@@ -1,14 +1,14 @@
 %bx-cta-link{
-	padding;
-	margin;
-	font;
-	etc...
-	background-color: transparent;
+	// padding;
+	// margin;
+	// font;
+	// etc...
+	// background-color: transparent;
 }
 
 .bx-cta-link {
-		@extend %bx-cta-link;
-	 	// without color context
+	@extend %bx-cta-link;
+	 // without color context
 }
 
 // .bx-hero {
