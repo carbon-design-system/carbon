@@ -27,7 +27,7 @@ A single service card element would be marked up as follows:
 </li>
 ```
 
-This block should exist as a partial. And should be iterated within an unordered list as follows:
+This block should exist as a partial. And should be iterated within an unordered list. Here's what this might look like in dust.js
 
 ```html
 <ul class="bx-card-list">
