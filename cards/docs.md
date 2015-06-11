@@ -1,4 +1,10 @@
-# Service cards!
+# Service cards
+
+1. Always prepend classes with `bx-card` (this is <prepend> in the formulas below).
+* Add type of card to prefix: `bx-btn--service-card`.
+* If there is an secondary modifier add `--class`.
+* Available card types are: `-service-card`,`-app-card`,`-catalog-card`
+* The state container changes color based on the state message. Available types are '--healthy', '--in-prog', '--warning', '--error'
 
 Cards are used as summaries for, and access to detail pages for specific items. All cards will appear in unordered lists.
 
@@ -21,7 +27,7 @@ A single service card element would be marked up as follows:
 </li>
 ```
 
-This block should exist as a partial. And should be iterated within an unordered list as follows:
+This block should exist as a partial. And should be iterated within an unordered list. Here's what this might look like in dust.js
 
 ```html
 <ul class="bx-card-list">
@@ -30,3 +36,4 @@ This block should exist as a partial. And should be iterated within an unordered
 	{/ servicesData }
 </ul>
 ```
+
