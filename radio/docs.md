@@ -43,11 +43,11 @@ Pattern Library classes apply various predefined visual and behavioral requireme
 | `bx-radio--input` | Defines radio input | Required on input element for radio component |
 | `bx-radio--name` | Defines the name of the radio component | Required on span element inside radio component |
 
-# IDs and other Attributes
+# IDs and Other Attributes
 
 Radio buttons rely on a variety of attributes in order to function properly. Here are a few things that are essential to know:
 
 - The `name` attribute defines a group of radio buttons.
 - A matching ID and `for` attribute enable users to make selections on radio buttons through the `<label>` element and through the `<input>`.
 - Adding the `disabled` attribute will prevent a radio button from being selected.
-- Adding the `checked` attribute will pre-select a radio button. 
+- Adding the `checked` attribute will pre-select a radio button.
