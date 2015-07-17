@@ -1,6 +1,6 @@
 # Radio
 
-The radio pattern is a standard HTML `<input type="radio">`, or "radio button" element.
+The radio component is a standard HTML `<input type="radio">`, or "radio button" element.
 
 Radio buttons always appear in groups of two or more.
 
@@ -45,4 +45,9 @@ Pattern Library classes apply various predefined visual and behavioral requireme
 
 # IDs and other Attributes
 
-Radio buttons use a matching ID and for attribute to enable users to make selections on radio buttons through the `<label>` element and through the `<input>`.
+Radio buttons rely on a variety of attributes in order to function properly. Here are a few things that are essential to know:
+
+- The `name` attribute defines a group of radio buttons.
+- A matching ID and `for` attribute enable users to make selections on radio buttons through the `<label>` element and through the `<input>`.
+- Adding the `disabled` attribute will prevent a radio button from being selected.
+- Adding the `checked` attribute will pre-select a radio button. 
