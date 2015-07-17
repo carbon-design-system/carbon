@@ -7,6 +7,8 @@ They also allow users an access point to more complex and detailed information t
 
 # Basic use
 
+<!-- Start with something about how to include this component, maybe it's npm install? Maybe it's cdn? We don't know yet... -->
+
 <!-- Write something here about using or constructing an unordered list <ul> to define a group of cards. Each list item <li> should represent a card. -->
 
 <!-- Add a class on the list-items <li> to define the cards as either service-cards or app-cards (`.bx-card--app-card` or `.bx-card--service-card`) -->
