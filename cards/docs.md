@@ -5,7 +5,45 @@ A card is a user interface element that looks like a card or tile that consists 
 Cards are meant to provide useful, glanceable information about apps and services.
 
 They also allow users an access point to more complex and detailed information that relates to a particular card and the instance it represents.
- 
+
+# Basic use
+
+<!-- Write something here about using or constructing an unordered list <ul> to define a group of cards. Each list item <li> should represent a card. -->
+
+# Examples
+
+A list of cards that represent user's apps.
+
+```html
+<ul class="bx-card-list">
+  <li class="bx-card--app-card">...</li>
+  <li class="bx-card--app-card">...</li>
+  <li class="bx-card--app-card">...</li>
+</ul>
+```
+
+A single card that represents a user's app.
+
+```html
+<li class="bx-card--app-card">
+  <a href="(app detail URL)">
+    <img class="bx-card--icon" src="(icon URL)" alt="(app name)">
+    <h3 class="bx-card--name">app name</h3>
+    <ul class="bx-card--bindings-list">
+      <li class="bx-card--binding">binding</li>
+      <li class="bx-card--binding">binding</li>
+      <li class="bx-card--binding">binding</li>
+    </ul>
+    <div class="bx-card--state-container">
+      <p class="bx-card--state">Running</p>
+    </div>
+  </a>
+</li>
+```
+
+# Classes 
+
+
 
 
 
