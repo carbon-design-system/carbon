@@ -1,4 +1,15 @@
-# Service cards
+# Cards
+
+A card is a user interface element that looks like a card or tile that consists of related data -- for Bluemix, this is data related to app or service instances.
+
+Cards are meant to provide useful, glanceable information about apps and services.
+
+They also allow users an access point to more complex and detailed information that relates to a particular card and the instance it represents.
+ 
+
+
+
+
 
 1. Always prepend classes with `bx-card` (this is <prepend> in the formulas below).
 * Add type of card to prefix: `bx-btn--service-card`.
@@ -36,4 +47,3 @@ This block should exist as a partial. And should be iterated within an unordered
 	{/ servicesData }
 </ul>
 ```
-
