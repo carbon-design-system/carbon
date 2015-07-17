@@ -10,6 +10,8 @@ They also allow users an access point to more complex and detailed information t
 
 <!-- Write something here about using or constructing an unordered list <ul> to define a group of cards. Each list item <li> should represent a card. -->
 
+<!-- Add a class on the list-items <li> to define the cards as either service-cards or app-cards (`.bx-card--app-card` or `.bx-card--service-card`) -->
+
 # Examples
 
 A list of cards that represent user's apps.
@@ -35,13 +37,31 @@ A single card that represents a user's app.
       <li class="bx-card--binding">binding</li>
     </ul>
     <div class="bx-card--state-container">
-      <p class="bx-card--state">Running</p>
+      <p class="bx-card--state--healthy">Running</p>
     </div>
   </a>
 </li>
 ```
 
 # Classes 
+
+| Class | Effect | Remarks |
+|-----------|--------|---------|
+|`bx-card-list`| Defines a list of cards | Required |
+|`bx-card--app-card`| Defines an app card | Required; applies specifc styles that are exclusive to app cards |
+|`bx-card--service-card`| Defines an service card | Required; applies specifc styles that are exclusive to service cards |
+|`bx-card--catalog-card`(?)| Defines a catalog card | Not sure what this is... |
+|`bx-card--icon`| Defines an icon for a card | Required |
+|`bx-card--name`| Defines a name for a card | Required |
+|`bx-card--bindings-list`| Defines a list of bindings for a card | Required; bindings could be service bindings for apps, or vice versa. |
+|`bx-card--binding`| Defines a binding for a card | Required |
+|`bx-card--state-container`| Defines a container that contains information about the state of a card | Used mainly for apps, services use this container to show different content (like, plans) |
+|`bx-card--state`| Defines the state of a card | Required, must be modified with a class extension, see classes below |
+|`bx-card--state--healthy`| Defines a healthy state for a card | Required |
+|`bx-card--state--in-prog`| Defines an in-progress state for a card | Required |
+|`bx-card--state--warning`| Defines a warning state for a card | Required |
+|`bx-card--state--error`| Defines an error state for a card | Required |
+
 
 
 
