@@ -1,4 +1,7 @@
 # pattern-library
+
+> A themeable library of re-usable patterns for building websites and UIs.
+
 Previously known as Design Guide. More accurately pattern and component collection - for Bluemix, but reusable.
 
 ## Commit standards
