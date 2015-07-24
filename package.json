@@ -12,8 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
-    "url": "git@github.ibm.com:Bluemix/pattern-library.git"
+    "type": "git"
   },
   "keywords": [
     "ibm",
@@ -29,6 +28,6 @@
     "js",
     "javascript"
   ],
-  "author": "Brian Han <thisisbrianhan@gmail.com> (http://brianhanio.mybluemix.net/)",
+  "author": "Brian Han <bthan@us.ibm.com>",
   "license": "MIT"
 }
