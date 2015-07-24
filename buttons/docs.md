@@ -1,15 +1,38 @@
-# Standard Buttons
+# Buttons
 
-Always prepend classes with 'bx-btn' (this is <prepend> in the formulas below).
-* Add type of button to prefix: 'bx-btn--primary'.
-* If there is an secondary modifier add it after primary; e.g. 'bx-btn--primary icon-cancel'.
-* Available button types are: '--primary','--secondary','--tertiary','--warning','--danger', '--close'.
-* List of available secondary modifiers is:
-	'icon-[NAME]'
-	..etc
+A button is a standard HTML `<button>` element.
 
-# Toggle Buttons
+Buttons uses text and/or an image to express what action will occur when the user clicks or touches it.
 
-Toggle buttons are used when only a single option can be selected. They are radio buttons in HTML.
+# Basic use
 
-Multiple options can be added (theoretically unlimited, restricted by design guidelines)
+*This is some text on basic use of this pattern*
+
+# Examples
+
+A button with text.
+```html
+<button class="bx-btn--primary">submit</button>
+```
+
+A button with text and an icon.
+```html
+<button class="bx-btn--primary icon-cancel">cancel</button>
+```
+
+A disabled button with text.
+```html
+<button disabled class="bx-btn--primary">Disabled Button</button>
+```
+
+# Classes
+
+| Class | Effect | Remarks |
+|-----------|--------|---------|
+|`bx-btn--primary`| Defines a button that is the primary call-to-action | Required |
+|`bx-btn--secondary` | Defines a button that is the secondary call-to-action | Required, should appear with a primary button |
+|`bx-btn--tertiary` | Defines a button that is the secondary call-to-action | Required, should appear with a primary and secondary button |
+|`bx-btn--warning` | Defines a warning button | Required |
+|`bx-btn--danger` | Defines a danger button | Required, this is more dangerous than warning ;) |
+|`bx-btn--close` | Defines a close button | Required, the expected action from this button is to close something, like a pop-up, or a dialog box. |
+|`icon-{icon-name}` | Defines an icon to be used in a button | Optional, [see icons](add link to icons) |
