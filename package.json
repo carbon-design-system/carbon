@@ -9,7 +9,6 @@
     "ibm-design-icons": "^1.0.0"
   },
   "scripts": {
-    "watch-sass": "gulp watch-sass",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
