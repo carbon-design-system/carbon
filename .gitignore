@@ -1,2 +1,4 @@
 project.sublime-project
 project.sublime-workspace
+node_modules
+bower_components
