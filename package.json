@@ -7,8 +7,8 @@
     "bluemix-typography": "^0.0.1",
     "bluemix-colors": "^0.0.5"
   },
-  "devDependencies": {},
   "scripts": {
+    "watch-sass": "gulp watch-sass",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
