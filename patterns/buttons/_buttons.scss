@@ -1,3 +1,31 @@
-.button {
-  color: green;
+$primary-button--color: $teal-45;
+
+@mixin base--button($color: $cool-grey-50) {
+  @extend %helvetica-bold;
+  @extend %font-smoothing;
+  text-transform: uppercase;
+  border: 4px solid $color;
+  font-size: type-scale(1);
+  padding: 0 1em;
+  min-width: 9.375em;
+  min-height: 2.75em;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+%primary-button {
+  @include base--button($primary-button--color);
+  background-color: $primary-button--color;
+  color: $white;
+}
+
+.bx-btn {
+  &--primary {
+    @extend %primary-button;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
 }
