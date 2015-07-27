@@ -2,39 +2,31 @@
 	// styles for list of cards, <ul>
 }
 
-.bx-card--service-card {
-	// styles specific to a service card. 
-}
-
-.bx-card--app-card {
-	// styles specific to an app card. 
-}
-
 .bx-card {
 	& {
-		background-color: white;	
+		background-color: white;
 	}
-	
+
 	& a {
 		text-decoration: none;
 	}
 
 	&--icon {
-
+		// styles
 	}
 	&--name {
-
+		// styles
 	}
 	&--bindings-list {
-
+		// styles
 	}
 	&--binding {
-
+		// styles
 	}
 	&--state-container {
-
+		// styles
 	}
 	&--state {
-
+		// styles
 	}
 }
