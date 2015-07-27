@@ -1,2 +1,5 @@
 project.sublime-project
 project.sublime-workspace
+.DS_Store
+npm-debug.log
+node_modules
