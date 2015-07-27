@@ -5,8 +5,7 @@
   "main": "gulpfile.js",
   "dependencies": {
     "bluemix-colors": "^0.0.5",
-    "bluemix-typography": "^0.0.1",
-    "ibm-design-icons": "^1.0.0"
+    "bluemix-typography": "^0.0.1"
   },
   "scripts": {
     "compile-scss": "./.bin/compile-scss",
