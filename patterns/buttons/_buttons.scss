@@ -1,5 +1,6 @@
 $primary-button--color: $teal-45;
 $secondary-button--color: $blue-40;
+$close-button--color: $cool-grey-50;
 
 @mixin base--button($color: $cool-grey-50) {
   @extend %helvetica-bold;
@@ -38,6 +39,12 @@ $secondary-button--color: $blue-40;
   }
 }
 
+%close-button {
+  @include base--button;
+  background-color: $close-button--color; 
+  color: $white;
+}
+
 .bx-btn {
   &--primary {
     @extend %primary-button;
@@ -45,5 +52,9 @@ $secondary-button--color: $blue-40;
 
   &--secondary {
     @extend %secondary-button;
+  }
+
+  &--close {
+    @extend %close-button;
   }
 }
