@@ -1,1 +1,1 @@
-node-sass pattern-library.scss pattern-library.css
+node-sass _pattern-library.scss pattern-library.css
