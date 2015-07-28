@@ -38,7 +38,7 @@ $ git checkout -b <feature-branch-name>
 
 ## Commit Message Standards
 
-All commits should have meaningful, short, and concise commit messages. A history of good commit messages helps keep a code base easy to work with, maintainable, and failsafe. 
+All commits should have meaningful, short, and concise commit messages. A history of good commit messages helps keep a code base maintainable, easy to work with, and failsafe. 
 
 General guidelines:
 1. Use present tense, imperative mood in the subject line
@@ -50,10 +50,13 @@ General guidelines:
 
 ### Examples
 Do this:
-![]()
+![](http://i.imgur.com/9CqZmYQ.png)
 
 Refrain from doing this:
 ![]()
+Or anything that looks like the commits here: 
+* http://whatthecommit.com/
+* http://www.commitlogsfromlastnight.com/
 
 ## Submitting Pull Requests
  
