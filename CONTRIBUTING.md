@@ -21,7 +21,7 @@ The following is a detailed list of guidelines that must be followed when partic
 - All communication in all channels (GitHub, Slack, Email, Twitter, etc.) must be constructive and never resort to personal attacks, trolling, public or private harassment, insults or other unprofessional conduct. 
 - We extend respect to everyone involved regardless of gender, gender identity, sexual orientation, disability, age, race, ethnicity, religion, or level of experience. Everyone who contributes is expected to do the same. 
 
-## Commit Standards
+## Feature Branches
 
 If there's something that needs to be added or a bug that needs to be resolved, developers can contribute code within their own feature branches to make the changes that are needed. 
 
@@ -35,6 +35,25 @@ $ git checkout -b <feature-branch-name>
 * Always push to remote branches that match your `<feature-branch-name>`.
 * Keep commits as small as possible. 
 * Push your commits to your remote branch sparingly to allow for rollbacks or amends. 
+
+## Commit Message Standards
+
+All commits should have meaningful, short, and concise commit messages. A history of good commit messages helps keep a code base easy to work with, maintainable, and failsafe. 
+
+General guidelines:
+1. Use present tense, imperative mood in the subject line
+2. Capitalize the subject line
+3. Keep the subject line short
+4. Don't end the subject line with a period
+5. Put additional text in the body of the commit
+6. Separate the subject line and the body with a blank line
+
+### Examples
+Do this:
+![]()
+
+Refrain from doing this:
+![]()
 
 ## Submitting Pull Requests
  
