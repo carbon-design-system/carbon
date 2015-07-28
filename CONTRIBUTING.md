@@ -1,0 +1,104 @@
+## Contributing to Pattern Library
+
+A pattern library and other similar projects is a living, growing resource that needs to adapt with changes over time. We welcome you to contribute so we can make the pattern library better and more useful for everyone who uses it. 
+
+- Code of Conduct
+- Commits
+- Submitting Pull Requests
+- Reviewing Pull Requests
+- Issues
+
+## Code of Conduct
+
+We are all contributors and maintainers of this Pattern Library. 
+We also want to be happy, welcoming and constructive when we are collaborating to grow the work that happens here. 
+
+The bottom-line: **Be respectful**. 
+
+The following is a detailed list of guidelines that must be followed when participating in the work that happens for the pattern library: 
+
+- Respect everyone who contributes in all channels of communication and in all activities of collaboration. 
+- All communication in all channels (GitHub, Slack, Email, Twitter, etc.) must be constructive and never resort to personal attacks, trolling, public or private harassment, insults or other unprofessional conduct. 
+- We extend respect to everyone involved regardless of gender, gender identity, sexual orientation, disability, age, race, ethnicity, religion, or level of experience. Everyone who contributes is expected to do the same. 
+
+## Commit Standards
+
+If there's something that needs to be added or a bug that needs to be resolved, developers can contribute code within their own feature branches to make the changes that are needed. 
+
+```bash
+$ git clone git@github.ibm.com:Bluemix/pattern-library.git
+$ cd pattern-library
+$ git checkout -b <feature-branch-name>
+```
+
+* Work on feature branches that you create. Do not work and commit to *master*.
+* Always push to remote branches that match your `<feature-branch-name>`.
+* Keep commits as small as possible. 
+* Push your commits to your remote branch sparingly to allow for rollbacks or amends. 
+
+## Submitting Pull Requests
+ 
+When you're ready to push code up the repo, push your commits to your own remote branch that matches your `<feature-branch-name>`. 
+
+```bash
+$ git push origin <feature-branch-name>
+```
+
+Keep the work inside your branch as small and manageable as possible so maintainers can review and give feedback promptly. 
+Developers will meet 1-2 times a week to review pull requests on a regular basis.
+
+* Open a pull request when pushing a commit ([hub](https://github.com/github/hub) allows you to do PRs via command line, otherwise you can open them in GHE).
+* Summarize what the pull request is about in the description. 
+* Where possible, reference a relevant issue that can be updated or closed based on the pull request.
+* ~~For a more comprehensive overview of commit standards, see [this doc](https://github.com/cloud-platform-design/cloud-platform-beta/blob/master/Contributing.md).~~
+
+### Example
+
+![example of pull request](http://i.imgur.com/RQcQb5U.png)
+
+## Reviewing Pull Requests
+
+Pull requests are basically like a code review -- this is code that needs to be reviewed before it gets merged into master branch. 
+Consider everything that's in master branch as production-ready (but don't stress yourself out either). 
+**Production-ready does not mean perfect**. 
+
+Production ready means your code means you won't break master branch and your code makes it better to some degree. 
+
+- Pull requests need to have two :+1: from two developers on Bluemix. 
+- Pull requests are reviewed 1-2 times per week regularly. 
+
+The best way to review code is to pull it down to your own computer, run it & **try to break it**, here's how: 
+
+Make sure you're in the master branch, pull down any new changes from master. 
+
+```bash
+$ git branch
+$ git checkout master
+$ git pull origin master
+```
+
+Create a new branch that matches the name of the remote branch that the pull request is using. Than pull down the code from that remote branch. 
+
+```bash
+$ git fetch --all
+$ git checkout <name-of-remote-branch>
+$ git pull origin <name-of-remote-branch>
+```
+
+At this point, it's possible that you may encounter a **merge conflict**, communicate that to the contributor on their pull request. 
+
+The code we're dealing with in the pattern library is mainly HTML, CSS, Sass and JavaScript files. 
+If you're reviewing HTML code, open the html files in your browser. You can double-click the html files or you can use the `open` command in terminal. 
+
+```bash
+$ open buttons/primary-button.html
+```
+
+As you find areas in their code that should be addressed you can:  
+- leave constructive comments on their pull request
+- ask specific questions about decisions they made in their code. 
+- approve the pull request with a :+1: 
+- give pending approval with a :+1: and a comment that says what they need to fix/change before merging to master 
+- feel free to express your approval with another positive emoji :100: :shipit: :rocket: :whale2:, and state your approval for clarity. 
+
+
