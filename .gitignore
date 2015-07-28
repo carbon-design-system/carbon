@@ -1,5 +1,6 @@
 project.sublime-project
 project.sublime-workspace
+node_modules
+bower_components
 .DS_Store
 npm-debug.log
-node_modules

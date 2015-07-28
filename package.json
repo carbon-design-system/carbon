@@ -1,0 +1,38 @@
+{
+  "name": "pattern-library",
+  "version": "0.0.1",
+  "description": "The Pattern Library is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "bluemix-colors": "^0.0.5",
+    "bluemix-typography": "^0.0.1"
+  },
+  "scripts": {
+    "compile-scss": "./.bin/compile-scss",
+    "watch-scss": "./.bin/watch-scss",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "ibm",
+    "bluemix",
+    "pattern",
+    "library",
+    "components",
+    "component",
+    "html",
+    "css",
+    "scss",
+    "sass",
+    "js",
+    "javascript"
+  ],
+  "author": "Brian Han <bthan@us.ibm.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "node-sass": "^3.2.0",
+    "nodemon": "^1.3.8"
+  }
+}
