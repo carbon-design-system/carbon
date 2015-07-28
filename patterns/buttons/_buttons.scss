@@ -1,4 +1,5 @@
 $primary-button--color: $teal-45;
+$secondary-button--color: $blue-40;
 
 @mixin base--button($color: $cool-grey-50) {
   @extend %helvetica-bold;
@@ -11,6 +12,11 @@ $primary-button--color: $teal-45;
   min-height: 2.75em;
   letter-spacing: 1px;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 %primary-button {
@@ -19,13 +25,25 @@ $primary-button--color: $teal-45;
   color: $white;
 }
 
+%secondary-button {
+  @include base--button($secondary-button--color);
+  background-color: transparent;
+  color: $secondary-button--color;
+  transition: background-color ease-out 0.15s, color ease-out 0.15s;
+
+  &:hover,
+  &:focus {
+    background-color: $secondary-button--color;
+    color: $white;
+  }
+}
+
 .bx-btn {
   &--primary {
     @extend %primary-button;
+  }
 
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+  &--secondary {
+    @extend %secondary-button;
   }
 }
