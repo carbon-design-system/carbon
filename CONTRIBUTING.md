@@ -38,6 +38,8 @@ $ git checkout -b <feature-branch-name>
 * Keep commits as small as possible. 
 * Push your commits to your remote branch sparingly to allow for rollbacks or amends. 
 
+If you're not a contributor, you can fork this repo and work on that fork. Click the 'fork' button, and then clone your forked repo locally. In this case, it is still recommended to work on feature branches in order to keep your `master` branch clean and up-to-date with this repo. 
+
 ## Commit Message Standards
 
 All commits should have meaningful, short, and concise commit messages. A history of good commit messages helps keep a code base maintainable, easy to work with, and failsafe. 
@@ -60,8 +62,6 @@ Refrain from doing this:
 ## Submitting Pull Requests
 
 When you're ready to push code up the repo, push your commits to your own remote branch that matches your `<feature-branch-name>`. 
-
-If you're not a contributor, you can fork this repo and push commits your fork. 
 
 ```bash
 $ git push origin <feature-branch-name>
