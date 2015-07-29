@@ -57,7 +57,7 @@ Do this:
 ![Good commits](http://i.imgur.com/9CqZmYQ.png)
 
 Refrain from doing this:
-![Bad commits](http://i.imgur.com/xFzKghl.png)
+![Bad commits](http://i.imgur.com/soid211.png)
 
 ## Submitting Pull Requests
 
