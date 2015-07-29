@@ -50,13 +50,10 @@ General guidelines:
 
 ### Examples
 Do this:
-![](http://i.imgur.com/9CqZmYQ.png)
+![Good commits](http://i.imgur.com/9CqZmYQ.png)
 
 Refrain from doing this:
-![]()
-Or anything that looks like the commits here: 
-* http://whatthecommit.com/
-* http://www.commitlogsfromlastnight.com/
+![Bad commits](http://i.imgur.com/xFzKghl.png)
 
 ## Submitting Pull Requests
  
