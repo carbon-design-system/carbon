@@ -1,6 +1,6 @@
 ## Contributing to Pattern Library
 
-A pattern library and other similar projects is a living, growing resource that needs to adapt with changes over time. We welcome you to contribute so we can make the pattern library better and more useful for everyone who uses it. 
+A pattern library is a living, growing resource that needs to adapt with changes over time. We welcome you to contribute so we can make the pattern library better and more useful for everyone who uses it. 
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ The following is a detailed list of guidelines that must be followed when partic
 
 ## Feature Branches
 
-If there's something that needs to be added or a bug that needs to be resolved, developers can contribute code within their own feature branches to make the changes that are needed. 
+If there's something that needs to be added or a bug that needs to be resolved, developers can contribute code using feature branches. 
 
 ```bash
 $ git clone git@github.ibm.com:Bluemix/pattern-library.git
@@ -38,7 +38,7 @@ $ git checkout -b <feature-branch-name>
 * Keep commits as small as possible. 
 * Push your commits to your remote branch sparingly to allow for rollbacks or amends. 
 
-If you're not a contributor, you can fork this repo and work on that fork. Click the 'fork' button, and then clone your forked repo locally. In this case, it is still recommended to work on feature branches in order to keep your `master` branch clean and up-to-date with this repo. 
+If you're not a contributor, you can work on a forked copy of this repo. In this case, it is still recommended to work on feature branches in order to keep your `master` branch clean and up-to-date with this repo. 
 
 ## Commit Message Standards
 
@@ -46,10 +46,10 @@ All commits should have meaningful, short, and concise commit messages. A histor
 
 General guidelines:
 1. Use present tense, imperative mood in the subject line
-2. Capitalize the subject line
+2. Capitalize the first letter in the subject line
 3. Keep the subject line short
 4. Don't end the subject line with a period
-5. Put additional text in the body of the commit
+5. Put any additional text in the body of the commit
 6. Separate the subject line and the body with a blank line
 
 ### Examples
@@ -61,7 +61,7 @@ Refrain from doing this:
 
 ## Submitting Pull Requests
 
-When you're ready to push code up the repo, push your commits to your own remote branch that matches your `<feature-branch-name>`. 
+When you're ready to push code up to the repo, push your commits to your own remote branch that matches your `<feature-branch-name>`. 
 
 ```bash
 $ git push origin <feature-branch-name>
