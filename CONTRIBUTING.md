@@ -56,8 +56,10 @@ Refrain from doing this:
 ![Bad commits](http://i.imgur.com/xFzKghl.png)
 
 ## Submitting Pull Requests
- 
+
 When you're ready to push code up the repo, push your commits to your own remote branch that matches your `<feature-branch-name>`. 
+
+If you're not a contributor, you can fork this repo and push commits your fork. 
 
 ```bash
 $ git push origin <feature-branch-name>
