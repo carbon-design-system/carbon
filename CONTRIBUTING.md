@@ -2,11 +2,13 @@
 
 A pattern library and other similar projects is a living, growing resource that needs to adapt with changes over time. We welcome you to contribute so we can make the pattern library better and more useful for everyone who uses it. 
 
-- Code of Conduct
-- Commits
-- Submitting Pull Requests
-- Reviewing Pull Requests
-- Issues
+## Table of Contents
+
+- [Code of Conduct](#code-of-conduct)
+- [Commits](#commits)
+- [Submitting Pull Requests](#submitting-pull-requests)
+- [Reviewing Pull Requests](#reviewing-pull-requests)
+- [Issues](#issues)
 
 ## Code of Conduct
 
