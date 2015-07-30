@@ -32,6 +32,7 @@
   "author": "Brian Han <bthan@us.ibm.com>",
   "license": "MIT",
   "devDependencies": {
+    "express": "^4.13.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-plumber": "^1.0.1",
