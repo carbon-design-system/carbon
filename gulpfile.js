@@ -17,11 +17,13 @@ var BROWSERS = [
   "Android > 0"
 ];
 
-gulp.task('sass', function() {
-  gulp.src('dev/*.scss')
-    .pipe(plumber())
-    .pipe(gulp.dest('dist'))
-    .pipe(sass())
-    .pipe(autoprefixer({ browsers: BROWSERS }))
-    .pipe(gulp.dest('dev'))
+gulp.task('sass', function() { // Main Sass task
+  gulp.src('dev/*.scss')       // Target all scss files in dev folder (pattern-library.scss)
+    .pipe(plumber())           // plumber() keeps the gulp task running if there's an error
+    .pipe(gulp.dest('dist'))   // Pipe a copy of all scss files from dev folder to dist folder.
+    .pipe(sass())              // Compile scss files to css
+    .pipe(autoprefixer({       // Add vendor prefixes
+      browsers: BROWSERS       // Prefixes are added based on compatibility with the BROWSERS array
+    }))
+    .pipe(gulp.dest('dev'))    // Pipe the css file to dev folder (pattern-library.css)
 });
