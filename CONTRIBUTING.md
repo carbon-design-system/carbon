@@ -53,7 +53,7 @@ General guidelines:
 5. Put any additional text in the body of the commit
 6. Separate the subject line and the body with a blank line
 
-### Examples
+#### Examples
 Do this:
 ![Good commits](http://i.imgur.com/9CqZmYQ.png)
 
@@ -76,7 +76,7 @@ Developers will meet 1-2 times a week to review pull requests on a regular basis
 * Where possible, reference a relevant issue that can be updated or closed based on the pull request.
 * ~~For a more comprehensive overview of commit standards, see [this doc](https://github.com/cloud-platform-design/cloud-platform-beta/blob/master/Contributing.md).~~
 
-### Example
+#### Example
 
 ![example of pull request](http://i.imgur.com/RQcQb5U.png)
 
