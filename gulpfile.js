@@ -18,9 +18,9 @@ var BROWSERS = [
 ];
 
 gulp.task('sass', function() {
-  gulp.src(['dist', 'patterns/**/*.scss'])
+  gulp.src('dist/*.scss')
     .pipe(plumber())
     .pipe(sass())
     .pipe(autoprefixer({ browsers: BROWSERS }))
-    .pipe(gulp.dest(['./', 'patterns/**/']))
-})
+    .pipe(gulp.dest('.'))
+});
