@@ -1,6 +1,6 @@
 ## Contributing to Pattern Library
 
-A pattern library is a living, growing resource that needs to adapt with changes over time. We welcome you to contribute so we can make the pattern library better and more useful for everyone who uses it. 
+A pattern library is a living, growing resource that needs to adapt with changes over time. We welcome you to help make this pattern library better than it is today!
 
 ## Table of Contents
 
