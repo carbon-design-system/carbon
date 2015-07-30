@@ -5,7 +5,8 @@ A pattern library is a living, growing resource that needs to adapt with changes
 ## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
-- [Commits](#commits)
+- [Feature Branches](#feature-branches)
+- [Commit Message Standards](#commit-message-standards)
 - [Submitting Pull Requests](#submitting-pull-requests)
 - [Reviewing Pull Requests](#reviewing-pull-requests)
 - [Issues](#issues)
@@ -125,3 +126,4 @@ As you find areas in their code that should be addressed you can:
 - feel free to express your approval with another positive emoji :100: :shipit: :rocket: :whale2:, and state your approval for clarity. 
 
 
+## Issues
