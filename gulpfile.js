@@ -25,5 +25,5 @@ gulp.task('sass', function() { // Main Sass task
     .pipe(autoprefixer({       // Add vendor prefixes
       browsers: BROWSERS       // Prefixes are added based on compatibility with the BROWSERS array
     }))
-    .pipe(gulp.dest('dev'))    // Pipe the css file to dev folder (pattern-library.css)
+    .pipe(gulp.dest('dev/patterns'))    // Pipe the css file to dev folder (pattern-library.css)
 });
