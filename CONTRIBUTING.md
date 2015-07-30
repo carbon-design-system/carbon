@@ -1,6 +1,8 @@
-## Contributing to Pattern Library
+# Contributing to Pattern Library
 
-A pattern library is a living, growing resource that needs to adapt with changes over time. We welcome you to help make this pattern library better than it is today!
+Hello, developer! Thank you for your interest in contributing to this project.
+
+A pattern library is a living, growing resource that needs to adapt with changes over time. We welcome you to help make this pattern library better than it is today.
 
 ## Table of Contents
 
@@ -13,8 +15,7 @@ A pattern library is a living, growing resource that needs to adapt with changes
 
 ## Code of Conduct
 
-We are all contributors and maintainers of this Pattern Library.
-We also want to be happy, welcoming and constructive when we are collaborating to grow the work that happens here.
+We are all contributors and maintainers of this Pattern Library. We also want to be happy, welcoming and constructive when we are collaborating to grow the work that happens here.
 
 The bottom-line: **Be respectful**.
 
