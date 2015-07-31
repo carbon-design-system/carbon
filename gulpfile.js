@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var plumber = require('gulp-plumber');
 var browserSync = require('browser-sync').create();
+var rename = require('gulp-rename');
 var reload = browserSync.reload;
 
 var BROWSERS = [
@@ -22,14 +23,14 @@ var BROWSERS = [
 gulp.task('browser-sync', function() {
   browserSync.init({
     proxy: "http://localhost:3000",
-    logPrefix: "Pattern Library",
-    browser: ["google chrome", "firefox", "safari"]
+    logPrefix: "Pattern Library"
   });
 });
 
 gulp.task('dist', function() {
   gulp.src(['dev/*.scss', 'patterns/**/*.scss']) // Target all scss files in dev folder (pattern-library.scss)
     .pipe(plumber())           // plumber() keeps the gulp task running if there's an error
+    .pipe(rename('pattern-library.scss'))
     .pipe(gulp.dest('dist'))   // Pipe a copy of all scss files from dev folder to dist folder.
 });
 
