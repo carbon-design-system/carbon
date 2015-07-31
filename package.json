@@ -4,8 +4,8 @@
   "description": "The Pattern Library is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
   "main": "gulpfile.js",
   "dependencies": {
-    "bluemix-colors": "^0.0.5",
-    "bluemix-typography": "^0.0.1"
+    "bluemix-colors": "*",
+    "bluemix-typography": ">=0.0.6"
   },
   "scripts": {
     "start": "nodemon server.js",
