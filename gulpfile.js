@@ -28,26 +28,25 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('dist', function() {
-  gulp.src(['dev/*.scss', 'patterns/**/*.scss']) // Target all scss files in dev folder (pattern-library.scss)
-    .pipe(plumber())           // plumber() keeps the gulp task running if there's an error
-    .pipe(rename('pattern-library.scss'))
-    .pipe(gulp.dest('dist'))   // Pipe a copy of all scss files from dev folder to dist folder.
+  gulp.src('dev/*.scss')                   // Target scss files in this directory (dev.scss)
+    .pipe(plumber())                       // Keeps the gulp task running if there's an error
+    .pipe(rename('_pattern-library.scss')) // Rename dev.scss to pattern-library.scss
+    .pipe(gulp.dest('dist'))               // Pipe a copy of the renamed scss file to dist folder (_pattern-library.scss).
 });
 
-gulp.task('sass', function() { // Main Sass task
-
-  gulp.src(['dev/*.scss', 'patterns/**/*.scss'])
+gulp.task('sass', function() {
+  gulp.src(['dev/*.scss', 'patterns/**/*.scss']) // Target scss files in these directories
     .pipe(plumber())
     .pipe(sass())              // Compile scss files to css
     .pipe(autoprefixer({       // Add vendor prefixes
       browsers: BROWSERS       // Prefixes are added based on compatibility with the BROWSERS array
     }))
-    .pipe(gulp.dest('dev/patterns')) // Pipe the css file to dev folder (pattern-library.css)
-    .pipe(reload({ stream: true }));
+    .pipe(gulp.dest('dev/patterns')) // Pipe the css file to dev folder (dev.css)
+    .pipe(reload({ stream: true })); // Reload the browser (but stream when possible)
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'dist']);
+  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'dist']); // watch for changes on these scss files
 })
 
 gulp.task('default', ['browser-sync', 'sass', 'dist', 'watch']);
