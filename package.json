@@ -8,8 +8,8 @@
     "bluemix-typography": "^0.0.1"
   },
   "scripts": {
-    "server": "nodemon server.js",
-    "dev": "npm run server & gulp"
+    "start": "nodemon server.js",
+    "dev": "npm start & gulp"
   },
   "repository": {
     "type": "git"
