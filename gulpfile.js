@@ -22,7 +22,8 @@ var BROWSERS = [
 gulp.task('browser-sync', function() {
   browserSync.init({
     proxy: "http://localhost:3000",
-    open: false
+    logPrefix: "Pattern Library",
+    browser: ["google chrome", "firefox", "safari"]
   });
 });
 
