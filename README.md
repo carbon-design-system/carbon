@@ -11,6 +11,8 @@ The aim is for every developer to use consistent HTML, CSS, and JavaScript in as
 - buttons
 - cards
 
-## In-progress
-- tables
-- nav
+## To-do
+- tables - [ref-link](http://pages.design.ibm.com/bluemix/sp-styleguide/master/index.html#tables-and-menus)
+- nav - [ref-link](http://pages.design.ibm.com/bluemix/sp-styleguide/master/index.html#main-nav)
+- modals (dialog-box) - [ref-link](http://pages.design.ibm.com/bluemix/sp-styleguide/master/index.html#messaging)
+- links - [ref-link](http://pages.design.ibm.com/bluemix/sp-styleguide/master/index.html#typography)
