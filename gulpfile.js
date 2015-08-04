@@ -33,13 +33,6 @@ gulp.task('dist', function() {
     .pipe(gulp.dest('dist/patterns'));
 });
 
-// gulp.task('dist', function() {
-//   gulp.src('dev/*.scss')                   // Target scss files in this directory (dev.scss)
-//     .pipe(plumber())                       // Keeps the gulp task running if there's an error
-//     .pipe(rename('_pattern-library.scss')) // Rename dev.scss to pattern-library.scss
-//     .pipe(gulp.dest('dist'))               // Pipe a copy of the renamed scss file to dist folder (_pattern-library.scss).
-// });
-
 gulp.task('sass', function() {
   gulp.src(['dev/*.scss', 'patterns/**/*.scss']) // Target scss files in these directories
     .pipe(plumber())
