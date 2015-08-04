@@ -1,4 +1,17 @@
+// Colors
 @import 'node_modules/bluemix-colors/bluemix-colors';
+
+// Typography
 @import 'node_modules/bluemix-typography/bluemix-typography';
 
-@import 'dev/patterns/buttons/buttons';
+// Patterns
+@import 'patterns/buttons/buttons';
+@import 'patterns/cards/cards';
+@import 'patterns/forms/forms';
+@import 'patterns/links/links';
+@import 'patterns/lists/lists';
+@import 'patterns/modals/modals';
+@import 'patterns/nav/nav';
+@import 'patterns/radio/radio';
+@import 'patterns/tables/tables';
+@import 'patterns/tooltips/tooltips';
