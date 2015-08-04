@@ -5,7 +5,6 @@
   font-weight: 700; }
 
 .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
-  font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
@@ -35,7 +34,10 @@
   cursor: pointer;
   background-color: transparent;
   color: #5596e6;
-  transition: background-color ease-out 0.15s, color ease-out 0.15s; }
+  -webkit-transition: background-color ease-out 0.15s, color ease-out 0.15s;
+     -moz-transition: background-color ease-out 0.15s, color ease-out 0.15s;
+       -o-transition: background-color ease-out 0.15s, color ease-out 0.15s;
+          transition: background-color ease-out 0.15s, color ease-out 0.15s; }
   .bx-btn--secondary:disabled {
     opacity: 0.5;
     cursor: not-allowed; }

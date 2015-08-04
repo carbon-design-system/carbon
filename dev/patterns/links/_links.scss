@@ -1,0 +1,22 @@
+%bx-cta-link{
+  // padding;
+  // margin;
+  // font;
+  // etc...
+  // background-color: transparent;
+}
+
+.bx-cta-link {
+  @extend %bx-cta-link;
+   // without color context
+}
+
+// .bx-hero {
+//  .bx-cta-link {
+//    // color context
+//  }
+// }
+
+.bx-content-link {
+  // Inline link styles
+}
