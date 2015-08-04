@@ -60,3 +60,9 @@
   .bx-btn--close:disabled {
     opacity: 0.5;
     cursor: not-allowed; }
+
+.bx-card {
+  background-color: white; }
+
+.bx-card a {
+  text-decoration: none; }
