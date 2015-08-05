@@ -1,0 +1,26 @@
+{
+  "name": "bluemix-modals",
+  "version": "0.0.1",
+  "description": "Reusable modals that are commonly used in IBM Bluemix.",
+  "files": [
+    "_modals.scss",
+    "docs.md"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "modals",
+    "ibm",
+    "bluemix",
+    "pattern",
+    "library",
+    "components",
+    "component"
+  ],
+  "contributors": [
+    "Brian Han <bthan@us.ibm.com>",
+    "Jefferson Lam <jwlam@us.ibm.com>"
+  ],
+  "license": "MIT"
+}

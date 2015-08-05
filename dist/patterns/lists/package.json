@@ -1,0 +1,26 @@
+{
+  "name": "bluemix-lists",
+  "version": "0.0.1",
+  "description": "Reusable lists that are commonly used in IBM Bluemix.",
+  "files": [
+    "_lists.scss",
+    "docs.md"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "lists",
+    "ibm",
+    "bluemix",
+    "pattern",
+    "library",
+    "components",
+    "component"
+  ],
+  "contributors": [
+    "Brian Han <bthan@us.ibm.com>",
+    "Jefferson Lam <jwlam@us.ibm.com>"
+  ],
+  "license": "MIT"
+}

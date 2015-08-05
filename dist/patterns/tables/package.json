@@ -1,0 +1,26 @@
+{
+  "name": "bluemix-tables",
+  "version": "0.0.1",
+  "description": "Reusable tables that are commonly used in IBM Bluemix.",
+  "files": [
+    "_tables.scss",
+    "docs.md"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "tables",
+    "ibm",
+    "bluemix",
+    "pattern",
+    "library",
+    "components",
+    "component"
+  ],
+  "contributors": [
+    "Brian Han <bthan@us.ibm.com>",
+    "Jefferson Lam <jwlam@us.ibm.com>"
+  ],
+  "license": "MIT"
+}

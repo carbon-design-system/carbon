@@ -1,0 +1,26 @@
+{
+  "name": "bluemix-forms",
+  "version": "0.0.1",
+  "description": "Reusable forms that are commonly used in IBM Bluemix.",
+  "files": [
+    "_forms.scss",
+    "docs.md"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "buttons",
+    "ibm",
+    "bluemix",
+    "pattern",
+    "library",
+    "components",
+    "component"
+  ],
+  "contributors": [
+    "Brian Han <bthan@us.ibm.com>",
+    "Jefferson Lam <jwlam@us.ibm.com>"
+  ],
+  "license": "MIT"
+}
