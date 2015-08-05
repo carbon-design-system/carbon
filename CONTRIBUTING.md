@@ -63,6 +63,14 @@ Refrain from doing this:
 
 ## Submitting Pull Requests
 
+Before submitting a pull request, make sure you do the following: 
+
+```bash
+$ git fetch --all && git merge master
+```
+
+This ensures that the code is up to date with any updates to the master branch and ultimately, avoiding merge conflicts. 
+
 When you're ready to push code up to the repo, push your commits to your own remote branch that matches your `<feature-branch-name>`.
 
 ```bash
@@ -72,10 +80,20 @@ $ git push origin <feature-branch-name>
 Keep the work inside your branch as small and manageable as possible so maintainers can review and give feedback promptly.
 Developers will meet 1-2 times a week to review pull requests on a regular basis.
 
-* Open a pull request when pushing a commit ([hub](https://github.com/github/hub) allows you to do PRs via command line, otherwise you can open them in GHE).
+* Open a pull request when pushing a commit ([hub](https://github.com/github/hub) allows you to do PRs via command line, otherwise you can open them in Github Enterprise).
 * Summarize what the pull request is about in the description.
 * Where possible, reference a relevant issue that can be updated or closed based on the pull request.
 * ~~For a more comprehensive overview of commit standards, see [this doc](https://github.com/cloud-platform-design/cloud-platform-beta/blob/master/Contributing.md).~~
+
+After your pull request is approved: 
+- click on the **merge pull request** button
+- delete your remote feature branch
+- In your terminal, pull down the changes from master into your local master branch
+
+```bash
+$ git checkout master
+$ git pull origin master
+```
 
 #### Example
 
