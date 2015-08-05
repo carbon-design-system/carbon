@@ -31,10 +31,15 @@ gulp.task('dist', function() {
   gulp.src('dev/patterns/**/*.scss')
     .pipe(plumber())
     .pipe(gulp.dest('dist/patterns'));
+
+  gulp.src('dev/*.scss')
+    .pipe(plumber())
+    .pipe(rename('_pattern-library.scss'))
+    .pipe(gulp.dest('dist'))
 });
 
 gulp.task('sass', function() {
-  gulp.src(['dev/*.scss', 'patterns/**/*.scss']) // Target scss files in these directories
+  gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss']) // Target scss files in these directories
     .pipe(plumber())
     .pipe(sass())              // Compile scss files to css
     .pipe(autoprefixer({       // Add vendor prefixes
