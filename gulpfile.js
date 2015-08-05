@@ -28,7 +28,7 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('dist', function() {
-  gulp.src('dev/patterns/**/*.scss')
+  gulp.src(['dev/patterns/**/*.scss', 'dev/patterns/**/*.md'])
     .pipe(plumber())
     .pipe(gulp.dest('dist/patterns'));
 
