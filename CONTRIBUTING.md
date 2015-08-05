@@ -7,11 +7,11 @@ A pattern library is a living, growing resource that needs to adapt with changes
 ## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
+- [Issues](#issues)
 - [Feature Branches](#feature-branches)
 - [Commit Message Standards](#commit-message-standards)
 - [Submitting Pull Requests](#submitting-pull-requests)
 - [Reviewing Pull Requests](#reviewing-pull-requests)
-- [Issues](#issues)
 
 ## Code of Conduct
 
@@ -24,6 +24,22 @@ The following is a detailed list of guidelines that must be followed when partic
 - Respect everyone who contributes in all channels of communication and in all activities of collaboration.
 - All communication in all channels (GitHub, Slack, Email, Twitter, etc.) must be constructive and never resort to personal attacks, trolling, public or private harassment, insults or other unprofessional conduct.
 - We extend respect to everyone involved regardless of gender, gender identity, sexual orientation, disability, age, race, ethnicity, religion, or level of experience. Everyone who contributes is expected to do the same.
+
+## Issues
+
+- Before contributing any new code to the repo, **always create a new issue**. 
+- Label the issue appropriately
+- Explain what the issue is. 
+
+### Example
+
+#### Bug
+
+![issue-bug](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0140/bee26a4c-3b80-11e5-9b92-57b545f8dddc.png)
+
+#### Pattern
+
+![issue-pattern](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0142/18086932-3b81-11e5-9a77-f17dc8d4a99c.png)
 
 ## Feature Branches
 
@@ -143,6 +159,3 @@ As you find areas in their code that should be addressed you can:
 - approve the pull request with a :+1:
 - give pending approval with a :+1: and a comment that says what they need to fix/change before merging to master
 - feel free to express your approval with another positive emoji :100: :shipit: :rocket: :whale2:, and state your approval for clarity.
-
-
-## Issues
