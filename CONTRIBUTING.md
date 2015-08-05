@@ -27,19 +27,33 @@ The following is a detailed list of guidelines that must be followed when partic
 
 ## Issues
 
-- Before contributing any new code to the repo, **always create a new issue**. 
-- Label the issue appropriately
-- Explain what the issue is. 
+- **Always create a new issue**, before contributing any code to the repo. 
+- Label the issue with the appropriate label (bug, pattern, enhancement, question)
+- Explain what the issue is depending on the context of the issue and label. 
 
 ### Example
 
 #### Bug
 
+- Explain what the bug is. 
+- Explain how to reproduce the bug.
+
 ![issue-bug](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0140/bee26a4c-3b80-11e5-9b92-57b545f8dddc.png)
 
 #### Pattern
 
+- This is usually a task for adding a new pattern to the repo
+- Include any sub-tasks that needs to be completed.
+
 ![issue-pattern](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0142/18086932-3b81-11e5-9a77-f17dc8d4a99c.png)
+
+#### Enhancement
+
+- A general improvement to the source code that doesn't directly relate to patterns. 
+
+#### Question
+
+- This is a question that someone asks about the repo. 
 
 ## Feature Branches
 
