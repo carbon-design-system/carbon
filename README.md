@@ -12,6 +12,45 @@ This package is in *very* **early stages of development**.
 
 IBMers, please visit our GitHub Enterprise repo (search bluemix pattern-library) to learn how you can contribute.
 
+## Install
+
+Make sure you have node and npm installed.
+
+```bash
+# terminal
+npm install bluemix-pattern-library -D
+```
+Create a **main.scss** file in your project and `@import` bluemix-pattern-library with a relative path to the node module.
+
+```scss
+// main.scss
+@import 'path/to/node_modules/bluemix-pattern-library/dist/pattern-library';
+```
+
+Compile your **main.scss** file with something (Gulp.js, Grunt, etc.) and you'll get a **main.css** file with all the compiled Sass.
+
+In your **index.html**, link to the **main.css** file and start writing a pattern using markup, classes and attributes.
+
+Here's an example.
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Pattern Library Dev</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <button class="bx-btn--primary" type="button">primary button</button>
+</body>
+</html>
+```
+
+
+
 ## Dependencies
 
 By default, this library will reflect the visual design of IBM Bluemix. If you need different colors or typography styles, you will be enabled to do so.
