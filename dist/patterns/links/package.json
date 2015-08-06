@@ -1,16 +1,16 @@
 {
-  "name": "bluemix-tooltips",
+  "name": "bluemix-links",
   "version": "0.0.1",
-  "description": "Reusable tooltips that are commonly used in IBM Bluemix.",
+  "description": "Reusable links that are commonly used in IBM Bluemix.",
   "files": [
-    "_tooltips.scss",
+    "_links.scss",
     "docs.md"
   ],
   "repository": {
     "type": "git"
   },
   "keywords": [
-    "tooltips",
+    "buttons",
     "ibm",
     "bluemix",
     "pattern",
