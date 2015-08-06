@@ -10,14 +10,14 @@
     "type": "git"
   },
   "keywords": [
-    "style guide",
-    "buttons",
-    "ibm",
     "bluemix",
-    "pattern",
-    "library",
-    "components",
+    "buttons",
     "component"
+    "components",
+    "ibm",
+    "library",
+    "pattern",
+    "style guide",
   ],
   "contributors": [
     "Brian Han <bthan@us.ibm.com>",
