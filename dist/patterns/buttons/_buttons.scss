@@ -1,22 +1,22 @@
+$close-button--color: $cool-grey-50;
 $primary-button--color: $teal-45;
 $secondary-button--color: $blue-40;
-$close-button--color: $cool-grey-50;
 
 @mixin base--button($color: $cool-grey-50) {
-  @extend %helvetica-bold;
   @extend %font-smoothing;
-  text-transform: uppercase;
+  @extend %helvetica-bold;
   border: 4px solid $color;
-  font-size: typescale(1);
-  padding: 0 1em;
-  min-width: 9.375em;
-  min-height: 2.75em;
-  letter-spacing: 1px;
   cursor: pointer;
+  font-size: typescale(1);
+  letter-spacing: 1px;
+  min-height: 2.75em;
+  min-width: 9.375em;
+  padding: 0 1em;
+  text-transform: uppercase;
 
   &:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 
