@@ -1,0 +1,28 @@
+{
+  "name": "bluemix-nav",
+  "version": "0.0.1",
+  "description": "Reusable nav that are commonly used in IBM Bluemix.",
+  "files": [
+    "_nav.scss",
+    "docs.md"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "bluemix",
+    "component"
+    "components",
+    "ibm",
+    "library",
+    "nav",
+    "navbar",
+    "navigation",
+    "pattern",
+    "style guide",
+  ],
+  "contributors": [
+    "Brian Han <bthan@us.ibm.com>",
+    "Jefferson Lam <jwlam@us.ibm.com>"
+  ]
+}

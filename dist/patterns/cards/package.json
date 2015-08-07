@@ -1,0 +1,26 @@
+{
+  "name": "bluemix-cards",
+  "version": "0.0.1",
+  "description": "Reusable cards that are commonly used in IBM Bluemix.",
+  "files": [
+    "_cards.scss",
+    "docs.md"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "bluemix",
+    "cards",
+    "component"
+    "components",
+    "ibm",
+    "library",
+    "pattern",
+    "style guide",
+  ],
+  "contributors": [
+    "Brian Han <bthan@us.ibm.com>",
+    "Jefferson Lam <jwlam@us.ibm.com>"
+  ]
+}

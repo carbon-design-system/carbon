@@ -1,38 +1,16 @@
 {
-  "name": "pattern-library",
-  "version": "0.0.1",
-  "description": "The Pattern Library is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
-  "main": "gulpfile.js",
+  "name": "bluemix-pattern-library",
+  "version": "0.0.4",
+  "description": "The Bluemix Pattern Library is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
+  "files": [
+    ".npmignore",
+    "dist",
+    "README.md"
+  ],
   "dependencies": {
     "bluemix-colors": "*",
-    "bluemix-typography": ">=0.0.6"
+    "bluemix-typography": "*"
   },
-  "scripts": {
-    "start": "nodemon server.js",
-    "dev": "npm start & gulp"
-  },
-  "repository": {
-    "type": "git"
-  },
-  "keywords": [
-    "ibm",
-    "bluemix",
-    "pattern",
-    "library",
-    "components",
-    "component",
-    "html",
-    "css",
-    "scss",
-    "sass",
-    "js",
-    "javascript"
-  ],
-  "author": [
-    "Brian Han <bthan@us.ibm.com>",
-    "Jefferson Lam <jwlam@us.ibm.com>"
-  ],
-  "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.8.1",
     "express": "^4.13.1",
@@ -42,5 +20,32 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "nodemon": "^1.3.8"
-  }
+  },
+  "scripts": {
+    "dev": "npm start & gulp",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "bluemix",
+    "component",
+    "components",
+    "css",
+    "html",
+    "ibm",
+    "javascript",
+    "js",
+    "library",
+    "pattern",
+    "patterns",
+    "sass",
+    "scss",
+    "style guide"
+  ],
+  "contributors": [
+    "Brian Han <bthan@us.ibm.com>",
+    "Jefferson Lam <jwlam@us.ibm.com>"
+  ]
 }

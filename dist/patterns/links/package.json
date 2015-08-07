@@ -1,0 +1,26 @@
+{
+  "name": "bluemix-links",
+  "version": "0.0.1",
+  "description": "Reusable links that are commonly used in IBM Bluemix.",
+  "files": [
+    "_links.scss",
+    "docs.md"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "bluemix",
+    "buttons",
+    "component"
+    "components",
+    "ibm",
+    "library",
+    "pattern",
+    "style guide",
+  ],
+  "contributors": [
+    "Brian Han <bthan@us.ibm.com>",
+    "Jefferson Lam <jwlam@us.ibm.com>"
+  ]
+}
