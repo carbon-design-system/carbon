@@ -37,7 +37,7 @@ git clone git@github.ibm.com:Bluemix/pattern-library.git
 cd pattern-library
 ```
 
-### 3. Install the dependencies
+### 3. Install the dependencies, Check for updates.
 
 You must have **node, npm and ruby** installed on your computer to contribute.
 
@@ -45,6 +45,19 @@ Install the dependencies.
 
 ```
 npm install
+```
+
+Check for any version updates for package.json dependencies and devDependencies.
+
+```
+npm run update:check
+```
+
+Read the prompt -- if necessary, update package.json and install latest versions of dependencies by running the following commands:
+
+```
+npm run update:all
+npm update
 ```
 
 *See [package.json](https://github.ibm.com/Bluemix/pattern-library/blob/master/package.json) for a list of dependencies and devDependencies.*
