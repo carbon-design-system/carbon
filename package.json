@@ -8,8 +8,8 @@
     "README.md"
   ],
   "dependencies": {
-    "bluemix-colors": "*",
-    "bluemix-typography": "*"
+    "bluemix-colors": "0.0.6",
+    "bluemix-typography": "0.0.6"
   },
   "devDependencies": {
     "browser-sync": "^2.8.1",
