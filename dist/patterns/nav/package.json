@@ -11,7 +11,7 @@
   },
   "keywords": [
     "bluemix",
-    "component"
+    "component",
     "components",
     "ibm",
     "library",
@@ -19,7 +19,7 @@
     "navbar",
     "navigation",
     "pattern",
-    "style guide",
+    "style guide"
   ],
   "contributors": [
     "Brian Han <bthan@us.ibm.com>",
