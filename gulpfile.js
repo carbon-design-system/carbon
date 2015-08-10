@@ -52,6 +52,8 @@ gulp.task('jslint', function() {
     .pipe(jshint.reporter(stylish));
 });
 
+gulp.task('reload', reload);
+
 // Lint Sass files (.scss)
 gulp.task('scss-lint', function() {
   gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss'])
@@ -72,7 +74,7 @@ gulp.task('sass', function() {
 });
 
 // Controls shutdown of nodemon for a clean exit
-//---> https://github.com/remy/nodemon#controlling-shutdown-of-your-script
+// https://github.com/remy/nodemon#controlling-shutdown-of-your-script
 gulp.task('clean-server', function() {
   exec('node clean-server.js', function(err, stdout, stderr) {
     if (err) throw err;
@@ -85,8 +87,9 @@ gulp.task('clean-server', function() {
 // Run these specific tasks when files change.
 gulp.task('watch', function() {
   gulp.watch('dev/patterns/**/*.md', ['clean-server']);
+  gulp.watch('dev/patterns/**/html/*.html').on('change', reload);
+  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['jslint', 'clean-server']).on('change', reload);
   gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist', 'clean-server']);
-  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['jslint', 'clean-server']);
 });
 
 // Default task -- run these tasks.
