@@ -37,14 +37,14 @@ gulp.task('dist', function() {
   gulp.src('dev/*.scss')
     .pipe(plumber())
     .pipe(rename('_pattern-library.scss'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('lint', function() {
   return gulp.src(['*.json', '*.js', 'dist/patterns/**/*.json'])
   // return gulp.src('*.json')
     .pipe(jshint())
-    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter(stylish));
 });
 
 gulp.task('sass', function() {
@@ -60,6 +60,7 @@ gulp.task('sass', function() {
 
 gulp.task('watch', function() {
   gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'dist']); // watch for changes on these scss files
-})
+  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['lint']);
+});
 
 gulp.task('default', ['browser-sync', 'sass', 'dist', 'watch']);
