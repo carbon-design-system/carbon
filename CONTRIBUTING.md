@@ -6,12 +6,117 @@ A pattern library is a living, growing resource that needs to adapt with changes
 
 ## Table of Contents
 
+- [Getting Started](#getting-started)
 - [Code of Conduct](#code-of-conduct)
-- [Issues](#issues)
-- [Feature Branches](#feature-branches)
-- [Commit Message Standards](#commit-message-standards)
-- [Submitting Pull Requests](#submitting-pull-requests)
-- [Reviewing Pull Requests](#reviewing-pull-requests)
+- [Details](#details)
+  - [Issues](#issues)
+  - [Feature Branches](#feature-branches)
+  - [Commit Message Standards](#commit-message-standards)
+  - [Submitting Pull Requests](#submitting-pull-requests)
+  - [Reviewing Pull Requests](#reviewing-pull-requests)
+
+## Getting Started
+
+### 1. Find or Create an Issue
+
+[Find an issue](https://github.ibm.com/Bluemix/pattern-library/issues), assign yourself so we know what you're working on it.
+
+If you can't find an issue:
+  - [Create a new issue](https://github.ibm.com/Bluemix/pattern-library/issues/new)
+  - Add the appropriate label
+  - Assign yourself
+
+*For more details on working with Issues, [click here](#issues).*
+
+### 2. Get the Repo
+
+Clone the repo and `cd` into **pattern-library**
+
+```
+git clone git@github.ibm.com:Bluemix/pattern-library.git
+cd pattern-library
+```
+
+### 3. Install the dependencies, Check for updates.
+
+You must have **node, npm and ruby** installed on your computer to contribute.
+
+Install the dependencies.
+
+```
+npm install
+```
+
+Check for any version updates for package.json dependencies and devDependencies.
+
+```
+npm run update:check
+```
+
+Read the prompt -- if necessary, update package.json and install latest versions of dependencies by running the following commands:
+
+```
+npm run update:all
+npm update
+```
+
+*See [package.json](https://github.ibm.com/Bluemix/pattern-library/blob/master/package.json) for a list of dependencies and devDependencies.*
+
+### 4. Create and Checkout into New Feature Branch
+
+Create a new feature branch with a name that closely matches the work you're doing to resolve the issue(s) you're working on. Then checkout into that new branch. (You can do both of these steps with the git command below)
+
+```
+git checkout -b <your-feature-branch-name>
+```
+
+*For more details, see [feature branches](#feature-branches)*
+### 5. Run the code.
+
+Run the command below -- this starts a server and automatically opens a browser that shows all the rendered code for patterns.
+
+```
+npm run dev
+```
+
+*See [package.json scripts](https://github.ibm.com/Bluemix/pattern-library/blob/master/package.json#L24) and [gulpfile.js](https://github.ibm.com/Bluemix/pattern-library/blob/master/gulpfile.js) to see what's happening.*
+
+### 6. Work inside the dev folder only.
+
+- Find the pattern you're working on inside the [patterns folder](https://github.ibm.com/Bluemix/pattern-library/tree/master/dev/patterns).
+- Update **html, scss and md** files, you'll find these inside each pattern folder.
+- The `npm run dev` command will automatically update the browser with changes to **html and scss/css code**.
+
+
+### 7. Commit and Push your Work
+
+Use git to commit code changes to your feature branch.
+
+```
+git add <filename>
+git commit -m "your short, concise commit message".
+```
+
+Push your commits to your remote feature branch.
+
+```
+git push origin <your-feature-branch-name>
+```
+
+*See [Commit Message Standards](#commit-message-standards) for best practices around writing good commits.*
+
+### 8. Submit a Pull Request
+
+When you're ready for your code to be reviewed, submit a pull request.
+[Visit the repo](https://github.ibm.com/Bluemix/pattern-library) at GitHub Enterprise.
+
+For more details on submitting pull requests, [click here](#submitting-pull-requests).
+
+### 9. Pull Request Review
+
+Get your code reviewed by another IBM developer. Merge your pull request after getting two approvals (:+1). Delete remote feature branch. See [Reviewing Pull Requests](#reviewing-pull-requests) for details.
+
+***
 
 ## Code of Conduct
 
@@ -25,37 +130,41 @@ The following is a detailed list of guidelines that must be followed when partic
 - All communication in all channels (GitHub, Slack, Email, Twitter, etc.) must be constructive and never resort to personal attacks, trolling, public or private harassment, insults or other unprofessional conduct.
 - We extend respect to everyone involved regardless of gender, gender identity, sexual orientation, disability, age, race, ethnicity, religion, or level of experience. Everyone who contributes is expected to do the same.
 
-## Issues
+***
 
-- **Always create a new issue**, before contributing any code to the repo. 
+## Details
+
+### Issues
+
+- **Always create a new issue**, before contributing any code to the repo.
 - Label the issue with the appropriate label (bug, pattern, enhancement, question)
-- Explain what the issue is depending on the context of the issue and label. 
+- Explain what the issue is depending on the context of the issue and label.
 
-### Example
+#### Example
 
-#### Bug
+##### Bug
 
-- Explain what the bug is. 
+- Explain what the bug is.
 - Explain how to reproduce the bug.
 
 ![issue-bug](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0140/bee26a4c-3b80-11e5-9b92-57b545f8dddc.png)
 
-#### Pattern
+##### Pattern
 
 - This is usually a task for adding a new pattern to the repo
 - Include any sub-tasks that needs to be completed.
 
 ![issue-pattern](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0142/18086932-3b81-11e5-9a77-f17dc8d4a99c.png)
 
-#### Enhancement
+##### Enhancement
 
-- A general improvement to the source code that doesn't directly relate to patterns. 
+- A general improvement to the source code that doesn't directly relate to patterns.
 
-#### Question
+##### Question
 
-- This is a question that someone asks about the repo. 
+- This is a question that someone asks about the repo.
 
-## Feature Branches
+### Feature Branches
 
 If there's something that needs to be added or a bug that needs to be resolved, developers can contribute code using feature branches.
 
@@ -72,7 +181,7 @@ $ git checkout -b <feature-branch-name>
 
 If you're not a contributor, you can work on a forked copy of this repo. In this case, it is still recommended to work on feature branches in order to keep your `master` branch clean and up-to-date with this repo.
 
-## Commit Message Standards
+### Commit Message Standards
 
 All commits should have meaningful, short, and concise commit messages. A history of good commit messages helps keep a code base maintainable, easy to work with, and failsafe.
 
@@ -84,22 +193,22 @@ General guidelines:
 5. Put any additional text in the body of the commit
 6. Separate the subject line and the body with a blank line
 
-#### Examples
+##### Examples
 Do this:
 ![Good commits](http://i.imgur.com/9CqZmYQ.png)
 
 Refrain from doing this:
 ![Bad commits](http://i.imgur.com/soid211.png)
 
-## Submitting Pull Requests
+### Submitting Pull Requests
 
-Before submitting a pull request, make sure you do the following: 
+Before submitting a pull request, make sure you do the following:
 
 ```bash
 $ git fetch --all && git merge master
 ```
 
-This ensures that the code is up to date with any updates to the master branch and ultimately, avoiding merge conflicts. 
+This ensures that the code is up to date with any updates to the master branch and ultimately, avoiding merge conflicts.
 
 When you're ready to push code up to the repo, push your commits to your own remote branch that matches your `<feature-branch-name>`.
 
@@ -115,7 +224,7 @@ Developers will meet 1-2 times a week to review pull requests on a regular basis
 * Where possible, reference a relevant issue that can be updated or closed based on the pull request.
 * ~~For a more comprehensive overview of commit standards, see [this doc](https://github.com/cloud-platform-design/cloud-platform-beta/blob/master/Contributing.md).~~
 
-After your pull request is approved: 
+After your pull request is approved:
 - click on the **merge pull request** button
 - delete your remote feature branch
 - In your terminal, pull down the changes from master into your local master branch
@@ -125,11 +234,11 @@ $ git checkout master
 $ git pull origin master
 ```
 
-#### Example
+##### Example
 
 ![example of pull request](http://i.imgur.com/RQcQb5U.png)
 
-## Reviewing Pull Requests
+### Reviewing Pull Requests
 
 Pull requests are basically like a code review -- this is code that needs to be reviewed before it gets merged into master branch.
 Consider everything that's in master branch as production-ready (but don't stress yourself out either).
