@@ -83,6 +83,11 @@
      -moz-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+     -moz-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
   -webkit-align-items: center;
      -moz-box-align: center;
@@ -90,10 +95,14 @@
           align-items: center; }
 
 .nav {
-  background-color: #1d3649; }
+  background-color: #1d3649;
+  padding: 0 10px; }
 
 .nav__links {
   list-style-type: none; }
+
+.brand__logo {
+  margin-right: 5px; }
 
 .brand__name,
 .brand__name--thin {

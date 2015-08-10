@@ -1,19 +1,21 @@
 $nav__color--background: $blue-80;
-$nav__color--type: $white; 
+$nav__color--type: $white;
 
 
 .nav {
-  
+
   &,
   &__brand,
   &__links {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
   }
 
   & {
     background-color: $nav__color--background;
+    padding: 0 10px;
   }
 
   &__links {
@@ -24,8 +26,9 @@ $nav__color--type: $white;
 .brand {
   &__logo {
     // logo styles
+    margin-right: 5px;
   }
-  
+
   &__name,
   &__name--thin {
     color: $nav__color--type;
@@ -35,7 +38,7 @@ $nav__color--type: $white;
 
   &__name {
     @extend %helvetica-bold;
-    
+
   }
 
   &__name--thin {
@@ -47,7 +50,7 @@ $nav__color--type: $white;
 .links {
   &__link-item {
     // stuff
-    
+
   }
 
   &__link-item__link,
