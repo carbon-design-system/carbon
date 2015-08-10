@@ -86,7 +86,6 @@ gulp.task('clean-server', function() {
 // Watch for changes on these files 
 // Run these specific tasks when files change.
 gulp.task('watch', function() {
-  gulp.watch('dev/patterns/**/*.md', ['clean-server']);
   gulp.watch('dev/patterns/**/html/*.html').on('change', reload);
   gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['jslint', 'clean-server']).on('change', reload);
   gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist', 'clean-server']);
