@@ -19,7 +19,7 @@ A pattern library is a living, growing resource that needs to adapt with changes
 
 ### 1. Find or Create an Issue
 
-[Find an issue](https://github.ibm.com/Bluemix/pattern-library/issues), assign yourself so we know that you're working on it.
+[Find an issue](https://github.ibm.com/Bluemix/pattern-library/issues), assign yourself so we know what you're working on it.
 
 If you can't find an issue:
   - [Create a new issue](https://github.ibm.com/Bluemix/pattern-library/issues/new)
