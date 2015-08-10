@@ -43,7 +43,6 @@ gulp.task('dist', function() {
 
 gulp.task('jslint', function() {
   return gulp.src(['*.json', '*.js', 'dist/patterns/**/*.json'])
-  // return gulp.src('*.json')
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
