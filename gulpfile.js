@@ -7,6 +7,7 @@ var rename = require('gulp-rename');
 var reload = browserSync.reload;
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
+var scsslint = require('gulp-scss-lint');
 
 var BROWSERS = [
   "> 5%",
@@ -40,11 +41,16 @@ gulp.task('dist', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('lint', function() {
+gulp.task('jslint', function() {
   return gulp.src(['*.json', '*.js', 'dist/patterns/**/*.json'])
   // return gulp.src('*.json')
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
+});
+
+gulp.task('scss-lint', function() {
+  gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss'])
+    .pipe(scsslint());
 });
 
 gulp.task('sass', function() {
@@ -59,8 +65,8 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'dist']); // watch for changes on these scss files
-  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['lint']);
+  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist']); // watch for changes on these scss files
+  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['jslint']);
 });
 
 gulp.task('default', ['browser-sync', 'sass', 'dist', 'watch']);
