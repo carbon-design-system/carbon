@@ -1,5 +1,5 @@
 var express = require('express');
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3333;
 var app = express();
 
 app.use(express.static(__dirname + '/dev/patterns'));
