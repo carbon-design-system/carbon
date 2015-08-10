@@ -5,6 +5,8 @@ var plumber = require('gulp-plumber');
 var browserSync = require('browser-sync').create();
 var rename = require('gulp-rename');
 var reload = browserSync.reload;
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 
 var BROWSERS = [
   "> 5%",
@@ -36,6 +38,13 @@ gulp.task('dist', function() {
     .pipe(plumber())
     .pipe(rename('_pattern-library.scss'))
     .pipe(gulp.dest('dist'))
+});
+
+gulp.task('lint', function() {
+  return gulp.src(['*.json', '*.js', 'dist/patterns/**/*.json'])
+  // return gulp.src('*.json')
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
 });
 
 gulp.task('sass', function() {
