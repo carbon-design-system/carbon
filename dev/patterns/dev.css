@@ -1,7 +1,14 @@
-.bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
+.brand__name--thin, .links__link-item__link,
+.links__link-item__link--sign-up,
+.links__link-item__link--log-in, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__name {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
-.bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
+.brand__name--thin, .links__link-item__link,
+.links__link-item__link--sign-up,
+.links__link-item__link--log-in {
+  font-weight: 200; }
+
+.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__name {
   font-weight: 700; }
 
 .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
@@ -60,3 +67,44 @@
   .bx-btn--close:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
+
+.nav,
+.nav__brand,
+.nav__links {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.nav {
+  background-color: #1d3649; }
+
+.nav__links {
+  list-style-type: none; }
+
+.brand__name,
+.brand__name--thin {
+  color: #fff;
+  font-size: 0.875em; }
+
+.brand__name--thin {
+  margin-right: 5px; }
+
+.links__link-item__link,
+.links__link-item__link--sign-up,
+.links__link-item__link--log-in {
+  color: #fff;
+  text-decoration: none; }

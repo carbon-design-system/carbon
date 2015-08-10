@@ -1,0 +1,60 @@
+$nav__color--background: $blue-80;
+$nav__color--type: $white; 
+
+
+.nav {
+  
+  &,
+  &__brand,
+  &__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  & {
+    background-color: $nav__color--background;
+  }
+
+  &__links {
+    list-style-type: none;
+  }
+}
+
+.brand {
+  &__logo {
+    // logo styles
+  }
+  
+  &__name,
+  &__name--thin {
+    color: $nav__color--type;
+    font-size: 0.875em;
+  }
+
+
+  &__name {
+    @extend %helvetica-bold;
+    
+  }
+
+  &__name--thin {
+    @extend %helvetica-light;
+    margin-right: 5px;
+  }
+}
+
+.links {
+  &__link-item {
+    // stuff
+    
+  }
+
+  &__link-item__link,
+  &__link-item__link--sign-up,
+  &__link-item__link--log-in {
+    @extend %helvetica-light;
+    color: $nav__color--type;
+    text-decoration: none;
+  }
+}
