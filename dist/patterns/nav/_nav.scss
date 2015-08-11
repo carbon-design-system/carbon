@@ -9,7 +9,8 @@ $nav--sign-up-color: #00b299;
   padding: 0 10px;
   
   &,
-  &__brand {
+  &__brand,
+  &__nav {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -22,23 +23,19 @@ $nav--sign-up-color: #00b299;
 }
 
 .nav {
-  &,
+
   &__links,
   &__cta-links {
     align-items: center;
     display: flex;
     flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
   }
 
   &__brand {
     flex: 1;
-  }
-
-  &__links,
-  &__cta-links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
   }
 }
 
