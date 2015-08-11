@@ -28,8 +28,10 @@ var BROWSERS = [
 // Initialize browser-sync and proxy web server
 gulp.task('browser-sync', function() {
   browserSync.init({
-    proxy: "http://localhost:3333",
-    logPrefix: "Pattern Library"
+    logPrefix: "Pattern Library",
+    server: {
+      baseDir: "./dev/patterns"
+    }
   });
 });
 
@@ -71,7 +73,7 @@ gulp.task('sass', function() {
       browsers: BROWSERS
     }))
     .pipe(gulp.dest('dev/patterns'))
-    .pipe(reload({ stream: true }));
+    .pipe(browserSync.stream());
 });
 
 // Watch for changes on these files

@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "browser-sync": "^2.8.2",
-    "express": "^4.13.3",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-jshint": "^1.11.2",
@@ -22,15 +21,12 @@
     "gulp-sass": "^2.0.4",
     "gulp-scss-lint": "^0.2.2",
     "jshint-stylish": "^2.0.1",
-    "nodemon": "^1.4.0",
     "npm-check-updates": "^2.2.0"
   },
   "scripts": {
     "update:check": "ncu",
     "update:all": "ncu --upgradeAll",
-    "preinstall": "gem install scss_lint",
-    "dev": "npm start & gulp",
-    "start": "nodemon server.js"
+    "preinstall": "gem install scss_lint"
   },
   "repository": {
     "type": "git"
