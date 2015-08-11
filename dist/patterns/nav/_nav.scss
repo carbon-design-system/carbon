@@ -1,21 +1,19 @@
-$nav__color--background: $blue-80;
-$nav__color--type: $white;
-
+$nav--background-color: $blue-80;
+$nav--link-color: $bluemix-nav-grey;
+$nav--logo-color: $white;
+$nav--sign-up-color: #00b299;
 
 .nav {
-
+  background-color: $nav--background-color;
+  padding: 0 10px;
+  
   &,
   &__brand,
   &__links {
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-  }
-
-  & {
-    background-color: $nav__color--background;
-    padding: 0 10px;
   }
 
   &__links {
@@ -30,9 +28,9 @@ $nav__color--type: $white;
   }
 
   &__name,
-  &__name--thin {
-    color: $nav__color--type;
-    font-size: 0.875em;
+  &__name--normal {
+    color: $nav--logo-color;
+    font-size: .875em;
   }
 
 
@@ -41,23 +39,36 @@ $nav__color--type: $white;
 
   }
 
-  &__name--thin {
-    @extend %helvetica-light;
+  &__name--normal {
+    @extend %helvetica-normal;
     margin-right: 5px;
   }
 }
 
 .links {
-  &__link-item {
-    // stuff
-
-  }
-
+  // All the links
   &__link-item__link,
   &__link-item__link--sign-up,
   &__link-item__link--log-in {
     @extend %helvetica-light;
-    color: $nav__color--type;
+    font-size: em(14px);
+    letter-spacing: em(1px);
+    padding-left: 10px;
     text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  &__link-item__link,
+  &__link-item__link--log-in {
+    color: $nav--link-color;
+
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+  }
+
+  &__link-item__link--sign-up {
+    color: $nav--sign-up-color;
   }
 }
