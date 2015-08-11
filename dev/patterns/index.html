@@ -11,6 +11,9 @@
   you'll be able to see changes to your patterns here. -->
 
   <!-- PATTERNS -->
+  <div ng-include="'nav/html/nav.html'"></div>
+  <div ng-include="'nav/html/secondary-nav.html'"></div>
+
   <h1>buttons</h1>
   <div ng-include="'buttons/html/primary-button.html'"></div>
   <div ng-include="'buttons/html/secondary-button.html'"></div>
@@ -38,10 +41,6 @@
   <h1>modals</h1>
   <div ng-include="'modals/html/modal.html'"></div>
 
-  <h1>nav</h1>
-  <div ng-include="'nav/html/nav.html'"></div>
-  <div ng-include="'nav/html/secondary-nav.html'"></div>
-
   <h1>radio</h1>
   <div ng-include="'radio/html/radio.html'"></div>
 
@@ -51,10 +50,13 @@
   <h1>tooltips</h1>
   <div ng-include="'tooltips/html/tooltip.html'"></div>
 
+
   <!-- SCRIPTS -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js" charset="utf-8"></script>
   <script>
     (function(){ angular.module('app', []); }());
+    var menu = document.querySelector('#menu-toggle');
+    console.log(menu);
   </script>
 </body>
 </html>
