@@ -3,6 +3,12 @@ $nav--link-color: $bluemix-nav-grey;
 $nav--logo-color: $white;
 $nav--sign-up-color: #00b299;
 
+%flex--horizontal-center {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
 .header {
   background-color: $nav--background-color;
   height: 3.125em;
@@ -11,9 +17,7 @@ $nav--sign-up-color: #00b299;
   &,
   &__brand,
   &__nav {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
+    @extend %flex--horizontal-center;
   }
 
   &__brand {
@@ -23,19 +27,12 @@ $nav--sign-up-color: #00b299;
 }
 
 .nav {
-
   &__links,
   &__cta-links {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
+    @extend %flex--horizontal-center;
     list-style-type: none;
     margin: 0;
     padding: 0;
-  }
-
-  &__brand {
-    flex: 1;
   }
 }
 
