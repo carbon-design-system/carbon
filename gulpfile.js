@@ -28,8 +28,10 @@ var BROWSERS = [
 // Initialize browser-sync and proxy web server
 gulp.task('browser-sync', function() {
   browserSync.init({
-    proxy: "http://localhost:3333",
-    logPrefix: "Pattern Library"
+    logPrefix: "Pattern Library",
+    server: {
+      baseDir: "./dev/patterns"
+    }
   });
 });
 
@@ -52,6 +54,7 @@ gulp.task('jslint', function() {
     .pipe(jshint.reporter(stylish));
 });
 
+// Full Browser Reload (HTML, JS, JSON files)
 gulp.task('reload', reload);
 
 // Lint Sass files (.scss)
@@ -60,35 +63,25 @@ gulp.task('scss-lint', function() {
     .pipe(scsslint());
 });
 
-// Compile and prefix Sass code into CSS, 
+// Compile and prefix Sass code into CSS,
 // then reload the browser (stream when possible).
 gulp.task('sass', function() {
-  gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss']) 
+  gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss'])
     .pipe(plumber())
-    .pipe(sass())              
-    .pipe(autoprefixer({       
-      browsers: BROWSERS       
+    .pipe(sass())
+    .pipe(autoprefixer({
+      browsers: BROWSERS
     }))
-    .pipe(gulp.dest('dev/patterns')) 
-    .pipe(reload({ stream: true })); 
+    .pipe(gulp.dest('dev/patterns'))
+    .pipe(browserSync.stream());
 });
 
-// Controls shutdown of nodemon for a clean exit
-// https://github.com/remy/nodemon#controlling-shutdown-of-your-script
-gulp.task('clean-server', function() {
-  exec('node clean-server.js', function(err, stdout, stderr) {
-    if (err) throw err;
-    console.log(stdout);
-    console.log(stderr);
-  });
-});
-
-// Watch for changes on these files 
+// Watch for changes on these files
 // Run these specific tasks when files change.
 gulp.task('watch', function() {
   gulp.watch('dev/patterns/**/html/*.html').on('change', reload);
-  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['jslint', 'clean-server']).on('change', reload);
-  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist', 'clean-server']);
+  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['jslint']).on('change', reload);
+  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist']);
 });
 
 // Default task -- run these tasks.
