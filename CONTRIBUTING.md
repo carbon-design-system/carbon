@@ -147,14 +147,14 @@ The following is a detailed list of guidelines that must be followed when partic
 - Explain what the bug is.
 - Explain how to reproduce the bug.
 
-![issue-bug]()
+![issue-bug](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0189/bced242c-4015-11e5-850f-41bc3fbfb538.png)
 
 ##### Pattern
 
 - This is usually a task for adding a new pattern to the repo
 - Include any sub-tasks that needs to be completed.
 
-![issue-pattern](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0182/7d01b7ca-4014-11e5-9c83-ad3148453bb8.png)
+![issue-pattern](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0142/18086932-3b81-11e5-9a77-f17dc8d4a99c.png)
 
 ##### Enhancement
 
