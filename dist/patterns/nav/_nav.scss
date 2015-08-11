@@ -2,6 +2,7 @@ $nav--background-color: $blue-80;
 $nav--link-color: $bluemix-nav-grey;
 $nav--logo-color: $white;
 $nav--sign-up-color: #00b299;
+$breakpoint--desktop: em(900px);
 
 // https://console.ng.bluemix.net/api/v1/imgs/sprite.png
 
@@ -15,7 +16,7 @@ $nav--sign-up-color: #00b299;
   background-color: $nav--background-color;
   height: 3.125em;
   padding: 0 10px;
-  
+
   &,
   &__brand,
   &__nav {
@@ -29,24 +30,72 @@ $nav--sign-up-color: #00b299;
 }
 
 .nav {
-  &__links,
   &__cta-links {
     @extend %flex--horizontal-center;
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
+
+  &__links {
+    background-color: $nav--background-color;
+    display: flex;
+    flex-direction: column;
+    left: 0px;
+    line-height: 28px;
+    list-style-type: none;
+    margin: 0;
+    min-height: 822px;
+    opacity: .9;
+    padding: 0;
+    position: fixed;
+    top: 48px;
+    transform: translateX(-300px);
+    width: 300px;
+
+    @media screen and (min-width: $breakpoint--desktop) {
+      align-items: center;
+      display: flex;
+      flex-direction: row;  
+      position: static;
+      opacity: 1;
+      min-height: none;
+      background-color: transparent;
+      min-height: 32px;
+      transform: translateX(0px);
+      width: 480px;
+    }
+  }
 }
 
 .brand {
+  &__menu {
+    background-image: url('https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png');
+    background-position: -68px -106px; 
+    cursor: pointer;
+    height: 14px;
+    margin: 0 10px;
+    width: 12px;
+
+    &:hover, 
+    &:focus {
+      background-position: -56px -106px;
+    }
+
+    @media screen and (min-width: $breakpoint--desktop) {
+      display: none;
+    }
+  }
   &__link {
     @extend %flex--horizontal-center;
 
     &__logo {
-      background-image: url('https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png');
-      background-position: -40px -50px;
-      width: 32px;
-      height: 32px;
+      @media screen and (min-width: $breakpoint--desktop) {
+        background-image: url('https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png');
+        background-position: -40px -50px;
+        width: 32px;
+        height: 32px;
+      }
     }
 
     &__name,
