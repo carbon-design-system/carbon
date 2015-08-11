@@ -151,10 +151,23 @@ The following is a detailed list of guidelines that must be followed when partic
 
 ### Pattern
 
-- This is usually a task for adding a new pattern to the repo
+- A pattern is a self-contained component of markup, styles and sometimes behavior
+- We develop patterns with HTML, Sass/CSS, JavaScript but we only distribute **.scss** and **.js** files.
+- An issue that's labeled as pattern should be anything that relates to a pattern.
+- A pattern issue is usually a task for adding a new pattern to the repo, updating an existing pattern, or creating new variations of a pattern.
 - Include any sub-tasks that needs to be completed.
 
+**Creating a New Pattern**
+
+*example coming soon*
+
+**Updating an Existing Pattern**
+
 ![issue-pattern](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0142/18086932-3b81-11e5-9a77-f17dc8d4a99c.png)
+
+**Creating variations of an Existing Pattern**
+
+*example coming soon*
 
 ### Enhancement
 
