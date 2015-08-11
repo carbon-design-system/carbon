@@ -16,7 +16,7 @@ $secondary-button--color: $blue-40;
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: .5;
   }
 }
 
@@ -30,7 +30,7 @@ $secondary-button--color: $blue-40;
   @include base--button($secondary-button--color);
   background-color: transparent;
   color: $secondary-button--color;
-  transition: background-color ease-out 0.15s, color ease-out 0.15s;
+  transition: background-color ease-out .15s, color ease-out .15s;
 
   &:hover,
   &:focus {
