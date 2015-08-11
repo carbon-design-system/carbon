@@ -358,18 +358,18 @@ td,
 th {
   padding: 0; }
 
-.links__link, .cta-links__link--sign-up,
-.cta-links__link--log-in, .brand__link__name--normal, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__link__name {
+.links__link, .brand__link__name--normal, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__link__name, .cta-links__link--sign-up,
+.cta-links__link--log-in {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
-.links__link, .cta-links__link--sign-up,
-.cta-links__link--log-in {
+.links__link {
   font-weight: 200; }
 
 .brand__link__name--normal {
   font-weight: 400; }
 
-.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__link__name {
+.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__link__name, .cta-links__link--sign-up,
+.cta-links__link--log-in {
   font-weight: 700; }
 
 .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
@@ -469,7 +469,10 @@ th {
   padding: 0; }
 
 .brand__link__logo {
-  margin-right: 5px; }
+  background-image: url("https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png");
+  background-position: -40px -50px;
+  width: 32px;
+  height: 32px; }
 
 .brand__link__name,
 .brand__link__name--normal {
@@ -477,13 +480,14 @@ th {
   font-size: .875em; }
 
 .brand__link__name--normal {
+  margin-left: 0.75em;
   margin-right: 5px; }
 
 .links__link {
   color: #B3B3B3;
   font-size: 0.875em;
   letter-spacing: 0.0625em;
-  padding: 0 5px;
+  margin: 0 12px;
   text-decoration: none;
   text-transform: uppercase; }
   .links__link:hover,
@@ -496,9 +500,36 @@ th {
 
 .cta-links__link--sign-up,
 .cta-links__link--log-in {
-  color: #B3B3B3;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
   font-size: 0.875em;
   letter-spacing: 0.0625em;
-  padding: 0 5px;
+  margin: 0 5px;
+  padding: 5px 12px;
   text-decoration: none;
   text-transform: uppercase; }
+
+.cta-links__link--sign-up {
+  border: 1px solid #00b299;
+  color: #00b299; }
+  .cta-links__link--sign-up:hover,
+  .cta-links__link--sign-up:focus {
+    background-color: #00b299;
+    color: #1d3649;
+    -webkit-transition: background-color 0.2s ease-out, color 0.2s ease-out;
+       -moz-transition: background-color 0.2s ease-out, color 0.2s ease-out;
+         -o-transition: background-color 0.2s ease-out, color 0.2s ease-out;
+            transition: background-color 0.2s ease-out, color 0.2s ease-out; }
+
+.cta-links__link--log-in {
+  border: 1px solid #B3B3B3;
+  color: #B3B3B3; }
+  .cta-links__link--log-in:hover,
+  .cta-links__link--log-in:focus {
+    background-color: #B3B3B3;
+    color: #1d3649;
+    -webkit-transition: background-color 0.2s ease-out, color 0.2s ease-out;
+       -moz-transition: background-color 0.2s ease-out, color 0.2s ease-out;
+         -o-transition: background-color 0.2s ease-out, color 0.2s ease-out;
+            transition: background-color 0.2s ease-out, color 0.2s ease-out; }

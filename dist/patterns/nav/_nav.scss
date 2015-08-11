@@ -3,6 +3,8 @@ $nav--link-color: $bluemix-nav-grey;
 $nav--logo-color: $white;
 $nav--sign-up-color: #00b299;
 
+// https://console.ng.bluemix.net/api/v1/imgs/sprite.png
+
 %flex--horizontal-center {
   align-items: center;
   display: flex;
@@ -41,7 +43,10 @@ $nav--sign-up-color: #00b299;
     @extend %flex--horizontal-center;
 
     &__logo {
-      margin-right: 5px;
+      background-image: url('https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png');
+      background-position: -40px -50px;
+      width: 32px;
+      height: 32px;
     }
 
     &__name,
@@ -56,6 +61,7 @@ $nav--sign-up-color: #00b299;
 
     &__name--normal {
       @extend %helvetica-normal;
+      margin-left: 0.75em;
       margin-right: 5px;
     }
   }
@@ -67,7 +73,7 @@ $nav--sign-up-color: #00b299;
     color: $nav--link-color;
     font-size: em(14px);
     letter-spacing: em(1px);
-    padding: 0 5px;
+    margin: 0 12px;
     text-decoration: none;
     text-transform: uppercase;
 
@@ -82,12 +88,37 @@ $nav--sign-up-color: #00b299;
 .cta-links {
   &__link--sign-up,
   &__link--log-in {
-    @extend %helvetica-light;
-    color: $nav--link-color;
+    @extend %helvetica-bold;
+    border-radius: 3px;
     font-size: em(14px);
     letter-spacing: em(1px);
-    padding: 0 5px;
+    margin: 0 5px;
+    padding: 5px 12px;
     text-decoration: none;
     text-transform: uppercase;
+  }
+
+  &__link--sign-up {
+    border: 1px solid $nav--sign-up-color;
+    color: $nav--sign-up-color;
+
+    &:hover,
+    &:focus {
+      background-color: $nav--sign-up-color;
+      color: $nav--background-color;
+      transition: background-color .2s ease-out, color .2s ease-out;
+    }
+  }
+
+  &__link--log-in {
+    border: 1px solid $nav--link-color;
+    color: $nav--link-color;
+
+    &:hover, 
+    &:focus {
+      background-color: $nav--link-color;
+      color: $nav--background-color;
+      transition: background-color .2s ease-out, color .2s ease-out;
+    }
   }
 }
