@@ -118,7 +118,7 @@ Get your code reviewed by another IBM developer. Merge your pull request after g
 
 ***
 
-## Code of Conduct
+# Code of Conduct
 
 We are all contributors and maintainers of this Pattern Library. We also want to be happy, welcoming and constructive when we are collaborating to grow the work that happens here.
 
@@ -132,39 +132,42 @@ The following is a detailed list of guidelines that must be followed when partic
 
 ***
 
-## Details
+# Details
 
-### Issues
+## Issues
 
 - **Always create a new issue**, before contributing any code to the repo.
 - Label the issue with the appropriate label (bug, pattern, enhancement, question)
 - Explain what the issue is depending on the context of the issue and label.
 
-#### Example
+## Example Issues
 
-##### Bug
+### Bug
 
 - Explain what the bug is.
 - Explain how to reproduce the bug.
 
 ![issue-bug](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0189/bced242c-4015-11e5-850f-41bc3fbfb538.png)
 
-##### Pattern
+### Pattern
 
 - This is usually a task for adding a new pattern to the repo
 - Include any sub-tasks that needs to be completed.
 
 ![issue-pattern](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0142/18086932-3b81-11e5-9a77-f17dc8d4a99c.png)
 
-##### Enhancement
+### Enhancement
 
 - A general improvement to the source code that doesn't directly relate to patterns.
+- This can be [contributing to documentation](https://github.ibm.com/Bluemix/pattern-library/pull/47), adding new tasks to the gulpfile.js, etc.
 
-##### Question
+![Enhancement-example](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0190/628badc2-4016-11e5-9819-32cea232693f.png)
+
+### Question
 
 - This is a question that someone asks about the repo.
 
-### Feature Branches
+## Feature Branches
 
 If there's something that needs to be added or a bug that needs to be resolved, developers can contribute code using feature branches.
 
@@ -181,7 +184,7 @@ $ git checkout -b <feature-branch-name>
 
 If you're not a contributor, you can work on a forked copy of this repo. In this case, it is still recommended to work on feature branches in order to keep your `master` branch clean and up-to-date with this repo.
 
-### Commit Message Standards
+## Commit Message Standards
 
 All commits should have meaningful, short, and concise commit messages. A history of good commit messages helps keep a code base maintainable, easy to work with, and failsafe.
 
@@ -193,14 +196,17 @@ General guidelines:
 5. Put any additional text in the body of the commit
 6. Separate the subject line and the body with a blank line
 
-##### Examples
-Do this:
+## Example Commits
+
+### Do this:
+
 ![Good commits](http://i.imgur.com/9CqZmYQ.png)
 
-Refrain from doing this:
+### Refrain from doing this:
+
 ![Bad commits](http://i.imgur.com/soid211.png)
 
-### Submitting Pull Requests
+## Submitting Pull Requests
 
 Before submitting a pull request, make sure you do the following:
 
@@ -234,11 +240,11 @@ $ git checkout master
 $ git pull origin master
 ```
 
-##### Example
+## Example Pull Request
 
 ![example of pull request](http://i.imgur.com/RQcQb5U.png)
 
-### Reviewing Pull Requests
+## Reviewing Pull Requests
 
 Pull requests are basically like a code review -- this is code that needs to be reviewed before it gets merged into master branch.
 Consider everything that's in master branch as production-ready (but don't stress yourself out either).
