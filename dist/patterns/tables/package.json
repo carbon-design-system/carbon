@@ -11,13 +11,13 @@
   },
   "keywords": [
     "bluemix",
-    "component"
+    "component",
     "components",
     "ibm",
     "library",
     "pattern",
     "style guide",
-    "tables",
+    "tables"
   ],
   "contributors": [
     "Brian Han <bthan@us.ibm.com>",
