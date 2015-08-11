@@ -73,10 +73,10 @@ git checkout -b <your-feature-branch-name>
 *For more details, see [feature branches](#feature-branches)*
 ### 5. Run the code.
 
-Run the command below -- this starts a server and automatically opens a browser that shows all the rendered code for patterns.
+Run the gulp command below -- this starts a static server with [browserSync](http://www.browsersync.io/docs/gulp/) via [gulpfile.js](https://github.ibm.com/Bluemix/pattern-library/blob/master/gulpfile.js) and automatically opens a browser that shows all the rendered code for patterns.
 
 ```
-npm run dev
+gulp
 ```
 
 *See [package.json scripts](https://github.ibm.com/Bluemix/pattern-library/blob/master/package.json#L24) and [gulpfile.js](https://github.ibm.com/Bluemix/pattern-library/blob/master/gulpfile.js) to see what's happening.*
@@ -85,7 +85,7 @@ npm run dev
 
 - Find the pattern you're working on inside the [patterns folder](https://github.ibm.com/Bluemix/pattern-library/tree/master/dev/patterns).
 - Update **html, scss and md** files, you'll find these inside each pattern folder.
-- The `npm run dev` command will automatically update the browser with changes to **html and scss/css code**.
+- The `gulp` command will automatically update the browser with changes to **html and scss/css code**.
 
 
 ### 7. Commit and Push your Work
