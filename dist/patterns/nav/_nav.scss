@@ -38,9 +38,7 @@ $nav--sign-up-color: #00b299;
 
 .brand {
   &__link {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
+    @extend %flex--horizontal-center;
 
     &__logo {
       margin-right: 5px;
