@@ -3,72 +3,99 @@ $nav--link-color: $bluemix-nav-grey;
 $nav--logo-color: $white;
 $nav--sign-up-color: #00b299;
 
-.nav {
+.header {
   background-color: $nav--background-color;
+  height: 3.125em;
   padding: 0 10px;
   
   &,
-  &__brand,
-  &__links {
+  &__brand {
     align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
   }
 
-  &__links {
+  &__brand {
+    flex: 1;
+  }
+
+}
+
+.nav {
+  &,
+  &__links,
+  &__cta-links {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__brand {
+    flex: 1;
+  }
+
+  &__links,
+  &__cta-links {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
   }
 }
 
 .brand {
-  &__logo {
-    // logo styles
-    margin-right: 5px;
-  }
+  &__link {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 
-  &__name,
-  &__name--normal {
-    color: $nav--logo-color;
-    font-size: .875em;
-  }
+    &__logo {
+      margin-right: 5px;
+    }
 
+    &__name,
+    &__name--normal {
+      color: $nav--logo-color;
+      font-size: .875em;
+    }
 
-  &__name {
-    @extend %helvetica-bold;
+    &__name {
+      @extend %helvetica-bold;
+    }
 
-  }
-
-  &__name--normal {
-    @extend %helvetica-normal;
-    margin-right: 5px;
+    &__name--normal {
+      @extend %helvetica-normal;
+      margin-right: 5px;
+    }
   }
 }
 
 .links {
-  // All the links
-  &__link-item__link,
-  &__link-item__link--sign-up,
-  &__link-item__link--log-in {
+  &__link {
     @extend %helvetica-light;
+    color: $nav--link-color;
     font-size: em(14px);
     letter-spacing: em(1px);
-    padding-left: 10px;
+    padding: 0 5px;
     text-decoration: none;
     text-transform: uppercase;
-  }
-
-  &__link-item__link,
-  &__link-item__link--log-in {
-    color: $nav--link-color;
 
     &:hover,
     &:focus {
       color: $white;
+      transition: color .2s ease-out;
     }
   }
+}
 
-  &__link-item__link--sign-up {
-    color: $nav--sign-up-color;
+.cta-links {
+  &__link--sign-up,
+  &__link--log-in {
+    @extend %helvetica-light;
+    color: $nav--link-color;
+    font-size: em(14px);
+    letter-spacing: em(1px);
+    padding: 0 5px;
+    text-decoration: none;
+    text-transform: uppercase;
   }
 }

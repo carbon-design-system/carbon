@@ -1,17 +1,15 @@
-.links__link-item__link,
-.links__link-item__link--sign-up,
-.links__link-item__link--log-in, .brand__name--normal, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__name {
+.links__link, .cta-links__link--sign-up,
+.cta-links__link--log-in, .brand__link__name--normal, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__link__name {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
-.links__link-item__link,
-.links__link-item__link--sign-up,
-.links__link-item__link--log-in {
+.links__link, .cta-links__link--sign-up,
+.cta-links__link--log-in {
   font-weight: 200; }
 
-.brand__name--normal {
+.brand__link__name--normal {
   font-weight: 400; }
 
-.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__name {
+.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__link__name {
   font-weight: 700; }
 
 .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
@@ -71,12 +69,12 @@
     cursor: not-allowed;
     opacity: .5; }
 
-.nav {
+.header {
   background-color: #1d3649;
+  height: 3.125em;
   padding: 0 10px; }
-  .nav,
-  .nav__brand,
-  .nav__links {
+  .header,
+  .header__brand {
     -webkit-box-align: center;
     -webkit-align-items: center;
        -moz-box-align: center;
@@ -93,43 +91,95 @@
        -moz-box-orient: horizontal;
        -moz-box-direction: normal;
         -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-       -moz-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between; }
-  .nav__links {
-    list-style-type: none; }
+            flex-direction: row; }
+  .header__brand {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+       -moz-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1; }
 
-.brand__logo {
-  margin-right: 5px; }
+.nav,
+.nav__links,
+.nav__cta-links {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; }
 
-.brand__name,
-.brand__name--normal {
-  color: #fff;
-  font-size: .875em; }
+.nav__brand {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+     -moz-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
 
-.brand__name--normal {
-  margin-right: 5px; }
+.nav__links,
+.nav__cta-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
 
-.links__link-item__link,
-.links__link-item__link--sign-up,
-.links__link-item__link--log-in {
+.brand__link {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+     -moz-box-orient: horizontal;
+     -moz-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+  .brand__link__logo {
+    margin-right: 5px; }
+  .brand__link__name,
+  .brand__link__name--normal {
+    color: #fff;
+    font-size: .875em; }
+  .brand__link__name--normal {
+    margin-right: 5px; }
+
+.links__link {
+  color: #B3B3B3;
   font-size: 0.875em;
   letter-spacing: 0.0625em;
-  padding-left: 10px;
+  padding: 0 5px;
   text-decoration: none;
   text-transform: uppercase; }
+  .links__link:hover,
+  .links__link:focus {
+    color: #fff;
+    -webkit-transition: color 0.2s ease-out;
+       -moz-transition: color 0.2s ease-out;
+         -o-transition: color 0.2s ease-out;
+            transition: color 0.2s ease-out; }
 
-.links__link-item__link,
-.links__link-item__link--log-in {
-  color: #B3B3B3; }
-  .links__link-item__link:hover,
-  .links__link-item__link:focus,
-  .links__link-item__link--log-in:hover,
-  .links__link-item__link--log-in:focus {
-    color: #fff; }
-
-.links__link-item__link--sign-up {
-  color: #00b299; }
+.cta-links__link--sign-up,
+.cta-links__link--log-in {
+  color: #B3B3B3;
+  font-size: 0.875em;
+  letter-spacing: 0.0625em;
+  padding: 0 5px;
+  text-decoration: none;
+  text-transform: uppercase; }

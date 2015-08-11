@@ -1,26 +1,31 @@
 <!-- Nav (https://console.ng.bluemix.net/home/) -->
-<nav class="nav" role="navigation">
-  <a href="https://console.ng.bluemix.net/home/" class="nav__brand">
-    <img src="http://placehold.it/32x32" alt="bluemix-logo" class="brand__logo">
-    <span class="brand__name--normal">IBM</span>
-    <span class="brand__name">Bluemix</span>
-  </a>
-  <ul class="nav__links">
-    <li class="links__link-item">
-      <a href="https://console.ng.bluemix.net/solutions/" class="links__link-item__link">solutions</a></li>
-    <li class="links__link-item">
-      <a href="https://console.ng.bluemix.net/?ace_base=true/#/store/cloudOEPaneId=store" class="links__link-item__link">catalog</a></li>
-    <li class="links__link-item">
-      <a href="https://console.ng.bluemix.net/pricing/" class="links__link-item__link">pricing</a></li>
-    <li class="links__link-item">
-      <a href="https://www.ng.bluemix.net/docs/" class="links__link-item__link">docs</a></li>
-    <li class="links__link-item">
-      <a href="https://developer.ibm.com/bluemix/" class="links__link-item__link">community</a></li>
-    <li class="links__link-item">
-      <a href="https://console.ng.bluemix.net/registration" class="links__link-item__link--sign-up">sign up</a></li>
-    <li class="links__link-item">
-      <a href="https://console.ng.bluemix.net/home/auth/bluemix" class="links__link-item__link--log-in">log in</a></li>
-  </ul>
-</nav>
 
-header
+<header class="header">
+  <!-- Brand -->
+  <div class="header__brand">
+    <a href="https://console.ng.bluemix.net/home/" class="brand__link">
+      <img src="http://placehold.it/32x32" alt="bluemix-logo" class="brand__link__logo">
+    </a>
+    <a href="https://console.ng.bluemix.net/home/" class="brand__link">
+      <span class="brand__link__name--normal">IBM</span>
+      <span class="brand__link__name">Bluemix</span>
+    </a>
+  </div>
+  
+  <nav class="nav" role="navigation">
+    <!-- Links -->
+    <ul class="nav__links">
+      <li><a href="https://console.ng.bluemix.net/solutions/" class="links__link">solutions</a></li>
+      <li><a href="https://console.ng.bluemix.net/?ace_base=true/#/store/cloudOEPaneId=store" class="links__link">catalog</a></li>
+      <li><a href="https://console.ng.bluemix.net/pricing/" class="links__link">pricing</a></li>
+      <li><a href="https://www.ng.bluemix.net/docs/" class="links__link">docs</a></li>
+      <li><a href="https://developer.ibm.com/bluemix/" class="links__link">community</a></li>
+    </ul>
+  
+    <!-- CTA Links -->
+    <ul class="nav__cta-links">
+      <li><a href="https://console.ng.bluemix.net/registration" class="cta-links__link--sign-up">sign up</a></li>
+      <li><a href="https://console.ng.bluemix.net/home/auth/bluemix" class="cta-links__link--log-in">log in</a></li>
+    </ul>
+  </nav>
+</header>
