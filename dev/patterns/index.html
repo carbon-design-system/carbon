@@ -16,20 +16,29 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
   <script>
     $(document).ready(function() {
-      var buttons = [
-        'buttons/html/close-button.html',
-        'buttons/html/danger-button.html',
-        'buttons/html/primary-button.html',
-        'buttons/html/secondary-button.html',
-        'buttons/html/tertiary-button.html',
-        'buttons/html/warning-button.html'
-      ];
+      var patterns = {
+        'buttons': [
+          'buttons/html/close-button.html',
+          'buttons/html/danger-button.html',
+          'buttons/html/primary-button.html',
+          'buttons/html/secondary-button.html',
+          'buttons/html/tertiary-button.html',
+          'buttons/html/warning-button.html'
+        ],
+        'cards': [
+          'cards/html/card.html'
+        ]
+      };
 
-      for (var i=0; i < buttons.length; i++) {
-        $.get(buttons[i], function(data) {
-          $('body').append('<div>' + data + '</div>');
-        });  
-      }
+      for (var prop in patterns) {
+        var patternArray = patterns[prop];
+
+        for (var i = 0; i < patternArray.length; i++) {
+          $.get(patternArray[i], function (data) {
+            $('body').append('<div>' + data + '</div>');
+          });
+        }
+      };
     });
   </script>
 </body>
