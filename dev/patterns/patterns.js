@@ -10,7 +10,7 @@ $(document).ready(function() {
     ],
     'cards': [
       'cards/html/card.html'
-    ], 
+    ],
     'forms': [
       'forms/html/form.html'
     ],
@@ -51,14 +51,14 @@ $(document).ready(function() {
       for (var i = 0; i < navArray.length; i++ ) {
         $.get(navArray[i], function (data) {
 
-          // Append nav patterns to #nav because bluemix nav needs to be at the top of the viewport in order for the styles to work responsively. 
-          $('#nav').append(data);  
+          // Append nav patterns to #nav because bluemix nav needs to be at the top of the viewport in order for the styles to work responsively.
+          $('#nav').append(data);
         })
       }
-    } 
+    }
     // For all other patterns, append them to #patterns.
     else {
-      var patternArray = patterns[prop];  
+      var patternArray = patterns[prop];
 
       for (var i = 0; i < patternArray.length; i++) {
         $.get(patternArray[i], function (data) {
