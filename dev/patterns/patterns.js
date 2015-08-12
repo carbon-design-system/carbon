@@ -26,9 +26,9 @@ $(document).ready(function() {
     'modals': [
       'modals/html/modal.html'
     ],
-    'nav': [
-      'nav/html/navigation.html',
-      'nav/html/secondary-nav.html'
+    'navigation': [
+      'navigation/html/navigation.html',
+      'navigation/html/secondary-nav.html'
     ],
     'radio': [
       'radio/html/radio.html'
@@ -45,7 +45,7 @@ $(document).ready(function() {
   for (var prop in patterns) {
 
     // Handle the nav patterns differently
-    if (prop === 'nav') {
+    if (prop === 'navigation') {
       var navArray = patterns[prop];
 
       for (var i = 0; i < navArray.length; i++ ) {
