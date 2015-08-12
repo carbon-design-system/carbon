@@ -6,55 +6,26 @@
   <title>Pattern Library Dev</title>
   <link rel="stylesheet" href="dev.css">
 </head>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+
+</style>
 <body>
   <!-- Open and view this HTML file when developing patterns,
   you'll be able to see changes to your patterns here. -->
+  
+  <!-- Nav needs to be on top -->
+  <div id="nav"></div>
 
   <!-- PATTERNS -->
-  <h1>buttons</h1>
-  <div ng-include="'buttons/html/primary-button.html'"></div>
-  <div ng-include="'buttons/html/secondary-button.html'"></div>
-  <div ng-include="'buttons/html/tertiary-button.html'"></div>
-  <div ng-include="'buttons/html/warning-button.html'"></div>
-  <div ng-include="'buttons/html/danger-button.html'"></div>
-  <div ng-include="'buttons/html/close-button.html'"></div>
-
-  <h1>cards</h1>
-  <div ng-include="'cards/html/card.html'"></div>
-
-  <h1>forms</h1>
-  <div ng-include="'forms/html/form.html'"></div>
-
-  <h1>links</h1>
-  <div ng-include="'links/html/content-link.html'"></div>
-  <div ng-include="'links/html/cta-link.html'"></div>
-
-  <h1>lists</h1>
-  <div ng-include="'lists/html/card-list.html'"></div>
-  <div ng-include="'lists/html/nested-list.html'"></div>
-  <div ng-include="'lists/html/ordered-list.html'"></div>
-  <div ng-include="'lists/html/unordered-list.html'"></div>
-
-  <h1>modals</h1>
-  <div ng-include="'modals/html/modal.html'"></div>
-
-  <h1>nav</h1>
-  <div ng-include="'nav/html/global-nav.html'"></div>
-  <div ng-include="'nav/html/secondary-nav.html'"></div>
-
-  <h1>radio</h1>
-  <div ng-include="'radio/html/radio.html'"></div>
-
-  <h1>tables</h1>
-  <div ng-include="'tables/html/table.html'"></div>
-
-  <h1>tooltips</h1>
-  <div ng-include="'tooltips/html/tooltip.html'"></div>
-
+  <div id="patterns"></div>
   <!-- SCRIPTS -->
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js" charset="utf-8"></script>
-  <script>
-    (function(){ angular.module('app', []); }());
-  </script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="patterns.js"></script>
 </body>
 </html>
