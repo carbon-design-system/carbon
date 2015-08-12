@@ -225,6 +225,7 @@
             transition: transform 0.3s; }
   @media screen and (min-width: 56.25em) {
     .nav__links {
+      padding: 0;
       -webkit-box-align: center;
       -webkit-align-items: center;
          -moz-box-align: center;

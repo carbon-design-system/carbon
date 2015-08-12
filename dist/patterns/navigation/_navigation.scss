@@ -75,6 +75,7 @@ $breakpoint--desktop: em(900px);
 
     @media screen and (min-width: $breakpoint--desktop) {
       // border: 1px dotted red;
+      padding: 0;
       align-items: center;
       display: flex;
       flex-direction: row;  
