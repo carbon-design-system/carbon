@@ -1,5 +1,8 @@
-.bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
+.table, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
+
+.table {
+  font-weight: 400; }
 
 .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
   font-weight: 700; }
@@ -60,3 +63,28 @@
   .bx-btn--close:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
+
+.table {
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  max-width: 100%;
+  width: 100%; }
+  .table__header {
+    border-bottom: 4px solid #4178be; }
+
+.header__row--heading {
+  padding: 8px;
+  text-align: left; }
+
+.body__row:hover {
+  background-color: #d5eaff; }
+
+.body__row--cell {
+  color: #959f9f;
+  padding: 8px; }
+
+.footer__row--cell {
+  color: #959f9f;
+  padding: 8px; }
