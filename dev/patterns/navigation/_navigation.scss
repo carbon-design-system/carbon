@@ -12,6 +12,16 @@ $breakpoint--desktop: em(900px);
   flex-direction: row;
 }
 
+@keyframes slide-right {
+  0%   { transform: translateX(-300px); }
+  100% { transform: translateX(0px); }
+}
+
+@keyframes slide-left {
+  0%   { transform: translateX(0px); }
+  100% { transform: translateX(-300px); }
+}
+
 .header {
   background-color: $nav--background-color;
   position: fixed;
@@ -52,13 +62,15 @@ $breakpoint--desktop: em(900px);
     padding: 0;
     position: fixed;
     top: 48px;
-    transform: translateX(-300px);
-    transition: 0.2s;
     width: 300px;
+    // transform: translateX(-300px);
+    // transition: transform 0.3s;
+    animation: slide-left 0.2s forwards;
 
     &.visible {
-      transform: translateX(0px);
-      transition: 0.2s;
+      animation: slide-right 0.2s forwards;
+      // transform: translateX(0px);
+      // transition: transform 0.3s;
     }
 
     @media screen and (min-width: $breakpoint--desktop) {
