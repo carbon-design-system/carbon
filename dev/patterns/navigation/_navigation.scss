@@ -59,21 +59,22 @@ $breakpoint--desktop: em(900px);
     margin: 0;
     min-height: 822px;
     opacity: .9;
-    padding: 0;
+    padding: 40px;
     position: fixed;
     top: 48px;
     width: 300px;
-    // transform: translateX(-300px);
-    // transition: transform 0.3s;
-    animation: slideLeft 0.2s forwards;
+    transform: translateX(-300px);
+    transition: transform 0.3s;
+    // animation: slideLeft 0.3s forwards;
 
     &.visible {
-      animation: slideRight 0.2s forwards;
-      // transform: translateX(0px);
-      // transition: transform 0.3s;
+      // animation: slideRight 0.3s forwards;
+      transform: translateX(0px);
+      transition: transform 0.3s;
     }
 
     @media screen and (min-width: $breakpoint--desktop) {
+      // border: 1px dotted red;
       align-items: center;
       display: flex;
       flex-direction: row;  
@@ -127,7 +128,12 @@ $breakpoint--desktop: em(900px);
     }
 
     &__name {
-      @extend %helvetica-bold;
+      display: none;
+
+      @media screen and (min-width: $breakpoint--desktop) {
+        display: inline;
+        @extend %helvetica-bold;  
+      }
     }
 
     &__name--normal {
