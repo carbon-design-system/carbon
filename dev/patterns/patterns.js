@@ -17,9 +17,27 @@ $(document).ready(function() {
     'links': [
       'links/html/content-link.html'
     ],
+    'lists': [
+      'lists/html/card-list.html',
+      'lists/html/nested-list.html',
+      'lists/html/ordered-list.html',
+      'lists/html/unordered-list.html'
+    ],
+    'modals': [
+      'modals/html/modal.html'
+    ],
     'nav': [
       'nav/html/navigation.html',
       'nav/html/secondary-nav.html'
+    ],
+    'radio': [
+      'radio/html/radio.html'
+    ],
+    'tables': [
+      'tables/html/table.html'
+    ],
+    'tooltips': [
+      'tooltips/html/tooltip.html'
     ]
   };
 
