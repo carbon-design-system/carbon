@@ -88,6 +88,7 @@ $breakpoint--desktop: em(900px);
   }
   &__link {
     @extend %flex--horizontal-center;
+    text-decoration: none;
 
     &__logo {
       @media screen and (min-width: $breakpoint--desktop) {
@@ -102,6 +103,7 @@ $breakpoint--desktop: em(900px);
     &__name--normal {
       color: $nav--logo-color;
       font-size: .875em;
+      line-height: 1;
     }
 
     &__name {

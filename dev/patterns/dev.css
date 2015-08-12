@@ -180,21 +180,22 @@
     .brand__menu {
       display: none; } }
 
-@media screen and (min-width: 56.25em) {
-  .brand__link__logo {
-    background-image: url("https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png");
-    background-position: -40px -50px;
-    width: 32px;
-    height: 32px; } }
-
-.brand__link__name,
-.brand__link__name--normal {
-  color: #fff;
-  font-size: .875em; }
-
-.brand__link__name--normal {
-  margin-left: 0.75em;
-  margin-right: 5px; }
+.brand__link {
+  text-decoration: none; }
+  @media screen and (min-width: 56.25em) {
+    .brand__link__logo {
+      background-image: url("https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png");
+      background-position: -40px -50px;
+      width: 32px;
+      height: 32px; } }
+  .brand__link__name,
+  .brand__link__name--normal {
+    color: #fff;
+    font-size: .875em;
+    line-height: 1; }
+  .brand__link__name--normal {
+    margin-left: 0.75em;
+    margin-right: 5px; }
 
 .links__link {
   color: #B3B3B3;
