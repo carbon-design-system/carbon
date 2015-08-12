@@ -16,8 +16,6 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
   <script>
     $(document).ready(function() {
-      // var hello = $('#hello');
-      // console.log(hello); 
       var buttons = [
         'buttons/html/close-button.html',
         'buttons/html/danger-button.html',
@@ -25,9 +23,13 @@
         'buttons/html/secondary-button.html',
         'buttons/html/tertiary-button.html',
         'buttons/html/warning-button.html'
-      ]
+      ];
 
-      $('body').load("nav/html/global-nav.html");
+      for (var i=0; i < buttons.length; i++) {
+        $.get(buttons[i], function(data) {
+          $('body').append('<div>' + data + '</div>');
+        });  
+      }
     });
   </script>
 </body>
