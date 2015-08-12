@@ -80,7 +80,7 @@ gulp.task('sass', function() {
 // Run these specific tasks when files change.
 gulp.task('watch', function() {
   gulp.watch(['dev/patterns/**/html/*.html', 'dev/patterns/*.html']).on('change', reload);
-  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json'], ['jslint']).on('change', reload);
+  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json', 'dev/patterns/*.js'], ['jslint']).on('change', reload);
   gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist']);
 });
 
