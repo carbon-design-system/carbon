@@ -12,12 +12,12 @@ $breakpoint--desktop: em(900px);
   flex-direction: row;
 }
 
-@keyframes slide-right {
+@keyframes slideRight {
   0%   { transform: translateX(-300px); }
   100% { transform: translateX(0px); }
 }
 
-@keyframes slide-left {
+@keyframes slideLeft {
   0%   { transform: translateX(0px); }
   100% { transform: translateX(-300px); }
 }
@@ -65,10 +65,10 @@ $breakpoint--desktop: em(900px);
     width: 300px;
     // transform: translateX(-300px);
     // transition: transform 0.3s;
-    animation: slide-left 0.2s forwards;
+    animation: slideLeft 0.2s forwards;
 
     &.visible {
-      animation: slide-right 0.2s forwards;
+      animation: slideRight 0.2s forwards;
       // transform: translateX(0px);
       // transition: transform 0.3s;
     }

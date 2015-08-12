@@ -90,7 +90,7 @@
       -ms-flex-direction: row;
           flex-direction: row; }
 
-@-webkit-keyframes slide-right {
+@-webkit-keyframes slideRight {
   0% {
     -webkit-transform: translateX(-300px);
             transform: translateX(-300px); }
@@ -98,7 +98,7 @@
     -webkit-transform: translateX(0px);
             transform: translateX(0px); } }
 
-@-moz-keyframes slide-right {
+@-moz-keyframes slideRight {
   0% {
     -moz-transform: translateX(-300px);
          transform: translateX(-300px); }
@@ -106,7 +106,7 @@
     -moz-transform: translateX(0px);
          transform: translateX(0px); } }
 
-@-o-keyframes slide-right {
+@-o-keyframes slideRight {
   0% {
     -o-transform: translateX(-300px);
        transform: translateX(-300px); }
@@ -114,7 +114,7 @@
     -o-transform: translateX(0px);
        transform: translateX(0px); } }
 
-@keyframes slide-right {
+@keyframes slideRight {
   0% {
     -webkit-transform: translateX(-300px);
        -moz-transform: translateX(-300px);
@@ -126,7 +126,7 @@
          -o-transform: translateX(0px);
             transform: translateX(0px); } }
 
-@-webkit-keyframes slide-left {
+@-webkit-keyframes slideLeft {
   0% {
     -webkit-transform: translateX(0px);
             transform: translateX(0px); }
@@ -134,7 +134,7 @@
     -webkit-transform: translateX(-300px);
             transform: translateX(-300px); } }
 
-@-moz-keyframes slide-left {
+@-moz-keyframes slideLeft {
   0% {
     -moz-transform: translateX(0px);
          transform: translateX(0px); }
@@ -142,7 +142,7 @@
     -moz-transform: translateX(-300px);
          transform: translateX(-300px); } }
 
-@-o-keyframes slide-left {
+@-o-keyframes slideLeft {
   0% {
     -o-transform: translateX(0px);
        transform: translateX(0px); }
@@ -150,7 +150,7 @@
     -o-transform: translateX(-300px);
        transform: translateX(-300px); } }
 
-@keyframes slide-left {
+@keyframes slideLeft {
   0% {
     -webkit-transform: translateX(0px);
        -moz-transform: translateX(0px);
@@ -204,15 +204,15 @@
   position: fixed;
   top: 48px;
   width: 300px;
-  -webkit-animation: slide-left 0.2s forwards;
-     -moz-animation: slide-left 0.2s forwards;
-       -o-animation: slide-left 0.2s forwards;
-          animation: slide-left 0.2s forwards; }
+  -webkit-animation: slideLeft 0.2s forwards;
+     -moz-animation: slideLeft 0.2s forwards;
+       -o-animation: slideLeft 0.2s forwards;
+          animation: slideLeft 0.2s forwards; }
   .nav__links.visible {
-    -webkit-animation: slide-right 0.2s forwards;
-       -moz-animation: slide-right 0.2s forwards;
-         -o-animation: slide-right 0.2s forwards;
-            animation: slide-right 0.2s forwards; }
+    -webkit-animation: slideRight 0.2s forwards;
+       -moz-animation: slideRight 0.2s forwards;
+         -o-animation: slideRight 0.2s forwards;
+            animation: slideRight 0.2s forwards; }
   @media screen and (min-width: 56.25em) {
     .nav__links {
       -webkit-box-align: center;
