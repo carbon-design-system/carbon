@@ -11,8 +11,14 @@ $(document).ready(function() {
     'cards': [
       'cards/html/card.html'
     ], 
+    'forms': [
+      'forms/html/form.html'
+    ],
+    'links': [
+      'links/html/content-link.html'
+    ],
     'nav': [
-      'nav/html/global-nav.html',
+      'nav/html/navigation.html',
       'nav/html/secondary-nav.html'
     ]
   };
