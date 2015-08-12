@@ -92,8 +92,10 @@
 
 .header {
   background-color: #1d3649;
+  position: fixed;
   height: 3.125em;
-  padding: 0 10px; }
+  padding: 0 10px;
+  width: 100%; }
   .header__brand {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
@@ -134,7 +136,21 @@
       -ms-transform: translateX(-300px);
        -o-transform: translateX(-300px);
           transform: translateX(-300px);
+  -webkit-transition: 0.2s;
+     -moz-transition: 0.2s;
+       -o-transition: 0.2s;
+          transition: 0.2s;
   width: 300px; }
+  .nav__links.visible {
+    -webkit-transform: translateX(0px);
+       -moz-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+         -o-transform: translateX(0px);
+            transform: translateX(0px);
+    -webkit-transition: 0.2s;
+       -moz-transition: 0.2s;
+         -o-transition: 0.2s;
+            transition: 0.2s; }
   @media screen and (min-width: 56.25em) {
     .nav__links {
       -webkit-box-align: center;

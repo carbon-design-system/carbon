@@ -33,3 +33,16 @@
     </ul>
   </nav>
 </header>
+
+<!-- INLINE SCRIPTS are for DEVELOPMENT ONLY -->
+<!-- <script src="../js/navigation.js"></script> -->
+<script>
+(function(){
+  var menuToggle = document.querySelector('#menu-toggle');
+  var nav = document.querySelector('ul.nav__links');
+  
+  menuToggle.addEventListener('click', function (event) {
+    nav.classList.toggle('visible');
+  });
+})();
+</script> 

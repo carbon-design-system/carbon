@@ -14,8 +14,10 @@ $breakpoint--desktop: em(900px);
 
 .header {
   background-color: $nav--background-color;
+  position: fixed;
   height: 3.125em;
   padding: 0 10px;
+  width: 100%;
 
   &,
   &__brand,
@@ -51,7 +53,13 @@ $breakpoint--desktop: em(900px);
     position: fixed;
     top: 48px;
     transform: translateX(-300px);
+    transition: 0.2s;
     width: 300px;
+
+    &.visible {
+      transform: translateX(0px);
+      transition: 0.2s;
+    }
 
     @media screen and (min-width: $breakpoint--desktop) {
       align-items: center;
