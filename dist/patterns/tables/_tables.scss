@@ -1,14 +1,15 @@
 $table-blue: color('blue');
 $table-light-blue: #d5eaff;
 $table-text-color: color('cool-gray', 40);
-$cell-padding: 8px;
+$cell-padding: .5rem;
 
-.table {
+.table-section {
   @extend %helvetica-normal;
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
-  margin-bottom: 20px;
+  color: $table-text-color;
+  margin-bottom: 1.25rem;
   max-width: 100%;
   width: 100%;
 
@@ -18,6 +19,7 @@ $cell-padding: 8px;
 }
 
 .header__row--heading {
+  color: color('black');
   padding: $cell-padding;
   text-align: left;
 }
@@ -29,12 +31,10 @@ $cell-padding: 8px;
   }
 
   &--cell {
-    color: $table-text-color;
     padding: $cell-padding;
   }
 }
 
 .footer__row--cell {
-  color: $table-text-color;
   padding: $cell-padding;
 }
