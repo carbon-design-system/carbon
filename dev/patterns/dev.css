@@ -90,17 +90,17 @@
       -ms-flex-direction: row;
           flex-direction: row; }
 
-.brand__menu, .brand__menu:hover,
-.brand__menu:focus, .brand__link__logo {
+.brand__hamburger-icon, .brand__hamburger-icon:hover,
+.brand__hamburger-icon:focus, .brand__link__logo {
   background-image: url("https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png"); }
 
 .header {
   background-color: #1d3649;
-  position: fixed;
-  z-index: 1;
   height: 3.125em;
   padding: 0 10px;
-  width: 100%; }
+  position: fixed;
+  width: 100%;
+  z-index: 1; }
   .header__brand {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
@@ -108,17 +108,17 @@
         -ms-flex: 1;
             flex: 1; }
 
-.brand__menu {
+.brand__hamburger-icon {
   background-position: -68px -106px;
   cursor: pointer;
   height: 14px;
   margin: 0 10px;
   width: 12px; }
-  .brand__menu:hover,
-  .brand__menu:focus {
+  .brand__hamburger-icon:hover,
+  .brand__hamburger-icon:focus {
     background-position: -56px -106px; }
   @media screen and (min-width: 56.25em) {
-    .brand__menu {
+    .brand__hamburger-icon {
       display: none; } }
 
 .brand__link {
@@ -143,7 +143,7 @@
       display: inline; } }
 
 .brand__link__name--normal {
-  margin-left: 0.75em;
+  margin-left: .75em;
   margin-right: 5px; }
 
 .nav__links--mobile,
@@ -175,10 +175,10 @@
          -moz-box-direction: normal;
           -ms-flex-direction: column;
               flex-direction: column;
-      left: 0px;
+      left: 0;
       min-height: 1400px;
       opacity: .9;
-      padding: 55px;
+      padding: 20px 55px 0;
       position: fixed;
       top: 50px;
       -webkit-transform: translateX(-300px);
@@ -192,11 +192,11 @@
               transition: transform 0.2s ease-out;
       width: 300px; }
       .nav__links.visible {
-        -webkit-transform: translateX(0px);
-           -moz-transform: translateX(0px);
-            -ms-transform: translateX(0px);
-             -o-transform: translateX(0px);
-                transform: translateX(0px);
+        -webkit-transform: translateX(0);
+           -moz-transform: translateX(0);
+            -ms-transform: translateX(0);
+             -o-transform: translateX(0);
+                transform: translateX(0);
         -webkit-transition: -webkit-transform 0.2s ease-out;
            -moz-transition: -moz-transform 0.2s ease-out;
              -o-transition: -o-transform 0.2s ease-out;

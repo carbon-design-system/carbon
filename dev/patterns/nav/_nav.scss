@@ -37,11 +37,11 @@ $breakpoint--desktop: em(900px);
 // Styles
 .header {
   background-color: $nav--background-color;
-  position: fixed;
-  z-index: 1;
   height: 3.125em;
   padding: 0 10px;
+  position: fixed;
   width: 100%;
+  z-index: 1;
 
   &,
   &__brand,
@@ -55,14 +55,14 @@ $breakpoint--desktop: em(900px);
 }
 
 .brand {
-  &__menu {
+  &__hamburger-icon {
     @include hamburger-icon;
     cursor: pointer;
     height: 14px;
     margin: 0 10px;
     width: 12px;
 
-    &:hover, 
+    &:hover,
     &:focus {
       @include hamburger-icon--hover;
     }
@@ -71,6 +71,7 @@ $breakpoint--desktop: em(900px);
       display: none;
     }
   }
+
   &__link {
     @extend %flex--horizontal-center;
     text-decoration: none;
@@ -95,14 +96,14 @@ $breakpoint--desktop: em(900px);
     display: none;
 
     @media screen and (min-width: $breakpoint--desktop) {
+      @extend %helvetica-bold;
       display: inline;
-      @extend %helvetica-bold;  
     }
   }
 
   &__link__name--normal {
     @extend %helvetica-normal;
-    margin-left: 0.75em;
+    margin-left: .75em;
     margin-right: 5px;
   }
 }
@@ -126,10 +127,10 @@ $breakpoint--desktop: em(900px);
 
     @media screen and (max-width: $breakpoint--desktop) {
       flex-direction: column;
-      left: 0px;
+      left: 0;
       min-height: 1400px;
       opacity: .9;
-      padding: 55px;
+      padding: 20px 55px 0;
       position: fixed;
       top: 50px;
       transform: translateX(-300px);
@@ -137,7 +138,7 @@ $breakpoint--desktop: em(900px);
       width: 300px;
 
       &.visible {
-        transform: translateX(0px);
+        transform: translateX(0);
         transition: transform .2s ease-out;
       }
     }
@@ -157,7 +158,7 @@ $breakpoint--desktop: em(900px);
     margin-bottom: 12px;
 
     @media screen and (min-width: $breakpoint--desktop) {
-      margin-bottom: 0;  
+      margin-bottom: 0;
     }
   }
 
@@ -177,7 +178,7 @@ $breakpoint--desktop: em(900px);
 
     @media screen and (min-width: $breakpoint--desktop) {
       margin: 0 12px;
-    } 
+    }
   }
 }
 
@@ -210,7 +211,7 @@ $breakpoint--desktop: em(900px);
     border: 1px solid $nav--link-color;
     color: $nav--link-color;
 
-    &:hover, 
+    &:hover,
     &:focus {
       background-color: $nav--link-color;
       color: $nav--background-color;
