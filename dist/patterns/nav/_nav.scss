@@ -38,6 +38,7 @@ $breakpoint--desktop: em(900px);
 .header {
   background-color: $nav--background-color;
   position: fixed;
+  z-index: 1;
   height: 3.125em;
   padding: 0 10px;
   width: 100%;
@@ -78,8 +79,8 @@ $breakpoint--desktop: em(900px);
   &__link__logo {
     @media screen and (min-width: $breakpoint--desktop) {
       @include bluemix-icon;
-      width: 32px;
       height: 32px;
+      width: 32px;
     }
   }
 
@@ -126,9 +127,9 @@ $breakpoint--desktop: em(900px);
     padding: 55px;
     position: fixed;
     top: 50px;
-    width: 300px;
     transform: translateX(-300px);
     transition: transform .2s ease-out;
+    width: 300px;
 
     &.visible {
       transform: translateX(0px);

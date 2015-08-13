@@ -97,6 +97,7 @@
 .header {
   background-color: #1d3649;
   position: fixed;
+  z-index: 1;
   height: 3.125em;
   padding: 0 10px;
   width: 100%; }
@@ -126,8 +127,8 @@
 @media screen and (min-width: 56.25em) {
   .brand__link__logo {
     background-position: -40px -50px;
-    width: 32px;
-    height: 32px; } }
+    height: 32px;
+    width: 32px; } }
 
 .brand__link__name--bold,
 .brand__link__name--normal {
@@ -165,7 +166,6 @@
   padding: 55px;
   position: fixed;
   top: 50px;
-  width: 300px;
   -webkit-transform: translateX(-300px);
      -moz-transform: translateX(-300px);
       -ms-transform: translateX(-300px);
@@ -174,7 +174,8 @@
   -webkit-transition: -webkit-transform 0.2s ease-out;
      -moz-transition: -moz-transform 0.2s ease-out;
        -o-transition: -o-transform 0.2s ease-out;
-          transition: transform 0.2s ease-out; }
+          transition: transform 0.2s ease-out;
+  width: 300px; }
   .nav__links--mobile.visible {
     -webkit-transform: translateX(0px);
        -moz-transform: translateX(0px);
