@@ -90,9 +90,19 @@
       -ms-flex-direction: row;
           flex-direction: row; }
 
-.brand__hamburger-icon, .brand__hamburger-icon:hover,
-.brand__hamburger-icon:focus, .brand__link__logo {
-  background-image: url("https://console.ng.bluemix.net/api/v1/imgs/sprite.png"); }
+@media screen and (min-width: 56.25em) {
+  .brand__link__logo {
+    background-image: url("https://console.ng.bluemix.net/api/v1/imgs/sprite.png");
+    background-position: -8px -50px;
+    height: 32px;
+    width: 32px; } }
+
+.brand__hamburger-icon {
+  background-image: url("https://console.ng.bluemix.net/api/v1/imgs/sprite.png");
+  background-position: -104px -112px; }
+  .brand__hamburger-icon:hover,
+  .brand__hamburger-icon:focus {
+    background-position: -102px -63px; }
 
 .header {
   background-color: #1d3649;
@@ -109,26 +119,16 @@
             flex: 1; }
 
 .brand__hamburger-icon {
-  background-position: -104px -112px;
   cursor: pointer;
   height: 14px;
   margin: 0 10px;
   width: 12px; }
-  .brand__hamburger-icon:hover,
-  .brand__hamburger-icon:focus {
-    background-position: -102px -63px; }
   @media screen and (min-width: 56.25em) {
     .brand__hamburger-icon {
       display: none; } }
 
 .brand__link {
   text-decoration: none; }
-
-@media screen and (min-width: 56.25em) {
-  .brand__link__logo {
-    background-position: -8px -50px;
-    height: 32px;
-    width: 32px; } }
 
 .brand__link__name--bold,
 .brand__link__name--normal {

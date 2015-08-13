@@ -14,24 +14,24 @@ $breakpoint--global-nav: em(900px);
   flex-direction: row;
 }
 
-%sprite {
-  background-image: url('https://console.ng.bluemix.net/api/v1/imgs/sprite.png');
-}
+%icon {
+  &__bluemix {
+    @media screen and (min-width: $breakpoint--global-nav) {
+      background-image: url('https://console.ng.bluemix.net/api/v1/imgs/sprite.png');
+      background-position: -8px -50px; 
+      height: 32px;
+      width: 32px;
+    }
+  }
 
-// Mixins
-@mixin bluemix-icon {
-  @extend %sprite;
-  background-position: -8px -50px;
-}
+  &__hamburger {
+    background-image: url('https://console.ng.bluemix.net/api/v1/imgs/sprite.png');
+    background-position: -104px -112px;
 
-@mixin hamburger-icon {
-  @extend %sprite;
-  background-position: -104px -112px;
-}
-
-@mixin hamburger-icon--hover {
-  @extend %sprite;
-  background-position: -102px -63px;
+    &--hover {
+      background-position: -102px -63px;
+    }
+  }
 }
 
 // Styles
@@ -56,7 +56,7 @@ $breakpoint--global-nav: em(900px);
 
 .brand {
   &__hamburger-icon {
-    @include hamburger-icon;
+    @extend %icon__hamburger;
     cursor: pointer;
     height: 14px;
     margin: 0 10px;
@@ -64,7 +64,7 @@ $breakpoint--global-nav: em(900px);
 
     &:hover,
     &:focus {
-      @include hamburger-icon--hover;
+      @extend %icon__hamburger--hover;
     }
 
     @media screen and (min-width: $breakpoint--global-nav) {
@@ -78,11 +78,7 @@ $breakpoint--global-nav: em(900px);
   }
 
   &__link__logo {
-    @media screen and (min-width: $breakpoint--global-nav) {
-      @include bluemix-icon;
-      height: 32px;
-      width: 32px;
-    }
+    @extend %icon__bluemix;
   }
 
   &__link__name--bold,
@@ -93,10 +89,10 @@ $breakpoint--global-nav: em(900px);
   }
 
   &__link__name--bold {
+    @extend %helvetica-bold;
     display: none;
 
     @media screen and (min-width: $breakpoint--global-nav) {
-      @extend %helvetica-bold;
       display: inline;
     }
   }
