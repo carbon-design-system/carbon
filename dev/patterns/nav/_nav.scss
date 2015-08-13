@@ -26,12 +26,12 @@ $breakpoint--global-nav: em(900px);
 
 @mixin hamburger-icon {
   @extend %sprite;
-  background-position: -68px -106px;
+  background-position: -104px -112px;
 }
 
 @mixin hamburger-icon--hover {
   @extend %sprite;
-  background-position: -56px -106px;
+  background-position: -102px -63px;
 }
 
 // Styles

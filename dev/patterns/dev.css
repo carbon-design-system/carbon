@@ -109,14 +109,14 @@
             flex: 1; }
 
 .brand__hamburger-icon {
-  background-position: -68px -106px;
+  background-position: -104px -112px;
   cursor: pointer;
   height: 14px;
   margin: 0 10px;
   width: 12px; }
   .brand__hamburger-icon:hover,
   .brand__hamburger-icon:focus {
-    background-position: -56px -106px; }
+    background-position: -102px -63px; }
   @media screen and (min-width: 56.25em) {
     .brand__hamburger-icon {
       display: none; } }
