@@ -6,19 +6,26 @@
   <div class="header__brand">
     <span id="menu-toggle" class="brand__menu"></span>
     <a href="https://console.ng.bluemix.net/home/" class="brand__link">
-      <!-- <img src="http://placehold.it/32x32" alt="bluemix-logo" class="brand__link__logo"> -->
       <span class="brand__link__logo"></span>
     </a>
     <a href="https://console.ng.bluemix.net/home/" class="brand__link">
       <span class="brand__link__name--normal">IBM</span>
-      <span class="brand__link__name">Bluemix</span>
+      <span class="brand__link__name--bold">Bluemix</span>
     </a>
   </div>
   
   <!-- Nav -->
   <nav class="header__nav" role="navigation">
     <!-- Links -->
-    <ul class="nav__links">
+    <ul class="nav__links--mobile">
+      <li><a href="https://console.ng.bluemix.net/solutions/" class="links__link">solutions</a></li>
+      <li><a href="https://console.ng.bluemix.net/?ace_base=true/#/store/cloudOEPaneId=store" class="links__link">catalog</a></li>
+      <li><a href="https://console.ng.bluemix.net/pricing/" class="links__link">pricing</a></li>
+      <li><a href="https://www.ng.bluemix.net/docs/" class="links__link">docs</a></li>
+      <li><a href="https://developer.ibm.com/bluemix/" class="links__link">community</a></li>
+    </ul>
+
+    <ul class="nav__links--desktop">
       <li><a href="https://console.ng.bluemix.net/solutions/" class="links__link">solutions</a></li>
       <li><a href="https://console.ng.bluemix.net/?ace_base=true/#/store/cloudOEPaneId=store" class="links__link">catalog</a></li>
       <li><a href="https://console.ng.bluemix.net/pricing/" class="links__link">pricing</a></li>
@@ -39,7 +46,7 @@
 <script>
 (function(){
   var menuToggle = document.querySelector('#menu-toggle');
-  var nav = document.querySelector('ul.nav__links');
+  var nav = document.querySelector('ul.nav__links--mobile');
   
   menuToggle.addEventListener('click', function (event) {
     nav.classList.toggle('visible');
