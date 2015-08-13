@@ -3,6 +3,8 @@ $primary-button--color: $teal-45;
 $secondary-button--color: $blue-40;
 $tertiary-button--color: $bluemix-medium-grey;
 $danger-button--color: $red-50;
+$warning-button--color: $yellow-20;
+$warning-button--color--text: #000;
 
 @mixin base--button($color: $cool-grey-50) {
   @extend %font-smoothing;
@@ -35,7 +37,7 @@ $danger-button--color: $red-50;
   @include base--button($secondary-button--color);
   background-color: transparent;
   color: $secondary-button--color;
-  transition: background-color ease-out 0.15s, color ease-out 0.15s;
+  transition: background-color ease-out .15s, color ease-out .15s;
 
   &:hover,
   &:focus {
@@ -48,7 +50,13 @@ $danger-button--color: $red-50;
   @include base--button($tertiary-button--color);
   background-color: transparent;
   color: $tertiary-button--color;
-  transition: background-color ease-out 0.15s, color ease-out 0.15s;
+  transition: background-color ease-out .15s, color ease-out .15s;
+
+  &:hover,
+  &:focus {
+    background-color: $tertiary-button--color;
+    color: $white;
+  }
 }
 
 %close-button {
@@ -63,6 +71,12 @@ $danger-button--color: $red-50;
   color: $white;
 }
 
+%warning-button {
+  @include base--button($warning-button--color);
+  background-color: $warning-button--color;
+  color: $warning-button--color--text;
+}
+
 .btn {
   &--primary {
     @extend %primary-button;
@@ -72,11 +86,19 @@ $danger-button--color: $red-50;
     @extend %secondary-button;
   }
 
+  &--tertiary {
+    @extend %tertiary-button;
+  }
+
   &--close {
     @extend %close-button;
   }
 
   &--danger {
     @extend %danger-button;
+  }
+
+  &--warning {
+    @extend %warning-button;
   }
 }
