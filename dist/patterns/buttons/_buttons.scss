@@ -1,22 +1,27 @@
 $close-button--color: $cool-grey-50;
 $primary-button--color: $teal-45;
 $secondary-button--color: $blue-40;
+$tertiary-button--color: $bluemix-medium-grey;
+$danger-button--color: $red-50;
 
 @mixin base--button($color: $cool-grey-50) {
   @extend %font-smoothing;
   @extend %helvetica-bold;
   border: 4px solid $color;
   cursor: pointer;
+  display: inline-block;
   font-size: typescale(1);
   letter-spacing: 1px;
+  margin: 16px 0;
   min-height: 2.75em;
   min-width: 9.375em;
-  padding: 0 1em;
+  padding: .5em 1em;
+  text-decoration: none;
   text-transform: uppercase;
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: .5;
   }
 }
 
@@ -39,13 +44,26 @@ $secondary-button--color: $blue-40;
   }
 }
 
+%tertiary-button {
+  @include base--button($tertiary-button--color);
+  background-color: transparent;
+  color: $tertiary-button--color;
+  transition: background-color ease-out 0.15s, color ease-out 0.15s;
+}
+
 %close-button {
   @include base--button;
   background-color: $close-button--color;
   color: $white;
 }
 
-.bx-btn {
+%danger-button {
+  @include base--button($danger-button--color);
+  background-color: $danger-button--color;
+  color: $white;
+}
+
+.btn {
   &--primary {
     @extend %primary-button;
   }
@@ -56,5 +74,9 @@ $secondary-button--color: $blue-40;
 
   &--close {
     @extend %close-button;
+  }
+
+  &--danger {
+    @extend %danger-button;
   }
 }
