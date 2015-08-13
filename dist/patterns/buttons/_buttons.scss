@@ -27,13 +27,13 @@ $warning-button--color--text: #000;
   }
 }
 
-%primary-button {
+%button--primary {
   @include base--button($primary-button--color);
   background-color: $primary-button--color;
   color: $white;
 }
 
-%secondary-button {
+%button--secondary {
   @include base--button($secondary-button--color);
   background-color: transparent;
   color: $secondary-button--color;
@@ -46,7 +46,7 @@ $warning-button--color--text: #000;
   }
 }
 
-%tertiary-button {
+%button--tertiary {
   @include base--button($tertiary-button--color);
   background-color: transparent;
   color: $tertiary-button--color;
@@ -59,19 +59,19 @@ $warning-button--color--text: #000;
   }
 }
 
-%close-button {
+%button--close {
   @include base--button;
   background-color: $close-button--color;
   color: $white;
 }
 
-%danger-button {
+%button--danger {
   @include base--button($danger-button--color);
   background-color: $danger-button--color;
   color: $white;
 }
 
-%warning-button {
+%button--warning {
   @include base--button($warning-button--color);
   background-color: $warning-button--color;
   color: $warning-button--color--text;
@@ -79,26 +79,26 @@ $warning-button--color--text: #000;
 
 .btn {
   &--primary {
-    @extend %primary-button;
+    @extend %button--primary;
   }
 
   &--secondary {
-    @extend %secondary-button;
+    @extend %button--secondary;
   }
 
   &--tertiary {
-    @extend %tertiary-button;
+    @extend %button--tertiary;
   }
 
   &--close {
-    @extend %close-button;
+    @extend %button--close;
   }
 
   &--danger {
-    @extend %danger-button;
+    @extend %button--danger;
   }
 
   &--warning {
-    @extend %warning-button;
+    @extend %button--warning;
   }
 }
