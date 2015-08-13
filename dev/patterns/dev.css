@@ -1,8 +1,8 @@
-.links__link, .brand__link__name--normal, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__link__name--bold, .cta-links__link--sign-up,
+.link-list__link, .brand__link__name--normal, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
-.links__link {
+.link-list__link {
   font-weight: 200; }
 
 .brand__link__name--normal {
@@ -146,12 +146,10 @@
   margin-left: .75em;
   margin-right: 5px; }
 
-.nav__links--mobile,
-.nav__links--desktop,
 .nav__cta-links {
   list-style-type: none; }
 
-.nav__links {
+.nav__link-list {
   background-color: #1d3649;
   display: -webkit-box;
   display: -webkit-flex;
@@ -167,7 +165,7 @@
           flex-direction: row;
   list-style-type: none; }
   @media screen and (max-width: 56.25em) {
-    .nav__links {
+    .nav__link-list {
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
       -webkit-flex-direction: column;
@@ -191,7 +189,7 @@
            -o-transition: -o-transform 0.2s ease-out;
               transition: transform 0.2s ease-out;
       width: 300px; }
-      .nav__links.visible {
+      .nav__link-list.visible {
         -webkit-transform: translateX(0);
            -moz-transform: translateX(0);
             -ms-transform: translateX(0);
@@ -202,37 +200,27 @@
              -o-transition: -o-transform 0.2s ease-out;
                 transition: transform 0.2s ease-out; } }
 
-.nav__links--desktop {
-  display: none; }
-  @media screen and (min-width: 56.25em) {
-    .nav__links--desktop {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: flex; } }
-
-.links__link-item {
+.link-list__link-item {
   margin-bottom: 12px; }
   @media screen and (min-width: 56.25em) {
-    .links__link-item {
+    .link-list__link-item {
       margin-bottom: 0; } }
 
-.links__link {
+.link-list__link {
   color: #B3B3B3;
   font-size: 0.875em;
   letter-spacing: 0.0625em;
   text-decoration: none;
   text-transform: uppercase; }
-  .links__link:hover,
-  .links__link:focus {
+  .link-list__link:hover,
+  .link-list__link:focus {
     color: #fff;
     -webkit-transition: color 0.2s ease-out;
        -moz-transition: color 0.2s ease-out;
          -o-transition: color 0.2s ease-out;
             transition: color 0.2s ease-out; }
   @media screen and (min-width: 56.25em) {
-    .links__link {
+    .link-list__link {
       margin: 0 12px; } }
 
 .cta-links__link--sign-up,

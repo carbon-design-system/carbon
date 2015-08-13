@@ -105,8 +105,6 @@ $breakpoint--global-nav: em(900px);
 }
 
 .nav {
-  &__links--mobile,
-  &__links--desktop,
   &__cta-links {
     list-style-type: none;
   }
@@ -115,7 +113,7 @@ $breakpoint--global-nav: em(900px);
     @extend %flex--horizontal-center;
   }
 
-  &__links {
+  &__link-list {
     background-color: $nav--background-color;
     display: flex;
     flex-direction: row;
@@ -139,17 +137,9 @@ $breakpoint--global-nav: em(900px);
       }
     }
   }
-
-  &__links--desktop {
-    display: none;
-
-    @media screen and (min-width: $breakpoint--global-nav) {
-      display: flex;
-    }
-  }
 }
 
-.links {
+.link-list {
   &__link-item {
     margin-bottom: 12px;
 

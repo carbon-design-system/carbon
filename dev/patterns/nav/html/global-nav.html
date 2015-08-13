@@ -16,12 +16,12 @@
   <nav class="header__nav" role="navigation">
     
     <!-- Links -->
-    <ul class="nav__links">
-      <li class="links__link-item"><a href="https://console.ng.bluemix.net/solutions/" class="links__link">solutions</a></li>
-      <li class="links__link-item"><a href="https://console.ng.bluemix.net/?ace_base=true/#/store/cloudOEPaneId=store" class="links__link">catalog</a></li>
-      <li class="links__link-item"><a href="https://console.ng.bluemix.net/pricing/" class="links__link">pricing</a></li>
-      <li class="links__link-item"><a href="https://www.ng.bluemix.net/docs/" class="links__link">docs</a></li>
-      <li class="links__link-item"><a href="https://developer.ibm.com/bluemix/" class="links__link">community</a></li>
+    <ul class="nav__link-list">
+      <li class="link-list__link-item"><a href="https://console.ng.bluemix.net/solutions/" class="link-list__link">solutions</a></li>
+      <li class="link-list__link-item"><a href="https://console.ng.bluemix.net/?ace_base=true/#/store/cloudOEPaneId=store" class="link-list__link">catalog</a></li>
+      <li class="link-list__link-item"><a href="https://console.ng.bluemix.net/pricing/" class="link-list__link">pricing</a></li>
+      <li class="link-list__link-item"><a href="https://www.ng.bluemix.net/docs/" class="link-list__link">docs</a></li>
+      <li class="link-list__link-item"><a href="https://developer.ibm.com/bluemix/" class="link-list__link">community</a></li>
     </ul>
   
     <!-- CTA Links -->
@@ -37,7 +37,7 @@
 <script>
 (function(){
   var menuToggle = document.querySelector('#menu-toggle');
-  var nav = document.querySelector('ul.nav__links--mobile');
+  var nav = document.querySelector('ul.nav__link-list');
   
   menuToggle.addEventListener('click', function (event) {
     nav.classList.toggle('visible');
