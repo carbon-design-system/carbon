@@ -5,7 +5,7 @@ $nav--logo-color: $white;
 $nav--sign-up-color: #00b299;
 
 // Breakpoints
-$breakpoint--desktop: em(900px);
+$breakpoint--global-nav: em(900px);
 
 // Extends
 %flex--horizontal-center {
@@ -67,7 +67,7 @@ $breakpoint--desktop: em(900px);
       @include hamburger-icon--hover;
     }
 
-    @media screen and (min-width: $breakpoint--desktop) {
+    @media screen and (min-width: $breakpoint--global-nav) {
       display: none;
     }
   }
@@ -78,7 +78,7 @@ $breakpoint--desktop: em(900px);
   }
 
   &__link__logo {
-    @media screen and (min-width: $breakpoint--desktop) {
+    @media screen and (min-width: $breakpoint--global-nav) {
       @include bluemix-icon;
       height: 32px;
       width: 32px;
@@ -95,7 +95,7 @@ $breakpoint--desktop: em(900px);
   &__link__name--bold {
     display: none;
 
-    @media screen and (min-width: $breakpoint--desktop) {
+    @media screen and (min-width: $breakpoint--global-nav) {
       @extend %helvetica-bold;
       display: inline;
     }
@@ -125,7 +125,7 @@ $breakpoint--desktop: em(900px);
     flex-direction: row;
     list-style-type: none;
 
-    @media screen and (max-width: $breakpoint--desktop) {
+    @media screen and (max-width: $breakpoint--global-nav) {
       flex-direction: column;
       left: 0;
       min-height: 1400px;
@@ -147,7 +147,7 @@ $breakpoint--desktop: em(900px);
   &__links--desktop {
     display: none;
 
-    @media screen and (min-width: $breakpoint--desktop) {
+    @media screen and (min-width: $breakpoint--global-nav) {
       display: flex;
     }
   }
@@ -157,7 +157,7 @@ $breakpoint--desktop: em(900px);
   &__link-item {
     margin-bottom: 12px;
 
-    @media screen and (min-width: $breakpoint--desktop) {
+    @media screen and (min-width: $breakpoint--global-nav) {
       margin-bottom: 0;
     }
   }
@@ -176,7 +176,7 @@ $breakpoint--desktop: em(900px);
       transition: color .2s ease-out;
     }
 
-    @media screen and (min-width: $breakpoint--desktop) {
+    @media screen and (min-width: $breakpoint--global-nav) {
       margin: 0 12px;
     }
   }
