@@ -12,10 +12,22 @@ $breakpoint--desktop: em(900px);
   flex-direction: row;
 }
 
+@keyframes slideRight {
+  0%   { transform: translateX(-300px); }
+  100% { transform: translateX(0px); }
+}
+
+@keyframes slideLeft {
+  0%   { transform: translateX(0px); }
+  100% { transform: translateX(-300px); }
+}
+
 .header {
   background-color: $nav--background-color;
+  position: fixed;
   height: 3.125em;
   padding: 0 10px;
+  width: 100%;
 
   &,
   &__brand,
@@ -45,15 +57,25 @@ $breakpoint--desktop: em(900px);
     line-height: 28px;
     list-style-type: none;
     margin: 0;
-    min-height: 822px;
+    min-height: 1000px;
     opacity: .9;
-    padding: 0;
+    padding: 40px;
     position: fixed;
     top: 48px;
-    transform: translateX(-300px);
     width: 300px;
+    transform: translateX(-300px);
+    transition: transform 0.3s;
+    // animation: slideLeft 0.3s forwards;
+
+    &.visible {
+      // animation: slideRight 0.3s forwards;
+      transform: translateX(0px);
+      transition: transform 0.3s;
+    }
 
     @media screen and (min-width: $breakpoint--desktop) {
+      // border: 1px dotted red;
+      padding: 0;
       align-items: center;
       display: flex;
       flex-direction: row;  
@@ -88,6 +110,7 @@ $breakpoint--desktop: em(900px);
   }
   &__link {
     @extend %flex--horizontal-center;
+    text-decoration: none;
 
     &__logo {
       @media screen and (min-width: $breakpoint--desktop) {
@@ -102,10 +125,16 @@ $breakpoint--desktop: em(900px);
     &__name--normal {
       color: $nav--logo-color;
       font-size: .875em;
+      line-height: 1;
     }
 
     &__name {
-      @extend %helvetica-bold;
+      display: none;
+
+      @media screen and (min-width: $breakpoint--desktop) {
+        display: inline;
+        @extend %helvetica-bold;  
+      }
     }
 
     &__name--normal {
