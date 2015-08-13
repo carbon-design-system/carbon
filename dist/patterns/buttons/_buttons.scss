@@ -6,7 +6,7 @@ $danger-button--color: $red-50;
 $warning-button--color: $yellow-20;
 $warning-button--color--text: #000;
 
-@mixin base--button($color: $cool-grey-50) {
+@mixin base--button($color: $close-button--color) {
   @extend %font-smoothing;
   @extend %helvetica-bold;
   border: 4px solid $color;
