@@ -90,6 +90,10 @@
       -ms-flex-direction: row;
           flex-direction: row; }
 
+.brand__menu, .brand__menu:hover,
+.brand__menu:focus, .brand__link__logo {
+  background-image: url("https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png"); }
+
 @-webkit-keyframes slideRight {
   0% {
     -webkit-transform: translateX(-300px);
@@ -225,12 +229,12 @@
             transition: transform 0.3s; }
   @media screen and (min-width: 56.25em) {
     .nav__links {
-      padding: 0;
       -webkit-box-align: center;
       -webkit-align-items: center;
          -moz-box-align: center;
           -ms-flex-align: center;
               align-items: center;
+      background-color: transparent;
       display: -webkit-box;
       display: -webkit-flex;
       display: -moz-box;
@@ -243,11 +247,11 @@
          -moz-box-direction: normal;
           -ms-flex-direction: row;
               flex-direction: row;
-      position: static;
-      opacity: 1;
-      min-height: none;
-      background-color: transparent;
       min-height: 32px;
+      min-height: none;
+      opacity: 1;
+      padding: 0;
+      position: static;
       -webkit-transform: translateX(0px);
          -moz-transform: translateX(0px);
           -ms-transform: translateX(0px);
@@ -256,7 +260,6 @@
       width: 480px; } }
 
 .brand__menu {
-  background-image: url("https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png");
   background-position: -68px -106px;
   cursor: pointer;
   height: 14px;
@@ -273,7 +276,6 @@
   text-decoration: none; }
   @media screen and (min-width: 56.25em) {
     .brand__link__logo {
-      background-image: url("https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png");
       background-position: -40px -50px;
       width: 32px;
       height: 32px; } }

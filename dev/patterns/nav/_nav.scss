@@ -1,17 +1,40 @@
+// COLORS
 $nav--background-color: $blue-80;
 $nav--link-color: $bluemix-nav-grey;
 $nav--logo-color: $white;
 $nav--sign-up-color: #00b299;
+
+// Breakpoints
 $breakpoint--desktop: em(900px);
 
-// https://console.ng.bluemix.net/api/v1/imgs/sprite.png
-
+// Extends
 %flex--horizontal-center {
   align-items: center;
   display: flex;
   flex-direction: row;
 }
 
+%sprite {
+  background-image: url('https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png');
+}
+
+// Mixins
+@mixin bluemix-icon {
+  @extend %sprite;
+  background-position: -40px -50px;
+}
+
+@mixin hamburger-icon {
+  @extend %sprite;
+  background-position: -68px -106px;
+}
+
+@mixin hamburger-icon--hover {
+  @extend %sprite;
+  background-position: -56px -106px;
+}
+
+// Animations
 @keyframes slideRight {
   0%   { transform: translateX(-300px); }
   100% { transform: translateX(0px); }
@@ -22,6 +45,7 @@ $breakpoint--desktop: em(900px);
   100% { transform: translateX(-300px); }
 }
 
+// Styles
 .header {
   background-color: $nav--background-color;
   position: fixed;
@@ -74,16 +98,15 @@ $breakpoint--desktop: em(900px);
     }
 
     @media screen and (min-width: $breakpoint--desktop) {
-      // border: 1px dotted red;
-      padding: 0;
       align-items: center;
+      background-color: transparent;
       display: flex;
       flex-direction: row;  
-      position: static;
-      opacity: 1;
-      min-height: none;
-      background-color: transparent;
       min-height: 32px;
+      min-height: none;
+      opacity: 1;
+      padding: 0;
+      position: static;
       transform: translateX(0px);
       width: 480px;
     }
@@ -92,8 +115,7 @@ $breakpoint--desktop: em(900px);
 
 .brand {
   &__menu {
-    background-image: url('https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png');
-    background-position: -68px -106px; 
+    @include hamburger-icon;
     cursor: pointer;
     height: 14px;
     margin: 0 10px;
@@ -101,7 +123,7 @@ $breakpoint--desktop: em(900px);
 
     &:hover, 
     &:focus {
-      background-position: -56px -106px;
+      @include hamburger-icon--hover;
     }
 
     @media screen and (min-width: $breakpoint--desktop) {
@@ -114,8 +136,7 @@ $breakpoint--desktop: em(900px);
 
     &__logo {
       @media screen and (min-width: $breakpoint--desktop) {
-        background-image: url('https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png');
-        background-position: -40px -50px;
+        @include bluemix-icon;
         width: 32px;
         height: 32px;
       }
