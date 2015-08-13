@@ -15,13 +15,13 @@ $breakpoint--global-nav: em(900px);
 }
 
 %sprite {
-  background-image: url('https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png');
+  background-image: url('https://console.ng.bluemix.net/api/v1/imgs/sprite.png');
 }
 
 // Mixins
 @mixin bluemix-icon {
   @extend %sprite;
-  background-position: -40px -50px;
+  background-position: -8px -50px;
 }
 
 @mixin hamburger-icon {

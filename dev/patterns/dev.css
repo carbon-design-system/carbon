@@ -92,7 +92,7 @@
 
 .brand__hamburger-icon, .brand__hamburger-icon:hover,
 .brand__hamburger-icon:focus, .brand__link__logo {
-  background-image: url("https://ace-common-production-20150731-141133.ng.bluemix.net/cache/9ec1-3656781102/api/v1/imgs/sprite.png"); }
+  background-image: url("https://console.ng.bluemix.net/api/v1/imgs/sprite.png"); }
 
 .header {
   background-color: #1d3649;
@@ -126,7 +126,7 @@
 
 @media screen and (min-width: 56.25em) {
   .brand__link__logo {
-    background-position: -40px -50px;
+    background-position: -8px -50px;
     height: 32px;
     width: 32px; } }
 
