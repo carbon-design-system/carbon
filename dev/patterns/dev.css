@@ -1,7 +1,7 @@
-.bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
+.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .content-link {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
-.bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
+.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .content-link {
   font-weight: 700; }
 
 .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
@@ -60,3 +60,20 @@
   .bx-btn--close:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
+
+.content-link, .content-link:active,
+.content-link:hover {
+  -webkit-transition: color, 0.2s, ease-out;
+     -moz-transition: color, 0.2s, ease-out;
+       -o-transition: color, 0.2s, ease-out;
+          transition: color, 0.2s, ease-out; }
+
+.content-link {
+  line-height: 24px;
+  text-decoration: underline; }
+  .content-link,
+  .content-link:visited {
+    color: #5596e6; }
+  .content-link:active,
+  .content-link:hover {
+    color: #6d7777; }

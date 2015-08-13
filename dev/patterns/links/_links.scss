@@ -1,22 +1,24 @@
-%bx-cta-link{
-  // padding;
-  // margin;
-  // font;
-  // etc...
-  // background-color: transparent;
+$color__content-link: $blue-40;
+$color__content-link--hover: $cool-grey-50;
+
+%content-link__transition {
+  transition: color, .2s, ease-out;
 }
 
-.bx-cta-link {
-  @extend %bx-cta-link;
-   // without color context
-}
+.content-link {
+  @extend %helvetica-bold;
+  @extend %content-link__transition;
+  line-height: 24px; // from SPSG
+  text-decoration: underline;
 
-// .bx-hero {
-//  .bx-cta-link {
-//    // color context
-//  }
-// }
+  &,
+  &:visited {
+    color: $color__content-link;
+  }
 
-.bx-content-link {
-  // Inline link styles
+  &:active,
+  &:hover {
+    @extend %content-link__transition;
+    color: $color__content-link--hover;
+  }
 }
