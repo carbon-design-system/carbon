@@ -1,13 +1,13 @@
-$color--card--background: $white;
+$color--card: $white;
 $color--card--hover: #00aed1;
-$color--info--link: $bluemix-medium-grey;
-$color--bindings--divider: lighten($bluemix-light-grey, 2);
-$color--bindings--icon-border: #00bfe5;
-$color--state--background: #e9f1f4;
-$color--status--running: #13dd6d;
-$color--status--text: darken($bluemix-medium-grey, 5);
+$color--card--info--link: $bluemix-medium-grey;
+$color--card--bindings--divider: lighten($bluemix-light-grey, 2);
+$color--card--bindings--icon-border: #00bfe5;
+$color--card--status: #e9f1f4;
+$color--card--status--running: #13dd6d;
+$color--card--status--text: darken($bluemix-medium-grey, 5);
 
-%transition__card {
+%transition--card {
   transition: box-shadow .1s;
 
   &:focus,
@@ -20,8 +20,8 @@ $color--status--text: darken($bluemix-medium-grey, 5);
 .card {
   @extend %font-smoothing;
   @extend %helvetica-light;
-  @extend %transition__card;
-  background-color: $color--card--background;
+  @extend %transition--card;
+  background-color: $color--card;
   display: inline-block;
   height: em(250px);
   width: em(245px);
@@ -38,15 +38,15 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   }
 
   &__bindings {
-    border-top: 1px solid $color--bindings--divider;
+    border-top: 1px solid $color--card--bindings--divider;
     display: flex;
     justify-content: center;
     list-style-type: none;
     padding: em(14px) em(10px);
   }
 
-  &__state {
-    background-color: $color--state--background;
+  &__status {
+    background-color: $color--card--status;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -70,7 +70,7 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   }
 
   &__link {
-    color: $color--info--link;
+    color: $color--card--info--link;
     font-size: em(12px);
     line-height: 1.5;
     text-decoration: none;
@@ -81,7 +81,7 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   &__icon {
     align-items: center;
     border-radius: 50%;
-    border: em(3px) solid $color--bindings--icon-border;
+    border: em(3px) solid $color--card--bindings--icon-border;
     display: flex;
     height: em(36px);
     justify-content: center;
@@ -91,10 +91,10 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   }
 }
 
-.state {
+.status {
   &__icon {
     &--running {
-      background-color: $color--status--running;
+      background-color: $color--card--status--running;
       width: em(17px);
       height: em(17px);
       border-radius: 50%;
@@ -102,9 +102,9 @@ $color--status--text: darken($bluemix-medium-grey, 5);
     }
   }
 
-  &__status-text {
+  &__text {
     &--running {
-      color: darken($color--info--link, 5);
+      color: $color--card--status--text;
       font-size: 14px;
     }
   }

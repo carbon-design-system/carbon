@@ -192,7 +192,7 @@
             justify-content: center;
     list-style-type: none;
     padding: 0.875em 0.625em; }
-  .card__state {
+  .card__status {
     background-color: #e9f1f4;
     display: -webkit-box;
     display: -webkit-flex;
@@ -255,7 +255,7 @@
   padding: 0.1875em;
   width: 2.25em; }
 
-.state__icon--running {
+.status__icon--running {
   background-color: #13dd6d;
   width: 1.0625em;
   height: 1.0625em;
@@ -264,7 +264,7 @@
           border-radius: 50%;
   margin-right: 0.625em; }
 
-.state__status-text--running {
+.status__text--running {
   color: #8697a0;
   font-size: 14px; }
 
