@@ -162,16 +162,20 @@
 
 @media screen and (min-width: 56.25em) {
   .brand__link__logo {
-    background-image: url("https://console.ng.bluemix.net/api/v1/imgs/sprite.png");
+    background-image: url("images/sprite.png");
     background-position: -8px -50px;
     height: 32px;
     width: 32px; } }
 
-.brand--hamburger-icon {
-  background-image: url("https://console.ng.bluemix.net/api/v1/imgs/sprite.png");
-  background-position: -104px -112px; }
-  .brand--hamburger-icon:hover,
-  .brand--hamburger-icon:focus {
+.brand__hamburger-icon {
+  background-image: url("images/sprite.png");
+  background-position: -104px -112px;
+  height: 13px;
+  width: 12px;
+  margin: 0 10px; }
+  .brand__hamburger-icon:hover,
+  .brand__hamburger-icon:focus {
+    background-image: url("images/sprite.png");
     background-position: -102px -63px; }
 
 .header {
@@ -188,13 +192,10 @@
         -ms-flex: 1;
             flex: 1; }
 
-.brand--hamburger-icon {
-  cursor: pointer;
-  height: 14px;
-  margin: 0 10px;
-  width: 12px; }
+.brand__hamburger-icon {
+  cursor: pointer; }
   @media screen and (min-width: 56.25em) {
-    .brand--hamburger-icon {
+    .brand__hamburger-icon {
       display: none; } }
 
 .brand__link {

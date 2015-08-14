@@ -1,43 +1,43 @@
 $(document).ready(function() {
   var patterns = {
     'buttons': [
-      'buttons/html/close-button.html',
-      'buttons/html/danger-button.html',
-      'buttons/html/primary-button.html',
-      'buttons/html/secondary-button.html',
-      'buttons/html/tertiary-button.html',
-      'buttons/html/warning-button.html'
+      'patterns/buttons/html/close-button.html',
+      'patterns/buttons/html/danger-button.html',
+      'patterns/buttons/html/primary-button.html',
+      'patterns/buttons/html/secondary-button.html',
+      'patterns/buttons/html/tertiary-button.html',
+      'patterns/buttons/html/warning-button.html'
     ],
     'cards': [
-      'cards/html/card.html'
+      'patterns/cards/html/card.html'
     ],
     'forms': [
-      'forms/html/form.html'
+      'patterns/forms/html/form.html'
     ],
     'links': [
-      'links/html/content-link.html'
+      'patterns/links/html/content-link.html'
     ],
     'lists': [
-      'lists/html/card-list.html',
-      'lists/html/nested-list.html',
-      'lists/html/ordered-list.html',
-      'lists/html/unordered-list.html'
+      'patterns/lists/html/card-list.html',
+      'patterns/lists/html/nested-list.html',
+      'patterns/lists/html/ordered-list.html',
+      'patterns/lists/html/unordered-list.html'
     ],
     'modals': [
-      'modals/html/modal.html'
+      'patterns/modals/html/modal.html'
     ],
     'nav': [
-      'nav/html/global-nav.html',
-      'nav/html/secondary-nav.html'
+      'patterns/nav/html/global-nav.html',
+      'patterns/nav/html/secondary-nav.html'
     ],
     'radio': [
-      'radio/html/radio.html'
+      'patterns/radio/html/radio.html'
     ],
     'tables': [
-      'tables/html/table.html'
+      'patterns/tables/html/table.html'
     ],
     'tooltips': [
-      'tooltips/html/tooltip.html'
+      'patterns/tooltips/html/tooltip.html'
     ]
   };
 
