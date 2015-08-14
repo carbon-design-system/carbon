@@ -1,29 +1,32 @@
-$color__card--background: $white;
-$color__card--hover: #00aed1;
-$color__info--link: $bluemix-medium-grey;
-$color__bindings-list--divider: $bluemix-light-grey;
-$color__bindings-list--icon-border: #00bfe5;
-// 
+$color--card--background: $white;
+$color--card--hover: #00aed1;
+$color--info--link: $bluemix-medium-grey;
+$color--bindings--divider: lighten($bluemix-light-grey, 2);
+$color--bindings--icon-border: #00bfe5;
+$color--state--background: #e9f1f4;
+$color--status--running: #13dd6d;
+$color--status--text: darken($bluemix-medium-grey, 5);
 
 %transition__card {
   transition: box-shadow .1s;
 
   &:focus,
   &:hover {
-    box-shadow: 0px 0px 2pt 3pt $color__card--hover;
+    box-shadow: 0 0 2pt 3pt $color--card--hover;
     cursor: pointer;
   }
 }
+
 .card {
   @extend %transition__card;
-  background-color: $color__card--background;
+  background-color: $color--card--background;
   display: inline-block;
   height: em(250px);
   width: em(245px);
 
   &__link-wrapper {
     text-decoration: none;
-  } 
+  }
 
   &__info {
     display: flex;
@@ -33,7 +36,7 @@ $color__bindings-list--icon-border: #00bfe5;
   }
 
   &__bindings {
-    border-top: 1px solid lighten($color__bindings-list--divider, 2);
+    border-top: 1px solid $color--bindings--divider;
     display: flex;
     justify-content: center;
     list-style-type: none;
@@ -41,7 +44,12 @@ $color__bindings-list--icon-border: #00bfe5;
   }
 
   &__state {
-    // styles
+    background-color: $color--state--background;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: em(35px);
+    padding: 0 em(10px);
   }
 }
 
@@ -62,7 +70,7 @@ $color__bindings-list--icon-border: #00bfe5;
   &__link {
     @extend %helvetica-light;
     @extend %font-smoothing;
-    color: $color__info--link;
+    color: $color--info--link;
     font-size: em(12px);
     line-height: 1.5;
     text-decoration: none;
@@ -73,12 +81,31 @@ $color__bindings-list--icon-border: #00bfe5;
   &__icon {
     align-items: center;
     border-radius: 50%;
-    border: em(3px) solid $color__bindings-list--icon-border;
+    border: em(3px) solid $color--bindings--icon-border;
     display: flex;
     height: em(36px);
     justify-content: center;
     margin: 0 em(2px);
     padding: em(3px);
     width: em(36px);
+  }
+}
+
+.state {
+  &__icon {
+    &--running {
+      background-color: $color--status--running;
+      width: em(17px);
+      height: em(17px);
+      border-radius: 50%;
+      margin-right: em(10px);
+    }
+  }
+
+  &__status-text--running {
+    @extend %helvetica-light;
+    @extend %font-smoothing;
+    color: darken($color--info--link, 5);
+    font-size: 14px;
   }
 }

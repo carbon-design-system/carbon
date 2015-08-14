@@ -1,13 +1,13 @@
-.info__name, .info__link, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
+.info__name, .info__link, .state__status-text--running, .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
-.info__name, .info__link {
+.info__name, .info__link, .state__status-text--running {
   font-weight: 200; }
 
 .bx-btn--primary, .bx-btn--secondary, .bx-btn--close {
   font-weight: 700; }
 
-.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .info__link {
+.bx-btn--primary, .bx-btn--secondary, .bx-btn--close, .info__link, .state__status-text--running {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
@@ -71,9 +71,9 @@
           transition: box-shadow 0.1s; }
   .card:focus,
   .card:hover {
-    -webkit-box-shadow: 0px 0px 2pt 3pt #00aed1;
-       -moz-box-shadow: 0px 0px 2pt 3pt #00aed1;
-            box-shadow: 0px 0px 2pt 3pt #00aed1;
+    -webkit-box-shadow: 0 0 2pt 3pt #00aed1;
+       -moz-box-shadow: 0 0 2pt 3pt #00aed1;
+            box-shadow: 0 0 2pt 3pt #00aed1;
     cursor: pointer; }
 
 .card {
@@ -116,6 +116,27 @@
             justify-content: center;
     list-style-type: none;
     padding: 0.875em 0.625em; }
+  .card__state {
+    background-color: #e9f1f4;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 2.1875em;
+    padding: 0 0.625em; }
 
 .info__icon {
   display: block;
@@ -157,3 +178,16 @@
   margin: 0 0.125em;
   padding: 0.1875em;
   width: 2.25em; }
+
+.state__icon--running {
+  background-color: #13dd6d;
+  width: 1.0625em;
+  height: 1.0625em;
+  -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+          border-radius: 50%;
+  margin-right: 0.625em; }
+
+.state__status-text--running {
+  color: #8697a0;
+  font-size: 14px; }
