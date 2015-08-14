@@ -102,6 +102,20 @@
         -ms-flex-direction: column;
             flex-direction: column;
     padding: 1.75em 0.625em 0.875em; }
+  .card__bindings {
+    border-top: 1px solid #e5ebef;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+       -moz-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    list-style-type: none;
+    padding: 0.875em 0.625em; }
 
 .info__icon {
   display: block;
@@ -118,3 +132,28 @@
   font-size: 0.75em;
   line-height: 1.5;
   text-decoration: none; }
+
+.bindings__icon {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+          border-radius: 50%;
+  border: 0.1875em solid #00bfe5;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 2.25em;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 0.125em;
+  padding: 0.1875em;
+  width: 2.25em; }

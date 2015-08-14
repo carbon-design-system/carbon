@@ -1,6 +1,9 @@
 $color__card--background: $white;
 $color__card--hover: #00aed1;
 $color__info--link: $bluemix-medium-grey;
+$color__bindings-list--divider: $bluemix-light-grey;
+$color__bindings-list--icon-border: #00bfe5;
+// 
 
 %transition__card {
   transition: box-shadow .1s;
@@ -11,7 +14,6 @@ $color__info--link: $bluemix-medium-grey;
     cursor: pointer;
   }
 }
-
 .card {
   @extend %transition__card;
   background-color: $color__card--background;
@@ -30,8 +32,12 @@ $color__info--link: $bluemix-medium-grey;
     padding: em(28px) em(10px) em(14px);
   }
 
-  &__bindings-list {
-    // styles
+  &__bindings {
+    border-top: 1px solid lighten($color__bindings-list--divider, 2);
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: em(14px) em(10px);
   }
 
   &__state {
@@ -60,5 +66,19 @@ $color__info--link: $bluemix-medium-grey;
     font-size: em(12px);
     line-height: 1.5;
     text-decoration: none;
+  }
+}
+
+.bindings {
+  &__icon {
+    align-items: center;
+    border-radius: 50%;
+    border: em(3px) solid $color__bindings-list--icon-border;
+    display: flex;
+    height: em(36px);
+    justify-content: center;
+    margin: 0 em(2px);
+    padding: em(3px);
+    width: em(36px);
   }
 }
