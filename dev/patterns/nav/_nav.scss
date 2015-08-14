@@ -36,6 +36,7 @@ $breakpoint--global-nav: em(900px);
 
 // Styles
 .header {
+  @extend %flex--horizontal-center;
   background-color: $nav--background-color;
   height: 3.125em;
   padding: 0 10px;
@@ -43,7 +44,6 @@ $breakpoint--global-nav: em(900px);
   width: 100%;
   z-index: 1;
 
-  &,
   &__brand,
   &__nav {
     @extend %flex--horizontal-center;
