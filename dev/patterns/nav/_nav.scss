@@ -176,7 +176,7 @@ $breakpoint--global-nav: em(900px);
   }
 
   &__link--sign-up {
-    border: em(1px) solid $nav--sign-up-color;
+    border: 1px solid $nav--sign-up-color;
     color: $nav--sign-up-color;
 
     &:hover,
@@ -188,7 +188,7 @@ $breakpoint--global-nav: em(900px);
   }
 
   &__link--log-in {
-    border: em(1px) solid $nav--link-color;
+    border: 1px solid $nav--link-color;
     color: $nav--link-color;
 
     &:hover,
