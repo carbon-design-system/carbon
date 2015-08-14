@@ -171,8 +171,8 @@
   background-image: url("images/sprite.png");
   background-position: -104px -112px;
   height: 13px;
-  width: 12px;
-  margin: 0 10px; }
+  margin: 0 10px;
+  width: 12px; }
   .brand__hamburger-icon:focus,
   .brand__hamburger-icon:hover {
     background-position: -102px -63px; }
