@@ -173,9 +173,8 @@
   height: 13px;
   width: 12px;
   margin: 0 10px; }
-  .brand__hamburger-icon:hover,
-  .brand__hamburger-icon:focus {
-    background-image: url("images/sprite.png");
+  .brand__hamburger-icon:focus,
+  .brand__hamburger-icon:hover {
     background-position: -102px -63px; }
 
 .header {

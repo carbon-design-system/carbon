@@ -31,8 +31,8 @@ $breakpoint--global-nav: em(900px);
     width: 12px;
     margin: 0 10px;
 
-    &--hover {
-      background-image: url('images/sprite.png');
+    &:focus,
+    &:hover {
       background-position: -102px -63px;
     }
   }
@@ -62,11 +62,6 @@ $breakpoint--global-nav: em(900px);
   &__hamburger-icon {
     @extend %icon--hamburger;
     cursor: pointer;
-
-    &:hover,
-    &:focus {
-      @extend %icon--hamburger--hover;
-    }
 
     @media screen and (min-width: $breakpoint--global-nav) {
       display: none;
