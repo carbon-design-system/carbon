@@ -306,7 +306,7 @@
   text-transform: uppercase; }
 
 .cta-links__link--sign-up {
-  border: 0.0625em solid #00b299;
+  border: 1px solid #00b299;
   color: #00b299; }
   .cta-links__link--sign-up:hover,
   .cta-links__link--sign-up:focus {
@@ -318,7 +318,7 @@
             transition: background-color 0.2s ease-out, color 0.2s ease-out; }
 
 .cta-links__link--log-in {
-  border: 0.0625em solid #B3B3B3;
+  border: 1px solid #B3B3B3;
   color: #B3B3B3; }
   .cta-links__link--log-in:hover,
   .cta-links__link--log-in:focus {
