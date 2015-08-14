@@ -14,12 +14,14 @@ IBMers, please visit our GitHub Enterprise repo (search bluemix pattern-library)
 
 ## Install
 
-Make sure you have node and npm installed.
+[Download](https://github.ibm.com/Bluemix/pattern-library/archive/master.zip) or clone the repo.
 
-```bash
-# terminal
-npm install bluemix-pattern-library -D
 ```
+# clone
+git clone git@github.ibm.com:Bluemix/pattern-library.git
+cd pattern-library
+```
+
 Create a **main.scss** file in your project and `@import` bluemix-pattern-library with a relative path to the node module.
 
 ```scss
@@ -43,11 +45,12 @@ Here's an example.
   <title>Pattern Library Dev</title>
   <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body class="bx-light">
   <button class="bx-btn--primary" type="button">primary button</button>
 </body>
 </html>
 ```
+- Make sure to add `bx-light` or `bx-dark` class to the body tag.
 
 
 
@@ -65,8 +68,8 @@ Here are the dependencies:
 
 ## Usable-ish
 
-- buttons
-- cards
+- buttons 
+- cards (html only)
 
 ## Priority To-do List
 
