@@ -18,6 +18,8 @@ $color--status--text: darken($bluemix-medium-grey, 5);
 }
 
 .card {
+  @extend %font-smoothing;
+  @extend %helvetica-light;
   @extend %transition__card;
   background-color: $color--card--background;
   display: inline-block;
@@ -68,8 +70,6 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   }
 
   &__link {
-    @extend %helvetica-light;
-    @extend %font-smoothing;
     color: $color--info--link;
     font-size: em(12px);
     line-height: 1.5;
@@ -102,10 +102,10 @@ $color--status--text: darken($bluemix-medium-grey, 5);
     }
   }
 
-  &__status-text--running {
-    @extend %helvetica-light;
-    @extend %font-smoothing;
-    color: darken($color--info--link, 5);
-    font-size: 14px;
+  &__status-text {
+    &--running {
+      color: darken($color--info--link, 5);
+      font-size: 14px;
+    }
   }
 }

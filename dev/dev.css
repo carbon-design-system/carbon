@@ -1,8 +1,8 @@
-.info__name, .info__link, .state__status-text--running, .link-list__link, .brand__link__name--normal, .btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .brand__link__name--bold, .cta-links__link--sign-up,
+.card, .info__name, .link-list__link, .brand__link__name--normal, .btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
-.info__name, .info__link, .state__status-text--running, .link-list__link {
+.card, .info__name, .link-list__link {
   font-weight: 200; }
 
 .brand__link__name--normal {
@@ -12,7 +12,7 @@
 .cta-links__link--log-in {
   font-weight: 700; }
 
-.btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .info__link, .state__status-text--running {
+.btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .card {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
