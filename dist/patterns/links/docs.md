@@ -1,21 +1,41 @@
 # Links
 
-1. Always prepend classes with `bx` (this is <prepend> in the formulas below)
-* Link class options are: `content-link` & `cta-link`.
+A link is a standard HTML `<a>` (anchor) element.
 
-## Content Link
-*Content links most often appear inside of a paragraph.* 
+Links are used in bodies of text to link to other pages or downloads when clicked on.
 
+# Basic use
 
-## CTA Link
-*CTA links most often appear visually as buttons.*
+*This is some text on basic use of this pattern*
 
-2. A CTA link recieves its color based on its context (parent).
+# Examples
 
+A link.
+```html
+<a href="#" class="content-link">bluemix docs</a>
 ```
-.bx-hero {
-	.bx-cta-link {
-		// color context
-	}
-}
+
+A download link.
+```html
+<a download href="#" class="content-link">download</a>
 ```
+
+A link that opens in a new tab.
+```html
+<a href="#" target="_blank" class="content-link">open in new tab</a>
+```
+- see other uses for target here on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target)
+
+# Classes
+
+| Class | Effect | Remarks |
+|-----------|--------|---------|
+|`content-link`| Defines a link | - |
+
+# Attributes
+
+| Attribute | Effect | Remarks |
+|-----------|--------|---------|
+|`href`| Defines a URL for a link | For example, `href` URL can take the user to another page |
+|`download`| Defines a link as a download | Clicking on a link with a download attribute will download a file located at its `href` value |
+|`target`| Defines a target for a link to open | For example, `target=_blank` will open the `href` value in a new browser tab |
