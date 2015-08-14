@@ -62,7 +62,7 @@ $(document).ready(function() {
 
       for (var i=0; i < cardArray.length; i++) {
         $.get(cardArray[i], function (data) {
-          $('#cards').append(data);  
+          $('#cards').append(data);
         });
       }
     }
