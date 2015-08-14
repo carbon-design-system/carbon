@@ -1,6 +1,19 @@
-<!-- Modal -->
-<button class="bx-btn--{CONTEXT}" data-toggle="modal" data-target="{MODAL_ID}">{BUTTON_CONTENT}</button>
-<aside id="{MODAL_ID}" class="bx-modal">
-  {MODAL_CONTENT}
-  <button class="bx-button--close">Close</button>
+<aside class="modal" id="modal-id">
+  <div class="modal__header">
+    <h4 class="header__heading">Modal Heading</h4>
+    <button class="btn--close" type="button" data-toggle="modal" data-target="modal-id">
+      <span aria-hidden="true">x</span>
+      <span class="sr-only">Close</span>
+    </button>
+  </div>
+  <div class="modal__content">
+    <p class="content__text">
+      Also known as a dialog box. This text can include a 
+      <a href="#" class="content-link">content-link</a>
+    </p>
+  </div>
+  <div class="modal__actions">
+    <button class="btn--secondary" type="button">cancel</button>
+    <button class="btn--primary" type="button">ok</button>
+  </div>
 </aside>
