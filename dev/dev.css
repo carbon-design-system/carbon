@@ -1,11 +1,11 @@
-.card, .info__name, .link-list__link, .brand__link__name--normal, .btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
+.card, .info__name, .link-list__link, .brand__link__name--normal, .table-section, .btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
 .card, .info__name, .link-list__link {
   font-weight: 200; }
 
-.brand__link__name--normal {
+.brand__link__name--normal, .table-section {
   font-weight: 400; }
 
 .btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
@@ -473,3 +473,27 @@
        -moz-transition: background-color 0.2s ease-out, color 0.2s ease-out;
          -o-transition: background-color 0.2s ease-out, color 0.2s ease-out;
             transition: background-color 0.2s ease-out, color 0.2s ease-out; }
+
+.table-section {
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: #959f9f;
+  max-width: 100%;
+  width: 100%; }
+  .table-section__header {
+    border-bottom: 4px solid #4178be; }
+
+.header__row--heading {
+  color: #000;
+  padding: 0.5em;
+  text-align: left; }
+
+.body__row:hover {
+  background-color: #d5eaff; }
+
+.body__row--cell {
+  padding: 0.5em; }
+
+.footer__row--cell {
+  padding: 0.5em; }
