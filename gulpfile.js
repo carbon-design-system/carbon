@@ -30,7 +30,7 @@ gulp.task('browser-sync', function() {
   browserSync.init({
     logPrefix: "Pattern Library",
     server: {
-      baseDir: "./dev/patterns"
+      baseDir: "./dev"
     }
   });
 });
@@ -45,6 +45,10 @@ gulp.task('dist', function() {
     .pipe(plumber())
     .pipe(rename('_pattern-library.scss'))
     .pipe(gulp.dest('dist'));
+
+  gulp.src('dev/images/*.png')
+    .pipe(plumber())
+    .pipe(gulp.dest('dist/images'));
 });
 
 // Lint JavaScript and JSON files.
@@ -72,7 +76,7 @@ gulp.task('sass', function() {
     .pipe(autoprefixer({
       browsers: BROWSERS
     }))
-    .pipe(gulp.dest('dev/patterns'))
+    .pipe(gulp.dest('dev'))
     .pipe(browserSync.stream());
 });
 
