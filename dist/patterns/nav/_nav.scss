@@ -15,7 +15,7 @@ $breakpoint--global-nav: em(900px);
 }
 
 %icon {
-  &__bluemix {
+  &--bluemix {
     @media screen and (min-width: $breakpoint--global-nav) {
       background-image: url('https://console.ng.bluemix.net/api/v1/imgs/sprite.png');
       background-position: -8px -50px; 
@@ -24,7 +24,7 @@ $breakpoint--global-nav: em(900px);
     }
   }
 
-  &__hamburger {
+  &--hamburger {
     background-image: url('https://console.ng.bluemix.net/api/v1/imgs/sprite.png');
     background-position: -104px -112px;
 
