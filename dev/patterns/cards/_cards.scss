@@ -1,0 +1,32 @@
+$color__card--background: $white;
+$color__card--hover: #00aed1;
+
+%transition__card {
+  transition: box-shadow .1s;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0px 0px 2pt 3pt $color__card--hover;
+    cursor: pointer;
+  }
+}
+
+.card {
+  @extend %transition__card;
+  background-color: $color__card--background;
+  display: inline-block;
+  height: em(250px);
+  width: em(245px);
+
+  &__info {
+  
+  }
+
+  &__bindings-list {
+
+  }
+
+  &__state {
+
+  }
+}

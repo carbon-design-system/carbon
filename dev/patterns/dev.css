@@ -60,3 +60,21 @@
   .bx-btn--close:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
+
+.card {
+  -webkit-transition: -webkit-box-shadow 0.1s;
+     -moz-transition: -moz-box-shadow 0.1s;
+       -o-transition: box-shadow 0.1s;
+          transition: box-shadow 0.1s; }
+  .card:focus,
+  .card:hover {
+    -webkit-box-shadow: 0px 0px 2pt 3pt #00aed1;
+       -moz-box-shadow: 0px 0px 2pt 3pt #00aed1;
+            box-shadow: 0px 0px 2pt 3pt #00aed1;
+    cursor: pointer; }
+
+.card {
+  background-color: #fff;
+  display: inline-block;
+  height: 15.625em;
+  width: 15.3125em; }
