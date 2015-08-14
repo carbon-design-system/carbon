@@ -43,7 +43,7 @@ $breakpoint--global-nav: em(900px);
   @extend %flex--horizontal-center;
   background-color: $nav--background-color;
   height: 3.125em;
-  padding: 0 10px;
+  padding: 0 em(10px);
   position: fixed;
   width: 100%;
   z-index: 1;
@@ -96,7 +96,7 @@ $breakpoint--global-nav: em(900px);
   &__link__name--normal {
     @extend %helvetica-normal;
     margin-left: .75em;
-    margin-right: 5px;
+    margin-right: em(5px);
   }
 }
 
@@ -116,15 +116,14 @@ $breakpoint--global-nav: em(900px);
     @media screen and (max-width: $breakpoint--global-nav) {
       flex-direction: column;
       left: 0;
-      min-height: 1400px;
-      // height: 100vh;
+      min-height: em(1400px);
       opacity: .9;
-      padding: 20px 55px 0;
+      padding: em(20px) em(55px) 0;
       position: fixed;
-      top: 50px;
+      top: em(50px);
       transform: translateX(-300px);
       transition: transform .2s ease-out;
-      width: 300px;
+      width: em(300px);
 
       &.visible {
         transform: translateX(0);
@@ -158,7 +157,7 @@ $breakpoint--global-nav: em(900px);
     }
 
     @media screen and (min-width: $breakpoint--global-nav) {
-      margin: 0 12px;
+      margin: 0 em(12px);
     }
   }
 }
@@ -167,17 +166,17 @@ $breakpoint--global-nav: em(900px);
   &__link--sign-up,
   &__link--log-in {
     @extend %helvetica-bold;
-    border-radius: 3px;
+    border-radius: em(3px);
     font-size: em(14px);
     letter-spacing: em(1px);
-    margin: 0 5px;
-    padding: 5px 12px;
+    margin: 0 em(5px);
+    padding: em(5px) em(12px);
     text-decoration: none;
     text-transform: uppercase;
   }
 
   &__link--sign-up {
-    border: 1px solid $nav--sign-up-color;
+    border: em(1px) solid $nav--sign-up-color;
     color: $nav--sign-up-color;
 
     &:hover,
@@ -189,7 +188,7 @@ $breakpoint--global-nav: em(900px);
   }
 
   &__link--log-in {
-    border: 1px solid $nav--link-color;
+    border: em(1px) solid $nav--link-color;
     color: $nav--link-color;
 
     &:hover,

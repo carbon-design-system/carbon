@@ -180,7 +180,7 @@
 .header {
   background-color: #1d3649;
   height: 3.125em;
-  padding: 0 10px;
+  padding: 0 0.625em;
   position: fixed;
   width: 100%;
   z-index: 1; }
@@ -214,7 +214,7 @@
 
 .brand__link__name--normal {
   margin-left: .75em;
-  margin-right: 5px; }
+  margin-right: 0.3125em; }
 
 .nav__cta-links {
   list-style-type: none; }
@@ -244,11 +244,11 @@
           -ms-flex-direction: column;
               flex-direction: column;
       left: 0;
-      min-height: 1400px;
+      min-height: 87.5em;
       opacity: .9;
-      padding: 20px 55px 0;
+      padding: 1.25em 3.4375em 0;
       position: fixed;
-      top: 50px;
+      top: 3.125em;
       -webkit-transform: translateX(-300px);
          -moz-transform: translateX(-300px);
           -ms-transform: translateX(-300px);
@@ -258,7 +258,7 @@
          -moz-transition: -moz-transform 0.2s ease-out;
            -o-transition: -o-transform 0.2s ease-out;
               transition: transform 0.2s ease-out;
-      width: 300px; }
+      width: 18.75em; }
       .nav__link-list.visible {
         -webkit-transform: translateX(0);
            -moz-transform: translateX(0);
@@ -291,22 +291,22 @@
             transition: color 0.2s ease-out; }
   @media screen and (min-width: 56.25em) {
     .link-list__link {
-      margin: 0 12px; } }
+      margin: 0 0.75em; } }
 
 .cta-links__link--sign-up,
 .cta-links__link--log-in {
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
+  -webkit-border-radius: 0.1875em;
+     -moz-border-radius: 0.1875em;
+          border-radius: 0.1875em;
   font-size: 0.875em;
   letter-spacing: 0.0625em;
-  margin: 0 5px;
-  padding: 5px 12px;
+  margin: 0 0.3125em;
+  padding: 0.3125em 0.75em;
   text-decoration: none;
   text-transform: uppercase; }
 
 .cta-links__link--sign-up {
-  border: 1px solid #00b299;
+  border: 0.0625em solid #00b299;
   color: #00b299; }
   .cta-links__link--sign-up:hover,
   .cta-links__link--sign-up:focus {
@@ -318,7 +318,7 @@
             transition: background-color 0.2s ease-out, color 0.2s ease-out; }
 
 .cta-links__link--log-in {
-  border: 1px solid #B3B3B3;
+  border: 0.0625em solid #B3B3B3;
   color: #B3B3B3; }
   .cta-links__link--log-in:hover,
   .cta-links__link--log-in:focus {
