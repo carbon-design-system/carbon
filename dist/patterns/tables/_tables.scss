@@ -1,7 +1,7 @@
 $table-blue: color('blue');
 $table-light-blue: #d5eaff;
 $table-text-color: color('cool-gray', 40);
-$cell-padding: .5em;
+$cell-padding: em(8px);
 
 .table-section {
   @extend %helvetica-normal;
@@ -9,7 +9,6 @@ $cell-padding: .5em;
   border-collapse: collapse;
   border-spacing: 0;
   color: $table-text-color;
-  margin-bottom: 1.25em;
   max-width: 100%;
   width: 100%;
 
