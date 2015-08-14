@@ -1,4 +1,4 @@
-.link-list__link, .brand__link__name--normal, .btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .brand__link__name--bold, .cta-links__link--sign-up,
+.link-list__link, .brand__link__name--normal, .btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
@@ -8,7 +8,7 @@
 .brand__link__name--normal {
   font-weight: 400; }
 
-.btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .brand__link__name--bold, .cta-links__link--sign-up,
+.btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-weight: 700; }
 
@@ -139,6 +139,23 @@
   .btn--warning:disabled {
     cursor: not-allowed;
     opacity: .5; }
+
+.content-link, .content-link:active,
+.content-link:hover {
+  -webkit-transition: color, 0.2s, ease-out;
+     -moz-transition: color, 0.2s, ease-out;
+       -o-transition: color, 0.2s, ease-out;
+          transition: color, 0.2s, ease-out; }
+
+.content-link {
+  line-height: 1.5em;
+  text-decoration: underline; }
+  .content-link,
+  .content-link:visited {
+    color: #5596e6; }
+  .content-link:active,
+  .content-link:hover {
+    color: #6d7777; }
 
 .header, .header__brand,
 .header__nav, .brand__link, .nav__cta-links {
