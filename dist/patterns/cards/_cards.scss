@@ -1,5 +1,6 @@
 $color__card--background: $white;
 $color__card--hover: #00aed1;
+$color__info--link: $bluemix-medium-grey;
 
 %transition__card {
   transition: box-shadow .1s;
@@ -18,15 +19,46 @@ $color__card--hover: #00aed1;
   height: em(250px);
   width: em(245px);
 
+  &__link-wrapper {
+    text-decoration: none;
+  } 
+
   &__info {
-  
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: em(28px) em(10px) em(14px);
   }
 
   &__bindings-list {
-
+    // styles
   }
 
   &__state {
+    // styles
+  }
+}
 
+.info {
+  &__icon {
+    display: block;
+    margin: 0 auto em(14px);
+  }
+
+  &__name {
+    @extend %helvetica-light;
+    color: $blue-90;
+    font-size: typescale(1);
+    line-height: 1.5;
+    text-transform: lowercase;
+  }
+
+  &__link {
+    @extend %helvetica-light;
+    @extend %font-smoothing;
+    color: $color__info--link;
+    font-size: em(12px);
+    line-height: 1.5;
+    text-decoration: none;
   }
 }
