@@ -16,12 +16,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.btn--close, .btn--primary, .btn--secondary, .btn--tertiary, .btn--danger, .btn--warning {
+.btn--close {
   cursor: pointer;
   display: inline-block;
-  margin: 1em 0; }
-
-.btn--close {
+  margin: 1em 0;
   border-color: transparent;
   background-color: transparent;
   text-transform: lowercase;
@@ -61,6 +59,9 @@
     display: none; }
 
 .btn--primary {
+  cursor: pointer;
+  display: inline-block;
+  margin: 1em 0;
   border: 4px solid #00a391;
   font-size: 1.125rem;
   letter-spacing: 1px;
@@ -76,6 +77,9 @@
     opacity: .5; }
 
 .btn--secondary {
+  cursor: pointer;
+  display: inline-block;
+  margin: 1em 0;
   border: 4px solid #5596e6;
   font-size: 1.125rem;
   letter-spacing: 1px;
@@ -99,6 +103,9 @@
     color: #fff; }
 
 .btn--tertiary {
+  cursor: pointer;
+  display: inline-block;
+  margin: 1em 0;
   border: 4px solid #94A3AB;
   font-size: 1.125rem;
   letter-spacing: 1px;
@@ -122,6 +129,9 @@
     color: #fff; }
 
 .btn--danger {
+  cursor: pointer;
+  display: inline-block;
+  margin: 1em 0;
   border: 4px solid #e71d32;
   font-size: 1.125rem;
   letter-spacing: 1px;
@@ -137,6 +147,9 @@
     opacity: .5; }
 
 .btn--warning {
+  cursor: pointer;
+  display: inline-block;
+  margin: 1em 0;
   border: 4px solid #fdd600;
   font-size: 1.125rem;
   letter-spacing: 1px;
