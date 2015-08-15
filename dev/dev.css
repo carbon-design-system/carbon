@@ -1,4 +1,4 @@
-.link-list__link, .brand__link__name--normal, .table-section, .btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
+.link-list__link, .brand__link__name--normal, .table-section, .btn--close, .btn--primary, .btn--secondary, .btn--tertiary, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
@@ -8,21 +8,62 @@
 .brand__link__name--normal, .table-section {
   font-weight: 400; }
 
-.btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
+.btn--close, .btn--primary, .btn--secondary, .btn--tertiary, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-weight: 700; }
 
-.btn--primary, .btn--secondary, .btn--tertiary, .btn--close, .btn--danger, .btn--warning {
+.btn--close, .btn--primary, .btn--secondary, .btn--tertiary, .btn--danger, .btn--warning {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.btn--primary {
-  border: 4px solid #00a391;
+.btn--close, .btn--primary, .btn--secondary, .btn--tertiary, .btn--danger, .btn--warning {
   cursor: pointer;
   display: inline-block;
+  margin: 1em 0; }
+
+.btn--close {
+  border-color: transparent;
+  background-color: transparent;
+  text-transform: lowercase;
+  border-width: 0; }
+  .btn--close [aria-hidden="true"] {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    color: #798484;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 1.60181rem;
+    height: 1.5em;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+       -moz-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    left: 0.0625em;
+    position: relative;
+    text-decoration: none;
+    top: -0.0625em;
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+    width: 1.5em; }
+    .btn--close [aria-hidden="true"]:hover {
+      color: #555c5c; }
+  .btn--close .sr-only {
+    display: none; }
+
+.btn--primary {
+  border: 4px solid #00a391;
   font-size: 1.125rem;
   letter-spacing: 1px;
-  margin: 1em 0;
   min-height: 2.75em;
   min-width: 9.375em;
   padding: 0.5em 1em;
@@ -36,11 +77,8 @@
 
 .btn--secondary {
   border: 4px solid #5596e6;
-  cursor: pointer;
-  display: inline-block;
   font-size: 1.125rem;
   letter-spacing: 1px;
-  margin: 1em 0;
   min-height: 2.75em;
   min-width: 9.375em;
   padding: 0.5em 1em;
@@ -62,11 +100,8 @@
 
 .btn--tertiary {
   border: 4px solid #94A3AB;
-  cursor: pointer;
-  display: inline-block;
   font-size: 1.125rem;
   letter-spacing: 1px;
-  margin: 1em 0;
   min-height: 2.75em;
   min-width: 9.375em;
   padding: 0.5em 1em;
@@ -86,31 +121,10 @@
     background-color: #94A3AB;
     color: #fff; }
 
-.btn--close {
-  border: 4px solid #6d7777;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1.125rem;
-  letter-spacing: 1px;
-  margin: 1em 0;
-  min-height: 2.75em;
-  min-width: 9.375em;
-  padding: 0.5em 1em;
-  text-decoration: none;
-  text-transform: uppercase;
-  background-color: #6d7777;
-  color: #fff; }
-  .btn--close:disabled {
-    cursor: not-allowed;
-    opacity: .5; }
-
 .btn--danger {
   border: 4px solid #e71d32;
-  cursor: pointer;
-  display: inline-block;
   font-size: 1.125rem;
   letter-spacing: 1px;
-  margin: 1em 0;
   min-height: 2.75em;
   min-width: 9.375em;
   padding: 0.5em 1em;
@@ -124,11 +138,8 @@
 
 .btn--warning {
   border: 4px solid #fdd600;
-  cursor: pointer;
-  display: inline-block;
   font-size: 1.125rem;
   letter-spacing: 1px;
-  margin: 1em 0;
   min-height: 2.75em;
   min-width: 9.375em;
   padding: 0.5em 1em;
