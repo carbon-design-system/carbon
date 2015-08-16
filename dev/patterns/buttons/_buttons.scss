@@ -12,7 +12,6 @@ $warning-button--text-color: #000;
   @extend %helvetica-bold;
   cursor: pointer;
   display: inline-block;
-  margin: 1em 0;
 }
 
 // Common styles for buttons with Icon only
@@ -21,6 +20,7 @@ $warning-button--text-color: #000;
   border-color: $color;
   background-color: $color;
   text-transform: lowercase;
+  margin: 1em 0;
 }
 
 // Common styles for buttons with Text or Text + Icon
@@ -31,6 +31,7 @@ $warning-button--text-color: #000;
   letter-spacing: 1px;
   min-height: 2.75em;
   min-width: 9.375em;
+  margin: 1em 0 1em 0.5em;
   padding: .5em 1em;
   text-decoration: none;
   text-transform: uppercase;

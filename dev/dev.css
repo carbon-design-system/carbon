@@ -19,10 +19,10 @@
 .btn--close {
   cursor: pointer;
   display: inline-block;
-  margin: 1em 0;
   border-color: transparent;
   background-color: transparent;
   text-transform: lowercase;
+  margin: 1em 0;
   -webkit-box-align: center;
   -webkit-align-items: center;
      -moz-box-align: center;
@@ -60,12 +60,12 @@
 .btn--primary {
   cursor: pointer;
   display: inline-block;
-  margin: 1em 0;
   border: 4px solid #00a391;
   font-size: 1.125rem;
   letter-spacing: 1px;
   min-height: 2.75em;
   min-width: 9.375em;
+  margin: 1em 0 1em 0.5em;
   padding: 0.5em 1em;
   text-decoration: none;
   text-transform: uppercase;
@@ -78,12 +78,12 @@
 .btn--secondary {
   cursor: pointer;
   display: inline-block;
-  margin: 1em 0;
   border: 4px solid #5596e6;
   font-size: 1.125rem;
   letter-spacing: 1px;
   min-height: 2.75em;
   min-width: 9.375em;
+  margin: 1em 0 1em 0.5em;
   padding: 0.5em 1em;
   text-decoration: none;
   text-transform: uppercase;
@@ -104,12 +104,12 @@
 .btn--tertiary {
   cursor: pointer;
   display: inline-block;
-  margin: 1em 0;
   border: 4px solid #94A3AB;
   font-size: 1.125rem;
   letter-spacing: 1px;
   min-height: 2.75em;
   min-width: 9.375em;
+  margin: 1em 0 1em 0.5em;
   padding: 0.5em 1em;
   text-decoration: none;
   text-transform: uppercase;
@@ -130,12 +130,12 @@
 .btn--danger {
   cursor: pointer;
   display: inline-block;
-  margin: 1em 0;
   border: 4px solid #e71d32;
   font-size: 1.125rem;
   letter-spacing: 1px;
   min-height: 2.75em;
   min-width: 9.375em;
+  margin: 1em 0 1em 0.5em;
   padding: 0.5em 1em;
   text-decoration: none;
   text-transform: uppercase;
@@ -148,12 +148,12 @@
 .btn--warning {
   cursor: pointer;
   display: inline-block;
-  margin: 1em 0;
   border: 4px solid #fdd600;
   font-size: 1.125rem;
   letter-spacing: 1px;
   min-height: 2.75em;
   min-width: 9.375em;
+  margin: 1em 0 1em 0.5em;
   padding: 0.5em 1em;
   text-decoration: none;
   text-transform: uppercase;
