@@ -43,24 +43,23 @@ $warning-button--text-color: #000;
 
 %button--close {
   @include button--icon;
+  align-items: center;
   border-width: 0;
+  display: flex;
+  height: em(10px);
+  justify-content: center;
+  margin: 1em;
+  padding: 0;
+  width: em(10px);
 
   [aria-hidden="true"] {
-    align-items: center;
     color: $close-button--text-color;
-    display: flex;
+    display: inline-block;
     font-size: typescale(4);
-    height: em(24px);
-    justify-content: center;
-    left: em(1px);
-    position: relative;
-    text-decoration: none;
-    top: em(-1px);
     transform: rotate(45deg);
-    width: em(24px);
 
     &:hover {
-      color: darken($close-button--text-color, 15);
+      color: ligthen($close-button--text-color, 15);
     }
   }
 
