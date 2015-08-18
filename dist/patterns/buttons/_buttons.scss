@@ -1,18 +1,23 @@
-$close-button--text-color: lighten($cool-grey-50, 5);
+////////////////////
+// Variables
+///////////////////
+
+// Button colors
 $primary-button--color: $teal-45;
 $secondary-button--color: $blue-40;
 $tertiary-button--color: $bluemix-medium-grey;
 $danger-button--color: $red-50;
 $warning-button--color: $yellow-20;
+
+// Button text colors
+$close-button--text-color: lighten($cool-grey-50, 5);
 $warning-button--text-color: #000;
 
-// Common styles for all buttons.
-// @mixin button--base {
-//   @extend %font-smoothing;
-//   @extend %helvetica-bold;
-//   cursor: pointer;
-//   display: inline-block;
-// }
+//////////////////////
+// Extends + Mixins
+//////////////////////
+
+// Common styles for all buttons
 %button--base {
   @extend %font-smoothing;
   @extend %helvetica-bold;
@@ -20,24 +25,15 @@ $warning-button--text-color: #000;
   display: inline-block;
 }
 
-// Common styles for buttons with Icon only
-@mixin button--icon($color: transparent) {
-  // @extend %button--base;
-  border-color: $color;
-  background-color: $color;
-  text-transform: lowercase;
-  margin: 1em 0;
-}
-
-// Common styles for buttons with Text or Text + Icon
-@mixin button--text($color: transparent) {
-  // @extend %button--base;
-  border: 4px solid $color;
+// Common styles for buttons with:
+// -- text
+// -- text + icons
+%button--text-buttons {
   font-size: typescale(1);
-  letter-spacing: 1px;
+  letter-spacing: em(1px);
   min-height: 2.75em;
   min-width: 9.375em;
-  margin: 1em 0 1em 0.5em;
+  margin: 1em 0 1em .5em;
   padding: .5em 1em;
   text-decoration: none;
   text-transform: uppercase;
@@ -48,10 +44,28 @@ $warning-button--text-color: #000;
   }
 }
 
+// Common styles for buttons with:
+// -- icons only
+%button--icon-buttons {
+  text-transform: lowercase;
+  margin: 1em 0;
+}
+
+// Common border styles for all buttons
+@mixin button--style--border($color) {
+  border: .25em solid $color;
+}
+
+// Common transition for all buttons
+%button--style--transition {
+  transition: background-color ease-out .15s, color ease-out .15s;
+}
+
 %button--close {
-  @include button--icon;
+  @extend %button--base;
+  @extend %button--icon-buttons;
   align-items: center;
-  border-width: 0;
+  border: 0 solid transparent;
   display: flex;
   height: em(10px);
   justify-content: center;
@@ -76,16 +90,20 @@ $warning-button--text-color: #000;
 }
 
 %button--primary {
-  @include button--text($primary-button--color);
+  @extend %button--base;
+  @extend %button--text-buttons;
+  @include button--style--border($primary-button--color);
   background-color: $primary-button--color;
   color: $white;
 }
 
 %button--secondary {
-  @include button--text($secondary-button--color);
+  @extend %button--base;
+  @extend %button--text-buttons;
+  @extend %button--style--transition;
+  @include button--style--border($secondary-button--color);
   background-color: transparent;
   color: $secondary-button--color;
-  transition: background-color ease-out .15s, color ease-out .15s;
 
   &:hover,
   &:focus {
@@ -95,10 +113,12 @@ $warning-button--text-color: #000;
 }
 
 %button--tertiary {
-  @include button--text($tertiary-button--color);
+  @extend %button--base;
+  @extend %button--text-buttons;
+  @extend %button--style--transition;
+  @include button--style--border($tertiary-button--color);
   background-color: transparent;
   color: $tertiary-button--color;
-  transition: background-color ease-out .15s, color ease-out .15s;
 
   &:hover,
   &:focus {
@@ -108,16 +128,24 @@ $warning-button--text-color: #000;
 }
 
 %button--danger {
-  @include button--text($danger-button--color);
+  @extend %button--base;
+  @extend %button--text-buttons;
+  @include button--style--border($danger-button--color);
   background-color: $danger-button--color;
   color: $white;
 }
 
 %button--warning {
-  @include button--text($warning-button--color);
+  @extend %button--base;
+  @extend %button--text-buttons;
+  @include button--style--border($warning-button--color);
   background-color: $warning-button--color;
   color: $warning-button--text-color;
 }
+
+////////////////////
+// Classes
+///////////////////
 
 .btn {
   &--primary {
