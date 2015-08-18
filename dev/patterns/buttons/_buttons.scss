@@ -41,6 +41,8 @@ $warning-button--text-color: #000;
 // Common styles for buttons with icons only
 %button--icon-button {
   @extend %button--base;
+  min-height: .1em;
+  min-width: .1em;
 }
 
 // Common transition for all buttons
