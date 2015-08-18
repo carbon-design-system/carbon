@@ -13,23 +13,16 @@ $warning-button--color: $yellow-20;
 $close-button--text-color: lighten($cool-grey-50, 5);
 $warning-button--text-color: #000;
 
-//////////////////////
-// Extends + Mixins
-//////////////////////
+////////////////////////////////////////////
+// Extends + Mixins (Shared button styles)
+////////////////////////////////////////////
 
-// Common styles for all buttons
+// Common styles for all buttons (text and text + icon)
 %button--base {
   @extend %font-smoothing;
   @extend %helvetica-bold;
   cursor: pointer;
   display: inline-block;
-}
-
-// Common styles for buttons with:
-// -- text
-// -- text + icons
-%button--text-button {
-  @extend %button--base;
   font-size: typescale(1);
   letter-spacing: em(1px);
   min-height: 2.75em;
@@ -45,12 +38,14 @@ $warning-button--text-color: #000;
   }
 }
 
-// Common styles for buttons with:
-// -- icons only
+// Common styles for buttons with icons only
 %button--icon-button {
   @extend %button--base;
-  text-transform: lowercase;
-  margin: 1em 0;
+}
+
+// Common transition for all buttons
+%button--style--transition {
+  transition: background-color ease-out .15s, color ease-out .15s;
 }
 
 // Common border styles for all buttons
@@ -58,10 +53,9 @@ $warning-button--text-color: #000;
   border: .25em solid $color;
 }
 
-// Common transition for all buttons
-%button--style--transition {
-  transition: background-color ease-out .15s, color ease-out .15s;
-}
+////////////////////////////////////////////
+// Extends (specific button styles)
+////////////////////////////////////////////
 
 %button--close {
   @extend %button--icon-button;
@@ -92,14 +86,14 @@ $warning-button--text-color: #000;
 }
 
 %button--primary {
-  @extend %button--text-button;
+  @extend %button--base;
   @include button--style--border($primary-button--color);
   background-color: $primary-button--color;
   color: $white;
 }
 
 %button--secondary {
-  @extend %button--text-button;
+  @extend %button--base;
   @extend %button--style--transition;
   @include button--style--border($secondary-button--color);
   background-color: transparent;
@@ -113,7 +107,7 @@ $warning-button--text-color: #000;
 }
 
 %button--tertiary {
-  @extend %button--text-button;
+  @extend %button--base;
   @extend %button--style--transition;
   @include button--style--border($tertiary-button--color);
   background-color: transparent;
@@ -127,14 +121,14 @@ $warning-button--text-color: #000;
 }
 
 %button--danger {
-  @extend %button--text-button;
+  @extend %button--base;
   @include button--style--border($danger-button--color);
   background-color: $danger-button--color;
   color: $white;
 }
 
 %button--warning {
-  @extend %button--text-button;
+  @extend %button--base;
   @include button--style--border($warning-button--color);
   background-color: $warning-button--color;
   color: $warning-button--text-color;
