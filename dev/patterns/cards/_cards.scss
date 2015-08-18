@@ -95,10 +95,10 @@ $color--card--status--text: darken($bluemix-medium-grey, 5);
   &__icon {
     &--running {
       background-color: $color--card--status--running;
-      width: em(17px);
-      height: em(17px);
       border-radius: 50%;
+      height: em(17px);
       margin-right: em(10px);
+      width: em(17px);
     }
   }
 
