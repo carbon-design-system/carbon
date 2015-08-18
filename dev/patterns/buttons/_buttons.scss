@@ -69,19 +69,14 @@ $warning-button--text-color: #000;
   padding: 0;
   width: em(10px);
 
-  [aria-hidden="true"] {
+  [aria-label="Close"] {
     color: $close-button--text-color;
     display: inline-block;
-    font-size: typescale(4);
-    transform: rotate(45deg);
+    font-size: typescale(1);
 
     &:hover {
       color: ligthen($close-button--text-color, 15);
     }
-  }
-
-  .sr-only {
-    display: none;
   }
 }
 
