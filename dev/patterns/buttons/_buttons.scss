@@ -7,13 +7,13 @@ $warning-button--color: $yellow-20;
 $warning-button--text-color: #000;
 
 // Common styles for all buttons.
-// @mixin base--button {
+// @mixin button--base {
 //   @extend %font-smoothing;
 //   @extend %helvetica-bold;
 //   cursor: pointer;
 //   display: inline-block;
 // }
-%base--button {
+%button--base {
   @extend %font-smoothing;
   @extend %helvetica-bold;
   cursor: pointer;
@@ -22,7 +22,7 @@ $warning-button--text-color: #000;
 
 // Common styles for buttons with Icon only
 @mixin button--icon($color: transparent) {
-  // @extend %base--button;
+  // @extend %button--base;
   border-color: $color;
   background-color: $color;
   text-transform: lowercase;
@@ -31,7 +31,7 @@ $warning-button--text-color: #000;
 
 // Common styles for buttons with Text or Text + Icon
 @mixin button--text($color: transparent) {
-  // @extend %base--button;
+  // @extend %button--base;
   border: 4px solid $color;
   font-size: typescale(1);
   letter-spacing: 1px;
