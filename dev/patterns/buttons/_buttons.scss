@@ -29,6 +29,7 @@ $warning-button--text-color: #000;
 // -- text
 // -- text + icons
 %button--text-buttons {
+  @extend %button--base;
   font-size: typescale(1);
   letter-spacing: em(1px);
   min-height: 2.75em;
@@ -47,6 +48,7 @@ $warning-button--text-color: #000;
 // Common styles for buttons with:
 // -- icons only
 %button--icon-buttons {
+  @extend %button--base;
   text-transform: lowercase;
   margin: 1em 0;
 }
@@ -62,9 +64,9 @@ $warning-button--text-color: #000;
 }
 
 %button--close {
-  @extend %button--base;
   @extend %button--icon-buttons;
   align-items: center;
+  background-color: transparent;
   border: 0 solid transparent;
   display: flex;
   height: em(10px);
@@ -90,7 +92,6 @@ $warning-button--text-color: #000;
 }
 
 %button--primary {
-  @extend %button--base;
   @extend %button--text-buttons;
   @include button--style--border($primary-button--color);
   background-color: $primary-button--color;
@@ -98,7 +99,6 @@ $warning-button--text-color: #000;
 }
 
 %button--secondary {
-  @extend %button--base;
   @extend %button--text-buttons;
   @extend %button--style--transition;
   @include button--style--border($secondary-button--color);
@@ -113,7 +113,6 @@ $warning-button--text-color: #000;
 }
 
 %button--tertiary {
-  @extend %button--base;
   @extend %button--text-buttons;
   @extend %button--style--transition;
   @include button--style--border($tertiary-button--color);
@@ -128,7 +127,6 @@ $warning-button--text-color: #000;
 }
 
 %button--danger {
-  @extend %button--base;
   @extend %button--text-buttons;
   @include button--style--border($danger-button--color);
   background-color: $danger-button--color;
@@ -136,7 +134,6 @@ $warning-button--text-color: #000;
 }
 
 %button--warning {
-  @extend %button--base;
   @extend %button--text-buttons;
   @include button--style--border($warning-button--color);
   background-color: $warning-button--color;
