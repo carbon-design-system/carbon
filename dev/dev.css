@@ -1,4 +1,4 @@
-.link-list__link, .brand__link__name--normal, .table-section, .btn--close, .btn--primary, .btn--secondary, .btn--tertiary, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
+.link-list__link, .brand__link__name--normal, .table-section, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-family: HelveticaNeue, Helvetica Neue, Helvetica, sans-serif; }
 
@@ -8,17 +8,11 @@
 .brand__link__name--normal, .table-section {
   font-weight: 400; }
 
-.btn--close, .btn--primary, .btn--secondary, .btn--tertiary, .btn--danger, .btn--warning, .content-link, .brand__link__name--bold, .cta-links__link--sign-up,
+.content-link, .brand__link__name--bold, .cta-links__link--sign-up,
 .cta-links__link--log-in {
   font-weight: 700; }
 
-.btn--close, .btn--primary, .btn--secondary, .btn--tertiary, .btn--danger, .btn--warning {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
-
 .btn--close {
-  cursor: pointer;
-  display: inline-block;
   border-color: transparent;
   background-color: transparent;
   text-transform: lowercase;
@@ -58,8 +52,6 @@
     display: none; }
 
 .btn--primary {
-  cursor: pointer;
-  display: inline-block;
   border: 4px solid #00a391;
   font-size: 1.125rem;
   letter-spacing: 1px;
@@ -76,8 +68,6 @@
     opacity: .5; }
 
 .btn--secondary {
-  cursor: pointer;
-  display: inline-block;
   border: 4px solid #5596e6;
   font-size: 1.125rem;
   letter-spacing: 1px;
@@ -102,8 +92,6 @@
     color: #fff; }
 
 .btn--tertiary {
-  cursor: pointer;
-  display: inline-block;
   border: 4px solid #94A3AB;
   font-size: 1.125rem;
   letter-spacing: 1px;
@@ -128,8 +116,6 @@
     color: #fff; }
 
 .btn--danger {
-  cursor: pointer;
-  display: inline-block;
   border: 4px solid #e71d32;
   font-size: 1.125rem;
   letter-spacing: 1px;
@@ -146,8 +132,6 @@
     opacity: .5; }
 
 .btn--warning {
-  cursor: pointer;
-  display: inline-block;
   border: 4px solid #fdd600;
   font-size: 1.125rem;
   letter-spacing: 1px;
