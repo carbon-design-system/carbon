@@ -14,11 +14,14 @@ $padding--section:     em(15px);
   }
 
   &__header {
-    @extend %helvetica-light;
     border-bottom: 1px solid $color--border--inner;
     font-size: typescale(4);
     padding: $padding--section;
     text-transform: uppercase;
+
+    h4 {
+      @extend %helvetica-light;
+    }
   }
 
   &__content {
