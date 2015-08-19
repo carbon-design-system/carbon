@@ -15,35 +15,34 @@ They also allow users an access point to more complex and detailed information t
 
 *the following paragraph is placeholder text*
 
-Start with something about how to include this component, maybe it's npm install? Maybe it's cdn? We don't know yet...
-Write something here about using or constructing an unordered list `<ul>` to define a group of cards. Need to confirm if cards will always exist in groups/lists. Will there ever be cards that exist on their own?
-
 # Examples
 
 A list of cards that represent user's deployments.
 
 ```html
-<ul class="bx-card-list">
-  <li class="bx-card" data-type="deployment">...</li>
-  <li class="bx-card" data-type="deployment">...</li>
-  <li class="bx-card" data-type="deployment">...</li>
+<ul class="card-list">
+  <li class="card" data-type="deployment">...</li>
+  <li class="card" data-type="deployment">...</li>
+  <li class="card" data-type="deployment">...</li>
 </ul>
 ```
 
-A single card that represents a user's app.
+A single card that represents a user's app with a running status.
 
 ```html
-<li class="bx-card--app-card">
-  <a href="(app detail URL)">
-    <img class="bx-card--icon" src="(icon URL)" alt="(app name)">
-    <h3 class="bx-card--name">app name</h3>
-    <ul class="bx-card--bindings-list">
-      <li class="bx-card--binding">binding</li>
-      <li class="bx-card--binding">binding</li>
-      <li class="bx-card--binding">binding</li>
-    </ul>
-    <div class="bx-card--state-container">
-      <p class="bx-card--state--healthy">Running</p>
+<li class="card" data-type="deployment">
+  <a href="#" class="card__link-wrapper">
+    <div class="card__info">
+      <img src="..." alt="..." class="info__icon">
+      <h3 class="info__name">deployment-card</h3>
+      <a href="#" class="info__link">app-card.mybluemix.net</a>
+    </div>
+    <div class="card__bindings">
+      <img src="..." alt="#" class="bindings__icon">
+    </div>
+    <div class="card__state">
+      <span class="state__icon--running"></span>
+      <p class="state__status-text--running">Running</p>
     </div>
   </a>
 </li>
@@ -53,25 +52,30 @@ A single card that represents a user's app.
 
 | Class | Effect | Remarks |
 |-----------|--------|---------|
-|`bx-card-list`| Defines a list of cards | Required |
-|`bx-card`| Defines a single card in a list of cards | Required |
-|`bx-card--icon`| Defines an icon for a card | Required |
-|`bx-card--name`| Defines a name for a card | Required |
-|`bx-card--bindings-list`| Defines a list of bindings for a card | Required; bindings could be service bindings for apps, or vice versa. |
-|`bx-card--binding`| Defines a binding for a card | Required |
-|`bx-card--state-container`| Defines a container that contains information about the state of a card | Used mainly for apps, services use this container to show different content (like, plans) |
-|`bx-card--state`| Defines the state of a card | Required, must be modified with a class extension, see classes below |
-|`bx-card--state--healthy`| Defines a healthy state for a card | Required |
-|`bx-card--state--in-prog`| Defines an in-progress state for a card | Required |
-|`bx-card--state--warning`| Defines a warning state for a card | Required |
-|`bx-card--state--error`| Defines an error state for a card | Required |
+|`card-list`| Defines a list of cards | - |
+|`card`| Defines a single card in a list of cards | - |
+|`card__info`| A section of card information | i.e. includes name, link, icon |
+|`info__icon`| An icon that represents the card | - |
+|`info__name`| A name that represents the card | - |
+|`info__link`| A relevant link for what that card represents | i.e. a deployment card will link to the app itself |
+|`card__bindings`| A section that displays all bindings for that card | i.e. services, other integrations, etc. |
+|`bindings__icon`| An icon that represents a binding | - |
+|`card__state`| A region of the card with status information | - |
+|`state__icon`| An icon that represents the state of the card | - |
+|`state__icon--running`| Defines a warning state for a card | - |
+|`state__icon--warning`| Defines a warning state for a card | - |
+|`state__icon--error`| Defines an error state for a card | - |
+|`state__status-text--running`| Text inside card__state | Reads as "Running" |
+|`state__status-text--warning`| Text inside card__state | Reads as "Warning" |
+|`state__status-text--error`| Text inside card__state | Reads as "Error" |
 
 # Attributes
 
-| Attr | Effect | Remarks |
-|`data-type`| Defines the type of card in a list of cards | Required |
-|`data-type="deployment"`| Defines a deployment card | Required |
-|`data-type="environment"`| Defines a environment card | Required |
-|`data-type="integration"`| Defines a integration card | Required |
-|`data-type="pipeline"`| Defines a pipeline card | Required |
-|`data-type="service"`| Defines a service card | Required |
+| Attributes | Effect | Remarks |
+|-----------|--------|---------|
+|`data-type`| Defines the type of card in a list of cards | - |
+|`data-type="deployment"`| Defines a deployment card | - |
+|`data-type="environment"`| Defines a environment card | - |
+|`data-type="integration"`| Defines a integration card | - |
+|`data-type="pipeline"`| Defines a pipeline card | - |
+|`data-type="service"`| Defines a service card | - |
