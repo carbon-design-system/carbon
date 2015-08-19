@@ -72,6 +72,7 @@ A single card that represents a user's app with a running status.
 # Attributes
 
 | Attributes | Effect | Remarks |
+|-----------|--------|---------|
 |`data-type`| Defines the type of card in a list of cards | - |
 |`data-type="deployment"`| Defines a deployment card | - |
 |`data-type="environment"`| Defines a environment card | - |
