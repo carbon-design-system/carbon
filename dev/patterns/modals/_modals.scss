@@ -9,8 +9,15 @@ $padding--section:     em(15px);
   & {
     border: 1px solid $color--border--outer;
     box-shadow: 0 5px 15px $color--box-shadow;
+    position: relative;
     width: 600px;
     z-index: 1000;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   &__header {
