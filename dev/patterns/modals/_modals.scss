@@ -33,7 +33,7 @@ $padding--section:     em(15px);
 }
 
 .header {
-  &__heading {
+  &__title {
     @extend %helvetica-light;
     padding: 1.25em 0;
   }
