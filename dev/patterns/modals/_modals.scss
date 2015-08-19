@@ -18,10 +18,6 @@ $padding--section:     em(15px);
     font-size: typescale(4);
     padding: $padding--section;
     text-transform: uppercase;
-
-    h4 {
-      @extend %helvetica-light;
-    }
   }
 
   &__content {
@@ -34,5 +30,11 @@ $padding--section:     em(15px);
     border-top: 1px solid $color--border--inner;
     padding: $padding--section;
     text-align: right;
+  }
+}
+
+.header {
+  &__heading {
+    @extend %helvetica-light;
   }
 }
