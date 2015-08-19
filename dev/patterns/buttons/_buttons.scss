@@ -1,22 +1,33 @@
-$close-button--color: $cool-grey-50;
+////////////////////
+// Variables
+///////////////////
+
+// Button colors
 $primary-button--color: $teal-45;
 $secondary-button--color: $blue-40;
 $tertiary-button--color: $bluemix-medium-grey;
 $danger-button--color: $red-50;
 $warning-button--color: $yellow-20;
-$warning-button--color--text: #000;
 
-@mixin base--button($color: $close-button--color) {
+// Button text colors
+$close-button--text-color: lighten($cool-grey-50, 5);
+$warning-button--text-color: #000;
+
+////////////////////////////////////////////
+// Extends + Mixins (Shared button styles)
+////////////////////////////////////////////
+
+// Common styles for all buttons (text and text + icon)
+%button--base {
   @extend %font-smoothing;
   @extend %helvetica-bold;
-  border: 4px solid $color;
   cursor: pointer;
   display: inline-block;
   font-size: typescale(1);
-  letter-spacing: 1px;
-  margin: 1em 0;
+  letter-spacing: em(1px);
   min-height: 2.75em;
   min-width: 9.375em;
+  margin: 1em 0 1em .5em;
   padding: .5em 1em;
   text-decoration: none;
   text-transform: uppercase;
@@ -27,17 +38,63 @@ $warning-button--color--text: #000;
   }
 }
 
+// Common styles for buttons with icons only
+%button--icon-button {
+  @extend %button--base;
+  min-height: .1em;
+  min-width: .1em;
+}
+
+// Common transition for all buttons
+%button--style--transition {
+  transition: background-color ease-out .15s, color ease-out .15s;
+}
+
+// Common border styles for all buttons
+@mixin button--style--border($color) {
+  border: .25em solid $color;
+}
+
+////////////////////////////////////////////
+// Extends (specific button styles)
+////////////////////////////////////////////
+
+%button--close {
+  @extend %button--icon-button;
+  align-items: center;
+  background-color: transparent;
+  border: 0 solid transparent;
+  display: flex;
+  height: em(10px);
+  justify-content: center;
+  margin: 1em;
+  padding: 0;
+  width: em(10px);
+
+  [aria-label="Close"] {
+    color: $close-button--text-color;
+    display: inline-block;
+    font-size: typescale(1);
+
+    &:hover {
+      color: ligthen($close-button--text-color, 15);
+    }
+  }
+}
+
 %button--primary {
-  @include base--button($primary-button--color);
+  @extend %button--base;
+  @include button--style--border($primary-button--color);
   background-color: $primary-button--color;
   color: $white;
 }
 
 %button--secondary {
-  @include base--button($secondary-button--color);
+  @extend %button--base;
+  @extend %button--style--transition;
+  @include button--style--border($secondary-button--color);
   background-color: transparent;
   color: $secondary-button--color;
-  transition: background-color ease-out .15s, color ease-out .15s;
 
   &:hover,
   &:focus {
@@ -47,10 +104,11 @@ $warning-button--color--text: #000;
 }
 
 %button--tertiary {
-  @include base--button($tertiary-button--color);
+  @extend %button--base;
+  @extend %button--style--transition;
+  @include button--style--border($tertiary-button--color);
   background-color: transparent;
   color: $tertiary-button--color;
-  transition: background-color ease-out .15s, color ease-out .15s;
 
   &:hover,
   &:focus {
@@ -59,23 +117,23 @@ $warning-button--color--text: #000;
   }
 }
 
-%button--close {
-  @include base--button;
-  background-color: $close-button--color;
-  color: $white;
-}
-
 %button--danger {
-  @include base--button($danger-button--color);
+  @extend %button--base;
+  @include button--style--border($danger-button--color);
   background-color: $danger-button--color;
   color: $white;
 }
 
 %button--warning {
-  @include base--button($warning-button--color);
+  @extend %button--base;
+  @include button--style--border($warning-button--color);
   background-color: $warning-button--color;
-  color: $warning-button--color--text;
+  color: $warning-button--text-color;
 }
+
+////////////////////
+// Classes
+///////////////////
 
 .btn {
   &--primary {

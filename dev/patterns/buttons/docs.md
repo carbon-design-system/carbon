@@ -43,6 +43,7 @@ A disabled button with text.
 
 | Attribute | Effect | Remarks |
 |-----------|--------|---------|
+|`aria-label="Close"` | label is read by screen readers but not visible on screen | i.e. `<button aria-label="Close">&#215;</button>` -- this content is not conveyed through assistive technology like screen-readers, but visible on screens ([source](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute))|
 |`role`| Defines the role of an anchor tag | **Must be used with anchor tags** -- for links that look like buttons, the role will always equal button. |
 |`type` | Defines the usage of a button tag | **Must be used with button tags** -- type can equal button, submit or reset |
 |`disabled`| Defines a disabled button | **Must be used with button tags** |
