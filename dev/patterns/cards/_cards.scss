@@ -64,7 +64,7 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   &__name {
     @extend %helvetica-light;
     color: $blue-90;
-    font-size: typescale(1);
+    font-size: 1.25em;
     line-height: 1.5;
     text-transform: lowercase;
   }
@@ -105,7 +105,7 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   &__text {
     &--running {
       color: $color--status--text;
-      font-size: 14px;
+      font-size: em(14px);
     }
   }
 }
