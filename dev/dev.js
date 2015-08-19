@@ -66,6 +66,16 @@ $(document).ready(function() {
       }
     }
 
+    else if (prop === 'cards') {
+      var cardArray = patterns[prop];
+
+      for (var i=0; i < cardArray.length; i++) {
+        $.get(cardArray[i], function (data) {
+          $('#cards').append(data);
+        });
+      }
+    }
+
     // For all other patterns, append them to #patterns.
     else {
       for (var i = 0; i < patternArray.length; i++) {
