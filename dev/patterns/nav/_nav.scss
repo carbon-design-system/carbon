@@ -46,7 +46,7 @@ $breakpoint--global-nav: em(900px);
   padding: 0 em(10px);
   position: fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 9999;
 
   &__brand,
   &__nav {
