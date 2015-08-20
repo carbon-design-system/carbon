@@ -8,8 +8,8 @@
     "README.md"
   ],
   "dependencies": {
-    "bluemix-colors": "0.0.6",
-    "bluemix-typography": "0.0.8"
+    "bluemix-colors": "0.0.7",
+    "bluemix-typography": "0.0.9"
   },
   "devDependencies": {
     "browser-sync": "^2.8.2",
@@ -19,7 +19,7 @@
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
-    "gulp-scss-lint": "^0.2.2",
+    "gulp-scss-lint": "^0.2.4",
     "jshint-stylish": "^2.0.1",
     "npm-check-updates": "^2.2.0"
   },
