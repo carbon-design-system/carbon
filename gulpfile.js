@@ -7,7 +7,7 @@ var plumber = require('gulp-plumber');
 var reload = browserSync.reload;
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
-var scsslint = require('gulp-scss-lint');
+// var scsslint = require('gulp-scss-lint');
 var stylish = require('jshint-stylish');
 
 // Target these browsers for adding vendor prefixes to CSS
@@ -62,10 +62,10 @@ gulp.task('jslint', function() {
 gulp.task('reload', reload);
 
 // Lint Sass files (.scss)
-gulp.task('scss-lint', function() {
-  gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss'])
-    .pipe(scsslint());
-});
+// gulp.task('scss-lint', function() {
+//   gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss'])
+//     .pipe(scsslint());
+// });
 
 // Compile and prefix Sass code into CSS,
 // then reload the browser (stream when possible).
@@ -85,7 +85,9 @@ gulp.task('sass', function() {
 gulp.task('watch', function() {
   gulp.watch(['dev/patterns/**/html/*.html', 'dev/patterns/*.html']).on('change', reload);
   gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json', 'dev/patterns/*.js'], ['jslint']).on('change', reload);
-  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist']);
+  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'dist']);
+  // If you have scss-lint:
+  // gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist']);
 });
 
 // Default task -- run these tasks.
