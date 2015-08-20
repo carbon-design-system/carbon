@@ -19,14 +19,13 @@
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
-    "gulp-scss-lint": "^0.2.4",
     "jshint-stylish": "^2.0.1",
     "npm-check-updates": "^2.2.0"
   },
   "scripts": {
+    "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
     "update:check": "ncu",
-    "update:all": "ncu --upgradeAll",
-    "preinstall": "gem install scss_lint"
+    "update:all": "ncu --upgradeAll"
   },
   "repository": {
     "type": "git"
