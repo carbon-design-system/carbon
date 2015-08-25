@@ -14,12 +14,10 @@ IBMers, please visit our GitHub Enterprise repo (search bluemix pattern-library)
 
 ## Install
 
-[Download](https://github.ibm.com/Bluemix/pattern-library/archive/master.zip) or clone the repo.
+Use npm to install bluemix-pattern-library as a node_module.
 
 ```
-# clone
-git clone git@github.ibm.com:Bluemix/pattern-library.git
-cd pattern-library
+npm install bluemix-pattern-library -D
 ```
 
 Create a **main.scss** file in your project and `@import` bluemix-pattern-library with a relative path to the node module.
@@ -46,7 +44,7 @@ Here's an example.
   <link rel="stylesheet" href="main.css">
 </head>
 <body class="bx-light">
-  <button class="bx-btn--primary" type="button">primary button</button>
+  <button class="btn--primary" type="button">primary button</button>
 </body>
 </html>
 ```
@@ -64,18 +62,3 @@ Here are the dependencies:
 
 - [bluemix-colors](https://www.npmjs.com/package/bluemix-colors): A palette of Bluemix colors based on [IBM-Design/colors](https://github.com/IBM-Design/colors)
 - [bluemix-typography](https://www.npmjs.com/package/bluemix-typography): Typography functions, variables and fonts that are commonly used in Bluemix.
-
-
-## Usable-ish
-
-- buttons 
-- cards (html only)
-
-## Priority To-do List
-
-These are patterns that are in common with sp-styleguide. Define HTML, styles and JavaScript for these patterns first.
-
-- [tables](http://pages.design.ibm.com/bluemix/sp-styleguide/master/index.html#tables-and-menus)
-- [nav](http://pages.design.ibm.com/bluemix/sp-styleguide/master/index.html#main-nav)
-- [modals (dialog-box)](http://pages.design.ibm.com/bluemix/sp-styleguide/master/index.html#messaging)
-- [links](http://pages.design.ibm.com/bluemix/sp-styleguide/master/index.html#typography)
