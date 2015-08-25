@@ -1,6 +1,6 @@
 {
   "name": "bluemix-pattern-library",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "The Bluemix Pattern Library is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
   "files": [
     ".npmignore",
@@ -23,6 +23,7 @@
     "npm-check-updates": "^2.2.0"
   },
   "scripts": {
+    "install": "npm run install:scss-lint",
     "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
     "update:check": "ncu",
     "update:all": "ncu --upgradeAll"
@@ -48,6 +49,7 @@
   ],
   "contributors": [
     "Brian Han <bthan@us.ibm.com>",
-    "Jefferson Lam <jwlam@us.ibm.com>"
+    "Jefferson Lam <jwlam@us.ibm.com>",
+    "Una Kravets <unakravets@us.ibm.com>"
   ]
 }
