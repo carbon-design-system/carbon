@@ -1,16 +1,19 @@
 
-<select class="dropdown">
-  <option class="dropdown__option" value="volvo">Volvo</option>
-  <option class="dropdown__option" value="saab">Saab</option>
-  <option class="dropdown__option" value="opel">Opel</option>
-  <option class="dropdown__option" value="audi">Audi</option>
-</select>
 
-<div class="dropdown--styled">
+
+<div class="dropdown">
+  <select class="dropdown__select">
+    <option class="dropdown__option" value="volvo">Volvo</option>
+    <option class="dropdown__option" value="saab">Saab</option>
+    <option class="dropdown__option" value="opel">Opel</option>
+    <option class="dropdown__option" value="audi">Audi</option>
+  </select>
+
   <div class="dropdown__selected-option">
     Volvo
     <span class="icon--caret">
       <!-- icon library need to have a caret -->
+      &#x25BE;
     </span>
   </div>
 
@@ -22,6 +25,77 @@
   </ul>
 </div>
 
+<div class="dropdown">
+  <select class="dropdown__select">
+    <option class="dropdown__option" value="volvo">Apple</option>
+    <option class="dropdown__option" value="saab">Orange</option>
+    <option class="dropdown__option" value="opel">Pear</option>
+    <option class="dropdown__option" value="audi">Dragonfruit</option>
+  </select>
+
+  <div class="dropdown__selected-option">
+    Apple
+    <span class="icon--caret">
+      <!-- icon library need to have a caret -->
+      &#x25BE;
+    </span>
+  </div><ul class="dropdown__option-list">
+    <li class="option-list__item">Apple</li>
+    <li class="option-list__item">Orange</li>
+    <li class="option-list__item">Pear</li>
+    <li class="option-list__item">Dragonfruit</li>
+  </ul>
+</div>
+
 <script>
-  // js
+(function(){
+
+  document.body.addEventListener('click', function (event){
+    //What does toElement do?
+    var target = event.target || event.toElement;
+    var selectedOption = {};  
+
+    if(target.className == 'dropdown__selected-option'){
+      console.log("clicked on dropdown selected option");
+      selectedOption = target;
+
+    }
+
+    else if (target.parentNode.className == 'dropdown__selected-option'){
+      console.log("clicked on caret");
+      selectedOption = target.parentNode;
+
+    }
+
+    else return;
+
+    var optionList = selectedOption.nextSibling;
+
+    //Need to check for whitespace and comment nodes
+    while(optionList && optionList.nodeType != 1) {
+        optionList = optionList.nextSibling
+    }
+    
+    console.log(optionList);
+    optionList.className += " active";
+
+
+  });
+
+  // var dropdowns = document.querySelectorAll('.dropdown');
+  // console.log(dropdowns);
+  // dropdowns.forEach(dropdownHandler);
+  
+  // function dropdownHandler (element, index, array) {
+  //   console.log(element);
+  //   element.addEventListener('click', function (event) {
+  //     console.log(element);
+  //   });
+
+  // }
+
+  // menuToggle.addEventListener('click', function (event) {
+  //   nav.classList.toggle('visible');
+  // });
+})();
 </script>
