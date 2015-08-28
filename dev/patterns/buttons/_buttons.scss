@@ -23,7 +23,7 @@ $warning-btn--text-color: #000;
   @extend %helvetica-bold;
   cursor: pointer;
   display: inline-block;
-  font-size: typescale(1);
+  font-size: 1rem;
   letter-spacing: em(1px);
   min-height: 2.75em;
   min-width: 9.375em;
@@ -52,7 +52,7 @@ $warning-btn--text-color: #000;
 
 // Common border styles for all buttons
 @mixin btn--style--border($color) {
-  border: .25em solid $color;
+  border: em(3px) solid $color;
 }
 
 ////////////////////////////////////////////
