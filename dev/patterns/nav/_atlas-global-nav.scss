@@ -1,6 +1,11 @@
 $color--wireframe-gray: #E8E8E8;
 $color--wireframe-black: #323232;
 
+$breakpoint--small: em(500px);
+$breakpoint--small-1: em(600px);
+$breakpoint--big: em(1200px);
+
+
 %flex--horizontal-center {
   display: flex;
   flex-direction: row;
@@ -16,6 +21,14 @@ $color--wireframe-black: #323232;
   z-index: 9999;
   padding: 0 5%;
 
+  @media screen and (min-width: $breakpoint--small-1) {
+    padding: 0 10%;
+  }
+
+  @media screen and (min-width: $breakpoint--big) {
+    padding: 0 12.5%;
+  }
+
   &__logo {
     @extend %flex--horizontal-center;
     text-decoration: none;
@@ -23,7 +36,7 @@ $color--wireframe-black: #323232;
     .icon--atlas-logo {
       display: none;
 
-      @media screen and (min-width: 500px) {
+      @media screen and (min-width: $breakpoint--small) {
         display: inline-block;
       }
     }
@@ -51,11 +64,10 @@ $color--wireframe-black: #323232;
 }
 
 .logo {
-
   &__wordmark {
     display: none;
 
-    @media screen and (min-width: 500px) {
+    @media screen and (min-width: $breakpoint--small) {
       display: inline-block;
       @extend %helvetica-bold;
       font-size: em(14px);
