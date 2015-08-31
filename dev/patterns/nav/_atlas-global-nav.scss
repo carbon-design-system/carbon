@@ -1,34 +1,135 @@
-.global-header {
-  &__logo {
+$color--wireframe-gray: #E8E8E8;
+$color--wireframe-black: #323232;
 
+%flex--horizontal-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.global-header {
+  display: flex;
+  background-color: $color--wireframe-gray;
+  position: fixed;
+  height: 3rem;
+  width: 100%;
+  z-index: 9999;
+  padding: 0 5%;
+
+  &__logo {
+    @extend %flex--horizontal-center;
+    text-decoration: none;
+
+    .icon--atlas-logo {
+      display: none;
+
+      @media screen and (min-width: 500px) {
+        display: inline-block;
+      }
+    }
   }
 
   &__nav {
-
+    @extend %flex--horizontal-center;
+    justify-content: space-between;
+    flex: 1;
   }
 
   &__account {
+    @extend %flex--horizontal-center;
+    margin-left: 1em;
 
+    .btn--avatar {
+      background: url("http://placecreature.com/100/100") no-repeat;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background-size: contain;
+      border: none;
+    }
+  }
+}
+
+.logo {
+
+  &__wordmark {
+    display: none;
+
+    @media screen and (min-width: 500px) {
+      display: inline-block;
+      @extend %helvetica-bold;
+      font-size: em(14px);
+      color: $color--wireframe-black;
+      margin: 0 1em;
+      border-right: 1px solid $color--wireframe-black;
+      padding-right: 1em;
+      line-height: 1;
+    }
+
+    span {
+      @extend %helvetica-light;
+    }
   }
 }
 
 .nav {
-  &__dropdown {
+  &__dropdown-btn {
+    @extend %helvetica-light;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    line-height: 1;
+    min-width: em(92px);
 
   }
 
   &__global-menu {
-
+    display: none;
+    list-style-type: none;
   }
 
   &__links-list {
+    @extend %flex--horizontal-center;
+    list-style-type: none;
+  }
+}
 
+.global-menu {
+
+  &__item {
+
+  }
+
+  &__link {
+
+  }
+
+  &__count {
+
+  }
+}
+
+.links-list {
+  &__item {
+    margin-left: 1em;
+  }
+
+  &__link {
+    @extend %helvetica-light;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: $color--wireframe-black;
+
+    &.active {
+      @extend %helvetica-bold;
+    }
   }
 }
 
 .account {
   &__menu {
-
+    display: none;
+    list-style-type: none;
   }
 
   &__menu-item {
