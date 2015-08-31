@@ -39,54 +39,5 @@
     	}
 	}
 
-	&__selected-option{
-		position: relative;
-		border: 1px solid gray; 
-
-		cursor: pointer;
-		display: inline-block;
-		font-size: typescale(1);
-		font-weight: bold;
-
-		// letter-spacing: em(1px);
-		// min-height: 2.75em;
-		min-width: 9.375em;
-		margin: 1em 0 1em .5em;
-		padding: .5em 0em .5em 1em;
-		text-decoration: none;
-		// text-transform: uppercase;
-
-		// How to write this inner element style
-		.icon--caret{
-			border-left: 1px solid gray;
-			height: 100%;
-			position: absolute;
-			right: 0;
-			top: 0;
-			padding: .5em;
-		}
-	}
-
-
-    &__option-list{
-
-	    position: absolute;
-	    left: .5em;
-	    top: 4em;
-	    border: 1px solid gray;
-	    display: none;
-	    width: 150px;
-	    z-index: 10;
-	    background-color: white;
-
-
-    	display: none;
-
-    	&.active{
-    		display: inline-block;
-
-    	}
-    }
-
 }
 
