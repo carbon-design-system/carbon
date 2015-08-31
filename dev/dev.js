@@ -28,7 +28,7 @@ $(document).ready(function() {
     ],
     'nav': [
       'patterns/nav/html/global-nav.html',
-      'patterns/nav/html/secondary-nav.html'
+      'patterns/nav/html/atlas-global-nav.html'
     ],
     'radio': [
       'patterns/radio/html/radio.html'
@@ -47,13 +47,13 @@ $(document).ready(function() {
 
     // Handle the nav patterns differently
     if (prop === 'nav') {
-      for (var i = 0; i < patternArray.length; i++ ) {
-        $.get(patternArray[i], function (data) {
+      $.get(patternArray[0], function (data) {
+        $('#nav').append(data);
+      });
 
-          // Append nav patterns to #nav because bluemix nav needs to be at the top of the viewport in order for the styles to work responsively.
-          $('#nav').append(data);
-        });
-      }
+      $.get(patternArray[1], function (data) {
+        $('#atlas-nav').append(data);
+      });
     }
 
     else if (prop === 'modals') {
