@@ -8,12 +8,12 @@ $(document).ready(function() {
 
   bluemixButton.on('click', function (event) {
     console.log(event);
-    $('#nav').css('display', 'block;');
+    $('#nav').css('display', 'block');
     $('#atlas-nav').css('display', 'none');
   });
 
   atlasButton.on('click', function (event) {
-    $('#nav').css('display', 'none;');
+    $('#nav').css('display', 'none');
     $('#atlas-nav').css('display', 'block');
   });
 
