@@ -70,6 +70,8 @@ Full HTML for Atlas Global Header:
 
 ## Classes
 
+### Atlas Global Header
+
 | Class | Effect | Remarks |
 |-----------|--------|---------|
 |`global-header`| Defines the Atlas Global Header | All class names and styles derive from this class name |
@@ -93,6 +95,8 @@ Full HTML for Atlas Global Header:
 |`account__menu-link` | A link inside `account__menu` | - |
 
 ## Attributes
+
+### Atlas Global Header
 
 | Attribute | Effect | Remarks |
 |-----------|--------|---------|

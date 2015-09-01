@@ -50,7 +50,7 @@ $(document).ready(function() {
     ],
     'nav': [
       'patterns/nav/html/global-nav.html',
-      'patterns/nav/html/atlas-global-nav.html'
+      'patterns/nav/html/atlas-global-header.html'
     ],
     'radio': [
       'patterns/radio/html/radio.html'
