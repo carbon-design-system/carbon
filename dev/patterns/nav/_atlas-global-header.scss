@@ -68,17 +68,17 @@ $breakpoint--big: em(1200px);
 
 .logo {
   &__wordmark {
+    @extend %helvetica-bold;
+    border-right: 1px solid $color--wireframe-black;
+    color: $color--wireframe-black;
     display: none;
+    font-size: em(14px);
+    line-height: 1;
+    margin: 0 1em;
+    padding-right: 1em;
 
     @media screen and (min-width: $breakpoint--small) {
-      @extend %helvetica-bold;
-      border-right: 1px solid $color--wireframe-black;
-      color: $color--wireframe-black;
       display: inline-block;
-      font-size: em(14px);
-      line-height: 1;
-      margin: 0 1em;
-      padding-right: 1em;
     }
 
     span {
