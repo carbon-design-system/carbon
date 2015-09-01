@@ -16,13 +16,13 @@ $breakpoint--big: em(1200px);
 }
 
 .global-header {
-  display: flex;
   background-color: $color--wireframe-gray;
-  position: fixed;
+  display: flex;
   height: 3rem;
+  padding: 0 5%;
+  position: fixed;
   width: 100%;
   z-index: 9999;
-  padding: 0 5%;
 
   @media screen and (min-width: $breakpoint--small-1) {
     padding: 0 10%;
@@ -47,8 +47,8 @@ $breakpoint--big: em(1200px);
 
   &__nav {
     @extend %flex--horizontal-center;
-    justify-content: space-between;
     flex: 1;
+    justify-content: space-between;
   }
 
   &__account {
@@ -56,12 +56,12 @@ $breakpoint--big: em(1200px);
     margin-left: 1em;
 
     .btn--avatar {
-      background: url("http://placecreature.com/100/100") no-repeat;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
       background-size: contain;
+      background: url("http://placecreature.com/100/100") no-repeat;
+      border-radius: 50%;
       border: none;
+      height: 2rem;
+      width: 2rem;
     }
   }
 }
@@ -71,14 +71,14 @@ $breakpoint--big: em(1200px);
     display: none;
 
     @media screen and (min-width: $breakpoint--small) {
-      display: inline-block;
       @extend %helvetica-bold;
-      font-size: em(14px);
-      color: $color--wireframe-black;
-      margin: 0 1em;
       border-right: 1px solid $color--wireframe-black;
-      padding-right: 1em;
+      color: $color--wireframe-black;
+      display: inline-block;
+      font-size: em(14px);
       line-height: 1;
+      margin: 0 1em;
+      padding-right: 1em;
     }
 
     span {
@@ -90,18 +90,18 @@ $breakpoint--big: em(1200px);
 .nav {
   &__dropdown-btn {
     @extend %helvetica-light;
-    font-size: 1rem;
     background-color: transparent;
     border: none;
+    font-size: 1rem;
     line-height: 1;
     min-width: em(92px);
 
   }
 
   &__global-menu {
+    opacity: 0;
     position: fixed;
     top: -10000px;
-    opacity: 0;
     transition: opacity .2s;
 
     &.active {
@@ -110,13 +110,13 @@ $breakpoint--big: em(1200px);
       display: inline-block;
       left: 15%;
       list-style-type: none;
+      margin: 0;
+      opacity: 1;
       padding: 1em 0;
       position: fixed;
       top: 3rem;
-      width: 12em;
-      opacity: 1;
       transition: opacity .2s;
-      margin: 0;
+      width: 12em;
     }
   }
 
@@ -134,21 +134,21 @@ $breakpoint--big: em(1200px);
   }
 
   &__link {
-    @extend %helvetica-light;
     @extend %flex--horizontal-center;
-    justify-content: space-between;
-    text-decoration: none;
+    @extend %helvetica-light;
     color: $color--wireframe-dark-gray;
+    justify-content: space-between;
     padding-left: 1em;
+    text-decoration: none;
     width: 100%;
   }
 
   &__count {
     background-color: $color--wireframe-light-gray;
-    margin-right: .5em;
-    padding: .25em .5em;
     border-radius: 50%;
     font-size: .75rem;
+    margin-right: .5em;
+    padding: .25em .5em;
   }
 }
 
@@ -159,9 +159,9 @@ $breakpoint--big: em(1200px);
 
   &__link {
     @extend %helvetica-light;
+    color: $color--wireframe-black;
     text-decoration: none;
     text-transform: uppercase;
-    color: $color--wireframe-black;
 
     &.active {
       @extend %helvetica-bold;
@@ -173,13 +173,5 @@ $breakpoint--big: em(1200px);
   &__menu {
     display: none;
     list-style-type: none;
-  }
-
-  &__menu-item {
-
-  }
-
-  &__menu-link {
-
   }
 }
