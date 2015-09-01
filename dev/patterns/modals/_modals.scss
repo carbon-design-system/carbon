@@ -5,14 +5,20 @@ $color--content:       color('gray', 40);
 $padding--section:     em(15px);
 
 .modal {
+  display: block;
+  position: absolute;
+  transform: translateX(-500vw);
+  transition: transform .2s;
 
-  & {
+  &:target {
     background-color: $white;
     border: 1px solid $color--border--outer;
     box-shadow: 0 5px 15px $color--box-shadow;
-    position: relative;
+    position: fixed;
     width: 600px;
     z-index: 1000;
+    transform: translateX(30vw);
+    transition: transform .2s;
   }
 
   &__close {
