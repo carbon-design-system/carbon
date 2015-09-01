@@ -1,4 +1,26 @@
 $(document).ready(function() {
+  /////////////////////////
+  // Nav Theme Switcher
+  /////////////////////////
+
+  var bluemixButton = $('#bluemix-theme');
+  var atlasButton = $('#atlas-theme');
+
+  bluemixButton.on('click', function (event) {
+    console.log(event);
+    $('#nav').css('display', 'block;');
+    $('#atlas-nav').css('display', 'none');
+  });
+
+  atlasButton.on('click', function (event) {
+    $('#nav').css('display', 'none;');
+    $('#atlas-nav').css('display', 'block');
+  });
+
+  /////////////////////////////////
+  // AJAX Patterns on to index.html
+  /////////////////////////////////
+
   var patterns = {
     'buttons': [
       'patterns/buttons/html/close-button.html',
