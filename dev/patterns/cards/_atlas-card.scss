@@ -69,6 +69,10 @@ $color--card-metadata: color('blue', 30);
     width: 100%;
     padding: 0 1rem;
     border-bottom: 1px $color--card-border solid;
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
 
