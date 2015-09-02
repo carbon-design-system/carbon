@@ -20,8 +20,9 @@ The HTML for a card is made of any or all of the following parts in order:
  - card metadata icon
  - card metadata value
 
-![Anatomy of a card]
-(https://uploads.github.ibm.com/github-enterprise-assets/0000/0206/0000/0703/b0a3cb0e-5180-11e5-8499-997a48ce99ae.png)
+![anatomy of a light card]
+(https://uploads.github.ibm.com/github-enterprise-assets/0000/0206/0000/0704/03641b96-5181-11e5-9978-0dd20e828b59.png)
+![anatomy of a dark card](https://uploads.github.ibm.com/github-enterprise-assets/0000/0206/0000/0707/19844864-5182-11e5-9b2b-b751c9673ad7.png)
 
 Full HTML example of a Cloud Foundry app card:
 
