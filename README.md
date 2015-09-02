@@ -6,11 +6,17 @@ The Bluemix Pattern Library gives developers (FEDs & Engineers) a collection of 
 
 The aim is for every developer to use consistent HTML, CSS, and JavaScript in as many places as possible in their prototype and production work.
 
-## Warning!
+## Patch Notes -- Version 0.0.8
+*Browse [repo](https://github.ibm.com/Bluemix/pattern-library/tree/e939a22e49c37ec5fa1c6c73fe96a618b7430e4e) at this point in history.*
 
-This package is in *very* **early stages of development**.
+### Patterns
+- Atlas Global Header
+  - Main navigation for Atlas
+  - Wireframe styles only
+  - Update docs
 
-IBMers, please visit our GitHub Enterprise repo (search bluemix pattern-library) to learn how you can contribute.
+### Dev Environment
+- Add radio buttons to toggle between Bluemix and Atlas headers
 
 ## Install
 
