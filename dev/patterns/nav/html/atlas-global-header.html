@@ -1,0 +1,48 @@
+<header class="global-header">
+  <!-- Logo -->
+  <a href="/" class="global-header__logo">
+    <img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=32%C3%9732&w=32&h=32" alt="..." class="icon--atlas-logo">
+    <h1 class="logo__wordmark">IBM <span>Cloud</span></h1>
+  </a>
+  <!-- Nav -->
+  <nav class="global-header__nav" role="navigation">
+    <button type="button" class="nav__dropdown-btn" id="global-menu-toggle">
+      All Objects &or;
+    </button>
+    <!-- Global Menu -->
+    <ul class="nav__global-menu">
+      <li class="global-menu__item">
+        <a href="/console/compute" class="global-menu__link">All Objects</a>
+      </li>
+      <li class="global-menu__item">
+        <a href="/console/compute" class="global-menu__link">Compute <p class="global-menu__count">1</p></a>
+      </li>
+      <li class="global-menu__item">
+        <a href="/console/network" class="global-menu__link">
+          Network
+          <p class="global-menu__count">2</p>
+        </a>
+      </li>
+      <!-- more li.global-menu__items here -->
+    </ul>
+    <!-- Links List -->
+    <ul class="nav__links-list">
+      <li class="links-list__item"><a href="#" class="links-list__link active">manage</a></li>
+      <li class="links-list__item"><a href="#" class="links-list__link">learn</a></li>
+    </ul>
+  </nav>
+  <!-- Account -->
+  <div class="global-header__account">
+    <button class="btn--avatar"></button>
+    <ul class="account__menu">
+      <li class="account__menu-item"><a href="#" class="account__menu-link">menu link</a></li>
+    </ul>
+  </div>
+</header>
+<script>
+  var menuButton = document.querySelector('#global-menu-toggle');
+  var dropdownMenu = document.querySelector('.nav__global-menu');
+  menuButton.addEventListener('click', function (event) {
+    dropdownMenu.classList.toggle('active');
+  });
+</script>

@@ -12,7 +12,7 @@
 @import '../node_modules/bluemix-colors/bluemix-colors';
 @import '../node_modules/bluemix-typography/bluemix-typography';
 
-// Patterns
+// Bluemix Patterns
 @import 'patterns/buttons/buttons';
 @import 'patterns/cards/cards';
 @import 'patterns/forms/forms';
@@ -23,3 +23,6 @@
 @import 'patterns/radio/radio';
 @import 'patterns/tables/tables';
 @import 'patterns/tooltips/tooltips';
+
+// Atlas Patterns
+@import 'patterns/nav/atlas-global-header';
