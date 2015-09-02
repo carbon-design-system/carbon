@@ -9,7 +9,7 @@ $(document).ready(function() {
       'patterns/buttons/html/warning-button.html'
     ],
     'cards': [
-      'patterns/cards/html/card.html'
+      'patterns/cards/html/atlas-card.html'
     ],
     'forms': [
       'patterns/forms/html/form.html'
