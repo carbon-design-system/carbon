@@ -74,7 +74,7 @@ Full HTML for Atlas Global Header:
 
 | Class | Effect | Remarks |
 |-----------|--------|---------|
-|`global-header`| Defines the Atlas Global Header | All class names and styles derive from this class name |
+|`global-header`| Defines the Atlas Global Header | - |
 |`global-header__logo` | Defines a block of HTML for Atlas logo and wordmark | - |
 |`icon--atlas-logo` | Defines a reusable atlas logo | - |
 |`logo__wordmark` | Defines the wordmark | -|
