@@ -1,4 +1,26 @@
 $(document).ready(function() {
+  /////////////////////////
+  // Nav Theme Switcher
+  /////////////////////////
+
+  var bluemixButton = $('#bluemix-theme');
+  var atlasButton = $('#atlas-theme');
+
+  bluemixButton.on('click', function (event) {
+    console.log(event);
+    $('#nav').css('display', 'block');
+    $('#atlas-nav').css('display', 'none');
+  });
+
+  atlasButton.on('click', function (event) {
+    $('#nav').css('display', 'none');
+    $('#atlas-nav').css('display', 'block');
+  });
+
+  /////////////////////////////////
+  // AJAX Patterns on to index.html
+  /////////////////////////////////
+
   var patterns = {
     'buttons': [
       'patterns/buttons/html/close-button.html',
@@ -28,7 +50,7 @@ $(document).ready(function() {
     ],
     'nav': [
       'patterns/nav/html/global-nav.html',
-      'patterns/nav/html/secondary-nav.html'
+      'patterns/nav/html/atlas-global-header.html'
     ],
     'radio': [
       'patterns/radio/html/radio.html'
@@ -47,13 +69,13 @@ $(document).ready(function() {
 
     // Handle the nav patterns differently
     if (prop === 'nav') {
-      for (var i = 0; i < patternArray.length; i++ ) {
-        $.get(patternArray[i], function (data) {
+      $.get(patternArray[0], function (data) {
+        $('#nav').append(data);
+      });
 
-          // Append nav patterns to #nav because bluemix nav needs to be at the top of the viewport in order for the styles to work responsively.
-          $('#nav').append(data);
-        });
-      }
+      $.get(patternArray[1], function (data) {
+        $('#atlas-nav').append(data);
+      });
     }
 
     else if (prop === 'modals') {
