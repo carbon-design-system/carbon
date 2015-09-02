@@ -5,48 +5,48 @@ $color--card-content: white;
 $color--card-metadata: color('blue', 30);
 
 %flex--horizontal-start {
+  align-items: flex-start;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
 }
 
 %flex--horizontal-center {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
 }
 
 %flex--horizontal-end {
+  align-items: flex-end;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
 }
 
 %flex--vertical-center {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 #cards {
   @extend %flex--vertical-center;
-  justify-content: center;
-  padding: 20px;
-  margin: 20px 0;
   background-color: #34434c;
+  justify-content: center;
   list-style: none;
+  margin: 20px 0;
+  padding: 20px;
 
   @media screen and (min-width: 600px) {
+    align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
     justify-content: flex-start;
   }
 }
 
 .object-card {
+  margin-bottom: 2rem;
   margin-right: 2rem;
-  margin-bottom: 2rem
   width: 100%;
 
   @media screen and (min-width: 400px) {
@@ -117,12 +117,12 @@ $color--card-metadata: color('blue', 30);
 
   a {
     @extend %flex--horizontal-start;
-    flex-wrap: wrap;
-    width: 100%;
     background-color: $color--card-background;
     border: 1px $color--card-border solid;
-    transition: transform .2s;
+    flex-wrap: wrap;
     text-decoration: none;
+    transition: transform .2s;
+    width: 100%;
 
     &:hover {
       transform: scale(1.02);
@@ -131,25 +131,25 @@ $color--card-metadata: color('blue', 30);
 
   &__card-header {
     @extend %flex--horizontal-center;
-    width: 100%;
+    border-bottom: 3px color('blue', 40) solid;
     justify-content: center;
     padding-right: .5rem;
-    border-bottom: 3px color('blue', 40) solid;
+    width: 100%;
   }
 
   &__graph {
-    width: 100%;
-    height: 66px;
     background-color: $color--card-foreground;
+    height: 66px;
+    width: 100%;
   }
 
   &__card-metric {
     @extend %flex--horizontal-end;
-    flex-wrap: wrap;
-    width: 50%;
     border-bottom: 1px $color--card-border solid;
     border-right: 1px $color--card-border solid;
+    flex-wrap: wrap;
     padding: .8rem 0;
+    width: 50%;
 
     &:last-child {
       border-right: none;
@@ -158,9 +158,9 @@ $color--card-metadata: color('blue', 30);
 
   &__card-metadata {
     @extend %flex--horizontal-center;
-    width: 100%;
-    padding: 0 1rem;
     border-bottom: 1px $color--card-border solid;
+    padding: 0 1rem;
+    width: 100%;
 
     &:last-child {
       border-bottom: none;
@@ -172,10 +172,10 @@ $color--card-metadata: color('blue', 30);
 
   &__title {
     @extend %helvetica-medium;
-    padding: 1.2em 0;
     color: $color--card-content;
-    letter-spacing: .035rem;
     font-size: .95rem;
+    letter-spacing: .035rem;
+    padding: 1.2em 0;
   }
 
   &__icon {
@@ -187,29 +187,29 @@ $color--card-metadata: color('blue', 30);
 
   &__figure {
     @extend %helvetica-bold;
-    width: 100%;
     color: $color--card-content;
     font-size: 2.661rem;
     text-align: center;
+    width: 100%;
   }
 
   &__unit {
     @extend %helvetica-light;
     // why can't I get this font to get lighter than 200?
-    font-weight: 100;
     font-size: 1.3rem;
+    font-weight: 100;
     margin-left: .1rem;
   }
 
   &__label {
     @extend %helvetica-light;
-    width: 100%;
-    transform: scaleX(.9);
-    font-size: .8rem;
-    text-align: center;
-    letter-spacing: .015rem;
-    text-transform: uppercase;
     color: $color--card-content;
+    font-size: .8rem;
+    letter-spacing: .015rem;
+    text-align: center;
+    text-transform: uppercase;
+    transform: scaleX(.9);
+    width: 100%;
   }
 }
 
@@ -221,12 +221,12 @@ $color--card-metadata: color('blue', 30);
 
   &__value {
     @extend %helvetica-light;
+    color: $color--card-metadata;
     flex: 1;
-    padding: .8rem;
-    white-space: nowrap;
     font-size: .8rem;
     overflow: hidden;
+    padding: .8rem;
     text-overflow: ellipsis;
-    color: $color--card-metadata;
+    white-space: nowrap;
   }
 }
