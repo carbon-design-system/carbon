@@ -64,7 +64,7 @@ $color--card-metadata: color('blue', 30);
     }
   }
 
-  &__metadata-item {
+  &__card-metadata {
     @extend %flex--horizontal-center;
     width: 100%;
     padding: 0 1rem;
@@ -115,12 +115,13 @@ $color--card-metadata: color('blue', 30);
     transform: scaleX(.9);
     font-size: .8rem;
     text-align: center;
+    letter-spacing: .015rem;
     text-transform: uppercase;
     color: $color--card-content;
   }
 }
 
-.metadata-item {
+.card-metadata {
 
   &__icon {
     width: 1.125rem;
