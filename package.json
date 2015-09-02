@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "bluemix-colors": "0.0.7",
-    "bluemix-typography": "0.0.9"
+    "bluemix-typography": "0.0.10"
   },
   "devDependencies": {
     "browser-sync": "^2.8.2",
