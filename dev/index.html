@@ -12,6 +12,25 @@
     margin: 0;
     padding: 0;
   }
+  #cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #34434c;
+    justify-content: center;
+    list-style: none;
+    margin: 20px 0;
+    padding: 20px;
+
+  }
+  @media screen and (min-width: 600px) {
+    #cards {
+      align-items: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  }
 </style>
 <body class="bx-light">
   <!-- Open and view this HTML file when developing patterns,

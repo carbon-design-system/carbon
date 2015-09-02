@@ -28,25 +28,8 @@ $color--card-metadata: color('blue', 30);
   flex-direction: column;
 }
 
-#cards {
-  @extend %flex--vertical-center;
-  background-color: #34434c;
-  justify-content: center;
-  list-style: none;
-  margin: 20px 0;
-  padding: 20px;
-
-  @media screen and (min-width: 600px) {
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-}
-
 .object-card {
   margin-bottom: 2rem;
-  margin-right: 2rem;
   width: 100%;
 
   @media screen and (min-width: 400px) {
