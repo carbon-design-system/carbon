@@ -22,19 +22,111 @@ $color--card-metadata: color('blue', 30);
   align-items: flex-end;
 }
 
-.object-card {
-  @extend %flex--horizontal-start;
-  flex-wrap: wrap;
-  width: 18rem;
-  height: auto;
-  background-color: $color--card-background;
-  border: 1px $color--card-border solid;
-  margin-right: 2rem;
-  transition: transform .2s;
-  text-decoration: none;
+%flex--vertical-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  &:hover {
-    transform: scale(1.02);
+#cards {
+  @extend %flex--vertical-center;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #34434c;
+  list-style: none;
+
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+.object-card {
+  margin-right: 2rem;
+  margin-bottom: 2rem
+  width: 100%;
+
+  @media screen and (min-width: 400px) {
+		width: 80%;
+	}
+
+	@media screen and (min-width: 500px) {
+		width: 70%;
+	}
+
+	@media screen and (min-width: 600px) {
+		margin: 0 10% 35px 0;
+		width: 45%;
+
+		&:nth-child(2n) {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: 950px) {
+		width: 32%;
+
+		&:nth-child(n) {
+			margin: 0 2% 35px 0;
+		}
+
+		&:nth-child(3n) {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: 1240px) {
+		width: 23.5%;
+
+		&:nth-child(n) {
+			margin: 0 2% 35px 0;
+		}
+
+		&:nth-child(4n) {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: 1700px) {
+		width: 18%;
+
+		&:nth-child(n) {
+			margin: 0 2.5% 35px 0;
+		}
+
+		&:nth-child(5n) {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: 2100px) { //phat displays, y'all
+		width: 15%;
+
+		&:nth-child(n) {
+			margin: 0 2% 35px 0;
+		}
+
+		&:nth-child(6n) {
+			margin-right: 0;
+		}
+	}
+
+
+  a {
+    @extend %flex--horizontal-start;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: $color--card-background;
+    border: 1px $color--card-border solid;
+    transition: transform .2s;
+    text-decoration: none;
+
+    &:hover {
+      transform: scale(1.02);
+    }
   }
 
   &__card-header {
