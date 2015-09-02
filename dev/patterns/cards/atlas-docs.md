@@ -1,11 +1,11 @@
 # Cards
-Cards are links which always appear as list items within a view and provide an at-a glance preview of its linked page's content. Cards can be as minimal as a title, icon and some metadata, or as detailed as including a chart, description, metadata or even live metrics.
+Cards are links which always appear as list items within a view. They provide an at-a glance preview of the content they link to. Cards can be as minimal as a title, icon and description, or as detailed as including a title,  chart, several live metrics, and several pieces of metadata.
 
 ## Basic use
 
-Whenever you are creating a list of like, but complex content that needs more information for differentiation than just a title and icon, cards might be a useful pattern.
+Whenever you are creating a collection of items which each surface a large amount of information in a similar schema, cards may be a useful pattern.
 
-The HTML for a card is made of any composition of the following parts:
+The HTML for a card is made of any or all of the following parts in order:
 
 - card header
  - card icon
