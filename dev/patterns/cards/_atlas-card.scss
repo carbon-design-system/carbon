@@ -107,6 +107,7 @@ $color--card-metadata: color('blue', 30);
     transition: transform .2s;
     width: 100%;
 
+    &:focus,
     &:hover {
       transform: scale(1.02);
     }
