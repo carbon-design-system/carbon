@@ -1,11 +1,13 @@
-<a href="#modal-id" class="btn--primary" role="button">Reval Modal</a>
+<!-- Click handler for triggering modal appear -->
+<a href="#modal-id" class="btn--primary" role="button">Reval Modal with Heading</a>
 
-<aside class="modal" id="modal-id">
+ <!--  -->
+<aside class="modal" id="modal-id" role="dialog" aria-labelledby="modal-heading" aria-hidden="true">
   <a href="#" class="modal__close btn--close icon--close" role="button">
     <span aria-label="Close">&#215;</span>
   </a>
   <div class="modal__header">
-    <h1 class="header__title"><span class="icon--info"></span>Modal Heading</h1>
+    <h1 id="modal-heading" class="header__title"><span class="icon--info"></span>Modal Heading</h1>
   </div>
   <div class="modal__content">
     <p class="content__text">
