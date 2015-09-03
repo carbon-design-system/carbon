@@ -1,5 +1,5 @@
-$color--border--outer: color('gray', 20);
 $color--border--inner: color('gray', 10);
+$color--border--outer: color('gray', 20);
 $color--box-shadow:    color('gray', 50);
 $color--content:       color('gray', 40);
 $padding--section:     em(15px);
@@ -25,20 +25,20 @@ $breakpoint--medium: 800px;
     z-index: 1000;
 
     @media screen and (min-width: $breakpoint--small) {
-      width: em(450px);
       left: calc(50vw - 225px);
+      width: em(450px);
     }
 
     @media screen and (min-width: $breakpoint--small-1) {
-      width: em(500px);
       left: calc(50vw - 250px);
+      width: em(500px);
     }
   }
 
   &__close {
     position: absolute;
-    top: 0;
     right: 0;
+    top: 0;
   }
 
   &__header {
@@ -54,20 +54,20 @@ $breakpoint--medium: 800px;
   }
 
   &__actions {
+    border-top: 1px solid $color--border--inner;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid $color--border--inner;
     padding: $padding--section;
 
     .btn--primary {
-      order: 1;
       margin-bottom: 0;
       margin-left: 0;
+      order: 1;
     }
 
     .btn--secondary {
-      order: 2;
       margin-left: 0;
+      order: 2;
     }
 
     @media screen and (min-width: $breakpoint--small) {
@@ -75,9 +75,9 @@ $breakpoint--medium: 800px;
       justify-content: flex-end;
 
       .btn--primary {
-        order: 2;
         margin-bottom: 1em;
         margin-left: 1em;
+        order: 2;
       }
     }
   }
@@ -96,11 +96,11 @@ $breakpoint--medium: 800px;
     background-position: -32px -112px;
     display: inline-block;
     height: 24px;
-    width: 24px;
-    position: relative;
-    top: 4px;
     left: 10px;
     margin-right: 20px;
+    position: relative;
+    top: 4px;
+    width: 24px;
 
     @media screen and (min-width: $breakpoint--small) {
       left: 0;
