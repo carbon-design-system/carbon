@@ -48,10 +48,12 @@ $padding--section:     em(15px);
     .btn--primary {
       order: 1;
       margin-bottom: 0;
+      margin-left: 0;
     }
 
     .btn--secondary { 
       order: 2;
+      margin-left: 0;
     }
   }
 }
