@@ -7,18 +7,18 @@ $padding--section:     em(15px);
 .modal {
   display: block;
   position: absolute;
-  transform: translateX(-500vw);
-  transition: transform .2s;
+  top: 0;
+  transform: translateY(-100vh);
+  transition: all .2s;
 
   &:target {
     background-color: $white;
     border: 1px solid $color--border--outer;
     box-shadow: 0 5px 15px $color--box-shadow;
     position: fixed;
-    width: 600px;
+    transform: translateY(15vh);
+    width: 90%;
     z-index: 1000;
-    transform: translateX(30vw);
-    transition: transform .2s;
   }
 
   &__close {
@@ -40,9 +40,19 @@ $padding--section:     em(15px);
   }
 
   &__actions {
+    display: flex;
+    flex-direction: column;
     border-top: 1px solid $color--border--inner;
     padding: $padding--section;
-    text-align: right;
+
+    .btn--primary {
+      order: 1;
+      margin-bottom: 0;
+    }
+
+    .btn--secondary { 
+      order: 2;
+    }
   }
 }
 
