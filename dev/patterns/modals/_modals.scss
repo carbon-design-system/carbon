@@ -13,10 +13,6 @@ $breakpoint--medium: 800px;
     display: none;
   }
 
-  // position: absolute;
-  // top: 0;
-  // transform: translateY(-100vh);
-
   &:target {
     background-color: $white;
     border: 1px solid $color--border--outer;
