@@ -9,16 +9,21 @@ $breakpoint--small-1: 600px;
 $breakpoint--medium: 800px;
 
 .modal {
-  display: block;
-  position: absolute;
-  top: 0;
-  transform: translateY(-100vh);
+  &[aria-hidden="true"] {
+    display: none;
+  }
+
+  // position: absolute;
+  // top: 0;
+  // transform: translateY(-100vh);
 
   &:target {
     background-color: $white;
     border: 1px solid $color--border--outer;
     box-shadow: 0 5px 15px $color--box-shadow;
+    display: block;
     position: fixed;
+    top: 0;
     transform: translateY(15vh);
     width: 90%;
     z-index: 1000;
