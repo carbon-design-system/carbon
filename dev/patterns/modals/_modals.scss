@@ -4,12 +4,15 @@ $color--box-shadow:    color('gray', 50);
 $color--content:       color('gray', 40);
 $padding--section:     em(15px);
 
+$breakpoint--small: 500px;
+$breakpoint--small-1: 600px;
+$breakpoint--medium: 800px;
+
 .modal {
   display: block;
   position: absolute;
   top: 0;
   transform: translateY(-100vh);
-  transition: all .2s;
 
   &:target {
     background-color: $white;
@@ -19,6 +22,16 @@ $padding--section:     em(15px);
     transform: translateY(15vh);
     width: 90%;
     z-index: 1000;
+
+    @media screen and (min-width: $breakpoint--small) {
+      width: em(450px);
+      left: calc(50vw - 225px);
+    }
+
+    @media screen and (min-width: $breakpoint--small-1) {
+      width: em(500px);
+      left: calc(50vw - 250px);
+    }
   }
 
   &__close {
@@ -51,9 +64,20 @@ $padding--section:     em(15px);
       margin-left: 0;
     }
 
-    .btn--secondary { 
+    .btn--secondary {
       order: 2;
       margin-left: 0;
+    }
+
+    @media screen and (min-width: $breakpoint--small) {
+      flex-direction: row;
+      justify-content: flex-end;
+
+      .btn--primary {
+        order: 2;
+        margin-bottom: 1em;
+        margin-left: 1em;
+      }
     }
   }
 }
@@ -76,5 +100,9 @@ $padding--section:     em(15px);
     top: 4px;
     left: 10px;
     margin-right: 20px;
+
+    @media screen and (min-width: $breakpoint--small) {
+      left: 0;
+    }
   }
 }
