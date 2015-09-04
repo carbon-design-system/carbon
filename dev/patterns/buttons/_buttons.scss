@@ -23,12 +23,13 @@ $warning-btn--text-color: #000;
   @extend %helvetica-bold;
   cursor: pointer;
   display: inline-block;
-  font-size: 1rem;
+  font-size: em(14px);
   letter-spacing: em(1px);
-  min-height: 2.75em;
-  min-width: 9.375em;
+  min-width: 6em; // 96px
+  height: 2.75em;
+  vertical-align: middle;
   margin: 1em 0 1em .5em;
-  padding: .5em 1em;
+  padding: .65em 1em;
   text-decoration: none;
   text-transform: uppercase;
 
