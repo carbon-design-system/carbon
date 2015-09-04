@@ -24,14 +24,14 @@ $warning-btn--text-color: #000;
   cursor: pointer;
   display: inline-block;
   font-size: em(14px);
+  height: 2.75em; // 44px
   letter-spacing: em(1px);
-  min-width: 6em; // 96px
-  height: 2.75em;
-  vertical-align: middle;
   margin: 1em 0 1em .5em;
+  min-width: 6em; // 96px
   padding: .65em 1em;
   text-decoration: none;
   text-transform: uppercase;
+  vertical-align: middle;
 
   &:disabled {
     cursor: not-allowed;
