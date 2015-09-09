@@ -29,7 +29,7 @@ $color--card-metadata: color('blue', 30);
 }
 
 .object-card {
-  margin-bottom: 2rem;
+  margin-bottom: 2em;
   width: 100%;
 
   @media screen and (min-width: 400px) {
@@ -117,7 +117,7 @@ $color--card-metadata: color('blue', 30);
     @extend %flex--horizontal-center;
     border-bottom: 3px color('blue', 40) solid;
     justify-content: center;
-    padding-right: .5rem;
+    padding-right: .5em;
     width: 100%;
   }
 
@@ -132,7 +132,7 @@ $color--card-metadata: color('blue', 30);
     border-bottom: 1px $color--card-border solid;
     border-right: 1px $color--card-border solid;
     flex-wrap: wrap;
-    padding: .8rem 0;
+    padding: .8em 0;
     width: 50%;
 
     &:last-child {
@@ -143,7 +143,7 @@ $color--card-metadata: color('blue', 30);
   &__card-metadata {
     @extend %flex--horizontal-center;
     border-bottom: 1px $color--card-border solid;
-    padding: 0 1rem;
+    padding: 0 1em;
     width: 100%;
 
     &:last-child {
@@ -158,7 +158,7 @@ $color--card-metadata: color('blue', 30);
     @extend %helvetica-medium;
     color: $color--card-content;
     font-size: .95rem;
-    letter-spacing: .035rem;
+    letter-spacing: .035em;
     padding: 1.2em 0;
   }
 
@@ -182,14 +182,14 @@ $color--card-metadata: color('blue', 30);
     // why can't I get this font to get lighter than 200?
     font-size: 1.3rem;
     font-weight: 100;
-    margin-left: .1rem;
+    margin-left: .1em;
   }
 
   &__label {
     @extend %helvetica-light;
     color: $color--card-content;
     font-size: .8rem;
-    letter-spacing: .015rem;
+    letter-spacing: .015em;
     text-align: center;
     text-transform: uppercase;
     transform: scaleX(.9);
@@ -200,7 +200,7 @@ $color--card-metadata: color('blue', 30);
 .card-metadata {
 
   &__icon {
-    width: 1.125rem;
+    width: 1.125em;
   }
 
   &__value {
@@ -209,7 +209,7 @@ $color--card-metadata: color('blue', 30);
     flex: 1;
     font-size: .8rem;
     overflow: hidden;
-    padding: .8rem;
+    padding: .8em;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
