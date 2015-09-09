@@ -1,0 +1,215 @@
+$color--card-background: #2A3840;
+$color--card-foreground: #394952;
+$color--card-border: #253139;
+$color--card-content: white;
+$color--card-metadata: color('blue', 30);
+
+%flex--horizontal-start {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+}
+
+%flex--horizontal-center {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+%flex--horizontal-end {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+}
+
+%flex--vertical-center {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.object-card {
+  margin-bottom: 2em;
+  width: 100%;
+
+  @media screen and (min-width: em(400px)) {
+		width: 80%;
+	}
+
+	@media screen and (min-width: em(500px)) {
+		width: 70%;
+	}
+
+	@media screen and (min-width: em(600px)) {
+		margin: 0 10% 35px 0;
+		width: 45%;
+
+		&:nth-child(2n) {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: em(950px)) {
+		width: 32%;
+
+		&:nth-child(n) {
+			margin: 0 2% 35px 0;
+		}
+
+		&:nth-child(3n) {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: em(1240px)) {
+		width: 23.5%;
+
+		&:nth-child(n) {
+			margin: 0 2% 35px 0;
+		}
+
+		&:nth-child(4n) {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: em(1700px)) {
+		width: 18%;
+
+		&:nth-child(n) {
+			margin: 0 2.5% 35px 0;
+		}
+
+		&:nth-child(5n) {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: 2100px) {
+		width: 15%;
+
+		&:nth-child(n) {
+			margin: 0 2% 35px 0;
+		}
+
+		&:nth-child(6n) {
+			margin-right: 0;
+		}
+	}
+
+
+  a {
+    @extend %flex--horizontal-start;
+    background-color: $color--card-background;
+    border: 1px $color--card-border solid;
+    flex-wrap: wrap;
+    text-decoration: none;
+    transition: transform .2s;
+    width: 100%;
+
+    &:focus,
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  &__card-header {
+    @extend %flex--horizontal-center;
+    border-bottom: 3px color('blue', 40) solid;
+    justify-content: center;
+    padding-right: .5em;
+    width: 100%;
+  }
+
+  &__graph {
+    background-color: $color--card-foreground;
+    height: 66px;
+    width: 100%;
+  }
+
+  &__card-metric {
+    @extend %flex--horizontal-end;
+    border-bottom: 1px $color--card-border solid;
+    border-right: 1px $color--card-border solid;
+    flex-wrap: wrap;
+    padding: .8em 0;
+    width: 50%;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  &__card-metadata {
+    @extend %flex--horizontal-center;
+    border-bottom: 1px $color--card-border solid;
+    padding: 0 1em;
+    width: 100%;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.card-header {
+
+  &__title {
+    @extend %helvetica-medium;
+    color: $color--card-content;
+    font-size: .95rem;
+    letter-spacing: .035em;
+    padding: 1.2em 0;
+  }
+
+  &__icon {
+    margin-right: 1em;
+  }
+}
+
+.card-metric {
+
+  &__figure {
+    @extend %helvetica-bold;
+    color: $color--card-content;
+    font-size: 2.661rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__unit {
+    @extend %helvetica-light;
+    font-size: 1.3rem;
+    font-weight: 100;
+    margin-left: .1em;
+  }
+
+  &__label {
+    @extend %helvetica-light;
+    color: $color--card-content;
+    font-size: .8rem;
+    letter-spacing: .015em;
+    text-align: center;
+    text-transform: uppercase;
+    transform: scaleX(.9);
+    width: 100%;
+  }
+}
+
+.card-metadata {
+
+  &__icon {
+    width: 1.125em;
+  }
+
+  &__value {
+    @extend %helvetica-light;
+    color: $color--card-metadata;
+    flex: 1;
+    font-size: .8rem;
+    overflow: hidden;
+    padding: .8em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
