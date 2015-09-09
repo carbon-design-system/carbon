@@ -32,15 +32,15 @@ $color--card-metadata: color('blue', 30);
   margin-bottom: 2em;
   width: 100%;
 
-  @media screen and (min-width: 400px) {
+  @media screen and (min-width: em(400px)) {
 		width: 80%;
 	}
 
-	@media screen and (min-width: 500px) {
+	@media screen and (min-width: em(500px)) {
 		width: 70%;
 	}
 
-	@media screen and (min-width: 600px) {
+	@media screen and (min-width: em(600px)) {
 		margin: 0 10% 35px 0;
 		width: 45%;
 
@@ -49,7 +49,7 @@ $color--card-metadata: color('blue', 30);
 		}
 	}
 
-	@media screen and (min-width: 950px) {
+	@media screen and (min-width: em(950px)) {
 		width: 32%;
 
 		&:nth-child(n) {
@@ -61,7 +61,7 @@ $color--card-metadata: color('blue', 30);
 		}
 	}
 
-	@media screen and (min-width: 1240px) {
+	@media screen and (min-width: em(1240px)) {
 		width: 23.5%;
 
 		&:nth-child(n) {
@@ -73,7 +73,7 @@ $color--card-metadata: color('blue', 30);
 		}
 	}
 
-	@media screen and (min-width: 1700px) {
+	@media screen and (min-width: em(1700px)) {
 		width: 18%;
 
 		&:nth-child(n) {
@@ -85,7 +85,7 @@ $color--card-metadata: color('blue', 30);
 		}
 	}
 
-	@media screen and (min-width: 2100px) { //phat displays, y'all
+	@media screen and (min-width: 2100px) {
 		width: 15%;
 
 		&:nth-child(n) {
@@ -179,7 +179,6 @@ $color--card-metadata: color('blue', 30);
 
   &__unit {
     @extend %helvetica-light;
-    // why can't I get this font to get lighter than 200?
     font-size: 1.3rem;
     font-weight: 100;
     margin-left: .1em;
