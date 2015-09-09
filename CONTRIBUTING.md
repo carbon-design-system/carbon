@@ -39,7 +39,7 @@ cd pattern-library
 
 ### 3. Install the dependencies, Check for updates.
 
-You must have **node, npm and ruby** installed on your computer to contribute.
+You must have **node and npm** installed on your computer to contribute.
 
 Install the dependencies.
 
@@ -53,7 +53,7 @@ Check for any version updates for package.json dependencies and devDependencies.
 npm run update:check
 ```
 
-Read the prompt -- if necessary, update package.json and install latest versions of dependencies by running the following commands:
+Read the prompt -- if necessary, run the following commands to update the package.json and install latest versions of dependencies:
 
 ```
 npm run update:all
