@@ -1,3 +1,8 @@
+'use-strict';
+
+//////////////////////////////
+// Requires
+//////////////////////////////
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var exec = require('child_process').exec;
@@ -10,6 +15,11 @@ var sass = require('gulp-sass');
 // var scsslint = require('gulp-scss-lint');
 var stylish = require('jshint-stylish');
 
+//////////////////////////////
+// Variables
+//////////////////////////////
+
+// Autoprefixer:
 // Target these browsers for adding vendor prefixes to CSS
 var BROWSERS = [
   "> 5%",
@@ -24,6 +34,24 @@ var BROWSERS = [
   "Blackberry > 0",
   "Android > 0"
 ];
+
+var dirs = {
+  'sass': 'dev/patterns/**/*.scss',
+  'js': {
+    'lint': [
+      'Gulpfile.js',
+      '*.json',
+      'dev/dev.js',
+      'dev/patterns/**/package.json'
+    ]
+  },
+  'html': {
+    'reload': [
+      'dev/index.html',
+      'dev/patterns/**/html/*.html'
+    ]
+  }
+};
 
 // Initialize browser-sync and proxy web server
 gulp.task('browser-sync', function() {
