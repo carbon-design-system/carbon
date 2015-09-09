@@ -37,7 +37,13 @@ git clone git@github.ibm.com:Bluemix/pattern-library.git
 cd pattern-library
 ```
 
-### 3. Install the dependencies, Check for updates.
+### 3. Install dependencies, plugins. Check for updates.
+
+We use [EditorConfig](http://editorconfig.org/) to keep general coding styles consistent.
+Add the editorconfig plugin for your preferred text-editor, [full list here](http://editorconfig.org/#download).
+
+- **Sublime Text**: https://github.com/sindresorhus/editorconfig-sublime#readme
+- **Atom**: https://github.com/sindresorhus/atom-editorconfig#readme
 
 You must have **node and npm** installed on your computer to contribute.
 
