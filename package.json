@@ -24,7 +24,7 @@
     "npm-check-updates": "^2.2.0"
   },
   "scripts": {
-    "csscomb": "csscomb -c ./.csscomb.json dev/patterns/**/*.scss",
+    "css:sort": "csscomb -c ./csscomb.json dev/patterns/**/*.scss",
     "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
     "update:check": "ncu",
     "update:all": "ncu --upgradeAll"
