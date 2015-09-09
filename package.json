@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.8.2",
+    "csscomb": "^3.1.8",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-jshint": "^1.11.2",
@@ -23,6 +24,7 @@
     "npm-check-updates": "^2.2.0"
   },
   "scripts": {
+    "csscomb": "csscomb dev/patterns/**/*.scss",
     "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
     "update:check": "ncu",
     "update:all": "ncu --upgradeAll"
