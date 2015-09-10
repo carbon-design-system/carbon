@@ -6,7 +6,6 @@
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var jshint = require('gulp-jshint');
 var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
@@ -16,8 +15,6 @@ var stylish = require('jshint-stylish');
 //////////////////////////////
 // Variables
 //////////////////////////////
-
-var env = 'dev';
 
 var dirs = {
   'images': 'dev/images/*.{png,jpg,jpeg}',
