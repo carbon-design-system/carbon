@@ -46,7 +46,7 @@ gulp.task('dist', function() {
     .pipe(rename('_pattern-library.scss'))
     .pipe(gulp.dest('dist'));
 
-  gulp.src('dev/images/*.png')
+  gulp.src('dev/images/*.{png,jpg,jpeg}')
     .pipe(plumber())
     .pipe(gulp.dest('dist/images'));
 });
