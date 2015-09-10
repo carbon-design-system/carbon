@@ -5,13 +5,12 @@
 //////////////////////////////
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
-// var eslint = require('gulp-eslint');
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
 var gulp = require('gulp');
+var jshint = require('gulp-jshint');
+var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
-var plumber = require('gulp-plumber');
+var stylish = require('jshint-stylish');
 
 //////////////////////////////
 // Variables
