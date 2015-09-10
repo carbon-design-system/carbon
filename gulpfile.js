@@ -37,6 +37,7 @@ var BROWSERS = [
 
 var dirs = {
   'sass': 'dev/patterns/**/*.scss',
+  'markdown': 'dev/patterns/**/*.md',
   'js': {
     'lint': [
       'Gulpfile.js',
