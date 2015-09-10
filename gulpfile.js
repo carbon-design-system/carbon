@@ -16,20 +16,6 @@ var stylish = require('jshint-stylish');
 // Variables
 //////////////////////////////
 
-var BROWSERS = [
-  '> 5%',
-  'ie > 0',
-  'Firefox > 0',
-  'Chrome > 0',
-  'Opera > 0',
-  'OperaMobile > 0',
-  'OperaMini > 0',
-  'Safari > 0',
-  'iOS > 0',
-  'Blackberry > 0',
-  'Android > 0'
-];
-
 var dirs = {
   'images': 'dev/images/*.{png,jpg,jpeg}',
   'markdown': 'dev/patterns/**/*.md',
@@ -107,7 +93,7 @@ gulp.task('sass', function() {
   gulp.src(dirs.sass.main)
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
-      browsers: BROWSERS
+      browsers: ['> 1%', 'last 2 versions']
     }))
     .pipe(gulp.dest('dev'))
     .pipe(browserSync.stream());
