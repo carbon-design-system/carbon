@@ -1,0 +1,14 @@
+options:
+  merge-default-rules: true
+files:
+  include: 'dev/patterns/**/*.scss'
+rules:
+  # No ID selectors allowed
+  no-ids: 2
+  # Require extends to use placeholders
+  placeholder-in-extend: 2
+  # Require space after commas
+  space-after-comma: 2
+  # Space surrounding colons
+  space-before-colon: 2
+  space-after-colon: 2
