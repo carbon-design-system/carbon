@@ -17,6 +17,8 @@ var stylish = require('jshint-stylish');
 // Variables
 //////////////////////////////
 
+var env = 'dev';
+
 var dirs = {
   'images': 'dev/images/*.{png,jpg,jpeg}',
   'markdown': 'dev/patterns/**/*.md',
@@ -98,6 +100,13 @@ gulp.task('sass', function() {
     }))
     .pipe(gulp.dest('dev'))
     .pipe(browserSync.stream());
+
+  gulp.src([dirs.sass.patterns, dirs.markdown])
+    .pipe(gulp.dest('dist/patterns'));
+
+  gulp.src(dirs.sass.main)
+    .pipe(rename('_pattern-library.scss'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('sass:watch', function() {
@@ -105,17 +114,10 @@ gulp.task('sass:watch', function() {
 });
 
 //////////////////////////////
-// Build Tasks
+// Image Tasks
 //////////////////////////////
 
-gulp.task('build:dist', function() {
-  gulp.src([dirs.sass.patterns, dirs.markdown])
-    .pipe(gulp.dest('dist/patterns'));
-
-  gulp.src(dirs.sass.main)
-    .pipe(rename('_pattern-library.scss'))
-    .pipe(gulp.dest('dist'));
-
+gulp.task('image', function() {
   gulp.src(dirs.images)
     .pipe(gulp.dest('dist/images'));
 });
@@ -124,7 +126,7 @@ gulp.task('build:dist', function() {
 // Running Tasks
 //////////////////////////////
 
-gulp.task('build', ['sass', 'build:dist']);
+gulp.task('build', ['sass', 'image']);
 
 gulp.task('watch', ['sass:watch', 'jshint:watch', 'html:reload', 'js:reload']);
 
