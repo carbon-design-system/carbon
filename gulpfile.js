@@ -4,40 +4,46 @@
 // Requires
 //////////////////////////////
 var autoprefixer = require('gulp-autoprefixer');
-var browserSync = require('browser-sync').create();
-var exec = require('child_process').exec;
+var browserSync = require('browser-sync');
+// var exec = require('child_process').exec;
 var gulp = require('gulp');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var plumber = require('gulp-plumber');
-var reload = browserSync.reload;
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
-// var scsslint = require('gulp-scss-lint');
+var sasslint = require('gulp-sass-lint');
 var stylish = require('jshint-stylish');
 
 //////////////////////////////
 // Variables
 //////////////////////////////
 
-// Autoprefixer:
-// Target these browsers for adding vendor prefixes to CSS
 var BROWSERS = [
-  "> 5%",
-  "ie > 0",
-  "Firefox > 0",
-  "Chrome > 0",
-  "Opera > 0",
-  "OperaMobile > 0",
-  "OperaMini > 0",
-  "Safari > 0",
-  "iOS > 0",
-  "Blackberry > 0",
-  "Android > 0"
+  '> 5%',
+  'ie > 0',
+  'Firefox > 0',
+  'Chrome > 0',
+  'Opera > 0',
+  'OperaMobile > 0',
+  'OperaMini > 0',
+  'Safari > 0',
+  'iOS > 0',
+  'Blackberry > 0',
+  'Android > 0'
 ];
 
 var dirs = {
-  'sass': 'dev/patterns/**/*.scss',
+  'images': 'dev/images/*.png',
   'markdown': 'dev/patterns/**/*.md',
+  'sass': {
+    'main': 'dev/dev.scss',
+    'patterns': 'dev/patterns/**/*.scss',
+    'lint':[
+      'dev/patterns/**/*.scss',
+      'dev/dev.scss',
+      '!dev/*.css'
+    ]
+  },
   'js': {
     'lint': [
       'Gulpfile.js',
@@ -54,7 +60,14 @@ var dirs = {
   }
 };
 
-// Initialize browser-sync and proxy web server
+//////////////////////////////
+// BrowserSync
+//////////////////////////////
+browserSync = browserSync.create();
+var reload = browserSync.reload;
+
+gulp.task('reload', reload);
+
 gulp.task('browser-sync', function() {
   browserSync.init({
     logPrefix: "Pattern Library",
@@ -64,43 +77,28 @@ gulp.task('browser-sync', function() {
   });
 });
 
-// Get the patterns ready for distribution
-gulp.task('dist', function() {
-  gulp.src(['dev/patterns/**/*.scss', 'dev/patterns/**/*.md'])
-    .pipe(plumber())
-    .pipe(gulp.dest('dist/patterns'));
+//////////////////////////////
+// JavaScript Tasks
+//////////////////////////////
 
-  gulp.src('dev/*.scss')
-    .pipe(plumber())
-    .pipe(rename('_pattern-library.scss'))
-    .pipe(gulp.dest('dist'));
-
-  gulp.src('dev/images/*.png')
-    .pipe(plumber())
-    .pipe(gulp.dest('dist/images'));
+gulp.task('eslint', function() {
+  gulp.src(dirs.js.lint)
+    .pipe(eslint())
+    .pipe(eslint.format());
 });
 
-// Lint JavaScript and JSON files.
-gulp.task('jslint', function() {
-  return gulp.src(['*.json', '*.js', 'dist/patterns/**/*.json'])
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish));
+gulp.task('eslint:watch', function() {
+  gulp.watch(dirs.js.lint, ['eslint']);
 });
 
-// Full Browser Reload (HTML, JS, JSON files)
-gulp.task('reload', reload);
-
-// Lint Sass files (.scss)
-// gulp.task('scss-lint', function() {
-//   gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss'])
-//     .pipe(scsslint());
-// });
+//////////////////////////////
+// Sass Tasks
+//////////////////////////////
 
 // Compile and prefix Sass code into CSS,
 // then reload the browser (stream when possible).
 gulp.task('sass', function() {
-  gulp.src(['dev/*.scss', 'dev/patterns/**/*.scss'])
-    .pipe(plumber())
+  gulp.src(dirs.sass.main)
     .pipe(sass())
     .pipe(autoprefixer({
       browsers: BROWSERS
@@ -109,15 +107,38 @@ gulp.task('sass', function() {
     .pipe(browserSync.stream());
 });
 
+gulp.task('sass:lint', function() {
+  gulp.src(dirs.sass.lint)
+    .pipe(sasslint())
+    .pipe(sasslint.format());
+});
+
+gulp.task('sass:watch', function() {
+  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:lint']);
+});
+
+// Get the patterns ready for distribution
+gulp.task('build:dist', function() {
+  gulp.src([dirs.sass.patterns, dirs.markdown])
+    .pipe(gulp.dest('dist/patterns'));
+
+  gulp.src(dirs.sass.main)
+    .pipe(rename('_pattern-library.scss'))
+    .pipe(gulp.dest('dist'));
+
+  gulp.src(dirs.images)
+    .pipe(gulp.dest('dist/images'));
+});
+
 // Watch for changes on these files
 // Run these specific tasks when files change.
 gulp.task('watch', function() {
   gulp.watch(['dev/patterns/**/html/*.html', 'dev/patterns/*.html']).on('change', reload);
-  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json', 'dev/patterns/*.js'], ['jslint']).on('change', reload);
-  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'dist']);
+  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json', 'dev/patterns/*.js'], ['eslint']).on('change', reload);
+  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'build:dist']);
   // If you have scss-lint:
   // gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist']);
 });
 
 // Default task -- run these tasks.
-gulp.task('default', ['browser-sync', 'sass', 'dist', 'watch']);
+gulp.task('default', ['browser-sync', 'sass', 'build:dist', 'watch']);
