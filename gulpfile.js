@@ -31,7 +31,7 @@ var BROWSERS = [
 ];
 
 var dirs = {
-  'images': 'dev/images/*.png',
+  'images': 'dev/images/*.{png,jpg,jpeg}',
   'markdown': 'dev/patterns/**/*.md',
   'sass': {
     'main': 'dev/dev.scss',
@@ -78,7 +78,6 @@ gulp.task('browser-sync', function() {
 gulp.task('html:reload', function() {
   gulp.watch(dirs.html.reload).on('change', browserSync.reload);
 });
-
 
 //////////////////////////////
 // JavaScript Tasks
