@@ -105,7 +105,7 @@ gulp.task('js:reload', function() {
 
 gulp.task('sass', function() {
   gulp.src(dirs.sass.main)
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: BROWSERS
     }))
