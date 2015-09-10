@@ -4,15 +4,14 @@
 // Requires
 //////////////////////////////
 var autoprefixer = require('gulp-autoprefixer');
-var browserSync = require('browser-sync');
-// var exec = require('child_process').exec;
+var browserSync = require('browser-sync').create();
+// var eslint = require('gulp-eslint');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 var gulp = require('gulp');
-var eslint = require('gulp-eslint');
-var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
-var sasslint = require('gulp-sass-lint');
-var stylish = require('jshint-stylish');
+var plumber = require('gulp-plumber');
 
 //////////////////////////////
 // Variables
@@ -38,7 +37,7 @@ var dirs = {
   'sass': {
     'main': 'dev/dev.scss',
     'patterns': 'dev/patterns/**/*.scss',
-    'lint':[
+    'lint': [
       'dev/patterns/**/*.scss',
       'dev/dev.scss',
       '!dev/*.css'
@@ -63,10 +62,6 @@ var dirs = {
 //////////////////////////////
 // BrowserSync
 //////////////////////////////
-browserSync = browserSync.create();
-var reload = browserSync.reload;
-
-gulp.task('reload', reload);
 
 gulp.task('browser-sync', function() {
   browserSync.init({
@@ -78,25 +73,38 @@ gulp.task('browser-sync', function() {
 });
 
 //////////////////////////////
+// HTML Tasks
+//////////////////////////////
+
+gulp.task('html:reload', function() {
+  gulp.watch(dirs.html.reload).on('change', browserSync.reload);
+});
+
+
+//////////////////////////////
 // JavaScript Tasks
 //////////////////////////////
 
-gulp.task('eslint', function() {
+gulp.task('jshint', function() {
   gulp.src(dirs.js.lint)
-    .pipe(eslint())
-    .pipe(eslint.format());
+    .pipe(plumber())
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('eslint:watch', function() {
-  gulp.watch(dirs.js.lint, ['eslint']);
+gulp.task('jshint:watch', function() {
+  gulp.watch(dirs.js.lint, ['jshint']);
 });
+
+gulp.task('js:reload', function() {
+  gulp.watch(dirs.js.lint).on('change', browserSync.reload);
+});
+
 
 //////////////////////////////
 // Sass Tasks
 //////////////////////////////
 
-// Compile and prefix Sass code into CSS,
-// then reload the browser (stream when possible).
 gulp.task('sass', function() {
   gulp.src(dirs.sass.main)
     .pipe(sass())
@@ -107,17 +115,14 @@ gulp.task('sass', function() {
     .pipe(browserSync.stream());
 });
 
-gulp.task('sass:lint', function() {
-  gulp.src(dirs.sass.lint)
-    .pipe(sasslint())
-    .pipe(sasslint.format());
-});
-
 gulp.task('sass:watch', function() {
-  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:lint']);
+  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass']);
 });
 
-// Get the patterns ready for distribution
+//////////////////////////////
+// Build Tasks
+//////////////////////////////
+
 gulp.task('build:dist', function() {
   gulp.src([dirs.sass.patterns, dirs.markdown])
     .pipe(gulp.dest('dist/patterns'));
@@ -130,15 +135,12 @@ gulp.task('build:dist', function() {
     .pipe(gulp.dest('dist/images'));
 });
 
-// Watch for changes on these files
-// Run these specific tasks when files change.
-gulp.task('watch', function() {
-  gulp.watch(['dev/patterns/**/html/*.html', 'dev/patterns/*.html']).on('change', reload);
-  gulp.watch(['*.json', '*.js', 'dist/patterns/**/*.json', 'dev/patterns/*.js'], ['eslint']).on('change', reload);
-  gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'build:dist']);
-  // If you have scss-lint:
-  // gulp.watch(['dev/*.scss', 'dev/patterns/**/*.scss'], ['sass', 'scss-lint', 'dist']);
-});
+//////////////////////////////
+// Running Tasks
+//////////////////////////////
 
-// Default task -- run these tasks.
-gulp.task('default', ['browser-sync', 'sass', 'build:dist', 'watch']);
+gulp.task('build', ['sass', 'build:dist']);
+
+gulp.task('watch', ['sass:watch', 'jshint:watch', 'html:reload', 'js:reload']);
+
+gulp.task('default', ['browser-sync', 'build', 'watch']);
