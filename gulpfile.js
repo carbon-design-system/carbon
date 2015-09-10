@@ -91,6 +91,8 @@ gulp.task('js:reload', function() {
 
 gulp.task('sass', function() {
   gulp.src(dirs.sass.main)
+    .pipe(rename('_pattern-library.scss'))
+    .pipe(gulp.dest('dist'))
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions']
@@ -100,10 +102,6 @@ gulp.task('sass', function() {
 
   gulp.src(dirs.sass.patterns)
     .pipe(gulp.dest('dist/patterns'));
-
-  gulp.src(dirs.sass.main)
-    .pipe(rename('_pattern-library.scss'))
-    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('sass:watch', function() {
