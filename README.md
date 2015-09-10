@@ -6,11 +6,7 @@ The Bluemix Pattern Library gives developers (FEDs & Engineers) a collection of 
 
 The aim is for every developer to use consistent HTML, CSS, and JavaScript in as many places as possible in their prototype and production work.
 
-## Warning!
-
-This package is in *very* **early stages of development**.
-
-IBMers, please visit our GitHub Enterprise repo (search bluemix pattern-library) to learn how you can contribute.
+See [patchnotes](https://github.ibm.com/Bluemix/pattern-library/blob/master/PATCHNOTES.md) for changes to the Pattern Library.
 
 ## Install
 
