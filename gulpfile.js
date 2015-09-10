@@ -98,7 +98,7 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('dev'))
     .pipe(browserSync.stream());
 
-  gulp.src([dirs.sass.patterns, dirs.markdown])
+  gulp.src(dirs.sass.patterns)
     .pipe(gulp.dest('dist/patterns'));
 
   gulp.src(dirs.sass.main)
@@ -120,10 +120,19 @@ gulp.task('image', function() {
 });
 
 //////////////////////////////
+// Markdown Tasks
+//////////////////////////////
+
+gulp.task('markdown', function() {
+  gulp.src(dirs.markdown)
+    .pipe(gulp.dest('dist/patterns'));
+});
+
+//////////////////////////////
 // Running Tasks
 //////////////////////////////
 
-gulp.task('build', ['sass', 'image']);
+gulp.task('build', ['sass', 'image', 'markdown']);
 
 gulp.task('watch', ['sass:watch', 'jshint:watch', 'html:reload', 'js:reload']);
 
