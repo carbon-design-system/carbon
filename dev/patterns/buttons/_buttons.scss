@@ -23,14 +23,16 @@ $warning-btn--text-color: #000;
   @extend %helvetica-bold;
   cursor: pointer;
   display: inline-block;
-  font-size: 1rem;
+  font-size: em(14px);
+  height: 2.75em; // 44px
   letter-spacing: em(1px);
-  min-height: 2.75em;
-  min-width: 9.375em;
   margin: 1em 0 1em .5em;
-  padding: .5em 1em;
+  min-width: 6em; // 96px
+  padding: .65em 1em;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  vertical-align: middle;
 
   &:disabled {
     cursor: not-allowed;

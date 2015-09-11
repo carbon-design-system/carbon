@@ -12,16 +12,56 @@
     margin: 0;
     padding: 0;
   }
+
+  body {
+    padding-top: 5rem;
+  }
+
+  #cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #34434c;
+    justify-content: center;
+    list-style: none;
+    margin: 20px 0;
+    padding: 20px;
+  }
+
+  #cards .card {
+    margin: 1em;
+  }
+
+  @media screen and (min-width: 600px) {
+    #cards {
+      align-items: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  }
 </style>
 <body class="bx-light">
   <!-- Open and view this HTML file when developing patterns,
   you'll be able to see changes to your patterns here. -->
 
   <!-- Nav needs to be on top -->
-  <div id="nav"></div>
-  
+  <div id="nav" style="position: absolute; top: 0; display: none;"></div>
+  <div id="atlas-nav" style="position: absolute; top: 0;"></div>
+
+  <div style="margin-left: 3rem;">
+    <label id="bluemix-theme" style="margin-right: 1em;">
+      <input type="radio" name="theme" value="bluemix">
+      <span>Bluemix Nav</span>
+    </label>
+    <label id="atlas-theme">
+      <input type="radio" name="theme" value="atlas" checked>
+      <span>Atlas Nav</span>
+    </label>
+  </div>
+
   <!-- dark-ui for cards -->
-  <div id="cards" style="background-color: #3b4b54; padding: 20px; margin: 20px 0;"></div>
+  <ul id="cards"></ul>
 
   <div id="modal" style="margin: 1em;"></div>
   <!-- PATTERNS -->
@@ -31,4 +71,3 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="dev.js"></script>
 </body>
-</html>
