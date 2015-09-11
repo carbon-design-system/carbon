@@ -20,7 +20,7 @@ var dirs = {
   'images': 'dev/images/*.{png,jpg,jpeg}',
   'markdown': 'dev/patterns/**/*.md',
   'sass': {
-    'main': 'dev/dev.scss',
+    'main': 'dev/*.scss',
     'patterns': 'dev/patterns/**/*.scss',
     'lint': [
       'dev/patterns/**/*.scss',
