@@ -1,6 +1,6 @@
-[class ^= 'bx-tooltip'] {
+[class ^= 'bx--tooltip'] {
 	position: relative;
-	display:inline-block;
+	display: inline-block;
 	&:before, &:after {
 		opacity: 0;
 		visibility: hidden;
@@ -16,6 +16,8 @@
 		border: 1px #fff solid;
 		pointer-events: none;
 		max-width: 200px;
+		transform: translateX(-50%);
+		margin-left: 50%;
 	}
 	&:after {
 		content: '';
@@ -27,14 +29,15 @@
 		border-right: 1px solid #fff;
 		border-bottom: 1px solid #fff;
 	}
-	&:hover {
+	&:hover, &:focus {
 		&:before, &:after {
 			visibility: visible;
 			opacity: 1;
+			transition: all .1s ease-in 0;
 		}
 	}
 }
-.bx-tooltip-top {
+.bx--tooltip__top {
 	&:before {
 		bottom: 30px;
 	}
@@ -43,7 +46,7 @@
 		transform:rotate(45deg);
 	}
 }
-.bx-tooltip-bottom {
+.bx--tooltip__bottom {
 	&:before {
 		top: 30px;
 	}
