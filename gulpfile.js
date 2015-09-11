@@ -70,7 +70,7 @@ gulp.task('html:reload', function() {
 //////////////////////////////
 
 gulp.task('jshint', function() {
-  gulp.src(dirs.js.lint)
+  return gulp.src(dirs.js.lint)
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
@@ -90,7 +90,7 @@ gulp.task('js:reload', function() {
 //////////////////////////////
 
 gulp.task('sass', function() {
-  gulp.src(dirs.sass.main)
+  return gulp.src(dirs.sass.main)
     .pipe(rename('_pattern-library.scss'))
     .pipe(gulp.dest('dist'))
     .pipe(sass().on('error', sass.logError))
@@ -99,13 +99,15 @@ gulp.task('sass', function() {
     }))
     .pipe(gulp.dest('dev'))
     .pipe(browserSync.stream());
-
-  gulp.src(dirs.sass.patterns)
-    .pipe(gulp.dest('dist/patterns'));
 });
 
+gulp.task('sass:dist', function() {
+  return gulp.src(dirs.sass.patterns)
+    .pipe(gulp.dest('dist/patterns'));
+})
+
 gulp.task('sass:watch', function() {
-  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass']);
+  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:dist']);
 });
 
 //////////////////////////////
@@ -113,7 +115,7 @@ gulp.task('sass:watch', function() {
 //////////////////////////////
 
 gulp.task('image', function() {
-  gulp.src(dirs.images)
+  return gulp.src(dirs.images)
     .pipe(gulp.dest('dist/images'));
 });
 
@@ -122,7 +124,7 @@ gulp.task('image', function() {
 //////////////////////////////
 
 gulp.task('markdown', function() {
-  gulp.src(dirs.markdown)
+  return gulp.src(dirs.markdown)
     .pipe(gulp.dest('dist/patterns'));
 });
 
@@ -130,7 +132,7 @@ gulp.task('markdown', function() {
 // Running Tasks
 //////////////////////////////
 
-gulp.task('build', ['sass', 'image', 'markdown']);
+gulp.task('build', ['sass', 'sass:dist', 'image', 'markdown']);
 
 gulp.task('watch', ['sass:watch', 'jshint:watch', 'html:reload', 'js:reload']);
 
