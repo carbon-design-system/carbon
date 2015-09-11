@@ -34,6 +34,9 @@ $(document).ready(function() {
       'patterns/cards/html/atlas-card.html',
       'patterns/cards/html/card.html'
     ],
+    'dropdown': [
+      'patterns/dropdown/html/dropdown.html'
+    ],
     'forms': [
       'patterns/forms/html/form.html'
     ],

@@ -26,8 +26,9 @@
   "scripts": {
     "css:sort": "csscomb -c ./csscomb.json dev/patterns/**/*.scss",
     "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
-    "update:check": "ncu",
-    "update:all": "ncu --upgradeAll"
+    "serve": "gulp",
+    "update:all": "ncu --upgradeAll",
+    "update:check": "ncu"
   },
   "repository": {
     "type": "git"
