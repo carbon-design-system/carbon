@@ -119,6 +119,10 @@ gulp.task('image', function() {
     .pipe(gulp.dest('dist/images'));
 });
 
+gulp.task('image:watch', function() {
+  gulp.watch(dirs.images, ['image']);
+});
+
 //////////////////////////////
 // Markdown Tasks
 //////////////////////////////
@@ -132,8 +136,8 @@ gulp.task('markdown', function() {
 // Running Tasks
 //////////////////////////////
 
-gulp.task('build', ['sass', 'sass:dist', 'image', 'markdown']);
+gulp.task('build', ['sass', 'image', 'markdown']);
 
-gulp.task('watch', ['sass:watch', 'jshint:watch', 'html:reload', 'js:reload']);
+gulp.task('watch', ['sass:watch', 'jshint:watch', 'image:watch', 'html:reload', 'js:reload']);
 
 gulp.task('default', ['browser-sync', 'build', 'watch']);
