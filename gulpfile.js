@@ -18,7 +18,7 @@ var stylish = require('jshint-stylish');
 
 var dirs = {
   'images': 'dev/images/*.{png,jpg,jpeg}',
-  'markdown': 'dev/patterns/**/*.md',
+  'markdown': 'dev/docs/*.md',
   'sass': {
     'main': 'dev/*.scss',
     'patterns': 'dev/patterns/**/*.scss',
@@ -133,7 +133,7 @@ gulp.task('image:watch', function() {
 
 gulp.task('markdown', function() {
   return gulp.src(dirs.markdown)
-    .pipe(gulp.dest('dist/patterns'));
+    .pipe(gulp.dest('dist/docs'));
 });
 
 //////////////////////////////
