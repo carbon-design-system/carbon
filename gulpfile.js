@@ -70,7 +70,7 @@ gulp.task('html:reload', function() {
 //////////////////////////////
 
 gulp.task('jshint', function() {
-  gulp.src(dirs.js.lint)
+  return gulp.src(dirs.js.lint)
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
@@ -90,22 +90,28 @@ gulp.task('js:reload', function() {
 //////////////////////////////
 
 gulp.task('sass', function() {
-  gulp.src(dirs.sass.main)
-    .pipe(rename('_pattern-library.scss'))
-    .pipe(gulp.dest('dist'))
+  return gulp.src(dirs.sass.main)
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions']
     }))
     .pipe(gulp.dest('dev'))
     .pipe(browserSync.stream());
+});
 
-  gulp.src(dirs.sass.patterns)
+gulp.task('sass:dist', function() {
+  return gulp.src(dirs.sass.patterns)
     .pipe(gulp.dest('dist/patterns'));
 });
 
+gulp.task('sass:rename', function() {
+  return gulp.src(dirs.sass.main)
+    .pipe(rename('_pattern-library.scss'))
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('sass:watch', function() {
-  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass']);
+  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:dist', 'sass:rename']);
 });
 
 //////////////////////////////
@@ -113,8 +119,12 @@ gulp.task('sass:watch', function() {
 //////////////////////////////
 
 gulp.task('image', function() {
-  gulp.src(dirs.images)
+  return gulp.src(dirs.images)
     .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('image:watch', function() {
+  gulp.watch(dirs.images, ['image']);
 });
 
 //////////////////////////////
@@ -122,7 +132,7 @@ gulp.task('image', function() {
 //////////////////////////////
 
 gulp.task('markdown', function() {
-  gulp.src(dirs.markdown)
+  return gulp.src(dirs.markdown)
     .pipe(gulp.dest('dist/patterns'));
 });
 
@@ -132,6 +142,6 @@ gulp.task('markdown', function() {
 
 gulp.task('build', ['sass', 'image', 'markdown']);
 
-gulp.task('watch', ['sass:watch', 'jshint:watch', 'html:reload', 'js:reload']);
+gulp.task('watch', ['sass:watch', 'jshint:watch', 'image:watch', 'html:reload', 'js:reload']);
 
 gulp.task('default', ['browser-sync', 'build', 'watch']);
