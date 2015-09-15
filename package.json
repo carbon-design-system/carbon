@@ -1,6 +1,6 @@
 {
   "name": "bluemix-pattern-library",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "The Bluemix Pattern Library is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
   "files": [
     ".npmignore",
