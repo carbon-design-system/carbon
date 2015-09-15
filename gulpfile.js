@@ -91,8 +91,6 @@ gulp.task('js:reload', function() {
 
 gulp.task('sass', function() {
   return gulp.src(dirs.sass.main)
-    .pipe(rename('_pattern-library.scss'))
-    .pipe(gulp.dest('dist'))
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions']
@@ -104,10 +102,16 @@ gulp.task('sass', function() {
 gulp.task('sass:dist', function() {
   return gulp.src(dirs.sass.patterns)
     .pipe(gulp.dest('dist/patterns'));
-})
+});
+
+gulp.task('sass:rename', function() {
+  return gulp.src(dirs.sass.main)
+    .pipe(rename('_pattern-library.scss'))
+    .pipe(gulp.dest('dist'));
+});
 
 gulp.task('sass:watch', function() {
-  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:dist']);
+  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:dist', 'sass:rename']);
 });
 
 //////////////////////////////
