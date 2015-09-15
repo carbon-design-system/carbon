@@ -6,7 +6,26 @@ The Bluemix Pattern Library gives developers (FEDs & Engineers) a collection of 
 
 The aim is for every developer to use consistent HTML, CSS, and JavaScript in as many places as possible in their prototype and production work.
 
-See [patchnotes](https://github.ibm.com/Bluemix/pattern-library/blob/master/PATCHNOTES.md) for changes to the Pattern Library.
+## Patch Notes
+
+### Version 0.0.9 (Latest)
+
+*Updated on 9/9/2015: Browse [repo](https://github.ibm.com/Bluemix/pattern-library/tree/f9707fb5c786f53f49bfe1531926d38fe95ec668) at this point in history.*
+
+#### Patterns
+- Add atlas-cards
+
+- Update button sizing
+  - font-size smaller (14px or .875em)
+  - height shorter (44px or 2.75em)
+  - min-width smaller (6em or 96px)
+
+- Update behavior and styles for modal
+  - Use CSS :target selector to reveal modal
+  - Update styles for mobile-first design
+
+
+View all previous [patch notes](https://github.ibm.com/Bluemix/pattern-library/blob/master/PATCHNOTES.md) for changes to the Pattern Library.
 
 ## Install
 
@@ -45,8 +64,6 @@ Here's an example.
 </html>
 ```
 - Make sure to add `bx-light` or `bx-dark` class to the body tag.
-
-
 
 ## Dependencies
 

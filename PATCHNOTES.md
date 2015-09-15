@@ -1,4 +1,4 @@
-## Version 0.0.9
+## Version 0.0.9 (Latest)
 
 *Updated on 9/9/2015: Browse [repo](https://github.ibm.com/Bluemix/pattern-library/tree/f9707fb5c786f53f49bfe1531926d38fe95ec668) at this point in history.*
 
