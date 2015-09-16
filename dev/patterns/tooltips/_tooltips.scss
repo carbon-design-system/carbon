@@ -1,0 +1,61 @@
+$color--tooltip-background: #3b4b54;
+$tooltip--accent: $white;
+
+[class ^= 'tooltip'] {
+	position: relative;
+	display: inline-block;
+	font-size: 1rem;
+	&:before, &:after {
+		opacity: 0;
+		position: absolute;
+		background: $color--tooltip-background;
+		transition: all .2s ease-in .3s;
+	}
+	&:before {
+		content: attr(data-tooltip);
+		color: $tooltip--accent;
+		padding: 1em;
+		font-size: .9rem;
+		border: 1px $tooltip--accent solid;
+		pointer-events: none;
+		transform: translateX(-50%);
+		margin-left: 50%;
+		white-space: nowrap;
+	}
+	&:after {
+		content: '';
+		width: .6em;
+		height: .6em;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		backface-visibility: hidden;
+		border-right: 1px solid $tooltip--accent;
+		border-bottom: 1px solid $tooltip--accent;
+	}
+	&:hover, &:focus {
+		&:before, &:after {
+			opacity: 1;
+		}
+	}
+}
+.tooltip {
+	&__top {
+		&:before {
+			bottom: 2em;
+		}
+		&:after {
+			bottom: 1.5em;
+			transform:rotate(45deg);
+		}
+	}
+	&__bottom {
+		&:before {
+			top: 2em;
+		}
+		&:after {
+			top: 1.5em;
+			transform:rotate(-135deg);
+		}
+	}
+}
