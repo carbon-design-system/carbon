@@ -1,6 +1,7 @@
 .DS_Store
 bower-dist
 bower_components
+dev/dev.css
 node_modules
 npm-debug.log
 npm-dist
