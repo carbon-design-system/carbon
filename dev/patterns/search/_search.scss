@@ -1,0 +1,21 @@
+$search--accent: $white;
+
+.search--wrapper {
+	width: 100%;
+	background: color('gray', 50);
+	padding: 1em 3em;
+}
+
+.search {
+	width: 20em;
+	border-bottom: 1px $search--accent solid;
+	padding-left: 1.8em;
+	background: url(/images/search.png) left center no-repeat;
+	input {
+		width: 100%;
+		background: none;
+		border: none;
+		font-size: 1em;
+		color: $search--accent;
+	}
+}

@@ -59,6 +59,9 @@ $(document).ready(function() {
     'radio': [
       'patterns/radio/html/radio.html'
     ],
+    'search': [
+      'patterns/search/html/search.html'
+    ],
     'tables': [
       'patterns/tables/html/table.html'
     ],
