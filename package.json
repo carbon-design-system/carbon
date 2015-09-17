@@ -8,20 +8,20 @@
     "README.md"
   ],
   "dependencies": {
-    "bluemix-colors": "0.0.7",
+    "bluemix-colors": "0.0.14",
     "bluemix-typography": "0.0.10"
   },
   "devDependencies": {
-    "browser-sync": "^2.8.2",
+    "browser-sync": "^2.9.3",
     "csscomb": "^3.1.8",
     "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^2.3.1",
+    "gulp-autoprefixer": "^3.0.1",
     "gulp-jshint": "^1.11.2",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "jshint-stylish": "^2.0.1",
-    "npm-check-updates": "^2.2.0"
+    "npm-check-updates": "^2.2.3"
   },
   "scripts": {
     "css:sort": "csscomb -c ./csscomb.json dev/patterns/**/*.scss",
