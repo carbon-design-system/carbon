@@ -1,5 +1,8 @@
-server.js
-gulpfile.js
+.bowerrc
 .git
-dev
 .gitignore
+bower-dist
+bower_components
+dev
+node_modules
+server.js

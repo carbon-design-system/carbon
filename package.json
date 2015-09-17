@@ -19,15 +19,17 @@
     "gulp-jshint": "^1.11.2",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.0.4",
     "jshint-stylish": "^2.0.1",
     "lazypipe": "^1.0.1",
+    "merge-stream": "^1.0.0",
     "npm-check-updates": "^2.2.3"
   },
   "scripts": {
     "css:sort": "csscomb -c ./csscomb.json dev/patterns/**/*.scss",
     "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
-    "serve": "gulp",
+    "dev": "gulp",
     "update:all": "ncu --upgradeAll",
     "update:check": "ncu"
   },
