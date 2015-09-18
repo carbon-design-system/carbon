@@ -12,8 +12,8 @@ $color--status--text: darken($bluemix-medium-grey, 5);
 
   &:focus,
   &:hover {
-    box-shadow: 0 0 .25em .25em $color--card--hover;
     cursor: pointer;
+    box-shadow: 0 0 .25em .25em $color--card--hover;
   }
 }
 
@@ -21,10 +21,12 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   @extend %font-smoothing;
   @extend %helvetica-light;
   @extend %transition--card;
-  background-color: $color--card;
+
   display: inline-block;
-  height: em(250px);
   width: em(245px);
+  height: em(250px);
+
+  background-color: $color--card;
 
   &__link-wrapper {
     text-decoration: none;
@@ -38,20 +40,22 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   }
 
   &__bindings {
-    border-top: 1px solid $color--bindings--divider;
     display: flex;
     justify-content: center;
-    list-style-type: none;
     padding: em(14px) em(10px);
+    border-top: 1px solid $color--bindings--divider;
+
+    list-style-type: none;
   }
 
   &__status {
-    background-color: $color--status;
     display: flex;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
     height: em(35px);
     padding: 0 em(10px);
+
+    background-color: $color--status;
   }
 }
 
@@ -63,7 +67,9 @@ $color--status--text: darken($bluemix-medium-grey, 5);
 
   &__name {
     @extend %helvetica-light;
+
     color: $blue-90;
+
     font-size: 1.25em;
     line-height: 1.5;
     text-transform: lowercase;
@@ -71,6 +77,7 @@ $color--status--text: darken($bluemix-medium-grey, 5);
 
   &__link {
     color: $color--info--link;
+
     font-size: em(12px);
     line-height: 1.5;
     text-decoration: none;
@@ -79,32 +86,34 @@ $color--status--text: darken($bluemix-medium-grey, 5);
 
 .bindings {
   &__icon {
-    align-items: center;
-    border-radius: 50%;
-    border: em(3px) solid $color--bindings--icon-border;
     display: flex;
-    height: em(36px);
+    align-items: center;
     justify-content: center;
-    margin: 0 em(2px);
-    padding: em(3px);
     width: em(36px);
+    height: em(36px);
+    padding: em(3px);
+    border: em(3px) solid $color--bindings--icon-border;
+    border-radius: 50%;
+    margin: 0 em(2px);
   }
 }
 
 .status {
   &__icon {
     &--running {
-      background-color: $color--status--running;
-      border-radius: 50%;
-      height: em(17px);
-      margin-right: em(10px);
       width: em(17px);
+      height: em(17px);
+      border-radius: 50%;
+      margin-right: em(10px);
+
+      background-color: $color--status--running;
     }
   }
 
   &__text {
     &--running {
       color: $color--status--text;
+
       font-size: em(14px);
     }
   }

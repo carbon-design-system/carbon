@@ -5,12 +5,15 @@ $cell-padding: em(8px);
 
 .table-section {
   @extend %helvetica-normal;
-  background-color: transparent;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: $table-text-color;
-  max-width: 100%;
+
   width: 100%;
+  max-width: 100%;
+
+  background-color: transparent;
+  color: $table-text-color;
+
+  border-spacing: 0;
+  border-collapse: collapse;
 
   &__header {
     border-bottom: 4px solid $table-blue;
@@ -18,8 +21,10 @@ $cell-padding: em(8px);
 }
 
 .header__row--heading {
-  color: color('black');
   padding: $cell-padding;
+
+  color: color('black');
+
   text-align: left;
 }
 

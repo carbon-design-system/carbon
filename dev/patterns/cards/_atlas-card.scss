@@ -1,36 +1,36 @@
-$color--card-background: #2A3840;
+$color--card-background: #2a3840;
 $color--card-foreground: #394952;
 $color--card-border: #253139;
 $color--card-content: white;
 $color--card-metadata: color('blue', 30);
 
 %flex--horizontal-start {
-  align-items: flex-start;
   display: flex;
+  align-items: flex-start;
   flex-direction: row;
 }
 
 %flex--horizontal-center {
-  align-items: center;
   display: flex;
+  align-items: center;
   flex-direction: row;
 }
 
 %flex--horizontal-end {
-  align-items: flex-end;
   display: flex;
+  align-items: flex-end;
   flex-direction: row;
 }
 
 %flex--vertical-center {
-  align-items: center;
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 
 .object-card {
-  margin-bottom: 2em;
   width: 100%;
+  margin-bottom: 2em;
 
   @media screen and (min-width: em(400px)) {
 		width: 80%;
@@ -41,8 +41,8 @@ $color--card-metadata: color('blue', 30);
 	}
 
 	@media screen and (min-width: em(600px)) {
-		margin: 0 10% 35px 0;
 		width: 45%;
+		margin: 0 10% 35px 0;
 
 		&:nth-child(2n) {
 			margin-right: 0;
@@ -100,12 +100,16 @@ $color--card-metadata: color('blue', 30);
 
   a {
     @extend %flex--horizontal-start;
-    background-color: $color--card-background;
-    border: 1px $color--card-border solid;
+
     flex-wrap: wrap;
-    text-decoration: none;
-    transition: transform .2s;
     width: 100%;
+    border: 1px $color--card-border solid;
+
+    background-color: $color--card-background;
+
+    text-decoration: none;
+
+    transition: transform .2s;
 
     &:focus,
     &:hover {
@@ -115,25 +119,28 @@ $color--card-metadata: color('blue', 30);
 
   &__card-header {
     @extend %flex--horizontal-center;
-    border-bottom: 3px color('blue', 40) solid;
+
     justify-content: center;
-    padding-right: .5em;
     width: 100%;
+    padding-right: .5em;
+    border-bottom: 3px color('blue', 40) solid;
   }
 
   &__graph {
-    background-color: $color--card-foreground;
-    height: 66px;
     width: 100%;
+    height: 66px;
+
+    background-color: $color--card-foreground;
   }
 
   &__card-metric {
     @extend %flex--horizontal-end;
-    border-bottom: 1px $color--card-border solid;
-    border-right: 1px $color--card-border solid;
+
     flex-wrap: wrap;
-    padding: .8em 0;
     width: 50%;
+    padding: .8em 0;
+    border-right: 1px $color--card-border solid;
+    border-bottom: 1px $color--card-border solid;
 
     &:last-child {
       border-right: none;
@@ -142,9 +149,10 @@ $color--card-metadata: color('blue', 30);
 
   &__card-metadata {
     @extend %flex--horizontal-center;
-    border-bottom: 1px $color--card-border solid;
-    padding: 0 1em;
+
     width: 100%;
+    padding: 0 1em;
+    border-bottom: 1px $color--card-border solid;
 
     &:last-child {
       border-bottom: none;
@@ -156,10 +164,13 @@ $color--card-metadata: color('blue', 30);
 
   &__title {
     @extend %helvetica-medium;
+
+    padding: 1.2em 0;
+
     color: $color--card-content;
+
     font-size: .95rem;
     letter-spacing: .035em;
-    padding: 1.2em 0;
   }
 
   &__icon {
@@ -171,28 +182,37 @@ $color--card-metadata: color('blue', 30);
 
   &__figure {
     @extend %helvetica-bold;
+
+    width: 100%;
+
     color: $color--card-content;
+
     font-size: 2.661rem;
     text-align: center;
-    width: 100%;
   }
 
   &__unit {
     @extend %helvetica-light;
+
+    margin-left: .1em;
+
     font-size: 1.3rem;
     font-weight: 100;
-    margin-left: .1em;
   }
 
   &__label {
     @extend %helvetica-light;
-    color: $color--card-content;
-    font-size: .8rem;
-    letter-spacing: .015em;
-    text-align: center;
-    text-transform: uppercase;
-    transform: scaleX(.9);
+
     width: 100%;
+
+    color: $color--card-content;
+
+    font-size: .8rem;
+    text-align: center;
+    letter-spacing: .015em;
+    text-transform: uppercase;
+
+    transform: scaleX(.9);
   }
 }
 
@@ -204,12 +224,16 @@ $color--card-metadata: color('blue', 30);
 
   &__value {
     @extend %helvetica-light;
-    color: $color--card-metadata;
+
     flex: 1;
-    font-size: .8rem;
     overflow: hidden;
     padding: .8em;
+
+    color: $color--card-metadata;
+
+    font-size: .8rem;
     text-overflow: ellipsis;
+
     white-space: nowrap;
   }
 }

@@ -9,27 +9,29 @@ $breakpoint--global-nav: em(900px);
 
 // Extends
 %flex--horizontal-center {
-  align-items: center;
   display: flex;
+  align-items: center;
   flex-direction: row;
 }
 
 %icon {
   &--bluemix {
     @media screen and (min-width: $breakpoint--global-nav) {
+      width: 32px;
+      height: 32px;
+
       background-image: url('images/sprite.png');
       background-position: -8px -50px;
-      height: 32px;
-      width: 32px;
     }
   }
 
   &--hamburger {
-    background-image: url('images/sprite.png');
-    background-position: -104px -112px;
+    width: 12px;
     height: 13px;
     margin: 0 10px;
-    width: 12px;
+
+    background-image: url('images/sprite.png');
+    background-position: -104px -112px;
 
     &:focus,
     &:hover {
@@ -41,12 +43,15 @@ $breakpoint--global-nav: em(900px);
 // Styles
 .header {
   @extend %flex--horizontal-center;
-  background-color: $nav--background-color;
+
+  position: fixed;
+  z-index: 9999;
+
+  width: 100%;
   height: 3.125em;
   padding: 0 em(10px);
-  position: fixed;
-  width: 100%;
-  z-index: 9999;
+
+  background-color: $nav--background-color;
 
   &__brand,
   &__nav {
@@ -61,6 +66,7 @@ $breakpoint--global-nav: em(900px);
 .brand {
   &__hamburger-icon {
     @extend %icon--hamburger;
+
     cursor: pointer;
 
     @media screen and (min-width: $breakpoint--global-nav) {
@@ -70,6 +76,7 @@ $breakpoint--global-nav: em(900px);
 
   &__link {
     @extend %flex--horizontal-center;
+
     text-decoration: none;
   }
 
@@ -80,12 +87,14 @@ $breakpoint--global-nav: em(900px);
   &__link__name--bold,
   &__link__name--normal {
     color: $nav--logo-color;
+
     font-size: .875em;
     line-height: 1;
   }
 
   &__link__name--bold {
     @extend %helvetica-bold;
+
     display: none;
 
     @media screen and (min-width: $breakpoint--global-nav) {
@@ -95,8 +104,9 @@ $breakpoint--global-nav: em(900px);
 
   &__link__name--normal {
     @extend %helvetica-normal;
-    margin-left: .75em;
+
     margin-right: em(5px);
+    margin-left: .75em;
   }
 }
 
@@ -104,30 +114,35 @@ $breakpoint--global-nav: em(900px);
 
   &__cta-links {
     @extend %flex--horizontal-center;
+
     list-style-type: none;
   }
 
   &__link-list {
-    background-color: $nav--background-color;
     display: flex;
     flex-direction: row;
+
+    background-color: $nav--background-color;
+
     list-style-type: none;
 
     @media screen and (max-width: $breakpoint--global-nav) {
-      flex-direction: column;
-      left: 0;
-      min-height: em(1400px);
-      opacity: .9;
-      padding: em(20px) em(55px) 0;
       position: fixed;
       top: em(50px);
-      transform: translateX(-300px);
-      transition: transform .2s ease-out;
+      left: 0;
+
+      flex-direction: column;
       width: em(300px);
+      min-height: em(1400px);
+      padding: em(20px) em(55px) 0;
+
+      transition: transform .2s ease-out;
+      transform: translateX(-300px);
+      opacity: .9;
 
       &.visible {
-        transform: translateX(0);
         transition: transform .2s ease-out;
+        transform: translateX(0);
       }
     }
   }
@@ -144,15 +159,18 @@ $breakpoint--global-nav: em(900px);
 
   &__link {
     @extend %helvetica-light;
+
     color: $nav--link-color;
+
     font-size: em(14px);
-    letter-spacing: em(1px);
     text-decoration: none;
+    letter-spacing: em(1px);
     text-transform: uppercase;
 
     &:hover,
     &:focus {
       color: $white;
+
       transition: color .2s ease-out;
     }
 
@@ -166,35 +184,41 @@ $breakpoint--global-nav: em(900px);
   &__link--sign-up,
   &__link--log-in {
     @extend %helvetica-bold;
-    border-radius: em(3px);
-    font-size: em(14px);
-    letter-spacing: em(1px);
-    margin: 0 em(5px);
+
     padding: em(5px) em(12px);
+    border-radius: em(3px);
+    margin: 0 em(5px);
+
+    font-size: em(14px);
     text-decoration: none;
+    letter-spacing: em(1px);
     text-transform: uppercase;
   }
 
   &__link--sign-up {
     border: 1px solid $nav--sign-up-color;
+
     color: $nav--sign-up-color;
 
     &:hover,
     &:focus {
       background-color: $nav--sign-up-color;
       color: $nav--background-color;
+
       transition: background-color .2s ease-out, color .2s ease-out;
     }
   }
 
   &__link--log-in {
     border: 1px solid $nav--link-color;
+
     color: $nav--link-color;
 
     &:hover,
     &:focus {
       background-color: $nav--link-color;
       color: $nav--background-color;
+
       transition: background-color .2s ease-out, color .2s ease-out;
     }
   }
