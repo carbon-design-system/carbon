@@ -1,0 +1,44 @@
+{
+  "name": "bluemix-pattern-library",
+  "version": "0.0.11",
+  "authors": [
+    "thisisbrianhan <bthan@us.ibm.com>"
+  ],
+  "description": "The Bluemix Pattern Library is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
+  "main": "bower-dist/_pattern-library.scss",
+  "keywords": [
+    "bluemix",
+    "component",
+    "components",
+    "css",
+    "html",
+    "ibm",
+    "javascript",
+    "js",
+    "library",
+    "pattern",
+    "patterns",
+    "sass",
+    "scss",
+    "style",
+    "styleguide",
+    "guide"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    ".git",
+    ".npmignore",
+    "bower_components",
+    "dev",
+    "node_modules",
+    "npm-debug.log",
+    "npm-dist",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bluemix-colors": "*",
+    "bluemix-typography": "*"
+  }
+}

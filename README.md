@@ -6,7 +6,7 @@ The Bluemix Pattern Library gives developers (FEDs & Engineers) a collection of 
 
 The aim is for every developer to use consistent HTML, CSS, and JavaScript in as many places as possible in their prototype and production work.
 
-## Patch Notes
+## Changelog
 
 ### Version 0.0.9 (Latest)
 
@@ -25,7 +25,7 @@ The aim is for every developer to use consistent HTML, CSS, and JavaScript in as
   - Update styles for mobile-first design
 
 
-View all previous [patch notes](https://github.ibm.com/Bluemix/pattern-library/blob/master/PATCHNOTES.md) for changes to the Pattern Library.
+View all previous [CHANGELOG.md](https://github.ibm.com/Bluemix/pattern-library/blob/master/PATCHNOTES.md) for changes to the Pattern Library.
 
 ## Install
 

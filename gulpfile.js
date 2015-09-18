@@ -9,8 +9,11 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
+var replace = require('gulp-replace');
 var sass = require('gulp-sass');
 var stylish = require('jshint-stylish');
+var merge = require('merge-stream');
+var lazypipe = require('lazypipe');
 
 //////////////////////////////
 // Variables
@@ -41,6 +44,17 @@ var dirs = {
       'dev/index.html',
       'dev/patterns/**/html/*.html'
     ]
+  }
+};
+
+var importPath = {
+  node_modules: {
+    colors: '../node_modules/bluemix-colors/npm-dist/bluemix-colors',
+    typography: '../node_modules/bluemix-typography/bluemix-typography'
+  },
+  bower_components: {
+    colors: '../bluemix-colors/bower-dist/bluemix-colors',
+    typography: '../bluemix-typography/bluemix-typography'
   }
 };
 
@@ -89,8 +103,11 @@ gulp.task('js:reload', function() {
 // Sass Tasks
 //////////////////////////////
 
+// Using importPaths here to properly compile dev.css for development
 gulp.task('sass', function() {
   return gulp.src(dirs.sass.main)
+    .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
+    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions']
@@ -100,18 +117,29 @@ gulp.task('sass', function() {
 });
 
 gulp.task('sass:dist', function() {
-  return gulp.src(dirs.sass.patterns)
-    .pipe(gulp.dest('dist/patterns'));
-});
-
-gulp.task('sass:rename', function() {
-  return gulp.src(dirs.sass.main)
+  var npmDistMain = gulp.src(dirs.sass.main)
+    .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
+    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
     .pipe(rename('_pattern-library.scss'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('npm-dist'));
+
+  var npmDistPatterns = gulp.src(dirs.sass.patterns)
+    .pipe(gulp.dest('npm-dist/patterns'));
+
+  var bowerDistMain = gulp.src(dirs.sass.main)
+    .pipe(replace('{PATH_TO_COLORS}', importPath.bower_components.colors))
+    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.bower_components.typography))
+    .pipe(rename('_pattern-library.scss'))
+    .pipe(gulp.dest('bower-dist'));
+
+  var bowerDistPatterns = gulp.src(dirs.sass.patterns)
+    .pipe(gulp.dest('bower-dist/patterns'));
+
+  return merge(npmDistMain, npmDistPatterns, bowerDistMain, bowerDistPatterns);
 });
 
 gulp.task('sass:watch', function() {
-  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:dist', 'sass:rename']);
+  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:dist']);
 });
 
 //////////////////////////////
@@ -119,8 +147,13 @@ gulp.task('sass:watch', function() {
 //////////////////////////////
 
 gulp.task('image', function() {
-  return gulp.src(dirs.images)
-    .pipe(gulp.dest('dist/images'));
+  var npmDist = gulp.src(dirs.images)
+    .pipe(gulp.dest('npm-dist/images'));
+
+  var bowerDist = gulp.src(dirs.images)
+    .pipe(gulp.dest('bower-dist/images'));
+
+  return merge(npmDist, bowerDist);
 });
 
 gulp.task('image:watch', function() {
@@ -132,8 +165,13 @@ gulp.task('image:watch', function() {
 //////////////////////////////
 
 gulp.task('markdown', function() {
-  return gulp.src(dirs.markdown)
-    .pipe(gulp.dest('dist/docs'));
+  var npmDist = gulp.src(dirs.markdown)
+    .pipe(gulp.dest('npm-dist/docs'));
+
+  var bowerDist = gulp.src(dirs.markdown)
+    .pipe(gulp.dest('bower-dist/docs'));
+
+  return (npmDist, bowerDist);
 });
 
 //////////////////////////////
