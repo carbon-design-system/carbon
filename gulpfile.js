@@ -107,7 +107,7 @@ gulp.task('js:reload', function() {
 gulp.task('sass', function() {
   return gulp.src(dirs.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
-    .pipe(replace('{PATH_TO_TYPOGRAPHTY}', importPath.node_modules.typography))
+    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions']
@@ -119,7 +119,7 @@ gulp.task('sass', function() {
 gulp.task('sass:dist', function() {
   var npmDistMain = gulp.src(dirs.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
-    .pipe(replace('{PATH_TO_TYPOGRAPHTY}', importPath.node_modules.typography))
+    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
     .pipe(rename('_pattern-library.scss'))
     .pipe(gulp.dest('npm-dist'));
 
@@ -128,7 +128,7 @@ gulp.task('sass:dist', function() {
 
   var bowerDistMain = gulp.src(dirs.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.bower_components.colors))
-    .pipe(replace('{PATH_TO_TYPOGRAPHTY}', importPath.bower_components.typography))
+    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.bower_components.typography))
     .pipe(rename('_pattern-library.scss'))
     .pipe(gulp.dest('bower-dist'));
 
