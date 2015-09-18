@@ -34,19 +34,26 @@
 </select>
 
 <form action="" class="bx-form">
+    <!-- label for name should match corresponding input name whether using BEM naming convention or not -->
 
-    <label for=""></label>
-    <input type="text" name="" class="bx-form__input--first-name"></input>
+    <label for="bx-form__input--first-name">First Name</label>
+    <input type="text" name="bx-form__input--first-name" class="bx-form__input--first-name"></input>
 
-    <input type="text" class="bx-form__input--last-name"></input>
+    <label for="bx-form__input--last-name">Last Name</label>
+    <input type="text" name="bx-form__input--last-name" class="bx-form__input--last-name"></input>
 
+    <label for="bx-form__input--phone-number"></label>
     <input type="tel" class="bx-form__input--phone-number"></input>
 
+    <label for="bx-form__input--company-name"></label>
     <input type="text" class="bx-form__input--company-name"></input>
 
-    <select>
-        // this list could have different option values for the country names
-        // might make sense to put the USA as default or first option on the list. debateable though.
+    <label for="bx-form__input--country"></label>
+    <select name="bx-form__input--country">
+        <!--
+            this list could have different option values for the country names
+            might make sense to put the USA as default or first option on the list. debateable though.
+        -->
         <option value="Afghanistan">Afghanistan</option>
         <option value="Åland Islands">Åland Islands</option>
         <option value="Albania">Albania</option>
@@ -293,14 +300,19 @@
         <option value="Zimbabwe">Zimbabwe</option>
     </select>
 
+    <label for="bx-form__input--email"></label>
     <input type="email" class="bx-form__input--email">
 
+    <label for="bx-form__input--password"></label>
     <input type="password" class="bx-form__input--password">
 
+    <label for="bx-form__input--password-confirm"></label>
     <input type="password" class="bx-form__input--password-confirm">
 
+    <label for="bx-form__input-security-question"></label>
     <input type="text" class="bx-form__input-security-question">
 
+    <label for="bx-form__input-security-answer"></label>
     <input type="text" class="bx-form__input-security-answer">
 
 </form>
