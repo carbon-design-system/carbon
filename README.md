@@ -1,8 +1,8 @@
-# Bluemix Pattern Library
+# Bluemix Components
 
-**A themeable library of re-usable patterns for building websites and UIs.**
+**A themeable library of re-usable components for building websites and UIs.**
 
-The Bluemix Pattern Library gives developers (FEDs & Engineers) a collection of re-usable patterns they can use for building websites and user-interfaces for Bluemix.
+Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable components they can use for building websites and user-interfaces for Bluemix.
 
 The aim is for every developer to use consistent HTML, CSS, and JavaScript in as many places as possible in their prototype and production work.
 
@@ -12,7 +12,7 @@ The aim is for every developer to use consistent HTML, CSS, and JavaScript in as
 
 *Updated on 9/9/2015: Browse [repo](https://github.ibm.com/Bluemix/pattern-library/tree/f9707fb5c786f53f49bfe1531926d38fe95ec668) at this point in history.*
 
-#### Patterns
+#### Components
 - Add atlas-cards
 
 - Update button sizing
@@ -29,10 +29,15 @@ View all previous [CHANGELOG.md](https://github.ibm.com/Bluemix/pattern-library/
 
 ## Install
 
-Use npm to install bluemix-pattern-library as a node_module.
+### Bower
 
 ```
-npm install bluemix-pattern-library -D
+bower install bluemix-components --save-dev
+```
+
+### NPM
+```
+npm install bluemix-components -D
 ```
 
 Create a **main.scss** file in your project and `@import` bluemix-pattern-library with a relative path to the node module.
