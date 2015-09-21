@@ -15,18 +15,18 @@
 @import '{PATH_TO_TYPOGRAPHY}';
 
 // Bluemix Patterns
-@import 'patterns/buttons/buttons';
-@import 'patterns/cards/cards';
-@import 'patterns/dropdown/dropdown';
-@import 'patterns/forms/forms';
-@import 'patterns/links/links';
-@import 'patterns/lists/lists';
-@import 'patterns/modals/modals';
-@import 'patterns/nav/nav';
-@import 'patterns/radio/radio';
-@import 'patterns/tables/tables';
-@import 'patterns/tooltips/tooltips';
+@import 'components/buttons/buttons';
+@import 'components/cards/cards';
+@import 'components/dropdown/dropdown';
+@import 'components/forms/forms';
+@import 'components/links/links';
+@import 'components/lists/lists';
+@import 'components/modals/modals';
+@import 'components/nav/nav';
+@import 'components/radio/radio';
+@import 'components/tables/tables';
+@import 'components/tooltips/tooltips';
 
 // Atlas Patterns
-@import 'patterns/nav/atlas-global-header';
-@import 'patterns/cards/atlas-card';
+@import 'components/nav/atlas-global-header';
+@import 'components/cards/atlas-card';

@@ -24,9 +24,9 @@ var dirs = {
   'markdown': 'dev/docs/*.md',
   'sass': {
     'main': 'dev/*.scss',
-    'patterns': 'dev/patterns/**/*.scss',
+    'components': 'dev/components/**/*.scss',
     'lint': [
-      'dev/patterns/**/*.scss',
+      'dev/components/**/*.scss',
       'dev/dev.scss',
       '!dev/*.css'
     ]
@@ -36,13 +36,13 @@ var dirs = {
       'Gulpfile.js',
       '*.json',
       'dev/dev.js',
-      'dev/patterns/**/package.json'
+      'dev/components/**/package.json'
     ]
   },
   'html': {
     'reload': [
       'dev/index.html',
-      'dev/patterns/**/html/*.html'
+      'dev/components/**/html/*.html'
     ]
   }
 };
@@ -120,26 +120,26 @@ gulp.task('sass:dist', function() {
   var npmDistMain = gulp.src(dirs.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
     .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
-    .pipe(rename('_pattern-library.scss'))
+    .pipe(rename('_bluemix-components.scss'))
     .pipe(gulp.dest('npm-dist'));
 
-  var npmDistPatterns = gulp.src(dirs.sass.patterns)
-    .pipe(gulp.dest('npm-dist/patterns'));
+  var npmDistPatterns = gulp.src(dirs.sass.components)
+    .pipe(gulp.dest('npm-dist/components'));
 
   var bowerDistMain = gulp.src(dirs.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.bower_components.colors))
     .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.bower_components.typography))
-    .pipe(rename('_pattern-library.scss'))
+    .pipe(rename('_bluemix-components'))
     .pipe(gulp.dest('bower-dist'));
 
-  var bowerDistPatterns = gulp.src(dirs.sass.patterns)
-    .pipe(gulp.dest('bower-dist/patterns'));
+  var bowerDistPatterns = gulp.src(dirs.sass.components)
+    .pipe(gulp.dest('bower-dist/components'));
 
   return merge(npmDistMain, npmDistPatterns, bowerDistMain, bowerDistPatterns);
 });
 
 gulp.task('sass:watch', function() {
-  gulp.watch([dirs.sass.main, dirs.sass.patterns], ['sass', 'sass:dist']);
+  gulp.watch([dirs.sass.main, dirs.sass.components], ['sass', 'sass:dist']);
 });
 
 //////////////////////////////
