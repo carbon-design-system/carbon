@@ -1,6 +1,10 @@
 {
   "name": "bluemix-components",
-  "version": "0.0.12",
+  "version": "0.0.13",
+  "repository": {
+    "type": "git",
+    "url": "git://github.ibm.com/Bluemix/bluemix-components"
+  },
   "authors": [
     "thisisbrianhan <bthan@us.ibm.com>"
   ],
@@ -26,7 +30,6 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
     ".git",
     ".npmignore",
     "bower_components",
