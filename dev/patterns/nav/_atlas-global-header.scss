@@ -1,7 +1,7 @@
-$color--wireframe-gray: #E8E8E8;
+$color--wireframe-gray: #e8e8e8;
 $color--wireframe-black: #323232;
-$color--wireframe-border: #AFAFAF;
-$color--wireframe-light-gray: #D7D7D7;
+$color--wireframe-border: #afafaf;
+$color--wireframe-light-gray: #d7d7d7;
 $color--wireframe-dark-gray: #777677;
 
 $breakpoint--small: em(500px);
@@ -11,18 +11,20 @@ $breakpoint--big: em(1200px);
 
 %flex--horizontal-center {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
 }
 
 .global-header {
-  background-color: $color--wireframe-gray;
+  position: fixed;
+  z-index: 9999;
+
   display: flex;
+  width: 100%;
   height: 3em;
   padding: 0 5%;
-  position: fixed;
-  width: 100%;
-  z-index: 9999;
+
+  background-color: $color--wireframe-gray;
 
   @media screen and (min-width: $breakpoint--small-1) {
     padding: 0 10%;
@@ -34,6 +36,7 @@ $breakpoint--big: em(1200px);
 
   &__logo {
     @extend %flex--horizontal-center;
+
     text-decoration: none;
 
     .icon--atlas-logo {
@@ -47,21 +50,24 @@ $breakpoint--big: em(1200px);
 
   &__nav {
     @extend %flex--horizontal-center;
-    flex: 1;
+
     justify-content: space-between;
+    flex: 1;
   }
 
   &__account {
     @extend %flex--horizontal-center;
+
     margin-left: 1em;
 
     .btn--avatar {
-      background-size: contain;
-      background: url("http://placecreature.com/100/100") no-repeat;
-      border-radius: 50%;
-      border: none;
-      height: 2em;
       width: 2em;
+      height: 2em;
+      border: none;
+      border-radius: 50%;
+
+      background: url('http://placecreature.com/100/100') no-repeat;
+      background-size: contain;
     }
   }
 }
@@ -69,13 +75,16 @@ $breakpoint--big: em(1200px);
 .logo {
   &__wordmark {
     @extend %helvetica-bold;
-    border-right: 1px solid $color--wireframe-black;
-    color: $color--wireframe-black;
+
     display: none;
+    padding-right: 1em;
+    border-right: 1px solid $color--wireframe-black;
+    margin: 0 1em;
+
+    color: $color--wireframe-black;
+
     font-size: em(14px);
     line-height: 1;
-    margin: 0 1em;
-    padding-right: 1em;
 
     @media screen and (min-width: $breakpoint--small) {
       display: inline-block;
@@ -90,37 +99,46 @@ $breakpoint--big: em(1200px);
 .nav {
   &__dropdown-btn {
     @extend %helvetica-light;
-    background-color: transparent;
+
+    min-width: em(92px);
     border: none;
+
+    background-color: transparent;
+
     font-size: 1rem;
     line-height: 1;
-    min-width: em(92px);
 
   }
 
   &__global-menu {
-    opacity: 0;
     position: fixed;
     top: -100vh;
+
     transition: opacity .2s;
+    opacity: 0;
 
     &.active {
-      background-color: $color--wireframe-gray;
-      border: em(1px) solid $color--wireframe-border;
-      display: inline-block;
-      left: 15%;
-      list-style-type: none;
-      margin: 0;
-      opacity: 1;
-      padding: 1em 0;
       position: fixed;
       top: 3em;
+      left: 15%;
+
+      display: inline-block;
       width: 12em;
+      padding: 1em 0;
+      border: em(1px) solid $color--wireframe-border;
+      margin: 0;
+
+      background-color: $color--wireframe-gray;
+
+      list-style-type: none;
+
+      opacity: 1;
     }
   }
 
   &__links-list {
     @extend %flex--horizontal-center;
+
     list-style-type: none;
   }
 }
@@ -128,26 +146,31 @@ $breakpoint--big: em(1200px);
 .global-menu {
 
   &__item {
-    margin-bottom: .5em;
     width: 100%;
+    margin-bottom: .5em;
   }
 
   &__link {
     @extend %flex--horizontal-center;
     @extend %helvetica-light;
-    color: $color--wireframe-dark-gray;
+
     justify-content: space-between;
-    padding-left: 1em;
-    text-decoration: none;
     width: 100%;
+    padding-left: 1em;
+
+    color: $color--wireframe-dark-gray;
+
+    text-decoration: none;
   }
 
   &__count {
-    background-color: $color--wireframe-light-gray;
-    border-radius: 50%;
-    font-size: .75rem;
-    margin-right: .5em;
     padding: .25em .5em;
+    border-radius: 50%;
+    margin-right: .5em;
+
+    background-color: $color--wireframe-light-gray;
+
+    font-size: .75rem;
   }
 }
 
@@ -158,7 +181,9 @@ $breakpoint--big: em(1200px);
 
   &__link {
     @extend %helvetica-light;
+
     color: $color--wireframe-black;
+
     text-decoration: none;
     text-transform: uppercase;
 
@@ -171,6 +196,7 @@ $breakpoint--big: em(1200px);
 .account {
   &__menu {
     display: none;
+
     list-style-type: none;
   }
 }

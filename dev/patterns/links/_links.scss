@@ -8,6 +8,7 @@ $color__content-link--hover: $cool-grey-50;
 .content-link {
   @extend %helvetica-bold;
   @extend %content-link__transition;
+
   line-height: em(24px); // from SPSG
   text-decoration: underline;
 
@@ -19,6 +20,7 @@ $color__content-link--hover: $cool-grey-50;
   &:active,
   &:hover {
     @extend %content-link__transition;
+
     color: $color__content-link--hover;
   }
 }

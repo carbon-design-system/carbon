@@ -21,17 +21,20 @@ $warning-btn--text-color: #000;
 %btn--base {
   @extend %font-smoothing;
   @extend %helvetica-bold;
-  cursor: pointer;
+
   display: inline-block;
-  font-size: em(14px);
-  height: 2.75em; // 44px
-  letter-spacing: em(1px);
-  margin: 1em 0 1em .5em;
   min-width: 6em; // 96px
+  height: 2.75em; // 44px
   padding: .65em 1em;
+  margin: 1em 0 1em .5em;
+
+  font-size: em(14px);
   text-align: center;
   text-decoration: none;
+  letter-spacing: em(1px);
   text-transform: uppercase;
+
+  cursor: pointer;
   vertical-align: middle;
 
   &:disabled {
@@ -43,8 +46,9 @@ $warning-btn--text-color: #000;
 // Common styles for buttons with icons only
 %btn--icon-btn {
   @extend %btn--base;
-  min-height: .1em;
+
   min-width: .1em;
+  min-height: .1em;
 }
 
 // Common transition for all buttons
@@ -63,19 +67,23 @@ $warning-btn--text-color: #000;
 
 %btn--close {
   @extend %btn--icon-btn;
-  align-items: center;
-  background-color: transparent;
-  border: 0 solid transparent;
-  display: flex;
-  height: em(10px);
-  justify-content: center;
-  margin: 1em;
-  padding: 0;
-  width: em(10px);
 
-  [aria-label="Close"] {
-    color: $close-btn--text-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: em(10px);
+  height: em(10px);
+  padding: 0;
+  border: 0 solid transparent;
+  margin: 1em;
+
+  background-color: transparent;
+
+  [aria-label='Close'] {
     display: inline-block;
+
+    color: $close-btn--text-color;
+
     font-size: typescale(1);
 
     &:hover {
@@ -87,6 +95,7 @@ $warning-btn--text-color: #000;
 %btn--primary {
   @extend %btn--base;
   @include btn--style--border($primary-btn--color);
+
   background-color: $primary-btn--color;
   color: $white;
 }
@@ -95,6 +104,7 @@ $warning-btn--text-color: #000;
   @extend %btn--base;
   @extend %btn--style--transition;
   @include btn--style--border($secondary-btn--color);
+
   background-color: transparent;
   color: $secondary-btn--color;
 
@@ -109,6 +119,7 @@ $warning-btn--text-color: #000;
   @extend %btn--base;
   @extend %btn--style--transition;
   @include btn--style--border($tertiary-btn--color);
+
   background-color: transparent;
   color: $tertiary-btn--color;
 
@@ -122,6 +133,7 @@ $warning-btn--text-color: #000;
 %btn--danger {
   @extend %btn--base;
   @include btn--style--border($danger-btn--color);
+
   background-color: $danger-btn--color;
   color: $white;
 }
@@ -129,6 +141,7 @@ $warning-btn--text-color: #000;
 %btn--warning {
   @extend %btn--base;
   @include btn--style--border($warning-btn--color);
+
   background-color: $warning-btn--color;
   color: $warning-btn--text-color;
 }

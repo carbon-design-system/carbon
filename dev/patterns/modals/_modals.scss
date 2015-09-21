@@ -9,74 +9,85 @@ $breakpoint--small-1: 600px;
 $breakpoint--medium: 800px;
 
 .modal {
-  &[aria-hidden="true"] {
+  &[aria-hidden='true'] {
     display: none;
   }
 
   &:target {
-    background-color: $white;
-    border: 1px solid $color--border--outer;
-    box-shadow: 0 5px 15px $color--box-shadow;
-    display: block;
     position: fixed;
-    top: 0;
-    transform: translateY(15vh);
-    width: 90%;
     z-index: 1000;
+    top: 0;
+
+    display: block;
+    width: 90%;
+    border: 1px solid $color--border--outer;
+
+    background-color: $white;
+
+    transform: translateY(15vh);
+    box-shadow: 0 5px 15px $color--box-shadow;
 
     @media screen and (min-width: $breakpoint--small) {
       left: calc(50vw - 225px);
+
       width: em(450px);
     }
 
     @media screen and (min-width: $breakpoint--small-1) {
       left: calc(50vw - 250px);
+
       width: em(500px);
     }
   }
 
   &__close {
     position: absolute;
-    right: 0;
     top: 0;
+    right: 0;
   }
 
   &__header {
-    border-bottom: 1px solid $color--border--inner;
     padding: $padding--section;
+    border-bottom: 1px solid $color--border--inner;
+
     text-transform: uppercase;
   }
 
   &__content {
     @extend %helvetica-medium;
-    color: $color--content;
+
     padding: $padding--section;
+
+    color: $color--content;
   }
 
   &__actions {
-    border-top: 1px solid $color--border--inner;
     display: flex;
     flex-direction: column;
     padding: $padding--section;
+    border-top: 1px solid $color--border--inner;
 
     .btn--primary {
       margin-bottom: 0;
       margin-left: 0;
+
       order: 1;
     }
 
     .btn--secondary {
       margin-left: 0;
+
       order: 2;
     }
 
     @media screen and (min-width: $breakpoint--small) {
-      flex-direction: row;
       justify-content: flex-end;
+      flex-direction: row;
 
       .btn--primary {
         margin-bottom: 1em;
         margin-left: 1em;
+
         order: 2;
       }
     }
@@ -86,21 +97,24 @@ $breakpoint--medium: 800px;
 .header {
   &__title {
     @extend %helvetica-light;
+
     padding: 1.25em 0;
   }
 }
 
 .icon {
   &--info {
-    background-image: url("images/sprite.png");
-    background-position: -32px -112px;
-    display: inline-block;
-    height: 24px;
-    left: 10px;
-    margin-right: 20px;
     position: relative;
     top: 4px;
+    left: 10px;
+
+    display: inline-block;
     width: 24px;
+    height: 24px;
+    margin-right: 20px;
+
+    background-image: url('images/sprite.png');
+    background-position: -32px -112px;
 
     @media screen and (min-width: $breakpoint--small) {
       left: 0;
