@@ -1,6 +1,6 @@
 {
   "name": "bluemix-components",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "repository": {
     "type": "git"
   },
@@ -29,11 +29,12 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
+    ".git",
     "dev",
     "node_modules",
     "npm-debug.log",
-    "npm-dist"
+    "npm-dist",
+    "bower_components"
   ],
   "dependencies": {
     "bluemix-colors": "*",
