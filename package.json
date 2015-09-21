@@ -1,11 +1,12 @@
 {
   "name": "bluemix-components",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
   "files": [
     ".npmignore",
-    "dist",
-    "README.md"
+    "npm-dist",
+    "README.md",
+    "CHANGELOG.md"
   ],
   "dependencies": {
     "bluemix-colors": "0.0.14",

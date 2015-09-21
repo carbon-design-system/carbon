@@ -4,4 +4,5 @@
 bower-dist
 bower_components
 dev
+node_modules
 server.js
