@@ -1,9 +1,8 @@
 {
   "name": "bluemix-components",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "repository": {
-    "type": "git",
-    "url": "git://github.ibm.com/Bluemix/bluemix-components"
+    "type": "git"
   },
   "authors": [
     "thisisbrianhan <bthan@us.ibm.com>"
@@ -30,15 +29,13 @@
   ],
   "license": "MIT",
   "ignore": [
+    "**/.*",
     ".git",
     ".npmignore",
-    "bower_components",
     "dev",
     "node_modules",
     "npm-debug.log",
-    "npm-dist",
-    "test",
-    "tests"
+    "npm-dist"
   ],
   "devDependencies": {
     "bluemix-colors": "*",
