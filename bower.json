@@ -30,8 +30,6 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    ".git",
-    ".npmignore",
     "dev",
     "node_modules",
     "npm-debug.log",
