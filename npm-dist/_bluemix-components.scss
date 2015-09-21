@@ -11,8 +11,8 @@
 // Bluemix Theme (Dependencies)
 //--+ Gulpfile.js runs a task to replace the 'path_to' strings with
 //--+ correct paths to bower_components or node_modules
-@import '{PATH_TO_COLORS}';
-@import '{PATH_TO_TYPOGRAPHY}';
+@import '../node_modules/bluemix-colors/npm-dist/bluemix-colors';
+@import '../node_modules/bluemix-typography/bluemix-typography';
 
 // Bluemix Patterns
 @import 'components/buttons/buttons';
