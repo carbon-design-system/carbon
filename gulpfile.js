@@ -64,7 +64,7 @@ var importPath = {
 
 gulp.task('browser-sync', function() {
   browserSync.init({
-    logPrefix: "Pattern Library",
+    logPrefix: "Bluemix Components",
     server: {
       baseDir: "./dev"
     }
@@ -129,7 +129,7 @@ gulp.task('sass:dist', function() {
   var bowerDistMain = gulp.src(dirs.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.bower_components.colors))
     .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.bower_components.typography))
-    .pipe(rename('_bluemix-components'))
+    .pipe(rename('_bluemix-components.scss'))
     .pipe(gulp.dest('bower-dist'));
 
   var bowerDistPatterns = gulp.src(dirs.sass.components)
