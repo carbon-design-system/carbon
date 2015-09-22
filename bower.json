@@ -3,7 +3,7 @@
   "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
   "main": "./bower-dist/_bluemix-components.scss",
   "dependencies": {
-    "bluemix-colors": "*",
+    "bluemix-colors": "~0.0.14",
     "bluemix-typography": "*"
   },
   "keywords": [
@@ -25,8 +25,14 @@
     "guide"
   ],
   "authors": [
-    { "name": "Brian Han", "email": "bthan@us.ibm.com" },
-    { "name": "Stan Li", "email": "lih@us.ibm.com" }
+    {
+      "name": "Brian Han",
+      "email": "bthan@us.ibm.com"
+    },
+    {
+      "name": "Stan Li",
+      "email": "lih@us.ibm.com"
+    }
   ],
   "license": "MIT",
   "ignore": [
