@@ -54,7 +54,7 @@ var importPath = {
   },
   bower_components: {
     colors: '../../bluemix-colors/bower-dist/bluemix-colors',
-    typography: '../bluemix-typography/bluemix-typography'
+    typography: '../../bluemix-typography/bluemix-typography'
   }
 };
 
