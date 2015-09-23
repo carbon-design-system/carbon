@@ -4,7 +4,7 @@
   "main": "./bower-dist/_bluemix-components.scss",
   "dependencies": {
     "bluemix-colors": "~0.0.14",
-    "bluemix-typography": "*"
+    "bluemix-typography": "~0.0.12"
   },
   "keywords": [
     "bluemix",
