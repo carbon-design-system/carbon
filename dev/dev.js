@@ -21,60 +21,60 @@ $(document).ready(function() {
   // AJAX Patterns on to index.html
   /////////////////////////////////
 
-  var patterns = {
+  var components = {
     'buttons': [
-      'patterns/buttons/html/close-button.html',
-      'patterns/buttons/html/danger-button.html',
-      'patterns/buttons/html/primary-button.html',
-      'patterns/buttons/html/secondary-button.html',
-      'patterns/buttons/html/tertiary-button.html',
-      'patterns/buttons/html/warning-button.html'
+      'components/buttons/html/close-button.html',
+      'components/buttons/html/danger-button.html',
+      'components/buttons/html/primary-button.html',
+      'components/buttons/html/secondary-button.html',
+      'components/buttons/html/tertiary-button.html',
+      'components/buttons/html/warning-button.html'
     ],
     'cards': [
-      'patterns/cards/html/atlas-card.html',
-      'patterns/cards/html/card.html'
+      'components/cards/html/atlas-card.html',
+      'components/cards/html/card.html'
     ],
     'dropdown': [
-      'patterns/dropdown/html/dropdown.html'
+      'components/dropdown/html/dropdown.html'
     ],
     'forms': [
-      'patterns/forms/html/form.html'
+      'components/forms/html/form.html'
     ],
     'links': [
-      'patterns/links/html/content-link.html'
+      'components/links/html/content-link.html'
     ],
     'lists': [
-      'patterns/lists/html/card-list.html',
-      'patterns/lists/html/nested-list.html',
-      'patterns/lists/html/ordered-list.html',
-      'patterns/lists/html/unordered-list.html'
+      'components/lists/html/card-list.html',
+      'components/lists/html/nested-list.html',
+      'components/lists/html/ordered-list.html',
+      'components/lists/html/unordered-list.html'
     ],
     'modals': [
-      'patterns/modals/html/modal.html'
+      'components/modals/html/modal.html'
     ],
     'nav': [
-      'patterns/nav/html/global-nav.html',
-      'patterns/nav/html/atlas-global-header.html'
+      'components/nav/html/global-nav.html',
+      'components/nav/html/atlas-global-header.html'
     ],
     'radio': [
-      'patterns/radio/html/radio.html'
+      'components/radio/html/radio.html'
     ],
     'search': [
       'patterns/search/html/search.html'
     ],
     'tables': [
-      'patterns/tables/html/table.html'
+      'components/tables/html/table.html'
     ],
     'tooltips': [
-      'patterns/tooltips/html/tooltip.html'
+      'components/tooltips/html/tooltip.html'
     ]
   };
 
-  // Loop over each property in patterns object
-  for (var prop in patterns) {
-    var patternArray = patterns[prop];
+  // Loop over each property in components object
+  for (var prop in components) {
+    var patternArray = components[prop];
 
-    // Handle the nav patterns differently
+    // Handle the nav components differently
     if (prop === 'nav') {
       $.get(patternArray[0], function (data) {
         $('#nav').append(data);
@@ -96,7 +96,7 @@ $(document).ready(function() {
     }
 
     else if (prop === 'cards') {
-      var cardArray = patterns[prop];
+      var cardArray = components[prop];
 
       for (var i=0; i < cardArray.length; i++) {
         $.get(cardArray[i], function (data) {
@@ -105,11 +105,11 @@ $(document).ready(function() {
       }
     }
 
-    // For all other patterns, append them to #patterns.
+    // For all other components, append them to #components.
     else {
       for (var i = 0; i < patternArray.length; i++) {
         $.get(patternArray[i], function (data) {
-          $('#patterns').append('<div>' + data + '</div>');
+          $('#components').append('<div>' + data + '</div>');
         });
       }
     }

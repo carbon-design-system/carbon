@@ -1,18 +1,18 @@
-# Bluemix Pattern Library
+# Bluemix Components
 
-**A themeable library of re-usable patterns for building websites and UIs.**
+**A themeable library of re-usable components for building websites and UIs.**
 
-The Bluemix Pattern Library gives developers (FEDs & Engineers) a collection of re-usable patterns they can use for building websites and user-interfaces for Bluemix.
+Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable components they can use for building websites and user-interfaces for Bluemix.
 
 The aim is for every developer to use consistent HTML, CSS, and JavaScript in as many places as possible in their prototype and production work.
 
-## Patch Notes
+## Changelog
 
 ### Version 0.0.9 (Latest)
 
 *Updated on 9/9/2015: Browse [repo](https://github.ibm.com/Bluemix/pattern-library/tree/f9707fb5c786f53f49bfe1531926d38fe95ec668) at this point in history.*
 
-#### Patterns
+#### Components
 - Add atlas-cards
 
 - Update button sizing
@@ -25,14 +25,19 @@ The aim is for every developer to use consistent HTML, CSS, and JavaScript in as
   - Update styles for mobile-first design
 
 
-View all previous [patch notes](https://github.ibm.com/Bluemix/pattern-library/blob/master/PATCHNOTES.md) for changes to the Pattern Library.
+View all previous [CHANGELOG.md](https://github.ibm.com/Bluemix/pattern-library/blob/master/PATCHNOTES.md) for changes to the Pattern Library.
 
 ## Install
 
-Use npm to install bluemix-pattern-library as a node_module.
+### Bower
 
 ```
-npm install bluemix-pattern-library -D
+bower install bluemix-components --save-dev
+```
+
+### NPM
+```
+npm install bluemix-components -D
 ```
 
 Create a **main.scss** file in your project and `@import` bluemix-pattern-library with a relative path to the node module.
@@ -75,3 +80,71 @@ Here are the dependencies:
 
 - [bluemix-colors](https://www.npmjs.com/package/bluemix-colors): A palette of Bluemix colors based on [IBM-Design/colors](https://github.com/IBM-Design/colors)
 - [bluemix-typography](https://www.npmjs.com/package/bluemix-typography): Typography functions, variables and fonts that are commonly used in Bluemix.
+
+## Components Folders and Files
+```bash
+├── buttons
+│   ├── _buttons.scss
+│   └── html
+│       ├── close-button.html
+│       ├── danger-button.html
+│       ├── primary-button.html
+│       ├── secondary-button.html
+│       ├── tertiary-button.html
+│       └── warning-button.html
+├── cards
+│   ├── _atlas-card.scss
+│   ├── _cards.scss
+│   └── html
+│       ├── atlas-card.html
+│       └── card.html
+├── dropdown
+│   ├── _dropdown.scss
+│   ├── html
+│   │   └── dropdown.html
+│   └── js
+│       └── dropdown.js
+├── forms
+│   ├── _forms.scss
+│   └── html
+│       └── form.html
+├── links
+│   ├── _links.scss
+│   └── html
+│       └── content-link.html
+├── lists
+│   ├── _lists.scss
+│   └── html
+│       ├── card-list.html
+│       ├── nested-list.html
+│       ├── ordered-list.html
+│       └── unordered-list.html
+├── modals
+│   ├── _modals.scss
+│   └── html
+│       └── modal.html
+├── nav
+│   ├── _atlas-global-header.scss
+│   ├── _nav.scss
+│   ├── html
+│   │   ├── atlas-global-header.html
+│   │   ├── global-nav.html
+│   │   └── secondary-nav.html
+│   └── js
+│       ├── atlas-global-header.js
+│       └── global-nav.js
+├── radio
+│   ├── _radio.scss
+│   └── html
+│       └── radio.html
+├── tables
+│   ├── _tables.scss
+│   └── html
+│       └── table.html
+└── tooltips
+    ├── _tooltips.scss
+    └── html
+        └── tooltip.html
+
+24 directories, 38 files
+```

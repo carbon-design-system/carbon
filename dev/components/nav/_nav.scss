@@ -1,0 +1,225 @@
+// COLORS
+$nav--background-color: $blue-80;
+$nav--link-color: $bluemix-nav-grey;
+$nav--logo-color: $white;
+$nav--sign-up-color: #00b299;
+
+// Breakpoints
+$breakpoint--global-nav: em(900px);
+
+// Extends
+%flex--horizontal-center {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+%icon {
+  &--bluemix {
+    @media screen and (min-width: $breakpoint--global-nav) {
+      width: 32px;
+      height: 32px;
+
+      background-image: url('images/sprite.png');
+      background-position: -8px -50px;
+    }
+  }
+
+  &--hamburger {
+    width: 12px;
+    height: 13px;
+    margin: 0 10px;
+
+    background-image: url('images/sprite.png');
+    background-position: -104px -112px;
+
+    &:focus,
+    &:hover {
+      background-position: -102px -63px;
+    }
+  }
+}
+
+// Styles
+.header {
+  @extend %flex--horizontal-center;
+
+  position: fixed;
+  z-index: 9999;
+
+  width: 100%;
+  height: 3.125em;
+  padding: 0 em(10px);
+
+  background-color: $nav--background-color;
+
+  &__brand,
+  &__nav {
+    @extend %flex--horizontal-center;
+  }
+
+  &__brand {
+    flex: 1;
+  }
+}
+
+.brand {
+  &__hamburger-icon {
+    @extend %icon--hamburger;
+
+    cursor: pointer;
+
+    @media screen and (min-width: $breakpoint--global-nav) {
+      display: none;
+    }
+  }
+
+  &__link {
+    @extend %flex--horizontal-center;
+
+    text-decoration: none;
+  }
+
+  &__link__logo {
+    @extend %icon--bluemix;
+  }
+
+  &__link__name--bold,
+  &__link__name--normal {
+    color: $nav--logo-color;
+
+    font-size: .875em;
+    line-height: 1;
+  }
+
+  &__link__name--bold {
+    @extend %helvetica-bold;
+
+    display: none;
+
+    @media screen and (min-width: $breakpoint--global-nav) {
+      display: inline;
+    }
+  }
+
+  &__link__name--normal {
+    @extend %helvetica-normal;
+
+    margin-right: em(5px);
+    margin-left: .75em;
+  }
+}
+
+.nav {
+
+  &__cta-links {
+    @extend %flex--horizontal-center;
+
+    list-style-type: none;
+  }
+
+  &__link-list {
+    display: flex;
+    flex-direction: row;
+
+    background-color: $nav--background-color;
+
+    list-style-type: none;
+
+    @media screen and (max-width: $breakpoint--global-nav) {
+      position: fixed;
+      top: em(50px);
+      left: 0;
+
+      flex-direction: column;
+      width: em(300px);
+      min-height: em(1400px);
+      padding: em(20px) em(55px) 0;
+
+      transition: transform .2s ease-out;
+      transform: translateX(-300px);
+      opacity: .9;
+
+      &.visible {
+        transition: transform .2s ease-out;
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+.link-list {
+  &__link-item {
+    margin-bottom: 12px;
+
+    @media screen and (min-width: $breakpoint--global-nav) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__link {
+    @extend %helvetica-light;
+
+    color: $nav--link-color;
+
+    font-size: em(14px);
+    text-decoration: none;
+    letter-spacing: em(1px);
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+      color: $white;
+
+      transition: color .2s ease-out;
+    }
+
+    @media screen and (min-width: $breakpoint--global-nav) {
+      margin: 0 em(12px);
+    }
+  }
+}
+
+.cta-links {
+  &__link--sign-up,
+  &__link--log-in {
+    @extend %helvetica-bold;
+
+    padding: em(5px) em(12px);
+    border-radius: em(3px);
+    margin: 0 em(5px);
+
+    font-size: em(14px);
+    text-decoration: none;
+    letter-spacing: em(1px);
+    text-transform: uppercase;
+  }
+
+  &__link--sign-up {
+    border: 1px solid $nav--sign-up-color;
+
+    color: $nav--sign-up-color;
+
+    &:hover,
+    &:focus {
+      background-color: $nav--sign-up-color;
+      color: $nav--background-color;
+
+      transition: background-color .2s ease-out, color .2s ease-out;
+    }
+  }
+
+  &__link--log-in {
+    border: 1px solid $nav--link-color;
+
+    color: $nav--link-color;
+
+    &:hover,
+    &:focus {
+      background-color: $nav--link-color;
+      color: $nav--background-color;
+
+      transition: background-color .2s ease-out, color .2s ease-out;
+    }
+  }
+}
