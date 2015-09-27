@@ -72,32 +72,32 @@ $(document).ready(function() {
 
   // Loop over each property in components object
   for (var prop in components) {
-    var patternArray = components[prop];
+    var componentArray = components[prop];
 
     // Handle the nav components differently
     if (prop === 'nav') {
-      $.get(patternArray[0], function (data) {
+      $.get(componentArray[0], function (data) {
         $('#nav').append(data);
       });
 
-      $.get(patternArray[1], function (data) {
+      $.get(componentArray[1], function (data) {
         $('#atlas-nav').append(data);
       });
     }
 
     else if (prop === 'modals') {
-      for (var i = 0; i < patternArray.length; i++ ) {
-        $.get(patternArray[i], function (data) {
+      for (var i = 0; i < componentArray.length; i++ ) {
+        $.get(componentArray[i], function (data) {
           $('#modal').append(data);
         });
       }
     }
 
     else if (prop === 'search') {
-      for (var i = 0; i < patternArray.length; i++) {
-        $.get(patternArray[i], function (data) {
+      for (var i = 0; i < componentArray.length; i++) {
+        $.get(componentArray[i], function (data) {
           $('#search').append(data);
-        })
+        });
       }
     }
 
@@ -113,11 +113,11 @@ $(document).ready(function() {
 
     // For all other components, append them to #components.
     else {
-      for (var i = 0; i < patternArray.length; i++) {
-        $.get(patternArray[i], function (data) {
+      for (var i = 0; i < componentArray.length; i++) {
+        $.get(componentArray[i], function (data) {
           $('#components').append('<div>' + data + '</div>');
         });
       }
     }
-  };
+  }
 });
