@@ -1,4 +1,5 @@
 $search--accent: $white;
+$search--background: color('gray', 50);
 
 .search {
 	width: 20em;
@@ -7,15 +8,28 @@ $search--accent: $white;
 
 	background: url(/images/search.png) left center no-repeat;
 
-	input {
+	input[type='search'] {
 		@extend %helvetica-normal;
 
 		width: 100%;
+		padding: .25em;
 		border: none;
+		margin-top: .25em;
+		margin-bottom: .25em;
 
-		background: none;
+		background-color: transparent;
 		color: $search--accent;
 
 		font-size: 1em;
+
+		appearance: none; // avoids safari from overriding these styles
 	}
 }
+
+// The styles below will disable other webkit search UI
+// input[type="search"]::-webkit-search-decoration,
+// input[type="search"]::-webkit-search-cancel-button,
+// input[type="search"]::-webkit-search-results-button,
+// input[type="search"]::-webkit-search-results-decoration {
+//   display: none;
+// }
