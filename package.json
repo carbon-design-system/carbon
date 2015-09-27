@@ -28,8 +28,7 @@
     "npm-check-updates": "^2.2.3"
   },
   "scripts": {
-    "register:bower": "bower register bluemix-components git@github.ibm.com:Bluemix/bluemix-components.git",
-    "css:sort": "csscomb -c ./csscomb.json dev/patterns/**/*.scss",
+    "css-sort": "csscomb -c ./csscomb.json dev/patterns/**/*.scss",
     "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
     "dev": "gulp",
     "update:all": "ncu --upgradeAll",
