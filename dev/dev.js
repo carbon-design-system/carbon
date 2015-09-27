@@ -60,7 +60,7 @@ $(document).ready(function() {
       'components/radio/html/radio.html'
     ],
     'search': [
-      'patterns/search/html/search.html'
+      'components/search/html/search.html'
     ],
     'tables': [
       'components/tables/html/table.html'
