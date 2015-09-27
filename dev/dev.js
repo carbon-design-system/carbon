@@ -88,10 +88,16 @@ $(document).ready(function() {
     else if (prop === 'modals') {
       for (var i = 0; i < patternArray.length; i++ ) {
         $.get(patternArray[i], function (data) {
-
-          // Append modal pattern to #modal so that it can display with margins specifc for modals
           $('#modal').append(data);
         });
+      }
+    }
+
+    else if (prop === 'search') {
+      for (var i = 0; i < patternArray.length; i++) {
+        $.get(patternArray[i], function (data) {
+          $('#search').append(data);
+        })
       }
     }
 
