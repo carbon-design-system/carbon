@@ -2,16 +2,20 @@ $search--accent: $white;
 
 .search {
 	width: 20em;
-	border-bottom: 1px $search--accent solid;
 	padding-left: 1.8em;
+	border-bottom: 1px $search--accent solid;
+
 	background: url(/images/search.png) left center no-repeat;
 
 	input {
 		@extend %helvetica-normal;
+
 		width: 100%;
-		background: none;
 		border: none;
-		font-size: 1em;
+
+		background: none;
 		color: $search--accent;
+
+		font-size: 1em;
 	}
 }
