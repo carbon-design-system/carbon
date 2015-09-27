@@ -80,3 +80,71 @@ Here are the dependencies:
 
 - [bluemix-colors](https://www.npmjs.com/package/bluemix-colors): A palette of Bluemix colors based on [IBM-Design/colors](https://github.com/IBM-Design/colors)
 - [bluemix-typography](https://www.npmjs.com/package/bluemix-typography): Typography functions, variables and fonts that are commonly used in Bluemix.
+
+## Components Folders and Files
+```bash
+├── buttons
+│   ├── _buttons.scss
+│   └── html
+│       ├── close-button.html
+│       ├── danger-button.html
+│       ├── primary-button.html
+│       ├── secondary-button.html
+│       ├── tertiary-button.html
+│       └── warning-button.html
+├── cards
+│   ├── _atlas-card.scss
+│   ├── _cards.scss
+│   └── html
+│       ├── atlas-card.html
+│       └── card.html
+├── dropdown
+│   ├── _dropdown.scss
+│   ├── html
+│   │   └── dropdown.html
+│   └── js
+│       └── dropdown.js
+├── forms
+│   ├── _forms.scss
+│   └── html
+│       └── form.html
+├── links
+│   ├── _links.scss
+│   └── html
+│       └── content-link.html
+├── lists
+│   ├── _lists.scss
+│   └── html
+│       ├── card-list.html
+│       ├── nested-list.html
+│       ├── ordered-list.html
+│       └── unordered-list.html
+├── modals
+│   ├── _modals.scss
+│   └── html
+│       └── modal.html
+├── nav
+│   ├── _atlas-global-header.scss
+│   ├── _nav.scss
+│   ├── html
+│   │   ├── atlas-global-header.html
+│   │   ├── global-nav.html
+│   │   └── secondary-nav.html
+│   └── js
+│       ├── atlas-global-header.js
+│       └── global-nav.js
+├── radio
+│   ├── _radio.scss
+│   └── html
+│       └── radio.html
+├── tables
+│   ├── _tables.scss
+│   └── html
+│       └── table.html
+└── tooltips
+    ├── _tooltips.scss
+    └── html
+        └── tooltip.html
+
+24 directories, 38 files
+```
