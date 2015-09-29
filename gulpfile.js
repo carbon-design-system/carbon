@@ -53,8 +53,8 @@ var importPath = {
     typography: '../node_modules/bluemix-typography/bluemix-typography'
   },
   bower_components: {
-    colors: '../bluemix-colors/bower-dist/bluemix-colors',
-    typography: '../bluemix-typography/bluemix-typography'
+    colors: '../../bluemix-colors/bower-dist/bluemix-colors',
+    typography: '../../bluemix-typography/bluemix-typography'
   }
 };
 
