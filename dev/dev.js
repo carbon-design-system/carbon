@@ -18,55 +18,60 @@ $(document).ready(function() {
   });
 
   /////////////////////////////////
-  // AJAX Patterns on to index.html
+  // AJAX Components on to index.html
   /////////////////////////////////
 
   var components = {
     'buttons': [
-      'components/buttons/html/close-button.html',
-      'components/buttons/html/danger-button.html',
-      'components/buttons/html/primary-button.html',
-      'components/buttons/html/secondary-button.html',
-      'components/buttons/html/tertiary-button.html',
-      'components/buttons/html/warning-button.html'
+      'components/buttons/close-button.html',
+      'components/buttons/danger-button.html',
+      'components/buttons/primary-button.html',
+      'components/buttons/secondary-button.html',
+      'components/buttons/tertiary-button.html',
+      'components/buttons/warning-button.html'
     ],
     'cards': [
-      'components/cards/html/atlas-card.html',
-      'components/cards/html/card.html'
-    ],
-    'dropdown': [
-      'components/dropdown/html/dropdown.html'
+      'components/cards/atlas-card.html',
+      'components/cards/card.html'
     ],
     'forms': [
-      'components/forms/html/form.html'
+      'components/forms/form.html',
+      'components/forms/form-group.html'
     ],
     'links': [
-      'components/links/html/content-link.html'
+      'components/links/link.html'
     ],
     'lists': [
-      'components/lists/html/card-list.html',
-      'components/lists/html/nested-list.html',
-      'components/lists/html/ordered-list.html',
-      'components/lists/html/unordered-list.html'
+      'components/lists/card-list.html',
+      'components/lists/nested-list.html',
+      'components/lists/ordered-list.html',
+      'components/lists/unordered-list.html'
     ],
     'modals': [
-      'components/modals/html/modal.html'
+      'components/modals/modal.html'
     ],
-    'nav': [
-      'components/nav/html/global-nav.html',
-      'components/nav/html/atlas-global-header.html'
-    ],
-    'radio': [
-      'components/radio/html/radio.html'
+    'navigation': [
+      'components/navigation/nav.html'
     ],
     'search': [
-      'components/search/html/search.html'
+      'components/search/search.html'
+    ],
+    'selects': [
+      'components/selects/select.html'
     ],
     'tables': [
-      'components/tables/html/table.html'
+      'components/tables/table.html'
+    ],
+    'textfields': [
+      'components/textfields/text-field.html',
+      'components/textfields/text-area.html'
+    ],
+    'toggles': [
+      'components/toggles/checkbox.html',
+      'components/toggles/radio.html'
     ],
     'tooltips': [
-      'components/tooltips/html/tooltip.html'
+      'components/tooltips/tooltip.html'
     ]
   };
 
@@ -75,13 +80,9 @@ $(document).ready(function() {
     var componentArray = components[prop];
 
     // Handle the nav components differently
-    if (prop === 'nav') {
+    if (prop === 'navigation') {
       $.get(componentArray[0], function (data) {
         $('#nav').append(data);
-      });
-
-      $.get(componentArray[1], function (data) {
-        $('#atlas-nav').append(data);
       });
     }
 

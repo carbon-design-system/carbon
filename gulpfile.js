@@ -123,7 +123,7 @@ gulp.task('sass:dist', function() {
     .pipe(rename('_bluemix-components.scss'))
     .pipe(gulp.dest('npm-dist'));
 
-  var npmDistPatterns = gulp.src(dirs.sass.components)
+  var npmDistComponents = gulp.src(dirs.sass.components)
     .pipe(gulp.dest('npm-dist/components'));
 
   var bowerDistMain = gulp.src(dirs.sass.main)
@@ -132,10 +132,10 @@ gulp.task('sass:dist', function() {
     .pipe(rename('_bluemix-components.scss'))
     .pipe(gulp.dest('bower-dist'));
 
-  var bowerDistPatterns = gulp.src(dirs.sass.components)
+  var bowerDistComponents = gulp.src(dirs.sass.components)
     .pipe(gulp.dest('bower-dist/components'));
 
-  return merge(npmDistMain, npmDistPatterns, bowerDistMain, bowerDistPatterns);
+  return merge(npmDistMain, npmDistComponents, bowerDistMain, bowerDistComponents);
 });
 
 gulp.task('sass:watch', function() {

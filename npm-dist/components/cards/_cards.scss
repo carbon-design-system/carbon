@@ -32,94 +32,101 @@ $color--card-metadata: color('blue', 30);
   flex-direction: column;
 }
 
-.object-card {
-  width: 100%;
-  margin-bottom: 2em;
+.card-list {
+  list-style-type: none;
 
-  @media screen and (min-width: em(400px)) {
-    width: 80%;
-  }
-
-  @media screen and (min-width: em(500px)) {
-    width: 70%;
-  }
-
-  @media screen and (min-width: em(600px)) {
-    width: 45%;
-    margin: 0 10% 35px 0;
-
-    &:nth-child(2n) {
-      margin-right: 0;
-    }
-  }
-
-  @media screen and (min-width: em(950px)) {
-    width: 32%;
-
-    &:nth-child(n) {
-      margin: 0 2% 35px 0;
-    }
-
-    &:nth-child(3n) {
-      margin-right: 0;
-    }
-  }
-
-  @media screen and (min-width: em(1240px)) {
-    width: 23.5%;
-
-    &:nth-child(n) {
-      margin: 0 2% 35px 0;
-    }
-
-    &:nth-child(4n) {
-      margin-right: 0;
-    }
-  }
-
-  @media screen and (min-width: em(1700px)) {
-    width: 18%;
-
-    &:nth-child(n) {
-      margin: 0 2.5% 35px 0;
-    }
-
-    &:nth-child(5n) {
-      margin-right: 0;
-    }
-  }
-
-  @media screen and (min-width: 2100px) {
-    width: 15%;
-
-    &:nth-child(n) {
-      margin: 0 2% 35px 0;
-    }
-
-    &:nth-child(6n) {
-      margin-right: 0;
-    }
-  }
-
-
-  a {
-    @extend %flex--horizontal-start;
-
-    flex-wrap: wrap;
+  &__object-card {
     width: 100%;
-    border: 1px $color--card-border solid;
+    margin-bottom: 2em;
 
-    background-color: $color--card-background;
+    @media screen and (min-width: em(400px)) {
+      width: 80%;
+    }
 
-    text-decoration: none;
+    @media screen and (min-width: em(500px)) {
+      width: 70%;
+    }
 
-    transition: transform .2s;
+    @media screen and (min-width: em(600px)) {
+      width: 45%;
+      margin: 0 10% 35px 0;
 
-    &:focus,
-    &:hover {
-      transform: scale(1.02);
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+    }
+
+    @media screen and (min-width: em(950px)) {
+      width: 32%;
+
+      &:nth-child(n) {
+        margin: 0 2% 35px 0;
+      }
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+
+    @media screen and (min-width: em(1240px)) {
+      width: 23.5%;
+
+      &:nth-child(n) {
+        margin: 0 2% 35px 0;
+      }
+
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+    }
+
+    @media screen and (min-width: em(1700px)) {
+      width: 18%;
+
+      &:nth-child(n) {
+        margin: 0 2.5% 35px 0;
+      }
+
+      &:nth-child(5n) {
+        margin-right: 0;
+      }
+    }
+
+    @media screen and (min-width: 2100px) {
+      width: 15%;
+
+      &:nth-child(n) {
+        margin: 0 2% 35px 0;
+      }
+
+      &:nth-child(6n) {
+        margin-right: 0;
+      }
+    }
+
+
+    a {
+      @extend %flex--horizontal-start;
+
+      flex-wrap: wrap;
+      width: 100%;
+      border: 1px $color--card-border solid;
+
+      background-color: $color--card-background;
+
+      text-decoration: none;
+
+      transition: transform .2s;
+
+      &:focus,
+      &:hover {
+        transform: scale(1.02);
+      }
     }
   }
+}
+
+.object-card {
 
   &__card-header {
     @extend %flex--horizontal-center;
@@ -265,17 +272,21 @@ $color--status--text: darken($bluemix-medium-grey, 5);
   }
 }
 
+.card-list {
+  list-style-type: none;
+  &__card {
+    @extend %font-smoothing;
+    @extend %helvetica-light;
+    @extend %transition--card;
+
+    display: inline-block;
+    width: em(245px);
+    height: em(250px);
+    background-color: $color--card;
+  }
+}
+
 .card {
-  @extend %font-smoothing;
-  @extend %helvetica-light;
-  @extend %transition--card;
-
-  display: inline-block;
-  width: em(245px);
-  height: em(250px);
-
-  background-color: $color--card;
-
   &__link-wrapper {
     text-decoration: none;
   }
@@ -292,7 +303,6 @@ $color--status--text: darken($bluemix-medium-grey, 5);
     justify-content: center;
     padding: em(14px) em(10px);
     border-top: 1px solid $color--bindings--divider;
-
     list-style-type: none;
   }
 
@@ -302,7 +312,6 @@ $color--status--text: darken($bluemix-medium-grey, 5);
     flex-direction: row;
     height: em(35px);
     padding: 0 em(10px);
-
     background-color: $color--status;
   }
 }
