@@ -1,4 +1,4 @@
-# Bluemix Components Dev Notes
+# Dev Notes
 
 When developing for Bluemix Components:
 
