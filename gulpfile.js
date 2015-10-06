@@ -80,7 +80,7 @@ gulp.task('browser-sync', function() {
 // HTML Tasks
 //////////////////////////////
 
-gulp.task('html:dist', function() {
+gulp.task('html', function() {
   var npmDistComponents = gulp.src(dirs.html.components).pipe(gulp.dest('npm-dist/components'));
   var bowerDistComponents = gulp.src(dirs.html.components).pipe(gulp.dest('bower-dist/components'));
 
@@ -213,7 +213,7 @@ gulp.task('markdown', function() {
 // Running Tasks
 //////////////////////////////
 
-gulp.task('build', ['sass', 'image', 'markdown', 'js']);
+gulp.task('build', ['sass', 'image', 'markdown', 'js', 'html']);
 
 gulp.task('watch', ['sass:watch', 'js:watch', 'image:watch']);
 
