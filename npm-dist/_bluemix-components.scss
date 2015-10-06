@@ -1,33 +1,23 @@
-//////////////////////////////
-// Bluemix Pattern Library  //
-///////////////////////////////////////////////////////////////////////
-// - @import this scss file into your own scss file (ex. main.scss)
-// - Compile that scss file (main.scss -> main.css)
-// - Link to the css file in your html file.
-// - Write HTML with classes provided by Bluemix Pattern Library
-// - Visit the repo for docs: https://github.ibm.com/Bluemix/pattern-library
-///////////////////////////////////////////////////////////////////////
+/////////////////////////
+// Bluemix Components  //
+/////////////////////////
 
-// Bluemix Theme (Dependencies)
-//--+ Gulpfile.js runs a task to replace the 'path_to' strings with
-//--+ correct paths to bower_components or node_modules
 @import '../node_modules/bluemix-colors/npm-dist/bluemix-colors';
 @import '../node_modules/bluemix-typography/bluemix-typography';
 
-// Bluemix Patterns
+// Components
 @import 'components/buttons/buttons';
 @import 'components/cards/cards';
-@import 'components/dropdown/dropdown';
 @import 'components/forms/forms';
 @import 'components/links/links';
 @import 'components/lists/lists';
 @import 'components/modals/modals';
-@import 'components/nav/nav';
-@import 'components/radio/radio';
+@import 'components/navigation/nav';
 @import 'components/search/search';
+@import 'components/selects/select';
 @import 'components/tables/tables';
+@import 'components/textfields/text-area';
+@import 'components/textfields/text-field';
+@import 'components/toggles/checkbox';
+@import 'components/toggles/radio';
 @import 'components/tooltips/tooltips';
-
-// Atlas Patterns
-@import 'components/nav/atlas-global-header';
-@import 'components/cards/atlas-card';
