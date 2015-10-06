@@ -83,68 +83,93 @@ Here are the dependencies:
 
 ## Components Folders and Files
 ```bash
+dev/components
 ├── buttons
-│   ├── _buttons.scss
-│   └── html
-│       ├── close-button.html
-│       ├── danger-button.html
-│       ├── primary-button.html
-│       ├── secondary-button.html
-│       ├── tertiary-button.html
-│       └── warning-button.html
-├── cards
-│   ├── _atlas-card.scss
-│   ├── _cards.scss
-│   └── html
-│       ├── atlas-card.html
-│       └── card.html
-├── dropdown
-│   ├── _dropdown.scss
 │   ├── html
-│   │   └── dropdown.html
-│   └── js
-│       └── dropdown.js
+│   │   ├── close-button.html
+│   │   ├── danger-button.html
+│   │   ├── primary-button.html
+│   │   ├── secondary-button.html
+│   │   ├── tertiary-button.html
+│   │   └── warning-button.html
+│   └── scss
+│       └── _buttons.scss
+├── cards
+│   ├── html
+│   │   ├── atlas-card.html
+│   │   └── card.html
+│   └── scss
+│       └── _cards.scss
 ├── forms
-│   ├── _forms.scss
-│   └── html
-│       └── form.html
+│   ├── html
+│   │   ├── form-group.html
+│   │   └── form.html
+│   └── scss
+│       └── _forms.scss
 ├── links
-│   ├── _links.scss
-│   └── html
-│       └── content-link.html
+│   ├── html
+│   │   └── content-link.html
+│   └── scss
+│       └── _links.scss
 ├── lists
-│   ├── _lists.scss
-│   └── html
-│       ├── card-list.html
-│       ├── nested-list.html
-│       ├── ordered-list.html
-│       └── unordered-list.html
+│   ├── html
+│   │   ├── card-list.html
+│   │   ├── nested-list.html
+│   │   ├── ordered-list.html
+│   │   └── unordered-list.html
+│   └── scss
+│       └── _lists.scss
 ├── modals
-│   ├── _modals.scss
-│   └── html
-│       └── modal.html
+│   ├── html
+│   │   └── modal.html
+│   └── scss
+│       └── _modals.scss
 ├── nav
-│   ├── _atlas-global-header.scss
-│   ├── _nav.scss
 │   ├── html
 │   │   ├── atlas-global-header.html
 │   │   ├── global-nav.html
 │   │   └── secondary-nav.html
-│   └── js
-│       ├── atlas-global-header.js
-│       └── global-nav.js
-├── radio
-│   ├── _radio.scss
-│   └── html
-│       └── radio.html
+│   ├── js
+│   │   ├── _atlas-global-header.js
+│   │   └── _global-nav.js
+│   └── scss
+│       └── _nav.scss
+├── search
+│   ├── html
+│   │   └── search.html
+│   └── scss
+│       └── _search.scss
+├── select
+│   ├── html
+│   │   └── select.html
+│   ├── js
+│   │   └── _select.js
+│   └── scss
+│       └── _select.scss
 ├── tables
-│   ├── _tables.scss
-│   └── html
-│       └── table.html
+│   ├── html
+│   │   └── table.html
+│   └── scss
+│       └── _tables.scss
+├── textfields
+│   ├── html
+│   │   ├── textarea.html
+│   │   └── textfield.html
+│   └── scss
+│       ├── _textarea.scss
+│       └── _textfield.scss
+├── toggles
+│   ├── html
+│   │   ├── checkbox.html
+│   │   └── radio.html
+│   └── scss
+│       ├── _checkbox.scss
+│       └── _radio.scss
 └── tooltips
-    ├── _tooltips.scss
-    └── html
-        └── tooltip.html
+    ├── html
+    │   └── tooltip.html
+    └── scss
+        └── _tooltips.scss
 
-24 directories, 38 files
+41 directories, 45 files
 ```
