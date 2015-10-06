@@ -8,23 +8,56 @@ The aim is for every developer to use consistent HTML, CSS, and JavaScript in as
 
 ## Install
 
-### Bower
+Installing Bluemix Components will automatically give you access to these dependencies:
 
+- [bluemix-colors](https://www.npmjs.com/package/bluemix-colors): A scss file with a palette of Bluemix colors based on [IBM-Design/colors](https://github.com/IBM-Design/colors)
+- [bluemix-typography](https://www.npmjs.com/package/bluemix-typography): A scss file with typography-related functions, classes, and extends.
+
+**Bower**:
+
+Initialize a **bower.json** file:
+```bash
+bower init
 ```
+
+Create a **.bowerrc** file:
+```json
+{ "registry": "http://bower.stage1.mybluemix.net/" }
+```
+
+Install the bower package:
+
+```bash
 bower install bluemix-components --save-dev
 ```
 
-### NPM
-```
-npm install bluemix-components -D
+Create a **main.scss** file in your project and `@import` bluemix-components with a relative path to the bower package.
+
+You can also configure your **.bowerrc** file to install bluemix-components and other bower packages in another directory. Please see refer to [bower/spec](https://github.com/bower/spec/blob/master/config.md#directory) docs.
+
+**NPM**:
+
+Initialize a **package.json** file:
+```bash
+npm init
 ```
 
-Create a **main.scss** file in your project and `@import` bluemix-pattern-library with a relative path to the node module.
+Install:
+
+```bash
+npm install bluemix-components -D
+```
 
 ```scss
 // main.scss
 @import 'path/to/node_modules/bluemix-pattern-library/dist/pattern-library';
 ```
+
+Create a **main.scss** file in your project and `@import` bluemix-components with a relative path to the **node_modules**.
+
+## Usage
+
+**Using all styles from Bluemix Components**:
 
 Compile your **main.scss** file with something (Gulp.js, Grunt, etc.) and you'll get a **main.css** file with all the compiled Sass.
 
@@ -47,18 +80,11 @@ Here's an example.
 </body>
 </html>
 ```
-- Make sure to add `bx-light` or `bx-dark` class to the body tag.
+- Make sure to add `light-ui` or `dark-ui` class to the `<body>` tag (not working yet).
 
-## Dependencies
+**Pick and choose styles you need**:
 
-By default, this library will reflect the visual design of IBM Bluemix. If you need different colors or typography styles, you will be enabled to do so.
-
-For right now, you will only be able to use Bluemix colors and typography.
-
-Here are the dependencies:
-
-- [bluemix-colors](https://www.npmjs.com/package/bluemix-colors): A palette of Bluemix colors based on [IBM-Design/colors](https://github.com/IBM-Design/colors)
-- [bluemix-typography](https://www.npmjs.com/package/bluemix-typography): Typography functions, variables and fonts that are commonly used in Bluemix.
+*docs coming soon*
 
 ## Components Folders and Files
 ```bash
@@ -105,9 +131,7 @@ dev/components
 │       └── _modals.scss
 ├── nav
 │   ├── html
-│   │   ├── atlas-global-header.html
-│   │   ├── global-nav.html
-│   │   └── secondary-nav.html
+│   │   └── nav.html
 │   ├── js
 │   │   ├── _atlas-global-header.js
 │   │   └── _global-nav.js
@@ -150,5 +174,5 @@ dev/components
     └── scss
         └── _tooltips.scss
 
-41 directories, 45 files
+41 directories, 43 files
 ```
