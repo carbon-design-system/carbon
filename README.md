@@ -87,7 +87,7 @@ Here's an example.
 *docs coming soon*
 
 ## Components Folders and Files
-```bash
+```
 dev/components
 ├── buttons
 │   ├── _buttons.scss
