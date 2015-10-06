@@ -5,15 +5,17 @@
 //////////////////////////////
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
+var concat = require('gulp-concat');
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
+var lazypipe = require('lazypipe');
+var merge = require('merge-stream');
 var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var sass = require('gulp-sass');
 var stylish = require('jshint-stylish');
-var merge = require('merge-stream');
-var lazypipe = require('lazypipe');
+var uglify = require('gulp-uglify');
 
 //////////////////////////////
 // Variables
@@ -32,6 +34,8 @@ var dirs = {
     ]
   },
   'js': {
+    'main': 'dev/*.js',
+    'components': 'dev/components/**/*.js',
     'lint': [
       'Gulpfile.js',
       '*.json',
@@ -40,9 +44,10 @@ var dirs = {
     ]
   },
   'html': {
+    'components': 'dev/components/**/*.html',
     'reload': [
       'dev/index.html',
-      'dev/components/**/html/*.html'
+      'dev/components/**/*.html'
     ]
   }
 };
@@ -75,6 +80,13 @@ gulp.task('browser-sync', function() {
 // HTML Tasks
 //////////////////////////////
 
+gulp.task('html:dist', function() {
+  var npmDistComponents = gulp.src(dirs.html.components).pipe(gulp.dest('npm-dist/components'));
+  var bowerDistComponents = gulp.src(dirs.html.components).pipe(gulp.dest('bower-dist/components'));
+
+  return merge(npmDistComponents, bowerDistComponents);
+});
+
 gulp.task('html:reload', function() {
   gulp.watch(dirs.html.reload).on('change', browserSync.reload);
 });
@@ -83,15 +95,38 @@ gulp.task('html:reload', function() {
 // JavaScript Tasks
 //////////////////////////////
 
-gulp.task('jshint', function() {
+gulp.task('js', function() {
+  var concatOnly = gulp.src(dirs.js.components)
+    .pipe(concat('bluemix-componets.js'))
+    .pipe(gulp.dest('dev'));
+
+  var minify = gulp.src(dirs.js.components)
+    .pipe(concat('bluemix-componets.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dev'));
+
+  return merge(concatOnly, minify);
+});
+
+gulp.task('js:hint', function() {
   return gulp.src(dirs.js.lint)
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('jshint:watch', function() {
-  gulp.watch(dirs.js.lint, ['jshint']);
+gulp.task('js:dist', function() {
+  var npmDistMain = gulp.src(dirs.js.main)
+    .pipe(gulp.dest('npm-dist'));
+
+  var bowerDistMain = gulp.src(dirs.js.main)
+    .pipe(gulp.dest('bower-dist'));
+
+  return merge(npmDistMain, bowerDistMain);
+});
+
+gulp.task('js:watch', function() {
+  gulp.watch(dirs.js.lint, ['js', 'js:hint', 'js:dist']);
 });
 
 gulp.task('js:reload', function() {
@@ -178,8 +213,10 @@ gulp.task('markdown', function() {
 // Running Tasks
 //////////////////////////////
 
-gulp.task('build', ['sass', 'image', 'markdown']);
+gulp.task('build', ['sass', 'image', 'markdown', 'js']);
 
-gulp.task('watch', ['sass:watch', 'jshint:watch', 'image:watch', 'html:reload', 'js:reload']);
+gulp.task('watch', ['sass:watch', 'js:watch', 'image:watch']);
 
-gulp.task('default', ['browser-sync', 'build', 'watch']);
+gulp.task('reload', ['html:reload', 'js:reload']);
+
+gulp.task('default', ['browser-sync', 'build', 'watch', 'reload']);
