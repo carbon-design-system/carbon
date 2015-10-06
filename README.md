@@ -6,27 +6,6 @@ Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable
 
 The aim is for every developer to use consistent HTML, CSS, and JavaScript in as many places as possible in their prototype and production work.
 
-## Changelog
-
-### Version 0.0.9 (Latest)
-
-*Updated on 9/9/2015: Browse [repo](https://github.ibm.com/Bluemix/pattern-library/tree/f9707fb5c786f53f49bfe1531926d38fe95ec668) at this point in history.*
-
-#### Components
-- Add atlas-cards
-
-- Update button sizing
-  - font-size smaller (14px or .875em)
-  - height shorter (44px or 2.75em)
-  - min-width smaller (6em or 96px)
-
-- Update behavior and styles for modal
-  - Use CSS :target selector to reveal modal
-  - Update styles for mobile-first design
-
-
-View all previous [CHANGELOG.md](https://github.ibm.com/Bluemix/pattern-library/blob/master/PATCHNOTES.md) for changes to the Pattern Library.
-
 ## Install
 
 ### Bower
