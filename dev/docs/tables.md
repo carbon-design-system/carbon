@@ -64,9 +64,9 @@ Tables typically contain text, but may enclose other elements (i.e. icons and im
 ## Accessibility Notes:
 There are two types of tables that are commonly used in HTML. Data tables contain multiple rows and columns and are used to present information to a user in a clean, concise manner. Layout tables are used to lay out the images and text on a page. Layout tables do not contain tabular data and are only used for the visual layout.
 
-Using layout tables to make your pages more visually appealing may create difficulties for someone using assistive technologies, as they will not be able to immediately discern that the table is used only for layout. Therefore, our design standard expressly forbids using tables for layout.
+Our design standard expressly forbids using tables for layout. Using layout tables to make your pages more visually appealing may create difficulties for someone using assistive technologies, as they will not be able to immediately discern that the table is used only for layout.
 
-To comply with this checkpoint, you must meet all of the following techniques. These techniques are defined in [WCAG 2.0 Level A Success Criterion 1.3.1]http://www.w3.org/TR/UNDERSTANDING-WCAG20/content-structure-separation-programmatic.html. These techniques are consistent with the Section 508 guideline for accessible tables.
+You must meet all of the following techniques defined in [WCAG 2.0 Level A Success Criterion 1.3.1]http://www.w3.org/TR/UNDERSTANDING-WCAG20/content-structure-separation-programmatic.html. These techniques are consistent with the Section 508 guideline for accessible tables.
 
     1. Table markup: Use table markup to present tabular information.
     2. Id and headers in tables: Use id and headers attributes to associate data cells with header cells in data tables.
