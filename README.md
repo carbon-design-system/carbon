@@ -90,89 +90,60 @@ Here's an example.
 ```bash
 dev/components
 ├── buttons
-│   ├── html
-│   │   ├── close-button.html
-│   │   ├── danger-button.html
-│   │   ├── primary-button.html
-│   │   ├── secondary-button.html
-│   │   ├── tertiary-button.html
-│   │   └── warning-button.html
-│   └── scss
-│       └── _buttons.scss
+│   ├── _buttons.scss
+│   ├── close-button.html
+│   ├── danger-button.html
+│   ├── primary-button.html
+│   ├── secondary-button.html
+│   ├── tertiary-button.html
+│   └── warning-button.html
 ├── cards
-│   ├── html
-│   │   ├── atlas-card.html
-│   │   └── card.html
-│   └── scss
-│       └── _cards.scss
+│   ├── _cards.scss
+│   ├── atlas-card.html
+│   └── card.html
 ├── forms
-│   ├── html
-│   │   ├── form-group.html
-│   │   └── form.html
-│   └── scss
-│       └── _forms.scss
+│   ├── _forms.scss
+│   ├── form-group.html
+│   └── form.html
 ├── links
-│   ├── html
-│   │   └── content-link.html
-│   └── scss
-│       └── _links.scss
+│   ├── _links.scss
+│   └── link.html
 ├── lists
-│   ├── html
-│   │   ├── card-list.html
-│   │   ├── nested-list.html
-│   │   ├── ordered-list.html
-│   │   └── unordered-list.html
-│   └── scss
-│       └── _lists.scss
+│   ├── _lists.scss
+│   ├── card-list.html
+│   ├── nested-list.html
+│   ├── ordered-list.html
+│   └── unordered-list.html
 ├── modals
-│   ├── html
-│   │   └── modal.html
-│   └── scss
-│       └── _modals.scss
-├── nav
-│   ├── html
-│   │   └── nav.html
-│   ├── js
-│   │   ├── _atlas-global-header.js
-│   │   └── _global-nav.js
-│   └── scss
-│       └── _nav.scss
+│   ├── _modals.scss
+│   └── modal.html
+├── navigation
+│   ├── _nav.scss
+│   └── nav.html
 ├── search
-│   ├── html
-│   │   └── search.html
-│   └── scss
-│       └── _search.scss
-├── select
-│   ├── html
-│   │   └── select.html
-│   ├── js
-│   │   └── _select.js
-│   └── scss
-│       └── _select.scss
+│   ├── _search.js
+│   ├── _search.scss
+│   └── search.html
+├── selects
+│   ├── _select.js
+│   ├── _select.scss
+│   └── select.html
 ├── tables
-│   ├── html
-│   │   └── table.html
-│   └── scss
-│       └── _tables.scss
+│   ├── _tables.scss
+│   └── table.html
 ├── textfields
-│   ├── html
-│   │   ├── textarea.html
-│   │   └── textfield.html
-│   └── scss
-│       ├── _textarea.scss
-│       └── _textfield.scss
+│   ├── _text-area.scss
+│   ├── _text-field.scss
+│   ├── text-area.html
+│   └── text-field.html
 ├── toggles
-│   ├── html
-│   │   ├── checkbox.html
-│   │   └── radio.html
-│   └── scss
-│       ├── _checkbox.scss
-│       └── _radio.scss
+│   ├── _checkbox.scss
+│   ├── _radio.scss
+│   ├── checkbox.html
+│   └── radio.html
 └── tooltips
-    ├── html
-    │   └── tooltip.html
-    └── scss
-        └── _tooltips.scss
+    ├── _tooltips.scss
+    └── tooltip.html
 
-41 directories, 43 files
+13 directories, 42 files
 ```
