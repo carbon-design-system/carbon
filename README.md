@@ -75,7 +75,7 @@ Here's an example.
   <title>Pattern Library Dev</title>
   <link rel="stylesheet" href="main.css">
 </head>
-<body class="bx-light">
+<body class="light-ui">
   <button class="btn--primary" type="button">primary button</button>
 </body>
 </html>
