@@ -213,7 +213,7 @@ gulp.task('markdown', function() {
 // Running Tasks
 //////////////////////////////
 
-gulp.task('build', ['sass', 'image', 'markdown', 'js', 'html']);
+gulp.task('build', ['sass', 'sass:dist', 'image', 'markdown', 'js', 'html']);
 
 gulp.task('watch', ['sass:watch', 'js:watch', 'image:watch']);
 
