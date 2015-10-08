@@ -80,7 +80,7 @@ gulp.task('browser-sync', function() {
 // HTML Tasks
 //////////////////////////////
 
-gulp.task('html', function() {
+gulp.task('html:dist', function() {
   var npmDistComponents = gulp.src(dirs.html.components).pipe(gulp.dest('npm-dist/components'));
   var bowerDistComponents = gulp.src(dirs.html.components).pipe(gulp.dest('bower-dist/components'));
 
@@ -90,18 +90,17 @@ gulp.task('html', function() {
 gulp.task('html:reload', function() {
   gulp.watch(dirs.html.reload).on('change', browserSync.reload);
 });
-
 //////////////////////////////
 // JavaScript Tasks
 //////////////////////////////
 
-gulp.task('js', function() {
+gulp.task('js:compile', function() {
   var concatOnly = gulp.src(dirs.js.components)
-    .pipe(concat('bluemix-componets.js'))
+    .pipe(concat('bluemix-components.js'))
     .pipe(gulp.dest('dev'));
 
   var minify = gulp.src(dirs.js.components)
-    .pipe(concat('bluemix-componets.min.js'))
+    .pipe(concat('bluemix-components.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dev'));
 
@@ -126,12 +125,14 @@ gulp.task('js:dist', function() {
 });
 
 gulp.task('js:watch', function() {
-  gulp.watch(dirs.js.lint, ['js', 'js:hint', 'js:dist']);
+  gulp.watch(dirs.js.lint, ['js', 'js:hint']);
 });
 
 gulp.task('js:reload', function() {
   gulp.watch(dirs.js.lint).on('change', browserSync.reload);
 });
+
+gulp.task('js', ['js:compile', 'js:dist']);
 
 
 //////////////////////////////
@@ -139,7 +140,7 @@ gulp.task('js:reload', function() {
 //////////////////////////////
 
 // Using importPaths here to properly compile dev.css for development
-gulp.task('sass', function() {
+gulp.task('sass:compile', function() {
   return gulp.src(dirs.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
     .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
@@ -177,11 +178,13 @@ gulp.task('sass:watch', function() {
   gulp.watch([dirs.sass.main, dirs.sass.components], ['sass', 'sass:dist']);
 });
 
+gulp.task('sass', ['sass:compile', 'sass:dist']);
+
 //////////////////////////////
 // Image Tasks
 //////////////////////////////
 
-gulp.task('image', function() {
+gulp.task('image:dist', function() {
   var npmDist = gulp.src(dirs.images)
     .pipe(gulp.dest('npm-dist/images'));
 
@@ -199,7 +202,7 @@ gulp.task('image:watch', function() {
 // Markdown Tasks
 //////////////////////////////
 
-gulp.task('markdown', function() {
+gulp.task('markdown:dist', function() {
   var npmDist = gulp.src(dirs.markdown)
     .pipe(gulp.dest('npm-dist/docs'));
 
@@ -213,10 +216,12 @@ gulp.task('markdown', function() {
 // Running Tasks
 //////////////////////////////
 
-gulp.task('build', ['sass', 'sass:dist', 'image', 'markdown', 'js', 'html']);
+gulp.task('dist', ['image:dist', 'markdown:dist', 'html:dist'])
+
+gulp.task('build', ['sass', 'js']);
 
 gulp.task('watch', ['sass:watch', 'js:watch', 'image:watch']);
 
 gulp.task('reload', ['html:reload', 'js:reload']);
 
-gulp.task('default', ['browser-sync', 'build', 'watch', 'reload']);
+gulp.task('default', ['browser-sync', 'build', 'watch', 'reload', 'dist']);
