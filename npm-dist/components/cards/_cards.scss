@@ -49,7 +49,7 @@ $color--card-metadata: color('blue', 30);
 
     @media screen and (min-width: em(600px)) {
       width: 45%;
-      margin: 0 10% 35px 0;
+      margin: 0 10% em(35px) 0;
 
       &:nth-child(2n) {
         margin-right: 0;
@@ -60,7 +60,7 @@ $color--card-metadata: color('blue', 30);
       width: 32%;
 
       &:nth-child(n) {
-        margin: 0 2% 35px 0;
+        margin: 0 2% em(35px) 0;
       }
 
       &:nth-child(3n) {
@@ -72,7 +72,7 @@ $color--card-metadata: color('blue', 30);
       width: 23.5%;
 
       &:nth-child(n) {
-        margin: 0 2% 35px 0;
+        margin: 0 2% em(35px) 0;
       }
 
       &:nth-child(4n) {
@@ -84,7 +84,7 @@ $color--card-metadata: color('blue', 30);
       width: 18%;
 
       &:nth-child(n) {
-        margin: 0 2.5% 35px 0;
+        margin: 0 2.5% em(35px) 0;
       }
 
       &:nth-child(5n) {
@@ -96,7 +96,7 @@ $color--card-metadata: color('blue', 30);
       width: 15%;
 
       &:nth-child(n) {
-        margin: 0 2% 35px 0;
+        margin: 0 2% em(35px) 0;
       }
 
       &:nth-child(6n) {
@@ -349,7 +349,7 @@ $color--status--text: darken($bluemix-medium-grey, 5);
     width: em(36px);
     height: em(36px);
     padding: em(3px);
-    border: em(3px) solid $color--bindings--icon-border;
+    border: 3px solid $color--bindings--icon-border;
     border-radius: 50%;
     margin: 0 em(2px);
   }

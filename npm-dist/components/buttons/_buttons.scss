@@ -79,14 +79,15 @@ $warning-btn--text-color: #000;
 
   background-color: transparent;
 
-  [aria-label='Close'] {
+  [aria-label='close'] {
     display: inline-block;
 
     color: $close-btn--text-color;
 
     font-size: typescale(1);
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: ligthen($close-btn--text-color, 15);
     }
   }
