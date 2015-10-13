@@ -1,6 +1,6 @@
-$table-blue: color('blue');
-$table-light-blue: #d5eaff;
-$table-text-color: color('cool-gray', 40);
+$color__table--blue: color('blue');
+$color__table--light-blue: #d5eaff;
+$color__table-text: color('cool-gray', 40);
 $cell-padding: em(8px);
 
 .table-section {
@@ -10,13 +10,13 @@ $cell-padding: em(8px);
   max-width: 100%;
 
   background-color: transparent;
-  color: $table-text-color;
+  color: $color__table-text;
 
   border-spacing: 0;
   border-collapse: collapse;
 
   &__header {
-    border-bottom: 4px solid $table-blue;
+    border-bottom: 4px solid $color__table--blue;
   }
 }
 
@@ -30,8 +30,9 @@ $cell-padding: em(8px);
 
 .body__row {
 
-  &:hover {
-    background-color: $table-light-blue;
+  &:hover,
+  &:focus {
+    background-color: $color__table--light-blue;
   }
 
   &--cell {

@@ -18,7 +18,8 @@ $color__content-link--hover: $cool-grey-50;
   }
 
   &:active,
-  &:hover {
+  &:hover,
+  &:focus {
     @extend %content-link__transition;
 
     color: $color__content-link--hover;

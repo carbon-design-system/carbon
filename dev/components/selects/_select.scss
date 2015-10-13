@@ -7,7 +7,7 @@
     display: inline-block;
     min-width: 9.375em;
     padding: .5em 0 .5em 1em;
-    border: 1px solid gray;
+    border: 1px solid color('gray');
     border-radius: 0;
     margin: 1em 0 1em .5em;
 
@@ -18,7 +18,7 @@
     background-size: 13px;
 
     font-size: typescale(1);
-    font-weight: bold;
+    font-weight: 800;
     text-decoration: none;
 
     cursor: pointer;
