@@ -260,8 +260,9 @@
   }
 }
 
-.card-list {
+%card-list {
   list-style-type: none;
+
   &__card {
     @extend %font-smoothing;
     @extend %helvetica-light;
@@ -274,7 +275,7 @@
   }
 }
 
-.card {
+%card {
   &__link-wrapper {
     text-decoration: none;
   }
@@ -304,7 +305,7 @@
   }
 }
 
-.info {
+%info {
   &__icon {
     display: block;
     margin: 0 auto em(14px);
@@ -329,7 +330,7 @@
   }
 }
 
-.bindings {
+%bindings {
   &__icon {
     display: flex;
     align-items: center;
@@ -343,7 +344,7 @@
   }
 }
 
-.status {
+.%status {
   &__icon {
     &--running {
       width: em(17px);

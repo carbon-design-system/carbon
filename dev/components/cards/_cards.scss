@@ -78,3 +78,69 @@
   }
 }
 
+//////////////////////////////
+// Bluemix Cards (.card)
+//////////////////////////////
+
+.card-list {
+  @extend %card-list;
+
+  &__card {
+    @extend %card-list__card;
+  }
+}
+
+.card {
+  &__link-wrapper {
+    @extend %card__link-wrapper;
+  }
+
+  &__info {
+    @extend %card__info;
+  }
+
+  &__bindings {
+    @extend %card__bindings;
+  }
+
+  &__status {
+    @extend %card__status;
+  }
+}
+
+.info {
+  &__icon {
+    @extend %info__icon;
+  }
+
+  &__name {
+    @extend %info__name;
+  }
+
+  &__link {
+    @extend %info__link;
+  }
+}
+
+.bindings {
+  &__icon {
+    @extend %bindings__icon;
+  }
+}
+
+.status {
+  &__icon {
+    &--running {
+      @extend %status__icon--running;
+    }
+  }
+
+  &__text {
+    &--running {
+      @extend %status__text--running;
+    }
+  }
+}
+
+
+
