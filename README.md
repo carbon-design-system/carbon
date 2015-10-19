@@ -90,13 +90,17 @@ Here's an example.
 ```
 dev/components
 ├── buttons
+    └── _partials.scss
+        ├── _mixins.scss
+        ├── _vars.scss
+        └── _extends.scss
 │   ├── _buttons.scss
-│   ├── close-button.html
-│   ├── danger-button.html
-│   ├── primary-button.html
-│   ├── secondary-button.html
-│   ├── tertiary-button.html
-│   └── warning-button.html
+│   ├── btn--close.html
+│   ├── btn--danger.html
+│   ├── btn--primary.html
+│   ├── btn--secondary.html
+│   ├── btn--tertiary.html
+│   └── btn--warning.html
 ├── cards
 │   ├── _cards.scss
 │   ├── atlas-card.html
