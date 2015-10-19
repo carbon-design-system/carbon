@@ -1,0 +1,39 @@
+// Move to bluemix-grids
+
+%flex--horizontal-start {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+%flex--horizontal-center {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+%flex--horizontal-end {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+}
+
+%flex--vertical-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+//////////////////////////////
+// Bluemix Cards (.card)
+//////////////////////////////
+
+%transition--card {
+  transition: box-shadow .1s;
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 .25em .25em $color--card--hover;
+  }
+}

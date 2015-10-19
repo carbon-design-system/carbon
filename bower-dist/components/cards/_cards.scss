@@ -1,36 +1,10 @@
+@import '_partials/vars';
+@import '_partials/extends';
+
 //////////////////////////////
 // Atlas Card (.object-card)
 //////////////////////////////
 
-$color--card-background: #2a3840;
-$color--card-foreground: #394952;
-$color--card-border: #253139;
-$color--card-content: white;
-$color--card-metadata: color('blue', 30);
-
-%flex--horizontal-start {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-}
-
-%flex--horizontal-center {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
-
-%flex--horizontal-end {
-  display: flex;
-  align-items: flex-end;
-  flex-direction: row;
-}
-
-%flex--vertical-center {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
 
 .card-list {
   list-style-type: none;
@@ -252,25 +226,6 @@ $color--card-metadata: color('blue', 30);
 //////////////////////////////
 // Bluemix Cards (.card)
 //////////////////////////////
-
-$color--card: $white;
-$color--card--hover: #00aed1;
-$color--info--link: $bluemix-medium-grey;
-$color--bindings--divider: lighten($bluemix-light-grey, 2);
-$color--bindings--icon-border: #00bfe5;
-$color--status: #e9f1f4;
-$color--status--running: #13dd6d;
-$color--status--text: darken($bluemix-medium-grey, 5);
-
-%transition--card {
-  transition: box-shadow .1s;
-
-  &:focus,
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0 0 .25em .25em $color--card--hover;
-  }
-}
 
 .card-list {
   list-style-type: none;
