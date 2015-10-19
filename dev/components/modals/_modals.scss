@@ -85,8 +85,7 @@ $breakpoint--medium: 800px;
       flex-direction: row;
 
       .btn--primary {
-        margin-bottom: 1em;
-        margin-left: 1em;
+        margin: 0 1em 1em 0;
 
         order: 2;
       }
@@ -105,16 +104,16 @@ $breakpoint--medium: 800px;
 .icon {
   &--info {
     position: relative;
-    top: 4px;
-    left: 10px;
+    top: em(4px);
+    left: em(10px);
 
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    margin-right: 20px;
+    width: em(24px);
+    height: em(24px);
+    margin-right: em(20px);
 
     background-image: url('images/sprite.png');
-    background-position: -32px -112px;
+    background-position: em(-32px) em(-112px);
 
     @media screen and (min-width: $breakpoint--small) {
       left: 0;

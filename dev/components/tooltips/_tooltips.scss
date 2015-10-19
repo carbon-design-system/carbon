@@ -1,4 +1,4 @@
-$color--tooltip-background: #3b4b54;
+$color__tooltip--background: #3b4b54;
 $tooltip--accent: $white;
 
 [class ^= 'tooltip'] {
@@ -7,14 +7,17 @@ $tooltip--accent: $white;
 	display: inline-block;
 
 	font-size: 1rem;
-	&:before, &:after {
+
+	&:before,
+  &:after {
 		position: absolute;
 
-		background: $color--tooltip-background;
+		background: $color__tooltip--background;
 
 		transition: all .2s ease-in .3s;
 		opacity: 0;
 	}
+
 	&:before {
 		padding: 1em;
 		border: 1px $tooltip--accent solid;
@@ -29,6 +32,7 @@ $tooltip--accent: $white;
 		white-space: nowrap;
 		pointer-events: none;
 	}
+
 	&:after {
 		right: 0;
 		left: 0;
@@ -43,27 +47,34 @@ $tooltip--accent: $white;
 
 		backface-visibility: hidden;
 	}
-	&:hover, &:focus {
-		&:before, &:after {
+
+	&:hover,
+  &:focus {
+		&:before,
+    &:after {
 			opacity: 1;
 		}
 	}
 }
+
 .tooltip {
 	&__top {
 		&:before {
 			bottom: 2em;
 		}
+
 		&:after {
 			bottom: 1.5em;
 
 			transform:rotate(45deg);
 		}
 	}
+
 	&__bottom {
 		&:before {
 			top: 2em;
 		}
+
 		&:after {
 			top: 1.5em;
 
