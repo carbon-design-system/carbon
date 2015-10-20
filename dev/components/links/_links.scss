@@ -1,20 +1,16 @@
-.link-content {
-  @extend %helvetica-bold;
-  @extend %transition--link--content;
-
-  line-height: 1.5;
-  text-decoration: underline;
+.hyperlink {
+  @extend %hyperlink--base;
 
   &,
   &:visited {
-    color: $color--link--content;
+    color: $color--hyperlink;
   }
 
   &:active,
   &:hover,
   &:focus {
-    @extend %transition--link--content;
+    @extend %transition--hyperlink;
 
-    color: $color--link-hover--content;
+    color: $color--hyperlink-hover;
   }
 }
