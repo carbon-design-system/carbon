@@ -1,27 +1,20 @@
-$color__content-link: $blue-40;
-$color__content-link--hover: $cool-grey-50;
-
-%content-link__transition {
-  transition: color, .2s, ease-out;
-}
-
-.content-link {
+.link-content {
   @extend %helvetica-bold;
-  @extend %content-link__transition;
+  @extend %transition--link--content;
 
   line-height: 1.5;
   text-decoration: underline;
 
   &,
   &:visited {
-    color: $color__content-link;
+    color: $color--link--content;
   }
 
   &:active,
   &:hover,
   &:focus {
-    @extend %content-link__transition;
+    @extend %transition--link--content;
 
-    color: $color__content-link--hover;
+    color: $color--link-hover--content;
   }
 }
