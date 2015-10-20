@@ -2,11 +2,6 @@
 // Extends + Mixins (Shared modal styles)
 ////////////////////////////////////////////
 
-// Temporary breakpoints
-$breakpoint--small: 500px;
-$breakpoint--small-1: 600px;
-$breakpoint--medium: 800px;
-
 // General modal styles
 %modal {
   &[aria-hidden='true'] {
@@ -49,16 +44,14 @@ $breakpoint--medium: 800px;
 
   // Header
   &__header {
-    padding: $padding--section;
+    padding: 0 $padding--section;
     border-bottom: 1px solid $color--border--inner;
   }
 
   // Content
   &__content {
-    @extend %helvetica-medium;
-
-    padding: $padding--section;
-
+    @extend %helvetica;
+    padding: 2em $padding--section;
     color: $color--content;
   }
 
@@ -70,15 +63,14 @@ $breakpoint--medium: 800px;
     border-top: 1px solid $color--border--inner;
 
     .btn--primary {
-      margin-bottom: 0;
-      margin-left: 0;
-
+      margin: 0.5em;
+      min-width: 10em;
       order: 1;
     }
 
     .btn--secondary {
-      margin-left: 0;
-
+      margin: 0.5em;
+      min-width: 10em;
       order: 2;
     }
 
@@ -87,7 +79,7 @@ $breakpoint--medium: 800px;
       flex-direction: row;
 
       .btn--primary {
-        margin: 0 1em 1em 0;
+        min-width: 10em;
 
         order: 2;
       }
@@ -100,13 +92,18 @@ $breakpoint--medium: 800px;
 	&__title {
 		@extend %helvetica-light;
 
-		text-transform: uppercase;
 		padding: 1.25em 0;
 	}
 }
 
+%content {
+  &__text {
+    @extend %helvetica-medium;
+  }
+}
+
 // Info icon
-%icon--info {
+/* %icon--info {
     position: relative;
     top: em(4px);
     left: em(10px);
@@ -119,7 +116,4 @@ $breakpoint--medium: 800px;
     background-image: url('images/sprite.png');
     background-position: em(-32px) em(-112px);
 
-    @media screen and (min-width: $breakpoint--small) {
-      left: 0;
-    }
-}
+} */

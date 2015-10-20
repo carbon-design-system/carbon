@@ -13,6 +13,14 @@
   &__header {
     @extend %modal__header;
   }
+
+  &__content {
+    @extend %modal__content;
+  }
+
+  &__actions {
+    @extend %modal__actions;
+  }
 }
 
 .header {
