@@ -3,7 +3,7 @@
 
   &,
   &:visited {
-    color: $color--hyperlink;
+    color: $color__hyperlink;
   }
 
   &:active,
@@ -11,6 +11,6 @@
   &:focus {
     @extend %transition--hyperlink;
 
-    color: $color--hyperlink-hover;
+    color: $color__hyperlink--hover;
   }
 }
