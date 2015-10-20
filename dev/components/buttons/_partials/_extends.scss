@@ -41,11 +41,6 @@
   transition: background-color ease-out .15s, color ease-out .15s;
 }
 
-// Common border styles for all buttons
-@mixin btn--style--border($color) {
-  border: em(3px) solid $color;
-}
-
 ////////////////////////////////////////////
 // Extends (specific button styles)
 ////////////////////////////////////////////
@@ -67,36 +62,36 @@
   [aria-label='close'] {
     display: inline-block;
 
-    color: $close-btn--text-color;
+    color: $color--text--btn-close;
 
     font-size: typescale(1);
 
     &:hover,
     &:focus {
-      color: ligthen($close-btn--text-color, 15);
+      color: ligthen($color--text--btn-close, 15);
     }
   }
 }
 
 %btn--primary {
   @extend %btn--base;
-  @include btn--style--border($primary-btn--color);
+  @include btn--style--border($color--btn--primary);
 
-  background-color: $primary-btn--color;
+  background-color: $color--btn--primary;
   color: $white;
 }
 
 %btn--secondary {
   @extend %btn--base;
   @extend %btn--style--transition;
-  @include btn--style--border($secondary-btn--color);
+  @include btn--style--border($color--btn--secondary);
 
   background-color: transparent;
-  color: $secondary-btn--color;
+  color: $color--btn--secondary;
 
   &:hover,
   &:focus {
-    background-color: $secondary-btn--color;
+    background-color: $color--btn--secondary;
     color: $white;
   }
 }
@@ -104,30 +99,30 @@
 %btn--tertiary {
   @extend %btn--base;
   @extend %btn--style--transition;
-  @include btn--style--border($tertiary-btn--color);
+  @include btn--style--border($color--btn--tertiary);
 
   background-color: transparent;
-  color: $tertiary-btn--color;
+  color: $color--btn--tertiary;
 
   &:hover,
   &:focus {
-    background-color: $tertiary-btn--color;
+    background-color: $color--btn--tertiary;
     color: $white;
   }
 }
 
 %btn--danger {
   @extend %btn--base;
-  @include btn--style--border($danger-btn--color);
+  @include btn--style--border($color--btn--danger);
 
-  background-color: $danger-btn--color;
+  background-color: $color--btn--danger;
   color: $white;
 }
 
 %btn--warning {
   @extend %btn--base;
-  @include btn--style--border($warning-btn--color);
+  @include btn--style--border($color--btn--warning);
 
-  background-color: $warning-btn--color;
-  color: $warning-btn--text-color;
+  background-color: $color--btn--warning;
+  color: $color--text--btn-warning;
 }
