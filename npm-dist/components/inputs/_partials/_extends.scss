@@ -1,0 +1,16 @@
+%input--search {
+  @extend %helvetica-normal;
+
+  width: 100%;
+  padding: .25em;
+  border: none;
+  margin-top: .25em;
+  margin-bottom: .25em;
+
+  background-color: transparent;
+  color: $color__search--accent;
+
+  font-size: 1em;
+
+  appearance: none; // avoids safari from overriding these styles
+}
