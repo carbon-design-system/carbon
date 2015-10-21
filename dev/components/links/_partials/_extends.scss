@@ -1,0 +1,11 @@
+%transition--hyperlink {
+  transition: color, .2s, ease-out;
+}
+
+%hyperlink--base {
+  @extend %helvetica-bold;
+  @extend %transition--hyperlink;
+
+  line-height: 1.5;
+  text-decoration: underline;
+}
