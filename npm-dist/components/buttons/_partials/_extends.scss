@@ -41,11 +41,6 @@
   transition: background-color ease-out .15s, color ease-out .15s;
 }
 
-// Common border styles for all buttons
-@mixin btn--style--border($color) {
-  border: em(3px) solid $color;
-}
-
 ////////////////////////////////////////////
 // Extends (specific button styles)
 ////////////////////////////////////////////
