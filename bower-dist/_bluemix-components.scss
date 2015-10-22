@@ -5,19 +5,19 @@
 @import '../../bluemix-colors/bower-dist/bluemix-colors';
 @import '../../bluemix-typography/bluemix-typography';
 
+// Base Elements
+@import 'base-elements/buttons/buttons';
+@import 'base-elements/forms/forms';
+@import 'base-elements/forms/inputs/inputs';
+@import 'base-elements/forms/selects/select';
+@import 'base-elements/forms/textfields/text-area';
+@import 'base-elements/forms/textfields/text-field';
+@import 'base-elements/links/links';
+@import 'base-elements/lists/lists';
+
 // Components
-@import 'components/buttons/buttons';
 @import 'components/cards/cards';
-@import 'components/forms/forms';
-@import 'components/links/links';
-@import 'components/lists/lists';
-@import 'components/inputs/checkbox';
-@import 'components/inputs/radio';
-@import 'components/inputs/search';
+@import 'components/inputs/inputs';
 @import 'components/modals/modals';
-@import 'components/navigation/nav';
-@import 'components/selects/select';
-@import 'components/tables/tables';
-@import 'components/textfields/text-area';
-@import 'components/textfields/text-field';
+@import 'components/search/search';
 @import 'components/tooltips/tooltips';

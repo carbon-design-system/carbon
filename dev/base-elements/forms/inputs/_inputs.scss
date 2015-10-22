@@ -1,3 +1,8 @@
 @import '_partials/vars';
 @import '_partials/mixins';
 @import '_partials/extends';
+
+.bx--styled input[type="search"],
+.input--search {
+  @extend %input--search;
+}
