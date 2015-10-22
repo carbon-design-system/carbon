@@ -1,0 +1,31 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+// Default/Light UI
+.bx--styled button,
+.btn {
+  &--primary {
+    @extend %btn--primary;
+  }
+
+  &--secondary {
+    @extend %btn--secondary;
+  }
+
+  &--tertiary {
+    @extend %btn--tertiary;
+  }
+
+  &--close {
+    @extend %btn--close;
+  }
+
+  &--danger {
+    @extend %btn--danger;
+  }
+
+  &--warning {
+    @extend %btn--warning;
+  }
+}

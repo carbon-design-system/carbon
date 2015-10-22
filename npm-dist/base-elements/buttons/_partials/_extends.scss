@@ -1,0 +1,128 @@
+////////////////////////////////////////////
+// Extends + Mixins (Shared button styles)
+////////////////////////////////////////////
+
+// Common styles for all buttons (text and text + icon)
+%btn--base {
+  @extend %font-smoothing;
+  @extend %helvetica-bold;
+
+  display: inline-block;
+  min-width: 6em; // 96px
+  height: 2.75em; // 44px
+  padding: .65em 1em;
+  margin: 1em 0 1em .5em;
+
+  font-size: em(14px);
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: em(1px);
+  text-transform: uppercase;
+
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}
+
+// Common styles for buttons with icons only
+%btn--icon-btn {
+  @extend %btn--base;
+
+  min-width: .1em;
+  min-height: .1em;
+}
+
+// Common transition for all buttons
+%btn--style--transition {
+  transition: background-color ease-out .15s, color ease-out .15s;
+}
+
+////////////////////////////////////////////
+// Extends (specific button styles)
+////////////////////////////////////////////
+
+%btn--close {
+  @extend %btn--icon-btn;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: em(10px);
+  height: em(10px);
+  padding: 0;
+  border: 0 solid transparent;
+  margin: 1em;
+
+  background-color: transparent;
+
+  [aria-label='close'] {
+    display: inline-block;
+
+    color: $color--text--btn-close;
+
+    font-size: typescale(1);
+
+    &:hover,
+    &:focus {
+      color: ligthen($color--text--btn-close, 15);
+    }
+  }
+}
+
+%btn--primary {
+  @extend %btn--base;
+  @include btn--style--border($color--btn--primary);
+
+  background-color: $color--btn--primary;
+  color: $white;
+}
+
+%btn--secondary {
+  @extend %btn--base;
+  @extend %btn--style--transition;
+  @include btn--style--border($color--btn--secondary);
+
+  background-color: transparent;
+  color: $color--btn--secondary;
+
+  &:hover,
+  &:focus {
+    background-color: $color--btn--secondary;
+    color: $white;
+  }
+}
+
+%btn--tertiary {
+  @extend %btn--base;
+  @extend %btn--style--transition;
+  @include btn--style--border($color--btn--tertiary);
+
+  background-color: transparent;
+  color: $color--btn--tertiary;
+
+  &:hover,
+  &:focus {
+    background-color: $color--btn--tertiary;
+    color: $white;
+  }
+}
+
+%btn--danger {
+  @extend %btn--base;
+  @include btn--style--border($color--btn--danger);
+
+  background-color: $color--btn--danger;
+  color: $white;
+}
+
+%btn--warning {
+  @extend %btn--base;
+  @include btn--style--border($color--btn--warning);
+
+  background-color: $color--btn--warning;
+  color: $color--text--btn-warning;
+}
