@@ -26,8 +26,12 @@ var dirs = {
   'markdown': 'dev/docs/*.md',
   'sass': {
     'main': 'dev/*.scss',
-    'components': 'dev/components/**/*.scss',
+    'partials': [
+      'dev/base-elements/**/*.scss',
+      'dev/components/**/*.scss'
+    ],
     'lint': [
+      'dev/base-elements/**/*.scss',
       'dev/components/**/*.scss',
       'dev/dev.scss',
       '!dev/*.css'
@@ -35,18 +39,24 @@ var dirs = {
   },
   'js': {
     'main': 'dev/*.js',
-    'components': 'dev/components/**/*.js',
+    'partials': [
+      'dev/base-elements/**/*.js',
+      'dev/components/**/*.js',
+    ],
     'lint': [
       'Gulpfile.js',
       '*.json',
-      'dev/dev.js',
-      'dev/components/**/package.json'
+      'dev/dev.js'
     ]
   },
   'html': {
-    'components': 'dev/components/**/*.html',
+    'partials': [
+      'dev/base-elements/**/*.html'
+      'dev/components/**/*.html'
+    ],
     'reload': [
       'dev/index.html',
+      'dev/base-elements/**/*.html'
       'dev/components/**/*.html'
     ]
   }
