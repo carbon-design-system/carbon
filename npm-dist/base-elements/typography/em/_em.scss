@@ -1,0 +1,11 @@
+// @import '../../../core/sass/core';
+
+@import 'partials/vars';
+@import 'partials/settings';
+@import 'partials/mixins';
+@import 'partials/extends';
+
+.em--base,
+.base--STYLED em {
+  @extend %em--base;
+}
