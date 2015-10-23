@@ -1,0 +1,45 @@
+$color__table--blue: color('blue');
+$color__table--light-blue: #d5eaff;
+$color__table-text: color('cool-gray', 40);
+$cell-padding: em(8px);
+
+.table-section {
+  @extend %helvetica-normal;
+
+  width: 100%;
+  max-width: 100%;
+
+  background-color: transparent;
+  color: $color__table-text;
+
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  &__header {
+    border-bottom: 4px solid $color__table--blue;
+  }
+}
+
+.header__row--heading {
+  padding: $cell-padding;
+
+  color: color('black');
+
+  text-align: left;
+}
+
+.body__row {
+
+  &:hover,
+  &:focus {
+    background-color: $color__table--light-blue;
+  }
+
+  &--cell {
+    padding: $cell-padding;
+  }
+}
+
+.footer__row--cell {
+  padding: $cell-padding;
+}
