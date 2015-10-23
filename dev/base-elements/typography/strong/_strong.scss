@@ -1,0 +1,8 @@
+@import 'partials/vars';
+@import 'partials/mixins';
+@import 'partials/extends';
+
+.strong--base,
+.bx--styled strong {
+  @extend %strong--base;
+}

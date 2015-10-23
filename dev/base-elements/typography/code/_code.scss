@@ -1,0 +1,8 @@
+@import 'partials/vars';
+@import 'partials/mixins';
+@import 'partials/extends';
+
+.code--base,
+.base--STYLED code {
+  @extend %code--base;
+}
