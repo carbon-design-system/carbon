@@ -1,45 +1,31 @@
-$color__table--blue: color('blue');
-$color__table--light-blue: #d5eaff;
-$color__table-text: color('cool-gray', 40);
-$cell-padding: em(8px);
+@import '_partials/vars';
+@import '_partials/extends';
+@import '_partials/mixins';
 
 .table-section {
-  @extend %helvetica-normal;
-
-  width: 100%;
-  max-width: 100%;
-
-  background-color: transparent;
-  color: $color__table-text;
-
-  border-spacing: 0;
-  border-collapse: collapse;
+  @extend %table-section;
 
   &__header {
-    border-bottom: 4px solid $color__table--blue;
+    @extend %table-section__header;
   }
 }
 
 .header__row--heading {
-  padding: $cell-padding;
-
-  color: color('black');
-
-  text-align: left;
+  @extend %header__row--heading;
 }
 
 .body__row {
-
-  &:hover,
-  &:focus {
-    background-color: $color__table--light-blue;
-  }
+  @extend %body__row;
 
   &--cell {
-    padding: $cell-padding;
+    @extend %body__row--cell;
   }
 }
 
-.footer__row--cell {
-  padding: $cell-padding;
+.footer__row {
+  @extend %footer__row;
+
+  &--cell {
+    @extend %footer__row--cell;
+  }
 }
