@@ -21,7 +21,7 @@ var uglify = require('gulp-uglify');
 // Variables
 //////////////////////////////
 
-var dirs = {
+var paths = {
   'images': 'dev/images/*.{png,jpg,jpeg}',
   'markdown': 'dev/docs/*.md',
   'dist': [
@@ -89,18 +89,18 @@ gulp.task('browser-sync', function() {
 //////////////////////////////
 
 gulp.task('html:reload', function() {
-  gulp.watch(dirs.html.reload).on('change', browserSync.reload);
+  gulp.watch(paths.html.reload).on('change', browserSync.reload);
 });
 //////////////////////////////
 // JavaScript Tasks
 //////////////////////////////
 
 gulp.task('js', function() {
-  var concatOnly = gulp.src(dirs.js.concat)
+  var concatOnly = gulp.src(paths.js.concat)
     .pipe(concat('bluemix-components.js'))
     .pipe(gulp.dest('dev'));
 
-  var minify = gulp.src(dirs.js.concat)
+  var minify = gulp.src(paths.js.concat)
     .pipe(concat('bluemix-components.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dev'));
@@ -109,18 +109,18 @@ gulp.task('js', function() {
 });
 
 gulp.task('js:hint', function() {
-  return gulp.src(dirs.js.lint)
+  return gulp.src(paths.js.lint)
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
 
 gulp.task('js:watch', function() {
-  gulp.watch(dirs.js.lint, ['js', 'js:hint']);
+  gulp.watch(paths.js.lint, ['js', 'js:hint']);
 });
 
 gulp.task('js:reload', function() {
-  gulp.watch(dirs.js.lint).on('change', browserSync.reload);
+  gulp.watch(paths.js.lint).on('change', browserSync.reload);
 });
 
 
@@ -130,7 +130,7 @@ gulp.task('js:reload', function() {
 
 // Using importPaths here to properly compile dev.css for development
 gulp.task('sass', function() {
-  return gulp.src(dirs.sass.main)
+  return gulp.src(paths.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
     .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
     .pipe(sass().on('error', sass.logError))
@@ -142,7 +142,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('sass:watch', function() {
-  gulp.watch(dirs.sass.lint, ['sass']);
+  gulp.watch(paths.sass.lint, ['sass']);
 });
 
 //////////////////////////////
@@ -150,7 +150,7 @@ gulp.task('sass:watch', function() {
 //////////////////////////////
 
 gulp.task('image:watch', function() {
-  gulp.watch(dirs.images, ['image']);
+  gulp.watch(paths.images, ['image']);
 });
 
 //////////////////////////////
@@ -158,17 +158,17 @@ gulp.task('image:watch', function() {
 //////////////////////////////
 
 gulp.task('dist', function() {
-  var everything = gulp.src(dirs.dist)
+  var everything = gulp.src(paths.dist)
     .pipe(gulp.dest('bower-dist'))
     .pipe(gulp.dest('npm-dist'));
 
-  var scss_npm = gulp.src(dirs.sass.main)
+  var scss_npm = gulp.src(paths.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
     .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
     .pipe(rename('_bluemix-components.scss'))
     .pipe(gulp.dest('npm-dist'));
 
-  var scss_bower = gulp.src(dirs.sass.main)
+  var scss_bower = gulp.src(paths.sass.main)
     .pipe(replace('{PATH_TO_COLORS}', importPath.bower_components.colors))
     .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.bower_components.typography))
     .pipe(rename('_bluemix-components.scss'))
