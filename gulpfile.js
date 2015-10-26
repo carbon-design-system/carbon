@@ -85,13 +85,6 @@ gulp.task('browser-sync', function() {
 });
 
 //////////////////////////////
-// HTML Tasks
-//////////////////////////////
-
-gulp.task('html:reload', function() {
-  gulp.watch(paths.html.reload).on('change', browserSync.reload);
-});
-//////////////////////////////
 // JavaScript Tasks
 //////////////////////////////
 
@@ -115,14 +108,6 @@ gulp.task('js:hint', function() {
     .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('js:watch', function() {
-  gulp.watch(paths.js.lint, ['js', 'js:hint']);
-});
-
-gulp.task('js:reload', function() {
-  gulp.watch(paths.js.lint).on('change', browserSync.reload);
-});
-
 
 //////////////////////////////
 // Sass Tasks
@@ -130,7 +115,7 @@ gulp.task('js:reload', function() {
 
 // Using importPaths here to properly compile dev.css for development
 gulp.task('sass', function() {
-  return gulp.src(paths.sass.main)
+  var devCSS = gulp.src('dev/**/*.scss')
     .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
     .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
     .pipe(sass().on('error', sass.logError))
@@ -139,19 +124,10 @@ gulp.task('sass', function() {
     }))
     .pipe(gulp.dest('dev'))
     .pipe(browserSync.stream());
+
+  return merge(devCSS);
 });
 
-gulp.task('sass:watch', function() {
-  gulp.watch(paths.sass.lint, ['sass']);
-});
-
-//////////////////////////////
-// Image Task
-//////////////////////////////
-
-gulp.task('image:watch', function() {
-  gulp.watch(paths.images, ['image']);
-});
 
 //////////////////////////////
 // Dist Task
@@ -181,10 +157,13 @@ gulp.task('dist', function() {
 // Running Tasks
 //////////////////////////////
 
+gulp.task('watch', function() {
+  gulp.watch(paths.html.reload, ['dist']).on('change', browserSync.reload);
+  gulp.watch(paths.js.lint, ['js', 'js:hint', 'dist']).on('change', browserSync.reload);
+  gulp.watch('dev/**/*.scss', ['sass', 'dist']);
+  gulp.watch(paths.images, ['image', 'dist']);
+});
+
 gulp.task('build', ['dist', 'sass', 'js']);
 
-gulp.task('watch', ['sass:watch', 'js:watch', 'image:watch']);
-
-gulp.task('reload', ['html:reload', 'js:reload']);
-
-gulp.task('default', ['browser-sync', 'build', 'watch', 'reload']);
+gulp.task('default', ['browser-sync', 'build', 'watch']);
