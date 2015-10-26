@@ -8,6 +8,7 @@
 * [Issues](#issues)
 * [Run Bluemix Components](#run-bluemix-components)
 * [Work in a Branch](#work-in-a-branch)
+* [Squashing Commits with Rebase](#squashing-commits-with-rebase)
 * [Pull Requests](#pull-requests)
   * [Create a Pull Request](#create-a-pull-request)
   * [Collaborate on a Pull Request](#collaborate-on-a-pull-request)
@@ -25,7 +26,7 @@ This document is going to walk you through everything you need to know to collab
 
 ## Forking Workflow
 
-![fork-workflow](https://www.atlassian.com/git/images/tutorials/collaborating/comparing-workflows/forking-workflow/01.svg)
+![forking-workflow](https://www.atlassian.com/git/images/tutorials/collaborating/comparing-workflows/forking-workflow/01.svg)
 
 We use a **forking workflow** with feature branches for us to collaborate here on GitHub Enterprise (GHE).
 
@@ -94,6 +95,8 @@ git push origin master
 
 If you're responsible for reviewing and maintaining the Bluemix Components repo, please see docs for [Syncing with Other Forks]() in [CORE-TEAM.md](https://github.ibm.com/Bluemix/bluemix-components/blob/master/CORE-TEAM.md)
 
+(*Pending: See [Issue #219](https://github.ibm.com/Bluemix/bluemix-components/issues/219)*)
+
 # Contributing to Source Code
 
 Once you've set up your personal repo, and your remotes, you can start making your own contributions to the Bluemix Components repo.
@@ -102,6 +105,8 @@ Once you've set up your personal repo, and your remotes, you can start making yo
 Before you work on anything, [find](https://github.ibm.com/Bluemix/bluemix-components/issues) an issue to work on or [create](https://github.ibm.com/Bluemix/bluemix-components/issues/new) an issue with a description of what you want to work on (i.e. a bug fix, a new component, refactoring, new docs, etc.)
 
 ## Run Bluemix Components
+Bluemix Components is equipped to run a static server to enable development of base-elements and components.
+
 In your terminal, make sure to install npm and bower dependencies.
 
 ```
@@ -159,11 +164,11 @@ git commit -m "Add missing semicolon"
 
 ## Squashing Commits with Rebase
 
-Before pushing to your branch, we want all contributors to squash commits via `git rebase -i` so that there's always **one commit** per **pull request**.
+All contributors should squash commits via `git rebase -i` so that there's always **one commit** per **pull request**.
 
 This allows us to:
-* better understand the commit history.
-* make it easier to revert to previously merged pull requests.
+* better understand our commit history.
+* make it easier to revert to a feature.
 
 Let's get started.
 
@@ -173,6 +178,7 @@ Do a `git log` to see your commit history and count the commits you want to squa
 # As an example...
 git log --oneline
 
+# earliest commit on top, latest commit on bottom...
 c46e938 Fix header.js
 82d4341 Move docs into new docs folder
 22c943b Update README.md
@@ -181,7 +187,7 @@ d7fef3e Add missing curly brace
 
 Let's say I want to squash the last 4 commits into one commit.
 
-I can do a `git rebase` in interactive mode to target the last 4 commits, like this:
+I can do a `git rebase` in `interactive` mode to target the last 4 commits, like this:
 
 ```
 git rebase -i HEAD~4
@@ -197,15 +203,11 @@ squash 82d4341 Move docs into new docs folder
 squash 22c943b Update README.md
 squash d7fef3e Add missing curly brace
 ```
+Always `pick` the first commit in this list, `squash` the rest.
+
 This tells Git to combine all four commits into the first commit on this list (the commit with the word `pick` in front).
 
-But be aware, if the commits you're squashing are already pushed to GitHub, the commits may show up out-of-order. You can re-order the commits in the editor. Move the latest commit (the `pick` commit) to the top of the list.
-
-Write/quit (`:wq`) past the editor.
-
-Git will then guide you through the `rebase` process to resolve any conflicts. (*I don't know how to write docs for resolving conflicts while rebasing -- this happens every time I'm rebasing commits that have been already pushed to GitHub*)
-
-Next, Git is going to show you one more screen to edit the final commit message, something that looks like this:
+Git is going to show you one more screen to edit the final commit message, something that looks like this:
 
 ```
 # This is a combination of 4 commits.
@@ -230,21 +232,18 @@ Add missing curly brace
 Edit this message as you want.
 You can edit this message so the first commit message is more accurate in describing the overall work these 4 commits is accomplishing.
 
-Write/quit again (`:wq`).
-
-When you're ready to push. You can either do a simple git push to your branch or force a push if your squashed commits are already in GitHub.
+When you squash your commits for the first time, all your commits are local, which allows you to `git push` normally to your branch:
 
 ```
-#Do a normal push only if these commits don't exist in GitHub yet
 git push origin <branch-name>
+```
 
-#Force a push
+But after you get feedback on your work, you'll need to `git rebase -i` again and force your pushes:
+
+```
 git push origin <branch-name> -f
 ```
 
-For more details on squashing commits, see:
-* [Squash Commits with Git | David Walsh](http://davidwalsh.name/squash-commits-git)
-* [Squashing commits with Rebase | Git Ready | Nick quaranto](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html)
 
 ## Pull Requests
 
@@ -266,7 +265,7 @@ Sometimes this pull-request button isn't there, so alternatively, you can click 
 
 Clicking this other button will take you to a 'Compare changes' screen. There are two dropdowns to compare two branches. Change the second dropdown to your branch.
 
-*(does this comepare changes thing even work across forks?)*
+*(does this 'compare changes' work across forks?)*
 
 ![compare-changes](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/2327/f635fd24-7c03-11e5-9011-9aff28daaee5.png)
 
