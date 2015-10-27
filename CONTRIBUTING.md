@@ -1,309 +1,292 @@
-# Contributing to Pattern Library
+# Contributing to Bluemix Components
 
-Hello, developer! Thank you for your interest in contributing to this project.
+* [Forking Workflow](#forking-workflow)
+* [Set up and Sync your Personal Repo](#set-up-and-sync-your-fork)
+  * [Fork and Clone](#fork-and-clone)
+  * [Add Upstream Remote](#add-upstream-remote)
+* [Contributing to Source Code](#contributing-to-source-code)
+* [Issues](#issues)
+* [Run Bluemix Components](#run-bluemix-components)
+* [Work in a Branch](#work-in-a-branch)
+* [Pull Requests](#pull-requests)
+  * [Create a Pull Request](#create-a-pull-request)
+  * [Collaborate on a Pull Request](#collaborate-on-a-pull-request)
 
-A pattern library is a living, growing resource that needs to adapt with changes over time. We welcome you to help make this pattern library better than it is today.
 
-## Table of Contents
+Hello!
 
-- [Getting Started](#getting-started)
-- [Code of Conduct](#code-of-conduct)
-- [Details](#details)
-  - [Issues](#issues)
-  - [Feature Branches](#feature-branches)
-  - [Commit Message Standards](#commit-message-standards)
-  - [Submitting Pull Requests](#submitting-pull-requests)
-  - [Reviewing Pull Requests](#reviewing-pull-requests)
+Bluemix Components is a living resource that adapts and changes over time. It's important that we work together in a transparent and consistent manner.
 
-## Getting Started
+This documentation is for everyone: contributors and core-team members.
 
-### 1. Find or Create an Issue
+As a core-team member, see [CORE-TEAM.md](https://github.ibm.com/Bluemix/bluemix-components/blob/master/CORE-TEAM.md) for essential instructions on maintaining this source code repo.
 
-[Find an issue](https://github.ibm.com/Bluemix/pattern-library/issues), assign yourself so we know what you're working on it.
+This document is going to walk you through everything you need to know to collaborate on this source code.
 
-If you can't find an issue:
-  - [Create a new issue](https://github.ibm.com/Bluemix/pattern-library/issues/new)
-  - Add the appropriate label
-  - Assign yourself
+## Forking Workflow
 
-*For more details on working with Issues, [click here](#issues).*
+![fork-workflow](https://www.atlassian.com/git/images/tutorials/collaborating/comparing-workflows/forking-workflow/01.svg)
 
-### 2. Get the Repo
+We use a **forking workflow** with feature branches for us to collaborate here on GitHub Enterprise (GHE).
 
-Clone the repo and `cd` into **pattern-library**
+For full details on how this works, Atlassian has a [great tutorial article](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) we encourage you to read - but while you're here, let's talk about how to get things set up.
 
-```
-git clone git@github.ibm.com:Bluemix/pattern-library.git
-cd pattern-library
-```
+## Set up and Sync your Personal Repo
+In this section, we are setting up remotes for your fork. These remotes are called `upstream` and `origin`.
+* The `origin` remote is set up for you by default. This points to your **personal repo** (or a fork) of bluemix-components. You push your code to this remote.
+* The `upstream` remote connects your fork with the official bluemix-components repo. You pull code from this repo.
 
-### 3. Install dependencies, plugins. Check for updates.
+### Fork and Clone
 
-We use [EditorConfig](http://editorconfig.org/) to keep general coding styles consistent.
-Add the editorconfig plugin for your preferred text-editor, [full list here](http://editorconfig.org/#download).
+Go to [bluemix-components](https://github.ibm.com/Bluemix/bluemix-components) and fork the repo, you'll find a button called 'fork' in the top-right corner.
 
-- **Sublime Text**: https://github.com/sindresorhus/editorconfig-sublime#readme
-- **Atom**: https://github.com/sindresorhus/atom-editorconfig#readme
+![fork](https://help.github.com/assets/images/help/repository/fork_button.jpg)
 
-You must have **node and npm** installed on your computer to contribute.
+When you fork the repo, you're creating a **personal public copy** of the bluemix-components repo. This is known as your **personal repo**. Your personal repo will live under your username.
 
-Install the dependencies.
+Next, you need to `git clone` your personal repo to your computer.
 
 ```
-npm install
+git clone git@github.ibm.com:YOUR_USERNAME/bluemix-components.git
 ```
 
-Check for any version updates for package.json dependencies and devDependencies.
+See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more details.
+
+### Add Upstream Remote
+
+When you clone your personal repo, you will see `origin` is set up for you already by default. This should be pointing to your personal repo.
 
 ```
-npm run update:check
+git remote -v
+
+origin  git@github.ibm.com:YOUR_USERNAME/bluemix-components.git (fetch)
+origin  git@github.ibm.com:YOUR_USERNAME/bluemix-components.git (push)
 ```
 
-Read the prompt -- if necessary, run the following commands to update the package.json and install latest versions of dependencies:
+Now we need to add an `upstream` remote.
+
+In a nutshell, this will enable you to keep your personal repo up to date with the latest changes from the `master` branch of bluemix-components.
 
 ```
-npm run update:all
-npm update
+git remote add upstream git@github.ibm.com:Bluemix/bluemix-components.git
 ```
 
-*See [package.json](https://github.ibm.com/Bluemix/pattern-library/blob/master/package.json) for a list of dependencies and devDependencies.*
-
-### 4. Create and Checkout into New Feature Branch
-
-Create a new feature branch with a name that closely matches the work you're doing to resolve the issue(s) you're working on. Then checkout into that new branch. (You can do both of these steps with the git command below)
+Verify the `upstream` remote has been added.
 
 ```
-git checkout -b <your-feature-branch-name>
+git remote -v
+
+origin  git@github.ibm.com:YOUR_USERNAME/bluemix-components.git (fetch)
+origin  git@github.ibm.com:YOUR_USERNAME/bluemix-components.git (push)
+upstream    git@github.ibm.com:Bluemix/bluemix-components.git (fetch)
+upstream    git@github.ibm.com:Bluemix/bluemix-components.git (push)
 ```
 
-*For more details, see [feature branches](#feature-branches)*
-### 5. Run the code.
+Now that the `upstream` remote is set up, you can update the `master` branch of your personal repo.
 
-Run the gulp command below -- this starts a static server with [browserSync](http://www.browsersync.io/docs/gulp/) via [gulpfile.js](https://github.ibm.com/Bluemix/pattern-library/blob/master/gulpfile.js) and automatically opens a browser that shows all the rendered code for patterns.
-
-```
-gulp
-```
-
-*See [package.json scripts](https://github.ibm.com/Bluemix/pattern-library/blob/master/package.json#L24) and [gulpfile.js](https://github.ibm.com/Bluemix/pattern-library/blob/master/gulpfile.js) to see what's happening.*
-
-### 6. Work inside the dev folder only.
-
-- Find the pattern you're working on inside the [patterns folder](https://github.ibm.com/Bluemix/pattern-library/tree/master/dev/patterns).
-- Update **html, scss and md** files, you'll find these inside each pattern folder.
-- The `gulp` command will automatically update the browser with changes to **html and scss/css code**.
-
-
-### 7. Commit and Push your Work
-
-Use git to commit code changes to your feature branch.
+This will update your personal repo on your computer and on GHE.
 
 ```
-git add <filename>
-git commit -m "your short, concise commit message".
+# While in your master branch
+git pull upstream master
+git push origin master
 ```
 
-Push your commits to your remote feature branch.
+If you're responsible for reviewing and maintaining the Bluemix Components repo, please see docs for [Syncing with Other Forks]() in [CORE-TEAM.md](https://github.ibm.com/Bluemix/bluemix-components/blob/master/CORE-TEAM.md)
 
-```
-git push origin <your-feature-branch-name>
-```
+# Contributing to Source Code
 
-*See [Commit Message Standards](#commit-message-standards) for best practices around writing good commits.*
-
-### 8. Submit a Pull Request
-
-When you're ready for your code to be reviewed, submit a pull request.
-[Visit the repo](https://github.ibm.com/Bluemix/pattern-library) at GitHub Enterprise.
-
-For more details on submitting pull requests, [click here](#submitting-pull-requests).
-
-### 9. Pull Request Review
-
-Get your code reviewed by another IBM developer. Merge your pull request after getting two approvals (:+1). Delete remote feature branch. See [Reviewing Pull Requests](#reviewing-pull-requests) for details.
-
-***
-
-# Code of Conduct
-
-We are all contributors and maintainers of this Pattern Library. We also want to be happy, welcoming and constructive when we are collaborating to grow the work that happens here.
-
-The bottom-line: **Be respectful**.
-
-The following is a detailed list of guidelines that must be followed when participating in the work that happens for the pattern library:
-
-- Respect everyone who contributes in all channels of communication and in all activities of collaboration.
-- All communication in all channels (GitHub, Slack, Email, Twitter, etc.) must be constructive and never resort to personal attacks, trolling, public or private harassment, insults or other unprofessional conduct.
-- We extend respect to everyone involved regardless of gender, gender identity, sexual orientation, disability, age, race, ethnicity, religion, or level of experience. Everyone who contributes is expected to do the same.
-
-***
-
-# Details
+Once you've set up your personal repo, and your remotes, you can start making your own contributions to the Bluemix Components repo.
 
 ## Issues
+Before you work on anything, [find](https://github.ibm.com/Bluemix/bluemix-components/issues) an issue to work on or [create](https://github.ibm.com/Bluemix/bluemix-components/issues/new) an issue with a description of what you want to work on (i.e. a bug fix, a new component, refactoring, new docs, etc.)
 
-- **Always create a new issue**, before contributing any code to the repo.
-- Label the issue with the appropriate label (bug, pattern, enhancement, question)
-- Explain what the issue is depending on the context of the issue and label.
+## Run Bluemix Components
+In your terminal, make sure to install npm and bower dependencies.
 
-## Example Issues
-
-### Bug
-
-- Explain what the bug is.
-- Explain how to reproduce the bug.
-
-![issue-bug](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0189/bced242c-4015-11e5-850f-41bc3fbfb538.png)
-
-### Pattern
-
-- A pattern is a self-contained component of markup, styles and sometimes behavior
-- We develop patterns with HTML, Sass/CSS, JavaScript but we only distribute **.scss** and **.js** files.
-- An issue that's labeled as pattern should be anything that relates to a pattern.
-- A pattern issue is usually a task for adding a new pattern to the repo, updating an existing pattern, or creating new variations of a pattern.
-- Include any sub-tasks that needs to be completed.
-
-**Creating a New Pattern**
-
-*example coming soon*
-
-**Updating an Existing Pattern**
-
-![issue-pattern](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0142/18086932-3b81-11e5-9a77-f17dc8d4a99c.png)
-
-**Creating variations of an Existing Pattern**
-
-*example coming soon*
-
-### Enhancement
-
-- A general improvement to the source code that doesn't directly relate to patterns.
-- This can be [contributing to documentation](https://github.ibm.com/Bluemix/pattern-library/pull/47), adding new tasks to the gulpfile.js, etc.
-
-![Enhancement-example](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/0190/628badc2-4016-11e5-9819-32cea232693f.png)
-
-### Question
-
-- This is a question that someone asks about the repo.
-
-## Feature Branches
-
-If there's something that needs to be added or a bug that needs to be resolved, developers can contribute code using feature branches.
-
-```bash
-$ git clone git@github.ibm.com:Bluemix/pattern-library.git
-$ cd pattern-library
-$ git checkout -b <feature-branch-name>
+```
+npm install & bower install
 ```
 
-* Work on feature branches that you create. Do not work and commit to *master*.
-* Always push to remote branches that match your `<feature-branch-name>`.
-* Keep commits as small as possible.
-* Push your commits to your remote branch sparingly to allow for rollbacks or amends.
+Run the repo for development.
 
-If you're not a contributor, you can work on a forked copy of this repo. In this case, it is still recommended to work on feature branches in order to keep your `master` branch clean and up-to-date with this repo.
-
-## Commit Message Standards
-
-All commits should have meaningful, short, and concise commit messages. A history of good commit messages helps keep a code base maintainable, easy to work with, and failsafe.
-
-General guidelines:
-1. Use present tense, imperative mood in the subject line
-2. Capitalize the first letter in the subject line
-3. Keep the subject line short
-4. Don't end the subject line with a period
-5. Put any additional text in the body of the commit
-6. Separate the subject line and the body with a blank line
-
-## Example Commits
-
-### Do this:
-
-![Good commits](http://i.imgur.com/9CqZmYQ.png)
-
-### Refrain from doing this:
-
-![Bad commits](http://i.imgur.com/soid211.png)
-
-## Submitting Pull Requests
-
-Before submitting a pull request, make sure you do the following:
-
-```bash
-$ git fetch --all && git merge master
+```
+npm run dev
 ```
 
-This ensures that the code is up to date with any updates to the master branch and ultimately, avoiding merge conflicts.
+This is going to run `gulp` from `node_modules`, which handles various front-end tasks that you need for development. Keep this process running in your terminal.
 
-When you're ready to push code up to the repo, push your commits to your own remote branch that matches your `<feature-branch-name>`.
+You should see your browser open to [`http://localhost:3000`](http://localhost:3000) with [dev/index.html](https://github.ibm.com/Bluemix/bluemix-components/blob/master/dev/index.html)
 
-```bash
-$ git push origin <feature-branch-name>
+This is an html file for you to see what components or base-elements you're working on and how they render in the browser.
+
+**Do not** work in [bower-dist](https://github.ibm.com/Bluemix/bluemix-components/tree/master/bower-dist) or [npm-dist](https://github.ibm.com/Bluemix/bluemix-components/tree/master/npm-dist). These dist folders are what we distribute to our users via npm and bower. Making changes in these folders will be overridden by changes made in the [dev](https://github.ibm.com/Bluemix/bluemix-components/tree/master/dev) folder.
+
+## Work in a Branch
+Pull down the latest changes from `upstream`.
+
+```
+# While in master branch
+git pull upstream master
 ```
 
-Keep the work inside your branch as small and manageable as possible so maintainers can review and give feedback promptly.
-Developers will meet 1-2 times a week to review pull requests on a regular basis.
+Checkout into a new branch for the work you're doing.
+Name your branch using slashes.
 
-* Open a pull request when pushing a commit ([hub](https://github.com/github/hub) allows you to do PRs via command line, otherwise you can open them in Github Enterprise).
-* Summarize what the pull request is about in the description.
-* Where possible, reference a relevant issue that can be updated or closed based on the pull request.
-* ~~For a more comprehensive overview of commit standards, see [this doc](https://github.com/cloud-platform-design/cloud-platform-beta/blob/master/Contributing.md).~~
+*(Branch naming convention coming soon)*
 
-After your pull request is approved:
-- click on the **merge pull request** button
-- delete your remote feature branch
-- In your terminal, pull down the changes from master into your local master branch
+```
+# component branch
+git checkout -b component/cards/refactor-classes
 
-```bash
-$ git checkout master
-$ git pull origin master
+# hotfix branch
+git checkout -b hotfix/gulpfile/missing-curly-brace
+
+# feature branch
+git checkout -b feature/some-feature/details-about-feature
+
+# task-runner branch
+# docs branch
 ```
 
-## Example Pull Request
+Run `gulp build` before committing changes and commit frequently with short messages in present-tense.
 
-![example of pull request](http://i.imgur.com/RQcQb5U.png)
-
-## Reviewing Pull Requests
-
-Pull requests are basically like a code review -- this is code that needs to be reviewed before it gets merged into master branch.
-Consider everything that's in master branch as production-ready (but don't stress yourself out either).
-**Production-ready does not mean perfect**.
-
-Production ready means your code means you won't break master branch and your code makes it better to some degree.
-
-- Pull requests need to have two :+1: from two developers on Bluemix.
-- Pull requests are reviewed 1-2 times per week regularly.
-
-The best way to review code is to pull it down to your own computer, run it & **try to break it**, here's how:
-
-Make sure you're in the master branch, pull down any new changes from master.
-
-```bash
-$ git branch
-$ git checkout master
-$ git pull origin master
+```
+gulp build
+git add <path/to/file>
+git commit -m "Add missing semicolon"
 ```
 
-Create a new branch that matches the name of the remote branch that the pull request is using. Than pull down the code from that remote branch.
+## Squashing Commits with Rebase
 
-```bash
-$ git fetch --all
-$ git checkout <name-of-remote-branch>
-$ git pull origin <name-of-remote-branch>
+Before pushing to your branch, we want all contributors to squash commits via `git rebase -i` so that there's always **one commit** per **pull request**.
+
+This allows us to:
+* better understand the commit history.
+* make it easier to revert to previously merged pull requests.
+
+Let's get started.
+
+Do a `git log` to see your commit history and count the commits you want to squash.
+
+```
+# As an example...
+git log --oneline
+
+c46e938 Fix header.js
+82d4341 Move docs into new docs folder
+22c943b Update README.md
+d7fef3e Add missing curly brace
 ```
 
-At this point, it's possible that you may encounter a **merge conflict**, communicate that to the contributor on their pull request.
+Let's say I want to squash the last 4 commits into one commit.
 
-The code we're dealing with in the pattern library is mainly HTML, CSS, Sass and JavaScript files.
-If you're reviewing HTML code, open the html files in your browser. You can double-click the html files or you can use the `open` command in terminal.
+I can do a `git rebase` in interactive mode to target the last 4 commits, like this:
 
-```bash
-$ open buttons/primary-button.html
+```
+git rebase -i HEAD~4
 ```
 
-As you find areas in their code that should be addressed you can:
-- leave constructive comments on their pull request
-- ask specific questions about decisions they made in their code.
-- approve the pull request with a :+1:
-- give pending approval with a :+1: and a comment that says what they need to fix/change before merging to master
-- feel free to express your approval with another positive emoji :100: :shipit: :rocket: :whale2:, and state your approval for clarity.
+There's a great excerpt from [this article](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html) that explains what's going on really well:
+
+> ...I told Git that I wanted to rebase using the last four commits from where the `HEAD` is with `HEAD~4`. Git has now put me into an editor with the above text in it, and a little explanation of what can be done. You have plenty of options available to you from this screen, but right now we’re just going to squash everything into one commit. So, changing the first four lines of the file to this will do the trick:
+
+```
+pick c46e938 Fix header.js
+squash 82d4341 Move docs into new docs folder
+squash 22c943b Update README.md
+squash d7fef3e Add missing curly brace
+```
+This tells Git to combine all four commits into the first commit on this list (the commit with the word `pick` in front).
+
+But be aware, if the commits you're squashing are already pushed to GitHub, the commits may show up out-of-order. You can re-order the commits in the editor. Move the latest commit (the `pick` commit) to the top of the list.
+
+Write/quit (`:wq`) past the editor.
+
+Git will then guide you through the `rebase` process to resolve any conflicts. (*I don't know how to write docs for resolving conflicts while rebasing -- this happens every time I'm rebasing commits that have been already pushed to GitHub*)
+
+Next, Git is going to show you one more screen to edit the final commit message, something that looks like this:
+
+```
+# This is a combination of 4 commits.
+# The first commit's message is:
+Fix header.js
+
+# This is the 2nd commit message:
+
+Move docs into new docs folder
+
+# This is the 3rd commit message:
+
+Update README.md
+
+# This is the 4th commit message:
+
+Add missing curly brace
+
+...
+```
+
+Edit this message as you want.
+You can edit this message so the first commit message is more accurate in describing the overall work these 4 commits is accomplishing.
+
+Write/quit again (`:wq`).
+
+When you're ready to push. You can either do a simple git push to your branch or force a push if your squashed commits are already in GitHub.
+
+```
+#Do a normal push only if these commits don't exist in GitHub yet
+git push origin <branch-name>
+
+#Force a push
+git push origin <branch-name> -f
+```
+
+For more details on squashing commits, see:
+* [Squash Commits with Git | David Walsh](http://davidwalsh.name/squash-commits-git)
+* [Squashing commits with Rebase | Git Ready | Nick quaranto](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html)
+
+## Pull Requests
+
+Pull requests are how we perform code reviews (the same idea applies to writing docs as well). This is where we do a lot of communication and share constructive criticism, so it's required that everyone **be respectful**.
+
+See our [Code of Conduct](https://github.ibm.com/Bluemix/bluemix-components/wiki/Code-of-Conduct) for details.
+
+### Create a Pull Request
+
+[This](https://github.com/blog/1943-how-to-write-the-perfect-pull-request) is a great resource for our approach to pull requests (highly recommended).
+
+After pushing your last commit(s), visit the [Bluemix/bluemix-components](https://github.ibm.com/Bluemix/bluemix-components/blob/master) and you can find a button that says to 'Create pull request'.
+
+![create-a-pull-request](https://help.github.com/assets/images/help/pull_requests/pull-request-review-create.png)
+
+Sometimes this pull-request button isn't there, so alternatively, you can click on this other pull-request button. It looks like this:
+
+![other-button](https://help.github.com/assets/images/help/pull_requests/pull-request-start-review-button.png)
+
+Clicking this other button will take you to a 'Compare changes' screen. There are two dropdowns to compare two branches. Change the second dropdown to your branch.
+
+*(does this comepare changes thing even work across forks?)*
+
+![compare-changes](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/2327/f635fd24-7c03-11e5-9011-9aff28daaee5.png)
+
+After clicking on 'Create pull request',
+you'll be taken to a form where you can enter a title and description.
+
+Write a description for your pull request starting with:
+* A reference to the issue that you're resolving (see [closing issues via pull requests](https://github.com/blog/1506-closing-issues-via-pull-requests))
+* Give any extra explanation if needed.
+
+
+### Collaborate on a Pull Request
+
+Two team members responsible for maintaining Bluemix Components will review your pull request and will:
+* Ask questions about your work
+* Ask that you make additional changes to your pull request.
+* Check to make sure that nothing breaks.
+
+After you get a thumbs up :+1: from two maintainers, you can merge your pull request and delete your branch via the GHE UI.
+
+Once your changes are merged to master, and while you're in the `master` branch, remember to `git pull upstream master` on your fork.
+
+If you're responsible for reviewing and maintaining the Bluemix Components repo, please see docs for [Reviewing Pull Requests]() in [CORE-TEAM.md](https://github.ibm.com/Bluemix/bluemix-components/blob/master/CORE-TEAM.md).
