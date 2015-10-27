@@ -162,8 +162,8 @@ git commit -m "Add missing semicolon"
 Before pushing to your branch, we want all contributors to squash commits via `git rebase -i` so that there's always **one commit** per **pull request**.
 
 This allows us to:
-* better understand the commit history.
-* make it easier to revert to previously merged pull requests.
+* better understand our commit history.
+* make it easier to revert to a feature.
 
 Let's get started.
 
@@ -199,13 +199,7 @@ squash d7fef3e Add missing curly brace
 ```
 This tells Git to combine all four commits into the first commit on this list (the commit with the word `pick` in front).
 
-But be aware, if the commits you're squashing are already pushed to GitHub, the commits may show up out-of-order. You can re-order the commits in the editor. Move the latest commit (the `pick` commit) to the top of the list.
-
-Write/quit (`:wq`) past the editor.
-
-Git will then guide you through the `rebase` process to resolve any conflicts. (*I don't know how to write docs for resolving conflicts while rebasing -- this happens every time I'm rebasing commits that have been already pushed to GitHub*)
-
-Next, Git is going to show you one more screen to edit the final commit message, something that looks like this:
+Git is going to show you one more screen to edit the final commit message, something that looks like this:
 
 ```
 # This is a combination of 4 commits.
@@ -230,21 +224,9 @@ Add missing curly brace
 Edit this message as you want.
 You can edit this message so the first commit message is more accurate in describing the overall work these 4 commits is accomplishing.
 
-Write/quit again (`:wq`).
+*(`git pull origin <branch-name>` and resolve conflicts again...)*
 
-When you're ready to push. You can either do a simple git push to your branch or force a push if your squashed commits are already in GitHub.
-
-```
-#Do a normal push only if these commits don't exist in GitHub yet
-git push origin <branch-name>
-
-#Force a push
-git push origin <branch-name> -f
-```
-
-For more details on squashing commits, see:
-* [Squash Commits with Git | David Walsh](http://davidwalsh.name/squash-commits-git)
-* [Squashing commits with Rebase | Git Ready | Nick quaranto](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html)
+*(`git push origin <branch-name> -f`)*
 
 ## Pull Requests
 
@@ -266,7 +248,7 @@ Sometimes this pull-request button isn't there, so alternatively, you can click 
 
 Clicking this other button will take you to a 'Compare changes' screen. There are two dropdowns to compare two branches. Change the second dropdown to your branch.
 
-*(does this comepare changes thing even work across forks?)*
+*(does this 'compare changes' work across forks?)*
 
 ![compare-changes](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/2327/f635fd24-7c03-11e5-9011-9aff28daaee5.png)
 
