@@ -111,7 +111,6 @@ gulp.task('js:hint', function() {
     .pipe(jshint.reporter(stylish));
 });
 
-
 //////////////////////////////
 // Sass Tasks
 //////////////////////////////
