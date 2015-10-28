@@ -26,7 +26,7 @@ This document is going to walk you through everything you need to know to collab
 
 ## Forking Workflow
 
-![fork-workflow](https://www.atlassian.com/git/images/tutorials/collaborating/comparing-workflows/forking-workflow/01.svg)
+![forking-workflow](https://www.atlassian.com/git/images/tutorials/collaborating/comparing-workflows/forking-workflow/01.svg)
 
 We use a **forking workflow** with feature branches for us to collaborate here on GitHub Enterprise (GHE).
 
@@ -94,6 +94,8 @@ git push origin master
 ```
 
 If you're responsible for reviewing and maintaining the Bluemix Components repo, please see docs for [Syncing with Other Forks]() in [CORE-TEAM.md](https://github.ibm.com/Bluemix/bluemix-components/blob/master/CORE-TEAM.md)
+
+(*Pending: See [Issue #219](https://github.ibm.com/Bluemix/bluemix-components/issues/219)*)
 
 # Contributing to Source Code
 
