@@ -1,8 +1,0 @@
-@import 'partials/vars';
-@import 'partials/mixins';
-@import 'partials/extends';
-
-.blockquote--base,
-.bx--styled blockquote {
-  @extend %blockquote--base;
-}

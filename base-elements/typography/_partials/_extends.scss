@@ -1,0 +1,28 @@
+%font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+%helvetica {
+  font-family: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
+}
+
+%helvetica-light {
+  @extend %helvetica;
+  font-weight: 200;
+}
+
+%helvetica-normal {
+  @extend %helvetica;
+  font-weight: 400;
+}
+
+%helvetica-medium {
+  @extend %helvetica;
+  font-weight: 500;
+}
+
+%helvetica-bold {
+  @extend %helvetica;
+  font-weight: 700;
+}

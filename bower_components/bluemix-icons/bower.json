@@ -1,0 +1,23 @@
+{
+  "name": "bluemix-icons",
+  "authors": [
+    {"name": "Brian Han", "email": "bthan@us.ibm.com"},
+    {"name": "Stan Li", "email": "lih@us.ibm.com"},
+    {"name": "Jeff Ng", "email": "ctng@us.ibm.com"}
+  ],
+  "description": "",
+  "main": "_icons.scss",
+  "keywords": [
+    "ibm",
+    "bluemix",
+    "icons"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

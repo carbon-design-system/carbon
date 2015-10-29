@@ -1,9 +1,0 @@
-@import '_partials/vars';
-@import '_partials/mixins';
-@import '_partials/extends';
-@import '../inputs/_partials/extends';
-
-.search--base {
-  @extend %search--base;
-  // note: inherits input search type from ../inputs/_inputs.scss
-}

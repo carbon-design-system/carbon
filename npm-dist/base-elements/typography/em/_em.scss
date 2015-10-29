@@ -1,8 +1,0 @@
-@import 'partials/vars';
-@import 'partials/mixins';
-@import 'partials/extends';
-
-.em--base,
-.bx--styled em {
-  @extend %em--base;
-}
