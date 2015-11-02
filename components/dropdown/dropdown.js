@@ -1,5 +1,5 @@
 window.onhashchange = function() { 
-	var current = document.querySelector(".current");
+	var current = document.querySelector("#current");
 	var hash = document.location.hash;
 	if (hash == '') {
 		current.innerHTML = "Home";

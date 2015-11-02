@@ -30,16 +30,16 @@
 	}
 }
 
-.global-header__dropdown__item {
-	@extend %global-header__dropdown__item;
+.dropdown__item {
+	@extend %dropdown__item;
 }
 
-.global-header__dropdown-menu {
-	@extend %global-header__dropdown-menu;
+.dropdown-menu {
+	@extend %dropdown-menu;
 }
 
-.global-header__dropdown-menu__item {
-	@extend %global-header__dropdown-menu__item;
+.dropdown-menu__item {
+	@extend %dropdown-menu__item;
 }
 
 .active {

@@ -65,18 +65,6 @@
 	margin-left: 1em;
 }
 
-%global-header__dropdown__item {
-	@extend %dropdown__item;
-}
-
-%global-header__dropdown-menu {
-	@extend %dropdown-menu;
-}
-
-%global-header__dropdown-menu__item {
-	@extend %dropdown-menu__item;
-}
-
 %global-header__dropdown--arrow {
 	@extend %dropdown__arrow;
 }
