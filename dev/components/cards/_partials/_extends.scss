@@ -1,37 +1,35 @@
 // Move to bluemix-grids
 
-// %flex--horizontal-start {
-//   display: flex;
-//   align-items: flex-start;
-//   flex-direction: row;
-// }
+%flex--horizontal-start {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
 
-// %flex--horizontal-center {
-//   display: flex;
-//   align-items: center;
-//   flex-direction: row;
-// }
+%flex--horizontal-center {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
 
-// %flex--horizontal-end {
-//   display: flex;
-//   align-items: flex-end;
-//   flex-direction: row;
-// }
+%flex--horizontal-end {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+}
 
-// %flex--vertical-center {
-//   display: flex;
-//   align-items: center;
-//   flex-direction: column;
-// }
+%flex--vertical-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
 //////////////////////////////
 // Card List
 //////////////////////////////
 // Keep this in cards or move to lists?
 
-%card-list {
-
-  &__card {
+%card-list__card {
     @extend %font-smoothing;
     @extend %helvetica-light;
     @extend %transition--card;
@@ -40,9 +38,9 @@
     width: em(245px);
     height: em(250px);
     background-color: $color--card;
-  }
+}
 
-  &__object-card {
+%card-list__object-card {
     width: 100%;
     margin-bottom: 2em;
 
@@ -110,9 +108,9 @@
         margin-right: 0;
       }
     }
-  }
+}
 
-  &__link-wrapper {
+%card-list__link-wrapper {
     @extend %flex--horizontal-start;
 
     flex-wrap: wrap;
@@ -126,123 +124,110 @@
     &:hover {
       transform: scale(1.02);
     }
-  }
 }
 
 //////////////////////////////
 // Atlas Card (.object-card)
 //////////////////////////////
 
-%object-card {
+%object-card__card-header {
+  @extend %flex--horizontal-center;
 
-  &__card-header {
-    @extend %flex--horizontal-center;
+  justify-content: center;
+  width: 100%;
+  padding-right: .5em;
+  border-bottom: 3px color('blue', 40) solid;
+}
 
-    justify-content: center;
-    width: 100%;
-    padding-right: .5em;
-    border-bottom: 3px color('blue', 40) solid;
-  }
+%object-card__graph {
+  width: 100%;
+  height: 66px;
 
-  &__graph {
-    width: 100%;
-    height: 66px;
+  background-color: $color--card-foreground;
+}
 
-    background-color: $color--card-foreground;
-  }
+%object-card__card-metric {
+  @extend %flex--horizontal-end;
 
-  &__card-metric {
-    @extend %flex--horizontal-end;
+  flex-wrap: wrap;
+  width: 50%;
+  padding: .8em 0;
+  border-right: 1px $color--card-border solid;
+  border-bottom: 1px $color--card-border solid;
 
-    flex-wrap: wrap;
-    width: 50%;
-    padding: .8em 0;
-    border-right: 1px $color--card-border solid;
-    border-bottom: 1px $color--card-border solid;
-
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  &__card-metadata {
-    @extend %flex--horizontal-center;
-
-    width: 100%;
-    padding: 0 1em;
-    border-bottom: 1px $color--card-border solid;
-
-    &:last-child {
-      border-bottom: none;
-    }
+  &:last-child {
+    border-right: none;
   }
 }
 
-%card-header {
+%object-card__card-metadata {
+  @extend %flex--horizontal-center;
 
-  &__title {
-    @extend %helvetica-medium;
+  width: 100%;
+  padding: 0 1em;
+  border-bottom: 1px $color--card-border solid;
 
-    padding: 1.2em 0;
-    color: $color--card-content;
-    font-size: .95rem;
-    letter-spacing: .035em;
+  &:last-child {
+    border-bottom: none;
   }
+}
 
-  &__icon {
+%card-header__title {
+  @extend %helvetica-medium;
+
+  padding: 1.2em 0;
+  color: $color--card-content;
+  font-size: .95rem;
+  letter-spacing: .035em;
+}
+
+%card-header__icon {
     margin-right: 1em;
-  }
 }
 
-%card-metric {
+%card-metric__figure {
+  @extend %helvetica-bold;
 
-  &__figure {
-    @extend %helvetica-bold;
-
-    width: 100%;
-    color: $color--card-content;
-    font-size: 2.661rem;
-    text-align: center;
-  }
-
-  &__unit {
-    @extend %helvetica-light;
-
-    margin-left: .1em;
-    font-size: 1.3rem;
-    font-weight: 100;
-  }
-
-  &__label {
-    @extend %helvetica-light;
-
-    width: 100%;
-    color: $color--card-content;
-    font-size: .8rem;
-    text-align: center;
-    letter-spacing: .015em;
-    text-transform: uppercase;
-    transform: scaleX(.9);
-  }
+  width: 100%;
+  color: $color--card-content;
+  font-size: 2.661rem;
+  text-align: center;
 }
 
-%card-metadata {
+%card-metric__unit {
+  @extend %helvetica-light;
 
-  &__icon {
-    width: 1.125em;
-  }
+  margin-left: .1em;
+  font-size: 1.3rem;
+  font-weight: 100;
+}
 
-  &__value {
-    @extend %helvetica-light;
+%card-metric__label {
+  @extend %helvetica-light;
 
-    flex: 1;
-    overflow: hidden;
-    padding: .8em;
-    color: $color--card-metadata;
-    font-size: .8rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  width: 100%;
+  color: $color--card-content;
+  font-size: .8rem;
+  text-align: center;
+  letter-spacing: .015em;
+  text-transform: uppercase;
+  transform: scaleX(.9);
+}
+
+%card-metadata__icon {
+  width: 1.125em;
+}
+
+%card-metadata__value {
+  @extend %helvetica-light;
+
+  flex: 1;
+  overflow: hidden;
+  padding: .8em;
+  color: $color--card-metadata;
+  font-size: .8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 //////////////////////////////
@@ -259,89 +244,77 @@
   }
 }
 
-%card {
-  &__link-wrapper {
-    text-decoration: none;
-  }
-
-  &__info {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: em(28px) em(10px) em(14px);
-  }
-
-  &__bindings {
-    display: flex;
-    justify-content: center;
-    padding: em(14px) em(10px);
-    border-top: 1px solid $color--bindings--divider;
-    list-style-type: none;
-  }
-
-  &__status {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    height: em(35px);
-    padding: 0 em(10px);
-    background-color: $color--status;
-  }
+%card__link-wrapper {
+  text-decoration: none;
 }
 
-%info {
-  &__icon {
-    display: block;
-    margin: 0 auto em(14px);
-  }
-
-  &__name {
-    @extend %helvetica-light;
-
-    color: $blue-90;
-    font-size: 1.25em;
-    line-height: 1.5;
-    text-transform: lowercase;
-  }
-
-  &__link {
-    color: $color--info--link;
-    font-size: em(12px);
-    line-height: 1.5;
-    text-decoration: none;
-  }
+%card__info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: em(28px) em(10px) em(14px);
 }
 
-%bindings {
-  &__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: em(36px);
-    height: em(36px);
-    padding: em(3px);
-    border: 3px solid $color--bindings--icon-border;
-    border-radius: 50%;
-    margin: 0 em(2px);
-  }
+%card__bindings {
+  display: flex;
+  justify-content: center;
+  padding: em(14px) em(10px);
+  border-top: 1px solid $color--bindings--divider;
+  list-style-type: none;
 }
 
-%status {
-  &__icon {
-    &--running {
-      width: em(17px);
-      height: em(17px);
-      border-radius: 50%;
-      margin-right: em(10px);
-      background-color: $color--status--running;
-    }
-  }
+%card__status {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: em(35px);
+  padding: 0 em(10px);
+  background-color: $color--status;
+}
 
-  &__text {
-    &--running {
-      color: $color--status--text;
-      font-size: em(14px);
-    }
-  }
+%info__icon {
+  display: block;
+  margin: 0 auto em(14px);
+}
+
+%info__name {
+  @extend %helvetica-light;
+
+  color: $blue-90;
+  font-size: 1.25em;
+  line-height: 1.5;
+  text-transform: lowercase;
+}
+
+%info__link {
+  color: $color--info--link;
+  font-size: em(12px);
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+%bindings__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: em(36px);
+  height: em(36px);
+  padding: em(3px);
+  border: 3px solid $color--bindings--icon-border;
+  border-radius: 50%;
+  margin: 0 em(2px);
+}
+
+%status__icon--running {
+  width: em(17px);
+  height: em(17px);
+  border-radius: 50%;
+  margin-right: em(10px);
+  background-color: $color--status--running;
+}
+
+%status__text--running {
+  color: $color--status--text;
+  font-size: em(14px);
 }
 
