@@ -4,7 +4,7 @@
 
 // Default/Light UI
 .modal {
-  @extend %modal;
+  @extend %modal--base;
 
   &__close {
     @extend %modal__close;
@@ -15,7 +15,7 @@
   }
 
   &__content {
-    @extend %modal__content;
+    @extend %modal__content__text;
   }
 
   &__actions {
@@ -25,7 +25,7 @@
 
 .header {
   &__title {
-    @extend %header__title;
+    @extend %modal__header__title;
   }
 }
 

@@ -1,7 +1,4 @@
-%dropdown {
-  position: relative;
-
-  &__select {
+%dropdown__select {
     position: relative;
     display: inline-block;
     min-width: 9.375em;
@@ -19,5 +16,4 @@
     text-decoration: none;
     cursor: pointer;
     appearance: none;
-  }
 }
