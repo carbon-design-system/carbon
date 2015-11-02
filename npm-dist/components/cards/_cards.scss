@@ -115,23 +115,17 @@
   }
 }
 
-.bindings {
-  &__icon {
-    @extend %bindings__icon;
-  }
+.bindings__icon {
+  @extend %bindings__icon;
 }
 
 .status {
-  &__icon {
-    &--running {
-      @extend %status__icon--running;
-    }
+  &__icon--running {
+    @extend %status__icon--running;
   }
 
-  &__text {
-    &--running {
-      @extend %status__text--running;
-    }
+  &__text--running {
+    @extend %status__text--running;
   }
 }
 
