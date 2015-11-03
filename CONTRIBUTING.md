@@ -121,11 +121,10 @@ npm run dev
 
 This is going to run `gulp` from `node_modules`, which handles various front-end tasks that you need for development. Keep this process running in your terminal.
 
-You should see your browser open to [`http://localhost:3000`](http://localhost:3000) with [dev/index.html](https://github.ibm.com/Bluemix/bluemix-components/blob/master/dev/index.html)
+You should see your browser open to [`http://localhost:3000`](http://localhost:3000) with [index.html](https://github.ibm.com/Bluemix/bluemix-components/blob/master/index.html)
 
 This is an html file for you to see what components or base-elements you're working on and how they render in the browser.
 
-**Do not** work in [bower-dist](https://github.ibm.com/Bluemix/bluemix-components/tree/master/bower-dist) or [npm-dist](https://github.ibm.com/Bluemix/bluemix-components/tree/master/npm-dist). These dist folders are what we distribute to our users via npm and bower. Making changes in these folders will be overridden by changes made in the [dev](https://github.ibm.com/Bluemix/bluemix-components/tree/master/dev) folder.
 
 ## Work in a Branch
 Pull down the latest changes from `upstream`.

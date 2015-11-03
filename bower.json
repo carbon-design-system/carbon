@@ -1,10 +1,10 @@
 {
   "name": "bluemix-components",
   "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
-  "main": "./bower-dist/_bluemix-components.scss",
+  "main": "_styles.scss",
   "dependencies": {
-    "bluemix-colors": "~0.0.14",
-    "bluemix-typography": "~0.0.12"
+    "bluemix-icons": "~0.0.3",
+    "IBM-Design-Colors": "ibm-colors#~1.4.1"
   },
   "keywords": [
     "bluemix",
@@ -24,23 +24,12 @@
     "styleguide",
     "guide"
   ],
-  "authors": [
-    {
-      "name": "Brian Han",
-      "email": "bthan@us.ibm.com"
-    },
-    {
-      "name": "Stan Li",
-      "email": "lih@us.ibm.com"
-    }
-  ],
   "license": "MIT",
   "ignore": [
     ".git",
-    "dev",
-    "node_modules",
-    "npm-debug.log",
-    "npm-dist",
-    "bower_components"
+    "index.html",
+    "dev.{scss, css}",
+    "bower_components",
+    "node_modules"
   ]
 }
