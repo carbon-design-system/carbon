@@ -36,26 +36,23 @@
   }
 }
 
-%modal {
-  // Close icon
-  &__close {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+%modal__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
-  // Header
-  &__header {
-    padding: 0 $padding--section;
-    border-bottom: 1px solid $color--border--inner;
-  }
+// Header
+%modal__header {
+  padding: 0 $padding--section;
+  border-bottom: 1px solid $color--border--inner;
+}
 
-  // Content
-  &__content {
-    @extend %helvetica;
-    padding: 2em $padding--section;
-    color: $color--content;
-  }
+// Content
+%modal__content {
+  @extend %helvetica;
+  padding: 2em $padding--section;
+  color: $color--content;
 }
 
 // Header title
