@@ -1,0 +1,130 @@
+@import '_partials/vars';
+@import '_partials/extends';
+
+//////////////////////////////
+// Card List
+//////////////////////////////
+// Keep this in cards or move to lists?
+
+.card-list {
+  list-style-type: none;
+
+  &__card {
+    @extend %card-list__card;
+  }
+
+  &__object-card {
+    @extend %card-list__object-card;
+  }
+
+  &__link-wrapper {
+    @extend %card-list__link-wrapper;
+  }
+}
+
+
+//////////////////////////////
+// Atlas Card (.object-card)
+//////////////////////////////
+
+.object-card {
+  &__card-header {
+    @extend %object-card__card-header;
+  }
+
+  &__graph {
+    @extend %object-card__graph;
+  }
+
+  &__card-metric {
+    @extend %object-card__card-metric;
+  }
+
+  &__card-metadata {
+    @extend %object-card__card-metadata;
+  }
+}
+
+.card-header {
+  &__title {
+    @extend %card-header__title;
+  }
+
+  &__icon {
+    @extend %card-header__icon;
+  }
+}
+
+.card-metric {
+  &__figure {
+    @extend %card-metric__figure;
+  }
+
+  &__unit {
+    @extend %card-metric__unit;
+  }
+
+  &__label {
+    @extend %card-metric__label;
+  }
+}
+
+.card-metadata {
+  &__icon {
+    @extend %card-metadata__icon;
+  }
+
+  &__value {
+    @extend %card-metadata__value;
+  }
+}
+
+//////////////////////////////
+// Bluemix Cards (.card)
+//////////////////////////////
+
+.card {
+  &__link-wrapper {
+    @extend %card__link-wrapper;
+  }
+
+  &__info {
+    @extend %card__info;
+  }
+
+  &__bindings {
+    @extend %card__bindings;
+  }
+
+  &__status {
+    @extend %card__status;
+  }
+}
+
+.info {
+  &__icon {
+    @extend %info__icon;
+  }
+
+  &__name {
+    @extend %info__name;
+  }
+
+  &__link {
+    @extend %info__link;
+  }
+}
+
+.bindings__icon {
+  @extend %bindings__icon;
+}
+
+.status {
+  &__icon--running {
+    @extend %status__icon--running;
+  }
+
+  &__text--running {
+    @extend %status__text--running;
+  }
+}

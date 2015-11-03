@@ -1,0 +1,11 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+.dropdown{
+  position: relative;
+
+  &__select{
+    @extend %dropdown__select;
+  }
+}

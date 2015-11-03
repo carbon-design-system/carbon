@@ -24,45 +24,32 @@ var uglify = require('gulp-uglify');
 //////////////////////////////
 
 var paths = {
-  'images': 'dev/**/*.{png,jpg,jpeg}',
-  'markdown': 'dev/**/*.md',
-  'del': [
-    'bower-dist/**/*',
-    'npm-dist/**/*'
+  clean: [
+    'dev.css',
+    '_styles.scss',
+    '_scripts.js',
+    '_scripts.min.js',
   ],
-  'dist': [
-    'dev/**/*',
-    '!dev/dev.scss',
-    '!dev/dev.css',
-    '!dev/index.html'
+  scripts: [
+    'base-elements/**/*.js',
+    'components/**/*.js'
   ],
-  'sass': {
-    'main': 'dev/*.scss',
-    'lint': [
-      'dev/**/*.scss',
-      '!dev/*.css'
-    ]
-  },
-  'js': {
-    'concat': [
-      'dev/base-elements/**/*.js',
-      'dev/components/**/*.js'
+  scss: {
+    all: [
+      'base-elements/**/*.scss',
+      'components/**/*.scss',
+      'dev.scss'
     ],
-    'lint': 'dev/**/*.{js,json}'
+    main: 'dev.scss'
   },
-  'html': 'dev/**/*.html'
-};
+  html: './**/*.html',
+  images: './**/*.{png,jpeg,jpg}'
+}
 
-var importPath = {
-  node_modules: {
-    colors: '../node_modules/bluemix-colors/npm-dist/bluemix-colors',
-    typography: '../node_modules/bluemix-typography/bluemix-typography'
-  },
-  bower_components: {
-    colors: '../../bluemix-colors/bower-dist/bluemix-colors',
-    typography: '../../bluemix-typography/bluemix-typography'
-  }
-};
+var importPaths = {
+  icons: '../bluemix-icons/icons',
+  ibmColors: '../IBM-Design-Colors/ibm-colors'
+}
 
 //////////////////////////////
 // BrowserSync
@@ -72,40 +59,38 @@ gulp.task('browser-sync', function() {
   browserSync.init({
     logPrefix: "Bluemix Components",
     server: {
-      baseDir: "./dev"
+      baseDir: "."
     }
   });
 });
-
 
 //////////////////////////////
 // Clean
 //////////////////////////////
 
 gulp.task('clean', function() {
-  return del(paths.del);
+  return del(paths.clean);
 });
-
 
 //////////////////////////////
 // JavaScript Tasks
 //////////////////////////////
 
-gulp.task('js', function() {
-  var concatOnly = gulp.src(paths.js.concat)
-    .pipe(concat('bluemix-components.js'))
-    .pipe(gulp.dest('dev'));
+gulp.task('scripts', function() {
+  var concatOnly = gulp.src(paths.scripts)
+    .pipe(concat('_scripts.js'))
+    .pipe(gulp.dest('.'));
 
-  var minify = gulp.src(paths.js.concat)
-    .pipe(concat('bluemix-components.min.js'))
+  var minify = gulp.src(paths.scripts)
+    .pipe(concat('_scripts.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('dev'));
+    .pipe(gulp.dest('.'));
 
   return merge(concatOnly, minify);
 });
 
-gulp.task('js:hint', function() {
-  return gulp.src(paths.js.lint)
+gulp.task('scripts:hint', function() {
+  return gulp.src(paths.scripts)
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
@@ -115,41 +100,22 @@ gulp.task('js:hint', function() {
 // Sass Tasks
 //////////////////////////////
 
-// Using importPaths here to properly compile dev.css for development
 gulp.task('sass', function() {
-  return gulp.src('dev/**/*.scss')
-    .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
-    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
+  var compile = gulp.src(paths.scss.all)
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions']
     }))
-    .pipe(gulp.dest('dev'))
+    .pipe(gulp.dest('.'))
     .pipe(browserSync.stream());
-});
 
-//////////////////////////////
-// Dist Task
-//////////////////////////////
+  var bower = gulp.src(paths.scss.main)
+    .pipe(replace('bower_components/bluemix-icons/icons', importPaths.icons))
+    .pipe(replace('bower_components/IBM-Design-Colors/ibm-colors', importPaths.ibmColors))
+    .pipe(rename('_styles.scss'))
+    .pipe(gulp.dest('.'));
 
-gulp.task('dist', function() {
-  var everything = gulp.src(paths.dist)
-    .pipe(gulp.dest('bower-dist'))
-    .pipe(gulp.dest('npm-dist'));
-
-  var scss_npm = gulp.src(paths.sass.main)
-    .pipe(replace('{PATH_TO_COLORS}', importPath.node_modules.colors))
-    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.node_modules.typography))
-    .pipe(rename('_bluemix-components.scss'))
-    .pipe(gulp.dest('npm-dist'));
-
-  var scss_bower = gulp.src(paths.sass.main)
-    .pipe(replace('{PATH_TO_COLORS}', importPath.bower_components.colors))
-    .pipe(replace('{PATH_TO_TYPOGRAPHY}', importPath.bower_components.typography))
-    .pipe(rename('_bluemix-components.scss'))
-    .pipe(gulp.dest('bower-dist'));
-
-  return merge(everything, scss_npm, scss_bower);
+  return merge(compile, bower);
 });
 
 //////////////////////////////
@@ -157,14 +123,13 @@ gulp.task('dist', function() {
 //////////////////////////////
 
 gulp.task('watch', function() {
-  gulp.watch(paths.html, ['dist']).on('change', browserSync.reload);
-  gulp.watch(paths.js.lint, ['js', 'js:hint', 'dist']).on('change', browserSync.reload);
-  gulp.watch('dev/**/*.scss', ['sass', 'dist']);
-  gulp.watch(paths.images, ['image', 'dist']);
+  gulp.watch(paths.html).on('change', browserSync.reload);
+  gulp.watch(paths.scripts, ['scripts', 'scripts:hint']).on('change', browserSync.reload);
+  gulp.watch(paths.scss.all, ['sass']);
 });
 
 gulp.task('build', function () {
-  runSequence(['clean'], ['dist', 'sass', 'js']);
+  runSequence(['clean'], ['sass', 'scripts']);
 });
 
 gulp.task('default', function () {

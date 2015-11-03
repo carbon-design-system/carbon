@@ -1,0 +1,55 @@
+@import '_partials/vars';
+@import '_partials/functions';
+@import '_partials/font-face';
+@import '_partials/extends';
+@import 'h1/h1';
+@import 'h2/h2';
+@import 'h3/h3';
+@import 'h4/h4';
+@import 'h5/h5';
+@import 'h6/h6';
+@import 'p/p';
+@import 'blockquote/blockquote';
+@import 'em/em';
+
+[class ^= 'type'] {
+  @extend %font-smoothing;
+  line-height: 1.4;
+}
+
+.type {
+  &--headline {
+    @extend %helvetica-bold;
+    font-size: 2rem; // 32px
+  }
+
+  &--title {
+    @extend %helvetica-bold;
+    font-size: 1.5rem; // 24px
+  }
+
+  &--subtitle {
+    @extend %helvetica-bold;
+    font-size: 1.25rem; // 20px
+  }
+
+  &--body {
+    @extend %helvetica-normal;
+    font-size: .875rem; // 14px
+  }
+
+  &--body--bold {
+    @extend %helvetica-bold;
+    font-size: .875rem; // 14px
+  }
+
+  &--caption {
+    @extend %helvetica-normal;
+    font-size: .75rem; // 12px
+  }
+
+  &--caption--bold {
+    @extend %helvetica-bold;
+    font-size: .75rem; // 12px
+  }
+}

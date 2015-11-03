@@ -1,7 +1,5 @@
 .DS_Store
-bower_components
-dev/dev.css
 node_modules
 npm-debug.log
-project.sublime-project
+project.swublime-project
 project.sublime-workspace

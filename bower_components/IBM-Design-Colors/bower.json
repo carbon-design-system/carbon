@@ -1,0 +1,26 @@
+{
+  "name": "IBM-Design-Colors",
+  "version": "1.4.0",
+  "homepage": "https://github.com/IBM-Design/colors",
+  "authors": [
+    "Sam Richard <sam.richard@us.ibm.com>"
+  ],
+  "description": "Color Palettes and helper functions for IBM Design Language",
+  "main": "_ibm-colors.scss",
+  "keywords": [
+    "IBM",
+    "design",
+    "color",
+    "sass",
+    "scss",
+    "colour"
+  ],
+  "license": "Custom",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

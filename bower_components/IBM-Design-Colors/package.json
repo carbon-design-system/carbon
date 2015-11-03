@@ -1,0 +1,29 @@
+{
+  "name": "ibm-design-colors",
+  "version": "1.4.1",
+  "description": "Color Palettes and helper functions for IBM Design Language",
+  "main": "_ibm-colors.scss",
+  "eyeglass": {
+    "exports": "eyeglass-exports.js",
+    "name": "ibm-colors"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBM-Design/colors.git"
+  },
+  "keywords": [
+    "design",
+    "sass",
+    "colors",
+    "eyeglass-module"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IBM-Design/colors/issues"
+  },
+  "homepage": "https://github.com/IBM-Design/colors"
+}

@@ -1,0 +1,14 @@
+//------------------//
+// em() and rem()   //
+//------------------//
+// These functions are used to convert pixels (px) to ems or rems based on $base-font-size.
+// .button-class { font-size: em(20px); } this will compile to:
+// .button-class { font-size: 1.25em; }
+
+@function rem($px, $base: $base-font-size) {
+  @return ($px / $base) * 1rem;
+}
+
+@function em($px, $base: $base-font-size) {
+  @return ($px / $base) * 1em;
+}

@@ -1,8 +1,0 @@
-@import 'partials/vars';
-@import 'partials/mixins';
-@import 'partials/extends';
-
-.code--base,
-.bx--styled code {
-  @extend %code--base;
-}
