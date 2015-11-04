@@ -3,7 +3,10 @@
 @import '_partials/extends';
 
 // Default/Light UI
-.bx--styled button,
+.bx--styled button {
+  @extend %btn--primary;
+}
+
 .btn {
   &--primary {
     @extend %btn--primary;

@@ -7,7 +7,7 @@
 // Keep this in cards or move to lists?
 
 .card-list {
-  @extend %card-list;
+  list-style-type: none;
 
   &__card {
     @extend %card-list__card;
@@ -115,25 +115,16 @@
   }
 }
 
-.bindings {
-  &__icon {
-    @extend %bindings__icon;
-  }
+.bindings__icon {
+  @extend %bindings__icon;
 }
 
 .status {
-  &__icon {
-    &--running {
-      @extend %status__icon--running;
-    }
+  &__icon--running {
+    @extend %status__icon--running;
   }
 
-  &__text {
-    &--running {
-      @extend %status__text--running;
-    }
+  &__text--running {
+    @extend %status__text--running;
   }
 }
-
-
-

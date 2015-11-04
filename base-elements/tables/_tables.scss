@@ -3,7 +3,8 @@
 @import '_partials/mixins';
 
 .table-section {
-  @extend %table-section;
+  @extend %table-section--base;
+  @extend %helvetica-normal;
 
   &__header {
     @extend %table-section__header;
@@ -15,17 +16,20 @@
 }
 
 .body__row {
-  @extend %body__row;
+  @extend %row--cell;
+
+  &:hover,
+  &:focus {
+    background-color: $color__table--light-blue;
+  }
 
   &--cell {
-    @extend %body__row--cell;
+    @extend %row--cell;
   }
 }
 
 .footer__row {
-  @extend %footer__row;
-
   &--cell {
-    @extend %footer__row--cell;
+    @extend %row--cell;
   }
 }

@@ -3,9 +3,9 @@
 @import '_partials/extends';
 
 .dropdown{
-    @extend %dropdown;
+  position: relative;
 
-	&__select{
+  &__select{
     @extend %dropdown__select;
-	}
+  }
 }
