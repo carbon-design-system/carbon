@@ -133,6 +133,8 @@ $bluemix-status-grey: #e9f1f4;
 $cool-grey-50: color('cool-grey', 50);
 // usage: Button color for cancel, undo, or negative actions. Type on white.
 
+$grey-20: color('grey', 20);
+
 //////////////////////////////
 // SECONDARY PALETTE
 //////////////////////////////
@@ -140,6 +142,7 @@ $cool-grey-50: color('cool-grey', 50);
 //------ RED ------//
 
 $red-50: color('red', 50);
+$red-20: color('red', 20);
 
 
 //------ ORANGE ------//
@@ -162,4 +165,5 @@ $bluemix-status-green: #13dd6d;
 //------ PURPLE ------//
 
 $purple-40: #5596E6;
+$purple-30: color('purple', 30);
 $purple-60: color('purple', 60);
