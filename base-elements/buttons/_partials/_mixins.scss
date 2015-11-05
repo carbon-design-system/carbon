@@ -2,3 +2,18 @@
 @mixin btn--style--border($color) {
   border: em(3px) solid $color;
 }
+
+@mixin btn($background, $active-background, $color, $active-color, $border) {
+  @include btn--style--border($border);
+  @extend %btn--base;
+  @extend %btn--style--transition;
+
+  background-color: $background;
+  color: $color;
+
+  &:hover,
+  &:focus {
+    background-color: $active-background;
+    color: $active-color;
+  }
+}
