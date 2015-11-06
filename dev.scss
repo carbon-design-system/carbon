@@ -6,8 +6,11 @@
 @import 'bower_components/bluemix-icons/icons';
 @import 'bower_components/IBM-Design-Colors/ibm-colors';
 
+// Core
+@import 'core/colors/colors';
+
 // Base Elements
-@import 'base-elements/colors/colors';
+@import 'base-elements/body/body';
 @import 'base-elements/typography/typography';
 @import 'base-elements/buttons/buttons';
 @import 'base-elements/forms/forms';

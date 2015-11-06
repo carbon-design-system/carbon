@@ -1,0 +1,9 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+.bx--styled {
+  @extend %helvetica;
+  @extend %border-box;
+  background-color: $color__bg;
+}
