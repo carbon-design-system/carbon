@@ -1,0 +1,78 @@
+%global-header {
+	width: 100%;
+	background-color: $blue-90;
+	height: em(60px);
+	padding: 1em;
+	position: relative;
+}
+
+%global-header__logo {
+	@extend %h3--base;
+	color: white;
+	font-weight: 200;
+	float: left;
+	margin-left: 3em;
+	text-decoration: none;
+}
+
+%global-header__nav {
+	list-style: none;
+	float: right;
+	margin-right: 3em;
+}
+
+%global-header__nav--item {
+	@extend %p--base;
+
+	display: inline-block;
+	color: white;	
+	font-size: .75rem;
+	font-weight: 500;
+	list-style: none;
+	padding: .5em 1em;
+	margin-left: 1em;
+
+	&:last-child {
+		margin-left: 5em;
+		opacity: .8;
+		&:hover {
+			background: none;
+		}
+	}
+
+	&:hover {
+		background: $blue-70;
+		border-radius: 20px;
+		padding: .5em 1em;
+		cursor: pointer;
+	}
+}
+
+%active {
+	background: $blue-70;
+	border-radius: 20px;
+	padding: .5em 1em;
+}
+
+
+%global-header__dropdown {
+	@extend %dropdown;
+	margin-top: -.4em;
+	margin-left: 1em;
+}
+
+%global-header__dropdown__item {
+	@extend %dropdown__item;
+}
+
+%global-header__dropdown-menu {
+	@extend %dropdown-menu;
+}
+
+%global-header__dropdown-menu__item {
+	@extend %dropdown-menu__item;
+}
+
+%global-header__dropdown--arrow {
+	@extend %dropdown__arrow;
+}
