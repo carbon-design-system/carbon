@@ -1,5 +1,3 @@
-console.log('test');
-
 window.onhashchange = function() { 
 	var current = document.querySelector(".current");
 	var hash = document.location.hash;
@@ -11,6 +9,3 @@ window.onhashchange = function() {
 	}
 	console.log(current.innerHTML);
 }
-var test = function() {
-  console.log('test function');
-};

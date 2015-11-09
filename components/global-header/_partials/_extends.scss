@@ -1,6 +1,6 @@
 %global-header {
 	width: 100%;
-	background-color: $blue-90;
+	background-color: $color__global-header--bg;
 	height: em(60px);
 	padding: 1em;
 	position: relative;
@@ -8,7 +8,7 @@
 
 %global-header__logo {
 	@extend %h3--base;
-	color: white;
+	color: $white;
 	font-weight: 200;
 	float: left;
 	margin-left: 3em;
@@ -16,16 +16,20 @@
 }
 
 %global-header__nav {
+	display: inline;
+}
+
+%nav__list {
 	list-style: none;
 	float: right;
 	margin-right: 3em;
 }
 
-%global-header__nav--item {
+%nav__item {
 	@extend %p--base;
 
 	display: inline-block;
-	color: white;	
+	color: $white;	
 	font-size: .75rem;
 	font-weight: 500;
 	list-style: none;
@@ -41,7 +45,7 @@
 	}
 
 	&:hover {
-		background: $blue-70;
+		background: $color__global-header--link-bg;
 		border-radius: 20px;
 		padding: .5em 1em;
 		cursor: pointer;
@@ -49,7 +53,7 @@
 }
 
 %active {
-	background: $blue-70;
+	background: $color__global-header--link-bg;
 	border-radius: 20px;
 	padding: .5em 1em;
 }

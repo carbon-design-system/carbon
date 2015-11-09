@@ -10,12 +10,16 @@
 	}
 }
 
-.global-header__nav {
-	@extend %global-header__nav;
+.nav__list {
+	@extend %nav__list;
 }
 
-.global-header__nav--item {
-	@extend %global-header__nav--item;
+.nav__item {
+	@extend %nav__item;
+}
+
+.global-header__nav {
+	@extend %global-header__nav;
 }
 
 

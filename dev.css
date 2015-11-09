@@ -17,7 +17,7 @@
   box-sizing: border-box; }
 
 .bx--styled {
-  background-color: #152935; }
+  background-color: #fff; }
 
 @font-face {
   font-family: 'IBM Helvetica';
@@ -48,7 +48,7 @@
   -moz-osx-font-smoothing: grayscale; }
 
 .bx--styled, .card-list__card, .card-metric__unit, .card-metric__label, .card-metadata__value, .info__name, .header__title, .p--base,
-.bx--styled p, .global-header__nav--item, .global-header__dropdown, .dropdown, .em--base,
+.bx--styled p, .nav__item, .global-header__dropdown, .dropdown, .em--base,
 .bx--styled em, .type--body, .type--caption,
 .input--search, .bx--styled input[type="search"], .table-section, .card-header__title, .modal__content, .h1--base,
 .bx--styled h1, .h2--base,
@@ -63,7 +63,7 @@
   font-weight: 200; }
 
 .p--base,
-.bx--styled p, .global-header__nav--item, .global-header__dropdown, .dropdown, .em--base,
+.bx--styled p, .nav__item, .global-header__dropdown, .dropdown, .em--base,
 .bx--styled em, .type--body, .type--caption,
 .input--search, .bx--styled input[type="search"], .table-section {
   font-weight: 400; }
@@ -93,7 +93,7 @@
   font-size: 1.25rem; }
 
 .p--base,
-.bx--styled p, .global-header__nav--item, .global-header__dropdown, .dropdown {
+.bx--styled p, .nav__item, .global-header__dropdown, .dropdown {
   font-size: .875rem; }
 
 .em--base,
@@ -737,31 +737,34 @@
   position: relative; }
 
 .global-header__logo {
-  color: white;
+  color: #fff;
   font-weight: 200;
   float: left;
   margin-left: 3em;
   text-decoration: none; }
 
 .global-header__nav {
+  display: inline; }
+
+.nav__list {
   list-style: none;
   float: right;
   margin-right: 3em; }
 
-.global-header__nav--item {
+.nav__item {
   display: inline-block;
-  color: white;
+  color: #fff;
   font-size: .75rem;
   font-weight: 500;
   list-style: none;
   padding: .5em 1em;
   margin-left: 1em; }
-  .global-header__nav--item:last-child {
+  .nav__item:last-child {
     margin-left: 5em;
     opacity: .8; }
-    .global-header__nav--item:last-child:hover {
+    .nav__item:last-child:hover {
       background: none; }
-  .global-header__nav--item:hover {
+  .nav__item:hover {
     background: #2D3F4A;
     border-radius: 20px;
     padding: .5em 1em;
@@ -835,4 +838,4 @@
       color: #5aaafa; }
   .global-header__dropdown-menu__item a, .dropdown-menu__item a {
     text-decoration: none;
-    color: white; }
+    color: #fff; }

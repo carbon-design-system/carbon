@@ -3,8 +3,8 @@
 	min-width: 15em;
 	display: inline-block;
 	list-style: none;
-	background: $blue-70;
-	color: $blue-30;
+	background: $color__dropdown--bg;
+	color: $color__dropdown--text;
 	font-size: .875rem;
 	border-radius: 2px;
 	font-weight: 500;
@@ -29,14 +29,14 @@
 	
 	a {
 		text-decoration: none;
-		color: $blue-30;
+		color: $color__dropdown--link;
 	}
 }
 
 %dropdown__arrow {
 	content: '';
 	display: inline-block;
-	background: red;
+	background: red; // waiting for icon
 	width: 15px;
 	height: 15px;
 	float: right;
@@ -50,8 +50,8 @@
 	display: none;
 	opacity: 0;
 	visibility: hidden;
-	background: $blue-70;
-	color: $blue-30;
+	background: $color__dropdown--bg;
+	color: $color__dropdown--text;
 	font-size: .875rem;
 	border-radius: 2px;
 	margin-left: -1.5em;
@@ -69,13 +69,13 @@
 		background: rgba(255,255,255,.05);
 		cursor: pointer;
 		a {
-			color: $blue-30;
+			color: $color__dropdown--link;
 		}
 	}
 
 	a {
 		text-decoration: none;
-		color: white;
+		color: $white;
 	}
 }
 
