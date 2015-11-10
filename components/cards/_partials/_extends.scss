@@ -29,7 +29,7 @@
 //////////////////////////////
 // Keep this in cards or move to lists?
 
-%card-list__card {
+%card {
     @extend %font-smoothing;
     @extend %helvetica-light;
     @extend %transition--card;
@@ -40,12 +40,32 @@
     background-color: $color--card;
 }
 
-%card-list__object-card {
+%link-wrapper {
+    @extend %flex--horizontal-start;
+
+    flex-wrap: wrap;
+    width: 100%;
+    border: 1px $color--card-border solid;
+    background-color: $color--card-background;
+    text-decoration: none;
+    transition: transform .2s;
+
+    &:focus,
+    &:hover {
+      transform: scale(1.02);
+    }
+}
+
+//////////////////////////////
+// Atlas Card (.object-card)
+//////////////////////////////
+
+%object-card {
     width: 100%;
     margin-bottom: 2em;
 
-    @media screen and (min-width: em(400px)) {
-      width: 80%;
+     ul > & {
+      list-style: none;
     }
 
     @media screen and (min-width: em(500px)) {
@@ -96,39 +116,7 @@
         margin-right: 0;
       }
     }
-
-    @media screen and (min-width: 2100px) {
-      width: 15%;
-
-      &:nth-child(n) {
-        margin: 0 2% em(35px) 0;
-      }
-
-      &:nth-child(6n) {
-        margin-right: 0;
-      }
-    }
 }
-
-%card-list__link-wrapper {
-    @extend %flex--horizontal-start;
-
-    flex-wrap: wrap;
-    width: 100%;
-    border: 1px $color--card-border solid;
-    background-color: $color--card-background;
-    text-decoration: none;
-    transition: transform .2s;
-
-    &:focus,
-    &:hover {
-      transform: scale(1.02);
-    }
-}
-
-//////////////////////////////
-// Atlas Card (.object-card)
-//////////////////////////////
 
 %object-card__card-header {
   @extend %flex--horizontal-center;
