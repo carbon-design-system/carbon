@@ -1,0 +1,70 @@
+%global-header {
+	width: 100%;
+	background-color: $color__global-header--bg;
+	height: em(60px);
+	padding: 1em;
+	position: relative;
+}
+
+%global-header__logo {
+	@extend %h3--base;
+	color: $white;
+	font-weight: 200;
+	float: left;
+	margin-left: 3em;
+	text-decoration: none;
+}
+
+%global-header__nav {
+	display: inline;
+}
+
+%nav__list {
+	list-style: none;
+	float: right;
+	margin-right: 3em;
+}
+
+%nav__item {
+	@extend %p--base;
+
+	display: inline-block;
+	color: $white;	
+	font-size: .75rem;
+	font-weight: 500;
+	list-style: none;
+	padding: .5em 1em;
+	margin-left: 1em;
+
+	&:last-child {
+		margin-left: 5em;
+		opacity: .8;
+		&:hover {
+			background: none;
+		}
+	}
+
+	&:hover {
+		background: $color__global-header--link-bg;
+		border-radius: 20px;
+		padding: .5em 1em;
+		cursor: pointer;
+	}
+}
+
+%active {
+	background: $color__global-header--link-bg;
+	border-radius: 20px;
+	padding: .5em 1em;
+}
+
+
+%global-header__dropdown {
+	@extend %dropdown;
+	margin-top: -.4em;
+	margin-left: 1em;
+}
+
+%global-header__dropdown--arrow {
+	@extend %dropdown__arrow;
+}
