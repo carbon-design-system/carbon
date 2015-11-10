@@ -134,26 +134,38 @@ Pull down the latest changes from `upstream`.
 git pull upstream master
 ```
 
-Checkout into a new branch for the work you're doing.
-Name your branch using slashes.
+Checkout into a new branch for the work you're doing. It's recommended to name your branch based on our [GitHub Label Guide](https://github.ibm.com/Bluemix/bluemix-components/wiki/GitHub-Labels-Guide).
 
-*(Branch naming convention coming soon)*
+![labels](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/2967/c0db2a6a-8792-11e5-8009-ad7ae1782564.png)
+
+Here's the anatomy of a branch name using slash notation:
+```
+git checkout -b <category>/<sub-category>/<brief-description>
+```
+
+Here are some examples of branch names that will correspond with our **common** GitHub labels.
 
 ```
+# base-element branch
+git checkout -b base-element/buttons/change-colors
+
 # component branch
 git checkout -b component/cards/refactor-classes
 
 # hotfix branch
-git checkout -b hotfix/gulpfile/missing-curly-brace
-
-# feature branch
-git checkout -b feature/some-feature/details-about-feature
+git checkout -b hotfix/gulpfile/add-missing-curly-brace
 
 # task-runner branch
+git checkout -b task-runner/sass/add-source-maps
+
 # docs branch
+git checkout -b docs/readme/how-to-squash-commits
 ```
 
-Run `gulp build` before committing changes and commit frequently with short messages in present-tense.
+* See our [GitHub Labels Guide](https://github.ibm.com/Bluemix/bluemix-components/wiki/GitHub-Labels-Guide) for more details.
+
+
+Finally, run `gulp build` before committing changes and commit frequently with short messages in present-tense.
 
 ```
 gulp build
@@ -165,7 +177,7 @@ git commit -m "Add missing semicolon"
 
 All contributors should squash commits via `git rebase -i` so that there's always **one commit** per **pull request**.
 
-This allows us to:
+Squashing commits allows us to:
 * better understand our commit history.
 * make it easier to revert to a feature.
 
@@ -242,6 +254,8 @@ But after you get feedback on your work, you'll need to `git rebase -i` again an
 ```
 git push origin <branch-name> -f
 ```
+
+With that said, feel free to push to your branch normally then squash your commits after your pull request has been approved.
 
 
 ## Pull Requests
