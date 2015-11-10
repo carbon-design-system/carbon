@@ -7,13 +7,16 @@
 $blue-90: color('blue', 90);
 // usage: Background for global header
 
-$blue-90-lighter: rgba($blue-90, .5);
+$blue-90-light: rgba($blue-90, .5);
 // usage: Item details in the header
+
+$cool-grey-60: color('grey', 60);
+// usage: Divider color
 
 $cool-grey-60-mod: #485760;
 // usage: Dark buttons
 
-$cool-grey-60-mod-lighter: rgba($cool-grey-60-mod, .5);
+$cool-grey-60-mod-light: rgba($cool-grey-60-mod, .5);
 // usage: Module bg color
 
 $cool-grey-60-mod-lightest: rgba($cool-grey-60-mod, .7);
@@ -22,11 +25,9 @@ $cool-grey-60-mod-lightest: rgba($cool-grey-60-mod, .7);
 $blue-70-mod: #2D3F49;
 // usage: Page bg color
 
-$white-opaque: rgba($white, .1);
+$white-overlay: rgba($white, .1);
 // usage: Toggle selector
 
-$cool-grey-60: color('grey', 60);
-// usage: Divider color
 
 //------ TEXT COLORS ------//
 
@@ -42,6 +43,7 @@ $blue-30: color(blue, 30);
 $atlas-med-gray: #8C9BA5;
 // usage: IP address/route
 
+
 //------ ACCENT COLORS ------//
 
 $blue-30: color(blue, 30);
@@ -53,6 +55,11 @@ $teal-20: color(teal, 20);
 $green-30: color(green, 30);
 // usage: Good Health
 
+$red-40: color(red, 40);
+// usage: Bad Health
+
+$yellow-30: color(yellow, 30);
+// usage: Medium Health
 
 
 
