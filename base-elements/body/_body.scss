@@ -5,4 +5,5 @@
 .bx--styled {
   @extend %helvetica;
   background-color: $color__bg;
+  color: $color__text--body;
 }
