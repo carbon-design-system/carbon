@@ -1,5 +1,71 @@
 //////////////////////////////
-// PRIMARY PALETTE
+// ATLAS PALETTE
+//////////////////////////////
+
+//------ TEXT COLORS ------//
+
+$white: #FFFFFF;
+// usage: Primary text
+
+$blue-20: color('blue', 20);
+// usage: Button/Link/Info
+
+$blue-30: color('blue', 30);
+// usage: Selected State
+
+$atlas-med-gray: #8C9BA5;
+// usage: IP address/route
+
+//------ INTERFACE COLORS ------//
+
+$blue-90: color('blue', 90);
+// usage: Background for global header
+
+$blue-90-light: rgba($blue-90, .5);
+// usage: Item details in the header
+
+$cool-grey-60: color('grey', 60);
+// usage: Divider color
+
+$cool-grey-60-mod: #485760;
+// usage: Dark buttons
+
+$cool-grey-60-mod-light: rgba($cool-grey-60-mod, .5);
+// usage: Module bg color
+
+$cool-grey-60-mod-lightest: rgba($cool-grey-60-mod, .7);
+// usage: Table zebra stripe
+
+$blue-70-mod: #2D3F49;
+// usage: Page bg color
+
+$white-overlay: rgba($white, .1);
+// usage: Toggle selector
+
+//------ ACCENT COLORS ------//
+
+$blue-30: color('blue', 30);
+// usage: Primary accent
+
+$teal-20: color('teal', 20);
+// usage: Secondary accent
+
+$green-30: color('green', 30);
+// usage: Good Health
+
+$red-40: color('red', 40);
+// usage: Bad Health
+
+$yellow-30: color('yellow', 30);
+// usage: Medium Health
+
+
+
+
+
+
+//////////////////////////////
+// BLUEMIX PALETTE
 //////////////////////////////
 
 //------ TEAL ------//
