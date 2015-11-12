@@ -1,27 +1,13 @@
 @import '_partials/vars';
 @import '_partials/extends';
 
-//////////////////////////////
-// Card List
-//////////////////////////////
-// Keep this in cards or move to lists?
-
-.card-list {
-  list-style-type: none;
-
-  &__card {
-    @extend %card-list__card;
-  }
-
-  &__object-card {
-    @extend %card-list__object-card;
-  }
-
-  &__link-wrapper {
-    @extend %card-list__link-wrapper;
-  }
+.object-card {
+    @extend %object-card;
 }
 
+.link-wrapper {
+    @extend %link-wrapper;
+}
 
 //////////////////////////////
 // Atlas Card (.object-card)
@@ -84,6 +70,8 @@
 //////////////////////////////
 
 .card {
+  @extend %card;
+
   &__link-wrapper {
     @extend %card__link-wrapper;
   }
