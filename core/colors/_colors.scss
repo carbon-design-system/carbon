@@ -2,6 +2,20 @@
 // ATLAS PALETTE
 //////////////////////////////
 
+//------ TEXT COLORS ------//
+
+$white: #FFFFFF;
+// usage: Primary text
+
+$blue-20: color('blue', 20);
+// usage: Button/Link/Info
+
+$blue-30: color('blue', 30);
+// usage: Selected State
+
+$atlas-med-gray: #8C9BA5;
+// usage: IP address/route
+
 //------ INTERFACE COLORS ------//
 
 $blue-90: color('blue', 90);
@@ -28,37 +42,21 @@ $blue-70-mod: #2D3F49;
 $white-overlay: rgba($white, .1);
 // usage: Toggle selector
 
-
-//------ TEXT COLORS ------//
-
-$white: #FFFFFF;
-// usage: Primary text
-
-$blue-20: color(blue, 20);
-// usage: Button/Link/Info
-
-$blue-30: color(blue, 30);
-// usage: Selected State
-
-$atlas-med-gray: #8C9BA5;
-// usage: IP address/route
-
-
 //------ ACCENT COLORS ------//
 
-$blue-30: color(blue, 30);
+$blue-30: color('blue', 30);
 // usage: Primary accent
 
-$teal-20: color(teal, 20);
+$teal-20: color('teal', 20);
 // usage: Secondary accent
 
-$green-30: color(green, 30);
+$green-30: color('green', 30);
 // usage: Good Health
 
-$red-40: color(red, 40);
+$red-40: color('red', 40);
 // usage: Bad Health
 
-$yellow-30: color(yellow, 30);
+$yellow-30: color('yellow', 30);
 // usage: Medium Health
 
 
