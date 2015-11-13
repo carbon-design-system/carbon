@@ -1,0 +1,8 @@
+%alert--base {
+  @extend %font-smoothing;
+  padding: 15px 30px;
+  margin-bottom: 20px;
+  border: none;
+  background: $blue-90;
+  box-shadow: 0 5px 15px $color--box-shadow;
+}

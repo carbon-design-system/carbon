@@ -1,0 +1,50 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+.alert {
+  &--running { @include alert--theme($blue-30); }
+  &--danger { @include alert--theme($red-50); }
+  &--warning { @include alert--theme($orange-30); }
+  &--misc { @include alert--theme($purple-60); }
+  &--info { @include alert--theme($yellow-20); }
+}
+
+.alert__title,
+.alert__subtitle,
+.alert__body,
+.alert__caption {
+  margin: 5px 0;
+}
+
+.alert__close {
+  float: right;
+  background: none;
+  border: none;
+  color: $grey-20;
+  font-size: 1.5rem;
+  &:hover,
+  &:focus {
+    color: $white;
+    cursor: pointer;
+  }
+}
+
+.alert__title {
+  @extend .type--title;
+}
+
+.alert__subtitle {
+  @extend .type--subtitle;
+  color: $grey-20;
+}
+
+.alert__caption {
+  @extend .type--caption;
+  color: $grey-20;
+}
+
+.alert__body {
+  @extend .type--body;
+  color: $white;
+}
