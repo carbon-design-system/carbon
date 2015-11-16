@@ -2,33 +2,12 @@
 @import '_partials/mixins';
 @import '_partials/extends';
 
-// Default/Light UI
-.bx--styled button {
-  @extend %btn--primary;
-}
-
 .btn {
-  &--primary {
-    @extend %btn--primary;
+  &--light {
+    @include btn($btn--bg, $btn--bg, $btn--text);
   }
 
-  &--secondary {
-    @extend %btn--secondary;
-  }
-
-  &--tertiary {
-    @extend %btn--tertiary;
-  }
-
-  &--close {
-    @extend %btn--close;
-  }
-
-  &--danger {
-    @extend %btn--danger;
-  }
-
-  &--warning {
-    @extend %btn--warning;
+  &--dark {
+    @include btn($btn--bg--dark, $btn--bg--dark, $btn--text);
   }
 }
