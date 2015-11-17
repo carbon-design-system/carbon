@@ -1,9 +1,13 @@
 @import '_partials/vars';
-@import '_partials/mixins';
-@import '_partials/extends';
 
-.bx--styled {
+body {
   @extend %helvetica;
   background-color: $color__bg;
   color: $color__text--body;
+}
+
+.light-theme {
+  @extend %helvetica;
+  background-color: white; // temporary
+  color: black; // temporary
 }

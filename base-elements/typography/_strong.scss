@@ -1,0 +1,10 @@
+// Default: Dark Theme and Bold by default
+.strong {
+  @include type(.875rem);
+  font-weight: 700;
+
+  .light-theme & {
+    @include type(.875rem, black); // black is a temporary color for light-theme text color.
+    font-weight: 700;
+  }
+}
