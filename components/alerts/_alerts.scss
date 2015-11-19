@@ -30,12 +30,12 @@
       font-size: 1.3rem;
     }
     .alert__subtitle {
-      @extend %helveitca-light;
+      @extend %helvetica-light;
       margin-bottom: 1em;
       color: white;
     }
     .alert__caption {
-      @extend %helveitca-light;
+      @extend %helvetica-light;
       color: white;
     }
   }
