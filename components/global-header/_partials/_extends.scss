@@ -1,9 +1,9 @@
 %global-header {
 	width: 100%;
-	background-color: $color__global-header--bg;
+	background-color: $blue-90;
 	height: em(60px);
-	padding: 1em;
 	position: relative;
+	margin: 1em 0;
 }
 
 %global-header__logo {
@@ -11,7 +11,8 @@
 	color: $white;
 	font-weight: 200;
 	float: left;
-	margin-left: 3em;
+	margin-left: 2em;
+	padding: 1em;
 	text-decoration: none;
 }
 
@@ -29,40 +30,53 @@
 	@extend %p--base;
 
 	display: inline-block;
-	color: $white;	
-	font-size: .75rem;
+	color: $blue-20;	
+	font-size: .875rem;
 	font-weight: 500;
 	list-style: none;
-	padding: .5em 1em;
+	padding: 1.6em;
 	margin-left: 1em;
 
 	&:last-child {
 		margin-left: 5em;
 		opacity: .8;
-		&:hover {
-			background: none;
-		}
+		color: $white;
 	}
 
 	&:hover {
-		background: $color__global-header--link-bg;
-		border-radius: 20px;
-		padding: .5em 1em;
 		cursor: pointer;
 	}
 }
 
 %active {
-	background: $color__global-header--link-bg;
 	border-radius: 20px;
 	padding: .5em 1em;
 }
 
 
 %global-header__dropdown {
-	@extend %dropdown;
-	margin-top: -.4em;
-	margin-left: 1em;
+	@extend %p--base;
+	min-width: 15em;
+	display: inline-block;
+	list-style: none;
+	background: $darkest-blue;
+	color: $white;
+	font-size: .875rem;
+	border-radius: 2px;
+	font-weight: 500;
+	padding: 1.6em;
+
+	&:hover,
+	&:focus {
+		cursor: pointer;
+	}
+	
+	&:hover ul,
+	&:focus ul {
+		display: block;
+		opacity: 1;
+		visibility: visible;
+	}
 }
 
 %global-header__dropdown--arrow {
