@@ -1,0 +1,5 @@
+@mixin type($size, $color: $white) {
+  font-family: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
+  font-size: $size;
+  color: $color;
+}

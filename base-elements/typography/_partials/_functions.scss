@@ -5,10 +5,10 @@
 // .button-class { font-size: em(20px); } this will compile to:
 // .button-class { font-size: 1.25em; }
 
-@function rem($px, $base: $base-font-size) {
-  @return ($px / $base) * 1rem;
+@function rem($px) {
+  @return ($px / $base-font-size) * 1rem;
 }
 
-@function em($px, $base: $base-font-size) {
-  @return ($px / $base) * 1em;
+@function em($px) {
+  @return ($px / $base-font-size) * 1em;
 }

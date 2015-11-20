@@ -1,3 +1,5 @@
+$font-path: '.' !default; // Default font directory, allow user override
+
 @font-face {
   font-family: 'IBM Helvetica';
   font-style: normal;
