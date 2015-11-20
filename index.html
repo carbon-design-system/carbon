@@ -23,6 +23,7 @@
 
   <!-- SCRIPTS -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
+  
   <script>
     $(document).ready(function() {
 
@@ -33,6 +34,12 @@
       var components = {
         'global-header': [
           'components/global-header/global-header.html'
+        ],
+        'button-label': [
+          'components/fab-label/fab-label.html'
+        ],
+        'floating-add-button': [
+          'components/floating-add-button/floating-add-button.html'
         ],
         'typography': [
           'base-elements/typography/typography.html'
@@ -52,10 +59,6 @@
           'base-elements/forms/selects/select.html',
           'base-elements/forms/textfields/text-area.html',
           'base-elements/forms/textfields/text-field.html'
-        ],
-        'inputs': [
-          'components/inputs/input--checkbox.html',
-          'components/inputs/input--radio.html'
         ],
         'search': [
           'components/search/search.html'
@@ -133,6 +136,11 @@
           }
         }
       }
+
+      var componentScripts = document.createElement('script');
+      componentScripts.type = 'text/javascript';
+      componentScripts.src = '/_scripts.min.js';
+      document.querySelector('body').appendChild(componentScripts);
     });
 
   </script>
