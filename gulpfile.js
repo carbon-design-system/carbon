@@ -58,6 +58,7 @@ var importPaths = {
 gulp.task('browser-sync', function() {
   browserSync.init({
     logPrefix: "Bluemix Components",
+    open: false,
     server: {
       baseDir: "."
     }
