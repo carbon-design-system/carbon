@@ -1,47 +1,49 @@
 @import '_partials/vars';
 @import '_partials/mixins';
-@import '_partials/extends';
 
 .global-header {
-	@extend %global-header;
-	
-	&__logo {
-		@extend %global-header__logo;
-	}
+  @include global-header;
+
+  &--ghost {
+    @include global-header($color__global-header--bg--ghost);
+  }
+
+  .light-ui & {
+    @include global-header($color__global-header--bg--light);
+  }
 }
 
-.nav__list {
-	@extend %nav__list;
+.nav {
+  @include nav;
+
+  .global-header--ghost & {
+    @include nav($color__global-header--bg--ghost, $color__global-header--text, none); // !temporary
+  }
+
+  .light-ui & {
+    @include nav($color__dropdown--bg--light, $color__global-header--text);
+  }
+
+  .light-ui .global-header--ghost & {
+    @include nav($color__global-header--bg--ghost, $black, none); // !temporary
+  }
 }
 
-.nav__item {
-	@extend %nav__item;
+.nav--secondary {
+  @include nav--secondary;
+
+  .light-ui & {
+    @include nav--secondary($color__global-header--text);
+  }
+
+  .light-ui .global-header--ghost & {
+    @include nav--secondary($black); // !temporary
+  }
 }
 
-.global-header__nav {
-	@extend %global-header__nav;
-}
+.global-profile {
 
-
-.global-header__dropdown {
-	@extend %global-header__dropdown;
-	&--arrow {
-		@extend %global-header__dropdown--arrow;
-	}
-}
-
-.dropdown__item {
-	@extend %dropdown__item;
-}
-
-.dropdown-menu {
-	@extend %dropdown-menu;
-}
-
-.dropdown-menu__item {
-	@extend %dropdown-menu__item;
-}
-
-.active {
-	@extend %active;
+  .light-ui .global-header--ghost & {
+    @include global-profile($color__global-header--text, $black); // !temporary
+  }
 }

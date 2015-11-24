@@ -1,0 +1,59 @@
+@mixin global-header($bg: $color__global-header--bg) {
+  background-color: $bg;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: em(60px);
+  width: 100%;
+  padding: 0 4em;
+
+  &__nav--secondary {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@mixin nav($bg: $color__dropdown--bg, $text: $color__global-header--text, $display: inline-block) {
+
+  &__wordmark {
+    @extend %h2;
+
+    color: $text;
+    font-weight: 200;
+    text-decoration: none;
+  }
+
+  &__dropdown {
+    @extend %p;
+
+    background: $bg;
+    display: $display;
+    font-weight: 500;
+    list-style: none;
+    margin-left: 2em;
+    min-width: 10em;
+    padding: 1.6em;
+    text-decoration: none;
+
+    a {
+      color: $text;
+    }
+  }
+}
+
+@mixin nav--secondary($text: $color__secondary-nav--text) {
+  &__list {
+    display: flex;
+    align-items: center;
+  }
+
+  &__link {
+    @extend %p;
+
+    color: $text;
+    font-weight: 700;
+    margin-right: 3em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
