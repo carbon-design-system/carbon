@@ -1,13 +1,11 @@
 %btn--base {
-  @extend %helvetica-bold;
-  @extend %font-smoothing;
+  @extend %p;
 
   cursor: pointer;
   display: inline-block;
   width: em(200px);
   height: em(40px);
   border-width: 0;
-  font-size: rem(14px);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;

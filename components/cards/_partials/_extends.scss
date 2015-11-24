@@ -123,8 +123,8 @@
 
   width: 100%;
   color: $color--card-content;
-  font-size: rem(10px) !important;
-  font-weight: 100 !important;
+  font-size: rem(10px);
+  font-weight: 100;
   text-align: center;
   text-transform: uppercase;
   padding-top: .3em;
@@ -144,11 +144,7 @@
   overflow: hidden;
   padding: 1.6em 1em 1em;
   color: $color--card-metadata;
-  font-size: rem(12px) !important;
+  font-size: rem(12px);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-
-
-
