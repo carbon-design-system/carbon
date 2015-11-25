@@ -2,13 +2,9 @@
 // Variables
 ///////////////////
 
-// Button colors
-$color--btn--primary: $teal-45;
-$color--btn--secondary: $blue-40;
-$color--btn--tertiary: $bluemix-medium-grey;
-$color--btn--danger: $red-50;
-$color--btn--warning: $yellow-20;
+// Background Color
+$btn--bg: $blue-40;
+$btn--bg--dark: $cool-grey-60-mod;
 
-// Button text colors
-$color--text--btn-close: lighten($cool-grey-50, 5);
-$color--text--btn-warning: #000;
+// Text Color
+$btn--text: $white;

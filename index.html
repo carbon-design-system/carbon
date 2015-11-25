@@ -3,51 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
-  <title>Pattern Library Dev</title>
+  <title>Bluemix Components</title>
   <link rel="stylesheet" href="dev.css">
 </head>
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    padding-top: 5rem;
-  }
-
-  #cards {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #34434c;
-    justify-content: center;
-    list-style: none;
-    margin: 20px 0;
-    padding: 20px;
-  }
-
-  #cards .card {
-    margin: 1em;
-  }
-
-  #search {
-  	width: 100%;
-  	background: #777677; /* gray-50 */
-  	padding: 1em 3em;
-  }
-
-  @media screen and (min-width: 600px) {
-    #cards {
-      align-items: flex-start;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-    }
-  }
-</style>
-<body class="bx--styled">
+<body>
   <!-- Open and view this HTML file when developing patterns,
   you'll be able to see changes to your patterns here. -->
 
@@ -55,66 +14,34 @@
   <div id="nav" style="position: absolute; top: 0; display: none;"></div>
   <div id="atlas-nav" style="position: absolute; top: 0;"></div>
 
-  <div style="margin-left: 3rem;">
-    <label id="bluemix-theme" style="margin-right: 1em;">
-      <input type="radio" name="theme" value="bluemix">
-      <span>Bluemix Nav</span>
-    </label>
-    <label id="atlas-theme">
-      <input type="radio" name="theme" value="atlas" checked>
-      <span>Atlas Nav</span>
-    </label>
-  </div>
-
   <!-- dark-ui for cards -->
   <div id="cards"></div>
 
-  <div id="modal" style="margin: 1em;"></div>
   <div id="search"></div>
   <!-- COMPONENTS -->
   <div id="components"></div>
 
   <!-- SCRIPTS -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="dev.js"></script>
   <script>
     $(document).ready(function() {
-      /////////////////////////
-      // Nav Theme Switcher
-      /////////////////////////
-
-      var bluemixButton = $('#bluemix-theme');
-      var atlasButton = $('#atlas-theme');
-
-      bluemixButton.on('click', function (event) {
-        console.log(event);
-        $('#nav').css('display', 'block');
-        $('#atlas-nav').css('display', 'none');
-      });
-
-      atlasButton.on('click', function (event) {
-        $('#nav').css('display', 'none');
-        $('#atlas-nav').css('display', 'block');
-      });
 
       /////////////////////////////////
       // AJAX Components on to index.html
       /////////////////////////////////
 
       var components = {
+        'global-header': [
+          'components/global-header/global-header.html'
+        ],
         'typography': [
           'base-elements/typography/typography.html'
         ],
         'buttons': [
-          'base-elements/buttons/btn--close.html',
-          'base-elements/buttons/btn--danger.html',
-          'base-elements/buttons/btn--primary.html',
-          'base-elements/buttons/btn--secondary.html',
-          'base-elements/buttons/btn--tertiary.html',
-          'base-elements/buttons/btn--warning.html'
+          'base-elements/buttons/btn--light.html',
+          'base-elements/buttons/btn--dark.html'
         ],
         'cards': [
-          'components/cards/card--atlas.html',
           'components/cards/card.html'
         ],
         'forms': [
@@ -141,14 +68,30 @@
           'base-elements/lists/list--ordered.html',
           'base-elements/lists/list--unordered.html'
         ],
-        'modals': [
-          'components/modals/modal.html'
-        ],
         'tables': [
           'base-elements/tables/table.html'
         ],
         'tooltips': [
           'components/tooltips/tooltip.html'
+        ],
+        'dropdown': [
+          'components/dropdown/dropdown.html'
+        ],
+        'alerts': [
+          'components/alerts/alert--danger.html',
+          'components/alerts/alert--running.html',
+          'components/alerts/alert--warning.html',
+          'components/alerts/alert--info.html',
+          'components/alerts/alert--misc.html'
+        ],
+        'data-module': [
+          'components/data-module/data-module.html'
+        ],
+        'item-list': [
+          'components/item-list/item-list.html'
+        ],
+        'activity-log': [
+          'components/activity-log/activity-log.html'
         ]
       };
 
@@ -161,14 +104,6 @@
           $.get(componentArray[0], function (data) {
             $('#nav').append(data);
           });
-        }
-
-        else if (prop === 'modals') {
-          for (var i = 0; i < componentArray.length; i++ ) {
-            $.get(componentArray[i], function (data) {
-              $('#modal').append(data);
-            });
-          }
         }
 
         else if (prop === 'search') {

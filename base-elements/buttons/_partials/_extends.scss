@@ -1,94 +1,14 @@
-////////////////////////////////////////////
-// Extends + Mixins (Shared button styles)
-////////////////////////////////////////////
-
-// Common styles for all buttons (text and text + icon)
 %btn--base {
-  @extend %font-smoothing;
   @extend %helvetica-bold;
-
-  display: inline-block;
-  min-width: 6em; // 96px
-  height: 2.75em; // 44px
-  padding: .65em 1em;
-  margin: 1em 0 1em .5em;
-
-  font-size: em(14px);
-  text-align: center;
-  text-decoration: none;
-  letter-spacing: em(1px);
-  text-transform: uppercase;
+  @extend %font-smoothing;
 
   cursor: pointer;
-  vertical-align: middle;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: .5;
-  }
-}
-
-// Common styles for buttons with icons only
-%btn--icon-btn {
-  @extend %btn--base;
-
-  min-width: .1em;
-  min-height: .1em;
-}
-
-// Common transition for all buttons
-%btn--style--transition {
-  transition: background-color ease-out .15s, color ease-out .15s;
-}
-
-////////////////////////////////////////////
-// Extends (specific button styles)
-////////////////////////////////////////////
-
-%btn--close {
-  @extend %btn--icon-btn;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: em(10px);
-  height: em(10px);
-  padding: 0;
-  border: 0 solid transparent;
-  margin: 1em;
-
-  background-color: transparent;
-
-  [aria-label='close'] {
-    display: inline-block;
-
-    color: $color--text--btn-close;
-
-    font-size: typescale(1);
-
-    &:hover,
-    &:focus {
-      color: ligthen($color--text--btn-close, 15);
-    }
-  }
-}
-
-%btn--primary {
-  @include btn($color--btn--primary, $color--btn--primary, $white, $white, $color--btn--primary);
-}
-
-%btn--secondary {
-  @include btn(transparent, $color--btn--secondary, $color--btn--secondary, $white, $color--btn--secondary);
-}
-
-%btn--tertiary {
-  @include btn(transparent, $color--btn--tertiary, $color--btn--tertiary, $white, $color--btn--tertiary);
-}
-
-%btn--danger {
-  @include btn($color--btn--danger, $color--btn--danger, $white, $white, $color--btn--danger);
-}
-
-%btn--warning {
-  @include btn($color--btn--warning, $color--btn--warning, $color--text--btn-warning, $color--text--btn-warning, $color--btn--warning);
+  display: inline-block;
+  width: em(200px);
+  height: em(40px);
+  border-width: 0;
+  font-size: rem(14px);
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
 }

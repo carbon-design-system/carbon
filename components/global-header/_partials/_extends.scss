@@ -1,0 +1,85 @@
+%global-header {
+	width: 100%;
+	background-color: $blue-90;
+	height: em(60px);
+	position: relative;
+	margin: 1em 0;
+}
+
+%global-header__logo {
+	@extend %h3--base;
+	color: $white;
+	font-weight: 200;
+	float: left;
+	margin-left: 2em;
+	padding: 1em;
+	text-decoration: none;
+}
+
+%global-header__nav {
+	display: inline;
+}
+
+%nav__list {
+	list-style: none;
+	float: right;
+	margin-right: 3em;
+}
+
+%nav__item {
+	@extend %p--base;
+
+	display: inline-block;
+	color: $blue-20;	
+	font-size: .875rem;
+	font-weight: 500;
+	list-style: none;
+	padding: 1.6em;
+	margin-left: 1em;
+
+	
+	&:last-child {
+		margin-left: 5em;
+		opacity: .8;
+		color: $white;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+%active {
+	border-radius: 20px;
+	padding: .5em 1em;
+}
+
+
+%global-header__dropdown {
+	@extend %p--base;
+	min-width: 15em;
+	display: inline-block;
+	list-style: none;
+	background: $darkest-blue;
+	color: $white;
+	font-size: .875rem;
+	border-radius: 2px;
+	font-weight: 500;
+	padding: 1.6em;
+
+	&:hover,
+	&:focus {
+		cursor: pointer;
+	}
+	
+	&:hover ul,
+	&:focus ul {
+		display: block;
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+%global-header__dropdown--arrow {
+	@extend %dropdown__arrow;
+}

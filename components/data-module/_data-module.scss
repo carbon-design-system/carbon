@@ -1,0 +1,31 @@
+@import '_partials/vars';
+@import '_partials/extends';
+
+.data-module {
+	@extend %data-module;
+
+	&__container {
+		@extend %data-module__container;
+	}
+	&__data {
+		@extend %data-module__data;
+	}
+	&__details-link {
+		@extend %data-module__details-link;
+	}
+}
+
+.data {
+	&__main-heading {
+		@extend %data__main-heading;
+	}
+	&__main-data {
+		@extend %data__main-data;
+		&--big {
+			@extend %data__main-data--big;
+		}
+	}
+	&__more-info {
+		@extend %data__more-info;
+	}
+}

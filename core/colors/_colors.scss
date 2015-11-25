@@ -1,99 +1,30 @@
 //////////////////////////////
-// PRIMARY PALETTE
+// ATLAS PALETTE
 //////////////////////////////
 
-//------ TEAL ------//
+$palette__bluemix: (
+  'blue-dark': #2D3F49,
+  'blue-darker': #20343E,
+  'blue-darkest': #152934,
+  'blue-light': color('blue', 30),
+  'blue-lighter': color('blue', 20),
+  'gray-dark': #485760,
+  'gray-darker': #42535C,
+  'gray-darkest': #394B54,
+  'gray-light': color('cool-gray', 60),
+  'gray-lighter': #8C9BA5,
+  'green': color('green', 30),
+  'red': color('red', 40),
+  'teal': color('teal', 20),
+  'white': color('white'),
+  'yellow': color('yellow', 30),
+);
 
-$teal-30: color('teal', 30);
-// usage: accent or button on dark backgrounds
-
-$teal-40: color('teal', 40);
-// usage: Logo color. Primary accent.
-
-$teal-45: #00a391;
-//usage: Used sparingly for accessibility.
-
-
-//------ BLUE ------//
-
-$blue-30: color('blue', 30);
-// usage: Logo color. Accent or button on dark backgrounds
-
-$blue-40: color('blue', 40);
-// usage: Accent, links, buttons on light background.
-
-$blue-50: color('blue', 50);
-// usage: sparingly for accessibility
-
-$blue-70: #2D3F4A;
-// usage: Type color for small headings; background color for code snippets; background for tabs, toggles and other UI components.
-
-$blue-80: color('blue', 80);
-// usage: Background for header and footer nav bars; can be used as a background in UI elements but not UI pages.
-
-$blue-90: color('blue', 90);
-// usage: Background for main UI on dark pages. Used for hover states on dark nav. Backgrounds in dark UI components. Text for h1.
-
-$bluemix-table-blue: #d5eaff;
-// usage: Background for table rows on hover.
-
-$bluemix-icon-border-blue: #00bfe5;
-// usage: Border color for card icons (runtimes, services)
-
-$bluemix-card-blue: #00aed1;
-// usage: box shadow for cards on hover.
-
-//------ WHITE ------//
-
-$white: color('white');
-// usage: background, type color, or accent
-
-$cool-white-40: color('cool-white', 40);
-// usage: Type on darkest colors; aka cool-4
-
-//------ GRAY ------//
-
-$bluemix-nav-grey: #B3B3B3;
-// usage: navigation links (solutions, catalog, pricing, docs, community, login)
-
-$bluemix-light-grey: #DFE6EB;
-// usage: borders on UI elements: form fields, graph grids, tables, drop downs, etc. Expired notification; light background in UI.
-
-$bluemix-medium-grey: #94A3AB; // usage: Logo color. Disabled states. Used at 25% for zebra striping on tables and hovers on dropdowns.
-
-$bluemix-status-grey: #e9f1f4;
-// usage: Background for card status (`.card__status`).
-
-$cool-grey-50: color('cool-grey', 50);
-// usage: Button color for cancel, undo, or negative actions. Type on white.
-
-//////////////////////////////
-// SECONDARY PALETTE
-//////////////////////////////
-
-//------ RED ------//
-
-$red-50: color('red', 50);
-
-
-//------ ORANGE ------//
-
-$orange-30: color('orange', 30);
-
-
-//------ YELLOW ------//
-
-$yellow-20: color('yellow', 20);
-
-
-//------ GREEN ------//
-
-$green-40: color('green', 40);
-$bluemix-status-green: #13dd6d;
-// usage: Running status color for cards (as is in bluemix.net).
-
-
-//------ PURPLE ------//
-
-$purple-40: #5596E6;
-$purple-60: color('purple', 60);
+@function palette($color) {
+  @if map-has-key($palette__bluemix, $color) {
+    @return map-get($palette__bluemix, $color);
+  } @else {
+    @warn "We couldn't find #{$color} in $palette__bluemix map.
+         Please make sure it's defined."
+  }
+}

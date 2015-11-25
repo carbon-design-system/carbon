@@ -1,0 +1,7 @@
+.caption {
+  @include type(.75rem);
+
+  .light-theme & {
+    @include type(.75rem, black);
+  }
+}

@@ -1,8 +1,0 @@
-@import 'partials/vars';
-@import 'partials/mixins';
-@import 'partials/extends';
-
-.h6--base,
-.bx--styled h6 {
-  @extend %h6--base;
-}

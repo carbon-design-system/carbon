@@ -1,0 +1,47 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+.global-header {
+	@extend %global-header;
+	
+	&__logo {
+		@extend %global-header__logo;
+	}
+}
+
+.nav__list {
+	@extend %nav__list;
+}
+
+.nav__item {
+	@extend %nav__item;
+}
+
+.global-header__nav {
+	@extend %global-header__nav;
+}
+
+
+.global-header__dropdown {
+	@extend %global-header__dropdown;
+	&--arrow {
+		@extend %global-header__dropdown--arrow;
+	}
+}
+
+.dropdown__item {
+	@extend %dropdown__item;
+}
+
+.dropdown-menu {
+	@extend %dropdown-menu;
+}
+
+.dropdown-menu__item {
+	@extend %dropdown-menu__item;
+}
+
+.active {
+	@extend %active;
+}

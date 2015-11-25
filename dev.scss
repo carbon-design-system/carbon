@@ -8,6 +8,8 @@
 
 // Core
 @import 'core/colors/colors';
+@import 'core/fonts/font-face';
+@import 'core/reset/reset';
 
 // Base Elements
 @import 'base-elements/body/body';
@@ -24,7 +26,11 @@
 
 // Components
 @import 'components/cards/cards';
-@import 'components/inputs/inputs';
-@import 'components/modals/modals';
 @import 'components/search/search';
 @import 'components/tooltips/tooltips';
+@import 'components/global-header/global-header';
+@import 'components/dropdown/dropdown';
+@import 'components/alerts/alerts';
+@import 'components/data-module/data-module';
+@import 'components/item-list/item-list';
+@import 'components/activity-log/activity-log';

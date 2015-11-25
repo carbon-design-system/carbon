@@ -1,0 +1,53 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+.alert {
+  &--running { @include alert--theme($blue-30); }
+  &--danger { @include alert--theme($red-50); }
+  &--warning { @include alert--theme($orange-30); }
+  &--misc { @include alert--theme($purple-60); }
+  &--info { @include alert--theme($yellow-20); }
+}
+
+.alert {
+  display: flex;
+
+  &--danger, &--running, &--warning, &--misc, &--info {
+    @extend %font-smoothing;
+    background: #2E404B;
+    flex: 1;
+    padding: .3em 0 .3em .5em;
+    border-right: 3px solid #202E33;
+
+    .alert__title,
+    .alert__subtitle,
+    .alert__caption {
+      margin: .4em 0;
+    }
+    .alert__title {
+      @extend %helvetica-bold;
+      font-size: 1.3rem;
+    }
+    .alert__subtitle {
+      @extend %helvetica-light;
+      margin-bottom: 1em;
+      color: white;
+    }
+    .alert__caption {
+      @extend %helvetica-light;
+      color: white;
+    }
+  }
+
+  .alert__close {
+    background: #2E404B;
+    border: none;
+    span {
+      padding: .1em;
+      svg {
+        fill: $close-button;
+      }
+    }
+  }
+}
