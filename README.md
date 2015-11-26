@@ -1,10 +1,10 @@
 # Bluemix Components
 
-**Component library for building websites and UIs for Bluemix.**
+**Component library for building websites and UIs for Atlas/Bluemix.**
 
-Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable components they can use for building websites and user-interfaces for Bluemix.
+Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable HTML and Sass partials they can use for building websites and user-interfaces for Bluemix.
 
-The aim is for every developer to use consistent HTML, CSS, and JavaScript in as many places as possible in their prototype and production work.
+The aim is for every developer to use consistent markup, styles, and behavior in their prototype and production work.
 
 ## Install
 
@@ -32,7 +32,7 @@ Create a **.bowerrc** file:
 Install the bower package:
 
 ```bash
-bower install bluemix-components --save-dev
+bower install bluemix-components#2.0.0-alpha --save-dev
 ```
 
 Create a **main.scss** file in your project and `@import` bluemix-components with a relative path to the bower package.
