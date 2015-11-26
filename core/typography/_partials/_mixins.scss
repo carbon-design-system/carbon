@@ -1,0 +1,5 @@
+@mixin type($size, $color: $white) {
+  @extend %helvetica;
+  font-size: $size;
+  color: $color;
+}

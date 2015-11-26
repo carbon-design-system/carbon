@@ -57,13 +57,13 @@
 %text__headline--catalog {
 	@extend %text__headline;
 	font-size: rem(14px);
-	font-weight: 600 !important;
+	font-weight: 600;
 }
 
 %text__desc--catalog {
 	@extend %text__desc;
-	font-size: rem(12px) !important;
-	font-weight: 200 !important;
+	font-size: rem(12px);
+	font-weight: 200;
 }
 
 // SUMMARY ITEMS STYLES
@@ -94,12 +94,12 @@
 
 %text__headline--summary {
 	@extend %text__headline;
-	font-size: rem(20px) !important;
-	font-weight: 600 !important;
+	font-size: rem(20px);
+	font-weight: 600;
 }
 
 %text__desc--summary {
 	@extend %text__desc;
-	font-size: rem(13px) !important;
-	font-weight: 200 !important;
+	font-size: rem(13px);
+	font-weight: 200;
 }

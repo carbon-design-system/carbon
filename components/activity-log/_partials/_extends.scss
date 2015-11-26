@@ -1,15 +1,15 @@
 %activity-log {
 	width: em(400px);
-	background-color: $cool-grey-60-mod-light;
+	background-color: $gray--darker;
 	padding-bottom: .5em;
 	margin: 4em;
 }
 
 %activity-log__headline {
 	color: rgba($white, .8);
-	font-weight: 600 !important;
+	font-weight: 600;
 	padding: 1.8em 2em;
-	border-bottom: 1px solid $cool-grey-60;
+	border-bottom: 1px solid $gray--light;
 	width: 100%;
 }
 
@@ -36,8 +36,7 @@ dl {
 }
 
 %item__activity-desc {
-	font-weight: 200 !important;
-	letter-spacing: rem(.2px);
+	font-weight: 200;
 	line-height: 2;
 	padding-left: 5em;
 	top: em(-21px);
@@ -45,13 +44,12 @@ dl {
 }
 
 %activity-desc__time {
-	color: $blue-20;
+	color: $blue--lighter;
 	padding-left: .5em;
 }
 
 %item__border {
-	border-left: 2px solid $cool-grey-60;
-	margin-right: em(.5px);
+	border-left: 2px solid $gray--light;
 	padding: .8em 0;
 	display: inline-block;
 }
@@ -69,10 +67,10 @@ dl {
 		padding-top: .45em;
 		border-radius: 12px;
 	}
-	&::after {	
+	&::after {
 		content: ' ';
 		position: relative;
-		border: 1px solid $cool-grey-60;
+		border: 1px solid $gray--light;
 		padding-top: 1em;
 		top: em(-15px);
 		left: em(-15px);

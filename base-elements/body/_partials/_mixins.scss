@@ -1,0 +1,12 @@
+// @mixin body($theme: 'dark') {
+//   @extend %helvetica;
+
+//   @if $theme == 'dark' {
+//     background-color: $blue-dark;
+//     color: $white;
+//   }
+//   @if $theme == 'light' {
+//     background-color: $white; // !temporary
+//     color: $black; // !temporary
+//   }
+// }

@@ -1,7 +1,0 @@
-.p {
-  @include type(.875rem);
-
-  .light-theme & {
-    @include type(.875rem, black); // black is a temporary color for light-theme text color.
-  }
-}

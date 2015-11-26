@@ -1,8 +1,0 @@
-.h1 {
-  @include type(2rem);
-
-  .light-theme & {
-    @include type(2rem, black); // black is a temporary color for light-theme text color.
-  }
-}
-
