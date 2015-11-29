@@ -30,14 +30,14 @@
 	@extend %p--base;
 
 	display: inline-block;
-	color: $blue-20;	
+	color: $blue--lighter;
 	font-size: .875rem;
 	font-weight: 500;
 	list-style: none;
 	padding: 1.6em;
 	margin-left: 1em;
 
-	
+
 	&:last-child {
 		margin-left: 5em;
 		opacity: .8;
@@ -60,7 +60,7 @@
 	min-width: 15em;
 	display: inline-block;
 	list-style: none;
-	background: $darkest-blue;
+  background-color: $blue--darkest;
 	color: $white;
 	font-size: .875rem;
 	border-radius: 2px;
@@ -71,7 +71,7 @@
 	&:focus {
 		cursor: pointer;
 	}
-	
+
 	&:hover ul,
 	&:focus ul {
 		display: block;

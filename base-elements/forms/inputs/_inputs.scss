@@ -2,7 +2,10 @@
 @import '_partials/mixins';
 @import '_partials/extends';
 
-.bx--styled input[type="search"],
-.input--search {
+.bx--styled input[type="search"] {
   @extend %input--search;
+}
+
+.bx--styled input[type="text"] {
+  @extend %input--text;
 }

@@ -14,7 +14,7 @@
 	&:focus {
 		cursor: pointer;
 	}
-	
+
 	&:hover ul,
 	&:focus ul {
 		display: block;
@@ -26,7 +26,7 @@
 %dropdown__item {
 	display: inline-block;
 	position: relative;
-	
+
 	a {
 		text-decoration: none;
 		color: $color__dropdown--link;
@@ -46,7 +46,7 @@
 %dropdown-menu {
 	min-width: 15em;
 	list-style: none;
-	position: absolute;	
+	position: absolute;
 	display: none;
 	opacity: 0;
 	visibility: hidden;
@@ -63,7 +63,7 @@
 	float: none;
 	display: block;
 	padding: 1em 2.5em 1em 1.5em;
-	
+
 	&:hover,
 	&:focus {
 		background: rgba(255,255,255,.05);

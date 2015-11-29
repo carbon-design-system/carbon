@@ -3,11 +3,11 @@
 @import '_partials/extends';
 
 .alert {
-  &--running { @include alert--theme($blue-30); }
-  &--danger { @include alert--theme($red-50); }
+  &--running { @include alert--theme($blue--light); }
+  &--danger { @include alert--theme($red); }
   &--warning { @include alert--theme($orange-30); }
   &--misc { @include alert--theme($purple-60); }
-  &--info { @include alert--theme($yellow-20); }
+  &--info { @include alert--theme($yellow); }
 }
 
 .alert {
@@ -26,17 +26,16 @@
       margin: .4em 0;
     }
     .alert__title {
-      @extend %helvetica-bold;
-      font-size: 1.3rem;
+      @extend %h2;
     }
     .alert__subtitle {
-      @extend %helvetica-light;
+      @extend %helvetica;
       margin-bottom: 1em;
-      color: white;
+      color: $white;
     }
     .alert__caption {
-      @extend %helvetica-light;
-      color: white;
+      @extend %helvetica;
+      color: $white;
     }
   }
 
