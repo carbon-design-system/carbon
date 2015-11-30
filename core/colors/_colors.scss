@@ -3,21 +3,21 @@
 //////////////////////////////
 
 $palette__bluemix: (
-  'blue-dark': #2D3F49,
-  'blue-darker': #20343E,
-  'blue-darkest': #152934,
-  'blue-light': color('blue', 30),
-  'blue-lighter': color('blue', 20),
-  'gray-dark': #485760,
-  'gray-darker': #42535C,
-  'gray-darkest': #394B54,
-  'gray-light': color('cool-gray', 60),
-  'gray-lighter': #8C9BA5,
+  'blue--dark': #2D3F49,
+  'blue--darker': #20343E,
+  'blue--darkest': #152934,
+  'blue--light': color('blue', 30),
+  'blue--lighter': color('blue', 20),
+  'gray--dark': #485760,
+  'gray--darker': #42535C,
+  'gray--darkest': #394B54,
+  'gray--light': color('cool-gray', 60),
+  'gray--lighter': #8C9BA5,
   'green': color('green', 30),
   'red': color('red', 40),
   'teal': color('teal', 20),
   'white': color('white'),
-  'yellow': color('yellow', 30),
+  'yellow': color('yellow', 30)
 );
 
 @function palette($color) {
@@ -25,6 +25,33 @@ $palette__bluemix: (
     @return map-get($palette__bluemix, $color);
   } @else {
     @warn "We couldn't find #{$color} in $palette__bluemix map.
-         Please make sure it's defined."
+         Please make sure it's defined.";
   }
 }
+
+$blue--dark: palette('blue--dark');
+$blue--darker: palette('blue--darker');
+$blue--darkest: palette('blue--darkest');
+$blue--light: palette('blue--light');
+$blue--lighter: palette('blue--lighter');
+$gray--dark: palette('gray--dark');
+$gray--darker: palette('gray--darker');
+$gray--darkest: palette('gray--darkest');
+$gray--light: palette('gray--light');
+$gray--lighter: palette('gray--lighter');
+$green: palette('green');
+$red: palette('red');
+$teal: palette('teal');
+$white: palette('white');
+$yellow: palette('yellow');
+
+// !temporary (maybe need to include)
+$black: #000;
+$blue-40: color('blue', 40);
+$blue-90: color('blue', 90);
+$darkest-blue: #0F212E; // used in dropdown (global-header)
+$color--card-background: #283840;
+$cool-grey-50: color('cool-grey', 50);
+$orange-30: color('orange', 30); // alerts
+$purple-60: color('purple', 60); // alerts
+

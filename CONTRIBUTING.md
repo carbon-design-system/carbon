@@ -11,6 +11,7 @@
 * [Squashing Commits with Rebase](#squashing-commits-with-rebase)
 * [Pull Requests](#pull-requests)
   * [Create a Pull Request](#create-a-pull-request)
+  * [Update your Branch](#update-your-branch)
   * [Collaborate on a Pull Request](#collaborate-on-a-pull-request)
 
 
@@ -189,11 +190,12 @@ Do a `git log` to see your commit history and count the commits you want to squa
 # As an example...
 git log --oneline
 
-# earliest commit on top, latest commit on bottom...
-c46e938 Fix header.js
-82d4341 Move docs into new docs folder
-22c943b Update README.md
+# latest commit will appear on top...
 d7fef3e Add missing curly brace
+22c943b Update README.md
+82d4341 Move docs into new docs folder
+c46e938 Fix header.js
+
 ```
 
 Let's say I want to squash the last 4 commits into one commit.
@@ -278,8 +280,6 @@ Sometimes this pull-request button isn't there, so alternatively, you can click 
 
 Clicking this other button will take you to a 'Compare changes' screen. There are two dropdowns to compare two branches. Change the second dropdown to your branch.
 
-*(does this 'compare changes' work across forks?)*
-
 ![compare-changes](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/2327/f635fd24-7c03-11e5-9011-9aff28daaee5.png)
 
 After clicking on 'Create pull request',
@@ -288,6 +288,23 @@ you'll be taken to a form where you can enter a title and description.
 Write a description for your pull request starting with:
 * A reference to the issue that you're resolving (see [closing issues via pull requests](https://github.com/blog/1506-closing-issues-via-pull-requests))
 * Give any extra explanation if needed.
+
+
+### Update your Branch
+
+When you see this on your pull request:
+
+![merge-conflict](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/3900/15be5a9c-946e-11e5-8403-af7df30657cb.png)
+
+you will need to update your feature branch with `upstream/master`.
+
+```
+git checkout master
+git pull upstream master
+git checkout your/feature/branch
+git rebase master
+```
+
 
 
 ### Collaborate on a Pull Request

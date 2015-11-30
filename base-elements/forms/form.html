@@ -1,10 +1,28 @@
-<form action="" class="form">
-  <label for="email"></label>
-  <input type="email" class="form__email">
+<form action="#" class="form">
 
-  <label for="password"></label>
-  <input type="password" class="form__password">
+    <label class="select__label" for="">Form label</label>
+    <select class="dropdown__select">
+      <option class="dropdown__option" value="volvo">Volvo</option>
+      <option class="dropdown__option" value="saab">Saab</option>
+      <option class="dropdown__option" value="opel">Opel</option>
+      <option class="dropdown__option" value="audi">Audi</option>
+    </select>
 
-  <!-- Submit Primary Button-->
-  <button class="btn--primary" type="submit">submit button</button>
+    <label class="input__label" for="">Text Label</label>
+    <input type="text" name="" class="input--text">
+
+    <label class="radiogroup__label" for="item-1">Item One:</label>
+    <input type="radio" name="groupname" value="item-1" class="input--radio">
+
+    <label class="radiogroup__label" for="item-2">Item Two:</label>
+    <input type="radio" name="groupname" value="item-2" class="input--radio">
+
+    <input id="toggle1" class="toggle" type="checkbox" checked="checked">
+    <label for="toggle1">
+      On <span>OFF</span>
+    </label>
+
+    <button class="btn--light" type="submit">Submit</button>
+
 </form>
+<!-- close form -->

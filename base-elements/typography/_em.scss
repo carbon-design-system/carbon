@@ -1,9 +1,0 @@
-.em {
-  @include type(.875rem);
-  font-style: italic;
-
-  .light-theme & {
-    @include type(.875rem, black); // black is a temporary color for light-theme text color.
-    font-style: italic;
-  }
-}

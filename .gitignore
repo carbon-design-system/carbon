@@ -7,3 +7,4 @@ bower_components
 dev.css
 _scripts.js
 _scripts.min.js
+*.css.map

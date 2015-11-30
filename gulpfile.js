@@ -18,7 +18,7 @@ var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var stylish = require('jshint-stylish');
 var uglify = require('gulp-uglify');
-
+var sourcemaps = require('gulp-sourcemaps');
 //////////////////////////////
 // Variables
 //////////////////////////////
@@ -103,10 +103,12 @@ gulp.task('scripts:hint', function() {
 
 gulp.task('sass', function() {
   var compile = gulp.src(paths.scss.all)
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions']
     }))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('.'))
     .pipe(browserSync.stream());
 

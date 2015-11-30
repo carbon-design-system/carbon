@@ -1,13 +1,21 @@
-@import '_partials/vars';
+// @import '_partials/mixins';
+
+// body {
+//   @include body;
+// }
+
+// .light-theme {
+//   @include body('light');
+// }
 
 body {
   @extend %helvetica;
-  background-color: $blue-70-mod;
-  color: $color__text--body;
-}
 
-.light-theme {
-  @extend %helvetica;
-  background-color: white; // temporary
-  color: black; // temporary
+  background-color: $blue--dark;
+  color: $white;
+
+  &.light-theme {
+    background-color: $white; // !temporary
+    color: $black; // !temporary
+  }
 }
