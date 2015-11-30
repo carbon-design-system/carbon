@@ -1,26 +1,28 @@
 // Map of Breakpoints
 //
 $breakpoints: (
-  xs: 500px,
-  sm: 768px,
-  md: 992px,
-  lg: 1200px
+  bp--xs--major: 500px,
+  bp--sm--major: 768px,
+  bp--md--major: 992px,
+  bp--lg--major: 1200px
 );
 
 // Breakpoint Mixin
 //
 // usage:
-// @include breakpoint(md) {
+// @include breakpoint(bp--md--major) {
 //    - styles here --
 // }
 @mixin breakpoint($size) {
   @if map-has-key($breakpoints, $size) {
-    @media (min-width: map-get($breakpoints, $size)) {
+    @media screen and (min-width: map-get($breakpoints, $size)) {
       @content;
     }
   }
 
   @else {
-    @warn "Breakpoint mixin supports: xs (500px), sm (768px), md (992px), and lg (1200px)";
+    @media screen and (min-width: $size) {
+      @content;
+    }
   }
 }
