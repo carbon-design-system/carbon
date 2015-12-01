@@ -1,0 +1,11 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+.fab-label {
+	@extend %fab-label;
+}
+
+.fab-label__text {
+	@extend %fab-label__text;
+}
