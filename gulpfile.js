@@ -25,7 +25,7 @@ var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
   clean: [
-    'dev.css',
+    '*.css',
     '_styles.scss',
     '_scripts.js',
     '_scripts.min.js',
@@ -38,7 +38,7 @@ var paths = {
     all: [
       'base-elements/**/*.scss',
       'components/**/*.scss',
-      'dev.scss'
+      '*.scss'
     ],
     main: 'dev.scss'
   },

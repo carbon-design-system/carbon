@@ -29,6 +29,7 @@
     ".git",
     "index.html",
     "dev.{scss, css}",
+    "dev-colors.{scss, css}",
     "bower_components",
     "node_modules"
   ]

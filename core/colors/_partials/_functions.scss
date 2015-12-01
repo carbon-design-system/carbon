@@ -1,0 +1,18 @@
+@function mod($color) {
+  @if map-has-key($palette__modified, $color) {
+    @return map-get($palette__modified, $color);
+  } @else {
+    @warn "We couldn't find #{$color} in $palette__modified map.
+         Please make sure it's defined.";
+  }
+}
+
+@function ibm($color) {
+  @if map-has-key($palette__ibm, $color) {
+    @return map-get($palette__ibm, $color);
+  } @else {
+    @warn "We couldn't find #{$color} in $palette__ibm map.
+         Please make sure it's defined.";
+  }
+}
+

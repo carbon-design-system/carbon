@@ -3,11 +3,11 @@
 @import '_partials/extends';
 
 .alert {
-  &--running { @include alert--theme($blue--light); }
-  &--danger { @include alert--theme($red); }
-  &--warning { @include alert--theme($orange-30); }
-  &--misc { @include alert--theme($purple-60); }
-  &--info { @include alert--theme($yellow); }
+  &--running { @include alert--theme($blue-30); }
+  &--danger { @include alert--theme($red-40); }
+  &--warning { @include alert--theme($orange-30); } // !temporary
+  &--misc { @include alert--theme($purple-60); } // !temporary
+  &--info { @include alert--theme($yellow-30); }
 }
 
 .alert {

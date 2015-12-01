@@ -4,7 +4,7 @@ npm-debug.log
 project.swublime-project
 project.sublime-workspace
 bower_components
-dev.css
+*.css
 _scripts.js
 _scripts.min.js
 *.css.map

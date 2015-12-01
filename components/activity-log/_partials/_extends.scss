@@ -1,6 +1,6 @@
 %activity-log {
 	width: em(400px);
-	background-color: $gray--darker;
+	background-color: $gray-2-mod;
 	padding-bottom: .5em;
 	margin: 4em;
 }
@@ -9,7 +9,7 @@
 	color: rgba($white, .8);
 	font-weight: 600;
 	padding: 1.8em 2em;
-	border-bottom: 1px solid $gray--light;
+	border-bottom: 1px solid $gray-cool-60;
 	width: 100%;
 }
 
@@ -44,12 +44,12 @@ dl {
 }
 
 %activity-desc__time {
-	color: $blue--lighter;
+	color: $blue-20;
 	padding-left: .5em;
 }
 
 %item__border {
-	border-left: 2px solid $gray--light;
+	border-left: 2px solid $gray-cool-60;
 	padding: .8em 0;
 	display: inline-block;
 }
@@ -70,7 +70,7 @@ dl {
 	&::after {
 		content: ' ';
 		position: relative;
-		border: 1px solid $gray--light;
+		border: 1px solid $gray-cool-60;
 		padding-top: 1em;
 		top: em(-15px);
 		left: em(-15px);

@@ -1,7 +1,7 @@
 %fab {
 
 	&--close {
-		@include fab($gray--dark, 90deg);
+		@include fab($gray-1-mod, 90deg);
 
 		%fab__sign {
 			@include fab__sign($fab--text, $fab--rotation, $fab--padding, $fab--line-height);
@@ -65,6 +65,3 @@
 	position: absolute;
 	width: 0 !important;
 }
-
-
-
