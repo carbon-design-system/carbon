@@ -1,0 +1,31 @@
+%fab-label {
+	padding: 1em;
+	margin-right: .5em;
+	background-color: $label-bg;
+	float: left;
+	position: relative;
+	margin: 1em 4em;
+	text-align: center;
+
+	&__text {
+		color: $blue--light;
+		font-style: italic;
+		font-weight: 400;
+		position: relative;
+		z-index: 3;
+	}
+
+	&:before {
+		content: '';
+		float: left;
+		width: 0;
+		height: 0;
+		border: 48px solid transparent;
+		border-right: 48px solid $label-bg;
+		position: absolute;
+		left: -47px;
+		top: -48px;
+		transform: rotate(90deg);
+		z-index:2;
+	}
+}
