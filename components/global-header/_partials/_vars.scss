@@ -1,2 +1,7 @@
-$color__global-header--bg: $blue-90;
-$color__global-header--link-bg: $blue--dark;
+$color__global-header--bg: $blue-90; // !temporary
+$color__global-header--bg--light: $blue--light;
+$color__global-header--bg--ghost: transparent;
+$color__global-header--text: $white;
+$color__dropdown--bg: $darkest-blue; // !temporary
+$color__dropdown--bg--light: $blue-40; // !temporary
+$color__secondary-nav--text: $blue--lighter;
