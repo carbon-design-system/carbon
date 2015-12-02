@@ -25,8 +25,8 @@
   &__breadcrumb {
     @extend %helvetica;
     font-weight: 600;
-    color: white;
-    font-size: rem(14px);
+    color: $white;
+    @include type(rem(14px));
     padding-top: em(25px);
     padding-bottom: em(15px);
     margin-left: em(-30px);
@@ -48,10 +48,10 @@
 
   &__title {
     @extend %helvetica-light;
-    color: white;
-    font-size: rem(32px);
+    color: $white;
+    @include type(rem(32px));
     @media screen and (max-width: 401px) {
-      font-size: rem(24px);
+      @include type(rem(24px));
       font-weight: 300;
       border-left: 1px solid $color__detail-page-header--border;
       padding: .2em 0 .2em em(9px);
@@ -70,7 +70,6 @@
           margin-right: em(30px);
         }
       }
-      // max-width 600px mobile
       @media screen and (max-width: 600px) {
         .detail-page-header__nav--mobile {
           display: block;
@@ -90,7 +89,7 @@
       justify-content: flex-start;
       flex-wrap: nowrap;
       @extend %helvetica-bold;
-      font-size: rem(14px);
+      @include type(rem(14px));
       padding-top: em(40px);
       width: 100%;
       .selected {
@@ -99,7 +98,7 @@
         }
       li {
         a {
-          color: white;
+          color: $white;
           text-decoration: none;
           margin-right: em(50px);
           &:hover {
@@ -113,13 +112,13 @@
       margin-top: em(15px);
       width: 100%;
       min-width: 0;
-      font-size: rem(14px);
+      @include type(rem(14px));
       border-radius: 0;
       border: none;
       @extend %helvetica;
       height: em(45px);
       padding: 0 1.7em;
-      color: white;
+      color: $white;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
