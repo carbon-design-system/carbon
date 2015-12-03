@@ -1,6 +1,12 @@
-<!-- Search -->
-<div class="search--base">
-	<input class="input--search" type="search" placeholder="Search Text">
-</div>
+<div class='search-field'>
 
-<script src="search.js"></script>
+	<svg class='search-field__icon' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+		<g>
+		  <path d="M12,1C5.926,1,1,5.926,1,12c0,6.074,4.926,11,11,11s11-4.926,11-11C23,5.926,18.074,1,12,1z M12,21c-4.962,0-9-4.038-9-9 s4.038-9,9-9s9,4.038,9,9S16.962,21,12,21z"/>
+		  <rect x="23.879" y="21.05" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -10.7696 26)" width="4.243" height="9.899"/>
+		  <circle cx="21" cy="21" r="1"/>
+		</g>
+	</svg>
+	<input type='search' class='search-field__input' id='search-field__input' placeholder='Search Atlas Offerings'>
+	<button class='search-field__filter' type='button'><span class='filter__text'>Filter</span></button>
+</div>
