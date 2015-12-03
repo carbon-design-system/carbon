@@ -1,0 +1,33 @@
+@import 'partials/vars';
+@import 'partials/extends';
+@import 'partials/mixins';
+
+.taxonomy-item {
+
+  &--global-dash {
+    @include taxonomy-item ($taxonomy-item__icon-diameter--global-dash, $taxonomy-item__icon-stroke--global-dash);
+  }
+
+  &--taxonomy-menu {
+    @include taxonomy-item ($taxonomy-item__icon-diameter--taxonomy-menu, $taxonomy-item__icon-stroke--taxonomy-menu);
+  }
+
+  &__metric {
+    @extend %horizontal-center;
+    @extend %p;
+    color: $white;
+    height: 1.5em;
+    background: $color__taxonomy-icon--metric-background;
+    padding: .3rem .5rem;
+    border-radius: 3px;
+    margin: -25px 0 .5rem 0;
+  }
+
+  &__label {
+    @extend %p;
+    color: $white;
+    font-weight: 100;
+    text-align: center;
+    line-height: 1.4;
+  }
+}

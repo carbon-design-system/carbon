@@ -1,0 +1,14 @@
+$taxonomy-item__icon-diameter--global-dash: 130px;
+$taxonomy-item__icon-stroke--global-dash: 4px;
+
+$taxonomy-item__icon-diameter--taxonomy-menu: 75px;
+$taxonomy-item__icon-stroke--taxonomy-menu: 3px;
+
+$color__taxonomy-item--healthy: #6dedd8; // !temporary
+$color__taxonomy-icon--error: #e71e30; //!temporary
+$color__taxonomy-icon--stateless: #5aaafa; // !temporary
+$color__taxonomy-icon--metric-background: #152934; // !temporary
+
+$color__taxonomy-icon--bg: #244556; //!temporary
+$color__taxonomy-icon--bg--hover: lighten($color__taxonomy-icon--bg, 5); //!temporary
+$color__taxonomy-icon--healthy-stroke: linear-gradient(135deg, $color__taxonomy-item--healthy, #5AAAFA); //!temporary
