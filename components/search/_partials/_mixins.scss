@@ -1,0 +1,89 @@
+// MIXIN FOR PLACEHOLDER TEXT
+@mixin placeholder {
+	&::-moz-placeholder { @content }
+	&::-webkit-input-placeholder { @content }
+	&::-ms-input-placeholder { @content }
+}
+
+// MIXIN FOR SEARCH FIELD
+@mixin search-field {
+	display: flex;
+	align-items: center;
+	width: 80%;
+	margin: 2em;
+
+	&__input {
+		@include type(.875rem);
+		@include placeholder {
+			font-style: italic;
+		}
+
+		flex: 2;
+		padding: 1em 1em 1em 2.5em;
+		border: none;
+		background-color: $color--search-bg;
+		margin-right: -3.9em;
+
+		&:focus {
+			outline-color: $blue--light;
+		}
+
+		@include breakpoint(500px) {
+			@include type(1rem);
+			@include placeholder {
+				color: $white;
+				font-style: normal;
+			}
+			font-weight: 500;
+			margin-right: -6.5em;
+		}
+	}
+
+	&__icon {
+		height: em(18px);
+		width: em(18px);
+		fill: $color--filter-text;
+		position: relative;
+		left: 30px;
+
+		@include breakpoint(500px) {
+			height: em(20px);
+			width: em(20px);
+			left: 35px;
+		}
+	}
+
+	&__filter {
+		@include type(1rem, $color--filter-text);
+		font-weight: 600;
+		background-color: $color--filter-bg;
+		border: none;
+		padding: .78em 1.2em;
+		cursor: pointer;
+
+		&::before {
+			content: url('../../../images/filter.png'); //!temporary Icon is not added yet to the library
+		}
+
+		span {
+			padding-left: .7em;
+		}
+
+		.filter__text {
+			display: none;
+		}
+
+		// MOBILE STYLES
+		@include breakpoint(500px) {
+			.filter__text {
+				display: inline-block;
+			}
+			padding: 1em 1.2em;
+		}
+	}
+
+	@include breakpoint(992px) {
+		width: 50%;
+	}
+}
+

@@ -2,7 +2,6 @@
 @import '_partials/mixins';
 @import '_partials/extends';
 
-.search--base {
-  @extend %search--base;
-  // note: should inherit input search type from ../inputs/_inputs.scss
+.search-field {
+	@include search-field;
 }

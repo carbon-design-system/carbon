@@ -10,20 +10,12 @@
   <!-- Open and view this HTML file when developing patterns,
   you'll be able to see changes to your patterns here. -->
 
-  <!-- Nav needs to be on top -->
-  <div id="nav" style="position: absolute; top: 0; display: none;"></div>
-  <div id="atlas-nav" style="position: absolute; top: 0;"></div>
-
-  <!-- dark-ui for cards -->
-  <div id="cards"></div>
-
-  <div id="search"></div>
   <!-- COMPONENTS -->
   <div id="components"></div>
 
   <!-- SCRIPTS -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
-  
+
   <script>
     $(document).ready(function() {
 
@@ -33,7 +25,13 @@
 
       var components = {
         'global-header': [
-          'components/global-header/global-header.html'
+          'components/global-header/global-header.html',
+          'components/global-header/global-header--ghost.html',
+          'components/global-header/global-header--light-ui.html',
+          'components/global-header/global-header--light-ui--ghost.html'
+        ],
+        'global-profile': [
+          'components/global-profile/global-profile.html'
         ],
         'button-label': [
           'components/fab-label/fab-label.html'
@@ -50,6 +48,9 @@
         ],
         'cards': [
           'components/cards/card.html'
+        ],
+        'detail-page-header': [
+          'components/detail-page-header/detail-page-header.html'
         ],
         'forms': [
           'base-elements/forms/form.html',
@@ -102,38 +103,10 @@
       for (var prop in components) {
         var componentArray = components[prop];
 
-        // Handle the nav components differently
-        if (prop === 'navigation') {
-          $.get(componentArray[0], function (data) {
-            $('#nav').append(data);
+        for (var i = 0; i < componentArray.length; i++) {
+          $.get(componentArray[i], function (data) {
+            $('#components').append('<div>' + data + '</div>');
           });
-        }
-
-        else if (prop === 'search') {
-          for (var i = 0; i < componentArray.length; i++) {
-            $.get(componentArray[i], function (data) {
-              $('#search').append(data);
-            });
-          }
-        }
-
-        else if (prop === 'cards') {
-          var cardArray = components[prop];
-
-          for (var i=0; i < cardArray.length; i++) {
-            $.get(cardArray[i], function (data) {
-              $('#cards').append(data);
-            });
-          }
-        }
-
-        // For all other components, append them to #components.
-        else {
-          for (var i = 0; i < componentArray.length; i++) {
-            $.get(componentArray[i], function (data) {
-              $('#components').append('<div>' + data + '</div>');
-            });
-          }
         }
       }
 

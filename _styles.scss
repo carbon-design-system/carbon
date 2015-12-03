@@ -11,6 +11,8 @@
 @import 'core/fonts/font-face';
 @import 'core/reset/reset';
 @import 'core/typography/typography';
+@import 'core/grid/grid';
+
 
 // Base Elements
 @import 'base-elements/body/body';
@@ -25,15 +27,19 @@
 @import 'base-elements/tables/tables';
 
 // Components
-@import 'components/cards/cards';
-@import 'components/search/search';
-@import 'components/tooltips/tooltips';
-@import 'components/global-header/global-header';
-@import 'components/dropdown/dropdown';
+@import 'components/activity-log/activity-log';
 @import 'components/alerts/alerts';
 @import 'components/data-module/data-module';
+@import 'components/dropdown/dropdown';
+@import 'components/cards/cards';
+@import 'components/global-profile/global-profile';
+@import 'components/global-header/global-header';
 @import 'components/item-list/item-list';
 @import 'components/activity-log/activity-log';
 @import 'components/fab-label/fab-label';
 @import 'components/floating-add-button/floating-add-button';
+@import 'components/search/search';
+@import 'components/tooltips/tooltips';
+@import 'components/detail-page-header/detail-page-header';
+
 

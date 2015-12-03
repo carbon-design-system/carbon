@@ -1,0 +1,26 @@
+@mixin global-profile($border: $white, $text: $white) {
+  display: flex;
+  align-items: center;
+
+  &__avatar {
+    background-image: url('http://bit.ly/1QWOZe2'); // !temporary
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid $border;
+    width: em(30px);
+    height: em(30px);
+    text-decoration: none;
+    margin-right: 1em;
+    color: $text;
+  }
+
+  &__full-name {
+    @extend %caption;
+
+    display: inline-block;
+    text-decoration: none;
+    color: $text;
+  }
+}
