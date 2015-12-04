@@ -1,0 +1,19 @@
+// create placeholders for all of the flex layouts I need:
+// %horizontal-start
+// %horizontal-center
+// %horizontal-end
+// %vertical-start
+// %vertical-center
+// %vertical-end
+$flex-directions: ("horizontal": row, "vertical": column);
+$flex-alignments: ("start": flex-start, "center": center, "end": flex-end);
+
+@each $direction-name, $direction-value in $flex-directions {
+  @each $alignment-name, $alignment-value in $flex-alignments {
+    %#{$direction-name}-#{$alignment-name} {
+      display: flex;
+      flex-direction: $direction-value;
+      align-items: $alignment-value;
+    }
+  }
+}
