@@ -1,31 +1,64 @@
 @import '_partials/vars';
+@import '_partials/mixins';
 @import '_partials/extends';
 
 .data-module {
 	@extend %data-module;
 
-	&__container {
-		@extend %data-module__container;
+	&--1x {
+		width: 100%;
+
+		@include breakpoint(bp--sm--major) {
+			width: 45%;
+		}
+
+		@include breakpoint(bp--lg--major) {
+			width: 30%;
+		}
+
+		@include breakpoint(2000px) {
+			width: 22%;
+		}
 	}
-	&__data {
-		@extend %data-module__data;
-	}
-	&__details-link {
-		@extend %data-module__details-link;
+
+	&--2x {
+		width: 100%;
+
+		@include breakpoint(bp--sm--major) {
+			width: 90%;
+		}
+
+		@include breakpoint(bp--lg--major) {
+			width: 60%;
+		}
+
+		@include breakpoint(2000px) {
+			width: 44%;
+		}
 	}
 }
 
-.data {
-	&__main-heading {
-		@extend %data__main-heading;
+.metrics {
+	@extend %metrics;
+
+	&__data {
+		@extend %metrics__data;
 	}
-	&__main-data {
-		@extend %data__main-data;
-		&--big {
-			@extend %data__main-data--big;
-		}
-	}
-	&__more-info {
-		@extend %data__more-info;
+
+	&__details-link {
+		@extend %metrics__details-link;
 	}
 }
+
+.activity-log {
+	&__headline {
+		@extend %activity-log__headline;
+	}
+
+	&__feed {
+		@extend %activity-log__feed;
+	}
+}
+
+
+
