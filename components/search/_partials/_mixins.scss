@@ -61,10 +61,6 @@
 		padding: .78em 1.2em;
 		cursor: pointer;
 
-		&::before {
-			content: url('../../../images/filter.png'); //!temporary Icon is not added yet to the library
-		}
-
 		span {
 			padding-left: .7em;
 		}
