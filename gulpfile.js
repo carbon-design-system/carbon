@@ -5,6 +5,7 @@
 //////////////////////////////
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
+var nodemon = require('nodemon');
 var concat = require('gulp-concat');
 var del = require('del');
 var gulp = require('gulp');
@@ -24,6 +25,7 @@ var sourcemaps = require('gulp-sourcemaps');
 //////////////////////////////
 
 var paths = {
+  static: 'static',
   clean: [
     'dev.css',
     '_styles.scss',
@@ -52,16 +54,21 @@ var importPaths = {
 }
 
 //////////////////////////////
-// BrowserSync
+// BrowserSync + Nodemon
 //////////////////////////////
 
 gulp.task('browser-sync', function() {
   browserSync.init({
     logPrefix: "Bluemix Components",
     open: false,
-    server: {
-      baseDir: "."
-    }
+    proxy: 'localhost:8080',
+  });
+});
+
+gulp.task('nodemon', function() {
+  nodemon({
+    script: 'server.js',
+    ext: 'dust',
   });
 });
 
@@ -80,12 +87,13 @@ gulp.task('clean', function() {
 gulp.task('scripts', function() {
   var concatOnly = gulp.src(paths.scripts)
     .pipe(concat('_scripts.js'))
-    .pipe(gulp.dest('.'));
+    .pipe(gulp.dest(paths.static + '/js'))
+    .pipe(browserSync.stream());
 
   var minify = gulp.src(paths.scripts)
     .pipe(concat('_scripts.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('.'));
+    .pipe(gulp.dest(paths.static + '/js'));
 
   return merge(concatOnly, minify);
 });
@@ -109,7 +117,7 @@ gulp.task('sass', function() {
       browsers: ['> 1%', 'last 2 versions']
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest(paths.static + '/css'))
     .pipe(browserSync.stream());
 
   var bower = gulp.src(paths.scss.main)
@@ -121,20 +129,31 @@ gulp.task('sass', function() {
   return merge(compile, bower);
 });
 
+/////////////////////////////
+// Copy
+/////////////////////////////
+
+gulp.task('copy:fonts', function() {
+  var fonts = 'core/fonts/*.{woff,woff2}';
+
+  gulp.src(fonts)
+    .pipe(gulp.dest(paths.static + '/css'));
+});
+
 //////////////////////////////
 // Running Tasks
 //////////////////////////////
 
 gulp.task('watch', function() {
   gulp.watch(paths.html).on('change', browserSync.reload);
-  gulp.watch(paths.scripts, ['scripts', 'scripts:hint']).on('change', browserSync.reload);
+  gulp.watch(paths.scripts, ['scripts', 'scripts:hint']);
   gulp.watch(paths.scss.all, ['sass']);
 });
 
 gulp.task('build', function () {
-  runSequence(['clean'], ['sass', 'scripts']);
+  runSequence('clean', ['sass', 'scripts', 'copy:fonts']);
 });
 
 gulp.task('default', function () {
-  runSequence(['build'], ['browser-sync', 'watch']);
+  runSequence('build', 'nodemon', ['browser-sync', 'watch']);
 });
