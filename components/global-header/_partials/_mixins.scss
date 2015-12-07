@@ -1,11 +1,16 @@
 @mixin global-header($bg: $color__global-header--bg) {
-  background-color: $bg;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: em(60px);
   width: 100%;
-  padding: 0 4em;
+  background-color: $bg;
+
+  // !temporary
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: em(60px);
+    width: 90%;
+    margin: 0 auto;
+  }
 
   &__nav--secondary {
     display: flex;
