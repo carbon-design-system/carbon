@@ -1,0 +1,71 @@
+@import 'bower_components/IBM-Design-Colors/ibm-colors';
+@import 'core/colors/colors';
+
+%swatch--base {
+  display: inline-block;
+  width: 10em;
+  height: 10em;
+  padding: 1em;
+  margin: 1em;
+}
+
+@mixin swatch($bg-color, $text: $white) {
+  @extend %swatch--base;
+  background-color: $bg-color;
+  color: $text;
+
+  .name {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1;
+    margin-bottom: .5em;
+  }
+}
+
+.colors {
+  background-color: $white;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: $black;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 3em;
+  }
+
+  &__category {
+    display: block;
+    width: 100%;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: .5em;
+  }
+}
+
+.swatch {
+  // Blue - Modified
+  &--blue-1-mod { @include swatch($blue-1-mod); }
+  &--blue-2-mod { @include swatch($blue-2-mod); }
+
+  // Gray - Modified
+  &--gray-1-mod { @include swatch($gray-1-mod); }
+  &--gray-2-mod { @include swatch($gray-2-mod); }
+  &--gray-3-mod { @include swatch($gray-3-mod); }
+  &--gray-4-mod { @include swatch($gray-4-mod); }
+
+  // IBM Colors
+  &--blue-20 { @include swatch($blue-20, $black); }
+  &--blue-30 { @include swatch($blue-30, $black); }
+  &--blue-90 { @include swatch($blue-90); }
+  &--gray-cool-60 { @include swatch($gray-cool-60); }
+  &--green-30 { @include swatch($green-30, $black); }
+  &--red-40 { @include swatch($red-40); }
+  &--teal-20 { @include swatch($teal-20, $black); }
+  &--yellow-30 { @include swatch($yellow-30, $black); }
+  &--white { @include swatch($white); }
+}

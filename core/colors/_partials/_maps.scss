@@ -1,0 +1,24 @@
+// Modified Colors
+
+$palette__modified: (
+  'blue-1': #2D3F49,
+  'blue-2': #20343E,
+  'gray-1': #485760,
+  'gray-2': #42535C,
+  'gray-3': #394B54,
+  'gray-4': #8C9BA5
+);
+
+// IBM Colors
+
+$palette__ibm: (
+  'blue-30': color('blue', 30),
+  'blue-20': color('blue', 20),
+  'blue-90': color('blue', 90),
+  'gray-cool-60': color('cool-gray', 60),
+  'green-30': color('green', 30),
+  'red-40': color('red', 40),
+  'teal-20': color('teal', 20),
+  'yellow-30': color('yellow', 30),
+  'white': color('white')
+);

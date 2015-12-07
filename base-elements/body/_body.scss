@@ -1,17 +1,7 @@
-// @import '_partials/mixins';
-
-// body {
-//   @include body;
-// }
-
-// .light-theme {
-//   @include body('light');
-// }
-
 body {
   @extend %helvetica;
 
-  background-color: $blue--dark;
+  background-color: $blue-1-mod;
   color: $white;
 
   &.light-theme {
