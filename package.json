@@ -1,34 +1,9 @@
 {
   "name": "bluemix-components",
-  "version": "0.0.18",
-  "main": "_npm.scss",
   "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
   "scripts": {
-    "css-sort": "csscomb -c ./csscomb.json dev/components/**/*.scss",
-    "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
-    "dev": "gulp",
-    "update:all": "ncu --upgradeAll",
-    "update:check": "ncu"
+    "dev": "gulp"
   },
-  "repository": {
-    "type": "git"
-  },
-  "keywords": [
-    "bluemix",
-    "component",
-    "components",
-    "css",
-    "html",
-    "ibm",
-    "javascript",
-    "js",
-    "library",
-    "pattern",
-    "patterns",
-    "sass",
-    "scss",
-    "style guide"
-  ],
   "dependencies": {
     "adaro": "^1.0.1",
     "express": "^4.13.3",
@@ -38,7 +13,6 @@
   },
   "devDependencies": {
     "browser-sync": "^2.9.3",
-    "csscomb": "^3.1.8",
     "del": "^2.0.2",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.0.0",
@@ -56,7 +30,6 @@
     "jshint-stylish": "^2.0.1",
     "lazypipe": "^1.0.1",
     "merge-stream": "^1.0.0",
-    "npm-check-updates": "^2.2.3",
     "run-sequence": "^1.1.4"
   }
 }
