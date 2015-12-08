@@ -1,0 +1,37 @@
+# Linter Options
+options:
+  # Don't merge default rules
+  merge-default-rules: false
+# File Options
+files:
+  include:
+    - './core/**/*.scss'
+    - './base-elements/**/*.scss'
+    - './components/**/*.scss'
+  # Ignore is not working right now
+  ignore:
+    - './dev.scss'
+    - './dev-colors.scss'
+    - './bower_components/**/*.scss'
+    - './components/taxonomy-item/**/*.scss'
+# Rule Configuration
+rules:
+  # Extends and Mixins
+  extends-before-mixins: 1
+  extends-before-declarations: 1
+  placeholder-in-extend: 1
+  mixins-before-declarations: 1
+  # Spaces and Lines
+  space-before-brace: 1
+  final-newline: 1
+  empty-line-between-blocks:
+    - 1
+    - include: true
+    - allow-single-line-rulesets: true
+  # Other
+  leading-zero: 1
+  no-color-keywords: 1
+  # Units
+  property-units:
+    - global: ['em']
+    - per-property: { font-size: ['rem'] }
