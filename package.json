@@ -3,26 +3,6 @@
   "version": "0.0.18",
   "main": "_npm.scss",
   "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
-  "devDependencies": {
-    "browser-sync": "^2.9.3",
-    "csscomb": "^3.1.8",
-    "del": "^2.0.2",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.0.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-jshint": "^1.11.2",
-    "gulp-plumber": "^1.0.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.1.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.4.1",
-    "jshint-stylish": "^2.0.1",
-    "lazypipe": "^1.0.1",
-    "merge-stream": "^1.0.0",
-    "npm-check-updates": "^2.2.3",
-    "run-sequence": "^1.1.4"
-  },
   "scripts": {
     "css-sort": "csscomb -c ./csscomb.json dev/components/**/*.scss",
     "install:scss-lint": "gem install scss_lint && npm install gulp-scss-lint",
@@ -48,5 +28,35 @@
     "sass",
     "scss",
     "style guide"
-  ]
+  ],
+  "dependencies": {
+    "adaro": "^1.0.1",
+    "express": "^4.13.3",
+    "express-dustjs": "^1.1.1",
+    "express-handlebars": "^2.0.1",
+    "globby": "^4.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.9.3",
+    "csscomb": "^3.1.8",
+    "del": "^2.0.2",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^2.0.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.1",
+    "jshint-stylish": "^2.0.1",
+    "lazypipe": "^1.0.1",
+    "merge-stream": "^1.0.0",
+    "npm-check-updates": "^2.2.3",
+    "run-sequence": "^1.1.4"
+  }
 }

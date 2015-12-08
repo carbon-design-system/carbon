@@ -7,4 +7,6 @@ bower_components
 *.css
 _scripts.js
 _scripts.min.js
+static/*
+!static/images
 *.css.map
