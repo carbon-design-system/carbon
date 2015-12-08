@@ -38,6 +38,10 @@
 	@extend %text__headline--catalog;
 }
 
+.text__action--catalog{
+	@extend %text__action--catalog;
+}
+
 .text__desc--catalog {
 	@extend %text__desc--catalog;
 }
@@ -62,4 +66,13 @@
 
 .text__desc--summary {
 	@extend %text__desc--summary;
+}
+
+// CONTENT SPECIFIC INCLUSIONS
+.apache__spark{
+	@extend %item__icon--apache__spark;
+}
+
+.cloud__foundry{
+	@extend %item__icon--cloud__foundry;
 }

@@ -5,38 +5,93 @@
 	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
-	width: 90%;
-	justify-content: center;
+	width: 100%;
+	justify-content: stretch;
+	@include breakpoint(bp--xs--major){
+		width: 90%;
+	}
 }
 
 %item-list__item {
-	width: 100%;
-	margin-bottom: 6em;
-	@media screen and (min-width: 700px) {
-		width: 50%;
+	margin-right: 0;
+	padding: 3em 1em 3em 1em;
+	width: 50%;
+	&:nth-child(n+3){
+		border-top: 1px solid $gray-3-mod;
+		@include breakpoint(bp--xs--major){
+			border: none;
+		}
 	}
-	@media screen and (min-width: 1200px) {
-		width: 25%;
+	&:nth-child(even){
+		border-left: 1px solid $gray-3-mod;
+		@include breakpoint(bp--xs--major){
+			border: none;
+		}
+	}
+	&:nth-child(4n+1), &:nth-child(4n+2){
+		background-color: rgba($green-100, 0.1);
+		@include breakpoint(bp--xs--major){
+			background-color: transparent;
+		}
+	}
+	@include breakpoint(bp--xs--major){
+		display: flex;
+		justify-content: flex-start;
 	}
 }
 
 %item__icon {
-	float: left;
+	display: block;
+	margin: auto auto 2em auto;
+	width: em(80px);
+	height: em(80px);
+	background-position: center center;
+	background-repeat: no-repeat;
+	@include breakpoint(bp--xs--major){
+		margin: 0;
+	}
 }
 
 %item__text {
-	float: left;
-	width: 75%;
-	margin-left: 1em;
+	margin-left: 0;
+	width: 100%;
+	text-align: center;
+	max-width: em(325px);
+	min-width: em(135px);
+	@include breakpoint(bp--xs--major){
+		text-align: left;
+		width: 65%;
+		margin-left: 1em;
+	}
+
+
 }
 
 %text__headline {
-	margin-bottom: .2em;
+	font-weight: 600;
+	margin-bottom: 1em;
+	@include breakpoint(bp-sm--major){
+		margin-bottom: .2em;
+	}
 }
 
+
+
 %text__desc {
+	display: none;
 	line-height: 1.5;
-	letter-spacing: rem(.2px);
+	letter-spacing: rem(.2px); // !temporary
+	font-weight: 200;
+	@include breakpoint(bp--xs--major){
+		display: block;
+	}
+}
+
+%text__action{
+	display: inline;
+	@include breakpoint(bp--xs--major){
+		display: none;
+	}
 }
 
 // CATALOG ITEMS STYLES
@@ -45,61 +100,113 @@
 	@extend %item-list;
 }
 
+%item-list--summary {
+	@extend %item-list;
+}
+
 %catalog__item {
 	@extend %item-list__item;
+	padding-left: 1em;
+	padding-right: 1em;
+
+	&:nth-child(odd){
+		padding-left: 0;
+	}
+	&:nth-child(even){
+		padding-right: 0;
+	}
+
+	@include breakpoint(bp--md--major){
+		&:nth-child(n){
+			padding-left: 1em;
+			padding-right: 1em;
+		}
+		width: 33%;
+	}
+	@include breakpoint(bp--lg--major){
+		width: 25%;
+	}
 }
 
 %item__icon--catalog {
 	@extend %item__icon;
-	width: em(50px);
+	background-size: 50px auto;
+	border-radius: 50%;
+	border: 1px solid $blue-20;
+	background-color: $white;
+	@include breakpoint(bp--xs--major){
+		width: em(50px);
+		height: em(50px);
+		background-size: 30px 30px;
+	}
 }
 
 %text__headline--catalog {
 	@extend %text__headline;
-	font-size: rem(14px);
-	font-weight: 600;
+	@include type(rem(14px));
 }
 
 %text__desc--catalog {
 	@extend %text__desc;
-	font-size: rem(12px);
-	font-weight: 200;
+	@include type($catalog--caption__type);
+}
+
+%text__action--catalog {
+	@extend %text__action;
+	@include type($catalog--caption__type, $blue-20);
 }
 
 // SUMMARY ITEMS STYLES
-
 %item-list--summary {
 	@extend %item-list;
-	width: 65%;
-	margin: 2em auto;
-	@media screen and (max-width: 1200px) {
+	@include breakpoint(bp--xs--major){
 		width: 75%;
+		margin: 2em auto;
+		min-width: 500px;
 	}
 }
 
 %summary__item {
 	@extend %item-list__item;
-	width: 45%;
-	margin-right: 5%;
-	@media screen and (max-width: 800px) {
-		width: 100%;
+	@include breakpoint(bp--xs--major){
+		width: 45%;
+		&:nth-child(odd){
+			margin-right: 10%;
+		}
 	}
-
 }
 
 %item__icon--summary {
 	@extend %item__icon;
-	width: em(40px);
+	background-size: 50px auto;
+	@include breakpoint(bp--xs--major){
+		width: em(40px);
+		height: em(40px);
+		background-size: 40px auto;
+	}
 }
 
 %text__headline--summary {
 	@extend %text__headline;
-	font-size: rem(20px);
-	font-weight: 600;
+	@include type(rem(20px));
 }
 
 %text__desc--summary {
 	@extend %text__desc;
-	font-size: rem(13px);
-	font-weight: 200;
+	@include type($summary--caption__type)
+}
+
+%text__action--summary{
+	@extend %text__action;
+	@include type($summary--caption__type, $blue-20);
+}
+
+// CONTENT SPECIFIC STYLES
+%item__icon--apache__spark{
+	@include icon('icon-example','svg');
+}
+
+%item__icon--cloud__foundry{
+	// !temporary
+	@include icon('icon-example-s','png');
 }
