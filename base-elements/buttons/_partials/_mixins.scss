@@ -1,11 +1,34 @@
-@mixin btn($background, $active-background, $color) {
-  @extend %btn--base;
+@mixin btn--primary($background, $active-background, $color--text: $color__btn--text) {
+  @extend %btn--primary;
 
   background-color: $background;
-  color: $color;
+  color: $color--text;
 
   &:hover,
   &:focus {
     background-color: $active-background;
+
+    &:disabled {
+      background-color: $background;
+    }
+  }
+}
+
+@mixin btn--secondary($active-background, $color--text: $active-background) {
+  @extend %btn--secondary;
+
+  border-color: $active-background;
+  background-color: transparent;
+  color: $color--text;
+
+  &:hover,
+  &:focus {
+    background-color: $active-background;
+    color: $color__btn--text;
+
+    &:disabled {
+      background-color: transparent;
+      color: $color--text;
+    }
   }
 }

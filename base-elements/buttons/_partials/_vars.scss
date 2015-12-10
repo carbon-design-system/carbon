@@ -1,10 +1,8 @@
-////////////////////
-// Variables
-///////////////////
-
 // Background Color
-$btn--bg: $blue-40;
-$btn--bg--dark: $gray-1-mod;
+$color__btn--bg: $blue-40;
+$color__btn--bg--active: $blue-30;
+$color__btn--bg--light: $gray-1-mod;
+$color__btn--bg--active--light: lighten($gray-1-mod, 5);
 
 // Text Color
-$btn--text: $white;
+$color__btn--text: $white;

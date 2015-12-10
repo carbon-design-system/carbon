@@ -1,12 +1,29 @@
 %btn--base {
-  @extend %p;
+  @extend %strong;
 
   cursor: pointer;
   display: inline-block;
   width: em(200px);
   height: em(40px);
-  border-width: 0;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
+  transition: background-color 150ms ease-in, color 150ms ease-in;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+}
+
+%btn--primary {
+  @extend %btn--base;
+
+  border-width: 0;
+}
+
+%btn--secondary {
+  @extend %btn--base;
+
+  border-width: 2px;
+  border-style: solid;
 }
