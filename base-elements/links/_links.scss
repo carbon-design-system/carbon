@@ -1,20 +1,18 @@
 @import '_partials/vars';
-@import '_partials/mixins';
-@import '_partials/extends';
 
-.hyperlink {
-  @extend %hyperlink--base;
+.link {
+  text-decoration: underline;
+  font-weight: bold;
+  transition: $transition--link;
+  color: $color--link;
 
-  &,
   &:visited {
-    color: $color__hyperlink;
+    color: $color--link;
   }
 
   &:active,
   &:hover,
   &:focus {
-    @extend %transition--hyperlink;
-
-    color: $color__hyperlink--hover;
+    color: $color--link--hover;
   }
 }
