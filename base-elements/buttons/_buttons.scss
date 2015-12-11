@@ -3,11 +3,17 @@
 @import '_partials/extends';
 
 .btn {
-  &--light {
-    @include btn($btn--bg, $btn--bg, $btn--text);
-  }
+  @include btn--primary($color__btn--bg, $color__btn--bg--active);
 
-  &--dark {
-    @include btn($btn--bg--dark, $btn--bg--dark, $btn--text);
+  .light-ui & {
+    @include btn--primary($color__btn--bg--light, $color__btn--bg--active--light);
+  }
+}
+
+.btn--secondary {
+  @include btn--secondary($color__btn--bg);
+
+  .light-ui & {
+    @include btn--secondary($color__btn--bg--light);
   }
 }
