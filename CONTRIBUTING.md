@@ -126,6 +126,8 @@ By default, your OS X terminal or iterm is set to use `vi` as its text-editor wh
 
 ### 3. Write New Commit Message
 
+Make sure the commit message reflects the work done in your pull request.
+
 ```
 # This is a combination of 7 commits.
 # The first commit's message is:
