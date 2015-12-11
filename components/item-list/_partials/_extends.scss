@@ -7,9 +7,6 @@
 	flex-wrap: wrap;
 	width: 100%;
 	justify-content: stretch;
-	@include breakpoint(bp--xs--major){
-		width: 90%;
-	}
 }
 
 %item-list__item {
@@ -49,6 +46,7 @@
 	background-repeat: no-repeat;
 	@include breakpoint(bp--xs--major){
 		margin: 0;
+		flex-shrink: 0;
 	}
 }
 
@@ -57,11 +55,12 @@
 	width: 100%;
 	text-align: center;
 	max-width: em(325px);
-	min-width: em(135px);
-	@include breakpoint(bp--xs--major){
+	min-width: em(170px);
+	@include breakpoint(550px){
+		display: inline;
 		text-align: left;
-		width: 65%;
 		margin-left: 1em;
+		flex-shrink: 1;
 	}
 
 
@@ -69,7 +68,7 @@
 
 %text__headline {
 	font-weight: 600;
-	margin-bottom: 1em;
+	margin-bottom: .5em;
 	@include breakpoint(bp-sm--major){
 		margin-bottom: .2em;
 	}
@@ -83,6 +82,9 @@
 	letter-spacing: rem(.2px); // !temporary
 	font-weight: 200;
 	@include breakpoint(bp--xs--major){
+		display: none;
+	}
+	@include breakpoint(550px){
 		display: block;
 	}
 }
@@ -116,15 +118,49 @@
 		padding-right: 0;
 	}
 
+	@include breakpoint(bp--xs--major){
+		&:nth-child(odd){
+			padding-left: em(20px);
+		}
+		&:nth-child(even){
+			padding-right: em(20px);
+		}
+	}
+
+	@include breakpoint(550px){
+		&:nth-child(odd){
+			padding-left: 0;
+		}
+		&:nth-child(even){
+			padding-right: 0;
+		}
+	}
+
 	@include breakpoint(bp--md--major){
 		&:nth-child(n){
 			padding-left: 1em;
 			padding-right: 1em;
 		}
+		&:nth-child(3n+1){
+			padding-left: 0;
+		}
+		&:nth-child(3n+3){
+			padding-right: 0;
+		}
 		width: 33%;
 	}
 	@include breakpoint(bp--lg--major){
 		width: 25%;
+		&:nth-child(n){
+			padding-left: 1em;
+			padding-right: 1em;
+		}
+		&:nth-child(4n+1){
+			padding-left: 0;
+		}
+		&:nth-child(4n+4){
+			padding-right: 0;
+		}
 	}
 }
 
@@ -135,8 +171,8 @@
 	border: 1px solid $blue-20;
 	background-color: $white;
 	@include breakpoint(bp--xs--major){
-		width: em(50px);
-		height: em(50px);
+		width: 50px;
+		height: 50px;
 		background-size: 30px 30px;
 	}
 }
@@ -180,8 +216,8 @@
 	@extend %item__icon;
 	background-size: 50px auto;
 	@include breakpoint(bp--xs--major){
-		width: em(40px);
-		height: em(40px);
+		width: 40px;
+		height: 40px;
 		background-size: 40px auto;
 	}
 }
