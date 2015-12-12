@@ -3,13 +3,12 @@
 
 %swatch--base {
   display: inline-block;
-  width: 10em;
-  height: 10em;
+  width: 14em;
+  min-height: 14em;
   padding: 1em;
-  margin: 1em;
 }
 
-@mixin swatch($bg-color, $text: $white) {
+@mixin swatch($bg-color, $text: $color__white) {
   @extend %swatch--base;
   background-color: $bg-color;
   color: $text;
@@ -24,18 +23,43 @@
 }
 
 .colors {
-  background-color: $white;
-  padding: 1em;
+  background-color: $color__white;
+  padding: 1em 1em 0;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  color: $black;
+  color: $color__navy-gray-1;
+
+  li {
+    line-height: 1.2;
+    font-size: .875rem;
+    padding-bottom: 1em;
+    letter-spacing: .2px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: bold;
+
+    &.not-used {
+      color: $color__red-40;
+    }
+  }
+
+  &__headline {
+    font-size: 3rem;
+    font-weight: bold;
+    border-bottom: 5px solid $color__navy-gray-1;
+    line-height: 1.5;
+    margin-bottom: 1em;
+    // margin-left: .325em;
+    display: inline-block;
+  }
 
   &__container {
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 3em;
+    align-items: center;
+    padding-bottom: 1em;
+    // background-color: yellow;
   }
 
   &__category {
@@ -43,29 +67,36 @@
     width: 100%;
     font-size: 2rem;
     font-weight: bold;
-    margin-left: .5em;
+    margin: 1em 0;
   }
 }
 
 .swatch {
-  // Blue - Modified
-  &--blue-1-mod { @include swatch($blue-1-mod); }
-  &--blue-2-mod { @include swatch($blue-2-mod); }
 
-  // Gray - Modified
-  &--gray-1-mod { @include swatch($gray-1-mod); }
-  &--gray-2-mod { @include swatch($gray-2-mod); }
-  &--gray-3-mod { @include swatch($gray-3-mod); }
-  &--gray-4-mod { @include swatch($gray-4-mod); }
+  // Modified
+  &--navy-gray-1 { @include swatch($color__navy-gray-1); }
+  &--navy-gray-2 { @include swatch($color__navy-gray-2); }
+  &--navy-gray-3 { @include swatch($color__navy-gray-3); }
+  &--navy-gray-4 { @include swatch($color__navy-gray-4); }
+  &--navy-gray-5 { @include swatch($color__navy-gray-5); }
+  &--navy-gray-6 { @include swatch($color__navy-gray-6); }
+  &--navy-gray-7 { @include swatch($color__navy-gray-7); }
 
   // IBM Colors
-  &--blue-20 { @include swatch($blue-20, $black); }
-  &--blue-30 { @include swatch($blue-30, $black); }
-  &--blue-90 { @include swatch($blue-90); }
-  &--gray-cool-60 { @include swatch($gray-cool-60); }
-  &--green-30 { @include swatch($green-30, $black); }
-  &--red-40 { @include swatch($red-40); }
-  &--teal-20 { @include swatch($teal-20, $black); }
-  &--yellow-30 { @include swatch($yellow-30, $black); }
-  &--white { @include swatch($white); }
+  &--blue-20 { @include swatch($color__blue-20, $color__navy-gray-1); }
+  &--blue-30 { @include swatch($color__blue-30, $color__navy-gray-1); }
+  &--blue-90 { @include swatch($color__blue-90); }
+  &--gray-cool-60 { @include swatch($color__navy-gray-6); }
+  &--green-30 { @include swatch($color__green-30, $color__navy-gray-1); }
+  &--red-40 { @include swatch($color__red-40); }
+  &--teal-20 { @include swatch($color__teal-20, $color__navy-gray-1); }
+  &--yellow-30 { @include swatch($color__yellow-30, $color__navy-gray-1); }
+  &--blue-40 { @include swatch($color__blue-40) }
+  &--orange-30 { @include swatch($color__orange-30) }
+  &--purple-40 { @include swatch($color__purple-40) }
+
+  &--white {
+    @include swatch($color__white, $color__navy-gray-1);
+    border: 1px solid $color__navy-gray-1;
+  }
 }

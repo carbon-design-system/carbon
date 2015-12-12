@@ -1,13 +1,13 @@
-$color__search--accent: $white;
-$color__search--background: $gray-50;
+$color__search--accent: $color__white;
+$color__search--background: $color__navy-gray-6;
 
 // toggle vars
-$transition__toggle-switch--speed: all 0.2s ease-in-out;
-$color__toggle-switch--off: $gray-1-mod;
-$color__toggle-switch--on: $blue-40;
-$color__toggle-switch--front: $white;
+$transition__toggle-switch--speed: all .2s ease-in-out;
+$color__toggle-switch--off: $color__navy-gray-5;
+$color__toggle-switch--on: $color__blue-40;
+$color__toggle-switch--front: $color__white;
 
 // Checkbox vars
-$color__checkbox--bg--checked: $blue-30;
-$color__checkbox--border: $gray-4-mod;
-$color__checkbox--border--checked: $blue-2-mod;
+$color__checkbox--bg--checked: $color__blue-30;
+$color__checkbox--border: $color__navy-gray-7;
+$color__checkbox--border--checked: $color__navy-gray-2;

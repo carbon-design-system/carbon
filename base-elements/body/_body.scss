@@ -1,11 +1,11 @@
 body {
   @extend %helvetica;
 
-  background-color: $blue-1-mod;
-  color: $white;
+  background-color: $color__navy-gray-3;
+  color: $color__white;
 
   &.light-theme {
-    background-color: $white; // !temporary
-    color: $black; // !temporary
+    background-color: $color__white; // !temporary
+    color: $color__navy-gray-1; // !temporary
   }
 }

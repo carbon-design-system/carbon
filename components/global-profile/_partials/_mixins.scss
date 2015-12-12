@@ -1,4 +1,4 @@
-@mixin global-profile($border: $white, $text: $white) {
+@mixin global-profile($border: $color__white, $text: $color__white) {
   display: flex;
   align-items: center;
 

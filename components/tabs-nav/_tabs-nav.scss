@@ -58,7 +58,7 @@
   &__item {
 
     .item__link {
-			color: $white;
+			color: $color__white;
 			text-decoration: none;
 			margin-right: em(50px);
 			padding-bottom: .6em;
@@ -97,9 +97,9 @@
 		border: none;
 		height: em(45px);
 		padding: 0 1.7em;
-		color: $white;
+		color: $color__white;
 		appearance: none;
-		background: url(../images/dropdown-triangle.svg) no-repeat right center $blue-2-mod;
+		background: url(../images/dropdown-triangle.svg) no-repeat right center $color__navy-gray-2;
 		border-right: 2em solid transparent;
 
 		@include breakpoint(401px) {

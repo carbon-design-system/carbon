@@ -25,13 +25,13 @@
 		margin-right: -3.9em;
 
 		&:focus {
-			outline-color: $blue-30;
+			outline-color: $color__blue-30;
 		}
 
 		@include breakpoint(500px) {
 			@include type(1rem);
 			@include placeholder {
-				color: $white;
+				color: $color__white;
 				font-style: normal;
 			}
 			font-weight: 500;

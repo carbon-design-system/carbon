@@ -1,34 +1,23 @@
-// Modified Colors
+// Modified
 
-
-// $blueberry
-// $bluesky
-$blue-1-mod: mod('blue-1'); // blue--dark    // Modified Blue 70
-$blue-2-mod: mod('blue-2'); // blue--darker  // IBM Blue 90 at 50%
-$gray-1-mod: mod('gray-1'); // gray--dark    // Modified Cool Gray 60
-$gray-2-mod: mod('gray-2'); // gray--darker  // Modified Cool Gray 60 at 50%
-$gray-3-mod: mod('gray-3'); // gray--darkest // Modified Cool Gray 60 at 70%
-$gray-4-mod: mod('gray-4'); // gray--lighter // Atlas Gray
+$color__navy-gray-1: mod('navy-gray-1');
+$color__navy-gray-2: mod('navy-gray-2');
+$color__navy-gray-3: mod('navy-gray-3');
+$color__navy-gray-4: mod('navy-gray-4');
+$color__navy-gray-5: mod('navy-gray-5');
+$color__navy-gray-6: mod('navy-gray-6');
+$color__navy-gray-7: mod('navy-gray-7');
 
 // IBM Colors
 
-$blue-20: ibm('blue-20'); // #7cc7ff
-$blue-30: ibm('blue-30'); // #5aaafa
-$blue-90: ibm('blue-90'); // #152934
-$gray-cool-60: ibm('gray-cool-60'); // #5a6464
-$green-30: ibm('green-30'); // #8cd211
-$red-40: ibm('red-40'); // #ff5050
-$teal-20: ibm('teal-20'); // #6eedd8
-$yellow-30: ibm('yellow-30'); // #efc100
-$white: ibm('white'); // #fff
-
-// !temporary (maybe need to include)
-$black: #000;
-$blue-40: color('blue', 40);
-$darkest-blue: #0F212E; // used in dropdown (global-header)
-$color--card-background: #283840;
-$cool-grey-50: color('cool-grey', 50);
-$orange-30: color('orange', 30); // alerts
-$purple-60: color('purple', 60); // alerts
-$gray-50: color('gray', 50);
-$green-100: color('green', 100);
+$color__blue-20  : ibm('blue-20');   // #7cc7ff
+$color__blue-30  : ibm('blue-30');   // #5aaafa
+$color__blue-40  : ibm('blue-40');   // #5596e6
+$color__blue-90  : ibm('blue-90');   // #152934
+$color__green-30 : ibm('green-30');  // #8cd211
+$color__red-40   : ibm('red-40');    // #ff5050
+$color__teal-20  : ibm('teal-20');   // #6eedd8
+$color__yellow-30: ibm('yellow-30'); // #efc100
+$color__orange-30: ibm('orange-30'); // #ff7832
+$color__purple-40: ibm('purple-40'); // #734098
+$color__white    : ibm('white');     // #fff

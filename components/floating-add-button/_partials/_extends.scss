@@ -1,7 +1,7 @@
 %fab {
 
 	&--close {
-		@include fab($gray-1-mod, 90deg);
+		@include fab($color__navy-gray-5, 90deg);
 
 		%fab__sign {
 			@include fab__sign($fab--text, $fab--rotation, $fab--padding, $fab--line-height);
@@ -52,7 +52,7 @@
 
 	&__sign {
 		@include fab__sign;
-		color: $white;
+		color: $color__white;
 	}
 }
 

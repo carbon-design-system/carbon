@@ -2,6 +2,7 @@
 
 const globby = require('globby');
 const templateDirectories = [
+  'core/colors/*.html',
   'components/global-header/global-header.html',
   'components/global-header/global-header--ghost.html',
   'components/global-header/global-header--light-ui.html',

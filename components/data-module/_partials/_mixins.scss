@@ -27,7 +27,7 @@
 		color: $color--headline;
 		font-weight: 600;
 		padding: 2em;
-		border-bottom: 1px solid $gray-cool-60;
+		border-bottom: 1px solid $color__navy-gray-6;
 		width: 100%;
 	}
 
@@ -43,7 +43,7 @@
 
 			&::before {
 				content: '\2022'; // Filled circle
-				color: $white;
+				color: $color__white;
 				position: relative;
 				top: em(7px);
 				left: em(-17px);
@@ -68,12 +68,12 @@
 				    top: 14px;
 				    display: inline-block;
 				    border-radius: 50%;
-				    border: 2px solid $white;
+				    border: 2px solid $color__white;
 				    width: em(25px);
 				    height: em(25px);
 				    text-decoration: none;
 				    margin-right: 1em;
-				    color: $white;
+				    color: $color__white;
 				 }
 
 				&::after {

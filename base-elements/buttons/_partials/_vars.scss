@@ -1,8 +1,8 @@
 // Background Color
-$color__btn--bg: $blue-40;
-$color__btn--bg--active: $blue-30;
-$color__btn--bg--light: $gray-1-mod;
-$color__btn--bg--active--light: lighten($gray-1-mod, 5);
+$color__btn--bg: $color__blue-40;
+$color__btn--bg--active: $color__blue-30;
+$color__btn--bg--light: $color__navy-gray-5;
+$color__btn--bg--active--light: lighten($color__navy-gray-5, 5);
 
 // Text Color
-$color__btn--text: $white;
+$color__btn--text: $color__white;

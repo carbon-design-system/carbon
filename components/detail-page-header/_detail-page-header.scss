@@ -28,7 +28,7 @@
   &__breadcrumb {
     @extend %helvetica;
     @include type(rem(16px));
-    color: $white;
+    color: $color__white;
     margin-left: 0;
     padding: em(34px) em(5px) 0 0;
 
@@ -39,6 +39,7 @@
     @include breakpoint(401px) {
       padding-top: em(25px);
       margin-left: em(-30px);
+
       .previous-page-title {
         display: inline-block;
       }
@@ -75,7 +76,7 @@
 
   &__docs-button {
     @include type(rem(16px));
-    color: $white;
+    color: $color__white;
     text-decoration: none;
   }
 
@@ -89,4 +90,3 @@
   }
 
 }
-
