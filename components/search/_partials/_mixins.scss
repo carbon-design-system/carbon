@@ -54,7 +54,9 @@
 	}
 
 	&__filter {
-		@include type(1rem, $color--filter-text);
+		@include type(1rem);
+
+		color: $color--filter-text;
 		font-weight: 600;
 		background-color: $color--filter-bg;
 		border: none;
@@ -82,4 +84,3 @@
 		width: 50%;
 	}
 }
-

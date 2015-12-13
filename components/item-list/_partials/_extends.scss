@@ -189,7 +189,9 @@
 
 %text__action--catalog {
 	@extend %text__action;
-	@include type($catalog--caption__type, $blue-20);
+	@include type($catalog--caption__type);
+
+	color: $blue-20;
 }
 
 // SUMMARY ITEMS STYLES
@@ -234,7 +236,9 @@
 
 %text__action--summary{
 	@extend %text__action;
-	@include type($summary--caption__type, $blue-20);
+	@include type($summary--caption__type);
+
+	color: $blue-20;
 }
 
 // CONTENT SPECIFIC STYLES

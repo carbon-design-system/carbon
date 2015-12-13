@@ -1,5 +1,11 @@
-@mixin type($size, $color: $white) {
+@mixin type($size) {
   @extend %helvetica;
-  font-size: $size;
-  color: $color;
+
+  @if map-has-key($typescale-map, $size) {
+    font-size: map-get($typescale-map, $size);
+  }
+
+  @else {
+    font-size: $size;
+  }
 }
