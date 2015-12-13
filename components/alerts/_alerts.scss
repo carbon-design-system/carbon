@@ -15,10 +15,10 @@
 
   &--danger, &--running, &--warning, &--misc, &--info {
     @extend %font-smoothing;
-    background: #2E404B;
+    background-color: $color--alerts--bg;
     flex: 1;
     padding: .3em 0 .3em .5em;
-    border-right: 3px solid #202E33;
+    border-right: 3px solid $color--alerts--border;
 
     .alert__title,
     .alert__subtitle,
@@ -26,7 +26,8 @@
       margin: .4em 0;
     }
     .alert__title {
-      @extend %h2;
+      @extend %helvetica;
+      font-size: 1.5rem;
     }
     .alert__subtitle {
       @extend %helvetica;
@@ -40,7 +41,7 @@
   }
 
   .alert__close {
-    background: #2E404B;
+    background-color: $blue-2-mod;
     border: none;
     span {
       padding: .1em;

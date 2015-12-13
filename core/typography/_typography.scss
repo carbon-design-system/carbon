@@ -2,10 +2,33 @@
 @import '_partials/functions';
 @import '_partials/extends';
 @import '_partials/mixins';
-@import 'h1';
-@import 'h2';
-@import 'h3';
-@import 'p';
-@import 'strong';
-@import 'caption';
-@import 'em';
+
+h1, %h1 {
+  @include type('h1');
+}
+
+h2, %h2 {
+  @include type('h2');
+}
+
+h3, %h3 {
+  @include type('h3');
+}
+
+p, %p {
+  @include type('body');
+}
+
+strong, %strong {
+  @include type('body');
+  font-weight: bold;
+}
+
+em, %em {
+  @include type('body');
+  font-style: italic;
+}
+
+%caption {
+  @include type('caption');
+}
