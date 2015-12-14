@@ -43,8 +43,11 @@
   .alert__close {
     background-color: $blue-2-mod;
     border: none;
+    margin: .3em 0;
+
     span {
       padding: .1em;
+
       svg {
         fill: $close-button;
       }
