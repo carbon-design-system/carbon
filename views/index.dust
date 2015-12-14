@@ -12,5 +12,5 @@
 
   {content|s}
 
-  <script src="js/_scripts.js"></script>
+  <script src="js/bundle.js"></script>
 </body>

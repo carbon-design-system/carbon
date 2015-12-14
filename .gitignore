@@ -1,12 +1,21 @@
-.DS_Store
+# Hide package manager
 node_modules
-npm-debug.log
-project.swublime-project
-project.sublime-workspace
 bower_components
+
+# Ignore built files and static folder
 *.css
-_scripts.js
-_scripts.min.js
 static/*
 !static/images
 *.css.map
+
+# OSX
+.DS_Store
+
+# Debug
+npm-debug.log
+
+# Editors
+project.swublime-project
+project.sublime-workspace
+jsconfig.json
+.vscode
