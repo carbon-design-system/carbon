@@ -1,0 +1,34 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+// class names specified
+.input--file {
+  // visually hidden
+  &__input {
+    @extend %visually-hidden ;
+  }
+
+  // label is the styling
+  &__label {
+    @extend %file__label;
+
+    // "upload button"
+    &:after {
+      @extend %btn--upload;
+    }
+  }
+}
+
+//unspecified class names
+.bx--styled input[type='file'] {
+  @extend %visually-hidden;
+
+  + label {
+    @extend %file__label;
+
+    &:after {
+      @extend %btn--upload;
+    }
+  }
+}
