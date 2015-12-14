@@ -45,7 +45,9 @@
 	&:nth-child(2):not(:last-child) {
 		padding-bottom: 2em;
 		.data__main-data {
-			@include type(rem(45px), $color--desc);
+			@include type(rem(45px));
+
+			color: $color--desc;
 		}
 	}
 
@@ -54,7 +56,9 @@
 		border-right: none;
 		padding: 0;
 		.data__main-data {
-			@include type(rem(64px), $color--desc); // !temporary
+			@include type(rem(64px));
+
+			color: $color--desc; // !temporary
 			width: 100%;
 			margin: 1em 0 .15em;
 		}
@@ -87,7 +91,9 @@
 	}
 
 	.data__main-data {
-		@include type(rem(64px), $blue-20); // !temporary
+		@include type(rem(64px));
+
+		color: $blue-20; // !temporary
 		font-weight: 300;
 		sup {
 			@extend %h3;
@@ -96,18 +102,24 @@
 			top: -28px;
 		}
 		span {
-			@include type(rem(20px), $blue-20);
+			@include type(rem(20px));
+
+			color: $blue-20;
 		}
 	}
 
 	.data__more-info {
-		@include type(rem(14px), $blue-20);
+		@include type(rem(14px));
+
+		color: $blue-20;
 		font-weight: 300;
 	}
 }
 
 %metrics__details-link {
-	@include type(rem(14px), $blue-20);
+	@include type(rem(14px));
+
+	color: $blue-20;
 	display: block;
 	margin: 0 auto 1em;
 	padding: 1em 0;
@@ -125,7 +137,9 @@
 //////////////////
 
 %activity-log__headline {
-	@include type(.875rem, $color--headline);
+	@include type(.875rem);
+
+	color: $color--headline;
 	font-weight: 600;
 	padding: 2em;
 	border-bottom: 1px solid $gray-cool-60;
@@ -212,6 +226,3 @@
 			}
 		}
 	}
-
-
-

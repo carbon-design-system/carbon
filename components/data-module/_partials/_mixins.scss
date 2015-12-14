@@ -22,7 +22,9 @@
 
 @mixin activity-log {
 	&__headline {
-		@include type(.875rem, $color--headline);
+		@include type(.875rem);
+
+		color: $color--headline;
 		font-weight: 600;
 		padding: 2em;
 		border-bottom: 1px solid $gray-cool-60;
@@ -110,5 +112,3 @@
 		}
 	}
 }
-
-
