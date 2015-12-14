@@ -3,9 +3,30 @@
 @import '_partials/extends';
 
 .bx--styled input[type="search"] {
-  @extend %input--search;
+	@extend %input--search;
 }
 
 .bx--styled input[type="text"] {
-  @extend %input--text;
+	@extend %input--text;
 }
+
+input[type="checkbox"] {
+	@extend %input--checkbox;
+}
+
+.checkbox-container {
+	@extend %checkbox-container;
+}
+
+.checkbox {
+	@extend %checkbox;
+
+	&__overlay {
+		@extend %checkbox__overlay;
+	}
+
+	&__label {
+		@extend %checkbox__label;
+	}
+}
+
