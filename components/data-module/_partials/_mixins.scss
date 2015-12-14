@@ -1,0 +1,114 @@
+/////////////////
+// DATA-MODULE //
+/////////////////
+
+@mixin data-module($data-module-type) {
+	@if ($data-module-type == 'activity-log') {
+		.activity-log {
+			@include activity-log;
+		}
+	}
+
+	@elseif ($data-module-type == 'metrics') {
+		.metrics {
+			@extend %metrics;
+		}
+	}
+}
+
+//////////////////
+// ACTIVITY LOG //
+//////////////////
+
+@mixin activity-log {
+	&__headline {
+		@include type(.875rem, $color--headline);
+		font-weight: 600;
+		padding: 2em;
+		border-bottom: 1px solid $gray-cool-60;
+		width: 100%;
+	}
+
+	&__feed {
+		overflow: scroll;
+		list-style-type: none;
+		padding: 0em 1em 1em 2em;
+		max-height: em(295px);
+
+		.feed__item {
+			position: relative;
+			padding: 0 0 0 1em;
+
+			&::before {
+				content: '\2022'; // Filled circle
+				color: $white;
+				position: relative;
+				top: em(7px);
+				left: em(-17px);
+			}
+
+			&--activity {
+				@extend %p;
+				margin: em(-10px);
+				padding-left: em(15px);
+			}
+
+			&--user-activity {
+				padding-left: em(15px);
+
+				&::before {
+					content: '';
+				    background-image: url('http://bit.ly/1QWOZe2'); // !temporary
+				    background-size: 100%;
+				    background-repeat: no-repeat;
+				    position: relative;
+				    left: -27px;
+				    top: 14px;
+				    display: inline-block;
+				    border-radius: 50%;
+				    border: 2px solid $white;
+				    width: em(25px);
+				    height: em(25px);
+				    text-decoration: none;
+				    margin-right: 1em;
+				    color: $white;
+				 }
+
+				&::after {
+					content: ' ';
+					position: relative;
+					border: 1px solid $color--border;
+					padding-top: .6em;
+					top: em(-15px);
+					left: em(-15px);
+				}
+
+			}
+		}
+
+		.item {
+			&__activity-desc {
+				font-weight: 200;
+				line-height: 2;
+				padding-left: 5em;
+				top: em(-21px);
+				position: relative;
+			}
+
+			&__line {
+				border-left: 2px solid $color--border;
+				padding: .8em 0;
+				display: inline-block;
+			}
+		}
+
+		.activity-desc {
+			&__time {
+				color: $color--desc;
+				padding-left: .5em;
+			}
+		}
+	}
+}
+
+
