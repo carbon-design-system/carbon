@@ -1,2 +1,9 @@
-// Font-size
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
+
+$typescale-map: (
+  'h1'     : 2rem,
+  'h2'     : 1.5rem,
+  'h3'     : 1.25rem,
+  'body'   : .875rem,
+  'caption': .75rem
+);

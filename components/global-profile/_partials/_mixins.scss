@@ -17,10 +17,10 @@
   }
 
   &__full-name {
-    @extend %caption;
+    @include type('caption');
 
+    color: $text;
     display: inline-block;
     text-decoration: none;
-    color: $text;
   }
 }

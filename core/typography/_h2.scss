@@ -1,7 +1,0 @@
-%h2 {
-  @include type(1.5rem);
-
-  .light-theme & {
-    @include type(1.5rem, $black); // !temporary
-  }
-}

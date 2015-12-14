@@ -14,8 +14,8 @@
 
   &__metric {
     @extend %horizontal-center;
-    @extend %p;
-    color: $white;
+    @include type('body');
+
     height: 1.5em;
     background: $color__taxonomy-icon--metric-background;
     padding: .3rem .5rem;
@@ -24,8 +24,8 @@
   }
 
   &__label {
-    @extend %p;
-    color: $white;
+    @include type('body');
+
     font-weight: 100;
     text-align: center;
     line-height: 1.4;

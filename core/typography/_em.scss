@@ -1,9 +1,0 @@
-%em {
-  @include type(.875rem);
-  font-style: italic;
-
-  .light-theme & {
-    @include type(.875rem, $black); // !temporary
-    font-style: italic;
-  }
-}

@@ -1,7 +1,0 @@
-%p {
-  @include type(.875rem);
-
-  .light-theme & {
-    @include type(.875rem, $black); // !temporary
-  }
-}

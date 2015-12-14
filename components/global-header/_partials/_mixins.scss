@@ -21,7 +21,7 @@
 @mixin nav($bg: $color__dropdown--bg, $text: $color__global-header--text, $display: inline-block) {
 
   &__wordmark {
-    @extend %h2;
+    @include type('h2');
 
     color: $text;
     font-weight: 200;
@@ -29,7 +29,7 @@
   }
 
   &__dropdown {
-    @extend %p;
+    @include type('body');
 
     background: $bg;
     display: $display;
@@ -53,7 +53,7 @@
   }
 
   &__link {
-    @extend %p;
+    @include type('body');
 
     color: $text;
     font-weight: 700;
