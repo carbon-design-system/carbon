@@ -32,7 +32,7 @@ Create a **.bowerrc** file:
 Install the bower package:
 
 ```bash
-bower install bluemix-components'#'2.9.1-alpha --save
+bower install bluemix-components'#'2.10.0-alpha --save
 ```
 
 Create a **main.scss** file in your project and `@import` bluemix-components with a relative path to the bower package.
