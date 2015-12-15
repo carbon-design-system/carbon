@@ -21,6 +21,9 @@ var sassLint = require('gulp-sass-lint');
 var stylish = require('jshint-stylish');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
+var webpack = require('webpack');
+var gutil = require('gulp-util');
+
 //////////////////////////////
 // Variables
 //////////////////////////////
@@ -33,10 +36,13 @@ var paths = {
     '_scripts.js',
     '_scripts.min.js',
   ],
-  scripts: [
-    'base-elements/**/*.js',
-    'components/**/*.js'
-  ],
+  scripts: {
+    all: [
+      'base-elements/**/*.js',
+      'components/**/*.js'
+    ],
+    main: 'app.js'
+  },
   scss: {
     all: [
       'base-elements/**/*.scss',
@@ -62,7 +68,7 @@ gulp.task('browser-sync', function() {
   browserSync.init({
     logPrefix: "Bluemix Components",
     open: false,
-    proxy: 'localhost:8080',
+    proxy: 'localhost:8080'
   });
 });
 
@@ -72,6 +78,10 @@ gulp.task('nodemon', function() {
     ext: 'dust',
   });
 });
+
+process.once('SIGINT', function() {
+  process.exit(0);
+})
 
 //////////////////////////////
 // Clean
@@ -85,26 +95,33 @@ gulp.task('clean', function() {
 // JavaScript Tasks
 //////////////////////////////
 
-gulp.task('scripts', function() {
-  var concatOnly = gulp.src(paths.scripts)
-    .pipe(concat('_scripts.js'))
-    .pipe(gulp.dest(paths.static + '/js'))
-    .pipe(browserSync.stream());
-
-  var minify = gulp.src(paths.scripts)
-    .pipe(concat('_scripts.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.static + '/js'));
-
-  return merge(concatOnly, minify);
+gulp.task('scripts', function(cb) {
+  webpack({
+    entry: './app.js',
+    output: {
+      path: paths.static + '/js',
+      filename: 'bundle.js'
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.js?$/,
+          exclude: /node_modules/,
+          loaders: ['babel'],
+        },
+      ],
+    },
+  }, function(err, stats) {
+    if (err) throw new gutil.PluginError('webpack', err);
+    gutil.log('[webpack]', stats.toString({
+      progress: true,
+      colors: true
+    }));
+    browserSync.reload();
+    cb();
+  });
 });
 
-gulp.task('scripts:hint', function() {
-  return gulp.src(paths.scripts)
-    .pipe(plumber())
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish));
-});
 
 //////////////////////////////
 // Sass Tasks
@@ -162,7 +179,7 @@ gulp.task('copy:fonts', function() {
 
 gulp.task('watch', function() {
   gulp.watch(paths.html).on('change', browserSync.reload);
-  gulp.watch(paths.scripts, ['scripts', 'scripts:hint']);
+  gulp.watch(paths.scripts.all, ['scripts']);
   gulp.watch(paths.scss.all, ['sass']);
 });
 
