@@ -17,6 +17,7 @@ var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
+var sassLint = require('gulp-sass-lint');
 var stylish = require('jshint-stylish');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
@@ -110,6 +111,7 @@ gulp.task('scripts:hint', function() {
 //////////////////////////////
 
 gulp.task('sass', function() {
+
   var compile = gulp.src(paths.scss.all)
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
@@ -117,6 +119,7 @@ gulp.task('sass', function() {
       browsers: ['> 1%', 'last 2 versions']
     }))
     .pipe(sourcemaps.write())
+    .pipe(gulp.dest('.'))
     .pipe(gulp.dest(paths.static + '/css'))
     .pipe(browserSync.stream());
 
@@ -127,6 +130,19 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('.'));
 
   return merge(compile, bower);
+});
+
+/////////////////////////////
+// Sass Linter
+// This is a WIP -- usage may break
+// until SassLint is updated > 1.3.3
+/////////////////////////////
+
+gulp.task('sass-lint', function() {
+  gulp.src(paths.scss.all)
+    .pipe(sassLint())
+    .pipe(sassLint.format())
+    .pipe(sassLint.failOnError());
 });
 
 /////////////////////////////
