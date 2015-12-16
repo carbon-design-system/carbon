@@ -1,3 +1,6 @@
-import fab from './components/floating-add-button/fab';
+import Fab from './components/floating-add-button/fab';
 
-fab();
+import FileUploader from './base-elements/forms/files/file';
+
+Fab();
+FileUploader();

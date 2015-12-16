@@ -39,7 +39,8 @@ var paths = {
   scripts: {
     all: [
       'base-elements/**/*.js',
-      'components/**/*.js'
+      'components/**/*.js',
+      'app.js'
     ],
     main: 'app.js'
   },
