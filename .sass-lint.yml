@@ -8,10 +8,10 @@ files:
     - './core/**/*.scss'
     - './base-elements/**/*.scss'
     - './components/**/*.scss'
-  # Ignore is not working right now
   ignore:
     - './dev.scss'
     - './dev-colors.scss'
+    - './dev-typography.scss'
     - './bower_components/**/*.scss'
     - './components/taxonomy-item/**/*.scss'
 # Rule Configuration
@@ -22,15 +22,30 @@ rules:
   placeholder-in-extend: 1
   mixins-before-declarations: 1
   # Spaces and Lines
+  one-declaration-per-line: 1
   space-before-brace: 1
   final-newline: 1
+  indentation: 1
+  space-before-brace: 1
+  space-after-comma: 1
+  space-around-operator: 1
   empty-line-between-blocks:
     - 1
     - include: true
     - allow-single-line-rulesets: true
   # Other
   leading-zero: 1
-  no-color-keywords: 1
+  trailing-semicolon: 1
+  quotes:
+    - 1
+    - style: single
+  # Not Allowed
+  no-color-keywords: 2
+  no-misspelled-properties: 2
+  no-ids: 2
+  no-important: 2
+  no-empty-rulesets: 2
+  no-duplicate-properties: 2
   # Units
   property-units:
     - global: ['em']
