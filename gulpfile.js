@@ -136,7 +136,6 @@ gulp.task('sass', function() {
       browsers: ['> 1%', 'last 2 versions']
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('.'))
     .pipe(gulp.dest(paths.static + '/css'))
     .pipe(browserSync.stream());
 
