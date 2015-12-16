@@ -24,6 +24,64 @@
   @extend %input--base;
 }
 
+%input--checkbox {
+  visibility: hidden;
+}
+
+%checkbox-container {
+  display: flex;
+  align-items: baseline;
+}
+
+%checkbox {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  width: em(18px);
+  position: relative;
+
+  input[type=checkbox]:checked + .checkbox__overlay:after {
+    opacity: 1;
+  }
+
+  input[type=checkbox]:checked + .checkbox__overlay {
+    background: $color__checkbox--bg--checked;
+    border: 2px solid $color__checkbox--bg--checked;
+  }
+}
+
+%checkbox__overlay {
+    cursor: pointer;
+    position: absolute;
+    width: em(18px);
+    height: em(18px);
+    top: 0;
+    left: 0;
+    background: $blue-2-mod;
+    border: 2px solid $color__checkbox--border;
+    border-radius: 2px;
+
+    &:after {
+      opacity: 0;
+      content: '';
+      position: absolute;
+      background: transparent;
+      width: em(11px);
+      height: em(5px);
+      top: 2px;
+      border: 2px solid $color__checkbox--border--checked;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+    }
+}
+
+%checkbox__label {
+    @extend %p;
+    margin-left: .75em;
+    font-weight: 600;
+  }
+
 // this should only be used on checkboxes but is a class b/c it shouldn't affect every checkbox
 .toggle {
   position: absolute;
