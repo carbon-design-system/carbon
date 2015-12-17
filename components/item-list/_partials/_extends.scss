@@ -14,19 +14,19 @@
 	padding: 3em 1em 3em 1em;
 	width: 50%;
 	&:nth-child(n+3){
-		border-top: 1px solid $gray-3-mod;
+		border-top: 1px solid $color__navy-gray-4;
 		@include breakpoint(bp--xs--major){
 			border: none;
 		}
 	}
 	&:nth-child(even){
-		border-left: 1px solid $gray-3-mod;
+		border-left: 1px solid $color__navy-gray-4;
 		@include breakpoint(bp--xs--major){
 			border: none;
 		}
 	}
 	&:nth-child(4n+1), &:nth-child(4n+2){
-		background-color: rgba($green-100, 0.1);
+		background-color: rgba($color__navy-gray-1, 0.1);
 		@include breakpoint(bp--xs--major){
 			background-color: transparent;
 		}
@@ -168,8 +168,8 @@
 	@extend %item__icon;
 	background-size: 50px auto;
 	border-radius: 50%;
-	border: 1px solid $blue-20;
-	background-color: $white;
+	border: 1px solid $color__blue-20;
+	background-color: $color__white;
 	@include breakpoint(bp--xs--major){
 		width: 50px;
 		height: 50px;
@@ -191,7 +191,7 @@
 	@extend %text__action;
 	@include type($catalog--caption__type);
 
-	color: $blue-20;
+	color: $color__blue-20;
 }
 
 // SUMMARY ITEMS STYLES
@@ -238,7 +238,7 @@
 	@extend %text__action;
 	@include type($summary--caption__type);
 
-	color: $blue-20;
+	color: $color__blue-20;
 }
 
 // CONTENT SPECIFIC STYLES

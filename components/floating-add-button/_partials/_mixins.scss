@@ -1,7 +1,7 @@
 // MIXINS
 
 // FLOATING ADD BUTTON ROTATION AND BACKGROUND COLOR
-@mixin fab($bg-color: $blue-40, $rotate-deg: 0deg) {
+@mixin fab($bg-color: $color__blue-40, $rotate-deg: 0deg) {
 	transform: rotate($rotate-deg);
 	background-color: $bg-color;
 }

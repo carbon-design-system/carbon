@@ -93,7 +93,7 @@
 	.data__main-data {
 		@include type(rem(64px));
 
-		color: $blue-20; // !temporary
+		color: $color__blue-20; // !temporary
 		font-weight: 300;
 		sup {
 			@extend %h3;
@@ -104,14 +104,14 @@
 		span {
 			@include type(rem(20px));
 
-			color: $blue-20;
+			color: $color__blue-20;
 		}
 	}
 
 	.data__more-info {
 		@include type(rem(14px));
 
-		color: $blue-20;
+		color: $color__blue-20;
 		font-weight: 300;
 	}
 }
@@ -119,11 +119,11 @@
 %metrics__details-link {
 	@include type(rem(14px));
 
-	color: $blue-20;
+	color: $color__blue-20;
 	display: block;
 	margin: 0 auto 1em;
 	padding: 1em 0;
-	background: $gray-2-mod;
+	background: $color__navy-gray-5;
 	border: none;
 	text-transform: none;
 	text-decoration: none;
@@ -142,7 +142,7 @@
 	color: $color--headline;
 	font-weight: 600;
 	padding: 2em;
-	border-bottom: 1px solid $gray-cool-60;
+	border-bottom: 1px solid $color__navy-gray-6;
 	width: 100%;
 }
 
@@ -158,7 +158,7 @@
 
 			&::before {
 				content: '\2022'; // Filled circle
-				color: $white;
+				color: $color__white;
 				position: relative;
 				top: em(7px);
 				left: em(-17px);
@@ -183,12 +183,12 @@
 				    top: 14px;
 				    display: inline-block;
 				    border-radius: 50%;
-				    border: 2px solid $white;
+				    border: 2px solid $color__white;
 				    width: em(25px);
 				    height: em(25px);
 				    text-decoration: none;
 				    margin-right: 1em;
-				    color: $white;
+				    color: $color__white;
 				 }
 
 				&::after {
