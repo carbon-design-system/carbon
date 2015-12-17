@@ -1,3 +1,30 @@
 @import '_partials/vars';
 @import '_partials/mixins';
 @import '_partials/extends';
+
+.list--icon {
+  overflow: hidden;
+  display: flex;
+
+  &__item {
+    display: block;
+    background-color: $blue-2-mod;
+    font-size: 2em; // this will affect icon size, keep em unit
+    margin: 0;
+    padding: .15em;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    border-right: 1px solid $darkest-blue;
+    transition-duration: .25s;
+
+    &:first-child {
+      border-left: 1px solid $darkest-blue;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: mix($blue-2-mod, $white, 97%);
+    }
+  }
+}
