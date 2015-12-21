@@ -98,6 +98,7 @@ gulp.task('clean', function() {
 
 gulp.task('scripts', function(cb) {
   webpack({
+    devtool: 'source-maps',
     entry: './app.js',
     output: {
       path: paths.static + '/js',
