@@ -1,7 +1,0 @@
-@import '_partials/vars';
-@import '_partials/mixins';
-@import '_partials/extends';
-
-.search-field {
-	@include search-field;
-}

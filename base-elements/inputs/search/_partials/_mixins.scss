@@ -1,0 +1,72 @@
+@mixin search {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 2em;
+
+  @include breakpoint(992px) {
+    width: 50%;
+  }
+
+  &__input {
+    @include type(.875rem);
+    flex: 2;
+    padding: 1em 1em 1em 2.5em;
+    border: none;
+    background-color: $color--search-bg;
+    margin-right: -3.9em;
+    color: $color__white;
+    appearance: none;
+
+    &::placeholder {
+      font-style: italic;
+    }
+
+    @include breakpoint(500px) {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-right: -6.5em;
+    }
+  }
+
+  &__icon {
+    height: em(18px);
+    width: em(18px);
+    fill: $color--filter-text;
+    position: relative;
+    left: 30px;
+
+    @include breakpoint(500px) {
+      height: em(20px);
+      width: em(20px);
+      left: 35px;
+    }
+  }
+
+  &__filter {
+    @include type(1rem);
+    color: $color--filter-text;
+    font-weight: bold;
+    background-color: $color--filter-bg;
+    border: none;
+    padding: .78em 1.1em;
+    cursor: pointer;
+
+    span {
+      padding-left: .7em;
+    }
+
+    .filter__text {
+      display: none;
+
+      @include breakpoint(500px) {
+        display: inline-block;
+      }
+    }
+
+    // MOBILE STYLES
+    @include breakpoint(500px) {
+      padding: 1em 1.2em 1em .9em;
+    }
+  }
+}
