@@ -9,7 +9,7 @@ const app = express();
 const adaro = require('adaro');
 
 const templateDirectories = [
-  'core/colors/*.html',
+  'global/colors/*.html',
   'components/global-header/global-header.html',
   'components/global-header/global-header--ghost.html',
   'components/global-header/global-header--light-ui.html',
@@ -17,14 +17,14 @@ const templateDirectories = [
   'components/taxonomy-item/taxonomy-items.html',
   'base-elements/**/*.html',
   'components/**/*.html',
-  'core/**/*.html',
+  'global/**/*.html',
   '!base-elements/body/body.html',
 ];
 
 const directoryOrder = [
   'base-elements/**/*.html',
   'components/**/*.html',
-  'core/**/*.html'
+  'global/**/*.html'
 ];
 
 app.engine('dust', adaro.dust());
@@ -104,8 +104,8 @@ app.get('/base-elements/:component', (req, res) => {
     });
 });
 
-app.get('/core/:component', (req, res) => {
-  const glob = `core/${req.params.component}/**/*.html`;
+app.get('/global/:component', (req, res) => {
+  const glob = `global/${req.params.component}/**/*.html`;
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
