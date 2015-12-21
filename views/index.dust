@@ -4,13 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <title>Bluemix Components</title>
-  <link rel="stylesheet" href="css/dev.css">
-  <link rel="stylesheet" href="css/dev-colors.css">
-  <link rel="stylesheet" href="css/dev-typography.css">
+  <link rel="stylesheet" href="/css/dev.css">
+  <link rel="stylesheet" href="/css/dev-colors.css">
+  <link rel="stylesheet" href="/css/dev-typography.css">
+  <style>
+    .toc {
+      margin-top: 2rem;
+    }
+    .toc li {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+    .toc a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+  </style>
 </head>
 <body>
 
   {content|s}
 
-  <script src="js/bundle.js"></script>
+  <nav class="toc">
+    <ul>
+      {#links}
+       <li><a href="/{url}">{url}</a></li>
+      {/links}
+    </ul>
+  </nav>
+
+
+  <script src="/js/bundle.js"></script>
 </body>
