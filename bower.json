@@ -10,28 +10,26 @@
   "keywords": [
     "bluemix",
     "component",
-    "components",
-    "css",
-    "html",
-    "ibm",
-    "javascript",
-    "js",
-    "library",
-    "pattern",
-    "patterns",
-    "sass",
-    "scss",
-    "style",
-    "styleguide",
-    "guide"
+    "components"
   ],
   "license": "MIT",
   "ignore": [
     ".git",
-    "index.html",
     "dev.{scss, css}",
     "dev-colors.{scss, css}",
+    "dev-typography.{scss, css}",
     "bower_components",
-    "node_modules"
+    "node_modules",
+    "examples",
+    ".babelrc",
+    ".bowerrc",
+    ".editorconfig",
+    ".eslintignore",
+    ".eslintrc",
+    ".sass-lint.yml",
+    "CORE-TEAM.md",
+    "gulpfile.js",
+    "server.js",
+    "views"
   ]
 }
