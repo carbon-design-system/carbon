@@ -90,6 +90,7 @@
   &--green-30 { @include swatch($color__green-30, $color__navy-gray-1); }
   &--red-40 { @include swatch($color__red-40); }
   &--teal-20 { @include swatch($color__teal-20, $color__navy-gray-1); }
+  &--teal-30 { @include swatch($color__teal-30, $color__navy-gray-1); }
   &--yellow-30 { @include swatch($color__yellow-30, $color__navy-gray-1); }
   &--blue-40 { @include swatch($color__blue-40) }
   &--orange-30 { @include swatch($color__orange-30) }
