@@ -1,0 +1,25 @@
+%checkbox__overlay {
+  cursor: pointer;
+  position: absolute;
+  width: em(18px);
+  height: em(18px);
+  top: 0;
+  left: 0;
+  background-color: $color__navy-gray-2;
+  border: 2px solid $color__checkbox--border;
+  border-radius: 2px;
+
+  &:after {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    background-color: transparent;
+    width: em(11px);
+    height: em(5px);
+    top: 2px;
+    border: 2px solid $color__checkbox--border--checked;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+  }
+}

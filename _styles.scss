@@ -18,12 +18,12 @@
 // Base Elements
 @import 'base-elements/body/body';
 @import 'base-elements/buttons/buttons';
-@import 'base-elements/forms/forms';
-@import 'base-elements/forms/inputs/inputs';
-@import 'base-elements/forms/selects/select';
-@import 'base-elements/forms/files/file';
-@import 'base-elements/forms/textfields/text-area';
-@import 'base-elements/forms/textfields/text-field';
+@import 'base-elements/inputs/file/file';
+@import 'base-elements/inputs/checkbox/checkbox';
+@import 'base-elements/inputs/toggle/toggle';
+@import 'base-elements/inputs/search/search';
+@import 'base-elements/inputs/select/select';
+@import 'base-elements/inputs/text/text';
 @import 'base-elements/links/links';
 @import 'base-elements/lists/lists';
 @import 'base-elements/tables/tables';
@@ -38,7 +38,7 @@
 @import 'components/item-list/item-list';
 @import 'components/fab-label/fab-label';
 @import 'components/floating-add-button/floating-add-button';
-@import 'components/search/search';
+// @import 'components/search/search';
 @import 'components/tooltips/tooltips';
 @import 'components/detail-page-header/detail-page-header';
 @import 'components/taxonomy-item/taxonomy-item';

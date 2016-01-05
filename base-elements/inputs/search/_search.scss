@@ -1,0 +1,6 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+
+.search {
+  @include search;
+}

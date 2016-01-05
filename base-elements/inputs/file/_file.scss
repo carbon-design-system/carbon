@@ -1,0 +1,15 @@
+@import '_partials/vars';
+@import '_partials/extends';
+
+.file__input {
+  @extend %visually-hidden ;
+}
+
+.file__appearance {
+  @extend %file__label;
+
+  // "upload button"
+  &:after {
+    @extend %btn--upload;
+  }
+}
