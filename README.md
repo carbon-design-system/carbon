@@ -42,7 +42,7 @@ bower install bluemix-components'#'3.0.1-alpha --save
 
 ## Usage
 
-See [examples/getting-started](https://github.ibm.com/Bluemix/bluemix-components/tree/docs/readme/usage/examples/getting-started) for how to:
+See [examples/getting-started](https://github.ibm.com/Bluemix/bluemix-components/tree/master/examples/getting-started) for how to:
 * Set up Bluemix Components
 * How to compile SCSS with gulp or grunt
 * Setting up Fonts Directory (temporary)
