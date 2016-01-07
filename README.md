@@ -37,7 +37,7 @@ Create a **.bowerrc** file:
 Install the bower package:
 
 ```bash
-bower install bluemix-components'#'3.0.1-alpha --save
+bower install bluemix-components'#'4.0.0-alpha --save
 ```
 
 ## Usage

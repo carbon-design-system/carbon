@@ -16,6 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "bluemix-components": "3.0.1-alpha"
+    "bluemix-components": "4.0.0-alpha"
   }
 }
