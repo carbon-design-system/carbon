@@ -3,7 +3,9 @@
 @import '_partials/mixins';
 
 .tooltip {
+	display: none;
 	&__top {
+		display: none;
     @extend %tooltip--setup;
 		&:before {
 			bottom: 2em;
@@ -17,6 +19,7 @@
 	}
 
 	&__bottom {
+		display: none;
     @extend %tooltip--setup;
 		&:before {
 			top: 2em;

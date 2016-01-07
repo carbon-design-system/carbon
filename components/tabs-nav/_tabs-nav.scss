@@ -2,109 +2,107 @@
 @import '_partials/mixins';
 @import '_partials/extends';
 
-.tabs-nav {
+.tabs {
+  @include type('body');
   width: 100%;
+  background-color: $color__tabs--bg;
+  color: $color__tabs--text;
+  cursor: pointer;
 
-  .tabs-nav--mobile {
-  	display: block;
-
-  	li a {
-  		padding: em(20px);
-  	}
-  }
-
-  .tabs-nav--wide {
-  	display: none;
-  }
-
-  @include breakpoint(600px) {
-
-  	.tabs-nav--wide li a {
-  		margin-right: em(30px);
-  	}
-
-  	.tabs-nav--wide {
-  		display: flex;
-  	}
-
-  	.tabs-nav--mobile {
-  		display: none;
-  	}
-  }
-
-  @include breakpoint(640px) {
-
-		.tabs-nav--wide li a {
-	  	margin-right: em(30px);
-	  }
-
-		.tabs-nav--wide li a {
-			margin-right: em(40px);
-	  }
-  }
-
-  &--wide {
-    @include type(rem(16px));
+  &__nav {
     display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		align-items: center;
-		flex-wrap: nowrap;
-		padding-top: em(40px);
-		padding-bottom: em(30px);
-		width: 100%;
-  }
+    flex-direction: column;
 
-  &__item {
-
-    .item__link {
-			color: $color__white;
-			text-decoration: none;
-			margin-right: em(50px);
-			padding-bottom: .6em;
-			padding-left: em(5px);
-
-			&:hover {
-				color: $color__detail-page-header--selected;
-			}
-		}
-
-		.selected {
-  		color: $color__detail-page-header--selected;
-  		border-bottom: 3px solid $color__detail-page-header--selected;
-
-		  &::after {
-	  		content: '';
-	  		width: 0;
-	  		height: 0;
-	  		border-left: 5px solid transparent;
-	  		border-right: 5px solid transparent;
-	  		border-bottom: 5px solid $color__detail-page-header--selected;
-	  		position: relative;
-	  		right: em(35px);
-	  		top: em(5px);
-		  }
+    @include breakpoint(bp--sm--major) {
+      @include type(1rem);
+      flex-direction: row;
+      background: none;
     }
   }
 
-  &--mobile {
-		@include type(rem(14px));
-		display: none;
-		margin-top: em(15px);
-		width: 100%;
-		min-width: 0;
-		border-radius: 0;
-		border: none;
-		height: em(45px);
-		padding: 0 1.7em;
-		color: $color__white;
-		appearance: none;
-		background: url(../images/dropdown-triangle.svg) no-repeat right center $color__navy-gray-2;
-		border-right: 2em solid transparent;
+  &__trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
 
-		@include breakpoint(401px) {
-			margin-top: em(23px);
-		}
+    &:hover {
+      background: lighten($color__tabs--bg, 1);
+    }
+
+    svg {
+      width: em(12px);
+      position: relative;
+      top: em(4px);
+      fill: $color__tabs--caret;
+    }
+
+    @include breakpoint(bp--sm--major) {
+      display: none;
+    }
+  }
+
+  @include breakpoint(bp--sm--major) {
+    background: none;
   }
 }
 
+.nav {
+
+  &__item {
+    padding: 1em;
+    background: lighten($color__tabs--bg, 1);
+
+    a {
+      padding: 1em;
+      text-decoration: none;
+      color: $color__tabs--text;
+
+      @include breakpoint(bp--sm--major) {
+
+        &:hover {
+          color: $color__tabs--selected;
+        }
+      }
+    }
+
+    &:hover {
+      background: lighten($color__tabs--bg, 2);
+
+      @include breakpoint(bp--sm--major) {
+        background: none;
+      }
+    }
+
+    @include breakpoint(bp--sm--major) {
+      background: none;
+      padding: .5em;
+    }
+  }
+}
+
+
+.selected {
+  color: $color__tabs--text;
+  border: none;
+
+  @include breakpoint(bp--sm--major) {
+    border-bottom: 4px solid $color__tabs--selected;
+
+    a {
+      color: $color__tabs--selected;
+    }
+  }
+}
+
+.tabs--hidden {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+
+  @include breakpoint(bp--sm--major) {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+  }
+}
