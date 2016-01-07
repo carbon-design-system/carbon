@@ -1,0 +1,7 @@
+%content-switcher__btn {
+  font-weight: 400;
+
+  &:not(:last-child) {
+    border-right: none;
+  }
+}
