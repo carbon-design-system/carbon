@@ -155,6 +155,7 @@
 		.feed__item {
 			position: relative;
 			padding: 0 0 0 1em;
+      max-height: em(30px);
 
 			&::before {
 				content: '\2022'; // Filled circle
@@ -172,6 +173,8 @@
 
 			&--user-activity {
 				padding-left: em(15px);
+        max-height: em(80px);
+        margin-bottom: .5em;
 
 				&::before {
 					content: '';
@@ -195,7 +198,7 @@
 					content: ' ';
 					position: relative;
 					border: 1px solid $color--border;
-					padding-top: .6em;
+					padding-top: .4em;
 					top: em(-15px);
 					left: em(-15px);
 				}
@@ -214,7 +217,8 @@
 
 			&__line {
 				border-left: 2px solid $color--border;
-				padding: .8em 0;
+        margin-top: .5em;
+				padding: .5em 0;
 				display: inline-block;
 			}
 		}
