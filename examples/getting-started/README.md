@@ -56,7 +56,7 @@ gulp
 *This is a temporary step that will be resolved in a future release*
 
 Bluemix Components includes 'Helvetica Neue for IBM' as font files.
-These are located in [bower_components/bluemix-components/core/fonts](https://github.ibm.com/Bluemix/bluemix-components/tree/master/core/fonts).
+These are located in [bower_components/bluemix-components/global/fonts](https://github.ibm.com/Bluemix/bluemix-components/tree/master/global/fonts).
 
 Use this getting-started project as a reference for how to set-up fonts to ensure that you're always serving 'Helvetica Neue for IBM'.
 
