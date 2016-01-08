@@ -30,17 +30,17 @@
 
 // Components
 @import 'components/alerts/alerts';
-@import 'components/data-module/data-module';
-@import 'components/dropdown/dropdown';
 @import 'components/cards/cards';
+@import 'components/content-switcher/content-switcher';
+@import 'components/data-module/data-module';
+@import 'components/detail-page-header/detail-page-header';
+@import 'components/dropdown/dropdown';
+@import 'components/fab-label/fab-label';
+@import 'components/floating-add-button/floating-add-button';
+@import 'components/form-footer/form-footer';
 @import 'components/global-profile/global-profile';
 @import 'components/global-header/global-header';
 @import 'components/item-list/item-list';
-@import 'components/fab-label/fab-label';
-@import 'components/floating-add-button/floating-add-button';
-// @import 'components/search/search';
-@import 'components/tooltips/tooltips';
-@import 'components/detail-page-header/detail-page-header';
-@import 'components/taxonomy-item/taxonomy-item';
 @import 'components/tabs-nav/tabs-nav';
-@import 'components/form-footer/form-footer';
+@import 'components/taxonomy-item/taxonomy-item';
+@import 'components/tooltips/tooltips';
