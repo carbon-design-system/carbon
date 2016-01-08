@@ -168,7 +168,7 @@ gulp.task('sass-lint', function() {
 /////////////////////////////
 
 gulp.task('copy:fonts', function() {
-  var fonts = 'core/fonts/*.{woff,woff2}';
+  var fonts = 'global/fonts/*.{woff,woff2}';
 
   gulp.src(fonts)
     .pipe(gulp.dest(paths.static + '/css'));
