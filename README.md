@@ -11,18 +11,38 @@ Bluemix Components comes bundled with these dependencies:
 - [IBM Design Colors](https://github.com/IBM-Design/colors): A SCSS file with IBM Design Colors.
 - [Bluemix Icons](https://github.ibm.com/Bluemix/bluemix-icons): A SCSS file with icon classes using SVG.
 
-## Requirements:
+## Contributing
 
-You must have `node.js`, `npm` and `bower`.
-If you're contributing to this repo, it's recommended to use [`nvm` (node version manager)](https://github.com/creationix/nvm) and the latest version of `node.js` (4 or higher).
+### Requirements
+
+* SSH Key for GitHub Enterprise account
+* node.js 4 or higher
+
+Contributing to bluemix-components requires that you can run this repo locally on your computer.
+
+Please read the [Generating SSH Keys](https://help.github.com/articles/generating-ssh-keys/) article from GitHub for steps on how to set-up your **SSH key**.
+
+You must have **node.js 4 or higher** in order to run this project locally on your computer.
+
+It's recommended to use [`nvm` (node version manager)](https://github.com/creationix/nvm) to use the latest version of `node.js` (4 or higher).
+
+## Install
+
+### Requirements
+
+* SSH Key for GitHub Enterprise account
+* `git`
+* `bower`
+
+To install bluemix-components with `bower`, you must have your **SSH key** set-up with your GitHub Enterprise account.
+
+Please read the [Generating SSH Keys](https://help.github.com/articles/generating-ssh-keys/) article from GitHub for steps on how to set-up your SSH key.
 
 Install `bower` globally:
 
 ```
 npm install -g bower
 ```
-
-## Installation
 
 Initialize a **bower.json** file:
 ```bash
@@ -37,7 +57,7 @@ Create a **.bowerrc** file:
 Install the bower package:
 
 ```bash
-bower install bluemix-components'#'4.0.0-alpha --save
+bower install bluemix-components --save
 ```
 
 ## Usage
