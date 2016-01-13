@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px"
+height="36px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
+  <g id="Background" display="none">
+    <rect display="inline" fill="#F0F0F0" width="32" height="32"/>
+  </g>
+  <g id="Icon">
+    <g>
+      <g>
+        <path d="M20.433,12c0-0.451-0.045-0.89-0.114-1.322L23,8.333l-2.277-3.738l-3.197,1.044c-0.764-0.665-1.648-1.19-2.617-1.547
+          L14.2,1H9.8L9.091,4.092C8.123,4.449,7.238,4.975,6.474,5.64L3.277,4.595L1,8.333l2.68,2.346C3.612,11.11,3.567,11.549,3.567,12
+          s0.045,0.89,0.113,1.321L1,15.667l2.278,3.738l3.196-1.044c0.764,0.665,1.649,1.191,2.618,1.547L9.8,23h4.4l0.708-3.092
+          c0.969-0.356,1.853-0.882,2.617-1.547l3.196,1.044L23,15.667l-2.681-2.345C20.388,12.89,20.433,12.451,20.433,12z M12,15
+          c-1.655,0-3-1.343-3-3s1.345-3,3-3s3,1.343,3,3S13.655,15,12,15z"/>
+      </g>
+    </g>
+  </g>
+  <g id="Guide" display="none">
+    <g display="inline">
+      <path fill="#FFCCCC" d="M23,1v22H1V1H23 M24,0H0v24h24V0L24,0z"/>
+    </g>
+  </g>
+</svg>
