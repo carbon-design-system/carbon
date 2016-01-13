@@ -1,6 +1,4 @@
 @import '_partials/vars';
-@import '_partials/mixins';
-@import '_partials/extends';
 
 .detail-page-header {
   width: 100%;
@@ -60,9 +58,8 @@
   }
 
   &__title {
-    @extend %helvetica-light;
     @include type(rem(24px));
-    font-weight: 300; // !temporary
+    font-weight: 300;
     border-left: 1px solid $color__detail-page-header--border;
     padding: .2em 0 .2em em(9px);
 
