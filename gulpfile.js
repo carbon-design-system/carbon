@@ -1,40 +1,39 @@
-'use-strict';
+'use strict';
 
 //////////////////////////////
 // Requires
 //////////////////////////////
-var autoprefixer = require('gulp-autoprefixer');
-var browserSync = require('browser-sync').create();
-var nodemon = require('gulp-nodemon');
-var concat = require('gulp-concat');
-var del = require('del');
-var gulp = require('gulp');
-var jshint = require('gulp-jshint');
-var lazypipe = require('lazypipe');
-var merge = require('merge-stream');
-var plumber = require('gulp-plumber');
-var rename = require('gulp-rename');
-var replace = require('gulp-replace');
-var runSequence = require('run-sequence');
-var sass = require('gulp-sass');
-var sassLint = require('gulp-sass-lint');
-var stylish = require('jshint-stylish');
-var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
-var webpack = require('webpack');
-var gutil = require('gulp-util');
+
+const autoprefixer = require('gulp-autoprefixer');
+const browserSync = require('browser-sync').create();
+const nodemon = require('gulp-nodemon');
+const concat = require('gulp-concat');
+const del = require('del');
+const gulp = require('gulp');
+const jshint = require('gulp-jshint');
+const lazypipe = require('lazypipe');
+const merge = require('merge-stream');
+const plumber = require('gulp-plumber');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
+const runSequence = require('run-sequence');
+const sass = require('gulp-sass');
+const sassLint = require('gulp-sass-lint');
+const stylish = require('jshint-stylish');
+const uglify = require('gulp-uglify');
+const sourcemaps = require('gulp-sourcemaps');
+const webpack = require('webpack');
+const gutil = require('gulp-util');
 
 //////////////////////////////
 // Variables
 //////////////////////////////
 
-var paths = {
+const PATHS = {
   static: 'static',
   clean: [
-    '*.css',
-    '_styles.scss',
-    '_scripts.js',
-    '_scripts.min.js',
+    'static/**/*.{css,woff,woff2,png,svg,jpeg,js,map}',
+    '_styles.scss'
   ],
   scripts: {
     all: [
@@ -53,10 +52,10 @@ var paths = {
     main: 'dev.scss'
   },
   html: './**/*.html',
-  images: './**/*.{png,jpeg,jpg}'
+  images: 'images/**/*.{png,jpeg,jpg,svg}'
 }
 
-var importPaths = {
+const importPaths = {
   icons: '../bluemix-icons/icons',
   ibmColors: '../IBM-Design-Colors/ibm-colors'
 }
@@ -89,7 +88,7 @@ process.once('SIGINT', function() {
 //////////////////////////////
 
 gulp.task('clean', function() {
-  return del(paths.clean);
+  return del(PATHS.clean);
 });
 
 //////////////////////////////
@@ -101,7 +100,7 @@ gulp.task('scripts', function(cb) {
     devtool: 'source-maps',
     entry: './app.js',
     output: {
-      path: paths.static + '/js',
+      path: PATHS.static + '/js',
       filename: 'bundle.js'
     },
     module: {
@@ -131,17 +130,17 @@ gulp.task('scripts', function(cb) {
 
 gulp.task('sass', function() {
 
-  var compile = gulp.src(paths.scss.all)
+  var compile = gulp.src(PATHS.scss.all)
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions']
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(paths.static + '/css'))
+    .pipe(gulp.dest(PATHS.static + '/css'))
     .pipe(browserSync.stream());
 
-  var bower = gulp.src(paths.scss.main)
+  var bower = gulp.src(PATHS.scss.main)
     .pipe(replace('bower_components/bluemix-icons/icons', importPaths.icons))
     .pipe(replace('bower_components/IBM-Design-Colors/ibm-colors', importPaths.ibmColors))
     .pipe(rename('_styles.scss'))
@@ -157,7 +156,7 @@ gulp.task('sass', function() {
 /////////////////////////////
 
 gulp.task('sass-lint', function() {
-  gulp.src(paths.scss.all)
+  gulp.src(PATHS.scss.all)
     .pipe(sassLint())
     .pipe(sassLint.format())
     .pipe(sassLint.failOnError());
@@ -168,24 +167,31 @@ gulp.task('sass-lint', function() {
 /////////////////////////////
 
 gulp.task('copy:fonts', function() {
-  var fonts = 'global/fonts/*.{woff,woff2}';
+  let fonts = 'global/fonts/*.{woff,woff2}';
 
-  gulp.src(fonts)
-    .pipe(gulp.dest(paths.static + '/css'));
+  return gulp.src(fonts)
+    .pipe(gulp.dest(PATHS.static + '/css'));
 });
+
+gulp.task('copy:images', function() {
+  return gulp.src(PATHS.images)
+    .pipe(gulp.dest(PATHS.static + '/images'));
+});
+
+gulp.task('copy', ['copy:fonts', 'copy:images']);
 
 //////////////////////////////
 // Running Tasks
 //////////////////////////////
 
 gulp.task('watch', function() {
-  gulp.watch(paths.html).on('change', browserSync.reload);
-  gulp.watch(paths.scripts.all, ['scripts']);
-  gulp.watch(paths.scss.all, ['sass']);
+  gulp.watch(PATHS.html).on('change', browserSync.reload);
+  gulp.watch(PATHS.scripts.all, ['scripts']);
+  gulp.watch(PATHS.scss.all, ['sass']);
 });
 
 gulp.task('build', function () {
-  runSequence('clean', ['sass', 'scripts', 'copy:fonts']);
+  runSequence('clean', ['sass', 'scripts', 'copy']);
 });
 
 gulp.task('default', function () {
