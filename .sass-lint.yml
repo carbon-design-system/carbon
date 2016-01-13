@@ -23,7 +23,6 @@ rules:
   mixins-before-declarations: 1
   # Spaces and Lines
   one-declaration-per-line: 1
-  space-before-brace: 1
   final-newline: 1
   indentation: 1
   space-before-brace: 1
