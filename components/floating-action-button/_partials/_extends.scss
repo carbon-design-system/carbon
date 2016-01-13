@@ -1,0 +1,69 @@
+%fab {
+  @include fab;
+  width: em(62px);
+  height: em(36px);
+  box-shadow: $fab--shadow;
+  display: inline-block;
+  margin: 2em;
+  transition: 600ms;
+  top: $global-header__height + .75em;
+  right: .75em;
+}
+
+%fab {
+  &--close {
+    @include fab($color__navy-gray-5, 90deg);
+
+    %fab__sign {
+      @include fab__sign($fab--text, $fab--rotation, $fab--padding, $fab--line-height);
+    }
+  }
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    z-index: 5;
+    width: em(44px);
+    height: em(44px);
+    transform: scaleY(.5774) rotate(-45deg);
+    background-color: inherit;
+    left: em(9px);
+    box-shadow: $fab--shadow;
+   }
+
+  &:before {
+    top: em(-22px);
+  }
+
+  &:after {
+    bottom: em(-22px);
+  }
+
+  &__shadow-overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:em(62px);
+    height:em(35px);
+    z-index: 7;
+    background: inherit;
+  }
+
+  &__sign {
+    @include fab__sign;
+    color: $color__white;
+    transition: 600ms;
+  }
+}
+
+%screen-reader-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 0;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 0;
+}
