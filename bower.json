@@ -4,8 +4,8 @@
   "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
   "main": "_styles.scss",
   "dependencies": {
-    "bluemix-icons": "0.2.0-alpha",
-    "IBM-Design-Colors": "ibm-colors#~1.5.1"
+    "IBM-Design-Colors": "ibm-colors#~1.5.1",
+    "bluemix-icons": "~0.2.0"
   },
   "keywords": [
     "bluemix",
