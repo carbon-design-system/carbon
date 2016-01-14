@@ -1,0 +1,17 @@
+.tab-content {
+  @extend %grid-container;
+}
+
+.tile {
+  padding: 1em;
+}
+
+.data-container {
+  display: flex;
+  flex-flow: row wrap;
+
+  @include breakpoint(bp--xs--major) {
+    margin-left: -1em;
+    margin-right: -1em;
+  }
+}

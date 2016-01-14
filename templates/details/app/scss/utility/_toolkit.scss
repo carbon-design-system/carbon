@@ -1,0 +1,10 @@
+%grid-container {
+  width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+
+  @include breakpoint(bp--xs--major) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
