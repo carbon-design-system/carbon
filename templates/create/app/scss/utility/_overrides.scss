@@ -1,0 +1,15 @@
+.detail-page-header {
+  height: auto;
+}
+
+.detail-page-header__container {
+  @extend %grid-container;
+}
+
+.tabs {
+  padding-top: 2em;
+}
+
+.checkbox {
+  width: auto;
+}

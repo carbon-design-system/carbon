@@ -1,0 +1,32 @@
+%grid-container {
+  width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+
+  @include breakpoint(bp--xs--major) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+.horizontal-list {
+  display: flex;
+  margin-left: -10px;
+  margin-right: -10px;
+
+  li {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.blue-list {
+  color: $color__blue-30;
+
+  a {
+    color: inherit;
+    padding-bottom: 2px;
+    text-decoration: none;
+    border-bottom: 1px solid $color__blue-30;
+  }
+}

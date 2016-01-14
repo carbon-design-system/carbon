@@ -1,0 +1,35 @@
+.detail-page-header {
+  height: auto;
+}
+
+.detail-page-header__container {
+  @extend %grid-container;
+}
+
+.tabs {
+  padding-top: 2em;
+}
+
+.data-module {
+  &--1x {
+    width: 100%;
+
+    @include breakpoint(bp--sm--major) {
+      width: 50%;
+    }
+
+    @include breakpoint(bp--lg--major) {
+      width: (1/3) * 100%;
+    }
+  }
+
+  &--2x {
+    @include breakpoint(bp--sm--major) {
+      width: 50%;
+    }
+
+    @include breakpoint(bp--lg--major) {
+      width: (2/3) * 100%;
+    }
+  }
+}
