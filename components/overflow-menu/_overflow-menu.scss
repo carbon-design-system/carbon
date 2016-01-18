@@ -1,0 +1,105 @@
+@import '_partials/vars';
+@import '_partials/extends';
+
+.overflow-menu {
+  display: flex;
+  cursor: pointer;
+  width: 2em;
+  height: 3em;
+  margin: 1em;
+
+  // horizontal rule styling
+  hr {
+    border: none;
+    border-bottom: 1px solid $color__navy-gray-6;
+  }
+
+  // Initial styling for the options pane
+  &__options {
+    transition-duration: .25s;
+    display: none;
+    position: absolute;
+    margin: 2.5em 0 0 -3em;
+    background: $color--list-bg;
+    padding: .25em 0;
+
+    // rectangle to make little arrow
+    &:before {
+      content: '';
+      display: block;
+      transform: rotate(45deg);
+      z-index: -1;
+      background-color: $color--list-bg;
+      width: 1em;
+      height: 1em;
+      position: absolute;
+      top: -.5em;
+      left: 1.6em;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    color: $color__white;
+    border: none;
+    text-align: left;
+    font-size: .85em;
+    background: none;
+    cursor: pointer;
+    font-weight: 200;
+    padding: .5em 1em;
+
+    &:hover {
+      background: $color--list-bg--hover;
+    }
+
+    &[data-state='delete']:hover {
+      background: $color__red-40;
+    }
+  }
+
+  // Base styling just for the 3-dot menu icon
+  &__icon {
+    color: $color--list-icon;
+    transition-duration: .25s;
+    border-radius: 50%;
+    width: .25em;
+    height: .25em;
+    display: block;
+    position: relative;
+    background-color: currentColor;
+    margin: .8em;
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      border-radius: 50%;
+      width: .25em;
+      height: .25em;
+      background-color: currentColor;
+      position: absolute;
+    }
+
+    &:before {
+      top: -.5em;
+    }
+
+    &:after {
+      bottom: -.5em;
+    }
+  }
+
+  // Focus and hover states for the entire component
+  &:focus,
+  &:active,
+  &:hover {
+    .overflow-menu__icon {
+      color: $color__white;
+    }
+
+    .overflow-menu__options {
+      display: block;
+    }
+  }
+}
