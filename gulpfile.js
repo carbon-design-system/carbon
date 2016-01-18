@@ -68,7 +68,8 @@ gulp.task('browser-sync', function() {
   browserSync.init({
     logPrefix: "Bluemix Components",
     open: false,
-    proxy: 'localhost:8080'
+    proxy: 'localhost:8080',
+    reloadDelay: 500
   });
 });
 
@@ -76,6 +77,8 @@ gulp.task('nodemon', function() {
   nodemon({
     script: 'server.js',
     ext: 'dust',
+  }).on('restart', () => {
+    browserSync.reload;
   });
 });
 
