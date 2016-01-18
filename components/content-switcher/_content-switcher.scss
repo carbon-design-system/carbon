@@ -3,14 +3,14 @@
 
 .content-switcher {
   display: flex;
-}
 
-.content-switcher__btn {
-  @extend %content-switcher__btn;
-  @include btn--secondary($color__btn--bg);
-}
+  .content-switcher__btn {
+    @extend %content-switcher__btn;
+    @include btn--secondary($color__btn--bg);
+  }
 
-.active {
-  @extend %content-switcher__btn;
-  @include btn--primary($color__btn--bg, $color__btn--bg);
+  .active {
+    @extend %content-switcher__btn;
+    @include btn--primary($color__btn--bg, $color__btn--bg);
+  }
 }
