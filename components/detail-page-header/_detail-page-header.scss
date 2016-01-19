@@ -3,8 +3,6 @@
 .detail-page-header {
   background: $color__detail-page-header--bg;
 
-<<<<<<< HEAD
-=======
   @include breakpoint(401px) {
     height: em(145px);
   }
@@ -22,7 +20,6 @@
     margin: -.7em .1em;
   }
 
->>>>>>> 5c2340b... icons are added, styled,  and refactored with the new usage
   &__container {
     display: flex;
     flex-direction: column;
