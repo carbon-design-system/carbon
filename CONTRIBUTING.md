@@ -49,6 +49,10 @@ git remote add brian git@github.ibm.com:bthan/forking.git
 
 ## Work in a Branch
 
+Always work in a branch.
+Submit pull requests from a branch.
+Do not submit pull requests from your forks master branch.
+
 ```
 git checkout -b component/card/refactor
 
