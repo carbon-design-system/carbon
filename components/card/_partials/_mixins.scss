@@ -1,0 +1,54 @@
+@mixin app-status($status) {
+  @include type(rem(12px));
+  display: none;
+  align-items: center;
+  margin-left: 1em;
+
+  @if ($status == 'running') {
+
+    &::before {
+      content: ' ';
+      height: em(20px);
+      width: em(20px);
+      border-radius: 100%;
+      margin-right: .75em;
+      background-color: $color__card-running;
+    }
+  }
+
+  @else if ($status == 'not-running') {
+
+    &::before {
+      content: ' ';
+      height: em(20px);
+      width: em(20px);
+      border-radius: 100%;
+      margin-right: .75em;
+      background-color: $color__card-not-running;
+    }
+  }
+
+  @else if ($status == 'stopped') {
+
+    &::before {
+      content: ' ';
+      height: em(20px);
+      width: em(20px);
+      border-radius: 100%;
+      margin-right: .75em;
+      background-color: $color__card-stopped;
+    }
+  }
+
+  @else if ($status == 'limited') {
+
+    &::before {
+      content: ' ';
+      height: em(20px);
+      width: em(20px);
+      border-radius: 100%;
+      margin-right: .75em;
+      background-color: $color__card-limited;
+    }
+  }
+}

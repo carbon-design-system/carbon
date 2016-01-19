@@ -1,0 +1,70 @@
+<!-- app card -->
+<div class="card">
+
+  <!-- card overview -->
+  <div class="card__card-overview">
+
+    <!-- about the app -->
+    <div class="card-overview__about">
+      <div class="about__icon">
+        <img src="../../images/container-icon-example.png" class="about__icon--img" />
+      </div>
+      <div class="about__title">
+        <h3 class="about__title--name">Container Group</h3>
+        <a class="about__title--link">Route: None</a>
+      </div>
+    </div>
+
+    <!-- overflow menu begins -->
+    <div class='overflow-menu'>
+      <div class='overflow-menu__icon'></div>
+      <ul class='overflow-menu__options'>
+        <li>
+          <button type='button' class='overflow-menu__btn'>Option 1</button>
+        </li>
+        <li>
+          <button type='button' class='overflow-menu__btn'>Option 2</button>
+        </li>
+        <li>
+          <button type='button' class='overflow-menu__btn'>Option 3</button>
+        </li>
+        <li>
+          <button type='button' class='overflow-menu__btn'>Option 4</button>
+        </li>
+        <hr/>
+        <li>
+          <button type='button' class='overflow-menu__btn' data-state='delete'>Option 5</button>
+        </li>
+      </ul>
+    </div>
+    <!-- overflow menu ends -->
+
+  </div>
+
+  <!-- card footer begins -->
+  <div class="card__card-footer">
+
+    <!-- app status -->
+    <div class="card-footer__app-status">
+      <div class="card-footer__app-status--running active">
+        <div class="running__text">Running</div>
+      </div>
+      <div class="card-footer__app-status--not-running">
+        <div class="not-running__text">Not Running</div>
+      </div>
+      <div class="card-footer__app-status--stopped">
+        <div class="stopped__text">Stopped</div>
+      </div>
+    </div>
+
+    <!-- app actions -->
+    <div class="card-footer__app-actions">
+      <button class="app-actions__button" id="restart-app">
+        <svg class="app-actions__button--icon">
+          <use xlink:href="../../images/sprite.svg#common--restart"></use>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</div>
