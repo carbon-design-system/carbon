@@ -5,7 +5,7 @@
   "main": "_styles.scss",
   "dependencies": {
     "IBM-Design-Colors": "ibm-colors#~1.5.1",
-    "bluemix-icons": "~0.2.0"
+    "bluemix-icons": "0.2.0-alpha"
   },
   "keywords": [
     "bluemix",
