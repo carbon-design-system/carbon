@@ -4,10 +4,8 @@
 
 .tabs {
   @include type('body');
-  width: 100%;
   background-color: $color__tabs--bg;
   color: $color__tabs--text;
-  cursor: pointer;
 
   &__nav {
     display: flex;
@@ -17,14 +15,23 @@
       @include type(1rem);
       flex-direction: row;
       background: none;
+      margin-left: em(16px);
+      margin-right: em(16px);
     }
+
+    @include breakpoint(bp--lg--major) {
+      margin-left: 0;
+    }
+
   }
 
   &__trigger {
+    border-top: 1px solid darken($color__tabs--bg, 2);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em 2em;
+    padding: rem(16px);
+    cursor: pointer;
 
     &:hover {
       background: lighten($color__tabs--bg, 1);
@@ -50,15 +57,18 @@
 .nav {
 
   &__item {
-    padding: 1em;
     background: lighten($color__tabs--bg, 1);
 
     a {
+      display: block;
       padding: 1em;
       text-decoration: none;
       color: $color__tabs--text;
 
       @include breakpoint(bp--sm--major) {
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 1px;
 
         &:hover {
           color: $color__tabs--selected;
@@ -76,7 +86,10 @@
 
     @include breakpoint(bp--sm--major) {
       background: none;
-      padding: .5em;
+
+      &+& {
+        margin-left: em(50px);
+      }
     }
   }
 }
@@ -87,7 +100,7 @@
   border: none;
 
   @include breakpoint(bp--sm--major) {
-    border-bottom: 4px solid $color__tabs--selected;
+    border-bottom: 2px solid $color__tabs--selected;
 
     a {
       color: $color__tabs--selected;
@@ -97,12 +110,8 @@
 
 .tabs--hidden {
   display: none;
-  opacity: 0;
-  visibility: hidden;
 
   @include breakpoint(bp--sm--major) {
     display: flex;
-    opacity: 1;
-    visibility: visible;
   }
 }
