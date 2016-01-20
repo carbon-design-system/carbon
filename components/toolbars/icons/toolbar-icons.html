@@ -2,12 +2,12 @@
 
   <!-- Slide out search field -->
   <div class="slide-out-search">
-    <input type="search" class="search-field" data-id="search-field" placeholder="Start typing to filter results..">
+    <input type="search" class="search-field" data-list-icons-search-field placeholder="Start typing to filter results..">
   </div>
 
   <!-- Icon list -->
   <ul class="toolbar-icons__icons">
-    <li data-id="search-action" class="icons__tool">
+    <li data-list-icons-search-action-target="[data-list-icons-search-field]" data-id="search-action" class="icons__tool">
       <svg class="tool-icon">
         <use xlink:href="../../images/sprite.svg#common--search"></use>
       </svg>
@@ -19,7 +19,7 @@
         </svg>
       </a>
     </li>
-    <li data-id="map-action" class="icons__tool">
+    <li class="icons__tool">
       <a href="#">
         <svg class="tool-icon">
           <use xlink:href="../../images/sprite.svg#common--grid"></use>

@@ -1,23 +1,29 @@
-const FileUploader = () => {
-  const fileInput = [...document.querySelectorAll('input.file__input')];
+export default class FileUploader {
+  constructor(element, options) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
+    }
 
-  fileInput.forEach((input) => {
-    const label = input.nextElementSibling;
+    this.element = element;
 
-    input.addEventListener('change', (e) => {
-      let fileName = '';
+    const labelSelector = options && options.labelSelector || element.getAttribute('data-label');
+    this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 
-      if (input.files && input.files.length > 1) {
-        fileName = (input.getAttribute('data-multiple-caption') || '').replace('{count}', input.files.length);
-      } else {
-        fileName = e.target.value.split('\\').pop();
-      }
+    element.addEventListener('change', (e) => this.updateLabel(e));
+  }
 
-      if (fileName) {
-        label.innerHTML = fileName;
-      }
-    });
-  });
-};
+  updateLabel(e) {
+    let fileName = '';
+    const element = this.element;
 
-export default FileUploader;
+    if (element.files && element.files.length > 1) {
+      fileName = (element.getAttribute('data-multiple-caption') || '').replace('{count}', element.files.length);
+    } else {
+      fileName = e.target.value.split('\\').pop();
+    }
+
+    if (fileName) {
+      this.labelNode.innerHTML = fileName;
+    }
+  }
+}

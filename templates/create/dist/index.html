@@ -91,7 +91,7 @@
           <h2 class="create-main__header">1. Select Image</h2>
 
           <div class="form-row">
-            <div class="content-switcher">
+            <div data-content-switcher class="content-switcher">
 
               <button type="button" class="content-switcher__btn active">New</button>
               <button type="button" class="content-switcher__btn">Existing</button>
@@ -99,8 +99,8 @@
           </div>
 
           <div class="form-row">
-            <input class="file__input" type="file" name="file" id="file" data-multiple-caption="{count} files selected" multiple="multiple">
-            <label class="file__appearance" for="file">Upload New Image</label>
+            <input data-file-input class="file__input" type="file" name="file" id="file" data-multiple-caption="{count} files selected" data-label="[data-file-appearance]" multiple="multiple">
+            <label data-file-appearance class="file__appearance" for="file">Upload New Image</label>
           </div>
         </section>
 
@@ -119,7 +119,7 @@
           <div class="from-row">
             <div class="form-group">
               <div class="form-row">
-                <input class="file__input" type="file" name="post-install" id="post-install" data-multiple-caption="{count} files selected" multiple="multiple">
+                <input class="file__input" type="file" name="post-install" id="post-install" data-multiple-caption="{count} files selected" data-label="[data-file-appearance]" multiple="multiple">
                 <label class="file__appearance" for="post-install">Post Install Script</label>
               </div>
             </div>

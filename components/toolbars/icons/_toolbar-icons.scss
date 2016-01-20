@@ -69,6 +69,10 @@
 
       &:first-child {
         border-left: 1px solid $color__navy-gray-1;
+
+        &.show-search {
+          border-left: none;
+        }
       }
 
       &:hover,

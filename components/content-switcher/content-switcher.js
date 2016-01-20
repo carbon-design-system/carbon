@@ -1,26 +1,36 @@
-const ContentSwitcher = () => {
+import '../../global/js/array-from';
+import '../../global/js/object-assign';
 
-  const csButtons = [... (document.querySelectorAll('.content-switcher__btn'))];
+function toggleClass(element, name, add) {
+  if (element.classList.contains(name) === !add) {
+    element.classList[add ? 'add' : 'remove'](name);
+  }
+}
 
-  const addActive = (buttons) => {
-    buttons.forEach(button => {
-      button.addEventListener('click', function() {
-        removeActive(buttons);
-        button.classList.add('active');
-      });
-    });
-  };
+export default class ContentSwitcher {
+  constructor(element, options = {}) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
+    }
 
-  const removeActive = (buttons) => {
-    buttons.forEach(button => {
-      if (button.classList.contains('active')) {
-        button.classList.remove('active');
-      }
+    this.element = element;
+
+    this.options = Object.assign({
+      selectorButton: '.content-switcher__btn',
+      classActive: 'active',
+    }, options);
+
+    [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
+      button.addEventListener('click', (e) => this.setActive(e));
     });
   }
 
-  addActive(csButtons);
-
-};
-
-export default ContentSwitcher;
+  setActive(e) {
+    [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
+      if (button !== e.currentTarget) {
+        toggleClass(button, this.options.classActive, false);
+      }
+    });
+    toggleClass(e.currentTarget, this.options.classActive, true);
+  }
+}
