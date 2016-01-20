@@ -1,0 +1,146 @@
+@import '_partials/vars';
+@import '_partials/mixins';
+@import '_partials/extends';
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $color__modal-bg;
+  z-index: z('hidden');
+  opacity: 0;
+  font-size: 0;
+  transition: opacity .2s, z-index 0s .2s;
+}
+
+.modal__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color__modal-footer;
+  padding: 1.5em 2em 2em 2em;
+  margin: 3em -3.125em -3.125em -3.125em;
+
+  .buttons {
+
+    &__cancel {
+      @include btn--secondary($color__navy-gray-6);
+      margin-right: .5em;
+    }
+
+    &__save {
+      @include btn--primary($color__blue-40, $color__blue-30);
+    }
+  }
+
+  @include breakpoint('bp--xs--major') {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  // Breakpoint so the buttons are centered between 768px - 800px
+  @include breakpoint('bp--sm--major') {
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include breakpoint('800px') {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
+
+.modal-visible {
+  z-index: z('modal');
+  opacity: 1;
+  transition: opacity .2s;
+}
+
+.modal-content {
+
+  &__heading {
+    @include type(rem(28px));
+    font-weight: 200;
+    color: $color__modal-text;
+  }
+
+  &__text {
+    padding-top: 1em;
+    color: $color__modal-text;
+    line-height: 1.5;
+  }
+}
+
+.modal-inner {
+  @include type(rem(16px));
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: $color__modal-bg--inner;
+  padding: 2.5em;
+  border-top: 6px solid $color__blue-30;
+  transition: .2s;
+  z-index: z('modal');
+  opacity: 1;
+
+  @include breakpoint('bp--sm--major') {
+    width: 50%;
+    height: auto;
+    max-height: 90%;
+  }
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: em(45px);
+  height: em(45px);
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+
+  &--icon {
+    transition: .2s;
+    height: em(44px);
+    width: em(44px);
+    fill: $color__navy-gray-6;
+
+    &:hover {
+      fill: $color__navy-gray-7;
+    }
+
+    @include breakpoint('bp--sm--major') {
+      width: em(25px);
+      height: em(25px);
+    }
+  }
+
+  @include breakpoint('bp--sm--major') {
+    width: em(30px);
+    height: em(30px);
+  }
+}
+
+.modal__header {
+  background: $color__modal-header;
+  padding: 2.8125em 3.125em 2.1875em 3.125em;
+  margin: -3.125em -3.125em 1.5em -3.125em;
+}
+
+// Example buttons for components website
+.modal-buttons button {
+  margin-right: .5em;
+}
