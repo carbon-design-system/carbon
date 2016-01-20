@@ -1,35 +1,88 @@
 @import '_partials/vars';
-@import '_partials/extends';
-@import '_partials/mixins';
 
-.table-section {
-  @extend %table-section--base;
-  @extend %helvetica-normal;
+.table {
+  @include type('body');
+  color: $color__table-text;
+  width: 100%;
+  // border-spacing: 0;
 
-  &__header {
-    @extend %table-section__header;
+  &__row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__main-title {
+    // @extend %font-smoothing;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+    background-color: $color__table-bg;
+    padding: $padding__table;
+    font-weight: 700;
+    border-bottom: 1px solid $color__table-border;
+
+    .link {
+      text-decoration: none;
+    }
+  }
+
+  &__column-title {
+    // @extend %font-smoothing;
+    flex: 1;
+    text-align: left;
+    background-color: $color__table-bg;
+    padding: $padding__table;
+    font-weight: 700;
   }
 }
 
-.header__row--heading {
-  @extend %header__row--heading;
-}
-
-.body__row {
-  @extend %row--cell;
-
-  &:hover,
-  &:focus {
-    background-color: $color__table--light-blue;
+.table__body {
+  &__cell {
+    flex: 1;
+    text-align: left;
+    padding: $padding__table;
+    font-size: .875rem;
   }
 
-  &--cell {
-    @extend %row--cell;
+  .table__row {
+
+    &:nth-child(odd) {
+      background-color: $color__table-row--odd;
+    }
+
+    &:nth-child(even) {
+      background-color: $color__table-bg;
+    }
+
+    &:focus,
+    &:hover {
+      background-color: $color__table-row--hover;
+    }
   }
 }
 
-.footer__row {
-  &--cell {
-    @extend %row--cell;
+/////////////////////
+// Configurations
+/////////////////////
+
+.table {
+  .cta {
+    // Use .cta as a modifier for <th> or <td> classes when including:
+    // * Status icon
+    // * Checkbox
+    // * etc.
+    flex: none;
+  }
+
+  [data-sortable] {
+    cursor: pointer;
+  }
+
+  .status-icon { // !temporary
+    // example of a status-icon to use inside `.cta`
+    width: 1em;
+    height: 1em;
+    background-color: $color__green-30;
   }
 }
