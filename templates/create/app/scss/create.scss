@@ -7,7 +7,7 @@
 /////////////////////////
 
 // Vendor
-@import 'bower_components/bluemix-icons/icons';
+@import '../../../icons';
 @import 'bower_components/IBM-Design-Colors/ibm-colors';
 
 // Global
@@ -36,7 +36,6 @@
 @import 'components/form-footer/form-footer';
 
 // Local
-
 @import 'utility/toolkit';
 @import 'utility/overrides';
 @import 'layout/create';
