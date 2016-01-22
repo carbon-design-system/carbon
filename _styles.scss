@@ -6,13 +6,7 @@
 @import '../IBM-Design-Colors/ibm-colors';
 
 // Global
-@import 'global/colors/colors';
-@import 'global/fonts/font-face';
-@import 'global/reset/reset';
-@import 'global/typography/typography';
-@import 'global/layout/grid';
-@import 'global/layout/z-index';
-
+@import 'global/global';
 
 // Base Elements
 @import 'base-elements/body/body';
