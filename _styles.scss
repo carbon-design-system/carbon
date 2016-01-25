@@ -20,6 +20,8 @@
 @import 'base-elements/links/links';
 @import 'base-elements/lists/lists';
 @import 'base-elements/tables/tables';
+@import 'base-elements/footer/footer/footer';
+@import 'base-elements/footer/form-footer/form-footer';
 
 // Components
 @import 'components/alerts/alerts';
@@ -30,7 +32,6 @@
 @import 'components/dropdown/dropdown';
 @import 'components/fab-label/fab-label';
 @import 'components/floating-action-button/floating-action-button';
-@import 'components/form-footer/form-footer';
 @import 'components/global-profile/global-profile';
 @import 'components/global-header/global-header';
 @import 'components/item-list/item-list';
@@ -38,6 +39,5 @@
 @import 'components/taxonomy-item/taxonomy-item';
 @import 'components/tooltips/tooltips';
 @import 'components/overflow-menu/overflow-menu';
-@import 'components/form-footer/form-footer';
 @import 'components/content-switcher/content-switcher';
 @import 'components/modals/modals';

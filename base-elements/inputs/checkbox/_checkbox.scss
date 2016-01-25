@@ -6,6 +6,7 @@
   display: flex;
   align-items: baseline;
   cursor: pointer;
+  align-items: baseline;
 
   &__input {
     visibility: hidden;
@@ -26,7 +27,7 @@
 
   &__label {
     @extend %p;
-    margin-left: .75em;
+    margin-left: .5em;
     font-weight: bold;
   }
 }
