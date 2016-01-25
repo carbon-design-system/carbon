@@ -10,10 +10,7 @@ const adaro = require('adaro');
 
 const templateDirectories = [
   'global/colors/*.html',
-  'components/global-header/global-header.html',
-  'components/global-header/global-header--ghost.html',
-  'components/global-header/global-header--light-ui.html',
-  'components/global-header/global-header--light-ui--ghost.html',
+  'components/header/header.html',
   'components/taxonomy-item/taxonomy-items.html',
   'base-elements/**/*.html',
   'components/**/*.html',
