@@ -1,5 +1,10 @@
 # Contributing to Bluemix Components
 
+# Guidlines
+
+Please be sure reading [our guidelines](https://github.ibm.com/Bluemix/bluemix-components/wiki/Rules-for-Contributing-Code).
+More details can be found in [our wiki](https://github.ibm.com/Bluemix/bluemix-components/wiki).
+
 # Forks
 
 **What's a fork?**

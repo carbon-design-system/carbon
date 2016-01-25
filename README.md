@@ -26,6 +26,8 @@ You must have **node.js 4 or higher** in order to run this project locally on yo
 
 It's recommended to use [`nvm` (node version manager)](https://github.com/creationix/nvm) to use the latest version of `node.js` (4 or higher).
 
+Detailed steps as well as our guidelines can be found in [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ## Install
 
 ### Requirements
