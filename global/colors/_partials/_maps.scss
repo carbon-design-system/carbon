@@ -11,19 +11,18 @@ $palette__modified: (
 );
 
 // IBM Colors
-// Will eventually use hexcodes instead of color()
 
 $palette__ibm: (
-  'blue-20'  : color('blue', 20),
-  'blue-30'  : color('blue', 30),
-  'blue-40'  : color('blue', 40),
-  'blue-90'  : color('blue', 90),
-  'green-30' : color('green', 30),
-  'red-40'   : color('red', 40),
-  'teal-20'  : color('teal', 20),
-  'teal-30'  : color('teal', 30),
-  'yellow-30': color('yellow', 30),
-  'orange-30': color('orange', 30),
-  'purple-40': color('purple', 40),
-  'white'    : color('white')
+  'blue-20'  : #7cc7ff,
+  'blue-30'  : #5aaafa,
+  'blue-40'  : #5596e6,
+  'blue-90'  : #152934,
+  'green-30' : #8cd211,
+  'red-40'   : #ff5050,
+  'teal-20'  : #6eedd8,
+  'teal-30'  : #41d6c3,
+  'yellow-30': #efc100,
+  'orange-30': #ff7832,
+  'purple-40': #734098,
+  'white'    : #fff
 );
