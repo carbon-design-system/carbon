@@ -2,29 +2,83 @@
 @import '_partials/mixins';
 @import '_partials/extends';
 
-.list--icon {
+.list--icons {
+  // Uncomment the line below to test the slide-out search field
+  margin-left: 25em;
   display: flex;
-  overflow: hidden;
 
-  &__item {
-    display: block;
-    width: 1.5em;
-    height: 1.5em;
-    padding: .15em;
-    margin: 0;
-    font-size: 2em; // this will affect icon size, keep em unit
-    text-align: center;
-    background-color: $color__navy-gray-2;
-    border-right: 1px solid $color__navy-gray-1;
-    transition-duration: .25s;
+  .slide-out-search {
+    text-align: right;
+  }
 
-    &:first-child {
-      border-left: 1px solid $color__navy-gray-1;
+  .search-field {
+    @include type(em(12px));
+    width: 0;
+    padding: 1.36em;
+    margin-left: -22em;
+    background-color: transparent;
+    color: $color__white;
+    border: none;
+    transition: width .5s, background .5s;
+    outline: none; // Because of the slide out effect of the element, this is approved regarding accessibility
+
+    &::placeholder {
+      opacity: 0;
+      font-style: italic;
+      transition: .5s;
+      color: $color__white;
     }
 
-    &:hover,
     &:focus {
-      background-color: mix($color__navy-gray-2, $color__white, 97%);
+      outline-width: 1px;
+    }
+  }
+
+  .show-search {
+    width: 22em;
+    padding: 1.36em;
+    background-color: $color__navy-gray-2;
+
+    &::placeholder {
+      opacity: 1;
+    }
+  }
+
+  .item-icon {
+    width: em(8px);
+    height: em(8px);
+    fill: $color__navy-gray-7;
+
+    &:active, &:hover, &:focus {
+      fill: $color__blue-40;
+    }
+  }
+
+  .list--icon {
+    display: flex;
+    overflow: hidden;
+
+    &__item {
+      display: block;
+      font-size: 2em; // this will affect icon size, keep em unit
+      margin: 0;
+      padding: .15em;
+      width: 1.5em;
+      height: 1.5em;
+      text-align: center;
+      background-color: $color__navy-gray-2;
+      transition-duration: .25s;
+      cursor: pointer;
+      border-right: 1px solid $color__navy-gray-1;
+
+      &:first-child {
+        border-left: 1px solid $color__navy-gray-1;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: mix($color__navy-gray-2, $color__white, 97%);
+      }
     }
   }
 }

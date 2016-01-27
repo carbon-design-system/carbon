@@ -5,6 +5,7 @@ import ContentSwitcher from './components/content-switcher/content-switcher';
 import OverflowMenu from './components/overflow-menu/overflow-menu';
 import Modal from './components/modals/modals';
 import Header from './components/header/header';
+import Lists from './base-elements/lists/lists';
 
 Fab();
 Tab();
@@ -13,3 +14,4 @@ ContentSwitcher();
 OverflowMenu();
 Modal();
 Header();
+Lists();
