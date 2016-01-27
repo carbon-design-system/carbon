@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <title>Bluemix Components</title>
-  <link rel="stylesheet" href="/css/dev.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/dev-colors.css">
   <link rel="stylesheet" href="/css/dev-typography.css">
   <style>
