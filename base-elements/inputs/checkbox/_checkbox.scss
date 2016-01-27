@@ -3,14 +3,12 @@
 
 .checkbox {
   @extend %checkbox;
-  // display: inline-block;
   cursor: pointer;
   line-height: 2;
-  font-size: 1rem;
+  font-size: .875rem;
 
   &__label {
     position: relative;
-    margin-left: .5em;
     font-weight: bold;
   }
 }

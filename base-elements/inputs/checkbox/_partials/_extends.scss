@@ -19,7 +19,7 @@
     display: inline-block;
     width: .75em;
     height: .75em;
-    vertical-align: -.25em;
+    vertical-align: -.1em;
     background-color: $color__checkbox--bg;
     border: 2px solid $color__checkbox--border;
     margin-right: .5em;
@@ -31,6 +31,7 @@
 
   [type='checkbox']:checked + .checkbox__label:before {
     background: $color__checkbox--bg--checked;
+    border-color: transparent;
   }
 
   [type='checkbox']:checked + .checkbox__label:after {
@@ -40,7 +41,7 @@
     background-color: transparent;
     width: em(11px);
     height: em(5px);
-    top: em(12px);
+    top: em(10px);
     left: em(2px);
     border: 2px solid $color__checkbox--border--checked;
     border-top: none;
