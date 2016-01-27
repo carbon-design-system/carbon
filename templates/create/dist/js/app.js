@@ -46,16 +46,57 @@
 
 	'use strict';
 	
-	var _contentSwitcher = __webpack_require__(1);
+	var _file = __webpack_require__(1);
+	
+	var _file2 = _interopRequireDefault(_file);
+	
+	var _contentSwitcher = __webpack_require__(2);
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	(0, _file2.default)();
 	(0, _contentSwitcher2.default)();
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	var FileUploader = function FileUploader() {
+	  var fileInput = [].concat(_toConsumableArray(document.querySelectorAll('input.file__input')));
+	
+	  fileInput.forEach(function (input) {
+	    var label = input.nextElementSibling;
+	
+	    input.addEventListener('change', function (e) {
+	      var fileName = '';
+	
+	      if (input.files && input.files.length > 1) {
+	        fileName = (input.getAttribute('data-multiple-caption') || '').replace('{count}', input.files.length);
+	      } else {
+	        fileName = e.target.value.split('\\').pop();
+	      }
+	
+	      if (fileName) {
+	        label.innerHTML = fileName;
+	      }
+	    });
+	  });
+	};
+	
+	exports.default = FileUploader;
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';

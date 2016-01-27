@@ -29,11 +29,12 @@
 @import 'base-elements/inputs/text/text';
 @import 'base-elements/links/links';
 @import 'base-elements/lists/lists';
+@import 'base-elements/footer/footer/footer';
+@import 'base-elements/footer/form-footer/form-footer';
 
 // Components
 @import 'components/content-switcher/content-switcher';
 @import 'components/detail-page-header/detail-page-header';
-@import 'components/form-footer/form-footer';
 
 // Local
 @import 'utility/toolkit';
