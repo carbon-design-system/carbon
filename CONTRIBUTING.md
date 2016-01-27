@@ -27,7 +27,13 @@ A fork is a copy of a repo.
 * Go to your GitHub profile.
 * Find bluemix-comonents.
 * Copy the **SSH clone URL**.
-* `git clone git@github.ibm.com:YOUR_USERNAME/bluemix-components.git`
+
+In your terminal:
+
+```
+git clone git@github.ibm.com:YOUR_USERNAME/bluemix-components.git
+cd bluemix-components
+```
 
 See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more details.
 
@@ -43,8 +49,9 @@ A remote is a connection to other repos.
 When you clone your personal repo, you will see `origin` is set up for you already by default. This should be pointing to your personal repo.
 
 ```
-git remote add upstream git@github.ibm.com:puppycat/forking.git
-git remote add brian git@github.ibm.com:bthan/forking.git
+git remote add upstream git@github.ibm.com:Bluemix/bluemix-components.git
+git remote add brian git@github.ibm.com:bthan/bluemix-components.git
+git remote -v
 ```
 
 * `origin`: connection to your fork
