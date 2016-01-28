@@ -1,0 +1,93 @@
+%radio {
+  [type='radio'] {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  [type='radio'] + .radio__label {
+    display: inline-block;
+  }
+
+  [type='radio'] + .radio__label:before {
+    content: '';
+    display: inline-block;
+    width: .75em;
+    height: .75em;
+    vertical-align: -.1em;
+    background-color: $color__radio--bg;
+    border: 2px solid $color__radio--border;
+    margin-right: .5em;
+    border-radius: 50%;
+  }
+
+  [type='radio']:focus + .radio__label:before {
+    box-shadow: 0px 0px 1px 1px $color__box-shadow;
+  }
+
+  [type='radio']:checked + .radio__label:before {
+    border-color: $color__radio--bg--selected;
+  }
+
+  [type='radio']:checked + .radio__label:after {
+    background-color: $color__radio--bg--selected;
+    border-color: $color__radio--bg--selected;
+    width: em(8px);
+    height: em(8px);
+    position: absolute;
+    content: '';
+    top: em(12px);
+    left: em(4px);
+    border-radius: 50%;
+  }
+
+  [type='radio']:hover + .radio__label:before {
+    background-color: #222222; //temporary
+  }
+
+  [type='radio']:checked:hover + .radio__label:after {
+    background-color: $color__radio--hover;
+    border-color: $color__radio--hover;
+  }
+
+  // disabled
+  [type='radio']:disabled + .radio__label:before {
+    content: '';
+    display: inline-block;
+    width: .75em;
+    height: .75em;
+    vertical-align: -.1em;
+    background-color: $color__radio--bg;
+    border: 2px solid $color__radio--border;
+    margin-right: .5em;
+    border-radius: 50%;
+    opacity: .5;
+  }
+
+  [type='radio']:disabled + .radio__label:after {
+    background-color: transparent;
+  }
+
+  [type='radio']:checked:disabled + .radio__label:after {
+    background-color: $color__radio--bg--selected;
+    border-color: $color__radio--bg--selected;
+    width: em(8px);
+    height: em(8px);
+    position: absolute;
+    content: '';
+    top: em(12px);
+    left: em(4px);
+    border-radius: 50%;
+    opacity: .5;
+  }
+
+   [type='radio']:checked:disabled + .radio__label:before {
+    border-color: $color__radio--bg--selected;
+    opacity: .5;
+  }
+}
