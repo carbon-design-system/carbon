@@ -33,7 +33,6 @@
   }
 
   &__breadcrumb {
-    @extend %helvetica;
     @include type(rem(14px));
     color: $color__white;
     margin-bottom: rem(8px);

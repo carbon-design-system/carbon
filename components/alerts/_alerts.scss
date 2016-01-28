@@ -26,16 +26,13 @@
       margin: .4em 0;
     }
     .alert__title {
-      @extend %helvetica;
       font-size: 1.5rem;
     }
     .alert__subtitle {
-      @extend %helvetica;
       margin-bottom: 1em;
       color: $color__white;
     }
     .alert__caption {
-      @extend %helvetica;
       color: $color__white;
     }
   }
