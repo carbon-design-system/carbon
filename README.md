@@ -62,6 +62,12 @@ Install the bower package:
 bower install bluemix-components --save
 ```
 
+If you are on a Unix-based system (such as on a Mac), you can do the above four steps in one step by typing the following into your terminal:
+
+```bash
++touch .bowerrc && echo '{ "registry": "http://x1showcase.emmlabs.ibm.com:5678/" }' > .bowerrc && bower init && bower install bluemix-components --save
+```
+
 ## Usage
 
 See [examples/getting-started](https://github.ibm.com/Bluemix/bluemix-components/tree/master/examples/getting-started) for how to:
