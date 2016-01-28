@@ -15,7 +15,7 @@ static/*
 npm-debug.log
 
 # Editors
-project.swublime-project
+project.sublime-project
 project.sublime-workspace
 jsconfig.json
 .vscode
