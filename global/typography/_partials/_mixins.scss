@@ -1,6 +1,4 @@
 @mixin type($size) {
-  @extend %helvetica;
-
   @if map-has-key($typescale-map, $size) {
     font-size: map-get($typescale-map, $size);
   }
