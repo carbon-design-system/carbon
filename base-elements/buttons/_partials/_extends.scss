@@ -1,13 +1,13 @@
 %btn--base {
   @extend %strong;
-  cursor: pointer;
   display: inline-block;
-  min-width: em(200px);
   height: em(40px);
+  min-width: em(200px);
+  padding: 0 1em;
   text-align: center;
   text-decoration: none;
   text-transform: capitalize;
-  padding: 0 1em;
+  cursor: pointer;
   transition: background-color 150ms ease-in, color 150ms ease-in;
 
   &:disabled {
@@ -25,6 +25,6 @@
 %btn--secondary {
   @extend %btn--base;
 
-  border-width: 2px;
   border-style: solid;
+  border-width: 2px;
 }

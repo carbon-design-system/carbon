@@ -3,19 +3,19 @@
 @import '_partials/extends';
 
 .modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: z('hidden');
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  content: '';
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: $color__modal-bg;
-  z-index: z('hidden');
-  opacity: 0;
   font-size: 0;
+  background: $color__modal-bg;
+  content: '';
+  opacity: 0;
   transition: opacity .2s, z-index 0s .2s;
 }
 
@@ -23,9 +23,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $color__modal-footer;
   padding: 1.5em 2em 2em 2em;
   margin: 3em -3.125em -3.125em -3.125em;
+  background: $color__modal-footer;
 
   .buttons {
 
@@ -72,26 +72,26 @@
 
   &__text {
     padding-top: 1em;
-    color: $color__modal-text;
     line-height: 1.5;
+    color: $color__modal-text;
   }
 }
 
 .modal-inner {
   @include type(rem(16px));
   position: relative;
-  overflow: hidden;
+  z-index: z('modal');
   width: 100%;
-  max-height: 100%;
   height: 100%;
+  max-height: 100%;
+  padding: 2.5em;
+  overflow: hidden;
   overflow-x: hidden;
   overflow-y: auto;
   background: $color__modal-bg--inner;
-  padding: 2.5em;
   border-top: 6px solid $color__blue-30;
-  transition: .2s;
-  z-index: z('modal');
   opacity: 1;
+  transition: .2s;
 
   @include breakpoint('bp--sm--major') {
     width: 50%;
@@ -106,16 +106,16 @@
   right: 10px;
   width: em(45px);
   height: em(45px);
+  padding: 0;
   overflow: hidden;
   cursor: pointer;
-  border: none;
   background-color: transparent;
-  padding: 0;
+  border: none;
 
   &--icon {
-    transition: .2s;
-    height: em(44px);
     width: em(44px);
+    height: em(44px);
+    transition: .2s;
     fill: $color__navy-gray-6;
 
     &:hover {
@@ -135,9 +135,9 @@
 }
 
 .modal__header {
-  background: $color__modal-header;
   padding: 2.8125em 3.125em 2.1875em 3.125em;
   margin: -3.125em -3.125em 1.5em -3.125em;
+  background: $color__modal-header;
 }
 
 // Example buttons for components website

@@ -3,17 +3,17 @@
 /////////////////
 
 @mixin data-module($data-module-type) {
-	@if ($data-module-type == 'activity-log') {
-		.activity-log {
-			@include activity-log;
-		}
-	}
+  @if ($data-module-type == 'activity-log') {
+    .activity-log {
+      @include activity-log;
+    }
+  }
 
-	@elseif ($data-module-type == 'metrics') {
-		.metrics {
-			@extend %metrics;
-		}
-	}
+  @elseif ($data-module-type == 'metrics') {
+    .metrics {
+      @extend %metrics;
+    }
+  }
 }
 
 //////////////////
@@ -21,94 +21,93 @@
 //////////////////
 
 @mixin activity-log {
-	&__headline {
-		@include type(.875rem);
+  &__headline {
+    @include type(.875rem);
 
-		color: $color--headline;
-		font-weight: 600;
-		padding: 2em;
-		border-bottom: 1px solid $color__navy-gray-6;
-		width: 100%;
-	}
+    width: 100%;
+    padding: 2em;
+    font-weight: 600;
+    color: $color--headline;
+    border-bottom: 1px solid $color__navy-gray-6;
+  }
 
-	&__feed {
-		overflow: scroll;
-		list-style-type: none;
-		padding: 0em 1em 1em 2em;
-		max-height: em(295px);
+  &__feed {
+    max-height: em(295px);
+    padding: 0em 1em 1em 2em;
+    overflow: scroll;
+    list-style-type: none;
 
-		.feed__item {
-			position: relative;
-			padding: 0 0 0 1em;
+    .feed__item {
+      position: relative;
+      padding: 0 0 0 1em;
 
-			&::before {
-				content: '\2022'; // Filled circle
-				color: $color__white;
-				position: relative;
-				top: em(7px);
-				left: em(-17px);
-			}
+      &::before {
+        position: relative;
+        top: em(7px);
+        left: em(-17px);
+        color: $color__white;
+        content: '\2022'; // Filled circle
+      }
 
-			&--activity {
-				@extend %p;
-				margin: em(-10px);
-				padding-left: em(15px);
-			}
+      &--activity {
+        @extend %p;
+        padding-left: em(15px);
+        margin: em(-10px);
+      }
 
-			&--user-activity {
-				padding-left: em(15px);
+      &--user-activity {
+        padding-left: em(15px);
 
-				&::before {
-					content: '';
-				    background-image: url('http://bit.ly/1QWOZe2'); // !temporary
-				    background-size: 100%;
-				    background-repeat: no-repeat;
-				    position: relative;
-				    left: -27px;
-				    top: 14px;
-				    display: inline-block;
-				    border-radius: 50%;
-				    border: 2px solid $color__white;
-				    width: em(25px);
-				    height: em(25px);
-				    text-decoration: none;
-				    margin-right: 1em;
-				    color: $color__white;
-				 }
+        &::before {
+          position: relative;
+          top: 14px;
+          left: -27px;
+          display: inline-block;
+          width: em(25px);
+          height: em(25px);
+          margin-right: 1em;
+          color: $color__white;
+          text-decoration: none;
+          background-image: url('http://bit.ly/1QWOZe2'); // !temporary
+          background-repeat: no-repeat;
+          background-size: 100%;
+          border: 2px solid $color__white;
+          border-radius: 50%;
+          content: '';
+       }
 
-				&::after {
-					content: ' ';
-					position: relative;
-					border: 1px solid $color--border;
-					padding-top: .6em;
-					top: em(-15px);
-					left: em(-15px);
-				}
+        &::after {
+          position: relative;
+          top: em(-15px);
+          left: em(-15px);
+          padding-top: .6em;
+          border: 1px solid $color--border;
+          content: ' ';
+        }
+      }
+    }
 
-			}
-		}
+    .item {
+      &__activity-desc {
+        position: relative;
+        top: em(-21px);
+        padding-left: 5em;
+        font-weight: 200;
+        line-height: 2;
+      }
 
-		.item {
-			&__activity-desc {
-				font-weight: 200;
-				line-height: 2;
-				padding-left: 5em;
-				top: em(-21px);
-				position: relative;
-			}
+      &__line {
+        display: inline-block;
+        padding: .8em 0;
+        border-left: 2px solid $color--border;
+      }
+    }
 
-			&__line {
-				border-left: 2px solid $color--border;
-				padding: .8em 0;
-				display: inline-block;
-			}
-		}
-
-		.activity-desc {
-			&__time {
-				color: $color--desc;
-				padding-left: .5em;
-			}
-		}
-	}
+    .activity-desc {
+      &__time {
+        padding-left: .5em;
+        color: $color--desc;
+      }
+    }
+  }
 }

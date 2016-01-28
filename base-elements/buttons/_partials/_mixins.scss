@@ -1,8 +1,8 @@
 @mixin btn--primary($background, $active-background, $color--text: $color__btn--text) {
   @extend %btn--primary;
 
-  background-color: $background;
   color: $color--text;
+  background-color: $background;
 
   &:hover,
   &:focus {
@@ -17,18 +17,18 @@
 @mixin btn--secondary($active-background, $color--text: $active-background) {
   @extend %btn--secondary;
 
-  border-color: $active-background;
-  background-color: transparent;
   color: $color--text;
+  background-color: transparent;
+  border-color: $active-background;
 
   &:hover,
   &:focus {
-    background-color: $active-background;
     color: $color__btn--text;
+    background-color: $active-background;
 
     &:disabled {
-      background-color: transparent;
       color: $color--text;
+      background-color: transparent;
     }
   }
 }

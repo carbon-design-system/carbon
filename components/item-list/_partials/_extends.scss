@@ -1,252 +1,266 @@
 // GENERAL ITEM LIST STYLES
 
 %item-list {
-	margin: 5em auto;
-	list-style: none;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-	justify-content: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  width: 100%;
+  margin: 5em auto;
+  list-style: none;
 }
 
 %item-list__item {
-	margin-right: 0;
-	padding: 3em 1em 3em 1em;
-	width: 50%;
-	&:nth-child(n+3){
-		border-top: 1px solid $color__navy-gray-4;
-		@include breakpoint(bp--xs--major){
-			border: none;
-		}
-	}
-	&:nth-child(even){
-		border-left: 1px solid $color__navy-gray-4;
-		@include breakpoint(bp--xs--major){
-			border: none;
-		}
-	}
-	&:nth-child(4n+1), &:nth-child(4n+2){
-		background-color: rgba($color__navy-gray-1, 0.1);
-		@include breakpoint(bp--xs--major){
-			background-color: transparent;
-		}
-	}
-	@include breakpoint(bp--xs--major){
-		display: flex;
-		justify-content: flex-start;
-	}
+  width: 50%;
+  padding: 3em 1em 3em 1em;
+  margin-right: 0;
+
+  &:nth-child(n+3) {
+    border-top: 1px solid $color__navy-gray-4;
+    @include breakpoint(bp--xs--major) {
+      border: none;
+    }
+  }
+
+  &:nth-child(even) {
+    border-left: 1px solid $color__navy-gray-4;
+    @include breakpoint(bp--xs--major) {
+      border: none;
+    }
+  }
+
+  &:nth-child(4n+1), &:nth-child(4n+2) {
+    background-color: rgba($color__navy-gray-1, .1);
+    @include breakpoint(bp--xs--major) {
+      background-color: transparent;
+    }
+  }
+
+  @include breakpoint(bp--xs--major) {
+    display: flex;
+    justify-content: flex-start;
+  }
 }
 
 %item__icon {
-	display: block;
-	margin: auto auto 2em auto;
-	width: em(80px);
-	height: em(80px);
-	background-position: center center;
-	background-repeat: no-repeat;
-	@include breakpoint(bp--xs--major){
-		margin: 0;
-		flex-shrink: 0;
-	}
+  display: block;
+  width: em(80px);
+  height: em(80px);
+  margin: auto auto 2em auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  @include breakpoint(bp--xs--major) {
+    flex-shrink: 0;
+    margin: 0;
+  }
 }
 
 %item__text {
-	margin-left: 0;
-	width: 100%;
-	text-align: center;
-	max-width: em(325px);
-	min-width: em(170px);
-	@include breakpoint(550px){
-		display: inline;
-		text-align: left;
-		margin-left: 1em;
-		flex-shrink: 1;
-	}
+  width: 100%;
+  max-width: em(325px);
+  min-width: em(170px);
+  margin-left: 0;
+  text-align: center;
+  @include breakpoint(550px) {
+    display: inline;
+    flex-shrink: 1;
+    margin-left: 1em;
+    text-align: left;
+  }
 
 
 }
 
 %text__headline {
-	font-weight: 600;
-	margin-bottom: .5em;
-	@include breakpoint(bp-sm--major){
-		margin-bottom: .2em;
-	}
+  margin-bottom: .5em;
+  font-weight: 600;
+  @include breakpoint(bp-sm--major) {
+    margin-bottom: .2em;
+  }
 }
 
 
 
 %text__desc {
-	display: none;
-	line-height: 1.5;
-	letter-spacing: rem(.2px); // !temporary
-	font-weight: 200;
-	@include breakpoint(bp--xs--major){
-		display: none;
-	}
-	@include breakpoint(550px){
-		display: block;
-	}
+  display: none;
+  font-weight: 200;
+  line-height: 1.5;
+  letter-spacing: rem(.2px); // !temporary
+  @include breakpoint(bp--xs--major) {
+    display: none;
+  }
+  @include breakpoint(550px) {
+    display: block;
+  }
 }
 
-%text__action{
-	display: inline;
-	@include breakpoint(bp--xs--major){
-		display: none;
-	}
+%text__action {
+  display: inline;
+  @include breakpoint(bp--xs--major) {
+    display: none;
+  }
 }
 
 // CATALOG ITEMS STYLES
 
 %item-list--catalog {
-	@extend %item-list;
+  @extend %item-list;
 }
 
 %item-list--summary {
-	@extend %item-list;
+  @extend %item-list;
 }
 
 %catalog__item {
-	@extend %item-list__item;
-	padding-left: 1em;
-	padding-right: 1em;
+  @extend %item-list__item;
+  padding-right: 1em;
+  padding-left: 1em;
 
-	&:nth-child(odd){
-		padding-left: 0;
-	}
-	&:nth-child(even){
-		padding-right: 0;
-	}
+  &:nth-child(odd) {
+    padding-left: 0;
+  }
 
-	@include breakpoint(bp--xs--major){
-		&:nth-child(odd){
-			padding-left: em(20px);
-		}
-		&:nth-child(even){
-			padding-right: em(20px);
-		}
-	}
+  &:nth-child(even) {
+    padding-right: 0;
+  }
 
-	@include breakpoint(550px){
-		&:nth-child(odd){
-			padding-left: 0;
-		}
-		&:nth-child(even){
-			padding-right: 0;
-		}
-	}
+  @include breakpoint(bp--xs--major) {
+    &:nth-child(odd) {
+      padding-left: em(20px);
+    }
 
-	@include breakpoint(bp--md--major){
-		&:nth-child(n){
-			padding-left: 1em;
-			padding-right: 1em;
-		}
-		&:nth-child(3n+1){
-			padding-left: 0;
-		}
-		&:nth-child(3n+3){
-			padding-right: 0;
-		}
-		width: 33%;
-	}
-	@include breakpoint(bp--lg--major){
-		width: 25%;
-		&:nth-child(n){
-			padding-left: 1em;
-			padding-right: 1em;
-		}
-		&:nth-child(4n+1){
-			padding-left: 0;
-		}
-		&:nth-child(4n+4){
-			padding-right: 0;
-		}
-	}
+    &:nth-child(even) {
+      padding-right: em(20px);
+    }
+  }
+
+  @include breakpoint(550px) {
+    &:nth-child(odd) {
+      padding-left: 0;
+    }
+
+    &:nth-child(even) {
+      padding-right: 0;
+    }
+  }
+
+  @include breakpoint(bp--md--major) {
+    &:nth-child(n) {
+      padding-right: 1em;
+      padding-left: 1em;
+    }
+
+    &:nth-child(3n+1) {
+      padding-left: 0;
+    }
+
+    &:nth-child(3n+3) {
+      padding-right: 0;
+    }
+
+    width: 33%;
+  }
+  @include breakpoint(bp--lg--major) {
+    width: 25%;
+
+    &:nth-child(n) {
+      padding-right: 1em;
+      padding-left: 1em;
+    }
+
+    &:nth-child(4n+1) {
+      padding-left: 0;
+    }
+
+    &:nth-child(4n+4) {
+      padding-right: 0;
+    }
+  }
 }
 
 %item__icon--catalog {
-	@extend %item__icon;
-	background-size: 50px auto;
-	border-radius: 50%;
-	border: 1px solid $color__blue-20;
-	background-color: $color__white;
-	@include breakpoint(bp--xs--major){
-		width: 50px;
-		height: 50px;
-		background-size: 30px 30px;
-	}
+  @extend %item__icon;
+  background-color: $color__white;
+  background-size: 50px auto;
+  border: 1px solid $color__blue-20;
+  border-radius: 50%;
+  @include breakpoint(bp--xs--major) {
+    width: 50px;
+    height: 50px;
+    background-size: 30px 30px;
+  }
 }
 
 %text__headline--catalog {
-	@extend %text__headline;
-	@include type(rem(14px));
+  @extend %text__headline;
+  @include type(rem(14px));
 }
 
 %text__desc--catalog {
-	@extend %text__desc;
-	@include type($catalog--caption__type);
+  @extend %text__desc;
+  @include type($catalog--caption__type);
 }
 
 %text__action--catalog {
-	@extend %text__action;
-	@include type($catalog--caption__type);
+  @extend %text__action;
+  @include type($catalog--caption__type);
 
-	color: $color__blue-20;
+  color: $color__blue-20;
 }
 
 // SUMMARY ITEMS STYLES
 %item-list--summary {
-	@extend %item-list;
-	@include breakpoint(bp--xs--major){
-		width: 75%;
-		margin: 2em auto;
-		min-width: 500px;
-	}
+  @extend %item-list;
+  @include breakpoint(bp--xs--major) {
+    width: 75%;
+    min-width: 500px;
+    margin: 2em auto;
+  }
 }
 
 %summary__item {
-	@extend %item-list__item;
-	@include breakpoint(bp--xs--major){
-		width: 45%;
-		&:nth-child(odd){
-			margin-right: 10%;
-		}
-	}
+  @extend %item-list__item;
+  @include breakpoint(bp--xs--major) {
+    width: 45%;
+
+    &:nth-child(odd) {
+      margin-right: 10%;
+    }
+  }
 }
 
 %item__icon--summary {
-	@extend %item__icon;
-	background-size: 50px auto;
-	@include breakpoint(bp--xs--major){
-		width: 40px;
-		height: 40px;
-		background-size: 40px auto;
-	}
+  @extend %item__icon;
+  background-size: 50px auto;
+  @include breakpoint(bp--xs--major) {
+    width: 40px;
+    height: 40px;
+    background-size: 40px auto;
+  }
 }
 
 %text__headline--summary {
-	@extend %text__headline;
-	@include type(rem(20px));
+  @extend %text__headline;
+  @include type(rem(20px));
 }
 
 %text__desc--summary {
-	@extend %text__desc;
-	@include type($summary--caption__type)
+  @extend %text__desc;
+  @include type($summary--caption__type)
 }
 
-%text__action--summary{
-	@extend %text__action;
-	@include type($summary--caption__type);
+%text__action--summary {
+  @extend %text__action;
+  @include type($summary--caption__type);
 
-	color: $color__blue-20;
+  color: $color__blue-20;
 }
 
 // CONTENT SPECIFIC STYLES
-%item__icon--apache__spark{
-	@include icon('icon-example','svg');
+%item__icon--apache__spark {
+  @include icon('icon-example', 'svg');
 }
 
-%item__icon--cloud__foundry{
-	// !temporary
-	@include icon('icon-example-s','png');
+%item__icon--cloud__foundry {
+  // !temporary
+  @include icon('icon-example-s', 'png');
 }

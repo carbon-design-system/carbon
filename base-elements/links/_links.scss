@@ -1,10 +1,10 @@
 @import '_partials/vars';
 
 .link {
-  text-decoration: underline;
   font-weight: bold;
-  transition: $transition--link;
   color: $color--link;
+  text-decoration: underline;
+  transition: $transition--link;
 
   &:visited {
     color: $color--link;

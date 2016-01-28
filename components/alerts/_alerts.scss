@@ -15,9 +15,9 @@
 
   &--danger, &--running, &--warning, &--misc, &--info {
     @extend %font-smoothing;
-    background-color: $color--alerts--bg;
     flex: 1;
     padding: .3em 0 .3em .5em;
+    background-color: $color--alerts--bg;
     border-right: 3px solid $color--alerts--border;
 
     .alert__title,
@@ -25,22 +25,25 @@
     .alert__caption {
       margin: .4em 0;
     }
+
     .alert__title {
       font-size: 1.5rem;
     }
+
     .alert__subtitle {
       margin-bottom: 1em;
       color: $color__white;
     }
+
     .alert__caption {
       color: $color__white;
     }
   }
 
   .alert__close {
+    margin: .3em 0;
     background-color: $color__navy-gray-2;
     border: none;
-    margin: .3em 0;
 
     span {
       padding: .1em;

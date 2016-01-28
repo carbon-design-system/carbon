@@ -1,31 +1,31 @@
 %fab-label {
-	padding: 1em;
-	margin-right: .5em;
-	background-color: $label-bg;
-	float: left;
-	position: relative;
-	margin: 1em 4em;
-	text-align: center;
+  position: relative;
+  float: left;
+  padding: 1em;
+  margin: 1em 4em;
+  margin-right: .5em;
+  text-align: center;
+  background-color: $label-bg;
 
-	&__text {
-		color: $color__blue-30;
-		font-style: italic;
-		font-weight: 400;
-		position: relative;
-		z-index: 3;
-	}
+  &__text {
+    position: relative;
+    z-index: 3;
+    font-style: italic;
+    font-weight: 400;
+    color: $color__blue-30;
+  }
 
-	&:before {
-		content: '';
-		float: left;
-		width: 0;
-		height: 0;
-		border: 48px solid transparent;
-		border-right: 48px solid $label-bg;
-		position: absolute;
-		left: -47px;
-		top: -48px;
-		transform: rotate(90deg);
-		z-index:2;
-	}
+  &:before {
+    position: absolute;
+    top: -48px;
+    left: -47px;
+    z-index: 2;
+    float: left;
+    width: 0;
+    height: 0;
+    border: 48px solid transparent;
+    border-right: 48px solid $label-bg;
+    content: '';
+    transform: rotate(90deg);
+  }
 }

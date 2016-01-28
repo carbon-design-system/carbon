@@ -3,10 +3,10 @@
 
 .overflow-menu {
   display: flex;
-  cursor: pointer;
   width: 2em;
   height: 3em;
   margin: 1em;
+  cursor: pointer;
 
   // horizontal rule styling
   hr {
@@ -16,38 +16,38 @@
 
   // Initial styling for the options pane
   &__options {
-    transition-duration: .25s;
-    display: none;
     position: absolute;
+    display: none;
+    padding: .25em 0;
     margin: 2.5em 0 0 -3em;
     background: $color--list-bg;
-    padding: .25em 0;
+    transition-duration: .25s;
 
     // rectangle to make little arrow
     &:before {
-      content: '';
-      display: block;
-      transform: rotate(45deg);
-      z-index: -1;
-      background-color: $color--list-bg;
-      width: 1em;
-      height: 1em;
       position: absolute;
       top: -.5em;
       left: 1.6em;
+      z-index: - 1;
+      display: block;
+      width: 1em;
+      height: 1em;
+      background-color: $color--list-bg;
+      content: '';
+      transform: rotate(45deg);
     }
   }
 
   &__btn {
     width: 100%;
-    color: $color__white;
-    border: none;
-    text-align: left;
-    font-size: .85em;
-    background: none;
-    cursor: pointer;
-    font-weight: 200;
     padding: .5em 1em;
+    font-size: .85rem;
+    font-weight: 200;
+    color: $color__white;
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: none;
 
     &:hover {
       background: $color--list-bg--hover;
@@ -60,25 +60,25 @@
 
   // Base styling just for the 3-dot menu icon
   &__icon {
-    color: $color--list-icon;
-    transition-duration: .25s;
-    border-radius: 50%;
+    position: relative;
+    display: block;
     width: .25em;
     height: .25em;
-    display: block;
-    position: relative;
-    background-color: currentColor;
     margin: .8em;
+    color: $color--list-icon;
+    background-color: currentColor;
+    border-radius: 50%;
+    transition-duration: .25s;
 
     &:before,
     &:after {
-      content: '';
+      position: absolute;
       display: block;
-      border-radius: 50%;
       width: .25em;
       height: .25em;
       background-color: currentColor;
-      position: absolute;
+      border-radius: 50%;
+      content: '';
     }
 
     &:before {

@@ -4,8 +4,8 @@
 
 .tabs {
   @include type('body');
-  background-color: $color__tabs--bg;
   color: $color__tabs--text;
+  background-color: $color__tabs--bg;
 
   &__nav {
     display: flex;
@@ -14,9 +14,9 @@
     @include breakpoint(bp--sm--major) {
       @include type(1rem);
       flex-direction: row;
-      background: none;
-      margin-left: em(16px);
       margin-right: em(16px);
+      margin-left: em(16px);
+      background: none;
     }
 
     @include breakpoint(bp--lg--major) {
@@ -26,21 +26,21 @@
   }
 
   &__trigger {
-    border-top: 1px solid darken($color__tabs--bg, 2);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: rem(16px);
     cursor: pointer;
+    border-top: 1px solid darken($color__tabs--bg, 2);
 
     &:hover {
       background: lighten($color__tabs--bg, 1);
     }
 
     svg {
-      width: em(12px);
       position: relative;
       top: em(4px);
+      width: em(12px);
       fill: $color__tabs--caret;
     }
 
@@ -62,12 +62,12 @@
     a {
       display: block;
       padding: 1em;
-      text-decoration: none;
       color: $color__tabs--text;
+      text-decoration: none;
 
       @include breakpoint(bp--sm--major) {
-        padding-left: 0;
         padding-right: 0;
+        padding-left: 0;
         margin-bottom: 1px;
 
         &:hover {
