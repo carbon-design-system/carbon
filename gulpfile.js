@@ -10,7 +10,6 @@ const nodemon = require('gulp-nodemon');
 const concat = require('gulp-concat');
 const del = require('del');
 const gulp = require('gulp');
-const merge = require('merge-stream');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const runSequence = require('run-sequence');
@@ -128,8 +127,7 @@ gulp.task('scripts', function(cb) {
 //////////////////////////////
 
 gulp.task('sass', function() {
-
-  var compile = gulp.src(PATHS.scss.all)
+  return gulp.src(PATHS.scss.all)
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
@@ -138,14 +136,6 @@ gulp.task('sass', function() {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(PATHS.static + '/css'))
     .pipe(browserSync.stream());
-
-  var bower = gulp.src(PATHS.scss.main)
-    .pipe(replace('bower_components/bluemix-icons/icons', importPaths.icons))
-    .pipe(replace('bower_components/IBM-Design-Colors/ibm-colors', importPaths.ibmColors))
-    .pipe(rename('_styles.scss'))
-    .pipe(gulp.dest('.'));
-
-  return merge(compile, bower);
 });
 
 /////////////////////////////

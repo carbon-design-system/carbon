@@ -17,3 +17,7 @@
     @include btn--secondary($color__btn--bg--light);
   }
 }
+
+.btn--danger {
+  @include btn--secondary($color__red-40);
+}

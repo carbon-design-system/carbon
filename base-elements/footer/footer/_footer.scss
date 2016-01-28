@@ -1,0 +1,10 @@
+@import '_partials/vars';
+@import '_partials/extends';
+
+.footer {
+  @extend %footer;
+
+  &__container {
+    @extend %footer__container;
+  }
+}

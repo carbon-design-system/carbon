@@ -1,4 +1,8 @@
-$color__table--blue: color('blue');
-$color__table--light-blue: #d5eaff;
-$color__table-text: color('cool-gray', 40);
-$cell-padding: em(8px);
+$color__table-bg: $color__navy-gray-4;
+$color__table-text: $color__white;
+$color__table-border: $color__navy-gray-6;
+$color__table-row--even: $color__navy-gray-6;
+$color__table-row--odd: $color__navy-gray-5;
+$color__table-row--hover: $color__blue-30;
+
+$padding__table: 1.5em;

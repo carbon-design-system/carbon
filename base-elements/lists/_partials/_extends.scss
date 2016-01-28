@@ -19,21 +19,22 @@
 %header__row--heading {
   padding: $cell-padding;
 
-  color: color('black');
+  color: $color__header-text;
 
   text-align: left;
 }
 
-%body__row {
-  &:hover,
-    &:focus {
-      background-color: $color__table--light-blue;
-    }
-
-    &--cell {
-      padding: $cell-padding;
-  }
-}
+// Commented code is not being used, remove later
+// %body__row {
+//   &:hover,
+//     &:focus {
+//       background-color: $color__table--light-blue;
+//     }
+//
+//     &--cell {
+//       padding: $cell-padding;
+//   }
+// }
 
 %footer__row {
   &--cell {

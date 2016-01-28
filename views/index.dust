@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <title>Bluemix Components</title>
-  <link rel="stylesheet" href="/css/dev.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/dev-colors.css">
   <link rel="stylesheet" href="/css/dev-typography.css">
   <style>
@@ -19,10 +19,23 @@
       color: #fff;
       text-decoration: none;
     }
-
+    body {
+      padding-top: 3.75rem;
+      padding-bottom: 7.5em;
+    }
+    .offleft {
+      position: absolute;
+      top: 0;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
   </style>
 </head>
 <body>
+  <a class="offleft" href="#maincontent">Skip to main content</a>
+  <a name="maincontent"></a>
 
   {content|s}
 

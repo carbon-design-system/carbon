@@ -1,12 +1,13 @@
 %btn--base {
   @extend %strong;
-
   cursor: pointer;
   display: inline-block;
-  width: em(200px);
+  min-width: em(200px);
   height: em(40px);
   text-align: center;
   text-decoration: none;
+  text-transform: capitalize;
+  padding: 0 1em;
   transition: background-color 150ms ease-in, color 150ms ease-in;
 
   &:disabled {

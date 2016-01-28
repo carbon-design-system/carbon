@@ -116,4 +116,11 @@
     transition: background-color .2s;
     margin-bottom: 1em;
   }
+
+  .taxonomy-item__icon svg {
+    display: block;
+    margin: 20%;
+    width: 60%;
+    height: 60%;
+  }
 }

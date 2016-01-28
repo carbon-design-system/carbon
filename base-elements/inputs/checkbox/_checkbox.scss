@@ -2,31 +2,18 @@
 @import '_partials/extends';
 
 .checkbox {
-  position: relative;
-  display: flex;
-  align-items: baseline;
+  @extend %checkbox;
   cursor: pointer;
-
-  &__input {
-    visibility: hidden;
-
-    &:checked + .checkbox__overlay:after {
-      opacity: 1;
-    }
-
-    &:checked + .checkbox__overlay {
-      background-color: $color__checkbox--bg--checked;
-      border: 2px solid $color__checkbox--bg--checked;
-    }
-  }
-
-  &__overlay {
-    @extend %checkbox__overlay;
-  }
+  line-height: 2;
+  font-size: .875rem;
 
   &__label {
-    @extend %p;
-    margin-left: .75em;
+    position: relative;
     font-weight: bold;
   }
 }
+
+.checkbox__input {
+  @extend %checkbox;
+}
+

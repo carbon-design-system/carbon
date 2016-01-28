@@ -1,5 +1,5 @@
 const FileUploader = () => {
-  const fileInput = [...document.querySelectorAll('.input--file__input')];
+  const fileInput = [...document.querySelectorAll('input.file__input')];
 
   fileInput.forEach((input) => {
     const label = input.nextElementSibling;

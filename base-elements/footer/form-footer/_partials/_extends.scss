@@ -1,0 +1,71 @@
+%form-footer {
+  height: em(120px);
+  width: 100%;
+  background-color: $color__footer--bg;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 2.5em 0;
+  z-index: z('footer');
+  border-top: 1px solid $color__footer--border-inside;
+  outline: 1px solid $color__footer--border-outside;
+  box-shadow: 0px -4px 50px 0px rgba(0, 0, 0, .75);
+}
+
+%form-footer__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+
+  @media (max-width: 580px) {
+    justify-content: flex-end;
+  }
+}
+
+%container__information {
+  display: flex;
+
+  @media (max-width: 580px) {
+    display: none;
+  }
+}
+
+%container__submit {
+  display: flex;
+  align-items: center;
+}
+
+%submit__price {
+  font-weight: 200;
+  letter-spacing: 1px; // !temporary
+  margin-right: 1em;
+}
+
+%information__support {
+  margin-right: 4em;
+
+  @media (max-width: 825px) {
+    display: none;
+  }
+}
+
+%support__question {
+  @include type(1rem);
+  padding: 0 0 .6em 0;
+  font-size: rem(14px);
+}
+
+%support__link {
+  font-weight: 600;
+  font-size: rem(14px);
+  color: $color__footer--link;
+  text-decoration: none;
+}
+
+%save-settings__question {
+  @include type(1rem);
+  padding: 0 0 .2em 0;
+  font-size: rem(14px);
+}
