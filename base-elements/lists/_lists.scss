@@ -3,18 +3,18 @@
 @import '_partials/extends';
 
 .list--icon {
-  overflow: hidden;
   display: flex;
+  overflow: hidden;
 
   &__item {
     display: block;
-    background-color: $color__navy-gray-2;
-    font-size: 2em; // this will affect icon size, keep em unit
-    margin: 0;
-    padding: .15em;
     width: 1.5em;
     height: 1.5em;
+    padding: .15em;
+    margin: 0;
+    font-size: 2em; // this will affect icon size, keep em unit
     text-align: center;
+    background-color: $color__navy-gray-2;
     border-right: 1px solid $color__navy-gray-1;
     transition-duration: .25s;
 

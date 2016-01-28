@@ -3,9 +3,9 @@
 
 .radio {
   @extend %radio;
-  cursor: pointer;
-  line-height: 2;
   font-size: 1rem;
+  line-height: 2;
+  cursor: pointer;
 
   &__label {
     position: relative;

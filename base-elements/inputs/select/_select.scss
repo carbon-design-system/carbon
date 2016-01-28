@@ -3,14 +3,14 @@
 .select {
   @extend %select__caret;
   @include type(1rem);
-  appearance: none;
-  border: none;
-  border-radius: 0;
-  background-color: $color__navy-gray-4;
-  color: $color__white;
-  margin: .25em 0;
+  position: relative;
+  width: 100%;
   min-width: 9.375em;
   padding: .5em 0 .5em 1em;
-  width: 100%;
-  position: relative;
+  margin: .25em 0;
+  color: $color__white;
+  background-color: $color__navy-gray-4;
+  border: none;
+  border-radius: 0;
+  appearance: none;
 }

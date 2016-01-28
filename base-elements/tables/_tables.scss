@@ -2,8 +2,8 @@
 
 .table {
   @include type('body');
-  color: $color__table-text;
   width: 100%;
+  color: $color__table-text;
   // border-spacing: 0;
 
   &__row {
@@ -16,10 +16,10 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    text-align: left;
-    background-color: $color__table-bg;
     padding: $padding__table;
     font-weight: 700;
+    text-align: left;
+    background-color: $color__table-bg;
     border-bottom: 1px solid $color__table-border;
 
     .link {
@@ -30,19 +30,19 @@
   &__column-title {
     // @extend %font-smoothing;
     flex: 1;
-    text-align: left;
-    background-color: $color__table-bg;
     padding: $padding__table;
     font-weight: 700;
+    text-align: left;
+    background-color: $color__table-bg;
   }
 }
 
 .table__body {
   &__cell {
     flex: 1;
-    text-align: left;
     padding: $padding__table;
     font-size: .875rem;
+    text-align: left;
   }
 
   .table__row {

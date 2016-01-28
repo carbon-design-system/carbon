@@ -3,21 +3,21 @@
 @import '_partials/extends';
 
 .dropdown {
-	@extend %dropdown;
+  @extend %dropdown;
 }
 
 .dropdown__item {
-	@extend %dropdown__item;
+  @extend %dropdown__item;
 }
 
 .dropdown-menu {
-	@extend %dropdown-menu;
+  @extend %dropdown-menu;
 }
 
 .dropdown__arrow {
-	@extend %dropdown__arrow;
+  @extend %dropdown__arrow;
 }
 
 .dropdown-menu__item {
-	@extend %dropdown-menu__item;
+  @extend %dropdown-menu__item;
 }

@@ -12,10 +12,10 @@
     @include type(.875rem);
     flex: 2;
     padding: 1em 1em 1em 2.5em;
-    border: none;
-    background-color: $color--search-bg;
     margin-right: -3.9em;
     color: $color__white;
+    background-color: $color--search-bg;
+    border: none;
     appearance: none;
 
     &::placeholder {
@@ -23,34 +23,34 @@
     }
 
     @include breakpoint(500px) {
+      margin-right: -6.5em;
       font-size: 1rem;
       font-weight: 500;
-      margin-right: -6.5em;
     }
   }
 
   &__icon {
-    height: em(18px);
-    width: em(18px);
-    fill: $color--filter-text;
     position: relative;
     left: 30px;
+    width: em(18px);
+    height: em(18px);
+    fill: $color--filter-text;
 
     @include breakpoint(500px) {
-      height: em(20px);
-      width: em(20px);
       left: 35px;
+      width: em(20px);
+      height: em(20px);
     }
   }
 
   &__filter {
     @include type(1rem);
-    color: $color--filter-text;
+    padding: .78em 1.1em;
     font-weight: bold;
+    color: $color--filter-text;
+    cursor: pointer;
     background-color: $color--filter-bg;
     border: none;
-    padding: .78em 1.1em;
-    cursor: pointer;
 
     span {
       padding-left: .7em;

@@ -17,17 +17,17 @@
     @include type('body');
 
     height: 1.5em;
-    background: $color__taxonomy-icon--metric-background;
     padding: .3rem .5rem;
-    border-radius: 3px;
     margin: -25px 0 .5rem 0;
+    background: $color__taxonomy-icon--metric-background;
+    border-radius: 3px;
   }
 
   &__label {
     @include type('body');
 
     font-weight: 100;
-    text-align: center;
     line-height: 1.4;
+    text-align: center;
   }
 }

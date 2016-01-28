@@ -16,8 +16,8 @@
   &__gear {
     width: 3.5em;
     height: 3.5em;
-    fill: $color__navy-gray-7;
     margin: -.7em .1em;
+    fill: $color__navy-gray-7;
   }
 
   &__container {
@@ -27,19 +27,19 @@
 
     @include breakpoint(bp--lg--major) {
       width: 90%;
-      margin-left: auto;
       margin-right: auto;
+      margin-left: auto;
     }
   }
 
   &__breadcrumb {
     @extend %helvetica;
     @include type(rem(14px));
-    color: $color__white;
+    padding: rem(20px) rem(5px) 0 0;
+    margin-right: rem(16px);
     margin-bottom: rem(8px);
     margin-left: rem(16px);
-    margin-right: rem(16px);
-    padding: rem(20px) rem(5px) 0 0;
+    color: $color__white;
 
     &:hover {
       cursor: pointer;
@@ -63,13 +63,13 @@
 
   &__title {
     @include type(rem(24px));
-    font-weight: 300;
     padding: .2em 0 .2em rem(16px);
+    font-weight: 300;
 
     @include breakpoint(bp--sm--major) {
       @include type(rem(32px));
-      font-weight: 500;
       padding-left: rem(42px);
+      font-weight: 500;
     }
     @include breakpoint(bp--lg--major) {
       padding-left: 0;
@@ -88,8 +88,7 @@
     top: em(13px);
     left: em(5px);
     padding: 0 .5em;
-    fill: rgba($color__detail-page-header--docs, .4);
     cursor: pointer;
+    fill: rgba($color__detail-page-header--docs, .4);
   }
-
 }

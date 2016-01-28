@@ -3,17 +3,17 @@
   @extend %helvetica-normal;
 
   width: 100%;
-    max-width: 100%;
+  max-width: 100%;
 
-    background-color: transparent;
-    color: $color__table-text;
+  color: $color__table-text;
+  background-color: transparent;
 
-    border-spacing: 0;
-    border-collapse: collapse;
+  border-collapse: collapse;
+  border-spacing: 0;
 
-    &__header {
-      border-bottom: 4px solid $color__table--blue;
-    }
+  &__header {
+    border-bottom: 4px solid $color__table--blue;
+  }
 }
 
 %header__row--heading {
