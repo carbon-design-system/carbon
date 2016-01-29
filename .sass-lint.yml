@@ -5,15 +5,10 @@ options:
 # File Options
 files:
   include:
-    - './core/**/*.scss'
-    - './base-elements/**/*.scss'
-    - './components/**/*.scss'
+    - '**/*.scss'
   ignore:
-    - './dev.scss'
-    - './dev-colors.scss'
-    - './dev-typography.scss'
-    - './bower_components/**/*.scss'
-    - './components/taxonomy-item/**/*.scss'
+    - 'bower_components/**/*.scss'
+    - '*.scss'
 # Rule Configuration
 rules:
   # Extends and Mixins
@@ -49,7 +44,6 @@ rules:
   property-units:
     - global: ['em']
     - per-property: { font-size: ['rem'] }
-  # Property sort order https://github.com/sasstools/sass-lint/blob/master/lib/config/property-sort-orders/recess.yml with flex-box support
   property-sort-order:
     - 1
     - order:
