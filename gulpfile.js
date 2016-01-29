@@ -25,11 +25,8 @@ const gutil = require('gulp-util');
 //////////////////////////////
 
 const PATHS = {
-  static: 'static',
-  clean: [
-    'static/**/*.{css,woff,woff2,png,svg,jpeg,js,map}',
-    '_styles.scss'
-  ],
+  static: 'dev/static',
+  clean: 'dev/static/**/*.{css,woff,woff2,png,svg,jpeg,js,map}',
   scripts: {
     all: [
       'base-elements/**/*.js',
@@ -42,9 +39,10 @@ const PATHS = {
     all: [
       'base-elements/**/*.scss',
       'components/**/*.scss',
+      'dev/**/*.scss',
       '*.scss'
     ],
-    main: 'dev.scss'
+    main: 'styles.scss'
   },
   html: './**/*.html',
   images: 'images/**/*.{png,jpeg,jpg,svg}'

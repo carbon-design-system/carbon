@@ -4,9 +4,9 @@ bower_components
 
 # Ignore built files and static folder
 *.css
-static/*
-!static/images
+dev/*
 *.css.map
+static
 
 # OSX
 .DS_Store
