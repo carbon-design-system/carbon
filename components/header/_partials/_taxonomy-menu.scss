@@ -18,7 +18,7 @@
     top: em($header-height) + 1em;
     left: 2%;
 
-    width: $item-width * 4 + 2;
+    width: $item-width * 4 + 2 + em(1px); // IE11 seems to need some slack
 
     transition: $transition-timing--inverted;
     transform: scale(0);
@@ -26,7 +26,7 @@
   }
 
   @include breakpoint(bp--sm--major) {
-    width: $item-width * 6 + 2;
+    width: $item-width * 6 + 2 + em(1px); // IE11 seems to need some slack
   }
 
   &--active {
@@ -84,6 +84,7 @@
 
   .taxonomy-item {
     display: flex;
+    align-items: stretch;
     padding: .5em;
 
     &.selected {
@@ -144,14 +145,15 @@
 
         text-align: center;
 
-        flex: 0;
+        flex: 0 0 auto;
       }
     }
   }
 
   .taxonomy-item--taxonomy-menu {
-    flex: 1;
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
 
     width: auto;
     margin: 0;
