@@ -5,6 +5,7 @@ bower_components
 # Ignore built files and static folder
 *.css
 dev/*
+!dev/*.scss
 *.css.map
 static
 
