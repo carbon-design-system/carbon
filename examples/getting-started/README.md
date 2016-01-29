@@ -31,6 +31,9 @@ Set up your respective gulpfile.js or gruntfile.js; refer to the ones already in
 
 In case you don't have gulp or grunt installed globally, it's also recommended to make an npm script in your package.json to execute your task-runner .
 
+Note that bluemix-components relies on [autoprefixer](https://github.com/postcss/autoprefixer)
+to handle vendor prefixes. Both of the gulp and grunt examples include this plugin.
+
 For grunt:
 ```
 npm run grunt

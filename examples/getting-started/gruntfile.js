@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+  grunt.loadNpmTasks('grunt-autoprefixer');
+
   grunt.initConfig({
     sass: {                              // Task
       dist: {                            // Target
@@ -9,10 +11,17 @@ module.exports = function(grunt) {
           'main.css': 'main.scss'        // 'destination': 'source'
         }
       }
+    },
+    autoprefixer: {
+      dist: {
+        files: {
+          'main.css': 'main.css'
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('default', ['sass']);
+  grunt.registerTask('default', ['sass', 'autoprefixer']);
 }
