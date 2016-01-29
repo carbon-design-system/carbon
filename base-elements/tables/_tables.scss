@@ -29,6 +29,7 @@
 
   &__column-title {
     // @extend %font-smoothing;
+    display: flex;
     flex: 1;
     padding: $padding__table;
     font-weight: 700;
@@ -39,10 +40,15 @@
 
 .table__body {
   &__cell {
+    display: flex;
     flex: 1;
     padding: $padding__table;
     font-size: .875rem;
     text-align: left;
+
+    .link {
+      color: $color__blue-30;;
+    }
   }
 
   .table__row {
@@ -53,11 +59,6 @@
 
     &:nth-child(even) {
       background-color: $color__table-bg;
-    }
-
-    &:focus,
-    &:hover {
-      background-color: $color__table-row--hover;
     }
   }
 }
