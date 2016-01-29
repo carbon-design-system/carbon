@@ -1,0 +1,24 @@
+@import '_partials/vars';
+
+.module {
+  margin-bottom: 1em;
+  background-color: $color__module-bg;
+}
+
+.module__header,
+.module__body,
+.module__footer {
+  padding: $padding__module;
+}
+
+.module__header {
+  border-bottom: 1px solid $color__module-border;
+  font-size: .875rem;
+  font-weight: 600;
+  color: $color__module-header;
+}
+
+.module__footer {
+  border-top: 1px solid $color__module-border;
+  font-size: .875rem;
+}
