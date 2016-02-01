@@ -4,4 +4,14 @@
   &:not(:last-child) {
     border-right: none;
   }
+
+  &:first-child {
+    border-top-left-radius: $border__btn--radius;
+    border-bottom-left-radius: $border__btn--radius;
+  }
+
+  &:last-child {
+    border-top-right-radius: $border__btn--radius;
+    border-bottom-right-radius: $border__btn--radius;
+  }
 }
