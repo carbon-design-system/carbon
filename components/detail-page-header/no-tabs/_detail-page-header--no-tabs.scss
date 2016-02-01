@@ -1,0 +1,40 @@
+@import '../_partials/vars';
+@import '../_partials/extends';
+
+.detail-page-header--no-tabs {
+  @extend %detail-page-header;
+  @extend %grid-container;
+  display: flex;
+  align-items: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  &__link-wrapper {
+    color: $color__detail-page-header--text;
+    text-decoration: none;
+    background-color: $color__detail-page-header--bg;
+
+    .arrow {
+      @extend %detail-page-header__arrow;
+    }
+  }
+
+  .info-title {
+    @extend %font-smoothing;
+    display: flex;
+    align-items: flex-start;
+    padding-left: .5em;
+    margin-left: .5em;
+    font-size: 1.5rem;
+    font-weight: 200;
+    border-left: 1px solid $color__detail-page-header--border;
+
+    @include breakpoint(bp--xs--major) {
+      margin-left: -.2em;
+    }
+
+    @include breakpoint(bp--sm--major) {
+      font-size: 1.875rem;
+    }
+  }
+}

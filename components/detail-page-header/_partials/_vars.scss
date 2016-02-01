@@ -1,7 +1,8 @@
-$color__detail-page-header--docs: rgba($color__white, .8);
 $color__detail-page-header--bg: $color__navy-gray-2;
-$color__detail-page-header--link-bg: $color__blue-30;
-$color__detail-page-header--selected: $color__blue-20;
 $color__detail-page-header--border: rgba($color__navy-gray-6, .5);
-$color__detail-page-header--link: $color__blue-30;
-$color__detail-page-header--selected: $color__blue-20;
+$color__detail-page-header--text: $color__white;
+$color__detail-page-header--text--breadcrumb: $color__blue-30;
+
+$color__detail-page-header__tabs--bg: $color__navy-gray-3;
+$color__detail-page-header__tabs--bg--small: $color__navy-gray-2;
+$color__detail-page-header__tabs--hover: lighten($color__navy-gray-3, 5);
