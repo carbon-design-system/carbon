@@ -2,8 +2,7 @@
   @extend %strong;
   display: inline-block;
   height: em(40px);
-  min-width: em(200px);
-  padding: 0 1em;
+  padding: 0 16px;
   text-align: center;
   text-decoration: none;
   text-transform: capitalize;
@@ -19,7 +18,8 @@
 %btn--primary {
   @extend %btn--base;
 
-  border-width: 0;
+  border-color: transparent;
+  border-width: 2px;
 }
 
 %btn--secondary {
