@@ -5,10 +5,71 @@
 // .button-class { font-size: em(20px); } this will compile to:
 // .button-class { font-size: 1.25em; }
 
+
 @function rem($px) {
   @return ($px / $base-font-size) * 1rem;
 }
 
 @function em($px) {
   @return ($px / $base-font-size) * 1em;
+}
+
+
+//-------------------------//
+// decimal-round(), pow(), ms() //
+//------------------------//
+// These functions are used to convert a number in the range -6 to 16 into a rem value based on the ratio of 1.125.
+// .button-class { font-size: ms(10); } this will compile to:
+// .button-class { font-size: 3.247em; }
+
+
+@function decimal-round ($number, $digits: 0, $mode: round) {
+  $n: 1;
+  @if type-of($number) != number {
+    @warn '#{ $number } is not a number.';
+    @return $number;
+  }
+  @if type-of($digits) != number {
+    @warn '#{ $digits } is not a number.';
+    @return $number;
+  } @else if not unitless($digits) {
+    @warn '#{ $digits } has a unit.';
+    @return $number;
+  }
+  @for $i from 1 through $digits {
+    $n: $n * 10;
+  }
+  @if $mode == round {
+    @return round($number * $n) / $n;
+  } @else if $mode == ceil {
+    @return ceil($number * $n) / $n;
+  } @else if $mode == floor {
+    @return floor($number * $n) / $n;
+  } @else {
+    @warn '#{ $mode } is undefined keyword.';
+    @return $number;
+  }
+}
+
+@function pow($number, $exp) {
+  $value: 1;
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
+    }
+  }
+  @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+
+@function ms($n) {
+  @if $n >= -6 and $n <= 16 {
+    @return decimal-round(rem(pow(1.125, $n) * 16px), 3);
+  } @else {
+    @error '#{$n} is not in the acceptable range.';
+  }
 }

@@ -6,6 +6,7 @@
   <title>Bluemix Components</title>
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/dev-colors.css">
+  <link rel="stylesheet" href="/css/dev-major-second.css">
   <link rel="stylesheet" href="/css/dev-typography.css">
   <style>
     .toc {
