@@ -26,3 +26,32 @@ $breakpoints: (
     }
   }
 }
+
+// Move padding stuff (lines 5 to 28) to:
+// global/layouts/grids/_grids.scss
+// (Issue: https://github.ibm.com/Bluemix/bluemix-components/issues/634)
+
+$padding: (
+  'mobile': 3%,
+  'xs': 5%
+);
+
+@function padding($value) {
+  @if map-has-key($padding, $value) {
+    @return map-get($padding, $value);
+  } @else {
+    @warn 'padding: could not find #{$value} in $padding map.
+          Please make sure it is defined';
+  }
+}
+
+%grid-container {
+  width: 100%;
+  padding-right: padding(mobile);
+  padding-left: padding(mobile);
+
+  @include breakpoint(bp--xs--major) {
+    padding-right: padding(xs);
+    padding-left: padding(xs);
+  }
+}

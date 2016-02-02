@@ -1,0 +1,14 @@
+%detail-page-header {
+  @extend %font-smoothing;
+  background-color: $color__detail-page-header--bg;
+}
+
+%detail-page-header__arrow {
+  width: 16px;
+  height: 16px;
+
+  @include breakpoint(bp--xs--major) {
+    position: relative;
+    left: em(-20px);
+  }
+}
