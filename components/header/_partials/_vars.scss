@@ -6,7 +6,7 @@ $transition-timing--inverted: .2s cubic-bezier(1.0, 0, 1.0, .37);
 // real sloppy
 $header-height: 60px;
 // (width of icon) + 2 * (border of anchor) + 2 * (padding of anchor) + 2 * (padding of list item)
-$item-width: em($taxonomy-item__icon-diameter--taxonomy-menu) + em(2px) + 2.5;
+$item-width: em($icon-size__taxonomy-menu--diameter) + em(2px) + 2.5;
 
 $color__taxonomy-nav-item--selected: #5dcfb7;
 
