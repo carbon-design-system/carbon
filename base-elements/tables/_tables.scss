@@ -4,15 +4,12 @@
   @include type('body');
   width: 100%;
   color: $color__table-text;
-  // border-spacing: 0;
 
   &__row {
     display: flex;
-    align-items: center;
   }
 
   &__main-title {
-    // @extend %font-smoothing;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -28,9 +25,9 @@
   }
 
   &__column-title {
-    // @extend %font-smoothing;
     display: flex;
     flex: 1;
+    align-items: baseline;
     padding: $padding__table;
     font-weight: 700;
     text-align: left;
