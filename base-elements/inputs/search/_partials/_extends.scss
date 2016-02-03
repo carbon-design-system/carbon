@@ -1,0 +1,16 @@
+%icon--search {
+  fill: $color__navy-gray-7;
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  top: 1em;
+
+  .light-ui & {
+    fill: $color__blue-40;
+  }
+
+  @include breakpoint(500px) {
+    width: 1.25em;
+    height: 1.25em;
+  }
+}
