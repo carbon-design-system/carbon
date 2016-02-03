@@ -35,7 +35,8 @@
 
 // Components
 @import 'components/content-switcher/content-switcher';
-@import 'components/detail-page-header/detail-page-header';
+@import 'components/detail-page-header/no-tabs/detail-page-header--no-tabs';
+@import 'components/detail-page-header/with-tabs/detail-page-header--with-tabs';
 
 // Local
 @import 'utility/toolkit';
