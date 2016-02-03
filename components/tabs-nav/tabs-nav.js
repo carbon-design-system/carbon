@@ -1,54 +1,40 @@
-const Tab = () => {
+import '../../global/js/array-from';
+import '../../global/js/object-assign';
 
-  const CLASSES = {
-    MENU: '.tabs__nav',
-    TRIGGER: '.tabs__trigger',
-    TRIGGER_TEXT: '.trigger__text',
-    LINK: '.nav__item',
-  };
+import ContentSwitcher from '../content-switcher/content-switcher';
 
-  const trigger = document.querySelector(CLASSES.TRIGGER);
-  const menu = document.querySelector(CLASSES.MENU);
-  const links = [... (document.querySelectorAll(CLASSES.LINK))];
-  const triggerText = document.querySelector(CLASSES.TRIGGER_TEXT);
+export default class Tab extends ContentSwitcher {
+  constructor(element, options = {}) {
+    super(element, Object.assign({
+      selectorMenu: '.tabs__nav',
+      selectorTrigger: '.tabs__trigger',
+      selectorTriggerText: '.trigger__text',
+      selectorButton: '.nav__item',
+      selectorButtonSelected: '.nav__item.selected',
+      classActive: 'selected',
+    }, options));
 
-  // ADDS CLICK EVENT LISTENER TO ALL LIST ITEMS
-  const addListenerToLinks = (tabLinks) => {
-    tabLinks.forEach(link => {
-      link.addEventListener('click', function (e) {
-        removeSelected(tabLinks);
-        link.classList.add('selected');
-        changeTopText(tabLinks);
-        menu.classList.toggle('tabs--hidden');
-      });
+    [... this.element.querySelectorAll(this.options.selectorTrigger)].forEach((trigger) => {
+      trigger.addEventListener('click', (e) => this.updateMenuState(e));
     });
-  };
 
-  // REMOVES SELECTED CLASS FOR PREVIOUS SELECTED
-  const removeSelected = (tabLinks) => {
-    tabLinks.forEach(link => {
-      if (link.classList.contains('selected')) {
-        link.classList.remove('selected');
-      }
-    });
-  };
+    this.updateTriggerText(this.element.querySelector(this.options.selectorButtonSelected));
+  }
 
-  // ADDS INNER TEXT OF SELECTED LIST ITEM TO TABS TRIGGER
-  const changeTopText = (tabLinks) => {
-    tabLinks.forEach(link => {
-      if (link.classList.contains('selected')) {
-        triggerText.innerText = link.innerText;
-      }
-    });
-  };
+  setActive(e) {
+    if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
+      e.preventDefault();
+    }
+    super.setActive(e);
+    this.updateMenuState();
+    this.updateTriggerText(e.currentTarget);
+  }
 
-  trigger.addEventListener('click', function (e) {
-    menu.classList.toggle('tabs--hidden');
-  });
+  updateMenuState() {
+    this.element.querySelector(this.options.selectorMenu).classList.toggle('tabs--hidden');
+  }
 
-  addListenerToLinks(links);
-  changeTopText(links);
-
-};
-
-export default Tab;
+  updateTriggerText(target) {
+    this.element.querySelector(this.options.selectorTriggerText).textContent = target.textContent;
+  }
+}

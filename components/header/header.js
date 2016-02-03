@@ -1,76 +1,128 @@
-function toggleClass(element, name, add) {
-  if (typeof add === 'undefined') {
-    element.classList.toggle(name);
-  } else if (element.classList.contains(name) === !add) {
-    element.classList[add ? 'add' : 'remove'](name);
+import '../../global/js/array-from';
+import '../../global/js/object-assign';
+import '../../global/js/custom-event';
+
+export default class HeaderNav {
+  constructor(element, options = {}) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
+    }
+
+    this.element = element;
+
+    this.options = Object.assign({
+      selectorTriggerLabel: '.current-taxonomy',
+      selectorActive: 'taxonomy-nav--active',
+      selectorMenu: '.taxonomy-menu',
+      selectorItem: '.taxonomy-item',
+      selectorItemLink: '.taxonomy-item--taxonomy-menu',
+      selectorLabel: '.taxonomy-item__label',
+    }, options);
+
+    this.menuNode = this.element.querySelector(this.options.selectorMenu);
+
+    this.element.addEventListener('keydown', (e) => this.toggleNav(e));
+
+    [... this.element.querySelectorAll(this.options.selectorItemLink)].forEach((item) => {
+      item.addEventListener('click', (e) => this.select(e));
+    });
+  }
+
+  toggleNav(e) {
+    const isActive = this.element.classList.contains(this.options.selectorActive);
+    let add;
+    if (e.type === 'click' || e.type === 'keydown' && e.which === 40) {
+      // Toggle button or ESC key on nav
+      add = !isActive;
+    } else if (e.type === 'keydown' && e.which === 27) {
+      // Down arrow on launch button
+      add = false;
+    } else {
+      return;
+    }
+    if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
+      e.preventDefault();
+    }
+
+    const launchingElement = e.currentTarget;
+    const typeSuffix = add ? 'shown' : 'hidden';
+    const eventStart = new CustomEvent(`header-being${typeSuffix}`, {
+      bubbles: true,
+      cancelable: true,
+      detail: { launchingElement: launchingElement },
+    });
+    this.element.dispatchEvent(eventStart);
+
+    if (add) {
+      this.triggerNode = e.currentTarget;
+      this.triggerLabelNode = this.triggerNode.querySelector(this.options.selectorTriggerLabel);
+    }
+
+    if (!eventStart.defaultPrevented) {
+      this.element.classList[add ? 'add' : 'remove'](this.options.selectorActive);
+      (this.element.classList.contains(this.options.selectorActive) ? this.menuNode : this.triggerNode).focus();
+      this.element.dispatchEvent(new CustomEvent(`header-${typeSuffix}`, {
+        bubbles: true,
+        cancelable: true,
+        detail: { launchingElement: launchingElement },
+      }));
+    }
+  }
+
+  select(e) {
+    const activatedElement = e.currentTarget;
+    const eventStart = new CustomEvent('header-beingselected', {
+      bubbles: true,
+      cancelable: true,
+      detail: {
+        initiatingEvent: e,
+        itemElement: activatedElement,
+      },
+    });
+    this.element.dispatchEvent(eventStart);
+
+    if (!eventStart.defaultPrevented) {
+      [... this.element.querySelectorAll(this.options.selectorItem)].forEach((element) => {
+        if (element.contains(activatedElement)) {
+          element.classList.add('selected');
+        } else if (element.classList.contains('selected')) {
+          element.classList.remove('selected');
+        }
+      });
+      activatedElement.classList.add('selected');
+      if (this.triggerLabelNode) {
+        this.triggerLabelNode.textContent = activatedElement.querySelector(this.options.selectorLabel).textContent;
+      }
+      this.element.dispatchEvent(new CustomEvent('header-selected', {
+        bubbles: true,
+        cancelable: true,
+        detail: { itemElement: activatedElement },
+      }));
+    }
+  }
+
+  static create(element, options) {
+    return HeaderNav.components.get(element) || new HeaderNav(element, options);
+  }
+
+  static hook(element, options) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
+    }
+
+    const navs = [... element.ownerDocument.querySelectorAll(element.getAttribute('data-nav-target'))].map((target) => {
+      return HeaderNav.create(target, options);
+    });
+
+    ['keydown', 'click'].forEach((name) => {
+      element.addEventListener(name, (e) => {
+        if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
+          e.preventDefault();
+        }
+        navs.forEach((nav) => nav.toggleNav(e));
+      });
+    });
   }
 }
 
-const Header = () => {
-  const CLASSNAMES = {
-    TRIGGER: '.global-menu-trigger',
-    TRIGGERLABEL: '.current-taxonomy',
-    NAV: '.taxonomy-nav',
-    ACTIVE: 'taxonomy-nav--active',
-    MENU: '.taxonomy-menu',
-    ITEM: '.taxonomy-item',
-    SELECTEDITEM: '.taxonomy-item.selected',
-    LABEL: '.taxonomy-item__label',
-  };
-
-  class Taxonomy {
-    constructor(element) {
-      this.trigger = document.querySelector(element);
-      this.triggerLabel = this.trigger.querySelector(CLASSNAMES.TRIGGERLABEL);
-      this.nav = document.querySelector(CLASSNAMES.NAV);
-      this.menu = document.querySelector(CLASSNAMES.MENU);
-      this.taxonomyItems = [...this.nav.querySelectorAll(CLASSNAMES.ITEM)];
-      this.trigger.addEventListener('click', this.toggleMenu.bind(this));
-      this.trigger.addEventListener('keydown', this.toggleMenu.bind(this));
-      this.nav.addEventListener('keydown', this.toggleMenu.bind(this));
-    }
-
-    /**
-     * function --> toggle active class name
-     */
-
-    toggleMenu(e) {
-      let add;
-      if (e.type === 'click' || e.type === 'keydown' && e.currentTarget === this.trigger && e.which === 40) {
-        add = undefined;
-      } else if (e.type === 'keydown' && e.which === 27) {
-        add = false;
-      } else {
-        return;
-      }
-      e.preventDefault();
-      toggleClass(this.nav, CLASSNAMES.ACTIVE, add);
-      (this.nav.classList.contains(CLASSNAMES.ACTIVE) ? this.menu : this.trigger).focus();
-    }
-
-    /**
-     * function --> hook taxonomy change logic here
-     */
-
-    routeSwitch(activeElement, triggerLabel) {
-      activeElement.addEventListener('click', (e) => {
-        e.preventDefault();
-        [... this.nav.querySelectorAll(CLASSNAMES.SELECTEDITEM)].forEach((element) => {
-          if (element !== activeElement) {
-            element.classList.remove('selected');
-          }
-        });
-        activeElement.classList.add('selected');
-        triggerLabel.textContent = activeElement.querySelector(CLASSNAMES.LABEL).textContent;
-      });
-    }
-  }
-
-  const taxonomyHeader = new Taxonomy(CLASSNAMES.TRIGGER);
-
-  taxonomyHeader.taxonomyItems.forEach(taxonomyItem => {
-    taxonomyHeader.routeSwitch(taxonomyItem, taxonomyHeader.triggerLabel);
-  });
-};
-
-export default Header;
+HeaderNav.components = new WeakMap();

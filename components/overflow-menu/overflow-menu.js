@@ -1,11 +1,16 @@
-const OverflowMenu = () => {
+export default class OverflowMenu {
+  constructor(element) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
+    }
+    this.element = element;
+    this.element.addEventListener('click', (e) => this.openMenu(e));
+  }
 
-  const overflowMenu = document.querySelector('.overflow-menu');
-  overflowMenu.addEventListener('click', (e) => {
-    e.preventDefault();
-    overflowMenu.classList.toggle('open');
-  });
-
-};
-
-export default OverflowMenu;
+  openMenu(e) {
+    if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
+      e.preventDefault();
+    }
+    this.element.classList.toggle('open');
+  }
+}

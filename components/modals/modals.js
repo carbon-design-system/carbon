@@ -1,50 +1,165 @@
-const Modal = () => {
+import '../../global/js/array-from';
+import '../../global/js/object-assign';
+import '../../global/js/custom-event';
 
-  const modal = document.querySelector('.modal');
-  const transactionalButton = document.querySelector('.buttons__transactional');
-  const passiveButton = document.querySelector('.buttons__passive');
-  const transactionalModal = document.querySelector('.modal--transactional');
-  const passiveModal = document.querySelector('.modal--passive');
-  const cancelButton = document.querySelector('.buttons__cancel');
-  const closeButton = document.querySelector('.modal__close');
+export default class Modal {
+  constructor(element, options = {}) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
+    }
 
-  const showModal = (modal, button) => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      modal.classList.toggle('modal-visible');
+    this.element = element;
 
-      if (modal == passiveModal) {
-        document.onkeydown = function(e) {
-          if (e.keyCode == 27) {
-           passiveModal.classList.remove('modal-visible');
-          }
-        }
-      }
-    });
-  };
+    this.options = Object.assign({
+      type: element.getAttribute('data-modal-type') || Modal.TYPE_TRANSACTIONAL,
+      classVisible: 'modal-visible',
+    }, options);
 
-  const hideModal = (...buttons) => {
-    buttons.forEach((button) => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        let selected = document.querySelector('.modal-visible');
-        if (selected) {
-          selected.classList.toggle('modal-visible');
-        }
+    Modal.components.push(this);
+
+    this.hookCloseButtons();
+  }
+
+  hookCloseButtons() {
+    [... this.element.querySelectorAll('[data-modal-close]')].forEach((element) => {
+      element.addEventListener('click', () => {
+        this.hide();
       });
     });
-  };
-
-  if (passiveButton) {
-    showModal(passiveModal, passiveButton);
   }
 
-  if (transactionalModal) {
-    showModal(transactionalModal, transactionalButton);
+  _changeState(visible, callback) {
+    let finished;
+    const finishedTransition = () => {
+      if (!finished) {
+        finished = true;
+        this.element.removeEventListener('transitionend', finishedTransition);
+        callback();
+      }
+    };
+
+    this.element.addEventListener('transitionend', finishedTransition);
+    this.element.classList[visible ? 'add' : 'remove'](this.options.classVisible);
+    const transitionDuration = parseFloat(this.element.ownerDocument.defaultView.getComputedStyle(this.element).transitionDuration);
+    if (isNaN(transitionDuration) || transitionDuration === 0) {
+      finishedTransition();
+    }
   }
 
-  hideModal(cancelButton, closeButton);
+  show(launchingElement, callback) {
+    if (typeof launchingElement === 'function') {
+      callback = launchingElement; // eslint-disable-line no-param-reassign
+      launchingElement = null; // eslint-disable-line no-param-reassign
+    }
 
-};
+    if (launchingElement && !launchingElement.nodeType) {
+      throw new TypeError('DOM Node should be given for launchingElement.');
+    }
 
-export default Modal;
+    if (this.element.classList.contains(this.options.classVisible)) {
+      if (callback) {
+        callback();
+      }
+      return;
+    }
+
+    const eventStart = new CustomEvent('modal-beingshown', {
+      bubbles: true,
+      cancelable: true,
+      detail: { launchingElement: launchingElement },
+    });
+
+    // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
+    if (this.element.dispatchEvent(eventStart)) {
+      this._changeState(true, () => {
+        this.element.dispatchEvent(new CustomEvent('modal-shown', {
+          bubbles: true,
+          cancelable: true,
+          detail: { launchingElement: launchingElement },
+        }));
+        if (callback) {
+          callback();
+        }
+      });
+    } else {
+      const error = new Error('Showing dialog has been canceled.');
+      error.canceled = true;
+      if (callback) {
+        callback(error);
+      }
+    }
+  }
+
+  hide(callback) {
+    if (!this.element.classList.contains(this.options.classVisible)) {
+      if (callback) {
+        callback();
+      }
+      return;
+    }
+
+    const eventStart = new CustomEvent('modal-beinghidden', {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
+    if (this.element.dispatchEvent(eventStart)) {
+      this._changeState(false, () => {
+        this.element.dispatchEvent(new CustomEvent('modal-hidden'), {
+          bubbles: true,
+          cancelable: true,
+        });
+        if (callback) {
+          callback();
+        }
+      });
+    } else {
+      const error = new Error('Hiding dialog has been canceled.');
+      error.canceled = true;
+      if (callback) {
+        callback(error);
+      }
+    }
+  }
+
+  static hook(element, options) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
+    }
+
+    const modals = [... element.ownerDocument.querySelectorAll(element.getAttribute('data-modal-target'))].map((target) => {
+      return Modal.components.filter((entry) => target === entry.element)[0] || new Modal(target, options);
+    });
+
+    element.addEventListener('click', (e) => {
+      if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
+        e.preventDefault();
+      }
+      modals.forEach((modal) => {
+        modal.show(e.currentTarget, () => {
+          const modalElement = modal.element;
+          if (modalElement.offsetWidth > 0 && modalElement.offsetHeight > 0) {
+            modalElement.focus();
+          }
+        });
+      });
+    });
+  }
+}
+
+Modal.TYPE_TRANSACTIONAL = 'transactional';
+Modal.TYPE_PASSIVE = 'passive';
+Modal.components = [];
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.addEventListener('keydown', (e) => {
+    if (e.keyCode === 27) {
+      Modal.components.forEach((modal) => {
+        if (modal.element.ownerDocument === document && modal.options.type === Modal.TYPE_PASSIVE) {
+          modal.hide();
+        }
+      });
+    }
+  });
+});

@@ -1,27 +1,24 @@
-const Lists = () => {
-
-  // ======================
-  // SLIDE OUT SEARCH
-  // ======================
-  const searchIcon = document.querySelector("[data-id='search-action']");
-  const searchField = document.querySelector("[data-id='search-field']");
-
-  searchIcon.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    if (searchIcon.style.borderLeft == 'none') {
-      searchIcon.style.borderLeft = '1px solid #0F212E';
-    }
-    else {
-      searchIcon.style.borderLeft = 'none';
+export default class Lists {
+  constructor(element) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
-    searchField.classList.toggle('show-search');
-    searchField.value = "";
-  });
-  // ======================
-  // ======================
+    this.element = element;
+    this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.getAttribute('data-list-icons-search-action-target'));
 
-};
+    this.element.addEventListener('click', (e) => this.handleActionClick(e));
+  }
 
-export default Lists;
+  handleActionClick(e) {
+    const searchActionNode = e.currentTarget;
+
+    if (searchActionNode.tagName === 'A' || searchActionNode.querySelector('a')) {
+      e.preventDefault();
+    }
+
+    this.element.classList.toggle('show-search');
+    this.searchFieldNode.classList.toggle('show-search');
+    this.searchFieldNode.value = '';
+  }
+}
