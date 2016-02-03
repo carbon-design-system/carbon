@@ -1,3 +1,15 @@
+.create-container {
+  .detail-page-header--no-tabs {
+    padding-top: 4.5em;
+    padding-bottom: 2em;
+  }
+
+  &__link-wrapper {
+    padding-left: 100em; ;
+  }
+}
+
+
 .create {
   @extend %grid-container;
 
@@ -27,37 +39,13 @@
 
   &__main {
     flex: 2;
+    margin-bottom: em(100px);
     @include breakpoint (bp--md--major) {
       padding-left: 2%;
       padding-right: 2%;
     }
   }
 }
-
-
-.create-container {
-  background: linear-gradient(to bottom, #0F222B, #152934);
-
-  .detail-page-header {
-    background: transparent;
-    padding-top: 1em;
-
-    &:after {
-      display: block;
-      width: 90%;
-      margin: 0 auto 2em;
-      content: '';
-      padding-bottom: 2em;
-      border-bottom: 2px solid $color__blue-30;
-    }
-
-    &__container {
-      background: transparent;
-    }
-  }
-}
-
-// App details side bar
 
 .create-sidebar-list {
   padding-top: 2rem;
