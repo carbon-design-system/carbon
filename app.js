@@ -1,3 +1,4 @@
+import 'svgxuse';
 import './global/js/array-from';
 
 import FabButton from './components/floating-action-button/fab';
