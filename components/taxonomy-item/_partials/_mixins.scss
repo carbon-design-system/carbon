@@ -1,127 +1,76 @@
-@mixin taxonomy-item($icon-diameter, $icon-stroke) {
+@mixin taxonomy-item($icon-diameter, $icon-stroke, $icon-height) {
+  @extend %taxonomy-item;
   $item-width: $icon-diameter + 2 * $icon-stroke;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: $color__white; // !temporary
-  text-decoration: none;
-  color: $color__white;
-  width: $item-width;
-  padding: 0;
-  margin: 0 0 1.75em 0;
-  z-index: 1;
-
-  &--empty {
-    .taxonomy-item__metric {
-      background: none;
-    }
-  }
-
-  &--stateless {
-    .taxonomy-item__icon {
-      &:before {
-        content: "";
-        width: $item-width;
-        height: $item-width;
-        background: $color__taxonomy-icon--stateless;
-        position: absolute;
-        border-radius: 50%;
-        margin-left: -$icon-stroke;
-        margin-top: -$icon-stroke;
-        z-index: -1;
-      }
-    }
-
-    .taxonomy-item__metric {
-      color: $color__taxonomy-icon--stateless;
-    }
-  }
-
-  &--healthy {
-    .taxonomy-item__icon {
-      &:before {
-        content: "";
-        width: $item-width;
-        height: $item-width;
-        background: $color__taxonomy-icon--healthy-stroke;
-        position: absolute;
-        border-radius: 50%;
-        margin-left: -$icon-stroke;
-        margin-top: -$icon-stroke;
-        z-index: -1;
-      }
-    }
-
-    .taxonomy-item__metric {
-      color: $color__taxonomy-item--healthy;
-    }
-  }
-
-  &--error {
-    .taxonomy-item__icon {
-      &:before {
-        content: "";
-        width: $item-width;
-        height: $item-width;
-        background: $color__taxonomy-icon--error;
-        position: absolute;
-        border-radius: 50%;
-        margin-top: -$icon-stroke;
-        margin-left: -$icon-stroke;
-        z-index: -1;
-        animation-name: pulse--#{$icon-diameter};
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease;
-
-        @keyframes pulse--#{$icon-diameter} {
-        	0%, 11%, 100% {
-            width: $icon-diameter + 2 * $icon-stroke;
-            height: $icon-diameter + 2 * $icon-stroke;
-            margin: -$icon-stroke;
-          }
-        	4% {
-            width: $icon-diameter + $icon-stroke;
-            height: $icon-diameter + $icon-stroke;
-            margin: -($icon-stroke / 2);
-          }
-          8% {
-            width: $icon-diameter + (4 * $icon-stroke);
-            height: $icon-diameter + (4 * $icon-stroke);
-            margin: -(2 * $icon-stroke);
-          }
-        }
-      }
-    }
-
-    .taxonomy-item__metric {
-      color: $color__taxonomy-icon--error;
-    }
-  }
-
-  &:hover, &:focus {
-    .taxonomy-item__icon {
-      background-color: $color__taxonomy-icon--bg--hover;
-    }
-  }
+  width: em($item-width);
 
   .taxonomy-item__icon {
-		width: $icon-diameter;
-		height: $icon-diameter;
-		border-radius: 50%;
-		background-color: $color__taxonomy-icon--bg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $icon-diameter;
+    height: $icon-diameter;
+    border-radius: 50%;
+    background-color: $color__taxonomy-icon--bg;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 43%;
     transition: background-color .2s;
     margin-bottom: 1em;
+
+    svg {
+      display: block;
+      position: relative;
+      left: em(-110px);
+      top: em(7px);
+      margin: 20%;
+      height: $icon-height;
+    }
+  }
+}
+
+@mixin animation--pulse($size, $stroke) {
+  animation-name: pulse;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+
+  @keyframes pulse {
+    0%, 11%, 100% {
+      width: $size + (2 * $stroke);
+      height: $size + (2 * $stroke);
+      margin: -$stroke;
+    }
+    4% {
+      width: $size + $stroke;
+      height: $size + $stroke;
+      margin: - ($stroke / 2);
+    }
+    8% {
+      width: $size + (3 * $stroke);
+      height: $size + (3 * $stroke);
+      margin: - (1.5 * $stroke);
+    }
+  }
+}
+
+@mixin item-state($color__state: none) {
+  .taxonomy-item__icon {
+    display: inline-block;
+
+    &:before {
+      content: '';
+      width: 8.6em;
+      height: 8.6em;
+      background: $color__state;
+      position: absolute;
+      border-radius: 50%;
+      margin-left: -$icon-size__global-dash--stroke;
+      margin-top: -$icon-size__global-dash--stroke;
+      z-index: z('hidden');
+    }
   }
 
-  .taxonomy-item__icon svg {
-    display: block;
-    margin: 20%;
-    width: 60%;
-    height: 60%;
+  .taxonomy-item__metric {
+    color: $color__state;
   }
 }

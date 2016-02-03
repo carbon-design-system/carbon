@@ -1,14 +1,17 @@
-$taxonomy-item__icon-diameter--global-dash: 130px;
-$taxonomy-item__icon-stroke--global-dash: 4px;
+$icon-size__global-dash--diameter: 130px;
+$icon-size__global-dash--stroke: 4px;
+$icon-size__global-dash--height: 62px;
 
-$taxonomy-item__icon-diameter--taxonomy-menu: 75px;
-$taxonomy-item__icon-stroke--taxonomy-menu: 3px;
+$icon-size__taxonomy-menu--diameter: 75px;
+$icon-size__taxonomy-menu--stroke: 3px;
+$icon-size__taxonomy-menu--height: 35px;
 
-$color__taxonomy-item--healthy: #6dedd8; // !temporary
-$color__taxonomy-icon--error: #e71e30; //!temporary
-$color__taxonomy-icon--stateless: #5aaafa; // !temporary
-$color__taxonomy-icon--metric-background: #152934; // !temporary
+$color__taxonomy-item--is-healthy: $color__teal-30;
+$color__taxonomy-icon--is-error: $color__red-40;
+$color__taxonomy-icon--is-stateless: $color__blue-30;
+$color__taxonomy-icon--is-stopped: $color__navy-gray-7;
+$color__taxonomy-icon--metric-background: $color__blue-90;
 
-$color__taxonomy-icon--bg: #244556; //!temporary
-$color__taxonomy-icon--bg--hover: lighten($color__taxonomy-icon--bg, 5); //!temporary
-$color__taxonomy-icon--healthy-stroke: linear-gradient(135deg, $color__taxonomy-item--healthy, #5AAAFA); //!temporary
+$color__taxonomy-icon--bg: $color__navy-gray-8;
+$color__taxonomy-icon--bg--hover: lighten($color__taxonomy-icon--bg, 5);
+$color__taxonomy-icon--is-healthy-stroke: linear-gradient(135deg, $color__taxonomy-item--is-healthy, $color__blue-30);
