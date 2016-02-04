@@ -11,7 +11,7 @@ export default class Modal {
     this.element = element;
 
     this.options = Object.assign({
-      type: element.getAttribute('data-modal-type') || Modal.TYPE_TRANSACTIONAL,
+      type: element.getAttribute('data-modal-type') || Modal.TYPE_TRANSACTIONAL || Modal.TYPE_INPUTS,
       classVisible: 'modal-visible',
     }, options);
 
@@ -150,6 +150,7 @@ export default class Modal {
 
 Modal.TYPE_TRANSACTIONAL = 'transactional';
 Modal.TYPE_PASSIVE = 'passive';
+Modal.TYPE_INPUTS = 'inputs';
 Modal.components = [];
 
 window.addEventListener('DOMContentLoaded', () => {

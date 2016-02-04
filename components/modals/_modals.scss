@@ -142,3 +142,35 @@
 .modal-buttons button {
   margin-right: .5em;
 }
+
+// modal with inputs
+.modal-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: em(90px);
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: em(14px);
+
+    .text__input {
+      margin-right: 1em;
+      font-weight: 400;
+      color: $color__modal-text;
+      background: $color__modal-input-light;
+    }
+
+    .select {
+      margin-left: 1em;
+      font-weight: 400;
+      color: $color__modal-text;
+      background-color: $color__modal-input-light;
+      background-position: 95%;
+    }
+  }
+}
+
