@@ -8,7 +8,7 @@ import ContentSwitcher from './components/content-switcher/content-switcher';
 import OverflowMenu from './components/overflow-menu/overflow-menu';
 import Modal from './components/modals/modals';
 import HeaderNav from './components/header/header';
-import Lists from './base-elements/lists/lists';
+import Toolbars from './components/toolbars/toolbars';
 
 document.addEventListener('DOMContentLoaded', () => {
   [... document.querySelectorAll('[data-floating-action-button]')].forEach((element) => new FabButton(element));
@@ -27,5 +27,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     HeaderNav.hook(element);
   });
-  [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach((element) => new Lists(element));
+  [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach((element) => new Toolbars(element));
 });
