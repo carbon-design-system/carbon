@@ -4,19 +4,24 @@
 .content-switcher {
   display: flex;
 
-  .content-switcher__btn {
-    @extend %content-switcher__btn;
+  input[type='radio'] {
+    visibility: hidden;
+    position: absolute;
+
+    &:checked + label {
+      @include btn--primary($color__btn--bg, $color__btn--bg);
+      @extend %content-switcher__btn;
+      color: $color__content-switcher-text--active;
+    }
+  }
+
+  label {
     @include btn--secondary($color__btn--bg);
+    @extend %content-switcher__btn;
 
     &:hover,
     &:focus {
       color: $color__content-switcher-text--active;
     }
-  }
-
-  .active {
-    @extend %content-switcher__btn;
-    @include btn--primary($color__btn--bg, $color__btn--bg);
-    color: $color__content-switcher-text--active;
   }
 }
