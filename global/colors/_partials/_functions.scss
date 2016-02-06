@@ -11,7 +11,7 @@
   @if map-has-key($palette__ibm, $color) {
     @return map-get($palette__ibm, $color);
   } @else {
-    @warn 'We couldn not find #{$color} in $palette__ibm map.
-         Please make sure it is defined.'';
+    @warn 'We could not find #{$color} in $palette__ibm map.
+         Please make sure it is defined.';
   }
 }
