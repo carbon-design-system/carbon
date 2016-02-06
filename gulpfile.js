@@ -4,6 +4,7 @@
 // Requires
 //////////////////////////////
 
+const path = require('path');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 const nodemon = require('gulp-nodemon');
@@ -14,6 +15,13 @@ const sassLint = require('gulp-sass-lint');
 const sourcemaps = require('gulp-sourcemaps');
 const webpack = require('webpack');
 const gutil = require('gulp-util');
+const Server = require('karma').Server;
+const cloptions = require('minimist')(process.argv.slice(2), {
+  alias: {
+    k: 'keepalive',
+  },
+  boolean: ['keepalive'],
+});
 
 //////////////////////////////
 // Variables
@@ -158,6 +166,17 @@ gulp.task('copy:images', () => {
 });
 
 gulp.task('copy', ['copy:fonts', 'copy:images']);
+
+/////////////////////////////
+// Test
+/////////////////////////////
+
+gulp.task('test', function (done) {
+  new Server({
+    configFile: path.resolve(__dirname, 'tests/karma.conf.js'),
+    singleRun: !cloptions.keepalive,
+  }, done).start();
+});
 
 //////////////////////////////
 // Running Tasks

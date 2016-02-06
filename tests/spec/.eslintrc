@@ -1,0 +1,28 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "extends": [
+    "airbnb/base"
+  ],
+  "globals": {
+    "describe": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true,
+    "it": true,
+    "expect": true,
+    "sinon": true
+  },
+  "rules": {
+    "func-names": 0,
+    "no-unused-expressions": 0,
+    "prefer-arrow-callback": 0
+  }
+}
