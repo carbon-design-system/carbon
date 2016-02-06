@@ -1,11 +1,8 @@
 {
   "name": "bluemix-components",
-  "version": "4.4.0-alpha",
+  "version": "4.5.0-alpha",
   "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
-  "main": "_styles.scss",
-  "dependencies": {
-    "bluemix-icons": "^0.2.4"
-  },
+  "main": "styles.scss",
   "keywords": [
     "bluemix",
     "component",
@@ -14,9 +11,7 @@
   "license": "MIT",
   "ignore": [
     ".git",
-    "dev.{scss, css}",
-    "dev-colors.{scss, css}",
-    "dev-typography.{scss, css}",
+    "dev",
     "bower_components",
     "node_modules",
     "examples",
@@ -25,10 +20,14 @@
     ".editorconfig",
     ".eslintignore",
     ".eslintrc",
+    ".htmlhintrc",
     ".sass-lint.yml",
     "CORE-TEAM.md",
     "gulpfile.js",
     "server.js",
     "views"
-  ]
+  ],
+  "dependencies": {
+    "bluemix-icons": "^0.2.4"
+  }
 }
