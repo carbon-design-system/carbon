@@ -31,7 +31,6 @@
 
 // inputs/search
 @import 'base-elements/inputs/search/_partials/vars';
-@import 'base-elements/inputs/search/_partials/mixins';
 
 // inputs/select
 @import 'base-elements/inputs/select/_partials/extends';
@@ -89,6 +88,10 @@
 @import 'components/floating-action-button/_partials/mixins';
 @import 'components/floating-action-button/_partials/extends';
 
+// taxonomy-item
+@import 'components/taxonomy-item/_partials/vars';
+@import 'components/taxonomy-item/_partials/mixins';
+
 // global-profile
 @import 'components/global-profile/_partials/mixins';
 
@@ -106,10 +109,6 @@
 
 // overflow-menu
 @import 'components/tabs-nav/_partials/vars';
-
-// taxonomy-item
-@import 'components/taxonomy-item/_partials/vars';
-@import 'components/taxonomy-item/_partials/mixins';
 
 // tooltips
 @import 'components/tooltips/_partials/vars';
