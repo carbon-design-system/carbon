@@ -4,18 +4,32 @@
 import '../../global/js/array-from';
 import '../../global/js/object-assign';
 
-import ContentSwitcher from './content-switcher';
+function toggleClass(element, name, add) {
+  if (element.classList.contains(name) === !add) {
+    element.classList[add ? 'add' : 'remove'](name);
+  }
+}
 
-export default class Tab extends ContentSwitcher {
+export default class Tab {
   constructor(element, options = {}) {
-    super(element, Object.assign({
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      throw new TypeError('DOM element should be given to initialize this widget.');
+    }
+
+    this.element = element;
+
+    this.options = Object.assign({
       selectorMenu: '.tabs__nav',
       selectorTrigger: '.tabs__trigger',
       selectorTriggerText: '.trigger__text',
       selectorButton: '.nav__item',
       selectorButtonSelected: '.nav__item.selected',
       classActive: 'selected',
-    }, options));
+    }, options);
+
+    [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
+      button.addEventListener('click', (event) => this.handleItemClick(event));
+    });
 
     [... this.element.querySelectorAll(this.options.selectorTrigger)].forEach((trigger) => {
       trigger.addEventListener('click', (event) => this.updateMenuState(event));
@@ -24,13 +38,22 @@ export default class Tab extends ContentSwitcher {
     this.updateTriggerText(this.element.querySelector(this.options.selectorButtonSelected));
   }
 
-  setActive(event) {
+  handleItemClick(event) {
     if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
       event.preventDefault();
     }
-    super.setActive(event);
+    this.setActive(event);
     this.updateMenuState();
     this.updateTriggerText(event.currentTarget);
+  }
+
+  setActive(event) {
+    [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
+      if (button !== event.currentTarget) {
+        toggleClass(button, this.options.classActive, false);
+      }
+    });
+    toggleClass(event.currentTarget, this.options.classActive, true);
   }
 
   updateMenuState() {
