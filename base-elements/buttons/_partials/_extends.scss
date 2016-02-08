@@ -1,5 +1,7 @@
 %btn--base {
   @extend %strong;
+  @extend %helvetica;
+  @extend %font-smoothing;
   display: inline-block;
   height: em(40px);
   padding: 0 16px;
@@ -17,14 +19,12 @@
 
 %btn--primary {
   @extend %btn--base;
-
   border-color: transparent;
   border-width: 2px;
 }
 
 %btn--secondary {
   @extend %btn--base;
-
   border-style: solid;
   border-width: 2px;
 }
