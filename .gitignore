@@ -20,3 +20,6 @@ project.sublime-project
 project.sublime-workspace
 jsconfig.json
 .vscode
+
+# Test reports
+tests/coverage

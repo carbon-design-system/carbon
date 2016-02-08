@@ -70,7 +70,30 @@ git commit -m "Update header with newest designs, resolves #123"
 * [Close a commit via commit message](https://help.github.com/articles/closing-issues-via-commit-messages/) - *1.5 min read*
 * [Writing good commit messages](https://github.com/erlang/otp/wiki/Writing-good-commit-messages) - *1.5 min read*
 
-## 5. Make a Pull Request
+## 5. Test your JavaScript code
+
+If you make any changes to our JavaScript code, test your change by:
+
+```sh
+> gulp test
+```
+
+If you add any features to our JavaScript code, make sure adding test so that your code is covered.
+Tests are written in [Mocha](https://mochajs.org)/[Chai](http://chaijs.com).
+You can see if your code is covered by looking at bluemix-components/tests/coverage/\*/index.html after running test.
+
+If your change may hit some browser quirks, use `-b` option, like:
+
+```sh
+> gulp test -b IE
+```
+
+Other options for testing are:
+
+* `-d`/`--debug`: Stop generating code coverage report. Useful to debug your code when running test.
+* `-k`/`--keepalive`: Keep running test runner even after test ends. Test will restart running when you make changes to any test files or any files under test.
+
+## 6. Make a Pull Request
 
 When you're at a good stopping place and you're ready for feedback from other contributors and maintainers, **push your commits to your fork**:
 
