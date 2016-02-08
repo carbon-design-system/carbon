@@ -6,7 +6,9 @@ $z-map: (
   dropdown  : 7000,
   header    : 6000,
   footer    : 5000,
-  hidden    : -1
+  hidden: -1,
+  overflowHidden: -1,
+  overflowOptions: 1
 );
 
 // Z-Index Function
