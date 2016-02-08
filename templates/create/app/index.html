@@ -91,10 +91,11 @@
           <h2 class="create-main__header">1. Select Image</h2>
 
           <div class="form-row">
-            <div data-content-switcher class="content-switcher">
-
-              <button type="button" class="content-switcher__btn active">New</button>
-              <button type="button" class="content-switcher__btn">Existing</button>
+            <div class="content-switcher">
+              <input type="radio" name="image-select" value="new" id="new" checked>
+              <label for="new">New</label>
+              <input type="radio" name="image-select" value="existing" id="existing">
+              <label for="existing">Existing</label>
             </div>
           </div>
 

@@ -1,7 +1,10 @@
+// This file was moved here as a dependancy of tab-nav.
+// It no longer has anything to do with content-switcher, so the name could
+// possibly be changed
 import '../../global/js/array-from';
 import '../../global/js/object-assign';
 
-import ContentSwitcher from '../content-switcher/content-switcher';
+import ContentSwitcher from './content-switcher';
 
 export default class Tab extends ContentSwitcher {
   constructor(element, options = {}) {
