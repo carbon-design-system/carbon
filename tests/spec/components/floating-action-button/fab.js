@@ -3,13 +3,13 @@ import FabButton from '../../../../components/floating-action-button/fab';
 
 describe('Test floating action button', function () {
   describe('Constructor', function () {
-    it('Should throw if root element is not given', function () {
+    it(`Should throw if root element is not given`, function () {
       expect(() => {
         new FabButton(); // eslint-disable-line no-new
       }).to.throw;
     });
 
-    it('Should throw if root element is not a DOM element', function () {
+    it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
         new FabButton(document.createTextNode('')); // eslint-disable-line no-new
       }).to.throw;
@@ -25,18 +25,18 @@ describe('Test floating action button', function () {
       document.body.appendChild(element);
     });
 
-    it('Should cancel the event for <a>', function () {
+    it(`Should cancel the event for <a>`, function () {
       // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
       expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).to.be.false;
     });
 
-    it('Should turn to open state from closed state', function () {
+    it(`Should turn to open state from closed state`, function () {
       element.classList.add('fab--close');
       element.dispatchEvent(new CustomEvent('click'));
       expect(element.classList.contains('fab--close')).to.be.false;
     });
 
-    it('Should turn to closed state from open state', function () {
+    it(`Should turn to closed state from open state`, function () {
       element.dispatchEvent(new CustomEvent('click'));
       expect(element.classList.contains('fab--close')).to.be.true;
     });
