@@ -5,7 +5,7 @@ export default class OverflowMenu {
     }
     this.element = element;
     this.element.addEventListener('click', (e) => this.openMenu(e));
-  }
+}
 
   openMenu(e) {
     if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {

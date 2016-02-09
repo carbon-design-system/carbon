@@ -19,15 +19,17 @@
     display: none;
     padding: .25em 0;
     margin: 2.5em 0 0 -3em;
+    z-index: z('overflowOptions');
     background: $color--list-bg;
     transition-duration: .25s;
+
 
     // rectangle to make little arrow
     &:before {
       position: absolute;
       top: -.5em;
       left: 1.6em;
-      z-index: - 1;
+      z-index: z('overflowHidden');
       display: block;
       width: 1em;
       height: 1em;
@@ -38,6 +40,7 @@
   }
 
   &__btn {
+    @extend %helvetica;
     width: 100%;
     padding: .5em 1em;
     font-size: .85rem;
@@ -90,15 +93,15 @@
   }
 
   // Focus and hover states for the entire component
-  &:focus,
-  &:active,
-  &:hover {
-    .overflow-menu__icon {
-      color: $color__white;
-    }
+ &:focus,
+ &:active,
+ &.open {
+   .overflow-menu__icon {
+     color: $color__white;
+   }
 
-    .overflow-menu__options {
-      display: block;
-    }
-  }
+   .overflow-menu__options {
+     display: block;
+   }
+ }
 }
