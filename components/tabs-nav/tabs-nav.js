@@ -18,19 +18,19 @@ export default class Tab extends ContentSwitcher {
     }, options));
 
     [... this.element.querySelectorAll(this.options.selectorTrigger)].forEach((trigger) => {
-      trigger.addEventListener('click', (e) => this.updateMenuState(e));
+      trigger.addEventListener('click', (event) => this.updateMenuState(event));
     });
 
     this.updateTriggerText(this.element.querySelector(this.options.selectorButtonSelected));
   }
 
-  setActive(e) {
-    if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
-      e.preventDefault();
+  setActive(event) {
+    if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
+      event.preventDefault();
     }
-    super.setActive(e);
+    super.setActive(event);
     this.updateMenuState();
-    this.updateTriggerText(e.currentTarget);
+    this.updateTriggerText(event.currentTarget);
   }
 
   updateMenuState() {

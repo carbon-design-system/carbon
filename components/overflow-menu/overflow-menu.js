@@ -4,12 +4,12 @@ export default class OverflowMenu {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
     this.element = element;
-    this.element.addEventListener('click', (e) => this.openMenu(e));
-}
+    this.element.addEventListener('click', (event) => this.openMenu(event));
+  }
 
-  openMenu(e) {
-    if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
-      e.preventDefault();
+  openMenu(event) {
+    if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
+      event.preventDefault();
     }
     this.element.classList.toggle('open');
   }
