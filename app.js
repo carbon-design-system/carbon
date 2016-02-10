@@ -26,22 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach((element) => new Toolbars(element));
 
-  // TODO: Where should this example code go?
-  // example of how to hook into Modal for a 'transactional' effect
-  const transactionalModal = Modal.getTarget('transactional-modal');
-  transactionalModal.options.canClose = false;
-
-  transactionalModal.element.addEventListener('modal-beinghidden', (event) => {
-    if (!transactionalModal.options.canClose) {
-      event.preventDefault(); //this stops the event
-      console.log('Nope! Overriding hide event. Hit save to close.');
-    }
-  });
-
-  transactionalModal.element.querySelector('.buttons__save').addEventListener('click', () => {
-    transactionalModal.options.canClose = true;
-    transactionalModal.hide();
-    transactionalModal.options.canClose = false;
-  });
-  // ----- transactional modal example
+  // // Where should this example code go?
+  // // example of how to hook into Modal for a 'transactional' effect
+  // const transactionalModal = Modal.getTarget('transactional-modal');
+  // transactionalModal.options.canClose = false;
+  //
+  // transactionalModal.element.addEventListener('modal-beinghidden', (event) => {
+  //   if (!transactionalModal.options.canClose) {
+  //     event.preventDefault(); //this stops the event
+  //     console.log('Nope! Overriding hide event. Hit save to close.');
+  //   }
+  // });
+  //
+  // transactionalModal.element.querySelector('.buttons__save').addEventListener('click', () => {
+  //   transactionalModal.options.canClose = true;
+  //   transactionalModal.hide();
+  //   transactionalModal.options.canClose = false;
+  // });
+  // // ----- transactional modal example
 });
