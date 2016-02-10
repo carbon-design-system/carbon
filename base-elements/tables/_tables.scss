@@ -42,10 +42,18 @@
     padding: $padding__table;
     font-size: .875rem;
     text-align: left;
+    overflow: hidden;
 
     .link {
       color: $color__blue-30;;
     }
+  }
+
+  &__link {
+    color: $color__blue-30;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .table__row {
