@@ -12,7 +12,7 @@ export default class HeaderNav {
 
     this.options = Object.assign({
       selectorTriggerLabel: '.current-taxonomy',
-      selectorActive: 'taxonomy-nav--active',
+      classActive: 'taxonomy-nav--active',
       selectorMenu: '.taxonomy-menu',
       selectorItem: '.taxonomy-item',
       selectorItemLink: '.taxonomy-item--taxonomy-menu',
@@ -29,7 +29,7 @@ export default class HeaderNav {
   }
 
   toggleNav(event) {
-    const isActive = this.element.classList.contains(this.options.selectorActive);
+    const isActive = this.element.classList.contains(this.options.classActive);
     let add;
     if (event.type === 'click' || event.type === 'keydown' && event.which === 40) {
       // Toggle button or ESC key on nav
@@ -59,8 +59,8 @@ export default class HeaderNav {
     }
 
     if (!eventStart.defaultPrevented) {
-      this.element.classList[add ? 'add' : 'remove'](this.options.selectorActive);
-      (this.element.classList.contains(this.options.selectorActive) ? this.menuNode : this.triggerNode).focus();
+      this.element.classList[add ? 'add' : 'remove'](this.options.classActive);
+      (this.element.classList.contains(this.options.classActive) ? this.menuNode : this.triggerNode).focus();
       this.element.dispatchEvent(new CustomEvent(`header-${typeSuffix}`, {
         bubbles: true,
         cancelable: true,
