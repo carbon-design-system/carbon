@@ -151,8 +151,8 @@ export default class Modal {
         event.preventDefault();
       }
       modal.show(event.currentTarget, () => {
-        if (modalElement.offsetWidth > 0 && modalElement.offsetHeight > 0) {
-          modalElement.focus();
+        if (modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
+          modal.element.focus();
         }
       });
     });
