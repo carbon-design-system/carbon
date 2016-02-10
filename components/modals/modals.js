@@ -132,12 +132,12 @@ export default class Modal {
       return Modal.components.filter((entry) => target === entry.element)[0] || new Modal(target, options);
     });
 
-    element.addEventListener('click', (e) => {
-      if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
-        e.preventDefault();
+    element.addEventListener('click', (event) => {
+      if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
+        event.preventDefault();
       }
       modals.forEach((modal) => {
-        modal.show(e.currentTarget, () => {
+        modal.show(event.currentTarget, () => {
           const modalElement = modal.element;
           if (modalElement.offsetWidth > 0 && modalElement.offsetHeight > 0) {
             modalElement.focus();
@@ -154,8 +154,8 @@ Modal.TYPE_INPUTS = 'inputs';
 Modal.components = [];
 
 window.addEventListener('DOMContentLoaded', () => {
-  document.body.addEventListener('keydown', (e) => {
-    if (e.keyCode === 27) {
+  document.body.addEventListener('keydown', (event) => {
+    if (event.keyCode === 27) {
       Modal.components.forEach((modal) => {
         if (modal.element.ownerDocument === document && modal.options.type === Modal.TYPE_PASSIVE) {
           modal.hide();

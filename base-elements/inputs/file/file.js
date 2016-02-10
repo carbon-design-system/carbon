@@ -9,17 +9,17 @@ export default class FileUploader {
     const labelSelector = options && options.labelSelector || element.getAttribute('data-label');
     this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 
-    element.addEventListener('change', (e) => this.updateLabel(e));
+    element.addEventListener('change', (event) => this.updateLabel(event));
   }
 
-  updateLabel(e) {
+  updateLabel(event) {
     let fileName = '';
     const element = this.element;
 
     if (element.files && element.files.length > 1) {
       fileName = (element.getAttribute('data-multiple-caption') || '').replace('{count}', element.files.length);
     } else {
-      fileName = e.target.value.split('\\').pop();
+      fileName = event.target.value.split('\\').pop();
     }
 
     if (fileName) {

@@ -7,11 +7,11 @@ const missingNativeCustomEvent = (() => {
 })();
 if (missingNativeCustomEvent) {
   window.CustomEvent = function CustomEvent(type, init = {}) {
-    const e = document.createEvent('HTMLEvents');
-    e.initEvent(type, init.bubbles, init.cancelable);
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent(type, init.bubbles, init.cancelable);
     if (init.detail) {
-      e.detail = init.detail;
+      event.detail = init.detail;
     }
-    return e;
+    return event;
   };
 }

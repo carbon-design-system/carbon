@@ -21,30 +21,30 @@ export default class HeaderNav {
 
     this.menuNode = this.element.querySelector(this.options.selectorMenu);
 
-    this.element.addEventListener('keydown', (e) => this.toggleNav(e));
+    this.element.addEventListener('keydown', (event) => this.toggleNav(event));
 
     [... this.element.querySelectorAll(this.options.selectorItemLink)].forEach((item) => {
       item.addEventListener('click', (e) => this.select(e));
     });
   }
 
-  toggleNav(e) {
+  toggleNav(event) {
     const isActive = this.element.classList.contains(this.options.selectorActive);
     let add;
-    if (e.type === 'click' || e.type === 'keydown' && e.which === 40) {
+    if (event.type === 'click' || event.type === 'keydown' && event.which === 40) {
       // Toggle button or ESC key on nav
       add = !isActive;
-    } else if (e.type === 'keydown' && e.which === 27) {
+    } else if (event.type === 'keydown' && event.which === 27) {
       // Down arrow on launch button
       add = false;
     } else {
       return;
     }
-    if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
-      e.preventDefault();
+    if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
+      event.preventDefault();
     }
 
-    const launchingElement = e.currentTarget;
+    const launchingElement = event.currentTarget;
     const typeSuffix = add ? 'shown' : 'hidden';
     const eventStart = new CustomEvent(`header-being${typeSuffix}`, {
       bubbles: true,
@@ -54,7 +54,7 @@ export default class HeaderNav {
     this.element.dispatchEvent(eventStart);
 
     if (add) {
-      this.triggerNode = e.currentTarget;
+      this.triggerNode = event.currentTarget;
       this.triggerLabelNode = this.triggerNode.querySelector(this.options.selectorTriggerLabel);
     }
 
@@ -69,13 +69,13 @@ export default class HeaderNav {
     }
   }
 
-  select(e) {
-    const activatedElement = e.currentTarget;
+  select(event) {
+    const activatedElement = event.currentTarget;
     const eventStart = new CustomEvent('header-beingselected', {
       bubbles: true,
       cancelable: true,
       detail: {
-        initiatingEvent: e,
+        initiatingEvent: event,
         itemElement: activatedElement,
       },
     });
@@ -115,11 +115,11 @@ export default class HeaderNav {
     });
 
     ['keydown', 'click'].forEach((name) => {
-      element.addEventListener(name, (e) => {
-        if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
-          e.preventDefault();
+      element.addEventListener(name, (event) => {
+        if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
+          event.preventDefault();
         }
-        navs.forEach((nav) => nav.toggleNav(e));
+        navs.forEach((nav) => nav.toggleNav(event));
       });
     });
   }

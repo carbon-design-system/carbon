@@ -21,16 +21,16 @@ export default class ContentSwitcher {
     }, options);
 
     [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
-      button.addEventListener('click', (e) => this.setActive(e));
+      button.addEventListener('click', (event) => this.setActive(event));
     });
   }
 
-  setActive(e) {
+  setActive(event) {
     [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
-      if (button !== e.currentTarget) {
+      if (button !== event.currentTarget) {
         toggleClass(button, this.options.classActive, false);
       }
     });
-    toggleClass(e.currentTarget, this.options.classActive, true);
+    toggleClass(event.currentTarget, this.options.classActive, true);
   }
 }

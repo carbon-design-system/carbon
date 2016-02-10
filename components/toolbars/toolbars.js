@@ -7,14 +7,14 @@ export default class Toolbars {
     this.element = element;
     this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.getAttribute('data-list-icons-search-action-target'));
 
-    this.element.addEventListener('click', (e) => this.handleActionClick(e));
+    this.element.addEventListener('click', (event) => this.handleActionClick(event));
   }
 
-  handleActionClick(e) {
-    const searchActionNode = e.currentTarget;
+  handleActionClick(event) {
+    const searchActionNode = event.currentTarget;
 
     if (searchActionNode.tagName === 'A' || searchActionNode.querySelector('a')) {
-      e.preventDefault();
+      event.preventDefault();
     }
 
     this.element.classList.toggle('show-search');

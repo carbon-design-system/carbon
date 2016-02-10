@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   [... document.querySelectorAll('[data-modal-target].buttons__transactional, [data-modal-target].buttons__passive, [data-modal-target].buttons__inputs')].forEach((element) => Modal.hook(element));
   [... document.querySelectorAll('[data-nav-target]')].forEach((element) => {
     [... document.querySelectorAll(element.getAttribute('data-nav-target'))].forEach((target) => {
-      target.addEventListener('header-beingselected', (e) => {
+      target.addEventListener('header-beingselected', (event) => {
         // In demo, don't follow the link in nav
-        e.detail.initiatingEvent.preventDefault();
+        event.detail.initiatingEvent.preventDefault();
       });
     });
     HeaderNav.hook(element);

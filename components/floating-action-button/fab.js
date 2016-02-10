@@ -4,12 +4,12 @@ export default class FabButton {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
     this.element = element;
-    element.addEventListener('click', (e) => this.toggle(e));
+    element.addEventListener('click', (event) => this.toggle(event));
   }
 
-  toggle(e) {
-    if (e.currentTarget.tagName === 'A' || e.currentTarget.querySelector('a')) {
-      e.preventDefault();
+  toggle(event) {
+    if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
+      event.preventDefault();
     }
     this.element.classList.toggle('fab--close');
   }
