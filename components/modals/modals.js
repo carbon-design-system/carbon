@@ -68,7 +68,7 @@ export default class Modal {
 
     if (this.element.classList.contains(this.options.classVisible)) {
       if (callback) {
-        callback();
+        callback(null, true);
       }
       return;
     }
@@ -103,7 +103,7 @@ export default class Modal {
   hide(callback) {
     if (!this.element.classList.contains(this.options.classVisible)) {
       if (callback) {
-        callback();
+        callback(null, true);
       }
       return;
     }
@@ -150,8 +150,8 @@ export default class Modal {
       if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
         event.preventDefault();
       }
-      modal.show(event.currentTarget, () => {
-        if (modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
+      modal.show(event.currentTarget, (error, shownAlready) => {
+        if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
           modal.element.focus();
         }
       });
