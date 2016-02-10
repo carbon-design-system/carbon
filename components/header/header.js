@@ -122,6 +122,8 @@ export default class HeaderNav {
         navs.forEach((nav) => nav.toggleNav(event));
       });
     });
+
+    return navs;
   }
 }
 
