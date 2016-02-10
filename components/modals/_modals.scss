@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
   padding: 1.5em 2em 2em 2em;
-  margin: 3em -3.125em -3.125em -3.125em;
+  margin: 3em -3.125em -2.5em -3.125em;
   background: $color__modal-footer;
 
   .buttons {
@@ -134,8 +134,7 @@
 
 .modal__header {
   padding: 2.8125em 3.125em 2.1875em 3.125em;
-  margin: -3.125em -3.125em 1.5em -3.125em;
-  background: $color__modal-header;
+  margin: -2.5em -3.125em 1.5em -3.125em;
 }
 
 // Example buttons for components website
