@@ -9,18 +9,28 @@ export default class Modal {
     }
 
     this.element = element;
+    this.id = element.getAttribute('data-modal-id');
 
     this.options = Object.assign({
-      type: element.getAttribute('data-modal-type') || Modal.TYPE_TRANSACTIONAL || Modal.TYPE_INPUTS,
       classVisible: 'modal-visible',
     }, options);
 
     Modal.components.push(this);
 
-    this.hookCloseButtons();
+    this.hookCloseActions();
   }
 
-  hookCloseButtons() {
+  hookCloseActions() {
+    this.element.addEventListener('click', (event) => {
+      if (event.currentTarget === event.target) this.hide();
+    });
+
+    this.element.ownerDocument.body.addEventListener('keydown', (event) => {
+      if (event.keyCode === 27 && this.element.ownerDocument === document) {
+        this.hide();
+      }
+    });
+
     [... this.element.querySelectorAll('[data-modal-close]')].forEach((element) => {
       element.addEventListener('click', () => {
         this.hide();
@@ -128,39 +138,31 @@ export default class Modal {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
-    const modals = [... element.ownerDocument.querySelectorAll(element.getAttribute('data-modal-target'))].map((target) => {
-      return Modal.components.filter((entry) => target === entry.element)[0] || new Modal(target, options);
-    });
+    const modalElement = [... element.ownerDocument.querySelectorAll(`[data-modal-id="${element.getAttribute('data-modal-target')}"]`)];
+
+    if (modalElement.length > 1) {
+      throw new Error('data-modal-id must be unique.');
+    }
+
+    const modal = Modal.components.filter((modal) => modalElement[0] === modal.element)[0] || new Modal(modalElement[0], options);
 
     element.addEventListener('click', (event) => {
       if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
         event.preventDefault();
       }
-      modals.forEach((modal) => {
-        modal.show(event.currentTarget, () => {
-          const modalElement = modal.element;
-          if (modalElement.offsetWidth > 0 && modalElement.offsetHeight > 0) {
-            modalElement.focus();
-          }
-        });
+      modal.show(event.currentTarget, () => {
+        if (modalElement.offsetWidth > 0 && modalElement.offsetHeight > 0) {
+          modalElement.focus();
+        }
       });
     });
+
+    return modal;
+  }
+
+  static getTarget(id) {
+    return Modal.components.filter((modal) => modal.id === id)[0];
   }
 }
 
-Modal.TYPE_TRANSACTIONAL = 'transactional';
-Modal.TYPE_PASSIVE = 'passive';
-Modal.TYPE_INPUTS = 'inputs';
 Modal.components = [];
-
-window.addEventListener('DOMContentLoaded', () => {
-  document.body.addEventListener('keydown', (event) => {
-    if (event.keyCode === 27) {
-      Modal.components.forEach((modal) => {
-        if (modal.element.ownerDocument === document && modal.options.type === Modal.TYPE_PASSIVE) {
-          modal.hide();
-        }
-      });
-    }
-  });
-});
