@@ -9,6 +9,8 @@ export default class FileUploader {
     const labelSelector = options && options.labelSelector || element.getAttribute('data-label');
     this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 
+    FileUploader.components.set(this.element, this);
+
     element.addEventListener('change', (event) => this.updateLabel(event));
   }
 
@@ -26,4 +28,14 @@ export default class FileUploader {
       this.labelNode.innerHTML = fileName;
     }
   }
+
+  release() {
+    FileUploader.components.delete(this.element);
+  }
+
+  static create(element, options) {
+    return FileUploader.components.get(element) || new FileUploader(element, options);
+  }
 }
+
+FileUploader.components = new WeakMap();

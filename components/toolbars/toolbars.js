@@ -7,6 +7,8 @@ export default class Toolbars {
     this.element = element;
     this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.getAttribute('data-list-icons-search-action-target'));
 
+    Toolbars.components.set(this.element, this);
+
     this.element.addEventListener('click', (event) => this.handleActionClick(event));
   }
 
@@ -21,4 +23,14 @@ export default class Toolbars {
     this.searchFieldNode.classList.toggle('show-search');
     this.searchFieldNode.value = '';
   }
+
+  release() {
+    Toolbars.components.delete(this.element);
+  }
+
+  static create(element) {
+    return Toolbars.components.get(element) || new Toolbars(element);
+  }
 }
+
+Toolbars.components = new WeakMap();

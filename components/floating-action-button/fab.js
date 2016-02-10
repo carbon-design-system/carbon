@@ -4,6 +4,9 @@ export default class FabButton {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
     this.element = element;
+
+    FabButton.components.set(this.element, this);
+
     element.addEventListener('click', (event) => this.toggle(event));
   }
 
@@ -13,4 +16,14 @@ export default class FabButton {
     }
     this.element.classList.toggle('fab--close');
   }
+
+  release() {
+    FabButton.components.delete(this.element);
+  }
+
+  static create(element) {
+    return FabButton.components.get(element) || new FabButton(element);
+  }
 }
+
+FabButton.components = new WeakMap();

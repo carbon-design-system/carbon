@@ -1,4 +1,7 @@
 import '../../../../global/js/custom-event';
+
+import '../../../utils/es6-weak-map-global'; // For PhantomJS
+
 import FabButton from '../../../../components/floating-action-button/fab';
 
 describe('Test floating action button', function () {
@@ -17,11 +20,12 @@ describe('Test floating action button', function () {
   });
 
   describe('Toggling', function () {
+    let fab;
     let element;
 
     before(function () {
       element = document.createElement('a');
-      new FabButton(element); // eslint-disable-line no-new
+      fab = new FabButton(element);
       document.body.appendChild(element);
     });
 
@@ -46,7 +50,47 @@ describe('Test floating action button', function () {
     });
 
     after(function () {
+      fab.release();
       document.body.removeChild(element);
+    });
+  });
+
+  describe('Managing instances', function () {
+    let element;
+
+    before(function () {
+      element = document.createElement('a');
+    });
+
+    it('Should prevent creating duplicate instances', function () {
+      let first;
+      let second;
+      try {
+        first = FabButton.create(element);
+        second = FabButton.create(element);
+        expect(first).to.equal(second);
+      } finally {
+        first && first.release();
+        if (first !== second) {
+          second && second.release();
+        }
+      }
+    });
+
+    it('Should let create a new instance for an element if an earlier one has been released', function () {
+      let first;
+      let second;
+      try {
+        first = FabButton.create(element);
+        first.release();
+        second = FabButton.create(element);
+        expect(first).not.to.equal(second);
+      } finally {
+        first && first.release();
+        if (first !== second) {
+          second && second.release();
+        }
+      }
     });
   });
 });

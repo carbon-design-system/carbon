@@ -27,6 +27,8 @@ export default class Tab {
       classActive: 'selected',
     }, options);
 
+    Tab.components.set(this.element, this);
+
     [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
       button.addEventListener('click', (event) => this.handleItemClick(event));
     });
@@ -63,4 +65,14 @@ export default class Tab {
   updateTriggerText(target) {
     this.element.querySelector(this.options.selectorTriggerText).textContent = target.textContent;
   }
+
+  release() {
+    Tab.components.delete(this.element);
+  }
+
+  static create(element, options) {
+    return Tab.components.get(element) || new Tab(element, options);
+  }
 }
+
+Tab.components = new WeakMap();

@@ -28,20 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // // Where should this example code go?
   // // example of how to hook into Modal for a 'transactional' effect
-  // const transactionalModal = Modal.getTarget('transactional-modal');
+  // const transactionalModal = Modal.components.get(document.getElementById('transactional-modal'));
   // transactionalModal.options.canClose = false;
-  //
+
   // transactionalModal.element.addEventListener('modal-beinghidden', (event) => {
   //   if (!transactionalModal.options.canClose) {
-  //     event.preventDefault(); //this stops the event
-  //     console.log('Nope! Overriding hide event. Hit save to close.');
+  //     event.preventDefault(); // this stops the event
+  //     console.log('Nope! Overriding hide event. Hit save to close.'); // eslint-disable-line no-console
   //   }
   // });
-  //
+
   // transactionalModal.element.querySelector('.buttons__save').addEventListener('click', () => {
   //   transactionalModal.options.canClose = true;
   //   transactionalModal.hide();
   //   transactionalModal.options.canClose = false;
   // });
-  // // ----- transactional modal example
+  // ----- transactional modal example
 });

@@ -9,13 +9,12 @@ export default class Modal {
     }
 
     this.element = element;
-    this.id = element.getAttribute('data-modal-id');
 
     this.options = Object.assign({
       classVisible: 'is-visible',
     }, options);
 
-    Modal.components.push(this);
+    Modal.components.set(this.element, this);
 
     this.hookCloseActions();
   }
@@ -25,11 +24,18 @@ export default class Modal {
       if (event.currentTarget === event.target) this.hide();
     });
 
-    this.element.ownerDocument.body.addEventListener('keydown', (event) => {
-      if (event.keyCode === 27 && this.element.ownerDocument === document) {
+    if (this.keydownHandler) {
+      this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
+      this.keydownHandler = null;
+    }
+
+    this.keydownHandler = (event) => {
+      if (event.which === 27) {
         this.hide();
       }
-    });
+    };
+
+    this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
 
     [... this.element.querySelectorAll('[data-modal-close]')].forEach((element) => {
       element.addEventListener('click', () => {
@@ -133,18 +139,29 @@ export default class Modal {
     }
   }
 
+  release() {
+    if (this.keydownHandler) {
+      this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
+      this.keydownHandler = null;
+    }
+    Modal.components.delete(this.element);
+  }
+
+  static create(element, options) {
+    return Modal.components.get(element) || new Modal(element, options);
+  }
+
   static hook(element, options) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
-    const modalElement = [... element.ownerDocument.querySelectorAll(`[data-modal-id="${element.getAttribute('data-modal-target')}"]`)];
-
-    if (modalElement.length > 1) {
-      throw new Error('data-modal-id must be unique.');
+    const modalElements = [... element.ownerDocument.querySelectorAll(element.getAttribute('data-modal-target'))];
+    if (modalElements.length > 1) {
+      throw new Error('Target modal must be unique.');
     }
 
-    const modal = Modal.components.filter((modal) => modalElement[0] === modal.element)[0] || new Modal(modalElement[0], options);
+    const modal = Modal.components.get(modalElements[0]) || new Modal(modalElements[0], options);
 
     element.addEventListener('click', (event) => {
       if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
@@ -159,10 +176,6 @@ export default class Modal {
 
     return modal;
   }
-
-  static getTarget(id) {
-    return Modal.components.filter((modal) => modal.id === id)[0];
-  }
 }
 
-Modal.components = [];
+Modal.components = new WeakMap();
