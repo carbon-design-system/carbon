@@ -56,6 +56,7 @@
     align-items: center;
 
     .info-title {
+      @extend %font-smoothing;
       padding-left: .5em;
       margin-left: .5em;
       font-size: 1.5rem;
