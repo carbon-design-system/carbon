@@ -122,7 +122,7 @@ gulp.task('scripts', (cb) => {
 // Sass Tasks
 //////////////////////////////
 
-gulp.task('sass', () => {
+gulp.task('sass', ['sass-lint'], () => {
   return gulp.src(PATHS.scss.all)
     .pipe(sourcemaps.init())
     .pipe(sass({

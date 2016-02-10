@@ -30,7 +30,7 @@
     "gulp-babel": "~6.1.1",
     "gulp-nodemon": "~2.0.4",
     "gulp-sass": "~2.1.0",
-    "gulp-sass-lint": "~1.1.0",
+    "gulp-sass-lint": "~1.1.1",
     "gulp-sourcemaps": "~1.6.0",
     "gulp-util": "~3.0.7",
     "istanbul-instrumenter-loader": "~0.1.3",
