@@ -10,74 +10,197 @@
 <body>
 
   <main class="create-container">
-    <header class="detail-page-header">
-      <div class="detail-page-header__container">
-        <div class="detail-page-header__breadcrumb">
-          <span>
-            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-            <svg width="15px" height="13px" viewBox="0 0 15 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                <g id="CF-App-Detail" sketch:type="MSArtboardGroup" transform="translate(-68.000000, -87.000000)" fill="#5AAAFA">
-                  <path d="M71.4348072,92.5559675 L82.410296,92.5559675 L82.410296,94.1400344 L71.4344151,94.1400344 L75.7718961,98.3507374 L74.6341126,99.4709674 L69.1426732,94.1400344 L68.9318973,94.1400344 L68.9318973,93.9354191 L68.573913,93.5878982 L68.8172993,93.3482669 L68.573913,93.1086355 L68.9318973,92.7611146 L68.9318973,92.5559675 L69.1432211,92.5559675 L74.6341126,87.2255663 L75.7718961,88.3452644 L71.4348072,92.5559675 Z" id="back" sketch:type="MSShapeGroup"></path>
-                </g>
-              </g>
-            </svg>
-          </span>
-          <span class="previous-page-title">View all Offerings</span>
-        </div>
-        <div class="detail-page-header__info">
-          <div class="detail-page-header__title">Create a Virtual Machine</div>
-          <div class="detail-page-header__settings">
-            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
-                <g id="Background" display="none">
-                  <rect display="inline" fill="#F0F0F0" width="32" height="32"/>
-                </g>
-                <g id="Icon">
-                  <g>
-                    <g>
-                      <path d="M20.433,12c0-0.451-0.045-0.89-0.114-1.322L23,8.333l-2.277-3.738l-3.197,1.044c-0.764-0.665-1.648-1.19-2.617-1.547
-                    L14.2,1H9.8L9.091,4.092C8.123,4.449,7.238,4.975,6.474,5.64L3.277,4.595L1,8.333l2.68,2.346C3.612,11.11,3.567,11.549,3.567,12
-                    s0.045,0.89,0.113,1.321L1,15.667l2.278,3.738l3.196-1.044c0.764,0.665,1.649,1.191,2.618,1.547L9.8,23h4.4l0.708-3.092
-                    c0.969-0.356,1.853-0.882,2.617-1.547l3.196,1.044L23,15.667l-2.681-2.345C20.388,12.89,20.433,12.451,20.433,12z M12,15
-                    c-1.655,0-3-1.343-3-3s1.345-3,3-3s3,1.343,3,3S13.655,15,12,15z"/>
-                    </g>
-                  </g>
-                </g>
-                <g id="Guide" display="none">
-                  <g display="inline">
-                    <path fill="#FFCCCC" d="M23,1v22H1V1H23 M24,0H0v24h24V0L24,0z"/>
-                  </g>
-                </g>
-              </svg>
+    <header role="header" class="global-header">
+      <a class="global-logo" href="#">IBM <span class="global-product-title">Bluemix</span></a>
+      <a id="global-menu-trigger" class="global-menu-trigger" href="" aria-haspopup="true" data-nav-target=".taxonomy-nav">
+        <span class="current-taxonomy">Compute</span>
+        <span class="dropdown-affordance"></span>
+      </a>
+
+      <a class="global-docs" href="#">docs</a>
+
+      <div class="global-profile">
+        <a class="global-profile__avatar" href="#" alt="Avatar"></a>
+        <a class="global-profile__full-name" href="#">
+          <div class="name-details">
+            <span class="global-given-name">FirstName&nbsp;</span>
+            <span class="global-family-name">LastName</span>
           </div>
-          <a href="#" class="detail-page-header__docs-button">Docs</a>
-        </div>
+          <div class="current-details">
+            <div class="current-details__region"></div>
+            <div class="current-details__org"></div>
+          </div>
+        </a>
       </div>
+
+      <nav role="navigation" class="taxonomy-nav" aria-labelledby="global-menu-trigger">
+        <ul class="taxonomy-menu" tabindex="0">
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--compute-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--compute"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Compute</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--storage-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--storage"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Storage</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--network-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--network"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Network</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--mobile-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--mobile"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Mobile</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--iot-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--iot"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Internet of Things</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--app-services-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--app-services"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">App Services</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--cognitive-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--cognitive"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Cognitive</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--data-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--data"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Data &amp; Analytics</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--integration-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--integration"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Integration</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--media-cdn-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--media-cdn"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Media &amp; CDN</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--devops-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--devops"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">DevOps</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--security-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--security"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Security</p>
+            </a>
+          </li>
+          <li class="taxonomy-item">
+            <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+              <div class="taxonomy-item__icon">
+                <svg class="svg--taxonomy--private-apis-dims" focusable="false">
+                  <use xlink:href="../../images/sprite.svg#taxonomy--private-apis"></use>
+                </svg>
+              </div>
+              <p class="taxonomy-item__label">Private APIs</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </header>
+
+
+    <header class="detail-page-header--no-tabs">
+     <a href="#" class="detail-page-header--no-tabs__link-wrapper">
+       <svg class="arrow">
+         <use xlink:href="../../images/sprite.svg#service--back"></use>
+       </svg>
+     </a>
+     <p class="info-title">Detail Page Header</p>
+</header>
 
     <section class="create">
       <div class="create__sidebar">
         <p>Powered by SoftLayer, these VMs deliver a higher degree of customization, transparency, predictability, and automation, and they integrate seamlessly with Bluemix bare metal servers.</p>
 
         <ul class="create-sidebar-list horizontal-list blue-list">
-          <li><a href="#">Docs</a></li>
-          <li><a href="#">Terms</a></li>
+          <li><a href="#" class="link">Docs</a></li>
+          <li><a href="#" class="link">Terms</a></li>
         </ul>
 
         <button class="btn--secondary create-sidebar-btn" type="button">Download RC File</button>
 
         <div class="create-form-details">
-          <label for="location">Location:</label>
-          <select name="location" class="select">
+          <label for="Location">Location:</label>
+          <select class="select">
             <option class="select__option" value="volvo">Volvo</option>
             <option class="select__option" value="saab">Saab</option>
             <option class="select__option" value="opel">Opel</option>
             <option class="select__option" value="audi">Audi</option>
           </select>
 
-          <label for="location">Size:</label>
-          <select name="location" class="select">
+          <label for="Size">Size:</label>
+          <select class="select">
             <option class="select__option" value="volvo">Volvo</option>
             <option class="select__option" value="saab">Saab</option>
             <option class="select__option" value="opel">Opel</option>
@@ -91,10 +214,11 @@
           <h2 class="create-main__header">1. Select Image</h2>
 
           <div class="form-row">
-            <div data-content-switcher class="content-switcher">
-
-              <button type="button" class="content-switcher__btn active">New</button>
-              <button type="button" class="content-switcher__btn">Existing</button>
+            <div class="content-switcher">
+              <input type="radio" name="image-select" value="new" id="new" checked="checked">
+              <label for="new">New</label>
+              <input type="radio" name="image-select" value="existing" id="existing">
+              <label for="existing">Existing</label>
             </div>
           </div>
 
@@ -108,11 +232,11 @@
           <h2 class="create-main__header">2. VM Settings</h2>
           <div class="form-row form-row--two-col">
             <div class="form-group form-group--two-col">
-              <label>Name:</label>
+              <label for="Name">Name:</label>
               <input type="text" class="text__input">
             </div>
             <div class="form-group form-group--two-col">
-              <label>Network:</label>
+              <label for="Network">Network:</label>
               <input type="text" class="text__input">
             </div>
           </div>
@@ -131,16 +255,15 @@
           <div class="form-row">
             <div class="form-group">
               <label class="checkbox">
-                <input class="checkbox__input" type="checkbox" value="None" name="check" id="checkbox1">
-                <span class="checkbox__overlay"></span>
-                <p class="checkbox__label">Assign Public IP Address</p>
+                <input class="checkbox__input" type="checkbox" value="None" name="check" id="checkbox">
+                <span class="checkbox__label">Assign Public IP Address</span>
               </label>
-              <div>
-              </div>
+            </div>
+           </div>
               <div class="form-row form-row--two-col">
                 <div class="form-group form-group--two-col">
-                  <label for="sshkey">SSH Key:</label>
-                  <select name="sshkey" class="select">
+                  <label for="select">SSH Key:</label>
+                  <select class="select">
                     <option class="select__option" value="volvo">No SSH Key Found</option>
                     <option class="select__option" value="saab">Saab</option>
                     <option class="select__option" value="opel">Opel</option>
@@ -149,7 +272,7 @@
                 </div>
                 <div class="form-group form-group--two-col">
                   <label for="sshkey">Security Group:</label>
-                  <select name="sshkey" class="select">
+                  <select class="select">
                     <option class="select__option" value="volvo">No SSH Key Found</option>
                     <option class="select__option" value="saab">Saab</option>
                     <option class="select__option" value="opel">Opel</option>
@@ -157,7 +280,7 @@
                   </select>
                 </div>
               </div>
-        </div></div></section>
+        </section>
 
         <section class="form-section">
           <h2 class="create-main__header">4. Summary</h2>
@@ -165,14 +288,14 @@
             <div class="form-group">
               <label class="checkbox">
                 <input class="checkbox__input" type="checkbox" value="None" name="check" id="checkbox2">
-                <span class="checkbox__overlay"></span>
-                <p class="checkbox__label">Assign Public IP Address</p>
+                <span class="checkbox__label">Assign Public IP Address</span>
               </label>
-              <div>
               </div>
-        </div></div></section>
+            </div>
+        </section>
         </div>
     </section>
+
     <footer class="form-footer">
 
       <div class="form-footer__container">
@@ -186,9 +309,8 @@
             <p class="save-settings__question">Preferred VM Configuration?</p>
             <div class="save-settings__checkbox checkbox-container">
               <label class="checkbox">
-                <input type="checkbox" value="None" name="check" id="checkbox3">
-                <span class="checkbox__overlay"></span>
-                <p class="checkbox__label">Save these settings</p>
+                <input class="checkbox__input" type="checkbox" value="None" name="check" id="checkbox">
+                <span class="checkbox__label">Save these settings</span>
               </label>
             </div>
           </div>

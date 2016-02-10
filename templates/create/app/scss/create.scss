@@ -8,7 +8,6 @@
 
 // Vendor
 @import '../../../icons';
-@import 'bower_components/IBM-Design-Colors/ibm-colors';
 
 // Global
 @import 'global/colors/colors';
@@ -34,9 +33,13 @@
 @import 'base-elements/footer/form-footer/form-footer';
 
 // Components
+@import 'components/taxonomy-item/taxonomy-item';
+@import 'components/header/header';
 @import 'components/content-switcher/content-switcher';
 @import 'components/detail-page-header/no-tabs/detail-page-header--no-tabs';
 @import 'components/detail-page-header/with-tabs/detail-page-header--with-tabs';
+@import 'components/global-profile/global-profile';
+@import 'components/tabs-nav/tabs-nav';
 
 // Local
 @import 'utility/toolkit';
