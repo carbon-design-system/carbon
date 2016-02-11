@@ -95,6 +95,8 @@ Other options for testing are:
 
 ## 6. Make a Pull Request
 
+**Note:** Before you make a pull request, [search](https://github.ibm.com/Bluemix/bluemix-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.  
+
 When you're at a good stopping place and you're ready for feedback from other contributors and maintainers, **push your commits to your fork**:
 
 ```
