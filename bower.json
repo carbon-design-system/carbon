@@ -28,6 +28,6 @@
     "views"
   ],
   "dependencies": {
-    "bluemix-icons": "^0.2.5"
+    "bluemix-icons": "~0.2.6"
   }
 }

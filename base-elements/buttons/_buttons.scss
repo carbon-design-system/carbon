@@ -21,3 +21,25 @@
 .btn--danger {
   @include btn--secondary($color__red-40);
 }
+
+.btn--right-icon {
+  @include btn--primary($color__btn--bg, $color__btn--bg--active);
+  min-width: rem(225px);
+  padding-right: rem(6px);
+  text-align: left; // override default center alignment in some browsers
+  vertical-align: bottom; // Firefox seems to have a different v-align
+
+  // a wrapping element is necessary because FF does _not_ like display: flex; on buttons
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__icon {
+    width: rem(24px);
+    height: rem(24px);
+
+    use { fill: $color__white; }
+  }
+}

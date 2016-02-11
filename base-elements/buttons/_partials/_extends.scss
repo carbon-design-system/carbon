@@ -3,8 +3,8 @@
   @extend %helvetica;
   @extend %font-smoothing;
   display: inline-block;
-  height: em(40px);
-  padding: 0 16px;
+  height: rem(40px);
+  padding: 0 rem(16px);
   text-align: center;
   text-decoration: none;
   text-transform: capitalize;
@@ -14,6 +14,12 @@
   &:disabled {
     cursor: not-allowed;
     opacity: .5;
+  }
+
+  // Buttons in FF have some intrinsic, browser-specific extra padding. This removes that. Discovered and fixed in #731
+  &::-moz-focus-inner {
+    padding: 0;
+    border: 0;
   }
 }
 
