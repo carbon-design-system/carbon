@@ -18,7 +18,7 @@
   visibility: hidden;
 }
 
-.modal-visible {
+.is-visible {
   z-index: z('modal');
   opacity: 1;
   transition: opacity .2s;
@@ -175,4 +175,3 @@
     }
   }
 }
-
