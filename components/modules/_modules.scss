@@ -1,24 +1,47 @@
-@import '_partials/vars';
+@import '_partials/extends';
+
+.module-section {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em auto;
+  justify-content: space-between;
+  max-width: $module--max;
+}
 
 .module {
-  margin-bottom: 1em;
-  background-color: $color__module-bg;
-}
+  &--full, .full {
+    @extend %module--base;
+    flex-basis: 100%;
+  }
 
-.module__header,
-.module__body,
-.module__footer {
-  padding: $padding__module;
-}
 
-.module__header {
-  border-bottom: 1px solid $color__module-border;
-  font-size: .875rem;
-  font-weight: 600;
-  color: $color__module-header;
-}
+  &--half, .half {
+    @extend %module--base;
+    flex-basis: 100%;
+    width: 100%;
 
-.module__footer {
-  border-top: 1px solid $color__module-border;
-  font-size: .875rem;
+    @include breakpoint(bp--sm--major) {
+      flex-basis: calc(50% - .5em); // $module-margin/2 is .5em -- calc wouldn't allow vars because it is CSS
+    }
+  }
+
+  &--two-third {
+    @extend %module--base;
+    flex-basis: 100%;
+    width: 100%;
+
+    @include breakpoint(bp--sm--major) {
+      flex-basis: 66%;
+    }
+  }
+
+  &--one-third {
+    @extend %module--base;
+    flex-basis: 100%;
+    width: 100%;
+
+    @include breakpoint(bp--sm--major) {
+      flex-basis: calc(33% - .5em);
+    }
+  }
 }
