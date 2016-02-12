@@ -5,19 +5,30 @@
   display: flex;
 
   input[type='radio'] {
-    visibility: hidden;
-    position: absolute;
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0, 0, 0, 0);
+    border:0;
+    visibility: visible;
+
+    &:focus + label {
+      outline: 3px solid $color__orange-30;
+    }
 
     &:checked + label {
-      @include btn--primary($color__btn--bg, $color__btn--bg);
       @extend %content-switcher__btn;
+      @include btn--primary($color__btn--bg, $color__btn--bg);
       color: $color__content-switcher-text--active;
     }
   }
 
   label {
-    @include btn--secondary($color__btn--bg);
     @extend %content-switcher__btn;
+    @include btn--secondary($color__btn--bg);
 
     &:hover,
     &:focus {
