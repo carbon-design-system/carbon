@@ -1,0 +1,28 @@
+@import '../_partials/vars';
+
+%module--base {
+  display: flex;
+  flex-direction: column;
+  max-height: em(365px);
+  padding-bottom: .5em;
+  background-color: $color--module-bg;
+  margin-bottom: $module--margin;
+}
+
+.module__header,
+.module__body,
+.module__footer {
+  padding: $module--margin;
+}
+
+.module__header {
+  border-bottom: 1px solid $color__module-border;
+  font-size: .875rem;
+  font-weight: 600;
+  color: $color__module-header;
+}
+
+.module__footer {
+  border-top: 1px solid $color__module-border;
+  font-size: .875rem;
+}

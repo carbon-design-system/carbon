@@ -2,40 +2,76 @@
 @import '_partials/mixins';
 @import '_partials/extends';
 
+.data-section {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em auto;
+  justify-content: space-between;
+  max-width: $module--max;
+}
+
 .data-module {
-  @extend %data-module;
 
-  &--1x {
+  &--full, .full {
+    @extend %data-module;
+    flex-basis: 100%;
+  }
+
+
+  &--half, .half {
+    @extend %data-module;
+    flex-basis: 100%;
     width: 100%;
 
     @include breakpoint(bp--sm--major) {
-      width: 45%;
+      flex-basis: calc(50% - .5em); // $module-margin/2 is .5em -- calc wouldn't allow vars because it is CSS
     }
 
-    @include breakpoint(bp--lg--major) {
-      width: (100% / 3);
-    }
+    .half {
+      .data__main-data {
+        font-size: 10vw;
 
-    @include breakpoint(2000px) {
-      width: 22%;
+        @include breakpoint(bp--sm--major) {
+          font-size: rem(48px);
+        }
+
+        @include breakpoint(bp--md--major) {
+          font-size: rem(64px);
+        }
+      }
     }
   }
 
-  &--2x {
+  &--two-third {
+    @extend %data-module;
+    flex-basis: 100%;
     width: 100%;
 
     @include breakpoint(bp--sm--major) {
-      width: 90%;
-    }
-
-    @include breakpoint(bp--lg--major) {
-      width: (100% / 3) * 2;
-    }
-
-    @include breakpoint(2000px) {
-      width: 44%;
+      flex-basis: 66%;
     }
   }
+
+  &--one-third {
+    @extend %data-module;
+    flex-basis: 100%;
+    width: 100%;
+
+    @include breakpoint(bp--sm--major) {
+      flex-basis: calc(33% - .5em);
+    }
+
+    .half {
+      .data__main-data {
+        font-size: 3vw;
+
+        @include breakpoint(bp--sm--major) {
+          font-size: rem(48px);
+        }
+      }
+    }
+  }
+
 }
 
 .metrics {
