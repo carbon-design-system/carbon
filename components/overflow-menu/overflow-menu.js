@@ -15,10 +15,14 @@ export default class OverflowMenu {
       event.preventDefault();
     }
 
-    [... this.element.ownerDocument.querySelectorAll('[data-overflow-menu].open')].forEach((element) => {
-      element.classList.remove('open');
-    });
+    if (this.element.classList.contains('open')) {
+      this.element.classList.remove('open');
+    } else {
+      [... this.element.ownerDocument.querySelectorAll('[data-overflow-menu].open')].forEach((element) => {
+        element.classList.remove('open');
+      });
 
-    this.element.classList.toggle('open');
+      this.element.classList.add('open');
+    }
   }
 }
