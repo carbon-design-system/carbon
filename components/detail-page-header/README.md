@@ -28,7 +28,7 @@ $path: 'bower_components/bluemix-components';
 <header class="detail-page-header--no-tabs">
   <a href="#" class="detail-page-header--no-tabs__link-wrapper">
     <svg class="arrow">
-      <use xlink:href="../../images/sprite.svg#service--back"></use>
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--back"></use>
     </svg>
   </a>
   <p class="info-title">Detail Page Header</p>
@@ -49,7 +49,7 @@ $path: 'bower_components/bluemix-components';
     <div class="detail-page-header--with-tabs__breadcrumb">
       <a href="#" class="link-wrapper">
         <svg class="arrow">
-          <use xlink:href="../../images/sprite.svg#service--back"></use>
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--back"></use>
         </svg>
         <p class="breadcrumb-title">breadcrumb title</p>
       </a>

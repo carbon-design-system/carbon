@@ -23,6 +23,7 @@
     @include type(.875rem);
     font-weight: 600;
     color: $color__detail-page-header--text--breadcrumb;
+    cursor: pointer;
 
     @include breakpoint(bp--xs--major) {
       padding-bottom: 1em;
