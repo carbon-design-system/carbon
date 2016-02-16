@@ -3,9 +3,9 @@
 .module-section {
   display: flex;
   flex-wrap: wrap;
-  margin: 1em auto;
   justify-content: space-between;
   max-width: $module--max;
+  margin: 1em auto;
 }
 
 .module {

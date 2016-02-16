@@ -1,11 +1,11 @@
 # Modules
 
 
-Basic usage
+### Usage
 
 ![Module](https://uploads.github.ibm.com/github-enterprise-assets/0000/1346/0000/8757/eeb59346-c999-11e5-93cc-8bc145bb0b09.png)
 
-- create modules within a `module-section`
+Create modules within a `module-section`
 
 ```html
 <section class="module-section">
@@ -41,10 +41,10 @@ Header and footer blocks are optional:
 </div>
 ```
 
-# Components required
+# Required
 
 ```scss
-@import 'bluemix-components/core/colors/colors';
+@import 'bluemix-components/global/global';
 
 @import 'bluemix-components/components/modules/modules';
 ```
