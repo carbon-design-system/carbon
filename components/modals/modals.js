@@ -12,7 +12,7 @@ export default class Modal {
     this.id = element.getAttribute('data-modal-id');
 
     this.options = Object.assign({
-      classVisible: 'modal-visible',
+      classVisible: 'is-visible',
     }, options);
 
     Modal.components.push(this);
