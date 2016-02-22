@@ -5,15 +5,7 @@
   display: flex;
 
   input[type='radio'] {
-    position:absolute;
-    width:1px;
-    height:1px;
-    padding:0;
-    margin:-1px;
-    overflow:hidden;
-    clip:rect(0, 0, 0, 0);
-    border:0;
-    visibility: visible;
+    @extend %hidden;
 
     &:focus + label {
       outline: 3px solid $color__orange-30;
