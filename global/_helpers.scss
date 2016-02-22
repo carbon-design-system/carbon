@@ -9,3 +9,9 @@
   border:0;
   visibility: visible;
 }
+
+@mixin rotate($deg, $speed, $origin: center) {
+  transform: rotate($deg);
+  transition: transform $speed;
+  transform-origin: $origin;
+}
