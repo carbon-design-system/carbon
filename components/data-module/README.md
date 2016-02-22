@@ -1,11 +1,15 @@
 # Data Modules
 
-- create modules within a `module-section`
+### Deprecated: Use [modules](https://github.ibm.com/Bluemix/bluemix-components/tree/master/components/modules) instead.
+
+### Usage
+
+Create modules within a `module-section`
 
 ```html
 <section class="data-section">
   <div class="data-module--full">
-    //...
+    <!-- ... -->
   </div>
 </section>
 ```
@@ -26,10 +30,10 @@ Classes for internal modules (within the containing ones):
 ![screen shot 2016-02-12 at 3 01 58 pm](https://uploads.github.ibm.com/github-enterprise-assets/0000/0078/0001/0514/21e4eb38-d19a-11e5-861c-f15185eed35d.png)
 
 
-# Components required
+# Required
 
 ```scss
-@import 'bluemix-components/core/colors/colors';
+@import 'bluemix-components/global/global';
 
-@import 'bluemix-components/components/modules/modules';
+@import 'bluemix-components/components/data-module/data-module';
 ```
