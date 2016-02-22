@@ -5,6 +5,7 @@
 %detail-page-header__arrow {
   width: 16px;
   height: 16px;
+  fill: $color__link;
 
   @include breakpoint(bp--xs--major) {
     position: relative;
