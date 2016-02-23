@@ -8,6 +8,7 @@ import OverflowMenu from './components/overflow-menu/overflow-menu';
 import Modal from './components/modals/modals';
 import HeaderNav from './components/header/header';
 import Toolbars from './components/toolbars/toolbars';
+import Spinner from './components/spinner/spinner';
 
 document.addEventListener('DOMContentLoaded', () => {
   [... document.querySelectorAll('[data-floating-action-button]')].forEach((element) => new FabButton(element));
@@ -25,6 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     HeaderNav.hook(element);
   });
   [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach((element) => new Toolbars(element));
+  [... document.querySelectorAll('[data-spinner]')].forEach((element) => {
+    const spinner = new Spinner(element);
+    setInterval(() => spinner.toggle(), 3000);
+  });
 
   // // Where should this example code go?
   // // example of how to hook into Modal for a 'transactional' effect
