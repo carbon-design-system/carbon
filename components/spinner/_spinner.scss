@@ -3,22 +3,19 @@
 @import '_partials/extends';
 
 .spinner {
+  @extend %animation--spin;
   width: $spinner__size;
   height: $spinner__size;
 
-  &.is-active {
-    @extend %animation--spin;
-  }
-
-  &.is-active--ie {
-    @extend %animation--spin--ie;
-  }
-
-  &.is-inactive {
+  &.is-stopping {
     @extend %animation--stop;
   }
 
-  &.is-inactive--ie {
+  &.is--ie {
+    @extend %animation--spin--ie;
+  }
+
+  &.is-stopping--ie {
     @extend %animation--stop--ie;
   }
 }
