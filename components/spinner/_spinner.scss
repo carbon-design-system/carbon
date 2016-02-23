@@ -1,0 +1,33 @@
+@import '_partials/vars';
+@import '_partials/keyframes';
+@import '_partials/extends';
+
+.spinner {
+  width: $spinner__size;
+  height: $spinner__size;
+
+  &.is-active {
+    @extend %animation--spin;
+  }
+
+  &.is-active--ie {
+    @extend %animation--spin--ie;
+  }
+
+  &.is-inactive {
+    @extend %animation--stop;
+  }
+
+  &.is-inactive--ie {
+    @extend %animation--stop--ie;
+  }
+}
+
+.spinner__svg {
+  fill: transparent;
+  stroke: $color__teal-30;
+  stroke-width: 8;
+  stroke-linecap: butt;
+  stroke-dasharray: 240;
+  stroke-dashoffset: $spinner__gap;
+}
