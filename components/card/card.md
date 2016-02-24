@@ -33,7 +33,7 @@
 When there's a card that shows status in its footer,
 **toggle the `active` classname to show the appropriate status.**
 
-```html
+```markup
 <!-- app status -->
 <div class="card-footer__app-status">
   <div class="card-footer__app-status--running active">
