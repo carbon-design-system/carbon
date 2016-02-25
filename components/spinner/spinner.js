@@ -12,6 +12,7 @@ export default class Spinner {
     // check if browser is Internet Explorer
     if (options.ie || window.ActiveXObject || "ActiveXObject" in window) {
       this.ie = true;
+      this.element.classList.add('is--ie');
     }
 
     // initialize spinner
@@ -25,12 +26,14 @@ export default class Spinner {
 
     this.active = active;
 
-    const state = this.active ? 'active' : 'inactive';
-
-    if (this.ie) {
-      this.element.setAttribute('class', `spinner is-${state} is-${state}--ie`);
+    if (this.active) {
+      this.element.classList.remove('is-stopping--ie', 'is-stopping');
     } else {
-      this.element.setAttribute('class', `spinner is-${state}`);
+      if (this.ie) {
+        this.element.classList.add('is-stopping--ie');
+      } else {
+        this.element.classList.add('is-stopping');
+      }
     }
 
     return this;

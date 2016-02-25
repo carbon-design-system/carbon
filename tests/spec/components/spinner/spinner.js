@@ -26,7 +26,7 @@ describe('Test spinner', function () {
     });
   });
 
-  describe('Set', function () {
+  describe('set()', function () {
     it('Should throw if boolean is not passed in', function () {
       const spinner = new Spinner(document.createElement('div'));
       expect(() => spinner.set()).to.throw;
@@ -49,22 +49,22 @@ describe('Test spinner', function () {
     it('Should set class of DOM element', function() {
       const spinner = new Spinner(document.createElement('div'));
       spinner.set(true);
-      expect(spinner.element.className).to.equal('spinner is-active');
+      expect(spinner.element.className).to.equal('');
       spinner.set(false);
-      expect(spinner.element.className).to.equal('spinner is-inactive');
+      expect(spinner.element.className).to.equal('is-stopping');
     });
 
     it('Should set special class for IE', function() {
       var options = { ie: true };
       const spinner = new Spinner(document.createElement('div'), options);
       spinner.set(true);
-      expect(spinner.element.className).to.equal('spinner is-active is-active--ie');
+      expect(spinner.element.className).to.equal('is--ie');
       spinner.set(false);
-      expect(spinner.element.className).to.equal('spinner is-inactive is-inactive--ie');
+      expect(spinner.element.className).to.equal('is--ie is-stopping--ie');
     });
   });
 
-  describe('Toggling', function() {
+  describe('toggle()', function() {
     it('Should toggle', function() {
       const spinner = new Spinner(document.createElement('div'));
       spinner.toggle();
@@ -74,18 +74,10 @@ describe('Test spinner', function () {
     });
   });
 
-  describe('Check spinner state', function() {
+  describe('isActive()', function() {
     it('Should return spinner state', function() {
       const spinner = new Spinner(document.createElement('div'));
       expect(spinner.isActive()).to.equal(true);
-    });
-  });
-
-  describe('Get DOM element', function() {
-    it('Should return DOM element', function() {
-      const element = document.createElement('div');
-      const spinner = new Spinner(element);
-      expect(spinner.element).to.equal(element);
     });
   });
 });
