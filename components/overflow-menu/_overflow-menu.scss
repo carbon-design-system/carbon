@@ -93,15 +93,15 @@
   }
 
   // Focus and hover states for the entire component
- &:focus,
- &:active,
- &.open {
-   .overflow-menu__icon {
-     color: $color__white;
-   }
+  &:focus,
+  &:active,
+  &.open {
+    .overflow-menu__icon {
+      color: $color__white;
+    }
 
-   .overflow-menu__options {
-     display: block;
-   }
- }
+    .overflow-menu__options {
+      display: block;
+    }
+  }
 }
