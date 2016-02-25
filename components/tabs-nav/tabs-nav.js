@@ -25,6 +25,7 @@ export default class Tab {
       selectorButton: '.nav__item',
       selectorButtonSelected: '.nav__item.selected',
       classActive: 'selected',
+      classHidden: 'tabs--hidden',
     }, options);
 
     [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
@@ -57,7 +58,7 @@ export default class Tab {
   }
 
   updateMenuState() {
-    this.element.querySelector(this.options.selectorMenu).classList.toggle('tabs--hidden');
+    this.element.querySelector(this.options.selectorMenu).classList.toggle(this.options.classHidden);
   }
 
   updateTriggerText(target) {
