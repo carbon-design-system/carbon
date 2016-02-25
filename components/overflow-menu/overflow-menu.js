@@ -7,6 +7,9 @@ export default class OverflowMenu {
     }
 
     this.element = element;
+
+    OverflowMenu.components.set(this.element, this);
+
     this.element.addEventListener('click', (event) => this.openMenu(event));
   }
 
@@ -25,4 +28,14 @@ export default class OverflowMenu {
       this.element.classList.add('open');
     }
   }
+
+  release() {
+    OverflowMenu.components.delete(this.element);
+  }
+
+  static create(element) {
+    return OverflowMenu.components.get(element) || new OverflowMenu(element);
+  }
 }
+
+OverflowMenu.components = new WeakMap();

@@ -19,6 +19,8 @@ export default class HeaderNav {
       selectorLabel: '.taxonomy-item__label',
     }, options);
 
+    HeaderNav.components.set(this.element, this);
+
     this.menuNode = this.element.querySelector(this.options.selectorMenu);
 
     this.element.addEventListener('keydown', (event) => this.toggleNav(event));
@@ -99,6 +101,10 @@ export default class HeaderNav {
         detail: { itemElement: activatedElement },
       }));
     }
+  }
+
+  release() {
+    HeaderNav.components.delete(this.element);
   }
 
   static create(element, options) {

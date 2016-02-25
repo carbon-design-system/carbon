@@ -1,4 +1,7 @@
 import '../../../../global/js/custom-event';
+
+import '../../../utils/es6-weak-map-global'; // For PhantomJS
+
 import OverflowMenu from '../../../../components/overflow-menu/overflow-menu';
 
 describe('Test Overflow menu', function () {
@@ -17,10 +20,11 @@ describe('Test Overflow menu', function () {
   });
 
   describe('Toggling a single overflow-menu', function () {
+    let menu;
     let element;
     before(function () {
       element = document.createElement('a');
-      new OverflowMenu(element); // eslint-disable-line no-new
+      menu = new OverflowMenu(element);
       document.body.appendChild(element);
     });
 
@@ -55,6 +59,7 @@ describe('Test Overflow menu', function () {
     });
 
     after(function () {
+      menu.release();
       document.body.removeChild(element);
     });
   });
@@ -110,6 +115,45 @@ describe('Test Overflow menu', function () {
       document.body.removeChild(element1);
       document.body.removeChild(element2);
       document.body.removeChild(element3);
+    });
+  });
+
+  describe('Managing instances', function () {
+    let element;
+
+    before(function () {
+      element = document.createElement('a');
+    });
+
+    it('Should prevent creating duplicate instances', function () {
+      let first;
+      let second;
+      try {
+        first = OverflowMenu.create(element);
+        second = OverflowMenu.create(element);
+        expect(first).to.equal(second);
+      } finally {
+        first && first.release();
+        if (first !== second) {
+          second && second.release();
+        }
+      }
+    });
+
+    it('Should let create a new instance for an element if an earlier one has been released', function () {
+      let first;
+      let second;
+      try {
+        first = OverflowMenu.create(element);
+        first.release();
+        second = OverflowMenu.create(element);
+        expect(first).not.to.equal(second);
+      } finally {
+        first && first.release();
+        if (first !== second) {
+          second && second.release();
+        }
+      }
     });
   });
 });
