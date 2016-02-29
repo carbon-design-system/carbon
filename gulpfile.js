@@ -7,7 +7,6 @@
 const path = require('path');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
-const nodemon = require('gulp-nodemon');
 const del = require('del');
 const gulp = require('gulp');
 const sass = require('gulp-sass');
@@ -64,18 +63,10 @@ gulp.task('browser-sync', () => {
   });
 });
 
-gulp.task('nodemon', () => {
-  nodemon({
-    script: 'server.js',
-    ext: 'dust',
-  }).on('restart', () => {
-    browserSync.reload;
-  });
-});
-
+// For controlling exit of Nodemon (npm run serve)
 process.once('SIGINT', () => {
   process.exit(0);
-})
+});
 
 //////////////////////////////
 // Clean
@@ -190,4 +181,4 @@ gulp.task('watch', () => {
 
 gulp.task('build', ['clean', 'sass', 'scripts', 'copy']);
 
-gulp.task('default', ['build', 'nodemon', 'browser-sync', 'watch']);
+gulp.task('default', ['build', 'browser-sync', 'watch']);

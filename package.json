@@ -2,7 +2,8 @@
   "name": "bluemix-components",
   "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
   "scripts": {
-    "dev": "gulp",
+    "dev": "gulp & npm run serve",
+    "serve": "nodemon -e dust,js server.js",
     "test:html": "htmlhint --ignore views,bower_components",
     "test": "npm run test:html"
   },
@@ -28,7 +29,6 @@
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.1",
     "gulp-babel": "~6.1.1",
-    "gulp-nodemon": "~2.0.4",
     "gulp-sass": "~2.1.0",
     "gulp-sass-lint": "~1.1.1",
     "gulp-sourcemaps": "~1.6.0",
@@ -46,10 +46,14 @@
     "karma-sinon-chai": "^1.1.0",
     "karma-sourcemap-loader": "~0.3.7",
     "karma-webpack": "~1.7.0",
+    "lolex": "1.4.0",
     "minimist": "~1.2.0",
     "mocha": "~2.4.4",
+    "nodemon": "1.9.1",
     "phantomjs-prebuilt": "^2.1.3",
     "run-sequence": "~1.1.4",
+    "sinon": "1.17.3",
+    "sinon-chai": "2.8.0",
     "svgxuse": "~1.1.5",
     "webpack": "~1.12.9"
   },
