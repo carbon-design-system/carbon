@@ -17,6 +17,7 @@ h3, %h3 {
 
 p, %p {
   @include type('body');
+  line-height: 1.2;
 }
 
 strong, %strong {
