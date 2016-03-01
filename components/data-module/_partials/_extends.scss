@@ -49,7 +49,7 @@
     color: $color--desc;
   }
 
-  &:nth-child(:first-child) {
+  &:nth-child(1) {
     border-bottom: 1px solid $color--border;
   }
 
