@@ -38,7 +38,7 @@ describe('Test tabs', function () {
         element.appendChild(buttonNode);
       });
 
-      new Tab(element); // eslint-disable-line no-new
+      new Tab(element);
       expect(triggerTextNode.textContent).to.equal('0');
     });
   });
@@ -61,7 +61,7 @@ describe('Test tabs', function () {
       element.appendChild(triggerNode);
       element.appendChild(menuNode);
 
-      new Tab(element); // eslint-disable-line no-new
+      new Tab(element);
     });
 
     it(`Should show drop down upon hitting trigger button`, function () {
@@ -108,7 +108,7 @@ describe('Test tabs', function () {
         return element.appendChild(buttonNode);
       });
 
-      new Tab(element); // eslint-disable-line no-new
+      new Tab(element);
     });
 
     beforeEach(function () {

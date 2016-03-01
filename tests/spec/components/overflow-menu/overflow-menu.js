@@ -8,13 +8,13 @@ describe('Test Overflow menu', function () {
   describe('Constructor', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
-        new OverflowMenu(); // eslint-disable-line no-new
+        new OverflowMenu();
       }).to.throw;
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
-        new OverflowMenu(document.createTextNode('')); // eslint-disable-line no-new
+        new OverflowMenu(document.createTextNode(''));
       }).to.throw;
     });
   });
@@ -76,9 +76,9 @@ describe('Test Overflow menu', function () {
       element1.setAttribute('data-overflow-menu', '');
       element2.setAttribute('data-overflow-menu', '');
       element3.setAttribute('data-overflow-menu', '');
-      new OverflowMenu(element1); // eslint-disable-line no-new
-      new OverflowMenu(element2); // eslint-disable-line no-new
-      new OverflowMenu(element3); // eslint-disable-line no-new
+      new OverflowMenu(element1);
+      new OverflowMenu(element2);
+      new OverflowMenu(element3);
       document.body.appendChild(element1);
       document.body.appendChild(element2);
       document.body.appendChild(element3);

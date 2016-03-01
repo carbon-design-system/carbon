@@ -8,13 +8,13 @@ describe('Test floating action button', function () {
   describe('Constructor', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
-        new FabButton(); // eslint-disable-line no-new
+        new FabButton();
       }).to.throw;
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
-        new FabButton(document.createTextNode('')); // eslint-disable-line no-new
+        new FabButton(document.createTextNode(''));
       }).to.throw;
     });
   });
