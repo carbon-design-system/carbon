@@ -14,7 +14,7 @@ export default class FabButton {
     if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
       event.preventDefault();
     }
-    this.element.classList.toggle('fab--close');
+    this.element.classList.toggle('is-closed');
   }
 
   release() {

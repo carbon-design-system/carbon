@@ -35,18 +35,18 @@ describe('Test floating action button', function () {
     });
 
     it(`Should turn to open state from closed state`, function () {
-      element.classList.add('fab--close');
+      element.classList.add('is-closed');
       element.dispatchEvent(new CustomEvent('click'));
-      expect(element.classList.contains('fab--close')).to.be.false;
+      expect(element.classList.contains('is-closed')).to.be.false;
     });
 
     it(`Should turn to closed state from open state`, function () {
       element.dispatchEvent(new CustomEvent('click'));
-      expect(element.classList.contains('fab--close')).to.be.true;
+      expect(element.classList.contains('is-closed')).to.be.true;
     });
 
     afterEach(function () {
-      element.classList.remove('fab--close');
+      element.classList.remove('is-closed');
     });
 
     after(function () {
