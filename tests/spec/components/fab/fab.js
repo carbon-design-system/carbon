@@ -2,7 +2,7 @@ import '../../../../global/js/custom-event';
 
 import '../../../utils/es6-weak-map-global'; // For PhantomJS
 
-import FabButton from '../../../../components/floating-action-button/fab';
+import FabButton from '../../../../components/fab/fab';
 
 describe('Test floating action button', function () {
   describe('Constructor', function () {
