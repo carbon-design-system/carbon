@@ -1,7 +1,7 @@
 import 'svgxuse';
 import './global/js/array-from';
 
-import FabButton from './components/fab/fab';
+import './components/fab/fab';
 import FileUploader from './base-elements/inputs/file/file';
 import Tab from './components/tabs-nav/tabs-nav';
 import OverflowMenu from './components/overflow-menu/overflow-menu';
@@ -11,7 +11,6 @@ import Toolbars from './components/toolbars/toolbars';
 import Spinner from './components/spinner/spinner';
 
 document.addEventListener('DOMContentLoaded', () => {
-  [... document.querySelectorAll('[data-fab]')].forEach((element) => new FabButton(element));
   [... document.querySelectorAll('[data-file-input]')].forEach((element) => new FileUploader(element));
   [... document.querySelectorAll('[data-tabs]')].forEach((element) => new Tab(element));
   [... document.querySelectorAll('[data-tabs] .item__link')].forEach((element) => {
