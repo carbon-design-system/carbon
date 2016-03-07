@@ -60,36 +60,9 @@
     }
   }
 
-  // Base styling just for the 3-dot menu icon
   &__icon {
-    position: relative;
-    display: block;
-    width: .25em;
-    height: .25em;
-    margin: .8em;
-    color: $color--list-icon;
-    background-color: currentColor;
-    border-radius: 50%;
-    transition-duration: .25s;
-
-    &:before,
-    &:after {
-      position: absolute;
-      display: block;
-      width: .25em;
-      height: .25em;
-      background-color: currentColor;
-      border-radius: 50%;
-      content: '';
-    }
-
-    &:before {
-      top: -.5em;
-    }
-
-    &:after {
-      bottom: -.5em;
-    }
+    height: 20px;
+    fill: $color__navy-gray-7;
   }
 
   // Focus and hover states for the entire component

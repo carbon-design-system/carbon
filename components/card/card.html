@@ -7,8 +7,7 @@
     <!-- about the app -->
     <div class="card-overview__about">
       <div class="about__icon">
-        <svg class="about__icon--app">
-        </svg>
+        <svg class="about__icon--app"></svg>
       </div>
       <div class="about__title">
         <h3 class="about__title--name">App Name 1</h3>
@@ -18,28 +17,20 @@
 
     <!-- overflow menu begins -->
     <div data-overflow-menu class="overflow-menu">
-      <div class="overflow-menu__icon"></div>
+      <svg class="overflow-menu__icon">
+        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#app-actions--overflow_menu_icon"></use>
+      </svg>
+      </svg>
       <ul class="overflow-menu__options">
-        <li>
-          <button type="button" class="overflow-menu__btn">Option 1</button>
-        </li>
-        <li>
-          <button type="button" class="overflow-menu__btn">Option 2</button>
-        </li>
-        <li>
-          <button type="button" class="overflow-menu__btn">Option 3</button>
-        </li>
-        <li>
-          <button type="button" class="overflow-menu__btn">Option 4</button>
-        </li>
+        <li><button type="button" class="overflow-menu__btn">Stop App</button></li>
+        <li><button type="button" class="overflow-menu__btn">Restart App</button></li>
+        <li><button type="button" class="overflow-menu__btn">Restart App</button></li>
+        <li><button type="button" class="overflow-menu__btn">Edit Routes and Access</button></li>
         <hr/>
-        <li>
-          <button type="button" class="overflow-menu__btn" data-state="delete">Option 5</button>
-        </li>
+        <li><button type="button" class="overflow-menu__btn" data-state="delete">Delete App</button></li>
       </ul>
     </div>
     <!-- overflow menu ends -->
-
   </div>
 
   <!-- card footer begins -->
