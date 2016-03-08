@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
   [... document.querySelectorAll('[data-fab]')].forEach((element) => new FabButton(element));
   [... document.querySelectorAll('[data-file-input]')].forEach((element) => new FileUploader(element));
   [... document.querySelectorAll('[data-tabs]')].forEach((element) => new Tab(element));
+  [... document.querySelectorAll('[data-tabs] .item__link')].forEach((element) => {
+    // In demo, don't follow links in tab
+    element.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  });
   [... document.querySelectorAll('[data-overflow-menu]')].forEach((element) => new OverflowMenu(element));
   [... document.querySelectorAll('[data-modal-target]')].forEach((element) => Modal.hook(element));
   [... document.querySelectorAll('[data-nav-target]')].forEach((element) => {
@@ -24,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
     HeaderNav.hook(element);
+    // In demo, don't follow taxonomy nav links
+    element.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
   });
   [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach((element) => new Toolbars(element));
   [... document.querySelectorAll('[data-spinner]')].forEach((element) => {

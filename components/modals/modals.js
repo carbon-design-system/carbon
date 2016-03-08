@@ -164,7 +164,7 @@ export default class Modal {
     const modal = Modal.components.get(modalElements[0]) || new Modal(modalElements[0], options);
 
     element.addEventListener('click', (event) => {
-      if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
+      if (event.currentTarget.tagName === 'A') {
         event.preventDefault();
       }
       modal.show(event.currentTarget, (error, shownAlready) => {

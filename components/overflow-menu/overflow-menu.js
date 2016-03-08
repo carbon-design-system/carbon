@@ -14,7 +14,7 @@ export default class OverflowMenu {
   }
 
   openMenu(event) {
-    if (event.currentTarget.tagName === 'A' || event.currentTarget.querySelector('a')) {
+    if (event.currentTarget.tagName === 'A') {
       event.preventDefault();
     }
 
