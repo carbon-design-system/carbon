@@ -8,13 +8,13 @@ describe('Test toolbars', function () {
   describe('Constructor', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
-        new Toolbars(); // eslint-disable-line no-new
+        new Toolbars();
       }).to.throw;
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
-        new Toolbars(document.createTextNode('')); // eslint-disable-line no-new
+        new Toolbars(document.createTextNode(''));
       }).to.throw;
     });
   });
