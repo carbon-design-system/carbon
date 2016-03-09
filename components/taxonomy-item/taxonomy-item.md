@@ -11,7 +11,7 @@ Create a global dashboard taxonomy item:
 <a href="" class="taxonomy-item--global-dash is-empty">
   <div class="taxonomy-item__icon">
     <svg class="svg--taxonomy--compute-dims">
-      <use xlink:href="../../images/sprite.svg#taxonomy--compute"></use>
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--compute"></use>
     </svg>
   </div>
   <p class="taxonomy-item__metric"></p>
@@ -55,7 +55,7 @@ Create a taxonomy menu item:
 <a href="" class="taxonomy-item--taxonomy-menu">
   <div class="taxonomy-item__icon">
     <svg class="svg--taxonomy--compute-dims">
-      <use xlink:href="../../images/sprite.svg#taxonomy--compute"></use>
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--compute"></use>
     </svg>
   </div>
   <p class="taxonomy-item__label">Compute</p>

@@ -25,14 +25,14 @@ Each icon can also exist by itself, so if you only need for example the search a
   <ul class="toolbar-icons__icons">
     <li data-list-icons-search-action-target="[data-list-icons-search-field]" data-id="search-action" class="icons__tool">
       <svg class="tool-icon">
-        <use xlink:href="../../images/sprite.svg#common--search"></use>
+        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--search"></use>
       </svg>
     </li>
     <!-- Comment out a list item if it's not needed
     <li data-id="sort-action" class="icons__tool">
       <a href="#">
         <svg class="tool-icon">
-          <use xlink:href="../../images/sprite.svg#common--arrows"></use>
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--arrows"></use>
         </svg>
       </a>
     </li>
@@ -40,7 +40,7 @@ Each icon can also exist by itself, so if you only need for example the search a
     <li class="icons__tool">
       <a href="#">
         <svg class="tool-icon">
-          <use xlink:href="../../images/sprite.svg#common--grid"></use>
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--grid"></use>
         </svg>
       </a>
     </li>

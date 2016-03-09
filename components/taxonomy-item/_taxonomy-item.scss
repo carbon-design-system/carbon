@@ -16,6 +16,10 @@
       }
     }
 
+    .taxonomy-item__icon {
+      fill: $color__blue-30;
+    }
+
     .taxonomy-item__label {
       @extend %taxonomy-item__label;
       @include type(rem(20px));
@@ -80,6 +84,7 @@
       svg {
         position: relative;
         left: -8em;
+        fill: $color__blue-30;
       }
     }
 
