@@ -1,6 +1,5 @@
 @import '../_partials/vars';
 @import '../_partials/extends';
-@import '_partials/extends';
 
 .detail-page-header--with-tabs {
   @extend %detail-page-header;
