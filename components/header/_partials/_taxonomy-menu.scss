@@ -5,7 +5,7 @@
   left: -100vw;
 
   width: 48%;
-  padding: 1em;
+  padding: 0;
 
   opacity: 0;
   background-color: $color__navy-gray-1;
@@ -17,6 +17,7 @@
     overflow-y: visible;
     top: em($header-height) + 1em;
     left: 2%;
+    padding: 1em;
 
     width: $item-width * 4 + 2 + em(1px); // IE11 seems to need some slack
 
@@ -85,7 +86,12 @@
   .taxonomy-item {
     display: flex;
     align-items: stretch;
-    padding: .5em;
+    padding: 0;
+
+    @include breakpoint(bp--xs--major) {
+      align-items: flex-start;
+      padding: .5em;
+    }
 
     &.selected {
       border: none;
@@ -95,7 +101,7 @@
       }
 
       .taxonomy-item__label {
-        padding-left: 1.5em;
+        padding-left: 1.75em;
 
         @include breakpoint(bp--xs--major) {
           padding-left: 1em;
@@ -110,37 +116,45 @@
           font-size: 1rem;
           width: 1em;
           height: 1em;
-          margin-top: -.75em;
+          margin-top: -.5em;
           margin-left: -1em;
-
-          @include breakpoint(bp--xs--major) {
-            margin-top: -.5em;
-          }
+          line-height: 1;
         }
       }
     }
 
     &__icon {
-      width: 25px;
-      height: 25px;
+      width: em(25px);
+      height: em(25px);
       margin: 0;
 
       @include breakpoint(bp--xs--major) {
-        width: 75px;
-        height: 75px;
+        width: em(125px);
+        height: em(25px);
+        margin-bottom: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      svg {
+        width: em(25px);
+        height: em(25px);
+        top: auto;
+        left: auto;
+        margin: 0;
       }
     }
 
     &__label {
       flex: 1;
+      display: flex;
+      justify-content: center;
       position: relative;
-      padding-left: .5em;
-
-      text-align: left;
+      padding-left: 1em;
 
       @include breakpoint(bp--xs--major) {
         max-width: 75px;
-        padding-top: .5em;
         padding-left: 0;
 
         text-align: center;
@@ -152,19 +166,25 @@
 
   .taxonomy-item--taxonomy-menu {
     display: flex;
-    flex-direction: column;
+    flex: 1;
+    flex-direction: row;
     justify-content: stretch;
 
     width: auto;
     margin: 0;
-    padding: .75em;
+    padding: 1em;
 
     @include breakpoint(bp--xs--major) {
-      padding: .25em .75em 1.25em;
+      width: 6.375em;
+      padding: 1em 0;
+      flex: 0 1 auto;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-radius: .875em;
     }
 
     border: solid transparent 1px;
-    border-radius: .875em;
+    border-radius: 0;
 
     @include breakpoint(bp--xs--major) {
       flex-direction: column;
