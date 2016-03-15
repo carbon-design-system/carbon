@@ -31,7 +31,7 @@ describe('Test toolbars', function () {
       searchFieldNode.id = id;
 
       element = document.createElement('a');
-      element.setAttribute('data-list-icons-search-action-target', `#${id}`);
+      element.dataset.listIconsSearchActionTarget = `#${id}`;
       element.appendChild(searchFieldNode);
 
       toolbars = new Toolbars(element);

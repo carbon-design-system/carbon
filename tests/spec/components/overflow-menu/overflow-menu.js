@@ -73,9 +73,9 @@ describe('Test Overflow menu', function () {
       element1 = document.createElement('a');
       element2 = document.createElement('a');
       element3 = document.createElement('a');
-      element1.setAttribute('data-overflow-menu', '');
-      element2.setAttribute('data-overflow-menu', '');
-      element3.setAttribute('data-overflow-menu', '');
+      element1.dataset.overflowMenu = '';
+      element2.dataset.overflowMenu = '';
+      element3.dataset.overflowMenu = '';
       new OverflowMenu(element1);
       new OverflowMenu(element2);
       new OverflowMenu(element3);
