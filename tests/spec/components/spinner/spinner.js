@@ -80,4 +80,43 @@ describe('Test spinner', function () {
       expect(spinner.isActive()).to.equal(true);
     });
   });
+
+  describe('Managing instances', function () {
+    let element;
+
+    before(function () {
+      element = document.createElement('a');
+    });
+
+    it('Should prevent creating duplicate instances', function () {
+      let first;
+      let second;
+      try {
+        first = Spinner.create(element);
+        second = Spinner.create(element);
+        expect(first).to.equal(second);
+      } finally {
+        first && first.release();
+        if (first !== second) {
+          second && second.release();
+        }
+      }
+    });
+
+    it('Should let create a new instance for an element if an earlier one has been released', function () {
+      let first;
+      let second;
+      try {
+        first = Spinner.create(element);
+        first.release();
+        second = Spinner.create(element);
+        expect(first).not.to.equal(second);
+      } finally {
+        first && first.release();
+        if (first !== second) {
+          second && second.release();
+        }
+      }
+    });
+  });
 });

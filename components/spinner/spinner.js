@@ -15,6 +15,8 @@ export default class Spinner {
       this.element.classList.add('is--ie');
     }
 
+    Spinner.components.set(this.element, this);
+
     // initialize spinner
     this.set(this.active);
   }
@@ -46,4 +48,14 @@ export default class Spinner {
   isActive() {
     return this.active;
   }
+
+  release() {
+    Spinner.components.delete(this.element);
+  }
+
+  static create(element) {
+    return Spinner.components.get(element) || new Spinner(element);
+  }
 }
+
+Spinner.components = new WeakMap();
