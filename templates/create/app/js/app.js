@@ -1,9 +1,10 @@
 import 'svgxuse';
-import '../../../../global/js/array-from';
+import '../../../../js/array-from';
 
 import FileUploader from '../../../../base-elements/inputs/file/file';
 import Tab from '../../../../components/tabs-nav/tabs-nav';
 import HeaderNav from '../../../../components/header/header';
+import Toolbars from '../../../../components/toolbars/toolbars';
 
 document.addEventListener('DOMContentLoaded', () => {
   [... document.querySelectorAll('[data-file-input]')]

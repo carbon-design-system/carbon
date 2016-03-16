@@ -2,13 +2,9 @@
 // Bluemix Components
 /////////////////////////
 
-// Vendor
-@import '../../../icons';
-@import 'bower_components/IBM-Design-Colors/ibm-colors';
-
 // Global
 @import 'global/colors/colors';
-@import 'global/fonts/font-face';
+@import 'global/typography/font-face';
 @import 'global/reset/reset';
 @import 'global/typography/typography';
 @import 'global/layout/grid';
@@ -22,7 +18,6 @@
 @import 'components/data-module/data-module';
 @import 'components/detail-page-header/no-tabs/detail-page-header--no-tabs';
 @import 'components/detail-page-header/with-tabs/detail-page-header--with-tabs';
-@import 'components/dropdown/dropdown';
 @import 'components/tabs-nav/tabs-nav';
 
 // Local

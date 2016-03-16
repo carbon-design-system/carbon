@@ -6,12 +6,10 @@
 // Bluemix Components
 /////////////////////////
 
-// Vendor
-@import '../../../icons';
-
 // Global
+@import 'global/helpers';
 @import 'global/colors/colors';
-@import 'global/fonts/font-face';
+@import 'global/typography/font-face';
 @import 'global/reset/reset';
 @import 'global/typography/typography';
 @import 'global/layout/grid';

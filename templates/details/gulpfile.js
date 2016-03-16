@@ -71,6 +71,7 @@ gulp.task('serve', ['build'], () => {
     }
   });
 
+  gulp.watch(paths.html, ['minify']);
   gulp.watch(paths.css, ['sass']);
   gulp.watch(paths.js, ['js']);
 });
