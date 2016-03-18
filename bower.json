@@ -26,8 +26,5 @@
     "gulpfile.js",
     "server.js",
     "views"
-  ],
-  "dependencies": {
-    "bluemix-icons": "^1.3.3"
-  }
+  ]
 }
