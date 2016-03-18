@@ -1,4 +1,4 @@
-import '../../../../global/js/custom-event';
+import '../../../../js/custom-event';
 
 import '../../../utils/es6-weak-map-global'; // For PhantomJS
 

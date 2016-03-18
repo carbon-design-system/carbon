@@ -1,4 +1,4 @@
-import '../../global/js/array-from';
+import '../../js/array-from';
 
 export default class OverflowMenu {
   constructor(element) {

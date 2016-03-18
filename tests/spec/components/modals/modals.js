@@ -1,5 +1,5 @@
-import '../../../../global/js/custom-event';
-import '../../../../global/js/object-assign';
+import '../../../../js/custom-event';
+import '../../../../js/object-assign';
 
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
 

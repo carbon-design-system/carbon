@@ -1,5 +1,4 @@
-import 'svgxuse';
-import './global/js/array-from';
+import './js/array-from';
 
 import './components/fab/fab';
 import FileUploader from './base-elements/inputs/file/file';
