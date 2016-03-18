@@ -8,7 +8,8 @@
     @extend %hidden;
 
     &:focus + label {
-      outline: 3px solid $color__orange-30;
+      outline: 1px dotted; // for non-webkit browsers
+      outline: auto 5px -webkit-focus-ring-color; // webkit default
     }
 
     &:checked + label {
