@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "gulp & npm run serve",
     "serve": "nodemon -e dust,js server.js",
-    "test:html": "htmlhint --ignore views,bower_components",
+    "test:html": "htmlhint --ignore views",
     "test": "npm run test:html"
   },
   "engines": {
