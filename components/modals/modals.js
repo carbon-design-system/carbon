@@ -1,6 +1,6 @@
-import '../../global/js/array-from';
-import '../../global/js/object-assign';
-import '../../global/js/custom-event';
+import '../../js/array-from';
+import '../../js/object-assign';
+import '../../js/custom-event';
 
 export default class Modal {
   constructor(element, options = {}) {

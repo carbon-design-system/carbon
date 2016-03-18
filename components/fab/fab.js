@@ -1,4 +1,4 @@
-import eventMatches from '../../global/js/event-matches';
+import eventMatches from '../../js/event-matches';
 
 export default class FabButton {
   constructor(element) {

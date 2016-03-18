@@ -1,8 +1,8 @@
 // This file was moved here as a dependancy of tab-nav.
 // It no longer has anything to do with content-switcher, so the name could
 // possibly be changed
-import '../../global/js/array-from';
-import '../../global/js/object-assign';
+import '../../js/array-from';
+import '../../js/object-assign';
 
 function toggleClass(element, name, add) {
   if (element.classList.contains(name) === !add) {

@@ -1,4 +1,4 @@
-import '../../../../global/js/custom-event';
+import '../../../../js/custom-event';
 import Tab from '../../../../components/tabs-nav/tabs-nav';
 
 describe('Test tabs', function () {
