@@ -47,7 +47,7 @@ const PATHS = {
     main: 'styles.scss'
   },
   html: './**/*.html',
-  images: 'images/**/*.{png,jpeg,jpg,svg}'
+  images: 'assets/images/**/*.{png,jpeg,jpg,svg}'
 }
 
 //////////////////////////////
@@ -145,7 +145,7 @@ gulp.task('sass-lint', () => {
 /////////////////////////////
 
 gulp.task('copy:fonts', () => {
-  let fonts = 'global/fonts/*.{woff,woff2}';
+  let fonts = 'assets/fonts/*.{woff,woff2}';
 
   return gulp.src(fonts)
     .pipe(gulp.dest(PATHS.static + '/css'));
