@@ -1,25 +1,16 @@
-import './js/array-from';
-
-import './components/fab/fab';
-import FileUploader from './base-elements/inputs/file/file';
-import Tab from './components/tabs-nav/tabs-nav';
-import OverflowMenu from './components/overflow-menu/overflow-menu';
-import Modal from './components/modals/modals';
-import HeaderNav from './components/header/header';
-import Toolbars from './components/toolbars/toolbars';
-import Spinner from './components/spinner/spinner';
+import BluemixComponents from './js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  [... document.querySelectorAll('[data-file-input]')].forEach((element) => new FileUploader(element));
-  [... document.querySelectorAll('[data-tabs]')].forEach((element) => new Tab(element));
+  [... document.querySelectorAll('[data-file-input]')].forEach((element) => new BluemixComponents.FileUploader(element));
+  [... document.querySelectorAll('[data-tabs]')].forEach((element) => new BluemixComponents.Tab(element));
   [... document.querySelectorAll('[data-tabs] .item__link')].forEach((element) => {
     // In demo, don't follow links in tab
     element.addEventListener('click', (event) => {
       event.preventDefault();
     });
   });
-  [... document.querySelectorAll('[data-overflow-menu]')].forEach((element) => new OverflowMenu(element));
-  [... document.querySelectorAll('[data-modal-target]')].forEach((element) => Modal.hook(element));
+  [... document.querySelectorAll('[data-overflow-menu]')].forEach((element) => new BluemixComponents.OverflowMenu(element));
+  [... document.querySelectorAll('[data-modal-target]')].forEach((element) => BluemixComponents.Modal.hook(element));
   [... document.querySelectorAll('[data-nav-target]')].forEach((element) => {
     [... document.querySelectorAll(element.getAttribute('data-nav-target'))].forEach((target) => {
       target.addEventListener('header-beingselected', (event) => {
@@ -27,21 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
         event.detail.initiatingEvent.preventDefault();
       });
     });
-    HeaderNav.hook(element);
+    BluemixComponents.HeaderNav.hook(element);
     // In demo, don't follow taxonomy nav links
     element.addEventListener('click', (event) => {
       event.preventDefault();
     });
   });
-  [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach((element) => new Toolbars(element));
+  [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach((element) => new BluemixComponents.Toolbars(element));
   [... document.querySelectorAll('[data-spinner]')].forEach((element) => {
-    const spinner = new Spinner(element);
+    const spinner = new BluemixComponents.Spinner(element);
     setInterval(() => spinner.toggle(), 3000);
   });
 
   // // Where should this example code go?
   // // example of how to hook into Modal for a 'transactional' effect
-  // const transactionalModal = Modal.components.get(document.getElementById('transactional-modal'));
+  // const transactionalModal = BluemixComponents.Modal.components.get(document.getElementById('transactional-modal'));
   // transactionalModal.options.canClose = false;
 
   // transactionalModal.element.addEventListener('modal-beinghidden', (event) => {
