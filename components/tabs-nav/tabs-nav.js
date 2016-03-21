@@ -41,6 +41,10 @@ export default class Tab {
     this.updateTriggerText(this.element.querySelector(this.options.selectorButtonSelected));
   }
 
+  static init() {
+    [... document.querySelectorAll('[data-tabs]')].forEach(element => this.create(element));
+  }
+
   handleItemClick(event) {
     this.setActive(event);
     this.updateMenuState();

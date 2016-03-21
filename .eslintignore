@@ -1,2 +1,5 @@
 **/gulpfile.js
 **/server.js
+dist
+dev/static
+node_modules

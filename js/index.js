@@ -10,6 +10,17 @@ import HeaderNav from '../components/header/header';
 import Toolbars from '../components/toolbars/toolbars';
 import Spinner from '../components/spinner/spinner';
 
+document.addEventListener('DOMContentLoaded', () => {
+  Fab.init();
+  FileUploader.init();
+  Tab.init();
+  OverflowMenu.init();
+  Modal.init();
+  HeaderNav.init();
+  Toolbars.init();
+  Spinner.init();
+});
+
 module.exports = {
   Fab,
   FileUploader,

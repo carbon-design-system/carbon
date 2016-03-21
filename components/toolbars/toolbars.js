@@ -12,6 +12,10 @@ export default class Toolbars {
     this.element.addEventListener('click', (event) => this.handleActionClick(event));
   }
 
+  static init() {
+    [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach(element => this.create(element));
+  }
+
   handleActionClick(event) {
     const searchActionNode = event.currentTarget;
 

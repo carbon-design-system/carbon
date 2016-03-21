@@ -14,6 +14,10 @@ export default class FileUploader {
     element.addEventListener('change', (event) => this.updateLabel(event));
   }
 
+  static init() {
+    [... document.querySelectorAll('[data-file-input]')].forEach(element => this.create(element));
+  }
+
   updateLabel(event) {
     let fileName = '';
     const element = this.element;

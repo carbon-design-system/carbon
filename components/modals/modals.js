@@ -19,6 +19,11 @@ export default class Modal {
     this.hookCloseActions();
   }
 
+  static init() {
+    [... document.querySelectorAll('[data-modal-target]')].forEach(element => this.hook(element));
+    [... document.querySelectorAll('[data-modal]')].forEach(element => this.create(element));
+  }
+
   hookCloseActions() {
     this.element.addEventListener('click', (event) => {
       if (event.currentTarget === event.target) this.hide();
