@@ -97,6 +97,13 @@ describe('Test file uploader', function () {
       expect(labelNode.textContent).to.equal('bar');
     });
 
+    it(`Should handle HTML tag in file name correctly`, function () {
+      element.value = '<html>.html';
+      element.files = [{}];
+      element.dispatchEvent(new CustomEvent('change'));
+      expect(labelNode.textContent).to.equal('<html>.html');
+    });
+
     afterEach(function () {
       labelNode.textContent = '';
       element.dataset.multipleCaption = '';
