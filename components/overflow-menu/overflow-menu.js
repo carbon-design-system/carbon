@@ -13,6 +13,10 @@ export default class OverflowMenu {
     this.element.addEventListener('click', (event) => this.openMenu(event));
   }
 
+  static init() {
+    [... document.querySelectorAll('[data-overflow-menu]')].forEach(element => this.create(element));
+  }
+
   openMenu(event) {
     if (event.currentTarget.tagName === 'A') {
       event.preventDefault();

@@ -12,6 +12,10 @@ export default class FabButton {
     element.addEventListener('click', (event) => this.toggle(event));
   }
 
+  static init() {
+    [... document.querySelectorAll('[data-fab]')].forEach(element => this.create(element));
+  }
+
   toggle(event) {
     if (this.element.tagName === 'A') {
       event.preventDefault();

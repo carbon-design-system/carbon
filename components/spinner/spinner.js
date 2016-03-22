@@ -10,7 +10,7 @@ export default class Spinner {
     this.ie = false;
 
     // check if browser is Internet Explorer
-    if (options.ie || window.ActiveXObject || "ActiveXObject" in window) {
+    if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
       this.ie = true;
       this.element.classList.add('is--ie');
     }
@@ -19,6 +19,10 @@ export default class Spinner {
 
     // initialize spinner
     this.set(this.active);
+  }
+
+  static init() {
+    [... document.querySelectorAll('[data-spinner]')].forEach(element => this.create(element));
   }
 
   set(active) {
