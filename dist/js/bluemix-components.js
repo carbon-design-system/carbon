@@ -464,7 +464,7 @@ var BluemixComponents =
 	      }
 	
 	      if (fileName) {
-	        this.labelNode.innerHTML = fileName;
+	        this.labelNode.textContent = fileName;
 	      }
 	    }
 	  }, {
