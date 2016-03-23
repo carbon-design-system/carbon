@@ -1,12 +1,6 @@
 import BluemixComponents from './js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  BluemixComponents.FileUploader.init();
-  BluemixComponents.Tab.init();
-  BluemixComponents.OverflowMenu.init();
-  BluemixComponents.Modal.init();
-  BluemixComponents.Toolbars.init();
-
   // The following Components have custom setup for demo purposes, so we aren't using init();
   [... document.querySelectorAll('[data-tabs] .item__link')].forEach((element) => {
     // In demo, don't follow links in tab
@@ -21,14 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
         event.detail.initiatingEvent.preventDefault();
       });
     });
-    BluemixComponents.HeaderNav.hook(element);
     // In demo, don't follow taxonomy nav links
     element.addEventListener('click', (event) => {
       event.preventDefault();
     });
   });
   [... document.querySelectorAll('[data-spinner]')].forEach((element) => {
-    const spinner = BluemixComponents.Spinner.create(element);
+    const spinner = BluemixComponents.Spinner.components.get(element);
     setInterval(() => spinner.toggle(), 3000);
   });
 
