@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width">
   <title>Bluemix Components</title>
   <link rel="stylesheet" href="/css/bluemix-components.css">
-  <link rel="stylesheet" href="/css/dev-colors.css">
-  <link rel="stylesheet" href="/css/dev-major-second.css">
-  <link rel="stylesheet" href="/css/dev-typography.css">
+  <link rel="stylesheet" href="/css/dev.css">
   <style>
     .toc {
       margin-top: 2rem;
@@ -49,5 +47,5 @@
   </nav>
 
 
-  <script src="/js/bundle.js"></script>
+  <script src="/js/demo.js"></script>
 </body>

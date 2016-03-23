@@ -27,8 +27,8 @@ const directoryOrder = [
 app.engine('dust', adaro.dust());
 app.set('view engine', 'dust');
 app.set('views', path.resolve(__dirname, 'views'));
-app.use(express.static('dev/static'));
 app.use(express.static('dist'));
+app.use(express.static('dev'));
 
 const getContent = (glob) => {
   return globby(glob)
