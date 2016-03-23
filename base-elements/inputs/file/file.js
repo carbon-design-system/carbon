@@ -29,7 +29,7 @@ export default class FileUploader {
     }
 
     if (fileName) {
-      this.labelNode.innerHTML = fileName;
+      this.labelNode.textContent = fileName;
     }
   }
 
