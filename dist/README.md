@@ -20,6 +20,7 @@ These CSS files assume that you follow the same file structure to reference the 
 ─ css
   ├── bluemix-components.css
   └── bluemix-components.min.css
+└── dist-demo.html
 ```
 
 ### Assets
@@ -37,3 +38,7 @@ These font files are also used on [index.dust](https://github.ibm.com/Bluemix/bl
 ```html
 <script type="text/javascript" src="bluemix-components.js"></script>
 ```
+
+## `dist-demo.html`
+
+This is an HTML file that demonstrates how to use JS and CSS files from dist folder.

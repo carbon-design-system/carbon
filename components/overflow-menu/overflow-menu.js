@@ -1,4 +1,4 @@
-import '../../js/array-from';
+import '../../js/polyfills/array-from';
 
 export default class OverflowMenu {
   constructor(element) {

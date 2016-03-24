@@ -1,5 +1,5 @@
-import '../../../../js/custom-event';
-import Tab from '../../../../components/tabs-nav/tabs-nav';
+import '../../js/polyfills/custom-event';
+import { Tab } from '../../js/index.js';
 
 describe('Test tabs', function () {
   describe('Constructor', function () {

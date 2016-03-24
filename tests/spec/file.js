@@ -1,8 +1,6 @@
-import '../../../../../js/custom-event';
-
-import '../../../../utils/es6-weak-map-global'; // For PhantomJS
-
-import FileUploader from '../../../../../base-elements/inputs/file/file';
+import '../../js/polyfills/custom-event';
+import '../utils/es6-weak-map-global'; // For PhantomJS
+import { FileUploader } from '../../js/index.js';
 
 describe('Test file uploader', function () {
   describe('Constructor', function () {

@@ -1,4 +1,4 @@
-import eventMatches from '../../js/event-matches';
+import eventMatches from '../../js/polyfills/event-matches';
 
 export default class FabButton {
   constructor(element) {
