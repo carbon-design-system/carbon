@@ -13,7 +13,12 @@ export default class FabButton {
   }
 
   static init() {
-    [... document.querySelectorAll('[data-fab]')].forEach(element => this.create(element));
+    document.addEventListener('click', (event) => {
+      const element = eventMatches(event, '[data-fab]');
+      if (element && !FabButton.components.has(element)) {
+        FabButton.create(element).toggle(event);
+      }
+    });
   }
 
   toggle(event) {
@@ -33,10 +38,3 @@ export default class FabButton {
 }
 
 FabButton.components = new WeakMap();
-
-document.addEventListener('click', (event) => {
-  const element = eventMatches(event, '[data-fab]');
-  if (element && !FabButton.components.has(element)) {
-    new FabButton(element).toggle(event);
-  }
-});

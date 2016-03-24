@@ -84,7 +84,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Spinner = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.FileUploader = exports.FabButton = undefined;
+	exports.Spinner = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 	
 	__webpack_require__(2);
 	
@@ -122,23 +122,15 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// Export all vars/classes for consumption:
-	
 	// Base Elements & Components
 	// -------------
 	// - JavaScript classes for use with components and base-elements.
 	// - The following statements import classes from actual locations to
 	//   be consumed from this file instead of their actual locations.
-	exports.FabButton = _fab2.default;
-	exports.FileUploader = _file2.default;
-	exports.Tab = _tabsNav2.default;
-	exports.OverflowMenu = _overflowMenu2.default;
-	exports.Modal = _modals2.default;
-	exports.HeaderNav = _header2.default;
-	exports.Toolbars = _toolbars2.default;
-	exports.Spinner = _spinner2.default;
 	
-	// ES5 only: Listen for DOMContentLoaded event and initialize all classes
+	var settings = {};
+	
+	// Export all vars/classes for consumption:
 	// ====================//
 	// Imports and Exports //
 	// ====================//
@@ -152,17 +144,36 @@
 	
 	// Polyfills
 	// -------------
+	exports.settings = settings;
+	exports.FabButton = _fab2.default;
+	exports.FileUploader = _file2.default;
+	exports.Tab = _tabsNav2.default;
+	exports.OverflowMenu = _overflowMenu2.default;
+	exports.Modal = _modals2.default;
+	exports.HeaderNav = _header2.default;
+	exports.Toolbars = _toolbars2.default;
+	exports.Spinner = _spinner2.default;
 	
-	document.addEventListener('DOMContentLoaded', function () {
-	  _fab2.default.init();
-	  _file2.default.init();
-	  _tabsNav2.default.init();
-	  _overflowMenu2.default.init();
-	  _modals2.default.init();
-	  _header2.default.init();
-	  _toolbars2.default.init();
-	  _spinner2.default.init();
-	});
+	var init = function init() {
+	  if (!settings.disableAutoInit) {
+	    _fab2.default.init();
+	    _file2.default.init();
+	    _tabsNav2.default.init();
+	    _overflowMenu2.default.init();
+	    _modals2.default.init();
+	    _header2.default.init();
+	    _toolbars2.default.init();
+	    _spinner2.default.init();
+	  }
+	};
+	
+	if (document.readyState === 'loading') {
+	  document.addEventListener('DOMContentLoaded', init);
+	} else {
+	  // DOMContentLoaded has been fired already
+	  // Let consumer have chance to see if it wants automatic instantiation disabled, and then run automatic instantiation otherwise
+	  setTimeout(init, 0);
+	}
 
 /***/ },
 /* 2 */
@@ -368,8 +379,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var FabButton = function () {
@@ -406,10 +415,11 @@
 	  }], [{
 	    key: 'init',
 	    value: function init() {
-	      var _this2 = this;
-	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-fab]'))).forEach(function (element) {
-	        return _this2.create(element);
+	      document.addEventListener('click', function (event) {
+	        var element = (0, _eventMatches2.default)(event, '[data-fab]');
+	        if (element && !FabButton.components.has(element)) {
+	          FabButton.create(element).toggle(event);
+	        }
 	      });
 	    }
 	  }, {
@@ -426,13 +436,6 @@
 	
 	
 	FabButton.components = new WeakMap();
-	
-	document.addEventListener('click', function (event) {
-	  var element = (0, _eventMatches2.default)(event, '[data-fab]');
-	  if (element && !FabButton.components.has(element)) {
-	    new FabButton(element).toggle(event);
-	  }
-	});
 
 /***/ },
 /* 4 */
