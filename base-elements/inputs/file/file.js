@@ -1,12 +1,12 @@
 export default class FileUploader {
-  constructor(element, options) {
+  constructor(element, options = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
     this.element = element;
 
-    const labelSelector = options && options.labelSelector || element.getAttribute('data-label');
+    const labelSelector = options.labelSelector || element.getAttribute('data-label');
     this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 
     FileUploader.components.set(this.element, this);
@@ -14,8 +14,8 @@ export default class FileUploader {
     element.addEventListener('change', (event) => this.updateLabel(event));
   }
 
-  static init() {
-    [... document.querySelectorAll('[data-file-input]')].forEach(element => this.create(element));
+  static init(options) {
+    [... document.querySelectorAll('[data-file-input]')].forEach(element => this.create(element, options));
   }
 
   updateLabel(event) {

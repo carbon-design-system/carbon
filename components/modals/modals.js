@@ -19,9 +19,9 @@ export default class Modal {
     this.hookCloseActions();
   }
 
-  static init() {
-    [... document.querySelectorAll('[data-modal-target]')].forEach(element => this.hook(element));
-    [... document.querySelectorAll('[data-modal]')].forEach(element => this.create(element));
+  static init(options) {
+    [... document.querySelectorAll('[data-modal-target]')].forEach(element => this.hook(element, options));
+    [... document.querySelectorAll('[data-modal]')].forEach(element => this.create(element, options));
   }
 
   hookCloseActions() {

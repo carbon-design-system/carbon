@@ -21,8 +21,8 @@ export default class Spinner {
     this.set(this.active);
   }
 
-  static init() {
-    [... document.querySelectorAll('[data-spinner]')].forEach(element => this.create(element));
+  static init(options) {
+    [... document.querySelectorAll('[data-spinner]')].forEach(element => this.create(element, options));
   }
 
   set(active) {
