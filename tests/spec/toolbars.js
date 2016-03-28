@@ -1,8 +1,6 @@
-import '../../../../js/custom-event';
-
-import '../../../utils/es6-weak-map-global'; // For PhantomJS
-
-import Toolbars from '../../../../components/toolbars/toolbars';
+import '../../js/polyfills/custom-event';
+import '../utils/es6-weak-map-global'; // For PhantomJS
+import { Toolbars } from '../../js/index.js';
 
 describe('Test toolbars', function () {
   describe('Constructor', function () {

@@ -1,12 +1,9 @@
-import '../../../../js/custom-event';
-import '../../../../js/object-assign';
-
+import '../../js/polyfills/custom-event';
+import '../../js/polyfills/object-assign';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
-
-import EventManager from '../../../utils/event-manager';
-import promiseTryCatcher from '../../../utils/promise-try-catcher';
-
-import Modal from '../../../../components/modals/modals';
+import EventManager from '../utils/event-manager';
+import promiseTryCatcher from '../utils/promise-try-catcher';
+import { Modal } from '../../js/index.js';
 
 describe('Test modal', function () {
   describe('Constructor', function () {

@@ -1,4 +1,4 @@
-import Spinner from '../../../../components/spinner/spinner';
+import { Spinner } from '../../js/index.js';
 
 describe('Test spinner', function () {
   describe('Constructor', function () {
@@ -41,12 +41,12 @@ describe('Test spinner', function () {
       expect(spinner.isActive()).to.equal(false);
     });
 
-    it('Should return self after setting', function() {
+    it('Should return self after setting', function () {
       const spinner = new Spinner(document.createElement('div'));
       expect(spinner.set(true)).to.equal(spinner);
     });
 
-    it('Should set class of DOM element', function() {
+    it('Should set class of DOM element', function () {
       const spinner = new Spinner(document.createElement('div'));
       spinner.set(true);
       expect(spinner.element.className).to.equal('');
@@ -54,8 +54,8 @@ describe('Test spinner', function () {
       expect(spinner.element.className).to.equal('is-stopping');
     });
 
-    it('Should set special class for IE', function() {
-      var options = { ie: true };
+    it('Should set special class for IE', function () {
+      const options = { ie: true };
       const spinner = new Spinner(document.createElement('div'), options);
       spinner.set(true);
       expect(spinner.element.className).to.equal('is--ie');
@@ -64,8 +64,8 @@ describe('Test spinner', function () {
     });
   });
 
-  describe('toggle()', function() {
-    it('Should toggle', function() {
+  describe('toggle()', function () {
+    it('Should toggle', function () {
       const spinner = new Spinner(document.createElement('div'));
       spinner.toggle();
       expect(spinner.isActive()).to.equal(false);
@@ -74,8 +74,8 @@ describe('Test spinner', function () {
     });
   });
 
-  describe('isActive()', function() {
-    it('Should return spinner state', function() {
+  describe('isActive()', function () {
+    it('Should return spinner state', function () {
       const spinner = new Spinner(document.createElement('div'));
       expect(spinner.isActive()).to.equal(true);
     });

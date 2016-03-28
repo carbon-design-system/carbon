@@ -47,19 +47,22 @@ var BluemixComponents =
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Spinner = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.FileUploader = exports.FabButton = undefined;
+	
 	__webpack_require__(1);
 	
-	__webpack_require__(2);
-	
-	var _fab = __webpack_require__(3);
+	var _fab = __webpack_require__(2);
 	
 	var _fab2 = _interopRequireDefault(_fab);
 	
-	var _file = __webpack_require__(5);
+	var _file = __webpack_require__(4);
 	
 	var _file2 = _interopRequireDefault(_file);
 	
-	var _tabsNav = __webpack_require__(6);
+	var _tabsNav = __webpack_require__(5);
 	
 	var _tabsNav2 = _interopRequireDefault(_tabsNav);
 	
@@ -85,6 +88,37 @@ var BluemixComponents =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// Export all vars/classes for consumption:
+	
+	// Base Elements & Components
+	// -------------
+	// - JavaScript classes for use with components and base-elements.
+	// - The following statements import classes from actual locations to
+	//   be consumed from this file instead of their actual locations.
+	exports.FabButton = _fab2.default;
+	exports.FileUploader = _file2.default;
+	exports.Tab = _tabsNav2.default;
+	exports.OverflowMenu = _overflowMenu2.default;
+	exports.Modal = _modals2.default;
+	exports.HeaderNav = _header2.default;
+	exports.Toolbars = _toolbars2.default;
+	exports.Spinner = _spinner2.default;
+	
+	// ES5 only: Listen for DOMContentLoaded event and initialize all classes
+	// ====================//
+	// Imports and Exports //
+	// ====================//
+	
+	// This file is for the following:
+	// 1. Export ES2015 classes as modules (used with base-elements and components)
+	//    - consume ES2015 modules from this file using import:
+	//    - import { Fab, FileUploader } from 'relative/path/to/bower/components';
+	// 2. Build an ES5-compatible files for prototyping.
+	//    See ./dist/dist-demo.html for details
+	
+	// Polyfills
+	// -------------
+	
 	document.addEventListener('DOMContentLoaded', function () {
 	  _fab2.default.init();
 	  _file2.default.init();
@@ -95,17 +129,6 @@ var BluemixComponents =
 	  _toolbars2.default.init();
 	  _spinner2.default.init();
 	});
-	
-	module.exports = {
-	  Fab: _fab2.default,
-	  FileUploader: _file2.default,
-	  Tab: _tabsNav2.default,
-	  OverflowMenu: _overflowMenu2.default,
-	  Modal: _modals2.default,
-	  HeaderNav: _header2.default,
-	  Toolbars: _toolbars2.default,
-	  Spinner: _spinner2.default
-	};
 
 /***/ },
 /* 1 */
@@ -295,16 +318,6 @@ var BluemixComponents =
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Array.from = Array.from || function fromArray(a) {
-	  return Array.prototype.slice.call(a);
-	};
-
-/***/ },
-/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -315,7 +328,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventMatches = __webpack_require__(4);
+	var _eventMatches = __webpack_require__(3);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
@@ -388,7 +401,7 @@ var BluemixComponents =
 	});
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -414,7 +427,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -497,7 +510,7 @@ var BluemixComponents =
 	FileUploader.components = new WeakMap();
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -511,7 +524,7 @@ var BluemixComponents =
 	// possibly be changed
 	
 	
-	__webpack_require__(2);
+	__webpack_require__(6);
 	
 	__webpack_require__(7);
 	
@@ -625,6 +638,16 @@ var BluemixComponents =
 	Tab.components = new WeakMap();
 
 /***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Array.from = Array.from || function fromArray(a) {
+	  return Array.prototype.slice.call(a);
+	};
+
+/***/ },
 /* 7 */
 /***/ function(module, exports) {
 
@@ -660,7 +683,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(2);
+	__webpack_require__(6);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -743,7 +766,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(2);
+	__webpack_require__(6);
 	
 	__webpack_require__(7);
 	
@@ -1007,7 +1030,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(2);
+	__webpack_require__(6);
 	
 	__webpack_require__(7);
 	

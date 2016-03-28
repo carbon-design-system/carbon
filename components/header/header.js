@@ -1,6 +1,6 @@
-import '../../js/array-from';
-import '../../js/object-assign';
-import '../../js/custom-event';
+import '../../js/polyfills/array-from';
+import '../../js/polyfills/object-assign';
+import '../../js/polyfills/custom-event';
 
 export default class HeaderNav {
   constructor(element, options = {}) {
