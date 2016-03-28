@@ -3,8 +3,9 @@ node_modules
 bower_components
 
 # Ignore built files and static folder
-dev/css
-dev/js
+dist/demo/demo.css
+dist/demo/demo.js
+dist/demo/demo.js.map
 *.css.map
 static
 

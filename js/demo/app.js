@@ -1,4 +1,4 @@
-import BluemixComponents from './js/index';
+import BluemixComponents from '../index';
 
 document.addEventListener('DOMContentLoaded', () => {
   // The following Components have custom setup for demo purposes, so we aren't using init();

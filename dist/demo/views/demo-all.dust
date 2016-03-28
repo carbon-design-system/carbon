@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width">
   <title>Bluemix Components</title>
   <link rel="stylesheet" href="/css/bluemix-components.css">
-  <link rel="stylesheet" href="/css/dev.css">
+  <link rel="stylesheet" href="/demo/demo.css">
   <style>
     .toc {
       margin-top: 2rem;
@@ -47,5 +47,5 @@
   </nav>
 
 
-  <script src="/js/demo.js"></script>
+  <script src="/demo/demo.js"></script>
 </body>

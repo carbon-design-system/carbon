@@ -8,7 +8,7 @@ files:
     - '**/*.scss'
   ignore:
     - 'bower_components/**/*.scss'
-    - '*.scss'
+    - 'scss/demo/*.scss'
 # Rule Configuration
 rules:
   # Extends and Mixins
