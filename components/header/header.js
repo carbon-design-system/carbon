@@ -30,8 +30,8 @@ export default class HeaderNav {
     });
   }
 
-  static init() {
-    [... document.querySelectorAll('[data-nav-target]')].forEach(element => this.hook(element));
+  static init(options) {
+    [... document.querySelectorAll('[data-nav-target]')].forEach(element => this.hook(element, options));
   }
 
   toggleNav(event) {
