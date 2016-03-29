@@ -93,4 +93,38 @@ describe('Test floating action button', function () {
       }
     });
   });
+
+  describe('Automatic creation', function () {
+    let element;
+
+    before(function () {
+      element = document.createElement('a');
+      element.dataset.fab = '';
+      document.body.appendChild(element);
+    });
+
+    it(`Should create an instance upon clicking`, function () {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(element.classList.contains('is-closed')).to.be.true;
+    });
+
+    it(`Shouldn't create a new instance upon clicking if one has been there already`, function () {
+      const stubComponentsSet = sinon.stub(FabButton.components, 'set');
+      try {
+        element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(element.classList.contains('is-closed')).to.be.false;
+        expect(stubComponentsSet).not.have.been.called;
+      } finally {
+        stubComponentsSet.restore();
+      }
+    });
+
+    after(function () {
+      const fab = FabButton.components.get(element);
+      if (fab) {
+        fab.release();
+      }
+      document.body.removeChild(element);
+    });
+  });
 });

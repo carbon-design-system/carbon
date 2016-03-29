@@ -1,4 +1,8 @@
-const matchesFuncName = typeof document.documentElement.matches === 'function' ? 'matches' : 'msMatchesSelector';
+const matchesFuncName = [
+  'matches',
+  'webkitMatchesSelector',
+  'msMatchesSelector',
+].filter((name) => typeof document.documentElement[name] === 'function')[0];
 
 export default function eventMatches(event, selector) {
   if (event.target[matchesFuncName](selector)) {
