@@ -26,9 +26,8 @@ const directoryOrder = [
 
 app.engine('dust', adaro.dust());
 app.set('view engine', 'dust');
-app.set('views', path.resolve(__dirname, 'views'));
+app.set('views', path.resolve(__dirname, 'dist/demo/views'));
 app.use(express.static('dist'));
-app.use(express.static('dev'));
 
 const getContent = (glob) => {
   return globby(glob)
@@ -71,7 +70,7 @@ app.get('/', (req, res) => {
   Promise.all([getContent(templateDirectories), allLinks])
     .then(results => {
 
-      res.render('index', {
+      res.render('demo-all', {
         content: results[0],
         links: results[1]
       });
@@ -83,7 +82,7 @@ app.get('/components/:component', (req, res) => {
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
-      res.render('index', {
+      res.render('demo-all', {
         content: results[0],
         links: results[1]
       });
@@ -95,7 +94,7 @@ app.get('/base-elements/:component', (req, res) => {
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
-      res.render('index', {
+      res.render('demo-all', {
         content: results[0],
         links: results[1]
       });
@@ -107,7 +106,7 @@ app.get('/global/:component', (req, res) => {
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
-      res.render('index', {
+      res.render('demo-all', {
         content: results[0],
         links: results[1]
       });

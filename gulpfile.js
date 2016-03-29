@@ -84,16 +84,17 @@ function buildDistBundle(prod) {
   });
 }
 
-gulp.task('scripts:dist:dev', () => buildDistBundle());
-
-gulp.task('scripts:dist:prod', () => buildDistBundle(true));
+gulp.task('scripts:dist', () => {
+  buildDistBundle() // Expanded ES5
+  buildDistBundle(true); // Minified ES5
+});
 
 gulp.task('scripts:demo', (cb) => {
   webpack({
     devtool: 'source-maps',
-    entry: './app.js',
+    entry: './js/demo/app.js',
     output: {
-      path: 'dev/js',
+      path: 'dist/demo',
       filename: 'demo.js'
     },
     module: {
@@ -118,8 +119,6 @@ gulp.task('scripts:demo', (cb) => {
 
 gulp.task('scripts', ['scripts:dist', 'scripts:demo']);
 
-gulp.task('scripts:dist', ['scripts:dist:dev', 'scripts:dist:prod']);
-
 //////////////////////////////
 // Sass Tasks
 //////////////////////////////
@@ -128,7 +127,7 @@ function buildDistSass(prod) {
   return gulp.src([
     'base-elements/**/*.scss',
     'components/**/*.scss',
-    '*.scss'
+    'scss/*.scss'
   ])
   .pipe(sourcemaps.init())
   .pipe(sass({
@@ -150,24 +149,13 @@ function buildDistSass(prod) {
   .pipe(browserSync.stream());
 }
 
-gulp.task('sass:dist:dev', ['sass:lint'], () => buildDistSass());
-
-gulp.task('sass:dist:prod', ['sass:lint'], () => buildDistSass(true));
-
-gulp.task('sass:lint', () => {
-  gulp.src([
-    'base-elements/**/*.scss',
-    'components/**/*.scss',
-    'dev/**/*.scss',
-    '*.scss'
-  ])
-  .pipe(sassLint())
-  .pipe(sassLint.format())
-  .pipe(sassLint.failOnError());
+gulp.task('sass:dist', () => {
+  buildDistSass(); // Expanded CSS
+  buildDistSass(true); // Minified CSS
 });
 
 gulp.task('sass:demo', ['sass:lint'], () => {
-  return gulp.src('dev/**/*.scss')
+  return gulp.src('scss/**/demo.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'expanded'
@@ -177,13 +165,23 @@ gulp.task('sass:demo', ['sass:lint'], () => {
     }))
     .pipe(rename({ dirname: '' }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dev/css'))
+    .pipe(gulp.dest('dist/demo'))
     .pipe(browserSync.stream());
 });
 
 gulp.task('sass', ['sass:dist', 'sass:demo']);
 
-gulp.task('sass:dist', ['sass:dist:dev', 'sass:dist:prod']);
+gulp.task('sass:lint', () => {
+  gulp.src([
+    'base-elements/**/*.scss',
+    'components/**/*.scss',
+    'global/**/*.scss',
+    'scss/**/*.scss'
+  ])
+  .pipe(sassLint())
+  .pipe(sassLint.format())
+  .pipe(sassLint.failOnError());
+});
 
 /////////////////////////////
 // Test
@@ -202,11 +200,11 @@ gulp.task('test', (done) => {
 
 gulp.task('watch', () => {
   gulp.watch('./**/*.html').on('change', browserSync.reload);
-  gulp.watch(['base-elements/**/*.js', 'components/**/*.js', 'app.js' ], ['scripts']);
-  gulp.watch(['base-elements/**/*.scss', 'components/**/*.scss', 'dev/**/*.scss', '*.scss'], ['sass']);
+  gulp.watch(['base-elements/**/*.js', 'components/**/*.js', 'js/**/*.js' ], ['scripts']);
+  gulp.watch(['base-elements/**/*.scss', 'components/**/*.scss', 'scss/**/*.scss'], ['sass']);
 });
+
+gulp.task('serve', ['browser-sync', 'watch']);
 
 // Use: npm run build
 gulp.task('build', ['sass', 'scripts']);
-
-gulp.task('serve', ['browser-sync', 'watch']);

@@ -410,7 +410,9 @@ var BluemixComponents =
 	  value: true
 	});
 	exports.default = eventMatches;
-	var matchesFuncName = typeof document.documentElement.matches === 'function' ? 'matches' : 'msMatchesSelector';
+	var matchesFuncName = ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(function (name) {
+	  return typeof document.documentElement[name] === 'function';
+	})[0];
 	
 	function eventMatches(event, selector) {
 	  if (event.target[matchesFuncName](selector)) {
@@ -443,8 +445,10 @@ var BluemixComponents =
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var FileUploader = function () {
-	  function FileUploader(element, options) {
+	  function FileUploader(element) {
 	    var _this = this;
+	
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	
 	    _classCallCheck(this, FileUploader);
 	
@@ -454,7 +458,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    var labelSelector = options && options.labelSelector || element.getAttribute('data-label');
+	    var labelSelector = options.labelSelector || element.getAttribute('data-label');
 	    this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 	
 	    FileUploader.components.set(this.element, this);
@@ -487,11 +491,11 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init() {
+	    value: function init(options) {
 	      var _this2 = this;
 	
 	      [].concat(_toConsumableArray(document.querySelectorAll('[data-file-input]'))).forEach(function (element) {
-	        return _this2.create(element);
+	        return _this2.create(element, options);
 	      });
 	    }
 	  }, {
@@ -615,11 +619,11 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init() {
+	    value: function init(options) {
 	      var _this3 = this;
 	
 	      [].concat(_toConsumableArray(document.querySelectorAll('[data-tabs]'))).forEach(function (element) {
-	        return _this3.create(element);
+	        return _this3.create(element, options);
 	      });
 	    }
 	  }, {
@@ -940,14 +944,14 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init() {
+	    value: function init(options) {
 	      var _this5 = this;
 	
 	      [].concat(_toConsumableArray(document.querySelectorAll('[data-modal-target]'))).forEach(function (element) {
-	        return _this5.hook(element);
+	        return _this5.hook(element, options);
 	      });
 	      [].concat(_toConsumableArray(document.querySelectorAll('[data-modal]'))).forEach(function (element) {
-	        return _this5.create(element);
+	        return _this5.create(element, options);
 	      });
 	    }
 	  }, {
@@ -1160,11 +1164,11 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init() {
+	    value: function init(options) {
 	      var _this2 = this;
 	
 	      [].concat(_toConsumableArray(document.querySelectorAll('[data-nav-target]'))).forEach(function (element) {
-	        return _this2.hook(element);
+	        return _this2.hook(element, options);
 	      });
 	    }
 	  }, {
@@ -1362,11 +1366,11 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init() {
+	    value: function init(options) {
 	      var _this = this;
 	
 	      [].concat(_toConsumableArray(document.querySelectorAll('[data-spinner]'))).forEach(function (element) {
-	        return _this.create(element);
+	        return _this.create(element, options);
 	      });
 	    }
 	  }, {
