@@ -1,9 +1,0 @@
-@import '_partials/mixins';
-
-.global-profile {
-  @include global-profile;
-
-  .light-ui & {
-    @include global-profile;
-  }
-}
