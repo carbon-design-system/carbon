@@ -8,7 +8,7 @@ export default class OverflowMenu {
 
     this.element = element;
 
-    OverflowMenu.components.set(this.element, this);
+    this.constructor.components.set(this.element, this);
 
     this.element.addEventListener('click', (event) => this.openMenu(event));
   }
@@ -34,11 +34,11 @@ export default class OverflowMenu {
   }
 
   release() {
-    OverflowMenu.components.delete(this.element);
+    this.constructor.components.delete(this.element);
   }
 
   static create(element) {
-    return OverflowMenu.components.get(element) || new OverflowMenu(element);
+    return this.components.get(element) || new this(element);
   }
 }
 

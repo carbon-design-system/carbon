@@ -14,7 +14,7 @@ export default class Modal {
       classVisible: 'is-visible',
     }, options);
 
-    Modal.components.set(this.element, this);
+    this.constructor.components.set(this.element, this);
 
     this.hookCloseActions();
   }
@@ -149,11 +149,11 @@ export default class Modal {
       this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
       this.keydownHandler = null;
     }
-    Modal.components.delete(this.element);
+    this.constructor.components.delete(this.element);
   }
 
   static create(element, options) {
-    return Modal.components.get(element) || new Modal(element, options);
+    return this.components.get(element) || new this(element, options);
   }
 
   static hook(element, options) {
@@ -166,7 +166,7 @@ export default class Modal {
       throw new Error('Target modal must be unique.');
     }
 
-    const modal = Modal.components.get(modalElements[0]) || new Modal(modalElements[0], options);
+    const modal = this.create(modalElements[0], options);
 
     element.addEventListener('click', (event) => {
       if (event.currentTarget.tagName === 'A') {

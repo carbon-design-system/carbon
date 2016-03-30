@@ -28,7 +28,7 @@ export default class Tab {
       classHidden: 'tabs--hidden',
     }, options);
 
-    Tab.components.set(this.element, this);
+    this.constructor.components.set(this.element, this);
 
     [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
       button.addEventListener('click', (event) => this.handleItemClick(event));
@@ -69,11 +69,11 @@ export default class Tab {
   }
 
   release() {
-    Tab.components.delete(this.element);
+    this.constructor.components.delete(this.element);
   }
 
   static create(element, options) {
-    return Tab.components.get(element) || new Tab(element, options);
+    return this.components.get(element) || new this(element, options);
   }
 }
 
