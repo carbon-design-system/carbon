@@ -1,0 +1,58 @@
+@import 'vars';
+@import 'mixins';
+@import 'extends';
+
+.alert {
+  &--running { @include alert--theme($color__blue-30); }
+  &--danger { @include alert--theme($color__red-40); }
+  &--warning { @include alert--theme($color__orange-30); } // !temporary
+  &--misc { @include alert--theme($color__purple-40); } // !temporary
+  &--info { @include alert--theme($color__yellow-30); }
+}
+
+.alert {
+  display: flex;
+
+  &--danger, &--running, &--warning, &--misc, &--info {
+    @extend %font-smoothing;
+    flex: 1;
+    padding: .3em 0 .3em .5em;
+    background-color: $color--alerts--bg;
+    border-right: 3px solid $color--alerts--border;
+
+    .alert__title,
+    .alert__subtitle,
+    .alert__caption {
+      margin: .4em 0;
+    }
+
+    .alert__title {
+      font-size: 1.5rem;
+    }
+
+    .alert__subtitle {
+      margin-bottom: 1em;
+      color: $color__white;
+    }
+
+    .alert__caption {
+      color: $color__white;
+    }
+  }
+
+  .alert__close {
+    margin: .3em 0;
+    background-color: $color__navy-gray-2;
+    border: none;
+
+    span {
+      padding: .1em;
+
+      svg {
+        fill: $close-button;
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}

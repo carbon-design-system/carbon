@@ -1,0 +1,15 @@
+// !temporary
+@mixin icon ($icon-file, $file-ext : 'png') {
+  @if $file-ext == 'svg' {
+    background-image: url('../images/#{$icon-file}.#{$file-ext}');
+  }
+
+  @else {
+    background-image: url('../images/#{$icon-file}@1x.#{$file-ext}');
+    // sass-lint:disable indentation
+    @media (min--moz-device-pixel-ratio: 1.3) {
+      /* on retina, use image that's scaled by 2 */
+      background-image: url('../images/#{$icon-file}@2x.#{$file-ext}');
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@import 'vars';
+@import 'extends';
+
+.footer {
+  @extend %footer;
+
+  &__container {
+    @extend %footer__container;
+  }
+}

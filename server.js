@@ -9,15 +9,12 @@ const app = express();
 const adaro = require('adaro');
 
 const templateDirectories = [
-  'global/colors/*.html',
-  'components/header/header.html',
-  'components/taxonomy-item/taxonomy-items.html',
-  'base-elements/**/*.html',
-  'components/**/*.html',
-  'global/**/*.html',
-  '!base-elements/body/body.html',
+  'html/**/header.html',
+  'html/**/*.html',
+  '!html/**/body.html'
 ];
 
+// Used for allLinks() function
 const directoryOrder = [
   'base-elements/**/*.html',
   'components/**/*.html',
@@ -26,8 +23,8 @@ const directoryOrder = [
 
 app.engine('dust', adaro.dust());
 app.set('view engine', 'dust');
-app.set('views', path.resolve(__dirname, 'dist/demo/views'));
-app.use(express.static('dist'));
+app.set('views', path.resolve(__dirname, 'demo/views'));
+app.use(express.static('demo'));
 
 const getContent = (glob) => {
   return globby(glob)

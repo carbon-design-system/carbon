@@ -1,0 +1,36 @@
+@import 'vars';
+@import 'extends';
+
+.tooltip {
+  display: none;
+
+  &__top {
+    @extend %tooltip--setup;
+    display: none;
+
+    &:before {
+      bottom: 2em;
+    }
+
+    &:after {
+      bottom: 1.5em;
+
+      transform:rotate(45deg);
+    }
+  }
+
+  &__bottom {
+    @extend %tooltip--setup;
+    display: none;
+
+    &:before {
+      top: 2em;
+    }
+
+    &:after {
+      top: 1.5em;
+
+      transform:rotate(-135deg);
+    }
+  }
+}

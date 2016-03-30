@@ -1,0 +1,18 @@
+@import 'vars';
+
+.link {
+  font-weight: bold;
+  color: $color--link;
+  text-decoration: underline;
+  transition: $transition--link;
+
+  &:visited {
+    color: $color--link;
+  }
+
+  &:active,
+  &:hover,
+  &:focus {
+    color: $color--link--hover;
+  }
+}
