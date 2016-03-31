@@ -15,7 +15,7 @@ export default class Spinner {
       this.element.classList.add('is--ie');
     }
 
-    Spinner.components.set(this.element, this);
+    this.constructor.components.set(this.element, this);
 
     // initialize spinner
     this.set(this.active);
@@ -54,11 +54,11 @@ export default class Spinner {
   }
 
   release() {
-    Spinner.components.delete(this.element);
+    this.constructor.components.delete(this.element);
   }
 
   static create(element) {
-    return Spinner.components.get(element) || new Spinner(element);
+    return this.components.get(element) || new this(element);
   }
 }
 

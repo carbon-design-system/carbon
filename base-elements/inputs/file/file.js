@@ -9,7 +9,7 @@ export default class FileUploader {
     const labelSelector = options.labelSelector || element.getAttribute('data-label');
     this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 
-    FileUploader.components.set(this.element, this);
+    this.constructor.components.set(this.element, this);
 
     element.addEventListener('change', (event) => this.updateLabel(event));
   }
@@ -34,11 +34,11 @@ export default class FileUploader {
   }
 
   release() {
-    FileUploader.components.delete(this.element);
+    this.constructor.components.delete(this.element);
   }
 
   static create(element, options) {
-    return FileUploader.components.get(element) || new FileUploader(element, options);
+    return this.components.get(element) || new this(element, options);
   }
 }
 

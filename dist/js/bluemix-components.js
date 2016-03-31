@@ -349,7 +349,7 @@ var BluemixComponents =
 	    }
 	    this.element = element;
 	
-	    FabButton.components.set(this.element, this);
+	    this.constructor.components.set(this.element, this);
 	
 	    element.addEventListener('click', function (event) {
 	      return _this.toggle(event);
@@ -367,7 +367,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'release',
 	    value: function release() {
-	      FabButton.components.delete(this.element);
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'init',
@@ -381,7 +381,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'create',
 	    value: function create(element) {
-	      return FabButton.components.get(element) || new FabButton(element);
+	      return this.components.get(element) || new this(element);
 	    }
 	  }]);
 	
@@ -461,7 +461,7 @@ var BluemixComponents =
 	    var labelSelector = options.labelSelector || element.getAttribute('data-label');
 	    this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 	
-	    FileUploader.components.set(this.element, this);
+	    this.constructor.components.set(this.element, this);
 	
 	    element.addEventListener('change', function (event) {
 	      return _this.updateLabel(event);
@@ -487,7 +487,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'release',
 	    value: function release() {
-	      FileUploader.components.delete(this.element);
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'init',
@@ -501,7 +501,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'create',
 	    value: function create(element, options) {
-	      return FileUploader.components.get(element) || new FileUploader(element, options);
+	      return this.components.get(element) || new this(element, options);
 	    }
 	  }]);
 	
@@ -566,7 +566,7 @@ var BluemixComponents =
 	      classHidden: 'tabs--hidden'
 	    }, options);
 	
-	    Tab.components.set(this.element, this);
+	    this.constructor.components.set(this.element, this);
 	
 	    [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorButton))).forEach(function (button) {
 	      button.addEventListener('click', function (event) {
@@ -615,7 +615,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'release',
 	    value: function release() {
-	      Tab.components.delete(this.element);
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'init',
@@ -629,7 +629,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'create',
 	    value: function create(element, options) {
-	      return Tab.components.get(element) || new Tab(element, options);
+	      return this.components.get(element) || new this(element, options);
 	    }
 	  }]);
 	
@@ -705,7 +705,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    OverflowMenu.components.set(this.element, this);
+	    this.constructor.components.set(this.element, this);
 	
 	    this.element.addEventListener('click', function (event) {
 	      return _this.openMenu(event);
@@ -732,7 +732,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'release',
 	    value: function release() {
-	      OverflowMenu.components.delete(this.element);
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'init',
@@ -746,7 +746,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'create',
 	    value: function create(element) {
-	      return OverflowMenu.components.get(element) || new OverflowMenu(element);
+	      return this.components.get(element) || new this(element);
 	    }
 	  }]);
 	
@@ -796,7 +796,7 @@ var BluemixComponents =
 	      classVisible: 'is-visible'
 	    }, options);
 	
-	    Modal.components.set(this.element, this);
+	    this.constructor.components.set(this.element, this);
 	
 	    this.hookCloseActions();
 	  }
@@ -940,7 +940,7 @@ var BluemixComponents =
 	        this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
 	        this.keydownHandler = null;
 	      }
-	      Modal.components.delete(this.element);
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'init',
@@ -957,7 +957,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'create',
 	    value: function create(element, options) {
-	      return Modal.components.get(element) || new Modal(element, options);
+	      return this.components.get(element) || new this(element, options);
 	    }
 	  }, {
 	    key: 'hook',
@@ -971,7 +971,7 @@ var BluemixComponents =
 	        throw new Error('Target modal must be unique.');
 	      }
 	
-	      var modal = Modal.components.get(modalElements[0]) || new Modal(modalElements[0], options);
+	      var modal = this.create(modalElements[0], options);
 	
 	      element.addEventListener('click', function (event) {
 	        if (event.currentTarget.tagName === 'A') {
@@ -1067,7 +1067,7 @@ var BluemixComponents =
 	      selectorLabel: '.taxonomy-item__label'
 	    }, options);
 	
-	    HeaderNav.components.set(this.element, this);
+	    this.constructor.components.set(this.element, this);
 	
 	    this.menuNode = this.element.querySelector(this.options.selectorMenu);
 	
@@ -1160,7 +1160,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'release',
 	    value: function release() {
-	      HeaderNav.components.delete(this.element);
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'init',
@@ -1174,17 +1174,19 @@ var BluemixComponents =
 	  }, {
 	    key: 'create',
 	    value: function create(element, options) {
-	      return HeaderNav.components.get(element) || new HeaderNav(element, options);
+	      return this.components.get(element) || new this(element, options);
 	    }
 	  }, {
 	    key: 'hook',
 	    value: function hook(element, options) {
+	      var _this3 = this;
+	
 	      if (!element || element.nodeType !== Node.ELEMENT_NODE) {
 	        throw new TypeError('DOM element should be given to initialize this widget.');
 	      }
 	
 	      var navs = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.getAttribute('data-nav-target')))).map(function (target) {
-	        return HeaderNav.create(target, options);
+	        return _this3.create(target, options);
 	      });
 	
 	      ['keydown', 'click'].forEach(function (name) {
@@ -1236,7 +1238,7 @@ var BluemixComponents =
 	    this.element = element;
 	    this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.getAttribute('data-list-icons-search-action-target'));
 	
-	    Toolbars.components.set(this.element, this);
+	    this.constructor.components.set(this.element, this);
 	
 	    this.element.addEventListener('click', function (event) {
 	      return _this.handleActionClick(event);
@@ -1259,7 +1261,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'release',
 	    value: function release() {
-	      Toolbars.components.delete(this.element);
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'init',
@@ -1273,7 +1275,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'create',
 	    value: function create(element) {
-	      return Toolbars.components.get(element) || new Toolbars(element);
+	      return this.components.get(element) || new this(element);
 	    }
 	  }]);
 	
@@ -1322,7 +1324,7 @@ var BluemixComponents =
 	      this.element.classList.add('is--ie');
 	    }
 	
-	    Spinner.components.set(this.element, this);
+	    this.constructor.components.set(this.element, this);
 	
 	    // initialize spinner
 	    this.set(this.active);
@@ -1362,7 +1364,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'release',
 	    value: function release() {
-	      Spinner.components.delete(this.element);
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'init',
@@ -1376,7 +1378,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'create',
 	    value: function create(element) {
-	      return Spinner.components.get(element) || new Spinner(element);
+	      return this.components.get(element) || new this(element);
 	    }
 	  }]);
 	

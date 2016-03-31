@@ -7,7 +7,7 @@ export default class FabButton {
     }
     this.element = element;
 
-    FabButton.components.set(this.element, this);
+    this.constructor.components.set(this.element, this);
 
     element.addEventListener('click', (event) => this.toggle(event));
   }
@@ -24,11 +24,11 @@ export default class FabButton {
   }
 
   release() {
-    FabButton.components.delete(this.element);
+    this.constructor.components.delete(this.element);
   }
 
   static create(element) {
-    return FabButton.components.get(element) || new FabButton(element);
+    return this.components.get(element) || new this(element);
   }
 }
 
