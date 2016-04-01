@@ -27,8 +27,11 @@ import HeaderNav from '../components/header/header';
 import Toolbars from '../components/toolbars/toolbars';
 import Spinner from '../components/spinner/spinner';
 
+const settings = {};
+
 // Export all vars/classes for consumption:
 export {
+  settings,
   FabButton,
   FileUploader,
   Tab,
@@ -39,14 +42,23 @@ export {
   Spinner,
 };
 
-// ES5 only: Listen for DOMContentLoaded event and initialize all classes
-document.addEventListener('DOMContentLoaded', () => {
-  FabButton.init();
-  FileUploader.init();
-  Tab.init();
-  OverflowMenu.init();
-  Modal.init();
-  HeaderNav.init();
-  Toolbars.init();
-  Spinner.init();
-});
+const init = () => {
+  if (!settings.disableAutoInit) {
+    FabButton.init();
+    FileUploader.init();
+    Tab.init();
+    OverflowMenu.init();
+    Modal.init();
+    HeaderNav.init();
+    Toolbars.init();
+    Spinner.init();
+  }
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  // DOMContentLoaded has been fired already
+  // Let consumer have chance to see if it wants automatic instantiation disabled, and then run automatic instantiation otherwise
+  setTimeout(init, 0);
+}
