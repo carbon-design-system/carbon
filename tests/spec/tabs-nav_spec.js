@@ -1,5 +1,5 @@
 import '../../consumables/js/polyfills/custom-event';
-import { Tab } from '../../consumables/js/es2015/index.js';
+import Tab from '../../consumables/js/es2015/tabs-nav';
 
 describe('Test tabs', function () {
   describe('Constructor', function () {

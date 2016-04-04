@@ -1,6 +1,6 @@
 import '../../consumables/js/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import { Toolbars } from '../../consumables/js/es2015/index.js';
+import Toolbars from '../../consumables/js/es2015/toolbars';
 
 describe('Test toolbars', function () {
   describe('Constructor', function () {

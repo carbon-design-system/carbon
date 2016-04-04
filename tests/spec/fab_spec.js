@@ -1,6 +1,6 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import '../../consumables/js/polyfills/custom-event';
-import { FabButton } from '../../consumables/js/es2015/index.js';
+import FabButton from '../../consumables/js/es2015/fab';
 
 describe('Test floating action button', function () {
   describe('Constructor', function () {
@@ -94,19 +94,21 @@ describe('Test floating action button', function () {
 
   describe('Automatic creation', function () {
     let element;
+    let initContext;
 
     before(function () {
+      initContext = FabButton.init();
       element = document.createElement('a');
       element.dataset.fab = '';
       document.body.appendChild(element);
     });
 
-    xit(`Should create an instance upon clicking`, function () {
+    it(`Should create an instance upon clicking`, function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.classList.contains('is-closed')).to.be.true;
     });
 
-    xit(`Shouldn't create a new instance upon clicking if one has been there already`, function () {
+    it(`Shouldn't create a new instance upon clicking if one has been there already`, function () {
       const stubComponentsSet = sinon.stub(FabButton.components, 'set');
       try {
         element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -123,6 +125,9 @@ describe('Test floating action button', function () {
         fab.release();
       }
       document.body.removeChild(element);
+      if (initContext) {
+        initContext.remove();
+      }
     });
   });
 });
