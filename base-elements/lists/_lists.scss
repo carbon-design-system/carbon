@@ -1,19 +1,17 @@
-.list {
-  &--unordered {
-    margin-left: 2em;
-    line-height: 1.5;
+.bx--list--unordered {
+  margin-left: 2em;
+  line-height: 1.5;
 
-    .list__item {
-      list-style: initial;
-    }
+  &__item {
+    list-style: initial;
   }
+}
 
-  &--ordered {
-    margin-left: 2em;
-    line-height: 1.5;
+.bx--list--ordered {
+  margin-left: 2em;
+  line-height: 1.5;
 
-    .list__item {
-      list-style-type: decimal;
-    }
+  &__item {
+    list-style-type: decimal;
   }
 }
