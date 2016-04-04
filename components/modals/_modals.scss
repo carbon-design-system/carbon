@@ -16,7 +16,7 @@
   opacity: 0;
   transition: opacity .2s, z-index 0s .2s;
   visibility: hidden;
-  
+
   &.is-visible {
     z-index: z('modal');
     opacity: 1;
