@@ -151,7 +151,7 @@ var BluemixComponents =
 	 * @copyright Copyright (c) 2016 IcoMoon.io
 	 * @license   Licensed under MIT license
 	 *            See https://github.com/Keyamoon/svgxuse
-	 * @version   1.1.7
+	 * @version   1.1.15
 	 */
 	/*jslint browser: true */
 	/*global XDomainRequest, MutationObserver, window */
@@ -170,6 +170,8 @@ var BluemixComponents =
 	        };
 	        var observeChanges = function () {
 	            var observer;
+	            window.addEventListener('resize', debouncedCheck, false);
+	            window.addEventListener('orientationchange', debouncedCheck, false);
 	            if (window.MutationObserver) {
 	                observer = new MutationObserver(debouncedCheck);
 	                observer.observe(document.documentElement, {
@@ -180,12 +182,16 @@ var BluemixComponents =
 	                unobserveChanges = function () {
 	                    try {
 	                        observer.disconnect();
+	                        window.removeEventListener('resize', debouncedCheck, false);
+	                        window.removeEventListener('orientationchange', debouncedCheck, false);
 	                    } catch (ignore) {}
 	                };
 	            } else {
 	                document.documentElement.addEventListener('DOMSubtreeModified', debouncedCheck, false);
 	                unobserveChanges = function () {
 	                    document.documentElement.removeEventListener('DOMSubtreeModified', debouncedCheck, false);
+	                    window.removeEventListener('resize', debouncedCheck, false);
+	                    window.removeEventListener('orientationchange', debouncedCheck, false);
 	                };
 	            }
 	        };
@@ -220,7 +226,14 @@ var BluemixComponents =
 	                    observeChanges(); // watch for changes to DOM
 	                }
 	            }
-	            function onload(xhr) {
+	            function attrUpdateFunc(spec) {
+	                return function () {
+	                    if (cache[spec.base] !== true) {
+	                        spec.useEl.setAttributeNS(xlinkNS, 'xlink:href', '#' + spec.hash);
+	                    }
+	                };
+	            }
+	            function onloadFunc(xhr) {
 	                return function () {
 	                    var body = document.body;
 	                    var x = document.createElement('x');
@@ -232,6 +245,7 @@ var BluemixComponents =
 	                        svg.style.position = 'absolute';
 	                        svg.style.width = 0;
 	                        svg.style.height = 0;
+	                        svg.style.overflow = 'hidden';
 	                        body.insertBefore(svg, body.firstChild);
 	                    }
 	                    observeIfDone();
@@ -266,14 +280,20 @@ var BluemixComponents =
 	                        base = fallback;
 	                    }
 	                    if (base.length) {
+	                        // schedule updating xlink:href
 	                        xhr = cache[base];
 	                        if (xhr !== true) {
-	                            uses[i].setAttributeNS(xlinkNS, 'xlink:href', '#' + hash);
+	                            // true signifies that prepending the SVG was not required
+	                            setTimeout(attrUpdateFunc({
+	                                useEl: uses[i],
+	                                base: base,
+	                                hash: hash
+	                            }), 0);
 	                        }
 	                        if (xhr === undefined) {
 	                            xhr = new Request();
 	                            cache[base] = xhr;
-	                            xhr.onload = onload(xhr);
+	                            xhr.onload = onloadFunc(xhr);
 	                            xhr.onerror = onErrorTimeout(xhr);
 	                            xhr.ontimeout = onErrorTimeout(xhr);
 	                            xhr.open('GET', base);
@@ -282,9 +302,17 @@ var BluemixComponents =
 	                        }
 	                    }
 	                } else {
-	                    // remember this URL if the use element was not empty and no request was sent
-	                    if (!isHidden && cache[base] === undefined) {
-	                        cache[base] = true;
+	                    if (!isHidden) {
+	                        if (cache[base] === undefined) {
+	                            // remember this URL if the use element was not empty and no request was sent
+	                            cache[base] = true;
+	                        } else if (cache[base].onload) {
+	                            // if it turns out that prepending the SVG is not necessary,
+	                            // abort the in-progress xhr.
+	                            cache[base].abort();
+	                            cache[base].onload = undefined;
+	                            cache[base] = true;
+	                        }
 	                    }
 	                }
 	            }
@@ -295,11 +323,10 @@ var BluemixComponents =
 	        // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
 	        window.addEventListener('load', function winLoad() {
 	            window.removeEventListener('load', winLoad, false); // to prevent memory leaks
-	            checkUseElems();
+	            tid = setTimeout(checkUseElems, 0);
 	        }, false);
 	    }
 	}());
-	
 
 
 /***/ },
@@ -812,7 +839,7 @@ var BluemixComponents =
 	    value: function _changeState(visible, callback) {
 	      var _this2 = this;
 	
-	      var finished = undefined;
+	      var finished = void 0;
 	      var finishedTransition = function finishedTransition() {
 	        if (!finished) {
 	          finished = true;
@@ -1064,7 +1091,7 @@ var BluemixComponents =
 	    key: 'toggleNav',
 	    value: function toggleNav(event) {
 	      var isActive = this.element.classList.contains(this.options.classActive);
-	      var add = undefined;
+	      var add = void 0;
 	      if (event.type === 'click' || event.type === 'keydown' && event.which === 40) {
 	        // Toggle button or ESC key on nav
 	        add = !isActive;
