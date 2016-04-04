@@ -2,35 +2,36 @@
 @import '_partials/mixins';
 @import '_partials/extends';
 
-.btn {
-  @include btn--primary($color__btn--bg, $color__btn--bg--active);
+// Light UI is not meant to be used yet until later
 
-  .light-ui & {
-    @include btn--primary($color__btn--bg--light, $color__btn--bg--active--light);
-  }
+.bx--btn {
+  @extend %btn--primary;
+
+  // .light-ui & {
+  //   @extend %btn--base;
+  //   @include btn--primary($color__btn--bg--light, $color__btn--bg--active--light);
+  // }
 }
 
-.btn--secondary {
-  @include btn--secondary($color__btn--bg);
+.bx--btn--secondary {
+  @extend %btn--secondary;
 
-  .light-ui & {
-    @include btn--secondary($color__btn--bg--light);
-  }
+  // .light-ui & {
+  //   @extend %btn--base;
+  //   @include btn--secondary($color__btn--bg--light);
+  // }
 }
 
-.btn--danger {
-  @include btn--secondary($color__red-40);
+.bx--btn--danger {
+  @extend %btn--danger;
 }
 
-.btn--right-icon {
-  @include btn--primary($color__btn--bg, $color__btn--bg--active);
-  min-width: rem(225px);
-  padding-right: rem(6px);
-  text-align: left; // override default center alignment in some browsers
-  vertical-align: bottom; // Firefox seems to have a different v-align
+.bx--btn--right-icon {
+  @extend %btn--right-icon;
 
-  // a wrapping element is necessary because FF does _not_ like display: flex; on buttons
   &__wrapper {
+    // a wrapping element is needed
+    // Firefox does _not_ like `display: flex;` on buttons
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,7 +40,9 @@
   &__icon {
     width: rem(24px);
     height: rem(24px);
+  }
 
-    use { fill: $color__white; }
+  &__use {
+    fill: $color__white;
   }
 }
