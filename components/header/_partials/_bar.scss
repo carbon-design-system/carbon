@@ -112,42 +112,6 @@
   }
 }
 
-.global-profile {
-  margin-left: auto;
-  padding-left: 1em;
-
-  @include breakpoint(bp--sm--major) {
-    margin-left: 0;
-  }
-
-  &__avatar {
-    background-image: url('../../images/i-avatar-icon.png');
-    border: 1px solid $border-color__global-profile__avatar;
-
-    &:hover {
-      background-image: url('../../images/i-avatar-icon-hover.png');
-    }
-  }
-
-  &__full-name {
-    display: flex;
-    flex-direction: column;
-
-    position: absolute;
-    overflow: hidden;
-    transition: all .5s ease;
-    transform: translateX(300px);
-
-    @include breakpoint(bp--sm--major) {
-      position: relative;
-      transform: translateX(0);
-      text-decoration: none;
-      color: $color__white;
-      font-size: 14px;
-    }
-  }
-}
-
 .name-details,
 .current-details {
   line-height: 1.2;
