@@ -208,3 +208,7 @@ gulp.task('serve', ['browser-sync', 'watch']);
 
 // Use: npm run build
 gulp.task('build', ['sass', 'scripts']);
+
+gulp.task('default', () => {
+  console.log('\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n');
+});
