@@ -16,13 +16,13 @@
   opacity: 0;
   transition: opacity .2s, z-index 0s .2s;
   visibility: hidden;
-}
-
-.is-visible {
-  z-index: z('modal');
-  opacity: 1;
-  transition: opacity .2s;
-  visibility: visible;
+  
+  &.is-visible {
+    z-index: z('modal');
+    opacity: 1;
+    transition: opacity .2s;
+    visibility: visible;
+  }
 }
 
 .modal__buttons {
@@ -136,7 +136,7 @@
 
 .modal__header {
   padding: 3.125em 3.125em 0 3.125em;
-  margin: -3.125em -3.125em 0.25em -3.125em;
+  margin: -3.125em -3.125em .25em -3.125em;
 }
 
 // Example buttons for components website
