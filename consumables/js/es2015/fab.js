@@ -12,13 +12,20 @@ export default class FabButton {
     element.addEventListener('click', (event) => this.toggle(event));
   }
 
-  static init() {
-    document.addEventListener('click', (event) => {
-      const element = eventMatches(event, '[data-fab]');
-      if (element && !FabButton.components.has(element)) {
-        FabButton.create(element).toggle(event);
-      }
-    });
+  static init(target = document) {
+    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+    }
+    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fab !== undefined) {
+      this.create(target);
+    } else {
+      target.addEventListener('click', (event) => {
+        const element = eventMatches(event, '[data-fab]');
+        if (element && !FabButton.components.has(element)) {
+          FabButton.create(element).toggle(event);
+        }
+      });
+    }
   }
 
   toggle(event) {

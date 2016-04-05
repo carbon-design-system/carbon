@@ -13,8 +13,15 @@ export default class OverflowMenu {
     this.element.addEventListener('click', (event) => this.openMenu(event));
   }
 
-  static init() {
-    [... document.querySelectorAll('[data-overflow-menu]')].forEach(element => this.create(element));
+  static init(target = document) {
+    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+    }
+    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.overflowMenu !== undefined) {
+      this.create(target);
+    } else {
+      [... target.querySelectorAll('[data-overflow-menu]')].forEach(element => this.create(element));
+    }
   }
 
   openMenu(event) {

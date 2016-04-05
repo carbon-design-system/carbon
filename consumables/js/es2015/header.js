@@ -30,8 +30,18 @@ export default class HeaderNav {
     });
   }
 
-  static init(options) {
-    [... document.querySelectorAll('[data-nav-target]')].forEach(element => this.hook(element, options));
+  static init(target = document, options) {
+    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+    }
+    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.navTarget !== undefined) {
+      this.hook(target, options);
+    } else if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
+      this.create(target, options);
+    } else {
+      [... target.querySelectorAll('[data-nav-target]')].forEach(element => this.hook(element, options));
+      [... target.querySelectorAll('[data-nav]')].forEach(element => this.create(element, options));
+    }
   }
 
   toggleNav(event) {
@@ -120,7 +130,7 @@ export default class HeaderNav {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
-    const navs = [... element.ownerDocument.querySelectorAll(element.getAttribute('data-nav-target'))].map((target) => {
+    const navs = [... element.ownerDocument.querySelectorAll(element.dataset.navTarget)].map((target) => {
       return this.create(target, options);
     });
 
