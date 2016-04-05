@@ -2,6 +2,7 @@
   @extend %strong;
   @extend %helvetica;
   @extend %font-smoothing;
+
   display: inline-block;
   height: rem(40px);
   padding: 0 rem(16px);
@@ -16,8 +17,10 @@
     opacity: .5;
   }
 
-  // Buttons in FF have some intrinsic, browser-specific extra padding. This removes that. Discovered and fixed in #731
   &::-moz-focus-inner {
+    // Buttons in Firefox have
+    // some intrinsic, browser-specific extra padding.
+    // This removes that. Discovered and fixed in #731
     padding: 0;
     border: 0;
   }
@@ -25,12 +28,30 @@
 
 %btn--primary {
   @extend %btn--base;
+  @include btn--primary($color__btn--bg, $color__btn--bg--active);
+
   border-color: transparent;
   border-width: 2px;
 }
 
 %btn--secondary {
   @extend %btn--base;
+  @include btn--secondary($color__btn--bg);
+
   border-style: solid;
   border-width: 2px;
+}
+
+%btn--danger {
+  @extend %btn--base;
+  @include btn--secondary($color__red-40);
+}
+
+%btn--right-icon {
+  @include btn--primary($color__btn--bg, $color__btn--bg--active);
+  min-width: rem(225px);
+  padding-right: rem(6px);
+  // Styles for browser compatibility
+  text-align: left;
+  vertical-align: bottom;
 }
