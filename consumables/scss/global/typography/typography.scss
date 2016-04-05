@@ -1,0 +1,35 @@
+@import 'vars';
+@import 'functions';
+@import 'extends';
+@import 'mixins';
+
+h1, %h1 {
+  @include type('h1');
+}
+
+h2, %h2 {
+  @include type('h2');
+}
+
+h3, %h3 {
+  @include type('h3');
+}
+
+p, %p {
+  @include type('body');
+  line-height: 1.2;
+}
+
+strong, %strong {
+  @include type('body');
+  font-weight: bold;
+}
+
+em, %em {
+  @include type('body');
+  font-style: italic;
+}
+
+%caption {
+  @include type('caption');
+}

@@ -1,0 +1,16 @@
+@import 'extends';
+
+.select {
+  @extend %select__caret;
+  @include type(1rem);
+  position: relative;
+  max-width: 100%; // some sort of width is necessary: otherwise very long <option> text will cause the <select> in most browsers to grow as wide as is necessary to fit the longest <option> text
+  min-width: 9.375em;
+  padding: .5em 1.5em .5em 1em;
+  margin: .25em 0;
+  color: $color__white;
+  background-color: $color__navy-gray-4;
+  border: none;
+  border-radius: 0;
+  appearance: none;
+}

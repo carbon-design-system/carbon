@@ -1,0 +1,18 @@
+@import 'vars';
+@import 'extends';
+
+.checkbox {
+  @extend %checkbox;
+  font-size: .875rem;
+  line-height: 2;
+  cursor: pointer;
+
+  &__label {
+    position: relative;
+    font-weight: bold;
+  }
+}
+
+.checkbox__input {
+  @extend %checkbox;
+}

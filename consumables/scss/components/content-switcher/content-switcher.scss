@@ -1,0 +1,31 @@
+@import 'vars';
+@import 'extends';
+
+.content-switcher {
+  display: flex;
+
+  input[type='radio'] {
+    @extend %hidden;
+
+    &:focus + label {
+      outline: 1px dotted; // for non-webkit browsers
+      outline: auto 5px -webkit-focus-ring-color; // webkit default
+    }
+
+    &:checked + label {
+      @extend %content-switcher__btn;
+      @include btn--primary($color__btn--bg, $color__btn--bg);
+      color: $color__content-switcher-text--active;
+    }
+  }
+
+  label {
+    @extend %content-switcher__btn;
+    @include btn--secondary($color__btn--bg);
+
+    &:hover,
+    &:focus {
+      color: $color__content-switcher-text--active;
+    }
+  }
+}

@@ -42,120 +42,121 @@ gulp.task('browser-sync', () => {
 
 // Use: npm run prebuild
 gulp.task('clean', () => {
-  return del('dist/**/*.{css,js,map}');
+  return del([
+    'consumables/css/*.css',
+    'consumables/es5/*.{js,map}',
+    'demo/*.{js,map}'
+  ]);
 });
 
 //////////////////////////////
 // JavaScript Tasks
 //////////////////////////////
-
-function buildDistBundle(prod) {
-  return new Promise((resolve, reject) => {
-    webpack({
-      devtool: 'source-maps',
-      entry: './js/index.js',
-      output: {
-        path: 'dist/js',
-        filename: 'bluemix-components' + (prod ? '.min' : '') + '.js',
-        libraryTarget: 'var',
-        library: 'BluemixComponents',
-      },
-      module: {
-        loaders: [
-          {
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            loaders: ['babel'],
-          },
-        ],
-      },
-      plugins: prod ? [new webpack.optimize.UglifyJsPlugin()] : [],
-    }, (err, stats) => {
-      if (err) {
-        reject(new gutil.PluginError('webpack', err));
-      } else {
-        gutil.log('[webpack]', stats.toString({
-          progress: true,
-          colors: true,
-        }));
-        resolve();
-      }
+gulp.task('scripts:consumables', () => {
+  function buildScripts(prod) {
+    return new Promise((resolve, reject) => {
+      webpack({
+        devtool: 'source-maps',
+        entry: './consumables/js/es2015/index.js',
+        output: {
+          path: './consumables/js/es5',
+          filename: 'bluemix-components' + (prod ? '.min' : '') + '.js',
+          libraryTarget: 'var',
+          library: 'BluemixComponents',
+        },
+        module: {
+          loaders: [
+            {
+              test: /\.js?$/,
+              exclude: /node_modules/,
+              loaders: ['babel'],
+            },
+          ],
+        },
+        plugins: prod ? [new webpack.optimize.UglifyJsPlugin()] : [],
+      }, (err, stats) => {
+        if (err) {
+          reject(new gutil.PluginError('webpack', err));
+        } else {
+          gutil.log('[webpack]', stats.toString({
+            progress: true,
+            colors: true,
+          }));
+          resolve();
+        }
+      });
     });
-  });
-}
+  }
 
-gulp.task('scripts:dist', () => {
-  buildDistBundle() // Expanded ES5
-  buildDistBundle(true); // Minified ES5
+  buildScripts() // Expanded ES5
+  buildScripts(true); // Minified ES5
 });
 
 gulp.task('scripts:demo', (cb) => {
-  webpack({
-    devtool: 'source-maps',
-    entry: './js/demo/app.js',
-    output: {
-      path: 'dist/demo',
-      filename: 'demo.js'
-    },
-    module: {
-      loaders: [
-        {
-          test: /\.js?$/,
-          exclude: /node_modules/,
-          loaders: ['babel'],
-        },
-      ],
-    },
-  }, (err, stats) => {
-    if (err) throw new gutil.PluginError('webpack', err);
-    gutil.log('[webpack]', stats.toString({
-      progress: true,
-      colors: true
-    }));
-    browserSync.reload();
-    cb();
-  });
+  return gulp.src('consumables/js/es5/*.{js,map}')
+    .pipe(gulp.dest('demo'));
+  // webpack({
+  //   devtool: 'source-maps',
+  //   entry: './demo/demo-es2015.js',
+  //   output: {
+  //     path: './demo',
+  //     filename: 'demo.js'
+  //   },
+  //   module: {
+  //     loaders: [
+  //       {
+  //         test: /\.js?$/,
+  //         exclude: /node_modules/,
+  //         loaders: ['babel'],
+  //       },
+  //     ],
+  //   },
+  // }, (err, stats) => {
+  //   if (err) throw new gutil.PluginError('webpack', err);
+  //   gutil.log('[webpack]', stats.toString({
+  //     progress: true,
+  //     colors: true
+  //   }));
+  //   browserSync.reload();
+  //   cb();
+  // });
 });
 
-gulp.task('scripts', ['scripts:dist', 'scripts:demo']);
+gulp.task('scripts', ['scripts:consumables', 'scripts:demo']);
 
 //////////////////////////////
 // Sass Tasks
 //////////////////////////////
 
-function buildDistSass(prod) {
-  return gulp.src([
-    'base-elements/**/*.scss',
-    'components/**/*.scss',
-    'scss/*.scss'
-  ])
-  .pipe(sourcemaps.init())
-  .pipe(sass({
-    outputStyle: prod ? 'compressed' : 'expanded'
-  }).on('error', sass.logError))
-  .pipe(autoprefixer({
-    browsers: ['> 1%', 'last 2 versions']
-  }))
-  .pipe(rename(function (path) {
-    if (path.basename === 'styles') {
-      path.basename = 'bluemix-components';
-    }
-    if (prod) {
-      path.extname = '.min' + path.extname;
-    }
-  }))
-  .pipe(sourcemaps.write())
-  .pipe(gulp.dest('dist/css'))
-  .pipe(browserSync.stream());
-}
+gulp.task('sass:consumables', () => {
+  function buildStyles(prod) {
+    return gulp.src('consumables/scss/styles.scss')
+      .pipe(sourcemaps.init())
+      .pipe(sass({
+        outputStyle: prod ? 'compressed' : 'expanded'
+      }).on('error', sass.logError))
+      .pipe(autoprefixer({
+        browsers: ['> 1%', 'last 2 versions']
+      }))
+      .pipe(rename(function (path) {
+        if (path.basename === 'styles') {
+          path.basename = 'bluemix-components';
+        }
+        if (prod) {
+          path.extname = '.min' + path.extname;
+        }
+      }))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('consumables/css'))
+      .pipe(browserSync.stream());
+  }
 
-gulp.task('sass:dist', () => {
-  buildDistSass(); // Expanded CSS
-  buildDistSass(true); // Minified CSS
+  buildStyles(); // Expanded CSS
+  buildStyles(true); // Minified CSS
 });
 
-gulp.task('sass:demo', ['sass:lint'], () => {
-  return gulp.src('scss/**/demo.scss')
+gulp.task('sass:demo', () => {
+  return gulp.src('demo/**/demo.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'expanded'
@@ -165,23 +166,19 @@ gulp.task('sass:demo', ['sass:lint'], () => {
     }))
     .pipe(rename({ dirname: '' }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dist/demo'))
+    .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream());
 });
 
-gulp.task('sass', ['sass:dist', 'sass:demo']);
+// Temporary: gulp-sass-lint does not seem to be using our .sass-lint.yml
+// gulp.task('sass:lint', () => {
+//   return gulp.src('consumables/**/*.scss')
+//     .pipe(sassLint())
+//     .pipe(sassLint.format())
+//     .pipe(sassLint.failOnError());
+// });
 
-gulp.task('sass:lint', () => {
-  gulp.src([
-    'base-elements/**/*.scss',
-    'components/**/*.scss',
-    'global/**/*.scss',
-    'scss/**/*.scss'
-  ])
-  .pipe(sassLint())
-  .pipe(sassLint.format())
-  .pipe(sassLint.failOnError());
-});
+gulp.task('sass', ['sass:consumables', 'sass:demo']);
 
 /////////////////////////////
 // Test
@@ -200,8 +197,8 @@ gulp.task('test', (done) => {
 
 gulp.task('watch', () => {
   gulp.watch('./**/*.html').on('change', browserSync.reload);
-  gulp.watch(['base-elements/**/*.js', 'components/**/*.js', 'js/**/*.js' ], ['scripts']);
-  gulp.watch(['base-elements/**/*.scss', 'components/**/*.scss', 'scss/**/*.scss'], ['sass']);
+  gulp.watch(['consumables/**/*.js', 'demo/**/*.js'], ['scripts']);
+  gulp.watch(['consumables/**/*.scss', 'demo/**/*.scss'], ['sass']);
 });
 
 gulp.task('serve', ['browser-sync', 'watch']);

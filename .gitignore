@@ -3,11 +3,9 @@ node_modules
 bower_components
 
 # Ignore built files and static folder
-dist/demo/demo.css
-dist/demo/demo.js
-dist/demo/demo.js.map
-*.css.map
-static
+demo/*.css
+demo/*.map
+demo/demo.js
 
 # OSX
 .DS_Store

@@ -4,11 +4,10 @@ options:
   merge-default-rules: false
 # File Options
 files:
-  include:
-    - '**/*.scss'
   ignore:
-    - 'bower_components/**/*.scss'
-    - 'scss/demo/*.scss'
+    - 'consumables/scss/global/reset/*.scss'
+    - 'consumables/scss/global/typography/font-face.scss'
+    - 'consumables/scss/global/typography/_extends.scss'
 # Rule Configuration
 rules:
   # Extends and Mixins
