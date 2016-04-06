@@ -1,18 +1,58 @@
 @import 'vars';
 @import 'extends';
 
-.checkbox {
-  @extend %checkbox;
-  font-size: .875rem;
-  line-height: 2;
-  cursor: pointer;
+.bx--checkbox {
+  @extend %hidden;
 
   &__label {
-    position: relative;
-    font-weight: bold;
+    // Checkbox Label - fonts and positioning
+    @extend %font-smoothing;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
-}
 
-.checkbox__input {
-  @extend %checkbox;
+  &__box {
+    // Styled Checkbox - default
+    display: inline-block;
+    font-size: 1rem;
+    width: em(18px);
+    height: em(18px);
+    background-color: $color__navy-gray-2;
+    border: 2px solid $color__navy-gray-7;
+    margin-right: .75em;
+    border-radius: 2px;
+  }
+
+  &:checked + &__label &__box {
+    // Styled Checkbox - checked - background
+    display: flex;
+    align-items: baseline;
+    background-color: $color__blue-30;
+    border-color: $color__blue-30;
+
+    &:before {
+      // Styled Checkbox - checked - checkmark
+      content: '';
+      width: em(12px);
+      height: em(6px);
+      background: transparent;
+      border: 2px solid $color__navy-gray-2;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:disabled + &__label {
+    // Styled Checkbox and Label - disabled
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  &:focus + &__label &__box {
+    // Styled Checkbox - Focus outline (Firefox and Webkit)
+    outline: 1px dotted; // for non-webkit browsers
+    outline: auto 5px -webkit-focus-ring-color; // webkit default
+  }
 }

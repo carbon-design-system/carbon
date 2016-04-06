@@ -38,7 +38,7 @@ rules:
   no-ids: 2
   no-important: 2
   no-empty-rulesets: 2
-  no-duplicate-properties: 2
+  no-duplicate-properties: 1
   # Units
   property-units:
     - global: ['em']
