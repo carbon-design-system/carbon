@@ -20,6 +20,7 @@ import 'svgxuse';
 //   be consumed from this file instead of their actual locations.
 import FileUploader from './file-uploader';
 import FabButton from './fab';
+import ContentSwitcher from './content-switcher';
 import Tab from './tabs-nav';
 import OverflowMenu from './overflow-menu';
 import Modal from './modals';
@@ -34,6 +35,7 @@ export {
   settings,
   FabButton,
   FileUploader,
+  ContentSwitcher,
   Tab,
   OverflowMenu,
   Modal,
@@ -46,6 +48,7 @@ const init = () => {
   if (!settings.disableAutoInit) {
     FabButton.init();
     FileUploader.init();
+    ContentSwitcher.init();
     Tab.init();
     OverflowMenu.init();
     Modal.init();

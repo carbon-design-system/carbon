@@ -12,6 +12,10 @@ export default class Modal {
 
     this.options = Object.assign({
       classVisible: 'is-visible',
+      eventBeforeShown: 'modal-beingshown',
+      eventAfterShown: 'modal-shown',
+      eventBeforeHidden: 'modal-beinghidden',
+      eventAfterHidden: 'modal-hidden',
     }, options);
 
     this.constructor.components.set(this.element, this);
@@ -93,7 +97,7 @@ export default class Modal {
       return;
     }
 
-    const eventStart = new CustomEvent('modal-beingshown', {
+    const eventStart = new CustomEvent(this.options.eventBeforeShown, {
       bubbles: true,
       cancelable: true,
       detail: { launchingElement: launchingElement },
@@ -102,7 +106,7 @@ export default class Modal {
     // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
     if (this.element.dispatchEvent(eventStart)) {
       this._changeState(true, () => {
-        this.element.dispatchEvent(new CustomEvent('modal-shown', {
+        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterShown, {
           bubbles: true,
           cancelable: true,
           detail: { launchingElement: launchingElement },
@@ -128,7 +132,7 @@ export default class Modal {
       return;
     }
 
-    const eventStart = new CustomEvent('modal-beinghidden', {
+    const eventStart = new CustomEvent(this.options.eventBeforeHidden, {
       bubbles: true,
       cancelable: true,
     });
@@ -136,7 +140,7 @@ export default class Modal {
     // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
     if (this.element.dispatchEvent(eventStart)) {
       this._changeState(false, () => {
-        this.element.dispatchEvent(new CustomEvent('modal-hidden'), {
+        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterHidden), {
           bubbles: true,
           cancelable: true,
         });

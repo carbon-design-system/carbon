@@ -1,3 +1,4 @@
+import '../utils/es6-weak-map-global'; // For PhantomJS
 import '../../consumables/js/polyfills/custom-event';
 import Tab from '../../consumables/js/es2015/tabs-nav';
 
@@ -15,6 +16,8 @@ describe('Test tabs', function () {
           selectorButtonSelected: '.nav__item.selected',
           classActive: 'selected',
           classHidden: 'tabs--hidden',
+          eventBeforeSelected: 'tab-beingselected',
+          eventAfterSelected: 'tab-selected',
         });
       } finally {
         stubUpdateTriggerText.restore();
