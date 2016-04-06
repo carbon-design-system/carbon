@@ -8,17 +8,24 @@ const express = require('express');
 const app = express();
 const adaro = require('adaro');
 
-const templateDirectories = [
-  'html/**/header.html',
-  'html/**/*.html',
-  '!html/**/body.html'
-];
+const htmlFiles = {
+  // Used in getContent() function
+  all: [
+    'html/**/*.html',
+    '!html/**/body.html',
+    '!html/**/header.html',
+    '!html/components/detail-page-header/**/*.html',
+  ],
+  header: 'html/**/header.html',
+  detailHeader: 'html/components/detail-page-header/**/*.html',
+  baseElements: 'html/base-elements/**/*.html',
+  components: 'html/components/**/*.html'
+};
 
-// Used for allLinks() function
 const directoryOrder = [
-  'base-elements/**/*.html',
-  'components/**/*.html',
-  'global/**/*.html'
+  // Used for allLinks() function
+  'html/base-elements/**/*.html',
+  'html/components/**/*.html'
 ];
 
 app.engine('dust', adaro.dust());
@@ -64,47 +71,39 @@ const allLinks = globby(directoryOrder)
 
 
 app.get('/', (req, res) => {
-  Promise.all([getContent(templateDirectories), allLinks])
-    .then(results => {
-
-      res.render('demo-all', {
-        content: results[0],
-        links: results[1]
-      });
-    })
+  Promise.all([
+    getContent(htmlFiles.header),
+    getContent(htmlFiles.detailHeader),
+    getContent(htmlFiles.all)
+  ])
+  .then(results => {
+    res.render('demo-all', {
+      header: results[0],
+      detailHeader: results[1],
+      html: results[2]
+    });
+  });
 });
 
 app.get('/components/:component', (req, res) => {
-  const glob = `components/${req.params.component}/**/*.html`;
+  const glob = `html/components/${req.params.component}/**/*.html`;
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
       res.render('demo-all', {
-        content: results[0],
+        html: results[0],
         links: results[1]
       });
     });
 });
 
 app.get('/base-elements/:component', (req, res) => {
-  const glob = `base-elements/${req.params.component}/**/*.html`;
+  const glob = `html/base-elements/${req.params.component}/**/*.html`;
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
       res.render('demo-all', {
-        content: results[0],
-        links: results[1]
-      });
-    });
-});
-
-app.get('/global/:component', (req, res) => {
-  const glob = `global/${req.params.component}/**/*.html`;
-
-  Promise.all([getContent(glob), allLinks])
-    .then(results => {
-      res.render('demo-all', {
-        content: results[0],
+        html: results[0],
         links: results[1]
       });
     });

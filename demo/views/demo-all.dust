@@ -6,45 +6,17 @@
   <title>Bluemix Components</title>
   <link rel="stylesheet" href="/demo.css">
   <style>
-    .toc {
-      margin-top: 2rem;
-    }
-    .toc li {
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
-    }
-    .toc a {
-      color: #fff;
-      text-decoration: none;
-    }
     body {
       padding-top: 3.75rem;
-      padding-bottom: 7.5em;
-    }
-    .offleft {
-      position: absolute;
-      top: 0;
-      left: -10000px;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
     }
   </style>
 </head>
 <body>
-  <a class="offleft" href="#maincontent">Skip to main content</a>
-  <a name="maincontent"></a>
-
-  {content|s}
-
-  <nav class="toc">
-    <ul>
-      {#links}
-       <li><a href="/{url}">{url}</a></li>
-      {/links}
-    </ul>
-  </nav>
-
+  {header|s}
+  {detailHeader|s}
+  <div class="demo--container">
+    {html|s}
+  </div>
 
   <!-- Scripts -->
   <!-- <script src="../bluemix-components.min.js"></script> -->
