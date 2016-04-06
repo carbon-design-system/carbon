@@ -197,7 +197,7 @@ gulp.task('test', (done) => {
 
 gulp.task('watch', () => {
   gulp.watch('./**/*.html').on('change', browserSync.reload);
-  gulp.watch(['consumables/**/*.js', 'demo/**/*.js'], ['scripts']);
+  gulp.watch(['consumables/**/*.js', '!**/es5/*.js'], ['scripts']);
   gulp.watch(['consumables/**/*.scss', 'demo/**/*.scss'], ['sass']);
 });
 
