@@ -7,3 +7,9 @@
 @import 'demo-colors';
 @import 'demo-major-second';
 @import 'demo-typography';
+
+.demo--container {
+  @extend %grid-container;
+  padding-top: 3.75rem;
+  padding-bottom: 7.5em;
+}
