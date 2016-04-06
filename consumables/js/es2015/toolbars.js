@@ -5,15 +5,22 @@ export default class Toolbars {
     }
 
     this.element = element;
-    this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.getAttribute('data-list-icons-search-action-target'));
+    this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.dataset.listIconsSearchActionTarget);
 
     this.constructor.components.set(this.element, this);
 
     this.element.addEventListener('click', (event) => this.handleActionClick(event));
   }
 
-  static init() {
-    [... document.querySelectorAll('[data-list-icons-search-action-target]')].forEach(element => this.create(element));
+  static init(target = document) {
+    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+    }
+    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.listIconsSearchActionTarget !== undefined) {
+      this.create(target);
+    } else {
+      [... target.querySelectorAll('[data-list-icons-search-action-target]')].forEach(element => this.create(element));
+    }
   }
 
   handleActionClick(event) {
