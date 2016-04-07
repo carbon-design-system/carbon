@@ -67,14 +67,14 @@ export default class HeaderNav {
       cancelable: true,
       detail: { launchingElement: launchingElement },
     });
-    this.element.dispatchEvent(eventStart);
+    const defaultNotPrevented = this.element.dispatchEvent(eventStart);
 
     if (add) {
       this.triggerNode = event.currentTarget;
       this.triggerLabelNode = this.triggerNode.querySelector(this.options.selectorTriggerLabel);
     }
 
-    if (!eventStart.defaultPrevented) {
+    if (defaultNotPrevented) {
       this.element.classList[add ? 'add' : 'remove'](this.options.classActive);
       (this.element.classList.contains(this.options.classActive) ? this.menuNode : this.triggerNode).focus();
       this.element.dispatchEvent(new CustomEvent(`header-${typeSuffix}`, {
@@ -95,9 +95,8 @@ export default class HeaderNav {
         itemElement: activatedElement,
       },
     });
-    this.element.dispatchEvent(eventStart);
 
-    if (!eventStart.defaultPrevented) {
+    if (this.element.dispatchEvent(eventStart)) {
       [... this.element.querySelectorAll(this.options.selectorItem)].forEach((element) => {
         if (element.contains(activatedElement)) {
           element.classList.add('selected');
