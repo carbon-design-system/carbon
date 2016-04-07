@@ -47,11 +47,12 @@ describe('Test spinner', function () {
     });
 
     it('Should set class of DOM element', function () {
+      const isIE = window.ActiveXObject || 'ActiveXObject' in window;
       const spinner = new Spinner(document.createElement('div'));
       spinner.set(true);
-      expect(spinner.element.className).to.equal('');
+      expect(spinner.element.className).to.equal(isIE ? 'is--ie' : '');
       spinner.set(false);
-      expect(spinner.element.className).to.equal('is-stopping');
+      expect(spinner.element.className).to.equal(isIE ? 'is--ie is-stopping--ie' : 'is-stopping');
     });
 
     it('Should set special class for IE', function () {
