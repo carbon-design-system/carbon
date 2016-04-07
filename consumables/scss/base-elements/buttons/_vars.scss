@@ -1,8 +1,8 @@
-// Background Color
-$color__btn--bg: $color__blue-40;
-$color__btn--bg--active: $color__blue-30;
-$color__btn--bg--light: $color__navy-gray-5;
-$color__btn--bg--active--light: lighten($color__navy-gray-5, 5);
+// Dark UI - default
+$color__btn--bg: $color__blue-30;
+$color__btn--text: $color__blue-90;
+$color__btn--bg--hover: lighten($color__blue-30, 5%);
 
-// Text Color
-$color__btn--text: $color__white;
+// Light UI
+// $color__btn--bg--light-ui: $color__navy-gray-5;
+// $color__btn--bg--hover--light-ui: lighten($color__navy-gray-5, 5%);

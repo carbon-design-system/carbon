@@ -5,12 +5,13 @@
 
   display: inline-block;
   height: rem(40px);
-  padding: 0 rem(16px);
+  padding: 0 1rem;
   text-align: center;
   text-decoration: none;
   text-transform: capitalize;
   cursor: pointer;
-  transition: background-color 150ms ease-in, color 150ms ease-in;
+  transition-duration: $transition--base;
+  transition-timing-function: ease-in;
 
   &:disabled {
     cursor: not-allowed;
@@ -28,30 +29,31 @@
 
 %btn--primary {
   @extend %btn--base;
-  @include btn--primary($color__btn--bg, $color__btn--bg--active);
-
-  border-color: transparent;
-  border-width: 2px;
+  @include btn--primary($color__btn--bg, $color__btn--bg--hover);
 }
 
 %btn--secondary {
   @extend %btn--base;
   @include btn--secondary($color__btn--bg);
-
-  border-style: solid;
-  border-width: 2px;
 }
 
 %btn--danger {
   @extend %btn--base;
-  @include btn--secondary($color__red-40);
-}
+  color: $color__white;
+  background-color: transparent;
+  border-color: $color__white;
+  border: 2px solid currentColor;
 
-%btn--right-icon {
-  @include btn--primary($color__btn--bg, $color__btn--bg--active);
-  min-width: rem(225px);
-  padding-right: rem(6px);
-  // Styles for browser compatibility
-  text-align: left;
-  vertical-align: bottom;
+  &:hover,
+  &:focus {
+    color: $color__white;
+    border: 2px solid transparent;
+    background-color: $color__red-50; // white text on red 50 - AA a11y pass
+
+    &:disabled {
+      color: $color__white;
+      background-color: transparent;
+      border: 2px solid currentColor;
+    }
+  }
 }

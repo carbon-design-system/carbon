@@ -130,7 +130,7 @@
 
 // SERVICE CARD STYLES
 .card-footer__credentials-button {
-  @include btn--primary($color__navy-gray-4, $color__blue-40);
+  @extend %btn--primary;
   @include type(rem(12px));
   margin-left: .5em;
 }

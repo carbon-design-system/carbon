@@ -2,23 +2,23 @@
 @import 'mixins';
 @import 'extends';
 
-// Light UI is not meant to be used yet until later
-
 .bx--btn {
   @extend %btn--primary;
-
+  // Light UI is not meant to be used yet until later
+  // -------------------------------------------------
   // .light-ui & {
   //   @extend %btn--base;
-  //   @include btn--primary($color__btn--bg--light, $color__btn--bg--active--light);
+  //   @include btn--primary($color__btn--bg--light-ui, $color__btn--bg--hover--light-ui);
   // }
 }
 
 .bx--btn--secondary {
   @extend %btn--secondary;
-
+  // Light UI is not meant to be used yet until later
+  // -------------------------------------------------
   // .light-ui & {
   //   @extend %btn--base;
-  //   @include btn--secondary($color__btn--bg--light);
+  //   @include btn--secondary($color__btn--bg--light-ui);
   // }
 }
 
@@ -27,22 +27,29 @@
 }
 
 .bx--btn--right-icon {
-  @extend %btn--right-icon;
+  @extend %btn--base;
+  @include btn--primary($color__btn--bg, $color__btn--bg--hover);
+  border-color: transparent;
+  padding-right: rem(6px);
+  // Styles for browser compatibility
+  text-align: left;
+  vertical-align: bottom;
 
-  &__wrapper {
-    // a wrapping element is needed
-    // Firefox does _not_ like `display: flex;` on buttons
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  &__text {
+    display: inline;
+    vertical-align: middle;
   }
 
   &__icon {
+    vertical-align: middle;
+    display: inline;
     width: rem(24px);
     height: rem(24px);
+    margin-left: .5em;
+    margin-right: .25em;
   }
 
   &__use {
-    fill: $color__white;
+    fill: $color__blue-90;
   }
 }

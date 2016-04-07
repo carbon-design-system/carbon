@@ -23,7 +23,7 @@
 }
 
 %btn--upload {
-  @include btn--primary($color__btn--bg, $color__btn--bg--active);
+  @extend %btn--primary;
   position: absolute;
   top: 0;
   right:0;
