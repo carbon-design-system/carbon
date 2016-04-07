@@ -19,12 +19,18 @@ export default class FabButton {
     if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fab !== undefined) {
       this.create(target);
     } else {
-      target.addEventListener('click', (event) => {
+      const handler = (event) => {
         const element = eventMatches(event, '[data-fab]');
         if (element && !FabButton.components.has(element)) {
           FabButton.create(element).toggle(event);
         }
-      });
+      };
+      target.addEventListener('click', handler);
+      return {
+        remove: () => {
+          document.removeEventListener('click', handler);
+        },
+      };
     }
   }
 

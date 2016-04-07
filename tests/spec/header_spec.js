@@ -4,7 +4,7 @@ import Promise from 'bluebird'; // For testing on browsers not supporting Promis
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import promiseTryCatcher from '../utils/promise-try-catcher';
-import { HeaderNav } from '../../consumables/js/es2015/index.js';
+import HeaderNav from '../../consumables/js/es2015/header';
 
 describe('Test header', function () {
   describe('Constructor', function () {

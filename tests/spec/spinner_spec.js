@@ -1,4 +1,4 @@
-import { Spinner } from '../../consumables/js/es2015/index.js';
+import Spinner from '../../consumables/js/es2015/spinner';
 
 describe('Test spinner', function () {
   describe('Constructor', function () {

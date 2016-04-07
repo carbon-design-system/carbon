@@ -1,6 +1,6 @@
 import '../../consumables/js/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import { OverflowMenu } from '../../consumables/js/es2015/index.js';
+import OverflowMenu from '../../consumables/js/es2015/overflow-menu';
 
 describe('Test Overflow menu', function () {
   describe('Constructor', function () {

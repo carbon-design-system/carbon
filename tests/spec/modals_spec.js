@@ -3,7 +3,7 @@ import '../../consumables/js/polyfills/object-assign';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
 import EventManager from '../utils/event-manager';
 import promiseTryCatcher from '../utils/promise-try-catcher';
-import { Modal } from '../../consumables/js/es2015/index.js';
+import Modal from '../../consumables/js/es2015/modals';
 
 describe('Test modal', function () {
   describe('Constructor', function () {
