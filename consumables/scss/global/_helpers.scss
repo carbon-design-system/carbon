@@ -13,6 +13,11 @@ $shadow: 2px 2px 8px rgba(0, 0, 0, .4);
   visibility: visible;
 }
 
+%focus-outline {
+  outline: 1px dotted; // for non-webkit browsers
+  outline: auto 5px -webkit-focus-ring-color; // webkit default
+}
+
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
   transition: transform $speed;

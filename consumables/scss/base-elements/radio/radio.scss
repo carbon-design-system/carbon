@@ -1,15 +1,55 @@
 @import 'vars';
-@import 'extends';
 
-.radio {
-  @extend %radio;
-  font-size: 1rem;
-  line-height: 2;
-  cursor: pointer;
+.bx--radio {
+  @extend %hidden;
 
   &__label {
-    position: relative;
-    margin-left: .5em;
-    font-weight: bold;
+    // Radio Label - fonts and positioning
+    @extend %font-smoothing;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__control {
+    // Styled Radio Button - default
+    display: inline-block;
+    font-size: 1rem;
+    width: em(18px);
+    height: em(18px);
+    background-color: $color__navy-gray-2;
+    border: 2px solid $color__navy-gray-7;
+    margin-right: .75em;
+    border-radius: 50%;
+  }
+
+  &:checked + &__label &__control {
+    // Styled Radio - checked - background
+    display: flex;
+    align-items: center;
+    border-color: $color__blue-30;
+
+    &:before {
+      // Styled Radio - checked - dot
+      content: '';
+      display: inline-block;
+      position: relative;
+      left: 3px;
+      width: em(8px);
+      height: em(8px);
+      border-radius: 50%;
+      background-color: $color__blue-30;
+    }
+  }
+
+  &:disabled + &__label {
+    // Styled Radio and Label - disabled
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  &:focus + &__label &__control {
+    // Styled Radio - Focus outline (Firefox and Webkit)
+    @extend %focus-outline;
   }
 }
