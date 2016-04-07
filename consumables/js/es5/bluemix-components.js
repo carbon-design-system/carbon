@@ -359,7 +359,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    var labelSelector = options.labelSelector || element.getAttribute('data-label');
+	    var labelSelector = options.labelSelector || element.dataset.label;
 	    this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 	
 	    this.constructor.components.set(this.element, this);
@@ -376,7 +376,7 @@ var BluemixComponents =
 	      var element = this.element;
 	
 	      if (element.files && element.files.length > 1) {
-	        fileName = (element.getAttribute('data-multiple-caption') || '').replace('{count}', element.files.length);
+	        fileName = (element.dataset.multipleCaption || '').replace('{count}', element.files.length);
 	      } else {
 	        fileName = event.target.value.split('\\').pop();
 	      }
@@ -392,12 +392,22 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init(options) {
+	    value: function init() {
 	      var _this2 = this;
 	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-file-input]'))).forEach(function (element) {
-	        return _this2.create(element, options);
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fileInput !== undefined) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-file-input]'))).forEach(function (element) {
+	          return _this2.create(element, options);
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'create',
@@ -423,6 +433,8 @@ var BluemixComponents =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -468,12 +480,33 @@ var BluemixComponents =
 	  }], [{
 	    key: 'init',
 	    value: function init() {
-	      document.addEventListener('click', function (event) {
-	        var element = (0, _eventMatches2.default)(event, '[data-fab]');
-	        if (element && !FabButton.components.has(element)) {
-	          FabButton.create(element).toggle(event);
-	        }
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fab !== undefined) {
+	        this.create(target);
+	      } else {
+	        var _ret = function () {
+	          var handler = function handler(event) {
+	            var element = (0, _eventMatches2.default)(event, '[data-fab]');
+	            if (element && !FabButton.components.has(element)) {
+	              FabButton.create(element).toggle(event);
+	            }
+	          };
+	          target.addEventListener('click', handler);
+	          return {
+	            v: {
+	              remove: function remove() {
+	                document.removeEventListener('click', handler);
+	              }
+	            }
+	          };
+	        }();
+	
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	      }
 	    }
 	  }, {
 	    key: 'create',
@@ -624,12 +657,22 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init(options) {
+	    value: function init() {
 	      var _this3 = this;
 	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-tabs]'))).forEach(function (element) {
-	        return _this3.create(element, options);
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-tabs]'))).forEach(function (element) {
+	          return _this3.create(element, options);
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'create',
@@ -744,9 +787,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-overflow-menu]'))).forEach(function (element) {
-	        return _this2.create(element);
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.overflowMenu !== undefined) {
+	        this.create(target);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-overflow-menu]'))).forEach(function (element) {
+	          return _this2.create(element);
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'create',
@@ -949,15 +1001,27 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init(options) {
+	    value: function init() {
 	      var _this5 = this;
 	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-modal-target]'))).forEach(function (element) {
-	        return _this5.hook(element, options);
-	      });
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-modal]'))).forEach(function (element) {
-	        return _this5.create(element, options);
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.modalTarget !== undefined) {
+	        this.hook(target, options);
+	      } else if (target.nodeType === Node.ELEMENT_NODE && target.dataset.modal !== undefined) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-modal-target]'))).forEach(function (element) {
+	          return _this5.hook(element, options);
+	        });
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-modal]'))).forEach(function (element) {
+	          return _this5.create(element, options);
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'create',
@@ -1112,14 +1176,14 @@ var BluemixComponents =
 	        cancelable: true,
 	        detail: { launchingElement: launchingElement }
 	      });
-	      this.element.dispatchEvent(eventStart);
+	      var defaultNotPrevented = this.element.dispatchEvent(eventStart);
 	
 	      if (add) {
 	        this.triggerNode = event.currentTarget;
 	        this.triggerLabelNode = this.triggerNode.querySelector(this.options.selectorTriggerLabel);
 	      }
 	
-	      if (!eventStart.defaultPrevented) {
+	      if (defaultNotPrevented) {
 	        this.element.classList[add ? 'add' : 'remove'](this.options.classActive);
 	        (this.element.classList.contains(this.options.classActive) ? this.menuNode : this.triggerNode).focus();
 	        this.element.dispatchEvent(new CustomEvent('header-' + typeSuffix, {
@@ -1141,9 +1205,8 @@ var BluemixComponents =
 	          itemElement: activatedElement
 	        }
 	      });
-	      this.element.dispatchEvent(eventStart);
 	
-	      if (!eventStart.defaultPrevented) {
+	      if (this.element.dispatchEvent(eventStart)) {
 	        [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorItem))).forEach(function (element) {
 	          if (element.contains(activatedElement)) {
 	            element.classList.add('selected');
@@ -1169,12 +1232,27 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init(options) {
+	    value: function init() {
 	      var _this2 = this;
 	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-nav-target]'))).forEach(function (element) {
-	        return _this2.hook(element, options);
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.navTarget !== undefined) {
+	        this.hook(target, options);
+	      } else if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-nav-target]'))).forEach(function (element) {
+	          return _this2.hook(element, options);
+	        });
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-nav]'))).forEach(function (element) {
+	          return _this2.create(element, options);
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'create',
@@ -1190,7 +1268,7 @@ var BluemixComponents =
 	        throw new TypeError('DOM element should be given to initialize this widget.');
 	      }
 	
-	      var navs = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.getAttribute('data-nav-target')))).map(function (target) {
+	      var navs = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.dataset.navTarget))).map(function (target) {
 	        return _this3.create(target, options);
 	      });
 	
@@ -1241,7 +1319,7 @@ var BluemixComponents =
 	    }
 	
 	    this.element = element;
-	    this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.getAttribute('data-list-icons-search-action-target'));
+	    this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.dataset.listIconsSearchActionTarget);
 	
 	    this.constructor.components.set(this.element, this);
 	
@@ -1273,9 +1351,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-list-icons-search-action-target]'))).forEach(function (element) {
-	        return _this2.create(element);
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.listIconsSearchActionTarget !== undefined) {
+	        this.create(target);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-list-icons-search-action-target]'))).forEach(function (element) {
+	          return _this2.create(element);
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'create',
@@ -1373,12 +1460,22 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init(options) {
+	    value: function init() {
 	      var _this = this;
 	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-spinner]'))).forEach(function (element) {
-	        return _this.create(element, options);
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.spinner !== undefined) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-spinner]'))).forEach(function (element) {
+	          return _this.create(element, options);
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'create',
