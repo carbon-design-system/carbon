@@ -13,6 +13,12 @@
 @import 'base-elements/buttons/mixins';
 @import 'base-elements/buttons/extends';
 
+// checkbox
+@import 'base-elements/checkbox/vars';
+
+// file
+@import 'base-elements/file/vars';
+@import 'base-elements/file/extends';
 
 // footer/footer
 @import 'base-elements/footer/vars';
@@ -22,12 +28,11 @@
 @import 'base-elements/form-footer/vars';
 @import 'base-elements/form-footer/extends';
 
-// checkbox
-@import 'base-elements/checkbox/vars';
+// links
+@import 'base-elements/links/vars';
 
-// file
-@import 'base-elements/file/vars';
-@import 'base-elements/file/extends';
+// radio
+@import 'base-elements/radio/vars';
 
 // search
 @import 'base-elements/search/vars';
@@ -35,14 +40,12 @@
 // select
 @import 'base-elements/select/extends';
 
+// tables
+@import 'base-elements/tables/vars';
+
 // toggle
 @import 'base-elements/toggle/vars';
 
-// links
-@import 'base-elements/links/vars';
-
-// tables
-@import 'base-elements/tables/vars';
 
 ///////////////////////
 // Components

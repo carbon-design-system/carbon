@@ -11,7 +11,7 @@
     cursor: pointer;
   }
 
-  &__box {
+  &__control {
     // Styled Checkbox - default
     display: inline-block;
     font-size: 1rem;
@@ -23,7 +23,7 @@
     border-radius: 2px;
   }
 
-  &:checked + &__label &__box {
+  &:checked + &__label &__control {
     // Styled Checkbox - checked - background
     display: flex;
     align-items: baseline;
@@ -49,9 +49,8 @@
     cursor: not-allowed;
   }
 
-  &:focus + &__label &__box {
+  &:focus + &__label &__control {
     // Styled Checkbox - Focus outline (Firefox and Webkit)
-    outline: 1px dotted; // for non-webkit browsers
-    outline: auto 5px -webkit-focus-ring-color; // webkit default
+    @extend %focus-outline;
   }
 }
