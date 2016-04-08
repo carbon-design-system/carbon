@@ -11,39 +11,22 @@ Bluemix Components comes bundled with these dependencies:
 - [IBM Design Colors](https://github.com/IBM-Design/colors): A SCSS file with IBM Design Colors.
 - [Bluemix Icons](https://github.ibm.com/Bluemix/bluemix-icons): A SCSS file with icon classes using SVG.
 
-## Contributing
-
-### Requirements
-
-* SSH Key for GitHub Enterprise account
-* node.js 4 or higher
-
-Contributing to bluemix-components requires that you can run this repo locally on your computer.
-
-Please read the [Generating SSH Keys](https://help.github.com/articles/generating-ssh-keys/) article from GitHub for steps on how to set-up your **SSH key**.
-
-You must have **node.js 4 or higher** in order to run this project locally on your computer.
-
-It's recommended to use [`nvm` (node version manager)](https://github.com/creationix/nvm) to use the latest version of `node.js` (4 or higher).
-
-Detailed steps as well as our guidelines can be found in [CONTRIBUTING.md](./CONTRIBUTING.md).
-
 ## Install
 
-### Requirements
+#### Bower (recommended)
 
-* SSH Key for GitHub Enterprise account
-* `git`
-* `bower`
-
-To install bluemix-components with `bower`, you must have your **SSH key** set-up with your GitHub Enterprise account.
-
-Please read the [Generating SSH Keys](https://help.github.com/articles/generating-ssh-keys/) article from GitHub for steps on how to set-up your SSH key.
+Set up your SSH key on GitHub Enterprise, see [Generating SSH Keys - GitHub](https://help.github.com/articles/generating-ssh-keys/).
 
 Install `bower` globally:
 
 ```
 npm install -g bower
+```
+
+> **Mac & Unix users:** you can do the below four steps all at once - copy and paste the following into your terminal:
+
+> ```bash
+touch .bowerrc && echo '{ "registry": "http://x1showcase.emmlabs.ibm.com:5678/" }' > .bowerrc && bower init && bower install bluemix-components --save
 ```
 
 Initialize a **bower.json** file:
@@ -62,11 +45,13 @@ Install the bower package:
 bower install bluemix-components --save
 ```
 
-If you are on a Unix-based system (such as on a Mac), you can do the above four steps in one step by typing the following into your terminal:
+#### Download
 
-```bash
-+touch .bowerrc && echo '{ "registry": "http://x1showcase.emmlabs.ibm.com:5678/" }' > .bowerrc && bower init && bower install bluemix-components --save
-```
+Go to [releases](https://github.ibm.com/Bluemix/bluemix-components/releases), find the version you want to use and download the source code as a `.zip` or `tar.gz` file.
+
+![download-gif](https://media.github.ibm.com/user/76/files/159ed244-fdb9-11e5-9809-f7cd22e36217)
+
+
 
 ## Usage
 
@@ -74,3 +59,7 @@ See [examples/getting-started](https://github.ibm.com/Bluemix/bluemix-components
 * Set up Bluemix Components
 * How to compile SCSS with gulp or grunt
 * Setting up Fonts Directory (temporary)
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
