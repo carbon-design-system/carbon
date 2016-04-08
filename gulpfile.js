@@ -88,13 +88,16 @@ gulp.task('scripts:consumables', () => {
     });
   }
 
-  buildScripts() // Expanded ES5
-  buildScripts(true); // Minified ES5
+  return Promise.all([
+    buildScripts(), // Expanded ES5
+    buildScripts(true), // Minified ES5
+  ]);
 });
 
-gulp.task('scripts:demo', (cb) => {
+gulp.task('scripts:demo', ['scripts:consumables'], (cb) => {
   return gulp.src('consumables/js/es5/*.{js,map}')
-    .pipe(gulp.dest('demo'));
+    .pipe(gulp.dest('demo'))
+    .pipe(browserSync.stream());
   // webpack({
   //   devtool: 'source-maps',
   //   entry: './demo/demo-es2015.js',
@@ -122,7 +125,7 @@ gulp.task('scripts:demo', (cb) => {
   // });
 });
 
-gulp.task('scripts', ['scripts:consumables', 'scripts:demo']);
+gulp.task('scripts', ['scripts:demo']);
 
 //////////////////////////////
 // Sass Tasks
