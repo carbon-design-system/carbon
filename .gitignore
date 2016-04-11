@@ -21,3 +21,7 @@ jsconfig.json
 
 # Test reports
 tests/coverage
+
+# Temporary gitignores
+consumables/css/bluemix-components.min.css
+consumables/css/bluemix-components.css
