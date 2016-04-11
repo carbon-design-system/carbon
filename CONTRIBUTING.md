@@ -1,11 +1,12 @@
-# Contributing to Bluemix Components
+# Contributing
 
-## Read These First
+## Requirements
 
-Please be sure to read the following guidelines from [our wiki](https://github.ibm.com/Bluemix/bluemix-components/wiki):
-* [Code of Conduct](https://github.ibm.com/Bluemix/bluemix-components/wiki/Code-of-Conduct): *40 second read*
-* [Code Styleguide](https://github.ibm.com/Bluemix/bluemix-components/wiki/Code-Styleguide): *25 second read*
-* [Git/GitHub FAQs](https://github.ibm.com/Bluemix/bluemix-components/wiki/Git-and-GitHub-FAQ): *2 minute read*
+Set up your SSH Key GitHub Enterprise account and install node.js 4 or higher.
+* [Generating SSH Keys - GitHub](https://help.github.com/articles/generating-ssh-keys/)
+* [`NVM` (node version manager)](https://github.com/creationix/nvm) to use the latest version of `node.js` (4 or higher).
+
+Contributing to bluemix-components requires that you can run this repo locally on your computer.
 
 ## 1. Fork The Repo:
 
