@@ -54,9 +54,9 @@ var BluemixComponents =
 	
 	__webpack_require__(1);
 	
-	var _file = __webpack_require__(2);
+	var _fileUploader = __webpack_require__(2);
 	
-	var _file2 = _interopRequireDefault(_file);
+	var _fileUploader2 = _interopRequireDefault(_fileUploader);
 	
 	var _fab = __webpack_require__(3);
 	
@@ -113,7 +113,7 @@ var BluemixComponents =
 	// -------------
 	exports.settings = settings;
 	exports.FabButton = _fab2.default;
-	exports.FileUploader = _file2.default;
+	exports.FileUploader = _fileUploader2.default;
 	exports.Tab = _tabsNav2.default;
 	exports.OverflowMenu = _overflowMenu2.default;
 	exports.Modal = _modals2.default;
@@ -125,7 +125,7 @@ var BluemixComponents =
 	var init = function init() {
 	  if (!settings.disableAutoInit) {
 	    _fab2.default.init();
-	    _file2.default.init();
+	    _fileUploader2.default.init();
 	    _tabsNav2.default.init();
 	    _overflowMenu2.default.init();
 	    _modals2.default.init();
@@ -404,7 +404,7 @@ var BluemixComponents =
 	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fileInput !== undefined) {
 	        this.create(target, options);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-file-input]'))).forEach(function (element) {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-file-uploader]'))).forEach(function (element) {
 	          return _this2.create(element, options);
 	        });
 	      }
