@@ -1,0 +1,42 @@
+@import 'vars';
+
+.bx--file {
+
+  &__input {
+    @extend %hidden ;
+  }
+
+  &__input:focus + &__label {
+    // Styled File Uploader - focus outline
+    @extend %focus-outline;
+  }
+
+  &__label {
+    // Styled File Uploader
+    @include type(1rem);
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 9.375em;
+    padding: .75em;
+    margin: .25em 0;
+    color: $color__file__label--text;
+    background-color: $color__file__label--bg;
+    border: none;
+    border-radius: 0;
+    appearance: none; // avoids safari from overriding these styles
+
+    &:after {
+      // "upload button"
+      @extend %btn--primary;
+      position: absolute;
+      top: 0;
+      right:0;
+      height: em(34px);
+      padding-top: .35em;
+      line-height: 2;
+      text-transform: capitalize;;
+      content: 'Choose Files';
+    }
+  }
+}

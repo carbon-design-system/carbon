@@ -21,7 +21,7 @@ export default class FileUploader {
     if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fileInput !== undefined) {
       this.create(target, options);
     } else {
-      [... target.querySelectorAll('[data-file-input]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll('[data-file-uploader]')].forEach(element => this.create(element, options));
     }
   }
 
