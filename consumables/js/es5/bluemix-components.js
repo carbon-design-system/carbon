@@ -151,7 +151,7 @@ var BluemixComponents =
 	 * @copyright Copyright (c) 2016 IcoMoon.io
 	 * @license   Licensed under MIT license
 	 *            See https://github.com/Keyamoon/svgxuse
-	 * @version   1.1.16
+	 * @version   1.1.15
 	 */
 	/*jslint browser: true */
 	/*global XDomainRequest, MutationObserver, window */
@@ -242,7 +242,6 @@ var BluemixComponents =
 	                    x.innerHTML = xhr.responseText;
 	                    svg = x.getElementsByTagName('svg')[0];
 	                    if (svg) {
-	                        svg.setAttribute('aria-hidden', 'true');
 	                        svg.style.position = 'absolute';
 	                        svg.style.width = 0;
 	                        svg.style.height = 0;

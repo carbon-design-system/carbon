@@ -1,8 +1,7 @@
 @mixin btn--primary($background, $active-background, $color--text: $color__btn--text) {
-  @extend %btn--primary;
-
   color: $color--text;
   background-color: $background;
+  border: 2px solid transparent;
 
   &:hover,
   &:focus {
@@ -15,11 +14,9 @@
 }
 
 @mixin btn--secondary($active-background, $color--text: $active-background) {
-  @extend %btn--secondary;
-
   color: $color--text;
   background-color: transparent;
-  border-color: $active-background;
+  border: 2px solid $active-background;
 
   &:hover,
   &:focus {

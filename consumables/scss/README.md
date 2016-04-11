@@ -42,21 +42,14 @@ buttons
 @import 'mixins';
 @import 'extends';
 
-.btn {
-  @include btn--primary($color__btn--bg, $color__btn--bg--active);
-
-  .light-ui & {
-    @include btn--primary($color__btn--bg--light, $color__btn--bg--active--light);
-  }
+.bx--btn {
+  @extend %btn--primary;
 }
 
-.btn--secondary {
-  @include btn--secondary($color__btn--bg);
-
-  .light-ui & {
-    @include btn--secondary($color__btn--bg--light);
-  }
+.bx--btn--secondary {
+  @extend %btn--secondary;
 }
+
 
 // ... truncated for brevity
 ```
