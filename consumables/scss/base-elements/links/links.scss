@@ -1,7 +1,8 @@
 @import 'vars';
 
-.link {
-  font-weight: bold;
+.bx--link {
+  @extend %strong;
+  @extend %font-smoothing;
   color: $color--link;
   text-decoration: underline;
   transition: $transition--link;
