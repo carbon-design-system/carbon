@@ -1,0 +1,57 @@
+@import 'vars';
+@import 'mixins';
+@import 'extends';
+
+.bx--notification {
+  &--running { @include notification--theme($color__blue-30); }
+  &--danger { @include notification--theme($color__red-40); }
+  &--warning { @include notification--theme($color__orange-30); } // !temporary
+  &--misc { @include notification--theme($color__purple-40); } // !temporary
+  &--info { @include notification--theme($color__yellow-30); }
+}
+
+.bx--notification {
+  display: flex;
+
+  &--danger, &--running, &--warning, &--misc, &--info {
+    @extend %font-smoothing;
+    flex: 1;
+    padding: .3em 0 .3em .5em;
+    background-color: $color--notifications--bg;
+    border-right: 3px solid $color--notifications--border;
+
+    .bx--notification__title,
+    .bx--notification__subtitle,
+    .bx--notification__caption {
+      margin: .4em 0;
+    }
+
+    .bx--notification__title {
+      font-size: 1.5rem;
+    }
+
+    .bx--notification__subtitle {
+      margin-bottom: 1em;
+      color: $color__white;
+    }
+
+    .bx--notification__caption {
+      color: $color__white;
+    }
+  }
+
+  .bx--notification__close {
+    background-color: $color__navy-gray-2;
+    border: none;
+
+    span {
+      padding: .1em;
+
+      svg {
+        fill: $close-button;
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}
