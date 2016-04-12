@@ -1,10 +1,74 @@
 @import 'vars';
 @import 'extends';
 
-.footer {
+.bx--footer {
   @extend %footer;
 
   &__container {
-    @extend %footer__container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+.bx--footer--config {
+  @extend %footer;
+
+  display: flex;
+
+  &__container {
+    @extend %form__container;
+
+    @media (max-width: 580px) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__information {
+    display: flex;
+
+    @media (max-width: 580px) {
+      display: none;
+    }
+  }
+
+  &__support {
+    margin-right: 4em;
+
+    @media (max-width: 825px) {
+      display: none;
+    }
+  }
+
+  &__support-question {
+    @include type(1rem);
+    padding-bottom: .25em;
+    font-size: rem(14px);
+  }
+
+  &__support-link {
+    font-size: rem(14px);
+    font-weight: 600;
+    color: $color__footer--link;
+    text-decoration: none;
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+  }
+
+  &__submit-price {
+    margin-right: 1em;
+    font-weight: 200;
+    letter-spacing: 1px; // !temporary
+  }
+
+  &__settings-question {
+    @include type(1rem);
+    padding-bottom: .25em;
+    font-size: rem(14px);
   }
 }
