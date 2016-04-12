@@ -1,0 +1,35 @@
+@import 'vars';
+@import 'keyframes';
+@import 'extends';
+
+.bx--loading {
+  width: $loading__size;
+  height: $loading__size;
+
+  &__svg {
+    fill: transparent;
+    stroke: $color__teal-30;
+    stroke-width: 8;
+    stroke-linecap: butt;
+    stroke-dasharray: 240;
+    stroke-dashoffset: $loading__gap;
+  }
+
+  // Animation - Active (Default)
+  &[data-state='active'] {
+    @extend %animation--spin;
+
+    &[data-ie='yes'] {
+      @extend %animation--spin--ie;
+    }
+  }
+
+  // Animation - Inactive
+  &[data-state='inactive'] {
+    @extend %animation--stop;
+
+    &[data-ie='yes'] {
+      @extend %animation--stop--ie;
+    }
+  }
+}
