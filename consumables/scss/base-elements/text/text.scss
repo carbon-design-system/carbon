@@ -1,5 +1,6 @@
 .bx--text__input {
   @include type(1rem);
+
   width: 100%;
   min-width: 9.375em;
   padding: .5em 0 .5em 1em;
@@ -8,5 +9,8 @@
   background-color: $color__navy-gray-4;
   border: none;
   border-radius: 0;
-  appearance: none;
+
+  &:focus {
+    @extend %focus-outline;
+  }
 }

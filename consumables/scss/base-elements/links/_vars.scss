@@ -1,4 +1,4 @@
-$color--link: $color__blue-30;
+$color--link: lighten($color__blue-30, .5%);
 $color--link--hover: $color__blue-20;
 $transition--link: color, 200ms, ease-in;
 
