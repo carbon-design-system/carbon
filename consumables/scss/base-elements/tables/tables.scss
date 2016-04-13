@@ -1,6 +1,6 @@
 @import 'vars';
 
-.table {
+.bx--table {
   @include type('body');
   width: 100%;
   color: $color__table-text;
@@ -19,7 +19,8 @@
     background-color: $color__table-bg;
     border-bottom: 1px solid $color__table-border;
 
-    .link {
+    .bx--link {
+      color: $color__table-link;
       text-decoration: none;
     }
   }
@@ -35,7 +36,7 @@
   }
 }
 
-.table__body {
+.bx--table__body {
   &__cell {
     display: flex;
     flex: 1;
@@ -43,20 +44,17 @@
     font-size: .875rem;
     text-align: left;
     overflow: hidden;
-
-    .link {
-      color: $color__blue-30;;
-    }
   }
 
-  &__link {
-    color: $color__blue-30;
+  .bx--link {
+    color: $color__table-link;
+    text-decoration: none;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .table__row {
+  .bx--table__row {
 
     &:nth-child(odd) {
       background-color: $color__table-row--odd;
@@ -72,12 +70,13 @@
 // Configurations
 /////////////////////
 
-.table {
-  .cta {
-    // Use .cta as a modifier for <th> or <td> classes when including:
-    // * Status icon
-    // * Checkbox
-    // * etc.
+.bx--table {
+
+  // Use .cta as a modifier for <th> or <td> classes when including:
+  // * Status icon
+  // * Checkbox
+  // * etc.
+  .bx--table--cta {
     flex: none;
   }
 
@@ -85,11 +84,17 @@
     cursor: pointer;
   }
 
-  .status-icon { // !temporary
-    // example of a status-icon to use inside `.cta`
+  // example of a status-icon to use inside `.cta`
+  .bx--table--status-icon { // !temporary
     width: 1em;
     height: 1em;
     background-color: $color__green-30;
     border-radius: 100%;
+
+    &--hidden {
+      background-color: transparent;
+      width: 1em;
+      height: 1em;
+    }
   }
 }
