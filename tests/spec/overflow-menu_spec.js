@@ -22,12 +22,9 @@ describe('Test Overflow menu', function () {
     let element;
     before(function () {
       element = document.createElement('a');
+      element.dataset.state = 'closed';
       menu = new OverflowMenu(element);
       document.body.appendChild(element);
-    });
-
-    it(`Instantiates without open class`, function () {
-      expect(element.classList.contains('open')).to.be.false;
     });
 
     it(`Prevents default behavior of anchor element on click event`, function () {
@@ -35,25 +32,20 @@ describe('Test Overflow menu', function () {
       expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).to.be.false;
     });
 
-    it(`Adds open class on click event`, function () {
+    it(`Sets data-state to "open" on click event`, function () {
       element.dispatchEvent(new CustomEvent('click'));
-      expect(element.classList.contains('open')).to.be.true;
+      expect(element.dataset.state).to.equal('open');
     });
 
-    it(`Removes open class on click event`, function () {
-      element.classList.add('open');
+    it(`Sets data-state to "open", then sets it to "closed" on click events`, function () {
       element.dispatchEvent(new CustomEvent('click'));
-      expect(element.classList.contains('open')).to.be.false;
-    });
-
-    it(`Adds open class then removes open class on click events`, function () {
+      expect(element.dataset.state).to.equal('open');
       element.dispatchEvent(new CustomEvent('click'));
-      element.dispatchEvent(new CustomEvent('click'));
-      expect(element.classList.contains('open')).to.be.false;
+      expect(element.dataset.state).to.equal('closed');
     });
 
     afterEach(function () {
-      element.classList.remove('open');
+      element.dataset.state = 'closed';
     });
 
     after(function () {
@@ -74,6 +66,9 @@ describe('Test Overflow menu', function () {
       element1.dataset.overflowMenu = '';
       element2.dataset.overflowMenu = '';
       element3.dataset.overflowMenu = '';
+      element1.dataset.state = 'closed';
+      element2.dataset.state = 'closed';
+      element3.dataset.state = 'closed';
       new OverflowMenu(element1);
       new OverflowMenu(element2);
       new OverflowMenu(element3);
@@ -82,31 +77,25 @@ describe('Test Overflow menu', function () {
       document.body.appendChild(element3);
     });
 
-    it('All overflow-menus should instatiate without an open class', function () {
-      expect(element1.classList.contains('open')).to.be.false;
-      expect(element2.classList.contains('open')).to.be.false;
-      expect(element3.classList.contains('open')).to.be.false;
-    });
-
-    it('One overflow-menu should open at a time on click event', function () {
+    it('Should open one menu on a single click event', function () {
       element1.dispatchEvent(new CustomEvent('click'));
-      expect(element1.classList.contains('open')).to.be.true;
-      expect(element2.classList.contains('open')).to.be.false;
-      expect(element3.classList.contains('open')).to.be.false;
+      expect(element1.dataset.state).to.equal('open');
+      expect(element2.dataset.state).to.equal('closed');
+      expect(element3.dataset.state).to.equal('closed');
     });
 
-    it('One overflow-menu should open at a time on multiple click events', function () {
+    it('Should open one menu on multiple click events', function () {
       element1.dispatchEvent(new CustomEvent('click'));
       element2.dispatchEvent(new CustomEvent('click'));
-      expect(element1.classList.contains('open')).to.be.false;
-      expect(element2.classList.contains('open')).to.be.true;
-      expect(element3.classList.contains('open')).to.be.false;
+      expect(element1.dataset.state).to.equal('closed');
+      expect(element2.dataset.state).to.equal('open');
+      expect(element3.dataset.state).to.equal('closed');
     });
 
     afterEach(function () {
-      element1.classList.remove('open');
-      element2.classList.remove('open');
-      element3.classList.remove('open');
+      element1.dataset.state = 'closed';
+      element2.dataset.state = 'closed';
+      element3.dataset.state = 'closed';
     });
 
     after(function () {
