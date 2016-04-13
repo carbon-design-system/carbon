@@ -1,11 +1,11 @@
 @import 'vars';
 
-.toggle__input { // should always use checkbox, visibly hidden
+.bx--toggle__input { // should always use checkbox, visibly hidden
   position: absolute;
   margin-left: -100%;
   visibility: hidden;
 
-  & + .toggle__appearance { // this is the main body of the toggle's appearance
+  & + .bx--toggle__appearance { // this is the main body of the toggle's appearance
     position: relative;
     display: block;
     width: em(70px);
@@ -22,20 +22,20 @@
     transition: $transition__toggle-switch--speed;
     user-select: none;
 
-    .toggle__appearance--off {
+    .bx--toggle__appearance--off {
       position: relative;
       left: em(33px);
     }
   }
 
 
-  & + .toggle__appearance:before {
+  & + .bx--toggle__appearance:before {
     position: absolute;
     display: block;
     content: '';
   }
 
-  & + .toggle__appearance:after {
+  & + .bx--toggle__appearance:after {
     position: absolute;
     top: em(2px);
     bottom: em(2px);
@@ -49,16 +49,16 @@
     transition: $transition__toggle-switch--speed;
   }
 
-  &:checked + .toggle__appearance {
+  &:checked + .bx--toggle__appearance {
     text-indent: 1px;
     background-color: $color__toggle-switch--on;
 
-    .toggle__appearance--off {
+    .bx--toggle__appearance--off {
       left: em(40px);
     }
   }
 
-  &:checked + .toggle__appearance:after {
+  &:checked + .bx--toggle__appearance:after {
     margin-left: em(46px); // position of the white button within the toggle
     background-color: $color__toggle-switch--front;
   }
