@@ -14,11 +14,11 @@
 /* Stroke animations */
 @keyframes init-stroke {
   0% { stroke-dashoffset: 240; }
-  100% { stroke-dashoffset: $spinner__gap; }
+  100% { stroke-dashoffset: $loading__gap; }
 }
 
 @keyframes stroke-end {
-  0% { stroke-dashoffset: $spinner__gap; }
+  0% { stroke-dashoffset: $loading__gap; }
   100% { stroke-dashoffset: 240; }
 }
 

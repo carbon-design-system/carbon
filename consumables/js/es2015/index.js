@@ -25,7 +25,7 @@ import OverflowMenu from './overflow-menu';
 import Modal from './modals';
 import HeaderNav from './header';
 import Toolbars from './toolbars';
-import Spinner from './spinner';
+import Loading from './loading';
 
 const settings = {};
 
@@ -39,7 +39,7 @@ export {
   Modal,
   HeaderNav,
   Toolbars,
-  Spinner,
+  Loading,
 };
 
 const init = () => {
@@ -51,7 +51,7 @@ const init = () => {
     Modal.init();
     HeaderNav.init();
     Toolbars.init();
-    Spinner.init();
+    Loading.init();
   }
 };
 

@@ -1,4 +1,4 @@
-export default class Spinner {
+export default class Loading {
   constructor(element, options = { active: true }) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       throw new TypeError('DOM element should be given to initialize this widget.');
@@ -6,13 +6,14 @@ export default class Spinner {
 
     this.element = element;
     this.active = 'active' in options ? options.active : true;
-
     this.ie = false;
 
     // check if browser is Internet Explorer
     if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
       this.ie = true;
-      this.element.classList.add('is--ie');
+      this.element.dataset.ie = 'yes';
+    } else {
+      this.element.dataset.ie = 'no';
     }
 
     this.constructor.components.set(this.element, this);
@@ -21,14 +22,18 @@ export default class Spinner {
     this.set(this.active);
   }
 
+  static create(element) {
+    return this.components.get(element) || new this(element);
+  }
+
   static init(target = document, options) {
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.spinner !== undefined) {
+    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
       this.create(target, options);
     } else {
-      [... target.querySelectorAll('[data-spinner]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll('[data-loading]')].forEach(element => this.create(element, options));
     }
   }
 
@@ -40,13 +45,9 @@ export default class Spinner {
     this.active = active;
 
     if (this.active) {
-      this.element.classList.remove('is-stopping--ie', 'is-stopping');
+      this.element.dataset.state = 'active';
     } else {
-      if (this.ie) {
-        this.element.classList.add('is-stopping--ie');
-      } else {
-        this.element.classList.add('is-stopping');
-      }
+      this.element.dataset.state = 'inactive';
     }
 
     return this;
@@ -63,10 +64,6 @@ export default class Spinner {
   release() {
     this.constructor.components.delete(this.element);
   }
-
-  static create(element) {
-    return this.components.get(element) || new this(element);
-  }
 }
 
-Spinner.components = new WeakMap();
+Loading.components = new WeakMap();

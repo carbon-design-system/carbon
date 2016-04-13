@@ -73,7 +73,6 @@
 @import 'components/fab-label/vars';
 @import 'components/fab-label/extends';
 
-
 // fab
 @import 'components/fab/vars';
 
@@ -89,6 +88,10 @@
 @import 'components/item-list/vars';
 @import 'components/item-list/mixins';
 @import 'components/item-list/extends';
+
+// loading
+@import 'components/loading/vars';
+@import 'components/loading/extends';
 
 // modals
 @import 'components/modals/vars';
