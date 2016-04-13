@@ -1,6 +1,6 @@
 @import 'vars';
 
-.fab {
+.bx--fab {
   @include rotate(0, $transition--base);
   display: inline-block;
   width: rem(72px);
@@ -8,33 +8,36 @@
   text-decoration: none;
   filter: drop-shadow($shadow);
 
+  &__hidden {
+    @extend %hidden;
+    color: $color__white;
+  }
+
+  // Styles for "Open" state
   &__svg {
     width: 100%;
 
-    .hexagon {
+    .bx--fab__hexagon {
       transition: fill $transition--base;
       fill: $color__fab-hexagon;
     }
 
-    .plus-icon {
+    .bx--fab__plus-icon {
       @include rotate(0, $transition--base);
       fill: $color__fab-plus-icon;
     }
   }
 
-  &__screen-reader-only {
-    @extend %hidden;
-  }
-
-  &.is-closed {
+  // Styles for "Closed" state
+  &[data-state='closed'] {
     @include rotate(90deg, $transition--base);
 
-    .hexagon {
+    .bx--fab__hexagon {
       transition: fill $transition--base;
       fill: $color__fab-hexagon--is-closed;
     }
 
-    .plus-icon {
+    .bx--fab__plus-icon {
       @include rotate(-45deg, $transition--base);
     }
   }

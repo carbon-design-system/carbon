@@ -33,18 +33,19 @@ describe('Test floating action button', function () {
     });
 
     it(`Should turn to open state from closed state`, function () {
-      element.classList.add('is-closed');
+      element.dataset.state = 'open';
       element.dispatchEvent(new CustomEvent('click'));
-      expect(element.classList.contains('is-closed')).to.be.false;
+      expect(element.dataset.state).to.equal('closed');
     });
 
     it(`Should turn to closed state from open state`, function () {
+      element.dataset.state = 'closed';
       element.dispatchEvent(new CustomEvent('click'));
-      expect(element.classList.contains('is-closed')).to.be.true;
+      expect(element.dataset.state).to.equal('open');
     });
 
     afterEach(function () {
-      element.classList.remove('is-closed');
+      element.dataset.state = 'open';
     });
 
     after(function () {
@@ -100,23 +101,28 @@ describe('Test floating action button', function () {
       initContext = FabButton.init();
       element = document.createElement('a');
       element.dataset.fab = '';
+      element.dataset.state = 'open';
       document.body.appendChild(element);
     });
 
     it(`Should create an instance upon clicking`, function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.classList.contains('is-closed')).to.be.true;
+      expect(element.dataset.state).to.equal('closed');
     });
 
     it(`Shouldn't create a new instance upon clicking if one has been there already`, function () {
       const stubComponentsSet = sinon.stub(FabButton.components, 'set');
       try {
         element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(element.classList.contains('is-closed')).to.be.false;
+        expect(element.dataset.state).to.equal('closed');
         expect(stubComponentsSet).not.have.been.called;
       } finally {
         stubComponentsSet.restore();
       }
+    });
+
+    afterEach(function () {
+      element.dataset.state = 'open';
     });
 
     after(function () {
