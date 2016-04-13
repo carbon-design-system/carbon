@@ -1,5 +1,0 @@
-@mixin alert--theme($color) {
-  .alert__title { color: $color; }
-  border-left: 6px solid $color;
-  color: $color;
-}
