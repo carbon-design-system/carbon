@@ -50,7 +50,7 @@ var BluemixComponents =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Spinner = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.FileUploader = exports.FabButton = exports.settings = undefined;
+	exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 	
 	__webpack_require__(1);
 	
@@ -82,9 +82,9 @@ var BluemixComponents =
 	
 	var _toolbars2 = _interopRequireDefault(_toolbars);
 	
-	var _spinner = __webpack_require__(13);
+	var _loading = __webpack_require__(13);
 	
-	var _spinner2 = _interopRequireDefault(_spinner);
+	var _loading2 = _interopRequireDefault(_loading);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -119,7 +119,7 @@ var BluemixComponents =
 	exports.Modal = _modals2.default;
 	exports.HeaderNav = _header2.default;
 	exports.Toolbars = _toolbars2.default;
-	exports.Spinner = _spinner2.default;
+	exports.Loading = _loading2.default;
 	
 	
 	var init = function init() {
@@ -131,7 +131,7 @@ var BluemixComponents =
 	    _modals2.default.init();
 	    _header2.default.init();
 	    _toolbars2.default.init();
-	    _spinner2.default.init();
+	    _loading2.default.init();
 	  }
 	};
 	
@@ -1401,11 +1401,11 @@ var BluemixComponents =
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Spinner = function () {
-	  function Spinner(element) {
+	var Loading = function () {
+	  function Loading(element) {
 	    var options = arguments.length <= 1 || arguments[1] === undefined ? { active: true } : arguments[1];
 	
-	    _classCallCheck(this, Spinner);
+	    _classCallCheck(this, Loading);
 	
 	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
 	      throw new TypeError('DOM element should be given to initialize this widget.');
@@ -1413,13 +1413,14 @@ var BluemixComponents =
 	
 	    this.element = element;
 	    this.active = 'active' in options ? options.active : true;
-	
 	    this.ie = false;
 	
 	    // check if browser is Internet Explorer
 	    if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
 	      this.ie = true;
-	      this.element.classList.add('is--ie');
+	      this.element.dataset.ie = 'yes';
+	    } else {
+	      this.element.dataset.ie = 'no';
 	    }
 	
 	    this.constructor.components.set(this.element, this);
@@ -1428,7 +1429,7 @@ var BluemixComponents =
 	    this.set(this.active);
 	  }
 	
-	  _createClass(Spinner, [{
+	  _createClass(Loading, [{
 	    key: 'set',
 	    value: function set(active) {
 	      if (typeof active !== 'boolean') {
@@ -1438,13 +1439,9 @@ var BluemixComponents =
 	      this.active = active;
 	
 	      if (this.active) {
-	        this.element.classList.remove('is-stopping--ie', 'is-stopping');
+	        this.element.dataset.state = 'active';
 	      } else {
-	        if (this.ie) {
-	          this.element.classList.add('is-stopping--ie');
-	        } else {
-	          this.element.classList.add('is-stopping');
-	        }
+	        this.element.dataset.state = 'inactive';
 	      }
 	
 	      return this;
@@ -1465,6 +1462,11 @@ var BluemixComponents =
 	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
+	    key: 'create',
+	    value: function create(element) {
+	      return this.components.get(element) || new this(element);
+	    }
+	  }, {
 	    key: 'init',
 	    value: function init() {
 	      var _this = this;
@@ -1475,28 +1477,23 @@ var BluemixComponents =
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.spinner !== undefined) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
 	        this.create(target, options);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-spinner]'))).forEach(function (element) {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-loading]'))).forEach(function (element) {
 	          return _this.create(element, options);
 	        });
 	      }
 	    }
-	  }, {
-	    key: 'create',
-	    value: function create(element) {
-	      return this.components.get(element) || new this(element);
-	    }
 	  }]);
 	
-	  return Spinner;
+	  return Loading;
 	}();
 	
-	exports.default = Spinner;
+	exports.default = Loading;
 	
 	
-	Spinner.components = new WeakMap();
+	Loading.components = new WeakMap();
 
 /***/ }
 /******/ ]);
