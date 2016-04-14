@@ -758,36 +758,24 @@ var BluemixComponents =
 	    }
 	
 	    this.element = element;
-	
+	    this.element.dataset.state = 'closed';
 	    this.constructor.components.set(this.element, this);
-	
-	    this.element.addEventListener('click', function (event) {
-	      return _this.toggle(event);
+	    this.element.ownerDocument.addEventListener('click', function (event) {
+	      return _this.handleDocumentClick(event);
 	    });
 	  }
 	
 	  _createClass(OverflowMenu, [{
-	    key: 'toggle',
-	    value: function toggle(event) {
-	      var _this2 = this;
+	    key: 'handleDocumentClick',
+	    value: function handleDocumentClick(event) {
+	      var isOfSelf = this.element.contains(event.target);
+	      var shouldBeOpen = isOfSelf && this.element.dataset.state !== 'open';
 	
-	      if (event.currentTarget.tagName === 'A') {
+	      if (isOfSelf && this.element.tagName === 'A') {
 	        event.preventDefault();
 	      }
 	
-	      if (this.element.dataset.state === 'closed') {
-	        this.element.dataset.state = 'open';
-	        [].concat(_toConsumableArray(this.element.ownerDocument.querySelectorAll('[data-overflow-menu][data-state="open"]'))).forEach(function (element) {
-	          if (element !== _this2.element) {
-	            element.dataset.state = 'closed';
-	          }
-	        });
-	      } else {
-	        [].concat(_toConsumableArray(this.element.ownerDocument.querySelectorAll('[data-overflow-menu][data-state="open"]'))).forEach(function (element) {
-	          element.dataset.state = 'closed';
-	        });
-	        this.element.dataset.state = 'closed';
-	      }
+	      this.element.dataset.state = shouldBeOpen ? 'open' : 'closed';
 	    }
 	  }, {
 	    key: 'release',
@@ -802,7 +790,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'init',
 	    value: function init() {
-	      var _this3 = this;
+	      var _this2 = this;
 	
 	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
 	
@@ -813,7 +801,7 @@ var BluemixComponents =
 	        this.create(target);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll('[data-overflow-menu]'))).forEach(function (element) {
-	          return _this3.create(element);
+	          return _this2.create(element);
 	        });
 	      }
 	    }

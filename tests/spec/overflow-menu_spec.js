@@ -29,18 +29,18 @@ describe('Test Overflow menu', function () {
 
     it(`Prevents default behavior of anchor element on click event`, function () {
       // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
-      expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).to.be.false;
+      expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.false;
     });
 
     it(`Sets data-state to "open" on click event`, function () {
-      element.dispatchEvent(new CustomEvent('click'));
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.dataset.state).to.equal('open');
     });
 
     it(`Sets data-state to "open", then sets it to "closed" on click events`, function () {
-      element.dispatchEvent(new CustomEvent('click'));
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.dataset.state).to.equal('open');
-      element.dispatchEvent(new CustomEvent('click'));
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.dataset.state).to.equal('closed');
     });
 
@@ -78,15 +78,15 @@ describe('Test Overflow menu', function () {
     });
 
     it('Should open one menu on a single click event', function () {
-      element1.dispatchEvent(new CustomEvent('click'));
+      element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element1.dataset.state).to.equal('open');
       expect(element2.dataset.state).to.equal('closed');
       expect(element3.dataset.state).to.equal('closed');
     });
 
     it('Should open one menu on multiple click events', function () {
-      element1.dispatchEvent(new CustomEvent('click'));
-      element2.dispatchEvent(new CustomEvent('click'));
+      element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      element2.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element1.dataset.state).to.equal('closed');
       expect(element2.dataset.state).to.equal('open');
       expect(element3.dataset.state).to.equal('closed');
