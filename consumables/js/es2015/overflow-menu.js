@@ -28,7 +28,13 @@ export default class OverflowMenu {
   }
 
   handleDocumentClick(event) {
-    const shouldBeOpen = this.element.contains(event.target) && this.element.dataset.state !== 'open';
+    const isOfSelf = this.element.contains(event.target);
+    const shouldBeOpen = isOfSelf && this.element.dataset.state !== 'open';
+
+    if (isOfSelf && this.element.tagName === 'A') {
+      event.preventDefault();
+    }
+
     this.element.dataset.state = shouldBeOpen ? 'open' : 'closed';
   }
 
