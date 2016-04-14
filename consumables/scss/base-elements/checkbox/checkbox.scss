@@ -3,16 +3,16 @@
 .bx--checkbox {
   @extend %hidden;
 
+  // Checkbox Label - fonts and positioning
   &__label {
-    // Checkbox Label - fonts and positioning
     @extend %font-smoothing;
     display: flex;
     align-items: center;
     cursor: pointer;
   }
 
+  // Styled Checkbox - default
   &__control {
-    // Styled Checkbox - default
     display: inline-block;
     font-size: 1rem;
     width: em(18px);
@@ -23,15 +23,15 @@
     border-radius: 2px;
   }
 
+  // Styled Checkbox - checked - background
   &:checked + &__label &__control {
-    // Styled Checkbox - checked - background
     display: flex;
     align-items: baseline;
     background-color: $color__blue-30;
     border-color: $color__blue-30;
 
+    // Styled Checkbox - checked - checkmark
     &:before {
-      // Styled Checkbox - checked - checkmark
       content: '';
       width: em(12px);
       height: em(6px);
@@ -43,14 +43,14 @@
     }
   }
 
+  // Styled Checkbox and Label - disabled
   &:disabled + &__label {
-    // Styled Checkbox and Label - disabled
     opacity: .5;
     cursor: not-allowed;
   }
 
+  // Styled Checkbox - Focus outline (Firefox and Webkit)
   &:focus + &__label &__control {
-    // Styled Checkbox - Focus outline (Firefox and Webkit)
     @extend %focus-outline;
   }
 }

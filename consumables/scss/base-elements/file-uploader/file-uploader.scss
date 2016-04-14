@@ -6,13 +6,13 @@
     @extend %hidden ;
   }
 
+  // Styled File Uploader - focus outline
   &__input:focus + &__label {
-    // Styled File Uploader - focus outline
     @extend %focus-outline;
   }
 
+  // Styled File Uploader
   &__label {
-    // Styled File Uploader
     @include type(1rem);
     position: relative;
     display: block;
@@ -24,10 +24,11 @@
     background-color: $color__file__label--bg;
     border: none;
     border-radius: 0;
-    appearance: none; // avoids safari from overriding these styles
+    // appearance: none - avoids safari from overriding these styles
+    appearance: none;
 
+    // "upload button"
     &:after {
-      // "upload button"
       @extend %btn--primary;
       position: absolute;
       top: 0;

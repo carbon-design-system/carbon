@@ -1,16 +1,19 @@
-.bx--text__input {
-  @include type(1rem);
+.bx--text {
 
-  width: 100%;
-  min-width: 9.375em;
-  padding: .5em 0 .5em 1em;
-  margin: .25em 0;
-  color: $color__white;
-  background-color: $color__navy-gray-4;
-  border: none;
-  border-radius: 0;
+  &__input {
+    @include type(1rem);
 
-  &:focus {
-    @extend %focus-outline;
+    width: 100%;
+    min-width: 9.375em;
+    padding: .5em 0 .5em 1em;
+    margin: .25em 0;
+    color: $color__white;
+    background-color: $color__navy-gray-4;
+    border: none;
+    border-radius: 0;
+
+    &:focus {
+      @extend %focus-outline;
+    }
   }
 }

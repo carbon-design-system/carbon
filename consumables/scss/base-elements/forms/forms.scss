@@ -1,0 +1,11 @@
+.bx--form {
+
+  &__legend {
+    @extend %hidden;
+  }
+
+  &__label {
+    display: inline-block;
+    padding-bottom: 1em;
+  }
+}

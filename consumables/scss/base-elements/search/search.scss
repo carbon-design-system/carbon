@@ -6,6 +6,10 @@
   align-items: center;
   position: relative;
 
+  &__label {
+    @extend %hidden;
+  }
+
   &__input {
     @include type(.875rem);
     flex: 2;

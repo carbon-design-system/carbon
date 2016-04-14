@@ -24,5 +24,4 @@ jsconfig.json
 tests/coverage
 
 # Temporary gitignores
-consumables/css/bluemix-components.min.css
-consumables/css/bluemix-components.css
+consumables/css/*.css
