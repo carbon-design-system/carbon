@@ -12,7 +12,7 @@
   }
 
   // Styled Checkbox - default
-  &__control {
+  &__appearance {
     display: inline-block;
     font-size: 1rem;
     width: em(18px);
@@ -24,7 +24,7 @@
   }
 
   // Styled Checkbox - checked - background
-  &:checked + &__label &__control {
+  &:checked + &__label &__appearance {
     display: flex;
     align-items: baseline;
     background-color: $color__blue-30;
@@ -50,7 +50,7 @@
   }
 
   // Styled Checkbox - Focus outline (Firefox and Webkit)
-  &:focus + &__label &__control {
+  &:focus + &__label &__appearance {
     @extend %focus-outline;
   }
 }
