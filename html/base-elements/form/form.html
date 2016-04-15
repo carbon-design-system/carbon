@@ -1,0 +1,112 @@
+<form class="bx--form">
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">Content Switcher</legend>
+    <div class="bx--content-switcher">
+      <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="1" id="opt-1" checked>
+      <label class="bx--content-switcher__btn" for="opt-1">Option 1</label>
+      <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="2" id="opt-2">
+      <label class="bx--content-switcher__btn" for="opt-2">Option 2</label>
+      <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="3" id="opt-3">
+      <label class="bx--content-switcher__btn" for="opt-3">Option 3</label>
+    </div>
+
+  </fieldset>
+  <!-- Checkbox -->
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">Checkbox</legend>
+    <input id="unique-checkbox-1" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
+    <label for="unique-checkbox-1" class="bx--checkbox__label">
+      <span class="bx--checkbox__control"></span>
+      checkbox label text
+    </label>
+    <br>
+    <input disabled id="unique-checkbox-disabled" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
+    <label for="unique-checkbox-disabled" class="bx--checkbox__label">
+      <span class="bx--checkbox__control"></span>
+      checkbox label - disabled
+    </label>
+  </fieldset>
+
+  <!-- File Uploader -->
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">File Uploader</legend>
+    <label data-file-appearance class="bx--file__label" for="file">Choose Files...</label>
+    <input
+      data-file-uploader
+      data-multiple-caption="{count} files selected"
+      data-label="[data-file-appearance]"
+      class="bx--file__input"
+      type="file"
+      name="file"
+      id="file"
+      multiple />
+  </fieldset>
+
+  <!-- Radio -->
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">Radio</legend>
+    <input id="unique-radio-1" class="bx--radio" type="radio" value="red" name="radio">
+    <label for="unique-radio-1" class="bx--radio__label">
+      <span class="bx--radio__control"></span>
+      radio label text 1
+    </label>
+    <br>
+    <input id="unique-radio-2" class="bx--radio" type="radio" value="blue" name="radio">
+    <label for="unique-radio-2" class="bx--radio__label">
+      <span class="bx--radio__control"></span>
+      radio label text 2
+    </label>
+    <br>
+    <input disabled id="unique-radio-disabled" class="bx--radio" type="radio" value="blue" name="radio">
+    <label for="unique-radio-disabled" class="bx--radio__label">
+      <span class="bx--radio__control"></span>
+      radio label text - disabled
+    </label>
+  </fieldset>
+
+  <!-- Search -->
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">Search</legend>
+    <div class="bx--search" role="search">
+      <svg class="bx--search__icon--magnifier">
+        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--search" x="" y=""/>
+      </svg>
+      <label for="search__input" class="bx--search__label">Search</label>
+      <input type="search" class="bx--search__input" id="search__input" placeholder="Search Atlas Offerings">
+      <button class="bx--search__filter" type="button">
+        <svg class="bx--search__icon--filter">
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--arrows" x="" y=""/>
+        </svg>
+        <span class="filter__text">Filter</span>
+      </button>
+    </div>
+  </fieldset>
+
+  <!-- Select -->
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">Select</legend>
+    <div class="bx--select">
+      <label for="select-id" class="bx--form__label">Select</label>
+      <span class="bx--select__arrow"></span>
+      <select id="select-id" class="bx--select__input">
+        <option class="bx--select__option" value="volvo">Volvo</option>
+        <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
+        <option class="bx--select__option" value="saab">Saab</option>
+        <option class="bx--select__option" value="opel">Opel</option>
+        <option class="bx--select__option" value="audi">Audi</option>
+      </select>
+      <svg class="bx--select__arrow">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+      </svg>
+    </div>
+  </fieldset>
+
+  <!-- Text -->
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">Text</legend>
+    <label for="text1" class="bx--form__label">Text Input - Label</label>
+    <input id="text1" type="text" class="bx--text__input">
+  </fieldset>
+
+  <button class="bx--btn" type="submit">Submit</button>
+</form>
