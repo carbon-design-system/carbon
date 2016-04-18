@@ -1,11 +1,25 @@
 .bx--form {
 
+  &__fieldset {
+    display: block;
+    margin-bottom: 2em;
+  }
+
   &__legend {
-    @extend %hidden;
+    @extend %font-smoothing;
+    font-weight: 300;
+    font-size: 2rem;
+    display: inline-block;
+    padding-bottom: 1em;
+
+    &--hidden {
+      @extend %hidden;
+    }
   }
 
   &__label {
     display: inline-block;
-    padding-bottom: 1em;
+    font-size: rem(14px);
+    padding-bottom: .5em;
   }
 }

@@ -1,8 +1,11 @@
 .bx--select {
   position: relative;
+  display: inline-block;
 
-  &__dropdown {
+  &__input {
     @include type(1rem);
+    appearance: none;
+    display: block;
     width: 100%;
     padding: .5em 1.5em .5em 1em;
     margin: .25em 0;
@@ -10,20 +13,35 @@
     background-color: $color__navy-gray-4;
     border: none;
     border-radius: 0;
-    appearance: none;
     cursor: pointer;
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
   }
 
-  &__caret {
+  &__arrow {
     position: absolute;
     right: .75em;
-    top: .75em;
+    top: 2em;
     width: .75em;
     height: 1.5em;
     pointer-events: none;
 
     use {
       fill: $color__navy-gray-7;
+    }
+  }
+}
+
+// Hide default select arrow in Firefox
+@-moz-document url-prefix() {
+  .bx--select {
+    overflow: hidden;
+
+    &__input {
+      width: 110%;
     }
   }
 }
