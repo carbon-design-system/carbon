@@ -18,6 +18,10 @@
     opacity: .5;
   }
 
+  &:focus {
+    @extend %focus-outline;
+  }
+
   &::-moz-focus-inner {
     // Buttons in Firefox have
     // some intrinsic, browser-specific extra padding.
