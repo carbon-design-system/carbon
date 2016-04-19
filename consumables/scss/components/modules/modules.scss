@@ -1,22 +1,32 @@
 @import 'vars';
 @import 'extends';
 
-.module-section {
+// This is a section of modules
+.bx--module {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: $module--max;
   margin: 1em auto;
+
+  // Override colors for a11y
+  .bx--link {
+    color: lighten($color__blue-30, 8%);
+  }
+
+  .bx--btn--secondary {
+    @include btn--secondary(lighten($color__blue-30, 8%));
+  }
 }
 
-.module {
-  &--full, .full {
+.bx--module {
+  &--full {
     @extend %module--base;
     flex-basis: 100%;
   }
 
 
-  &--half, .half {
+  &--half {
     @extend %module--base;
     flex-basis: 100%;
     width: 100%;
@@ -44,5 +54,22 @@
     @include breakpoint(bp--sm--major) {
       flex-basis: calc(33% - .5em);
     }
+  }
+
+  &__header {
+    @extend %strong;
+    color: $color__module-header;
+    border-bottom: 1px solid $color__module-border;
+  }
+
+  &__footer {
+    font-size: .875rem;
+    border-top: 1px solid $color__module-border;
+  }
+
+  &__header,
+  &__body,
+  &__footer {
+    padding: $module--margin;
   }
 }
