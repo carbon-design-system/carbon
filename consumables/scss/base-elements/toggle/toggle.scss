@@ -1,65 +1,115 @@
 @import 'vars';
 
-.bx--toggle__input { // should always use checkbox, visibly hidden
-  position: absolute;
-  margin-left: -100%;
-  visibility: hidden;
+.bx--toggle {
+  @extend %hidden;
 
-  & + .bx--toggle__appearance { // this is the main body of the toggle's appearance
+  &__label {
+    @extend %font-smoothing;
     position: relative;
-    display: block;
-    width: em(70px);
-    height: em(24px);
-    padding: 0 5px;
-    margin-bottom: em(10px);
-    overflow: hidden;
-    line-height: 1.5;
-    text-indent: em(-35px);
-    text-transform: uppercase;
+    display: inline-block;
+    margin: 1em 0;
+    height: $toggle-circle;
+    color: $color__toggle-switch--off;
+    transition-duration: $transition--base;
     cursor: pointer;
-    background-color: $color__toggle-switch--off;
-    border-radius: em(24px);
-    transition: $transition__toggle-switch--speed;
-    user-select: none;
+  }
 
-    .bx--toggle__appearance--off {
+  // Styled Toggle - Default
+  &__appearance {
+    position: relative;
+    display: inline-block;
+    top: - $toggle-circle / 1.5;
+
+    // bar
+    &::before {
+      position: absolute;
+      display: block;
+      content: '';
+      width: $toggle-circle * 2;
+      height: $toggle-line;
+      top: $toggle-circle / 2;
+      background-color: currentColor;
+      transition-duration: $transition--base;
+      cursor: pointer;
+    }
+
+    // circle
+    &::after {
+      position: absolute;
+      top: 0;
+      display: block;
+      border: $toggle-line / 2 solid $color__navy-gray-3;
+      cursor: pointer;
+      width: $toggle-circle;
+      height: $toggle-circle;
+      background-color: $color__toggle-switch--off-center;
+      border-radius: 50%;
+      content: '';
+      transition-duration: $transition--base;
+      box-shadow: inset 0 0 0 $toggle-line / 2 $color__toggle-switch--off;
+    }
+
+    &:hover::after,
+    &:focus::after {
+      background-color: $color__toggle-switch--off--hover-center;
+    }
+  }
+
+  // Styled Toggle - Checked
+  &:checked + &__label &__appearance {
+    // bar
+    &::before {
+      background-color: $color__toggle-switch;
+    }
+
+    // circle
+    &::after {
+      transform: translateX($toggle-circle);
+      background-color: $color__toggle-switch;;
+      box-shadow: none;
+    }
+  }
+
+  // Styled Toggle - Disabled
+  &:disabled + &__label {
+    cursor: not-allowed;
+    color: $color__toggle-switch--disabled;
+    opacity: .5;
+  }
+
+  &:disabled + &__label &__appearance {
+
+    // bar and circle
+    &::before,
+    &::after {
+      cursor: not-allowed;
+    }
+
+    &:hover::after {
+      background-color: $color__toggle-switch--off-center;
+    }
+  }
+
+  // Focus Styles
+  &:focus + &__label &__appearance {
+    @extend %focus-outline;
+  }
+
+  &__text {
+    // Text position text left-side of toggle
+    &--left {
       position: relative;
-      left: em(33px);
+      margin-right: .5em;
+      top: $toggle-circle / 6;
+      text-transform: capitalize;
     }
-  }
 
-
-  & + .bx--toggle__appearance:before {
-    position: absolute;
-    display: block;
-    content: '';
-  }
-
-  & + .bx--toggle__appearance:after {
-    position: absolute;
-    top: em(2px);
-    bottom: em(2px);
-    left: em(2px);
-    display: block;
-    width: em(20px);
-    height: em(20px);
-    background-color: $color__toggle-switch--front;
-    border-radius: em(20px);
-    content: '';
-    transition: $transition__toggle-switch--speed;
-  }
-
-  &:checked + .bx--toggle__appearance {
-    text-indent: 1px;
-    background-color: $color__toggle-switch--on;
-
-    .bx--toggle__appearance--off {
-      left: em(40px);
+    // Text position text right-side of toggle
+    &--right {
+      position: relative;
+      left: em($toggle-circle * 2) + .5em;
+      top: $toggle-circle / 6;
+      text-transform: capitalize;
     }
-  }
-
-  &:checked + .bx--toggle__appearance:after {
-    margin-left: em(46px); // position of the white button within the toggle
-    background-color: $color__toggle-switch--front;
   }
 }

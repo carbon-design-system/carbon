@@ -11,7 +11,7 @@
     cursor: pointer;
   }
 
-  &__control {
+  &__appearance {
     // Styled Radio Button - default
     display: inline-block;
     font-size: 1rem;
@@ -23,7 +23,7 @@
     border-radius: 50%;
   }
 
-  &:checked + &__label &__control {
+  &:checked + &__label &__appearance {
     // Styled Radio - checked - background
     display: flex;
     align-items: center;
@@ -48,7 +48,7 @@
     cursor: not-allowed;
   }
 
-  &:focus + &__label &__control {
+  &:focus + &__label &__appearance {
     // Styled Radio - Focus outline (Firefox and Webkit)
     @extend %focus-outline;
   }
