@@ -6,3 +6,8 @@
 @import 'typography/typography';
 @import 'helpers';
 @import 'body';
+
+// These imports are deprecated
+// Remove in version 7.0.0
+@import 'colors/maps';
+@import 'colors/functions';
