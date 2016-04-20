@@ -1,22 +1,81 @@
 @import 'vars';
-@import 'extends';
+@import 'mixins';
 
-.dropdown {
-  @extend %dropdown;
+.bx--dropdown {
+  @include dropdown;
+
+  &:focus {
+    @include focus-outline;
+  }
+
+  &__menu-text {
+    padding-top: em(15px);
+    padding-bottom: em(15px);
+    padding-left: 1em;
+    color: $color__navy-gray-7;
+
+    &:not([data-selection='']) {
+      color: currentColor;
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    right: .75em;
+    top: .75em;
+    width: .75em;
+    height: 1.5em;
+    pointer-events: none;
+    transition: transform $transition--base ease-in-out;
+
+    [data-state='open'] & {
+      transform: rotate(180deg);
+    }
+
+    use {
+      fill: $color__blue-30;
+    }
+  }
+
+
+
+  &__list {
+    display: none;
+    font-size: .875rem;
+  }
+
+  &[data-state='open'] &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__list-item {
+    &:hover,
+    &:focus {
+      background-color: $color__blue-30;
+      color: $color__blue-90;
+    }
+
+    &[data-item='selected'] {
+      display: none;
+    }
+  }
+
+  &__link {
+    display: block;
+    color: currentColor;
+    text-decoration: none;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1.5em;
+
+    [data-item='selected'] & {
+      color: $color__white;
+    }
+  }
 }
 
-.dropdown__item {
-  @extend %dropdown__item;
-}
-
-.dropdown-menu {
-  @extend %dropdown-menu;
-}
-
-.dropdown__arrow {
-  @extend %dropdown__arrow;
-}
-
-.dropdown-menu__item {
-  @extend %dropdown-menu__item;
+.bx--dropdown--selected {
+  display: none;
 }

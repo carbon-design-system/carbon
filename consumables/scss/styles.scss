@@ -1,11 +1,11 @@
-/////////////////////////
-// Bluemix Components
-/////////////////////////
-
-// Global
+//-------------------------
+// 🌍 Global
+//-------------------------
 @import 'global/global';
 
-// Base Elements
+//-------------------------
+// 🍅 Base Elements
+//-------------------------
 @import 'base-elements/forms/forms';
 @import 'base-elements/buttons/buttons';
 @import 'base-elements/file-uploader/file-uploader';
@@ -19,25 +19,35 @@
 @import 'base-elements/links/links';
 @import 'base-elements/lists/lists';
 @import 'base-elements/tables/tables';
-@import 'base-elements/footer/footer';
 
-// Components
-@import 'components/notifications/notifications';
+//-------------------------
+// 🍕 Components
+//-------------------------
+@import 'components/overflow-menu/overflow-menu';
 @import 'components/card/card';
-@import 'components/data-module/data-module';
+@import 'components/content-switcher/content-switcher';
 @import 'components/detail-page-header/detail-page-header--no-tabs';
 @import 'components/detail-page-header/detail-page-header--with-tabs';
 @import 'components/dropdown/dropdown';
-@import 'components/fab-label/fab-label';
-@import 'components/fab/fab';
-@import 'components/item-list/item-list';
-@import 'components/tabs-nav/tabs-nav';
-@import 'components/taxonomy-item/taxonomy-item';
-@import 'components/header/header';
-@import 'components/tooltips/tooltips';
-@import 'components/overflow-menu/overflow-menu';
-@import 'components/content-switcher/content-switcher';
+@import 'components/loading/loading';
 @import 'components/modals/modals';
 @import 'components/modules/modules';
+@import 'components/notifications/notifications';
+@import 'components/tooltips/tooltips';
+@import 'components/tabs/tabs';
+
+//----------------------------
+// 🙈 Hidden (Not exposed on website)
+//----------------------------
+@import 'base-elements/footer/footer';
+@import 'components/fab/fab';
+@import 'components/taxonomy-item/taxonomy-item';
+@import 'components/header/header';
+
+//-------------------------
+// ☠️ Deprecated
+//-------------------------
+@import 'components/data-module/data-module';
+@import 'components/fab-label/fab-label';
+@import 'components/item-list/item-list';
 @import 'components/toolbars/toolbar-icons';
-@import 'components/loading/loading';

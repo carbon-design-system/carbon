@@ -511,8 +511,8 @@ var BluemixComponents =
 	          target.addEventListener('click', handler);
 	          return {
 	            v: {
-	              remove: function remove() {
-	                target.removeEventListener('click', handler);
+	              release: function release() {
+	                return target.removeEventListener('click', handler);
 	              }
 	            }
 	          };
@@ -1155,8 +1155,8 @@ var BluemixComponents =
 	          target.addEventListener('click', handler);
 	          return {
 	            v: {
-	              remove: function remove() {
-	                target.removeEventListener('click', handler);
+	              release: function release() {
+	                return target.removeEventListener('click', handler);
 	              }
 	            }
 	          };

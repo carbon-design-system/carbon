@@ -1,12 +1,15 @@
-<ul class="dropdown">
-  <li class="dropdown__item"><p id="current">Menu</p>
-    <span class="dropdown__arrow"></span>
-    <ul class="dropdown-menu">
-      <li class="dropdown-menu__item"><a href="#">Home</a></li>
-      <li class="dropdown-menu__item"><a href="#cognitive">Cognitive</a></li>
-      <li class="dropdown-menu__item"><a href="#watson">Watson</a></li>
-      <li class="dropdown-menu__item"><a href="#">Services</a></li>
-      <li class="dropdown-menu__item"><a href="#">Storage</a></li>
+<ul data-dropdown data-state="closed" data-value class="bx--dropdown" tabindex="0">
+  <li class="bx--dropdown__menu-text">Choose something...</li>
+  <svg class="bx--dropdown__arrow">
+    <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+  </svg>
+  <li>
+    <ul class="bx--dropdown__list">
+      <li data-option data-value="" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="#">All</a></li>
+      <li data-option data-value="" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="#">Cloud Foundry API</a></li>
+      <li data-option data-value="" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="#">Staging</a></li>
+      <li data-option data-value="" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="#">Droplet Execution Agent</a></li>
+      <li data-option data-value="" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="#">Router</a></li>
     </ul>
   </li>
 </ul>
