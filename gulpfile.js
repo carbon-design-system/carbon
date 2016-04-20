@@ -4,6 +4,8 @@
 // Requires
 //////////////////////////////
 
+const fs = require('fs');
+const scssToJson = require('scss-to-json');
 const path = require('path');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
@@ -98,31 +100,6 @@ gulp.task('scripts:demo', ['scripts:consumables'], (cb) => {
   return gulp.src('consumables/js/es5/*.{js,map}')
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream());
-  // webpack({
-  //   devtool: 'source-maps',
-  //   entry: './demo/demo-es2015.js',
-  //   output: {
-  //     path: './demo',
-  //     filename: 'demo.js'
-  //   },
-  //   module: {
-  //     loaders: [
-  //       {
-  //         test: /\.js?$/,
-  //         exclude: /node_modules/,
-  //         loaders: ['babel'],
-  //       },
-  //     ],
-  //   },
-  // }, (err, stats) => {
-  //   if (err) throw new gutil.PluginError('webpack', err);
-  //   gutil.log('[webpack]', stats.toString({
-  //     progress: true,
-  //     colors: true
-  //   }));
-  //   browserSync.reload();
-  //   cb();
-  // });
 });
 
 gulp.task('scripts', ['scripts:demo']);
@@ -171,6 +148,18 @@ gulp.task('sass:demo', () => {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream());
+});
+
+gulp.task('sass:json', () => {
+  const src = '_colors.scss';
+  const dest = 'colors.json';
+  const filePath = path.resolve(__dirname, `consumables/scss/global/colors/`);
+  const colors = JSON.stringify(scssToJson(`${filePath}/${src}`), null, 2);
+
+  fs.writeFile(`${filePath}/${dest}`, colors, (err) => {
+    if (err) return console.log(err);
+    console.log('colors > colors.json!');
+  });
 });
 
 // Temporary: gulp-sass-lint does not seem to be using our .sass-lint.yml
