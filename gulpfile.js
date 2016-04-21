@@ -150,17 +150,18 @@ gulp.task('sass:demo', () => {
     .pipe(browserSync.stream());
 });
 
-gulp.task('sass:json', () => {
-  const src = '_colors.scss';
-  const dest = 'colors.json';
-  const filePath = path.resolve(__dirname, `consumables/scss/global/colors/`);
-  const colors = JSON.stringify(scssToJson(`${filePath}/${src}`), null, 2);
-
-  fs.writeFile(`${filePath}/${dest}`, colors, (err) => {
-    if (err) return console.log(err);
-    console.log('colors > colors.json!');
-  });
-});
+// Temporary 
+// gulp.task('sass:json', () => {
+//   const src = '_colors.scss';
+//   const dest = 'colors.json';
+//   const filePath = path.resolve(__dirname, `consumables/scss/global/colors/`);
+//   const colors = JSON.stringify(scssToJson(`${filePath}/${src}`), null, 2);
+//
+//   fs.writeFile(`${filePath}/${dest}`, colors, (err) => {
+//     if (err) return console.log(err);
+//     console.log('colors > colors.json!');
+//   });
+// });
 
 // Temporary: gulp-sass-lint does not seem to be using our .sass-lint.yml
 // gulp.task('sass:lint', () => {
