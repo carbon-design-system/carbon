@@ -6,7 +6,7 @@
   &__label {
     @extend %font-smoothing;
     position: relative;
-    display: inline-block;
+    display: block;
     margin: 1em 0;
     height: $toggle-circle;
     color: $color__toggle-switch--off;
