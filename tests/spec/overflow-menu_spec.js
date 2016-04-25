@@ -7,13 +7,13 @@ describe('Test Overflow menu', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
         new OverflowMenu();
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
         new OverflowMenu(document.createTextNode(''));
-      }).to.throw;
+      }).to.throw(Error);
     });
   });
 

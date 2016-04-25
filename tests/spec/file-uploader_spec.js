@@ -7,13 +7,13 @@ describe('Test file uploader', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
         new FileUploader();
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
         new FileUploader(document.createTextNode(''));
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should search for an element with options.labelSelector`, function () {
