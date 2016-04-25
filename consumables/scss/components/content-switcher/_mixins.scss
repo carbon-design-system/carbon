@@ -1,8 +1,4 @@
-//-------------------------
-// ☠️ Deprecated
-//-------------------------
-
-%content-switcher__btn {
+@mixin content-switcher__btn {
   margin: 0;
   font-weight: 400;
   height: auto;

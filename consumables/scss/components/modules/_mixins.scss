@@ -1,8 +1,4 @@
-//-------------------------
-// ☠️ Deprecated
-//-------------------------
-
-%module--base {
+@mixin module--base {
   display: flex;
   flex-direction: column;
   max-height: em(365px);

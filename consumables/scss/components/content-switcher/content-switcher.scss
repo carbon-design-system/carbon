@@ -1,5 +1,6 @@
 @import 'vars';
 @import 'extends';
+@import 'mixins';
 
 .bx--content-switcher {
   display: flex;
@@ -17,7 +18,7 @@
     }
 
     &:checked + .bx--content-switcher__btn {
-      @extend %content-switcher__btn;
+      @include content-switcher__btn;
       background-color: $color__content-switcher;
       font-size: 1rem;
       color: $color__content-switcher-text--active;
@@ -25,7 +26,7 @@
   }
 
   &__btn {
-    @extend %content-switcher__btn;
+    @include content-switcher__btn;
     border: 2px solid $color__content-switcher;
     color: $color__content-switcher;
 
