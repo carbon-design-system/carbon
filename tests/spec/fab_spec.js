@@ -7,13 +7,13 @@ describe('Test floating action button', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
         new FabButton();
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
         new FabButton(document.createTextNode(''));
-      }).to.throw;
+      }).to.throw(Error);
     });
   });
 

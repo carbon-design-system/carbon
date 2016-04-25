@@ -10,13 +10,13 @@ describe('Test modal', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
         new Modal();
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
         new Modal(document.createTextNode(''));
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should set default options`, function () {
@@ -52,7 +52,7 @@ describe('Test modal', function () {
     it(`Should sanity check show()'s arguments`, function () {
       expect(() => {
         modal.show({});
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should have show() do nothing if no state change happens`, function () {
@@ -256,7 +256,7 @@ describe('Test modal', function () {
     it(`Should sanity check hook()'s arguments`, function () {
       expect(() => {
         Modal.hook();
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should have hook() prevent duplicate Modal instances for the same element`, function () {

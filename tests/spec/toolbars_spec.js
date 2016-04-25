@@ -7,13 +7,13 @@ describe('Test toolbars', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
         new Toolbars();
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
         new Toolbars(document.createTextNode(''));
-      }).to.throw;
+      }).to.throw(Error);
     });
   });
 
@@ -44,7 +44,7 @@ describe('Test toolbars', function () {
       toolbars.searchFieldNode = null;
       expect(() => {
         element.dispatchEvent(new CustomEvent('click'));
-      }).not.to.throw;
+      }).to.not.throw(Error);
     });
 
     it(`Should cancel the event for <a>`, function () {

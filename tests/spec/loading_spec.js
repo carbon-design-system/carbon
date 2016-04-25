@@ -5,13 +5,13 @@ describe('Test Loading', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
         new Loading();
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
         new Loading(document.createTextNode(''));
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should default state to active`, function () {
@@ -29,8 +29,8 @@ describe('Test Loading', function () {
   describe('set()', function () {
     it('Should throw if boolean is not passed in', function () {
       const spinner = new Loading(document.createElement('div'));
-      expect(() => spinner.set()).to.throw;
-      expect(() => spinner.set('true')).to.throw;
+      expect(() => spinner.set()).to.throw(Error);
+      expect(() => spinner.set('true')).to.throw(Error);
     });
 
     it('Should set state', function () {

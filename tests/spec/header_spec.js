@@ -11,13 +11,13 @@ describe('Test header', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
         new HeaderNav(); // eslint-disable-line no-new
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
         new HeaderNav(document.createTextNode('')); // eslint-disable-line no-new
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should set default options`, function () {
@@ -182,7 +182,7 @@ describe('Test header', function () {
     it(`Should sanity check hook()'s arguments`, function () {
       expect(() => {
         HeaderNav.hook();
-      }).to.throw;
+      }).to.throw(Error);
     });
 
     it(`Should handle header nav's button for launching header nav`, function () {
