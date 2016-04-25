@@ -38,7 +38,10 @@ export default class Tab {
       trigger.addEventListener('click', (event) => this.updateMenuState(event));
     });
 
-    this.updateTriggerText(this.element.querySelector(this.options.selectorButtonSelected));
+    const selected = this.element.querySelector(this.options.selectorButtonSelected);
+    if (selected) {
+      this.updateTriggerText(selected);
+    }
   }
 
   static init(target = document, options) {
