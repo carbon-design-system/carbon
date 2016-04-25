@@ -1,6 +1,5 @@
 @import 'vars';
 @import 'mixins';
-@import 'extends';
 
 .bx--notification {
   &--running { @include notification--theme($color__blue-30); }

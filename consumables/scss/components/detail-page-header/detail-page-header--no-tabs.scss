@@ -1,8 +1,9 @@
 @import 'vars';
 @import 'extends';
+@import 'mixins';
 
 .bx--detail-page-header--no-tabs {
-  @extend %detail-page-header;
+  @include detail-page-header;
   @include grid-container;
   display: flex;
   align-items: center;
@@ -21,7 +22,7 @@
   }
 
   &__arrow {
-    @extend %detail-page-header__arrow;
+    @include detail-page-header__arrow;
   }
 
   &__info-title {

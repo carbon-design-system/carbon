@@ -1,8 +1,9 @@
 @import 'vars';
 @import 'extends';
+@import 'mixins';
 
 .bx--detail-page-header--with-tabs {
-  @extend %detail-page-header;
+  @include detail-page-header;
 
   &__container {
     @include grid-container;
@@ -48,7 +49,7 @@
   }
 
   &__arrow {
-    @extend %detail-page-header__arrow;
+    @include detail-page-header__arrow;
     top: 3px;
   }
 
@@ -77,6 +78,6 @@
   }
 
   &__tabs-container {
-    @extend %detail-page-header__tab-overrides;
+    @include detail-page-header__tab-overrides;
   }
 }

@@ -1,12 +1,8 @@
-//-------------------------
-// ☠️ Deprecated
-//-------------------------
-
-%detail-page-header {
+@mixin detail-page-header {
   background-color: $color__detail-page-header--bg;
 }
 
-%detail-page-header__arrow {
+@mixin detail-page-header__arrow {
   width: 16px;
   height: 16px;
   fill: $color__link;
@@ -17,7 +13,7 @@
   }
 }
 
-%detail-page-header__tab-overrides {
+@mixin detail-page-header__tab-overrides {
   @include grid-container;
   padding-top: 0;
   padding-bottom: 1em;

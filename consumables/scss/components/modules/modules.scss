@@ -1,5 +1,6 @@
 @import 'vars';
 @import 'extends';
+@import 'mixins';
 
 // This is a section of modules
 .bx--module {
@@ -21,13 +22,13 @@
 
 .bx--module {
   &--full {
-    @extend %module--base;
+    @include module--base;
     flex-basis: 100%;
   }
 
 
   &--half {
-    @extend %module--base;
+    @include module--base;
     flex-basis: 100%;
     width: 100%;
 
@@ -37,7 +38,7 @@
   }
 
   &--two-third {
-    @extend %module--base;
+    @include module--base;
     flex-basis: 100%;
     width: 100%;
 
@@ -47,7 +48,7 @@
   }
 
   &--one-third {
-    @extend %module--base;
+    @include module--base;
     flex-basis: 100%;
     width: 100%;
 
@@ -57,7 +58,8 @@
   }
 
   &__header {
-    @extend %strong;
+    font-weight: 700;
+    font-size: .875rem;
     color: $color__module-header;
     border-bottom: 1px solid $color__module-border;
   }

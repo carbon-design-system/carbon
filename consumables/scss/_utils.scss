@@ -49,7 +49,6 @@
 
 // notifications
 @import 'components/notifications/vars';
-@import 'components/notifications/extends';
 @import 'components/notifications/mixins';
 
 // card
@@ -59,6 +58,7 @@
 // content-switcher
 @import 'components/content-switcher/vars';
 @import 'components/content-switcher/extends';
+@import 'components/content-switcher/mixins';
 
 // data-module
 @import 'components/data-module/vars';
@@ -68,6 +68,7 @@
 // detail-page-header
 @import 'components/detail-page-header/vars';
 @import 'components/detail-page-header/extends';
+@import 'components/detail-page-header/mixins';
 
 // dropdown
 @import 'components/dropdown/vars';
@@ -95,9 +96,15 @@
 // loading
 @import 'components/loading/vars';
 @import 'components/loading/extends';
+@import 'components/loading/mixins';
 
 // modals
 @import 'components/modals/vars';
+
+// modules
+@import 'components/modules/vars';
+@import 'components/modules/extends';
+@import 'components/modules/mixins';
 
 // overflow-menu
 @import 'components/tabs-nav/vars';
