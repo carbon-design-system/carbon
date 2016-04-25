@@ -41,6 +41,16 @@ describe('Test tabs', function () {
       new Tab(element);
       expect(triggerTextNode.textContent).to.equal('0');
     });
+
+    it(`Should deal with a condition with no selected item when constructor runs`, function () {
+      const element = document.createElement('div');
+      const buttonNode = document.createElement('div');
+      buttonNode.classList.add('nav__item');
+      element.appendChild(buttonNode);
+      expect(() => {
+        new Tab(element);
+      }).to.not.throw(Error);
+    });
   });
 
   describe('Toggling drop down for narrow screen', function () {
