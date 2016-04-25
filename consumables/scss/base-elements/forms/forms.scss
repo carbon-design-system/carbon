@@ -6,14 +6,14 @@
   }
 
   &__legend {
-    @extend %font-smoothing;
+    @include font-smoothing;
     font-weight: 300;
     font-size: 2rem;
     display: inline-block;
     padding-bottom: 1em;
 
     &--hidden {
-      @extend %hidden;
+      @include hidden;
     }
   }
 

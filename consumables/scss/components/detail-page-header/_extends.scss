@@ -14,7 +14,7 @@
 }
 
 %detail-page-header__tab-overrides {
-  @extend %grid-container;
+  @include grid-container;
   padding-top: 0;
   padding-bottom: 1em;
 

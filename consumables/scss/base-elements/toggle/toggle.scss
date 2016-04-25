@@ -1,11 +1,11 @@
 @import 'vars';
 
 .bx--toggle {
-  @extend %hidden;
+  @include hidden;
 
   // Toggle Container
   &__label {
-    @extend %font-smoothing;
+    @include font-smoothing;
     position: relative;
     display: block;
     margin: 1em 0;
@@ -80,7 +80,7 @@
 
   // Focus Styles
   &:focus + &__label &__appearance {
-    @extend %focus-outline;
+    @include focus-outline;
   }
 }
 

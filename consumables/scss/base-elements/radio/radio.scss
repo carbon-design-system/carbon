@@ -1,11 +1,11 @@
 @import 'vars';
 
 .bx--radio {
-  @extend %hidden;
+  @include hidden;
 
   &__label {
     // Radio Label - fonts and positioning
-    @extend %font-smoothing;
+    @include font-smoothing;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -50,6 +50,6 @@
 
   &:focus + &__label &__appearance {
     // Styled Radio - Focus outline (Firefox and Webkit)
-    @extend %focus-outline;
+    @include focus-outline;
   }
 }

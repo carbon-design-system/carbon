@@ -15,7 +15,7 @@
     border-radius: 0;
 
     &:focus {
-      @extend %focus-outline;
+      @include focus-outline;
     }
   }
 }

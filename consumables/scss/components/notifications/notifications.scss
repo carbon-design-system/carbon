@@ -14,7 +14,7 @@
   display: flex;
 
   &--danger, &--running, &--warning, &--misc, &--info {
-    @extend %font-smoothing;
+    @include font-smoothing;
     flex: 1;
     padding: .3em 0 .3em .5em;
     background-color: $color--notifications--bg;

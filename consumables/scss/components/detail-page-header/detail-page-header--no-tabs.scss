@@ -3,7 +3,7 @@
 
 .bx--detail-page-header--no-tabs {
   @extend %detail-page-header;
-  @extend %grid-container;
+  @include grid-container;
   display: flex;
   align-items: center;
   padding-top: 1em;
@@ -17,7 +17,7 @@
   }
 
   &__link-text {
-    @extend %hidden;
+    @include hidden;
   }
 
   &__arrow {
@@ -25,7 +25,7 @@
   }
 
   &__info-title {
-    @extend %font-smoothing;
+    @include font-smoothing;
     display: flex;
     align-items: flex-start;
     padding-left: .5em;

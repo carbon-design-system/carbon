@@ -1,26 +1,31 @@
-// Map of Z-Indices
-//
-$z-map: (
+//--------------------------------
+// Map: $z-indexes
+//--------------------------------
+
+$z-indexes: (
   modal     : 9000,
   overlay   : 8000,
   dropdown  : 7000,
   header    : 6000,
   footer    : 5000,
-  hidden    : -1,
+  hidden    : - 1,
   overflowHidden: - 1,
   overflowOptions: 1
 );
 
-// Z-Index Function
-//
+//-------------------------------------
+// @function: z($layer)
+//-------------------------------------
 // usage:
-// .confirmation-modal {
+// .modal {
 //   z-index: z('modal');
 // }
+//-------------------------------------
+
 @function z($layer) {
-  @if not map-has-key($z-map, $layer) {
-    @warn 'No layer found for `#{$layer}` in $z-map map. Property omitted.';
+  @if not map-has-key($z-indexes, $layer) {
+    @warn 'No layer found for `#{$layer}` in $z-indexes map. Property omitted.';
   }
 
-  @return map-get($z-map, $layer);
+  @return map-get($z-indexes, $layer);
 }

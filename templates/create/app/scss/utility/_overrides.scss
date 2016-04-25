@@ -3,7 +3,7 @@
 }
 
 .detail-page-header__container {
-  @extend %grid-container;
+  @include grid-container;
 }
 
 .checkbox {

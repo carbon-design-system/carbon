@@ -1,5 +1,5 @@
 %notification--base {
-  @extend %font-smoothing;
+  @include font-smoothing;
   padding: 1em 2em;
   border: none;
   background: $color__blue-90;

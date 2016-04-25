@@ -40,7 +40,7 @@
   }
 
   &__btn {
-    @extend %helvetica;
+    @include helvetica;
     width: 100%;
     padding: .5em 1em;
     font-size: .85rem;
@@ -67,7 +67,7 @@
 
   // Focus and hover states for the entire component
   &:focus {
-    @extend %focus-outline;
+    @include focus-outline;
   }
 
   &:focus,
