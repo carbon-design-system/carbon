@@ -9,7 +9,7 @@
 }
 
 %taxonomy-item__label {
-  @extend %font-smoothing;
+  @include font-smoothing;
   font-weight: 200;
   line-height: 1.4;
   text-align: center;

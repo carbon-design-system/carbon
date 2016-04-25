@@ -5,7 +5,7 @@
   @extend %detail-page-header;
 
   &__container {
-    @extend %grid-container;
+    @include grid-container;
     display: flex;
     align-items: center;
     padding-top: 1em;
@@ -42,7 +42,7 @@
   }
 
   &__link-wrapper {
-    @extend %font-smoothing;
+    @include font-smoothing;
     color: $color__detail-page-header--text--breadcrumb;
     text-decoration: none;
   }
@@ -58,7 +58,7 @@
   }
 
   &__info-title {
-    @extend %font-smoothing;
+    @include font-smoothing;
     padding-left: .5em;
     margin-left: .5em;
     font-size: 1.5rem;

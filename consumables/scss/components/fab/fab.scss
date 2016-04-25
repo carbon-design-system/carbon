@@ -9,7 +9,7 @@
   filter: drop-shadow($shadow);
 
   &__hidden {
-    @extend %hidden;
+    @include hidden;
     color: $color__white;
   }
 

@@ -1,5 +1,7 @@
-// Map of Breakpoints
-//
+//--------------------------------
+// Map: $breakpoints and $padding
+//--------------------------------
+
 $breakpoints: (
   bp--xs--major: 500px,
   bp--sm--major: 768px,
@@ -7,12 +9,33 @@ $breakpoints: (
   bp--lg--major: 1200px
 );
 
-// Breakpoint Mixin
-//
+$padding: (
+  'mobile': 3%,
+  'xs': 5%
+);
+
+//--------------------------------
+// @function: padding($value)
+//--------------------------------
+
+@function padding($value) {
+  @if map-has-key($padding, $value) {
+    @return map-get($padding, $value);
+  } @else {
+    @warn 'padding: could not find #{$value} in $padding map.
+          Please make sure it is defined';
+  }
+}
+
+//-------------------------------------
+// @mixin: breakpoint($size)
+//-------------------------------------
 // usage:
 // @include breakpoint(bp--md--major) {
 //    - styles here --
 // }
+//-------------------------------------
+
 @mixin breakpoint($size) {
   @if map-has-key($breakpoints, $size) {
     @media screen and (min-width: map-get($breakpoints, $size)) {
@@ -27,23 +50,29 @@ $breakpoints: (
   }
 }
 
-// Move padding stuff (lines 5 to 28) to:
-// global/layouts/grids/_grids.scss
-// (Issue: https://github.ibm.com/Bluemix/bluemix-components/issues/634)
+//-------------------------------------
+// @mixin: grid-container
+//-------------------------------------
+// usage:
+// .some-styles {
+//   @include grid-container;
+// }
+//-------------------------------------
 
-$padding: (
-  'mobile': 3%,
-  'xs': 5%
-);
+@mixin grid-container {
+  width: 100%;
+  padding-right: padding(mobile);
+  padding-left: padding(mobile);
 
-@function padding($value) {
-  @if map-has-key($padding, $value) {
-    @return map-get($padding, $value);
-  } @else {
-    @warn 'padding: could not find #{$value} in $padding map.
-          Please make sure it is defined';
+  @include breakpoint(bp--xs--major) {
+    padding-right: padding(xs);
+    padding-left: padding(xs);
   }
 }
+
+//-------------------------
+// ☠️ Deprecated
+//-------------------------
 
 %grid-container {
   width: 100%;

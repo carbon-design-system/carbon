@@ -1,47 +1,33 @@
 .global-header {
-  @extend %grid-container;
-
+  @include grid-container;
+  @include helvetica;
   position: fixed;
   z-index: z('header');
   top: 0;
-
   display: flex;
-
   height: rem($header-height);
-
   background-color: $color__blue-90;
-
   line-height: rem($header-height);
-
   align-items: center;
 }
 
 .global-logo {
-  @extend %helvetica-light;
-
+  font-weight: 300;
   font-size: .875rem;
-
   position: absolute;
-
   overflow: hidden;
-
   transition: all .5s ease;
   transform: translateX(-300px);
 
   @include breakpoint(bp--sm--major) {
-    @extend %h2;
-
+    @include type('h2');
     position: relative;
-
     padding-right: 1em;
-
     transition: all .5s ease;
     transform: translateX(0);
     text-decoration: none;
-
     color: $color__white;
-
-    font-weight: 200;
+    font-weight: 300;
 
     &:hover,
     &:focus {
@@ -58,18 +44,13 @@
 
 .global-menu-trigger {
   display: flex;
-
   height: 100%;
   padding-right: 1em;
   padding-left: 1em;
-
   text-decoration: none;
-
   color: $color__blue-20;
   background-color: $color__navy-gray-1;
-
   font-weight: 700;
-
   justify-content: space-between;
 }
 
@@ -82,10 +63,8 @@
 .dropdown-affordance {
   position: relative;
   top: $header-height / 2;
-
   width: 0px;
   height: 0px;
-
   border-width: 5px 5px 0px 5px;
   border-style: solid;
   border-color: $color__blue-20 transparent;

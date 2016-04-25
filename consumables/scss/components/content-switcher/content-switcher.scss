@@ -5,10 +5,10 @@
   display: flex;
 
   &__input {
-    @extend %hidden;
+    @include hidden;
 
     &:focus + .bx--content-switcher__btn {
-      @extend %focus-outline;
+      @include focus-outline;
     }
 
     &:focus + .bx--content-switcher__btn,

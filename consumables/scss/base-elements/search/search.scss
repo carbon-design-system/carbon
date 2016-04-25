@@ -7,7 +7,7 @@
   position: relative;
 
   &__label {
-    @extend %hidden;
+    @include hidden;
   }
 
   &__input {
@@ -20,7 +20,7 @@
     appearance: none;
 
     &:focus {
-      @extend %focus-outline;
+      @include focus-outline;
     }
 
     &::placeholder {

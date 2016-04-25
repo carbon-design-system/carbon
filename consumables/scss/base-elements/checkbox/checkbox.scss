@@ -1,11 +1,11 @@
 @import 'vars';
 
 .bx--checkbox {
-  @extend %hidden;
+  @include hidden;
 
   // Checkbox Label - fonts and positioning
   &__label {
-    @extend %font-smoothing;
+    @include font-smoothing;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -51,6 +51,6 @@
 
   // Styled Checkbox - Focus outline (Firefox and Webkit)
   &:focus + &__label &__appearance {
-    @extend %focus-outline;
+    @include focus-outline;
   }
 }

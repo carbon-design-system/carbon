@@ -1,5 +1,40 @@
+//-------------------------
+// Variables
+//-------------------------
+
 $transition--base: .25s;
 $shadow: 2px 2px 8px rgba(0, 0, 0, .4);
+
+//-------------------------
+// Mixins
+//-------------------------
+
+@mixin rotate($deg, $speed, $origin: center) {
+  transform: rotate($deg);
+  transition: transform $speed;
+  transform-origin: $origin;
+}
+
+@mixin hidden {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0, 0, 0, 0);
+  border:0;
+  visibility: visible;
+}
+
+@mixin focus-outline {
+  outline: 1px dotted; // for non-webkit browsers
+  outline: auto 5px -webkit-focus-ring-color; // webkit default
+}
+
+//-------------------------
+// ☠️ Deprecated
+//-------------------------
 
 %hidden {
   position:absolute;
@@ -16,10 +51,4 @@ $shadow: 2px 2px 8px rgba(0, 0, 0, .4);
 %focus-outline {
   outline: 1px dotted; // for non-webkit browsers
   outline: auto 5px -webkit-focus-ring-color; // webkit default
-}
-
-@mixin rotate($deg, $speed, $origin: center) {
-  transform: rotate($deg);
-  transition: transform $speed;
-  transform-origin: $origin;
 }

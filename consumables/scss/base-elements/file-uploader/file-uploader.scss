@@ -3,12 +3,12 @@
 .bx--file {
 
   &__input {
-    @extend %hidden ;
+    @include hidden;
   }
 
   // Styled File Uploader - focus outline
   &__input:focus + &__label {
-    @extend %focus-outline;
+    @include focus-outline;
   }
 
   // Styled File Uploader

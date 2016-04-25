@@ -1,8 +1,9 @@
 %btn--base {
-  @extend %strong;
-  @extend %helvetica;
-  @extend %font-smoothing;
+  @include helvetica;
+  @include font-smoothing;
 
+  font-size: .875rem;
+  font-weight: 700;
   display: inline-block;
   height: rem(40px);
   padding: 0 1rem;
@@ -19,7 +20,7 @@
   }
 
   &:focus {
-    @extend %focus-outline;
+    @include focus-outline;
   }
 
   &::-moz-focus-inner {
