@@ -1,8 +1,9 @@
 @import 'vars';
 @import 'extends';
+@import 'mixins';
 
 .bx--footer {
-  @extend %footer;
+  @include footer;
 
   &__container {
     display: flex;
@@ -14,12 +15,12 @@
 }
 
 .bx--footer--config {
-  @extend %footer;
+  @include footer;
 
   display: flex;
 
   &__container {
-    @extend %form__container;
+    @include form__container;
 
     @media (max-width: 580px) {
       justify-content: flex-end;

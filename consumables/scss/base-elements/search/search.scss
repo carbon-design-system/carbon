@@ -1,5 +1,6 @@
 @import 'vars';
 @import 'extends';
+@import 'mixins';
 
 .bx--search {
   display: flex;
@@ -45,12 +46,12 @@
 
   &__icon {
     &--magnifier {
-      @extend %icon--search;
+      @include icon--search;
       left: .9em;
     }
 
     &--filter {
-      @extend %icon--search;
+      @include icon--search;
       right: .75em;
     }
   }

@@ -1,8 +1,4 @@
-//-------------------------
-// ☠️ Deprecated
-//-------------------------
-
-%icon--search {
+@mixin icon--search {
   fill: $color__navy-gray-7;
   width: 1em;
   height: 1em;

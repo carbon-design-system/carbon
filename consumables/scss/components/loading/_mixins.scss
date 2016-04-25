@@ -1,8 +1,4 @@
-//-------------------------
-// ☠️ Deprecated
-//-------------------------
-
-%animation--spin {
+@mixin animation--spin {
   /* animate the container */
   animation-name: rotate, rotate;
   animation-duration: 1000ms, 500ms;
@@ -18,7 +14,7 @@
   }
 }
 
-%animation--stop {
+@mixin animation--spin--stopping {
   /* animate the container */
   // Can't seem to break this into separate rules, getting weird animation bug
   animation: rotate-end-p1 700ms cubic-bezier(0, 0, .7, 1.1) forwards, rotate-end-p2 700ms cubic-bezier(0, 0, 1, 1) 700ms forwards;
@@ -34,7 +30,7 @@
 }
 
 /* ie only: stroke effects do not apply so opacity is used to fade in and out */
-%animation--start--ie {
+@mixin animation--spin--ie {
   animation-name: ie-init-rotate, rotate;
   animation-duration: 1000ms, 500ms;
   animation-timing-function: cubic-bezier(.6, 0, 1, 1), linear;
@@ -42,7 +38,7 @@
   animation-iteration-count: 1, infinite;
 }
 
-%animation--stop--ie {
+@mixin animation--spin--stopping--ie {
   animation-name: rotate-end-p1, ie-rotate-end-p2;
   animation-duration: 700ms, 700ms;
   animation-timing-function: cubic-bezier(0, 0, .7, 1.1), cubic-bezier(0, 0, 1, 1);

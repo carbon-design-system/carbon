@@ -43,11 +43,11 @@ buttons
 @import 'extends';
 
 .bx--btn {
-  @extend %btn--primary;
+  @include btn--primary;
 }
 
 .bx--btn--secondary {
-  @extend %btn--secondary;
+  @include btn--primary;
 }
 
 

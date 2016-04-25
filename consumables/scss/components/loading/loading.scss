@@ -1,5 +1,6 @@
 @import 'vars';
 @import 'keyframes';
+@import 'mixins';
 @import 'extends';
 
 .bx--loading {
@@ -17,19 +18,19 @@
 
   // Animation - Active (Default)
   &[data-state='active'] {
-    @extend %animation--spin;
+    @include animation--spin;
 
     &[data-ie='yes'] {
-      @extend %animation--spin--ie;
+      @include animation--spin--ie;
     }
   }
 
   // Animation - Inactive
   &[data-state='inactive'] {
-    @extend %animation--stop;
+    @include animation--spin--stopping;
 
     &[data-ie='yes'] {
-      @extend %animation--stop--ie;
+      @include animation--spin--stopping--ie;
     }
   }
 }
