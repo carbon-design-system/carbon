@@ -31,8 +31,10 @@ export default class Toolbars {
     }
 
     this.element.classList.toggle('show-search');
-    this.searchFieldNode.classList.toggle('show-search');
-    this.searchFieldNode.value = '';
+    if (this.searchFieldNode) {
+      this.searchFieldNode.classList.toggle('show-search');
+      this.searchFieldNode.value = '';
+    }
   }
 
   release() {
