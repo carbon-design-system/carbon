@@ -1,31 +1,89 @@
-@mixin btn--primary($background, $active-background, $color--text: $color__btn--text) {
-  color: $color--text;
-  background-color: $background;
+@mixin btn--base {
+  @include helvetica;
+  @include font-smoothing;
+
+  font-size: .875rem;
+  font-weight: 700;
+  display: inline-block;
+  height: rem(40px);
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition-duration: $transition--base;
+  transition-timing-function: ease-in;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+
+  &:focus {
+    @include focus-outline;
+  }
+
+  &::-moz-focus-inner {
+    // Buttons in Firefox have
+    // some intrinsic, browser-specific extra padding.
+    // This removes that. Discovered and fixed in #731
+    padding: 0;
+    border: 0;
+  }
+}
+
+
+@mixin btn--primary($bg: $color__btn--bg, $hover-bg: $color__btn--bg--hover, $text: $color__btn--text) {
+  @include btn--base;
+  color: $text;
+  background-color: $bg;
   border: 2px solid transparent;
 
   &:hover,
   &:focus {
-    background-color: $active-background;
+    background-color: $hover-bg;
 
     &:disabled {
-      background-color: $background;
+      background-color: $bg;
     }
   }
 }
 
-@mixin btn--secondary($active-background, $color--text: $active-background) {
-  color: $color--text;
+@mixin btn--secondary($hover-bg: $color__btn--bg, $text: $hover-bg) {
+  @include btn--base;
+  color: $text;
   background-color: transparent;
-  border: 2px solid $active-background;
+  border: 2px solid $hover-bg;
 
   &:hover,
   &:focus {
     color: $color__btn--text;
-    background-color: $active-background;
+    background-color: $hover-bg;
 
     &:disabled {
-      color: $color--text;
+      color: $text;
       background-color: transparent;
+    }
+  }
+}
+
+@mixin btn--danger {
+  @include btn--base;
+  color: $color__white;
+  background-color: transparent;
+  border-color: $color__white;
+  border: 2px solid currentColor;
+
+  &:hover,
+  &:focus {
+    color: $color__white;
+    border: 2px solid transparent;
+    background-color: $color__red-50; // white text on red 50 - AA a11y pass
+
+    &:disabled {
+      color: $color__white;
+      background-color: transparent;
+      border: 2px solid currentColor;
     }
   }
 }

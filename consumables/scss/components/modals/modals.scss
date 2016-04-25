@@ -41,7 +41,7 @@
     }
 
     &__save {
-      @extend %btn--primary;
+      @include btn--primary;
     }
   }
 

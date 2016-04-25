@@ -22,6 +22,8 @@
 // footer
 @import 'base-elements/footer/vars';
 @import 'base-elements/footer/extends';
+@import 'base-elements/footer/mixins';
+
 
 // links
 @import 'base-elements/links/vars';
@@ -31,6 +33,8 @@
 
 // search
 @import 'base-elements/search/vars';
+@import 'base-elements/search/extends';
+@import 'base-elements/search/mixins';
 
 // tables
 @import 'base-elements/tables/vars';

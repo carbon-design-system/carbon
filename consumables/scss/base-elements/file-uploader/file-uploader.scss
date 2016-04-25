@@ -29,7 +29,7 @@
 
     // "upload button"
     &:after {
-      @extend %btn--primary;
+      @include btn--primary;
       position: absolute;
       top: 0;
       right:0;

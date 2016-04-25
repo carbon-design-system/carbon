@@ -3,7 +3,7 @@
 @import 'extends';
 
 .bx--btn {
-  @extend %btn--primary;
+  @include btn--primary;
   // Light UI is not meant to be used yet until later
   // -------------------------------------------------
   // .light-ui & {
@@ -13,7 +13,7 @@
 }
 
 .bx--btn--secondary {
-  @extend %btn--secondary;
+  @include btn--secondary;
   // Light UI is not meant to be used yet until later
   // -------------------------------------------------
   // .light-ui & {
@@ -23,12 +23,12 @@
 }
 
 .bx--btn--danger {
-  @extend %btn--danger;
+  @include btn--danger;
 }
 
 .bx--btn--right-icon {
-  @extend %btn--base;
-  @include btn--primary($color__btn--bg, $color__btn--bg--hover);
+  @include btn--base;
+  @include btn--primary;
   border-color: transparent;
   padding-right: rem(6px);
   // Styles for browser compatibility

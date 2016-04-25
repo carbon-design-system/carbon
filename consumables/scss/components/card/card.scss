@@ -130,7 +130,7 @@
 
 // SERVICE CARD STYLES
 .bx--card-footer__credentials-button {
-  @extend %btn--primary;
+  @include btn--primary;
   @include type(rem(12px));
   margin-left: .5em;
 }
