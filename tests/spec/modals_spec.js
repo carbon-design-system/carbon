@@ -1,6 +1,7 @@
 import '../../consumables/js/polyfills/custom-event';
 import '../../consumables/js/polyfills/object-assign';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import promiseTryCatcher from '../utils/promise-try-catcher';
 import Modal from '../../consumables/js/es2015/modals';
@@ -24,6 +25,10 @@ describe('Test modal', function () {
       try {
         expect(modal.options).to.deep.equal({
           classVisible: 'is-visible',
+          eventBeforeShown: 'modal-beingshown',
+          eventAfterShown: 'modal-shown',
+          eventBeforeHidden: 'modal-beinghidden',
+          eventAfterHidden: 'modal-hidden',
         });
       } finally {
         modal.release();

@@ -17,6 +17,12 @@ export default class HeaderNav {
       selectorItem: '.taxonomy-item',
       selectorItemLink: '.taxonomy-item--taxonomy-menu',
       selectorLabel: '.taxonomy-item__label',
+      eventBeforeShown: 'header-beingshown',
+      eventAfterShown: 'header-shown',
+      eventBeforeHidden: 'header-beinghidden',
+      eventAfterHidden: 'header-hidden',
+      eventBeforeSelected: 'header-beingselected',
+      eventAfterSelected: 'header-selected',
     }, options);
 
     this.constructor.components.set(this.element, this);
@@ -61,8 +67,7 @@ export default class HeaderNav {
     }
 
     const launchingElement = event.currentTarget;
-    const typeSuffix = add ? 'shown' : 'hidden';
-    const eventStart = new CustomEvent(`header-being${typeSuffix}`, {
+    const eventStart = new CustomEvent(this.options[add ? 'eventBeforeShown' : 'eventBeforeHidden'], {
       bubbles: true,
       cancelable: true,
       detail: { launchingElement: launchingElement },
@@ -77,7 +82,7 @@ export default class HeaderNav {
     if (defaultNotPrevented) {
       this.element.classList[add ? 'add' : 'remove'](this.options.classActive);
       (this.element.classList.contains(this.options.classActive) ? this.menuNode : this.triggerNode).focus();
-      this.element.dispatchEvent(new CustomEvent(`header-${typeSuffix}`, {
+      this.element.dispatchEvent(new CustomEvent(this.options[add ? 'eventAfterShown' : 'eventAfterHidden'], {
         bubbles: true,
         cancelable: true,
         detail: { launchingElement: launchingElement },
@@ -87,7 +92,7 @@ export default class HeaderNav {
 
   select(event) {
     const activatedElement = event.currentTarget;
-    const eventStart = new CustomEvent('header-beingselected', {
+    const eventStart = new CustomEvent(this.options.eventBeforeSelected, {
       bubbles: true,
       cancelable: true,
       detail: {
@@ -108,7 +113,7 @@ export default class HeaderNav {
       if (this.triggerLabelNode) {
         this.triggerLabelNode.textContent = activatedElement.querySelector(this.options.selectorLabel).textContent;
       }
-      this.element.dispatchEvent(new CustomEvent('header-selected', {
+      this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
         bubbles: true,
         cancelable: true,
         detail: { itemElement: activatedElement },

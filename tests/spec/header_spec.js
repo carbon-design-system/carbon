@@ -30,6 +30,12 @@ describe('Test header', function () {
         selectorItem: '.taxonomy-item',
         selectorItemLink: '.taxonomy-item--taxonomy-menu',
         selectorLabel: '.taxonomy-item__label',
+        eventBeforeShown: 'header-beingshown',
+        eventAfterShown: 'header-shown',
+        eventBeforeHidden: 'header-beinghidden',
+        eventAfterHidden: 'header-hidden',
+        eventBeforeSelected: 'header-beingselected',
+        eventAfterSelected: 'header-selected',
       });
     });
   });
