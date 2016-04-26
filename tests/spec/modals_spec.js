@@ -354,7 +354,7 @@ describe('Test modal', function () {
     });
 
     after(function () {
-      context.remove();
+      context.release();
     });
   });
 });

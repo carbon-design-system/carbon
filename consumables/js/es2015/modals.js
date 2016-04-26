@@ -56,9 +56,7 @@ export default class Modal {
       };
       target.addEventListener('click', handler);
       return {
-        remove: () => {
-          target.removeEventListener('click', handler);
-        },
+        release: () => target.removeEventListener('click', handler),
       };
     }
   }
