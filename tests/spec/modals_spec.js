@@ -4,6 +4,7 @@ import Promise from 'bluebird'; // For testing on browsers not supporting Promis
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import promiseTryCatcher from '../utils/promise-try-catcher';
+import '../utils/es6-weak-map-global'; // For PhantomJS
 import Modal from '../../consumables/js/es2015/modals';
 
 describe('Test modal', function () {
@@ -229,15 +230,49 @@ describe('Test modal', function () {
     });
   });
 
-  describe('Launching button', function () {
+  describe('Automatic creation', function () {
+    let context;
     let element;
     let target;
     let spyFocus;
-    let modal;
 
     const events = new EventManager();
 
     before(function () {
+      context = Modal.init();
+    });
+
+    it(`Should do nothing if there is none of a button's target modal upon button click`, function () {
+      element = document.createElement('a');
+      document.body.appendChild(element);
+      expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true }))).to.be.true;
+    });
+
+    it(`Should throw if there are more than one of a button's target modal`, function () {
+      const className = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('a');
+      element.dataset.modalTarget = `.${className}`;
+
+      const targets = [... new Array(2)].map(() => {
+        const item = document.createElement('div');
+        item.className = className;
+        item.style.width = item.style.height = '200px';
+        return item;
+      });
+
+      document.body.appendChild(element);
+
+      try {
+        targets.forEach((item) => document.body.appendChild(item));
+        expect(() => {
+          element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        }).to.throw;
+      } finally {
+        targets.forEach((item) => document.body.removeChild(item));
+      }
+    });
+
+    it(`Should launch modal upon button click`, function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.modalTarget = `#${id}`;
@@ -246,31 +281,11 @@ describe('Test modal', function () {
       target.setAttribute('id', id);
       target.style.width = target.style.height = '200px';
 
+      spyFocus = sinon.spy(target, 'focus');
+
       document.body.appendChild(element);
       document.body.appendChild(target);
 
-      spyFocus = sinon.spy(target, 'focus');
-
-      modal = Modal.hook(element);
-    });
-
-    beforeEach(function () {
-      target.style.width = target.style.height = '200px';
-    });
-
-    it(`Should sanity check hook()'s arguments`, function () {
-      expect(() => {
-        Modal.hook();
-      }).to.throw(Error);
-    });
-
-    it(`Should have hook() prevent duplicate Modal instances for the same element`, function () {
-      const spyHookCloseActions = sinon.spy(Modal.prototype, 'hookCloseActions');
-      Modal.hook(element);
-      expect(spyHookCloseActions).not.have.been.called;
-    });
-
-    it(`Should launch modal upon button click`, function () {
       return new Promise((resolve, reject) => {
         events.on(target, 'modal-beingshown', promiseTryCatcher((e) => {
           expect(e.detail.launchingElement).to.equal(element);
@@ -280,33 +295,66 @@ describe('Test modal', function () {
             expect(spyFocus).have.been.calledOnce;
           }, resolve, reject), 0);
         });
-        expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).to.be.false;
+        expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.false;
+        expect(Modal.components.has(target)).to.be.true;
       });
     });
 
     it(`Shouldn't focus on modal unless its root element has an area`, function () {
+      const id = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('a');
+      element.dataset.modalTarget = `#${id}`;
+
+      target = document.createElement('div');
+      target.setAttribute('id', id);
       target.style.width = target.style.height = '0';
+
+      spyFocus = sinon.spy(target, 'focus');
+
+      document.body.appendChild(element);
+      document.body.appendChild(target);
+
       return new Promise((resolve, reject) => {
         events.on(target, 'modal-shown', () => {
           setTimeout(promiseTryCatcher(() => {
             expect(spyFocus).not.have.been.called;
           }, resolve, reject), 0);
         });
-        element.dispatchEvent(new CustomEvent('click'));
+        element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
       });
     });
 
+    it(`Shouldn't cancel event if the button is not <a>`, function () {
+      const id = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('button');
+      element.dataset.modalTarget = `#${id}`;
+
+      target = document.createElement('div');
+      target.setAttribute('id', id);
+      target.style.width = target.style.height = '200px';
+
+      document.body.appendChild(element);
+      document.body.appendChild(target);
+
+      expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.true;
+    });
+
     afterEach(function () {
-      target.classList.remove('is-visible');
-      spyFocus.reset();
+      if (spyFocus) {
+        spyFocus.restore();
+        spyFocus = null;
+      }
+      if (document.body.contains(target)) {
+        document.body.removeChild(target);
+      }
+      if (document.body.contains(element)) {
+        document.body.removeChild(element);
+      }
       events.reset();
     });
 
     after(function () {
-      modal.release();
-      spyFocus.restore();
-      document.body.removeChild(target);
-      document.body.removeChild(element);
+      context.remove();
     });
   });
 });
