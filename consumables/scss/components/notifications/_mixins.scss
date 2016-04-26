@@ -1,5 +1,11 @@
-@mixin notification--theme($color) {
-  .notification__title { color: $color; }
-  border-left: 6px solid $color;
+@mixin notification--base($color) {
+  @include font-smoothing;
+  background-color: $color__navy-gray-2;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
   color: $color;
+  padding: .3em 0 .3em .5em;
+  border-left: 6px solid $color;
+  border-right: 3px solid darken($color__navy-gray-2, 5);
 }
