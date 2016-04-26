@@ -126,7 +126,7 @@ describe('Test floating action button', function () {
       const elementInContainer = document.createElement('a');
 
       if (initContext) {
-        initContext.remove();
+        initContext.release();
         initContext = null;
       }
 
@@ -135,7 +135,7 @@ describe('Test floating action button', function () {
       container.appendChild(elementInContainer);
       document.body.appendChild(container);
       try {
-        FabButton.init(container).remove();
+        FabButton.init(container).release();
         elementInContainer.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(elementInContainer.dataset.state).not.to.equal('closed');
       } finally {
@@ -154,7 +154,7 @@ describe('Test floating action button', function () {
       }
       document.body.removeChild(element);
       if (initContext) {
-        initContext.remove();
+        initContext.release();
       }
     });
   });
