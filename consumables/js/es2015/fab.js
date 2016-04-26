@@ -28,7 +28,7 @@ export default class FabButton {
       target.addEventListener('click', handler);
       return {
         remove: () => {
-          document.removeEventListener('click', handler);
+          target.removeEventListener('click', handler);
         },
       };
     }

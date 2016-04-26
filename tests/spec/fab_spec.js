@@ -121,6 +121,28 @@ describe('Test floating action button', function () {
       }
     });
 
+    it(`Should provide a way to remove event listener`, function () {
+      const container = document.createElement('div');
+      const elementInContainer = document.createElement('a');
+
+      if (initContext) {
+        initContext.remove();
+        initContext = null;
+      }
+
+      elementInContainer.dataset.fab = '';
+      elementInContainer.dataset.state = 'open';
+      container.appendChild(elementInContainer);
+      document.body.appendChild(container);
+      try {
+        FabButton.init(container).remove();
+        elementInContainer.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        expect(elementInContainer.dataset.state).not.to.equal('closed');
+      } finally {
+        document.body.removeChild(container);
+      }
+    });
+
     afterEach(function () {
       element.dataset.state = 'open';
     });
