@@ -1,56 +1,41 @@
-@import 'vars';
 @import 'mixins';
 
 .bx--notification {
-  &--running { @include notification--theme($color__blue-30); }
-  &--danger { @include notification--theme($color__red-40); }
-  &--warning { @include notification--theme($color__orange-30); } // !temporary
-  &--misc { @include notification--theme($color__purple-40); } // !temporary
-  &--info { @include notification--theme($color__yellow-30); }
-}
+  // Theming mixins for notifitcations
+  &--danger  { @include notification--base($color__red-40);    }
+  &--running { @include notification--base($color__blue-30);   }
+  &--info    { @include notification--base($color__yellow-30); }
+  &--warning { @include notification--base($color__orange-30); }
+  &--misc    { @include notification--base($color__purple-40); }
 
-.bx--notification {
-  display: flex;
-
-  &--danger, &--running, &--warning, &--misc, &--info {
-    @include font-smoothing;
-    flex: 1;
-    padding: .3em 0 .3em .5em;
-    background-color: $color--notifications--bg;
-    border-right: 3px solid $color--notifications--border;
-
-    .bx--notification__title,
-    .bx--notification__subtitle,
-    .bx--notification__caption {
-      margin: .4em 0;
-    }
-
-    .bx--notification__title {
-      font-size: 1.5rem;
-    }
-
-    .bx--notification__subtitle {
-      margin-bottom: 1em;
-      color: $color__white;
-    }
-
-    .bx--notification__caption {
-      color: $color__white;
-    }
+  // Common styles for child elements
+  &__title {
+    margin: .4em 0;
+    font-size: 1.5rem;
   }
 
-  .bx--notification__close {
+  &__subtitle {
+    margin-top: .4em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1em;
+    color: $color__white;
+  }
+
+  &__caption {
+    margin: .4em 0;
+  }
+
+  &__close-button {
     background-color: $color__navy-gray-2;
     border: none;
+    cursor: pointer;
+    padding: .1em;
+  }
 
-    span {
-      padding: .1em;
-
-      svg {
-        fill: $close-button;
-        width: 22px;
-        height: 22px;
-      }
-    }
+  &__icon {
+    fill: $color__blue-20;
+    width: 22px;
+    height: 22px;
   }
 }
