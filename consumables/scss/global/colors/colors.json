@@ -67,15 +67,15 @@
       "scss": "$color__white"
     },
     {
-      "name": "Navy-Gray 9",
-      "hex": "#eff2f5",
-      "scss": "$color__navy-gray-9"
+      "name": "Navy-Gray 8",
+      "hex": "#dfe6eb",
+      "scss": "$color__navy-gray-8"
     },
     {
       "name": "Navy-Gray 9",
-      "hex": "#dfe6eb",
+      "hex": "#eff2f5",
       "scss": "$color__navy-gray-9"
-    },
+    }
   ],
   "accent-colors": [
     {
