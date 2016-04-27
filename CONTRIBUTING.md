@@ -89,6 +89,12 @@ If your change may hit some browser quirks, use `-b` option, like:
 > gulp test -b IE
 ```
 
+If you are very sure that your change affects a specific set of components, you can use `-f` option, like:
+
+```sh
+> gulp test -f tests/spec/fab_spec.js
+```
+
 Other options for testing are:
 
 * `-d`/`--debug`: Stop generating code coverage report. Useful to debug your code when running test.
