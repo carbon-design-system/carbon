@@ -1,6 +1,7 @@
 import '../polyfills/array-from';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
+import eventMatches from '../../js/polyfills/event-matches';
 
 export default class HeaderNav {
   constructor(element, options = {}) {
@@ -45,8 +46,33 @@ export default class HeaderNav {
     } else if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
       this.create(target, options);
     } else {
-      [... target.querySelectorAll('[data-nav-target]')].forEach(element => this.hook(element, options));
-      [... target.querySelectorAll('[data-nav]')].forEach(element => this.create(element, options));
+      const handler = (event) => {
+        const element = eventMatches(event, '[data-nav-target]');
+
+        if (element) {
+          const headerElements = [... element.ownerDocument.querySelectorAll(element.dataset.navTarget)];
+          if (headerElements.length > 1) {
+            throw new Error('Target header must be unique.');
+          }
+
+          if (headerElements.length === 1) {
+            if (element.tagName === 'A') {
+              event.preventDefault();
+            }
+            this.create(headerElements[0], options).toggleNav(event);
+          }
+        }
+      };
+
+      target.addEventListener('click', handler);
+      target.addEventListener('keydown', handler);
+
+      return {
+        release: () => {
+          target.removeEventListener('keydown', handler);
+          target.removeEventListener('click', handler);
+        },
+      };
     }
   }
 
@@ -62,11 +88,12 @@ export default class HeaderNav {
     } else {
       return;
     }
-    if (event.currentTarget.tagName === 'A') {
+
+    const launchingElement = eventMatches(event, '[data-nav-target]') || event.currentTarget;
+    if (launchingElement.tagName === 'A') {
       event.preventDefault();
     }
 
-    const launchingElement = event.currentTarget;
     const eventStart = new CustomEvent(this.options[add ? 'eventBeforeShown' : 'eventBeforeHidden'], {
       bubbles: true,
       cancelable: true,
@@ -75,7 +102,7 @@ export default class HeaderNav {
     const defaultNotPrevented = this.element.dispatchEvent(eventStart);
 
     if (add) {
-      this.triggerNode = event.currentTarget;
+      this.triggerNode = launchingElement;
       this.triggerLabelNode = this.triggerNode.querySelector(this.options.selectorTriggerLabel);
     }
 
