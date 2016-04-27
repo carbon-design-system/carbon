@@ -86,9 +86,9 @@ These classes can now be consumed in a project with named imports like this:
 import { FabButton, FileUploader } from './relative/path/to/index';
 ```
 
-Users can then choose how they initialize these classes.
+Users can then choose how they instantiate these classes.
 
-Automatically initialize (recommended)
+Automatically instantiate (recommended)
 ```js
 FabButton.init();
 FileUploader.init();
@@ -104,18 +104,20 @@ FileUploader.create(anotherElement);
 
 ```
 
+For more details on our Class API, see [examples]().
+
 ### ES5 (prototyping)
 
 ES5-compatible js files are also available for prototyping purposes.
 
 Include it in your HTML file as an external script.
-By default, the JavaScript will automatically initialize but you can turn off this feature by setting  `BluemixComponents.settings.disableAutoInit = true`.
+By default, the JavaScript will automatically instantiate but you can turn off this feature by setting  `BluemixComponents.settings.disableAutoInit = true`.
 
 ```html
 <script src="path/to/bluemix-components/consumables/js/es5/bluemix-components.min.js"></script>
 <!-- Disable Auto Init with this flag -->
-<!-- true = JavaScript will not initialize automatically -->
-<!-- false = JavaScript will initialize automatically -->
+<!-- true = JavaScript will not instantiate automatically -->
+<!-- false = JavaScript will instantiate automatically -->
 <script>
   BluemixComponents.settings.disableAutoInit = true;
 </script>
