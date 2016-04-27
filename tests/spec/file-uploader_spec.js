@@ -49,6 +49,26 @@ describe('Test file uploader', function () {
       expect(uploader.labelNode).to.equal(labelNode);
     });
 
+    it(`Should have options.labelSelector attribute win over data-label`, function () {
+      const ids = [
+        `__element_${Math.random().toString(36).substr(2)}`,
+        `__element_${Math.random().toString(36).substr(2)}`,
+      ];
+
+      const parentElement = document.createElement('div');
+      const element = document.createElement('div');
+      element.dataset.label = `#${ids[1]}`;
+
+      const labelNode = document.createElement('div');
+      labelNode.id = ids[0];
+
+      parentElement.appendChild(element);
+      parentElement.appendChild(labelNode);
+
+      const uploader = new FileUploader(element, { labelSelector: `#${ids[0]}` });
+      expect(uploader.labelNode).to.equal(labelNode);
+    });
+
     it(`Should use next sibling as the default label node`, function () {
       const parentElement = document.createElement('div');
       const element = document.createElement('div');
