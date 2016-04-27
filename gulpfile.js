@@ -14,6 +14,7 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
+const eslint = require('gulp-eslint');
 const sourcemaps = require('gulp-sourcemaps');
 const webpack = require('webpack');
 const gutil = require('gulp-util');
@@ -163,15 +164,40 @@ gulp.task('sass:demo', () => {
 //   });
 // });
 
+gulp.task('sass', ['sass:consumables', 'sass:demo']);
+
+/////////////////////////////
+// Lint
+/////////////////////////////
+
 // Temporary: gulp-sass-lint does not seem to be using our .sass-lint.yml
-// gulp.task('sass:lint', () => {
+// gulp.task('lint:sass', () => {
 //   return gulp.src('consumables/**/*.scss')
 //     .pipe(sassLint())
 //     .pipe(sassLint.format())
 //     .pipe(sassLint.failOnError());
 // });
 
-gulp.task('sass', ['sass:consumables', 'sass:demo']);
+gulp.task('lint:scripts', function () {
+  return gulp.src([
+      'consumables/js/{es2015,polyfills}/**/*.js',
+      '!**/examples/**/*.js',
+    ])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+    .pipe(eslint.results(function(results) {
+      var count = results.warningCount;
+      if (count > 0) {
+        throw new gutil.PluginError('gulp-eslint', {
+          name: 'ESLintWarning',
+          message: 'Has ' + count + ' warning' + (count > 1 ? 's' : ''),
+        });
+      }
+    }));
+});
+
+gulp.task('lint', [/*'lint:sass',*/ 'lint:scripts']);
 
 /////////////////////////////
 // Test
