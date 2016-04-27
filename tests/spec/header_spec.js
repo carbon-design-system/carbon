@@ -149,122 +149,216 @@ describe('Test header', function () {
     });
   });
 
-  describe('Launching button', function () {
-    const id = `__element_${Math.random().toString(36).substr(2)}`;
-
+  describe('Automatic creation', function () {
+    let context;
     let element;
     let target;
-    let targetMenu;
-    let spyFocusElement;
-    let spyFocusTargetMenu;
+    let spyFocus;
 
     const events = new EventManager();
 
     before(function () {
+      context = HeaderNav.init();
+    });
+
+    it(`Should do nothing if there is none of a button's target taxonomy menu upon button click`, function () {
       element = document.createElement('a');
-      element.setAttribute('data-nav-target', `#${id}`);
+      document.body.appendChild(element);
+      expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true }))).to.be.true;
+    });
+
+    it(`Should throw if there are more than one of a button's target taxonomy menu`, function () {
+      const className = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('a');
+      element.dataset.navTarget = `.${className}`;
+
+      const targets = [... new Array(2)].map(() => {
+        const item = document.createElement('div');
+        item.className = className;
+        item.style.width = item.style.height = '200px';
+        return item;
+      });
+
+      document.body.appendChild(element);
+
+      try {
+        targets.forEach((item) => document.body.appendChild(item));
+        expect(() => {
+          element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+        }).to.throw;
+      } finally {
+        targets.forEach((item) => document.body.removeChild(item));
+      }
+    });
+
+    it(`Should launch taxonomy menu upon button click`, function () {
+      const id = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('a');
+      element.dataset.navTarget = `#${id}`;
 
       target = document.createElement('div');
       target.setAttribute('id', id);
       target.style.width = target.style.height = '200px';
 
-      targetMenu = document.createElement('div');
+      const targetMenu = document.createElement('div');
       targetMenu.classList.add('taxonomy-menu');
       target.appendChild(targetMenu);
 
-      spyFocusElement = sinon.spy(element, 'focus');
-      spyFocusTargetMenu = sinon.spy(targetMenu, 'focus');
+      spyFocus = sinon.spy(targetMenu, 'focus');
 
       document.body.appendChild(element);
       document.body.appendChild(target);
 
-      HeaderNav.hook(element);
-    });
-
-    beforeEach(function () {
-      target.style.width = target.style.height = '200px';
-    });
-
-    it(`Should sanity check hook()'s arguments`, function () {
-      expect(() => {
-        HeaderNav.hook();
-      }).to.throw(Error);
-    });
-
-    it(`Should handle header nav's button for launching header nav`, function () {
       return new Promise((resolve, reject) => {
         events.on(target, 'header-beingshown', promiseTryCatcher((e) => {
           expect(e.detail.launchingElement).to.equal(element);
         }, reject));
         events.on(target, 'header-shown', () => {
           setTimeout(promiseTryCatcher(() => {
-            expect(spyFocusTargetMenu).have.been.calledOnce;
+            expect(spyFocus).have.been.calledOnce;
           }, resolve, reject), 0);
         });
-        expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).to.be.false;
+        expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.false;
+        expect(HeaderNav.components.has(target)).to.be.true;
       });
     });
 
     it(`Should handle header nav's button for closing header nav`, function () {
-      target.classList.add('taxonomy-nav--active');
+      const id = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('a');
+      element.dataset.navTarget = `#${id}`;
+
+      target = document.createElement('div');
+      target.setAttribute('id', id);
+      target.style.width = target.style.height = '200px';
+
+      const targetMenu = document.createElement('div');
+      targetMenu.classList.add('taxonomy-menu');
+      target.appendChild(targetMenu);
+
+      spyFocus = sinon.spy(element, 'focus');
+
+      document.body.appendChild(element);
+      document.body.appendChild(target);
 
       return new Promise((resolve, reject) => {
-        events.on(target, 'header-beinghidden', promiseTryCatcher((e) => {
-          expect(e.detail.launchingElement).to.equal(element);
+        events.on(target, 'header-shown', promiseTryCatcher(() => {
+          events.on(target, 'header-beinghidden', promiseTryCatcher((e) => {
+            expect(e.detail.launchingElement).to.equal(element);
+          }, reject));
+          events.on(target, 'header-hidden', () => {
+            setTimeout(promiseTryCatcher(() => {
+              expect(spyFocus).have.been.calledOnce;
+            }, resolve, reject), 0);
+          });
+          element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
         }, reject));
-        events.on(target, 'header-hidden', () => {
-          setTimeout(promiseTryCatcher(() => {
-            expect(spyFocusElement).have.been.calledOnce;
-          }, resolve, reject), 0);
-        });
-        expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).to.be.false;
+        element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
       });
     });
 
     it(`Should handle down key for lauching header nav`, function () {
+      const id = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('a');
+      element.dataset.navTarget = `#${id}`;
+
+      target = document.createElement('div');
+      target.setAttribute('id', id);
+      target.style.width = target.style.height = '200px';
+
+      const targetMenu = document.createElement('div');
+      targetMenu.classList.add('taxonomy-menu');
+      target.appendChild(targetMenu);
+
+      spyFocus = sinon.spy(targetMenu, 'focus');
+
+      document.body.appendChild(element);
+      document.body.appendChild(target);
+
       return new Promise((resolve, reject) => {
         events.on(target, 'header-beingshown', promiseTryCatcher((e) => {
           expect(e.detail.launchingElement).to.equal(element);
         }, reject));
         events.on(target, 'header-shown', () => {
           setTimeout(promiseTryCatcher(() => {
-            expect(spyFocusTargetMenu).have.been.calledOnce;
+            expect(spyFocus).have.been.calledOnce;
           }, resolve, reject), 0);
         });
-        expect(element.dispatchEvent(Object.assign(new CustomEvent('keydown', { cancelable: true }), { which: 40 }))).to.be.false;
+        expect(element.dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true, cancelable: true }), { which: 40 }))).to.be.false;
+        expect(HeaderNav.components.has(target)).to.be.true;
       });
     });
 
     it(`Should provide a way to cancel showing header nav`, function () {
+      const id = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('a');
+      element.dataset.navTarget = `#${id}`;
+
+      target = document.createElement('div');
+      target.setAttribute('id', id);
+      target.style.width = target.style.height = '200px';
+
+      const spyShown = sinon.spy();
+      events.on(target, 'header-shown', spyShown);
+
+      events.on(target, 'header-beingshown', (e) => {
+        e.preventDefault();
+      });
+
+      const targetMenu = document.createElement('div');
+      targetMenu.classList.add('taxonomy-menu');
+      target.appendChild(targetMenu);
+
+      spyFocus = sinon.spy(element, 'focus');
+
+      document.body.appendChild(element);
+      document.body.appendChild(target);
+
       return new Promise((resolve, reject) => {
-        events.on(target, 'header-beingshown', (e) => {
-          e.preventDefault();
-        });
-
-        const spyShown = sinon.spy();
-        events.on(target, 'header-shown', spyShown);
-
-        element.dispatchEvent(new CustomEvent('click', { cancelable: true }));
+        element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
 
         setTimeout(promiseTryCatcher(() => {
-          expect(spyFocusTargetMenu).not.have.been.called;
+          expect(spyFocus).not.have.been.called;
           expect(spyShown).not.have.been.called;
         }, resolve, reject), 200);
       });
     });
 
+    it(`Shouldn't cancel event if the button is not <a>`, function () {
+      const id = `__element_${Math.random().toString(36).substr(2)}`;
+      element = document.createElement('button');
+      element.dataset.navTarget = `#${id}`;
+
+      target = document.createElement('div');
+      target.setAttribute('id', id);
+      target.style.width = target.style.height = '200px';
+
+      const targetMenu = document.createElement('div');
+      targetMenu.classList.add('taxonomy-menu');
+      target.appendChild(targetMenu);
+
+      document.body.appendChild(element);
+      document.body.appendChild(target);
+
+      expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.true;
+    });
+
     afterEach(function () {
-      spyFocusTargetMenu.reset();
-      spyFocusElement.reset();
-      target.classList.remove('taxonomy-nav--active');
+      if (spyFocus) {
+        spyFocus.restore();
+        spyFocus = null;
+      }
+      if (document.body.contains(target)) {
+        document.body.removeChild(target);
+      }
+      if (document.body.contains(element)) {
+        document.body.removeChild(element);
+      }
       events.reset();
     });
 
     after(function () {
-      spyFocusTargetMenu.restore();
-      spyFocusElement.restore();
-      document.body.removeChild(target);
-      document.body.removeChild(element);
+      context.release();
     });
   });
 });
