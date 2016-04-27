@@ -1,8 +1,11 @@
 'use strict';
 
+var path = require('path');
+
 var cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
     b: 'browsers',
+    f: 'files',
     d: 'debug',
   },
   boolean: ['debug'],
@@ -14,7 +17,9 @@ module.exports = function (config) {
 
     frameworks: ['mocha', 'sinon-chai'],
 
-    files: [
+    files: cloptions.files ? (Array.isArray(cloptions.files) ? cloptions.files : [cloptions.files]).map(function (file) {
+      return path.relative(__dirname, path.resolve(__dirname, '..', file));
+    }) : [
       'spec/**/*.js',
     ],
 
