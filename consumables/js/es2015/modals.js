@@ -194,7 +194,7 @@ export default class Modal {
   }
 
   static hook() {
-    console.warn('Modals.hook() is deprecated. Use Modals.init() instead.');
+    console.warn('Modals.hook() is deprecated. Use Modals.init() instead.'); // eslint-disable-line no-console
   }
 }
 
