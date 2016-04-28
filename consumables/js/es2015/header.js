@@ -41,9 +41,7 @@ export default class HeaderNav {
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.navTarget !== undefined) {
-      this.hook(target, options);
-    } else if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
+    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
       this.create(target, options);
     } else {
       const handler = (event) => {
@@ -156,22 +154,8 @@ export default class HeaderNav {
     return this.components.get(element) || new this(element, options);
   }
 
-  static hook(element, options) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    const navs = [... element.ownerDocument.querySelectorAll(element.dataset.navTarget)].map((target) => {
-      return this.create(target, options);
-    });
-
-    ['keydown', 'click'].forEach((name) => {
-      element.addEventListener(name, (event) => {
-        navs.forEach((nav) => nav.toggleNav(event));
-      });
-    });
-
-    return navs;
+  static hook() {
+    console.warn('HeaderNav.hook() is deprecated. Use HeaderNav.init() instead.'); // eslint-disable-line no-console
   }
 }
 
