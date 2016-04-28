@@ -1,3 +1,7 @@
+// $color__dropdown--bg: $color__navy-gray-1;
 $color__dropdown--bg: $color__navy-gray-3;
-$color__dropdown--text: $color__blue-30;
+$color__dropdown--text: $color__blue-20;
+$color__dropdown--bg--hover: lighten($color__navy-gray-1, 5%);
+
+// Deprecated
 $color__dropdown--link: $color__blue-30;

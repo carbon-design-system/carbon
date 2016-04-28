@@ -1,12 +1,11 @@
-///////////////////////
-// Global
-///////////////////////
-
+//-------------------------
+// 🌍 Global
+//-------------------------
 @import 'global/global';
 
-///////////////////////
-// Base Elements
-///////////////////////
+//-------------------------
+// 🍅 Base Elements
+//-------------------------
 
 // buttons
 @import 'base-elements/buttons/vars';
@@ -18,12 +17,6 @@
 
 // file-uploader
 @import 'base-elements/file-uploader/vars';
-
-// footer
-@import 'base-elements/footer/vars';
-@import 'base-elements/footer/extends';
-@import 'base-elements/footer/mixins';
-
 
 // links
 @import 'base-elements/links/vars';
@@ -43,12 +36,9 @@
 @import 'base-elements/toggle/vars';
 
 
-///////////////////////
-// Components
-///////////////////////
-
-// notifications
-@import 'components/notifications/mixins';
+//-------------------------
+// 🍕 Components
+//-------------------------
 
 // card
 @import 'components/card/vars';
@@ -59,11 +49,6 @@
 @import 'components/content-switcher/extends';
 @import 'components/content-switcher/mixins';
 
-// data-module
-@import 'components/data-module/vars';
-@import 'components/data-module/mixins';
-@import 'components/data-module/extends';
-
 // detail-page-header
 @import 'components/detail-page-header/vars';
 @import 'components/detail-page-header/extends';
@@ -72,25 +57,6 @@
 // dropdown
 @import 'components/dropdown/vars';
 @import 'components/dropdown/extends';
-
-// fab-label
-@import 'components/fab-label/vars';
-@import 'components/fab-label/extends';
-
-// fab
-@import 'components/fab/vars';
-
-// taxonomy-item
-@import 'components/taxonomy-item/vars';
-@import 'components/taxonomy-item/mixins';
-
-// header
-@import 'components/header/vars';
-
-// item-list
-@import 'components/item-list/vars';
-@import 'components/item-list/mixins';
-@import 'components/item-list/extends';
 
 // loading
 @import 'components/loading/vars';
@@ -105,9 +71,52 @@
 @import 'components/modules/extends';
 @import 'components/modules/mixins';
 
+// notifications
+@import 'components/notifications/mixins';
+
 // overflow-menu
-@import 'components/tabs-nav/vars';
+@import 'components/overflow-menu/vars';
+
+// tabs
+@import 'components/tabs/vars';
 
 // tooltips
 @import 'components/tooltips/vars';
 @import 'components/tooltips/extends';
+
+//----------------------------
+// 🙈 Hidden (Not exposed on website)
+//----------------------------
+
+// footer
+@import 'base-elements/footer/vars';
+@import 'base-elements/footer/extends';
+
+// taxonomy-item
+@import 'components/taxonomy-item/vars';
+@import 'components/taxonomy-item/mixins';
+
+// header
+@import 'components/header/vars';
+
+// fab
+@import 'components/fab/vars';
+
+
+//-------------------------
+// ☠️ Deprecated
+//-------------------------
+
+// data-module
+@import 'components/data-module/vars';
+@import 'components/data-module/mixins';
+@import 'components/data-module/extends';
+
+// fab-label
+@import 'components/fab-label/vars';
+@import 'components/fab-label/extends';
+
+// item-list
+@import 'components/item-list/vars';
+@import 'components/item-list/mixins';
+@import 'components/item-list/extends';

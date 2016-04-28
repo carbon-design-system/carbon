@@ -1,27 +1,9 @@
 @import 'vars';
 
-.tabs {
+.bx--tabs {
   @include type('body');
   color: $color__tabs--text;
   background-color: $color__tabs--bg;
-
-  &__nav {
-    display: flex;
-    flex-direction: column;
-
-    @include breakpoint(bp--sm--major) {
-      @include type(1rem);
-      flex-direction: row;
-      margin-right: em(16px);
-      margin-left: em(16px);
-      background: none;
-    }
-
-    @include breakpoint(bp--lg--major) {
-      margin-left: 0;
-    }
-
-  }
 
   &__trigger {
     display: flex;
@@ -51,11 +33,25 @@
   @include breakpoint(bp--sm--major) {
     background: none;
   }
-}
 
-.nav {
+  &__nav {
+    display: flex;
+    flex-direction: column;
 
-  &__item {
+    @include breakpoint(bp--sm--major) {
+      @include type(1rem);
+      flex-direction: row;
+      margin-right: em(16px);
+      margin-left: em(16px);
+      background: none;
+    }
+
+    @include breakpoint(bp--lg--major) {
+      margin-left: 0;
+    }
+  }
+
+  &__nav-item {
     background: lighten($color__tabs--bg, 1);
 
     a {
@@ -93,8 +89,7 @@
   }
 }
 
-
-.selected {
+[data-state='selected'] {
   color: $color__tabs--text;
   border: none;
 
@@ -107,7 +102,7 @@
   }
 }
 
-.tabs--hidden {
+[data-state='hidden'] {
   display: none;
 
   @include breakpoint(bp--sm--major) {

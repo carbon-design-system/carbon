@@ -27,6 +27,8 @@ import Modal from './modals';
 import HeaderNav from './header';
 import Toolbars from './toolbars';
 import Loading from './loading';
+import Dropdown from './dropdown';
+
 
 const settings = {};
 
@@ -42,6 +44,7 @@ export {
   HeaderNav,
   Toolbars,
   Loading,
+  Dropdown,
 };
 
 const init = () => {
@@ -55,6 +58,7 @@ const init = () => {
     HeaderNav.init();
     Toolbars.init();
     Loading.init();
+    Dropdown.init();
   }
 };
 
