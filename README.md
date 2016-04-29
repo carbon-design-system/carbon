@@ -1,3 +1,5 @@
+[![Build Status](https://travis.innovate.ibm.com/Bluemix/bluemix-components.svg?token=PscWax4p1FECdA5aCxvd&branch=master)](https://travis.innovate.ibm.com/Bluemix/bluemix-components)
+
 # Bluemix Components
 
 **Component library for building websites and UIs for Atlas/Bluemix.**
