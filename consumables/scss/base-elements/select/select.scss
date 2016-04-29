@@ -1,6 +1,6 @@
 .bx--select {
   position: relative;
-  display: inline-block;
+  display: block;
 
   &__input {
     @include type(1rem);
