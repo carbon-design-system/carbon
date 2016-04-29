@@ -50,7 +50,7 @@ var BluemixComponents =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
+	exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 	
 	__webpack_require__(1);
 	
@@ -90,8 +90,22 @@ var BluemixComponents =
 	
 	var _loading2 = _interopRequireDefault(_loading);
 	
+	var _dropdown = __webpack_require__(15);
+	
+	var _dropdown2 = _interopRequireDefault(_dropdown);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// Base Elements & Components
+	// -------------
+	// - JavaScript classes for use with components and base-elements.
+	// - The following statements import classes from actual locations to
+	//   be consumed from this file instead of their actual locations.
+	
+	
+	var settings = {};
+	
+	// Export all vars/classes for consumption:
 	// ====================//
 	// Imports and Exports //
 	// ====================//
@@ -105,17 +119,6 @@ var BluemixComponents =
 	
 	// Polyfills
 	// -------------
-	
-	
-	var settings = {};
-	
-	// Export all vars/classes for consumption:
-	
-	// Base Elements & Components
-	// -------------
-	// - JavaScript classes for use with components and base-elements.
-	// - The following statements import classes from actual locations to
-	//   be consumed from this file instead of their actual locations.
 	exports.settings = settings;
 	exports.FabButton = _fab2.default;
 	exports.FileUploader = _fileUploader2.default;
@@ -126,6 +129,7 @@ var BluemixComponents =
 	exports.HeaderNav = _header2.default;
 	exports.Toolbars = _toolbars2.default;
 	exports.Loading = _loading2.default;
+	exports.Dropdown = _dropdown2.default;
 	
 	
 	var init = function init() {
@@ -139,6 +143,7 @@ var BluemixComponents =
 	    _header2.default.init();
 	    _toolbars2.default.init();
 	    _loading2.default.init();
+	    _dropdown2.default.init();
 	  }
 	};
 	
@@ -1173,7 +1178,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'hook',
 	    value: function hook() {
-	      console.warn('Modals.hook() is deprecated. Use Modals.init() instead.');
+	      console.warn('Modals.hook() is deprecated. Use Modals.init() instead.'); // eslint-disable-line no-console
 	    }
 	  }]);
 	
@@ -1221,6 +1226,8 @@ var BluemixComponents =
 	  value: true
 	});
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	__webpack_require__(6);
@@ -1228,6 +1235,12 @@ var BluemixComponents =
 	__webpack_require__(7);
 	
 	__webpack_require__(11);
+	
+	var _eventMatches = __webpack_require__(4);
+	
+	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -1291,11 +1304,12 @@ var BluemixComponents =
 	      } else {
 	        return;
 	      }
-	      if (event.currentTarget.tagName === 'A') {
+	
+	      var launchingElement = (0, _eventMatches2.default)(event, '[data-nav-target]') || event.currentTarget;
+	      if (launchingElement.tagName === 'A') {
 	        event.preventDefault();
 	      }
 	
-	      var launchingElement = event.currentTarget;
 	      var eventStart = new CustomEvent(this.options[add ? 'eventBeforeShown' : 'eventBeforeHidden'], {
 	        bubbles: true,
 	        cancelable: true,
@@ -1304,7 +1318,7 @@ var BluemixComponents =
 	      var defaultNotPrevented = this.element.dispatchEvent(eventStart);
 	
 	      if (add) {
-	        this.triggerNode = event.currentTarget;
+	        this.triggerNode = launchingElement;
 	        this.triggerLabelNode = this.triggerNode.querySelector(this.options.selectorTriggerLabel);
 	      }
 	
@@ -1366,17 +1380,42 @@ var BluemixComponents =
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.navTarget !== undefined) {
-	        this.hook(target, options);
-	      } else if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
 	        this.create(target, options);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-nav-target]'))).forEach(function (element) {
-	          return _this2.hook(element, options);
-	        });
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-nav]'))).forEach(function (element) {
-	          return _this2.create(element, options);
-	        });
+	        var _ret = function () {
+	          var handler = function handler(event) {
+	            var element = (0, _eventMatches2.default)(event, '[data-nav-target]');
+	
+	            if (element) {
+	              var headerElements = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.dataset.navTarget)));
+	              if (headerElements.length > 1) {
+	                throw new Error('Target header must be unique.');
+	              }
+	
+	              if (headerElements.length === 1) {
+	                if (element.tagName === 'A') {
+	                  event.preventDefault();
+	                }
+	                _this2.create(headerElements[0], options).toggleNav(event);
+	              }
+	            }
+	          };
+	
+	          target.addEventListener('click', handler);
+	          target.addEventListener('keydown', handler);
+	
+	          return {
+	            v: {
+	              release: function release() {
+	                target.removeEventListener('keydown', handler);
+	                target.removeEventListener('click', handler);
+	              }
+	            }
+	          };
+	        }();
+	
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	      }
 	    }
 	  }, {
@@ -1386,26 +1425,8 @@ var BluemixComponents =
 	    }
 	  }, {
 	    key: 'hook',
-	    value: function hook(element, options) {
-	      var _this3 = this;
-	
-	      if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-	        throw new TypeError('DOM element should be given to initialize this widget.');
-	      }
-	
-	      var navs = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.dataset.navTarget))).map(function (target) {
-	        return _this3.create(target, options);
-	      });
-	
-	      ['keydown', 'click'].forEach(function (name) {
-	        element.addEventListener(name, function (event) {
-	          navs.forEach(function (nav) {
-	            return nav.toggleNav(event);
-	          });
-	        });
-	      });
-	
-	      return navs;
+	    value: function hook() {
+	      console.warn('HeaderNav.hook() is deprecated. Use HeaderNav.init() instead.'); // eslint-disable-line no-console
 	    }
 	  }]);
 	
@@ -1615,6 +1636,120 @@ var BluemixComponents =
 	
 	
 	Loading.components = new WeakMap();
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(6);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Dropdown = function () {
+	  function Dropdown(element) {
+	    var _this = this;
+	
+	    _classCallCheck(this, Dropdown);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	
+	    this.element = element;
+	
+	    this.element.dataset.dropdown = '';
+	    this.element.dataset.state = 'closed';
+	    this.constructor.components.set(this.element, this);
+	
+	    this.element.ownerDocument.addEventListener('click', function (event) {
+	      return _this.toggle(event);
+	    });
+	    this.element.addEventListener('keypress', function (event) {
+	      return _this.toggle(event);
+	    });
+	    this.element.addEventListener('click', function (event) {
+	      return _this.selected(event);
+	    });
+	  }
+	
+	  _createClass(Dropdown, [{
+	    key: 'release',
+	    value: function release() {
+	      this.constructor.components.delete(this.element);
+	    }
+	
+	    // Open and close dropdown menu
+	
+	  }, {
+	    key: 'toggle',
+	    value: function toggle() {
+	      var isOfSelf = this.element.contains(event.target);
+	      var shouldBeOpen = isOfSelf && this.element.dataset.state !== 'open';
+	
+	      this.element.dataset.state = shouldBeOpen ? 'open' : 'closed';
+	    }
+	
+	    // Handles clicking on dropdown options.
+	    // * Change Dropdown text to selected option
+	    // * Remove selected option from options when selected.
+	
+	  }, {
+	    key: 'selected',
+	    value: function selected(event) {
+	      if (event.target.parentElement.dataset.option !== undefined) {
+	        this.element.firstElementChild.textContent = event.target.textContent;
+	        this.element.dataset.value = event.target.dataset.value;
+	
+	        if (this.selectedItem) {
+	          this.selectedItem.classList.remove('bx--dropdown--selected');
+	        }
+	
+	        event.target.classList.add('bx--dropdown--selected');
+	        this.selectedItem = event.target;
+	      }
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element) {
+	      return this.components.get(element) || new this(element);
+	    }
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this2 = this;
+	
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
+	        this.create(target);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-dropdown]'))).forEach(function (element) {
+	          return _this2.create(element);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return Dropdown;
+	}();
+	
+	exports.default = Dropdown;
+	
+	
+	Dropdown.components = new WeakMap();
 
 /***/ }
 /******/ ]);
