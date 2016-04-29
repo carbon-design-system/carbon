@@ -33,7 +33,7 @@
 }
 
 
-@mixin btn--primary($bg: $color__btn--bg, $hover-bg: $color__btn--bg--hover, $text: $color__btn--text) {
+@mixin btn--primary($bg: $color__blue-30, $hover-bg: $color__blue-20, $text: $color__blue-90) {
   @include btn--base;
   color: $text;
   background-color: $bg;
@@ -49,7 +49,7 @@
   }
 }
 
-@mixin btn--secondary($hover-bg: $color__btn--bg, $text: $hover-bg) {
+@mixin btn--secondary($hover-bg: $color__blue-30, $text: $hover-bg) {
   @include btn--base;
   color: $text;
   background-color: transparent;
