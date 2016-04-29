@@ -9,7 +9,7 @@
     @include font-smoothing;
     font-weight: 300;
     font-size: 2rem;
-    display: inline-block;
+    display: block;
     padding-bottom: 1em;
 
     &--hidden {
