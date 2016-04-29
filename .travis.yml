@@ -1,0 +1,9 @@
+language: node_js
+node_js: "4"
+before_install:
+  - if [[ `npm -v` != 3* ]]; then npm install -g npm@3; fi
+install:
+  - npm install
+script:
+  - npm run lint
+  - npm test
