@@ -1,7 +1,7 @@
 @mixin dropdown($text: $color__white) {
   position: relative;
   display: block;
-  background-color: $color__inputs;
+  background-color: $color__inputs--bg;
   width: 100%;
   cursor: pointer;
   color: $text;
