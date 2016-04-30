@@ -8,8 +8,8 @@ Loading.init();
   // Attempt to access instance for WeakMap with given element
   const instance = Loading.components.get(element);
 
-  // If instance, set to false when a process is finished (like a network request)
+  // If instance, set to false when a process is finished (like a network request) or failed
   if (instance) {
-    promiseNetworkRequest.then(() => { instance.set(false) });
+    promiseNetworkRequest.then(() => instance.set(false), () => instance.set(false));
   }
 });
