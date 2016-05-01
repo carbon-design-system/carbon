@@ -1,8 +1,8 @@
 language: node_js
 node_js: "4"
-before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; npm cache clean; fi
 install:
-  - npm install
+  - npm install || (cat npm-debug.log; false)
 script:
   - npm run lint
   - npm test
