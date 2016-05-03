@@ -43,13 +43,24 @@
   &__icon {
     vertical-align: middle;
     display: inline;
-    width: rem(24px);
-    height: rem(24px);
+    width: rem(18px);
+    height: rem(18px);
     margin-left: .5em;
     margin-right: .25em;
   }
 
   &__use {
     fill: $color__blue-90;
+  }
+}
+
+.bx--sets-of-buttons {
+
+  .bx--btn {
+    margin-left: 1em;
+  }
+
+  .bx--btn--secondary {
+    @include btn--secondary($color__navy-gray-8);
   }
 }
