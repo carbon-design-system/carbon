@@ -1,17 +1,39 @@
-.bx--list--unordered {
-  margin-left: 2em;
-  line-height: 1.5;
-
-  &__item {
-    list-style: initial;
+.bx--list {
+  // Base Styles for variations of .bx--list
+  &,
+  &--nested,
+  &--unordered,
+  &--ordered {
+    @include font-smoothing;
+    font-size: .889rem;
+    margin-left: 2em;
+    line-height: 1.75;
   }
-}
 
-.bx--list--ordered {
-  margin-left: 2em;
-  line-height: 1.5;
+  &--nested {
+    margin-left: 0;
+  }
 
   &__item {
+    font-weight: 700;
+    padding-left: .25em;
+  }
+
+  &--unordered &__item {
+    list-style-type: disc;
+  }
+
+  &--ordered &__item {
     list-style-type: decimal;
+  }
+
+  &--nested &__item {
+    list-style-type: none;
+    font-weight: 400;
+
+    &:before {
+      content: '-';
+      padding-right: 1em;
+    }
   }
 }
