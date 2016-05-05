@@ -1,10 +1,10 @@
 .bx--textarea {
 
   &__input {
-    @include type(1rem);
-
+    font-size: .889rem;
     display: block;
     font-family: inherit;
+    font-weight: 300;
     width: 100%;
     min-height: 9.375em;
     min-width: 9.375em;
@@ -17,6 +17,11 @@
 
     &:focus {
       @include focus-outline;
+      outline: auto 2px -webkit-focus-ring-color; // webkit default
+    }
+
+    &::-webkit-input-placeholder {
+      color: darken($color__navy-gray-8, 12%);
     }
   }
 }

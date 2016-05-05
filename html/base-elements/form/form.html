@@ -17,19 +17,19 @@
     <input id="unique-checkbox-1" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
     <label for="unique-checkbox-1" class="bx--checkbox__label">
       <span class="bx--checkbox__appearance"></span>
-      checkbox label text 1
+      Checkbox label text
     </label>
     <br>
-    <input id="unique-checkbox-2" class="bx--checkbox" type="checkbox" value="blue" name="checkbox">
+    <input id="unique-checkbox-2" class="bx--checkbox" type="checkbox" value="blue" name="checkbox" checked>
     <label for="unique-checkbox-2" class="bx--checkbox__label">
       <span class="bx--checkbox__appearance"></span>
-      checkbox label text 2
+      Checkbox label text
     </label>
     <br>
     <input disabled id="unique-checkbox-disabled" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
     <label for="unique-checkbox-disabled" class="bx--checkbox__label">
       <span class="bx--checkbox__appearance"></span>
-      checkbox label - disabled
+      Checkbox label text - Disabled
     </label>
   </fieldset>
 
@@ -72,19 +72,19 @@
     <input id="unique-radio-1" class="bx--radio" type="radio" value="red" name="radio">
     <label for="unique-radio-1" class="bx--radio__label">
       <span class="bx--radio__appearance"></span>
-      radio label text 1
+      Radio label text
     </label>
     <br>
-    <input id="unique-radio-2" class="bx--radio" type="radio" value="blue" name="radio">
+    <input id="unique-radio-2" class="bx--radio" type="radio" value="blue" name="radio" checked>
     <label for="unique-radio-2" class="bx--radio__label">
       <span class="bx--radio__appearance"></span>
-      radio label text 2
+      Radio label text
     </label>
     <br>
     <input disabled id="unique-radio-disabled" class="bx--radio" type="radio" value="blue" name="radio">
     <label for="unique-radio-disabled" class="bx--radio__label">
       <span class="bx--radio__appearance"></span>
-      radio label text - disabled
+      Radio label text - disabled
     </label>
   </fieldset>
 
@@ -112,6 +112,22 @@
     <div class="bx--select">
       <label for="select-id" class="bx--form__label">Select</label>
       <select id="select-id" class="bx--select__input">
+        <option class="bx--select__option" value="" disabled selected hidden>Pick an option</option>
+        <option class="bx--select__option" value="volvo">Volvo</option>
+        <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
+        <option class="bx--select__option" value="saab">Saab</option>
+        <option class="bx--select__option" value="opel">Opel</option>
+        <option class="bx--select__option" value="audi">Audi</option>
+      </select>
+      <svg class="bx--select__arrow">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+      </svg>
+    </div>
+    <br>
+    <div class="bx--select">
+      <label for="select-id" class="bx--form__label">Select</label>
+      <select id="select-id" class="bx--select__input" disabled>
+        <option class="bx--select__option" value="" disabled selected hidden>Pick an option</option>
         <option class="bx--select__option" value="volvo">Volvo</option>
         <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
         <option class="bx--select__option" value="saab">Saab</option>
@@ -127,15 +143,15 @@
   <!-- Text -->
   <fieldset class="bx--form__fieldset">
     <legend class="bx--form__legend">Text</legend>
-    <label for="text1" class="bx--form__label">Text Input - Label</label>
-    <input id="text1" type="text" class="bx--text__input">
+    <label for="text1" class="bx--form__label">Text Field Label:</label>
+    <input id="text1" type="text" class="bx--text__input" placeholder="Hint text here">
   </fieldset>
 
   <!-- Textarea -->
   <fieldset class="bx--form__fieldset">
     <legend class="bx--form__legend">Textarea</legend>
-    <label for="textarea1" class="bx--form__label">Textarea - Label</label>
-    <textarea id="textarea1" class="bx--textarea__input" rows="4" cols="50"></textarea>
+    <label for="textarea1" class="bx--form__label">Text Area Label:</label>
+    <textarea id="textarea1" class="bx--textarea__input" rows="4" cols="50" placeholder="Hint text here"></textarea>
   </fieldset>
 
   <button class="bx--btn" type="submit">Submit</button>
