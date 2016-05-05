@@ -9,7 +9,6 @@ export default class Dropdown {
     this.element = element;
 
     this.element.dataset.dropdown = '';
-    this.element.dataset.state = 'closed';
     this.constructor.components.set(this.element, this);
 
     this.element.ownerDocument.addEventListener('click', (event) => this.toggle(event));
@@ -39,9 +38,12 @@ export default class Dropdown {
   // Open and close dropdown menu
   toggle() {
     const isOfSelf = this.element.contains(event.target);
-    const shouldBeOpen = isOfSelf && this.element.dataset.state !== 'open';
 
-    this.element.dataset.state = shouldBeOpen ? 'open' : 'closed';
+    if (isOfSelf) {
+      this.element.classList.toggle('bx--dropdown--open');
+    } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
+      this.element.classList.remove('bx--dropdown--open');
+    }
   }
 
   // Handles clicking on dropdown options.
@@ -50,7 +52,7 @@ export default class Dropdown {
   selected(event) {
     if (event.target.parentElement.dataset.option !== undefined) {
       this.element.firstElementChild.textContent = event.target.textContent;
-      this.element.dataset.value = event.target.dataset.value;
+      this.element.dataset.value = event.target.parentElement.dataset.value;
 
       if (this.selectedItem) {
         this.selectedItem.classList.remove('bx--dropdown--selected');

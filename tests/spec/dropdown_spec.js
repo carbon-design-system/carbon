@@ -16,11 +16,11 @@ describe('Dropdown', function () {
       }).to.throw(Error);
     });
 
-    it(`Should instantiate with closed state`, function () {
+    it(`Should not instantiate with "open" stateful modifier class`, function () {
       const element = document.createElement('ul');
       new Dropdown(element);
       document.body.appendChild(element);
-      expect(element.dataset.state).to.equal('closed');
+      expect(element.classList.contains('bx--dropdown--open')).to.be.false;
     });
 
     it(`Should instantiate with data-dropdown attribute`, function () {
@@ -33,37 +33,38 @@ describe('Dropdown', function () {
     });
   });
 
-  describe('Toggling Dropdown: toggle()', function () {
+  describe('Toggle', function () {
     let dropdown;
     let element;
 
     before(function () {
       element = document.createElement('ul');
+      element.classList.add('bx--dropdown');
       dropdown = new Dropdown(element);
       document.body.appendChild(element);
     });
 
-    it(`Should turn to open state on click`, function () {
+    it(`Should add "open" stateful modifier class`, function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('open');
+      expect(element.classList.contains('bx--dropdown--open')).to.be.true;
+      expect(element.getAttribute('class')).to.equal('bx--dropdown bx--dropdown--open');
     });
 
-    it(`Should turn to closed state on click`, function () {
+    it(`Should remove "open" stateful modifier class (closed default state)`, function () {
+      element.classList.add('bx--dropdown--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('open');
-      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('closed');
+      expect(element.classList.contains('bx--dropdown--open')).to.be.false;
+      expect(element.getAttribute('class')).to.equal('bx--dropdown');
     });
 
     it(`Should always close dropdown when clicking document`, function () {
-      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('open');
+      element.classList.add('bx--dropdown--open');
       document.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('closed');
+      expect(element.getAttribute('class')).to.equal('bx--dropdown');
     });
 
     afterEach(function () {
-      element.dataset.state = 'closed';
+      element.classList.remove('bx--dropdown--open');
     });
 
     after(function () {
