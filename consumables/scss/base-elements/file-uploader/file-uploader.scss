@@ -12,14 +12,15 @@
 
   // Styled File Uploader
   &__label {
-    @include type(1rem);
+    @include type(.889rem);
     position: relative;
     display: block;
     width: 100%;
     min-width: 9.375em;
-    padding: .75em;
+    padding: .9em;
     margin: .25em 0;
-    color: $color__white;
+    font-weight: 200;
+    color: $color__navy-gray-8;
     background-color: $color__inputs--bg;
     border: none;
     border-radius: 0;
@@ -33,7 +34,8 @@
       top: 0;
       right:0;
       height: em(34px);
-      padding-top: .35em;
+      padding-bottom: .2em;
+      padding-top: .2em;
       line-height: 2;
       text-transform: capitalize;;
       content: 'Choose Files';
