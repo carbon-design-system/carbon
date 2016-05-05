@@ -1,20 +1,30 @@
 .bx--text {
 
   &__input {
-    @include type(1rem);
-
+    font-size: .889rem;
     display: block;
     width: 100%;
     min-width: 9.375em;
-    padding: .5em 0 .5em 1em;
+    padding: .825em 0 .825em 1em;
+    font-weight: 300;
     margin: .25em 0;
     color: $color__white;
     background-color: $color__inputs--bg;
     border: none;
     border-radius: 0;
 
+    &::-webkit-input-placeholder {
+      color: darken($color__navy-gray-8, 12%);
+    }
+
     &:focus {
       @include focus-outline;
+      outline: auto 2px -webkit-focus-ring-color; // webkit default
+    }
+
+    &:disabled {
+      opacity: .5;
+      cursor: not-allowed;
     }
   }
 }
