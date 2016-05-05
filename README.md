@@ -1,17 +1,12 @@
-[![Build Status](https://travis.innovate.ibm.com/Bluemix/bluemix-components.svg?token=PscWax4p1FECdA5aCxvd&branch=master)](https://travis.innovate.ibm.com/Bluemix/bluemix-components)
-
 # Bluemix Components
+
+[![Build Status](https://travis.innovate.ibm.com/Bluemix/bluemix-components.svg?token=PscWax4p1FECdA5aCxvd&branch=master)](https://travis.innovate.ibm.com/Bluemix/bluemix-components)
 
 **Component library for building websites and UIs for Atlas/Bluemix.**
 
 Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable HTML and Sass partials they can use for building websites and user-interfaces for Bluemix.
 
 The aim is for every developer to use consistent markup, styles, and behavior in their prototype and production work.
-
-Bluemix Components comes bundled with these dependencies:
-
-- [IBM Design Colors](https://github.com/IBM-Design/colors): A SCSS file with IBM Design Colors.
-- [Bluemix Icons](https://github.ibm.com/Bluemix/bluemix-icons): A SCSS file with icon classes using SVG.
 
 ## Install
 
@@ -27,8 +22,8 @@ npm install -g bower
 
 > **Mac & Unix users:** you can do the below four steps all at once - copy and paste the following into your terminal:
 
-> ```bash
-touch .bowerrc && echo '{ "registry": "http://x1showcase.emmlabs.ibm.com:5678/" }' > .bowerrc && bower init && bower install bluemix-components --save
+> ```sh
+touch .bowerrc && echo '{ "registry": "http://9.37.228.216:5678/" }' > .bowerrc && bower init && bower install bluemix-components --save
 ```
 
 Initialize a **bower.json** file:
@@ -38,12 +33,12 @@ bower init
 
 Create a **.bowerrc** file:
 ```json
-{ "registry": "http://x1showcase.emmlabs.ibm.com:5678/" }
+{ "registry": "http://9.37.228.216:5678/" }
 ```
 
 Install the bower package:
 
-```bash
+```sh
 bower install bluemix-components --save
 ```
 
@@ -52,7 +47,6 @@ bower install bluemix-components --save
 Go to [releases](https://github.ibm.com/Bluemix/bluemix-components/releases), find the version you want to use and download the source code as a `.zip` or `tar.gz` file.
 
 ![download-gif](https://media.github.ibm.com/user/76/files/159ed244-fdb9-11e5-9809-f7cd22e36217)
-
 
 
 ## Usage
