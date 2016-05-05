@@ -12,25 +12,27 @@
   }
 
   &__input {
-    @include type(.875rem);
-    flex: 2;
+    @include type(.889rem);
+    width: 100%;
     padding: 1em 1em 1em 2.5em;
     color: $color__white;
     background-color: $color__inputs--bg;
     border: none;
     appearance: none;
+    z-index: z('overflowOptions');
 
     &:focus {
       @include focus-outline;
     }
 
     &::placeholder {
+      @include font-smoothing;
       font-style: italic;
+      color: darken($color__navy-gray-8, 15%);
     }
 
     @include breakpoint(bp--sm--major) {
       font-size: 1rem;
-      font-weight: 500;
     }
 
     // light ui styles intentionally commented out for now
@@ -47,27 +49,41 @@
   &__icon {
     &--magnifier {
       @include icon--search;
-      left: .9em;
+      width: 1.2em;
+      height: 1.2em;
+      left: .75em;
+      top: .85em;
+
+      @include breakpoint(500px) {
+        width: 1.4em;
+        height: 1.4em;
+      }
     }
 
     &--filter {
       @include icon--search;
-      right: .75em;
+      right: .85em;
+      width: 1em;
+      height: 1em;
+      transition-duration: .25s;
+      top: 1em;
+
+      @include breakpoint(500px) {
+        width: 1em;
+        height: 1em;
+      }
     }
   }
 
   &__filter {
     @include type(1rem);
     padding: 1.4em;
-    margin-left: 1em;
-    font-weight: bold;
-    color: $color__white;
+    font-weight: 600;
+    color: $color__navy-gray-8;
     cursor: pointer;
     background-color: $color--filter-bg;
     border: none;
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: relative;
     transition-duration: .25s;
 
     @include breakpoint(bp--sm--major) {
@@ -78,6 +94,11 @@
     &:hover,
     &:focus {
       background-color: mix($color__white, $color--filter-bg, 10%);
+      color: $color__white;
+
+      .bx--search__icon--filter {
+        fill: $color__white;
+      }
     }
 
     // light ui styles commented out for now
@@ -100,4 +121,32 @@
       }
     }
   }
+}
+
+// Styles for Firefox
+
+body:not(:-moz-handler-blocked) .bx--search__filter {
+  padding: 1.7em 2.5em 1em 0;
+
+  @include breakpoint(bp--sm--major) {
+    padding: .86em 2.5em 1em 0;
+  }
+}
+
+body:not(:-moz-handler-blocked) .bx--search__icon--filter {
+  top: .89em;
+
+  @include breakpoint(bp--sm--major) {
+    top: 1em;
+  }
+}
+
+body:not(:-moz-handler-blocked) .bx--search__input {
+  padding-left: 2.75em;
+}
+
+// Styles for Safari
+
+_::-webkit-full-page-media, _:future, :root .bx--search__input {
+  padding-right: 0;
 }
