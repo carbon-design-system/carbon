@@ -1,4 +1,4 @@
 {
-  "registry": "http://x1showcase.emmlabs.ibm.com:5678/"
+  "registry": "http://9.37.228.216:5678/",
+  "timeout": 300000
 }
-
