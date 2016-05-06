@@ -1,7 +1,6 @@
 <div class="bx--card">
-
+  <!-- Card Overview -->
   <div class="bx--card__card-overview">
-
     <div class="bx--card-overview__about">
       <div class="bx--about__icon">
         <svg class="bx--about__icon--img">
@@ -14,8 +13,8 @@
         <a class="bx--about__title--link">Image: Ubuntu 14.04</a>
       </div>
     </div>
-
-    <div data-overflow-menu data-state="closed" class="bx--overflow-menu">
+    <!-- OverflowMenu -->
+    <div data-overflow-menu class="bx--overflow-menu">
       <svg class="bx--overflow-menu__icon">
         <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#app-actions--overflow_menu_icon"></use>
       </svg>
@@ -25,29 +24,18 @@
         <li><button type="button" class="bx--overflow-menu__btn">Restart App</button></li>
         <li><button type="button" class="bx--overflow-menu__btn">Edit Routes and Access</button></li>
         <hr/>
-        <li><button type="button" class="bx--overflow-menu__btn" data-state="delete">Delete App</button></li>
+        <li><button type="button" class="bx--overflow-menu__btn--delete">Delete App</button></li>
       </ul>
     </div>
-
   </div>
-
+  <!-- Card Footer -->
   <div class="bx--card__card-footer">
-
     <div class="bx--card-footer__app-status">
-      <div class="bx--card-footer__app-status--running active">
-        Running
-      </div>
-      <div class="bx--card-footer__app-status--not-running">
-        Not Running
-      </div>
-      <div class="bx--card-footer__app-status--stopped">
-        Stopped
-      </div>
-      <div class="bx--card-footer__app-status--limited">
-        Limited
-      </div>
+      <div class="bx--card-footer__app-status--running active">Running</div>
+      <div class="bx--card-footer__app-status--not-running">Not Running</div>
+      <div class="bx--card-footer__app-status--stopped">Stopped</div>
+      <div class="bx--card-footer__app-status--limited">Limited</div>
     </div>
-
     <div class="bx--card-footer__app-actions">
       <button class="bx--app-actions__button" id="restart-app">
         <svg class="bx--app-actions__button--icon">
@@ -55,7 +43,5 @@
         </svg>
       </button>
     </div>
-
   </div>
-
 </div>

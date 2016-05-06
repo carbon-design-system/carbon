@@ -7,7 +7,6 @@ export default class OverflowMenu {
     }
 
     this.element = element;
-    this.element.dataset.state = 'closed';
     this.constructor.components.set(this.element, this);
     this.element.ownerDocument.addEventListener('click', (event) => this.handleDocumentClick(event));
   }
@@ -29,13 +28,17 @@ export default class OverflowMenu {
 
   handleDocumentClick(event) {
     const isOfSelf = this.element.contains(event.target);
-    const shouldBeOpen = isOfSelf && this.element.dataset.state !== 'open';
+    const shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
 
     if (isOfSelf && this.element.tagName === 'A') {
       event.preventDefault();
     }
 
-    this.element.dataset.state = shouldBeOpen ? 'open' : 'closed';
+    if (shouldBeOpen) {
+      this.element.classList.toggle('bx--overflow-menu--open');
+    } else {
+      this.element.classList.remove('bx--overflow-menu--open');
+    }
   }
 
   release() {

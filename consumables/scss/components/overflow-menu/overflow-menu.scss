@@ -39,7 +39,8 @@
     }
   }
 
-  &__btn {
+  &__btn,
+  &__btn--delete {
     @include helvetica;
     width: 100%;
     padding: .5em 1em;
@@ -55,8 +56,8 @@
       background: $color--list-bg--hover;
     }
 
-    &[data-state='delete']:hover {
-      background: $color__red-40;
+    &--delete:hover {
+      background-color: $color__red-40;
     }
   }
 
@@ -72,7 +73,7 @@
 
   &:focus,
   &:active,
-  &[data-state='open'] {
+  &.bx--overflow-menu--open {
     .bx--overflow-menu__icon {
       color: $color__white;
     }

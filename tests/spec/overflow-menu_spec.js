@@ -22,7 +22,6 @@ describe('Test Overflow menu', function () {
     let element;
     before(function () {
       element = document.createElement('a');
-      element.dataset.state = 'closed';
       menu = new OverflowMenu(element);
       document.body.appendChild(element);
     });
@@ -32,20 +31,18 @@ describe('Test Overflow menu', function () {
       expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.false;
     });
 
-    it(`Sets data-state to "open" on click event`, function () {
+    it(`Should set and remove "bx--overflow-menu--open" class on click event`, function () {
+      // Initial click to open overflow-menu:
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('open');
-    });
+      expect(element.classList.contains('bx--overflow-menu--open')).to.be.true;
 
-    it(`Sets data-state to "open", then sets it to "closed" on click events`, function () {
+      // Secondary click to close overflow-menu:
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('open');
-      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('closed');
+      expect(element.classList.contains('bx--overflow-menu--open')).to.be.false;
     });
 
     afterEach(function () {
-      element.dataset.state = 'closed';
+      element.classList.remove('bx--overflow-menu--open');
     });
 
     after(function () {
@@ -66,9 +63,6 @@ describe('Test Overflow menu', function () {
       element1.dataset.overflowMenu = '';
       element2.dataset.overflowMenu = '';
       element3.dataset.overflowMenu = '';
-      element1.dataset.state = 'closed';
-      element2.dataset.state = 'closed';
-      element3.dataset.state = 'closed';
       new OverflowMenu(element1);
       new OverflowMenu(element2);
       new OverflowMenu(element3);
@@ -79,23 +73,23 @@ describe('Test Overflow menu', function () {
 
     it('Should open one menu on a single click event', function () {
       element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element1.dataset.state).to.equal('open');
-      expect(element2.dataset.state).to.equal('closed');
-      expect(element3.dataset.state).to.equal('closed');
+      expect(element1.classList.contains('bx--overflow-menu--open')).to.be.true;
+      expect(element2.classList.contains('bx--overflow-menu--open')).to.be.false;
+      expect(element3.classList.contains('bx--overflow-menu--open')).to.be.false;
     });
 
     it('Should open one menu on multiple click events', function () {
       element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       element2.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element1.dataset.state).to.equal('closed');
-      expect(element2.dataset.state).to.equal('open');
-      expect(element3.dataset.state).to.equal('closed');
+      expect(element1.classList.contains('bx--overflow-menu--open')).to.be.false;
+      expect(element2.classList.contains('bx--overflow-menu--open')).to.be.true;
+      expect(element3.classList.contains('bx--overflow-menu--open')).to.be.false;
     });
 
     afterEach(function () {
-      element1.dataset.state = 'closed';
-      element2.dataset.state = 'closed';
-      element3.dataset.state = 'closed';
+      element1.classList.remove('bx--overflow-menu--open');
+      element2.classList.remove('bx--overflow-menu--open');
+      element3.classList.remove('bx--overflow-menu--open');
     });
 
     after(function () {
