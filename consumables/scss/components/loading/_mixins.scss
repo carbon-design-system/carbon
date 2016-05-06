@@ -1,12 +1,16 @@
-@mixin animation--spin {
-  /* animate the container */
+//-------------------------
+// Animations - Loading
+//-------------------------
+
+@mixin animation__loading--spin {
+  // Animate the container
   animation-name: rotate, rotate;
   animation-duration: 1000ms, 500ms;
   animation-timing-function: cubic-bezier(.6, 0, 1.0, 1.0), linear;
   animation-fill-mode: forwards, none;
   animation-iteration-count: 1, infinite;
 
-  /* animate the stroke */
+  // Animate the stroke
   & svg circle {
     animation-name: init-stroke;
     animation-duration: 1000ms;
@@ -14,12 +18,11 @@
   }
 }
 
-@mixin animation--spin--stopping {
-  /* animate the container */
-  // Can't seem to break this into separate rules, getting weird animation bug
+@mixin animation__loading--stop {
+  // Animate the container
   animation: rotate-end-p1 700ms cubic-bezier(0, 0, .7, 1.1) forwards, rotate-end-p2 700ms cubic-bezier(0, 0, 1, 1) 700ms forwards;
 
-  /* animate the stroke */
+  // Animate the stroke
   & svg circle {
     animation-name: stroke-end;
     animation-duration: 700ms;
@@ -29,8 +32,12 @@
   }
 }
 
-/* ie only: stroke effects do not apply so opacity is used to fade in and out */
-@mixin animation--spin--ie {
+//--------------------------------
+// Animations - Loading (IE only)
+//--------------------------------
+// IE only: stroke effects do not apply so opacity is used to fade in and out
+
+@mixin animation__loading--spin--ie {
   animation-name: ie-init-rotate, rotate;
   animation-duration: 1000ms, 500ms;
   animation-timing-function: cubic-bezier(.6, 0, 1, 1), linear;
@@ -38,7 +45,7 @@
   animation-iteration-count: 1, infinite;
 }
 
-@mixin animation--spin--stopping--ie {
+@mixin animation__loading--stop--ie {
   animation-name: rotate-end-p1, ie-rotate-end-p2;
   animation-duration: 700ms, 700ms;
   animation-timing-function: cubic-bezier(0, 0, .7, 1.1), cubic-bezier(0, 0, 1, 1);

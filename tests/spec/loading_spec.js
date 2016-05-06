@@ -15,7 +15,7 @@ describe('Test Loading', function () {
       }).to.throw(Error);
     });
 
-    it(`Should default state to active`, function () {
+    it(`Should set default state to active`, function () {
       const spinner = new Loading(document.createElement('div'));
       expect(spinner.isActive()).to.equal(true);
     });
@@ -24,6 +24,12 @@ describe('Test Loading', function () {
       const options = { active: false };
       const spinner = new Loading(document.createElement('div'), options);
       expect(spinner.isActive()).to.equal(false);
+    });
+
+    it(`Should set class to 'bx--loading--ie'`, function () {
+      const isIE = window.ActiveXObject || 'ActiveXObject' in window;
+      const spinner = new Loading(document.createElement('div'));
+      if (isIE) expect(spinner.element.classList.contains('bx--loading--ie')).to.be.true;
     });
   });
 
@@ -37,30 +43,33 @@ describe('Test Loading', function () {
     it('Should set state', function () {
       const spinner = new Loading(document.createElement('div'));
       spinner.set(true);
-      expect(spinner.isActive()).to.equal(true);
+      expect(spinner.isActive()).to.be.true;
       spinner.set(false);
-      expect(spinner.isActive()).to.equal(false);
+      expect(spinner.isActive()).to.be.false;
     });
 
-    it('Should return self after setting', function () {
+    it('Should return self', function () {
       const spinner = new Loading(document.createElement('div'));
       expect(spinner.set(true)).to.equal(spinner);
     });
 
-    it('Should set data-ie attributes of DOM element', function () {
+    it(`Should remove and add 'bx--loading--stop' class attribute of DOM element`, function () {
+      const isIE = window.ActiveXObject || 'ActiveXObject' in window;
+      const spinner = new Loading(document.createElement('div'));
+      spinner.set(false);
+      expect(spinner.element.classList.contains('bx--loading--stop')).to.be.true;
+      if (isIE) expect(spinner.element.classList.contains('bx--loading--stop--ie')).to.be.true;
+
+      spinner.set(true);
+      expect(spinner.element.classList.contains('bx--loading--stop')).to.be.false;
+      if (isIE) expect(spinner.element.classList.contains('bx--loading--stop--ie')).to.be.false;
+    });
+
+    it(`Should set 'bx--loading--ie' attributes of DOM element`, function () {
       const isIE = window.ActiveXObject || 'ActiveXObject' in window;
       const spinner = new Loading(document.createElement('div'));
       spinner.set(true);
-      expect(spinner.element.dataset.ie).to.equal('no');
-      if (isIE) expect(spinner.element.dataset.ie).to.equal('yes');
-    });
-
-    it('Should set data-state attributes of DOM element', function () {
-      const spinner = new Loading(document.createElement('div'));
-      spinner.set(true);
-      expect(spinner.element.dataset.state).to.equal('active');
-      spinner.set(false);
-      expect(spinner.element.dataset.state).to.equal('inactive');
+      if (isIE) expect(spinner.element.classList.contains('bx--loading--ie')).to.be.true;
     });
   });
 

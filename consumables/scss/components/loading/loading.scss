@@ -4,9 +4,11 @@
 @import 'extends';
 
 .bx--loading {
+  @include animation__loading--spin;
   width: $loading__size;
   height: $loading__size;
 
+  // Animation (Spin by default)
   &__svg {
     fill: transparent;
     stroke: $color__teal-30;
@@ -16,21 +18,16 @@
     stroke-dashoffset: $loading__gap;
   }
 
-  // Animation - Active (Default)
-  &[data-state='active'] {
-    @include animation--spin;
-
-    &[data-ie='yes'] {
-      @include animation--spin--ie;
-    }
+  &.bx--loading--stop {
+    @include animation__loading--stop;
   }
 
-  // Animation - Inactive
-  &[data-state='inactive'] {
-    @include animation--spin--stopping;
+  // Animation for IE (Spin by default)
+  &.bx--loading--ie {
+    @include animation__loading--spin--ie;
+  }
 
-    &[data-ie='yes'] {
-      @include animation--spin--stopping--ie;
-    }
+  &.bx--loading--stop--ie {
+    @include animation__loading--stop--ie;
   }
 }

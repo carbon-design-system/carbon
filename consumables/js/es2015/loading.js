@@ -8,17 +8,15 @@ export default class Loading {
     this.active = 'active' in options ? options.active : true;
     this.ie = false;
 
-    // check if browser is Internet Explorer
+    // Check if browser is Internet Explorer
     if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
       this.ie = true;
-      this.element.dataset.ie = 'yes';
-    } else {
-      this.element.dataset.ie = 'no';
+      this.element.classList.add('bx--dropdown--ie');
     }
 
     this.constructor.components.set(this.element, this);
 
-    // initialize spinner
+    // Initialize spinner
     this.set(this.active);
   }
 
@@ -44,10 +42,16 @@ export default class Loading {
 
     this.active = active;
 
-    if (this.active) {
-      this.element.dataset.state = 'active';
-    } else {
-      this.element.dataset.state = 'inactive';
+    switch (this.active) {
+      case true:
+        if (this.ie) this.element.classList.remove('bx--loading--stop--ie');
+        this.element.classList.remove('bx--loading--stop');
+        break;
+      case false:
+        if (this.ie) this.element.classList.add('bx--loading--stop--ie');
+        this.element.classList.add('bx--loading--stop');
+        break;
+      default: break;
     }
 
     return this;
