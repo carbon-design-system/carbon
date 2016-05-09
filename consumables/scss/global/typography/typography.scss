@@ -3,33 +3,95 @@
 @import 'extends';
 @import 'mixins';
 
-h1, %h1 {
-  @include type('h1');
+h1 {
+  @include font-size('32');
+  @include line-height('heading');
+  @include letter-spacing;
 }
 
-h2, %h2 {
-  @include type('h2');
+h2 {
+  @include font-size('26');
+  @include line-height('heading');
+  @include letter-spacing;
 }
 
-h3, %h3 {
-  @include type('h3');
+h3 {
+  @include font-size('20');
+  @include line-height('heading');
+  @include letter-spacing;
 }
 
-p, %p {
-  @include type('body');
-  line-height: 1.2;
+h4 {
+  @include font-size('18');
+  @include line-height('heading');
 }
 
-strong, %strong {
-  @include type('body');
-  font-weight: bold;
+h5 {
+  @include font-size('16');
+  @include line-height('heading');
 }
 
-em, %em {
-  @include type('body');
+h6 {
+  @include font-size('14');
+  @include line-height('heading');
+}
+
+p {
+  @include font-size('16');
+  @include line-height('body');
+}
+
+strong {
+  @include font-smoothing;
+  @include letter-spacing;
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+a {
+  color: $color__blue-20;
+}
+
+//----------------------------------------------------------
+// ☠️ Deprecated - %h1, %h2, %h3, %p, %strong, %em, %caption
+//----------------------------------------------------------
+
+%h1 {
+  @include font-size('32');
+  @include line-height('heading');
+  @include letter-spacing;
+}
+
+%h2 {
+  @include font-size('26');
+  @include line-height('heading');
+  @include letter-spacing;
+}
+
+%h3 {
+  @include font-size('20');
+  @include line-height('heading');
+  @include letter-spacing;
+}
+
+%p {
+  @include font-size('16');
+  @include line-height('body');
+}
+
+%strong {
+  @include font-smoothing;
+  @include letter-spacing;
+  font-weight: 700;
+}
+
+%em {
   font-style: italic;
 }
 
 %caption {
-  @include type('caption');
+  @include font-size('12');
 }

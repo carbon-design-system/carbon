@@ -19,13 +19,15 @@ const htmlFiles = {
   header: 'html/**/header.html',
   detailHeader: 'html/components/detail-page-header/**/*.html',
   baseElements: 'html/base-elements/**/*.html',
-  components: 'html/components/**/*.html'
+  components: 'html/components/**/*.html',
+  global: 'html/global/**/*.html'
 };
 
 const directoryOrder = [
   // Used for allLinks() function
   'html/base-elements/**/*.html',
-  'html/components/**/*.html'
+  'html/components/**/*.html',
+  'html/global/**/*.html'
 ];
 
 app.engine('dust', adaro.dust());
@@ -100,6 +102,18 @@ app.get('/components/:component', (req, res) => {
 
 app.get('/base-elements/:component', (req, res) => {
   const glob = `html/base-elements/${req.params.component}/**/*.html`;
+
+  Promise.all([getContent(glob), allLinks])
+    .then(results => {
+      res.render('demo-all', {
+        html: results[0],
+        links: results[1]
+      });
+    });
+});
+
+app.get('/global/:component', (req, res) => {
+  const glob = `html/global/${req.params.component}/**/*.html`;
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {

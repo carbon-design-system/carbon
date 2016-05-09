@@ -1,9 +1,35 @@
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
+$major-second-typescale-map: (
+  '11'    : .702rem,
+  '12'    : .79rem,
+  '14'    : .889rem,
+  '16'    : 1rem,
+  '18'    : 1.125rem,
+  '20'    : 1.266rem,
+  '23'    : 1.424rem,
+  '26'    : 1.602rem,
+  '29'    : 1.802rem,
+  '32'    : 2.027rem,
+  '36'    : 2.281rem
+  '41'    : 2.566rem
+  '46'    : 2.887rem
+  '52'    : 3.427rem
+  '58'    : 3.653rem
+  '66'    : 4.11rem
+  '74'    : 4.624rem
+  '83'    : 5.202rem
+  '94'    : 5.852rem
+);
+
+//-------------------------
+// ☠️ Deprecated
+//-------------------------
+
 $typescale-map: (
   'h1'     : 2rem,
   'h2'     : 1.5rem,
   'h3'     : 1.25rem,
   'body'   : .875rem,
-  'caption': .75rem
+  'caption': .75rem,
 );

@@ -1,8 +1,8 @@
 @mixin btn--base {
   @include helvetica;
   @include font-smoothing;
-
-  font-size: .875rem;
+  @include letter-spacing;  
+  @include font-size('14');
   font-weight: 700;
   display: inline-block;
   height: rem(40px);
