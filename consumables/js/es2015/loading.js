@@ -42,16 +42,12 @@ export default class Loading {
 
     this.active = active;
 
-    switch (this.active) {
-      case true:
-        if (this.ie) this.element.classList.remove('bx--loading--stop--ie');
-        this.element.classList.remove('bx--loading--stop');
-        break;
-      case false:
-        if (this.ie) this.element.classList.add('bx--loading--stop--ie');
-        this.element.classList.add('bx--loading--stop');
-        break;
-      default: break;
+    if (this.active) {
+      if (this.ie) this.element.classList.remove('bx--loading--stop--ie');
+      this.element.classList.remove('bx--loading--stop');
+    } else {
+      if (this.ie) this.element.classList.add('bx--loading--stop--ie');
+      this.element.classList.add('bx--loading--stop');
     }
 
     return this;
