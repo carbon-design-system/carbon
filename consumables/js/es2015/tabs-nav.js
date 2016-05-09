@@ -5,13 +5,13 @@ import ContentSwitcher from './content-switcher';
 export default class Tab extends ContentSwitcher {
   constructor(element, options = {}) {
     super(element, Object.assign({
-      selectorMenu: '.tabs__nav',
-      selectorTrigger: '.tabs__trigger',
-      selectorTriggerText: '.trigger__text',
-      selectorButton: '.nav__item',
-      selectorButtonSelected: '.nav__item.selected',
-      classActive: 'selected',
-      classHidden: 'tabs--hidden',
+      selectorMenu: '.bx--tabs__nav',
+      selectorTrigger: '.bx--tabs__trigger',
+      selectorTriggerText: '.bx--tabs__trigger-text',
+      selectorButton: '.bx--tabs__nav-item',
+      selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
+      classActive: 'bx--tabs--selected',
+      classHidden: 'bx--tabs--hidden',
       eventBeforeSelected: 'tab-beingselected',
       eventAfterSelected: 'tab-selected',
     }, options));

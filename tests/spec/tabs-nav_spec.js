@@ -9,13 +9,13 @@ describe('Test tabs', function () {
       try {
         const tab = new Tab(document.createElement('div'));
         expect(tab.options).to.deep.equal({
-          selectorMenu: '.tabs__nav',
-          selectorTrigger: '.tabs__trigger',
-          selectorTriggerText: '.trigger__text',
-          selectorButton: '.nav__item',
-          selectorButtonSelected: '.nav__item.selected',
-          classActive: 'selected',
-          classHidden: 'tabs--hidden',
+          selectorMenu: '.bx--tabs__nav',
+          selectorTrigger: '.bx--tabs__trigger',
+          selectorTriggerText: '.bx--tabs__trigger-text',
+          selectorButton: '.bx--tabs__nav-item',
+          selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
+          classActive: 'bx--tabs--selected',
+          classHidden: 'bx--tabs--hidden',
           eventBeforeSelected: 'tab-beingselected',
           eventAfterSelected: 'tab-selected',
         });
@@ -26,16 +26,16 @@ describe('Test tabs', function () {
 
     it(`Should initialize currently selected tab item for narrow screen`, function () {
       const triggerTextNode = document.createElement('div');
-      triggerTextNode.classList.add('trigger__text');
+      triggerTextNode.classList.add('bx--tabs__trigger-text');
 
       const element = document.createElement('div');
       element.appendChild(triggerTextNode);
 
       [... new Array(2)].forEach((item, i) => {
         const buttonNode = document.createElement('div');
-        buttonNode.classList.add('nav__item');
+        buttonNode.classList.add('bx--tabs__nav-item');
         if (i === 0) {
-          buttonNode.classList.add('selected');
+          buttonNode.classList.add('bx--tabs--selected');
         }
         buttonNode.textContent = i;
         element.appendChild(buttonNode);
@@ -48,7 +48,7 @@ describe('Test tabs', function () {
     it(`Should deal with a condition with no selected item when constructor runs`, function () {
       const element = document.createElement('div');
       const buttonNode = document.createElement('div');
-      buttonNode.classList.add('nav__item');
+      buttonNode.classList.add('bx--tabs__nav-item');
       element.appendChild(buttonNode);
       expect(() => {
         new Tab(element);
@@ -65,10 +65,10 @@ describe('Test tabs', function () {
       stubUpdateTriggerText = sinon.stub(Tab.prototype, 'updateTriggerText');
 
       triggerNode = document.createElement('div');
-      triggerNode.classList.add('tabs__trigger');
+      triggerNode.classList.add('bx--tabs__trigger');
 
       menuNode = document.createElement('div');
-      menuNode.classList.add('tabs__nav');
+      menuNode.classList.add('bx--tabs__nav');
 
       const element = document.createElement('div');
       element.appendChild(triggerNode);
@@ -78,18 +78,18 @@ describe('Test tabs', function () {
     });
 
     it(`Should show drop down upon hitting trigger button`, function () {
-      menuNode.classList.add('tabs--hidden');
+      menuNode.classList.add('bx--tabs--hidden');
       triggerNode.dispatchEvent(new CustomEvent('click'));
-      expect(menuNode.classList.contains('tabs--hidden')).to.be.false;
+      expect(menuNode.classList.contains('bx--tabs--hidden')).to.be.false;
     });
 
     it(`Should hide drop down upon hitting trigger button`, function () {
       triggerNode.dispatchEvent(new CustomEvent('click'));
-      expect(menuNode.classList.contains('tabs--hidden')).to.be.true;
+      expect(menuNode.classList.contains('bx--tabs--hidden')).to.be.true;
     });
 
     afterEach(function () {
-      menuNode.classList.remove('tabs--hidden');
+      menuNode.classList.remove('bx--tabs--hidden');
     });
 
     after(function () {
@@ -106,17 +106,17 @@ describe('Test tabs', function () {
       stubUpdateMenuState = sinon.stub(Tab.prototype, 'updateMenuState');
 
       triggerTextNode = document.createElement('div');
-      triggerTextNode.classList.add('trigger__text');
+      triggerTextNode.classList.add('bx--tabs__trigger-text');
 
       const element = document.createElement('div');
       element.appendChild(triggerTextNode);
 
       buttonNodes = [... new Array(2)].map((item, i) => {
         const buttonNode = document.createElement('a');
-        buttonNode.classList.add('nav__item');
+        buttonNode.classList.add('bx--tabs__nav-item');
         buttonNode.textContent = i;
         if (i === 0) {
-          buttonNode.classList.add('selected');
+          buttonNode.classList.add('bx--tabs--selected');
         }
         return element.appendChild(buttonNode);
       });
@@ -126,14 +126,14 @@ describe('Test tabs', function () {
 
     beforeEach(function () {
       buttonNodes.forEach((buttonNode, i) => {
-        buttonNode.classList[i === 0 ? 'add' : 'remove']('selected');
+        buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--tabs--selected');
       });
     });
 
     it(`Should update active tab upon clicking`, function () {
       buttonNodes[1].dispatchEvent(new CustomEvent('click'));
-      expect(buttonNodes[0].classList.contains('selected')).to.be.false;
-      expect(buttonNodes[1].classList.contains('selected')).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
     });
 
     it(`Should update currently selected tab item for narrow screen`, function () {

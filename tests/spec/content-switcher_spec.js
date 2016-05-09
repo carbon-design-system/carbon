@@ -11,8 +11,8 @@ describe('Test content switcher', function () {
       const contentSwitcher = new ContentSwitcher(document.createElement('div'));
       expect(contentSwitcher.options).to.deep.equal({
         selectorButton: 'input[type="radio"]',
-        selectorButtonSelected: 'input[type="radio"].selected',
-        classActive: 'selected',
+        selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
+        classActive: 'bx--content-switcher--selected',
         eventBeforeSelected: 'content-switcher-beingselected',
         eventAfterSelected: 'content-switcher-selected',
       });
@@ -36,7 +36,7 @@ describe('Test content switcher', function () {
         buttonNode.type = 'radio';
         buttonNode.value = i;
         if (i === 0) {
-          buttonNode.classList.add('selected');
+          buttonNode.classList.add('bx--content-switcher--selected');
         }
         return element.appendChild(buttonNode);
       });
@@ -57,7 +57,7 @@ describe('Test content switcher', function () {
 
     beforeEach(function () {
       buttonNodes.forEach((buttonNode, i) => {
-        buttonNode.classList[i === 0 ? 'add' : 'remove']('selected');
+        buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--content-switcher--selected');
       });
     });
 
@@ -65,8 +65,8 @@ describe('Test content switcher', function () {
       return new Promise((resolve, reject) => {
         events.on(element, 'content-switcher-selected', promiseTryCatcher((e) => {
           expect(e.detail.item).to.equal(buttonNodes[1]);
-          expect(buttonNodes[0].classList.contains('selected')).to.be.false;
-          expect(buttonNodes[1].classList.contains('selected')).to.be.true;
+          expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.false;
+          expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
         }, resolve, reject));
         buttonNodes[1].dispatchEvent(new CustomEvent('click'));
       });
@@ -78,16 +78,16 @@ describe('Test content switcher', function () {
         e.preventDefault();
       });
       buttonNodes[1].dispatchEvent(new CustomEvent('click'));
-      expect(buttonNodes[0].classList.contains('selected')).to.be.true;
-      expect(buttonNodes[1].classList.contains('selected')).to.be.false;
+      expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.true;
+      expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
 
     it(`Should select target pane`, function () {
       try {
         buttonNodes[1].dataset.target = `.${id}_1`;
         buttonNodes[1].dispatchEvent(new CustomEvent('click'));
-        paneNodes[0].forEach((node) => expect(node.classList.contains('selected')).to.be.false);
-        paneNodes[1].forEach((node) => expect(node.classList.contains('selected')).to.be.true);
+        paneNodes[0].forEach((node) => expect(node.classList.contains('bx--content-switcher--selected')).to.be.false);
+        paneNodes[1].forEach((node) => expect(node.classList.contains('bx--content-switcher--selected')).to.be.true);
       } finally {
         buttonNodes.forEach((buttonNode) => buttonNode.dataset.target = undefined);
       }

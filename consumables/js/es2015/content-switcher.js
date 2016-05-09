@@ -17,8 +17,8 @@ export default class ContentSwitcher {
 
     this.options = Object.assign({
       selectorButton: 'input[type="radio"]',
-      selectorButtonSelected: 'input[type="radio"].selected',
-      classActive: 'selected',
+      selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
+      classActive: 'bx--content-switcher--selected',
       eventBeforeSelected: 'content-switcher-beingselected',
       eventAfterSelected: 'content-switcher-selected',
     }, options);
