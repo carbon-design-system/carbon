@@ -1,4 +1,6 @@
-$font-path: '../../../dist/assets/fonts' !default; // Default font directory, allow user override
+// Default font directory, `!default` flag allows user override.
+// (font files are configured to be served as static assets from server.js)
+$font-path: '/assets/fonts' !default;
 
 @font-face {
   font-family: 'IBM Helvetica';

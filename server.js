@@ -32,6 +32,7 @@ app.engine('dust', adaro.dust());
 app.set('view engine', 'dust');
 app.set('views', path.resolve(__dirname, 'demo/views'));
 app.use(express.static('demo'));
+app.use(express.static('consumables'));
 
 const getContent = (glob) => {
   return globby(glob)
