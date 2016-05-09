@@ -6,7 +6,7 @@ bower_components
 # Ignore built files and static folder
 demo/*.css
 demo/*.map
-demo/demo.js
+demo/*.js
 
 # OSX
 .DS_Store

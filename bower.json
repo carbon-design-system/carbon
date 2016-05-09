@@ -11,20 +11,7 @@
   "license": "MIT",
   "ignore": [
     ".git",
-    "dev",
-    "bower_components",
-    "node_modules",
-    "examples",
-    ".babelrc",
-    ".bowerrc",
-    ".editorconfig",
-    ".eslintignore",
-    ".eslintrc",
-    ".htmlhintrc",
-    ".sass-lint.yml",
-    "CORE-TEAM.md",
-    "gulpfile.js",
-    "server.js",
-    "views"
+    "demo",
+    "server.js"
   ]
 }
