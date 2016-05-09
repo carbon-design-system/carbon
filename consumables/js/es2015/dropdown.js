@@ -36,7 +36,7 @@ export default class Dropdown {
   }
 
   // Open and close dropdown menu
-  toggle() {
+  toggle(event) {
     const isOfSelf = this.element.contains(event.target);
 
     if (isOfSelf) {
