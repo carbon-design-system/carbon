@@ -1,3 +1,4 @@
+import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
 import '../polyfills/object-assign';
 import ContentSwitcher from './content-switcher';
@@ -16,10 +17,6 @@ export default class Tab extends ContentSwitcher {
       eventAfterSelected: 'tab-selected',
     }, options));
 
-    [... this.element.querySelectorAll(this.options.selectorTrigger)].forEach((trigger) => {
-      trigger.addEventListener('click', (event) => this.updateMenuState(event));
-    });
-
     const selected = this.element.querySelector(this.options.selectorButtonSelected);
     if (selected) {
       this.updateTriggerText(selected);
@@ -37,10 +34,17 @@ export default class Tab extends ContentSwitcher {
     }
   }
 
-  handleItemClick(event) {
-    super.handleItemClick(event);
-    this.updateMenuState();
-    this.updateTriggerText(event.currentTarget);
+  handleClick(event) {
+    const button = eventMatches(event, this.options.selectorButton);
+    const trigger = eventMatches(event, this.options.selectorTrigger);
+    if (button) {
+      super.handleClick(event);
+      this.updateMenuState();
+      this.updateTriggerText(button);
+    }
+    if (trigger) {
+      this.updateMenuState();
+    }
   }
 
   updateMenuState() {

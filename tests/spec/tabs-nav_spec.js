@@ -58,6 +58,7 @@ describe('Test tabs', function () {
 
   describe('Toggling drop down for narrow screen', function () {
     let stubUpdateTriggerText;
+    let element;
     let triggerNode;
     let menuNode;
 
@@ -70,21 +71,23 @@ describe('Test tabs', function () {
       menuNode = document.createElement('div');
       menuNode.classList.add('bx--tabs__nav');
 
-      const element = document.createElement('div');
+      element = document.createElement('div');
       element.appendChild(triggerNode);
       element.appendChild(menuNode);
+
+      document.body.appendChild(element);
 
       new Tab(element);
     });
 
     it(`Should show drop down upon hitting trigger button`, function () {
       menuNode.classList.add('bx--tabs--hidden');
-      triggerNode.dispatchEvent(new CustomEvent('click'));
+      triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs--hidden')).to.be.false;
     });
 
     it(`Should hide drop down upon hitting trigger button`, function () {
-      triggerNode.dispatchEvent(new CustomEvent('click'));
+      triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs--hidden')).to.be.true;
     });
 
@@ -93,12 +96,14 @@ describe('Test tabs', function () {
     });
 
     after(function () {
+      document.body.removeChild(element);
       stubUpdateTriggerText.restore();
     });
   });
 
   describe('Setting active tab', function () {
     let stubUpdateMenuState;
+    let element;
     let buttonNodes;
     let triggerTextNode;
 
@@ -108,8 +113,10 @@ describe('Test tabs', function () {
       triggerTextNode = document.createElement('div');
       triggerTextNode.classList.add('bx--tabs__trigger-text');
 
-      const element = document.createElement('div');
+      element = document.createElement('div');
       element.appendChild(triggerTextNode);
+
+      document.body.appendChild(element);
 
       buttonNodes = [... new Array(2)].map((item, i) => {
         const buttonNode = document.createElement('a');
@@ -131,17 +138,18 @@ describe('Test tabs', function () {
     });
 
     it(`Should update active tab upon clicking`, function () {
-      buttonNodes[1].dispatchEvent(new CustomEvent('click'));
+      buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
       expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
     });
 
     it(`Should update currently selected tab item for narrow screen`, function () {
-      buttonNodes[1].dispatchEvent(new CustomEvent('click'));
+      buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(triggerTextNode.textContent).to.equal(buttonNodes[1].textContent);
     });
 
     after(function () {
+      document.body.removeChild(element);
       stubUpdateMenuState.restore();
     });
   });

@@ -1,3 +1,4 @@
+import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
 import '../polyfills/object-assign';
 
@@ -25,17 +26,18 @@ export default class ContentSwitcher {
 
     this.constructor.components.set(this.element, this);
 
-    [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
-      button.addEventListener('click', (event) => this.handleItemClick(event));
-    });
+    this.element.addEventListener('click', (event) => this.handleClick(event));
   }
 
   static init(options) {
     [... document.querySelectorAll('[data-content-switcher]')].forEach(element => this.create(element, options));
   }
 
-  handleItemClick(event) {
-    this.setActive(event.currentTarget);
+  handleClick(event) {
+    const button = eventMatches(event, this.options.selectorButton);
+    if (button) {
+      this.setActive(button);
+    }
   }
 
   setActive(item) {

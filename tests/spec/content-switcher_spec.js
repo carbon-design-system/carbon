@@ -68,7 +68,7 @@ describe('Test content switcher', function () {
           expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.false;
           expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
         }, resolve, reject));
-        buttonNodes[1].dispatchEvent(new CustomEvent('click'));
+        buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
     });
 
@@ -77,7 +77,7 @@ describe('Test content switcher', function () {
         expect(e.detail.item).to.equal(buttonNodes[1]);
         e.preventDefault();
       });
-      buttonNodes[1].dispatchEvent(new CustomEvent('click'));
+      buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.true;
       expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
@@ -85,7 +85,7 @@ describe('Test content switcher', function () {
     it(`Should select target pane`, function () {
       try {
         buttonNodes[1].dataset.target = `.${id}_1`;
-        buttonNodes[1].dispatchEvent(new CustomEvent('click'));
+        buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
         paneNodes[0].forEach((node) => expect(node.classList.contains('bx--content-switcher--selected')).to.be.false);
         paneNodes[1].forEach((node) => expect(node.classList.contains('bx--content-switcher--selected')).to.be.true);
       } finally {
