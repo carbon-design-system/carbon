@@ -33,16 +33,8 @@
   margin: rem(48px) -3.125rem -3.125rem -3.125rem;
   background: $color__modal-footer;
 
-  .bx--buttons {
-
-    &__cancel {
-      @include btn--secondary($color__navy-gray-6);
-      margin-right: .5rem;
-    }
-
-    &__save {
-      @include btn--primary;
-    }
+  .bx--btn--secondary {
+    margin-right: .5rem;
   }
 
   @include breakpoint('bp--xs--major') {
