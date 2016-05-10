@@ -50,17 +50,10 @@
   }
 }
 
-// Hide default select arrow in Firefox
+// Override some Firefox user-agent styles
 @-moz-document url-prefix() {
-  .bx--select {
-    overflow: hidden;
-
-    &__input {
-      width: 110%;
-    }
-
-    &__option {
-      color: $color__white;
-    }
+  .bx--select__option {
+    background-color: $color__navy-gray-5;
+    color: $color__white;
   }
 }

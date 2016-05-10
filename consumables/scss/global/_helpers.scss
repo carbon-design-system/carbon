@@ -10,6 +10,10 @@ $color__inputs--bg: rgba(255, 255, 255, .1);
 // Mixins
 //-------------------------
 
+@mixin box-shadow {
+  box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, .1);
+}
+
 @mixin focus-outline {
   outline: 1px dotted; // for non-webkit browsers
   outline: auto 5px -webkit-focus-ring-color; // webkit default

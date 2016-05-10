@@ -3,6 +3,7 @@
 
 .bx--dropdown {
   @include dropdown;
+  background-color: $color__navy-gray-5;
 
   &:focus {
     @include focus-outline;
@@ -16,7 +17,7 @@
 
   // Before seletion is made, text color is gray (default)
   &[data-value=''] &__menu-text {
-    color: $color__navy-gray-7;
+    color: rgba(255, 255, 255, .5);
   }
 
   &__arrow {
@@ -45,8 +46,10 @@
   }
 
   .bx--dropdown--open &__list {
+    @include box-shadow;
     display: flex;
     flex-direction: column;
+    background-color: $color__navy-gray-4;
   }
 
   &__list-item {
