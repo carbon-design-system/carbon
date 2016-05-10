@@ -5,7 +5,7 @@
     "prebuild": "gulp clean",
     "build": "gulp build",
     "serve": "nodemon -e dust,js server.js",
-    "predev": "npm run build",
+    "predev": "gulp build:dev",
     "dev": "gulp serve & npm run serve",
     "lint": "gulp lint",
     "test": "gulp test"
