@@ -6,3 +6,21 @@
   padding-top: 3.75rem;
   padding-bottom: 7.5em;
 }
+
+.demo--panels {
+  width: 100%;
+  height: 3.75rem;
+}
+
+.demo--panel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  padding: 1em;
+
+  &.bx--content-switcher--selected,
+  &.bx--tabs--selected {
+    opacity: 1;
+  }
+}

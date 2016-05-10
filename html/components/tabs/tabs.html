@@ -5,9 +5,15 @@
     </svg>
   </div>
   <ul class="bx--tabs__nav bx--tabs--hidden">
-    <li class="bx--tabs__nav-item bx--tabs--selected"><a class="bx--tabs__nav-link" href="...">Overview</a></li>
-    <li class="bx--tabs__nav-item"><a class="bx--tabs__nav-link" href="...">Containers Files</a></li>
-    <li class="bx--tabs__nav-item"><a class="bx--tabs__nav-link" href="...">Connected Objects</a></li>
-    <li class="bx--tabs__nav-item"><a class="bx--tabs__nav-link" href="...">Manage</a></li>
+    <li class="bx--tabs__nav-item bx--tabs--selected" data-target=".demo--panel--overview"><a class="bx--tabs__nav-link" href="javascript:void(0)">Overview</a></li>
+    <li class="bx--tabs__nav-item" data-target=".demo--panel--containers"><a class="bx--tabs__nav-link" href="javascript:void(0)">Containers Files</a></li>
+    <li class="bx--tabs__nav-item" data-target=".demo--panel--connected"><a class="bx--tabs__nav-link" href="javascript:void(0)">Connected Objects</a></li>
+    <li class="bx--tabs__nav-item" data-target=".demo--panel--manage"><a class="bx--tabs__nav-link" href="javascript:void(0)">Manage</a></li>
   </ul>
 </nav>
+<div class="demo--panels">
+  <div class="demo--panel demo--panel--overview bx--tabs--selected">Overview</div>
+  <div class="demo--panel demo--panel--containers">Containers Files</div>
+  <div class="demo--panel demo--panel--connected">Connected Objects</div>
+  <div class="demo--panel demo--panel--manage">Manage</div>
+</div>

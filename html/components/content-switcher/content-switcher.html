@@ -1,8 +1,13 @@
 <div data-content-switcher class="bx--content-switcher">
-  <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="1" id="opt-1" checked>
+  <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="1" id="opt-1" checked data-target=".demo--panel--opt-1">
   <label class="bx--content-switcher__btn" for="opt-1">Option 1</label>
-  <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="2" id="opt-2">
+  <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="2" id="opt-2" data-target=".demo--panel--opt-2">
   <label class="bx--content-switcher__btn" for="opt-2">Option 2</label>
-  <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="3" id="opt-3">
+  <input class="bx--content-switcher__input" type="radio" name="switcher-group" value="3" id="opt-3" data-target=".demo--panel--opt-3">
   <label class="bx--content-switcher__btn" for="opt-3">Option 3</label>
+</div>
+<div class="demo--panels">
+  <div class="demo--panel demo--panel--opt-1 bx--content-switcher--selected">View 1</div>
+  <div class="demo--panel demo--panel--opt-2">View 2</div>
+  <div class="demo--panel demo--panel--opt-3">View 3</div>
 </div>
