@@ -4,5 +4,6 @@ before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; npm cache clean; f
 install:
   - npm install || (cat npm-debug.log; false)
 script:
+  - npm run build
   - npm run lint
   - npm test
