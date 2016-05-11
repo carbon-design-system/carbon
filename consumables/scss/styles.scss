@@ -36,9 +36,9 @@
 @import 'components/tooltips/tooltips';
 @import 'components/tabs/tabs';
 
-//----------------------------
+//-------------------------------------
 // 🙈 Hidden (Not exposed on website)
-//----------------------------
+//-------------------------------------
 @import 'base-elements/footer/footer';
 @import 'components/fab/fab';
 @import 'components/taxonomy-item/taxonomy-item';
@@ -47,7 +47,7 @@
 //-------------------------
 // ☠️ Deprecated
 //-------------------------
-@import 'components/data-module/data-module';
-@import 'components/fab-label/fab-label';
-@import 'components/item-list/item-list';
-@import 'components/toolbars/toolbar-icons';
+@import 'deprecated/data-module/data-module';
+@import 'deprecated/fab-label/fab-label';
+@import 'deprecated/item-list/item-list';
+@import 'deprecated/toolbars/toolbar-icons';
