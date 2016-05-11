@@ -10,8 +10,8 @@
 
   // Common styles for child elements
   &__title {
+    @include font-size('23');
     margin: .4em 0;
-    font-size: 1.5rem;
   }
 
   &__subtitle {

@@ -19,8 +19,8 @@
 
     &:checked + .bx--content-switcher__btn {
       @include content-switcher__btn;
+      @include font-size('16');
       background-color: $color__content-switcher;
-      font-size: 1rem;
       color: $color__content-switcher-text--active;
     }
   }

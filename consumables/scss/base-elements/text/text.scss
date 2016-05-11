@@ -1,7 +1,7 @@
 .bx--text {
 
   &__input {
-    font-size: .889rem;
+    @include font-size('14');
     display: block;
     width: 100%;
     min-width: 9.375em;

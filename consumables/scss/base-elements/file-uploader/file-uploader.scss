@@ -12,7 +12,7 @@
 
   // Styled File Uploader
   &__label {
-    @include type(.889rem);
+    @include font-size('14');
     position: relative;
     display: block;
     width: 100%;

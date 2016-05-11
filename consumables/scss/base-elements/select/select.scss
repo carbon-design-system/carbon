@@ -4,7 +4,7 @@
 
   &__input {
     @include helvetica;
-    font-size: .889rem;
+    @include font-size('14');
     appearance: none;
     display: block;
     width: 100%;

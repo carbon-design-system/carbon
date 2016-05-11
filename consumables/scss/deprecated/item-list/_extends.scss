@@ -85,10 +85,10 @@
 
 
 %text__desc {
+  @include line-height('body');
+  @include letter-spacing;
   display: none;
   font-weight: 200;
-  line-height: 1.5;
-  letter-spacing: rem(.2px); // !temporary
   @include breakpoint(bp--xs--major) {
     display: none;
   }
@@ -196,7 +196,7 @@
 
 %text__headline--catalog {
   @extend %text__headline;
-  @include type(rem(14px));
+  @include font-size('14');
 }
 
 %text__desc--catalog {
@@ -244,7 +244,7 @@
 
 %text__headline--summary {
   @extend %text__headline;
-  @include type(rem(20px));
+  @include font-size('20');
 }
 
 %text__desc--summary {

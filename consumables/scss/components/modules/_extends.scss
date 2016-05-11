@@ -9,5 +9,5 @@
   padding-bottom: .5em;
   margin-bottom: $module--margin;
   background-color: $color--module-bg;
-  line-height: 1.5;
+  @include line-height('body');
 }

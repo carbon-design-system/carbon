@@ -1,7 +1,7 @@
 @import 'vars';
 
 .bx--tabs {
-  @include type('body');
+  @include font-size('14');
   color: $color__tabs--text;
   background-color: $color__tabs--bg;
 
@@ -39,7 +39,7 @@
     flex-direction: column;
 
     @include breakpoint(bp--sm--major) {
-      @include type(1rem);
+      @include font-size('16');
       flex-direction: row;
       margin-right: em(16px);
       margin-left: em(16px);

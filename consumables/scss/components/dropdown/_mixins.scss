@@ -5,5 +5,5 @@
   width: 100%;
   cursor: pointer;
   color: $text;
-  font-size: .875rem;
+  @include font-size('14');
 }

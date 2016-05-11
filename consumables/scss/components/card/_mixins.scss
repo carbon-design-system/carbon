@@ -1,5 +1,5 @@
 @mixin app-status($status) {
-  @include type(rem(12px));
+  @include font-size('12');
   display: none;
   align-items: center;
   margin-left: 1em;

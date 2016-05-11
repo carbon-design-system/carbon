@@ -1,8 +1,8 @@
 @import 'vars';
 
 .bx--link {
+  @include font-size('14');
   @include font-smoothing;
-  font-size: .875rem;
   font-weight: 700;
   color: $color--link;
   text-decoration: underline;

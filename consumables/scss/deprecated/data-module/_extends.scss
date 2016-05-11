@@ -148,7 +148,7 @@
 //////////////////
 
 %activity-log__headline {
-  @include type(.875rem);
+  @include font-size('14');
 
   width: 100%;
   padding: 2em;

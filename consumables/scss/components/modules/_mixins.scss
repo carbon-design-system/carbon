@@ -1,9 +1,9 @@
 @mixin module--base {
+  @include line-height('body');
   display: flex;
   flex-direction: column;
   max-height: em(365px);
   padding-bottom: .5em;
   margin-bottom: $module--margin;
   background-color: $color--module-bg;
-  line-height: 1.5;
 }

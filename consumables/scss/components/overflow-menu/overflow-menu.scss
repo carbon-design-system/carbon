@@ -42,9 +42,9 @@
   &__btn,
   &__btn--delete {
     @include helvetica;
+    @include font-size('14');
     width: 100%;
     padding: .5em 1em;
-    font-size: .85rem;
     font-weight: 200;
     color: $color__white;
     text-align: left;

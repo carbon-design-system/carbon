@@ -1,7 +1,7 @@
 .bx--textarea {
 
   &__input {
-    font-size: .889rem;
+    @include font-size('14');
     display: block;
     font-family: inherit;
     font-weight: 300;

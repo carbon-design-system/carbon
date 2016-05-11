@@ -6,7 +6,7 @@
   display: inline-block;
   min-width: 15em;
   padding: .7em 5em .7em 1.5em;
-  font-size: .875rem;
+  @include font-size('14');
   font-weight: 400;
   color: $color__dropdown--text;
   list-style: none;
@@ -52,7 +52,7 @@
   min-width: 15em;
   padding-top: .9em;
   margin-left: -1.5em;
-  font-size: .875rem;
+  @include font-size('14');
   color: $color__dropdown--text;
   list-style: none;
   background: $color__dropdown--bg;

@@ -108,12 +108,12 @@
         }
 
         &:before {
+          @include font-size('16');
           display: block;
           position: absolute;
           top: 50%;
           content: '\0025cf';
           color: $color__taxonomy-nav-item--selected;
-          font-size: 1rem;
           width: 1em;
           height: 1em;
           margin-top: -.5em;

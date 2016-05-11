@@ -59,13 +59,13 @@
 
   &__header {
     font-weight: 700;
-    font-size: .875rem;
+    @include font-size('14');
     color: $color__module-header;
     border-bottom: 1px solid $color__module-border;
   }
 
   &__footer {
-    font-size: .875rem;
+    @include font-size('14');
     border-top: 1px solid $color__module-border;
   }
 

@@ -4,8 +4,8 @@
   &--nested,
   &--unordered,
   &--ordered {
+    @include font-size('14');
     @include font-smoothing;
-    font-size: .889rem;
     margin-left: 2em;
     line-height: 1.75;
   }

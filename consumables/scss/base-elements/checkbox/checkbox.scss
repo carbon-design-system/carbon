@@ -11,8 +11,8 @@
 
   // Styled Checkbox - default
   &__appearance {
+    @include font-size('16');
     display: inline-block;
-    font-size: 1rem;
     width: em(18px);
     height: em(18px);
     background-color: $color__inputs--bg;

@@ -57,7 +57,7 @@
 .bx--modal-content {
 
   &__heading {
-    @include type(rem(28px));
+    @include font-size('29');
     font-weight: 200;
 
     color: $color__navy-gray-5;
@@ -65,14 +65,14 @@
   }
 
   &__text {
+    @include line-height('body');
     padding-top: 1rem;
-    line-height: 1.5;
     color: $color__modal-text;
   }
 }
 
 .bx--modal-inner {
-  @include type(rem(16px));
+  @include font-size('16');
   position: relative;
   z-index: z('modal');
   width: 100%;

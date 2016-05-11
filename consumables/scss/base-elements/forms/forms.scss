@@ -6,9 +6,9 @@
   }
 
   &__legend {
+    @include font-size('32');
     @include font-smoothing;
     font-weight: 300;
-    font-size: 2rem;
     display: block;
     padding-bottom: 1em;
 
@@ -18,8 +18,9 @@
   }
 
   &__label {
+    @include font-size('14');
+    @include letter-spacing;
     display: inline-block;
-    font-size: rem(14px);
     padding-bottom: .5em;
   }
 }

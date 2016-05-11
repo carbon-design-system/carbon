@@ -20,7 +20,7 @@
   }
 
   &__breadcrumb {
-    @include type(.875rem);
+    @include font-size('14');
     font-weight: 600;
     color: $color__detail-page-header--text--breadcrumb;
     cursor: pointer;
@@ -59,10 +59,10 @@
   }
 
   &__info-title {
+    @include font-size('23');
     @include font-smoothing;
     padding-left: .5em;
     margin-left: .5em;
-    font-size: 1.5rem;
     font-weight: 200;
     border-left: 1px solid $color__detail-page-header--border;
 
@@ -73,7 +73,7 @@
     }
 
     @include breakpoint(bp--sm--major) {
-      font-size: 1.875rem;
+      @include font-size('29');
     }
   }
 

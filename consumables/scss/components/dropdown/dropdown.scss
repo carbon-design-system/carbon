@@ -41,8 +41,8 @@
 
 
   &__list {
+    @include font-size('14');
     display: none;
-    font-size: .875rem;
   }
 
   .bx--dropdown--open &__list {

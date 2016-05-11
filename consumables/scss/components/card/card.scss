@@ -49,13 +49,13 @@
     }
 
     &--link {
-      @include type(rem(12px));
+      @include font-size('12');
       color: $color__card-links;
       text-decoration: none;
     }
 
     &--additional-info {
-      @include type(rem(12px));
+      @include font-size('12');
       padding: .25em 0;
       color: $color__card-subinfo;
     }
@@ -106,10 +106,10 @@
   margin-right: .5em;
 
   .bx--app-actions__button {
+    @include font-size('16');
     display: inline-block;
     padding: 0;
     margin: 0;
-    font-size: 1rem;
     cursor: pointer;
     background: none;
     border: none;
@@ -131,12 +131,12 @@
 // SERVICE CARD STYLES
 .bx--card-footer__credentials-button {
   @include btn--primary;
-  @include type(rem(12px));
+  @include font-size('12');
   margin-left: .5em;
 }
 
 .bx--card-footer__docs-link {
-  @include type(rem(12px));
+  @include font-size('12');
   margin-right: .5em;
   color: $color__card-links;
 }
@@ -156,18 +156,18 @@
 
 
     .bx--overview__description {
-      @include type(rem(14px));
+      @include font-size('14');
+      @include line-height('heading');
       padding: 0 1.5em;
-      line-height: 1.3;
     }
 
     .bx--overview__main-number {
-      @include type(rem(44px));
+      @include font-size('46');
     }
 
     .bx--overview__details-button {
       @include btn--secondary($color__btn--bg);
-      font-size: .8rem;
+      @include font-size('14');
       padding: .5em 1em;
       margin-top: 1.5em;
     }

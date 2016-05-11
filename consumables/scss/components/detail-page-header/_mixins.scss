@@ -42,7 +42,7 @@
   }
 
   .nav__item {
-    font-size: .875rem;
+    @include font-size('14');
   }
 
   .nav__item.selected {

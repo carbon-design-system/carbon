@@ -44,13 +44,12 @@
   }
 
   &__support-question {
-    @include type(1rem);
+    @include font-size('14');
     padding-bottom: .25em;
-    font-size: rem(14px);
   }
 
   &__support-link {
-    font-size: rem(14px);
+    @include font-size('14');
     font-weight: 600;
     color: $color__footer--link;
     text-decoration: none;
@@ -68,8 +67,7 @@
   }
 
   &__settings-question {
-    @include type(1rem);
+    @include font-size('14');
     padding-bottom: .25em;
-    font-size: rem(14px);
   }
 }

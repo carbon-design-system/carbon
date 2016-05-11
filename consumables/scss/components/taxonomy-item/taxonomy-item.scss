@@ -22,11 +22,11 @@
 
     .taxonomy-item__label {
       @extend %taxonomy-item__label;
-      @include type(rem(20px));
+      @include font-size('20');
     }
 
     .taxonomy-item__metric {
-      @include type(em(18px));
+      @include font-size('18');
 
       height: 1.5em;
       padding: .3em .5em;
@@ -73,7 +73,7 @@
 
     .taxonomy-item__label {
       @extend %taxonomy-item__label;
-      @include type(rem(16px));
+      @include font-size('16');
     }
 
     .taxonomy-item__icon {

@@ -1,7 +1,7 @@
 @import 'vars';
 
 .bx--table {
-  @include type('body');
+  @include font-size('14');
   width: 100%;
   color: $color__table-text;
 
@@ -38,10 +38,10 @@
 
 .bx--table__body {
   &__cell {
+    @include font-size('14');
     display: flex;
     flex: 1;
     padding: $padding__table;
-    font-size: .875rem;
     text-align: left;
     overflow: hidden;
   }

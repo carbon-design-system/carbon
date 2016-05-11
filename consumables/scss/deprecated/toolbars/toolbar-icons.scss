@@ -12,7 +12,7 @@
   }
 
   .search-field {
-    @include type(em(12px));
+    @include font-size('12');
     width: 0;
     padding: 1.36em;
     margin-left: -22em;
