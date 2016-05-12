@@ -21,8 +21,8 @@ export default class FabButton {
     } else {
       const handler = (event) => {
         const element = eventMatches(event, '[data-fab]');
-        if (element && !FabButton.components.has(element)) {
-          FabButton.create(element).toggle(event);
+        if (element && !this.components.has(element)) {
+          this.create(element).toggle(event);
         }
       };
       target.addEventListener('click', handler);
