@@ -10,6 +10,7 @@
   }
 
   &__column-title {
+    @include font-size('12');
     display: flex;
     align-items: center;
     text-transform: uppercase;
@@ -20,8 +21,8 @@
     background-color: $color__table-bg;
     width: auto;
     cursor: pointer;
-
-    @include breakpoint(bp--sm--major) {
+    
+    @include breakpoint(bp--lg--major) {
       width: 10%;
     }
 
