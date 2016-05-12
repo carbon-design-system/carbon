@@ -1,3 +1,7 @@
+//-------------------------
+// ☠️ Deprecated
+//-------------------------
+
 @function mod($color) {
   @warn 'mod($color) is deprecated, please use the color variable you need instead.';
   @if map-has-key($palette__modified, $color) {
