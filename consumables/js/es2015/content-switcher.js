@@ -1,12 +1,7 @@
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
 import '../polyfills/object-assign';
-
-function toggleClass(element, name, add) {
-  if (element.classList.contains(name) === !add) {
-    element.classList[add ? 'add' : 'remove'](name);
-  }
-}
+import toggleClass from '../polyfills/toggle-class';
 
 export default class ContentSwitcher {
   constructor(element, options = {}) {
