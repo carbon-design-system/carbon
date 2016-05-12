@@ -1,27 +1,36 @@
-<table class="bx--table">
+<table data-table class="bx--table">
   <thead>
     <tr class="bx--table__row">
-      <th id="name-1" class="bx--table__column-title">Name</th>
-      <th id="cpu-1" class="bx--table__column-title">CPU</th>
-      <th id="memory-1" class="bx--table__column-title">Memory</th>
-      <th id="disk-1" class="bx--table__column-title">Disk</th>
-      <th id="date-1" class="bx--table__column-title">Date Created</th>
+      <th id="name" class="bx--table__column-title">
+        Name
+        <svg class="bx--table__column-title--filter-icon">
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+        </svg>
+      </th>
+      <th id="date" class="bx--table__column-title">
+        Date
+        <svg class="bx--table__column-title--filter-icon">
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+        </svg>
+      </th>
+      <th id="size" class="bx--table__column-title">
+        Size
+        <svg class="bx--table__column-title--filter-icon">
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+        </svg>
+      </th>
     </tr>
   </thead>
   <tbody class="bx--table__body">
     <tr class="bx--table__row">
-      <td header="name-1" class="bx--table__body__cell">VMgroup_DAL-01</td>
-      <td header="cpu-1" class="bx--table__body__cell">2</td>
-      <td header="memory-1" class="bx--table__body__cell">512 MB</td>
-      <td header="disk-1" class="bx--table__body__cell">10 GB</td>
-      <td header="date-1" class="bx--table__body__cell">June 06, 2015, 02:26 PM</td>
+      <td header="name" class="bx--table__body__cell">VMgroup_DAL-02</td>
+      <td header="date" class="bx--table__body__cell">5/31/2015</td>
+      <td header="size" class="bx--table__body__cell">1.23 GB</td>
     </tr>
     <tr class="bx--table__row">
-      <td header="name-1" class="bx--table__body__cell">VMgroup_DAL-02</td>
-      <td header="cpu-1" class="bx--table__body__cell">3</td>
-      <td header="memory-1" class="bx--table__body__cell">256 MB</td>
-      <td header="disk-1" class="bx--table__body__cell">20 GB</td>
-      <td header="date-1" class="bx--table__body__cell">Aug 16, 2015, 02:26 PM</td>
+      <td header="name" class="bx--table__body__cell">VMgroup_DAL-01</td>
+      <td header="date" class="bx--table__body__cell">7/31/2015</td>
+      <td header="size" class="bx--table__body__cell">2.23 GB</td>
     </tr>
   </tbody>
 </table>

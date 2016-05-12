@@ -30,6 +30,7 @@ import Loading from './loading';
 import Dropdown from './dropdown';
 import Card from './card';
 import NumberInput from './number-input';
+import Table from './table';
 
 const settings = {};
 
@@ -48,6 +49,7 @@ export {
   Dropdown,
   Card,
   NumberInput,
+  Table,
 };
 
 const init = () => {
@@ -64,6 +66,7 @@ const init = () => {
     Dropdown.init();
     Card.init();
     NumberInput.init();
+    Table.init();
   }
 };
 

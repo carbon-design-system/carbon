@@ -9,30 +9,44 @@
     display: flex;
   }
 
-  &__main-title {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: $padding__table;
-    font-weight: 700;
-    text-align: left;
-    background-color: $color__table-bg;
-    border-bottom: 1px solid $color__table-border;
-
-    .bx--link {
-      color: $color__table-link;
-      text-decoration: none;
-    }
-  }
-
   &__column-title {
     display: flex;
-    flex: 1;
-    align-items: baseline;
-    padding: $padding__table;
-    font-weight: 700;
+    align-items: center;
+    text-transform: uppercase;
+    padding: 1.5em;
+    font-weight: 400;
     text-align: left;
+    letter-spacing: 1.7px;
     background-color: $color__table-bg;
+    width: auto;
+    cursor: pointer;
+
+    @include breakpoint(bp--sm--major) {
+      width: 10%;
+    }
+
+    &:nth-child(1) {
+      flex-grow: 1;
+
+      @include breakpoint(bp--sm--major) {
+        width: 80%;
+      }
+    }
+
+    &--rotated {
+
+      .bx--table__column-title--filter-icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &--filter-icon {
+      width: em(15px);
+      height: em(7px);
+      fill: $color__table-text;
+      margin: 0 .75em;
+      transition: $transition--base;
+    }
   }
 }
 
@@ -40,21 +54,33 @@
   &__cell {
     @include font-size('14');
     display: flex;
-    flex: 1;
-    padding: $padding__table;
+    padding: 1.05em 1.2em 1.05em 1.5em;
     text-align: left;
-    overflow: hidden;
-  }
-
-  .bx--link {
-    color: $color__table-link;
-    text-decoration: none;
-    text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    font-weight: 200;
+    width: auto;
+    align-items: center;
+
+    @include breakpoint(bp--sm--major) {
+      width: 10%;
+    }
+
+    &:nth-child(1) {
+      flex-grow: 1;
+
+      @include breakpoint(bp--sm--major) {
+        width: 80%;
+      }
+    }
+
+    &--checked {
+      background-color: $color__navy-gray-2;
+    }
   }
 
   .bx--table__row {
+    border: 1px solid transparent;
 
     &:nth-child(odd) {
       background-color: $color__table-row--odd;
@@ -63,38 +89,20 @@
     &:nth-child(even) {
       background-color: $color__table-bg;
     }
-  }
-}
 
-/////////////////////
-// Configurations
-/////////////////////
+    &:hover,
+    &:active {
+      cursor: pointer;
+      background-color: $color__navy-gray-2;
+      border: 1px solid $color__blue-30;
+    }
 
-.bx--table {
+    &--checked {
 
-  // Use .cta as a modifier for <th> or <td> classes when including:
-  // * Status icon
-  // * Checkbox
-  // * etc.
-  .bx--table--cta {
-    flex: none;
-  }
-
-  [data-sortable] {
-    cursor: pointer;
-  }
-
-  // example of a status-icon to use inside `.cta`
-  .bx--table--status-icon { // !temporary
-    width: 1em;
-    height: 1em;
-    background-color: $color__green-30;
-    border-radius: 100%;
-
-    &--hidden {
-      background-color: transparent;
-      width: 1em;
-      height: 1em;
+      &:nth-child(odd), &:nth-child(even) {
+        background-color: $color__navy-gray-2;
+        border: 1px solid $color__blue-30;
+      }
     }
   }
 }
