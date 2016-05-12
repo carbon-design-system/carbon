@@ -1,0 +1,16 @@
+@mixin tag($base-color) {
+  @include font-size('12');
+  display: inline-flex;
+  align-items: center;
+  font-weight: 200;
+  padding: .835em 1em;
+  height: 1.25em;
+  margin: .1875em;
+  border-radius: .9375em;
+  background-color: rgba($base-color, .2);
+  color: $base-color;
+
+  &:not(:first-child) {
+    margin-left: 0;
+  }
+}

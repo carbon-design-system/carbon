@@ -1,0 +1,31 @@
+@import 'mixins';
+
+.tag--ibm {
+  @include tag($color__blue-20);
+}
+
+.tag--beta {
+  @include tag($color__navy-gray-8);
+}
+
+.tag--third-party {
+  @include tag($color__teal-20);
+}
+
+.tag--local,
+.tag--dedicated,
+.tag--custom {
+  @include tag($color__purple-20);
+}
+
+.tag--experimental {
+  @include tag($color__orange-20);
+}
+
+.tag--community {
+  @include tag($color__green-20);
+}
+
+.tag--private {
+  @include tag($color__yellow-20);
+}
