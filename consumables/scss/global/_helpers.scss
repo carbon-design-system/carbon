@@ -3,7 +3,6 @@
 //-------------------------
 
 $transition--base: .25s;
-$shadow: 2px 2px 8px rgba(0, 0, 0, .4);
 $color__inputs--bg: rgba(255, 255, 255, .1);
 
 //-------------------------
@@ -17,12 +16,6 @@ $color__inputs--bg: rgba(255, 255, 255, .1);
 @mixin focus-outline {
   outline: 1px dotted; // for non-webkit browsers
   outline: auto 5px -webkit-focus-ring-color; // webkit default
-}
-
-@mixin rotate($deg, $speed, $origin: center) {
-  transform: rotate($deg);
-  transition: transform $speed;
-  transform-origin: $origin;
 }
 
 @mixin hidden {
@@ -40,6 +33,15 @@ $color__inputs--bg: rgba(255, 255, 255, .1);
 //-------------------------
 // ☠️ Deprecated
 //-------------------------
+
+// $shadow and @rotate are only used in "fab" which is being deprecated.
+$shadow: 2px 2px 8px rgba(0, 0, 0, .4);
+
+@mixin rotate($deg, $speed, $origin: center) {
+  transform: rotate($deg);
+  transition: transform $speed;
+  transform-origin: $origin;
+}
 
 %hidden {
   position:absolute;

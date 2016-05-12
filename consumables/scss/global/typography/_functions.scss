@@ -15,6 +15,10 @@
 }
 
 
+//-------------------------
+// ☠️ Deprecated
+//-------------------------
+
 //-------------------------//
 // decimal-round(), pow(), ms() //
 //------------------------//
@@ -68,6 +72,7 @@
 
 @function ms($n) {
   @if $n >= -6 and $n <= 16 {
+    @warn 'The ms() function is being deprecated in favor of the font-size mixin.';
     @return decimal-round(rem(pow(1.125, $n) * 16px), 3);
   } @else {
     @error '#{$n} is not in the acceptable range.';

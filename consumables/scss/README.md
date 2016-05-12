@@ -8,6 +8,7 @@ Bluemix Components uses Sass (CSS preprocessor) with SCSS syntax.
 scss
 ├── base-elements
 ├── components
+├── deprecated
 ├── global
 ├── _utils.scss
 └── styles.scss
