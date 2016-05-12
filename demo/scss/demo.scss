@@ -15,9 +15,10 @@
 .demo--panel {
   position: absolute;
   width: 100%;
+  max-width: 960px;
   height: 100%;
   opacity: 0;
-  padding: 1em;
+  padding: 3em 1em 1em;
 
   &.bx--content-switcher--selected,
   &.bx--tabs--selected {
