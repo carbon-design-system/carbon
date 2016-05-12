@@ -98,15 +98,15 @@
 //-------------------------
 
 // data-module
-@import 'components/data-module/vars';
-@import 'components/data-module/mixins';
-@import 'components/data-module/extends';
+@import 'deprecated/data-module/vars';
+@import 'deprecated/data-module/mixins';
+@import 'deprecated/data-module/extends';
 
 // fab-label
-@import 'components/fab-label/vars';
-@import 'components/fab-label/extends';
+@import 'deprecated/fab-label/vars';
+@import 'deprecated/fab-label/extends';
 
 // item-list
-@import 'components/item-list/vars';
-@import 'components/item-list/mixins';
-@import 'components/item-list/extends';
+@import 'deprecated/item-list/vars';
+@import 'deprecated/item-list/mixins';
+@import 'deprecated/item-list/extends';
