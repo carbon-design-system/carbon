@@ -1,0 +1,72 @@
+.bx--number {
+  position: relative;
+  
+  // Styles to prevent selecting label / number when user
+  // double clicks the number arrows
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+  
+  &__input {
+    @include type(1rem);
+    
+    width: 100%;
+    min-width: 9.375em;
+    padding: .5em 0 .5em 1em;
+    margin: .25em 0;
+    color: $color__white;
+    background-color: $color__navy-gray-4;
+    border: none;
+
+    // Mozilla always displays system number toggles by default.
+    // This removes them, and I set a range on the HTML element for 
+    // form validation
+    -moz-appearance: textfield;
+
+    &:focus {
+      @extend %focus-outline;
+    }
+
+    // Hide system spinner on Chrome/Safari
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+
+  // Position spans to place SVG's inside. Create placeholder 
+  // instead of extending class?
+  &__arrow {
+    position: absolute;
+    right: 0;
+    fill: $color--blue-40;
+    cursor: pointer;
+    display: flex;
+    padding: 0 .5em;
+
+    &:hover {
+      fill: $color__blue-30;
+    }
+
+    &--up {
+      @extend .bx--number__arrow;
+      bottom: 1.3em;
+      padding-top: .5em;
+      align-items: flex-start;
+    }
+
+    &--down {
+      @extend .bx--number__arrow;
+      bottom: .25em;
+      padding-bottom: .5em;
+      align-items: flex-end;
+    }
+
+    .icon--down,
+    .icon--up {
+      display: block;
+      height: .5em;
+      width: .5em;
+    }
+  }
+}
