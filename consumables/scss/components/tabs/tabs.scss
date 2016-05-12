@@ -2,8 +2,14 @@
 
 .bx--tabs {
   @include font-size('14');
+  @include font-smoothing;
   color: $color__tabs--text;
-  background-color: $color__tabs--bg;
+  background-color: $color__navy_gray_5;
+  cursor: pointer;
+
+  @include breakpoint(bp--sm--major) {
+    background: none;
+  }
 
   &__trigger {
     display: flex;
@@ -11,11 +17,6 @@
     justify-content: space-between;
     padding: rem(16px);
     cursor: pointer;
-    border-top: 1px solid darken($color__tabs--bg, 2);
-
-    &:hover {
-      background: lighten($color__tabs--bg, 1);
-    }
 
     svg {
       position: relative;
@@ -30,8 +31,10 @@
     }
   }
 
-  @include breakpoint(bp--sm--major) {
-    background: none;
+  &__trigger-text {
+    text-decoration: none;
+    font-weight: 700;
+    color: $color__white;
   }
 
   &__nav {
@@ -52,27 +55,19 @@
   }
 
   &__nav-item {
-    background: lighten($color__tabs--bg, 1);
-
-    a {
-      display: block;
-      padding: 1em;
-      color: $color__tabs--text;
-      text-decoration: none;
-
-      @include breakpoint(bp--sm--major) {
-        padding-right: 0;
-        padding-left: 0;
-        margin-bottom: 1px;
-
-        &:hover {
-          color: $color__tabs--selected;
-        }
-      }
-    }
+    background-color: $color__navy_gray_4;
+    padding: 1em;
 
     &:hover {
-      background: lighten($color__tabs--bg, 2);
+      background-color: $color__blue-30;
+
+      .bx--tabs__nav-link {
+        color: $color__blue-90;
+
+        @include breakpoint(bp--sm--major) {
+          color: $color__white;
+        }
+      }
 
       @include breakpoint(bp--sm--major) {
         background: none;
@@ -81,9 +76,26 @@
 
     @include breakpoint(bp--sm--major) {
       background: none;
+      padding: 1em 0;
 
       &+& {
         margin-left: em(50px);
+      }
+    }
+  }
+
+  &__nav-link {
+    display: inline-block;
+    color: $color__tabs--text;
+    text-decoration: none;
+
+    @include breakpoint(bp--sm--major) {
+      padding-right: 0;
+      padding-left: 0;
+      margin-bottom: 1px;
+
+      &:hover {
+        color: $color__tabs--selected;
       }
     }
   }
