@@ -12,6 +12,7 @@
 
   &__card-overview {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
     min-height: em(190px);
     text-align: center;

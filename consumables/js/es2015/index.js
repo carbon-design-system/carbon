@@ -28,6 +28,7 @@ import HeaderNav from './header';
 import Toolbars from './toolbars';
 import Loading from './loading';
 import Dropdown from './dropdown';
+import Card from './card';
 
 
 const settings = {};
@@ -45,6 +46,7 @@ export {
   Toolbars,
   Loading,
   Dropdown,
+  Card,
 };
 
 const init = () => {
@@ -59,6 +61,7 @@ const init = () => {
     Toolbars.init();
     Loading.init();
     Dropdown.init();
+    Card.init();
   }
 };
 

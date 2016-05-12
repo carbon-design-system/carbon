@@ -50,7 +50,7 @@ var BluemixComponents =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
+	exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 	
 	__webpack_require__(1);
 	
@@ -94,18 +94,12 @@ var BluemixComponents =
 	
 	var _dropdown2 = _interopRequireDefault(_dropdown);
 	
+	var _card = __webpack_require__(16);
+	
+	var _card2 = _interopRequireDefault(_card);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// Base Elements & Components
-	// -------------
-	// - JavaScript classes for use with components and base-elements.
-	// - The following statements import classes from actual locations to
-	//   be consumed from this file instead of their actual locations.
-	
-	
-	var settings = {};
-	
-	// Export all vars/classes for consumption:
 	// ====================//
 	// Imports and Exports //
 	// ====================//
@@ -119,6 +113,17 @@ var BluemixComponents =
 	
 	// Polyfills
 	// -------------
+	
+	
+	var settings = {};
+	
+	// Export all vars/classes for consumption:
+	
+	// Base Elements & Components
+	// -------------
+	// - JavaScript classes for use with components and base-elements.
+	// - The following statements import classes from actual locations to
+	//   be consumed from this file instead of their actual locations.
 	exports.settings = settings;
 	exports.FabButton = _fab2.default;
 	exports.FileUploader = _fileUploader2.default;
@@ -130,6 +135,7 @@ var BluemixComponents =
 	exports.Toolbars = _toolbars2.default;
 	exports.Loading = _loading2.default;
 	exports.Dropdown = _dropdown2.default;
+	exports.Card = _card2.default;
 	
 	
 	var init = function init() {
@@ -144,6 +150,7 @@ var BluemixComponents =
 	    _toolbars2.default.init();
 	    _loading2.default.init();
 	    _dropdown2.default.init();
+	    _card2.default.init();
 	  }
 	};
 	
@@ -864,10 +871,12 @@ var BluemixComponents =
 	    }
 	
 	    this.element = element;
-	    this.element.dataset.state = 'closed';
 	    this.constructor.components.set(this.element, this);
 	    this.element.ownerDocument.addEventListener('click', function (event) {
 	      return _this.handleDocumentClick(event);
+	    });
+	    this.element.ownerDocument.addEventListener('keypress', function (event) {
+	      return _this.handleKeyPress(event);
 	    });
 	  }
 	
@@ -875,13 +884,36 @@ var BluemixComponents =
 	    key: 'handleDocumentClick',
 	    value: function handleDocumentClick(event) {
 	      var isOfSelf = this.element.contains(event.target);
-	      var shouldBeOpen = isOfSelf && this.element.dataset.state !== 'open';
+	      var shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
 	
 	      if (isOfSelf && this.element.tagName === 'A') {
 	        event.preventDefault();
 	      }
 	
-	      this.element.dataset.state = shouldBeOpen ? 'open' : 'closed';
+	      if (shouldBeOpen) {
+	        this.element.classList.toggle('bx--overflow-menu--open');
+	      } else {
+	        this.element.classList.remove('bx--overflow-menu--open');
+	      }
+	    }
+	  }, {
+	    key: 'handleKeyPress',
+	    value: function handleKeyPress(event) {
+	      var key = event.key || event.which;
+	      if (key === 'Enter' || key === 13) {
+	        var isOfSelf = this.element.contains(event.target);
+	        var shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
+	
+	        if (isOfSelf && this.element.tagName === 'A') {
+	          event.preventDefault();
+	        }
+	
+	        if (shouldBeOpen) {
+	          this.element.classList.toggle('bx--overflow-menu--open');
+	        } else {
+	          this.element.classList.remove('bx--overflow-menu--open');
+	        }
+	      }
 	    }
 	  }, {
 	    key: 'release',
@@ -1557,17 +1589,15 @@ var BluemixComponents =
 	    this.active = 'active' in options ? options.active : true;
 	    this.ie = false;
 	
-	    // check if browser is Internet Explorer
+	    // Check if browser is Internet Explorer
 	    if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
 	      this.ie = true;
-	      this.element.dataset.ie = 'yes';
-	    } else {
-	      this.element.dataset.ie = 'no';
+	      this.element.classList.add('bx--dropdown--ie');
 	    }
 	
 	    this.constructor.components.set(this.element, this);
 	
-	    // initialize spinner
+	    // Initialize spinner
 	    this.set(this.active);
 	  }
 	
@@ -1581,9 +1611,11 @@ var BluemixComponents =
 	      this.active = active;
 	
 	      if (this.active) {
-	        this.element.dataset.state = 'active';
+	        if (this.ie) this.element.classList.remove('bx--loading--stop--ie');
+	        this.element.classList.remove('bx--loading--stop');
 	      } else {
-	        this.element.dataset.state = 'inactive';
+	        if (this.ie) this.element.classList.add('bx--loading--stop--ie');
+	        this.element.classList.add('bx--loading--stop');
 	      }
 	
 	      return this;
@@ -1668,7 +1700,6 @@ var BluemixComponents =
 	    this.element = element;
 	
 	    this.element.dataset.dropdown = '';
-	    this.element.dataset.state = 'closed';
 	    this.constructor.components.set(this.element, this);
 	
 	    this.element.ownerDocument.addEventListener('click', function (event) {
@@ -1692,11 +1723,14 @@ var BluemixComponents =
 	
 	  }, {
 	    key: 'toggle',
-	    value: function toggle() {
+	    value: function toggle(event) {
 	      var isOfSelf = this.element.contains(event.target);
-	      var shouldBeOpen = isOfSelf && this.element.dataset.state !== 'open';
 	
-	      this.element.dataset.state = shouldBeOpen ? 'open' : 'closed';
+	      if (isOfSelf) {
+	        this.element.classList.toggle('bx--dropdown--open');
+	      } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
+	        this.element.classList.remove('bx--dropdown--open');
+	      }
 	    }
 	
 	    // Handles clicking on dropdown options.
@@ -1708,7 +1742,7 @@ var BluemixComponents =
 	    value: function selected(event) {
 	      if (event.target.parentElement.dataset.option !== undefined) {
 	        this.element.firstElementChild.textContent = event.target.textContent;
-	        this.element.dataset.value = event.target.dataset.value;
+	        this.element.dataset.value = event.target.parentElement.dataset.value;
 	
 	        if (this.selectedItem) {
 	          this.selectedItem.classList.remove('bx--dropdown--selected');
@@ -1750,6 +1784,108 @@ var BluemixComponents =
 	
 	
 	Dropdown.components = new WeakMap();
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Card = function () {
+	  function Card(element) {
+	    var _this = this;
+	
+	    _classCallCheck(this, Card);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	    this.element = element;
+	    this.constructor.components.set(this.element, this);
+	    this.element.setAttribute('aria-labelledby', '#card__title--' + Card.cards.indexOf(this.element));
+	    this.cardLocation = this.element.querySelector('.bx--about__title--name') || this.element.querySelector('.bx--overview__description');
+	    this.cardLocation.setAttribute('id', '#card__title--' + Card.cards.indexOf(this.element));
+	    this.element.addEventListener('keydown', function (event) {
+	      return _this.cardKeyPress(event);
+	    });
+	  }
+	
+	  _createClass(Card, [{
+	    key: 'cardKeyPress',
+	    value: function cardKeyPress(event) {
+	      if (this.element === document.activeElement) {
+	        var direction = this.cardKeyboardNavigation(event);
+	        Card.cardIndex = Card.cards.indexOf(this.element) + direction;
+	        if (Card.cardIndex < 0) Card.cardIndex = Card.cards.length - 1;
+	        if (Card.cardIndex > Card.cards.length - 1) Card.cardIndex = 0;
+	        if (direction === 0) return;
+	        Card.cards[Card.cardIndex].focus();
+	      }
+	    }
+	  }, {
+	    key: 'cardKeyboardNavigation',
+	    value: function cardKeyboardNavigation(event) {
+	      var key = event.key || event.which;
+	
+	      switch (key) {
+	        case 'ArrowLeft':
+	        case 37:
+	          event.preventDefault();
+	          return -1;
+	        case 'ArrowRight':
+	        case 39:
+	          event.preventDefault();
+	          return 1;
+	        default:
+	          return 0;
+	      }
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element) {
+	      return this.components.get(element) || new this(element);
+	    }
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this2 = this;
+	
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	
+	      // const cardIndex = 0;
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.overflowMenu !== undefined) {
+	        this.create(target);
+	      } else {
+	        this.cards = [].concat(_toConsumableArray(document.querySelectorAll('.bx--card')));
+	        this.cards.forEach(function (element) {
+	          return _this2.create(element);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return Card;
+	}();
+	
+	exports.default = Card;
+	
+	
+	Card.components = new WeakMap();
+	Card.cards = [];
+	Card.cardIndex = 0;
 
 /***/ }
 /******/ ]);

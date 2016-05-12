@@ -1,19 +1,8 @@
-<div class="bx--card">
+<div class="bx--card" tabindex="0">
   <!-- Card Overview -->
   <div class="bx--card__card-overview">
-    <div class="bx--card-overview__about">
-      <div class="bx--about__icon">
-        <svg class="bx--about__icon--img">
-          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--default"></use>
-        </svg>
-      </div>
-      <div class="bx--about__title">
-        <h3 class="bx--about__title--name">Container Group</h3>
-        <a class="bx--about__title--link">Route: None</a>
-      </div>
-    </div>
     <!-- OverflowMenu -->
-    <div data-overflow-menu class="bx--overflow-menu">
+    <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
       <svg class="bx--overflow-menu__icon">
         <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#app-actions--overflow_menu_icon"></use>
       </svg>
@@ -25,6 +14,17 @@
         <hr/>
         <li><button type="button" class="bx--overflow-menu__btn--delete">Delete App</button></li>
       </ul>
+    </div>
+    <div class="bx--card-overview__about">
+      <div class="bx--about__icon">
+        <svg class="bx--about__icon--img">
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--default"></use>
+        </svg>
+      </div>
+      <div class="bx--about__title">
+        <h3 class="bx--about__title--name">Container Group</h3>
+        <a class="bx--about__title--link">Route: None</a>
+      </div>
     </div>
   </div>
   <!-- Card Footer -->
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="bx--card-footer__app-actions">
-      <button class="bx--app-actions__button" id="restart-app">
+      <button class="bx--app-actions__button" id="restart-app" aria-label="restart-app">
         <svg class="bx--app-actions__button--icon">
           <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--restart"></use>
         </svg>
