@@ -21,7 +21,7 @@ import 'svgxuse';
 import FileUploader from './file-uploader';
 import FabButton from './fab';
 import ContentSwitcher from './content-switcher';
-import Tab from './tabs-nav';
+import Tab from './tabs';
 import OverflowMenu from './overflow-menu';
 import Modal from './modals';
 import HeaderNav from './header';
