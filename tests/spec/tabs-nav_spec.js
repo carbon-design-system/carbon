@@ -1,5 +1,6 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import '../../consumables/js/polyfills/custom-event';
+import '../../consumables/js/polyfills/object-assign';
 import Tab from '../../consumables/js/es2015/tabs-nav';
 
 describe('Test tabs', function () {
@@ -14,6 +15,7 @@ describe('Test tabs', function () {
           selectorTriggerText: '.bx--tabs__trigger-text',
           selectorButton: '.bx--tabs__nav-item',
           selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
+          selectorLink: '.bx--tabs__nav-link',
           classActive: 'bx--tabs--selected',
           classHidden: 'bx--tabs--hidden',
           eventBeforeSelected: 'tab-beingselected',
@@ -119,7 +121,7 @@ describe('Test tabs', function () {
       document.body.appendChild(element);
 
       buttonNodes = [... new Array(2)].map((item, i) => {
-        const buttonNode = document.createElement('a');
+        const buttonNode = document.createElement('button');
         buttonNode.classList.add('bx--tabs__nav-item');
         buttonNode.textContent = i;
         if (i === 0) {
@@ -146,6 +148,55 @@ describe('Test tabs', function () {
     it(`Should update currently selected tab item for narrow screen`, function () {
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(triggerTextNode.textContent).to.equal(buttonNodes[1].textContent);
+    });
+
+    it(`Should update active tab upon right key with old spec`, function () {
+      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { keyIdentifier: 'Right' }));
+      expect(defaultPrevented).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+    });
+
+    it(`Should update active tab upon right key with new spec`, function () {
+      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
+      expect(defaultPrevented).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+    });
+
+    it(`Should handle out of range index`, function () {
+      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
+      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
+      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.true;
+      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.false;
+    });
+
+    it(`Should update active tab upon left key with old spec`, function () {
+      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { keyIdentifier: 'Left' }));
+      expect(defaultPrevented).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+    });
+
+    it(`Should update active tab upon left key with new spec`, function () {
+      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowLeft' }));
+      expect(defaultPrevented).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+    });
+
+    it(`Should focus on the new active tab upon keyboard navigation`, function () {
+      const link = document.createElement('a');
+      const spyFocus = sinon.spy(link, 'focus');
+      link.classList.add('bx--tabs__nav-link');
+      buttonNodes[1].appendChild(link);
+      try {
+        element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
+        expect(spyFocus).to.be.calledOnce;
+      } finally {
+        spyFocus.restore();
+        buttonNodes[1].removeChild(link);
+      }
     });
 
     after(function () {

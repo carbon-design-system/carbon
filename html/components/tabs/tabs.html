@@ -4,16 +4,16 @@
       <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
     </svg>
   </div>
-  <ul class="bx--tabs__nav bx--tabs--hidden">
-    <li class="bx--tabs__nav-item bx--tabs--selected" data-target=".demo--panel--overview"><a class="bx--tabs__nav-link" href="javascript:void(0)">Overview</a></li>
-    <li class="bx--tabs__nav-item" data-target=".demo--panel--containers"><a class="bx--tabs__nav-link" href="javascript:void(0)">Containers Files</a></li>
-    <li class="bx--tabs__nav-item" data-target=".demo--panel--connected"><a class="bx--tabs__nav-link" href="javascript:void(0)">Connected Objects</a></li>
-    <li class="bx--tabs__nav-item" data-target=".demo--panel--manage"><a class="bx--tabs__nav-link" href="javascript:void(0)">Manage</a></li>
+  <ul class="bx--tabs__nav bx--tabs--hidden" role="tablist">
+    <li class="bx--tabs__nav-item bx--tabs--selected" data-target=".demo--panel--overview" role="presentation"><a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">Overview</a></li>
+    <li class="bx--tabs__nav-item" data-target=".demo--panel--containers" role="presentation"><a id="tab-link-2" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-2" aria-selected="false">Containers Files</a></li>
+    <li class="bx--tabs__nav-item" data-target=".demo--panel--connected" role="presentation"><a id="tab-link-3" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-3" aria-selected="false">Connected Objects</a></li>
+    <li class="bx--tabs__nav-item" data-target=".demo--panel--manage" role="presentation"><a id="tab-link-4" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-4" aria-selected="false">Manage</a></li>
   </ul>
 </nav>
 <div class="demo--panels">
-  <div class="demo--panel demo--panel--overview bx--tabs--selected">Overview</div>
-  <div class="demo--panel demo--panel--containers">Containers Files</div>
-  <div class="demo--panel demo--panel--connected">Connected Objects</div>
-  <div class="demo--panel demo--panel--manage">Manage</div>
+  <div id="tab-panel-1" class="demo--panel demo--panel--overview bx--tabs--selected" role="tabpanel" aria-labelledby="tab-link-1" aria-hidden="false">Overview</div>
+  <div id="tab-panel-2" class="demo--panel demo--panel--containers" role="tabpanel" aria-labelledby="tab-link-2" aria-hidden="true">Containers Files</div>
+  <div id="tab-panel-3" class="demo--panel demo--panel--connected" role="tabpanel" aria-labelledby="tab-link-3" aria-hidden="true">Connected Objects</div>
+  <div id="tab-panel-4" class="demo--panel demo--panel--manage" role="tabpanel" aria-labelledby="tab-link-4" aria-hidden="true">Manage</div>
 </div>

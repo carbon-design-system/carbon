@@ -40,7 +40,35 @@ export default class ContentSwitcher {
     }
   }
 
-  setActive(item) {
+  _changeActive(item) {
+    // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
+    const itemLink = item.querySelector(this.options.selectorLink);
+    if (itemLink) {
+      [... this.element.querySelectorAll(this.options.selectorLink)].forEach((link) => {
+        if (link !== itemLink) {
+          link.setAttribute('aria-selected', 'false');
+        }
+      });
+      itemLink.setAttribute('aria-selected', 'true');
+    }
+
+    [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
+      if (button !== item) {
+        toggleClass(button, this.options.classActive, false);
+        [... button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => {
+          toggleClass(element, this.options.classActive, false);
+          element.setAttribute('aria-hidden', 'true');
+        });
+      }
+    });
+    toggleClass(item, this.options.classActive, true);
+    [... item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => {
+      toggleClass(element, this.options.classActive, true);
+      element.setAttribute('aria-hidden', 'false');
+    });
+  }
+
+  setActive(item, callback) {
     const eventStart = new CustomEvent(this.options.eventBeforeSelected, {
       bubbles: true,
       cancelable: true,
@@ -49,21 +77,22 @@ export default class ContentSwitcher {
 
     // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
     if (this.element.dispatchEvent(eventStart)) {
-      [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
-        if (button !== item) {
-          [button, ... button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => {
-            toggleClass(element, this.options.classActive, false);
-          });
-        }
-      });
-      [item, ... item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => {
-        toggleClass(element, this.options.classActive, true);
-      });
+      this._changeActive(item);
       this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
         bubbles: true,
         cancelable: true,
         detail: { item },
       }));
+      if (callback) {
+        callback(null, item);
+      }
+    } else {
+      const error = new Error('Switching active item has been canceled.');
+      error.canceled = true;
+      error.item = item;
+      if (callback) {
+        callback(error);
+      }
     }
   }
 

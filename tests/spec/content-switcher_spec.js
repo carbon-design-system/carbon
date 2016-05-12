@@ -72,7 +72,18 @@ describe('Test content switcher', function () {
       });
     });
 
-    it(`Should provide a way to cancel switching item`, function () {
+    it(`Should update active item upon an API call`, function () {
+      return new Promise((resolve, reject) => {
+        contentSwitcher.setActive(buttonNodes[1], promiseTryCatcher((e, item) => {
+          expect(e).to.be.null;
+          expect(item).to.equal(buttonNodes[1]);
+          expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.false;
+          expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
+        }, resolve, reject));
+      });
+    });
+
+    it(`Should provide a way to cancel switching item upon clicking`, function () {
       events.on(element, 'content-switcher-beingselected', (e) => {
         expect(e.detail.item).to.equal(buttonNodes[1]);
         e.preventDefault();
@@ -82,12 +93,36 @@ describe('Test content switcher', function () {
       expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
 
+    it(`Should provide a way to cancel switching item upon an API call`, function () {
+      events.on(element, 'content-switcher-beingselected', (e) => {
+        expect(e.detail.item).to.equal(buttonNodes[1]);
+        e.preventDefault();
+      });
+      return new Promise((resolve, reject) => {
+        contentSwitcher.setActive(buttonNodes[1], promiseTryCatcher((e, item) => {
+          expect(e).not.to.be.null;
+          expect(e.canceled).to.be.true;
+          expect(e.item).to.equal(buttonNodes[1]);
+          expect(item).not.to.be.ok;
+          expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.true;
+          expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
+        }, resolve, reject));
+      });
+    });
+
     it(`Should select target pane`, function () {
       try {
+        buttonNodes[0].dataset.target = `.${id}_0`;
         buttonNodes[1].dataset.target = `.${id}_1`;
         buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        paneNodes[0].forEach((node) => expect(node.classList.contains('bx--content-switcher--selected')).to.be.false);
-        paneNodes[1].forEach((node) => expect(node.classList.contains('bx--content-switcher--selected')).to.be.true);
+        paneNodes[0].forEach((node) => {
+          expect(node.classList.contains('bx--content-switcher--selected'), 'CSS class of unselected item').to.be.false;
+          expect(node.getAttribute('aria-hidden'), 'aria-hidden of unselected item').to.equal('true');
+        });
+        paneNodes[1].forEach((node) => {
+          expect(node.classList.contains('bx--content-switcher--selected'), 'CSS class of selected item').to.be.true;
+          expect(node.getAttribute('aria-hidden'), 'aria-hidden of selected item').to.equal('false');
+        });
       } finally {
         buttonNodes.forEach((buttonNode) => buttonNode.dataset.target = undefined);
       }
@@ -100,6 +135,40 @@ describe('Test content switcher', function () {
     after(function () {
       contentSwitcher.release();
       paneNodes.forEach((nodes) => nodes.forEach((node) => document.body.removeChild(node)));
+      document.body.removeChild(element);
+    });
+  });
+
+  describe('Setting active item with link', function () {
+    let element;
+    let linkNodes;
+
+    before(function () {
+      element = document.createElement('div');
+
+      document.body.appendChild(element);
+
+      linkNodes = [... new Array(2)].map(() => {
+        const buttonNode = document.createElement('button');
+        const linkNode = document.createElement('a');
+        buttonNode.appendChild(linkNode);
+        element.appendChild(buttonNode);
+        return linkNode;
+      });
+
+      new ContentSwitcher(element, {
+        selectorButton: 'button',
+        selectorLink: 'a',
+      });
+    });
+
+    it(`Should update active item upon clicking`, function () {
+      linkNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(linkNodes[0].getAttribute('aria-selected')).to.equal('false');
+      expect(linkNodes[1].getAttribute('aria-selected')).to.equal('true');
+    });
+
+    after(function () {
       document.body.removeChild(element);
     });
   });
