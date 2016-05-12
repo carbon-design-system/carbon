@@ -14,7 +14,7 @@
 <body>
   {header|s}
   {detailHeader|s}
-  <div class="demo--container">
+  <div class="demo--container" data-card-list>
     {html|s}
   </div>
 

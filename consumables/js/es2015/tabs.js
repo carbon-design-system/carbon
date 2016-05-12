@@ -1,12 +1,8 @@
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
+import '../polyfills/math-sign';
 import '../polyfills/object-assign';
 import ContentSwitcher from './content-switcher';
-
-const sign = Math.sign || function sign(x) {
-  const n = +x;
-  return n === 0 ? n : n / Math.abs(n);
-};
 
 export default class Tab extends ContentSwitcher {
   constructor(element, options = {}) {
@@ -78,7 +74,7 @@ export default class Tab extends ContentSwitcher {
       const button = this.element.querySelector(this.options.selectorButtonSelected);
       const nextIndex = Math.max(buttons.indexOf(button) + direction, -1 /* For `button` not found in `buttons` */);
       const nextIndexLooped = nextIndex >= 0 && nextIndex < buttons.length ? nextIndex :
-        nextIndex - sign(nextIndex) * buttons.length;
+        nextIndex - Math.sign(nextIndex) * buttons.length;
       this.setActive(buttons[nextIndexLooped], (error, item) => {
         if (item) {
           const link = item.querySelector(this.options.selectorLink);
