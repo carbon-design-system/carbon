@@ -1,6 +1,7 @@
 {
   "name": "bluemix-components",
-  "description": "Bluemix Components is a collection of commonly used, reusable UI elements for developers to use in their prototypes and production work for Bluemix -- the scope of this project may expand to be used more widely throughout IBM.",
+  "version": "6.0.0",
+  "description": "Bluemix Components is a component library for Bluemix",
   "scripts": {
     "prebuild": "gulp clean",
     "build": "gulp build",
