@@ -37,7 +37,6 @@
 
     &:focus,
     &:hover {
-      background-color: $color__detail-page-header__tabs--hover;
 
       @include breakpoint(bp--sm--major) {
         background-color: $color__detail-page-header__tabs--bg--small;

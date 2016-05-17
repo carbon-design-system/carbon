@@ -1,5 +1,6 @@
 @mixin detail-page-header {
   background-color: $color__detail-page-header--bg;
+  width: 100%;
 }
 
 @mixin detail-page-header__arrow {
@@ -22,35 +23,7 @@
     padding-bottom: 0;
   }
 
-  .tabs__trigger,
-  .nav__item,
-  .nav__item.selected {
-    background-color: $color__detail-page-header__tabs--bg;
-
-    @include breakpoint(bp--sm--major) {
-      background-color: $color__detail-page-header__tabs--bg--small;
-    }
-
-    &:focus,
-    &:hover {
-      background-color: $color__detail-page-header__tabs--hover;
-
-      @include breakpoint(bp--sm--major) {
-        background-color: $color__detail-page-header__tabs--bg--small;
-      }
-    }
-  }
-
-  .nav__item {
-    @include font-size('14');
-  }
-
-  .nav__item.selected {
-    font-weight: bold;
-    border-bottom-width: 4px;
-  }
-
-  .tabs__nav {
+  .bx--tabs__nav {
     @include breakpoint(bp--sm--major) {
       margin: 0;
     }

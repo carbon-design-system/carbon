@@ -3,8 +3,9 @@
 .bx--tabs {
   @include font-size('14');
   @include font-smoothing;
-  color: $color__tabs--text;
+  color: $color__navy-gray-8;
   background-color: $color__navy_gray_5;
+  font-weight: 700;
   cursor: pointer;
 
   @include breakpoint(bp--sm--major) {
@@ -55,6 +56,7 @@
   }
 
   &__nav-item {
+    @include font-size('14');
     background-color: $color__navy_gray_4;
     padding: 1em;
 
@@ -65,7 +67,7 @@
         color: $color__blue-90;
 
         @include breakpoint(bp--sm--major) {
-          color: $color__white;
+          color: $color__blue-30;
         }
       }
 
@@ -79,7 +81,7 @@
       padding: 1em 0;
 
       &+& {
-        margin-left: em(50px);
+        margin-left: em(48px);
       }
     }
   }

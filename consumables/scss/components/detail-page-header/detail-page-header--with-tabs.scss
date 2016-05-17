@@ -15,22 +15,23 @@
 
     @include breakpoint(bp--xs--major) {
       flex-direction: column;
+      padding-bottom: .5em;
       align-items: flex-start;
     }
   }
 
   &__breadcrumb {
-    @include font-size('14');
     font-weight: 600;
     color: $color__detail-page-header--text--breadcrumb;
     cursor: pointer;
 
     @include breakpoint(bp--xs--major) {
-      padding-bottom: 1em;
+      padding-bottom: .5em;
     }
   }
 
   &__breadcrumb-title {
+    @include font-size('14');
     display: none;
     text-align: left;
     text-transform: capitalize;
@@ -73,7 +74,7 @@
     }
 
     @include breakpoint(bp--sm--major) {
-      @include font-size('29');
+      @include font-size('32');
     }
   }
 
