@@ -201,12 +201,12 @@
 
 %text__desc--catalog {
   @extend %text__desc;
-  @include type($catalog--caption__type);
+  font-size: $catalog--caption__type;
 }
 
 %text__action--catalog {
   @extend %text__action;
-  @include type($catalog--caption__type);
+  font-size: $catalog--caption__type;
 
   color: $color__blue-20;
 }
@@ -249,12 +249,12 @@
 
 %text__desc--summary {
   @extend %text__desc;
-  @include type($summary--caption__type)
+  font-size: $summary--caption__type;
 }
 
 %text__action--summary {
   @extend %text__action;
-  @include type($summary--caption__type);
+  font-size: $summary--caption__type;
 
   color: $color__blue-20;
 }

@@ -48,7 +48,7 @@
   }
 
   .data__main-data {
-    @include type(rem(45px));
+    font-size: rem(45px);
 
     color: $color--desc;
   }
@@ -63,7 +63,7 @@
     border-right: none;
 
     .data__main-data {
-      @include type(rem(64px));
+      font-size: rem(64px);
 
       width: 100%;
       margin: 1em 0 .15em;
@@ -100,7 +100,7 @@
   }
 
   .data__main-data {
-    @include type(rem(64px));
+    font-size: rem(64px);
 
     font-weight: 300;
     color: $color__blue-20; // !temporary
@@ -113,14 +113,14 @@
     }
 
     span {
-      @include type(rem(20px));
+      @include font-size('20');
 
       color: $color__blue-20;
     }
   }
 
   .data__more-info {
-    @include type(rem(14px));
+    @include font-size('14');
 
     font-weight: 300;
     color: $color__blue-20;
@@ -128,7 +128,7 @@
 }
 
 %metrics__details-link {
-  @include type(rem(14px));
+  @include font-size('14');
 
   display: block;
   width: 85%;

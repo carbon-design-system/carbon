@@ -1,16 +1,16 @@
 .bx--number {
   position: relative;
-  
+
   // Styles to prevent selecting label / number when user
   // double clicks the number arrows
   -webkit-user-select: none;
   -moz-user-select: none;
   -khtml-user-select: none;
   -ms-user-select: none;
-  
+
   &__input {
-    @include type(1rem);
-    
+    @include font-size('16');
+
     width: 100%;
     min-width: 9.375em;
     padding: .5em 0 .5em 1em;
@@ -20,7 +20,7 @@
     border: none;
 
     // Mozilla always displays system number toggles by default.
-    // This removes them, and I set a range on the HTML element for 
+    // This removes them, and I set a range on the HTML element for
     // form validation
     -moz-appearance: textfield;
 
@@ -34,7 +34,7 @@
     }
   }
 
-  // Position spans to place SVG's inside. Create placeholder 
+  // Position spans to place SVG's inside. Create placeholder
   // instead of extending class?
   &__arrow {
     position: absolute;
