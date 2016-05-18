@@ -1,3 +1,9 @@
+# DEPRECATED :skull:
+
+### This directory will be removed by `7.0.0`.
+
+This is out of date and user-testing has shown that this example project is causing confusion around how to use and "get started" with Bluemix Components.
+
 # Getting Started
 
 This is a basic project to show you how you how to get started. Use this project as a reference for:
