@@ -33,6 +33,25 @@
     </label>
   </fieldset>
 
+  <!-- Number Input -->
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">Number Input</legend>
+    <div data-numberinput class="bx--number">
+      <label for="numberinput-id-1" class="bx--form__label">Number Input</label>
+      <input id="numberinput-id-1" type="number" pattern="[0-9]*" step="1" min="0" max="10" value="0" class="bx--number__input" />
+      <span class="bx--number__arrow--up bx--number__arrow--icon-up">
+        <svg class="icon--up bx--number__arrow--icon-up">
+          <use class="icon--up bx--number__arrow--icon-up" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://new-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-up"></use>
+        </svg>
+      </span>
+      <span class="bx--number__arrow--down bx--number__arrow--icon-down">
+        <svg class="icon--down bx--number__arrow--icon-down">
+          <use class="icon--down bx--number__arrow--icon-down" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://new-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+        </svg>
+      </span>
+    </div>
+  </fieldset>
+
   <!-- Toggle -->
   <fieldset class="bx--form__fieldset">
     <legend class="bx--form__legend">Toggle</legend>
@@ -125,8 +144,8 @@
     </div>
     <br>
     <div class="bx--select">
-      <label for="select-id" class="bx--form__label">Select</label>
-      <select id="select-id" class="bx--select__input" disabled>
+      <label for="select-id-disabled" class="bx--form__label">Select</label>
+      <select id="select-id-disabled" class="bx--select__input" disabled>
         <option class="bx--select__option" value="" disabled selected hidden>Pick an option</option>
         <option class="bx--select__option" value="volvo">Volvo</option>
         <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
