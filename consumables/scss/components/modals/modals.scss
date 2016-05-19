@@ -27,47 +27,47 @@
 
 .bx--modal__buttons {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: rem(23px) 2rem rem(23px) 2rem;
-  margin: rem(48px) -3.125rem -3.125rem -3.125rem;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: em(24px) 3em em(24px) 3em;
+  margin: em(48px) -3em -3.125em -3em;
   background: $color__modal-footer;
 
   .bx--btn--secondary {
-    margin-right: .5rem;
-  }
+    @include btn--secondary($color__navy-gray-6);
+    color: $color__navy-gray-6;
+    margin-right: 1em;
 
-  @include breakpoint('bp--xs--major') {
-    align-items: flex-end;
-    justify-content: flex-end;
-  }
-
-  // Breakpoint so the buttons are centered between 768px - 800px
-  @include breakpoint('bp--sm--major') {
-    align-items: center;
-    justify-content: center;
-  }
-
-  @include breakpoint('800px') {
-    align-items: flex-end;
-    justify-content: flex-end;
+    &:hover {
+      color: $color__white;
+    }
   }
 }
 
 .bx--modal-content {
 
   &__heading {
-    @include font-size('29');
+    @include font-size('20');
     font-weight: 200;
-
     color: $color__navy-gray-5;
-    margin-bottom: rem(24px);
+    padding-bottom: .925em;
+
+    @include breakpoint(640px) {
+      @include font-size('26');
+    }
   }
 
   &__text {
     @include line-height('body');
-    padding-top: 1rem;
     color: $color__modal-text;
+  }
+
+  &__label {
+    @include font-size('12');
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: em(8px);
   }
 }
 
@@ -78,20 +78,18 @@
   width: 100%;
   height: 100%;
   max-height: 100%;
-  padding: 3.125rem;
-  overflow: hidden;
-  overflow-x: hidden;
-  overflow-y: auto;
+  padding: 2.75em 1em 1em;
   background: $color__modal-bg--inner;
   border-top: 6px solid $color__blue-40;
   opacity: 1;
   transition: .2s;
   color: $color__modal-text;
 
-  @include breakpoint('bp--sm--major') {
+  @include breakpoint(640px) {
     width: 50%;
     height: auto;
     max-height: 90%;
+    padding: 2.75em 3em 3em 3em;
   }
 
   .bx--select,
@@ -130,22 +128,26 @@
   }
 
   .bx--search__filter {
-    color: $color__navy-gray-6;
+    color: $color__navy-gray-5;
     background-color: mix($color__white, $color__navy-gray-7, 30%);
 
     &:hover,
     &:focus {
       background-color: mix($color__white, $color__navy-gray-7, 40%);
     }
+
+    .bx--search__icon--filter {
+      fill: $color__navy-gray-5;
+    }
   }
 }
 
 .bx--modal__close {
   position: absolute;
-  top: rem(10px);
-  right: rem(10px);
-  width: rem(45px);
-  height: rem(45px);
+  top: 1em;
+  right: 1em;
+  width: 2.25em;
+  height: 2.25em;
   padding: 0;
   overflow: hidden;
   cursor: pointer;
@@ -153,28 +155,18 @@
   border: none;
 
   &--icon {
-    width: rem(44px);
-    height: rem(44px);
     transition: .2s;
     fill: $color__navy-gray-6;
+    width: 2.25em;
+    height: 2.25em;
 
     &:hover {
       fill: $color__navy-gray-7;
     }
-
-    @include breakpoint('bp--sm--major') {
-      width: rem(25px);
-      height: rem(25px);
-    }
-  }
-
-  @include breakpoint('bp--sm--major') {
-    width: rem(30px);
-    height: rem(30px);
   }
 }
 
 .bx--modal__header {
-  padding: 3.125rem 3.125rem 0 3.125rem;
-  margin: -3.125rem -3.125rem .25rem -3.125rem;
+  padding: 3.125em 3.125em 0 3.125em;
+  margin: -3.125em -3.125em .25em -3.125em;
 }
