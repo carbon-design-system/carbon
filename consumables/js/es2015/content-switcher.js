@@ -22,6 +22,10 @@ export default class ContentSwitcher {
     this.constructor.components.set(this.element, this);
 
     this.element.addEventListener('click', (event) => this.handleClick(event));
+
+    [... element.querySelectorAll('input')].forEach((input) => {
+      if (input.checked) this._changeActive(input);
+    });
   }
 
   static init(target = document, options) {
@@ -57,17 +61,11 @@ export default class ContentSwitcher {
     [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
       if (button !== item) {
         toggleClass(button, this.options.classActive, false);
-        [... button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => {
-          toggleClass(element, this.options.classActive, false);
-          element.setAttribute('aria-hidden', 'true');
-        });
+        [... button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => element.setAttribute('hidden', ''));
       }
     });
     toggleClass(item, this.options.classActive, true);
-    [... item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => {
-      toggleClass(element, this.options.classActive, true);
-      element.setAttribute('aria-hidden', 'false');
-    });
+    [... item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => element.removeAttribute('hidden'));
   }
 
   setActive(item, callback) {

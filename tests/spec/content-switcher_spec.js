@@ -116,12 +116,10 @@ describe('Test content switcher', function () {
         buttonNodes[1].dataset.target = `.${id}_1`;
         buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
         paneNodes[0].forEach((node) => {
-          expect(node.classList.contains('bx--content-switcher--selected'), 'CSS class of unselected item').to.be.false;
-          expect(node.getAttribute('aria-hidden'), 'aria-hidden of unselected item').to.equal('true');
+          expect(node.getAttribute('hidden'), 'hidden of unselected item').to.exist;
         });
         paneNodes[1].forEach((node) => {
-          expect(node.classList.contains('bx--content-switcher--selected'), 'CSS class of selected item').to.be.true;
-          expect(node.getAttribute('aria-hidden'), 'aria-hidden of selected item').to.equal('false');
+          expect(node.getAttribute('hidden'), 'hidden of selected item').to.not.exist;
         });
       } finally {
         buttonNodes.forEach((buttonNode) => buttonNode.dataset.target = undefined);
