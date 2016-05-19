@@ -18,22 +18,11 @@
     }
 
     &:checked + .bx--content-switcher__btn {
-      @include content-switcher__btn;
-      @include font-size('16');
-      background-color: $color__content-switcher;
-      color: $color__content-switcher-text--active;
+      @include content-switcher__btn(400, $color__blue-30, $color__blue-90);
     }
   }
 
   &__btn {
     @include content-switcher__btn;
-    border: 2px solid $color__content-switcher;
-    color: $color__content-switcher;
-
-    &:hover,
-    &:focus {
-      background-color: $color__content-switcher;
-      color: $color__content-switcher-text--active;
-    }
   }
 }

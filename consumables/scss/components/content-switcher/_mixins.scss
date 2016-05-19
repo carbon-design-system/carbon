@@ -1,8 +1,10 @@
-@mixin content-switcher__btn {
-  margin: 0;
-  font-weight: 400;
-  height: auto;
-  padding: $padding__content-switcher;
+@mixin content-switcher__btn($font-weight: 200, $bg-color: none, $text-color: $color__blue-30) {
+  @include font-size('14');
+  background-color: $bg-color;
+  color: $text-color;
+  border: 1px solid $color__blue-30;
+  font-weight: $font-weight;
+  padding: .87em 2em;
 
   &:not(:last-of-type) {
     border-right: none;
@@ -16,5 +18,12 @@
   &:last-of-type {
     border-top-right-radius: $border__content-switcher-radius;
     border-bottom-right-radius: $border__content-switcher-radius;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__blue-30;
+    color: $color__blue-90;
+    font-weight: 400;
   }
 }
