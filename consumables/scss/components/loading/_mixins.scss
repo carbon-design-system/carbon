@@ -4,11 +4,11 @@
 
 @mixin animation__loading--spin {
   // Animate the container
-  animation-name: rotate, rotate;
-  animation-duration: 1000ms, 500ms;
-  animation-timing-function: cubic-bezier(.6, 0, 1.0, 1.0), linear;
-  animation-fill-mode: forwards, none;
-  animation-iteration-count: 1, infinite;
+  animation-name: rotate;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
 
   // Animate the stroke
   & svg circle {
