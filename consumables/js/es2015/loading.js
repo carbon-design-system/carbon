@@ -1,3 +1,5 @@
+import toggleClass from '../polyfills/toggle-class';
+
 export default class Loading {
   constructor(element, options = { active: true }) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -42,13 +44,10 @@ export default class Loading {
 
     this.active = active;
 
-    if (this.active) {
-      if (this.ie) this.element.classList.remove('bx--loading--stop--ie');
-      this.element.classList.remove('bx--loading--stop');
-    } else {
-      if (this.ie) this.element.classList.add('bx--loading--stop--ie');
-      this.element.classList.add('bx--loading--stop');
+    if (this.ie) {
+      toggleClass(this.element, 'bx--loading--stop--ie', !this.active);
     }
+    toggleClass(this.element, 'bx--loading--stop', !this.active);
 
     return this;
   }

@@ -2,6 +2,7 @@ import '../polyfills/array-from';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import eventMatches from '../../js/polyfills/event-matches';
+import toggleClass from '../polyfills/toggle-class';
 
 export default class Modal {
   constructor(element, options = {}) {
@@ -97,7 +98,7 @@ export default class Modal {
     };
 
     this.element.addEventListener('transitionend', finishedTransition);
-    this.element.classList[visible ? 'add' : 'remove'](this.options.classVisible);
+    toggleClass(this.element, this.options.classVisible, visible);
     const transitionDuration = parseFloat(this.element.ownerDocument.defaultView.getComputedStyle(this.element).transitionDuration);
     if (isNaN(transitionDuration) || transitionDuration === 0) {
       finishedTransition();

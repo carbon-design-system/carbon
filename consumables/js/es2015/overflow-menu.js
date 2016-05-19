@@ -1,4 +1,5 @@
 import '../polyfills/array-from';
+import toggleClass from '../polyfills/toggle-class';
 
 export default class OverflowMenu {
   constructor(element) {
@@ -35,11 +36,7 @@ export default class OverflowMenu {
       event.preventDefault();
     }
 
-    if (shouldBeOpen) {
-      this.element.classList.toggle('bx--overflow-menu--open');
-    } else {
-      this.element.classList.remove('bx--overflow-menu--open');
-    }
+    toggleClass(this.element, 'bx--overflow-menu--open', shouldBeOpen);
   }
 
   handleKeyPress(event) {
@@ -52,11 +49,7 @@ export default class OverflowMenu {
         event.preventDefault();
       }
 
-      if (shouldBeOpen) {
-        this.element.classList.toggle('bx--overflow-menu--open');
-      } else {
-        this.element.classList.remove('bx--overflow-menu--open');
-      }
+      toggleClass(this.element, 'bx--overflow-menu--open', shouldBeOpen);
     }
   }
 
