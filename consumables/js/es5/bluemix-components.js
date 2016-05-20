@@ -50,8 +50,7 @@ var BluemixComponents =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
+	exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 	
 	__webpack_require__(1);
 	
@@ -67,41 +66,45 @@ var BluemixComponents =
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
-	var _tabsNav = __webpack_require__(8);
+	var _tabs = __webpack_require__(9);
 	
-	var _tabsNav2 = _interopRequireDefault(_tabsNav);
+	var _tabs2 = _interopRequireDefault(_tabs);
 	
-	var _overflowMenu = __webpack_require__(9);
+	var _overflowMenu = __webpack_require__(11);
 	
 	var _overflowMenu2 = _interopRequireDefault(_overflowMenu);
 	
-	var _modals = __webpack_require__(10);
+	var _modals = __webpack_require__(12);
 	
 	var _modals2 = _interopRequireDefault(_modals);
 	
-	var _header = __webpack_require__(12);
+	var _header = __webpack_require__(14);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _toolbars = __webpack_require__(13);
+	var _toolbars = __webpack_require__(15);
 	
 	var _toolbars2 = _interopRequireDefault(_toolbars);
 	
-	var _loading = __webpack_require__(14);
+	var _loading = __webpack_require__(16);
 	
 	var _loading2 = _interopRequireDefault(_loading);
 	
-	var _dropdown = __webpack_require__(15);
+	var _dropdown = __webpack_require__(17);
 	
 	var _dropdown2 = _interopRequireDefault(_dropdown);
 	
-	var _card = __webpack_require__(16);
+	var _card = __webpack_require__(18);
 	
 	var _card2 = _interopRequireDefault(_card);
 	
-	var _numberInput = __webpack_require__(17);
+	var _numberInput = __webpack_require__(19);
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
+	
+	var _table = __webpack_require__(20);
+	
+	var _table2 = _interopRequireDefault(_table);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -133,7 +136,7 @@ var BluemixComponents =
 	exports.FabButton = _fab2.default;
 	exports.FileUploader = _fileUploader2.default;
 	exports.ContentSwitcher = _contentSwitcher2.default;
-	exports.Tab = _tabsNav2.default;
+	exports.Tab = _tabs2.default;
 	exports.OverflowMenu = _overflowMenu2.default;
 	exports.Modal = _modals2.default;
 	exports.HeaderNav = _header2.default;
@@ -142,6 +145,7 @@ var BluemixComponents =
 	exports.Dropdown = _dropdown2.default;
 	exports.Card = _card2.default;
 	exports.NumberInput = _numberInput2.default;
+	exports.Table = _table2.default;
 	
 	
 	var init = function init() {
@@ -149,7 +153,7 @@ var BluemixComponents =
 	    _fab2.default.init();
 	    _fileUploader2.default.init();
 	    _contentSwitcher2.default.init();
-	    _tabsNav2.default.init();
+	    _tabs2.default.init();
 	    _overflowMenu2.default.init();
 	    _modals2.default.init();
 	    _header2.default.init();
@@ -158,6 +162,7 @@ var BluemixComponents =
 	    _dropdown2.default.init();
 	    _card2.default.init();
 	    _numberInput2.default.init();
+	    _table2.default.init();
 	  }
 	};
 	
@@ -512,6 +517,8 @@ var BluemixComponents =
 	  }], [{
 	    key: 'init',
 	    value: function init() {
+	      var _this2 = this;
+	
 	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
 	
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
@@ -523,8 +530,8 @@ var BluemixComponents =
 	        var _ret = function () {
 	          var handler = function handler(event) {
 	            var element = (0, _eventMatches2.default)(event, '[data-fab]');
-	            if (element && !FabButton.components.has(element)) {
-	              FabButton.create(element).toggle(event);
+	            if (element && !_this2.components.has(element)) {
+	              _this2.create(element).toggle(event);
 	            }
 	          };
 	          target.addEventListener('click', handler);
@@ -603,17 +610,15 @@ var BluemixComponents =
 	
 	__webpack_require__(7);
 	
+	var _toggleClass = __webpack_require__(8);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function toggleClass(element, name, add) {
-	  if (element.classList.contains(name) === !add) {
-	    element.classList[add ? 'add' : 'remove'](name);
-	  }
-	}
 	
 	var ContentSwitcher = function () {
 	  function ContentSwitcher(element) {
@@ -642,6 +647,10 @@ var BluemixComponents =
 	    this.element.addEventListener('click', function (event) {
 	      return _this.handleClick(event);
 	    });
+	
+	    [].concat(_toConsumableArray(element.querySelectorAll('input'))).forEach(function (input) {
+	      if (input.checked) _this._changeActive(input);
+	    });
 	  }
 	
 	  _createClass(ContentSwitcher, [{
@@ -653,10 +662,37 @@ var BluemixComponents =
 	      }
 	    }
 	  }, {
-	    key: 'setActive',
-	    value: function setActive(item) {
+	    key: '_changeActive',
+	    value: function _changeActive(item) {
 	      var _this2 = this;
 	
+	      // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
+	      var itemLink = item.querySelector(this.options.selectorLink);
+	      if (itemLink) {
+	        [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLink))).forEach(function (link) {
+	          if (link !== itemLink) {
+	            link.setAttribute('aria-selected', 'false');
+	          }
+	        });
+	        itemLink.setAttribute('aria-selected', 'true');
+	      }
+	
+	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorButton))).forEach(function (button) {
+	        if (button !== item) {
+	          (0, _toggleClass2.default)(button, _this2.options.classActive, false);
+	          [].concat(_toConsumableArray(button.ownerDocument.querySelectorAll(button.dataset.target))).forEach(function (element) {
+	            return element.setAttribute('hidden', '');
+	          });
+	        }
+	      });
+	      (0, _toggleClass2.default)(item, this.options.classActive, true);
+	      [].concat(_toConsumableArray(item.ownerDocument.querySelectorAll(item.dataset.target))).forEach(function (element) {
+	        return element.removeAttribute('hidden');
+	      });
+	    }
+	  }, {
+	    key: 'setActive',
+	    value: function setActive(item, callback) {
 	      var eventStart = new CustomEvent(this.options.eventBeforeSelected, {
 	        bubbles: true,
 	        cancelable: true,
@@ -665,21 +701,22 @@ var BluemixComponents =
 	
 	      // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
 	      if (this.element.dispatchEvent(eventStart)) {
-	        [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorButton))).forEach(function (button) {
-	          if (button !== item) {
-	            [button].concat(_toConsumableArray(button.ownerDocument.querySelectorAll(button.dataset.target))).forEach(function (element) {
-	              toggleClass(element, _this2.options.classActive, false);
-	            });
-	          }
-	        });
-	        [item].concat(_toConsumableArray(item.ownerDocument.querySelectorAll(item.dataset.target))).forEach(function (element) {
-	          toggleClass(element, _this2.options.classActive, true);
-	        });
+	        this._changeActive(item);
 	        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
 	          bubbles: true,
 	          cancelable: true,
 	          detail: { item: item }
 	        }));
+	        if (callback) {
+	          callback(null, item);
+	        }
+	      } else {
+	        var error = new Error('Switching active item has been canceled.');
+	        error.canceled = true;
+	        error.item = item;
+	        if (callback) {
+	          callback(error);
+	        }
 	      }
 	    }
 	  }, {
@@ -689,12 +726,22 @@ var BluemixComponents =
 	    }
 	  }], [{
 	    key: 'init',
-	    value: function init(options) {
+	    value: function init() {
 	      var _this3 = this;
 	
-	      [].concat(_toConsumableArray(document.querySelectorAll('[data-content-switcher]'))).forEach(function (element) {
-	        return _this3.create(element, options);
-	      });
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.contentSwitcher !== undefined) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(document.querySelectorAll('[data-content-switcher]'))).forEach(function (element) {
+	          return _this3.create(element, options);
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'create',
@@ -747,6 +794,22 @@ var BluemixComponents =
 
 /***/ },
 /* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = toggleClass;
+	function toggleClass(element, name, add) {
+	  if (element.classList.contains(name) === !add) {
+	    element.classList[add ? 'add' : 'remove'](name);
+	  }
+	}
+
+/***/ },
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -764,6 +827,8 @@ var BluemixComponents =
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
 	__webpack_require__(6);
+	
+	__webpack_require__(10);
 	
 	__webpack_require__(7);
 	
@@ -795,11 +860,16 @@ var BluemixComponents =
 	      selectorTriggerText: '.bx--tabs__trigger-text',
 	      selectorButton: '.bx--tabs__nav-item',
 	      selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
+	      selectorLink: '.bx--tabs__nav-link',
 	      classActive: 'bx--tabs--selected',
 	      classHidden: 'bx--tabs--hidden',
 	      eventBeforeSelected: 'tab-beingselected',
 	      eventAfterSelected: 'tab-selected'
 	    }, options)));
+	
+	    _this.element.addEventListener('keydown', function (event) {
+	      return _this.handleKeyDown(event);
+	    });
 	
 	    var selected = _this.element.querySelector(_this.options.selectorButtonSelected);
 	    if (selected) {
@@ -809,17 +879,56 @@ var BluemixComponents =
 	  }
 	
 	  _createClass(Tab, [{
+	    key: '_changeActive',
+	    value: function _changeActive(item) {
+	      _get(Object.getPrototypeOf(Tab.prototype), '_changeActive', this).call(this, item);
+	      this.updateTriggerText(item);
+	    }
+	  }, {
 	    key: 'handleClick',
 	    value: function handleClick(event) {
+	      _get(Object.getPrototypeOf(Tab.prototype), 'handleClick', this).call(this, event);
 	      var button = (0, _eventMatches2.default)(event, this.options.selectorButton);
 	      var trigger = (0, _eventMatches2.default)(event, this.options.selectorTrigger);
 	      if (button) {
 	        _get(Object.getPrototypeOf(Tab.prototype), 'handleClick', this).call(this, event);
 	        this.updateMenuState();
-	        this.updateTriggerText(button);
 	      }
 	      if (trigger) {
 	        this.updateMenuState();
+	      }
+	    }
+	  }, {
+	    key: 'handleKeyDown',
+	    value: function handleKeyDown(event) {
+	      var _this2 = this;
+	
+	      var triggerNode = this.element.querySelector(this.options.selectorTrigger);
+	      if (triggerNode && triggerNode.offsetParent) {
+	        return;
+	      }
+	
+	      var direction = {
+	        Left: -1,
+	        Right: 1,
+	        ArrowLeft: -1,
+	        ArrowRight: 1
+	      }[event.key || event.keyIdentifier];
+	
+	      if (direction) {
+	        var buttons = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorButton)));
+	        var button = this.element.querySelector(this.options.selectorButtonSelected);
+	        var nextIndex = Math.max(buttons.indexOf(button) + direction, -1 /* For `button` not found in `buttons` */);
+	        var nextIndexLooped = nextIndex >= 0 && nextIndex < buttons.length ? nextIndex : nextIndex - Math.sign(nextIndex) * buttons.length;
+	        this.setActive(buttons[nextIndexLooped], function (error, item) {
+	          if (item) {
+	            var link = item.querySelector(_this2.options.selectorLink);
+	            if (link) {
+	              link.focus();
+	            }
+	          }
+	        });
+	        event.preventDefault();
 	      }
 	    }
 	  }, {
@@ -835,7 +944,7 @@ var BluemixComponents =
 	  }], [{
 	    key: 'init',
 	    value: function init() {
-	      var _this2 = this;
+	      var _this3 = this;
 	
 	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
 	      var options = arguments[1];
@@ -847,7 +956,7 @@ var BluemixComponents =
 	        this.create(target, options);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll('[data-tabs]'))).forEach(function (element) {
-	          return _this2.create(element, options);
+	          return _this3.create(element, options);
 	        });
 	      }
 	    }
@@ -862,7 +971,18 @@ var BluemixComponents =
 	Tab.components = new WeakMap();
 
 /***/ },
-/* 9 */
+/* 10 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Math.sign = Math.sign || function sign(x) {
+	  var n = +x;
+	  return n === 0 ? n : n / Math.abs(n);
+	};
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -874,6 +994,12 @@ var BluemixComponents =
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	__webpack_require__(6);
+	
+	var _toggleClass = __webpack_require__(8);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -909,11 +1035,7 @@ var BluemixComponents =
 	        event.preventDefault();
 	      }
 	
-	      if (shouldBeOpen) {
-	        this.element.classList.toggle('bx--overflow-menu--open');
-	      } else {
-	        this.element.classList.remove('bx--overflow-menu--open');
-	      }
+	      (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
 	    }
 	  }, {
 	    key: 'handleKeyPress',
@@ -927,11 +1049,7 @@ var BluemixComponents =
 	          event.preventDefault();
 	        }
 	
-	        if (shouldBeOpen) {
-	          this.element.classList.toggle('bx--overflow-menu--open');
-	        } else {
-	          this.element.classList.remove('bx--overflow-menu--open');
-	        }
+	        (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
 	      }
 	    }
 	  }, {
@@ -973,7 +1091,7 @@ var BluemixComponents =
 	OverflowMenu.components = new WeakMap();
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -990,11 +1108,15 @@ var BluemixComponents =
 	
 	__webpack_require__(7);
 	
-	__webpack_require__(11);
+	__webpack_require__(13);
 	
 	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
+	var _toggleClass = __webpack_require__(8);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1070,7 +1192,7 @@ var BluemixComponents =
 	      };
 	
 	      this.element.addEventListener('transitionend', finishedTransition);
-	      this.element.classList[visible ? 'add' : 'remove'](this.options.classVisible);
+	      (0, _toggleClass2.default)(this.element, this.options.classVisible, visible);
 	      var transitionDuration = parseFloat(this.element.ownerDocument.defaultView.getComputedStyle(this.element).transitionDuration);
 	      if (isNaN(transitionDuration) || transitionDuration === 0) {
 	        finishedTransition();
@@ -1242,7 +1364,7 @@ var BluemixComponents =
 	Modal.components = new WeakMap();
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1268,7 +1390,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1285,7 +1407,7 @@ var BluemixComponents =
 	
 	__webpack_require__(7);
 	
-	__webpack_require__(11);
+	__webpack_require__(13);
 	
 	var _eventMatches = __webpack_require__(4);
 	
@@ -1490,7 +1612,7 @@ var BluemixComponents =
 	HeaderNav.components = new WeakMap();
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1579,8 +1701,8 @@ var BluemixComponents =
 	Toolbars.components = new WeakMap();
 
 /***/ },
-/* 14 */
-/***/ function(module, exports) {
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -1589,6 +1711,12 @@ var BluemixComponents =
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _toggleClass = __webpack_require__(8);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -1629,13 +1757,10 @@ var BluemixComponents =
 	
 	      this.active = active;
 	
-	      if (this.active) {
-	        if (this.ie) this.element.classList.remove('bx--loading--stop--ie');
-	        this.element.classList.remove('bx--loading--stop');
-	      } else {
-	        if (this.ie) this.element.classList.add('bx--loading--stop--ie');
-	        this.element.classList.add('bx--loading--stop');
+	      if (this.ie) {
+	        (0, _toggleClass2.default)(this.element, 'bx--loading--stop--ie', !this.active);
 	      }
+	      (0, _toggleClass2.default)(this.element, 'bx--loading--stop', !this.active);
 	
 	      return this;
 	    }
@@ -1689,7 +1814,7 @@ var BluemixComponents =
 	Loading.components = new WeakMap();
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1704,7 +1829,7 @@ var BluemixComponents =
 	
 	__webpack_require__(7);
 	
-	__webpack_require__(11);
+	__webpack_require__(13);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -1774,9 +1899,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'selected',
 	    value: function selected(event) {
-	      if (event.target.parentElement.dataset.option !== undefined) {
-	        this.element.firstElementChild.textContent = event.target.textContent;
-	        this.element.dataset.value = event.target.parentElement.dataset.value;
+	      var _this2 = this;
 	
 	      var activatedElement = event.target;
 	      if (activatedElement.parentElement.dataset.option !== undefined) {
@@ -1841,7 +1964,104 @@ var BluemixComponents =
 	Dropdown.components = new WeakMap();
 
 /***/ },
-/* 16 */
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _eventMatches = __webpack_require__(4);
+	
+	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
+	__webpack_require__(10);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Card = function () {
+	  function Card(element) {
+	    var _this = this;
+	
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    _classCallCheck(this, Card);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	    this.element = element;
+	    this.options = Object.assign({
+	      selectorCard: '.bx--card'
+	    }, options);
+	    this.constructor.components.set(this.element, this);
+	    this.element.addEventListener('keydown', function (event) {
+	      return _this.cardKeyPress(event);
+	    });
+	  }
+	
+	  _createClass(Card, [{
+	    key: 'cardKeyPress',
+	    value: function cardKeyPress(event) {
+	      var direction = {
+	        Left: -1,
+	        Right: 1,
+	        ArrowLeft: -1,
+	        ArrowRight: 1
+	      }[event.key || event.keyIdentifier];
+	      var card = (0, _eventMatches2.default)(event, this.options.selectorCard);
+	
+	      if (direction && card && card === document.activeElement) {
+	        var cards = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorCard)));
+	        var nextIndex = Math.max(cards.indexOf(card) + direction, -1 /* For `card` not found in `cards` */);
+	        var nextIndexLooped = nextIndex >= 0 && nextIndex < cards.length ? nextIndex : nextIndex - Math.sign(nextIndex) * cards.length;
+	        cards[nextIndexLooped].focus();
+	      }
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
+	    }
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this2 = this;
+	
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.cardList !== undefined) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-card-list]'))).forEach(function (element) {
+	          return _this2.create(element, options);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return Card;
+	}();
+	
+	exports.default = Card;
+	
+	
+	Card.components = new WeakMap();
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1926,8 +2146,8 @@ var BluemixComponents =
 	NumberInput.components = new WeakMap();
 
 /***/ },
-/* 16 */
-/***/ function(module, exports) {
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -1935,65 +2155,108 @@ var BluemixComponents =
 	  value: true
 	});
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	var _eventMatches = __webpack_require__(4);
+	
+	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
+	var _toggleClass = __webpack_require__(8);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Card = function () {
-	  function Card(element) {
+	var Table = function () {
+	  function Table(element) {
 	    var _this = this;
 	
-	    _classCallCheck(this, Card);
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    _classCallCheck(this, Table);
 	
 	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
 	      throw new TypeError('DOM element should be given to initialize this widget.');
 	    }
 	    this.element = element;
+	
+	    this.options = Object.assign({
+	      selectorTitle: '.bx--table__column-title',
+	      selectorRow: '.bx--table__row',
+	      selectorCheckbox: '.bx--checkbox',
+	      classSortState: 'bx--table__column-title--rotated',
+	      classCheckState: 'bx--table__row--checked',
+	      eventBeforeSortToggled: 'table-sort-beingtoggled',
+	      eventAfterSortToggled: 'table-sort-toggled',
+	      eventBeforeCheckToggled: 'table-check-beingtoggled',
+	      eventAfterCheckToggled: 'table-check-toggled'
+	    }, options);
+	
 	    this.constructor.components.set(this.element, this);
-	    this.element.setAttribute('aria-labelledby', '#card__title--' + Card.cards.indexOf(this.element));
-	    this.cardLocation = this.element.querySelector('.bx--about__title--name') || this.element.querySelector('.bx--overview__description');
-	    this.cardLocation.setAttribute('id', '#card__title--' + Card.cards.indexOf(this.element));
-	    this.element.addEventListener('keydown', function (event) {
-	      return _this.cardKeyPress(event);
+	
+	    this.element.addEventListener('click', function (event) {
+	      return _this.handleClick(event);
 	    });
 	  }
 	
-	  _createClass(Card, [{
-	    key: 'cardKeyPress',
-	    value: function cardKeyPress(event) {
-	      if (this.element === document.activeElement) {
-	        var direction = this.cardKeyboardNavigation(event);
-	        Card.cardIndex = Card.cards.indexOf(this.element) + direction;
-	        if (Card.cardIndex < 0) Card.cardIndex = Card.cards.length - 1;
-	        if (Card.cardIndex > Card.cards.length - 1) Card.cardIndex = 0;
-	        if (direction === 0) return;
-	        Card.cards[Card.cardIndex].focus();
+	  _createClass(Table, [{
+	    key: 'handleClick',
+	    value: function handleClick(event) {
+	      var title = (0, _eventMatches2.default)(event, this.options.selectorTitle);
+	      var row = (0, _eventMatches2.default)(event, this.options.selectorRow);
+	      var checkbox = (0, _eventMatches2.default)(event, this.options.selectorCheckbox);
+	      if (title) {
+	        this.toggleState('Sort', title);
+	      }
+	      if (row && checkbox) {
+	        this.toggleState('Check', row);
 	      }
 	    }
 	  }, {
-	    key: 'cardKeyboardNavigation',
-	    value: function cardKeyboardNavigation(event) {
-	      var key = event.key || event.which;
+	    key: 'toggleState',
+	    value: function toggleState(type, element, callback) {
+	      var newState = !element.classList.contains(this.options['class' + type + 'State']);
+	      var eventStart = new CustomEvent(this.options['eventBefore' + type + 'Toggled'], {
+	        bubbles: true,
+	        cancelable: true,
+	        detail: { newState: newState }
+	      });
 	
-	      switch (key) {
-	        case 'ArrowLeft':
-	        case 37:
-	          event.preventDefault();
-	          return -1;
-	        case 'ArrowRight':
-	        case 39:
-	          event.preventDefault();
-	          return 1;
-	        default:
-	          return 0;
+	      // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
+	      if (element.dispatchEvent(eventStart)) {
+	        (0, _toggleClass2.default)(element, this.options['class' + type + 'State'], newState);
+	        // this._changeActive(item);
+	        element.dispatchEvent(new CustomEvent(this.options['eventAfter' + type + 'Toggled'], {
+	          bubbles: true,
+	          cancelable: true,
+	          detail: { newState: newState }
+	        }));
+	        if (callback) {
+	          callback(null, element, newState);
+	        }
+	      } else {
+	        var error = new Error('Toggling on table has been canceled.');
+	        error.canceled = true;
+	        error.element = element;
+	        error.newState = newState;
+	        if (callback) {
+	          callback(error);
+	        }
 	      }
+	    }
+	  }, {
+	    key: 'release',
+	    value: function release() {
+	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
 	    key: 'create',
-	    value: function create(element) {
-	      return this.components.get(element) || new this(element);
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
 	    }
 	  }, {
 	    key: 'init',
@@ -2001,31 +2264,43 @@ var BluemixComponents =
 	      var _this2 = this;
 	
 	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
 	
-	      // const cardIndex = 0;
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.overflowMenu !== undefined) {
-	        this.create(target);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.table !== undefined) {
+	        this.create(target, options);
 	      } else {
-	        this.cards = [].concat(_toConsumableArray(document.querySelectorAll('.bx--card')));
-	        this.cards.forEach(function (element) {
-	          return _this2.create(element);
-	        });
+	        var _ret = function () {
+	          var handler = function handler(event) {
+	            var element = (0, _eventMatches2.default)(event, '[data-table]');
+	            if (element && !_this2.components.has(element)) {
+	              _this2.create(element, options).handleClick(event);
+	            }
+	          };
+	          target.addEventListener('click', handler);
+	          return {
+	            v: {
+	              release: function release() {
+	                return target.removeEventListener('click', handler);
+	              }
+	            }
+	          };
+	        }();
+	
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	      }
 	    }
 	  }]);
 	
-	  return Card;
+	  return Table;
 	}();
 	
-	exports.default = Card;
+	exports.default = Table;
 	
 	
-	Card.components = new WeakMap();
-	Card.cards = [];
-	Card.cardIndex = 0;
+	Table.components = new WeakMap();
 
 /***/ }
 /******/ ]);

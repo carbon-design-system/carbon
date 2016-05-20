@@ -1,6 +1,6 @@
 {
   "name": "bluemix-components",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Bluemix Components is a component library for Bluemix",
   "scripts": {
     "prebuild": "gulp clean",
