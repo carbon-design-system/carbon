@@ -5,20 +5,26 @@
 .bx--card {
   display: flex;
   flex-direction: column;
-  width: em(200px);
+  width: 12.5em;
+  height: 14.375em;
   background-color: $color__card-bg;
   border: 1px solid $color__card-border;
   box-shadow: 0px 4px 4px 0px $color__card-box-shadow;
+}
+
+.bx--card {
 
   &__card-overview {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    min-height: em(190px);
     text-align: center;
+    height: 12em;
 
     .bx--overflow-menu {
-      margin: .5em 0 0;
+      z-index: z('overflowOptions');
+      margin: 0;
+      padding-top: 1em;
     }
   }
 
@@ -26,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: .75em 0;
+    height: 3em;
     background-color: $color__card-border;
     border-top: 1px solid $color__card-border--light;
   }
@@ -38,27 +44,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 1.5em;
+  padding-top: 1em;
   margin-right: -2em;
 
   .bx--about__title {
+    font-weight: 200;
     padding-top: 1em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 
     &--name {
+      @include font-size('18');
+      @include font-smoothing;
       margin-bottom: .25em;
     }
 
     &--link {
       @include font-size('12');
-      color: $color__card-links;
+      color: $color__blue-30;
       text-decoration: none;
     }
 
     &--additional-info {
       @include font-size('12');
-      padding: .25em 0;
-      color: $color__card-subinfo;
+      padding: 0;
+      color: $color__navy-gray-8;
+
+      &:first-child {
+        padding-top: .25em;
+      }
     }
   }
 
@@ -73,7 +86,9 @@
 
     &--img {
       width: em(35px);
+      height: em(35px);
       overflow: hidden;
+      fill: $color__blue-40;
     }
   }
 }
@@ -100,6 +115,13 @@
   &--limited {
     @include app-status('limited');
   }
+
+  .bx--running__text,
+  .bx--not-running__text,
+  .bx--stopped__text {
+    font-weight: 200;
+    color: $color__navy-gray-8;
+  }
 }
 
 .bx--card-footer__app-actions {
@@ -115,12 +137,19 @@
     background: none;
     border: none;
 
+    &:hover {
+
+      .bx--app-actions__button--icon {
+        fill: $color__white;
+      }
+    }
+
     &--icon {
-      width: em(18px);
-      height: em(18px);
+      width: 1em;
+      height: 1em;
       margin: 0 .3em;
       transition: .2s;
-      fill: $color__card-subinfo;
+      fill: $color__navy-gray-8;
 
       &:hover {
         fill: $color__white;
@@ -130,47 +159,59 @@
 }
 
 // SERVICE CARD STYLES
+.bx--card--service__card-footer {
+  height: 3.3em;
+}
+
+.bx--card--service__card-overview {
+  height: 12em;
+}
+
 .bx--card-footer__credentials-button {
-  @include btn--primary;
+  @include btn--primary($color__navy-gray-4, $color__blue-30, $color__white);
   @include font-size('12');
   margin-left: .5em;
+
+  &:hover {
+    color: $color__blue-90;
+  }
 }
 
 .bx--card-footer__docs-link {
   @include font-size('12');
-  margin-right: .5em;
-  color: $color__card-links;
+  padding-right: 1.25em;
+  color: $color__blue-30;
 }
 
 // QUOTA CARD STYLES
 .bx--card--quota {
-  min-height: em(220px);
-  background-color: $color__card-border;
 
   &__overview {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 2em 1em;
+    justify-content: space-between;
+    height: 100%;
+    padding: 2em 2em 2.5em 2em;
     text-align: center;
+  }
+}
 
+.card--quota {
+  background-color: $color__blue-90;
 
-    .bx--overview__description {
-      @include font-size('14');
-      @include line-height('heading');
-      padding: 0 1.5em;
-    }
+  .bx--overview__description {
+    @include font-size('14');
+    color: $color__navy-gray-8;
+    font-weight: 200;
 
     .bx--overview__main-number {
       @include font-size('46');
+      color: $color__white;
     }
+  }
 
-    .bx--overview__details-button {
-      @include btn--secondary($color__btn--bg);
-      @include font-size('14');
-      padding: .5em 1em;
-      margin-top: 1.5em;
-    }
+  .bx--overview__details-button {
+    @include btn--secondary;
   }
 }
