@@ -49,9 +49,12 @@ Go to [releases](https://github.ibm.com/Bluemix/bluemix-components/releases), fi
 ![download-gif](https://media.github.ibm.com/user/76/files/159ed244-fdb9-11e5-9809-f7cd22e36217)
 
 
-## Usage - :skull: Deprecated
+## Usage
 
-Usage guidelines have fallen out of date and require more explanation of FED technologies as shown by user feedback.
+#### *Usage guidelines are now deprecated :skull:* 
+
+Guidelines have fallen out of date and require more explanation of FED technologies as shown by user feedback.
+Will be updating again soon to provide better "Getting Started" experience.
 
 ## FAQ
 
