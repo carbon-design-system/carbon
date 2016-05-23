@@ -9,26 +9,26 @@
 
   // horizontal rule styling
   hr {
+    margin: .25em 0 0;
     border: none;
     border-bottom: 1px solid $color__navy-gray-6;
   }
 
   // Initial styling for the options pane
   &__options {
+    @include box-shadow;
     position: absolute;
     display: none;
-    padding: .25em 0;
-    margin: 2.5em 0 0 -3em;
+    padding: .3em 0 .5em;
+    margin: 2.2em 0 0 -10em;
     z-index: z('overflowOptions');
     background: $color--list-bg;
-    transition-duration: .25s;
-
 
     // rectangle to make little arrow
     &:before {
       position: absolute;
-      top: -.5em;
-      left: 1.6em;
+      top: -.2em;
+      left: 8.5em;
       z-index: z('overflowHidden');
       display: block;
       width: 1em;
@@ -44,9 +44,9 @@
     @include helvetica;
     @include font-size('14');
     width: 100%;
-    padding: .5em 1em;
+    padding: .5em 1.25em;
     font-weight: 200;
-    color: $color__white;
+    color: $color__navy-gray-8;
     text-align: left;
     cursor: pointer;
     background: none;
@@ -54,6 +54,7 @@
 
     &:hover {
       background: $color--list-bg--hover;
+      color: $color__blue-90;
     }
 
     &--delete:hover {
@@ -63,7 +64,7 @@
 
   &__icon {
     height: 20px;
-    fill: $color__navy-gray-7;
+    fill: $color__navy-gray-8;
   }
 
   // Focus and hover states for the entire component
