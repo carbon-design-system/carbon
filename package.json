@@ -1,7 +1,13 @@
 {
-  "name": "bluemix-components",
+  "name": "@console/bluemix-components",
   "version": "6.0.1",
   "description": "Bluemix Components is a component library for Bluemix",
+  "maintainers": [
+    {
+      "name": "Brian Han",
+      "email": "bthan@us.ibm.com"
+    }
+  ],
   "scripts": {
     "prebuild": "gulp clean",
     "build": "gulp build",
