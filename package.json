@@ -41,6 +41,7 @@
     "gulp-autoprefixer": "~3.0.1",
     "gulp-babel": "~6.1.1",
     "gulp-eslint": "~1.1.0",
+    "gulp-jsdoc3": "^0.2.1",
     "gulp-rename": "~1.2.2",
     "gulp-sass": "2.3.1",
     "gulp-sass-lint": "~1.1.1",

@@ -16,6 +16,7 @@ const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
 const eslint = require('gulp-eslint');
 const sourcemaps = require('gulp-sourcemaps');
+const jsdoc = require('gulp-jsdoc3');
 const webpack = require('webpack');
 const gutil = require('gulp-util');
 const Server = require('karma').Server;
@@ -205,6 +206,19 @@ gulp.task('test', (done) => {
     configFile: path.resolve(__dirname, 'tests/karma.conf.js'),
     singleRun: !cloptions.keepalive,
   }, done).start();
+});
+
+/////////////////////////////
+// JSDoc
+/////////////////////////////
+
+gulp.task('jsdoc', function (cb) {
+  gulp.src(['README.md', 'consumables/js/es2015/**/*.js'], {read: false})
+    .pipe(jsdoc(Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), {
+      opts: {
+        destination: './docs/js'
+      },
+    }), cb));
 });
 
 //////////////////////////////

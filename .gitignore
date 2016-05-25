@@ -25,3 +25,6 @@ tests/coverage
 
 # Temporary gitignores
 consumables/css/*.css
+
+# JSDoc
+/docs
