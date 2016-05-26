@@ -1,6 +1,6 @@
 ## Overview
 
-{{ Resolved issue number(s) here }}
+Resolves {{ issue number(s) here }}
 
 {{ Description about the PR }}
 
