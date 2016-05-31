@@ -1,4 +1,5 @@
 import eventMatches from '../polyfills/event-matches';
+import '../polyfills/object-assign';
 import toggleClass from '../polyfills/toggle-class';
 
 export default class Table {
