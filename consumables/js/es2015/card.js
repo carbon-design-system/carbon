@@ -1,4 +1,6 @@
 import eventMatches from '../polyfills/event-matches';
+import '../polyfills/array-from';
+import '../polyfills/object-assign';
 import '../polyfills/math-sign';
 
 export default class Card {
@@ -45,6 +47,10 @@ export default class Card {
         nextIndex - Math.sign(nextIndex) * cards.length;
       cards[nextIndexLooped].focus();
     }
+  }
+
+  release() {
+    this.constructor.components.delete(this.element);
   }
 }
 
