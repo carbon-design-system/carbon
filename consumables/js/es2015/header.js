@@ -1,7 +1,7 @@
 import '../polyfills/array-from';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
-import eventMatches from '../../js/polyfills/event-matches';
+import eventMatches from '../polyfills/event-matches';
 
 export default class HeaderNav {
   constructor(element, options = {}) {

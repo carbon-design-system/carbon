@@ -17,8 +17,13 @@ const sassLint = require('gulp-sass-lint');
 const eslint = require('gulp-eslint');
 const sourcemaps = require('gulp-sourcemaps');
 const jsdoc = require('gulp-jsdoc3');
+
 const webpack = require('webpack');
+const babel = require('gulp-babel');
+const merge = require('merge-stream');
 const gutil = require('gulp-util');
+
+
 const Server = require('karma').Server;
 const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
@@ -98,6 +103,26 @@ gulp.task('scripts:consumables', () => {
     buildScripts(false, true), // Minified ES5
   ]);
 });
+
+gulp.task('scripts:umd', () => {
+  const files = './consumables/js/es2015/*.js';
+  const polyfills = './consumables/js/polyfills/**/*.js';
+
+  const babelOpts = {
+    plugins: ['transform-es2015-modules-umd', 'transform-runtime'],
+  };
+
+  const fileStream = gulp.src(files)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('./consumables/js/umd/lib'));
+
+  const polyfillStream = gulp.src(polyfills)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('./consumables/js/umd/polyfills'));
+
+  return merge(fileStream, polyfillStream);
+});
+
 
 gulp.task('scripts:dev', () => {
   return Promise.all([
@@ -234,7 +259,7 @@ gulp.task('watch', () => {
 gulp.task('serve', ['browser-sync', 'watch']);
 
 // Use: npm run build
-gulp.task('build', ['sass:consumables', 'scripts:consumables']);
+gulp.task('build', ['sass:consumables', 'scripts:consumables', 'scripts:umd']);
 gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {
