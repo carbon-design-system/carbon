@@ -49,6 +49,13 @@ module.exports = function (config) {
       },
     },
 
+    customLaunchers: {
+      Chrome_Travis: {
+        base: 'Chrome',
+        flags: ['--no-sandbox'],
+      },
+    },
+
     plugins: [
       require('karma-mocha'),
       require('karma-sinon-chai'),
@@ -90,14 +97,9 @@ module.exports = function (config) {
 
     autoWatch: true,
 
-    browsers: (function () {
-      if (Array.isArray(cloptions.browsers)) {
-        return cloptions.browsers;
-      } else if (cloptions.browsers) {
-        return [cloptions.browsers];
-      }
-      return ['PhantomJS'];
-    }()),
+    browsers: (Array.isArray(cloptions.browsers) ? cloptions.browsers : [cloptions.browsers || 'PhantomJS']).map(function (browser) {
+      return browser + (browser === 'Chrome' && process.env.TRAVIS ? '_Travis' : '');
+    }),
 
     singleRun: false,
 
