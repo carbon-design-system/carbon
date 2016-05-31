@@ -32,6 +32,12 @@
   }
 
   var NumberInput = function () {
+    /**
+     * Number input UI.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a number input UI.
+     */
+
     function NumberInput(element) {
       var _this = this;
 
@@ -47,6 +53,12 @@
         return _this.handleClick(event);
       });
     }
+
+    /**
+     * Instantiates number input UI of the given element.
+     * @param {HTMLElement} element The element.
+     */
+
 
     (0, _createClass3.default)(NumberInput, [{
       key: 'handleClick',
@@ -95,5 +107,9 @@
   exports.default = NumberInput;
 
 
+  /**
+   * The map associating DOM element and number input UI instance.
+   * @type {WeakMap}
+   */
   NumberInput.components = new _weakMap2.default();
 });

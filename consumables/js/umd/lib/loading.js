@@ -34,6 +34,14 @@
   }
 
   var Loading = function () {
+    /**
+     * Spinner indicating loading state.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a spinner.
+     * @param {Object} options The component options.
+     * @param {boolean} options.active `true` if this spinner should roll.
+     */
+
     function Loading(element) {
       var options = arguments.length <= 1 || arguments[1] === undefined ? { active: true } : arguments[1];
       (0, _classCallCheck3.default)(this, Loading);
@@ -57,6 +65,12 @@
       // Initialize spinner
       this.set(this.active);
     }
+
+    /**
+     * Instantiates spinner of the given element.
+     * @param {HTMLElement} element The element.
+     */
+
 
     (0, _createClass3.default)(Loading, [{
       key: 'set',
@@ -120,5 +134,9 @@
   exports.default = Loading;
 
 
+  /**
+   * The map associating DOM element and spinner instance.
+   * @type {WeakMap}
+   */
   Loading.components = new _weakMap2.default();
 });

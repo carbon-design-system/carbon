@@ -1,13 +1,13 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/math/sign', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/math-sign'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/math/sign', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/math-sign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/math/sign'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/math-sign'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/math/sign'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/math-sign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.sign, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.mathSign);
+    factory(mod.exports, global.weakMap, global.sign, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.arrayFrom, global.objectAssign, global.mathSign);
     global.card = mod.exports;
   }
 })(this, function (exports, _weakMap, _sign, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _eventMatches) {
@@ -38,6 +38,14 @@
   }
 
   var Card = function () {
+    /**
+     * The container for cards.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a container.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorCard] The CSS selector to find cards.
+     */
+
     function Card(element) {
       var _this = this;
 
@@ -57,6 +65,12 @@
       });
     }
 
+    /**
+     * Instantiates card container of the given element.
+     * @param {HTMLElement} element The element.
+     */
+
+
     (0, _createClass3.default)(Card, [{
       key: 'cardKeyPress',
       value: function cardKeyPress(event) {
@@ -74,6 +88,11 @@
           var nextIndexLooped = nextIndex >= 0 && nextIndex < cards.length ? nextIndex : nextIndex - (0, _sign2.default)(nextIndex) * cards.length;
           cards[nextIndexLooped].focus();
         }
+      }
+    }, {
+      key: 'release',
+      value: function release() {
+        this.constructor.components.delete(this.element);
       }
     }], [{
       key: 'create',
@@ -106,5 +125,15 @@
   exports.default = Card;
 
 
+  /**
+   * The component options.
+   * @member {Object} Card#options
+   * @property {string} [selectorCard] The CSS selector to find cards.
+   */
+
+  /**
+   * The map associating DOM element and card list instance.
+   * @type {WeakMap}
+   */
   Card.components = new _weakMap2.default();
 });

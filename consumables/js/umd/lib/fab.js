@@ -34,6 +34,12 @@
   }
 
   var FabButton = function () {
+    /**
+     * Floating action button.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a floting action button.
+     */
+
     function FabButton(element) {
       var _this = this;
 
@@ -50,6 +56,15 @@
         return _this.toggle(event);
       });
     }
+
+    /**
+     * Instantiates floating action buttons in the given element.
+     * If the given element indicates that it's an floating action button (having `data-fab` attribute), instantiates it.
+     * Otherwise, instantiates floating action buttons by clicking on floating action buttons in the given node.
+     * @param {Node} target The DOM node to instantiate floating action buttons in. Should be a document or an element.
+     * @returns {Handle} The handle to remove the event listener to handle clicking.
+     */
+
 
     (0, _createClass3.default)(FabButton, [{
       key: 'toggle',
@@ -114,5 +129,9 @@
   exports.default = FabButton;
 
 
+  /**
+   * The map associating DOM element and floating action button instance.
+   * @type {WeakMap}
+   */
   FabButton.components = new _weakMap2.default();
 });
