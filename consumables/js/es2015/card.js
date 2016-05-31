@@ -4,6 +4,13 @@ import '../polyfills/object-assign';
 import '../polyfills/math-sign';
 
 export default class Card {
+  /**
+   * The container for cards.
+   * @implements Component
+   * @param {HTMLElement} element The element working as a container.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.selectorCard] The CSS selector to find cards.
+   */
   constructor(element, options = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       throw new TypeError('DOM element should be given to initialize this widget.');
@@ -16,10 +23,22 @@ export default class Card {
     this.element.addEventListener('keydown', (event) => this.cardKeyPress(event));
   }
 
+  /**
+   * Instantiates card container of the given element.
+   * @param {HTMLElement} element The element.
+   */
   static create(element, options) {
     return this.components.get(element) || new this(element, options);
   }
 
+  /**
+   * Instantiates card container in the given node.
+   * If the given element indicates that it's an card container (having `data-card-list` attribute), instantiates it.
+   * Otherwise, instantiates card containers by searching for card containers in the given node.
+   * @param {Node} target The DOM node to instantiate card containers in. Should be a document or an element.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.selectorCard] The CSS selector to find cards.
+   */
   static init(target = document, options) {
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
@@ -31,6 +50,11 @@ export default class Card {
     }
   }
 
+  /**
+   * Goes back/forward among cards,
+   * right arrow key for going forward, left arrow key for going backward.
+   * @param {Event} event The event triggering this method.
+   */
   cardKeyPress(event) {
     const direction = {
       Left: -1,
@@ -54,4 +78,14 @@ export default class Card {
   }
 }
 
+/**
+ * The component options.
+ * @member {Object} Card#options
+ * @property {string} [selectorCard] The CSS selector to find cards.
+ */
+
+/**
+ * The map associating DOM element and card list instance.
+ * @type {WeakMap}
+ */
 Card.components = new WeakMap();
