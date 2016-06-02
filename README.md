@@ -10,28 +10,28 @@ The aim is for every developer to use consistent markup, styles, and behavior in
 
 ## Install
 
-#### Bower (recommended)
+#### Bower
 
-Set up your SSH key on GitHub Enterprise, see [Generating SSH Keys - GitHub](https://help.github.com/articles/generating-ssh-keys/).
+> **Before Install:** Set up your SSH key on GitHub Enterprise, see [Generating SSH Keys - GitHub](https://help.github.com/articles/generating-ssh-keys/).
 
-Install `bower` globally:
+> Install `bower` globally:
 
-```
+> ```
 npm install -g bower
 ```
 
-> **Mac & Unix users:** you can do the below four steps all at once - copy and paste the following into your terminal:
+> **Mac & Unix Shortcut:** you can do the below four steps all at once - copy and paste the following into your terminal:
 
 > ```sh
 touch .bowerrc && echo '{ "registry": "http://9.37.228.216:5678/" }' > .bowerrc && bower init && bower install bluemix-components --save
 ```
 
-Initialize a **bower.json** file:
+> Initialize a **bower.json** file:
 ```bash
 bower init
 ```
 
-Create a **.bowerrc** file:
+> Create a **.bowerrc** file:
 ```json
 { "registry": "http://9.37.228.216:5678/" }
 ```
@@ -40,6 +40,25 @@ Install the bower package:
 
 ```sh
 bower install bluemix-components --save
+```
+
+#### NPM
+
+> **Before Install**: Bluemix Components is also available on the ops-console registry as a private npm package.
+> Create an `.npmrc` file in the root of your project directory (or on your computer's `~` directory):
+> ```
+cd ~ && touch .npmrc
+```
+> Write the following config into `.npmrc`
+> ```
+//dev-console-npm.stage1.ng.bluemix.net/:_authToken="u6vjQywpRv51/eKBiRcAFA=="
+@console:registry=https://dev-console-npm.stage1.ng.bluemix.net/
+```
+
+Install with `npm`
+
+```
+npm install @console/bluemix-components --save
 ```
 
 #### Download
@@ -51,7 +70,7 @@ Go to [releases](https://github.ibm.com/Bluemix/bluemix-components/releases), fi
 
 ## Usage
 
-#### *Usage guidelines are now deprecated :skull:* 
+#### *Usage guidelines are now deprecated :skull:*
 
 Guidelines have fallen out of date and require more explanation of FED technologies as shown by user feedback.
 Will be updating again soon to provide better "Getting Started" experience.

@@ -28,17 +28,30 @@ npm run dev
 
 ## Publish New Releases
 
-Bluemix Components is distributed as a private bower package called `bluemix-components`. Use GitHub releases to draft and publish new versions of the `bluemix-components` bower package. Every version must use `semver` (semantic version) numbers. New versions are published (almost) daily as Pull Requests are merged to the original project. Reference commit history to draft new releases. [Read our wiki on Semantic Versioning](https://github.ibm.com/Bluemix/bluemix-components/wiki/Semantic-Versioning-(semver)) for more details.
+Bluemix Components is distributed as a private bower and npm package called `bluemix-components`. Use [GitHub releases](https://github.ibm.com/Bluemix/bluemix-components/releases) to draft and publish new versions of the `bluemix-components` bower package. Every version must use `semver` (semantic version) numbers. New versions are published (almost) daily as Pull Requests are merged to the original project. Reference commit history to draft new releases.
 
-1. Go to [GitHub Releases](https://github.ibm.com/Bluemix/bluemix-components/releases)
-2. Click the ["Draft New Release"](https://github.ibm.com/Bluemix/bluemix-components/releases/new) button.
-3. Fill in the form: 
-  * Tag: semantic version appended with `-alpha`
-  * Release title: same as tag
-  * Description: describes what's changed in the new release.
-4. Check the box for "This is a pre-release"
-5. Complete the release by pressing "Publish release" button
-  * You can also press "Save draft" button to edit this later.
+### Make a new Pull Request
 
-![publish-new-release](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/4804/e1ba9db4-9eae-11e5-85a6-39acbba1165c.gif)
+- Checkout into a `bump/version` branch (i.e. `bump/6.0.1`)
+- Update `"version"` in `package.json` and `bower.json`
+- `npm run build` to build CSS and JS
+- Check in and push all changes
+- Merge into master
+- Publish new github release pointing to `master` branch
 
+### Versioning
+
+[Read our wiki on Semantic Versioning](https://github.ibm.com/Bluemix/bluemix-components/wiki/Semantic-Versioning-(semver) for full details.
+
+Every release needs a new version number.
+
+Version numbers look like this: `Major.Minor.Patch`
+* Patch: When something gets fixed.
+* Minor: When something changes, enhances or gets added without breaking changes
+* Major: When something changes, gets renamed or removed. These are breaking changes.
+
+### Description
+
+* Describes what's changed in the new release.
+* Link to relevant, resolved issues
+* Add images or gifs
