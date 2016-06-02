@@ -14,7 +14,7 @@
   &__input {
     @include font-size('14');
     width: 100%;
-    padding: 1em 1em 1em 2.5em;
+    padding: 1rem 1rem 1rem 2.5rem;
     color: $color__white;
     background-color: $color__inputs--bg;
     border: none;
@@ -49,35 +49,35 @@
   &__icon {
     &--magnifier {
       @include icon--search;
-      width: 1.2em;
-      height: 1.2em;
-      left: .75em;
-      top: .85em;
+      width: 1.2rem;
+      height: 1.2rem;
+      left: .75rem;
+      top: .85rem;
 
       @include breakpoint(500px) {
-        width: 1.4em;
-        height: 1.4em;
+        width: 1.4rem;
+        height: 1.4rem;
       }
     }
 
     &--filter {
       @include icon--search;
-      right: .85em;
-      width: 1em;
-      height: 1em;
+      right: .85rem;
+      width: 1rem;
+      height: 1rem;
       transition-duration: .25s;
-      top: 1em;
+      top: 1rem;
 
       @include breakpoint(500px) {
-        width: 1em;
-        height: 1em;
+        width: 1rem;
+        height: 1rem;
       }
     }
   }
 
   &__filter {
     @include font-size('16');
-    padding: 1.4em;
+    padding: 1.4rem;
     font-weight: 600;
     color: $color__navy-gray-8;
     cursor: pointer;
@@ -87,7 +87,7 @@
     transition-duration: .25s;
 
     @include breakpoint(bp--sm--major) {
-      padding: 1em 2.5em 1em 0;
+      padding: 1rem 2.5rem 1rem 0;
       margin-left: 0;
     }
 
@@ -114,7 +114,7 @@
 
     .filter__text {
       display: none;
-      padding-left: 1em;
+      padding-left: 1rem;
 
       @include breakpoint(bp--sm--major) {
         display: inline-block;
@@ -126,23 +126,23 @@
 // Styles for Firefox
 
 body:not(:-moz-handler-blocked) .bx--search__filter {
-  padding: 1.7em 2.5em 1em 0;
+  padding: 1.7rem 2.5rem 1rem 0;
 
   @include breakpoint(bp--sm--major) {
-    padding: .86em 2.5em 1em 0;
+    padding: .86rem 2.5rem 1rem 0;
   }
 }
 
 body:not(:-moz-handler-blocked) .bx--search__icon--filter {
-  top: .89em;
+  top: .89rem;
 
   @include breakpoint(bp--sm--major) {
-    top: 1em;
+    top: 1rem;
   }
 }
 
 body:not(:-moz-handler-blocked) .bx--search__input {
-  padding-left: 2.75em;
+  padding-left: 2.75rem;
 }
 
 // Styles for Safari

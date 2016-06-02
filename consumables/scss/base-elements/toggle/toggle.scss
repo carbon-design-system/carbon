@@ -8,7 +8,7 @@
     @include font-smoothing;
     position: relative;
     display: block;
-    margin: 1em 0;
+    margin: 1rem 0;
     height: $toggle-circle;
     transition-duration: $transition--base;
     cursor: pointer;
@@ -69,12 +69,12 @@
 
     // Left-label styles
     &--left {
-      margin-right: .5em;
+      margin-right: .5rem;
     }
 
     // Right-label styles
     &--right {
-      left: em($toggle-circle * 2) + .5em;
+      left: rem($toggle-circle * 2) + .5rem;
     }
   }
 

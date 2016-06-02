@@ -8,8 +8,8 @@
     appearance: none;
     display: block;
     width: 100%;
-    padding: .8em 2.5em .8em 1em;
-    margin: .25em 0;
+    padding: .8rem 2.5rem .8rem 1rem;
+    margin: .25rem 0;
     color: $color__white;
     background-color: $color__inputs--bg;
     border: none;
@@ -34,10 +34,10 @@
 
   &__arrow {
     position: absolute;
-    right: .85em;
-    top: 2.25em;
-    width: .75em;
-    height: 1.5em;
+    right: .85rem;
+    top: 2.25rem;
+    width: .75rem;
+    height: 1.5rem;
     pointer-events: none;
 
     use {

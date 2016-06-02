@@ -14,14 +14,14 @@
     display: flex;
     align-items: center;
     text-transform: uppercase;
-    padding: 1.5em;
+    padding: 1.5rem;
     font-weight: 400;
     text-align: left;
     letter-spacing: 1.7px;
     background-color: $color__table-bg;
     width: auto;
     cursor: pointer;
-    
+
     @include breakpoint(bp--lg--major) {
       width: 10%;
     }
@@ -42,10 +42,10 @@
     }
 
     &--filter-icon {
-      width: em(15px);
-      height: em(7px);
+      width: rem(15px);
+      height: rem(7px);
       fill: $color__table-text;
-      margin: 0 .75em;
+      margin: 0 .75rem;
       transition: $transition--base;
     }
   }
@@ -55,7 +55,7 @@
   &__cell {
     @include font-size('14');
     display: flex;
-    padding: 1.05em 1.2em 1.05em 1.5em;
+    padding: 1.05rem 1.2rem 1.05rem 1.5rem;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;

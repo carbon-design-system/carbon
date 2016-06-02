@@ -13,11 +13,11 @@
   &__appearance {
     @include font-size('16');
     display: inline-block;
-    width: em(18px);
-    height: em(18px);
+    width: rem(18px);
+    height: rem(18px);
     background-color: $color__inputs--bg;
     border: 2px solid $color__navy-gray-7;
-    margin-right: .75em;
+    margin-right: .75rem;
     border-radius: 2px;
   }
 
@@ -31,8 +31,8 @@
     // Styled Checkbox - checked - checkmark
     &:before {
       content: '';
-      width: em(12px);
-      height: em(6px);
+      width: rem(12px);
+      height: rem(6px);
       background: transparent;
       border: 2px solid $color__navy-gray-2;
       border-top: none;

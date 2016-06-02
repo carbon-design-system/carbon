@@ -3,18 +3,15 @@
 
   // Styles to prevent selecting label / number when user
   // double clicks the number arrows
-  -webkit-user-select: none;
-  -moz-user-select: none;
+  user-select: none;
   -khtml-user-select: none;
-  -ms-user-select: none;
 
   &__input {
     @include font-size('16');
-
     width: 100%;
-    min-width: 9.375em;
-    padding: .5em 0 .5em 1em;
-    margin: .25em 0;
+    min-width: 9.375rem;
+    padding: .5rem 0 .5rem 1rem;
+    margin: .25rem 0;
     color: $color__white;
     background-color: $color__navy-gray-4;
     border: none;
@@ -42,7 +39,7 @@
     fill: $color--blue-40;
     cursor: pointer;
     display: flex;
-    padding: 0 .5em;
+    padding: 0 .5rem;
 
     &:hover {
       fill: $color__blue-30;
@@ -50,23 +47,23 @@
 
     &--up {
       @extend .bx--number__arrow;
-      bottom: 1.3em;
-      padding-top: .5em;
+      bottom: 1.3rem;
+      padding-top: .5rem;
       align-items: flex-start;
     }
 
     &--down {
       @extend .bx--number__arrow;
-      bottom: .25em;
-      padding-bottom: .5em;
+      bottom: .25rem;
+      padding-bottom: .5rem;
       align-items: flex-end;
     }
 
     .icon--down,
     .icon--up {
       display: block;
-      height: .5em;
-      width: .5em;
+      height: .5rem;
+      width: .5rem;
     }
   }
 }

@@ -36,7 +36,7 @@
   }
 
   &__support {
-    margin-right: 4em;
+    margin-right: 4rem;
 
     @media (max-width: 825px) {
       display: none;
@@ -45,7 +45,7 @@
 
   &__support-question {
     @include font-size('14');
-    padding-bottom: .25em;
+    padding-bottom: .25rem;
   }
 
   &__support-link {
@@ -61,13 +61,13 @@
   }
 
   &__submit-price {
-    margin-right: 1em;
+    @include letter-spacing;
+    margin-right: 1rem;
     font-weight: 200;
-    letter-spacing: 1px; // !temporary
   }
 
   &__settings-question {
     @include font-size('14');
-    padding-bottom: .25em;
+    padding-bottom: .25rem;
   }
 }

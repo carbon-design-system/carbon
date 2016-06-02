@@ -2,7 +2,7 @@
 
   &__fieldset {
     display: block;
-    margin-bottom: 2em;
+    margin-bottom: 2rem;
   }
 
   &__legend {
@@ -10,7 +10,7 @@
     @include font-smoothing;
     font-weight: 300;
     display: block;
-    padding-bottom: 1em;
+    padding-bottom: 1rem;
 
     &--hidden {
       @include hidden;
@@ -21,6 +21,6 @@
     @include font-size('14');
     @include letter-spacing;
     display: inline-block;
-    padding-bottom: .5em;
+    padding-bottom: .5rem;
   }
 }

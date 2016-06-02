@@ -6,7 +6,7 @@
   &--ordered {
     @include font-size('14');
     @include font-smoothing;
-    margin-left: 2em;
+    margin-left: 2rem;
     line-height: 1.75;
   }
 
@@ -16,7 +16,7 @@
 
   &__item {
     font-weight: 700;
-    padding-left: .25em;
+    padding-left: .25rem;
   }
 
   &--unordered &__item {
@@ -33,7 +33,7 @@
 
     &:before {
       content: '-';
-      padding-right: 1em;
+      padding-right: 1rem;
     }
   }
 }

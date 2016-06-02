@@ -13,11 +13,11 @@
     // Styled Radio Button - default
     @include font-size('16');
     display: inline-block;
-    width: em(18px);
-    height: em(18px);
+    width: rem(18px);
+    height: rem(18px);
     background-color: $color__inputs--bg;
     border: 2px solid $color__navy-gray-7;
-    margin-right: .75em;
+    margin-right: .75rem;
     border-radius: 50%;
   }
 
@@ -33,8 +33,8 @@
       display: inline-block;
       position: relative;
       left: 3px;
-      width: .5em;
-      height: .5em;
+      width: .5rem;
+      height: .5rem;
       border-radius: 50%;
       background-color: $color__blue-30;
     }

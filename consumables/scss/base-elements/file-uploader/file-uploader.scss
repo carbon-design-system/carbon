@@ -16,9 +16,9 @@
     position: relative;
     display: block;
     width: 100%;
-    min-width: 9.375em;
-    padding: .9em;
-    margin: .25em 0;
+    min-width: 9.375rem;
+    padding: .9rem;
+    margin: .25rem 0;
     font-weight: 200;
     color: $color__navy-gray-8;
     background-color: $color__inputs--bg;
@@ -33,9 +33,8 @@
       position: absolute;
       top: 0;
       right:0;
-      height: 2em;
-      padding-bottom: .2em;
-      padding-top: .2em;
+      height: 2rem;
+      padding-top: .3rem;
       line-height: 2;
       text-transform: capitalize;;
       content: 'Choose Files';
