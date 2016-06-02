@@ -29,14 +29,14 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  padding: em(24px) 3em em(24px) 3em;
-  margin: em(48px) -3em -3.125em -3em;
+  padding: rem(24px) 3rem rem(24px) 3rem;
+  margin: rem(48px) -3rem -3.125rem -3rem;
   background: $color__modal-footer;
 
   .bx--btn--secondary {
     @include btn--secondary($color__navy-gray-6);
     color: $color__navy-gray-6;
-    margin-right: 1em;
+    margin-right: 1rem;
 
     &:hover {
       color: $color__white;
@@ -50,7 +50,7 @@
     @include font-size('20');
     font-weight: 200;
     color: $color__navy-gray-5;
-    padding-bottom: .925em;
+    padding-bottom: .925rem;
 
     @include breakpoint(640px) {
       @include font-size('26');
@@ -67,7 +67,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 700;
-    padding-bottom: em(8px);
+    padding-bottom: rem(8px);
   }
 }
 
@@ -78,7 +78,7 @@
   width: 100%;
   height: 100%;
   max-height: 100%;
-  padding: 2.75em 1em 1em;
+  padding: 2.75rem 1rem 1rem;
   background: $color__modal-bg--inner;
   border-top: 6px solid $color__blue-40;
   opacity: 1;
@@ -89,7 +89,7 @@
     width: 50%;
     height: auto;
     max-height: 90%;
-    padding: 2.75em 3em 3em 3em;
+    padding: 2.75rem 3rem 3rem 3rem;
   }
 
   .bx--select,
@@ -144,10 +144,10 @@
 
 .bx--modal__close {
   position: absolute;
-  top: 1em;
-  right: 1em;
-  width: 2.25em;
-  height: 2.25em;
+  top: 1rem;
+  right: 1rem;
+  width: 2.25rem;
+  height: 2.25rem;
   padding: 0;
   overflow: hidden;
   cursor: pointer;
@@ -157,8 +157,8 @@
   &--icon {
     transition: .2s;
     fill: $color__navy-gray-6;
-    width: 2.25em;
-    height: 2.25em;
+    width: 2.25rem;
+    height: 2.25rem;
 
     &:hover {
       fill: $color__navy-gray-7;
@@ -167,6 +167,6 @@
 }
 
 .bx--modal__header {
-  padding: 3.125em 3.125em 0 3.125em;
-  margin: -3.125em -3.125em .25em -3.125em;
+  padding: 3.125rem 3.125rem 0 3.125rem;
+  margin: -3.125rem -3.125rem .25rem -3.125rem;
 }

@@ -1,7 +1,7 @@
 @mixin taxonomy-item($icon-diameter, $icon-stroke, $icon-height) {
   @extend %taxonomy-item;
   $item-width: $icon-diameter + 2 * $icon-stroke;
-  width: em($item-width);
+  width: rem($item-width);
 
   .taxonomy-item__icon {
     display: flex;
@@ -15,15 +15,15 @@
     background-position: center;
     background-size: 43%;
     transition: background-color .2s;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
 
     svg {
       display: block;
       position: relative;
-      left: em(-110px);
-      top: em(7px);
+      left: rem(-110px);
+      top: rem(7px);
       margin: 20%;
-      width: em(300px);
+      width: rem(300px);
       height: $icon-height;
     }
   }
@@ -60,8 +60,8 @@
 
     &:before {
       content: '';
-      width: 8.6em;
-      height: 8.6em;
+      width: 8.6rem;
+      height: 8.6rem;
       background: $color__state;
       position: absolute;
       border-radius: 50%;

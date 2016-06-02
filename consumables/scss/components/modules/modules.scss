@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: $module--max;
-  margin: 1em auto;
+  margin: 1rem auto;
 
   // Override colors for a11y
   .bx--link {
@@ -36,7 +36,7 @@
     width: 100%;
 
     @include breakpoint(bp--sm--major) {
-      flex-basis: calc(50% - .5em); // $module-margin/2 is .5em -- calc wouldn't allow vars because it is CSS
+      flex-basis: calc(50% - .5rem); // $module-margin/2 is .5rem -- calc wouldn't allow vars because it is CSS
     }
   }
 
@@ -58,13 +58,13 @@
     width: 100%;
 
     @include breakpoint(bp--sm--major) {
-      flex-basis: calc(33% - .5em);
+      flex-basis: calc(33% - .5rem);
     }
   }
 
   &__header {
-    font-weight: 700;
     @include font-size('14');
+    font-weight: 700;
     color: $color__module-header;
     border-bottom: 1px solid $color__module-border;
   }

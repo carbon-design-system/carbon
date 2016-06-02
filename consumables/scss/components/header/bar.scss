@@ -22,7 +22,7 @@
   @include breakpoint(bp--sm--major) {
     @include font-size('23');
     position: relative;
-    padding-right: 1em;
+    padding-right: 1rem;
     transition: all .5s ease;
     transform: translateX(0);
     text-decoration: none;
@@ -45,8 +45,8 @@
 .global-menu-trigger {
   display: flex;
   height: 100%;
-  padding-right: 1em;
-  padding-left: 1em;
+  padding-right: 1rem;
+  padding-left: 1rem;
   text-decoration: none;
   color: $color__blue-20;
   background-color: $color__navy-gray-1;
@@ -57,7 +57,7 @@
 
 .current-taxonomy {
   @include font-size('14');
-  padding-right: .5em;
+  padding-right: .5rem;
 }
 
 .dropdown-affordance {
@@ -83,8 +83,8 @@
     margin-left: auto;
     color: $color__blue-20;
     font-weight: 700;
-    padding-left: 1em;
-    padding-right: 1.5em;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
     text-decoration: none;
     text-transform: uppercase;
     align-self: flex-end;
@@ -102,7 +102,7 @@
   &__registration {
     @include font-size('14');
     font-weight: 700;
-    padding-right: 1em;
+    padding-right: 1rem;
 
     a {
       text-decoration: none;

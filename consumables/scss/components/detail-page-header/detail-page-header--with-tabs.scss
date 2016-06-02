@@ -9,13 +9,13 @@
     @include grid-container;
     display: flex;
     align-items: center;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     background-color: $color__detail-page-header--bg;
 
     @include breakpoint(bp--xs--major) {
       flex-direction: column;
-      padding-bottom: .5em;
+      padding-bottom: .5rem;
       align-items: flex-start;
     }
   }
@@ -26,7 +26,7 @@
     cursor: pointer;
 
     @include breakpoint(bp--xs--major) {
-      padding-bottom: .5em;
+      padding-bottom: .5rem;
     }
   }
 
@@ -62,8 +62,8 @@
   &__info-title {
     @include font-size('23');
     @include font-smoothing;
-    padding-left: .5em;
-    margin-left: .5em;
+    padding-left: .5rem;
+    margin-left: .5rem;
     font-weight: 200;
     border-left: 1px solid $color__detail-page-header--border;
 

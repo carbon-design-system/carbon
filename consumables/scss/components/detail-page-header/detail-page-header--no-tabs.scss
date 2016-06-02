@@ -7,8 +7,8 @@
   @include grid-container;
   display: flex;
   align-items: center;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
   &__link-wrapper {
     color: $color__detail-page-header--text;
@@ -30,13 +30,13 @@
     @include font-smoothing;
     display: flex;
     align-items: flex-start;
-    padding-left: .5em;
-    margin-left: .5em;
+    padding-left: .5rem;
+    margin-left: .5rem;
     font-weight: 200;
     border-left: 1px solid $color__detail-page-header--border;
 
     @include breakpoint(bp--xs--major) {
-      margin-left: -.2em;
+      margin-left: -.2rem;
     }
 
     @include breakpoint(bp--sm--major) {

@@ -2,16 +2,16 @@
   @include font-size('12');
   display: none;
   align-items: center;
-  margin-left: 1em;
+  margin-left: 1rem;
 
   @if ($status == 'running') {
 
     &::before {
       content: ' ';
-      height: em(20px);
-      width: em(20px);
+      height: rem(20px);
+      width: rem(20px);
       border-radius: 100%;
-      margin-right: .75em;
+      margin-right: .75rem;
       background-color: $color__card-running;
     }
   }
@@ -20,10 +20,10 @@
 
     &::before {
       content: ' ';
-      height: em(20px);
-      width: em(20px);
+      height: rem(20px);
+      width: rem(20px);
       border-radius: 100%;
-      margin-right: .75em;
+      margin-right: .75rem;
       background-color: $color__card-not-running;
     }
   }
@@ -32,10 +32,10 @@
 
     &::before {
       content: ' ';
-      height: em(20px);
-      width: em(20px);
+      height: rem(20px);
+      width: rem(20px);
       border-radius: 100%;
-      margin-right: .75em;
+      margin-right: .75rem;
       background-color: $color__card-stopped;
     }
   }
@@ -44,10 +44,10 @@
 
     &::before {
       content: ' ';
-      height: em(20px);
-      width: em(20px);
+      height: rem(20px);
+      width: rem(20px);
       border-radius: 100%;
-      margin-right: .75em;
+      margin-right: .75rem;
       background-color: $color__card-limited;
     }
   }

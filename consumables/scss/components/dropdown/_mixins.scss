@@ -1,9 +1,9 @@
 @mixin dropdown($text: $color__white) {
+  @include font-size('14');
   position: relative;
   display: block;
   background-color: $color__inputs--bg;
   width: 100%;
   cursor: pointer;
   color: $text;
-  @include font-size('14');
 }

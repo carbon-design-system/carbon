@@ -1,7 +1,7 @@
 .taxonomy-nav {
   position: absolute;
   z-index: z(header);
-  top: em($header-height);
+  top: rem($header-height);
   left: -100vw;
 
   width: 48%;
@@ -15,19 +15,19 @@
   @include breakpoint(bp--xs--major) {
     height: auto;
     overflow-y: visible;
-    top: em($header-height) + 1em;
+    top: rem($header-height) + 1rem;
     left: 2%;
-    padding: 1em;
+    padding: 1rem;
 
-    width: $item-width * 4 + 2 + em(1px); // IE11 seems to need some slack
+    width: $item-width * 4 + 2 + rem(1px); // IE11 seems to need some slack
 
     transition: $transition-timing--inverted;
     transform: scale(0);
-    transform-origin: 10em -1em;
+    transform-origin: 10rem -1rem;
   }
 
   @include breakpoint(bp--sm--major) {
-    width: $item-width * 6 + 2 + em(1px); // IE11 seems to need some slack
+    width: $item-width * 6 + 2 + rem(1px); // IE11 seems to need some slack
   }
 
   &--active {
@@ -44,7 +44,7 @@
 
       &:before {
         position: absolute;
-        top: -.5em;
+        top: -.5rem;
         left: 10%;
 
         display: block;
@@ -54,7 +54,7 @@
 
         content: '';
 
-        border-width: 0 .5em .5em .5em;
+        border-width: 0 .5rem .5rem .5rem;
         border-style: solid;
         border-color: $color__navy-gray-1 transparent;
       }
@@ -90,7 +90,7 @@
 
     @include breakpoint(bp--xs--major) {
       align-items: flex-start;
-      padding: .5em;
+      padding: .5rem;
     }
 
     &.selected {
@@ -101,10 +101,10 @@
       }
 
       .taxonomy-item__label {
-        padding-left: 1.75em;
+        padding-left: 1.75rem;
 
         @include breakpoint(bp--xs--major) {
-          padding-left: 1em;
+          padding-left: 1rem;
         }
 
         &:before {
@@ -114,32 +114,32 @@
           top: 50%;
           content: '\0025cf';
           color: $color__taxonomy-nav-item--selected;
-          width: 1em;
-          height: 1em;
-          margin-top: -.5em;
-          margin-left: -1em;
+          width: 1rem;
+          height: 1rem;
+          margin-top: -.5rem;
+          margin-left: -1rem;
           line-height: 1;
         }
       }
     }
 
     &__icon {
-      width: em(25px);
-      height: em(25px);
+      width: rem(25px);
+      height: rem(25px);
       margin: 0;
 
       @include breakpoint(bp--xs--major) {
-        width: em(125px);
-        height: em(25px);
-        margin-bottom: 1em;
+        width: rem(125px);
+        height: rem(25px);
+        margin-bottom: 1rem;
         display: flex;
         justify-content: center;
         align-items: center;
       }
 
       svg {
-        width: em(25px);
-        height: em(25px);
+        width: rem(25px);
+        height: rem(25px);
         top: auto;
         left: auto;
         margin: 0;
@@ -151,7 +151,7 @@
       display: flex;
       justify-content: center;
       position: relative;
-      padding-left: 1em;
+      padding-left: 1rem;
 
       @include breakpoint(bp--xs--major) {
         max-width: 75px;

@@ -28,9 +28,9 @@
     .taxonomy-item__metric {
       @include font-size('18');
 
-      height: 1.5em;
-      padding: .3em .5em;
-      margin: em(-25px) 0 .5em 0;
+      height: 1.5rem;
+      padding: .3rem .5rem;
+      margin: rem(-25px) 0 .5rem 0;
       background: $color__taxonomy-icon--metric-background;
       border-radius: 3px;
     }
@@ -67,8 +67,8 @@
 
   &--taxonomy-menu {
     @include taxonomy-item ($icon-size__taxonomy-menu--diameter, $icon-size__taxonomy-menu--stroke, $icon-size__taxonomy-menu--height);
-    width: em(105px);
-    padding: .6em 2em 1.4em 2em;
+    width: rem(105px);
+    padding: .6rem 2rem 1.4rem 2rem;
     border: 1px solid transparent;
 
     .taxonomy-item__label {
@@ -83,7 +83,7 @@
 
       svg {
         position: relative;
-        left: .3125em;
+        left: .3125rem;
         width: 35px;
         fill: $color__blue-30;
       }

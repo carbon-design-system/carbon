@@ -10,14 +10,14 @@
 
   @include breakpoint(bp--xs--major) {
     position: relative;
-    left: em(-20px);
+    left: rem(-20px);
   }
 }
 
 @mixin detail-page-header__tab-overrides {
   @include grid-container;
   padding-top: 0;
-  padding-bottom: 1em;
+  padding-bottom: 1rem;
 
   @include breakpoint(bp--sm--major) {
     padding-bottom: 0;

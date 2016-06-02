@@ -10,9 +10,9 @@
   }
 
   &__menu-text {
-    padding-top: em(15px);
-    padding-bottom: em(15px);
-    padding-left: 1em;
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+    padding-left: 1rem;
   }
 
   // Before seletion is made, text color is gray (default)
@@ -22,10 +22,10 @@
 
   &__arrow {
     position: absolute;
-    right: .75em;
-    top: .75em;
-    width: .75em;
-    height: 1.5em;
+    right: .75rem;
+    top: .75rem;
+    width: .75rem;
+    height: 1.5rem;
     pointer-events: none;
     transition: transform $transition--base ease-in-out;
 
@@ -68,10 +68,10 @@
     display: block;
     color: currentColor;
     text-decoration: none;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    padding-left: 1em;
-    padding-right: 1.5em;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
 
     .bx--dropdown--selected & {
       color: $color__white;

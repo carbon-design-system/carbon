@@ -21,9 +21,9 @@
 
     svg {
       position: relative;
-      top: em(4px);
-      width: em(12px);
-      height: em(12px);
+      top: rem(4px);
+      width: rem(12px);
+      height: rem(12px);
       fill: $color__tabs--caret;
     }
 
@@ -45,8 +45,8 @@
     @include breakpoint(bp--sm--major) {
       @include font-size('16');
       flex-direction: row;
-      margin-right: em(16px);
-      margin-left: em(16px);
+      margin-right: rem(16px);
+      margin-left: rem(16px);
       background: none;
     }
 
@@ -58,7 +58,7 @@
   &__nav-item {
     @include font-size('14');
     background-color: $color__navy_gray_4;
-    padding: 1em;
+    padding: 1rem;
 
     &:hover {
       background-color: $color__blue-30;
@@ -78,10 +78,10 @@
 
     @include breakpoint(bp--sm--major) {
       background: none;
-      padding: 1em 0;
+      padding: 1rem 0;
 
       &+& {
-        margin-left: em(48px);
+        margin-left: rem(48px);
       }
     }
   }

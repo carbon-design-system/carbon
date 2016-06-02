@@ -11,26 +11,26 @@
   // Common styles for child elements
   &__title {
     @include font-size('23');
-    margin: .4em 0;
+    margin: .4rem 0;
   }
 
   &__subtitle {
-    margin-top: .4em;
+    margin-top: .4rem;
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
     color: $color__white;
   }
 
   &__caption {
-    margin: .4em 0;
+    margin: .4rem 0;
   }
 
   &__close-button {
     background-color: $color__navy-gray-2;
     border: none;
     cursor: pointer;
-    padding: .1em;
+    padding: .1rem;
   }
 
   &__icon {
