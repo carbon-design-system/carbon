@@ -41,5 +41,4 @@ rules:
   no-duplicate-properties: 1
   # Units
   property-units:
-    - global: ['em']
-    - per-property: { font-size: ['rem'] }
+    - global: ['rem', 'px']
