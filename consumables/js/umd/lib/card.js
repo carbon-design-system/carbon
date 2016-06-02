@@ -67,7 +67,9 @@
 
     /**
      * Instantiates card container of the given element.
-     * @param {HTMLElement} element The element.
+     * @param {HTMLElement} element The element working as a container.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorCard] The CSS selector to find cards.
      */
 
 
