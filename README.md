@@ -77,6 +77,25 @@ Will be updating again soon to provide better "Getting Started" experience.
 
 ## FAQ
 
+### "I have a question to ask you, when will you respond to my Slack/emails/sametime?"
+
+We do our best to respond to all questions and direct messages when they're asked.
+
+But for the **best results**, we rely on GitHub [issues](https://github.ibm.com/Bluemix/bluemix-components/issues) to answer questions and discuss problems **openly** and **on-the-record**.
+
+I encourage you to search the [issues](https://github.ibm.com/Bluemix/bluemix-components/issues) on our repo; it's possible we may have already answered your question or addressed it in a previous issue.
+
+If not, [make an issue](https://github.ibm.com/Bluemix/bluemix-components/issues/new) and ask your question. You'll have the benefit of many IBM Bluemix devs ready to jump in and help you out.
+
+### "I need help now...this won't take long, do I really need to make an issue?"
+
+Ask us on Slack.
+If the problem gets resolved quickly. Great!
+But it's not guaranteed that you'll get a response immediately or when you need it.
+It's also not guaranteed that we can resolve your issue in that particular Slack conversation.
+
+Again, the **best way to get help** with Bluemix Components is to [make an issue](https://github.ibm.com/Bluemix/bluemix-components/issues/new).
+
 ### Sass errors in `_extends.scss`
 ```
 Error in plugin 'sass'
