@@ -1,12 +1,6 @@
 //-------------------------
-// 🌍 Global
-//-------------------------
-@import 'global/global';
-
-//-------------------------
 // 🍅 Base Elements
 //-------------------------
-@import 'base-elements/forms/forms';
 @import 'base-elements/buttons/buttons';
 @import 'base-elements/file-uploader/file-uploader';
 @import 'base-elements/checkbox/checkbox';
@@ -16,9 +10,10 @@
 @import 'base-elements/select/select';
 @import 'base-elements/text/text';
 @import 'base-elements/textarea/textarea';
+@import 'base-elements/number-input/number-input';
+@import 'base-elements/forms/forms';
 @import 'base-elements/links/links';
 @import 'base-elements/lists/lists';
-@import 'base-elements/number-input/number-input';
 @import 'base-elements/tables/tables';
 
 //-------------------------

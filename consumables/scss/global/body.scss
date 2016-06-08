@@ -1,11 +1,15 @@
-body {
-  @include helvetica;
+@import '../import-once';
 
-  color: $color__white;
-  background-color: $color__blue-90;
+@include exports('body') {
+  body {
+    @include helvetica;
 
-  // &.light-ui {
-  //   color: $color__navy-gray-1; // !temporary
-    // background-color: $color__white; // !temporary
-  // }
+    color: $color__white;
+    background-color: $color__blue-90;
+
+    // &.light-ui {
+    //   color: $color__navy-gray-1; // !temporary
+      // background-color: $color__white; // !temporary
+    // }
+  }  
 }
