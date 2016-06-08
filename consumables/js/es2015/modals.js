@@ -5,6 +5,21 @@ import eventMatches from '../polyfills/event-matches';
 import toggleClass from '../polyfills/toggle-class';
 
 export default class Modal {
+  /**
+   * Modal dialog.
+   * @implements Component
+   * @param {HTMLElement} element The element working as a modal dialog.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.eventBeforeShown]
+   *   The name of the custom event fired before this modal is shown.
+   *   Cancellation of this event stops showing the modal.
+   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+   * @param {string} [options.eventBeforeHidden]
+   *   The name of the custom event fired before this modal is hidden.
+   *   Cancellation of this event stops hiding the modal.
+   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+   */
   constructor(element, options = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       throw new TypeError('DOM element should be given to initialize this widget.');
@@ -25,6 +40,43 @@ export default class Modal {
     this.hookCloseActions();
   }
 
+  /**
+   * Instantiates modal dialog of the given element.
+   * @param {HTMLElement} element The element working as a modal dialog.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.eventBeforeShown]
+   *   The name of the custom event fired before this modal is shown.
+   *   Cancellation of this event stops showing the modal.
+   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+   * @param {string} [options.eventBeforeHidden]
+   *   The name of the custom event fired before this modal is hidden.
+   *   Cancellation of this event stops hiding the modal.
+   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+   */
+  static create(element, options) {
+    return this.components.get(element) || new this(element, options);
+  }
+
+  /**
+   * Instantiates modal dialogs in the given element.
+   * If the given element indicates that it's an modal dialog (having `data-modal` attribute), instantiates it.
+   * Otherwise, instantiates modal dialogs by clicking on launcher buttons
+   * (buttons with `data-modal-target` attribute) of modal dialogs in the given node.
+   * @implements Component
+   * @param {Node} target The DOM node to instantiate modal dialogs in. Should be a document or an element.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.eventBeforeShown]
+   *   The name of the custom event fired before this modal is shown.
+   *   Cancellation of this event stops showing the modal.
+   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+   * @param {string} [options.eventBeforeHidden]
+   *   The name of the custom event fired before this modal is hidden.
+   *   Cancellation of this event stops hiding the modal.
+   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+   * @returns {Handle} The handle to remove the event listener to handle clicking.
+   */
   static init(target = document, options) {
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
@@ -62,6 +114,9 @@ export default class Modal {
     }
   }
 
+  /**
+   * Adds event listeners for closing this dialog.
+   */
   hookCloseActions() {
     this.element.addEventListener('click', (event) => {
       if (event.currentTarget === event.target) this.hide();
@@ -87,6 +142,12 @@ export default class Modal {
     });
   }
 
+  /**
+   * Internal method of {@linkcode Modal#show .show()} and  {@linkcode Modal#hide .hide()}, to change show/hidden state.
+   * @private
+   * @param {boolean} visible `true` to make this modal dialog visible.
+   * @param {Function} callback Callback called when change in state completes.
+   */
   _changeState(visible, callback) {
     let finished;
     const finishedTransition = () => {
@@ -105,6 +166,21 @@ export default class Modal {
     }
   }
 
+  /**
+   * The callback called once showing/hiding this dialog is finished or is canceled.
+   * @callback Modal~stateChangeCallback
+   * @param {Error} error
+   *   An error object with `true` in its `canceled` property if the showing/hiding this dialog is canceled.
+   *   Cancellation happens if the handler of a custom event, that is fired before showing/hiding this dialog happens,
+   *   calls `.preventDefault()` against the event.
+   * @param {boolean} newState The new toggle state.
+   */
+
+  /**
+   * Shows this modal dialog.
+   * @param {HTMLElement} [launchingElement] The DOM element that triggered calling this function.
+   * @param {Modal~stateChangeCallback} [callback] The callback called once showing this dialog is finished or is canceled.
+   */
   show(launchingElement, callback) {
     if (typeof launchingElement === 'function') {
       callback = launchingElement; // eslint-disable-line no-param-reassign
@@ -149,6 +225,10 @@ export default class Modal {
     }
   }
 
+  /**
+   * Hides this modal dialog.
+   * @param {Modal~stateChangeCallback} [callback] The callback called once showing this dialog is finished or is canceled.
+   */
   hide(callback) {
     if (!this.element.classList.contains(this.options.classVisible)) {
       if (callback) {
@@ -190,13 +270,30 @@ export default class Modal {
     this.constructor.components.delete(this.element);
   }
 
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
+  /**
+   * @deprecated
+   */
   static hook() {
     console.warn('Modals.hook() is deprecated. Use Modals.init() instead.'); // eslint-disable-line no-console
   }
 }
 
+/**
+ * The component options.
+ * @member {Object} Modal#options
+ * @property {string} [classVisible] The CSS class for the visible state.
+ * @property {string} [eventBeforeShown]
+ *   The name of the custom event fired before this modal is shown.
+ *   Cancellation of this event stops showing the modal.
+ * @property {string} [eventAfterShown] The name of the custom event fired after this modal is shown.
+ * @property {string} [eventBeforeHidden]
+ *   The name of the custom event fired before this modal is hidden.
+ *   Cancellation of this event stops hiding the modal.
+ * @property {string} [eventAfterHidden] The name of the custom event fired after this modal is hidden.
+ */
+
+/**
+ * The map associating DOM element and modal instance.
+ * @type {WeakMap}
+ */
 Modal.components = new WeakMap();
