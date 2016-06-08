@@ -156,13 +156,9 @@
 
   &--icon {
     transition: .2s;
-    fill: $color__navy-gray-6;
-    width: 2.25rem;
-    height: 2.25rem;
-
-    &:hover {
-      fill: $color__navy-gray-7;
-    }
+    fill: $color__navy-gray-7;
+    width: 1rem;
+    height: 1rem;
   }
 }
 
