@@ -5,6 +5,24 @@ import '../polyfills/object-assign';
 import ContentSwitcher from './content-switcher';
 
 export default class Tab extends ContentSwitcher {
+  /**
+   * Container of tabs.
+   * @extends ContentSwitcher
+   * @param {HTMLElement} element The element working as a container of tabs.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
+   * @param {string} [options.selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
+   * @param {string} [options.selectorButton] The CSS selector to find tab containers.
+   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected tab.
+   * @param {string} [options.selectorLink] The CSS selector to find the links in tabs.
+   * @param {string} [options.classActive] The CSS class for tab's selected state.
+   * @param {string} [options.classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
+   * @param {string} [options.eventBeforeSelected]
+   *   The name of the custom event fired before a tab is selected.
+   *   Cancellation of this event stops selection of tab.
+   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
+   */
   constructor(element, options = {}) {
     super(element, Object.assign({
       selectorMenu: '.bx--tabs__nav',
@@ -27,6 +45,25 @@ export default class Tab extends ContentSwitcher {
     }
   }
 
+  /**
+   * Instantiates tab containers in the given node.
+   * If the given element indicates that it's an tab container (having `data-tabs` attribute), instantiates it.
+   * Otherwise, instantiates tab containers by searching for tab containers in the given node.
+   * @param {Node} target The DOM node to instantiate tab containers in. Should be a document or an element.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
+   * @param {string} [options.selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
+   * @param {string} [options.selectorButton] The CSS selector to find tab containers.
+   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected tab.
+   * @param {string} [options.selectorLink] The CSS selector to find the links in tabs.
+   * @param {string} [options.classActive] The CSS class for tab's selected state.
+   * @param {string} [options.classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
+   * @param {string} [options.eventBeforeSelected]
+   *   The name of the custom event fired before a tab is selected.
+   *   Cancellation of this event stops selection of tab.
+   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
+   */
   static init(target = document, options) {
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
@@ -43,6 +80,12 @@ export default class Tab extends ContentSwitcher {
     this.updateTriggerText(item);
   }
 
+  /**
+   * Handles click on tab container.
+   * * If the click is on a tab, activates it.
+   * * If the click is on the button to open the drop down menu, does so.
+   * @param {Event} event The event triggering this method.
+   */
   handleClick(event) {
     super.handleClick(event);
     const button = eventMatches(event, this.options.selectorButton);
@@ -56,6 +99,12 @@ export default class Tab extends ContentSwitcher {
     }
   }
 
+  /**
+   * Handles arrow keys on tab container.
+   * * Up/Left keys are used to go to previous tab.
+   * * Down/Right keys are used to go to next tab.
+   * @param {Event} event The event triggering this method.
+   */
   handleKeyDown(event) {
     const triggerNode = this.element.querySelector(this.options.selectorTrigger);
     if (triggerNode && triggerNode.offsetParent) {
@@ -87,13 +136,41 @@ export default class Tab extends ContentSwitcher {
     }
   }
 
+  /**
+   * Shows/hides the drop down menu used in narrow mode.
+   */
   updateMenuState() {
     this.element.querySelector(this.options.selectorMenu).classList.toggle(this.options.classHidden);
   }
 
+  /**
+   * Updates the text indicating the currently selected tab item.
+   * @param {HTMLElement} target The newly selected tab item.
+   */
   updateTriggerText(target) {
     this.element.querySelector(this.options.selectorTriggerText).textContent = target.textContent;
   }
 }
 
+/**
+ * The component options.
+ * @member {Object} Tab#options
+ * @property {string} [selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
+ * @property {string} [selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
+ * @property {string} [selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
+ * @property {string} [selectorButton] The CSS selector to find tab containers.
+ * @property {string} [selectorButtonSelected] The CSS selector to find the selected tab.
+ * @property {string} [selectorLink] The CSS selector to find the links in tabs.
+ * @property {string} [classActive] The CSS class for tab's selected state.
+ * @property {string} [classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
+ * @property {string} [eventBeforeSelected]
+ *   The name of the custom event fired before a tab is selected.
+ *   Cancellation of this event stops selection of tab.
+ * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
+ */
+
+/**
+ * The map associating DOM element and tab container instance.
+ * @type {WeakMap}
+ */
 Tab.components = new WeakMap();
