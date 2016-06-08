@@ -10,9 +10,9 @@ The aim is for every developer to use consistent markup, styles, and behavior in
 
 ## Documentation
 
-* Install: How to install Bluemix Components
-* Update: Info for updating Bluemix Components
-* FAQ: Solutions for common errors and answers to common questions
+* [Install](https://github.ibm.com/Bluemix/bluemix-components/blob/master/docs/getting-started/install.md): How to install Bluemix Components
+* [Update](https://github.ibm.com/Bluemix/bluemix-components/blob/master/docs/getting-started/update.md): Info for updating Bluemix Components
+* [FAQ](https://github.ibm.com/Bluemix/bluemix-components/blob/master/docs/getting-started/faq.md): Solutions for common errors and answers to common questions
 
 
 ## Usage/Examples
