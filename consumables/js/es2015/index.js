@@ -2,12 +2,6 @@
 // Imports and Exports //
 // ====================//
 
-// This file is for the following:
-// 1. Export ES2015 classes as modules (used with base-elements and components)
-//    - consume ES2015 modules from this file using import:
-//    - import { Fab, FileUploader } from 'relative/path/to/bower/components';
-// 2. Build an ES5-compatible files for prototyping.
-//    See ./dist/dist-demo.html for details
 
 // Polyfills
 // -------------
@@ -34,24 +28,115 @@ import Table from './table';
 
 const settings = {};
 
-// Export all vars/classes for consumption:
+/**
+ * This module is used for the following purposes:
+ * 1. Export ES2015 classes as modules (used with base-elements and components)
+ * 2. Build an ES5-compatible files for prototyping.
+ *    See /path/to/bluemix-components/dist/dist-demo.html for details.
+ * @exports BluemixComponents
+ * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
+ * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
+ */
 export {
+  /**
+   * Settings.
+   * @type Object
+   * @property {boolean} [disableAutoInit]
+   *   Disables automatic instantiation of components.
+   *   By default (`BluemixComponents.disableAutoInit` is `false`),
+   *   bluemix-components attempts to instantiate components automatically
+   *   by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
+   *   or upon DOM events (e.g. clicking) on such elements.
+   *   See each components' static `.init()` methods for details.
+   */
   settings,
+
+  /**
+   * Floating action button.
+   * @type FabButton
+   */
   FabButton,
+
+  /**
+   * File uploader.
+   * @type FileUploader
+   */
   FileUploader,
+
+  /**
+   * Content switcher.
+   * @type ContentSwitcher
+   */
   ContentSwitcher,
+
+  /**
+   * Container of tabs.
+   * @type Tab
+   */
   Tab,
+
+  /**
+   * Overflow menu.
+   * @type OverflowMenu
+   */
   OverflowMenu,
+
+  /**
+   * Modal dialog.
+   * @type Modal
+   */
   Modal,
+
+  /**
+   * Header with taxonomy menu.
+   * @type HeaderNav
+   */
   HeaderNav,
+
+  /**
+   * Search button in tool bar.
+   * @type Toolbars
+   */
   Toolbars,
+
+  /**
+   * Spinner indicating loading state.
+   * @type Loading
+   */
   Loading,
+
+  /**
+   * A selector with drop downs.
+   * @type Dropdown
+   */
   Dropdown,
+
+  /**
+   * The container for cards.
+   * @type Card
+   */
   Card,
+
+  /**
+   * Number input UI.
+   * @type NumberInput
+   */
   NumberInput,
+
+  /**
+   * Data table.
+   * @type Table
+   */
   Table,
 };
 
+/**
+ * Instantiates components automatically
+ * by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
+ * or upon DOM events (e.g. clicking) on such elements.
+ * See each components' static `.init()` methods for details.
+ * @private
+ */
 const init = () => {
   if (!settings.disableAutoInit) {
     FabButton.init();
