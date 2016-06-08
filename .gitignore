@@ -24,4 +24,4 @@ jsconfig.json
 tests/coverage
 
 # JSDoc
-/docs
+docs/js
