@@ -2,11 +2,13 @@
 
 [![Build Status](https://travis.innovate.ibm.com/Bluemix/bluemix-components.svg?token=PscWax4p1FECdA5aCxvd&branch=master)](https://travis.innovate.ibm.com/Bluemix/bluemix-components)
 
-**Component library for building websites and UIs for Atlas/Bluemix.**
+### Component library for building Bluemix
 
-Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable HTML and Sass partials they can use for building websites and user-interfaces for Bluemix.
+#### Browse component library on our [Design System website](design-system.stage1.mybluemix.net)
 
-The aim is for every developer to use consistent markup, styles, and behavior in their prototype and production work.
+- Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable HTML and Sass partials they can use for building websites and user-interfaces for Bluemix.
+
+- The aim is for every developer to use consistent markup, styles, and behavior in their prototype and production work.
 
 ## Documentation
 
