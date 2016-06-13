@@ -1,45 +1,56 @@
+//-----------------------------
+// File Uploader
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
+@import '../buttons/buttons';
 
-.bx--file {
+// import-once
+@import '../../import-once';
 
-  &__input {
-    @include hidden;
-  }
+@include exports('file-uploader') {
+  .bx--file {
 
-  // Styled File Uploader - focus outline
-  &__input:focus + &__label {
-    @include focus-outline;
-  }
+    &__input {
+      @include hidden;
+    }
 
-  // Styled File Uploader
-  &__label {
-    @include font-size('14');
-    position: relative;
-    display: block;
-    width: 100%;
-    min-width: 9.375rem;
-    padding: .9rem;
-    margin: .25rem 0;
-    font-weight: 200;
-    color: $color__navy-gray-8;
-    background-color: $color__inputs--bg;
-    border: none;
-    border-radius: 0;
-    // avoids safari from overriding these styles
-    appearance: none;
+    // Styled File Uploader - focus outline
+    &__input:focus + &__label {
+      @include focus-outline;
+    }
 
-    // "upload button"
-    &:after {
-      @include btn--primary;
-      position: absolute;
-      top: 0;
-      right:0;
-      height: 2rem;
-      padding-top: .3rem;
-      line-height: 2;
-      text-transform: capitalize;;
-      content: 'Choose Files';
-      border: 3px solid transparent;
+    // Styled File Uploader
+    &__label {
+      @include font-size('14');
+      position: relative;
+      display: block;
+      width: 100%;
+      min-width: 9.375rem;
+      padding: .9rem;
+      margin: .25rem 0;
+      font-weight: 200;
+      color: $color__navy-gray-8;
+      background-color: $color__inputs--bg;
+      border: none;
+      border-radius: 0;
+      // avoids safari from overriding these styles
+      appearance: none;
+
+      // "upload button"
+      &:after {
+        @include btn--primary;
+        position: absolute;
+        top: 0;
+        right:0;
+        height: 2rem;
+        padding-top: .3rem;
+        line-height: 2;
+        text-transform: capitalize;;
+        content: 'Choose Files';
+        border: 3px solid transparent;
+      }
     }
   }
 }

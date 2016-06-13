@@ -1,153 +1,166 @@
+//-----------------------------
+// Search
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
+
+// Local
 @import 'vars';
 @import 'extends';
 @import 'mixins';
 
-.bx--search {
-  display: flex;
-  align-items: center;
-  position: relative;
+// import-once
+@import '../../import-once';
 
-  &__label {
-    @include hidden;
-  }
-
-  &__input {
-    @include font-size('14');
-    width: 100%;
-    padding: 1rem 1rem 1rem 2.5rem;
-    color: $color__white;
-    background-color: $color__inputs--bg;
-    border: none;
-    appearance: none;
-    z-index: z('overflowOptions');
-
-    &:focus {
-      @include focus-outline;
-    }
-
-    &::placeholder {
-      @include font-smoothing;
-      font-style: italic;
-      color: darken($color__navy-gray-8, 15%);
-    }
-
-    @include breakpoint(bp--sm--major) {
-      @include font-size('16');
-    }
-
-    // light ui styles intentionally commented out for now
-    // .light-ui & {
-    //   &::placeholder {
-    //     color: $color__navy-gray-7;
-    //   }
-
-    //   color: $color__navy-gray-6;
-    //   background-color: mix($color__white, $color__navy-gray-7, 50%);
-    // }
-  }
-
-  &__icon {
-    &--magnifier {
-      @include icon--search;
-      width: 1.2rem;
-      height: 1.2rem;
-      left: .75rem;
-      top: .85rem;
-
-      @include breakpoint(500px) {
-        width: 1.4rem;
-        height: 1.4rem;
-      }
-    }
-
-    &--filter {
-      @include icon--search;
-      right: .85rem;
-      width: 1rem;
-      height: 1rem;
-      transition-duration: .25s;
-      top: 1rem;
-
-      @include breakpoint(500px) {
-        width: 1rem;
-        height: 1rem;
-      }
-    }
-  }
-
-  &__filter {
-    @include font-size('16');
-    padding: 1.4rem;
-    font-weight: 600;
-    color: $color__navy-gray-8;
-    cursor: pointer;
-    background-color: $color--filter-bg;
-    border: none;
+@include exports('search') {
+  .bx--search {
+    display: flex;
+    align-items: center;
     position: relative;
-    transition-duration: .25s;
 
-    @include breakpoint(bp--sm--major) {
-      padding: 1rem 2.5rem 1rem 0;
-      margin-left: 0;
+    &__label {
+      @include hidden;
     }
 
-    &:hover,
-    &:focus {
-      background-color: mix($color__white, $color--filter-bg, 10%);
+    &__input {
+      @include font-size('14');
+      width: 100%;
+      padding: 1rem 1rem 1rem 2.5rem;
       color: $color__white;
+      background-color: $color__inputs--bg;
+      border: none;
+      appearance: none;
+      z-index: z('overflowOptions');
 
-      .bx--search__icon--filter {
-        fill: $color__white;
+      &:focus {
+        @include focus-outline;
       }
-    }
 
-    // light ui styles commented out for now
-    // .light-ui & {
-    //   color: $color__navy-gray-6;
-    //   background-color: mix($color__white, $color__navy-gray-7, 30%);
-
-    //   &:hover,
-    //   &:focus {
-    //     background-color: mix($color__white, $color__navy-gray-7, 40%);
-    //   }
-    // }
-
-    .filter__text {
-      display: none;
-      padding-left: 1rem;
+      &::placeholder {
+        @include font-smoothing;
+        font-style: italic;
+        color: darken($color__navy-gray-8, 15%);
+      }
 
       @include breakpoint(bp--sm--major) {
-        display: inline-block;
+        @include font-size('16');
+      }
+
+      // light ui styles intentionally commented out for now
+      // .light-ui & {
+      //   &::placeholder {
+      //     color: $color__navy-gray-7;
+      //   }
+
+      //   color: $color__navy-gray-6;
+      //   background-color: mix($color__white, $color__navy-gray-7, 50%);
+      // }
+    }
+
+    &__icon {
+      &--magnifier {
+        @include icon--search;
+        width: 1.2rem;
+        height: 1.2rem;
+        left: .75rem;
+        top: .85rem;
+
+        @include breakpoint(500px) {
+          width: 1.4rem;
+          height: 1.4rem;
+        }
+      }
+
+      &--filter {
+        @include icon--search;
+        right: .85rem;
+        width: 1rem;
+        height: 1rem;
+        transition-duration: .25s;
+        top: 1rem;
+
+        @include breakpoint(500px) {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+    }
+
+    &__filter {
+      @include font-size('16');
+      padding: 1.4rem;
+      font-weight: 600;
+      color: $color__navy-gray-8;
+      cursor: pointer;
+      background-color: $color--filter-bg;
+      border: none;
+      position: relative;
+      transition-duration: .25s;
+
+      @include breakpoint(bp--sm--major) {
+        padding: 1rem 2.5rem 1rem 0;
+        margin-left: 0;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: mix($color__white, $color--filter-bg, 10%);
+        color: $color__white;
+
+        .bx--search__icon--filter {
+          fill: $color__white;
+        }
+      }
+
+      // light ui styles commented out for now
+      // .light-ui & {
+      //   color: $color__navy-gray-6;
+      //   background-color: mix($color__white, $color__navy-gray-7, 30%);
+
+      //   &:hover,
+      //   &:focus {
+      //     background-color: mix($color__white, $color__navy-gray-7, 40%);
+      //   }
+      // }
+
+      .filter__text {
+        display: none;
+        padding-left: 1rem;
+
+        @include breakpoint(bp--sm--major) {
+          display: inline-block;
+        }
       }
     }
   }
-}
 
-// Styles for Firefox
+  // Styles for Firefox
 
-body:not(:-moz-handler-blocked) .bx--search__filter {
-  padding: 1.7rem 2.5rem 1rem 0;
+  body:not(:-moz-handler-blocked) .bx--search__filter {
+    padding: 1.7rem 2.5rem 1rem 0;
 
-  @include breakpoint(bp--sm--major) {
-    padding: .86rem 2.5rem 1rem 0;
+    @include breakpoint(bp--sm--major) {
+      padding: .86rem 2.5rem 1rem 0;
+    }
+  }
+
+  body:not(:-moz-handler-blocked) .bx--search__icon--filter {
+    top: .89rem;
+
+    @include breakpoint(bp--sm--major) {
+      top: 1rem;
+    }
+  }
+
+  body:not(:-moz-handler-blocked) .bx--search__input {
+    padding-left: 2.75rem;
+  }
+
+  // Styles for Safari
+
+  _::-webkit-full-page-media, _:future, :root .bx--search__input {
+    padding-right: 0;
   }
 }
 
-body:not(:-moz-handler-blocked) .bx--search__icon--filter {
-  top: .89rem;
-
-  @include breakpoint(bp--sm--major) {
-    top: 1rem;
-  }
-}
-
-body:not(:-moz-handler-blocked) .bx--search__input {
-  padding-left: 2.75rem;
-}
-
-// Styles for Safari
-
-_::-webkit-full-page-media, _:future, :root .bx--search__input {
-  padding-right: 0;
-}

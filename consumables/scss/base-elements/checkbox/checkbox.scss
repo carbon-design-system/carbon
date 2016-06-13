@@ -1,56 +1,67 @@
+//-----------------------------
+// Checkbox
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
 
-.bx--checkbox {
-  @include hidden;
+// import-once
+@import '../../import-once';
 
-  // Checkbox Label - fonts and positioning
-  &__label {
-    @include font-smoothing;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
+@include exports('checkbox') {
+  .bx--checkbox {
+    @include hidden;
 
-  // Styled Checkbox - default
-  &__appearance {
-    @include font-size('16');
-    display: inline-block;
-    width: rem(18px);
-    height: rem(18px);
-    background-color: $color__inputs--bg;
-    border: 2px solid $color__navy-gray-7;
-    margin-right: .75rem;
-    border-radius: 2px;
-  }
+    // Checkbox Label - fonts and positioning
+    &__label {
+      @include font-smoothing;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
 
-  // Styled Checkbox - checked - background
-  &:checked + &__label &__appearance {
-    display: flex;
-    align-items: baseline;
-    background-color: $color__blue-30;
-    border-color: $color__blue-30;
+    // Styled Checkbox - default
+    &__appearance {
+      @include font-size('16');
+      display: inline-block;
+      width: rem(18px);
+      height: rem(18px);
+      background-color: $color__inputs--bg;
+      border: 2px solid $color__navy-gray-7;
+      margin-right: .75rem;
+      border-radius: 2px;
+    }
 
-    // Styled Checkbox - checked - checkmark
-    &:before {
-      content: '';
-      width: rem(12px);
-      height: rem(6px);
-      background: transparent;
-      border: 2px solid $color__navy-gray-2;
-      border-top: none;
-      border-right: none;
-      transform: rotate(-45deg);
+    // Styled Checkbox - checked - background
+    &:checked + &__label &__appearance {
+      display: flex;
+      align-items: baseline;
+      background-color: $color__blue-30;
+      border-color: $color__blue-30;
+
+      // Styled Checkbox - checked - checkmark
+      &:before {
+        content: '';
+        width: rem(12px);
+        height: rem(6px);
+        background: transparent;
+        border: 2px solid $color__navy-gray-2;
+        border-top: none;
+        border-right: none;
+        transform: rotate(-45deg);
+      }
+    }
+
+    // Styled Checkbox and Label - disabled
+    &:disabled + &__label {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    // Styled Checkbox - Focus outline (Firefox and Webkit)
+    &:focus + &__label &__appearance {
+      @include focus-outline;
     }
   }
-
-  // Styled Checkbox and Label - disabled
-  &:disabled + &__label {
-    opacity: .5;
-    cursor: not-allowed;
-  }
-
-  // Styled Checkbox - Focus outline (Firefox and Webkit)
-  &:focus + &__label &__appearance {
-    @include focus-outline;
-  }
 }
+

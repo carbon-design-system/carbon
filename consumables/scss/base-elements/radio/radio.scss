@@ -1,55 +1,66 @@
+//-----------------------------
+// Radio
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
 
-.bx--radio {
-  @include hidden;
+// import-once
+@import '../../import-once';
 
-  &__label {
-    // Radio Label - fonts and positioning
-    @include font-smoothing;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
+@include exports('radio') {
+  .bx--radio {
+    @include hidden;
 
-  &__appearance {
-    // Styled Radio Button - default
-    @include font-size('16');
-    display: inline-block;
-    width: rem(18px);
-    height: rem(18px);
-    background-color: $color__inputs--bg;
-    border: 2px solid $color__navy-gray-7;
-    margin-right: .75rem;
-    border-radius: 50%;
-  }
+    &__label {
+      // Radio Label - fonts and positioning
+      @include font-smoothing;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
 
-  &:checked + &__label &__appearance {
-    // Styled Radio - checked - background
-    display: flex;
-    align-items: center;
-    border-color: $color__blue-30;
-
-    &:before {
-      // Styled Radio - checked - dot
-      content: '';
+    &__appearance {
+      // Styled Radio Button - default
+      @include font-size('16');
       display: inline-block;
-      position: relative;
-      left: 3px;
-      width: .5rem;
-      height: .5rem;
+      width: rem(18px);
+      height: rem(18px);
+      background-color: $color__inputs--bg;
+      border: 2px solid $color__navy-gray-7;
+      margin-right: .75rem;
       border-radius: 50%;
-      background-color: $color__blue-30;
+    }
+
+    &:checked + &__label &__appearance {
+      // Styled Radio - checked - background
+      display: flex;
+      align-items: center;
+      border-color: $color__blue-30;
+
+      &:before {
+        // Styled Radio - checked - dot
+        content: '';
+        display: inline-block;
+        position: relative;
+        left: 3px;
+        width: .5rem;
+        height: .5rem;
+        border-radius: 50%;
+        background-color: $color__blue-30;
+      }
+    }
+
+    &:disabled + &__label {
+      // Styled Radio and Label - disabled
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    &:focus + &__label &__appearance {
+      // Styled Radio - Focus outline (Firefox and Webkit)
+      @include focus-outline;
     }
   }
-
-  &:disabled + &__label {
-    // Styled Radio and Label - disabled
-    opacity: .5;
-    cursor: not-allowed;
-  }
-
-  &:focus + &__label &__appearance {
-    // Styled Radio - Focus outline (Firefox and Webkit)
-    @include focus-outline;
-  }
 }
+

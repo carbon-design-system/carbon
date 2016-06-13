@@ -1,4 +1,19 @@
+//-----------------------------
+// Forms
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
+@import '../buttons/buttons';
+@import '../checkbox/checkbox';
+@import '../file-uploader/file-uploader';
+@import '../number-input/number-input';
+@import '../radio/radio';
+@import '../search/search';
+@import '../select/select';
+@import '../text/text';
+@import '../textarea/textarea';
+@import '../toggle/toggle';
 
 .bx--form {
 

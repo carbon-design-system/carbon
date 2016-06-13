@@ -1,71 +1,81 @@
+//-----------------------------
+// Number Input
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
 
-.bx--number {
-  position: relative;
+// import-once
+@import '../../import-once';
 
-  // Styles to prevent selecting label / number when user
-  // double clicks the number arrows
-  user-select: none;
-  -khtml-user-select: none;
+@include exports('number-input') {
+  .bx--number {
+    position: relative;
 
-  &__input {
-    @include font-size('16');
-    width: 100%;
-    min-width: 9.375rem;
-    padding: .5rem 0 .5rem 1rem;
-    margin: .25rem 0;
-    color: $color__white;
-    background-color: $color__navy-gray-4;
-    border: none;
+    // Styles to prevent selecting label / number when user
+    // double clicks the number arrows
+    user-select: none;
+    -khtml-user-select: none;
 
-    // Mozilla always displays system number toggles by default.
-    // This removes them, and I set a range on the HTML element for
-    // form validation
-    -moz-appearance: textfield;
+    &__input {
+      @include font-size('16');
+      width: 100%;
+      min-width: 9.375rem;
+      padding: .5rem 0 .5rem 1rem;
+      margin: .25rem 0;
+      color: $color__white;
+      background-color: $color__navy-gray-4;
+      border: none;
 
-    &:focus {
-      @extend %focus-outline;
+      // Mozilla always displays system number toggles by default.
+      // This removes them, and I set a range on the HTML element for
+      // form validation
+      -moz-appearance: textfield;
+
+      &:focus {
+        @extend %focus-outline;
+      }
+
+      // Hide system spinner on Chrome/Safari
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
     }
 
-    // Hide system spinner on Chrome/Safari
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-    }
-  }
+    // Position spans to place SVG's inside. Create placeholder
+    // instead of extending class?
+    &__arrow {
+      position: absolute;
+      right: 0;
+      fill: $color--blue-40;
+      cursor: pointer;
+      display: flex;
+      padding: 0 .5rem;
 
-  // Position spans to place SVG's inside. Create placeholder
-  // instead of extending class?
-  &__arrow {
-    position: absolute;
-    right: 0;
-    fill: $color--blue-40;
-    cursor: pointer;
-    display: flex;
-    padding: 0 .5rem;
+      &:hover {
+        fill: $color__blue-30;
+      }
 
-    &:hover {
-      fill: $color__blue-30;
-    }
+      &--up {
+        @extend .bx--number__arrow;
+        bottom: 1.3rem;
+        padding-top: .5rem;
+        align-items: flex-start;
+      }
 
-    &--up {
-      @extend .bx--number__arrow;
-      bottom: 1.3rem;
-      padding-top: .5rem;
-      align-items: flex-start;
-    }
+      &--down {
+        @extend .bx--number__arrow;
+        bottom: .25rem;
+        padding-bottom: .5rem;
+        align-items: flex-end;
+      }
 
-    &--down {
-      @extend .bx--number__arrow;
-      bottom: .25rem;
-      padding-bottom: .5rem;
-      align-items: flex-end;
-    }
-
-    .icon--down,
-    .icon--up {
-      display: block;
-      height: .5rem;
-      width: .5rem;
+      .icon--down,
+      .icon--up {
+        display: block;
+        height: .5rem;
+        width: .5rem;
+      }
     }
   }
 }

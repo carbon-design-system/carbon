@@ -1,32 +1,42 @@
+//-----------------------------
+// Text
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
 
-.bx--text {
+// import-once
+@import '../../import-once';
 
-  &__input {
-    @include font-size('14');
-    display: block;
-    width: 100%;
-    min-width: 9.375rem;
-    padding: .825rem 0 .825rem 1rem;
-    font-weight: 300;
-    margin: .25rem 0;
-    color: $color__white;
-    background-color: $color__inputs--bg;
-    border: none;
-    border-radius: 0;
+@include exports('text') {
+  .bx--text {
 
-    &::-webkit-input-placeholder {
-      color: darken($color__navy-gray-8, 12%);
-    }
+    &__input {
+      @include font-size('14');
+      display: block;
+      width: 100%;
+      min-width: 9.375rem;
+      padding: .825rem 0 .825rem 1rem;
+      font-weight: 300;
+      margin: .25rem 0;
+      color: $color__white;
+      background-color: $color__inputs--bg;
+      border: none;
+      border-radius: 0;
 
-    &:focus {
-      @include focus-outline;
-      outline: auto 2px -webkit-focus-ring-color; // webkit default
-    }
+      &::-webkit-input-placeholder {
+        color: darken($color__navy-gray-8, 12%);
+      }
 
-    &:disabled {
-      opacity: .5;
-      cursor: not-allowed;
+      &:focus {
+        @include focus-outline;
+        outline: auto 2px -webkit-focus-ring-color; // webkit default
+      }
+
+      &:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+      }
     }
   }
 }

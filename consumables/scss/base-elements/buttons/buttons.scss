@@ -1,68 +1,79 @@
+//-----------------------------
+// Buttons
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
 
+// Local Dependencies
 @import 'vars';
 @import 'mixins';
 @import 'extends';
 
-.bx--btn {
-  @include btn--primary;
-  // Light UI is not meant to be used yet until later
-  // -------------------------------------------------
-  // .light-ui & {
-  //   @extend %btn--base;
-  //   @include btn--primary($color__btn--bg--light-ui, $color__btn--bg--hover--light-ui);
-  // }
-}
+// import-once
+@import '../../import-once';
 
-.bx--btn--secondary {
-  @include btn--secondary;
-  // Light UI is not meant to be used yet until later
-  // -------------------------------------------------
-  // .light-ui & {
-  //   @extend %btn--base;
-  //   @include btn--secondary($color__btn--bg--light-ui);
-  // }
-}
-
-.bx--btn--danger {
-  @include btn--danger;
-}
-
-.bx--btn--right-icon {
-  @include btn--base;
-  @include btn--primary;
-  border-color: transparent;
-  padding-right: rem(6px);
-  // Styles for browser compatibility
-  text-align: left;
-  vertical-align: bottom;
-
-  &__text {
-    display: inline;
-    vertical-align: middle;
-  }
-
-  &__icon {
-    vertical-align: middle;
-    display: inline;
-    width: rem(18px);
-    height: rem(18px);
-    margin-left: .5rem;
-    margin-right: .25rem;
-  }
-
-  &__use {
-    fill: $color__blue-90;
-  }
-}
-
-.bx--sets-of-buttons {
-
+@include exports('buttons') {
   .bx--btn {
-    margin-left: 1rem;
+    @include btn--primary;
+    // Light UI is not meant to be used yet until later
+    // -------------------------------------------------
+    // .light-ui & {
+    //   @extend %btn--base;
+    //   @include btn--primary($color__btn--bg--light-ui, $color__btn--bg--hover--light-ui);
+    // }
   }
 
   .bx--btn--secondary {
-    @include btn--secondary($color__navy-gray-8);
+    @include btn--secondary;
+    // Light UI is not meant to be used yet until later
+    // -------------------------------------------------
+    // .light-ui & {
+    //   @extend %btn--base;
+    //   @include btn--secondary($color__btn--bg--light-ui);
+    // }
+  }
+
+  .bx--btn--danger {
+    @include btn--danger;
+  }
+
+  .bx--btn--right-icon {
+    @include btn--base;
+    @include btn--primary;
+    border-color: transparent;
+    padding-right: rem(6px);
+    // Styles for browser compatibility
+    text-align: left;
+    vertical-align: bottom;
+
+    &__text {
+      display: inline;
+      vertical-align: middle;
+    }
+
+    &__icon {
+      vertical-align: middle;
+      display: inline;
+      width: rem(18px);
+      height: rem(18px);
+      margin-left: .5rem;
+      margin-right: .25rem;
+    }
+
+    &__use {
+      fill: $color__blue-90;
+    }
+  }
+
+  .bx--sets-of-buttons {
+
+    .bx--btn {
+      margin-left: 1rem;
+    }
+
+    .bx--btn--secondary {
+      @include btn--secondary($color__navy-gray-8);
+    }
   }
 }
