@@ -38,6 +38,31 @@
   }
 
   var HeaderNav = function () {
+    /**
+     * Header with taxonomy menu.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a taxonomy menu.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
+     * @param {string} [options.selectorMenu] The CSS selector to find the container of the menu items.
+     * @param {string} [options.selectorItem] The CSS selector to find the menu items.
+     * @param {string} [options.selectorItemLink] The CSS selector to find the link in the menu items.
+     * @param {string} [options.selectorLabel] The CSS selector to find the label of the menu items.
+     * @param {string} [options.classActive] The CSS class for the visible state.
+     * @param {string} [options.eventBeforeShown]
+     *   The name of the custom event fired before this taxonomy menu is shown.
+     *   Cancellation of this event stops showing the taxonomy menu.
+     * @param {string} [options.eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
+     * @param {string} [options.eventBeforeHidden]
+     *   The name of the custom event fired before this taxonomy menu is hidden.
+     *   Cancellation of this event stops hiding the taxonomy menu.
+     * @param {string} [options.eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
+     * @param {string} [options.eventBeforeSelected]
+     *   The name of the custom event fired before a menu item is selected.
+     *   Cancellation of this event stops the selection.
+     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a menu item is selected.
+     */
+
     function HeaderNav(element) {
       var _this = this;
 
@@ -79,6 +104,36 @@
         });
       });
     }
+
+    /**
+     * Instantiates taxonomy menus in the given element.
+     * If the given element indicates that it's an taxonomy menu (having `data-nav` attribute), instantiates it.
+     * Otherwise, instantiates taxonomy menus by clicking on launcher buttons
+     * (buttons with `data-nav-target` attribute) of taxonomy menus in the given node.
+     * @implements Component
+     * @param {Node} target The DOM node to instantiate taxonomy menus in. Should be a document or an element.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
+     * @param {string} [options.selectorMenu] The CSS selector to find the container of the menu items.
+     * @param {string} [options.selectorItem] The CSS selector to find the menu items.
+     * @param {string} [options.selectorItemLink] The CSS selector to find the link in the menu items.
+     * @param {string} [options.selectorLabel] The CSS selector to find the label of the menu items.
+     * @param {string} [options.classActive] The CSS class for the visible state.
+     * @param {string} [options.eventBeforeShown]
+     *   The name of the custom event fired before this taxonomy menu is shown.
+     *   Cancellation of this event stops showing the taxonomy menu.
+     * @param {string} [options.eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
+     * @param {string} [options.eventBeforeHidden]
+     *   The name of the custom event fired before this taxonomy menu is hidden.
+     *   Cancellation of this event stops hiding the taxonomy menu.
+     * @param {string} [options.eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
+     * @param {string} [options.eventBeforeSelected]
+     *   The name of the custom event fired before a menu item is selected.
+     *   Cancellation of this event stops the selection.
+     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a menu item is selected.
+     * @returns {Handle} The handle to remove the event listener to handle clicking.
+     */
+
 
     (0, _createClass3.default)(HeaderNav, [{
       key: 'toggleNav',
@@ -225,5 +280,32 @@
   exports.default = HeaderNav;
 
 
+  /**
+   * The component options.
+   * @member {Object} HeaderNav#options
+   * @property {string} [selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
+   * @property {string} [selectorMenu] The CSS selector to find the container of the menu items.
+   * @property {string} [selectorItem] The CSS selector to find the menu items.
+   * @property {string} [selectorItemLink] The CSS selector to find the link in the menu items.
+   * @property {string} [selectorLabel] The CSS selector to find the label of the menu items.
+   * @property {string} [classActive] The CSS class for the visible state.
+   * @property {string} [eventBeforeShown]
+   *   The name of the custom event fired before this taxonomy menu is shown.
+   *   Cancellation of this event stops showing the taxonomy menu.
+   * @property {string} [eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
+   * @property {string} [eventBeforeHidden]
+   *   The name of the custom event fired before this taxonomy menu is hidden.
+   *   Cancellation of this event stops hiding the taxonomy menu.
+   * @property {string} [eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
+   * @property {string} [eventBeforeSelected]
+   *   The name of the custom event fired before a menu item is selected.
+   *   Cancellation of this event stops the selection.
+   * @property {string} [eventAfterSelected] The name of the custom event fired after a menu item is selected.
+   */
+
+  /**
+   * The map associating DOM element and taxonomy menu instance.
+   * @type {WeakMap}
+   */
   HeaderNav.components = new _weakMap2.default();
 });

@@ -32,6 +32,14 @@
   }
 
   var FileUploader = function () {
+    /**
+     * File uploader.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a file uploader.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
+     */
+
     function FileUploader(element) {
       var _this = this;
 
@@ -53,6 +61,14 @@
         return _this.updateLabel(event);
       });
     }
+
+    /**
+     * Instantiates file uploader of the given element.
+     * @param {HTMLElement} element The element working as a file uploader.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
+     */
+
 
     (0, _createClass3.default)(FileUploader, [{
       key: 'updateLabel',
@@ -76,6 +92,11 @@
         this.constructor.components.delete(this.element);
       }
     }], [{
+      key: 'create',
+      value: function create(element, options) {
+        return this.components.get(element) || new this(element, options);
+      }
+    }, {
       key: 'init',
       value: function init() {
         var _this2 = this;
@@ -94,11 +115,6 @@
           });
         }
       }
-    }, {
-      key: 'create',
-      value: function create(element, options) {
-        return this.components.get(element) || new this(element, options);
-      }
     }]);
     return FileUploader;
   }();
@@ -106,5 +122,15 @@
   exports.default = FileUploader;
 
 
+  /**
+   * The component options.
+   * @member {Object} FileUploader#options
+   * @property {string} [labelSelector] The CSS selector to find the label for the file name.
+   */
+
+  /**
+   * The map associating DOM element and file uploader instance.
+   * @type {WeakMap}
+   */
   FileUploader.components = new _weakMap2.default();
 });

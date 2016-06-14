@@ -32,6 +32,12 @@
   }
 
   var Toolbars = function () {
+    /**
+     * Search button in tool bar.
+     * @implements Component
+     * @param {HTMLElement} element The element working as an search button.
+     */
+
     function Toolbars(element) {
       var _this = this;
 
@@ -50,6 +56,12 @@
         return _this.handleActionClick(event);
       });
     }
+
+    /**
+     * Instantiates a search button of the given element.
+     * @param {HTMLElement} element The element working as a search button.
+     */
+
 
     (0, _createClass3.default)(Toolbars, [{
       key: 'handleActionClick',
@@ -72,6 +84,11 @@
         this.constructor.components.delete(this.element);
       }
     }], [{
+      key: 'create',
+      value: function create(element) {
+        return this.components.get(element) || new this(element);
+      }
+    }, {
       key: 'init',
       value: function init() {
         var _this2 = this;
@@ -89,11 +106,6 @@
           });
         }
       }
-    }, {
-      key: 'create',
-      value: function create(element) {
-        return this.components.get(element) || new this(element);
-      }
     }]);
     return Toolbars;
   }();
@@ -101,5 +113,9 @@
   exports.default = Toolbars;
 
 
+  /**
+   * The map associating DOM element and search button instance.
+   * @type {WeakMap}
+   */
   Toolbars.components = new _weakMap2.default();
 });

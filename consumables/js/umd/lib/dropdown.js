@@ -34,6 +34,20 @@
   }
 
   var Dropdown = function () {
+    /**
+     * A selector with drop downs.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a selector.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
+     * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+     * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
+     * @param {string} [options.eventBeforeSelected]
+     *   The name of the custom event fired before a drop down item is selected.
+     *   Cancellation of this event stops selection of drop down item.
+     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+     */
+
     function Dropdown(element) {
       var _this = this;
 
@@ -67,6 +81,20 @@
         return _this.selected(event);
       });
     }
+
+    /**
+     * Instantiates selector of the given element.
+     * @param {HTMLElement} element The element working as a selector.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
+     * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+     * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
+     * @param {string} [options.eventBeforeSelected]
+     *   The name of the custom event fired before a drop down item is selected.
+     *   Cancellation of this event stops selection of drop down item.
+     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+     */
+
 
     (0, _createClass3.default)(Dropdown, [{
       key: 'release',
@@ -148,5 +176,21 @@
   exports.default = Dropdown;
 
 
+  /**
+   * The component options.
+   * @member {Object} Dropdown#options
+   * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
+   * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+   * @property {string} [classSelected] The CSS class for the selected dropdown item.
+   * @property {string} [eventBeforeSelected]
+   *   The name of the custom event fired before a drop down item is selected.
+   *   Cancellation of this event stops selection of drop down item.
+   * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+   */
+
+  /**
+   * The map associating DOM element and selector instance.
+   * @type {WeakMap}
+   */
   Dropdown.components = new _weakMap2.default();
 });

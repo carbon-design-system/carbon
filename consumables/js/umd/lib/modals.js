@@ -40,6 +40,22 @@
   }
 
   var Modal = function () {
+    /**
+     * Modal dialog.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a modal dialog.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.classVisible] The CSS class for the visible state.
+     * @param {string} [options.eventBeforeShown]
+     *   The name of the custom event fired before this modal is shown.
+     *   Cancellation of this event stops showing the modal.
+     * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+     * @param {string} [options.eventBeforeHidden]
+     *   The name of the custom event fired before this modal is hidden.
+     *   Cancellation of this event stops hiding the modal.
+     * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+     */
+
     function Modal(element) {
       var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
       (0, _classCallCheck3.default)(this, Modal);
@@ -62,6 +78,22 @@
 
       this.hookCloseActions();
     }
+
+    /**
+     * Instantiates modal dialog of the given element.
+     * @param {HTMLElement} element The element working as a modal dialog.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.classVisible] The CSS class for the visible state.
+     * @param {string} [options.eventBeforeShown]
+     *   The name of the custom event fired before this modal is shown.
+     *   Cancellation of this event stops showing the modal.
+     * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+     * @param {string} [options.eventBeforeHidden]
+     *   The name of the custom event fired before this modal is hidden.
+     *   Cancellation of this event stops hiding the modal.
+     * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+     */
+
 
     (0, _createClass3.default)(Modal, [{
       key: 'hookCloseActions',
@@ -205,6 +237,11 @@
         this.constructor.components.delete(this.element);
       }
     }], [{
+      key: 'create',
+      value: function create(element, options) {
+        return this.components.get(element) || new this(element, options);
+      }
+    }, {
       key: 'init',
       value: function init() {
         var _this5 = this;
@@ -258,11 +295,6 @@
         }
       }
     }, {
-      key: 'create',
-      value: function create(element, options) {
-        return this.components.get(element) || new this(element, options);
-      }
-    }, {
       key: 'hook',
       value: function hook() {
         console.warn('Modals.hook() is deprecated. Use Modals.init() instead.'); // eslint-disable-line no-console
@@ -274,5 +306,23 @@
   exports.default = Modal;
 
 
+  /**
+   * The component options.
+   * @member {Object} Modal#options
+   * @property {string} [classVisible] The CSS class for the visible state.
+   * @property {string} [eventBeforeShown]
+   *   The name of the custom event fired before this modal is shown.
+   *   Cancellation of this event stops showing the modal.
+   * @property {string} [eventAfterShown] The name of the custom event fired after this modal is shown.
+   * @property {string} [eventBeforeHidden]
+   *   The name of the custom event fired before this modal is hidden.
+   *   Cancellation of this event stops hiding the modal.
+   * @property {string} [eventAfterHidden] The name of the custom event fired after this modal is hidden.
+   */
+
+  /**
+   * The map associating DOM element and modal instance.
+   * @type {WeakMap}
+   */
   Modal.components = new _weakMap2.default();
 });

@@ -38,6 +38,20 @@
   }
 
   var ContentSwitcher = function () {
+    /**
+     * Set of content switcher buttons.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a set of content switcher buttons.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
+     * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
+     * @param {string} [options.classActive] The CSS class for switcher button's selected state.
+     * @param {string} [options.eventBeforeSelected]
+     *   The name of the custom event fired before a switcher button is selected.
+     *   Cancellation of this event stops selection of content switcher button.
+     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
+     */
+
     function ContentSwitcher(element) {
       var _this = this;
 
@@ -68,6 +82,20 @@
         if (input.checked) _this._changeActive(input);
       });
     }
+
+    /**
+     * Instantiates a set of content switcher buttons of the given element.
+     * @param {HTMLElement} element The element working as a set of content switcher buttons.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
+     * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
+     * @param {string} [options.classActive] The CSS class for switcher button's selected state.
+     * @param {string} [options.eventBeforeSelected]
+     *   The name of the custom event fired before a switcher button is selected.
+     *   Cancellation of this event stops selection of content switcher button.
+     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
+     */
+
 
     (0, _createClass3.default)(ContentSwitcher, [{
       key: 'handleClick',
@@ -141,6 +169,11 @@
         this.constructor.components.delete(this.element);
       }
     }], [{
+      key: 'create',
+      value: function create(element, options) {
+        return this.components.get(element) || new this(element, options);
+      }
+    }, {
       key: 'init',
       value: function init() {
         var _this3 = this;
@@ -159,11 +192,6 @@
           });
         }
       }
-    }, {
-      key: 'create',
-      value: function create(element, options) {
-        return this.components.get(element) || new this(element, options);
-      }
     }]);
     return ContentSwitcher;
   }();
@@ -171,5 +199,21 @@
   exports.default = ContentSwitcher;
 
 
+  /**
+   * The component options.
+   * @member {Object} ContentSwitcher#options
+   * @property {string} [selectorButton] The CSS selector to find switcher buttons.
+   * @property {string} [selectorButtonSelected] The CSS selector to find the selected switcher button.
+   * @property {string} [classActive] The CSS class for switcher button's selected state.
+   * @property {string} [eventBeforeSelected]
+   *   The name of the custom event fired before a switcher button is selected.
+   *   Cancellation of this event stops selection of content switcher button.
+   * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
+   */
+
+  /**
+   * The map associating DOM element and content switcher set instance.
+   * @type {WeakMap}
+   */
   ContentSwitcher.components = new _weakMap2.default();
 });

@@ -112,41 +112,140 @@ var BluemixComponents =
 	// Imports and Exports //
 	// ====================//
 	
-	// This file is for the following:
-	// 1. Export ES2015 classes as modules (used with base-elements and components)
-	//    - consume ES2015 modules from this file using import:
-	//    - import { Fab, FileUploader } from 'relative/path/to/bower/components';
-	// 2. Build an ES5-compatible files for prototyping.
-	//    See ./dist/dist-demo.html for details
-	
 	// Polyfills
 	// -------------
 	
 	
 	var settings = {};
 	
-	// Export all vars/classes for consumption:
+	/**
+	 * This module is used for the following purposes:
+	 * 1. Export ES2015 classes as modules (used with base-elements and components)
+	 * 2. Build an ES5-compatible files for prototyping.
+	 *    See /path/to/bluemix-components/dist/dist-demo.html for details.
+	 * @exports BluemixComponents
+	 * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
+	 * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
+	 */
+	
 	
 	// Base Elements & Components
 	// -------------
 	// - JavaScript classes for use with components and base-elements.
 	// - The following statements import classes from actual locations to
 	//   be consumed from this file instead of their actual locations.
-	exports.settings = settings;
-	exports.FabButton = _fab2.default;
-	exports.FileUploader = _fileUploader2.default;
-	exports.ContentSwitcher = _contentSwitcher2.default;
-	exports.Tab = _tabs2.default;
-	exports.OverflowMenu = _overflowMenu2.default;
-	exports.Modal = _modals2.default;
-	exports.HeaderNav = _header2.default;
-	exports.Toolbars = _toolbars2.default;
-	exports.Loading = _loading2.default;
-	exports.Dropdown = _dropdown2.default;
-	exports.Card = _card2.default;
-	exports.NumberInput = _numberInput2.default;
-	exports.Table = _table2.default;
+	exports.
+	/**
+	 * Settings.
+	 * @type Object
+	 * @property {boolean} [disableAutoInit]
+	 *   Disables automatic instantiation of components.
+	 *   By default (`BluemixComponents.disableAutoInit` is `false`),
+	 *   bluemix-components attempts to instantiate components automatically
+	 *   by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
+	 *   or upon DOM events (e.g. clicking) on such elements.
+	 *   See each components' static `.init()` methods for details.
+	 */
+	settings = settings;
+	exports.
 	
+	/**
+	 * Floating action button.
+	 * @type FabButton
+	 */
+	FabButton = _fab2.default;
+	exports.
+	
+	/**
+	 * File uploader.
+	 * @type FileUploader
+	 */
+	FileUploader = _fileUploader2.default;
+	exports.
+	
+	/**
+	 * Content switcher.
+	 * @type ContentSwitcher
+	 */
+	ContentSwitcher = _contentSwitcher2.default;
+	exports.
+	
+	/**
+	 * Container of tabs.
+	 * @type Tab
+	 */
+	Tab = _tabs2.default;
+	exports.
+	
+	/**
+	 * Overflow menu.
+	 * @type OverflowMenu
+	 */
+	OverflowMenu = _overflowMenu2.default;
+	exports.
+	
+	/**
+	 * Modal dialog.
+	 * @type Modal
+	 */
+	Modal = _modals2.default;
+	exports.
+	
+	/**
+	 * Header with taxonomy menu.
+	 * @type HeaderNav
+	 */
+	HeaderNav = _header2.default;
+	exports.
+	
+	/**
+	 * Search button in tool bar.
+	 * @type Toolbars
+	 */
+	Toolbars = _toolbars2.default;
+	exports.
+	
+	/**
+	 * Spinner indicating loading state.
+	 * @type Loading
+	 */
+	Loading = _loading2.default;
+	exports.
+	
+	/**
+	 * A selector with drop downs.
+	 * @type Dropdown
+	 */
+	Dropdown = _dropdown2.default;
+	exports.
+	
+	/**
+	 * The container for cards.
+	 * @type Card
+	 */
+	Card = _card2.default;
+	exports.
+	
+	/**
+	 * Number input UI.
+	 * @type NumberInput
+	 */
+	NumberInput = _numberInput2.default;
+	exports.
+	
+	/**
+	 * Data table.
+	 * @type Table
+	 */
+	Table = _table2.default;
+	
+	/**
+	 * Instantiates components automatically
+	 * by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
+	 * or upon DOM events (e.g. clicking) on such elements.
+	 * See each components' static `.init()` methods for details.
+	 * @private
+	 */
 	
 	var init = function init() {
 	  if (!settings.disableAutoInit) {
@@ -378,6 +477,14 @@ var BluemixComponents =
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var FileUploader = function () {
+	  /**
+	   * File uploader.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a file uploader.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
+	   */
+	
 	  function FileUploader(element) {
 	    var _this = this;
 	
@@ -401,8 +508,22 @@ var BluemixComponents =
 	    });
 	  }
 	
+	  /**
+	   * Instantiates file uploader of the given element.
+	   * @param {HTMLElement} element The element working as a file uploader.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
+	   */
+	
+	
 	  _createClass(FileUploader, [{
 	    key: 'updateLabel',
+	
+	
+	    /**
+	     * Updates the label for the file name upon file selection.
+	     * @param {Event} event The event triggering this method.
+	     */
 	    value: function updateLabel(event) {
 	      var fileName = '';
 	      var element = this.element;
@@ -423,6 +544,21 @@ var BluemixComponents =
 	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
+	    key: 'create',
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
+	    }
+	
+	    /**
+	     * Instantiates file uploader in the given node.
+	     * If the given element indicates that it's an file uploader (having `data-file-uploader` attribute), instantiates it.
+	     * Otherwise, instantiates file uploader by searching for file uploader in the given node.
+	     * @param {HTMLElement} element The element working as a file uploader.
+	     * @param {Object} [options] The component options.
+	     * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
+	     */
+	
+	  }, {
 	    key: 'init',
 	    value: function init() {
 	      var _this2 = this;
@@ -441,19 +577,24 @@ var BluemixComponents =
 	        });
 	      }
 	    }
-	  }, {
-	    key: 'create',
-	    value: function create(element, options) {
-	      return this.components.get(element) || new this(element, options);
-	    }
 	  }]);
 	
 	  return FileUploader;
 	}();
 	
+	/**
+	 * The component options.
+	 * @member {Object} FileUploader#options
+	 * @property {string} [labelSelector] The CSS selector to find the label for the file name.
+	 */
+	
+	/**
+	 * The map associating DOM element and file uploader instance.
+	 * @type {WeakMap}
+	 */
+	
+	
 	exports.default = FileUploader;
-	
-	
 	FileUploader.components = new WeakMap();
 
 /***/ },
@@ -652,6 +793,20 @@ var BluemixComponents =
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var ContentSwitcher = function () {
+	  /**
+	   * Set of content switcher buttons.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a set of content switcher buttons.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
+	   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
+	   * @param {string} [options.classActive] The CSS class for switcher button's selected state.
+	   * @param {string} [options.eventBeforeSelected]
+	   *   The name of the custom event fired before a switcher button is selected.
+	   *   Cancellation of this event stops selection of content switcher button.
+	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
+	   */
+	
 	  function ContentSwitcher(element) {
 	    var _this = this;
 	
@@ -684,14 +839,42 @@ var BluemixComponents =
 	    });
 	  }
 	
+	  /**
+	   * Instantiates a set of content switcher buttons of the given element.
+	   * @param {HTMLElement} element The element working as a set of content switcher buttons.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
+	   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
+	   * @param {string} [options.classActive] The CSS class for switcher button's selected state.
+	   * @param {string} [options.eventBeforeSelected]
+	   *   The name of the custom event fired before a switcher button is selected.
+	   *   Cancellation of this event stops selection of content switcher button.
+	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
+	   */
+	
+	
 	  _createClass(ContentSwitcher, [{
 	    key: 'handleClick',
+	
+	
+	    /**
+	     * Handles click on content switcher button set.
+	     * If the click is on a content switcher button, activates it.
+	     * @param {Event} event The event triggering this method.
+	     */
 	    value: function handleClick(event) {
 	      var button = (0, _eventMatches2.default)(event, this.options.selectorButton);
 	      if (button) {
 	        this.setActive(button);
 	      }
 	    }
+	
+	    /**
+	     * Internal method of {@linkcode ContentSwitcher#setActive .setActive()}, to select a content switcher button.
+	     * @private
+	     * @param {HTMLElement} item The button to be selected.
+	     */
+	
 	  }, {
 	    key: '_changeActive',
 	    value: function _changeActive(item) {
@@ -721,6 +904,29 @@ var BluemixComponents =
 	        return element.removeAttribute('hidden');
 	      });
 	    }
+	
+	    /**
+	     * Error thrown when selection (upon clicking on a content switcher button, etc.) is canceled.
+	     * @typedef {Object} ContentSwitcher~cancelError
+	     * @property {boolean} canceled `true` always.
+	     * @property {boolean} item The content switcher button that was about to be selected.
+	     */
+	
+	    /**
+	     * The callback called once switching is finished or is canceled.
+	     * @callback ContentSwitcher~setActiveCallback
+	     * @param {ContentSwitcher~cancelError} error Error thrown when selection (upon clicking on a content switcher button, etc.) is canceled.
+	     * @param {HTMLElement} item The newly selected button. `null` if when selection is canceled.
+	     */
+	
+	    /**
+	     * Selects a content switcher button.
+	     * If the selected button has `data-target` attribute, DOM elements it points to as a CSS selector will be shown.
+	     * DOM elements associated with unselected buttons in the same way will be hidden.
+	     * @param {HTMLElement} item The button to be selected.
+	     * @param {ContentSwitcher~setActiveCallback} callback The callback called once selection is finished or is canceled.
+	     */
+	
 	  }, {
 	    key: 'setActive',
 	    value: function setActive(item, callback) {
@@ -756,6 +962,27 @@ var BluemixComponents =
 	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
+	    key: 'create',
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
+	    }
+	
+	    /**
+	     * Instantiates content switcher button sets in the given node.
+	     * If the given element indicates that it's an content switcher button set (having `data-content-switcher` attribute), instantiates it.
+	     * Otherwise, instantiates content switcher button sets by searching for content switcher button sets in the given node.
+	     * @param {Node} target The DOM node to instantiate content switcher button sets in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
+	     * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
+	     * @param {string} [options.classActive] The CSS class for switcher button's selected state.
+	     * @param {string} [options.eventBeforeSelected]
+	     *   The name of the custom event fired before a switcher button is selected.
+	     *   Cancellation of this event stops selection of content switcher button.
+	     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
+	     */
+	
+	  }, {
 	    key: 'init',
 	    value: function init() {
 	      var _this3 = this;
@@ -774,19 +1001,30 @@ var BluemixComponents =
 	        });
 	      }
 	    }
-	  }, {
-	    key: 'create',
-	    value: function create(element, options) {
-	      return this.components.get(element) || new this(element, options);
-	    }
 	  }]);
 	
 	  return ContentSwitcher;
 	}();
 	
+	/**
+	 * The component options.
+	 * @member {Object} ContentSwitcher#options
+	 * @property {string} [selectorButton] The CSS selector to find switcher buttons.
+	 * @property {string} [selectorButtonSelected] The CSS selector to find the selected switcher button.
+	 * @property {string} [classActive] The CSS class for switcher button's selected state.
+	 * @property {string} [eventBeforeSelected]
+	 *   The name of the custom event fired before a switcher button is selected.
+	 *   Cancellation of this event stops selection of content switcher button.
+	 * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
+	 */
+	
+	/**
+	 * The map associating DOM element and content switcher set instance.
+	 * @type {WeakMap}
+	 */
+	
+	
 	exports.default = ContentSwitcher;
-	
-	
 	ContentSwitcher.components = new WeakMap();
 
 /***/ },
@@ -880,6 +1118,25 @@ var BluemixComponents =
 	var Tab = function (_ContentSwitcher) {
 	  _inherits(Tab, _ContentSwitcher);
 	
+	  /**
+	   * Container of tabs.
+	   * @extends ContentSwitcher
+	   * @param {HTMLElement} element The element working as a container of tabs.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
+	   * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
+	   * @param {string} [options.selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
+	   * @param {string} [options.selectorButton] The CSS selector to find tab containers.
+	   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected tab.
+	   * @param {string} [options.selectorLink] The CSS selector to find the links in tabs.
+	   * @param {string} [options.classActive] The CSS class for tab's selected state.
+	   * @param {string} [options.classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
+	   * @param {string} [options.eventBeforeSelected]
+	   *   The name of the custom event fired before a tab is selected.
+	   *   Cancellation of this event stops selection of tab.
+	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
+	   */
+	
 	  function Tab(element) {
 	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	
@@ -909,12 +1166,41 @@ var BluemixComponents =
 	    return _this;
 	  }
 	
+	  /**
+	   * Instantiates tab containers in the given node.
+	   * If the given element indicates that it's an tab container (having `data-tabs` attribute), instantiates it.
+	   * Otherwise, instantiates tab containers by searching for tab containers in the given node.
+	   * @param {Node} target The DOM node to instantiate tab containers in. Should be a document or an element.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
+	   * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
+	   * @param {string} [options.selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
+	   * @param {string} [options.selectorButton] The CSS selector to find tab containers.
+	   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected tab.
+	   * @param {string} [options.selectorLink] The CSS selector to find the links in tabs.
+	   * @param {string} [options.classActive] The CSS class for tab's selected state.
+	   * @param {string} [options.classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
+	   * @param {string} [options.eventBeforeSelected]
+	   *   The name of the custom event fired before a tab is selected.
+	   *   Cancellation of this event stops selection of tab.
+	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
+	   */
+	
+	
 	  _createClass(Tab, [{
 	    key: '_changeActive',
 	    value: function _changeActive(item) {
 	      _get(Object.getPrototypeOf(Tab.prototype), '_changeActive', this).call(this, item);
 	      this.updateTriggerText(item);
 	    }
+	
+	    /**
+	     * Handles click on tab container.
+	     * * If the click is on a tab, activates it.
+	     * * If the click is on the button to open the drop down menu, does so.
+	     * @param {Event} event The event triggering this method.
+	     */
+	
 	  }, {
 	    key: 'handleClick',
 	    value: function handleClick(event) {
@@ -929,6 +1215,14 @@ var BluemixComponents =
 	        this.updateMenuState();
 	      }
 	    }
+	
+	    /**
+	     * Handles arrow keys on tab container.
+	     * * Up/Left keys are used to go to previous tab.
+	     * * Down/Right keys are used to go to next tab.
+	     * @param {Event} event The event triggering this method.
+	     */
+	
 	  }, {
 	    key: 'handleKeyDown',
 	    value: function handleKeyDown(event) {
@@ -962,11 +1256,22 @@ var BluemixComponents =
 	        event.preventDefault();
 	      }
 	    }
+	
+	    /**
+	     * Shows/hides the drop down menu used in narrow mode.
+	     */
+	
 	  }, {
 	    key: 'updateMenuState',
 	    value: function updateMenuState() {
 	      this.element.querySelector(this.options.selectorMenu).classList.toggle(this.options.classHidden);
 	    }
+	
+	    /**
+	     * Updates the text indicating the currently selected tab item.
+	     * @param {HTMLElement} target The newly selected tab item.
+	     */
+	
 	  }, {
 	    key: 'updateTriggerText',
 	    value: function updateTriggerText(target) {
@@ -996,9 +1301,30 @@ var BluemixComponents =
 	  return Tab;
 	}(_contentSwitcher2.default);
 	
+	/**
+	 * The component options.
+	 * @member {Object} Tab#options
+	 * @property {string} [selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
+	 * @property {string} [selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
+	 * @property {string} [selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
+	 * @property {string} [selectorButton] The CSS selector to find tab containers.
+	 * @property {string} [selectorButtonSelected] The CSS selector to find the selected tab.
+	 * @property {string} [selectorLink] The CSS selector to find the links in tabs.
+	 * @property {string} [classActive] The CSS class for tab's selected state.
+	 * @property {string} [classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
+	 * @property {string} [eventBeforeSelected]
+	 *   The name of the custom event fired before a tab is selected.
+	 *   Cancellation of this event stops selection of tab.
+	 * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
+	 */
+	
+	/**
+	 * The map associating DOM element and tab container instance.
+	 * @type {WeakMap}
+	 */
+	
+	
 	exports.default = Tab;
-	
-	
 	Tab.components = new WeakMap();
 
 /***/ },
@@ -1156,6 +1482,22 @@ var BluemixComponents =
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var Modal = function () {
+	  /**
+	   * Modal dialog.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a modal dialog.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.classVisible] The CSS class for the visible state.
+	   * @param {string} [options.eventBeforeShown]
+	   *   The name of the custom event fired before this modal is shown.
+	   *   Cancellation of this event stops showing the modal.
+	   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+	   * @param {string} [options.eventBeforeHidden]
+	   *   The name of the custom event fired before this modal is hidden.
+	   *   Cancellation of this event stops hiding the modal.
+	   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+	   */
+	
 	  function Modal(element) {
 	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	
@@ -1180,8 +1522,29 @@ var BluemixComponents =
 	    this.hookCloseActions();
 	  }
 	
+	  /**
+	   * Instantiates modal dialog of the given element.
+	   * @param {HTMLElement} element The element working as a modal dialog.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.classVisible] The CSS class for the visible state.
+	   * @param {string} [options.eventBeforeShown]
+	   *   The name of the custom event fired before this modal is shown.
+	   *   Cancellation of this event stops showing the modal.
+	   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+	   * @param {string} [options.eventBeforeHidden]
+	   *   The name of the custom event fired before this modal is hidden.
+	   *   Cancellation of this event stops hiding the modal.
+	   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+	   */
+	
+	
 	  _createClass(Modal, [{
 	    key: 'hookCloseActions',
+	
+	
+	    /**
+	     * Adds event listeners for closing this dialog.
+	     */
 	    value: function hookCloseActions() {
 	      var _this = this;
 	
@@ -1208,6 +1571,14 @@ var BluemixComponents =
 	        });
 	      });
 	    }
+	
+	    /**
+	     * Internal method of {@linkcode Modal#show .show()} and  {@linkcode Modal#hide .hide()}, to change show/hidden state.
+	     * @private
+	     * @param {boolean} visible `true` to make this modal dialog visible.
+	     * @param {Function} callback Callback called when change in state completes.
+	     */
+	
 	  }, {
 	    key: '_changeState',
 	    value: function _changeState(visible, callback) {
@@ -1229,6 +1600,23 @@ var BluemixComponents =
 	        finishedTransition();
 	      }
 	    }
+	
+	    /**
+	     * The callback called once showing/hiding this dialog is finished or is canceled.
+	     * @callback Modal~stateChangeCallback
+	     * @param {Error} error
+	     *   An error object with `true` in its `canceled` property if the showing/hiding this dialog is canceled.
+	     *   Cancellation happens if the handler of a custom event, that is fired before showing/hiding this dialog happens,
+	     *   calls `.preventDefault()` against the event.
+	     * @param {boolean} newState The new toggle state.
+	     */
+	
+	    /**
+	     * Shows this modal dialog.
+	     * @param {HTMLElement} [launchingElement] The DOM element that triggered calling this function.
+	     * @param {Modal~stateChangeCallback} [callback] The callback called once showing this dialog is finished or is canceled.
+	     */
+	
 	  }, {
 	    key: 'show',
 	    value: function show(launchingElement, callback) {
@@ -1276,6 +1664,12 @@ var BluemixComponents =
 	        }
 	      }
 	    }
+	
+	    /**
+	     * Hides this modal dialog.
+	     * @param {Modal~stateChangeCallback} [callback] The callback called once showing this dialog is finished or is canceled.
+	     */
+	
 	  }, {
 	    key: 'hide',
 	    value: function hide(callback) {
@@ -1321,7 +1715,38 @@ var BluemixComponents =
 	      }
 	      this.constructor.components.delete(this.element);
 	    }
+	
+	    /**
+	     * @deprecated
+	     */
+	
 	  }], [{
+	    key: 'create',
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
+	    }
+	
+	    /**
+	     * Instantiates modal dialogs in the given element.
+	     * If the given element indicates that it's an modal dialog (having `data-modal` attribute), instantiates it.
+	     * Otherwise, instantiates modal dialogs by clicking on launcher buttons
+	     * (buttons with `data-modal-target` attribute) of modal dialogs in the given node.
+	     * @implements Component
+	     * @param {Node} target The DOM node to instantiate modal dialogs in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {string} [options.classVisible] The CSS class for the visible state.
+	     * @param {string} [options.eventBeforeShown]
+	     *   The name of the custom event fired before this modal is shown.
+	     *   Cancellation of this event stops showing the modal.
+	     * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+	     * @param {string} [options.eventBeforeHidden]
+	     *   The name of the custom event fired before this modal is hidden.
+	     *   Cancellation of this event stops hiding the modal.
+	     * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+	     * @returns {Handle} The handle to remove the event listener to handle clicking.
+	     */
+	
+	  }, {
 	    key: 'init',
 	    value: function init() {
 	      var _this5 = this;
@@ -1375,11 +1800,6 @@ var BluemixComponents =
 	      }
 	    }
 	  }, {
-	    key: 'create',
-	    value: function create(element, options) {
-	      return this.components.get(element) || new this(element, options);
-	    }
-	  }, {
 	    key: 'hook',
 	    value: function hook() {
 	      console.warn('Modals.hook() is deprecated. Use Modals.init() instead.'); // eslint-disable-line no-console
@@ -1389,9 +1809,27 @@ var BluemixComponents =
 	  return Modal;
 	}();
 	
+	/**
+	 * The component options.
+	 * @member {Object} Modal#options
+	 * @property {string} [classVisible] The CSS class for the visible state.
+	 * @property {string} [eventBeforeShown]
+	 *   The name of the custom event fired before this modal is shown.
+	 *   Cancellation of this event stops showing the modal.
+	 * @property {string} [eventAfterShown] The name of the custom event fired after this modal is shown.
+	 * @property {string} [eventBeforeHidden]
+	 *   The name of the custom event fired before this modal is hidden.
+	 *   Cancellation of this event stops hiding the modal.
+	 * @property {string} [eventAfterHidden] The name of the custom event fired after this modal is hidden.
+	 */
+	
+	/**
+	 * The map associating DOM element and modal instance.
+	 * @type {WeakMap}
+	 */
+	
+	
 	exports.default = Modal;
-	
-	
 	Modal.components = new WeakMap();
 
 /***/ },
@@ -1451,6 +1889,31 @@ var BluemixComponents =
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var HeaderNav = function () {
+	  /**
+	   * Header with taxonomy menu.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a taxonomy menu.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
+	   * @param {string} [options.selectorMenu] The CSS selector to find the container of the menu items.
+	   * @param {string} [options.selectorItem] The CSS selector to find the menu items.
+	   * @param {string} [options.selectorItemLink] The CSS selector to find the link in the menu items.
+	   * @param {string} [options.selectorLabel] The CSS selector to find the label of the menu items.
+	   * @param {string} [options.classActive] The CSS class for the visible state.
+	   * @param {string} [options.eventBeforeShown]
+	   *   The name of the custom event fired before this taxonomy menu is shown.
+	   *   Cancellation of this event stops showing the taxonomy menu.
+	   * @param {string} [options.eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
+	   * @param {string} [options.eventBeforeHidden]
+	   *   The name of the custom event fired before this taxonomy menu is hidden.
+	   *   Cancellation of this event stops hiding the taxonomy menu.
+	   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
+	   * @param {string} [options.eventBeforeSelected]
+	   *   The name of the custom event fired before a menu item is selected.
+	   *   Cancellation of this event stops the selection.
+	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a menu item is selected.
+	   */
+	
 	  function HeaderNav(element) {
 	    var _this = this;
 	
@@ -1494,8 +1957,44 @@ var BluemixComponents =
 	    });
 	  }
 	
+	  /**
+	   * Instantiates taxonomy menus in the given element.
+	   * If the given element indicates that it's an taxonomy menu (having `data-nav` attribute), instantiates it.
+	   * Otherwise, instantiates taxonomy menus by clicking on launcher buttons
+	   * (buttons with `data-nav-target` attribute) of taxonomy menus in the given node.
+	   * @implements Component
+	   * @param {Node} target The DOM node to instantiate taxonomy menus in. Should be a document or an element.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
+	   * @param {string} [options.selectorMenu] The CSS selector to find the container of the menu items.
+	   * @param {string} [options.selectorItem] The CSS selector to find the menu items.
+	   * @param {string} [options.selectorItemLink] The CSS selector to find the link in the menu items.
+	   * @param {string} [options.selectorLabel] The CSS selector to find the label of the menu items.
+	   * @param {string} [options.classActive] The CSS class for the visible state.
+	   * @param {string} [options.eventBeforeShown]
+	   *   The name of the custom event fired before this taxonomy menu is shown.
+	   *   Cancellation of this event stops showing the taxonomy menu.
+	   * @param {string} [options.eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
+	   * @param {string} [options.eventBeforeHidden]
+	   *   The name of the custom event fired before this taxonomy menu is hidden.
+	   *   Cancellation of this event stops hiding the taxonomy menu.
+	   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
+	   * @param {string} [options.eventBeforeSelected]
+	   *   The name of the custom event fired before a menu item is selected.
+	   *   Cancellation of this event stops the selection.
+	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a menu item is selected.
+	   * @returns {Handle} The handle to remove the event listener to handle clicking.
+	   */
+	
+	
 	  _createClass(HeaderNav, [{
 	    key: 'toggleNav',
+	
+	
+	    /**
+	     * Shows/hides this taxonomy menu.
+	     * @param {Event} event The event triggering this function.
+	     */
 	    value: function toggleNav(event) {
 	      var isActive = this.element.classList.contains(this.options.classActive);
 	      var add = void 0;
@@ -1536,6 +2035,12 @@ var BluemixComponents =
 	        }));
 	      }
 	    }
+	
+	    /**
+	     * Selects a menu item.
+	     * @param {Event} event The event triggering this function.
+	     */
+	
 	  }, {
 	    key: 'select',
 	    value: function select(event) {
@@ -1573,6 +2078,11 @@ var BluemixComponents =
 	    value: function release() {
 	      this.constructor.components.delete(this.element);
 	    }
+	
+	    /**
+	     * @deprecated
+	     */
+	
 	  }], [{
 	    key: 'init',
 	    value: function init() {
@@ -1622,6 +2132,31 @@ var BluemixComponents =
 	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	      }
 	    }
+	
+	    /**
+	     * Instantiates taxonomy menu of the given element.
+	     * @param {HTMLElement} element The element working as a taxonomy menu.
+	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
+	     * @param {string} [options.selectorMenu] The CSS selector to find the container of the menu items.
+	     * @param {string} [options.selectorItem] The CSS selector to find the menu items.
+	     * @param {string} [options.selectorItemLink] The CSS selector to find the link in the menu items.
+	     * @param {string} [options.selectorLabel] The CSS selector to find the label of the menu items.
+	     * @param {string} [options.classActive] The CSS class for the visible state.
+	     * @param {string} [options.eventBeforeShown]
+	     *   The name of the custom event fired before this taxonomy menu is shown.
+	     *   Cancellation of this event stops showing the taxonomy menu.
+	     * @param {string} [options.eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
+	     * @param {string} [options.eventBeforeHidden]
+	     *   The name of the custom event fired before this taxonomy menu is hidden.
+	     *   Cancellation of this event stops hiding the taxonomy menu.
+	     * @param {string} [options.eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
+	     * @param {string} [options.eventBeforeSelected]
+	     *   The name of the custom event fired before a menu item is selected.
+	     *   Cancellation of this event stops the selection.
+	     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a menu item is selected.
+	     */
+	
 	  }, {
 	    key: 'create',
 	    value: function create(element, options) {
@@ -1637,9 +2172,36 @@ var BluemixComponents =
 	  return HeaderNav;
 	}();
 	
+	/**
+	 * The component options.
+	 * @member {Object} HeaderNav#options
+	 * @property {string} [selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
+	 * @property {string} [selectorMenu] The CSS selector to find the container of the menu items.
+	 * @property {string} [selectorItem] The CSS selector to find the menu items.
+	 * @property {string} [selectorItemLink] The CSS selector to find the link in the menu items.
+	 * @property {string} [selectorLabel] The CSS selector to find the label of the menu items.
+	 * @property {string} [classActive] The CSS class for the visible state.
+	 * @property {string} [eventBeforeShown]
+	 *   The name of the custom event fired before this taxonomy menu is shown.
+	 *   Cancellation of this event stops showing the taxonomy menu.
+	 * @property {string} [eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
+	 * @property {string} [eventBeforeHidden]
+	 *   The name of the custom event fired before this taxonomy menu is hidden.
+	 *   Cancellation of this event stops hiding the taxonomy menu.
+	 * @property {string} [eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
+	 * @property {string} [eventBeforeSelected]
+	 *   The name of the custom event fired before a menu item is selected.
+	 *   Cancellation of this event stops the selection.
+	 * @property {string} [eventAfterSelected] The name of the custom event fired after a menu item is selected.
+	 */
+	
+	/**
+	 * The map associating DOM element and taxonomy menu instance.
+	 * @type {WeakMap}
+	 */
+	
+	
 	exports.default = HeaderNav;
-	
-	
 	HeaderNav.components = new WeakMap();
 
 /***/ },
@@ -1659,6 +2221,12 @@ var BluemixComponents =
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var Toolbars = function () {
+	  /**
+	   * Search button in tool bar.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as an search button.
+	   */
+	
 	  function Toolbars(element) {
 	    var _this = this;
 	
@@ -1678,8 +2246,20 @@ var BluemixComponents =
 	    });
 	  }
 	
+	  /**
+	   * Instantiates a search button of the given element.
+	   * @param {HTMLElement} element The element working as a search button.
+	   */
+	
+	
 	  _createClass(Toolbars, [{
 	    key: 'handleActionClick',
+	
+	
+	    /**
+	     * Show/hide search box.
+	     * @param {Event} event The event triggering this method.
+	     */
 	    value: function handleActionClick(event) {
 	      var searchActionNode = event.currentTarget;
 	
@@ -1699,6 +2279,19 @@ var BluemixComponents =
 	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
+	    key: 'create',
+	    value: function create(element) {
+	      return this.components.get(element) || new this(element);
+	    }
+	
+	    /**
+	     * Instantiates search buttons in the given node.
+	     * If the given element indicates that it's an search button (having `data-list-icons-search-action-target` attribute), instantiates it.
+	     * Otherwise, instantiates search buttons by searching for search buttons in the given node.
+	     * @param {Node} target The DOM node to instantiate search buttons in. Should be a document or an element.
+	     */
+	
+	  }, {
 	    key: 'init',
 	    value: function init() {
 	      var _this2 = this;
@@ -1716,19 +2309,18 @@ var BluemixComponents =
 	        });
 	      }
 	    }
-	  }, {
-	    key: 'create',
-	    value: function create(element) {
-	      return this.components.get(element) || new this(element);
-	    }
 	  }]);
 	
 	  return Toolbars;
 	}();
 	
+	/**
+	 * The map associating DOM element and search button instance.
+	 * @type {WeakMap}
+	 */
+	
+	
 	exports.default = Toolbars;
-	
-	
 	Toolbars.components = new WeakMap();
 
 /***/ },
@@ -1910,6 +2502,20 @@ var BluemixComponents =
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var Dropdown = function () {
+	  /**
+	   * A selector with drop downs.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a selector.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
+	   * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+	   * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
+	   * @param {string} [options.eventBeforeSelected]
+	   *   The name of the custom event fired before a drop down item is selected.
+	   *   Cancellation of this event stops selection of drop down item.
+	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+	   */
+	
 	  function Dropdown(element) {
 	    var _this = this;
 	
@@ -1945,13 +2551,30 @@ var BluemixComponents =
 	    });
 	  }
 	
+	  /**
+	   * Instantiates selector of the given element.
+	   * @param {HTMLElement} element The element working as a selector.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
+	   * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+	   * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
+	   * @param {string} [options.eventBeforeSelected]
+	   *   The name of the custom event fired before a drop down item is selected.
+	   *   Cancellation of this event stops selection of drop down item.
+	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+	   */
+	
+	
 	  _createClass(Dropdown, [{
 	    key: 'release',
 	    value: function release() {
 	      this.constructor.components.delete(this.element);
 	    }
 	
-	    // Open and close dropdown menu
+	    /**
+	     * Opens and closes the dropdown menu.
+	     * @param {Event} event The event triggering this method.
+	     */
 	
 	  }, {
 	    key: 'toggle',
@@ -1965,10 +2588,13 @@ var BluemixComponents =
 	      }
 	    }
 	
-	    // Handles clicking on dropdown options.
-	    // * Change Dropdown text to selected option.
-	    // * Remove selected option from options when selected.
-	    // * Emit custom events.
+	    /**
+	     * Handles clicking on the dropdown options, doing the following:
+	     * * Change Dropdown text to selected option.
+	     * * Remove selected option from options when selected.
+	     * * Emit custom events.
+	     * @param {Event} event The event triggering this method.
+	     */
 	
 	  }, {
 	    key: 'selected',
@@ -2008,6 +2634,22 @@ var BluemixComponents =
 	    value: function create(element, options) {
 	      return this.components.get(element) || new this(element, options);
 	    }
+	
+	    /**
+	     * Instantiates selectors in the given node.
+	     * If the given element indicates that it's an selector (having `data-dropdown` attribute), instantiates it.
+	     * Otherwise, instantiates selectors by searching for selectors in the given node.
+	     * @param {Node} target The DOM node to instantiate selectors in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
+	     * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+	     * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
+	     * @param {string} [options.eventBeforeSelected]
+	     *   The name of the custom event fired before a drop down item is selected.
+	     *   Cancellation of this event stops selection of drop down item.
+	     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+	     */
+	
 	  }, {
 	    key: 'init',
 	    value: function init() {
@@ -2032,9 +2674,25 @@ var BluemixComponents =
 	  return Dropdown;
 	}();
 	
+	/**
+	 * The component options.
+	 * @member {Object} Dropdown#options
+	 * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
+	 * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+	 * @property {string} [classSelected] The CSS class for the selected dropdown item.
+	 * @property {string} [eventBeforeSelected]
+	 *   The name of the custom event fired before a drop down item is selected.
+	 *   Cancellation of this event stops selection of drop down item.
+	 * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+	 */
+	
+	/**
+	 * The map associating DOM element and selector instance.
+	 * @type {WeakMap}
+	 */
+	
+	
 	exports.default = Dropdown;
-	
-	
 	Dropdown.components = new WeakMap();
 
 /***/ },
@@ -2330,6 +2988,22 @@ var BluemixComponents =
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var Table = function () {
+	  /**
+	   * Data table.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a data table.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorTitle] The CSS selector to find column titles.
+	   * @param {string} [options.selectorRow] The CSS selector to find rows.
+	   * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
+	   * @param {string} [options.classSortState] The CSS class for the sorting state.
+	   * @param {string} [options.classCheckState] The CSS class for the checked state.
+	   * @param {string} [options.eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
+	   * @param {string} [options.eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
+	   * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
+	   * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
+	   */
+	
 	  function Table(element) {
 	    var _this = this;
 	
@@ -2361,8 +3035,32 @@ var BluemixComponents =
 	    });
 	  }
 	
+	  /**
+	   * Instantiates a data table of the given element.
+	   * @param {HTMLElement} element The element working as a data table.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorTitle] The CSS selector to find column titles.
+	   * @param {string} [options.selectorRow] The CSS selector to find rows.
+	   * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
+	   * @param {string} [options.classSortState] The CSS class for the sorting state.
+	   * @param {string} [options.classCheckState] The CSS class for the checked state.
+	   * @param {string} [options.eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
+	   * @param {string} [options.eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
+	   * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
+	   * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
+	   */
+	
+	
 	  _createClass(Table, [{
 	    key: 'handleClick',
+	
+	
+	    /**
+	     * Handles click on data table.
+	     * * If the click is on a column title, toggles its sorting state.
+	     * * If the click is on a check box, toggles the check box.
+	     * @param {Event} event The event triggering this method.
+	     */
 	    value: function handleClick(event) {
 	      var title = (0, _eventMatches2.default)(event, this.options.selectorTitle);
 	      var row = (0, _eventMatches2.default)(event, this.options.selectorRow);
@@ -2374,6 +3072,28 @@ var BluemixComponents =
 	        this.toggleState('Check', row);
 	      }
 	    }
+	
+	    /**
+	     * The callback called once toggling is finished or is canceled.
+	     * @callback Table~toggleStateCallback
+	     * @param {Error} error
+	     *   An error object with `true` in its `canceled` property if the toggling is canceled.
+	     *   Cancellation happens if the handler of a custom event, that is fired before toggling happens,
+	     *   calls `.preventDefault()` against the event.
+	     * @param {HTMLElement} element The toggled element.
+	     * @param {boolean} newState The new toggle state.
+	     */
+	
+	    /**
+	     * Toggles a sorting state or a check box's state.
+	     * @param {string} type
+	     *   Specifies what state to toggle:
+	     *   * `"Sort"` for toggling a sorting state.
+	     *   * `"Check"` for toggling a check box's state.
+	     * @param {HTMLElement} element The DOM element to toggle its state.
+	     * @param {Table~toggleStateCallback} callback The callback called once toggling is finished or is canceled.
+	     */
+	
 	  }, {
 	    key: 'toggleState',
 	    value: function toggleState(type, element, callback) {
@@ -2416,6 +3136,25 @@ var BluemixComponents =
 	    value: function create(element, options) {
 	      return this.components.get(element) || new this(element, options);
 	    }
+	
+	    /**
+	     * Sets up the given node to instantiate data tables in.
+	     * If the given element indicates that it's an data table (having `data-table` attribute), instantiates it.
+	     * Otherwise, lazily instantiates data table when it's clicked on.
+	     * @param {Node} target The DOM node to instantiate data tables in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorTitle] The CSS selector to find column titles.
+	     * @param {string} [options.selectorRow] The CSS selector to find rows.
+	     * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
+	     * @param {string} [options.classSortState] The CSS class for the sorting state.
+	     * @param {string} [options.classCheckState] The CSS class for the checked state.
+	     * @param {string} [options.eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
+	     * @param {string} [options.eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
+	     * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
+	     * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
+	     * @returns {Handle} The handle to remove the event listener to handle clicking.
+	     */
+	
 	  }, {
 	    key: 'init',
 	    value: function init() {
@@ -2455,9 +3194,27 @@ var BluemixComponents =
 	  return Table;
 	}();
 	
+	/**
+	 * The component options.
+	 * @member {Object} Table#options
+	 * @property {string} [selectorTitle] The CSS selector to find column titles.
+	 * @property {string} [selectorRow] The CSS selector to find rows.
+	 * @property {string} [selectorCheckbox] The CSS selector to find check boxes.
+	 * @property {string} [classSortState] The CSS class for the sorting state.
+	 * @property {string} [classCheckState] The CSS class for the checked state.
+	 * @property {string} [eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
+	 * @property {string} [eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
+	 * @property {string} [eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
+	 * @property {string} [eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
+	 */
+	
+	/**
+	 * The map associating DOM element and data table instance.
+	 * @type {WeakMap}
+	 */
+	
+	
 	exports.default = Table;
-	
-	
 	Table.components = new WeakMap();
 
 /***/ }

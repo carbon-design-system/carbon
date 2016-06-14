@@ -38,6 +38,22 @@
   }
 
   var Table = function () {
+    /**
+     * Data table.
+     * @implements Component
+     * @param {HTMLElement} element The element working as a data table.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorTitle] The CSS selector to find column titles.
+     * @param {string} [options.selectorRow] The CSS selector to find rows.
+     * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
+     * @param {string} [options.classSortState] The CSS class for the sorting state.
+     * @param {string} [options.classCheckState] The CSS class for the checked state.
+     * @param {string} [options.eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
+     * @param {string} [options.eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
+     * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
+     * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
+     */
+
     function Table(element) {
       var _this = this;
 
@@ -67,6 +83,22 @@
         return _this.handleClick(event);
       });
     }
+
+    /**
+     * Instantiates a data table of the given element.
+     * @param {HTMLElement} element The element working as a data table.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorTitle] The CSS selector to find column titles.
+     * @param {string} [options.selectorRow] The CSS selector to find rows.
+     * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
+     * @param {string} [options.classSortState] The CSS class for the sorting state.
+     * @param {string} [options.classCheckState] The CSS class for the checked state.
+     * @param {string} [options.eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
+     * @param {string} [options.eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
+     * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
+     * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
+     */
+
 
     (0, _createClass3.default)(Table, [{
       key: 'handleClick',
@@ -164,5 +196,23 @@
   exports.default = Table;
 
 
+  /**
+   * The component options.
+   * @member {Object} Table#options
+   * @property {string} [selectorTitle] The CSS selector to find column titles.
+   * @property {string} [selectorRow] The CSS selector to find rows.
+   * @property {string} [selectorCheckbox] The CSS selector to find check boxes.
+   * @property {string} [classSortState] The CSS class for the sorting state.
+   * @property {string} [classCheckState] The CSS class for the checked state.
+   * @property {string} [eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
+   * @property {string} [eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
+   * @property {string} [eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
+   * @property {string} [eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
+   */
+
+  /**
+   * The map associating DOM element and data table instance.
+   * @type {WeakMap}
+   */
   Table.components = new _weakMap2.default();
 });
