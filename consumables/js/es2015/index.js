@@ -135,8 +135,12 @@ export {
  * by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
  * or upon DOM events (e.g. clicking) on such elements.
  * See each components' static `.init()` methods for details.
+ *
+ * HeaderNav is not instantiated - see PR https://github.ibm.com/Bluemix/bluemix-components/pull/1318
+ *
  * @private
  */
+
 const init = () => {
   if (!settings.disableAutoInit) {
     FabButton.init();
@@ -145,7 +149,6 @@ const init = () => {
     Tab.init();
     OverflowMenu.init();
     Modal.init();
-    HeaderNav.init();
     Toolbars.init();
     Loading.init();
     Dropdown.init();
