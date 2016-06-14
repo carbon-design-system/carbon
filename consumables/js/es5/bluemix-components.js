@@ -244,6 +244,9 @@ var BluemixComponents =
 	 * by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
 	 * or upon DOM events (e.g. clicking) on such elements.
 	 * See each components' static `.init()` methods for details.
+	 *
+	 * HeaderNav is not instantiated - see PR https://github.ibm.com/Bluemix/bluemix-components/pull/1318
+	 *
 	 * @private
 	 */
 	
@@ -255,7 +258,6 @@ var BluemixComponents =
 	    _tabs2.default.init();
 	    _overflowMenu2.default.init();
 	    _modals2.default.init();
-	    _header2.default.init();
 	    _toolbars2.default.init();
 	    _loading2.default.init();
 	    _dropdown2.default.init();
