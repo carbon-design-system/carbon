@@ -1,85 +1,97 @@
+//-----------------------------
+// Dropdown
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
+
+// Local
 @import 'vars';
 @import 'mixins';
 
-.bx--dropdown {
-  @include dropdown;
-  background-color: $color__navy-gray-5;
+// import-once
+@import '../../import-once';
 
-  &:focus {
-    @include focus-outline;
-  }
+@include exports('dropdown') {
+  .bx--dropdown {
+    @include dropdown;
+    background-color: $color__navy-gray-5;
 
-  &__menu-text {
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
-    padding-left: 1rem;
-  }
-
-  // Before seletion is made, text color is gray (default)
-  &[data-value=''] &__menu-text {
-    color: rgba(255, 255, 255, .5);
-  }
-
-  &__arrow {
-    position: absolute;
-    right: .75rem;
-    top: .75rem;
-    width: .75rem;
-    height: 1.5rem;
-    pointer-events: none;
-    transition: transform $transition--base ease-in-out;
-
-    .bx--dropdown--open & {
-      transform: rotate(180deg);
-    }
-
-    use {
-      fill: $color__blue-30;
-    }
-  }
-
-
-
-  &__list {
-    @include font-size('14');
-    display: none;
-  }
-
-  .bx--dropdown--open &__list {
-    @include box-shadow;
-    display: flex;
-    flex-direction: column;
-    background-color: $color__navy-gray-4;
-  }
-
-  &__list-item {
-    &:hover,
     &:focus {
-      background-color: $color__blue-30;
-      color: $color__blue-90;
+      @include focus-outline;
     }
 
-    &.bx--dropdown--selected {
+    &__menu-text {
+      padding-top: rem(15px);
+      padding-bottom: rem(15px);
+      padding-left: 1rem;
+    }
+
+    // Before seletion is made, text color is gray (default)
+    &[data-value=''] &__menu-text {
+      color: rgba(255, 255, 255, .5);
+    }
+
+    &__arrow {
+      position: absolute;
+      right: .75rem;
+      top: .75rem;
+      width: .75rem;
+      height: 1.5rem;
+      pointer-events: none;
+      transition: transform $transition--base ease-in-out;
+
+      .bx--dropdown--open & {
+        transform: rotate(180deg);
+      }
+
+      use {
+        fill: $color__blue-30;
+      }
+    }
+
+
+
+    &__list {
+      @include font-size('14');
       display: none;
     }
-  }
 
-  &__link {
-    display: block;
-    color: currentColor;
-    text-decoration: none;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
-    padding-right: 1.5rem;
+    .bx--dropdown--open &__list {
+      @include box-shadow;
+      display: flex;
+      flex-direction: column;
+      background-color: $color__navy-gray-4;
+    }
 
-    .bx--dropdown--selected & {
-      color: $color__white;
+    &__list-item {
+      &:hover,
+      &:focus {
+        background-color: $color__blue-30;
+        color: $color__blue-90;
+      }
+
+      &.bx--dropdown--selected {
+        display: none;
+      }
+    }
+
+    &__link {
+      display: block;
+      color: currentColor;
+      text-decoration: none;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      padding-left: 1rem;
+      padding-right: 1.5rem;
+
+      .bx--dropdown--selected & {
+        color: $color__white;
+      }
     }
   }
-}
 
-.bx--dropdown--selected {
-  display: none;
+  .bx--dropdown--selected {
+    display: none;
+  }
 }

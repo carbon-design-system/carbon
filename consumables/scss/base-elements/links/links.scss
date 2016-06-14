@@ -8,21 +8,25 @@
 // Local
 @import 'vars';
 
-.bx--link {
-  @include font-size('14');
-  @include font-smoothing;
-  font-weight: 700;
-  color: $color--link;
-  text-decoration: underline;
-  transition: $transition--link;
+@import '../../import-once';
 
-  &:visited {
+@include exports('links') {
+  .bx--link {
+    @include font-size('14');
+    @include font-smoothing;
+    font-weight: 700;
     color: $color--link;
-  }
+    text-decoration: underline;
+    transition: $transition--link;
 
-  &:active,
-  &:hover,
-  &:focus {
-    color: $color--link--hover;
-  }
+    &:visited {
+      color: $color--link;
+    }
+
+    &:active,
+    &:hover,
+    &:focus {
+      color: $color--link--hover;
+    }
+  }  
 }

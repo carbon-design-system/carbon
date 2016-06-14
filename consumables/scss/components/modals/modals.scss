@@ -1,4 +1,19 @@
+//-----------------------------
+// Modals
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
+@import '../../base-elements/buttons/buttons';
+@import '../../base-elements/checkbox/checkbox';
+@import '../../base-elements/file-uploader/file-uploader';
+@import '../../base-elements/radio/radio';
+@import '../../base-elements/search/search';
+@import '../../base-elements/select/select';
+@import '../../base-elements/text/text';
+@import '../../base-elements/textarea/textarea';
+
+// Local
 @import 'vars';
 
 .bx--modal {

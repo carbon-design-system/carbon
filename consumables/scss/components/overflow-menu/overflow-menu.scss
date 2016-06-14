@@ -1,86 +1,97 @@
+//-----------------------------
+// Overflow Menu
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
 
+// Local
 @import 'vars';
 
-.bx--overflow-menu {
-  display: flex;
-  width: 2rem;
-  margin: 0 1rem 0 1rem;
-  cursor: pointer;
+// import-once
+@import '../../import-once';
 
-  // horizontal rule styling
-  hr {
-    margin: .25rem 0 0;
-    border: none;
-    border-bottom: 1px solid $color__navy-gray-6;
-  }
-
-  // Initial styling for the options pane
-  &__options {
-    @include box-shadow;
-    position: absolute;
-    display: none;
-    padding: .3rem 0 .5rem;
-    margin: 2.2rem 0 0 -10rem;
-    z-index: z('overflowOptions');
-    background: $color--list-bg;
-
-    // rectangle to make little arrow
-    &:before {
-      position: absolute;
-      top: -.2rem;
-      left: 8.5rem;
-      z-index: z('overflowHidden');
-      display: block;
-      width: 1rem;
-      height: 1rem;
-      background-color: $color--list-bg;
-      content: '';
-      transform: rotate(45deg);
-    }
-  }
-
-  &__btn,
-  &__btn--delete {
-    @include helvetica;
-    @include font-size('14');
-    width: 100%;
-    padding: .5rem 1.25rem;
-    font-weight: 200;
-    color: $color__navy-gray-8;
-    text-align: left;
+@include exports('overflow-menu') {
+  .bx--overflow-menu {
+    display: flex;
+    width: 2rem;
+    margin: 0 1rem 0 1rem;
     cursor: pointer;
-    background: none;
-    border: none;
 
-    &:hover {
-      background: $color--list-bg--hover;
-      color: $color__blue-90;
+    // horizontal rule styling
+    hr {
+      margin: .25rem 0 0;
+      border: none;
+      border-bottom: 1px solid $color__navy-gray-6;
     }
 
-    &--delete:hover {
-      background-color: $color__red-40;
+    // Initial styling for the options pane
+    &__options {
+      @include box-shadow;
+      position: absolute;
+      display: none;
+      padding: .3rem 0 .5rem;
+      margin: 2.2rem 0 0 -10rem;
+      z-index: z('overflowOptions');
+      background: $color--list-bg;
+
+      // rectangle to make little arrow
+      &:before {
+        position: absolute;
+        top: -.2rem;
+        left: 8.5rem;
+        z-index: z('overflowHidden');
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        background-color: $color--list-bg;
+        content: '';
+        transform: rotate(45deg);
+      }
     }
-  }
 
-  &__icon {
-    height: 20px;
-    fill: $color__navy-gray-8;
-  }
+    &__btn,
+    &__btn--delete {
+      @include helvetica;
+      @include font-size('14');
+      width: 100%;
+      padding: .5rem 1.25rem;
+      font-weight: 200;
+      color: $color__navy-gray-8;
+      text-align: left;
+      cursor: pointer;
+      background: none;
+      border: none;
 
-  // Focus and hover states for the entire component
-  &:focus {
-    @include focus-outline;
-  }
+      &:hover {
+        background: $color--list-bg--hover;
+        color: $color__blue-90;
+      }
 
-  &:active,
-  &.bx--overflow-menu--open {
-    .bx--overflow-menu__icon {
-      color: $color__white;
+      &--delete:hover {
+        background-color: $color__red-40;
+      }
     }
 
-    .bx--overflow-menu__options {
-      display: block;
+    &__icon {
+      height: 20px;
+      fill: $color__navy-gray-8;
+    }
+
+    // Focus and hover states for the entire component
+    &:focus {
+      @include focus-outline;
+    }
+
+    &:active,
+    &.bx--overflow-menu--open {
+      .bx--overflow-menu__icon {
+        color: $color__white;
+      }
+
+      .bx--overflow-menu__options {
+        display: block;
+      }
     }
   }
 }

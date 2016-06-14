@@ -1,7 +1,19 @@
+//-----------------------------
+// Detail Page Header (with tabs)
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
+@import '../../base-elements/links/links';
+@import '../tabs/tabs';
+
+// Local
 @import 'vars';
 @import 'extends';
 @import 'mixins';
+
+@import '../../import-once';
+
 
 .bx--detail-page-header--with-tabs {
   @include detail-page-header;

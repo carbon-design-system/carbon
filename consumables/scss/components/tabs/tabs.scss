@@ -1,126 +1,138 @@
+//-----------------------------
+// Tabs
+//-----------------------------
+
+// Dependencies
 @import '../../global/global';
+
+// Local
 @import 'vars';
 
-.bx--tabs {
-  @include font-size('14');
-  @include font-smoothing;
-  color: $color__navy-gray-8;
-  background-color: $color__navy_gray_5;
-  font-weight: 700;
-  cursor: pointer;
+// import-once
+@import '../../import-once';
 
-  @include breakpoint(bp--sm--major) {
-    background: none;
-  }
-
-  &__trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: rem(16px);
+@include exports('tabs') {
+  .bx--tabs {
+    @include font-size('14');
+    @include font-smoothing;
+    color: $color__navy-gray-8;
+    background-color: $color__navy_gray_5;
+    font-weight: 700;
     cursor: pointer;
 
-    svg {
-      position: relative;
-      top: rem(4px);
-      width: rem(12px);
-      height: rem(12px);
-      fill: $color__tabs--caret;
-    }
-
     @include breakpoint(bp--sm--major) {
-      display: none;
-    }
-  }
-
-  &__trigger-text {
-    text-decoration: none;
-    font-weight: 700;
-    color: $color__white;
-  }
-
-  &__nav {
-    display: flex;
-    flex-direction: column;
-
-    @include breakpoint(bp--sm--major) {
-      @include font-size('16');
-      flex-direction: row;
-      margin-right: rem(16px);
-      margin-left: rem(16px);
       background: none;
     }
 
-    @include breakpoint(bp--lg--major) {
-      margin-left: 0;
+    &__trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: rem(16px);
+      cursor: pointer;
+
+      svg {
+        position: relative;
+        top: rem(4px);
+        width: rem(12px);
+        height: rem(12px);
+        fill: $color__tabs--caret;
+      }
+
+      @include breakpoint(bp--sm--major) {
+        display: none;
+      }
     }
-  }
 
-  &__nav-item {
-    @include font-size('14');
-    background-color: $color__navy_gray_4;
-    padding: 1rem;
+    &__trigger-text {
+      text-decoration: none;
+      font-weight: 700;
+      color: $color__white;
+    }
 
-    &:hover {
-      background-color: $color__blue-30;
+    &__nav {
+      display: flex;
+      flex-direction: column;
 
-      .bx--tabs__nav-link {
-        color: $color__blue-90;
+      @include breakpoint(bp--sm--major) {
+        @include font-size('16');
+        flex-direction: row;
+        margin-right: rem(16px);
+        margin-left: rem(16px);
+        background: none;
+      }
+
+      @include breakpoint(bp--lg--major) {
+        margin-left: 0;
+      }
+    }
+
+    &__nav-item {
+      @include font-size('14');
+      background-color: $color__navy_gray_4;
+      padding: 1rem;
+
+      &:hover {
+        background-color: $color__blue-30;
+
+        .bx--tabs__nav-link {
+          color: $color__blue-90;
+
+          @include breakpoint(bp--sm--major) {
+            color: $color__blue-30;
+          }
+        }
 
         @include breakpoint(bp--sm--major) {
-          color: $color__blue-30;
+          background: none;
         }
       }
 
       @include breakpoint(bp--sm--major) {
         background: none;
+        padding: 1rem 0;
+
+        &+& {
+          margin-left: rem(48px);
+        }
       }
     }
 
-    @include breakpoint(bp--sm--major) {
-      background: none;
-      padding: 1rem 0;
+    &__nav-link {
+      display: inline-block;
+      color: $color__tabs--text;
+      text-decoration: none;
 
-      &+& {
-        margin-left: rem(48px);
+      @include breakpoint(bp--sm--major) {
+        padding-right: 0;
+        padding-left: 0;
+        margin-bottom: 1px;
+
+        &:hover {
+          color: $color__tabs--selected;
+        }
       }
     }
   }
 
-  &__nav-link {
-    display: inline-block;
+  .bx--tabs--selected {
     color: $color__tabs--text;
-    text-decoration: none;
+    border: none;
 
     @include breakpoint(bp--sm--major) {
-      padding-right: 0;
-      padding-left: 0;
-      margin-bottom: 1px;
+      border-bottom: 2px solid $color__tabs--selected;
 
-      &:hover {
+      a {
         color: $color__tabs--selected;
       }
     }
   }
-}
 
-.bx--tabs--selected {
-  color: $color__tabs--text;
-  border: none;
+  .bx--tabs--hidden {
+    display: none;
 
-  @include breakpoint(bp--sm--major) {
-    border-bottom: 2px solid $color__tabs--selected;
-
-    a {
-      color: $color__tabs--selected;
+    @include breakpoint(bp--sm--major) {
+      display: flex;
     }
-  }
-}
-
-.bx--tabs--hidden {
-  display: none;
-
-  @include breakpoint(bp--sm--major) {
-    display: flex;
   }
 }
