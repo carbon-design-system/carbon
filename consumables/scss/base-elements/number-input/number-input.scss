@@ -9,13 +9,30 @@
 @import '../../import-once';
 
 @include exports('number-input') {
+  // Cross-browser compatibility
   .bx--number {
-    position: relative;
-
-    // Styles to prevent selecting label / number when user
-    // double clicks the number arrows
+    // Styles to prevent selecting label / number when user double clicks the number arrows
     user-select: none;
     -khtml-user-select: none;
+
+    &__input {
+      // Firefox: Hide default number spinner (prefixed by autoprefixer);
+      appearance: textfield;
+
+      // IE: Hide "clear-field" `x` button on input field
+      &::-ms-clear {
+        display: none;
+      }
+
+      // Chrome/Safari: Hide number spinner
+      &::-webkit-inner-spin-button {
+        appearance: none;
+      }
+    }
+  }
+
+  .bx--number {
+    position: relative;
 
     &__input {
       @include font-size('14');
@@ -37,11 +54,6 @@
       &:focus {
         @include focus-outline;
         outline: auto 2px -webkit-focus-ring-color; // webkit default
-      }
-
-      // Hide system spinner on Chrome/Safari
-      &::spin-button {
-        appearance: none;
       }
 
       &:disabled {
