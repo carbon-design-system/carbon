@@ -33,7 +33,7 @@
     }
 
     // Styled Checkbox - checked - background
-    &:checked + &__label &__appearance {
+    &:checked + &__appearance, &:checked + &__label &__appearance {
       display: flex;
       align-items: baseline;
       background-color: $color__blue-30;
@@ -53,13 +53,13 @@
     }
 
     // Styled Checkbox and Label - disabled
-    &:disabled + &__label {
+    &:disabled + &__label, &:disabled + &__appearance, &:disabled + &__appearance + &__label-text {
       opacity: .5;
       cursor: not-allowed;
     }
 
     // Styled Checkbox - Focus outline (Firefox and Webkit)
-    &:focus + &__label &__appearance {
+    &:focus + &__appearance {
       @include focus-outline;
     }
   }
