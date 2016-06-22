@@ -1,0 +1,19 @@
+$font-path: '../fonts';
+
+//--------------------------------------------
+// Import all styles
+//--------------------------------------------
+@import 'bluemix-components/consumables/scss/styles';
+
+
+//--------------------------------------------
+// OR Pick and choose which styles to import
+//--------------------------------------------
+
+// // Import _utils.scss: these are SCSS vars, mixins and functions used as dependencies
+// @import 'bluemix-components/consumables/scss/utils';
+//
+// // Import other dependencies for base-elements and components here.
+//
+// @import 'bluemix-components/consumables/scss/base-elements/buttons/buttons';
+// @import 'bluemix-components/consumables/scss/base-elements/checkbox/checkbox';
