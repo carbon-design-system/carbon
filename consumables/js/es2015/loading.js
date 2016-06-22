@@ -20,7 +20,7 @@ export default class Loading {
     // Check if browser is Internet Explorer
     if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
       this.ie = true;
-      this.element.classList.add('bx--dropdown--ie');
+      this.element.classList.add('bx--loading--ie');
     }
 
     this.constructor.components.set(this.element, this);

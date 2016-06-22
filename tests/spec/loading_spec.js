@@ -57,12 +57,12 @@ describe('Test Loading', function () {
       const isIE = window.ActiveXObject || 'ActiveXObject' in window;
       const spinner = new Loading(document.createElement('div'));
       spinner.set(false);
-      expect(spinner.element.classList.contains('bx--loading--stop')).to.be.true;
-      if (isIE) expect(spinner.element.classList.contains('bx--loading--stop--ie')).to.be.true;
+      expect(spinner.element.classList.contains('bx--loading--stop'), 'Class for stopped state').to.be.true;
+      if (isIE) expect(spinner.element.classList.contains('bx--loading--stop--ie'), 'IE class for stopped state').to.be.true;
 
       spinner.set(true);
-      expect(spinner.element.classList.contains('bx--loading--stop')).to.be.false;
-      if (isIE) expect(spinner.element.classList.contains('bx--loading--stop--ie')).to.be.false;
+      expect(spinner.element.classList.contains('bx--loading--stop'), 'Class for started state').to.be.false;
+      if (isIE) expect(spinner.element.classList.contains('bx--loading--stop--ie'), 'IE class for started state').to.be.false;
     });
 
     it(`Should set 'bx--loading--ie' attributes of DOM element`, function () {
