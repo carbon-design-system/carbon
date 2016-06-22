@@ -1,25 +1,27 @@
 @import '../../global/global';
 @import 'vars';
 
-.bx--tooltip {
-  display: none;
 
+.bx--tooltip {
+
+  // Element: when hovered or focused will show tooltip
   &__top,
   &__bottom {
     @include font-size('16');
     position: relative;
+    display: inline-block;
 
+    // Tooltip - renders as a combo of :before and :after elements
     &:before,
     &:after {
       position: absolute;
+      display: none;
       background: $color__tooltip--background;
-      transition: all .2s ease-in .3s;
-      opacity: 0;
     }
 
     &:before {
       @include font-size('14');
-      padding: 1em;
+      padding: 1rem;
       border: 1px $color__tooltip--accent solid;
       margin-left: 50%;
       color: $color__tooltip--accent;
@@ -32,8 +34,8 @@
     &:after {
       right: 0;
       left: 0;
-      width: .6em;
-      height: .6em;
+      width: .6rem;
+      height: .6rem;
       border-right: 1px solid $color__tooltip--accent;
       border-bottom: 1px solid $color__tooltip--accent;
       margin: 0 auto;
@@ -44,29 +46,33 @@
     &:focus {
       &:before,
       &:after {
-        opacity: 1;
+        position: absolute;
+        display: block;
       }
     }
   }
 
+  // Tooltip caret - top position
   &__top {
     &:before {
-      bottom: 2em;
+      bottom: 1.8rem;
     }
 
+
     &:after {
-      bottom: 1.5em;
+      bottom: 1.5rem;
       transform:rotate(45deg);
     }
   }
 
+  // Tooltip caret - bottom position
   &__bottom {
     &:before {
-      top: 2em;
+      top: 1.8rem;
     }
 
     &:after {
-      top: 1.5em;
+      top: 1.5rem;
       transform:rotate(-135deg);
     }
   }
