@@ -58,24 +58,27 @@
   margin-right: -2rem;
 
   .bx--about__title {
-    font-weight: 200;
+    font-weight: 300;
     padding-top: 1rem;
     margin-bottom: 1rem;
 
     &--name {
       @include font-size('18');
       @include font-smoothing;
+      @include text-overflow(rem(180px));
       margin-bottom: .25rem;
     }
 
     &--link {
       @include font-size('12');
+      @include text-overflow(rem(180px));
       color: $color__blue-30;
       text-decoration: none;
     }
 
     &--additional-info {
       @include font-size('12');
+      @include text-overflow(rem(180px));
       padding: 0;
       color: $color__navy-gray-8;
 

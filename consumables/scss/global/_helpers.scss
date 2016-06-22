@@ -9,6 +9,14 @@ $color__inputs--bg: rgba(255, 255, 255, .1);
 // Mixins
 //-------------------------
 
+@mixin text-overflow($width) {
+  display: block;
+  width: $width;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @mixin box-shadow {
   box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, .1);
 }
