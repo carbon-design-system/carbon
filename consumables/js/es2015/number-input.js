@@ -6,14 +6,20 @@ export default class NumberInput {
    * @implements Component
    * @param {HTMLElement} element The element working as a number input UI.
    */
-  constructor(element) {
+  constructor(element, options = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
+    this.options = options;
+    this.options.ie = this.options.ie || 'ActiveXObject' in window;
+
     this.element = element;
     this.constructor.components.set(this.element, this);
-    this.element.addEventListener('click', (event) => this.handleClick(event));
+    // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
+    // Also <svg> does not seems to have `Element.classList`.
+    this.element.querySelector('.bx--number__arrow--up').addEventListener('click', (event) => this.handleClick(event));
+    this.element.querySelector('.bx--number__arrow--down').addEventListener('click', (event) => this.handleClick(event));
   }
 
   /**
@@ -46,13 +52,23 @@ export default class NumberInput {
    * @param {Event} event The event triggering this method.
    */
   handleClick(event) {
-    const state = event.target.classList;
+    const state = event.currentTarget.classList;
     const numberInput = this.element.querySelector('.bx--number__input');
 
     if (state.contains('bx--number__arrow--icon-up')) {
-      numberInput.stepUp();
+      if (this.options.ie) {
+        ++numberInput.value;
+      } else {
+        numberInput.stepUp();
+      }
     } else if (state.contains('bx--number__arrow--icon-down')) {
-      numberInput.stepDown();
+      if (this.options.ie) {
+        if (numberInput.value > 0) {
+          --numberInput.value;
+        }
+      } else {
+        numberInput.stepDown();
+      }
     }
   }
 

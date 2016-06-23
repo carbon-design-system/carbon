@@ -27,8 +27,10 @@ describe('Test Number Input', function () {
     before(function () {
       element = document.createElement('div');
       upArrowNode = element.appendChild(document.createElement('div'));
+      upArrowNode.classList.add('bx--number__arrow--up');
       upArrowNode.classList.add('bx--number__arrow--icon-up');
       downArrowNode = element.appendChild(document.createElement('div'));
+      downArrowNode.classList.add('bx--number__arrow--down');
       downArrowNode.classList.add('bx--number__arrow--icon-down');
       inputNode = element.appendChild(document.createElement('input'));
       inputNode.type = 'number';
@@ -62,6 +64,10 @@ describe('Test Number Input', function () {
 
     before(function () {
       element = document.createElement('div');
+      const upArrowNode = element.appendChild(document.createElement('div'));
+      upArrowNode.classList.add('bx--number__arrow--up');
+      const downArrowNode = element.appendChild(document.createElement('div'));
+      downArrowNode.classList.add('bx--number__arrow--down');
     });
 
     it('Should prevent creating duplicate instances', function () {
