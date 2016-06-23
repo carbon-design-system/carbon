@@ -22,7 +22,7 @@ Go to [bluemix-components](https://github.ibm.com/Bluemix/bluemix-components) an
 
 In your terminal:
 
-```
+```sh
 git clone git@github.ibm.com:{ YOUR_USERNAME }/bluemix-components.git
 cd bluemix-components
 ```
@@ -34,9 +34,9 @@ See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more detail
 
 When you clone your personal repo, you will see `origin` is set up for you already by default. This should be pointing to your personal repo.
 
-```
+```sh
 git remote add upstream git@github.ibm.com:Bluemix/bluemix-components.git
-git remote add bthan git@github.ibm.com:bthan/bluemix-components.git
+git remote add {{YOUR_NAME_HERE}} git@github.ibm.com:{{YOUR_NAME_HERE}}/bluemix-components.git
 
 # List all your remotes
 git remote -v
@@ -52,31 +52,23 @@ When you do `git remote -v`, you'll see these remotes:
 
 * Always work in a branch.
 * Submit pull requests from a branch.
-* *Do not submit pull requests from your forks master branch.*
+* *Do not submit pull requests from the `master` branch of your fork.*
 
 ```
 git checkout -b { YOUR_BRANCH_NAME }
-
-# Edit some code
-# Check status frequently to see what you're doing
-git status
-
-# Stage all of your changed files
 git add .
-
-# Write a short, descriptive message about the work you're committing
-# Use keywords: "closes, fixes, resolves" and issue number to close the relevant issue
 git commit -m "Update header with newest designs, resolves #123"
 ```
+
 * [Close a commit via commit message](https://help.github.com/articles/closing-issues-via-commit-messages/)
 * [Writing good commit messages](https://github.com/erlang/otp/wiki/Writing-good-commit-messages)
 
 ## 5. Test your JavaScript code
 
-If you make any changes to our JavaScript code, test your change by:
+If you're contributing JavaScript, test your changes by running our test commands:
 
 ```sh
-> gulp test
+gulp test
 ```
 
 If you add any features to our JavaScript code, make sure adding test so that your code is covered.
@@ -86,13 +78,13 @@ You can see if your code is covered by looking at bluemix-components/tests/cover
 If your change may hit some browser quirks, use `-b` option, like:
 
 ```sh
-> gulp test -b IE
+gulp test -b IE
 ```
 
 If you are very sure that your change affects a specific set of components, you can use `-f` option, like:
 
 ```sh
-> gulp test -f tests/spec/fab_spec.js
+gulp test -f tests/spec/fab_spec.js
 ```
 
 Other options for testing are:
@@ -116,9 +108,11 @@ In your browser, navigate to [Bluemix/bluemix-components](https://github.ibm.com
 
 > **Is it a Breaking Change?**
 
-> It's safe to say that changing, renaming or removing anything can result in a breaking change.
+> We want to respect semver.
+It's important to discern whether your pull request contains breaking changes or not.
+Sometimes, renaming or removing things in the code can result in breaking changes.
 
-> Here are some examples of breaking changes...changing, renaming or removing:
+> Here are some examples of breaking changes...changing, renaming or removing any of the following:
 > * HTML attributes
 > * Folders or Files
 > * Any SCSS `@mixin`, `$variable` or `function`

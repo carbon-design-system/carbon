@@ -48,8 +48,3 @@ You have a few options:
   * `4.6.x` update to `4.6.2-alpha`
   * `4.0.x` or older, update to `4.1.2-alpha`
   * Or update to `latest` stable version, see [releases](https://github.ibm.com/Bluemix/bluemix-components/releases)
-
-
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md).

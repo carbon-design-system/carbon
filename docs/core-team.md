@@ -4,27 +4,26 @@ This is documentation for team members who are responsible for maintaining the b
 
 ## Review Pull Requests Locally
 
-Follow the steps below to review a pull request locally.
-Once that's done, refer to the [wiki](https://github.ibm.com/Bluemix/bluemix-components/wiki/Review-Pull-Requests) for how to thoroughly review pull requests before merging.
+After setting up your `upstream` remote, configure `upstream` to also fetch pull requests (you only do this once):
 
+```sh
+git config --global --add remote.upstream.fetch "+refs/pull/*/head:refs/remotes/upstream/pull/*"
 ```
-# Add remotes for contributors (name them whatever you want)
-git remote add badluckbrian git@github.ibm.com:bthan/bluemix-components.git
 
-# Fetch all branches (easier)
-git fetch --all
-
-# Checkout into one of their branches to review
-git checkout --track badluckbrian/component/calendar/refactor
-
-# Run the project
-npm run dev
+Now, you can fetch upstream and checkout into the pull request you want to review locally.
+```sh
+git fetch upstream
+git checkout pull/{{ PULL REQUEST NUMBER }}
 ```
-* `badluckbrian`'s branch is now available locally at `component/calendar/refactor`
-* If `badluckbrian` makes more changes to the branch, pull down his changes to your local copy of his branch: `git pull badluckbrian component/calendar/refactor`
-* Don't worry about merge commits *you* create on this branch locally.
 
-![git-remote-add-danz](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/4629/5b4152b8-9da1-11e5-8a52-2bdb16b66ae4.gif)
+For example:
+
+```sh
+# To review Pull Request #1388
+git checkout pull/1388
+```
+
+🤓 If the contributor has made updates to the PR, you'll be prompted to `git pull` the latest changes into your branch.
 
 ## Publish New Releases
 
