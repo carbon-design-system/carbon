@@ -75,7 +75,7 @@
 
 // CONTENT SPECIFIC INCLUSIONS
 .apache__spark {
-  @extend %item__icon--apache__spark;
+  @extend %item__icon--apache__spark !optional;
 }
 
 .cloud__foundry {
