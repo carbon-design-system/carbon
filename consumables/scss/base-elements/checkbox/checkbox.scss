@@ -9,10 +9,12 @@
 @import '../../import-once';
 
 @include exports('checkbox') {
+
+  // Input Element - visually hidden
   .bx--checkbox {
     @include hidden;
 
-    // Checkbox Label - fonts and positioning
+    // Label Element - fonts and positioning
     &__label {
       @include font-smoothing;
       display: flex;
@@ -20,7 +22,7 @@
       cursor: pointer;
     }
 
-    // Styled Checkbox - default
+    // Box Styles - default state
     &__appearance {
       @include font-size('16');
       display: inline-block;
@@ -32,14 +34,15 @@
       border-radius: 2px;
     }
 
-    // Styled Checkbox - checked - background
-    &:checked + &__appearance, &:checked + &__label &__appearance {
+    // Box Styles - checked state - background
+    &:checked + &__appearance,
+    &:checked + &__label &__appearance {
       display: flex;
       align-items: baseline;
       background-color: $color__blue-30;
       border-color: $color__blue-30;
 
-      // Styled Checkbox - checked - checkmark
+      // Box Styles - checked state - checkmark
       &:before {
         content: '';
         width: rem(12px);
@@ -52,15 +55,40 @@
       }
     }
 
-    // Styled Checkbox and Label - disabled
-    &:disabled + &__label, &:disabled + &__appearance, &:disabled + &__appearance + &__label-text {
+    // Disabled
+    &:disabled + &__label,
+    &__label &:disabled,
+    &:disabled + &__appearance,
+    &:disabled + &__appearance + &__label-text {
       opacity: .5;
       cursor: not-allowed;
     }
 
-    // Styled Checkbox - Focus outline (Firefox and Webkit)
+    // Focus
+    &:focus + &__label &__appearance,
     &:focus + &__appearance {
       @include focus-outline;
+    }
+  }
+
+  // SVG Checkmark - default
+  .bx--checkbox__checkmark {
+    display: none;
+    fill: $color__blue-90;
+    width: rem(15px);
+    height: rem(15px);
+  }
+
+  // SVG Checkmark - checked
+  .bx--checkbox--svg {
+    &:checked + .bx--checkbox__appearance:before,
+    &:checked + .bx--checkbox__label .bx--checkbox__appearance:before {
+      content: none;
+    }
+
+    &:checked + .bx--checkbox__appearance .bx--checkbox__checkmark,
+    &:checked + .bx--checkbox__label .bx--checkbox__appearance .bx--checkbox__checkmark {
+      display: block;
     }
   }
 }

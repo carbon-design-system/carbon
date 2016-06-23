@@ -1,5 +1,50 @@
-<input disabled id="unique-checkbox-disabled" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
-<label for="unique-checkbox-disabled" class="bx--checkbox__label">
+<!--
+  Checkbox - Disabled (Default)
+  * uses CSS to create checkmark
+  * not compatible with IE11
+-->
+
+<!-- input + label -->
+<input disabled id="disabled-checkbox" class="bx--checkbox" type="checkbox" value="apple" name="checkbox">
+<label for="disabled-checkbox" class="bx--checkbox__label">
   <span class="bx--checkbox__appearance"></span>
-  Checkbox label text - Disabled
+  Disabled Checkbox (input + label)
+</label>
+
+<!-- label > input -->
+<label class="bx--checkbox__label">
+  <input disabled class="bx--checkbox" type="checkbox" value="banana" name="checkbox">
+  <span class="bx--checkbox__appearance"></span>
+  <span class="bx--checkbox__label-text">Disabled Checkbox (label > input)</span>
+</label>
+
+<!--
+  Checkbox (SVG)
+  * Available as default in `7.x`
+  * Uses SVG to create checkmark (bluemix-icons)
+  * Compatible with all browsers
+-->
+
+<!-- input + label -->
+<input disabled id="disabled-checkbox-svg" class="bx--checkbox bx--checkbox--svg" type="checkbox" value="green" name="checkbox">
+<label for="disabled-checkbox-svg" class="bx--checkbox__label">
+  <span class="bx--checkbox__appearance">
+    <svg class="bx--checkbox__checkmark">
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--check-padding"></use>
+    </svg>
+  </span>
+  Checkbox SVG (input + label)
+  <!-- <span class="bx--checkbox__label-text">Checkbox SVG (input + label)</span> -->
+</label>
+
+<!-- label > input -->
+<label class="bx--checkbox__label">
+  <input disabled class="bx--checkbox bx--checkbox--svg" type="checkbox" value="yellow" name="checkbox">
+  <span class="bx--checkbox__appearance">
+    <svg class="bx--checkbox__checkmark">
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--check-padding"></use>
+    </svg>
+  </span>
+  <!-- Disabled Checkbox SVG (label > input) -->
+  <span class="bx--checkbox__label-text">Disabled Checkbox SVG (label > input)</span>
 </label>
