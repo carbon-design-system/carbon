@@ -4,7 +4,7 @@
 
 ### Component library for building Bluemix
 
-#### Browse component library on our [Design System website](design-system.stage1.mybluemix.net)
+#### Browse component library on our [Design System website](http://design-system.stage1.mybluemix.net/)
 
 - Bluemix Components gives developers (FEDs & Engineers) a collection of re-usable HTML and Sass partials they can use for building websites and user-interfaces for Bluemix.
 
