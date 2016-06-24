@@ -751,14 +751,19 @@ var BluemixComponents =
 	})[0];
 	
 	function eventMatches(event, selector) {
-	  if (event.target[matchesFuncName](selector)) {
-	    // If event target itself matches the given selector, return it
-	    return event.target;
-	  } else if (event.target[matchesFuncName](selector + ' *')) {
-	    // If event target is a child node of a DOM element that matches the given selector, find the DOM element by going up the DOM tree
-	    for (var traverse = event.target; traverse && traverse !== event.currentTarget; traverse = traverse.parentNode) {
-	      if (traverse[matchesFuncName](selector)) {
-	        return traverse;
+	  // <svg> in IE does not have `Element#msMatchesSelector()`.
+	  // Also a weird behavior is seen in IE where DOM tree seems broken when `event.target` is on <svg>.
+	  // Therefore this function simply returns `undefined` when `event.target` is on <svg>.
+	  if (typeof event.target[matchesFuncName] === 'function') {
+	    if (event.target[matchesFuncName](selector)) {
+	      // If event target itself matches the given selector, return it
+	      return event.target;
+	    } else if (event.target[matchesFuncName](selector + ' *')) {
+	      // If event target is a child node of a DOM element that matches the given selector, find the DOM element by going up the DOM tree
+	      for (var traverse = event.target; traverse && traverse !== event.currentTarget; traverse = traverse.parentNode) {
+	        if (traverse[matchesFuncName](selector)) {
+	          return traverse;
+	        }
 	      }
 	    }
 	  }
@@ -2372,7 +2377,7 @@ var BluemixComponents =
 	    // Check if browser is Internet Explorer
 	    if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
 	      this.ie = true;
-	      this.element.classList.add('bx--dropdown--ie');
+	      this.element.classList.add('bx--loading--ie');
 	    }
 	
 	    this.constructor.components.set(this.element, this);
@@ -2874,15 +2879,25 @@ var BluemixComponents =
 	  function NumberInput(element) {
 	    var _this = this;
 	
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
 	    _classCallCheck(this, NumberInput);
 	
 	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
 	      throw new TypeError('DOM element should be given to initialize this widget.');
 	    }
 	
+	    this.options = options;
+	    this.options.ie = this.options.ie || 'ActiveXObject' in window;
+	
 	    this.element = element;
 	    this.constructor.components.set(this.element, this);
-	    this.element.addEventListener('click', function (event) {
+	    // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
+	    // Also <svg> does not seems to have `Element.classList`.
+	    this.element.querySelector('.bx--number__arrow--up').addEventListener('click', function (event) {
+	      return _this.handleClick(event);
+	    });
+	    this.element.querySelector('.bx--number__arrow--down').addEventListener('click', function (event) {
 	      return _this.handleClick(event);
 	    });
 	  }
@@ -2902,13 +2917,23 @@ var BluemixComponents =
 	     * @param {Event} event The event triggering this method.
 	     */
 	    value: function handleClick(event) {
-	      var state = event.target.classList;
+	      var state = event.currentTarget.classList;
 	      var numberInput = this.element.querySelector('.bx--number__input');
 	
 	      if (state.contains('bx--number__arrow--icon-up')) {
-	        numberInput.stepUp();
+	        if (this.options.ie) {
+	          ++numberInput.value;
+	        } else {
+	          numberInput.stepUp();
+	        }
 	      } else if (state.contains('bx--number__arrow--icon-down')) {
-	        numberInput.stepDown();
+	        if (this.options.ie) {
+	          if (numberInput.value > 0) {
+	            --numberInput.value;
+	          }
+	        } else {
+	          numberInput.stepDown();
+	        }
 	      }
 	    }
 	  }, {
