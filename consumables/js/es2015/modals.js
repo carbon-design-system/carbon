@@ -149,6 +149,7 @@ export default class Modal {
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(visible, callback) {
+    toggleClass(document.body, 'bx--noscroll', visible);
     let finished;
     const finishedTransition = () => {
       if (!finished) {
