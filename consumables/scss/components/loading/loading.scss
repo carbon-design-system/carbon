@@ -17,6 +17,10 @@
     stroke-linecap: butt;
     stroke-dasharray: 240;
     stroke-dashoffset: $loading__gap;
+
+    @include light-ui {
+      stroke: $color__teal-20;
+    }
   }
 
   &.bx--loading--stop {
