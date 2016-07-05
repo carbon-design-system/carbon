@@ -17,6 +17,11 @@
     @include dropdown;
     background-color: $color__navy-gray-5;
 
+    @include light-ui {
+      background-color: $color__inputs--bg--light-ui;
+      color: $color__blue-90;
+    }
+
     &:focus {
       @include focus-outline;
     }
@@ -25,11 +30,16 @@
       padding-top: rem(15px);
       padding-bottom: rem(15px);
       padding-left: 1rem;
+      font-weight: 700;
     }
 
     // Before seletion is made, text color is gray (default)
     &[data-value=''] &__menu-text {
       color: rgba(255, 255, 255, .5);
+
+      @include light-ui {
+        color: $color__navy-gray-7;
+      }
     }
 
     &__arrow {
@@ -62,6 +72,10 @@
       display: flex;
       flex-direction: column;
       background-color: $color__navy-gray-4;
+
+      @include light-ui {
+        background-color: $color__white;
+      }
     }
 
     &__list-item {
@@ -69,6 +83,11 @@
       &:focus {
         background-color: $color__blue-30;
         color: $color__blue-90;
+
+        @include light-ui {
+          background-color: $color__blue-51;
+          color: $color__white;
+        }
       }
 
       &.bx--dropdown--selected {
