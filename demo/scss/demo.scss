@@ -4,6 +4,11 @@
   @include grid-container;
   padding-top: 3.75rem;
   padding-bottom: 7.5em;
+  transition: .2s;
+
+  .bx--global-light-ui & {
+    background-color: #F5F7FA; // to be `$color__gray-3`
+  }
 }
 
 .demo--panels {
@@ -16,4 +21,8 @@
   max-width: 960px;
   height: 100%;
   padding: 3em 1em 1em;
+}
+
+.theme-switcher {
+  margin: 1rem 0;
 }

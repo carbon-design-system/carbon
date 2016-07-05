@@ -38,6 +38,13 @@ $color__inputs--bg: rgba(255, 255, 255, .1);
   visibility: visible;
 }
 
+@mixin light-ui {
+
+  .bx--global-light-ui & {
+    @content;
+  }
+}
+
 //-------------------------
 // ☠️ Deprecated
 //-------------------------

@@ -15,6 +15,7 @@
   {header|s}
   {detailHeader|s}
   <div class="demo--container" data-card-list>
+    <button class="bx--btn theme-switcher" data-theme-switcher>Theme Switcher</button>
     {html|s}
   </div>
 
