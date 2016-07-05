@@ -25,7 +25,6 @@ import Dropdown from './dropdown';
 import Card from './card';
 import NumberInput from './number-input';
 import Table from './table';
-import ThemeSwitcher from './theme-switcher';
 
 const settings = {};
 
@@ -156,7 +155,6 @@ const init = () => {
     Card.init();
     NumberInput.init();
     Table.init();
-    ThemeSwitcher.init();
   }
 };
 

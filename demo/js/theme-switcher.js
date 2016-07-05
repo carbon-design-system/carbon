@@ -1,5 +1,3 @@
-import '../polyfills/array-from';
-
 export default class ThemeSwitcher {
 
   constructor(element = {}) {

@@ -62,17 +62,21 @@ gulp.task('clean', () => {
 // JavaScript Tasks
 //////////////////////////////
 
-function buildScripts(dev, prod) {
+function buildScripts(options) {
+  options = options || {};
+  options.target = (options.target || './consumables/js/es5/bluemix-components.js')
+    .replace(/\.js$/, options.prod ? '.min.js' : '.js');
   return new Promise((resolve, reject) => {
     webpack({
       devtool: 'source-maps',
-      entry: './consumables/js/es2015/index.js',
-      output: {
-        path: dev ? './demo' : './consumables/js/es5',
-        filename: dev ? 'demo.js' : 'bluemix-components' + (prod ? '.min' : '') + '.js',
+      entry: options.entry || './consumables/js/es2015/index.js',
+      output: Object.assign({
+        path: path.dirname(options.target),
+        filename: path.basename(options.target),
+      }, options.noExport ? {} : {
         libraryTarget: 'var',
         library: 'BluemixComponents',
-      },
+      }),
       module: {
         loaders: [
           {
@@ -82,7 +86,7 @@ function buildScripts(dev, prod) {
           },
         ],
       },
-      plugins: prod ? [new webpack.optimize.UglifyJsPlugin()] : [],
+      plugins: options.prod ? [new webpack.optimize.UglifyJsPlugin()] : [],
     }, (err, stats) => {
       if (err) {
         reject(new gutil.PluginError('webpack', err));
@@ -100,13 +104,30 @@ function buildScripts(dev, prod) {
 gulp.task('scripts:consumables', () => {
   return Promise.all([
     buildScripts(), // Expanded ES5
-    buildScripts(false, true), // Minified ES5
+    buildScripts({ prod: true }), // Minified ES5
+  ]);
+});
+
+gulp.task('scripts:polyfills', () => {
+  return Promise.all([
+    buildScripts({
+      noExport: true,
+      target: './consumables/js/es5/bluemix-components-polyfills.js',
+      entry: './consumables/js/polyfills/index.js',
+    }), // Expanded ES5
+    buildScripts({
+      prod: true,
+      noExport: true,
+      target: './consumables/js/es5/bluemix-components-polyfills.js',
+      entry: './consumables/js/polyfills/index.js',
+    }), // Minified ES5
   ]);
 });
 
 gulp.task('scripts:umd', () => {
   const files = './consumables/js/es2015/*.js';
   const polyfills = './consumables/js/polyfills/**/*.js';
+  const utils = './consumables/js/utils/**/*.js';
 
   const babelOpts = {
     plugins: ['transform-es2015-modules-umd', 'transform-runtime'],
@@ -120,13 +141,20 @@ gulp.task('scripts:umd', () => {
     .pipe(babel(babelOpts))
     .pipe(gulp.dest('./consumables/js/umd/polyfills'));
 
-  return merge(fileStream, polyfillStream);
+  const utilStream = gulp.src(utils)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('./consumables/js/umd/utils'));
+
+  return merge(fileStream, polyfillStream, utilStream);
 });
 
 
 gulp.task('scripts:dev', () => {
   return Promise.all([
-    buildScripts(true),
+    buildScripts({
+      target: './demo/demo.js',
+      entry: './demo/index.js',
+    }),
   ]);
 });
 
@@ -259,7 +287,7 @@ gulp.task('watch', () => {
 gulp.task('serve', ['browser-sync', 'watch']);
 
 // Use: npm run build
-gulp.task('build', ['sass:consumables', 'scripts:consumables', 'scripts:umd']);
+gulp.task('build', ['sass:consumables', 'scripts:consumables', 'scripts:polyfills', 'scripts:umd']);
 gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {
