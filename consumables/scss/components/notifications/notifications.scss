@@ -3,11 +3,43 @@
 
 .bx--notification {
   // Theming mixins for notifitcations
-  &--danger  { @include notification--base($color__red-40);    }
-  &--running { @include notification--base($color__blue-30);   }
-  &--info    { @include notification--base($color__yellow-30); }
-  &--warning { @include notification--base($color__orange-30); }
-  &--misc    { @include notification--base($color__purple-40); }
+
+  &--danger {
+    @include notification--base($color__red-40);
+
+    @include light-ui {
+      @include notification--base($color__red-50);
+    }
+  }
+
+  &--running {
+    @include notification--base($color__blue-30);
+  }
+
+  &--info {
+    @include notification--base($color__yellow-30);
+  }
+
+  &--warning {
+    @include notification--base($color__orange-30);
+  }
+
+  &--misc {
+    @include notification--base($color__purple-40);
+  }
+
+  &--danger,
+  &--running,
+  &--info,
+  &--warning,
+  &--misc {
+
+    @include light-ui {
+      background-color: $color__white;
+      color: $color__blue-90;
+      border-right: 3px solid $color__navy-gray-8;
+    }
+  }
 
   // Common styles for child elements
   &__title {
@@ -21,6 +53,10 @@
     margin-right: 0;
     margin-bottom: 1rem;
     color: $color__white;
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
   }
 
   &__caption {
@@ -32,11 +68,19 @@
     border: none;
     cursor: pointer;
     padding: .1rem;
+
+    @include light-ui {
+      background-color: $color__white;
+    }
   }
 
   &__icon {
     fill: $color__blue-20;
     width: 22px;
     height: 22px;
+
+    @include light-ui {
+      fill: $color__blue-90;
+    }
   }
 }
