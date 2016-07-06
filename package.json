@@ -78,6 +78,9 @@
   "repository": {
     "type": "git"
   },
+  "files": [
+    "consumables/**/*"
+  ],
   "keywords": [
     "bluemix",
     "component",

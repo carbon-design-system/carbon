@@ -17,8 +17,8 @@ gulp.task('sass', function() {
 });
 
 gulp.task('fonts', function () {
-  return gulp.src('bower_components/bluemix-components/**/*.{woff, woff2}')
-    .pipe(gulp.dest('src/fonts'))
+  return gulp.src('bower_components/bluemix-components/consumables/assets/**/*.{woff,woff2}')
+    .pipe(gulp.dest('src'))
     .pipe(gulp.dest('dist'))
 });
 

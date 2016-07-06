@@ -10,8 +10,7 @@
   ],
   "license": "MIT",
   "ignore": [
-    ".git",
-    "demo",
-    "server.js"
+    "**/*",
+    "!consumables/**/*"
   ]
 }
