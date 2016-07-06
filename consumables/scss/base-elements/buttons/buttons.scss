@@ -16,22 +16,34 @@
 @include exports('buttons') {
   .bx--btn {
     @include btn--primary;
-    // Light UI is not meant to be used yet until later
-    // -------------------------------------------------
-    // .light-ui & {
-    //   @extend %btn--base;
-    //   @include btn--primary($color__btn--bg--light-ui, $color__btn--bg--hover--light-ui);
-    // }
+
+    @include light-ui {
+      @include btn--primary($color__blue-51, $color__blue-40);
+      color: $color__white;
+    }
   }
 
   .bx--btn--secondary {
     @include btn--secondary;
-    // Light UI is not meant to be used yet until later
-    // -------------------------------------------------
-    // .light-ui & {
-    //   @extend %btn--base;
-    //   @include btn--secondary($color__btn--bg--light-ui);
-    // }
+
+    @include light-ui {
+      @include btn--base;
+      color: $color__blue-51;
+      background-color: transparent;
+      border: 2px solid $color__blue-51;
+
+      &:hover,
+      &:focus {
+        color: $color__white;
+        background-color: $color__blue-40;
+        border: 2px solid $color__blue-40;
+
+        &:disabled {
+          color: $color__blue-51;
+          background-color: transparent;
+        }
+      }
+    }
   }
 
   .bx--btn--danger {
@@ -48,6 +60,7 @@
     vertical-align: bottom;
 
     &__text {
+      @include font-size('14');
       display: inline;
       vertical-align: middle;
     }
@@ -64,6 +77,16 @@
     &__use {
       fill: $color__blue-90;
     }
+
+    @include light-ui {
+      @include btn--primary($color__blue-51, $color__blue-40);
+      padding-right: rem(6px);
+      color: $color__white;
+
+      .bx--btn--right-icon__use {
+        fill: $color__white;
+      }
+    }
   }
 
   .bx--sets-of-buttons {
@@ -73,7 +96,15 @@
     }
 
     .bx--btn--secondary {
-      @include btn--secondary($color__navy-gray-8);
+      @include btn--secondary;
+
+      @include light-ui {
+        @include btn--secondary($color__blue-51);
+
+        &:hover {
+          color: $color__white;
+        }
+      }
     }
   }
 }
