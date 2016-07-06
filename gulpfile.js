@@ -108,22 +108,6 @@ gulp.task('scripts:consumables', () => {
   ]);
 });
 
-gulp.task('scripts:polyfills', () => {
-  return Promise.all([
-    buildScripts({
-      noExport: true,
-      target: './consumables/js/es5/bluemix-components-polyfills.js',
-      entry: './consumables/js/polyfills/index.js',
-    }), // Expanded ES5
-    buildScripts({
-      prod: true,
-      noExport: true,
-      target: './consumables/js/es5/bluemix-components-polyfills.js',
-      entry: './consumables/js/polyfills/index.js',
-    }), // Minified ES5
-  ]);
-});
-
 gulp.task('scripts:umd', () => {
   const files = './consumables/js/es2015/*.js';
   const polyfills = './consumables/js/polyfills/**/*.js';
@@ -287,7 +271,7 @@ gulp.task('watch', () => {
 gulp.task('serve', ['browser-sync', 'watch']);
 
 // Use: npm run build
-gulp.task('build', ['sass:consumables', 'scripts:consumables', 'scripts:polyfills', 'scripts:umd']);
+gulp.task('build', ['sass:consumables', 'scripts:consumables', 'scripts:umd']);
 gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {
