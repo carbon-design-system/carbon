@@ -6,56 +6,58 @@
 @import '../../import-once';
 
 @include exports('typography') {
-  h1 {
-    @include font-size('32');
-    @include line-height('heading');
-    @include letter-spacing;
-  }
+  @if $use-globals == true {
+    h1 {
+      @include font-size('32');
+      @include line-height('heading');
+      @include letter-spacing;
+    }
 
-  h2 {
-    @include font-size('26');
-    @include line-height('heading');
-    @include letter-spacing;
-  }
+    h2 {
+      @include font-size('26');
+      @include line-height('heading');
+      @include letter-spacing;
+    }
 
-  h3 {
-    @include font-size('20');
-    @include line-height('heading');
-    @include letter-spacing;
-  }
+    h3 {
+      @include font-size('20');
+      @include line-height('heading');
+      @include letter-spacing;
+    }
 
-  h4 {
-    @include font-size('18');
-    @include line-height('heading');
-  }
+    h4 {
+      @include font-size('18');
+      @include line-height('heading');
+    }
 
-  h5 {
-    @include font-size('16');
-    @include line-height('heading');
-  }
+    h5 {
+      @include font-size('16');
+      @include line-height('heading');
+    }
 
-  h6 {
-    @include font-size('14');
-    @include line-height('heading');
-  }
+    h6 {
+      @include font-size('14');
+      @include line-height('heading');
+    }
 
-  p {
-    @include font-size('16');
-    @include line-height('body');
-  }
+    p {
+      @include font-size('16');
+      @include line-height('body');
+    }
 
-  strong {
-    @include font-smoothing;
-    @include letter-spacing;
-    font-weight: 700;
-  }
+    strong {
+      @include font-smoothing;
+      @include letter-spacing;
+      font-weight: 700;
+    }
 
-  em {
-    font-style: italic;
-  }
+    em {
+      font-style: italic;
+    }
 
-  a {
-    color: $color__blue-20;
+    a {
+      color: $color__blue-20;
+    }
   }
 
   //----------------------------------------------------------
@@ -97,5 +99,5 @@
 
   %caption {
     @include font-size('12');
-  }  
+  }
 }

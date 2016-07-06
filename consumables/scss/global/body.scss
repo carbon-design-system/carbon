@@ -1,9 +1,8 @@
 @import '../import-once';
 
-@include exports('body') {
+@mixin body-styles {
   body {
     @include helvetica;
-
     color: $color__white;
     background-color: $color__blue-90;
 
@@ -11,5 +10,11 @@
       color: $color__blue-90;
       background-color: $color__gray-3;
     }
+  }
+}
+
+@include exports('body') {
+  @if $use-globals == true {
+    @include body-styles;
   }
 }
