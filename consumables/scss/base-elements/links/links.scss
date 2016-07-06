@@ -19,14 +19,26 @@
     text-decoration: underline;
     transition: $transition--link;
 
+    @include light-ui {
+      color: $color__blue-51;
+    }
+
     &:visited {
       color: $color--link;
+
+      @include light-ui {
+        color: $color__blue-51;
+      }
     }
 
     &:active,
     &:hover,
     &:focus {
       color: $color--link--hover;
+
+      @include light-ui {
+        color: $color__blue-40;
+      }
     }
-  }  
+  }
 }
