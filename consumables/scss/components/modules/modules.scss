@@ -23,10 +23,22 @@
   // Override colors for a11y
   .bx--link {
     color: lighten($color__blue-30, 8%);
+
+    @include light-ui {
+      color: $color__blue-51;
+    }
   }
 
   .bx--btn--secondary {
     @include btn--secondary(lighten($color__blue-30, 8%));
+
+    @include light-ui {
+      @include btn--secondary($color__blue-51);
+
+      &:hover {
+        color: $color__white;
+      }
+    }
   }
 }
 
@@ -76,11 +88,20 @@
     font-weight: 700;
     color: $color__module-header;
     border-bottom: 1px solid $color__module-border;
+
+    @include light-ui {
+      color: $color__blue-90;
+      border-bottom: 1px solid $color__navy-gray-8;
+    }
   }
 
   &__footer {
     @include font-size('14');
     border-top: 1px solid $color__module-border;
+
+    @include light-ui {
+      border-top: 1px solid $color__navy-gray-8;
+    }
   }
 
   &__header,

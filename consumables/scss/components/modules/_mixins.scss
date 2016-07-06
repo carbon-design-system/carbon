@@ -6,4 +6,9 @@
   padding-bottom: .5rem;
   margin-bottom: $module--margin;
   background-color: $color--module-bg;
+
+  @include light-ui {
+    background-color: $color__white;
+    border: 1px solid $color__navy-gray-8;
+  }
 }
