@@ -41,6 +41,7 @@ describe('Test modal', function () {
     let element;
     let button;
     let modal;
+    let style;
 
     const events = new EventManager();
 
@@ -49,6 +50,7 @@ describe('Test modal', function () {
       button.dataset.modalClose = '';
 
       element = document.createElement('div');
+      element.classList.add('bx--modal');
       element.appendChild(button);
       document.body.appendChild(element);
 
@@ -73,6 +75,25 @@ describe('Test modal', function () {
     });
 
     it(`Should have show() method show modal`, function () {
+      const spyShownEventFired = sinon.spy();
+      return new Promise((resolve) => {
+        events.on(element, 'modal-shown', spyShownEventFired);
+        modal.show(resolve);
+      }).then(() => {
+        expect(spyShownEventFired).have.been.calledOnce;
+      });
+    });
+
+    it(`Should call callback of show() method after it finishes`, function () {
+      style = document.createElement('style');
+      style.textContent = `.bx--modal {
+        opacity: 0;
+      }
+      .bx--modal .is-visible {
+        opacity: 1;
+        transition: opacity .2s;
+      }`;
+      document.head.appendChild(style);
       const spyShownEventFired = sinon.spy();
       return new Promise((resolve) => {
         events.on(element, 'modal-shown', spyShownEventFired);
@@ -109,6 +130,26 @@ describe('Test modal', function () {
         modal.hide(promiseTryCatcher(() => {
           expect(spyPreHiddenEventFired).not.have.been.called;
         }, resolve, reject));
+      });
+    });
+
+    it(`Should have hide() method hide modal`, function () {
+      element.classList.add('is-visible');
+      style = document.createElement('style');
+      style.textContent = `.bx--modal {
+        opacity: 0;
+      }
+      .bx--modal .is-visible {
+        opacity: 1;
+        transition: opacity .2s;
+      }`;
+      document.head.appendChild(style);
+      const spyHiddenEventFired = sinon.spy();
+      return new Promise((resolve) => {
+        events.on(element, 'modal-hidden', spyHiddenEventFired);
+        modal.hide(resolve);
+      }).then(() => {
+        expect(spyHiddenEventFired).have.been.calledOnce;
       });
     });
 
@@ -149,6 +190,10 @@ describe('Test modal', function () {
     });
 
     afterEach(function () {
+      if (style) {
+        document.head.removeChild(style);
+        style = null;
+      }
       element.classList.remove('is-visible');
       events.reset();
     });

@@ -4,6 +4,18 @@ import '../polyfills/custom-event';
 import eventMatches from '../polyfills/event-matches';
 import toggleClass from '../polyfills/toggle-class';
 
+/**
+ * @param {Element} element The element to obtain transition duration from.
+ * @returns {number} The transition duration of the given property set in the given element.
+ */
+function getTransitionDuration(element) {
+  const computedStyle = element.ownerDocument.defaultView.getComputedStyle(element);
+  const durations = computedStyle.transitionDuration.split(/,\s*/)
+    .map((transitionDuration) => parseFloat(transitionDuration))
+    .filter((duration) => !isNaN(duration));
+  return durations.length > 0 ? Math.max(...durations) : 0;
+}
+
 export default class Modal {
   /**
    * Modal dialog.
@@ -160,9 +172,9 @@ export default class Modal {
     };
 
     this.element.addEventListener('transitionend', finishedTransition);
+    const transitionDuration = getTransitionDuration(this.element);
     toggleClass(this.element, this.options.classVisible, visible);
-    const transitionDuration = parseFloat(this.element.ownerDocument.defaultView.getComputedStyle(this.element).transitionDuration);
-    if (isNaN(transitionDuration) || transitionDuration === 0) {
+    if (transitionDuration === 0) {
       finishedTransition();
     }
   }
