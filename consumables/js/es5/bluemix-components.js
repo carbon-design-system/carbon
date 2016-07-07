@@ -1591,6 +1591,7 @@ var BluemixComponents =
 	    value: function _changeState(visible, callback) {
 	      var _this2 = this;
 	
+	      (0, _toggleClass2.default)(document.body, 'bx--noscroll', visible);
 	      var finished = void 0;
 	      var finishedTransition = function finishedTransition() {
 	        if (!finished) {
