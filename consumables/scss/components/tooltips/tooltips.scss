@@ -17,6 +17,10 @@
       position: absolute;
       display: none;
       background: $color__tooltip--background;
+
+      @include light-ui {
+        background: $color__white;
+      }
     }
 
     &:before {
@@ -29,6 +33,12 @@
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
+
+      @include light-ui {
+        border: 1px solid $color__navy-gray-8;
+        color: $color__blue-90;
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1);
+      }
     }
 
     &:after {
@@ -40,6 +50,11 @@
       border-bottom: 1px solid $color__tooltip--accent;
       margin: 0 auto;
       content: '';
+
+      @include light-ui {
+        border-right: 1px solid $color__navy-gray-8;
+        border-bottom: 1px solid $color__navy-gray-8;
+      }
     }
 
     &:hover,
