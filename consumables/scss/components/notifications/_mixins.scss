@@ -1,11 +1,133 @@
-@mixin notification--base($color) {
+//-------------------------------
+// Common Styles (6.x and 7.x)
+//-------------------------------
+
+@mixin notification--base($color, $new: false) {
   @include font-smoothing;
-  background-color: $color__navy-gray-2;
   display: flex;
   flex: 1;
   justify-content: space-between;
-  color: $color;
-  padding: .3rem 0 .3rem .5rem;
   border-left: 6px solid $color;
-  border-right: 3px solid darken($color__navy-gray-2, 5);
+
+  @include light-ui {
+    background-color: $color__white;
+    color: $color__blue-90;
+    border-right: 3px solid $color__navy-gray-8;
+  }
+
+  @if ($new == false) {
+    // 6.x
+    background-color: $color__navy-gray-2;
+    border-right: 3px solid darken($color__navy-gray-2, 5);
+    color: $color;
+    padding: .3rem 0 .3rem .5rem;
+  }
+
+  @else {
+    // 7.x
+    align-items: center;
+    padding: 1rem .625rem .5rem 1rem;
+    background-color: $color__blue-90;
+    color: $color__white;
+  }
+}
+
+@mixin bx--notification--themes($version) {
+  @if $version == '6.x' {
+    $new: false;
+
+    // Theming mixins for notifitcations
+    .bx--global-light-ui &--danger {
+      @include notification--base($color__red-50, $new);
+    }
+
+    &--danger {
+      @include notification--base($color__red-40, $new);
+    }
+
+    &--running {
+      @include notification--base($color__blue-30, $new);
+    }
+
+    &--info {
+      @include notification--base($color__yellow-30, $new);
+    }
+
+    &--warning {
+      @include notification--base($color__orange-30, $new);
+    }
+
+    &--misc {
+      @include notification--base($color__purple-40, $new);
+    }
+  }
+
+  @if $version == '7.x' {
+    $new: true;
+
+    // Theming mixins for notifications
+    .bx--global-light-ui &.bx--notification--error {
+      @include notification--base($color__red-50, $new);
+    }
+
+    &.bx--notification--error  {
+      @include notification--base($color__red-40, $new);
+    }
+
+    &.bx--notification--success {
+      @include notification--base($color__green-30, $new);
+    }
+
+    &.bx--notification--info    {
+      @include notification--base($color__blue-20, $new);
+    }
+
+    &.bx--notification--warning {
+      @include notification--base($color__yellow-30, $new);
+    }
+  }
+}
+
+//-------------------------------
+// 7.x Styles Only
+//-------------------------------
+
+@mixin notification--inline($color) {
+  @include font-smoothing;
+  @include font-size('14');
+  background-color: transparent;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: .75rem 1rem;
+  border: 1px solid $color;
+  border-left: 6px solid $color;
+
+  .bx--notification-inline__details svg {
+    fill: $color;
+  }
+}
+
+@mixin inline--icon {
+  height: 16px;
+  width: 16px;
+  min-width: 22px;
+}
+
+@mixin close--icon {
+  height: 10px;
+  width: 10px;
+  fill: $color__navy-gray-7;
+}
+
+@mixin close--button {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  min-width: 42px;
+  min-height: 42px;
 }
