@@ -32,7 +32,11 @@
 }
 
 
-@mixin btn--primary($bg: $color__blue-30, $hover-bg: $color__blue-20, $text: $color__blue-90) {
+@mixin btn--primary(
+  $bg: $color__blue-30,
+  $hover-bg: $color__blue-20,
+  $text: $color__blue-90
+) {
   @include btn--base;
   color: $text;
   background-color: $bg;
@@ -46,9 +50,22 @@
       background-color: $bg;
     }
   }
+
+  @include light-ui {
+    background-color: $color__blue-51;
+    color: $color__white;
+
+    &:hover,
+    &:focus {
+      background-color: $color__blue-40;
+    }
+  }
 }
 
-@mixin btn--secondary($hover-bg: $color__blue-30, $text: $hover-bg) {
+@mixin btn--secondary(
+  $hover-bg: $color__blue-30,
+  $text: $hover-bg
+) {
   @include btn--base;
   color: $text;
   background-color: transparent;
@@ -62,6 +79,16 @@
     &:disabled {
       color: $text;
       background-color: transparent;
+    }
+  }
+
+  @include light-ui {
+    border: 2px solid $color__blue-51;
+    color: $color__blue-51;
+
+    &:hover {
+      border: 2px solid $hover-bg;
+      color: $color__white;
     }
   }
 }

@@ -14,62 +14,56 @@
 @import '../../import-once';
 
 @include exports('buttons') {
+
+  // Primary Buttons
   .bx--btn {
     @include btn--primary;
-
-    @include light-ui {
-      @include btn--primary($color__blue-51, $color__blue-40);
-      color: $color__white;
-    }
   }
 
+  a.bx--btn {
+    padding: .7rem 1rem .75rem;
+    vertical-align: baseline;
+  }
+
+  // Secondary Buttons
   .bx--btn--secondary {
     @include btn--secondary;
-
-    @include light-ui {
-      @include btn--base;
-      color: $color__blue-51;
-      background-color: transparent;
-      border: 2px solid $color__blue-51;
-
-      &:hover,
-      &:focus {
-        color: $color__white;
-        background-color: $color__blue-40;
-        border: 2px solid $color__blue-40;
-
-        &:disabled {
-          color: $color__blue-51;
-          background-color: transparent;
-        }
-      }
-    }
   }
 
+  a.bx--btn--secondary {
+    padding: .7rem 1rem .75rem;
+    vertical-align: baseline;
+  }
+
+  // Danger Buttons
   .bx--btn--danger {
     @include btn--danger;
   }
 
+  a.bx--btn--danger {
+    padding: .7rem 1rem .75rem;
+    vertical-align: baseline;
+  }
+
+  // Right-Icon Buttons
   .bx--btn--right-icon {
-    @include btn--base;
     @include btn--primary;
+    display: inline-block;
     border-color: transparent;
     padding-right: rem(6px);
     // Styles for browser compatibility
     text-align: left;
-    vertical-align: bottom;
 
     &__text {
       @include font-size('14');
       display: inline;
-      vertical-align: middle;
     }
 
     &__icon {
       vertical-align: middle;
       display: inline;
-      width: rem(18px);
-      height: rem(18px);
+      width: rem(16px);
+      height: rem(16px);
       margin-left: .5rem;
       margin-right: .25rem;
     }
@@ -79,32 +73,18 @@
     }
 
     @include light-ui {
-      @include btn--primary($color__blue-51, $color__blue-40);
-      padding-right: rem(6px);
-      color: $color__white;
-
-      .bx--btn--right-icon__use {
+      &__use {
         fill: $color__white;
       }
     }
   }
 
-  .bx--sets-of-buttons {
+  a.bx--btn--right-icon {
+    padding-top: .45rem;
+  }
 
-    .bx--btn {
-      margin-left: 1rem;
-    }
-
-    .bx--btn--secondary {
-      @include btn--secondary;
-
-      @include light-ui {
-        @include btn--secondary($color__blue-51);
-
-        &:hover {
-          color: $color__white;
-        }
-      }
-    }
+  // Button Sets
+  .bx--sets-of-buttons .bx--btn {
+    margin-left: 1rem;
   }
 }
