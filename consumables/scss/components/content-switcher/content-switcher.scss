@@ -13,6 +13,27 @@
 .bx--content-switcher {
   display: flex;
 
+
+  // No Radio Styles
+  &__btn {
+    @include content-switcher__btn;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      cursor: pointer;
+    }
+
+    &:focus {
+      @include focus-outline;
+    }
+
+    &.bx--content-switcher--selected {
+      @include content-switcher__btn(400, $color__blue-30, $color__blue-90);
+    }
+  }
+
+  // Original Styles
   &__input {
     @include hidden;
 
@@ -28,9 +49,5 @@
     &:checked + .bx--content-switcher__btn {
       @include content-switcher__btn(400, $color__blue-30, $color__blue-90);
     }
-  }
-
-  &__btn {
-    @include content-switcher__btn;
   }
 }

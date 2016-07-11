@@ -25,7 +25,7 @@ export default class ContentSwitcher {
     this.element = element;
 
     this.options = Object.assign({
-      selectorButton: 'input[type="radio"]',
+      selectorButton: 'input[type="radio"], a.bx--content-switcher__btn',
       selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
       classActive: 'bx--content-switcher--selected',
       eventBeforeSelected: 'content-switcher-beingselected',
@@ -89,6 +89,7 @@ export default class ContentSwitcher {
    */
   handleClick(event) {
     const button = eventMatches(event, this.options.selectorButton);
+
     if (button) {
       this.setActive(button);
     }
@@ -111,12 +112,15 @@ export default class ContentSwitcher {
       itemLink.setAttribute('aria-selected', 'true');
     }
 
-    [... this.element.querySelectorAll(this.options.selectorButton)].forEach((button) => {
+    const selectorButtons = [... this.element.querySelectorAll(this.options.selectorButton)];
+
+    selectorButtons.forEach((button) => {
       if (button !== item) {
         toggleClass(button, this.options.classActive, false);
         [... button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => element.setAttribute('hidden', ''));
       }
     });
+
     toggleClass(item, this.options.classActive, true);
     [... item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => element.removeAttribute('hidden'));
   }

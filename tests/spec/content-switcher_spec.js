@@ -10,7 +10,7 @@ describe('Test content switcher', function () {
     it(`Should set default options`, function () {
       const contentSwitcher = new ContentSwitcher(document.createElement('div'));
       expect(contentSwitcher.options).to.deep.equal({
-        selectorButton: 'input[type="radio"]',
+        selectorButton: 'input[type="radio"], a.bx--content-switcher__btn',
         selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
         classActive: 'bx--content-switcher--selected',
         eventBeforeSelected: 'content-switcher-beingselected',
