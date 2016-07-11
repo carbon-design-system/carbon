@@ -23,6 +23,7 @@ export default class Modal {
    * @param {HTMLElement} element The element working as a modal dialog.
    * @param {Object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
@@ -41,6 +42,7 @@ export default class Modal {
 
     this.options = Object.assign({
       classVisible: 'is-visible',
+      classNoScroll: 'bx--noscroll',
       eventBeforeShown: 'modal-beingshown',
       eventAfterShown: 'modal-shown',
       eventBeforeHidden: 'modal-beinghidden',
@@ -57,6 +59,7 @@ export default class Modal {
    * @param {HTMLElement} element The element working as a modal dialog.
    * @param {Object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
@@ -79,6 +82,7 @@ export default class Modal {
    * @param {Node} target The DOM node to instantiate modal dialogs in. Should be a document or an element.
    * @param {Object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
+   * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
@@ -161,7 +165,6 @@ export default class Modal {
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(visible, callback) {
-    toggleClass(document.body, 'bx--noscroll', visible);
     let finished;
     const finishedTransition = () => {
       if (!finished) {
@@ -174,6 +177,7 @@ export default class Modal {
     this.element.addEventListener('transitionend', finishedTransition);
     const transitionDuration = getTransitionDuration(this.element);
     toggleClass(this.element, this.options.classVisible, visible);
+    toggleClass(this.element.ownerDocument.body, this.options.classNoScroll, visible);
     if (transitionDuration === 0) {
       finishedTransition();
     }
@@ -295,6 +299,7 @@ export default class Modal {
  * The component options.
  * @member {Object} Modal#options
  * @property {string} [classVisible] The CSS class for the visible state.
+ * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
  * @property {string} [eventBeforeShown]
  *   The name of the custom event fired before this modal is shown.
  *   Cancellation of this event stops showing the modal.
