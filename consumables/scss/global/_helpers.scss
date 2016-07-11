@@ -20,6 +20,10 @@ $color__inputs--bg--light-ui: rgba($color__blue-51, .1);
 
 @mixin box-shadow {
   box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, .1);
+
+  @include light-ui {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
+  }
 }
 
 @mixin focus-outline {
