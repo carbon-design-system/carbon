@@ -19,6 +19,18 @@
     @include content-switcher__btn;
     text-decoration: none;
 
+    @include light-ui {
+      @include content-switcher__btn(400, $color__white, $color__blue-51);
+      border: 1px solid $color__blue-51;
+
+      &:hover,
+      &:focus {
+        background-color: $color__blue-51;
+        color: $color__white;
+        font-weight: 400;
+      }
+    }
+
     &:hover,
     &:focus {
       cursor: pointer;
@@ -30,6 +42,18 @@
 
     &.bx--content-switcher--selected {
       @include content-switcher__btn(400, $color__blue-30, $color__blue-90);
+
+      @include light-ui {
+        @include content-switcher__btn(400, $color__blue-51, $color__white);
+        border: 1px solid $color__blue-51;
+
+        &:hover,
+        &:focus {
+          background-color: $color__blue-51;
+          color: $color__white;
+          font-weight: 400;
+        }
+      }
     }
   }
 
@@ -48,6 +72,17 @@
 
     &:checked + .bx--content-switcher__btn {
       @include content-switcher__btn(400, $color__blue-30, $color__blue-90);
+
+      @include light-ui {
+        @include content-switcher__btn(400, $color__blue-51, $color__white);
+        border: 1px solid $color__blue-51;
+
+        &:hover,
+        &:focus {
+          background-color: $color__blue-51;
+          color: $color__white;
+        }
+      }
     }
   }
 }
