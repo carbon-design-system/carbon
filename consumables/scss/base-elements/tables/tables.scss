@@ -14,6 +14,12 @@
   width: 100%;
   color: $color__table-text;
 
+  @include light-ui {
+    background-color: $color__white;
+    color: $color__blue-90;
+    border: 1px solid $color__navy-gray-8;
+  }
+
   &__row {
     display: flex;
   }
@@ -30,6 +36,11 @@
     background-color: $color__table-bg;
     width: auto;
     cursor: pointer;
+
+    @include light-ui {
+      background-color: $color__white;
+      font-weight: 600;
+    }
 
     @include breakpoint(bp--lg--major) {
       width: 10%;
@@ -56,6 +67,10 @@
       fill: $color__table-text;
       margin: 0 .75rem;
       transition: $transition--base;
+
+      @include light-ui {
+        fill: $color__blue-90;
+      }
     }
   }
 }
@@ -94,10 +109,18 @@
 
     &:nth-child(odd) {
       background-color: $color__table-row--odd;
+
+      @include light-ui {
+        background-color: $color__inputs--bg--light-ui;
+      }
     }
 
     &:nth-child(even) {
       background-color: $color__table-bg;
+
+      @include light-ui {
+        background-color: $color__white;
+      }
     }
 
     &:hover,
@@ -105,6 +128,11 @@
       cursor: pointer;
       background-color: $color__navy-gray-2;
       border: 1px solid $color__blue-30;
+
+      @include light-ui {
+        background-color: none;
+        border: 1px solid $color__blue-30;
+      }
     }
 
     &--checked {
@@ -112,6 +140,11 @@
       &:nth-child(odd), &:nth-child(even) {
         background-color: $color__navy-gray-2;
         border: 1px solid $color__blue-30;
+
+        @include light-ui {
+          background-color: $color__inputs--bg--light-ui;
+          border: 1px solid $color__blue-30;
+        }
       }
     }
   }
