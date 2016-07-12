@@ -4,9 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "storybook": "start-storybook -p 9001",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@console/bluemix-components": "6.4.0",
+    "classnames": "2.2.5",
+    "react": "15.2.1"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "1.38.0",
+    "css-loader": "0.23.1",
+    "node-sass": "3.8.0",
+    "sass-loader": "4.0.0",
+    "style-loader": "0.13.1"
+  }
 }
