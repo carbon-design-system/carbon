@@ -65,7 +65,7 @@
       this.element = element;
 
       this.options = (0, _assign2.default)({
-        selectorButton: 'input[type="radio"]',
+        selectorButton: 'input[type="radio"], a.bx--content-switcher__btn',
         selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
         classActive: 'bx--content-switcher--selected',
         eventBeforeSelected: 'content-switcher-beingselected',
@@ -101,6 +101,7 @@
       key: 'handleClick',
       value: function handleClick(event) {
         var button = (0, _eventMatches2.default)(event, this.options.selectorButton);
+
         if (button) {
           this.setActive(button);
         }
@@ -121,7 +122,9 @@
           itemLink.setAttribute('aria-selected', 'true');
         }
 
-        [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorButton))).forEach(function (button) {
+        var selectorButtons = [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorButton)));
+
+        selectorButtons.forEach(function (button) {
           if (button !== item) {
             (0, _toggleClass2.default)(button, _this2.options.classActive, false);
             [].concat((0, _toConsumableArray3.default)(button.ownerDocument.querySelectorAll(button.dataset.target))).forEach(function (element) {
@@ -129,6 +132,7 @@
             });
           }
         });
+
         (0, _toggleClass2.default)(item, this.options.classActive, true);
         [].concat((0, _toConsumableArray3.default)(item.ownerDocument.querySelectorAll(item.dataset.target))).forEach(function (element) {
           return element.removeAttribute('hidden');

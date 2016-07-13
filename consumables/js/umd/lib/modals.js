@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/toConsumableArray', '../polyfills/event-matches', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/toConsumableArray'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global._typeof, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.toggleClass, global.arrayFrom, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global._typeof, global.assign, global.classCallCheck, global.createClass, global.toConsumableArray, global.eventMatches, global.toggleClass, global.arrayFrom, global.objectAssign, global.customEvent);
     global.modals = mod.exports;
   }
-})(this, function (exports, _weakMap, _typeof2, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _eventMatches, _toggleClass) {
+})(this, function (exports, _weakMap, _typeof2, _assign, _classCallCheck2, _createClass2, _toConsumableArray2, _eventMatches, _toggleClass) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -21,13 +21,13 @@
 
   var _typeof3 = _interopRequireDefault(_typeof2);
 
-  var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
   var _assign2 = _interopRequireDefault(_assign);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
+
+  var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
   var _eventMatches2 = _interopRequireDefault(_eventMatches);
 
@@ -39,6 +39,20 @@
     };
   }
 
+  /**
+   * @param {Element} element The element to obtain transition duration from.
+   * @returns {number} The transition duration of the given property set in the given element.
+   */
+  function getTransitionDuration(element) {
+    var computedStyle = element.ownerDocument.defaultView.getComputedStyle(element);
+    var durations = computedStyle.transitionDuration.split(/,\s*/).map(function (transitionDuration) {
+      return parseFloat(transitionDuration);
+    }).filter(function (duration) {
+      return !isNaN(duration);
+    });
+    return durations.length > 0 ? Math.max.apply(Math, (0, _toConsumableArray3.default)(durations)) : 0;
+  }
+
   var Modal = function () {
     /**
      * Modal dialog.
@@ -46,6 +60,7 @@
      * @param {HTMLElement} element The element working as a modal dialog.
      * @param {Object} [options] The component options.
      * @param {string} [options.classVisible] The CSS class for the visible state.
+     * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
      * @param {string} [options.eventBeforeShown]
      *   The name of the custom event fired before this modal is shown.
      *   Cancellation of this event stops showing the modal.
@@ -68,6 +83,7 @@
 
       this.options = (0, _assign2.default)({
         classVisible: 'is-visible',
+        classNoScroll: 'bx--noscroll',
         eventBeforeShown: 'modal-beingshown',
         eventAfterShown: 'modal-shown',
         eventBeforeHidden: 'modal-beinghidden',
@@ -84,6 +100,7 @@
      * @param {HTMLElement} element The element working as a modal dialog.
      * @param {Object} [options] The component options.
      * @param {string} [options.classVisible] The CSS class for the visible state.
+     * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
      * @param {string} [options.eventBeforeShown]
      *   The name of the custom event fired before this modal is shown.
      *   Cancellation of this event stops showing the modal.
@@ -128,7 +145,6 @@
       value: function _changeState(visible, callback) {
         var _this2 = this;
 
-        (0, _toggleClass2.default)(document.body, 'bx--noscroll', visible);
         var finished = void 0;
         var finishedTransition = function finishedTransition() {
           if (!finished) {
@@ -139,9 +155,10 @@
         };
 
         this.element.addEventListener('transitionend', finishedTransition);
+        var transitionDuration = getTransitionDuration(this.element);
         (0, _toggleClass2.default)(this.element, this.options.classVisible, visible);
-        var transitionDuration = parseFloat(this.element.ownerDocument.defaultView.getComputedStyle(this.element).transitionDuration);
-        if (isNaN(transitionDuration) || transitionDuration === 0) {
+        (0, _toggleClass2.default)(this.element.ownerDocument.body, this.options.classNoScroll, visible);
+        if (transitionDuration === 0) {
           finishedTransition();
         }
       }
@@ -311,6 +328,7 @@
    * The component options.
    * @member {Object} Modal#options
    * @property {string} [classVisible] The CSS class for the visible state.
+   * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @property {string} [eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.

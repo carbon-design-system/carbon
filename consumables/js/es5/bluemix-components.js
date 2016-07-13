@@ -828,7 +828,7 @@ var BluemixComponents =
 	    this.element = element;
 	
 	    this.options = Object.assign({
-	      selectorButton: 'input[type="radio"]',
+	      selectorButton: 'input[type="radio"], a.bx--content-switcher__btn',
 	      selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
 	      classActive: 'bx--content-switcher--selected',
 	      eventBeforeSelected: 'content-switcher-beingselected',
@@ -871,6 +871,7 @@ var BluemixComponents =
 	     */
 	    value: function handleClick(event) {
 	      var button = (0, _eventMatches2.default)(event, this.options.selectorButton);
+	
 	      if (button) {
 	        this.setActive(button);
 	      }
@@ -898,7 +899,9 @@ var BluemixComponents =
 	        itemLink.setAttribute('aria-selected', 'true');
 	      }
 	
-	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorButton))).forEach(function (button) {
+	      var selectorButtons = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorButton)));
+	
+	      selectorButtons.forEach(function (button) {
 	        if (button !== item) {
 	          (0, _toggleClass2.default)(button, _this2.options.classActive, false);
 	          [].concat(_toConsumableArray(button.ownerDocument.querySelectorAll(button.dataset.target))).forEach(function (element) {
@@ -906,6 +909,7 @@ var BluemixComponents =
 	          });
 	        }
 	      });
+	
 	      (0, _toggleClass2.default)(item, this.options.classActive, true);
 	      [].concat(_toConsumableArray(item.ownerDocument.querySelectorAll(item.dataset.target))).forEach(function (element) {
 	        return element.removeAttribute('hidden');
@@ -1484,9 +1488,23 @@ var BluemixComponents =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	/**
+	 * @param {Element} element The element to obtain transition duration from.
+	 * @returns {number} The transition duration of the given property set in the given element.
+	 */
+	function getTransitionDuration(element) {
+	  var computedStyle = element.ownerDocument.defaultView.getComputedStyle(element);
+	  var durations = computedStyle.transitionDuration.split(/,\s*/).map(function (transitionDuration) {
+	    return parseFloat(transitionDuration);
+	  }).filter(function (duration) {
+	    return !isNaN(duration);
+	  });
+	  return durations.length > 0 ? Math.max.apply(Math, _toConsumableArray(durations)) : 0;
+	}
 	
 	var Modal = function () {
 	  /**
@@ -1495,6 +1513,7 @@ var BluemixComponents =
 	   * @param {HTMLElement} element The element working as a modal dialog.
 	   * @param {Object} [options] The component options.
 	   * @param {string} [options.classVisible] The CSS class for the visible state.
+	   * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
 	   * @param {string} [options.eventBeforeShown]
 	   *   The name of the custom event fired before this modal is shown.
 	   *   Cancellation of this event stops showing the modal.
@@ -1518,6 +1537,7 @@ var BluemixComponents =
 	
 	    this.options = Object.assign({
 	      classVisible: 'is-visible',
+	      classNoScroll: 'bx--noscroll',
 	      eventBeforeShown: 'modal-beingshown',
 	      eventAfterShown: 'modal-shown',
 	      eventBeforeHidden: 'modal-beinghidden',
@@ -1534,6 +1554,7 @@ var BluemixComponents =
 	   * @param {HTMLElement} element The element working as a modal dialog.
 	   * @param {Object} [options] The component options.
 	   * @param {string} [options.classVisible] The CSS class for the visible state.
+	   * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
 	   * @param {string} [options.eventBeforeShown]
 	   *   The name of the custom event fired before this modal is shown.
 	   *   Cancellation of this event stops showing the modal.
@@ -1591,7 +1612,6 @@ var BluemixComponents =
 	    value: function _changeState(visible, callback) {
 	      var _this2 = this;
 	
-	      (0, _toggleClass2.default)(document.body, 'bx--noscroll', visible);
 	      var finished = void 0;
 	      var finishedTransition = function finishedTransition() {
 	        if (!finished) {
@@ -1602,9 +1622,10 @@ var BluemixComponents =
 	      };
 	
 	      this.element.addEventListener('transitionend', finishedTransition);
+	      var transitionDuration = getTransitionDuration(this.element);
 	      (0, _toggleClass2.default)(this.element, this.options.classVisible, visible);
-	      var transitionDuration = parseFloat(this.element.ownerDocument.defaultView.getComputedStyle(this.element).transitionDuration);
-	      if (isNaN(transitionDuration) || transitionDuration === 0) {
+	      (0, _toggleClass2.default)(this.element.ownerDocument.body, this.options.classNoScroll, visible);
+	      if (transitionDuration === 0) {
 	        finishedTransition();
 	      }
 	    }
@@ -1743,6 +1764,7 @@ var BluemixComponents =
 	     * @param {Node} target The DOM node to instantiate modal dialogs in. Should be a document or an element.
 	     * @param {Object} [options] The component options.
 	     * @param {string} [options.classVisible] The CSS class for the visible state.
+	     * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
 	     * @param {string} [options.eventBeforeShown]
 	     *   The name of the custom event fired before this modal is shown.
 	     *   Cancellation of this event stops showing the modal.
@@ -1821,6 +1843,7 @@ var BluemixComponents =
 	 * The component options.
 	 * @member {Object} Modal#options
 	 * @property {string} [classVisible] The CSS class for the visible state.
+	 * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
 	 * @property {string} [eventBeforeShown]
 	 *   The name of the custom event fired before this modal is shown.
 	 *   Cancellation of this event stops showing the modal.
