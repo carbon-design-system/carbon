@@ -20,8 +20,17 @@
     font-weight: 700;
     cursor: pointer;
 
+    @include light-ui {
+      color: $color__blue-90;
+      background-color: $color__inputs--bg--light-ui;
+    }
+
     @include breakpoint(bp--sm--major) {
       background: none;
+
+      @include light-ui {
+        background: none;
+      }
     }
 
     &__trigger {
@@ -37,6 +46,10 @@
         width: rem(12px);
         height: rem(12px);
         fill: $color__tabs--caret;
+
+        @include light-ui {
+          fill: $color__blue-51;
+        }
       }
 
       @include breakpoint(bp--sm--major) {
@@ -48,6 +61,10 @@
       text-decoration: none;
       font-weight: 700;
       color: $color__white;
+
+      @include light-ui {
+        color: $color__blue-90;
+      }
     }
 
     &__nav {
@@ -72,19 +89,39 @@
       background-color: $color__navy_gray_4;
       padding: 1rem;
 
+      @include light-ui {
+        background-color: $color__white;
+      }
+
       &:hover {
         background-color: $color__blue-30;
+
+        @include light-ui {
+          background-color: $color__blue-51;
+        }
 
         .bx--tabs__nav-link {
           color: $color__blue-90;
 
+          @include light-ui {
+            color: $color__white;
+          }
+
           @include breakpoint(bp--sm--major) {
             color: $color__blue-30;
+
+            @include light-ui {
+              color: $color__blue-51;
+            }
           }
         }
 
         @include breakpoint(bp--sm--major) {
           background: none;
+
+          @include light-ui {
+            background-color: $color__white;
+          }
         }
       }
 
@@ -103,6 +140,10 @@
       color: $color__tabs--text;
       text-decoration: none;
 
+      @include light-ui {
+        color: $color__blue-90;
+      }
+
       @include breakpoint(bp--sm--major) {
         padding-right: 0;
         padding-left: 0;
@@ -110,6 +151,10 @@
 
         &:hover {
           color: $color__tabs--selected;
+
+          @include light-ui {
+            color: $color__blue-51;
+          }
         }
       }
     }
@@ -122,8 +167,16 @@
     @include breakpoint(bp--sm--major) {
       border-bottom: 2px solid $color__tabs--selected;
 
+      @include light-ui {
+        border-bottom: 2px solid $color__blue-51;
+      }
+
       a {
         color: $color__tabs--selected;
+
+        @include light-ui {
+          color: $color__blue-51;
+        }
       }
     }
   }

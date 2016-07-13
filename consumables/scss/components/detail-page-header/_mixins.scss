@@ -1,6 +1,10 @@
 @mixin detail-page-header {
   background-color: $color__detail-page-header--bg;
   width: 100%;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
 }
 
 @mixin detail-page-header__arrow {

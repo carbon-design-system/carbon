@@ -23,6 +23,11 @@
     text-decoration: none;
     background-color: $color__detail-page-header--bg;
     cursor: pointer;
+
+    @include light-ui {
+      color: $color__navy-gray-3;
+      background-color: $color__white;
+    }
   }
 
   &__link-text {
@@ -42,6 +47,10 @@
     margin-left: .5rem;
     font-weight: 200;
     border-left: 1px solid $color__detail-page-header--border;
+
+    @include light-ui {
+      color: $color__navy-gray-6;
+    }
 
     @include breakpoint(bp--xs--major) {
       margin-left: -.2rem;

@@ -31,15 +31,23 @@
       padding-bottom: .5rem;
       align-items: flex-start;
     }
+
+    @include light-ui {
+      background-color: $color__white;
+    }
   }
 
   &__breadcrumb {
     font-weight: 600;
-    color: $color__detail-page-header--text--breadcrumb;
+    color: $color__blue-30;
     cursor: pointer;
 
     @include breakpoint(bp--xs--major) {
       padding-bottom: .5rem;
+    }
+
+    @include light-ui {
+      color: $color__blue-90;
     }
   }
 
@@ -60,6 +68,10 @@
     @include font-smoothing;
     color: $color__detail-page-header--text--breadcrumb;
     text-decoration: none;
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
   }
 
   &__arrow {
@@ -88,6 +100,10 @@
 
     @include breakpoint(bp--sm--major) {
       @include font-size('32');
+    }
+
+    @include light-ui {
+      color: $color__navy-gray-6;
     }
   }
 
