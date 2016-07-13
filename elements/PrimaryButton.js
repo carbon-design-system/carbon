@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import '@console/bluemix-components/consumables/scss/base-elements/buttons/buttons.scss';
+import '@console/bluemix-components/consumables/scss/base-elements/buttons/button--primary.scss';
 
 
 export default class PrimaryButton extends React.Component {
