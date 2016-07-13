@@ -26,6 +26,12 @@
       border: none;
       border-radius: 0;
 
+      @include light-ui {
+        color: $color__blue-90;
+        background-color: $color__inputs--bg--light-ui;
+        font-weight: 400;
+      }
+
       &:focus {
         @include focus-outline;
         outline: auto 2px -webkit-focus-ring-color; // webkit default

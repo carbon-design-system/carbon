@@ -53,6 +53,12 @@
         border-top: none;
         border-right: none;
         transform: rotate(-45deg);
+
+        @include light-ui {
+          border: 2px solid $color__white;
+          border-top: none;
+          border-right: none;
+        }
       }
     }
 
@@ -78,6 +84,10 @@
     fill: $color__blue-90;
     width: rem(15px);
     height: rem(15px);
+
+    @include light-ui {
+      fill: $color__white;
+    }
   }
 
   // SVG Checkmark - checked

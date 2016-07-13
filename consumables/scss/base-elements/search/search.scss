@@ -24,7 +24,8 @@
     }
 
     &__input {
-      @include font-size('14');
+      @include helvetica;
+      font-weight: 700;
       width: 100%;
       padding: 1rem 1rem 1rem 2.5rem;
       color: $color__white;
@@ -33,6 +34,11 @@
       appearance: none;
       z-index: z('overflowOptions');
 
+      @include light-ui {
+        color: $color__blue-90;
+        background-color: $color__inputs--bg--light-ui;
+      }
+
       &:focus {
         @include focus-outline;
       }
@@ -40,7 +46,12 @@
       &::placeholder {
         @include font-smoothing;
         font-style: italic;
+        font-weight: 400;
         color: darken($color__navy-gray-8, 15%);
+
+        @include light-ui {
+          color: $color__blue-90;
+        }
       }
 
       @include breakpoint(bp--sm--major) {
@@ -84,12 +95,16 @@
           width: 1rem;
           height: 1rem;
         }
+
+        @include light-ui {
+          fill: $color__white;
+        }
       }
     }
 
     &__filter {
       @include font-size('16');
-      padding: 1.4rem;
+      padding: 1.52rem;
       font-weight: 600;
       color: $color__navy-gray-8;
       cursor: pointer;
@@ -103,10 +118,19 @@
         margin-left: 0;
       }
 
+      @include light-ui {
+        background-color: $color__blue-51;
+        color: $color__white;
+      }
+
       &:hover,
       &:focus {
         background-color: mix($color__white, $color--filter-bg, 10%);
         color: $color__white;
+
+        @include light-ui {
+          background-color: $color__blue-40;
+        }
 
         .bx--search__icon--filter {
           fill: $color__white;
@@ -163,4 +187,3 @@
     padding-right: 0;
   }
 }
-

@@ -2,7 +2,7 @@
   fill: $color__navy-gray-7;
   position: absolute;
 
-  .light-ui & {
-    fill: $color__blue-40;
+  @include light-ui {
+    fill: $color__blue-90;
   }
 }

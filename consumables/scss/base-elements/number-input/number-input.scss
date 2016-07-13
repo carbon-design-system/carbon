@@ -60,6 +60,11 @@
         opacity: .5;
         cursor: not-allowed;
       }
+
+      @include light-ui {
+        color: $color__blue-90;
+        background-color: $color__inputs--bg--light-ui;
+      }
     }
 
     // Position spans to place SVG's inside. Create placeholder

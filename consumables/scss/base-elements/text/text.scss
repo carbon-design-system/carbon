@@ -24,6 +24,12 @@
       border: none;
       border-radius: 0;
 
+      @include light-ui {
+        color: $color__blue-90;
+        background-color: $color__inputs--bg--light-ui;
+        font-weight: 400;
+      }
+
       &::-webkit-input-placeholder {
         color: darken($color__navy-gray-8, 12%);
       }

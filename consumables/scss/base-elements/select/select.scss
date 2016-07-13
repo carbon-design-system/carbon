@@ -27,6 +27,11 @@
       border-radius: 0;
       cursor: pointer;
 
+      @include light-ui {
+        color: $color__blue-90;
+        background-color: $color__inputs--bg--light-ui;
+      }
+
       // Hide default select arrow in IE10+
       &::-ms-expand {
         display: none;
@@ -46,7 +51,7 @@
     &__arrow {
       position: absolute;
       right: .85rem;
-      top: 2.25rem;
+      top: 2.4rem;
       width: .75rem;
       height: 1.5rem;
       pointer-events: none;

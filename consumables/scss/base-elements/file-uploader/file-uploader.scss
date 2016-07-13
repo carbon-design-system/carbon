@@ -38,6 +38,11 @@
       // avoids safari from overriding these styles
       appearance: none;
 
+      @include light-ui {
+        background-color: $color__inputs--bg--light-ui;
+        color: $color__blue-90;
+      }
+
       // "upload button"
       &:after {
         @include btn--primary;
@@ -47,9 +52,17 @@
         height: 2rem;
         padding-top: .3rem;
         line-height: 2;
-        text-transform: capitalize;;
         content: 'Choose Files';
         border: 3px solid transparent;
+
+        // Since it's a pseudo selector, some of the code needs to be duplicated
+        @include light-ui {
+          @include btn--primary($color__blue-51, $color__blue-40);
+          color: $color__white;
+          height: 2rem;
+          padding-top: .3rem;
+          border: 3px solid transparent;
+        }
       }
     }
   }
