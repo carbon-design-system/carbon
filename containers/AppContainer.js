@@ -18,17 +18,17 @@ export default class AppContainer extends React.Component {
   }
 
   setLightTheme() {
-    this.setState({ lightTheme: true
-  })
+    this.setState({ lightTheme: true })
   }
 
   setDarkTheme() {
-    this.setState({ lightTheme: false})
+    this.setState({ lightTheme: false })
   }
 
   render() {
 
     const appContainerClasses = classNames({
+      'bx--body': true,
       'bx--global-light-ui': this.state.lightTheme
     });
 
