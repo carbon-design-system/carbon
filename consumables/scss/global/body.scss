@@ -1,7 +1,8 @@
 @import '../import-once';
 
 @mixin body-styles {
-  body {
+  body,
+  .bx--body {
     @include helvetica;
     color: $color__white;
     background-color: $color__navy-gray-3;
