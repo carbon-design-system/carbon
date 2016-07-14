@@ -67,7 +67,7 @@ describe('Test modal', function () {
     it(`Should have show() do nothing if no state change happens`, function () {
       element.classList.add('is-visible');
       const spyPreShownEventFired = sinon.spy();
-      events.on(element, 'modal-beingshown', spyPreShownEventFired);
+      events.on(element.ownerDocument.body, 'modal-beingshown', spyPreShownEventFired);
       return new Promise((resolve, reject) => {
         modal.show(promiseTryCatcher(() => {
           expect(spyPreShownEventFired).not.have.been.called;
@@ -78,7 +78,7 @@ describe('Test modal', function () {
     it(`Should have show() method show modal`, function () {
       const spyShownEventFired = sinon.spy();
       return new Promise((resolve) => {
-        events.on(element, 'modal-shown', spyShownEventFired);
+        events.on(element.ownerDocument.body, 'modal-shown', spyShownEventFired);
         modal.show(resolve);
       }).then(() => {
         expect(spyShownEventFired, 'modal-shown event').have.been.calledOnce;
@@ -99,7 +99,7 @@ describe('Test modal', function () {
       document.head.appendChild(style);
       const spyShownEventFired = sinon.spy();
       return new Promise((resolve) => {
-        events.on(element, 'modal-shown', spyShownEventFired);
+        events.on(element.ownerDocument.body, 'modal-shown', spyShownEventFired);
         modal.show(resolve);
       }).then(() => {
         expect(spyShownEventFired).have.been.calledOnce;
@@ -109,13 +109,13 @@ describe('Test modal', function () {
     it(`Should have elements with data-modal-close attribute close buttons`, function () {
       element.classList.add('is-visible');
       return new Promise((resolve) => {
-        events.on(element, 'modal-hidden', resolve);
+        events.on(element.ownerDocument.body, 'modal-hidden', resolve);
         button.dispatchEvent(new CustomEvent('click'));
       });
     });
 
     it(`Should provide a way to cancel showing modal`, function () {
-      events.on(element, 'modal-beingshown', (e) => {
+      events.on(element.ownerDocument.body, 'modal-beingshown', (e) => {
         e.preventDefault();
       });
       return new Promise((resolve, reject) => {
@@ -132,7 +132,7 @@ describe('Test modal', function () {
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
       return new Promise((resolve) => {
-        events.on(element, 'modal-hidden', spyHiddenEventFired);
+        events.on(element.ownerDocument.body, 'modal-hidden', spyHiddenEventFired);
         modal.hide(resolve);
       }).then(() => {
         expect(spyHiddenEventFired, 'modal-hidden event').have.been.calledOnce;
@@ -143,7 +143,7 @@ describe('Test modal', function () {
 
     it(`Should do nothing for hide() if no state change happens`, function () {
       const spyPreHiddenEventFired = sinon.spy();
-      events.on(element, 'modal-beinghidden', spyPreHiddenEventFired);
+      events.on(element.ownerDocument.body, 'modal-beinghidden', spyPreHiddenEventFired);
       return new Promise((resolve, reject) => {
         modal.hide(promiseTryCatcher(() => {
           expect(spyPreHiddenEventFired).not.have.been.called;
@@ -164,7 +164,7 @@ describe('Test modal', function () {
       document.head.appendChild(style);
       const spyHiddenEventFired = sinon.spy();
       return new Promise((resolve) => {
-        events.on(element, 'modal-hidden', spyHiddenEventFired);
+        events.on(element.ownerDocument.body, 'modal-hidden', spyHiddenEventFired);
         modal.hide(resolve);
       }).then(() => {
         expect(spyHiddenEventFired).have.been.calledOnce;
@@ -174,7 +174,7 @@ describe('Test modal', function () {
     it(`Should provide a way to cancel hiding modal`, function () {
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
-      events.on(element, 'modal-beinghidden', (e) => {
+      events.on(element.ownerDocument.body, 'modal-beinghidden', (e) => {
         e.preventDefault();
       });
       return new Promise((resolve, reject) => {
@@ -190,7 +190,7 @@ describe('Test modal', function () {
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
       return new Promise((resolve) => {
-        events.on(element, 'modal-hidden', resolve);
+        events.on(element.ownerDocument.body, 'modal-hidden', resolve);
         document.body.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 27 }));
       });
     });
@@ -200,7 +200,7 @@ describe('Test modal', function () {
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
       return new Promise((resolve) => {
-        events.on(element, 'modal-hidden', () => {
+        events.on(element.ownerDocument.body, 'modal-hidden', () => {
           spyHiddenEventFired();
           resolve();
         });

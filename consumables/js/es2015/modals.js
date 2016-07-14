@@ -262,10 +262,10 @@ export default class Modal {
     // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
     if (this.element.dispatchEvent(eventStart)) {
       this._changeState(false, () => {
-        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterHidden), {
+        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterHidden, {
           bubbles: true,
           cancelable: true,
-        });
+        }));
         if (callback) {
           callback();
         }
