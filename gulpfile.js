@@ -54,7 +54,8 @@ gulp.task('clean', () => {
   return del([
     'consumables/css/*.css',
     'consumables/es5/*.{js,map}',
-    'demo/*.{js,map}'
+    'demo/*.{js,map}',
+    '!demo/index.js',
   ]);
 });
 
@@ -263,7 +264,7 @@ gulp.task('jsdoc', function (cb) {
 //////////////////////////////
 
 gulp.task('watch', () => {
-  gulp.watch('./**/*.html').on('change', browserSync.reload);
+  gulp.watch('consumables/**/*.html').on('change', browserSync.reload);
   gulp.watch(['consumables/**/*.js', '!**/es5/*.js'], ['scripts:dev']);
   gulp.watch(['consumables/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
 });
