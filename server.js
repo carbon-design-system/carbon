@@ -11,23 +11,23 @@ const adaro = require('adaro');
 const htmlFiles = {
   // Used in getContent() function
   all: [
-    'html/**/*.html',
-    '!html/**/body.html',
-    '!html/**/header.html',
-    '!html/components/detail-page-header/**/*.html',
+    'consumables/html/**/*.html',
+    '!consumables/html/**/body.html',
+    '!consumables/html/**/header.html',
+    '!consumables/html/components/detail-page-header/**/*.html',
   ],
-  header: 'html/**/header.html',
-  detailHeader: 'html/components/detail-page-header/**/*.html',
-  baseElements: 'html/base-elements/**/*.html',
-  components: 'html/components/**/*.html',
-  global: 'html/global/**/*.html'
+  header: 'consumables/html/**/header.html',
+  detailHeader: 'consumables/html/components/detail-page-header/**/*.html',
+  baseElements: 'consumables/html/base-elements/**/*.html',
+  components: 'consumables/html/components/**/*.html',
+  global: 'consumables/html/global/**/*.html'
 };
 
 const directoryOrder = [
   // Used for allLinks() function
-  'html/base-elements/**/*.html',
-  'html/components/**/*.html',
-  'html/global/**/*.html'
+  'consumables/html/base-elements/**/*.html',
+  'consumables/html/components/**/*.html',
+  'consumables/html/global/**/*.html'
 ];
 
 app.engine('dust', adaro.dust());
@@ -89,7 +89,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/components/:component', (req, res) => {
-  const glob = `html/components/${req.params.component}/**/*.html`;
+  const glob = `consumables/html/components/${req.params.component}/**/*.html`;
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
@@ -101,7 +101,7 @@ app.get('/components/:component', (req, res) => {
 });
 
 app.get('/base-elements/:component', (req, res) => {
-  const glob = `html/base-elements/${req.params.component}/**/*.html`;
+  const glob = `consumables/html/base-elements/${req.params.component}/**/*.html`;
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
@@ -113,7 +113,7 @@ app.get('/base-elements/:component', (req, res) => {
 });
 
 app.get('/global/:component', (req, res) => {
-  const glob = `html/global/${req.params.component}/**/*.html`;
+  const glob = `consumables/html/global/${req.params.component}/**/*.html`;
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
