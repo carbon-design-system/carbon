@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@console/bluemix-components": "git+ssh://git@github.ibm.com:bthan/bluemix-components.git#modular-button-styles",
+    "@console/bluemix-components": "git+ssh://git@github.ibm.com:Bluemix/bluemix-components.git#master",
     "classnames": "2.2.5",
     "react": "15.2.1"
   },
