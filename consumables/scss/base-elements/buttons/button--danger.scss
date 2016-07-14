@@ -1,0 +1,30 @@
+//-----------------------------
+// Danger Button
+//-----------------------------
+
+// Dependencies
+@import '../../global/colors/colors';
+@import '../../global/helpers';
+@import '../../global/typography/vars';
+@import '../../global/typography/functions';
+@import '../../global/typography/mixins';
+
+// Local Dependencies
+@import 'vars';
+@import 'mixins';
+@import 'extends';
+
+// import-once
+@import '../../import-once';
+
+@include exports('button--danger') {
+  // Danger Buttons
+  .bx--btn--danger {
+    @include btn--danger;
+  }
+
+  a.bx--btn--danger {
+    padding: .7rem 1rem .75rem;
+    vertical-align: baseline;
+  }
+}

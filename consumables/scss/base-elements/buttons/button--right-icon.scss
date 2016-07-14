@@ -1,0 +1,58 @@
+//-----------------------------
+// Buttons
+//-----------------------------
+
+// Dependencies
+@import '../../global/colors/colors';
+@import '../../global/helpers';
+@import '../../global/typography/vars';
+@import '../../global/typography/functions';
+@import '../../global/typography/mixins';
+
+// Local Dependencies
+@import 'vars';
+@import 'mixins';
+@import 'extends';
+
+// import-once
+@import '../../import-once';
+
+@include exports('buttons') {
+  // Right-Icon Buttons
+  .bx--btn--right-icon {
+    @include btn--primary;
+    display: inline-block;
+    border-color: transparent;
+    padding-right: rem(6px);
+    // Styles for browser compatibility
+    text-align: left;
+
+    &__text {
+      @include font-size('14');
+      display: inline;
+    }
+
+    &__icon {
+      vertical-align: middle;
+      display: inline;
+      width: rem(16px);
+      height: rem(16px);
+      margin-left: .5rem;
+      margin-right: .25rem;
+    }
+
+    &__use {
+      fill: $color__blue-90;
+    }
+
+    @include light-ui {
+      &__use {
+        fill: $color__white;
+      }
+    }
+  }
+
+  a.bx--btn--right-icon {
+    padding-top: .45rem;
+  }
+}

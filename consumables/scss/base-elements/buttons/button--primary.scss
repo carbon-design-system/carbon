@@ -1,0 +1,31 @@
+//-----------------------------
+// Primary Button
+//-----------------------------
+
+// Dependencies
+@import '../../global/colors/colors';
+@import '../../global/helpers';
+@import '../../global/typography/vars';
+@import '../../global/typography/functions';
+@import '../../global/typography/mixins';
+
+// Local Dependencies
+@import 'vars';
+@import 'mixins';
+@import 'extends';
+
+// import-once
+@import '../../import-once';
+
+@include exports('button--primary') {
+
+  // Primary Buttons
+  .bx--btn {
+    @include btn--primary;
+  }
+
+  a.bx--btn {
+    padding: .7rem 1rem .75rem;
+    vertical-align: baseline;
+  }
+}
