@@ -10,6 +10,8 @@ export default class AppContainer extends React.Component {
     this.state = {
       lightTheme: false
     }
+
+    this.toggleTheme = this.toggleTheme.bind(this);
   }
 
   static propTypes = {
@@ -17,12 +19,10 @@ export default class AppContainer extends React.Component {
     className: React.PropTypes.string
   }
 
-  setLightTheme() {
-    this.setState({ lightTheme: true })
-  }
-
-  setDarkTheme() {
-    this.setState({ lightTheme: false })
+  toggleTheme() {
+    this.setState({
+      lightTheme: !this.state.lightTheme
+    });
   }
 
   render() {
@@ -34,7 +34,9 @@ export default class AppContainer extends React.Component {
 
     return (
       <div className={appContainerClasses}>
-        {this.props.children}
+        {React.cloneElement(this.props.children, {
+          toggleTheme: this.toggleTheme
+          })}
       </div>
     )
   }
