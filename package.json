@@ -98,6 +98,7 @@
     "style guide"
   ],
   "dependencies": {
+    "lodash.debounce": "^4.0.6",
     "svgxuse": "~1.1.5"
   }
 }

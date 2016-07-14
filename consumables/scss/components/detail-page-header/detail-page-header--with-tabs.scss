@@ -14,9 +14,26 @@
 
 @import '../../import-once';
 
-
 .bx--detail-page-header--with-tabs {
   @include detail-page-header;
+
+  &--animated {
+    @include detail-page-header-animated;
+
+    &-slide-up {
+      transform: translateY(-101px);
+      
+      @media (max-width: 770px) {
+        transform: translateY(-87px);
+
+        .bx--detail-page-header--with-tabs__tabs-container {
+          padding-top: 1rem;
+        }
+      }
+    }
+  }
+
+  
 
   &__container {
     @include grid-container;

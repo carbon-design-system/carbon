@@ -7,6 +7,17 @@
   }
 }
 
+@mixin detail-page-header-animated {
+  transition: 185ms transform;
+  will-change: transform;
+  transition-timing-function: cubic-bezier(.5, 0, .1, 1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: z('header');
+}
+
 @mixin detail-page-header__arrow {
   width: 16px;
   height: 16px;

@@ -25,6 +25,7 @@ import Dropdown from './dropdown';
 import Card from './card';
 import NumberInput from './number-input';
 import Table from './table';
+import DetailPageHeader from './detail-page-header';
 
 const settings = {};
 
@@ -128,6 +129,12 @@ export {
    * @type Table
    */
   Table,
+
+  /**
+   * Detail page header.
+   * @type DetailPageHeader
+   */
+  DetailPageHeader,
 };
 
 /**
@@ -155,6 +162,7 @@ const init = () => {
     Card.init();
     NumberInput.init();
     Table.init();
+    DetailPageHeader.init();
   }
 };
 
