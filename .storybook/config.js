@@ -1,8 +1,11 @@
 import { configure } from '@kadira/storybook';
 
+function requireAll(requireContext) {
+  return requireContext.keys().map(requireContext);
+}
+
 function loadStories() {
-  require('./elements/PrimaryButton');
-  require('./containers/AppContainer');
+  requireAll(require.context('./', true, /Story\.js$/));
 }
 
 configure(loadStories, module);
