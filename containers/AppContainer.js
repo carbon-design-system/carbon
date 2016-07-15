@@ -34,9 +34,7 @@ export default class AppContainer extends React.Component {
 
     return (
       <div className={appContainerClasses}>
-        {React.cloneElement(this.props.children, {
-          toggleTheme: this.toggleTheme
-          })}
+        {this.props.children}
       </div>
     )
   }

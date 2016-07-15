@@ -1,8 +1,8 @@
 import { configure } from '@kadira/storybook';
 
 function loadStories() {
-  require('../stories/elements/PrimaryButton');
-  require('../stories/containers/AppContainer');
+  require('./elements/PrimaryButton');
+  require('./containers/AppContainer');
 }
 
 configure(loadStories, module);
