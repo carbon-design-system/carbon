@@ -229,10 +229,10 @@
         // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
         if (this.element.dispatchEvent(eventStart)) {
           this._changeState(false, function () {
-            _this4.element.dispatchEvent(new CustomEvent(_this4.options.eventAfterHidden), {
+            _this4.element.dispatchEvent(new CustomEvent(_this4.options.eventAfterHidden, {
               bubbles: true,
               cancelable: true
-            });
+            }));
             if (callback) {
               callback();
             }

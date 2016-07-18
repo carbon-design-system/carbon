@@ -1,22 +1,22 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', './file-uploader', './fab', './content-switcher', './tabs', './overflow-menu', './modals', './header', './toolbars', './loading', './dropdown', './card', './number-input', './table', 'svgxuse'], factory);
+    define(['exports', './file-uploader', './fab', './content-switcher', './tabs', './overflow-menu', './modals', './header', './toolbars', './loading', './dropdown', './card', './number-input', './table', './detail-page-header', 'svgxuse'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('./file-uploader'), require('./fab'), require('./content-switcher'), require('./tabs'), require('./overflow-menu'), require('./modals'), require('./header'), require('./toolbars'), require('./loading'), require('./dropdown'), require('./card'), require('./number-input'), require('./table'), require('svgxuse'));
+    factory(exports, require('./file-uploader'), require('./fab'), require('./content-switcher'), require('./tabs'), require('./overflow-menu'), require('./modals'), require('./header'), require('./toolbars'), require('./loading'), require('./dropdown'), require('./card'), require('./number-input'), require('./table'), require('./detail-page-header'), require('svgxuse'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.fileUploader, global.fab, global.contentSwitcher, global.tabs, global.overflowMenu, global.modals, global.header, global.toolbars, global.loading, global.dropdown, global.card, global.numberInput, global.table, global.svgxuse);
+    factory(mod.exports, global.fileUploader, global.fab, global.contentSwitcher, global.tabs, global.overflowMenu, global.modals, global.header, global.toolbars, global.loading, global.dropdown, global.card, global.numberInput, global.table, global.detailPageHeader, global.svgxuse);
     global.index = mod.exports;
   }
-})(this, function (exports, _fileUploader, _fab, _contentSwitcher, _tabs, _overflowMenu, _modals, _header, _toolbars, _loading, _dropdown, _card, _numberInput, _table) {
+})(this, function (exports, _fileUploader, _fab, _contentSwitcher, _tabs, _overflowMenu, _modals, _header, _toolbars, _loading, _dropdown, _card, _numberInput, _table, _detailPageHeader) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
+  exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 
   var _fileUploader2 = _interopRequireDefault(_fileUploader);
 
@@ -44,18 +44,19 @@
 
   var _table2 = _interopRequireDefault(_table);
 
+  var _detailPageHeader2 = _interopRequireDefault(_detailPageHeader);
+
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
       default: obj
     };
   }
 
-  // ====================//
-  // Imports and Exports //
-  // ====================//
-
-  // Polyfills
+  // Base Elements & Components
   // -------------
+  // - JavaScript classes for use with components and base-elements.
+  // - The following statements import classes from actual locations to
+  //   be consumed from this file instead of their actual locations.
 
 
   var settings = {};
@@ -69,13 +70,12 @@
    * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
    * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
    */
+  // ====================//
+  // Imports and Exports //
+  // ====================//
 
-
-  // Base Elements & Components
+  // Polyfills
   // -------------
-  // - JavaScript classes for use with components and base-elements.
-  // - The following statements import classes from actual locations to
-  //   be consumed from this file instead of their actual locations.
   exports.
   /**
    * Settings.
@@ -180,6 +180,13 @@
    * @type Table
    */
   Table = _table2.default;
+  exports.
+
+  /**
+   * Detail page header.
+   * @type DetailPageHeader
+   */
+  DetailPageHeader = _detailPageHeader2.default;
 
 
   /**
@@ -207,6 +214,7 @@
       _card2.default.init();
       _numberInput2.default.init();
       _table2.default.init();
+      _detailPageHeader2.default.init();
     }
   };
 
