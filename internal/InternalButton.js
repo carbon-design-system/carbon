@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 
 class InternalButton extends React.Component {
@@ -15,23 +14,18 @@ class InternalButton extends React.Component {
 
   render() {
 
-    const button = <button
-                    className={this.props.className}
-                    disabled={this.props.disabled || false}
-                    tabIndex={this.props.tabIndex}
-                    type={this.props.type || 'button'}>
-                      {this.props.children}
-                  </button>
+    const buttonProps = {
+      className: this.props.className,
+      disabled: this.props.disabled,
+      tabIndex: this.props.tabIndex,
+      type: this.props.type,
+      href: this.props.href,
+      role: this.props.role
+    }
 
-    const link = <a
-                  className={this.props.className}
-                  href={this.props.href}
-                  role={this.props.role || 'button'}
-                  tabIndex={this.props.tabIndex}>
-                    {this.props.children}
-                </a>
-
-    const HTML = (this.props.href) ? link : button;
+    const HTML = (this.props.href)
+      ? <a {...buttonProps}>{this.props.children}</a>
+      : <button {...buttonProps}>{this.props.children}</button>;
 
     return HTML;
   }
