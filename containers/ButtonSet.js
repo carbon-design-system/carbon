@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/base-elements/buttons/button--sets.scss';
 
 
-class ButtonContainer extends React.Component {
+class ButtonSet extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -16,16 +16,16 @@ class ButtonContainer extends React.Component {
 
   render() {
 
-    const buttonContainerClasses = classNames({
+    const buttonSetClasses = classNames({
       'bx--sets-of-buttons': true
     });
 
     return (
-      <div className={buttonContainerClasses}>
+      <div className={buttonSetClasses}>
         {this.props.children}
       </div>
     )
   }
 }
 
-export default ButtonContainer;
+export default ButtonSet;
