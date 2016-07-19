@@ -8,15 +8,6 @@ class PrimaryButton extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     className: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    href: React.PropTypes.string,
-    tabIndex: React.PropTypes.number,
-    type: React.PropTypes.string
-  }
-
-  static defaultProps = {
-    className: 'bx--btn',
-    tabIndex: 0
   }
 
   render() {
@@ -24,10 +15,12 @@ class PrimaryButton extends React.Component {
     const buttonClasses = classNames({
       'bx--btn': true,
       [this.props.className]: this.props.className
-    })
+    });
+
+    console.log(this.props);
 
     return (
-      <InternalButton {...this.props} className={buttonClasses} />
+      <InternalButton {...this.props} className={buttonClasses}/>
     )
   }
 }

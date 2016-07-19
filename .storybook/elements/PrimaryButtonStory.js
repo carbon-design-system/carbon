@@ -4,6 +4,15 @@ import { storiesOf, action } from '@kadira/storybook';
 import AppContainer from '../../containers/AppContainer';
 import PrimaryButton from '../../elements/PrimaryButton';
 
+const buttonEvents = {
+  onBlur: () => { console.log('blur')},
+  onClick: () => { console.log('click')},
+  onFocus: () => { console.log('focus')},
+  onMouseEnter: () => { console.log('mouseEnter')},
+  onMouseDown: () => { console.log('mouseDown')},
+  className: 'some-class'
+}
+
 storiesOf('PrimaryButton', module)
   .addDecorator((story) => (
     <AppContainer>
@@ -11,11 +20,13 @@ storiesOf('PrimaryButton', module)
     </AppContainer>
   ))
   .add('button', () => (
-    <PrimaryButton className="user-prodvided-class">Primary Button</PrimaryButton>
+    <PrimaryButton {...buttonEvents} className="some-class">
+      Primary Button
+    </PrimaryButton>
   ))
   .add('link', () => (
-    <PrimaryButton href="#" className="link">Primary Link</PrimaryButton>
+    <PrimaryButton {...buttonEvents} href="#" className="some-class">Primary Link</PrimaryButton>
   ))
   .add('disabled', () => (
-    <PrimaryButton disabled={true}>Disabled</PrimaryButton>
+    <PrimaryButton {...buttonEvents} disabled={true}>Disabled</PrimaryButton>
   ))
