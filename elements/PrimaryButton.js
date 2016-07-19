@@ -17,8 +17,6 @@ class PrimaryButton extends React.Component {
       [this.props.className]: this.props.className
     });
 
-    console.log(this.props);
-
     return (
       <InternalButton {...this.props} className={buttonClasses}/>
     )
