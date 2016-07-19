@@ -68,6 +68,10 @@ class InternalButton extends React.Component {
     this.props.onMouseDown(evt);
   }
 
+  handleMouseUp = (evt) => {
+    this.props.onMouseUp(evt);
+  }
+
 
   render() {
 
@@ -84,6 +88,8 @@ class InternalButton extends React.Component {
       onKeyDown: this.handleKeyDown,
       onMouseEnter: this.handleMouseEnter,
       onMouseDown: this.handleMouseDown,
+      onMouseLeave: this.handleMouseLeave,
+      onMouseUp: this.handleMouseUp,
     }
 
     const HTML = (this.props.href)

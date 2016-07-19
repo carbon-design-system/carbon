@@ -8,8 +8,10 @@ const buttonEvents = {
   onBlur: () => { console.log('blur')},
   onClick: () => { console.log('click')},
   onFocus: () => { console.log('focus')},
-  onMouseEnter: () => { console.log('mouseEnter')},
   onMouseDown: () => { console.log('mouseDown')},
+  onMouseEnter: () => { console.log('mouseEnter')},
+  onMouseLeave: () => { console.log('mouseLeave')},
+  onMouseUp: () => { console.log('mouseUp')},
   className: 'some-class'
 }
 
