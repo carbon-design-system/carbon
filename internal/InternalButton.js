@@ -3,15 +3,6 @@ import React from 'react';
 
 class InternalButton extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isKeyboardFocused: false
-    }
-  }
-
-
   static propTypes = {
     children: React.PropTypes.node,
     className: React.PropTypes.string,
@@ -90,6 +81,7 @@ class InternalButton extends React.Component {
       onBlur: this.handleBlur,
       onClick: this.handleClick,
       onFocus: this.handleFocus,
+      onKeyDown: this.handleKeyDown,
       onMouseEnter: this.handleMouseEnter,
       onMouseDown: this.handleMouseDown,
     }
