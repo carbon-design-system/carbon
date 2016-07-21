@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import InternalButton from '../internal/InternalButton';
-import '@console/bluemix-components/consumables/scss/base-elements/buttons/button--primary.scss';
+import '@console/bluemix-components/consumables/scss/base-elements/buttons/button--danger.scss';
 
-class PrimaryButton extends React.Component {
+class SecondaryButton extends React.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -13,7 +13,7 @@ class PrimaryButton extends React.Component {
   render() {
 
     const buttonClasses = classNames({
-      'bx--btn': true,
+      'bx--btn--danger': true,
       [this.props.className]: this.props.className
     });
 
@@ -23,4 +23,4 @@ class PrimaryButton extends React.Component {
   }
 }
 
-export default PrimaryButton;
+export default SecondaryButton;
