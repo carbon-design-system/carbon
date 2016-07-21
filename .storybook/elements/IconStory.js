@@ -15,5 +15,5 @@ storiesOf('Icon', module)
     </AppContainer>
   ))
   .add('default', () => (
-    <Icon name="copy-code" / >
+    <Icon name="search" / >
   ))

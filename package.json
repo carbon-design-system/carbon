@@ -12,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "@console/bluemix-components": "6.6.0",
+    "@console/bluemix-icons": "git+ssh://git@github.ibm.com:Bluemix/bluemix-icons.git#gulp-tasks",
     "classnames": "2.2.5",
+    "json-loader": "0.5.4",
     "react": "15.2.1"
   },
   "devDependencies": {
