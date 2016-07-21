@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/base-elements/toggle/toggle.scss';
 
 
-export default class Toggle extends React.Component {
+class Toggle extends React.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -73,7 +73,6 @@ export default class Toggle extends React.Component {
   render() {
 
     const toggleProps = {
-        className: this.props.className,
         disabled: this.props.disabled,
         tabIndex: this.props.tabIndex,
         type: this.props.type || 'checkbox',
@@ -96,9 +95,7 @@ export default class Toggle extends React.Component {
     const toggle = <div className="toggleWrapper">
                         <input
                         className={toggleClasses}
-                        disabled={this.props.disabled || false}
-                        tabIndex={this.props.tabIndex}
-                        type={this.props.type || 'checkbox'} id={this.props.id} />
+                        {...toggleProps} />
                         <label
                         className="bx--toggle__label"
                         htmlFor={this.props.id}>
@@ -113,3 +110,5 @@ export default class Toggle extends React.Component {
     return toggle;
   }
 }
+
+export default Toggle;

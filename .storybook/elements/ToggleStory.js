@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { storiesOf, action } from '@kadira/storybook';
+import AppContainer from '../../containers/AppContainer';
 import Toggle from '../../elements/Toggle';
 
 const toggleEvents = {
@@ -11,12 +12,18 @@ const toggleEvents = {
     onMouseEnter: () => { console.log('mouseEnter')},
     onMouseLeave: () => { console.log('mouseLeave')},
     onMouseUp: () => { console.log('mouseUp')},
+    className: 'some-class'
 }
 
 storiesOf('Toggle', module)
+  .addDecorator((story) => (
+      <AppContainer>
+      {story()}
+      </AppContainer>
+  ))
   .add('toggle', () => (
-    <Toggle {...toggleEvents} className="some-class"></Toggle>
+      <Toggle {...toggleEvents} className="some-class"></Toggle>
   ))
   .add('disabled', () => (
-    <Toggle {...toggleEvents} disabled={true}></Toggle>
+      <Toggle {...toggleEvents} disabled={true}></Toggle>
   ))
