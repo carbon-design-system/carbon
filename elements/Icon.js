@@ -36,14 +36,8 @@ class Icon extends Component {
   }
 
   render() {
-    // const icon = this._findIcon(this.props.name);
     const paths = this._getPaths(this.props.name);
     const circles = this._getCircles(this.props.name);
-
-    console.log(circles);
-    // const groups = buildGroup(icon);
-    // const paths = buildPath(icon);
-    // .. processing here
 
     const iconProps = {
       name: this.props.name,
@@ -57,6 +51,7 @@ class Icon extends Component {
         xmlns="http://www.w3.org/2000/svg"
       >
         { paths }
+        { circles }
       </svg>
     );
   }
