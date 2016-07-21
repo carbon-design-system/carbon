@@ -93,18 +93,11 @@ class Toggle extends React.Component {
     });
 
     const toggle = <div className="toggleWrapper">
-                        <input
-                        className={toggleClasses}
-                        {...toggleProps} />
-                        <label
-                        className="bx--toggle__label"
-                        htmlFor={this.props.id}>
-                        <span
-                        className="bx--toggle__text--left">Off</span>
-                        <span
-                        className="bx--toggle__appearance"></span>
-                        <span
-                        className="bx--toggle__text--right">On</span>
+                        <input className={toggleClasses} {...toggleProps} />
+                        <label className="bx--toggle__label" htmlFor={toggleProps.id}>
+                        <span className="bx--toggle__text--left">Off</span>
+                        <span className="bx--toggle__appearance"></span>
+                        <span className="bx--toggle__text--right">On</span>
                         </label>
                     </div>
     return toggle;
