@@ -51,6 +51,10 @@
     }
   }
 
+  &:active {
+    background-color: darken($bg, 20%);
+  }
+
   @include light-ui {
     background-color: $color__blue-51;
     color: $color__white;
@@ -58,6 +62,10 @@
     &:hover,
     &:focus {
       background-color: $color__blue-40;
+    }
+
+    &:active {
+      background-color: darken($color__blue-51, 20%);
     }
   }
 }
@@ -80,6 +88,10 @@
       color: $text;
       background-color: transparent;
     }
+  }
+
+  &:active {
+    background-color: darken($hover-bg, 20%);
   }
 
   @include light-ui {
