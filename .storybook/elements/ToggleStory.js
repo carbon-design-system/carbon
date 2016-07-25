@@ -22,7 +22,7 @@ storiesOf('Toggle', module)
       </AppContainer>
   ))
   .add('toggle', () => (
-      <Toggle {...toggleEvents} className="some-class"></Toggle>
+      <Toggle {...toggleEvents} className="some-class" id="toggle-1"></Toggle>
   ))
   .add('disabled', () => (
       <Toggle {...toggleEvents} disabled={true}></Toggle>

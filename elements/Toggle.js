@@ -26,7 +26,6 @@ class Toggle extends React.Component {
 
   static defaultProps = {
     className: 'bx--toggle',
-    id: 'toggle-1',
     tabIndex: 0,
     onBlur: () => {},
     onClick: () => {},
