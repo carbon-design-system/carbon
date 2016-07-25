@@ -22,41 +22,83 @@ class Icon extends Component {
   }
 
   /**
-   * Returns a value from "svgData" object
+   * Returns "svgData" Object
    * @param {string} iconName - "name" property of icon
-   * @param {Object} data - JSON Object, value returned from this._findIcon
    * @example
-   * // Returns Array of svgData
-   * this._getSvgData('copy-code', 'paths');
+   * // Returns svgData Object for given iconName
+   * this._getSvgData('copy-code');
    */
-  _getSvgData = (iconName, data) => {
-    const svgData = this._findIcon(iconName).svgData;
-    if (svgData[data] === '' || undefined) {
-      return false
-    }
-
-    return svgData[data];
+  _getSvgData = (iconName) => {
+    return this._findIcon(iconName).svgData;
   }
 
-  _getPaths = (iconName) => {
-    const paths = this._getSvgData(iconName, 'paths');
+  /**
+   * Returns Elements/Nodes for SVG
+   * @param {Object} svgData - JSON Object for an SVG icon
+   * @example
+   * // Returns SVG elements
+   * const svgData = this._getSvgData('copy-code');
+   * this._getSvgContent(svgData);
+   */
+  _getSvgContent = (svgData) => {
+    const svgElements = Object.keys(svgData)
+      .filter(key => {
+        return svgData[key]
+      })
+      .map(svgProp => {
+        const data = svgData[svgProp];
 
-    return paths.map(path => {
-      return <path d={path.d} />
-    });
-  }
+        if (svgProp === 'circles') {
+          const circleProps = {
+            cx: data.cx,
+            cy: data.cy,
+            cr: data.cr,
+          };
 
-  _getCircles = (iconName) => {
-    const circles = this._getSvgData(iconName, 'circles');
+          return <circle {...circleProps} />
+        }
 
-    return circles.map(circle => {
-      return <circle cx={circle.cx} cy={circle.cy} r={circle.r} />
-    });
+        else if (svgProp === 'paths') {
+          return data.map(path => {
+            return <path d={path.d} />
+          });
+        }
+
+        else if (svgProp === 'polygons') {
+          return data.map(pointsData => {
+            return <polygon points={poinstData.points}></polygon>
+          })
+        }
+
+        else if (svgProp === 'polylines') {
+          return data.map(pointsData => {
+            return <polyline points={poinstData.points}></polyline>
+          })
+        }
+
+        else if (svgProp === 'rects') {
+
+          const rectProps = {
+            width: data.width,
+            height: data.height,
+            x: data.x,
+            y: data.y,
+            rx: data.rx,
+            ry: data.ry,
+          };
+
+          return <rect {...rectProps}></rect>
+        }
+      });
+
+
+    return svgElements;
   }
 
   render() {
-    const paths = this._getPaths(this.props.name);
-    const circles = this._getCircles(this.props.name);
+
+    const svgData = this._getSvgData(this.props.name);
+    const svgContent = this._getSvgContent(svgData);
 
     const iconProps = {
       name: this.props.name,
@@ -65,12 +107,8 @@ class Icon extends Component {
     }
 
     return (
-      <svg
-        {...iconProps}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        { paths }
-        { circles }
+      <svg {...iconProps} xmlns="http://www.w3.org/2000/svg">
+        {svgContent}
       </svg>
     );
   }
