@@ -4,10 +4,6 @@ import { storiesOf, action } from '@kadira/storybook';
 import Icon from '../../elements/Icon';
 import AppContainer from '../../containers/AppContainer';
 
-const iconProps = {
-  className: 'some-class',
-}
-
 storiesOf('Icon', module)
   .addDecorator((story) => (
     <AppContainer>
@@ -15,5 +11,10 @@ storiesOf('Icon', module)
     </AppContainer>
   ))
   .add('default', () => (
-    <Icon name="search" fill="red" / >
+    <Icon
+      name="search"
+      fill="red"
+      title="search"
+      description="search microservices"
+    />
   ))

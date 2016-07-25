@@ -49,13 +49,15 @@ class Icon extends Component {
         const data = svgData[svgProp];
 
         if (svgProp === 'circles') {
-          const circleProps = {
-            cx: data.cx,
-            cy: data.cy,
-            cr: data.cr,
-          };
+          return data.map(circle => {
+            const circleProps = {
+              cx: circle.cx,
+              cy: circle.cy,
+              r: circle.r,
+            };
 
-          return <circle {...circleProps} />
+            return <circle {...circleProps} />
+          });
         }
 
         else if (svgProp === 'paths') {
@@ -97,17 +99,22 @@ class Icon extends Component {
 
   render() {
 
+    // SVG Content and Data for Render
     const svgData = this._getSvgData(this.props.name);
     const svgContent = this._getSvgContent(svgData);
 
+    // Props
+    const idProp = this._findIcon(this.props.name).id;
     const iconProps = {
+      className: this.props.className,
       name: this.props.name,
       fill: this.props.fill,
       fillRule: this.props.fillRule || 'evenodd',
     }
 
     return (
-      <svg {...iconProps} xmlns="http://www.w3.org/2000/svg">
+      <svg {...iconProps} aria-labelledby={idProp}>
+        <title id={idProp}>{this.props.description}</title>
         {svgContent}
       </svg>
     );
