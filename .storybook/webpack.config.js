@@ -9,7 +9,7 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loaders: ['json']
+        loader: 'json'
       }
     ]
   }
