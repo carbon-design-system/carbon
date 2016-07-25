@@ -14,7 +14,6 @@ storiesOf('Icon', module)
     <Icon
       name="search"
       fill="red"
-      title="search"
       description="search microservices"
     />
   ))
