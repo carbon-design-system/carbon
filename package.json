@@ -10,6 +10,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb"
+  },
   "dependencies": {
     "@console/bluemix-components": "6.6.0",
     "classnames": "2.2.5",
@@ -17,7 +21,13 @@
   },
   "devDependencies": {
     "@kadira/storybook": "1.38.0",
+    "babel-eslint": "^6.1.2",
     "css-loader": "0.23.1",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^1.5.5",
+    "eslint-plugin-react": "^5.2.2",
     "node-sass": "3.8.0",
     "sass-loader": "4.0.0",
     "style-loader": "0.13.1"
