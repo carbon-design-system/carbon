@@ -39,7 +39,7 @@ app.use(express.static('consumables'));
 const getContent = (glob) => {
   return globby(glob)
     .then(paths => {
-      return paths
+      return paths.length === 0 ? undefined : paths
         .map(file => {
           return fs.readFileSync(file, { 'encoding': 'utf8' });
         })
@@ -85,6 +85,10 @@ app.get('/', (req, res) => {
       detailHeader: results[1],
       html: results[2]
     });
+  })
+  .catch((error) => {
+    console.error(error.stack); // eslint-disable-line no-console
+    res.status(500).end();
   });
 });
 
@@ -93,10 +97,18 @@ app.get('/components/:component', (req, res) => {
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
-      res.render('demo-all', {
-        html: results[0],
-        links: results[1]
-      });
+      if (typeof results[0] === 'undefined') {
+        res.status(404).end();
+      } else {
+        res.render('demo-all', {
+          html: results[0],
+          links: results[1]
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error.stack); // eslint-disable-line no-console
+      res.status(500).end();
     });
 });
 
@@ -105,10 +117,18 @@ app.get('/base-elements/:component', (req, res) => {
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
-      res.render('demo-all', {
-        html: results[0],
-        links: results[1]
-      });
+      if (typeof results[0] === 'undefined') {
+        res.status(404).end();
+      } else {
+        res.render('demo-all', {
+          html: results[0],
+          links: results[1]
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error.stack); // eslint-disable-line no-console
+      res.status(500).end();
     });
 });
 
@@ -117,10 +137,18 @@ app.get('/global/:component', (req, res) => {
 
   Promise.all([getContent(glob), allLinks])
     .then(results => {
-      res.render('demo-all', {
-        html: results[0],
-        links: results[1]
-      });
+      if (typeof results[0] === 'undefined') {
+        res.status(404).end();
+      } else {
+        res.render('demo-all', {
+          html: results[0],
+          links: results[1]
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error.stack); // eslint-disable-line no-console
+      res.status(500).end();
     });
 });
 
