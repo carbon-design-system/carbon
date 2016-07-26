@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "eslintConfig": {
+    "parser": "babel-eslint",
     "extends": "airbnb"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@kadira/storybook": "1.38.0",
+    "babel-eslint": "^6.1.2",
     "css-loader": "0.23.1",
     "eslint": "^2.13.1",
     "eslint-config-airbnb": "^9.0.1",
