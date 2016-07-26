@@ -22,6 +22,7 @@
     "react": "15.2.1"
   },
   "devDependencies": {
+    "@kadira/react-storybook-decorator-centered": "^1.0.0",
     "@kadira/storybook": "1.38.0",
     "babel-eslint": "^6.1.2",
     "css-loader": "0.23.1",
