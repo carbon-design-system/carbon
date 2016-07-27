@@ -72,7 +72,6 @@ class InternalButton extends React.Component {
     this.props.onMouseUp(evt);
   }
 
-
   render() {
 
     const buttonProps = {

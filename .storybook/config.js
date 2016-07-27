@@ -9,6 +9,6 @@ function loadStories() {
   requireAll(require.context('./', true, /Story\.js$/));
 }
 
-addDecorator(centered);
+// addDecorator(centered);
 
 configure(loadStories, module);
