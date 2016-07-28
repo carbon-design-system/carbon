@@ -79,7 +79,8 @@
     "type": "git"
   },
   "files": [
-    "consumables/**/*"
+    "consumables/**/*",
+    "bower.json"
   ],
   "keywords": [
     "bluemix",

@@ -11,6 +11,7 @@
   "license": "MIT",
   "ignore": [
     "**/*",
-    "!consumables/**/*"
+    "!consumables/**/*",
+    "!package.json"
   ]
 }
