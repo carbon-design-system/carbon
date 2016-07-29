@@ -13,9 +13,9 @@ class Icon extends Component {
    * @param {Object} [iconsObj=icons] - JSON Array of Objects
    * @example
    * // Returns a single icon Object
-   * this._findIcon('copy-code', icons.json);
+   * this.findIcon('copy-code', icons.json);
    */
-  _findIcon = (iconName, iconsObj = icons) => {
+  findIcon = (iconName, iconsObj = icons) => {
     return iconsObj.find(icon => {
       return (icon.name === iconName) ? icon : false;
     });
@@ -26,10 +26,10 @@ class Icon extends Component {
    * @param {string} iconName - "name" property of icon
    * @example
    * // Returns svgData Object for given iconName
-   * this._getSvgData('copy-code');
+   * this.getSvgData('copy-code');
    */
-  _getSvgData = (iconName) => {
-    return this._findIcon(iconName).svgData;
+  getSvgData = (iconName) => {
+    return this.findIcon(iconName).svgData;
   }
 
   /**
@@ -37,10 +37,10 @@ class Icon extends Component {
    * @param {Object} svgData - JSON Object for an SVG icon
    * @example
    * // Returns SVG elements
-   * const svgData = this._getSvgData('copy-code');
-   * this._getSvgContent(svgData);
+   * const svgData = this.getSvgData('copy-code');
+   * this.getSvgContent(svgData);
    */
-  _getSvgContent = (svgData) => {
+  getSvgContent = (svgData) => {
     const svgElements = Object.keys(svgData)
       .filter(key => {
         return svgData[key]
@@ -100,16 +100,19 @@ class Icon extends Component {
   render() {
 
     // SVG Content and Data for Render
-    const svgData = this._getSvgData(this.props.name);
-    const svgContent = this._getSvgContent(svgData);
+    const svgData = this.getSvgData(this.props.name);
+    const svgContent = this.getSvgContent(svgData);
 
     // Props
-    const idProp = this._findIcon(this.props.name).id;
+    const idProp = this.findIcon(this.props.name).id;
     const iconProps = {
       className: this.props.className,
-      name: this.props.name,
       fill: this.props.fill,
       fillRule: this.props.fillRule || 'evenodd',
+      height: this.props.height || '32px',
+      name: this.props.name,
+      viewBox: this.props.viewBox || '0 0 32 32',
+      width: this.props.width || '32px',
     }
 
     return (
