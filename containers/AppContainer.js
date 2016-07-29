@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/global/global.scss';
 
-
 export default class AppContainer extends React.Component {
   constructor() {
     super();

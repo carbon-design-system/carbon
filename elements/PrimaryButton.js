@@ -11,15 +11,14 @@ class PrimaryButton extends React.Component {
   }
 
   render() {
-
     const buttonClasses = classNames({
       'bx--btn': true,
-      [this.props.className]: this.props.className
+      [this.props.className]: this.props.className,
     });
 
     return (
-      <InternalButton {...this.props} className={buttonClasses}/>
-    )
+      <InternalButton {...this.props} className={buttonClasses} />
+    );
   }
 }
 

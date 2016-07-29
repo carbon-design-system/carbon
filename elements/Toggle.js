@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/base-elements/toggle/toggle.scss';
 
-
 class Toggle extends React.Component {
 
   static propTypes = {
@@ -21,7 +20,7 @@ class Toggle extends React.Component {
     onMouseDown: React.PropTypes.func,
     onMouseEnter: React.PropTypes.func,
     onMouseLeave: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func
+    onMouseUp: React.PropTypes.func,
   }
 
   static defaultProps = {
@@ -36,69 +35,69 @@ class Toggle extends React.Component {
     onMouseDown: () => {},
     onMouseEnter: () => {},
     onMouseLeave: () => {},
-    onMouseUp: () => {}
+    onMouseUp: () => {},
   }
 
   handleBlur = (evt) => {
-      this.props.onBlur(evt);
+    this.props.onBlur(evt);
   }
 
   handleClick = (evt) => {
-      if (!this.props.disabled) {
-          this.props.onClick(evt);
-      }
+    if (!this.props.disabled) {
+      this.props.onClick(evt);
+    }
   }
 
   handleFocus = (evt) => {
-      this.props.onFocus(evt);
+    this.props.onFocus(evt);
   }
 
   handleMouseEnter = (evt) => {
-      this.props.onMouseEnter(evt);
+    this.props.onMouseEnter(evt);
   }
 
   handleMouseLeave = (evt) => {
-      this.props.onMouseLeave(evt);
+    this.props.onMouseLeave(evt);
   }
 
   handleMouseDown = (evt) => {
-      this.props.onMouseDown(evt);
+    this.props.onMouseDown(evt);
   }
 
   handleMouseUp = (evt) => {
-      this.props.onMouseUp(evt);
+    this.props.onMouseUp(evt);
   }
 
   render() {
-
     const toggleProps = {
-        disabled: this.props.disabled,
-        tabIndex: this.props.tabIndex,
-        type: this.props.type || 'checkbox',
-        id: this.props.id,
-        onBlur: this.handleBlur,
-        onClick: this.handleClick,
-        onFocus: this.handleFocus,
-        onKeyDown: this.handleKeyDown,
-        onMouseEnter: this.handleMouseEnter,
-        onMouseDown: this.handleMouseDown,
-        onMouseLeave: this.handleMouseLeave,
-        onMouseUp: this.handleMouseUp,
-    }
+      disabled: this.props.disabled,
+      tabIndex: this.props.tabIndex,
+      type: this.props.type || 'checkbox',
+      id: this.props.id,
+      onBlur: this.handleBlur,
+      onClick: this.handleClick,
+      onFocus: this.handleFocus,
+      onKeyDown: this.handleKeyDown,
+      onMouseEnter: this.handleMouseEnter,
+      onMouseDown: this.handleMouseDown,
+      onMouseLeave: this.handleMouseLeave,
+      onMouseUp: this.handleMouseUp,
+    };
 
     const toggleClasses = classNames({
       'bx--toggle': true,
-      [this.props.className]: this.props.className
+      [this.props.className]: this.props.className,
     });
 
-    const toggle = <div className="toggleWrapper">
-                        <input className={toggleClasses} {...toggleProps} />
-                        <label className="bx--toggle__label" htmlFor={toggleProps.id}>
-                        <span className="bx--toggle__text--left">Off</span>
-                        <span className="bx--toggle__appearance"></span>
-                        <span className="bx--toggle__text--right">On</span>
-                        </label>
-                    </div>
+    const toggle =
+    (<div className="toggleWrapper">
+        <input className={toggleClasses} {...toggleProps} />
+        <label className="bx--toggle__label" htmlFor={toggleProps.id}>
+        <span className="bx--toggle__text--left">Off</span>
+        <span className="bx--toggle__appearance"></span>
+        <span className="bx--toggle__text--right">On</span>
+        </label>
+      </div>);
     return toggle;
   }
 }

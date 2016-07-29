@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class InternalButton extends React.Component {
 
   static propTypes = {
