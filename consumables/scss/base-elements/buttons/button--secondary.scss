@@ -18,6 +18,7 @@
 @import '../../import-once';
 
 @include exports('button--secondary') {
+
   // Secondary Buttons
   .bx--btn--secondary {
     @include btn--secondary;
@@ -26,5 +27,22 @@
   a.bx--btn--secondary {
     padding: .7rem 1rem .75rem;
     vertical-align: baseline;
+  }
+
+  // With Icons
+  .bx--btn--right-icon__icon {
+    vertical-align: middle;
+    display: inline;
+    width: rem(16px);
+    height: rem(16px);
+    margin-left: .5rem;
+  }
+
+  .bx--btn--right-icon__use {
+    fill: currentColor;
+  }
+
+  .bx--global-light-ui .bx--btn--right-icon__use {
+    fill: currentColor;
   }
 }
