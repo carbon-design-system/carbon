@@ -34,9 +34,10 @@
 
     &:checked + &__label &__appearance {
       // Styled Radio - checked - background
+      border-color: $color__blue-30;
       display: flex;
       align-items: center;
-      border-color: $color__blue-30;
+      z-index: z('hidden');
 
       &:before {
         // Styled Radio - checked - dot
