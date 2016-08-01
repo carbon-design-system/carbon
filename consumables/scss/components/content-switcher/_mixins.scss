@@ -1,4 +1,8 @@
-@mixin content-switcher__btn($font-weight: 200, $bg-color: none, $text-color: $color__blue-30) {
+@mixin content-switcher__btn(
+  $font-weight: 200,
+  $bg-color: none,
+  $text-color: $color__blue-30
+) {
   @include font-size('14');
   background-color: $bg-color;
   color: $text-color;

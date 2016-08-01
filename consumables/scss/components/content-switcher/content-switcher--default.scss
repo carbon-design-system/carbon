@@ -1,0 +1,63 @@
+//-------------------------
+// Content Switcher Default
+//-------------------------
+
+// Dependencies
+@import '../../global/global';
+
+// Local
+@import 'vars';
+@import 'extends';
+@import 'mixins';
+
+// import-once
+@import '../../import-once';
+
+@include exports('content-switcher--default') {
+  .bx--content-switcher {
+    display: flex;
+
+    // Default (use with <button> and <a>)
+    &__btn {
+      @include content-switcher__btn(400, $color__navy-gray-3);
+      text-decoration: none;
+
+      @include light-ui {
+        @include content-switcher__btn(400, $color__white, $color__blue-51);
+        border: 1px solid $color__blue-51;
+
+        &:hover,
+        &:focus {
+          background-color: $color__blue-51;
+          color: $color__white;
+          font-weight: 400;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        cursor: pointer;
+      }
+
+      &:focus {
+        @include focus-outline;
+      }
+
+      &.bx--content-switcher--selected {
+        @include content-switcher__btn(400, $color__blue-30, $color__blue-90);
+
+        @include light-ui {
+          @include content-switcher__btn(400, $color__blue-51, $color__white);
+          border: 1px solid $color__blue-51;
+
+          &:hover,
+          &:focus {
+            background-color: $color__blue-51;
+            color: $color__white;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}
