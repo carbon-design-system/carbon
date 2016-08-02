@@ -1,4 +1,5 @@
 import '../polyfills/array-from';
+import '../polyfills/custom-event';
 
 export default class NumberInput {
   /**
@@ -69,7 +70,15 @@ export default class NumberInput {
       } else {
         numberInput.stepDown();
       }
+    } else {
+      return;
     }
+
+    // Programmatic change in value (including `stepUp()`/`stepDown()`) won't fire change event
+    numberInput.dispatchEvent(new CustomEvent('change', {
+      bubbles: true,
+      cancelable: false,
+    }));
   }
 
   release() {

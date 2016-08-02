@@ -1,5 +1,8 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import '../../consumables/js/polyfills/custom-event';
+import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+import EventManager from '../utils/event-manager';
+import promiseTryCatcher from '../utils/promise-try-catcher';
 import NumberInput from '../../consumables/js/es2015/number-input';
 
 describe('Test Number Input', function () {
@@ -23,6 +26,7 @@ describe('Test Number Input', function () {
     let upArrowNode;
     let downArrowNode;
     let inputNode;
+    const events = new EventManager();
 
     before(function () {
       element = document.createElement('div');
@@ -44,13 +48,27 @@ describe('Test Number Input', function () {
     });
 
     it(`Should increase the value`, function () {
-      upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(inputNode.value).to.equal('3');
+      return new Promise((resolve, reject) => {
+        events.on(document.body, 'change', promiseTryCatcher((e) => {
+          expect(e.cancelable).to.be.false;
+          expect(inputNode.value).to.equal('3');
+        }, resolve, reject));
+        upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      });
     });
 
     it(`Should decrease the value`, function () {
-      downArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(inputNode.value).to.equal('1');
+      return new Promise((resolve, reject) => {
+        events.on(document.body, 'change', promiseTryCatcher((e) => {
+          expect(e.cancelable).to.be.false;
+          expect(inputNode.value).to.equal('1');
+        }, resolve, reject));
+        downArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      });
+    });
+
+    afterEach(function () {
+      events.reset();
     });
 
     after(function () {
