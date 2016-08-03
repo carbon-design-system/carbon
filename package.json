@@ -24,6 +24,7 @@
   "devDependencies": {
     "@kadira/react-storybook-decorator-centered": "^1.0.0",
     "@kadira/storybook": "1.38.0",
+    "autoprefixer": "^6.3.7",
     "babel-eslint": "^6.1.2",
     "css-loader": "0.23.1",
     "eslint": "^2.13.1",
@@ -32,6 +33,7 @@
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
     "node-sass": "3.8.0",
+    "postcss-loader": "^0.9.1",
     "sass-loader": "4.0.0",
     "style-loader": "0.13.1",
     "warning": "3.0.0"
