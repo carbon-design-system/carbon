@@ -1,104 +1,96 @@
 import React from 'react';
 import classNames from 'classnames';
+import InternalSwitch from '../internal/InternalSwitch';
 import '@console/bluemix-components/consumables/scss/base-elements/toggle/toggle.scss';
 
 class Toggle extends React.Component {
 
   static propTypes = {
+    defaultToggled: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
     children: React.PropTypes.node,
     className: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    tabIndex: React.PropTypes.number,
-    type: React.PropTypes.string,
+    onToggle: React.PropTypes.func,
     id: React.PropTypes.string,
-    onBlur: React.PropTypes.func,
-    onClick: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
-    onKeyUp: React.PropTypes.func,
-    onKeyboardFocus: React.PropTypes.func,
-    onMouseDown: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func,
+    toggled: React.PropTypes.bool,
   }
 
   static defaultProps = {
-    className: 'bx--toggle',
-    tabIndex: 0,
-    onBlur: () => {},
-    onClick: () => {},
-    onFocus: () => {},
-    onKeyDown: () => {},
-    onKeyUp: () => {},
-    onKeyboardFocus: () => {},
-    onMouseDown: () => {},
-    onMouseEnter: () => {},
-    onMouseLeave: () => {},
-    onMouseUp: () => {},
+    defaultToggled: false,
+    disabled: false,
   }
 
-  handleBlur = (evt) => {
-    this.props.onBlur(evt);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      switched: (this.props.toggled || this.props.defaultToggled),
+    };
   }
 
-  handleClick = (evt) => {
-    if (!this.props.disabled) {
-      this.props.onClick(evt);
+  setToggled(newToggledValue) {
+    this.refs.internalSwitch.setSwitched(newToggledValue);
+  }
+
+  isToggled() {
+    return this.refs.internalSwitch.isSwitched();
+  }
+
+  handleStateChange = (newSwitched) => {
+    this.setState({
+      switched: newSwitched,
+    });
+  };
+
+  handleToggle = (event, isInputChecked) => {
+    if (this.props.onToggle) {
+      this.props.onToggle(event, isInputChecked);
     }
-  }
-
-  handleFocus = (evt) => {
-    this.props.onFocus(evt);
-  }
-
-  handleMouseEnter = (evt) => {
-    this.props.onMouseEnter(evt);
-  }
-
-  handleMouseLeave = (evt) => {
-    this.props.onMouseLeave(evt);
-  }
-
-  handleMouseDown = (evt) => {
-    this.props.onMouseDown(evt);
-  }
-
-  handleMouseUp = (evt) => {
-    this.props.onMouseUp(evt);
-  }
+  };
 
   render() {
-    const toggleProps = {
-      disabled: this.props.disabled,
-      tabIndex: this.props.tabIndex,
-      type: this.props.type || 'checkbox',
-      id: this.props.id,
-      onBlur: this.handleBlur,
-      onClick: this.handleClick,
-      onFocus: this.handleFocus,
-      onKeyDown: this.handleKeyDown,
-      onMouseEnter: this.handleMouseEnter,
-      onMouseDown: this.handleMouseDown,
-      onMouseLeave: this.handleMouseLeave,
-      onMouseUp: this.handleMouseUp,
-    };
+    const {
+      defaultToggled,
+      onToggle, // eslint-disable-line no-unused-vars
+      toggled,
+      id,
+      ...other,
+    } = this.props;
 
     const toggleClasses = classNames({
       'bx--toggle': true,
       [this.props.className]: this.props.className,
     });
 
-    const toggle =
-    (<div className="toggleWrapper">
-        <input className={toggleClasses} {...toggleProps} />
-        <label className="bx--toggle__label" htmlFor={toggleProps.id}>
-        <span className="bx--toggle__text--left">Off</span>
-        <span className="bx--toggle__appearance"></span>
-        <span className="bx--toggle__text--right">On</span>
+    const internalSwitchProps = {
+      ref: 'internalSwitch',
+      inputType: 'checkbox',
+      switched: this.state.switched,
+      onSwitch: this.handleToggle,
+      onParentShouldUpdate: this.handleStateChange,
+    };
+
+    if (this.props.hasOwnProperty('toggled')) {
+      internalSwitchProps.checked = toggled;
+    } else if (this.props.hasOwnProperty('defaultToggled')) {
+      internalSwitchProps.defaultChecked = defaultToggled;
+    }
+
+    return (
+      <div className="toggleWrapper">
+        <InternalSwitch
+          {...other}
+          {...internalSwitchProps}
+          className={toggleClasses}
+          id={id}
+        />
+        <label className="bx--toggle__label" htmlFor={id}>
+          <span className="bx--toggle__text--left">Off</span>
+          <span className="bx--toggle__appearance"></span>
+          <span className="bx--toggle__text--right">On</span>
         </label>
-      </div>);
-    return toggle;
+      </div>
+    );
   }
 }
 
