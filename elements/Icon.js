@@ -113,6 +113,7 @@ class Icon extends Component {
       name: this.props.name,
       viewBox: this.props.viewBox || '0 0 32 32',
       width: this.props.width || '32px',
+      style: this.props.style,
     }
 
     return (

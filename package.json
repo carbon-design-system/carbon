@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@console/bluemix-components": "6.6.0",
-    "@console/bluemix-icons": "2.0.2",
+    "@console/bluemix-icons": "2.0.3",
     "classnames": "2.2.5",
     "json-loader": "0.5.4",
     "react": "15.2.1"
