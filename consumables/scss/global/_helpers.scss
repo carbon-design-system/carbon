@@ -2,7 +2,21 @@
 // Variables
 //-------------------------
 
-$transition--base: .25s;
+// Bluemix specific easing curves
+// More detail here: http://design-system.stage1.mybluemix.net/essentials/motion.html
+
+// Used for the majority of animations.
+$bx--standard-easing: cubic-bezier(.5, 0, .1, 1);
+
+// Used for adding elements to the screen or changing
+// on-screen states at a users's input.
+$bx---ease-out: cubic-bezier(0, 0, .25, 1);
+
+// Used primarily for removing elements from the screen.
+$bx---ease-in: cubic-bezier(.25, 0, 1, 1);
+
+
+$transition--base: 250ms;
 $color__inputs--bg: rgba(255, 255, 255, .1);
 $color__inputs--bg--light-ui: rgba($color__blue-51, .1);
 
