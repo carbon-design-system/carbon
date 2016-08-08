@@ -52,7 +52,7 @@
         height: 2rem;
         padding-top: .3rem;
         line-height: 2;
-        content: 'Choose Files';
+        content: attr(data-button-title);
         border: 3px solid transparent;
 
         // Since it's a pseudo selector, some of the code needs to be duplicated
