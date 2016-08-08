@@ -89,7 +89,6 @@ class InternalSwitch extends React.Component {
       ...other,
     } = this.props;
 
-
     return (
       <input
         {...other}
