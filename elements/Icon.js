@@ -62,7 +62,7 @@ class Icon extends Component {
 
         else if (svgProp === 'paths') {
           return data.map(path => {
-            return <path d={path.d} />
+            return <path d={path.d} className={this.props.className} />
           });
         }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Icon from './icon';
+import Icon from './Icon';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/base-elements/number-input/number-input.scss';
 
@@ -92,10 +92,12 @@ class NumberInput extends Component {
           value,
         });
       } else if (arrow.contains('bx--number__arrow--icon-down')) {
-        --value;
-        this.setState({
-          value,
-        });
+        if (value > 0) {
+          --value;
+          this.setState({
+            value,
+          });
+        }
       }
     }
 
@@ -123,16 +125,24 @@ class NumberInput extends Component {
     return (
       <div data-numberinput className={numberInputClasses}>
         <label htmlFor="numberinput-id" className="bx--form__label">{this.props.children}</label>
-        <input id="numberinput-id" className="bx--number__input" pattern="[0-9]*" {...props} />
-        <span className="bx--number__arrow--up bx--number__arrow--icon-up" onClick={props.onClick}>
-          <svg className="icon--up bx--number__arrow--icon-up" viewBox="-606 394.7 10.5 5.3">
-            <path className="icon--up bx--number__arrow--icon-up" d="M-595.5,400l-5.3-5.3l-5.3,5.3H-595.5z"/>
-          </svg>
+        <input
+          id="numberinput-id"
+          className="bx--number__input"
+          pattern="[0-9]*"
+          min="0"
+          {...props}
+        />
+        <span
+          className="bx--number__arrow--up bx--number__arrow--icon-up"
+          onClick={props.onClick}
+        >
+          <Icon className="icon--up bx--number__arrow--icon-up" name="chevron-up" />
         </span>
-        <span className="bx--number__arrow--down bx--number__arrow--icon-down" onClick={props.onClick}>
-          <svg className="icon--down bx--number__arrow--icon-down" x="0px" y="0px" viewBox="-606 394.7 10.5 5.3">
-            <path className="icon--down bx--number__arrow--icon-down" d="M-606,394.7l5.3,5.3l5.3-5.3H-606z"/>
-          </svg>
+        <span
+          className="bx--number__arrow--down bx--number__arrow--icon-down"
+          onClick={props.onClick}
+        >
+          <Icon className="icon--down bx--number__arrow--icon-down" name="chevron-down" />
         </span>
       </div>
     );

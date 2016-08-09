@@ -24,4 +24,4 @@ storiesOf('NumberInput', module)
   ))
   .add('disabled', () => (
     <NumberInput disabled {...numberInputProps}>Number Input</NumberInput>
-  ))
+  ));
