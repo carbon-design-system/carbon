@@ -15,33 +15,30 @@
 
 @include exports('content-switcher--radio') {
 
-  .bx--content-switcher {
-    // Original Styles
-    &__input {
-      @include hidden;
+  .bx--content-switcher__input {
+    @include hidden;
 
-      &:focus + .bx--content-switcher__btn {
-        @include focus-outline;
-      }
+    &:focus + .bx--content-switcher__btn {
+      @include focus-outline;
+    }
 
-      &:focus + .bx--content-switcher__btn,
-      &:hover + .bx--content-switcher__btn {
-        cursor: pointer;
-      }
+    &:focus + .bx--content-switcher__btn,
+    &:hover + .bx--content-switcher__btn {
+      cursor: pointer;
+    }
 
-      &:checked + .bx--content-switcher__btn {
-        @include content-switcher__btn(400, $color__blue-30, $color__blue-90);
+    &:checked + .bx--content-switcher__btn {
+      background-color: $color__blue-30;
+      color: $color__blue-90;
+      font-weight: 400;
+      // @include content-switcher__btn($color__blue-30, $color__blue-90);
 
-        @include light-ui {
-          @include content-switcher__btn(400, $color__blue-51, $color__white);
-          border: 1px solid $color__blue-51;
+      @include light-ui {
+        background-color: $color__blue-51;
+        color: $color__white;
+        font-weight: 400;
 
-          &:hover,
-          &:focus {
-            background-color: $color__blue-51;
-            color: $color__white;
-          }
-        }
+        &:hover { border-color: $color__blue-51; }
       }
     }
   }

@@ -1,8 +1,80 @@
+@mixin content-switcher($theme: 'dark') {
+  @include font-size('14');
+  background-color: transparent;
+  display: inline-block;
+  font-weight: 200;
+  padding: .87rem 2rem;
+  text-decoration: none;
+
+  &:not(:last-of-type) {
+    border-right: none;
+  }
+
+  @if ($theme == 'dark') {
+    border: 1px solid $color__blue-30;
+    color: $color__blue-30;
+  }
+
+  @if ($theme == 'light') {
+    border: 1px solid $color__blue-51;
+    color: $color__blue-51;
+  }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+
+  &:focus {
+    @include focus-outline;
+  }
+
+  &:hover,
+  &:active {
+
+    @if ($theme == 'dark') {
+      background-color: $color__blue-20;
+      border-color: $color__blue-20;
+      color: $color__blue-90;
+    }
+
+    @if ($theme == 'light') {
+      background-color: $color__blue-30;
+      border-color: $color__blue-30;
+      color: $color__white;
+    }
+  }
+
+  &:first-of-type {
+    border-bottom-left-radius: $border__content-switcher-radius;
+    border-top-left-radius: $border__content-switcher-radius;
+
+    &:hover {
+      @if ($theme == 'dark') { border-color: $color__blue-20; }
+      @if ($theme == 'light') { border-color: $color__blue-30; }
+    }
+  }
+
+  &:last-of-type {
+    border-top-right-radius: $border__content-switcher-radius;
+    border-bottom-right-radius: $border__content-switcher-radius;
+
+    &:hover {
+      @if ($theme == 'dark') { border-color: $color__blue-20; }
+      @if ($theme == 'light') { border-color: $color__blue-30; }
+    }
+  }
+}
+
+//-------------------------------
+// ☠️ Deprecated - content-switcher__btn
+//-------------------------------
 @mixin content-switcher__btn(
   $font-weight: 200,
   $bg-color: none,
   $text-color: $color__blue-30
 ) {
+  @warn '`@mixin content-switcher__btn` is deprecated...use `@mixin content-switcher instead`.';
   @include font-size('14');
   background-color: $bg-color;
   color: $text-color;
