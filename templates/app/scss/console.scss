@@ -1,0 +1,74 @@
+// Global Styles
+@import 'main.scss';
+
+// Base Elements
+@import 'bluemix-components/consumables/scss/base-elements/text/text';
+
+// Components
+@import 'bluemix-components/consumables/scss/components/header/header';
+@import 'bluemix-components/consumables/scss/components/detail-page-header/detail-page-header--with-tabs';
+@import 'bluemix-components/consumables/scss/components/fab/fab';
+@import 'bluemix-components/consumables/scss/components/card/card';
+
+// Deprecated 💀
+@import 'bluemix-components/consumables/scss/deprecated/toolbars/toolbar-icons';
+
+html, 
+.bx--main {
+  background-color: $color__navy-gray-3;
+}
+
+.bx--detail-page-header--with-tabs {
+  position: relative;
+
+  &__tabs-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+  }
+
+  .toolbar-icons__icons {
+    margin-right: 4.5rem;
+
+    .icons__tool {
+      border: 0;
+
+      &:first-child {
+        border: 0;
+      }
+    }
+    
+    @media (max-width: 500px) {
+      display: none;
+    }
+  }
+
+  .bx--fab {
+    position: absolute;
+    right: 5%;
+    bottom: -2.25rem;
+  }
+}
+
+.bx--card-container {
+  padding: $gutter 0;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  
+  @media (max-width: 530px) {
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+.bx--card {
+  margin: $spacing-unit;
+}
+
+// Safari fix for deprecated toolbar-icons
+.toolbar-icons .search-field {
+  margin-left: 0;
+}

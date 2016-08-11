@@ -1,0 +1,140 @@
+// Global Styles
+@import 'main';
+
+// Base Elements
+@import 'bluemix-components/consumables/scss/base-elements/forms/forms';
+@import 'bluemix-components/consumables/scss/base-elements/select/select';
+@import 'bluemix-components/consumables/scss/base-elements/number-input/number-input';
+@import 'bluemix-components/consumables/scss/base-elements/footer/footer';
+
+// Components
+@import 'bluemix-components/consumables/scss/components/header/header';
+@import 'bluemix-components/consumables/scss/components/detail-page-header/detail-page-header--with-tabs';
+@import 'bluemix-components/consumables/scss/components/fab/fab';
+@import 'bluemix-components/consumables/scss/components/dropdown/dropdown';
+
+// Layout
+html {
+  background-color: $color__blue-90;
+} 
+
+.bx--detail-page-header--with-tabs {
+  &__container {
+    background-color: $color__blue-90;
+  }
+
+  &__info {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid $color__blue-30;
+  }
+}
+
+.bx--main {
+  display: flex;
+  padding-top: $spacing-unit * 2;
+  background-color: $color__blue-90;
+  
+  @media (max-width: 650px) {
+    flex-direction: column;
+  }
+
+  &__sidebar {
+    flex: 3;
+    margin-right: $gutter;
+    
+    @media (max-width: 650px) {
+      flex: 1;
+      margin-right: 0;
+      margin-bottom: $gutter;
+    }
+
+    p {
+      margin-bottom: $spacing-unit;
+    }
+
+    a {
+      margin-right: $spacing-unit / 2;
+    }
+  }
+
+  &__content {
+    flex: 7;
+    margin-right: $gutter;
+    
+    @media (max-width: 650px) {
+      margin: 0;
+    }
+  }
+}
+
+.bx--form__container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: $spacing-unit; 
+
+  .bx--number {
+    flex: 1 0 auto;
+  }
+
+  .bx--text {
+    flex-basis: 75%;
+    margin-left: $spacing-unit;
+  }
+  
+  @media (max-width: 650px) {
+    display: block;
+
+    .bx--number, .bx--text  {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+.bx--summary {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $gutter;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    line-height: 1.5;
+  }
+
+  &__icon {
+    height: 17px;
+    width: 17px;
+    fill: $color__navy-gray-7;
+  }
+
+  &__bold {
+    padding: .5rem .25rem .5rem 1rem;
+    font-weight: 600;
+  }
+
+  &__light {
+    font-weight: 300;
+  }
+}
+
+.bx--footer--config {
+  position: fixed; 
+
+  &__submit-cost {
+    @include font-size('14');
+  }
+
+  &__submit-price {
+    @include font-size('23');
+    color: $color__blue-30;
+    margin-right: $gutter;
+  }
+}
+

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Templates - Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <script defer src="../js/svgxuse.min.js"></script>
+  <script src="../js/bluemix-components.min.js"></script>
+</head>
+<body>
+  <!-- Global Header !-->
+  <header role="header" class="global-header">
+
+    <a class="global-logo" href="/">IBM <span class="global-product-title">Bluemix</span></a>
+    <a id="global-menu-trigger" class="global-menu-trigger" href="" aria-haspopup="true" data-nav-target="[data-nav]">
+      <span class="current-taxonomy">Compute</span>
+      <span class="dropdown-affordance"></span>
+    </a>
+
+    <a class="global-docs" href="#">docs</a>
+
+    <nav data-nav role="navigation" class="taxonomy-nav" aria-labelledby="global-menu-trigger">
+      <ul class="taxonomy-menu" tabindex="0">
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--compute-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--compute"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Compute</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--storage-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--storage"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Storage</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--network-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--network"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Network</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--mobile-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--mobile"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Mobile</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--iot-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--iot"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Internet of Things</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--app-services-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--app-services"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">App Services</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--cognitive-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--cognitive"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Cognitive</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--data-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--data"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Data &amp; Analytics</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--integration-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--integration"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Integration</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--media-cdn-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--media-cdn"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Media &amp; CDN</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--devops-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--devops"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">DevOps</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--security-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--security"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Security</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--private-apis-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--private-apis"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Private APIs</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- Detail Page Header !-->
+  <header class="bx--detail-page-header--with-tabs">
+    <div class="bx--detail-page-header--with-tabs__container">
+      <div class="bx--detail-page-header--with-tabs__breadcrumb">
+        <a href="/" class="bx--detail-page-header--with-tabs__link-wrapper">
+          <svg class="bx--detail-page-header--with-tabs__arrow">
+            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--back"></use>
+          </svg>
+          <p class="bx--detail-page-header--with-tabs__breadcrumb-title">Cognitive</p>
+        </a>
+      </div>
+      <div class="bx--detail-page-header--with-tabs__info">
+        <p class="bx--detail-page-header--with-tabs__info-title">Watson-Personality-Insights-p4</p>
+      </div>
+    </div>
+    <div class="bx--detail-page-header--with-tabs__tabs-container">
+      <nav data-tabs class="bx--tabs" role="navigation">
+        <div class="bx--tabs__trigger">
+          <a href="javascript:void(0)" class="bx--tabs__trigger-text"></a>
+          <svg>
+            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+          </svg>
+        </div>
+        <ul class="bx--tabs__nav bx--tabs--hidden" role="tablist">
+          <li class="bx--tabs__nav-item bx--tabs--selected" data-target=".demo--panel--overview" role="presentation"><a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">Overview</a></li>
+          <li class="bx--tabs__nav-item" data-target=".demo--panel--containers" role="presentation"><a id="tab-link-2" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-2" aria-selected="false">Containers Files</a></li>
+          <li class="bx--tabs__nav-item" data-target=".demo--panel--connected" role="presentation"><a id="tab-link-3" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-3" aria-selected="false">Connected Objects</a></li>
+          <li class="bx--tabs__nav-item" data-target=".demo--panel--manage" role="presentation"><a id="tab-link-4" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-4" aria-selected="false">Manage</a></li>
+          <li class="bx--tabs__nav-item" data-target=".demo--panel--api-reference" role="presentation"><a id="tab-link-5" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-5" aria-selected="false">API Reference</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container !-->
+  <div class="bx--main">
+    <section class="bx--module" role="region">
+      
+      <!-- Module 1 !-->
+      <div class="bx--module--full">
+        <h2 class="bx--module__header">API Calls Made <span>(August 2015)</span></h2>
+        <div class="bx--module__body bx--module__body--image">
+          <img src="/img/chart.png" alt="">
+        </div>
+      </div>
+
+      <!-- Module 2 !-->
+      <div class="bx--module--half">
+        <div class="bx--module__body bx--module__body--data">
+          <h4 class="bx--module__label">Average Response Time <span>(Last 30 Days)</span></h4>
+          <h1 class="bx--module__data">0.31<span>ms</span></h1>
+        </div>
+        <div class="bx--module__body bx--module__body--data">
+          <h4 class="bx--module__label">Estimated Monthly Charge</h4>
+          <h1 class="bx--module__data bx--module__data--alt-color"><sup>$</sup>19.32</h1>
+        </div>
+        <div class="bx--module__footer">
+          <button class="bx--module__button">View Full Usage Details</button>
+        </div>
+      </div>
+      
+      <!-- Module 3 !-->
+      <div class="bx--module--half">
+        <h2 class="bx--module__header">Applications Using Personality Insights-p4</h2>
+        <div class="bx--module__body">
+          <ul class="bx--module__list">
+            <li>
+              <p class="bx--module__text">Aviato-DisruptDemo</p>
+              <a href="#" class="bx--link">www.disrupt-demo.atlas.net</a>
+            </li>
+            <li>
+              <p class="bx--module__text">PiedPiper-testing</p>
+              <a href="#" class="bx--link">www.piedpiper.atlas.net</a>
+            </li>
+            <li>
+              <p class="bx--module__text">PiedPiper-Compression</p>
+              <a href="#" class="bx--link">www.compressiontest.atlas.net</a>
+            </li>
+            <li>
+              <p class="bx--module__text">Aviato-TestingDemo</p>
+              <a href="#" class="bx--link">www.disrupt-demo1.atlas.net</a>
+            </li>
+          </ul>
+        </div>
+        <div class="bx--module__footer">
+          <button class="bx--module__button">View More</button>
+        </div>
+      </div>
+
+      <!-- Module 4 !-->
+      <div class="bx--module--half">
+        <h2 class="bx--module__header">Service Authorizations</h2>
+          <ul class="bx--module__icon-list">
+            <li>
+              <img src="/img/watson-lang.png" />
+              <p class="bx--module__text">Watson-LanguageTranslation</p>
+            </li>
+            <li>
+              <img src="/img/watson-concept.png" />
+              <p class="bx--module__text">Watson-Concept-Insights</p>
+            </li>
+            <li>
+              <img src="/img/watson-speech.png" />
+              <p class="bx--module__text">Watson-Speech-to-Text</p>
+            </li>
+            <li>
+              <img src="/img/cloudant.png" />
+              <p class="bx--module__text">Cloudant-DB</p>
+            </li>
+          </ul>
+      </div>
+
+      <!-- Module 5 !-->
+      <div class="bx--module--half">
+        <h2 class="bx--module__header">Instance Credentials</h2>
+        <div class="bx--module__body bx--module__body--centered-content">
+          <h4 class="bx--module__label">API Key</h4>
+          <input id="text1" type="text" class="bx--text__input" value="129ka0-9a129s0-23mn0239s">
+
+          <h4 class="bx--module__label">App Secret</h4>
+          <input id="text1" type="text" class="bx--text__input" value="129ka0-9a129s0-23mn0239s">
+
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

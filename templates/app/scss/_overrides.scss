@@ -1,0 +1,244 @@
+@import 'main';
+
+$color__module-bg: $color__navy-gray-4;
+$color__module-border: $color__navy-gray-6;
+$color__module-header: $color__navy-gray-8;
+
+$module--margin: rem(12px);
+$module--max: 1200px;
+
+@mixin module--base {
+  @include line-height('body');
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: em(300px);
+  min-width: 100%;
+  flex-basis: 100%;
+  margin: 0 0 $module--margin;
+  background-color: $color--module-bg;
+}
+
+@mixin multi-line-fallback {
+  position: relative;
+  max-height: 1rem * 1.5 * 6.5;
+
+  &:before {
+    background: $color__module-bg;
+    bottom: 2px;
+    position: absolute;
+    right: 0;
+    float: right;
+    content: '\2026';
+    margin-left: -3rem;
+    width: 3rem;
+  }
+
+  &:after {
+    content: '';
+    background: $color__module-bg;
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+//-----------------------------
+// Modals
+//-----------------------------
+
+// This is a section of modules
+.bx--module {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin: 1rem auto;
+  justify-content: flex-start;
+
+  // Override colors for a11y
+  .bx--link {
+    color: $color__blue-20;
+  }
+}
+
+.bx--module {
+  &--full {
+    @include module--base;
+    width: 100%;
+    flex-grow: 1;
+    flex-basis: 100%;
+
+    @include breakpoint(844px) {
+      margin: $module--margin;
+      min-width: auto;
+      max-width: 100%;
+      flex-basis: 100%;
+    }
+
+    @include breakpoint('bp--lg--major') {
+      min-width: calc((100%/3 * 2) - 24px);
+      max-width: calc((100%/3 * 2) - 24px);
+      flex-basis: calc((100%/3 * 2) - 24px); // Fixes Safari bug
+    }
+  }
+
+  &--half {
+    @include module--base;
+    max-width: 100%;
+    flex-grow: 1;
+
+    @include breakpoint(844px) {
+      margin: $module--margin;
+      min-width: calc((100%/2) - 24px);
+      max-width: calc((100%/2) - 24px);
+      flex-basis: calc((100%/2) - 24px); // Fixes Safari bug
+    }
+
+    @include breakpoint('bp--lg--major') {
+      min-width: calc((100%/3) - 24px);
+      max-width: calc((100%/3) - 24px);
+      flex-basis: calc((100%/3) - 24px); // Fixes Safari bug
+    }
+  }
+
+  &__text {
+    @include font-size('14');
+    display: block; // Fallback for non-webkit
+    display: -webkit-box;
+    max-height: 100%;
+    line-height: 1.5;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .5rem 0 0;
+    margin-bottom: 0;
+    width: 100%;
+
+    // FIREFOX SPECIFIC STYLES
+    @-moz-document url-prefix() {
+      @include multi-line-fallback;
+    }
+
+    // INTERNET EXPLORER SPECIFIC STYLES
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      @include multi-line-fallback;
+    }
+  }
+
+  &__data {
+    @include font-smoothing;
+  }
+
+  &__label {
+    @include font-size('12');
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: $color__navy-gray-8;
+  }
+
+  &__body,
+  &__header,
+  &__footer {
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    flex: 1;
+
+    &--centered-content {
+      align-items: center;
+      justify-content: center;
+      padding: 0 15%;
+
+      .bx--module__text {
+        width: 100%; // Fixes IE11 bug
+        text-align: center;
+        color: $color__navy-gray-8;
+        padding: 0 0 1rem;
+        white-space: pre-wrap;
+        text-overflow: inherit;
+      }
+    }
+  }
+
+  &__header {
+    @include font-size('14');
+    font-weight: 700;
+    color: $color__module-header;
+    border-bottom: 1px solid $color__module-border;
+    padding-bottom: 1rem;
+    height: 3.25rem;
+    min-height: 3.25rem;
+  }
+
+  &__footer {
+    display: flex;
+    height: 5rem;
+    min-height: 5rem;
+  }
+
+  &__button {
+    @include btn--primary($color__navy-gray-6, $color__blue-30);
+    width: 100%;
+    color: $color__white;
+
+    &:hover {
+      color: $color__blue-90;
+    }
+  }
+
+  //-------------------------
+  // ☠️ Deprecated
+  //-------------------------
+
+  &--two-third {
+    @include module--base;
+    flex-basis: 100%;
+    flex-grow: 1;
+    width: 100%;
+    margin: 12px;
+
+    @include breakpoint(bp--sm--major) {
+      flex-basis: 66%;
+    }
+  }
+
+  &--one-third {
+    @include module--base;
+    flex-basis: 100%;
+    flex-grow: 1;
+    width: 100%;
+    margin: 12px;
+
+    @include breakpoint(bp--sm--major) {
+      flex-basis: calc(33% - .5rem);
+    }
+  }
+
+  &__header {
+    @include font-size('14');
+    font-weight: 700;
+    color: $color__module-header;
+    border-bottom: 1px solid $color__module-border;
+  }
+
+  &__footer {
+    @include font-size('14');
+    border-top: 1px solid $color__module-border;
+  }
+
+  &__header,
+  &__body,
+  &__footer {
+    padding: $module--margin;
+  }
+}

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Templates - Configuration</title>
+  <link rel="stylesheet" href="../css/configuration.css">
+  <script defer src="../js/svgxuse.min.js"></script>
+  <script src="../js/bluemix-components.min.js"></script>
+</head>
+<body>
+  <!-- Global Header !-->
+  <header role="header" class="global-header">
+
+    <a class="global-logo" href="/">IBM <span class="global-product-title">Bluemix</span></a>
+    <a id="global-menu-trigger" class="global-menu-trigger" href="" aria-haspopup="true" data-nav-target="[data-nav]">
+      <span class="current-taxonomy">Compute</span>
+      <span class="dropdown-affordance"></span>
+    </a>
+
+    <a class="global-docs" href="#">docs</a>
+
+    <nav data-nav role="navigation" class="taxonomy-nav" aria-labelledby="global-menu-trigger">
+      <ul class="taxonomy-menu" tabindex="0">
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--compute-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--compute"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Compute</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--storage-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--storage"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Storage</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--network-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--network"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Network</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--mobile-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--mobile"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Mobile</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--iot-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--iot"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Internet of Things</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--app-services-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--app-services"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">App Services</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--cognitive-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--cognitive"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Cognitive</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--data-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--data"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Data &amp; Analytics</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--integration-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--integration"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Integration</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--media-cdn-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--media-cdn"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Media &amp; CDN</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--devops-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--devops"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">DevOps</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--security-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--security"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Security</p>
+          </a>
+        </li>
+        <li class="taxonomy-item">
+          <a href="/catalog" class="taxonomy-item--taxonomy-menu">
+            <div class="taxonomy-item__icon">
+              <svg class="svg--taxonomy--private-apis-dims" focusable="false">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#taxonomy--private-apis"></use>
+              </svg>
+            </div>
+            <p class="taxonomy-item__label">Private APIs</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- Detail Page Header !-->
+  <header class="bx--detail-page-header--with-tabs">
+    <div class="bx--detail-page-header--with-tabs__container">
+      <div class="bx--detail-page-header--with-tabs__breadcrumb">
+        <a href="/" class="bx--detail-page-header--with-tabs__link-wrapper">
+          <svg class="bx--detail-page-header--with-tabs__arrow">
+            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--back"></use>
+          </svg>
+          <p class="bx--detail-page-header--with-tabs__breadcrumb-title">View All</p>
+        </a>
+      </div>
+      <div class="bx--detail-page-header--with-tabs__info">
+        <p class="bx--detail-page-header--with-tabs__info-title">Provision a Bare Metal Server</p>
+        <a href="#" data-fab data-state="closed" class="bx--fab" role="button" alt="Show Content">
+          <svg class="bx--fab__svg" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+            <polygon class="bx--fab__hexagon" fill-rule="evenodd" points="36 0 67.1769145 18 67.1769145 54 36 72 4.82308546 54 4.82308546 18 "></polygon>
+            <path class="bx--fab__plus-icon" stroke-width="1" d="M35.08,34.992 L26.98,34.992 L26.98,36.9 L35.08,36.9 L35.08,45 L36.988,45 L36.988,36.9 L45.088,36.9 L45.088,34.992 L36.988,34.992 L36.988,26.892 L35.08,26.892 L35.08,34.992 Z"></path>
+          </svg>
+          <span class="bx--fab__hidden">show content</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container !-->
+  <div class="bx--main">
+    <!-- Left Side !-->
+    <div class="bx--main__sidebar">
+      <p>
+        Bare metal servers aid in. A bare metal environment is a computer system or network in which a virtual machine is installed directly on hardware rather than within the host operating system (OS). The term "bare metal" refers to a hard disk, the usual medium on which a computer's OS is installed.
+      </p>
+      <!-- Links !-->
+      <a href="#" class="bx--link">Docs</a>
+      <a href="#" class="bx--link">Terms</a>
+    </div>
+
+    <!-- Right Side !-->
+    <div class="bx--main__content">
+      <!-- Configuration Form !-->
+      <form class="bx--form">  
+        <!-- Select Location !-->
+        <fieldset class="bx--form__fieldset">
+          <legend class="bx--form__legend">1. Select Location</legend>
+          <div class="bx--select">
+            <label for="select-id" class="bx--form__label">Location:</label>
+            <select id="select-id" class="bx--select__input">
+              <option class="bx--select__option" value="" disabled selected hidden>US-South</option>
+              <option class="bx--select__option" value="volvo">Volvo</option>
+              <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
+              <option class="bx--select__option" value="saab">Saab</option>
+              <option class="bx--select__option" value="opel">Opel</option>
+              <option class="bx--select__option" value="audi">Audi</option>
+            </select>
+            <svg class="bx--select__arrow">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+            </svg>
+          </div>
+        </fieldset>
+
+        <!-- Select Flavor !-->
+        <fieldset class="bx--form__fieldset">
+          <legend class="bx--form__legend">2. Select Flavor</legend>
+          <div class="bx--select">
+            <label for="select-id" class="bx--form__label">Flavor:</label>
+            <select id="select-id" class="bx--select__input">
+              <option class="bx--select__option" value="" disabled selected hidden>Single Xeon 1270, 32GB Ram, 1X1TB SATA disk, Non-RAID | $0.595/hr</option>
+              <option class="bx--select__option" value="volvo">Volvo</option>
+              <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
+              <option class="bx--select__option" value="saab">Saab</option>
+              <option class="bx--select__option" value="opel">Opel</option>
+              <option class="bx--select__option" value="audi">Audi</option>
+            </select>
+            <svg class="bx--select__arrow">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+            </svg>
+          </div>
+        </fieldset>
+        
+        <!-- Bare Metal Settings !-->
+        <fieldset class="bx--form__fieldset">
+          <legend class="bx--form__legend">3. Bare Metal Settings</legend>
+          <div class="bx--form__container">
+            <div data-numberinput class="bx--number">
+                <label for="numberinput-id" class="bx--form__label">Quantity:</label>
+                <input id="numberinput-id" type="number" pattern="[0-9]*" step="1" min="0" max="10" value="1" class="bx--number__input" />
+                <span class="bx--number__arrow--up bx--number__arrow--icon-up">
+                  <svg class="icon--up bx--number__arrow--icon-up">
+                    <use class="icon--up bx--number__arrow--icon-up" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://new-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-up"></use>
+                  </svg>
+                </span>
+                <span class="bx--number__arrow--down bx--number__arrow--icon-down">
+                  <svg class="icon--down bx--number__arrow--icon-down">
+                    <use class="icon--down bx--number__arrow--icon-down" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://new-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+                  </svg>
+                </span>
+            </div>
+            <div class="bx--text">
+              <label for="text1" class="bx--form__label">Name:</label>
+              <input id="text1" type="text" class="bx--text__input" placeholder="Enter a host and domain; i.e. hostname.domain.com">
+            </div>
+          </div>
+          <label for="text1" class="bx--form__label">Post Install Script:</label>
+          <input id="text1" type="text" class="bx--text__input" placeholder="Paste or enter a valid URL">
+        </fieldset>
+        
+        <!-- Image Settings !-->
+        <fieldset class="bx--form__fieldset">
+          <legend class="bx--form__legend">4. Image Settings</legend>
+          <div class="bx--select">
+            <label for="select-id" class="bx--form__label">Select Image:</label>
+            <select id="select-id" class="bx--select__input">
+              <option class="bx--select__option" value="" disabled selected hidden>Ubuntu 14.04</option>
+              <option class="bx--select__option" value="volvo">Volvo</option>
+              <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
+              <option class="bx--select__option" value="saab">Saab</option>
+              <option class="bx--select__option" value="opel">Opel</option>
+              <option class="bx--select__option" value="audi">Audi</option>
+            </select>
+            <svg class="bx--select__arrow">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+            </svg>
+          </div>
+        </fieldset>
+        
+        <!-- Summary !-->
+        <fieldset class="bx--form__fieldset">
+          <legend class="bx--form__legend">5. Summary</legend>
+          <ul class="bx--summary__container">
+            <li class="bx--summary__info">
+              <svg class="bx--summary__icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--configure"></use>
+              </svg>
+              <span class="bx--summary__bold">Cores:</span>
+              <span class="bx--summary__light">4</span>
+            </li>
+            <li class="bx--summary__info">
+              <svg class="bx--summary__icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--configure"></use>
+              </svg>
+              <span class="bx--summary__bold">GHz:</span>
+              <span class="bx--summary__light">3.40</span>
+            </li>
+            <li class="bx--summary__info">
+              <svg class="bx--summary__icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--configure"></use>
+              </svg>
+              <span class="bx--summary__bold">Internal Hard Drives:</span>
+              <span class="bx--summary__light">2</span>
+            </li>
+            <li class="bx--summary__info">
+              <svg class="bx--summary__icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--configure"></use>
+              </svg>
+              <span class="bx--summary__bold">Mbps Max Port Speed:</span>
+              <span class="bx--summary__light">1000</span>
+            </li>
+          </ul>
+        </fieldset>
+      </form>
+
+    </div>
+  </div>
+  
+  <!-- Footer !-->
+  <footer class="bx--footer--config" role="contentinfo">
+    <div class="bx--footer--config__container">
+      <div class="bx--footer--config__information">
+        <div class="bx--footer--config__support">
+          <p class="bx--footer--config__support-question">Need Help?</p>
+          <a href="#" class="bx--footer--config__support-link">Contact Bluemix Sales</a>
+        </div>
+        
+        <div class="bx--footer--config__support">
+          <p class="bx--footer--config__support-question">Estimate Monthly Cost</p>
+          <a href="#" class="bx--footer--config__support-link">Cost Calculator</a>
+        </div>
+      </div>
+
+      <div class="bx--footer--config__submit">
+        <div>
+          <p class="bx--footer--config__submit-cost">Cost</p>
+          <h2 class="bx--footer--config__submit-price">$0.59/hr</h2>
+        </div>
+        <button class="bx--footer--config__submit-btn bx--btn" type="submit">Create</button>
+      </div>
+
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+/////////////////////////
+//  Bluemix Components //
+/////////////////////////
+$font-path: '../fonts';
+
+// Global
+@import 'bluemix-components/consumables/scss/utils';
+
+$gutter: 4rem;
+$spacing-unit: 1rem;
+
+html, body {
+  min-height: 100%;
+  background-color: $color__navy-gray-3;
+}
+
+.bx--detail-page-header--with-tabs {
+  padding-top: 3.75rem;
+}
+
+.bx--main {
+  @include grid-container;
+  background-color: $color__navy-gray-3;
+  height: 100%;
+}
