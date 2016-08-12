@@ -181,5 +181,19 @@ describe('Dropdown', function () {
         }
       }
     });
+
+    it('Should remove click event listener on document object once the instance is released', function () {
+      element.classList.add('bx--dropdown--open');
+      document.body.appendChild(element);
+      Dropdown.create(element).release();
+      document.body.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(element.classList.contains('bx--dropdown--open')).to.be.true;
+    });
+
+    afterEach(function () {
+      if (document.body.contains(element)) {
+        document.body.removeChild(element);
+      }
+    });
   });
 });

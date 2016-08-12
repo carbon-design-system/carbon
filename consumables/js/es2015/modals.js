@@ -3,6 +3,7 @@ import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import eventMatches from '../polyfills/event-matches';
 import toggleClass from '../polyfills/toggle-class';
+import on from '../misc/on';
 
 /**
  * @param {Element} element The element to obtain transition duration from.
@@ -100,7 +101,7 @@ export default class Modal {
     if (target.nodeType === Node.ELEMENT_NODE && target.dataset.modal !== undefined) {
       this.create(target, options);
     } else {
-      const handler = (event) => {
+      return on(target, 'click', (event) => {
         const element = eventMatches(event, '[data-modal-target]');
 
         if (element) {
@@ -122,11 +123,7 @@ export default class Modal {
             });
           }
         }
-      };
-      target.addEventListener('click', handler);
-      return {
-        release: () => target.removeEventListener('click', handler),
-      };
+      });
     }
   }
 

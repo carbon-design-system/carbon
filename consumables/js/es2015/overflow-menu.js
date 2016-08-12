@@ -1,5 +1,6 @@
 import '../polyfills/array-from';
 import toggleClass from '../polyfills/toggle-class';
+import on from '../misc/on';
 
 export default class OverflowMenu {
   constructor(element) {
@@ -9,8 +10,18 @@ export default class OverflowMenu {
 
     this.element = element;
     this.constructor.components.set(this.element, this);
-    this.element.ownerDocument.addEventListener('click', (event) => this.handleDocumentClick(event));
-    this.element.ownerDocument.addEventListener('keypress', (event) => this.handleKeyPress(event));
+
+    /**
+     * The handle to release click event listener on document object.
+     * @member {Handle}
+     */
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => this.handleDocumentClick(event));
+
+    /**
+     * The handle to release keypress event listener on document object.
+     * @member {Handle}
+     */
+    this.hDocumentKeyPress = on(this.element.ownerDocument, 'keypress', (event) => this.handleKeyPress(event));
   }
 
   static create(element) {
@@ -54,6 +65,12 @@ export default class OverflowMenu {
   }
 
   release() {
+    if (this.hDocumentClick) {
+      this.hDocumentClick = this.hDocumentClick.release();
+    }
+    if (this.hDocumentKeyPress) {
+      this.hDocumentKeyPress = this.hDocumentKeyPress.release();
+    }
     this.constructor.components.delete(this.element);
   }
 }

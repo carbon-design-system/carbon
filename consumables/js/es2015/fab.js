@@ -1,4 +1,5 @@
 import eventMatches from '../polyfills/event-matches';
+import on from '../misc/on';
 
 export default class FabButton {
   /**
@@ -31,16 +32,12 @@ export default class FabButton {
     if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fab !== undefined) {
       this.create(target);
     } else {
-      const handler = (event) => {
+      return on(target, 'click', (event) => {
         const element = eventMatches(event, '[data-fab]');
         if (element && !this.components.has(element)) {
           this.create(element).toggle(event);
         }
-      };
-      target.addEventListener('click', handler);
-      return {
-        release: () => target.removeEventListener('click', handler),
-      };
+      });
     }
   }
 

@@ -1,6 +1,7 @@
 import '../polyfills/array-from';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
+import on from '../misc/on';
 
 export default class Dropdown {
   /**
@@ -34,7 +35,12 @@ export default class Dropdown {
     this.element.dataset.dropdown = '';
     this.constructor.components.set(this.element, this);
 
-    this.element.ownerDocument.addEventListener('click', (event) => this.toggle(event));
+    /**
+     * The handle to release click event listener on document object.
+     * @member {Handle}
+     */
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => this.toggle(event));
+
     this.element.addEventListener('keypress', (event) => this.toggle(event));
     this.element.addEventListener('click', (event) => this.selected(event));
   }
@@ -81,6 +87,9 @@ export default class Dropdown {
   }
 
   release() {
+    if (this.hDocumentClick) {
+      this.hDocumentClick = this.hDocumentClick.release();
+    }
     this.constructor.components.delete(this.element);
   }
 

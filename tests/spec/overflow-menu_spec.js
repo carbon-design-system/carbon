@@ -136,5 +136,29 @@ describe('Test Overflow menu', function () {
         }
       }
     });
+
+    it('Should remove click event listener on document object once the instance is released', function () {
+      element.classList.add('bx--overflow-menu--open');
+      document.body.appendChild(element);
+      OverflowMenu.create(element).release();
+      document.body.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(element.classList.contains('bx--overflow-menu--open')).to.be.true;
+    });
+
+    it('Should remove keypress event listener on document object once the instance is released', function () {
+      element.classList.add('bx--overflow-menu--open');
+      document.body.appendChild(element);
+      OverflowMenu.create(element).release();
+      const event = new CustomEvent('keypress', { bubbles: true });
+      event.key = 'Enter';
+      document.body.dispatchEvent(event);
+      expect(element.classList.contains('bx--overflow-menu--open')).to.be.true;
+    });
+
+    afterEach(function () {
+      if (document.body.contains(element)) {
+        document.body.removeChild(element);
+      }
+    });
   });
 });

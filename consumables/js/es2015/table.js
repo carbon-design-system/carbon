@@ -1,6 +1,7 @@
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/object-assign';
 import toggleClass from '../polyfills/toggle-class';
+import on from '../misc/on';
 
 export default class Table {
   /**
@@ -83,16 +84,12 @@ export default class Table {
     if (target.nodeType === Node.ELEMENT_NODE && target.dataset.table !== undefined) {
       this.create(target, options);
     } else {
-      const handler = (event) => {
+      return on(target, 'click', (event) => {
         const element = eventMatches(event, '[data-table]');
         if (element && !this.components.has(element)) {
           this.create(element, options).handleClick(event);
         }
-      };
-      target.addEventListener('click', handler);
-      return {
-        release: () => target.removeEventListener('click', handler),
-      };
+      });
     }
   }
 
