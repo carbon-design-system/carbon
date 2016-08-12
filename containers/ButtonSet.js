@@ -4,27 +4,21 @@ import '@console/bluemix-components/consumables/scss/base-elements/buttons/butto
 
 
 class ButtonSet extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   static propTypes = {
     children: React.PropTypes.node,
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
   }
 
-
   render() {
-
     const buttonSetClasses = classNames({
-      'bx--sets-of-buttons': true
+      'bx--sets-of-buttons': true,
     });
 
     return (
       <div className={buttonSetClasses}>
         {this.props.children}
       </div>
-    )
+    );
   }
 }
 

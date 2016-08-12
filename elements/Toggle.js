@@ -4,7 +4,6 @@ import InternalSwitch from '../internal/InternalSwitch';
 import '@console/bluemix-components/consumables/scss/base-elements/toggle/toggle.scss';
 
 class Toggle extends React.Component {
-
   static propTypes = {
     defaultToggled: React.PropTypes.bool,
     disabled: React.PropTypes.bool,

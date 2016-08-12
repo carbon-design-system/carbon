@@ -1,24 +1,18 @@
-import React, { Component }  from 'react';
+import React, { Component } from 'react';
 import icons from '@console/bluemix-icons/icons.json';
 
 class Icon extends Component {
 
   static propTypes = {
+    name: React.PropTypes.string,
+    description: React.PropTypes.string,
     className: React.PropTypes.string,
-  }
-
-  /**
-   * Returns a single icon Object
-   * @param {string} iconName - "name" property of icon
-   * @param {Object} [iconsObj=icons] - JSON Array of Objects
-   * @example
-   * // Returns a single icon Object
-   * this.findIcon('copy-code', icons.json);
-   */
-  findIcon = (iconName, iconsObj = icons) => {
-    return iconsObj.find(icon => {
-      return (icon.name === iconName) ? icon : false;
-    });
+    fill: React.PropTypes.string,
+    fillRule: React.PropTypes.string,
+    width: React.PropTypes.string,
+    height: React.PropTypes.string,
+    viewBox: React.PropTypes.string,
+    style: React.PropTypes.string,
   }
 
   /**
@@ -28,9 +22,7 @@ class Icon extends Component {
    * // Returns svgData Object for given iconName
    * this.getSvgData('copy-code');
    */
-  getSvgData = (iconName) => {
-    return this.findIcon(iconName).svgData;
-  }
+  getSvgData = (iconName) => this.findIcon(iconName).svgData
 
   /**
    * Returns Elements/Nodes for SVG
@@ -42,9 +34,7 @@ class Icon extends Component {
    */
   getSvgContent = (svgData) => {
     const svgElements = Object.keys(svgData)
-      .filter(key => {
-        return svgData[key]
-      })
+      .filter(key => svgData[key])
       .map(svgProp => {
         const data = svgData[svgProp];
 
@@ -56,30 +46,17 @@ class Icon extends Component {
               r: circle.r,
             };
 
-            return <circle {...circleProps} />
+            return <circle {...circleProps} />;
           });
-        }
-
-        else if (svgProp === 'paths') {
-          return data.map(path => {
-            return <path d={path.d} className={this.props.className} />
-          });
-        }
-
-        else if (svgProp === 'polygons') {
-          return data.map(pointsData => {
-            return <polygon points={poinstData.points}></polygon>
-          })
-        }
-
-        else if (svgProp === 'polylines') {
-          return data.map(pointsData => {
-            return <polyline points={poinstData.points}></polyline>
-          })
-        }
-
-        else if (svgProp === 'rects') {
-
+        } else if (svgProp === 'paths') {
+          return data.map(path => <path d={path.d} className={this.props.className} />);
+        } else if (svgProp === 'paths') {
+          return data.map(path => <path d={path.d} />);
+        } else if (svgProp === 'polygons') {
+          return data.map(pointsData => <polygon points={pointsData.points}></polygon>);
+        } else if (svgProp === 'polylines') {
+          return data.map(pointsData => <polyline points={pointsData.points}></polyline>);
+        } else if (svgProp === 'rects') {
           const rectProps = {
             width: data.width,
             height: data.height,
@@ -89,16 +66,27 @@ class Icon extends Component {
             ry: data.ry,
           };
 
-          return <rect {...rectProps}></rect>
+          return <rect {...rectProps}></rect>;
         }
+
+        return '';
       });
 
 
     return svgElements;
   }
 
-  render() {
+  /**
+   * Returns a single icon Object
+   * @param {string} iconName - "name" property of icon
+   * @param {Object} [iconsObj=icons] - JSON Array of Objects
+   * @example
+   * // Returns a single icon Object
+   * this.findIcon('copy-code', icons.json);
+   */
+  findIcon = (iconName, iconsObj = icons) => iconsObj.find(icon => ((icon.name === iconName) ? icon : false))
 
+  render() {
     // SVG Content and Data for Render
     const svgData = this.getSvgData(this.props.name);
     const svgContent = this.getSvgContent(svgData);
@@ -114,7 +102,7 @@ class Icon extends Component {
       viewBox: this.props.viewBox || '0 0 32 32',
       width: this.props.width || '32px',
       style: this.props.style,
-    }
+    };
 
     return (
       <svg {...iconProps} aria-labelledby={idProp}>

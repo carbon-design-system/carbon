@@ -105,20 +105,23 @@ class FileUploader extends React.Component {
       [this.props.className]: this.props.className,
     });
 
-    const fileUploader = (<div className="fileUploaderWrapper">
-                            <label
-                            data-file-appearance
-                            className={fileUploaderClasses}
-                            htmlFor={this.props.id}>{this.props.labelDescription}
-                            </label>
-                            <input
-                            data-file-uploader
-                            data-multiple-caption="{count} files selected"
-                            data-label="[data-file-appearance]"
-                            className="bx--file__input"
-                            {... fileUploaderProps}
-                            multiple />
-                        </div>);
+    const fileUploader = (
+      <div className="fileUploaderWrapper">
+        <label
+          data-file-appearance
+          className={fileUploaderClasses}
+          htmlFor={this.props.id}
+        >{this.props.labelDescription}</label>
+        <input
+          data-file-uploader
+          data-multiple-caption="{count} files selected"
+          data-label="[data-file-appearance]"
+          className="bx--file__input"
+          {... fileUploaderProps}
+          multiple
+        />
+      </div>
+    );
     return fileUploader;
   }
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 
 class InternalButton extends React.Component {
-
   static propTypes = {
     children: React.PropTypes.node,
     className: React.PropTypes.string,
@@ -9,6 +8,7 @@ class InternalButton extends React.Component {
     href: React.PropTypes.string,
     tabIndex: React.PropTypes.number,
     type: React.PropTypes.string,
+    role: React.PropTypes.string,
     onBlur: React.PropTypes.func,
     onClick: React.PropTypes.func,
     onFocus: React.PropTypes.func,
@@ -21,7 +21,7 @@ class InternalButton extends React.Component {
     onMouseUp: React.PropTypes.func,
     onTouchEnd: React.PropTypes.func,
     onTouchStart: React.PropTypes.func,
-    onTouchTap: React.PropTypes.func
+    onTouchTap: React.PropTypes.func,
   }
 
   static defaultProps = {
@@ -38,7 +38,7 @@ class InternalButton extends React.Component {
     onMouseUp: () => {},
     onTouchEnd: () => {},
     onTouchStart: () => {},
-    onTouchTap: () => {}
+    onTouchTap: () => {},
   }
 
   handleBlur = (evt) => {
@@ -72,7 +72,6 @@ class InternalButton extends React.Component {
   }
 
   render() {
-
     const buttonProps = {
       className: this.props.className,
       disabled: this.props.disabled,
@@ -88,7 +87,7 @@ class InternalButton extends React.Component {
       onMouseDown: this.handleMouseDown,
       onMouseLeave: this.handleMouseLeave,
       onMouseUp: this.handleMouseUp,
-    }
+    };
 
     const HTML = (this.props.href)
       ? <a {...buttonProps}>{this.props.children}</a>

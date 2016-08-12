@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "storybook": "start-storybook -p 9001",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,7 +13,12 @@
   "license": "ISC",
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": "airbnb"
+    "extends": "airbnb",
+    "rules": {
+      "max-len": [2, 130, 4],
+      "no-underscore-dangle": 0,
+      "react/prefer-stateless-function": 0
+    }
   },
   "dependencies": {
     "@console/bluemix-components": "6.6.0",

@@ -41,8 +41,8 @@ class OverflowMenuItem extends React.Component {
       [this.props.className]: this.props.className,
     });
 
-    const overflowMenuItem = isLastItem
-    ? <span>
+    const overflowMenuItem = isLastItem ?
+      <span>
         <hr />
         <li>
           <button
@@ -52,16 +52,15 @@ class OverflowMenuItem extends React.Component {
           >{itemText}
           </button>
         </li>
-      </span>
-    : <li>
+      </span> :
+      <li>
         <button
           {...other}
           type="button"
           className={overflowMenuItemClasses}
         >{itemText}
         </button>
-      </li>
-    ;
+      </li>;
 
     return overflowMenuItem;
   }

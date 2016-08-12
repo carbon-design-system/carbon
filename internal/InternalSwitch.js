@@ -83,7 +83,7 @@ class InternalSwitch extends React.Component {
       onSwitch, // eslint-disable-line no-unused-vars
       disabled,
       className,
-      onParentShouldUpdate,
+      onParentShouldUpdate, // eslint-disable-line no-unused-vars
       switched, // eslint-disable-line no-unused-vars
       id,
       ...other,
