@@ -53,8 +53,9 @@ gulp.task('browser-sync', () => {
 gulp.task('clean', () => {
   return del([
     'consumables/css/*.css',
-    'consumables/es5/*.{js,map}',
-    'demo/*.{js,map}',
+    'consumables/js/{es5,umd}/**/*.{js,map}',
+    'demo/**/*.{js,map}',
+    '!demo/js/theme-switcher.js',
     '!demo/index.js',
   ]);
 });
@@ -110,27 +111,22 @@ gulp.task('scripts:consumables', () => {
 });
 
 gulp.task('scripts:umd', () => {
-  const files = './consumables/js/es2015/*.js';
-  const polyfills = './consumables/js/polyfills/**/*.js';
-  const utils = './consumables/js/utils/**/*.js';
+  const filesMain = './consumables/js/es2015/*.js';
+  const filesOthers = './consumables/js/{misc,polyfills}/**/*.js';
 
   const babelOpts = {
     plugins: ['transform-es2015-modules-umd', 'transform-runtime'],
   };
 
-  const fileStream = gulp.src(files)
+  const mainStream = gulp.src(filesMain)
     .pipe(babel(babelOpts))
     .pipe(gulp.dest('./consumables/js/umd/lib'));
 
-  const polyfillStream = gulp.src(polyfills)
+  const othersStream = gulp.src(filesOthers)
     .pipe(babel(babelOpts))
-    .pipe(gulp.dest('./consumables/js/umd/polyfills'));
+    .pipe(gulp.dest('./consumables/js/umd'));
 
-  const utilStream = gulp.src(utils)
-    .pipe(babel(babelOpts))
-    .pipe(gulp.dest('./consumables/js/umd/utils'));
-
-  return merge(fileStream, polyfillStream, utilStream);
+  return merge(mainStream, othersStream);
 });
 
 
@@ -216,7 +212,7 @@ gulp.task('sass:dev', () => {
 
 gulp.task('lint:scripts', function () {
   return gulp.src([
-    'consumables/js/{es2015,polyfills}/**/*.js',
+    'consumables/js/{es2015,misc,polyfills}/**/*.js',
     '!**/examples/**/*.js',
   ])
     .pipe(eslint())
@@ -265,7 +261,7 @@ gulp.task('jsdoc', function (cb) {
 
 gulp.task('watch', () => {
   gulp.watch('consumables/**/*.html').on('change', browserSync.reload);
-  gulp.watch(['consumables/**/*.js', '!**/es5/*.js'], ['scripts:dev']);
+  gulp.watch(['consumables/js/{es2015,misc,polyfills}/**/*.js'], ['scripts:dev']);
   gulp.watch(['consumables/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
 });
 
