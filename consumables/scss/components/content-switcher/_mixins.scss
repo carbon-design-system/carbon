@@ -23,6 +23,7 @@
   &:hover,
   &:focus {
     cursor: pointer;
+    text-decoration: underline solid $color__blue-30;
   }
 
   &:focus {
