@@ -1,13 +1,13 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/array-from'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/array-from', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/array-from'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/array-from'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.classCallCheck, global.createClass, global.arrayFrom);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.classCallCheck, global.createClass, global.arrayFrom, global.customEvent);
     global.numberInput = mod.exports;
   }
 })(this, function (exports, _weakMap, _toConsumableArray2, _classCallCheck2, _createClass2) {
@@ -89,7 +89,15 @@
           } else {
             numberInput.stepDown();
           }
+        } else {
+          return;
         }
+
+        // Programmatic change in value (including `stepUp()`/`stepDown()`) won't fire change event
+        numberInput.dispatchEvent(new CustomEvent('change', {
+          bubbles: true,
+          cancelable: false
+        }));
       }
     }, {
       key: 'release',

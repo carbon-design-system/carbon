@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class', '../polyfills/array-from'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class', '../misc/on', '../polyfills/array-from'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'), require('../polyfills/array-from'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'), require('../misc/on'), require('../polyfills/array-from'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.classCallCheck, global.createClass, global.toggleClass, global.arrayFrom);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.classCallCheck, global.createClass, global.toggleClass, global.on, global.arrayFrom);
     global.overflowMenu = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _classCallCheck2, _createClass2, _toggleClass) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _classCallCheck2, _createClass2, _toggleClass, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -26,6 +26,8 @@
   var _createClass3 = _interopRequireDefault(_createClass2);
 
   var _toggleClass2 = _interopRequireDefault(_toggleClass);
+
+  var _on2 = _interopRequireDefault(_on);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -45,10 +47,20 @@
 
       this.element = element;
       this.constructor.components.set(this.element, this);
-      this.element.ownerDocument.addEventListener('click', function (event) {
+
+      /**
+       * The handle to release click event listener on document object.
+       * @member {Handle}
+       */
+      this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (event) {
         return _this.handleDocumentClick(event);
       });
-      this.element.ownerDocument.addEventListener('keypress', function (event) {
+
+      /**
+       * The handle to release keypress event listener on document object.
+       * @member {Handle}
+       */
+      this.hDocumentKeyPress = (0, _on2.default)(this.element.ownerDocument, 'keypress', function (event) {
         return _this.handleKeyPress(event);
       });
     }
@@ -83,6 +95,12 @@
     }, {
       key: 'release',
       value: function release() {
+        if (this.hDocumentClick) {
+          this.hDocumentClick = this.hDocumentClick.release();
+        }
+        if (this.hDocumentKeyPress) {
+          this.hDocumentKeyPress = this.hDocumentKeyPress.release();
+        }
         this.constructor.components.delete(this.element);
       }
     }], [{

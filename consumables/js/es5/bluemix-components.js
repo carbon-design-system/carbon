@@ -62,51 +62,51 @@ var BluemixComponents =
 	
 	var _fab2 = _interopRequireDefault(_fab);
 	
-	var _contentSwitcher = __webpack_require__(5);
+	var _contentSwitcher = __webpack_require__(6);
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
-	var _tabs = __webpack_require__(9);
+	var _tabs = __webpack_require__(10);
 	
 	var _tabs2 = _interopRequireDefault(_tabs);
 	
-	var _overflowMenu = __webpack_require__(11);
+	var _overflowMenu = __webpack_require__(12);
 	
 	var _overflowMenu2 = _interopRequireDefault(_overflowMenu);
 	
-	var _modals = __webpack_require__(12);
+	var _modals = __webpack_require__(13);
 	
 	var _modals2 = _interopRequireDefault(_modals);
 	
-	var _header = __webpack_require__(14);
+	var _header = __webpack_require__(15);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _toolbars = __webpack_require__(15);
+	var _toolbars = __webpack_require__(16);
 	
 	var _toolbars2 = _interopRequireDefault(_toolbars);
 	
-	var _loading = __webpack_require__(16);
+	var _loading = __webpack_require__(17);
 	
 	var _loading2 = _interopRequireDefault(_loading);
 	
-	var _dropdown = __webpack_require__(17);
+	var _dropdown = __webpack_require__(18);
 	
 	var _dropdown2 = _interopRequireDefault(_dropdown);
 	
-	var _card = __webpack_require__(18);
+	var _card = __webpack_require__(19);
 	
 	var _card2 = _interopRequireDefault(_card);
 	
-	var _numberInput = __webpack_require__(19);
+	var _numberInput = __webpack_require__(20);
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
 	
-	var _table = __webpack_require__(20);
+	var _table = __webpack_require__(21);
 	
 	var _table2 = _interopRequireDefault(_table);
 	
-	var _detailPageHeader = __webpack_require__(21);
+	var _detailPageHeader = __webpack_require__(22);
 	
 	var _detailPageHeader2 = _interopRequireDefault(_detailPageHeader);
 	
@@ -619,13 +619,15 @@ var BluemixComponents =
 	  value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
+	var _on = __webpack_require__(5);
+	
+	var _on2 = _interopRequireDefault(_on);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -707,24 +709,12 @@ var BluemixComponents =
 	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fab !== undefined) {
 	        this.create(target);
 	      } else {
-	        var _ret = function () {
-	          var handler = function handler(event) {
-	            var element = (0, _eventMatches2.default)(event, '[data-fab]');
-	            if (element && !_this2.components.has(element)) {
-	              _this2.create(element).toggle(event);
-	            }
-	          };
-	          target.addEventListener('click', handler);
-	          return {
-	            v: {
-	              release: function release() {
-	                return target.removeEventListener('click', handler);
-	              }
-	            }
-	          };
-	        }();
-	
-	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	        return (0, _on2.default)(target, 'click', function (event) {
+	          var element = (0, _eventMatches2.default)(event, '[data-fab]');
+	          if (element && !_this2.components.has(element)) {
+	            _this2.create(element).toggle(event);
+	          }
+	        });
 	      }
 	    }
 	  }, {
@@ -781,6 +771,30 @@ var BluemixComponents =
 
 /***/ },
 /* 5 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = on;
+	function on(element) {
+	  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	    args[_key - 1] = arguments[_key];
+	  }
+	
+	  element.addEventListener.apply(element, args);
+	  return {
+	    release: function release() {
+	      element.removeEventListener.apply(element, args);
+	      return null;
+	    }
+	  };
+	}
+
+/***/ },
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -795,11 +809,11 @@ var BluemixComponents =
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(6);
-	
 	__webpack_require__(7);
 	
-	var _toggleClass = __webpack_require__(8);
+	__webpack_require__(8);
+	
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -838,7 +852,7 @@ var BluemixComponents =
 	    this.element = element;
 	
 	    this.options = Object.assign({
-	      selectorButton: 'input[type="radio"], a.bx--content-switcher__btn',
+	      selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
 	      selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
 	      classActive: 'bx--content-switcher--selected',
 	      eventBeforeSelected: 'content-switcher-beingselected',
@@ -1049,7 +1063,7 @@ var BluemixComponents =
 	ContentSwitcher.components = new WeakMap();
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1059,7 +1073,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1083,7 +1097,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1099,7 +1113,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1116,13 +1130,13 @@ var BluemixComponents =
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(6);
-	
-	__webpack_require__(10);
-	
 	__webpack_require__(7);
 	
-	var _contentSwitcher = __webpack_require__(5);
+	__webpack_require__(11);
+	
+	__webpack_require__(8);
+	
+	var _contentSwitcher = __webpack_require__(6);
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
@@ -1349,7 +1363,7 @@ var BluemixComponents =
 	Tab.components = new WeakMap();
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1360,7 +1374,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1371,11 +1385,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(6);
+	__webpack_require__(7);
 	
-	var _toggleClass = __webpack_require__(8);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	var _on = __webpack_require__(5);
+	
+	var _on2 = _interopRequireDefault(_on);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1395,10 +1413,20 @@ var BluemixComponents =
 	
 	    this.element = element;
 	    this.constructor.components.set(this.element, this);
-	    this.element.ownerDocument.addEventListener('click', function (event) {
+	
+	    /**
+	     * The handle to release click event listener on document object.
+	     * @member {Handle}
+	     */
+	    this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (event) {
 	      return _this.handleDocumentClick(event);
 	    });
-	    this.element.ownerDocument.addEventListener('keypress', function (event) {
+	
+	    /**
+	     * The handle to release keypress event listener on document object.
+	     * @member {Handle}
+	     */
+	    this.hDocumentKeyPress = (0, _on2.default)(this.element.ownerDocument, 'keypress', function (event) {
 	      return _this.handleKeyPress(event);
 	    });
 	  }
@@ -1433,6 +1461,12 @@ var BluemixComponents =
 	  }, {
 	    key: 'release',
 	    value: function release() {
+	      if (this.hDocumentClick) {
+	        this.hDocumentClick = this.hDocumentClick.release();
+	      }
+	      if (this.hDocumentKeyPress) {
+	        this.hDocumentKeyPress = this.hDocumentKeyPress.release();
+	      }
 	      this.constructor.components.delete(this.element);
 	    }
 	  }], [{
@@ -1469,7 +1503,7 @@ var BluemixComponents =
 	OverflowMenu.components = new WeakMap();
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1478,23 +1512,25 @@ var BluemixComponents =
 	  value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	__webpack_require__(6);
 	
 	__webpack_require__(7);
 	
-	__webpack_require__(13);
+	__webpack_require__(8);
+	
+	__webpack_require__(14);
 	
 	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	var _toggleClass = __webpack_require__(8);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	var _on = __webpack_require__(5);
+	
+	var _on2 = _interopRequireDefault(_on);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1800,43 +1836,31 @@ var BluemixComponents =
 	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.modal !== undefined) {
 	        this.create(target, options);
 	      } else {
-	        var _ret = function () {
-	          var handler = function handler(event) {
-	            var element = (0, _eventMatches2.default)(event, '[data-modal-target]');
+	        return (0, _on2.default)(target, 'click', function (event) {
+	          var element = (0, _eventMatches2.default)(event, '[data-modal-target]');
 	
-	            if (element) {
-	              var modalElements = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.dataset.modalTarget)));
-	              if (modalElements.length > 1) {
-	                throw new Error('Target modal must be unique.');
-	              }
+	          if (element) {
+	            var modalElements = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.dataset.modalTarget)));
+	            if (modalElements.length > 1) {
+	              throw new Error('Target modal must be unique.');
+	            }
 	
-	              if (modalElements.length === 1) {
-	                (function () {
-	                  if (element.tagName === 'A') {
-	                    event.preventDefault();
+	            if (modalElements.length === 1) {
+	              (function () {
+	                if (element.tagName === 'A') {
+	                  event.preventDefault();
+	                }
+	
+	                var modal = _this5.create(modalElements[0], options);
+	                modal.show(element, function (error, shownAlready) {
+	                  if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
+	                    modal.element.focus();
 	                  }
-	
-	                  var modal = _this5.create(modalElements[0], options);
-	                  modal.show(element, function (error, shownAlready) {
-	                    if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
-	                      modal.element.focus();
-	                    }
-	                  });
-	                })();
-	              }
+	                });
+	              })();
 	            }
-	          };
-	          target.addEventListener('click', handler);
-	          return {
-	            v: {
-	              release: function release() {
-	                return target.removeEventListener('click', handler);
-	              }
-	            }
-	          };
-	        }();
-	
-	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	          }
+	        });
 	      }
 	    }
 	  }, {
@@ -1874,7 +1898,7 @@ var BluemixComponents =
 	Modal.components = new WeakMap();
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1900,7 +1924,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1913,11 +1937,11 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(6);
-	
 	__webpack_require__(7);
 	
-	__webpack_require__(13);
+	__webpack_require__(8);
+	
+	__webpack_require__(14);
 	
 	var _eventMatches = __webpack_require__(4);
 	
@@ -2246,7 +2270,7 @@ var BluemixComponents =
 	HeaderNav.components = new WeakMap();
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2365,7 +2389,7 @@ var BluemixComponents =
 	Toolbars.components = new WeakMap();
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2376,7 +2400,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _toggleClass = __webpack_require__(8);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -2521,7 +2545,7 @@ var BluemixComponents =
 	Loading.components = new WeakMap();
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2532,11 +2556,17 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(6);
-	
 	__webpack_require__(7);
 	
-	__webpack_require__(13);
+	__webpack_require__(8);
+	
+	__webpack_require__(14);
+	
+	var _on = __webpack_require__(5);
+	
+	var _on2 = _interopRequireDefault(_on);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -2581,9 +2611,14 @@ var BluemixComponents =
 	    this.element.dataset.dropdown = '';
 	    this.constructor.components.set(this.element, this);
 	
-	    this.element.ownerDocument.addEventListener('click', function (event) {
+	    /**
+	     * The handle to release click event listener on document object.
+	     * @member {Handle}
+	     */
+	    this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (event) {
 	      return _this.toggle(event);
 	    });
+	
 	    this.element.addEventListener('keypress', function (event) {
 	      return _this.toggle(event);
 	    });
@@ -2609,6 +2644,9 @@ var BluemixComponents =
 	  _createClass(Dropdown, [{
 	    key: 'release',
 	    value: function release() {
+	      if (this.hDocumentClick) {
+	        this.hDocumentClick = this.hDocumentClick.release();
+	      }
 	      this.constructor.components.delete(this.element);
 	    }
 	
@@ -2737,7 +2775,7 @@ var BluemixComponents =
 	Dropdown.components = new WeakMap();
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2752,11 +2790,11 @@ var BluemixComponents =
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(6);
-	
 	__webpack_require__(7);
 	
-	__webpack_require__(10);
+	__webpack_require__(8);
+	
+	__webpack_require__(11);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2886,7 +2924,7 @@ var BluemixComponents =
 	Card.components = new WeakMap();
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2897,7 +2935,9 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(6);
+	__webpack_require__(7);
+	
+	__webpack_require__(14);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -2968,7 +3008,15 @@ var BluemixComponents =
 	        } else {
 	          numberInput.stepDown();
 	        }
+	      } else {
+	        return;
 	      }
+	
+	      // Programmatic change in value (including `stepUp()`/`stepDown()`) won't fire change event
+	      numberInput.dispatchEvent(new CustomEvent('change', {
+	        bubbles: true,
+	        cancelable: false
+	      }));
 	    }
 	  }, {
 	    key: 'release',
@@ -3021,7 +3069,7 @@ var BluemixComponents =
 	NumberInput.components = new WeakMap();
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3030,19 +3078,21 @@ var BluemixComponents =
 	  value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(7);
+	__webpack_require__(8);
 	
-	var _toggleClass = __webpack_require__(8);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	var _on = __webpack_require__(5);
+	
+	var _on2 = _interopRequireDefault(_on);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -3230,24 +3280,12 @@ var BluemixComponents =
 	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.table !== undefined) {
 	        this.create(target, options);
 	      } else {
-	        var _ret = function () {
-	          var handler = function handler(event) {
-	            var element = (0, _eventMatches2.default)(event, '[data-table]');
-	            if (element && !_this2.components.has(element)) {
-	              _this2.create(element, options).handleClick(event);
-	            }
-	          };
-	          target.addEventListener('click', handler);
-	          return {
-	            v: {
-	              release: function release() {
-	                return target.removeEventListener('click', handler);
-	              }
-	            }
-	          };
-	        }();
-	
-	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	        return (0, _on2.default)(target, 'click', function (event) {
+	          var element = (0, _eventMatches2.default)(event, '[data-table]');
+	          if (element && !_this2.components.has(element)) {
+	            _this2.create(element, options).handleClick(event);
+	          }
+	        });
 	      }
 	    }
 	  }]);
@@ -3279,7 +3317,7 @@ var BluemixComponents =
 	Table.components = new WeakMap();
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3290,7 +3328,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(23);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -3406,7 +3444,7 @@ var BluemixComponents =
 	DetailPageHeader.components = new WeakMap();
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/**

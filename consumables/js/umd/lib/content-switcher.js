@@ -65,7 +65,7 @@
       this.element = element;
 
       this.options = (0, _assign2.default)({
-        selectorButton: 'input[type="radio"], a.bx--content-switcher__btn',
+        selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
         selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
         classActive: 'bx--content-switcher--selected',
         eventBeforeSelected: 'content-switcher-beingselected',

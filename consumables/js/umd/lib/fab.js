@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../misc/on'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../misc/on'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global._typeof, global.classCallCheck, global.createClass, global.eventMatches);
+    factory(mod.exports, global.weakMap, global.classCallCheck, global.createClass, global.eventMatches, global.on);
     global.fab = mod.exports;
   }
-})(this, function (exports, _weakMap, _typeof2, _classCallCheck2, _createClass2, _eventMatches) {
+})(this, function (exports, _weakMap, _classCallCheck2, _createClass2, _eventMatches, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -19,13 +19,13 @@
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
-  var _typeof3 = _interopRequireDefault(_typeof2);
-
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
 
   var _eventMatches2 = _interopRequireDefault(_eventMatches);
+
+  var _on2 = _interopRequireDefault(_on);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -97,24 +97,12 @@
         if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fab !== undefined) {
           this.create(target);
         } else {
-          var _ret = function () {
-            var handler = function handler(event) {
-              var element = (0, _eventMatches2.default)(event, '[data-fab]');
-              if (element && !_this2.components.has(element)) {
-                _this2.create(element).toggle(event);
-              }
-            };
-            target.addEventListener('click', handler);
-            return {
-              v: {
-                release: function release() {
-                  return target.removeEventListener('click', handler);
-                }
-              }
-            };
-          }();
-
-          if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
+          return (0, _on2.default)(target, 'click', function (event) {
+            var element = (0, _eventMatches2.default)(event, '[data-fab]');
+            if (element && !_this2.components.has(element)) {
+              _this2.create(element).toggle(event);
+            }
+          });
         }
       }
     }, {

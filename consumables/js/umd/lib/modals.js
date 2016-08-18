@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/toConsumableArray', '../polyfills/event-matches', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/toConsumableArray', '../polyfills/event-matches', '../polyfills/toggle-class', '../misc/on', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/toConsumableArray'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/toConsumableArray'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global._typeof, global.assign, global.classCallCheck, global.createClass, global.toConsumableArray, global.eventMatches, global.toggleClass, global.arrayFrom, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.assign, global.classCallCheck, global.createClass, global.toConsumableArray, global.eventMatches, global.toggleClass, global.on, global.arrayFrom, global.objectAssign, global.customEvent);
     global.modals = mod.exports;
   }
-})(this, function (exports, _weakMap, _typeof2, _assign, _classCallCheck2, _createClass2, _toConsumableArray2, _eventMatches, _toggleClass) {
+})(this, function (exports, _weakMap, _assign, _classCallCheck2, _createClass2, _toConsumableArray2, _eventMatches, _toggleClass, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -18,8 +18,6 @@
   });
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
-
-  var _typeof3 = _interopRequireDefault(_typeof2);
 
   var _assign2 = _interopRequireDefault(_assign);
 
@@ -32,6 +30,8 @@
   var _eventMatches2 = _interopRequireDefault(_eventMatches);
 
   var _toggleClass2 = _interopRequireDefault(_toggleClass);
+
+  var _on2 = _interopRequireDefault(_on);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -273,43 +273,31 @@
         if (target.nodeType === Node.ELEMENT_NODE && target.dataset.modal !== undefined) {
           this.create(target, options);
         } else {
-          var _ret = function () {
-            var handler = function handler(event) {
-              var element = (0, _eventMatches2.default)(event, '[data-modal-target]');
+          return (0, _on2.default)(target, 'click', function (event) {
+            var element = (0, _eventMatches2.default)(event, '[data-modal-target]');
 
-              if (element) {
-                var modalElements = [].concat((0, _toConsumableArray3.default)(element.ownerDocument.querySelectorAll(element.dataset.modalTarget)));
-                if (modalElements.length > 1) {
-                  throw new Error('Target modal must be unique.');
-                }
+            if (element) {
+              var modalElements = [].concat((0, _toConsumableArray3.default)(element.ownerDocument.querySelectorAll(element.dataset.modalTarget)));
+              if (modalElements.length > 1) {
+                throw new Error('Target modal must be unique.');
+              }
 
-                if (modalElements.length === 1) {
-                  (function () {
-                    if (element.tagName === 'A') {
-                      event.preventDefault();
+              if (modalElements.length === 1) {
+                (function () {
+                  if (element.tagName === 'A') {
+                    event.preventDefault();
+                  }
+
+                  var modal = _this5.create(modalElements[0], options);
+                  modal.show(element, function (error, shownAlready) {
+                    if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
+                      modal.element.focus();
                     }
-
-                    var modal = _this5.create(modalElements[0], options);
-                    modal.show(element, function (error, shownAlready) {
-                      if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
-                        modal.element.focus();
-                      }
-                    });
-                  })();
-                }
+                  });
+                })();
               }
-            };
-            target.addEventListener('click', handler);
-            return {
-              v: {
-                release: function release() {
-                  return target.removeEventListener('click', handler);
-                }
-              }
-            };
-          }();
-
-          if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
+            }
+          });
         }
       }
     }, {

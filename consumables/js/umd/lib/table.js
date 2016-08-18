@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/toggle-class', '../polyfills/object-assign'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/toggle-class', '../misc/on', '../polyfills/object-assign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../polyfills/object-assign'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../misc/on'), require('../polyfills/object-assign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global._typeof, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.toggleClass, global.objectAssign);
+    factory(mod.exports, global.weakMap, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.toggleClass, global.on, global.objectAssign);
     global.table = mod.exports;
   }
-})(this, function (exports, _weakMap, _typeof2, _assign, _classCallCheck2, _createClass2, _eventMatches, _toggleClass) {
+})(this, function (exports, _weakMap, _assign, _classCallCheck2, _createClass2, _eventMatches, _toggleClass, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -18,8 +18,6 @@
   });
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
-
-  var _typeof3 = _interopRequireDefault(_typeof2);
 
   var _assign2 = _interopRequireDefault(_assign);
 
@@ -30,6 +28,8 @@
   var _eventMatches2 = _interopRequireDefault(_eventMatches);
 
   var _toggleClass2 = _interopRequireDefault(_toggleClass);
+
+  var _on2 = _interopRequireDefault(_on);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -169,24 +169,12 @@
         if (target.nodeType === Node.ELEMENT_NODE && target.dataset.table !== undefined) {
           this.create(target, options);
         } else {
-          var _ret = function () {
-            var handler = function handler(event) {
-              var element = (0, _eventMatches2.default)(event, '[data-table]');
-              if (element && !_this2.components.has(element)) {
-                _this2.create(element, options).handleClick(event);
-              }
-            };
-            target.addEventListener('click', handler);
-            return {
-              v: {
-                release: function release() {
-                  return target.removeEventListener('click', handler);
-                }
-              }
-            };
-          }();
-
-          if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
+          return (0, _on2.default)(target, 'click', function (event) {
+            var element = (0, _eventMatches2.default)(event, '[data-table]');
+            if (element && !_this2.components.has(element)) {
+              _this2.create(element, options).handleClick(event);
+            }
+          });
         }
       }
     }]);
