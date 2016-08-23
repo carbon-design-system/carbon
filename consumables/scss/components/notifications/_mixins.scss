@@ -106,6 +106,8 @@
   .bx--notification-inline__details svg {
     fill: $color;
   }
+
+  @include light-ui { color: $color__blue-90; }
 }
 
 @mixin inline--icon {
