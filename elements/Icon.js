@@ -12,7 +12,7 @@ class Icon extends Component {
     width: React.PropTypes.string,
     height: React.PropTypes.string,
     viewBox: React.PropTypes.string,
-    style: React.PropTypes.string,
+    style: React.PropTypes.object,
   }
 
   /**

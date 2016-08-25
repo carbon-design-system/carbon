@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import centered from '@kadira/react-storybook-decorator-centered';
 import OverflowMenu from '../../components/OverflowMenu';
-import OverflowMenuItem from '../../internal/OverflowMenuItem';
+import OverflowMenuItem from '../../components/OverflowMenuItem';
 import AppContainer from '../../containers/AppContainer';
 
 const overflowMenuEvents = {
