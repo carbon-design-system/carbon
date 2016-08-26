@@ -18,3 +18,21 @@ npm run storybook
 ```
 
 Open browser to [http://localhost:9001/](http://localhost:9001/) and develop components in [stories]() folder.
+
+## Run tests
+
+```sh
+npm run test
+```
+
+## Run linting
+
+```sh
+npm run lint
+```
+
+## Run lint and tests
+
+```sh
+npm run check
+```
