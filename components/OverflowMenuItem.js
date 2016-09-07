@@ -7,7 +7,6 @@ class OverflowMenuItem extends React.Component {
   static propTypes = {
     className: React.PropTypes.string,
     itemText: React.PropTypes.string.isRequired,
-    type: React.PropTypes.string,
     isDelete: React.PropTypes.bool,
     isLastItem: React.PropTypes.bool,
     onBlur: React.PropTypes.func,
@@ -22,7 +21,6 @@ class OverflowMenuItem extends React.Component {
   }
 
   static defaultProps = {
-    type: 'button',
     isDelete: false,
     isLastItem: false,
   }
@@ -35,32 +33,29 @@ class OverflowMenuItem extends React.Component {
       ...other,
     } = this.props;
 
-    const overflowMenuItemClasses = classNames({
-      'bx--overflow-menu__btn': true,
-      'bx--overflow-menu__btn--delete': isDelete,
-      [this.props.className]: this.props.className,
-    });
+    const overflowMenuItemClasses = classNames(
+      this.props.className,
+      'bx--overflow-menu__btn',
+      { 'bx--overflow-menu__btn--delete': isDelete },
+    );
 
-    const overflowMenuItem = isLastItem ?
-      <span>
-        <hr />
-        <li>
-          <button
-            {...other}
-            type="button"
-            className={overflowMenuItemClasses}
-          >{itemText}
-          </button>
-        </li>
-      </span> :
+    const item = (
       <li>
         <button
           {...other}
           type="button"
           className={overflowMenuItemClasses}
-        >{itemText}
+        >
+          {itemText}
         </button>
-      </li>;
+      </li>
+    );
+
+    const overflowMenuItem = isLastItem ?
+      <span>
+        <hr />
+        {item}
+      </span> : item;
 
     return overflowMenuItem;
   }
