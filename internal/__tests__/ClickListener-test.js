@@ -1,13 +1,13 @@
-jest.unmock('../ClickListener');
-
 import React from 'react';
 import ClickListener from '../ClickListener';
 import { shallow, mount } from 'enzyme';
 
 describe('ClickListener', () => {
   it('renders children as expected', () => {
+    const onClickOutside = jest.fn();
+
     const wrapper = shallow(
-      <ClickListener>
+      <ClickListener onClickOutside={onClickOutside}>
         <div className="child">Test</div>
         <div className="child">Test</div>
       </ClickListener>

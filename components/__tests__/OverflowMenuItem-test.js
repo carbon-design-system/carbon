@@ -1,5 +1,3 @@
-jest.unmock('../OverflowMenuItem');
-
 import React from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { shallow } from 'enzyme';

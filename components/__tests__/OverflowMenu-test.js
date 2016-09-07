@@ -1,5 +1,3 @@
-jest.unmock('../OverflowMenu');
-
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
 import Icon from '../../elements/Icon';
