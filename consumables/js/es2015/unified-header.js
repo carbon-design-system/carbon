@@ -1,8 +1,8 @@
 import '../polyfills/array-from';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
-import toggleClass from '../polyfills/toggle-class';
-import eventMatches from '../polyfills/event-matches';
+// import toggleClass from '../polyfills/toggle-class';
+// import eventMatches from '../polyfills/event-matches';
 
 export default class UnifiedHeader {
 
