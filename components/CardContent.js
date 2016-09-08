@@ -24,10 +24,6 @@ class CardContent extends React.Component {
     fullSize: false,
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       children,
