@@ -1,0 +1,146 @@
+.bx--global-header {
+  @include helvetica;
+  width: 100%;
+  padding-right: 3%;
+  position: fixed;
+  z-index: z('header');
+  top: 40px;
+  display: flex;
+  height: rem(50px);
+  line-height: 1.5;
+  background-color: $color__blue-90;
+  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, .1);
+
+  &__title {
+    display: flex;
+    align-items: center;
+
+    &--logo {
+      display: flex;
+      align-items: center;
+      padding: 0 .75rem 0 1rem;
+      text-decoration: none;
+      color: $color__white;
+
+      &:hover,
+      &:focus {
+        color: $color__blue-20;
+      }
+    }
+
+    &--current-page {
+      @include font-smoothing;
+      display: flex;
+      align-items: center;
+      color: $color__blue-40;
+      font-weight: 400;
+    }
+  }
+
+  .logo {
+
+    &__image {
+      margin-right: .5rem;
+    }
+
+    &__text {
+      @include font-size('18');
+      @include font-smoothing;
+      font-weight: 400;
+
+      &--bold {
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__left-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .bx--dropdown {
+    @include font-size('16');
+    height: rem(50px);
+    background-color: transparent;
+    outline: none;
+    width: 0;
+    overflow: hidden;
+
+    &--open {
+      overflow: visible;
+
+      .bx--dropdown__menu-arrow {
+        transform: rotate(180deg);
+      }
+
+      .bx--dropdown__menu-text {
+        background-color: $color__navy-gray-3;
+      }
+
+      .bx--dropdown__list {
+        max-height: 15rem;
+        transition: .5s ease;
+        position: relative;
+      }
+    }
+
+    &__list {
+      max-height: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background-color: $color__navy-gray-3;
+      transition: .3s ease;
+      z-index: z('modal');
+    }
+
+    &__list-item {
+      transition: .3s;
+      padding: .5rem 1rem;
+
+      &:hover {
+        background-color: $color__blue-51;
+        color: $color__white;
+      }
+    }
+
+    &__link {
+      @include font-size('16');
+      padding: 0;
+    }
+
+    &__menu-text {
+      @include font-smoothing;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 1rem;
+      background-color: $color__blue-90;
+      transition: .1s;
+      border-bottom: 1px solid transparent;
+
+      a {
+        color: $color__blue-30;
+        font-weight: 700;
+      }
+
+      &:hover {
+        background-color: $color__navy-gray-3;
+      }
+    }
+
+    &__menu-arrow {
+      position: absolute;
+      right: .75rem;
+      top: .75rem;
+      width: .75rem;
+      height: 1.95rem;
+      fill: $color__blue-40;
+      pointer-events: none;
+      transition: .3s ease-in-out;
+      opacity: 0;
+    }
+  }
+}

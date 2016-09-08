@@ -26,6 +26,8 @@ import Card from './card';
 import NumberInput from './number-input';
 import Table from './table';
 import DetailPageHeader from './detail-page-header';
+import LeftNav from './left-nav';
+import UnifiedHeader from './unified-header';
 
 const settings = {};
 
@@ -93,6 +95,12 @@ export {
    * @type HeaderNav
    */
   HeaderNav,
+
+  /**
+   * Left Navigation Menu
+   * @type LeftNav
+   */
+   LeftNav,
 
   /**
    * Search button in tool bar.
@@ -163,6 +171,8 @@ const init = () => {
     NumberInput.init();
     Table.init();
     DetailPageHeader.init();
+    LeftNav.init();
+    UnifiedHeader.init();
   }
 };
 

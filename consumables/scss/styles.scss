@@ -39,6 +39,7 @@
 @import 'components/tooltips/tooltips';
 @import 'components/tabs/tabs';
 @import 'components/tags/tags';
+@import 'components/unified-header/unified-header';
 
 //-------------------------------------
 // 🙈 Hidden (Not exposed on website)
@@ -46,7 +47,7 @@
 @import 'base-elements/footer/footer';
 @import 'components/fab/fab';
 @import 'components/taxonomy-item/taxonomy-item';
-@import 'components/header/header';
+// @import 'components/header/header';
 
 //-------------------------
 // ☠️ Deprecated

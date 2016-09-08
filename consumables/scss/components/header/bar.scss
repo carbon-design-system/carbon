@@ -1,112 +1,129 @@
-.global-header {
-  @include grid-container;
-  @include helvetica;
-  position: fixed;
-  z-index: z('header');
-  top: 0;
-  display: flex;
-  height: rem($header-height);
-  background-color: $color__blue-90;
-  line-height: rem($header-height);
-  align-items: center;
-}
-
-.global-logo {
-  @include font-size('14');
-  font-weight: 300;
-  position: absolute;
-  overflow: hidden;
-  transition: all .5s ease;
-  transform: translateX(-300px);
-
-  @include breakpoint(bp--sm--major) {
-    @include font-size('23');
-    position: relative;
-    padding-right: 1rem;
-    transition: all .5s ease;
-    transform: translateX(0);
-    text-decoration: none;
-    color: $color__white;
-    font-weight: 300;
-
-    &:hover,
-    &:focus {
-      transition: all .5s ease;
-
-      color: $color__blue-20;
-    }
-  }
-}
-
-.global-product-title {
-  font-weight: 700;
-}
-
-.global-menu-trigger {
-  display: flex;
-  height: 100%;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  text-decoration: none;
-  color: $color__blue-20;
-  background-color: $color__navy-gray-1;
-  font-weight: 700;
-  justify-content: space-between;
-}
-
-
-.current-taxonomy {
-  @include font-size('14');
-  padding-right: .5rem;
-}
-
-.dropdown-affordance {
-  position: relative;
-  top: $header-height / 2;
-  width: 0px;
-  height: 0px;
-  border-width: 5px 5px 0px 5px;
-  border-style: solid;
-  border-color: $color__blue-20 transparent;
-
-  &--active {
-    border-width: 0px 5px 5px 5px;
-  }
-}
-
-.global-docs {
-  display: none;
-
-  @include breakpoint(bp--sm--major) {
-    @include font-size('12');
-    display: block;
-    margin-left: auto;
-    color: $color__blue-20;
-    font-weight: 700;
-    padding-left: 1rem;
-    padding-right: 1.5rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    align-self: flex-end;
-  }
-}
-
-.name-details,
-.current-details {
-  @include line-height('heading');
-}
-
-.global-login {
-  display: flex;
-
-  &__registration {
-    @include font-size('14');
-    font-weight: 700;
-    padding-right: 1rem;
-
-    a {
-      text-decoration: none;
-      color: $color__blue-20;
-    }
-  }
-}
+// .global-header {
+//   @include helvetica;
+//   width: 100%;
+//   padding-right: 3%;
+//   position: fixed;
+//   z-index: z('header');
+//   top: 0;
+//   display: flex;
+//   height: rem($header-height);
+//   background-color: $color__blue-90;
+//   line-height: rem($header-height);
+//
+//   .left-container {
+//     display: flex;
+//     align-items: center;
+//   }
+//
+//   &__current-page--link {
+//     @include font-size('18');
+//     @include font-smoothing;
+//   }
+// }
+//
+// .global-logo {
+//   @include font-size('16');
+//   font-weight: 300;
+//   display: flex;
+//   align-items: center;
+//   padding: 0 1rem;
+//   text-decoration: none;
+//   color: $color__white;
+//   flex: 1;
+//
+//   &:hover,
+//   &:focus {
+//     color: $color__blue-20;
+//   }
+//
+//   &__image {
+//     margin-right: .5rem;
+//   }
+//
+//   &__text {
+//     @include font-size('18');
+//     @include font-smoothing;
+//     font-weight: 300;
+//
+//     &--bold {
+//       font-weight: 700;
+//     }
+//   }
+// }
+//
+// .bx--left-nav__header {
+//   display: flex;
+//   align-items: center;
+//   height: 100%;
+//   border-bottom: 1px solid $color__gray-1;
+//
+//   &--title {
+//     @include font-size('18');
+//     color: $color__blue-51;
+//   }
+//
+//   &.active {
+//     background-color: $color__white;
+//     width: rem(250px);
+//   }
+// }
+//
+// .bx--left-nav__trigger {
+//   width: 3.75rem;
+//   height: 100%;
+//
+//   &--btn {
+//     padding: 1.5rem;
+//     position: relative;
+//     cursor: pointer;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//
+//     span,
+//     span:before,
+//     span:after {
+//       height: rem(2px);
+//       background: $color__blue-51;
+//       cursor: pointer;
+//       position: absolute;
+//       display: block;
+//       content: '';
+//       transition: all $transition--base ease;
+//     }
+//
+//     span {
+//       width: .8rem;
+//     }
+//
+//     span:before,
+//     span:after {
+//       width: 1rem;
+//     }
+//
+//     span:before {
+//       top: rem(-5px);
+//     }
+//
+//     span:after {
+//       bottom: rem(-5px);
+//     }
+//
+//     &.active span {
+//       background-color: transparent;
+//     }
+//
+//     &.active span:before,
+//     &.active span:after {
+//       top: 0;
+//     }
+//
+//     &.active span:before {
+//       transform: rotate(45deg);
+//     }
+//
+//     &.active span:after {
+//       transform: rotate(-45deg);
+//     }
+//   }
+// }
