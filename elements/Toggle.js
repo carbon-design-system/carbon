@@ -12,11 +12,15 @@ class Toggle extends React.Component {
     onToggle: React.PropTypes.func,
     id: React.PropTypes.string,
     toggled: React.PropTypes.bool,
+    labelA: React.PropTypes.string.isRequired,
+    labelB: React.PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     defaultToggled: false,
     disabled: false,
+    labelA: 'Off',
+    labelB: 'On',
   }
 
   constructor(props) {
@@ -54,6 +58,8 @@ class Toggle extends React.Component {
       toggled,
       id,
       ...other,
+      labelA,
+      labelB,
     } = this.props;
 
     const toggleClasses = classNames({
@@ -84,9 +90,9 @@ class Toggle extends React.Component {
           id={id}
         />
         <label className="bx--toggle__label" htmlFor={id}>
-          <span className="bx--toggle__text--left">Off</span>
+          <span className="bx--toggle__text--left">{labelA}</span>
           <span className="bx--toggle__appearance"></span>
-          <span className="bx--toggle__text--right">On</span>
+          <span className="bx--toggle__text--right">{labelB}</span>
         </label>
       </div>
     );
