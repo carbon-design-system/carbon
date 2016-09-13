@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: z('overlay');
+  z-index: 8001;
 
   &__account,
   &__profile {

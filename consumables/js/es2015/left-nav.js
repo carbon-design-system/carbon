@@ -59,10 +59,11 @@ export default class LeftNav {
 
     this.constructor.components.set(this.element, this);
 
-    this.hookSectionSwitcher();
+    // this.hookSectionSwitcher();
     this.hookOpenActions();
     this.hookListItemsEvents();
-    this.addArrowsToNestedLists();
+    // this.addArrowsToNestedLists();
+    this.element.querySelector(this.options.selectorLeftNavList).classList.add('left-nav-list--slide-down');
     this.element.ownerDocument.addEventListener('click', (evt) => this.handleDocumentClick(evt));
   }
 
@@ -130,37 +131,37 @@ export default class LeftNav {
   /**
    * Adds arrow icons to nested lists
    */
-  addArrowsToNestedLists() {
-    const leftNavListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)];
-    leftNavListItems.forEach(item => {
-      if (item.classList.contains(this.options.classItemHasChildren)) {
-        const chevron = this.element.ownerDocument.createElement('div');
-        chevron.classList.add('left-nav-list__item-icon');
-        chevron.setAttribute('data-left-nav-icon', true);
-        chevron.innerHTML = `
-          <svg class="icon">
-            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
-          </svg>
-        `;
-        const link = item.querySelector('a');
-        link.appendChild(chevron);
-      }
-    });
-    const leftNavNestedListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
-    leftNavNestedListItems.forEach(item => {
-      if (item.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-        const chevron = this.element.ownerDocument.createElement('div');
-        chevron.classList.add('left-nav-list--flyout--arrow');
-        chevron.innerHTML = `
-          <svg class="left-nav-list--flyout--arrow-icon">
-            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
-          </svg>
-        `;
-        const link = item.querySelector('a');
-        link.appendChild(chevron);
-      }
-    });
-  }
+  // addArrowsToNestedLists() {
+  //   const leftNavListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)];
+  //   leftNavListItems.forEach(item => {
+  //     if (item.classList.contains(this.options.classItemHasChildren)) {
+  //       const chevron = this.element.ownerDocument.createElement('div');
+  //       chevron.classList.add('left-nav-list__item-icon');
+  //       chevron.setAttribute('data-left-nav-icon', true);
+  //       chevron.innerHTML = `
+  //         <svg class="icon">
+  //           <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+  //         </svg>
+  //       `;
+  //       const link = item.querySelector('a');
+  //       link.appendChild(chevron);
+  //     }
+  //   });
+  //   const leftNavNestedListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
+  //   leftNavNestedListItems.forEach(item => {
+  //     if (item.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+  //       const chevron = this.element.ownerDocument.createElement('div');
+  //       chevron.classList.add('left-nav-list--flyout--arrow');
+  //       chevron.innerHTML = `
+  //         <svg class="left-nav-list--flyout--arrow-icon">
+  //           <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
+  //         </svg>
+  //       `;
+  //       const link = item.querySelector('a');
+  //       link.appendChild(chevron);
+  //     }
+  //   });
+  // }
 
   /**
    * Adds event listeners for showing and hiding the left navigation
@@ -181,58 +182,15 @@ export default class LeftNav {
   /**
    * Adds event listeners for switching between the three sections in the left navigation header
    */
-  hookSectionSwitcher() {
-    const currentSectionHeader = this.element.ownerDocument.querySelector(this.options.selectorLeftNavCurrentSection);
-    const sections = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavSection)];
-    sections.forEach(section => {
-      section.addEventListener('click', (evt) => {
-        this.addActiveSection(evt.currentTarget);
-      });
-      if (currentSectionHeader.dataset.leftNavCurrentSection === section.dataset.leftNavSection) {
-        section.classList.add('left-nav__section--hidden');
-      }
-    });
-  }
-
-  /**
-   * Adds the active class to the section, updates the current page title, and removes the active class from the other two sections.
-   * @param {Object} item The active section.
-   */
-  addActiveSection(item) {
-    const currentSectionHeader = this.element.ownerDocument.querySelector(this.options.selectorLeftNavCurrentSection);
-    const sections = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavSection)];
-    sections.forEach(section => {
-      if (item === section) {
-        const sectionTitle = item.dataset.leftNavSection;
-        currentSectionHeader.setAttribute('data-left-nav-current-section', sectionTitle);
-        currentSectionHeader.querySelector('[data-left-nav-current-section-title]').textContent = sectionTitle;
-        item.classList.add('left-nav__section--hidden');
-        // DEMO PURPOSES
-        const unifiedHeader = this.element.ownerDocument.querySelector('[data-unified-header]');
-        const currentPageTitle = this.element.ownerDocument.querySelector('[data-global-header-current-page]');
-        if (sectionTitle === 'Applications') {
-          unifiedHeader.classList.add('unified-header--applications');
-          unifiedHeader.classList.remove('unified-header--infrastructure');
-          unifiedHeader.classList.remove('unified-header--services');
-          currentPageTitle.innerHTML = 'Applications';
-        } else if (sectionTitle === 'Infrastructure') {
-          unifiedHeader.classList.add('unified-header--infrastructure');
-          unifiedHeader.classList.remove('unified-header--applications');
-          unifiedHeader.classList.remove('unified-header--services');
-          currentPageTitle.innerHTML = 'Infrastructure';
-        } else if (sectionTitle === 'Services') {
-          unifiedHeader.classList.add('unified-header--services');
-          unifiedHeader.classList.remove('unified-header--infrastructure');
-          unifiedHeader.classList.remove('unified-header--applications');
-          currentPageTitle.innerHTML = 'Services';
-        }
-        // END OF DEMO CONTENT
-      } else {
-        section.classList.remove('left-nav__section--hidden');
-        section.classList.remove(this.options.classActiveSection);
-      }
-    });
-  }
+  // hookSectionSwitcher() {
+  //   const sections = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavSection)];
+  //   const leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
+  //   sections.forEach(section => {
+  //     section.addEventListener('click', (evt) => {
+  //       leftNavList.classList.add('left-nav-list--slide-up');
+  //     });
+  //   });
+  // }
 
   /**
    * Adds event listeners to list items
