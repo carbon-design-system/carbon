@@ -9,10 +9,24 @@ export default class LeftNav {
    * Left Navigation.
    * @implements Component
    * @param {HTMLElement} element The element working as a left navigation.
-   * @param {Object} [options] The component options.selectorL   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show the left navigation on mobile.
-   * @param {string} [options.selectorLeftNavDimmer] The data attribute selector that will add a dimmer to the rest of the content when the left navigation is displayed on mobile.
+   * @param {Object} [options] The component options
+   * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+   * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+   * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
    * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
    * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+   * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+   * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+   * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+   * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+   * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+   * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
+   * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
+   * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+   * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+   * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
+   * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
    */
   constructor(element, options = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -27,38 +41,52 @@ export default class LeftNav {
       selectorLeftNavList: '[data-left-nav-list]',
       selectorLeftNavNestedList: '[data-left-nav-nested-list]',
       selectorLeftNavToggle: '[data-left-nav-toggle]',
-      selectorLeftNavDimmer: '[data-left-nav-dimmer]',
       selectorLeftNavListItem: '[data-left-nav-item]',
       selectorLeftNavListItemLink: '[data-left-nav-item-link]',
       selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
-      selectorLeftNavListItemWithChildren: '.left-nav-list__item.left-nav-list__item--has-children',
-      selectorLeftNavListItemWithoutChildren: '.left-nav-list__item:not(.left-nav-list__item--has-children)',
       selectorLeftNavArrowIcon: '[data-left-nav-icon]',
+      selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
+      selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+      selectorLeftNavSection: '[data-left-nav-section]',
+      selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
       // CSS Class Selectors
       classActiveLeftNav: 'left-nav--active',
       classActiveLeftNavListItem: 'left-nav-list__item--active',
       classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
+      classFlyoutDisplayed: 'left-nav-list--flyout--displayed',
       classItemHasChildren: 'left-nav-list__item--has-children',
-      classIconDisplayed: 'left-nav-list__item-icon--displayed',
-      classIconActive: 'left-nav-list__item-icon--active',
-      classDimmerVisible: 'left-nav-dimmer--visible',
     }, options);
 
     this.constructor.components.set(this.element, this);
 
+    this.hookSectionSwitcher();
     this.hookOpenActions();
     this.hookListItemsEvents();
-    // this.addArrowsToNestedLists();
+    this.addArrowsToNestedLists();
     this.element.ownerDocument.addEventListener('click', (evt) => this.handleDocumentClick(evt));
   }
 
   /**
    * Instantiates a left navigation of the given element.
    * @param {HTMLElement} element The element working as the left navigation.
-   * @param {Object} [options] The component options.selectorL   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show the left navigation on mobile.
-   * @param {string} [options.selectorLeftNavDimmer] The data attribute selector that will add a dimmer to the rest of the content when the left navigation is displayed on mobile.
+   * @param {Object} [options] The component options
+   * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+   * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+   * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
    * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
    * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+   * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+   * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+   * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+   * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+   * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+   * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
+   * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
+   * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+   * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+   * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
+   * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
    */
   static create(element, options) {
     return this.components.get(element) || new this(element, options);
@@ -66,13 +94,27 @@ export default class LeftNav {
 
   /**
    * Instantiates a left navigation in the given node.
-   * If the given element indicates that it's a left navigation (having `data-left-nav` attribute), instantiates it.
+   * If the given element indicates that it's a left navigation (having `data-left-nav-container` attribute), instantiates it.
    * Otherwise, instantiates left navigation by searching for left navigation in the given node.
    * @param {Node} target The DOM node to instantiate left navigation in. Should be a document or an element.
-   * @param {Object} [options] The component options.selectorL   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show the left navigation on mobile.
-   * @param {string} [options.selectorLeftNavDimmer] The data attribute selector that will add a dimmer to the rest of the content when the left navigation is displayed on mobile.
+   * @param {Object} [options] The component options
+   * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+   * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+   * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
    * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
    * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+   * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+   * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+   * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+   * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+   * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+   * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
+   * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
+   * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+   * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+   * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
+   * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
    */
   static init(target = document, options) {
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
@@ -92,7 +134,7 @@ export default class LeftNav {
     const leftNavListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)];
     leftNavListItems.forEach(item => {
       if (item.classList.contains(this.options.classItemHasChildren)) {
-        const chevron = document.createElement('div');
+        const chevron = this.element.ownerDocument.createElement('div');
         chevron.classList.add('left-nav-list__item-icon');
         chevron.setAttribute('data-left-nav-icon', true);
         chevron.innerHTML = `
@@ -106,13 +148,13 @@ export default class LeftNav {
     });
     const leftNavNestedListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
     leftNavNestedListItems.forEach(item => {
-      if (item.querySelector('[data-left-nav-flyout]')) {
-        const chevron = document.createElement('div');
+      if (item.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+        const chevron = this.element.ownerDocument.createElement('div');
         chevron.classList.add('left-nav-list--flyout--arrow');
         chevron.innerHTML = `
-        <svg class="left-nav-list--flyout--arrow-icon">
-          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
-        </svg>
+          <svg class="left-nav-list--flyout--arrow-icon">
+            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
+          </svg>
         `;
         const link = item.querySelector('a');
         link.appendChild(chevron);
@@ -121,13 +163,74 @@ export default class LeftNav {
   }
 
   /**
-   * Adds event listeners for showing the left navigation on mobile
+   * Adds event listeners for showing and hiding the left navigation
    */
   hookOpenActions() {
-    const headerHamburger = document.querySelector('[data-left-nav-toggle]');
-    headerHamburger.addEventListener('click', () => {
-      this.element.classList.toggle('left-nav--active');
-      // this.toggleLeftNav();
+    const openCloseBtns = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavToggle)];
+    openCloseBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.leftNavToggle === 'close') {
+          this.element.classList.remove(this.options.classActiveLeftNav);
+        } else if (btn.dataset.leftNavToggle === 'open') {
+          this.element.classList.add(this.options.classActiveLeftNav);
+        }
+      });
+    });
+  }
+
+  /**
+   * Adds event listeners for switching between the three sections in the left navigation header
+   */
+  hookSectionSwitcher() {
+    const currentSectionHeader = this.element.ownerDocument.querySelector(this.options.selectorLeftNavCurrentSection);
+    const sections = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavSection)];
+    sections.forEach(section => {
+      section.addEventListener('click', (evt) => {
+        this.addActiveSection(evt.currentTarget);
+      });
+      if (currentSectionHeader.dataset.leftNavCurrentSection === section.dataset.leftNavSection) {
+        section.classList.add('left-nav__section--hidden');
+      }
+    });
+  }
+
+  /**
+   * Adds the active class to the section, updates the current page title, and removes the active class from the other two sections.
+   * @param {Object} item The active section.
+   */
+  addActiveSection(item) {
+    const currentSectionHeader = this.element.ownerDocument.querySelector(this.options.selectorLeftNavCurrentSection);
+    const sections = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavSection)];
+    sections.forEach(section => {
+      if (item === section) {
+        const sectionTitle = item.dataset.leftNavSection;
+        currentSectionHeader.setAttribute('data-left-nav-current-section', sectionTitle);
+        currentSectionHeader.querySelector('[data-left-nav-current-section-title]').textContent = sectionTitle;
+        item.classList.add('left-nav__section--hidden');
+        // DEMO PURPOSES
+        const unifiedHeader = this.element.ownerDocument.querySelector('[data-unified-header]');
+        const currentPageTitle = this.element.ownerDocument.querySelector('[data-global-header-current-page]');
+        if (sectionTitle === 'Applications') {
+          unifiedHeader.classList.add('unified-header--applications');
+          unifiedHeader.classList.remove('unified-header--infrastructure');
+          unifiedHeader.classList.remove('unified-header--services');
+          currentPageTitle.innerHTML = 'Applications';
+        } else if (sectionTitle === 'Infrastructure') {
+          unifiedHeader.classList.add('unified-header--infrastructure');
+          unifiedHeader.classList.remove('unified-header--applications');
+          unifiedHeader.classList.remove('unified-header--services');
+          currentPageTitle.innerHTML = 'Infrastructure';
+        } else if (sectionTitle === 'Services') {
+          unifiedHeader.classList.add('unified-header--services');
+          unifiedHeader.classList.remove('unified-header--infrastructure');
+          unifiedHeader.classList.remove('unified-header--applications');
+          currentPageTitle.innerHTML = 'Services';
+        }
+        // END OF DEMO CONTENT
+      } else {
+        section.classList.remove('left-nav__section--hidden');
+        section.classList.remove(this.options.classActiveSection);
+      }
     });
   }
 
@@ -136,142 +239,86 @@ export default class LeftNav {
    */
   hookListItemsEvents() {
     const leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
-
     leftNavList.addEventListener('click', (evt) => {
       const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
-      const leftNavNestedListItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
-      const leftNavFlyoutListItem = eventMatches(evt, '[data-left-nav-flyout-item]');
-
+      const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
       if (leftNavItem) {
-        if (leftNavItem.classList.contains(this.options.classItemHasChildren)) {
+        const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
+        const hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
+        if (childItem) {
+          this.addActiveListItem(childItem);
+        } else if (hasChildren) {
           this.handleNestedListClick(leftNavItem, evt);
         } else {
-          this.addActiveListItem(evt);
+          this.addActiveListItem(leftNavItem);
         }
       }
-
-      if (leftNavNestedListItem) {
-        this.addActiveListItem(evt);
-      }
-
-      if (leftNavFlyoutListItem) {
-        const isMobile = (window.outerWidth < 600);
-        leftNavFlyoutListItem.parentElement.parentElement.classList.add('left-nav-list__item--active');
-        if (isMobile) {
-          this.toggleLeftNav();
-        } else {
-          leftNavFlyoutListItem.parentElement.classList.remove('left-nav-list--flyout--displayed');
-        }
+      if (flyoutItem) {
+        [...this.element.querySelectorAll(this.options.selectorLeftNavFlyoutItem)].forEach(currentItem => {
+          if (!(flyoutItem === currentItem)) {
+            currentItem.classList.remove(this.options.classActiveLeftNavListItem);
+          }
+        });
+        flyoutItem.classList.add(this.options.classActiveLeftNavListItem);
+        this.element.classList.toggle(this.options.classActiveLeftNav);
       }
     });
-
-    // const leftNavNestedListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
   }
 
   /**
-   * Toggles the visibility of the left nav and dimmer
-   */
-  toggleLeftNav() {
-    const leftNavList = this.element.querySelector(this.options.selectorLeftNav);
-    const leftNavDimmer = this.element.querySelector(this.options.selectorLeftNavDimmer);
-    const isOpen = leftNavList.classList.contains(this.options.classActiveLeftNav);
-    const leftNavToggle = document.querySelector('[data-left-nav-toggle]');
-    const demoContainer = document.querySelector('.global-header__demo-container');
-    demoContainer.classList.toggle('slide-out');
-    toggleClass(leftNavList, this.options.classActiveLeftNav, !isOpen);
-    toggleClass(leftNavDimmer, this.options.classDimmerVisible, !isOpen);
-    toggleClass(leftNavToggle, 'active', !isOpen);
-  }
-
-  /**
-   * Sets a list item as active by redirecting to the specific function based on whether the item is a single item or if it is part of a nested itemHasChildren.
-   */
-  addActiveListItem(evt) {
-    const itemHasChildren = eventMatches(evt, this.options.selectorLeftNavListItemWithChildren);
-    const itemWithoutChildren = eventMatches(evt, this.options.selectorLeftNavListItemWithoutChildren);
-    const flyoutMenus = [... this.element.querySelectorAll('[data-left-nav-flyout]')];
-    flyoutMenus.forEach(menu => {
-      menu.classList.remove('left-nav-list--flyout--displayed');
-    });
-
-    if (itemHasChildren) {
-      this.addActiveNestedListItem(evt);
-    }
-
-    if (itemWithoutChildren) {
-      this.addActiveSingleListItem(itemWithoutChildren);
-    }
-  }
-
-  /**
-   * Sets a list item in a nested list as active.
-   */
-  addActiveNestedListItem(evt) {
-    const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
-    const item = evt.target;
-    if (childItem.querySelector('[data-left-nav-flyout]')) {
-      const flyoutMenu = childItem.querySelector('[data-left-nav-flyout]');
-      flyoutMenu.classList.toggle('left-nav-list--flyout--displayed');
-    }
-    [... this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach(currentItem => {
-      if (childItem !== currentItem) {
-        const currentIcon = currentItem.parentElement.parentElement.querySelector('[data-left-nav-icon]');
-        currentItem.classList.remove(this.options.classActiveLeftNavListItem);
-        if (currentItem.querySelector('[data-left-nav-flyout]')) {
-          const flyoutMenu = currentItem.querySelector('[data-left-nav-flyout]');
-          flyoutMenu.classList.remove('left-nav-list--flyout--displayed');
-        }
-        currentIcon.classList.remove(this.options.classIconActive);
-      }
-    });
-    const arrowIcon = childItem.parentElement.parentElement.querySelector('[data-left-nav-icon]');
-    arrowIcon.classList.add(this.options.classIconActive);
-    item.classList.add(this.options.classActiveLeftNavListItem);
-    childItem.classList.add(this.options.classActiveLeftNavListItem);
-    const isMobile = (window.outerWidth < 600);
-    if (isMobile) {
-      this.toggleLeftNav();
-    }
-  }
-
-  /**
-   * Sets a single list item without a nested list as active.
+   * Sets a list item as active.
    * @param {Object} item The active list item.
    */
-  addActiveSingleListItem(item) {
-    [...this.element.querySelectorAll(this.options.selectorLeftNavListItemWithoutChildren)].forEach(currentItem => {
-      if (item !== currentItem) {
+  addActiveListItem(item) {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(currentItem => {
+      if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
     });
     item.classList.add(this.options.classActiveLeftNavListItem);
+    const flyoutMenuItems = [... this.element.querySelectorAll(this.options.selectorLeftNavFlyoutItem)];
+    flyoutMenuItems.forEach(flyoutItem => {
+      flyoutItem.classList.remove(this.options.classActiveLeftNavListItem);
+    });
+    if (item.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+      const flyoutMenu = item.querySelector(this.options.selectorLeftNavFlyoutMenu);
+      flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
+    } else {
+      this.hideAllFlyoutMenus();
+      this.element.classList.toggle(this.options.classActiveLeftNav);
+    }
+  }
+
+  /**
+   * Hides all flyout menus.
+   */
+  hideAllFlyoutMenus() {
+    const flyoutMenus = [... this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)];
+    flyoutMenus.forEach(menu => {
+      menu.classList.remove(this.options.classFlyoutDisplayed);
+    });
   }
 
   /**
    * Handles click on the document.
-   * Closes the left navigation on mobile screens when document is clicked outside the left navigation.
+   * Closes the left navigation when document is clicked outside the left navigation.
    * @param {Event} event The event triggering this method.
    */
   handleDocumentClick(evt) {
     const clickTarget = evt.target;
-    const leftNavList = this.element.querySelector(this.options.selectorLeftNav);
-    const leftNavToggle = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle);
-    if (leftNavList && leftNavToggle) {
-      const isOfSelf = leftNavList.contains(clickTarget);
-      const isToggle = leftNavToggle.contains(clickTarget);
-      const isOpen = leftNavList.classList.contains(this.options.classActiveLeftNav);
-      const isMobile = (window.outerWidth < 600);
-      const shouldClose = !isOfSelf && !isToggle && isOpen && isMobile;
-      const flyoutOpen = this.element.querySelector('[data-left-nav-flyout]').classList.contains('left-nav-list--flyout--displayed');
-      if (isOfSelf && leftNavList.tagName === 'A') {
-        evt.preventDefault();
-      }
-      if (shouldClose) {
-        this.toggleLeftNav();
-      }
-      if (flyoutOpen && !isOfSelf && !isToggle && isOpen) {
-        this.element.querySelector('[data-left-nav-flyout]').classList.remove('left-nav-list--flyout--displayed');
-      }
+    const isOfSelf = this.element.contains(clickTarget);
+    const isToggleBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle).contains(clickTarget);
+    const isOpen = this.element.classList.contains(this.options.classActiveLeftNav);
+    const shouldClose = !isOfSelf && isOpen && !isToggleBtn;
+    const flyoutOpen = this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.contains(this.options.classFlyoutDisplayed);
+    if (isOfSelf && this.element.tagName === 'A') {
+      evt.preventDefault();
+    }
+    if (shouldClose) {
+      this.element.classList.remove(this.options.classActiveLeftNav);
+    }
+    if (flyoutOpen && !isOfSelf && isOpen) {
+      this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
     }
   }
 
@@ -283,9 +330,9 @@ export default class LeftNav {
    */
   handleNestedListClick(listItem, evt) {
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
-    const flyoutMenus = [... this.element.querySelectorAll('[data-left-nav-flyout]')];
+    const flyoutMenus = [... this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)];
     flyoutMenus.forEach(menu => {
-      menu.classList.remove('left-nav-list--flyout--displayed');
+      menu.classList.remove(this.options.classFlyoutDisplayed);
     });
     if (!('leftNavItemLink' in evt.target.dataset)) {
       toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
@@ -303,10 +350,23 @@ export default class LeftNav {
 /**
 * The component options.
  * @member {Object} LeftNav#options
- * @property {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show the left navigation on mobile.
- * @property {string} [options.selectorLeftNavDimmer] The data attribute selector that will add a dimmer to the rest of the content when the left navigation is displayed on mobile.
+ * @property {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+ * @property {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+ * @property {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+ * @property {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
  * @property {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
  * @property {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+ * @property {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+ * @property {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+ * @property {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+ * @property {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+ * @property {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+ * @property {string} [options.classActiveLeftNav] The class name for when a left nav is active.
+ * @property {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
+ * @property {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+ * @property {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+ * @property {string} [options.classActiveSection] The class name for an active section item in the left nav header.
+ * @property {string} [options.classItemHasChildren] The class name for when a list item has children.
  */
 
 /**

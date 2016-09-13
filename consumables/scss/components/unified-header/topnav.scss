@@ -9,6 +9,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: z('overlay');
 
   &__account,
   &__profile {
@@ -37,7 +38,17 @@
           transform: rotate(0);
 
           use {
-            fill: #fff;
+            .unified-header--applications & {
+              fill: $color__teal-30;
+            }
+
+            .unified-header--infrastructure & {
+              fill: $color__blue-30;
+            }
+
+            .unified-header--services & {
+              fill: $color__purple-40;
+            }
           }
         }
       }
@@ -59,6 +70,22 @@
         &__menu-text {
           padding-right: 2rem;
         }
+
+        &__arrow {
+          use {
+            .unified-header--applications & {
+              fill: $color__teal-30;
+            }
+
+            .unified-header--infrastructure & {
+              fill: $color__blue-30;
+            }
+
+            .unified-header--services & {
+              fill: $color__purple-40;
+            }
+          }
+        }
       }
 
       &:last-child {
@@ -74,19 +101,26 @@
 
   &__item {
     &--icon {
-      fill: #fff;
       height: 2rem;
       width: 2rem;
+
+      .unified-header--applications & {
+        fill: $color__teal-30;
+      }
+
+      .unified-header--infrastructure & {
+        fill: $color__blue-30;
+      }
+
+      .unified-header--services & {
+        fill: $color__purple-40;
+      }
     }
   }
 
   .bx--dropdown[data-value=''] .bx--dropdown__menu-text {
     color: $color__white;
     letter-spacing: .5px;
-
-    .bx--dropdown--open & {
-      color: red;
-    }
   }
 
   .bx--dropdown {
@@ -96,6 +130,10 @@
     display: flex;
     align-items: center;
     font-size: .75rem;
+
+    &:focus {
+      @include focus-outline;
+    }
 
     &--open {
       background-color: $color__navy-gray-3;
@@ -107,10 +145,33 @@
 
       .bx--dropdown__menu-text {
         color: $color__blue-40;
+
+        .unified-header--applications & {
+          color: $color__teal-30;
+        }
+
+        .unified-header--infrastructure & {
+          color: $color__blue-30;
+        }
+
+        .unified-header--services & {
+          color: $color__purple-40;
+        }
       }
 
       .bx--dropdown__arrow use {
-        fill: $color__blue-40;
+
+        .unified-header--applications & {
+          fill: $color__teal-30;
+        }
+
+        .unified-header--infrastructure & {
+          fill: $color__blue-30;
+        }
+
+        .unified-header--services & {
+          fill: $color__purple-40;
+        }
       }
     }
 
@@ -126,14 +187,29 @@
       background-color: $color__navy-gray-3;
       z-index: 9000;
 
+      .bx--global-light-ui & {
+        background-color: $color__navy-gray-3;
+      }
+
       &-item {
         width: 100%;
         white-space: nowrap;
         text-overflow: ellipsis;
 
         &:hover {
-          background-color: $color__blue-51;
-          color: $color__white;
+          color: $color__blue-90;
+
+          .unified-header--applications & {
+            background-color: $color__teal-30;
+          }
+
+          .unified-header--infrastructure & {
+            background-color: $color__blue-30;
+          }
+
+          .unified-header--services & {
+            background-color: $color__purple-40;
+          }
         }
       }
     }

@@ -6,7 +6,7 @@
 @import 'global/typography/font-face';
 
 //-------------------------
-// 🍅 Base Elements
+// 🍅 Base Elementss
 //-------------------------
 @import 'base-elements/buttons/buttons';
 @import 'base-elements/file-uploader/file-uploader';
@@ -40,6 +40,7 @@
 @import 'components/tabs/tabs';
 @import 'components/tags/tags';
 @import 'components/unified-header/unified-header';
+@import 'components/inline-left-nav/inline-left-nav';
 
 //-------------------------------------
 // 🙈 Hidden (Not exposed on website)
@@ -47,7 +48,6 @@
 @import 'base-elements/footer/footer';
 @import 'components/fab/fab';
 @import 'components/taxonomy-item/taxonomy-item';
-// @import 'components/header/header';
 
 //-------------------------
 // ☠️ Deprecated

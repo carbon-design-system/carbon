@@ -1,0 +1,66 @@
+.bx--inline-left-nav {
+  width: rem(250px);
+  position: fixed;
+  top: rem(90px);
+  height: 100%;
+  background-color: $color__white;
+  border-right: 1px solid $color__gray-1;
+
+  &__header {
+    border-bottom: 1px solid $color__gray-1;
+    cursor: pointer;
+
+    &--link {
+      @include font-smoothing;
+      text-decoration: none;
+      padding: 1rem;
+      margin-left: .5rem;
+      color: $color__blue-51;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+
+      .icon {
+        width: rem(15px);
+        height: rem(15px);
+        fill: $color__blue-51;
+        margin-right: 1rem;
+      }
+
+      &:hover {
+        color: $color__blue-40;
+
+        & > .icon {
+          fill: $color__blue-40;
+        }
+      }
+
+      .previous-page {
+        margin-left: .3rem;
+      }
+    }
+  }
+
+  & > .left-nav-list {
+    padding-top: 1.25rem;
+  }
+
+  .left-nav-list {
+    height: 100%;
+
+    &__item {
+      padding-left: 2.4rem;
+      padding-top: .75rem;
+      transition: .3s;
+
+      &:hover,
+      &--active {
+        background-color: $color__blue-51;
+
+        .left-nav-list__item-link {
+          color: $color__white;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,11 @@
 // Local components
 @import '../../global/global';
+@import 'vars';
 @import 'global-header';
 @import 'left-nav';
 @import 'topnav';
+
+.unified-header {
+  position: fixed;
+  z-index: z('header');
+}

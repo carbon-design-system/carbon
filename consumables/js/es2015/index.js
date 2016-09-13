@@ -28,6 +28,7 @@ import Table from './table';
 import DetailPageHeader from './detail-page-header';
 import LeftNav from './left-nav';
 import UnifiedHeader from './unified-header';
+import InlineLeftNav from './inline-left-nav';
 
 const settings = {};
 
@@ -173,6 +174,7 @@ const init = () => {
     DetailPageHeader.init();
     LeftNav.init();
     UnifiedHeader.init();
+    InlineLeftNav.init();
   }
 };
 

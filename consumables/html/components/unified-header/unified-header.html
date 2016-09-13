@@ -1,4 +1,7 @@
-<div data-unified-header class="unified-header">
+<!-- Unified Header -->
+<div data-unified-header class="unified-header unified-header--applications">
+
+  <!-- Super Global Header -->
   <nav class="bx--top-nav">
     <ul class="bx--top-nav__account">
       <li class="bx--top-nav__account--item">
@@ -9,7 +12,6 @@
           </svg>
           <li>
             <ul class="bx--dropdown__list">
-              <!-- `href` in `<li>` would typically be actual links of routes -->
               <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
               <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
               <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
@@ -25,7 +27,6 @@
           </svg>
           <li>
             <ul class="bx--dropdown__list">
-              <!-- `href` in `<li>` would typically be actual links of routes -->
               <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Sales</a></li>
               <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">DW Answers</a></li>
               <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">StackOverflow</a></li>
@@ -41,7 +42,6 @@
           </svg>
           <li>
             <ul class="bx--dropdown__list">
-              <!-- `href` in `<li>` would typically be actual links of routes -->
               <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">System Status</a></li>
               <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Application Status</a></li>
             </ul>
@@ -58,7 +58,6 @@
           </svg>
           <li>
             <ul class="bx--dropdown__list">
-              <!-- `href` in `<li>` would typically be actual links of routes -->
               <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
               <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
               <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
@@ -76,7 +75,6 @@
           </svg>
           <li>
             <ul class="bx--dropdown__list">
-              <!-- `href` in `<li>` would typically be actual links of routes -->
               <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
               <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
               <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
@@ -94,7 +92,6 @@
           </svg>
           <li>
             <ul class="bx--dropdown__list">
-              <!-- `href` in `<li>` would typically be actual links of routes -->
               <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
               <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
               <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
@@ -113,7 +110,6 @@
           </li>
           <li>
             <ul class="bx--dropdown__list">
-              <!-- `href` in `<li>` would typically be actual links of routes -->
               <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
               <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
               <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
@@ -125,62 +121,65 @@
       </li>
     </ul>
   </nav>
+  <!-- End Super Global Header -->
 
+  <!-- Global Header -->
   <header role="header" class="bx--global-header">
-
     <div class="bx--global-header__left-container">
-
+      <div class="left-nav__trigger">
+        <a class="left-nav__trigger--btn" data-left-nav-toggle="open">
+          <span></span>
+        </a>
+      </div>
+      <!-- Left Navigation -->
       <div class="bx--global-header__left-nav" data-left-nav-container>
-
-        <div class="left-nav__header">
-
-          <div class="left-nav__trigger">
-            <a class="left-nav__trigger--btn" data-left-nav-toggle>
-              <span></span>
-            </a>
-          </div>
-
-          <ul data-dropdown data-section-dropdown data-value class="bx--dropdown" tabindex="0">
-            <li class="bx--dropdown__menu-text">
-              Applications
-            </li>
-            <svg class="bx--dropdown__menu-arrow">
-              <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
-            </svg>
-            <li>
-              <ul class="bx--dropdown__list">
-                <li data-option data-value="applications" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Applications</a></li>
-                <li data-option data-value="infrastructure" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Infrastructure</a></li>
-                <li data-option data-value="services" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Services</a></li>
-              </ul>
-            </li>
-          </ul>
+        <div data-left-nav-toggle="close" data-left-nav-current-section="Applications" class="left-nav__header">
+          <!-- <img class="left-nav__header--logo" src="https://new-console.ng.bluemix.net/api/v4/img/bluemix-logo-2016-feb.svg" /> -->
+          <a data-left-nav-current-section-title class="left-nav__header--title">Applications</a>
+          <svg class="left-nav__header--close-icon">
+            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--close"></use>
+          </svg>
         </div>
-
         <nav class="left-nav" data-left-nav>
+          <ul data-left-nav-sections class="left-nav__sections" tabindex="0">
+            <li data-left-nav-section="Applications" class="left-nav__section left-nav__section--applications"><a class="left-nav__section--link" href="javascript:void(0)">Applications</a></li>
+            <li data-left-nav-section="Infrastructure" class="left-nav__section left-nav__section--infrastructure"><a class="left-nav__section--link" href="javascript:void(0)">Infrastructure</a></li>
+            <li data-left-nav-section="Services" class="left-nav__section left-nav__section--services"><a class="left-nav__section--link" href="javascript:void(0)">Services</a></li>
+          </ul>
+          <hr>
           <ul class="left-nav-list" data-left-nav-list>
+            <li class="left-nav-list__item" data-left-nav-item>
+              <a href="#" class="left-nav-list__item-link">
+                Item without children
+              </a>
+            </li>
+            <li class="left-nav-list__item" data-left-nav-item>
+              <a href="#" class="left-nav-list__item-link">
+                Item without children
+              </a>
+            </li>
             <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item>
               <a class="left-nav-list__item-link">
-                Devices
+                Item with children
               </a>
               <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
                 <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-1A" class="left-nav-list__item-link" data-left-nav-item-link>Manage</a>
+                  <a href="#example-item-1A" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1A</a>
                   <ul class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
                     <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Passwords</a>
+                      <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Aa</a>
                     </li>
                     <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Images</a>
+                      <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ab</a>
                     </li>
                     <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>SSH Keys</a>
+                      <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ac</a>
                     </li>
                     <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Provisioning Scripts</a>
+                      <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ad</a>
                     </li>
                     <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Control Panel Licenses</a>
+                      <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ae</a>
                     </li>
                   </ul>
                 </li>
@@ -197,7 +196,7 @@
             </li>
             <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item>
               <a class="left-nav-list__item-link">
-                Storages
+                Item with children
               </a>
               <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
                 <li class="left-nav-list__item" data-left-nav-nested-item>
@@ -205,23 +204,6 @@
                 </li>
                 <li class="left-nav-list__item" data-left-nav-nested-item>
                   <a href="#example-item-2B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2B</a>
-                  <ul class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-2Ba" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2Ba</a>
-                    </li>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-2Bb" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2Bb</a>
-                    </li>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-2Bc" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2Bc</a>
-                    </li>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-2Bd" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2Bd</a>
-                    </li>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-2Be" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2Be</a>
-                    </li>
-                  </ul>
                 </li>
                 <li class="left-nav-list__item" data-left-nav-nested-item>
                   <a href="#example-item-2C" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2C</a>
@@ -233,7 +215,7 @@
             </li>
             <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item>
               <a class="left-nav-list__item-link">
-                Network
+                Item with children
               </a>
               <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
                 <li class="left-nav-list__item" data-left-nav-nested-item>
@@ -241,12 +223,29 @@
                 </li>
                 <li class="left-nav-list__item" data-left-nav-nested-item>
                   <a href="#example-item-3B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3B</a>
+                  <ul class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item>
+                      <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Ba</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item>
+                      <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bb</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item>
+                      <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bc</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item>
+                      <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bd</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item>
+                      <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Be</a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>
             <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item>
               <a class="left-nav-list__item-link">
-                Security
+                Item with children
               </a>
               <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
                 <li class="left-nav-list__item" data-left-nav-nested-item>
@@ -263,21 +262,19 @@
                 </li>
               </ul>
             </li>
-            <li class="left-nav-list__item" data-left-nav-item>
-              <a href="#sub-category-5" class="left-nav-list__item-link" data-left-nav-item-link>
-                Services
-              </a>
-            </li>
           </ul>
         </nav>
       </div>
+      <!-- End Left Navigation -->
       <div class="bx--global-header__title">
-        <a class="bx--global-header__title--logo" href="#">
+        <!-- <a class="bx--global-header__title--logo" href="#">
           <img class="logo__image" src="https://new-console.ng.bluemix.net/api/v4/img/bluemix-logo-2016-feb.svg" />
-          <span class="logo__text">IBM <span class="logo__text--bold">Bluemix</span></span>
-        </a>
-        <h4 class="bx--global-header__title--current-page">Applications</h4>
+        </a> -->
+        <h4 data-global-header-current-page class="bx--global-header__title--current-page">Applications</h4>
       </div>
     </div>
   </header>
+  <!-- End Global Header -->
+
 </div>
+<!-- End Unified Header -->

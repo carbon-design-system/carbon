@@ -1,8 +1,6 @@
 import '../polyfills/array-from';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
-// import toggleClass from '../polyfills/toggle-class';
-// import eventMatches from '../polyfills/event-matches';
 
 export default class UnifiedHeader {
 
@@ -15,12 +13,10 @@ export default class UnifiedHeader {
 
     this.options = Object.assign({
       // Data Attribute selectors
-      selectorDropdown: '[data-section-dropdown]',
       // CSS Class Selectors
     }, options);
-
+    document.body.classList.add('bx--global-light-ui');
     this.constructor.components.set(this.element, this);
-    this.element.querySelector(this.options.selectorDropdown).addEventListener('click', (e) => this.updateSectionTitle(e));
   }
 
   static create(element, options) {
@@ -36,13 +32,6 @@ export default class UnifiedHeader {
     } else {
       [... target.querySelectorAll('[data-unified-header]')].forEach(element => this.create(element, options));
     }
-  }
-
-  updateSectionTitle(e) {
-    const dropdown = e.currentTarget;
-    const selectedText = dropdown.querySelector('.bx--dropdown__menu-text').innerHTML;
-    const title = this.element.querySelector('.bx--global-header__title--current-page');
-    title.innerHTML = selectedText;
   }
 
   release() {
