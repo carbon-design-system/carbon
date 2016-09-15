@@ -1,116 +1,70 @@
-<nav data-inline-left-nav class="bx--inline-left-nav">
+<nav role="navigation" aria-label="Inline Left Navigation" data-inline-left-nav class="bx--inline-left-nav">
   <div class="bx--inline-left-nav__header">
-    <a data-inline-left-nav-previous-page href="#" class="bx--inline-left-nav__header--link">
+    <a tabindex="0" data-inline-left-nav-previous-page href="#" class="bx--inline-left-nav__header--link">
       <svg class="icon">
         <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--previous"></use>
       </svg>
       Back to <span data-inline-left-nav-previous-page-title class="previous-page">Projects</span>
     </a>
   </div>
-  <ul class="left-nav-list" data-left-nav-list>
-    <li class="left-nav-list__item left-nav-list__item--active left-nav-list__item--has-children" data-left-nav-item>
+  <ul role="menubar" class="left-nav-list" data-inline-left-nav-list aria-hidden="false">
+    <li role="menuitem" tabindex="0" class="left-nav-list__item left-nav-list__item--has-children" data-inline-left-nav-item>
       <a class="left-nav-list__item-link">
         Example Item 1
+        <div class="left-nav-list__item-icon">
+          <svg class="icon">
+            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+          </svg>
+        </div>
       </a>
-      <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-1A" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1A</a>
-          <ul class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Aa</a>
-            </li>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ab</a>
-            </li>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ac</a>
-            </li>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ad</a>
-            </li>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ae</a>
-            </li>
-          </ul>
+      <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--nested" data-inline-left-nav-nested-list>
+        <li class="left-nav-list__item" data-inline-left-nav-nested-item role="menuitem" tabindex="-1">
+          <a href="#example-item-1A" class="left-nav-list__item-link" data-inline-left-nav-item-link tabindex="-1">Example Item 1A</a>
         </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-1B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1B</a>
+        <li class="left-nav-list__item" data-inline-left-nav-nested-item role="menuitem" tabindex="-1">
+          <a href="#example-item-1B" class="left-nav-list__item-link" data-inline-left-nav-item-link tabindex="-1">Example Item 1B</a>
         </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-1C" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1C</a>
+        <li class="left-nav-list__item" data-inline-left-nav-nested-item role="menuitem" tabindex="-1">
+          <a href="#example-item-1C" class="left-nav-list__item-link" data-inline-left-nav-item-link tabindex="-1">Example Item 1C</a>
         </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-1D" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1D</a>
+        <li class="left-nav-list__item" data-inline-left-nav-nested-item role="menuitem" tabindex="-1">
+          <a href="#example-item-1D" class="left-nav-list__item-link" data-inline-left-nav-item-link tabindex="-1">Example Item 1D</a>
         </li>
       </ul>
     </li>
-    <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item>
+    <li role="menuitem" tabindex="0" class="left-nav-list__item left-nav-list__item--has-children" data-inline-left-nav-item>
       <a class="left-nav-list__item-link">
         Example Item 2
+        <div class="left-nav-list__item-icon">
+          <svg class="icon">
+            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+          </svg>
+        </div>
       </a>
-      <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-2A" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2A</a>
+      <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--nested" data-inline-left-nav-nested-list>
+        <li class="left-nav-list__item" data-inline-left-nav-nested-item role="menuitem" tabindex="-1">
+          <a href="#example-item-2A" class="left-nav-list__item-link" data-inline-left-nav-item-link tabindex="-1">Example Item 2A</a>
         </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-2B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2B</a>
+        <li class="left-nav-list__item" data-inline-left-nav-nested-item role="menuitem" tabindex="-1">
+          <a href="#example-item-2B" class="left-nav-list__item-link" data-inline-left-nav-item-link tabindex="-1">Example Item 2B</a>
         </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-2C" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2C</a>
+        <li class="left-nav-list__item" data-inline-left-nav-nested-item role="menuitem" tabindex="-1">
+          <a href="#example-item-2C" class="left-nav-list__item-link" data-inline-left-nav-item-link tabindex="-1">Example Item 2C</a>
         </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-2D" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2D</a>
+        <li class="left-nav-list__item" data-inline-left-nav-nested-item role="menuitem" tabindex="-1">
+          <a href="#example-item-2D" class="left-nav-list__item-link" data-inline-left-nav-item-link tabindex="-1">Example Item 2D</a>
         </li>
       </ul>
     </li>
-    <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item>
+    <li role="menuitem" tabindex="0" class="left-nav-list__item" data-inline-left-nav-item>
       <a class="left-nav-list__item-link">
         Example Item 3
       </a>
-      <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-3A" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3A</a>
-        </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-3B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3B</a>
-          <ul class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Ba</a>
-            </li>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bb</a>
-            </li>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bc</a>
-            </li>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bd</a>
-            </li>
-            <li class="left-nav-list__item" data-left-nav-flyout-item>
-              <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Be</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
     </li>
-    <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item>
+    <li role="menuitem" tabindex="0" class="left-nav-list__item" data-inline-left-nav-item>
       <a class="left-nav-list__item-link">
         Example Item 4
       </a>
-      <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-4A" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 4A</a>
-        </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-4B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 4B</a>
-        </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-4C" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 4C</a>
-        </li>
-        <li class="left-nav-list__item" data-left-nav-nested-item>
-          <a href="#example-item-4D" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 4D</a>
-        </li>
-      </ul>
     </li>
   </ul>
 </nav>

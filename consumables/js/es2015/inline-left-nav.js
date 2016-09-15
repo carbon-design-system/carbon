@@ -1,3 +1,9 @@
+import '../polyfills/array-from';
+import '../polyfills/object-assign';
+import '../polyfills/custom-event';
+import toggleClass from '../polyfills/toggle-class';
+import eventMatches from '../polyfills/event-matches';
+
 export default class InlineLeftNav {
   /**
    * Spinner indicating loading state.
@@ -12,17 +18,20 @@ export default class InlineLeftNav {
 
     this.options = Object.assign({
       // Data Attribute selectors
-      selectorLeftNavListItem: '[data-left-nav-item]',
-      selectorLeftNavListItemLink: '[data-left-nav-item-link]',
+      selectorLeftNavList: '[data-inline-left-nav-list]',
+      selectorLeftNavNestedList: '[data-inline-left-nav-nested-list]',
+      selectorLeftNavListItem: '[data-inline-left-nav-item]',
+      selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
+      selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
       // CSS Class Selectors
       classActiveLeftNavListItem: 'left-nav-list__item--active',
+      classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
     }, options);
 
     this.element = element;
 
     this.constructor.components.set(this.element, this);
-
-    this.hookListItemEvents();
+    this.hookListItemsEvents();
   }
 
   /**
@@ -50,25 +59,67 @@ export default class InlineLeftNav {
     }
   }
 
-  hookListItemEvents() {
-    const listItems = [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)];
-    listItems.forEach(item => {
-      item.addEventListener('click', () => {
-        this.addActiveListItem(item);
+  hookListItemsEvents() {
+    const leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
+    leftNavList.addEventListener('click', (evt) => {
+      const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+      if (leftNavItem) {
+        const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
+        const hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
+        if (childItem) {
+          this.addActiveListItem(childItem);
+        } else if (hasChildren) {
+          this.handleNestedListClick(leftNavItem, evt);
+        } else {
+          this.addActiveListItem(leftNavItem);
+        }
+      }
+    });
+    [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(item => {
+      item.addEventListener('keydown', (evt) => {
+        const leftNavItemWithChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+        if (leftNavItemWithChildren && evt.which === 13) {
+          this.handleNestedListClick(leftNavItemWithChildren);
+        }
       });
     });
   }
 
   addActiveListItem(item) {
-    const listItems = [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)];
-    listItems.forEach(currentItem => {
-      if (currentItem === item) {
-        currentItem.classList.add(this.options.classActiveLeftNavListItem);
-      } else {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(currentItem => {
+      if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
     });
+    [...this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach(currentItem => {
+      if (!(item === currentItem)) {
+        currentItem.classList.remove(this.options.classActiveLeftNavListItem);
+      }
+    });
+    item.classList.add(this.options.classActiveLeftNavListItem);
   }
+
+  /**
+   * Handles click on a list item that contains a nested list in the left navigation.
+   * The nested list is expanded and the icon is rotated.
+   * @param {HTMLElement} listItem The list item that was clicked.
+   * @param {Event} event The event triggering this method.
+   */
+   handleNestedListClick(listItem, evt) {
+     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
+     if (!('leftNavItemLink' in evt.target.dataset)) {
+       toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
+     }
+     const list = listItem.querySelector(this.options.selectorLeftNavNestedList);
+     const listItems = [... list.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
+     listItems.forEach(item => {
+       if (isOpen) {
+         item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = -1;
+       } else {
+         item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = 0;
+       }
+     });
+   }
 
   release() {
     this.constructor.components.delete(this.element);

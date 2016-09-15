@@ -3,7 +3,7 @@
   width: 100%;
   padding-right: 3%;
   position: fixed;
-  top: 40px;
+  top: 36px;
   display: flex;
   height: $height--global-nav;
   line-height: 1.5;
@@ -25,15 +25,15 @@
       font-weight: 400;
 
       .unified-header--applications & {
-        color: $color__teal-30;
+        color: $color__teal-40;
       }
 
       .unified-header--infrastructure & {
-        color: $color__blue-30;
+        color: $color__blue-40;
       }
 
       .unified-header--services & {
-        color: $color__purple-40;
+        color: $color__purple-30;
       }
     }
   }

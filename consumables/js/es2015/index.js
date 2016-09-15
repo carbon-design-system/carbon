@@ -29,6 +29,7 @@ import DetailPageHeader from './detail-page-header';
 import LeftNav from './left-nav';
 import UnifiedHeader from './unified-header';
 import InlineLeftNav from './inline-left-nav';
+import ProfileSwitcher from './profile-switcher';
 
 const settings = {};
 
@@ -144,6 +145,12 @@ export {
    * @type DetailPageHeader
    */
   DetailPageHeader,
+
+  /**
+   * Profile Switcher.
+   * @type ProfileSwitcher
+   */
+  ProfileSwitcher,
 };
 
 /**
@@ -175,6 +182,7 @@ const init = () => {
     LeftNav.init();
     UnifiedHeader.init();
     InlineLeftNav.init();
+    ProfileSwitcher.init();
   }
 };
 

@@ -3,6 +3,7 @@ import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import toggleClass from '../polyfills/toggle-class';
 import eventMatches from '../polyfills/event-matches';
+import on from '../misc/on';
 
 export default class LeftNav {
   /**
@@ -49,6 +50,9 @@ export default class LeftNav {
       selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
       selectorLeftNavSection: '[data-left-nav-section]',
       selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+      selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
+      selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
+      selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
       // CSS Class Selectors
       classActiveLeftNav: 'left-nav--active',
       classActiveLeftNavListItem: 'left-nav-list__item--active',
@@ -59,12 +63,10 @@ export default class LeftNav {
 
     this.constructor.components.set(this.element, this);
 
-    // this.hookSectionSwitcher();
     this.hookOpenActions();
     this.hookListItemsEvents();
-    // this.addArrowsToNestedLists();
-    this.element.querySelector(this.options.selectorLeftNavList).classList.add('left-nav-list--slide-down');
-    this.element.ownerDocument.addEventListener('click', (evt) => this.handleDocumentClick(evt));
+    this.animateInNav();
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
   }
 
   /**
@@ -121,7 +123,7 @@ export default class LeftNav {
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
+    if (target.nodeType === Node.ELEMENT_NODE) {
       this.create(target, options);
     } else {
       [... target.querySelectorAll('[data-left-nav-container]')].forEach(element => this.create(element, options));
@@ -129,39 +131,15 @@ export default class LeftNav {
   }
 
   /**
-   * Adds arrow icons to nested lists
+   * Adds a animation delay to the list items as they appear on page load.
    */
-  // addArrowsToNestedLists() {
-  //   const leftNavListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)];
-  //   leftNavListItems.forEach(item => {
-  //     if (item.classList.contains(this.options.classItemHasChildren)) {
-  //       const chevron = this.element.ownerDocument.createElement('div');
-  //       chevron.classList.add('left-nav-list__item-icon');
-  //       chevron.setAttribute('data-left-nav-icon', true);
-  //       chevron.innerHTML = `
-  //         <svg class="icon">
-  //           <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
-  //         </svg>
-  //       `;
-  //       const link = item.querySelector('a');
-  //       link.appendChild(chevron);
-  //     }
-  //   });
-  //   const leftNavNestedListItems = [... this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
-  //   leftNavNestedListItems.forEach(item => {
-  //     if (item.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-  //       const chevron = this.element.ownerDocument.createElement('div');
-  //       chevron.classList.add('left-nav-list--flyout--arrow');
-  //       chevron.innerHTML = `
-  //         <svg class="left-nav-list--flyout--arrow-icon">
-  //           <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
-  //         </svg>
-  //       `;
-  //       const link = item.querySelector('a');
-  //       link.appendChild(chevron);
-  //     }
-  //   });
-  // }
+  animateInNav() {
+    let counter = 0.15;
+    [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(item => {
+      item.style.animationDelay = `${counter}s`;
+      counter += 0.1;
+    });
+  }
 
   /**
    * Adds event listeners for showing and hiding the left navigation
@@ -171,26 +149,27 @@ export default class LeftNav {
     openCloseBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         if (btn.dataset.leftNavToggle === 'close') {
+          this.element.tabIndex = '-1';
+          this.element.classList.remove(this.options.classActiveLeftNav);
+        } else if (btn.dataset.leftNavToggle === 'open') {
+          this.element.tabIndex = '0';
+          this.element.classList.add(this.options.classActiveLeftNav);
+        }
+      });
+      btn.addEventListener('keypress', () => {
+        if (btn.dataset.leftNavToggle === 'close') {
           this.element.classList.remove(this.options.classActiveLeftNav);
         } else if (btn.dataset.leftNavToggle === 'open') {
           this.element.classList.add(this.options.classActiveLeftNav);
         }
       });
     });
+    this.element.ownerDocument.addEventListener('keydown', (evt) => {
+      if (evt.which === 27 && this.element.classList.contains(this.options.classActiveLeftNav)) {
+        this.element.classList.remove(this.options.classActiveLeftNav);
+      }
+    });
   }
-
-  /**
-   * Adds event listeners for switching between the three sections in the left navigation header
-   */
-  // hookSectionSwitcher() {
-  //   const sections = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavSection)];
-  //   const leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
-  //   sections.forEach(section => {
-  //     section.addEventListener('click', (evt) => {
-  //       leftNavList.classList.add('left-nav-list--slide-up');
-  //     });
-  //   });
-  // }
 
   /**
    * Adds event listeners to list items
@@ -199,52 +178,56 @@ export default class LeftNav {
     const leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
     leftNavList.addEventListener('click', (evt) => {
       const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
-      const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
       if (leftNavItem) {
         const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
-        const hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
-        if (childItem) {
-          this.addActiveListItem(childItem);
+        const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+        const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
+        if (flyoutItem) {
+          this.addActiveListItem(flyoutItem);
+        } else if (childItem) {
+          if (childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+            const flyoutMenu = childItem.querySelector(this.options.selectorLeftNavFlyoutMenu);
+            flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
+          } else {
+            this.addActiveListItem(childItem);
+          }
         } else if (hasChildren) {
-          this.handleNestedListClick(leftNavItem, evt);
+          this.handleNestedListClick(leftNavItem);
         } else {
           this.addActiveListItem(leftNavItem);
         }
       }
-      if (flyoutItem) {
-        [...this.element.querySelectorAll(this.options.selectorLeftNavFlyoutItem)].forEach(currentItem => {
-          if (!(flyoutItem === currentItem)) {
-            currentItem.classList.remove(this.options.classActiveLeftNavListItem);
+    });
+    leftNavList.addEventListener('keydown', (evt) => {
+      if (evt.which === 13) {
+        const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+        if (leftNavItem) {
+          const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
+          const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+          const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
+          if (flyoutItem) {
+            this.addActiveListItem(flyoutItem);
+          } else if (childItem) {
+            if (!childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+              this.addActiveListItem(childItem);
+            }
+          } else if (hasChildren) {
+            this.handleNestedListClick(leftNavItem);
+          } else {
+            this.addActiveListItem(leftNavItem);
           }
-        });
-        flyoutItem.classList.add(this.options.classActiveLeftNavListItem);
-        this.element.classList.toggle(this.options.classActiveLeftNav);
+        }
       }
     });
-  }
-
-  /**
-   * Sets a list item as active.
-   * @param {Object} item The active list item.
-   */
-  addActiveListItem(item) {
-    [...this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(currentItem => {
-      if (!(item === currentItem)) {
-        currentItem.classList.remove(this.options.classActiveLeftNavListItem);
-      }
+    const flyouts = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)];
+    flyouts.forEach(flyout => {
+      flyout.addEventListener('mouseover', () => {
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.add(this.options.classFlyoutDisplayed);
+      });
+      flyout.addEventListener('mouseout', () => {
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
+      });
     });
-    item.classList.add(this.options.classActiveLeftNavListItem);
-    const flyoutMenuItems = [... this.element.querySelectorAll(this.options.selectorLeftNavFlyoutItem)];
-    flyoutMenuItems.forEach(flyoutItem => {
-      flyoutItem.classList.remove(this.options.classActiveLeftNavListItem);
-    });
-    if (item.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-      const flyoutMenu = item.querySelector(this.options.selectorLeftNavFlyoutMenu);
-      flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
-    } else {
-      this.hideAllFlyoutMenus();
-      this.element.classList.toggle(this.options.classActiveLeftNav);
-    }
   }
 
   /**
@@ -258,6 +241,25 @@ export default class LeftNav {
   }
 
   /**
+   * Sets a list item as active.
+   * @param {Object} item The active list item.
+   */
+  addActiveListItem(item) {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavAllListItems)].forEach(currentItem => {
+      if (!(item === currentItem)) {
+        if (!currentItem.contains(item)) {
+          currentItem.classList.remove(this.options.classActiveLeftNavListItem);
+        } else {
+          currentItem.classList.add(this.options.classActiveLeftNavListItem);
+        }
+      }
+    });
+    item.classList.add(this.options.classActiveLeftNavListItem);
+    this.hideAllFlyoutMenus();
+    this.element.classList.remove(this.options.classActiveLeftNav);
+  }
+
+  /**
    * Handles click on the document.
    * Closes the left navigation when document is clicked outside the left navigation.
    * @param {Event} event The event triggering this method.
@@ -267,7 +269,8 @@ export default class LeftNav {
     const isOfSelf = this.element.contains(clickTarget);
     const isToggleBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle).contains(clickTarget);
     const isOpen = this.element.classList.contains(this.options.classActiveLeftNav);
-    const shouldClose = !isOfSelf && isOpen && !isToggleBtn;
+    const isTopBar = this.element.ownerDocument.querySelector('.bx--top-nav').contains(clickTarget);
+    const shouldClose = !isOfSelf && isOpen && !isToggleBtn && !isTopBar;
     const flyoutOpen = this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.contains(this.options.classFlyoutDisplayed);
     if (isOfSelf && this.element.tagName === 'A') {
       evt.preventDefault();
@@ -282,24 +285,27 @@ export default class LeftNav {
 
   /**
    * Handles click on a list item that contains a nested list in the left navigation.
-   * The nested list is expanded and the icon is rotated.
+   * It hides all flyout menus and switches the tab-index on the list items based on whether or not the list is expanded.
    * @param {HTMLElement} listItem The list item that was clicked.
    * @param {Event} event The event triggering this method.
    */
-  handleNestedListClick(listItem, evt) {
+  handleNestedListClick(listItem) {
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
-    const flyoutMenus = [... this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)];
-    flyoutMenus.forEach(menu => {
-      menu.classList.remove(this.options.classFlyoutDisplayed);
+    this.hideAllFlyoutMenus();
+    toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
+    const listItems = [... listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
+    listItems.forEach(item => {
+      if (isOpen) {
+        item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = -1;
+      } else {
+        item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = 0;
+      }
     });
-    if (!('leftNavItemLink' in evt.target.dataset)) {
-      toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
-    }
   }
 
   release() {
-    if (this.handleDocumentClick) {
-      this.element.ownerDocument.removeEventListener('click', (evt) => this.handleDocumentClick(evt));
+    if (this.hDocumentClick) {
+      this.hDocumentClick = this.hDocumentClick.release();
     }
     this.constructor.components.delete(this.element);
   }
