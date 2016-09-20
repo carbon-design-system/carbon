@@ -4,19 +4,20 @@
   width: rem(250px);
   top: $height--top-nav;
   left: 0;
+  height: 100%;
   transform: translate3d(-100%, 0, 0);
   transition: .3s ease-in-out;
   box-shadow: none;
   visibility: hidden;
 
-  &.left-nav--active {
+  &.bx--left-nav--active {
     transform: translate3d(0, 0, 0);
     box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, .1);
     visibility: visible;
   }
 }
 
-.left-nav__trigger {
+.bx--left-nav__trigger {
   width: rem(55px);
   height: $height--global-nav;
   background-color: $color__blue-90;
@@ -39,15 +40,15 @@
       content: '';
       transition: all $transition--base ease;
 
-      .unified-header--applications & {
+      .bx--unified-header--applications & {
         background: $color__teal-40;
       }
 
-      .unified-header--infrastructure & {
+      .bx--unified-header--infrastructure & {
         background: $color__blue-40;
       }
 
-      .unified-header--services & {
+      .bx--unified-header--services & {
         background: $color__purple-30;
       }
     }
@@ -74,7 +75,7 @@
   }
 }
 
-.left-nav__header {
+.bx--left-nav__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,7 +83,6 @@
   height: $height--global-nav;
   cursor: pointer;
   position: relative;
-  z-index: 8001; // overlay + 1
   top: 0;
   left: 0;
   width: 100%;
@@ -113,32 +113,27 @@
   }
 }
 
-.left-nav {
+.bx--left-nav {
   display: block;
-  height: 100vh;
   width: 100%;
+  height: 100%;
   background-color: $color__white;
   padding: 0 0 2rem 0;
-  position: relative;
-
-  .left-nav--active & {
-
-    & .left-nav-list--nested {
-      opacity: 1;
-    }
-  }
+  overflow-y: auto;
 }
 
-.left-nav-list {
+.bx--left-nav-list {
   display: flex;
   flex-direction: column;
   background-color: $color__white;
   padding-top: 1rem;
+  margin-bottom: 5rem;
 
-  &:not(.left-nav-list--nested):not(.left-nav-list--flyout) {
-    & > .left-nav-list__item {
-      opacity: 0;
-      transition: transform .5s;
+  & > .bx--left-nav-list__item {
+    opacity: 1;
+    position: static;
+
+    &.animate {
       animation: animate .3s both cubic-bezier(0, 0, .25, 1) .1s;
     }
   }
@@ -147,10 +142,12 @@
     cursor: pointer;
     width: 100%;
     padding: 0;
+    background-color: $color__white;
+    margin-bottom: .25rem;
 
     &--active {
 
-      & > .left-nav-list__item-link {
+      & > .bx--left-nav-list__item-link {
         background-color: $color__blue-51;
         color: $color__white;
       }
@@ -159,7 +156,6 @@
     &-link {
       @include font-size('14');
       font-weight: 400;
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -180,27 +176,8 @@
       }
     }
 
-    &--expanded {
-
-      .left-nav-list--nested {
-        max-height: 20rem;
-        transition: .3s ease-in;
-        overflow: inherit;
-        opacity: 1;
-
-        .left-nav-list__item {
-          opacity: 1;
-        }
-      }
-
-      .left-nav-list__item-icon .icon {
-        transform: rotate(180deg);
-      }
-    }
-
-    &:not(.left-nav-list__item--has-children):hover {
-
-      & > .left-nav-list__item-link {
+    &:hover {
+      & > .bx--left-nav-list__item-link {
         background-color: $color__blue-51;
         color: $color__white;
       }
@@ -209,20 +186,21 @@
 
   &__item--has-children {
 
-    .left-nav-list__item-link {
+    .bx--left-nav-list__item-link {
       padding-right: 1.5rem;
     }
 
     &:hover {
 
-      .left-nav-list__item-link {
+      & > .bx--left-nav-list__item-link {
+        background-color: $color__white;
         color: $color__blue-90;
       }
     }
 
-    &.left-nav-list__item--active {
+    &.bx--left-nav-list__item--active {
 
-      & > .left-nav-list__item-link {
+      & > .bx--left-nav-list__item-link {
         background-color: $color__white;
         color: $color__blue-51;
       }
@@ -230,16 +208,31 @@
   }
 }
 
-.left-nav-list--nested {
+.bx--left-nav-list--nested {
   max-height: 0;
-  overflow: hidden;
   transition: .3s ease-in-out;
   padding: 0;
   opacity: 0;
+  overflow: hidden;
+  margin-bottom: 0;
 
-  .left-nav-list__item {
+  .bx--left-nav-list__item--expanded & {
+    max-height: 20rem;
+    transition: .3s ease-in;
+    opacity: 1;
+
+    .bx--left-nav-list__item {
+      opacity: 1;
+    }
+
+    .bx--left-nav-list__item-icon .icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  .bx--left-nav-list__item {
     width: 100%;
-    position: relative;
+    position: static;
     padding: 0;
     transition: $transition--base;
     opacity: 0;
@@ -258,50 +251,24 @@
       background-color: $color__blue-51;
       outline: none;
 
-      & > .left-nav-list__item-link {
+      & > .bx--left-nav-list__item-link {
         color: $color__white;
       }
 
-      .left-nav-list--flyout--arrow-icon {
+      .bx--left-nav-list--flyout--arrow-icon {
         fill: $color__white;
       }
-      //
-      // .left-nav-list--flyout {
-      //   display: block;
-      //
-      //   & > .left-nav-list__item .left-nav-list__item-link {
-      //     color: $color__blue-90;
-      //     background-color: $color__white;
-      //   }
-      //
-      //   & > .left-nav-list__item {
-      //
-      //     &:hover {
-      //
-      //       .left-nav-list__item-link {
-      //         background-color: $color__blue-51;
-      //         color: $color__white;
-      //         padding-right: 1.5rem;
-      //       }
-      //     }
-      //   }
-      //
-      //   & > .left-nav-list__item--active .left-nav-list__item-link {
-      //     background-color: $color__blue-51;
-      //     color: $color__white;
-      //   }
-      // }
     }
 
     &--active {
       background-color: $color__blue-51;
       color: $color__white;
 
-      .left-nav-list--flyout--arrow-icon {
+      .bx--left-nav-list--flyout--arrow-icon {
         fill: $color__white;
       }
 
-      & > .left-nav-list__item-link {
+      & > .bx--left-nav-list__item-link {
         background-color: $color__blue-51;
         color: $color__white;
       }
@@ -309,18 +276,16 @@
   }
 }
 
-.left-nav-list--flyout {
+.bx--left-nav-list--flyout {
   display: none;
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, .25);
-  position: absolute;
   background-color: $color__white;
-  top: 0;
-  left: rem(250px);
   padding: 0 0 .5rem;
   min-width: auto;
   white-space: nowrap;
-  z-index: 9000;
   outline: none;
+  position: absolute;
+  z-index: 9999;
 
   &:before {
     content: '';
@@ -331,44 +296,46 @@
     top: -3rem;
     left: 0;
     padding: 2rem;
+    z-index: - 1;
   }
 
   &--displayed {
     display: block;
+    border-left: 1px solid $color__navy-gray-9;
+    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, .15);
 
-    & > .left-nav-list__item .left-nav-list__item-link {
-      color: $color__blue-90;
-      background-color: $color__white;
-    }
-
-    & > .left-nav-list__item {
+    & > .bx--left-nav-list__item {
+      .bx--left-nav-list__item-link {
+        color: $color__blue-90;
+        background-color: $color__white;
+      }
 
       &:hover {
-
-        .left-nav-list__item-link {
+        .bx--left-nav-list__item-link {
           background-color: $color__blue-51;
           color: $color__white;
           padding-right: 1.5rem;
         }
       }
-    }
 
-    & > .left-nav-list__item--active .left-nav-list__item-link {
-      background-color: $color__blue-51;
-      color: $color__white;
+      &--active {
+        .bx--left-nav-list__item-link {
+          background-color: $color__blue-51;
+          color: $color__white;
+        }
+      }
     }
   }
 
   &--arrow {
-
     &-icon {
-      width: 10px;
-      height: 10px;
+      width: rem(10px);
+      height: rem(10px);
       fill: $color__blue-90;
     }
   }
 
-  .left-nav-list__item {
+  .bx--left-nav-list__item {
     margin: 0;
     height: rem(37px);
     display: flex;
@@ -380,7 +347,7 @@
     }
 
     &--active {
-      .left-nav-list__item-link {
+      .bx--left-nav-list__item-link {
         color: $color__white;
         background-color: $color__blue-51;
       }
@@ -388,7 +355,7 @@
   }
 }
 
-.left-nav__sections {
+.bx--left-nav__sections {
   padding: 0 0 1rem;
   background-color: $color__white;
   position: relative;
@@ -397,7 +364,7 @@
   z-index: z('overlay');
   border-bottom: 1px solid $color__navy-gray-9;
 
-  .left-nav__section {
+  .bx--left-nav__section {
     cursor: pointer;
     background-color: $color__white;
     transition: $transition--base ease-in-out;
@@ -413,7 +380,7 @@
     }
 
     &:hover {
-      .left-nav__section--link {
+      .bx--left-nav__section--link {
         @include font-size('18');
         @include font-smoothing;
         font-weight: 700;

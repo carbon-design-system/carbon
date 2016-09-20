@@ -16,9 +16,6 @@ export default class UnifiedHeader {
       // CSS Class Selectors
     }, options);
     this.constructor.components.set(this.element, this);
-    // window.addEventListener('beforeunload', (evt) => {
-    //   this.element.querySelector(this.options.selectorLeftNavList).classList.add('left-nav-list--slide-up');
-    // });
   }
 
   static create(element, options) {

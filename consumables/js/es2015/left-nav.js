@@ -54,11 +54,11 @@ export default class LeftNav {
       selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
       selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
       // CSS Class Selectors
-      classActiveLeftNav: 'left-nav--active',
-      classActiveLeftNavListItem: 'left-nav-list__item--active',
-      classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
-      classFlyoutDisplayed: 'left-nav-list--flyout--displayed',
-      classItemHasChildren: 'left-nav-list__item--has-children',
+      classActiveLeftNav: 'bx--left-nav--active',
+      classActiveLeftNavListItem: 'bx--left-nav-list__item--active',
+      classExpandedLeftNavListItem: 'bx--left-nav-list__item--expanded',
+      classFlyoutDisplayed: 'bx--left-nav-list--flyout--displayed',
+      classItemHasChildren: 'bx--left-nav-list__item--has-children',
     }, options);
 
     this.constructor.components.set(this.element, this);
@@ -134,11 +134,17 @@ export default class LeftNav {
    * Adds a animation delay to the list items as they appear on page load.
    */
   animateInNav() {
-    let counter = 0.15;
+    let counter = 0.1;
     [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(item => {
+      item.classList.add('animate');
       item.style.animationDelay = `${counter}s`;
-      counter += 0.1;
+      counter += 0.05;
     });
+    setTimeout(() => {
+      [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(item => {
+        item.classList.remove('animate');
+      });
+    }, 1000);
   }
 
   /**
@@ -160,6 +166,7 @@ export default class LeftNav {
         if (btn.dataset.leftNavToggle === 'close') {
           this.element.classList.remove(this.options.classActiveLeftNav);
         } else if (btn.dataset.leftNavToggle === 'open') {
+          this.element.tabIndex = '0';
           this.element.classList.add(this.options.classActiveLeftNav);
         }
       });
@@ -221,10 +228,12 @@ export default class LeftNav {
     });
     const flyouts = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)];
     flyouts.forEach(flyout => {
-      flyout.addEventListener('mouseover', () => {
+      flyout.addEventListener('mouseenter', () => {
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${flyout.offsetTop - this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${flyout.offsetLeft + Math.round(flyout.offsetWidth)}px`;
         flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.add(this.options.classFlyoutDisplayed);
       });
-      flyout.addEventListener('mouseout', () => {
+      flyout.addEventListener('mouseleave', () => {
         flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
       });
     });
@@ -254,6 +263,11 @@ export default class LeftNav {
         }
       }
     });
+    [...this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach(currentItem => {
+      if (!(item === currentItem)) {
+        currentItem.classList.remove(this.options.classActiveLeftNavListItem);
+      }
+    });
     item.classList.add(this.options.classActiveLeftNavListItem);
     this.hideAllFlyoutMenus();
     this.element.classList.remove(this.options.classActiveLeftNav);
@@ -269,8 +283,8 @@ export default class LeftNav {
     const isOfSelf = this.element.contains(clickTarget);
     const isToggleBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle).contains(clickTarget);
     const isOpen = this.element.classList.contains(this.options.classActiveLeftNav);
-    const isTopBar = this.element.ownerDocument.querySelector('.bx--top-nav').contains(clickTarget);
-    const shouldClose = !isOfSelf && isOpen && !isToggleBtn && !isTopBar;
+    const isUnifiedHeader = this.element.ownerDocument.querySelector('[data-unified-header]').contains(clickTarget);
+    const shouldClose = !isOfSelf && isOpen && !isToggleBtn && !isUnifiedHeader;
     const flyoutOpen = this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.contains(this.options.classFlyoutDisplayed);
     if (isOfSelf && this.element.tagName === 'A') {
       evt.preventDefault();

@@ -1,10 +1,10 @@
 .bx--global-header {
   @include helvetica;
   width: 100%;
-  padding-right: 3%;
   position: fixed;
-  top: 36px;
+  top: $height--top-nav;
   display: flex;
+  justify-content: space-between;
   height: $height--global-nav;
   line-height: 1.5;
   background-color: $color__blue-90;
@@ -14,43 +14,22 @@
     display: flex;
     align-items: center;
 
-    &--logo {
-      display: flex;
-    }
-
     &--current-page {
       @include font-smoothing;
       display: flex;
       align-items: center;
       font-weight: 400;
 
-      .unified-header--applications & {
+      .bx--unified-header--applications & {
         color: $color__teal-40;
       }
 
-      .unified-header--infrastructure & {
+      .bx--unified-header--infrastructure & {
         color: $color__blue-40;
       }
 
-      .unified-header--services & {
+      .bx--unified-header--services & {
         color: $color__purple-30;
-      }
-    }
-  }
-
-  .logo {
-
-    &__image {
-      margin-right: .5rem;
-    }
-
-    &__text {
-      @include font-size('18');
-      @include font-smoothing;
-      font-weight: 400;
-
-      &--bold {
-        font-weight: 700;
       }
     }
   }
@@ -58,5 +37,123 @@
   &__left-container {
     display: flex;
     align-items: center;
+  }
+
+  &__right-container {
+    padding-right: 1%;
+    background-color: $color__blue-90;
+  }
+}
+
+.bx--global-header__menu {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  &__item {
+    width: 100%;
+    flex: 0 1 100px;
+
+    &:focus {
+      outline: 0;
+      background-color: $color__navy-gray-3;
+      color: $color__blue-30;
+    }
+
+    &--link {
+      @include font-smoothing;
+      @include font-size('14');
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: $height--global-nav;
+      text-decoration: none;
+      background-color: $color__blue-90;
+      color: $color__white;
+      padding: 0 1rem;
+
+      &:hover {
+        color: $color__blue-30;
+      }
+    }
+
+    &:last-child {
+      & .bx--dropdown__list {
+        right: 0;
+      }
+    }
+  }
+
+  .bx--dropdown {
+    height: $height--global-nav;
+    background-color: transparent;
+
+    &:focus {
+      outline: 0;
+      background-color: $color__navy-gray-3;
+
+      .bx--dropdown__menu-text {
+        color: $color__blue-30;
+      }
+
+      .bx--dropdown__menu-text,
+      .bx--dropdown__list {
+        outline: 0;
+      }
+    }
+
+    &__menu-text {
+      @include font-smoothing;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      padding-right: 1rem;
+      z-index: 1000;
+      color: $color__white;
+
+      &:hover {
+        color: $color__blue-30;
+      }
+    }
+
+    &__list {
+      transition: $transition--base all $bx--standard-easing;
+      transform: translateY(-150%);
+      opacity: 0;
+      visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      width: auto;
+      z-index: -1;
+      padding-bottom: .5rem;
+
+      &-item {
+        min-width: 200px;
+        width: 100%;
+      }
+    }
+
+    &__link {
+      padding: .5rem .75rem;
+    }
+
+    &--open {
+      .bx--dropdown {
+        &__menu-text {
+          background-color: $color__navy-gray-3;
+          color: $color__blue-30;
+        }
+
+        &__list {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+          background-color: $color__navy-gray-3;
+        }
+      }
+    }
   }
 }

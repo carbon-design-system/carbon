@@ -98,12 +98,14 @@ export default class Dropdown {
    * @param {Event} event The event triggering this method.
    */
   toggle(event) {
-    const isOfSelf = this.element.contains(event.target);
+    if (event.which === 13 || event.type === 'click') {
+      const isOfSelf = this.element.contains(event.target);
 
-    if (isOfSelf) {
-      this.element.classList.toggle('bx--dropdown--open');
-    } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
-      this.element.classList.remove('bx--dropdown--open');
+      if (isOfSelf) {
+        this.element.classList.toggle('bx--dropdown--open');
+      } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
+        this.element.classList.remove('bx--dropdown--open');
+      }
     }
   }
 

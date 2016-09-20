@@ -2,73 +2,84 @@
 <div data-unified-header class="unified-header unified-header--infrastructure" tabindex="0">
 
   <!-- Super Global Header -->
-  <nav class="bx--top-nav">
-    <ul class="bx--top-nav__account">
-      <li class="bx--top-nav__account--item">
-        <ul data-dropdown class="bx--dropdown" tabindex="0">
+  <nav role="navigation" class="bx--top-nav" aria-label="Top Header">
+    <ul role="menubar" class="bx--top-nav__account" aria-hidden="false">
+      <li role="menuitem" class="bx--top-nav__account--item">
+        <ul role="menu" data-dropdown class="bx--dropdown" tabindex="0">
           <li class="bx--dropdown__menu-text">Docs</li>
-          <svg class="bx--dropdown__arrow">
-            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--search"></use>
-          </svg>
           <li>
-            <ul class="bx--dropdown__list">
-              <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
-              <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
-              <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
+            <svg class="bx--dropdown__arrow">
+              <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--search"></use>
+            </svg>
+          </li>
+          <li aria-haspopup="true">
+            <ul role="menu" aria-hidden="true" class="bx--dropdown__list">
+              <li role="menuitem" tabindex="0" data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
+              <li role="menuitem" tabindex="0" data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
+              <li role="menuitem" tabindex="0" data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li class="bx--top-nav__account--item">
-        <ul data-dropdown class="bx--dropdown" tabindex="0">
+      <li role="menuitem" class="bx--top-nav__account--item">
+        <ul role="menu" data-dropdown class="bx--dropdown" tabindex="0">
           <li class="bx--dropdown__menu-text">Contact</li>
-          <svg class="bx--dropdown__arrow">
-            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--user"></use>
-          </svg>
           <li>
-            <ul class="bx--dropdown__list">
-              <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Sales</a></li>
-              <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">DW Answers</a></li>
-              <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">StackOverflow</a></li>
+            <svg class="bx--dropdown__arrow">
+              <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--user"></use>
+            </svg>
+          </li>
+          <li aria-haspopup="true">
+            <ul role="menu" aria-hidden="true" class="bx--dropdown__list">
+              <li role="menuitem" tabindex="0" data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
+              <li role="menuitem" tabindex="0" data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
+              <li role="menuitem" tabindex="0" data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li class="bx--top-nav__account--item">
-        <ul data-dropdown class="bx--dropdown" tabindex="0">
+      <li role="menuitem" class="bx--top-nav__account--item">
+        <ul role="menu" data-dropdown class="bx--dropdown" tabindex="0">
           <li class="bx--dropdown__menu-text">Notifications</li>
-          <svg class="bx--dropdown__arrow">
-            <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#notifications--info"></use>
-          </svg>
           <li>
-            <ul class="bx--dropdown__list">
-              <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">System Status</a></li>
-              <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Application Status</a></li>
+            <svg class="bx--dropdown__arrow">
+              <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#notifications--info"></use>
+            </svg>
+          </li>
+          <li aria-haspopup="true">
+            <ul role="menu" aria-hidden="true" class="bx--dropdown__list">
+              <li role="menuitem" tabindex="0" data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">All</a></li>
+              <li role="menuitem" tabindex="0" data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Cloud Foundry API</a></li>
+              <li role="menuitem" tabindex="0" data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Staging</a></li>
             </ul>
           </li>
         </ul>
       </li>
     </ul>
-    <ul class="bx--top-nav__profile">
-      <li class="bx--top-nav__profile--item">
-        <ul class="bx--switcher bx--switcher--open" tabindex="0">
-          <li class="bx--switcher__toggle">
-            <p>Logans_account_12345</p>|<p>Organization 1: Space 2</p>
+    <ul role="menubar" class="bx--top-nav__profile">
+      <li role="menuitem" class="bx--top-nav__profile--item">
+        <ul role="menu" data-profile-switcher class="bx--switcher">
+          <li tabindex="0" data-profile-switcher-toggle class="bx--switcher__toggle">
+            <p data-switcher-account class="bx--toggle__account"></p>
+            <p>|</p>
+            <p data-switcher-org class="bx--toggle__org"></p>
+            <p data-switcher-space class="bx--toggle__space"></p>
           </li>
-          <li class="bx--switcher__menu">
-            <ul class="bx--menu">
-              <li class="bx--menu__item">
+          <li role="menuitem" class="bx--switcher__menu">
+            <ul role="menu" class="bx--menu">
+              <li role="menuitem" class="bx--menu__item">
                 <p class="bx--menu__item--title">Account</p>
-                <ul data-dropdown data-value class="bx--dropdown" tabindex="0">
-                  <li class="bx--dropdown__menu-text">Logans_account_12345</li>
-                  <svg class="bx--dropdown__arrow">
-                    <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
-                  </svg>
+                <ul role="menu" data-dropdown data-value class="bx--dropdown" tabindex="0">
+                  <li data-dropdown-account class="bx--dropdown__menu-text">Logans_account_123456789_1234</li>
                   <li>
-                    <ul class="bx--dropdown__list">
-                      <!-- `href` in `<li>` would typically be actual links of routes -->
-                      <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Logans_account_12345</a></li>
-                      <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">TJs_account_54321</a></li>
+                    <svg class="bx--dropdown__arrow">
+                      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+                    </svg>
+                  </li>
+                  <li aria-haspopup="true">
+                    <ul role="menu" aria-hidden="true" class="bx--dropdown__list">
+                      <li role="menuitem" data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)" tabindex="0">Logans_account_12345</a></li>
+                      <li role="menuitem" data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)" tabindex="0">TJs_account_54321</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -83,9 +94,9 @@
                   </svg>
                   <li>
                     <ul class="bx--dropdown__list">
-                      <!-- `href` in `<li>` would typically be actual links of routes -->
-                      <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Sydney</a></li>
-                      <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">United Kingdom</a></li>
+                      <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">US South</a></li>
+                      <li data-option data-value="all" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Sydney</a></li>
+                      <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">United Kingdom</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -94,18 +105,17 @@
               <li class="bx--menu__item">
                 <p class="bx--menu__item--title">Organization</p>
                 <ul data-dropdown data-value class="bx--dropdown" tabindex="0">
-                  <li class="bx--dropdown__menu-text">Organization 1</li>
+                  <li data-dropdown-org class="bx--dropdown__menu-text">Organization 1</li>
                   <svg class="bx--dropdown__arrow">
                     <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
                   </svg>
                   <li>
                     <ul class="bx--dropdown__list">
-                      <!-- `href` in `<li>` would typically be actual links of routes -->
-                      <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Organization 1</a></li>
-                      <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Organization 2</a></li>
-                      <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Organization 3</a></li>
-                      <li data-option data-value="dea" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Organization 4</a></li>
-                      <li data-option data-value="router" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Organization 5</a></li>
+                      <li data-option data-value="all" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Organization 1</a></li>
+                      <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Organization 2</a></li>
+                      <li data-option data-value="staging" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Organization 3</a></li>
+                      <li data-option data-value="dea" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Organization 4</a></li>
+                      <li data-option data-value="router" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Organization 5</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -114,21 +124,24 @@
               <li class="bx--menu__item">
                 <p class="bx--menu__item--title">Space</p>
                 <ul data-dropdown data-value class="bx--dropdown" tabindex="0">
-                  <li class="bx--dropdown__menu-text">Space 2</li>
+                  <li data-dropdown-space class="bx--dropdown__menu-text">Space 2</li>
                   <svg class="bx--dropdown__arrow">
                     <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
                   </svg>
                   <li>
                     <ul class="bx--dropdown__list">
-                      <!-- `href` in `<li>` would typically be actual links of routes -->
-                      <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Space 1</a></li>
-                      <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Space 3</a></li>
-                      <li data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Space 4</a></li>
-                      <li data-option data-value="dea" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Space 5</a></li>
+                      <li data-option data-value="all" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Space 1</a></li>
+                      <li data-option data-value="all" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Space 2</a></li>
+                      <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Space 3</a></li>
+                      <li data-option data-value="staging" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Space 4</a></li>
+                      <li data-option data-value="dea" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Space 5</a></li>
                     </ul>
                   </li>
                 </ul>
-
+              </li>
+              <li class="bx--menu__item">
+                <a href="#" class="bx--link">Manage Organizations</a>
+                <a href="#" class="bx--link">Create A Space</a>
               </li>
             </ul>
           </li>
@@ -143,8 +156,8 @@
           </li>
           <li>
             <ul class="bx--dropdown__list">
-              <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Profile: Erlich Bachman</a></li>
-              <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Profile: TJ Egan</a></li>
+              <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Profile</a></li>
+              <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Log Out</a></li>
             </ul>
           </li>
         </ul>
@@ -154,12 +167,12 @@
   <!-- End Super Global Header -->
 
   <!-- Global Header -->
-  <header role="header" class="bx--global-header">
+  <header role="banner" class="bx--global-header">
     <div class="bx--global-header__left-container">
       <div class="left-nav__trigger">
-        <a class="left-nav__trigger--btn" data-left-nav-toggle="open" tabindex="0">
+        <div class="left-nav__trigger--btn" data-left-nav-toggle="open" tabindex="0">
           <span></span>
-        </a>
+        </div>
       </div>
       <!-- Left Navigation -->
       <div class="bx--global-header__left-nav left-nav--active" data-left-nav-container>
@@ -176,17 +189,17 @@
           </ul>
           <ul role="menubar" class="left-nav-list" data-left-nav-list aria-hidden="false">
             <li role="menuitem" tabindex="0" class="left-nav-list__item" data-left-nav-item>
-              <a href="#" title="Item without children" class="left-nav-list__item-link">
+              <a href="#" title="Item without children" class="left-nav-list__item-link" tabindex="-1">
                 Item without children
               </a>
             </li>
             <li role="menuitem" tabindex="0" class="left-nav-list__item" data-left-nav-item>
-              <a href="#" class="left-nav-list__item-link">
+              <a href="#" class="left-nav-list__item-link" tabindex="-1">
                 Item without children
               </a>
             </li>
-            <li role="menuitem" tabindex="0" class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item aria-haspopup="true">
-              <a class="left-nav-list__item-link">
+            <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item-with-children data-left-nav-item tabindex="0" aria-haspopup="true">
+              <a class="left-nav-list__item-link" tabindex="-1">
                 Item with children
                 <div class="left-nav-list__item-icon">
                   <svg class="icon">
@@ -196,7 +209,7 @@
               </a>
               <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
                 <li class="left-nav-list__item" data-left-nav-nested-item data-left-nav-has-flyout role="menuitem" tabindex="-1" aria-haspopup="true">
-                  <a href="#example-item-1A" class="left-nav-list__item-link" data-left-nav-item-link>Item with Flyout
+                  <a href="#example-item-1A" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Item with Flyout
                     <div class="left-nav-list--flyout--icon">
                       <svg class="left-nav-list--flyout--arrow-icon">
                         <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
@@ -222,18 +235,18 @@
                   </ul>
                 </li>
                 <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
-                  <a href="#example-item-1B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1B</a>
+                  <a href="#example-item-1B" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1B</a>
                 </li>
                 <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
-                  <a href="#example-item-1C" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1C</a>
+                  <a href="#example-item-1C" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1C</a>
                 </li>
                 <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
-                  <a href="#example-item-1D" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1D</a>
+                  <a href="#example-item-1D" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1D</a>
                 </li>
               </ul>
             </li>
-            <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item aria-haspopup="true">
-              <a class="left-nav-list__item-link">
+            <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item-with-children data-left-nav-item tabindex="0" aria-haspopup="true">
+              <a class="left-nav-list__item-link" tabindex="-1">
                 Item with children
                 <div class="left-nav-list__item-icon">
                   <svg class="icon">
@@ -241,64 +254,46 @@
                   </svg>
                 </div>
               </a>
-              <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-2A" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2A</a>
-                </li>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-2B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2B</a>
-                </li>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-2C" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2C</a>
-                </li>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-2D" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 2D</a>
-                </li>
-              </ul>
-            </li>
-            <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item aria-haspopup="true">
-              <a class="left-nav-list__item-link">
-                Item with children
-                <div class="left-nav-list__item-icon">
-                  <svg class="icon">
-                    <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
-                  </svg>
-                </div>
-              </a>
-              <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-3A" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3A</a>
-                </li>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-3B" class="left-nav-list__item-link" data-left-nav-item-link>Item with Flyout
+              <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
+                <li class="left-nav-list__item" data-left-nav-nested-item data-left-nav-has-flyout role="menuitem" tabindex="-1" aria-haspopup="true">
+                  <a href="#example-item-1A" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Item with Flyout
                     <div class="left-nav-list--flyout--icon">
                       <svg class="left-nav-list--flyout--arrow-icon">
                         <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
                       </svg>
                     </div>
                   </a>
-                  <ul class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Ba</a>
+                  <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Aa</a>
                     </li>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bb</a>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ab</a>
                     </li>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bc</a>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ac</a>
                     </li>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Bd</a>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ad</a>
                     </li>
-                    <li class="left-nav-list__item" data-left-nav-flyout-item>
-                      <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 3Be</a>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ae</a>
                     </li>
                   </ul>
                 </li>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1B" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1B</a>
+                </li>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1C" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1C</a>
+                </li>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1D" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1D</a>
+                </li>
               </ul>
             </li>
-            <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item aria-haspopup="true">
-              <a class="left-nav-list__item-link">
+            <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item-with-children data-left-nav-item tabindex="0" aria-haspopup="true">
+              <a class="left-nav-list__item-link" tabindex="-1">
                 Item with children
                 <div class="left-nav-list__item-icon">
                   <svg class="icon">
@@ -306,18 +301,88 @@
                   </svg>
                 </div>
               </a>
-              <ul class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-4A" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 4A</a>
+              <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
+                <li class="left-nav-list__item" data-left-nav-nested-item data-left-nav-has-flyout role="menuitem" tabindex="-1" aria-haspopup="true">
+                  <a href="#example-item-1A" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Item with Flyout
+                    <div class="left-nav-list--flyout--icon">
+                      <svg class="left-nav-list--flyout--arrow-icon">
+                        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
+                      </svg>
+                    </div>
+                  </a>
+                  <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Aa</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ab</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ac</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ad</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ae</a>
+                    </li>
+                  </ul>
                 </li>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-4B" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 4B</a>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1B" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1B</a>
                 </li>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-4C" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 4C</a>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1C" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1C</a>
                 </li>
-                <li class="left-nav-list__item" data-left-nav-nested-item>
-                  <a href="#example-item-4D" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 4D</a>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1D" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1D</a>
+                </li>
+              </ul>
+            </li>
+            <li class="left-nav-list__item left-nav-list__item--has-children" data-left-nav-item-with-children data-left-nav-item tabindex="0" aria-haspopup="true">
+              <a class="left-nav-list__item-link" tabindex="-1">
+                Item with children
+                <div class="left-nav-list__item-icon">
+                  <svg class="icon">
+                    <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
+                  </svg>
+                </div>
+              </a>
+              <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--nested" data-left-nav-nested-list>
+                <li class="left-nav-list__item" data-left-nav-nested-item data-left-nav-has-flyout role="menuitem" tabindex="-1" aria-haspopup="true">
+                  <a href="#example-item-1A" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Item with Flyout
+                    <div class="left-nav-list--flyout--icon">
+                      <svg class="left-nav-list--flyout--arrow-icon">
+                        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
+                      </svg>
+                    </div>
+                  </a>
+                  <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--flyout" data-left-nav-flyout>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Aa" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Aa</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ab" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ab</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ac" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ac</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ad" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ad</a>
+                    </li>
+                    <li class="left-nav-list__item" data-left-nav-flyout-item role="menuitem" tabindex="-1">
+                      <a href="#example-item-1Ae" class="left-nav-list__item-link" data-left-nav-item-link>Example Item 1Ae</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1B" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1B</a>
+                </li>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1C" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1C</a>
+                </li>
+                <li class="left-nav-list__item" data-left-nav-nested-item role="menuitem" tabindex="-1">
+                  <a href="#example-item-1D" class="left-nav-list__item-link" data-left-nav-item-link tabindex="-1">Example Item 1D</a>
                 </li>
               </ul>
             </li>
@@ -326,7 +391,7 @@
       </div>
       <!-- End Left Navigation -->
       <div class="bx--global-header__title">
-        <h4 data-global-header-current-page class="bx--global-header__title--current-page">Applications</h4>
+        <h4 data-global-header-current-page class="bx--global-header__title--current-page">Infrastructure</h4>
       </div>
     </div>
   </header>

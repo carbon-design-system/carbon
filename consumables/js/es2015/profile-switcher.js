@@ -27,19 +27,27 @@ export default class ProfileSwitcher {
     this.options = Object.assign({
       // Data Attribute selectors
       selectorProfileSwitcher: '[data-profile-switcher]',
+      selectorToggle: '[data-profile-switcher-toggle]',
+      selectorMenu: '[data-switcher-menu]',
       selectorAccount: '[data-switcher-account]',
       selectorOrg: '[data-switcher-org]',
       selectorSpace: '[data-switcher-space]',
       selectorAccountDropdown: '[data-dropdown-account]',
       selectorOrgDropdown: '[data-dropdown-org]',
       selectorSpaceDropdown: '[data-dropdown-space]',
+      classSwitcherOpen: 'bx--account-switcher--open',
     }, options);
 
     this.constructor.components.set(this.element, this);
 
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
+    this.element.querySelector(this.options.selectorToggle).addEventListener('keypress', (event) => this.toggle(event));
 
-    this.determineSwitcherValues();
+    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', () => this.determineSwitcherValues(true));
+
+    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', () => this.determineSwitcherValues(false));
+
+    this.determineSwitcherValues(false);
   }
 
   /**
@@ -70,6 +78,21 @@ export default class ProfileSwitcher {
   }
 
   /**
+   * Opens and closes the menu.
+   * @param {Event} event The event triggering this method.
+   */
+  toggle(event) {
+    if (event.which === 13) {
+      const isOfSelf = this.element.contains(event.target);
+      if (isOfSelf) {
+        this.element.classList.toggle(this.options.classSwitcherOpen);
+      } else if (!isOfSelf && this.element.classList.contains(this.options.classSwitcherOpen)) {
+        this.element.classList.remove(this.options.classSwitcherOpen);
+      }
+    }
+  }
+
+  /**
    * Handles click on the document.
    * Closes the profile switcherwhen document is clicked outside the left navigation or
    * the user clicks the profile switcher while it is open.
@@ -78,37 +101,64 @@ export default class ProfileSwitcher {
   handleDocumentClick(evt) {
     const clickTarget = evt.target;
     const isOfSelf = this.element.contains(clickTarget);
-    const isToggle = this.element.ownerDocument.querySelector('[data-profile-switcher-toggle]').contains(clickTarget);
-    const isOpen = this.element.classList.contains('bx--switcher--open');
+    const isToggle = this.element.ownerDocument.querySelector(this.options.selectorToggle).contains(clickTarget);
+    const isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 
     if (isOfSelf) {
       if (isToggle && isOpen) {
-        this.element.classList.remove('bx--switcher--open');
+        this.element.classList.remove(this.options.classSwitcherOpen);
       } else if (isOpen) {
         this.determineSwitcherValues();
       } else {
-        this.element.classList.add('bx--switcher--open');
+        this.element.classList.add(this.options.classSwitcherOpen);
       }
     } else {
-      this.element.classList.remove('bx--switcher--open');
+      this.element.classList.remove(this.options.classSwitcherOpen);
     }
   }
 
   /**
-   * Determines values to put in the profile switcher.
+   * Handles logic to determine what text to display in profile switcher.
+   * If the text is over 25 characters long, truncate and add ellipses.
+   * Also adds logic to change the switcher width based on the width of the hovered
+   * profile switcher
+   * @param {boolean} isHovered boolean value passed by the event listener on bx--toggle.
    */
-  determineSwitcherValues() {
+  determineSwitcherValues(isHovered) {
     const nameElement = this.element.querySelector(this.options.selectorAccount);
     const orgElement = this.element.querySelector(this.options.selectorOrg);
     const spaceElement = this.element.querySelector(this.options.selectorSpace);
+    const menuElement = this.element.querySelector(this.options.selectorMenu);
+    const isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 
-    const nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).innerHTML;
-    const orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).innerHTML;
-    const spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).innerHTML;
+    const nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
+    const orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
+    const spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+    let nameShort;
+    let orgShort;
 
-    nameElement.innerHTML = nameDropdownValue;
-    orgElement.innerHTML = orgDropdownValue;
-    spaceElement.innerHTML = spaceDropdownValue;
+    if (isHovered && !isOpen) {
+      nameElement.textContent = nameDropdownValue;
+      orgElement.textContent = orgDropdownValue;
+      spaceElement.textContent = spaceDropdownValue;
+      menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
+    } else {
+      if (nameDropdownValue.length > 25) {
+        nameShort = nameDropdownValue.substr(0, 25) + '...';
+        nameElement.textContent = nameShort;
+      } else {
+        nameElement.textContent = nameDropdownValue;
+      }
+
+      if (orgDropdownValue.length > 25) {
+        orgShort = orgDropdownValue.slice(0, 12) + '...' + orgDropdownValue.slice(-13);
+        orgElement.textContent = orgShort;
+      } else {
+        orgElement.textContent = orgDropdownValue;
+      }
+      menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
+      spaceElement.textContent = spaceDropdownValue;
+    }
   }
 
   release() {
@@ -120,7 +170,7 @@ export default class ProfileSwitcher {
 }
 
 /**
-* The component options.
+* The component options..
  * @member {Object} ProfileSwitcher#options
  * @property {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
  * @property {string} [options.selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
