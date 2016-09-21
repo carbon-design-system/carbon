@@ -4,7 +4,13 @@
   <!-- Super Global Header -->
   <nav role="navigation" class="bx--top-nav" aria-label="Top Header">
     <ul role="menubar" class="bx--top-nav__left-container" aria-hidden="false">
-      <li role="menuitem" class="bx--top-nav__left-container__item">
+      <a class="bx--top-nav__left-container__link" href="#">
+        <svg class="bx--top-nav__left-container__link--icon">
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--search"></use>
+        </svg>
+        Docs
+      </a>
+      <!-- <li role="menuitem" class="bx--top-nav__left-container__item">
         <ul role="menu" data-dropdown class="bx--dropdown" tabindex="0">
           <li class="bx--dropdown__menu-text">Docs</li>
           <li>
@@ -20,8 +26,8 @@
             </ul>
           </li>
         </ul>
-      </li>
-      <li role="menuitem" class="bx--top-nav__left-container__item">
+      </li> -->
+      <!-- <li role="menuitem" class="bx--top-nav__left-container__item">
         <ul role="menu" data-dropdown class="bx--dropdown" tabindex="0">
           <li class="bx--dropdown__menu-text">Contact</li>
           <li>
@@ -37,8 +43,8 @@
             </ul>
           </li>
         </ul>
-      </li>
-      <li role="menuitem" class="bx--top-nav__left-container__item">
+      </li> -->
+      <!-- <li role="menuitem" class="bx--top-nav__left-container__item">
         <ul role="menu" data-dropdown class="bx--dropdown" tabindex="0">
           <li class="bx--dropdown__menu-text">Notifications</li>
           <li>
@@ -53,7 +59,7 @@
             </ul>
           </li>
         </ul>
-      </li>
+      </li> -->
     </ul>
     <ul role="menubar" class="bx--top-nav__right-container">
       <li role="menuitem" class="bx--top-nav__right-container__item">
@@ -75,7 +81,7 @@
                       <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
                     </svg>
                   </li>
-                  <li aria-haspopup="true">
+                  <li aria-haspopup="true" class="bx--dropdown--scroll">
                     <ul role="menu" aria-hidden="true" class="bx--dropdown__list">
                       <li role="menuitem" data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)" tabindex="0">someone_at_a_company@email.com</a></li>
                       <li role="menuitem" data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)" tabindex="0">TJs_accoqwejqwhekjqwgehgunt_54321</a></li>
@@ -90,7 +96,7 @@
                   <svg class="bx--dropdown__arrow">
                     <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
                   </svg>
-                  <li>
+                  <li class="bx--dropdown--scroll">
                     <ul class="bx--dropdown__list">
                       <li data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">US South</a></li>
                       <li data-option data-value="all" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Sydney</a></li>
@@ -106,7 +112,7 @@
                   <svg class="bx--dropdown__arrow">
                     <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
                   </svg>
-                  <li>
+                  <li class="bx--dropdown--scroll">
                     <ul class="bx--dropdown__list">
                       <li data-option data-value="all" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">someone_at_a_company@email.com</a></li>
                       <li data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Organization q2332434341sddsf2</a></li>
@@ -124,7 +130,7 @@
                   <svg class="bx--dropdown__arrow">
                     <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
                   </svg>
-                  <li>
+                  <li class="bx--dropdown--scroll">
                     <ul class="bx--dropdown__list">
                       <li data-option data-value="all" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Dev</a></li>
                       <li data-option data-value="all" class="bx--dropdown__list-item"><a  class="bx--dropdown__link" href="javascript:void(0)">Space 2</a></li>
@@ -147,7 +153,9 @@
         <ul data-dropdown data-value class="bx--dropdown" tabindex="0">
           <li data-top-nav-profile-image class="bx--dropdown__menu-text--profile-image">
             <div class="profile-image">
-              <!-- Profile image here -->
+              <svg class="bx--dropdown__profile-dropdown--picture">
+                <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--user-stroke-circle"></use>
+              </svg>
             </div>
           </li>
           <li class="bx--dropdown__profile-dropdown">
@@ -176,13 +184,21 @@
   <!-- Global Header -->
   <header role="banner" class="bx--global-header">
     <div class="bx--global-header__left-container">
-      <div class="bx--left-nav__trigger">
+      <!-- <div class="bx--left-nav__trigger">
         <div class="bx--left-nav__trigger--btn" data-left-nav-toggle="open" tabindex="0">
           <span></span>
         </div>
+      </div> -->
+      <div class="bx--global-header__title">
+        <a class="bx--global-header__title--logo">
+          <img class="logo__image" src="http://ace-common-test-20160909-173359.ng.bluemix.net/cache/784-1688551103/api/v4/img/bluemix-logo-2016-feb.svg" data-left-nav-toggle="open" tabindex="0"></img>
+          <a href="#" class="logo__text">
+            IBM <span class="logo__text--bold">Bluemix</span>
+          </a>
+        </a>
+        <h4 class="bx--global-header__title--current-page">Applications</h4>
       </div>
-      <!-- Left Navigation -->
-      <div class="bx--global-header__left-nav bx--left-nav--active" data-left-nav-container>
+      <div class="bx--global-header__left-nav" data-left-nav-container>
         <div data-left-nav-toggle="close" data-left-nav-current-section="Applications" class="bx--left-nav__header">
           <a data-left-nav-current-section-title class="bx--left-nav__header--title">Applications</a>
           <svg tabindex="0" class="bx--left-nav__header--close-icon">
@@ -190,7 +206,7 @@
           </svg>
         </div>
         <nav class="bx--left-nav" data-left-nav role="navigation" aria-label="Left Navigation">
-          <ul data-left-nav-sections class="bx--left-nav__sections">
+          <ul data-left-nav-sections class="bx--left-nav__sections" tabindex="0">
             <li data-left-nav-section="Infrastructure" class="bx--left-nav__section bx--left-nav__section--infrastructure"><a class="bx--left-nav__section--link" href="./unified-header-infrastructure">Infrastructure</a></li>
             <li data-left-nav-section="Services" class="bx--left-nav__section bx--left-nav__section--services"><a class="bx--left-nav__section--link" href="./unified-header-services">Services</a></li>
           </ul>
@@ -399,18 +415,18 @@
         </nav>
       </div>
       <!-- End Left Navigation -->
-      <div class="bx--global-header__title">
-        <h4 data-global-header-current-page class="bx--global-header__title--current-page">Applications</h4>
-      </div>
     </div>
 
     <!-- Global Header - Right Nav -->
     <div class="bx--global-header__right-container">
-      <ul role="menubar" class="bx--global-header__menu" aria-hidden="false">
+      <ul data-global-header-menu role="menubar" class="bx--global-header__menu" aria-hidden="false">
         <li role="menuitem" class="bx--global-header__menu__item">
           <a class="bx--global-header__menu__item--link" href="javascript:void(0)">Catalog</a>
         </li>
         <li role="menuitem" class="bx--global-header__menu__item">
+          <a class="bx--global-header__menu__item--link" href="javascript:void(0)">Support</a>
+        </li>
+        <!-- <li role="menuitem" class="bx--global-header__menu__item">
           <ul role="menu" data-dropdown class="bx--dropdown" tabindex="0">
             <li class="bx--dropdown__menu-text">Support</li>
             <li aria-haspopup="true">
@@ -422,18 +438,18 @@
               </ul>
             </li>
           </ul>
-        </li>
+        </li> -->
         <li role="menuitem" class="bx--global-header__menu__item">
           <ul role="menu" data-dropdown class="bx--dropdown" tabindex="0">
             <li class="bx--dropdown__menu-text">Account</li>
             <li aria-haspopup="true">
               <ul role="menu" aria-hidden="true" class="bx--dropdown__list">
-                <li role="menuitem" tabindex="0" data-option data-value="all" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Make A Payment</a></li>
-                <li role="menuitem" tabindex="0" data-option data-value="cloudFoundry" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Sales</a></li>
-                <li role="menuitem" tabindex="0" data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Billing</a></li>
-                <li role="menuitem" tabindex="0" data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Users</a></li>
-                <li role="menuitem" tabindex="0" data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">VPN Access</a></li>
-                <li role="menuitem" tabindex="0" data-option data-value="staging" class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Manage</a></li>
+                <li role="menuitem" tabindex="0" data-option class="bx--dropdown__list-item"><a class="bx--dropdown__link" href="javascript:void(0)">Make A Payment</a></li>
+                <li role="menuitem" tabindex="0" data-option class="bx--dropdown__list-item"><a data-account-link class="bx--dropdown__link" href="javascript:void(0)">Sales</a></li>
+                <li role="menuitem" tabindex="0" data-option class="bx--dropdown__list-item"><a data-account-link class="bx--dropdown__link" href="javascript:void(0)">Billing</a></li>
+                <li role="menuitem" tabindex="0" data-option class="bx--dropdown__list-item"><a data-account-link class="bx--dropdown__link" href="javascript:void(0)">Users</a></li>
+                <li role="menuitem" tabindex="0" data-option class="bx--dropdown__list-item"><a data-account-link class="bx--dropdown__link" href="javascript:void(0)">VPN Access</a></li>
+                <li role="menuitem" tabindex="0" data-option class="bx--dropdown__list-item"><a data-account-link class="bx--dropdown__link" href="javascript:void(0)">Manage</a></li>
               </ul>
             </li>
           </ul>

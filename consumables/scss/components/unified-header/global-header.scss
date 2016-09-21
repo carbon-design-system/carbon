@@ -9,16 +9,64 @@
   line-height: 1.5;
   background-color: $color__blue-90;
   box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, .1);
+  z-index: 9000;
 
   &__title {
     display: flex;
     align-items: center;
+
+    &--logo {
+      display: flex;
+      align-items: center;
+      padding: 0 .5rem 0 1.25rem;
+      text-decoration: none;
+      color: $color__white;
+      position: relative;
+
+      //
+      // &:after {
+      //   content: '';
+      //   position: absolute;
+      //   top: -4px;
+      //   left: 18px;
+      //   width: 2rem;
+      //   height: 2rem;
+      //   background-color: transparent;
+      //   border: 2px solid $color__blue-30;
+      //   border-radius: 50%;
+      //   z-index: -1;
+      //   transition: .5s;
+      //   animation-name: pulse;
+      //   animation-duration: 2s;
+      //   animation-iteration-count: infinite;
+      //   animation-direction: alternate;
+      // }
+      //
+      // &:before {
+      //   content: '';
+      //   position: absolute;
+      //   top: -10px;
+      //   left: 12px;
+      //   width: 2.75rem;
+      //   height: 2.75rem;
+      //   background-color: transparent;
+      //   border: 3px solid $color__blue-30;
+      //   border-radius: 50%;
+      //   z-index: -1;
+      //   transition: .5s;
+      //   animation-name: pulse2;
+      //   animation-duration: 1.5s;
+      //   animation-iteration-count: infinite;
+      // }
+    }
 
     &--current-page {
       @include font-smoothing;
       display: flex;
       align-items: center;
       font-weight: 400;
+      line-height: inherit;
+      color: $color__blue-30;
 
       .bx--unified-header--applications & {
         color: $color__teal-40;
@@ -34,12 +82,41 @@
     }
   }
 
+  .logo {
+    &__image {
+      margin-right: .5rem;
+      cursor: pointer;
+      position: relative;
+    }
+
+    &__text {
+      @include font-size('18');
+      @include font-smoothing;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      color: $color__white;
+      margin-right: .5rem;
+
+      &:hover,
+      &:focus {
+        color: $color__blue-20;
+      }
+
+      &--bold {
+        font-weight: 700;
+      }
+    }
+  }
+
   &__left-container {
     display: flex;
     align-items: center;
   }
 
   &__right-container {
+    display: flex;
+    align-items: center;
     padding-right: 1%;
     background-color: $color__blue-90;
   }
@@ -74,6 +151,12 @@
       padding: 0 1rem;
 
       &:hover {
+        color: $color__blue-30;
+      }
+
+      &:focus {
+        outline: 0;
+        background-color: $color__navy-gray-3;
         color: $color__blue-30;
       }
     }
@@ -138,6 +221,12 @@
 
     &__link {
       padding: .5rem .75rem;
+      color: $color__white;
+
+      &:hover {
+        color: $color__blue-90;
+        background-color: $color__blue-30;
+      }
     }
 
     &--open {
