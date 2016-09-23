@@ -1,3 +1,4 @@
+@import '../helpers';
 @import 'vars';
 @import 'functions';
 @import 'extends';
@@ -57,6 +58,10 @@
 
     a {
       color: $color__blue-20;
+
+      @include light-ui {
+        color: $color__blue-51;
+      }
     }
   }
 
