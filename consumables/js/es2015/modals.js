@@ -28,11 +28,15 @@ export default class Modal {
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
-   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+   * @param {string} [options.eventAfterShown]
+   *   The name of the custom event telling that modal is sure shown
+   *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
    * @param {string} [options.eventBeforeHidden]
    *   The name of the custom event fired before this modal is hidden.
    *   Cancellation of this event stops hiding the modal.
-   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+   * @param {string} [options.eventAfterHidden]
+   *   The name of the custom event telling that modal is sure hidden
+   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    */
   constructor(element, options = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -64,11 +68,15 @@ export default class Modal {
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
-   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+   * @param {string} [options.eventAfterShown]
+   *   The name of the custom event telling that modal is sure shown
+   *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
    * @param {string} [options.eventBeforeHidden]
    *   The name of the custom event fired before this modal is hidden.
    *   Cancellation of this event stops hiding the modal.
-   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+   * @param {string} [options.eventAfterHidden]
+   *   The name of the custom event telling that modal is sure hidden
+   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    */
   static create(element, options) {
     return this.components.get(element) || new this(element, options);
@@ -87,11 +95,15 @@ export default class Modal {
    * @param {string} [options.eventBeforeShown]
    *   The name of the custom event fired before this modal is shown.
    *   Cancellation of this event stops showing the modal.
-   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+   * @param {string} [options.eventAfterShown]
+   *   The name of the custom event telling that modal is sure shown
+   *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
    * @param {string} [options.eventBeforeHidden]
    *   The name of the custom event fired before this modal is hidden.
    *   Cancellation of this event stops hiding the modal.
-   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+   * @param {string} [options.eventAfterHidden]
+   *   The name of the custom event telling that modal is sure hidden
+   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    * @returns {Handle} The handle to remove the event listener to handle clicking.
    */
   static init(target = document, options) {
@@ -105,6 +117,8 @@ export default class Modal {
         const element = eventMatches(event, '[data-modal-target]');
 
         if (element) {
+          event.delegateTarget = element;
+
           const modalElements = [... element.ownerDocument.querySelectorAll(element.dataset.modalTarget)];
           if (modalElements.length > 1) {
             throw new Error('Target modal must be unique.');
@@ -116,7 +130,7 @@ export default class Modal {
             }
 
             const modal = this.create(modalElements[0], options);
-            modal.show(element, (error, shownAlready) => {
+            modal.show(event, (error, shownAlready) => {
               if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
                 modal.element.focus();
               }
@@ -132,7 +146,7 @@ export default class Modal {
    */
   hookCloseActions() {
     this.element.addEventListener('click', (event) => {
-      if (event.currentTarget === event.target) this.hide();
+      if (event.currentTarget === event.target) this.hide(event);
     });
 
     if (this.keydownHandler) {
@@ -142,15 +156,15 @@ export default class Modal {
 
     this.keydownHandler = (event) => {
       if (event.which === 27) {
-        this.hide();
+        this.hide(event);
       }
     };
 
     this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
 
     [... this.element.querySelectorAll('[data-modal-close]')].forEach((element) => {
-      element.addEventListener('click', () => {
-        this.hide();
+      element.addEventListener('click', (event) => {
+        this.hide(event);
       });
     });
   }
@@ -195,14 +209,24 @@ export default class Modal {
    * @param {HTMLElement} [launchingElement] The DOM element that triggered calling this function.
    * @param {Modal~stateChangeCallback} [callback] The callback called once showing this dialog is finished or is canceled.
    */
-  show(launchingElement, callback) {
-    if (typeof launchingElement === 'function') {
-      callback = launchingElement; // eslint-disable-line no-param-reassign
-      launchingElement = null; // eslint-disable-line no-param-reassign
+  show(launchingElementOrEvent, callback) {
+    const launchingElementOrEventOmitted = !launchingElementOrEvent || typeof launchingElementOrEvent === 'function';
+    if (launchingElementOrEventOmitted) {
+      callback = launchingElementOrEvent; // eslint-disable-line no-param-reassign
     }
 
+    const launchingElement = launchingElementOrEventOmitted ? null :
+      launchingElementOrEvent.delegateTarget || launchingElementOrEvent.currentTarget || launchingElementOrEvent;
+
+    const launchingEvent = launchingElementOrEventOmitted ? null :
+      launchingElementOrEvent.currentTarget && launchingElementOrEvent;
+
     if (launchingElement && !launchingElement.nodeType) {
-      throw new TypeError('DOM Node should be given for launchingElement.');
+      throw new TypeError('DOM Node should be given for launching element.');
+    }
+
+    if (launchingEvent && !launchingEvent.type) {
+      throw new TypeError('DOM event should be given for launching event.');
     }
 
     if (this.element.classList.contains(this.options.classVisible)) {
@@ -215,7 +239,10 @@ export default class Modal {
     const eventStart = new CustomEvent(this.options.eventBeforeShown, {
       bubbles: true,
       cancelable: true,
-      detail: { launchingElement: launchingElement },
+      detail: {
+        launchingElement,
+        launchingEvent,
+      },
     });
 
     // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
@@ -224,7 +251,10 @@ export default class Modal {
         this.element.dispatchEvent(new CustomEvent(this.options.eventAfterShown, {
           bubbles: true,
           cancelable: true,
-          detail: { launchingElement: launchingElement },
+          detail: {
+            launchingElement,
+            launchingEvent,
+          },
         }));
         if (callback) {
           callback();
@@ -243,7 +273,26 @@ export default class Modal {
    * Hides this modal dialog.
    * @param {Modal~stateChangeCallback} [callback] The callback called once showing this dialog is finished or is canceled.
    */
-  hide(callback) {
+  hide(launchingElementOrEvent, callback) {
+    const launchingElementOrEventOmitted = !launchingElementOrEvent || typeof launchingElementOrEvent === 'function';
+    if (launchingElementOrEventOmitted) {
+      callback = launchingElementOrEvent; // eslint-disable-line no-param-reassign
+    }
+
+    const launchingElement = launchingElementOrEventOmitted ? null :
+      launchingElementOrEvent.currentTarget || launchingElementOrEvent;
+
+    const launchingEvent = launchingElementOrEventOmitted ? null :
+      launchingElementOrEvent.currentTarget && launchingElementOrEvent;
+
+    if (launchingElement && !launchingElement.nodeType) {
+      throw new TypeError('DOM Node should be given for launching element.');
+    }
+
+    if (launchingEvent && !launchingEvent.type) {
+      throw new TypeError('DOM event should be given for launching event.');
+    }
+
     if (!this.element.classList.contains(this.options.classVisible)) {
       if (callback) {
         callback(null, true);
@@ -254,6 +303,10 @@ export default class Modal {
     const eventStart = new CustomEvent(this.options.eventBeforeHidden, {
       bubbles: true,
       cancelable: true,
+      detail: {
+        launchingElement,
+        launchingEvent,
+      },
     });
 
     // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
@@ -262,6 +315,10 @@ export default class Modal {
         this.element.dispatchEvent(new CustomEvent(this.options.eventAfterHidden, {
           bubbles: true,
           cancelable: true,
+          detail: {
+            launchingElement,
+            launchingEvent,
+          },
         }));
         if (callback) {
           callback();
@@ -300,11 +357,15 @@ export default class Modal {
  * @property {string} [eventBeforeShown]
  *   The name of the custom event fired before this modal is shown.
  *   Cancellation of this event stops showing the modal.
- * @property {string} [eventAfterShown] The name of the custom event fired after this modal is shown.
+ * @property {string} [eventAfterShown]
+ *   The name of the custom event telling that modal is sure shown
+ *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
  * @property {string} [eventBeforeHidden]
  *   The name of the custom event fired before this modal is hidden.
  *   Cancellation of this event stops hiding the modal.
- * @property {string} [eventAfterHidden] The name of the custom event fired after this modal is hidden.
+ * @property {string} [eventAfterHidden]
+ *   The name of the custom event telling that modal is sure hidden
+ *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
  */
 
 /**

@@ -87,6 +87,27 @@ describe('Test modal', function () {
       });
     });
 
+    it(`Should have show() method support providing a DOM element instead of an event`, function () {
+      const spyBeingShownEventFired = sinon.spy();
+      const spyShownEventFired = sinon.spy();
+      return new Promise((resolve) => {
+        events.on(element.ownerDocument.body, 'modal-beingshown', spyBeingShownEventFired);
+        events.on(element.ownerDocument.body, 'modal-shown', spyShownEventFired);
+        modal.show(modal.element, resolve);
+      }).then(() => {
+        expect(spyBeingShownEventFired, 'modal-beingshown event').have.been.calledOnce;
+        expect(spyBeingShownEventFired.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beingshown event')
+          .to.equal(modal.element);
+        expect(spyBeingShownEventFired.firstCall.args[0].detail.launchingEvent, 'Launching element for modal-beingshown event')
+          .not.to.be.ok;
+        expect(spyShownEventFired, 'modal-shown event').have.been.calledOnce;
+        expect(spyShownEventFired.firstCall.args[0].detail.launchingElement, 'Launching element for modal-shown event')
+          .to.equal(modal.element);
+        expect(spyShownEventFired.firstCall.args[0].detail.launchingEvent, 'Launching element for modal-shown event')
+          .not.to.be.ok;
+      });
+    });
+
     it(`Should call callback of show() method after it finishes`, function () {
       style = document.createElement('style');
       style.textContent = `.bx--modal {
@@ -106,10 +127,20 @@ describe('Test modal', function () {
       });
     });
 
-    it(`Should have elements with data-modal-close attribute close buttons`, function () {
+    it(`Should have elements with data-modal-close attribute work as close buttons`, function () {
+      const spyBeingHidden = sinon.spy();
       element.classList.add('is-visible');
-      return new Promise((resolve) => {
-        events.on(element.ownerDocument.body, 'modal-hidden', resolve);
+      return new Promise((resolve, reject) => {
+        events.on(element.ownerDocument.body, 'modal-beinghidden', spyBeingHidden);
+        events.on(element.ownerDocument.body, 'modal-hidden', promiseTryCatcher((e) => {
+          expect(spyBeingHidden, 'Call count of modal-beinghidden event').to.have.been.calledOnce;
+          expect(spyBeingHidden.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beinghidden')
+            .to.equal(button);
+          expect(spyBeingHidden.firstCall.args[0].detail.launchingEvent.currentTarget, 'Launching event for modal-beinghidden')
+            .to.equal(button);
+          expect(e.detail.launchingElement, 'Launching element for modal-hidden').to.equal(button);
+          expect(e.detail.launchingEvent.currentTarget, 'Launching event for modal-hidden').to.equal(button);
+        }, resolve, reject));
         button.dispatchEvent(new CustomEvent('click'));
       });
     });
@@ -187,10 +218,20 @@ describe('Test modal', function () {
     });
 
     it(`Should handle ESC key`, function () {
+      const spyBeingHidden = sinon.spy();
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
-      return new Promise((resolve) => {
-        events.on(element.ownerDocument.body, 'modal-hidden', resolve);
+      return new Promise((resolve, reject) => {
+        events.on(element.ownerDocument.body, 'modal-beinghidden', spyBeingHidden);
+        events.on(element.ownerDocument.body, 'modal-hidden', promiseTryCatcher((e) => {
+          expect(spyBeingHidden, 'Call count of modal-beinghidden event').to.have.been.calledOnce;
+          expect(spyBeingHidden.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beinghidden')
+            .to.equal(element.ownerDocument.body);
+          expect(spyBeingHidden.firstCall.args[0].detail.launchingEvent.currentTarget, 'Launching event for modal-beinghidden')
+            .to.equal(element.ownerDocument.body);
+          expect(e.detail.launchingElement, 'Launching element for modal-hidden').to.equal(element.ownerDocument.body);
+          expect(e.detail.launchingEvent.currentTarget, 'Launching event for modal-hidden').to.equal(element.ownerDocument.body);
+        }, resolve, reject));
         document.body.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 27 }));
       });
     });
@@ -208,6 +249,24 @@ describe('Test modal', function () {
         setTimeout(resolve, 500);
       }).then(() => {
         expect(spyHiddenEventFired).not.to.have.been.called;
+      });
+    });
+
+    it(`Should handle click outside`, function () {
+      const spyBeingHidden = sinon.spy();
+      element.classList.add('is-visible');
+      return new Promise((resolve, reject) => {
+        events.on(element.ownerDocument.body, 'modal-beinghidden', spyBeingHidden);
+        events.on(element.ownerDocument.body, 'modal-hidden', promiseTryCatcher((e) => {
+          expect(spyBeingHidden, 'Call count of modal-beinghidden event').to.have.been.calledOnce;
+          expect(spyBeingHidden.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beinghidden')
+            .to.equal(element);
+          expect(spyBeingHidden.firstCall.args[0].detail.launchingEvent.currentTarget, 'Launching event for modal-beinghidden')
+            .to.equal(element);
+          expect(e.detail.launchingElement, 'Launching element for modal-hidden').to.equal(element);
+          expect(e.detail.launchingEvent.currentTarget, 'Launching event for modal-hidden').to.equal(element);
+        }, resolve, reject));
+        element.dispatchEvent(new CustomEvent('click'));
       });
     });
 
@@ -356,9 +415,12 @@ describe('Test modal', function () {
       return new Promise((resolve, reject) => {
         events.on(target, 'modal-beingshown', promiseTryCatcher((e) => {
           expect(e.detail.launchingElement).to.equal(element);
+          expect(e.detail.launchingEvent.delegateTarget).to.equal(element);
         }, reject));
-        events.on(target, 'modal-shown', () => {
+        events.on(target, 'modal-shown', (e) => {
           setTimeout(promiseTryCatcher(() => {
+            expect(e.detail.launchingElement).to.equal(element);
+            expect(e.detail.launchingEvent.delegateTarget).to.equal(element);
             expect(spyFocus).have.been.calledOnce;
           }, resolve, reject), 0);
         });
