@@ -32,7 +32,9 @@ export default class Dropdown {
       eventAfterSelected: 'dropdown-selected',
     }, options);
 
-    this.element.dataset.dropdown = '';
+    if (this.element.dataset.dropdown !== 'navigation') {
+      this.element.dataset.dropdown = '';
+    }
     this.constructor.components.set(this.element, this);
 
     /**
@@ -126,16 +128,16 @@ export default class Dropdown {
       });
 
       if (this.element.dispatchEvent(eventStart)) {
-        this.element.firstElementChild.textContent = activatedElement.textContent;
+        if (this.element.dataset.dropdown !== 'navigation') {
+          this.element.firstElementChild.textContent = activatedElement.textContent;
+          activatedElement.classList.add(this.options.classSelected);
+        }
         this.element.dataset.value = activatedElement.parentElement.dataset.value;
-
         [... this.element.querySelectorAll(this.options.selectorItemSelected)].forEach((item) => {
           if (activatedElement !== item) {
             item.classList.remove(this.options.classSelected);
           }
         });
-
-        activatedElement.classList.add(this.options.classSelected);
 
         this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
           bubbles: true,

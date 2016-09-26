@@ -120,6 +120,12 @@ describe('Dropdown', function () {
       expect(textNode.textContent).to.equal('1');
     });
 
+    it(`Should not update text if navigation`, function () {
+      element.setAttribute('data-dropdown', 'navigation');
+      itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(textNode.textContent).to.equal('0');
+    });
+
     it(`Should provide a way to cancel switching item`, function () {
       events.on(element, 'dropdown-beingselected', (e) => {
         expect(e.detail.item).to.equal(itemNodes[1]);
