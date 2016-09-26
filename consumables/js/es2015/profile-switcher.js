@@ -46,8 +46,6 @@ export default class ProfileSwitcher {
     this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', () => this.determineSwitcherValues(true));
 
     this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', () => this.determineSwitcherValues(false));
-
-    this.determineSwitcherValues(false);
   }
 
   /**
@@ -136,6 +134,7 @@ export default class ProfileSwitcher {
     const spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
     let nameShort;
     let orgShort;
+    let spaceShort;
 
     if (isHovered && !isOpen) {
       nameElement.textContent = nameDropdownValue;
@@ -156,8 +155,15 @@ export default class ProfileSwitcher {
       } else {
         orgElement.textContent = orgDropdownValue;
       }
+
+      if (spaceDropdownValue.length > 25) {
+        spaceShort = spaceDropdownValue.substr(0, 25) + '...';
+        spaceElement.textContent = spaceShort;
+      } else {
+        spaceElement.textContent = spaceDropdownValue;
+      }
+
       menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
-      spaceElement.textContent = spaceDropdownValue;
     }
   }
 
