@@ -1,99 +1,61 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 class InternalButton extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    href: React.PropTypes.string,
-    tabIndex: React.PropTypes.number,
-    type: React.PropTypes.string,
-    role: React.PropTypes.string,
-    onBlur: React.PropTypes.func,
-    onClick: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
-    onKeyUp: React.PropTypes.func,
-    onKeyboardFocus: React.PropTypes.func,
-    onMouseDown: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func,
-    onTouchEnd: React.PropTypes.func,
-    onTouchStart: React.PropTypes.func,
-    onTouchTap: React.PropTypes.func,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
+    href: PropTypes.string,
+    tabIndex: PropTypes.number,
+    type: PropTypes.oneOf(['button', 'reset', 'submit']),
+    role: PropTypes.string,
   }
 
   static defaultProps = {
     tabIndex: 0,
-    onBlur: () => {},
-    onClick: () => {},
-    onFocus: () => {},
-    onKeyDown: () => {},
-    onKeyUp: () => {},
-    onKeyboardFocus: () => {},
-    onMouseDown: () => {},
-    onMouseEnter: () => {},
-    onMouseLeave: () => {},
-    onMouseUp: () => {},
-    onTouchEnd: () => {},
-    onTouchStart: () => {},
-    onTouchTap: () => {},
-  }
-
-  handleBlur = (evt) => {
-    this.props.onBlur(evt);
-  }
-
-  handleClick = (evt) => {
-    if (!this.props.disabled) {
-      this.props.onClick(evt);
-    }
-  }
-
-  handleFocus = (evt) => {
-    this.props.onFocus(evt);
-  }
-
-  handleMouseEnter = (evt) => {
-    this.props.onMouseEnter(evt);
-  }
-
-  handleMouseLeave = (evt) => {
-    this.props.onMouseLeave(evt);
-  }
-
-  handleMouseDown = (evt) => {
-    this.props.onMouseDown(evt);
-  }
-
-  handleMouseUp = (evt) => {
-    this.props.onMouseUp(evt);
+    type: 'button',
+    disabled: false,
   }
 
   render() {
-    const buttonProps = {
-      className: this.props.className,
-      disabled: this.props.disabled,
-      tabIndex: this.props.tabIndex,
-      type: this.props.type,
-      href: this.props.href,
-      role: this.props.role,
-      onBlur: this.handleBlur,
-      onClick: this.handleClick,
-      onFocus: this.handleFocus,
-      onKeyDown: this.handleKeyDown,
-      onMouseEnter: this.handleMouseEnter,
-      onMouseDown: this.handleMouseDown,
-      onMouseLeave: this.handleMouseLeave,
-      onMouseUp: this.handleMouseUp,
+    const {
+      children,
+      className,
+      disabled,
+      href,
+      tabIndex,
+      type,
+      ...other,
+    } = this.props;
+
+    const commonProps = {
+      className,
+      tabIndex,
     };
 
-    const HTML = (this.props.href)
-      ? <a {...buttonProps}>{this.props.children}</a>
-      : <button {...buttonProps}>{this.props.children}</button>;
+    const button = (
+      <button
+        {...other}
+        {...commonProps}
+        disabled={disabled}
+        type={type}
+      >
+        {children}
+      </button>
+    );
 
-    return HTML;
+    const anchor = (
+      <a
+        {...other}
+        {...commonProps}
+        href={href}
+        role="button"
+      >
+        {children}
+      </a>
+    );
+
+    return (href) ? anchor : button;
   }
 }
 
