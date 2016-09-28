@@ -30,6 +30,7 @@ import LeftNav from './left-nav';
 import UnifiedHeader from './unified-header';
 import InlineLeftNav from './inline-left-nav';
 import ProfileSwitcher from './profile-switcher';
+import SearchWithOptions from './search-with-options';
 
 const settings = {};
 
@@ -183,6 +184,7 @@ const init = () => {
     UnifiedHeader.init();
     InlineLeftNav.init();
     ProfileSwitcher.init();
+    SearchWithOptions.init();
   }
 };
 

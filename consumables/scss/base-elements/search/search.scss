@@ -57,16 +57,6 @@
       @include breakpoint(bp--sm--major) {
         @include font-size('16');
       }
-
-      // light ui styles intentionally commented out for now
-      // .light-ui & {
-      //   &::placeholder {
-      //     color: $color__navy-gray-7;
-      //   }
-
-      //   color: $color__navy-gray-6;
-      //   background-color: mix($color__white, $color__navy-gray-7, 50%);
-      // }
     }
 
     &__icon {
@@ -137,17 +127,6 @@
         }
       }
 
-      // light ui styles commented out for now
-      // .light-ui & {
-      //   color: $color__navy-gray-6;
-      //   background-color: mix($color__white, $color__navy-gray-7, 30%);
-
-      //   &:hover,
-      //   &:focus {
-      //     background-color: mix($color__white, $color__navy-gray-7, 40%);
-      //   }
-      // }
-
       .filter__text {
         display: none;
         padding-left: 1rem;
@@ -185,5 +164,69 @@
 
   _::-webkit-full-page-media, _:future, :root .bx--search__input {
     padding-right: 0;
+  }
+
+  .bx--search-with-options {
+    width: 100%;
+
+    .bx--search__input {
+      @include font-size('16');
+      flex: 1;
+      height: 100%;
+
+      @include breakpoint(bp--sm--major) {
+        @include font-size('16');
+      }
+    }
+
+    .bx--search__icon--magnifier {
+      width: 1rem;
+      height: 1rem;
+      top: rem(18px);
+    }
+
+    .bx--search__toggle-layout,
+    .bx--search__sort {
+      width: 3.25rem;
+      height: 3.25rem;
+      position: relative;
+      padding: 0;
+      background-color: $color__navy-gray-4;
+      border: none;
+      margin-left: 2px;
+      cursor: pointer;
+      transition: $transition--base;
+
+      &:hover,
+      &:focus {
+        background-color: $color__navy-gray-6;
+      }
+
+      &__container {
+        opacity: 1;
+
+        &--hidden {
+          opacity: 0;
+        }
+      }
+
+      @include light-ui {
+        background-color: $color__blue-51;
+
+        &:hover,
+        &:focus {
+          background-color: $color__blue-30;
+        }
+      }
+    }
+
+    .bx--search__icon {
+      position: absolute;
+      top: rem(18px);
+      right: rem(18px);
+      width: 1rem;
+      height: 1rem;
+      fill: $color__white;
+    }
   }
 }
