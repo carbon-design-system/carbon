@@ -8,6 +8,8 @@ const express = require('express');
 const app = express();
 const adaro = require('adaro');
 
+const port = process.env.PORT || 8080;
+
 const htmlFiles = {
   // Used in getContent() function
   all: [
@@ -153,4 +155,6 @@ app.get('/global/:component', (req, res) => {
     });
 });
 
-app.listen(8080);
+app.listen(port, () => {
+  console.log(`Listening on port: ${port}`);
+});
