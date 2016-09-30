@@ -158,21 +158,30 @@
       font-weight: 400;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       color: $color__navy-gray-3;
       text-decoration: none;
       transition: background-color $transition--base;
       padding: .5rem 1.5rem;
-    }
 
-    &-icon {
-      display: flex;
-
-      .icon {
-        fill: $color__blue-40;
-        width: rem(10px);
-        height: rem(10px);
+      &--taxonomy-icon {
+        fill: $color__navy-gray-3;
+        width: rem(24px);
+        height: rem(24px);
         transition: $transition--base;
+        margin-right: .75rem;
+      }
+
+      &--icon {
+        display: flex;
+        margin-left: auto;
+
+        .icon {
+          fill: $color__blue-40;
+          width: rem(10px);
+          height: rem(10px);
+          transition: $transition--base;
+        }
       }
     }
 
@@ -180,6 +189,10 @@
       & > .bx--left-nav-list__item-link {
         background-color: $color__blue-51;
         color: $color__white;
+      }
+
+      .bx--left-nav-list__item-link--taxonomy-icon {
+        fill: $color__white;
       }
     }
   }
@@ -195,6 +208,10 @@
       & > .bx--left-nav-list__item-link {
         background-color: $color__white;
         color: $color__blue-90;
+      }
+
+      .bx--left-nav-list__item-link--taxonomy-icon {
+        fill: $color__navy-gray-3;
       }
     }
 
