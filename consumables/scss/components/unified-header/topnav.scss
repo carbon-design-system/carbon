@@ -26,6 +26,10 @@
     color: $color__white;
     font-weight: 700;
 
+    @include light-ui {
+      color: $color__white;
+    }
+
     &--icon {
       width: .675rem;
       height: .7rem;

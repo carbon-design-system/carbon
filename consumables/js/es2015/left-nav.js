@@ -285,15 +285,20 @@ export default class LeftNav {
     const isOpen = this.element.classList.contains(this.options.classActiveLeftNav);
     const isUnifiedHeader = this.element.ownerDocument.querySelector('[data-unified-header]').contains(clickTarget);
     const shouldClose = !isOfSelf && isOpen && !isToggleBtn && !isUnifiedHeader;
-    const flyoutOpen = this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.contains(this.options.classFlyoutDisplayed);
+    let flyoutOpen;
+    if (this.element.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+      flyoutOpen = this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.contains(this.options.classFlyoutDisplayed);
+    }
     if (isOfSelf && this.element.tagName === 'A') {
       evt.preventDefault();
     }
     if (shouldClose) {
       this.element.classList.remove(this.options.classActiveLeftNav);
     }
-    if (flyoutOpen && !isOfSelf && isOpen) {
-      this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
+    if (this.element.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+      if (flyoutOpen && !isOfSelf && isOpen) {
+        this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
+      }
     }
   }
 

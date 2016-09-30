@@ -20,15 +20,17 @@
 .bx--left-nav__trigger {
   width: rem(55px);
   height: $height--global-nav;
-  background-color: $color__blue-90;
+  background-color: $color__navy-gray-3;
+  margin-left: 1rem;
+  position: relative;
+  cursor: pointer;
 
   &--btn {
-    padding: 1.525rem;
-    position: relative;
-    cursor: pointer;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.125rem;
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
 
     span,
     span:before,
@@ -39,38 +41,27 @@
       display: block;
       content: '';
       transition: all $transition--base ease;
-
-      .bx--unified-header--applications & {
-        background: $color__teal-40;
-      }
-
-      .bx--unified-header--infrastructure & {
-        background: $color__blue-40;
-      }
-
-      .bx--unified-header--services & {
-        background: $color__purple-30;
-      }
+      background: $color__blue-30;
     }
 
     span {
-      width: .75rem;
+      width: 1.25rem;
     }
 
     span:before {
-      width: 1rem;
+      width: 1.25rem;
     }
 
     span:after {
-      width: .85rem;
+      width: 1.25rem;
     }
 
     span:before {
-      top: rem(-5px);
+      top: rem(-6px);
     }
 
     span:after {
-      bottom: rem(-5px);
+      bottom: rem(-6px);
     }
   }
 }
@@ -78,38 +69,58 @@
 .bx--left-nav__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0 1.5rem;
   height: $height--global-nav;
   cursor: pointer;
-  position: relative;
+  position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  padding: 1.125rem 1rem;
 
-  &[data-left-nav-current-section='Applications'] {
-    background-color: $color__teal-50;
-  }
+  @include light-ui {
+    background-color: $color__navy-gray-1;
+    justify-content: space-between;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.125rem 1.5rem;
 
-  &[data-left-nav-current-section='Infrastructure'] {
-    background-color: $color__blue-50;
-  }
+    &[data-left-nav-current-section='Applications'] {
+      background-color: $color__teal-50;
+    }
 
-  &[data-left-nav-current-section='Services'] {
-    background-color: $color__purple-60;
+    &[data-left-nav-current-section='Infrastructure'] {
+      background-color: $color__blue-50;
+    }
+
+    &[data-left-nav-current-section='Services'] {
+      background-color: $color__purple-60;
+    }
   }
 
   &--title {
-    @include font-size('18');
-    @include font-smoothing;
-    color: $color__white;
-    font-weight: 700;
+    display: none;
+
+    @include light-ui {
+      @include font-size('18');
+      @include font-smoothing;
+      display: block;
+      color: $color__white;
+      font-weight: 700;
+      color: $color__white;
+    }
   }
 
   &--close-icon {
-    width: rem(13px);
-    height: rem(13px);
-    fill: $color__white;
+    width: rem(14px);
+    height: rem(14px);
+    fill: $color__blue-30;
+
+    @include light-ui {
+      fill: $color__white;
+    }
   }
 }
 
@@ -117,17 +128,25 @@
   display: block;
   width: 100%;
   height: 100%;
-  background-color: $color__white;
+  background-color: $color__navy-gray-1;
   padding: 0 0 2rem 0;
   overflow-y: auto;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
 }
 
 .bx--left-nav-list {
   display: flex;
   flex-direction: column;
-  background-color: $color__white;
   padding-top: 1rem;
   margin-bottom: 5rem;
+  background-color: $color__navy-gray-1;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
 
   & > .bx--left-nav-list__item {
     opacity: 1;
@@ -142,14 +161,27 @@
     cursor: pointer;
     width: 100%;
     padding: 0;
-    background-color: $color__white;
-    margin-bottom: .25rem;
+    margin-bottom: 0;
+    background-color: $color__navy-gray-1;
+
+    @include light-ui {
+      background-color: $color__white;
+    }
 
     &--active {
 
       & > .bx--left-nav-list__item-link {
-        background-color: $color__blue-51;
+        background-color: $color__blue-30;
         color: $color__white;
+
+        .bx--left-nav-list__item-link--taxonomy-icon {
+          fill: $color__white;
+        }
+
+        @include light-ui {
+          background-color: $color__blue-51;
+          color: $color__white;
+        }
       }
     }
 
@@ -159,17 +191,25 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      color: $color__navy-gray-3;
+      color: $color__white;
       text-decoration: none;
       transition: background-color $transition--base;
-      padding: .5rem 1.5rem;
+      padding: .5rem 1.125rem;
+
+      @include light-ui {
+        color: $color__navy-gray-3;
+      }
 
       &--taxonomy-icon {
-        fill: $color__navy-gray-3;
-        width: rem(24px);
-        height: rem(24px);
+        fill: $color__blue-30;
+        width: rem(20px);
+        height: rem(20px);
         transition: $transition--base;
-        margin-right: .75rem;
+        margin-right: 1.125rem;
+
+        @include light-ui {
+          fill: $color__blue-40;
+        }
       }
 
       &--icon {
@@ -185,10 +225,20 @@
       }
     }
 
-    &:hover {
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover,
+    &:focus {
       & > .bx--left-nav-list__item-link {
-        background-color: $color__blue-51;
+        background-color: $color__blue-30;
         color: $color__white;
+
+        @include light-ui {
+          background-color: $color__blue-51;
+          color: $color__white;
+        }
       }
 
       .bx--left-nav-list__item-link--taxonomy-icon {
@@ -380,6 +430,11 @@
   width: 100%;
   z-index: z('overlay');
   border-bottom: 1px solid $color__navy-gray-9;
+  display: none;
+
+  @include light-ui {
+    display: block;
+  }
 
   .bx--left-nav__section {
     cursor: pointer;

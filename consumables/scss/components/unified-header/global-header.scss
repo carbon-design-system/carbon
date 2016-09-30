@@ -8,7 +8,7 @@
   height: $height--global-nav;
   line-height: 1.5;
   background-color: $color__blue-90;
-  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, .1);
+  // box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, .1);
   z-index: 9000;
 
   &__title {
@@ -149,6 +149,10 @@
       background-color: $color__blue-90;
       color: $color__white;
       padding: 0 1rem;
+
+      @include light-ui {
+        color: $color__white;
+      }
 
       &:hover {
         color: $color__blue-30;
