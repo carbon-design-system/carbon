@@ -127,7 +127,7 @@
 
       @include breakpoint(bp--sm--major) {
         background: none;
-        padding: 1rem 0;
+        padding: 0;
 
         &+& {
           margin-left: rem(48px);
@@ -145,8 +145,7 @@
       }
 
       @include breakpoint(bp--sm--major) {
-        padding-right: 0;
-        padding-left: 0;
+        padding: 1rem 0;
         margin-bottom: 1px;
 
         &:hover {
