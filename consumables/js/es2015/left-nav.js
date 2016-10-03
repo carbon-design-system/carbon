@@ -56,6 +56,7 @@ export default class LeftNav {
       // CSS Class Selectors
       classActiveLeftNav: 'bx--left-nav--active',
       classActiveLeftNavListItem: 'bx--left-nav-list__item--active',
+      classActiveTrigger: 'bx--left-nav__trigger--active',
       classExpandedLeftNavListItem: 'bx--left-nav-list__item--expanded',
       classFlyoutDisplayed: 'bx--left-nav-list--flyout--displayed',
       classItemHasChildren: 'bx--left-nav-list__item--has-children',
@@ -151,28 +152,42 @@ export default class LeftNav {
    * Adds event listeners for showing and hiding the left navigation
    */
   hookOpenActions() {
-    const openCloseBtns = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavToggle)];
-    openCloseBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (btn.dataset.leftNavToggle === 'close') {
-          this.element.tabIndex = '-1';
-          this.element.classList.remove(this.options.classActiveLeftNav);
-        } else if (btn.dataset.leftNavToggle === 'open') {
-          this.element.tabIndex = '0';
-          this.element.classList.add(this.options.classActiveLeftNav);
-        }
-      });
-      btn.addEventListener('keypress', () => {
-        if (btn.dataset.leftNavToggle === 'close') {
-          this.element.classList.remove(this.options.classActiveLeftNav);
-        } else if (btn.dataset.leftNavToggle === 'open') {
-          this.element.tabIndex = '0';
-          this.element.classList.add(this.options.classActiveLeftNav);
-        }
-      });
+    const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle);
+    openBtn.addEventListener('click', () => {
+      this.element.classList.toggle(this.options.classActiveLeftNav);
+      openBtn.classList.toggle(this.options.classActiveTrigger);
     });
+    openBtn.addEventListener('keydown', (evt) => {
+      if (evt.which === 13) {
+        this.element.classList.toggle(this.options.classActiveLeftNav);
+        openBtn.classList.toggle(this.options.classActiveTrigger);
+      }
+    });
+    // const openCloseBtns = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavToggle)];
+    // openCloseBtns.forEach(btn => {
+    //   btn.addEventListener('click', () => {
+    //     if (btn.dataset.leftNavToggle === 'close') {
+    //       this.element.tabIndex = '-1';
+    //       this.element.classList.remove(this.options.classActiveLeftNav);
+    //     } else if (btn.dataset.leftNavToggle === 'open') {
+    //       this.element.tabIndex = '0';
+    //       btn.classList.toggle('bx--left-nav__trigger--active');
+    //       this.element.classList.toggle(this.options.classActiveLeftNav);
+    //     }
+    //   });
+    //   btn.addEventListener('keypress', () => {
+    //     if (btn.dataset.leftNavToggle === 'close') {
+    //       this.element.classList.remove(this.options.classActiveLeftNav);
+    //     } else if (btn.dataset.leftNavToggle === 'open') {
+    //       this.element.tabIndex = '0';
+    //       btn.classList.toggle('bx--left-nav__trigger--active');
+    //       this.element.classList.toggle(this.options.classActiveLeftNav);
+    //     }
+    //   });
+    // });
     this.element.ownerDocument.addEventListener('keydown', (evt) => {
       if (evt.which === 27 && this.element.classList.contains(this.options.classActiveLeftNav)) {
+        openBtn.classList.remove(this.options.classActiveTrigger);
         this.element.classList.remove(this.options.classActiveLeftNav);
       }
     });
@@ -293,6 +308,7 @@ export default class LeftNav {
       evt.preventDefault();
     }
     if (shouldClose) {
+      this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle).classList.remove(this.options.classActiveTrigger);
       this.element.classList.remove(this.options.classActiveLeftNav);
     }
     if (this.element.querySelector(this.options.selectorLeftNavFlyoutMenu)) {

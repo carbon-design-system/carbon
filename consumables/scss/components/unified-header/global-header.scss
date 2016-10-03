@@ -18,7 +18,7 @@
     &--logo {
       display: flex;
       align-items: center;
-      padding: 0 .5rem 0 1.25rem;
+      padding: 0 rem(18px) 0 rem(8px);
       text-decoration: none;
       color: $color__white;
       position: relative;
@@ -84,7 +84,6 @@
 
   .logo {
     &__image {
-      margin-right: .5rem;
       cursor: pointer;
       position: relative;
     }
