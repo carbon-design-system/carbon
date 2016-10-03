@@ -1,15 +1,24 @@
 .bx--inline-left-nav {
+  @include light-ui {
+    background-color: $color__white;
+    border-right: 1px solid $color__gray-1;
+  }
+
   width: rem(250px);
   position: fixed;
   top: rem(90px);
   height: 100%;
-  background-color: $color__white;
-  border-right: 1px solid $color__gray-1;
+  background-color: $color__navy-gray-2;
+  border-right: 1px solid $color__navy-gray-1;
 
   .left-nav-list {
+    @include light-ui {
+      background-color: $color__white;
+    }
+
     display: flex;
     flex-direction: column;
-    background-color: $color__white;
+    background-color: $color__navy-gray-2;
     padding-top: 1rem;
 
     &__item {
@@ -20,19 +29,27 @@
       &--active {
 
         & > .left-nav-list__item-link {
-          background-color: $color__blue-51;
+          @include light-ui {
+            background-color: $color__blue-51;
+            color: $color__white;
+          }
+          background-color: $color__blue-30;
           color: $color__white;
         }
       }
 
       &-link {
         @include font-size('14');
+        @include light-ui {
+          color: $color__navy-gray-3;
+        }
+
+        color: $color__white;
         font-weight: 400;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: $color__navy-gray-3;
         text-decoration: none;
         transition: background-color $transition--base;
         padding: .75rem 1.5rem;
@@ -42,7 +59,11 @@
         display: flex;
 
         .icon {
-          fill: $color__blue-40;
+          @include light-ui {
+            fill: $color__blue-40;
+          }
+
+          fill: $color__white;
           width: rem(10px);
           height: rem(10px);
           transition: $transition--base;
@@ -64,13 +85,17 @@
 
         .left-nav-list__item-icon .icon {
           transform: rotate(180deg);
+          fill: $color__blue-30;
         }
       }
 
       &:not(.left-nav-list__item--has-children):hover {
 
         & > .left-nav-list__item-link {
-          background-color: $color__blue-51;
+          @include light-ui {
+            background-color: $color__blue-51;
+          }
+          background-color: $color__blue-30;
           color: $color__white;
         }
       }
@@ -83,10 +108,12 @@
       }
 
       &:hover {
-
-        .left-nav-list__item-link {
-          color: $color__blue-90;
-        }
+        > .left-nav-list__item-link {
+          @include light-ui {
+            color: $color__blue-90;
+          }
+          color: $color__blue-30;
+        }  
       }
     }
   }
@@ -107,7 +134,10 @@
 
       &-link {
         @include font-size('14');
-        color: $color__navy-gray-3;
+        @include light-ui {
+          color: $color__navy-gray-3;
+        }
+        color: $color__white;
         padding: .75rem 1.35rem .75rem 2.5rem;
         font-weight: 400;
         display: flex;
@@ -125,11 +155,17 @@
       }
 
       &--active {
-        background-color: $color__blue-51;
+        @include light-ui {
+          background-color: $color__blue-51;
+        }
+        background-color: $color__blue-30;
         color: $color__white;
 
         & > .left-nav-list__item-link {
-          background-color: $color__blue-51;
+          @include light-ui {
+            background-color: $color__blue-51;
+          }
+          background-color: $color__blue-30;
           color: $color__white;
         }
       }
@@ -137,31 +173,46 @@
   }
 
   &__header {
-    border-bottom: 1px solid $color__gray-1;
+    @include light-ui {
+      border-bottom: 1px solid $color__gray-1;
+    }
+    border-bottom: 1px solid $color__navy-gray-1;
     cursor: pointer;
 
     &--link {
       @include font-smoothing;
+      @include light-ui {
+        color: $color__blue-51;
+      }
       text-decoration: none;
       padding: 1rem;
       margin-left: .5rem;
-      color: $color__blue-51;
       font-weight: 700;
       display: flex;
       align-items: center;
+      color: $color__blue-30;
 
       .icon {
+        @include light-ui {
+          fill: $color__blue-51;
+        }
         width: rem(15px);
         height: rem(15px);
-        fill: $color__blue-51;
         margin-right: 1rem;
+        fill: $color__blue-30;
       }
 
       &:hover {
-        color: $color__blue-40;
+        @include light-ui {
+          color: $color__blue-40;
+        }
+        color: $color__blue-20;
 
         & > .icon {
-          fill: $color__blue-40;
+          @include light-ui {
+            fill: $color__blue-40;
+          }
+          fill: $color__blue-20;
         }
       }
 
