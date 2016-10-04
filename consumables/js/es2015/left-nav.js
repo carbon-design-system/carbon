@@ -41,7 +41,8 @@ export default class LeftNav {
       selectorLeftNav: '[data-left-nav]',
       selectorLeftNavList: '[data-left-nav-list]',
       selectorLeftNavNestedList: '[data-left-nav-nested-list]',
-      selectorLeftNavToggle: '[data-left-nav-toggle]',
+      selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
+      selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
       selectorLeftNavListItem: '[data-left-nav-item]',
       selectorLeftNavListItemLink: '[data-left-nav-item-link]',
       selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
@@ -152,41 +153,39 @@ export default class LeftNav {
    * Adds event listeners for showing and hiding the left navigation
    */
   hookOpenActions() {
-    const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle);
+    const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+    const closeBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleClose);
+
     openBtn.addEventListener('click', () => {
+      this.element.tabIndex = '0';
+      openBtn.classList.toggle('bx--left-nav__trigger--active');
       this.element.classList.toggle(this.options.classActiveLeftNav);
-      openBtn.classList.toggle(this.options.classActiveTrigger);
     });
+
     openBtn.addEventListener('keydown', (evt) => {
       if (evt.which === 13) {
+        this.element.tabIndex = '0';
+        openBtn.classList.toggle('bx--left-nav__trigger--active');
         this.element.classList.toggle(this.options.classActiveLeftNav);
-        openBtn.classList.toggle(this.options.classActiveTrigger);
       }
     });
-    // const openCloseBtns = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavToggle)];
-    // openCloseBtns.forEach(btn => {
-    //   btn.addEventListener('click', () => {
-    //     if (btn.dataset.leftNavToggle === 'close') {
-    //       this.element.tabIndex = '-1';
-    //       this.element.classList.remove(this.options.classActiveLeftNav);
-    //     } else if (btn.dataset.leftNavToggle === 'open') {
-    //       this.element.tabIndex = '0';
-    //       btn.classList.toggle('bx--left-nav__trigger--active');
-    //       this.element.classList.toggle(this.options.classActiveLeftNav);
-    //     }
-    //   });
-    //   btn.addEventListener('keypress', () => {
-    //     if (btn.dataset.leftNavToggle === 'close') {
-    //       this.element.classList.remove(this.options.classActiveLeftNav);
-    //     } else if (btn.dataset.leftNavToggle === 'open') {
-    //       this.element.tabIndex = '0';
-    //       btn.classList.toggle('bx--left-nav__trigger--active');
-    //       this.element.classList.toggle(this.options.classActiveLeftNav);
-    //     }
-    //   });
-    // });
+
+    closeBtn.addEventListener('click', () => {
+      this.element.tabIndex = '-1';
+      this.element.classList.remove(this.options.classActiveLeftNav);
+      openBtn.classList.remove('bx--left-nav__trigger--active');
+    });
+
+    closeBtn.addEventListener('keydown', (evt) => {
+      if (evt.which === 13) {
+        this.element.tabIndex = '-1';
+        this.element.classList.remove(this.options.classActiveLeftNav);
+        openBtn.classList.remove('bx--left-nav__trigger--active');
+      }
+    });
+
     this.element.ownerDocument.addEventListener('keydown', (evt) => {
-      if (evt.which === 27 && this.element.classList.contains(this.options.classActiveLeftNav)) {
+      if ((evt.which === 27) && this.element.classList.contains(this.options.classActiveLeftNav)) {
         openBtn.classList.remove(this.options.classActiveTrigger);
         this.element.classList.remove(this.options.classActiveLeftNav);
       }
@@ -296,7 +295,7 @@ export default class LeftNav {
   handleDocumentClick(evt) {
     const clickTarget = evt.target;
     const isOfSelf = this.element.contains(clickTarget);
-    const isToggleBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle).contains(clickTarget);
+    const isToggleBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).contains(clickTarget);
     const isOpen = this.element.classList.contains(this.options.classActiveLeftNav);
     const isUnifiedHeader = this.element.ownerDocument.querySelector('[data-unified-header]').contains(clickTarget);
     const shouldClose = !isOfSelf && isOpen && !isToggleBtn && !isUnifiedHeader;
@@ -308,7 +307,7 @@ export default class LeftNav {
       evt.preventDefault();
     }
     if (shouldClose) {
-      this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggle).classList.remove(this.options.classActiveTrigger);
+      this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.remove(this.options.classActiveTrigger);
       this.element.classList.remove(this.options.classActiveLeftNav);
     }
     if (this.element.querySelector(this.options.selectorLeftNavFlyoutMenu)) {

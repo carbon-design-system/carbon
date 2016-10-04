@@ -18,10 +18,18 @@
     &--logo {
       display: flex;
       align-items: center;
-      padding: 0 rem(18px) 0 rem(8px);
+      padding: 0 rem(8px) 0 rem(8px);
       text-decoration: none;
       color: $color__white;
       position: relative;
+
+      &:hover,
+      &:focus {
+
+        .logo__text {
+          color: $color__blue-20;
+        }
+      }
 
       //
       // &:after {
@@ -69,15 +77,21 @@
       color: $color__blue-30;
 
       .bx--unified-header--applications & {
-        color: $color__teal-40;
+        @include light-ui {
+          color: $color__teal-40;
+        }
       }
 
       .bx--unified-header--infrastructure & {
-        color: $color__blue-40;
+        @include light-ui {
+          color: $color__blue-40;
+        }
       }
 
       .bx--unified-header--services & {
-        color: $color__purple-30;
+        @include light-ui {
+          color: $color__purple-30;
+        }
       }
     }
   }
@@ -86,6 +100,7 @@
     &__image {
       cursor: pointer;
       position: relative;
+      margin-right: 1.125rem;
     }
 
     &__text {
@@ -95,12 +110,6 @@
       cursor: pointer;
       text-decoration: none;
       color: $color__white;
-      margin-right: .5rem;
-
-      &:hover,
-      &:focus {
-        color: $color__blue-20;
-      }
 
       &--bold {
         font-weight: 700;
