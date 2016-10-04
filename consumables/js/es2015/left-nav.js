@@ -133,6 +133,22 @@ export default class LeftNav {
   }
 
   /**
+   * Closes the menu.
+   */
+   closeMenu() {
+     this.element.classList.remove(this.options.classActiveLeftNav);
+     this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.remove(this.options.classActiveTrigger);
+   }
+
+   /**
+    * Toggles the menu to open and close.
+    */
+   toggleMenu() {
+     this.element.classList.toggle(this.options.classActiveLeftNav);
+     this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.toggle(this.options.classActiveTrigger);
+   }
+
+  /**
    * Adds a animation delay to the list items as they appear on page load.
    */
   animateInNav() {
@@ -158,36 +174,31 @@ export default class LeftNav {
 
     openBtn.addEventListener('click', () => {
       this.element.tabIndex = '0';
-      openBtn.classList.toggle('bx--left-nav__trigger--active');
-      this.element.classList.toggle(this.options.classActiveLeftNav);
+      this.toggleMenu();
     });
 
     openBtn.addEventListener('keydown', (evt) => {
       if (evt.which === 13) {
         this.element.tabIndex = '0';
-        openBtn.classList.toggle('bx--left-nav__trigger--active');
-        this.element.classList.toggle(this.options.classActiveLeftNav);
+        this.toggleMenu();
       }
     });
 
     closeBtn.addEventListener('click', () => {
       this.element.tabIndex = '-1';
-      this.element.classList.remove(this.options.classActiveLeftNav);
-      openBtn.classList.remove('bx--left-nav__trigger--active');
+      this.closeMenu();
     });
 
     closeBtn.addEventListener('keydown', (evt) => {
       if (evt.which === 13) {
         this.element.tabIndex = '-1';
-        this.element.classList.remove(this.options.classActiveLeftNav);
-        openBtn.classList.remove('bx--left-nav__trigger--active');
+        this.closeMenu();
       }
     });
 
     this.element.ownerDocument.addEventListener('keydown', (evt) => {
       if ((evt.which === 27) && this.element.classList.contains(this.options.classActiveLeftNav)) {
-        openBtn.classList.remove(this.options.classActiveTrigger);
-        this.element.classList.remove(this.options.classActiveLeftNav);
+        this.closeMenu();
       }
     });
   }
@@ -284,7 +295,7 @@ export default class LeftNav {
     });
     item.classList.add(this.options.classActiveLeftNavListItem);
     this.hideAllFlyoutMenus();
-    this.element.classList.remove(this.options.classActiveLeftNav);
+    this.closeMenu();
   }
 
   /**
@@ -307,8 +318,7 @@ export default class LeftNav {
       evt.preventDefault();
     }
     if (shouldClose) {
-      this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.remove(this.options.classActiveTrigger);
-      this.element.classList.remove(this.options.classActiveLeftNav);
+      this.closeMenu();
     }
     if (this.element.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
       if (flyoutOpen && !isOfSelf && isOpen) {
