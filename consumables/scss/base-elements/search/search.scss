@@ -202,11 +202,16 @@
         background-color: $color__navy-gray-6;
       }
 
-      &__container {
+      &__container,
+      &__container svg {
         opacity: 1;
 
         &--hidden {
           opacity: 0;
+
+          svg {
+            opacity: 0;
+          }
         }
       }
 
