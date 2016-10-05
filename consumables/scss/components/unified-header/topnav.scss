@@ -20,15 +20,15 @@
   &__left-container__link {
     @include font-size('11');
     @include font-smoothing;
+    @include light-ui {
+      color: $color__white;
+    }
+
     display: flex;
     align-items: flex-start;
     text-decoration: none;
     color: $color__white;
     font-weight: 700;
-
-    @include light-ui {
-      color: $color__white;
-    }
 
     &--icon {
       width: .675rem;
@@ -455,6 +455,10 @@
     display: block;
     flex-direction: column;
     min-width: 200px;
+
+    &[data-value=''] .bx--dropdown__menu-text {
+      color: $color__white;
+    }
 
     &--scroll {
       max-height: 180px;
