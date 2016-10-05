@@ -32,6 +32,7 @@ export default class ProfileSwitcher {
       selectorAccount: '[data-switcher-account]',
       selectorOrg: '[data-switcher-org]',
       selectorSpace: '[data-switcher-space]',
+      selectorDropdown: '[data-dropdown]',
       selectorAccountDropdown: '[data-dropdown-account]',
       selectorOrgDropdown: '[data-dropdown-org]',
       selectorSpaceDropdown: '[data-dropdown-space]',
@@ -41,11 +42,13 @@ export default class ProfileSwitcher {
     this.constructor.components.set(this.element, this);
 
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
-    this.element.querySelector(this.options.selectorToggle).addEventListener('keypress', (event) => this.toggle(event));
+    this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', (event) => this.toggle(event));
 
     this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', () => this.determineSwitcherValues(true));
 
     this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', () => this.determineSwitcherValues(false));
+
+    this.element.ownerDocument.addEventListener('keyup', () => this.handleBlur());
   }
 
   /**
@@ -80,13 +83,19 @@ export default class ProfileSwitcher {
    * @param {Event} event The event triggering this method.
    */
   toggle(event) {
-    if (event.which === 13) {
-      const isOfSelf = this.element.contains(event.target);
+    const isOfSelf = this.element.contains(event.target);
+    if (event.which === 13 || event.which === 32) {
       if (isOfSelf) {
         this.element.classList.toggle(this.options.classSwitcherOpen);
       } else if (!isOfSelf && this.element.classList.contains(this.options.classSwitcherOpen)) {
         this.element.classList.remove(this.options.classSwitcherOpen);
       }
+    }
+  }
+
+  handleBlur() {
+    if (!(this.element.contains(document.activeElement))) {
+      this.element.classList.remove(this.options.classSwitcherOpen);
     }
   }
 

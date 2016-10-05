@@ -194,12 +194,17 @@
     &:focus {
       outline: 0;
     }
+
+    &:last-child {
+      .bx--dropdown {
+        outline: 0;
+      }
+    }
   }
 
   .bx--dropdown {
 
     &:focus {
-      outline: 0;
       background-color: $color__navy-gray-3;
     }
   }

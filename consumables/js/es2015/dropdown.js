@@ -100,7 +100,7 @@ export default class Dropdown {
    * @param {Event} event The event triggering this method.
    */
   toggle(event) {
-    if (event.which === 13 || event.type === 'click') {
+    if (event.which === 13 || event.which === 32 || event.type === 'click') {
       const isOfSelf = this.element.contains(event.target);
 
       if (isOfSelf) {
