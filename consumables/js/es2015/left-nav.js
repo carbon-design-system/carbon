@@ -184,17 +184,19 @@ export default class LeftNav {
       }
     });
 
-    closeBtn.addEventListener('click', () => {
-      this.element.tabIndex = '-1';
-      this.closeMenu();
-    });
-
-    closeBtn.addEventListener('keydown', (evt) => {
-      if (evt.which === 13) {
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
         this.element.tabIndex = '-1';
         this.closeMenu();
-      }
-    });
+      });
+
+      closeBtn.addEventListener('keydown', (evt) => {
+        if (evt.which === 13) {
+          this.element.tabIndex = '-1';
+          this.closeMenu();
+        }
+      });
+    }
 
     this.element.ownerDocument.addEventListener('keydown', (evt) => {
       if ((evt.which === 27) && this.element.classList.contains(this.options.classActiveLeftNav)) {
