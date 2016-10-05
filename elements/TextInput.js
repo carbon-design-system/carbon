@@ -104,9 +104,10 @@ class TextInput extends Component {
 
 
     return (
-      <label htmlFor={id} className="bx--form__label">{children}
+      <div>
+        <label htmlFor={id} className="bx--form__label">{children}</label>
         <input {...other} {...textInputProps} className={textInputClasses} />
-      </label>
+      </div>
     );
   }
 }
