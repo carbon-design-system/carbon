@@ -5,16 +5,18 @@ import '@console/bluemix-components/consumables/scss/base-elements/select/select
 class SelectItem extends React.Component {
 
   static propTypes = {
-    value: React.PropTypes.any,
+    value: React.PropTypes.any.isRequired,
     className: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     hidden: React.PropTypes.bool,
-    selectItemText: React.PropTypes.string,
+    text: React.PropTypes.string.isRequired,
   };
 
   static defaultProps = {
     disabled: false,
     hidden: false,
+    value: '',
+    text: '',
   };
 
   render() {
@@ -27,7 +29,7 @@ class SelectItem extends React.Component {
       value,
       disabled,
       hidden,
-      selectItemText,
+      text,
       ...other,
     } = this.props;
 
@@ -38,7 +40,7 @@ class SelectItem extends React.Component {
         value={value}
         disabled={disabled}
         hidden={hidden}
-      >{selectItemText}
+      >{text}
       </option>
     );
   }

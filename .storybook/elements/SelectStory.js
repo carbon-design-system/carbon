@@ -1,17 +1,17 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf, action } from '@kadira/storybook';
 import AppContainer from '../../containers/AppContainer';
 import Select from '../../elements/Select';
-import SelectItem from '../../internal/SelectItem';
+import SelectItem from '../../elements/SelectItem';
 
 const selectProps = {
-  onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
-  onClick: () => { console.log('click'); }, // eslint-disable-line no-console
-  onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
-  onMouseDown: () => { console.log('mouseDown'); }, // eslint-disable-line no-console
-  onMouseEnter: () => { console.log('mouseEnter'); }, // eslint-disable-line no-console
-  onMouseLeave: () => { console.log('mouseLeave'); }, // eslint-disable-line no-console
-  onMouseUp: () => { console.log('mouseUp'); }, // eslint-disable-line no-console
+  onBlur: () => { action('blur'); }, // eslint-disable-line no-console
+  onClick: () => { action('click'); }, // eslint-disable-line no-console
+  onFocus: () => { action('focus'); }, // eslint-disable-line no-console
+  onMouseDown: () => { action('mouseDown'); }, // eslint-disable-line no-console
+  onMouseEnter: () => { action('mouseEnter'); }, // eslint-disable-line no-console
+  onMouseLeave: () => { action('mouseLeave'); }, // eslint-disable-line no-console
+  onMouseUp: () => { action('mouseUp'); }, // eslint-disable-line no-console
   className: 'some-class',
 };
 
@@ -22,18 +22,23 @@ storiesOf('Select', module)
     </AppContainer>
   ))
   .add('select', () => (
-    <Select {...selectProps} id="select-1" labelText="Select">
-      <SelectItem disabled hidden value="placeholder-item" selectItemText="Pick an option" />
-      <SelectItem value="option-1" selectItemText="Option 1" />
-      <SelectItem value="option-2" selectItemText="Option 2" />
-      <SelectItem value="option-3" selectItemText="Option 3" />
+    <Select
+      {...selectProps}
+      onChange={action('onChange')} // eslint-disable-line no-console
+      id="select-1"
+      defaultValue="placeholder-item"
+    >
+      <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
+      <SelectItem value="option-1" text="Option 1" />
+      <SelectItem value="option-2" text="Option 2" />
+      <SelectItem value="option-3" text="Option 3" />
     </Select>
   ))
   .add('disabled', () => (
     <Select disabled {...selectProps}>
-      <SelectItem disabled hidden value="placeholder-item" selectItemText="Pick an option" />
-      <SelectItem value="option-1" selectItemText="Option 1" />
-      <SelectItem value="option-2" selectItemText="Option 2" />
-      <SelectItem value="option-3" selectItemText="Option 3" />
+      <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
+      <SelectItem value="option-1" text="Option 1" />
+      <SelectItem value="option-2" text="Option 2" />
+      <SelectItem value="option-3" text="Option 3" />
     </Select>
   ));

@@ -57,9 +57,9 @@ class Toggle extends React.Component {
       onToggle, // eslint-disable-line no-unused-vars
       toggled,
       id,
-      ...other,
       labelA,
       labelB,
+      ...other,
     } = this.props;
 
     const toggleClasses = classNames({

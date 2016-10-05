@@ -8,18 +8,17 @@ class Select extends React.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
-    value: React.PropTypes.any,
     className: React.PropTypes.string,
-    id: React.PropTypes.string,
+    id: React.PropTypes.string.isRequired,
     labelText: React.PropTypes.string,
-    placeholderText: React.PropTypes.string,
+    onChange: React.PropTypes.func,
     disabled: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onMouseDown: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func,
+    defaultValue: React.PropTypes.any,
+  };
+
+  static defaultProps = {
+    disabled: false,
+    labelText: 'Select',
   };
 
   render() {
@@ -30,10 +29,10 @@ class Select extends React.Component {
 
     const {
       id,
-      value,
-      children,
       labelText,
       disabled,
+      children,
+      defaultValue,
       ...other,
     } = this.props;
 
@@ -42,10 +41,9 @@ class Select extends React.Component {
         <label htmlFor={id} className="bx--form__label">{labelText}</label>
         <select
           {...other}
+          defaultValue={defaultValue}
           id={id}
-          defaultValue={value}
           className="bx--select__input"
-          defaultValue="placeholder-item"
           disabled={disabled}
         >
           {children}
