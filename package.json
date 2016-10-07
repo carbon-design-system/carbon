@@ -34,7 +34,8 @@
     "@console/bluemix-icons": "2.0.3",
     "classnames": "2.2.5",
     "json-loader": "0.5.4",
-    "react": "15.3.1"
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   },
   "devDependencies": {
     "@kadira/react-storybook-decorator-centered": "^1.0.0",

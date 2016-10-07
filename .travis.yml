@@ -1,9 +1,14 @@
 language: node_js
-node_js: "4"
-
+node_js:
+  - "4"
+  - "6"
+group: bluezone
+cache:
+  directories:
+    - node_modules
 before_install:
-  - if [[ `npm -v` != 3* ]]; then npm i -g npm@~3.8.0; npm cache clean; fi
-
+  - echo "@console:registry=http://dev-console-npm.stage1.ng.bluemix.net/" >> .npmrc
+  - echo "//dev-console-npm.stage1.ng.bluemix.net/:_authToken="u6vjQywpRv51/eKBiRcAFA=="" >> .npmrc
 script:
   - npm run lint
   - npm test
