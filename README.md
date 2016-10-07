@@ -1,7 +1,7 @@
 # Bluemix Components React
 
 A set of React Components that implements [Bluemix Components](https://github.ibm.com/Bluemix/bluemix-components) from [Bluemix Design System](http://design-system.stage1.mybluemix.net/)
-
+View available React Components [here](https://pages.github.ibm.com/Bluemix/bluemix-components-react/).
 
 ## Contributing
 
@@ -35,4 +35,10 @@ npm run lint
 
 ```sh
 npm run check
+```
+
+## Deploy react-storybook to gh-pages
+
+```sh
+npm run deploy
 ```

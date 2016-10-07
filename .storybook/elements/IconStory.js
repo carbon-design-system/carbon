@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf, action } from '@kadira/storybook';
 import Icon from '../../elements/Icon';
 import AppContainer from '../../containers/AppContainer';
 
@@ -9,10 +9,10 @@ storiesOf('Icon', module)
       {story()}
     </AppContainer>
   ))
-  .add('default', () => (
-    <Icon
-      name="search"
-      fill="red"
-      description="search microservices"
-    />
-  ));
+  .addWithInfo(
+    'simple usage',
+    `
+      basic usage text
+    `,
+    () => (<Icon name="search" fill="red" description="search microservices" />),
+  );

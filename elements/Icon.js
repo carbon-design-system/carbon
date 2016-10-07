@@ -4,8 +4,8 @@ import icons from '@console/bluemix-icons/icons.json';
 class Icon extends Component {
 
   static propTypes = {
-    name: React.PropTypes.string,
-    description: React.PropTypes.string,
+    name: React.PropTypes.string.isRequired,
+    description: React.PropTypes.string.isRequired,
     className: React.PropTypes.string,
     fill: React.PropTypes.string,
     fillRule: React.PropTypes.string,
