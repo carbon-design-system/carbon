@@ -323,7 +323,7 @@
 
   &__toggle {
     z-index: 9000;
-    min-height: rem(36px);
+    height: rem(36px);
     width: 100%;
     min-width: rem(350px);
     display: inline-flex;
@@ -331,7 +331,6 @@
     justify-content: center;
     color: $color__white;
     padding: 0 .75rem;
-    height: 100%;
     background-color: $color__navy-gray-1;
     cursor: pointer;
 
