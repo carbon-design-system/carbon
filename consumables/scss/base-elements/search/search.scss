@@ -202,16 +202,10 @@
         background-color: $color__navy-gray-6;
       }
 
-      &__container,
-      &__container svg {
-        opacity: 1;
+      &__container {
 
         &--hidden {
           opacity: 0;
-
-          svg {
-            opacity: 0;
-          }
         }
       }
 
@@ -232,6 +226,7 @@
       width: 1rem;
       height: 1rem;
       fill: $color__white;
+      opacity: inherit;
     }
   }
 }
