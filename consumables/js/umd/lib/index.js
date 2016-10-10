@@ -1,22 +1,22 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', './file-uploader', './fab', './content-switcher', './tabs', './overflow-menu', './modals', './header', './toolbars', './loading', './dropdown', './card', './number-input', './table', './detail-page-header', 'svgxuse'], factory);
+    define(['exports', './file-uploader', './fab', './content-switcher', './tabs', './overflow-menu', './modals', './header', './toolbars', './loading', './dropdown', './card', './number-input', './table', './detail-page-header', './left-nav', './unified-header', './inline-left-nav', './profile-switcher', './search-with-options', 'svgxuse'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('./file-uploader'), require('./fab'), require('./content-switcher'), require('./tabs'), require('./overflow-menu'), require('./modals'), require('./header'), require('./toolbars'), require('./loading'), require('./dropdown'), require('./card'), require('./number-input'), require('./table'), require('./detail-page-header'), require('svgxuse'));
+    factory(exports, require('./file-uploader'), require('./fab'), require('./content-switcher'), require('./tabs'), require('./overflow-menu'), require('./modals'), require('./header'), require('./toolbars'), require('./loading'), require('./dropdown'), require('./card'), require('./number-input'), require('./table'), require('./detail-page-header'), require('./left-nav'), require('./unified-header'), require('./inline-left-nav'), require('./profile-switcher'), require('./search-with-options'), require('svgxuse'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.fileUploader, global.fab, global.contentSwitcher, global.tabs, global.overflowMenu, global.modals, global.header, global.toolbars, global.loading, global.dropdown, global.card, global.numberInput, global.table, global.detailPageHeader, global.svgxuse);
+    factory(mod.exports, global.fileUploader, global.fab, global.contentSwitcher, global.tabs, global.overflowMenu, global.modals, global.header, global.toolbars, global.loading, global.dropdown, global.card, global.numberInput, global.table, global.detailPageHeader, global.leftNav, global.unifiedHeader, global.inlineLeftNav, global.profileSwitcher, global.searchWithOptions, global.svgxuse);
     global.index = mod.exports;
   }
-})(this, function (exports, _fileUploader, _fab, _contentSwitcher, _tabs, _overflowMenu, _modals, _header, _toolbars, _loading, _dropdown, _card, _numberInput, _table, _detailPageHeader) {
+})(this, function (exports, _fileUploader, _fab, _contentSwitcher, _tabs, _overflowMenu, _modals, _header, _toolbars, _loading, _dropdown, _card, _numberInput, _table, _detailPageHeader, _leftNav, _unifiedHeader, _inlineLeftNav, _profileSwitcher, _searchWithOptions) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
+  exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 
   var _fileUploader2 = _interopRequireDefault(_fileUploader);
 
@@ -46,17 +46,28 @@
 
   var _detailPageHeader2 = _interopRequireDefault(_detailPageHeader);
 
+  var _leftNav2 = _interopRequireDefault(_leftNav);
+
+  var _unifiedHeader2 = _interopRequireDefault(_unifiedHeader);
+
+  var _inlineLeftNav2 = _interopRequireDefault(_inlineLeftNav);
+
+  var _profileSwitcher2 = _interopRequireDefault(_profileSwitcher);
+
+  var _searchWithOptions2 = _interopRequireDefault(_searchWithOptions);
+
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
       default: obj
     };
   }
 
-  // Base Elements & Components
+  // ====================//
+  // Imports and Exports //
+  // ====================//
+
+  // Polyfills
   // -------------
-  // - JavaScript classes for use with components and base-elements.
-  // - The following statements import classes from actual locations to
-  //   be consumed from this file instead of their actual locations.
 
 
   var settings = {};
@@ -70,12 +81,13 @@
    * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
    * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
    */
-  // ====================//
-  // Imports and Exports //
-  // ====================//
 
-  // Polyfills
+
+  // Base Elements & Components
   // -------------
+  // - JavaScript classes for use with components and base-elements.
+  // - The following statements import classes from actual locations to
+  //   be consumed from this file instead of their actual locations.
   exports.
   /**
    * Settings.
@@ -141,6 +153,13 @@
   exports.
 
   /**
+   * Left Navigation Menu
+   * @type LeftNav
+   */
+  LeftNav = _leftNav2.default;
+  exports.
+
+  /**
    * Search button in tool bar.
    * @type Toolbars
    */
@@ -187,6 +206,13 @@
    * @type DetailPageHeader
    */
   DetailPageHeader = _detailPageHeader2.default;
+  exports.
+
+  /**
+   * Profile Switcher.
+   * @type ProfileSwitcher
+   */
+  ProfileSwitcher = _profileSwitcher2.default;
 
 
   /**
@@ -215,6 +241,11 @@
       _numberInput2.default.init();
       _table2.default.init();
       _detailPageHeader2.default.init();
+      _leftNav2.default.init();
+      _unifiedHeader2.default.init();
+      _inlineLeftNav2.default.init();
+      _profileSwitcher2.default.init();
+      _searchWithOptions2.default.init();
     }
   };
 

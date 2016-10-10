@@ -70,7 +70,9 @@
         eventAfterSelected: 'dropdown-selected'
       }, options);
 
-      this.element.dataset.dropdown = '';
+      if (this.element.dataset.dropdown !== 'navigation') {
+        this.element.dataset.dropdown = '';
+      }
       this.constructor.components.set(this.element, this);
 
       /**
@@ -114,12 +116,14 @@
     }, {
       key: 'toggle',
       value: function toggle(event) {
-        var isOfSelf = this.element.contains(event.target);
+        if (event.which === 13 || event.type === 'click') {
+          var isOfSelf = this.element.contains(event.target);
 
-        if (isOfSelf) {
-          this.element.classList.toggle('bx--dropdown--open');
-        } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
-          this.element.classList.remove('bx--dropdown--open');
+          if (isOfSelf) {
+            this.element.classList.toggle('bx--dropdown--open');
+          } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
+            this.element.classList.remove('bx--dropdown--open');
+          }
         }
       }
     }, {
@@ -136,16 +140,16 @@
           });
 
           if (this.element.dispatchEvent(eventStart)) {
-            this.element.firstElementChild.textContent = activatedElement.textContent;
+            if (this.element.dataset.dropdown !== 'navigation') {
+              this.element.firstElementChild.textContent = activatedElement.textContent;
+              activatedElement.classList.add(this.options.classSelected);
+            }
             this.element.dataset.value = activatedElement.parentElement.dataset.value;
-
             [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorItemSelected))).forEach(function (item) {
               if (activatedElement !== item) {
                 item.classList.remove(_this2.options.classSelected);
               }
             });
-
-            activatedElement.classList.add(this.options.classSelected);
 
             this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
               bubbles: true,

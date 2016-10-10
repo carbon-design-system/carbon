@@ -50,7 +50,7 @@ var BluemixComponents =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
+	exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 	
 	__webpack_require__(1);
 	
@@ -110,13 +110,34 @@ var BluemixComponents =
 	
 	var _detailPageHeader2 = _interopRequireDefault(_detailPageHeader);
 	
+	var _leftNav = __webpack_require__(24);
+	
+	var _leftNav2 = _interopRequireDefault(_leftNav);
+	
+	var _unifiedHeader = __webpack_require__(25);
+	
+	var _unifiedHeader2 = _interopRequireDefault(_unifiedHeader);
+	
+	var _inlineLeftNav = __webpack_require__(26);
+	
+	var _inlineLeftNav2 = _interopRequireDefault(_inlineLeftNav);
+	
+	var _profileSwitcher = __webpack_require__(27);
+	
+	var _profileSwitcher2 = _interopRequireDefault(_profileSwitcher);
+	
+	var _searchWithOptions = __webpack_require__(28);
+	
+	var _searchWithOptions2 = _interopRequireDefault(_searchWithOptions);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// Base Elements & Components
+	// ====================//
+	// Imports and Exports //
+	// ====================//
+	
+	// Polyfills
 	// -------------
-	// - JavaScript classes for use with components and base-elements.
-	// - The following statements import classes from actual locations to
-	//   be consumed from this file instead of their actual locations.
 	
 	
 	var settings = {};
@@ -130,12 +151,13 @@ var BluemixComponents =
 	 * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
 	 * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
 	 */
-	// ====================//
-	// Imports and Exports //
-	// ====================//
 	
-	// Polyfills
+	
+	// Base Elements & Components
 	// -------------
+	// - JavaScript classes for use with components and base-elements.
+	// - The following statements import classes from actual locations to
+	//   be consumed from this file instead of their actual locations.
 	exports.
 	/**
 	 * Settings.
@@ -201,6 +223,13 @@ var BluemixComponents =
 	exports.
 	
 	/**
+	 * Left Navigation Menu
+	 * @type LeftNav
+	 */
+	LeftNav = _leftNav2.default;
+	exports.
+	
+	/**
 	 * Search button in tool bar.
 	 * @type Toolbars
 	 */
@@ -247,6 +276,13 @@ var BluemixComponents =
 	 * @type DetailPageHeader
 	 */
 	DetailPageHeader = _detailPageHeader2.default;
+	exports.
+	
+	/**
+	 * Profile Switcher.
+	 * @type ProfileSwitcher
+	 */
+	ProfileSwitcher = _profileSwitcher2.default;
 	
 	/**
 	 * Instantiates components automatically
@@ -274,6 +310,11 @@ var BluemixComponents =
 	    _numberInput2.default.init();
 	    _table2.default.init();
 	    _detailPageHeader2.default.init();
+	    _leftNav2.default.init();
+	    _unifiedHeader2.default.init();
+	    _inlineLeftNav2.default.init();
+	    _profileSwitcher2.default.init();
+	    _searchWithOptions2.default.init();
 	  }
 	};
 	
@@ -1563,11 +1604,15 @@ var BluemixComponents =
 	   * @param {string} [options.eventBeforeShown]
 	   *   The name of the custom event fired before this modal is shown.
 	   *   Cancellation of this event stops showing the modal.
-	   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+	   * @param {string} [options.eventAfterShown]
+	   *   The name of the custom event telling that modal is sure shown
+	   *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
 	   * @param {string} [options.eventBeforeHidden]
 	   *   The name of the custom event fired before this modal is hidden.
 	   *   Cancellation of this event stops hiding the modal.
-	   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+	   * @param {string} [options.eventAfterHidden]
+	   *   The name of the custom event telling that modal is sure hidden
+	   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
 	   */
 	
 	  function Modal(element) {
@@ -1604,11 +1649,15 @@ var BluemixComponents =
 	   * @param {string} [options.eventBeforeShown]
 	   *   The name of the custom event fired before this modal is shown.
 	   *   Cancellation of this event stops showing the modal.
-	   * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+	   * @param {string} [options.eventAfterShown]
+	   *   The name of the custom event telling that modal is sure shown
+	   *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
 	   * @param {string} [options.eventBeforeHidden]
 	   *   The name of the custom event fired before this modal is hidden.
 	   *   Cancellation of this event stops hiding the modal.
-	   * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+	   * @param {string} [options.eventAfterHidden]
+	   *   The name of the custom event telling that modal is sure hidden
+	   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
 	   */
 	
 	
@@ -1623,7 +1672,7 @@ var BluemixComponents =
 	      var _this = this;
 	
 	      this.element.addEventListener('click', function (event) {
-	        if (event.currentTarget === event.target) _this.hide();
+	        if (event.currentTarget === event.target) _this.hide(event);
 	      });
 	
 	      if (this.keydownHandler) {
@@ -1633,15 +1682,15 @@ var BluemixComponents =
 	
 	      this.keydownHandler = function (event) {
 	        if (event.which === 27) {
-	          _this.hide();
+	          _this.hide(event);
 	        }
 	      };
 	
 	      this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
 	
 	      [].concat(_toConsumableArray(this.element.querySelectorAll('[data-modal-close]'))).forEach(function (element) {
-	        element.addEventListener('click', function () {
-	          _this.hide();
+	        element.addEventListener('click', function (event) {
+	          _this.hide(event);
 	        });
 	      });
 	    }
@@ -1694,16 +1743,24 @@ var BluemixComponents =
 	
 	  }, {
 	    key: 'show',
-	    value: function show(launchingElement, callback) {
+	    value: function show(launchingElementOrEvent, callback) {
 	      var _this3 = this;
 	
-	      if (typeof launchingElement === 'function') {
-	        callback = launchingElement; // eslint-disable-line no-param-reassign
-	        launchingElement = null; // eslint-disable-line no-param-reassign
+	      var launchingElementOrEventOmitted = !launchingElementOrEvent || typeof launchingElementOrEvent === 'function';
+	      if (launchingElementOrEventOmitted) {
+	        callback = launchingElementOrEvent; // eslint-disable-line no-param-reassign
 	      }
 	
+	      var launchingElement = launchingElementOrEventOmitted ? null : launchingElementOrEvent.delegateTarget || launchingElementOrEvent.currentTarget || launchingElementOrEvent;
+	
+	      var launchingEvent = launchingElementOrEventOmitted ? null : launchingElementOrEvent.currentTarget && launchingElementOrEvent;
+	
 	      if (launchingElement && !launchingElement.nodeType) {
-	        throw new TypeError('DOM Node should be given for launchingElement.');
+	        throw new TypeError('DOM Node should be given for launching element.');
+	      }
+	
+	      if (launchingEvent && !launchingEvent.type) {
+	        throw new TypeError('DOM event should be given for launching event.');
 	      }
 	
 	      if (this.element.classList.contains(this.options.classVisible)) {
@@ -1716,7 +1773,10 @@ var BluemixComponents =
 	      var eventStart = new CustomEvent(this.options.eventBeforeShown, {
 	        bubbles: true,
 	        cancelable: true,
-	        detail: { launchingElement: launchingElement }
+	        detail: {
+	          launchingElement: launchingElement,
+	          launchingEvent: launchingEvent
+	        }
 	      });
 	
 	      // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
@@ -1725,7 +1785,10 @@ var BluemixComponents =
 	          _this3.element.dispatchEvent(new CustomEvent(_this3.options.eventAfterShown, {
 	            bubbles: true,
 	            cancelable: true,
-	            detail: { launchingElement: launchingElement }
+	            detail: {
+	              launchingElement: launchingElement,
+	              launchingEvent: launchingEvent
+	            }
 	          }));
 	          if (callback) {
 	            callback();
@@ -1747,8 +1810,25 @@ var BluemixComponents =
 	
 	  }, {
 	    key: 'hide',
-	    value: function hide(callback) {
+	    value: function hide(launchingElementOrEvent, callback) {
 	      var _this4 = this;
+	
+	      var launchingElementOrEventOmitted = !launchingElementOrEvent || typeof launchingElementOrEvent === 'function';
+	      if (launchingElementOrEventOmitted) {
+	        callback = launchingElementOrEvent; // eslint-disable-line no-param-reassign
+	      }
+	
+	      var launchingElement = launchingElementOrEventOmitted ? null : launchingElementOrEvent.currentTarget || launchingElementOrEvent;
+	
+	      var launchingEvent = launchingElementOrEventOmitted ? null : launchingElementOrEvent.currentTarget && launchingElementOrEvent;
+	
+	      if (launchingElement && !launchingElement.nodeType) {
+	        throw new TypeError('DOM Node should be given for launching element.');
+	      }
+	
+	      if (launchingEvent && !launchingEvent.type) {
+	        throw new TypeError('DOM event should be given for launching event.');
+	      }
 	
 	      if (!this.element.classList.contains(this.options.classVisible)) {
 	        if (callback) {
@@ -1759,7 +1839,11 @@ var BluemixComponents =
 	
 	      var eventStart = new CustomEvent(this.options.eventBeforeHidden, {
 	        bubbles: true,
-	        cancelable: true
+	        cancelable: true,
+	        detail: {
+	          launchingElement: launchingElement,
+	          launchingEvent: launchingEvent
+	        }
 	      });
 	
 	      // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
@@ -1767,7 +1851,11 @@ var BluemixComponents =
 	        this._changeState(false, function () {
 	          _this4.element.dispatchEvent(new CustomEvent(_this4.options.eventAfterHidden, {
 	            bubbles: true,
-	            cancelable: true
+	            cancelable: true,
+	            detail: {
+	              launchingElement: launchingElement,
+	              launchingEvent: launchingEvent
+	            }
 	          }));
 	          if (callback) {
 	            callback();
@@ -1814,11 +1902,15 @@ var BluemixComponents =
 	     * @param {string} [options.eventBeforeShown]
 	     *   The name of the custom event fired before this modal is shown.
 	     *   Cancellation of this event stops showing the modal.
-	     * @param {string} [options.eventAfterShown] The name of the custom event fired after this modal is shown.
+	     * @param {string} [options.eventAfterShown]
+	     *   The name of the custom event telling that modal is sure shown
+	     *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
 	     * @param {string} [options.eventBeforeHidden]
 	     *   The name of the custom event fired before this modal is hidden.
 	     *   Cancellation of this event stops hiding the modal.
-	     * @param {string} [options.eventAfterHidden] The name of the custom event fired after this modal is hidden.
+	     * @param {string} [options.eventAfterHidden]
+	     *   The name of the custom event telling that modal is sure hidden
+	     *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
 	     * @returns {Handle} The handle to remove the event listener to handle clicking.
 	     */
 	
@@ -1840,6 +1932,8 @@ var BluemixComponents =
 	          var element = (0, _eventMatches2.default)(event, '[data-modal-target]');
 	
 	          if (element) {
+	            event.delegateTarget = element;
+	
 	            var modalElements = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.dataset.modalTarget)));
 	            if (modalElements.length > 1) {
 	              throw new Error('Target modal must be unique.');
@@ -1852,7 +1946,7 @@ var BluemixComponents =
 	                }
 	
 	                var modal = _this5.create(modalElements[0], options);
-	                modal.show(element, function (error, shownAlready) {
+	                modal.show(event, function (error, shownAlready) {
 	                  if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
 	                    modal.element.focus();
 	                  }
@@ -1881,11 +1975,15 @@ var BluemixComponents =
 	 * @property {string} [eventBeforeShown]
 	 *   The name of the custom event fired before this modal is shown.
 	 *   Cancellation of this event stops showing the modal.
-	 * @property {string} [eventAfterShown] The name of the custom event fired after this modal is shown.
+	 * @property {string} [eventAfterShown]
+	 *   The name of the custom event telling that modal is sure shown
+	 *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
 	 * @property {string} [eventBeforeHidden]
 	 *   The name of the custom event fired before this modal is hidden.
 	 *   Cancellation of this event stops hiding the modal.
-	 * @property {string} [eventAfterHidden] The name of the custom event fired after this modal is hidden.
+	 * @property {string} [eventAfterHidden]
+	 *   The name of the custom event telling that modal is sure hidden
+	 *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
 	 */
 	
 	/**
@@ -2608,7 +2706,9 @@ var BluemixComponents =
 	      eventAfterSelected: 'dropdown-selected'
 	    }, options);
 	
-	    this.element.dataset.dropdown = '';
+	    if (this.element.dataset.dropdown !== 'navigation') {
+	      this.element.dataset.dropdown = '';
+	    }
 	    this.constructor.components.set(this.element, this);
 	
 	    /**
@@ -2658,12 +2758,14 @@ var BluemixComponents =
 	  }, {
 	    key: 'toggle',
 	    value: function toggle(event) {
-	      var isOfSelf = this.element.contains(event.target);
+	      if (event.which === 13 || event.type === 'click') {
+	        var isOfSelf = this.element.contains(event.target);
 	
-	      if (isOfSelf) {
-	        this.element.classList.toggle('bx--dropdown--open');
-	      } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
-	        this.element.classList.remove('bx--dropdown--open');
+	        if (isOfSelf) {
+	          this.element.classList.toggle('bx--dropdown--open');
+	        } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
+	          this.element.classList.remove('bx--dropdown--open');
+	        }
 	      }
 	    }
 	
@@ -2689,16 +2791,16 @@ var BluemixComponents =
 	        });
 	
 	        if (this.element.dispatchEvent(eventStart)) {
-	          this.element.firstElementChild.textContent = activatedElement.textContent;
+	          if (this.element.dataset.dropdown !== 'navigation') {
+	            this.element.firstElementChild.textContent = activatedElement.textContent;
+	            activatedElement.classList.add(this.options.classSelected);
+	          }
 	          this.element.dataset.value = activatedElement.parentElement.dataset.value;
-	
 	          [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorItemSelected))).forEach(function (item) {
 	            if (activatedElement !== item) {
 	              item.classList.remove(_this2.options.classSelected);
 	            }
 	          });
-	
-	          activatedElement.classList.add(this.options.classSelected);
 	
 	          this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
 	            bubbles: true,
@@ -3842,6 +3944,1178 @@ var BluemixComponents =
 	
 	module.exports = debounce;
 
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(7);
+	
+	__webpack_require__(8);
+	
+	__webpack_require__(14);
+	
+	var _toggleClass = __webpack_require__(9);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	var _eventMatches = __webpack_require__(4);
+	
+	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
+	var _on = __webpack_require__(5);
+	
+	var _on2 = _interopRequireDefault(_on);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var LeftNav = function () {
+	  /**
+	   * Left Navigation.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a left navigation.
+	   * @param {Object} [options] The component options
+	   * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+	   * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+	   * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+	   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
+	   * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
+	   * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+	   * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+	   * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+	   * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+	   * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+	   * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+	   * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
+	   * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
+	   * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+	   * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+	   * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
+	   * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
+	   */
+	
+	  function LeftNav(element) {
+	    var _this = this;
+	
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    _classCallCheck(this, LeftNav);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	
+	    this.element = element;
+	
+	    this.options = Object.assign({
+	      // Data Attribute selectors
+	      selectorLeftNav: '[data-left-nav]',
+	      selectorLeftNavList: '[data-left-nav-list]',
+	      selectorLeftNavNestedList: '[data-left-nav-nested-list]',
+	      selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
+	      selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
+	      selectorLeftNavListItem: '[data-left-nav-item]',
+	      selectorLeftNavListItemLink: '[data-left-nav-item-link]',
+	      selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
+	      selectorLeftNavArrowIcon: '[data-left-nav-icon]',
+	      selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
+	      selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+	      selectorLeftNavSection: '[data-left-nav-section]',
+	      selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+	      selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
+	      selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
+	      selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
+	      // CSS Class Selectors
+	      classActiveLeftNav: 'bx--left-nav--active',
+	      classActiveLeftNavListItem: 'bx--left-nav-list__item--active',
+	      classActiveTrigger: 'bx--left-nav__trigger--active',
+	      classExpandedLeftNavListItem: 'bx--left-nav-list__item--expanded',
+	      classFlyoutDisplayed: 'bx--left-nav-list--flyout--displayed',
+	      classItemHasChildren: 'bx--left-nav-list__item--has-children'
+	    }, options);
+	
+	    this.constructor.components.set(this.element, this);
+	
+	    this.hookOpenActions();
+	    this.hookListItemsEvents();
+	    this.animateInNav();
+	    this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (evt) {
+	      return _this.handleDocumentClick(evt);
+	    });
+	  }
+	
+	  /**
+	   * Instantiates a left navigation of the given element.
+	   * @param {HTMLElement} element The element working as the left navigation.
+	   * @param {Object} [options] The component options
+	   * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+	   * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+	   * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+	   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
+	   * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
+	   * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+	   * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+	   * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+	   * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+	   * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+	   * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+	   * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
+	   * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
+	   * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+	   * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+	   * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
+	   * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
+	   */
+	
+	
+	  _createClass(LeftNav, [{
+	    key: 'closeMenu',
+	
+	
+	    /**
+	     * Closes the menu.
+	     */
+	    value: function closeMenu() {
+	      this.element.classList.remove(this.options.classActiveLeftNav);
+	      this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.remove(this.options.classActiveTrigger);
+	    }
+	
+	    /**
+	     * Toggles the menu to open and close.
+	     */
+	
+	  }, {
+	    key: 'toggleMenu',
+	    value: function toggleMenu() {
+	      this.element.classList.toggle(this.options.classActiveLeftNav);
+	      this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.toggle(this.options.classActiveTrigger);
+	    }
+	
+	    /**
+	     * Adds a animation delay to the list items as they appear on page load.
+	     */
+	
+	  }, {
+	    key: 'animateInNav',
+	    value: function animateInNav() {
+	      var _this2 = this;
+	
+	      var counter = 0.1;
+	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavListItem))).forEach(function (item) {
+	        item.classList.add('animate');
+	        item.style.animationDelay = counter + 's';
+	        counter += 0.05;
+	      });
+	      setTimeout(function () {
+	        [].concat(_toConsumableArray(_this2.element.querySelectorAll(_this2.options.selectorLeftNavListItem))).forEach(function (item) {
+	          item.classList.remove('animate');
+	        });
+	      }, 1000);
+	    }
+	
+	    /**
+	     * Adds event listeners for showing and hiding the left navigation
+	     */
+	
+	  }, {
+	    key: 'hookOpenActions',
+	    value: function hookOpenActions() {
+	      var _this3 = this;
+	
+	      var openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+	      var closeBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleClose);
+	
+	      openBtn.addEventListener('click', function () {
+	        _this3.element.tabIndex = '0';
+	        _this3.toggleMenu();
+	      });
+	
+	      openBtn.addEventListener('keydown', function (evt) {
+	        if (evt.which === 13) {
+	          _this3.element.tabIndex = '0';
+	          _this3.toggleMenu();
+	        }
+	      });
+	
+	      closeBtn.addEventListener('click', function () {
+	        _this3.element.tabIndex = '-1';
+	        _this3.closeMenu();
+	      });
+	
+	      closeBtn.addEventListener('keydown', function (evt) {
+	        if (evt.which === 13) {
+	          _this3.element.tabIndex = '-1';
+	          _this3.closeMenu();
+	        }
+	      });
+	
+	      this.element.ownerDocument.addEventListener('keydown', function (evt) {
+	        if (evt.which === 27 && _this3.element.classList.contains(_this3.options.classActiveLeftNav)) {
+	          _this3.closeMenu();
+	        }
+	      });
+	    }
+	
+	    /**
+	     * Adds event listeners to list items
+	     */
+	
+	  }, {
+	    key: 'hookListItemsEvents',
+	    value: function hookListItemsEvents() {
+	      var _this4 = this;
+	
+	      var leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
+	      leftNavList.addEventListener('click', function (evt) {
+	        var leftNavItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavListItem);
+	        if (leftNavItem) {
+	          var childItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavNestedListItem);
+	          var hasChildren = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavListItemHasChildren);
+	          var flyoutItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavFlyoutItem);
+	          if (flyoutItem) {
+	            _this4.addActiveListItem(flyoutItem);
+	          } else if (childItem) {
+	            if (childItem.querySelector(_this4.options.selectorLeftNavFlyoutMenu)) {
+	              var flyoutMenu = childItem.querySelector(_this4.options.selectorLeftNavFlyoutMenu);
+	              flyoutMenu.classList.toggle(_this4.options.classFlyoutDisplayed);
+	            } else {
+	              _this4.addActiveListItem(childItem);
+	            }
+	          } else if (hasChildren) {
+	            _this4.handleNestedListClick(leftNavItem);
+	          } else {
+	            _this4.addActiveListItem(leftNavItem);
+	          }
+	        }
+	      });
+	      leftNavList.addEventListener('keydown', function (evt) {
+	        if (evt.which === 13) {
+	          var leftNavItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavListItem);
+	          if (leftNavItem) {
+	            var childItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavNestedListItem);
+	            var hasChildren = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavListItemHasChildren);
+	            var flyoutItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavFlyoutItem);
+	            if (flyoutItem) {
+	              _this4.addActiveListItem(flyoutItem);
+	            } else if (childItem) {
+	              if (!childItem.querySelector(_this4.options.selectorLeftNavFlyoutMenu)) {
+	                _this4.addActiveListItem(childItem);
+	              }
+	            } else if (hasChildren) {
+	              _this4.handleNestedListClick(leftNavItem);
+	            } else {
+	              _this4.addActiveListItem(leftNavItem);
+	            }
+	          }
+	        }
+	      });
+	      var flyouts = [].concat(_toConsumableArray(this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)));
+	      flyouts.forEach(function (flyout) {
+	        flyout.addEventListener('mouseenter', function () {
+	          flyout.querySelector(_this4.options.selectorLeftNavFlyoutMenu).style.top = flyout.offsetTop - _this4.element.querySelector(_this4.options.selectorLeftNav).scrollTop + 'px';
+	          flyout.querySelector(_this4.options.selectorLeftNavFlyoutMenu).style.left = flyout.offsetLeft + Math.round(flyout.offsetWidth) + 'px';
+	          flyout.querySelector(_this4.options.selectorLeftNavFlyoutMenu).classList.add(_this4.options.classFlyoutDisplayed);
+	        });
+	        flyout.addEventListener('mouseleave', function () {
+	          flyout.querySelector(_this4.options.selectorLeftNavFlyoutMenu).classList.remove(_this4.options.classFlyoutDisplayed);
+	        });
+	      });
+	    }
+	
+	    /**
+	     * Hides all flyout menus.
+	     */
+	
+	  }, {
+	    key: 'hideAllFlyoutMenus',
+	    value: function hideAllFlyoutMenus() {
+	      var _this5 = this;
+	
+	      var flyoutMenus = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)));
+	      flyoutMenus.forEach(function (menu) {
+	        menu.classList.remove(_this5.options.classFlyoutDisplayed);
+	      });
+	    }
+	
+	    /**
+	     * Sets a list item as active.
+	     * @param {Object} item The active list item.
+	     */
+	
+	  }, {
+	    key: 'addActiveListItem',
+	    value: function addActiveListItem(item) {
+	      var _this6 = this;
+	
+	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavAllListItems))).forEach(function (currentItem) {
+	        if (!(item === currentItem)) {
+	          if (!currentItem.contains(item)) {
+	            currentItem.classList.remove(_this6.options.classActiveLeftNavListItem);
+	          } else {
+	            currentItem.classList.add(_this6.options.classActiveLeftNavListItem);
+	          }
+	        }
+	      });
+	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem))).forEach(function (currentItem) {
+	        if (!(item === currentItem)) {
+	          currentItem.classList.remove(_this6.options.classActiveLeftNavListItem);
+	        }
+	      });
+	      item.classList.add(this.options.classActiveLeftNavListItem);
+	      this.hideAllFlyoutMenus();
+	      this.closeMenu();
+	    }
+	
+	    /**
+	     * Handles click on the document.
+	     * Closes the left navigation when document is clicked outside the left navigation.
+	     * @param {Event} event The event triggering this method.
+	     */
+	
+	  }, {
+	    key: 'handleDocumentClick',
+	    value: function handleDocumentClick(evt) {
+	      var clickTarget = evt.target;
+	      var isOfSelf = this.element.contains(clickTarget);
+	      var isToggleBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).contains(clickTarget);
+	      var isOpen = this.element.classList.contains(this.options.classActiveLeftNav);
+	      var isUnifiedHeader = this.element.ownerDocument.querySelector('[data-unified-header]').contains(clickTarget);
+	      var shouldClose = !isOfSelf && isOpen && !isToggleBtn && !isUnifiedHeader;
+	      var flyoutOpen = void 0;
+	      if (this.element.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+	        flyoutOpen = this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.contains(this.options.classFlyoutDisplayed);
+	      }
+	      if (isOfSelf && this.element.tagName === 'A') {
+	        evt.preventDefault();
+	      }
+	      if (shouldClose) {
+	        this.closeMenu();
+	      }
+	      if (this.element.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+	        if (flyoutOpen && !isOfSelf && isOpen) {
+	          this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
+	        }
+	      }
+	    }
+	
+	    /**
+	     * Handles click on a list item that contains a nested list in the left navigation.
+	     * It hides all flyout menus and switches the tab-index on the list items based on whether or not the list is expanded.
+	     * @param {HTMLElement} listItem The list item that was clicked.
+	     * @param {Event} event The event triggering this method.
+	     */
+	
+	  }, {
+	    key: 'handleNestedListClick',
+	    value: function handleNestedListClick(listItem) {
+	      var _this7 = this;
+	
+	      var isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
+	      this.hideAllFlyoutMenus();
+	      (0, _toggleClass2.default)(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
+	      var listItems = [].concat(_toConsumableArray(listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem)));
+	      listItems.forEach(function (item) {
+	        if (isOpen) {
+	          item.querySelector(_this7.options.selectorLeftNavListItemLink).tabIndex = -1;
+	        } else {
+	          item.querySelector(_this7.options.selectorLeftNavListItemLink).tabIndex = 0;
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'release',
+	    value: function release() {
+	      if (this.hDocumentClick) {
+	        this.hDocumentClick = this.hDocumentClick.release();
+	      }
+	      this.constructor.components.delete(this.element);
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
+	    }
+	
+	    /**
+	     * Instantiates a left navigation in the given node.
+	     * If the given element indicates that it's a left navigation (having `data-left-nav-container` attribute), instantiates it.
+	     * Otherwise, instantiates left navigation by searching for left navigation in the given node.
+	     * @param {Node} target The DOM node to instantiate left navigation in. Should be a document or an element.
+	     * @param {Object} [options] The component options
+	     * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+	     * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+	     * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+	     * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
+	     * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
+	     * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+	     * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+	     * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+	     * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+	     * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+	     * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+	     * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
+	     * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
+	     * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+	     * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+	     * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
+	     * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
+	     */
+	
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this8 = this;
+	
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-left-nav-container]'))).forEach(function (element) {
+	          return _this8.create(element, options);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return LeftNav;
+	}();
+	
+	/**
+	* The component options.
+	 * @member {Object} LeftNav#options
+	 * @property {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+	 * @property {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+	 * @property {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+	 * @property {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
+	 * @property {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
+	 * @property {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+	 * @property {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+	 * @property {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+	 * @property {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+	 * @property {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+	 * @property {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+	 * @property {string} [options.classActiveLeftNav] The class name for when a left nav is active.
+	 * @property {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
+	 * @property {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+	 * @property {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+	 * @property {string} [options.classActiveSection] The class name for an active section item in the left nav header.
+	 * @property {string} [options.classItemHasChildren] The class name for when a list item has children.
+	 */
+	
+	/**
+	 * The map associating DOM element and left navigation instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = LeftNav;
+	LeftNav.components = new WeakMap();
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(7);
+	
+	__webpack_require__(8);
+	
+	__webpack_require__(14);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var UnifiedHeader = function () {
+	  function UnifiedHeader(element) {
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    _classCallCheck(this, UnifiedHeader);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	
+	    this.element = element;
+	
+	    this.options = Object.assign({
+	      // Data Attribute selectors
+	      // CSS Class Selectors
+	    }, options);
+	    this.constructor.components.set(this.element, this);
+	  }
+	
+	  _createClass(UnifiedHeader, [{
+	    key: 'release',
+	    value: function release() {
+	      var _this = this;
+	
+	      if (this.handleDocumentClick) {
+	        this.element.ownerDocument.removeEventListener('click', function (evt) {
+	          return _this.handleDocumentClick(evt);
+	        });
+	      }
+	      this.constructor.components.delete(this.element);
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
+	    }
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this2 = this;
+	
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-unified-header]'))).forEach(function (element) {
+	          return _this2.create(element, options);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return UnifiedHeader;
+	}();
+	
+	/**
+	 * The map associating DOM element and left navigation instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = UnifiedHeader;
+	UnifiedHeader.components = new WeakMap();
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(7);
+	
+	__webpack_require__(8);
+	
+	__webpack_require__(14);
+	
+	var _toggleClass = __webpack_require__(9);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	var _eventMatches = __webpack_require__(4);
+	
+	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var InlineLeftNav = function () {
+	  /**
+	   * Spinner indicating loading state.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a spinner.
+	   * @param {Object} options The component options.
+	   */
+	
+	  function InlineLeftNav(element) {
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    _classCallCheck(this, InlineLeftNav);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	
+	    this.options = Object.assign({
+	      // Data Attribute selectors
+	      selectorLeftNavList: '[data-inline-left-nav-list]',
+	      selectorLeftNavNestedList: '[data-inline-left-nav-nested-list]',
+	      selectorLeftNavListItem: '[data-inline-left-nav-item]',
+	      selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
+	      selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
+	      // CSS Class Selectors
+	      classActiveLeftNavListItem: 'left-nav-list__item--active',
+	      classExpandedLeftNavListItem: 'left-nav-list__item--expanded'
+	    }, options);
+	
+	    this.element = element;
+	
+	    this.constructor.components.set(this.element, this);
+	    this.hookListItemsEvents();
+	  }
+	
+	  /**
+	   * Instantiates spinner of the given element.
+	   * @param {HTMLElement} element The element.
+	   */
+	
+	
+	  _createClass(InlineLeftNav, [{
+	    key: 'hookListItemsEvents',
+	    value: function hookListItemsEvents() {
+	      var _this = this;
+	
+	      var leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
+	      leftNavList.addEventListener('click', function (evt) {
+	        var leftNavItem = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItem);
+	        if (leftNavItem) {
+	          var childItem = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavNestedListItem);
+	          var hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
+	          if (childItem) {
+	            _this.addActiveListItem(childItem);
+	          } else if (hasChildren) {
+	            _this.handleNestedListClick(leftNavItem, evt);
+	          } else {
+	            _this.addActiveListItem(leftNavItem);
+	          }
+	        }
+	      });
+	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavListItem))).forEach(function (item) {
+	        item.addEventListener('keydown', function (evt) {
+	          var leftNavItemWithChildren = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItemHasChildren);
+	          if (leftNavItemWithChildren && evt.which === 13) {
+	            _this.handleNestedListClick(leftNavItemWithChildren);
+	          }
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'addActiveListItem',
+	    value: function addActiveListItem(item) {
+	      var _this2 = this;
+	
+	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavListItem))).forEach(function (currentItem) {
+	        if (!(item === currentItem)) {
+	          currentItem.classList.remove(_this2.options.classActiveLeftNavListItem);
+	        }
+	      });
+	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem))).forEach(function (currentItem) {
+	        if (!(item === currentItem)) {
+	          currentItem.classList.remove(_this2.options.classActiveLeftNavListItem);
+	        }
+	      });
+	      item.classList.add(this.options.classActiveLeftNavListItem);
+	    }
+	
+	    /**
+	     * Handles click on a list item that contains a nested list in the left navigation.
+	     * The nested list is expanded and the icon is rotated.
+	     * @param {HTMLElement} listItem The list item that was clicked.
+	     * @param {Event} event The event triggering this method.
+	     */
+	
+	  }, {
+	    key: 'handleNestedListClick',
+	    value: function handleNestedListClick(listItem, evt) {
+	      var _this3 = this;
+	
+	      var isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
+	      if (!('leftNavItemLink' in evt.target.dataset)) {
+	        (0, _toggleClass2.default)(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
+	      }
+	      var list = listItem.querySelector(this.options.selectorLeftNavNestedList);
+	      var listItems = [].concat(_toConsumableArray(list.querySelectorAll(this.options.selectorLeftNavNestedListItem)));
+	      listItems.forEach(function (item) {
+	        if (isOpen) {
+	          item.querySelector(_this3.options.selectorLeftNavListItemLink).tabIndex = -1;
+	        } else {
+	          item.querySelector(_this3.options.selectorLeftNavListItemLink).tabIndex = 0;
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'release',
+	    value: function release() {
+	      this.constructor.components.delete(this.element);
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element) {
+	      return this.components.get(element) || new this(element);
+	    }
+	
+	    /**
+	     * Instantiates spinner in the given node.
+	     * If the given element indicates that it's an spinner (having `data-loading` attribute), instantiates it.
+	     * Otherwise, instantiates spinners by searching for spinners in the given node.
+	     * @param {Node} target The DOM node to instantiate spinners in. Should be a document or an element.
+	     */
+	
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this4 = this;
+	
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-inline-left-nav]'))).forEach(function (element) {
+	          return _this4.create(element, options);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return InlineLeftNav;
+	}();
+	
+	/**
+	 * The map associating DOM element and spinner instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = InlineLeftNav;
+	InlineLeftNav.components = new WeakMap();
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(7);
+	
+	__webpack_require__(8);
+	
+	__webpack_require__(14);
+	
+	var _on = __webpack_require__(5);
+	
+	var _on2 = _interopRequireDefault(_on);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ProfileSwitcher = function () {
+	  /**
+	   * Profile Switcher.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a profile switcher.
+	   * @param {Object} [options] The component options
+	   * @param {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
+	   * @param {string} [options.selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
+	   * @param {string} [options.selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
+	   * @param {string} [options.selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
+	   * @param {string} [options.selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
+	   * @param {string} [options.selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
+	   * @param {string} [options.selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
+	   */
+	
+	  function ProfileSwitcher(element) {
+	    var _this = this;
+	
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    _classCallCheck(this, ProfileSwitcher);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	
+	    this.element = element;
+	
+	    this.options = Object.assign({
+	      // Data Attribute selectors
+	      selectorProfileSwitcher: '[data-profile-switcher]',
+	      selectorToggle: '[data-profile-switcher-toggle]',
+	      selectorMenu: '[data-switcher-menu]',
+	      selectorAccount: '[data-switcher-account]',
+	      selectorOrg: '[data-switcher-org]',
+	      selectorSpace: '[data-switcher-space]',
+	      selectorAccountDropdown: '[data-dropdown-account]',
+	      selectorOrgDropdown: '[data-dropdown-org]',
+	      selectorSpaceDropdown: '[data-dropdown-space]',
+	      classSwitcherOpen: 'bx--account-switcher--open'
+	    }, options);
+	
+	    this.constructor.components.set(this.element, this);
+	
+	    this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (evt) {
+	      return _this.handleDocumentClick(evt);
+	    });
+	    this.element.querySelector(this.options.selectorToggle).addEventListener('keypress', function (event) {
+	      return _this.toggle(event);
+	    });
+	
+	    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', function () {
+	      return _this.determineSwitcherValues(true);
+	    });
+	
+	    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', function () {
+	      return _this.determineSwitcherValues(false);
+	    });
+	  }
+	
+	  /**
+	   * Instantiates a profile switcher of the given element.
+	   * @param {HTMLElement} element The element working as the profile switcher.
+	   * @param {Object} [options] The component options
+	   */
+	
+	
+	  _createClass(ProfileSwitcher, [{
+	    key: 'toggle',
+	
+	
+	    /**
+	     * Opens and closes the menu.
+	     * @param {Event} event The event triggering this method.
+	     */
+	    value: function toggle(event) {
+	      if (event.which === 13) {
+	        var isOfSelf = this.element.contains(event.target);
+	        if (isOfSelf) {
+	          this.element.classList.toggle(this.options.classSwitcherOpen);
+	        } else if (!isOfSelf && this.element.classList.contains(this.options.classSwitcherOpen)) {
+	          this.element.classList.remove(this.options.classSwitcherOpen);
+	        }
+	      }
+	    }
+	
+	    /**
+	     * Handles click on the document.
+	     * Closes the profile switcherwhen document is clicked outside the left navigation or
+	     * the user clicks the profile switcher while it is open.
+	     * @param {Event} event The event triggering this method.
+	     */
+	
+	  }, {
+	    key: 'handleDocumentClick',
+	    value: function handleDocumentClick(evt) {
+	      var clickTarget = evt.target;
+	      var isOfSelf = this.element.contains(clickTarget);
+	      var isToggle = this.element.ownerDocument.querySelector(this.options.selectorToggle).contains(clickTarget);
+	      var isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
+	
+	      if (isOfSelf) {
+	        if (isToggle && isOpen) {
+	          this.element.classList.remove(this.options.classSwitcherOpen);
+	        } else if (isOpen) {
+	          this.determineSwitcherValues();
+	        } else {
+	          this.element.classList.add(this.options.classSwitcherOpen);
+	        }
+	      } else {
+	        this.element.classList.remove(this.options.classSwitcherOpen);
+	      }
+	    }
+	
+	    /**
+	     * Handles logic to determine what text to display in profile switcher.
+	     * If the text is over 25 characters long, truncate and add ellipses.
+	     * Also adds logic to change the switcher width based on the width of the hovered
+	     * profile switcher
+	     * @param {boolean} isHovered boolean value passed by the event listener on bx--toggle.
+	     */
+	
+	  }, {
+	    key: 'determineSwitcherValues',
+	    value: function determineSwitcherValues(isHovered) {
+	      var nameElement = this.element.querySelector(this.options.selectorAccount);
+	      var orgElement = this.element.querySelector(this.options.selectorOrg);
+	      var spaceElement = this.element.querySelector(this.options.selectorSpace);
+	      var menuElement = this.element.querySelector(this.options.selectorMenu);
+	      var isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
+	
+	      var nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
+	      var orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
+	      var spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+	      var nameShort = void 0;
+	      var orgShort = void 0;
+	      var spaceShort = void 0;
+	
+	      if (isHovered && !isOpen) {
+	        nameElement.textContent = nameDropdownValue;
+	        orgElement.textContent = orgDropdownValue;
+	        spaceElement.textContent = spaceDropdownValue;
+	        menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
+	      } else {
+	        if (nameDropdownValue.length > 25) {
+	          nameShort = nameDropdownValue.substr(0, 25) + '...';
+	          nameElement.textContent = nameShort;
+	        } else {
+	          nameElement.textContent = nameDropdownValue;
+	        }
+	
+	        if (orgDropdownValue.length > 25) {
+	          orgShort = orgDropdownValue.slice(0, 12) + '...' + orgDropdownValue.slice(-13);
+	          orgElement.textContent = orgShort;
+	        } else {
+	          orgElement.textContent = orgDropdownValue;
+	        }
+	
+	        if (spaceDropdownValue.length > 25) {
+	          spaceShort = spaceDropdownValue.substr(0, 25) + '...';
+	          spaceElement.textContent = spaceShort;
+	        } else {
+	          spaceElement.textContent = spaceDropdownValue;
+	        }
+	
+	        menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
+	      }
+	    }
+	  }, {
+	    key: 'release',
+	    value: function release() {
+	      if (this.hDocumentClick) {
+	        this.hDocumentClick = this.hDocumentClick.release();
+	      }
+	      this.constructor.components.delete(this.element);
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
+	    }
+	
+	    /**
+	     * Instantiates a profile switcher in the given node.
+	     * If the given element indicates that it's a profile switcher (having `data-profile-switcher` attribute), instantiates it.
+	     * Otherwise, instantiates profile switcher by searching for profile switcher in the given node.
+	     * @param {Node} target The DOM node to instantiate profile switcher in. Should be a document or an element.
+	     * @param {Object} [options] The component options
+	     */
+	
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this2 = this;
+	
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-profile-switcher]'))).forEach(function (element) {
+	          return _this2.create(element, options);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return ProfileSwitcher;
+	}();
+	
+	/**
+	* The component options..
+	 * @member {Object} ProfileSwitcher#options
+	 * @property {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
+	 * @property {string} [options.selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
+	 * @property {string} [options.selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
+	 * @property {string} [options.selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
+	 * @property {string} [options.selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
+	 * @property {string} [options.selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
+	 * @property {string} [options.selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
+	 */
+	
+	/**
+	 * The map associating DOM element and profile switcher instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = ProfileSwitcher;
+	ProfileSwitcher.components = new WeakMap();
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(7);
+	
+	__webpack_require__(8);
+	
+	__webpack_require__(14);
+	
+	var _toggleClass = __webpack_require__(9);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var SearchWithOptions = function () {
+	  /**
+	   * Search with Options.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as the search component.
+	   * @param {Object} [options] The component options
+	   * @param {string} [options.selectorToggleLayoutBtn] The data attribute selector for the button that toggles between the layouts.
+	   * @param {string} [options.selectorIconContainer] The data attribute selector for the icon layout container.
+	   * @param {string} [options.classHiddenContainer] The class selector for a hidden container.
+	   */
+	
+	  function SearchWithOptions(element) {
+	    var _this = this;
+	
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	    _classCallCheck(this, SearchWithOptions);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	
+	    this.element = element;
+	
+	    this.options = Object.assign({
+	      selectorToggleLayoutBtn: '[data-search-toggle-btn]',
+	      selectorIconContainer: '[data-search-toggle-layout]',
+	      classHiddenContainer: 'bx--search__toggle-layout__container--hidden'
+	    }, options);
+	
+	    this.constructor.components.set(this.element, this);
+	
+	    this.element.querySelector(this.options.selectorToggleLayoutBtn).addEventListener('click', function (evt) {
+	      return _this.toggleLayout(evt);
+	    });
+	  }
+	
+	  /**
+	   * Instantiates a search component of the given element.
+	   * @param {HTMLElement} element The element working as the search component.
+	   * @param {Object} [options] The component options
+	   */
+	
+	
+	  _createClass(SearchWithOptions, [{
+	    key: 'toggleLayout',
+	
+	
+	    /**
+	     * Toggles between the grid and list layout.
+	     * @param {Event} event The event triggering this method.
+	     */
+	    value: function toggleLayout(evt) {
+	      var _this2 = this;
+	
+	      var btn = evt.currentTarget;
+	      var iconContainers = [].concat(_toConsumableArray(btn.querySelectorAll(this.options.selectorIconContainer)));
+	      iconContainers.forEach(function (container) {
+	        var isHidden = container.classList.contains(_this2.options.classHiddenContainer);
+	        (0, _toggleClass2.default)(container, _this2.options.classHiddenContainer, !isHidden);
+	      });
+	    }
+	  }, {
+	    key: 'release',
+	    value: function release() {
+	      this.constructor.components.delete(this.element);
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element, options) {
+	      return this.components.get(element) || new this(element, options);
+	    }
+	
+	    /**
+	     * Instantiates a search component in the given node.
+	     * If the given element indicates that it's a search component (having `data-search-with-options` attribute), instantiates it.
+	     * Otherwise, instantiates the search component by searching for the search component in the given node.
+	     * @param {Node} target The DOM node to instantiate the search component in. Should be a document or an element..
+	     * @param {Object} [options] The component options
+	     */
+	
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this3 = this;
+	
+	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var options = arguments[1];
+	
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE) {
+	        this.create(target, options);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll('[data-search-with-options]'))).forEach(function (element) {
+	          return _this3.create(element, options);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return SearchWithOptions;
+	}();
+	
+	exports.default = SearchWithOptions;
+	
+	
+	SearchWithOptions.components = new WeakMap();
 
 /***/ }
 /******/ ]);
