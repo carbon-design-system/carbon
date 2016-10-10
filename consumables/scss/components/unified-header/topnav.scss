@@ -203,8 +203,8 @@
   }
 
   .bx--dropdown {
-
-    &:focus {
+    &:focus,
+    &:hover {
       background-color: $color__navy-gray-3;
     }
   }
@@ -222,7 +222,8 @@
     width: rem(36px);
     display: flex;
     align-items: center;
-    padding: 0rem .5rem;
+    justify-content: center;
+    margin: 0rem 1rem;
 
     .profile-image {
       display: flex;
@@ -320,17 +321,18 @@
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  min-width: rem(350px);
 
   &__toggle {
     z-index: 9000;
     height: rem(36px);
-    width: 100%;
-    min-width: rem(350px);
+    width: auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: $color__white;
-    padding: 0 .75rem;
+    padding: 0 1rem;
     background-color: $color__navy-gray-1;
     cursor: pointer;
 
@@ -339,7 +341,8 @@
       visibility: hidden;
     }
 
-    &:focus {
+    &:focus,
+    &:hover {
       outline: 0;
       background-color: $color__navy-gray-3;
 
@@ -355,6 +358,7 @@
       display: inline-block;
       white-space: nowrap;
       padding-right: .5rem;
+      font-weight: 300;
 
       &:first-child {
         @include font-smoothing;
@@ -380,7 +384,7 @@
       opacity: 0;
       top: 100%;
       right: 0;
-      transform: translateY(-100%);
+      transform: translateY(-10%);
       color: $color__white;
       z-index: 8000;
     }
@@ -422,12 +426,15 @@
     }
 
     &:last-child {
-      justify-content: flex-end;
-      padding: .5rem 1rem 1rem;
+      display: flex;
+      margin-left: auto;
+      justify-content: flex-start;
+      max-width: 75%;
+      padding: .75rem 0 1rem 1.5rem;
 
       a {
         @include font-size('11');
-        padding-left: 1rem;
+        padding-right: 1rem;
         color: $color__blue-30;
 
         &:visited {

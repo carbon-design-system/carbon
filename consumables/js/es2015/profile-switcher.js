@@ -30,10 +30,12 @@ export default class ProfileSwitcher {
       selectorToggle: '[data-profile-switcher-toggle]',
       selectorMenu: '[data-switcher-menu]',
       selectorAccount: '[data-switcher-account]',
+      selectorRegion: '[data-switcher-region]',
       selectorOrg: '[data-switcher-org]',
       selectorSpace: '[data-switcher-space]',
       selectorDropdown: '[data-dropdown]',
       selectorAccountDropdown: '[data-dropdown-account]',
+      selectorRegionDropdown: '[data-dropdown-region]',
       selectorOrgDropdown: '[data-dropdown-org]',
       selectorSpaceDropdown: '[data-dropdown-space]',
       classSwitcherOpen: 'bx--account-switcher--open',
@@ -133,14 +135,17 @@ export default class ProfileSwitcher {
    */
   determineSwitcherValues(isHovered) {
     const nameElement = this.element.querySelector(this.options.selectorAccount);
+    const regionElement = this.element.querySelector(this.options.selectorRegion);
     const orgElement = this.element.querySelector(this.options.selectorOrg);
     const spaceElement = this.element.querySelector(this.options.selectorSpace);
     const menuElement = this.element.querySelector(this.options.selectorMenu);
     const isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 
     const nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
+    const regionDropdownValue = this.element.querySelector(this.options.selectorRegionDropdown).textContent;
     const orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
     const spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+
     let nameShort;
     let orgShort;
     let spaceShort;
@@ -149,6 +154,7 @@ export default class ProfileSwitcher {
       nameElement.textContent = nameDropdownValue;
       orgElement.textContent = orgDropdownValue;
       spaceElement.textContent = spaceDropdownValue;
+      regionElement.textContent = regionDropdownValue;
       menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
     } else {
       if (nameDropdownValue.length > 25) {
@@ -172,6 +178,7 @@ export default class ProfileSwitcher {
         spaceElement.textContent = spaceDropdownValue;
       }
 
+      regionElement.textContent = regionDropdownValue;
       menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
     }
   }
