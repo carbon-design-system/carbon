@@ -48,8 +48,8 @@ class Icon extends Component {
 
             return <circle {...circleProps} />;
           });
-        } else if (svgProp === 'paths') {
-          return data.map(path => <path d={path.d} className={this.props.className} />);
+        // } else if (svgProp === 'paths') {
+        //   return data.map(path => <path d={path.d} className={this.props.className} />);
         } else if (svgProp === 'paths') {
           return data.map(path => <path d={path.d} />);
         } else if (svgProp === 'polygons') {
