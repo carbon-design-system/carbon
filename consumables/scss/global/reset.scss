@@ -57,7 +57,7 @@
 }
 
 @include exports('reset') {
-  @if $use-globals == true {
+  @if $use-reset == true {
     @include reset-styles;
   }
 }

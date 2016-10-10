@@ -1,5 +1,6 @@
 $use-globals: true !default;
-$use-fonts:  false !default;
+$use-fonts: false !default;
+$use-reset: true !default;
 
 @import 'reset';
 @import 'colors/colors';
