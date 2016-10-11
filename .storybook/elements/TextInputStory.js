@@ -1,16 +1,14 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { action, storiesOf } from '@kadira/storybook';
 import AppContainer from '../../containers/AppContainer';
 import TextInput from '../../elements/TextInput';
 
 const TextInputProps = {
-  children: 'This is a Label',
   className: 'some-class',
   id: 'test2',
-  onBlur: () => { console.log('blur') },
-  onClick: () => { console.log('click') },
-  onChange: () => { console.log('change') },
-  onFocus: () => { console.log('focus') },
+  label: 'Text Input',
+  onClick: action('onClick'),
+  onChange: action('onChange'),
   placeholder: 'Hint text here',
 };
 
