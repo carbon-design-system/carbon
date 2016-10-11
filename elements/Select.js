@@ -32,7 +32,6 @@ class Select extends React.Component {
       labelText,
       disabled,
       children,
-      defaultValue,
       ...other,
     } = this.props;
 
@@ -41,14 +40,13 @@ class Select extends React.Component {
         <label htmlFor={id} className="bx--form__label">{labelText}</label>
         <select
           {...other}
-          defaultValue={defaultValue}
           id={id}
           className="bx--select__input"
           disabled={disabled}
         >
           {children}
         </select>
-        <Icon name="down-arrow" className="bx--select__arrow" fill="#5aaafa" />
+        <Icon name="down-arrow" className="bx--select__arrow" description="select-arrow" fill="#5aaafa" />
       </div>
     );
   }
