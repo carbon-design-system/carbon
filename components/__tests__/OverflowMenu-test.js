@@ -65,6 +65,12 @@ describe('OverflowMenu', () => {
   });
 
   describe('open and closed states', () => {
+    it('open state should be false by default', () => {
+      const rootWrapper = mount(<OverflowMenu />);
+      expect(rootWrapper.state().open).toEqual(false);
+      expect(rootWrapper.props().open).toEqual(false);
+    });
+
     it('should set expected class when state is open', () => {
       const rootWrapper = mount(<OverflowMenu />);
       const menu = rootWrapper.childAt(0);
@@ -104,6 +110,14 @@ describe('OverflowMenu', () => {
       rootWrapper.props().onClickOutside();
 
       expect(rootWrapper.state().open).toEqual(false);
+    });
+
+    it('open state should be controlled by open props', () => {
+      const rootWrapper = mount(<OverflowMenu />);
+
+      rootWrapper.setProps({ open: true });
+
+      expect(rootWrapper.state().open).toEqual(true);
     });
   });
 });

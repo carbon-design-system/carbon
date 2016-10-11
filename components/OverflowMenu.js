@@ -1,63 +1,62 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import ClickListener from '../internal/ClickListener';
 import Icon from '../elements/Icon';
 import '@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss';
 
-class OverflowMenu extends React.Component {
+class OverflowMenu extends Component {
 
   static propTypes = {
-    open: React.PropTypes.bool,
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    tabIndex: React.PropTypes.number,
-    id: React.PropTypes.string,
-    ariaLabel: React.PropTypes.string,
-    onBlur: React.PropTypes.func,
-    onClick: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
-    onKeyUp: React.PropTypes.func,
-    onMouseDown: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func,
-    handleClick: React.PropTypes.func,
+    open: PropTypes.bool,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    tabIndex: PropTypes.number,
+    id: PropTypes.string,
+    ariaLabel: PropTypes.string,
+    onClick: PropTypes.func,
+    onFocus: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    handleClick: PropTypes.func,
   }
 
   static defaultProps = {
     ariaLabel: 'List of options',
+    open: false,
+    onClick: () => {},
   }
 
   state = {
-    open: false,
+    open: this.props.open,
   }
 
   componentDidMount() {
     document.addEventListener('keypress', this.handleKeyPress);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.open !== this.props.open) {
+      this.setState({ open: nextProps.open });
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener('keypress', this.handleKeyPress);
   }
 
-  setOpen = (open) => {
-    this.setState({ open });
-  }
-
-  handleClick = () => {
-    this.setOpen(!this.state.open);
+  handleClick = (evt) => {
+    this.setState({ open: !this.state.open });
+    this.props.onClick(evt);
   }
 
   handleClickOutside = () => {
-    this.setOpen(false);
+    this.setState({ open: false });
   }
 
   handleKeyPress = (evt) => {
     const key = evt.key || evt.which;
 
     if (key === 'Enter' || key === 13) {
-      this.setOpen(false);
+      this.setState({ open: false });
     }
   }
 
@@ -85,7 +84,6 @@ class OverflowMenu extends React.Component {
         <div
           {...other}
           ref="overflow"
-          data-overflow-menu
           className={overflowMenuClasses}
           onClick={this.handleClick}
           aria-label={ariaLabel}
