@@ -16,17 +16,7 @@ export default class InlineLeftNav {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
-    this.options = Object.assign({
-      // Data Attribute selectors
-      selectorLeftNavList: '[data-inline-left-nav-list]',
-      selectorLeftNavNestedList: '[data-inline-left-nav-nested-list]',
-      selectorLeftNavListItem: '[data-inline-left-nav-item]',
-      selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
-      selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
-      // CSS Class Selectors
-      classActiveLeftNavListItem: 'left-nav-list__item--active',
-      classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
-    }, options);
+    this.options = Object.assign(this.constructor.options, options);
 
     this.element = element;
 
@@ -47,15 +37,18 @@ export default class InlineLeftNav {
    * If the given element indicates that it's an spinner (having `data-loading` attribute), instantiates it.
    * Otherwise, instantiates spinners by searching for spinners in the given node.
    * @param {Node} target The DOM node to instantiate spinners in. Should be a document or an element.
+   * @param {Object} [options] The component options.
+   * @param {string} [options.selectorInit] The CSS selector to find inline left navs.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
     if (target.nodeType === Node.ELEMENT_NODE) {
-      this.create(target, options);
+      this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll('[data-inline-left-nav]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -131,3 +124,22 @@ export default class InlineLeftNav {
  * @type {WeakMap}
  */
 InlineLeftNav.components = new WeakMap();
+
+/**
+ * The component options.
+ * If `options` is specified in the constructor, {@linkcode InlineLeftNav.create .create()}, or {@linkcode InlineLeftNav.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode InlineLeftNav.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find inline left navs.
+ */
+InlineLeftNav.options = {
+  selectorInit: '[data-inline-left-nav]',
+  // Data Attribute selectors
+  selectorLeftNavList: '[data-inline-left-nav-list]',
+  selectorLeftNavNestedList: '[data-inline-left-nav-nested-list]',
+  selectorLeftNavListItem: '[data-inline-left-nav-item]',
+  selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
+  selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
+  // CSS Class Selectors
+  classActiveLeftNavListItem: 'left-nav-list__item--active',
+  classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
+};

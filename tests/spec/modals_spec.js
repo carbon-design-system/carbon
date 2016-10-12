@@ -25,6 +25,8 @@ describe('Test modal', function () {
       const modal = new Modal(document.createElement('div'));
       try {
         expect(modal.options).to.deep.equal({
+          selectorInit: '[data-modal]',
+          attribInitTarget: 'data-modal-target',
           classVisible: 'is-visible',
           classNoScroll: 'bx--noscroll',
           eventBeforeShown: 'modal-beingshown',

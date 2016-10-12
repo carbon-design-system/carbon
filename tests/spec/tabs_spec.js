@@ -10,6 +10,7 @@ describe('Test tabs', function () {
       try {
         const tab = new Tab(document.createElement('div'));
         expect(tab.options).to.deep.equal({
+          selectorInit: '[data-tabs]',
           selectorMenu: '.bx--tabs__nav',
           selectorTrigger: '.bx--tabs__trigger',
           selectorTriggerText: '.bx--tabs__trigger-text',

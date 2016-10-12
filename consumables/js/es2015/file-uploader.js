@@ -1,3 +1,5 @@
+import '../polyfills/element-matches';
+
 export default class FileUploader {
   /**
    * File uploader.
@@ -12,8 +14,9 @@ export default class FileUploader {
     }
 
     this.element = element;
+    this.options = Object.assign(Object.create(this.constructor.options), options);
 
-    const labelSelector = options.labelSelector || element.dataset.label;
+    const labelSelector = this.options.labelSelector || element.dataset.label;
     this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 
     this.constructor.components.set(this.element, this);
@@ -33,20 +36,22 @@ export default class FileUploader {
 
   /**
    * Instantiates file uploader in the given node.
-   * If the given element indicates that it's an file uploader (having `data-file-uploader` attribute), instantiates it.
+   * If the given element indicates that it's an file uploader, instantiates it.
    * Otherwise, instantiates file uploader by searching for file uploader in the given node.
    * @param {HTMLElement} element The element working as a file uploader.
    * @param {Object} [options] The component options.
+   * @param {string} [options.selectorInit] The CSS selector to find file uploaders.
    * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fileInput !== undefined) {
-      this.create(target, options);
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+      this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll('[data-file-uploader]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -75,13 +80,18 @@ export default class FileUploader {
 }
 
 /**
- * The component options.
- * @member {Object} FileUploader#options
- * @property {string} [labelSelector] The CSS selector to find the label for the file name.
- */
-
-/**
  * The map associating DOM element and file uploader instance.
  * @type {WeakMap}
  */
 FileUploader.components = new WeakMap();
+
+/**
+ * The component options.
+ * If `options` is specified in the constructor, {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode FileUploader.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find file uploaders.
+ * @property {string} [labelSelector] The CSS selector to find the label for the file name.
+ */
+FileUploader.options = {
+  selectorInit: '[data-file-uploader]',
+};

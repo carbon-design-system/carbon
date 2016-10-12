@@ -23,6 +23,7 @@ describe('Test table', function () {
       const table = new Table(document.createElement('table'));
       try {
         expect(table.options).to.deep.equal({
+          selectorInit: '[data-table]',
           selectorTitle: '.bx--table__column-title',
           selectorRow: '.bx--table__row',
           selectorCheckbox: '.bx--checkbox',

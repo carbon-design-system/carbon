@@ -24,22 +24,7 @@ export default class ProfileSwitcher {
 
     this.element = element;
 
-    this.options = Object.assign({
-      // Data Attribute selectors
-      selectorProfileSwitcher: '[data-profile-switcher]',
-      selectorToggle: '[data-profile-switcher-toggle]',
-      selectorMenu: '[data-switcher-menu]',
-      selectorAccount: '[data-switcher-account]',
-      selectorRegion: '[data-switcher-region]',
-      selectorOrg: '[data-switcher-org]',
-      selectorSpace: '[data-switcher-space]',
-      selectorDropdown: '[data-dropdown]',
-      selectorAccountDropdown: '[data-dropdown-account]',
-      selectorRegionDropdown: '[data-dropdown-region]',
-      selectorOrgDropdown: '[data-dropdown-org]',
-      selectorSpaceDropdown: '[data-dropdown-space]',
-      classSwitcherOpen: 'bx--account-switcher--open',
-    }, options);
+    this.options = Object.assign(this.constructor.options, options);
 
     this.constructor.components.set(this.element, this);
 
@@ -68,15 +53,17 @@ export default class ProfileSwitcher {
    * Otherwise, instantiates profile switcher by searching for profile switcher in the given node.
    * @param {Node} target The DOM node to instantiate profile switcher in. Should be a document or an element.
    * @param {Object} [options] The component options
+   * @param {string} [options.selectorInit] The CSS selector to find profile switchers.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
     if (target.nodeType === Node.ELEMENT_NODE) {
-      this.create(target, options);
+      this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll('[data-profile-switcher]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -192,16 +179,33 @@ export default class ProfileSwitcher {
 }
 
 /**
-* The component options..
- * @member {Object} ProfileSwitcher#options
- * @property {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
- * @property {string} [options.selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
- * @property {string} [options.selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
- * @property {string} [options.selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
- * @property {string} [options.selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
- * @property {string} [options.selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
- * @property {string} [options.selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
+ * The component options.
+ * @property {string} selectorInit The CSS selector to find profile switchers.
+ * @property {string} [selectorProfileSwitcher] The data attribute selector for the profile switcher.
+ * @property {string} [selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
+ * @property {string} [selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
+ * @property {string} [selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
+ * @property {string} [selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
+ * @property {string} [selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
+ * @property {string} [selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
  */
+ProfileSwitcher.options = {
+  selectorInit: '[data-profile-switcher]',
+  // Data Attribute selectors
+  selectorProfileSwitcher: '[data-profile-switcher]',
+  selectorToggle: '[data-profile-switcher-toggle]',
+  selectorMenu: '[data-switcher-menu]',
+  selectorAccount: '[data-switcher-account]',
+  selectorRegion: '[data-switcher-region]',
+  selectorOrg: '[data-switcher-org]',
+  selectorSpace: '[data-switcher-space]',
+  selectorDropdown: '[data-dropdown]',
+  selectorAccountDropdown: '[data-dropdown-account]',
+  selectorRegionDropdown: '[data-dropdown-region]',
+  selectorOrgDropdown: '[data-dropdown-org]',
+  selectorSpaceDropdown: '[data-dropdown-space]',
+  classSwitcherOpen: 'bx--account-switcher--open',
+};
 
 /**
  * The map associating DOM element and profile switcher instance.

@@ -1,4 +1,5 @@
 import '../polyfills/array-from';
+import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import eventMatches from '../polyfills/event-matches';
@@ -45,14 +46,7 @@ export default class Modal {
 
     this.element = element;
 
-    this.options = Object.assign({
-      classVisible: 'is-visible',
-      classNoScroll: 'bx--noscroll',
-      eventBeforeShown: 'modal-beingshown',
-      eventAfterShown: 'modal-shown',
-      eventBeforeHidden: 'modal-beinghidden',
-      eventAfterHidden: 'modal-hidden',
-    }, options);
+    this.options = Object.assign(Object.create(this.constructor.options), options);
 
     this.constructor.components.set(this.element, this);
 
@@ -84,12 +78,14 @@ export default class Modal {
 
   /**
    * Instantiates modal dialogs in the given element.
-   * If the given element indicates that it's an modal dialog (having `data-modal` attribute), instantiates it.
+   * If the given element indicates that it's an modal dialog, instantiates it.
    * Otherwise, instantiates modal dialogs by clicking on launcher buttons
    * (buttons with `data-modal-target` attribute) of modal dialogs in the given node.
    * @implements Component
    * @param {Node} target The DOM node to instantiate modal dialogs in. Should be a document or an element.
    * @param {Object} [options] The component options.
+   * @param {string} [options.selectorInit] The CSS class to find modal dialogs.
+   * @param {string} [options.attribInitTarget] The attribute name in the launcher buttons to find target modal dialogs.
    * @param {string} [options.classVisible] The CSS class for the visible state.
    * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @param {string} [options.eventBeforeShown]
@@ -106,20 +102,21 @@ export default class Modal {
    *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    * @returns {Handle} The handle to remove the event listener to handle clicking.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.modal !== undefined) {
-      this.create(target, options);
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+      this.create(target, effectiveOptions);
     } else {
       return on(target, 'click', (event) => {
-        const element = eventMatches(event, '[data-modal-target]');
+        const element = eventMatches(event, `[${effectiveOptions.attribInitTarget}]`);
 
         if (element) {
           event.delegateTarget = element;
 
-          const modalElements = [... element.ownerDocument.querySelectorAll(element.dataset.modalTarget)];
+          const modalElements = [... element.ownerDocument.querySelectorAll(element.getAttribute(effectiveOptions.attribInitTarget))];
           if (modalElements.length > 1) {
             throw new Error('Target modal must be unique.');
           }
@@ -129,7 +126,7 @@ export default class Modal {
               event.preventDefault();
             }
 
-            const modal = this.create(modalElements[0], options);
+            const modal = this.create(modalElements[0], effectiveOptions);
             modal.show(event, (error, shownAlready) => {
               if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
                 modal.element.focus();
@@ -350,8 +347,17 @@ export default class Modal {
 }
 
 /**
+ * The map associating DOM element and modal instance.
+ * @type {WeakMap}
+ */
+Modal.components = new WeakMap();
+
+/**
  * The component options.
- * @member {Object} Modal#options
+ * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
+ * @property {string} selectorInit The CSS class to find modal dialogs.
+ * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
  * @property {string} [classVisible] The CSS class for the visible state.
  * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
  * @property {string} [eventBeforeShown]
@@ -367,9 +373,13 @@ export default class Modal {
  *   The name of the custom event telling that modal is sure hidden
  *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
  */
-
-/**
- * The map associating DOM element and modal instance.
- * @type {WeakMap}
- */
-Modal.components = new WeakMap();
+Modal.options = {
+  selectorInit: '[data-modal]',
+  attribInitTarget: 'data-modal-target',
+  classVisible: 'is-visible',
+  classNoScroll: 'bx--noscroll',
+  eventBeforeShown: 'modal-beingshown',
+  eventAfterShown: 'modal-shown',
+  eventBeforeHidden: 'modal-beinghidden',
+  eventAfterHidden: 'modal-hidden',
+};

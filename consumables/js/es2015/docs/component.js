@@ -37,3 +37,11 @@
  * The map associating DOM element and this component's instance.
  * @member {WeakMap} Component.components
  */
+
+/**
+ * The component options.
+ * If `options` is specified in the constructor, {@linkcode Componnt.create .create()}, or {@linkcode Componnt.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode Componnt.init .init()} works.
+ * @member {Object} Component.options
+ * @property {string} selectorInit The CSS selector to find the components.
+ */

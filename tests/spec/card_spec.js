@@ -19,6 +19,7 @@ describe('Test card', function () {
     it(`Should set default options`, function () {
       const cardlist = new Card(document.createElement('div'));
       expect(cardlist.options).to.deep.equal({
+        selectorInit: '[data-card-list]',
         selectorCard: '.bx--card',
       });
     });

@@ -1,5 +1,6 @@
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
+import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import toggleClass from '../polyfills/toggle-class';
 
@@ -24,13 +25,7 @@ export default class ContentSwitcher {
 
     this.element = element;
 
-    this.options = Object.assign({
-      selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
-      selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
-      classActive: 'bx--content-switcher--selected',
-      eventBeforeSelected: 'content-switcher-beingselected',
-      eventAfterSelected: 'content-switcher-selected',
-    }, options);
+    this.options = Object.assign(Object.create(this.constructor.options), options);
 
     this.constructor.components.set(this.element, this);
 
@@ -59,10 +54,11 @@ export default class ContentSwitcher {
 
   /**
    * Instantiates content switcher button sets in the given node.
-   * If the given element indicates that it's an content switcher button set (having `data-content-switcher` attribute), instantiates it.
+   * If the given element indicates that it's an content switcher button set, instantiates it.
    * Otherwise, instantiates content switcher button sets by searching for content switcher button sets in the given node.
    * @param {Node} target The DOM node to instantiate content switcher button sets in. Should be a document or an element.
    * @param {Object} [options] The component options.
+   * @param {string} [options.selectorInit] The CSS selector to find content switcher button set.
    * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
    * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
    * @param {string} [options.classActive] The CSS class for switcher button's selected state.
@@ -71,14 +67,15 @@ export default class ContentSwitcher {
    *   Cancellation of this event stops selection of content switcher button.
    * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.contentSwitcher !== undefined) {
-      this.create(target, options);
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+      this.create(target, effectiveOptions);
     } else {
-      [... document.querySelectorAll('[data-content-switcher]')].forEach(element => this.create(element, options));
+      [... document.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -180,8 +177,16 @@ export default class ContentSwitcher {
 }
 
 /**
+ * The map associating DOM element and content switcher set instance.
+ * @type {WeakMap}
+ */
+ContentSwitcher.components = new WeakMap();
+
+/**
  * The component options.
- * @member {Object} ContentSwitcher#options
+ * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode ContentSwitcher.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode ContentSwitcher.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find content switcher button set.
  * @property {string} [selectorButton] The CSS selector to find switcher buttons.
  * @property {string} [selectorButtonSelected] The CSS selector to find the selected switcher button.
  * @property {string} [classActive] The CSS class for switcher button's selected state.
@@ -190,9 +195,11 @@ export default class ContentSwitcher {
  *   Cancellation of this event stops selection of content switcher button.
  * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
  */
-
-/**
- * The map associating DOM element and content switcher set instance.
- * @type {WeakMap}
- */
-ContentSwitcher.components = new WeakMap();
+ContentSwitcher.options = {
+  selectorInit: '[data-content-switcher]',
+  selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
+  selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
+  classActive: 'bx--content-switcher--selected',
+  eventBeforeSelected: 'content-switcher-beingselected',
+  eventAfterSelected: 'content-switcher-selected',
+};

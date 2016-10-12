@@ -24,6 +24,8 @@ describe('Test header', function () {
       const element = document.createElement('div');
       const nav = new HeaderNav(element);
       expect(nav.options).to.deep.equal({
+        selectorInit: '[data-nav]',
+        attribInitTarget: 'data-nav-target',
         selectorTriggerLabel: '.current-taxonomy',
         classActive: 'taxonomy-nav--active',
         selectorMenu: '.taxonomy-menu',

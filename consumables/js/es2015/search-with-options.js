@@ -20,11 +20,7 @@ export default class SearchWithOptions {
 
     this.element = element;
 
-    this.options = Object.assign({
-      selectorToggleLayoutBtn: '[data-search-toggle-btn]',
-      selectorIconContainer: '[data-search-toggle-layout]',
-      classHiddenContainer: 'bx--search__toggle-layout__container--hidden',
-    }, options);
+    this.options = Object.assign(this.constructor.options, options);
 
     this.constructor.components.set(this.element, this);
 
@@ -46,15 +42,17 @@ export default class SearchWithOptions {
    * Otherwise, instantiates the search component by searching for the search component in the given node.
    * @param {Node} target The DOM node to instantiate the search component in. Should be a document or an element..
    * @param {Object} [options] The component options
+   * @param {string} [options.selectorInit] The CSS selector to find unified headers.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
     if (target.nodeType === Node.ELEMENT_NODE) {
-      this.create(target, options);
+      this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll('[data-search-with-options]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -77,3 +75,16 @@ export default class SearchWithOptions {
 }
 
 SearchWithOptions.components = new WeakMap();
+
+/**
+ * The component options.
+ * If `options` is specified in the constructor, {@linkcode SearchWithOptions.create .create()}, or {@linkcode SearchWithOptions.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode SearchWithOptions.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find search UIs with options.
+ */
+SearchWithOptions.options = {
+  selectorInit: '[data-search-with-options]',
+  selectorToggleLayoutBtn: '[data-search-toggle-btn]',
+  selectorIconContainer: '[data-search-toggle-layout]',
+  classHiddenContainer: 'bx--search__toggle-layout__container--hidden',
+};

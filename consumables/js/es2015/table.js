@@ -1,3 +1,4 @@
+import '../polyfills/element-matches';
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/object-assign';
 import toggleClass from '../polyfills/toggle-class';
@@ -25,17 +26,7 @@ export default class Table {
     }
     this.element = element;
 
-    this.options = Object.assign({
-      selectorTitle: '.bx--table__column-title',
-      selectorRow: '.bx--table__row',
-      selectorCheckbox: '.bx--checkbox',
-      classSortState: 'bx--table__column-title--rotated',
-      classCheckState: 'bx--table__row--checked',
-      eventBeforeSortToggled: 'table-sort-beingtoggled',
-      eventAfterSortToggled: 'table-sort-toggled',
-      eventBeforeCheckToggled: 'table-check-beingtoggled',
-      eventAfterCheckToggled: 'table-check-toggled',
-    }, options);
+    this.options = Object.assign(Object.create(this.constructor.options), options);
 
     this.constructor.components.set(this.element, this);
 
@@ -62,10 +53,11 @@ export default class Table {
 
   /**
    * Sets up the given node to instantiate data tables in.
-   * If the given element indicates that it's an data table (having `data-table` attribute), instantiates it.
+   * If the given element indicates that it's an data table, instantiates it.
    * Otherwise, lazily instantiates data table when it's clicked on.
    * @param {Node} target The DOM node to instantiate data tables in. Should be a document or an element.
    * @param {Object} [options] The component options.
+   * @param {string} [options.selectorInit] The CSS selector to find data tables.
    * @param {string} [options.selectorTitle] The CSS selector to find column titles.
    * @param {string} [options.selectorRow] The CSS selector to find rows.
    * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
@@ -77,17 +69,18 @@ export default class Table {
    * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
    * @returns {Handle} The handle to remove the event listener to handle clicking.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.table !== undefined) {
-      this.create(target, options);
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+      this.create(target, effectiveOptions);
     } else {
       return on(target, 'click', (event) => {
-        const element = eventMatches(event, '[data-table]');
+        const element = eventMatches(event, effectiveOptions.selectorInit);
         if (element && !this.components.has(element)) {
-          this.create(element, options).handleClick(event);
+          this.create(element, effectiveOptions).handleClick(event);
         }
       });
     }
@@ -168,8 +161,16 @@ export default class Table {
 }
 
 /**
+ * The map associating DOM element and data table instance.
+ * @type {WeakMap}
+ */
+Table.components = new WeakMap();
+
+/**
  * The component options.
- * @member {Object} Table#options
+ * If `options` is specified in the constructor, {@linkcode Table.create .create()}, or {@linkcode Table.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode Table.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find data tables.
  * @property {string} [selectorTitle] The CSS selector to find column titles.
  * @property {string} [selectorRow] The CSS selector to find rows.
  * @property {string} [selectorCheckbox] The CSS selector to find check boxes.
@@ -180,9 +181,15 @@ export default class Table {
  * @property {string} [eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
  * @property {string} [eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
  */
-
-/**
- * The map associating DOM element and data table instance.
- * @type {WeakMap}
- */
-Table.components = new WeakMap();
+Table.options = {
+  selectorInit: '[data-table]',
+  selectorTitle: '.bx--table__column-title',
+  selectorRow: '.bx--table__row',
+  selectorCheckbox: '.bx--checkbox',
+  classSortState: 'bx--table__column-title--rotated',
+  classCheckState: 'bx--table__row--checked',
+  eventBeforeSortToggled: 'table-sort-beingtoggled',
+  eventAfterSortToggled: 'table-sort-toggled',
+  eventBeforeCheckToggled: 'table-check-beingtoggled',
+  eventAfterCheckToggled: 'table-check-toggled',
+};

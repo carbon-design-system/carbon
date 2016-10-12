@@ -1,5 +1,6 @@
 import '../polyfills/array-from';
 import '../polyfills/custom-event';
+import '../polyfills/element-matches';
 
 export default class NumberInput {
   /**
@@ -33,18 +34,21 @@ export default class NumberInput {
 
   /**
    * Instantiates number input UI in the given node.
-   * If the given element indicates that it's an number input UI (having `data-numberinput` attribute), instantiates it.
+   * If the given element indicates that it's an number input UI, instantiates it.
    * Otherwise, instantiates number input UIs by searching for number input UIs in the given node.
    * @param {Node} target The DOM node to instantiate number input UIs in. Should be a document or an element.
+   * @param {Object} [options] The component options.
+   * @param {boolean} [options.selectorInit] The CSS selector to find number input UIs.
    */
-  static init(target = document) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.numberinput !== undefined) {
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
       this.create(target);
     } else {
-      [... target.querySelectorAll('[data-numberinput]')].forEach(element => this.create(element));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element));
     }
   }
 
@@ -91,3 +95,13 @@ export default class NumberInput {
  * @type {WeakMap}
  */
 NumberInput.components = new WeakMap();
+
+/**
+ * The component options.
+ * If `options` is specified in the constructor, {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find number input UIs.
+ */
+NumberInput.options = {
+  selectorInit: '[data-numberinput]',
+};

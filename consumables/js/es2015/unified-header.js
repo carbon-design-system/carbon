@@ -11,10 +11,7 @@ export default class UnifiedHeader {
 
     this.element = element;
 
-    this.options = Object.assign({
-      // Data Attribute selectors
-      // CSS Class Selectors
-    }, options);
+    this.options = Object.assign(this.constructor.options, options);
     this.constructor.components.set(this.element, this);
   }
 
@@ -22,14 +19,15 @@ export default class UnifiedHeader {
     return this.components.get(element) || new this(element, options);
   }
 
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
     if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
-      this.create(target, options);
+      this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll('[data-unified-header]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -46,3 +44,15 @@ export default class UnifiedHeader {
  * @type {WeakMap}
  */
 UnifiedHeader.components = new WeakMap();
+
+/**
+ * The component options.
+ * If `options` is specified in the constructor, {@linkcode UnifiedHeader.create .create()}, or {@linkcode UnifiedHeader.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode UnifiedHeader.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find unified headers.
+ */
+UnifiedHeader.options = {
+  selectorInit: '[data-unified-header]',
+  // Data Attribute selectors
+  // CSS Class Selectors
+};

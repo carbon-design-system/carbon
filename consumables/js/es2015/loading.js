@@ -1,20 +1,22 @@
 import toggleClass from '../polyfills/toggle-class';
+import '../polyfills/element-matches';
 
 export default class Loading {
   /**
    * Spinner indicating loading state.
    * @implements Component
    * @param {HTMLElement} element The element working as a spinner.
-   * @param {Object} options The component options.
-   * @param {boolean} options.active `true` if this spinner should roll.
+   * @param {Object} [options] The component options.
+   * @param {boolean} [options.active] `true` if this spinner should roll.
    */
-  constructor(element, options = { active: true }) {
+  constructor(element, options = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
     this.element = element;
-    this.active = 'active' in options ? options.active : true;
+    this.options = Object.assign(Object.create(this.constructor.options), options);
+    this.active = this.options.active;
     this.ie = false;
 
     // Check if browser is Internet Explorer
@@ -39,18 +41,22 @@ export default class Loading {
 
   /**
    * Instantiates spinner in the given node.
-   * If the given element indicates that it's an spinner (having `data-loading` attribute), instantiates it.
+   * If the given element indicates that it's an spinner, instantiates it.
    * Otherwise, instantiates spinners by searching for spinners in the given node.
    * @param {Node} target The DOM node to instantiate spinners in. Should be a document or an element.
+   * @param {Object} [options] The component options.
+   * @param {boolean} [options.selectorInit] The CSS selector to find spinners.
+   * @param {boolean} [options.active] `true` if this spinner should roll.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
-      this.create(target, options);
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+      this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll('[data-loading]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -98,3 +104,14 @@ export default class Loading {
  * @type {WeakMap}
  */
 Loading.components = new WeakMap();
+
+/**
+ * The component options.
+ * If `options` is specified in the constructor, {@linkcode Loading.create .create()}, or {@linkcode Loading.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode Loading.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find spinners.
+ */
+Loading.options = {
+  selectorInit: '[data-loading]',
+  active: true,
+};

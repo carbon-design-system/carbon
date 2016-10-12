@@ -1,5 +1,6 @@
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
+import '../polyfills/element-matches';
 import '../polyfills/math-sign';
 import '../polyfills/object-assign';
 import ContentSwitcher from './content-switcher';
@@ -23,19 +24,8 @@ export default class Tab extends ContentSwitcher {
    *   Cancellation of this event stops selection of tab.
    * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
    */
-  constructor(element, options = {}) {
-    super(element, Object.assign({
-      selectorMenu: '.bx--tabs__nav',
-      selectorTrigger: '.bx--tabs__trigger',
-      selectorTriggerText: '.bx--tabs__trigger-text',
-      selectorButton: '.bx--tabs__nav-item',
-      selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
-      selectorLink: '.bx--tabs__nav-link',
-      classActive: 'bx--tabs--selected',
-      classHidden: 'bx--tabs--hidden',
-      eventBeforeSelected: 'tab-beingselected',
-      eventAfterSelected: 'tab-selected',
-    }, options));
+  constructor(element, options) {
+    super(element, options);
 
     this.element.addEventListener('keydown', (event) => this.handleKeyDown(event));
 
@@ -47,10 +37,11 @@ export default class Tab extends ContentSwitcher {
 
   /**
    * Instantiates tab containers in the given node.
-   * If the given element indicates that it's an tab container (having `data-tabs` attribute), instantiates it.
+   * If the given element indicates that it's an tab container, instantiates it.
    * Otherwise, instantiates tab containers by searching for tab containers in the given node.
    * @param {Node} target The DOM node to instantiate tab containers in. Should be a document or an element.
    * @param {Object} [options] The component options.
+   * @param {string} [options.selectorInit] The CSS selector to find tab containers.
    * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
    * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
    * @param {string} [options.selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
@@ -64,14 +55,15 @@ export default class Tab extends ContentSwitcher {
    *   Cancellation of this event stops selection of tab.
    * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
-      this.create(target, options);
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+      this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll('[data-tabs]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -153,8 +145,16 @@ export default class Tab extends ContentSwitcher {
 }
 
 /**
+ * The map associating DOM element and tab container instance.
+ * @type {WeakMap}
+ */
+Tab.components = new WeakMap();
+
+/**
  * The component options.
- * @member {Object} Tab#options
+ * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode Tab.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode Tab.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find tab containers.
  * @property {string} [selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
  * @property {string} [selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
  * @property {string} [selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
@@ -168,9 +168,16 @@ export default class Tab extends ContentSwitcher {
  *   Cancellation of this event stops selection of tab.
  * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
  */
-
-/**
- * The map associating DOM element and tab container instance.
- * @type {WeakMap}
- */
-Tab.components = new WeakMap();
+Tab.options = Object.assign(Object.create(ContentSwitcher.options), {
+  selectorInit: '[data-tabs]',
+  selectorMenu: '.bx--tabs__nav',
+  selectorTrigger: '.bx--tabs__trigger',
+  selectorTriggerText: '.bx--tabs__trigger-text',
+  selectorButton: '.bx--tabs__nav-item',
+  selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
+  selectorLink: '.bx--tabs__nav-link',
+  classActive: 'bx--tabs--selected',
+  classHidden: 'bx--tabs--hidden',
+  eventBeforeSelected: 'tab-beingselected',
+  eventAfterSelected: 'tab-selected',
+});

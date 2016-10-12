@@ -1,4 +1,5 @@
 import '../polyfills/array-from';
+import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import on from '../misc/on';
@@ -24,13 +25,7 @@ export default class Dropdown {
 
     this.element = element;
 
-    this.options = Object.assign({
-      selectorItem: '[data-option] > .bx--dropdown__link',
-      selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
-      classSelected: 'bx--dropdown--selected',
-      eventBeforeSelected: 'dropdown-beingselected',
-      eventAfterSelected: 'dropdown-selected',
-    }, options);
+    this.options = Object.assign(Object.create(this.constructor.options), options);
 
     if (this.element.dataset.dropdown !== 'navigation') {
       this.element.dataset.dropdown = '';
@@ -65,10 +60,11 @@ export default class Dropdown {
 
   /**
    * Instantiates selectors in the given node.
-   * If the given element indicates that it's an selector (having `data-dropdown` attribute), instantiates it.
+   * If the given element indicates that it's an selector, instantiates it.
    * Otherwise, instantiates selectors by searching for selectors in the given node.
    * @param {Node} target The DOM node to instantiate selectors in. Should be a document or an element.
    * @param {Object} [options] The component options.
+   * @param {string} [options.selectorInit] The CSS selector to find selectors.
    * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
@@ -77,14 +73,15 @@ export default class Dropdown {
    *   Cancellation of this event stops selection of drop down item.
    * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
    */
-  static init(target = document, options) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
-      this.create(target, options);
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+      this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll('[data-dropdown]')].forEach(element => this.create(element, options));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
@@ -149,10 +146,17 @@ export default class Dropdown {
   }
 }
 
+/**
+ * The map associating DOM element and selector instance.
+ * @type {WeakMap}
+ */
+Dropdown.components = new WeakMap();
 
 /**
  * The component options.
- * @member {Object} Dropdown#options
+ * If `options` is specified in the constructor, {@linkcode Dropdown.create .create()}, or {@linkcode Dropdown.init .init()},
+ * properties in this object are overriden for the instance being create and how {@linkcode Dropdown.init .init()} works.
+ * @property {string} selectorInit The CSS selector to find selectors.
  * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
  * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
  * @property {string} [classSelected] The CSS class for the selected dropdown item.
@@ -161,9 +165,11 @@ export default class Dropdown {
  *   Cancellation of this event stops selection of drop down item.
  * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
  */
-
-/**
- * The map associating DOM element and selector instance.
- * @type {WeakMap}
- */
-Dropdown.components = new WeakMap();
+Dropdown.options = {
+  selectorInit: '[data-dropdown]',
+  selectorItem: '[data-option] > .bx--dropdown__link',
+  selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
+  classSelected: 'bx--dropdown--selected',
+  eventBeforeSelected: 'dropdown-beingselected',
+  eventAfterSelected: 'dropdown-selected',
+};

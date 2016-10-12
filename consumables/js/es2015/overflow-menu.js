@@ -1,4 +1,5 @@
 import '../polyfills/array-from';
+import '../polyfills/element-matches';
 import toggleClass from '../polyfills/toggle-class';
 import on from '../misc/on';
 
@@ -28,14 +29,15 @@ export default class OverflowMenu {
     return this.components.get(element) || new this(element);
   }
 
-  static init(target = document) {
+  static init(target = document, options = {}) {
+    const effectiveOptions = Object.assign(Object.create(this.options), options);
     if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
       throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.overflowMenu !== undefined) {
+    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
       this.create(target);
     } else {
-      [... target.querySelectorAll('[data-overflow-menu]')].forEach(element => this.create(element));
+      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element));
     }
   }
 
@@ -76,3 +78,7 @@ export default class OverflowMenu {
 }
 
 OverflowMenu.components = new WeakMap();
+
+OverflowMenu.options = {
+  selectorInit: '[data-overflow-menu]',
+};
