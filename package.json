@@ -1,7 +1,7 @@
 {
   "name": "bx-components-react",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "A React wrapper for bluemix-components",
   "main": "index.js",
   "scripts": {
     "check": "npm run lint && npm run test",
@@ -11,9 +11,45 @@
     "test-watch": "jest --watch",
     "deploy": "build-storybook -s .storybook -o .gh-pages && node deploy.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "bluemix",
+    "bluemix-components"
+  ],
+  "files": [
+    "components/**/*",
+    "containers/**/*",
+    "elements/**/*",
+    "internal/**/*",
+    "lib/**/*"
+  ],
+  "contributors": [
+    {
+      "name": "Brian Han",
+      "email": "bthan@us.ibm.com"
+    },
+    {
+      "name": "Aziz Punjani",
+      "email": "punjani@us.ibm.com"
+    },
+    {
+      "name": "Mari Johannessen",
+      "email": "mjohannessen@us.ibm.com"
+    },
+    {
+      "name": "T.J. Eagan",
+      "email": "twegan@us.ibm.com"
+    },
+    {
+      "name": "Ian Fleming",
+      "email": "ianfleming@us.ibm.com"
+    },
+    {
+      "name": "Chris Dhanaraj",
+      "email": "chrisdhanaraj@us.ibm.com"
+    }
+  ],
+  "license": "MIT",
   "eslintConfig": {
     "parser": "babel-eslint",
     "extends": "airbnb",

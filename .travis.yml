@@ -12,3 +12,9 @@ before_install:
 script:
   - npm run lint
   - npm test
+
+deploy:
+  provider: script
+  script: sh travis.ci/deploy.sh
+  on:
+    all_branches: true
