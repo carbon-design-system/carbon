@@ -1,6 +1,6 @@
 {
   "name": "bx-components-react",
-  "version": "0.0.4-beta",
+  "version": "0.0.5-beta",
   "description": "A React wrapper for bluemix-components",
   "main": "index.js",
   "scripts": {
@@ -75,6 +75,7 @@
     "react-dom": "^15.3.2"
   },
   "devDependencies": {
+    "@console/console-npm-scripts": "^1.0.11",
     "@kadira/react-storybook-addon-info": "3.2.1",
     "@kadira/react-storybook-decorator-centered": "^1.0.0",
     "@kadira/storybook": "1.38.0",
