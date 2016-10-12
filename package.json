@@ -1,6 +1,6 @@
 {
   "name": "bx-components-react",
-  "version": "0.0.3-beta",
+  "version": "0.0.4-beta",
   "description": "A React wrapper for bluemix-components",
   "main": "index.js",
   "scripts": {

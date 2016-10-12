@@ -6,13 +6,9 @@ group: bluezone
 cache:
   directories:
     - node_modules
-before_install:
-  - echo "@console:registry=http://dev-console-npm.stage1.ng.bluemix.net/" >> .npmrc
-  - echo "//dev-console-npm.stage1.ng.bluemix.net/:_authToken="u6vjQywpRv51/eKBiRcAFA=="" >> .npmrc
 script:
   - npm run lint
   - npm test
-
 deploy:
   provider: script
   script: sh travis.ci/deploy.sh
