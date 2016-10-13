@@ -1,0 +1,642 @@
+.bx--global-header__left-nav {
+  position: fixed;
+  z-index: 9000;
+  width: rem(250px);
+  top: $height--top-nav;
+  left: 0;
+  height: 100%;
+  transform: translate3d(-100%, 0, 0);
+  transition: 300ms $bx--standard-easing;
+  box-shadow: none;
+  visibility: hidden;
+
+  &.bx--left-nav--active {
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0px 1px 15px 2px rgba(0, 0, 0, .1);
+    visibility: visible;
+  }
+}
+
+.bx--left-nav {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: $color__navy-gray-1;
+  padding: 0 0 4rem 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
+}
+
+.bx--left-nav__close-row {
+  height: $height--global-nav;
+  width: 100%;
+  background-color: $color__navy-gray-1;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
+}
+
+
+.bx--left-nav__header {
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1.5rem;
+  height: $height--global-nav;
+  cursor: pointer;
+  position: relative;
+  background-color: $color__blue-90;
+  display: none;
+
+  @include light-ui {
+    display: flex;
+    background-color: $color__navy-gray-1;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.125rem rem(20px);
+
+    &[data-left-nav-current-section='Applications'] {
+      background-color: $color__teal-50;
+    }
+
+    &[data-left-nav-current-section='Infrastructure'] {
+      background-color: $color__blue-50;
+    }
+
+    &[data-left-nav-current-section='Services'] {
+      background-color: $color__purple-60;
+    }
+  }
+
+  &--title {
+    @include font-size('16');
+    @include font-smoothing;
+    color: $color__white;
+    font-weight: 700;
+    margin-right: auto;
+
+    @include light-ui {
+      @include font-size('16');
+      @include font-smoothing;
+      display: block;
+      color: $color__white;
+      font-weight: 700;
+    }
+  }
+
+  &--taxonomy-icon {
+    width: rem(24px);
+    height: rem(24px);
+    fill: $color__white;
+    margin-right: 1rem;
+  }
+
+  &--close-icon {
+    width: rem(14px);
+    height: rem(14px);
+    fill: $color__blue-30;
+    display: none;
+
+    @include light-ui {
+      display: block;
+      fill: $color__white;
+    }
+  }
+}
+
+.bx--left-nav__sections {
+  padding: 0 0 1rem;
+  background-color: $color__navy-gray-1;
+  width: 100%;
+  z-index: 8000;
+  position: relative;
+  border-bottom: 1px solid $color__navy-gray-9;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
+}
+
+.bx--left-nav__section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: $color__navy-gray-1;
+  padding: 0 rem(20px);
+  transition: $transition--base $bx--standard-easing;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
+
+  &--active {
+    justify-content: flex-start;
+    padding: 0 1.5rem;
+    align-items: center;
+    height: $height--global-nav;
+    cursor: pointer;
+    position: relative;
+    background-color: $color__blue-90;
+    display: none;
+
+    @include light-ui {
+      display: flex;
+      background-color: $color__navy-gray-1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.125rem rem(20px);
+    }
+
+    .bx--global-light-ui &[data-left-nav-section='Applications'] {
+      background-color: $color__teal-50;
+    }
+
+    .bx--global-light-ui &[data-left-nav-section='Infrastructure'] {
+      background-color: $color__blue-50;
+    }
+
+    .bx--global-light-ui &[data-left-nav-section='Services'] {
+      background-color: $color__purple-60;
+    }
+  }
+
+  &--taxonomy-icon {
+    width: rem(24px);
+    height: rem(24px);
+    fill: $color__blue-30;
+    margin-right: 1rem;
+
+    @include light-ui {
+      fill: $color__blue-90;
+    }
+  }
+
+  &--transition {
+    @extend .bx--left-nav__section--active;
+    position: absolute;
+    z-index: 9999;
+    transition: all .3s $bx---ease-out;
+    // transform: translateZ(0);
+
+    .bx--left-nav__section--taxonomy-icon {
+      width: rem(24px);
+      height: rem(24px);
+      fill: $color__white;
+      margin-right: 1rem;
+    }
+
+    &--50 {
+      transform: translateY(100px);
+    }
+
+    &--100 {
+      transform: translateY(150px);
+    }
+
+    &--0 {
+      transform: translateY(50px);
+    }
+  }
+
+  &--link {
+    @include font-size('16');
+    display: flex;
+    align-items: center;
+    color: $color__white;
+    text-decoration: none;
+    height: rem(50px);
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
+  }
+
+  &:hover {
+    background-color: $color__blue-30;
+
+    @include light-ui {
+      &[data-left-nav-section="Applications"] {
+        background-color: $color__teal-50;
+      }
+
+      &[data-left-nav-section="Services"] {
+        background-color: $color__purple-60;
+      }
+
+      &[data-left-nav-section="Infrastructure"] {
+        background-color: $color__blue-50;
+      }
+    }
+
+    .bx--left-nav__section--link {
+      @include font-smoothing;
+      font-weight: 700;
+      color: $color__white;
+    }
+
+    .bx--left-nav__section--taxonomy-icon {
+      fill: $color__white;
+    }
+  }
+}
+
+// MAIN NAV
+.bx--left-nav__main-nav {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5rem;
+  margin-top: 0; // Have to use margin, because setting position to anything other than static breaks the flyouts.
+  transition: all 250ms $bx---ease-out;
+  background-color: $color__navy-gray-1;
+  padding-top: 1rem;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
+
+  &--hidden {
+    display: none;
+  }
+
+  &--top {
+    margin-top: -100vh; // Also transform: translate breaks the flyouts.
+  }
+}
+
+.bx--main-nav__parent-item {
+  opacity: 1;
+  transition: opacity 200ms $bx--standard-easing;
+  cursor: pointer;
+  width: 100%;
+  padding: 0;
+  margin-bottom: .25rem;
+  background-color: $color__navy-gray-1;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
+
+  &--fade {
+    opacity: 0;
+  }
+
+  &--hidden {
+    display: none;
+  }
+
+  &--expanded {
+
+    .bx--parent-item__link--down-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.bx--parent-item__link {
+  @include font-size('14');
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: $color__white;
+  text-decoration: none;
+  padding: .5rem rem(20px);
+  transition: background-color $transition--base $bx--standard-easing;
+
+  @include light-ui {
+    color: $color__blue-90;
+  }
+
+  &:hover {
+    color: $color__blue-30;
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+      color: $color__teal-50;
+
+      .bx--left-nav-list__item-link--taxonomy-icon {
+        fill: $color__teal-50;
+      }
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+      color: $color__purple-60;
+
+      .bx--left-nav-list__item-link--taxonomy-icon {
+        fill: $color__purple-60;
+      }
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+      color: $color__blue-51;
+
+      .bx--left-nav-list__item-link--taxonomy-icon {
+        fill: $color__blue-51;
+      }
+    }
+  }
+
+  &--taxonomy-icon {
+    fill: $color__blue-30;
+    width: rem(24px);
+    height: rem(24px);
+    transition: $transition--base $bx--standard-easing;
+    margin-right: 1rem;
+
+    @include light-ui {
+      fill: $color__blue-90;
+    }
+  }
+
+  &--down-icon {
+    display: flex;
+    margin-left: auto;
+
+    svg {
+      fill: $color__white;
+      width: rem(10px);
+      height: rem(10px);
+      transition: $transition--base $bx--standard-easing;
+
+      @include light-ui {
+        fill: $color__blue-40;
+      }
+    }
+  }
+}
+
+.bx--main-nav__parent-item.bx--active-list-item {
+
+  .bx--parent-item__link {
+    background-color: $color__blue-30;
+    color: $color__blue-90;
+
+    &--taxonomy-icon {
+      fill: $color__blue-90;
+    }
+
+    &--down-icon svg {
+      fill: $color__blue-90;
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+      background-color: $color__teal-50;
+
+      &:hover {
+        color: $color__white;
+      }
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+      background-color: $color__purple-60;
+
+      &:hover {
+        color: $color__white;
+      }
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+      background-color: $color__blue-51;
+
+      &:hover {
+        color: $color__white;
+      }
+    }
+
+    &:hover {
+      color: $color__white;
+    }
+  }
+
+  @include light-ui {
+    .bx--parent-item__link {
+      color: $color__white;
+
+      &--taxonomy-icon {
+        fill: $color__white;
+      }
+
+      &--down-icon svg {
+        fill: $color__white;
+      }
+    }
+  }
+}
+
+.bx--main-nav__nested-list {
+  @include list;
+  max-height: 0;
+  transition: 300ms $bx--standard-easing;
+  padding: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  .bx--main-nav__parent-item--expanded & {
+    max-height: 20rem;
+    transition: 300ms $bx--standard-easing;
+    opacity: 1;
+    margin-top: .5rem;
+    overflow: visible;
+
+    .bx--nested-list__item {
+      opacity: 1;
+    }
+  }
+
+  .bx--nested-list__item {
+    width: 100%;
+    position: static;
+    margin-bottom: .25rem;
+    padding: 0;
+    transition: $transition--base;
+    opacity: 0;
+
+    &--link {
+      @include font-size('14');
+      color: $color__white;
+      padding: .5rem 1.35rem .5rem 2rem;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      position: relative;
+      margin-right: auto;
+
+      @include light-ui {
+        color: $color__blue-90;
+      }
+
+      &:hover {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+          color: $color__teal-50;
+
+          .bx--left-nav-list__item-link--taxonomy-icon {
+            fill: $color__teal-50;
+          }
+        }
+
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+          color: $color__purple-60;
+
+          .bx--left-nav-list__item-link--taxonomy-icon {
+            fill: $color__purple-60;
+          }
+        }
+
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+          color: $color__blue-51;
+
+          .bx--left-nav-list__item-link--taxonomy-icon {
+            fill: $color__blue-51;
+          }
+        }
+      }
+    }
+
+    &--icon svg {
+      width: rem(10px);
+      height: rem(10px);
+      fill: $color__white;
+
+      @include light-ui {
+        fill: $color__blue-90;
+      }
+    }
+
+    &.bx--active-list-item {
+      .bx--nested-list__item--icon svg {
+        fill: $color__white;
+
+        @include light-ui {
+          fill: $color__blue-90;
+        }
+      }
+    }
+  }
+}
+
+.bx--nested-list__flyout-menu {
+  display: none;
+  box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, .15);
+  min-width: auto;
+  white-space: nowrap;
+  outline: none;
+  position: absolute;
+  z-index: 9999;
+  color: $color__blue-90;
+
+  @include light-ui {
+    color: $color__white;
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    top: -3rem;
+    left: 0;
+    padding: 2rem;
+    z-index: -1;
+  }
+
+  &--displayed {
+    display: block;
+    border-left: 1px solid $color__blue-90;
+
+    @include light-ui {
+      border-color: $color__navy-gray-9;
+    }
+
+    .bx--flyout-menu__item {
+
+      background-color: $color__navy-gray-1;
+
+      @include light-ui {
+        background-color: $color__white;
+      }
+
+      &--link {
+        color: $color__white;
+        text-decoration: none;
+
+        @include light-ui {
+          color: $color__blue-90;
+        }
+      }
+
+      &:hover {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & .bx--flyout-menu__item--link {
+          color: $color__teal-50;
+        }
+
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & .bx--flyout-menu__item--link {
+          color: $color__purple-60;
+        }
+
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & .bx--flyout-menu__item--link {
+          color: $color__blue-51;
+        }
+      }
+    }
+  }
+
+  .bx--flyout-menu__item.bx--active-list-item {
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+      background-color: $color__teal-50;
+
+      & .bx--flyout-menu__item--link {
+        color: $color__white;
+      }
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+      background-color: $color__purple-60;
+
+      & .bx--flyout-menu__item--link {
+        color: $color__white;
+      }
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+      background-color: $color__blue-51;
+
+      & .bx--flyout-menu__item--link {
+        color: $color__white;
+      }
+    }
+  }
+
+  .bx--flyout-menu__item {
+    margin: 0;
+    height: rem(37px);
+    display: flex;
+    align-items: center;
+
+    &--link {
+      @include font-size('14');
+      padding: 0 1.75rem 0 1rem;
+    }
+  }
+}
+
+// DEMO CONTAINER
+// body,
+// .demo-container {
+//   background-color: $color__gray-3;
+// }
+
+.demo--container {
+  padding: 0 !important;
+  display: flex;
+}

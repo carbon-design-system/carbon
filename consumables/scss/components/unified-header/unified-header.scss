@@ -1,9 +1,10 @@
 // Local components
 @import '../../global/global';
 @import 'vars';
+@import 'left-nav-trigger';
 @import 'global-header';
-@import 'left-nav';
 @import 'topnav';
+@import 'left-nav-new';
 
 .bx--unified-header {
   position: fixed;

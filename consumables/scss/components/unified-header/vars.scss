@@ -1,33 +1,40 @@
 $height--top-nav: rem(36px);
 $height--global-nav: rem(50px);
 
-@keyframes animate {
-  from {
-    transform: translate3d(-100%, 0, 0);
-  }
+// SECTION SPECIFIC VARIABLES
 
-  to {
-    transform: translate3d(0, 0, 0);
-  }
+@mixin list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
 }
 
-// @keyframes pulse {
-// 0%   {
-//       transform: scale(1.2);
-//       opacity:0.7;
-//     }
-// 100% {
-//       transform: scale(1.4);
-//       opacity: 0.3;
-//     }
-// }
-// @keyframes pulse2 {
-// 0% {
-//   transform: scale(1.2);
-//   opacity:0.7;
-// }
-// 100% {
-//     transform: scale(1.6);
-//     opacity: 0;
-//   }
-// }
+@mixin link-style {
+  &:hover {
+    color: $color__blue-30;
+
+    .bx--global-light-ui.bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+      color: $color__teal-50;
+
+      .bx--left-nav-list__item-link--taxonomy-icon {
+        fill: $color__teal-50;
+      }
+    }
+
+    .bx--global-light-ui.bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+      color: $color__purple-60;
+
+      .bx--left-nav-list__item-link--taxonomy-icon {
+        fill: $color__purple-60;
+      }
+    }
+
+    .bx--global-light-ui.bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+      color: $color__blue-51;
+
+      .bx--left-nav-list__item-link--taxonomy-icon {
+        fill: $color__blue-51;
+      }
+    }
+  }
+}

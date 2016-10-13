@@ -36,13 +36,54 @@ export default class LeftNav {
 
     this.element = element;
 
+    this.leftNavSectionActive = false;
+
+    this.options = Object.assign({
+      // Data Attribute selectors
+      selectorLeftNav: '[data-left-nav]',
+      selectorLeftNavList: '[data-left-nav-list]',
+      selectorLeftNavNestedList: '[data-left-nav-nested-list]',
+      selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
+      selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
+      selectorLeftNavListItem: '[data-left-nav-item]',
+      selectorLeftNavListItemLink: '[data-left-nav-item-link]',
+      selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
+      selectorLeftNavArrowIcon: '[data-left-nav-icon]',
+      selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
+      selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+      selectorLeftNavSections: '[data-left-nav-sections]',
+      selectorLeftNavSection: '[data-left-nav-section]',
+      selectorLeftNavSectionLink: '[data-left-nav-section-link]',
+      selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
+      selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+      selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
+      selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
+      selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
+      selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
+      selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
+      // CSS Class Selectors
+      classActiveTrigger: 'bx--left-nav__trigger--active',
+      classActiveLeftNav: 'bx--left-nav--active',
+      classActiveLeftNavListItem: 'bx--active-list-item',
+      classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
+      classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
+      classItemHasChildren: 'bx--main-nav__parent-item--has-children',
+      classNavSection: 'bx--left-nav__section',
+      classNavSectionTransition: 'bx--left-nav__section--transition',
+      classNavSectionLink: 'bx--left-nav__section--link',
+      classNavHeaderTitle: 'bx--left-nav__header--title',
+      classItemFade: 'bx--main-nav__parent-item--fade',
+      classItemHidden: 'bx--main-nav__parent-item--hidden',
+      classListHidden: 'bx--left-nav__main-nav--hidden',
+      classListTop: 'bx--left-nav__main-nav--top',
+    }, options);
     this.options = Object.assign(this.constructor.options, options);
 
     this.constructor.components.set(this.element, this);
 
     this.hookOpenActions();
+    this.hookListSectionEvents();
     this.hookListItemsEvents();
-    this.animateInNav();
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
   }
 
@@ -105,46 +146,92 @@ export default class LeftNav {
     if (target.nodeType === Node.ELEMENT_NODE) {
       this.create(target, effectiveOptions);
     } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
+      [...target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
     }
   }
 
   /**
    * Closes the menu.
    */
-   closeMenu() {
-     this.element.classList.remove(this.options.classActiveLeftNav);
-     this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.remove(this.options.classActiveTrigger);
-   }
-
-   /**
-    * Toggles the menu to open and close.
-    */
-   toggleMenu() {
-     this.element.classList.toggle(this.options.classActiveLeftNav);
-     this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.toggle(this.options.classActiveTrigger);
-   }
-
-  /**
-   * Adds a animation delay to the list items as they appear on page load.
-   */
-  animateInNav() {
-    let counter = 0.1;
-    [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(item => {
-      item.classList.add('animate');
-      item.style.animationDelay = `${counter}s`;
-      counter += 0.05;
-    });
-    setTimeout(() => {
-      [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(item => {
-        item.classList.remove('animate');
-      });
-    }, 1000);
+  closeMenu() {
+    this.element.classList.remove(this.options.classActiveLeftNav);
+    this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.remove(this.options.classActiveTrigger);
+    this.element.querySelector(this.options.selectorLeftNav).parentNode.setAttribute('aria-expanded', 'false');
   }
 
   /**
-   * Adds event listeners for showing and hiding the left navigation
+   * Toggles the menu to open and close.
    */
+  toggleMenu() {
+    const leftNavContainer = this.element.querySelector(this.options.selectorLeftNav).parentNode;
+    this.element.classList.toggle(this.options.classActiveLeftNav);
+    this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.toggle(this.options.classActiveTrigger);
+    if (leftNavContainer.getAttribute('aria-expanded') === 'false') leftNavContainer.setAttribute('aria-expanded', 'true');
+    else leftNavContainer.setAttribute('aria-expanded', 'false');
+  }
+
+  /**
+   * Adds a transitional animation to the navSection
+   */
+  animateNavSection(selectedNav) {
+    const selectedNavLink = selectedNav.querySelector(this.options.selectorLeftNavSectionLink);
+    const leftNav = this.element.querySelector(this.options.selectorLeftNav);
+    const leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
+
+    selectedNav.classList.remove(this.options.classNavSection);
+    selectedNav.classList.remove(`${this.options.classNavSection}--'${selectedNavLink.textContent.toLowerCase()}`);
+    selectedNav.classList.add(this.options.classNavSectionTransition);
+    if (leftNavSections.children[0] === selectedNav) selectedNav.classList.add(`${this.options.classNavSectionTransition}--50`); // First child only move 50px
+    else selectedNav.classList.add(`${this.options.classNavSectionTransition}--100`); // Second move 100px
+    selectedNav.setAttribute('data-left-nav-section', selectedNavLink.textContent);
+    /* Not sure what trick more performant*/
+    setTimeout(() => {
+      selectedNav.classList.add(`${this.options.classNavSectionTransition}--0`);
+    }, 100); // Could probably use a promise here
+
+    selectedNavLink.classList.remove(this.options.classNavSectionLink);
+    selectedNavLink.classList.add(this.options.classNavHeaderTitle);
+    selectedNavLink.setAttribute('data-left-nav-current-section-title', '');
+    selectedNavLink.removeAttribute('data-left-nav-section-link');
+
+    this.element.insertBefore(selectedNav, leftNav);
+  }
+
+  /**
+   * Adds a transitional animation to the navigation items on nav section click
+   */
+  animateNavList(selectedNavTitle) {
+    const currentLeftNavList = this.element.querySelector(`${this.options.selectorLeftNavList}:not(.bx--left-nav__main-nav--hidden)`);
+    const newLeftNavList = this.element.querySelector(`[data-left-nav-list=${selectedNavTitle}]`);
+    const currentLeftNavItems = [...currentLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)].reverse();
+    const newLeftNavItems = [...newLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)];
+
+    const fadeOutTime = 300;
+    let counter = 0;
+    const counterIteration = fadeOutTime / currentLeftNavItems.length; // Length of animation divided by number of items
+    currentLeftNavItems.forEach(item => {
+      item.setAttribute('tabIndex', '-1');
+      setTimeout(() => {
+        item.classList.add(this.options.classItemFade);
+      }, counter);
+      counter += counterIteration;
+    });
+
+    newLeftNavItems.forEach(item => {
+      item.setAttribute('tabIndex', '0');
+      item.classList.remove(this.options.classItemFade);
+    });
+
+    setTimeout(() => {
+      currentLeftNavList.classList.add(this.options.classListHidden);
+      currentLeftNavList.classList.add(this.options.classListTop);
+      currentLeftNavList.setAttribute('aria-hidden', 'true');
+      newLeftNavList.classList.remove(this.options.classListHidden);
+      setTimeout(() => { newLeftNavList.classList.remove(this.options.classListTop); }, 100);
+      newLeftNavList.setAttribute('aria-hidden', 'false');
+    }, fadeOutTime + 100); // Wait for items to fade out.
+  }
+
   hookOpenActions() {
     const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
     const closeBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleClose);
@@ -183,34 +270,29 @@ export default class LeftNav {
   }
 
   /**
+   * Addes Event listeners to list sections
+   */
+  hookListSectionEvents() {
+    const leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
+    leftNavSections.addEventListener('click', (evt) => {
+      this.handleSectionItemClick(evt, leftNavSections);
+    });
+
+    leftNavSections.addEventListener('keydown', (evt) => {
+      if (evt.which === 13) {
+        this.handleSectionItemClick(evt, leftNavSections);
+        this.element.querySelector(this.options.selectorLeftNavCurrentSectionTitle).focus();
+      }
+    });
+  }
+
+  /**
    * Adds event listeners to list items
    */
   hookListItemsEvents() {
-    const leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
-    leftNavList.addEventListener('click', (evt) => {
-      const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
-      if (leftNavItem) {
-        const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
-        const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
-        const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
-        if (flyoutItem) {
-          this.addActiveListItem(flyoutItem);
-        } else if (childItem) {
-          if (childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-            const flyoutMenu = childItem.querySelector(this.options.selectorLeftNavFlyoutMenu);
-            flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
-          } else {
-            this.addActiveListItem(childItem);
-          }
-        } else if (hasChildren) {
-          this.handleNestedListClick(leftNavItem);
-        } else {
-          this.addActiveListItem(leftNavItem);
-        }
-      }
-    });
-    leftNavList.addEventListener('keydown', (evt) => {
-      if (evt.which === 13) {
+    const leftNavList = [...this.element.querySelectorAll(this.options.selectorLeftNavList)];
+    leftNavList.forEach(list => {
+      list.addEventListener('click', (evt) => {
         const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
         if (leftNavItem) {
           const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
@@ -219,7 +301,10 @@ export default class LeftNav {
           if (flyoutItem) {
             this.addActiveListItem(flyoutItem);
           } else if (childItem) {
-            if (!childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+            if (childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+              const flyoutMenu = childItem.querySelector(this.options.selectorLeftNavFlyoutMenu);
+              flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
+            } else {
               this.addActiveListItem(childItem);
             }
           } else if (hasChildren) {
@@ -228,16 +313,43 @@ export default class LeftNav {
             this.addActiveListItem(leftNavItem);
           }
         }
-      }
+      });
+      list.addEventListener('keydown', (evt) => {
+        if (evt.which === 13) {
+          const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+          if (leftNavItem) {
+            const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
+            const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+            const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
+            if (flyoutItem) {
+              this.addActiveListItem(flyoutItem);
+            } else if (childItem) {
+              if (!childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+                this.addActiveListItem(childItem);
+              } else {
+                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
+                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${childItem.offsetTop - this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
+                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${childItem.offsetLeft + Math.round(childItem.offsetWidth)}px`;
+              }
+            } else if (hasChildren) {
+              this.handleNestedListClick(leftNavItem);
+            } else {
+              this.addActiveListItem(leftNavItem);
+            }
+          }
+        }
+      });
     });
-    const flyouts = [... this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)];
+    const flyouts = [...this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)];
     flyouts.forEach(flyout => {
       flyout.addEventListener('mouseenter', () => {
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
         flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${flyout.offsetTop - this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
         flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${flyout.offsetLeft + Math.round(flyout.offsetWidth)}px`;
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.add(this.options.classFlyoutDisplayed);
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.toggle(this.options.classFlyoutDisplayed);
       });
       flyout.addEventListener('mouseleave', () => {
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'true');
         flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
       });
     });
@@ -247,8 +359,9 @@ export default class LeftNav {
    * Hides all flyout menus.
    */
   hideAllFlyoutMenus() {
-    const flyoutMenus = [... this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)];
+    const flyoutMenus = [...this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)];
     flyoutMenus.forEach(menu => {
+      menu.setAttribute('aria-hidden', 'true');
       menu.classList.remove(this.options.classFlyoutDisplayed);
     });
   }
@@ -273,6 +386,7 @@ export default class LeftNav {
       }
     });
     item.classList.add(this.options.classActiveLeftNavListItem);
+    this.closeMenu();
     this.hideAllFlyoutMenus();
     this.closeMenu();
   }
@@ -316,14 +430,68 @@ export default class LeftNav {
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
     this.hideAllFlyoutMenus();
     toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
-    const listItems = [... listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
+    const listItems = [...listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
     listItems.forEach(item => {
       if (isOpen) {
+        listItem.querySelector(this.options.selectorLeftNavNestedList).setAttribute('aria-hidden', 'true');
         item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = -1;
       } else {
+        listItem.querySelector(this.options.selectorLeftNavNestedList).setAttribute('aria-hidden', 'false');
         item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = 0;
       }
     });
+  }
+
+  handleSectionItemClick(evt, leftNavSections) { // Sorry
+    const leftNavSectionItem = eventMatches(evt, this.options.selectorLeftNavSection);
+    if (leftNavSectionItem) {
+      const selectedLeftNavSectionItem = this.element.querySelector(this.options.selectorLeftNavCurrentSection);
+      const selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(this.options.selectorLeftNavCurrentSectionTitle);
+      const selectedLeftNavSectionItemIcon = this.element.querySelector(this.options.selectorLeftNavCurrentSectionIcon);
+      const selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
+      const leftNavSectionItemLink = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionLink);
+      const leftNavSectionItemIcon = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionIcon);
+      const leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
+
+      if (this.leftNavSectionActive) {
+        return;
+      }
+      this.leftNavSectionActive = true;
+
+      const newLeftNavSectionItem = document.createElement('li');
+      newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionItemTitle.textContent);
+      newLeftNavSectionItem.setAttribute('tabindex', 0);
+      newLeftNavSectionItem.classList.add(this.options.classNavSection);
+      newLeftNavSectionItem.classList.add(`${this.options.classNavSection}--${selectedLeftNavSectionItemTitle.textContent.toLowerCase()}`);
+
+      const newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
+      // IE11 doesn't support classList on SVG, must revert to className
+      newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
+      newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
+      newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionItemTitle.textContent);
+
+      const newLeftNavSectionItemLink = document.createElement('a');
+      newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
+      newLeftNavSectionItemLink.classList.add(this.options.classNavSectionLink);
+      newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
+
+      this.animateNavSection(leftNavSectionItem);
+      this.animateNavList(leftNavSectionItemLink.textContent);
+
+      newLeftNavSectionItem.appendChild(newLeftNavSectionItemIcon);
+      newLeftNavSectionItem.appendChild(newLeftNavSectionItemLink);
+      leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
+
+      setTimeout(() => {
+        selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
+        selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionItemLink.textContent);
+        selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionItemLink.textContent);
+        selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
+
+        leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
+        this.leftNavSectionActive = false;
+      }, 450); // Wait for nav items to animate
+    }
   }
 
   release() {
@@ -371,18 +539,31 @@ LeftNav.options = {
   selectorLeftNavArrowIcon: '[data-left-nav-icon]',
   selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
   selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+  selectorLeftNavSections: '[data-left-nav-sections]',
   selectorLeftNavSection: '[data-left-nav-section]',
+  selectorLeftNavSectionLink: '[data-left-nav-section-link]',
+  selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
   selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+  selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
+  selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
   selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
   selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
   selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
   // CSS Class Selectors
-  classActiveLeftNav: 'bx--left-nav--active',
-  classActiveLeftNavListItem: 'bx--left-nav-list__item--active',
   classActiveTrigger: 'bx--left-nav__trigger--active',
-  classExpandedLeftNavListItem: 'bx--left-nav-list__item--expanded',
-  classFlyoutDisplayed: 'bx--left-nav-list--flyout--displayed',
-  classItemHasChildren: 'bx--left-nav-list__item--has-children',
+  classActiveLeftNav: 'bx--left-nav--active',
+  classActiveLeftNavListItem: 'bx--active-list-item',
+  classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
+  classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
+  classItemHasChildren: 'bx--main-nav__parent-item--has-children',
+  classNavSection: 'bx--left-nav__section',
+  classNavSectionTransition: 'bx--left-nav__section--transition',
+  classNavSectionLink: 'bx--left-nav__section--link',
+  classNavHeaderTitle: 'bx--left-nav__header--title',
+  classItemFade: 'bx--main-nav__parent-item--fade',
+  classItemHidden: 'bx--main-nav__parent-item--hidden',
+  classListHidden: 'bx--left-nav__main-nav--hidden',
+  classListTop: 'bx--left-nav__main-nav--top',
 };
 
 /**

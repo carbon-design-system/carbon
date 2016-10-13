@@ -26,7 +26,7 @@
       &:hover,
       &:focus {
 
-        .logo__text {
+        .bx--logo__text {
           color: $color__blue-20;
         }
       }
@@ -96,7 +96,7 @@
     }
   }
 
-  .logo {
+  .bx--logo {
     &__image {
       cursor: pointer;
       position: relative;

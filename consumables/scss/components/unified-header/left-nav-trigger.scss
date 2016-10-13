@@ -1,0 +1,163 @@
+.bx--left-nav__trigger {
+  width: rem(60px);
+  height: $height--global-nav;
+  position: relative;
+  transition: $transition--base $bx--standard-easing;
+  cursor: pointer;
+  z-index: 9999;
+
+  &--btn {
+    position: absolute;
+    top: 1.5rem;
+    left: rem(20px);
+    width: 100%;
+    transition: $transition--base $bx--standard-easing;
+    display: flex;
+
+    span,
+    span:before,
+    span:after {
+      height: rem(2px);
+      width: rem(20px);
+      cursor: pointer;
+      position: absolute;
+      display: block;
+      content: '';
+      transition: all $transition--base ease;
+    }
+
+    span:before {
+      top: rem(-6px);
+    }
+
+    span:after {
+      bottom: rem(-6px);
+    }
+
+    .bx--left-nav__trigger--active & {
+      left: rem(18px);
+
+      span:before,
+      span:after {
+        top: 0;
+        width: rem(25.46px);
+      }
+
+      span:before {
+        transform: rotate(45deg);
+      }
+
+      span:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color__blue-30;
+
+    span,
+    span:before,
+    span:after {
+      background: $color__white;
+    }
+  }
+
+  &--applications {
+
+    span,
+    span:before,
+    span:after {
+      background: $color__teal-50;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $color__teal-50;
+
+      span,
+      span:before,
+      span:after {
+        background: $color__white;
+      }
+    }
+
+    &.bx--left-nav__trigger--active {
+
+      span {
+        background: transparent;
+      }
+    }
+  }
+
+  &--services {
+
+    span,
+    span:before,
+    span:after {
+      background: $color__purple-60;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $color__purple-60;
+
+      span,
+      span:before,
+      span:after {
+        background: $color__white;
+      }
+    }
+
+    &.bx--left-nav__trigger--active {
+
+      span {
+        background: transparent;
+      }
+    }
+  }
+
+  &--infrastructure {
+
+    span,
+    span:before,
+    span:after {
+      background: $color__blue-51;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $color__blue-51;
+
+      span,
+      span:before,
+      span:after {
+        background: $color__white;
+      }
+    }
+
+    &.bx--left-nav__trigger--active {
+
+      span {
+        background: transparent;
+      }
+    }
+  }
+}
