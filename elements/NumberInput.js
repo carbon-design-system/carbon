@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Icon from './Icon';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/base-elements/number-input/number-input.scss';
@@ -6,142 +6,121 @@ import '@console/bluemix-components/consumables/scss/base-elements/number-input/
 class NumberInput extends Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
-    onClick: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
-    onChange: React.PropTypes.func,
-    step: React.PropTypes.number,
-    type: React.PropTypes.string,
-    value: React.PropTypes.number,
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    max: PropTypes.number,
+    min: PropTypes.number,
+    onChange: PropTypes.func,
+    onClick: PropTypes.func,
+    step: PropTypes.number,
+    value: PropTypes.number,
   }
 
   static defaultProps = {
-    className: 'bx--number',
     disabled: false,
-    onFocus: () => {},
-    onBlur: () => {},
-    onClick: () => {},
-    onKeyDown: () => {},
-    onChange: () => {},
+    label: ' ',
     step: 1,
-    type: 'number',
     value: 0,
+    onClick: () => {},
+    onChange: () => {},
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: this.props.value,
-      disabled: this.props.disabled,
-      focus: false,
-    };
+  state = {
+    value: this.props.min || this.props.value,
   }
 
-  handleFocus = (evt) => {
-    if (!this.state.disabled) {
-      this.setState({
-        focus: true,
-      });
-      this.props.onFocus(evt);
-    }
-  }
-
-  handleBlur = (evt) => {
-    if (!this.state.disabled) {
-      this.setState({
-        focus: false,
-      });
-      this.props.onBlur(evt);
-    }
-  }
-
-  handleKeyDown = (evt) => {
-    let { value } = this.state;
-    const key = evt.keyCode;
-
-    if (!this.state.disabled) {
-      if (key === 38) {
-        value++;
-      } else if (key === 40) {
-        value--;
-      }
-      this.props.onKeyDown(evt);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      this.setState({ value: nextProps.value });
     }
   }
 
   handleChange = (evt) => {
-    if (!this.state.disabled) {
+    if (!this.props.disabled) {
       this.setState({
         value: evt.target.value,
       });
+
+      this.props.onChange(evt);
     }
   }
 
-  handleClick = (evt) => {
+  handleUpArrowClick = (evt) => {
     let { value } = this.state;
-    const arrow = evt.target.classList;
+    const { disabled, max, step } = this.props;
 
-    if (!this.state.disabled) {
-      if (arrow.contains('bx--number__arrow--icon-up')) {
-        ++value;
+    if (!disabled) {
+      if ((max !== undefined && value < max) || max === undefined) {
+        value += step;
         this.setState({
           value,
         });
-      } else if (arrow.contains('bx--number__arrow--icon-down')) {
-        if (value > 0) {
-          --value;
-          this.setState({
-            value,
-          });
-        }
+
+        this.props.onClick(evt);
+        this.props.onChange(evt);
       }
     }
+  }
 
-    this.props.onClick(evt);
+  handleDownArrowClick = (evt) => {
+    let { value } = this.state;
+    const { disabled, min, step } = this.props;
+
+    if (!disabled) {
+      if ((min !== undefined && value > min) || min === undefined) {
+        value -= step;
+        this.setState({
+          value,
+        });
+        this.props.onClick(evt);
+        this.props.onChange(evt);
+      }
+    }
   }
 
   render() {
-    const numberInputClasses = classNames({
-      'bx--number': true,
-      [this.props.className]: this.props.className,
-    });
+    const {
+      className,
+      disabled,
+      id,
+      label,
+      max,
+      min,
+      step,
+      ...other,
+    } = this.props;
+
+    const numberInputClasses = classNames(
+      'bx--number',
+      className,
+    );
 
     const props = {
-      disabled: this.props.disabled,
-      onClick: this.handleClick,
-      onBlur: this.handleBlur,
-      onFocus: this.handleFocus,
-      onKeyDown: this.handleKeyDown,
+      disabled,
+      id,
+      max,
+      min,
+      step,
       onChange: this.handleChange,
       value: this.state.value,
-      type: this.props.type,
-      step: this.props.step,
     };
 
     return (
-      <div data-numberinput className={numberInputClasses}>
-        <label htmlFor="numberinput-id" className="bx--form__label">{this.props.children}</label>
+      <div className={numberInputClasses}>
+        <label htmlFor={id} className="bx--form__label">{label}</label>
         <input
-          id="numberinput-id"
           className="bx--number__input"
+          type="number"
           pattern="[0-9]*"
-          min="0"
+          {...other}
           {...props}
         />
-        <span
-          className="bx--number__arrow--up bx--number__arrow--icon-up"
-          onClick={props.onClick}
-        >
+        <span onClick={this.handleUpArrowClick} className="bx--number__arrow--up bx--number__arrow--icon-up">
           <Icon className="icon--up bx--number__arrow--icon-up" name="chevron-up" />
         </span>
-        <span
-          className="bx--number__arrow--down bx--number__arrow--icon-down"
-          onClick={props.onClick}
-        >
+        <span onClick={this.handleDownArrowClick} className="bx--number__arrow--down bx--number__arrow--icon-down">
           <Icon className="icon--down bx--number__arrow--icon-down" name="chevron-down" />
         </span>
       </div>

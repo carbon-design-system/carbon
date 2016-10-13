@@ -1,16 +1,18 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { action, storiesOf } from '@kadira/storybook';
 import AppContainer from '../../containers/AppContainer';
 import NumberInput from '../../elements/NumberInput';
 
 const numberInputProps = {
-  onBlur: () => { console.log('blur')},
-  onClick: () => { console.log('click')},
-  onFocus: () => { console.log('focus')},
-  onKeyDown: () => { console.log('keydown')},
   className: 'some-class',
-  type: 'number',
-  step: 1,
+  id: 'tj-input',
+  label: 'Number Input',
+  onChange: action('onChange'),
+  onClick: action('onClick'),
+  min: 0,
+  max: 100,
+  value: 50,
+  step: 10,
 };
 
 storiesOf('NumberInput', module)
@@ -19,9 +21,30 @@ storiesOf('NumberInput', module)
       {story()}
     </AppContainer>
   ))
-  .add('enabled', () => (
-    <NumberInput {...numberInputProps}>Number Input</NumberInput>
+  .addWithInfo(
+    'enabled',
+    `
+      The example below shows an enabled Number Input component. The Number Input component can be
+      passed a starting value, a min, a max, and the step.
+    `,
+    () => (
+      <NumberInput {...numberInputProps} />
+    )
+  );
+
+storiesOf('NumberInput', module)
+  .addDecorator((story) => (
+    <AppContainer>
+      {story()}
+    </AppContainer>
   ))
-  .add('disabled', () => (
-    <NumberInput disabled {...numberInputProps}>Number Input</NumberInput>
-  ));
+  .addWithInfo(
+    'disabled',
+    `
+      The example below shows an disabled Number Input component. The Number Input component can be
+      passed a starting value, a min, a max, and the step.
+    `,
+    () => (
+      <NumberInput disabled {...numberInputProps} />
+    )
+  );
