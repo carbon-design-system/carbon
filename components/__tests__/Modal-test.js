@@ -6,6 +6,7 @@ import { shallow, mount } from 'enzyme';
 describe('Modal', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<Modal className="extra-class" />);
+    const mounted = mount(<Modal className="extra-class" />);
 
     it('has the expected classes', () => {
       expect(wrapper.hasClass('bx--modal')).toEqual(true);
@@ -27,6 +28,20 @@ describe('Modal', () => {
     it('should set id if one is passed via props', () => {
       const modal = shallow(<Modal id="modal-1" />);
       expect(modal.props().id).toEqual('modal-1');
+    });
+
+    it('has the expected default iconDescription', () => {
+      expect(mounted.props().iconDescription).toEqual('close the modal');
+    });
+
+    it('adds new iconDescription when passed via props', () => {
+      mounted.setProps({ iconDescription: 'new description' });
+      expect(mounted.props().iconDescription).toEqual('new description');
+    });
+
+    it('should have iconDescription match Icon component description prop', () => {
+      const matches = mounted.props().iconDescription === mounted.find('Icon').props().description;
+      expect(matches).toEqual(true);
     });
   });
 

@@ -97,6 +97,7 @@ class OverflowMenu extends Component {
             height="40px"
             viewBox="0 0 14 60"
             style={overriddenStyles}
+            description="open and close the menu"
           />
           <ul className="bx--overflow-menu__options">
             {children}

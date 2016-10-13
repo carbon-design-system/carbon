@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import Icon from '../elements/Icon';
 import '@console/bluemix-components/consumables/scss/components/dropdown/dropdown.scss';
 
-class Dropdown extends React.Component {
+class Dropdown extends Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    defaultText: React.PropTypes.string,
-    value: React.PropTypes.string,
-    tabIndex: React.PropTypes.number,
-    onClick: React.PropTypes.func,
-    onChange: React.PropTypes.func.isRequired,
-    selectedText: React.PropTypes.string,
-    open: React.PropTypes.bool,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    defaultText: PropTypes.string,
+    value: PropTypes.string,
+    tabIndex: PropTypes.number,
+    onClick: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
+    selectedText: PropTypes.string,
+    open: PropTypes.bool,
+    iconDescription: PropTypes.string,
   }
 
   static defaultProps = {
     tabIndex: 0,
     open: false,
+    iconDescription: 'open list of options',
+    onChange: () => {},
   }
 
   state = {
@@ -44,6 +47,7 @@ class Dropdown extends React.Component {
     const {
       tabIndex,
       defaultText, // eslint-disable-line no-unused-vars
+      iconDescription,
       ...other,
     } = this.props;
 
@@ -68,11 +72,9 @@ class Dropdown extends React.Component {
         tabIndex={tabIndex}
       >
         <li className="bx--dropdown__menu-text">{this.state.selectedText}</li>
-        <Icon name="down-arrow" className="bx--dropdown__arrow" fill="#5aaafa" />
+        <Icon name="down-arrow" className="bx--dropdown__arrow" fill="#5aaafa" description={iconDescription} />
         <li>
-          <ul className="bx--dropdown__list">
-              {children}
-          </ul>
+          <ul className="bx--dropdown__list">{children}</ul>
         </li>
       </ul>
     );

@@ -1,24 +1,26 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import Icon from '../elements/Icon';
 import '@console/bluemix-components/consumables/scss/base-elements/select/select.scss';
 import '@console/bluemix-components/consumables/scss/base-elements/forms/forms.scss';
 
-class Select extends React.Component {
+class Select extends Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    id: React.PropTypes.string.isRequired,
-    labelText: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
-    defaultValue: React.PropTypes.any,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    labelText: PropTypes.string,
+    onChange: PropTypes.func,
+    disabled: PropTypes.bool,
+    defaultValue: PropTypes.any,
+    iconDescription: PropTypes.string,
   };
 
   static defaultProps = {
     disabled: false,
     labelText: 'Select',
+    iconDescription: 'open list of options',
   };
 
   render() {
@@ -32,6 +34,7 @@ class Select extends React.Component {
       labelText,
       disabled,
       children,
+      iconDescription,
       ...other,
     } = this.props;
 
@@ -46,7 +49,7 @@ class Select extends React.Component {
         >
           {children}
         </select>
-        <Icon name="down-arrow" className="bx--select__arrow" description="select-arrow" fill="#5aaafa" />
+        <Icon name="down-arrow" className="bx--select__arrow" fill="#5aaafa" description={iconDescription} />
       </div>
     );
   }

@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from '../elements/Icon';
 import '@console/bluemix-components/consumables/scss/components/modals/modals.scss';
 
-class Modal extends React.Component {
+class Modal extends Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    passiveModal: React.PropTypes.bool,
-    onRequestClose: React.PropTypes.func,
-    id: React.PropTypes.string,
-    modalHeading: React.PropTypes.string,
-    modalLabel: React.PropTypes.string,
-    secondaryButtonText: React.PropTypes.string,
-    primaryButtonText: React.PropTypes.string,
-    open: React.PropTypes.bool,
-    onRequestSubmit: React.PropTypes.func,
-    onClick: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    passiveModal: PropTypes.bool,
+    onRequestClose: PropTypes.func,
+    id: PropTypes.string,
+    modalHeading: PropTypes.string,
+    modalLabel: PropTypes.string,
+    secondaryButtonText: PropTypes.string,
+    primaryButtonText: PropTypes.string,
+    open: PropTypes.bool,
+    onRequestSubmit: PropTypes.func,
+    onClick: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    iconDescription: PropTypes.string,
   }
 
   static defaultProps = {
@@ -27,6 +28,8 @@ class Modal extends React.Component {
     onClick: () => {},
     onKeyDown: () => {},
     passiveModal: false,
+    iconDescription: 'close the modal',
+
   };
 
   handleKeyDown = (evt) => {
@@ -53,6 +56,7 @@ class Modal extends React.Component {
       open,
       onRequestClose,
       onRequestSubmit,
+      iconDescription,
       ...other,
     } = this.props;
 
@@ -73,7 +77,7 @@ class Modal extends React.Component {
         <div className="bx--modal-content">
           <div className="bx--modal__header">
             <button className="bx--modal__close" type="button" onClick={onRequestClose}>
-              <Icon name="close" className="bx--modal__close--icon" />
+              <Icon name="close" className="bx--modal__close--icon" description={iconDescription} />
             </button>
             {modalLabelContent}
             <h2 className="bx--modal-content__heading">{modalHeading}</h2>
@@ -86,7 +90,7 @@ class Modal extends React.Component {
         {modalLabelContent}
         <h2 className="bx--modal-content__heading">{modalHeading}</h2>
         <button className="bx--modal__close" type="button" onClick={onRequestClose}>
-          <Icon name="close" className="bx--modal__close--icon" />
+          <Icon name="close" className="bx--modal__close--icon" description={iconDescription} />
         </button>
         <div className="bx--modal-content">
           {this.props.children}

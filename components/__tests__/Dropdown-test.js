@@ -8,7 +8,13 @@ describe('Dropdown', () => {
     const wrapper = shallow(
       <Dropdown
         className="extra-class"
-        onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
+        defaultText="Choose something.."
+      />
+    );
+
+    const mounted = mount(
+      <Dropdown
+        className="extra-class"
         defaultText="Choose something.."
       />
     );
@@ -27,14 +33,26 @@ describe('Dropdown', () => {
 
     it('should render children as expected', () => {
       const dropdown = shallow(
-        <Dropdown
-          onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
-        >
+        <Dropdown>
           <div className="test-child"></div>
           <div className="test-child"></div>
         </Dropdown>
       );
       expect(dropdown.find('.test-child').length).toEqual(2);
+    });
+
+    it('has the expected default iconDescription', () => {
+      expect(mounted.props().iconDescription).toEqual('open list of options');
+    });
+
+    it('adds new iconDescription when passed via props', () => {
+      mounted.setProps({ iconDescription: 'new description' });
+      expect(mounted.props().iconDescription).toEqual('new description');
+    });
+
+    it('should have iconDescription match Icon component description prop', () => {
+      const matches = mounted.props().iconDescription === mounted.find('Icon').props().description;
+      expect(matches).toEqual(true);
     });
   });
 
@@ -42,10 +60,7 @@ describe('Dropdown', () => {
     const onClick = jest.fn();
 
     const wrapper = mount(
-      <Dropdown
-        onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
-        onClick={onClick}
-      >
+      <Dropdown onClick={onClick}>
         <DropdownItem className="test-child" itemText="test-child" value="test-child" />
       </Dropdown>
     );

@@ -32,6 +32,20 @@ describe('Select', () => {
       it('applies extra classes specified via className', () => {
         expect(selectContainer.hasClass('extra-class')).toEqual(true);
       });
+
+      it('has the expected default iconDescription', () => {
+        expect(wrapper.props().iconDescription).toEqual('open list of options');
+      });
+
+      it('adds new iconDescription when passed via props', () => {
+        wrapper.setProps({ iconDescription: 'new description' });
+        expect(wrapper.props().iconDescription).toEqual('new description');
+      });
+
+      it('should have iconDescription match Icon component description prop', () => {
+        const matches = wrapper.props().iconDescription === wrapper.find('Icon').props().description;
+        expect(matches).toEqual(true);
+      });
     });
 
     describe('select', () => {
