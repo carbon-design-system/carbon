@@ -1,17 +1,15 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { action, storiesOf } from '@kadira/storybook';
 import AppContainer from '../../containers/AppContainer';
-import Textarea from '../../elements/Textarea';
+import Textarea from '../../elements/TextArea';
+import centered from '@kadira/react-storybook-decorator-centered';
 
 const textareaProps = {
   children: 'This is a Label',
   className: 'some-class',
-  onBlur: () => { console.log('Blur'); },
-  onChange: () => { console.log('Changed'); },
-  onClick: () => { console.log('Clicked'); },
-  onFocus: () => { console.log('Focus'); },
+  onChange: action('onChange'),
+  onClick: action('onClick'),
   placeholder: 'Hint text here',
-  name: 'myTextarea',
   id: 'test2',
   cols: 50,
   rows: 4,
@@ -23,10 +21,10 @@ storiesOf('Textarea', module)
       {story()}
     </AppContainer>
   ))
+  .addDecorator(centered)
   .add('enabled', () => (
     <Textarea {...textareaProps} />
   ))
   .add('disabled', () => (
     <Textarea disabled {...textareaProps} placeholder={'Disabled'} />
   ));
-
