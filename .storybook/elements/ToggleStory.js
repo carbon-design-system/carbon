@@ -1,16 +1,10 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf, action } from '@kadira/storybook';
 import AppContainer from '../../containers/AppContainer';
 import Toggle from '../../elements/Toggle';
 
 const toggleProps = {
-  onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
-  onClick: () => { console.log('click'); }, // eslint-disable-line no-console
-  onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
-  onMouseDown: () => { console.log('mouseDown'); }, // eslint-disable-line no-console
-  onMouseEnter: () => { console.log('mouseEnter'); }, // eslint-disable-line no-console
-  onMouseLeave: () => { console.log('mouseLeave'); }, // eslint-disable-line no-console
-  onMouseUp: () => { console.log('mouseUp'); }, // eslint-disable-line no-console
+  onToggle: action('toggle'),
   className: 'some-class',
 };
 
@@ -20,9 +14,13 @@ storiesOf('Toggle', module)
     {story()}
     </AppContainer>
   ))
-  .add('toggle', () => (
-    <Toggle {...toggleProps} className="some-class" id="toggle-1" />
-  ))
-  .add('disabled', () => (
-    <Toggle {...toggleProps} disabled />
-  ));
+  .addWithInfo(
+    ``,
+    `
+      The example below shows an uncontrolled Toggle component. To use the Toggle component as a controlled component, set the toggled property.
+      Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled prop will only set the value initially.
+    `,
+    () => (
+      <Toggle {...toggleProps} className="some-class" id="toggle-1" />
+    )
+  );

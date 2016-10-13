@@ -1,16 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import InternalSwitch from '../internal/InternalSwitch';
 import '@console/bluemix-components/consumables/scss/base-elements/toggle/toggle.scss';
 
 class Toggle extends React.Component {
   static propTypes = {
-    defaultToggled: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    children: React.PropTypes.node,
     className: React.PropTypes.string,
+    defaultToggled: React.PropTypes.bool,
     onToggle: React.PropTypes.func,
-    id: React.PropTypes.string,
+    id: React.PropTypes.string.isRequired,
     toggled: React.PropTypes.bool,
     labelA: React.PropTypes.string.isRequired,
     labelB: React.PropTypes.string.isRequired,
@@ -18,77 +15,52 @@ class Toggle extends React.Component {
 
   static defaultProps = {
     defaultToggled: false,
-    disabled: false,
     labelA: 'Off',
     labelB: 'On',
+    onToggle() { },
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      switched: (this.props.toggled || this.props.defaultToggled),
-    };
-  }
-
-  setToggled(newToggledValue) {
-    this.refs.internalSwitch.setSwitched(newToggledValue);
-  }
-
-  isToggled() {
-    return this.refs.internalSwitch.isSwitched();
-  }
-
-  handleStateChange = (newSwitched) => {
-    this.setState({
-      switched: newSwitched,
-    });
-  };
-
-  handleToggle = (event, isInputChecked) => {
-    if (this.props.onToggle) {
-      this.props.onToggle(event, isInputChecked);
-    }
+  handleToggle = (evt) => {
+    this.props.onToggle(this.input.checked, this.props.id, evt);
   };
 
   render() {
     const {
+      className,
       defaultToggled,
       onToggle, // eslint-disable-line no-unused-vars
-      toggled,
+      toggled, // eslint-disable-line no-unused-vars
       id,
       labelA,
       labelB,
       ...other,
     } = this.props;
 
-    const toggleClasses = classNames({
-      'bx--toggle': true,
-      [this.props.className]: this.props.className,
-    });
+    const wrapperClasses = classNames(
+      'toggleWrapper',
+      className
+    );
 
-    const internalSwitchProps = {
-      ref: 'internalSwitch',
-      inputType: 'checkbox',
-      switched: this.state.switched,
-      onSwitch: this.handleToggle,
-      onParentShouldUpdate: this.handleStateChange,
-    };
+    const checkedProps = {};
 
     if (this.props.hasOwnProperty('toggled')) {
-      internalSwitchProps.checked = toggled;
-    } else if (this.props.hasOwnProperty('defaultToggled')) {
-      internalSwitchProps.defaultChecked = defaultToggled;
+      checkedProps.checked = toggled;
+    } else {
+      checkedProps.defaultChecked = defaultToggled;
     }
 
     return (
-      <div className="toggleWrapper">
-        <InternalSwitch
+      <div className={wrapperClasses}>
+        <input
           {...other}
-          {...internalSwitchProps}
-          className={toggleClasses}
+          {...checkedProps}
+          type="checkbox"
           id={id}
+          className="bx--toggle"
+          onChange={this.handleToggle}
+          ref={el => { this.input = el; }}
         />
+
         <label className="bx--toggle__label" htmlFor={id}>
           <span className="bx--toggle__text--left">{labelA}</span>
           <span className="bx--toggle__appearance"></span>
