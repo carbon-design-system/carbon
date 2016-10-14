@@ -1,0 +1,21 @@
+//-----------------------------
+// Small Buttons
+//-----------------------------
+
+// import-once
+@import '../../import-once';
+
+@include exports('button--small') {
+
+  // Small button modifier classes
+  .bx--btn--sm {
+    height: rem(32px);
+    padding: 0 1rem;
+  }
+
+  a.bx--btn--sm {
+    padding: .3rem 1rem;
+    vertical-align: middle;
+    line-height: normal;
+  }
+}

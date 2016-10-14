@@ -99,8 +99,9 @@
     color: $color__blue-51;
 
     &:hover {
-      border: 2px solid $hover-bg;
+      border: 2px solid $color__blue-51;
       color: $color__white;
+      background-color: $color__blue-51;
     }
   }
 }
