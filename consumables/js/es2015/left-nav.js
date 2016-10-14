@@ -70,6 +70,7 @@ export default class LeftNav {
       classItemHasChildren: 'bx--main-nav__parent-item--has-children',
       classNavSection: 'bx--left-nav__section',
       classNavSectionTransition: 'bx--left-nav__section--transition',
+      classNavSectionAnchor: 'bx--left-nav__section--anchor',
       classNavSectionLink: 'bx--left-nav__section--link',
       classNavHeaderTitle: 'bx--left-nav__header--title',
       classItemFade: 'bx--main-nav__parent-item--fade',
@@ -464,13 +465,17 @@ export default class LeftNav {
       newLeftNavSectionItem.classList.add(this.options.classNavSection);
       newLeftNavSectionItem.classList.add(`${this.options.classNavSection}--${selectedLeftNavSectionItemTitle.textContent.toLowerCase()}`);
 
+      const newLeftNavSectionItemAnchor = document.createElement('a');
+      newLeftNavSectionItemAnchor.setAttribute('href', '#');
+      newLeftNavSectionItemAnchor.classList.add(this.options.classNavSectionAnchor);
+
       const newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
       // IE11 doesn't support classList on SVG, must revert to className
       newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
       newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
       newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionItemTitle.textContent);
 
-      const newLeftNavSectionItemLink = document.createElement('a');
+      const newLeftNavSectionItemLink = document.createElement('span');
       newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
       newLeftNavSectionItemLink.classList.add(this.options.classNavSectionLink);
       newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
@@ -478,8 +483,9 @@ export default class LeftNav {
       this.animateNavSection(leftNavSectionItem);
       this.animateNavList(leftNavSectionItemLink.textContent);
 
-      newLeftNavSectionItem.appendChild(newLeftNavSectionItemIcon);
-      newLeftNavSectionItem.appendChild(newLeftNavSectionItemLink);
+      newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
+      newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
+      newLeftNavSectionItem.appendChild(newLeftNavSectionItemAnchor);
       leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
 
       setTimeout(() => {
@@ -558,6 +564,7 @@ LeftNav.options = {
   classItemHasChildren: 'bx--main-nav__parent-item--has-children',
   classNavSection: 'bx--left-nav__section',
   classNavSectionTransition: 'bx--left-nav__section--transition',
+  classNavSectionAnchor: 'bx--left-nav__section--anchor',
   classNavSectionLink: 'bx--left-nav__section--link',
   classNavHeaderTitle: 'bx--left-nav__header--title',
   classItemFade: 'bx--main-nav__parent-item--fade',

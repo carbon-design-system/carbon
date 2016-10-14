@@ -129,7 +129,6 @@
   align-items: center;
   cursor: pointer;
   background-color: $color__navy-gray-1;
-  padding: 0 rem(20px);
   transition: $transition--base $bx--standard-easing;
 
   @include light-ui {
@@ -152,7 +151,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      padding: 1.125rem rem(20px);
+      padding: 1.125rem 0;
     }
 
     .bx--global-light-ui &[data-left-nav-section='Applications'] {
@@ -206,12 +205,19 @@
     }
   }
 
+  &--anchor {
+    display: flex;
+    width: 100%;
+    padding: 0 1.25rem;
+    align-items: center;
+    text-decoration: none;
+  }
+
   &--link {
     @include font-size('16');
     display: flex;
     align-items: center;
     color: $color__white;
-    text-decoration: none;
     height: rem(50px);
 
     @include light-ui {
