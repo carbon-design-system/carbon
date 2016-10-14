@@ -229,4 +229,27 @@
       opacity: inherit;
     }
   }
+
+  // Styles for small search input
+
+  .bx--search--sm {
+    max-width: rem(400px);
+
+    .bx--search__input {
+      @include font-size('14');
+      padding: rem(14px) 1rem rem(14px) 2.5rem;
+    }
+
+    .bx--search__icon--magnifier {
+      width: 1rem;
+      height: 1rem;
+      left: .75rem;
+      top: .85rem;
+
+      @include breakpoint(500px) {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
 }
