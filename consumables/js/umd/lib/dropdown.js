@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../misc/on', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.on, global.arrayFrom, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.dropdown = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _on) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -20,6 +20,8 @@
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+  var _create2 = _interopRequireDefault(_create);
 
   var _assign2 = _interopRequireDefault(_assign);
 
@@ -49,11 +51,10 @@
      *   Cancellation of this event stops selection of drop down item.
      * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
      */
-
     function Dropdown(element) {
       var _this = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, Dropdown);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -62,13 +63,7 @@
 
       this.element = element;
 
-      this.options = (0, _assign2.default)({
-        selectorItem: '[data-option] > .bx--dropdown__link',
-        selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
-        classSelected: 'bx--dropdown--selected',
-        eventBeforeSelected: 'dropdown-beingselected',
-        eventAfterSelected: 'dropdown-selected'
-      }, options);
+      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
 
       if (this.element.dataset.dropdown !== 'navigation') {
         this.element.dataset.dropdown = '';
@@ -116,7 +111,7 @@
     }, {
       key: 'toggle',
       value: function toggle(event) {
-        if (event.which === 13 || event.type === 'click') {
+        if (event.which === 13 || event.which === 32 || event.type === 'click') {
           var isOfSelf = this.element.contains(event.target);
 
           if (isOfSelf) {
@@ -169,17 +164,18 @@
       value: function init() {
         var _this3 = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-        var options = arguments[1];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
-        if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
-          this.create(target, options);
+        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+          this.create(target, effectiveOptions);
         } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll('[data-dropdown]'))).forEach(function (element) {
-            return _this3.create(element, options);
+          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+            return _this3.create(element, effectiveOptions);
           });
         }
       }
@@ -191,8 +187,16 @@
 
 
   /**
+   * The map associating DOM element and selector instance.
+   * @type {WeakMap}
+   */
+  Dropdown.components = new _weakMap2.default();
+
+  /**
    * The component options.
-   * @member {Object} Dropdown#options
+   * If `options` is specified in the constructor, {@linkcode Dropdown.create .create()}, or {@linkcode Dropdown.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Dropdown.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find selectors.
    * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
@@ -201,10 +205,12 @@
    *   Cancellation of this event stops selection of drop down item.
    * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
    */
-
-  /**
-   * The map associating DOM element and selector instance.
-   * @type {WeakMap}
-   */
-  Dropdown.components = new _weakMap2.default();
+  Dropdown.options = {
+    selectorInit: '[data-dropdown]',
+    selectorItem: '[data-option] > .bx--dropdown__link',
+    selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
+    classSelected: 'bx--dropdown--selected',
+    eventBeforeSelected: 'dropdown-beingselected',
+    eventAfterSelected: 'dropdown-selected'
+  };
 });

@@ -58,75 +58,75 @@ var BluemixComponents =
 	
 	var _fileUploader2 = _interopRequireDefault(_fileUploader);
 	
-	var _fab = __webpack_require__(3);
+	var _fab = __webpack_require__(4);
 	
 	var _fab2 = _interopRequireDefault(_fab);
 	
-	var _contentSwitcher = __webpack_require__(6);
+	var _contentSwitcher = __webpack_require__(7);
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
-	var _tabs = __webpack_require__(10);
+	var _tabs = __webpack_require__(11);
 	
 	var _tabs2 = _interopRequireDefault(_tabs);
 	
-	var _overflowMenu = __webpack_require__(12);
+	var _overflowMenu = __webpack_require__(13);
 	
 	var _overflowMenu2 = _interopRequireDefault(_overflowMenu);
 	
-	var _modals = __webpack_require__(13);
+	var _modals = __webpack_require__(14);
 	
 	var _modals2 = _interopRequireDefault(_modals);
 	
-	var _header = __webpack_require__(15);
+	var _header = __webpack_require__(16);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _toolbars = __webpack_require__(16);
+	var _toolbars = __webpack_require__(17);
 	
 	var _toolbars2 = _interopRequireDefault(_toolbars);
 	
-	var _loading = __webpack_require__(17);
+	var _loading = __webpack_require__(18);
 	
 	var _loading2 = _interopRequireDefault(_loading);
 	
-	var _dropdown = __webpack_require__(18);
+	var _dropdown = __webpack_require__(19);
 	
 	var _dropdown2 = _interopRequireDefault(_dropdown);
 	
-	var _card = __webpack_require__(19);
+	var _card = __webpack_require__(20);
 	
 	var _card2 = _interopRequireDefault(_card);
 	
-	var _numberInput = __webpack_require__(20);
+	var _numberInput = __webpack_require__(21);
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
 	
-	var _table = __webpack_require__(21);
+	var _table = __webpack_require__(22);
 	
 	var _table2 = _interopRequireDefault(_table);
 	
-	var _detailPageHeader = __webpack_require__(22);
+	var _detailPageHeader = __webpack_require__(23);
 	
 	var _detailPageHeader2 = _interopRequireDefault(_detailPageHeader);
 	
-	var _leftNav = __webpack_require__(24);
+	var _leftNav = __webpack_require__(25);
 	
 	var _leftNav2 = _interopRequireDefault(_leftNav);
 	
-	var _unifiedHeader = __webpack_require__(25);
+	var _unifiedHeader = __webpack_require__(26);
 	
 	var _unifiedHeader2 = _interopRequireDefault(_unifiedHeader);
 	
-	var _inlineLeftNav = __webpack_require__(26);
+	var _inlineLeftNav = __webpack_require__(27);
 	
 	var _inlineLeftNav2 = _interopRequireDefault(_inlineLeftNav);
 	
-	var _profileSwitcher = __webpack_require__(27);
+	var _profileSwitcher = __webpack_require__(28);
 	
 	var _profileSwitcher2 = _interopRequireDefault(_profileSwitcher);
 	
-	var _searchWithOptions = __webpack_require__(28);
+	var _searchWithOptions = __webpack_require__(29);
 	
 	var _searchWithOptions2 = _interopRequireDefault(_searchWithOptions);
 	
@@ -136,10 +136,9 @@ var BluemixComponents =
 	// Imports and Exports //
 	// ====================//
 	
+	
 	// Polyfills
 	// -------------
-	
-	
 	var settings = {};
 	
 	/**
@@ -158,131 +157,23 @@ var BluemixComponents =
 	// - JavaScript classes for use with components and base-elements.
 	// - The following statements import classes from actual locations to
 	//   be consumed from this file instead of their actual locations.
-	exports.
-	/**
-	 * Settings.
-	 * @type Object
-	 * @property {boolean} [disableAutoInit]
-	 *   Disables automatic instantiation of components.
-	 *   By default (`BluemixComponents.disableAutoInit` is `false`),
-	 *   bluemix-components attempts to instantiate components automatically
-	 *   by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
-	 *   or upon DOM events (e.g. clicking) on such elements.
-	 *   See each components' static `.init()` methods for details.
-	 */
-	settings = settings;
-	exports.
-	
-	/**
-	 * Floating action button.
-	 * @type FabButton
-	 */
-	FabButton = _fab2.default;
-	exports.
-	
-	/**
-	 * File uploader.
-	 * @type FileUploader
-	 */
-	FileUploader = _fileUploader2.default;
-	exports.
-	
-	/**
-	 * Content switcher.
-	 * @type ContentSwitcher
-	 */
-	ContentSwitcher = _contentSwitcher2.default;
-	exports.
-	
-	/**
-	 * Container of tabs.
-	 * @type Tab
-	 */
-	Tab = _tabs2.default;
-	exports.
-	
-	/**
-	 * Overflow menu.
-	 * @type OverflowMenu
-	 */
-	OverflowMenu = _overflowMenu2.default;
-	exports.
-	
-	/**
-	 * Modal dialog.
-	 * @type Modal
-	 */
-	Modal = _modals2.default;
-	exports.
-	
-	/**
-	 * Header with taxonomy menu.
-	 * @type HeaderNav
-	 */
-	HeaderNav = _header2.default;
-	exports.
-	
-	/**
-	 * Left Navigation Menu
-	 * @type LeftNav
-	 */
-	LeftNav = _leftNav2.default;
-	exports.
-	
-	/**
-	 * Search button in tool bar.
-	 * @type Toolbars
-	 */
-	Toolbars = _toolbars2.default;
-	exports.
-	
-	/**
-	 * Spinner indicating loading state.
-	 * @type Loading
-	 */
-	Loading = _loading2.default;
-	exports.
-	
-	/**
-	 * A selector with drop downs.
-	 * @type Dropdown
-	 */
-	Dropdown = _dropdown2.default;
-	exports.
-	
-	/**
-	 * The container for cards.
-	 * @type Card
-	 */
-	Card = _card2.default;
-	exports.
-	
-	/**
-	 * Number input UI.
-	 * @type NumberInput
-	 */
-	NumberInput = _numberInput2.default;
-	exports.
-	
-	/**
-	 * Data table.
-	 * @type Table
-	 */
-	Table = _table2.default;
-	exports.
-	
-	/**
-	 * Detail page header.
-	 * @type DetailPageHeader
-	 */
-	DetailPageHeader = _detailPageHeader2.default;
-	exports.
-	
-	/**
-	 * Profile Switcher.
-	 * @type ProfileSwitcher
-	 */
-	ProfileSwitcher = _profileSwitcher2.default;
+	exports.settings = settings;
+	exports.FabButton = _fab2.default;
+	exports.FileUploader = _fileUploader2.default;
+	exports.ContentSwitcher = _contentSwitcher2.default;
+	exports.Tab = _tabs2.default;
+	exports.OverflowMenu = _overflowMenu2.default;
+	exports.Modal = _modals2.default;
+	exports.HeaderNav = _header2.default;
+	exports.LeftNav = _leftNav2.default;
+	exports.Toolbars = _toolbars2.default;
+	exports.Loading = _loading2.default;
+	exports.Dropdown = _dropdown2.default;
+	exports.Card = _card2.default;
+	exports.NumberInput = _numberInput2.default;
+	exports.Table = _table2.default;
+	exports.DetailPageHeader = _detailPageHeader2.default;
+	exports.ProfileSwitcher = _profileSwitcher2.default;
 	
 	/**
 	 * Instantiates components automatically
@@ -334,7 +225,7 @@ var BluemixComponents =
 	 * @copyright Copyright (c) 2016 IcoMoon.io
 	 * @license   Licensed under MIT license
 	 *            See https://github.com/Keyamoon/svgxuse
-	 * @version   1.1.16
+	 * @version   1.1.22
 	 */
 	/*jslint browser: true */
 	/*global XDomainRequest, MutationObserver, window */
@@ -342,8 +233,8 @@ var BluemixComponents =
 	    'use strict';
 	    if (window && window.addEventListener) {
 	        var cache = Object.create(null); // holds xhr objects to prevent multiple requests
-	        var checkUseElems,
-	            tid; // timeout id
+	        var checkUseElems;
+	        var tid; // timeout id
 	        var debouncedCheck = function () {
 	            clearTimeout(tid);
 	            tid = setTimeout(checkUseElems, 100);
@@ -378,34 +269,48 @@ var BluemixComponents =
 	                };
 	            }
 	        };
-	        var xlinkNS = 'http://www.w3.org/1999/xlink';
-	        checkUseElems = function () {
-	            var base,
-	                bcr,
-	                fallback = '', // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
-	                hash,
-	                i,
-	                Request,
-	                inProgressCount = 0,
-	                isHidden,
-	                url,
-	                uses,
-	                xhr;
+	        var createRequest = function (url) {
+	            // In IE 9, cross origin requests can only be sent using XDomainRequest.
+	            // XDomainRequest would fail if CORS headers are not set.
+	            // Therefore, XDomainRequest should only be used with cross origin requests.
+	            function getOrigin(href) {
+	                var a = document.createElement('a');
+	                a.href = href;
+	                return a.protocol + a.hostname;
+	            }
+	            var Request;
+	            var origin = location.protocol + location.hostname;
+	            var origin2;
 	            if (window.XMLHttpRequest) {
 	                Request = new XMLHttpRequest();
-	                if (Request.withCredentials !== undefined) {
-	                    Request = XMLHttpRequest;
-	                } else {
+	                origin2 = getOrigin(url);
+	                if (Request.withCredentials === undefined && origin2 !== '' && origin2 !== origin) {
 	                    Request = XDomainRequest || undefined;
+	                } else {
+	                    Request = XMLHttpRequest;
 	                }
 	            }
-	            if (Request === undefined) {
-	                return;
-	            }
+	            return Request;
+	        };
+	        var xlinkNS = 'http://www.w3.org/1999/xlink';
+	        checkUseElems = function () {
+	            var base;
+	            var bcr;
+	            var fallback = ''; // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
+	            var hash;
+	            var href;
+	            var i;
+	            var inProgressCount = 0;
+	            var isHidden;
+	            var Request;
+	            var url;
+	            var uses;
+	            var xhr;
 	            function observeIfDone() {
 	                // If done with making changes, start watching for chagnes in DOM again
 	                inProgressCount -= 1;
 	                if (inProgressCount === 0) { // if all xhrs were resolved
+	                    unobserveChanges(); // make sure to remove old handlers
 	                    observeChanges(); // watch for changes to DOM
 	                }
 	            }
@@ -452,7 +357,12 @@ var BluemixComponents =
 	                    // failed to get bounding rectangle of the use element
 	                    bcr = false;
 	                }
-	                url = uses[i].getAttributeNS(xlinkNS, 'href').split('#');
+	                href = uses[i].getAttributeNS(xlinkNS, 'href');
+	                if (href && href.split) {
+	                    url = href.split('#');
+	                } else {
+	                    url = ["", ""];
+	                }
 	                base = url[0];
 	                hash = url[1];
 	                isHidden = bcr && bcr.left === 0 && bcr.right === 0 && bcr.top === 0 && bcr.bottom === 0;
@@ -475,14 +385,17 @@ var BluemixComponents =
 	                            }), 0);
 	                        }
 	                        if (xhr === undefined) {
-	                            xhr = new Request();
-	                            cache[base] = xhr;
-	                            xhr.onload = onloadFunc(xhr);
-	                            xhr.onerror = onErrorTimeout(xhr);
-	                            xhr.ontimeout = onErrorTimeout(xhr);
-	                            xhr.open('GET', base);
-	                            xhr.send();
-	                            inProgressCount += 1;
+	                            Request = createRequest(base);
+	                            if (Request !== undefined) {
+	                                xhr = new Request();
+	                                cache[base] = xhr;
+	                                xhr.onload = onloadFunc(xhr);
+	                                xhr.onerror = onErrorTimeout(xhr);
+	                                xhr.ontimeout = onErrorTimeout(xhr);
+	                                xhr.open('GET', base);
+	                                xhr.send();
+	                                inProgressCount += 1;
+	                            }
 	                        }
 	                    }
 	                } else {
@@ -494,9 +407,15 @@ var BluemixComponents =
 	                            // if it turns out that prepending the SVG is not necessary,
 	                            // abort the in-progress xhr.
 	                            cache[base].abort();
-	                            cache[base].onload = undefined;
+	                            delete cache[base].onload;
 	                            cache[base] = true;
 	                        }
+	                    } else if (base.length && cache[base]) {
+	                        attrUpdateFunc({
+	                            useEl: uses[i],
+	                            base: base,
+	                            hash: hash
+	                        })();
 	                    }
 	                }
 	            }
@@ -515,7 +434,7 @@ var BluemixComponents =
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -524,6 +443,8 @@ var BluemixComponents =
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(3);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -537,11 +458,10 @@ var BluemixComponents =
 	   * @param {Object} [options] The component options.
 	   * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
 	   */
-	
 	  function FileUploader(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, FileUploader);
 	
@@ -550,8 +470,9 @@ var BluemixComponents =
 	    }
 	
 	    this.element = element;
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
 	
-	    var labelSelector = options.labelSelector || element.dataset.label;
+	    var labelSelector = this.options.labelSelector || element.dataset.label;
 	    this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
 	
 	    this.constructor.components.set(this.element, this);
@@ -604,10 +525,11 @@ var BluemixComponents =
 	
 	    /**
 	     * Instantiates file uploader in the given node.
-	     * If the given element indicates that it's an file uploader (having `data-file-uploader` attribute), instantiates it.
+	     * If the given element indicates that it's an file uploader, instantiates it.
 	     * Otherwise, instantiates file uploader by searching for file uploader in the given node.
 	     * @param {HTMLElement} element The element working as a file uploader.
 	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS selector to find file uploaders.
 	     * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
 	     */
 	
@@ -616,17 +538,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fileInput !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-file-uploader]'))).forEach(function (element) {
-	          return _this2.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this2.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -636,12 +559,6 @@ var BluemixComponents =
 	}();
 	
 	/**
-	 * The component options.
-	 * @member {Object} FileUploader#options
-	 * @property {string} [labelSelector] The CSS selector to find the label for the file name.
-	 */
-	
-	/**
 	 * The map associating DOM element and file uploader instance.
 	 * @type {WeakMap}
 	 */
@@ -649,9 +566,34 @@ var BluemixComponents =
 	
 	exports.default = FileUploader;
 	FileUploader.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode FileUploader.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find file uploaders.
+	 * @property {string} [labelSelector] The CSS selector to find the label for the file name.
+	 */
+	FileUploader.options = {
+	  selectorInit: '[data-file-uploader]'
+	};
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var matchesFuncName = ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(function (name) {
+	  return typeof Element.prototype[name] === 'function';
+	})[0];
+	
+	if (matchesFuncName !== 'matches') {
+	  Element.prototype.matches = Element.prototype[matchesFuncName];
+	}
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -662,13 +604,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventMatches = __webpack_require__(4);
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	var _on = __webpack_require__(5);
+	var _on = __webpack_require__(6);
 	
 	var _on2 = _interopRequireDefault(_on);
+	
+	__webpack_require__(3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -680,7 +624,6 @@ var BluemixComponents =
 	   * @implements Component
 	   * @param {HTMLElement} element The element working as a floting action button.
 	   */
-	
 	  function FabButton(element) {
 	    var _this = this;
 	
@@ -700,9 +643,11 @@ var BluemixComponents =
 	
 	  /**
 	   * Instantiates floating action buttons in the given element.
-	   * If the given element indicates that it's an floating action button (having `data-fab` attribute), instantiates it.
+	   * If the given element indicates that it's an floating action button, instantiates it.
 	   * Otherwise, instantiates floating action buttons by clicking on floating action buttons in the given node.
 	   * @param {Node} target The DOM node to instantiate floating action buttons in. Should be a document or an element.
+	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorItem] The CSS selector to find floating action buttons.
 	   * @returns {Handle} The handle to remove the event listener to handle clicking.
 	   */
 	
@@ -742,16 +687,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fab !== undefined) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target);
 	      } else {
 	        return (0, _on2.default)(target, 'click', function (event) {
-	          var element = (0, _eventMatches2.default)(event, '[data-fab]');
+	          var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
 	          if (element && !_this2.components.has(element)) {
 	            _this2.create(element).toggle(event);
 	          }
@@ -776,10 +723,20 @@ var BluemixComponents =
 	
 	exports.default = FabButton;
 	FabButton.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode FabButton.create .create()}, or {@linkcode FabButton.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode FabButton.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find floating action buttons.
+	 */
+	FabButton.options = {
+	  selectorInit: '[data-fab]'
+	};
 
 /***/ },
-/* 4 */
-/***/ function(module, exports) {
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -787,22 +744,21 @@ var BluemixComponents =
 	  value: true
 	});
 	exports.default = eventMatches;
-	var matchesFuncName = ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(function (name) {
-	  return typeof document.documentElement[name] === 'function';
-	})[0];
+	
+	__webpack_require__(3);
 	
 	function eventMatches(event, selector) {
-	  // <svg> in IE does not have `Element#msMatchesSelector()`.
+	  // <svg> in IE does not have `Element#msMatchesSelector()` (that should be copied to `Element#matches()` by the polyfill).
 	  // Also a weird behavior is seen in IE where DOM tree seems broken when `event.target` is on <svg>.
 	  // Therefore this function simply returns `undefined` when `event.target` is on <svg>.
-	  if (typeof event.target[matchesFuncName] === 'function') {
-	    if (event.target[matchesFuncName](selector)) {
+	  if (typeof event.target.matches === 'function') {
+	    if (event.target.matches(selector)) {
 	      // If event target itself matches the given selector, return it
 	      return event.target;
-	    } else if (event.target[matchesFuncName](selector + ' *')) {
+	    } else if (event.target.matches(selector + ' *')) {
 	      // If event target is a child node of a DOM element that matches the given selector, find the DOM element by going up the DOM tree
 	      for (var traverse = event.target; traverse && traverse !== event.currentTarget; traverse = traverse.parentNode) {
-	        if (traverse[matchesFuncName](selector)) {
+	        if (traverse.matches(selector)) {
 	          return traverse;
 	        }
 	      }
@@ -811,7 +767,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -835,7 +791,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -846,15 +802,17 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventMatches = __webpack_require__(4);
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	var _toggleClass = __webpack_require__(9);
+	__webpack_require__(3);
+	
+	__webpack_require__(9);
+	
+	var _toggleClass = __webpack_require__(10);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -878,11 +836,10 @@ var BluemixComponents =
 	   *   Cancellation of this event stops selection of content switcher button.
 	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
 	   */
-	
 	  function ContentSwitcher(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, ContentSwitcher);
 	
@@ -892,13 +849,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
-	      selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
-	      classActive: 'bx--content-switcher--selected',
-	      eventBeforeSelected: 'content-switcher-beingselected',
-	      eventAfterSelected: 'content-switcher-selected'
-	    }, options);
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
 	
 	    this.constructor.components.set(this.element, this);
 	
@@ -1045,10 +996,11 @@ var BluemixComponents =
 	
 	    /**
 	     * Instantiates content switcher button sets in the given node.
-	     * If the given element indicates that it's an content switcher button set (having `data-content-switcher` attribute), instantiates it.
+	     * If the given element indicates that it's an content switcher button set, instantiates it.
 	     * Otherwise, instantiates content switcher button sets by searching for content switcher button sets in the given node.
 	     * @param {Node} target The DOM node to instantiate content switcher button sets in. Should be a document or an element.
 	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS selector to find content switcher button set.
 	     * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
 	     * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected switcher button.
 	     * @param {string} [options.classActive] The CSS class for switcher button's selected state.
@@ -1063,17 +1015,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this3 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.contentSwitcher !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(document.querySelectorAll('[data-content-switcher]'))).forEach(function (element) {
-	          return _this3.create(element, options);
+	        [].concat(_toConsumableArray(document.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this3.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -1083,8 +1036,19 @@ var BluemixComponents =
 	}();
 	
 	/**
+	 * The map associating DOM element and content switcher set instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = ContentSwitcher;
+	ContentSwitcher.components = new WeakMap();
+	
+	/**
 	 * The component options.
-	 * @member {Object} ContentSwitcher#options
+	 * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode ContentSwitcher.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode ContentSwitcher.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find content switcher button set.
 	 * @property {string} [selectorButton] The CSS selector to find switcher buttons.
 	 * @property {string} [selectorButtonSelected] The CSS selector to find the selected switcher button.
 	 * @property {string} [classActive] The CSS class for switcher button's selected state.
@@ -1093,18 +1057,17 @@ var BluemixComponents =
 	 *   Cancellation of this event stops selection of content switcher button.
 	 * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
 	 */
-	
-	/**
-	 * The map associating DOM element and content switcher set instance.
-	 * @type {WeakMap}
-	 */
-	
-	
-	exports.default = ContentSwitcher;
-	ContentSwitcher.components = new WeakMap();
+	ContentSwitcher.options = {
+	  selectorInit: '[data-content-switcher]',
+	  selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
+	  selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
+	  classActive: 'bx--content-switcher--selected',
+	  eventBeforeSelected: 'content-switcher-beingselected',
+	  eventAfterSelected: 'content-switcher-selected'
+	};
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1114,7 +1077,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1138,7 +1101,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1154,7 +1117,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1167,17 +1130,19 @@ var BluemixComponents =
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _eventMatches = __webpack_require__(4);
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(7);
-	
-	__webpack_require__(11);
-	
 	__webpack_require__(8);
 	
-	var _contentSwitcher = __webpack_require__(6);
+	__webpack_require__(3);
+	
+	__webpack_require__(12);
+	
+	__webpack_require__(9);
+	
+	var _contentSwitcher = __webpack_require__(7);
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
@@ -1212,24 +1177,10 @@ var BluemixComponents =
 	   *   Cancellation of this event stops selection of tab.
 	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
 	   */
-	
-	  function Tab(element) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
+	  function Tab(element, options) {
 	    _classCallCheck(this, Tab);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Tab).call(this, element, Object.assign({
-	      selectorMenu: '.bx--tabs__nav',
-	      selectorTrigger: '.bx--tabs__trigger',
-	      selectorTriggerText: '.bx--tabs__trigger-text',
-	      selectorButton: '.bx--tabs__nav-item',
-	      selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
-	      selectorLink: '.bx--tabs__nav-link',
-	      classActive: 'bx--tabs--selected',
-	      classHidden: 'bx--tabs--hidden',
-	      eventBeforeSelected: 'tab-beingselected',
-	      eventAfterSelected: 'tab-selected'
-	    }, options)));
+	    var _this = _possibleConstructorReturn(this, (Tab.__proto__ || Object.getPrototypeOf(Tab)).call(this, element, options));
 	
 	    _this.element.addEventListener('keydown', function (event) {
 	      return _this.handleKeyDown(event);
@@ -1244,10 +1195,11 @@ var BluemixComponents =
 	
 	  /**
 	   * Instantiates tab containers in the given node.
-	   * If the given element indicates that it's an tab container (having `data-tabs` attribute), instantiates it.
+	   * If the given element indicates that it's an tab container, instantiates it.
 	   * Otherwise, instantiates tab containers by searching for tab containers in the given node.
 	   * @param {Node} target The DOM node to instantiate tab containers in. Should be a document or an element.
 	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorInit] The CSS selector to find tab containers.
 	   * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
 	   * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
 	   * @param {string} [options.selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
@@ -1266,7 +1218,7 @@ var BluemixComponents =
 	  _createClass(Tab, [{
 	    key: '_changeActive',
 	    value: function _changeActive(item) {
-	      _get(Object.getPrototypeOf(Tab.prototype), '_changeActive', this).call(this, item);
+	      _get(Tab.prototype.__proto__ || Object.getPrototypeOf(Tab.prototype), '_changeActive', this).call(this, item);
 	      this.updateTriggerText(item);
 	    }
 	
@@ -1280,11 +1232,11 @@ var BluemixComponents =
 	  }, {
 	    key: 'handleClick',
 	    value: function handleClick(event) {
-	      _get(Object.getPrototypeOf(Tab.prototype), 'handleClick', this).call(this, event);
+	      _get(Tab.prototype.__proto__ || Object.getPrototypeOf(Tab.prototype), 'handleClick', this).call(this, event);
 	      var button = (0, _eventMatches2.default)(event, this.options.selectorButton);
 	      var trigger = (0, _eventMatches2.default)(event, this.options.selectorTrigger);
 	      if (button) {
-	        _get(Object.getPrototypeOf(Tab.prototype), 'handleClick', this).call(this, event);
+	        _get(Tab.prototype.__proto__ || Object.getPrototypeOf(Tab.prototype), 'handleClick', this).call(this, event);
 	        this.updateMenuState();
 	      }
 	      if (trigger) {
@@ -1358,17 +1310,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this3 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-tabs]'))).forEach(function (element) {
-	          return _this3.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this3.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -1378,8 +1331,19 @@ var BluemixComponents =
 	}(_contentSwitcher2.default);
 	
 	/**
+	 * The map associating DOM element and tab container instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = Tab;
+	Tab.components = new WeakMap();
+	
+	/**
 	 * The component options.
-	 * @member {Object} Tab#options
+	 * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode Tab.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode Tab.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find tab containers.
 	 * @property {string} [selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
 	 * @property {string} [selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
 	 * @property {string} [selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
@@ -1393,18 +1357,22 @@ var BluemixComponents =
 	 *   Cancellation of this event stops selection of tab.
 	 * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
 	 */
-	
-	/**
-	 * The map associating DOM element and tab container instance.
-	 * @type {WeakMap}
-	 */
-	
-	
-	exports.default = Tab;
-	Tab.components = new WeakMap();
+	Tab.options = Object.assign(Object.create(_contentSwitcher2.default.options), {
+	  selectorInit: '[data-tabs]',
+	  selectorMenu: '.bx--tabs__nav',
+	  selectorTrigger: '.bx--tabs__trigger',
+	  selectorTriggerText: '.bx--tabs__trigger-text',
+	  selectorButton: '.bx--tabs__nav-item',
+	  selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
+	  selectorLink: '.bx--tabs__nav-link',
+	  classActive: 'bx--tabs--selected',
+	  classHidden: 'bx--tabs--hidden',
+	  eventBeforeSelected: 'tab-beingselected',
+	  eventAfterSelected: 'tab-selected'
+	});
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1415,7 +1383,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1426,13 +1394,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
+	__webpack_require__(8);
 	
-	var _toggleClass = __webpack_require__(9);
+	__webpack_require__(3);
+	
+	var _toggleClass = __webpack_require__(10);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _on = __webpack_require__(5);
+	var _on = __webpack_require__(6);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -1520,15 +1490,17 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.overflowMenu !== undefined) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-overflow-menu]'))).forEach(function (element) {
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
 	          return _this2.create(element);
 	        });
 	      }
@@ -1542,9 +1514,13 @@ var BluemixComponents =
 	
 	
 	OverflowMenu.components = new WeakMap();
+	
+	OverflowMenu.options = {
+	  selectorInit: '[data-overflow-menu]'
+	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1555,21 +1531,23 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(3);
 	
-	var _eventMatches = __webpack_require__(4);
+	__webpack_require__(9);
+	
+	__webpack_require__(15);
+	
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	var _toggleClass = __webpack_require__(9);
+	var _toggleClass = __webpack_require__(10);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _on = __webpack_require__(5);
+	var _on = __webpack_require__(6);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -1614,9 +1592,8 @@ var BluemixComponents =
 	   *   The name of the custom event telling that modal is sure hidden
 	   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
 	   */
-	
 	  function Modal(element) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, Modal);
 	
@@ -1626,14 +1603,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      classVisible: 'is-visible',
-	      classNoScroll: 'bx--noscroll',
-	      eventBeforeShown: 'modal-beingshown',
-	      eventAfterShown: 'modal-shown',
-	      eventBeforeHidden: 'modal-beinghidden',
-	      eventAfterHidden: 'modal-hidden'
-	    }, options);
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
 	
 	    this.constructor.components.set(this.element, this);
 	
@@ -1891,12 +1861,14 @@ var BluemixComponents =
 	
 	    /**
 	     * Instantiates modal dialogs in the given element.
-	     * If the given element indicates that it's an modal dialog (having `data-modal` attribute), instantiates it.
+	     * If the given element indicates that it's an modal dialog, instantiates it.
 	     * Otherwise, instantiates modal dialogs by clicking on launcher buttons
 	     * (buttons with `data-modal-target` attribute) of modal dialogs in the given node.
 	     * @implements Component
 	     * @param {Node} target The DOM node to instantiate modal dialogs in. Should be a document or an element.
 	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS class to find modal dialogs.
+	     * @param {string} [options.attribInitTarget] The attribute name in the launcher buttons to find target modal dialogs.
 	     * @param {string} [options.classVisible] The CSS class for the visible state.
 	     * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
 	     * @param {string} [options.eventBeforeShown]
@@ -1919,22 +1891,23 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this5 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.modal !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
 	        return (0, _on2.default)(target, 'click', function (event) {
-	          var element = (0, _eventMatches2.default)(event, '[data-modal-target]');
+	          var element = (0, _eventMatches2.default)(event, '[' + effectiveOptions.attribInitTarget + ']');
 	
 	          if (element) {
 	            event.delegateTarget = element;
 	
-	            var modalElements = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.dataset.modalTarget)));
+	            var modalElements = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.getAttribute(effectiveOptions.attribInitTarget))));
 	            if (modalElements.length > 1) {
 	              throw new Error('Target modal must be unique.');
 	            }
@@ -1945,7 +1918,7 @@ var BluemixComponents =
 	                  event.preventDefault();
 	                }
 	
-	                var modal = _this5.create(modalElements[0], options);
+	                var modal = _this5.create(modalElements[0], effectiveOptions);
 	                modal.show(event, function (error, shownAlready) {
 	                  if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
 	                    modal.element.focus();
@@ -1968,8 +1941,20 @@ var BluemixComponents =
 	}();
 	
 	/**
+	 * The map associating DOM element and modal instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = Modal;
+	Modal.components = new WeakMap();
+	
+	/**
 	 * The component options.
-	 * @member {Object} Modal#options
+	 * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
+	 * @property {string} selectorInit The CSS class to find modal dialogs.
+	 * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
 	 * @property {string} [classVisible] The CSS class for the visible state.
 	 * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
 	 * @property {string} [eventBeforeShown]
@@ -1985,18 +1970,19 @@ var BluemixComponents =
 	 *   The name of the custom event telling that modal is sure hidden
 	 *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
 	 */
-	
-	/**
-	 * The map associating DOM element and modal instance.
-	 * @type {WeakMap}
-	 */
-	
-	
-	exports.default = Modal;
-	Modal.components = new WeakMap();
+	Modal.options = {
+	  selectorInit: '[data-modal]',
+	  attribInitTarget: 'data-modal-target',
+	  classVisible: 'is-visible',
+	  classNoScroll: 'bx--noscroll',
+	  eventBeforeShown: 'modal-beingshown',
+	  eventAfterShown: 'modal-shown',
+	  eventBeforeHidden: 'modal-beinghidden',
+	  eventAfterHidden: 'modal-hidden'
+	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2010,7 +1996,7 @@ var BluemixComponents =
 	}();
 	if (missingNativeCustomEvent) {
 	  window.CustomEvent = function CustomEvent(type) {
-	    var init = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var init = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    var event = document.createEvent('HTMLEvents');
 	    event.initEvent(type, init.bubbles, init.cancelable);
@@ -2022,7 +2008,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2031,17 +2017,19 @@ var BluemixComponents =
 	  value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(3);
 	
-	var _eventMatches = __webpack_require__(4);
+	__webpack_require__(9);
+	
+	__webpack_require__(15);
+	
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
@@ -2076,11 +2064,10 @@ var BluemixComponents =
 	   *   Cancellation of this event stops the selection.
 	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a menu item is selected.
 	   */
-	
 	  function HeaderNav(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, HeaderNav);
 	
@@ -2090,20 +2077,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      selectorTriggerLabel: '.current-taxonomy',
-	      classActive: 'taxonomy-nav--active',
-	      selectorMenu: '.taxonomy-menu',
-	      selectorItem: '.taxonomy-item',
-	      selectorItemLink: '.taxonomy-item--taxonomy-menu',
-	      selectorLabel: '.taxonomy-item__label',
-	      eventBeforeShown: 'header-beingshown',
-	      eventAfterShown: 'header-shown',
-	      eventBeforeHidden: 'header-beinghidden',
-	      eventAfterHidden: 'header-hidden',
-	      eventBeforeSelected: 'header-beingselected',
-	      eventAfterSelected: 'header-selected'
-	    }, options);
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
 	
 	    this.constructor.components.set(this.element, this);
 	
@@ -2122,12 +2096,14 @@ var BluemixComponents =
 	
 	  /**
 	   * Instantiates taxonomy menus in the given element.
-	   * If the given element indicates that it's an taxonomy menu (having `data-nav` attribute), instantiates it.
+	   * If the given element indicates that it's an taxonomy menu, instantiates it.
 	   * Otherwise, instantiates taxonomy menus by clicking on launcher buttons
 	   * (buttons with `data-nav-target` attribute) of taxonomy menus in the given node.
 	   * @implements Component
 	   * @param {Node} target The DOM node to instantiate taxonomy menus in. Should be a document or an element.
 	   * @param {Object} [options] The component options.
+	   * @param {string} [options.selectorInit] The CSS selector to find taxonomy menus.
+	   * @param {string} [options.attribInitTarget] The attribute name in the lancher buttons to find taxonomy menus.
 	   * @param {string} [options.selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
 	   * @param {string} [options.selectorMenu] The CSS selector to find the container of the menu items.
 	   * @param {string} [options.selectorItem] The CSS selector to find the menu items.
@@ -2251,21 +2227,22 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
 	        var _ret = function () {
 	          var handler = function handler(event) {
-	            var element = (0, _eventMatches2.default)(event, '[data-nav-target]');
+	            var element = (0, _eventMatches2.default)(event, '[' + effectiveOptions.attribInitTarget + ']');
 	
 	            if (element) {
-	              var headerElements = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.dataset.navTarget)));
+	              var headerElements = [].concat(_toConsumableArray(element.ownerDocument.querySelectorAll(element.getAttribute(effectiveOptions.attribInitTarget))));
 	              if (headerElements.length > 1) {
 	                throw new Error('Target header must be unique.');
 	              }
@@ -2274,7 +2251,7 @@ var BluemixComponents =
 	                if (element.tagName === 'A') {
 	                  event.preventDefault();
 	                }
-	                _this2.create(headerElements[0], options).toggleNav(event);
+	                _this2.create(headerElements[0], effectiveOptions).toggleNav(event);
 	              }
 	            }
 	          };
@@ -2336,8 +2313,20 @@ var BluemixComponents =
 	}();
 	
 	/**
+	 * The map associating DOM element and taxonomy menu instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = HeaderNav;
+	HeaderNav.components = new WeakMap();
+	
+	/**
 	 * The component options.
-	 * @member {Object} HeaderNav#options
+	 * If `options` is specified in the constructor, {@linkcode HeaderNav.create .create()}, or {@linkcode HeaderNav.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode HeaderNav.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find taxonomy menus.
+	 * @property {string} attribInitTarget The attribute name in the lancher buttons to find taxonomy menus.
 	 * @property {string} [selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
 	 * @property {string} [selectorMenu] The CSS selector to find the container of the menu items.
 	 * @property {string} [selectorItem] The CSS selector to find the menu items.
@@ -2357,19 +2346,26 @@ var BluemixComponents =
 	 *   Cancellation of this event stops the selection.
 	 * @property {string} [eventAfterSelected] The name of the custom event fired after a menu item is selected.
 	 */
-	
-	/**
-	 * The map associating DOM element and taxonomy menu instance.
-	 * @type {WeakMap}
-	 */
-	
-	
-	exports.default = HeaderNav;
-	HeaderNav.components = new WeakMap();
+	HeaderNav.options = {
+	  selectorInit: '[data-nav]',
+	  attribInitTarget: 'data-nav-target',
+	  selectorTriggerLabel: '.current-taxonomy',
+	  classActive: 'taxonomy-nav--active',
+	  selectorMenu: '.taxonomy-menu',
+	  selectorItem: '.taxonomy-item',
+	  selectorItemLink: '.taxonomy-item--taxonomy-menu',
+	  selectorLabel: '.taxonomy-item__label',
+	  eventBeforeShown: 'header-beingshown',
+	  eventAfterShown: 'header-shown',
+	  eventBeforeHidden: 'header-beinghidden',
+	  eventAfterHidden: 'header-hidden',
+	  eventBeforeSelected: 'header-beingselected',
+	  eventAfterSelected: 'header-selected'
+	};
 
 /***/ },
-/* 16 */
-/***/ function(module, exports) {
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -2378,6 +2374,8 @@ var BluemixComponents =
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(3);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -2389,7 +2387,6 @@ var BluemixComponents =
 	   * @implements Component
 	   * @param {HTMLElement} element The element working as an search button.
 	   */
-	
 	  function Toolbars(element) {
 	    var _this = this;
 	
@@ -2449,9 +2446,11 @@ var BluemixComponents =
 	
 	    /**
 	     * Instantiates search buttons in the given node.
-	     * If the given element indicates that it's an search button (having `data-list-icons-search-action-target` attribute), instantiates it.
+	     * If the given element indicates that it's an search button, instantiates it.
 	     * Otherwise, instantiates search buttons by searching for search buttons in the given node.
 	     * @param {Node} target The DOM node to instantiate search buttons in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS selector to find search buttons.
 	     */
 	
 	  }, {
@@ -2459,15 +2458,17 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.listIconsSearchActionTarget !== undefined) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-list-icons-search-action-target]'))).forEach(function (element) {
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
 	          return _this2.create(element);
 	        });
 	      }
@@ -2485,9 +2486,19 @@ var BluemixComponents =
 	
 	exports.default = Toolbars;
 	Toolbars.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode Toolbars.create .create()}, or {@linkcode Toolbars.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode Toolbars.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find search buttons.
+	 */
+	Toolbars.options = {
+	  selectorInit: '[data-list-icons-search-action-target]'
+	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2498,9 +2509,11 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _toggleClass = __webpack_require__(9);
+	var _toggleClass = __webpack_require__(10);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	
+	__webpack_require__(3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2513,12 +2526,11 @@ var BluemixComponents =
 	   * Spinner indicating loading state.
 	   * @implements Component
 	   * @param {HTMLElement} element The element working as a spinner.
-	   * @param {Object} options The component options.
-	   * @param {boolean} options.active `true` if this spinner should roll.
+	   * @param {Object} [options] The component options.
+	   * @param {boolean} [options.active] `true` if this spinner should roll.
 	   */
-	
 	  function Loading(element) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? { active: true } : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, Loading);
 	
@@ -2527,7 +2539,8 @@ var BluemixComponents =
 	    }
 	
 	    this.element = element;
-	    this.active = 'active' in options ? options.active : true;
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
+	    this.active = this.options.active;
 	    this.ie = false;
 	
 	    // Check if browser is Internet Explorer
@@ -2604,9 +2617,12 @@ var BluemixComponents =
 	
 	    /**
 	     * Instantiates spinner in the given node.
-	     * If the given element indicates that it's an spinner (having `data-loading` attribute), instantiates it.
+	     * If the given element indicates that it's an spinner, instantiates it.
 	     * Otherwise, instantiates spinners by searching for spinners in the given node.
 	     * @param {Node} target The DOM node to instantiate spinners in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {boolean} [options.selectorInit] The CSS selector to find spinners.
+	     * @param {boolean} [options.active] `true` if this spinner should roll.
 	     */
 	
 	  }, {
@@ -2614,17 +2630,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-loading]'))).forEach(function (element) {
-	          return _this.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -2641,9 +2658,20 @@ var BluemixComponents =
 	
 	exports.default = Loading;
 	Loading.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode Loading.create .create()}, or {@linkcode Loading.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode Loading.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find spinners.
+	 */
+	Loading.options = {
+	  selectorInit: '[data-loading]',
+	  active: true
+	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2654,13 +2682,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(3);
 	
-	var _on = __webpack_require__(5);
+	__webpack_require__(9);
+	
+	__webpack_require__(15);
+	
+	var _on = __webpack_require__(6);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -2684,11 +2714,10 @@ var BluemixComponents =
 	   *   Cancellation of this event stops selection of drop down item.
 	   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
 	   */
-	
 	  function Dropdown(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, Dropdown);
 	
@@ -2698,13 +2727,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      selectorItem: '[data-option] > .bx--dropdown__link',
-	      selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
-	      classSelected: 'bx--dropdown--selected',
-	      eventBeforeSelected: 'dropdown-beingselected',
-	      eventAfterSelected: 'dropdown-selected'
-	    }, options);
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
 	
 	    if (this.element.dataset.dropdown !== 'navigation') {
 	      this.element.dataset.dropdown = '';
@@ -2758,7 +2781,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'toggle',
 	    value: function toggle(event) {
-	      if (event.which === 13 || event.type === 'click') {
+	      if (event.which === 13 || event.which === 32 || event.type === 'click') {
 	        var isOfSelf = this.element.contains(event.target);
 	
 	        if (isOfSelf) {
@@ -2818,10 +2841,11 @@ var BluemixComponents =
 	
 	    /**
 	     * Instantiates selectors in the given node.
-	     * If the given element indicates that it's an selector (having `data-dropdown` attribute), instantiates it.
+	     * If the given element indicates that it's an selector, instantiates it.
 	     * Otherwise, instantiates selectors by searching for selectors in the given node.
 	     * @param {Node} target The DOM node to instantiate selectors in. Should be a document or an element.
 	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS selector to find selectors.
 	     * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
 	     * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
 	     * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
@@ -2836,17 +2860,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this3 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-dropdown]'))).forEach(function (element) {
-	          return _this3.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this3.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -2856,8 +2881,19 @@ var BluemixComponents =
 	}();
 	
 	/**
+	 * The map associating DOM element and selector instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = Dropdown;
+	Dropdown.components = new WeakMap();
+	
+	/**
 	 * The component options.
-	 * @member {Object} Dropdown#options
+	 * If `options` is specified in the constructor, {@linkcode Dropdown.create .create()}, or {@linkcode Dropdown.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode Dropdown.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find selectors.
 	 * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
 	 * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
 	 * @property {string} [classSelected] The CSS class for the selected dropdown item.
@@ -2866,18 +2902,17 @@ var BluemixComponents =
 	 *   Cancellation of this event stops selection of drop down item.
 	 * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
 	 */
-	
-	/**
-	 * The map associating DOM element and selector instance.
-	 * @type {WeakMap}
-	 */
-	
-	
-	exports.default = Dropdown;
-	Dropdown.components = new WeakMap();
+	Dropdown.options = {
+	  selectorInit: '[data-dropdown]',
+	  selectorItem: '[data-option] > .bx--dropdown__link',
+	  selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
+	  classSelected: 'bx--dropdown--selected',
+	  eventBeforeSelected: 'dropdown-beingselected',
+	  eventAfterSelected: 'dropdown-selected'
+	};
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2888,15 +2923,17 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventMatches = __webpack_require__(4);
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	__webpack_require__(11);
+	__webpack_require__(3);
+	
+	__webpack_require__(9);
+	
+	__webpack_require__(12);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2912,11 +2949,10 @@ var BluemixComponents =
 	   * @param {Object} [options] The component options.
 	   * @param {string} [options.selectorCard] The CSS selector to find cards.
 	   */
-	
 	  function Card(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, Card);
 	
@@ -2924,9 +2960,7 @@ var BluemixComponents =
 	      throw new TypeError('DOM element should be given to initialize this widget.');
 	    }
 	    this.element = element;
-	    this.options = Object.assign({
-	      selectorCard: '.bx--card'
-	    }, options);
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
 	    this.constructor.components.set(this.element, this);
 	    this.element.addEventListener('keydown', function (event) {
 	      return _this.cardKeyPress(event);
@@ -2979,10 +3013,11 @@ var BluemixComponents =
 	
 	    /**
 	     * Instantiates card container in the given node.
-	     * If the given element indicates that it's an card container (having `data-card-list` attribute), instantiates it.
+	     * If the given element indicates that it's an card container, instantiates it.
 	     * Otherwise, instantiates card containers by searching for card containers in the given node.
 	     * @param {Node} target The DOM node to instantiate card containers in. Should be a document or an element.
 	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS selector to find card containers.
 	     * @param {string} [options.selectorCard] The CSS selector to find cards.
 	     */
 	
@@ -2991,17 +3026,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.cardList !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-card-list]'))).forEach(function (element) {
-	          return _this2.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this2.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -3011,12 +3047,6 @@ var BluemixComponents =
 	}();
 	
 	/**
-	 * The component options.
-	 * @member {Object} Card#options
-	 * @property {string} [selectorCard] The CSS selector to find cards.
-	 */
-	
-	/**
 	 * The map associating DOM element and card list instance.
 	 * @type {WeakMap}
 	 */
@@ -3024,9 +3054,21 @@ var BluemixComponents =
 	
 	exports.default = Card;
 	Card.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode Card.create .create()}, or {@linkcode Card.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode Card.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find card containers.
+	 * @property {string} [selectorCard] The CSS selector to find cards.
+	 */
+	Card.options = {
+	  selectorInit: '[data-card-list]',
+	  selectorCard: '.bx--card'
+	};
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3037,9 +3079,11 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
+	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(15);
+	
+	__webpack_require__(3);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -3051,11 +3095,10 @@ var BluemixComponents =
 	   * @implements Component
 	   * @param {HTMLElement} element The element working as a number input UI.
 	   */
-	
 	  function NumberInput(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, NumberInput);
 	
@@ -3133,9 +3176,11 @@ var BluemixComponents =
 	
 	    /**
 	     * Instantiates number input UI in the given node.
-	     * If the given element indicates that it's an number input UI (having `data-numberinput` attribute), instantiates it.
+	     * If the given element indicates that it's an number input UI, instantiates it.
 	     * Otherwise, instantiates number input UIs by searching for number input UIs in the given node.
 	     * @param {Node} target The DOM node to instantiate number input UIs in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {boolean} [options.selectorInit] The CSS selector to find number input UIs.
 	     */
 	
 	  }, {
@@ -3143,15 +3188,17 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.numberinput !== undefined) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-numberinput]'))).forEach(function (element) {
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
 	          return _this2.create(element);
 	        });
 	      }
@@ -3169,9 +3216,19 @@ var BluemixComponents =
 	
 	exports.default = NumberInput;
 	NumberInput.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find number input UIs.
+	 */
+	NumberInput.options = {
+	  selectorInit: '[data-numberinput]'
+	};
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3182,17 +3239,19 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventMatches = __webpack_require__(4);
+	__webpack_require__(3);
+	
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(8);
+	__webpack_require__(9);
 	
-	var _toggleClass = __webpack_require__(9);
+	var _toggleClass = __webpack_require__(10);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _on = __webpack_require__(5);
+	var _on = __webpack_require__(6);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -3216,11 +3275,10 @@ var BluemixComponents =
 	   * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
 	   * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
 	   */
-	
 	  function Table(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, Table);
 	
@@ -3229,17 +3287,7 @@ var BluemixComponents =
 	    }
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      selectorTitle: '.bx--table__column-title',
-	      selectorRow: '.bx--table__row',
-	      selectorCheckbox: '.bx--checkbox',
-	      classSortState: 'bx--table__column-title--rotated',
-	      classCheckState: 'bx--table__row--checked',
-	      eventBeforeSortToggled: 'table-sort-beingtoggled',
-	      eventAfterSortToggled: 'table-sort-toggled',
-	      eventBeforeCheckToggled: 'table-check-beingtoggled',
-	      eventAfterCheckToggled: 'table-check-toggled'
-	    }, options);
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
 	
 	    this.constructor.components.set(this.element, this);
 	
@@ -3352,10 +3400,11 @@ var BluemixComponents =
 	
 	    /**
 	     * Sets up the given node to instantiate data tables in.
-	     * If the given element indicates that it's an data table (having `data-table` attribute), instantiates it.
+	     * If the given element indicates that it's an data table, instantiates it.
 	     * Otherwise, lazily instantiates data table when it's clicked on.
 	     * @param {Node} target The DOM node to instantiate data tables in. Should be a document or an element.
 	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS selector to find data tables.
 	     * @param {string} [options.selectorTitle] The CSS selector to find column titles.
 	     * @param {string} [options.selectorRow] The CSS selector to find rows.
 	     * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
@@ -3373,19 +3422,20 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.table !== undefined) {
-	        this.create(target, options);
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target, effectiveOptions);
 	      } else {
 	        return (0, _on2.default)(target, 'click', function (event) {
-	          var element = (0, _eventMatches2.default)(event, '[data-table]');
+	          var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
 	          if (element && !_this2.components.has(element)) {
-	            _this2.create(element, options).handleClick(event);
+	            _this2.create(element, effectiveOptions).handleClick(event);
 	          }
 	        });
 	      }
@@ -3396,8 +3446,19 @@ var BluemixComponents =
 	}();
 	
 	/**
+	 * The map associating DOM element and data table instance.
+	 * @type {WeakMap}
+	 */
+	
+	
+	exports.default = Table;
+	Table.components = new WeakMap();
+	
+	/**
 	 * The component options.
-	 * @member {Object} Table#options
+	 * If `options` is specified in the constructor, {@linkcode Table.create .create()}, or {@linkcode Table.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode Table.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find data tables.
 	 * @property {string} [selectorTitle] The CSS selector to find column titles.
 	 * @property {string} [selectorRow] The CSS selector to find rows.
 	 * @property {string} [selectorCheckbox] The CSS selector to find check boxes.
@@ -3408,18 +3469,21 @@ var BluemixComponents =
 	 * @property {string} [eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
 	 * @property {string} [eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
 	 */
-	
-	/**
-	 * The map associating DOM element and data table instance.
-	 * @type {WeakMap}
-	 */
-	
-	
-	exports.default = Table;
-	Table.components = new WeakMap();
+	Table.options = {
+	  selectorInit: '[data-table]',
+	  selectorTitle: '.bx--table__column-title',
+	  selectorRow: '.bx--table__row',
+	  selectorCheckbox: '.bx--checkbox',
+	  classSortState: 'bx--table__column-title--rotated',
+	  classCheckState: 'bx--table__row--checked',
+	  eventBeforeSortToggled: 'table-sort-beingtoggled',
+	  eventAfterSortToggled: 'table-sort-toggled',
+	  eventBeforeCheckToggled: 'table-check-beingtoggled',
+	  eventAfterCheckToggled: 'table-check-toggled'
+	};
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3430,7 +3494,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lodash = __webpack_require__(23);
+	var _lodash = __webpack_require__(24);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -3448,9 +3512,8 @@ var BluemixComponents =
 	   * @param {HTMLElement} element The element working as a page header.
 	   * @param {Object} [options] The component options.
 	   */
-	
 	  function DetailPageHeader(element) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, DetailPageHeader);
 	
@@ -3460,9 +3523,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      slideUp: 'bx--detail-page-header--with-tabs--animated-slide-up'
-	    }, options);
+	    this.options = Object.assign(this.constructor.options, options);
 	
 	    this.constructor.components.set(this.element, this);
 	
@@ -3510,6 +3571,7 @@ var BluemixComponents =
 	     * Otherwise, instantiates detail page header by searching for detail page header in the given node.
 	     * @param {Node} target The DOM node to instantiate detail page header in. Should be a document or an element.
 	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS selector to find detail page headers.
 	     */
 	
 	  }, {
@@ -3517,17 +3579,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
 	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.detailPageHeader !== undefined) {
-	        this.create(target, options);
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-detail-page-header]'))).forEach(function (element) {
-	          return _this.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -3544,13 +3607,24 @@ var BluemixComponents =
 	
 	exports.default = DetailPageHeader;
 	DetailPageHeader.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode DetailPageHeader.create .create()}, or {@linkcode DetailPageHeader.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode DetailPageHeader.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find detail page headers.
+	 */
+	DetailPageHeader.options = {
+	  slideUp: 'bx--detail-page-header--with-tabs--animated-slide-up',
+	  selectorInit: '[data-detail-page-header]'
+	};
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
-	/**
-	 * lodash 4.0.6 (Custom Build) <https://lodash.com/>
+	/* WEBPACK VAR INJECTION */(function(global) {/**
+	 * lodash (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modularize exports="npm" -o ./`
 	 * Copyright jQuery Foundation and other contributors <https://jquery.org/>
 	 * Released under MIT license <https://lodash.com/license>
@@ -3565,9 +3639,7 @@ var BluemixComponents =
 	var NAN = 0 / 0;
 	
 	/** `Object#toString` result references. */
-	var funcTag = '[object Function]',
-	    genTag = '[object GeneratorFunction]',
-	    symbolTag = '[object Symbol]';
+	var symbolTag = '[object Symbol]';
 	
 	/** Used to match leading and trailing whitespace. */
 	var reTrim = /^\s+|\s+$/g;
@@ -3584,12 +3656,21 @@ var BluemixComponents =
 	/** Built-in method references without a dependency on `root`. */
 	var freeParseInt = parseInt;
 	
+	/** Detect free variable `global` from Node.js. */
+	var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+	
+	/** Detect free variable `self`. */
+	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+	
+	/** Used as a reference to the global object. */
+	var root = freeGlobal || freeSelf || Function('return this')();
+	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
 	
 	/**
 	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
 	 * of values.
 	 */
 	var objectToString = objectProto.toString;
@@ -3605,7 +3686,6 @@ var BluemixComponents =
 	 * @static
 	 * @memberOf _
 	 * @since 2.4.0
-	 * @type {Function}
 	 * @category Date
 	 * @returns {number} Returns the timestamp.
 	 * @example
@@ -3613,23 +3693,29 @@ var BluemixComponents =
 	 * _.defer(function(stamp) {
 	 *   console.log(_.now() - stamp);
 	 * }, _.now());
-	 * // => Logs the number of milliseconds it took for the deferred function to be invoked.
+	 * // => Logs the number of milliseconds it took for the deferred invocation.
 	 */
-	var now = Date.now;
+	var now = function() {
+	  return root.Date.now();
+	};
 	
 	/**
 	 * Creates a debounced function that delays invoking `func` until after `wait`
 	 * milliseconds have elapsed since the last time the debounced function was
 	 * invoked. The debounced function comes with a `cancel` method to cancel
 	 * delayed `func` invocations and a `flush` method to immediately invoke them.
-	 * Provide an options object to indicate whether `func` should be invoked on
-	 * the leading and/or trailing edge of the `wait` timeout. The `func` is invoked
-	 * with the last arguments provided to the debounced function. Subsequent calls
-	 * to the debounced function return the result of the last `func` invocation.
+	 * Provide `options` to indicate whether `func` should be invoked on the
+	 * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+	 * with the last arguments provided to the debounced function. Subsequent
+	 * calls to the debounced function return the result of the last `func`
+	 * invocation.
 	 *
-	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
-	 * on the trailing edge of the timeout only if the debounced function is
-	 * invoked more than once during the `wait` timeout.
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is
+	 * invoked on the trailing edge of the timeout only if the debounced function
+	 * is invoked more than once during the `wait` timeout.
+	 *
+	 * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+	 * until to the next tick, similar to `setTimeout` with a timeout of `0`.
 	 *
 	 * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
 	 * for details over the differences between `_.debounce` and `_.throttle`.
@@ -3673,7 +3759,7 @@ var BluemixComponents =
 	      maxWait,
 	      result,
 	      timerId,
-	      lastCallTime = 0,
+	      lastCallTime,
 	      lastInvokeTime = 0,
 	      leading = false,
 	      maxing = false,
@@ -3724,7 +3810,7 @@ var BluemixComponents =
 	    // Either this is the first call, activity has stopped and we're at the
 	    // trailing edge, the system time has gone backwards and we're treating
 	    // it as the trailing edge, or we've hit the `maxWait` limit.
-	    return (!lastCallTime || (timeSinceLastCall >= wait) ||
+	    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
 	      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
 	  }
 	
@@ -3738,7 +3824,6 @@ var BluemixComponents =
 	  }
 	
 	  function trailingEdge(time) {
-	    clearTimeout(timerId);
 	    timerId = undefined;
 	
 	    // Only invoke if we have `lastArgs` which means `func` has been
@@ -3754,8 +3839,8 @@ var BluemixComponents =
 	    if (timerId !== undefined) {
 	      clearTimeout(timerId);
 	    }
-	    lastCallTime = lastInvokeTime = 0;
-	    lastArgs = lastThis = timerId = undefined;
+	    lastInvokeTime = 0;
+	    lastArgs = lastCallTime = lastThis = timerId = undefined;
 	  }
 	
 	  function flush() {
@@ -3776,7 +3861,6 @@ var BluemixComponents =
 	      }
 	      if (maxing) {
 	        // Handle invocations in a tight loop.
-	        clearTimeout(timerId);
 	        timerId = setTimeout(timerExpired, wait);
 	        return invokeFunc(lastCallTime);
 	      }
@@ -3792,34 +3876,8 @@ var BluemixComponents =
 	}
 	
 	/**
-	 * Checks if `value` is classified as a `Function` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified,
-	 *  else `false`.
-	 * @example
-	 *
-	 * _.isFunction(_);
-	 * // => true
-	 *
-	 * _.isFunction(/abc/);
-	 * // => false
-	 */
-	function isFunction(value) {
-	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in Safari 8 which returns 'object' for typed array and weak map constructors,
-	  // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
-	  var tag = isObject(value) ? objectToString.call(value) : '';
-	  return tag == funcTag || tag == genTag;
-	}
-	
-	/**
 	 * Checks if `value` is the
-	 * [language type](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types)
+	 * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
 	 * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
 	 *
 	 * @static
@@ -3883,8 +3941,7 @@ var BluemixComponents =
 	 * @since 4.0.0
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified,
-	 *  else `false`.
+	 * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
 	 * @example
 	 *
 	 * _.isSymbol(Symbol.iterator);
@@ -3909,8 +3966,8 @@ var BluemixComponents =
 	 * @returns {number} Returns the number.
 	 * @example
 	 *
-	 * _.toNumber(3);
-	 * // => 3
+	 * _.toNumber(3.2);
+	 * // => 3.2
 	 *
 	 * _.toNumber(Number.MIN_VALUE);
 	 * // => 5e-324
@@ -3918,8 +3975,8 @@ var BluemixComponents =
 	 * _.toNumber(Infinity);
 	 * // => Infinity
 	 *
-	 * _.toNumber('3');
-	 * // => 3
+	 * _.toNumber('3.2');
+	 * // => 3.2
 	 */
 	function toNumber(value) {
 	  if (typeof value == 'number') {
@@ -3929,7 +3986,7 @@ var BluemixComponents =
 	    return NAN;
 	  }
 	  if (isObject(value)) {
-	    var other = isFunction(value.valueOf) ? value.valueOf() : value;
+	    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
 	    value = isObject(other) ? (other + '') : other;
 	  }
 	  if (typeof value != 'string') {
@@ -3943,10 +4000,11 @@ var BluemixComponents =
 	}
 	
 	module.exports = debounce;
-
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3955,23 +4013,25 @@ var BluemixComponents =
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
-	__webpack_require__(7);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(9);
 	
-	var _toggleClass = __webpack_require__(9);
+	__webpack_require__(15);
+	
+	var _toggleClass = __webpack_require__(10);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _eventMatches = __webpack_require__(4);
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	var _on = __webpack_require__(5);
+	var _on = __webpack_require__(6);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -4005,11 +4065,10 @@ var BluemixComponents =
 	   * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
 	   * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
 	   */
-	
 	  function LeftNav(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, LeftNav);
 	
@@ -4018,6 +4077,8 @@ var BluemixComponents =
 	    }
 	
 	    this.element = element;
+	
+	    this.leftNavSectionActive = false;
 	
 	    this.options = Object.assign({
 	      // Data Attribute selectors
@@ -4032,25 +4093,40 @@ var BluemixComponents =
 	      selectorLeftNavArrowIcon: '[data-left-nav-icon]',
 	      selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
 	      selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+	      selectorLeftNavSections: '[data-left-nav-sections]',
 	      selectorLeftNavSection: '[data-left-nav-section]',
+	      selectorLeftNavSectionLink: '[data-left-nav-section-link]',
+	      selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
 	      selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+	      selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
+	      selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
 	      selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
 	      selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
 	      selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
 	      // CSS Class Selectors
-	      classActiveLeftNav: 'bx--left-nav--active',
-	      classActiveLeftNavListItem: 'bx--left-nav-list__item--active',
 	      classActiveTrigger: 'bx--left-nav__trigger--active',
-	      classExpandedLeftNavListItem: 'bx--left-nav-list__item--expanded',
-	      classFlyoutDisplayed: 'bx--left-nav-list--flyout--displayed',
-	      classItemHasChildren: 'bx--left-nav-list__item--has-children'
+	      classActiveLeftNav: 'bx--left-nav--active',
+	      classActiveLeftNavListItem: 'bx--active-list-item',
+	      classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
+	      classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
+	      classItemHasChildren: 'bx--main-nav__parent-item--has-children',
+	      classNavSection: 'bx--left-nav__section',
+	      classNavSectionTransition: 'bx--left-nav__section--transition',
+	      classNavSectionAnchor: 'bx--left-nav__section--anchor',
+	      classNavSectionLink: 'bx--left-nav__section--link',
+	      classNavHeaderTitle: 'bx--left-nav__header--title',
+	      classItemFade: 'bx--main-nav__parent-item--fade',
+	      classItemHidden: 'bx--main-nav__parent-item--hidden',
+	      classListHidden: 'bx--left-nav__main-nav--hidden',
+	      classListTop: 'bx--left-nav__main-nav--top'
 	    }, options);
+	    this.options = Object.assign(this.constructor.options, options);
 	
 	    this.constructor.components.set(this.element, this);
 	
 	    this.hookOpenActions();
+	    this.hookListSectionEvents();
 	    this.hookListItemsEvents();
-	    this.animateInNav();
 	    this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (evt) {
 	      return _this.handleDocumentClick(evt);
 	    });
@@ -4090,6 +4166,7 @@ var BluemixComponents =
 	    value: function closeMenu() {
 	      this.element.classList.remove(this.options.classActiveLeftNav);
 	      this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.remove(this.options.classActiveTrigger);
+	      this.element.querySelector(this.options.selectorLeftNav).parentNode.setAttribute('aria-expanded', 'false');
 	    }
 	
 	    /**
@@ -4099,71 +4176,144 @@ var BluemixComponents =
 	  }, {
 	    key: 'toggleMenu',
 	    value: function toggleMenu() {
+	      var leftNavContainer = this.element.querySelector(this.options.selectorLeftNav).parentNode;
 	      this.element.classList.toggle(this.options.classActiveLeftNav);
 	      this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.toggle(this.options.classActiveTrigger);
+	      if (leftNavContainer.getAttribute('aria-expanded') === 'false') leftNavContainer.setAttribute('aria-expanded', 'true');else leftNavContainer.setAttribute('aria-expanded', 'false');
 	    }
 	
 	    /**
-	     * Adds a animation delay to the list items as they appear on page load.
+	     * Adds a transitional animation to the navSection
 	     */
 	
 	  }, {
-	    key: 'animateInNav',
-	    value: function animateInNav() {
+	    key: 'animateNavSection',
+	    value: function animateNavSection(selectedNav) {
 	      var _this2 = this;
 	
-	      var counter = 0.1;
-	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavListItem))).forEach(function (item) {
-	        item.classList.add('animate');
-	        item.style.animationDelay = counter + 's';
-	        counter += 0.05;
-	      });
+	      var selectedNavLink = selectedNav.querySelector(this.options.selectorLeftNavSectionLink);
+	      var leftNav = this.element.querySelector(this.options.selectorLeftNav);
+	      var leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
+	
+	      selectedNav.classList.remove(this.options.classNavSection);
+	      selectedNav.classList.remove(this.options.classNavSection + '--\'' + selectedNavLink.textContent.toLowerCase());
+	      selectedNav.classList.add(this.options.classNavSectionTransition);
+	      if (leftNavSections.children[0] === selectedNav) selectedNav.classList.add(this.options.classNavSectionTransition + '--50'); // First child only move 50px
+	      else selectedNav.classList.add(this.options.classNavSectionTransition + '--100'); // Second move 100px
+	      selectedNav.setAttribute('data-left-nav-section', selectedNavLink.textContent);
+	      /* Not sure what trick more performant*/
 	      setTimeout(function () {
-	        [].concat(_toConsumableArray(_this2.element.querySelectorAll(_this2.options.selectorLeftNavListItem))).forEach(function (item) {
-	          item.classList.remove('animate');
-	        });
-	      }, 1000);
+	        selectedNav.classList.add(_this2.options.classNavSectionTransition + '--0');
+	      }, 100); // Could probably use a promise here
+	
+	      selectedNavLink.classList.remove(this.options.classNavSectionLink);
+	      selectedNavLink.classList.add(this.options.classNavHeaderTitle);
+	      selectedNavLink.setAttribute('data-left-nav-current-section-title', '');
+	      selectedNavLink.removeAttribute('data-left-nav-section-link');
+	
+	      this.element.insertBefore(selectedNav, leftNav);
 	    }
 	
 	    /**
-	     * Adds event listeners for showing and hiding the left navigation
+	     * Adds a transitional animation to the navigation items on nav section click
 	     */
 	
+	  }, {
+	    key: 'animateNavList',
+	    value: function animateNavList(selectedNavTitle) {
+	      var _this3 = this;
+	
+	      var currentLeftNavList = this.element.querySelector(this.options.selectorLeftNavList + ':not(.bx--left-nav__main-nav--hidden)');
+	      var newLeftNavList = this.element.querySelector('[data-left-nav-list=' + selectedNavTitle + ']');
+	      var currentLeftNavItems = [].concat(_toConsumableArray(currentLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem))).reverse();
+	      var newLeftNavItems = [].concat(_toConsumableArray(newLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)));
+	
+	      var fadeOutTime = 300;
+	      var counter = 0;
+	      var counterIteration = fadeOutTime / currentLeftNavItems.length; // Length of animation divided by number of items
+	      currentLeftNavItems.forEach(function (item) {
+	        item.setAttribute('tabIndex', '-1');
+	        setTimeout(function () {
+	          item.classList.add(_this3.options.classItemFade);
+	        }, counter);
+	        counter += counterIteration;
+	      });
+	
+	      newLeftNavItems.forEach(function (item) {
+	        item.setAttribute('tabIndex', '0');
+	        item.classList.remove(_this3.options.classItemFade);
+	      });
+	
+	      setTimeout(function () {
+	        currentLeftNavList.classList.add(_this3.options.classListHidden);
+	        currentLeftNavList.classList.add(_this3.options.classListTop);
+	        currentLeftNavList.setAttribute('aria-hidden', 'true');
+	        newLeftNavList.classList.remove(_this3.options.classListHidden);
+	        setTimeout(function () {
+	          newLeftNavList.classList.remove(_this3.options.classListTop);
+	        }, 100);
+	        newLeftNavList.setAttribute('aria-hidden', 'false');
+	      }, fadeOutTime + 100); // Wait for items to fade out.
+	    }
 	  }, {
 	    key: 'hookOpenActions',
 	    value: function hookOpenActions() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      var openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
 	      var closeBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleClose);
 	
 	      openBtn.addEventListener('click', function () {
-	        _this3.element.tabIndex = '0';
-	        _this3.toggleMenu();
+	        _this4.element.tabIndex = '0';
+	        _this4.toggleMenu();
 	      });
 	
 	      openBtn.addEventListener('keydown', function (evt) {
 	        if (evt.which === 13) {
-	          _this3.element.tabIndex = '0';
-	          _this3.toggleMenu();
+	          _this4.element.tabIndex = '0';
+	          _this4.toggleMenu();
 	        }
 	      });
 	
-	      closeBtn.addEventListener('click', function () {
-	        _this3.element.tabIndex = '-1';
-	        _this3.closeMenu();
-	      });
+	      if (closeBtn) {
+	        closeBtn.addEventListener('click', function () {
+	          _this4.element.tabIndex = '-1';
+	          _this4.closeMenu();
+	        });
 	
-	      closeBtn.addEventListener('keydown', function (evt) {
-	        if (evt.which === 13) {
-	          _this3.element.tabIndex = '-1';
-	          _this3.closeMenu();
-	        }
-	      });
+	        closeBtn.addEventListener('keydown', function (evt) {
+	          if (evt.which === 13) {
+	            _this4.element.tabIndex = '-1';
+	            _this4.closeMenu();
+	          }
+	        });
+	      }
 	
 	      this.element.ownerDocument.addEventListener('keydown', function (evt) {
-	        if (evt.which === 27 && _this3.element.classList.contains(_this3.options.classActiveLeftNav)) {
-	          _this3.closeMenu();
+	        if (evt.which === 27 && _this4.element.classList.contains(_this4.options.classActiveLeftNav)) {
+	          _this4.closeMenu();
+	        }
+	      });
+	    }
+	
+	    /**
+	     * Addes Event listeners to list sections
+	     */
+	
+	  }, {
+	    key: 'hookListSectionEvents',
+	    value: function hookListSectionEvents() {
+	      var _this5 = this;
+	
+	      var leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
+	      leftNavSections.addEventListener('click', function (evt) {
+	        _this5.handleSectionItemClick(evt, leftNavSections);
+	      });
+	
+	      leftNavSections.addEventListener('keydown', function (evt) {
+	        if (evt.which === 13) {
+	          _this5.handleSectionItemClick(evt, leftNavSections);
+	          _this5.element.querySelector(_this5.options.selectorLeftNavCurrentSectionTitle).focus();
 	        }
 	      });
 	    }
@@ -4175,61 +4325,69 @@ var BluemixComponents =
 	  }, {
 	    key: 'hookListItemsEvents',
 	    value: function hookListItemsEvents() {
-	      var _this4 = this;
+	      var _this6 = this;
 	
-	      var leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
-	      leftNavList.addEventListener('click', function (evt) {
-	        var leftNavItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavListItem);
-	        if (leftNavItem) {
-	          var childItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavNestedListItem);
-	          var hasChildren = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavListItemHasChildren);
-	          var flyoutItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavFlyoutItem);
-	          if (flyoutItem) {
-	            _this4.addActiveListItem(flyoutItem);
-	          } else if (childItem) {
-	            if (childItem.querySelector(_this4.options.selectorLeftNavFlyoutMenu)) {
-	              var flyoutMenu = childItem.querySelector(_this4.options.selectorLeftNavFlyoutMenu);
-	              flyoutMenu.classList.toggle(_this4.options.classFlyoutDisplayed);
-	            } else {
-	              _this4.addActiveListItem(childItem);
-	            }
-	          } else if (hasChildren) {
-	            _this4.handleNestedListClick(leftNavItem);
-	          } else {
-	            _this4.addActiveListItem(leftNavItem);
-	          }
-	        }
-	      });
-	      leftNavList.addEventListener('keydown', function (evt) {
-	        if (evt.which === 13) {
-	          var leftNavItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavListItem);
+	      var leftNavList = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavList)));
+	      leftNavList.forEach(function (list) {
+	        list.addEventListener('click', function (evt) {
+	          var leftNavItem = (0, _eventMatches2.default)(evt, _this6.options.selectorLeftNavListItem);
 	          if (leftNavItem) {
-	            var childItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavNestedListItem);
-	            var hasChildren = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavListItemHasChildren);
-	            var flyoutItem = (0, _eventMatches2.default)(evt, _this4.options.selectorLeftNavFlyoutItem);
+	            var childItem = (0, _eventMatches2.default)(evt, _this6.options.selectorLeftNavNestedListItem);
+	            var hasChildren = (0, _eventMatches2.default)(evt, _this6.options.selectorLeftNavListItemHasChildren);
+	            var flyoutItem = (0, _eventMatches2.default)(evt, _this6.options.selectorLeftNavFlyoutItem);
 	            if (flyoutItem) {
-	              _this4.addActiveListItem(flyoutItem);
+	              _this6.addActiveListItem(flyoutItem);
 	            } else if (childItem) {
-	              if (!childItem.querySelector(_this4.options.selectorLeftNavFlyoutMenu)) {
-	                _this4.addActiveListItem(childItem);
+	              if (childItem.querySelector(_this6.options.selectorLeftNavFlyoutMenu)) {
+	                var flyoutMenu = childItem.querySelector(_this6.options.selectorLeftNavFlyoutMenu);
+	                flyoutMenu.classList.toggle(_this6.options.classFlyoutDisplayed);
+	              } else {
+	                _this6.addActiveListItem(childItem);
 	              }
 	            } else if (hasChildren) {
-	              _this4.handleNestedListClick(leftNavItem);
+	              _this6.handleNestedListClick(leftNavItem);
 	            } else {
-	              _this4.addActiveListItem(leftNavItem);
+	              _this6.addActiveListItem(leftNavItem);
 	            }
 	          }
-	        }
+	        });
+	        list.addEventListener('keydown', function (evt) {
+	          if (evt.which === 13) {
+	            var leftNavItem = (0, _eventMatches2.default)(evt, _this6.options.selectorLeftNavListItem);
+	            if (leftNavItem) {
+	              var childItem = (0, _eventMatches2.default)(evt, _this6.options.selectorLeftNavNestedListItem);
+	              var hasChildren = (0, _eventMatches2.default)(evt, _this6.options.selectorLeftNavListItemHasChildren);
+	              var flyoutItem = (0, _eventMatches2.default)(evt, _this6.options.selectorLeftNavFlyoutItem);
+	              if (flyoutItem) {
+	                _this6.addActiveListItem(flyoutItem);
+	              } else if (childItem) {
+	                if (!childItem.querySelector(_this6.options.selectorLeftNavFlyoutMenu)) {
+	                  _this6.addActiveListItem(childItem);
+	                } else {
+	                  childItem.querySelector(_this6.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
+	                  childItem.querySelector(_this6.options.selectorLeftNavFlyoutMenu).style.top = childItem.offsetTop - _this6.element.querySelector(_this6.options.selectorLeftNav).scrollTop + 'px';
+	                  childItem.querySelector(_this6.options.selectorLeftNavFlyoutMenu).style.left = childItem.offsetLeft + Math.round(childItem.offsetWidth) + 'px';
+	                }
+	              } else if (hasChildren) {
+	                _this6.handleNestedListClick(leftNavItem);
+	              } else {
+	                _this6.addActiveListItem(leftNavItem);
+	              }
+	            }
+	          }
+	        });
 	      });
 	      var flyouts = [].concat(_toConsumableArray(this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)));
 	      flyouts.forEach(function (flyout) {
 	        flyout.addEventListener('mouseenter', function () {
-	          flyout.querySelector(_this4.options.selectorLeftNavFlyoutMenu).style.top = flyout.offsetTop - _this4.element.querySelector(_this4.options.selectorLeftNav).scrollTop + 'px';
-	          flyout.querySelector(_this4.options.selectorLeftNavFlyoutMenu).style.left = flyout.offsetLeft + Math.round(flyout.offsetWidth) + 'px';
-	          flyout.querySelector(_this4.options.selectorLeftNavFlyoutMenu).classList.add(_this4.options.classFlyoutDisplayed);
+	          flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
+	          flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).style.top = flyout.offsetTop - _this6.element.querySelector(_this6.options.selectorLeftNav).scrollTop + 'px';
+	          flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).style.left = flyout.offsetLeft + Math.round(flyout.offsetWidth) + 'px';
+	          flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).classList.toggle(_this6.options.classFlyoutDisplayed);
 	        });
 	        flyout.addEventListener('mouseleave', function () {
-	          flyout.querySelector(_this4.options.selectorLeftNavFlyoutMenu).classList.remove(_this4.options.classFlyoutDisplayed);
+	          flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'true');
+	          flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).classList.remove(_this6.options.classFlyoutDisplayed);
 	        });
 	      });
 	    }
@@ -4241,11 +4399,12 @@ var BluemixComponents =
 	  }, {
 	    key: 'hideAllFlyoutMenus',
 	    value: function hideAllFlyoutMenus() {
-	      var _this5 = this;
+	      var _this7 = this;
 	
 	      var flyoutMenus = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)));
 	      flyoutMenus.forEach(function (menu) {
-	        menu.classList.remove(_this5.options.classFlyoutDisplayed);
+	        menu.setAttribute('aria-hidden', 'true');
+	        menu.classList.remove(_this7.options.classFlyoutDisplayed);
 	      });
 	    }
 	
@@ -4257,23 +4416,24 @@ var BluemixComponents =
 	  }, {
 	    key: 'addActiveListItem',
 	    value: function addActiveListItem(item) {
-	      var _this6 = this;
+	      var _this8 = this;
 	
 	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavAllListItems))).forEach(function (currentItem) {
 	        if (!(item === currentItem)) {
 	          if (!currentItem.contains(item)) {
-	            currentItem.classList.remove(_this6.options.classActiveLeftNavListItem);
+	            currentItem.classList.remove(_this8.options.classActiveLeftNavListItem);
 	          } else {
-	            currentItem.classList.add(_this6.options.classActiveLeftNavListItem);
+	            currentItem.classList.add(_this8.options.classActiveLeftNavListItem);
 	          }
 	        }
 	      });
 	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem))).forEach(function (currentItem) {
 	        if (!(item === currentItem)) {
-	          currentItem.classList.remove(_this6.options.classActiveLeftNavListItem);
+	          currentItem.classList.remove(_this8.options.classActiveLeftNavListItem);
 	        }
 	      });
 	      item.classList.add(this.options.classActiveLeftNavListItem);
+	      this.closeMenu();
 	      this.hideAllFlyoutMenus();
 	      this.closeMenu();
 	    }
@@ -4320,7 +4480,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'handleNestedListClick',
 	    value: function handleNestedListClick(listItem) {
-	      var _this7 = this;
+	      var _this9 = this;
 	
 	      var isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
 	      this.hideAllFlyoutMenus();
@@ -4328,11 +4488,80 @@ var BluemixComponents =
 	      var listItems = [].concat(_toConsumableArray(listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem)));
 	      listItems.forEach(function (item) {
 	        if (isOpen) {
-	          item.querySelector(_this7.options.selectorLeftNavListItemLink).tabIndex = -1;
+	          listItem.querySelector(_this9.options.selectorLeftNavNestedList).setAttribute('aria-hidden', 'true');
+	          item.querySelector(_this9.options.selectorLeftNavListItemLink).tabIndex = -1;
 	        } else {
-	          item.querySelector(_this7.options.selectorLeftNavListItemLink).tabIndex = 0;
+	          listItem.querySelector(_this9.options.selectorLeftNavNestedList).setAttribute('aria-hidden', 'false');
+	          item.querySelector(_this9.options.selectorLeftNavListItemLink).tabIndex = 0;
 	        }
 	      });
+	    }
+	  }, {
+	    key: 'handleSectionItemClick',
+	    value: function handleSectionItemClick(evt, leftNavSections) {
+	      var _this10 = this;
+	
+	      // Sorry
+	      var leftNavSectionItem = (0, _eventMatches2.default)(evt, this.options.selectorLeftNavSection);
+	      if (leftNavSectionItem) {
+	        var _ret = function () {
+	          var selectedLeftNavSectionItem = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSection);
+	          var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(_this10.options.selectorLeftNavCurrentSectionTitle);
+	          var selectedLeftNavSectionItemIcon = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSectionIcon);
+	          var selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
+	          var leftNavSectionItemLink = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionLink);
+	          var leftNavSectionItemIcon = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionIcon);
+	          var leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
+	
+	          if (_this10.leftNavSectionActive) {
+	            return {
+	              v: void 0
+	            };
+	          }
+	          _this10.leftNavSectionActive = true;
+	
+	          var newLeftNavSectionItem = document.createElement('li');
+	          newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionItemTitle.textContent);
+	          newLeftNavSectionItem.setAttribute('tabindex', 0);
+	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection);
+	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection + '--' + selectedLeftNavSectionItemTitle.textContent.toLowerCase());
+	
+	          var newLeftNavSectionItemAnchor = document.createElement('a');
+	          newLeftNavSectionItemAnchor.setAttribute('href', '#');
+	          newLeftNavSectionItemAnchor.classList.add(_this10.options.classNavSectionAnchor);
+	
+	          var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
+	          // IE11 doesn't support classList on SVG, must revert to className
+	          newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
+	          newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
+	          newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionItemTitle.textContent);
+	
+	          var newLeftNavSectionItemLink = document.createElement('span');
+	          newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
+	          newLeftNavSectionItemLink.classList.add(_this10.options.classNavSectionLink);
+	          newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
+	
+	          _this10.animateNavSection(leftNavSectionItem);
+	          _this10.animateNavList(leftNavSectionItemLink.textContent);
+	
+	          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
+	          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
+	          newLeftNavSectionItem.appendChild(newLeftNavSectionItemAnchor);
+	          leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
+	
+	          setTimeout(function () {
+	            selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
+	            selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionItemLink.textContent);
+	            selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionItemLink.textContent);
+	            selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
+	
+	            leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
+	            _this10.leftNavSectionActive = false;
+	          }, 450); // Wait for nav items to animate
+	        }();
+	
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	      }
 	    }
 	  }, {
 	    key: 'release',
@@ -4354,6 +4583,7 @@ var BluemixComponents =
 	     * Otherwise, instantiates left navigation by searching for left navigation in the given node.
 	     * @param {Node} target The DOM node to instantiate left navigation in. Should be a document or an element.
 	     * @param {Object} [options] The component options
+	     * @param {string} [options.selectorInit] The CSS selector to find left nav containers.
 	     * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
 	     * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
 	     * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
@@ -4376,19 +4606,20 @@ var BluemixComponents =
 	  }, {
 	    key: 'init',
 	    value: function init() {
-	      var _this8 = this;
+	      var _this11 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
 	      if (target.nodeType === Node.ELEMENT_NODE) {
-	        this.create(target, options);
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-left-nav-container]'))).forEach(function (element) {
-	          return _this8.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this11.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -4398,38 +4629,81 @@ var BluemixComponents =
 	}();
 	
 	/**
-	* The component options.
-	 * @member {Object} LeftNav#options
-	 * @property {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
-	 * @property {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
-	 * @property {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
-	 * @property {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
-	 * @property {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
-	 * @property {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
-	 * @property {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
-	 * @property {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
-	 * @property {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
-	 * @property {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
-	 * @property {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
-	 * @property {string} [options.classActiveLeftNav] The class name for when a left nav is active.
-	 * @property {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
-	 * @property {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
-	 * @property {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
-	 * @property {string} [options.classActiveSection] The class name for an active section item in the left nav header.
-	 * @property {string} [options.classItemHasChildren] The class name for when a list item has children.
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode LeftNav.create .create()}, or {@linkcode LeftNav.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode LeftNav.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find left nav containers.
+	 * @property {string} [selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+	 * @property {string} [selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+	 * @property {string} [selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+	 * @property {string} [selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
+	 * @property {string} [selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
+	 * @property {string} [selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+	 * @property {string} [selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+	 * @property {string} [selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+	 * @property {string} [selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+	 * @property {string} [selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+	 * @property {string} [selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+	 * @property {string} [classActiveLeftNav] The class name for when a left nav is active.
+	 * @property {string} [classActiveLeftNavListItem] The class name for when a left nav list item is active.
+	 * @property {string} [classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+	 * @property {string} [classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+	 * @property {string} [classActiveSection] The class name for an active section item in the left nav header.
+	 * @property {string} [classItemHasChildren] The class name for when a list item has children.
 	 */
+	
+	
+	exports.default = LeftNav;
+	LeftNav.options = {
+	  selectorInit: '[data-left-nav-container]',
+	  // Data Attribute selectors
+	  selectorLeftNav: '[data-left-nav]',
+	  selectorLeftNavList: '[data-left-nav-list]',
+	  selectorLeftNavNestedList: '[data-left-nav-nested-list]',
+	  selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
+	  selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
+	  selectorLeftNavListItem: '[data-left-nav-item]',
+	  selectorLeftNavListItemLink: '[data-left-nav-item-link]',
+	  selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
+	  selectorLeftNavArrowIcon: '[data-left-nav-icon]',
+	  selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
+	  selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+	  selectorLeftNavSections: '[data-left-nav-sections]',
+	  selectorLeftNavSection: '[data-left-nav-section]',
+	  selectorLeftNavSectionLink: '[data-left-nav-section-link]',
+	  selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
+	  selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+	  selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
+	  selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
+	  selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
+	  selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
+	  selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
+	  // CSS Class Selectors
+	  classActiveTrigger: 'bx--left-nav__trigger--active',
+	  classActiveLeftNav: 'bx--left-nav--active',
+	  classActiveLeftNavListItem: 'bx--active-list-item',
+	  classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
+	  classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
+	  classItemHasChildren: 'bx--main-nav__parent-item--has-children',
+	  classNavSection: 'bx--left-nav__section',
+	  classNavSectionTransition: 'bx--left-nav__section--transition',
+	  classNavSectionAnchor: 'bx--left-nav__section--anchor',
+	  classNavSectionLink: 'bx--left-nav__section--link',
+	  classNavHeaderTitle: 'bx--left-nav__header--title',
+	  classItemFade: 'bx--main-nav__parent-item--fade',
+	  classItemHidden: 'bx--main-nav__parent-item--hidden',
+	  classListHidden: 'bx--left-nav__main-nav--hidden',
+	  classListTop: 'bx--left-nav__main-nav--top'
+	};
 	
 	/**
 	 * The map associating DOM element and left navigation instance.
 	 * @type {WeakMap}
 	 */
-	
-	
-	exports.default = LeftNav;
 	LeftNav.components = new WeakMap();
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4440,11 +4714,11 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(9);
+	
+	__webpack_require__(15);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -4452,7 +4726,7 @@ var BluemixComponents =
 	
 	var UnifiedHeader = function () {
 	  function UnifiedHeader(element) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, UnifiedHeader);
 	
@@ -4462,10 +4736,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      // Data Attribute selectors
-	      // CSS Class Selectors
-	    }, options);
+	    this.options = Object.assign(this.constructor.options, options);
 	    this.constructor.components.set(this.element, this);
 	  }
 	
@@ -4491,17 +4762,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
 	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
-	        this.create(target, options);
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-unified-header]'))).forEach(function (element) {
-	          return _this2.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this2.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -4518,9 +4790,19 @@ var BluemixComponents =
 	
 	exports.default = UnifiedHeader;
 	UnifiedHeader.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode UnifiedHeader.create .create()}, or {@linkcode UnifiedHeader.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode UnifiedHeader.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find unified headers.
+	 */
+	UnifiedHeader.options = {
+	  selectorInit: '[data-unified-header]'
+	};
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4531,17 +4813,17 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(9);
 	
-	var _toggleClass = __webpack_require__(9);
+	__webpack_require__(15);
+	
+	var _toggleClass = __webpack_require__(10);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _eventMatches = __webpack_require__(4);
+	var _eventMatches = __webpack_require__(5);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
@@ -4558,9 +4840,8 @@ var BluemixComponents =
 	   * @param {HTMLElement} element The element working as a spinner.
 	   * @param {Object} options The component options.
 	   */
-	
 	  function InlineLeftNav(element) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, InlineLeftNav);
 	
@@ -4568,17 +4849,7 @@ var BluemixComponents =
 	      throw new TypeError('DOM element should be given to initialize this widget.');
 	    }
 	
-	    this.options = Object.assign({
-	      // Data Attribute selectors
-	      selectorLeftNavList: '[data-inline-left-nav-list]',
-	      selectorLeftNavNestedList: '[data-inline-left-nav-nested-list]',
-	      selectorLeftNavListItem: '[data-inline-left-nav-item]',
-	      selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
-	      selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
-	      // CSS Class Selectors
-	      classActiveLeftNavListItem: 'left-nav-list__item--active',
-	      classExpandedLeftNavListItem: 'left-nav-list__item--expanded'
-	    }, options);
+	    this.options = Object.assign(this.constructor.options, options);
 	
 	    this.element = element;
 	
@@ -4681,6 +4952,8 @@ var BluemixComponents =
 	     * If the given element indicates that it's an spinner (having `data-loading` attribute), instantiates it.
 	     * Otherwise, instantiates spinners by searching for spinners in the given node.
 	     * @param {Node} target The DOM node to instantiate spinners in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {string} [options.selectorInit] The CSS selector to find inline left navs.
 	     */
 	
 	  }, {
@@ -4688,17 +4961,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this4 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
 	      if (target.nodeType === Node.ELEMENT_NODE) {
-	        this.create(target, options);
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-inline-left-nav]'))).forEach(function (element) {
-	          return _this4.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this4.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -4715,9 +4989,28 @@ var BluemixComponents =
 	
 	exports.default = InlineLeftNav;
 	InlineLeftNav.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode InlineLeftNav.create .create()}, or {@linkcode InlineLeftNav.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode InlineLeftNav.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find inline left navs.
+	 */
+	InlineLeftNav.options = {
+	  selectorInit: '[data-inline-left-nav]',
+	  // Data Attribute selectors
+	  selectorLeftNavList: '[data-inline-left-nav-list]',
+	  selectorLeftNavNestedList: '[data-inline-left-nav-nested-list]',
+	  selectorLeftNavListItem: '[data-inline-left-nav-item]',
+	  selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
+	  selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
+	  // CSS Class Selectors
+	  classActiveLeftNavListItem: 'left-nav-list__item--active',
+	  classExpandedLeftNavListItem: 'left-nav-list__item--expanded'
+	};
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4728,13 +5021,13 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(9);
 	
-	var _on = __webpack_require__(5);
+	__webpack_require__(15);
+	
+	var _on = __webpack_require__(6);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -4758,11 +5051,10 @@ var BluemixComponents =
 	   * @param {string} [options.selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
 	   * @param {string} [options.selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
 	   */
-	
 	  function ProfileSwitcher(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, ProfileSwitcher);
 	
@@ -4772,26 +5064,14 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      // Data Attribute selectors
-	      selectorProfileSwitcher: '[data-profile-switcher]',
-	      selectorToggle: '[data-profile-switcher-toggle]',
-	      selectorMenu: '[data-switcher-menu]',
-	      selectorAccount: '[data-switcher-account]',
-	      selectorOrg: '[data-switcher-org]',
-	      selectorSpace: '[data-switcher-space]',
-	      selectorAccountDropdown: '[data-dropdown-account]',
-	      selectorOrgDropdown: '[data-dropdown-org]',
-	      selectorSpaceDropdown: '[data-dropdown-space]',
-	      classSwitcherOpen: 'bx--account-switcher--open'
-	    }, options);
+	    this.options = Object.assign(this.constructor.options, options);
 	
 	    this.constructor.components.set(this.element, this);
 	
 	    this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (evt) {
 	      return _this.handleDocumentClick(evt);
 	    });
-	    this.element.querySelector(this.options.selectorToggle).addEventListener('keypress', function (event) {
+	    this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', function (event) {
 	      return _this.toggle(event);
 	    });
 	
@@ -4801,6 +5081,10 @@ var BluemixComponents =
 	
 	    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', function () {
 	      return _this.determineSwitcherValues(false);
+	    });
+	
+	    this.element.ownerDocument.addEventListener('keyup', function () {
+	      return _this.handleBlur();
 	    });
 	  }
 	
@@ -4820,13 +5104,20 @@ var BluemixComponents =
 	     * @param {Event} event The event triggering this method.
 	     */
 	    value: function toggle(event) {
-	      if (event.which === 13) {
-	        var isOfSelf = this.element.contains(event.target);
+	      var isOfSelf = this.element.contains(event.target);
+	      if (event.which === 13 || event.which === 32) {
 	        if (isOfSelf) {
 	          this.element.classList.toggle(this.options.classSwitcherOpen);
 	        } else if (!isOfSelf && this.element.classList.contains(this.options.classSwitcherOpen)) {
 	          this.element.classList.remove(this.options.classSwitcherOpen);
 	        }
+	      }
+	    }
+	  }, {
+	    key: 'handleBlur',
+	    value: function handleBlur() {
+	      if (!this.element.contains(document.activeElement)) {
+	        this.element.classList.remove(this.options.classSwitcherOpen);
 	      }
 	    }
 	
@@ -4870,14 +5161,17 @@ var BluemixComponents =
 	    key: 'determineSwitcherValues',
 	    value: function determineSwitcherValues(isHovered) {
 	      var nameElement = this.element.querySelector(this.options.selectorAccount);
+	      var regionElement = this.element.querySelector(this.options.selectorRegion);
 	      var orgElement = this.element.querySelector(this.options.selectorOrg);
 	      var spaceElement = this.element.querySelector(this.options.selectorSpace);
 	      var menuElement = this.element.querySelector(this.options.selectorMenu);
 	      var isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 	
 	      var nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
+	      var regionDropdownValue = this.element.querySelector(this.options.selectorRegionDropdown).textContent;
 	      var orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
 	      var spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+	
 	      var nameShort = void 0;
 	      var orgShort = void 0;
 	      var spaceShort = void 0;
@@ -4886,6 +5180,7 @@ var BluemixComponents =
 	        nameElement.textContent = nameDropdownValue;
 	        orgElement.textContent = orgDropdownValue;
 	        spaceElement.textContent = spaceDropdownValue;
+	        regionElement.textContent = regionDropdownValue;
 	        menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
 	      } else {
 	        if (nameDropdownValue.length > 25) {
@@ -4909,6 +5204,7 @@ var BluemixComponents =
 	          spaceElement.textContent = spaceDropdownValue;
 	        }
 	
+	        regionElement.textContent = regionDropdownValue;
 	        menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
 	      }
 	    }
@@ -4932,6 +5228,7 @@ var BluemixComponents =
 	     * Otherwise, instantiates profile switcher by searching for profile switcher in the given node.
 	     * @param {Node} target The DOM node to instantiate profile switcher in. Should be a document or an element.
 	     * @param {Object} [options] The component options
+	     * @param {string} [options.selectorInit] The CSS selector to find profile switchers.
 	     */
 	
 	  }, {
@@ -4939,17 +5236,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this2 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
 	      if (target.nodeType === Node.ELEMENT_NODE) {
-	        this.create(target, options);
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-profile-switcher]'))).forEach(function (element) {
-	          return _this2.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this2.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -4959,28 +5257,45 @@ var BluemixComponents =
 	}();
 	
 	/**
-	* The component options..
-	 * @member {Object} ProfileSwitcher#options
-	 * @property {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
-	 * @property {string} [options.selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
-	 * @property {string} [options.selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
-	 * @property {string} [options.selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
-	 * @property {string} [options.selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
-	 * @property {string} [options.selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
-	 * @property {string} [options.selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
+	 * The component options.
+	 * @property {string} selectorInit The CSS selector to find profile switchers.
+	 * @property {string} [selectorProfileSwitcher] The data attribute selector for the profile switcher.
+	 * @property {string} [selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
+	 * @property {string} [selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
+	 * @property {string} [selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
+	 * @property {string} [selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
+	 * @property {string} [selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
+	 * @property {string} [selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
 	 */
+	
+	
+	exports.default = ProfileSwitcher;
+	ProfileSwitcher.options = {
+	  selectorInit: '[data-profile-switcher]',
+	  // Data Attribute selectors
+	  selectorProfileSwitcher: '[data-profile-switcher]',
+	  selectorToggle: '[data-profile-switcher-toggle]',
+	  selectorMenu: '[data-switcher-menu]',
+	  selectorAccount: '[data-switcher-account]',
+	  selectorRegion: '[data-switcher-region]',
+	  selectorOrg: '[data-switcher-org]',
+	  selectorSpace: '[data-switcher-space]',
+	  selectorDropdown: '[data-dropdown]',
+	  selectorAccountDropdown: '[data-dropdown-account]',
+	  selectorRegionDropdown: '[data-dropdown-region]',
+	  selectorOrgDropdown: '[data-dropdown-org]',
+	  selectorSpaceDropdown: '[data-dropdown-space]',
+	  classSwitcherOpen: 'bx--account-switcher--open'
+	};
 	
 	/**
 	 * The map associating DOM element and profile switcher instance.
 	 * @type {WeakMap}
 	 */
-	
-	
-	exports.default = ProfileSwitcher;
 	ProfileSwitcher.components = new WeakMap();
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4991,13 +5306,13 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(7);
-	
 	__webpack_require__(8);
 	
-	__webpack_require__(14);
+	__webpack_require__(9);
 	
-	var _toggleClass = __webpack_require__(9);
+	__webpack_require__(15);
+	
+	var _toggleClass = __webpack_require__(10);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -5017,11 +5332,10 @@ var BluemixComponents =
 	   * @param {string} [options.selectorIconContainer] The data attribute selector for the icon layout container.
 	   * @param {string} [options.classHiddenContainer] The class selector for a hidden container.
 	   */
-	
 	  function SearchWithOptions(element) {
 	    var _this = this;
 	
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    _classCallCheck(this, SearchWithOptions);
 	
@@ -5031,11 +5345,7 @@ var BluemixComponents =
 	
 	    this.element = element;
 	
-	    this.options = Object.assign({
-	      selectorToggleLayoutBtn: '[data-search-toggle-btn]',
-	      selectorIconContainer: '[data-search-toggle-layout]',
-	      classHiddenContainer: 'bx--search__toggle-layout__container--hidden'
-	    }, options);
+	    this.options = Object.assign(this.constructor.options, options);
 	
 	    this.constructor.components.set(this.element, this);
 	
@@ -5086,6 +5396,7 @@ var BluemixComponents =
 	     * Otherwise, instantiates the search component by searching for the search component in the given node.
 	     * @param {Node} target The DOM node to instantiate the search component in. Should be a document or an element..
 	     * @param {Object} [options] The component options
+	     * @param {string} [options.selectorInit] The CSS selector to find unified headers.
 	     */
 	
 	  }, {
@@ -5093,17 +5404,18 @@ var BluemixComponents =
 	    value: function init() {
 	      var _this3 = this;
 	
-	      var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-	      var options = arguments[1];
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
 	      if (target.nodeType === Node.ELEMENT_NODE) {
-	        this.create(target, options);
+	        this.create(target, effectiveOptions);
 	      } else {
-	        [].concat(_toConsumableArray(target.querySelectorAll('[data-search-with-options]'))).forEach(function (element) {
-	          return _this3.create(element, options);
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this3.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -5116,6 +5428,19 @@ var BluemixComponents =
 	
 	
 	SearchWithOptions.components = new WeakMap();
+	
+	/**
+	 * The component options.
+	 * If `options` is specified in the constructor, {@linkcode SearchWithOptions.create .create()}, or {@linkcode SearchWithOptions.init .init()},
+	 * properties in this object are overriden for the instance being create and how {@linkcode SearchWithOptions.init .init()} works.
+	 * @property {string} selectorInit The CSS selector to find search UIs with options.
+	 */
+	SearchWithOptions.options = {
+	  selectorInit: '[data-search-with-options]',
+	  selectorToggleLayoutBtn: '[data-search-toggle-btn]',
+	  selectorIconContainer: '[data-search-toggle-layout]',
+	  classHiddenContainer: 'bx--search__toggle-layout__container--hidden'
+	};
 
 /***/ }
 /******/ ]);

@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.arrayFrom, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.arrayFrom, global.objectAssign, global.customEvent);
     global.unifiedHeader = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _assign, _classCallCheck2, _createClass2) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -20,6 +20,8 @@
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+  var _create2 = _interopRequireDefault(_create);
 
   var _assign2 = _interopRequireDefault(_assign);
 
@@ -35,7 +37,7 @@
 
   var UnifiedHeader = function () {
     function UnifiedHeader(element) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, UnifiedHeader);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -44,10 +46,7 @@
 
       this.element = element;
 
-      this.options = (0, _assign2.default)({
-        // Data Attribute selectors
-        // CSS Class Selectors
-      }, options);
+      this.options = (0, _assign2.default)(this.constructor.options, options);
       this.constructor.components.set(this.element, this);
     }
 
@@ -73,17 +72,18 @@
       value: function init() {
         var _this2 = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-        var options = arguments[1];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
         if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
-          this.create(target, options);
+          this.create(target, effectiveOptions);
         } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll('[data-unified-header]'))).forEach(function (element) {
-            return _this2.create(element, options);
+          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+            return _this2.create(element, effectiveOptions);
           });
         }
       }
@@ -99,4 +99,14 @@
    * @type {WeakMap}
    */
   UnifiedHeader.components = new _weakMap2.default();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode UnifiedHeader.create .create()}, or {@linkcode UnifiedHeader.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode UnifiedHeader.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find unified headers.
+   */
+  UnifiedHeader.options = {
+    selectorInit: '[data-unified-header]'
+  };
 });

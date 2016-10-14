@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global._typeof, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.arrayFrom, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global._typeof, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.header = mod.exports;
   }
-})(this, function (exports, _weakMap, _typeof2, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _eventMatches) {
+})(this, function (exports, _weakMap, _typeof2, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _eventMatches) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -22,6 +22,8 @@
   var _typeof3 = _interopRequireDefault(_typeof2);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+  var _create2 = _interopRequireDefault(_create);
 
   var _assign2 = _interopRequireDefault(_assign);
 
@@ -62,11 +64,10 @@
      *   Cancellation of this event stops the selection.
      * @param {string} [options.eventAfterSelected] The name of the custom event fired after a menu item is selected.
      */
-
     function HeaderNav(element) {
       var _this = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, HeaderNav);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -75,20 +76,7 @@
 
       this.element = element;
 
-      this.options = (0, _assign2.default)({
-        selectorTriggerLabel: '.current-taxonomy',
-        classActive: 'taxonomy-nav--active',
-        selectorMenu: '.taxonomy-menu',
-        selectorItem: '.taxonomy-item',
-        selectorItemLink: '.taxonomy-item--taxonomy-menu',
-        selectorLabel: '.taxonomy-item__label',
-        eventBeforeShown: 'header-beingshown',
-        eventAfterShown: 'header-shown',
-        eventBeforeHidden: 'header-beinghidden',
-        eventAfterHidden: 'header-hidden',
-        eventBeforeSelected: 'header-beingselected',
-        eventAfterSelected: 'header-selected'
-      }, options);
+      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
 
       this.constructor.components.set(this.element, this);
 
@@ -107,12 +95,14 @@
 
     /**
      * Instantiates taxonomy menus in the given element.
-     * If the given element indicates that it's an taxonomy menu (having `data-nav` attribute), instantiates it.
+     * If the given element indicates that it's an taxonomy menu, instantiates it.
      * Otherwise, instantiates taxonomy menus by clicking on launcher buttons
      * (buttons with `data-nav-target` attribute) of taxonomy menus in the given node.
      * @implements Component
      * @param {Node} target The DOM node to instantiate taxonomy menus in. Should be a document or an element.
      * @param {Object} [options] The component options.
+     * @param {string} [options.selectorInit] The CSS selector to find taxonomy menus.
+     * @param {string} [options.attribInitTarget] The attribute name in the lancher buttons to find taxonomy menus.
      * @param {string} [options.selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
      * @param {string} [options.selectorMenu] The CSS selector to find the container of the menu items.
      * @param {string} [options.selectorItem] The CSS selector to find the menu items.
@@ -219,21 +209,22 @@
       value: function init() {
         var _this2 = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-        var options = arguments[1];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
-        if (target.nodeType === Node.ELEMENT_NODE && target.dataset.nav !== undefined) {
-          this.create(target, options);
+        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+          this.create(target, effectiveOptions);
         } else {
           var _ret = function () {
             var handler = function handler(event) {
-              var element = (0, _eventMatches2.default)(event, '[data-nav-target]');
+              var element = (0, _eventMatches2.default)(event, '[' + effectiveOptions.attribInitTarget + ']');
 
               if (element) {
-                var headerElements = [].concat((0, _toConsumableArray3.default)(element.ownerDocument.querySelectorAll(element.dataset.navTarget)));
+                var headerElements = [].concat((0, _toConsumableArray3.default)(element.ownerDocument.querySelectorAll(element.getAttribute(effectiveOptions.attribInitTarget))));
                 if (headerElements.length > 1) {
                   throw new Error('Target header must be unique.');
                 }
@@ -242,7 +233,7 @@
                   if (element.tagName === 'A') {
                     event.preventDefault();
                   }
-                  _this2.create(headerElements[0], options).toggleNav(event);
+                  _this2.create(headerElements[0], effectiveOptions).toggleNav(event);
                 }
               }
             };
@@ -281,8 +272,17 @@
 
 
   /**
+   * The map associating DOM element and taxonomy menu instance.
+   * @type {WeakMap}
+   */
+  HeaderNav.components = new _weakMap2.default();
+
+  /**
    * The component options.
-   * @member {Object} HeaderNav#options
+   * If `options` is specified in the constructor, {@linkcode HeaderNav.create .create()}, or {@linkcode HeaderNav.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode HeaderNav.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find taxonomy menus.
+   * @property {string} attribInitTarget The attribute name in the lancher buttons to find taxonomy menus.
    * @property {string} [selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
    * @property {string} [selectorMenu] The CSS selector to find the container of the menu items.
    * @property {string} [selectorItem] The CSS selector to find the menu items.
@@ -302,10 +302,20 @@
    *   Cancellation of this event stops the selection.
    * @property {string} [eventAfterSelected] The name of the custom event fired after a menu item is selected.
    */
-
-  /**
-   * The map associating DOM element and taxonomy menu instance.
-   * @type {WeakMap}
-   */
-  HeaderNav.components = new _weakMap2.default();
+  HeaderNav.options = {
+    selectorInit: '[data-nav]',
+    attribInitTarget: 'data-nav-target',
+    selectorTriggerLabel: '.current-taxonomy',
+    classActive: 'taxonomy-nav--active',
+    selectorMenu: '.taxonomy-menu',
+    selectorItem: '.taxonomy-item',
+    selectorItemLink: '.taxonomy-item--taxonomy-menu',
+    selectorLabel: '.taxonomy-item__label',
+    eventBeforeShown: 'header-beingshown',
+    eventAfterShown: 'header-shown',
+    eventBeforeHidden: 'header-beinghidden',
+    eventAfterHidden: 'header-hidden',
+    eventBeforeSelected: 'header-beingselected',
+    eventAfterSelected: 'header-selected'
+  };
 });

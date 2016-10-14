@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/object-assign'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/object-assign'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.toggleClass, global.arrayFrom, global.objectAssign);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.toggleClass, global.arrayFrom, global.elementMatches, global.objectAssign);
     global.contentSwitcher = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _eventMatches, _toggleClass) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _eventMatches, _toggleClass) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -20,6 +20,8 @@
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+  var _create2 = _interopRequireDefault(_create);
 
   var _assign2 = _interopRequireDefault(_assign);
 
@@ -51,11 +53,10 @@
      *   Cancellation of this event stops selection of content switcher button.
      * @param {string} [options.eventAfterSelected] The name of the custom event fired after a switcher button is selected.
      */
-
     function ContentSwitcher(element) {
       var _this = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, ContentSwitcher);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -64,13 +65,7 @@
 
       this.element = element;
 
-      this.options = (0, _assign2.default)({
-        selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
-        selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
-        classActive: 'bx--content-switcher--selected',
-        eventBeforeSelected: 'content-switcher-beingselected',
-        eventAfterSelected: 'content-switcher-selected'
-      }, options);
+      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
 
       this.constructor.components.set(this.element, this);
 
@@ -182,17 +177,18 @@
       value: function init() {
         var _this3 = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-        var options = arguments[1];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
-        if (target.nodeType === Node.ELEMENT_NODE && target.dataset.contentSwitcher !== undefined) {
-          this.create(target, options);
+        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+          this.create(target, effectiveOptions);
         } else {
-          [].concat((0, _toConsumableArray3.default)(document.querySelectorAll('[data-content-switcher]'))).forEach(function (element) {
-            return _this3.create(element, options);
+          [].concat((0, _toConsumableArray3.default)(document.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+            return _this3.create(element, effectiveOptions);
           });
         }
       }
@@ -204,8 +200,16 @@
 
 
   /**
+   * The map associating DOM element and content switcher set instance.
+   * @type {WeakMap}
+   */
+  ContentSwitcher.components = new _weakMap2.default();
+
+  /**
    * The component options.
-   * @member {Object} ContentSwitcher#options
+   * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode ContentSwitcher.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode ContentSwitcher.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find content switcher button set.
    * @property {string} [selectorButton] The CSS selector to find switcher buttons.
    * @property {string} [selectorButtonSelected] The CSS selector to find the selected switcher button.
    * @property {string} [classActive] The CSS class for switcher button's selected state.
@@ -214,10 +218,12 @@
    *   Cancellation of this event stops selection of content switcher button.
    * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
    */
-
-  /**
-   * The map associating DOM element and content switcher set instance.
-   * @type {WeakMap}
-   */
-  ContentSwitcher.components = new _weakMap2.default();
+  ContentSwitcher.options = {
+    selectorInit: '[data-content-switcher]',
+    selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
+    selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
+    classActive: 'bx--content-switcher--selected',
+    eventBeforeSelected: 'content-switcher-beingselected',
+    eventAfterSelected: 'content-switcher-selected'
+  };
 });

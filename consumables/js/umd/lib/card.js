@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/math/sign', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/math-sign'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/math/sign', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/math-sign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/math/sign'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/math-sign'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/math/sign'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/math-sign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.sign, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.arrayFrom, global.objectAssign, global.mathSign);
+    factory(mod.exports, global.weakMap, global.sign, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.arrayFrom, global.elementMatches, global.objectAssign, global.mathSign);
     global.card = mod.exports;
   }
-})(this, function (exports, _weakMap, _sign, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _eventMatches) {
+})(this, function (exports, _weakMap, _sign, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _eventMatches) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -22,6 +22,8 @@
   var _sign2 = _interopRequireDefault(_sign);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+  var _create2 = _interopRequireDefault(_create);
 
   var _assign2 = _interopRequireDefault(_assign);
 
@@ -45,20 +47,17 @@
      * @param {Object} [options] The component options.
      * @param {string} [options.selectorCard] The CSS selector to find cards.
      */
-
     function Card(element) {
       var _this = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, Card);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
         throw new TypeError('DOM element should be given to initialize this widget.');
       }
       this.element = element;
-      this.options = (0, _assign2.default)({
-        selectorCard: '.bx--card'
-      }, options);
+      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
       this.constructor.components.set(this.element, this);
       this.element.addEventListener('keydown', function (event) {
         return _this.cardKeyPress(event);
@@ -106,17 +105,18 @@
       value: function init() {
         var _this2 = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-        var options = arguments[1];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
-        if (target.nodeType === Node.ELEMENT_NODE && target.dataset.cardList !== undefined) {
-          this.create(target, options);
+        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+          this.create(target, effectiveOptions);
         } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll('[data-card-list]'))).forEach(function (element) {
-            return _this2.create(element, options);
+          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+            return _this2.create(element, effectiveOptions);
           });
         }
       }
@@ -128,14 +128,20 @@
 
 
   /**
-   * The component options.
-   * @member {Object} Card#options
-   * @property {string} [selectorCard] The CSS selector to find cards.
-   */
-
-  /**
    * The map associating DOM element and card list instance.
    * @type {WeakMap}
    */
   Card.components = new _weakMap2.default();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode Card.create .create()}, or {@linkcode Card.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Card.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find card containers.
+   * @property {string} [selectorCard] The CSS selector to find cards.
+   */
+  Card.options = {
+    selectorInit: '[data-card-list]',
+    selectorCard: '.bx--card'
+  };
 });

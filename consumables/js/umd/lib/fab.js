@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../misc/on'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../misc/on', '../polyfills/element-matches'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../misc/on'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/element-matches'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.classCallCheck, global.createClass, global.eventMatches, global.on);
+    factory(mod.exports, global.weakMap, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.on, global.elementMatches);
     global.fab = mod.exports;
   }
-})(this, function (exports, _weakMap, _classCallCheck2, _createClass2, _eventMatches, _on) {
+})(this, function (exports, _weakMap, _create, _assign, _classCallCheck2, _createClass2, _eventMatches, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -18,6 +18,10 @@
   });
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
+
+  var _create2 = _interopRequireDefault(_create);
+
+  var _assign2 = _interopRequireDefault(_assign);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
@@ -39,7 +43,6 @@
      * @implements Component
      * @param {HTMLElement} element The element working as a floting action button.
      */
-
     function FabButton(element) {
       var _this = this;
 
@@ -59,9 +62,11 @@
 
     /**
      * Instantiates floating action buttons in the given element.
-     * If the given element indicates that it's an floating action button (having `data-fab` attribute), instantiates it.
+     * If the given element indicates that it's an floating action button, instantiates it.
      * Otherwise, instantiates floating action buttons by clicking on floating action buttons in the given node.
      * @param {Node} target The DOM node to instantiate floating action buttons in. Should be a document or an element.
+     * @param {Object} [options] The component options.
+     * @param {string} [options.selectorItem] The CSS selector to find floating action buttons.
      * @returns {Handle} The handle to remove the event listener to handle clicking.
      */
 
@@ -89,16 +94,18 @@
       value: function init() {
         var _this2 = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
-        if (target.nodeType === Node.ELEMENT_NODE && target.dataset.fab !== undefined) {
+        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
           this.create(target);
         } else {
           return (0, _on2.default)(target, 'click', function (event) {
-            var element = (0, _eventMatches2.default)(event, '[data-fab]');
+            var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
             if (element && !_this2.components.has(element)) {
               _this2.create(element).toggle(event);
             }
@@ -122,4 +129,14 @@
    * @type {WeakMap}
    */
   FabButton.components = new _weakMap2.default();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode FabButton.create .create()}, or {@linkcode FabButton.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode FabButton.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find floating action buttons.
+   */
+  FabButton.options = {
+    selectorInit: '[data-fab]'
+  };
 });

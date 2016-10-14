@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class', '../polyfills/element-matches'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'), require('../polyfills/element-matches'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.classCallCheck, global.createClass, global.toggleClass);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.toggleClass, global.elementMatches);
     global.loading = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _classCallCheck2, _createClass2, _toggleClass) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _toggleClass) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -20,6 +20,10 @@
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+  var _create2 = _interopRequireDefault(_create);
+
+  var _assign2 = _interopRequireDefault(_assign);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
@@ -38,12 +42,11 @@
      * Spinner indicating loading state.
      * @implements Component
      * @param {HTMLElement} element The element working as a spinner.
-     * @param {Object} options The component options.
-     * @param {boolean} options.active `true` if this spinner should roll.
+     * @param {Object} [options] The component options.
+     * @param {boolean} [options.active] `true` if this spinner should roll.
      */
-
     function Loading(element) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? { active: true } : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, Loading);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -51,7 +54,8 @@
       }
 
       this.element = element;
-      this.active = 'active' in options ? options.active : true;
+      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
+      this.active = this.options.active;
       this.ie = false;
 
       // Check if browser is Internet Explorer
@@ -113,17 +117,18 @@
       value: function init() {
         var _this = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-        var options = arguments[1];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
-        if (target.nodeType === Node.ELEMENT_NODE && target.dataset.loading !== undefined) {
-          this.create(target, options);
+        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+          this.create(target, effectiveOptions);
         } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll('[data-loading]'))).forEach(function (element) {
-            return _this.create(element, options);
+          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+            return _this.create(element, effectiveOptions);
           });
         }
       }
@@ -139,4 +144,15 @@
    * @type {WeakMap}
    */
   Loading.components = new _weakMap2.default();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode Loading.create .create()}, or {@linkcode Loading.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Loading.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find spinners.
+   */
+  Loading.options = {
+    selectorInit: '[data-loading]',
+    active: true
+  };
 });

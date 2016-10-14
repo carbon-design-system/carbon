@@ -66,10 +66,9 @@
   // Imports and Exports //
   // ====================//
 
+
   // Polyfills
   // -------------
-
-
   var settings = {};
 
   /**
@@ -88,131 +87,23 @@
   // - JavaScript classes for use with components and base-elements.
   // - The following statements import classes from actual locations to
   //   be consumed from this file instead of their actual locations.
-  exports.
-  /**
-   * Settings.
-   * @type Object
-   * @property {boolean} [disableAutoInit]
-   *   Disables automatic instantiation of components.
-   *   By default (`BluemixComponents.disableAutoInit` is `false`),
-   *   bluemix-components attempts to instantiate components automatically
-   *   by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
-   *   or upon DOM events (e.g. clicking) on such elements.
-   *   See each components' static `.init()` methods for details.
-   */
-  settings = settings;
-  exports.
-
-  /**
-   * Floating action button.
-   * @type FabButton
-   */
-  FabButton = _fab2.default;
-  exports.
-
-  /**
-   * File uploader.
-   * @type FileUploader
-   */
-  FileUploader = _fileUploader2.default;
-  exports.
-
-  /**
-   * Content switcher.
-   * @type ContentSwitcher
-   */
-  ContentSwitcher = _contentSwitcher2.default;
-  exports.
-
-  /**
-   * Container of tabs.
-   * @type Tab
-   */
-  Tab = _tabs2.default;
-  exports.
-
-  /**
-   * Overflow menu.
-   * @type OverflowMenu
-   */
-  OverflowMenu = _overflowMenu2.default;
-  exports.
-
-  /**
-   * Modal dialog.
-   * @type Modal
-   */
-  Modal = _modals2.default;
-  exports.
-
-  /**
-   * Header with taxonomy menu.
-   * @type HeaderNav
-   */
-  HeaderNav = _header2.default;
-  exports.
-
-  /**
-   * Left Navigation Menu
-   * @type LeftNav
-   */
-  LeftNav = _leftNav2.default;
-  exports.
-
-  /**
-   * Search button in tool bar.
-   * @type Toolbars
-   */
-  Toolbars = _toolbars2.default;
-  exports.
-
-  /**
-   * Spinner indicating loading state.
-   * @type Loading
-   */
-  Loading = _loading2.default;
-  exports.
-
-  /**
-   * A selector with drop downs.
-   * @type Dropdown
-   */
-  Dropdown = _dropdown2.default;
-  exports.
-
-  /**
-   * The container for cards.
-   * @type Card
-   */
-  Card = _card2.default;
-  exports.
-
-  /**
-   * Number input UI.
-   * @type NumberInput
-   */
-  NumberInput = _numberInput2.default;
-  exports.
-
-  /**
-   * Data table.
-   * @type Table
-   */
-  Table = _table2.default;
-  exports.
-
-  /**
-   * Detail page header.
-   * @type DetailPageHeader
-   */
-  DetailPageHeader = _detailPageHeader2.default;
-  exports.
-
-  /**
-   * Profile Switcher.
-   * @type ProfileSwitcher
-   */
-  ProfileSwitcher = _profileSwitcher2.default;
+  exports.settings = settings;
+  exports.FabButton = _fab2.default;
+  exports.FileUploader = _fileUploader2.default;
+  exports.ContentSwitcher = _contentSwitcher2.default;
+  exports.Tab = _tabs2.default;
+  exports.OverflowMenu = _overflowMenu2.default;
+  exports.Modal = _modals2.default;
+  exports.HeaderNav = _header2.default;
+  exports.LeftNav = _leftNav2.default;
+  exports.Toolbars = _toolbars2.default;
+  exports.Loading = _loading2.default;
+  exports.Dropdown = _dropdown2.default;
+  exports.Card = _card2.default;
+  exports.NumberInput = _numberInput2.default;
+  exports.Table = _table2.default;
+  exports.DetailPageHeader = _detailPageHeader2.default;
+  exports.ProfileSwitcher = _profileSwitcher2.default;
 
 
   /**

@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/create', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/create'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.toggleClass, global.arrayFrom, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.create, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.toggleClass, global.arrayFrom, global.objectAssign, global.customEvent);
     global.searchWithOptions = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _toggleClass) {
+})(this, function (exports, _weakMap, _create, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _toggleClass) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -18,6 +18,8 @@
   });
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
+
+  var _create2 = _interopRequireDefault(_create);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -45,11 +47,10 @@
      * @param {string} [options.selectorIconContainer] The data attribute selector for the icon layout container.
      * @param {string} [options.classHiddenContainer] The class selector for a hidden container.
      */
-
     function SearchWithOptions(element) {
       var _this = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, SearchWithOptions);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -58,11 +59,7 @@
 
       this.element = element;
 
-      this.options = (0, _assign2.default)({
-        selectorToggleLayoutBtn: '[data-search-toggle-btn]',
-        selectorIconContainer: '[data-search-toggle-layout]',
-        classHiddenContainer: 'bx--search__toggle-layout__container--hidden'
-      }, options);
+      this.options = (0, _assign2.default)(this.constructor.options, options);
 
       this.constructor.components.set(this.element, this);
 
@@ -105,17 +102,18 @@
       value: function init() {
         var _this3 = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-        var options = arguments[1];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
         if (target.nodeType === Node.ELEMENT_NODE) {
-          this.create(target, options);
+          this.create(target, effectiveOptions);
         } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll('[data-search-with-options]'))).forEach(function (element) {
-            return _this3.create(element, options);
+          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+            return _this3.create(element, effectiveOptions);
           });
         }
       }
@@ -127,4 +125,17 @@
 
 
   SearchWithOptions.components = new _weakMap2.default();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode SearchWithOptions.create .create()}, or {@linkcode SearchWithOptions.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode SearchWithOptions.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find search UIs with options.
+   */
+  SearchWithOptions.options = {
+    selectorInit: '[data-search-with-options]',
+    selectorToggleLayoutBtn: '[data-search-toggle-btn]',
+    selectorIconContainer: '[data-search-toggle-layout]',
+    classHiddenContainer: 'bx--search__toggle-layout__container--hidden'
+  };
 });

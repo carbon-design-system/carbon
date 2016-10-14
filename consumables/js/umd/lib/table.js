@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/toggle-class', '../misc/on', '../polyfills/object-assign'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/toggle-class', '../misc/on', '../polyfills/element-matches', '../polyfills/object-assign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../misc/on'), require('../polyfills/object-assign'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/toggle-class'), require('../misc/on'), require('../polyfills/element-matches'), require('../polyfills/object-assign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.toggleClass, global.on, global.objectAssign);
+    factory(mod.exports, global.weakMap, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.toggleClass, global.on, global.elementMatches, global.objectAssign);
     global.table = mod.exports;
   }
-})(this, function (exports, _weakMap, _assign, _classCallCheck2, _createClass2, _eventMatches, _toggleClass, _on) {
+})(this, function (exports, _weakMap, _create, _assign, _classCallCheck2, _createClass2, _eventMatches, _toggleClass, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -18,6 +18,8 @@
   });
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
+
+  var _create2 = _interopRequireDefault(_create);
 
   var _assign2 = _interopRequireDefault(_assign);
 
@@ -53,11 +55,10 @@
      * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
      * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
      */
-
     function Table(element) {
       var _this = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, Table);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
@@ -65,17 +66,7 @@
       }
       this.element = element;
 
-      this.options = (0, _assign2.default)({
-        selectorTitle: '.bx--table__column-title',
-        selectorRow: '.bx--table__row',
-        selectorCheckbox: '.bx--checkbox',
-        classSortState: 'bx--table__column-title--rotated',
-        classCheckState: 'bx--table__row--checked',
-        eventBeforeSortToggled: 'table-sort-beingtoggled',
-        eventAfterSortToggled: 'table-sort-toggled',
-        eventBeforeCheckToggled: 'table-check-beingtoggled',
-        eventAfterCheckToggled: 'table-check-toggled'
-      }, options);
+      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
 
       this.constructor.components.set(this.element, this);
 
@@ -160,19 +151,20 @@
       value: function init() {
         var _this2 = this;
 
-        var target = arguments.length <= 0 || arguments[0] === undefined ? document : arguments[0];
-        var options = arguments[1];
+        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
-        if (target.nodeType === Node.ELEMENT_NODE && target.dataset.table !== undefined) {
-          this.create(target, options);
+        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+          this.create(target, effectiveOptions);
         } else {
           return (0, _on2.default)(target, 'click', function (event) {
-            var element = (0, _eventMatches2.default)(event, '[data-table]');
+            var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
             if (element && !_this2.components.has(element)) {
-              _this2.create(element, options).handleClick(event);
+              _this2.create(element, effectiveOptions).handleClick(event);
             }
           });
         }
@@ -185,8 +177,16 @@
 
 
   /**
+   * The map associating DOM element and data table instance.
+   * @type {WeakMap}
+   */
+  Table.components = new _weakMap2.default();
+
+  /**
    * The component options.
-   * @member {Object} Table#options
+   * If `options` is specified in the constructor, {@linkcode Table.create .create()}, or {@linkcode Table.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Table.init .init()} works.
+   * @property {string} selectorInit The CSS selector to find data tables.
    * @property {string} [selectorTitle] The CSS selector to find column titles.
    * @property {string} [selectorRow] The CSS selector to find rows.
    * @property {string} [selectorCheckbox] The CSS selector to find check boxes.
@@ -197,10 +197,16 @@
    * @property {string} [eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
    * @property {string} [eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
    */
-
-  /**
-   * The map associating DOM element and data table instance.
-   * @type {WeakMap}
-   */
-  Table.components = new _weakMap2.default();
+  Table.options = {
+    selectorInit: '[data-table]',
+    selectorTitle: '.bx--table__column-title',
+    selectorRow: '.bx--table__row',
+    selectorCheckbox: '.bx--checkbox',
+    classSortState: 'bx--table__column-title--rotated',
+    classCheckState: 'bx--table__row--checked',
+    eventBeforeSortToggled: 'table-sort-beingtoggled',
+    eventAfterSortToggled: 'table-sort-toggled',
+    eventBeforeCheckToggled: 'table-check-beingtoggled',
+    eventAfterCheckToggled: 'table-check-toggled'
+  };
 });

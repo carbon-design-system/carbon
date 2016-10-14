@@ -22,7 +22,7 @@
   }();
   if (missingNativeCustomEvent) {
     window.CustomEvent = function CustomEvent(type) {
-      var init = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var init = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       var event = document.createEvent('HTMLEvents');
       event.initEvent(type, init.bubbles, init.cancelable);
