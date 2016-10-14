@@ -116,10 +116,11 @@
   width: 100%;
   z-index: 8000;
   position: relative;
-  border-bottom: 1px solid $color__navy-gray-9;
+  border-bottom: 1px solid $color__navy-gray-3;
 
   @include light-ui {
     background-color: $color__white;
+    border-color: $color__navy-gray-9;
   }
 }
 
@@ -293,7 +294,7 @@
 
   &--expanded {
 
-    .bx--parent-item__link--down-icon {
+    .bx--parent-item__link--down-icon svg {
       transform: rotate(180deg);
     }
   }
@@ -312,34 +313,6 @@
 
   @include light-ui {
     color: $color__blue-90;
-  }
-
-  &:hover {
-    color: $color__blue-30;
-
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
-      color: $color__teal-50;
-
-      .bx--left-nav-list__item-link--taxonomy-icon {
-        fill: $color__teal-50;
-      }
-    }
-
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
-      color: $color__purple-60;
-
-      .bx--left-nav-list__item-link--taxonomy-icon {
-        fill: $color__purple-60;
-      }
-    }
-
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
-      color: $color__blue-51;
-
-      .bx--left-nav-list__item-link--taxonomy-icon {
-        fill: $color__blue-51;
-      }
-    }
   }
 
   &--taxonomy-icon {
@@ -365,7 +338,38 @@
       transition: $transition--base $bx--standard-easing;
 
       @include light-ui {
-        fill: $color__blue-40;
+        fill: $color__blue-90;
+      }
+    }
+  }
+
+  &:hover {
+    color: $color__blue-30;
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+      color: $color__teal-50;
+
+      .bx--parent-item__link--taxonomy-icon,
+      .bx--parent-item__link--down-icon svg {
+        fill: $color__teal-50;
+      }
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+      color: $color__purple-60;
+
+      .bx--parent-item__link--taxonomy-icon,
+      .bx--parent-item__link--down-icon svg {
+        fill: $color__purple-60;
+      }
+    }
+
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+      color: $color__blue-51;
+
+      .bx--parent-item__link--taxonomy-icon,
+      .bx--parent-item__link--down-icon svg {
+        fill: $color__blue-51;
       }
     }
   }

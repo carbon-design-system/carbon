@@ -73,7 +73,7 @@
     span,
     span:before,
     span:after {
-      background: $color__teal-50;
+      background: $color__teal-40;
     }
 
     &:focus {
@@ -96,6 +96,21 @@
       span {
         background: transparent;
       }
+
+      span:before,
+      span:after {
+        background: $color__teal-50;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $color__teal-50;
+
+        span:before,
+        span:after {
+          background: $color__white;
+        }
+      }
     }
   }
 
@@ -104,7 +119,7 @@
     span,
     span:before,
     span:after {
-      background: $color__purple-60;
+      background: $color__purple-30;
     }
 
     &:focus {
@@ -127,6 +142,21 @@
       span {
         background: transparent;
       }
+
+      span:before,
+      span:after {
+        background: $color__purple-60;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $color__purple-60;
+
+        span:before,
+        span:after {
+          background: $color__white;
+        }
+      }
     }
   }
 
@@ -135,7 +165,7 @@
     span,
     span:before,
     span:after {
-      background: $color__blue-51;
+      background: $color__blue-40;
     }
 
     &:focus {
@@ -157,6 +187,21 @@
 
       span {
         background: transparent;
+      }
+
+      span:before,
+      span:after {
+        background: $color__blue-51;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $color__blue-51;
+
+        span:before,
+        span:after {
+          background: $color__white;
+        }
       }
     }
   }
