@@ -8,6 +8,7 @@ class NumberInput extends Component {
   static propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
+    iconDescription: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     label: PropTypes.string,
     max: PropTypes.number,
@@ -20,11 +21,12 @@ class NumberInput extends Component {
 
   static defaultProps = {
     disabled: false,
+    iconDescription: 'choose a number',
     label: ' ',
+    onChange: () => {},
+    onClick: () => {},
     step: 1,
     value: 0,
-    onClick: () => {},
-    onChange: () => {},
   }
 
   state = {
@@ -84,6 +86,7 @@ class NumberInput extends Component {
     const {
       className,
       disabled,
+      iconDescription, // eslint-disable-line
       id,
       label,
       max,
@@ -118,10 +121,18 @@ class NumberInput extends Component {
           {...props}
         />
         <span onClick={this.handleUpArrowClick} className="bx--number__arrow--up bx--number__arrow--icon-up">
-          <Icon className="icon--up bx--number__arrow--icon-up" name="chevron-up" />
+          <Icon
+            className="icon--up bx--number__arrow--icon-up"
+            name="chevron-up"
+            description={this.props.iconDescription}
+          />
         </span>
         <span onClick={this.handleDownArrowClick} className="bx--number__arrow--down bx--number__arrow--icon-down">
-          <Icon className="icon--down bx--number__arrow--icon-down" name="chevron-down" />
+          <Icon
+            className="icon--down bx--number__arrow--icon-down"
+            name="chevron-down"
+            description={this.props.iconDescription}
+          />
         </span>
       </div>
     );

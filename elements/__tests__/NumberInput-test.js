@@ -50,6 +50,31 @@ describe('numberInput', () => {
       });
     });
 
+    describe('Icon', () => {
+      it('renders two Icon components', () => {
+        const icons = wrapper.find('Icon');
+        expect(icons.length).toEqual(2);
+      });
+
+      it('has the expected default iconDescription', () => {
+        expect(wrapper.props().iconDescription).toEqual('choose a number');
+      });
+
+      it('adds new iconDescription when passed via props', () => {
+        wrapper.setProps({ iconDescription: 'new description' });
+        expect(wrapper.props().iconDescription).toEqual('new description');
+      });
+
+      it('should have iconDescription match Icon component description prop', () => {
+        const iconUpText = wrapper.find('.icon--up title').text();
+        const iconDownText = wrapper.find('.icon--down title').text();
+        const iconDescription = wrapper.props().iconDescription;
+
+        const matches = (iconDescription === iconUpText) && (iconDescription === iconDownText);
+        expect(matches).toEqual(true);
+      });
+    });
+
     describe('label', () => {
       it('renders a label', () => {
         expect(label.length).toEqual(1);
