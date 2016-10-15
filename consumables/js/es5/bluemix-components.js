@@ -4191,16 +4191,17 @@ var BluemixComponents =
 	    value: function animateNavSection(selectedNav) {
 	      var _this2 = this;
 	
+	      var selectedNavValue = selectedNav.dataset.leftNavSection;
 	      var selectedNavLink = selectedNav.querySelector(this.options.selectorLeftNavSectionLink);
 	      var leftNav = this.element.querySelector(this.options.selectorLeftNav);
 	      var leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
 	
 	      selectedNav.classList.remove(this.options.classNavSection);
-	      selectedNav.classList.remove(this.options.classNavSection + '--\'' + selectedNavLink.textContent.toLowerCase());
+	      selectedNav.classList.remove(this.options.classNavSection + '--' + selectedNavValue);
 	      selectedNav.classList.add(this.options.classNavSectionTransition);
 	      if (leftNavSections.children[0] === selectedNav) selectedNav.classList.add(this.options.classNavSectionTransition + '--50'); // First child only move 50px
 	      else selectedNav.classList.add(this.options.classNavSectionTransition + '--100'); // Second move 100px
-	      selectedNav.setAttribute('data-left-nav-section', selectedNavLink.textContent);
+	      selectedNav.setAttribute('data-left-nav-section', selectedNavValue);
 	      /* Not sure what trick more performant*/
 	      setTimeout(function () {
 	        selectedNav.classList.add(_this2.options.classNavSectionTransition + '--0');
@@ -4505,13 +4506,20 @@ var BluemixComponents =
 	      var leftNavSectionItem = (0, _eventMatches2.default)(evt, this.options.selectorLeftNavSection);
 	      if (leftNavSectionItem) {
 	        var _ret = function () {
+	
+	          console.log(leftNavSectionItem);
+	          // currently selected
 	          var selectedLeftNavSectionItem = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSection);
 	          var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(_this10.options.selectorLeftNavCurrentSectionTitle);
 	          var selectedLeftNavSectionItemIcon = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSectionIcon);
 	          var selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
+	          var selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
+	
+	          // clicked on item
 	          var leftNavSectionItemLink = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionLink);
 	          var leftNavSectionItemIcon = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionIcon);
 	          var leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
+	          var leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
 	
 	          if (_this10.leftNavSectionActive) {
 	            return {
@@ -4521,10 +4529,10 @@ var BluemixComponents =
 	          _this10.leftNavSectionActive = true;
 	
 	          var newLeftNavSectionItem = document.createElement('li');
-	          newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionItemTitle.textContent);
+	          newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
 	          newLeftNavSectionItem.setAttribute('tabindex', 0);
 	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection);
-	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection + '--' + selectedLeftNavSectionItemTitle.textContent.toLowerCase());
+	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection + '--' + selectedLeftNavSectionValue);
 	
 	          var newLeftNavSectionItemAnchor = document.createElement('a');
 	          newLeftNavSectionItemAnchor.setAttribute('href', '#');
@@ -4534,7 +4542,7 @@ var BluemixComponents =
 	          // IE11 doesn't support classList on SVG, must revert to className
 	          newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
 	          newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
-	          newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionItemTitle.textContent);
+	          newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
 	
 	          var newLeftNavSectionItemLink = document.createElement('span');
 	          newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
@@ -4542,7 +4550,7 @@ var BluemixComponents =
 	          newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
 	
 	          _this10.animateNavSection(leftNavSectionItem);
-	          _this10.animateNavList(leftNavSectionItemLink.textContent);
+	          _this10.animateNavList(leftNavSectionValue);
 	
 	          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
 	          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
@@ -4551,8 +4559,8 @@ var BluemixComponents =
 	
 	          setTimeout(function () {
 	            selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
-	            selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionItemLink.textContent);
-	            selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionItemLink.textContent);
+	            selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionValue);
+	            selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionValue);
 	            selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
 	
 	            leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
