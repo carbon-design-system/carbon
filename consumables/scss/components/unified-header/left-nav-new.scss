@@ -61,15 +61,15 @@
     width: 100%;
     padding: 1.125rem rem(20px);
 
-    &[data-left-nav-current-section='Applications'] {
+    &[data-left-nav-current-section='applications'] {
       background-color: $color__teal-50;
     }
 
-    &[data-left-nav-current-section='Infrastructure'] {
+    &[data-left-nav-current-section='infrastructure'] {
       background-color: $color__blue-50;
     }
 
-    &[data-left-nav-current-section='Services'] {
+    &[data-left-nav-current-section='services'] {
       background-color: $color__purple-60;
     }
   }
