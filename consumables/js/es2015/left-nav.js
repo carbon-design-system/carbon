@@ -447,8 +447,6 @@ export default class LeftNav {
   handleSectionItemClick(evt, leftNavSections) { // Sorry
     const leftNavSectionItem = eventMatches(evt, this.options.selectorLeftNavSection);
     if (leftNavSectionItem) {
-
-      console.log(leftNavSectionItem);
       // currently selected
       const selectedLeftNavSectionItem = this.element.querySelector(this.options.selectorLeftNavCurrentSection);
       const selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(this.options.selectorLeftNavCurrentSectionTitle);

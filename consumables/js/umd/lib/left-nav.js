@@ -451,8 +451,6 @@
         var leftNavSectionItem = (0, _eventMatches2.default)(evt, this.options.selectorLeftNavSection);
         if (leftNavSectionItem) {
           var _ret = function () {
-
-            console.log(leftNavSectionItem);
             // currently selected
             var selectedLeftNavSectionItem = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSection);
             var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(_this10.options.selectorLeftNavCurrentSectionTitle);
