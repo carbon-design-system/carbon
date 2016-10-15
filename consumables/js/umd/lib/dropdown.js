@@ -135,7 +135,7 @@
           });
 
           if (this.element.dispatchEvent(eventStart)) {
-            if (this.element.dataset.dropdown !== 'navigation') {
+            if (this.element.dataset.dropdownType !== 'navigation') {
               this.element.firstElementChild.textContent = activatedElement.textContent;
               activatedElement.classList.add(this.options.classSelected);
             }

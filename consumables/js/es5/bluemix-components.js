@@ -2814,7 +2814,7 @@ var BluemixComponents =
 	        });
 	
 	        if (this.element.dispatchEvent(eventStart)) {
-	          if (this.element.dataset.dropdown !== 'navigation') {
+	          if (this.element.dataset.dropdownType !== 'navigation') {
 	            this.element.firstElementChild.textContent = activatedElement.textContent;
 	            activatedElement.classList.add(this.options.classSelected);
 	          }
@@ -3586,7 +3586,7 @@ var BluemixComponents =
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.detailPageHeader !== undefined) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target, effectiveOptions);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
@@ -4615,7 +4615,7 @@ var BluemixComponents =
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target, effectiveOptions);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
@@ -4769,7 +4769,7 @@ var BluemixComponents =
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE && target.dataset.tabs !== undefined) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target, effectiveOptions);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
@@ -4968,7 +4968,7 @@ var BluemixComponents =
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target, effectiveOptions);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
@@ -5243,7 +5243,7 @@ var BluemixComponents =
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target, effectiveOptions);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
@@ -5411,7 +5411,7 @@ var BluemixComponents =
 	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
 	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
 	      }
-	      if (target.nodeType === Node.ELEMENT_NODE) {
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	        this.create(target, effectiveOptions);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {

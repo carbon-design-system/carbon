@@ -103,7 +103,7 @@
         if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
           throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
         }
-        if (target.nodeType === Node.ELEMENT_NODE && target.dataset.detailPageHeader !== undefined) {
+        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
           this.create(target, effectiveOptions);
         } else {
           [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
