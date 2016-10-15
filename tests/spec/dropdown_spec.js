@@ -121,7 +121,7 @@ describe('Dropdown', function () {
     });
 
     it(`Should not update text if navigation`, function () {
-      element.setAttribute('data-dropdown', 'navigation');
+      element.setAttribute('data-dropdown-type', 'navigation');
       itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(textNode.textContent).to.equal('0');
     });
