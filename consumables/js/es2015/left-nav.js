@@ -175,16 +175,17 @@ export default class LeftNav {
    * Adds a transitional animation to the navSection
    */
   animateNavSection(selectedNav) {
+    const selectedNavValue = selectedNav.dataset.leftNavSection;
     const selectedNavLink = selectedNav.querySelector(this.options.selectorLeftNavSectionLink);
     const leftNav = this.element.querySelector(this.options.selectorLeftNav);
     const leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
 
     selectedNav.classList.remove(this.options.classNavSection);
-    selectedNav.classList.remove(`${this.options.classNavSection}--'${selectedNavLink.textContent.toLowerCase()}`);
+    selectedNav.classList.remove(`${this.options.classNavSection}--${selectedNavValue}`);
     selectedNav.classList.add(this.options.classNavSectionTransition);
     if (leftNavSections.children[0] === selectedNav) selectedNav.classList.add(`${this.options.classNavSectionTransition}--50`); // First child only move 50px
     else selectedNav.classList.add(`${this.options.classNavSectionTransition}--100`); // Second move 100px
-    selectedNav.setAttribute('data-left-nav-section', selectedNavLink.textContent);
+    selectedNav.setAttribute('data-left-nav-section', selectedNavValue);
     /* Not sure what trick more performant*/
     setTimeout(() => {
       selectedNav.classList.add(`${this.options.classNavSectionTransition}--0`);
@@ -446,13 +447,21 @@ export default class LeftNav {
   handleSectionItemClick(evt, leftNavSections) { // Sorry
     const leftNavSectionItem = eventMatches(evt, this.options.selectorLeftNavSection);
     if (leftNavSectionItem) {
+
+      console.log(leftNavSectionItem);
+      // currently selected
       const selectedLeftNavSectionItem = this.element.querySelector(this.options.selectorLeftNavCurrentSection);
       const selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(this.options.selectorLeftNavCurrentSectionTitle);
       const selectedLeftNavSectionItemIcon = this.element.querySelector(this.options.selectorLeftNavCurrentSectionIcon);
       const selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
+      const selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
+
+      // clicked on item
       const leftNavSectionItemLink = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionLink);
       const leftNavSectionItemIcon = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionIcon);
       const leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
+      const leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
+
 
       if (this.leftNavSectionActive) {
         return;
@@ -460,10 +469,10 @@ export default class LeftNav {
       this.leftNavSectionActive = true;
 
       const newLeftNavSectionItem = document.createElement('li');
-      newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionItemTitle.textContent);
+      newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
       newLeftNavSectionItem.setAttribute('tabindex', 0);
       newLeftNavSectionItem.classList.add(this.options.classNavSection);
-      newLeftNavSectionItem.classList.add(`${this.options.classNavSection}--${selectedLeftNavSectionItemTitle.textContent.toLowerCase()}`);
+      newLeftNavSectionItem.classList.add(`${this.options.classNavSection}--${selectedLeftNavSectionValue}`);
 
       const newLeftNavSectionItemAnchor = document.createElement('a');
       newLeftNavSectionItemAnchor.setAttribute('href', '#');
@@ -473,7 +482,7 @@ export default class LeftNav {
       // IE11 doesn't support classList on SVG, must revert to className
       newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
       newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
-      newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionItemTitle.textContent);
+      newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
 
       const newLeftNavSectionItemLink = document.createElement('span');
       newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
@@ -481,7 +490,7 @@ export default class LeftNav {
       newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
 
       this.animateNavSection(leftNavSectionItem);
-      this.animateNavList(leftNavSectionItemLink.textContent);
+      this.animateNavList(leftNavSectionValue);
 
       newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
       newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
@@ -490,8 +499,8 @@ export default class LeftNav {
 
       setTimeout(() => {
         selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
-        selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionItemLink.textContent);
-        selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionItemLink.textContent);
+        selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionValue);
+        selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionValue);
         selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
 
         leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11

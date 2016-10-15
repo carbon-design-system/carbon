@@ -154,15 +154,15 @@
       padding: 1.125rem 0;
     }
 
-    .bx--global-light-ui &[data-left-nav-section='Applications'] {
+    .bx--global-light-ui &[data-left-nav-section='applications'] {
       background-color: $color__teal-50;
     }
 
-    .bx--global-light-ui &[data-left-nav-section='Infrastructure'] {
+    .bx--global-light-ui &[data-left-nav-section='infrastructure'] {
       background-color: $color__blue-50;
     }
 
-    .bx--global-light-ui &[data-left-nav-section='Services'] {
+    .bx--global-light-ui &[data-left-nav-section='services'] {
       background-color: $color__purple-60;
     }
   }
@@ -229,15 +229,15 @@
     background-color: $color__blue-30;
 
     @include light-ui {
-      &[data-left-nav-section="Applications"] {
+      &[data-left-nav-section="applications"] {
         background-color: $color__teal-50;
       }
 
-      &[data-left-nav-section="Services"] {
+      &[data-left-nav-section="services"] {
         background-color: $color__purple-60;
       }
 
-      &[data-left-nav-section="Infrastructure"] {
+      &[data-left-nav-section="infrastructure"] {
         background-color: $color__blue-50;
       }
     }
@@ -352,7 +352,7 @@
   &:hover {
     color: $color__blue-30;
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
       color: $color__teal-50;
 
       .bx--parent-item__link--taxonomy-icon,
@@ -361,7 +361,7 @@
       }
     }
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="services"] & {
       color: $color__purple-60;
 
       .bx--parent-item__link--taxonomy-icon,
@@ -370,7 +370,7 @@
       }
     }
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
       color: $color__blue-51;
 
       .bx--parent-item__link--taxonomy-icon,
@@ -395,7 +395,7 @@
       fill: $color__blue-90;
     }
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
       background-color: $color__teal-50;
 
       &:hover {
@@ -403,7 +403,7 @@
       }
     }
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="services"] & {
       background-color: $color__purple-60;
 
       &:hover {
@@ -411,7 +411,7 @@
       }
     }
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
       background-color: $color__blue-51;
 
       &:hover {
@@ -485,7 +485,7 @@
       }
 
       &:hover {
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
           color: $color__teal-50;
 
           .bx--left-nav-list__item-link--taxonomy-icon {
@@ -493,7 +493,7 @@
           }
         }
 
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="services"] & {
           color: $color__purple-60;
 
           .bx--left-nav-list__item-link--taxonomy-icon {
@@ -501,7 +501,7 @@
           }
         }
 
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
           color: $color__blue-51;
 
           .bx--left-nav-list__item-link--taxonomy-icon {
@@ -585,15 +585,15 @@
       }
 
       &:hover {
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & .bx--flyout-menu__item--link {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & .bx--flyout-menu__item--link {
           color: $color__teal-50;
         }
 
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & .bx--flyout-menu__item--link {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="services"] & .bx--flyout-menu__item--link {
           color: $color__purple-60;
         }
 
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & .bx--flyout-menu__item--link {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & .bx--flyout-menu__item--link {
           color: $color__blue-51;
         }
       }
@@ -602,7 +602,7 @@
 
   .bx--flyout-menu__item.bx--active-list-item {
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
       background-color: $color__teal-50;
 
       & .bx--flyout-menu__item--link {
@@ -610,7 +610,7 @@
       }
     }
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="services"] & {
       background-color: $color__purple-60;
 
       & .bx--flyout-menu__item--link {
@@ -618,7 +618,7 @@
       }
     }
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
       background-color: $color__blue-51;
 
       & .bx--flyout-menu__item--link {
