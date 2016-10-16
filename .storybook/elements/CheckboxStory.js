@@ -1,15 +1,14 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf, action } from '@kadira/storybook';
+import centered from '@kadira/react-storybook-decorator-centered';
 import AppContainer from '../../containers/AppContainer';
 import Checkbox from '../../elements/Checkbox';
 
 const checkboxEvents = {
-  onBlur: () => { console.log('blur')},
-  onClick: () => { console.log('click')},
-  onFocus: () => { console.log('focus')},
   className: 'some-class',
   labelText: 'Checkbox',
   id: 'checkbox-1',
+  onChange: action('onChange')
 };
 
 storiesOf('Checkbox', module)
@@ -18,12 +17,29 @@ storiesOf('Checkbox', module)
       {story()}
     </AppContainer>
   ))
-  .add('enabled checked', () => (
-    <Checkbox checked {...checkboxEvents} />
-  ))
-  .add('enabled unchecked', () => (
-    <Checkbox {...checkboxEvents} />
-  ))
-  .add('disabled unchecked', () => (
+  .addDecorator(centered)
+  .addWithInfo(
+    'enabled checked',
+    `
+      The example below shows how the Checkbox component can be used as an uncontrolled
+      component that is intially checked by setting the defaultChecked property to true. To use the component in a controlled way, you
+      should set the checked property instead.
+    `,
+    () => (
+      <Checkbox defaultChecked={true} {...checkboxEvents} />
+    ),
+  )
+  .addWithInfo(
+    'enabled unchecked',
+    `
+      The example below shows how the Checkbox component can be used as an uncontrolled
+      component that is intially unchecked. To use the component in a controlled way, you
+      should set the checked property instead.
+    `,
+    () => (
+      <Checkbox {...checkboxEvents} />
+    )
+  )
+  .addWithInfo('disabled unchecked', () => (
     <Checkbox disabled {...checkboxEvents} />
   ));
