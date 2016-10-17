@@ -1,19 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import icons from '@console/bluemix-icons/icons.json';
 
 class Icon extends Component {
 
   static propTypes = {
-    name: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string.isRequired,
-    className: React.PropTypes.string,
-    fill: React.PropTypes.string,
-    fillRule: React.PropTypes.string,
-    width: React.PropTypes.string,
-    height: React.PropTypes.string,
-    viewBox: React.PropTypes.string,
-    style: React.PropTypes.object,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    fill: PropTypes.string,
+    fillRule: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string,
+    viewBox: PropTypes.string,
+    style: PropTypes.object,
   }
+
+  static defaultProps = {
+    fillRule: 'evenodd',
+    height: '32px',
+    width: '32px',
+    viewBox: '0 0 32 32',
+  }
+
+  static data = icons;
 
   /**
    * Returns "svgData" Object
@@ -22,7 +31,10 @@ class Icon extends Component {
    * // Returns svgData Object for given iconName
    * this.getSvgData('copy-code');
    */
-  getSvgData = (iconName) => this.findIcon(iconName).svgData
+  getSvgData(iconName) {
+    const name = this.findIcon(iconName);
+    return (name) ? name.svgData : false;
+  }
 
   /**
    * Returns Elements/Nodes for SVG
@@ -48,8 +60,6 @@ class Icon extends Component {
 
             return <circle {...circleProps} />;
           });
-        // } else if (svgProp === 'paths') {
-        //   return data.map(path => <path d={path.d} className={this.props.className} />);
         } else if (svgProp === 'paths') {
           return data.map(path => <path d={path.d} />);
         } else if (svgProp === 'polygons') {
@@ -84,29 +94,52 @@ class Icon extends Component {
    * // Returns a single icon Object
    * this.findIcon('copy-code', icons.json);
    */
-  findIcon = (iconName, iconsObj = icons) => iconsObj.find(icon => ((icon.name === iconName) ? icon : false))
+  findIcon(name, iconsObj = icons) {
+    const icon = iconsObj.filter(obj => obj.name === name);
+
+    if (icon.length === 0) {
+      return false;
+    } else if (icon.length > 1) {
+      throw new Error('Multiple icons found...');
+    } else {
+      return icon[0];
+    }
+  }
 
   render() {
     // SVG Content and Data for Render
     const svgData = this.getSvgData(this.props.name);
     const svgContent = this.getSvgContent(svgData);
 
+    const {
+      className,
+      fill,
+      fillRule,
+      height,
+      width,
+      name,
+      viewBox,
+      style,
+      description,
+    } = this.props;
+
     // Props
-    const idProp = this.findIcon(this.props.name).id;
-    const iconProps = {
-      className: this.props.className,
-      fill: this.props.fill,
-      fillRule: this.props.fillRule || 'evenodd',
-      height: this.props.height || '32px',
-      name: this.props.name,
-      viewBox: this.props.viewBox || '0 0 32 32',
-      width: this.props.width || '32px',
-      style: this.props.style,
+    const props = {
+      className,
+      fill,
+      fillRule,
+      height,
+      width,
+      name,
+      viewBox,
+      style,
     };
 
+    const id = this.findIcon(this.props.name).id;
+
     return (
-      <svg {...iconProps} aria-labelledby={idProp}>
-        <title id={idProp}>{this.props.description}</title>
+      <svg {...props} aria-labelledby={id}>
+        <title id={id}>{description}</title>
         {svgContent}
       </svg>
     );

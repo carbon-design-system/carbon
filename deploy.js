@@ -4,7 +4,7 @@ const path = require('path');
 const options = {
   remote: 'upstream',
   logger: (message) => {
-    console.log(message);
+    console.log(message); // eslint-disable-line no-console
   },
 };
 

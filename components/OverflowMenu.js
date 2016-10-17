@@ -17,6 +17,7 @@ class OverflowMenu extends Component {
     onFocus: PropTypes.func,
     onKeyDown: PropTypes.func,
     handleClick: PropTypes.func,
+    iconDescription: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -66,6 +67,7 @@ class OverflowMenu extends Component {
       tabIndex,
       ariaLabel,
       children,
+      iconDescription,
       ...other,
     } = this.props;
 
@@ -93,6 +95,7 @@ class OverflowMenu extends Component {
           <Icon
             className="bx--overflow-menu__icon"
             name="overflow_menu_icon"
+            description={iconDescription}
             fill="#dfe6eb"
             height="40px"
             viewBox="0 0 14 60"
