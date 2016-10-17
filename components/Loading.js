@@ -5,39 +5,52 @@ import '@console/bluemix-components/consumables/scss/components/loading/loading.
 class Loading extends React.Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
+    active: React.PropTypes.bool,
     className: React.PropTypes.string,
-    onBlur: React.PropTypes.func,
-    onClick: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
-    onKeyUp: React.PropTypes.func,
-    onMouseDown: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func,
-    handleClick: React.PropTypes.func,
+  }
+
+  static defaultProps = {
+    active: true,
+  }
+
+  state = {
+    active: this.props.active,
+    isIE: (window.ActiveXObject || 'ActiveXObject' in window),
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.active !== this.props.active) {
+      this.setState({ active: nextProps.active });
+    }
   }
 
   render() {
     const {
+      className,
+      active,
       ...other,
     } = this.props;
 
-    const loadingClasses = classNames({
-      'bx--loading': true,
-      [this.props.className]: this.props.className,
-    });
+    let classToAdd;
 
-    const loading = (
-      <div {...other} data-loading className={loadingClasses}>
+    if (this.state.isIE) {
+      classToAdd = active ? 'bx--loading--ie' : 'bx--loading--ie bx--loading--stop--ie';
+    } else {
+      classToAdd = active ? 'bx--loading' : 'bx--loading bx--loading--stop';
+    }
+
+    const loadingClasses = classNames(
+      classToAdd,
+      className
+    );
+
+    return (
+      <div {...other} className={loadingClasses}>
         <svg className="bx--loading__svg" viewBox="-75 -75 150 150">
           <circle cx="0" cy="0" r="37.5" />
         </svg>
       </div>
     );
-
-    return loading;
   }
 }
 
