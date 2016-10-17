@@ -21,7 +21,8 @@ class OverflowMenu extends Component {
   }
 
   static defaultProps = {
-    ariaLabel: 'List of options',
+    ariaLabel: 'list of options',
+    iconDescription: 'list of options',
     open: false,
     onClick: () => {},
   }
