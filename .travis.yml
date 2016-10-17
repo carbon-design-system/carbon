@@ -11,6 +11,6 @@ script:
   - npm test
 deploy:
   provider: script
-  script: sh node_modules/@console/console-npm-scripts/deploy.sh
+  script: sh travis/deploy.sh
   on:
     all_branches: true
