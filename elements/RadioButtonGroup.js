@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import RadioButton from '../elements/RadioButton';
 import warning from 'warning';
 import '@console/bluemix-components/consumables/scss/base-elements/radio/radio.scss';
@@ -6,30 +6,28 @@ import '@console/bluemix-components/consumables/scss/base-elements/radio/radio.s
 class RadioButtonGroup extends React.Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    defaultSelected: React.PropTypes.any,
-    name: React.PropTypes.string.isRequired,
-    disabled: React.PropTypes.bool,
-    onChange: React.PropTypes.func,
-    valueSelected: React.PropTypes.any,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    defaultSelected: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    name: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    onChange: PropTypes.func,
+    valueSelected: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }
 
   state = {
-    numberCheckedRadioButtons: 0,
-    selected: '',
-  };
+    selected: null,
+  }
 
   componentWillMount() {
-    let count = 0;
-
-    React.Children.forEach(this.props.children, (option) => {
-      if (this.hasCheckAttribute(option)) count++;
-    }, this);
-
     this.setState({
-      numberCheckedRadioButtons: count,
-      selected: this.props.valueSelected || this.props.defaultSelected || '',
+      selected: this.props.valueSelected || this.props.defaultSelected || null,
     });
   }
 
@@ -41,70 +39,50 @@ class RadioButtonGroup extends React.Component {
     }
   }
 
-  getSelectedValue() {
-    return this.state.selected;
-  }
-
-  setSelectedValue(newSelectionValue) {
-    this.updateRadioButtons(newSelectionValue);
-  }
-
-  handleChange = (evt, newSelection) => {
-    this.updateRadioButtons(newSelection);
-
-    if (this.state.numberCheckedRadioButtons === 0) {
-      if (this.props.onChange) {
-        this.props.onChange(evt, newSelection);
-      }
-    }
-  };
-
-  updateRadioButtons(newSelection) {
-    if (this.state.numberCheckedRadioButtons === 0) {
-      this.setState({ selected: newSelection });
-    } else {
-      warning(false, `Cannot select a different radio button while
-         another radio button has the 'checked' property set to true.`);
-    }
-  }
-
-  hasCheckAttribute(radioButton) {
-    return radioButton.props.hasOwnProperty('checked') &&
-      radioButton.props.checked;
-  }
-
-  clearValue() {
-    this.setSelectedValue('');
-  }
-
-  render() {
-    const radioButtons = React.Children.map(this.props.children, (radioButton) => {
+  getRadioButtons = () => {
+    const children = React.Children.map(this.props.children, (radioButton) => {
       const {
-        name, // eslint-disable-line no-unused-vars
-        value, // eslint-disable-line no-unused-vars
-        label, // eslint-disable-line no-unused-vars
-        onCheck, // eslint-disable-line no-unused-vars
+        value,
         ...other,
       } = radioButton.props;
 
+      if (radioButton.props.hasOwnProperty('checked')) {
+        warning(false, `Instead of using the checked property on the RadioButton, set
+            the defaultSelected property or valueSelected property on the RadioButtonGroup.`);
+      }
 
       return (
         <RadioButton
           {...other}
-          ref={radioButton.props.value}
           name={this.props.name}
-          key={radioButton.props.value}
-          value={radioButton.props.value}
-          onCheck={this.handleChange}
-          checked={radioButton.props.value === this.state.selected}
+          key={value}
+          value={value}
+          onChange={this.handleChange}
+          checked={value === this.state.selected}
         />
       );
-    }, this);
+    });
+
+    return children;
+  }
+
+  handleChange = (newSelection, value, evt) => {
+    if (newSelection !== this.state.selected) {
+      this.setState({ selected: newSelection });
+      this.props.onChange(newSelection, this.props.name, evt);
+    }
+  }
+
+  render() {
+    const { disabled, className } = this.props;
 
     return (
-      <fieldset>
-        {radioButtons}
-      </fieldset>
+      <div
+        className={className}
+        disabled={disabled}
+      >
+        {this.getRadioButtons()}
+      </div>
     );
   }
 }

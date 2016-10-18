@@ -1,72 +1,58 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import InternalSwitch from '../internal/InternalSwitch';
+import uid from '../lib/uniqueId';
 import '@console/bluemix-components/consumables/scss/base-elements/radio/radio.scss';
 
 class RadioButton extends React.Component {
 
   static propTypes = {
-    checked: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    onCheck: React.PropTypes.func,
-    value: React.PropTypes.any,
-    className: React.PropTypes.string,
-    id: React.PropTypes.string,
-    labelText: React.PropTypes.string,
+    checked: PropTypes.bool,
+    className: PropTypes.string,
+    defaultChecked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    id: PropTypes.string,
+    labelText: PropTypes.string,
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
   };
 
   static defaultProps = {
-    checked: false,
-    disabled: false,
+    onChange: () => { },
   };
 
-  setChecked(newCheckedValue) {
-    this.refs.internalSwitch.setSwitched(newCheckedValue);
+  componentWillMount() {
+    this.uid = this.props.id || uid();
   }
 
-  getValue() {
-    return this.refs.internalSwitch.getValue();
-  }
-
-  isChecked() {
-    return this.refs.internalSwitch.isSwitched();
-  }
-
-  handleSwitch = (event) => {
-    if (this.props.onCheck) {
-      this.props.onCheck(event, this.props.value);
-    }
+  handleChange = (evt) => {
+    this.props.onChange(this.props.value, this.props.name, evt);
   };
 
   render() {
-    const radioButtonClasses = classNames({
-      'bx--radio': true,
-      [this.props.className]: this.props.className,
-    });
+    const wrapperClasses = classNames(
+      'radioButtonWrapper',
+      this.props.className,
+    );
 
     const {
-      checked,
-      onCheck, // eslint-disable-line no-unused-vars
-      disabled,
       labelText,
-      id,
       ...other,
     } = this.props;
 
     return (
-      <div className="radioButtonWrapper">
-        <InternalSwitch
+      <div className={wrapperClasses}>
+        <input
           {...other}
-          ref="internalSwitch"
-          className={radioButtonClasses}
-          inputType="radio"
-          checked={checked}
-          switched={checked}
-          disabled={disabled}
-          onSwitch={this.handleSwitch}
-          id={id}
+          type="radio"
+          className="bx--radio"
+          onChange={this.handleChange}
+          id={this.uid}
         />
-        <label htmlFor={id} className="bx--radio__label">
+        <label htmlFor={this.uid} className="bx--radio__label">
           <span className="bx--radio__appearance"></span>
           {labelText}
         </label>
