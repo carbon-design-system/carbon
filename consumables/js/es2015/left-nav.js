@@ -468,12 +468,12 @@ export default class LeftNav {
 
       const newLeftNavSectionItem = document.createElement('li');
       newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
-      newLeftNavSectionItem.setAttribute('tabindex', 0);
       newLeftNavSectionItem.classList.add(this.options.classNavSection);
       newLeftNavSectionItem.classList.add(`${this.options.classNavSection}--${selectedLeftNavSectionValue}`);
 
       const newLeftNavSectionItemAnchor = document.createElement('a');
       newLeftNavSectionItemAnchor.setAttribute('href', '#');
+      newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
       newLeftNavSectionItemAnchor.classList.add(this.options.classNavSectionAnchor);
 
       const newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
