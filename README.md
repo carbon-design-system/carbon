@@ -1,3 +1,5 @@
+[![Coverage Status](https://pages.github.ibm.com/Bluemix/bluemix-components-react/coverage/badge.svg)](https://pages.github.ibm.com/Bluemix/bluemix-components-react/coverage/lcov-report/index.html)
+
 # Bluemix Components React
 
 A set of React Components that implements [Bluemix Components](https://github.ibm.com/Bluemix/bluemix-components) from [Bluemix Design System](http://design-system.stage1.mybluemix.net/)
@@ -8,8 +10,8 @@ View available React Components [here](https://pages.github.ibm.com/Bluemix/blue
 
 > NPM package for `bluemix-components-react` is coming soon.
 
-Requires the use of 
-[Webpack](http://webpack.github.io/docs/tutorials/getting-started/) and the following dependencies below. 
+Requires the use of
+[Webpack](http://webpack.github.io/docs/tutorials/getting-started/) and the following dependencies below.
 See [webpack.config.js](https://github.ibm.com/Bluemix/bluemix-components-react/blob/master/.storybook/webpack.config.js) for details.
 
 All dependencies can be installed with `npm`.
@@ -41,6 +43,12 @@ Open browser to [http://localhost:9001/](http://localhost:9001/) and develop com
 
 ```sh
 npm run test
+```
+
+## Run coverage test
+
+```sh
+npm run coverage
 ```
 
 ## Run linting

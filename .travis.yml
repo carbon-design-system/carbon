@@ -9,6 +9,7 @@ cache:
 script:
   - npm run lint
   - npm test
+  - npm run coverage
 deploy:
   provider: script
   script: sh travis/deploy.sh

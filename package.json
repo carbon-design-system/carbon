@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "check": "npm run lint && npm run test",
+    "coverage": "jest --coverage && node tools/create-badge.js",
     "lint": "eslint .",
     "storybook": "start-storybook -p 9001",
     "test": "jest",
@@ -93,6 +94,7 @@
     "eslint-plugin-react": "^5.2.2",
     "gh-pages": "0.11.0",
     "jest": "^15.1.1",
+    "lcov2badge": "^0.1.0",
     "node-sass": "3.8.0",
     "postcss-loader": "^0.9.1",
     "react-addons-test-utils": "^15.3.1",
@@ -101,6 +103,7 @@
     "warning": "3.0.0"
   },
   "jest": {
+    "coverageDirectory": "./.gh-pages/coverage",
     "moduleNameMapper": {
       "^.+\\.(scss)$": "<rootDir>/lib/styleMock.js"
     }
