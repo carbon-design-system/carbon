@@ -33,7 +33,7 @@
       font-weight: 700;
     }
 
-    // Before seletion is made, text color is gray (default)
+    // Before selection is made, text color is gray (default)
     &[data-value=''] &__menu-text {
       color: rgba(255, 255, 255, .5);
 
@@ -87,6 +87,10 @@
         @include light-ui {
           background-color: $color__blue-51;
           color: $color__white;
+
+          .bx--dropdown__link {
+            color: $color__white;
+          }
         }
       }
 
@@ -106,6 +110,10 @@
 
       .bx--dropdown--selected & {
         color: $color__white;
+      }
+
+      @include light-ui {
+        color: $color__blue-90;
       }
     }
   }
