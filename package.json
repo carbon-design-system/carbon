@@ -22,7 +22,8 @@
     "containers/**/*",
     "elements/**/*",
     "internal/**/*",
-    "lib/**/*"
+    "lib/**/*",
+    "index.js"
   ],
   "contributors": [
     {
