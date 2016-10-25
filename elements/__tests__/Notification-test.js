@@ -130,8 +130,7 @@ describe('events and state', () => {
 
     mountedToast.setState({ open: false });
     mountedInline.setState({ open: false });
-
-    expect(mountedToast.childAt(0).html()).toBeNull();
-    expect(mountedInline.childAt(0).html()).toBeNull();
+    expect(mountedToast.html()).toBeNull();
+    expect(mountedInline.html()).toBeNull();
   });
 });
