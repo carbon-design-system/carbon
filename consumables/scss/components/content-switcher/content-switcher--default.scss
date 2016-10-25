@@ -34,11 +34,9 @@
     background-color: $color__blue-30;
     color: $color__blue-90;
     font-weight: 400;
-    text-decoration: underline solid $color__blue-30;
 
     &:hover {
       border-color: $color__blue-30;
-      text-decoration: underline solid $color__blue-30;
     }
 
     @include light-ui {

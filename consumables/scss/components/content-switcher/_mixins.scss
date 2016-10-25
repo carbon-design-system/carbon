@@ -2,7 +2,6 @@
   @include font-size('14');
   background-color: transparent;
   display: inline-block;
-  font-weight: 200;
   padding: .87rem 2rem;
   text-decoration: none;
 
@@ -23,7 +22,6 @@
   &:hover,
   &:focus {
     cursor: pointer;
-    text-decoration: underline solid $color__blue-30;
   }
 
   &:focus {
