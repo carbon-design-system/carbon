@@ -1,39 +1,48 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/global/global.scss';
 
-export default class AppContainer extends React.Component {
+class AppContainer extends Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
+    theme: PropTypes.oneOf(['dark', 'light']).isRequired,
+    children: PropTypes.node,
+    className: PropTypes.string,
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      lightTheme: false,
-    };
-
-    this.toggleTheme = this.toggleTheme.bind(this);
+  static defaultProps = {
+    theme: 'dark',
   }
 
-  toggleTheme() {
-    this.setState({
-      lightTheme: !this.state.lightTheme,
-    });
+  state = {
+    theme: this.props.theme,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.theme !== this.props.theme) {
+      this.setState({ theme: nextProps.theme });
+    }
   }
 
   render() {
-    const appContainerClasses = classNames({
-      'bx--body': true,
-      'bx--global-light-ui': this.state.lightTheme,
-    });
+    const {
+      children,
+      theme, // eslint-disable-line
+      className,
+      ...other,
+    } = this.props;
+
+    const classes = classNames(
+      'bx--body',
+      className,
+      { 'bx--global-light-ui': this.state.theme === 'light' },
+    );
 
     return (
-      <div className={appContainerClasses}>
-        {this.props.children}
+      <div {...other} className={classes}>
+        {children}
       </div>
     );
   }
 }
+
+export default AppContainer;
