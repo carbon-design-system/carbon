@@ -1,3 +1,4 @@
+[![Build Status](https://travis.ibm.com/Bluemix/bluemix-components-react.svg?token=rxygQXh19ShfmuUT1G3v&branch=master)](https://travis.ibm.com/Bluemix/bluemix-components-react)
 [![Coverage Status](https://pages.github.ibm.com/Bluemix/bluemix-components-react/coverage/badge.svg)](https://pages.github.ibm.com/Bluemix/bluemix-components-react/coverage/lcov-report/index.html)
 
 # Bluemix Components React
