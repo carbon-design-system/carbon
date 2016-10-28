@@ -2,50 +2,44 @@ import React from 'react';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/components/dropdown/dropdown.scss';
 
-class DropdownItem extends React.Component {
+const propTypes = {
+  value: React.PropTypes.string.isRequired,
+  itemText: React.PropTypes.string.isRequired,
+  className: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+};
 
-  static propTypes = {
-    value: React.PropTypes.string.isRequired,
-    itemText: React.PropTypes.string.isRequired,
-    className: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-  }
+const defaultProps = {
+  onClick: () => {},
+};
 
-  static defaultProps = {
-    onClick: () => {},
-  };
+const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
+  const dropdownItemClasses = classNames({
+    'bx--dropdown__list-item': true,
+    [className]: className,
+  });
 
-  handleClick = () => {
+  const handleClick = () => {
     const info = {
-      value: this.props.value,
-      itemText: this.props.itemText,
-    };
-    this.props.onClick(info);
-  }
-
-  render() {
-    const {
       value,
       itemText,
-      ...other,
-    } = this.props;
+    };
+    onClick(info);
+  };
 
-    const dropdownItemClasses = classNames({
-      'bx--dropdown__list-item': true,
-      [this.props.className]: this.props.className,
-    });
+  return (
+    <li
+      {...other}
+      value={value}
+      className={dropdownItemClasses}
+      onClick={handleClick}
+    >
+      <a className="bx--dropdown__link">{itemText}</a>
+    </li>
+  );
+};
 
-    return (
-      <li
-        {...other}
-        value={value}
-        className={dropdownItemClasses}
-        onClick={this.handleClick}
-      >
-        <a className="bx--dropdown__link">{itemText}</a>
-      </li>
-    );
-  }
-}
+DropdownItem.propTypes = propTypes;
+DropdownItem.defaultProps = defaultProps;
 
 export default DropdownItem;

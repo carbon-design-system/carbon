@@ -44,13 +44,8 @@ describe('Loading', () => {
 
     const loader = wrapper.find('div');
 
-    it('sets the state', () => {
-      expect(wrapper.state().active).toEqual(true);
-      wrapper.setProps({ active: false });
-      expect(wrapper.state().active).toEqual(false);
-    });
-
     it('should remove and add bx--loading--stop class', () => {
+      wrapper.setProps({ active: false });
       expect(loader.hasClass('bx--loading--stop')).toEqual(true);
       wrapper.setProps({ active: true });
       expect(loader.hasClass('bx--loading--stop')).toEqual(false);

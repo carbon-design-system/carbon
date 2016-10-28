@@ -2,43 +2,24 @@ import React from 'react';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/components/card/card.scss';
 
-class CardFooter extends React.Component {
+const propTypes = {
+  children: React.PropTypes.node,
+  className: React.PropTypes.string,
+};
 
-  static propTypes = {
-    children: React.PropTypes.node,
-    status: React.PropTypes.string,
-    className: React.PropTypes.string,
-    restartApp: React.PropTypes.func,
-  }
+const CardFooter = ({ children, className }) => {
+  const cardFooterClasses = classNames({
+    'bx--card__card-footer': true,
+    [className]: className,
+  });
 
-  static defaultProps = {
-    status: 'running',
-  }
+  return (
+    <div className={cardFooterClasses}>
+      {children}
+    </div>
+  );
+};
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      status: this.props.status,
-    };
-  }
-
-  render() {
-    const {
-      children,
-    } = this.props;
-
-    const cardFooterClasses = classNames({
-      'bx--card__card-footer': true,
-      [this.props.className]: this.props.className,
-    });
-
-    return (
-      <div className={cardFooterClasses}>
-        {children}
-      </div>
-    );
-  }
-}
+CardFooter.propTypes = propTypes;
 
 export default CardFooter;

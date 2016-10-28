@@ -1,86 +1,75 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/base-elements/textarea/textarea.scss';
 
-class Textarea extends Component {
+const propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  cols: PropTypes.number,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  disabled: PropTypes.bool,
+  id: PropTypes.string,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  placeholder: PropTypes.string,
+  rows: PropTypes.number,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+};
 
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    cols: PropTypes.number,
-    defaultValue: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    disabled: PropTypes.bool,
-    id: PropTypes.string,
-    onChange: PropTypes.func,
-    onClick: PropTypes.func,
-    placeholder: PropTypes.string,
-    rows: PropTypes.number,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-  }
+const defaultProps = {
+  disabled: false,
+  onChange: () => {},
+  onClick: () => {},
+  placeholder: 'Hint text here',
+  rows: 4,
+  cols: 50,
+};
 
-  static defaultProps = {
-    disabled: false,
-    onChange: () => {},
-    onClick: () => {},
-    placeholder: 'Hint text here',
-    rows: 4,
-    cols: 50,
-  }
+const Textarea = ({ children, className, id, onChange, onClick, ...other }) => {
+  const textareaProps = {
+    id,
+    onChange: evt => {
+      if (!other.disabled) {
+        onChange(evt);
+      }
+    },
+    onClick: evt => {
+      if (!other.disabled) {
+        onClick(evt);
+      }
+    },
+  };
 
-  handleChange = (evt) => {
-    if (!this.props.disabled) {
-      this.props.onChange(evt);
-    }
-  }
+  const textareaClasses = classNames(
+    'bx--textarea__input',
+    [className]: className,
+  );
 
-  handleClick = (evt) => {
-    if (!this.props.disabled) {
-      this.props.onClick(evt);
-    }
-  }
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="bx--form__label"
+      >
+        {children}
+      </label>
 
-  render() {
-    const {
-      children,
-      className,
-      id,
-      ...other,
-    } = this.props;
+      <textarea
+        {...other}
+        {...textareaProps}
+        className={textareaClasses}
+      />
+    </div>
+  );
+};
 
-    const textareaProps = {
-      id,
-      onChange: this.handleChange,
-      onClick: this.handleClick,
-    };
-
-    const textareaClasses = classNames(
-      'bx--textarea__input',
-      className,
-    );
-
-    return (
-      <div>
-        <label
-          htmlFor={id}
-          className="bx--form__label"
-        >
-          {children}
-        </label>
-
-        <textarea
-          {...other}
-          {...textareaProps}
-          className={textareaClasses}
-        />
-      </div>
-    );
-  }
-}
+Textarea.propTypes = propTypes;
+Textarea.defaultProps = defaultProps;
 
 export default Textarea;

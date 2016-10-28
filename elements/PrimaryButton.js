@@ -3,22 +3,22 @@ import classNames from 'classnames';
 import InternalButton from '../internal/InternalButton';
 import '@console/bluemix-components/consumables/scss/base-elements/buttons/button--primary.scss';
 
-class PrimaryButton extends React.Component {
-  static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-  }
+const propTypes = {
+  children: React.PropTypes.node,
+  className: React.PropTypes.string,
+};
 
-  render() {
-    const buttonClasses = classNames({
-      'bx--btn': true,
-      [this.props.className]: this.props.className,
-    });
+const PrimaryButton = ({ className, ...other }) => {
+  const buttonClasses = classNames({
+    'bx--btn': true,
+    [className]: className,
+  });
 
-    return (
-      <InternalButton {...this.props} className={buttonClasses} />
-    );
-  }
-}
+  return (
+    <InternalButton {...other} className={buttonClasses} />
+  );
+};
+
+PrimaryButton.propTypes = propTypes;
 
 export default PrimaryButton;
