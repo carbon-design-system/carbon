@@ -38,6 +38,8 @@ export default class Dropdown {
      */
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => this.toggle(event));
 
+    this.setCloseOnBlur();
+
     this.element.addEventListener('keypress', (event) => this.toggle(event));
     this.element.addEventListener('click', (event) => this.selected(event));
   }
@@ -86,6 +88,9 @@ export default class Dropdown {
   }
 
   release() {
+    if (this.hFocusIn) {
+      this.hFocusIn = this.hFocusIn.release();
+    }
     if (this.hDocumentClick) {
       this.hDocumentClick = this.hDocumentClick.release();
     }
@@ -143,6 +148,19 @@ export default class Dropdown {
         }));
       }
     }
+  }
+
+  /**
+   * Sets an event handler to document for "close on blur" behavior.
+   */
+  setCloseOnBlur() {
+    const hasFocusin = 'onfocusin' in window;
+    const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+    this.hFocusIn = on(this.element.ownerDocument, focusinEventName, (event) => {
+      if (!this.element.contains(event.target)) {
+        this.element.classList.remove('bx--dropdown--open');
+      }
+    }, !hasFocusin);
   }
 }
 

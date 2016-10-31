@@ -150,6 +150,53 @@ describe('Dropdown', function () {
     });
   });
 
+  describe('Close on blur', function () {
+    let dropdown;
+    let element;
+    let input;
+
+    before(function () {
+      element = document.createElement('ul');
+
+      const listContainer = element.appendChild(document.createElement('li'));
+      const list = listContainer.appendChild(document.createElement('ul'));
+
+      const itemContainerNode = document.createElement('li');
+
+      const itemNode = document.createElement('a');
+      itemNode.textContent = 'foo';
+      itemNode.classList.add('bx--dropdown__link');
+
+      itemContainerNode.appendChild(itemNode);
+      list.appendChild(itemContainerNode);
+
+      dropdown = new Dropdown(element);
+      document.body.appendChild(element);
+
+      input = document.createElement('input');
+      input.type = 'text';
+      document.body.appendChild(input);
+    });
+
+    beforeEach(function () {
+      dropdown.element.classList.add('bx--dropdown--open');
+      element.querySelector('.bx--dropdown__link').focus();
+    });
+
+    it('Should close when dropdown loses focus', function () {
+      input.focus();
+      expect(dropdown.element.contains(document.activeElement)).to.be.false;
+    });
+
+    after(function () {
+      if (document.body.contains(input)) {
+        document.body.removeChild(input);
+      }
+      dropdown.release();
+      document.body.removeChild(element);
+    });
+  });
+
   describe('Managing instances: create() and release()', function () {
     let element;
 
