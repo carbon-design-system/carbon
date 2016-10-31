@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import centered from '@kadira/react-storybook-decorator-centered';
 import Loading from '../../components/Loading';
 import AppContainer from '../../containers/AppContainer';
 
@@ -15,7 +14,6 @@ storiesOf('Loading', module)
       {story()}
     </AppContainer>
   ))
-  .addDecorator(centered)
   .add('default', () => (
     <Loading {...loadingProps} />
   ));

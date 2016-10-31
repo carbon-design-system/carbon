@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import centered from '@kadira/react-storybook-decorator-centered';
 import OverflowMenu from '../../components/OverflowMenu';
 import OverflowMenuItem from '../../components/OverflowMenuItem';
 import AppContainer from '../../containers/AppContainer';
@@ -21,7 +20,6 @@ storiesOf('OverflowMenu', module)
       {story()}
     </AppContainer>
   ))
-  .addDecorator(centered)
   .add('overflow-menu', () => (
     <OverflowMenu {...overflowMenuEvents}>
       <OverflowMenuItem

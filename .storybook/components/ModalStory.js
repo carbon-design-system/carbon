@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import centered from '@kadira/react-storybook-decorator-centered';
 import Modal from '../../components/Modal';
 import AppContainer from '../../containers/AppContainer';
 
@@ -21,7 +20,6 @@ storiesOf('Modal', module)
       {story()}
     </AppContainer>
   ))
-  .addDecorator(centered)
   .add('modal', () => (
     <Modal
       modalProps={modalProps}

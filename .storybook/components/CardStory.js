@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@kadira/storybook';
-import centered from '@kadira/react-storybook-decorator-centered';
 import Card from '../../components/Card';
 import OverflowMenu from '../../components/OverflowMenu';
 import OverflowMenuItem from '../../components/OverflowMenuItem';
@@ -164,7 +163,6 @@ storiesOf('Card', module)
       {story()}
     </AppContainer>
   ))
-  .addDecorator(centered)
   .add('card with example functions', () => (
     <ControlledCard status={CardStatus.appStatus.RUNNING} />
   ))

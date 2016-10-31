@@ -2,7 +2,6 @@ import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
 import AppContainer from '../../containers/AppContainer';
 import Textarea from '../../elements/TextArea';
-import centered from '@kadira/react-storybook-decorator-centered';
 
 const textareaProps = {
   children: 'This is a Label',
@@ -21,7 +20,6 @@ storiesOf('Textarea', module)
       {story()}
     </AppContainer>
   ))
-  .addDecorator(centered)
   .add('enabled', () => (
     <Textarea {...textareaProps} />
   ))

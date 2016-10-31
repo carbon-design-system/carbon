@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import centered from '@kadira/react-storybook-decorator-centered';
 import AppContainer from '../../containers/AppContainer';
 import Checkbox from '../../elements/Checkbox';
 
@@ -17,7 +16,6 @@ storiesOf('Checkbox', module)
       {story()}
     </AppContainer>
   ))
-  .addDecorator(centered)
   .addWithInfo(
     'enabled checked',
     `

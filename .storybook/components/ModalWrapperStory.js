@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import centered from '@kadira/react-storybook-decorator-centered';
 import ModalWrapper from '../../containers/ModalWrapper';
 import TextInput from '../../elements/TextInput';
 import Select from '../../elements/Select';
@@ -26,7 +25,6 @@ storiesOf('ModalWrapper', module)
       {story()}
     </AppContainer>
   ))
-  .addDecorator(centered)
   .add('transactional-modal', () => (
     <ModalWrapper
       modalProps={modalProps}
