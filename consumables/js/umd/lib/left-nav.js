@@ -473,12 +473,12 @@
 
             var newLeftNavSectionItem = document.createElement('li');
             newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
-            newLeftNavSectionItem.setAttribute('tabindex', 0);
             newLeftNavSectionItem.classList.add(_this10.options.classNavSection);
             newLeftNavSectionItem.classList.add(_this10.options.classNavSection + '--' + selectedLeftNavSectionValue);
 
             var newLeftNavSectionItemAnchor = document.createElement('a');
             newLeftNavSectionItemAnchor.setAttribute('href', '#');
+            newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
             newLeftNavSectionItemAnchor.classList.add(_this10.options.classNavSectionAnchor);
 
             var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);

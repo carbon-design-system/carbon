@@ -52,7 +52,9 @@ var BluemixComponents =
 	});
 	exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 	
-	__webpack_require__(1);
+	var _svg4everybody = __webpack_require__(1);
+	
+	var _svg4everybody2 = _interopRequireDefault(_svg4everybody);
 	
 	var _fileUploader = __webpack_require__(2);
 	
@@ -132,6 +134,13 @@ var BluemixComponents =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	(0, _svg4everybody2.default)({ polyfill: true });
+	
+	// Base Elements & Components
+	// -------------
+	// - JavaScript classes for use with components and base-elements.
+	// - The following statements import classes from actual locations to
+	//   be consumed from this file instead of their actual locations.
 	// ====================//
 	// Imports and Exports //
 	// ====================//
@@ -139,6 +148,8 @@ var BluemixComponents =
 	
 	// Polyfills
 	// -------------
+	
+	
 	var settings = {};
 	
 	/**
@@ -150,13 +161,6 @@ var BluemixComponents =
 	 * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
 	 * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
 	 */
-	
-	
-	// Base Elements & Components
-	// -------------
-	// - JavaScript classes for use with components and base-elements.
-	// - The following statements import classes from actual locations to
-	//   be consumed from this file instead of their actual locations.
 	exports.settings = settings;
 	exports.FabButton = _fab2.default;
 	exports.FileUploader = _fileUploader2.default;
@@ -219,218 +223,101 @@ var BluemixComponents =
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	/*!
-	 * @copyright Copyright (c) 2016 IcoMoon.io
-	 * @license   Licensed under MIT license
-	 *            See https://github.com/Keyamoon/svgxuse
-	 * @version   1.1.22
-	 */
-	/*jslint browser: true */
-	/*global XDomainRequest, MutationObserver, window */
-	(function () {
-	    'use strict';
-	    if (window && window.addEventListener) {
-	        var cache = Object.create(null); // holds xhr objects to prevent multiple requests
-	        var checkUseElems;
-	        var tid; // timeout id
-	        var debouncedCheck = function () {
-	            clearTimeout(tid);
-	            tid = setTimeout(checkUseElems, 100);
-	        };
-	        var unobserveChanges = function () {
-	            return;
-	        };
-	        var observeChanges = function () {
-	            var observer;
-	            window.addEventListener('resize', debouncedCheck, false);
-	            window.addEventListener('orientationchange', debouncedCheck, false);
-	            if (window.MutationObserver) {
-	                observer = new MutationObserver(debouncedCheck);
-	                observer.observe(document.documentElement, {
-	                    childList: true,
-	                    subtree: true,
-	                    attributes: true
-	                });
-	                unobserveChanges = function () {
-	                    try {
-	                        observer.disconnect();
-	                        window.removeEventListener('resize', debouncedCheck, false);
-	                        window.removeEventListener('orientationchange', debouncedCheck, false);
-	                    } catch (ignore) {}
-	                };
-	            } else {
-	                document.documentElement.addEventListener('DOMSubtreeModified', debouncedCheck, false);
-	                unobserveChanges = function () {
-	                    document.documentElement.removeEventListener('DOMSubtreeModified', debouncedCheck, false);
-	                    window.removeEventListener('resize', debouncedCheck, false);
-	                    window.removeEventListener('orientationchange', debouncedCheck, false);
-	                };
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(root, factory) {
+	     true ? // AMD. Register as an anonymous module unless amdModuleId is set
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	        return root.svg4everybody = factory();
+	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == typeof exports ? module.exports = factory() : root.svg4everybody = factory();
+	}(this, function() {
+	    /*! svg4everybody v2.1.0 | github.com/jonathantneal/svg4everybody */
+	    function embed(svg, target) {
+	        // if the target exists
+	        if (target) {
+	            // create a document fragment to hold the contents of the target
+	            var fragment = document.createDocumentFragment(), viewBox = !svg.getAttribute("viewBox") && target.getAttribute("viewBox");
+	            // conditionally set the viewBox on the svg
+	            viewBox && svg.setAttribute("viewBox", viewBox);
+	            // copy the contents of the clone into the fragment
+	            for (// clone the target
+	            var clone = target.cloneNode(!0); clone.childNodes.length; ) {
+	                fragment.appendChild(clone.firstChild);
 	            }
-	        };
-	        var createRequest = function (url) {
-	            // In IE 9, cross origin requests can only be sent using XDomainRequest.
-	            // XDomainRequest would fail if CORS headers are not set.
-	            // Therefore, XDomainRequest should only be used with cross origin requests.
-	            function getOrigin(href) {
-	                var a = document.createElement('a');
-	                a.href = href;
-	                return a.protocol + a.hostname;
-	            }
-	            var Request;
-	            var origin = location.protocol + location.hostname;
-	            var origin2;
-	            if (window.XMLHttpRequest) {
-	                Request = new XMLHttpRequest();
-	                origin2 = getOrigin(url);
-	                if (Request.withCredentials === undefined && origin2 !== '' && origin2 !== origin) {
-	                    Request = XDomainRequest || undefined;
-	                } else {
-	                    Request = XMLHttpRequest;
-	                }
-	            }
-	            return Request;
-	        };
-	        var xlinkNS = 'http://www.w3.org/1999/xlink';
-	        checkUseElems = function () {
-	            var base;
-	            var bcr;
-	            var fallback = ''; // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
-	            var hash;
-	            var href;
-	            var i;
-	            var inProgressCount = 0;
-	            var isHidden;
-	            var Request;
-	            var url;
-	            var uses;
-	            var xhr;
-	            function observeIfDone() {
-	                // If done with making changes, start watching for chagnes in DOM again
-	                inProgressCount -= 1;
-	                if (inProgressCount === 0) { // if all xhrs were resolved
-	                    unobserveChanges(); // make sure to remove old handlers
-	                    observeChanges(); // watch for changes to DOM
-	                }
-	            }
-	            function attrUpdateFunc(spec) {
-	                return function () {
-	                    if (cache[spec.base] !== true) {
-	                        spec.useEl.setAttributeNS(xlinkNS, 'xlink:href', '#' + spec.hash);
-	                    }
-	                };
-	            }
-	            function onloadFunc(xhr) {
-	                return function () {
-	                    var body = document.body;
-	                    var x = document.createElement('x');
-	                    var svg;
-	                    xhr.onload = null;
-	                    x.innerHTML = xhr.responseText;
-	                    svg = x.getElementsByTagName('svg')[0];
-	                    if (svg) {
-	                        svg.setAttribute('aria-hidden', 'true');
-	                        svg.style.position = 'absolute';
-	                        svg.style.width = 0;
-	                        svg.style.height = 0;
-	                        svg.style.overflow = 'hidden';
-	                        body.insertBefore(svg, body.firstChild);
-	                    }
-	                    observeIfDone();
-	                };
-	            }
-	            function onErrorTimeout(xhr) {
-	                return function () {
-	                    xhr.onerror = null;
-	                    xhr.ontimeout = null;
-	                    observeIfDone();
-	                };
-	            }
-	            unobserveChanges(); // stop watching for changes to DOM
-	            // find all use elements
-	            uses = document.getElementsByTagName('use');
-	            for (i = 0; i < uses.length; i += 1) {
-	                try {
-	                    bcr = uses[i].getBoundingClientRect();
-	                } catch (ignore) {
-	                    // failed to get bounding rectangle of the use element
-	                    bcr = false;
-	                }
-	                href = uses[i].getAttributeNS(xlinkNS, 'href');
-	                if (href && href.split) {
-	                    url = href.split('#');
-	                } else {
-	                    url = ["", ""];
-	                }
-	                base = url[0];
-	                hash = url[1];
-	                isHidden = bcr && bcr.left === 0 && bcr.right === 0 && bcr.top === 0 && bcr.bottom === 0;
-	                if (bcr && bcr.width === 0 && bcr.height === 0 && !isHidden) {
-	                    // the use element is empty
-	                    // if there is a reference to an external SVG, try to fetch it
-	                    // use the optional fallback URL if there is no reference to an external SVG
-	                    if (fallback && !base.length && hash && !document.getElementById(hash)) {
-	                        base = fallback;
-	                    }
-	                    if (base.length) {
-	                        // schedule updating xlink:href
-	                        xhr = cache[base];
-	                        if (xhr !== true) {
-	                            // true signifies that prepending the SVG was not required
-	                            setTimeout(attrUpdateFunc({
-	                                useEl: uses[i],
-	                                base: base,
-	                                hash: hash
-	                            }), 0);
-	                        }
-	                        if (xhr === undefined) {
-	                            Request = createRequest(base);
-	                            if (Request !== undefined) {
-	                                xhr = new Request();
-	                                cache[base] = xhr;
-	                                xhr.onload = onloadFunc(xhr);
-	                                xhr.onerror = onErrorTimeout(xhr);
-	                                xhr.ontimeout = onErrorTimeout(xhr);
-	                                xhr.open('GET', base);
-	                                xhr.send();
-	                                inProgressCount += 1;
-	                            }
-	                        }
-	                    }
-	                } else {
-	                    if (!isHidden) {
-	                        if (cache[base] === undefined) {
-	                            // remember this URL if the use element was not empty and no request was sent
-	                            cache[base] = true;
-	                        } else if (cache[base].onload) {
-	                            // if it turns out that prepending the SVG is not necessary,
-	                            // abort the in-progress xhr.
-	                            cache[base].abort();
-	                            delete cache[base].onload;
-	                            cache[base] = true;
-	                        }
-	                    } else if (base.length && cache[base]) {
-	                        attrUpdateFunc({
-	                            useEl: uses[i],
-	                            base: base,
-	                            hash: hash
-	                        })();
-	                    }
-	                }
-	            }
-	            uses = '';
-	            inProgressCount += 1;
-	            observeIfDone();
-	        };
-	        // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
-	        window.addEventListener('load', function winLoad() {
-	            window.removeEventListener('load', winLoad, false); // to prevent memory leaks
-	            tid = setTimeout(checkUseElems, 0);
-	        }, false);
+	            // append the fragment into the svg
+	            svg.appendChild(fragment);
+	        }
 	    }
-	}());
-
+	    function loadreadystatechange(xhr) {
+	        // listen to changes in the request
+	        xhr.onreadystatechange = function() {
+	            // if the request is ready
+	            if (4 === xhr.readyState) {
+	                // get the cached html document
+	                var cachedDocument = xhr._cachedDocument;
+	                // ensure the cached html document based on the xhr response
+	                cachedDocument || (cachedDocument = xhr._cachedDocument = document.implementation.createHTMLDocument(""), 
+	                cachedDocument.body.innerHTML = xhr.responseText, xhr._cachedTarget = {}), // clear the xhr embeds list and embed each item
+	                xhr._embeds.splice(0).map(function(item) {
+	                    // get the cached target
+	                    var target = xhr._cachedTarget[item.id];
+	                    // ensure the cached target
+	                    target || (target = xhr._cachedTarget[item.id] = cachedDocument.getElementById(item.id)), 
+	                    // embed the target into the svg
+	                    embed(item.svg, target);
+	                });
+	            }
+	        }, // test the ready state change immediately
+	        xhr.onreadystatechange();
+	    }
+	    function svg4everybody(rawopts) {
+	        function oninterval() {
+	            // while the index exists in the live <use> collection
+	            for (// get the cached <use> index
+	            var index = 0; index < uses.length; ) {
+	                // get the current <use>
+	                var use = uses[index], svg = use.parentNode;
+	                if (svg && /svg/i.test(svg.nodeName)) {
+	                    var src = use.getAttribute("xlink:href");
+	                    if (polyfill && (!opts.validate || opts.validate(src, svg, use))) {
+	                        // remove the <use> element
+	                        svg.removeChild(use);
+	                        // parse the src and get the url and id
+	                        var srcSplit = src.split("#"), url = srcSplit.shift(), id = srcSplit.join("#");
+	                        // if the link is external
+	                        if (url.length) {
+	                            // get the cached xhr request
+	                            var xhr = requests[url];
+	                            // ensure the xhr request exists
+	                            xhr || (xhr = requests[url] = new XMLHttpRequest(), xhr.open("GET", url), xhr.send(), 
+	                            xhr._embeds = []), // add the svg and id as an item to the xhr embeds list
+	                            xhr._embeds.push({
+	                                svg: svg,
+	                                id: id
+	                            }), // prepare the xhr ready state change event
+	                            loadreadystatechange(xhr);
+	                        } else {
+	                            // embed the local id into the svg
+	                            embed(svg, document.getElementById(id));
+	                        }
+	                    }
+	                } else {
+	                    // increase the index when the previous value was not "valid"
+	                    ++index;
+	                }
+	            }
+	            // continue the interval
+	            requestAnimationFrame(oninterval, 67);
+	        }
+	        var polyfill, opts = Object(rawopts), newerIEUA = /\bTrident\/[567]\b|\bMSIE (?:9|10)\.0\b/, webkitUA = /\bAppleWebKit\/(\d+)\b/, olderEdgeUA = /\bEdge\/12\.(\d+)\b/;
+	        polyfill = "polyfill" in opts ? opts.polyfill : newerIEUA.test(navigator.userAgent) || (navigator.userAgent.match(olderEdgeUA) || [])[1] < 10547 || (navigator.userAgent.match(webkitUA) || [])[1] < 537;
+	        // create xhr requests object
+	        var requests = {}, requestAnimationFrame = window.requestAnimationFrame || setTimeout, uses = document.getElementsByTagName("use");
+	        // conditionally start the interval if the polyfill is active
+	        polyfill && oninterval();
+	    }
+	    return svg4everybody;
+	});
 
 /***/ },
 /* 2 */
@@ -4528,12 +4415,12 @@ var BluemixComponents =
 	
 	          var newLeftNavSectionItem = document.createElement('li');
 	          newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
-	          newLeftNavSectionItem.setAttribute('tabindex', 0);
 	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection);
 	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection + '--' + selectedLeftNavSectionValue);
 	
 	          var newLeftNavSectionItemAnchor = document.createElement('a');
 	          newLeftNavSectionItemAnchor.setAttribute('href', '#');
+	          newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
 	          newLeftNavSectionItemAnchor.classList.add(_this10.options.classNavSectionAnchor);
 	
 	          var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
