@@ -153,6 +153,21 @@
     <label for="text1" class="bx--form__label">Text Field Label:</label>
     <input id="text1" type="text" class="bx--text__input" placeholder="Hint text here">
   </fieldset>
+  
+  <fieldset class="bx--form__fieldset">
+    <legend class="bx--form__legend">Password</legend>
+    <label for="text1" class="bx--form__label">Password Field Label:</label>
+    <input required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="text1" type="password" class="bx--text__input" placeholder="Hint text here">
+  </fieldset>
+  
+  <fieldset data-invalid class="bx--form__fieldset">
+    <legend class="bx--form__legend">Password (Invalid)</legend>
+    <label for="text1" class="bx--form__label">Password Field Label:</label>
+    <input required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="text1" type="password" class="bx--text__input" placeholder="Hint text here">
+    <div class="bx--form__requirements">
+      Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.
+    </div>
+  </fieldset>
 
   <!-- Textarea -->
   <fieldset class="bx--form__fieldset">

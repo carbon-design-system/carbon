@@ -40,4 +40,29 @@
     display: inline-block;
     padding-bottom: .5rem;
   }
+
+  &__fieldset[data-invalid] {
+    .bx--text__input {
+      border-bottom: 2px solid $color__red-40;
+    }
+
+    .bx--form__requirements {
+      max-height: rem(200px);
+    }
+  }
+
+  &__requirements {
+    @include font-size('11');
+    margin: .5rem 0 0;
+    max-height: 0;
+    overflow: hidden;
+    font-weight: 700;
+    line-height: 1.5;
+
+    &::before {
+      content: '*';
+      display: inline-block;
+      color: $color__red-40;
+    }
+  }
 }
