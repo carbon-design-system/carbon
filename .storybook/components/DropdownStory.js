@@ -41,7 +41,7 @@ storiesOf('Dropdown', module)
     </AppContainer>
   ))
   .addDecorator((story) => (
-    <div style={{ 'min-width': '20em' }}>
+    <div style={{ minWidth: '20em' }}>
       {story()}
     </div>
   ))
