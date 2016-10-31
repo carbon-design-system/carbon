@@ -98,61 +98,73 @@ app.get('/', (req, res) => {
 app.get('/components/:component', (req, res) => {
   const glob = `consumables/html/components/${req.params.component}/**/*.html`;
 
-  Promise.all([getContent(glob), allLinks])
-    .then(results => {
-      if (typeof results[0] === 'undefined') {
-        res.status(404).end();
-      } else {
-        res.render('demo-all', {
-          html: results[0],
-          links: results[1]
-        });
-      }
-    })
-    .catch((error) => {
-      console.error(error.stack); // eslint-disable-line no-console
-      res.status(500).end();
-    });
+  if (path.relative('consumables/html/components', glob).substr(0, 2) === '..') {
+    res.status(404).end();
+  } else {
+    Promise.all([getContent(glob), allLinks])
+      .then(results => {
+        if (typeof results[0] === 'undefined') {
+          res.status(404).end();
+        } else {
+          res.render('demo-all', {
+            html: results[0],
+            links: results[1]
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error.stack); // eslint-disable-line no-console
+        res.status(500).end();
+      });
+  }
 });
 
 app.get('/base-elements/:component', (req, res) => {
   const glob = `consumables/html/base-elements/${req.params.component}/**/*.html`;
 
-  Promise.all([getContent(glob), allLinks])
-    .then(results => {
-      if (typeof results[0] === 'undefined') {
-        res.status(404).end();
-      } else {
-        res.render('demo-all', {
-          html: results[0],
-          links: results[1]
-        });
-      }
-    })
-    .catch((error) => {
-      console.error(error.stack); // eslint-disable-line no-console
-      res.status(500).end();
-    });
+  if (path.relative('consumables/html/base-elements', glob).substr(0, 2) === '..') {
+    res.status(404).end();
+  } else {
+    Promise.all([getContent(glob), allLinks])
+      .then(results => {
+        if (typeof results[0] === 'undefined') {
+          res.status(404).end();
+        } else {
+          res.render('demo-all', {
+            html: results[0],
+            links: results[1]
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error.stack); // eslint-disable-line no-console
+        res.status(500).end();
+      });
+  }
 });
 
 app.get('/global/:component', (req, res) => {
   const glob = `consumables/html/global/${req.params.component}/**/*.html`;
 
-  Promise.all([getContent(glob), allLinks])
-    .then(results => {
-      if (typeof results[0] === 'undefined') {
-        res.status(404).end();
-      } else {
-        res.render('demo-all', {
-          html: results[0],
-          links: results[1]
-        });
-      }
-    })
-    .catch((error) => {
-      console.error(error.stack); // eslint-disable-line no-console
-      res.status(500).end();
-    });
+  if (path.relative('consumables/html/global', glob).substr(0, 2) === '..') {
+    res.status(404).end();
+  } else {
+    Promise.all([getContent(glob), allLinks])
+      .then(results => {
+        if (typeof results[0] === 'undefined') {
+          res.status(404).end();
+        } else {
+          res.render('demo-all', {
+            html: results[0],
+            links: results[1]
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error.stack); // eslint-disable-line no-console
+        res.status(500).end();
+      });
+  }
 });
 
 app.listen(port, () => {
