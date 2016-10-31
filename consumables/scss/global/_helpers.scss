@@ -55,6 +55,7 @@ $color__inputs--bg--light-ui: rgba($color__blue-51, .1);
   clip:rect(0, 0, 0, 0);
   border:0;
   visibility: visible;
+  white-space: nowrap;
 }
 
 @mixin light-ui {
