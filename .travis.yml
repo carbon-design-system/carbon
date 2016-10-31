@@ -8,10 +8,10 @@ cache:
     - node_modules
 script:
   - npm run lint
-  - npm test
   - npm run coverage
 deploy:
+  skip_cleanup: true
   provider: script
-  script: sh travis/deploy.sh
+  script: sh scripts/deploy.sh
   on:
-    all_branches: true
+    branch: master

@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "check": "npm run lint && npm run test",
-    "coverage": "jest --coverage && node tools/create-badge.js",
+    "coverage": "jest --coverage && node scripts/create-badge.js",
     "lint": "eslint .",
     "storybook": "start-storybook -p 9001",
     "test": "jest",
     "test-watch": "jest --watch",
-    "deploy": "build-storybook -s .storybook -o .gh-pages && node deploy.js"
+    "deploy": "build-storybook -s .storybook -o .gh-pages && node scripts/gh-pages.js"
   },
   "keywords": [
     "react",
