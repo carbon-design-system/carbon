@@ -8,64 +8,56 @@ A set of React Components that implements [Bluemix Components](https://github.ib
 View available React Components [here](https://pages.github.ibm.com/Bluemix/bluemix-components-react/).
 
 ## Getting Started
+Bluemix Components React is published to a private npm registry maintained by Bluemix Ops Console team.
 
-> NPM package for `bluemix-components-react` is coming soon.
+1. Before installing with npm,
+you must create an **.npmrc** file - you can create this in the root of your project folder or on your computer's **~** directory.
 
-Requires the use of
-[Webpack](http://webpack.github.io/docs/tutorials/getting-started/) and the following dependencies below.
-See [webpack.config.js](https://github.ibm.com/Bluemix/bluemix-components-react/blob/master/.storybook/webpack.config.js) for details.
+  ```
+  $ touch .npmrc
+  ```
 
-All dependencies can be installed with `npm`.
+  Next, write the following into your **.npmrc** file:
 
-- `json-loader`
-- `postcss-loader`
-- `sass-loader`
-- `style-loader`
-- `css-loader`
-- `node-sass`
+  ```
+  //dev-console-npm.stage1.ng.bluemix.net/:_authToken="u6vjQywpRv51/eKBiRcAFA=="
+  @console:registry=https://dev-console-npm.stage1.ng.bluemix.net/
+  ```
+
+  If you haven't done so already, create a **package.json** for your project:
+
+  ```
+  $ npm init
+  ```
+
+2. Install bluemix-components-react with `npm`.
+
+  ```
+  $ npm install --save @console/bluemix-components-react
+  ```
+
+3. These components require the use of
+[Webpack](http://webpack.github.io/docs/tutorials/getting-started/) in your project.
+See [webpack.config.js](https://github.ibm.com/Bluemix/bluemix-components-react/blob/master/.storybook/webpack.config.js) for an example config.
+
+  The following dependencies are required and can be installed with `npm`.
+
+  - `json-loader`
+  - `postcss-loader`
+  - `sass-loader`
+  - `style-loader`
+  - `css-loader`
+  - `node-sass`
+
+4. Example Usage
+  ```
+  import { Loading } from '@console/bluemix-components-react';
+  ReactDOM.render(
+    <Loading className="example-loading" />,
+    document.getElementById('example-container')
+  );
+  ```
 
 ## Contributing
 
-First: Fork the repo, Clone your Fork and install dependencies with `npm`
-
-```sh
-npm install
-```
-
-Start dev server (which uses [React Storybook](https://github.com/kadirahq/react-storybook)):
-
-```sh
-npm run storybook
-```
-
-Open browser to [http://localhost:9001/](http://localhost:9001/) and develop components in [.storybook](https://github.ibm.com/Bluemix/bluemix-components-react/tree/master/.storybook) folder.
-
-## Run tests
-
-```sh
-npm run test
-```
-
-## Run coverage test
-
-```sh
-npm run coverage
-```
-
-## Run linting
-
-```sh
-npm run lint
-```
-
-## Run lint and tests
-
-```sh
-npm run check
-```
-
-## Deploy react-storybook to gh-pages
-
-```sh
-npm run deploy
-```
+Please refer to our [Contributing Guidelines](https://github.ibm.com/Bluemix/bluemix-components-react/blob/master/CONTRIBUTING.md).

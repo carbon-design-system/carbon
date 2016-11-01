@@ -6,3 +6,6 @@ node_modules
 
 # docs
 .gh-pages
+
+# distribution files
+dist
