@@ -9,7 +9,6 @@ const propTypes = {
   fillRule: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
-  viewBox: PropTypes.string,
   style: PropTypes.object,
 };
 
@@ -17,7 +16,6 @@ const defaultProps = {
   fillRule: 'evenodd',
   height: '32px',
   width: '32px',
-  viewBox: '0 0 32 32',
 };
 
 /**
@@ -102,10 +100,10 @@ export function getSvgContent(svgData) {
   return svgElements;
 }
 
-const Icon = ({ className, fill, fillRule, height, width, name, viewBox, style, description }) => {
+const Icon = ({ className, fill, fillRule, height, width, name, style, description }) => {
   // SVG Content and Data for Render
-  const svgData = getSvgData(name);
-  const svgContent = getSvgContent(svgData);
+  const svg = findIcon(name);
+  const svgContent = svg ? getSvgContent(svg.svgData) : '';
 
   // Props
   const props = {
@@ -115,7 +113,7 @@ const Icon = ({ className, fill, fillRule, height, width, name, viewBox, style, 
     height,
     width,
     name,
-    viewBox,
+    viewBox: svg ? svg.viewBox : undefined,
     style,
   };
 

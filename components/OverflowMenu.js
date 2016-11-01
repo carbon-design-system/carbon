@@ -78,10 +78,6 @@ class OverflowMenu extends Component {
       { 'bx--overflow-menu--open': this.state.open },
     );
 
-    const overriddenStyles = {
-      height: 40,
-    };
-
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
@@ -98,9 +94,6 @@ class OverflowMenu extends Component {
             name="overflow_menu_icon"
             description={iconDescription}
             fill="#dfe6eb"
-            height="40px"
-            viewBox="0 0 14 60"
-            style={overriddenStyles}
             description="open and close the menu"
           />
           <ul className="bx--overflow-menu__options">
