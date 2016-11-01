@@ -8,95 +8,46 @@ class FileUploader extends React.Component {
     children: React.PropTypes.node,
     className: React.PropTypes.string,
     tabIndex: React.PropTypes.number,
-    type: React.PropTypes.string,
-    id: React.PropTypes.string,
+    id: React.PropTypes.string.isRequired,
     labelDescription: React.PropTypes.string,
-    onBlur: React.PropTypes.func,
-    onClick: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func,
-    onKeyUp: React.PropTypes.func,
-    onKeyboardFocus: React.PropTypes.func,
-    onMouseDown: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func,
+    onChange: React.PropTypes.func,
   }
 
   static defaultProps = {
     className: 'bx--file__label',
     tabIndex: 0,
-    onBlur: () => {},
-    onClick: () => {},
-    onFocus: () => {},
-    onKeyDown: () => {},
-    onKeyUp: () => {},
-    onKeyboardFocus: () => {},
-    onMouseDown: () => {},
-    onMouseEnter: () => {},
-    onMouseLeave: () => {},
-    onMouseUp: () => {},
+    labelDescription: '',
+    onChange: () => {},
   }
 
-  handleBlur = (evt) => {
-    this.props.onBlur(evt);
-  }
-
-  handleClick = (evt) => {
-    this.props.onClick(evt);
-  }
-
-  handleFocus = (evt) => {
-    this.props.onFocus(evt);
-  }
-
-  handleMouseEnter = (evt) => {
-    this.props.onMouseEnter(evt);
-  }
-
-  handleMouseLeave = (evt) => {
-    this.props.onMouseLeave(evt);
-  }
-
-  handleMouseDown = (evt) => {
-    this.props.onMouseDown(evt);
-  }
-
-  handleMouseUp = (evt) => {
-    this.props.onMouseUp(evt);
+  state = {
+    count: 0,
+    text: this.props.labelDescription,
   }
 
   updateLabel = (evt) => {
     const element = evt.target;
-    const labelSelector = element.dataset.label;
-    const labelNode = document.querySelector(labelSelector);
     let fileName = '';
 
     if (element.files && element.files.length > 1) {
-      fileName = (element.dataset.multipleCaption || '').replace('{count}', element.files.length);
+      fileName = `${element.files.length} files selected`;
+      this.setState({ count: element.files.length });
     } else {
       fileName = element.value.split('\\').pop();
+      this.setState({ count: 1 });
     }
 
     if (fileName) {
-      labelNode.textContent = fileName;
+      this.setState({ text: fileName });
     }
+    this.props.onChange(evt);
   }
 
   render() {
     const fileUploaderProps = {
       tabIndex: this.props.tabIndex,
-      type: this.props.type || 'file',
+      type: 'file',
       id: this.props.id,
-      labelDescription: this.props.labelDescription,
-      onBlur: this.handleBlur,
-      onClick: this.handleClick,
-      onFocus: this.handleFocus,
-      onKeyDown: this.handleKeyDown,
-      onMouseEnter: this.handleMouseEnter,
-      onMouseDown: this.handleMouseDown,
-      onMouseLeave: this.handleMouseLeave,
-      onMouseUp: this.handleMouseUp,
       onChange: this.updateLabel,
     };
 
@@ -111,10 +62,10 @@ class FileUploader extends React.Component {
           data-file-appearance
           className={fileUploaderClasses}
           htmlFor={this.props.id}
-        >{this.props.labelDescription}</label>
+        >{this.state.text}</label>
         <input
           data-file-uploader
-          data-multiple-caption="{count} files selected"
+          data-multiple-caption={`${this.state.count} files selected`}
           data-label="[data-file-appearance]"
           className="bx--file__input"
           {... fileUploaderProps}
