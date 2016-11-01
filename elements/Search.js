@@ -24,6 +24,8 @@ const propTypes = {
 
 const defaultProps = {
   className: 'bx--search',
+  type: 'search',
+  placeHolderText: '',
 };
 
 const Search = ({ className, type, id, placeHolderText, labelText, ...other }) => {
