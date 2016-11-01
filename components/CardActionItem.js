@@ -9,9 +9,10 @@ const propTypes = {
   ariaLabel: React.PropTypes.string,
   iconName: React.PropTypes.string.isRequired,
   restartApp: React.PropTypes.func,
+  description: React.PropTypes.string.isRequired,
 };
 
-const CardActionItem = ({ className, id, ariaLabel, iconName, ...other }) => {
+const CardActionItem = ({ className, id, ariaLabel, iconName, description, ...other }) => {
   const cardActionItemClasses = classNames({
     'bx--app-actions__button': true,
     [className]: className,
@@ -27,6 +28,7 @@ const CardActionItem = ({ className, id, ariaLabel, iconName, ...other }) => {
       <Icon
         className="bx--app-actions__button--icon"
         name={iconName}
+        description={description}
       />
     </button>
   );

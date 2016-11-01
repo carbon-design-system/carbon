@@ -78,7 +78,7 @@
   "devDependencies": {
     "@kadira/react-storybook-addon-info": "3.2.1",
     "@kadira/react-storybook-decorator-centered": "^1.0.0",
-    "@kadira/storybook": "1.38.0",
+    "@kadira/storybook": "^2.29.0",
     "autoprefixer": "^6.3.7",
     "babel-eslint": "^6.1.2",
     "babel-jest": "^14.1.0",

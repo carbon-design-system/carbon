@@ -147,9 +147,9 @@ class ControlledCard extends Component {
         <CardFooter>
           <CardStatus status={this.state.status} />
           <CardActions>
-            <CardActionItem iconName="restart_icon" onClick={this.restartApp} />
-            <CardActionItem iconName="go_to_icon" onClick={this.goToApp} />
-            <CardActionItem iconName="favorite_icon" onClick={this.favoriteApp} />
+            <CardActionItem iconName="restart_icon" onClick={this.restartApp} description="Restart App" />
+            <CardActionItem iconName="go_to_icon" onClick={this.goToApp} description="Go To App" />
+            <CardActionItem iconName="favorite_icon" onClick={this.favoriteApp} description="Favorite App" />
           </CardActions>
         </CardFooter>
       </Card>

@@ -60,7 +60,7 @@ const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardI
     {children}
       <div className="bx--card-overview__about">
         <div className="bx--about__icon">
-          <Icon className="bx--about__icon--img" name={cardIcon} />
+          <Icon className="bx--about__icon--img" name={cardIcon} description="About" />
         </div>
         <div className="bx--about__title">
           <p id="card-app-title" className="bx--about__title--name">{cardTitle}</p>
