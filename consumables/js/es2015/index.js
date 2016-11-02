@@ -2,12 +2,6 @@
 // Imports and Exports //
 // ====================//
 
-
-// Polyfills
-// -------------
-import svg4everybody from 'svg4everybody';
-svg4everybody({ polyfill: true });
-
 // Base Elements & Components
 // -------------
 // - JavaScript classes for use with components and base-elements.
