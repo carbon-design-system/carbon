@@ -78,6 +78,8 @@
         return _this.toggle(event);
       });
 
+      this.setCloseOnBlur();
+
       this.element.addEventListener('keypress', function (event) {
         return _this.toggle(event);
       });
@@ -103,6 +105,9 @@
     (0, _createClass3.default)(Dropdown, [{
       key: 'release',
       value: function release() {
+        if (this.hFocusIn) {
+          this.hFocusIn = this.hFocusIn.release();
+        }
         if (this.hDocumentClick) {
           this.hDocumentClick = this.hDocumentClick.release();
         }
@@ -154,6 +159,19 @@
           }
         }
       }
+    }, {
+      key: 'setCloseOnBlur',
+      value: function setCloseOnBlur() {
+        var _this3 = this;
+
+        var hasFocusin = 'onfocusin' in window;
+        var focusinEventName = hasFocusin ? 'focusin' : 'focus';
+        this.hFocusIn = (0, _on2.default)(this.element.ownerDocument, focusinEventName, function (event) {
+          if (!_this3.element.contains(event.target)) {
+            _this3.element.classList.remove('bx--dropdown--open');
+          }
+        }, !hasFocusin);
+      }
     }], [{
       key: 'create',
       value: function create(element, options) {
@@ -162,7 +180,7 @@
     }, {
       key: 'init',
       value: function init() {
-        var _this3 = this;
+        var _this4 = this;
 
         var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -175,7 +193,7 @@
           this.create(target, effectiveOptions);
         } else {
           [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
-            return _this3.create(element, effectiveOptions);
+            return _this4.create(element, effectiveOptions);
           });
         }
       }

@@ -52,103 +52,83 @@ var BluemixComponents =
 	});
 	exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
 	
-	var _svg4everybody = __webpack_require__(1);
-	
-	var _svg4everybody2 = _interopRequireDefault(_svg4everybody);
-	
-	var _fileUploader = __webpack_require__(2);
+	var _fileUploader = __webpack_require__(1);
 	
 	var _fileUploader2 = _interopRequireDefault(_fileUploader);
 	
-	var _fab = __webpack_require__(4);
+	var _fab = __webpack_require__(3);
 	
 	var _fab2 = _interopRequireDefault(_fab);
 	
-	var _contentSwitcher = __webpack_require__(7);
+	var _contentSwitcher = __webpack_require__(6);
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
-	var _tabs = __webpack_require__(11);
+	var _tabs = __webpack_require__(10);
 	
 	var _tabs2 = _interopRequireDefault(_tabs);
 	
-	var _overflowMenu = __webpack_require__(13);
+	var _overflowMenu = __webpack_require__(12);
 	
 	var _overflowMenu2 = _interopRequireDefault(_overflowMenu);
 	
-	var _modals = __webpack_require__(14);
+	var _modals = __webpack_require__(13);
 	
 	var _modals2 = _interopRequireDefault(_modals);
 	
-	var _header = __webpack_require__(16);
+	var _header = __webpack_require__(15);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _toolbars = __webpack_require__(17);
+	var _toolbars = __webpack_require__(16);
 	
 	var _toolbars2 = _interopRequireDefault(_toolbars);
 	
-	var _loading = __webpack_require__(18);
+	var _loading = __webpack_require__(17);
 	
 	var _loading2 = _interopRequireDefault(_loading);
 	
-	var _dropdown = __webpack_require__(19);
+	var _dropdown = __webpack_require__(18);
 	
 	var _dropdown2 = _interopRequireDefault(_dropdown);
 	
-	var _card = __webpack_require__(20);
+	var _card = __webpack_require__(19);
 	
 	var _card2 = _interopRequireDefault(_card);
 	
-	var _numberInput = __webpack_require__(21);
+	var _numberInput = __webpack_require__(20);
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
 	
-	var _table = __webpack_require__(22);
+	var _table = __webpack_require__(21);
 	
 	var _table2 = _interopRequireDefault(_table);
 	
-	var _detailPageHeader = __webpack_require__(23);
+	var _detailPageHeader = __webpack_require__(22);
 	
 	var _detailPageHeader2 = _interopRequireDefault(_detailPageHeader);
 	
-	var _leftNav = __webpack_require__(25);
+	var _leftNav = __webpack_require__(24);
 	
 	var _leftNav2 = _interopRequireDefault(_leftNav);
 	
-	var _unifiedHeader = __webpack_require__(26);
+	var _unifiedHeader = __webpack_require__(25);
 	
 	var _unifiedHeader2 = _interopRequireDefault(_unifiedHeader);
 	
-	var _inlineLeftNav = __webpack_require__(27);
+	var _inlineLeftNav = __webpack_require__(26);
 	
 	var _inlineLeftNav2 = _interopRequireDefault(_inlineLeftNav);
 	
-	var _profileSwitcher = __webpack_require__(28);
+	var _profileSwitcher = __webpack_require__(27);
 	
 	var _profileSwitcher2 = _interopRequireDefault(_profileSwitcher);
 	
-	var _searchWithOptions = __webpack_require__(29);
+	var _searchWithOptions = __webpack_require__(28);
 	
 	var _searchWithOptions2 = _interopRequireDefault(_searchWithOptions);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	(0, _svg4everybody2.default)({ polyfill: true });
-	
-	// Base Elements & Components
-	// -------------
-	// - JavaScript classes for use with components and base-elements.
-	// - The following statements import classes from actual locations to
-	//   be consumed from this file instead of their actual locations.
-	// ====================//
-	// Imports and Exports //
-	// ====================//
-	
-	
-	// Polyfills
-	// -------------
-	
 	
 	var settings = {};
 	
@@ -161,6 +141,15 @@ var BluemixComponents =
 	 * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
 	 * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
 	 */
+	// ====================//
+	// Imports and Exports //
+	// ====================//
+	
+	// Base Elements & Components
+	// -------------
+	// - JavaScript classes for use with components and base-elements.
+	// - The following statements import classes from actual locations to
+	//   be consumed from this file instead of their actual locations.
 	exports.settings = settings;
 	exports.FabButton = _fab2.default;
 	exports.FileUploader = _fileUploader2.default;
@@ -225,104 +214,6 @@ var BluemixComponents =
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(root, factory) {
-	     true ? // AMD. Register as an anonymous module unless amdModuleId is set
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function() {
-	        return root.svg4everybody = factory();
-	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == typeof exports ? module.exports = factory() : root.svg4everybody = factory();
-	}(this, function() {
-	    /*! svg4everybody v2.1.0 | github.com/jonathantneal/svg4everybody */
-	    function embed(svg, target) {
-	        // if the target exists
-	        if (target) {
-	            // create a document fragment to hold the contents of the target
-	            var fragment = document.createDocumentFragment(), viewBox = !svg.getAttribute("viewBox") && target.getAttribute("viewBox");
-	            // conditionally set the viewBox on the svg
-	            viewBox && svg.setAttribute("viewBox", viewBox);
-	            // copy the contents of the clone into the fragment
-	            for (// clone the target
-	            var clone = target.cloneNode(!0); clone.childNodes.length; ) {
-	                fragment.appendChild(clone.firstChild);
-	            }
-	            // append the fragment into the svg
-	            svg.appendChild(fragment);
-	        }
-	    }
-	    function loadreadystatechange(xhr) {
-	        // listen to changes in the request
-	        xhr.onreadystatechange = function() {
-	            // if the request is ready
-	            if (4 === xhr.readyState) {
-	                // get the cached html document
-	                var cachedDocument = xhr._cachedDocument;
-	                // ensure the cached html document based on the xhr response
-	                cachedDocument || (cachedDocument = xhr._cachedDocument = document.implementation.createHTMLDocument(""), 
-	                cachedDocument.body.innerHTML = xhr.responseText, xhr._cachedTarget = {}), // clear the xhr embeds list and embed each item
-	                xhr._embeds.splice(0).map(function(item) {
-	                    // get the cached target
-	                    var target = xhr._cachedTarget[item.id];
-	                    // ensure the cached target
-	                    target || (target = xhr._cachedTarget[item.id] = cachedDocument.getElementById(item.id)), 
-	                    // embed the target into the svg
-	                    embed(item.svg, target);
-	                });
-	            }
-	        }, // test the ready state change immediately
-	        xhr.onreadystatechange();
-	    }
-	    function svg4everybody(rawopts) {
-	        function oninterval() {
-	            // while the index exists in the live <use> collection
-	            for (// get the cached <use> index
-	            var index = 0; index < uses.length; ) {
-	                // get the current <use>
-	                var use = uses[index], svg = use.parentNode;
-	                if (svg && /svg/i.test(svg.nodeName)) {
-	                    var src = use.getAttribute("xlink:href");
-	                    if (polyfill && (!opts.validate || opts.validate(src, svg, use))) {
-	                        // remove the <use> element
-	                        svg.removeChild(use);
-	                        // parse the src and get the url and id
-	                        var srcSplit = src.split("#"), url = srcSplit.shift(), id = srcSplit.join("#");
-	                        // if the link is external
-	                        if (url.length) {
-	                            // get the cached xhr request
-	                            var xhr = requests[url];
-	                            // ensure the xhr request exists
-	                            xhr || (xhr = requests[url] = new XMLHttpRequest(), xhr.open("GET", url), xhr.send(), 
-	                            xhr._embeds = []), // add the svg and id as an item to the xhr embeds list
-	                            xhr._embeds.push({
-	                                svg: svg,
-	                                id: id
-	                            }), // prepare the xhr ready state change event
-	                            loadreadystatechange(xhr);
-	                        } else {
-	                            // embed the local id into the svg
-	                            embed(svg, document.getElementById(id));
-	                        }
-	                    }
-	                } else {
-	                    // increase the index when the previous value was not "valid"
-	                    ++index;
-	                }
-	            }
-	            // continue the interval
-	            requestAnimationFrame(oninterval, 67);
-	        }
-	        var polyfill, opts = Object(rawopts), newerIEUA = /\bTrident\/[567]\b|\bMSIE (?:9|10)\.0\b/, webkitUA = /\bAppleWebKit\/(\d+)\b/, olderEdgeUA = /\bEdge\/12\.(\d+)\b/;
-	        polyfill = "polyfill" in opts ? opts.polyfill : newerIEUA.test(navigator.userAgent) || (navigator.userAgent.match(olderEdgeUA) || [])[1] < 10547 || (navigator.userAgent.match(webkitUA) || [])[1] < 537;
-	        // create xhr requests object
-	        var requests = {}, requestAnimationFrame = window.requestAnimationFrame || setTimeout, uses = document.getElementsByTagName("use");
-	        // conditionally start the interval if the polyfill is active
-	        polyfill && oninterval();
-	    }
-	    return svg4everybody;
-	});
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -331,7 +222,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(3);
+	__webpack_require__(2);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -466,7 +357,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -480,7 +371,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -491,15 +382,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	var _on = __webpack_require__(6);
+	var _on = __webpack_require__(5);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
-	__webpack_require__(3);
+	__webpack_require__(2);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -622,7 +513,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -632,7 +523,7 @@ var BluemixComponents =
 	});
 	exports.default = eventMatches;
 	
-	__webpack_require__(3);
+	__webpack_require__(2);
 	
 	function eventMatches(event, selector) {
 	  // <svg> in IE does not have `Element#msMatchesSelector()` (that should be copied to `Element#matches()` by the polyfill).
@@ -654,7 +545,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -678,7 +569,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -689,17 +580,17 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
+	__webpack_require__(7);
+	
+	__webpack_require__(2);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(3);
-	
-	__webpack_require__(9);
-	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -954,7 +845,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -964,7 +855,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -988,7 +879,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1004,7 +895,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1017,19 +908,19 @@ var BluemixComponents =
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
+	__webpack_require__(7);
+	
+	__webpack_require__(2);
+	
+	__webpack_require__(11);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(3);
-	
-	__webpack_require__(12);
-	
-	__webpack_require__(9);
-	
-	var _contentSwitcher = __webpack_require__(7);
+	var _contentSwitcher = __webpack_require__(6);
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
@@ -1259,7 +1150,7 @@ var BluemixComponents =
 	});
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1270,7 +1161,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1281,15 +1172,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(8);
+	__webpack_require__(7);
 	
-	__webpack_require__(3);
+	__webpack_require__(2);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _on = __webpack_require__(6);
+	var _on = __webpack_require__(5);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -1407,7 +1298,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1418,23 +1309,23 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(7);
+	
+	__webpack_require__(2);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(3);
+	__webpack_require__(14);
 	
-	__webpack_require__(9);
-	
-	__webpack_require__(15);
-	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _on = __webpack_require__(6);
+	var _on = __webpack_require__(5);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -1869,7 +1760,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1895,7 +1786,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1908,15 +1799,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(7);
+	
+	__webpack_require__(2);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(3);
+	__webpack_require__(14);
 	
-	__webpack_require__(9);
-	
-	__webpack_require__(15);
-	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
@@ -2251,7 +2142,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2262,7 +2153,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(3);
+	__webpack_require__(2);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -2385,7 +2276,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2396,11 +2287,11 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	__webpack_require__(3);
+	__webpack_require__(2);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2558,7 +2449,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2569,15 +2460,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(7);
+	
+	__webpack_require__(2);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(3);
+	__webpack_require__(14);
 	
-	__webpack_require__(9);
-	
-	__webpack_require__(15);
-	
-	var _on = __webpack_require__(6);
+	var _on = __webpack_require__(5);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -2629,6 +2520,8 @@ var BluemixComponents =
 	      return _this.toggle(event);
 	    });
 	
+	    this.setCloseOnBlur();
+	
 	    this.element.addEventListener('keypress', function (event) {
 	      return _this.toggle(event);
 	    });
@@ -2654,6 +2547,9 @@ var BluemixComponents =
 	  _createClass(Dropdown, [{
 	    key: 'release',
 	    value: function release() {
+	      if (this.hFocusIn) {
+	        this.hFocusIn = this.hFocusIn.release();
+	      }
 	      if (this.hDocumentClick) {
 	        this.hDocumentClick = this.hDocumentClick.release();
 	      }
@@ -2720,6 +2616,24 @@ var BluemixComponents =
 	        }
 	      }
 	    }
+	
+	    /**
+	     * Sets an event handler to document for "close on blur" behavior.
+	     */
+	
+	  }, {
+	    key: 'setCloseOnBlur',
+	    value: function setCloseOnBlur() {
+	      var _this3 = this;
+	
+	      var hasFocusin = 'onfocusin' in window;
+	      var focusinEventName = hasFocusin ? 'focusin' : 'focus';
+	      this.hFocusIn = (0, _on2.default)(this.element.ownerDocument, focusinEventName, function (event) {
+	        if (!_this3.element.contains(event.target)) {
+	          _this3.element.classList.remove('bx--dropdown--open');
+	        }
+	      }, !hasFocusin);
+	    }
 	  }], [{
 	    key: 'create',
 	    value: function create(element, options) {
@@ -2745,7 +2659,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'init',
 	    value: function init() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
 	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -2758,7 +2672,7 @@ var BluemixComponents =
 	        this.create(target, effectiveOptions);
 	      } else {
 	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
-	          return _this3.create(element, effectiveOptions);
+	          return _this4.create(element, effectiveOptions);
 	        });
 	      }
 	    }
@@ -2799,7 +2713,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2810,17 +2724,17 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
+	__webpack_require__(7);
+	
+	__webpack_require__(2);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(3);
-	
-	__webpack_require__(9);
-	
-	__webpack_require__(12);
+	__webpack_require__(11);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2955,7 +2869,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2966,11 +2880,11 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(8);
+	__webpack_require__(7);
 	
-	__webpack_require__(15);
+	__webpack_require__(14);
 	
-	__webpack_require__(3);
+	__webpack_require__(2);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -3115,7 +3029,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3126,19 +3040,19 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	__webpack_require__(3);
+	__webpack_require__(2);
 	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	__webpack_require__(9);
+	__webpack_require__(8);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _on = __webpack_require__(6);
+	var _on = __webpack_require__(5);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -3370,7 +3284,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3381,7 +3295,7 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lodash = __webpack_require__(24);
+	var _lodash = __webpack_require__(23);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -3507,7 +3421,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -3891,7 +3805,7 @@ var BluemixComponents =
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3904,21 +3818,21 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(7);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(9);
+	__webpack_require__(14);
 	
-	__webpack_require__(15);
-	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	var _on = __webpack_require__(6);
+	var _on = __webpack_require__(5);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -4596,7 +4510,7 @@ var BluemixComponents =
 	LeftNav.components = new WeakMap();
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4607,11 +4521,11 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(7);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(9);
-	
-	__webpack_require__(15);
+	__webpack_require__(14);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -4695,7 +4609,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4706,17 +4620,17 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(7);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(9);
+	__webpack_require__(14);
 	
-	__webpack_require__(15);
-	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
-	var _eventMatches = __webpack_require__(5);
+	var _eventMatches = __webpack_require__(4);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
@@ -4903,7 +4817,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4914,13 +4828,13 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(7);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(9);
+	__webpack_require__(14);
 	
-	__webpack_require__(15);
-	
-	var _on = __webpack_require__(6);
+	var _on = __webpack_require__(5);
 	
 	var _on2 = _interopRequireDefault(_on);
 	
@@ -5188,7 +5102,7 @@ var BluemixComponents =
 	ProfileSwitcher.components = new WeakMap();
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5199,13 +5113,13 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(7);
+	
 	__webpack_require__(8);
 	
-	__webpack_require__(9);
+	__webpack_require__(14);
 	
-	__webpack_require__(15);
-	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(9);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	

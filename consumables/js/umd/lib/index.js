@@ -1,24 +1,22 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'svg4everybody', './file-uploader', './fab', './content-switcher', './tabs', './overflow-menu', './modals', './header', './toolbars', './loading', './dropdown', './card', './number-input', './table', './detail-page-header', './left-nav', './unified-header', './inline-left-nav', './profile-switcher', './search-with-options'], factory);
+    define(['exports', './file-uploader', './fab', './content-switcher', './tabs', './overflow-menu', './modals', './header', './toolbars', './loading', './dropdown', './card', './number-input', './table', './detail-page-header', './left-nav', './unified-header', './inline-left-nav', './profile-switcher', './search-with-options'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('svg4everybody'), require('./file-uploader'), require('./fab'), require('./content-switcher'), require('./tabs'), require('./overflow-menu'), require('./modals'), require('./header'), require('./toolbars'), require('./loading'), require('./dropdown'), require('./card'), require('./number-input'), require('./table'), require('./detail-page-header'), require('./left-nav'), require('./unified-header'), require('./inline-left-nav'), require('./profile-switcher'), require('./search-with-options'));
+    factory(exports, require('./file-uploader'), require('./fab'), require('./content-switcher'), require('./tabs'), require('./overflow-menu'), require('./modals'), require('./header'), require('./toolbars'), require('./loading'), require('./dropdown'), require('./card'), require('./number-input'), require('./table'), require('./detail-page-header'), require('./left-nav'), require('./unified-header'), require('./inline-left-nav'), require('./profile-switcher'), require('./search-with-options'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.svg4everybody, global.fileUploader, global.fab, global.contentSwitcher, global.tabs, global.overflowMenu, global.modals, global.header, global.toolbars, global.loading, global.dropdown, global.card, global.numberInput, global.table, global.detailPageHeader, global.leftNav, global.unifiedHeader, global.inlineLeftNav, global.profileSwitcher, global.searchWithOptions);
+    factory(mod.exports, global.fileUploader, global.fab, global.contentSwitcher, global.tabs, global.overflowMenu, global.modals, global.header, global.toolbars, global.loading, global.dropdown, global.card, global.numberInput, global.table, global.detailPageHeader, global.leftNav, global.unifiedHeader, global.inlineLeftNav, global.profileSwitcher, global.searchWithOptions);
     global.index = mod.exports;
   }
-})(this, function (exports, _svg4everybody, _fileUploader, _fab, _contentSwitcher, _tabs, _overflowMenu, _modals, _header, _toolbars, _loading, _dropdown, _card, _numberInput, _table, _detailPageHeader, _leftNav, _unifiedHeader, _inlineLeftNav, _profileSwitcher, _searchWithOptions) {
+})(this, function (exports, _fileUploader, _fab, _contentSwitcher, _tabs, _overflowMenu, _modals, _header, _toolbars, _loading, _dropdown, _card, _numberInput, _table, _detailPageHeader, _leftNav, _unifiedHeader, _inlineLeftNav, _profileSwitcher, _searchWithOptions) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.settings = undefined;
-
-  var _svg4everybody2 = _interopRequireDefault(_svg4everybody);
 
   var _fileUploader2 = _interopRequireDefault(_fileUploader);
 
@@ -64,22 +62,6 @@
     };
   }
 
-  (0, _svg4everybody2.default)({ polyfill: true });
-
-  // Base Elements & Components
-  // -------------
-  // - JavaScript classes for use with components and base-elements.
-  // - The following statements import classes from actual locations to
-  //   be consumed from this file instead of their actual locations.
-  // ====================//
-  // Imports and Exports //
-  // ====================//
-
-
-  // Polyfills
-  // -------------
-
-
   var settings = {};
 
   /**
@@ -91,6 +73,15 @@
    * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
    * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
    */
+  // ====================//
+  // Imports and Exports //
+  // ====================//
+
+  // Base Elements & Components
+  // -------------
+  // - JavaScript classes for use with components and base-elements.
+  // - The following statements import classes from actual locations to
+  //   be consumed from this file instead of their actual locations.
   exports.settings = settings;
   exports.FabButton = _fab2.default;
   exports.FileUploader = _fileUploader2.default;
