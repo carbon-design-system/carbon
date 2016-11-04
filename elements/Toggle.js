@@ -16,7 +16,7 @@ const defaultProps = {
   defaultToggled: false,
   labelA: 'Off',
   labelB: 'On',
-  onToggle() { },
+  onToggle: () => {},
 };
 
 const Toggle = ({ className, defaultToggled, toggled, onToggle, id, labelA, labelB, ...other }) => {

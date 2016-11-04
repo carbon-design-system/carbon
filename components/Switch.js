@@ -1,12 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-const defaultProps = {
-  selected: false,
-  kind: 'anchor',
-  onClick: () => { },
-};
-
 const propTypes = {
   className: PropTypes.string,
   index: PropTypes.number,
@@ -21,6 +15,12 @@ const propTypes = {
   onClick: PropTypes.func,
   selected: PropTypes.bool,
   text: PropTypes.string.isRequired,
+};
+
+const defaultProps = {
+  selected: false,
+  kind: 'anchor',
+  onClick: () => { },
 };
 
 const Switch = (props) => {

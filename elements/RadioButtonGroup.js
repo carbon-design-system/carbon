@@ -21,6 +21,10 @@ class RadioButtonGroup extends React.Component {
     ]),
   }
 
+  static defaultProps = {
+    onChange: () => {},
+  }
+
   state = {
     selected: null,
   }

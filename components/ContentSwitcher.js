@@ -9,10 +9,6 @@ class ContentSwitcher extends React.Component {
     onChange: PropTypes.func.isRequired,
   }
 
-  static defaultProps = {
-    onChange: () => { },
-  }
-
   state = {
     selectedIndex: 0,
   }
