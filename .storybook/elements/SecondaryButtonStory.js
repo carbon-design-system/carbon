@@ -20,14 +20,38 @@ storiesOf('SecondaryButton', module)
       {story()}
     </AppContainer>
   ))
-  .add('button', () => (
-    <SecondaryButton {...buttonEvents} className="some-class">
-      Secondary Button
-    </SecondaryButton>
+  .addWithInfo(
+    'button',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Secondary buttons should be used for secondary actions on each page.
+      Modify the behavior of the button by changing its property events. The example below
+      shows an enabled Secondary Button component.
+    `,
+    () => (
+      <SecondaryButton {...buttonEvents} className="some-class">
+        Secondary Button
+      </SecondaryButton>
   ))
-  .add('link', () => (
-    <SecondaryButton {...buttonEvents} href="#" className="some-class">Secondary Link</SecondaryButton>
+  .addWithInfo(
+    'link',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Secondary buttons should be used for secondary actions on each page.
+      Modify the behavior of the button by changing its property events. The example below
+      shows an enabled Secondary Button component with a link.
+    `,
+    () => (
+      <SecondaryButton {...buttonEvents} href="#" className="some-class">Secondary Link</SecondaryButton>
   ))
-  .add('disabled', () => (
-    <SecondaryButton {...buttonEvents} disabled>Disabled</SecondaryButton>
+  .addWithInfo(
+    'disabled',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Secondary buttons should be used for secondary actions on each page.
+      Modify the behavior of the button by changing its property events. The example below
+      shows a disabled Secondary Button component.
+    `,
+    () => (
+      <SecondaryButton {...buttonEvents} disabled>Disabled</SecondaryButton>
   ));

@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf, action } from '@kadira/storybook';
+import { storiesOf } from '@kadira/storybook';
 import Icon from '../../elements/Icon';
 import AppContainer from '../../containers/AppContainer';
 
@@ -10,9 +10,11 @@ storiesOf('Icon', module)
     </AppContainer>
   ))
   .addWithInfo(
-    'simple usage',
+    '',
     `
-      basic usage text
+      Icons are used in the product to present common actions and commands. Modify the fill
+      property to change the color of the icon. The name property specifies which the icon to be displayed.
+      For a full list of icon names, see: http://design-system.stage1.mybluemix.net/essentials/iconography.html#library.
     `,
     () => (<Icon name="search" fill="red" description="search microservices" />),
   );

@@ -14,15 +14,29 @@ const textareaProps = {
   rows: 4,
 };
 
-storiesOf('Textarea', module)
+storiesOf('TextArea', module)
   .addDecorator((story) => (
     <AppContainer>
       {story()}
     </AppContainer>
   ))
-  .add('enabled', () => (
-    <Textarea {...textareaProps} />
+  .addWithInfo(
+    'enabled',
+    `
+      Text areas enable the user to interact with and input data. A text area is used when you
+      anticipate the user to input more than 1 sentence. The example belows shows an enabled
+      Text Area component.
+    `,
+    () => (
+      <Textarea {...textareaProps} />
   ))
-  .add('disabled', () => (
-    <Textarea disabled {...textareaProps} placeholder={'Disabled'} />
+  .addWithInfo(
+    'disabled',
+    `
+      Text areas enable the user to interact with and input data. A text area is used when you
+      anticipate the user to input more than 1 sentence. The example belows shows an disabled
+      Text Area component.
+    `,
+    () => (
+      <Textarea disabled {...textareaProps} placeholder={'Disabled'} />
   ));

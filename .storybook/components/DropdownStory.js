@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import Dropdown from '../../components/Dropdown';
 import DropdownItem from '../../components/DropdownItem';
@@ -15,25 +15,6 @@ const dropdownEvents = {
   className: 'some-class',
 };
 
-class ControlledDropdown extends Component {
-
-  render() {
-    return (
-      <Dropdown
-        {...dropdownEvents}
-        onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
-        defaultText="Choose something.."
-      >
-        <DropdownItem itemText="All" value="all" />
-        <DropdownItem itemText="Cloud Foundry API" value="cloudFoundry" />
-        <DropdownItem itemText="Staging" value="staging" />
-        <DropdownItem itemText="Droplet Execution Agent" value="dea" />
-        <DropdownItem itemText="Router" value="router" />
-      </Dropdown>
-    );
-  }
-}
-
 storiesOf('Dropdown', module)
   .addDecorator((story) => (
     <AppContainer>
@@ -45,6 +26,22 @@ storiesOf('Dropdown', module)
       {story()}
     </div>
   ))
-  .add('dropdown', () => (
-    <ControlledDropdown />
+  .addWithInfo(
+    '',
+    `
+      The Dropdown component is used for navigating or filtering existing content.
+      Create Dropdown Item components for each option in the dropdown menu.
+    `,
+    () => (
+      <Dropdown
+        {...dropdownEvents}
+        onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
+        defaultText="Choose something.."
+      >
+        <DropdownItem itemText="All" value="all" />
+        <DropdownItem itemText="Cloud Foundry API" value="cloudFoundry" />
+        <DropdownItem itemText="Staging" value="staging" />
+        <DropdownItem itemText="Droplet Execution Agent" value="dea" />
+        <DropdownItem itemText="Router" value="router" />
+      </Dropdown>
   ));

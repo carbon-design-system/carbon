@@ -20,29 +20,35 @@ storiesOf('OverflowMenu', module)
       {story()}
     </AppContainer>
   ))
-  .add('overflow-menu', () => (
-    <OverflowMenu {...overflowMenuEvents}>
-      <OverflowMenuItem
-        {...overflowMenuItemEvents}
-        itemText="Stop App"
-      />
-      <OverflowMenuItem
-        {...overflowMenuItemEvents}
-        itemText="Restart App"
-      />
-      <OverflowMenuItem
-        {...overflowMenuItemEvents}
-        itemText="Rename App"
-      />
-      <OverflowMenuItem
-        {...overflowMenuItemEvents}
-        itemText="Edit Routes and Access"
-      />
-      <OverflowMenuItem
-        {...overflowMenuItemEvents}
-        itemText="Delete App"
-        isDelete
-        isLastItem
-      />
-    </OverflowMenu>
+  .addWithInfo(
+    '',
+    `
+      Overflow Menu is used when additional options are available to the user and there is a space constraint.
+      Create Overflow Menu Item components for each option on the menu.
+    `,
+    () => (
+      <OverflowMenu {...overflowMenuEvents}>
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText="Stop App"
+        />
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText="Restart App"
+        />
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText="Rename App"
+        />
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText="Edit Routes and Access"
+        />
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText="Delete App"
+          isDelete
+          isLastItem
+        />
+      </OverflowMenu>
   ));

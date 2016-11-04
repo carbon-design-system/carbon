@@ -7,7 +7,7 @@ const checkboxEvents = {
   className: 'some-class',
   labelText: 'Checkbox',
   id: 'checkbox-1',
-  onChange: action('onChange')
+  onChange: action('onChange'),
 };
 
 storiesOf('Checkbox', module)
@@ -19,25 +19,32 @@ storiesOf('Checkbox', module)
   .addWithInfo(
     'enabled checked',
     `
-      The example below shows how the Checkbox component can be used as an uncontrolled
-      component that is intially checked by setting the defaultChecked property to true. To use the component in a controlled way, you
-      should set the checked property instead.
+      Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
+      The example below shows how the Checkbox component can be used as an uncontrolled component that is initially checked
+      by setting the defaultChecked property to true. To use the component in a controlled way, you should set the
+      checked property instead.
     `,
     () => (
-      <Checkbox defaultChecked={true} {...checkboxEvents} />
+      <Checkbox defaultChecked {...checkboxEvents} />
     ),
   )
   .addWithInfo(
     'enabled unchecked',
     `
-      The example below shows how the Checkbox component can be used as an uncontrolled
-      component that is intially unchecked. To use the component in a controlled way, you
-      should set the checked property instead.
+      Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
+      The example below shows how the Checkbox component can be used as an uncontrolled component that is initially
+      unchecked. To use the component in a controlled way, you should set the checked property instead.
     `,
     () => (
       <Checkbox {...checkboxEvents} />
     )
   )
-  .addWithInfo('disabled unchecked', () => (
-    <Checkbox disabled {...checkboxEvents} />
+  .addWithInfo(
+    'disabled',
+    `
+      Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
+      The example below shows a disabled Checkbox component.
+    `,
+    () => (
+      <Checkbox disabled {...checkboxEvents} />
   ));

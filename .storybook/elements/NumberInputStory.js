@@ -24,6 +24,7 @@ storiesOf('NumberInput', module)
   .addWithInfo(
     'enabled',
     `
+      Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
       The example below shows an enabled Number Input component. The Number Input component can be
       passed a starting value, a min, a max, and the step.
     `,
@@ -41,6 +42,7 @@ storiesOf('NumberInput', module)
   .addWithInfo(
     'disabled',
     `
+      Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
       The example below shows an disabled Number Input component. The Number Input component can be
       passed a starting value, a min, a max, and the step.
     `,

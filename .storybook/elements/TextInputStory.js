@@ -18,15 +18,44 @@ storiesOf('TextInput', module)
       {story()}
     </AppContainer>
   ))
-  .add('enabled', () => (
-    <TextInput {...TextInputProps} />
+  .addWithInfo(
+    'enabled',
+    `
+      Text fields enable the user to interact with and input data. A single line field field is
+      used when the input anticipated by the user is a single line of text as opposed to a paragraph.
+      The example below shows an enabled Text Input component. The default type is 'text' and its
+      value can be either 'string' or 'number'.
+    `,
+    () => (
+      <TextInput {...TextInputProps} />
   ))
-  .add('disabled', () => (
-    <TextInput disabled {...TextInputProps} />
+  .addWithInfo(
+    'disabled',
+    `
+      Text fields enable the user to interact with and input data. A single line field field is
+      used when the input anticipated by the user is a single line of text as opposed to a paragraph.
+      The example below shows a disabled Text Input component.
+    `,
+    () => (
+      <TextInput disabled {...TextInputProps} />
   ))
-  .add('email', () => (
-    <TextInput {...TextInputProps} type={"email"} placeholder={"Please enter an email"} />
+  .addWithInfo(
+    'email',
+    `
+      Text fields enable the user to interact with and input data. A single line field field is
+      used when the input anticipated by the user is a single line of text as opposed to a paragraph.
+      The example below shows an enabled Text Input component with type 'email'.
+    `,
+    () => (
+      <TextInput {...TextInputProps} type={"email"} placeholder={"Please enter an email"} />
   ))
-  .add('password', () => (
-    <TextInput {...TextInputProps} type={"password"} placeholder={"Please enter a password"} />
+  .addWithInfo(
+    'password',
+    `
+      Text fields enable the user to interact with and input data. A single line field field is
+      used when the input anticipated by the user is a single line of text as opposed to a paragraph.
+      The example below shows an enabled Text Input component with type 'password'.
+    `,
+    () => (
+      <TextInput {...TextInputProps} type={"password"} placeholder={"Please enter a password"} />
   ));

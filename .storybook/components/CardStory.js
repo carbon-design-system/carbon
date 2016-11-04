@@ -163,167 +163,214 @@ storiesOf('Card', module)
       {story()}
     </AppContainer>
   ))
-  .add('card with example functions', () => (
-    <ControlledCard status={CardStatus.appStatus.RUNNING} />
+  .addWithInfo(
+    'card with example functions',
+    `
+      Cards provide an at-a glance preview of the content they link to and frequently contain
+      easily-consumable content. The Card component can be divided into seperate parts.
+      Use the Card Footer component to add a section to the bottom of your Card. The Card Content component
+      contains the main content of the card (cardIcon, cardTitle, cardLink, cardInfo). Card Status displays the
+      current status of the application (RUNNING, NOT_RUNNING, STOPPED). Finally, create Card Actions
+      to add functional buttons with icons. The example below shows a Card component with info and an Overflow Menu in the
+      Card Content, plus Restart/Go To/Favorite actions in the Card Footer.
+    `,
+    () => (
+      <ControlledCard status={CardStatus.appStatus.RUNNING} />
   ))
-  .add('basic card', () => (
-    <Card />
+  .addWithInfo(
+    'basic card',
+    `
+      Cards provide an at-a glance preview of the content they link to and frequently contain
+      easily-consumable content. The example below shows an empty card. Create Card Content, Card Footer,
+      Card Status and Card Actions components to add content to your card.
+    `,
+    () => (
+      <Card />
   ))
-  .add('app card', () => (
-    <Card {...cardProps}>
-      <CardContent
-        cardTitle="App Title 1"
-        cardLink={appCardLinks}
-        cardIcon="default"
-      >
-        <OverflowMenu {...overflowMenuProps}>
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Stop App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Restart App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Rename App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Delete App"
-            isDelete
-            isLastItem
-          />
-        </OverflowMenu>
-      </CardContent>
-      <CardFooter>
-        <CardStatus status={CardStatus.appStatus.RUNNING} />
-        <CardActions>
-          <CardActionItem iconName="restart_icon" />
-          <CardActionItem iconName="go_to_icon" />
-          <CardActionItem iconName="favorite_icon" />
-        </CardActions>
-      </CardFooter>
-    </Card>
+  .addWithInfo(
+    'app card',
+    `
+      Cards provide an at-a glance preview of the content they link to and frequently contain
+      easily-consumable content. The example below shows a Card suited for an application.
+    `,
+    () => (
+      <Card {...cardProps}>
+        <CardContent
+          cardTitle="App Title 1"
+          cardLink={appCardLinks}
+          cardIcon="default"
+        >
+          <OverflowMenu {...overflowMenuProps}>
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Stop App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Restart App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Rename App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Delete App"
+              isDelete
+              isLastItem
+            />
+          </OverflowMenu>
+        </CardContent>
+        <CardFooter>
+          <CardStatus status={CardStatus.appStatus.RUNNING} />
+          <CardActions>
+            <CardActionItem iconName="restart_icon" />
+            <CardActionItem iconName="go_to_icon" />
+            <CardActionItem iconName="favorite_icon" />
+          </CardActions>
+        </CardFooter>
+      </Card>
   ))
-  .add('container card', () => (
-    <Card {...cardProps}>
-      <CardContent
-        cardTitle="Container Group"
-        cardInfo={containerCardInfo}
-        cardIcon="default"
-      >
-        <OverflowMenu {...overflowMenuProps}>
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Stop App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Restart App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Rename App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Delete App"
-            isDelete
-            isLastItem
-          />
-        </OverflowMenu>
-      </CardContent>
-      <CardFooter>
-        <CardStatus status={CardStatus.appStatus.RUNNING} />
-        <CardActions>
-          <CardActionItem iconName="restart_icon" />
-        </CardActions>
-      </CardFooter>
-    </Card>
+  .addWithInfo(
+    'container card',
+    `
+      Cards provide an at-a glance preview of the content they link to and frequently contain
+      easily-consumable content. The example below shows a Card suited for a container.
+    `,
+    () => (
+      <Card {...cardProps}>
+        <CardContent
+          cardTitle="Container Group"
+          cardInfo={containerCardInfo}
+          cardIcon="default"
+        >
+          <OverflowMenu {...overflowMenuProps}>
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Stop App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Restart App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Rename App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Delete App"
+              isDelete
+              isLastItem
+            />
+          </OverflowMenu>
+        </CardContent>
+        <CardFooter>
+          <CardStatus status={CardStatus.appStatus.RUNNING} />
+          <CardActions>
+            <CardActionItem iconName="restart_icon" />
+          </CardActions>
+        </CardFooter>
+      </Card>
   ))
-  .add('service card', () => (
-    <Card {...cardProps}>
-      <CardContent
-        cardTitle="Service Name 1"
-        cardInfo={serviceCardInfo}
-        cardIcon="default"
-      >
-        <OverflowMenu {...overflowMenuProps}>
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Stop App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Restart App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Rename App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Delete App"
-            isDelete
-            isLastItem
-          />
-        </OverflowMenu>
-      </CardContent>
-      <CardFooter>
-        <InternalButton
-          className="bx--card-footer__credentials-button"
-        >View Credentials
-        </InternalButton>
-        <a href="#" className="bx--card-footer__docs-link">Docs</a>
-      </CardFooter>
-    </Card>
+  .addWithInfo(
+    'service card',
+    `
+      Cards provide an at-a glance preview of the content they link to and frequently contain
+      easily-consumable content. The example below shows a Card suited for a service.
+    `,
+    () => (
+      <Card {...cardProps}>
+        <CardContent
+          cardTitle="Service Name 1"
+          cardInfo={serviceCardInfo}
+          cardIcon="default"
+        >
+          <OverflowMenu {...overflowMenuProps}>
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Stop App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Restart App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Rename App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Delete App"
+              isDelete
+              isLastItem
+            />
+          </OverflowMenu>
+        </CardContent>
+        <CardFooter>
+          <InternalButton
+            className="bx--card-footer__credentials-button"
+          >View Credentials
+          </InternalButton>
+          <a href="#" className="bx--card-footer__docs-link">Docs</a>
+        </CardFooter>
+      </Card>
   ))
-  .add('virtual server group', () => (
-    <Card {...cardProps}>
-      <CardContent
-        cardTitle="Virtual Server Group"
-        cardLink={virtualServerCardLinks}
-        cardIcon="default"
-      >
-        <OverflowMenu {...overflowMenuProps}>
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Stop App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Restart App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Rename App"
-          />
-          <OverflowMenuItem
-            {...overflowMenuItemProps}
-            itemText="Delete App"
-            isDelete
-            isLastItem
-          />
-        </OverflowMenu>
-      </CardContent>
-      <CardFooter>
-        <CardStatus status={CardStatus.appStatus.RUNNING} />
-        <CardActions>
-          <CardActionItem iconName="restart_icon" />
-        </CardActions>
-      </CardFooter>
-    </Card>
+  .addWithInfo(
+    'virtual server group',
+    `
+      Cards provide an at-a glance preview of the content they link to and frequently contain
+      easily-consumable content. The example below shows a Card suited for virtual server group.
+    `,
+    () => (
+      <Card {...cardProps}>
+        <CardContent
+          cardTitle="Virtual Server Group"
+          cardLink={virtualServerCardLinks}
+          cardIcon="default"
+        >
+          <OverflowMenu {...overflowMenuProps}>
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Stop App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Restart App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Rename App"
+            />
+            <OverflowMenuItem
+              {...overflowMenuItemProps}
+              itemText="Delete App"
+              isDelete
+              isLastItem
+            />
+          </OverflowMenu>
+        </CardContent>
+        <CardFooter>
+          <CardStatus status={CardStatus.appStatus.RUNNING} />
+          <CardActions>
+            <CardActionItem iconName="restart_icon" />
+          </CardActions>
+        </CardFooter>
+      </Card>
   ))
-  .add('quota card', () => (
-    <Card {...cardProps} className="card--quota">
-      <CardContent
-        amount="2"
-        desc="out of 11 containers not running"
-        buttonText="Details"
-        fullSize
-      />
-    </Card>
-  ))
-  ;
+  .addWithInfo(
+    'quota card',
+    `
+      Cards provide an at-a glance preview of the content they link to and frequently contain
+      easily-consumable content. The example below shows a Card suited for a quota.
+    `,
+    () => (
+      <Card {...cardProps} className="card--quota">
+        <CardContent
+          amount="2"
+          desc="out of 11 containers not running"
+          buttonText="Details"
+          fullSize
+        />
+      </Card>
+  ));

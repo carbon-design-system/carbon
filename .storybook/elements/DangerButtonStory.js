@@ -20,14 +20,38 @@ storiesOf('DangerButton', module)
       {story()}
     </AppContainer>
   ))
-  .add('button', () => (
-    <DangerButton {...buttonEvents} className="some-class">
-      Danger Button
-    </DangerButton>
+  .addWithInfo(
+    'button',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Danger buttons should be used for a negative action (such as Delete)
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows an enabled Danger Button component.
+    `,
+    () => (
+      <DangerButton {...buttonEvents} className="some-class">
+        Danger Button
+      </DangerButton>
   ))
-  .add('link', () => (
-    <DangerButton {...buttonEvents} href="#" className="some-class">Danger Link</DangerButton>
+  .addWithInfo(
+    'link',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Danger buttons should be used for a negative action (such as Delete)
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows an enabled Danger Button component with a link.
+    `,
+    () => (
+      <DangerButton {...buttonEvents} href="#" className="some-class">Danger Link</DangerButton>
   ))
-  .add('disabled', () => (
-    <DangerButton {...buttonEvents} disabled>Disabled</DangerButton>
+  .addWithInfo(
+    'disabled',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Danger buttons should be used for a negative action (such as Delete)
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows a disabled Danger Button component.
+    `,
+    () => (
+      <DangerButton {...buttonEvents} disabled>Disabled</DangerButton>
   ));

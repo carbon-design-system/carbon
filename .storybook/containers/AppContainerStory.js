@@ -4,9 +4,9 @@ import AppContainer from '../../containers/AppContainer';
 
 storiesOf('AppContainer', module)
   .addWithInfo(
-    'Dark (default)',
+    'dark',
     `
-      <AppContainer> wraps all react components. 
+      The App Container component wraps all React components.
       This adds global styles using dark UI theme by default.
       Styles are hooked to internal className (.bx--body) and cascade down to all children.
     `,
@@ -17,10 +17,10 @@ storiesOf('AppContainer', module)
     ),
   )
   .addWithInfo(
-    'Light',
+    'light',
     `
-      <AppContainer> wraps all react components. 
-      Light UI can be triggered by setting theme prop to 'light'. 
+      The App Container component wraps all React components.
+      Light UI can be triggered by setting theme prop to 'light'.
       This adds an internal modifier className ('.bx--global--light-ui').
     `,
     () => (
@@ -28,5 +28,4 @@ storiesOf('AppContainer', module)
         <div>children go here</div>
       </AppContainer>
     ),
-  )
-  
+  );

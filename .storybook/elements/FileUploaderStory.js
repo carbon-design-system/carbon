@@ -20,11 +20,16 @@ storiesOf('FileUploader', module)
       {story()}
     </AppContainer>
   ))
-  .add('file-uploader', () => (
-    <FileUploader
-      {...fileUploaderEvents}
-      className="some-class"
-      id="file-1"
-      labelDescription="Choose Files..."
-    />
+  .addWithInfo(
+    '',
+    `
+      The File Uploader components allow the user to upload any necessary files.
+    `,
+    () => (
+      <FileUploader
+        {...fileUploaderEvents}
+        className="some-class"
+        id="file-1"
+        labelDescription="Choose Files..."
+      />
   ));

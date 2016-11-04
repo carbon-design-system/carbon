@@ -28,9 +28,10 @@ storiesOf('Notifications', module)
     </AppContainer>
   ))
   .addWithInfo(
-    'Toast',
+    'toast',
     `
-      Toast Notifications use kind props to specify the kind of notification that should render (error, info, success, warning).
+      Toast notifications are typically passive, meaning they won't affect the user's workflow if not addressed.
+      Toast Notifications use 'kind' props to specify the kind of notification that should render (error, info, success, warning).
     `,
     () => (
       <div>
@@ -42,9 +43,10 @@ storiesOf('Notifications', module)
     ),
   )
   .addWithInfo(
-    'Inline',
+    'inline',
     `
-      Toast Notifications use kind props to specify the kind of notification that should render (error, info, success, warning).
+    Inline notifications appear in-page, and are important to the context of what the user's workflow.
+    Inline Notifications use 'kind' props to specify the kind of notification that should render (error, info, success, warning).
     `,
     () => (
       <div>
@@ -54,4 +56,4 @@ storiesOf('Notifications', module)
         <Notification {...notificationProps.inline} kind="warning" />
       </div>
     ),
-  )
+  );

@@ -20,14 +20,38 @@ storiesOf('PrimaryButton', module)
       {story()}
     </AppContainer>
   ))
-  .add('button', () => (
-    <PrimaryButton {...buttonEvents} className="some-class">
-      Primary Button
-    </PrimaryButton>
+  .addWithInfo(
+    'button',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Primary buttons should be used for the principle call to action
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows an enabled Primary Button component.
+    `,
+    () => (
+      <PrimaryButton {...buttonEvents} className="some-class">
+        Primary Button
+      </PrimaryButton>
   ))
-  .add('link', () => (
-    <PrimaryButton {...buttonEvents} href="#" className="some-class">Primary Link</PrimaryButton>
+  .addWithInfo(
+    'link',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Primary buttons should be used for the principle call to action
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows an enabled Primary Button component with a link.
+    `,
+    () => (
+      <PrimaryButton {...buttonEvents} href="#" className="some-class">Primary Link</PrimaryButton>
   ))
-  .add('disabled', () => (
-    <PrimaryButton {...buttonEvents} disabled>Disabled</PrimaryButton>
+  .addWithInfo(
+    'disabled',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Primary buttons should be used for the principle call to action
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows a disabled Primary Button component.
+    `,
+    () => (
+      <PrimaryButton {...buttonEvents} disabled>Disabled</PrimaryButton>
   ));

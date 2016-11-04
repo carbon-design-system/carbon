@@ -20,15 +20,21 @@ storiesOf('Modal', module)
       {story()}
     </AppContainer>
   ))
-  .add('modal', () => (
-    <Modal
-      modalProps={modalProps}
-      open="true"
-      modalHeading="Modal Example"
-      modalLabel="Optional Label"
-      primaryButtonText="Primary Button"
-      secondaryButtonText="Secondary Button"
-    >
-      <p className="bx--modal-content__text">Please see ModalWrapper for more examples and demo of the functionality.</p>
-    </Modal>
+  .addWithInfo(
+    '',
+    `
+      Modals communicate information via a secondary window and allow the user to maintain the context of a particular task.
+      Use the Modal Wrapper component to encapsulate your Modal within a button.
+    `,
+    () => (
+      <Modal
+        modalProps={modalProps}
+        open="true"
+        modalHeading="Modal Example"
+        modalLabel="Optional Label"
+        primaryButtonText="Primary Button"
+        secondaryButtonText="Secondary Button"
+      >
+        <p className="bx--modal-content__text">Please see ModalWrapper for more examples and demo of the functionality.</p>
+      </Modal>
   ));

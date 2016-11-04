@@ -21,24 +21,40 @@ storiesOf('Select', module)
       {story()}
     </AppContainer>
   ))
-  .add('select', () => (
-    <Select
-      {...selectProps}
-      onChange={action('onChange')} // eslint-disable-line no-console
-      id="select-1"
-      defaultValue="placeholder-item"
-    >
-      <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
-      <SelectItem value="option-1" text="Option 1" />
-      <SelectItem value="option-2" text="Option 2" />
-      <SelectItem value="option-3" text="Option 3" />
-    </Select>
+  .addWithInfo(
+    'enabled',
+    `
+      Select dropdowns display a list below its title when selected. They are used primarily in forms,
+      where a user chooses one option from a list. Once the user selects an item, the dropdown will
+      dissapear and the field will reflect the user's choice. Create Select Item components for each
+      option in the list. The example below shows an enabled Select component with three items.
+    `,
+    () => (
+      <Select
+        {...selectProps}
+        onChange={action('onChange')} // eslint-disable-line no-console
+        id="select-1"
+        defaultValue="placeholder-item"
+      >
+        <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+      </Select>
   ))
-  .add('disabled', () => (
-    <Select disabled {...selectProps}>
-      <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
-      <SelectItem value="option-1" text="Option 1" />
-      <SelectItem value="option-2" text="Option 2" />
-      <SelectItem value="option-3" text="Option 3" />
-    </Select>
+  .addWithInfo(
+    'disabled',
+    `
+      Select dropdowns display a list below its title when selected. They are used primarily in forms,
+      where a user chooses one option from a list. Once the user selects an item, the dropdown will
+      dissapear and the field will reflect the user's choice. Create SelectItem components for each
+      option in the list. The example below shows an disabled Select component.
+    `,
+    () => (
+      <Select disabled {...selectProps}>
+        <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+      </Select>
   ));
