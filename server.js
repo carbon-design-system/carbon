@@ -35,6 +35,7 @@ const directoryOrder = [
 app.engine('dust', adaro.dust());
 app.set('view engine', 'dust');
 app.set('views', path.resolve(__dirname, 'demo/views'));
+app.use(express.static('node_modules'));
 app.use(express.static('demo'));
 app.use(express.static('consumables'));
 app.use('/docs/js', express.static('docs/js'));

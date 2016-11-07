@@ -75,6 +75,7 @@
     "scss-to-json": "1.1.0",
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0",
+    "svgxuse": "1.1.22",
     "webpack": "~1.12.9"
   },
   "repository": {

@@ -21,7 +21,8 @@
 
   <!-- Scripts -->
   <!-- <script src="../bluemix-components.min.js"></script> -->
-  <script src="../demo.js">
+  <script src="../demo.js"></script>
+  <script src="/svgxuse/svgxuse.min.js"></script>
 
   </script>
   <!-- Disable Auto Init with this flag -->
