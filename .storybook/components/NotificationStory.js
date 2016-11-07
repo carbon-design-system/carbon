@@ -1,7 +1,7 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import Notification from '../../elements/Notification';
+import AppContainer from '../../components/AppContainer';
+import Notification from '../../components/Notification';
 
 const notificationProps = {
   toast: {

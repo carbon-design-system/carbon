@@ -1,7 +1,7 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import TextInput from '../../elements/TextInput';
+import AppContainer from '../../components/AppContainer';
+import TextInput from '../../components/TextInput';
 
 const TextInputProps = {
   className: 'some-class',

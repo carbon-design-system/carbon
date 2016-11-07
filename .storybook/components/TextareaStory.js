@@ -1,7 +1,7 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import Textarea from '../../elements/TextArea';
+import AppContainer from '../../components/AppContainer';
+import Textarea from '../../components/TextArea';
 
 const textareaProps = {
   children: 'This is a Label',

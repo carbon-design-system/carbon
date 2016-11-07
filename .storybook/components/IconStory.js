@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import Icon from '../../elements/Icon';
-import AppContainer from '../../containers/AppContainer';
+import Icon from '../../components/Icon';
+import AppContainer from '../../components/AppContainer';
 
 storiesOf('Icon', module)
   .addDecorator((story) => (

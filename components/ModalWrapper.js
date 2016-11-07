@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '../components/Modal';
-import PrimaryButton from '../elements/PrimaryButton';
+import Modal from './Modal';
+import PrimaryButton from './PrimaryButton';
 import '@console/bluemix-components/consumables/scss/components/modals/modals.scss';
 
 class ModalWrapper extends React.Component {

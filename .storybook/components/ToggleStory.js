@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import Toggle from '../../elements/Toggle';
+import AppContainer from '../../components/AppContainer';
+import Toggle from '../../components/Toggle';
 
 const toggleProps = {
   onToggle: action('toggle'),

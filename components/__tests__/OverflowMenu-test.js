@@ -1,6 +1,6 @@
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
-import Icon from '../../elements/Icon';
+import Icon from '../Icon';
 import { shallow, mount } from 'enzyme';
 
 describe('OverflowMenu', () => {

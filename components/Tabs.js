@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import Icon from '../elements/Icon';
+import Icon from './Icon';
 import TabContent from './TabContent';
 import '@console/bluemix-components/consumables/scss/components/tabs/tabs.scss';
 

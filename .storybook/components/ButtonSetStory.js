@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import ButtonSet from '../../containers/ButtonSet';
-import PrimaryButton from '../../elements/PrimaryButton';
-import SecondaryButton from '../../elements/SecondaryButton';
+import AppContainer from '../../components/AppContainer';
+import ButtonSet from '../../components/ButtonSet';
+import PrimaryButton from '../../components/PrimaryButton';
+import SecondaryButton from '../../components/SecondaryButton';
 
 storiesOf('ButtonSet', module)
   .addDecorator((story) => (

@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import Select from '../../elements/Select';
-import SelectItem from '../../elements/SelectItem';
+import AppContainer from '../../components/AppContainer';
+import Select from '../../components/Select';
+import SelectItem from '../../components/SelectItem';
 
 const selectProps = {
   onBlur: () => { action('blur'); }, // eslint-disable-line no-console

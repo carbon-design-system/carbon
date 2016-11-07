@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import Checkbox from '../../elements/Checkbox';
+import AppContainer from '../../components/AppContainer';
+import Checkbox from '../../components/Checkbox';
 
 const checkboxEvents = {
   className: 'some-class',

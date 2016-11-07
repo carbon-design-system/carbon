@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import FileUploader from '../../components/FileUploader';
-import AppContainer from '../../containers/AppContainer';
+import AppContainer from '../../components/AppContainer';
+import Search from '../../components/Search';
 
-const fileUploaderEvents = {
+const searchProps = {
   onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
   onClick: () => { console.log('click'); }, // eslint-disable-line no-console
   onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
@@ -14,7 +14,7 @@ const fileUploaderEvents = {
   className: 'some-class',
 };
 
-storiesOf('FileUploader', module)
+storiesOf('Search', module)
   .addDecorator((story) => (
     <AppContainer>
       {story()}
@@ -23,13 +23,16 @@ storiesOf('FileUploader', module)
   .addWithInfo(
     '',
     `
-      The File Uploader components allow the user to upload any necessary files.
+      Search enables users to specify a word or a phrase to find particular relevant pieces of content
+      without the use of navigation. Search can be used as the primary means of discovering content,
+      or as a filter to aid the user in finding content.
     `,
     () => (
-      <FileUploader
-        {...fileUploaderEvents}
+      <Search
+        {...searchProps}
         className="some-class"
-        id="file-1"
-        labelDescription="Choose Files..."
+        id="search-1"
+        labelText="Search"
+        placeHolderText="Search Bluemix Offerings"
       />
   ));

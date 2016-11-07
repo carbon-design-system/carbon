@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import OverflowMenu from '../../components/OverflowMenu';
 import OverflowMenuItem from '../../components/OverflowMenuItem';
-import AppContainer from '../../containers/AppContainer';
+import AppContainer from '../../components/AppContainer';
 
 const overflowMenuEvents = {
   onClick: action('onClick'),

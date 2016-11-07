@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import SecondaryButton from '../../elements/SecondaryButton';
+import AppContainer from '../../components/AppContainer';
+import SecondaryButton from '../../components/SecondaryButton';
 
 const buttonEvents = {
   onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console

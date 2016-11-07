@@ -1,12 +1,12 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import ModalWrapper from '../../containers/ModalWrapper';
-import TextInput from '../../elements/TextInput';
-import Select from '../../elements/Select';
-import SelectItem from '../../elements/SelectItem';
-import RadioButtonGroup from '../../elements/RadioButtonGroup';
-import RadioButton from '../../elements/RadioButton';
-import AppContainer from '../../containers/AppContainer';
+import ModalWrapper from '../../components/ModalWrapper';
+import TextInput from '../../components/TextInput';
+import Select from '../../components/Select';
+import SelectItem from '../../components/SelectItem';
+import RadioButtonGroup from '../../components/RadioButtonGroup';
+import RadioButton from '../../components/RadioButton';
+import AppContainer from '../../components/AppContainer';
 
 const modalProps = {
   onBlur: action('onBlur'),

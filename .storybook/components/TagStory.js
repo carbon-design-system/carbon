@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import Tag, { types } from '../../elements/Tag';
+import AppContainer from '../../components/AppContainer';
+import Tag, { types } from '../../components/Tag';
 
 storiesOf('Tag', module)
   .addDecorator((story) => (

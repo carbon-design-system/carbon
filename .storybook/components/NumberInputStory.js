@@ -1,7 +1,7 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import NumberInput from '../../elements/NumberInput';
+import AppContainer from '../../components/AppContainer';
+import NumberInput from '../../components/NumberInput';
 
 const numberInputProps = {
   className: 'some-class',

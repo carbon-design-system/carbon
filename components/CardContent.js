@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import SecondaryButton from '../elements/SecondaryButton';
-import Icon from '../elements/Icon';
+import SecondaryButton from './SecondaryButton';
+import Icon from './Icon';
 import '@console/bluemix-components/consumables/scss/components/card/card.scss';
 
 const propTypes = {

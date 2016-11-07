@@ -69,7 +69,7 @@ git commit -m "Update header with newest designs, resolves #123"
 
 Open browser to [http://localhost:9001/](http://localhost:9001/)
 
-* develop components in their respective folders (elements, components, containers or internal)
+* develop components in their respective folders (components or internal)
 
 * [write stories](https://getstorybook.io/docs/basics/writing-stories) for your component in the .storybook folder.
 

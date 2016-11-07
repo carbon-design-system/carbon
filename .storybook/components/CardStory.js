@@ -9,7 +9,7 @@ import CardStatus from '../../components/CardStatus';
 import CardActions from '../../components/CardActions';
 import CardActionItem from '../../components/CardActionItem';
 import InternalButton from '../../internal/InternalButton';
-import AppContainer from '../../containers/AppContainer';
+import AppContainer from '../../components/AppContainer';
 
 const cardProps = {
   onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console

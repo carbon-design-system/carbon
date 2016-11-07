@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import Icon from '../elements/Icon';
+import Icon from './Icon';
 import '@console/bluemix-components/consumables/scss/base-elements/search/search.scss';
 
 const propTypes = {

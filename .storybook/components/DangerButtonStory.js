@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import PrimaryButton from '../../elements/PrimaryButton';
+import AppContainer from '../../components/AppContainer';
+import DangerButton from '../../components/DangerButton';
 
 const buttonEvents = {
   onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
@@ -14,7 +14,7 @@ const buttonEvents = {
   className: 'some-class',
 };
 
-storiesOf('PrimaryButton', module)
+storiesOf('DangerButton', module)
   .addDecorator((story) => (
     <AppContainer>
       {story()}
@@ -24,34 +24,34 @@ storiesOf('PrimaryButton', module)
     'button',
     `
       Buttons are used to initialize an action, either in the background or
-      foreground of an experience. Primary buttons should be used for the principle call to action
+      foreground of an experience. Danger buttons should be used for a negative action (such as Delete)
       on the page. Modify the behavior of the button by changing its event properties. The example below
-      shows an enabled Primary Button component.
+      shows an enabled Danger Button component.
     `,
     () => (
-      <PrimaryButton {...buttonEvents} className="some-class">
-        Primary Button
-      </PrimaryButton>
+      <DangerButton {...buttonEvents} className="some-class">
+        Danger Button
+      </DangerButton>
   ))
   .addWithInfo(
     'link',
     `
       Buttons are used to initialize an action, either in the background or
-      foreground of an experience. Primary buttons should be used for the principle call to action
+      foreground of an experience. Danger buttons should be used for a negative action (such as Delete)
       on the page. Modify the behavior of the button by changing its event properties. The example below
-      shows an enabled Primary Button component with a link.
+      shows an enabled Danger Button component with a link.
     `,
     () => (
-      <PrimaryButton {...buttonEvents} href="#" className="some-class">Primary Link</PrimaryButton>
+      <DangerButton {...buttonEvents} href="#" className="some-class">Danger Link</DangerButton>
   ))
   .addWithInfo(
     'disabled',
     `
       Buttons are used to initialize an action, either in the background or
-      foreground of an experience. Primary buttons should be used for the principle call to action
+      foreground of an experience. Danger buttons should be used for a negative action (such as Delete)
       on the page. Modify the behavior of the button by changing its event properties. The example below
-      shows a disabled Primary Button component.
+      shows a disabled Danger Button component.
     `,
     () => (
-      <PrimaryButton {...buttonEvents} disabled>Disabled</PrimaryButton>
+      <DangerButton {...buttonEvents} disabled>Disabled</DangerButton>
   ));

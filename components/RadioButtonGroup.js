@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import RadioButton from '../elements/RadioButton';
+import RadioButton from './RadioButton';
 import warning from 'warning';
 import '@console/bluemix-components/consumables/scss/base-elements/radio/radio.scss';
 

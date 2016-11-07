@@ -1,8 +1,8 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../containers/AppContainer';
-import RadioButtonGroup from '../../elements/RadioButtonGroup';
-import RadioButton from '../../elements/RadioButton';
+import AppContainer from '../../components/AppContainer';
+import RadioButtonGroup from '../../components/RadioButtonGroup';
+import RadioButton from '../../components/RadioButton';
 
 const radioProps = {
   className: 'some-class',
