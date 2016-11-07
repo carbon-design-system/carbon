@@ -32,6 +32,7 @@
       background-color: $color__inputs--bg;
       border: none;
       appearance: none;
+      height: rem(51px);
       z-index: z('overflowOptions');
 
       @include light-ui {
@@ -102,6 +103,7 @@
       border: none;
       position: relative;
       transition-duration: .25s;
+      height: rem(51px);
 
       @include breakpoint(bp--sm--major) {
         padding: 1rem 2.5rem 1rem 0;
@@ -172,7 +174,7 @@
     .bx--search__input {
       @include font-size('16');
       flex: 1;
-      height: 100%;
+      height: rem(44px);
 
       @include breakpoint(bp--sm--major) {
         @include font-size('16');
@@ -182,13 +184,13 @@
     .bx--search__icon--magnifier {
       width: 1rem;
       height: 1rem;
-      top: rem(18px);
+      top: 1rem;
     }
 
     .bx--search__toggle-layout,
     .bx--search__sort {
-      width: 3.25rem;
-      height: 3.25rem;
+      width: rem(44px);
+      height: rem(44px);
       position: relative;
       padding: 0;
       background-color: $color__navy-gray-4;
@@ -203,26 +205,34 @@
       }
 
       &__container {
-
         &--hidden {
           opacity: 0;
         }
       }
 
       @include light-ui {
-        background-color: $color__blue-51;
+        background-color: $color__white;
+
+        .bx--search__icon {
+          fill: $color__blue-51;
+        }
 
         &:hover,
         &:focus {
-          background-color: $color__blue-30;
+          background-color: $color__blue-51;
+
+          .bx--search__icon {
+            fill: $color__white;
+          }
         }
       }
     }
 
     .bx--search__icon {
       position: absolute;
-      top: rem(18px);
-      right: rem(18px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 1rem;
       height: 1rem;
       fill: $color__white;
