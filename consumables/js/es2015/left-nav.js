@@ -472,7 +472,7 @@ export default class LeftNav {
       newLeftNavSectionItem.classList.add(`${this.options.classNavSection}--${selectedLeftNavSectionValue}`);
 
       const newLeftNavSectionItemAnchor = document.createElement('a');
-      newLeftNavSectionItemAnchor.setAttribute('href', '#');
+      newLeftNavSectionItemAnchor.setAttribute('href', 'javascript:void(0)'); // eslint-disable-line no-script-url
       newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
       newLeftNavSectionItemAnchor.classList.add(this.options.classNavSectionAnchor);
 
