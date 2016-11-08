@@ -4,7 +4,6 @@
   @include letter-spacing;
   @include font-size('14');
   font-weight: 700;
-  display: inline-block;
   height: rem(40px);
   padding: 0 1rem;
   text-align: center;
@@ -12,6 +11,7 @@
   cursor: pointer;
   transition-duration: $transition--base;
   transition-timing-function: ease-in;
+  white-space: nowrap;
 
   &:disabled {
     cursor: not-allowed;
@@ -75,6 +75,13 @@
   $text: $hover-bg
 ) {
   @include btn--base;
+
+  &:not(button) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   color: $text;
   background-color: transparent;
   border: 2px solid $hover-bg;
