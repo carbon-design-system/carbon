@@ -6,7 +6,7 @@ import TextInput from '../../components/TextInput';
 const TextInputProps = {
   className: 'some-class',
   id: 'test2',
-  label: 'Text Input',
+  labelText: 'Text Input',
   onClick: action('onClick'),
   onChange: action('onChange'),
   placeholder: 'Hint text here',

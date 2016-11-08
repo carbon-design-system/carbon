@@ -4,7 +4,7 @@ import AppContainer from '../../components/AppContainer';
 import Textarea from '../../components/TextArea';
 
 const textareaProps = {
-  children: 'This is a Label',
+  labelText: 'This is a Label',
   className: 'some-class',
   onChange: action('onChange'),
   onClick: action('onClick'),

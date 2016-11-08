@@ -5,10 +5,7 @@ import Textarea from '../TextArea';
 describe('Textarea', () => {
   describe('should render as expected', () => {
     const wrapper = mount(
-      <Textarea id="testing" className="extra-class">
-        <div className="child"></div>
-        <div className="child"></div>
-      </Textarea>
+      <Textarea id="testing" className="extra-class" />
     );
 
     const label = wrapper.find('label');
@@ -63,16 +60,23 @@ describe('Textarea', () => {
     });
 
     describe('label', () => {
+      it('should not render a label by default', () => {
+        expect(label.length).toEqual(0);
+      });
+
+      wrapper.setProps({ labelText: 'testLabel' });
+      const renderedLabel = wrapper.find('label');
+
       it('renders a label', () => {
-        expect(textarea.length).toEqual(1);
+        expect(renderedLabel.length).toEqual(1);
+      });
+
+      it('label has expected text', () => {
+        expect(renderedLabel.text()).toEqual('testLabel');
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--form__label')).toEqual(true);
-      });
-
-      it('renders children as expected', () => {
-        expect(label.props().children.length).toEqual(2);
+        expect(renderedLabel.hasClass('bx--form__label')).toEqual(true);
       });
     });
   });

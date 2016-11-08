@@ -5,7 +5,7 @@ import { mount, shallow } from 'enzyme';
 describe('TextInput', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
-      <TextInput id="test" className="extra-class" label="Text Input" />
+      <TextInput id="test" className="extra-class" />
     );
 
     const label = wrapper.find('label');
@@ -43,25 +43,30 @@ describe('TextInput', () => {
       });
 
       it('should set placeholder as expected', () => {
-        expect(textInput.props().placeholder).toEqual('');
+        expect(textInput.props().placeholder).not.toBeDefined();
         wrapper.setProps({ placeholder: 'Enter text' });
         expect(textInput.props().placeholder).toEqual('Enter text');
       });
     });
 
     describe('label', () => {
+      it('does not render a label by default', () => {
+        expect(label.length).toBe(0);
+      });
+
+      wrapper.setProps({ labelText: 'Email Input' });
+      const renderedLabel = wrapper.find('label');
+
       it('renders a label', () => {
-        expect(label.length).toBe(1);
+        expect(renderedLabel.length).toBe(1);
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--form__label')).toEqual(true);
+        expect(renderedLabel.hasClass('bx--form__label')).toEqual(true);
       });
 
       it('should set label as expected', () => {
-        expect(wrapper.props().label).toEqual('Text Input');
-        wrapper.setProps({ label: 'Email Input' });
-        expect(wrapper.props().label).toEqual('Email Input');
+        expect(renderedLabel.text()).toEqual('Email Input');
       });
     });
   });

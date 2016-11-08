@@ -10,7 +10,7 @@ const propTypes = {
   ]),
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  label: PropTypes.string,
+  labelText: PropTypes.string,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   placeholder: PropTypes.string,
@@ -24,14 +24,12 @@ const propTypes = {
 const defaultProps = {
   className: 'bx--text__input',
   disabled: false,
-  label: ' ',
-  placeholder: '',
   type: 'text',
   onChange: () => {},
   onClick: () => {},
 };
 
-const TextInput = ({ label, className, id, placeholder, type, onChange, onClick, ...other }) => {
+const TextInput = ({ labelText, className, id, placeholder, type, onChange, onClick, ...other }) => {
   const textInputProps = {
     id,
     onChange: evt => {
@@ -53,9 +51,15 @@ const TextInput = ({ label, className, id, placeholder, type, onChange, onClick,
     className,
   );
 
+  const label = labelText ? (
+    <label htmlFor={id} className="bx--form__label">
+      {labelText}
+    </label>
+  ) : null;
+
   return (
     <div>
-      <label htmlFor={id} className="bx--form__label">{label}</label>
+      {label}
       <input {...other} {...textInputProps} className={textInputClasses} />
     </div>
   );

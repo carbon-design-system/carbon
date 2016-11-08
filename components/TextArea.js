@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/base-elements/textarea/textarea.scss';
 
 const propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   cols: PropTypes.number,
   defaultValue: PropTypes.oneOfType([
@@ -12,6 +11,7 @@ const propTypes = {
   ]),
   disabled: PropTypes.bool,
   id: PropTypes.string,
+  labelText: PropTypes.string,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   placeholder: PropTypes.string,
@@ -31,7 +31,7 @@ const defaultProps = {
   cols: 50,
 };
 
-const Textarea = ({ children, className, id, onChange, onClick, ...other }) => {
+const Textarea = ({ className, id, labelText, onChange, onClick, ...other }) => {
   const textareaProps = {
     id,
     onChange: evt => {
@@ -46,20 +46,16 @@ const Textarea = ({ children, className, id, onChange, onClick, ...other }) => {
     },
   };
 
-  const textareaClasses = classNames(
-    'bx--textarea__input',
-    [className]: className,
-  );
+  const textareaClasses = classNames('bx--textarea__input', className);
+  const label = labelText ? (
+    <label htmlFor={id} className="bx--form__label">
+      {labelText}
+    </label>
+  ) : null;
 
   return (
     <div>
-      <label
-        htmlFor={id}
-        className="bx--form__label"
-      >
-        {children}
-      </label>
-
+      {label}
       <textarea
         {...other}
         {...textareaProps}
