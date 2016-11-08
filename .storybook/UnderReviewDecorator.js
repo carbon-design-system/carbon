@@ -1,5 +1,5 @@
 import React from 'react';
-import Tag from '../elements/Tag';
+import Tag from '../components/Tag';
 
 const UnderReviewDecorator = (story) => (
   <div>
