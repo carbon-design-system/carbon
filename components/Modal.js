@@ -17,7 +17,6 @@ class Modal extends Component {
     primaryButtonText: PropTypes.string,
     open: PropTypes.bool,
     onRequestSubmit: PropTypes.func,
-    onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
     iconDescription: PropTypes.string,
   }
@@ -25,7 +24,6 @@ class Modal extends Component {
   static defaultProps = {
     onRequestClose: () => {},
     onRequestSubmit: () => {},
-    onClick: () => {},
     onKeyDown: () => {},
     passiveModal: false,
     iconDescription: 'close the modal',

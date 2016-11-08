@@ -28,8 +28,8 @@ storiesOf('Modal', module)
     `,
     () => (
       <Modal
-        modalProps={modalProps}
-        open="true"
+        {...modalProps}
+        open
         modalHeading="Modal Example"
         modalLabel="Optional Label"
         primaryButtonText="Primary Button"

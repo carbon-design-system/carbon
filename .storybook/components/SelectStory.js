@@ -51,7 +51,7 @@ storiesOf('Select', module)
       option in the list. The example below shows an disabled Select component.
     `,
     () => (
-      <Select disabled {...selectProps}>
+      <Select disabled {...selectProps} id="select-2" >
         <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
         <SelectItem value="option-1" text="Option 1" />
         <SelectItem value="option-2" text="Option 2" />
