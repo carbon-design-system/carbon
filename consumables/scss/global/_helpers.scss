@@ -58,6 +58,10 @@ $color__inputs--bg--light-ui: rgba($color__blue-51, .1);
   white-space: nowrap;
 }
 
+.bx--visually-hidden {
+  @include hidden;
+}
+
 @mixin light-ui {
 
   .bx--global-light-ui & {

@@ -1,0 +1,96 @@
+.bx--pagination {
+  width: 100%;
+  background-color: $color__navy-gray-2;
+  padding: .25rem 1rem;
+  display: flex;
+  align-items: center;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  &__text {
+    @include font-size('14');
+    color: $color__white;
+    font-weight: 300;
+
+    @include light-ui {
+      color: $color__navy-gray-6;
+    }
+  }
+
+  &__button {
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    svg {
+      height: rem(12px);
+      width: rem(12px);
+      fill: $color__white;
+      pointer-events: none;
+
+      @include light-ui {
+        fill: $color__navy-gray-7;
+      }
+    }
+
+    &--backward {
+      margin-left: rem(20px);
+      margin-right: rem(20px);
+
+      div {
+        transform: rotate(.5turn);
+      }
+    }
+
+    &--forward {
+      margin-left: rem(20px);
+    }
+  }
+
+  .bx--select {
+    margin-right: rem(10px);
+  }
+
+  .bx--select__input {
+    height: rem(24px);
+    width: rem(54px);
+    padding: 0 rem(10px);
+  }
+
+  .bx--select__arrow use {
+    @include light-ui {
+      fill: $color__blue-51;
+    }
+  }
+
+  .bx--select__arrow {
+    top: rem(6px);
+    right: rem(7px);
+  }
+
+  .bx--text__input {
+    height: rem(24px);
+    min-width: rem(24px);
+    width: rem(24px);
+    padding: 0;
+    text-align: center;
+  }
+}

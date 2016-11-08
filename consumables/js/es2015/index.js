@@ -25,6 +25,7 @@ import LeftNav from './left-nav';
 import UnifiedHeader from './unified-header';
 import InlineLeftNav from './inline-left-nav';
 import ProfileSwitcher from './profile-switcher';
+import Pagination from './pagination';
 import SearchWithOptions from './search-with-options';
 
 const settings = {};
@@ -147,6 +148,12 @@ export {
    * @type ProfileSwitcher
    */
   ProfileSwitcher,
+
+  /**
+   * Pagination.
+   * @type Pagination
+   */
+  Pagination,
 };
 
 /**
@@ -179,6 +186,7 @@ const init = () => {
     UnifiedHeader.init();
     InlineLeftNav.init();
     ProfileSwitcher.init();
+    Pagination.init();
     SearchWithOptions.init();
   }
 };

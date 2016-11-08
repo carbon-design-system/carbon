@@ -1,0 +1,38 @@
+<div class="bx--pagination" data-pagination>
+  <div class="bx--pagination__left">
+    <div class="bx--select">
+      <label for="select-id" class="bx--visually-hidden">Number of items per page</label>
+      <select id="select-id" class="bx--select__input" data-items-per-page>
+        <option class="bx--select__option" value="10" selected>10</option>
+        <option class="bx--select__option" value="15">15</option>
+        <option class="bx--select__option" value="20">20</option>
+        <option class="bx--select__option" value="25">25</option>
+        <option class="bx--select__option" value="30">30</option>
+      </select>
+      <svg class="bx--select__arrow">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+      </svg>
+    </div>
+    <span class="bx--pagination__text">Items per page&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    <span class="bx--pagination__text"><span data-displayed-item-range>1-10</span> of <span data-total-items>100</span> items</span>
+  </div>
+  <div class="bx--pagination__right">
+    <span class="bx--pagination__text"><span data-displayed-page-number>1</span> of <span data-total-pages>4</span> pages</span>
+    <button class="bx--pagination__button bx--pagination__button--backward" data-page-backward>
+      <div>
+        <svg>
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
+        </svg>
+      </div>
+    </button>
+    <label for="page-number-input" class="bx--visually-hidden">Page number input</label>
+    <input id="page-number-input" type="text" class="bx--text__input" placeholder="0" value="1" data-page-number-input>
+    <button class="bx--pagination__button bx--pagination__button--forward" data-page-forward>
+      <div>
+        <svg>
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--chevron"></use>
+        </svg>
+      </div>
+    </button>
+  </div>
+</div>

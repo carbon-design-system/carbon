@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "babel-core": "~6.3.15",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "~6.2.0",
     "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
     "babel-plugin-transform-runtime": "^6.9.0",
