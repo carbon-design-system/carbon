@@ -11,6 +11,7 @@ const notificationProps = {
     subtitle: 'subtitle',
     caption: 'caption',
     iconDescription: 'describes the close button',
+    style: { minWidth: '30rem', marginBottom: '.5rem' },
   },
   inline: {
     onCloseButtonClick: action('onCloseButtonClick'),
