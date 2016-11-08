@@ -400,6 +400,11 @@
 
       &:hover {
         color: $color__white;
+
+        .bx--parent-item__link--taxonomy-icon,
+        .bx--parent-item__link--down-icon svg {
+          fill: $color__white;
+        }
       }
     }
 
@@ -408,6 +413,11 @@
 
       &:hover {
         color: $color__white;
+
+        .bx--parent-item__link--taxonomy-icon,
+        .bx--parent-item__link--down-icon svg {
+          fill: $color__white;
+        }
       }
     }
 
@@ -416,6 +426,11 @@
 
       &:hover {
         color: $color__white;
+
+        .bx--parent-item__link--taxonomy-icon,
+        .bx--parent-item__link--down-icon svg {
+          fill: $color__white;
+        }
       }
     }
 
@@ -522,6 +537,47 @@
     }
 
     &.bx--active-list-item {
+
+      .bx--nested-list__item--link {
+        color: $color__white;
+
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
+          background-color: $color__teal-50;
+
+          &:hover {
+            color: $color__white;
+
+            .bx--parent-item__link--taxonomy-icon {
+              fill: $color__white;
+            }
+          }
+        }
+
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+          background-color: $color__purple-60;
+
+          &:hover {
+            color: $color__white;
+
+            .bx--parent-item__link--taxonomy-icon {
+              fill: $color__white;
+            }
+          }
+        }
+
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+          background-color: $color__blue-51;
+
+          &:hover {
+            color: $color__white;
+
+            .bx--parent-item__link--taxonomy-icon {
+              fill: $color__white;
+            }
+          }
+        }
+      }
+
       .bx--nested-list__item--icon svg {
         fill: $color__white;
 
