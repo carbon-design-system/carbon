@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/demo.css">
   <style>
     body {
-      padding-top: 3.75rem;
+      padding-top: 72px;
     }
   </style>
 </head>
@@ -15,6 +15,20 @@
   {header|s}
   {detailHeader|s}
   <button class="bx--btn theme-switcher" data-theme-switcher>Theme Switcher</button>
+  <div data-demo-switcher class="demo-switcher__container">
+    <input id="flex-col" data-demo-col class="bx--radio" type="radio" value="col" name="radio">
+    <label for="flex-col" data-demo-col class="bx--radio__label">
+      <span data-demo-col class="bx--radio__appearance"></span>
+      Flex - Column
+    </label>
+    <br>
+    <input id="flex-row" data-demo-row class="bx--radio" type="radio" value="row" name="radio">
+    <label for="flex-row" data-demo-row class="bx--radio__label">
+      <span data-demo-row class="bx--radio__appearance"></span>
+      Flex - Row
+    </label>
+  </div>
+
   <div class="demo--container" data-card-list>
     {html|s}
   </div>

@@ -2,12 +2,34 @@
 
 .demo--container {
   @include grid-container;
-  padding-top: 3.75rem;
-  padding-bottom: 7.5em;
+  display: flex;
+  padding: 1rem;
   transition: .2s;
 
   .bx--global-light-ui & {
     background-color: #F5F7FA; // to be `$color__gray-3`
+  }
+
+  &.flex-col {
+    flex-direction: column;
+    margin: 0 auto;
+
+    & > * {
+      margin: 1rem 0;
+    }
+  }
+
+  &.flex-row {
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+    & > * {
+      margin: 1rem;
+    }
+  }
+
+  &.mobile {
+    max-width: 600px;
   }
 }
 
@@ -27,5 +49,18 @@
   margin: 1rem 0;
   position: fixed;
   top: 0;
-  right: 20px;
+  right: 1rem;
+}
+
+.demo-switcher {  
+  &__container {
+    display: flex;
+    position: fixed;
+    top: 1.5rem;
+    left: 1rem;
+
+    label {
+      margin-right: 1rem;
+    }
+  }
 }

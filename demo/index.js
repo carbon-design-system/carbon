@@ -1,8 +1,10 @@
 export * from '../consumables/js/es2015';
 import ThemeSwitcher from './js/theme-switcher';
+import DemoSwitcher from './js/demo-switcher';
 
 const init = () => {
   ThemeSwitcher.init();
+  DemoSwitcher.init();
 };
 
 if (document.readyState === 'loading') {
