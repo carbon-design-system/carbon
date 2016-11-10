@@ -7,6 +7,7 @@
 // - JavaScript classes for use with components and base-elements.
 // - The following statements import classes from actual locations to
 //   be consumed from this file instead of their actual locations.
+import initCheckbox from './checkbox';
 import FileUploader from './file-uploader';
 import FabButton from './fab';
 import ContentSwitcher from './content-switcher';
@@ -53,6 +54,13 @@ export {
    *   See each components' static `.init()` methods for details.
    */
   settings,
+
+  /**
+   * Watches for change in checkbox in the given document and force changing `checked` attribute
+   * so that DOM mutation observer in {@link https://www.npmjs.com/package/svgxuse svgxuse} is triggered.
+   * @type initCheckbox
+   */
+  initCheckbox,
 
   /**
    * Floating action button.
@@ -176,6 +184,7 @@ export {
 
 const init = () => {
   if (!settings.disableAutoInit) {
+    initCheckbox();
     FabButton.init();
     FileUploader.init();
     ContentSwitcher.init();
