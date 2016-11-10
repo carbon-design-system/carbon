@@ -60,21 +60,13 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 
 	```
 	$ npm run storybook
-	``` 
+	```
 
 2. Open browser to `http://localhost:9001/`.
 
 3. Develop components in their respective folders (`/components` or `/internal`).
 
 4. Write stories for your components in `/.storybook`.
-
-### Deploy to gh-pages
-
-You can optionally deploy your changes to the [gh-pages](https://github.ibm.com/Bluemix/bluemix-components-react/tree/gh-pages) branch so they can be viewed [here](https://pages.github.ibm.com/Bluemix/bluemix-components-react/):
-
-```
-npm run deploy
-```
 
 
 ## Contributing

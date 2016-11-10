@@ -10,7 +10,7 @@
     "storybook": "start-storybook -p 9001",
     "test": "jest",
     "test-watch": "jest --watch",
-    "deploy": "build-storybook -s .storybook -o .gh-pages && node scripts/gh-pages.js",
+    "docs": "build-storybook -s .storybook -o .gh-pages && node scripts/gh-pages.js",
     "build-es5": "babel . -d dist --ignore __tests__,node_modules,scripts,deploy.js"
   },
   "keywords": [
