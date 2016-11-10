@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import DetailPageHeader from '../DetailPageHeader';
-import Icon from '../../elements/Icon';
+import Icon from '../Icon';
 
 describe('DetailPageHeader', () => {
   describe('component is rendered correctly when no child is passed', () => {

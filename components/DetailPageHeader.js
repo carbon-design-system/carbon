@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Icon from '../elements/Icon';
+import Icon from './Icon';
 import '@console/bluemix-components/consumables/scss/components/detail-page-header/detail-page-header--no-tabs.scss';
 import '@console/bluemix-components/consumables/scss/components/detail-page-header/detail-page-header--with-tabs.scss';
 
