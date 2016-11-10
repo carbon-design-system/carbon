@@ -8,7 +8,6 @@ const propTypes = {
   id: React.PropTypes.string,
   ariaLabel: React.PropTypes.string,
   iconName: React.PropTypes.string.isRequired,
-  restartApp: React.PropTypes.func,
   description: React.PropTypes.string.isRequired,
 };
 

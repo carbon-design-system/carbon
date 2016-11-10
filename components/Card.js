@@ -2,10 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/components/card/card.scss';
 
-const defaultProps = {
-  tabIndex: 0,
-};
-
 const propTypes = {
   children: React.PropTypes.node,
   className: React.PropTypes.string,
@@ -19,6 +15,10 @@ const propTypes = {
   onMouseEnter: React.PropTypes.func,
   onMouseLeave: React.PropTypes.func,
   onMouseUp: React.PropTypes.func,
+};
+
+const defaultProps = {
+  tabIndex: 0,
 };
 
 const Card = ({ children, className, tabIndex, ...other }) => {
