@@ -11,12 +11,10 @@ const defaultProps = {
   active: true,
 };
 
-const isIE = (window.ActiveXObject || 'ActiveXObject' in window);
-
 const Loading = ({ className, active, ...other }) => {
   let classToAdd;
 
-  if (isIE) {
+  if (window.ActiveXObject || 'ActiveXObject' in window) {
     classToAdd = active ? 'bx--loading--ie' : 'bx--loading--ie bx--loading--stop--ie';
   } else {
     classToAdd = active ? 'bx--loading' : 'bx--loading bx--loading--stop';

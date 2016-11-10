@@ -31,4 +31,16 @@ describe('DropdownItem', () => {
       expect(link.props().children).toEqual('test');
     });
   });
+
+  describe('Functions are called as expected', () => {
+    const onClick = jest.fn();
+    const wrapper = mount(
+      <DropdownItem onClick={onClick} itemText="test" value="test" />
+    );
+
+    it('onClick is called as expected', () => {
+      wrapper.simulate('click');
+      expect(onClick).toBeCalled();
+    });
+  });
 });

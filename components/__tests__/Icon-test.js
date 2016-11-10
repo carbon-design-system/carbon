@@ -70,6 +70,39 @@ describe('Icon', () => {
 
       expect(content.length).toBeGreaterThan(0);
     });
+
+    it('returns SVG XML when given an icon with valid polygons svgProp', () => {
+      const svgData = {
+        polygons: [{ points: '20,20 60,20 60,60 20,60' }],
+      };
+      const content = getSvgContent(svgData);
+      expect(content.length).toBeGreaterThan(0);
+    });
+
+    it('returns SVG XML when given an icon with valid polylines svgProp', () => {
+      const svgData = {
+        polylines: [{ points: '20,20 60,20 60,60 20,60' }],
+      };
+      const content = getSvgContent(svgData);
+      expect(content.length).toBeGreaterThan(0);
+    });
+
+    it('returns SVG XML when given an icon with valid rects svgProp', () => {
+      const svgData = {
+        rects: { width: 100, height: 100, x: 10, y: 10, rx: 1, ry: 1 },
+      };
+      const content = getSvgContent(svgData);
+      expect(content.length).toBeGreaterThan(0);
+    });
+
+    it('returns empty when given an icon with no valid svgProp', () => {
+      const svgData = {
+        invalidProp: [{ invalidAttribute: 43 }],
+      };
+      const content = getSvgContent(svgData);
+      expect(content.length).toBeGreaterThan(0);
+      expect(content).toEqual(['']);
+    });
   });
 
   describe('JSON file', () => {

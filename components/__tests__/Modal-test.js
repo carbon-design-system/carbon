@@ -113,5 +113,14 @@ describe('Modal', () => {
       div.simulate('click');
       expect(wrapper.state().open).toEqual(false);
     });
+
+    it('should handle keyDown events', () => {
+      const onRequestClose = jest.fn();
+      const wrapper = mount(<Modal onRequestClose={onRequestClose} />);
+      wrapper.simulate('keyDown', { which: 26 });
+      expect(onRequestClose).not.toBeCalled();
+      wrapper.simulate('keyDown', { which: 27 });
+      expect(onRequestClose).toBeCalled();
+    });
   });
 });
