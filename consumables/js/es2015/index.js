@@ -27,6 +27,7 @@ import InlineLeftNav from './inline-left-nav';
 import ProfileSwitcher from './profile-switcher';
 import Pagination from './pagination';
 import SearchWithOptions from './search-with-options';
+import Accordion from './accordion';
 
 const settings = {};
 
@@ -154,6 +155,12 @@ export {
    * @type Pagination
    */
   Pagination,
+
+  /**
+   * Accordion.
+   * @type Accordion
+   */
+  Accordion,
 };
 
 /**
@@ -188,6 +195,7 @@ const init = () => {
     ProfileSwitcher.init();
     Pagination.init();
     SearchWithOptions.init();
+    Accordion.init();
   }
 };
 
