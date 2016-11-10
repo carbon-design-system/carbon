@@ -1,10 +1,9 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import centered from '@kadira/react-storybook-decorator-centered';
 import DetailPageHeader from '../../components/DetailPageHeader';
 import Tabs from '../../components/Tabs';
 import Tab from '../../components/Tab';
-import AppContainer from '../../containers/AppContainer';
+import AppContainer from '../../components/AppContainer';
 
 storiesOf('DetailPageHeader', module)
   .addDecorator((story) => (
