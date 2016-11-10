@@ -88,20 +88,23 @@ export default class NumberInput {
   release() {
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The map associating DOM element and number input UI instance.
+   * @member NumberInput.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
+   * @member NumberInput.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find number input UIs.
+   */
+  static options = {
+    selectorInit: '[data-numberinput]',
+  };
 }
-
-/**
- * The map associating DOM element and number input UI instance.
- * @type {WeakMap}
- */
-NumberInput.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
- * @property {string} selectorInit The CSS selector to find number input UIs.
- */
-NumberInput.options = {
-  selectorInit: '[data-numberinput]',
-};

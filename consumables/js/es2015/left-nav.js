@@ -38,46 +38,6 @@ export default class LeftNav {
 
     this.leftNavSectionActive = false;
 
-    this.options = Object.assign({
-      // Data Attribute selectors
-      selectorLeftNav: '[data-left-nav]',
-      selectorLeftNavList: '[data-left-nav-list]',
-      selectorLeftNavNestedList: '[data-left-nav-nested-list]',
-      selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
-      selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
-      selectorLeftNavListItem: '[data-left-nav-item]',
-      selectorLeftNavListItemLink: '[data-left-nav-item-link]',
-      selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
-      selectorLeftNavArrowIcon: '[data-left-nav-icon]',
-      selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
-      selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
-      selectorLeftNavSections: '[data-left-nav-sections]',
-      selectorLeftNavSection: '[data-left-nav-section]',
-      selectorLeftNavSectionLink: '[data-left-nav-section-link]',
-      selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
-      selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
-      selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
-      selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
-      selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
-      selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
-      selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
-      // CSS Class Selectors
-      classActiveTrigger: 'bx--left-nav__trigger--active',
-      classActiveLeftNav: 'bx--left-nav--active',
-      classActiveLeftNavListItem: 'bx--active-list-item',
-      classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
-      classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
-      classItemHasChildren: 'bx--main-nav__parent-item--has-children',
-      classNavSection: 'bx--left-nav__section',
-      classNavSectionTransition: 'bx--left-nav__section--transition',
-      classNavSectionAnchor: 'bx--left-nav__section--anchor',
-      classNavSectionLink: 'bx--left-nav__section--link',
-      classNavHeaderTitle: 'bx--left-nav__header--title',
-      classItemFade: 'bx--main-nav__parent-item--fade',
-      classItemHidden: 'bx--main-nav__parent-item--hidden',
-      classListHidden: 'bx--left-nav__main-nav--hidden',
-      classListTop: 'bx--left-nav__main-nav--top',
-    }, options);
     this.options = Object.assign(this.constructor.options, options);
 
     this.constructor.components.set(this.element, this);
@@ -513,75 +473,78 @@ export default class LeftNav {
     }
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode LeftNav.create .create()}, or {@linkcode LeftNav.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode LeftNav.init .init()} works.
+   * @member LeftNav.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find left nav containers.
+   * @property {string} [selectorLeftNav] The data attribute selector for the nav element in the left nav container.
+   * @property {string} [selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
+   * @property {string} [selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
+   * @property {string} [selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
+   * @property {string} [selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
+   * @property {string} [selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+   * @property {string} [selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
+   * @property {string} [selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
+   * @property {string} [selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
+   * @property {string} [selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
+   * @property {string} [selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+   * @property {string} [classActiveLeftNav] The class name for when a left nav is active.
+   * @property {string} [classActiveLeftNavListItem] The class name for when a left nav list item is active.
+   * @property {string} [classExpandedLeftNavListItem] The class name for when a nested list is expanded.
+   * @property {string} [classFlyoutDisplayed] The class name for when a flyout menu is displayed.
+   * @property {string} [classActiveSection] The class name for an active section item in the left nav header.
+   * @property {string} [classItemHasChildren] The class name for when a list item has children.
+   */
+  static options = {
+    selectorInit: '[data-left-nav-container]',
+    // Data Attribute selectors
+    selectorLeftNav: '[data-left-nav]',
+    selectorLeftNavList: '[data-left-nav-list]',
+    selectorLeftNavNestedList: '[data-left-nav-nested-list]',
+    selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
+    selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
+    selectorLeftNavListItem: '[data-left-nav-item]',
+    selectorLeftNavListItemLink: '[data-left-nav-item-link]',
+    selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
+    selectorLeftNavArrowIcon: '[data-left-nav-icon]',
+    selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
+    selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+    selectorLeftNavSections: '[data-left-nav-sections]',
+    selectorLeftNavSection: '[data-left-nav-section]',
+    selectorLeftNavSectionLink: '[data-left-nav-section-link]',
+    selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
+    selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+    selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
+    selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
+    selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
+    selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
+    selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
+    // CSS Class Selectors
+    classActiveTrigger: 'bx--left-nav__trigger--active',
+    classActiveLeftNav: 'bx--left-nav--active',
+    classActiveLeftNavListItem: 'bx--active-list-item',
+    classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
+    classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
+    classItemHasChildren: 'bx--main-nav__parent-item--has-children',
+    classNavSection: 'bx--left-nav__section',
+    classNavSectionTransition: 'bx--left-nav__section--transition',
+    classNavSectionAnchor: 'bx--left-nav__section--anchor',
+    classNavSectionLink: 'bx--left-nav__section--link',
+    classNavHeaderTitle: 'bx--left-nav__header--title',
+    classItemFade: 'bx--main-nav__parent-item--fade',
+    classItemHidden: 'bx--main-nav__parent-item--hidden',
+    classListHidden: 'bx--left-nav__main-nav--hidden',
+    classListTop: 'bx--left-nav__main-nav--top',
+  };
+
+  /**
+   * The map associating DOM element and left navigation instance.
+   * @member LeftNav.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
 }
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode LeftNav.create .create()}, or {@linkcode LeftNav.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode LeftNav.init .init()} works.
- * @property {string} selectorInit The CSS selector to find left nav containers.
- * @property {string} [selectorLeftNav] The data attribute selector for the nav element in the left nav container.
- * @property {string} [selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
- * @property {string} [selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
- * @property {string} [selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
- * @property {string} [selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
- * @property {string} [selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
- * @property {string} [selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
- * @property {string} [selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
- * @property {string} [selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
- * @property {string} [selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
- * @property {string} [selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
- * @property {string} [classActiveLeftNav] The class name for when a left nav is active.
- * @property {string} [classActiveLeftNavListItem] The class name for when a left nav list item is active.
- * @property {string} [classExpandedLeftNavListItem] The class name for when a nested list is expanded.
- * @property {string} [classFlyoutDisplayed] The class name for when a flyout menu is displayed.
- * @property {string} [classActiveSection] The class name for an active section item in the left nav header.
- * @property {string} [classItemHasChildren] The class name for when a list item has children.
- */
-LeftNav.options = {
-  selectorInit: '[data-left-nav-container]',
-  // Data Attribute selectors
-  selectorLeftNav: '[data-left-nav]',
-  selectorLeftNavList: '[data-left-nav-list]',
-  selectorLeftNavNestedList: '[data-left-nav-nested-list]',
-  selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
-  selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
-  selectorLeftNavListItem: '[data-left-nav-item]',
-  selectorLeftNavListItemLink: '[data-left-nav-item-link]',
-  selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
-  selectorLeftNavArrowIcon: '[data-left-nav-icon]',
-  selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
-  selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
-  selectorLeftNavSections: '[data-left-nav-sections]',
-  selectorLeftNavSection: '[data-left-nav-section]',
-  selectorLeftNavSectionLink: '[data-left-nav-section-link]',
-  selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
-  selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
-  selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
-  selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
-  selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
-  selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
-  selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
-  // CSS Class Selectors
-  classActiveTrigger: 'bx--left-nav__trigger--active',
-  classActiveLeftNav: 'bx--left-nav--active',
-  classActiveLeftNavListItem: 'bx--active-list-item',
-  classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
-  classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
-  classItemHasChildren: 'bx--main-nav__parent-item--has-children',
-  classNavSection: 'bx--left-nav__section',
-  classNavSectionTransition: 'bx--left-nav__section--transition',
-  classNavSectionAnchor: 'bx--left-nav__section--anchor',
-  classNavSectionLink: 'bx--left-nav__section--link',
-  classNavHeaderTitle: 'bx--left-nav__header--title',
-  classItemFade: 'bx--main-nav__parent-item--fade',
-  classItemHidden: 'bx--main-nav__parent-item--hidden',
-  classListHidden: 'bx--left-nav__main-nav--hidden',
-  classListTop: 'bx--left-nav__main-nav--top',
-};
-
-/**
- * The map associating DOM element and left navigation instance.
- * @type {WeakMap}
- */
-LeftNav.components = new WeakMap();

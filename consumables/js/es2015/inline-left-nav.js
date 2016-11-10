@@ -117,29 +117,32 @@ export default class InlineLeftNav {
   release() {
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The map associating DOM element and spinner instance.
+   * @member InlineLeftNav.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode InlineLeftNav.create .create()}, or {@linkcode InlineLeftNav.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode InlineLeftNav.init .init()} works.
+   * @member InlineLeftNav.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find inline left navs.
+   */
+  static options = {
+    selectorInit: '[data-inline-left-nav]',
+    // Data Attribute selectors
+    selectorLeftNavList: '[data-inline-left-nav-list]',
+    selectorLeftNavNestedList: '[data-inline-left-nav-nested-list]',
+    selectorLeftNavListItem: '[data-inline-left-nav-item]',
+    selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
+    selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
+    // CSS Class Selectors
+    classActiveLeftNavListItem: 'left-nav-list__item--active',
+    classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
+  };
 }
-
-/**
- * The map associating DOM element and spinner instance.
- * @type {WeakMap}
- */
-InlineLeftNav.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode InlineLeftNav.create .create()}, or {@linkcode InlineLeftNav.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode InlineLeftNav.init .init()} works.
- * @property {string} selectorInit The CSS selector to find inline left navs.
- */
-InlineLeftNav.options = {
-  selectorInit: '[data-inline-left-nav]',
-  // Data Attribute selectors
-  selectorLeftNavList: '[data-inline-left-nav-list]',
-  selectorLeftNavNestedList: '[data-inline-left-nav-nested-list]',
-  selectorLeftNavListItem: '[data-inline-left-nav-item]',
-  selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
-  selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
-  // CSS Class Selectors
-  classActiveLeftNavListItem: 'left-nav-list__item--active',
-  classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
-};

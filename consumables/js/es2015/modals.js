@@ -344,42 +344,45 @@ export default class Modal {
   static hook() {
     console.warn('Modals.hook() is deprecated. Use Modals.init() instead.'); // eslint-disable-line no-console
   }
+
+  /**
+   * The map associating DOM element and modal instance.
+   * @member Modal.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
+   * @member Modal.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS class to find modal dialogs.
+   * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
+   * @property {string} [classVisible] The CSS class for the visible state.
+   * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
+   * @property {string} [eventBeforeShown]
+   *   The name of the custom event fired before this modal is shown.
+   *   Cancellation of this event stops showing the modal.
+   * @property {string} [eventAfterShown]
+   *   The name of the custom event telling that modal is sure shown
+   *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
+   * @property {string} [eventBeforeHidden]
+   *   The name of the custom event fired before this modal is hidden.
+   *   Cancellation of this event stops hiding the modal.
+   * @property {string} [eventAfterHidden]
+   *   The name of the custom event telling that modal is sure hidden
+   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
+   */
+  static options = {
+    selectorInit: '[data-modal]',
+    attribInitTarget: 'data-modal-target',
+    classVisible: 'is-visible',
+    classNoScroll: 'bx--noscroll',
+    eventBeforeShown: 'modal-beingshown',
+    eventAfterShown: 'modal-shown',
+    eventBeforeHidden: 'modal-beinghidden',
+    eventAfterHidden: 'modal-hidden',
+  };
 }
-
-/**
- * The map associating DOM element and modal instance.
- * @type {WeakMap}
- */
-Modal.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
- * @property {string} selectorInit The CSS class to find modal dialogs.
- * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
- * @property {string} [classVisible] The CSS class for the visible state.
- * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
- * @property {string} [eventBeforeShown]
- *   The name of the custom event fired before this modal is shown.
- *   Cancellation of this event stops showing the modal.
- * @property {string} [eventAfterShown]
- *   The name of the custom event telling that modal is sure shown
- *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
- * @property {string} [eventBeforeHidden]
- *   The name of the custom event fired before this modal is hidden.
- *   Cancellation of this event stops hiding the modal.
- * @property {string} [eventAfterHidden]
- *   The name of the custom event telling that modal is sure hidden
- *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
- */
-Modal.options = {
-  selectorInit: '[data-modal]',
-  attribInitTarget: 'data-modal-target',
-  classVisible: 'is-visible',
-  classNoScroll: 'bx--noscroll',
-  eventBeforeShown: 'modal-beingshown',
-  eventAfterShown: 'modal-shown',
-  eventBeforeHidden: 'modal-beinghidden',
-  eventAfterHidden: 'modal-hidden',
-};

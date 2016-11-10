@@ -68,21 +68,24 @@ export default class DetailPageHeader {
   release() {
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The map associating DOM element and detail page header instance.
+   * @member DetailPageHeader.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode DetailPageHeader.create .create()}, or {@linkcode DetailPageHeader.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode DetailPageHeader.init .init()} works.
+   * @member DetailPageHeader.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find detail page headers.
+   */
+  static options = {
+    slideUp: 'bx--detail-page-header--with-tabs--animated-slide-up',
+    selectorInit: '[data-detail-page-header]',
+  };
 }
-
-/**
- * The map associating DOM element and detail page header instance.
- * @type {WeakMap}
- */
-DetailPageHeader.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode DetailPageHeader.create .create()}, or {@linkcode DetailPageHeader.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode DetailPageHeader.init .init()} works.
- * @property {string} selectorInit The CSS selector to find detail page headers.
- */
-DetailPageHeader.options = {
-  slideUp: 'bx--detail-page-header--with-tabs--animated-slide-up',
-  selectorInit: '[data-detail-page-header]',
-};

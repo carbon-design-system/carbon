@@ -7,6 +7,7 @@ import eventMatches from '../polyfills/event-matches';
 export default class HeaderNav {
   /**
    * Header with taxonomy menu.
+   * @deprecated
    * @implements Component
    * @param {HTMLElement} element The element working as a taxonomy menu.
    * @param {Object} [options] The component options.
@@ -234,52 +235,55 @@ export default class HeaderNav {
   static hook() {
     console.warn('HeaderNav.hook() is deprecated. Use HeaderNav.init() instead.'); // eslint-disable-line no-console
   }
+
+  /**
+   * The map associating DOM element and taxonomy menu instance.
+   * @member HeaderNav.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode HeaderNav.create .create()}, or {@linkcode HeaderNav.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode HeaderNav.init .init()} works.
+   * @member HeaderNav.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find taxonomy menus.
+   * @property {string} attribInitTarget The attribute name in the lancher buttons to find taxonomy menus.
+   * @property {string} [selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
+   * @property {string} [selectorMenu] The CSS selector to find the container of the menu items.
+   * @property {string} [selectorItem] The CSS selector to find the menu items.
+   * @property {string} [selectorItemLink] The CSS selector to find the link in the menu items.
+   * @property {string} [selectorLabel] The CSS selector to find the label of the menu items.
+   * @property {string} [classActive] The CSS class for the visible state.
+   * @property {string} [eventBeforeShown]
+   *   The name of the custom event fired before this taxonomy menu is shown.
+   *   Cancellation of this event stops showing the taxonomy menu.
+   * @property {string} [eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
+   * @property {string} [eventBeforeHidden]
+   *   The name of the custom event fired before this taxonomy menu is hidden.
+   *   Cancellation of this event stops hiding the taxonomy menu.
+   * @property {string} [eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
+   * @property {string} [eventBeforeSelected]
+   *   The name of the custom event fired before a menu item is selected.
+   *   Cancellation of this event stops the selection.
+   * @property {string} [eventAfterSelected] The name of the custom event fired after a menu item is selected.
+   */
+  static options = {
+    selectorInit: '[data-nav]',
+    attribInitTarget: 'data-nav-target',
+    selectorTriggerLabel: '.current-taxonomy',
+    classActive: 'taxonomy-nav--active',
+    selectorMenu: '.taxonomy-menu',
+    selectorItem: '.taxonomy-item',
+    selectorItemLink: '.taxonomy-item--taxonomy-menu',
+    selectorLabel: '.taxonomy-item__label',
+    eventBeforeShown: 'header-beingshown',
+    eventAfterShown: 'header-shown',
+    eventBeforeHidden: 'header-beinghidden',
+    eventAfterHidden: 'header-hidden',
+    eventBeforeSelected: 'header-beingselected',
+    eventAfterSelected: 'header-selected',
+  };
 }
-
-/**
- * The map associating DOM element and taxonomy menu instance.
- * @type {WeakMap}
- */
-HeaderNav.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode HeaderNav.create .create()}, or {@linkcode HeaderNav.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode HeaderNav.init .init()} works.
- * @property {string} selectorInit The CSS selector to find taxonomy menus.
- * @property {string} attribInitTarget The attribute name in the lancher buttons to find taxonomy menus.
- * @property {string} [selectorTriggerLabel] The CSS selector to find the label for the selected menu item.
- * @property {string} [selectorMenu] The CSS selector to find the container of the menu items.
- * @property {string} [selectorItem] The CSS selector to find the menu items.
- * @property {string} [selectorItemLink] The CSS selector to find the link in the menu items.
- * @property {string} [selectorLabel] The CSS selector to find the label of the menu items.
- * @property {string} [classActive] The CSS class for the visible state.
- * @property {string} [eventBeforeShown]
- *   The name of the custom event fired before this taxonomy menu is shown.
- *   Cancellation of this event stops showing the taxonomy menu.
- * @property {string} [eventAfterShown] The name of the custom event fired after this taxonomy menu is shown.
- * @property {string} [eventBeforeHidden]
- *   The name of the custom event fired before this taxonomy menu is hidden.
- *   Cancellation of this event stops hiding the taxonomy menu.
- * @property {string} [eventAfterHidden] The name of the custom event fired after this taxonomy menu is hidden.
- * @property {string} [eventBeforeSelected]
- *   The name of the custom event fired before a menu item is selected.
- *   Cancellation of this event stops the selection.
- * @property {string} [eventAfterSelected] The name of the custom event fired after a menu item is selected.
- */
-HeaderNav.options = {
-  selectorInit: '[data-nav]',
-  attribInitTarget: 'data-nav-target',
-  selectorTriggerLabel: '.current-taxonomy',
-  classActive: 'taxonomy-nav--active',
-  selectorMenu: '.taxonomy-menu',
-  selectorItem: '.taxonomy-item',
-  selectorItemLink: '.taxonomy-item--taxonomy-menu',
-  selectorLabel: '.taxonomy-item__label',
-  eventBeforeShown: 'header-beingshown',
-  eventAfterShown: 'header-shown',
-  eventBeforeHidden: 'header-beinghidden',
-  eventAfterHidden: 'header-hidden',
-  eventBeforeSelected: 'header-beingselected',
-  eventAfterSelected: 'header-selected',
-};

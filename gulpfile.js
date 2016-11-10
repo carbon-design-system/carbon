@@ -259,12 +259,27 @@ gulp.task('test', (done) => {
 /////////////////////////////
 
 gulp.task('jsdoc', function (cb) {
-  gulp.src(['README.md', 'consumables/js/es2015/**/*.js'], {read: false})
-    .pipe(jsdoc(Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), {
-      opts: {
-        destination: './docs/js'
-      },
-    }), cb));
+  gulp.src('./consumables/js/es2015/**/*.js')
+    .pipe(babel({
+      plugins: ['transform-class-properties'],
+      babelrc: false,
+    }))
+    .pipe(gulp.dest('./docs/js/tmp'))
+    .on('end', () => {
+      gulp.src(['README.md', 'docs/js/tmp/**/*.js'], {read: false})
+        .pipe(jsdoc(Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), {
+          opts: {
+            destination: './docs/js'
+          },
+        }), (err) => {
+          if (err) {
+            cb(err);
+          } else {
+            del('./docs/js/tmp', cb);
+          }
+        }));
+    })
+    .on('error', cb);
 });
 
 //////////////////////////////

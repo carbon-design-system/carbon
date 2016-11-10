@@ -176,39 +176,42 @@ export default class ProfileSwitcher {
     }
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The component options.
+   * @member ProfileSwitcher.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find profile switchers.
+   * @property {string} [selectorProfileSwitcher] The data attribute selector for the profile switcher.
+   * @property {string} [selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
+   * @property {string} [selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
+   * @property {string} [selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
+   * @property {string} [selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
+   * @property {string} [selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
+   * @property {string} [selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
+   */
+  static options = {
+    selectorInit: '[data-profile-switcher]',
+    // Data Attribute selectors
+    selectorProfileSwitcher: '[data-profile-switcher]',
+    selectorToggle: '[data-profile-switcher-toggle]',
+    selectorMenu: '[data-switcher-menu]',
+    selectorAccount: '[data-switcher-account]',
+    selectorRegion: '[data-switcher-region]',
+    selectorOrg: '[data-switcher-org]',
+    selectorSpace: '[data-switcher-space]',
+    selectorDropdown: '[data-dropdown]',
+    selectorAccountDropdown: '[data-dropdown-account]',
+    selectorRegionDropdown: '[data-dropdown-region]',
+    selectorOrgDropdown: '[data-dropdown-org]',
+    selectorSpaceDropdown: '[data-dropdown-space]',
+    classSwitcherOpen: 'bx--account-switcher--open',
+  };
+
+  /**
+   * The map associating DOM element and profile switcher instance.
+   * @member ProfileSwitcher.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
 }
-
-/**
- * The component options.
- * @property {string} selectorInit The CSS selector to find profile switchers.
- * @property {string} [selectorProfileSwitcher] The data attribute selector for the profile switcher.
- * @property {string} [selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
- * @property {string} [selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
- * @property {string} [selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
- * @property {string} [selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
- * @property {string} [selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
- * @property {string} [selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
- */
-ProfileSwitcher.options = {
-  selectorInit: '[data-profile-switcher]',
-  // Data Attribute selectors
-  selectorProfileSwitcher: '[data-profile-switcher]',
-  selectorToggle: '[data-profile-switcher-toggle]',
-  selectorMenu: '[data-switcher-menu]',
-  selectorAccount: '[data-switcher-account]',
-  selectorRegion: '[data-switcher-region]',
-  selectorOrg: '[data-switcher-org]',
-  selectorSpace: '[data-switcher-space]',
-  selectorDropdown: '[data-dropdown]',
-  selectorAccountDropdown: '[data-dropdown-account]',
-  selectorRegionDropdown: '[data-dropdown-region]',
-  selectorOrgDropdown: '[data-dropdown-org]',
-  selectorSpaceDropdown: '[data-dropdown-space]',
-  classSwitcherOpen: 'bx--account-switcher--open',
-};
-
-/**
- * The map associating DOM element and profile switcher instance.
- * @type {WeakMap}
- */
-ProfileSwitcher.components = new WeakMap();

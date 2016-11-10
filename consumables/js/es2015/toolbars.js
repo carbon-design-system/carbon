@@ -68,20 +68,23 @@ export default class Toolbars {
   release() {
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The map associating DOM element and search button instance.
+   * @member Toolbars.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode Toolbars.create .create()}, or {@linkcode Toolbars.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Toolbars.init .init()} works.
+   * @member Toolbars.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find search buttons.
+   */
+  static options = {
+    selectorInit: '[data-list-icons-search-action-target]',
+  };
 }
-
-/**
- * The map associating DOM element and search button instance.
- * @type {WeakMap}
- */
-Toolbars.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode Toolbars.create .create()}, or {@linkcode Toolbars.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode Toolbars.init .init()} works.
- * @property {string} selectorInit The CSS selector to find search buttons.
- */
-Toolbars.options = {
-  selectorInit: '[data-list-icons-search-action-target]',
-};

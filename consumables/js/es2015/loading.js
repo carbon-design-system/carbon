@@ -97,21 +97,24 @@ export default class Loading {
   release() {
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The map associating DOM element and spinner instance.
+   * @member Loading.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode Loading.create .create()}, or {@linkcode Loading.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Loading.init .init()} works.
+   * @member Loading.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find spinners.
+   */
+  static options = {
+    selectorInit: '[data-loading]',
+    active: true,
+  };
 }
-
-/**
- * The map associating DOM element and spinner instance.
- * @type {WeakMap}
- */
-Loading.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode Loading.create .create()}, or {@linkcode Loading.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode Loading.init .init()} works.
- * @property {string} selectorInit The CSS selector to find spinners.
- */
-Loading.options = {
-  selectorInit: '[data-loading]',
-  active: true,
-};

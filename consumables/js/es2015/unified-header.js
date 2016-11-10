@@ -37,22 +37,25 @@ export default class UnifiedHeader {
     }
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The map associating DOM element and left navigation instance.
+   * @member UnifiedHeader.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode UnifiedHeader.create .create()}, or {@linkcode UnifiedHeader.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode UnifiedHeader.init .init()} works.
+   * @member UnifiedHeader.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find unified headers.
+   */
+  static options = {
+    selectorInit: '[data-unified-header]',
+    // Data Attribute selectors
+    // CSS Class Selectors
+  };
 }
-
-/**
- * The map associating DOM element and left navigation instance.
- * @type {WeakMap}
- */
-UnifiedHeader.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode UnifiedHeader.create .create()}, or {@linkcode UnifiedHeader.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode UnifiedHeader.init .init()} works.
- * @property {string} selectorInit The CSS selector to find unified headers.
- */
-UnifiedHeader.options = {
-  selectorInit: '[data-unified-header]',
-  // Data Attribute selectors
-  // CSS Class Selectors
-};

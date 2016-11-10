@@ -79,22 +79,25 @@ export default class Card {
   release() {
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The map associating DOM element and card list instance.
+   * @member Card.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode Card.create .create()}, or {@linkcode Card.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Card.init .init()} works.
+   * @member Card.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find card containers.
+   * @property {string} [selectorCard] The CSS selector to find cards.
+   */
+  static options = {
+    selectorInit: '[data-card-list]',
+    selectorCard: '.bx--card',
+  };
 }
-
-/**
- * The map associating DOM element and card list instance.
- * @type {WeakMap}
- */
-Card.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode Card.create .create()}, or {@linkcode Card.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode Card.init .init()} works.
- * @property {string} selectorInit The CSS selector to find card containers.
- * @property {string} [selectorCard] The CSS selector to find cards.
- */
-Card.options = {
-  selectorInit: '[data-card-list]',
-  selectorCard: '.bx--card',
-};

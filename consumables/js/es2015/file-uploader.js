@@ -77,21 +77,24 @@ export default class FileUploader {
   release() {
     this.constructor.components.delete(this.element);
   }
+
+  /**
+   * The map associating DOM element and file uploader instance.
+   * @member FileUploader.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode FileUploader.init .init()} works.
+   * @member FileUploader.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find file uploaders.
+   * @property {string} [labelSelector] The CSS selector to find the label for the file name.
+   */
+  static options = {
+    selectorInit: '[data-file-uploader]',
+  };
 }
-
-/**
- * The map associating DOM element and file uploader instance.
- * @type {WeakMap}
- */
-FileUploader.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode FileUploader.init .init()} works.
- * @property {string} selectorInit The CSS selector to find file uploaders.
- * @property {string} [labelSelector] The CSS selector to find the label for the file name.
- */
-FileUploader.options = {
-  selectorInit: '[data-file-uploader]',
-};

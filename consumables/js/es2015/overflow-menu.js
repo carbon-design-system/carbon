@@ -75,10 +75,10 @@ export default class OverflowMenu {
     }
     this.constructor.components.delete(this.element);
   }
+
+  static components = new WeakMap();
+
+  static options = {
+    selectorInit: '[data-overflow-menu]',
+  };
 }
-
-OverflowMenu.components = new WeakMap();
-
-OverflowMenu.options = {
-  selectorInit: '[data-overflow-menu]',
-};

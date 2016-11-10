@@ -162,32 +162,35 @@ export default class Dropdown {
       }
     }, !hasFocusin);
   }
+
+  /**
+   * The map associating DOM element and selector instance.
+   * @member Dropdown.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode Dropdown.create .create()}, or {@linkcode Dropdown.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Dropdown.init .init()} works.
+   * @member Dropdown.options
+   * @type {Object}
+   * @property {string} selectorInit The CSS selector to find selectors.
+   * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
+   * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+   * @property {string} [classSelected] The CSS class for the selected dropdown item.
+   * @property {string} [eventBeforeSelected]
+   *   The name of the custom event fired before a drop down item is selected.
+   *   Cancellation of this event stops selection of drop down item.
+   * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+   */
+  static options = {
+    selectorInit: '[data-dropdown]',
+    selectorItem: '[data-option] > .bx--dropdown__link',
+    selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
+    classSelected: 'bx--dropdown--selected',
+    eventBeforeSelected: 'dropdown-beingselected',
+    eventAfterSelected: 'dropdown-selected',
+  };
 }
-
-/**
- * The map associating DOM element and selector instance.
- * @type {WeakMap}
- */
-Dropdown.components = new WeakMap();
-
-/**
- * The component options.
- * If `options` is specified in the constructor, {@linkcode Dropdown.create .create()}, or {@linkcode Dropdown.init .init()},
- * properties in this object are overriden for the instance being create and how {@linkcode Dropdown.init .init()} works.
- * @property {string} selectorInit The CSS selector to find selectors.
- * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
- * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
- * @property {string} [classSelected] The CSS class for the selected dropdown item.
- * @property {string} [eventBeforeSelected]
- *   The name of the custom event fired before a drop down item is selected.
- *   Cancellation of this event stops selection of drop down item.
- * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
- */
-Dropdown.options = {
-  selectorInit: '[data-dropdown]',
-  selectorItem: '[data-option] > .bx--dropdown__link',
-  selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
-  classSelected: 'bx--dropdown--selected',
-  eventBeforeSelected: 'dropdown-beingselected',
-  eventAfterSelected: 'dropdown-selected',
-};
