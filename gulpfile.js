@@ -67,6 +67,7 @@ gulp.task('clean', () => {
 function buildScripts(options) {
   options = options || {};
   options.target = (options.target || './consumables/js/es5/bluemix-components.js')
+    .replace(/\.js$/, options.excludePolyfills ? '-without-polyfills.js' : '.js')
     .replace(/\.js$/, options.prod ? '.min.js' : '.js');
   return new Promise((resolve, reject) => {
     webpack({
@@ -88,6 +89,14 @@ function buildScripts(options) {
           },
         ],
       },
+      externals: options.excludePolyfills ? {
+        '../polyfills/array-from': 'Array.from',
+        '../polyfills/custom-event': 'CustomEvent',
+        './element-matches': 'Element.matches',
+        '../polyfills/element-matches': 'Element.matches',
+        '../polyfills/math-sign': 'Math.sign',
+        '../polyfills/object-assign': 'Object.assign',
+      } : {},
       plugins: options.prod ? [new webpack.optimize.UglifyJsPlugin()] : [],
     }, (err, stats) => {
       if (err) {
@@ -107,6 +116,8 @@ gulp.task('scripts:consumables', () => {
   return Promise.all([
     buildScripts(), // Expanded ES5
     buildScripts({ prod: true }), // Minified ES5
+    buildScripts({ excludePolyfills: true }), // Expanded ES5
+    buildScripts({ excludePolyfills: true, prod: true }), // Minified ES5
   ]);
 });
 
@@ -133,6 +144,7 @@ gulp.task('scripts:umd', () => {
 gulp.task('scripts:dev', () => {
   return Promise.all([
     buildScripts({
+      excludePolyfills: cloptions['exclude-polyfills'], // For testing "polyfills excluded" version
       target: './demo/demo.js',
       entry: './demo/index.js',
     }),
