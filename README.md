@@ -68,7 +68,15 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 
 4. Write stories for your components in `/.storybook`.
 
-
 ## Contributing
 
 Please check out our [Contribution Guidelines](CONTRIBUTING.md) for detailed information on how you can lend a hand.
+
+## Examples
+
+Here is a list of projects found that use `bluemix-components-react`:
+
+- [MLASS Bluemix Dashboard](https://github.ibm.com/NGP-TWC/mlaas-dashboard)
+- [Panorama](https://github.ibm.com/itsmui/panoconsole)
+- [Bluemix UnifiedSupport](https://github.ibm.com/gordonj/Bluemix.UnifiedSupport)
+- [OMaaS UI](https://github.ibm.com/OMaaS/event-analytics-ui)
