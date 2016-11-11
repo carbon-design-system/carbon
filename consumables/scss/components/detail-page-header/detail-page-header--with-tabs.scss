@@ -72,7 +72,6 @@
     @include font-size('14');
     display: none;
     text-align: left;
-    text-transform: capitalize;
 
     @include breakpoint(bp--xs--major) {
       display: inline-block;

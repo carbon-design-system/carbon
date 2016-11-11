@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   width: 12.5rem;
-  height: 14.375rem;
+  height: auto;
   background-color: $color__card-bg;
   border: 1px solid $color__card-border;
   box-shadow: 0px 4px 4px 0px $color__card-box-shadow;
@@ -49,7 +49,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 3rem;
+    height: rem(53px);
     background-color: $color__card-border;
     border-top: 1px solid $color__card-border--light;
 
@@ -232,7 +232,7 @@
 
 .bx--card-footer__docs-link {
   @include font-size('12');
-  padding-right: 1.25rem;
+  padding: 0 .625rem;
   color: $color__blue-30;
 }
 

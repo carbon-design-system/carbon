@@ -9,7 +9,8 @@
   &__bottom {
     @include font-size('16');
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
 
     // Tooltip - renders as a combo of :before and :after elements
     &:before,
@@ -65,6 +66,13 @@
         display: block;
       }
     }
+  }
+  
+  &__icon {
+    height: 1rem;
+    width: 1rem;
+    margin-left: .5rem;
+    fill: $color__blue-30;
   }
 
   // Tooltip caret - top position

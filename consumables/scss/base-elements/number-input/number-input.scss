@@ -13,7 +13,6 @@
   .bx--number {
     // Styles to prevent selecting label / number when user double clicks the number arrows
     user-select: none;
-    -khtml-user-select: none;
 
     &__input {
       // Firefox: Hide default number spinner (prefixed by autoprefixer);
@@ -39,9 +38,10 @@
       display: block;
       width: 100%;
       min-width: 9.375rem;
-      padding : .825rem 1.6rem .825rem 1rem;
+      padding : 0 2rem 0 1rem;
       font-weight: 300;
       margin: .25rem 0;
+      height: rem(40px);
       color: $color__white;
       background-color: $color__inputs--bg;
       border: none;
@@ -75,7 +75,7 @@
       fill: $color--blue-40;
       cursor: pointer;
       display: flex;
-      padding: 0 .5rem;
+      padding: 0 1rem 0 .5rem;
 
       &:hover {
         fill: $color__blue-30;
@@ -83,14 +83,14 @@
 
       &--up {
         @extend .bx--number__arrow;
-        bottom: 1.3rem;
+        bottom: 1.5rem;
         padding-top: .5rem;
         align-items: flex-start;
       }
 
       &--down {
         @extend .bx--number__arrow;
-        bottom: .25rem;
+        bottom: .5rem;
         padding-bottom: .5rem;
         align-items: flex-end;
       }

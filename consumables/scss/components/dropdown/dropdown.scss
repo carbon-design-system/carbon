@@ -50,6 +50,7 @@
       height: 1.5rem;
       pointer-events: none;
       transition: transform $transition--base ease-in-out;
+      transform-origin: 50% 45%;
 
       .bx--dropdown--open & {
         transform: rotate(180deg);
