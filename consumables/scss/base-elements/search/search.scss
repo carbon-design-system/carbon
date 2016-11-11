@@ -27,7 +27,7 @@
       @include helvetica;
       font-weight: 700;
       width: 100%;
-      padding: 1rem 1rem 1rem 2.5rem;
+      padding: 1rem 1rem 1rem 2.875rem;
       color: $color__white;
       background-color: $color__inputs--bg;
       border: none;
@@ -63,10 +63,10 @@
     &__icon {
       &--magnifier {
         @include icon--search;
-        width: 1.2rem;
-        height: 1.2rem;
-        left: .75rem;
-        top: .85rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        left: 1rem;
+        top: 1rem;
 
         @include breakpoint(500px) {
           width: 1.4rem;
@@ -182,15 +182,16 @@
     }
 
     .bx--search__icon--magnifier {
-      width: 1rem;
-      height: 1rem;
-      top: 1rem;
+      width: 1.25rem;
+      height: 1.25rem;
+      top: .75rem;
     }
 
     .bx--search__toggle-layout,
     .bx--search__sort {
       width: rem(44px);
       height: rem(44px);
+      min-width: rem(44px);
       position: relative;
       padding: 0;
       background-color: $color__navy-gray-4;
@@ -247,14 +248,15 @@
 
     .bx--search__input {
       @include font-size('14');
-      padding: rem(14px) 1rem rem(14px) 2.5rem;
+      height: rem(40px);
+      padding: rem(14px) 1rem rem(14px) 2.25rem;
     }
 
     .bx--search__icon--magnifier {
       width: 1rem;
       height: 1rem;
       left: .75rem;
-      top: .85rem;
+      top: .875rem;
 
       @include breakpoint(500px) {
         width: 1rem;
