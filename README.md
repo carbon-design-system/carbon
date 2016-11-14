@@ -11,7 +11,7 @@ This repository provides a collection of [Bluemix Components](https://github.ibm
 
 ### List of Available Components
 
-View available React Components [here](https://pages.github.ibm.com/Bluemix/bluemix-components-react/). Usage information is available when you click the blue **?** icon in the top right corner of the selected component.
+View available React Components [here](https://pages.github.ibm.com/Bluemix/bluemix-components-react/storybook). Usage information is available when you click the blue **?** icon in the top right corner of the selected component.
 
 ### Getting Started
 

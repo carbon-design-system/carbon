@@ -33,7 +33,7 @@ if (process.env.TRAVIS) {
 
 ghpages.publish(pagesFolder, options, (err) => {
   if (err) {
-    throw err;
+    console.log(err);
   } else {
     console.log('Published to GitHub Pages');
   }

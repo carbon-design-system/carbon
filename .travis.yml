@@ -9,7 +9,6 @@ cache:
 script:
   - npm run lint
   - npm run coverage
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then npm run docs; fi
 deploy:
   skip_cleanup: true
   provider: script
