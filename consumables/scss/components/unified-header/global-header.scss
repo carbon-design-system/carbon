@@ -76,7 +76,7 @@
       line-height: inherit;
       color: $color__blue-30;
 
-      .bx--unified-header--applications & {
+      .bx--unified-header--apps & {
         @include light-ui {
           color: $color__teal-40;
         }

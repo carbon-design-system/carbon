@@ -61,7 +61,7 @@
     width: 100%;
     padding: 1.125rem rem(20px);
 
-    &[data-left-nav-current-section='applications'] {
+    &[data-left-nav-current-section='apps'] {
       background-color: $color__teal-50;
     }
 
@@ -154,7 +154,7 @@
       padding: 1.125rem 0;
     }
 
-    .bx--global-light-ui &[data-left-nav-section='applications'] {
+    .bx--global-light-ui &[data-left-nav-section='apps'] {
       background-color: $color__teal-50;
     }
 
@@ -229,7 +229,7 @@
     background-color: $color__blue-30;
 
     @include light-ui {
-      &[data-left-nav-section="applications"] {
+      &[data-left-nav-section="apps"] {
         background-color: $color__teal-50;
       }
 
@@ -352,7 +352,7 @@
   &:hover {
     color: $color__blue-30;
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
       color: $color__teal-50;
 
       .bx--parent-item__link--taxonomy-icon,
@@ -395,7 +395,7 @@
       fill: $color__blue-90;
     }
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
       background-color: $color__teal-50;
 
       &:hover {
@@ -500,7 +500,7 @@
       }
 
       &:hover {
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
           color: $color__teal-50;
 
           .bx--left-nav-list__item-link--taxonomy-icon {
@@ -541,7 +541,7 @@
       .bx--nested-list__item--link {
         color: $color__white;
 
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
           background-color: $color__teal-50;
 
           &:hover {
@@ -641,7 +641,7 @@
       }
 
       &:hover {
-        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & .bx--flyout-menu__item--link {
+        .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="apps"] & .bx--flyout-menu__item--link {
           color: $color__teal-50;
         }
 
@@ -658,7 +658,7 @@
 
   .bx--flyout-menu__item.bx--active-list-item {
 
-    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="applications"] & {
+    .bx--global-light-ui .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
       background-color: $color__teal-50;
 
       & .bx--flyout-menu__item--link {

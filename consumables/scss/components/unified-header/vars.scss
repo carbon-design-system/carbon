@@ -13,7 +13,7 @@ $height--global-nav: rem(50px);
   &:hover {
     color: $color__blue-30;
 
-    .bx--global-light-ui.bx--left-nav__main-nav[data-left-nav-list="Applications"] & {
+    .bx--global-light-ui.bx--left-nav__main-nav[data-left-nav-list="apps"] & {
       color: $color__teal-50;
 
       .bx--left-nav-list__item-link--taxonomy-icon {
