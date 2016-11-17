@@ -1,6 +1,6 @@
 import '../../consumables/js/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import FileUploader from '../../consumables/js/es2015/file-uploader';
+import FileUploader from '../../consumables/js/es2015/file-uploader.js';
 
 describe('Test file uploader', function () {
   describe('Constructor', function () {
@@ -16,7 +16,15 @@ describe('Test file uploader', function () {
       }).to.throw(Error);
     });
 
-    it(`Should search for an element with options.labelSelector`, function () {
+    it(`Should set default options`, function () {
+      const fileUploader = new FileUploader(document.createElement('div'));
+      expect(fileUploader.options).to.deep.equal({
+        selectorInit: '[data-file-uploader]',
+        selectorLabel: '[data-file-appearance]',
+      });
+    });
+
+    it(`Should search for an element with options.selectorInit`, function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
 
       const parentElement = document.createElement('div');
@@ -28,7 +36,7 @@ describe('Test file uploader', function () {
       parentElement.appendChild(element);
       parentElement.appendChild(labelNode);
 
-      const uploader = new FileUploader(element, { labelSelector: `#${id}` });
+      const uploader = new FileUploader(element, { selectorInit: `#${id}` });
       expect(uploader.labelNode).to.equal(labelNode);
     });
 

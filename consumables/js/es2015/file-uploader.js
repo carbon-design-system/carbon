@@ -1,4 +1,6 @@
 import '../polyfills/element-matches';
+import '../polyfills/object-assign';
+import '../polyfills/array-from';
 
 export default class FileUploader {
   /**
@@ -14,10 +16,10 @@ export default class FileUploader {
     }
 
     this.element = element;
+
     this.options = Object.assign(Object.create(this.constructor.options), options);
 
-    const labelSelector = this.options.labelSelector || element.dataset.label;
-    this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
+    this.labelNode = this.element.nextElementSibling || this.element.ownerDocument.querySelector(`.bx--file__label${this.options.selectorLabel}`);
 
     this.constructor.components.set(this.element, this);
 
@@ -28,7 +30,6 @@ export default class FileUploader {
    * Instantiates file uploader of the given element.
    * @param {HTMLElement} element The element working as a file uploader.
    * @param {Object} [options] The component options.
-   * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
    */
   static create(element, options) {
     return this.components.get(element) || new this(element, options);
@@ -41,7 +42,6 @@ export default class FileUploader {
    * @param {HTMLElement} element The element working as a file uploader.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorInit] The CSS selector to find file uploaders.
-   * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
    */
   static init(target = document, options = {}) {
     const effectiveOptions = Object.assign(Object.create(this.options), options);
@@ -92,9 +92,9 @@ export default class FileUploader {
    * @member FileUploader.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find file uploaders.
-   * @property {string} [labelSelector] The CSS selector to find the label for the file name.
    */
   static options = {
     selectorInit: '[data-file-uploader]',
+    selectorLabel: '[data-file-appearance]',
   };
 }
