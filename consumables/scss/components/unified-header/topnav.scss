@@ -186,6 +186,102 @@
     justify-content: flex-end;
 
     &__item {
+      &[data-trial],
+      &[data-credit] {
+        .bx--dropdown {
+          &__menu-text {
+            padding: .75rem 2rem .75rem 1rem;
+            color: $color__white;
+            fill: $color__white;
+          }
+
+          &__list {
+            left: initial;
+            outline: 0;
+            right: 0;
+            min-width: rem(325px);
+            transform: translateY(-10%);
+          }
+
+          &__arrow {
+            top: .5rem;
+          }
+
+          &--open {
+            .bx--dropdown__list {
+              transform: translateY(0);
+            }
+
+            .bx--dropdown__menu-text {
+              color: $color__blue-30;
+            }
+          }
+
+          &:focus,
+          &:hover {
+            outline: 0;
+            background-color: $color__navy-gray-3;
+
+            .bx--dropdown__menu-text {
+              color: $color__blue-30;
+            }
+
+            .bx--dropdown__arrow use {
+              fill: $color__blue-30;
+            }
+          }
+
+          &__trial-content,
+          &__credit-content {
+            cursor: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+
+            &:focus,
+            &:hover {
+              outline: 0;
+            }
+
+            &--desc {
+              margin-bottom: 1rem;
+            }
+
+            .bx--link {
+              @include font-size('11');
+              margin-top: 1rem;
+              text-align: center;
+            }
+          }
+
+          &__trial-content {
+            &--desc {
+              @include font-size('12');
+            }
+          }
+
+          &__credit-content {
+            div {
+              .bx--dropdown__credit-content--heading {
+                @include font-smoothing;
+                @include font-size('12');
+                font-weight: 600;
+              }
+
+              .bx--dropdown__credit-content--desc {
+                @include font-size('14');
+              }
+
+              &:last-child {
+                .bx--dropdown__credit-content--desc {
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+
       &:last-child .bx--dropdown {
         &__arrow {
           transform-origin: 50% 40%;
@@ -248,6 +344,11 @@
           outline: 0;
         }
       }
+    }
+
+    &__item[data-credit] .bx--dropdown__list {
+      min-width: 0;
+      width: 100%;
     }
 
     .bx--dropdown__profile-dropdown {
