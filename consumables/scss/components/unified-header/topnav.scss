@@ -291,8 +291,6 @@
   }
 }
 
-
-// HERE
 .bx--account-switcher {
   position: relative;
   height: 100%;
@@ -300,6 +298,14 @@
   align-items: center;
   justify-content: flex-end;
   min-width: rem(350px);
+
+  &__linked-icon {
+    fill: $color__white;
+    height: 1rem;
+    width: 1rem;
+    margin: 0 .5rem;
+    transform: rotate(45deg);
+  }
 
   &__toggle {
     z-index: 9000;
@@ -326,6 +332,10 @@
       .bx--account-switcher__toggle--text {
         color: $color__blue-30;
       }
+
+      svg use {
+        fill: $color__blue-30;
+      }
     }
 
     &--text {
@@ -337,9 +347,24 @@
       padding-right: .5rem;
       font-weight: 300;
 
-      &:first-child {
+      &[data-switcher-account-sl],
+      &[data-switcher-account] {
         @include font-smoothing;
-        font-weight: 700;
+        font-weight: 600;
+      }
+
+      &[data-switcher-account-sl] {
+        display: inline-flex;
+        align-items: center;
+
+        .bx--account-switcher__linked-icon {
+          margin-right: 0;
+        }
+      }
+
+      & > [data-dropdown-account-linked] {
+        margin-left: .5rem;
+        margin-right: 0;
       }
 
       &:last-child {
@@ -374,6 +399,10 @@
     .bx--account-switcher__toggle {
       color: $color__blue-30;
       background-color: $color__navy-gray-3;
+    }
+
+    .bx--account-switcher__linked-icon {
+      fill: $color__blue-30;
     }
 
     .bx--account-switcher__menu__container {
@@ -484,6 +513,11 @@
       padding-right: 2rem;
       align-self: flex-start;
       background-color: $color__navy-gray-5;
+
+      .bx--account-switcher__linked-icon {
+        fill: $color__white;
+        vertical-align: middle;
+      }
     }
 
     &__list {
@@ -501,6 +535,10 @@
         .bx--dropdown__link:focus {
           background-color: $color__blue-30;
           color: $color__blue-90;
+
+          svg {
+            fill: $color__blue-90;
+          }
         }
       }
     }
@@ -509,6 +547,16 @@
       height: 100%;
       text-overflow: ellipsis;
       overflow: hidden;
+
+      span {
+        pointer-events: none;
+      }
+
+      svg {
+        fill: $color__white;
+        pointer-events: none;
+        vertical-align: middle;
+      }
     }
 
     &--open {

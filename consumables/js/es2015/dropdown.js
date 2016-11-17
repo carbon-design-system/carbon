@@ -131,7 +131,7 @@ export default class Dropdown {
 
       if (this.element.dispatchEvent(eventStart)) {
         if (this.element.dataset.dropdownType !== 'navigation') {
-          this.element.firstElementChild.textContent = activatedElement.textContent;
+          this.element.firstElementChild.innerHTML = activatedElement.innerHTML;
           activatedElement.classList.add(this.options.classSelected);
         }
         this.element.dataset.value = activatedElement.parentElement.dataset.value;

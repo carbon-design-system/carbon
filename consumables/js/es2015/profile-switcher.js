@@ -29,11 +29,29 @@ export default class ProfileSwitcher {
     this.constructor.components.set(this.element, this);
 
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
+
+    let linkedAccount;
+    let isLinked;
+    let linkedIcon;
+    this.element.addEventListener('dropdown-beingselected', (event) => {
+      if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
+        if (event.detail.item.querySelector(this.options.classLinkedIcon) !== null) {
+          this.element.linkedAccount = event.detail.item.childNodes[1].cloneNode(true);
+          this.element.isLinked = true;
+          this.element.linkedIcon = event.detail.item.querySelector(this.options.classLinkedIcon).cloneNode(true);
+        } else {
+          this.element.linkedAccount = '';
+          this.element.isLinked = false;
+          this.element.linkedIcon = '';
+        }
+      }
+    });
+
     this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', (event) => this.toggle(event));
 
-    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', () => this.determineSwitcherValues(true));
+    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', () => this.determineSwitcherValues(linkedAccount, linkedIcon, isLinked, true));
 
-    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', () => this.determineSwitcherValues(false));
+    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', () => this.determineSwitcherValues(linkedAccount, linkedIcon, isLinked, false));
 
     this.element.ownerDocument.addEventListener('keyup', () => this.handleBlur());
   }
@@ -120,7 +138,8 @@ export default class ProfileSwitcher {
    * profile switcher
    * @param {boolean} isHovered boolean value passed by the event listener on bx--toggle.
    */
-  determineSwitcherValues(isHovered) {
+  determineSwitcherValues(linkedAccount, linkedIcon, isLinked, isHovered) {
+    const linkedElement = this.element.querySelector(this.options.selectorLinkedAccount);
     const nameElement = this.element.querySelector(this.options.selectorAccount);
     const regionElement = this.element.querySelector(this.options.selectorRegion);
     const orgElement = this.element.querySelector(this.options.selectorOrg);
@@ -128,10 +147,36 @@ export default class ProfileSwitcher {
     const menuElement = this.element.querySelector(this.options.selectorMenu);
     const isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 
-    const nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
-    const regionDropdownValue = this.element.querySelector(this.options.selectorRegionDropdown).textContent;
-    const orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
-    const spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+    if (this.element.isLinked) {
+      linkedElement.appendChild(this.element.linkedAccount);
+      linkedElement.appendChild(this.element.linkedIcon);
+    } else {
+      linkedElement.textContent = '';
+    }
+
+    let nameDropdownValue = '';
+    if (this.element.querySelector(this.options.selectorAccountDropdown)) {
+      if (this.element.isLinked) {
+        nameDropdownValue = this.element.querySelector(this.options.selectorAccountLinked).textContent;
+      } else {
+        nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
+      }
+    }
+
+    let regionDropdownValue = '';
+    if (this.element.querySelector(this.options.selectorRegionDropdown)) {
+      regionDropdownValue = this.element.querySelector(this.options.selectorRegionDropdown).textContent;
+    }
+
+    let orgDropdownValue = '';
+    if (this.element.querySelector(this.options.selectorOrgDropdown)) {
+      orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
+    }
+
+    let spaceDropdownValue = '';
+    if (this.element.querySelector(this.options.selectorSpaceDropdown)) {
+      spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+    }
 
     let nameShort;
     let orgShort;
@@ -196,16 +241,20 @@ export default class ProfileSwitcher {
     selectorProfileSwitcher: '[data-profile-switcher]',
     selectorToggle: '[data-profile-switcher-toggle]',
     selectorMenu: '[data-switcher-menu]',
+    selectorLinkedAccount: '[data-switcher-account-sl]',
     selectorAccount: '[data-switcher-account]',
     selectorRegion: '[data-switcher-region]',
     selectorOrg: '[data-switcher-org]',
     selectorSpace: '[data-switcher-space]',
     selectorDropdown: '[data-dropdown]',
     selectorAccountDropdown: '[data-dropdown-account]',
+    selectorAccountSlDropdown: '[data-dropdown-account-sl]',
+    selectorAccountLinked: '[data-dropdown-account-linked]',
     selectorRegionDropdown: '[data-dropdown-region]',
     selectorOrgDropdown: '[data-dropdown-org]',
     selectorSpaceDropdown: '[data-dropdown-space]',
     classSwitcherOpen: 'bx--account-switcher--open',
+    classLinkedIcon: '.bx--account-switcher__linked-icon',
   };
 
   /**
