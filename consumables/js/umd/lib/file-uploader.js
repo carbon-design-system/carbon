@@ -1,13 +1,13 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/element-matches'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/array-from'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/element-matches'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/array-from'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.elementMatches);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.elementMatches, global.objectAssign, global.arrayFrom);
     global.fileUploader = mod.exports;
   }
 })(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2) {
@@ -54,10 +54,10 @@
       }
 
       this.element = element;
+
       this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
 
-      var labelSelector = this.options.labelSelector || element.dataset.label;
-      this.labelNode = element.parentNode.querySelector(labelSelector) || element.nextElementSibling;
+      this.labelNode = this.element.nextElementSibling || this.element.ownerDocument.querySelector('.bx--file__label' + this.options.selectorLabel);
 
       this.constructor.components.set(this.element, this);
 
@@ -70,7 +70,6 @@
      * Instantiates file uploader of the given element.
      * @param {HTMLElement} element The element working as a file uploader.
      * @param {Object} [options] The component options.
-     * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
      */
 
 
@@ -124,23 +123,10 @@
     return FileUploader;
   }();
 
-  exports.default = FileUploader;
-
-
-  /**
-   * The map associating DOM element and file uploader instance.
-   * @type {WeakMap}
-   */
   FileUploader.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode FileUploader.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find file uploaders.
-   * @property {string} [labelSelector] The CSS selector to find the label for the file name.
-   */
   FileUploader.options = {
-    selectorInit: '[data-file-uploader]'
+    selectorInit: '[data-file-uploader]',
+    selectorLabel: '[data-file-appearance]'
   };
+  exports.default = FileUploader;
 });

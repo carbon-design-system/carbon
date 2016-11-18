@@ -70,16 +70,34 @@
       this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (evt) {
         return _this.handleDocumentClick(evt);
       });
+
+      var linkedAccount = void 0;
+      var isLinked = void 0;
+      var linkedIcon = void 0;
+      this.element.addEventListener('dropdown-beingselected', function (event) {
+        if (event.target.querySelector(_this.options.selectorAccountDropdown) !== null) {
+          if (event.detail.item.querySelector(_this.options.classLinkedIcon) !== null) {
+            _this.element.linkedAccount = event.detail.item.childNodes[1].cloneNode(true);
+            _this.element.isLinked = true;
+            _this.element.linkedIcon = event.detail.item.querySelector(_this.options.classLinkedIcon).cloneNode(true);
+          } else {
+            _this.element.linkedAccount = '';
+            _this.element.isLinked = false;
+            _this.element.linkedIcon = '';
+          }
+        }
+      });
+
       this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', function (event) {
         return _this.toggle(event);
       });
 
       this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', function () {
-        return _this.determineSwitcherValues(true);
+        return _this.determineSwitcherValues(linkedAccount, linkedIcon, isLinked, true);
       });
 
       this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', function () {
-        return _this.determineSwitcherValues(false);
+        return _this.determineSwitcherValues(linkedAccount, linkedIcon, isLinked, false);
       });
 
       this.element.ownerDocument.addEventListener('keyup', function () {
@@ -135,7 +153,8 @@
       }
     }, {
       key: 'determineSwitcherValues',
-      value: function determineSwitcherValues(isHovered) {
+      value: function determineSwitcherValues(linkedAccount, linkedIcon, isLinked, isHovered) {
+        var linkedElement = this.element.querySelector(this.options.selectorLinkedAccount);
         var nameElement = this.element.querySelector(this.options.selectorAccount);
         var regionElement = this.element.querySelector(this.options.selectorRegion);
         var orgElement = this.element.querySelector(this.options.selectorOrg);
@@ -143,10 +162,36 @@
         var menuElement = this.element.querySelector(this.options.selectorMenu);
         var isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 
-        var nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
-        var regionDropdownValue = this.element.querySelector(this.options.selectorRegionDropdown).textContent;
-        var orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
-        var spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+        if (this.element.isLinked) {
+          linkedElement.appendChild(this.element.linkedAccount);
+          linkedElement.appendChild(this.element.linkedIcon);
+        } else {
+          linkedElement.textContent = '';
+        }
+
+        var nameDropdownValue = '';
+        if (this.element.querySelector(this.options.selectorAccountDropdown)) {
+          if (this.element.isLinked) {
+            nameDropdownValue = this.element.querySelector(this.options.selectorAccountLinked).textContent;
+          } else {
+            nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
+          }
+        }
+
+        var regionDropdownValue = '';
+        if (this.element.querySelector(this.options.selectorRegionDropdown)) {
+          regionDropdownValue = this.element.querySelector(this.options.selectorRegionDropdown).textContent;
+        }
+
+        var orgDropdownValue = '';
+        if (this.element.querySelector(this.options.selectorOrgDropdown)) {
+          orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
+        }
+
+        var spaceDropdownValue = '';
+        if (this.element.querySelector(this.options.selectorSpaceDropdown)) {
+          spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+        }
 
         var nameShort = void 0;
         var orgShort = void 0;
@@ -221,41 +266,27 @@
     return ProfileSwitcher;
   }();
 
-  exports.default = ProfileSwitcher;
-
-
-  /**
-   * The component options.
-   * @property {string} selectorInit The CSS selector to find profile switchers.
-   * @property {string} [selectorProfileSwitcher] The data attribute selector for the profile switcher.
-   * @property {string} [selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
-   * @property {string} [selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
-   * @property {string} [selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
-   * @property {string} [selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
-   * @property {string} [selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
-   * @property {string} [selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
-   */
   ProfileSwitcher.options = {
     selectorInit: '[data-profile-switcher]',
     // Data Attribute selectors
     selectorProfileSwitcher: '[data-profile-switcher]',
     selectorToggle: '[data-profile-switcher-toggle]',
     selectorMenu: '[data-switcher-menu]',
+    selectorLinkedAccount: '[data-switcher-account-sl]',
     selectorAccount: '[data-switcher-account]',
     selectorRegion: '[data-switcher-region]',
     selectorOrg: '[data-switcher-org]',
     selectorSpace: '[data-switcher-space]',
     selectorDropdown: '[data-dropdown]',
     selectorAccountDropdown: '[data-dropdown-account]',
+    selectorAccountSlDropdown: '[data-dropdown-account-sl]',
+    selectorAccountLinked: '[data-dropdown-account-linked]',
     selectorRegionDropdown: '[data-dropdown-region]',
     selectorOrgDropdown: '[data-dropdown-org]',
     selectorSpaceDropdown: '[data-dropdown-space]',
-    classSwitcherOpen: 'bx--account-switcher--open'
+    classSwitcherOpen: 'bx--account-switcher--open',
+    classLinkedIcon: '.bx--account-switcher__linked-icon'
   };
-
-  /**
-   * The map associating DOM element and profile switcher instance.
-   * @type {WeakMap}
-   */
   ProfileSwitcher.components = new _weakMap2.default();
+  exports.default = ProfileSwitcher;
 });

@@ -425,49 +425,19 @@ var BluemixComponents =
 /* 3 */
 /***/ function(module, exports) {
 
-	'use strict';
-	
-	var matchesFuncName = ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(function (name) {
-	  return typeof Element.prototype[name] === 'function';
-	})[0];
-	
-	if (matchesFuncName !== 'matches') {
-	  Element.prototype.matches = Element.prototype[matchesFuncName];
-	}
+	module.exports = Element.matches;
 
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
 
-	'use strict';
-	
-	Object.assign = Object.assign || function assignObject(inDst) {
-	  if (inDst == null) {
-	    // eslint-disable-line eqeqeq
-	    // Throw if the given destination is null or undefined
-	    throw new TypeError('Can\'t convert to object: ${dst}');
-	  }
-	
-	  var dst = Object(inDst);
-	
-	  [].concat(Array.prototype.slice.call(arguments)).slice(1).forEach(function (src) {
-	    Object.keys(src).forEach(function (prop) {
-	      dst[prop] = src[prop];
-	    });
-	  });
-	
-	  return dst;
-	};
+	module.exports = Object.assign;
 
 /***/ },
 /* 5 */
 /***/ function(module, exports) {
 
-	"use strict";
-	
-	Array.from = Array.from || function fromArray(a) {
-	  return Array.prototype.slice.call(a);
-	};
+	module.exports = Array.from;
 
 /***/ },
 /* 6 */
@@ -1230,12 +1200,7 @@ var BluemixComponents =
 /* 12 */
 /***/ function(module, exports) {
 
-	"use strict";
-	
-	Math.sign = Math.sign || function sign(x) {
-	  var n = +x;
-	  return n === 0 ? n : n / Math.abs(n);
-	};
+	module.exports = Math.sign;
 
 /***/ },
 /* 13 */
@@ -1841,27 +1806,7 @@ var BluemixComponents =
 /* 15 */
 /***/ function(module, exports) {
 
-	'use strict';
-	
-	var missingNativeCustomEvent = function () {
-	  try {
-	    new CustomEvent('test-event'); // eslint-disable-line no-new
-	  } catch (error) {
-	    return true;
-	  }
-	}();
-	if (missingNativeCustomEvent) {
-	  window.CustomEvent = function CustomEvent(type) {
-	    var init = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-	
-	    var event = document.createEvent('HTMLEvents');
-	    event.initEvent(type, init.bubbles, init.cancelable);
-	    if (init.detail) {
-	      event.detail = init.detail;
-	    }
-	    return event;
-	  };
-	}
+	module.exports = CustomEvent;
 
 /***/ },
 /* 16 */
@@ -5750,4 +5695,4 @@ var BluemixComponents =
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=bluemix-components.js.map
+//# sourceMappingURL=bluemix-components-without-polyfills.js.map

@@ -124,24 +124,10 @@
     return Card;
   }();
 
-  exports.default = Card;
-
-
-  /**
-   * The map associating DOM element and card list instance.
-   * @type {WeakMap}
-   */
   Card.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode Card.create .create()}, or {@linkcode Card.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Card.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find card containers.
-   * @property {string} [selectorCard] The CSS selector to find cards.
-   */
   Card.options = {
     selectorInit: '[data-card-list]',
     selectorCard: '.bx--card'
   };
+  exports.default = Card;
 });

@@ -115,23 +115,10 @@
     return DetailPageHeader;
   }();
 
-  exports.default = DetailPageHeader;
-
-
-  /**
-   * The map associating DOM element and detail page header instance.
-   * @type {WeakMap}
-   */
   DetailPageHeader.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode DetailPageHeader.create .create()}, or {@linkcode DetailPageHeader.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode DetailPageHeader.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find detail page headers.
-   */
   DetailPageHeader.options = {
     slideUp: 'bx--detail-page-header--with-tabs--animated-slide-up',
     selectorInit: '[data-detail-page-header]'
   };
+  exports.default = DetailPageHeader;
 });

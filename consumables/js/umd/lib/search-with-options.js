@@ -121,21 +121,12 @@
     return SearchWithOptions;
   }();
 
-  exports.default = SearchWithOptions;
-
-
   SearchWithOptions.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode SearchWithOptions.create .create()}, or {@linkcode SearchWithOptions.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode SearchWithOptions.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find search UIs with options.
-   */
   SearchWithOptions.options = {
     selectorInit: '[data-search-with-options]',
     selectorToggleLayoutBtn: '[data-search-toggle-btn]',
     selectorIconContainer: '[data-search-toggle-layout]',
     classHiddenContainer: 'bx--search__toggle-layout__container--hidden'
   };
+  exports.default = SearchWithOptions;
 });

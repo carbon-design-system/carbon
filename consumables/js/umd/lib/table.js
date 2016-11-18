@@ -173,30 +173,7 @@
     return Table;
   }();
 
-  exports.default = Table;
-
-
-  /**
-   * The map associating DOM element and data table instance.
-   * @type {WeakMap}
-   */
   Table.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode Table.create .create()}, or {@linkcode Table.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Table.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find data tables.
-   * @property {string} [selectorTitle] The CSS selector to find column titles.
-   * @property {string} [selectorRow] The CSS selector to find rows.
-   * @property {string} [selectorCheckbox] The CSS selector to find check boxes.
-   * @property {string} [classSortState] The CSS class for the sorting state.
-   * @property {string} [classCheckState] The CSS class for the checked state.
-   * @property {string} [eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
-   * @property {string} [eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
-   * @property {string} [eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
-   * @property {string} [eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
-   */
   Table.options = {
     selectorInit: '[data-table]',
     selectorTitle: '.bx--table__column-title',
@@ -209,4 +186,5 @@
     eventBeforeCheckToggled: 'table-check-beingtoggled',
     eventAfterCheckToggled: 'table-check-toggled'
   };
+  exports.default = Table;
 });

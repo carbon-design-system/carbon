@@ -136,22 +136,9 @@
     return NumberInput;
   }();
 
-  exports.default = NumberInput;
-
-
-  /**
-   * The map associating DOM element and number input UI instance.
-   * @type {WeakMap}
-   */
   NumberInput.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find number input UIs.
-   */
   NumberInput.options = {
     selectorInit: '[data-numberinput]'
   };
+  exports.default = NumberInput;
 });

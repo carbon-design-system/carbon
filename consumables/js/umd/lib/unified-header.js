@@ -91,22 +91,9 @@
     return UnifiedHeader;
   }();
 
-  exports.default = UnifiedHeader;
-
-
-  /**
-   * The map associating DOM element and left navigation instance.
-   * @type {WeakMap}
-   */
   UnifiedHeader.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode UnifiedHeader.create .create()}, or {@linkcode UnifiedHeader.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode UnifiedHeader.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find unified headers.
-   */
   UnifiedHeader.options = {
     selectorInit: '[data-unified-header]'
   };
+  exports.default = UnifiedHeader;
 });

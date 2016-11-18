@@ -136,23 +136,10 @@
     return Loading;
   }();
 
-  exports.default = Loading;
-
-
-  /**
-   * The map associating DOM element and spinner instance.
-   * @type {WeakMap}
-   */
   Loading.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode Loading.create .create()}, or {@linkcode Loading.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Loading.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find spinners.
-   */
   Loading.options = {
     selectorInit: '[data-loading]',
     active: true
   };
+  exports.default = Loading;
 });

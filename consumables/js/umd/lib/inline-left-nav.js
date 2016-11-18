@@ -167,21 +167,7 @@
     return InlineLeftNav;
   }();
 
-  exports.default = InlineLeftNav;
-
-
-  /**
-   * The map associating DOM element and spinner instance.
-   * @type {WeakMap}
-   */
   InlineLeftNav.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode InlineLeftNav.create .create()}, or {@linkcode InlineLeftNav.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode InlineLeftNav.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find inline left navs.
-   */
   InlineLeftNav.options = {
     selectorInit: '[data-inline-left-nav]',
     // Data Attribute selectors
@@ -194,4 +180,5 @@
     classActiveLeftNavListItem: 'left-nav-list__item--active',
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded'
   };
+  exports.default = InlineLeftNav;
 });

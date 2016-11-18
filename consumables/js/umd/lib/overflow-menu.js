@@ -136,12 +136,9 @@
     return OverflowMenu;
   }();
 
-  exports.default = OverflowMenu;
-
-
   OverflowMenu.components = new _weakMap2.default();
-
   OverflowMenu.options = {
     selectorInit: '[data-overflow-menu]'
   };
+  exports.default = OverflowMenu;
 });

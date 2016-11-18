@@ -121,22 +121,9 @@
     return FabButton;
   }();
 
-  exports.default = FabButton;
-
-
-  /**
-   * The map associating DOM element and floating action button instance.
-   * @type {WeakMap}
-   */
   FabButton.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode FabButton.create .create()}, or {@linkcode FabButton.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode FabButton.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find floating action buttons.
-   */
   FabButton.options = {
     selectorInit: '[data-fab]'
   };
+  exports.default = FabButton;
 });

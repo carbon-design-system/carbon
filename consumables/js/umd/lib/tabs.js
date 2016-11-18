@@ -195,33 +195,7 @@
     return Tab;
   }(_contentSwitcher2.default);
 
-  exports.default = Tab;
-
-
-  /**
-   * The map associating DOM element and tab container instance.
-   * @type {WeakMap}
-   */
   Tab.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode Tab.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Tab.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find tab containers.
-   * @property {string} [selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
-   * @property {string} [selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
-   * @property {string} [selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
-   * @property {string} [selectorButton] The CSS selector to find tab containers.
-   * @property {string} [selectorButtonSelected] The CSS selector to find the selected tab.
-   * @property {string} [selectorLink] The CSS selector to find the links in tabs.
-   * @property {string} [classActive] The CSS class for tab's selected state.
-   * @property {string} [classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
-   * @property {string} [eventBeforeSelected]
-   *   The name of the custom event fired before a tab is selected.
-   *   Cancellation of this event stops selection of tab.
-   * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
-   */
   Tab.options = (0, _assign2.default)((0, _create2.default)(_contentSwitcher2.default.options), {
     selectorInit: '[data-tabs]',
     selectorMenu: '.bx--tabs__nav',
@@ -235,4 +209,5 @@
     eventBeforeSelected: 'tab-beingselected',
     eventAfterSelected: 'tab-selected'
   });
+  exports.default = Tab;
 });

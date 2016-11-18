@@ -196,28 +196,7 @@
     return ContentSwitcher;
   }();
 
-  exports.default = ContentSwitcher;
-
-
-  /**
-   * The map associating DOM element and content switcher set instance.
-   * @type {WeakMap}
-   */
   ContentSwitcher.components = new _weakMap2.default();
-
-  /**
-   * The component options.
-   * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode ContentSwitcher.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode ContentSwitcher.init .init()} works.
-   * @property {string} selectorInit The CSS selector to find content switcher button set.
-   * @property {string} [selectorButton] The CSS selector to find switcher buttons.
-   * @property {string} [selectorButtonSelected] The CSS selector to find the selected switcher button.
-   * @property {string} [classActive] The CSS class for switcher button's selected state.
-   * @property {string} [eventBeforeSelected]
-   *   The name of the custom event fired before a switcher button is selected.
-   *   Cancellation of this event stops selection of content switcher button.
-   * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
-   */
   ContentSwitcher.options = {
     selectorInit: '[data-content-switcher]',
     selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
@@ -226,4 +205,5 @@
     eventBeforeSelected: 'content-switcher-beingselected',
     eventAfterSelected: 'content-switcher-selected'
   };
+  exports.default = ContentSwitcher;
 });
