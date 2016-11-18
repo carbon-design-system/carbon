@@ -55,6 +55,7 @@ gulp.task('clean', () => {
     'consumables/css/*.css',
     'consumables/js/{es5,umd}/**/*.{js,map}',
     'demo/**/*.{js,map}',
+    '!demo/js/demo-switcher.js',
     '!demo/js/theme-switcher.js',
     '!demo/index.js',
   ]);
