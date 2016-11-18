@@ -1,6 +1,7 @@
+import '../polyfills/element-matches';
+import '../polyfills/object-assign';
 import eventMatches from '../polyfills/event-matches';
 import on from '../misc/on';
-import '../polyfills/element-matches';
 
 export default class FabButton {
   /**

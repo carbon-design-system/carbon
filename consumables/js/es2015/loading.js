@@ -1,5 +1,7 @@
-import toggleClass from '../polyfills/toggle-class';
+import '../polyfills/array-from';
 import '../polyfills/element-matches';
+import '../polyfills/object-assign';
+import toggleClass from '../polyfills/toggle-class';
 
 export default class Loading {
   /**

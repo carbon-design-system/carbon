@@ -1,3 +1,8 @@
+import '../polyfills/array-from';
+import '../polyfills/custom-event';
+import '../polyfills/element-matches';
+import '../polyfills/object-assign';
+
 export default class Pagination {
   /**
   * Pagination component.

@@ -1,5 +1,6 @@
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
+import '../polyfills/object-assign';
 import toggleClass from '../polyfills/toggle-class';
 import on from '../misc/on';
 

@@ -1,4 +1,6 @@
+import '../polyfills/array-from';
 import '../polyfills/element-matches';
+import '../polyfills/object-assign';
 
 export default class Toolbars {
   /**

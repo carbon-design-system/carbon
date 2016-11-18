@@ -1,5 +1,6 @@
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
+import '../polyfills/custom-event';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import toggleClass from '../polyfills/toggle-class';

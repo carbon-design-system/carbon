@@ -1,3 +1,4 @@
+import '../polyfills/custom-event';
 import '../polyfills/element-matches';
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/object-assign';

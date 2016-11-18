@@ -1,3 +1,6 @@
+import '../polyfills/array-from';
+import '../polyfills/element-matches';
+import '../polyfills/object-assign';
 import debounce from 'lodash.debounce';
 
 export default class DetailPageHeader {

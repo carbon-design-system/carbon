@@ -1,4 +1,5 @@
 import '../polyfills/array-from';
+import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import on from '../misc/on';
