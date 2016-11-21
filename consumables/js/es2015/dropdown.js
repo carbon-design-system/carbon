@@ -1,3 +1,4 @@
+import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
@@ -41,7 +42,12 @@ export default class Dropdown {
     this.setCloseOnBlur();
 
     this.element.addEventListener('keypress', (event) => this.toggle(event));
-    this.element.addEventListener('click', (event) => this.selected(event));
+    this.element.addEventListener('click', (event) => {
+      const item = eventMatches(event, this.options.selectorItem);
+      if (item) {
+        this.select(item);
+      }
+    });
   }
 
   /**
@@ -118,35 +124,35 @@ export default class Dropdown {
    * * Change Dropdown text to selected option.
    * * Remove selected option from options when selected.
    * * Emit custom events.
-   * @param {Event} event The event triggering this method.
+   * @param {HTMLElement} itemToSelect The element to be activated.
    */
-  selected(event) {
-    const activatedElement = event.target;
-    if (activatedElement.parentElement.dataset.option !== undefined) {
-      const eventStart = new CustomEvent(this.options.eventBeforeSelected, {
-        bubbles: true,
-        cancelable: true,
-        detail: { item: activatedElement },
+  select(itemToSelect) {
+    const eventStart = new CustomEvent(this.options.eventBeforeSelected, {
+      bubbles: true,
+      cancelable: true,
+      detail: { item: itemToSelect },
+    });
+
+    if (this.element.dispatchEvent(eventStart)) {
+      if (this.element.dataset.dropdownType !== 'navigation') {
+        this.element.firstElementChild.innerHTML = itemToSelect.innerHTML;
+        itemToSelect.classList.add(this.options.classSelected);
+      }
+      this.element.dataset.value = itemToSelect.parentElement.dataset.value;
+
+      [... this.element.querySelectorAll(this.options.selectorItemSelected)].forEach((item) => {
+        if (itemToSelect !== item) {
+          item.classList.remove(this.options.classSelected);
+        }
       });
 
-      if (this.element.dispatchEvent(eventStart)) {
-        if (this.element.dataset.dropdownType !== 'navigation') {
-          this.element.firstElementChild.innerHTML = activatedElement.innerHTML;
-          activatedElement.classList.add(this.options.classSelected);
-        }
-        this.element.dataset.value = activatedElement.parentElement.dataset.value;
-        [... this.element.querySelectorAll(this.options.selectorItemSelected)].forEach((item) => {
-          if (activatedElement !== item) {
-            item.classList.remove(this.options.classSelected);
-          }
-        });
+      itemToSelect.classList.add(this.options.classSelected);
 
-        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
-          bubbles: true,
-          cancelable: true,
-          detail: { item: activatedElement },
-        }));
-      }
+      this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
+        bubbles: true,
+        cancelable: true,
+        detail: { item: itemToSelect },
+      }));
     }
   }
 
