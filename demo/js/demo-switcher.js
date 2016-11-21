@@ -8,9 +8,6 @@ export default class DemoSwitcher {
     this.element = element;
     this.constructor.components.set(this.element, this);
     this.element.addEventListener('click', (event) => this.handleClick(event));
-
-    document.querySelector('.demo--container').classList.add('flex-row');
-    document.querySelector('#flex-row').checked = true;
   }
 
   static create(element) {
