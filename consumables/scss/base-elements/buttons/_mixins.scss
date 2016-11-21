@@ -12,6 +12,9 @@
   transition-duration: $transition--base;
   transition-timing-function: ease-in;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   &:disabled {
     cursor: not-allowed;
@@ -28,6 +31,14 @@
     // This removes that. Discovered and fixed in #731
     padding: 0;
     border: 0;
+  }
+
+  // With Icons
+  .bx--btn--right-icon__icon {
+    display: inline-flex;
+    width: rem(16px);
+    height: rem(16px);
+    margin-left: .5rem;
   }
 }
 
@@ -75,13 +86,6 @@
   $text: $hover-bg
 ) {
   @include btn--base;
-
-  &:not(button) {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   color: $text;
   background-color: transparent;
   border: 2px solid $hover-bg;
