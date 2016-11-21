@@ -11,7 +11,14 @@ $spacing-unit: 1rem;
 
 html, body {
   min-height: 100%;
+}
+
+body {
   background-color: $color__navy-gray-3;
+
+  @include light-ui {
+    background-color: $color__gray-3;
+  }
 }
 
 .bx--detail-page-header--with-tabs {
