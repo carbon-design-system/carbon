@@ -1,8 +1,10 @@
 @mixin content-switcher($theme: 'dark') {
   @include font-size('14');
   background-color: transparent;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   padding: .87rem 2rem;
+  margin: 0;
   text-decoration: none;
 
   &:not(:last-of-type) {
