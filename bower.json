@@ -1,6 +1,6 @@
 {
   "name": "bluemix-components",
-  "version": "6.10.1",
+  "version": "6.10.2",
   "description": "Bluemix Components is a component library for Bluemix",
   "main": "styles.scss",
   "keywords": [

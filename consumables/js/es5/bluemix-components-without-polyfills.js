@@ -4946,13 +4946,10 @@ var BluemixComponents =
 	      return _this.handleDocumentClick(evt);
 	    });
 	
-	    var linkedAccount = void 0;
-	    var isLinked = void 0;
-	    var linkedIcon = void 0;
 	    this.element.addEventListener('dropdown-beingselected', function (event) {
 	      if (event.target.querySelector(_this.options.selectorAccountDropdown) !== null) {
 	        if (event.detail.item.querySelector(_this.options.classLinkedIcon) !== null) {
-	          _this.element.linkedAccount = event.detail.item.childNodes[1].cloneNode(true);
+	          _this.element.linkedAccount = event.detail.item.querySelector(_this.options.selectorAccountSlLinked).cloneNode(true);
 	          _this.element.isLinked = true;
 	          _this.element.linkedIcon = event.detail.item.querySelector(_this.options.classLinkedIcon).cloneNode(true);
 	        } else {
@@ -4967,12 +4964,14 @@ var BluemixComponents =
 	      return _this.toggle(event);
 	    });
 	
-	    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', function () {
-	      return _this.determineSwitcherValues(linkedAccount, linkedIcon, isLinked, true);
+	    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', function (event) {
+	      _this.getLinkedData(event);
+	      _this.determineSwitcherValues(true);
 	    });
 	
-	    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', function () {
-	      return _this.determineSwitcherValues(linkedAccount, linkedIcon, isLinked, false);
+	    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', function (event) {
+	      _this.getLinkedData(event);
+	      _this.determineSwitcherValues(false);
 	    });
 	
 	    this.element.ownerDocument.addEventListener('keyup', function () {
@@ -5002,6 +5001,17 @@ var BluemixComponents =
 	          this.element.classList.toggle(this.options.classSwitcherOpen);
 	        } else if (!isOfSelf && this.element.classList.contains(this.options.classSwitcherOpen)) {
 	          this.element.classList.remove(this.options.classSwitcherOpen);
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'getLinkedData',
+	    value: function getLinkedData(event) {
+	      if (event.target.querySelector(this.options.selectorLinkedAccount) !== null) {
+	        if (event.target.querySelector(this.options.selectorLinkedAccount).textContent.length > 1) {
+	          this.element.isLinked = true;
+	        } else {
+	          this.element.isLinked = false;
 	        }
 	      }
 	    }
@@ -5051,7 +5061,7 @@ var BluemixComponents =
 	
 	  }, {
 	    key: 'determineSwitcherValues',
-	    value: function determineSwitcherValues(linkedAccount, linkedIcon, isLinked, isHovered) {
+	    value: function determineSwitcherValues(isHovered) {
 	      var linkedElement = this.element.querySelector(this.options.selectorLinkedAccount);
 	      var nameElement = this.element.querySelector(this.options.selectorAccount);
 	      var regionElement = this.element.querySelector(this.options.selectorRegion);
@@ -5060,11 +5070,13 @@ var BluemixComponents =
 	      var menuElement = this.element.querySelector(this.options.selectorMenu);
 	      var isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 	
-	      if (this.element.isLinked) {
-	        linkedElement.appendChild(this.element.linkedAccount);
-	        linkedElement.appendChild(this.element.linkedIcon);
-	      } else {
-	        linkedElement.textContent = '';
+	      if (linkedElement) {
+	        if (this.element.isLinked) {
+	          linkedElement.appendChild(this.element.linkedAccount);
+	          linkedElement.appendChild(this.element.linkedIcon);
+	        } else {
+	          linkedElement.textContent = '';
+	        }
 	      }
 	
 	      var nameDropdownValue = '';
@@ -5212,6 +5224,7 @@ var BluemixComponents =
 	  selectorAccountDropdown: '[data-dropdown-account]',
 	  selectorAccountSlDropdown: '[data-dropdown-account-sl]',
 	  selectorAccountLinked: '[data-dropdown-account-linked]',
+	  selectorAccountSlLinked: '[data-dropdown-account-sl-linked]',
 	  selectorRegionDropdown: '[data-dropdown-region]',
 	  selectorOrgDropdown: '[data-dropdown-org]',
 	  selectorSpaceDropdown: '[data-dropdown-space]',
