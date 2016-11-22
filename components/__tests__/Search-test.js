@@ -104,6 +104,20 @@ describe('Search', () => {
         expect(wrapper.props().label).toEqual('Email Input');
       });
     });
+
+    describe('small variant', () => {
+      const small = mount(
+        <Search id="test" small className="extra-class" label="Search Field" />
+      );
+      const smallContainer = small.find('[role="search"]');
+      it('should have the appropriate small class', () => {
+        expect(smallContainer.hasClass('bx--search--sm')).toEqual(true);
+      });
+      it('should not have a filter button', () => {
+        const btn = small.find('button');
+        expect(btn.length).toEqual(0);
+      });
+    });
   });
 
   describe('events', () => {

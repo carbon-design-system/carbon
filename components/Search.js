@@ -7,6 +7,7 @@ const propTypes = {
   children: React.PropTypes.node,
   className: React.PropTypes.string,
   type: React.PropTypes.string,
+  small: React.PropTypes.bool,
   placeHolderText: React.PropTypes.string,
   labelText: React.PropTypes.string,
   id: React.PropTypes.string,
@@ -25,13 +26,15 @@ const propTypes = {
 const defaultProps = {
   className: 'bx--search',
   type: 'search',
+  small: false,
   placeHolderText: '',
 };
 
-const Search = ({ className, type, id, placeHolderText, labelText, ...other }) => {
+const Search = ({ className, type, id, placeHolderText, labelText, small, ...other }) => {
   const searchClasses = classNames({
     'bx--search': true,
     [className]: className,
+    'bx--search--sm': small,
   });
 
   return (
@@ -51,20 +54,21 @@ const Search = ({ className, type, id, placeHolderText, labelText, ...other }) =
         id={id}
         placeholder={placeHolderText}
       />
-      <button
-        className="bx--search__filter"
-        type="button"
-
-      >
-        <Icon
-          name="filter"
-          description="search"
-          className="bx--search__icon--filter"
-          width="16px"
-          height="16px"
-        />
-        <span className="filter__text">Filter</span>
-      </button>
+      {!small ? (
+        <button
+          className="bx--search__filter"
+          type="button"
+        >
+          <Icon
+            name="filter"
+            description="search"
+            className="bx--search__icon--filter"
+            width="16px"
+            height="16px"
+          />
+          <span className="filter__text">Filter</span>
+        </button>
+      ) : ''}
     </div>
   );
 };
