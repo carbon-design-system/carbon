@@ -54,10 +54,6 @@
     &--backward {
       margin-left: rem(20px);
       margin-right: rem(20px);
-
-      div {
-        transform: rotate(.5turn);
-      }
     }
 
     &--forward {
@@ -75,7 +71,7 @@
     padding: 0 rem(10px);
   }
 
-  .bx--select__arrow use {
+  .bx--select__arrow svg {
     @include light-ui {
       fill: $color__blue-51;
     }
