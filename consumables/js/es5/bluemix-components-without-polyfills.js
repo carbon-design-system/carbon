@@ -68,15 +68,15 @@ var BluemixComponents =
 	
 	var _contentSwitcher2 = _interopRequireDefault(_contentSwitcher);
 	
-	var _tabs = __webpack_require__(11);
+	var _tabs = __webpack_require__(12);
 	
 	var _tabs2 = _interopRequireDefault(_tabs);
 	
-	var _overflowMenu = __webpack_require__(13);
+	var _overflowMenu = __webpack_require__(14);
 	
 	var _overflowMenu2 = _interopRequireDefault(_overflowMenu);
 	
-	var _modals = __webpack_require__(14);
+	var _modals = __webpack_require__(15);
 	
 	var _modals2 = _interopRequireDefault(_modals);
 	
@@ -451,6 +451,10 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(3);
+	
+	__webpack_require__(4);
+	
 	var _eventMatches = __webpack_require__(7);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
@@ -458,8 +462,6 @@ var BluemixComponents =
 	var _on = __webpack_require__(8);
 	
 	var _on2 = _interopRequireDefault(_on);
-	
-	__webpack_require__(3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -659,11 +661,13 @@ var BluemixComponents =
 	
 	__webpack_require__(5);
 	
+	__webpack_require__(10);
+	
 	__webpack_require__(3);
 	
 	__webpack_require__(4);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(11);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -925,6 +929,12 @@ var BluemixComponents =
 /* 10 */
 /***/ function(module, exports) {
 
+	module.exports = CustomEvent;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -938,7 +948,7 @@ var BluemixComponents =
 	}
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -959,7 +969,7 @@ var BluemixComponents =
 	
 	__webpack_require__(3);
 	
-	__webpack_require__(12);
+	__webpack_require__(13);
 	
 	__webpack_require__(4);
 	
@@ -1197,13 +1207,13 @@ var BluemixComponents =
 	exports.default = Tab;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = Math.sign;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1218,7 +1228,9 @@ var BluemixComponents =
 	
 	__webpack_require__(3);
 	
-	var _toggleClass = __webpack_require__(10);
+	__webpack_require__(4);
+	
+	var _toggleClass = __webpack_require__(11);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -1337,7 +1349,7 @@ var BluemixComponents =
 	exports.default = OverflowMenu;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1354,13 +1366,13 @@ var BluemixComponents =
 	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
 	var _eventMatches = __webpack_require__(7);
 	
 	var _eventMatches2 = _interopRequireDefault(_eventMatches);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(11);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -1803,12 +1815,6 @@ var BluemixComponents =
 	exports.default = Modal;
 
 /***/ },
-/* 15 */
-/***/ function(module, exports) {
-
-	module.exports = CustomEvent;
-
-/***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1828,7 +1834,7 @@ var BluemixComponents =
 	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
 	var _eventMatches = __webpack_require__(7);
 	
@@ -2181,7 +2187,11 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(5);
+	
 	__webpack_require__(3);
+	
+	__webpack_require__(4);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -2319,11 +2329,15 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _toggleClass = __webpack_require__(10);
-	
-	var _toggleClass2 = _interopRequireDefault(_toggleClass);
+	__webpack_require__(5);
 	
 	__webpack_require__(3);
+	
+	__webpack_require__(4);
+	
+	var _toggleClass = __webpack_require__(11);
+	
+	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2496,13 +2510,17 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	var _eventMatches = __webpack_require__(7);
+	
+	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
 	__webpack_require__(5);
 	
 	__webpack_require__(3);
 	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
 	var _on = __webpack_require__(8);
 	
@@ -2562,7 +2580,10 @@ var BluemixComponents =
 	      return _this.toggle(event);
 	    });
 	    this.element.addEventListener('click', function (event) {
-	      return _this.selected(event);
+	      var item = (0, _eventMatches2.default)(event, _this.options.selectorItem);
+	      if (item) {
+	        _this.select(item);
+	      }
 	    });
 	  }
 	
@@ -2616,40 +2637,40 @@ var BluemixComponents =
 	     * * Change Dropdown text to selected option.
 	     * * Remove selected option from options when selected.
 	     * * Emit custom events.
-	     * @param {Event} event The event triggering this method.
+	     * @param {HTMLElement} itemToSelect The element to be activated.
 	     */
 	
 	  }, {
-	    key: 'selected',
-	    value: function selected(event) {
+	    key: 'select',
+	    value: function select(itemToSelect) {
 	      var _this2 = this;
 	
-	      var activatedElement = event.target;
-	      if (activatedElement.parentElement.dataset.option !== undefined) {
-	        var eventStart = new CustomEvent(this.options.eventBeforeSelected, {
-	          bubbles: true,
-	          cancelable: true,
-	          detail: { item: activatedElement }
+	      var eventStart = new CustomEvent(this.options.eventBeforeSelected, {
+	        bubbles: true,
+	        cancelable: true,
+	        detail: { item: itemToSelect }
+	      });
+	
+	      if (this.element.dispatchEvent(eventStart)) {
+	        if (this.element.dataset.dropdownType !== 'navigation') {
+	          this.element.firstElementChild.innerHTML = itemToSelect.innerHTML;
+	          itemToSelect.classList.add(this.options.classSelected);
+	        }
+	        this.element.dataset.value = itemToSelect.parentElement.dataset.value;
+	
+	        [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorItemSelected))).forEach(function (item) {
+	          if (itemToSelect !== item) {
+	            item.classList.remove(_this2.options.classSelected);
+	          }
 	        });
 	
-	        if (this.element.dispatchEvent(eventStart)) {
-	          if (this.element.dataset.dropdownType !== 'navigation') {
-	            this.element.firstElementChild.innerHTML = activatedElement.innerHTML;
-	            activatedElement.classList.add(this.options.classSelected);
-	          }
-	          this.element.dataset.value = activatedElement.parentElement.dataset.value;
-	          [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorItemSelected))).forEach(function (item) {
-	            if (activatedElement !== item) {
-	              item.classList.remove(_this2.options.classSelected);
-	            }
-	          });
+	        itemToSelect.classList.add(this.options.classSelected);
 	
-	          this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
-	            bubbles: true,
-	            cancelable: true,
-	            detail: { item: activatedElement }
-	          }));
-	        }
+	        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
+	          bubbles: true,
+	          cancelable: true,
+	          detail: { item: itemToSelect }
+	        }));
 	      }
 	    }
 	
@@ -2774,7 +2795,7 @@ var BluemixComponents =
 	
 	__webpack_require__(4);
 	
-	__webpack_require__(12);
+	__webpack_require__(13);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2926,9 +2947,11 @@ var BluemixComponents =
 	
 	__webpack_require__(5);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
 	__webpack_require__(3);
+	
+	__webpack_require__(4);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -3088,6 +3111,8 @@ var BluemixComponents =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	__webpack_require__(10);
+	
 	__webpack_require__(3);
 	
 	var _eventMatches = __webpack_require__(7);
@@ -3096,7 +3121,7 @@ var BluemixComponents =
 	
 	__webpack_require__(4);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(11);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -3346,6 +3371,12 @@ var BluemixComponents =
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(5);
+	
+	__webpack_require__(3);
+	
+	__webpack_require__(4);
 	
 	var _lodash = __webpack_require__(24);
 	
@@ -3876,11 +3907,13 @@ var BluemixComponents =
 	
 	__webpack_require__(5);
 	
+	__webpack_require__(3);
+	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(11);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -4543,9 +4576,11 @@ var BluemixComponents =
 	
 	__webpack_require__(5);
 	
+	__webpack_require__(3);
+	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -4646,11 +4681,13 @@ var BluemixComponents =
 	
 	__webpack_require__(5);
 	
+	__webpack_require__(3);
+	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(11);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -4858,9 +4895,11 @@ var BluemixComponents =
 	
 	__webpack_require__(5);
 	
+	__webpack_require__(3);
+	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
 	var _on = __webpack_require__(8);
 	
@@ -5184,7 +5223,7 @@ var BluemixComponents =
 
 /***/ },
 /* 29 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -5193,6 +5232,14 @@ var BluemixComponents =
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(5);
+	
+	__webpack_require__(10);
+	
+	__webpack_require__(3);
+	
+	__webpack_require__(4);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -5417,11 +5464,13 @@ var BluemixComponents =
 	
 	__webpack_require__(5);
 	
+	__webpack_require__(3);
+	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
-	var _toggleClass = __webpack_require__(10);
+	var _toggleClass = __webpack_require__(11);
 	
 	var _toggleClass2 = _interopRequireDefault(_toggleClass);
 	
@@ -5577,7 +5626,7 @@ var BluemixComponents =
 	
 	__webpack_require__(4);
 	
-	__webpack_require__(15);
+	__webpack_require__(10);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	

@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.dropdown = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _on) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _eventMatches, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -28,6 +28,8 @@
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
+
+  var _eventMatches2 = _interopRequireDefault(_eventMatches);
 
   var _on2 = _interopRequireDefault(_on);
 
@@ -84,7 +86,10 @@
         return _this.toggle(event);
       });
       this.element.addEventListener('click', function (event) {
-        return _this.selected(event);
+        var item = (0, _eventMatches2.default)(event, _this.options.selectorItem);
+        if (item) {
+          _this.select(item);
+        }
       });
     }
 
@@ -127,36 +132,36 @@
         }
       }
     }, {
-      key: 'selected',
-      value: function selected(event) {
+      key: 'select',
+      value: function select(itemToSelect) {
         var _this2 = this;
 
-        var activatedElement = event.target;
-        if (activatedElement.parentElement.dataset.option !== undefined) {
-          var eventStart = new CustomEvent(this.options.eventBeforeSelected, {
-            bubbles: true,
-            cancelable: true,
-            detail: { item: activatedElement }
+        var eventStart = new CustomEvent(this.options.eventBeforeSelected, {
+          bubbles: true,
+          cancelable: true,
+          detail: { item: itemToSelect }
+        });
+
+        if (this.element.dispatchEvent(eventStart)) {
+          if (this.element.dataset.dropdownType !== 'navigation') {
+            this.element.firstElementChild.innerHTML = itemToSelect.innerHTML;
+            itemToSelect.classList.add(this.options.classSelected);
+          }
+          this.element.dataset.value = itemToSelect.parentElement.dataset.value;
+
+          [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorItemSelected))).forEach(function (item) {
+            if (itemToSelect !== item) {
+              item.classList.remove(_this2.options.classSelected);
+            }
           });
 
-          if (this.element.dispatchEvent(eventStart)) {
-            if (this.element.dataset.dropdownType !== 'navigation') {
-              this.element.firstElementChild.innerHTML = activatedElement.innerHTML;
-              activatedElement.classList.add(this.options.classSelected);
-            }
-            this.element.dataset.value = activatedElement.parentElement.dataset.value;
-            [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorItemSelected))).forEach(function (item) {
-              if (activatedElement !== item) {
-                item.classList.remove(_this2.options.classSelected);
-              }
-            });
+          itemToSelect.classList.add(this.options.classSelected);
 
-            this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
-              bubbles: true,
-              cancelable: true,
-              detail: { item: activatedElement }
-            }));
-          }
+          this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
+            bubbles: true,
+            cancelable: true,
+            detail: { item: itemToSelect }
+          }));
         }
       }
     }, {

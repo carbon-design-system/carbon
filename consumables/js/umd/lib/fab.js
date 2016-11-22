@@ -1,13 +1,13 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../misc/on', '../polyfills/element-matches'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../misc/on', '../polyfills/element-matches', '../polyfills/object-assign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/element-matches'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/element-matches'), require('../polyfills/object-assign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.on, global.elementMatches);
+    factory(mod.exports, global.weakMap, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.on, global.elementMatches, global.objectAssign);
     global.fab = mod.exports;
   }
 })(this, function (exports, _weakMap, _create, _assign, _classCallCheck2, _createClass2, _eventMatches, _on) {
