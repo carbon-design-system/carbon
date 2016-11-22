@@ -41,8 +41,6 @@
       cursor: pointer;
 
       svg {
-        position: relative;
-        top: rem(4px);
         width: rem(12px);
         height: rem(12px);
         fill: $color__tabs--caret;
