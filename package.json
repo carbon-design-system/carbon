@@ -70,7 +70,8 @@
     "@console/bluemix-icons": "3.0.1",
     "classnames": "2.2.5",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "warning": "3.0.0"
   },
   "devDependencies": {
     "@kadira/react-storybook-addon-info": "3.2.1",
@@ -99,8 +100,7 @@
     "react-addons-test-utils": "^15.3.1",
     "sass-loader": "4.0.0",
     "shelljs": "^0.7.5",
-    "style-loader": "0.13.1",
-    "warning": "3.0.0"
+    "style-loader": "0.13.1"
   },
   "jest": {
     "coverageDirectory": "./.gh-pages/coverage",
