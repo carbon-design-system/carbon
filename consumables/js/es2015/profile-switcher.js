@@ -31,13 +31,10 @@ export default class ProfileSwitcher {
 
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
 
-    let linkedAccount;
-    let isLinked;
-    let linkedIcon;
     this.element.addEventListener('dropdown-beingselected', (event) => {
       if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
         if (event.detail.item.querySelector(this.options.classLinkedIcon) !== null) {
-          this.element.linkedAccount = event.detail.item.childNodes[1].cloneNode(true);
+          this.element.linkedAccount = event.detail.item.querySelector(this.options.selectorAccountSlLinked).cloneNode(true);
           this.element.isLinked = true;
           this.element.linkedIcon = event.detail.item.querySelector(this.options.classLinkedIcon).cloneNode(true);
         } else {
@@ -50,9 +47,15 @@ export default class ProfileSwitcher {
 
     this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', (event) => this.toggle(event));
 
-    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', () => this.determineSwitcherValues(linkedAccount, linkedIcon, isLinked, true));
+    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', (event) => {
+      this.getLinkedData(event);
+      this.determineSwitcherValues(true);
+    });
 
-    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', () => this.determineSwitcherValues(linkedAccount, linkedIcon, isLinked, false));
+    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', (event) => {
+      this.getLinkedData(event);
+      this.determineSwitcherValues(false);
+    });
 
     this.element.ownerDocument.addEventListener('keyup', () => this.handleBlur());
   }
@@ -101,6 +104,16 @@ export default class ProfileSwitcher {
     }
   }
 
+  getLinkedData(event) {
+    if (event.target.querySelector(this.options.selectorLinkedAccount) !== null) {
+      if (event.target.querySelector(this.options.selectorLinkedAccount).textContent.length > 1) {
+        this.element.isLinked = true;
+      } else {
+        this.element.isLinked = false;
+      }
+    }
+  }
+
   handleBlur() {
     if (!(this.element.contains(document.activeElement))) {
       this.element.classList.remove(this.options.classSwitcherOpen);
@@ -139,7 +152,7 @@ export default class ProfileSwitcher {
    * profile switcher
    * @param {boolean} isHovered boolean value passed by the event listener on bx--toggle.
    */
-  determineSwitcherValues(linkedAccount, linkedIcon, isLinked, isHovered) {
+  determineSwitcherValues(isHovered) {
     const linkedElement = this.element.querySelector(this.options.selectorLinkedAccount);
     const nameElement = this.element.querySelector(this.options.selectorAccount);
     const regionElement = this.element.querySelector(this.options.selectorRegion);
@@ -148,12 +161,15 @@ export default class ProfileSwitcher {
     const menuElement = this.element.querySelector(this.options.selectorMenu);
     const isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 
-    if (this.element.isLinked) {
-      linkedElement.appendChild(this.element.linkedAccount);
-      linkedElement.appendChild(this.element.linkedIcon);
-    } else {
-      linkedElement.textContent = '';
+    if (linkedElement) {
+      if (this.element.isLinked) {
+        linkedElement.appendChild(this.element.linkedAccount);
+        linkedElement.appendChild(this.element.linkedIcon);
+      } else {
+        linkedElement.textContent = '';
+      }
     }
+
 
     let nameDropdownValue = '';
     if (this.element.querySelector(this.options.selectorAccountDropdown)) {
@@ -251,6 +267,7 @@ export default class ProfileSwitcher {
     selectorAccountDropdown: '[data-dropdown-account]',
     selectorAccountSlDropdown: '[data-dropdown-account-sl]',
     selectorAccountLinked: '[data-dropdown-account-linked]',
+    selectorAccountSlLinked: '[data-dropdown-account-sl-linked]',
     selectorRegionDropdown: '[data-dropdown-region]',
     selectorOrgDropdown: '[data-dropdown-org]',
     selectorSpaceDropdown: '[data-dropdown-space]',
