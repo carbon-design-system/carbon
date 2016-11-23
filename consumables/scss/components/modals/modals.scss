@@ -137,13 +137,17 @@
       border-color: $color__blue-40;
     }
 
-    .bx--checkbox:checked + .bx--checkbox__label .bx--checkbox__appearance {
+    .bx--checkbox:checked + .bx--checkbox__appearance, .bx--checkbox:checked + .bx--checkbox__label .bx--checkbox__appearance {
       border-color: $color__blue-40;
       background-color: $color__blue-40;
 
       &:before {
         border-color: $color__white;
       }
+    }
+
+    .bx--checkbox__checkmark {
+      fill: $color__white;
     }
 
     .bx--search__filter {
