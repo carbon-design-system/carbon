@@ -44,7 +44,7 @@ $padding: (
   }
 
   @else {
-    @media screen and (min-width: $size) {
+    @media (min-width: $size) {
       @content;
     }
   }
