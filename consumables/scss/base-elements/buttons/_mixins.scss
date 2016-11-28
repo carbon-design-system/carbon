@@ -3,6 +3,7 @@
   @include font-smoothing;
   @include letter-spacing;
   @include font-size('14');
+  box-sizing: border-box;
   font-weight: 700;
   height: rem(40px);
   padding: 0 1rem;
