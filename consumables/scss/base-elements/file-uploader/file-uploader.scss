@@ -10,60 +10,45 @@
 @import '../../import-once';
 
 @include exports('file-uploader') {
-  .bx--file {
+  .bx--file__input {
+    @include hidden;
 
-    &__input {
-      @include hidden;
-    }
-
-    // Styled File Uploader - focus outline
-    &__input:focus + &__label {
+    &:focus + &__label {
       @include focus-outline;
     }
+  }
 
-    // Styled File Uploader
-    &__label {
-      @include font-size('14');
-      position: relative;
-      display: block;
-      width: 100%;
-      min-width: 9.375rem;
-      padding: .9rem;
-      margin: .25rem 0;
-      font-weight: 200;
-      color: $color__navy-gray-8;
-      background-color: $color__inputs--bg;
-      border: none;
-      border-radius: 0;
-      // avoids safari from overriding these styles
-      appearance: none;
+  .bx--file__label {
+    @include font-size('14');
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding-left: .9rem;
+    margin: .25rem 0;
+    height: rem(40px);
+    width: 100%;
+    background-color: $color__inputs--bg;
+    border: none;
+    color: $color__navy-gray-8;
+    font-weight: 200;
+    min-width: 9.375rem;
 
-      @include light-ui {
-        background-color: $color__inputs--bg--light-ui;
-        color: $color__blue-90;
-      }
+    @include light-ui {
+      background-color: $color__inputs--bg--light-ui;
+      color: $color__blue-90;
+    }
+  }
 
-      // "upload button"
-      &:after {
-        @include btn--primary;
-        position: absolute;
-        top: 0;
-        right:0;
-        height: 2rem;
-        padding-top: .3rem;
-        line-height: 2;
-        content: attr(data-button-title);
-        border: 3px solid transparent;
+  .bx--file__label:after {
+    @include btn--primary;
+    position: absolute;
+    top: 0;
+    right:0;
+    content: attr(data-button-title);
 
-        // Since it's a pseudo selector, some of the code needs to be duplicated
-        @include light-ui {
-          @include btn--primary($color__blue-51, $color__blue-40);
-          color: $color__white;
-          height: 2rem;
-          padding-top: .3rem;
-          border: 3px solid transparent;
-        }
-      }
+    @include light-ui {
+      @include btn--primary($color__blue-51, $color__blue-40);
+      color: $color__white;
     }
   }
 }
