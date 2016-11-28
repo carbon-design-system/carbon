@@ -13,28 +13,33 @@
   // Input Element - visually hidden
   .bx--checkbox {
     @include hidden;
+  }
 
-    // Label Element - fonts and positioning
-    &__label {
-      @include font-smoothing;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
+  // Label Element - fonts and positioning
+  .bx--checkbox__label {
+    @include font-smoothing;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .bx--checkbox__appearance {
+    @include font-size('16');
+    box-sizing: border-box;
+    display: inline-block;
+    height: rem(18px);
+    width: rem(18px);
+    margin-right: .75rem;
+    padding: 0;
+    background-color: $color__inputs--bg;
+    border-radius: 2px;
+    border: 2px solid $color__navy-gray-7;
+    overflow: hidden;
+    vertical-align: baseline;
+  }
 
-    // Box Styles - default state
-    &__appearance {
-      @include font-size('16');
-      display: inline-block;
-      width: rem(18px);
-      height: rem(18px);
-      background-color: $color__inputs--bg;
-      border: 2px solid $color__navy-gray-7;
-      margin-right: .75rem;
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
+  .bx--checkbox {
     // Box Styles - checked state - background
     &:checked + &__appearance,
     &:checked + &__label &__appearance {
