@@ -1,6 +1,16 @@
 @import '../import-once';
 
 @mixin body-styles {
+  body {
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+  }
+
   body,
   .bx--body {
     @include helvetica;
