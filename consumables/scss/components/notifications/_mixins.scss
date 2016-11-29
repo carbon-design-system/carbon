@@ -21,6 +21,7 @@
     border-right: 3px solid darken($color__navy-gray-2, 5);
     color: $color;
     padding: .3rem 0 .3rem .5rem;
+    min-height: rem(106.38px);
   }
 
   @else {
@@ -29,6 +30,7 @@
     padding: 1rem .625rem .5rem 1rem;
     background-color: $color__blue-90;
     color: $color__white;
+    min-height: rem(108.17px);
   }
 }
 
@@ -102,6 +104,7 @@
   padding: .75rem 1rem;
   border: 1px solid $color;
   border-left: 6px solid $color;
+  min-height: rem(68px);
 
   .bx--notification-inline__details svg {
     fill: $color;
