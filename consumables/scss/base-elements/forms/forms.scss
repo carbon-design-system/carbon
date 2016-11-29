@@ -16,10 +16,20 @@
 @import '../toggle/toggle';
 
 .bx--form {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 
   &__fieldset {
     display: block;
     margin-bottom: 2rem;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
   }
 
   &__legend {
@@ -28,6 +38,8 @@
     font-weight: 300;
     display: block;
     padding-bottom: 1rem;
+    margin: 0;
+    border: 0;
 
     &--hidden {
       @include hidden;
@@ -39,6 +51,9 @@
     @include letter-spacing;
     display: inline-block;
     padding-bottom: .5rem;
+    margin: 0;
+    border: 0;
+    vertical-align: baseline;
   }
 
   &__fieldset[data-invalid] {
@@ -58,6 +73,9 @@
     overflow: hidden;
     font-weight: 700;
     line-height: 1.5;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
 
     &::before {
       content: '*';
