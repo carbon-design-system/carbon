@@ -3,20 +3,23 @@
   @include font-smoothing;
   @include letter-spacing;
   @include font-size('14');
+  border: 0;
   box-sizing: border-box;
-  font-weight: 700;
-  height: rem(40px);
-  padding: 0 1rem;
-  flex-shrink: 0;
-  text-align: center;
-  text-decoration: none;
   cursor: pointer;
-  transition-duration: $transition--base;
-  transition-timing-function: ease-in;
-  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  height: rem(40px);
+  margin: 0;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: $transition--base;
+  transition-timing-function: ease-in;
+  vertical-align: baseline;
+  white-space: nowrap;
 
   &:disabled {
     cursor: not-allowed;
@@ -27,20 +30,37 @@
     @include focus-outline;
   }
 
-  &::-moz-focus-inner {
-    // Buttons in Firefox have
-    // some intrinsic, browser-specific extra padding.
-    // This removes that. Discovered and fixed in #731
-    padding: 0;
-    border: 0;
-  }
-
-  // With Icons
-  .bx--btn--right-icon__icon {
-    display: inline-flex;
+  svg {
     width: rem(16px);
     height: rem(16px);
     margin-left: .5rem;
+  }
+
+  /**
+   * Browser Hacks
+   */
+  &:not(a) {
+    // <button> elements cnanot be used as flex containers
+    display: inline-block;
+
+    svg {
+      // Vertically centering icon inside <button>
+      position: relative;
+      vertical-align: middle;
+      top: -1px;
+    }
+
+    // Targets IE10+ browsers
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      // Reset <svg> position for vertical centering
+      svg { top: 0; }
+    }
+  }
+
+  &::-moz-focus-inner {
+    // Reset intrisic padding in Firefox (see #731) 
+    padding: 0;
+    border: 0;
   }
 }
 
