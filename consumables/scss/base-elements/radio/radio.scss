@@ -15,6 +15,7 @@
     &__label {
       // Radio Label - fonts and positioning
       @include font-smoothing;
+      box-sizing: border-box;
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -23,25 +24,28 @@
     &__appearance {
       // Styled Radio Button - default
       @include font-size('16');
-      display: inline-block;
-      width: rem(18px);
-      height: rem(18px);
+      box-sizing: border-box;
       background-color: $color__inputs--bg;
-      border: 2px solid $color__navy-gray-7;
-      margin-right: .75rem;
       border-radius: 50%;
+      border: 2px solid $color__navy-gray-7;
+      display: inline-block;
+      height: rem(18px);
+      margin-right: .75rem;
+      padding: 0;
+      width: rem(18px);
     }
 
     &:checked + &__label &__appearance {
       // Styled Radio - checked - background
+      box-sizing: border-box;
+      align-items: center;
       border-color: $color__blue-30;
       display: flex;
-      align-items: center;
-      z-index: z('hidden');
 
       &:before {
         // Styled Radio - checked - dot
         content: '';
+        box-sizing: border-box;
         display: inline-block;
         position: relative;
         left: 3px;
