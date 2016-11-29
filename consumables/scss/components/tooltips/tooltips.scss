@@ -17,7 +17,7 @@
     &:after {
       position: absolute;
       display: none;
-      background: $color__tooltip--background;
+      background: $color__navy-gray-5;
 
       @include light-ui {
         background: $color__white;
@@ -27,9 +27,9 @@
     &:before {
       @include font-size('14');
       padding: 1rem;
-      border: 1px $color__tooltip--accent solid;
+      border: 1px $color__navy-gray-2 solid;
       margin-left: 50%;
-      color: $color__tooltip--accent;
+      color: $color__white;
       content: attr(data-tooltip);
       transform: translateX(-50%);
       white-space: nowrap;
@@ -47,8 +47,8 @@
       left: 0;
       width: .6rem;
       height: .6rem;
-      border-right: 1px solid $color__tooltip--accent;
-      border-bottom: 1px solid $color__tooltip--accent;
+      border-right: 1px solid $color__navy-gray-2;
+      border-bottom: 1px solid $color__navy-gray-2;
       margin: 0 auto;
       content: '';
 
@@ -67,7 +67,7 @@
       }
     }
   }
-  
+
   &__icon {
     height: 1rem;
     width: 1rem;

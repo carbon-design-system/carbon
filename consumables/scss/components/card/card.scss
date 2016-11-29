@@ -17,8 +17,8 @@
   flex-direction: column;
   width: 12.5rem;
   height: auto;
-  background-color: $color__card-bg;
-  border: 1px solid $color__card-border;
+  background-color: $color__navy-gray-3;
+  border: 1px solid $color__blue-90;
   box-shadow: 0px 4px 4px 0px $color__card-box-shadow;
 
   @include light-ui {
@@ -50,12 +50,10 @@
     align-items: center;
     justify-content: space-between;
     height: rem(53px);
-    background-color: $color__card-border;
-    border-top: 1px solid $color__card-border--light;
+    background-color: $color__blue-90;
 
     @include light-ui {
       background-color: $color__gray-3;
-      border-color: $color__gray-3;
     }
   }
 }
@@ -78,6 +76,7 @@
       @include font-size('18');
       @include font-smoothing;
       @include text-overflow(rem(180px));
+      font-weight: 400;
       margin-bottom: .25rem;
     }
 
@@ -190,7 +189,7 @@
       height: 1rem;
       margin: 0 .3rem;
       transition: .2s;
-      fill: $color__navy-gray-8;
+      fill: $color__navy-gray-7;
 
       @include light-ui {
         fill: $color__blue-90;
@@ -251,7 +250,7 @@
 }
 
 .card--quota {
-  background-color: $color__blue-90;
+  background-color: $color__navy-gray-3;
 
   .bx--overview__description {
     @include font-size('14');

@@ -194,7 +194,7 @@
       min-width: rem(44px);
       position: relative;
       padding: 0;
-      background-color: $color__navy-gray-4;
+      background-color: $color__navy-gray-3;
       border: none;
       margin-left: 2px;
       cursor: pointer;
@@ -202,7 +202,11 @@
 
       &:hover,
       &:focus {
-        background-color: $color__navy-gray-6;
+        background-color: $color__blue-30;
+
+        .bx--search__icon {
+          fill: $color__blue-90;
+        }
       }
 
       &__container {
@@ -236,7 +240,7 @@
       transform: translate(-50%, -50%);
       width: 1rem;
       height: 1rem;
-      fill: $color__white;
+      fill: $color__blue-30;
       opacity: inherit;
     }
   }

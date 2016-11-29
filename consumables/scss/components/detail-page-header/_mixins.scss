@@ -1,5 +1,5 @@
 @mixin detail-page-header {
-  background-color: $color__detail-page-header--bg;
+  background-color: $color__navy-gray-3;
   width: 100%;
 
   @include light-ui {
@@ -33,6 +33,11 @@
   @include grid-container;
   padding-top: 0;
   padding-bottom: 1rem;
+  background-color: $color__navy-gray-2;
+
+  @include breakpoint(bp--xs--major) {
+    background-color: $color__navy-gray-3;
+  }
 
   @include breakpoint(bp--sm--major) {
     padding-bottom: 0;

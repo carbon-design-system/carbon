@@ -5,6 +5,7 @@
   display: flex;
   padding: 1rem;
   transition: .2s;
+  background-color: $color__navy-gray-2;
 
   .bx--global-light-ui & {
     background-color: #F5F7FA; // to be `$color__gray-3`
@@ -52,7 +53,7 @@
   right: 1rem;
 }
 
-.demo-switcher {  
+.demo-switcher {
   &__container {
     display: flex;
     position: fixed;

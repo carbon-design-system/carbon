@@ -22,7 +22,7 @@
 
     &-slide-up {
       transform: translateY(-101px);
-      
+
       @media (max-width: 770px) {
         transform: translateY(-87px);
 
@@ -33,7 +33,7 @@
     }
   }
 
-  
+
 
   &__container {
     @include grid-container;
@@ -41,12 +41,13 @@
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: $color__detail-page-header--bg;
+    background-color: $color__navy-gray-2;
 
     @include breakpoint(bp--xs--major) {
       flex-direction: column;
       padding-bottom: .5rem;
       align-items: flex-start;
+      background-color: $color__navy-gray-3;
     }
 
     @include light-ui {
