@@ -184,12 +184,23 @@
       }
     }
 
+    @include light-ui {
+
+      &:hover {
+
+        .bx--app-actions__button--icon {
+          fill: $color__blue-51;
+        }
+      }
+    }
+
     &--icon {
       width: 1rem;
       height: 1rem;
       margin: 0 .3rem;
       transition: .2s;
       fill: $color__navy-gray-7;
+      cursor: pointer;
 
       @include light-ui {
         fill: $color__blue-90;
