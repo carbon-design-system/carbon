@@ -1,3 +1,5 @@
+export Accordion from './components/Accordion';
+export AccordionItem from './components/AccordionItem';
 export AppContainer from './components/AppContainer';
 export ButtonSet from './components/ButtonSet';
 export Card from './components/Card';
