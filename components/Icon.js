@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import icons from '@console/bluemix-icons/icons.json';
+import icons from '@console/bluemix-icons/legacy-icons';
 
 const propTypes = {
   name: PropTypes.string.isRequired,

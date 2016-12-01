@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@console/bluemix-components": "6.8.3",
-    "@console/bluemix-icons": "3.0.1",
+    "@console/bluemix-icons": "3.2.0",
     "classnames": "2.2.5",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -93,7 +93,6 @@
     "eslint-plugin-react": "^5.2.2",
     "gh-pages": "0.11.0",
     "jest": "^15.1.1",
-    "json-loader": "0.5.4",
     "lcov2badge": "^0.1.0",
     "node-sass": "3.8.0",
     "postcss-loader": "^0.9.1",
