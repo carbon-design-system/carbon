@@ -56,7 +56,9 @@ class RadioButton extends React.Component {
           <span className="bx--radio__appearance"></span>
           {labelText}
         </label>
+        <br />
       </div>
+
     );
   }
 }
