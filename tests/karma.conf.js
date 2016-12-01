@@ -7,8 +7,9 @@ var cloptions = require('minimist')(process.argv.slice(2), {
     b: 'browsers',
     f: 'files',
     d: 'debug',
+    v: 'verbose',
   },
-  boolean: ['debug'],
+  boolean: ['debug', 'verbose'],
 });
 
 module.exports = function (config) {
@@ -47,6 +48,13 @@ module.exports = function (config) {
           },
         ],
       },
+    },
+
+    webpackMiddleware: {
+      noInfo: !cloptions.verbose,
+      stats: cloptions.verbose ? {
+        colors: true,
+      } : {},
     },
 
     customLaunchers: {
