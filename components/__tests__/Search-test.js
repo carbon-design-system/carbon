@@ -35,29 +35,34 @@ describe('Search', () => {
       });
     });
 
-    describe('button', () => {
-      const btn = wrapper.find('button');
+    describe('buttons', () => {
+      const btns = wrapper.find('button');
 
-      it('should exist', () => {
-        expect(btn.length).toBe(1);
+      it('should be two buttons', () => {
+        expect(btns.length).toBe(2);
       });
 
-      it('should be a filter button', () => {
-        expect(btn.props().className).toEqual('bx--search__filter');
-        expect(btn.props().type).toEqual('button');
+      describe('sort button', () => {
+        const btn = btns.first();
+        it('first button should be a sort button', () => {
+          expect(btn.props().className).toEqual('bx--search__sort');
+          expect(btn.props().type).toEqual('button');
+        });
+
+        it('sort button should have an arrows icon', () => {
+          const sort = btn.find('Icon');
+          expect(sort.length).toBe(1);
+          expect(sort.props().name).toEqual('arrows');
+          expect(sort.props().className).toEqual('bx--search__icon');
+        });
       });
 
-      it('should have a filter icon', () => {
-        const filter = btn.find('Icon');
-        expect(filter.length).toBe(1);
-        expect(filter.props().name).toEqual('filter');
-        expect(filter.props().className).toEqual('bx--search__icon--filter');
-      });
-
-      it('should have a label', () => {
-        const filterLabel = btn.find('.filter__text');
-        expect(filterLabel.length).toBe(1);
-        expect(filterLabel.text()).toEqual('Filter');
+      describe('toggle-layout button', () => {
+        const btn = btns.last();
+        it('last button should be a toggle-layout button', () => {
+          expect(btn.props().className).toEqual('bx--search__toggle-layout');
+          expect(btn.props().type).toEqual('button');
+        });
       });
     });
 
@@ -113,7 +118,7 @@ describe('Search', () => {
       it('should have the appropriate small class', () => {
         expect(smallContainer.hasClass('bx--search--sm')).toEqual(true);
       });
-      it('should not have a filter button', () => {
+      it('should not have  buttons', () => {
         const btn = small.find('button');
         expect(btn.length).toEqual(0);
       });
