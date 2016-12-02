@@ -1,5 +1,10 @@
 language: node_js
-node_js: "4"
+cache:
+  directories:
+  - node_modules
+node_js: 
+  - "4"
+  - "6"
 
 group: bluezone
 
