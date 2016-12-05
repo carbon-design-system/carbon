@@ -54,4 +54,15 @@ storiesOf('PrimaryButton', module)
     `,
     () => (
       <PrimaryButton {...buttonEvents} disabled>Disabled</PrimaryButton>
+  ))
+  .addWithInfo(
+    'icon',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Primary buttons should be used for the principle call to action
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows a Primary Button component with an embedded icon.
+    `,
+    () => (
+      <PrimaryButton icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</PrimaryButton>
   ));

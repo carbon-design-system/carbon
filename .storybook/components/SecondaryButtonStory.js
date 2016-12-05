@@ -54,4 +54,15 @@ storiesOf('SecondaryButton', module)
     `,
     () => (
       <SecondaryButton {...buttonEvents} disabled>Disabled</SecondaryButton>
+  ))
+  .addWithInfo(
+    'icon',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Secondary buttons should be used for secondary actions on each page.
+      Modify the behavior of the button by changing its property events. The example below
+      shows a Secondary Button component with an embedded icon.
+    `,
+    () => (
+      <SecondaryButton icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</SecondaryButton>
   ));

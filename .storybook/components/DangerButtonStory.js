@@ -54,4 +54,15 @@ storiesOf('DangerButton', module)
     `,
     () => (
       <DangerButton {...buttonEvents} disabled>Disabled</DangerButton>
+  ))
+  .addWithInfo(
+    'icon',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Danger buttons should be used for a negative action (such as Delete)
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows a Danger Button component with an embedded icon.
+    `,
+    () => (
+      <DangerButton icon="delete" iconDescription="Search" {...buttonEvents}>Delete</DangerButton>
   ));
