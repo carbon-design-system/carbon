@@ -73,7 +73,7 @@ export default class InlineLeftNav {
       item.addEventListener('keydown', (evt) => {
         const leftNavItemWithChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
         if (leftNavItemWithChildren && evt.which === 13) {
-          this.handleNestedListClick(leftNavItemWithChildren);
+          this.handleNestedListClick(leftNavItemWithChildren, evt);
         }
       });
     });
@@ -142,6 +142,7 @@ export default class InlineLeftNav {
     selectorLeftNavListItem: '[data-inline-left-nav-item]',
     selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
     selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
+    selectorLeftNavListItemHasChildren: '[data-inline-left-nav-with-children]',
     // CSS Class Selectors
     classActiveLeftNavListItem: 'left-nav-list__item--active',
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
