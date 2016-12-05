@@ -5,7 +5,7 @@ import { shallow, mount } from 'enzyme';
 describe('SecondaryButton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(
-      <SecondaryButton className="extra-class">
+      <SecondaryButton small className="extra-class">
         <div className="child">Test</div>
         <div className="child">Test</div>
       </SecondaryButton>
@@ -22,6 +22,9 @@ describe('SecondaryButton', () => {
 
     it('Should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+    it('Should add classes for small that are passed via className', () => {
+      expect(wrapper.hasClass('bx--btn--sm')).toEqual(true);
     });
 
     describe('Renders icon buttons', () => {

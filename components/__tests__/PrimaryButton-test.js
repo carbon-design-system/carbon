@@ -5,7 +5,7 @@ import { shallow, mount } from 'enzyme';
 describe('PrimaryButton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(
-      <PrimaryButton className="extra-class">
+      <PrimaryButton small className="extra-class">
         <div className="child">Test</div>
         <div className="child">Test</div>
       </PrimaryButton>
@@ -15,11 +15,15 @@ describe('PrimaryButton', () => {
       expect(wrapper.find('.child').length).toBe(2);
       expect(wrapper.find('svg').length).toBe(0);
     });
-
+    it('Renders wrapper as expected', () => {
+      expect(wrapper.length).toBe(1);
+    });
     it('Has the expected classes', () => {
       expect(wrapper.hasClass('bx--btn')).toEqual(true);
     });
-
+    it('Has the expected classes for small', () => {
+      expect(wrapper.hasClass('bx--btn--sm')).toEqual(true);
+    });
     it('Should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });

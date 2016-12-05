@@ -6,6 +6,6 @@ node_modules
 
 # docs
 .gh-pages
-
+.DS_Store
 # distribution files
 dist
