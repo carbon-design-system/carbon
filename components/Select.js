@@ -13,6 +13,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   defaultValue: PropTypes.any,
   iconDescription: PropTypes.string,
+  hideLabel: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -21,15 +22,15 @@ const defaultProps = {
   iconDescription: 'open list of options',
 };
 
-const Select = ({ className, id, labelText, disabled, children, iconDescription, ...other }) => {
+const Select = ({ className, id, labelText, disabled, children, iconDescription, hideLabel, ...other }) => {
   const selectClasses = classNames({
     'bx--select': true,
     [className]: className,
   });
-
+  const labelClasses = classNames('bx--form__label', { 'bx--visually-hidden': hideLabel });
   return (
     <div className={selectClasses}>
-      <label htmlFor={id} className="bx--form__label">{labelText}</label>
+      <label htmlFor={id} className={labelClasses}>{labelText}</label>
       <select
         {...other}
         id={id}

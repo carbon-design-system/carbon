@@ -19,6 +19,7 @@ const propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  hideLabel: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -29,7 +30,7 @@ const defaultProps = {
   onClick: () => {},
 };
 
-const TextInput = ({ labelText, className, id, placeholder, type, onChange, onClick, ...other }) => {
+const TextInput = ({ labelText, className, id, placeholder, type, onChange, onClick, hideLabel, ...other }) => {
   const textInputProps = {
     id,
     onChange: evt => {
@@ -50,9 +51,10 @@ const TextInput = ({ labelText, className, id, placeholder, type, onChange, onCl
     'bx--text__input',
     className,
   );
+  const labelClasses = classNames('bx--form__label', { 'bx--visually-hidden': hideLabel });
 
   const label = labelText ? (
-    <label htmlFor={id} className="bx--form__label">
+    <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>
   ) : null;

@@ -33,6 +33,7 @@ export NumberInput from './components/NumberInput';
 export OrderedList from './components/OrderedList';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
+export Pagination from './components/Pagination';
 export PrimaryButton from './components/PrimaryButton';
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
