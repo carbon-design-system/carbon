@@ -34,7 +34,7 @@ const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
       className={dropdownItemClasses}
       onClick={handleClick}
     >
-      <a className="bx--dropdown__link">{itemText}</a>
+      <a href="#" className="bx--dropdown__link">{itemText}</a>
     </li>
   );
 };

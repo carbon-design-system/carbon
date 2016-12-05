@@ -31,8 +31,11 @@ class Dropdown extends Component {
     value: '',
   };
 
-  handleClick = () => {
-    this.setState({ open: !this.state.open });
+  toggle = (evt) => {
+    // Open on click, enter, or space
+    if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
+      this.setState({ open: !this.state.open });
+    }
   }
 
   handleItemClick = (info) => {
@@ -66,7 +69,8 @@ class Dropdown extends Component {
     const dropdown = (
       <ul
         {...other}
-        onClick={this.handleClick}
+        onClick={this.toggle}
+        onKeyPress={this.toggle}
         value={this.state.value}
         className={dropdownClasses}
         tabIndex={tabIndex}

@@ -73,6 +73,22 @@ describe('Dropdown', () => {
       expect(dropdown.hasClass('bx--dropdown--open')).toEqual(true);
     });
 
+    it('should toggle the open dropdown class on Enter', () => {
+      wrapper.setState({ open: false });
+      dropdown.simulate('keypress', { which: 13 });
+      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(true);
+      dropdown.simulate('keypress', { which: 13 });
+      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(false);
+    });
+
+    it('should toggle the open dropdown class on Space', () => {
+      wrapper.setState({ open: false });
+      dropdown.simulate('keypress', { which: 32 });
+      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(true);
+      dropdown.simulate('keypress', { which: 32 });
+      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(false);
+    });
+
     it('should update data value state when child item is clicked', () => {
       child.simulate('click');
       expect(dropdown.props().value).toEqual('test-child');
