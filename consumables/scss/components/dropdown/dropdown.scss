@@ -43,6 +43,7 @@
     }
 
     &__arrow {
+      fill: $color__blue-30;
       position: absolute;
       right: .75rem;
       top: .75rem;
@@ -54,10 +55,6 @@
 
       .bx--dropdown--open & {
         transform: rotate(180deg);
-      }
-
-      use {
-        fill: $color__blue-30;
       }
     }
 
