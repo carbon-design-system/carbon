@@ -49,16 +49,13 @@
     }
 
     &__arrow {
+      fill: $color__blue-30;
       position: absolute;
       right: .85rem;
       top: 2.4rem;
       width: .75rem;
       height: 1.5rem;
       pointer-events: none;
-
-      use {
-        fill: $color__blue-30;
-      }
     }
 
     &__option {
