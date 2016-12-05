@@ -35,19 +35,17 @@
     &__icon {
       vertical-align: middle;
       display: inline;
-      width: rem(16px);
-      height: rem(16px);
       margin-left: .5rem;
       margin-right: .25rem;
-    }
 
-    &__use {
-      fill: $color__blue-90;
-    }
+      svg {
+        fill: $color__blue-90;
+      }
 
-    @include light-ui {
-      &__use {
-        fill: $color__white;
+      @include light-ui {
+        svg {
+          fill: $color__white;
+        }
       }
     }
   }
