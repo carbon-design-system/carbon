@@ -5,6 +5,22 @@ import EventManager from '../utils/event-manager';
 import promiseTryCatcher from '../utils/promise-try-catcher';
 import NumberInput from '../../consumables/js/es2015/number-input';
 
+const HTML = `
+  <div data-numberinput class="bx--number">
+    <label for="numberinput-id" class="bx--form__label">Number input</label>
+    <input id="numberinput-id" type="number" pattern="[0-9]*" step="1" min="0" max="10" value="0" class="bx--number__input" />
+    <span class="bx--number__arrow--up">
+      <svg class="icon--up">
+        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--up"></use>
+      </svg>
+    </span>
+    <span class="bx--number__arrow--down">
+      <svg class="icon--down">
+        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--down"></use>
+      </svg>
+    </span>
+  </div>`;
+
 describe('Test Number Input', function () {
   describe('Constructor', function () {
     it(`Should throw if root element is not given`, function () {
@@ -21,47 +37,42 @@ describe('Test Number Input', function () {
   });
 
   describe('Adding and Subtracting', function () {
-    let input;
     let element;
-    let upArrowNode;
-    let downArrowNode;
+    let instance;
     let inputNode;
+    let container;
     const events = new EventManager();
 
     before(function () {
-      element = document.createElement('div');
-      upArrowNode = element.appendChild(document.createElement('div'));
-      upArrowNode.classList.add('bx--number__arrow--up');
-      upArrowNode.classList.add('bx--number__arrow--icon-up');
-      downArrowNode = element.appendChild(document.createElement('div'));
-      downArrowNode.classList.add('bx--number__arrow--down');
-      downArrowNode.classList.add('bx--number__arrow--icon-down');
-      inputNode = element.appendChild(document.createElement('input'));
-      inputNode.type = 'number';
-      inputNode.classList.add('bx--number__input');
-      input = new NumberInput(element);
-      document.body.appendChild(element);
-    });
-
-    beforeEach(function () {
-      inputNode.value = '2';
+      container = document.createElement('div');
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
+      element = document.querySelector('[data-numberinput]');
+      instance = new NumberInput(element);
+      inputNode = document.querySelector('input');
+      inputNode.value = '0';
     });
 
     it(`Should increase the value`, function () {
+      const upArrowNode = document.querySelector('.bx--number__arrow--up');
+
       return new Promise((resolve, reject) => {
         events.on(document.body, 'change', promiseTryCatcher((e) => {
           expect(e.cancelable).to.be.false;
-          expect(inputNode.value).to.equal('3');
+          expect(inputNode.value).to.equal('1');
         }, resolve, reject));
         upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
     });
 
     it(`Should decrease the value`, function () {
+      const downArrowNode = document.querySelector('.bx--number__arrow--down');
+      inputNode.value = '1';
+
       return new Promise((resolve, reject) => {
         events.on(document.body, 'change', promiseTryCatcher((e) => {
           expect(e.cancelable).to.be.false;
-          expect(inputNode.value).to.equal('1');
+          expect(inputNode.value).to.equal('0');
         }, resolve, reject));
         downArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
@@ -72,8 +83,8 @@ describe('Test Number Input', function () {
     });
 
     after(function () {
-      document.body.removeChild(element);
-      input.release();
+      document.body.removeChild(container);
+      instance.release();
     });
   });
 
@@ -81,11 +92,8 @@ describe('Test Number Input', function () {
     let element;
 
     before(function () {
-      element = document.createElement('div');
-      const upArrowNode = element.appendChild(document.createElement('div'));
-      upArrowNode.classList.add('bx--number__arrow--up');
-      const downArrowNode = element.appendChild(document.createElement('div'));
-      downArrowNode.classList.add('bx--number__arrow--down');
+      document.body.innerHTML = HTML;
+      element = document.querySelector('[data-numberinput]');
     });
 
     it('Should prevent creating duplicate instances', function () {

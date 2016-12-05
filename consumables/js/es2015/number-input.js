@@ -61,13 +61,13 @@ export default class NumberInput {
     const state = event.currentTarget.classList;
     const numberInput = this.element.querySelector('.bx--number__input');
 
-    if (state.contains('bx--number__arrow--icon-up')) {
+    if (state.contains('bx--number__arrow--up')) {
       if (this.options.ie) {
         ++numberInput.value;
       } else {
         numberInput.stepUp();
       }
-    } else if (state.contains('bx--number__arrow--icon-down')) {
+    } else if (state.contains('bx--number__arrow--down')) {
       if (this.options.ie) {
         if (numberInput.value > 0) {
           --numberInput.value;
