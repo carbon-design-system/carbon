@@ -86,7 +86,7 @@ class Search extends React.Component {
                 </div>
               ) : (
                 <div
-                  className="bx--search__toggle-layout__container bx--search__toggle-layout__container"
+                  className="bx--search__toggle-layout__container"
                   data-search-toggle-layout="grid"
                 >
                   <Icon
