@@ -6,7 +6,6 @@ import Select from '../../components/Select';
 import SelectItem from '../../components/SelectItem';
 import RadioButtonGroup from '../../components/RadioButtonGroup';
 import RadioButton from '../../components/RadioButton';
-import AppContainer from '../../components/AppContainer';
 
 const modalProps = {
   onBlur: action('onBlur'),
@@ -20,11 +19,6 @@ const modalProps = {
 };
 
 storiesOf('ModalWrapper', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'transactional modal',
     `

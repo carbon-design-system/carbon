@@ -1,14 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Tag, { types } from '../../components/Tag';
 
 storiesOf('Tag', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

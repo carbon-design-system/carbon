@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Pagination from '../../components/Pagination';
 
 const props = {
@@ -12,9 +11,9 @@ const props = {
 
 storiesOf('Pagination', module)
   .addDecorator((story) => (
-    <AppContainer style={{ width: '800px' }}>
+    <div style={{ width: '800px' }}>
       {story()}
-    </AppContainer>
+    </div>
   ))
   .addWithInfo(
     '',

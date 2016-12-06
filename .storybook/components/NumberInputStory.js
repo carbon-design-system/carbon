@@ -1,6 +1,5 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import NumberInput from '../../components/NumberInput';
 
 const numberInputProps = {
@@ -16,11 +15,6 @@ const numberInputProps = {
 };
 
 storiesOf('NumberInput', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'enabled',
     `

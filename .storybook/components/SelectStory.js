@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Select from '../../components/Select';
 import SelectItem from '../../components/SelectItem';
 
@@ -16,11 +15,6 @@ const selectProps = {
 };
 
 storiesOf('Select', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'enabled',
     `

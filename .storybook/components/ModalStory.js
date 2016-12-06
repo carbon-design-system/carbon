@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import Modal from '../../components/Modal';
-import AppContainer from '../../components/AppContainer';
 
 const modalProps = {
   onBlur: action('onBlur'),
@@ -15,11 +14,6 @@ const modalProps = {
 };
 
 storiesOf('Modal', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

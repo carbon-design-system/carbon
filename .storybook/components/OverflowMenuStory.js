@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import OverflowMenu from '../../components/OverflowMenu';
 import OverflowMenuItem from '../../components/OverflowMenuItem';
-import AppContainer from '../../components/AppContainer';
 
 const overflowMenuEvents = {
   onClick: action('onClick'),
@@ -15,11 +14,6 @@ const overflowMenuItemEvents = {
 };
 
 storiesOf('OverflowMenu', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

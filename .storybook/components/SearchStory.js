@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Search from '../../components/Search';
 
 const searchProps = {
@@ -15,11 +14,6 @@ const searchProps = {
 };
 
 storiesOf('Search', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'normal',
     `

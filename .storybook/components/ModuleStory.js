@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import ModulesContainer from '../../components/ModulesContainer';
 import Module from '../../components/Module';
 import ModuleHeader from '../../components/ModuleHeader';
@@ -10,11 +9,6 @@ import UnderReviewDecorator from '../UnderReviewDecorator';
 
 storiesOf('Module', module)
   .addDecorator(UnderReviewDecorator)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

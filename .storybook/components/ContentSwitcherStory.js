@@ -2,14 +2,8 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import ContentSwitcher from '../../components/ContentSwitcher';
 import Switch from '../../components/Switch';
-import AppContainer from '../../components/AppContainer';
 
 storiesOf('ContentSwitcher', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

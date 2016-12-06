@@ -3,15 +3,12 @@ import { action, storiesOf } from '@kadira/storybook';
 import DetailPageHeader from '../../components/DetailPageHeader';
 import Tabs from '../../components/Tabs';
 import Tab from '../../components/Tab';
-import AppContainer from '../../components/AppContainer';
 
 storiesOf('DetailPageHeader', module)
   .addDecorator((story) => (
-    <AppContainer>
-      <div style={{ 'min-width': '60em' }}>
-        {story()}
-      </div>
-    </AppContainer>
+    <div style={{ minWidth: '60em' }}>
+      {story()}
+    </div>
   ))
   .addWithInfo('without tabs', () => (
     <DetailPageHeader

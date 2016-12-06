@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Checkbox from '../../components/Checkbox';
 
 const checkboxEvents = {
@@ -11,11 +10,6 @@ const checkboxEvents = {
 };
 
 storiesOf('Checkbox', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'enabled checked',
     `

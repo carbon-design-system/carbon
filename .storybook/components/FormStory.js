@@ -1,6 +1,5 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Checkbox from '../../components/Checkbox';
 import Form from '../../components/Form';
 import FormGroup from '../../components/FormGroup';
@@ -169,11 +168,6 @@ const buttonEvents = {
 };
 
 storiesOf('Form', module)
-.addDecorator((story) => (
-  <AppContainer>
-  {story()}
-  </AppContainer>
-))
 .addWithInfo(
   '',
   `

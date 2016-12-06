@@ -1,6 +1,5 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import RadioButton from '../../components/RadioButton';
 
 const radioProps = {
@@ -8,11 +7,6 @@ const radioProps = {
 };
 
 storiesOf('RadioButton', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'enabled',
     `

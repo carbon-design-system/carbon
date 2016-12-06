@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Toggle from '../../components/Toggle';
 
 const toggleProps = {
@@ -9,11 +8,6 @@ const toggleProps = {
 };
 
 storiesOf('Toggle', module)
-  .addDecorator((story) => (
-    <AppContainer>
-    {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

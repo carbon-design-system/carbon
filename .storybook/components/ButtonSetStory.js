@@ -1,13 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import ButtonSet from '../../components/ButtonSet';
 import Button from '../../components/Button';
 
 storiesOf('ButtonSet', module)
-  .addDecorator((story) => (
-    <AppContainer>{story()}</AppContainer>
-  ))
   .addWithInfo(
     '',
     `

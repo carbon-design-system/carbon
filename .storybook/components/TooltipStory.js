@@ -1,16 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Tooltip from '../../components/Tooltip';
 import UnderReviewDecorator from '../UnderReviewDecorator';
 
 storiesOf('Tooltip', module)
   .addDecorator(UnderReviewDecorator)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
 	.addWithInfo(
     'default',
     `

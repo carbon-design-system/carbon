@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import FileUploader from '../../components/FileUploader';
-import AppContainer from '../../components/AppContainer';
 
 const fileUploaderEvents = {
   onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
@@ -15,11 +14,6 @@ const fileUploaderEvents = {
 };
 
 storiesOf('FileUploader', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

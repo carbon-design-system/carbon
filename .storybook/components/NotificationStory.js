@@ -1,6 +1,5 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Notification from '../../components/Notification';
 
 const notificationProps = {
@@ -23,11 +22,6 @@ const notificationProps = {
 };
 
 storiesOf('Notifications', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'toast',
     `

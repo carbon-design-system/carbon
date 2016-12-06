@@ -9,7 +9,6 @@ import CardStatus from '../../components/CardStatus';
 import CardActions from '../../components/CardActions';
 import CardActionItem from '../../components/CardActionItem';
 import Button from '../../components/Button';
-import AppContainer from '../../components/AppContainer';
 
 const cardProps = {
   onClick: () => { console.log('click'); }, // eslint-disable-line no-console
@@ -142,11 +141,6 @@ class ControlledCard extends Component {
 }
 
 storiesOf('Card', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'card with example functions',
     `

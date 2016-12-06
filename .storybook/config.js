@@ -1,25 +1,12 @@
 import React from 'react';
 import { configure, setAddon, addDecorator } from '@kadira/storybook';
 import infoAddon from '@kadira/react-storybook-addon-info';
+import ThemeContainer from './ThemeContainer';
 
-const style = {
-  padding: '3em',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-};
-
-const CenterDecorator = (story) => (
-  <div style={style}>
-    {story()}
-  </div>
+const appContainerDecorator = (story) => (
+  <ThemeContainer story={story} />
 );
-addDecorator(CenterDecorator);
+addDecorator(appContainerDecorator);
 
 setAddon(infoAddon);
 

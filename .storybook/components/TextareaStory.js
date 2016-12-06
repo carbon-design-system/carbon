@@ -1,6 +1,5 @@
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Textarea from '../../components/TextArea';
 
 const textareaProps = {
@@ -15,11 +14,6 @@ const textareaProps = {
 };
 
 storiesOf('TextArea', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'enabled',
     `

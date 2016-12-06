@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import Accordion from '../../components/Accordion';
 import AccordionItem from '../../components/AccordionItem';
 
@@ -9,11 +8,6 @@ const props = {
 };
 
 storiesOf('Accordion', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

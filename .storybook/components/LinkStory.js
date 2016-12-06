@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import Link from '../../components/Link';
-import AppContainer from '../../components/AppContainer';
 
 const additionalProps = {
   onClick: () => { console.log('Clicked!'); },  // eslint-disable-line no-console
@@ -9,11 +8,6 @@ const additionalProps = {
 };
 
 storiesOf('Link', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import Tabs from '../../components/Tabs';
 import Tab from '../../components/Tab';
-import AppContainer from '../../components/AppContainer';
 
 const props = {
   tabs: {
@@ -17,11 +16,6 @@ const props = {
 };
 
 storiesOf('Tabs', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

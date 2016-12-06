@@ -1,16 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import AppContainer from '../../components/AppContainer';
 import OrderedList from '../../components/OrderedList';
 import UnorderedList from '../../components/UnorderedList';
 import ListItem from '../../components/ListItem';
 
 storiesOf('Lists', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'ordered',
     `

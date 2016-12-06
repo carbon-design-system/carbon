@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import Loading from '../../components/Loading';
-import AppContainer from '../../components/AppContainer';
 
 const loadingProps = {
   active: true,
@@ -9,11 +8,6 @@ const loadingProps = {
 };
 
 storiesOf('Loading', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     '',
     `

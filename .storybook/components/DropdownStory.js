@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import Dropdown from '../../components/Dropdown';
 import DropdownItem from '../../components/DropdownItem';
-import AppContainer from '../../components/AppContainer';
 
 const dropdownEvents = {
   onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
@@ -16,11 +15,6 @@ const dropdownEvents = {
 };
 
 storiesOf('Dropdown', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addDecorator((story) => (
     <div style={{ minWidth: '20em' }}>
       {story()}
