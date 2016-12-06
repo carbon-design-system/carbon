@@ -58,6 +58,7 @@
       pointer-events: none;
     }
 
+    &__optgroup,
     &__option {
       color: $color__blue-90; // For the options to show in IE11
     }
