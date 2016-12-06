@@ -25,6 +25,11 @@ describe('Select', () => {
         expect(selectContainer.find('Icon').length).toEqual(1);
       });
 
+      it('should use correct icon', () => {
+        const icon = wrapper.find('Icon');
+        expect(icon.props().name).toEqual('caret--down');
+      });
+
       it('has the expected classes', () => {
         expect(selectContainer.hasClass('bx--select')).toEqual(true);
       });

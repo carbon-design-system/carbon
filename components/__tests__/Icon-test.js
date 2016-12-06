@@ -1,29 +1,60 @@
 import React from 'react';
-import Icon, { findIcon, getSvgContent, getSvgData, icons } from '../Icon';
+import Icon, { findIcon, svgShapes, getSvgData, icons } from '../Icon';
 import { mount } from 'enzyme';
 
 describe('Icon', () => {
   describe('Renders as expected', () => {
-    const iconRoot = mount(<Icon name="search" description="close the thing" />);
+    const props = {
+      className: 'extra-class',
+      name: 'search',
+      width: '20',
+      height: '20',
+      description: 'close the thing',
+      style: {
+        transition: '2s',
+      },
+    };
+
+    const wrapper = mount(<Icon {...props} />);
 
     it('Renders `description` as expected', () => {
-      expect(iconRoot.props().description).toEqual('close the thing');
+      expect(wrapper.props().description).toEqual('close the thing');
     });
 
     it('Renders with `id` on <title>', () => {
-      const id = iconRoot.find('title').props().id;
+      const id = wrapper.find('title').props().id;
       expect(id).not.toBeUndefined();
     });
 
     it('Renders `aria-labelledby` on <svg>', () => {
-      const aria = iconRoot.find('svg').props()['aria-labelledby'];
+      const aria = wrapper.find('svg').props()['aria-labelledby'];
       expect(aria).not.toBeUndefined();
     });
 
-    it('Should have equal values for `id` and `aria-labelledby` props', () => {
-      const id = iconRoot.find('title').props().id;
-      const aria = iconRoot.find('svg').props()['aria-labelledby'];
+    it('`id` and `aria-labelledby` should be equal', () => {
+      const id = wrapper.find('title').props().id;
+      const aria = wrapper.find('svg').props()['aria-labelledby'];
       expect(id).toEqual(aria);
+    });
+
+    it('should have expected viewBox on <svg>', () => {
+      expect(wrapper.find('svg').props().viewBox).not.toEqual('');
+    });
+
+    it('should add extra classes that are passed via className', () => {
+      expect(wrapper.props().className).toEqual('extra-class');
+    });
+
+    it('should recieve width props', () => {
+      expect(wrapper.props().width).toEqual('20');
+    });
+
+    it('should recieve height props', () => {
+      expect(wrapper.props().height).toEqual('20');
+    });
+
+    it('should recieve style props', () => {
+      expect(wrapper.props().style).toEqual({ transition: '2s' });
     });
   });
 
@@ -63,35 +94,10 @@ describe('Icon', () => {
     });
   });
 
-  describe('getSvgContent', () => {
+  describe('svgShapes', () => {
     it('returns with SVG XML when given a valid icon name', () => {
       const data = getSvgData('search');
-      const content = getSvgContent(data);
-
-      expect(content.length).toBeGreaterThan(0);
-    });
-
-    it('returns SVG XML when given an icon with valid polygons svgProp', () => {
-      const svgData = {
-        polygons: [{ points: '20,20 60,20 60,60 20,60' }],
-      };
-      const content = getSvgContent(svgData);
-      expect(content.length).toBeGreaterThan(0);
-    });
-
-    it('returns SVG XML when given an icon with valid polylines svgProp', () => {
-      const svgData = {
-        polylines: [{ points: '20,20 60,20 60,60 20,60' }],
-      };
-      const content = getSvgContent(svgData);
-      expect(content.length).toBeGreaterThan(0);
-    });
-
-    it('returns SVG XML when given an icon with valid rects svgProp', () => {
-      const svgData = {
-        rects: { width: 100, height: 100, x: 10, y: 10, rx: 1, ry: 1 },
-      };
-      const content = getSvgContent(svgData);
+      const content = svgShapes(data);
       expect(content.length).toBeGreaterThan(0);
     });
 
@@ -99,7 +105,7 @@ describe('Icon', () => {
       const svgData = {
         invalidProp: [{ invalidAttribute: 43 }],
       };
-      const content = getSvgContent(svgData);
+      const content = svgShapes(svgData);
       expect(content.length).toBeGreaterThan(0);
       expect(content).toEqual(['']);
     });

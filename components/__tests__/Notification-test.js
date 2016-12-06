@@ -3,7 +3,7 @@ import Notification from '../Notification';
 import { shallow, mount } from 'enzyme';
 
 const props = {
-  kind: 'error',
+  kind: 'success',
   title: 'title',
   subtitle: 'subtitle',
   iconDescription: 'description',
@@ -28,6 +28,26 @@ describe('Notification', () => {
 
       it('Renders inline notifications with two <Icon>', () => {
         expect(inline.find('Icon').length).toEqual(2);
+      });
+
+      it('renders checkmark--outline icon for success inline notification', () => {
+        const icon = inline.find('Icon[name="checkmark--outline"]');
+        expect(icon.props().name).toEqual('checkmark--outline');
+      });
+
+      it('renders error notification with matching kind and <icon name=""> values', () => {
+        inline.setProps({ kind: 'error' });
+        expect(inline.find('Icon').some('[name="error"]')).toBe(true);
+      });
+
+      it('renders warning notification with matching kind and <icon name=""> values', () => {
+        inline.setProps({ kind: 'warning' });
+        expect(inline.find('Icon').some('[name="warning"]')).toBe(true);
+      });
+
+      it('renders info notification with matching kind and <icon name=""> values', () => {
+        inline.setProps({ kind: 'info' });
+        expect(inline.find('Icon').some('[name="info"]')).toBe(true);
       });
 
       it('renders HTML for toast notifications when caption exists', () => {

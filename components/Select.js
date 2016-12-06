@@ -39,7 +39,7 @@ const Select = ({ className, id, labelText, disabled, children, iconDescription,
       >
         {children}
       </select>
-      <Icon name="down-arrow" className="bx--select__arrow" fill="#5aaafa" description={iconDescription} />
+      <Icon name="caret--down" className="bx--select__arrow" fill="#5aaafa" description={iconDescription} />
     </div>
   );
 };

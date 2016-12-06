@@ -22,7 +22,7 @@ class OverflowMenu extends Component {
 
   static defaultProps = {
     ariaLabel: 'list of options',
-    iconDescription: 'list of options',
+    iconDescription: 'open and close list of options',
     open: false,
     onClick: () => {},
   }
@@ -91,10 +91,8 @@ class OverflowMenu extends Component {
         >
           <Icon
             className="bx--overflow-menu__icon"
-            name="overflow_menu_icon"
+            name="overflow-menu"
             description={iconDescription}
-            fill="#dfe6eb"
-            description="open and close the menu"
           />
           <ul className="bx--overflow-menu__options">
             {children}

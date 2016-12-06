@@ -29,6 +29,11 @@ class Notification extends Component {
     this.props.onCloseButtonClick(evt);
   }
 
+  useIconName = (kindProp) => {
+    const isSuccess = kindProp === 'success';
+    return (isSuccess) ? 'checkmark--outline' : kindProp;
+  }
+
   render() {
     if (!this.state.open) {
       return null;
@@ -101,7 +106,7 @@ class Notification extends Component {
             description={this.props.iconDescription}
             className="bx--notification-inline__icon--left"
             aria-label="close"
-            name={kind}
+            name={this.useIconName(kind)}
           />
           <div className="bx--notification-inline__text">
             <p className="bx--notification-inline__title">{title}</p>

@@ -38,7 +38,7 @@ class AccordionItem extends Component {
     return (
       <li className={classNames} onClick={this.handleClick}>
         <div className="bx--accordion__heading">
-          <Icon className="bx--accordion__arrow" name="arrow-right" description="Expand/Collapse" />
+          <Icon className="bx--accordion__arrow" name="chevron--right" description="Expand/Collapse" />
           <p className="bx--accordion__title">{title}</p>
         </div>
         <p className="bx--accordion__content">{children}</p>

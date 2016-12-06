@@ -142,7 +142,7 @@ class Tabs extends React.Component {
         <nav {...other} {...props.nav}>
           <div {...props.trigger.div}>
             <a {...props.trigger.anchor}>{this.state.selectedLabel}</a>
-            <Icon description="show menu options" name="down-arrow" />
+            <Icon description="show menu options" name="caret--down" />
           </div>
           <ul {...props.tablist}>
             {tabsWithProps}

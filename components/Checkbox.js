@@ -39,7 +39,7 @@ const Checkbox = ({ className, id, labelText, onChange, ...other }) => {
         <Icon
           className="bx--checkbox__checkmark"
           description="checkmark"
-          name="check-padding"
+          name="checkmark"
         />
       </span>
       <span className="bx--checkbox__label-text">{labelText}</span>

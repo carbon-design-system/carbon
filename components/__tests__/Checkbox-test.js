@@ -35,7 +35,7 @@ describe('Checkbox', () => {
         it('has expected children', () => {
           const icon = span1.childAt(0);
           expect(icon.props().className).toEqual('bx--checkbox__checkmark');
-          expect(icon.props().name).toEqual('check-padding');
+          expect(icon.props().name).toEqual('checkmark');
         });
       });
 

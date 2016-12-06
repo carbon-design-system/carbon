@@ -7,6 +7,23 @@ describe('Pagination', () => {
     const pagination = shallow(
       <Pagination className="extra-class" pageSizes={[5, 10]} totalItems={50} />
     );
+
+    describe('icons', () => {
+      const icons = pagination.find('Icon');
+
+      it('should have 3 icons', () => {
+        expect(icons.length).toEqual(2);
+      });
+
+      it('should use correct "backward" icon', () => {
+        expect(icons.first().props().name).toEqual('chevron--left');
+      });
+
+      it('should use correct "forward" icon', () => {
+        expect(icons.last().props().name).toEqual('chevron--right');
+      });
+    });
+
     describe('pagination container', () => {
       it('should render the expected classes', () => {
         expect(pagination.hasClass('bx--pagination')).toBe(true);

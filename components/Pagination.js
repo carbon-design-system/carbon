@@ -92,7 +92,7 @@ class Pagination extends Component {
             disabled={page === 1}
           >
             <div>
-              <Icon style={{ transform: 'scaleX(-1)' }} name="arrow-right" description="Backward" />
+              <Icon name="chevron--left" description="Backward" />
             </div>
           </button>
           <TextInput
@@ -109,7 +109,7 @@ class Pagination extends Component {
             disabled={page === Math.ceil(totalItems / pageSize)}
           >
             <div>
-              <Icon name="arrow-right" description="Forward" />
+              <Icon name="chevron--right" description="Forward" />
             </div>
           </button>
         </div>

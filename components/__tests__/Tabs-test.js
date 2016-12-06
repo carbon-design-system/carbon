@@ -54,7 +54,7 @@ describe('Tabs', () => {
       });
 
       it('renders <Icon>', () => {
-        expect(trigger.find('Icon').props().name).toEqual('down-arrow');
+        expect(trigger.find('Icon').props().name).toEqual('caret--down');
       });
     });
 

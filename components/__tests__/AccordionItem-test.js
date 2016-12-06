@@ -21,6 +21,11 @@ describe('AccordionItem', () => {
       expect(heading.find('.bx--accordion__title').text()).toBe('A heading');
     });
 
+    it('should use correct icon', () => {
+      const heading = wrapper.find('.bx--accordion__heading');
+      expect(heading.find('Icon').props().name).toEqual('chevron--right');
+    });
+
     it('has the expected classes', () => {
       expect(wrapper.hasClass('bx--accordion__item')).toEqual(true);
       expect(wrapper.hasClass('bx--accordion__item--active')).toEqual(false);

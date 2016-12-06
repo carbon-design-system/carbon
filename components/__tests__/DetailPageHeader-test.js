@@ -33,6 +33,10 @@ describe('DetailPageHeader', () => {
       expect(hasIconClass).toEqual(true);
     });
 
+    it('should render correct icon', () => {
+      expect(wrapper.find('Icon').at(0).props().name).toEqual('arrow--left');
+    });
+
     it('should render an element with a link text class', () => {
       const link = wrapper.find('a');
       const hasLinkText = link.find('.bx--detail-page-header--no-tabs__link-text').length === 1;

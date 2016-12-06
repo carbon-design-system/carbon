@@ -21,51 +21,6 @@ describe('Search', () => {
       });
     });
 
-    describe('Icon', () => {
-      it('renders two Icon components', () => {
-        const icons = wrapper.find('Icon');
-        expect(icons.length).toEqual(2);
-      });
-
-      it('should have a search icon', () => {
-        const icons = wrapper.find('Icon');
-        const search = icons.at(0);
-        expect(search.props().name).toEqual('search');
-        expect(search.props().className).toEqual('bx--search__icon--magnifier');
-      });
-    });
-
-    describe('buttons', () => {
-      const btns = wrapper.find('button');
-
-      it('should be two buttons', () => {
-        expect(btns.length).toBe(2);
-      });
-
-      describe('sort button', () => {
-        const btn = btns.first();
-        it('first button should be a sort button', () => {
-          expect(btn.props().className).toEqual('bx--search__sort');
-          expect(btn.props().type).toEqual('button');
-        });
-
-        it('sort button should have an arrows icon', () => {
-          const sort = btn.find('Icon');
-          expect(sort.length).toBe(1);
-          expect(sort.props().name).toEqual('arrows');
-          expect(sort.props().className).toEqual('bx--search__icon');
-        });
-      });
-
-      describe('toggle-layout button', () => {
-        const btn = btns.last();
-        it('last button should be a toggle-layout button', () => {
-          expect(btn.props().className).toEqual('bx--search__toggle-layout');
-          expect(btn.props().type).toEqual('button');
-        });
-      });
-    });
-
     describe('input', () => {
       it('renders as expected', () => {
         expect(textInput.length).toBe(1);
@@ -110,17 +65,86 @@ describe('Search', () => {
       });
     });
 
-    describe('small variant', () => {
+    describe('Large Search', () => {
+      describe('buttons', () => {
+        const btns = wrapper.find('button');
+        const sortBtn = btns.first();
+        const toggleBtn = btns.last();
+
+        it('should be two buttons', () => {
+          expect(btns.length).toBe(2);
+        });
+
+        it('should have type="button"', () => {
+          const type1 = btns.get(0).getAttribute('type');
+          const type2 = btns.get(1).getAttribute('type');
+          expect(type1).toEqual('button');
+          expect(type2).toEqual('button');
+        });
+
+        it('has expected class for sort button', () => {
+          expect(sortBtn.hasClass('bx--search__sort')).toEqual(true);
+        });
+
+        it('has expected class for toggle-layout button', () => {
+          expect(toggleBtn.hasClass('bx--search__toggle-layout')).toEqual(true);
+        });
+      });
+
+      describe('icons', () => {
+        it('renders "search--glyph" icon', () => {
+          const icons = wrapper.find('Icon');
+          expect(icons.at(0).props().name).toEqual('search--glyph');
+        });
+
+        it('renders three Icons', () => {
+          wrapper.setProps({ small: false });
+          const icons = wrapper.find('Icon');
+          expect(icons.length).toEqual(3);
+        });
+
+        it('should use "filter--glyph" icon for sort button', () => {
+          const icon = wrapper.find('Icon').at(1);
+          expect(icon.props().name).toEqual('filter--glyph');
+        });
+
+        it('should use "list" icon for toggle button', () => {
+          const icon = wrapper.find('Icon').at(2);
+          expect(icon.props().name).toEqual('list');
+        });
+
+        it('should use "grid" icon when format state is not "list"', () => {
+          wrapper.setState({ format: 'not-list' });
+          const icon = wrapper.find('Icon').at(2);
+          expect(icon.props().name).toEqual('grid');
+        });
+      });
+    });
+
+    describe('Small Search', () => {
       const small = mount(
         <Search id="test" small className="extra-class" label="Search Field" />
       );
+
       const smallContainer = small.find('[role="search"]');
-      it('should have the appropriate small class', () => {
+
+      it('renders correct search icon', () => {
+        const icons = small.find('Icon');
+        expect(icons.at(0).props().name).toEqual('search--glyph');
+      });
+
+      it('should have the expected small class', () => {
         expect(smallContainer.hasClass('bx--search--sm')).toEqual(true);
       });
-      it('should not have  buttons', () => {
+
+      it('should not have buttons', () => {
         const btn = small.find('button');
         expect(btn.length).toEqual(0);
+      });
+
+      it('renders one Icon', () => {
+        const icons = small.find('Icon');
+        expect(icons.length).toEqual(1);
       });
     });
   });

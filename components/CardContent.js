@@ -18,7 +18,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  cardIcon: 'default',
+  cardIcon: 'app-services',
   fullSize: false,
 };
 

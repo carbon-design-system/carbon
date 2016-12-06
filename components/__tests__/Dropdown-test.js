@@ -41,6 +41,11 @@ describe('Dropdown', () => {
       expect(dropdown.find('.test-child').length).toEqual(2);
     });
 
+    it('should use correct icon', () => {
+      const icon = mounted.find('Icon');
+      expect(icon.props().name).toEqual('caret--down');
+    });
+
     it('has the expected default iconDescription', () => {
       expect(mounted.props().iconDescription).toEqual('open list of options');
     });

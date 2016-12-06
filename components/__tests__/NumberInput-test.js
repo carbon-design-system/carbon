@@ -5,7 +5,7 @@ import NumberInput from '../NumberInput';
 describe('numberInput', () => {
   describe('should render as expected', () => {
     const wrapper = mount(
-      <NumberInput min={0} max={100} id="test" label="Number Inptut" className="extra-class" />
+      <NumberInput min={0} max={100} id="test" label="Number Input" className="extra-class" />
     );
 
     const label = wrapper.find('label');
@@ -51,13 +51,18 @@ describe('numberInput', () => {
     });
 
     describe('Icon', () => {
+      const icons = wrapper.find('Icon');
       it('renders two Icon components', () => {
-        const icons = wrapper.find('Icon');
         expect(icons.length).toEqual(2);
       });
 
       it('has the expected default iconDescription', () => {
         expect(wrapper.props().iconDescription).toEqual('choose a number');
+      });
+
+      it('should use correct icons', () => {
+        expect(icons.at(0).props().name).toEqual('caret--up');
+        expect(icons.at(1).props().name).toEqual('caret--down');
       });
 
       it('adds new iconDescription when passed via props', () => {

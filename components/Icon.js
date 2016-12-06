@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
-import icons from '@console/bluemix-icons/legacy-icons';
+import icons from '@console/bluemix-icons';
 
 const propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  viewBox: PropTypes.string,
   className: PropTypes.string,
   fill: PropTypes.string,
   fillRule: PropTypes.string,
@@ -14,8 +15,6 @@ const propTypes = {
 
 const defaultProps = {
   fillRule: 'evenodd',
-  height: '32px',
-  width: '32px',
 };
 
 /**
@@ -55,10 +54,10 @@ export function getSvgData(iconName) {
  * @param {Object} svgData - JSON Object for an SVG icon
  * @example
  * // Returns SVG elements
- * const svgData = this.getSvgData('copy-code');
- * this.getSvgContent(svgData);
+ * const svgData = getSvgData('copy-code');
+ * svgShapes(svgData);
  */
-export function getSvgContent(svgData) {
+export function svgShapes(svgData) {
   const svgElements = Object.keys(svgData)
     .filter(key => svgData[key])
     .map(svgProp => {
@@ -76,48 +75,29 @@ export function getSvgContent(svgData) {
         });
       } else if (svgProp === 'paths') {
         return data.map(path => <path d={path.d} />);
-      } else if (svgProp === 'polygons') {
-        return data.map(pointsData => <polygon points={pointsData.points}></polygon>);
-      } else if (svgProp === 'polylines') {
-        return data.map(pointsData => <polyline points={pointsData.points}></polyline>);
-      } else if (svgProp === 'rects') {
-        const rectProps = {
-          width: data.width,
-          height: data.height,
-          x: data.x,
-          y: data.y,
-          rx: data.rx,
-          ry: data.ry,
-        };
-
-        return <rect {...rectProps}></rect>;
       }
 
       return '';
     });
 
-
   return svgElements;
 }
 
-const Icon = ({ className, fill, fillRule, height, width, name, style, description }) => {
-  // SVG Content and Data for Render
-  const svg = findIcon(name);
-  const svgContent = svg ? getSvgContent(svg.svgData) : '';
-
-  // Props
+const Icon = ({ className, width, height, fill, fillRule, name, style, description }) => {
+  const icon = findIcon(name);
+  const id = icon.id;
   const props = {
     className,
     fill,
     fillRule,
-    height,
-    width,
     name,
-    viewBox: svg ? svg.viewBox : undefined,
     style,
+    viewBox: icon.viewBox,
+    width: icon.width || width,
+    height: icon.height || height,
   };
 
-  const id = findIcon(name).id;
+  const svgContent = (icon) ? svgShapes(icon.svgData) : '';
 
   return (
     <svg {...props} aria-labelledby={id}>

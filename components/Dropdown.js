@@ -76,7 +76,7 @@ class Dropdown extends Component {
         tabIndex={tabIndex}
       >
         <li className="bx--dropdown__menu-text">{this.state.selectedText}</li>
-        <Icon name="down-arrow" className="bx--dropdown__arrow" fill="#5aaafa" description={iconDescription} />
+        <Icon name="caret--down" className="bx--dropdown__arrow" fill="#5aaafa" description={iconDescription} />
         <li>
           <ul className="bx--dropdown__list">{children}</ul>
         </li>

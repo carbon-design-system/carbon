@@ -50,11 +50,9 @@ class Search extends React.Component {
     return (
       <div className={searchClasses} role="search">
         <Icon
-          name="search"
+          name="search--glyph"
           description="search"
           className="bx--search__icon--magnifier"
-          width="22px"
-          height="22px"
         />
         <label htmlFor={id} className="bx--search__label">{labelText}</label>
         <input
@@ -68,21 +66,19 @@ class Search extends React.Component {
           <div>
             <button className="bx--search__sort" type="button">
               <Icon
-                name="arrows"
+                name="filter--glyph"
                 description="search"
                 className="bx--search__icon"
-                width="16px"
-                height="16px"
               />
             </button>
             <button className="bx--search__toggle-layout" type="button" onClick={this.toggle} data-search-toggle-btn>
               {this.state.format === 'list' ? (
                 <div className="bx--search__toggle-layout__container" data-search-toggle-layout="list">
-                  <svg className="bx--search__icon" fill="#fff" fillRule="evenodd">
-                    <rect x="0" y="0" width="15" height="4"></rect>
-                    <rect x="0" y="5" width="15" height="4"></rect>
-                    <rect x="0" y="10" width="15" height="4"></rect>
-                  </svg>
+                  <Icon
+                    name="list"
+                    description="list"
+                    className="bx--search__icon"
+                  />
                 </div>
               ) : (
                 <div
@@ -93,8 +89,6 @@ class Search extends React.Component {
                     name="grid"
                     description="toggle-layout"
                     className="bx--search__icon"
-                    width="16px"
-                    height="16px"
                   />
                 </div>
               )}

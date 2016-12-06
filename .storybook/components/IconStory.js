@@ -3,6 +3,16 @@ import { storiesOf } from '@kadira/storybook';
 import Icon from '../../components/Icon';
 import AppContainer from '../../components/AppContainer';
 
+const props = {
+  style: {
+    margin: '50px',
+    outline: '1px solid red',
+  },
+  fill: 'yellow',
+  description: 'description',
+  className: 'extra-class',
+};
+
 storiesOf('Icon', module)
   .addDecorator((story) => (
     <AppContainer>
@@ -16,5 +26,11 @@ storiesOf('Icon', module)
       property to change the color of the icon. The name property specifies which the icon to be displayed.
       For a full list of icon names, see: http://design-system.stage1.mybluemix.net/essentials/iconography.html#library.
     `,
-    () => (<Icon name="search" fill="red" description="search microservices" />),
+    () => (
+      <div>
+        <Icon name="add" {...props} />
+        <Icon name="add--glyph" {...props} />
+        <Icon name="add--outline" {...props} />
+      </div>
+    ),
   );

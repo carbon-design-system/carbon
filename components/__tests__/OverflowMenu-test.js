@@ -5,14 +5,22 @@ import { shallow, mount } from 'enzyme';
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
-    const rootWrapper = shallow(<OverflowMenu className="extra-class" />);
+    const rootWrapper = shallow(
+      <OverflowMenu className="extra-class">
+        <div className="test-child"></div>
+        <div className="test-child"></div>
+      </OverflowMenu>
+    );
     const menu = rootWrapper.childAt(0);
+    const icon = menu.find(Icon);
 
     it('should render an Icon', () => {
-      const icon = menu.find(Icon);
-
       expect(icon.length).toBe(1);
       expect(icon.hasClass('bx--overflow-menu__icon')).toEqual(true);
+    });
+
+    it('should use correct overflow-menu icon', () => {
+      expect(icon.props().name).toEqual('overflow-menu');
     });
 
     it('has the expected classes', () => {
@@ -30,38 +38,26 @@ describe('OverflowMenu', () => {
     it('should add extra classes that are passed via className', () => {
       expect(menu.hasClass('extra-class')).toEqual(true);
     });
-  });
 
-  it('should render children as expected', () => {
-    const menu = shallow(
-      <OverflowMenu>
-        <div className="test-child"></div>
-        <div className="test-child"></div>
-      </OverflowMenu>
-    );
+    it('should render children as expected', () => {
+      expect(menu.find('.test-child').length).toEqual(2);
+    });
 
-    expect(menu.find('.test-child').length).toEqual(2);
-  });
+    it('should set tabIndex if one is passed via props', () => {
+      rootWrapper.setProps({ tabIndex: 2 });
 
-  it('should set tabIndex if one is passed via props', () => {
-    const rootWrapper = shallow(<OverflowMenu tabIndex={2} />);
-    const menu = rootWrapper.childAt(0);
+      expect(rootWrapper.childAt(0).props().tabIndex).toEqual(2);
+    });
 
-    expect(menu.props().tabIndex).toEqual(2);
-  });
+    it('should set ariaLabel if one is passed via props', () => {
+      rootWrapper.setProps({ ariaLabel: 'test label' });
+      expect(rootWrapper.childAt(0).props()['aria-label']).toEqual('test label');
+    });
 
-  it('should set ariaLabel if one is passed via props', () => {
-    const rootWrapper = shallow(<OverflowMenu ariaLabel="test label" />);
-    const menu = rootWrapper.childAt(0);
-
-    expect(menu.props()['aria-label']).toEqual('test label');
-  });
-
-  it('should set id if one is passed via props', () => {
-    const rootWrapper = shallow(<OverflowMenu id="uniqueId" />);
-    const menu = rootWrapper.childAt(0);
-
-    expect(menu.props().id).toEqual('uniqueId');
+    it('should set id if one is passed via props', () => {
+      rootWrapper.setProps({ id: 'uniqueId' });
+      expect(rootWrapper.childAt(0).props().id).toEqual('uniqueId');
+    });
   });
 
   describe('open and closed states', () => {

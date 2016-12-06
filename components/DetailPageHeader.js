@@ -32,7 +32,7 @@ const DetailPageHeader = ({
         <div className="bx--detail-page-header--with-tabs__container">
           <div className="bx--detail-page-header--with-tabs__breadcrumb">
             <a href="#" className="bx--detail-page-header--with-tabs__link-wrapper" onClick={onBackLinkClick}>
-              <Icon description={breadcrumbTitle} name="back" className="bx--detail-page-header--with-tabs__arrow" />
+              <Icon description={breadcrumbTitle} name="arrow--left" className="bx--detail-page-header--with-tabs__arrow" />
               <p className="bx--detail-page-header--with-tabs__breadcrumb-title">{breadcrumbTitle}</p>
             </a>
           </div>
@@ -51,7 +51,7 @@ const DetailPageHeader = ({
       className="bx--detail-page-header--no-tabs"
     >
       <a href="#" className="bx--detail-page-header--no-tabs__link-wrapper" onClick={onBackLinkClick}>
-        <Icon description={breadcrumbTitle} name="back" className="bx--detail-page-header--no-tabs__arrow" />
+        <Icon description={breadcrumbTitle} name="arrow--left" className="bx--detail-page-header--no-tabs__arrow" />
         <p className="bx--detail-page-header--no-tabs__link-text">{breadcrumbTitle}</p>
       </a>
       <p className="bx--detail-page-header--no-tabs__info-title">{title}</p>

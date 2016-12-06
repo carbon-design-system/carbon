@@ -12,34 +12,19 @@ import InternalButton from '../../internal/InternalButton';
 import AppContainer from '../../components/AppContainer';
 
 const cardProps = {
-  onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
   onClick: () => { console.log('click'); }, // eslint-disable-line no-console
   onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
-  onMouseDown: () => { console.log('mouseDown'); }, // eslint-disable-line no-console
-  onMouseEnter: () => { console.log('mouseEnter'); }, // eslint-disable-line no-console
-  onMouseLeave: () => { console.log('mouseLeave'); }, // eslint-disable-line no-console
-  onMouseUp: () => { console.log('mouseUp'); }, // eslint-disable-line no-console
   className: 'some-class',
 };
 
 const overflowMenuProps = {
-  onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
   onClick: () => { console.log('click'); }, // eslint-disable-line no-console
   onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
-  onMouseDown: () => { console.log('mouseDown'); }, // eslint-disable-line no-console
-  onMouseEnter: () => { console.log('mouseEnter'); }, // eslint-disable-line no-console
-  onMouseLeave: () => { console.log('mouseLeave'); }, // eslint-disable-line no-console
-  onMouseUp: () => { console.log('mouseUp'); }, // eslint-disable-line no-console
   className: 'some-class',
 };
 
 const overflowMenuItemProps = {
-  onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
   onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
-  onMouseDown: () => { console.log('mouseDown'); }, // eslint-disable-line no-console
-  onMouseEnter: () => { console.log('mouseEnter'); }, // eslint-disable-line no-console
-  onMouseLeave: () => { console.log('mouseLeave'); }, // eslint-disable-line no-console
-  onMouseUp: () => { console.log('mouseUp'); }, // eslint-disable-line no-console
   className: 'some-class',
 };
 
@@ -117,7 +102,6 @@ class ControlledCard extends Component {
         <CardContent
           cardTitle="App Title 1"
           cardLink={cardLinks}
-          cardIcon="default"
         >
           <OverflowMenu {...overflowMenuProps}>
             <OverflowMenuItem
@@ -147,9 +131,9 @@ class ControlledCard extends Component {
         <CardFooter>
           <CardStatus status={this.state.status} />
           <CardActions>
-            <CardActionItem iconName="restart_icon" onClick={this.restartApp} description="Restart App" />
-            <CardActionItem iconName="go_to_icon" onClick={this.goToApp} description="Go To App" />
-            <CardActionItem iconName="favorite_icon" onClick={this.favoriteApp} description="Favorite App" />
+            <CardActionItem iconName="restart--glyph" onClick={this.restartApp} description="Restart App" />
+            <CardActionItem iconName="launch--glyph" onClick={this.goToApp} description="Go To App" />
+            <CardActionItem iconName="favorite" onClick={this.favoriteApp} description="Favorite App" />
           </CardActions>
         </CardFooter>
       </Card>
@@ -198,7 +182,6 @@ storiesOf('Card', module)
         <CardContent
           cardTitle="App Title 1"
           cardLink={appCardLinks}
-          cardIcon="default"
         >
           <OverflowMenu {...overflowMenuProps}>
             <OverflowMenuItem
@@ -224,9 +207,9 @@ storiesOf('Card', module)
         <CardFooter>
           <CardStatus status={CardStatus.appStatus.RUNNING} />
           <CardActions>
-            <CardActionItem iconName="restart_icon" />
-            <CardActionItem iconName="go_to_icon" />
-            <CardActionItem iconName="favorite_icon" />
+            <CardActionItem iconName="restart--glyph" />
+            <CardActionItem iconName="launch--glyph" />
+            <CardActionItem iconName="favorite" />
           </CardActions>
         </CardFooter>
       </Card>
@@ -242,7 +225,6 @@ storiesOf('Card', module)
         <CardContent
           cardTitle="Container Group"
           cardInfo={containerCardInfo}
-          cardIcon="default"
         >
           <OverflowMenu {...overflowMenuProps}>
             <OverflowMenuItem
@@ -284,7 +266,6 @@ storiesOf('Card', module)
         <CardContent
           cardTitle="Service Name 1"
           cardInfo={serviceCardInfo}
-          cardIcon="default"
         >
           <OverflowMenu {...overflowMenuProps}>
             <OverflowMenuItem
@@ -327,7 +308,6 @@ storiesOf('Card', module)
         <CardContent
           cardTitle="Virtual Server Group"
           cardLink={virtualServerCardLinks}
-          cardIcon="default"
         >
           <OverflowMenu {...overflowMenuProps}>
             <OverflowMenuItem
