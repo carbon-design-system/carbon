@@ -29,6 +29,7 @@ import ProfileSwitcher from './profile-switcher';
 import Pagination from './pagination';
 import SearchWithOptions from './search-with-options';
 import Accordion from './accordion';
+import CopyBtn from './copy-btn';
 
 const settings = {};
 
@@ -205,6 +206,7 @@ const init = () => {
     Pagination.init();
     SearchWithOptions.init();
     Accordion.init();
+    CopyBtn.init();
   }
 };
 
