@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './Modal';
-import PrimaryButton from './PrimaryButton';
+import Button from './Button';
 import '@console/bluemix-components/consumables/scss/components/modals/modals.scss';
 
 class ModalWrapper extends React.Component {
@@ -71,7 +71,7 @@ class ModalWrapper extends React.Component {
 
     return (
       <div>
-        <PrimaryButton onClick={this.handleOpen}>{buttonTriggerText}</PrimaryButton>
+        <Button onClick={this.handleOpen}>{buttonTriggerText}</Button>
         <Modal {...modalProps} {...props}>
           {this.props.children}
         </Modal>

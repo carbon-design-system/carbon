@@ -34,9 +34,10 @@ describe('CardContent', () => {
         expect(span.props().children).toBe('testAmount');
       });
 
-      it('renders SecondaryButton as expected', () => {
-        const SecondaryButton = wrapper.find('SecondaryButton');
+      it('renders Secondary Button as expected', () => {
+        const SecondaryButton = wrapper.find('Button');
         expect(SecondaryButton.hasClass('bx--overview__details-button')).toBe(true);
+        expect(SecondaryButton.props().kind).toBe('secondary');
         expect(SecondaryButton.props().children).toBe('testText');
       });
     });

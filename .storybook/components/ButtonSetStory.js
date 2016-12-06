@@ -2,8 +2,7 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import AppContainer from '../../components/AppContainer';
 import ButtonSet from '../../components/ButtonSet';
-import PrimaryButton from '../../components/PrimaryButton';
-import SecondaryButton from '../../components/SecondaryButton';
+import Button from '../../components/Button';
 
 storiesOf('ButtonSet', module)
   .addDecorator((story) => (
@@ -18,7 +17,7 @@ storiesOf('ButtonSet', module)
     `,
     () => (
       <ButtonSet>
-        <SecondaryButton>Backward</SecondaryButton>
-        <PrimaryButton>Forward</PrimaryButton>
+        <Button kind="secondary">Backward</Button>
+        <Button>Forward</Button>
       </ButtonSet>
   ));

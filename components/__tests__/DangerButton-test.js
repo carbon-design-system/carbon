@@ -1,14 +1,14 @@
 import React from 'react';
-import SecondaryButton from '../SecondaryButton';
+import DangerButton from '../DangerButton';
 import { shallow, mount } from 'enzyme';
 
-describe('SecondaryButton', () => {
+describe('DangerButton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(
-      <SecondaryButton small className="extra-class">
+      <DangerButton small className="extra-class">
         <div className="child">Test</div>
         <div className="child">Test</div>
-      </SecondaryButton>
+      </DangerButton>
     );
 
     it('Renders children as expected', () => {
@@ -18,10 +18,10 @@ describe('SecondaryButton', () => {
     it('Renders wrapper as expected', () => {
       expect(wrapper.length).toBe(1);
     });
-    it('Has the expected kind set to "secondary"', () => {
-      expect(wrapper.props().kind).toEqual('secondary');
+    it('Has kind="danger"', () => {
+      expect(wrapper.props().kind).toEqual('danger');
     });
-    it('Has the expected small property set to true', () => {
+    it('Has small property', () => {
       expect(wrapper.props().small).toEqual(true);
     });
     it('Should add extra classes that are passed via className', () => {
@@ -29,7 +29,7 @@ describe('SecondaryButton', () => {
     });
 
     describe('Renders icon buttons', () => {
-      const iconButton = mount(<SecondaryButton icon="search" iconDescription="Search">Search</SecondaryButton>);
+      const iconButton = mount(<DangerButton icon="search" iconDescription="Search">Search</DangerButton>);
       const icon = iconButton.find('svg');
       it('should have the appropriate icon', () => {
         expect(icon.hasClass('bx--btn--right-icon__icon')).toBe(true);

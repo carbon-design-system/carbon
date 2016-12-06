@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import SecondaryButton from './SecondaryButton';
+import Button from './Button';
 import Icon from './Icon';
 import '@console/bluemix-components/consumables/scss/components/card/card.scss';
 
@@ -52,7 +52,7 @@ const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardI
         <br />
         {desc}
       </p>
-      <SecondaryButton className="bx--overview__details-button">{buttonText}</SecondaryButton>
+      <Button kind="secondary" className="bx--overview__details-button">{buttonText}</Button>
     </div>
     )
   : (

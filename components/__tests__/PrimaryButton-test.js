@@ -18,11 +18,11 @@ describe('PrimaryButton', () => {
     it('Renders wrapper as expected', () => {
       expect(wrapper.length).toBe(1);
     });
-    it('Has the expected classes', () => {
-      expect(wrapper.hasClass('bx--btn')).toEqual(true);
+    it('Has the expected kind set to "primary"', () => {
+      expect(wrapper.props().kind).toEqual('primary');
     });
-    it('Has the expected classes for small', () => {
-      expect(wrapper.hasClass('bx--btn--sm')).toEqual(true);
+    it('Has the expected small property set to true', () => {
+      expect(wrapper.props().small).toEqual(true);
     });
     it('Should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);

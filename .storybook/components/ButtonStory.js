@@ -1,18 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf, action } from '@kadira/storybook';
 import AppContainer from '../../components/AppContainer';
-import PrimaryButton from '../../components/PrimaryButton';
-import SecondaryButton from '../../components/SecondaryButton';
+import Button from '../../components/Button';
 
 
 const buttonEvents = {
-  onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
-  onClick: () => { console.log('click'); }, // eslint-disable-line no-console
-  onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
-  onMouseDown: () => { console.log('mouseDown'); }, // eslint-disable-line no-console
-  onMouseEnter: () => { console.log('mouseEnter'); }, // eslint-disable-line no-console
-  onMouseLeave: () => { console.log('mouseLeave'); }, // eslint-disable-line no-console
-  onMouseUp: () => { console.log('mouseUp'); }, // eslint-disable-line no-console
+  onClick: action('onClick'),
+  onFocus: action('onFocus'),
   className: 'some-class',
 };
 
@@ -39,26 +33,11 @@ storiesOf('Buttons', module)
     `,
     () => (
       <div>
-        <PrimaryButton {...buttonEvents} className="some-class">
+        <Button {...buttonEvents} className="some-class">
           Primary Button
-        </PrimaryButton>
+        </Button>
         &nbsp;
-        <PrimaryButton {...buttonEvents} href="#" className="some-class">Primary Link</PrimaryButton>
-        &nbsp;
-        <PrimaryButton {...buttonEvents} disabled>Disabled</PrimaryButton>
-        &nbsp;
-        <PrimaryButton icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</PrimaryButton>
-        <br />
-        <br />
-        <PrimaryButton small {...buttonEvents} className="some-class">
-          Small Button
-        </PrimaryButton>
-        &nbsp;
-        <PrimaryButton small {...buttonEvents} href="#" className="some-class">Small Link</PrimaryButton>
-        &nbsp;
-        <PrimaryButton small {...buttonEvents} disabled>Small Disabled</PrimaryButton>
-        &nbsp;
-        <PrimaryButton small icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</PrimaryButton>
+        <Button {...buttonEvents} href="#" className="some-class">Primary Link</Button>
       </div>
   ))
   .addWithInfo(
@@ -71,25 +50,65 @@ storiesOf('Buttons', module)
     `,
     () => (
       <div>
-        <SecondaryButton {...buttonEvents} className="some-class">
+        <Button kind="secondary" {...buttonEvents} className="some-class">
           Secondary Button
-        </SecondaryButton>
+        </Button>
         &nbsp;
-        <SecondaryButton {...buttonEvents} href="#" className="some-class">Secondary Link</SecondaryButton>
+        <Button kind="secondary" {...buttonEvents} href="#" className="some-class">Secondary Link</Button>
+      </div>
+  ))
+  .addWithInfo(
+    'Small Buttons',
+    `
+      Small buttons may be used when there is not enough vertical space for a regular sized button. This issue is most
+      commonly found in tables. Small buttons should have three words or less.
+    `,
+    () => (
+      <div>
+        <Button small {...buttonEvents} className="some-class">
+          Small Button
+        </Button>
         &nbsp;
-        <SecondaryButton {...buttonEvents} disabled>Disabled</SecondaryButton>
+        <Button small {...buttonEvents} href="#" className="some-class">Small Link</Button>
+      </div>
+  ))
+  .addWithInfo(
+    'Disabled Button',
+    `
+      Disabled Buttons may be used when the user cannot proceed until input is collected.
+    `,
+    () => (
+      <div>
+        <Button {...buttonEvents} disabled>Disabled</Button>
+      </div>
+  ))
+  .addWithInfo(
+    'Button with Icon',
+    `
+      When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are
+      always paired with text.
+    `,
+    () => (
+      <div>
+        <Button icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</Button>
         &nbsp;
-        <SecondaryButton icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</SecondaryButton>
-        <br />
-        <br />
-        <SecondaryButton small {...buttonEvents} className="some-class">
-          Secondary button small
-        </SecondaryButton>
+        <Button kind="secondary" icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</Button>
+      </div>
+  ))
+  .addWithInfo(
+    'Danger Buttons',
+    `
+      Buttons are used to initialize an action, either in the background or
+      foreground of an experience. Danger buttons should be used for a negative action (such as Delete)
+      on the page. Modify the behavior of the button by changing its event properties. The example below
+      shows an enabled Danger Button component.
+    `,
+    () => (
+      <div>
+        <Button kind="danger" {...buttonEvents} className="some-class">
+          Danger Button
+        </Button>
         &nbsp;
-        <SecondaryButton small {...buttonEvents} href="#" className="some-class">Secondary link small</SecondaryButton>
-        &nbsp;
-        <SecondaryButton small {...buttonEvents} disabled>Disabled</SecondaryButton>
-        &nbsp;
-        <SecondaryButton small icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</SecondaryButton>
+        <Button kind="danger" {...buttonEvents} href="#" className="some-class">Danger Link</Button>
       </div>
   ));

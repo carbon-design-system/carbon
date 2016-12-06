@@ -8,7 +8,7 @@ import CardContent from '../../components/CardContent';
 import CardStatus from '../../components/CardStatus';
 import CardActions from '../../components/CardActions';
 import CardActionItem from '../../components/CardActionItem';
-import InternalButton from '../../internal/InternalButton';
+import Button from '../../components/Button';
 import AppContainer from '../../components/AppContainer';
 
 const cardProps = {
@@ -289,10 +289,10 @@ storiesOf('Card', module)
           </OverflowMenu>
         </CardContent>
         <CardFooter>
-          <InternalButton
+          <Button
             className="bx--card-footer__credentials-button"
           >View Credentials
-          </InternalButton>
+          </Button>
           <a href="#" className="bx--card-footer__docs-link">Docs</a>
         </CardFooter>
       </Card>

@@ -8,7 +8,7 @@ import FileUploader from '../../components/FileUploader';
 import NumberInput from '../../components/NumberInput';
 import RadioButton from '../../components/RadioButton';
 import RadioButtonGroup from '../../components/RadioButtonGroup';
-import PrimaryButton from '../../components/PrimaryButton';
+import Button from '../../components/Button';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
 import SelectItem from '../../components/SelectItem';
@@ -304,13 +304,13 @@ storiesOf('Form', module)
         <Textarea {...textareaProps} />
       </FormGroup>
 
-      <PrimaryButton
+      <Button
         type="submit"
         className="some-class"
         {...buttonEvents}
       >
         Submit
-      </PrimaryButton>
+      </Button>
     </Form>
 
     ));
