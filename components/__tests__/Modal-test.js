@@ -60,10 +60,9 @@ describe('Modal', () => {
 
     it('should set button text if one is passed via props', () => {
       const wrapper = shallow(<Modal primaryButtonText="Submit" secondaryButtonText="Cancel" />);
-      const primaryButton = wrapper.find('.bx--modal__buttons-container .bx--btn');
-      const secondaryButton = wrapper.find('.bx--modal__buttons-container .bx--btn--secondary');
-      expect(primaryButton.props().children).toEqual('Submit');
-      expect(secondaryButton.props().children).toEqual('Cancel');
+      const modalButtons = wrapper.find('.bx--modal__buttons-container').props().children;
+      expect(modalButtons[0].props.children).toEqual('Cancel');
+      expect(modalButtons[1].props.children).toEqual('Submit');
     });
   });
 

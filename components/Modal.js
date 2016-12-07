@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
+import Button from './Button';
 import '@console/bluemix-components/consumables/scss/components/modals/modals.scss';
 
 class Modal extends Component {
@@ -95,8 +96,8 @@ class Modal extends Component {
         </div>
         <div className="bx--modal__buttons">
           <div className="bx--modal__buttons-container">
-            <button className="bx--btn--secondary" type="button" onClick={onRequestClose}>{secondaryButtonText}</button>
-            <button className="bx--btn" onClick={onRequestSubmit}>{primaryButtonText}</button>
+            <Button kind="secondary" onClick={onRequestClose}>{secondaryButtonText}</Button>
+            <Button kind="primary" onClick={onRequestSubmit}>{primaryButtonText}</Button>
           </div>
         </div>
       </div>);
