@@ -179,5 +179,23 @@ describe('Search', () => {
         expect(onChange).toBeCalledWith(eventObject);
       });
     });
+
+    describe('enabled toggling layout', () => {
+      const wrapper = mount(
+        <Search id="test" />
+      );
+
+      it('should default to "list" layout', () => {
+        const icon = wrapper.find('Icon').at(2);
+        expect(icon.props().name).toEqual('list');
+      });
+
+      it('should toggle layout to "grid" when clicked', () => {
+        const button = wrapper.find('button').at(1);
+        button.simulate('click');
+        const icon = wrapper.find('Icon').at(2);
+        expect(icon.props().name).toEqual('grid');
+      });
+    });
   });
 });

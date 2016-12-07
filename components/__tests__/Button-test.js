@@ -91,6 +91,15 @@ describe('Button', () => {
       expect(icon.hasClass('bx--btn--right-icon__icon')).toBe(true);
       expect(icon.hasClass('bx--btn--right-icon__use')).toBe(true);
     });
+
+    it('should return error if icon given without description', () => {
+      const props = {
+        icon: 'search',
+      };
+      // eslint-disable-next-line quotes
+      const error = new Error(`'icon' property specified without also providing an 'iconDescription'.`);
+      expect(Button.propTypes.iconDescription(props)).toEqual(error);
+    });
   });
 });
 
