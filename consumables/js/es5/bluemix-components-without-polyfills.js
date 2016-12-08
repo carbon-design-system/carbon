@@ -50,7 +50,7 @@ var BluemixComponents =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Accordion = exports.Pagination = exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.initCheckbox = exports.settings = undefined;
+	exports.Accordion = exports.Pagination = exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.ResponsiveTable = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.initCheckbox = exports.settings = undefined;
 	
 	var _checkbox = __webpack_require__(1);
 	
@@ -104,41 +104,49 @@ var BluemixComponents =
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
 	
-	var _table = __webpack_require__(22);
+	var _responsiveTable = __webpack_require__(22);
+	
+	var _responsiveTable2 = _interopRequireDefault(_responsiveTable);
+	
+	var _table = __webpack_require__(24);
 	
 	var _table2 = _interopRequireDefault(_table);
 	
-	var _detailPageHeader = __webpack_require__(23);
+	var _detailPageHeader = __webpack_require__(25);
 	
 	var _detailPageHeader2 = _interopRequireDefault(_detailPageHeader);
 	
-	var _leftNav = __webpack_require__(25);
+	var _leftNav = __webpack_require__(27);
 	
 	var _leftNav2 = _interopRequireDefault(_leftNav);
 	
-	var _unifiedHeader = __webpack_require__(26);
+	var _unifiedHeader = __webpack_require__(28);
 	
 	var _unifiedHeader2 = _interopRequireDefault(_unifiedHeader);
 	
-	var _inlineLeftNav = __webpack_require__(27);
+	var _inlineLeftNav = __webpack_require__(29);
 	
 	var _inlineLeftNav2 = _interopRequireDefault(_inlineLeftNav);
 	
-	var _profileSwitcher = __webpack_require__(28);
+	var _profileSwitcher = __webpack_require__(30);
 	
 	var _profileSwitcher2 = _interopRequireDefault(_profileSwitcher);
 	
-	var _pagination = __webpack_require__(29);
+	var _pagination = __webpack_require__(31);
 	
 	var _pagination2 = _interopRequireDefault(_pagination);
 	
-	var _searchWithOptions = __webpack_require__(30);
+	var _searchWithOptions = __webpack_require__(32);
 	
 	var _searchWithOptions2 = _interopRequireDefault(_searchWithOptions);
 	
-	var _accordion = __webpack_require__(31);
+	var _accordion = __webpack_require__(33);
 	
 	var _accordion2 = _interopRequireDefault(_accordion);
+	
+	var _copyBtn = __webpack_require__(34);
+	
+	var _copyBtn2 = _interopRequireDefault(_copyBtn);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -177,6 +185,7 @@ var BluemixComponents =
 	exports.Dropdown = _dropdown2.default;
 	exports.Card = _card2.default;
 	exports.NumberInput = _numberInput2.default;
+	exports.ResponsiveTable = _responsiveTable2.default;
 	exports.Table = _table2.default;
 	exports.DetailPageHeader = _detailPageHeader2.default;
 	exports.ProfileSwitcher = _profileSwitcher2.default;
@@ -208,6 +217,7 @@ var BluemixComponents =
 	    _dropdown2.default.init();
 	    _card2.default.init();
 	    _numberInput2.default.init();
+	    _responsiveTable2.default.init();
 	    _table2.default.init();
 	    _detailPageHeader2.default.init();
 	    _leftNav2.default.init();
@@ -217,6 +227,7 @@ var BluemixComponents =
 	    _pagination2.default.init();
 	    _searchWithOptions2.default.init();
 	    _accordion2.default.init();
+	    _copyBtn2.default.init();
 	  }
 	};
 	
@@ -1248,13 +1259,19 @@ var BluemixComponents =
 	  function OverflowMenu(element) {
 	    var _this = this;
 	
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
 	    _classCallCheck(this, OverflowMenu);
+	
+	    _initialiseProps.call(this);
 	
 	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
 	      throw new TypeError('DOM element should be given to initialize this widget.');
 	    }
 	
 	    this.element = element;
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
+	    this.optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
 	    this.constructor.components.set(this.element, this);
 	
 	    /**
@@ -1284,7 +1301,12 @@ var BluemixComponents =
 	        event.preventDefault();
 	      }
 	
+	      (0, _toggleClass2.default)(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
 	      (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
+	
+	      if (shouldBeOpen) {
+	        this.emitEvent(this.element, event);
+	      }
 	    }
 	  }, {
 	    key: 'handleKeyPress',
@@ -1298,6 +1320,11 @@ var BluemixComponents =
 	          event.preventDefault();
 	        }
 	
+	        if (shouldBeOpen) {
+	          this.emitEvent(this.element, event);
+	        }
+	
+	        (0, _toggleClass2.default)(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
 	        (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
 	      }
 	    }
@@ -1344,8 +1371,30 @@ var BluemixComponents =
 	
 	OverflowMenu.components = new WeakMap();
 	OverflowMenu.options = {
-	  selectorInit: '[data-overflow-menu]'
+	  selectorInit: '[data-overflow-menu]',
+	  selectorOptionMenu: '.bx--overflow-menu__options'
 	};
+	
+	var _initialiseProps = function _initialiseProps() {
+	  var _this3 = this;
+	
+	  this.emitEvent = function (element, evt) {
+	    var detail = {
+	      element: element,
+	      optionMenu: _this3.optionMenu,
+	      evt: evt
+	    };
+	
+	    var eventAfter = new CustomEvent('overflow', {
+	      bubbles: true,
+	      cancelable: true,
+	      detail: detail
+	    });
+	
+	    _this3.element.ownerDocument.dispatchEvent(eventAfter);
+	  };
+	};
+	
 	exports.default = OverflowMenu;
 
 /***/ },
@@ -3007,13 +3056,13 @@ var BluemixComponents =
 	      var state = event.currentTarget.classList;
 	      var numberInput = this.element.querySelector('.bx--number__input');
 	
-	      if (state.contains('bx--number__arrow--icon-up')) {
+	      if (state.contains('bx--number__arrow--up')) {
 	        if (this.options.ie) {
 	          ++numberInput.value;
 	        } else {
 	          numberInput.stepUp();
 	        }
-	      } else if (state.contains('bx--number__arrow--icon-down')) {
+	      } else if (state.contains('bx--number__arrow--down')) {
 	        if (this.options.ie) {
 	          if (numberInput.value > 0) {
 	            --numberInput.value;
@@ -3101,6 +3150,412 @@ var BluemixComponents =
 
 /***/ },
 /* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _eventMatches = __webpack_require__(7);
+	
+	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
+	__webpack_require__(5);
+	
+	__webpack_require__(3);
+	
+	__webpack_require__(4);
+	
+	__webpack_require__(10);
+	
+	var _resize = __webpack_require__(23);
+	
+	var _resize2 = _interopRequireDefault(_resize);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ResponsiveTable = function () {
+	  /**
+	   * Responsive Table
+	   * @implements components
+	   * @param {HTMLElement} element The root element of tables
+	   * @param {Object} [options] the... options
+	   * @param {string} [options.selectorInit] selector initialization
+	   * @param {string} [options.selectorExpandCells] css selector for expand
+	   * @param {string} [options.expandableRow] css selector for expand
+	   * @param {string} [options.selectorParentRows] css selector for rows housing expansion
+	   * @param {string} [options.selectorTableBody] root css for table body
+	   * @param {string} [options.overflowMenu] any overflow menus
+	   * @param {string} [options.eventTrigger] selector for event bubble capture points
+	   * @param {string} [options.eventParentContainer] used find the bubble container
+	   */
+	  function ResponsiveTable(element) {
+	    var _this = this;
+	
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	    _classCallCheck(this, ResponsiveTable);
+	
+	    _initialiseProps.call(this);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('Responsive Tables requires a DOM element');
+	    }
+	
+	    this.element = element;
+	
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
+	
+	    this.container = element.parentNode; // requires the immediate parent to be the container
+	    this.expandCells = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorExpandCells)));
+	    this.expandableRows = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorExpandableRows)));
+	    this.parentRows = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorParentRows)));
+	    this.tableBody = this.element.querySelector(this.options.selectorTableBody);
+	
+	    this.zebraStripe();
+	    this.initExpandableRows();
+	    this.initOverflowMenus();
+	
+	    this.eventHandlers = {
+	      expand: this.toggleRowExpand,
+	      sort: this.toggleSort,
+	      'select-all': this.toggleSelectAll
+	    };
+	
+	    this.element.addEventListener('click', function (evt) {
+	      var eventElement = (0, _eventMatches2.default)(evt, _this.options.eventTrigger);
+	      if (eventElement) {
+	        _this.emitEvent(eventElement, evt);
+	      }
+	    });
+	
+	    this.constructor.components.set(this.element, this);
+	  }
+	
+	  /**
+	   * Create an object to be used in event emission
+	   */
+	
+	
+	  /**
+	   * Standardize way to emit events
+	   */
+	
+	
+	  /**
+	   * Zebra stripes - done in javascript to handle expandable rows
+	   */
+	
+	
+	  /**
+	   * Find all expandable rows and remove them from the DOM
+	   */
+	
+	
+	  /**
+	   * Because tables has an overflow-x on it, we need to pop the overflow
+	   * options outside of the table. This appends to the body and tags a resize
+	   * listener to reposition when needed
+	   */
+	
+	
+	  /**
+	   * When called, finds the position of the icon supplied and positions
+	   * the menu relative to that
+	   *
+	   * Uses fixed because getBoundingClientRect is relative to viewport
+	   */
+	
+	
+	  /**
+	   * On trigger, insert the expandable row back in
+	   */
+	
+	
+	  /**
+	   * On trigger, flip the sort icon
+	   */
+	
+	
+	  /**
+	   * On trigger, check all checkboxes
+	   */
+	
+	
+	  _createClass(ResponsiveTable, [{
+	    key: 'release',
+	    value: function release() {
+	      this.constructor.components.delete(this.element);
+	    }
+	  }], [{
+	    key: 'create',
+	    value: function create(element) {
+	      return this.components.get(element) || new this(element);
+	    }
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this2 = this;
+	
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this2.create(element);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return ResponsiveTable;
+	}();
+	
+	ResponsiveTable.components = new WeakMap();
+	ResponsiveTable.options = {
+	  selectorInit: '[data-responsive-table]',
+	  selectorExpandCells: '.bx--table-expand',
+	  selectorExpandableRows: '.bx--expandable-row',
+	  selectorParentRows: '.bx--parent-row',
+	  selectorTableBody: '.bx--table-body',
+	  selectorOverflowMenu: '[data-overflow-menu]',
+	  selectorCheckbox: '.bx--checkbox',
+	  selectorOverflowMenuIcon: '.bx--overflow-menu__icon',
+	  selectorOverflowMenuOptions: '.bx--overflow-menu__options',
+	  classParentRowEven: 'bx--parent-row--even',
+	  classExpandableRow: 'bx--expandable-row',
+	  classExpandableRowEven: 'bx--expandable-row--even',
+	  classExpandableRowHidden: 'bx--expandable-row--hidden',
+	  classTableSortAscending: 'bx--table-sort--ascending',
+	  eventTrigger: '[data-event]',
+	  eventParentContainer: '[data-parent-row]'
+	};
+	
+	var _initialiseProps = function _initialiseProps() {
+	  var _this3 = this;
+	
+	  this.getEventDetails = function (element, data, evt) {
+	    var event = data.event;
+	
+	    var label = data.label ? data.label : '';
+	    var previousValue = data.previousValue ? data.previousValue : '';
+	    var initialEvt = evt;
+	
+	    return {
+	      element: element,
+	      event: event,
+	      label: label,
+	      previousValue: previousValue,
+	      initialEvt: initialEvt
+	    };
+	  };
+	
+	  this.emitEvent = function (element, evt) {
+	    var detail = _this3.getEventDetails(element, element.dataset, evt);
+	
+	    var eventBefore = new CustomEvent('before' + detail.event, {
+	      bubbles: true,
+	      cancelable: true,
+	      detail: detail
+	    });
+	
+	    var eventAfter = new CustomEvent('' + detail.event, {
+	      bubbles: true,
+	      cancelable: true,
+	      detail: detail
+	    });
+	
+	    var canceled = !_this3.element.dispatchEvent(eventBefore);
+	
+	    if (!canceled) {
+	      _this3.eventHandlers[detail.event](detail);
+	      _this3.element.dispatchEvent(eventAfter);
+	    }
+	  };
+	
+	  this.zebraStripe = function () {
+	    _this3.parentRows.forEach(function (item, index) {
+	      if (index % 2 === 0) {
+	        item.classList.add(_this3.options.classParentRowEven);
+	        if (item.nextElementSibling.classList.contains(_this3.options.classExpandableRow)) {
+	          item.nextElementSibling.classList.add(_this3.options.classExpandableRowEven);
+	        }
+	      }
+	    });
+	  };
+	
+	  this.initExpandableRows = function () {
+	    _this3.expandableRows.forEach(function (item) {
+	      item.classList.remove(_this3.options.classExpandableRowHidden);
+	      _this3.tableBody.removeChild(item);
+	    });
+	  };
+	
+	  this.initOverflowMenus = function () {
+	    if (!_this3.element.querySelector(_this3.options.selectorOverflowMenu)) {
+	      return false;
+	    }
+	
+	    var menuMap = [].concat(_toConsumableArray(_this3.element.querySelectorAll(_this3.options.selectorOverflowMenu))).map(function (menu) {
+	      return {
+	        element: menu,
+	        optionMenu: menu.querySelector(_this3.options.selectorOverflowMenuOptions)
+	      };
+	    });
+	
+	    _resize2.default.add(function () {
+	      menuMap.forEach(function (menu) {
+	        _this3.placeOverflow({
+	          detail: menu
+	        });
+	      });
+	    });
+	
+	    menuMap.forEach(function (menu) {
+	      document.body.appendChild(menu.optionMenu);
+	      _this3.placeOverflow({
+	        detail: menu
+	      });
+	    });
+	  };
+	
+	  this.placeOverflow = function (evt) {
+	    var _evt$detail = evt.detail,
+	        element = _evt$detail.element,
+	        optionMenu = _evt$detail.optionMenu;
+	
+	
+	    var icon = element.querySelector(_this3.options.selectorOverflowMenuIcon);
+	    var position = icon.getBoundingClientRect();
+	
+	    optionMenu.style.position = 'fixed';
+	    optionMenu.style.top = position.top + 'px';
+	    optionMenu.style.left = position.right + 'px';
+	    optionMenu.style.right = 'auto';
+	  };
+	
+	  this.toggleRowExpand = function (detail) {
+	    var element = detail.element;
+	    var parent = (0, _eventMatches2.default)(detail.initialEvt, _this3.options.eventParentContainer);
+	
+	    var index = _this3.expandCells.indexOf(element);
+	    if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
+	      element.dataset.previousValue = 'collapsed';
+	      _this3.tableBody.insertBefore(_this3.expandableRows[index], _this3.parentRows[index + 1]);
+	    } else {
+	      _this3.tableBody.removeChild(parent.nextElementSibling);
+	      element.dataset.previousValue = 'expanded';
+	    }
+	  };
+	
+	  this.toggleSort = function (detail) {
+	    var element = detail.element,
+	        previousValue = detail.previousValue;
+	
+	
+	    if (!previousValue || previousValue === 'descending') {
+	      element.dataset.previousValue = 'ascending';
+	      element.classList.add(_this3.options.classTableSortAscending);
+	    } else {
+	      element.dataset.previousValue = 'descending';
+	      element.classList.remove(_this3.options.classTableSortAscending);
+	    }
+	  };
+	
+	  this.toggleSelectAll = function (detail) {
+	    var element = detail.element,
+	        previousValue = detail.previousValue;
+	
+	    var inputs = [].concat(_toConsumableArray(_this3.element.querySelectorAll(_this3.options.selectorCheckbox)));
+	    if (!previousValue || previousValue === 'toggled') {
+	      inputs.forEach(function (item) {
+	        return item.checked = true;
+	      });
+	      element.dataset.previousValue = 'off';
+	    } else {
+	      inputs.forEach(function (item) {
+	        return item.checked = false;
+	      });
+	      element.dataset.previousValue = 'toggled';
+	    }
+	  };
+	};
+	
+	exports.default = ResponsiveTable;
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// mdn resize function
+	
+	var optimizedResize = function optimizedResize() {
+	  var callbacks = [];
+	  var running = false;
+	
+	  // run the actual callbacks
+	  function runCallbacks() {
+	    callbacks.forEach(function (callback) {
+	      callback();
+	    });
+	
+	    running = false;
+	  }
+	
+	  // fired on resize event
+	  function resize() {
+	    if (!running) {
+	      running = true;
+	
+	      if (window.requestAnimationFrame) {
+	        window.requestAnimationFrame(runCallbacks);
+	      } else {
+	        setTimeout(runCallbacks, 66);
+	      }
+	    }
+	  }
+	
+	  // adds callback to loop
+	  function addCallback(callback) {
+	    if (callback) {
+	      callbacks.push(callback);
+	    }
+	  }
+	
+	  return {
+	    // public method to add additional callback
+	    add: function add(callback) {
+	      if (!callbacks.length) {
+	        window.addEventListener('resize', resize);
+	      }
+	      addCallback(callback);
+	    }
+	  };
+	}();
+	
+	exports.default = optimizedResize;
+
+/***/ },
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3361,7 +3816,7 @@ var BluemixComponents =
 	exports.default = Table;
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3378,7 +3833,7 @@ var BluemixComponents =
 	
 	__webpack_require__(4);
 	
-	var _lodash = __webpack_require__(24);
+	var _lodash = __webpack_require__(26);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -3508,7 +3963,7 @@ var BluemixComponents =
 	exports.default = DetailPageHeader;
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -3892,7 +4347,7 @@ var BluemixComponents =
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4563,7 +5018,7 @@ var BluemixComponents =
 	exports.default = LeftNav;
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4668,7 +5123,7 @@ var BluemixComponents =
 	exports.default = UnifiedHeader;
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4755,7 +5210,7 @@ var BluemixComponents =
 	        item.addEventListener('keydown', function (evt) {
 	          var leftNavItemWithChildren = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItemHasChildren);
 	          if (leftNavItemWithChildren && evt.which === 13) {
-	            _this.handleNestedListClick(leftNavItemWithChildren);
+	            _this.handleNestedListClick(leftNavItemWithChildren, evt);
 	          }
 	        });
 	      });
@@ -4875,6 +5330,7 @@ var BluemixComponents =
 	  selectorLeftNavListItem: '[data-inline-left-nav-item]',
 	  selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
 	  selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
+	  selectorLeftNavListItemHasChildren: '[data-inline-left-nav-with-children]',
 	  // CSS Class Selectors
 	  classActiveLeftNavListItem: 'left-nav-list__item--active',
 	  classExpandedLeftNavListItem: 'left-nav-list__item--expanded'
@@ -4882,7 +5338,7 @@ var BluemixComponents =
 	exports.default = InlineLeftNav;
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5072,8 +5528,12 @@ var BluemixComponents =
 	
 	      if (linkedElement) {
 	        if (this.element.isLinked) {
-	          linkedElement.appendChild(this.element.linkedAccount);
-	          linkedElement.appendChild(this.element.linkedIcon);
+	          if (this.element.linkedAccount) {
+	            linkedElement.appendChild(this.element.linkedAccount);
+	          }
+	          if (this.element.linkedIcon) {
+	            linkedElement.appendChild(this.element.linkedIcon);
+	          }
 	        } else {
 	          linkedElement.textContent = '';
 	        }
@@ -5235,7 +5695,7 @@ var BluemixComponents =
 	exports.default = ProfileSwitcher;
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5464,7 +5924,7 @@ var BluemixComponents =
 	};
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5622,7 +6082,7 @@ var BluemixComponents =
 	exports.default = SearchWithOptions;
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5754,6 +6214,152 @@ var BluemixComponents =
 	  selectorInit: '[data-accordion]',
 	  accordionItem: '[data-accordion-item]'
 	};
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	__webpack_require__(5);
+	
+	__webpack_require__(10);
+	
+	__webpack_require__(3);
+	
+	__webpack_require__(4);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var CopyBtn = function () {
+	  /**
+	   * CopyBtn UI.
+	   * @implements Component
+	   * @param {HTMLElement} element The element working as a copy button UI.
+	   */
+	  function CopyBtn(element) {
+	    var _this = this;
+	
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	    _classCallCheck(this, CopyBtn);
+	
+	    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+	      throw new TypeError('DOM element should be given to initialize this widget.');
+	    }
+	
+	    this.element = element;
+	    this.constructor.components.set(this.element, this);
+	
+	    this.options = Object.assign(Object.create(this.constructor.options), options);
+	    this.element.addEventListener('click', function () {
+	      return _this.handleClick();
+	    });
+	  }
+	
+	  /**
+	   * Instantiates copy button UI of the given element.
+	   * @param {HTMLElement} element The element.
+	   */
+	
+	
+	  _createClass(CopyBtn, [{
+	    key: 'handleClick',
+	
+	
+	    /**
+	     * Show the feedback tooltip on click. Hide the feedback tooltip after specified timeout value.
+	     */
+	    value: function handleClick() {
+	      var _this2 = this;
+	
+	      var feedback = this.element.querySelector(this.options.feedbackTooltip);
+	      feedback.classList.add(this.options.classShowFeedback);
+	      setTimeout(function () {
+	        feedback.classList.remove(_this2.options.classShowFeedback);
+	      }, this.options.timeoutValue);
+	    }
+	  }, {
+	    key: 'release',
+	    value: function release() {
+	      this.constructor.components.delete(this.element);
+	    }
+	
+	    /**
+	     * The map associating DOM element and copy button UI instance.
+	     * @member CopyBtn.components
+	     * @type {WeakMap}
+	     */
+	
+	
+	    /**
+	     * The component options.
+	     * If `options` is specified in the constructor, {@linkcode CopyBtn.create .create()}, or {@linkcode CopyBtn.init .init()},
+	     * properties in this object are overriden for the instance being create and how {@linkcode CopyBtn.init .init()} works.
+	     * @member CopyBtn.options
+	     * @type {Object}
+	     * @property {string} selectorInit The data attribute to find copy button UIs.
+	     * @property {string} feedbackTooltip The data attribute to find feedback tooltip.
+	     * @property {string} classShowFeedback The CSS selector for showing the feedback tooltip.
+	     * @property {number} timeoutValue The specified timeout value before the feedback tooltip is hidden.
+	     */
+	
+	  }], [{
+	    key: 'create',
+	    value: function create(element) {
+	      return this.components.get(element) || new this(element);
+	    }
+	
+	    /**
+	     * Instantiates copy button UI in the given node.
+	     * If the given element indicates that it's an copy button UI, instantiates it.
+	     * Otherwise, instantiates copy button UIs by searching for copy button UIs in the given node.
+	     * @param {Node} target The DOM node to instantiate copy button UIs in. Should be a document or an element.
+	     * @param {Object} [options] The component options.
+	     * @param {boolean} [options.selectorInit] The CSS selector to find copy button UIs.
+	     */
+	
+	  }, {
+	    key: 'init',
+	    value: function init() {
+	      var _this3 = this;
+	
+	      var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	      var effectiveOptions = Object.assign(Object.create(this.options), options);
+	      if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+	        throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+	      }
+	      if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
+	        this.create(target);
+	      } else {
+	        [].concat(_toConsumableArray(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
+	          return _this3.create(element);
+	        });
+	      }
+	    }
+	  }]);
+	
+	  return CopyBtn;
+	}();
+	
+	CopyBtn.components = new WeakMap();
+	CopyBtn.options = {
+	  selectorInit: '[data-copy-btn]',
+	  feedbackTooltip: '[data-feedback]',
+	  classShowFeedback: 'bx--btn--copy__feedback--displayed',
+	  timeoutValue: 2000
+	};
+	exports.default = CopyBtn;
 
 /***/ }
 /******/ ]);

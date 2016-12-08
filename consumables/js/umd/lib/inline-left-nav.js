@@ -92,7 +92,7 @@
           item.addEventListener('keydown', function (evt) {
             var leftNavItemWithChildren = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItemHasChildren);
             if (leftNavItemWithChildren && evt.which === 13) {
-              _this.handleNestedListClick(leftNavItemWithChildren);
+              _this.handleNestedListClick(leftNavItemWithChildren, evt);
             }
           });
         });
@@ -176,6 +176,7 @@
     selectorLeftNavListItem: '[data-inline-left-nav-item]',
     selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
     selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
+    selectorLeftNavListItemHasChildren: '[data-inline-left-nav-with-children]',
     // CSS Class Selectors
     classActiveLeftNavListItem: 'left-nav-list__item--active',
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded'

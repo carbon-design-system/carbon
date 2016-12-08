@@ -1,22 +1,22 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', './checkbox', './file-uploader', './fab', './content-switcher', './tabs', './overflow-menu', './modals', './header', './toolbars', './loading', './dropdown', './card', './number-input', './table', './detail-page-header', './left-nav', './unified-header', './inline-left-nav', './profile-switcher', './pagination', './search-with-options', './accordion'], factory);
+    define(['exports', './checkbox', './file-uploader', './fab', './content-switcher', './tabs', './overflow-menu', './modals', './header', './toolbars', './loading', './dropdown', './card', './number-input', './responsive-table', './table', './detail-page-header', './left-nav', './unified-header', './inline-left-nav', './profile-switcher', './pagination', './search-with-options', './accordion', './copy-btn'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('./checkbox'), require('./file-uploader'), require('./fab'), require('./content-switcher'), require('./tabs'), require('./overflow-menu'), require('./modals'), require('./header'), require('./toolbars'), require('./loading'), require('./dropdown'), require('./card'), require('./number-input'), require('./table'), require('./detail-page-header'), require('./left-nav'), require('./unified-header'), require('./inline-left-nav'), require('./profile-switcher'), require('./pagination'), require('./search-with-options'), require('./accordion'));
+    factory(exports, require('./checkbox'), require('./file-uploader'), require('./fab'), require('./content-switcher'), require('./tabs'), require('./overflow-menu'), require('./modals'), require('./header'), require('./toolbars'), require('./loading'), require('./dropdown'), require('./card'), require('./number-input'), require('./responsive-table'), require('./table'), require('./detail-page-header'), require('./left-nav'), require('./unified-header'), require('./inline-left-nav'), require('./profile-switcher'), require('./pagination'), require('./search-with-options'), require('./accordion'), require('./copy-btn'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.checkbox, global.fileUploader, global.fab, global.contentSwitcher, global.tabs, global.overflowMenu, global.modals, global.header, global.toolbars, global.loading, global.dropdown, global.card, global.numberInput, global.table, global.detailPageHeader, global.leftNav, global.unifiedHeader, global.inlineLeftNav, global.profileSwitcher, global.pagination, global.searchWithOptions, global.accordion);
+    factory(mod.exports, global.checkbox, global.fileUploader, global.fab, global.contentSwitcher, global.tabs, global.overflowMenu, global.modals, global.header, global.toolbars, global.loading, global.dropdown, global.card, global.numberInput, global.responsiveTable, global.table, global.detailPageHeader, global.leftNav, global.unifiedHeader, global.inlineLeftNav, global.profileSwitcher, global.pagination, global.searchWithOptions, global.accordion, global.copyBtn);
     global.index = mod.exports;
   }
-})(this, function (exports, _checkbox, _fileUploader, _fab, _contentSwitcher, _tabs, _overflowMenu, _modals, _header, _toolbars, _loading, _dropdown, _card, _numberInput, _table, _detailPageHeader, _leftNav, _unifiedHeader, _inlineLeftNav, _profileSwitcher, _pagination, _searchWithOptions, _accordion) {
+})(this, function (exports, _checkbox, _fileUploader, _fab, _contentSwitcher, _tabs, _overflowMenu, _modals, _header, _toolbars, _loading, _dropdown, _card, _numberInput, _responsiveTable, _table, _detailPageHeader, _leftNav, _unifiedHeader, _inlineLeftNav, _profileSwitcher, _pagination, _searchWithOptions, _accordion, _copyBtn) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.Accordion = exports.Pagination = exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.initCheckbox = exports.settings = undefined;
+  exports.Accordion = exports.Pagination = exports.ProfileSwitcher = exports.DetailPageHeader = exports.Table = exports.ResponsiveTable = exports.NumberInput = exports.Card = exports.Dropdown = exports.Loading = exports.Toolbars = exports.LeftNav = exports.HeaderNav = exports.Modal = exports.OverflowMenu = exports.Tab = exports.ContentSwitcher = exports.FileUploader = exports.FabButton = exports.initCheckbox = exports.settings = undefined;
 
   var _checkbox2 = _interopRequireDefault(_checkbox);
 
@@ -44,6 +44,8 @@
 
   var _numberInput2 = _interopRequireDefault(_numberInput);
 
+  var _responsiveTable2 = _interopRequireDefault(_responsiveTable);
+
   var _table2 = _interopRequireDefault(_table);
 
   var _detailPageHeader2 = _interopRequireDefault(_detailPageHeader);
@@ -61,6 +63,8 @@
   var _searchWithOptions2 = _interopRequireDefault(_searchWithOptions);
 
   var _accordion2 = _interopRequireDefault(_accordion);
+
+  var _copyBtn2 = _interopRequireDefault(_copyBtn);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -103,6 +107,7 @@
   exports.Dropdown = _dropdown2.default;
   exports.Card = _card2.default;
   exports.NumberInput = _numberInput2.default;
+  exports.ResponsiveTable = _responsiveTable2.default;
   exports.Table = _table2.default;
   exports.DetailPageHeader = _detailPageHeader2.default;
   exports.ProfileSwitcher = _profileSwitcher2.default;
@@ -135,6 +140,7 @@
       _dropdown2.default.init();
       _card2.default.init();
       _numberInput2.default.init();
+      _responsiveTable2.default.init();
       _table2.default.init();
       _detailPageHeader2.default.init();
       _leftNav2.default.init();
@@ -144,6 +150,7 @@
       _pagination2.default.init();
       _searchWithOptions2.default.init();
       _accordion2.default.init();
+      _copyBtn2.default.init();
     }
   };
 

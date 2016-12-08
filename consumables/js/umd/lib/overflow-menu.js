@@ -43,13 +43,18 @@
     function OverflowMenu(element) {
       var _this = this;
 
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       (0, _classCallCheck3.default)(this, OverflowMenu);
+
+      _initialiseProps.call(this);
 
       if (!element || element.nodeType !== Node.ELEMENT_NODE) {
         throw new TypeError('DOM element should be given to initialize this widget.');
       }
 
       this.element = element;
+      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
+      this.optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
       this.constructor.components.set(this.element, this);
 
       /**
@@ -79,7 +84,12 @@
           event.preventDefault();
         }
 
+        (0, _toggleClass2.default)(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
         (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
+
+        if (shouldBeOpen) {
+          this.emitEvent(this.element, event);
+        }
       }
     }, {
       key: 'handleKeyPress',
@@ -93,6 +103,11 @@
             event.preventDefault();
           }
 
+          if (shouldBeOpen) {
+            this.emitEvent(this.element, event);
+          }
+
+          (0, _toggleClass2.default)(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
           (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
         }
       }
@@ -138,7 +153,29 @@
 
   OverflowMenu.components = new _weakMap2.default();
   OverflowMenu.options = {
-    selectorInit: '[data-overflow-menu]'
+    selectorInit: '[data-overflow-menu]',
+    selectorOptionMenu: '.bx--overflow-menu__options'
   };
+
+  var _initialiseProps = function _initialiseProps() {
+    var _this3 = this;
+
+    this.emitEvent = function (element, evt) {
+      var detail = {
+        element: element,
+        optionMenu: _this3.optionMenu,
+        evt: evt
+      };
+
+      var eventAfter = new CustomEvent('overflow', {
+        bubbles: true,
+        cancelable: true,
+        detail: detail
+      });
+
+      _this3.element.ownerDocument.dispatchEvent(eventAfter);
+    };
+  };
+
   exports.default = OverflowMenu;
 });

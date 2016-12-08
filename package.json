@@ -1,6 +1,6 @@
 {
   "name": "@console/bluemix-components",
-  "version": "6.10.4",
+  "version": "6.11.0",
   "description": "Bluemix Components is a component library for Bluemix",
   "jsnext:main": "consumables/js/es2015/index",
   "main": "consumables/js/umd/lib/index",

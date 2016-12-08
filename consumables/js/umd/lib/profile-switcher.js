@@ -174,8 +174,12 @@
 
         if (linkedElement) {
           if (this.element.isLinked) {
-            linkedElement.appendChild(this.element.linkedAccount);
-            linkedElement.appendChild(this.element.linkedIcon);
+            if (this.element.linkedAccount) {
+              linkedElement.appendChild(this.element.linkedAccount);
+            }
+            if (this.element.linkedIcon) {
+              linkedElement.appendChild(this.element.linkedIcon);
+            }
           } else {
             linkedElement.textContent = '';
           }
