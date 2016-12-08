@@ -13,19 +13,18 @@
 
 // GENERAL CARD STYLES
 .bx--card {
+  @include box-shadow;
   display: flex;
   flex-direction: column;
   width: 12.5rem;
   height: auto;
   background-color: $color__navy-gray-3;
   border: 1px solid $color__blue-90;
-  box-shadow: 0px 4px 4px 0px $color__card-box-shadow;
 
   @include light-ui {
     color: $color__blue-90;
     background-color: $color__white;
     border: 1px solid $color__gray-1;
-    box-shadow: 0px 4px 4px 0px $color__card-box-shadow;
   }
 }
 

@@ -40,9 +40,9 @@
     left: 50%;
 
     &:before {
+      @include box-shadow;
       @include font-size('12');
       top: 1.1rem;
-      box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, .1);
       padding: .5rem 1rem;
       border: 1px solid $color__navy-gray-2;
       color: $color__white;
@@ -54,7 +54,6 @@
       @include light-ui {
         border: 1px solid $color__navy-gray-8;
         color: $color__blue-90;
-        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1);
       }
     }
 

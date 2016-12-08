@@ -66,7 +66,7 @@
     }
 
     .bx--dropdown--open &__list {
-      @include box-shadow;
+      @include box-shadow('large');
       display: flex;
       flex-direction: column;
       background-color: $color__navy-gray-4;

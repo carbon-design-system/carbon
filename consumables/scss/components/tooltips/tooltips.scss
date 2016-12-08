@@ -26,6 +26,7 @@
 
     &:before {
       @include font-size('14');
+      @include box-shadow;
       padding: 1rem;
       border: 1px $color__navy-gray-2 solid;
       margin-left: 50%;
@@ -38,7 +39,6 @@
       @include light-ui {
         border: 1px solid $color__navy-gray-8;
         color: $color__blue-90;
-        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1);
       }
     }
 

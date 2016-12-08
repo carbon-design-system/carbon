@@ -19,6 +19,7 @@ $bx---ease-in: cubic-bezier(.25, 0, 1, 1);
 $transition--base: 250ms;
 $color__inputs--bg: rgba(255, 255, 255, .1);
 $color__inputs--bg--light-ui: rgba($color__blue-51, .1);
+$color__box-shadow: rgba(0, 0, 0, .1);
 
 //-------------------------
 // Mixins
@@ -32,11 +33,14 @@ $color__inputs--bg--light-ui: rgba($color__blue-51, .1);
   white-space: nowrap;
 }
 
-@mixin box-shadow {
-  box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, .1);
+@mixin box-shadow($size: 'small') {
+  // Large - For dropdowns
+  @if($size == 'large') {
+    box-shadow: 6px 6px 6px 0 $color__box-shadow;
+  }
 
-  @include light-ui {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
+  @if ($size == 'small') {
+    box-shadow: 0px 3px 3px 0 $color__box-shadow;
   }
 }
 

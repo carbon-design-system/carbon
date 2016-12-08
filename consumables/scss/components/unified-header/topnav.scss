@@ -476,7 +476,7 @@
 
   &__menu {
     &__container {
-      @include box-shadow;
+      @include box-shadow('large');
       transition: $transition--base all $bx--standard-easing;
       position: absolute;
       width: auto;
