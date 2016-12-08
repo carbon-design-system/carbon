@@ -39,6 +39,11 @@ module.exports = function (config) {
             exclude: /node_modules/,
             loaders: ['babel'],
           },
+          {
+            test: /\.html?$/,
+            exclude: /node_modules/,
+            loaders: ['html'],
+          },
         ],
         postLoaders: cloptions.debug ? [] : [
           {
@@ -104,6 +109,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
 
     autoWatch: true,
+    autoWatchBatchDelay: 400,
 
     browsers: (Array.isArray(cloptions.browsers) ? cloptions.browsers : [cloptions.browsers || 'PhantomJS']).map(function (browser) {
       return browser + (browser === 'Chrome' && process.env.TRAVIS ? '_Travis' : '');

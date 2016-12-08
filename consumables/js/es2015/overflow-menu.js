@@ -5,12 +5,14 @@ import toggleClass from '../polyfills/toggle-class';
 import on from '../misc/on';
 
 export default class OverflowMenu {
-  constructor(element) {
+  constructor(element, options = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
       throw new TypeError('DOM element should be given to initialize this widget.');
     }
 
     this.element = element;
+    this.options = Object.assign(Object.create(this.constructor.options), options);
+    this.optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
     this.constructor.components.set(this.element, this);
 
     /**
@@ -42,6 +44,22 @@ export default class OverflowMenu {
     }
   }
 
+  emitEvent = (element, evt) => {
+    const detail = {
+      element,
+      optionMenu: this.optionMenu,
+      evt,
+    };
+
+    const eventAfter = new CustomEvent('overflow', {
+      bubbles: true,
+      cancelable: true,
+      detail,
+    });
+
+    this.element.ownerDocument.dispatchEvent(eventAfter);
+  }
+
   handleDocumentClick(event) {
     const isOfSelf = this.element.contains(event.target);
     const shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
@@ -50,7 +68,12 @@ export default class OverflowMenu {
       event.preventDefault();
     }
 
+    toggleClass(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
     toggleClass(this.element, 'bx--overflow-menu--open', shouldBeOpen);
+
+    if (shouldBeOpen) {
+      this.emitEvent(this.element, event);
+    }
   }
 
   handleKeyPress(event) {
@@ -63,6 +86,11 @@ export default class OverflowMenu {
         event.preventDefault();
       }
 
+      if (shouldBeOpen) {
+        this.emitEvent(this.element, event);
+      }
+
+      toggleClass(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
       toggleClass(this.element, 'bx--overflow-menu--open', shouldBeOpen);
     }
   }
@@ -81,5 +109,6 @@ export default class OverflowMenu {
 
   static options = {
     selectorInit: '[data-overflow-menu]',
+    selectorOptionMenu: '.bx--overflow-menu__options',
   };
 }

@@ -125,5 +125,13 @@
         display: block;
       }
     }
+
+    &.bx--overflow-menu--open {
+      display: flex;
+    }
+
+    &--open {
+      display: block;
+    }
   }
 }

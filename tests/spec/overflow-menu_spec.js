@@ -1,6 +1,26 @@
 import '../../consumables/js/polyfills/custom-event';
+import '../../consumables/js/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
+import EventManager from '../utils/event-manager';
+import promiseTryCatcher from '../utils/promise-try-catcher';
 import OverflowMenu from '../../consumables/js/es2015/overflow-menu';
+import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+
+const HTML = `
+  <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
+    <svg class="bx--overflow-menu__icon">
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/sprite.svg#app-actions--overflow-menu"></use>
+    </svg>
+    <ul class="bx--overflow-menu__options">
+      <li><button type="button" class="bx--overflow-menu__btn">Stop app</button></li>
+      <li><button type="button" class="bx--overflow-menu__btn">Restart app</button></li>
+      <li><button type="button" class="bx--overflow-menu__btn">Rename app</button></li>
+      <li><button type="button" class="bx--overflow-menu__btn">Edit routes and access</button></li>
+      <hr/>
+      <li><button type="button" class="bx--overflow-menu__btn--delete">Delete app</button></li>
+    </ul>
+  </div>
+`;
 
 describe('Test Overflow menu', function () {
   describe('Constructor', function () {
@@ -20,18 +40,17 @@ describe('Test Overflow menu', function () {
   describe('Toggling a single overflow-menu', function () {
     let menu;
     let element;
+    let options;
+    const container = document.createElement('div');
+    container.innerHTML = HTML;
+
     before(function () {
-      element = document.createElement('a');
+      document.body.appendChild(container);
+      element = document.querySelector('[data-overflow-menu]');
       menu = new OverflowMenu(element);
-      document.body.appendChild(element);
     });
 
-    it(`Prevents default behavior of anchor element on click event`, function () {
-      // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
-      expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.false;
-    });
-
-    it(`Should set and remove "bx--overflow-menu--open" class on click event`, function () {
+    it(`Should set and remove "bx--overflow-menu--open" class on the element on click event`, function () {
       // Initial click to open overflow-menu:
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.classList.contains('bx--overflow-menu--open')).to.be.true;
@@ -41,34 +60,80 @@ describe('Test Overflow menu', function () {
       expect(element.classList.contains('bx--overflow-menu--open')).to.be.false;
     });
 
+    it(`Should set and remove "bx--overflow-menu--open" class on the options menu`, function () {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(menu.optionMenu.classList.contains('bx--overflow-menu--open')).to.be.true;
+
+      // Secondary click to close overflow-menu:
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(menu.optionMenu.classList.contains('bx--overflow-menu--open')).to.be.false;
+    });
+
+    afterEach(function () {
+      element.classList.remove('bx--overflow-menu--open');
+      menu.optionMenu.classList.remove('bx--overflow-menu--open');
+    });
+
+    after(function () {
+      menu.release();
+      document.body.removeChild(container);
+    });
+  });
+
+  describe('Custom event emission', function () {
+    let menu;
+    let element;
+    let options;
+    const container = document.createElement('div');
+    container.innerHTML = HTML;
+
+    const events = new EventManager();
+
+    before(function () {
+      document.body.appendChild(container);
+      element = document.querySelector('[data-overflow-menu]');
+      menu = new OverflowMenu(element);
+    });
+
+    it('Should emit overflow event when opening', function () {
+      const spyOverflowEvent = sinon.spy();
+      events.on(document, 'overflow', spyOverflowEvent);
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      return new Promise((resolve, reject) => {
+        setTimeout(promiseTryCatcher(() => {
+          expect(spyOverflowEvent).to.have.been.called;
+        }, resolve, reject), 200);
+      });
+    });
+
     afterEach(function () {
       element.classList.remove('bx--overflow-menu--open');
     });
 
     after(function () {
       menu.release();
-      document.body.removeChild(element);
+      document.body.removeChild(container);
     });
   });
 
   describe('Toggling multiple overflow-menus', function () {
+    let elements;
     let element1;
     let element2;
     let element3;
+    const container = document.createElement('div');
+    container.innerHTML = [HTML, HTML, HTML].join('');
 
     before(function () {
-      element1 = document.createElement('a');
-      element2 = document.createElement('a');
-      element3 = document.createElement('a');
-      element1.dataset.overflowMenu = '';
-      element2.dataset.overflowMenu = '';
-      element3.dataset.overflowMenu = '';
+      document.body.appendChild(container);
+      elements = [... document.querySelectorAll('[data-overflow-menu]')];
+      element1 = elements[0];
+      element2 = elements[1];
+      element3 = elements[2];
       new OverflowMenu(element1);
       new OverflowMenu(element2);
       new OverflowMenu(element3);
-      document.body.appendChild(element1);
-      document.body.appendChild(element2);
-      document.body.appendChild(element3);
     });
 
     it('Should open one menu on a single click event', function () {
@@ -93,9 +158,7 @@ describe('Test Overflow menu', function () {
     });
 
     after(function () {
-      document.body.removeChild(element1);
-      document.body.removeChild(element2);
-      document.body.removeChild(element3);
+      document.body.removeChild(container);
     });
   });
 
@@ -103,7 +166,7 @@ describe('Test Overflow menu', function () {
     let element;
 
     before(function () {
-      element = document.createElement('a');
+      element = document.createElement('div');
     });
 
     it('Should prevent creating duplicate instances', function () {

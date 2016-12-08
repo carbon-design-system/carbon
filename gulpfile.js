@@ -41,7 +41,7 @@ gulp.task('browser-sync', () => {
     logPrefix: 'Bluemix Components',
     open: false,
     proxy: 'localhost:8080',
-    reloadDelay: 500,
+    timestamps: false,
   });
 });
 

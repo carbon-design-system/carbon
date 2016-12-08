@@ -20,6 +20,7 @@ import Loading from './loading';
 import Dropdown from './dropdown';
 import Card from './card';
 import NumberInput from './number-input';
+import ResponsiveTable from './responsive-table';
 import Table from './table';
 import DetailPageHeader from './detail-page-header';
 import LeftNav from './left-nav';
@@ -142,6 +143,12 @@ export {
   NumberInput,
 
   /**
+   *  Data table -responsive
+   *  @type Table
+   */
+  ResponsiveTable,
+
+  /**
    * Data table.
    * @type Table
    */
@@ -197,6 +204,7 @@ const init = () => {
     Dropdown.init();
     Card.init();
     NumberInput.init();
+    ResponsiveTable.init();
     Table.init();
     DetailPageHeader.init();
     LeftNav.init();
