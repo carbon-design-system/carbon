@@ -92,6 +92,11 @@
           transform: translateY(0);
           opacity: 1;
           visibility: visible;
+          background-color: $color__navy-gray-3;
+
+          @include light-ui {
+            background-color: $color__navy-gray-3;
+          }
         }
       }
     }
