@@ -168,7 +168,7 @@ export default class ResponsiveTable {
     const icon = element.querySelector(this.options.selectorOverflowMenuIcon);
     const position = icon.getBoundingClientRect();
 
-    optionMenu.style.position = 'fixed';
+    optionMenu.style.position = 'absolute';
     optionMenu.style.top = `${position.top}px`;
     optionMenu.style.left = `${position.right}px`;
     optionMenu.style.right = 'auto';
