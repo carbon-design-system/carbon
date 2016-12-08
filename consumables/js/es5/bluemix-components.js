@@ -3497,7 +3497,7 @@ var BluemixComponents =
 	    var icon = element.querySelector(_this3.options.selectorOverflowMenuIcon);
 	    var position = icon.getBoundingClientRect();
 	
-	    optionMenu.style.position = 'fixed';
+	    optionMenu.style.position = 'absolute';
 	    optionMenu.style.top = position.top + 'px';
 	    optionMenu.style.left = position.right + 'px';
 	    optionMenu.style.right = 'auto';
