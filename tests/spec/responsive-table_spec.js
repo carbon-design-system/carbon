@@ -3,7 +3,7 @@ import '../../consumables/js/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import ResponsiveTable from '../../consumables/js/es2015/responsive-table';
-import HTML from '../../consumables/html/base-elements/tables/responsiveTables.html';
+import HTML from '../../consumables/html/base-elements/tables/responsive-tables.html';
 
 describe('Test table', function () {
   describe('Constructor', function () {
@@ -101,6 +101,24 @@ describe('Test table', function () {
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       expect(document.querySelector('.bx--expandable-row')).to.be.null;
+    });
+
+    it(`Clicking a row expand table cell should trigger the event`, () => {
+      const rowExpansion = document.querySelector('.bx--table-expand');
+      const spyToggleRowExpandEvent = sinon.spy();
+      events.on(element.ownerDocument.body, 'expand', spyToggleRowExpandEvent);
+      rowExpansion.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      expect(spyToggleRowExpandEvent).to.have.been.called;
+    });
+
+    it(`The event should trigger the function`, () => {
+      const rowExpansion = document.querySelector('.bx--table-expand');
+
+      const spyToggleRowExpand = sinon.spy(expanseTable, 'toggleRowExpand');
+      rowExpansion.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      expect(spyToggleRowExpand).to.have.been.called;
     });
 
     afterEach(function () {

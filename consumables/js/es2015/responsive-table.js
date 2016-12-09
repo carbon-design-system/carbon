@@ -39,12 +39,6 @@ export default class ResponsiveTable {
     this.initExpandableRows();
     this.initOverflowMenus();
 
-    this.eventHandlers = {
-      expand: this.toggleRowExpand,
-      sort: this.toggleSort,
-      'select-all': this.toggleSelectAll,
-    };
-
     this.element.addEventListener('click', evt => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
       if (eventElement) {
@@ -94,7 +88,7 @@ export default class ResponsiveTable {
     const canceled = !this.element.dispatchEvent(eventBefore);
 
     if (!canceled) {
-      this.eventHandlers[detail.event](detail);
+      this[this.constructor.eventHandlers[detail.event]](detail);
       this.element.dispatchEvent(eventAfter);
     }
   }
@@ -242,6 +236,12 @@ export default class ResponsiveTable {
       [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element));
     }
   }
+
+  static eventHandlers = {
+    expand: 'toggleRowExpand',
+    sort: 'toggleSort',
+    'select-all': 'toggleSelectAll',
+  };
 
   static options = {
     selectorInit: '[data-responsive-table]',
