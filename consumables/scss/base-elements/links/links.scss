@@ -5,9 +5,6 @@
 // Dependencies
 @import '../../global/global';
 
-// Local
-@import 'vars';
-
 @import '../../import-once';
 
 @include exports('links') {
@@ -15,16 +12,16 @@
     @include font-size('14');
     @include font-smoothing;
     font-weight: 700;
-    color: $color--link;
+    color: $color__blue-30;
     text-decoration: underline;
-    transition: $transition--link;
+    transition: $transition--base;
 
     @include light-ui {
       color: $color__blue-51;
     }
 
     &:visited {
-      color: $color--link;
+      color: $color__blue-30;
 
       @include light-ui {
         color: $color__blue-51;
@@ -34,7 +31,7 @@
     &:active,
     &:hover,
     &:focus {
-      color: $color--link--hover;
+      color: $color__blue-20;
 
       @include light-ui {
         color: $color__blue-40;

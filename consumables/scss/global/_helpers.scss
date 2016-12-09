@@ -25,6 +25,14 @@ $color__box-shadow: rgba(0, 0, 0, .1);
 // Mixins
 //-------------------------
 
+@mixin placeholder-colors {
+  color: $color__navy-gray-7;
+
+  @include light-ui {
+    color: $color__navy-gray-6;
+  }
+}
+
 @mixin text-overflow($width) {
   display: block;
   width: $width;

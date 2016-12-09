@@ -21,7 +21,7 @@
 @mixin detail-page-header__arrow {
   width: 16px;
   height: 16px;
-  fill: $color__link;
+  fill: $color__blue-30;
 
   @include breakpoint(bp--xs--major) {
     position: relative;

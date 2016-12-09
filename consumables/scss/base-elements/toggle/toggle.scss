@@ -40,6 +40,7 @@
         width: $toggle-circle * 2;
         height: $toggle-bar;
         top: $toggle-circle / 2;
+        left: 1px;
         background-color: $color__navy-gray-7;
         transition-duration: $transition--base;
         cursor: pointer;
@@ -50,7 +51,7 @@
         position: absolute;
         top: 0;
         display: block;
-        border: $toggle-bar / 2 solid $color__navy-gray-3;
+        border: $toggle-bar / 2 solid $color__navy-gray-2;
         cursor: pointer;
         width: $toggle-circle;
         height: $toggle-circle;
@@ -82,13 +83,9 @@
       // Common styles for --left and --right
       &--left,
       &--right {
+        @include placeholder-colors;
         position: relative;
         top: $toggle-circle / 6;
-        color: $color__navy-gray-7;
-
-        @include light-ui {
-          color: $color__navy-gray-6;
-        }
       }
 
       // Left-label styles
@@ -142,7 +139,6 @@
   .bx--toggle {
     &:disabled + &__label {
       cursor: not-allowed;
-      color: $color__navy-gray-7;
       opacity: .5;
     }
 

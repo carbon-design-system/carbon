@@ -19,16 +19,24 @@
     cursor: pointer;
     display: flex;
     padding: 0 1rem 0 .5rem;
-
-    &:hover {
-      fill: $color__blue-30;
-    }
   }
 
   .bx--number__icon {
-    fill: $color--blue-40;
+    fill: $color--blue-30;
     height: .5rem;
     width: .5rem;
+
+    &:hover {
+      fill: $color__blue-20;
+    }
+    
+    @include light-ui {
+      fill: $color__blue-51;
+
+      &:hover {
+        fill: $color__blue-40;
+      }
+    }
   }
 
   // Position spans to place SVG's inside. Create placeholder
@@ -63,7 +71,7 @@
     border-radius: 0;
 
     &::placeholder {
-      color: darken($color__navy-gray-8, 12%);
+      @include placeholder-colors;
     }
 
     &:focus {

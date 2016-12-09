@@ -31,7 +31,7 @@
       }
 
       &::-webkit-input-placeholder {
-        color: darken($color__navy-gray-8, 12%);
+        @include placeholder-colors;
       }
 
       &:disabled {

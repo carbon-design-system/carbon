@@ -33,6 +33,10 @@
       margin-right: .75rem;
       padding: 0;
       width: rem(18px);
+
+      @include light-ui {
+        background-color: $color__inputs--bg--light-ui;
+      }
     }
 
     &:checked + &__label &__appearance {

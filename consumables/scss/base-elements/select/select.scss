@@ -56,6 +56,10 @@
       width: .75rem;
       height: 1.5rem;
       pointer-events: none;
+
+      @include light-ui {
+        fill: $color__blue-51;
+      }
     }
 
     &__optgroup,

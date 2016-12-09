@@ -6,7 +6,6 @@
 @import '../../global/global';
 
 // Local
-@import 'vars';
 @import 'extends';
 @import 'mixins';
 
@@ -46,13 +45,9 @@
 
       &::placeholder {
         @include font-smoothing;
+        @include placeholder-colors;
         font-style: italic;
         font-weight: 400;
-        color: darken($color__navy-gray-8, 15%);
-
-        @include light-ui {
-          color: $color__blue-90;
-        }
       }
 
       @include breakpoint(bp--sm--major) {
@@ -99,7 +94,7 @@
       font-weight: 600;
       color: $color__navy-gray-8;
       cursor: pointer;
-      background-color: $color--filter-bg;
+      background-color: $color__navy-gray-3;
       border: none;
       position: relative;
       transition-duration: .25s;
@@ -117,7 +112,7 @@
 
       &:hover,
       &:focus {
-        background-color: mix($color__white, $color--filter-bg, 10%);
+        background-color: $color__navy-gray-6;
         color: $color__white;
 
         @include light-ui {

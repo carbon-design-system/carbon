@@ -23,7 +23,7 @@
     align-items: center;
     cursor: pointer;
   }
-  
+
   .bx--checkbox__appearance {
     @include font-size('16');
     box-sizing: border-box;
@@ -37,6 +37,10 @@
     border: 2px solid $color__navy-gray-7;
     overflow: hidden;
     vertical-align: baseline;
+
+    @include light-ui {
+      background-color: $color__inputs--bg--light-ui;
+    }
   }
 
   .bx--checkbox {
@@ -54,7 +58,7 @@
         width: rem(12px);
         height: rem(6px);
         background: transparent;
-        border: 2px solid $color__navy-gray-2;
+        border: 2px solid $color__blue-90;
         border-top: none;
         border-right: none;
         transform: rotate(-45deg);
