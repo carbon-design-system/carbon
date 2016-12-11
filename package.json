@@ -17,7 +17,8 @@
     "predev": "gulp build:dev",
     "dev": "gulp serve & npm run serve",
     "lint": "gulp lint",
-    "test": "gulp test"
+    "test": "gulp test",
+    "start": "node server.js"
   },
   "engines": {
     "node": "~4.0.0",
