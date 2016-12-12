@@ -13,7 +13,7 @@ If not, [make an issue](https://github.ibm.com/Bluemix/bluemix-components/issues
 #### "I need help now...this won't take long, do I really need to make an issue?"
 
 Ask us on Slack.
-If the problem gets resolved quickly. Great!
+If the problem gets resolved quickly, great!
 But it's not guaranteed that you'll get a response immediately or when you need it.
 It's also not guaranteed that we can resolve your issue in that particular Slack conversation.
 
