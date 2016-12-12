@@ -1,6 +1,6 @@
 # Core Team
 
-This is documentation for team members who are responsible for maintaining the bluemix-components repo. These team members will be known and referred to as the **core team** ([see members](https://github.ibm.com/orgs/Bluemix/teams/bluemix-components-core-team)).
+This is documentation for team members who are responsible for maintaining the bluemix-components repo. These team members will be known and referred to as the **core team**.
 
 ## Review Pull Requests Locally
 
