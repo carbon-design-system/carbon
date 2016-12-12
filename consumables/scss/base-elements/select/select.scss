@@ -73,6 +73,19 @@
     .bx--select__option {
       background-color: $color__navy-gray-5;
       color: $color__white;
+
+      @include light-ui {
+        color: $color__blue-90;
+        background-color: $color__white;
+      }
+    }
+
+    .bx--select__optgroup {
+      color: $color__white;
+
+      @include light-ui {
+        color: $color__blue-90;
+      }
     }
   }
 }
