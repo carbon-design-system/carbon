@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '../Icon';
 import Tooltip from '../Tooltip';
 import { mount } from 'enzyme';
 
@@ -24,6 +25,13 @@ describe('Tooltip', () => {
 
       it('has the tooltip text specified', () => {
         expect(tooltip.props()['data-tooltip']).toEqual('Basic Tooltip Text');
+      });
+
+      it('renders the info icon', () => {
+        const icon = tooltip.find(Icon);
+        expect(icon.length).toBe(1);
+        expect(icon.props().className).toBe('bx--tooltip__icon');
+        expect(icon.props().name).toBe('info');
       });
     });
 

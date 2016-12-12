@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Icon from './Icon';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/components/tooltips/tooltips.scss';
 
@@ -15,7 +16,12 @@ const defaultProps = {
 
 const Tooltip = ({ children, className, position, text }) => {
   const tooltipClasses = classNames(`bx--tooltip__${position}`, className);
-  return <div className={tooltipClasses} data-tooltip={text}>{children}</div>;
+  return (
+    <div className={tooltipClasses} data-tooltip={text}>
+      {children}
+      <Icon className="bx--tooltip__icon" name="info" description="Information" />
+    </div>
+  );
 };
 
 Tooltip.propTypes = propTypes;
