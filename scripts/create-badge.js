@@ -4,6 +4,7 @@ const lcov2badge = require('lcov2badge');
 
 const options = {
   filePath: './.gh-pages/coverage/lcov.info',
+  style: 'flat',
 };
 
 lcov2badge.badge(options, (err, svgBadge) => {
