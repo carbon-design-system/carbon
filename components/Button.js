@@ -35,8 +35,9 @@ const defaultProps = {
 
 const Button = ({ children, className, disabled, small, kind, href,
                   tabIndex, type, icon, iconDescription, ...other }) => {
-  const buttonClasses = classNames('bx--btn', className, {
+  const buttonClasses = classNames(className, {
     'bx--btn--sm': small,
+    'bx--btn': kind === 'primary',
     'bx--btn--danger': kind === 'danger',
     'bx--btn--secondary': kind === 'secondary',
   });
