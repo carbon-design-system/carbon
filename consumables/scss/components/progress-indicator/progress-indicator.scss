@@ -1,3 +1,5 @@
+@import '../../global/global';
+
 .bx--progress-indicator {
   display: flex;
   flex-direction: column;
@@ -153,12 +155,12 @@
     display: block;
     padding: 0 0 0 .5rem;
     color: $color__navy-gray-7;
-    
+
     @include breakpoint(700px) {
       padding: .5rem 0 0 0;
     }
   }
-  
+
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     .bx--progress-indicator__step::after {
       left: .5rem;
