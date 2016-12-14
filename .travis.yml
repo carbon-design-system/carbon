@@ -9,11 +9,11 @@ node_js:
 group: bluezone
 
 addons:
-  firefox: "45.1.1esr"
+  firefox: "latest-esr"
 
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@~3.8.0; npm cache clean; fi
-  - tar -xjf /tmp/firefox-45.1.1esr.tar.bz2 --directory /tmp
+  - tar -xjf /tmp/firefox-latest-esr.tar.bz2 --directory /tmp
   - export PATH="/tmp/firefox:$PATH"
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
