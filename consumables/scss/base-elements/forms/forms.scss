@@ -49,6 +49,7 @@
   &__label {
     @include font-size('14');
     @include letter-spacing;
+    font-weight: 700;
     display: inline-block;
     padding-bottom: .5rem;
     margin: 0;
