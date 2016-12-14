@@ -40,7 +40,6 @@ describe('Test Overflow menu', function () {
   describe('Toggling a single overflow-menu', function () {
     let menu;
     let element;
-    let options;
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
@@ -83,7 +82,6 @@ describe('Test Overflow menu', function () {
   describe('Custom event emission', function () {
     let menu;
     let element;
-    let options;
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
@@ -95,9 +93,48 @@ describe('Test Overflow menu', function () {
       menu = new OverflowMenu(element);
     });
 
-    it('Should emit overflow event when opening', function () {
+    it(`Should provide a way to cancel showing overflow menu`, function () {
       const spyOverflowEvent = sinon.spy();
-      events.on(document, 'overflow', spyOverflowEvent);
+      events.on(element.ownerDocument.body, 'overflow-menu-beingshown', (e) => {
+        e.preventDefault();
+      });
+      events.on(element.ownerDocument.body, 'overflow-menu-shown', spyOverflowEvent);
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(spyOverflowEvent, 'overflow-menu-shown event').not.to.have.been.called;
+      expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.false;
+      expect(menu.optionMenu.classList.contains('bx--overflow-menu--open'), 'State of dropdown menu').to.be.false;
+    });
+
+    it('Should emit an event after showing', function () {
+      const spyOverflowEvent = sinon.spy();
+      events.on(document, 'overflow-menu-shown', spyOverflowEvent);
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+
+      return new Promise((resolve, reject) => {
+        setTimeout(promiseTryCatcher(() => {
+          expect(spyOverflowEvent).to.have.been.called;
+        }, resolve, reject), 200);
+      });
+    });
+
+    it(`Should provide a way to cancel hiding overflow menu`, function () {
+      const spyOverflowEvent = sinon.spy();
+      events.on(element.ownerDocument.body, 'overflow-menu-beinghidden', (e) => {
+        e.preventDefault();
+      });
+      events.on(element.ownerDocument.body, 'overflow-menu-hidden', spyOverflowEvent);
+      element.classList.add('bx--overflow-menu--open');
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(spyOverflowEvent, 'overflow-menu-hidden event').not.to.have.been.called;
+      expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.true;
+      expect(menu.optionMenu.classList.contains('bx--overflow-menu--open'), 'State of dropdown menu').to.be.true;
+    });
+
+    it('Should emit an event after hiding', function () {
+      const spyOverflowEvent = sinon.spy();
+      events.on(document, 'overflow-menu-hidden', spyOverflowEvent);
+
+      element.classList.add('bx--overflow-menu--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       return new Promise((resolve, reject) => {
@@ -109,6 +146,7 @@ describe('Test Overflow menu', function () {
 
     afterEach(function () {
       element.classList.remove('bx--overflow-menu--open');
+      events.reset();
     });
 
     after(function () {

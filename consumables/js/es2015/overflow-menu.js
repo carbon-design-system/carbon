@@ -1,7 +1,6 @@
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
-import toggleClass from '../polyfills/toggle-class';
 import on from '../misc/on';
 
 export default class OverflowMenu {
@@ -44,36 +43,64 @@ export default class OverflowMenu {
     }
   }
 
-  emitEvent = (element, evt) => {
-    const detail = {
-      element,
-      optionMenu: this.optionMenu,
-      evt,
-    };
+  /**
+   * Runs the state change handler associated with the given name, and fires events before/after that.
+   * If the event before the state change handler runs is canceled, the state change handler won't run.
+   * @param {string} name The name of change in state. The before/after event handlers will have its associated name.
+   * @param {Element} element The DOM element triggering this change in state.
+   * @param {Event} evt The event triggering this change in state.
+   */
+  emitEvent = (name, element, evt) => {
+    const optionMenu = this.optionMenu;
+    const detail = { element, optionMenu, evt };
+    const capitalizedName = name[0].toUpperCase() + name.substr(1);
 
-    const eventAfter = new CustomEvent('overflow', {
+    const eventBefore = new CustomEvent(this.constructor.options[`eventBefore${capitalizedName}`], {
       bubbles: true,
       cancelable: true,
       detail,
     });
 
-    this.element.ownerDocument.dispatchEvent(eventAfter);
+    const eventAfter = new CustomEvent(this.constructor.options[`eventAfter${capitalizedName}`], {
+      bubbles: true,
+      cancelable: true,
+      detail,
+    });
+
+    const canceled = !this.element.dispatchEvent(eventBefore);
+
+    if (!canceled) {
+      this[this.constructor.actionHandlers[name]](detail);
+      this.element.dispatchEvent(eventAfter);
+    }
+  }
+
+  /**
+   * Shows this overflow menu.
+   */
+  show() {
+    this.optionMenu.classList.add('bx--overflow-menu--open');
+    this.element.classList.add('bx--overflow-menu--open');
+  }
+
+  /**
+   * Hides this overflow menu.
+   */
+  hide() {
+    this.optionMenu.classList.remove('bx--overflow-menu--open');
+    this.element.classList.remove('bx--overflow-menu--open');
   }
 
   handleDocumentClick(event) {
     const isOfSelf = this.element.contains(event.target);
     const shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
+    const eventName = shouldBeOpen ? 'shown' : 'hidden';
 
     if (isOfSelf && this.element.tagName === 'A') {
       event.preventDefault();
     }
 
-    toggleClass(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
-    toggleClass(this.element, 'bx--overflow-menu--open', shouldBeOpen);
-
-    if (shouldBeOpen) {
-      this.emitEvent(this.element, event);
-    }
+    this.emitEvent(eventName, this.element, event);
   }
 
   handleKeyPress(event) {
@@ -81,17 +108,13 @@ export default class OverflowMenu {
     if (key === 'Enter' || key === 13) {
       const isOfSelf = this.element.contains(event.target);
       const shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
+      const eventName = shouldBeOpen ? 'shown' : 'hidden';
 
       if (isOfSelf && this.element.tagName === 'A') {
         event.preventDefault();
       }
 
-      if (shouldBeOpen) {
-        this.emitEvent(this.element, event);
-      }
-
-      toggleClass(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
-      toggleClass(this.element, 'bx--overflow-menu--open', shouldBeOpen);
+      this.emitEvent(eventName, this.element, event);
     }
   }
 
@@ -110,5 +133,14 @@ export default class OverflowMenu {
   static options = {
     selectorInit: '[data-overflow-menu]',
     selectorOptionMenu: '.bx--overflow-menu__options',
+    eventBeforeShown: 'overflow-menu-beingshown',
+    eventAfterShown: 'overflow-menu-shown',
+    eventBeforeHidden: 'overflow-menu-beinghidden',
+    eventAfterHidden: 'overflow-menu-hidden',
+  };
+
+  static actionHandlers = {
+    shown: 'show',
+    hidden: 'hide',
   };
 }

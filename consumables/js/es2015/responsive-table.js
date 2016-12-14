@@ -144,10 +144,9 @@ export default class ResponsiveTable {
 
     menuMap.forEach(menu => {
       document.body.appendChild(menu.optionMenu);
-      this.placeOverflow({
-        detail: menu,
-      });
     });
+
+    this.element.addEventListener('overflow-menu-shown', this.placeOverflow);
   }
 
   /**
