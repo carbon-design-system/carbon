@@ -100,7 +100,7 @@ export default class ResponsiveTable {
     this.parentRows.forEach((item, index) => {
       if (index % 2 === 0) {
         item.classList.add(this.options.classParentRowEven);
-        if (item.nextElementSibling.classList.contains(this.options.classExpandableRow)) {
+        if (item.nextElementSibling && item.nextElementSibling.classList.contains(this.options.classExpandableRow)) {
           item.nextElementSibling.classList.add(this.options.classExpandableRowEven);
         }
       }
@@ -162,7 +162,7 @@ export default class ResponsiveTable {
     const position = icon.getBoundingClientRect();
 
     optionMenu.style.position = 'absolute';
-    optionMenu.style.top = `${position.top}px`;
+    optionMenu.style.top = `${position.top + element.ownerDocument.defaultView.scrollY}px`;
     optionMenu.style.left = `${position.right}px`;
     optionMenu.style.right = 'auto';
   }
