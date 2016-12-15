@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.toggleClass, global.on, global.arrayFrom, global.elementMatches, global.objectAssign);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.on, global.arrayFrom, global.elementMatches, global.objectAssign);
     global.overflowMenu = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _toggleClass, _on) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -28,8 +28,6 @@
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
-
-  var _toggleClass2 = _interopRequireDefault(_toggleClass);
 
   var _on2 = _interopRequireDefault(_on);
 
@@ -75,21 +73,29 @@
     }
 
     (0, _createClass3.default)(OverflowMenu, [{
+      key: 'show',
+      value: function show() {
+        this.optionMenu.classList.add('bx--overflow-menu--open');
+        this.element.classList.add('bx--overflow-menu--open');
+      }
+    }, {
+      key: 'hide',
+      value: function hide() {
+        this.optionMenu.classList.remove('bx--overflow-menu--open');
+        this.element.classList.remove('bx--overflow-menu--open');
+      }
+    }, {
       key: 'handleDocumentClick',
       value: function handleDocumentClick(event) {
         var isOfSelf = this.element.contains(event.target);
         var shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
+        var eventName = shouldBeOpen ? 'shown' : 'hidden';
 
         if (isOfSelf && this.element.tagName === 'A') {
           event.preventDefault();
         }
 
-        (0, _toggleClass2.default)(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
-        (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
-
-        if (shouldBeOpen) {
-          this.emitEvent(this.element, event);
-        }
+        this.emitEvent(eventName, this.element, event);
       }
     }, {
       key: 'handleKeyPress',
@@ -98,17 +104,13 @@
         if (key === 'Enter' || key === 13) {
           var isOfSelf = this.element.contains(event.target);
           var shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
+          var eventName = shouldBeOpen ? 'shown' : 'hidden';
 
           if (isOfSelf && this.element.tagName === 'A') {
             event.preventDefault();
           }
 
-          if (shouldBeOpen) {
-            this.emitEvent(this.element, event);
-          }
-
-          (0, _toggleClass2.default)(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
-          (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
+          this.emitEvent(eventName, this.element, event);
         }
       }
     }, {
@@ -154,26 +156,43 @@
   OverflowMenu.components = new _weakMap2.default();
   OverflowMenu.options = {
     selectorInit: '[data-overflow-menu]',
-    selectorOptionMenu: '.bx--overflow-menu__options'
+    selectorOptionMenu: '.bx--overflow-menu__options',
+    eventBeforeShown: 'overflow-menu-beingshown',
+    eventAfterShown: 'overflow-menu-shown',
+    eventBeforeHidden: 'overflow-menu-beinghidden',
+    eventAfterHidden: 'overflow-menu-hidden'
+  };
+  OverflowMenu.actionHandlers = {
+    shown: 'show',
+    hidden: 'hide'
   };
 
   var _initialiseProps = function _initialiseProps() {
     var _this3 = this;
 
-    this.emitEvent = function (element, evt) {
-      var detail = {
-        element: element,
-        optionMenu: _this3.optionMenu,
-        evt: evt
-      };
+    this.emitEvent = function (name, element, evt) {
+      var optionMenu = _this3.optionMenu;
+      var detail = { element: element, optionMenu: optionMenu, evt: evt };
+      var capitalizedName = name[0].toUpperCase() + name.substr(1);
 
-      var eventAfter = new CustomEvent('overflow', {
+      var eventBefore = new CustomEvent(_this3.constructor.options['eventBefore' + capitalizedName], {
         bubbles: true,
         cancelable: true,
         detail: detail
       });
 
-      _this3.element.ownerDocument.dispatchEvent(eventAfter);
+      var eventAfter = new CustomEvent(_this3.constructor.options['eventAfter' + capitalizedName], {
+        bubbles: true,
+        cancelable: true,
+        detail: detail
+      });
+
+      var canceled = !_this3.element.dispatchEvent(eventBefore);
+
+      if (!canceled) {
+        _this3[_this3.constructor.actionHandlers[name]](detail);
+        _this3.element.dispatchEvent(eventAfter);
+      }
     };
   };
 

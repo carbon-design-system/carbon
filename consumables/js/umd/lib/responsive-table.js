@@ -80,12 +80,6 @@
       this.initExpandableRows();
       this.initOverflowMenus();
 
-      this.eventHandlers = {
-        expand: this.toggleRowExpand,
-        sort: this.toggleSort,
-        'select-all': this.toggleSelectAll
-      };
-
       this.element.addEventListener('click', function (evt) {
         var eventElement = (0, _eventMatches2.default)(evt, _this.options.eventTrigger);
         if (eventElement) {
@@ -181,6 +175,11 @@
   }();
 
   ResponsiveTable.components = new _weakMap2.default();
+  ResponsiveTable.eventHandlers = {
+    expand: 'toggleRowExpand',
+    sort: 'toggleSort',
+    'select-all': 'toggleSelectAll'
+  };
   ResponsiveTable.options = {
     selectorInit: '[data-responsive-table]',
     selectorExpandCells: '.bx--table-expand',
@@ -237,7 +236,7 @@
       var canceled = !_this3.element.dispatchEvent(eventBefore);
 
       if (!canceled) {
-        _this3.eventHandlers[detail.event](detail);
+        _this3[_this3.constructor.eventHandlers[detail.event]](detail);
         _this3.element.dispatchEvent(eventAfter);
       }
     };
@@ -246,7 +245,7 @@
       _this3.parentRows.forEach(function (item, index) {
         if (index % 2 === 0) {
           item.classList.add(_this3.options.classParentRowEven);
-          if (item.nextElementSibling.classList.contains(_this3.options.classExpandableRow)) {
+          if (item.nextElementSibling && item.nextElementSibling.classList.contains(_this3.options.classExpandableRow)) {
             item.nextElementSibling.classList.add(_this3.options.classExpandableRowEven);
           }
         }
@@ -282,10 +281,9 @@
 
       menuMap.forEach(function (menu) {
         document.body.appendChild(menu.optionMenu);
-        _this3.placeOverflow({
-          detail: menu
-        });
       });
+
+      _this3.element.addEventListener('overflow-menu-shown', _this3.placeOverflow);
     };
 
     this.placeOverflow = function (evt) {
@@ -298,7 +296,7 @@
       var position = icon.getBoundingClientRect();
 
       optionMenu.style.position = 'absolute';
-      optionMenu.style.top = position.top + 'px';
+      optionMenu.style.top = position.top + element.ownerDocument.defaultView.scrollY + 'px';
       optionMenu.style.left = position.right + 'px';
       optionMenu.style.right = 'auto';
     };

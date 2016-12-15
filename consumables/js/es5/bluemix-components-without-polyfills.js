@@ -1241,10 +1241,6 @@ var BluemixComponents =
 	
 	__webpack_require__(4);
 	
-	var _toggleClass = __webpack_require__(11);
-	
-	var _toggleClass2 = _interopRequireDefault(_toggleClass);
-	
 	var _on = __webpack_require__(8);
 	
 	var _on2 = _interopRequireDefault(_on);
@@ -1292,21 +1288,39 @@ var BluemixComponents =
 	  }
 	
 	  _createClass(OverflowMenu, [{
+	    key: 'show',
+	
+	
+	    /**
+	     * Shows this overflow menu.
+	     */
+	    value: function show() {
+	      this.optionMenu.classList.add('bx--overflow-menu--open');
+	      this.element.classList.add('bx--overflow-menu--open');
+	    }
+	
+	    /**
+	     * Hides this overflow menu.
+	     */
+	
+	  }, {
+	    key: 'hide',
+	    value: function hide() {
+	      this.optionMenu.classList.remove('bx--overflow-menu--open');
+	      this.element.classList.remove('bx--overflow-menu--open');
+	    }
+	  }, {
 	    key: 'handleDocumentClick',
 	    value: function handleDocumentClick(event) {
 	      var isOfSelf = this.element.contains(event.target);
 	      var shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
+	      var eventName = shouldBeOpen ? 'shown' : 'hidden';
 	
 	      if (isOfSelf && this.element.tagName === 'A') {
 	        event.preventDefault();
 	      }
 	
-	      (0, _toggleClass2.default)(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
-	      (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
-	
-	      if (shouldBeOpen) {
-	        this.emitEvent(this.element, event);
-	      }
+	      this.emitEvent(eventName, this.element, event);
 	    }
 	  }, {
 	    key: 'handleKeyPress',
@@ -1315,17 +1329,13 @@ var BluemixComponents =
 	      if (key === 'Enter' || key === 13) {
 	        var isOfSelf = this.element.contains(event.target);
 	        var shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
+	        var eventName = shouldBeOpen ? 'shown' : 'hidden';
 	
 	        if (isOfSelf && this.element.tagName === 'A') {
 	          event.preventDefault();
 	        }
 	
-	        if (shouldBeOpen) {
-	          this.emitEvent(this.element, event);
-	        }
-	
-	        (0, _toggleClass2.default)(this.optionMenu, 'bx--overflow-menu--open', shouldBeOpen);
-	        (0, _toggleClass2.default)(this.element, 'bx--overflow-menu--open', shouldBeOpen);
+	        this.emitEvent(eventName, this.element, event);
 	      }
 	    }
 	  }, {
@@ -1364,6 +1374,15 @@ var BluemixComponents =
 	        });
 	      }
 	    }
+	
+	    /**
+	     * Runs the state change handler associated with the given name, and fires events before/after that.
+	     * If the event before the state change handler runs is canceled, the state change handler won't run.
+	     * @param {string} name The name of change in state. The before/after event handlers will have its associated name.
+	     * @param {Element} element The DOM element triggering this change in state.
+	     * @param {Event} evt The event triggering this change in state.
+	     */
+	
 	  }]);
 	
 	  return OverflowMenu;
@@ -1372,26 +1391,43 @@ var BluemixComponents =
 	OverflowMenu.components = new WeakMap();
 	OverflowMenu.options = {
 	  selectorInit: '[data-overflow-menu]',
-	  selectorOptionMenu: '.bx--overflow-menu__options'
+	  selectorOptionMenu: '.bx--overflow-menu__options',
+	  eventBeforeShown: 'overflow-menu-beingshown',
+	  eventAfterShown: 'overflow-menu-shown',
+	  eventBeforeHidden: 'overflow-menu-beinghidden',
+	  eventAfterHidden: 'overflow-menu-hidden'
+	};
+	OverflowMenu.actionHandlers = {
+	  shown: 'show',
+	  hidden: 'hide'
 	};
 	
 	var _initialiseProps = function _initialiseProps() {
 	  var _this3 = this;
 	
-	  this.emitEvent = function (element, evt) {
-	    var detail = {
-	      element: element,
-	      optionMenu: _this3.optionMenu,
-	      evt: evt
-	    };
+	  this.emitEvent = function (name, element, evt) {
+	    var optionMenu = _this3.optionMenu;
+	    var detail = { element: element, optionMenu: optionMenu, evt: evt };
+	    var capitalizedName = name[0].toUpperCase() + name.substr(1);
 	
-	    var eventAfter = new CustomEvent('overflow', {
+	    var eventBefore = new CustomEvent(_this3.constructor.options['eventBefore' + capitalizedName], {
 	      bubbles: true,
 	      cancelable: true,
 	      detail: detail
 	    });
 	
-	    _this3.element.ownerDocument.dispatchEvent(eventAfter);
+	    var eventAfter = new CustomEvent(_this3.constructor.options['eventAfter' + capitalizedName], {
+	      bubbles: true,
+	      cancelable: true,
+	      detail: detail
+	    });
+	
+	    var canceled = !_this3.element.dispatchEvent(eventBefore);
+	
+	    if (!canceled) {
+	      _this3[_this3.constructor.actionHandlers[name]](detail);
+	      _this3.element.dispatchEvent(eventAfter);
+	    }
 	  };
 	};
 	
@@ -3224,12 +3260,6 @@ var BluemixComponents =
 	    this.initExpandableRows();
 	    this.initOverflowMenus();
 	
-	    this.eventHandlers = {
-	      expand: this.toggleRowExpand,
-	      sort: this.toggleSort,
-	      'select-all': this.toggleSelectAll
-	    };
-	
 	    this.element.addEventListener('click', function (evt) {
 	      var eventElement = (0, _eventMatches2.default)(evt, _this.options.eventTrigger);
 	      if (eventElement) {
@@ -3326,6 +3356,11 @@ var BluemixComponents =
 	}();
 	
 	ResponsiveTable.components = new WeakMap();
+	ResponsiveTable.eventHandlers = {
+	  expand: 'toggleRowExpand',
+	  sort: 'toggleSort',
+	  'select-all': 'toggleSelectAll'
+	};
 	ResponsiveTable.options = {
 	  selectorInit: '[data-responsive-table]',
 	  selectorExpandCells: '.bx--table-expand',
@@ -3382,7 +3417,7 @@ var BluemixComponents =
 	    var canceled = !_this3.element.dispatchEvent(eventBefore);
 	
 	    if (!canceled) {
-	      _this3.eventHandlers[detail.event](detail);
+	      _this3[_this3.constructor.eventHandlers[detail.event]](detail);
 	      _this3.element.dispatchEvent(eventAfter);
 	    }
 	  };
@@ -3391,7 +3426,7 @@ var BluemixComponents =
 	    _this3.parentRows.forEach(function (item, index) {
 	      if (index % 2 === 0) {
 	        item.classList.add(_this3.options.classParentRowEven);
-	        if (item.nextElementSibling.classList.contains(_this3.options.classExpandableRow)) {
+	        if (item.nextElementSibling && item.nextElementSibling.classList.contains(_this3.options.classExpandableRow)) {
 	          item.nextElementSibling.classList.add(_this3.options.classExpandableRowEven);
 	        }
 	      }
@@ -3427,10 +3462,9 @@ var BluemixComponents =
 	
 	    menuMap.forEach(function (menu) {
 	      document.body.appendChild(menu.optionMenu);
-	      _this3.placeOverflow({
-	        detail: menu
-	      });
 	    });
+	
+	    _this3.element.addEventListener('overflow-menu-shown', _this3.placeOverflow);
 	  };
 	
 	  this.placeOverflow = function (evt) {
@@ -3443,7 +3477,7 @@ var BluemixComponents =
 	    var position = icon.getBoundingClientRect();
 	
 	    optionMenu.style.position = 'absolute';
-	    optionMenu.style.top = position.top + 'px';
+	    optionMenu.style.top = position.top + element.ownerDocument.defaultView.scrollY + 'px';
 	    optionMenu.style.left = position.right + 'px';
 	    optionMenu.style.right = 'auto';
 	  };
