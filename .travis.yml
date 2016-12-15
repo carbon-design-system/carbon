@@ -24,7 +24,7 @@ install:
 script:
   - npm run build
   - npm test -- -b PhantomJS -b Chrome -b Firefox
-  - find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm test -- -f
+  - find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm test -- -d -f
   - npm run lint
 
 deploy:

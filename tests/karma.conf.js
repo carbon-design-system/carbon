@@ -21,12 +21,14 @@ module.exports = function (config) {
     files: cloptions.files ? (Array.isArray(cloptions.files) ? cloptions.files : [cloptions.files]).map(function (file) {
       return path.relative(__dirname, path.resolve(__dirname, '..', file));
     }) : [
+      'remainders.js', // For generatoring coverage report for untested files
       'spec/**/*.js',
     ],
 
     exclude: [],
 
     preprocessors: {
+      'remainders.js': ['webpack', 'sourcemap'], // For generatoring coverage report for untested files
       'spec/**/*.js': ['webpack', 'sourcemap'],
     },
 
@@ -42,6 +44,14 @@ module.exports = function (config) {
               presets: ['es2015', 'stage-1'],
               plugins: [
                 ['transform-runtime', { polyfill: false }],
+                [
+                  'istanbul',
+                  {
+                    include: [
+                      'consumables/**/*.js',
+                    ],
+                  },
+                ],
               ],
             },
           },
@@ -49,13 +59,6 @@ module.exports = function (config) {
             test: /\.html?$/,
             exclude: /node_modules/,
             loaders: ['html'],
-          },
-        ],
-        postLoaders: cloptions.debug ? [] : [
-          {
-            test: /\.js$/,
-            exclude: /(tests|node_modules|bower_components)\//,
-            loader: 'istanbul-instrumenter',
           },
         ],
       },
@@ -81,7 +84,6 @@ module.exports = function (config) {
       require('karma-sourcemap-loader'),
       require('karma-mocha-reporter'),
       require('karma-coverage'),
-      require('istanbul-instrumenter-loader'),
       require('karma-webpack'),
       require('karma-phantomjs-launcher'),
       require('karma-chrome-launcher'),
@@ -98,15 +100,39 @@ module.exports = function (config) {
       return reporters;
     })(),
 
-    // NOTE: Line-by-line coverage detail becomes of intermediate code for now, due to:
-    // https://github.com/gotwarlost/istanbul/issues/212
-    coverageReporter: {
+    coverageReporter: Object.assign({
       dir: 'coverage',
       reporters: [
         { type: 'html' },
-        { type: 'text-summary' },
+        { type: 'text' },
       ],
-    },
+    }, cloptions.files ? {} : {
+      check: {
+        each: {
+          statements: 40,
+          branches: 40,
+          functions: 40,
+          lines: 40,
+          excludes: [
+            // Files in this exclude list are of either:
+            // - Not meeting the code coverage standard set here, which shouldn't have happened
+            // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
+            // That said, new files should never be added, except for misc code that is very broser-specific
+            '../consumables/js/es2015/accordion.js',
+            '../consumables/js/es2015/copy-btn.js',
+            '../consumables/js/es2015/detail-page-header.js',
+            '../consumables/js/es2015/inline-left-nav.js',
+            '../consumables/js/es2015/left-nav.js',
+            '../consumables/js/es2015/pagination.js',
+            '../consumables/js/es2015/profile-switcher.js',
+            '../consumables/js/es2015/search-with-options.js',
+            '../consumables/js/es2015/unified-header.js',
+            '../consumables/js/misc/resize.js',
+            '../consumables/js/polyfills/**/*.js',
+          ],
+        },
+      },
+    }),
 
     port: 9876,
 
