@@ -2,8 +2,11 @@
 // 🌍 Global
 //-------------------------
 
+$use-globals: true !default;
+$use-fonts: false !default;
+$use-reset: true !default;
+
 @import 'global/global';
-@import 'global/typography/font-face';
 
 //-------------------------
 // 🍅 Base Elementss

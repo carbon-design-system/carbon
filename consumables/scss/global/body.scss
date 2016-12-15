@@ -1,21 +1,36 @@
 @import '../import-once';
 
 @mixin body-styles {
-  body {
-    border: 0;
+  .bx--body {
+    @include font-inherit-reset;
+    @include helvetica;
     font-size: 100%;
-    font: inherit;
+    color: $color__white;
+    background-color: $color__navy-gray-2;
+    border: 0;
     line-height: 1;
     margin: 0;
     padding: 0;
     vertical-align: baseline;
+
+    &.bx--global-light-ui {
+      color: $color__blue-90;
+      background-color: $color__gray-3;
+    }
   }
 
-  body,
-  .bx--body {
+  // Deprecated
+  body {
+    @include font-inherit-reset;
     @include helvetica;
+    font-size: 100%;
     color: $color__white;
     background-color: $color__navy-gray-2;
+    border: 0;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
 
     &.bx--global-light-ui {
       color: $color__blue-90;

@@ -57,6 +57,10 @@ $color__box-shadow: rgba(0, 0, 0, .1);
   outline: auto 5px -webkit-focus-ring-color; // webkit default
 }
 
+@mixin font-inherit-reset {
+  font: inherit;
+}
+
 @mixin hidden {
   position:absolute;
   width:1px;
