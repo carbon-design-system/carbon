@@ -1,8 +1,8 @@
 import '../../consumables/js/polyfills/custom-event';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+import { promisify } from 'bluebird';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
-import promiseTryCatcher from '../utils/promise-try-catcher';
 import ContentSwitcher from '../../consumables/js/es2015/content-switcher.js';
 
 describe('Test content switcher', function () {
@@ -62,53 +62,53 @@ describe('Test content switcher', function () {
       });
     });
 
-    it(`Should update active item upon clicking`, function () {
-      return new Promise((resolve, reject) => {
-        events.on(element, 'content-switcher-selected', promiseTryCatcher((e) => {
-          expect(e.detail.item).to.equal(buttonNodes[1]);
-          expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.false;
-          expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
-        }, resolve, reject));
+    it(`Should update active item upon clicking`, async function () {
+      const eventAfterSelected = await new Promise((resolve) => {
+        events.on(element, 'content-switcher-selected', resolve);
         buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
+      expect(eventAfterSelected.detail.item).to.equal(buttonNodes[1]);
+      expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
     });
 
-    it(`Should update active item upon an API call`, function () {
-      return new Promise((resolve, reject) => {
-        contentSwitcher.setActive(buttonNodes[1], promiseTryCatcher((e, item) => {
-          expect(e).to.be.null;
-          expect(item).to.equal(buttonNodes[1]);
-          expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.false;
-          expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
-        }, resolve, reject));
-      });
+    it(`Should update active item upon an API call`, async function () {
+      const item = await promisify(contentSwitcher.setActive, { context: contentSwitcher })(buttonNodes[1]);
+      expect(item).to.equal(buttonNodes[1]);
+      expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
     });
 
-    it(`Should provide a way to cancel switching item upon clicking`, function () {
-      events.on(element, 'content-switcher-beingselected', (e) => {
-        expect(e.detail.item).to.equal(buttonNodes[1]);
-        e.preventDefault();
+    it(`Should provide a way to cancel switching item upon clicking`, async function () {
+      const eventBeforeSelected = await new Promise((resolve) => {
+        events.on(element, 'content-switcher-beingselected', (event) => {
+          event.preventDefault();
+          resolve(event);
+        });
+        buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
-      buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(eventBeforeSelected.detail.item).to.equal(buttonNodes[1]);
       expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.true;
       expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
 
-    it(`Should provide a way to cancel switching item upon an API call`, function () {
-      events.on(element, 'content-switcher-beingselected', (e) => {
-        expect(e.detail.item).to.equal(buttonNodes[1]);
-        e.preventDefault();
+    it(`Should provide a way to cancel switching item upon an API call`, async function () {
+      let errorBeforeSelected;
+      let eventBeforeSelected;
+      events.on(element, 'content-switcher-beingselected', (event) => {
+        eventBeforeSelected = event;
+        event.preventDefault();
       });
-      return new Promise((resolve, reject) => {
-        contentSwitcher.setActive(buttonNodes[1], promiseTryCatcher((e, item) => {
-          expect(e).not.to.be.null;
-          expect(e.canceled).to.be.true;
-          expect(e.item).to.equal(buttonNodes[1]);
-          expect(item).not.to.be.ok;
-          expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.true;
-          expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
-        }, resolve, reject));
-      });
+      try {
+        await promisify(contentSwitcher.setActive, { context: contentSwitcher })(buttonNodes[1]);
+      } catch (error) {
+        errorBeforeSelected = error;
+      }
+      expect(eventBeforeSelected.detail.item).to.equal(buttonNodes[1]);
+      expect(errorBeforeSelected.canceled).to.be.true;
+      expect(errorBeforeSelected.item).to.equal(buttonNodes[1]);
+      expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.true;
+      expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
 
     it(`Should select target pane`, function () {

@@ -1,9 +1,9 @@
 import '../../consumables/js/polyfills/object-assign';
 import '../../consumables/js/polyfills/custom-event';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+import { delay } from 'bluebird';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
-import promiseTryCatcher from '../utils/promise-try-catcher';
 import HeaderNav from '../../consumables/js/es2015/header';
 
 describe('Test header', function () {
@@ -60,28 +60,23 @@ describe('Test header', function () {
       element.classList.add('taxonomy-nav--active');
     });
 
-    it(`Should handle ESC key`, function () {
-      return new Promise((resolve, reject) => {
-        events.on(element, 'header-hidden', promiseTryCatcher(() => {
-          expect(headerNav.triggerNode.focus).have.been.calledOnce;
-        }, resolve, reject));
+    it(`Should handle ESC key`, async function () {
+      await new Promise((resolve) => {
+        events.on(element, 'header-hidden', resolve);
         element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 27 }));
       });
+      expect(headerNav.triggerNode.focus).have.been.calledOnce;
     });
 
-    it(`Shouldn't handle non-ESC key`, function () {
+    it(`Shouldn't handle non-ESC key`, async function () {
       const spyHiddenEvent = sinon.spy();
       events.on(element, 'header-hidden', spyHiddenEvent);
       element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 32 }));
-
-      return new Promise((resolve, reject) => {
-        setTimeout(promiseTryCatcher(() => {
-          expect(spyHiddenEvent).not.have.been.called;
-        }, resolve, reject), 200);
-      });
+      await delay(200);
+      expect(spyHiddenEvent).not.have.been.called;
     });
 
-    it(`Should provide a way to cancel hiding nav`, function () {
+    it(`Should provide a way to cancel hiding nav`, async function () {
       events.on(element, 'header-beinghidden', (e) => {
         e.preventDefault();
       });
@@ -90,12 +85,10 @@ describe('Test header', function () {
       events.on(element, 'header-hidden', spyHidden);
       element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 27 }));
 
-      return new Promise((resolve, reject) => {
-        setTimeout(promiseTryCatcher(() => {
-          expect(spyHidden).not.have.been.called;
-          expect(headerNav.triggerNode.focus).not.have.been.called;
-        }, resolve, reject), 200);
-      });
+      await delay(200);
+
+      expect(spyHidden).not.have.been.called;
+      expect(headerNav.triggerNode.focus).not.have.been.called;
     });
 
     afterEach(function () {
@@ -109,7 +102,7 @@ describe('Test header', function () {
   });
 
   describe('Selection', function () {
-    it(`Should select header nav item upon clicking`, function () {
+    it(`Should select header nav item upon clicking`, async function () {
       const element = document.createElement('div');
       const itemsNodes = [... new Array(2)].map((item, i) => {
         const itemNode = document.createElement('div');
@@ -128,13 +121,13 @@ describe('Test header', function () {
 
       new HeaderNav(element); // eslint-disable-line no-new
 
-      return new Promise((resolve, reject) => {
-        element.addEventListener('header-selected', promiseTryCatcher((e) => {
-          expect(e.detail.itemElement).to.equal(itemsNodes[1].firstChild);
-          expect(itemsNodes.map((itemNode) => itemNode.classList.contains('selected'))).to.deep.equal([false, true]);
-        }, resolve, reject));
+      const e = await new Promise((resolve) => {
+        element.addEventListener('header-selected', resolve);
         itemsNodes[1].firstChild.dispatchEvent(new CustomEvent('click'));
       });
+
+      expect(e.detail.itemElement).to.equal(itemsNodes[1].firstChild);
+      expect(itemsNodes.map((itemNode) => itemNode.classList.contains('selected'))).to.deep.equal([false, true]);
     });
   });
 
@@ -193,7 +186,7 @@ describe('Test header', function () {
       }
     });
 
-    it(`Should launch taxonomy menu upon button click`, function () {
+    it(`Should launch taxonomy menu upon button click`, async function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.navTarget = `#${id}`;
@@ -211,21 +204,24 @@ describe('Test header', function () {
       document.body.appendChild(element);
       document.body.appendChild(target);
 
-      return new Promise((resolve, reject) => {
-        events.on(target, 'header-beingshown', promiseTryCatcher((e) => {
-          expect(e.detail.launchingElement).to.equal(element);
-        }, reject));
-        events.on(target, 'header-shown', () => {
-          setTimeout(promiseTryCatcher(() => {
-            expect(spyFocus).have.been.calledOnce;
-          }, resolve, reject), 0);
+      let eventBeforeShown;
+
+      await new Promise((resolve) => {
+        events.on(target, 'header-beingshown', (e) => {
+          eventBeforeShown = e;
         });
+        events.on(target, 'header-shown', resolve);
         expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.false;
         expect(HeaderNav.components.has(target)).to.be.true;
       });
+
+      await delay(0);
+
+      expect(eventBeforeShown.detail.launchingElement).to.equal(element);
+      expect(spyFocus).have.been.calledOnce;
     });
 
-    it(`Should handle header nav's button for closing header nav`, function () {
+    it(`Should handle header nav's button for closing header nav`, async function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.navTarget = `#${id}`;
@@ -243,23 +239,28 @@ describe('Test header', function () {
       document.body.appendChild(element);
       document.body.appendChild(target);
 
-      return new Promise((resolve, reject) => {
-        events.on(target, 'header-shown', promiseTryCatcher(() => {
-          events.on(target, 'header-beinghidden', promiseTryCatcher((e) => {
-            expect(e.detail.launchingElement).to.equal(element);
-          }, reject));
-          events.on(target, 'header-hidden', () => {
-            setTimeout(promiseTryCatcher(() => {
-              expect(spyFocus).have.been.calledOnce;
-            }, resolve, reject), 0);
-          });
-          element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
-        }, reject));
+      let eventBeforeHidden;
+
+      await new Promise((resolve) => {
+        events.on(target, 'header-shown', resolve);
         element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
       });
+
+      await new Promise((resolve) => {
+        events.on(target, 'header-beinghidden', (e) => {
+          eventBeforeHidden = e;
+        });
+        events.on(target, 'header-hidden', resolve);
+        element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
+      });
+
+      await delay(0);
+
+      expect(eventBeforeHidden.detail.launchingElement).to.equal(element);
+      expect(spyFocus).have.been.calledOnce;
     });
 
-    it(`Should handle down key for lauching header nav`, function () {
+    it(`Should handle down key for lauching header nav`, async function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.navTarget = `#${id}`;
@@ -277,21 +278,24 @@ describe('Test header', function () {
       document.body.appendChild(element);
       document.body.appendChild(target);
 
-      return new Promise((resolve, reject) => {
-        events.on(target, 'header-beingshown', promiseTryCatcher((e) => {
-          expect(e.detail.launchingElement).to.equal(element);
-        }, reject));
-        events.on(target, 'header-shown', () => {
-          setTimeout(promiseTryCatcher(() => {
-            expect(spyFocus).have.been.calledOnce;
-          }, resolve, reject), 0);
+      let eventBeforeShown;
+
+      await new Promise((resolve) => {
+        events.on(target, 'header-beingshown', (e) => {
+          eventBeforeShown = e;
         });
+        events.on(target, 'header-shown', resolve);
         expect(element.dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true, cancelable: true }), { which: 40 }))).to.be.false;
         expect(HeaderNav.components.has(target)).to.be.true;
       });
+
+      await delay(0);
+
+      expect(eventBeforeShown.detail.launchingElement).to.equal(element);
+      expect(spyFocus).have.been.calledOnce;
     });
 
-    it(`Should provide a way to cancel showing header nav`, function () {
+    it(`Should provide a way to cancel showing header nav`, async function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.navTarget = `#${id}`;
@@ -316,14 +320,12 @@ describe('Test header', function () {
       document.body.appendChild(element);
       document.body.appendChild(target);
 
-      return new Promise((resolve, reject) => {
-        element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
 
-        setTimeout(promiseTryCatcher(() => {
-          expect(spyFocus).not.have.been.called;
-          expect(spyShown).not.have.been.called;
-        }, resolve, reject), 200);
-      });
+      await delay(200);
+
+      expect(spyFocus).not.have.been.called;
+      expect(spyShown).not.have.been.called;
     });
 
     it(`Shouldn't cancel event if the button is not <a>`, function () {

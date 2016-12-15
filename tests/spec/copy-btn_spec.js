@@ -1,8 +1,5 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import '../../consumables/js/polyfills/custom-event';
-import Promise from 'bluebird'; // For testing on browsers not supporting Promise
-import EventManager from '../utils/event-manager';
-import promiseTryCatcher from '../utils/promise-try-catcher';
 import CopyBtn from '../../consumables/js/es2015/copy-btn';
 
 const HTML = `

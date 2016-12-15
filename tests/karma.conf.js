@@ -37,7 +37,13 @@ module.exports = function (config) {
           {
             test: /\.js?$/,
             exclude: /node_modules/,
-            loaders: ['babel'],
+            loader: 'babel',
+            query: {
+              presets: ['es2015', 'stage-1'],
+              plugins: [
+                ['transform-runtime', { polyfill: false }],
+              ],
+            },
           },
           {
             test: /\.html?$/,

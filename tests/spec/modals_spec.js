@@ -1,9 +1,9 @@
 import '../../consumables/js/polyfills/custom-event';
 import '../../consumables/js/polyfills/object-assign';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+import { delay, promisify } from 'bluebird';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
-import promiseTryCatcher from '../utils/promise-try-catcher';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import Modal from '../../consumables/js/es2015/modals';
 
@@ -66,51 +66,44 @@ describe('Test modal', function () {
       }).to.throw(Error);
     });
 
-    it(`Should have show() do nothing if no state change happens`, function () {
+    it(`Should have show() do nothing if no state change happens`, async function () {
       element.classList.add('is-visible');
       const spyPreShownEventFired = sinon.spy();
       events.on(element.ownerDocument.body, 'modal-beingshown', spyPreShownEventFired);
-      return new Promise((resolve, reject) => {
-        modal.show(promiseTryCatcher(() => {
-          expect(spyPreShownEventFired).not.have.been.called;
-        }, resolve, reject));
-      });
+      await promisify(modal.show, { context: modal })();
+      expect(spyPreShownEventFired).not.have.been.called;
     });
 
-    it(`Should have show() method show modal`, function () {
+    it(`Should have show() method show modal`, async function () {
       const spyShownEventFired = sinon.spy();
-      return new Promise((resolve) => {
+      await new Promise((resolve) => {
         events.on(element.ownerDocument.body, 'modal-shown', spyShownEventFired);
         modal.show(resolve);
-      }).then(() => {
-        expect(spyShownEventFired, 'modal-shown event').have.been.calledOnce;
-        expect(element.classList.contains('is-visible'), 'is-visible class').to.be.true;
-        expect(element.ownerDocument.body.classList.contains('bx--noscroll'), 'bx--noscroll class').to.be.true;
       });
+      expect(spyShownEventFired, 'modal-shown event').have.been.calledOnce;
+      expect(element.classList.contains('is-visible'), 'is-visible class').to.be.true;
+      expect(element.ownerDocument.body.classList.contains('bx--noscroll'), 'bx--noscroll class').to.be.true;
     });
 
-    it(`Should have show() method support providing a DOM element instead of an event`, function () {
+    it(`Should have show() method support providing a DOM element instead of an event`, async function () {
       const spyBeingShownEventFired = sinon.spy();
       const spyShownEventFired = sinon.spy();
-      return new Promise((resolve) => {
-        events.on(element.ownerDocument.body, 'modal-beingshown', spyBeingShownEventFired);
-        events.on(element.ownerDocument.body, 'modal-shown', spyShownEventFired);
-        modal.show(modal.element, resolve);
-      }).then(() => {
-        expect(spyBeingShownEventFired, 'modal-beingshown event').have.been.calledOnce;
-        expect(spyBeingShownEventFired.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beingshown event')
-          .to.equal(modal.element);
-        expect(spyBeingShownEventFired.firstCall.args[0].detail.launchingEvent, 'Launching element for modal-beingshown event')
-          .not.to.be.ok;
-        expect(spyShownEventFired, 'modal-shown event').have.been.calledOnce;
-        expect(spyShownEventFired.firstCall.args[0].detail.launchingElement, 'Launching element for modal-shown event')
-          .to.equal(modal.element);
-        expect(spyShownEventFired.firstCall.args[0].detail.launchingEvent, 'Launching element for modal-shown event')
-          .not.to.be.ok;
-      });
+      events.on(element.ownerDocument.body, 'modal-beingshown', spyBeingShownEventFired);
+      events.on(element.ownerDocument.body, 'modal-shown', spyShownEventFired);
+      await promisify(modal.show, { context: modal })(modal.element);
+      expect(spyBeingShownEventFired, 'modal-beingshown event').have.been.calledOnce;
+      expect(spyBeingShownEventFired.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beingshown event')
+        .to.equal(modal.element);
+      expect(spyBeingShownEventFired.firstCall.args[0].detail.launchingEvent, 'Launching element for modal-beingshown event')
+        .not.to.be.ok;
+      expect(spyShownEventFired, 'modal-shown event').have.been.calledOnce;
+      expect(spyShownEventFired.firstCall.args[0].detail.launchingElement, 'Launching element for modal-shown event')
+        .to.equal(modal.element);
+      expect(spyShownEventFired.firstCall.args[0].detail.launchingEvent, 'Launching element for modal-shown event')
+        .not.to.be.ok;
     });
 
-    it(`Should call callback of show() method after it finishes`, function () {
+    it(`Should call callback of show() method after it finishes`, async function () {
       style = document.createElement('style');
       style.textContent = `.bx--modal {
         opacity: 0;
@@ -121,70 +114,74 @@ describe('Test modal', function () {
       }`;
       document.head.appendChild(style);
       const spyShownEventFired = sinon.spy();
-      return new Promise((resolve) => {
+      await new Promise((resolve) => {
         events.on(element.ownerDocument.body, 'modal-shown', spyShownEventFired);
         modal.show(resolve);
-      }).then(() => {
-        expect(spyShownEventFired).have.been.calledOnce;
       });
+      expect(spyShownEventFired).have.been.calledOnce;
     });
 
-    it(`Should have elements with data-modal-close attribute work as close buttons`, function () {
-      const spyBeingHidden = sinon.spy();
+    it(`Should have elements with data-modal-close attribute work as close buttons`, async function () {
       element.classList.add('is-visible');
-      return new Promise((resolve, reject) => {
-        events.on(element.ownerDocument.body, 'modal-beinghidden', spyBeingHidden);
-        events.on(element.ownerDocument.body, 'modal-hidden', promiseTryCatcher((e) => {
-          expect(spyBeingHidden, 'Call count of modal-beinghidden event').to.have.been.calledOnce;
-          expect(spyBeingHidden.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beinghidden')
-            .to.equal(button);
-          expect(spyBeingHidden.firstCall.args[0].detail.launchingEvent.currentTarget, 'Launching event for modal-beinghidden')
-            .to.equal(button);
-          expect(e.detail.launchingElement, 'Launching element for modal-hidden').to.equal(button);
-          expect(e.detail.launchingEvent.currentTarget, 'Launching event for modal-hidden').to.equal(button);
-        }, resolve, reject));
-        button.dispatchEvent(new CustomEvent('click'));
-      });
+      const [eventDataBeforeHidden, eventDataAfterHidden] = await Promise.all([
+        new Promise((resolve) => {
+          events.on(element.ownerDocument.body, 'modal-beinghidden', (e) => {
+            resolve({
+              launchingElement: e.detail.launchingElement,
+              launchingEventCurrentTarget: e.detail.launchingEvent.currentTarget,
+            });
+          });
+        }),
+        new Promise((resolve) => {
+          events.on(element.ownerDocument.body, 'modal-hidden', (e) => {
+            resolve({
+              launchingElement: e.detail.launchingElement,
+              launchingEventCurrentTarget: e.detail.launchingEvent.currentTarget,
+            });
+          });
+          button.dispatchEvent(new CustomEvent('click'));
+        }),
+      ]);
+      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden').to.equal(button);
+      expect(eventDataBeforeHidden.launchingEventCurrentTarget, 'Launching event for modal-beinghidden').to.equal(button);
+      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden').to.equal(button);
+      expect(eventDataAfterHidden.launchingEventCurrentTarget, 'Launching event for modal-hidden').to.equal(button);
     });
 
-    it(`Should provide a way to cancel showing modal`, function () {
+    it(`Should provide a way to cancel showing modal`, async function () {
       events.on(element.ownerDocument.body, 'modal-beingshown', (e) => {
         e.preventDefault();
       });
-      return new Promise((resolve, reject) => {
-        modal.show(promiseTryCatcher((e) => {
-          expect(e && e.canceled, 'canceled property in error object').to.be.true;
-          expect(element.classList.contains('is-visible'), 'is-visible class').to.be.false;
-          expect(element.ownerDocument.body.classList.contains('bx--noscroll'), 'bx--noscroll class').to.be.false;
-        }, resolve, reject));
-      });
+      let errorShow;
+      try {
+        await promisify(modal.show, { context: modal })();
+      } catch (error) {
+        errorShow = error;
+      }
+      expect(errorShow && errorShow.canceled, 'canceled property in error object').to.be.true;
+      expect(element.classList.contains('is-visible'), 'is-visible class').to.be.false;
+      expect(element.ownerDocument.body.classList.contains('bx--noscroll'), 'bx--noscroll class').to.be.false;
     });
 
-    it(`Should have hide() method hide modal`, function () {
+    it(`Should have hide() method hide modal`, async function () {
       const spyHiddenEventFired = sinon.spy();
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
-      return new Promise((resolve) => {
-        events.on(element.ownerDocument.body, 'modal-hidden', spyHiddenEventFired);
-        modal.hide(resolve);
-      }).then(() => {
-        expect(spyHiddenEventFired, 'modal-hidden event').have.been.calledOnce;
-        expect(element.classList.contains('is-visible'), 'is-visible class').to.be.false;
-        expect(element.ownerDocument.body.classList.contains('bx--noscroll'), 'bx--noscroll class').to.be.false;
-      });
+      events.on(element.ownerDocument.body, 'modal-hidden', spyHiddenEventFired);
+      await promisify(modal.hide, { context: modal })();
+      expect(spyHiddenEventFired, 'modal-hidden event').have.been.calledOnce;
+      expect(element.classList.contains('is-visible'), 'is-visible class').to.be.false;
+      expect(element.ownerDocument.body.classList.contains('bx--noscroll'), 'bx--noscroll class').to.be.false;
     });
 
-    it(`Should do nothing for hide() if no state change happens`, function () {
+    it(`Should do nothing for hide() if no state change happens`, async function () {
       const spyPreHiddenEventFired = sinon.spy();
       events.on(element.ownerDocument.body, 'modal-beinghidden', spyPreHiddenEventFired);
-      return new Promise((resolve, reject) => {
-        modal.hide(promiseTryCatcher(() => {
-          expect(spyPreHiddenEventFired).not.have.been.called;
-        }, resolve, reject));
-      });
+      await promisify(modal.hide, { context: modal })();
+      expect(spyPreHiddenEventFired).not.have.been.called;
     });
 
-    it(`Should have hide() method hide modal`, function () {
+    it(`Should have hide() method hide modal`, async function () {
       element.classList.add('is-visible');
       style = document.createElement('style');
       style.textContent = `.bx--modal {
@@ -196,80 +193,93 @@ describe('Test modal', function () {
       }`;
       document.head.appendChild(style);
       const spyHiddenEventFired = sinon.spy();
-      return new Promise((resolve) => {
-        events.on(element.ownerDocument.body, 'modal-hidden', spyHiddenEventFired);
-        modal.hide(resolve);
-      }).then(() => {
-        expect(spyHiddenEventFired).have.been.calledOnce;
-      });
+      events.on(element.ownerDocument.body, 'modal-hidden', spyHiddenEventFired);
+      await promisify(modal.hide, { context: modal })();
+      expect(spyHiddenEventFired).have.been.calledOnce;
     });
 
-    it(`Should provide a way to cancel hiding modal`, function () {
+    it(`Should provide a way to cancel hiding modal`, async function () {
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
       events.on(element.ownerDocument.body, 'modal-beinghidden', (e) => {
         e.preventDefault();
       });
-      return new Promise((resolve, reject) => {
-        modal.hide(promiseTryCatcher((e) => {
-          expect(e && e.canceled, 'canceled property in error object').to.be.true;
-          expect(element.classList.contains('is-visible'), 'is-visible class').to.be.true;
-          expect(element.ownerDocument.body.classList.contains('bx--noscroll'), 'bx--noscroll class').to.be.true;
-        }, resolve, reject));
-      });
+      let errorHide;
+      try {
+        await promisify(modal.hide, { context: modal })();
+      } catch (error) {
+        errorHide = error;
+      }
+      expect(errorHide && errorHide.canceled, 'canceled property in error object').to.be.true;
+      expect(element.classList.contains('is-visible'), 'is-visible class').to.be.true;
+      expect(element.ownerDocument.body.classList.contains('bx--noscroll'), 'bx--noscroll class').to.be.true;
     });
 
-    it(`Should handle ESC key`, function () {
-      const spyBeingHidden = sinon.spy();
+    it(`Should handle ESC key`, async function () {
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
-      return new Promise((resolve, reject) => {
-        events.on(element.ownerDocument.body, 'modal-beinghidden', spyBeingHidden);
-        events.on(element.ownerDocument.body, 'modal-hidden', promiseTryCatcher((e) => {
-          expect(spyBeingHidden, 'Call count of modal-beinghidden event').to.have.been.calledOnce;
-          expect(spyBeingHidden.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beinghidden')
-            .to.equal(element.ownerDocument.body);
-          expect(spyBeingHidden.firstCall.args[0].detail.launchingEvent.currentTarget, 'Launching event for modal-beinghidden')
-            .to.equal(element.ownerDocument.body);
-          expect(e.detail.launchingElement, 'Launching element for modal-hidden').to.equal(element.ownerDocument.body);
-          expect(e.detail.launchingEvent.currentTarget, 'Launching event for modal-hidden').to.equal(element.ownerDocument.body);
-        }, resolve, reject));
-        document.body.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 27 }));
-      });
+      const [eventDataBeforeHidden, eventDataAfterHidden] = await Promise.all([
+        new Promise((resolve) => {
+          events.on(element.ownerDocument.body, 'modal-beinghidden', (e) => {
+            resolve({
+              launchingElement: e.detail.launchingElement,
+              launchingEventCurrentTarget: e.detail.launchingEvent.currentTarget,
+            });
+          });
+        }),
+        new Promise((resolve) => {
+          events.on(element.ownerDocument.body, 'modal-hidden', (e) => {
+            resolve({
+              launchingElement: e.detail.launchingElement,
+              launchingEventCurrentTarget: e.detail.launchingEvent.currentTarget,
+            });
+          });
+          document.body.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 27 }));
+        }),
+      ]);
+      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden')
+        .to.equal(element.ownerDocument.body);
+      expect(eventDataBeforeHidden.launchingEventCurrentTarget, 'Launching event for modal-beinghidden')
+        .to.equal(element.ownerDocument.body);
+      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden').to.equal(element.ownerDocument.body);
+      expect(eventDataAfterHidden.launchingEventCurrentTarget, 'Launching event for modal-hidden').to.equal(element.ownerDocument.body);
     });
 
-    it(`Shouldn't handle non-ESC key for closing`, function () {
+    it(`Shouldn't handle non-ESC key for closing`, async function () {
       const spyHiddenEventFired = sinon.spy();
       element.classList.add('is-visible');
       element.ownerDocument.body.classList.add('bx--noscroll');
-      return new Promise((resolve) => {
-        events.on(element.ownerDocument.body, 'modal-hidden', () => {
-          spyHiddenEventFired();
-          resolve();
-        });
-        document.body.dispatchEvent(Object.assign(new CustomEvent('keydown')));
-        setTimeout(resolve, 500);
-      }).then(() => {
-        expect(spyHiddenEventFired).not.to.have.been.called;
-      });
+      events.on(element.ownerDocument.body, 'modal-hidden', spyHiddenEventFired);
+      document.body.dispatchEvent(Object.assign(new CustomEvent('keydown')));
+      await delay(500);
+      expect(spyHiddenEventFired).not.to.have.been.called;
     });
 
-    it(`Should handle click outside`, function () {
-      const spyBeingHidden = sinon.spy();
+    it(`Should handle click outside`, async function () {
       element.classList.add('is-visible');
-      return new Promise((resolve, reject) => {
-        events.on(element.ownerDocument.body, 'modal-beinghidden', spyBeingHidden);
-        events.on(element.ownerDocument.body, 'modal-hidden', promiseTryCatcher((e) => {
-          expect(spyBeingHidden, 'Call count of modal-beinghidden event').to.have.been.calledOnce;
-          expect(spyBeingHidden.firstCall.args[0].detail.launchingElement, 'Launching element for modal-beinghidden')
-            .to.equal(element);
-          expect(spyBeingHidden.firstCall.args[0].detail.launchingEvent.currentTarget, 'Launching event for modal-beinghidden')
-            .to.equal(element);
-          expect(e.detail.launchingElement, 'Launching element for modal-hidden').to.equal(element);
-          expect(e.detail.launchingEvent.currentTarget, 'Launching event for modal-hidden').to.equal(element);
-        }, resolve, reject));
-        element.dispatchEvent(new CustomEvent('click'));
-      });
+      const [eventDataBeforeHidden, eventDataAfterHidden] = await Promise.all([
+        new Promise((resolve) => {
+          events.on(element.ownerDocument.body, 'modal-beinghidden', (e) => {
+            resolve({
+              launchingElement: e.detail.launchingElement,
+              launchingEventCurrentTarget: e.detail.launchingEvent.currentTarget,
+            });
+          });
+        }),
+        new Promise((resolve) => {
+          events.on(element.ownerDocument.body, 'modal-hidden', (e) => {
+            resolve({
+              launchingElement: e.detail.launchingElement,
+              launchingEventCurrentTarget: e.detail.launchingEvent.currentTarget,
+            });
+          });
+          element.dispatchEvent(new CustomEvent('click'));
+        }),
+      ]);
+      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden').to.equal(element);
+      expect(eventDataBeforeHidden.launchingEventCurrentTarget, 'Launching event for modal-beinghidden').to.equal(element);
+      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden').to.equal(element);
+      expect(eventDataAfterHidden.launchingEventCurrentTarget, 'Launching event for modal-hidden').to.equal(element);
     });
 
     afterEach(function () {
@@ -342,14 +352,11 @@ describe('Test modal', function () {
       modal = new Modal(element);
     });
 
-    it(`Shouldn't handle ESC key for modals in different frames`, function () {
+    it(`Shouldn't handle ESC key for modals in different frames`, async function () {
       const spyHideModal = sinon.spy(modal, 'hide');
-      return new Promise((resolve) => {
-        document.body.dispatchEvent(Object.assign(new CustomEvent('keydown')));
-        setTimeout(resolve, 500);
-      }).then(() => {
-        expect(spyHideModal).not.to.have.been.called;
-      });
+      document.body.dispatchEvent(Object.assign(new CustomEvent('keydown')));
+      await delay(500);
+      expect(spyHideModal).not.to.have.been.called;
     });
 
     after(function () {
@@ -400,7 +407,7 @@ describe('Test modal', function () {
       }
     });
 
-    it(`Should launch modal upon button click`, function () {
+    it(`Should launch modal upon button click`, async function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.modalTarget = `#${id}`;
@@ -414,24 +421,28 @@ describe('Test modal', function () {
       document.body.appendChild(element);
       document.body.appendChild(target);
 
-      return new Promise((resolve, reject) => {
-        events.on(target, 'modal-beingshown', promiseTryCatcher((e) => {
-          expect(e.detail.launchingElement).to.equal(element);
-          expect(e.detail.launchingEvent.delegateTarget).to.equal(element);
-        }, reject));
-        events.on(target, 'modal-shown', (e) => {
-          setTimeout(promiseTryCatcher(() => {
-            expect(e.detail.launchingElement).to.equal(element);
-            expect(e.detail.launchingEvent.delegateTarget).to.equal(element);
-            expect(spyFocus).have.been.calledOnce;
-          }, resolve, reject), 0);
+      let eventBeforeShown;
+
+      const eventAfterShown = await new Promise((resolve) => {
+        events.on(target, 'modal-beingshown', (e) => {
+          eventBeforeShown = e;
         });
+        events.on(target, 'modal-shown', resolve);
         expect(element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.false;
         expect(Modal.components.has(target)).to.be.true;
       });
+
+      await delay(0);
+
+      expect(eventBeforeShown.detail.launchingElement).to.equal(element);
+      expect(eventBeforeShown.detail.launchingEvent.delegateTarget).to.equal(element);
+
+      expect(eventAfterShown.detail.launchingElement).to.equal(element);
+      expect(eventAfterShown.detail.launchingEvent.delegateTarget).to.equal(element);
+      expect(spyFocus).have.been.calledOnce;
     });
 
-    it(`Shouldn't focus on modal unless its root element has an area`, function () {
+    it(`Shouldn't focus on modal unless its root element has an area`, async function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.modalTarget = `#${id}`;
@@ -445,14 +456,14 @@ describe('Test modal', function () {
       document.body.appendChild(element);
       document.body.appendChild(target);
 
-      return new Promise((resolve, reject) => {
-        events.on(target, 'modal-shown', () => {
-          setTimeout(promiseTryCatcher(() => {
-            expect(spyFocus).not.have.been.called;
-          }, resolve, reject), 0);
-        });
+      await new Promise((resolve) => {
+        events.on(target, 'modal-shown', resolve);
         element.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }));
       });
+
+      await delay(0);
+
+      expect(spyFocus).not.have.been.called;
     });
 
     it(`Shouldn't cancel event if the button is not <a>`, function () {

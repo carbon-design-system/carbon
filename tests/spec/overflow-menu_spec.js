@@ -2,9 +2,8 @@ import '../../consumables/js/polyfills/custom-event';
 import '../../consumables/js/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
-import promiseTryCatcher from '../utils/promise-try-catcher';
 import OverflowMenu from '../../consumables/js/es2015/overflow-menu';
-import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+import { delay } from 'bluebird';
 
 const HTML = `
   <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
@@ -93,7 +92,7 @@ describe('Test Overflow menu', function () {
       menu = new OverflowMenu(element);
     });
 
-    it(`Should provide a way to cancel showing overflow menu`, function () {
+    it('Should provide a way to cancel showing overflow menu', async function () {
       const spyOverflowEvent = sinon.spy();
       events.on(element.ownerDocument.body, 'overflow-menu-beingshown', (e) => {
         e.preventDefault();
@@ -105,16 +104,12 @@ describe('Test Overflow menu', function () {
       expect(menu.optionMenu.classList.contains('bx--overflow-menu--open'), 'State of dropdown menu').to.be.false;
     });
 
-    it('Should emit an event after showing', function () {
+    it('Should emit an event after showing', async function () {
       const spyOverflowEvent = sinon.spy();
       events.on(document, 'overflow-menu-shown', spyOverflowEvent);
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-
-      return new Promise((resolve, reject) => {
-        setTimeout(promiseTryCatcher(() => {
-          expect(spyOverflowEvent).to.have.been.called;
-        }, resolve, reject), 200);
-      });
+      await delay(200);
+      expect(spyOverflowEvent).to.have.been.called;
     });
 
     it(`Should provide a way to cancel hiding overflow menu`, function () {
@@ -130,18 +125,14 @@ describe('Test Overflow menu', function () {
       expect(menu.optionMenu.classList.contains('bx--overflow-menu--open'), 'State of dropdown menu').to.be.true;
     });
 
-    it('Should emit an event after hiding', function () {
+    it('Should emit an event after hiding', async function () {
       const spyOverflowEvent = sinon.spy();
       events.on(document, 'overflow-menu-hidden', spyOverflowEvent);
 
       element.classList.add('bx--overflow-menu--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-
-      return new Promise((resolve, reject) => {
-        setTimeout(promiseTryCatcher(() => {
-          expect(spyOverflowEvent).to.have.been.called;
-        }, resolve, reject), 200);
-      });
+      await delay(200);
+      expect(spyOverflowEvent).to.have.been.called;
     });
 
     afterEach(function () {

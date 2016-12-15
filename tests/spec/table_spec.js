@@ -1,7 +1,7 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
-import promiseTryCatcher from '../utils/promise-try-catcher';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+import { promisify } from 'bluebird';
 import '../../consumables/js/polyfills/custom-event';
 import Table from '../../consumables/js/es2015/table';
 
@@ -77,15 +77,14 @@ describe('Test table', function () {
       expect(headerNode.classList.contains('bx--table__column-title--rotated')).to.be.false;
     });
 
-    it(`Should emit an event after toggling is done`, function () {
-      return new Promise((resolve, reject) => {
-        events.on(element, 'table-sort-toggled', promiseTryCatcher((e) => {
-          expect(e.detail.newState).to.equal(true);
-          expect(headerNode.classList.contains('bx--table__column-title--rotated')).to.be.true;
-        }, resolve, reject));
+    it(`Should emit an event after toggling is done`, async function () {
+      const e = await new Promise((resolve) => {
+        events.on(element, 'table-sort-toggled', resolve);
         headerNode.classList.remove('bx--table__column-title--rotated');
         headerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
+      expect(e.detail.newState).to.equal(true);
+      expect(headerNode.classList.contains('bx--table__column-title--rotated')).to.be.true;
     });
 
     afterEach(function () {
@@ -139,15 +138,14 @@ describe('Test table', function () {
       expect(rowNode.classList.contains('bx--table__row--checked')).to.be.false;
     });
 
-    it(`Should emit an event after toggling is done`, function () {
-      return new Promise((resolve, reject) => {
-        events.on(element, 'table-check-toggled', promiseTryCatcher((e) => {
-          expect(e.detail.newState).to.equal(true);
-          expect(rowNode.classList.contains('bx--table__row--checked')).to.be.true;
-        }, resolve, reject));
+    it(`Should emit an event after toggling is done`, async function () {
+      const e = await new Promise((resolve) => {
+        events.on(element, 'table-check-toggled', resolve);
         rowNode.classList.remove('bx--table__row--checked');
         checkboxNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
+      expect(e.detail.newState).to.equal(true);
+      expect(rowNode.classList.contains('bx--table__row--checked')).to.be.true;
     });
 
     afterEach(function () {
@@ -175,58 +173,64 @@ describe('Test table', function () {
       document.body.appendChild(element);
     });
 
-    it(`Should turn to on state from off state`, function () {
+    it(`Should turn to on state from off state`, async function () {
       headerNode.classList.remove('bx--table__column-title--rotated');
-      return new Promise((resolve, reject) => {
-        table.toggleState('Sort', headerNode, promiseTryCatcher((error, toggledElement, newState) => {
-          expect(error, 'Error object').to.be.null;
-          expect(toggledElement, 'toggledElement').to.equal(headerNode);
-          expect(newState, 'newState').to.be.true;
-          expect(headerNode.classList.contains('bx--table__column-title--rotated'), 'CSS class').to.be.true;
-        }, resolve, reject));
-      });
+      const [toggledElement, newState] = await promisify(table.toggleState, {
+        context: table,
+        multiArgs: true,
+      })('Sort', headerNode);
+      expect(toggledElement, 'toggledElement').to.equal(headerNode);
+      expect(newState, 'newState').to.be.true;
+      expect(headerNode.classList.contains('bx--table__column-title--rotated'), 'CSS class').to.be.true;
     });
 
-    it(`Should turn to on state from off state`, function () {
+    it(`Should turn to on state from off state`, async function () {
       headerNode.classList.add('bx--table__column-title--rotated');
-      return new Promise((resolve, reject) => {
-        table.toggleState('Sort', headerNode, promiseTryCatcher((error, toggledElement, newState) => {
-          expect(error, 'Error object').to.be.null;
-          expect(toggledElement, 'toggledElement').to.equal(headerNode);
-          expect(newState, 'newState').to.be.false;
-          expect(headerNode.classList.contains('bx--table__column-title--rotated'), 'CSS class').to.be.false;
-        }, resolve, reject));
-      });
+      const [toggledElement, newState] = await promisify(table.toggleState, {
+        context: table,
+        multiArgs: true,
+      })('Sort', headerNode);
+      expect(toggledElement, 'toggledElement').to.equal(headerNode);
+      expect(newState, 'newState').to.be.false;
+      expect(headerNode.classList.contains('bx--table__column-title--rotated'), 'CSS class').to.be.false;
     });
 
-    it(`Should provide a way to cancel turning to on state from off state`, function () {
+    it(`Should provide a way to cancel turning to on state from off state`, async function () {
       events.on(element, 'table-sort-beingtoggled', (e) => e.preventDefault());
       headerNode.classList.remove('bx--table__column-title--rotated');
-      return new Promise((resolve, reject) => {
-        table.toggleState('Sort', headerNode, promiseTryCatcher((error, toggledElement, newState) => {
-          expect(error.canceled, 'error.canceled').to.be.true;
-          expect(error.element, 'error.element').to.equal(headerNode);
-          expect(error.newState, 'error.newState').to.be.true;
-          expect(toggledElement, 'toggledElement in parameter').to.be.undefined;
-          expect(newState, 'newState in parameter').to.be.undefined;
-          expect(headerNode.classList.contains('bx--table__column-title--rotated'), 'CSS class').to.be.false;
-        }, resolve, reject));
-      });
+      let errorToggleState;
+      try {
+        await promisify(table.toggleState, {
+          context: table,
+          multiArgs: true,
+        })('Sort', headerNode);
+      } catch (error) {
+        errorToggleState = error;
+      }
+      expect(errorToggleState, 'errorToggleState').to.be.ok;
+      expect(errorToggleState.canceled, 'errorToggleState.canceled').to.be.true;
+      expect(errorToggleState.element, 'errorToggleState.element').to.equal(headerNode);
+      expect(errorToggleState.newState, 'errorToggleState.newState').to.be.true;
+      expect(headerNode.classList.contains('bx--table__column-title--rotated'), 'CSS class').to.be.false;
     });
 
-    it(`Should provide a way to cancel turning to off state from on state`, function () {
+    it(`Should provide a way to cancel turning to off state from on state`, async function () {
       events.on(element, 'table-sort-beingtoggled', (e) => e.preventDefault());
       headerNode.classList.add('bx--table__column-title--rotated');
-      return new Promise((resolve, reject) => {
-        table.toggleState('Sort', headerNode, promiseTryCatcher((error, toggledElement, newState) => {
-          expect(error.canceled, 'error.canceled').to.be.true;
-          expect(error.element, 'error.element').to.equal(headerNode);
-          expect(error.newState, 'error.newState').to.be.false;
-          expect(toggledElement, 'toggledElement in parameter').to.be.undefined;
-          expect(newState, 'newState in parameter').to.be.undefined;
-          expect(headerNode.classList.contains('bx--table__column-title--rotated'), 'CSS class').to.be.true;
-        }, resolve, reject));
-      });
+      let errorToggleState;
+      try {
+        await promisify(table.toggleState, {
+          context: table,
+          multiArgs: true,
+        })('Sort', headerNode);
+      } catch (error) {
+        errorToggleState = error;
+      }
+      expect(errorToggleState, 'errorToggleState').to.be.ok;
+      expect(errorToggleState.canceled, 'errorToggleState.canceled').to.be.true;
+      expect(errorToggleState.element, 'errorToggleState.element').to.equal(headerNode);
+      expect(errorToggleState.newState, 'errorToggleState.newState').to.be.false;
+      expect(headerNode.classList.contains('bx--table__column-title--rotated'), 'CSS class').to.be.true;
     });
 
     afterEach(function () {
