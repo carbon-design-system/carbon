@@ -5,42 +5,49 @@
 // Dependencies
 @import '../../global/global';
 
-.bx--list {
-  // Base Styles for variations of .bx--list
-  &,
-  &--nested,
-  &--unordered,
-  &--ordered {
-    @include font-size('14');
-    @include font-smoothing;
-    margin-left: 2rem;
-    line-height: 1.75;
-  }
+// import-once
+@import '../../import-once';
 
-  &--nested {
-    margin-left: 0;
-  }
+@include exports('lists') {
 
-  &__item {
-    font-weight: 700;
-    padding-left: .25rem;
-  }
+.bx--list--nested,
+.bx--list--unordered,
+.bx--list--ordered {
+  @include font-size('14');
+  @include font-smoothing;
+  box-sizing: border-box;
+  margin: 0;
+  margin-left: 2rem;
+  line-height: 1.75;
+  padding: 0;
+}
 
-  &--unordered &__item {
-    list-style-type: disc;
-  }
+.bx--list__item {
+  box-sizing: border-box;
+  font-weight: 700;
+  padding-left: .25rem;
+}
 
-  &--ordered &__item {
-    list-style-type: decimal;
-  }
+.bx--list--unordered > .bx--list__item {
+  list-style-type: disc;
+}
 
-  &--nested &__item {
-    list-style-type: none;
-    font-weight: 400;
+.bx--list--ordered > .bx--list__item {
+  list-style-type: decimal;
+}
 
-    &:before {
-      content: '-';
-      padding-right: 1rem;
-    }
-  }
+.bx--list--nested {
+  margin-left: 0;
+}
+
+.bx--list--nested > .bx--list__item {
+  list-style-type: none;
+  font-weight: 400;
+}
+
+.bx--list--nested > .bx--list__item:before {
+  content: '-';
+  padding-right: 1rem;
+}
+
 }
