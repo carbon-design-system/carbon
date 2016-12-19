@@ -2,16 +2,12 @@
 
 @mixin body-styles {
   .bx--body {
+    @include reset;
     @include font-inherit-reset;
     @include helvetica;
-    font-size: 100%;
     color: $color__white;
     background-color: $color__navy-gray-2;
-    border: 0;
     line-height: 1;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
 
     &.bx--global-light-ui {
       color: $color__blue-90;
@@ -21,16 +17,12 @@
 
   // Deprecated
   body {
+    @include reset;
     @include font-inherit-reset;
     @include helvetica;
-    font-size: 100%;
     color: $color__white;
     background-color: $color__navy-gray-2;
-    border: 0;
     line-height: 1;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
 
     &.bx--global-light-ui {
       color: $color__blue-90;
