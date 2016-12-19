@@ -21,10 +21,13 @@
   }
 }
 
+.bx--form {
+  @include reset;
+}
+
 .bx--form__fieldset {
+  @include reset;
   display: block;
-  padding: 0;
-  border: 0;
   margin-bottom: 3rem;
   
   &:last-of-type {
@@ -41,11 +44,11 @@
 }
 
 .bx--form__legend {
+  @include reset;
   @include font-size('32');
   @include font-smoothing;
   font-weight: 300;
   display: block;
-  border: 0;
   margin-bottom: 2rem;
 
   &--hidden {
@@ -89,15 +92,13 @@
 }
 
 .bx--form__requirements {
+  @include reset;
   @include font-size('11');
   margin: .5rem 0 0;
   max-height: 0;
   overflow: hidden;
   font-weight: 700;
   line-height: 1.5;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
 
   &::before {
     content: '*';
