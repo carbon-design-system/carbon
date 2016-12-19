@@ -25,18 +25,17 @@
   }
 
   .bx--checkbox__appearance {
+    @include reset;
     @include font-size('16');
     box-sizing: border-box;
     display: inline-block;
     height: rem(18px);
     width: rem(18px);
     margin-right: .75rem;
-    padding: 0;
     background-color: $color__inputs--bg;
     border-radius: 2px;
     border: 2px solid $color__navy-gray-7;
     overflow: hidden;
-    vertical-align: baseline;
 
     @include light-ui {
       background-color: $color__inputs--bg--light-ui;
