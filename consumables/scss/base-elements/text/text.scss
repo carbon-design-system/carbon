@@ -12,6 +12,7 @@
   .bx--text {
 
     &__input {
+      @include reset;
       @include font-size('14');
       box-sizing: border-box;
       display: block;
@@ -22,8 +23,6 @@
       margin: .25rem 0;
       color: $color__white;
       background-color: $color__inputs--bg;
-      border: none;
-      border-radius: 0;
 
       @include light-ui {
         color: $color__blue-90;

@@ -12,9 +12,10 @@
   .bx--textarea {
 
     &__input {
+      @include reset;
       @include font-size('14');
+      box-sizing: border-box;
       display: block;
-      font-family: inherit;
       width: 100%;
       min-height: 9.375rem;
       min-width: 9.375rem;
@@ -22,8 +23,6 @@
       margin: .25rem 0;
       color: $color__white;
       background-color: $color__inputs--bg;
-      border: none;
-      border-radius: 0;
 
       &:focus {
         @include focus-outline;
