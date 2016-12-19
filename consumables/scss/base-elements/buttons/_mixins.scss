@@ -1,9 +1,9 @@
 @mixin btn--base {
+  @include reset;
   @include helvetica;
   @include font-smoothing;
   @include letter-spacing;
   @include font-size('14');
-  border: 0;
   box-sizing: border-box;
   cursor: pointer;
   display: inline-flex;
@@ -12,13 +12,11 @@
   flex-shrink: 0;
   font-weight: 700;
   height: rem(40px);
-  margin: 0;
   padding: 0 1rem;
   text-align: center;
   text-decoration: none;
   transition-duration: $transition--base;
   transition-timing-function: ease-in;
-  vertical-align: baseline;
   white-space: nowrap;
 
   &:disabled {
