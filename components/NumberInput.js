@@ -120,16 +120,16 @@ class NumberInput extends Component {
           {...other}
           {...props}
         />
-        <span onClick={this.handleUpArrowClick} className="bx--number__arrow--up bx--number__arrow--icon-up">
+        <span onClick={this.handleUpArrowClick} className="bx--number__arrow--up">
           <Icon
-            className="icon--up bx--number__arrow--icon-up"
+            className="bx--number__icon"
             name="caret--up"
             description={this.props.iconDescription}
           />
         </span>
-        <span onClick={this.handleDownArrowClick} className="bx--number__arrow--down bx--number__arrow--icon-down">
+        <span onClick={this.handleDownArrowClick} className="bx--number__arrow--down">
           <Icon
-            className="icon--down bx--number__arrow--icon-down"
+            className="bx--number__icon"
             name="caret--down"
             description={this.props.iconDescription}
           />

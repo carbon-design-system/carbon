@@ -72,8 +72,8 @@ describe('numberInput', () => {
       });
 
       it('should have iconDescription match Icon component description prop', () => {
-        const iconUpText = wrapper.find('.icon--up title').text();
-        const iconDownText = wrapper.find('.icon--down title').text();
+        const iconUpText = wrapper.find('.bx--number__arrow--up title').text();
+        const iconDownText = wrapper.find('.bx--number__arrow--down title').text();
         const iconDescription = wrapper.props().iconDescription;
 
         const matches = (iconDescription === iconUpText) && (iconDescription === iconDownText);
