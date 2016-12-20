@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import Select from '../../components/Select';
 import SelectItem from '../../components/SelectItem';
+import SelectItemGroup from '../../components/SelectItemGroup';
 
 const selectProps = {
   onBlur: () => { action('blur'); }, // eslint-disable-line no-console
@@ -31,9 +32,13 @@ storiesOf('Select', module)
         defaultValue="placeholder-item"
       >
         <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
-        <SelectItem value="option-1" text="Option 1" />
-        <SelectItem value="option-2" text="Option 2" />
-        <SelectItem value="option-3" text="Option 3" />
+        <SelectItemGroup label="Starter">
+          <SelectItem value="option-1" text="Option 1" />
+          <SelectItem value="option-2" text="Option 2" />
+        </SelectItemGroup>
+        <SelectItemGroup label="Advanced">
+          <SelectItem value="option-3" text="Option 3" />
+        </SelectItemGroup>
       </Select>
   ))
   .addWithInfo(
