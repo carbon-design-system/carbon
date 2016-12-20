@@ -284,7 +284,7 @@ storiesOf('Form', module)
       </FormGroup>
 
       <FormGroup
-        datainvalid
+        invalid
         {...fieldsetPassInvalidProps}
       >
         <TextInput

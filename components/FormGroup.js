@@ -6,22 +6,22 @@ const propTypes = {
   children: PropTypes.node,
   legendText: PropTypes.string,
   className: PropTypes.string,
-  datainvalid: PropTypes.bool,
+  invalid: PropTypes.bool,
   message: PropTypes.bool,
   messageText: PropTypes.string,
 };
 const defaultProps = {
-  datainvalid: undefined,
+  invalid: false,
   message: false,
   messageText: undefined,
 };
 
-const FormGroup = ({ legendText, datainvalid, children, className, message, messageText, ...other }) => {
+const FormGroup = ({ legendText, invalid, children, className, message, messageText, ...other }) => {
   const classNamesLegend = classnames('bx--form__legend', className);
   const classNamesFieldset = classnames('bx--form__fieldset', className);
 
   return (
-    <fieldset data-invalid={datainvalid} className={classNamesFieldset} {...other}>
+    <fieldset data-invalid={invalid || undefined} className={classNamesFieldset} {...other}>
       <legend className={classNamesLegend}>
         {legendText}
       </legend>

@@ -20,6 +20,13 @@ describe('FormGroup', () => {
     it('renders extra classes passed in via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
+    it('should not render the data-invalid property by default', () => {
+      expect(wrapper.props()['data-invalid']).toBe(undefined);
+    });
+    it('should render the data-invalid attribute when invalid is set', () => {
+      const formgroup = shallow(<FormGroup invalid />);
+      expect(formgroup.props()['data-invalid']).toBe(true);
+    });
     it('should render wrapper as expected', () => {
       const formGroup = shallow(
         <FormGroup>
