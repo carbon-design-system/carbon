@@ -23,7 +23,6 @@ const additionalProps = {
 const checkboxEvents = {
   className: 'some-class',
   labelText: 'Checkbox',
-  id: 'checkbox-1',
   onChange: action('onChange'),
 };
 const fieldsetCheckboxProps = {
@@ -180,11 +179,11 @@ storiesOf('Form', module)
   () => (
     <Form {...additionalProps} >
       <FormGroup {...fieldsetCheckboxProps}>
-        <Checkbox defaultChecked {...checkboxEvents} />
+        <Checkbox defaultChecked {...checkboxEvents} id="checkbox-0" />
         <br />
-        <Checkbox {...checkboxEvents} />
+        <Checkbox {...checkboxEvents} id="checkbox-1" />
         <br />
-        <Checkbox disabled {...checkboxEvents} />
+        <Checkbox disabled {...checkboxEvents} id="checkbox-2" />
         <br />
       </FormGroup>
 
