@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import '@console/bluemix-components/consumables/scss/components/card/card.scss';
 
 const propTypes = {
-  status: React.PropTypes.number,
-  className: React.PropTypes.string,
+  status: PropTypes.number,
+  className: PropTypes.string,
+  runningText: PropTypes.string,
+  notRunningText: PropTypes.string,
+  stoppedText: PropTypes.string,
 };
 
 const defaultProps = {
   status: 0,
+  runningText: 'Running',
+  notRunningText: 'Not Running',
+  stoppedText: 'Stopped',
 };
 
 const appStatus = {
@@ -17,31 +23,37 @@ const appStatus = {
   STOPPED: 2,
 };
 
-function createCardStatusContent(status) {
+function createCardStatusContent(status, labels) {
   const cardStatusArray = ['running', 'not-running', 'stopped'];
-  const statusTextArray = ['Running', 'Not Running', 'Stopped'];
   const statusText = cardStatusArray[status];
   if (statusText) {
     const cardStatusClassName = `bx--card-footer__app-status--${statusText} active`;
     const cardStatusTextClassName = `bx--${statusText}__text`;
     return (
       <div className={cardStatusClassName}>
-        <div className={cardStatusTextClassName}>{statusTextArray[status]}</div>
+        <div className={cardStatusTextClassName}>
+          {labels[`${statusText.replace(/(-(\w))/g, (match, separator, letter) => letter.toUpperCase())}Text`]}
+        </div>
       </div>
     );
   }
   return '';
 }
 
-const CardStatus = ({ className, status }) => {
+const CardStatus = ({ className, status, runningText, notRunningText, stoppedText }) => {
   const cardStatusClasses = classNames({
     'bx--card-footer__app-status': true,
     [className]: className,
   });
+  const labels = {
+    runningText,
+    notRunningText,
+    stoppedText,
+  };
 
   return (
     <div className={cardStatusClasses}>
-      {createCardStatusContent(status)}
+      {createCardStatusContent(status, labels)}
     </div>
   );
 };

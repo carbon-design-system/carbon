@@ -73,4 +73,31 @@ describe('CardStatus', () => {
       expect(newStatus.props().children).toBe('Stopped');
     });
   });
+
+  describe('Renders as expected with specified status text', () => {
+    const wrapper = shallow(
+      <CardStatus runningText="[[Running]]" notRunningText="[[Not Running]]" stoppedText="[[Stopped]]" />
+    );
+
+    it('Shows running text', () => {
+      wrapper.setProps({ status: 0 });
+      const statusDiv = wrapper.childAt(0);
+      const status = statusDiv.childAt(0);
+      expect(status.props().children).toBe('[[Running]]');
+    });
+
+    it('Shows not running text', () => {
+      wrapper.setProps({ status: 1 });
+      const statusDiv = wrapper.childAt(0);
+      const status = statusDiv.childAt(0);
+      expect(status.props().children).toBe('[[Not Running]]');
+    });
+
+    it('Shows stopped text', () => {
+      wrapper.setProps({ status: 2 });
+      const statusDiv = wrapper.childAt(0);
+      const status = statusDiv.childAt(0);
+      expect(status.props().children).toBe('[[Stopped]]');
+    });
+  });
 });
