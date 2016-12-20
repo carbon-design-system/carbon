@@ -12,6 +12,7 @@ describe('FileUploader', () => {
       const label = rootWrapper.find('label');
       expect(label.length).toBe(1);
       expect(label.hasClass('bx--file__label')).toBe(true);
+      expect(label.props()['data-button-title']).toBe('Choose Files');
     });
     it('should render an input with expected props', () => {
       const input = rootWrapper.find('input');
@@ -46,6 +47,11 @@ describe('FileUploader', () => {
       const label = rootWrapper.find('label');
       expect(label.hasClass('bx--file__label')).toBe(true);
       expect(label.hasClass('extra-class')).toBe(true);
+    });
+    it('should set the button text via props', () => {
+      const rootWrapper = shallow(<FileUploader id="testID" buttonText="Upload" />);
+      const label = rootWrapper.find('label');
+      expect(label.props()['data-button-title']).toBe('Upload');
     });
   });
 

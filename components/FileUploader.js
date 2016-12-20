@@ -10,6 +10,7 @@ class FileUploader extends React.Component {
     tabIndex: React.PropTypes.number,
     id: React.PropTypes.string.isRequired,
     labelDescription: React.PropTypes.string,
+    buttonText: React.PropTypes.string,
     onChange: React.PropTypes.func,
   }
 
@@ -17,6 +18,7 @@ class FileUploader extends React.Component {
     className: 'bx--file__label',
     tabIndex: 0,
     labelDescription: '',
+    buttonText: 'Choose Files',
     onChange: () => {},
   }
 
@@ -60,6 +62,7 @@ class FileUploader extends React.Component {
       <div className="fileUploaderWrapper">
         <label
           data-file-appearance
+          data-button-title={this.props.buttonText}
           className={fileUploaderClasses}
           htmlFor={this.props.id}
         >{this.state.text}</label>

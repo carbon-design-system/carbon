@@ -20,10 +20,12 @@ storiesOf('FileUploader', module)
       The File Uploader components allow the user to upload any necessary files.
     `,
     () => (
-      <FileUploader
-        {...fileUploaderEvents}
-        className="some-class"
-        id="file-1"
-        labelDescription="Choose Files..."
-      />
+      <div style={{ width: '400px' }}>
+        <FileUploader
+          {...fileUploaderEvents}
+          className="some-class"
+          id="file-1"
+          labelDescription="Choose Files..."
+        />
+      </div>
   ));
