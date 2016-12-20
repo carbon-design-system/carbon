@@ -1,5 +1,6 @@
 import React from 'react';
 import AccordionItem from '../AccordionItem';
+import Icon from '../Icon';
 import { shallow, mount } from 'enzyme';
 
 describe('AccordionItem', () => {
@@ -17,13 +18,13 @@ describe('AccordionItem', () => {
     it('renders heading as expected', () => {
       const heading = wrapper.find('.bx--accordion__heading');
       expect(heading.length).toBe(1);
-      expect(heading.find('Icon').length).toBe(1);
+      expect(heading.find(Icon).length).toBe(1);
       expect(heading.find('.bx--accordion__title').text()).toBe('A heading');
     });
 
     it('should use correct icon', () => {
       const heading = wrapper.find('.bx--accordion__heading');
-      expect(heading.find('Icon').props().name).toEqual('chevron--right');
+      expect(heading.find(Icon).props().name).toEqual('chevron--right');
     });
 
     it('has the expected classes', () => {

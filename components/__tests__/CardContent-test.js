@@ -1,5 +1,7 @@
 import React from 'react';
+import Button from '../Button';
 import CardContent from '../CardContent';
+import Icon from '../Icon';
 import { shallow } from 'enzyme';
 
 describe('CardContent', () => {
@@ -35,7 +37,7 @@ describe('CardContent', () => {
       });
 
       it('renders Secondary Button as expected', () => {
-        const SecondaryButton = wrapper.find('Button');
+        const SecondaryButton = wrapper.find(Button);
         expect(SecondaryButton.hasClass('bx--overview__details-button')).toBe(true);
         expect(SecondaryButton.props().kind).toBe('secondary');
         expect(SecondaryButton.props().children).toBe('testText');
@@ -79,10 +81,10 @@ describe('CardContent', () => {
           const aboutIcon = about.childAt(0);
           expect(aboutIcon.hasClass('bx--about__icon')).toBe(true);
 
-          const Icon = wrapper.find('Icon');
-          expect(Icon.hasClass('bx--about__icon--img')).toBe(true);
-          expect(Icon.props().name).toBe('testIcon');
-          expect(Icon.props().description).toBe('About');
+          const icon = wrapper.find(Icon);
+          expect(icon.hasClass('bx--about__icon--img')).toBe(true);
+          expect(icon.props().name).toBe('testIcon');
+          expect(icon.props().description).toBe('About');
         });
 
         describe('renders a title div', () => {

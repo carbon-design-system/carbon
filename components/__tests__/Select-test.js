@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '../Icon';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { mount } from 'enzyme';
@@ -22,11 +23,11 @@ describe('Select', () => {
       });
 
       it('renders the down arrow icon', () => {
-        expect(selectContainer.find('Icon').length).toEqual(1);
+        expect(selectContainer.find(Icon).length).toEqual(1);
       });
 
       it('should use correct icon', () => {
-        const icon = wrapper.find('Icon');
+        const icon = wrapper.find(Icon);
         expect(icon.props().name).toEqual('caret--down');
       });
 
@@ -48,7 +49,7 @@ describe('Select', () => {
       });
 
       it('should have iconDescription match Icon component description prop', () => {
-        const matches = wrapper.props().iconDescription === wrapper.find('Icon').props().description;
+        const matches = wrapper.props().iconDescription === wrapper.find(Icon).props().description;
         expect(matches).toEqual(true);
       });
     });

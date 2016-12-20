@@ -1,5 +1,8 @@
 import React from 'react';
+import Icon from '../Icon';
 import Pagination from '../Pagination';
+import Select from '../Select';
+import SelectItem from '../SelectItem';
 import { shallow, mount } from 'enzyme';
 
 describe('Pagination', () => {
@@ -9,7 +12,7 @@ describe('Pagination', () => {
     );
 
     describe('icons', () => {
-      const icons = pagination.find('Icon');
+      const icons = pagination.find(Icon);
 
       it('should have 3 icons', () => {
         expect(icons.length).toEqual(2);
@@ -37,8 +40,8 @@ describe('Pagination', () => {
         expect(left.length).toBe(1);
       });
       it('should have a size dropdown', () => {
-        const select = left.find('Select');
-        const items = select.find('SelectItem');
+        const select = left.find(Select);
+        const items = select.find(SelectItem);
         expect(select.length).toBe(1);
         expect(items.length).toBe(2);
         expect(items.at(0).props().value).toBe(5);

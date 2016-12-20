@@ -19,7 +19,7 @@ describe('OrderedList', () => {
     });
 
     it('should render children as expected', () => {
-      expect(list.find('ListItem').length).toEqual(1);
+      expect(list.find(ListItem).length).toEqual(1);
     });
 
     it('should render nested lists', () => {

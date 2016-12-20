@@ -19,7 +19,7 @@ describe('ModuleContainer', () => {
     });
 
     it('should render children as expected', () => {
-      expect(modulesContainer.find('Module').length).toEqual(1);
+      expect(modulesContainer.find(Module).length).toEqual(1);
     });
   });
 });

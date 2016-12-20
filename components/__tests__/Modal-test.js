@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '../Icon';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
 import { shallow, mount } from 'enzyme';
@@ -40,7 +41,7 @@ describe('Modal', () => {
     });
 
     it('should have iconDescription match Icon component description prop', () => {
-      const matches = mounted.props().iconDescription === mounted.find('Icon').props().description;
+      const matches = mounted.props().iconDescription === mounted.find(Icon).props().description;
       expect(matches).toEqual(true);
     });
   });

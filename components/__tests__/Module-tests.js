@@ -24,7 +24,7 @@ describe('Module', () => {
     });
 
     it('should render children as expected', () => {
-      expect(testModule.find('ModuleBody').length).toEqual(1);
+      expect(testModule.find(ModuleBody).length).toEqual(1);
     });
   });
 });

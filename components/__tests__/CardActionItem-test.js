@@ -1,5 +1,6 @@
 import React from 'react';
 import CardActionItem from '../CardActionItem';
+import Icon from '../Icon';
 import { shallow } from 'enzyme';
 
 describe('CardActionItem', () => {
@@ -34,18 +35,18 @@ describe('CardActionItem', () => {
     });
 
     describe('Renders Icon as expected', () => {
-      const Icon = wrapper.find('Icon');
+      const icon = wrapper.find(Icon);
 
       it('Icon should have expected class', () => {
-        expect(Icon.hasClass('bx--app-actions__button--icon')).toEqual(true);
+        expect(icon.hasClass('bx--app-actions__button--icon')).toEqual(true);
       });
 
       it('Icon has specified name', () => {
-        expect(Icon.props().name).toEqual('testName');
+        expect(icon.props().name).toEqual('testName');
       });
 
       it('Icon has specified description', () => {
-        expect(Icon.props().description).toEqual('testDescription');
+        expect(icon.props().description).toEqual('testDescription');
       });
     });
   });

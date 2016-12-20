@@ -1,6 +1,7 @@
 import React from 'react';
 import Dropdown from '../Dropdown';
 import DropdownItem from '../DropdownItem';
+import Icon from '../Icon';
 import { shallow, mount } from 'enzyme';
 
 describe('Dropdown', () => {
@@ -42,7 +43,7 @@ describe('Dropdown', () => {
     });
 
     it('should use correct icon', () => {
-      const icon = mounted.find('Icon');
+      const icon = mounted.find(Icon);
       expect(icon.props().name).toEqual('caret--down');
     });
 
@@ -56,7 +57,7 @@ describe('Dropdown', () => {
     });
 
     it('should have iconDescription match Icon component description prop', () => {
-      const matches = mounted.props().iconDescription === mounted.find('Icon').props().description;
+      const matches = mounted.props().iconDescription === mounted.find(Icon).props().description;
       expect(matches).toEqual(true);
     });
   });

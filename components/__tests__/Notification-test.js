@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '../Icon';
 import Notification from '../Notification';
 import { shallow, mount } from 'enzyme';
 
@@ -23,31 +24,31 @@ describe('Notification', () => {
       });
 
       it('renders toast notification with one <Icon>', () => {
-        expect(toast.find('Icon').length).toEqual(1);
+        expect(toast.find(Icon).length).toEqual(1);
       });
 
       it('Renders inline notifications with two <Icon>', () => {
-        expect(inline.find('Icon').length).toEqual(2);
+        expect(inline.find(Icon).length).toEqual(2);
       });
 
       it('renders checkmark--outline icon for success inline notification', () => {
-        const icon = inline.find('Icon[name="checkmark--outline"]');
+        const icon = inline.find('[name="checkmark--outline"]');
         expect(icon.props().name).toEqual('checkmark--outline');
       });
 
       it('renders error notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'error' });
-        expect(inline.find('Icon').some('[name="error"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="error"]')).toBe(true);
       });
 
       it('renders warning notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'warning' });
-        expect(inline.find('Icon').some('[name="warning"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="warning"]')).toBe(true);
       });
 
       it('renders info notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'info' });
-        expect(inline.find('Icon').some('[name="info"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="info"]')).toBe(true);
       });
 
       it('renders HTML for toast notifications when caption exists', () => {

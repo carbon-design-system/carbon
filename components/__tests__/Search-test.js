@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '../Icon';
 import Search from '../Search';
 import { mount, shallow } from 'enzyme';
 
@@ -93,29 +94,29 @@ describe('Search', () => {
 
       describe('icons', () => {
         it('renders "search--glyph" icon', () => {
-          const icons = wrapper.find('Icon');
+          const icons = wrapper.find(Icon);
           expect(icons.at(0).props().name).toEqual('search--glyph');
         });
 
         it('renders three Icons', () => {
           wrapper.setProps({ small: false });
-          const icons = wrapper.find('Icon');
+          const icons = wrapper.find(Icon);
           expect(icons.length).toEqual(3);
         });
 
         it('should use "filter--glyph" icon for sort button', () => {
-          const icon = wrapper.find('Icon').at(1);
+          const icon = wrapper.find(Icon).at(1);
           expect(icon.props().name).toEqual('filter--glyph');
         });
 
         it('should use "list" icon for toggle button', () => {
-          const icon = wrapper.find('Icon').at(2);
+          const icon = wrapper.find(Icon).at(2);
           expect(icon.props().name).toEqual('list');
         });
 
         it('should use "grid" icon when format state is not "list"', () => {
           wrapper.setState({ format: 'not-list' });
-          const icon = wrapper.find('Icon').at(2);
+          const icon = wrapper.find(Icon).at(2);
           expect(icon.props().name).toEqual('grid');
         });
       });
@@ -129,7 +130,7 @@ describe('Search', () => {
       const smallContainer = small.find('[role="search"]');
 
       it('renders correct search icon', () => {
-        const icons = small.find('Icon');
+        const icons = small.find(Icon);
         expect(icons.at(0).props().name).toEqual('search--glyph');
       });
 
@@ -143,7 +144,7 @@ describe('Search', () => {
       });
 
       it('renders one Icon', () => {
-        const icons = small.find('Icon');
+        const icons = small.find(Icon);
         expect(icons.length).toEqual(1);
       });
     });
@@ -186,14 +187,14 @@ describe('Search', () => {
       );
 
       it('should default to "list" layout', () => {
-        const icon = wrapper.find('Icon').at(2);
+        const icon = wrapper.find(Icon).at(2);
         expect(icon.props().name).toEqual('list');
       });
 
       it('should toggle layout to "grid" when clicked', () => {
         const button = wrapper.find('button').at(1);
         button.simulate('click');
-        const icon = wrapper.find('Icon').at(2);
+        const icon = wrapper.find(Icon).at(2);
         expect(icon.props().name).toEqual('grid');
       });
     });

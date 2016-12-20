@@ -34,7 +34,7 @@ describe('DetailPageHeader', () => {
     });
 
     it('should render correct icon', () => {
-      expect(wrapper.find('Icon').at(0).props().name).toEqual('arrow--left');
+      expect(wrapper.find(Icon).at(0).props().name).toEqual('arrow--left');
     });
 
     it('should render an element with a link text class', () => {

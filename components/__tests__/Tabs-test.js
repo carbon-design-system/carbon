@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '../Icon';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import { shallow, mount } from 'enzyme';
@@ -54,7 +55,7 @@ describe('Tabs', () => {
       });
 
       it('renders <Icon>', () => {
-        expect(trigger.find('Icon').props().name).toEqual('caret--down');
+        expect(trigger.find(Icon).props().name).toEqual('caret--down');
       });
     });
 

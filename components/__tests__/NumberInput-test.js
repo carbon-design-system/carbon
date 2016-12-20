@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
+import Icon from '../Icon';
 import NumberInput from '../NumberInput';
 
 describe('numberInput', () => {
@@ -51,7 +52,7 @@ describe('numberInput', () => {
     });
 
     describe('Icon', () => {
-      const icons = wrapper.find('Icon');
+      const icons = wrapper.find(Icon);
       it('renders two Icon components', () => {
         expect(icons.length).toEqual(2);
       });
