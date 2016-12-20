@@ -1,9 +1,10 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import classNames from 'classnames';
+import ClickListener from '../internal/ClickListener';
 import Icon from './Icon';
 import '@console/bluemix-components/consumables/scss/components/dropdown/dropdown.scss';
 
-class Dropdown extends Component {
+class Dropdown extends PureComponent {
 
   static propTypes = {
     children: PropTypes.node,
@@ -30,6 +31,10 @@ class Dropdown extends Component {
     selectedText: this.props.defaultText,
     value: '',
   };
+
+  close = () => {
+    this.setState({ open: false });
+  }
 
   toggle = (evt) => {
     // Open on click, enter, or space
@@ -67,20 +72,22 @@ class Dropdown extends Component {
     });
 
     const dropdown = (
-      <ul
-        {...other}
-        onClick={this.toggle}
-        onKeyPress={this.toggle}
-        value={this.state.value}
-        className={dropdownClasses}
-        tabIndex={tabIndex}
-      >
-        <li className="bx--dropdown__menu-text">{this.state.selectedText}</li>
-        <Icon name="caret--down" className="bx--dropdown__arrow" fill="#5aaafa" description={iconDescription} />
-        <li>
-          <ul className="bx--dropdown__list">{children}</ul>
-        </li>
-      </ul>
+      <ClickListener onClickOutside={this.close}>
+        <ul
+          {...other}
+          onClick={this.toggle}
+          onKeyPress={this.toggle}
+          value={this.state.value}
+          className={dropdownClasses}
+          tabIndex={tabIndex}
+        >
+          <li className="bx--dropdown__menu-text">{this.state.selectedText}</li>
+          <Icon name="caret--down" className="bx--dropdown__arrow" fill="#5aaafa" description={iconDescription} />
+          <li>
+            <ul className="bx--dropdown__list">{children}</ul>
+          </li>
+        </ul>
+      </ClickListener>
     );
 
     return dropdown;

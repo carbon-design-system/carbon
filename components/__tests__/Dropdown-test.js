@@ -11,7 +11,7 @@ describe('Dropdown', () => {
         defaultText="Choose something.."
       />
     );
-
+    const dropdownWrapper = wrapper.childAt(0);
     const mounted = mount(
       <Dropdown
         className="extra-class"
@@ -24,11 +24,11 @@ describe('Dropdown', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--dropdown')).toEqual(true);
+      expect(dropdownWrapper.hasClass('bx--dropdown')).toEqual(true);
     });
 
     it('should add extra classes that are passed via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(dropdownWrapper.hasClass('extra-class')).toEqual(true);
     });
 
     it('should render children as expected', () => {
