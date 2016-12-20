@@ -63,11 +63,13 @@ describe('Loading', () => {
     });
 
     it('has the expected classes', () => {
+      expect(loader.hasClass('bx--loading')).toEqual(true);
       expect(loader.hasClass('bx--loading--ie')).toEqual(true);
     });
 
     it('should remove and add bx--loading--stop--ie class', () => {
       wrapper.setProps({ active: false });
+      expect(loader.hasClass('bx--loading--stop')).toEqual(true);
       expect(loader.hasClass('bx--loading--stop--ie')).toEqual(true);
       wrapper.setProps({ active: true });
       expect(loader.hasClass('bx--loading--stop--ie')).toEqual(false);

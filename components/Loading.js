@@ -12,17 +12,16 @@ const defaultProps = {
 };
 
 const Loading = ({ className, active, ...other }) => {
-  let classToAdd;
-
-  if (window.ActiveXObject || 'ActiveXObject' in window) {
-    classToAdd = active ? 'bx--loading--ie' : 'bx--loading--ie bx--loading--stop--ie';
-  } else {
-    classToAdd = active ? 'bx--loading' : 'bx--loading bx--loading--stop';
-  }
+  const isIe = window.ActiveXObject || 'ActiveXObject' in window;
 
   const loadingClasses = classNames(
-    classToAdd,
-    [className]: className
+    'bx--loading',
+    className,
+    {
+      'bx--loading--ie': isIe,
+      'bx--loading--stop': !active,
+      'bx--loading--stop--ie': !active && isIe,
+    },
   );
 
   return (
