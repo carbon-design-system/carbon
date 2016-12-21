@@ -1,0 +1,14 @@
+// -------------------
+// LEGACY FILE
+// -------------------
+
+$color--link: lighten($color__blue-30, .5%);
+$color--link--hover: $color__blue-20;
+$transition--link: color, 200ms, ease-in;
+
+// a11y
+// -------
+// Passing contrast ratios on these backgrounds:
+// * $color__navy-gray-1
+// * $color__navy-gray-2
+// * $color__navy-gray-3
