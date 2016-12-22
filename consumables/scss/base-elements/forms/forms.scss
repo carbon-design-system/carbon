@@ -2,12 +2,9 @@
 // Forms
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
 @import '../buttons/buttons';
 @import '../checkbox/checkbox';
 @import '../text/text';
-
 @import '../../import-once';
 
 @include exports('forms') {
