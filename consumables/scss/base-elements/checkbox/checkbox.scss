@@ -2,10 +2,10 @@
 // Checkbox
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
-
-// import-once
+@import '../../global/colors/colors';
+@import '../../global/layout/grid';
+@import '../../global/typography/typography';
+@import '../../global/helpers';
 @import '../../import-once';
 
 @include exports('checkbox') {
@@ -17,6 +17,7 @@
 
   // Label Element - fonts and positioning
   .bx--checkbox__label {
+    @include reset;
     @include font-smoothing;
     box-sizing: border-box;
     display: flex;
