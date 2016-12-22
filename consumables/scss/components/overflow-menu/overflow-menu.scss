@@ -23,7 +23,7 @@
     hr {
       margin: .25rem 0 0;
       border: none;
-      border-bottom: 1px solid $color__navy-gray-6;
+      border-bottom: 1px solid $color__navy-gray-2;
 
       @include light-ui {
         border-bottom: 1px solid $color__gray-1;
@@ -40,7 +40,7 @@
       padding: .3rem 0 .5rem;
       margin: 2.2rem 0 0 -10rem;
       z-index: z('overflowOptions');
-      background: $color--list-bg;
+      background: $color__navy-gray-3;
 
       @include light-ui {
         background: $color__white;
