@@ -41,7 +41,7 @@
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: $color__navy-gray-2;
+    background-color: $color__navy-gray-3;
 
     @include breakpoint(bp--xs--major) {
       flex-direction: column;
@@ -57,7 +57,7 @@
 
   &__breadcrumb {
     font-weight: 600;
-    color: $color__blue-30;
+    color: $color__navy-gray-8;
     cursor: pointer;
 
     @include breakpoint(bp--xs--major) {
@@ -83,7 +83,7 @@
 
   &__link-wrapper {
     @include font-smoothing;
-    color: $color__detail-page-header--text--breadcrumb;
+    color: $color__navy-gray-8;
     text-decoration: none;
 
     @include light-ui {

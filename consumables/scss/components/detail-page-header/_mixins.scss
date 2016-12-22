@@ -33,7 +33,7 @@
   @include grid-container;
   padding-top: 0;
   padding-bottom: 1rem;
-  background-color: $color__navy-gray-2;
+  background-color: $color__navy-gray-3;
 
   @include breakpoint(bp--xs--major) {
     background-color: $color__navy-gray-3;
