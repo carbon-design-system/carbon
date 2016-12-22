@@ -17,7 +17,7 @@
     &:after {
       position: absolute;
       display: none;
-      background: $color__navy-gray-5;
+      background: $color__navy-gray-3;
 
       @include light-ui {
         background: $color__white;
