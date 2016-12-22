@@ -28,11 +28,6 @@ storiesOf('NumberInput', module)
   );
 
 storiesOf('NumberInput', module)
-  .addDecorator((story) => (
-    <AppContainer>
-      {story()}
-    </AppContainer>
-  ))
   .addWithInfo(
     'disabled',
     `
