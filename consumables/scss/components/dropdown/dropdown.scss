@@ -15,7 +15,7 @@
 @include exports('dropdown') {
   .bx--dropdown {
     @include dropdown;
-    background-color: $color__navy-gray-5;
+    background-color: $color__inputs--bg;
 
     @include light-ui {
       background-color: $color__inputs--bg--light-ui;
@@ -69,7 +69,7 @@
       @include box-shadow('large');
       display: flex;
       flex-direction: column;
-      background-color: $color__navy-gray-4;
+      background-color: $color__navy-gray-3;
 
       @include light-ui {
         background-color: $color__white;
