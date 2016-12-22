@@ -19,7 +19,7 @@
   width: 12.5rem;
   height: auto;
   background-color: $color__navy-gray-3;
-  border: 1px solid $color__blue-90;
+  border: 1px solid $color__navy-gray-2;
 
   @include light-ui {
     color: $color__blue-90;
@@ -226,7 +226,7 @@
 }
 
 .bx--card-footer__credentials-button {
-  @include btn--primary($color__navy-gray-4, $color__blue-30, $color__white);
+  @include btn--primary;
   @include font-size('12');
   margin-left: .5rem;
 
