@@ -5,7 +5,7 @@
   max-height: rem(365px);
   padding-bottom: .5rem;
   margin-bottom: $module--margin;
-  background-color: $color--module-bg;
+  background-color: $color__navy-gray-3;
 
   @include light-ui {
     background-color: $color__white;

@@ -87,7 +87,7 @@
     @include font-size('14');
     font-weight: 700;
     color: $color__module-header;
-    border-bottom: 1px solid $color__module-border;
+    border-bottom: 1px solid $color__navy-gray-2;
 
     @include light-ui {
       color: $color__blue-90;
@@ -97,7 +97,7 @@
 
   &__footer {
     @include font-size('14');
-    border-top: 1px solid $color__module-border;
+    border-top: 1px solid $color__navy-gray-2;
 
     @include light-ui {
       border-top: 1px solid $color__navy-gray-8;
