@@ -2,11 +2,7 @@
 // File Uploader
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
 @import '../buttons/buttons';
-
-// import-once
 @import '../../import-once';
 
 @include exports('file-uploader') {
@@ -19,7 +15,9 @@
   }
 
   .bx--file__label {
+    @include reset;
     @include font-size('14');
+    box-sizing: border-box;
     position: relative;
     display: inline-flex;
     align-items: center;
