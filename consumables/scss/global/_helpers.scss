@@ -1,9 +1,4 @@
-//-------------------------
-// Variables
-//-------------------------
-
-// Bluemix specific easing curves
-// More detail here: http://design-system.stage1.mybluemix.net/essentials/motion.html
+@import '../import-once';
 
 // Used for the majority of animations.
 $bx--standard-easing: cubic-bezier(.5, 0, .1, 1);
@@ -15,15 +10,10 @@ $bx---ease-out: cubic-bezier(0, 0, .25, 1);
 // Used primarily for removing elements from the screen.
 $bx---ease-in: cubic-bezier(.25, 0, 1, 1);
 
-
 $transition--base: 250ms;
 $color__inputs--bg: rgba(255, 255, 255, .1);
 $color__inputs--bg--light-ui: rgba($color__blue-51, .1);
 $color__box-shadow: rgba(0, 0, 0, .1);
-
-//-------------------------
-// Mixins
-//-------------------------
 
 @mixin reset {
   // Main reset block for most elements:
@@ -68,29 +58,7 @@ $color__box-shadow: rgba(0, 0, 0, .1);
   outline: auto 5px -webkit-focus-ring-color; // webkit default
 }
 
-@mixin font-inherit-reset {
-  font: inherit;
-}
-
-@mixin hidden {
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0, 0, 0, 0);
-  border:0;
-  visibility: visible;
-  white-space: nowrap;
-}
-
-.bx--visually-hidden {
-  @include hidden;
-}
-
 @mixin light-ui {
-
   .bx--global-light-ui & {
     @content;
   }
@@ -102,6 +70,10 @@ $color__box-shadow: rgba(0, 0, 0, .1);
 
 // $shadow and @rotate are only used in "fab" which is being deprecated.
 $shadow: 2px 2px 8px rgba(0, 0, 0, .4);
+
+@mixin font-inherit-reset {
+  font: inherit;
+}
 
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
@@ -124,4 +96,23 @@ $shadow: 2px 2px 8px rgba(0, 0, 0, .4);
 %focus-outline {
   outline: 1px dotted; // for non-webkit browsers
   outline: auto 5px -webkit-focus-ring-color; // webkit default
+}
+
+@mixin hidden {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0, 0, 0, 0);
+  border:0;
+  visibility: visible;
+  white-space: nowrap;
+}
+
+@include exports('helpers') {
+  .bx--visually-hidden {
+    @include hidden;
+  }
 }
