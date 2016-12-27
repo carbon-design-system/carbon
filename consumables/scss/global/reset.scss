@@ -1,3 +1,5 @@
+// $use-reset: true !default;
+
 @import '../import-once';
 
 @mixin reset-styles {
@@ -57,7 +59,7 @@
 }
 
 @include exports('reset') {
-  @if $use-reset == true {
+  @if global-variable-exists(use-reset) and $use-reset == true {
     @include reset-styles;
   }
 }

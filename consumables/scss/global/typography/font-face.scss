@@ -1,3 +1,5 @@
+// $use-fonts: false !default;
+
 @import '../../import-once';
 
 @mixin font-face-styles($path) {
@@ -71,7 +73,7 @@
 }
 
 @include exports('font-face') {
-  @if $use-fonts == true {
+  @if global-variable-exists(use-fonts) and $use-fonts == true {
     @include font-face-styles('/assets/fonts');
   }
 }

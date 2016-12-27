@@ -1,3 +1,5 @@
+// $use-globals: true !default;
+
 @import '../import-once';
 
 @mixin body-styles {
@@ -32,7 +34,7 @@
 }
 
 @include exports('body') {
-  @if $use-globals == true {
+  @if global-variable-exists(use-globals) and $use-globals == true {
     @include body-styles;
   }
 }
