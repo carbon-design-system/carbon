@@ -2,18 +2,20 @@
 // Card
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
-@import '../../base-elements/buttons/buttons';
+@import '../../global/colors/colors';
+@import '../../base-elements/buttons/vars';
+@import '../../base-elements/buttons/mixins';
 @import '../overflow-menu/overflow-menu';
-
-// Local
 @import 'vars';
 @import 'mixins';
+@import '../../import-once';
 
-// GENERAL CARD STYLES
+@include exports('card') {
+
 .bx--card {
+  @include reset;
   @include box-shadow;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 12.5rem;
@@ -31,6 +33,8 @@
 .bx--card {
 
   &__card-overview {
+    @include reset;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -45,6 +49,8 @@
   }
 
   &__card-footer {
+    @include reset;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -58,6 +64,8 @@
 }
 
 .bx--card-overview__about {
+  @include reset;
+  box-sizing: border-box;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -67,21 +75,27 @@
   margin-right: -2rem;
 
   .bx--about__title {
+    @include reset;
+    box-sizing: border-box;
     font-weight: 300;
     padding-top: 1rem;
     margin-bottom: 1rem;
 
     &--name {
+      @include reset;
       @include font-size('18');
       @include font-smoothing;
       @include text-overflow(rem(180px));
+      box-sizing: border-box;
       font-weight: 400;
       margin-bottom: .25rem;
     }
 
     &--link {
+      @include reset;
       @include font-size('12');
       @include text-overflow(rem(180px));
+      box-sizing: border-box;
       color: $color__blue-30;
       text-decoration: none;
 
@@ -107,6 +121,8 @@
   }
 
   .bx--about__icon {
+    @include reset;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,6 +146,8 @@
 
 // APP CARD STYLES
 .bx--card-footer__app-status {
+  @include reset;
+  box-sizing: border-box;
 
   .active {
     display: flex;
@@ -284,4 +302,6 @@
   .bx--overview__details-button {
     @include btn--secondary;
   }
+}
+
 }
