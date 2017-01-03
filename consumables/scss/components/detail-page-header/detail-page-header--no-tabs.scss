@@ -2,13 +2,13 @@
 // Detail Page Header (no tabs)
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
+@import '../../global/layout/grid';
 @import '../../base-elements/links/links';
-
-// Local
 @import 'vars';
 @import 'mixins';
+@import '../../import-once';
+
+@include exports('detail-page-header--no-tabs') {
 
 .bx--detail-page-header--no-tabs {
   @include detail-page-header;
@@ -19,6 +19,8 @@
   padding-bottom: 1rem;
 
   &__link-wrapper {
+    @include reset;
+    box-sizing: border-box;
     color: $color__detail-page-header--text;
     text-decoration: none;
     background-color: $color__navy-gray-3;
@@ -39,8 +41,10 @@
   }
 
   &__info-title {
+    @include reset;
     @include font-size('23');
     @include font-smoothing;
+    box-sizing: border-box;
     display: flex;
     align-items: flex-start;
     padding-left: .5rem;
@@ -61,3 +65,6 @@
     }
   }
 }
+
+}
+

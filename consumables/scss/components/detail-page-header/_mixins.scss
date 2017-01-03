@@ -1,4 +1,6 @@
 @mixin detail-page-header {
+  @include reset;
+  box-sizing: border-box;
   background-color: $color__navy-gray-3;
   width: 100%;
 
@@ -8,6 +10,8 @@
 }
 
 @mixin detail-page-header-animated {
+  @include reset;
+  box-sizing: border-box;
   transition: 185ms transform;
   will-change: transform;
   transition-timing-function: cubic-bezier(.5, 0, .1, 1);
@@ -30,7 +34,9 @@
 }
 
 @mixin detail-page-header__tab-overrides {
+  @include reset;
   @include grid-container;
+  box-sizing: border-box;
   padding-top: 0;
   padding-bottom: 1rem;
   background-color: $color__navy-gray-3;
