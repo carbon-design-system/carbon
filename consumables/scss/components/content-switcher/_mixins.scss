@@ -1,4 +1,5 @@
 @mixin content-switcher($theme: 'dark') {
+  @include reset;
   @include font-size('14');
   background-color: transparent;
   display: flex;

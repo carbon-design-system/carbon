@@ -2,49 +2,46 @@
 // Content Switcher Default
 //-------------------------
 
-// Dependencies
-@import '../../global/global';
-
-// Local
+@import '../../global/colors/colors';
+@import '../../global/typography/typography';
 @import 'vars';
 @import 'extends';
 @import 'mixins';
-
-// import-once
 @import '../../import-once';
 
 @include exports('content-switcher--default') {
 
-  // Container
-  .bx--content-switcher {
-    display: flex;
+// Container
+.bx--content-switcher {
+  display: flex;
+}
+
+// Default (use with <button> and <a>)
+.bx--content-switcher__btn {
+  @include content-switcher;
+
+  @include light-ui {
+    @include content-switcher('light');
+  }
+}
+
+// Selected
+.bx--content-switcher__btn.bx--content-switcher--selected {
+  background-color: $color__blue-30;
+  color: $color__blue-90;
+  font-weight: 400;
+
+  &:hover {
+    border-color: $color__blue-30;
   }
 
-  // Default (use with <button> and <a>)
-  .bx--content-switcher__btn {
-    @include content-switcher;
-
-    @include light-ui {
-      @include content-switcher('light');
-    }
-  }
-
-  // Selected
-  .bx--content-switcher__btn.bx--content-switcher--selected {
-    background-color: $color__blue-30;
-    color: $color__blue-90;
+  @include light-ui {
+    background-color: $color__blue-51;
+    color: $color__white;
     font-weight: 400;
 
-    &:hover {
-      border-color: $color__blue-30;
-    }
-
-    @include light-ui {
-      background-color: $color__blue-51;
-      color: $color__white;
-      font-weight: 400;
-
-      &:hover { border-color: $color__blue-51; }
-    }
+    &:hover { border-color: $color__blue-51; }
   }
+}
+
 }
