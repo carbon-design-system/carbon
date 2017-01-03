@@ -52,16 +52,16 @@ When you do `git remote -v`, you'll see these remotes:
 
 * Always work in a branch.
 * Submit pull requests from a branch.
+* All commits must follow the convention outlined [here](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md).
 * *Do not submit pull requests from the `master` branch of your fork.*
 
 ```
 git checkout -b { YOUR_BRANCH_NAME }
 git add .
-git commit -m "Update header with newest designs, resolves #123"
+git commit -m "fix(table): IE11 positioning error" -m "Fixes #34"
 ```
 
 * [Close a commit via commit message](https://help.github.com/articles/closing-issues-via-commit-messages/)
-* [Writing good commit messages](https://github.com/erlang/otp/wiki/Writing-good-commit-messages)
 
 ## 5. Test your JavaScript code
 
@@ -94,7 +94,7 @@ Other options for testing are:
 
 ## 6. Make a Pull Request
 
-**Note:** Before you make a pull request, [search](https://github.ibm.com/Bluemix/bluemix-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.  
+**Note:** Before you make a pull request, [search](https://github.ibm.com/Bluemix/bluemix-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.
 
 When you're at a good stopping place and you're ready for feedback from other contributors and maintainers, **push your commits to your fork**:
 

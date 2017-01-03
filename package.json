@@ -11,6 +11,7 @@
     }
   ],
   "scripts": {
+    "commitmsg": "validate-commit-msg",
     "prebuild": "gulp clean",
     "build": "gulp build",
     "serve": "nodemon -e dust,js server.js",
@@ -44,6 +45,7 @@
     "babel-runtime": "^6.20.0",
     "browser-sync": "~2.10.0",
     "chai": "~3.4.1",
+    "cz-conventional-changelog": "^1.2.0",
     "del": "~2.0.2",
     "es6-weak-map": "^2.0.1",
     "eslint": "~1.10.3",
@@ -59,6 +61,7 @@
     "gulp-sourcemaps": "~1.6.0",
     "gulp-util": "~3.0.7",
     "html-loader": "^0.4.4",
+    "husky": "^0.12.0",
     "karma": "~0.13.19",
     "karma-chrome-launcher": "~0.2.2",
     "karma-coverage": "~1.1.0",
@@ -81,6 +84,7 @@
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0",
     "svgxuse": "1.1.22",
+    "validate-commit-msg": "^2.8.2",
     "webpack": "~1.12.9"
   },
   "repository": {
@@ -105,5 +109,27 @@
     "sass",
     "scss",
     "style guide"
-  ]
+  ],
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "Subject does not match subject pattern!"
+    },
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
