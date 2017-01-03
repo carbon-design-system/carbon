@@ -1,5 +1,10 @@
-@import '../../global/global';
+@import '../../global/colors/colors';
+@import '../../global/typography/typography';
+@import '../../global/layout/grid';
 @import 'mixins';
+@import '../../import-once';
+
+@include exports('tags') {
 
 .tag--ibm {
   @include tag($color__blue-20);
@@ -65,3 +70,6 @@
     color: $color__yellow-60;
   }
 }
+
+}
+
