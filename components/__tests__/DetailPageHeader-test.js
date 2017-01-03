@@ -86,6 +86,20 @@ describe('DetailPageHeader', () => {
       expect(icon.props().className).toEqual('bx--detail-page-header--with-tabs__arrow');
       expect(link.find('.bx--detail-page-header--with-tabs__breadcrumb-title').length).toEqual(1);
     });
+
+    it('should be able to hide the breadcrumb', () => {
+      const nobreadcrumbWrapper = shallow(
+        <DetailPageHeader
+          title="test"
+          hideBreadcrumb
+          onBackLinkClick={() => {}}
+        >
+          <div className="child"></div>
+        </DetailPageHeader>
+      );
+      const breadcrumb = nobreadcrumbWrapper.find('.bx--detail-page-header--with-tabs__breadcrumb');
+      expect(breadcrumb.hasClass('bx--visually-hidden')).toBe(true);
+    });
   });
 
   describe('props with no child passed', () => {
