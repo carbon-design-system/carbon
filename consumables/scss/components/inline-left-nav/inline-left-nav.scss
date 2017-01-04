@@ -2,237 +2,254 @@
 // Inline Left Nav
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
-
-// import-once
+@import '../../global/colors/colors';
+@import '../../global/typography/typography';
 @import '../../import-once';
 
 @include exports('inline-left-nav') {
-  .bx--inline-left-nav {
+
+.bx--inline-left-nav {
+  @include reset;
+  box-sizing: border-box;
+  width: rem(250px);
+  position: fixed;
+  top: rem(90px);
+  height: 100%;
+  background-color: $color__navy-gray-3;
+  border-right: 1px solid $color__navy-gray-6;
+
+  @include light-ui {
+    background-color: $color__white;
+    border-right: 1px solid $color__gray-1;
+  }
+
+  .left-nav-list {
+    @include reset;
+    box-sizing: border-box;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    background-color: $color__navy-gray-3;
+    padding-top: 1.5rem;
+
     @include light-ui {
       background-color: $color__white;
-      border-right: 1px solid $color__gray-1;
     }
 
-    width: rem(250px);
-    position: fixed;
-    top: rem(90px);
-    height: 100%;
-    background-color: $color__navy-gray-3;
-    border-right: 1px solid $color__navy-gray-6;
-
-    .left-nav-list {
-      @include light-ui {
-        background-color: $color__white;
-      }
-
-      display: flex;
-      flex-direction: column;
-      background-color: $color__navy-gray-3;
-      padding-top: 1.5rem;
-
-      &__item {
-        cursor: pointer;
-        width: 100%;
-        padding: 0;
-
-        &--active {
-          & > .left-nav-list__item-link {
-            @include light-ui {
-              background-color: $color__gray-2;
-              color: $color__blue-51;
-            }
-            background-color: $color__navy-gray-2;
-            color: $color__blue-30;
-            font-weight: 600;
-          }
-        }
-
-        &-link {
-          @include font-size('14');
-          @include light-ui {
-            color: $color__navy-gray-3;
-          }
-
-          color: $color__white;
-          font-weight: 400;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          text-decoration: none;
-          transition: background-color $transition--base;
-          padding: .75rem 1.5rem .75rem rem(59px);
-        }
-
-        &-icon {
-          display: flex;
-
-          .bx--inline-left-nav__icon {
-            @include light-ui {
-              fill: $color__blue-51;
-            }
-
-            fill: $color__white;
-            width: rem(10px);
-            height: rem(10px);
-            transition: $transition--base;
-          }
-        }
-
-        &--expanded {
-          .left-nav-list--nested {
-            max-height: 20rem;
-            transition: .3s ease-in;
-            overflow: inherit;
-            opacity: 1;
-
-            .left-nav-list__item {
-              opacity: 1;
-            }
-          }
-
-          & > .left-nav-list__item-link {
-            @include light-ui {
-              color: $color__blue-51;
-            }
-            color: $color__blue-30;
-          }
-
-          .left-nav-list__item-icon .bx--inline-left-nav__icon {
-            transform: rotate(180deg);
-          }
-        }
-
-        &:not(.left-nav-list__item--has-children):hover {
-          & > .left-nav-list__item-link {
-            @include light-ui {
-              background-color: $color__gray-2;
-              color: $color__blue-51;
-            }
-            background-color: $color__navy-gray-2;
-            color: $color__blue-30;
-          }
-        }
-      }
-
-      &__item--has-children {
-        .left-nav-list__item-link {
-          padding-right: 1.5rem;
-        }
-
-        &:hover {
-          > .left-nav-list__item-link {
-            @include light-ui {
-              color: $color__blue-51;
-            }
-            color: $color__blue-30;
-          }
-        }
-      }
-    }
-
-    .left-nav-list--nested {
-      max-height: 0;
-      overflow: hidden;
-      transition: .3s ease-in-out;
-      padding: 0;
-      opacity: 0;
-
-      .left-nav-list__item {
-        width: 100%;
-        position: relative;
-        padding: 0;
-        transition: $transition--base;
-        opacity: 0;
-
-        &-link {
-          @include font-size('14');
-          @include light-ui {
-            color: $color__navy-gray-3;
-          }
-          color: $color__white;
-          padding: .75rem 1.35rem .75rem 4.5rem;
-          font-weight: 400;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        &:hover {
-          outline: none;
-        }
-
-        &--active {
-          @include light-ui {
-            color: $color__blue-51;
-            background-color: $color__gray-2;
-          }
-          color: $color__white;
-
-          & > .left-nav-list__item-link {
-            @include light-ui {
-              background-color: $color__gray-2;
-              color: $color__blue-51;
-            }
-            background-color: $color__navy-gray-2;
-            font-weight: 600;
-            color: $color__blue-30;
-          }
-        }
-      }
-    }
-
-    &__header {
-      @include light-ui {
-        border-bottom: 1px solid $color__gray-1;
-      }
-      border-bottom: 1px solid $color__navy-gray-6;
+    &__item {
+      @include reset;
+      box-sizing: border-box;
       cursor: pointer;
+      width: 100%;
+      padding: 0;
 
-      &--link {
-        @include font-smoothing;
-        @include light-ui {
-          color: $color__blue-51;
+      &--active {
+        & > .left-nav-list__item-link {
+          @include light-ui {
+            background-color: $color__gray-2;
+            color: $color__blue-51;
+          }
+          background-color: $color__navy-gray-2;
+          color: $color__blue-30;
+          font-weight: 600;
         }
+      }
+
+      &-link {
+        @include reset;
         @include font-size('14');
-        height: rem(50px);
-        text-decoration: none;
-        padding: 1.5rem 0 1rem 1.5rem;
-        display: flex;
-        font-weight: 600;
-        align-items: center;
+        @include light-ui {
+          color: $color__navy-gray-3;
+        }
+
+        box-sizing: border-box;
         color: $color__white;
+        font-weight: 400;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        transition: background-color $transition--base;
+        padding: .75rem 1.5rem .75rem rem(59px);
+      }
+
+      &-icon {
+        @include reset;
+        box-sizing: border-box;
+        display: flex;
 
         .bx--inline-left-nav__icon {
           @include light-ui {
             fill: $color__blue-51;
           }
-          width: rem(15px);
-          height: rem(15px);
-          margin-right: 1.25rem;
+
           fill: $color__white;
+          width: rem(10px);
+          height: rem(10px);
+          transition: $transition--base;
+        }
+      }
+
+      &--expanded {
+        .left-nav-list--nested {
+          max-height: 20rem;
+          transition: .3s ease-in;
+          overflow: inherit;
+          opacity: 1;
+
+          .left-nav-list__item {
+            opacity: 1;
+          }
         }
 
-        &:hover {
+        & > .left-nav-list__item-link {
           @include light-ui {
-            color: $color__blue-40;
+            color: $color__blue-51;
           }
-          color: $color__blue-20;
-
-          & > .bx--inline-left-nav__icon {
-            @include light-ui {
-              fill: $color__blue-40;
-            }
-            fill: $color__blue-20;
-          }
+          color: $color__blue-30;
         }
 
-        .previous-page {
-          margin-left: .3rem;
+        .left-nav-list__item-icon .bx--inline-left-nav__icon {
+          transform: rotate(180deg);
+        }
+      }
+
+      &:not(.left-nav-list__item--has-children):hover {
+        & > .left-nav-list__item-link {
+          @include light-ui {
+            background-color: $color__gray-2;
+            color: $color__blue-51;
+          }
+          background-color: $color__navy-gray-2;
+          color: $color__blue-30;
+        }
+      }
+    }
+
+    &__item--has-children {
+      .left-nav-list__item-link {
+        padding-right: 1.5rem;
+      }
+
+      &:hover {
+        > .left-nav-list__item-link {
+          @include light-ui {
+            color: $color__blue-51;
+          }
+          color: $color__blue-30;
         }
       }
     }
   }
+
+  .left-nav-list--nested {
+    max-height: 0;
+    overflow: hidden;
+    transition: .3s ease-in-out;
+    padding: 0;
+    opacity: 0;
+
+    .left-nav-list__item {
+      width: 100%;
+      position: relative;
+      padding: 0;
+      transition: $transition--base;
+      opacity: 0;
+
+      &-link {
+        @include font-size('14');
+        @include light-ui {
+          color: $color__navy-gray-3;
+        }
+        color: $color__white;
+        padding: .75rem 1.35rem .75rem 4.5rem;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &:hover {
+        outline: none;
+      }
+
+      &--active {
+        @include light-ui {
+          color: $color__blue-51;
+          background-color: $color__gray-2;
+        }
+        color: $color__white;
+
+        & > .left-nav-list__item-link {
+          @include light-ui {
+            background-color: $color__gray-2;
+            color: $color__blue-51;
+          }
+          background-color: $color__navy-gray-2;
+          font-weight: 600;
+          color: $color__blue-30;
+        }
+      }
+    }
+  }
+
+  &__header {
+    @include reset;
+    @include light-ui {
+      border-bottom: 1px solid $color__gray-1;
+    }
+    box-sizing: border-box;
+    border-bottom: 1px solid $color__navy-gray-6;
+    cursor: pointer;
+
+    &--link {
+      @include reset;
+      @include font-smoothing;
+      @include font-size('14');
+      @include light-ui {
+        color: $color__blue-51;
+      }
+      box-sizing: border-box;
+      height: rem(50px);
+      text-decoration: none;
+      padding: 1.5rem 0 1rem 1.5rem;
+      display: flex;
+      font-weight: 600;
+      align-items: center;
+      color: $color__white;
+
+      .bx--inline-left-nav__icon {
+        @include light-ui {
+          fill: $color__blue-51;
+        }
+        width: rem(15px);
+        height: rem(15px);
+        margin-right: 1.25rem;
+        fill: $color__white;
+      }
+
+      &:hover {
+        @include light-ui {
+          color: $color__blue-40;
+        }
+        color: $color__blue-20;
+
+        & > .bx--inline-left-nav__icon {
+          @include light-ui {
+            fill: $color__blue-40;
+          }
+          fill: $color__blue-20;
+        }
+      }
+
+      .previous-page {
+        @include reset;
+        box-sizing: border-box;
+        margin-left: .3rem;
+      }
+    }
+  }
+}
+
 }
