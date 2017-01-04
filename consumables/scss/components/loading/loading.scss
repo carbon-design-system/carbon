@@ -1,11 +1,18 @@
-@import '../../global/global';
+@import '../../global/colors/colors';
+@import '../../global/layout/grid';
+@import '../../global/helpers';
 @import 'vars';
 @import 'keyframes';
 @import 'mixins';
 @import 'extends';
+@import '../../import-once';
+
+@include exports('loading') {
 
 .bx--loading {
+  @include reset;
   @include animation__loading--spin;
+  box-sizing: border-box;
   width: $loading__size;
   height: $loading__size;
 
@@ -27,7 +34,7 @@
     @include animation__loading--stop;
   }
 
-  /** DEPRECATED **/
+  /** ☠ DEPRECATED **/
 
   // Animation for IE (Spin by default)
   // &.bx--loading--ie {
@@ -38,3 +45,6 @@
   //   @include animation__loading--stop--ie;
   // }
 }
+
+}
+
