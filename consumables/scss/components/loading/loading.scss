@@ -27,12 +27,14 @@
     @include animation__loading--stop;
   }
 
-  // Animation for IE (Spin by default)
-  &.bx--loading--ie {
-    @include animation__loading--spin--ie;
-  }
+  /** DEPRECATED **/
 
-  &.bx--loading--stop--ie {
-    @include animation__loading--stop--ie;
-  }
+  // Animation for IE (Spin by default)
+  // &.bx--loading--ie {
+  //   @include animation__loading--spin--ie;
+  // }
+  //
+  // &.bx--loading--stop--ie {
+  //   @include animation__loading--stop--ie;
+  // }
 }

@@ -22,21 +22,23 @@
   100% { stroke-dashoffset: 240; }
 }
 
-/* IE Specific */
-@keyframes ie-init-rotate {
-  0% {
-    transform: rotate(0deg);
-    opacity: 0;
-  }
+/** DEPRECATED **/
 
-  100% {
-    transform: rotate(360deg);
-    opacity: 1;
-  }
-}
-@keyframes ie-rotate-end-p2 {
-  100% {
-    opacity: 0;
-    transform: rotate(-360deg);
-  }
-}
+/* IE Specific */
+// @keyframes ie-init-rotate {
+//   0% {
+//     transform: rotate(0deg);
+//     opacity: 0;
+//   }
+//
+//   100% {
+//     transform: rotate(360deg);
+//     opacity: 1;
+//   }
+// }
+// @keyframes ie-rotate-end-p2 {
+//   100% {
+//     opacity: 0;
+//     transform: rotate(-360deg);
+//   }
+// }

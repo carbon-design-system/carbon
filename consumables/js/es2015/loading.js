@@ -19,13 +19,6 @@ export default class Loading {
     this.element = element;
     this.options = Object.assign(Object.create(this.constructor.options), options);
     this.active = this.options.active;
-    this.ie = false;
-
-    // Check if browser is Internet Explorer
-    if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
-      this.ie = true;
-      this.element.classList.add('bx--loading--ie');
-    }
 
     this.constructor.components.set(this.element, this);
 
@@ -72,10 +65,6 @@ export default class Loading {
     }
 
     this.active = active;
-
-    if (this.ie) {
-      toggleClass(this.element, 'bx--loading--stop--ie', !this.active);
-    }
     toggleClass(this.element, 'bx--loading--stop', !this.active);
 
     return this;
