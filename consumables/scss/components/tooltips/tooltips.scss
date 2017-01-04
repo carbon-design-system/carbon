@@ -1,13 +1,19 @@
-@import '../../global/global';
+@import '../../global/colors/colors';
+@import '../../global/typography/typography';
+@import '../../global/layout/grid';
 @import 'vars';
+@import '../../import-once';
 
+@include exports('tooltips') {
 
 .bx--tooltip {
 
   // Element: when hovered or focused will show tooltip
   &__top,
   &__bottom {
+    @include reset;
     @include font-size('16');
+    box-sizing: border-box;
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -99,4 +105,6 @@
       transform:rotate(-135deg);
     }
   }
+}
+
 }
