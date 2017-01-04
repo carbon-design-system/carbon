@@ -1,7 +1,6 @@
 @import '../../global/colors/colors';
 @import '../../global/helpers';
 @import '../../global/layout/grid';
-@import 'vars';
 @import '../../import-once';
 
 @include exports('fab') {
@@ -27,12 +26,12 @@
 
     .bx--fab__hexagon {
       transition: fill $transition--base;
-      fill: $color__fab-hexagon;
+      fill: $color__blue-40;
     }
 
     .bx--fab__plus-icon {
       @include rotate(0, $transition--base);
-      fill: $color__fab-plus-icon;
+      fill: $color__white;
     }
   }
 
@@ -42,7 +41,7 @@
 
     .bx--fab__hexagon {
       transition: fill $transition--base;
-      fill: $color__fab-hexagon--is-closed;
+      fill: $color__navy-gray-5;
     }
 
     .bx--fab__plus-icon {
