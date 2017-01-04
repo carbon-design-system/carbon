@@ -13,12 +13,12 @@
   }
 
   &:first-of-type {
-    border-bottom-left-radius: $border__content-switcher-radius;
-    border-top-left-radius: $border__content-switcher-radius;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
   }
 
   &:last-of-type {
-    border-top-right-radius: $border__content-switcher-radius;
-    border-bottom-right-radius: $border__content-switcher-radius;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 }
