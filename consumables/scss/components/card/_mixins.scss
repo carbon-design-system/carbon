@@ -14,7 +14,7 @@
       width: rem(20px);
       border-radius: 100%;
       margin-right: .75rem;
-      background-color: $color__card-running;
+      background-color: $color__green-30;
     }
   }
 
@@ -26,7 +26,7 @@
       width: rem(20px);
       border-radius: 100%;
       margin-right: .75rem;
-      background-color: $color__card-not-running;
+      background-color: $color__red-40;
     }
   }
 
@@ -38,7 +38,7 @@
       width: rem(20px);
       border-radius: 100%;
       margin-right: .75rem;
-      background-color: $color__card-stopped;
+      background-color: $color__navy-gray-6;
     }
   }
 
@@ -50,7 +50,7 @@
       width: rem(20px);
       border-radius: 100%;
       margin-right: .75rem;
-      background-color: $color__card-limited;
+      background-color: $color__yellow-30;
     }
   }
 }
