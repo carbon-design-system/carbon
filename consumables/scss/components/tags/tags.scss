@@ -71,5 +71,13 @@
   }
 }
 
+.tag--deprecated {
+  @include tag($color__red-30);
+
+  @include light-ui {
+    background-color: $color__red-10;
+    color: $color__red-60;
+  }
 }
 
+}
