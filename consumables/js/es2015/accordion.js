@@ -20,6 +20,7 @@ export default class Accordion {
 
     [... this.element.querySelectorAll(this.options.accordionItem)].forEach(item => {
       item.addEventListener('click', (event) => this.handleClick(event));
+      item.addEventListener('keypress', (event) => this.handleKeypress(event));
     });
   }
 
@@ -52,11 +53,19 @@ export default class Accordion {
   }
 
   /**
-   * Increase/decrease number by clicking on up/down icons.
+   * Handles toggling of active state of accordion
    * @param {Event} event The event triggering this method.
    */
   handleClick(event) {
     event.currentTarget.classList.toggle('bx--accordion__item--active');
+  }
+
+  /**
+   * Handles toggling of active state of accordion via keyboard
+   * @param {Event} event The event triggering this method.
+   */
+  handleKeypress(event) {
+    if (event.keyCode === 13 || event.keyCode === 32) this.handleClick(event);
   }
 
   release() {
