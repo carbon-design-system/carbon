@@ -1,6 +1,12 @@
-@import '../../global/global';
+@import '../../import-once';
+@import '../../base-elements/select/select';
+@import '../../base-elements/text/text';
+
+@include exports('pagination') {
 
 .bx--pagination {
+  @include reset;
+  box-sizing: border-box;
   width: 100%;
   background-color: $color__navy-gray-2;
   padding: .25rem 1rem;
@@ -12,18 +18,24 @@
   }
 
   &__left {
+    @include reset;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
   }
 
   &__right {
+    @include reset;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     margin-left: auto;
   }
 
   &__text {
+    @include reset;
     @include font-size('14');
+    box-sizing: border-box;
     color: $color__white;
     font-weight: 300;
 
@@ -33,11 +45,14 @@
   }
 
   &__button {
+    box-sizing: border-box;
     border: none;
     background: none;
     cursor: pointer;
 
     div {
+      @include reset;
+      box-sizing: border-box;
       display: flex;
       align-items: center;
     }
@@ -54,11 +69,13 @@
     }
 
     &--backward {
+      box-sizing: border-box;
       margin-left: rem(20px);
       margin-right: rem(20px);
     }
 
     &--forward {
+      box-sizing: border-box;
       margin-left: rem(20px);
     }
   }
@@ -92,3 +109,6 @@
     text-align: center;
   }
 }
+
+}
+
