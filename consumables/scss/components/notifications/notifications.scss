@@ -2,154 +2,153 @@
 // Notifications
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
-
-// Local
+@import '../../global/colors/colors';
+@import '../../global/typography/typography';
+@import '../../global/layout/grid';
 @import 'mixins';
-
-// import-once
 @import '../../import-once';
 
 @include exports('notifications') {
-  // light-ui (6.x and 7.x)
+
+// light-ui (6.x and 7.x)
+.bx--notification__subtitle,
+.bx--notification__caption {
+  @include light-ui {
+    color: $color__navy-gray-6;
+  }
+}
+
+.bx--notification__close-button {
+  @include light-ui {
+    background-color: $color__white;
+  }
+}
+
+.bx--notification__icon {
+  @include light-ui {
+    fill: $color__blue-90;
+  }
+}
+
+
+// 6.x
+.bx--notification {
+  @include bx--notification--themes('6.x');
+
+  // Common styles for child elements
+  &__title {
+    @include font-size('23');
+    margin: .4rem 0;
+  }
+
+  &__subtitle {
+    margin-top: .4rem;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    color: $color__white;
+  }
+
+  &__caption {
+    margin: .4rem 0;
+  }
+
+  &__close-button {
+    background-color: $color__navy-gray-2;
+    border: none;
+    cursor: pointer;
+    padding: .1rem;
+  }
+
+  &__icon {
+    fill: $color__blue-20;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+// 7.x
+.bx--notification--new {
+  @include bx--notification--themes('7.x');
+
+  // Common styles for child elements
+  .bx--notification__title {
+    @include font-size('14');
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
   .bx--notification__subtitle,
   .bx--notification__caption {
-    @include light-ui {
-      color: $color__navy-gray-6;
-    }
+    @include font-size('12');
+  }
+
+  .bx--notification__subtitle {
+    margin-top: 0;
+    margin-bottom: .75rem;
   }
 
   .bx--notification__close-button {
-    @include light-ui {
-      background-color: $color__white;
-    }
+    @include close--button;
+    align-self: flex-start;
   }
 
   .bx--notification__icon {
+    @include close--icon;
+  }
+}
+
+.bx--notification-inline {
+  // Theming mixins for notifications
+  &--error  {
+    @include notification--inline($color__red-40);
     @include light-ui {
-      fill: $color__blue-90;
+      @include notification--inline($color__red-50);
+    }
+  }
+  &--success { @include notification--inline($color__green-30); }
+  &--info    { @include notification--inline($color__blue-20); }
+  &--warning { @include notification--inline($color__yellow-30); }
+
+  &__details {
+    display: flex;
+    align-items: center;
+    height: auto;
+  }
+
+  &__text {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 .875rem;
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+      width: 100%;
     }
   }
 
-
-  // 6.x
-  .bx--notification {
-    @include bx--notification--themes('6.x');
-
-    // Common styles for child elements
-    &__title {
-      @include font-size('23');
-      margin: .4rem 0;
-    }
-
-    &__subtitle {
-      margin-top: .4rem;
-      margin-left: 0;
-      margin-right: 0;
-      margin-bottom: 1rem;
-      color: $color__white;
-    }
-
-    &__caption {
-      margin: .4rem 0;
-    }
-
-    &__close-button {
-      background-color: $color__navy-gray-2;
-      border: none;
-      cursor: pointer;
-      padding: .1rem;
-    }
-
-    &__icon {
-      fill: $color__blue-20;
-      width: 22px;
-      height: 22px;
-    }
+  &__title,
+  &__subtitle {
+    @include font-size('14');
   }
 
-  // 7.x
-  .bx--notification--new {
-    @include bx--notification--themes('7.x');
-
-    // Common styles for child elements
-    .bx--notification__title {
-      @include font-size('14');
-      font-weight: 700;
-      letter-spacing: 0;
-    }
-
-    .bx--notification__subtitle,
-    .bx--notification__caption {
-      @include font-size('12');
-    }
-
-    .bx--notification__subtitle {
-      margin-top: 0;
-      margin-bottom: .75rem;
-    }
-
-    .bx--notification__close-button {
-      @include close--button;
-      align-self: flex-start;
-    }
-
-    .bx--notification__icon {
-      @include close--icon;
-    }
+  &__title {
+    font-weight: 700;
+    margin-right: .25rem;
   }
 
-  .bx--notification-inline {
-    // Theming mixins for notifications
-    &--error  {
-      @include notification--inline($color__red-40);
-      @include light-ui {
-        @include notification--inline($color__red-50);
-      }
-    }
-    &--success { @include notification--inline($color__green-30); }
-    &--info    { @include notification--inline($color__blue-20); }
-    &--warning { @include notification--inline($color__yellow-30); }
-
-    &__details {
-      display: flex;
-      align-items: center;
-      height: auto;
-    }
-
-    &__text {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0 .875rem;
-
-      @media (max-width: 640px) {
-        flex-direction: column;
-        width: 100%;
-      }
-    }
-
-    &__title,
-    &__subtitle {
-      @include font-size('14');
-    }
-
-    &__title {
-      font-weight: 700;
-      margin-right: .25rem;
-    }
-
-    &__close-button {
-      @include close--button;
-      justify-content: center;
-    }
-
-    &__icon--left {
-      @include inline--icon;
-    }
-
-    &__icon--right {
-      @include close--icon;
-    }
+  &__close-button {
+    @include close--button;
+    justify-content: center;
   }
+
+  &__icon--left {
+    @include inline--icon;
+  }
+
+  &__icon--right {
+    @include close--icon;
+  }
+}
+
 }

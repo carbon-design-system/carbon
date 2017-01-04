@@ -3,7 +3,9 @@
 //-------------------------------
 
 @mixin notification--base($color, $new: false) {
+  @include reset;
   @include font-smoothing;
+  box-sizing: border-box;
   display: flex;
   flex: 1;
   justify-content: space-between;
@@ -95,8 +97,10 @@
 //-------------------------------
 
 @mixin notification--inline($color) {
+  @include reset;
   @include font-smoothing;
   @include font-size('14');
+  box-sizing: border-box;
   background-color: transparent;
   display: flex;
   flex: 1;
@@ -126,6 +130,7 @@
 }
 
 @mixin close--button {
+  box-sizing: border-box;
   background-color: transparent;
   display: flex;
   align-items: center;
