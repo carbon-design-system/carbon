@@ -105,8 +105,7 @@
       }
     }
 
-    // Focus Styles
-    &:focus + &__label &__appearance {
+    &:focus + &__label {
       @include focus-outline;
     }
   }
@@ -126,17 +125,6 @@
         background-color: $color__blue-30;
         box-shadow: none;
         border-color: $color__blue-51;
-      }
-    }
-
-    // If :checked, make right-label white
-    // else, make left-label white
-    .bx--toggle:checked + .bx--toggle__label &__text--right,
-    .bx--toggle:not(:checked) + .bx--toggle__label &__text--left {
-      color: $color__white;
-
-      @include light-ui {
-        color: $color__blue-90;
       }
     }
   }
