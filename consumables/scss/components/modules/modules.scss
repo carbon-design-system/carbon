@@ -2,14 +2,14 @@
 // Modals
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
+@import '../../global/layout/grid';
 @import '../../base-elements/buttons/buttons';
-
-// Local
 @import 'vars';
 @import 'extends';
 @import 'mixins';
+@import '../../import-once';
+
+@include exports('modules') {
 
 // This is a section of modules
 .bx--module {
@@ -109,4 +109,6 @@
   &__footer {
     padding: $module--margin;
   }
+}
+
 }
