@@ -1,8 +1,15 @@
-@import '../../global/global';
+@import '../../global/colors/colors';
+@import '../../global/helpers';
+@import '../../global/layout/grid';
 @import 'vars';
+@import '../../import-once';
+
+@include exports('fab') {
 
 .bx--fab {
+  @include reset;
   @include rotate(0, $transition--base);
+  box-sizing: border-box;
   display: inline-block;
   width: rem(72px);
   height: rem(72px);
@@ -43,3 +50,6 @@
     }
   }
 }
+
+}
+
