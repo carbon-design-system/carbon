@@ -5,7 +5,6 @@
 @import '../../global/colors/colors';
 @import '../../global/typography/typography';
 @import '../../global/layout/grid';
-@import 'vars';
 @import '../../import-once';
 
 @include exports('overflow-menu') {
@@ -59,7 +58,7 @@
       display: block;
       width: .75rem;
       height: .75rem;
-      background-color: $color--list-bg;
+      background-color: $color__navy-gray-3;
       content: '';
       transform: rotate(45deg);
 
@@ -92,7 +91,7 @@
     }
 
     &:hover {
-      background: $color--list-bg--hover;
+      background: $color__blue-30;
       color: $color__blue-90;
 
       @include light-ui {
@@ -123,7 +122,6 @@
   &.bx--overflow-menu--open {
     .bx--overflow-menu__icon {
       color: $color__white;
-      box-shadow: 0px 0px 2px 2px $color--focus-outline; // styles to imitate a focus outline
     }
 
     .bx--overflow-menu__options {
