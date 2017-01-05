@@ -11,6 +11,7 @@ export CardFooter from './components/CardFooter';
 export CardStatus from './components/CardStatus';
 export Checkbox from './components/Checkbox';
 export ContentSwitcher from './components/ContentSwitcher';
+export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
 export DetailPageHeader from './components/DetailPageHeader';
 export Dropdown from './components/Dropdown';
