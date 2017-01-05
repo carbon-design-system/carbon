@@ -1,6 +1,7 @@
 @import '../../import-once';
 @import '../../base-elements/select/select';
 @import '../../base-elements/text/text';
+@import '../../global/css-helpers';
 
 @include exports('pagination') {
 

@@ -64,6 +64,19 @@ $color__box-shadow: rgba(0, 0, 0, .1);
   }
 }
 
+@mixin hidden {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0, 0, 0, 0);
+  border:0;
+  visibility: visible;
+  white-space: nowrap;
+}
+
 //-------------------------
 // ☠️ Deprecated
 //-------------------------
@@ -96,23 +109,4 @@ $shadow: 2px 2px 8px rgba(0, 0, 0, .4);
 %focus-outline {
   outline: 1px dotted; // for non-webkit browsers
   outline: auto 5px -webkit-focus-ring-color; // webkit default
-}
-
-@mixin hidden {
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0, 0, 0, 0);
-  border:0;
-  visibility: visible;
-  white-space: nowrap;
-}
-
-@include exports('helpers') {
-  .bx--visually-hidden {
-    @include hidden;
-  }
 }
