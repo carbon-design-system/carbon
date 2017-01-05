@@ -127,7 +127,7 @@
         background: none;
 
         @include light-ui {
-          background-color: $color__white;
+          background-color: transparent;
         }
       }
     }
@@ -138,6 +138,10 @@
 
       &+& {
         margin-left: rem(48px);
+      }
+
+      @include light-ui {
+        background-color: transparent;
       }
     }
   }
