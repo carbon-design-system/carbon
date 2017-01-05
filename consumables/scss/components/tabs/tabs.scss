@@ -5,7 +5,6 @@
 @import '../../global/colors/colors';
 @import '../../global/typography/typography';
 @import '../../global/layout/grid';
-@import 'vars';
 @import '../../import-once';
 
 @include exports('tabs') {
@@ -45,7 +44,7 @@
     svg {
       width: rem(12px);
       height: rem(12px);
-      fill: $color__tabs--caret;
+      fill: $color__blue-30;
 
       @include light-ui {
         fill: $color__blue-51;
@@ -150,7 +149,7 @@
     @include reset;
     box-sizing: border-box;
     display: inline-block;
-    color: $color__tabs--text;
+    color: $color__white;
     text-decoration: none;
 
     @include light-ui {
@@ -162,7 +161,7 @@
       margin-bottom: 1px;
 
       &:hover {
-        color: $color__tabs--selected;
+        color: $color__blue-30;
 
         @include light-ui {
           color: $color__blue-51;
@@ -173,18 +172,18 @@
 }
 
 .bx--tabs--selected {
-  color: $color__tabs--text;
+  color: $color__white;
   border: none;
 
   @include breakpoint(bp--sm--major) {
-    border-bottom: 2px solid $color__tabs--selected;
+    border-bottom: 2px solid $color__blue-30;
 
     @include light-ui {
       border-bottom: 2px solid $color__blue-51;
     }
 
     a {
-      color: $color__tabs--selected;
+      color: $color__blue-30;
 
       @include light-ui {
         color: $color__blue-51;
