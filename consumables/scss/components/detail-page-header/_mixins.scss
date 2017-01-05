@@ -26,6 +26,10 @@
   width: 16px;
   height: 16px;
   fill: $color__blue-30;
+  
+  @include light-ui {
+    fill: $color__blue-51;
+  }
 
   @include breakpoint(bp--xs--major) {
     position: relative;
@@ -40,6 +44,10 @@
   padding-top: 0;
   padding-bottom: 1rem;
   background-color: $color__navy-gray-3;
+
+  @include light-ui {
+    background-color: $color__white;
+  }
 
   @include breakpoint(bp--xs--major) {
     background-color: $color__navy-gray-3;

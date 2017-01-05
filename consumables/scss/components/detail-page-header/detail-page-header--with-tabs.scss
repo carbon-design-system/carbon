@@ -3,7 +3,6 @@
 //-----------------------------
 
 @import '../tabs/tabs';
-@import 'vars';
 @import 'extends';
 @import 'mixins';
 @import '../../import-once';
@@ -113,12 +112,21 @@
     padding-left: .5rem;
     margin-left: .5rem;
     font-weight: 200;
-    border-left: 1px solid $color__detail-page-header--border;
+    border-left: 1px solid $color__navy-gray-4;
+
+    @include light-ui {
+      border-left: 1px solid $color__navy-gray-8;
+      color: $color__navy-gray-6;
+    }
 
     @include breakpoint(bp--xs--major) {
       padding-left: 0;
       margin-left: 0;
       border-left: none;
+      
+      @include light-ui {
+        border-left: none;
+      }
     }
 
     @include breakpoint(bp--sm--major) {

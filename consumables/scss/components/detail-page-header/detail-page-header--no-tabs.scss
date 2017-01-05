@@ -4,7 +4,6 @@
 
 @import '../../global/layout/grid';
 @import '../../base-elements/links/links';
-@import 'vars';
 @import 'mixins';
 @import '../../import-once';
 
@@ -21,7 +20,7 @@
   &__link-wrapper {
     @include reset;
     box-sizing: border-box;
-    color: $color__detail-page-header--text;
+    color: $color__white;
     text-decoration: none;
     background-color: $color__navy-gray-3;
     cursor: pointer;
@@ -50,10 +49,11 @@
     padding-left: .5rem;
     margin-left: .5rem;
     font-weight: 200;
-    border-left: 1px solid $color__detail-page-header--border;
+    border-left: 1px solid $color__navy-gray-4;
 
     @include light-ui {
       color: $color__navy-gray-6;
+      border-left: 1px solid $color__navy-gray-8;
     }
 
     @include breakpoint(bp--xs--major) {

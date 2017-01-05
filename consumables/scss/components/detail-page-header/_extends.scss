@@ -3,7 +3,7 @@
 //-------------------------
 
 %detail-page-header {
-  background-color: $color__detail-page-header--bg;
+  background-color: $color__navy-gray-2;
 }
 
 %detail-page-header__arrow {
@@ -29,17 +29,17 @@
   .tabs__trigger,
   .nav__item,
   .nav__item.selected {
-    background-color: $color__detail-page-header__tabs--bg;
+    background-color: $color__navy-gray-3;
 
     @include breakpoint(bp--sm--major) {
-      background-color: $color__detail-page-header__tabs--bg--small;
+      background-color: $color__navy-gray-2;
     }
 
     &:focus,
     &:hover {
 
       @include breakpoint(bp--sm--major) {
-        background-color: $color__detail-page-header__tabs--bg--small;
+        background-color: $color__navy-gray-2;
       }
     }
   }
