@@ -6,23 +6,52 @@ You may also need to set up your SSH key on **Jenkins** or **Travis** if you use
 
 ## npm
 
-Bluemix Components is published to a private npm registry maintained by Bluemix Ops Console team.
+Bluemix Components is published on all three available sinopia registries provided by [OpsConsole/console-npm](https://github.ibm.com/OpsConsole/console-npm): **production, integration and development**.
 
-Before installing with npm,
-you must create an **.npmrc** file - you can create this in the root of your project folder or on your computer's **~** directory.
+Recommended: create this file in your `~` directory so that all of your projects can use this configuration. 
 
-```
-$ touch .npmrc
-```
+> Note: You can still `npm install` packages normally from the public npm registry while using **.npmrc** configuration for private registries.
 
-Next, write the following into your **.npmrc** file:
+Create an **.npmrc** file. 
 
-```
-//dev-console-npm.stage1.ng.bluemix.net/:_authToken="u6vjQywpRv51/eKBiRcAFA=="
-@console:registry=https://dev-console-npm.stage1.ng.bluemix.net/
+```sh
+$ touch ~/.npmrc
 ```
 
-If you haven't done so already, create a **package.json** for your project:
+There are **three** private registries that you can use; `bluemix-components` will be published to all the registries.
+Set up involves:
+- Setting the npm registry you want to use
+- Adding yourself as a user to produce your `authToken`
+
+Set the private registry you want to use:
+
+**Production:**
+```sh
+npm set registry https://console-npm.ng.bluemix.net
+npm adduser --registry https://console-npm.ng.bluemix.net
+```
+
+**Integration:**
+```sh
+npm set registry https://int-console-npm.ng.bluemix.net
+npm adduser --registry https://int-console-npm.ng.bluemix.net
+```
+
+**Development:**
+```sh
+npm set registry https://dev-console-npm.stage1.ng.bluemix.net
+npm adduser --registry https://dev-console-npm.stage1.ng.bluemix.net
+```
+
+Follow the prompts and use the following information; the prompts are all the same for all registries:
+
+```
+Username: dev
+Password: bmDev
+Email: { YOUR_IBM_EMAIL }
+```
+
+Create a **package.json** for your project:
 
 ```
 $ npm init
