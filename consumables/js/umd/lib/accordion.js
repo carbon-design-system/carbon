@@ -59,6 +59,9 @@
         item.addEventListener('click', function (event) {
           return _this.handleClick(event);
         });
+        item.addEventListener('keypress', function (event) {
+          return _this.handleKeypress(event);
+        });
       });
     }
 
@@ -72,6 +75,11 @@
       key: 'handleClick',
       value: function handleClick(event) {
         event.currentTarget.classList.toggle('bx--accordion__item--active');
+      }
+    }, {
+      key: 'handleKeypress',
+      value: function handleKeypress(event) {
+        if (event.keyCode === 13 || event.keyCode === 32) this.handleClick(event);
       }
     }, {
       key: 'release',

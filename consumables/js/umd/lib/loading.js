@@ -56,13 +56,6 @@
       this.element = element;
       this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
       this.active = this.options.active;
-      this.ie = false;
-
-      // Check if browser is Internet Explorer
-      if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
-        this.ie = true;
-        this.element.classList.add('bx--loading--ie');
-      }
 
       this.constructor.components.set(this.element, this);
 
@@ -84,10 +77,6 @@
         }
 
         this.active = active;
-
-        if (this.ie) {
-          (0, _toggleClass2.default)(this.element, 'bx--loading--stop--ie', !this.active);
-        }
         (0, _toggleClass2.default)(this.element, 'bx--loading--stop', !this.active);
 
         return this;

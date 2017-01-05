@@ -2450,13 +2450,6 @@ var BluemixComponents =
 	    this.element = element;
 	    this.options = Object.assign(Object.create(this.constructor.options), options);
 	    this.active = this.options.active;
-	    this.ie = false;
-	
-	    // Check if browser is Internet Explorer
-	    if (options.ie || window.ActiveXObject || 'ActiveXObject' in window) {
-	      this.ie = true;
-	      this.element.classList.add('bx--loading--ie');
-	    }
 	
 	    this.constructor.components.set(this.element, this);
 	
@@ -2484,10 +2477,6 @@ var BluemixComponents =
 	      }
 	
 	      this.active = active;
-	
-	      if (this.ie) {
-	        (0, _toggleClass2.default)(this.element, 'bx--loading--stop--ie', !this.active);
-	      }
 	      (0, _toggleClass2.default)(this.element, 'bx--loading--stop', !this.active);
 	
 	      return this;
@@ -6164,6 +6153,9 @@ var BluemixComponents =
 	      item.addEventListener('click', function (event) {
 	        return _this.handleClick(event);
 	      });
+	      item.addEventListener('keypress', function (event) {
+	        return _this.handleKeypress(event);
+	      });
 	    });
 	  }
 	
@@ -6178,11 +6170,22 @@ var BluemixComponents =
 	
 	
 	    /**
-	     * Increase/decrease number by clicking on up/down icons.
+	     * Handles toggling of active state of accordion
 	     * @param {Event} event The event triggering this method.
 	     */
 	    value: function handleClick(event) {
 	      event.currentTarget.classList.toggle('bx--accordion__item--active');
+	    }
+	
+	    /**
+	     * Handles toggling of active state of accordion via keyboard
+	     * @param {Event} event The event triggering this method.
+	     */
+	
+	  }, {
+	    key: 'handleKeypress',
+	    value: function handleKeypress(event) {
+	      if (event.keyCode === 13 || event.keyCode === 32) this.handleClick(event);
 	    }
 	  }, {
 	    key: 'release',
