@@ -93,8 +93,8 @@ const Icon = ({ className, width, height, fill, fillRule, name, style, descripti
     name,
     style,
     viewBox: icon.viewBox,
-    width: icon.width || width,
-    height: icon.height || height,
+    width: width || icon.width,
+    height: height || icon.height,
   };
 
   const svgContent = (icon) ? svgShapes(icon.svgData) : '';

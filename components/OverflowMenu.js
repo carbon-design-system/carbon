@@ -93,6 +93,7 @@ class OverflowMenu extends Component {
             className="bx--overflow-menu__icon"
             name="overflow-menu"
             description={iconDescription}
+            width="auto"
           />
           <ul className="bx--overflow-menu__options">
             {children}
