@@ -1,6 +1,14 @@
-@import '../../global/global';
+@import '../../global/colors/colors';
+@import '../../global/layout/grid';
+@import '../../global/typography/typography';
+@import '../../import-once';
+
+@include exports('progress-indicator') {
 
 .bx--progress-indicator {
+  @include reset;
+  box-sizing: border-box;
+  list-style: none;
   display: flex;
   flex-direction: column;
   width: auto;
@@ -11,6 +19,8 @@
   }
 
   &__step {
+    @include reset;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     width: auto;
@@ -150,7 +160,9 @@
   }
 
   &__label {
+    @include reset;
     @include font-smoothing;
+    box-sizing: border-box;
     text-align: center;
     display: block;
     padding: 0 0 0 .5rem;
@@ -178,3 +190,6 @@
     }
   }
 }
+
+}
+
