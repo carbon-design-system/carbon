@@ -4,7 +4,6 @@
 
 @import '../../global/colors/colors';
 @import '../../global/typography/typography';
-@import 'vars';
 @import 'mixins';
 @import '../../import-once';
 
@@ -55,6 +54,10 @@
 
     .bx--dropdown--open & {
       transform: rotate(180deg);
+    }
+
+    @include light-ui {
+      fill: $color__blue-51;
     }
   }
 

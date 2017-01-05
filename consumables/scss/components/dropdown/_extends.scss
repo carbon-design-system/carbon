@@ -8,9 +8,9 @@
   padding: .7em 5em .7em 1.5em;
   @include font-size('14');
   font-weight: 400;
-  color: $color__dropdown--text;
+  color: $color__blue-20;
   list-style: none;
-  background: $color__dropdown--bg;
+  background: $color__navy-gray-3;
   border-radius: 2px;
 
   &:hover,
@@ -31,7 +31,7 @@
   display: inline-block;
 
   a {
-    color: $color__dropdown--link;
+    color: $color__blue-30;
     text-decoration: none;
   }
 }
@@ -53,9 +53,9 @@
   padding-top: .9em;
   margin-left: -1.5em;
   @include font-size('14');
-  color: $color__dropdown--text;
+  color: $color__blue-20;
   list-style: none;
-  background: $color__dropdown--bg;
+  background: $color__navy-gray-3;
   border-radius: 2px;
   opacity: 0;
   visibility: hidden;
@@ -73,7 +73,7 @@
     background: rgba(255, 255, 255, .05);
 
     a {
-      color: $color__dropdown--link;
+      color: $color__blue-30;
     }
   }
 
