@@ -53,7 +53,7 @@
 
     @include light-ui {
       color: $color__navy-gray-6;
-      border-left: 1px solid $color__navy-gray-8;
+      border-left: 1px solid $color__gray-1;
     }
 
     @include breakpoint(bp--xs--major) {
@@ -67,4 +67,3 @@
 }
 
 }
-

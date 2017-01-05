@@ -115,15 +115,15 @@
     border-left: 1px solid $color__navy-gray-4;
 
     @include light-ui {
-      border-left: 1px solid $color__navy-gray-8;
       color: $color__navy-gray-6;
+      border-left: 1px solid $color__gray-1;
     }
 
     @include breakpoint(bp--xs--major) {
       padding-left: 0;
       margin-left: 0;
       border-left: none;
-      
+
       @include light-ui {
         border-left: none;
       }
@@ -131,10 +131,6 @@
 
     @include breakpoint(bp--sm--major) {
       @include font-size('32');
-    }
-
-    @include light-ui {
-      color: $color__navy-gray-6;
     }
   }
 

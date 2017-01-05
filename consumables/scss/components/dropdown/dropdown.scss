@@ -25,8 +25,8 @@
   &__menu-text {
     @include reset;
     box-sizing: border-box;
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
+    padding-top: rem(13px);
+    padding-bottom: rem(13px);
     padding-left: 1rem;
     font-weight: 700;
   }
@@ -45,7 +45,7 @@
     fill: $color__blue-30;
     position: absolute;
     right: .75rem;
-    top: .75rem;
+    top: .6rem;
     width: .75rem;
     height: 1.5rem;
     pointer-events: none;
