@@ -1,5 +1,35 @@
+@mixin btn--browser-fixes {
+  $class: &;
+
+  @at-root button#{$class} {
+    // CSS selector becomes: button.& {}, where & === is whatever class the ampersand equals
+    // <button> elements cannot be used as flex containers
+    display: inline-block;
+
+    svg {
+      // Vertically centering icon inside <button>
+      position: relative;
+      vertical-align: middle;
+      top: -1px;
+    }
+
+    // Targets IE10+ browsers
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      // Reset <svg> position for vertical centering
+      svg { top: 0; }
+    }
+  }
+
+  &::-moz-focus-inner {
+    // Reset intrisic padding in Firefox (see #731)
+    padding: 0;
+    border: 0;
+  }
+}
+
 @mixin btn--base {
   @include reset;
+  @include btn--browser-fixes;
   @include helvetica;
   @include font-smoothing;
   @include letter-spacing;
@@ -32,33 +62,6 @@
     width: rem(16px);
     height: rem(16px);
     margin-left: .5rem;
-  }
-
-  /**
-   * Browser Hacks
-   */
-  &:not(a) {
-    // <button> elements cnanot be used as flex containers
-    display: inline-block;
-
-    svg {
-      // Vertically centering icon inside <button>
-      position: relative;
-      vertical-align: middle;
-      top: -1px;
-    }
-
-    // Targets IE10+ browsers
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      // Reset <svg> position for vertical centering
-      svg { top: 0; }
-    }
-  }
-
-  &::-moz-focus-inner {
-    // Reset intrisic padding in Firefox (see #731)
-    padding: 0;
-    border: 0;
   }
 }
 
