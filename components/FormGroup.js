@@ -21,7 +21,7 @@ const FormGroup = ({ legendText, invalid, children, className, message, messageT
   const classNamesFieldset = classnames('bx--form__fieldset', className);
 
   return (
-    <fieldset data-invalid={invalid || undefined} className={classNamesFieldset} {...other}>
+    <fieldset {...(invalid && { 'data-invalid': '' })} className={classNamesFieldset} {...other}>
       <legend className={classNamesLegend}>
         {legendText}
       </legend>

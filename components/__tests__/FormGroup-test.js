@@ -25,7 +25,7 @@ describe('FormGroup', () => {
     });
     it('should render the data-invalid attribute when invalid is set', () => {
       const formgroup = shallow(<FormGroup invalid />);
-      expect(formgroup.props()['data-invalid']).toBe(true);
+      expect(formgroup.props()['data-invalid']).toBe('');
     });
     it('should render wrapper as expected', () => {
       const formGroup = shallow(
