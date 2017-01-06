@@ -15,8 +15,8 @@ When you're done with this tutorial, you'll learn:
 
 🤓 If you don't want to go through the tutorial, you can see finished example code based on how you installed bluemix-components:
 
-- [bower-example](https://github.ibm.com/Bluemix/bluemix-components/blob/master/docs/getting-started/styles/gulp/bower-example)
-- [npm-example](https://github.ibm.com/Bluemix/bluemix-components/blob/master/docs/getting-started/styles/gulp/npm-example)
+- [bower-example](https://github.ibm.com/Bluemix/bluemix-components/tree/master/docs/styles/gulp/bower-example)
+- [npm-example](https://github.ibm.com/Bluemix/bluemix-components/tree/master/docs/styles/gulp/npm-example)
 
 ## Getting Started
 
