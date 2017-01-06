@@ -24,8 +24,9 @@
     appearance: none;
     display: block;
     width: 100%;
-    padding: .75rem 2.5rem .75rem 1rem;
-    margin: .25rem 0;
+    padding: .75rem 2.75rem .75rem 1rem;
+    height: rem(40px);
+    margin: .25rem 0 0;
     color: $color__white;
     background-color: $color__inputs--bg;
     border: none;
@@ -56,10 +57,10 @@
   &__arrow {
     fill: $color__blue-30;
     position: absolute;
-    right: .85rem;
-    top: 2.4rem;
+    right: 1rem;
+    bottom: 0;
     width: .75rem;
-    height: 1.5rem;
+    height: rem(40px);
     pointer-events: none;
 
     @include light-ui {
