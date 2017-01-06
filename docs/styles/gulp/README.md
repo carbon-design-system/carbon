@@ -20,7 +20,7 @@ When you're done with this tutorial, you'll learn:
 
 ## Getting Started
 
-Use [starter-files](https://github.ibm.com/Bluemix/bluemix-components/tree/master/docs/getting-started/styles/gulp/starter-files) and install dependencies.
+Use [starter-files](https://github.ibm.com/Bluemix/bluemix-components/tree/master/docs/styles/gulp/starter-files) and install dependencies.
 
 ```
 $ npm install
