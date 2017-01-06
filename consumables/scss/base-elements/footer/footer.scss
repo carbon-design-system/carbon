@@ -4,8 +4,7 @@
 
 @import '../forms/forms';
 @import '../buttons/buttons';
-@import 'vars';
-@import 'extends';
+@import '../links/links';
 @import 'mixins';
 
 .bx--footer {
@@ -36,6 +35,7 @@
 
   &__information {
     @include reset;
+    @include font-size('14');
     box-sizing: border-box;
     display: flex;
 
@@ -56,17 +56,14 @@
 
   &__support-question {
     @include reset;
-    @include font-size('14');
     box-sizing: border-box;
     padding-bottom: .25rem;
   }
 
-  &__support-link {
+  .bx--link {
     @include reset;
-    @include font-size('14');
     box-sizing: border-box;
     font-weight: 600;
-    color: $color__footer--link;
     text-decoration: none;
   }
 
@@ -87,7 +84,6 @@
 
   &__settings-question {
     @include reset;
-    @include font-size('14');
     box-sizing: border-box;
     padding-bottom: .25rem;
   }
