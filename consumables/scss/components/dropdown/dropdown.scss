@@ -64,6 +64,8 @@
 
 
   &__list {
+    @include reset;
+    box-sizing: border-box;
     display: none;
     list-style: none;
   }
@@ -83,6 +85,9 @@
   }
 
   &__list-item {
+    @include reset;
+    box-sizing: border-box;
+
     &:hover,
     &:focus {
       background-color: $color__blue-30;
@@ -104,6 +109,8 @@
   }
 
   &__link {
+    @include reset;
+    box-sizing: border-box;
     display: block;
     color: currentColor;
     text-decoration: none;

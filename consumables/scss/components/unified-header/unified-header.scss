@@ -1,12 +1,20 @@
-// Local components
-@import '../../global/global';
+@import '../../global/colors/colors';
+@import '../../global/typography/typography';
+@import '../../components/dropdown/dropdown';
 @import 'vars';
+@import 'mixins';
 @import 'left-nav-trigger';
 @import 'global-header';
 @import 'topnav';
 @import 'left-nav-new';
+@import '../../import-once';
 
-.bx--unified-header {
-  position: fixed;
-  z-index: z('header');
+@include exports('unified-header') {
+  .bx--unified-header {
+    @include reset;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: z('header');
+  }
 }
+

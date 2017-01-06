@@ -1,4 +1,10 @@
+@import '../../import-once';
+
+@include exports('topnav') {
+
 .bx--top-nav {
+  @include reset;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   background-color: $color__navy-gray-1;
@@ -12,6 +18,9 @@
 
   &__left-container,
   &__right-container {
+    @include reset;
+    box-sizing: border-box;
+    list-style: none;
     display: flex;
     align-items: center;
     min-width: 50%;
@@ -72,6 +81,9 @@
       }
 
       &__link {
+        @include reset;
+        box-sizing: border-box;
+
         @include light-ui {
           color: $color__white;
         }
@@ -136,6 +148,9 @@
     }
 
     &__item {
+      @include reset;
+      box-sizing: border-box;
+
       &:focus {
         outline: 0;
       }
@@ -238,6 +253,8 @@
 
           &__trial-content,
           &__credit-content {
+            @include reset;
+            box-sizing: border-box;
             cursor: auto;
             display: flex;
             flex-direction: column;
@@ -267,14 +284,21 @@
 
           &__credit-content {
             div {
+              @include reset;
+              box-sizing: border-box;
+
               .bx--dropdown__credit-content--heading {
+                @include reset;
                 @include font-smoothing;
                 @include font-size('12');
+                box-sizing: border-box;
                 font-weight: 600;
               }
 
               .bx--dropdown__credit-content--desc {
+                @include reset;
                 @include font-size('14');
+                box-sizing: border-box;
               }
 
               &:last-child {
@@ -398,6 +422,9 @@
 }
 
 .bx--account-switcher {
+  @include reset;
+  box-sizing: border-box;
+  list-style: none;
   position: relative;
   height: 100%;
   display: flex;
@@ -414,6 +441,8 @@
   }
 
   &__toggle {
+    @include reset;
+    box-sizing: border-box;
     z-index: 9000;
     height: rem(36px);
     width: auto;
@@ -445,7 +474,9 @@
     }
 
     &--text {
+      @include reset;
       @include font-size('11');
+      box-sizing: border-box;
       letter-spacing: .5px;
       overflow: hidden;
       display: inline-block;
@@ -480,8 +511,14 @@
   }
 
   &__menu {
+    @include reset;
+    box-sizing: border-box;
+    list-style: none;
+
     &__container {
+      @include reset;
       @include box-shadow('large');
+      box-sizing: border-box;
       transition: $transition--base all $bx--standard-easing;
       position: absolute;
       width: auto;
@@ -522,6 +559,8 @@
 
 .bx--account-switcher__menu {
   &__item {
+    @include reset;
+    box-sizing: border-box;
     width: 100%;
     height: auto;
     display: flex;
@@ -560,8 +599,10 @@
     }
 
     &--title {
+      @include reset;
       @include font-size('14');
       @include font-smoothing;
+      box-sizing: border-box;
       font-weight: 700;
       height: 44px;
       min-width: 100px;
@@ -584,6 +625,8 @@
     }
 
     &--scroll {
+      @include reset;
+      box-sizing: border-box;
       max-height: 180px;
       overflow-y: auto;
 
@@ -703,4 +746,6 @@
       animation-delay: ($i * 100ms) + 100ms;
     }
   }
+}
+
 }
