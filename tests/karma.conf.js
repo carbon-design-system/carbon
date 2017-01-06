@@ -42,8 +42,7 @@ module.exports = function (config) {
             loader: 'babel',
             query: {
               presets: ['es2015', 'stage-1'],
-              plugins: [
-                ['transform-runtime', { polyfill: false }],
+              plugins: [['transform-runtime', { polyfill: false }]].concat(cloptions.debug ? [] : [
                 [
                   'istanbul',
                   {
@@ -52,7 +51,7 @@ module.exports = function (config) {
                     ],
                   },
                 ],
-              ],
+              ]),
             },
           },
           {
