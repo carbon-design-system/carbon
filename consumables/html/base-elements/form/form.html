@@ -1,12 +1,12 @@
 <form class="bx--form">
 
-  <fieldset data-invalid class="bx--form__fieldset">
+  <fieldset class="bx--form__fieldset">
     <legend class="bx--form__legend">Account</legend>
 
     <div class="bx--form__row">
       <div class="bx--form__row-item">
         <label for="text1" class="bx--form__label">Username</label>
-        <input id="text1" type="text" class="bx--text__input" placeholder="Enter username here">
+        <input data-invalid id="text1" type="text" class="bx--text__input" placeholder="Enter username here">
         <div class='bx--form__requirements'>
           Username is taken.
         </div>
@@ -16,7 +16,7 @@
     <div class="bx--form__row">
       <div class="bx--form__row-item">
         <label for="text1" class="bx--form__label">Password</label>
-        <input required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="text1" type="password" class="bx--text__input" placeholder="Enter password">
+        <input data-invalid required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="text1" type="password" class="bx--text__input" placeholder="Enter password">
         <div class='bx--form__requirements'>
           Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.
         </div>
@@ -24,7 +24,7 @@
 
       <div class="bx--form__row-item">
         <label for="text1" class="bx--form__label">Re-enter password</label>
-        <input required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="text1" type="password" class="bx--text__input" placeholder="Re-enter password">
+        <input data-invalid required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="text1" type="password" class="bx--text__input" placeholder="Re-enter password">
         <div class='bx--form__requirements'>
           Password does not match.
         </div>

@@ -31,12 +31,14 @@
     margin-bottom: 0;
   }
 
-  &[data-invalid] .bx--text__input {
-    border-bottom: 2px solid $color__red-40;
-  }
+  input[data-invalid],
+  select[data-invalid],
+  textarea[data-invalid]  {
+    box-shadow: 0 2px 0px 0px $color__red-40;
 
-  &[data-invalid] .bx--form__requirements {
-    max-height: rem(200px);
+    ~ .bx--form__requirements {
+      max-height: rem(200px);
+    }
   }
 }
 
@@ -91,7 +93,7 @@
 .bx--form__requirements {
   @include reset;
   @include font-size('11');
-  margin: .5rem 0 0;
+  margin: .75rem 0 0;
   max-height: 0;
   overflow: hidden;
   font-weight: 700;
