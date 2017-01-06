@@ -6,7 +6,8 @@ Object.assign = Object.assign || function assignObject(inDst) {
 
   const dst = Object(inDst);
 
-  [... arguments].slice(1).forEach((src) => {
+  [... arguments].slice(1).forEach((inSrc) => {
+    const src = Object(inSrc);
     Object.keys(src).forEach((prop) => {
       dst[prop] = src[prop];
     });
