@@ -58,9 +58,9 @@
     fill: $color__blue-30;
     position: absolute;
     right: 1rem;
-    bottom: 0;
+    top: 2.65rem;
     width: .75rem;
-    height: rem(40px);
+    height: .75rem;
     pointer-events: none;
 
     @include light-ui {
