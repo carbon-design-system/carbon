@@ -66,7 +66,7 @@
       background-color: $color__navy-gray-4;
 
       @include light-ui {
-        background-color: rgba($color__blue-51, 0.1);
+        background-color: $color__gray-2;
       }
     }
   }
