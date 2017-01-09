@@ -461,7 +461,8 @@ var BluemixComponents =
 	
 	  var dst = Object(inDst);
 	
-	  [].concat(Array.prototype.slice.call(arguments)).slice(1).forEach(function (src) {
+	  [].concat(Array.prototype.slice.call(arguments)).slice(1).forEach(function (inSrc) {
+	    var src = Object(inSrc);
 	    Object.keys(src).forEach(function (prop) {
 	      dst[prop] = src[prop];
 	    });

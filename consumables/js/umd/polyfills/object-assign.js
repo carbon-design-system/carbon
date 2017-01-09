@@ -32,7 +32,8 @@
 
     var dst = Object(inDst);
 
-    [].concat(Array.prototype.slice.call(arguments)).slice(1).forEach(function (src) {
+    [].concat(Array.prototype.slice.call(arguments)).slice(1).forEach(function (inSrc) {
+      var src = Object(inSrc);
       (0, _keys2.default)(src).forEach(function (prop) {
         dst[prop] = src[prop];
       });
