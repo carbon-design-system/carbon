@@ -43,14 +43,14 @@
   // instead of extending class?
   .bx--number__arrow--up {
     @extend .bx--number__arrow;
-    bottom: 1.5rem;
+    top: 2rem;
     padding-top: .5rem;
     align-items: flex-start;
   }
 
   .bx--number__arrow--down {
     @extend .bx--number__arrow;
-    bottom: .5rem;
+    top: 3rem;
     padding-bottom: .5rem;
     align-items: flex-end;
   }
