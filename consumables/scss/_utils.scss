@@ -61,24 +61,25 @@
 // tags
 @import 'components/tags/mixins';
 
+
 //----------------------------
 // 🙈 Hidden (Not exposed on website)
 //----------------------------
 
 // footer
-@import 'base-elements/footer/extends';
+@import 'base-elements/footer/mixins';
 
 // taxonomy-item
 @import 'components/taxonomy-item/vars';
 @import 'components/taxonomy-item/mixins';
 
-// header
-@import 'components/header/vars';
-
 
 //-------------------------
 // ☠️ Deprecated
 //-------------------------
+
+// header
+@import 'deprecated/header/vars';
 
 // data-module
 @import 'deprecated/data-module/vars';
