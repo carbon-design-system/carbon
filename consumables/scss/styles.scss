@@ -5,7 +5,7 @@
 $typography-css: true !default;
 $use-globals: true !default;
 $use-fonts: false !default;
-$use-reset: true !default;
+$use-reset: false !default;
 
 @import 'global/global';
 
@@ -26,7 +26,6 @@ $use-reset: true !default;
 @import 'base-elements/links/links';
 @import 'base-elements/lists/lists';
 @import 'base-elements/responsiveTables/responsiveTables';
-@import 'base-elements/tables/tables';
 
 //-------------------------
 // 🍕 Components
@@ -60,6 +59,7 @@ $use-reset: true !default;
 //-------------------------
 // ☠️ Deprecated
 //-------------------------
+@import 'deprecated/tables/tables';
 @import 'deprecated/data-module/data-module';
 @import 'deprecated/fab-label/fab-label';
 @import 'deprecated/item-list/item-list';

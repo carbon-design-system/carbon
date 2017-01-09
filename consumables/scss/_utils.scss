@@ -1,7 +1,9 @@
 //-------------------------
 // 🌍 Global
 //-------------------------
-@import 'global/global';
+@import 'global/colors/colors';
+@import 'global/layout/grid';
+@import 'global/typography/typography';
 
 //-------------------------
 // 🍅 Base Elements
@@ -10,18 +12,14 @@
 // buttons
 @import 'base-elements/buttons/vars';
 @import 'base-elements/buttons/mixins';
-@import 'base-elements/buttons/extends';
 
 // links
 @import 'base-elements/links/vars';
 
 // search
 @import 'base-elements/search/vars';
-@import 'base-elements/search/extends';
 @import 'base-elements/search/mixins';
 
-// tables
-@import 'base-elements/tables/vars';
 
 // toggle
 @import 'base-elements/toggle/vars';
@@ -35,24 +33,18 @@
 @import 'components/card/mixins';
 
 // content-switcher
-@import 'components/content-switcher/extends';
 @import 'components/content-switcher/mixins';
 
 // detail-page-header
 @import 'components/detail-page-header/extends';
 @import 'components/detail-page-header/mixins';
 
-// dropdown
-@import 'components/dropdown/extends';
-
 // loading
 @import 'components/loading/vars';
-@import 'components/loading/extends';
 @import 'components/loading/mixins';
 
 // modules
 @import 'components/modules/vars';
-@import 'components/modules/extends';
 @import 'components/modules/mixins';
 
 // notifications
@@ -62,9 +54,9 @@
 @import 'components/tags/mixins';
 
 
-//----------------------------
+//------------------------------------
 // 🙈 Hidden (Not exposed on website)
-//----------------------------
+//------------------------------------
 
 // footer
 @import 'base-elements/footer/mixins';
@@ -78,19 +70,19 @@
 // ☠️ Deprecated
 //-------------------------
 
-// header
+@import 'base-elements/buttons/extends';
+@import 'base-elements/search/extends';
+@import 'components/content-switcher/extends';
+@import 'components/dropdown/extends';
+@import 'components/loading/extends';
+@import 'components/modules/extends';
+@import 'deprecated/tables/vars';
 @import 'deprecated/header/vars';
-
-// data-module
 @import 'deprecated/data-module/vars';
 @import 'deprecated/data-module/mixins';
 @import 'deprecated/data-module/extends';
-
-// fab-label
 @import 'deprecated/fab-label/vars';
 @import 'deprecated/fab-label/extends';
-
-// item-list
 @import 'deprecated/item-list/vars';
 @import 'deprecated/item-list/mixins';
 @import 'deprecated/item-list/extends';

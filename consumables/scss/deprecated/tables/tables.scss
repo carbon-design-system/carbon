@@ -2,12 +2,12 @@
 // Tables
 //-----------------------------
 
-// Dependencies
 @import '../../global/global';
-@import '../checkbox/checkbox';
-
-// Local
+@import '../../base-elements/checkbox/checkbox';
 @import 'vars';
+@import '../../import-once';
+
+@include exports('tables') {
 
 .bx--table {
   @include font-size('14');
@@ -149,3 +149,6 @@
     }
   }
 }
+
+}
+
