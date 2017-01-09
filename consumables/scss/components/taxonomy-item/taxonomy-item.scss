@@ -1,11 +1,18 @@
-@import '../../global/global';
+@import '../../global/colors/colors';
+@import '../../global/typography/typography';
+@import '../../global/layout/grid';
 @import 'vars';
 @import 'mixins';
 @import 'extends';
+@import '../../import-once';
+
+@include exports('taxonomy-item') {
 
 .taxonomy-item {
 
   &--global-dash {
+    @include reset;
+    box-sizing: border-box;
     @include taxonomy-item ($icon-size__global-dash--diameter, $icon-size__global-dash--stroke, $icon-size__global-dash--height);
 
 
@@ -18,17 +25,22 @@
     }
 
     .taxonomy-item__icon {
+      @include reset;
+      box-sizing: border-box;
       fill: $color__blue-30;
     }
 
     .taxonomy-item__label {
-      @extend %taxonomy-item__label;
+      @include reset;
       @include font-size('20');
+      @extend %taxonomy-item__label;
+      box-sizing: border-box;
     }
 
     .taxonomy-item__metric {
+      @include reset;
       @include font-size('18');
-
+      box-sizing: border-box;
       height: 1.5rem;
       padding: .3rem .5rem;
       margin: rem(-25px) 0 .5rem 0;
@@ -67,7 +79,9 @@
   }
 
   &--taxonomy-menu {
+    @include reset;
     @include taxonomy-item ($icon-size__taxonomy-menu--diameter, $icon-size__taxonomy-menu--stroke, $icon-size__taxonomy-menu--height);
+    box-sizing: border-box;
     width: rem(105px);
     padding: .6rem 2rem 1.4rem 2rem;
     border: 1px solid transparent;
@@ -99,3 +113,6 @@
     }
   }
 }
+
+}
+
