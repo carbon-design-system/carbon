@@ -17,8 +17,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 12.5rem;
-  height: auto;
+  width: rem(200px);
+  height: rem(235px);
   background-color: $color__navy-gray-3;
   border: 1px solid $color__navy-gray-2;
 
