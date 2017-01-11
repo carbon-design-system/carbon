@@ -89,6 +89,14 @@ describe('Pagination', () => {
           expect(actualPage).toBe(1);
           expect(pager.state().page).toBe(1);
         });
+        it('should return to first page on changes to pageSizes', () => {
+          const pager = mount(
+            <Pagination pageSizes={[5, 10]} totalItems={50} />
+          );
+          pager.setState({ page: 2 });
+          pager.setProps({ pageSizes: [3, 6] });
+          expect(pager.state().page).toEqual(1);
+        });
       });
     });
 

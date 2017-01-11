@@ -197,6 +197,15 @@ describe('Search', () => {
         const icon = wrapper.find(Icon).at(2);
         expect(icon.props().name).toEqual('grid');
       });
+      it('should toggle layout to "list" when clicked and currently set to "grid"', () => {
+        const button = wrapper.find('button').at(1);
+        wrapper.setState({
+          format: 'grid',
+        });
+        button.simulate('click');
+        const icon = wrapper.find(Icon).at(2);
+        expect(icon.props().name).toEqual('list');
+      });
     });
   });
 });

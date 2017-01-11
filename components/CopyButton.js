@@ -19,6 +19,7 @@ export default class CopyButton extends Component {
   state = {
     showFeedback: false,
   }
+  /* istanbul ignore next */
   componentWillUnmount() {
     if (typeof this.timeoutId !== undefined) {
       clearTimeout(this.timeoutId);

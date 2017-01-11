@@ -22,7 +22,7 @@ class RadioButtonGroup extends React.Component {
   }
 
   static defaultProps = {
-    onChange: () => {},
+    onChange: /* istanbul ignore next */() => {},
   }
 
   state = {
@@ -49,7 +49,7 @@ class RadioButtonGroup extends React.Component {
         value,
         ...other,
       } = radioButton.props;
-
+      /* istanbul ignore if */
       if (radioButton.props.hasOwnProperty('checked')) {
         warning(false, `Instead of using the checked property on the RadioButton, set
             the defaultSelected property or valueSelected property on the RadioButtonGroup.`);

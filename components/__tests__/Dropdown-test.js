@@ -2,6 +2,7 @@ import React from 'react';
 import Dropdown from '../Dropdown';
 import DropdownItem from '../DropdownItem';
 import Icon from '../Icon';
+import ClickListener from '../../internal/ClickListener';
 import { shallow, mount } from 'enzyme';
 
 describe('Dropdown', () => {
@@ -103,6 +104,12 @@ describe('Dropdown', () => {
     it('should update selected text when child item is clicked', () => {
       child.simulate('click');
       expect(wrapper.state().selectedText).toEqual('test-child');
+    });
+    it('should close dropdown on click outside', () => {
+      wrapper.setState({ open: true });
+      const listener = wrapper.find(ClickListener);
+      listener.props().onClickOutside();
+      expect(wrapper.state().open).toBe(false);
     });
   });
 });

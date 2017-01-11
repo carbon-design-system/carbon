@@ -1,7 +1,7 @@
 import React from 'react';
 import ProgressIndicator from '../ProgressIndicator';
 import ProgressIndicatorStep from '../ProgressIndicatorStep';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 describe('ProgressIndicator', () => {
   describe('Renders as expected', () => {
@@ -23,7 +23,7 @@ describe('ProgressIndicator', () => {
     });
 
     it('should flag steps before the active one as complete', () => {
-      const indicator = shallow(
+      const indicator = mount(
         <ProgressIndicator className="some-class">
           <ProgressIndicatorStep>Step 1</ProgressIndicatorStep>
           <ProgressIndicatorStep active>Step 2</ProgressIndicatorStep>

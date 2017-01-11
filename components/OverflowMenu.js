@@ -40,7 +40,7 @@ class OverflowMenu extends Component {
       this.setState({ open: nextProps.open });
     }
   }
-
+  /* istanbul ignore next */
   componentWillUnmount() {
     document.removeEventListener('keypress', this.handleKeyPress);
   }

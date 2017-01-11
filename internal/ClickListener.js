@@ -9,7 +9,7 @@ class ClickListener extends React.Component {
   componentDidMount() {
     document.addEventListener('click', this.handleDocumentClick);
   }
-
+  /* istanbul ignore next */
   componentWillUnmount() {
     document.removeEventListener('click', this.handleDocumentClick);
   }

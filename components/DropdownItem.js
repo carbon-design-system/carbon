@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  onClick: () => {},
+  onClick: /* istanbul ignore next */() => {},
 };
 
 const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
@@ -34,7 +34,7 @@ const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
       className={dropdownItemClasses}
       onClick={handleClick}
     >
-      <a href="#" onClick={(evt) => evt.preventDefault()} className="bx--dropdown__link">{itemText}</a>
+      <a href="#" onClick={/* istanbul ignore next */(evt) => evt.preventDefault()} className="bx--dropdown__link">{itemText}</a>
     </li>
   );
 };
