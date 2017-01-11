@@ -22,6 +22,11 @@ class AccordionItem extends Component {
     this.setState({ open });
     this.props.onClick({ isOpen: open, event: evt });
   }
+  handleKeyPress = (evt) => {
+    if (evt.which === 13 || evt.which === 32) {
+      this.handleClick(evt);
+    }
+  }
   render() {
     const {
       className,
@@ -36,12 +41,12 @@ class AccordionItem extends Component {
     className,
     );
     return (
-      <li className={classNames} onClick={this.handleClick}>
+      <li className={classNames} onClick={this.handleClick} onKeyPress={this.handleKeyPress} tabIndex="0">
         <div className="bx--accordion__heading">
           <Icon className="bx--accordion__arrow" name="chevron--right" description="Expand/Collapse" />
           <p className="bx--accordion__title">{title}</p>
         </div>
-        <p className="bx--accordion__content">{children}</p>
+        <div className="bx--accordion__content">{children}</div>
       </li>
     );
   }

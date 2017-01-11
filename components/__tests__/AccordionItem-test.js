@@ -79,4 +79,22 @@ describe('AccordionItem', () => {
       expect(toggler.state().open).toEqual(true);
     });
   });
+
+  describe('Check that the keyboard toggles its open state', () => {
+    const toggler = mount(
+      <AccordionItem title="A heading">
+        Lorem ipsum.
+      </AccordionItem>
+    );
+
+    it('should toggle state when using enter or space', () => {
+      expect(toggler.state().open).toBeUndefined();
+      toggler.simulate('keypress', { which: 32 });
+      expect(toggler.state().open).toEqual(true);
+      toggler.simulate('keypress', { which: 13 });
+      expect(toggler.state().open).toEqual(false);
+      toggler.simulate('keypress', { which: 97 });
+      expect(toggler.state().open).toEqual(false);
+    });
+  });
 });
