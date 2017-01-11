@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
 import AppContainer from '../components/AppContainer';
+import './_theme-container.scss';
 
 class ThemeContainer extends React.Component {
   static propTypes = {
