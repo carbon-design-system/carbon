@@ -7,6 +7,7 @@ const TYPES = {
   community: 'Community',
   custom: 'Custom',
   dedicated: 'Dedicated',
+  deprecated: 'Deprecated',
   experimental: 'Experimental',
   ibm: 'IBM',
   local: 'Local',
