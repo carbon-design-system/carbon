@@ -12,13 +12,25 @@ import '@console/bluemix-components/consumables/scss/components/pagination/pagin
 
 class Pagination extends Component {
   static propTypes = {
+    backwardText: PropTypes.string,
     className: PropTypes.string,
+    itemRangeText: PropTypes.func,
+    forwardText: PropTypes.string,
+    itemsPerPageText: PropTypes.string,
     onChange: PropTypes.func,
+    pageNumberText: PropTypes.string,
+    pageRangeText: PropTypes.func,
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
     totalItems: PropTypes.number.isRequired,
   }
   static defaultProps = {
+    backwardText: 'Backward',
+    itemRangeText: (min, max, total) => `${min}-${max} of ${total} items`,
+    forwardText: 'Forward',
+    itemsPerPageText: 'Items per page',
     onChange: () => {},
+    pageNumberText: 'Page Number',
+    pageRangeText: (current, total) => `${current} of ${total} pages`,
   }
   static uuid = 0
   state = {
@@ -55,7 +67,13 @@ class Pagination extends Component {
   }
   render() {
     const {
+      backwardText,
       className,
+      forwardText,
+      itemsPerPageText,
+      itemRangeText,
+      pageNumberText,
+      pageRangeText,
       pageSizes,
       totalItems,
     } = this.props;
@@ -70,21 +88,21 @@ class Pagination extends Component {
         <div className="bx--pagination__left">
           <Select
             id={`bx-pagination-select-${this.id}`}
-            labelText="Number of items per page"
+            labelText={itemsPerPageText}
             hideLabel
             onChange={this.handleSizeChange}
             value={pageSize}
           >
             {pageSizes.map(size => <SelectItem key={size} value={size} text={String(size)} />)}
           </Select>
-          <span className="bx--pagination__text">Items per page&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+          <span className="bx--pagination__text">{itemsPerPageText}&nbsp;&nbsp;|&nbsp;&nbsp;</span>
           <span className="bx--pagination__text">
-            <span>{pageSize * (page - 1) + 1}-{Math.min(page * pageSize, totalItems)}</span> of <span>{totalItems}</span> items
+            {itemRangeText(pageSize * (page - 1) + 1, Math.min(page * pageSize, totalItems), totalItems)}
           </span>
         </div>
         <div className="bx--pagination__right">
           <span className="bx--pagination__text">
-            <span>{page}</span> of <span>{Math.ceil(totalItems / pageSize)}</span> pages
+            {pageRangeText(page, Math.ceil(totalItems / pageSize))}
           </span>
           <button
             className="bx--pagination__button bx--pagination__button--backward"
@@ -92,7 +110,7 @@ class Pagination extends Component {
             disabled={page === 1}
           >
             <div>
-              <Icon name="chevron--left" description="Backward" />
+              <Icon name="chevron--left" description={backwardText} />
             </div>
           </button>
           <TextInput
@@ -100,7 +118,7 @@ class Pagination extends Component {
             placeholder="0"
             value={page}
             onChange={this.handlePageInputChange}
-            labelText="Page number input"
+            labelText={pageNumberText}
             hideLabel
           />
           <button
@@ -109,7 +127,7 @@ class Pagination extends Component {
             disabled={page === Math.ceil(totalItems / pageSize)}
           >
             <div>
-              <Icon name="chevron--right" description="Forward" />
+              <Icon name="chevron--right" description={forwardText} />
             </div>
           </button>
         </div>
