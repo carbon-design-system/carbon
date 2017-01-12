@@ -10,7 +10,6 @@
 
 .bx--inline-left-nav {
   @include reset;
-  box-sizing: border-box;
   width: rem(250px);
   position: fixed;
   top: rem(90px);
@@ -25,7 +24,6 @@
 
   .left-nav-list {
     @include reset;
-    box-sizing: border-box;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -38,7 +36,6 @@
 
     &__item {
       @include reset;
-      box-sizing: border-box;
       cursor: pointer;
       width: 100%;
       padding: 0;
@@ -62,7 +59,6 @@
           color: $color__blue-90;
         }
 
-        box-sizing: border-box;
         color: $color__white;
         font-weight: 400;
         position: relative;
@@ -76,7 +72,6 @@
 
       &-icon {
         @include reset;
-        box-sizing: border-box;
         display: flex;
 
         .bx--inline-left-nav__icon {
@@ -199,7 +194,7 @@
     @include light-ui {
       border-bottom: 1px solid $color__gray-1;
     }
-    box-sizing: border-box;
+    
     border-bottom: 1px solid $color__navy-gray-6;
     cursor: pointer;
 
@@ -210,7 +205,7 @@
       @include light-ui {
         color: $color__blue-51;
       }
-      box-sizing: border-box;
+      
       height: rem(50px);
       text-decoration: none;
       padding: 1.5rem 0 1rem 1.5rem;
@@ -245,7 +240,6 @@
 
       .previous-page {
         @include reset;
-        box-sizing: border-box;
         margin-left: .3rem;
       }
     }

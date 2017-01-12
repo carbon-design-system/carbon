@@ -1,7 +1,6 @@
 @mixin dropdown($text: $color__white) {
   @include reset;
   @include font-size('14');
-  box-sizing: border-box;
   position: relative;
   list-style: none;
   display: block;

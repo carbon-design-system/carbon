@@ -4,7 +4,6 @@
 
 .bx--global-header__left-nav {
   @include reset;
-  box-sizing: border-box;
   position: fixed;
   z-index: 9000;
   width: rem(250px);
@@ -25,7 +24,6 @@
 
 .bx--left-nav {
   @include reset;
-  box-sizing: border-box;
   display: block;
   width: 100%;
   height: 100%;
@@ -41,7 +39,6 @@
 
 .bx--left-nav__close-row {
   @include reset;
-  box-sizing: border-box;
   height: $height--global-nav;
   width: 100%;
   background-color: $color__navy-gray-1;
@@ -54,7 +51,6 @@
 
 .bx--left-nav__header {
   @include reset;
-  box-sizing: border-box;
   align-items: center;
   justify-content: flex-start;
   padding: 0 1.5rem;
@@ -124,7 +120,6 @@
 
 .bx--left-nav__sections {
   @include reset;
-  box-sizing: border-box;
   list-style: none;
   padding: 0 0 1rem;
   background-color: $color__navy-gray-1;
@@ -141,7 +136,6 @@
 
 .bx--left-nav__section {
   @include reset;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -224,7 +218,6 @@
 
   &--anchor {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     width: 100%;
     padding: 0 1.25rem;
@@ -235,7 +228,6 @@
   &--link {
     @include reset;
     @include font-size('16');
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     color: $color__white;
@@ -278,7 +270,6 @@
 // MAIN NAV
 .bx--left-nav__main-nav {
   @include reset;
-  box-sizing: border-box;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -303,7 +294,6 @@
 
 .bx--main-nav__parent-item {
   @include reset;
-  box-sizing: border-box;
   opacity: 1;
   transition: opacity 200ms $bx--standard-easing;
   cursor: pointer;
@@ -335,7 +325,6 @@
 .bx--parent-item__link {
   @include reset;
   @include font-size('14');
-  box-sizing: border-box;
   font-weight: 400;
   display: flex;
   align-items: center;
@@ -485,7 +474,6 @@
 .bx--main-nav__nested-list {
   @include reset;
   @include list;
-  box-sizing: border-box;
   list-style: none;
   max-height: 0;
   transition: 300ms $bx--standard-easing;

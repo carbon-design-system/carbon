@@ -17,7 +17,6 @@
   .bx--file__label {
     @include reset;
     @include font-size('14');
-    box-sizing: border-box;
     position: relative;
     display: inline-flex;
     align-items: center;

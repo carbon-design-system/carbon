@@ -24,7 +24,6 @@
 
   &__menu-text {
     @include reset;
-    box-sizing: border-box;
     padding-top: rem(13px);
     padding-bottom: rem(13px);
     padding-left: 1rem;
@@ -41,7 +40,6 @@
   }
 
   &__arrow {
-    box-sizing: border-box;
     fill: $color__blue-30;
     position: absolute;
     right: .75rem;
@@ -65,7 +63,6 @@
 
   &__list {
     @include reset;
-    box-sizing: border-box;
     display: none;
     list-style: none;
   }
@@ -74,7 +71,6 @@
     @include reset;
     @include font-size('14');
     @include box-shadow('large');
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background-color: $color__navy-gray-3;
@@ -86,8 +82,6 @@
 
   &__list-item {
     @include reset;
-    box-sizing: border-box;
-
     &:hover,
     &:focus {
       background-color: $color__blue-30;
@@ -110,7 +104,6 @@
 
   &__link {
     @include reset;
-    box-sizing: border-box;
     display: block;
     color: currentColor;
     text-decoration: none;

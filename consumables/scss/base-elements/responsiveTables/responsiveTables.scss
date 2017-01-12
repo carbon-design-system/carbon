@@ -9,7 +9,6 @@
 
 .bx--responsive-table-container {
   @include reset;
-  box-sizing: border-box;
   overflow-x: auto;
   overflow-y: hidden;
   width: 100%;
@@ -17,7 +16,6 @@
 
 .bx--responsive-table {
   @include reset;
-  box-sizing: border-box;
   background-color: $color__navy-gray-3;
   width: 100%;
   min-width: 500px;
@@ -28,7 +26,6 @@
 
   td {
     @include reset;
-    box-sizing: border-box;
     font-size: rem(14px);
     padding: rem(9px);
     vertical-align: middle;
@@ -36,14 +33,12 @@
 
   th {
     @include reset;
-    box-sizing: border-box;
     padding: rem(9px);
     vertical-align: middle;
   }
 
   table {
     @include reset;
-    box-sizing: border-box;
     border-collapse: collapse;
     border-spacing: 0;
     background-color: inherit;
@@ -58,7 +53,6 @@
 
   &--static-size {
     @include reset;
-    box-sizing: border-box;
     border-collapse: collapse;
     width: auto;
   }
@@ -66,13 +60,11 @@
 
 .bx--table-head {
   @include reset;
-  box-sizing: border-box;
   border-bottom: 1px solid $color__blue-30;
 }
 
 .bx--table-header {
   @include reset;
-  box-sizing: border-box;
   font-weight: 700;
   font-size: rem(12px);
   letter-spacing: 1px;
@@ -165,7 +157,6 @@
 
 .bx--table-select {
   @include reset;
-  box-sizing: border-box;
   width: rem(30px);
   text-align: center;
 
@@ -183,7 +174,6 @@
 
   .bx--overflow-menu {
     @include reset;
-    box-sizing: border-box;
     margin: 0 auto;
 
     &__icon {

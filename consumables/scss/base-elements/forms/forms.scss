@@ -10,15 +10,6 @@
 @include exports('forms') {
 
 .bx--form {
-  &__legend,
-  &__fieldset > *,
-  &__row > *,
-  &__row-item > * {
-    box-sizing: border-box;
-  }
-}
-
-.bx--form {
   @include reset;
 }
 

@@ -13,7 +13,6 @@
   @include reset;
   @include font-size('14');
   @include font-smoothing;
-  box-sizing: border-box;
   color: $color__navy-gray-8;
   background-color: $color__navy_gray_5;
   font-weight: 700;
@@ -34,7 +33,6 @@
 
   &__trigger {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -58,7 +56,6 @@
 
   &__trigger-text {
     @include reset;
-    box-sizing: border-box;
     text-decoration: none;
     font-weight: 700;
     color: $color__white;
@@ -71,7 +68,6 @@
   &__nav {
     @include reset;
     list-style: none;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
 
@@ -91,7 +87,6 @@
   &__nav-item {
     @include reset;
     @include font-size('14');
-    box-sizing: border-box;
     background-color: $color__navy_gray_4;
     padding: 1rem;
 
@@ -147,7 +142,6 @@
 
   &__nav-link {
     @include reset;
-    box-sizing: border-box;
     display: inline-block;
     color: $color__white;
     text-decoration: none;

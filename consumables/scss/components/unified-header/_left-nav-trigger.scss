@@ -4,7 +4,6 @@
 
 .bx--left-nav__trigger {
   @include reset;
-  box-sizing: border-box;
   width: rem(60px);
   height: $height--global-nav;
   position: relative;
@@ -14,7 +13,6 @@
 
   &--btn {
     @include reset;
-    box-sizing: border-box;
     position: absolute;
     top: 1.5rem;
     left: rem(20px);
@@ -26,7 +24,6 @@
     span:before,
     span:after {
       @include reset;
-      box-sizing: border-box;
       height: rem(2px);
       width: rem(20px);
       cursor: pointer;

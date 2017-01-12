@@ -8,7 +8,6 @@
 .bx--fab {
   @include reset;
   @include rotate(0, $transition--base);
-  box-sizing: border-box;
   display: inline-block;
   width: rem(72px);
   height: rem(72px);

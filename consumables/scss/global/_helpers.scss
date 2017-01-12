@@ -18,12 +18,15 @@ $color__box-shadow: rgba(0, 0, 0, .1);
 @mixin reset {
   // Main reset block for most elements:
   // http://cssreset.com/scripts/eric-meyer-reset-css/
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+  @if global-variable-exists(use-reset) and $use-reset == false {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
 }
 
 @mixin placeholder-colors {

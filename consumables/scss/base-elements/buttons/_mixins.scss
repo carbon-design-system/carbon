@@ -34,7 +34,6 @@
   @include font-smoothing;
   @include letter-spacing;
   @include font-size('14');
-  box-sizing: border-box;
   cursor: pointer;
   display: inline-flex;
   align-items: center;

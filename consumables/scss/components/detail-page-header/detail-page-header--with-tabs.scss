@@ -31,7 +31,6 @@
   &__container {
     @include reset;
     @include grid-container;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     padding-top: 1rem;
@@ -52,7 +51,6 @@
 
   &__breadcrumb {
     @include reset;
-    box-sizing: border-box;
     font-weight: 600;
     color: $color__navy-gray-8;
     cursor: pointer;
@@ -69,7 +67,6 @@
   &__breadcrumb-title {
     @include reset;
     @include font-size('14');
-    box-sizing: border-box;
     display: none;
     text-align: left;
 
@@ -83,7 +80,6 @@
   &__link-wrapper {
     @include reset;
     @include font-smoothing;
-    box-sizing: border-box;
     color: $color__navy-gray-8;
     text-decoration: none;
 
@@ -99,7 +95,6 @@
 
   &__info {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
   }
@@ -108,7 +103,6 @@
     @include reset;
     @include font-size('23');
     @include font-smoothing;
-    box-sizing: border-box;
     padding-left: .5rem;
     margin-left: .5rem;
     font-weight: 200;

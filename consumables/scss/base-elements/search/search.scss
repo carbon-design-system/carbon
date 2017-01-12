@@ -2,14 +2,9 @@
 // Search
 //-----------------------------
 
-// Dependencies
 @import '../../global/global';
-
-// Local
 @import 'extends';
 @import 'mixins';
-
-// import-once
 @import '../../import-once';
 
 @include exports('search') {
@@ -26,7 +21,6 @@
   &__input {
     @include reset;
     @include helvetica;
-    box-sizing: border-box;
     appearance: none;
     background-color: $color__inputs--bg;
     border: none;
@@ -48,7 +42,6 @@
 
     &::placeholder {
       @include placeholder-colors;
-      box-sizing: border-box;
       font-style: italic;
       font-weight: 400;
     }
@@ -61,7 +54,6 @@
   &__icon {
     &--magnifier {
       @include reset;
-      box-sizing: border-box;
       fill: $color__navy-gray-7;
       position: absolute;
       width: 1.25rem;
@@ -81,7 +73,6 @@
 
     &--filter {
       @include reset;
-      box-sizing: border-box;
       fill: $color__navy-gray-7;
       position: absolute;
       right: .85rem;
@@ -104,7 +95,6 @@
   &__filter {
     @include reset;
     @include font-size('16');
-    box-sizing: border-box;
     padding: 1.52rem;
     font-weight: 600;
     color: $color__navy-gray-8;
@@ -141,7 +131,6 @@
 
     .filter__text {
       @include reset;
-      box-sizing: border-box;
       display: none;
       padding-left: 1rem;
 

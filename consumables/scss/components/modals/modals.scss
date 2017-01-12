@@ -20,7 +20,6 @@
 
 .bx--modal {
   @include reset;
-  box-sizing: border-box;
   position: fixed;
   top: 0;
   right: 0;
@@ -65,7 +64,6 @@
 
   .bx--modal-content {
     @include reset;
-    box-sizing: border-box;
 
     &__heading {
       @include font-size('20');
@@ -95,7 +93,6 @@
   .bx--modal-inner {
     @include reset;
     @include font-size('16');
-    box-sizing: border-box;
     position: relative;
     z-index: z('modal');
     width: 100%;

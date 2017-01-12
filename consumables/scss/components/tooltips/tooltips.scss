@@ -12,7 +12,6 @@
   &__bottom {
     @include reset;
     @include font-size('16');
-    box-sizing: border-box;
     position: relative;
     display: inline-flex;
     align-items: center;

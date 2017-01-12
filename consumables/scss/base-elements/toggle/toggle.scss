@@ -19,7 +19,6 @@
     &__label {
       @include reset;
       @include font-smoothing;
-      box-sizing: border-box;
       position: relative;
       display: block;
       margin: 1rem 0;
@@ -31,7 +30,6 @@
     // Default Toggle Styles
     &__appearance {
       @include reset;
-      box-sizing: border-box;
       position: relative;
       display: inline-block;
       top: - $toggle-circle / 1.5;
@@ -89,7 +87,6 @@
       &--right {
         @include reset;
         @include placeholder-colors;
-        box-sizing: border-box;
         position: relative;
         top: $toggle-circle / 6;
       }

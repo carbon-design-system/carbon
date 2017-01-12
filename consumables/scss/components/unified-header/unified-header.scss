@@ -12,7 +12,6 @@
 @include exports('unified-header') {
   .bx--unified-header {
     @include reset;
-    box-sizing: border-box;
     position: fixed;
     z-index: z('header');
   }

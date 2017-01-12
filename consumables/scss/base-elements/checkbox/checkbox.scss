@@ -19,7 +19,6 @@
   .bx--checkbox__label {
     @include reset;
     @include font-smoothing;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -28,7 +27,6 @@
   .bx--checkbox__appearance {
     @include reset;
     @include font-size('16');
-    box-sizing: border-box;
     display: inline-block;
     height: rem(18px);
     width: rem(18px);

@@ -14,7 +14,6 @@
     &__input {
       @include reset;
       @include font-size('14');
-      box-sizing: border-box;
       display: block;
       width: 100%;
       height: rem(40px);

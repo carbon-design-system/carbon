@@ -1,6 +1,5 @@
 @mixin footer {
   @include reset;
-  box-sizing: border-box;
   // position: fixed;
   bottom: 0;
   left: 0;
@@ -20,7 +19,6 @@
 
 @mixin form__container {
   @include reset;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;

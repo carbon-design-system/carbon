@@ -11,7 +11,6 @@
 
 .bx--overflow-menu {
   @include reset;
-  box-sizing: border-box;
   display: flex;
   width: 2rem;
   margin: 0 1rem 0 1rem;
@@ -33,7 +32,6 @@
   &__options {
     @include reset;
     @include box-shadow;
-    box-sizing: border-box;
     list-style: none;
     left: auto;
     right: rem(-20px);
@@ -76,7 +74,6 @@
     @include reset;
     @include helvetica;
     @include font-size('14');
-    box-sizing: border-box;
     width: 100%;
     padding: .5rem 1.25rem;
     font-weight: 200;

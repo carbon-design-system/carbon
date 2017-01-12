@@ -12,7 +12,6 @@
 
   &__container {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,7 +35,6 @@
   &__information {
     @include reset;
     @include font-size('14');
-    box-sizing: border-box;
     display: flex;
 
     @media (max-width: 580px) {
@@ -46,7 +44,6 @@
 
   &__support {
     @include reset;
-    box-sizing: border-box;
     margin-right: 4rem;
 
     @media (max-width: 825px) {
@@ -56,20 +53,17 @@
 
   &__support-question {
     @include reset;
-    box-sizing: border-box;
     padding-bottom: .25rem;
   }
 
   .bx--link {
     @include reset;
-    box-sizing: border-box;
     font-weight: 600;
     text-decoration: none;
   }
 
   &__submit {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
   }
@@ -77,14 +71,12 @@
   &__submit-price {
     @include reset;
     @include letter-spacing;
-    box-sizing: border-box;
     margin-right: 1rem;
     font-weight: 200;
   }
 
   &__settings-question {
     @include reset;
-    box-sizing: border-box;
     padding-bottom: .25rem;
   }
 }

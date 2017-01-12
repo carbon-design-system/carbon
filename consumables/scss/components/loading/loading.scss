@@ -12,7 +12,6 @@
 .bx--loading {
   @include reset;
   @include animation__loading--spin;
-  box-sizing: border-box;
   width: $loading__size;
   height: $loading__size;
 

@@ -12,7 +12,6 @@
 
 .bx--select {
   @include reset;
-  box-sizing: border-box;
   position: relative;
   display: block;
 
@@ -20,7 +19,6 @@
     @include reset;
     @include helvetica;
     @include font-size('14');
-    box-sizing: border-box;
     appearance: none;
     display: block;
     width: 100%;
@@ -71,7 +69,6 @@
   &__optgroup,
   &__option {
     @include reset;
-    box-sizing: border-box;
     color: $color__blue-90; // For the options to show in IE11
   }
 }

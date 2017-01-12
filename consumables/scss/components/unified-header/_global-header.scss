@@ -5,7 +5,6 @@
 .bx--global-header {
   @include reset;
   @include helvetica;
-  box-sizing: border-box;
   width: 100%;
   position: fixed;
   top: $height--top-nav;
@@ -19,13 +18,11 @@
 
   &__title {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
 
     &--logo {
       @include reset;
-      box-sizing: border-box;
       display: flex;
       align-items: center;
       padding: 0 rem(8px) 0 rem(8px);
@@ -81,7 +78,6 @@
     &--current-page {
       @include reset;
       @include font-smoothing;
-      box-sizing: border-box;
       display: flex;
       align-items: center;
       font-weight: 400;
@@ -111,7 +107,6 @@
   .bx--logo {
     &__image {
       @include reset;
-      box-sizing: border-box;
       cursor: pointer;
       position: relative;
       margin-right: 1.125rem;
@@ -121,7 +116,6 @@
       @include reset;
       @include font-size('18');
       @include font-smoothing;
-      box-sizing: border-box;
       font-weight: 400;
       cursor: pointer;
       text-decoration: none;
@@ -135,14 +129,12 @@
 
   &__left-container {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
   }
 
   &__right-container {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     padding-right: 1%;
@@ -152,7 +144,6 @@
 
 .bx--global-header__menu {
   @include reset;
-  box-sizing: border-box;
   list-style: none;
   width: 100%;
   display: flex;
@@ -160,7 +151,6 @@
 
   &__item {
     @include reset;
-    box-sizing: border-box;
     width: 100%;
     flex: 0 1 100px;
 
@@ -174,7 +164,6 @@
       @include reset;
       @include font-smoothing;
       @include font-size('14');
-      box-sizing: border-box;
       font-weight: 700;
       display: flex;
       justify-content: center;

@@ -6,12 +6,10 @@
 
 .bx--accordion {
   @include reset;
-  box-sizing: border-box;
   list-style: none;
 
   &__item {
     @include reset;
-    box-sizing: border-box;
     transition: all $transition--base $bx--standard-easing;
     border-top: 1px solid $color__navy-gray-2;
     overflow: hidden;
@@ -31,7 +29,6 @@
 
   &__heading {
     @include reset;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -51,14 +48,12 @@
 
   &__title {
     @include reset;
-    box-sizing: border-box;
     margin-left: 1rem;
   }
 
   &__content {
     @include reset;
     @include font-size('14');
-    box-sizing: border-box;
     transition: all $transition--base $bx--standard-easing;
     padding: 0 1rem 0 1.75rem;
     max-height: 0;

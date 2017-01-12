@@ -19,7 +19,6 @@
 
   &__link-wrapper {
     @include reset;
-    box-sizing: border-box;
     color: $color__white;
     text-decoration: none;
     background-color: $color__navy-gray-3;
@@ -43,7 +42,6 @@
     @include reset;
     @include font-size('23');
     @include font-smoothing;
-    box-sizing: border-box;
     display: flex;
     align-items: flex-start;
     padding-left: .5rem;
