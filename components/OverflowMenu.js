@@ -25,6 +25,7 @@ class OverflowMenu extends Component {
     iconDescription: 'open and close list of options',
     open: false,
     onClick: () => {},
+    tabIndex: 0,
   }
 
   state = {

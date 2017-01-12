@@ -58,6 +58,11 @@ describe('OverflowMenu', () => {
       rootWrapper.setProps({ id: 'uniqueId' });
       expect(rootWrapper.childAt(0).props().id).toEqual('uniqueId');
     });
+
+    it('should apply a tabindex to the menu', () => {
+      const defaultMenu = shallow(<OverflowMenu><div>Child</div></OverflowMenu>).childAt(0);
+      expect(defaultMenu.props().tabIndex).toBe(0);
+    });
   });
 
   describe('open and closed states', () => {
