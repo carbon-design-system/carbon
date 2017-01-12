@@ -53,6 +53,11 @@ describe('FileUploader', () => {
       const label = rootWrapper.find('label');
       expect(label.props()['data-button-title']).toBe('Upload');
     });
+    it('should support a custom label for multiple file upload', () => {
+      const rootWrapper = mount(<FileUploader id="testID" multipleFilesText={count => `${count} files!`} />);
+      const input = rootWrapper.find('input');
+      expect(input.props()['data-multiple-caption']).toEqual('0 files!');
+    });
   });
 
   describe('updateLabel method should work as intended', () => {

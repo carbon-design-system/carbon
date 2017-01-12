@@ -10,6 +10,7 @@ class FileUploader extends React.Component {
     tabIndex: React.PropTypes.number,
     id: React.PropTypes.string.isRequired,
     labelDescription: React.PropTypes.string,
+    multipleFilesText: React.PropTypes.func,
     buttonText: React.PropTypes.string,
     onChange: React.PropTypes.func,
   }
@@ -18,6 +19,7 @@ class FileUploader extends React.Component {
     className: 'bx--file__label',
     tabIndex: 0,
     labelDescription: '',
+    multipleFilesText: count => `${count} files selected`,
     buttonText: 'Choose Files',
     onChange: () => {},
   }
@@ -32,7 +34,7 @@ class FileUploader extends React.Component {
     let fileName = '';
 
     if (element.files && element.files.length > 1) {
-      fileName = `${element.files.length} files selected`;
+      fileName = this.props.multipleFilesText(element.files.length);
       this.setState({ count: element.files.length });
     } else {
       fileName = element.value.split('\\').pop();
@@ -68,7 +70,7 @@ class FileUploader extends React.Component {
         >{this.state.text}</label>
         <input
           data-file-uploader
-          data-multiple-caption={`${this.state.count} files selected`}
+          data-multiple-caption={this.props.multipleFilesText(this.state.count)}
           data-label="[data-file-appearance]"
           className="bx--file__input"
           {... fileUploaderProps}
