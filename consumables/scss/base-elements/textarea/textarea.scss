@@ -8,39 +8,38 @@
 @import '../../../../globals/scss/import-once';
 
 @include exports('textarea') {
-  .bx--textarea {
 
-    &__input {
-      @include reset;
-      @include font-size('14');
-      display: block;
-      width: 100%;
-      min-height: 9.375rem;
-      min-width: 9.375rem;
-      padding: .5rem 0 .5rem 1rem;
-      margin: .25rem 0;
-      color: $color__white;
-      background-color: $color__inputs--bg;
+.bx--textarea {
+  &__input {
+    @include reset;
+    @include font-size('14');
+    display: block;
+    width: 100%;
+    min-height: 9.375rem;
+    min-width: 9.375rem;
+    padding: .5rem 0 .5rem 1rem;
+    margin: .25rem 0;
+    color: $color__white;
+    background-color: $color__inputs--bg;
 
-      &:focus {
-        @include focus-outline;
-        outline: auto 2px -webkit-focus-ring-color; // webkit default
-      }
+    &:focus {
+      @include focus-outline;
+      outline: auto 2px -webkit-focus-ring-color; // webkit default
+    }
 
-      &::-webkit-input-placeholder {
-        @include placeholder-colors;
-      }
+    &::-webkit-input-placeholder {
+      @include placeholder-colors;
+    }
 
-      &:disabled {
-        opacity: .5;
-        cursor: not-allowed;
-      }
+    &:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
 
-      @include light-ui {
-        color: $color__blue-90;
-        background-color: $color__inputs--bg--light-ui;
-        font-weight: 400;
-      }
+    @include light-ui {
+      color: $color__blue-90;
+      background-color: $color__inputs--bg--light-ui;
+      font-weight: 400;
     }
   }
 }
