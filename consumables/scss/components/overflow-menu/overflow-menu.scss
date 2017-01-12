@@ -5,6 +5,7 @@
 @import '../../global/colors/colors';
 @import '../../global/typography/typography';
 @import '../../global/layout/grid';
+@import '../../global/layout/z-index';
 @import '../../import-once';
 
 @include exports('overflow-menu') {
