@@ -2,10 +2,11 @@
 // Tabs
 //-----------------------------
 
-@import '../../global/colors/colors';
-@import '../../global/typography/typography';
-@import '../../global/layout/grid';
-@import '../../import-once';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/import-once';
 
 @include exports('tabs') {
 

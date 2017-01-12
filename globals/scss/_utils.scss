@@ -1,9 +1,12 @@
 //-------------------------
 // 🌍 Global
 //-------------------------
-@import 'global/colors/colors';
-@import 'global/layout/grid';
-@import 'global/typography/typography';
+
+$css-font-face: false !default;
+$css-helpers: false !default;
+$css-body: false !default;
+
+@import 'global';
 
 //-------------------------
 // 🍅 Base Elements
@@ -36,7 +39,6 @@
 @import 'components/content-switcher/mixins';
 
 // detail-page-header
-@import 'components/detail-page-header/extends';
 @import 'components/detail-page-header/mixins';
 
 // loading
@@ -64,25 +66,3 @@
 // taxonomy-item
 @import 'components/taxonomy-item/vars';
 @import 'components/taxonomy-item/mixins';
-
-
-//-------------------------
-// ☠️ Deprecated
-//-------------------------
-
-@import 'base-elements/buttons/extends';
-@import 'base-elements/search/extends';
-@import 'components/content-switcher/extends';
-@import 'components/dropdown/extends';
-@import 'components/loading/extends';
-@import 'components/modules/extends';
-@import 'deprecated/tables/vars';
-@import 'deprecated/header/vars';
-@import 'deprecated/data-module/vars';
-@import 'deprecated/data-module/mixins';
-@import 'deprecated/data-module/extends';
-@import 'deprecated/fab-label/vars';
-@import 'deprecated/fab-label/extends';
-@import 'deprecated/item-list/vars';
-@import 'deprecated/item-list/mixins';
-@import 'deprecated/item-list/extends';

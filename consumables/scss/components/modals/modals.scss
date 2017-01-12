@@ -10,7 +10,11 @@
 @import '../../base-elements/select/select';
 @import '../../base-elements/text/text';
 @import '../../base-elements/textarea/textarea';
-@import '../../import-once';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
 
 @include exports('modals') {
 

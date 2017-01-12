@@ -1,6 +1,6 @@
-@import '../import-once';
+@import 'import-once';
 
-@include exports('css-helpers') {
+@mixin css-helpers {
   .bx--visually-hidden {
     position:absolute;
     width:1px;
@@ -12,5 +12,11 @@
     border:0;
     visibility: visible;
     white-space: nowrap;
+  }
+}
+
+@include exports('css-helpers') {
+  @if global-variable-exists('css-helpers') and $css-helpers == true {
+    @include css-helpers;
   }
 }

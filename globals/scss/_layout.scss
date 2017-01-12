@@ -1,7 +1,3 @@
-//--------------------------------
-// Map: $breakpoints and $padding
-//--------------------------------
-
 $breakpoints: (
   bp--xs--major: 500px,
   bp--sm--major: 768px,
@@ -13,10 +9,6 @@ $padding: (
   'mobile': 3%,
   'xs': 5%
 );
-
-//--------------------------------
-// @function: padding($value)
-//--------------------------------
 
 @function padding($value) {
   @if map-has-key($padding, $value) {
@@ -54,7 +46,7 @@ $padding: (
 // @mixin: grid-container
 //-------------------------------------
 // usage:
-// .some-styles {
+// .some-container {
 //   @include grid-container;
 // }
 //-------------------------------------
@@ -70,17 +62,30 @@ $padding: (
   }
 }
 
-//-------------------------
-// ☠️ Deprecated
-//-------------------------
+$z-indexes: (
+  modal     : 9000,
+  overlay   : 8000,
+  dropdown  : 7000,
+  header    : 6000,
+  footer    : 5000,
+  hidden    : - 1,
+  overflowHidden: - 1,
+  overflowOptions: 1
+);
 
-%grid-container {
-  width: 100%;
-  padding-right: padding(mobile);
-  padding-left: padding(mobile);
+//-------------------------------------
+// @function: z($layer)
+//-------------------------------------
+// usage:
+// .modal {
+//   z-index: z('modal');
+// }
+//-------------------------------------
 
-  @include breakpoint(bp--xs--major) {
-    padding-right: padding(xs);
-    padding-left: padding(xs);
+@function z($layer) {
+  @if not map-has-key($z-indexes, $layer) {
+    @warn 'No layer found for `#{$layer}` in $z-indexes map. Property omitted.';
   }
+
+  @return map-get($z-indexes, $layer);
 }

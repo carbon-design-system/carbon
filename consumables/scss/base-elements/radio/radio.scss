@@ -2,11 +2,10 @@
 // Radio
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
-
-// import-once
-@import '../../import-once';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/import-once';
 
 @include exports('radio') {
   .bx--radio {

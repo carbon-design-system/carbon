@@ -2,10 +2,13 @@
 // Forms
 //-----------------------------
 
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
 @import '../buttons/buttons';
 @import '../checkbox/checkbox';
 @import '../text/text';
-@import '../../import-once';
 
 @include exports('forms') {
 

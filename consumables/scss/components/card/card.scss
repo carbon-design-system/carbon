@@ -2,12 +2,14 @@
 // Card
 //-----------------------------
 
-@import '../../global/colors/colors';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
 @import '../../base-elements/buttons/vars';
 @import '../../base-elements/buttons/mixins';
 @import '../overflow-menu/overflow-menu';
 @import 'mixins';
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('card') {
 

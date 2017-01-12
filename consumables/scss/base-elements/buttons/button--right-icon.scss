@@ -3,8 +3,8 @@
 //-------------------------
 
 // Dependencies
-@import '../../global/colors/colors';
-@import '../../global/helpers';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
 @import '../../global/typography/vars';
 @import '../../global/typography/functions';
 @import '../../global/typography/mixins';
@@ -15,7 +15,7 @@
 @import 'extends';
 
 // import-once
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('buttons') {
   // Right-Icon Buttons

@@ -2,10 +2,13 @@
 // Search
 //-----------------------------
 
-@import '../../global/global';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
 @import 'extends';
 @import 'mixins';
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('search') {
 

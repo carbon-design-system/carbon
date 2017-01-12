@@ -1,7 +1,6 @@
-@import '../../global/colors/colors';
-@import '../../global/helpers';
-@import '../../global/layout/grid';
-@import '../../import-once';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/import-once';
 
 @include exports('fab') {
 
@@ -12,7 +11,7 @@
   width: rem(72px);
   height: rem(72px);
   text-decoration: none;
-  filter: drop-shadow($shadow);
+  filter: drop-shadow(0px 3px 3px 0 $color__box-shadow);
 
   &__hidden {
     @include hidden;

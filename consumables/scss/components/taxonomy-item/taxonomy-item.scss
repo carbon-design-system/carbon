@@ -1,10 +1,9 @@
-@import '../../global/colors/colors';
-@import '../../global/typography/typography';
-@import '../../global/layout/grid';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/typography';
 @import 'vars';
 @import 'mixins';
 @import 'extends';
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('taxonomy-item') {
 
@@ -108,4 +107,3 @@
 }
 
 }
-

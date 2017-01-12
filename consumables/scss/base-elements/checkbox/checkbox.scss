@@ -2,11 +2,11 @@
 // Checkbox
 //-----------------------------
 
-@import '../../global/colors/colors';
-@import '../../global/layout/grid';
-@import '../../global/typography/typography';
-@import '../../global/helpers';
-@import '../../import-once';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/import-once';
 
 @include exports('checkbox') {
 

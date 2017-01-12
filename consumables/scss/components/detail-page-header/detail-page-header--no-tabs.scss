@@ -2,10 +2,12 @@
 // Detail Page Header (no tabs)
 //-----------------------------
 
-@import '../../global/layout/grid';
-@import '../../base-elements/links/links';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/typography';
 @import 'mixins';
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('detail-page-header--no-tabs') {
 

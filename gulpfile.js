@@ -158,7 +158,7 @@ gulp.task('scripts:dev', () => {
 
 gulp.task('sass:consumables', () => {
   function buildStyles(prod) {
-    return gulp.src('consumables/scss/styles.scss')
+    return gulp.src('globals/scss/styles.scss')
       .pipe(sourcemaps.init())
       .pipe(sass({
         outputStyle: prod ? 'compressed' : 'expanded',

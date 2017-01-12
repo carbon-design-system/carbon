@@ -2,20 +2,13 @@
 // Primary Button
 //-----------------------------
 
-// Dependencies
-@import '../../global/colors/colors';
-@import '../../global/helpers';
-@import '../../global/typography/vars';
-@import '../../global/typography/functions';
-@import '../../global/typography/mixins';
-
-// Local Dependencies
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
 @import 'vars';
 @import 'mixins';
 @import 'extends';
-
-// import-once
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('button--primary') {
 

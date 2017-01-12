@@ -1,8 +1,6 @@
-// $use-fonts: false !default;
+@import 'import-once';
 
-@import '../../import-once';
-
-@mixin font-face-styles($path) {
+@mixin font-face-css($path) {
   // Default font directory, `!default` flag allows user override.
   // (font files are configured to be served as static assets from server.js)
   $font-path: '#{$path}' !default;
@@ -73,7 +71,7 @@
 }
 
 @include exports('font-face') {
-  @if global-variable-exists(use-fonts) and $use-fonts == true {
-    @include font-face-styles('/assets/fonts');
+  @if global-variable-exists('css-font-face') and $css-font-face == true {
+    @include font-face-css('/assets/fonts');
   }
 }

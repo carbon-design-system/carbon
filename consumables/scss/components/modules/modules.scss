@@ -2,12 +2,15 @@
 // Modals
 //-----------------------------
 
-@import '../../global/layout/grid';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
 @import '../../base-elements/buttons/buttons';
 @import 'vars';
 @import 'extends';
 @import 'mixins';
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('modules') {
 

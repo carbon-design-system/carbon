@@ -1,4 +1,4 @@
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('left-nav-new') {
 
@@ -193,7 +193,7 @@
     @extend .bx--left-nav__section--active;
     position: absolute;
     z-index: 9999;
-    transition: all .3s $bx---ease-out;
+    transition: all .3s $bx--ease-out;
     // transform: translateZ(0);
 
     .bx--left-nav__section--taxonomy-icon {
@@ -275,7 +275,7 @@
   flex-direction: column;
   margin-bottom: 5rem;
   margin-top: 0; // Have to use margin, because setting position to anything other than static breaks the flyouts.
-  transition: all 250ms $bx---ease-out;
+  transition: all 250ms $bx--ease-out;
   background-color: $color__navy-gray-1;
   padding-top: 1rem;
 

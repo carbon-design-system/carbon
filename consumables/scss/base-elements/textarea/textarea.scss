@@ -2,11 +2,10 @@
 // Textarea
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
-
-// import-once
-@import '../../import-once';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
 
 @include exports('textarea') {
   .bx--textarea {
@@ -36,7 +35,7 @@
         opacity: .5;
         cursor: not-allowed;
       }
-      
+
       @include light-ui {
         color: $color__blue-90;
         background-color: $color__inputs--bg--light-ui;
@@ -44,4 +43,6 @@
       }
     }
   }
+}
+
 }

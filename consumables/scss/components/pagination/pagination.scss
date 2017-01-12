@@ -1,7 +1,10 @@
-@import '../../import-once';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/css-helpers';
 @import '../../base-elements/select/select';
 @import '../../base-elements/text/text';
-@import '../../global/css-helpers';
+@import '../../../../globals/scss/import-once';
 
 @include exports('pagination') {
 

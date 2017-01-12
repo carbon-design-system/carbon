@@ -2,10 +2,13 @@
 // Tables
 //-----------------------------
 
-@import '../../global/global';
-@import '../../base-elements/checkbox/checkbox';
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/typography';
+@import '../checkbox/checkbox';
 @import 'vars';
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('tables') {
 
@@ -151,4 +154,3 @@
 }
 
 }
-

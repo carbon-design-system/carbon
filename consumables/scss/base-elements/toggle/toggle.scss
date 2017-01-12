@@ -2,14 +2,11 @@
 // Toggle
 //-----------------------------
 
-// Dependencies
-@import '../../global/global';
-
-// Local
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
 @import 'vars';
-
-// import-once
-@import '../../import-once';
+@import '../../../../globals/scss/import-once';
 
 @include exports('toggle') {
   .bx--toggle {

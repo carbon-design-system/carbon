@@ -1,3 +1,38 @@
+@import 'helpers';
+// @import 'import-once';
+
+$base-font-size: 16px !default; // Default, Use with em() and rem() functions
+
+$major-second-typescale-map: (
+  '11' : .6875rem,
+  '12' : .75rem,
+  '14' : .875rem,
+  '16' : 1rem,
+  '18' : 1.125rem,
+  '20' : 1.25rem,
+  '23' : 1.4375rem,
+  '26' : 1.625rem,
+  '29' : 1.8125rem,
+  '32' : 2rem,
+  '36' : 2.25rem,
+  '41' : 2.5625rem,
+  '46' : 2.875rem,
+  '52' : 3.25rem,
+  '58' : 3.625rem,
+  '66' : 4.125rem,
+  '74' : 4.625rem,
+  '83' : 5.1875rem,
+  '94' : 5.875rem
+);
+
+@function rem($px) {
+  @return ($px / $base-font-size) * 1rem;
+}
+
+@function em($px) {
+  @return ($px / $base-font-size) * 1em;
+}
+
 @mixin helvetica {
   font-family: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
 }
@@ -31,18 +66,4 @@
 // Only applied to h1, h2, h3, bold weights and always to All Caps.
 @mixin letter-spacing {
   letter-spacing: .5px;
-}
-
-//-------------------------
-// ☠️ Deprecated
-//-------------------------
-
-@mixin type($size) {
-  @warn 'This mixin is being deprecated in favor of "font-size"';
-  @if map-has-key($typescale-map, $size) {
-    font-size: map-get($typescale-map, $size);
-  }
-  @else {
-    font-size: $size;
-  }
 }
