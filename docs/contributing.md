@@ -53,7 +53,22 @@ When you do `git remote -v`, you'll see these remotes:
 * Always work in a branch.
 * Submit pull requests from a branch.
 * All commits must follow the convention outlined [here](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md).
-* *Do not submit pull requests from the `master` branch of your fork.*
+
+> __Writing commit messages__
+>
+> - `<type>` indidcates the type of commit that's being made. This can be: `feat`, `fix`, `perf`, `docs`, `chore`, `style`, `refactor`
+> - `<scope>` The scope could be anything specifying place of the commit change or the thing(s) that changed.
+>
+> __Commit message format:__
+> ```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+*Do not submit pull requests from the `master` branch of your fork.*
 
 ```
 git checkout -b { YOUR_BRANCH_NAME }
