@@ -1,5 +1,18 @@
 # FAQ
 
+#### `ECMDERR` error when installing
+
+Your error message may also contain phrases like: `Failed to execute "git ls-remote --tags --heads git@github.ibm.com:Bluemix/bluemix-components.git"`.
+
+For sanity, make sure you check the following: 
+- you have SSH Key set up on your github.ibm.com account
+- you're on IBM VPN or IBM WiFi.
+- you restarted your terminal or command prompt.
+
+If the error still persists, create a new SSH key on your system and add that new SSH key to your github.ibm.com account.
+If your trying to install bluemix-components via a Jenkins job, then you need to create a new Jenkins user with an SSH key setup.
+
+
 #### "I have a question to ask you, when will you respond to my Slack/emails/sametime?"
 
 We do our best to respond to all questions and direct messages when they're asked.
