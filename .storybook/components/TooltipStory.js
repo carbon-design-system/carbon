@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import Tooltip from '../../components/Tooltip';
+import Link from '../../components/Link';
 import UnderReviewDecorator from '../UnderReviewDecorator';
 
 storiesOf('Tooltip', module)
@@ -13,7 +14,7 @@ storiesOf('Tooltip', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Tooltip text="This is some tooltip text" className="some-class"><a href="#">Tooltip - hover</a></Tooltip>
+        <Tooltip text="This is some tooltip text" className="some-class"><Link href="#">Tooltip - hover</Link></Tooltip>
       </div>
     ),
   )
