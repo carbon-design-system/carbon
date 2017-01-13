@@ -76,7 +76,13 @@ Please check out our [Contribution Guidelines](CONTRIBUTING.md) for detailed inf
 
 Here is a list of projects found that use `bluemix-components-react`:
 
-- [MLASS Bluemix Dashboard](https://github.ibm.com/NGP-TWC/mlaas-dashboard)
-- [Panorama](https://github.ibm.com/itsmui/panoconsole)
+- [IBM Design](https://github.ibm.com/Design/ibm-design-dependencies)
+- [Armada](https://github.ibm.com/alchemy-containers/armada-ui)
+- [MLASS](https://github.ibm.com/db2z-ml/mlaas)
+- [MLASS Dashboard](https://github.ibm.com/NGP-TWC/mlaas-dashboard)
+- [API Connect Native Dashboard](https://github.ibm.com/apimesh/native-dashboard)
+- [Atlas Access Management](https://github.ibm.com/IAM/access-management)
+- [Hybrid Connect Client](https://github.ibm.com/C2C-HybridConnect/HCClient)
+- [Bluemix Starter](https://github.ibm.com/Bluemix/generator-bluemix-ui-app)
 - [Bluemix UnifiedSupport](https://github.ibm.com/gordonj/Bluemix.UnifiedSupport)
-- [OMaaS UI](https://github.ibm.com/OMaaS/event-analytics-ui)
+- [Radio Dashboard](https://github.ibm.com/chrisdhanaraj/radio-dashboard)
