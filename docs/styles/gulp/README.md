@@ -199,7 +199,7 @@ And update **gulpfile.js:** require `gulp-rename` and create `fonts` task.
 var rename = require('gulp-rename');
 
 gulp.task('fonts', function () {
-  return gulp.src('bower_components/bluemix-components/**/*.{woff, woff2}')
+  return gulp.src('bower_components/bluemix-components/**/*.{woff,woff2}')
     .pipe(rename({ dirname: 'fonts' }))
     .pipe(gulp.dest('src'))
     .pipe(gulp.dest('dist'))
