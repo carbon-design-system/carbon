@@ -1,56 +1,25 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
 import '../polyfills/array-from';
 import '../polyfills/custom-event';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 
-export default class NumberInput {
+class NumberInput extends mixin(createComponent, initComponent) {
   /**
    * Number input UI.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a number input UI.
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.options = options;
+  constructor(element, options) {
+    super(element, options);
     this.options.ie = this.options.ie || 'ActiveXObject' in window;
-
-    this.element = element;
-    this.constructor.components.set(this.element, this);
     // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
     // Also <svg> does not seems to have `Element.classList`.
     this.element.querySelector('.bx--number__arrow--up').addEventListener('click', (event) => this.handleClick(event));
     this.element.querySelector('.bx--number__arrow--down').addEventListener('click', (event) => this.handleClick(event));
-  }
-
-  /**
-   * Instantiates number input UI of the given element.
-   * @param {HTMLElement} element The element.
-   */
-  static create(element) {
-    return this.components.get(element) || new this(element);
-  }
-
-  /**
-   * Instantiates number input UI in the given node.
-   * If the given element indicates that it's an number input UI, instantiates it.
-   * Otherwise, instantiates number input UIs by searching for number input UIs in the given node.
-   * @param {Node} target The DOM node to instantiate number input UIs in. Should be a document or an element.
-   * @param {Object} [options] The component options.
-   * @param {boolean} [options.selectorInit] The CSS selector to find number input UIs.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element));
-    }
   }
 
   /**
@@ -86,10 +55,6 @@ export default class NumberInput {
     }));
   }
 
-  release() {
-    this.constructor.components.delete(this.element);
-  }
-
   /**
    * The map associating DOM element and number input UI instance.
    * @member NumberInput.components
@@ -109,3 +74,5 @@ export default class NumberInput {
     selectorInit: '[data-numberinput]',
   };
 }
+
+export default NumberInput;

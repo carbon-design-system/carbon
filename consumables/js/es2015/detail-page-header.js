@@ -1,60 +1,27 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
+import on from '../misc/on';
 import debounce from 'lodash.debounce';
 
-export default class DetailPageHeader {
-
+class DetailPageHeader extends mixin(createComponent, initComponent) {
   /**
    * The Detail Page Header.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a page header.
    * @param {Object} [options] The component options.
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.element = element;
-
-    this.options = Object.assign(this.constructor.options, options);
-
-    this.constructor.components.set(this.element, this);
+  constructor(element, options) {
+    super(element, options);
 
     // Debounce scroll event calls to handleScroll
     const debouncedScroll = debounce(this.handleScroll.bind(this), 50);
 
-    this.element.ownerDocument.defaultView.addEventListener('scroll', debouncedScroll);
-  }
-
-  /**
-   * Instantiates detail page header of the given element.
-   * @param {HTMLElement} element The element.
-   * @param {Object} [options] The component options.
-   */
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
-  /**
-   * Instantiates the detail page header in the given element.
-   * If the given element indicates that it's a detail page header (animated) (having `data-detail-page-header` attribute), instantiates it.
-   * Otherwise, instantiates detail page header by searching for detail page header in the given node.
-   * @param {Node} target The DOM node to instantiate detail page header in. Should be a document or an element.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorInit] The CSS selector to find detail page headers.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
-    }
+    this.hScroll = on(this.element.ownerDocument.defaultView, 'scroll', debouncedScroll);
   }
 
   /**
@@ -68,8 +35,12 @@ export default class DetailPageHeader {
     }
   }
 
+  /**
+   * Cleans up stuffs specific to this widget.
+   */
   release() {
-    this.constructor.components.delete(this.element);
+    this.hScroll.release();
+    super.release();
   }
 
   /**
@@ -92,3 +63,5 @@ export default class DetailPageHeader {
     selectorInit: '[data-detail-page-header]',
   };
 }
+
+export default DetailPageHeader;

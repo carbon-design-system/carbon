@@ -1,3 +1,7 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
+import eventedState from '../mixins/evented-state';
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
@@ -5,10 +9,12 @@ import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import optimizedResize from '../misc/resize';
 
-export default class ResponsiveTable {
+class ResponsiveTable extends mixin(createComponent, initComponent, eventedState) {
   /**
    * Responsive Table
-   * @implements components
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends EventedState
    * @param {HTMLElement} element The root element of tables
    * @param {Object} [options] the... options
    * @param {string} [options.selectorInit] selector initialization
@@ -20,14 +26,8 @@ export default class ResponsiveTable {
    * @param {string} [options.eventTrigger] selector for event bubble capture points
    * @param {string} [options.eventParentContainer] used find the bubble container
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('Responsive Tables requires a DOM element');
-    }
-
-    this.element = element;
-
-    this.options = Object.assign(Object.create(this.constructor.options), options);
+  constructor(element, options) {
+    super(element, options);
 
     this.container = element.parentNode; // requires the immediate parent to be the container
     this.expandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
@@ -42,55 +42,39 @@ export default class ResponsiveTable {
     this.element.addEventListener('click', evt => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
       if (eventElement) {
-        this.emitEvent(eventElement, evt);
+        this.toggleState(eventElement, evt);
       }
     });
-
-    this.constructor.components.set(this.element, this);
   }
 
   /**
-   * Create an object to be used in event emission
+   * Toggles the given state.
+   * @private
+   * @param {Object} detail The detail of the event trigging this action.
+   * @param {Function} callback Callback called when change in state completes.
    */
-  getEventDetails = (element, data, evt) => {
-    const { event } = data;
+  _changeState(detail, callback) {
+    this[this.constructor.eventHandlers[detail.group]](detail);
+    callback();
+  }
+
+  /**
+   * Toggles the state of this component specified by `data-event` attribute of the given element.
+   * @param {HTMLElement} element The element.
+   * @param {Event} evt The event trigging this action.
+   */
+  toggleState = (element, evt) => {
+    const data = element.dataset;
     const label = (data.label) ? data.label : '';
     const previousValue = (data.previousValue) ? data.previousValue : '';
     const initialEvt = evt;
-
-    return {
+    this.changeState({
+      group: data.event,
       element,
-      event,
       label,
       previousValue,
       initialEvt,
-    };
-  }
-
-  /**
-   * Standardize way to emit events
-   */
-  emitEvent = (element, evt) => {
-    const detail = this.getEventDetails(element, element.dataset, evt);
-
-    const eventBefore = new CustomEvent(`before${detail.event}`, {
-      bubbles: true,
-      cancelable: true,
-      detail,
     });
-
-    const eventAfter = new CustomEvent(`${detail.event}`, {
-      bubbles: true,
-      cancelable: true,
-      detail,
-    });
-
-    const canceled = !this.element.dispatchEvent(eventBefore);
-
-    if (!canceled) {
-      this[this.constructor.eventHandlers[detail.event]](detail);
-      this.element.dispatchEvent(eventAfter);
-    }
   }
 
   /**
@@ -214,27 +198,7 @@ export default class ResponsiveTable {
     }
   }
 
-  release() {
-    this.constructor.components.delete(this.element);
-  }
-
   static components = new WeakMap();
-
-  static create(element) {
-    return this.components.get(element) || new this(element);
-  }
-
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element));
-    }
-  }
 
   static eventHandlers = {
     expand: 'toggleRowExpand',
@@ -257,7 +221,15 @@ export default class ResponsiveTable {
     classExpandableRowEven: 'bx--expandable-row--even',
     classExpandableRowHidden: 'bx--expandable-row--hidden',
     classTableSortAscending: 'bx--table-sort--ascending',
+    eventBeforeExpand: 'responsive-table-beforetoggleexpand',
+    eventAfterExpand: 'responsive-table-aftertoggleexpand',
+    eventBeforeSort: 'responsive-table-beforetogglesort',
+    eventAfterSort: 'responsive-table-aftertogglesort',
+    eventBeforeSelectAll: 'responsive-table-beforetoggleselectall',
+    eventAfterSelectAll: 'responsive-table-aftertoggleselectall',
     eventTrigger: '[data-event]',
     eventParentContainer: '[data-parent-row]',
   }
 }
+
+export default ResponsiveTable;

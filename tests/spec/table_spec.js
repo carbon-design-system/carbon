@@ -33,6 +33,7 @@ describe('Test table', function () {
           eventAfterSortToggled: 'table-sort-toggled',
           eventBeforeCheckToggled: 'table-check-beingtoggled',
           eventAfterCheckToggled: 'table-check-toggled',
+          initEventNames: ['click'],
         });
       } finally {
         table.release();

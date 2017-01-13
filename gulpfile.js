@@ -260,7 +260,7 @@ gulp.task('test', (done) => {
 /////////////////////////////
 
 gulp.task('jsdoc', function (cb) {
-  gulp.src('./consumables/js/es2015/**/*.js')
+  gulp.src('./consumables/js/{es2015,mixins}/**/*.js')
     .pipe(babel({
       plugins: ['transform-class-properties'],
       babelrc: false,

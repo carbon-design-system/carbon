@@ -24,7 +24,6 @@ import ResponsiveTable from './responsive-table';
 import Table from './table';
 import DetailPageHeader from './detail-page-header';
 import LeftNav from './left-nav';
-import UnifiedHeader from './unified-header';
 import InlineLeftNav from './inline-left-nav';
 import ProfileSwitcher from './profile-switcher';
 import Pagination from './pagination';
@@ -208,7 +207,6 @@ const init = () => {
     Table.init();
     DetailPageHeader.init();
     LeftNav.init();
-    UnifiedHeader.init();
     InlineLeftNav.init();
     ProfileSwitcher.init();
     Pagination.init();

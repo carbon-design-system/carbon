@@ -5,7 +5,7 @@ import EventManager from '../utils/event-manager';
 import ResponsiveTable from '../../consumables/js/es2015/responsive-table';
 import HTML from '../../consumables/html/base-elements/tables/responsive-tables.html';
 
-describe('Test table', function () {
+describe('Test responsive table', function () {
   describe('Constructor', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
@@ -106,7 +106,7 @@ describe('Test table', function () {
     it(`Clicking a row expand table cell should trigger the event`, () => {
       const rowExpansion = document.querySelector('.bx--table-expand');
       const spyToggleRowExpandEvent = sinon.spy();
-      events.on(element.ownerDocument.body, 'expand', spyToggleRowExpandEvent);
+      events.on(element.ownerDocument.body, 'responsive-table-aftertoggleexpand', spyToggleRowExpandEvent);
       rowExpansion.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       expect(spyToggleRowExpandEvent).to.have.been.called;

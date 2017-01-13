@@ -1,3 +1,6 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
@@ -5,52 +8,18 @@ import '../polyfills/custom-event';
 import toggleClass from '../polyfills/toggle-class';
 import eventMatches from '../polyfills/event-matches';
 
-export default class InlineLeftNav {
+class InlineLeftNav extends mixin(createComponent, initComponent) {
   /**
    * Spinner indicating loading state.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a spinner.
    * @param {Object} options The component options.
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.options = Object.assign(this.constructor.options, options);
-
-    this.element = element;
-
+  constructor(element, options) {
+    super(element, options);
     this.constructor.components.set(this.element, this);
     this.hookListItemsEvents();
-  }
-
-  /**
-   * Instantiates spinner of the given element.
-   * @param {HTMLElement} element The element.
-   */
-  static create(element) {
-    return this.components.get(element) || new this(element);
-  }
-
-  /**
-   * Instantiates spinner in the given node.
-   * If the given element indicates that it's an spinner (having `data-loading` attribute), instantiates it.
-   * Otherwise, instantiates spinners by searching for spinners in the given node.
-   * @param {Node} target The DOM node to instantiate spinners in. Should be a document or an element.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorInit] The CSS selector to find inline left navs.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
-    }
   }
 
   hookListItemsEvents() {
@@ -115,10 +84,6 @@ export default class InlineLeftNav {
      });
    }
 
-  release() {
-    this.constructor.components.delete(this.element);
-  }
-
   /**
    * The map associating DOM element and spinner instance.
    * @member InlineLeftNav.components
@@ -148,3 +113,5 @@ export default class InlineLeftNav {
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
   };
 }
+
+export default InlineLeftNav;

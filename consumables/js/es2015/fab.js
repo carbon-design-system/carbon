@@ -1,49 +1,27 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-event';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
-import eventMatches from '../polyfills/event-matches';
-import on from '../misc/on';
 
-export default class FabButton {
+class FabButton extends mixin(createComponent, initComponent) {
   /**
    * Floating action button.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentByEvent
    * @param {HTMLElement} element The element working as a floting action button.
    */
   constructor(element) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-    this.element = element;
-
-    this.constructor.components.set(this.element, this);
-
+    super(element);
     element.addEventListener('click', (event) => this.toggle(event));
   }
 
   /**
-   * Instantiates floating action buttons in the given element.
-   * If the given element indicates that it's an floating action button, instantiates it.
-   * Otherwise, instantiates floating action buttons by clicking on floating action buttons in the given node.
-   * @param {Node} target The DOM node to instantiate floating action buttons in. Should be a document or an element.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorItem] The CSS selector to find floating action buttons.
-   * @returns {Handle} The handle to remove the event listener to handle clicking.
+   * A method called when this widget is created upon clicking.
+   * @param {Event} event The event triggering the creation.
    */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target);
-    } else {
-      return on(target, 'click', (event) => {
-        const element = eventMatches(event, effectiveOptions.selectorInit);
-        if (element && !this.components.has(element)) {
-          this.create(element).toggle(event);
-        }
-      });
-    }
+  createdByEvent(event) {
+    this.toggle(event);
   }
 
   /**
@@ -60,10 +38,6 @@ export default class FabButton {
     } else {
       this.element.dataset.state = 'closed';
     }
-  }
-
-  release() {
-    this.constructor.components.delete(this.element);
   }
 
   /**
@@ -91,5 +65,8 @@ export default class FabButton {
    */
   static options = {
     selectorInit: '[data-fab]',
+    initEventNames: ['click'],
   };
 }
+
+export default FabButton;

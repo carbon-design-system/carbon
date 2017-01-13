@@ -1,3 +1,6 @@
+import mixin from '../misc/mixin';
+import createCoponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
@@ -6,10 +9,11 @@ import toggleClass from '../polyfills/toggle-class';
 import eventMatches from '../polyfills/event-matches';
 import on from '../misc/on';
 
-export default class LeftNav {
+class LeftNav extends mixin(createCoponent, initComponent) {
   /**
    * Left Navigation.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a left navigation.
    * @param {Object} [options] The component options
    * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
@@ -30,86 +34,13 @@ export default class LeftNav {
    * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
    * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.element = element;
-
+  constructor(element, options) {
+    super(element, options);
     this.leftNavSectionActive = false;
-
-    this.options = Object.assign(this.constructor.options, options);
-
-    this.constructor.components.set(this.element, this);
-
     this.hookOpenActions();
     this.hookListSectionEvents();
     this.hookListItemsEvents();
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
-  }
-
-  /**
-   * Instantiates a left navigation of the given element.
-   * @param {HTMLElement} element The element working as the left navigation.
-   * @param {Object} [options] The component options
-   * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
-   * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
-   * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
-   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
-   * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
-   * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
-   * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
-   * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
-   * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
-   * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
-   * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
-   * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
-   * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
-   * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
-   * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
-   * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
-   * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
-   */
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
-  /**
-   * Instantiates a left navigation in the given node.
-   * If the given element indicates that it's a left navigation (having `data-left-nav-container` attribute), instantiates it.
-   * Otherwise, instantiates left navigation by searching for left navigation in the given node.
-   * @param {Node} target The DOM node to instantiate left navigation in. Should be a document or an element.
-   * @param {Object} [options] The component options
-   * @param {string} [options.selectorInit] The CSS selector to find left nav containers.
-   * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
-   * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
-   * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
-   * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
-   * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
-   * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
-   * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
-   * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
-   * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
-   * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
-   * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
-   * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
-   * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
-   * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
-   * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
-   * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
-   * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      [...target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
-    }
   }
 
   /**
@@ -472,7 +403,7 @@ export default class LeftNav {
     if (this.hDocumentClick) {
       this.hDocumentClick = this.hDocumentClick.release();
     }
-    this.constructor.components.delete(this.element);
+    super.release();
   }
 
   /**
@@ -549,3 +480,5 @@ export default class LeftNav {
    */
   static components = new WeakMap();
 }
+
+export default LeftNav;

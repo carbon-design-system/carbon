@@ -1,13 +1,17 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import on from '../misc/on';
 
-export default class ProfileSwitcher {
+class ProfileSwitcher extends mixin(createComponent, initComponent) {
   /**
    * Profile Switcher.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a profile switcher.
    * @param {Object} [options] The component options
    * @param {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
@@ -18,16 +22,8 @@ export default class ProfileSwitcher {
    * @param {string} [options.selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
    * @param {string} [options.selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.element = element;
-
-    this.options = Object.assign(this.constructor.options, options);
-
-    this.constructor.components.set(this.element, this);
+  constructor(element, options) {
+    super(element, options);
 
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
 
@@ -58,35 +54,6 @@ export default class ProfileSwitcher {
     });
 
     this.element.ownerDocument.addEventListener('keyup', () => this.handleBlur());
-  }
-
-  /**
-   * Instantiates a profile switcher of the given element.
-   * @param {HTMLElement} element The element working as the profile switcher.
-   * @param {Object} [options] The component options
-   */
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
-  /**
-   * Instantiates a profile switcher in the given node.
-   * If the given element indicates that it's a profile switcher (having `data-profile-switcher` attribute), instantiates it.
-   * Otherwise, instantiates profile switcher by searching for profile switcher in the given node.
-   * @param {Node} target The DOM node to instantiate profile switcher in. Should be a document or an element.
-   * @param {Object} [options] The component options
-   * @param {string} [options.selectorInit] The CSS selector to find profile switchers.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
-    }
   }
 
   /**
@@ -240,7 +207,7 @@ export default class ProfileSwitcher {
     if (this.hDocumentClick) {
       this.hDocumentClick = this.hDocumentClick.release();
     }
-    this.constructor.components.delete(this.element);
+    super.release();
   }
 
   /**
@@ -286,3 +253,5 @@ export default class ProfileSwitcher {
    */
   static components = new WeakMap();
 }
+
+export default ProfileSwitcher;

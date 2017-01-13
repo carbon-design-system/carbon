@@ -5,7 +5,7 @@ import '../polyfills/math-sign';
 import '../polyfills/object-assign';
 import ContentSwitcher from './content-switcher';
 
-export default class Tab extends ContentSwitcher {
+class Tab extends ContentSwitcher {
   /**
    * Container of tabs.
    * @extends ContentSwitcher
@@ -36,40 +36,19 @@ export default class Tab extends ContentSwitcher {
   }
 
   /**
-   * Instantiates tab containers in the given node.
-   * If the given element indicates that it's an tab container, instantiates it.
-   * Otherwise, instantiates tab containers by searching for tab containers in the given node.
-   * @param {Node} target The DOM node to instantiate tab containers in. Should be a document or an element.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorInit] The CSS selector to find tab containers.
-   * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
-   * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
-   * @param {string} [options.selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
-   * @param {string} [options.selectorButton] The CSS selector to find tab containers.
-   * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected tab.
-   * @param {string} [options.selectorLink] The CSS selector to find the links in tabs.
-   * @param {string} [options.classActive] The CSS class for tab's selected state.
-   * @param {string} [options.classHidden] The CSS class for the drop down menu's hidden state used in narrow mode.
-   * @param {string} [options.eventBeforeSelected]
-   *   The name of the custom event fired before a tab is selected.
-   *   Cancellation of this event stops selection of tab.
-   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a tab is selected.
+   * Internal method of {@linkcode Tab#setActive .setActive()}, to select a tab item.
+   * @private
+   * @param {Object} detail The detail of the event trigging this action.
+   * @param {HTMLElement} detail.item The tab item to be selected.
+   * @param {Function} callback Callback called when change in state completes.
    */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
-    }
-  }
-
-  _changeActive(item) {
-    super._changeActive(item);
-    this.updateTriggerText(item);
+  _changeState(detail, callback) {
+    super._changeState(detail, (error, ...data) => {
+      if (!error) {
+        this.updateTriggerText(detail.item);
+      }
+      callback(error, ...data);
+    });
   }
 
   /**
@@ -184,3 +163,5 @@ export default class Tab extends ContentSwitcher {
     eventAfterSelected: 'tab-selected',
   });
 }
+
+export default Tab;

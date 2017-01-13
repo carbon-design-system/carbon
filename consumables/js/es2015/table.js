@@ -1,14 +1,17 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-event';
 import '../polyfills/custom-event';
 import '../polyfills/element-matches';
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/object-assign';
 import toggleClass from '../polyfills/toggle-class';
-import on from '../misc/on';
 
-export default class Table {
+class Table extends mixin(createComponent, initComponent) {
   /**
    * Data table.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a data table.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorTitle] The CSS selector to find column titles.
@@ -21,70 +24,17 @@ export default class Table {
    * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
    * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-    this.element = element;
-
-    this.options = Object.assign(Object.create(this.constructor.options), options);
-
-    this.constructor.components.set(this.element, this);
-
+  constructor(element, options) {
+    super(element, options);
     this.element.addEventListener('click', (event) => this.handleClick(event));
   }
 
   /**
-   * Instantiates a data table of the given element.
-   * @param {HTMLElement} element The element working as a data table.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorTitle] The CSS selector to find column titles.
-   * @param {string} [options.selectorRow] The CSS selector to find rows.
-   * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
-   * @param {string} [options.classSortState] The CSS class for the sorting state.
-   * @param {string} [options.classCheckState] The CSS class for the checked state.
-   * @param {string} [options.eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
-   * @param {string} [options.eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
-   * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
-   * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
+   * A method called when this widget is created upon clicking.
+   * @param {Event} event The event triggering the creation.
    */
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
-  /**
-   * Sets up the given node to instantiate data tables in.
-   * If the given element indicates that it's an data table, instantiates it.
-   * Otherwise, lazily instantiates data table when it's clicked on.
-   * @param {Node} target The DOM node to instantiate data tables in. Should be a document or an element.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorInit] The CSS selector to find data tables.
-   * @param {string} [options.selectorTitle] The CSS selector to find column titles.
-   * @param {string} [options.selectorRow] The CSS selector to find rows.
-   * @param {string} [options.selectorCheckbox] The CSS selector to find check boxes.
-   * @param {string} [options.classSortState] The CSS class for the sorting state.
-   * @param {string} [options.classCheckState] The CSS class for the checked state.
-   * @param {string} [options.eventBeforeSortToggled] The name of the custom event fired before a column's sorting is toggled.
-   * @param {string} [options.eventAfterSortToggled] The name of the custom event fired after a column's sorting is toggled.
-   * @param {string} [options.eventBeforeCheckToggled] The name of the custom event fired before a check box is toggled.
-   * @param {string} [options.eventAfterCheckToggled] The name of the custom event fired after a check box is toggled.
-   * @returns {Handle} The handle to remove the event listener to handle clicking.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      return on(target, 'click', (event) => {
-        const element = eventMatches(event, effectiveOptions.selectorInit);
-        if (element && !this.components.has(element)) {
-          this.create(element, effectiveOptions).handleClick(event);
-        }
-      });
-    }
+  createdByEvent(event) {
+    this.handleClick(event);
   }
 
   /**
@@ -156,10 +106,6 @@ export default class Table {
     }
   }
 
-  release() {
-    this.constructor.components.delete(this.element);
-  }
-
   /**
    * The map associating DOM element and data table instance.
    * @member Table.components
@@ -195,5 +141,8 @@ export default class Table {
     eventAfterSortToggled: 'table-sort-toggled',
     eventBeforeCheckToggled: 'table-check-beingtoggled',
     eventAfterCheckToggled: 'table-check-toggled',
+    initEventNames: ['click'],
   };
 }
+
+export default Table;

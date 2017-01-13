@@ -1,10 +1,12 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-launcher';
+import eventedState from '../mixins/evented-state';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import '../polyfills/custom-event';
-import eventMatches from '../polyfills/event-matches';
 import toggleClass from '../polyfills/toggle-class';
-import on from '../misc/on';
 
 /**
  * @param {Element} element The element to obtain transition duration from.
@@ -18,10 +20,12 @@ function getTransitionDuration(element) {
   return durations.length > 0 ? Math.max(...durations) : 0;
 }
 
-export default class Modal {
+class Modal extends mixin(createComponent, initComponent, eventedState) {
   /**
    * Modal dialog.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentByLauncher
+   * @extends EventedState
    * @param {HTMLElement} element The element working as a modal dialog.
    * @param {Object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
@@ -39,103 +43,21 @@ export default class Modal {
    *   The name of the custom event telling that modal is sure hidden
    *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.element = element;
-
-    this.options = Object.assign(Object.create(this.constructor.options), options);
-
-    this.constructor.components.set(this.element, this);
-
+  constructor(element, options) {
+    super(element, options);
     this.hookCloseActions();
   }
 
   /**
-   * Instantiates modal dialog of the given element.
-   * @param {HTMLElement} element The element working as a modal dialog.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.classVisible] The CSS class for the visible state.
-   * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
-   * @param {string} [options.eventBeforeShown]
-   *   The name of the custom event fired before this modal is shown.
-   *   Cancellation of this event stops showing the modal.
-   * @param {string} [options.eventAfterShown]
-   *   The name of the custom event telling that modal is sure shown
-   *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
-   * @param {string} [options.eventBeforeHidden]
-   *   The name of the custom event fired before this modal is hidden.
-   *   Cancellation of this event stops hiding the modal.
-   * @param {string} [options.eventAfterHidden]
-   *   The name of the custom event telling that modal is sure hidden
-   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
+   * A method called when this widget is created upon clicking on launcher button.
+   * @param {Event} event The event triggering the creation.
    */
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
-  /**
-   * Instantiates modal dialogs in the given element.
-   * If the given element indicates that it's an modal dialog, instantiates it.
-   * Otherwise, instantiates modal dialogs by clicking on launcher buttons
-   * (buttons with `data-modal-target` attribute) of modal dialogs in the given node.
-   * @implements Component
-   * @param {Node} target The DOM node to instantiate modal dialogs in. Should be a document or an element.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorInit] The CSS class to find modal dialogs.
-   * @param {string} [options.attribInitTarget] The attribute name in the launcher buttons to find target modal dialogs.
-   * @param {string} [options.classVisible] The CSS class for the visible state.
-   * @param {string} [options.classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
-   * @param {string} [options.eventBeforeShown]
-   *   The name of the custom event fired before this modal is shown.
-   *   Cancellation of this event stops showing the modal.
-   * @param {string} [options.eventAfterShown]
-   *   The name of the custom event telling that modal is sure shown
-   *   without being canceled by the event handler named by `eventBeforeShown` option (`modal-beingshown`).
-   * @param {string} [options.eventBeforeHidden]
-   *   The name of the custom event fired before this modal is hidden.
-   *   Cancellation of this event stops hiding the modal.
-   * @param {string} [options.eventAfterHidden]
-   *   The name of the custom event telling that modal is sure hidden
-   *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
-   * @returns {Handle} The handle to remove the event listener to handle clicking.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      return on(target, 'click', (event) => {
-        const element = eventMatches(event, `[${effectiveOptions.attribInitTarget}]`);
-
-        if (element) {
-          event.delegateTarget = element;
-
-          const modalElements = [... element.ownerDocument.querySelectorAll(element.getAttribute(effectiveOptions.attribInitTarget))];
-          if (modalElements.length > 1) {
-            throw new Error('Target modal must be unique.');
-          }
-
-          if (modalElements.length === 1) {
-            if (element.tagName === 'A') {
-              event.preventDefault();
-            }
-
-            const modal = this.create(modalElements[0], effectiveOptions);
-            modal.show(event, (error, shownAlready) => {
-              if (!error && !shownAlready && modal.element.offsetWidth > 0 && modal.element.offsetHeight > 0) {
-                modal.element.focus();
-              }
-            });
-          }
-        }
-      });
-    }
+  createdByLauncher(event) {
+    this.show(event, (error, shownAlready) => {
+      if (!error && !shownAlready && this.element.offsetWidth > 0 && this.element.offsetHeight > 0) {
+        this.element.focus();
+      }
+    });
   }
 
   /**
@@ -167,12 +89,21 @@ export default class Modal {
   }
 
   /**
-   * Internal method of {@linkcode Modal#show .show()} and  {@linkcode Modal#hide .hide()}, to change show/hidden state.
+   * @param {string} state The new state.
+   * @returns {boolean} `true` of the current state is different from the given new state.
+   */
+  shouldStateBeChanged(state) {
+    return state !== (this.element.classList.contains(this.options.classVisible) ? 'shown' : 'hidden');
+  }
+
+  /**
+   * Changes the shown/hidden state.
    * @private
-   * @param {boolean} visible `true` to make this modal dialog visible.
+   * @param {string} state The new state.
+   * @param {Object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
    */
-  _changeState(visible, callback) {
+  _changeState(state, detail, callback) {
     let finished;
     const finishedTransition = () => {
       if (!finished) {
@@ -181,6 +112,7 @@ export default class Modal {
         callback();
       }
     };
+    const visible = state === 'shown';
 
     this.element.addEventListener('transitionend', finishedTransition);
     const transitionDuration = getTransitionDuration(this.element);
@@ -192,19 +124,9 @@ export default class Modal {
   }
 
   /**
-   * The callback called once showing/hiding this dialog is finished or is canceled.
-   * @callback Modal~stateChangeCallback
-   * @param {Error} error
-   *   An error object with `true` in its `canceled` property if the showing/hiding this dialog is canceled.
-   *   Cancellation happens if the handler of a custom event, that is fired before showing/hiding this dialog happens,
-   *   calls `.preventDefault()` against the event.
-   * @param {boolean} newState The new toggle state.
-   */
-
-  /**
    * Shows this modal dialog.
    * @param {HTMLElement} [launchingElement] The DOM element that triggered calling this function.
-   * @param {Modal~stateChangeCallback} [callback] The callback called once showing this dialog is finished or is canceled.
+   * @param {EventedState~changeStateCallback} [callback] The callback called once showing this dialog is finished or is canceled.
    */
   show(launchingElementOrEvent, callback) {
     const launchingElementOrEventOmitted = !launchingElementOrEvent || typeof launchingElementOrEvent === 'function';
@@ -226,49 +148,12 @@ export default class Modal {
       throw new TypeError('DOM event should be given for launching event.');
     }
 
-    if (this.element.classList.contains(this.options.classVisible)) {
-      if (callback) {
-        callback(null, true);
-      }
-      return;
-    }
-
-    const eventStart = new CustomEvent(this.options.eventBeforeShown, {
-      bubbles: true,
-      cancelable: true,
-      detail: {
-        launchingElement,
-        launchingEvent,
-      },
-    });
-
-    // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
-    if (this.element.dispatchEvent(eventStart)) {
-      this._changeState(true, () => {
-        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterShown, {
-          bubbles: true,
-          cancelable: true,
-          detail: {
-            launchingElement,
-            launchingEvent,
-          },
-        }));
-        if (callback) {
-          callback();
-        }
-      });
-    } else {
-      const error = new Error('Showing dialog has been canceled.');
-      error.canceled = true;
-      if (callback) {
-        callback(error);
-      }
-    }
+    this.changeState('shown', { launchingElement, launchingEvent }, callback);
   }
 
   /**
    * Hides this modal dialog.
-   * @param {Modal~stateChangeCallback} [callback] The callback called once showing this dialog is finished or is canceled.
+   * @param {EventedState~changeStateCallback} [callback] The callback called once showing this dialog is finished or is canceled.
    */
   hide(launchingElementOrEvent, callback) {
     const launchingElementOrEventOmitted = !launchingElementOrEvent || typeof launchingElementOrEvent === 'function';
@@ -290,44 +175,7 @@ export default class Modal {
       throw new TypeError('DOM event should be given for launching event.');
     }
 
-    if (!this.element.classList.contains(this.options.classVisible)) {
-      if (callback) {
-        callback(null, true);
-      }
-      return;
-    }
-
-    const eventStart = new CustomEvent(this.options.eventBeforeHidden, {
-      bubbles: true,
-      cancelable: true,
-      detail: {
-        launchingElement,
-        launchingEvent,
-      },
-    });
-
-    // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
-    if (this.element.dispatchEvent(eventStart)) {
-      this._changeState(false, () => {
-        this.element.dispatchEvent(new CustomEvent(this.options.eventAfterHidden, {
-          bubbles: true,
-          cancelable: true,
-          detail: {
-            launchingElement,
-            launchingEvent,
-          },
-        }));
-        if (callback) {
-          callback();
-        }
-      });
-    } else {
-      const error = new Error('Hiding dialog has been canceled.');
-      error.canceled = true;
-      if (callback) {
-        callback(error);
-      }
-    }
+    this.changeState('hidden', { launchingElement, launchingEvent }, callback);
   }
 
   release() {
@@ -335,7 +183,7 @@ export default class Modal {
       this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
       this.keydownHandler = null;
     }
-    this.constructor.components.delete(this.element);
+    super.release();
   }
 
   /**
@@ -384,5 +232,8 @@ export default class Modal {
     eventAfterShown: 'modal-shown',
     eventBeforeHidden: 'modal-beinghidden',
     eventAfterHidden: 'modal-hidden',
+    initEventNames: ['click'],
   };
 }
+
+export default Modal;

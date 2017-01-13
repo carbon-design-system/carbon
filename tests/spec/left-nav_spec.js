@@ -1,28 +1,27 @@
+import '../../consumables/js/polyfills/custom-event';
+import '../utils/es6-weak-map-global'; // For PhantomJS
+import LeftNav from '../../consumables/js/es2015/left-nav';
+
+describe('Test Left Navigation', function () {
+  describe('Constructor', function () {
+    it(`Should throw if root element is not given`, function () {
+      expect(() => {
+        new LeftNav();
+      }).to.throw(Error);
+    });
+
+    it(`Should throw if root element is not a DOM element`, function () {
+      expect(() => {
+        new LeftNav(document.createTextNode(''));
+      }).to.throw(Error);
+    });
+  });
+
 //
 //
 //  TEMPORARILY COMMENTED OUT
 //  WHILE BETA RELEASES ARE BEING CUT
 //
-
-// import '../../consumables/js/polyfills/custom-event';
-// import '../utils/es6-weak-map-global'; // For PhantomJS
-// import LeftNav from '../../consumables/js/es2015/left-nav';
-
-// describe('Test Left Navigation', function () {
-//   describe('Constructor', function () {
-//     it(`Should throw if root element is not given`, function () {
-//       expect(() => {
-//         new LeftNav();
-//       }).to.throw(Error);
-//     });
-
-//     it(`Should throw if root element is not a DOM element`, function () {
-//       expect(() => {
-//         new LeftNav(document.createTextNode(''));
-//       }).to.throw(Error);
-//     });;
-//   });
-
 
 //   describe('Toggling the left navigation on mobile', function () {
 //     let leftNav;
@@ -78,3 +77,4 @@
 //       document.body.removeChild(element);
 //     });
 //   });
+});

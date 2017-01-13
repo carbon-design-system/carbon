@@ -38,6 +38,7 @@ describe('Test header', function () {
         eventAfterHidden: 'header-hidden',
         eventBeforeSelected: 'header-beingselected',
         eventAfterSelected: 'header-selected',
+        initEventNames: ['click', 'keydown'],
       });
     });
   });

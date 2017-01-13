@@ -1,58 +1,25 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import '../polyfills/array-from';
 
-export default class FileUploader {
+class FileUploader extends mixin(createComponent, initComponent) {
   /**
    * File uploader.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a file uploader.
    * @param {Object} [options] The component options.
    * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.element = element;
-
-    this.options = Object.assign(Object.create(this.constructor.options), options);
+  constructor(element, options) {
+    super(element, options);
 
     this.labelNode = this.element.nextElementSibling || this.element.ownerDocument.querySelector(`.bx--file__label${this.options.selectorLabel}`);
 
-    this.constructor.components.set(this.element, this);
-
     element.addEventListener('change', (event) => this.updateLabel(event));
-  }
-
-  /**
-   * Instantiates file uploader of the given element.
-   * @param {HTMLElement} element The element working as a file uploader.
-   * @param {Object} [options] The component options.
-   */
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
-  /**
-   * Instantiates file uploader in the given node.
-   * If the given element indicates that it's an file uploader, instantiates it.
-   * Otherwise, instantiates file uploader by searching for file uploader in the given node.
-   * @param {HTMLElement} element The element working as a file uploader.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorInit] The CSS selector to find file uploaders.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
-    }
   }
 
   /**
@@ -72,10 +39,6 @@ export default class FileUploader {
     if (fileName) {
       this.labelNode.textContent = fileName;
     }
-  }
-
-  release() {
-    this.constructor.components.delete(this.element);
   }
 
   /**
@@ -98,3 +61,5 @@ export default class FileUploader {
     selectorLabel: '[data-file-appearance]',
   };
 }
+
+export default FileUploader;

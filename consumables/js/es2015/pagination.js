@@ -1,12 +1,16 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
 import '../polyfills/array-from';
 import '../polyfills/custom-event';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 
-export default class Pagination {
+class Pagination extends mixin(createComponent, initComponent) {
   /**
   * Pagination component.
-  * @implements Component
+  * @extends CreateComponent
+  * @extends InitComponentBySearch
   * @param {HTMLElement} element The element working as a pagination component.
   * @param {Object} [options] The component options.
   * @property {string} [selectorInit] The CSS selector to find pagination components.
@@ -24,16 +28,8 @@ export default class Pagination {
   *   The name of the custom event fired when a user goes forward or backward a page.
   *   event.detail.direction contains the direction a user wishes to go.
   */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.element = element;
-
-    this.options = Object.assign(Object.create(this.constructor.options), options);
-
-    this.constructor.components.set(this.element, this);
+  constructor(element, options) {
+    super(element, options);
 
     this.element.addEventListener('click', (evt) => {
       if (evt.target.matches(this.options.selectorPageBackward)) {
@@ -86,62 +82,6 @@ export default class Pagination {
 
     this.element.dispatchEvent(event);
   }
-
-  /**
-   * Instantiates a pagination component of the given element.
-   * @param {HTMLElement} element The element working as a pagination component.
-   * @param {Object} [options] The component options.
-  * @property {string} [selectorInit] The CSS selector to find pagination components.
-  * @property {string} [selectorItemsPerPageInput] The CSS selector to find the input that determines the number of items per page.
-  * @property {string} [selectorPageNumberInput] The CSS selector to find the input that changes the page displayed.
-  * @property {string} [selectorPageBackward] The CSS selector to find the button that goes back a page.
-  * @property {string} [selectorPageForward] The CSS selector to find the button that goes forward a page.
-  * @property {string} [eventItemsPerPage]
-  *   The name of the custom event fired when a user changes the number of items per page.
-  *   event.detail.value contains the number of items a user wishes to see.
-  * @property {string} [eventPageNumber]
-  *   The name of the custom event fired when a user inputs a specific page number.
-  *   event.detail.value contains the value that the user input.
-  * @property {string} [eventPageChange]
-  *   The name of the custom event fired when a user goes forward or backward a page.
-  *   event.detail.direction contains the direction a user wishes to go.
-  */
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
-  /**
-  * Sets up the given node to instantiate a pagination component in.
-  * If the given element indicates that it's an pagination component, instantiates it.
-  * Otherwise, lazily instantiates pagination component when it's clicked on.
-  * @param {Node} target The DOM node to instantiate pagination component in. Should be a document or an element.
-  * @param {Object} [options] The component options.
-  * @property {string} [selectorInit] The CSS selector to find pagination components.
-  * @property {string} [selectorItemsPerPageInput] The CSS selector to find the input that determines the number of items per page.
-  * @property {string} [selectorPageNumberInput] The CSS selector to find the input that changes the page displayed.
-  * @property {string} [selectorPageBackward] The CSS selector to find the button that goes back a page.
-  * @property {string} [selectorPageForward] The CSS selector to find the button that goes forward a page.
-  * @property {string} [eventItemsPerPage]
-  *   The name of the custom event fired when a user changes the number of items per page.
-  *   event.detail.value contains the number of items a user wishes to see.
-  * @property {string} [eventPageNumber]
-  *   The name of the custom event fired when a user inputs a specific page number.
-  *   event.detail.value contains the value that the user input.
-  * @property {string} [eventPageChange]
-  *   The name of the custom event fired when a user goes forward or backward a page.
-  *   event.detail.direction contains the direction a user wishes to go.
-  */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
-    }
-  }
 }
 
 /**
@@ -179,3 +119,5 @@ Pagination.options = {
   eventPageNumber: 'pageNumber',
   eventPageChange: 'pageChange',
 };
+
+export default Pagination;

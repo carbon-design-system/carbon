@@ -33,6 +33,7 @@ describe('Test modal', function () {
           eventAfterShown: 'modal-shown',
           eventBeforeHidden: 'modal-beinghidden',
           eventAfterHidden: 'modal-hidden',
+          initEventNames: ['click'],
         });
       } finally {
         modal.release();
@@ -320,7 +321,7 @@ describe('Test modal', function () {
       document.body.appendChild(element);
 
       modal = new Modal(element);
-      modal._changeState(true, spyChangeStateCallback);
+      modal._changeState(true, null, spyChangeStateCallback);
     });
 
     it(`Should call _changeState()'s callback after transition ends`, function () {

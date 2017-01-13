@@ -1,18 +1,18 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
+import eventedState from '../mixins/evented-state';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
+import toggleClass from '../polyfills/toggle-class';
 import on from '../misc/on';
 
-export default class OverflowMenu {
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
+class OverflowMenu extends mixin(createComponent, initComponent, eventedState) {
+  constructor(element, options) {
+    super(element, options);
 
-    this.element = element;
-    this.options = Object.assign(Object.create(this.constructor.options), options);
     this.optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
-    this.constructor.components.set(this.element, this);
 
     /**
      * The handle to release click event listener on document object.
@@ -27,80 +27,41 @@ export default class OverflowMenu {
     this.hDocumentKeyPress = on(this.element.ownerDocument, 'keypress', (event) => this.handleKeyPress(event));
   }
 
-  static create(element) {
-    return this.components.get(element) || new this(element);
-  }
-
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element));
-    }
+  /**
+   * @param {string} state The new state.
+   * @returns {boolean} `true` of the current state is different from the given new state.
+   */
+  shouldStateBeChanged(state) {
+    return state !== (this.element.classList.contains('bx--overflow-menu--open') ? 'shown' : 'hidden');
   }
 
   /**
-   * Runs the state change handler associated with the given name, and fires events before/after that.
-   * If the event before the state change handler runs is canceled, the state change handler won't run.
-   * @param {string} name The name of change in state. The before/after event handlers will have its associated name.
-   * @param {Element} element The DOM element triggering this change in state.
-   * @param {Event} evt The event triggering this change in state.
+   * Changes the shown/hidden state.
+   * @private
+   * @param {string} state The new state.
+   * @param {Object} detail The detail of the event trigging this action.
+   * @param {Function} callback Callback called when change in state completes.
    */
-  emitEvent = (name, element, evt) => {
-    const optionMenu = this.optionMenu;
-    const detail = { element, optionMenu, evt };
-    const capitalizedName = name[0].toUpperCase() + name.substr(1);
-
-    const eventBefore = new CustomEvent(this.constructor.options[`eventBefore${capitalizedName}`], {
-      bubbles: true,
-      cancelable: true,
-      detail,
-    });
-
-    const eventAfter = new CustomEvent(this.constructor.options[`eventAfter${capitalizedName}`], {
-      bubbles: true,
-      cancelable: true,
-      detail,
-    });
-
-    const canceled = !this.element.dispatchEvent(eventBefore);
-
-    if (!canceled) {
-      this[this.constructor.actionHandlers[name]](detail);
-      this.element.dispatchEvent(eventAfter);
-    }
-  }
-
-  /**
-   * Shows this overflow menu.
-   */
-  show() {
-    this.optionMenu.classList.add('bx--overflow-menu--open');
-    this.element.classList.add('bx--overflow-menu--open');
-  }
-
-  /**
-   * Hides this overflow menu.
-   */
-  hide() {
-    this.optionMenu.classList.remove('bx--overflow-menu--open');
-    this.element.classList.remove('bx--overflow-menu--open');
+  _changeState(state, detail, callback) {
+    toggleClass(this.optionMenu, 'bx--overflow-menu--open', state === 'shown');
+    toggleClass(this.element, 'bx--overflow-menu--open', state === 'shown');
+    callback();
   }
 
   handleDocumentClick(event) {
     const isOfSelf = this.element.contains(event.target);
     const shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
-    const eventName = shouldBeOpen ? 'shown' : 'hidden';
+    const state = shouldBeOpen ? 'shown' : 'hidden';
 
     if (isOfSelf && this.element.tagName === 'A') {
       event.preventDefault();
     }
 
-    this.emitEvent(eventName, this.element, event);
+    this.changeState(state, {
+      element: this.element,
+      optionMenu: this.optionMenu,
+      evt: event,
+    });
   }
 
   handleKeyPress(event) {
@@ -108,13 +69,17 @@ export default class OverflowMenu {
     if (key === 'Enter' || key === 13) {
       const isOfSelf = this.element.contains(event.target);
       const shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
-      const eventName = shouldBeOpen ? 'shown' : 'hidden';
+      const state = shouldBeOpen ? 'shown' : 'hidden';
 
       if (isOfSelf && this.element.tagName === 'A') {
         event.preventDefault();
       }
 
-      this.emitEvent(eventName, this.element, event);
+      this.changeState(state, {
+        element: this.element,
+        optionMenu: this.optionMenu,
+        evt: event,
+      });
     }
   }
 
@@ -125,7 +90,7 @@ export default class OverflowMenu {
     if (this.hDocumentKeyPress) {
       this.hDocumentKeyPress = this.hDocumentKeyPress.release();
     }
-    this.constructor.components.delete(this.element);
+    super.release();
   }
 
   static components = new WeakMap();
@@ -138,9 +103,6 @@ export default class OverflowMenu {
     eventBeforeHidden: 'overflow-menu-beinghidden',
     eventAfterHidden: 'overflow-menu-hidden',
   };
-
-  static actionHandlers = {
-    shown: 'show',
-    hidden: 'hide',
-  };
 }
+
+export default OverflowMenu;

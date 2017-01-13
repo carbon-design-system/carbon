@@ -1,3 +1,6 @@
+import mixin from '../misc/mixin';
+import createComponent from '../mixins/create-component';
+import initComponent from '../mixins/init-component-by-search';
 import eventMatches from '../polyfills/event-matches';
 import '../polyfills/array-from';
 import '../polyfills/element-matches';
@@ -5,10 +8,11 @@ import '../polyfills/object-assign';
 import '../polyfills/custom-event';
 import on from '../misc/on';
 
-export default class Dropdown {
+class Dropdown extends mixin(createComponent, initComponent) {
   /**
    * A selector with drop downs.
-   * @implements Component
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a selector.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
@@ -19,19 +23,12 @@ export default class Dropdown {
    *   Cancellation of this event stops selection of drop down item.
    * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
    */
-  constructor(element, options = {}) {
-    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
-    }
-
-    this.element = element;
-
-    this.options = Object.assign(Object.create(this.constructor.options), options);
+  constructor(element, options) {
+    super(element, options);
 
     if (this.element.dataset.dropdown !== 'navigation') {
       this.element.dataset.dropdown = '';
     }
-    this.constructor.components.set(this.element, this);
 
     /**
      * The handle to release click event listener on document object.
@@ -51,48 +48,8 @@ export default class Dropdown {
   }
 
   /**
-   * Instantiates selector of the given element.
-   * @param {HTMLElement} element The element working as a selector.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
-   * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
-   * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
-   * @param {string} [options.eventBeforeSelected]
-   *   The name of the custom event fired before a drop down item is selected.
-   *   Cancellation of this event stops selection of drop down item.
-   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+   * Cleans up stuffs specific to this widget.
    */
-  static create(element, options) {
-    return this.components.get(element) || new this(element, options);
-  }
-
-  /**
-   * Instantiates selectors in the given node.
-   * If the given element indicates that it's an selector, instantiates it.
-   * Otherwise, instantiates selectors by searching for selectors in the given node.
-   * @param {Node} target The DOM node to instantiate selectors in. Should be a document or an element.
-   * @param {Object} [options] The component options.
-   * @param {string} [options.selectorInit] The CSS selector to find selectors.
-   * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
-   * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
-   * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
-   * @param {string} [options.eventBeforeSelected]
-   *   The name of the custom event fired before a drop down item is selected.
-   *   Cancellation of this event stops selection of drop down item.
-   * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
-   */
-  static init(target = document, options = {}) {
-    const effectiveOptions = Object.assign(Object.create(this.options), options);
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-    }
-    if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-      this.create(target, effectiveOptions);
-    } else {
-      [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, effectiveOptions));
-    }
-  }
-
   release() {
     if (this.hFocusIn) {
       this.hFocusIn = this.hFocusIn.release();
@@ -100,7 +57,7 @@ export default class Dropdown {
     if (this.hDocumentClick) {
       this.hDocumentClick = this.hDocumentClick.release();
     }
-    this.constructor.components.delete(this.element);
+    super.release();
   }
 
   /**
@@ -200,3 +157,5 @@ export default class Dropdown {
     eventAfterSelected: 'dropdown-selected',
   };
 }
+
+export default Dropdown;
