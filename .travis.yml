@@ -1,14 +1,20 @@
 language: node_js
 node_js:
-  - "4"
-  - "6"
+- '4'
+- '6'
 group: bluezone
 cache:
   directories:
-    - node_modules
+  - node_modules
+before_install:
+- echo "@console:registry=https://dev-console-npm.stage1.ng.bluemix.net/" > ~/.npmrc
+- echo -e "//dev-console-npm.stage1.ng.bluemix.net/:_authToken=\${CONSOLE_NPM_TOKEN}" >> ~/.npmrc
+- echo -e "@ibma:registry=https://npm-registry.whitewater.ibm.com/" >> ~/.npmrc
+- echo -e "//npm-registry.whitewater.ibm.com/:_authToken=${WW_NPM_TOKEN}" >> ~/.npmrc
 script:
-  - npm run lint
-  - npm run coverage
+- npm run lint
+- npm run coverage
+- if [[ $TRAVIS_PULL_REQUEST ]] ; then npm run test-a11y ; fi
 deploy:
   skip_cleanup: true
   provider: script

@@ -1,0 +1,68 @@
+{
+    "issueMessages": {
+        "messages": {
+            "wcag20.tech.h57.htmlLangValid": "Html element must have lang and/or xml:lang attribute that conforms to BCP: 47.",
+            "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
+            "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
+            "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
+            "wcag20.tech.aria.MissingKeyboardHandler": "The {0} element with WAI-ARIA role {1} might not be keyboard accessible. See rule help for remediation guidance."
+        },
+        "lang": "en-us"
+    },
+    "reports": [
+        {
+            "issues": [
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.h25.docHasTitle",
+                    "ruleId": "273",
+                    "help": "idhi_accessibility_check_g273.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]",
+                    "snippet": "<html>",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.h57.htmlLangValid",
+                    "ruleId": "490",
+                    "help": "idhi_accessibility_check_g490.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]",
+                    "snippet": "<html>",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                }
+            ],
+            "frameIdx": 0
+        }
+    ],
+    "summary": {
+        "counts": {
+            "violation": 2
+        },
+        "scanTime": 0,
+        "policies": [
+            "CI162_5_2_DCP070116",
+            "CI162_5_2_DCP080115"
+        ],
+        "reportLevels": [
+            "violation"
+        ],
+        "startScan": 1484166799232
+    },
+    "scanID": "9a1cb5ab-da99-41bb-a4c7-72bff169c1fa",
+    "toolID": "@ibma/aat-v1.0.24",
+    "label": "Tabs"
+}

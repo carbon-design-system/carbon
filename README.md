@@ -17,7 +17,7 @@ View available React Components [here](https://pages.github.ibm.com/Bluemix/blue
 
 Bluemix Components React is published on a private npm registry maintained by the Bluemix Ops Console team.
 
-1. Create the following `.npmrc` file in your project folder:
+1. You'll need to create a `.npmrc` file and authenticate to the Whitewater `npm` registry using [these instructions](https://github.ibm.com/Whitewater/npm-enterprise) Add the following to your `.npmrc` file in your project folder in order to access the Console registry:
 
   ```
   //dev-console-npm.stage1.ng.bluemix.net/:_authToken="u6vjQywpRv51/eKBiRcAFA=="
@@ -67,6 +67,18 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 3. Develop components in their respective folders (`/components` or `/internal`).
 
 4. Write stories for your components in `/.storybook`.
+
+## a11y testing
+
+This project is scanned according to [IBM a11y standards](https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/Wa7b684534a33_4971_b961_4529f9ad4a2e/page/CI%20162%20compliance%20information) when PRs are opened against it using [`@ibma/aat`](https://github.ibm.com/IBMa/Tools-Auto-Node/blob/master/src/README.md) to scan the components in the form of rendered HTML.  
+
+These tests can also be ran locally at any time by running:
+
+  ```
+  $ npm run test-a11y
+  ```
+
+Pull requests that introduce more a11y violations than are currently present will not pass code review.
 
 ## Contributing
 

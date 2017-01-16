@@ -1,0 +1,68 @@
+# optional - Specify the rule pack server to use. (Where to pull the rules and engine from)
+# Default: https://cc-rules.w3ibm.mybluemix.net/js/latest/
+rulePack: https://cc-rules.w3ibm.mybluemix.net/js/latest/
+
+# optional - Specify one or many policies to scan.
+# i.e. For one policy use policies: CI162_5_2_DCP080115
+# i.e. Multiple policies: CI162_5_2_DCP080115,CI162_5_2_DCP070116 or refer to below as a list
+# Default: CI162_5_2_DCP070116 <latest policy, maybe pull this from server>
+policies:
+    - CI162_5_2_DCP070116
+    - CI162_5_2_DCP080115
+
+# optional - Specify one or many violation levels on which to fail the test
+#            i.e. If specified violation then the testcase will only fail if
+#                 a violation is found uring the scan.
+# i.e. failLevels: violation
+# i.e. failLevels: violation,potential violation or refer to below as a list
+# Default: violation, potentialviolation
+failLevels:
+    - violation
+
+# optional - Specify one or many violation levels which should be reported
+#            i.e. If specified violation then in the report it would only contain
+#                 results which are level of violation.
+# i.e. reportLevels: violation
+# i.e. reportLevels: violation,potentialviolation or refer to below as a list
+# Default: violation, potentialviolation, recommendation, potentialrecommendation, manual
+reportLevels:
+    - violation
+
+# Optional - Specify if screenshoot should be captured of the current page that is being scanned
+# If the browser in use provides screen capture capability
+# Default: true
+captureScreenshots: true
+
+# Optional - Which type should the results be outputted to
+#   outputFormat: json,csv
+# Default: json
+outputFormat:
+    - json
+
+# Optional - Specify labels that you would like associated to your scan
+#
+# i.e.
+#   label: Firefox,master,V12,Linux
+#   label:
+#       - Firefox
+#       - master
+#       - V12
+#       - Linux
+# Default: N/A
+label:
+    - Chrome
+    - master
+
+# optional - Where the scan results should be saved
+# Default: results
+outputFolder: a11y/results
+
+# optional - Where baselines are stored
+# Default: baselines
+baselineFolder: a11y/baselines
+
+# optional - Should Hidden content be scanned
+# true --> Yes scan hidden content
+# false --> Don't scan hidden content
+# Default: true
+checkHiddenContent: true

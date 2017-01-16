@@ -7,5 +7,9 @@ node_modules
 # docs
 .gh-pages
 .DS_Store
+
 # distribution files
 dist
+
+# a11y files
+a11y/results

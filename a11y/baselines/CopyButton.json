@@ -1,0 +1,135 @@
+{
+    "issueMessages": {
+        "messages": {
+            "wcag20.tech.h57.htmlLangValid": "Html element must have lang and/or xml:lang attribute that conforms to BCP: 47.",
+            "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
+            "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
+            "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
+            "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks.",
+            "wcag20.tech.h36-h44-h65-h91.inputExplicitLabel": "Each form control must have associated label.",
+            "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role.",
+            "rpt.g484.titleValid": "Provide descriptive titles for Web pages."
+        },
+        "lang": "en-us"
+    },
+    "reports": [
+        {
+            "issues": [
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.h36-h44-h65-h91.inputExplicitLabel",
+                    "ruleId": "41",
+                    "help": "idhi_accessibility_check_g41.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]/body[1]/button[1]",
+                    "snippet": "<button class=\"bx--btn--copy\" type=\"button\">",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.h25.docHasTitle",
+                    "ruleId": "273",
+                    "help": "idhi_accessibility_check_g273.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]",
+                    "snippet": "<html>",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISMedium",
+                    "messageCode": "rpt.g484.titleValid",
+                    "ruleId": "484",
+                    "help": "idhi_accessibility_check_g484.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]/body[1]/button[1]/svg[1]/title[1]",
+                    "snippet": "<title id=\"copy--code\">",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.h57.htmlLangValid",
+                    "ruleId": "490",
+                    "help": "idhi_accessibility_check_g490.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]",
+                    "snippet": "<html>",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.g1.bodyFirstASkips",
+                    "ruleId": "1046",
+                    "help": "idhi_accessibility_check_g1046.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]/body[1]",
+                    "snippet": "<body>",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.aria.OrphanedContent",
+                    "ruleId": "1088",
+                    "help": "idhi_accessibility_check_g1088.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]/body[1]/button[1]",
+                    "snippet": "<button class=\"bx--btn--copy\" type=\"button\">",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                }
+            ],
+            "frameIdx": 0
+        }
+    ],
+    "summary": {
+        "counts": {
+            "violation": 6
+        },
+        "scanTime": 0,
+        "policies": [
+            "CI162_5_2_DCP070116",
+            "CI162_5_2_DCP080115"
+        ],
+        "reportLevels": [
+            "violation"
+        ],
+        "startScan": 1484166791139
+    },
+    "scanID": "9a1cb5ab-da99-41bb-a4c7-72bff169c1fa",
+    "toolID": "@ibma/aat-v1.0.24",
+    "label": "CopyButton"
+}
