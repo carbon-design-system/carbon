@@ -1,0 +1,44 @@
+import React from 'react';
+import InteriorLeftNavItem from '../InteriorLeftNavItem';
+import { shallow } from 'enzyme';
+
+describe('InteriorLeftNavItem', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(
+      <InteriorLeftNavItem
+        className="extra-class"
+        title="test-title"
+        href="test-href"
+      />
+    );
+    const matchingHrefs = shallow(
+      <InteriorLeftNavItem
+        title="test-title"
+        href="www.google.com"
+        activeHref="www.google.com"
+      />
+    );
+
+    it('renders a interior left nav item', () => {
+      expect(wrapper.length).toEqual(1);
+    });
+    it('has the expected classes', () => {
+      expect(wrapper.hasClass('left-nav-list__item')).toEqual(true);
+    });
+    it('should add extra classes that are passed via className', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+    it('should contain a title', () => {
+      expect(wrapper.find('a').text()).toEqual('test-title');
+    });
+    it('should contain an href', () => {
+      expect(wrapper.find('a').props().href).toEqual('test-href');
+    });
+    it('should add active class to item when activeHref is matched', () => {
+      expect(matchingHrefs.hasClass('left-nav-list__item--active')).toEqual(true);
+    });
+    it('has an anchor with the expected class', () => {
+      expect(wrapper.find('a').hasClass('left-nav-list__item-link')).toEqual(true);
+    });
+  });
+});
