@@ -86,7 +86,7 @@
   }
 }
 
-@include exports('css-body') {
+@include exports('css--body') {
   @if global-variable-exists('css--body') and $css--body == true {
     @include css-body;
     @include typography;
