@@ -11,9 +11,9 @@ $css-body: true !default;
 @import 'helpers';
 @import 'layout';
 @import 'typography';
-@import 'css-font-face';
-@import 'css-helpers';
-@import 'css-body';
+@import 'css--font-face';
+@import 'css--helpers';
+@import 'css--body';
 
 //-------------------------
 // 🍅 Base Elements
