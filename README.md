@@ -78,7 +78,7 @@ These tests can also be ran locally at any time by running:
   $ npm run test-a11y
   ```
 
-Pull requests that introduce more a11y violations than are currently present will not pass code review.
+Pull requests that introduce more a11y violations than are currently present will not pass code review.  See the [Contribution Guidelines](CONTRIBUTING.md) for information on adding a11y testing for any new components added.
 
 ## Contributing
 

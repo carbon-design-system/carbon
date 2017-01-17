@@ -160,4 +160,14 @@ Test your changes by running our test commands:
   ```
   npm run coverage
   ```
-  
+
+* Run a11y tests (ran by Travis CI on Pull Requests):
+
+  ```
+  npm run test-a11y 
+  ```
+
+
+### a11y testing
+
+If you add a new component to the library, then a new test case added to `a11y/__tests__/a11y-test.js` is required.  After creating a test case based on the existing test cases, run `npm run test-a11y`.  The test will fail, but a JSON file will be created under `a11y/results` that can be used as the baseline for your new test.  Move the JSON file from `a11y/results` to `a11y/baselines` and run `npm run test-a11y` again.  The test should pass this time.  
