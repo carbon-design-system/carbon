@@ -88,16 +88,8 @@ describe('DetailPageHeader', () => {
     });
 
     it('should be able to hide the breadcrumb', () => {
-      const nobreadcrumbWrapper = shallow(
-        <DetailPageHeader
-          title="test"
-          hideBreadcrumb
-          onBackLinkClick={() => {}}
-        >
-          <div className="child"></div>
-        </DetailPageHeader>
-      );
-      const breadcrumb = nobreadcrumbWrapper.find('.bx--detail-page-header--with-tabs__breadcrumb');
+      wrapper.setProps({ hideBreadcrumb: true });
+      const breadcrumb = wrapper.find('.bx--detail-page-header--with-tabs__breadcrumb');
       expect(breadcrumb.hasClass('bx--visually-hidden')).toBe(true);
     });
   });
