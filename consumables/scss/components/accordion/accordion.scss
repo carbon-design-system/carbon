@@ -64,6 +64,8 @@
 }
 
 .bx--accordion__item--active {
+  overflow: initial;
+
   .bx--accordion__content {
     max-height: 1000px;
     visibility: visible;
