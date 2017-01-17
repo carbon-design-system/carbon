@@ -63,4 +63,22 @@ describe('InteriorLeftNavList', () => {
       expect(interiorLeftNavList.find('.test-child').length).toEqual(2);
     });
   });
+
+  describe('actions', () => {
+    const openList = shallow(
+      <InteriorLeftNavList
+        className="extra-class"
+        title="test-title"
+        open
+      >
+        <InteriorLeftNavItem href="#" title="test-title" />
+      </InteriorLeftNavList>
+    );
+
+    it('handles click to leftNavList as expected', () => {
+      expect(openList.state().open).toEqual(true);
+      openList.simulate('click');
+      expect(openList.state().open).toEqual(false);
+    });
+  });
 });

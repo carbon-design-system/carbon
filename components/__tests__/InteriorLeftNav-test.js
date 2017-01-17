@@ -3,7 +3,7 @@ import InteriorLeftNav from '../InteriorLeftNav';
 import InteriorLeftNavHeader from '../InteriorLeftNavHeader';
 import InteriorLeftNavList from '../InteriorLeftNavList';
 import InteriorLeftNavItem from '../InteriorLeftNavItem';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 describe('InteriorLeftNav', () => {
   describe('Renders as expected', () => {
@@ -34,6 +34,22 @@ describe('InteriorLeftNav', () => {
       expect(interiorLeftNav.find(InteriorLeftNavHeader).length).toEqual(1);
       expect(interiorLeftNav.find('.left-nav-list').length).toEqual(1);
       expect(interiorLeftNav.find('.test-child').length).toEqual(2);
+    });
+  });
+
+  describe('actions', () => {
+    const interiorLeftNav = mount(
+      <InteriorLeftNav>
+        <InteriorLeftNavList className="test-child" />
+        <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
+      </InteriorLeftNav>
+    );
+
+    it('handles item click as expected', () => {
+      const leftNavItem = interiorLeftNav.find(InteriorLeftNavItem).last();
+      expect(interiorLeftNav.state().activeHref).toEqual('blank');
+      leftNavItem.simulate('click');
+      expect(interiorLeftNav.state().activeHref).toEqual('#');
     });
   });
 });
