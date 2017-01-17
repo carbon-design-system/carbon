@@ -37,11 +37,24 @@ Bluemix Components React is published on a private npm registry maintained by th
   ```
 
 4. These components require the use of [Webpack](http://webpack.github.io/docs/tutorials/getting-started/) in your project. See our [`webpack.config.js`](/.storybook/webpack.config.js) for an example configuration.
-
-5. Example usage:
-
+  * Each component has an associated stylesheet, which requires several webpack loaders (as seen in the example configuration)
+  * To install webpack and all of the loaders in the example configuration
   ```
+  $ npm install -D webpack sass-loader css-loader style-loader postcss-loader
+  ```
+
+5. Components do not import any of the global styles (font-family, font-size, body color, etc.). As such, you'll need to pull them into your project. One way to accomplish this is to create a SASS file that declares the use of globals and pulls in the global SASS module.
+
+6. Example usage:
+
+  ```scss
+  $use-globals: true;
+  @import '../node_modules/@console/bluemix-components/consumables/scss/global/global.scss';
+  ```
+
+  ```javascript
   import { Loading } from '@console/bluemix-components-react';
+  import './styles.scss'
   ReactDOM.render(
     <Loading className="example-loading" />,
     document.getElementById('example-container')
