@@ -165,8 +165,12 @@
     padding: 0 0 0 .5rem;
     color: $color__navy-gray-7;
 
+    @include light-ui {
+      color: $color__navy-gray-6;
+    }
+
     @include breakpoint(700px) {
-      padding: .5rem 0 0 0;
+      padding: .5rem 0;
     }
   }
 
