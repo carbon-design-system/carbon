@@ -39,7 +39,7 @@ $transition--base: 250ms;
 
 @mixin box-shadow($size: 'small') {
   // Large - For dropdowns
-  @if($size == 'large') {
+  @if ($size == 'large') {
     box-shadow: 6px 6px 6px 0 $color__box-shadow;
   }
 
@@ -51,14 +51,6 @@ $transition--base: 250ms;
 @mixin focus-outline {
   outline: 1px dotted; // for non-webkit browsers
   outline: auto 5px -webkit-focus-ring-color; // webkit default
-}
-
-@mixin placeholder-colors {
-  color: $color__navy-gray-7;
-
-  @include light-ui {
-    color: $color__navy-gray-6;
-  }
 }
 
 @mixin rotate($deg, $speed, $origin: center) {
@@ -84,12 +76,4 @@ $transition--base: 250ms;
   .bx--global-light-ui & {
     @content;
   }
-}
-
-@mixin text-overflow($width) {
-  display: block;
-  width: $width;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
