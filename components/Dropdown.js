@@ -82,7 +82,9 @@ class Dropdown extends PureComponent {
           tabIndex={tabIndex}
         >
           <li className="bx--dropdown__menu-text">{this.state.selectedText}</li>
-          <Icon name="caret--down" className="bx--dropdown__arrow" fill="#5aaafa" description={iconDescription} />
+          <li>
+            <Icon name="caret--down" className="bx--dropdown__arrow" fill="#5aaafa" description={iconDescription} />
+          </li>
           <li>
             <ul className="bx--dropdown__list">{children}</ul>
           </li>
