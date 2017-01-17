@@ -2,15 +2,17 @@
 // 🌍 Global
 //-------------------------
 
-$css-font-face: false !default;
-$css-helpers: true !default;
-$css-body: true !default;
+$css--font-face: false !default;
+$css--helpers: true !default;
+$css--body: true !default;
+$css--reset: false !default;
 
 @import 'colors';
 @import 'import-once';
 @import 'helpers';
 @import 'layout';
 @import 'typography';
+@import 'css--reset';
 @import 'css--font-face';
 @import 'css--helpers';
 @import 'css--body';
