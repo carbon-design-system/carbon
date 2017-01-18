@@ -10,6 +10,36 @@ $transition--base: 250ms;
 @mixin reset {
   // Main reset block for most elements:
   // http://cssreset.com/scripts/eric-meyer-reset-css/
+  @if global-variable-exists(use-reset) and $use-reset == false {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+}
+
+@mixin placeholder-colors {
+  color: $color__navy-gray-7;
+
+  @include light-ui {
+    color: $color__navy-gray-6;
+  }
+}
+
+@mixin text-overflow($width) {
+  display: block;
+  width: $width;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin reset {
+  // Main reset block for most elements:
+  // http://cssreset.com/scripts/eric-meyer-reset-css/
   @if global-variable-exists(css--reset) and $css--reset == false {
     box-sizing: border-box;
     margin: 0;

@@ -6,46 +6,61 @@
 @import '../../../../globals/scss/import-once';
 
 @include exports('file-uploader') {
-  .bx--file__input {
-    @include hidden;
 
-    &:focus + &__label {
-      @include focus-outline;
-    }
-  }
-
-  .bx--file__label {
-    @include reset;
-    @include font-size('14');
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding-left: .9rem;
-    margin: .25rem 0;
-    height: rem(40px);
+  .bx--file-uploader {
     width: 100%;
-    background-color: $color__inputs--bg;
-    border: none;
-    color: $color__navy-gray-8;
-    font-weight: 200;
-    min-width: 9.375rem;
+  }
 
-    @include light-ui {
-      background-color: $color__inputs--bg--light-ui;
-      color: $color__blue-90;
+  .bx--file-uploader__input {
+    @include hidden;
+  }
+
+  .bx--file-uploader__container {
+    display: block;
+    width: 100%;
+    margin-top: rem(20px);
+  }
+
+  .bx--file-uploader__selected-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: rem(30px);
+    background-color: $color__navy-gray-6;
+    padding: 0 1rem;
+    margin-bottom: rem(20px);
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 
-  .bx--file__label:after {
-    @include btn--primary;
-    position: absolute;
-    top: 0;
-    right:0;
-    content: attr(data-button-title);
+  .bx--file-uploader__filename {
+    @include font-size('12');
+    color: $color__white;
+  }
 
-    @include light-ui {
-      @include btn--primary($color__blue-51, $color__blue-40);
-      color: $color__white;
-    }
+  .bx--file-uploader__label {
+    @include btn--secondary;
+    display: inline-flex;
+    margin: 0;
+  }
+
+  .bx--file-uploader__state-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .bx--file-uploader__state-container .bx--loading {
+    width: 2rem;
+    height: 2rem;
+    margin-right: -7px;
+  }
+
+  .bx--file-uploader__state-container .bx--file-uploader__close-icon {
+    width: 1rem;
+    height: 1rem;
+    fill: $color__white;
+    cursor: pointer;
   }
 }

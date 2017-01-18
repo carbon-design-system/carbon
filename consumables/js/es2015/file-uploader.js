@@ -5,6 +5,33 @@ import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import '../polyfills/array-from';
 
+const initialStateHTML = (name, id) => {
+  return (`
+    <span class="bx--file-uploader__selected-file">
+      <p class="bx--file-uploader__filename">${name}</p>
+      <span data-for="${id}" class="bx--file-uploader__state-container"></span>
+    </span>
+  `);
+};
+
+const uploadStateHTML = () => {
+  return (`
+    <div data-loading class="bx--loading">
+      <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+        <circle cx="0" cy="0" r="37.5" />
+      </svg>
+    </div>`
+  );
+};
+
+const editStateHTML = () => {
+  return (`
+    <svg class="bx--file-uploader__close-icon">
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#close--glyph"></use>
+    </svg>`
+  );
+};
+
 class FileUploader extends mixin(createComponent, initComponent) {
   /**
    * File uploader.
@@ -14,31 +41,85 @@ class FileUploader extends mixin(createComponent, initComponent) {
    * @param {Object} [options] The component options.
    * @param {string} [options.labelSelector] The CSS selector to find the label for the file name.
    */
-  constructor(element, options) {
+  constructor(element, options = {}) {
     super(element, options);
+    this.uniqueStateContainerID = this.element.getAttribute('id');
+    this.options = Object.assign(Object.create(this.constructor.options), options);
+    this.state = '';
 
-    this.labelNode = this.element.nextElementSibling || this.element.ownerDocument.querySelector(`.bx--file__label${this.options.selectorLabel}`);
+    this.constructor.components.set(this.element, this);
 
-    element.addEventListener('change', (event) => this.updateLabel(event));
+    if (element.classList.contains('bx--file-uploader__input')) {
+      element.addEventListener('change', () => this.injectInitialStateHTML());
+    }
   }
 
   /**
-   * Updates the label for the file name upon file selection.
-   * @param {Event} event The event triggering this method.
+   * Display selected files for upload, invoked on change event
+   * @param {string} CSS selector for HTMLElement container that displays selected files.
    */
-  updateLabel(event) {
-    let fileName = '';
-    const element = this.element;
+  injectInitialStateHTML(selectorContainer = this.options.selectorContainer) {
+    const selector = this.element.dataset.target || selectorContainer;
+    const container = this.element.ownerDocument.querySelector(selector);
+    const HTMLString = [... this.element.files]
+      .map(file => initialStateHTML(file.name, this.uniqueStateContainerID))
+      .join('');
 
-    if (element.files && element.files.length > 1) {
-      fileName = (element.dataset.multipleCaption || '').replace('{count}', element.files.length);
-    } else {
-      fileName = event.target.value.split('\\').pop();
+    container.insertAdjacentHTML('afterbegin', HTMLString);
+    this.state = 'default';
+    return this.state;
+  }
+
+  /**
+   * Set dataset.state using given state
+   * insert HTMLString with given html param into target
+   */
+  injectStateHTML(state, target, html) {
+    this.element.dataset.state = state;
+    target.insertAdjacentHTML('afterbegin', html);
+  }
+
+  /**
+   * Set stateful HTML into each selected file state container
+   * Sets [data-state] to given state on this.element
+   * Removes any existing HTML in state container
+   * Should only be called after change event or after invoking injectInitialStateHTML()
+   * @param {string} State ('edit' or 'upload') determines which HTML fragment to inject
+   */
+  setStateHTML(state) {
+    const selector = `[data-for=${this.uniqueStateContainerID}]`;
+    const stateContainers = [... this.element.ownerDocument.querySelectorAll(selector)];
+
+    if (stateContainers.length === 0) {
+      throw new TypeError('State container elements not found; invoke injectInitialStateHTML() before injectStateHTML())');
     }
 
-    if (fileName) {
-      this.labelNode.textContent = fileName;
+    if (state === undefined || state === '') {
+      throw new TypeError('injectStateHTML() missing String args: "edit" or "upload"');
     }
+
+    stateContainers.forEach(container => {
+      const childNode = container.querySelector('div') || container.querySelector('svg') || false;
+      if (childNode) {
+        container.removeChild(childNode);
+      }
+
+      if (state === 'upload') {
+        this.injectStateHTML('upload', container, uploadStateHTML());
+      }
+
+      if (state === 'edit') {
+        this.injectStateHTML('edit', container, editStateHTML());
+      }
+    });
+
+    this.state = state;
+
+    return {
+      state: this.state,
+      selector,
+      stateContainers,
+    };
   }
 
   /**
@@ -55,10 +136,12 @@ class FileUploader extends mixin(createComponent, initComponent) {
    * @member FileUploader.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find file uploaders.
+   * @property {string} selectorContainer The CSS selector to find "file uploader container" showing all selected files to display.
+   * @property {string} [labelSelector] The CSS selector to find the label for the file name.
    */
   static options = {
     selectorInit: '[data-file-uploader]',
-    selectorLabel: '[data-file-appearance]',
+    selectorContainer: '[data-file-container]',
   };
 }
 
