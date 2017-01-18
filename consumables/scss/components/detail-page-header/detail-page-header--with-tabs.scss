@@ -57,15 +57,10 @@
   &__breadcrumb {
     @include reset;
     font-weight: 600;
-    color: $color__navy-gray-8;
     cursor: pointer;
 
     @include breakpoint(bp--xs--major) {
       padding-bottom: .5rem;
-    }
-
-    @include light-ui {
-      color: $color__blue-90;
     }
   }
 
@@ -74,6 +69,11 @@
     @include font-size('14');
     display: none;
     text-align: left;
+    color: $color__white;
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
 
     @include breakpoint(bp--xs--major) {
       display: inline-block;
@@ -111,11 +111,12 @@
     padding-left: .5rem;
     margin-left: .5rem;
     font-weight: 200;
-    border-left: 1px solid $color__navy-gray-4;
+    border-left: 1px solid $color__navy-gray-7;
+    color: $color__navy-gray-8;
 
     @include light-ui {
       color: $color__navy-gray-6;
-      border-left: 1px solid $color__gray-1;
+      border-left: 1px solid $color__navy-gray-7;
     }
 
     @include breakpoint(bp--xs--major) {
