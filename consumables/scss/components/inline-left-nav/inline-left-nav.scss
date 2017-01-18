@@ -15,7 +15,7 @@
   top: rem(90px);
   height: 100%;
   background-color: $color__navy-gray-3;
-  border-right: 1px solid $color__navy-gray-6;
+  border-right: 1px solid $color__blue-90;
 
   @include light-ui {
     background-color: $color__white;
@@ -46,7 +46,7 @@
             background-color: $color__gray-2;
             color: $color__blue-51;
           }
-          background-color: $color__navy-gray-2;
+          background-color: $color__blue-90;
           color: $color__blue-30;
           font-weight: 600;
         }
@@ -116,7 +116,7 @@
             background-color: $color__gray-2;
             color: $color__blue-51;
           }
-          background-color: $color__navy-gray-2;
+          background-color: $color__blue-90;
           color: $color__blue-30;
         }
       }
@@ -181,7 +181,7 @@
             background-color: $color__gray-2;
             color: $color__blue-51;
           }
-          background-color: $color__navy-gray-2;
+          background-color: $color__blue-90;
           font-weight: 600;
           color: $color__blue-30;
         }
@@ -195,7 +195,7 @@
       border-bottom: 1px solid $color__gray-1;
     }
     
-    border-bottom: 1px solid $color__navy-gray-6;
+    border-bottom: 1px solid $color__blue-90;
     cursor: pointer;
 
     &--link {
@@ -203,7 +203,7 @@
       @include font-smoothing;
       @include font-size('14');
       @include light-ui {
-        color: $color__blue-51;
+        color: $color__blue-90;
       }
       
       height: rem(50px);
@@ -221,20 +221,20 @@
         width: rem(15px);
         height: rem(15px);
         margin-right: 1.25rem;
-        fill: $color__white;
+        fill: $color__blue-30;
       }
 
       &:hover {
         @include light-ui {
           color: $color__blue-40;
         }
-        color: $color__blue-30;
+        color: $color__blue-20;
 
         & > .bx--inline-left-nav__icon {
           @include light-ui {
             fill: $color__blue-40;
           }
-          fill: $color__blue-30;
+          fill: $color__blue-20;
         }
       }
 
