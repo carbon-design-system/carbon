@@ -5,7 +5,7 @@
 %btn--base {
   @include helvetica;
   @include font-smoothing;
-  @include letter-spacing;  
+  @include letter-spacing;
   @include font-size('14');
   font-weight: 700;
   display: inline-block;

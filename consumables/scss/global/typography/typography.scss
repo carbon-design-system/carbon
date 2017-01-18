@@ -1,0 +1,129 @@
+@import '../helpers';
+@import 'vars';
+@import 'functions';
+@import 'extends';
+@import 'mixins';
+
+@import '../../import-once';
+
+@mixin typography-css {
+  h1 {
+    @include reset;
+    @include font-size('32');
+    @include line-height('heading');
+    @include letter-spacing; 
+  }
+
+  h2 {
+    @include reset;
+    @include font-size('26');
+    @include line-height('heading');
+    @include letter-spacing;
+  }
+
+  h3 {
+    @include reset;
+    @include font-size('20');
+    @include line-height('heading');
+    @include letter-spacing; 
+  }
+
+  h4 {
+    @include reset;
+    @include font-size('18');
+    @include line-height('heading');
+  }
+
+  h5 {
+    @include reset;
+    @include font-size('16');
+    @include line-height('heading');
+  }
+
+  h6 {
+    @include reset;
+    @include font-size('14');
+    @include line-height('heading');
+  }
+
+  p {
+    @include reset;
+    @include font-size('16');
+    @include line-height('body');
+  }
+
+  strong {
+    @include reset;
+    @include font-smoothing;
+    @include letter-spacing;
+    font-weight: 700;
+  }
+
+  em {
+    @include reset;
+    font-style: italic;
+  }
+
+  a {
+    @include reset;
+    color: $color__blue-20;
+
+    @include light-ui {
+      color: $color__blue-51;
+    }
+  }
+}
+
+@include exports('typography') {
+  @if global-variable-exists(typography-css) and $typography-css == true {
+    @include typography-css;
+  }
+}
+
+//----------------------------------------------------------
+// ☠️ Deprecated - %h1, %h2, %h3, %p, %strong, %em, %caption
+//----------------------------------------------------------
+
+%h1 {
+  @include reset;
+  @include font-size('32');
+  @include line-height('heading');
+  @include letter-spacing;
+}
+
+%h2 {
+  @include reset;
+  @include font-size('26');
+  @include line-height('heading');
+  @include letter-spacing;
+}
+
+%h3 {
+  @include reset;
+  @include font-size('20');
+  @include line-height('heading');
+  @include letter-spacing;
+}
+
+%p {
+  @include reset;
+  @include font-size('16');
+  @include line-height('body');
+}
+
+%strong {
+  @include reset;
+  @include font-smoothing;
+  @include letter-spacing;
+  font-weight: 700;
+}
+
+%em {
+  @include reset;
+  font-style: italic;
+}
+
+%caption {
+  @include reset;
+  @include font-size('12');
+}

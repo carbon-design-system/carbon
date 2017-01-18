@@ -2,15 +2,14 @@
 
 .demo--container {
   @include grid-container;
-  @include reset;
   box-sizing: border-box;
   display: flex;
   padding: 1rem;
   transition: .2s;
   background-color: $color__navy-gray-2;
 
-  .bx--global-light-ui & {
-    background-color: #F5F7FA; // to be `$color__gray-3`
+  @include light-ui {
+    background-color: $color__gray-3;
   }
 
   &.flex-col {

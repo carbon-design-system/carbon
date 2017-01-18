@@ -1,117 +1,97 @@
 //-----------------------------
-// Modals
+// Modules
 //-----------------------------
 
 @import '../../../../globals/scss/colors';
-@import '../../../../globals/scss/layout';
 @import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/layout';
 @import '../../../../globals/scss/typography';
-@import '../../base-elements/buttons/buttons';
-@import 'vars';
-@import 'extends';
-@import 'mixins';
 @import '../../../../globals/scss/import-once';
 
 @include exports('modules') {
+  .bx--module {
+    @include reset;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex-grow: 0;
+    padding: rem(10px);
+    flex: 1 0 auto;
+    margin: 0;
 
-// This is a section of modules
-.bx--module {
-  @include layer('raised');
-  display: flex;
-  flex-grow: 1;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: $module--max;
-  margin: 1rem auto;
+    .bx--module__inner {
+      @include layer('raised');
+      background-color: $color__navy-gray-3;
 
-  // Override colors for a11y
-  .bx--link {
-    color: lighten($color__blue-30, 8%);
+      @include light-ui {
+        background-color: $color__white;
+        border: 1px solid $color__navy-gray-8;
 
-    @include light-ui {
-      color: $color__blue-51;
-    }
-  }
-
-  .bx--btn--secondary {
-    @include btn--secondary(lighten($color__blue-30, 8%));
-
-    @include light-ui {
-      @include btn--secondary($color__blue-51);
-
-      &:hover {
-        color: $color__white;
       }
     }
-  }
-}
 
-.bx--module {
-  &--full {
-    @include module--base;
-    flex-basis: 100%;
-    flex-grow: 1;
-  }
+    .bx--module__header {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid $color__navy-gray-6;
 
-  &--half {
-    @include module--base;
-    flex-basis: 100%;
-    flex-grow: 1;
-    width: 100%;
+      @include light-ui {
+        border-bottom: 1px solid $color__navy-gray-8;
+      }
+    }
 
-    @include breakpoint(bp--sm--major) {
-      flex-basis: calc(50% - .5rem); // $module-margin/2 is .5rem -- calc wouldn't allow vars because it is CSS
+    .bx--module__title {
+      @include font-size('14');
+      @include font-smoothing;
+      font-weight: 700;
+      color: $color__navy-gray-8;
+
+      @include light-ui {
+        color: $color__blue-90;
+      }
+    }
+
+    .bx--module__text {
+      @include font-size('14');
+      color: $color__navy-gray-8;
+
+      @include light-ui {
+        color: $color__blue-90;
+      }
+    }
+
+    .bx--module__content {
+      display: flex;
+      flex-direction: column;
+      flex: 3;
+      padding: 1.5rem;
+    }
+
+    .bx--module__content--centered {
+      align-items: center;
+      justify-content: center;
+      padding: 5rem;
+
+      .bx--module__text {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+    }
+
+    .bx--module__content--scrollable {
+      max-height: rem(300px);
+      overflow-y: scroll;
+      margin-bottom: 2rem;
+    }
+
+    &.bx--module--single {
+      max-width: rem(500px);
+    }
+
+    &.bx--module--double {
+      max-width: rem(1000px);
     }
   }
-
-  &--two-third {
-    @include module--base;
-    flex-basis: 100%;
-    flex-grow: 1;
-    width: 100%;
-
-    @include breakpoint(bp--sm--major) {
-      flex-basis: 66%;
-    }
-  }
-
-  &--one-third {
-    @include module--base;
-    flex-basis: 100%;
-    flex-grow: 1;
-    width: 100%;
-
-    @include breakpoint(bp--sm--major) {
-      flex-basis: calc(33% - .5rem);
-    }
-  }
-
-  &__header {
-    @include font-size('14');
-    font-weight: 700;
-    color: $color__module-header;
-    border-bottom: 1px solid $color__navy-gray-2;
-
-    @include light-ui {
-      color: $color__blue-90;
-      border-bottom: 1px solid $color__navy-gray-8;
-    }
-  }
-
-  &__footer {
-    @include font-size('14');
-    border-top: 1px solid $color__navy-gray-2;
-
-    @include light-ui {
-      border-top: 1px solid $color__navy-gray-8;
-    }
-  }
-
-  &__header,
-  &__body,
-  &__footer {
-    padding: $module--margin;
-  }
-}
-
 }
