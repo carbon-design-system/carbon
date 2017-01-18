@@ -36,7 +36,7 @@
   &__text {
     @include reset;
     @include font-size('14');
-    color: $color__white;
+    color: $color__navy-gray-8;
     font-weight: 300;
 
     @include light-ui {
