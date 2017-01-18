@@ -41,7 +41,7 @@
       pointer-events: none;
 
       @include light-ui {
-        border: 1px solid $color__navy-gray-8;
+        border: 1px solid $color__gray-1;
         color: $color__blue-90;
       }
     }
@@ -76,7 +76,7 @@
     height: 1rem;
     width: 1rem;
     margin-left: .5rem;
-    fill: $color__blue-30;
+    fill: $color__blue-51;
   }
 
   // Tooltip caret - top position
