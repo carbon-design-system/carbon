@@ -30,7 +30,7 @@
 
     &:before {
       @include font-size('14');
-      @include box-shadow;
+      @include layer('overlay');
       padding: 1rem;
       border: 1px $color__navy-gray-2 solid;
       margin-left: 50%;

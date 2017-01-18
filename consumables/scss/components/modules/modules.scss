@@ -16,6 +16,7 @@
 
 // This is a section of modules
 .bx--module {
+  @include layer('raised');
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;

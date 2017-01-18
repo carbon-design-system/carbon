@@ -3,6 +3,7 @@
 @include exports('left-nav-new') {
 
 .bx--global-header__left-nav {
+  @include layer('left-nav');
   @include reset;
   position: fixed;
   z-index: 9000;

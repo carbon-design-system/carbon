@@ -33,7 +33,7 @@
     left: 50%;
 
     &:before {
-      @include box-shadow;
+      @include layer('overlay');
       @include font-size('12');
       top: 1.1rem;
       padding: .5rem 1rem;

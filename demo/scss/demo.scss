@@ -1,68 +1,69 @@
 @import '../../globals/scss/styles';
 
-// .demo--container {
-//   @include grid-container;
-//   box-sizing: border-box;
-//   display: flex;
-//   padding: 1rem;
-//   transition: .2s;
-//   background-color: $color__navy-gray-2;
+.demo--container {
+  @include grid-container;
+  @include reset;
+  box-sizing: border-box;
+  display: flex;
+  padding: 1rem;
+  transition: .2s;
+  background-color: $color__navy-gray-2;
 
-//   .bx--global-light-ui & {
-//     background-color: #F5F7FA; // to be `$color__gray-3`
-//   }
+  .bx--global-light-ui & {
+    background-color: #F5F7FA; // to be `$color__gray-3`
+  }
 
-//   &.flex-col {
-//     flex-direction: column;
-//     margin: 0 auto;
+  &.flex-col {
+    flex-direction: column;
+    margin: 0 auto;
 
-//     & > * {
-//       margin: 1rem 0;
-//     }
-//   }
+    & > * {
+      margin: 1rem 0;
+    }
+  }
 
-//   &.flex-row {
-//     flex-wrap: wrap;
-//     margin: 0 auto;
+  &.flex-row {
+    flex-wrap: wrap;
+    margin: 0 auto;
 
-//     & > * {
-//       margin: 1rem;
-//     }
-//   }
+    & > * {
+      margin: 1rem;
+    }
+  }
 
-//   &.mobile {
-//     max-width: 600px;
-//   }
-// }
+  &.mobile {
+    max-width: 600px;
+  }
+}
 
-// .demo--panels {
-//   width: 100%;
-//   height: 15rem;
-// }
+.demo--panels {
+  width: 100%;
+  height: 15rem;
+}
 
-// .demo--panel {
-//   width: 100%;
-//   max-width: 960px;
-//   height: 100%;
-//   padding: 3em 1em 1em;
-// }
+.demo--panel {
+  width: 100%;
+  max-width: 960px;
+  height: 100%;
+  padding: 3em 1em 1em;
+}
 
-// .theme-switcher {
-//   margin: 1rem 0;
-//   position: fixed;
-//   top: 0;
-//   right: 1rem;
-// }
+.theme-switcher {
+  margin: 1rem 0;
+  position: fixed;
+  top: 0;
+  right: 1rem;
+}
 
-// .demo-switcher {
-//   &__container {
-//     display: flex;
-//     position: fixed;
-//     top: 1.5rem;
-//     left: 1rem;
+.demo-switcher {
+  &__container {
+    display: flex;
+    position: fixed;
+    top: 1.5rem;
+    left: 1rem;
 
-//     label {
-//       margin-right: 1rem;
-//     }
-//   }
-// }
+    label {
+      margin-right: 1rem;
+    }
+  }
+}

@@ -11,6 +11,7 @@
 
 .bx--inline-left-nav {
   @include reset;
+  @include layer('flat');
   width: rem(250px);
   position: fixed;
   top: rem(90px);
@@ -195,7 +196,7 @@
     @include light-ui {
       border-bottom: 1px solid $color__gray-1;
     }
-    
+
     border-bottom: 1px solid $color__navy-gray-6;
     cursor: pointer;
 
@@ -206,7 +207,7 @@
       @include light-ui {
         color: $color__blue-51;
       }
-      
+
       height: rem(50px);
       text-decoration: none;
       padding: 1.5rem 0 1rem 1.5rem;

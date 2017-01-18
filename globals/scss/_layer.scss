@@ -1,0 +1,43 @@
+//-------------------------------------------
+// 📑 Layer
+// ------------------------------------------
+//
+//   Layer                 ||  Elevation
+//   ==========================================
+//   0 - Base              ||  0
+//   1 - Flat              ||  1
+//   2 - Raised            ||  2
+//   3 - Overlay           ||  8
+//   4 - Pop-out           ||  24
+//   ==========================================
+//   Custom: Left Nav      ||  16
+//   Custom: Global Header ||  12
+//
+
+// Box shadow variables
+$box-shadow--raised: 0 1px 2px 0 rgba(0, 0, 0, .2);
+$box-shadow--overlay: 0 4px 8px 0 rgba(0, 0, 0, .2);
+$box-shadow--pop-out: 0 12px 24px 0 rgba(0, 0, 0, .2);
+$box-shadow--left-nav: 0 8px 16px 0 rgba(0, 0, 0, .2);
+$box-shadow--global-header: 0 6px 12px 0 rgba(0, 0, 0, .2);
+
+// Layer box-shadow map
+$layer-shadows: (
+  base: none,
+  flat: none,
+  raised: $box-shadow--raised,
+  overlay: $box-shadow--overlay,
+  pop-out: $box-shadow--pop-out,
+  left-nav: $box-shadow--left-nav,
+  global-header: $box-shadow--global-header
+);
+
+// Layer mixin
+@mixin layer($layer) {
+  @if map-has-key($layer-shadows, $layer) {
+    box-shadow: #{map-get($layer-shadows, $layer)};
+  }
+  @else {
+    @warn '#{$layer} is not a valid layer.';
+  }
+}

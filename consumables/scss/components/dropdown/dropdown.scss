@@ -71,7 +71,7 @@
   .bx--dropdown--open &__list {
     @include reset;
     @include font-size('14');
-    @include box-shadow('large');
+    @include layer('overlay');
     display: flex;
     flex-direction: column;
     background-color: $color__navy-gray-3;

@@ -20,6 +20,7 @@
     @include detail-page-header-animated;
 
     &-slide-up {
+      @include layer('overlay');
       transform: translateY(-101px);
 
       @media (max-width: 770px) {

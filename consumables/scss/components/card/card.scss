@@ -15,7 +15,7 @@
 
 .bx--card {
   @include reset;
-  @include box-shadow;
+  @include layer('raised');
   display: flex;
   flex-direction: column;
   width: rem(200px);

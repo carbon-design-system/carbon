@@ -97,6 +97,7 @@
   .bx--modal-inner {
     @include reset;
     @include font-size('16');
+    @include layer('pop-out');
     position: relative;
     z-index: z('modal');
     width: 100%;
@@ -240,4 +241,3 @@
 }
 
 }
-

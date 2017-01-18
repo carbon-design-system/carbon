@@ -31,7 +31,7 @@
   // Initial styling for the options pane
   &__options {
     @include reset;
-    @include box-shadow;
+    @include layer('overlay');
     list-style: none;
     left: auto;
     right: rem(-20px);

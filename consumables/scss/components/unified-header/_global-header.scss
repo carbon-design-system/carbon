@@ -3,6 +3,7 @@
 @include exports('global-header') {
 
 .bx--global-header {
+  @include layer('global-header');
   @include reset;
   @include helvetica;
   width: 100%;
