@@ -2,7 +2,11 @@
 // Search
 //-----------------------------
 
-@import '../../global/global';
+@import '../../global/colors/colors';
+@import '../../global/layout/grid';
+@import '../../global/layout/z-index';
+@import '../../global/helpers';
+@import '../../global/typography/typography';
 @import 'extends';
 @import 'mixins';
 @import '../../import-once';
