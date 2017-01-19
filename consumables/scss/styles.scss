@@ -59,7 +59,7 @@ $use-reset: false !default;
 //-------------------------
 // ☠️ Deprecated
 //-------------------------
-@import 'deprecated/tables/tables';
+@import 'base-elements/tables/tables';
 @import 'deprecated/data-module/data-module';
 @import 'deprecated/fab-label/fab-label';
 @import 'deprecated/item-list/item-list';
