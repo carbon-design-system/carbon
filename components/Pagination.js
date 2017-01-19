@@ -76,6 +76,8 @@ class Pagination extends Component {
       pageRangeText,
       pageSizes,
       totalItems,
+      onChange, // eslint-disable-line no-unused-vars
+      ...other,
     } = this.props;
     const {
       page,
@@ -84,7 +86,7 @@ class Pagination extends Component {
     const classNames = classnames('bx--pagination', className);
 
     return (
-      <div className={classNames}>
+      <div className={classNames} {...other}>
         <div className="bx--pagination__left">
           <Select
             id={`bx-pagination-select-${this.id}`}

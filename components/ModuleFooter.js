@@ -7,10 +7,10 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const ModuleFooter = ({ children, className }) => {
+const ModuleFooter = ({ children, className, ...other }) => {
   const wrapperClasses = classNames('bx--module__footer', className);
   return (
-    <div className={wrapperClasses}>
+    <div className={wrapperClasses} {...other}>
       {children}
     </div>
   );

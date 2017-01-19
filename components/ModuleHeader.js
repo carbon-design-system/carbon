@@ -7,11 +7,11 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const ModuleHeader = ({ children, className }) => {
+const ModuleHeader = ({ children, className, ...other }) => {
   const wrapperClasses = classNames('bx--module__header', className);
 
   return (
-    <h2 className={wrapperClasses}>
+    <h2 className={wrapperClasses} {...other}>
       {children}
     </h2>
   );

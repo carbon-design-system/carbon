@@ -21,13 +21,13 @@ const propTypes = {
   type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
 };
 
-const Tag = ({ children, className, type }) => {
+const Tag = ({ children, className, type, ...other }) => {
   const tagClass = `tag--${type}`;
   const tagClasses = classNames(
     tagClass,
     className,
   );
-  return <span className={tagClasses}>{children || TYPES[type]}</span>;
+  return <span className={tagClasses} {...other}>{children || TYPES[type]}</span>;
 };
 
 Tag.propTypes = propTypes;

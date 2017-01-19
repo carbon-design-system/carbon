@@ -7,14 +7,14 @@ const propTypes = {
   className: React.PropTypes.string,
 };
 
-const CardFooter = ({ children, className }) => {
+const CardFooter = ({ children, className, ...other }) => {
   const cardFooterClasses = classNames({
     'bx--card__card-footer': true,
     [className]: className,
   });
 
   return (
-    <div className={cardFooterClasses}>
+    <div className={cardFooterClasses} {...other}>
       {children}
     </div>
   );

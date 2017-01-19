@@ -83,7 +83,7 @@ export function svgShapes(svgData) {
   return svgElements;
 }
 
-const Icon = ({ className, width, height, fill, fillRule, name, style, description }) => {
+const Icon = ({ className, width, height, fill, fillRule, name, style, description, ...other }) => {
   const icon = findIcon(name);
   const id = icon.id;
   const props = {
@@ -95,6 +95,7 @@ const Icon = ({ className, width, height, fill, fillRule, name, style, descripti
     viewBox: icon.viewBox,
     width: width || icon.width,
     height: height || icon.height,
+    ...other,
   };
 
   const svgContent = (icon) ? svgShapes(icon.svgData) : '';

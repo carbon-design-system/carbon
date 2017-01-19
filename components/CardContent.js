@@ -22,7 +22,8 @@ const defaultProps = {
   fullSize: false,
 };
 
-const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardInfo, fullSize, desc, amount, buttonText }) => {
+const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardInfo, fullSize, desc,
+                       amount, buttonText, ...other }) => {
   const cardContentClasses = classNames({
     'bx--card__card-overview': !fullSize,
     'bx--card--quota__overview': fullSize,
@@ -46,7 +47,7 @@ const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardI
 
   const cardContent = (fullSize)
   ? (
-    <div className={cardContentClasses}>
+    <div {...other} className={cardContentClasses}>
       <p className="bx--overview__description">
         <span className="bx--overview__main-number">{amount}</span>
         <br />
@@ -56,7 +57,7 @@ const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardI
     </div>
     )
   : (
-    <div className={cardContentClasses}>
+    <div {...other} className={cardContentClasses}>
     {children}
       <div className="bx--card-overview__about">
         <div className="bx--about__icon">

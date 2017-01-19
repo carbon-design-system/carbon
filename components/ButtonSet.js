@@ -10,13 +10,19 @@ class ButtonSet extends React.Component {
   }
 
   render() {
-    const buttonSetClasses = classNames({
+    const {
+      children,
+      className,
+      ...other,
+    } = this.props;
+
+    const buttonSetClasses = classNames(className, {
       'bx--sets-of-buttons': true,
     });
 
     return (
-      <div className={buttonSetClasses}>
-        {this.props.children}
+      <div {...other} className={buttonSetClasses}>
+        {children}
       </div>
     );
   }

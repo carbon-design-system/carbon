@@ -64,7 +64,7 @@ describe('a11y scan', () => {
 
   it('Button', (done) => {
     const wrapper = render(
-      <Button />
+      <Button>Label</Button>
     );
 
     AAT.getCompliance(wrapper.html(), 'Button', (data) => {
@@ -210,7 +210,7 @@ describe('a11y scan', () => {
 
   it('CopyButton', (done) => {
     const wrapper = render(
-      <CopyButton />
+      <CopyButton>Label</CopyButton>
     );
 
     AAT.getCompliance(wrapper.html(), 'CopyButton', (data) => {
@@ -221,7 +221,14 @@ describe('a11y scan', () => {
 
   it('Form', (done) => {
     const wrapper = render(
-      <Form />
+      <Form>
+        <Button
+          type="submit"
+          className="some-class"
+        >
+          Submit
+        </Button>
+      </Form>
     );
 
     AAT.getCompliance(wrapper.html(), 'Form', (data) => {
@@ -232,7 +239,7 @@ describe('a11y scan', () => {
 
   it('FormGroup', (done) => {
     const wrapper = render(
-      <FormGroup />
+      <FormGroup legendText="example legend Text" />
     );
 
     AAT.getCompliance(wrapper.html(), 'FormGroup', (data) => {
@@ -243,7 +250,7 @@ describe('a11y scan', () => {
 
   it('FileUploader', (done) => {
     const wrapper = render(
-      <FileUploader id="test id" />
+      <FileUploader id="test id" labelDescription="test label" />
     );
 
     AAT.getCompliance(wrapper.html(), 'FileUploader', (data) => {
@@ -287,7 +294,7 @@ describe('a11y scan', () => {
 
   it('DangerButton', (done) => {
     const wrapper = render(
-      <DangerButton />
+      <DangerButton>Label</DangerButton>
     );
 
     AAT.getCompliance(wrapper.html(), 'DangerButton', (data) => {
@@ -309,7 +316,7 @@ describe('a11y scan', () => {
 
   it('Link', (done) => {
     const wrapper = render(
-      <Link />
+      <Link>Link</Link>
     );
 
     AAT.getCompliance(wrapper.html(), 'Link', (data) => {
@@ -342,7 +349,12 @@ describe('a11y scan', () => {
 
   it('Modal', (done) => {
     const wrapper = render(
-      <Modal />
+      <Modal
+        modalHeading="modalHeading"
+        modalLabel="modal label"
+        primaryButtonText="primaryButtonText"
+        secondaryButtonText="secondaryButtonText"
+      />
     );
 
     AAT.getCompliance(wrapper.html(), 'Modal', (data) => {
@@ -353,7 +365,13 @@ describe('a11y scan', () => {
 
   it('ModalWrapper', (done) => {
     const wrapper = render(
-      <ModalWrapper />
+      <ModalWrapper
+        modalHeading="modalHeading"
+        modalLabel="modalLabel"
+        secondaryButtonText="secondaryButtonText"
+        primaryButtonText="primaryButtonText"
+        buttonTriggerText="buttonTriggerText"
+      />
     );
 
     AAT.getCompliance(wrapper.html(), 'ModalWrapper', (data) => {
@@ -397,7 +415,7 @@ describe('a11y scan', () => {
 
   it('ModuleHeader', (done) => {
     const wrapper = render(
-      <ModuleHeader />
+      <ModuleHeader>ModuleHeader</ModuleHeader>
     );
 
     AAT.getCompliance(wrapper.html(), 'ModuleHeader', (data) => {
@@ -408,7 +426,11 @@ describe('a11y scan', () => {
 
   it('ModulesContainer', (done) => {
     const wrapper = render(
-      <ModulesContainer />
+      <ModulesContainer>
+        <Module>
+          <ModuleHeader>ModuleHeader</ModuleHeader>
+        </Module>
+      </ModulesContainer>
     );
 
     AAT.getCompliance(wrapper.html(), 'ModulesContainer', (data) => {
@@ -430,7 +452,7 @@ describe('a11y scan', () => {
 
   it('NumberInput', (done) => {
     const wrapper = render(
-      <NumberInput id="test id" />
+      <NumberInput id="test id" label="label" />
     );
 
     AAT.getCompliance(wrapper.html(), 'NumberInput', (data) => {
@@ -452,7 +474,7 @@ describe('a11y scan', () => {
 
   it('SelectItem', (done) => {
     const wrapper = render(
-      <SelectItem />
+      <SelectItem text="text" />
     );
 
     AAT.getCompliance(wrapper.html(), 'SelectItem', (data) => {
@@ -500,7 +522,7 @@ describe('a11y scan', () => {
 
   it('SecondaryButton', (done) => {
     const wrapper = render(
-      <SecondaryButton />
+      <SecondaryButton>SecondaryButton</SecondaryButton>
     );
 
     AAT.getCompliance(wrapper.html(), 'SecondaryButton', (data) => {
@@ -512,7 +534,7 @@ describe('a11y scan', () => {
 
   it('Search', (done) => {
     const wrapper = render(
-      <Search />
+      <Search labelText="label" />
     );
 
     AAT.getCompliance(wrapper.html(), 'Search', (data) => {
@@ -536,7 +558,7 @@ describe('a11y scan', () => {
 
   it('RadioButton', (done) => {
     const wrapper = render(
-      <RadioButton value="test value" />
+      <RadioButton value="test value" labelText="label" />
     );
 
     AAT.getCompliance(wrapper.html(), 'RadioButton', (data) => {
@@ -548,7 +570,7 @@ describe('a11y scan', () => {
 
   it('PrimaryButton', (done) => {
     const wrapper = render(
-      <PrimaryButton />
+      <PrimaryButton>PrimaryButton</PrimaryButton>
     );
 
     AAT.getCompliance(wrapper.html(), 'PrimaryButton', (data) => {
@@ -605,9 +627,10 @@ describe('a11y scan', () => {
 
   it('Tabs', (done) => {
     const wrapper = render(
-      <Tabs className="extra-class">
-        <Tab label="firstTab">content1</Tab>
-        <Tab label="lastTab">content2</Tab>
+      <Tabs triggerHref="#anotherAnchor" className="className">
+        <Tab label="Overview">
+          <div className="some-content">Overview Content</div>
+        </Tab>
       </Tabs>
     );
 
@@ -630,7 +653,7 @@ describe('a11y scan', () => {
 
   it('TextInput', (done) => {
     const wrapper = render(
-      <TextInput id="test id" />
+      <TextInput id="test id" labelText="labelText" />
     );
 
     AAT.getCompliance(wrapper.html(), 'TextInput', (data) => {
@@ -674,7 +697,7 @@ describe('a11y scan', () => {
 
   it('TextArea', (done) => {
     const wrapper = render(
-      <TextArea />
+      <TextArea id="id" labelText="labelText" />
     );
 
     AAT.getCompliance(wrapper.html(), 'TextArea', (data) => {

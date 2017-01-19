@@ -54,6 +54,7 @@ class ModalWrapper extends React.Component {
       primaryButtonText,
       secondaryButtonText,
       modalProps,
+      ...other,
     } = this.props;
 
     const props = {
@@ -72,7 +73,7 @@ class ModalWrapper extends React.Component {
     return (
       <div>
         <Button onClick={this.handleOpen}>{buttonTriggerText}</Button>
-        <Modal {...modalProps} {...props}>
+        <Modal {...modalProps} {...props} {...other}>
           {this.props.children}
         </Modal>
       </div>

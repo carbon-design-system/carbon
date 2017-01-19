@@ -13,6 +13,8 @@ class Search extends React.Component {
     placeHolderText: React.PropTypes.string,
     labelText: React.PropTypes.string,
     id: React.PropTypes.string,
+    searchButtonLabelText: React.PropTypes.string,
+    layoutButtonLabelText: React.PropTypes.string,
   };
 
   static defaultProps = {
@@ -39,7 +41,8 @@ class Search extends React.Component {
   }
 
   render() {
-    const { className, type, id, placeHolderText, labelText, small, ...other } = this.props;
+    const { className, type, id, placeHolderText, labelText, small,
+            searchButtonLabelText, layoutButtonLabelText, ...other } = this.props;
 
     const searchClasses = classNames({
       'bx--search bx--search-with-options': true,
@@ -64,14 +67,20 @@ class Search extends React.Component {
         />
         {!small ? (
           <div>
-            <button className="bx--search__sort" type="button">
+            <button className="bx--search__sort" type="button" aria-label={searchButtonLabelText}>
               <Icon
                 name="filter--glyph"
                 description="search"
                 className="bx--search__icon"
               />
             </button>
-            <button className="bx--search__toggle-layout" type="button" onClick={this.toggle} data-search-toggle-btn>
+            <button
+              className="bx--search__toggle-layout"
+              type="button"
+              onClick={this.toggle}
+              data-search-toggle-btn
+              aria-label={layoutButtonLabelText}
+            >
               {this.state.format === 'list' ? (
                 <div className="bx--search__toggle-layout__container" data-search-toggle-layout="list">
                   <Icon

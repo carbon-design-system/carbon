@@ -14,11 +14,13 @@ const propTypes = {
     return type.apply(this, args);
   },
   title: PropTypes.string.isRequired,
+  role: PropTypes.string,
 };
 
 const defaultProps = {
   hideBreadcrumb: false,
   breadcrumbTitle: 'back',
+  role: 'banner', // a11y compliance
 };
 
 const DetailPageHeader = ({

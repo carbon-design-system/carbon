@@ -7,10 +7,10 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const Accordion = ({ children, className }) => {
+const Accordion = ({ children, className, ...other }) => {
   const classNames = classnames('bx--accordion', className);
   return (
-    <ul className={classNames}>
+    <ul className={classNames} {...other}>
       {children}
     </ul>
   );

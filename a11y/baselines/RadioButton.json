@@ -5,10 +5,9 @@
             "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
             "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
             "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
+            "rpt.g1.styleTrigger": "Web pages must be readable without requiring style sheets or equivalent facilitation is provided.",
             "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks.",
-            "wcag20.tech.h36-h44-h65-h91.inputExplicitLabel": "Each form control must have associated label.",
-            "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role.",
-            "val.g1055.labelHasContent": "Provide descriptive text in label elements."
+            "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role."
         },
         "lang": "en-us"
     },
@@ -17,28 +16,12 @@
             "issues": [
                 {
                     "severityCode": "eISHigh",
-                    "messageCode": "wcag20.tech.h36-h44-h65-h91.inputExplicitLabel",
-                    "ruleId": "41",
-                    "help": "idhi_accessibility_check_g41.html",
-                    "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/div[1]/input[1]",
-                    "snippet": "<input id=\"id1\" class=\"bx--radio\" value=\"test value\" type=\"radio\">",
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "level": "violation"
-                },
-                {
-                    "severityCode": "eISHigh",
                     "messageCode": "wcag20.tech.h25.docHasTitle",
                     "ruleId": "273",
                     "help": "idhi_accessibility_check_g273.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -54,7 +37,7 @@
                     "help": "idhi_accessibility_check_g490.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -70,23 +53,7 @@
                     "help": "idhi_accessibility_check_g1046.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]",
-                    "snippet": "<body>",
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "level": "violation"
-                },
-                {
-                    "severityCode": "eISHigh",
-                    "messageCode": "val.g1055.labelHasContent",
-                    "ruleId": "1055",
-                    "help": "idhi_accessibility_check_g1055.html",
-                    "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/div[1]/label[1]",
-                    "snippet": "<label class=\"bx--radio__label\" for=\"id1\">",
+                    "snippet": "<body style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -102,7 +69,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/div[1]/input[1]",
-                    "snippet": "<input id=\"id1\" class=\"bx--radio\" value=\"test value\" type=\"radio\">",
+                    "snippet": "<input style=\"\" id=\"id1\" class=\"bx--radio\" value=\"test value\" type=\"radio\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -117,7 +84,7 @@
     ],
     "summary": {
         "counts": {
-            "violation": 6
+            "violation": 4
         },
         "scanTime": 0,
         "policies": [
@@ -127,9 +94,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1484166796887
+        "startScan": 1484680263945
     },
-    "scanID": "9a1cb5ab-da99-41bb-a4c7-72bff169c1fa",
-    "toolID": "@ibma/aat-v1.0.24",
+    "scanID": "9aaca1d9-4c73-4b62-b274-1ae9f30a555c",
+    "toolID": "@ibma/aat-v1.1.0",
     "label": "RadioButton"
 }

@@ -7,11 +7,11 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const ModulesContainer = ({ children, className }) => {
+const ModulesContainer = ({ children, className, ...other }) => {
   const wrapperClasses = classNames('bx--module', className);
 
   return (
-    <section className={wrapperClasses} role="region">
+    <section className={wrapperClasses} {...other}>
       {children}
     </section>
   );

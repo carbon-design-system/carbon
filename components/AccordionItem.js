@@ -32,6 +32,8 @@ class AccordionItem extends Component {
       className,
       title,
       children,
+      onClick, // eslint-disable-line no-unused-vars
+      ...other,
     } = this.props;
 
     const classNames = classnames({
@@ -41,7 +43,7 @@ class AccordionItem extends Component {
     className,
     );
     return (
-      <li className={classNames} onClick={this.handleClick} onKeyPress={this.handleKeyPress} tabIndex="0">
+      <li className={classNames} onClick={this.handleClick} onKeyPress={this.handleKeyPress} {...other} tabIndex="0">
         <div className="bx--accordion__heading">
           <Icon className="bx--accordion__arrow" name="chevron--right" description="Expand/Collapse" />
           <p className="bx--accordion__title">{title}</p>

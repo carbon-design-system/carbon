@@ -12,11 +12,11 @@ const defaultProps = {
   width: 'full',
 };
 
-const Module = ({ children, className, width }) => {
+const Module = ({ children, className, width, ...other }) => {
   const wrapperClasses = classNames(`bx--module--${width}`, className);
 
   return (
-    <div className={wrapperClasses}>
+    <div className={wrapperClasses} {...other}>
       {children}
     </div>
   );

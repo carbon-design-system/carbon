@@ -5,7 +5,6 @@ import '@console/bluemix-components/consumables/scss/base-elements/file-uploader
 class FileUploader extends React.Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
     className: React.PropTypes.string,
     tabIndex: React.PropTypes.number,
     id: React.PropTypes.string.isRequired,
@@ -48,14 +47,25 @@ class FileUploader extends React.Component {
   }
 
   render() {
+    const {
+      className,
+      tabIndex,
+      id,
+      labelDescription,  // eslint-disable-line no-unused-vars
+      multipleFilesText,
+      buttonText,
+      onChange, // eslint-disable-line no-unused-vars
+      ...other,
+    } = this.props;
+
     const fileUploaderProps = {
-      tabIndex: this.props.tabIndex,
+      tabIndex,
       type: 'file',
-      id: this.props.id,
+      id,
       onChange: this.updateLabel,
     };
 
-    const fileUploaderClasses = classNames({
+    const fileUploaderClasses = classNames(className, {
       'bx--file__label': true,
       [this.props.className]: this.props.className,
     });
@@ -64,16 +74,17 @@ class FileUploader extends React.Component {
       <div className="fileUploaderWrapper">
         <label
           data-file-appearance
-          data-button-title={this.props.buttonText}
+          data-button-title={buttonText}
           className={fileUploaderClasses}
-          htmlFor={this.props.id}
+          htmlFor={id}
         >{this.state.text}</label>
         <input
           data-file-uploader
-          data-multiple-caption={this.props.multipleFilesText(this.state.count)}
+          data-multiple-caption={multipleFilesText(this.state.count)}
           data-label="[data-file-appearance]"
           className="bx--file__input"
-          {... fileUploaderProps}
+          {...fileUploaderProps}
+          {...other}
           multiple
         />
       </div>

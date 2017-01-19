@@ -28,7 +28,6 @@ class Modal extends Component {
     onKeyDown: () => {},
     passiveModal: false,
     iconDescription: 'close the modal',
-
   };
 
   handleKeyDown = (evt) => {

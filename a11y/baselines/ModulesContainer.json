@@ -5,8 +5,10 @@
             "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
             "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
             "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
+            "rpt.g1.styleTrigger": "Web pages must be readable without requiring style sheets or equivalent facilitation is provided.",
             "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks.",
-            "wcag20.tech.aria.RegionLabel": "Elements containing a 'region' role must be labeled with an aria-label or aria-labelledby."
+            "haac.g1139.SectionHasNoRole": "Html5 element &lt;section&gt; used in the content to identify a page Landmark/Section does not have the corresponding WAI-ARIA \"region\" role defined.",
+            "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role."
         },
         "lang": "en-us"
     },
@@ -20,7 +22,7 @@
                     "help": "idhi_accessibility_check_g273.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -36,7 +38,7 @@
                     "help": "idhi_accessibility_check_g490.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -52,7 +54,7 @@
                     "help": "idhi_accessibility_check_g1046.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]",
-                    "snippet": "<body>",
+                    "snippet": "<body style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -63,12 +65,12 @@
                 },
                 {
                     "severityCode": "eISHigh",
-                    "messageCode": "wcag20.tech.aria.RegionLabel",
-                    "ruleId": "1089",
-                    "help": "idhi_accessibility_check_g1089.html",
+                    "messageCode": "wcag20.tech.aria.OrphanedContent",
+                    "ruleId": "1088",
+                    "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/section[1]",
-                    "snippet": "<section role=\"region\" class=\"bx--module\">",
+                    "xpath": "/html[1]/body[1]/section[1]/div[1]/h2[1]",
+                    "snippet": "<h2 style=\"\" class=\"bx--module__header\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -93,9 +95,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1484166794403
+        "startScan": 1484761797473
     },
-    "scanID": "9a1cb5ab-da99-41bb-a4c7-72bff169c1fa",
-    "toolID": "@ibma/aat-v1.0.24",
+    "scanID": "3968998b-7ae6-4596-a7aa-9e94eec5c1d9",
+    "toolID": "@ibma/aat-v1.1.0",
     "label": "ModulesContainer"
 }

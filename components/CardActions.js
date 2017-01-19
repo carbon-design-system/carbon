@@ -7,14 +7,14 @@ const propTypes = {
   className: React.PropTypes.string,
 };
 
-const CardActions = ({ children, className }) => {
+const CardActions = ({ children, className, ...other }) => {
   const cardActionClasses = classNames({
     'bx--card-footer__app-actions': true,
     [className]: className,
   });
 
   return (
-    <div className={cardActionClasses}>
+    <div className={cardActionClasses} {...other}>
       {children}
     </div>
   );

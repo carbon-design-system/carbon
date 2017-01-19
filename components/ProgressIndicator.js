@@ -7,7 +7,7 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const ProgressIndicator = ({ children, className }) => {
+const ProgressIndicator = ({ children, className, ...other }) => {
   const classNames = classnames('bx--progress-indicator', className);
   let complete = true;
   // Marks all ProgressIndicatorStep children as being complete until the active step is found
@@ -19,7 +19,7 @@ const ProgressIndicator = ({ children, className }) => {
       complete,
     });
   });
-  return <ul className={classNames}>{mappedChildren}</ul>;
+  return <ul className={classNames} {...other}>{mappedChildren}</ul>;
 };
 
 ProgressIndicator.propTypes = propTypes;

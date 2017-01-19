@@ -5,9 +5,7 @@
             "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
             "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
             "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
-            "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks.",
-            "haac.g1138.HeaderHasNoRole": "Html5 element &lt;header&gt; used in the content to identify a page Landmark/Section does not have the corresponding WAI-ARIA \"banner\" role defined.",
-            "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role."
+            "rpt.g1.styleTrigger": "Web pages must be readable without requiring style sheets or equivalent facilitation is provided."
         },
         "lang": "en-us"
     },
@@ -21,7 +19,7 @@
                     "help": "idhi_accessibility_check_g273.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -37,39 +35,7 @@
                     "help": "idhi_accessibility_check_g490.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "level": "violation"
-                },
-                {
-                    "severityCode": "eISHigh",
-                    "messageCode": "wcag20.tech.g1.bodyFirstASkips",
-                    "ruleId": "1046",
-                    "help": "idhi_accessibility_check_g1046.html",
-                    "msgArgs": [],
-                    "xpath": "/html[1]/body[1]",
-                    "snippet": "<body>",
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "level": "violation"
-                },
-                {
-                    "severityCode": "eISHigh",
-                    "messageCode": "wcag20.tech.aria.OrphanedContent",
-                    "ruleId": "1088",
-                    "help": "idhi_accessibility_check_g1088.html",
-                    "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/header[1]/a[1]",
-                    "snippet": "<a class=\"bx--detail-page-header--no-tabs__link-wrapper\" href=\"#\">",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -84,7 +50,7 @@
     ],
     "summary": {
         "counts": {
-            "violation": 4
+            "violation": 2
         },
         "scanTime": 0,
         "policies": [
@@ -94,9 +60,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1484166792175
+        "startScan": 1484671367079
     },
-    "scanID": "9a1cb5ab-da99-41bb-a4c7-72bff169c1fa",
-    "toolID": "@ibma/aat-v1.0.24",
+    "scanID": "ca3a789a-345a-459d-96ab-d7f72b878cfc",
+    "toolID": "@ibma/aat-v1.1.0",
     "label": "DetailPageHeader"
 }

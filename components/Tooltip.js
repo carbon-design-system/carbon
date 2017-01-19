@@ -14,10 +14,10 @@ const defaultProps = {
   position: 'top',
 };
 
-const Tooltip = ({ children, className, position, text }) => {
+const Tooltip = ({ children, className, position, text, ...other }) => {
   const tooltipClasses = classNames(`bx--tooltip__${position}`, className);
   return (
-    <div className={tooltipClasses} data-tooltip={text}>
+    <div className={tooltipClasses} data-tooltip={text} {...other}>
       {children}
       <Icon className="bx--tooltip__icon" name="info" description="Information" />
     </div>

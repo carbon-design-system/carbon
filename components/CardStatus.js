@@ -40,7 +40,7 @@ function createCardStatusContent(status, labels) {
   return '';
 }
 
-const CardStatus = ({ className, status, runningText, notRunningText, stoppedText }) => {
+const CardStatus = ({ className, status, runningText, notRunningText, stoppedText, ...other }) => {
   const cardStatusClasses = classNames({
     'bx--card-footer__app-status': true,
     [className]: className,
@@ -52,7 +52,7 @@ const CardStatus = ({ className, status, runningText, notRunningText, stoppedTex
   };
 
   return (
-    <div className={cardStatusClasses}>
+    <div className={cardStatusClasses} {...other}>
       {createCardStatusContent(status, labels)}
     </div>
   );

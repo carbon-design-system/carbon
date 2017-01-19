@@ -9,7 +9,7 @@ const propTypes = {
   complete: PropTypes.bool,
 };
 
-const ProgressIndicatorStep = ({ active, children, className, complete }) => {
+const ProgressIndicatorStep = ({ active, children, className, complete, ...other }) => {
   const classNames = classnames(
     'bx--progress-indicator__step',
     className,
@@ -19,7 +19,7 @@ const ProgressIndicatorStep = ({ active, children, className, complete }) => {
     }
   );
   return (
-    <li className={classNames}>
+    <li className={classNames} {...other}>
       <Icon className="bx--progress-indicator__icon" name="checkmark--outline" description="" />
       <p className="bx--progress-indicator__label">{children}</p>
     </li>
