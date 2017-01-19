@@ -1,8 +1,8 @@
-import '../../consumables/js/polyfills/custom-event';
-import '../../consumables/js/polyfills/object-assign';
+import '../../demo/polyfills/custom-event';
+import '../../demo/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
-import OverflowMenu from '../../consumables/js/es2015/overflow-menu';
+import OverflowMenu from '../../src/components/overflow-menu/overflow-menu';
 import { delay } from 'bluebird';
 
 const HTML = `

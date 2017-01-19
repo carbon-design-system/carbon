@@ -1,9 +1,9 @@
 import '../../utils/es6-weak-map-global'; // For PhantomJS
-import '../../../consumables/js/polyfills/custom-event';
-import '../../../consumables/js/polyfills/element-matches';
-import '../../../consumables/js/polyfills/object-assign';
-import mixin from '../../../consumables/js/misc/mixin';
-import initComponentBySearch from '../../../consumables/js/mixins/init-component-by-search';
+import '../../../demo/polyfills/custom-event';
+import '../../../demo/polyfills/element-matches';
+import '../../../demo/polyfills/object-assign';
+import mixin from '../../../src/globals/js/misc/mixin';
+import initComponentBySearch from '../../../src/globals/js/mixins/init-component-by-search';
 
 describe('Test init component by search', function () {
   let container;

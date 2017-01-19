@@ -1,0 +1,25 @@
+//-----------------------------
+// Primary Button
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
+@import 'mixins';
+
+@include exports('button--primary') {
+
+  // Primary Buttons
+  .bx--btn {
+    @include btn--primary;
+  }
+
+  .bx--btn--right-icon__use {
+    fill: $color__blue-90;
+  }
+
+  .bx--global-light-ui .bx--btn--right-icon__use {
+    fill: $color__white;
+  }
+}

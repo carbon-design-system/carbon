@@ -1,4 +1,4 @@
-import '../../consumables/js/polyfills/object-assign';
+import '../../demo/polyfills/object-assign';
 
 describe('Test object-assign', function () {
   it(`Should cope with undefined arg`, function () {

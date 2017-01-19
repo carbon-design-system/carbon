@@ -1,6 +1,6 @@
-import '../../consumables/js/polyfills/custom-event';
+import '../../demo/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import Card from '../../consumables/js/es2015/card';
+import Card from '../../src/components/card/card';
 
 describe('Test card', function () {
   describe('Constructor', function () {

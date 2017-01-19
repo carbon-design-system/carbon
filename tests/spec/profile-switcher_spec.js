@@ -1,7 +1,7 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
-import ProfileSwitcher from '../../consumables/js/es2015/profile-switcher';
-import unifiedHeaderHtml from '../../consumables/html/components/unified-header/unified-header.html';
+import '../../demo/polyfills/custom-event';
+import ProfileSwitcher from '../../src/components/unified-header/profile-switcher';
+import unifiedHeaderHtml from '../../src/components/unified-header/unified-header.html';
 
 describe('Test profile switcher', function () {
   describe('Constructor', function () {

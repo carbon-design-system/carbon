@@ -1,0 +1,47 @@
+<div class="bx--card" tabindex="0" aria-labelledby="#card-virtual-server-title">
+  <!-- Card Overview -->
+  <div class="bx--card__card-overview">
+    <!-- OverflowMenu -->
+    <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
+      <svg class="bx--overflow-menu__icon">
+        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#app-actions--overflow_menu_icon"></use>
+      </svg>
+      <ul class="bx--overflow-menu__options">
+        <li><button type="button" class="bx--overflow-menu__btn">Stop App</button></li>
+        <li><button type="button" class="bx--overflow-menu__btn">Restart App</button></li>
+        <li><button type="button" class="bx--overflow-menu__btn">Restart App</button></li>
+        <li><button type="button" class="bx--overflow-menu__btn">Edit Routes and Access</button></li>
+        <hr/>
+        <li><button type="button" class="bx--overflow-menu__btn--delete">Delete App</button></li>
+      </ul>
+    </div>
+    <div class="bx--card-overview__about">
+      <div class="bx--about__icon">
+        <svg class="bx--about__icon--img">
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--default"></use>
+        </svg>
+      </div>
+      <div class="bx--about__title">
+        <p id="card-virtual-server-title" class="bx--about__title--name">Virtual Server Group</p>
+        <a class="bx--about__title--link">Private IP: 127.31.0.6</a><br>
+        <a class="bx--about__title--link">Image: Ubuntu 14.04</a>
+      </div>
+    </div>
+  </div>
+  <!-- Card Footer -->
+  <div class="bx--card__card-footer">
+    <div class="bx--card-footer__app-status">
+      <div class="bx--card-footer__app-status--running active">Running</div>
+      <div class="bx--card-footer__app-status--not-running">Not Running</div>
+      <div class="bx--card-footer__app-status--stopped">Stopped</div>
+      <div class="bx--card-footer__app-status--limited">Limited</div>
+    </div>
+    <div class="bx--card-footer__app-actions">
+      <button class="bx--app-actions__button" id="restart-app" aria-label="restart-app">
+        <svg class="bx--app-actions__button--icon">
+          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#app-actions--restart_icon"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

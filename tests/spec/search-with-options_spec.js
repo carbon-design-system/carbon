@@ -1,7 +1,7 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
-import SearchWithOptions from '../../consumables/js/es2015/search-with-options';
-import searchWithOptionsHtml from '../../consumables/html/base-elements/search/search-with-options.html';
+import '../../demo/polyfills/custom-event';
+import SearchWithOptions from '../../src/components/search/search-with-options';
+import searchWithOptionsHtml from '../../src/components/search/search-with-options.html';
 
 describe('Test search with options', function () {
   describe('Constructor', function () {

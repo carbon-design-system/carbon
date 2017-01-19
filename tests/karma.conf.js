@@ -47,7 +47,7 @@ module.exports = function (config) {
                   'istanbul',
                   {
                     include: [
-                      'consumables/**/*.js',
+                      'src/components/**/*.js',
                     ],
                   },
                 ],
@@ -117,17 +117,15 @@ module.exports = function (config) {
             // - Not meeting the code coverage standard set here, which shouldn't have happened
             // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
             // That said, new files should never be added, except for misc code that is very broser-specific
-            '../consumables/js/es2015/accordion.js',
-            '../consumables/js/es2015/copy-btn.js',
-            '../consumables/js/es2015/detail-page-header.js',
-            '../consumables/js/es2015/inline-left-nav.js',
-            '../consumables/js/es2015/left-nav.js',
-            '../consumables/js/es2015/pagination.js',
-            '../consumables/js/es2015/profile-switcher.js',
-            '../consumables/js/es2015/search-with-options.js',
-            '../consumables/js/es2015/unified-header.js',
-            '../consumables/js/misc/resize.js',
-            '../consumables/js/polyfills/**/*.js',
+            '../src/components/accordion/accordion.js',
+            '../src/components/buttons/copy-btn.js',
+            '../src/components/detail-page-header/detail-page-header.js',
+            '../src/components/inline-left-nav/inline-left-nav.js',
+            '../src/components/pagination/pagination.js',
+            '../src/components/search/search-with-options.js',
+            '../src/components/unified-header/left-nav.js',
+            '../src/components/unified-header/profile-switcher.js',
+            '../src/globals/js/misc/resize.js',
           ],
         },
       },

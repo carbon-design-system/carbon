@@ -1,7 +1,6 @@
-import '../../consumables/js/polyfills/custom-event';
+import '../../demo/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import EventManager from '../utils/event-manager';
-import FileUploader from '../../consumables/js/es2015/file-uploader.js';
+import FileUploader from '../../src/components/file-uploader/file-uploader';
 
 const HTML = `
 <div class="bx--file-uploader">

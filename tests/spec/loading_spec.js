@@ -1,5 +1,5 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import Loading from '../../consumables/js/es2015/loading';
+import Loading from '../../src/components/loading/loading';
 
 describe('Test Loading', function () {
   describe('Constructor', function () {

@@ -1,7 +1,7 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
-import InlineLeftNav from '../../consumables/js/es2015/inline-left-nav';
-import inlineLeftNavHtml from '../../consumables/html/components/inline-left-nav/inline-left-nav.html';
+import '../../demo/polyfills/custom-event';
+import InlineLeftNav from '../../src/components/inline-left-nav/inline-left-nav';
+import inlineLeftNavHtml from '../../src/components/inline-left-nav/inline-left-nav.html';
 
 describe('Test inline left nav', function () {
   describe('Constructor', function () {

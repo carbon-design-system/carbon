@@ -1,6 +1,6 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
-import initCheckbox from '../../consumables/js/es2015/checkbox';
+import '../../demo/polyfills/custom-event';
+import initCheckbox from '../../src/components/checkbox/checkbox';
 
 describe('Test checkbox', function () {
   let element;

@@ -1,6 +1,6 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
-import DetailPageHeader from '../../consumables/js/es2015/detail-page-header';
+import '../../demo/polyfills/custom-event';
+import DetailPageHeader from '../../src/components/detail-page-header/detail-page-header';
 
 describe('Test detail page header', function () {
   describe('Constructor', function () {

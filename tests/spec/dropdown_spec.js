@@ -1,7 +1,7 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
+import '../../demo/polyfills/custom-event';
 import EventManager from '../utils/event-manager';
-import Dropdown from '../../consumables/js/es2015/dropdown';
+import Dropdown from '../../src/components/dropdown/dropdown';
 
 describe('Dropdown', function () {
   describe('Constructor', function () {

@@ -1,6 +1,6 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
-import CopyBtn from '../../consumables/js/es2015/copy-btn';
+import '../../demo/polyfills/custom-event';
+import CopyBtn from '../../src/components/buttons/copy-btn';
 
 const HTML = `
 <button data-copy-btn class="bx--btn--copy">

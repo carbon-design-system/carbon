@@ -1,6 +1,6 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
-import Accordion from '../../consumables/js/es2015/accordion';
+import '../../demo/polyfills/custom-event';
+import Accordion from '../../src/components/accordion/accordion';
 
 describe('Test accordion', function () {
   describe('Constructor', function () {

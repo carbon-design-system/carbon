@@ -1,9 +1,9 @@
-import '../../consumables/js/polyfills/custom-event';
+import '../../demo/polyfills/custom-event';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
 import { promisify } from 'bluebird';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
-import ContentSwitcher from '../../consumables/js/es2015/content-switcher.js';
+import ContentSwitcher from '../../src/components/content-switcher/content-switcher';
 
 describe('Test content switcher', function () {
   describe('Constructor', function () {

@@ -1,0 +1,81 @@
+//-----------------------------
+// Primary Button
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
+@import 'mixins';
+
+@include exports('button--copy') {
+
+  // Copy Buttons
+  .bx--btn--copy {
+    @include btn--primary;
+    height: rem(32px);
+    padding: 0 .55rem .125rem;
+    position: relative;
+    overflow: visible;
+
+    .bx--btn--right-icon__icon {
+      margin-top: rem(2px);
+      margin-left: rem(5px);
+    }
+  }
+
+  .bx--btn--copy__feedback {
+    position: absolute;
+    display: none;
+    top: 1.2rem;
+    left: 50%;
+
+    &:before {
+      @include layer('overlay');
+      @include font-size('12');
+      top: 1.1rem;
+      padding: .5rem 1rem;
+      border: 1px solid $color__navy-gray-2;
+      color: $color__white;
+      content: attr(data-feedback);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      pointer-events: none;
+
+      @include light-ui {
+        border: 1px solid $color__navy-gray-8;
+        color: $color__blue-90;
+      }
+    }
+
+    &:after {
+      top: .8rem;
+      width: .5rem;
+      height: .5rem;
+      border-right: 1px solid $color__navy-gray-2;
+      border-bottom: 1px solid $color__navy-gray-2;
+      content: '';
+      transform: rotate(-135deg);
+
+      @include light-ui {
+        border-right: 1px solid $color__navy-gray-8;
+        border-bottom: 1px solid $color__navy-gray-8;
+      }
+    }
+
+    &:before,
+    &:after {
+      position: absolute;
+      display: block;
+      background: $color__navy-gray-5;
+
+      @include light-ui {
+        background: $color__white;
+      }
+    }
+
+    &--displayed {
+      display: inline-flex;
+    }
+  }
+}

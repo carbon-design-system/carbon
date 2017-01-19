@@ -1,8 +1,8 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../consumables/js/polyfills/custom-event';
+import '../../demo/polyfills/custom-event';
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
 import EventManager from '../utils/event-manager';
-import NumberInput from '../../consumables/js/es2015/number-input';
+import NumberInput from '../../src/components/number-input/number-input';
 
 const HTML = `
   <div data-numberinput class="bx--number">

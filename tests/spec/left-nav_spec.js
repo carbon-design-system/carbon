@@ -1,6 +1,6 @@
-import '../../consumables/js/polyfills/custom-event';
+import '../../demo/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import LeftNav from '../../consumables/js/es2015/left-nav';
+import LeftNav from '../../src/components/unified-header/left-nav';
 
 describe('Test Left Navigation', function () {
   describe('Constructor', function () {

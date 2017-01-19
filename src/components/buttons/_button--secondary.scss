@@ -1,0 +1,25 @@
+//-----------------------------
+// Secondary Button
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
+@import 'mixins';
+
+@include exports('button--secondary') {
+
+  // Secondary Buttons
+  .bx--btn--secondary {
+    @include btn--secondary;
+  }
+
+  .bx--btn--right-icon__use {
+    fill: currentColor;
+  }
+
+  .bx--global-light-ui .bx--btn--right-icon__use {
+    fill: currentColor;
+  }
+}
