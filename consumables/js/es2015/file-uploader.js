@@ -17,9 +17,10 @@ class FileUploader extends mixin(createComponent, initComponent) {
   constructor(element, options) {
     super(element, options);
 
-    this.labelNode = this.element.nextElementSibling || this.element.ownerDocument.querySelector(`.bx--file__label${this.options.selectorLabel}`);
+    this.labelNode = this.element.nextElementSibling
+      || this.element.ownerDocument.querySelector(`.bx--file__label${this.options.selectorLabel}`);
 
-    element.addEventListener('change', (event) => this.updateLabel(event));
+    element.addEventListener('change', (event) => { this.updateLabel(event); });
   }
 
   /**
@@ -50,7 +51,8 @@ class FileUploader extends mixin(createComponent, initComponent) {
 
   /**
    * The component options.
-   * If `options` is specified in the constructor, {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
+   * If `options` is specified in the constructor,
+   * {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode FileUploader.init .init()} works.
    * @member FileUploader.options
    * @type {Object}

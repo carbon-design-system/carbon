@@ -27,9 +27,9 @@ class ContentSwitcher extends mixin(createComponent, initComponent, eventedState
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', (event) => this.handleClick(event));
+    this.element.addEventListener('click', (event) => { this.handleClick(event); });
 
-    [... element.querySelectorAll('input')].forEach((input) => {
+    [...element.querySelectorAll('input')].forEach((input) => {
       if (input.checked) this._changeActive(input);
     });
   }
@@ -63,7 +63,7 @@ class ContentSwitcher extends mixin(createComponent, initComponent, eventedState
     // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
     const itemLink = item.querySelector(this.options.selectorLink);
     if (itemLink) {
-      [... this.element.querySelectorAll(this.options.selectorLink)].forEach((link) => {
+      [...this.element.querySelectorAll(this.options.selectorLink)].forEach((link) => {
         if (link !== itemLink) {
           link.setAttribute('aria-selected', 'false');
         }
@@ -71,17 +71,17 @@ class ContentSwitcher extends mixin(createComponent, initComponent, eventedState
       itemLink.setAttribute('aria-selected', 'true');
     }
 
-    const selectorButtons = [... this.element.querySelectorAll(this.options.selectorButton)];
+    const selectorButtons = [...this.element.querySelectorAll(this.options.selectorButton)];
 
     selectorButtons.forEach((button) => {
       if (button !== item) {
         toggleClass(button, this.options.classActive, false);
-        [... button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => element.setAttribute('hidden', ''));
+        [...button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => element.setAttribute('hidden', ''));
       }
     });
 
     toggleClass(item, this.options.classActive, true);
-    [... item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => element.removeAttribute('hidden'));
+    [...item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => element.removeAttribute('hidden'));
 
     callback();
   }
@@ -115,7 +115,8 @@ class ContentSwitcher extends mixin(createComponent, initComponent, eventedState
 
   /**
    * The component options.
-   * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode ContentSwitcher.init .init()},
+   * If `options` is specified in the constructor,
+   * {@linkcode ContentSwitcher.create .create()}, or {@linkcode ContentSwitcher.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode ContentSwitcher.init .init()} works.
    * @member ContentSwitcher.options
    * @type {Object}

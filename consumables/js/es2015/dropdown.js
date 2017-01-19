@@ -34,11 +34,11 @@ class Dropdown extends mixin(createComponent, initComponent) {
      * The handle to release click event listener on document object.
      * @member {Handle}
      */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => this.toggle(event));
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this.toggle(event); });
 
     this.setCloseOnBlur();
 
-    this.element.addEventListener('keypress', (event) => this.toggle(event));
+    this.element.addEventListener('keypress', (event) => { this.toggle(event); });
     this.element.addEventListener('click', (event) => {
       const item = eventMatches(event, this.options.selectorItem);
       if (item) {
@@ -97,7 +97,7 @@ class Dropdown extends mixin(createComponent, initComponent) {
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
-      [... this.element.querySelectorAll(this.options.selectorItemSelected)].forEach((item) => {
+      [...this.element.querySelectorAll(this.options.selectorItemSelected)].forEach((item) => {
         if (itemToSelect !== item) {
           item.classList.remove(this.options.classSelected);
         }

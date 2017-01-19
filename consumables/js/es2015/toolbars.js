@@ -15,7 +15,7 @@ class Toolbars extends mixin(createComponent, initComponent) {
   constructor(element) {
     super(element);
     this.searchFieldNode = this.element.ownerDocument.querySelector(this.element.dataset.listIconsSearchActionTarget);
-    this.element.addEventListener('click', (event) => this.handleActionClick(event));
+    this.element.addEventListener('click', (event) => { this.handleActionClick(event); });
   }
 
   /**

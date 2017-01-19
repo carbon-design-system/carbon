@@ -39,7 +39,7 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
     this.initExpandableRows();
     this.initOverflowMenus();
 
-    this.element.addEventListener('click', evt => {
+    this.element.addEventListener('click', (evt) => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
       if (eventElement) {
         this.toggleState(eventElement, evt);
@@ -95,7 +95,7 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
    * Find all expandable rows and remove them from the DOM
    */
   initExpandableRows = () => {
-    this.expandableRows.forEach(item => {
+    this.expandableRows.forEach((item) => {
       item.classList.remove(this.options.classExpandableRowHidden);
       this.tableBody.removeChild(item);
     });
@@ -111,26 +111,25 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
       return false;
     }
 
-    const menuMap = [...this.element.querySelectorAll(this.options.selectorOverflowMenu)].map(menu => {
-      return {
-        element: menu,
-        optionMenu: menu.querySelector(this.options.selectorOverflowMenuOptions),
-      };
-    });
+    const menuMap = [...this.element.querySelectorAll(this.options.selectorOverflowMenu)].map(menu => ({
+      element: menu,
+      optionMenu: menu.querySelector(this.options.selectorOverflowMenuOptions),
+    }));
 
     optimizedResize.add(() => {
-      menuMap.forEach(menu => {
+      menuMap.forEach((menu) => {
         this.placeOverflow({
           detail: menu,
         });
       });
     });
 
-    menuMap.forEach(menu => {
+    menuMap.forEach((menu) => {
       document.body.appendChild(menu.optionMenu);
     });
 
     this.element.addEventListener('overflow-menu-shown', this.placeOverflow);
+    return true;
   }
 
   /**
@@ -190,10 +189,10 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
     const { element, previousValue } = detail;
     const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
     if (!previousValue || previousValue === 'toggled') {
-      inputs.forEach(item => item.checked = true);
+      inputs.forEach((item) => { item.checked = true; }); // eslint-disable-line no-param-reassign
       element.dataset.previousValue = 'off';
     } else {
-      inputs.forEach(item => item.checked = false);
+      inputs.forEach((item) => { item.checked = false; }); // eslint-disable-line no-param-reassign
       element.dataset.previousValue = 'toggled';
     }
   }

@@ -14,7 +14,8 @@ class Pagination extends mixin(createComponent, initComponent) {
   * @param {HTMLElement} element The element working as a pagination component.
   * @param {Object} [options] The component options.
   * @property {string} [selectorInit] The CSS selector to find pagination components.
-  * @property {string} [selectorItemsPerPageInput] The CSS selector to find the input that determines the number of items per page.
+  * @property {string} [selectorItemsPerPageInput]
+  *   The CSS selector to find the input that determines the number of items per page.
   * @property {string} [selectorPageNumberInput] The CSS selector to find the input that changes the page displayed.
   * @property {string} [selectorPageBackward] The CSS selector to find the button that goes back a page.
   * @property {string} [selectorPageForward] The CSS selector to find the button that goes forward a page.

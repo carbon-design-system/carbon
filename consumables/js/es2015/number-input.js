@@ -18,8 +18,8 @@ class NumberInput extends mixin(createComponent, initComponent) {
     this.options.ie = this.options.ie || 'ActiveXObject' in window;
     // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
     // Also <svg> does not seems to have `Element.classList`.
-    this.element.querySelector('.bx--number__arrow--up').addEventListener('click', (event) => this.handleClick(event));
-    this.element.querySelector('.bx--number__arrow--down').addEventListener('click', (event) => this.handleClick(event));
+    this.element.querySelector('.bx--number__arrow--up').addEventListener('click', (event) => { this.handleClick(event); });
+    this.element.querySelector('.bx--number__arrow--down').addEventListener('click', (event) => { this.handleClick(event); });
   }
 
   /**
@@ -64,7 +64,8 @@ class NumberInput extends mixin(createComponent, initComponent) {
 
   /**
    * The component options.
-   * If `options` is specified in the constructor, {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
+   * If `options` is specified in the constructor,
+   * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
    * @member NumberInput.options
    * @type {Object}
