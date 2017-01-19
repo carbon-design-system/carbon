@@ -38,6 +38,7 @@ Bluemix Components React is published on a private npm registry maintained by th
 
 4. These components require the use of [Webpack](http://webpack.github.io/docs/tutorials/getting-started/) in your project. See our [`webpack.config.js`](/.storybook/webpack.config.js) for an example configuration.
   * Each component has an associated stylesheet, which requires several webpack loaders (as seen in the example configuration)
+  * Webpack should configure the `importPaths` property of `sassLoader` to include the `node_modules` directory so that the stylesheets can be found from `@import` statements
   * To install webpack and all of the loaders in the example configuration
   ```
   $ npm install -D webpack sass-loader css-loader style-loader postcss-loader
@@ -49,7 +50,7 @@ Bluemix Components React is published on a private npm registry maintained by th
 
   ```scss
   $use-globals: true;
-  @import '../node_modules/@console/bluemix-components/consumables/scss/global/global.scss';
+  @import '@console/bluemix-components/consumables/scss/global/global.scss';
   ```
 
   ```javascript
