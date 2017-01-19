@@ -53,29 +53,19 @@
         position: absolute;
         top: 0;
         display: block;
-        border: $toggle-bar / 2 solid $color__navy-gray-2;
+        border: $toggle-bar / 2 solid $color__navy-gray-7;
         cursor: pointer;
         width: $toggle-circle;
         height: $toggle-circle;
-        background-color: $color__navy-gray-2;
+        background-color: $color__navy-gray-3;
         border-radius: 50%;
         content: '';
         transition-duration: $transition--base;
-        box-shadow: inset 0 0 0 $toggle-bar / 2 $color__navy-gray-7;
 
         @include light-ui {
           background-color: $color__white;
           box-shadow: none;
           border: $toggle-bar / 2 solid $color__navy-gray-7;
-        }
-      }
-
-      &:hover::after,
-      &:focus::after {
-        background-color: darken($color__navy-gray-2, 5%);
-
-        @include light-ui {
-          background-color: $color__navy-gray-8;
         }
       }
     }
@@ -113,7 +103,11 @@
     &:checked + &__label &__appearance {
       // bar
       &::before {
-        background-color: $color__blue-51;
+        background-color: $color__blue-30;
+        
+        @include light-ui {
+          background-color: $color__blue-51;
+        }
       }
 
       // circle
@@ -121,7 +115,12 @@
         transform: translateX($toggle-circle);
         background-color: $color__blue-30;
         box-shadow: none;
-        border-color: $color__blue-51;
+        border-color: $color__blue-30;
+        
+        @include light-ui {
+          background-color: $color__blue-51;
+          border-color: $color__blue-51;
+        }
       }
     }
   }
