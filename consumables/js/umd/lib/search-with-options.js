@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/create', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/toggle-class', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/create'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/toggle-class'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.create, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.toggleClass, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.toggleClass, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.searchWithOptions = mod.exports;
   }
-})(this, function (exports, _weakMap, _create, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _toggleClass) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _toggleClass) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -19,15 +19,23 @@
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
-  var _create2 = _interopRequireDefault(_create);
-
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-  var _assign2 = _interopRequireDefault(_assign);
+  var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
+
+  var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+  var _inherits3 = _interopRequireDefault(_inherits2);
+
+  var _mixin3 = _interopRequireDefault(_mixin2);
+
+  var _createComponent2 = _interopRequireDefault(_createComponent);
+
+  var _initComponentBySearch2 = _interopRequireDefault(_initComponentBySearch);
 
   var _toggleClass2 = _interopRequireDefault(_toggleClass);
 
@@ -37,41 +45,35 @@
     };
   }
 
-  var SearchWithOptions = function () {
+  var SearchWithOptions = function (_mixin) {
+    (0, _inherits3.default)(SearchWithOptions, _mixin);
+
     /**
      * Search with Options.
-     * @implements Component
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
      * @param {HTMLElement} element The element working as the search component.
      * @param {Object} [options] The component options
-     * @param {string} [options.selectorToggleLayoutBtn] The data attribute selector for the button that toggles between the layouts.
+     * @param {string} [options.selectorToggleLayoutBtn]
+     *   The data attribute selector for the button that toggles between the layouts.
      * @param {string} [options.selectorIconContainer] The data attribute selector for the icon layout container.
      * @param {string} [options.classHiddenContainer] The class selector for a hidden container.
      */
-    function SearchWithOptions(element) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    function SearchWithOptions(element, options) {
       (0, _classCallCheck3.default)(this, SearchWithOptions);
 
-      if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-        throw new TypeError('DOM element should be given to initialize this widget.');
-      }
+      var _this = (0, _possibleConstructorReturn3.default)(this, (SearchWithOptions.__proto__ || (0, _getPrototypeOf2.default)(SearchWithOptions)).call(this, element, options));
 
-      this.element = element;
-
-      this.options = (0, _assign2.default)(this.constructor.options, options);
-
-      this.constructor.components.set(this.element, this);
-
-      this.element.querySelector(this.options.selectorToggleLayoutBtn).addEventListener('click', function (evt) {
-        return _this.toggleLayout(evt);
+      var toggleLayoutBtnNode = _this.element.querySelector(_this.options.selectorToggleLayoutBtn);
+      toggleLayoutBtnNode.addEventListener('click', function (evt) {
+        _this.toggleLayout(evt);
       });
+      return _this;
     }
 
     /**
-     * Instantiates a search component of the given element.
-     * @param {HTMLElement} element The element working as the search component.
-     * @param {Object} [options] The component options
+     * Toggles between the grid and list layout.
+     * @param {Event} event The event triggering this method.
      */
 
 
@@ -87,39 +89,9 @@
           (0, _toggleClass2.default)(container, _this2.options.classHiddenContainer, !isHidden);
         });
       }
-    }, {
-      key: 'release',
-      value: function release() {
-        this.constructor.components.delete(this.element);
-      }
-    }], [{
-      key: 'create',
-      value: function create(element, options) {
-        return this.components.get(element) || new this(element, options);
-      }
-    }, {
-      key: 'init',
-      value: function init() {
-        var _this3 = this;
-
-        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
-        if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-          throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-        }
-        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-          this.create(target, effectiveOptions);
-        } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
-            return _this3.create(element, effectiveOptions);
-          });
-        }
-      }
     }]);
     return SearchWithOptions;
-  }();
+  }((0, _mixin3.default)(_createComponent2.default, _initComponentBySearch2.default));
 
   SearchWithOptions.components = new _weakMap2.default();
   SearchWithOptions.options = {

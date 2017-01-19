@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/array-from', '../polyfills/custom-event', '../polyfills/element-matches', '../polyfills/object-assign'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/array-from', '../polyfills/custom-event', '../polyfills/element-matches', '../polyfills/object-assign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/array-from'), require('../polyfills/custom-event'), require('../polyfills/element-matches'), require('../polyfills/object-assign'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/array-from'), require('../polyfills/custom-event'), require('../polyfills/element-matches'), require('../polyfills/object-assign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.arrayFrom, global.customEvent, global.elementMatches, global.objectAssign);
+    factory(mod.exports, global.weakMap, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.arrayFrom, global.customEvent, global.elementMatches, global.objectAssign);
     global.copyBtn = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2) {
+})(this, function (exports, _weakMap, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _inherits2, _mixin2, _createComponent, _initComponentBySearch) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -19,15 +19,21 @@
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
-  var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-  var _create2 = _interopRequireDefault(_create);
-
-  var _assign2 = _interopRequireDefault(_assign);
+  var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
+
+  var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+  var _inherits3 = _interopRequireDefault(_inherits2);
+
+  var _mixin3 = _interopRequireDefault(_mixin2);
+
+  var _createComponent2 = _interopRequireDefault(_createComponent);
+
+  var _initComponentBySearch2 = _interopRequireDefault(_initComponentBySearch);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -35,34 +41,28 @@
     };
   }
 
-  var CopyBtn = function () {
+  var CopyBtn = function (_mixin) {
+    (0, _inherits3.default)(CopyBtn, _mixin);
+
     /**
      * CopyBtn UI.
-     * @implements Component
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
      * @param {HTMLElement} element The element working as a copy button UI.
      */
-    function CopyBtn(element) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    function CopyBtn(element, options) {
       (0, _classCallCheck3.default)(this, CopyBtn);
 
-      if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-        throw new TypeError('DOM element should be given to initialize this widget.');
-      }
+      var _this = (0, _possibleConstructorReturn3.default)(this, (CopyBtn.__proto__ || (0, _getPrototypeOf2.default)(CopyBtn)).call(this, element, options));
 
-      this.element = element;
-      this.constructor.components.set(this.element, this);
-
-      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
-      this.element.addEventListener('click', function () {
+      _this.element.addEventListener('click', function () {
         return _this.handleClick();
       });
+      return _this;
     }
 
     /**
-     * Instantiates copy button UI of the given element.
-     * @param {HTMLElement} element The element.
+     * Show the feedback tooltip on click. Hide the feedback tooltip after specified timeout value.
      */
 
 
@@ -77,39 +77,9 @@
           feedback.classList.remove(_this2.options.classShowFeedback);
         }, this.options.timeoutValue);
       }
-    }, {
-      key: 'release',
-      value: function release() {
-        this.constructor.components.delete(this.element);
-      }
-    }], [{
-      key: 'create',
-      value: function create(element) {
-        return this.components.get(element) || new this(element);
-      }
-    }, {
-      key: 'init',
-      value: function init() {
-        var _this3 = this;
-
-        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
-        if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-          throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-        }
-        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-          this.create(target);
-        } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
-            return _this3.create(element);
-          });
-        }
-      }
     }]);
     return CopyBtn;
-  }();
+  }((0, _mixin3.default)(_createComponent2.default, _initComponentBySearch2.default));
 
   CopyBtn.components = new _weakMap2.default();
   CopyBtn.options = {

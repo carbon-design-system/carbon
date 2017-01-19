@@ -19,6 +19,7 @@
     } catch (error) {
       return true;
     }
+    return false;
   }();
   if (missingNativeCustomEvent) {
     window.CustomEvent = function CustomEvent(type) {

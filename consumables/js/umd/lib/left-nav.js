@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/create', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/toggle-class', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/get', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/toggle-class', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/create'), require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/toggle-class'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/get'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/toggle-class'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.create, global._typeof, global.toConsumableArray, global.assign, global.classCallCheck, global.createClass, global.toggleClass, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global._typeof, global.toConsumableArray, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.get, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.toggleClass, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.leftNav = mod.exports;
   }
-})(this, function (exports, _weakMap, _create, _typeof2, _toConsumableArray2, _assign, _classCallCheck2, _createClass2, _toggleClass, _eventMatches, _on) {
+})(this, function (exports, _weakMap, _typeof2, _toConsumableArray2, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _get2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _toggleClass, _eventMatches, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -19,17 +19,27 @@
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
-  var _create2 = _interopRequireDefault(_create);
-
   var _typeof3 = _interopRequireDefault(_typeof2);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-  var _assign2 = _interopRequireDefault(_assign);
+  var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
+
+  var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+  var _get3 = _interopRequireDefault(_get2);
+
+  var _inherits3 = _interopRequireDefault(_inherits2);
+
+  var _mixin3 = _interopRequireDefault(_mixin2);
+
+  var _createComponent2 = _interopRequireDefault(_createComponent);
+
+  var _initComponentBySearch2 = _interopRequireDefault(_initComponentBySearch);
 
   var _toggleClass2 = _interopRequireDefault(_toggleClass);
 
@@ -43,23 +53,30 @@
     };
   }
 
-  var LeftNav = function () {
+  var LeftNav = function (_mixin) {
+    (0, _inherits3.default)(LeftNav, _mixin);
+
     /**
      * Left Navigation.
-     * @implements Component
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
      * @param {HTMLElement} element The element working as a left navigation.
      * @param {Object} [options] The component options
      * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
      * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
      * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
-     * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
+     * @param {string} [options.selectorLeftNavToggle]
+     *   The data attribute selector for the button that will show and hide the left navigation.
      * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
-     * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
+     * @param {string} [options.selectorLeftNavNestedListItem]
+     *   The data attribute selector for all nested list items in the left navigation.
      * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
      * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
      * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
-     * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
-     * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
+     * @param {string} [options.selectorLeftNavSection]
+     *   The data attribute selector for the three sections in the header of the left nav.
+     * @param {string} [options.selectorLeftNavCurrentPage]
+     *   The data attribute selector for the current section title in the left nav header.
      * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
      * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
      * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
@@ -67,53 +84,23 @@
      * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
      * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
      */
-    function LeftNav(element) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    function LeftNav(element, options) {
       (0, _classCallCheck3.default)(this, LeftNav);
 
-      if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-        throw new TypeError('DOM element should be given to initialize this widget.');
-      }
+      var _this = (0, _possibleConstructorReturn3.default)(this, (LeftNav.__proto__ || (0, _getPrototypeOf2.default)(LeftNav)).call(this, element, options));
 
-      this.element = element;
-
-      this.leftNavSectionActive = false;
-
-      this.options = (0, _assign2.default)(this.constructor.options, options);
-
-      this.constructor.components.set(this.element, this);
-
-      this.hookOpenActions();
-      this.hookListSectionEvents();
-      this.hookListItemsEvents();
-      this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (evt) {
-        return _this.handleDocumentClick(evt);
+      _this.leftNavSectionActive = false;
+      _this.hookOpenActions();
+      _this.hookListSectionEvents();
+      _this.hookListItemsEvents();
+      _this.hDocumentClick = (0, _on2.default)(_this.element.ownerDocument, 'click', function (evt) {
+        _this.handleDocumentClick(evt);
       });
+      return _this;
     }
 
     /**
-     * Instantiates a left navigation of the given element.
-     * @param {HTMLElement} element The element working as the left navigation.
-     * @param {Object} [options] The component options
-     * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
-     * @param {string} [options.selectorLeftNavList] The data attribute selector for the main ul element in the left nav.
-     * @param {string} [options.selectorLeftNavNestedList] The data attribute selector for the nested ul elements in the left nav.
-     * @param {string} [options.selectorLeftNavToggle] The data attribute selector for the button that will show and hide the left navigation.
-     * @param {string} [options.selectorLeftNavListItem] The data attribute selector for all list items in the left navigation.
-     * @param {string} [options.selectorLeftNavNestedListItem] The data attribute selector for all nested list items in the left navigation.
-     * @param {string} [options.selectorLeftNavArrowIcon] The data attribute selector for the arrow icons in the left nav.
-     * @param {string} [options.selectorLeftNavFlyoutMenu] The data attribute selector for the flyout menus in the left nav.
-     * @param {string} [options.selectorLeftNavFlyoutItem] The data attribute selector for the flyout menu items in the left nav.
-     * @param {string} [options.selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
-     * @param {string} [options.selectorLeftNavCurrentPage] The data attribute selector for the current section title in the left nav header.
-     * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
-     * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
-     * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
-     * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
-     * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
-     * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
+     * Closes the menu.
      */
 
 
@@ -121,7 +108,8 @@
       key: 'closeMenu',
       value: function closeMenu() {
         this.element.classList.remove(this.options.classActiveLeftNav);
-        this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.remove(this.options.classActiveTrigger);
+        var toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+        toggleOpenNode.classList.remove(this.options.classActiveTrigger);
         this.element.querySelector(this.options.selectorLeftNav).parentNode.setAttribute('aria-expanded', 'false');
       }
     }, {
@@ -129,7 +117,8 @@
       value: function toggleMenu() {
         var leftNavContainer = this.element.querySelector(this.options.selectorLeftNav).parentNode;
         this.element.classList.toggle(this.options.classActiveLeftNav);
-        this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).classList.toggle(this.options.classActiveTrigger);
+        var toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+        toggleOpenNode.classList.toggle(this.options.classActiveTrigger);
         if (leftNavContainer.getAttribute('aria-expanded') === 'false') leftNavContainer.setAttribute('aria-expanded', 'true');else leftNavContainer.setAttribute('aria-expanded', 'false');
       }
     }, {
@@ -145,8 +134,11 @@
         selectedNav.classList.remove(this.options.classNavSection);
         selectedNav.classList.remove(this.options.classNavSection + '--' + selectedNavValue);
         selectedNav.classList.add(this.options.classNavSectionTransition);
-        if (leftNavSections.children[0] === selectedNav) selectedNav.classList.add(this.options.classNavSectionTransition + '--50'); // First child only move 50px
-        else selectedNav.classList.add(this.options.classNavSectionTransition + '--100'); // Second move 100px
+        if (leftNavSections.children[0] === selectedNav) {
+          selectedNav.classList.add(this.options.classNavSectionTransition + '--50'); // First child only move 50px
+        } else {
+          selectedNav.classList.add(this.options.classNavSectionTransition + '--100'); // Second move 100px
+        }
         selectedNav.setAttribute('data-left-nav-section', selectedNavValue);
         /* Not sure what trick more performant*/
         setTimeout(function () {
@@ -313,7 +305,9 @@
         flyouts.forEach(function (flyout) {
           flyout.addEventListener('mouseenter', function () {
             flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
+            // eslint-disable-next-line no-param-reassign
             flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).style.top = flyout.offsetTop - _this6.element.querySelector(_this6.options.selectorLeftNav).scrollTop + 'px';
+            // eslint-disable-next-line no-param-reassign
             flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).style.left = flyout.offsetLeft + Math.round(flyout.offsetWidth) + 'px';
             flyout.querySelector(_this6.options.selectorLeftNavFlyoutMenu).classList.toggle(_this6.options.classFlyoutDisplayed);
           });
@@ -369,7 +363,8 @@
         var shouldClose = !isOfSelf && isOpen && !isToggleBtn && !isUnifiedHeader;
         var flyoutOpen = void 0;
         if (this.element.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-          flyoutOpen = this.element.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.contains(this.options.classFlyoutDisplayed);
+          var leftnavFlyoutMenu = this.element.querySelector(this.options.selectorLeftNavFlyoutMenu);
+          flyoutOpen = leftnavFlyoutMenu.classList.contains(this.options.classFlyoutDisplayed);
         }
         if (isOfSelf && this.element.tagName === 'A') {
           evt.preventDefault();
@@ -395,9 +390,11 @@
         listItems.forEach(function (item) {
           if (isOpen) {
             listItem.querySelector(_this9.options.selectorLeftNavNestedList).setAttribute('aria-hidden', 'true');
+            // eslint-disable-next-line no-param-reassign
             item.querySelector(_this9.options.selectorLeftNavListItemLink).tabIndex = -1;
           } else {
             listItem.querySelector(_this9.options.selectorLeftNavNestedList).setAttribute('aria-hidden', 'false');
+            // eslint-disable-next-line no-param-reassign
             item.querySelector(_this9.options.selectorLeftNavListItemLink).tabIndex = 0;
           }
         });
@@ -480,36 +477,11 @@
         if (this.hDocumentClick) {
           this.hDocumentClick = this.hDocumentClick.release();
         }
-        this.constructor.components.delete(this.element);
-      }
-    }], [{
-      key: 'create',
-      value: function create(element, options) {
-        return this.components.get(element) || new this(element, options);
-      }
-    }, {
-      key: 'init',
-      value: function init() {
-        var _this11 = this;
-
-        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
-        if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-          throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-        }
-        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-          this.create(target, effectiveOptions);
-        } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
-            return _this11.create(element, effectiveOptions);
-          });
-        }
+        (0, _get3.default)(LeftNav.prototype.__proto__ || (0, _getPrototypeOf2.default)(LeftNav.prototype), 'release', this).call(this);
       }
     }]);
     return LeftNav;
-  }();
+  }((0, _mixin3.default)(_createComponent2.default, _initComponentBySearch2.default));
 
   LeftNav.options = {
     selectorInit: '[data-left-nav-container]',

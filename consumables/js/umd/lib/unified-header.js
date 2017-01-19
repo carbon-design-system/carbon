@@ -57,7 +57,7 @@
 
         if (this.handleDocumentClick) {
           this.element.ownerDocument.removeEventListener('click', function (evt) {
-            return _this.handleDocumentClick(evt);
+            _this.handleDocumentClick(evt);
           });
         }
         this.constructor.components.delete(this.element);

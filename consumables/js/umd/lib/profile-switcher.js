@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/get', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/get'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.get, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.profileSwitcher = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _on) {
+})(this, function (exports, _weakMap, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _get2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -19,15 +19,23 @@
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
-  var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-  var _create2 = _interopRequireDefault(_create);
-
-  var _assign2 = _interopRequireDefault(_assign);
+  var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
+
+  var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+  var _get3 = _interopRequireDefault(_get2);
+
+  var _inherits3 = _interopRequireDefault(_inherits2);
+
+  var _mixin3 = _interopRequireDefault(_mixin2);
+
+  var _createComponent2 = _interopRequireDefault(_createComponent);
+
+  var _initComponentBySearch2 = _interopRequireDefault(_initComponentBySearch);
 
   var _on2 = _interopRequireDefault(_on);
 
@@ -37,41 +45,39 @@
     };
   }
 
-  var ProfileSwitcher = function () {
+  var ProfileSwitcher = function (_mixin) {
+    (0, _inherits3.default)(ProfileSwitcher, _mixin);
+
     /**
      * Profile Switcher.
-     * @implements Component
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
      * @param {HTMLElement} element The element working as a profile switcher.
      * @param {Object} [options] The component options
      * @param {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
-     * @param {string} [options.selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
-     * @param {string} [options.selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
-     * @param {string} [options.selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
-     * @param {string} [options.selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
-     * @param {string} [options.selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
-     * @param {string} [options.selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
+     * @param {string} [options.selectorAccount]
+     *   The data attribute selector for the element containing the account name in the profile switcher.
+     * @param {string} [options.selectorOrg]
+     *   The data attribute selector for the element containing the organization name in the profile switcher.
+     * @param {string} [options.selectorSpace]
+     *   The data attribute selector for the element containing the space name in the profile switcher.
+     * @param {string} [options.selectorAccountDropdown]
+     *   The data attribute selector for the dropdown item containing the current account name.
+     * @param {string} [options.selectorOrgDropdown]
+     *   The data attribute selector for the dropdown item containing the current organization name.
+     * @param {string} [options.selectorSpaceDropdown]
+     *   The data attribute selector for the dropdown item containing the current space name.
      */
-    function ProfileSwitcher(element) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    function ProfileSwitcher(element, options) {
       (0, _classCallCheck3.default)(this, ProfileSwitcher);
 
-      if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-        throw new TypeError('DOM element should be given to initialize this widget.');
-      }
+      var _this = (0, _possibleConstructorReturn3.default)(this, (ProfileSwitcher.__proto__ || (0, _getPrototypeOf2.default)(ProfileSwitcher)).call(this, element, options));
 
-      this.element = element;
-
-      this.options = (0, _assign2.default)(this.constructor.options, options);
-
-      this.constructor.components.set(this.element, this);
-
-      this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (evt) {
-        return _this.handleDocumentClick(evt);
+      _this.hDocumentClick = (0, _on2.default)(_this.element.ownerDocument, 'click', function (evt) {
+        _this.handleDocumentClick(evt);
       });
 
-      this.element.addEventListener('dropdown-beingselected', function (event) {
+      _this.element.addEventListener('dropdown-beingselected', function (event) {
         if (event.target.querySelector(_this.options.selectorAccountDropdown) !== null) {
           if (event.detail.item.querySelector(_this.options.classLinkedIcon) !== null) {
             _this.element.linkedAccount = event.detail.item.querySelector(_this.options.selectorAccountSlLinked).cloneNode(true);
@@ -85,29 +91,29 @@
         }
       });
 
-      this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', function (event) {
-        return _this.toggle(event);
+      _this.element.querySelector(_this.options.selectorToggle).addEventListener('keydown', function (event) {
+        _this.toggle(event);
       });
 
-      this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', function (event) {
+      _this.element.querySelector(_this.options.selectorToggle).addEventListener('mouseenter', function (event) {
         _this.getLinkedData(event);
         _this.determineSwitcherValues(true);
       });
 
-      this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', function (event) {
+      _this.element.querySelector(_this.options.selectorToggle).addEventListener('mouseleave', function (event) {
         _this.getLinkedData(event);
         _this.determineSwitcherValues(false);
       });
 
-      this.element.ownerDocument.addEventListener('keyup', function () {
+      _this.element.ownerDocument.addEventListener('keyup', function () {
         return _this.handleBlur();
       });
+      return _this;
     }
 
     /**
-     * Instantiates a profile switcher of the given element.
-     * @param {HTMLElement} element The element working as the profile switcher.
-     * @param {Object} [options] The component options
+     * Opens and closes the menu.
+     * @param {Event} event The event triggering this method.
      */
 
 
@@ -251,36 +257,11 @@
         if (this.hDocumentClick) {
           this.hDocumentClick = this.hDocumentClick.release();
         }
-        this.constructor.components.delete(this.element);
-      }
-    }], [{
-      key: 'create',
-      value: function create(element, options) {
-        return this.components.get(element) || new this(element, options);
-      }
-    }, {
-      key: 'init',
-      value: function init() {
-        var _this2 = this;
-
-        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
-        if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-          throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-        }
-        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-          this.create(target, effectiveOptions);
-        } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
-            return _this2.create(element, effectiveOptions);
-          });
-        }
+        (0, _get3.default)(ProfileSwitcher.prototype.__proto__ || (0, _getPrototypeOf2.default)(ProfileSwitcher.prototype), 'release', this).call(this);
       }
     }]);
     return ProfileSwitcher;
-  }();
+  }((0, _mixin3.default)(_createComponent2.default, _initComponentBySearch2.default));
 
   ProfileSwitcher.options = {
     selectorInit: '[data-profile-switcher]',

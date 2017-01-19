@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/math/sign', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/math-sign'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/core-js/math/sign', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/event-matches', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/math-sign'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/math/sign'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/math-sign'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/core-js/math/sign'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/event-matches'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/math-sign'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.sign, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.arrayFrom, global.elementMatches, global.objectAssign, global.mathSign);
+    factory(mod.exports, global.weakMap, global.sign, global.toConsumableArray, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.eventMatches, global.arrayFrom, global.elementMatches, global.objectAssign, global.mathSign);
     global.card = mod.exports;
   }
-})(this, function (exports, _weakMap, _sign, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _eventMatches) {
+})(this, function (exports, _weakMap, _sign, _toConsumableArray2, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _eventMatches) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -23,13 +23,21 @@
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-  var _create2 = _interopRequireDefault(_create);
-
-  var _assign2 = _interopRequireDefault(_assign);
+  var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
+
+  var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+  var _inherits3 = _interopRequireDefault(_inherits2);
+
+  var _mixin3 = _interopRequireDefault(_mixin2);
+
+  var _createComponent2 = _interopRequireDefault(_createComponent);
+
+  var _initComponentBySearch2 = _interopRequireDefault(_initComponentBySearch);
 
   var _eventMatches2 = _interopRequireDefault(_eventMatches);
 
@@ -39,36 +47,32 @@
     };
   }
 
-  var Card = function () {
+  var Card = function (_mixin) {
+    (0, _inherits3.default)(Card, _mixin);
+
     /**
      * The container for cards.
-     * @implements Component
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
      * @param {HTMLElement} element The element working as a container.
      * @param {Object} [options] The component options.
      * @param {string} [options.selectorCard] The CSS selector to find cards.
      */
-    function Card(element) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    function Card(element, options) {
       (0, _classCallCheck3.default)(this, Card);
 
-      if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-        throw new TypeError('DOM element should be given to initialize this widget.');
-      }
-      this.element = element;
-      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
-      this.constructor.components.set(this.element, this);
-      this.element.addEventListener('keydown', function (event) {
-        return _this.cardKeyPress(event);
+      var _this = (0, _possibleConstructorReturn3.default)(this, (Card.__proto__ || (0, _getPrototypeOf2.default)(Card)).call(this, element, options));
+
+      _this.element.addEventListener('keydown', function (event) {
+        _this.cardKeyPress(event);
       });
+      return _this;
     }
 
     /**
-     * Instantiates card container of the given element.
-     * @param {HTMLElement} element The element working as a container.
-     * @param {Object} [options] The component options.
-     * @param {string} [options.selectorCard] The CSS selector to find cards.
+     * Goes back/forward among cards,
+     * right arrow key for going forward, left arrow key for going backward.
+     * @param {Event} event The event triggering this method.
      */
 
 
@@ -90,39 +94,9 @@
           cards[nextIndexLooped].focus();
         }
       }
-    }, {
-      key: 'release',
-      value: function release() {
-        this.constructor.components.delete(this.element);
-      }
-    }], [{
-      key: 'create',
-      value: function create(element, options) {
-        return this.components.get(element) || new this(element, options);
-      }
-    }, {
-      key: 'init',
-      value: function init() {
-        var _this2 = this;
-
-        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
-        if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-          throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-        }
-        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-          this.create(target, effectiveOptions);
-        } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
-            return _this2.create(element, effectiveOptions);
-          });
-        }
-      }
     }]);
     return Card;
-  }();
+  }((0, _mixin3.default)(_createComponent2.default, _initComponentBySearch2.default));
 
   Card.components = new _weakMap2.default();
   Card.options = {

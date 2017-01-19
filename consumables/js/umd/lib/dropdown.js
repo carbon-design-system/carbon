@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/get', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/get'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.create, global.assign, global.classCallCheck, global.createClass, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.get, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.dropdown = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _create, _assign, _classCallCheck2, _createClass2, _eventMatches, _on) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _get2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _eventMatches, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -21,13 +21,23 @@
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-  var _create2 = _interopRequireDefault(_create);
-
-  var _assign2 = _interopRequireDefault(_assign);
+  var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
   var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
   var _createClass3 = _interopRequireDefault(_createClass2);
+
+  var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+  var _get3 = _interopRequireDefault(_get2);
+
+  var _inherits3 = _interopRequireDefault(_inherits2);
+
+  var _mixin3 = _interopRequireDefault(_mixin2);
+
+  var _createComponent2 = _interopRequireDefault(_createComponent);
+
+  var _initComponentBySearch2 = _interopRequireDefault(_initComponentBySearch);
 
   var _eventMatches2 = _interopRequireDefault(_eventMatches);
 
@@ -39,10 +49,13 @@
     };
   }
 
-  var Dropdown = function () {
+  var Dropdown = function (_mixin) {
+    (0, _inherits3.default)(Dropdown, _mixin);
+
     /**
      * A selector with drop downs.
-     * @implements Component
+     * @extends CreateComponent
+     * @extends InitComponentBySearch
      * @param {HTMLElement} element The element working as a selector.
      * @param {Object} [options] The component options.
      * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
@@ -53,57 +66,39 @@
      *   Cancellation of this event stops selection of drop down item.
      * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
      */
-    function Dropdown(element) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    function Dropdown(element, options) {
       (0, _classCallCheck3.default)(this, Dropdown);
 
-      if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-        throw new TypeError('DOM element should be given to initialize this widget.');
+      var _this = (0, _possibleConstructorReturn3.default)(this, (Dropdown.__proto__ || (0, _getPrototypeOf2.default)(Dropdown)).call(this, element, options));
+
+      if (_this.element.dataset.dropdown !== 'navigation') {
+        _this.element.dataset.dropdown = '';
       }
-
-      this.element = element;
-
-      this.options = (0, _assign2.default)((0, _create2.default)(this.constructor.options), options);
-
-      if (this.element.dataset.dropdown !== 'navigation') {
-        this.element.dataset.dropdown = '';
-      }
-      this.constructor.components.set(this.element, this);
 
       /**
        * The handle to release click event listener on document object.
        * @member {Handle}
        */
-      this.hDocumentClick = (0, _on2.default)(this.element.ownerDocument, 'click', function (event) {
-        return _this.toggle(event);
+      _this.hDocumentClick = (0, _on2.default)(_this.element.ownerDocument, 'click', function (event) {
+        _this.toggle(event);
       });
 
-      this.setCloseOnBlur();
+      _this.setCloseOnBlur();
 
-      this.element.addEventListener('keypress', function (event) {
-        return _this.toggle(event);
+      _this.element.addEventListener('keypress', function (event) {
+        _this.toggle(event);
       });
-      this.element.addEventListener('click', function (event) {
+      _this.element.addEventListener('click', function (event) {
         var item = (0, _eventMatches2.default)(event, _this.options.selectorItem);
         if (item) {
           _this.select(item);
         }
       });
+      return _this;
     }
 
     /**
-     * Instantiates selector of the given element.
-     * @param {HTMLElement} element The element working as a selector.
-     * @param {Object} [options] The component options.
-     * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
-     * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
-     * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
-     * @param {string} [options.eventBeforeSelected]
-     *   The name of the custom event fired before a drop down item is selected.
-     *   Cancellation of this event stops selection of drop down item.
-     * @param {string} [options.eventAfterSelected] The name of the custom event fired after a drop down item is selected.
+     * Cleans up stuffs specific to this widget.
      */
 
 
@@ -116,7 +111,7 @@
         if (this.hDocumentClick) {
           this.hDocumentClick = this.hDocumentClick.release();
         }
-        this.constructor.components.delete(this.element);
+        (0, _get3.default)(Dropdown.prototype.__proto__ || (0, _getPrototypeOf2.default)(Dropdown.prototype), 'release', this).call(this);
       }
     }, {
       key: 'toggle',
@@ -177,34 +172,9 @@
           }
         }, !hasFocusin);
       }
-    }], [{
-      key: 'create',
-      value: function create(element, options) {
-        return this.components.get(element) || new this(element, options);
-      }
-    }, {
-      key: 'init',
-      value: function init() {
-        var _this4 = this;
-
-        var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-        var effectiveOptions = (0, _assign2.default)((0, _create2.default)(this.options), options);
-        if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-          throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
-        }
-        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
-          this.create(target, effectiveOptions);
-        } else {
-          [].concat((0, _toConsumableArray3.default)(target.querySelectorAll(effectiveOptions.selectorInit))).forEach(function (element) {
-            return _this4.create(element, effectiveOptions);
-          });
-        }
-      }
     }]);
     return Dropdown;
-  }();
+  }((0, _mixin3.default)(_createComponent2.default, _initComponentBySearch2.default));
 
   Dropdown.components = new _weakMap2.default();
   Dropdown.options = {
