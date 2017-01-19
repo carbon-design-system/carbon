@@ -13,7 +13,8 @@ class Tab extends ContentSwitcher {
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
    * @param {string} [options.selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
-   * @param {string} [options.selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
+   * @param {string} [options.selectorTriggerText]
+   *   The CSS selector to find the element used in narrow mode showing the selected tab item.
    * @param {string} [options.selectorButton] The CSS selector to find tab containers.
    * @param {string} [options.selectorButtonSelected] The CSS selector to find the selected tab.
    * @param {string} [options.selectorLink] The CSS selector to find the links in tabs.
@@ -27,7 +28,7 @@ class Tab extends ContentSwitcher {
   constructor(element, options) {
     super(element, options);
 
-    this.element.addEventListener('keydown', (event) => this.handleKeyDown(event));
+    this.element.addEventListener('keydown', (event) => { this.handleKeyDown(event); });
 
     const selected = this.element.querySelector(this.options.selectorButtonSelected);
     if (selected) {
@@ -90,11 +91,11 @@ class Tab extends ContentSwitcher {
     }[event.key || event.keyIdentifier];
 
     if (direction) {
-      const buttons = [... this.element.querySelectorAll(this.options.selectorButton)];
+      const buttons = [...this.element.querySelectorAll(this.options.selectorButton)];
       const button = this.element.querySelector(this.options.selectorButtonSelected);
       const nextIndex = Math.max(buttons.indexOf(button) + direction, -1 /* For `button` not found in `buttons` */);
       const nextIndexLooped = nextIndex >= 0 && nextIndex < buttons.length ? nextIndex :
-        nextIndex - Math.sign(nextIndex) * buttons.length;
+        nextIndex - (Math.sign(nextIndex) * buttons.length);
       this.setActive(buttons[nextIndexLooped], (error, item) => {
         if (item) {
           const link = item.querySelector(this.options.selectorLink);
@@ -138,7 +139,8 @@ class Tab extends ContentSwitcher {
    * @property {string} selectorInit The CSS selector to find tab containers.
    * @property {string} [selectorMenu] The CSS selector to find the drop down menu used in narrow mode.
    * @property {string} [selectorTrigger] The CSS selector to find the button to open the drop down menu used in narrow mode.
-   * @property {string} [selectorTriggerText] The CSS selector to find the element used in narrow mode showing the selected tab item.
+   * @property {string} [selectorTriggerText]
+   *   The CSS selector to find the element used in narrow mode showing the selected tab item.
    * @property {string} [selectorButton] The CSS selector to find tab containers.
    * @property {string} [selectorButtonSelected] The CSS selector to find the selected tab.
    * @property {string} [selectorLink] The CSS selector to find the links in tabs.

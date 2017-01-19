@@ -15,17 +15,23 @@ class ProfileSwitcher extends mixin(createComponent, initComponent) {
    * @param {HTMLElement} element The element working as a profile switcher.
    * @param {Object} [options] The component options
    * @param {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
-   * @param {string} [options.selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
-   * @param {string} [options.selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
-   * @param {string} [options.selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
-   * @param {string} [options.selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
-   * @param {string} [options.selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
-   * @param {string} [options.selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
+   * @param {string} [options.selectorAccount]
+   *   The data attribute selector for the element containing the account name in the profile switcher.
+   * @param {string} [options.selectorOrg]
+   *   The data attribute selector for the element containing the organization name in the profile switcher.
+   * @param {string} [options.selectorSpace]
+   *   The data attribute selector for the element containing the space name in the profile switcher.
+   * @param {string} [options.selectorAccountDropdown]
+   *   The data attribute selector for the dropdown item containing the current account name.
+   * @param {string} [options.selectorOrgDropdown]
+   *   The data attribute selector for the dropdown item containing the current organization name.
+   * @param {string} [options.selectorSpaceDropdown]
+   *   The data attribute selector for the dropdown item containing the current space name.
    */
   constructor(element, options) {
     super(element, options);
 
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => this.handleDocumentClick(evt));
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this.handleDocumentClick(evt); });
 
     this.element.addEventListener('dropdown-beingselected', (event) => {
       if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
@@ -41,7 +47,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponent) {
       }
     });
 
-    this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', (event) => this.toggle(event));
+    this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', (event) => { this.toggle(event); });
 
     this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', (event) => {
       this.getLinkedData(event);
@@ -175,31 +181,31 @@ class ProfileSwitcher extends mixin(createComponent, initComponent) {
       orgElement.textContent = orgDropdownValue;
       spaceElement.textContent = spaceDropdownValue;
       regionElement.textContent = regionDropdownValue;
-      menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
+      menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
     } else {
       if (nameDropdownValue.length > 25) {
-        nameShort = nameDropdownValue.substr(0, 25) + '...';
+        nameShort = `${nameDropdownValue.substr(0, 25)}...`;
         nameElement.textContent = nameShort;
       } else {
         nameElement.textContent = nameDropdownValue;
       }
 
       if (orgDropdownValue.length > 25) {
-        orgShort = orgDropdownValue.slice(0, 12) + '...' + orgDropdownValue.slice(-13);
+        orgShort = `${orgDropdownValue.slice(0, 12)}...${orgDropdownValue.slice(-13)}`;
         orgElement.textContent = orgShort;
       } else {
         orgElement.textContent = orgDropdownValue;
       }
 
       if (spaceDropdownValue.length > 25) {
-        spaceShort = spaceDropdownValue.substr(0, 25) + '...';
+        spaceShort = `${spaceDropdownValue.substr(0, 25)}...`;
         spaceElement.textContent = spaceShort;
       } else {
         spaceElement.textContent = spaceDropdownValue;
       }
 
       regionElement.textContent = regionDropdownValue;
-      menuElement.style.width = this.element.getBoundingClientRect().width + 'px';
+      menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
     }
   }
 
@@ -216,12 +222,18 @@ class ProfileSwitcher extends mixin(createComponent, initComponent) {
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find profile switchers.
    * @property {string} [selectorProfileSwitcher] The data attribute selector for the profile switcher.
-   * @property {string} [selectorAccount] The data attribute selector for the element containing the account name in the profile switcher.
-   * @property {string} [selectorOrg] The data attribute selector for the element containing the organization name in the profile switcher.
-   * @property {string} [selectorSpace] The data attribute selector for the element containing the space name in the profile switcher.
-   * @property {string} [selectorAccountDropdown] The data attribute selector for the dropdown item containing the current account name.
-   * @property {string} [selectorOrgDropdown] The data attribute selector for the dropdown item containing the current organization name.
-   * @property {string} [selectorSpaceDropdown] The data attribute selector for the dropdown item containing the current space name.
+   * @property {string} [selectorAccount]
+   *   The data attribute selector for the element containing the account name in the profile switcher.
+   * @property {string} [selectorOrg]
+   *   The data attribute selector for the element containing the organization name in the profile switcher.
+   * @property {string} [selectorSpace]
+   *   The data attribute selector for the element containing the space name in the profile switcher.
+   * @property {string} [selectorAccountDropdown]
+   *   The data attribute selector for the dropdown item containing the current account name.
+   * @property {string} [selectorOrgDropdown]
+   *   The data attribute selector for the dropdown item containing the current organization name.
+   * @property {string} [selectorSpaceDropdown]
+   *   The data attribute selector for the dropdown item containing the current space name.
    */
   static options = {
     selectorInit: '[data-profile-switcher]',

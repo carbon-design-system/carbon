@@ -1,3 +1,4 @@
+import debounce from 'lodash.debounce';
 import mixin from '../misc/mixin';
 import createComponent from '../mixins/create-component';
 import initComponent from '../mixins/init-component-by-search';
@@ -5,7 +6,6 @@ import '../polyfills/array-from';
 import '../polyfills/element-matches';
 import '../polyfills/object-assign';
 import on from '../misc/on';
-import debounce from 'lodash.debounce';
 
 class DetailPageHeader extends mixin(createComponent, initComponent) {
   /**
@@ -52,8 +52,10 @@ class DetailPageHeader extends mixin(createComponent, initComponent) {
 
   /**
    * The component options.
-   * If `options` is specified in the constructor, {@linkcode DetailPageHeader.create .create()}, or {@linkcode DetailPageHeader.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode DetailPageHeader.init .init()} works.
+   * If `options` is specified in the constructor,
+   * {@linkcode DetailPageHeader.create .create()}, or {@linkcode DetailPageHeader.init .init()},
+   * properties in this object are overriden for the instance being created
+   * and how {@linkcode DetailPageHeader.init .init()} works.
    * @member DetailPageHeader.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find detail page headers.

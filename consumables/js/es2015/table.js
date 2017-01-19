@@ -26,7 +26,7 @@ class Table extends mixin(createComponent, initComponent) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', (event) => this.handleClick(event));
+    this.element.addEventListener('click', (event) => { this.handleClick(event); });
   }
 
   /**
@@ -83,6 +83,7 @@ class Table extends mixin(createComponent, initComponent) {
       detail: { newState },
     });
 
+    // eslint-disable-next-line max-len
     // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
     if (element.dispatchEvent(eventStart)) {
       toggleClass(element, this.options[`class${type}State`], newState);

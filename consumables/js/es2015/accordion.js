@@ -15,9 +15,9 @@ class Accordion extends mixin(createComponent, initComponent) {
    */
   constructor(element, options) {
     super(element, options);
-    [... this.element.querySelectorAll(this.options.accordionItem)].forEach(item => {
-      item.addEventListener('click', (event) => this.handleClick(event));
-      item.addEventListener('keypress', (event) => this.handleKeypress(event));
+    [...this.element.querySelectorAll(this.options.accordionItem)].forEach((item) => {
+      item.addEventListener('click', (event) => { this.handleClick(event); });
+      item.addEventListener('keypress', (event) => { this.handleKeypress(event); });
     });
   }
 
@@ -46,7 +46,8 @@ Accordion.components = new WeakMap();
 
 /**
  * The component options.
- * If `options` is specified in the constructor, {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
+ * If `options` is specified in the constructor,
+ * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
  * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
  * @property {string} selectorInit The CSS selector to find accordion UIs.
  */

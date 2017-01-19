@@ -15,8 +15,8 @@ import toggleClass from '../polyfills/toggle-class';
 function getTransitionDuration(element) {
   const computedStyle = element.ownerDocument.defaultView.getComputedStyle(element);
   const durations = computedStyle.transitionDuration.split(/,\s*/)
-    .map((transitionDuration) => parseFloat(transitionDuration))
-    .filter((duration) => !isNaN(duration));
+    .map(transitionDuration => parseFloat(transitionDuration))
+    .filter(duration => !isNaN(duration));
   return durations.length > 0 ? Math.max(...durations) : 0;
 }
 
@@ -81,7 +81,7 @@ class Modal extends mixin(createComponent, initComponent, eventedState) {
 
     this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
 
-    [... this.element.querySelectorAll('[data-modal-close]')].forEach((element) => {
+    [...this.element.querySelectorAll('[data-modal-close]')].forEach((element) => {
       element.addEventListener('click', (event) => {
         this.hide(event);
       });

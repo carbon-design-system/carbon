@@ -38,7 +38,7 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
         }
       }
     });
-    [... this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(item => {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach((item) => {
       item.addEventListener('keydown', (evt) => {
         const leftNavItemWithChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
         if (leftNavItemWithChildren && evt.which === 13) {
@@ -49,12 +49,12 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
   }
 
   addActiveListItem(item) {
-    [...this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(currentItem => {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach((currentItem) => {
       if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
     });
-    [...this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach(currentItem => {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach((currentItem) => {
       if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
@@ -68,21 +68,23 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
    * @param {HTMLElement} listItem The list item that was clicked.
    * @param {Event} event The event triggering this method.
    */
-   handleNestedListClick(listItem, evt) {
-     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
-     if (!('leftNavItemLink' in evt.target.dataset)) {
-       toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
-     }
-     const list = listItem.querySelector(this.options.selectorLeftNavNestedList);
-     const listItems = [... list.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
-     listItems.forEach(item => {
-       if (isOpen) {
-         item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = -1;
-       } else {
-         item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = 0;
-       }
-     });
-   }
+  handleNestedListClick(listItem, evt) {
+    const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
+    if (!('leftNavItemLink' in evt.target.dataset)) {
+      toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
+    }
+    const list = listItem.querySelector(this.options.selectorLeftNavNestedList);
+    const listItems = [...list.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
+    listItems.forEach((item) => {
+      if (isOpen) {
+        // eslint-disable-next-line no-param-reassign
+        item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = -1;
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = 0;
+      }
+    });
+  }
 
   /**
    * The map associating DOM element and spinner instance.
@@ -93,7 +95,8 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
 
   /**
    * The component options.
-   * If `options` is specified in the constructor, {@linkcode InlineLeftNav.create .create()}, or {@linkcode InlineLeftNav.init .init()},
+   * If `options` is specified in the constructor,
+   * {@linkcode InlineLeftNav.create .create()}, or {@linkcode InlineLeftNav.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode InlineLeftNav.init .init()} works.
    * @member InlineLeftNav.options
    * @type {Object}

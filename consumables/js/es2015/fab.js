@@ -13,7 +13,7 @@ class FabButton extends mixin(createComponent, initComponent) {
    */
   constructor(element) {
     super(element);
-    element.addEventListener('click', (event) => this.toggle(event));
+    element.addEventListener('click', (event) => { this.toggle(event); });
   }
 
   /**

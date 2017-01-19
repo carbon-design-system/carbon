@@ -14,13 +14,15 @@ class SearchWithOptions extends mixin(createComponent, initComponent) {
    * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as the search component.
    * @param {Object} [options] The component options
-   * @param {string} [options.selectorToggleLayoutBtn] The data attribute selector for the button that toggles between the layouts.
+   * @param {string} [options.selectorToggleLayoutBtn]
+   *   The data attribute selector for the button that toggles between the layouts.
    * @param {string} [options.selectorIconContainer] The data attribute selector for the icon layout container.
    * @param {string} [options.classHiddenContainer] The class selector for a hidden container.
    */
   constructor(element, options) {
     super(element, options);
-    this.element.querySelector(this.options.selectorToggleLayoutBtn).addEventListener('click', (evt) => this.toggleLayout(evt));
+    const toggleLayoutBtnNode = this.element.querySelector(this.options.selectorToggleLayoutBtn);
+    toggleLayoutBtnNode.addEventListener('click', (evt) => { this.toggleLayout(evt); });
   }
 
   /**
@@ -29,8 +31,8 @@ class SearchWithOptions extends mixin(createComponent, initComponent) {
    */
   toggleLayout(evt) {
     const btn = evt.currentTarget;
-    const iconContainers = [... btn.querySelectorAll(this.options.selectorIconContainer)];
-    iconContainers.forEach(container => {
+    const iconContainers = [...btn.querySelectorAll(this.options.selectorIconContainer)];
+    iconContainers.forEach((container) => {
       const isHidden = container.classList.contains(this.options.classHiddenContainer);
       toggleClass(container, this.options.classHiddenContainer, !isHidden);
     });
@@ -45,8 +47,10 @@ class SearchWithOptions extends mixin(createComponent, initComponent) {
 
   /**
    * The component options.
-   * If `options` is specified in the constructor, {@linkcode SearchWithOptions.create .create()}, or {@linkcode SearchWithOptions.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode SearchWithOptions.init .init()} works.
+   * If `options` is specified in the constructor,
+   * {@linkcode SearchWithOptions.create .create()}, or {@linkcode SearchWithOptions.init .init()},
+   * properties in this object are overriden for the instance being created
+   * and how {@linkcode SearchWithOptions.init .init()} works.
    * @member SearchWithOptions.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find search UIs with options.

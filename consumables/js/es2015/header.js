@@ -42,10 +42,10 @@ class HeaderNav extends mixin(createComponent, initComponent, eventedState) {
 
     this.menuNode = this.element.querySelector(this.options.selectorMenu);
 
-    this.element.addEventListener('keydown', (event) => this.toggleNav(event));
+    this.element.addEventListener('keydown', (event) => { this.toggleNav(event); });
 
-    [... this.element.querySelectorAll(this.options.selectorItemLink)].forEach((item) => {
-      item.addEventListener('click', (e) => this.select(e));
+    [...this.element.querySelectorAll(this.options.selectorItemLink)].forEach((item) => {
+      item.addEventListener('click', (e) => { this.select(e); });
     });
   }
 
@@ -84,7 +84,7 @@ class HeaderNav extends mixin(createComponent, initComponent, eventedState) {
   toggleNav(event) {
     const isActive = this.element.classList.contains(this.options.classActive);
     let add;
-    if (event.type === 'click' || event.type === 'keydown' && event.which === 40) {
+    if (event.type === 'click' || (event.type === 'keydown' && event.which === 40)) {
       // Toggle button or ESC key on nav
       add = !isActive;
     } else if (event.type === 'keydown' && event.which === 27) {
@@ -127,7 +127,7 @@ class HeaderNav extends mixin(createComponent, initComponent, eventedState) {
     });
 
     if (this.element.dispatchEvent(eventStart)) {
-      [... this.element.querySelectorAll(this.options.selectorItem)].forEach((element) => {
+      [...this.element.querySelectorAll(this.options.selectorItem)].forEach((element) => {
         if (element.contains(activatedElement)) {
           element.classList.add('selected');
         } else if (element.classList.contains('selected')) {

@@ -131,7 +131,8 @@ class FileUploader extends mixin(createComponent, initComponent) {
 
   /**
    * The component options.
-   * If `options` is specified in the constructor, {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
+   * If `options` is specified in the constructor,
+   * {@linkcode FileUploader.create .create()}, or {@linkcode FileUploader.init .init()},
    * properties in this object are overriden for the instance being create and how {@linkcode FileUploader.init .init()} works.
    * @member FileUploader.options
    * @type {Object}
