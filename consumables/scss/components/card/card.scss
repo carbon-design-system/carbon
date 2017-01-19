@@ -55,7 +55,7 @@
     background-color: $color__blue-90;
 
     @include light-ui {
-      background-color: $color__gray-3;
+      background-color: $color__gray-2;
     }
   }
 }
@@ -121,6 +121,7 @@
     width: rem(55px);
     height: rem(55px);
     background-color: $color__white;
+    border: 1px solid $color__navy-gray-2;
     border-radius: 100%;
 
     @include light-ui {
@@ -186,16 +187,13 @@
     border: none;
 
     &:hover {
-
       .bx--app-actions__button--icon {
-        fill: $color__white;
+        fill: $color__blue-30;
       }
     }
 
     @include light-ui {
-
       &:hover {
-
         .bx--app-actions__button--icon {
           fill: $color__blue-51;
         }
@@ -209,18 +207,6 @@
       transition: .2s;
       fill: $color__navy-gray-7;
       cursor: pointer;
-
-      @include light-ui {
-        fill: $color__blue-90;
-      }
-
-      &:hover {
-        fill: $color__white;
-        @include light-ui {
-          // check with visual for light hover state
-          fill: $color__blue-90;
-        }
-      }
     }
   }
 }
@@ -282,10 +268,10 @@
 
     .bx--overview__main-number {
       @include font-size('46');
-      color: $color__white;
+      color: $color__blue-30;
 
       @include light-ui {
-        color: $color__blue-50;
+        color: $color__blue-51;
       }
     }
   }

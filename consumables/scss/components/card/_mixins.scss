@@ -26,6 +26,10 @@
       border-radius: 100%;
       margin-right: .75rem;
       background-color: $color__red-40;
+
+      @include light-ui {
+        background-color: $color__red-50;
+      }
     }
   }
 
@@ -37,7 +41,7 @@
       width: rem(20px);
       border-radius: 100%;
       margin-right: .75rem;
-      background-color: $color__navy-gray-6;
+      background-color: $color__navy-gray-7;
     }
   }
 
