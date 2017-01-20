@@ -83,20 +83,6 @@
 
   &__list-item {
     @include reset;
-    &:hover,
-    &:focus {
-      background-color: $color__blue-30;
-      color: $color__blue-90;
-
-      @include light-ui {
-        background-color: $color__blue-51;
-        color: $color__white;
-
-        .bx--dropdown__link {
-          color: $color__white;
-        }
-      }
-    }
 
     &.bx--dropdown--selected {
       display: none;
@@ -115,6 +101,21 @@
 
     .bx--dropdown--selected & {
       color: $color__white;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $color__blue-30;
+      color: $color__blue-90;
+
+      @include light-ui {
+        background-color: $color__blue-51;
+        color: $color__white;
+
+        .bx--dropdown__link {
+          color: $color__white;
+        }
+      }
     }
 
     @include light-ui {
