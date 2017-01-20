@@ -35,8 +35,8 @@
   &:active {
 
     @if ($theme == 'dark') {
-      background-color: $color__blue-20;
-      border-color: $color__blue-20;
+      background-color: $color__blue-40;
+      border-color: $color__blue-40;
       color: $color__blue-90;
     }
 
@@ -52,7 +52,7 @@
     border-top-left-radius: 8px;
 
     &:hover {
-      @if ($theme == 'dark') { border-color: $color__blue-20; }
+      @if ($theme == 'dark') { border-color: $color__blue-40; }
       @if ($theme == 'light') { border-color: $color__blue-30; }
     }
   }
@@ -62,7 +62,7 @@
     border-bottom-right-radius: 8px;
 
     &:hover {
-      @if ($theme == 'dark') { border-color: $color__blue-20; }
+      @if ($theme == 'dark') { border-color: $color__blue-40; }
       @if ($theme == 'light') { border-color: $color__blue-30; }
     }
   }

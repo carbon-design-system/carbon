@@ -44,6 +44,10 @@
     align-items: center;
     border-color: $color__blue-30;
     display: flex;
+    
+    @include light-ui {
+      border-color: $color__blue-51;
+    }
 
     &:before {
       // Styled Radio - checked - dot
@@ -55,6 +59,10 @@
       height: .5rem;
       border-radius: 50%;
       background-color: $color__blue-30;
+      
+      @include light-ui {
+        background-color: $color__blue-51;
+      }
     }
   }
 

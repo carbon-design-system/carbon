@@ -12,7 +12,7 @@
   &__item {
     @include reset;
     transition: all $transition--base $bx--standard-easing;
-    border-top: 1px solid $color__navy-gray-2;
+    border-top: 1px solid $color__blue-90;
     overflow: hidden;
 
     @include light-ui {
@@ -20,7 +20,7 @@
     }
 
     &:last-child {
-      border-bottom: 1px solid $color__navy-gray-2;
+      border-bottom: 1px solid $color__blue-90;
 
       @include light-ui {
         border-bottom: 1px solid $color__gray-1;
@@ -43,7 +43,7 @@
     fill: $color__white;
 
     @include light-ui {
-      fill: $color__blue-90;
+      fill: $color__navy-gray-7;
     }
   }
 

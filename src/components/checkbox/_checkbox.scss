@@ -50,6 +50,11 @@
       background-color: $color__blue-30;
       border-color: $color__blue-30;
 
+      @include light-ui {
+        background-color: $color__blue-51;
+        border-color: $color__blue-51;
+      }
+
       // Box Styles - checked state - checkmark
       &:before {
         content: '';
