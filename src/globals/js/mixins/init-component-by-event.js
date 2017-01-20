@@ -1,4 +1,4 @@
-import eventMatches from '../polyfills/event-matches';
+import eventMatches from '../../../../demo/polyfills/event-matches';
 import on from '../misc/on';
 
 export default function (ToMix) {
@@ -41,6 +41,7 @@ export default function (ToMix) {
           },
         };
       }
+      return '';
     }
   }
   return InitComponentByEvent;

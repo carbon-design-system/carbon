@@ -1,0 +1,45 @@
+//-------------------------
+// Content Switcher Default
+//-------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+@import 'mixins';
+
+@include exports('content-switcher--default') {
+
+// Container
+.bx--content-switcher {
+  display: flex;
+}
+
+// Default (use with <button> and <a>)
+.bx--content-switcher__btn {
+  @include content-switcher;
+
+  @include light-ui {
+    @include content-switcher('light');
+  }
+}
+
+// Selected
+.bx--content-switcher__btn.bx--content-switcher--selected {
+  background-color: $color__blue-30;
+  color: $color__blue-90;
+  font-weight: 400;
+
+  &:hover {
+    border-color: $color__blue-30;
+  }
+
+  @include light-ui {
+    background-color: $color__blue-51;
+    color: $color__white;
+    font-weight: 400;
+
+    &:hover { border-color: $color__blue-51; }
+  }
+}
+
+}

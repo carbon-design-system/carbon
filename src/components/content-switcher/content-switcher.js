@@ -28,10 +28,6 @@ class ContentSwitcher extends mixin(createComponent, initComponent, eventedState
   constructor(element, options) {
     super(element, options);
     this.element.addEventListener('click', (event) => { this.handleClick(event); });
-
-    [...element.querySelectorAll('input')].forEach((input) => {
-      if (input.checked) this._changeActive(input);
-    });
   }
 
   /**
@@ -83,7 +79,9 @@ class ContentSwitcher extends mixin(createComponent, initComponent, eventedState
     toggleClass(item, this.options.classActive, true);
     [...item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => element.removeAttribute('hidden'));
 
-    callback();
+    if (callback) {
+      callback();
+    }
   }
 
   /**

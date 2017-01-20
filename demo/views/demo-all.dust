@@ -11,9 +11,7 @@
     }
   </style>
 </head>
-<body class="bx--body">
-  {header|s}
-  {detailHeader|s}
+<body class="bx--body bx--global-light-ui">
   <button class="bx--btn theme-switcher" data-theme-switcher>Theme Switcher</button>
   <div data-demo-switcher class="demo-switcher__container">
     <input id="flex-col" data-demo-col class="bx--radio" type="radio" value="col" name="radio">
@@ -34,8 +32,8 @@
   </div>
 
   <!-- Scripts -->
-  <!-- <script src="../bluemix-components.min.js"></script> -->
-  <script src="../demo.js"></script>
+  <!-- <script src="../../dist/bluemix-components.min.js"></script> -->
+  <script src="/demo.js"></script>
   <script src="/svgxuse/svgxuse.min.js"></script>
 
   </script>

@@ -1,9 +1,9 @@
-@import '../../../../globals/scss/colors';
-@import '../../../../globals/scss/typography';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/typography';
 @import 'vars';
 @import 'mixins';
 @import 'extends';
-@import '../../../../globals/scss/import-once';
+@import '../../globals/scss/import-once';
 
 @include exports('taxonomy-item') {
 

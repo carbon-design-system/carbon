@@ -5,32 +5,29 @@ import '../../../demo/polyfills/element-matches';
 import '../../../demo/polyfills/object-assign';
 import '../../../demo/polyfills/array-from';
 
-const initialStateHTML = (name, id) => {
-  return (`
+const initialStateHTML = (name, id) =>
+  (`
     <span class="bx--file-uploader__selected-file">
       <p class="bx--file-uploader__filename">${name}</p>
       <span data-for="${id}" class="bx--file-uploader__state-container"></span>
     </span>
   `);
-};
 
-const uploadStateHTML = () => {
-  return (`
+const uploadStateHTML = () =>
+  (`
     <div data-loading class="bx--loading">
       <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
         <circle cx="0" cy="0" r="37.5" />
       </svg>
     </div>`
   );
-};
 
-const editStateHTML = () => {
-  return (`
+const editStateHTML = () =>
+  (`
     <svg class="bx--file-uploader__close-icon">
       <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#close--glyph"></use>
     </svg>`
   );
-};
 
 class FileUploader extends mixin(createComponent, initComponent) {
   /**
@@ -61,7 +58,7 @@ class FileUploader extends mixin(createComponent, initComponent) {
   injectInitialStateHTML(selectorContainer = this.options.selectorContainer) {
     const selector = this.element.dataset.target || selectorContainer;
     const container = this.element.ownerDocument.querySelector(selector);
-    const HTMLString = [... this.element.files]
+    const HTMLString = [...this.element.files]
       .map(file => initialStateHTML(file.name, this.uniqueStateContainerID))
       .join('');
 
@@ -88,7 +85,7 @@ class FileUploader extends mixin(createComponent, initComponent) {
    */
   setStateHTML(state) {
     const selector = `[data-for=${this.uniqueStateContainerID}]`;
-    const stateContainers = [... this.element.ownerDocument.querySelectorAll(selector)];
+    const stateContainers = [...this.element.ownerDocument.querySelectorAll(selector)];
 
     if (stateContainers.length === 0) {
       throw new TypeError('State container elements not found; invoke injectInitialStateHTML() before injectStateHTML())');
@@ -98,7 +95,7 @@ class FileUploader extends mixin(createComponent, initComponent) {
       throw new TypeError('injectStateHTML() missing String args: "edit" or "upload"');
     }
 
-    stateContainers.forEach(container => {
+    stateContainers.forEach((container) => {
       const childNode = container.querySelector('div') || container.querySelector('svg') || false;
       if (childNode) {
         container.removeChild(childNode);
@@ -137,7 +134,7 @@ class FileUploader extends mixin(createComponent, initComponent) {
    * @member FileUploader.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find file uploaders.
-   * @property {string} selectorContainer The CSS selector to find "file uploader container" showing all selected files to display.
+   * @property {string} selectorContainer The selector to find "file uploader container" showing all selected files to display.
    * @property {string} [labelSelector] The CSS selector to find the label for the file name.
    */
   static options = {

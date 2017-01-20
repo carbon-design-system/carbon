@@ -1,4 +1,4 @@
-import eventMatches from '../polyfills/event-matches';
+import eventMatches from '../../../../demo/polyfills/event-matches';
 import on from '../misc/on';
 
 export default function (ToMix) {
@@ -30,10 +30,9 @@ export default function (ToMix) {
           const launcher = eventMatches(event, `[${effectiveOptions.attribInitTarget}]`);
 
           if (launcher) {
-            event.delegateTarget = launcher;
-
+            event.delegateTarget = launcher; // eslint-disable-line 
             const elements
-              = [... launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))];
+              = [...launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))];
             if (elements.length > 1) {
               throw new Error('Target widget must be unique.');
             }
@@ -58,6 +57,7 @@ export default function (ToMix) {
           },
         };
       }
+      return '';
     }
   }
   return InitComponentByLauncher;

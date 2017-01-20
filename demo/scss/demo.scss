@@ -1,10 +1,13 @@
-@import '../../globals/scss/styles';
+@import '../../src/globals/scss/styles';
 
 .demo--container {
   @include grid-container;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 1rem;
+  margin-top: 5rem;
   transition: .2s;
   background-color: $color__navy-gray-2;
 
@@ -22,6 +25,7 @@
   }
 
   &.flex-row {
+    flex-direction: row;
     flex-wrap: wrap;
     margin: 0 auto;
 

@@ -1,4 +1,4 @@
-export * from '../consumables/js/es2015';
+export * from '../index';
 import ThemeSwitcher from './js/theme-switcher';
 import DemoSwitcher from './js/demo-switcher';
 

@@ -3,7 +3,7 @@
 //-----------------------------
 
 @import '../buttons/buttons';
-@import '../../../../globals/scss/import-once';
+@import '../../globals/scss/import-once';
 
 @include exports('file-uploader') {
 

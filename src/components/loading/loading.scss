@@ -1,10 +1,10 @@
-@import '../../../../globals/scss/colors';
-@import '../../../../globals/scss/helpers';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/helpers';
 @import 'vars';
 @import 'keyframes';
 @import 'mixins';
 @import 'extends';
-@import '../../../../globals/scss/import-once';
+@import '../../globals/scss/import-once';
 
 @include exports('loading') {
 

@@ -1,8 +1,8 @@
-@import '../../../../globals/scss/colors';
-@import '../../../../globals/scss/helpers';
-@import '../../../../globals/scss/typography';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/helpers';
+@import '../../globals/scss/typography';
 @import 'mixins';
-@import '../../../../globals/scss/import-once';
+@import '../../globals/scss/import-once';
 
 @include exports('tags') {
 

@@ -97,22 +97,10 @@ export {
   Modal,
 
   /**
-   * Header with taxonomy menu.
-   * @type HeaderNav
-   */
-  HeaderNav,
-
-  /**
    * Left Navigation Menu
    * @type LeftNav
    */
    LeftNav,
-
-  /**
-   * Search button in tool bar.
-   * @type Toolbars
-   */
-  Toolbars,
 
   /**
    * Spinner indicating loading state.
@@ -143,12 +131,6 @@ export {
    *  @type Table
    */
   ResponsiveTable,
-
-  /**
-   * Data table.
-   * @type Table
-   */
-  Table,
 
   /**
    * Detail page header.
@@ -195,13 +177,11 @@ const init = () => {
     Tab.init();
     OverflowMenu.init();
     Modal.init();
-    Toolbars.init();
     Loading.init();
     Dropdown.init();
     Card.init();
     NumberInput.init();
     ResponsiveTable.init();
-    Table.init();
     DetailPageHeader.init();
     LeftNav.init();
     InlineLeftNav.init();

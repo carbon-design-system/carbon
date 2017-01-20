@@ -2,14 +2,14 @@
 // Detail Page Header (with tabs)
 //-----------------------------
 
-@import '../../../../globals/scss/colors';
-@import '../../../../globals/scss/layout';
-@import '../../../../globals/scss/helpers';
-@import '../../../../globals/scss/typography';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/helpers';
+@import '../../globals/scss/typography';
 @import '../tabs/tabs';
 @import 'extends';
 @import 'mixins';
-@import '../../../../globals/scss/import-once';
+@import '../../globals/scss/import-once';
 
 @include exports('detail-page-header--with-tabs') {
 

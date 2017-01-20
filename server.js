@@ -13,23 +13,15 @@ const port = process.env.PORT || 8080;
 const htmlFiles = {
   // Used in getContent() function
   all: [
-    'consumables/html/**/*.html',
-    '!consumables/html/**/body.html',
-    '!consumables/html/**/header.html',
-    '!consumables/html/components/detail-page-header/**/*.html',
-  ],
-  header: 'consumables/html/**/header.html',
-  detailHeader: 'consumables/html/components/detail-page-header/**/*.html',
-  baseElements: 'consumables/html/base-elements/**/*.html',
-  components: 'consumables/html/components/**/*.html',
-  global: 'consumables/html/global/**/*.html'
+    'src/components/**/*.html',
+    '!src/components/unified-header/*.html',
+    '!src/components/inline-left-nav/*.html'
+  ]
 };
 
 const directoryOrder = [
   // Used for allLinks() function
-  'consumables/html/base-elements/**/*.html',
-  'consumables/html/components/**/*.html',
-  'consumables/html/global/**/*.html'
+  'src/components/**/*.html',
 ];
 
 app.engine('dust', adaro.dust());
@@ -37,7 +29,7 @@ app.set('view engine', 'dust');
 app.set('views', path.resolve(__dirname, 'demo/views'));
 app.use(express.static('node_modules'));
 app.use(express.static('demo'));
-app.use(express.static('consumables'));
+app.use(express.static('src'));
 app.use('/docs/js', express.static('docs/js'));
 
 const getContent = (glob) => {
@@ -63,7 +55,6 @@ const allLinks = globby(directoryOrder)
             indices.push(i);
           }
         }
-
         return path.slice(0, indices[1]);
       })
       .filter((path, index, paths) => {
@@ -79,15 +70,11 @@ const allLinks = globby(directoryOrder)
 
 app.get('/', (req, res) => {
   Promise.all([
-    getContent(htmlFiles.header),
-    getContent(htmlFiles.detailHeader),
     getContent(htmlFiles.all)
   ])
   .then(results => {
     res.render('demo-all', {
-      header: results[0],
-      detailHeader: results[1],
-      html: results[2]
+      html: results[0]
     });
   })
   .catch((error) => {
@@ -97,9 +84,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/components/:component', (req, res) => {
-  const glob = `consumables/html/components/${req.params.component}/**/*.html`;
+  const glob = `src/components/${req.params.component}/**/*.html`;
 
-  if (path.relative('consumables/html/components', glob).substr(0, 2) === '..') {
+  if (path.relative('src/components', glob).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
     Promise.all([getContent(glob), allLinks])
@@ -108,56 +95,7 @@ app.get('/components/:component', (req, res) => {
           res.status(404).end();
         } else {
           res.render('demo-all', {
-            html: results[0],
-            links: results[1]
-          });
-        }
-      })
-      .catch((error) => {
-        console.error(error.stack); // eslint-disable-line no-console
-        res.status(500).end();
-      });
-  }
-});
-
-app.get('/base-elements/:component', (req, res) => {
-  const glob = `consumables/html/base-elements/${req.params.component}/**/*.html`;
-
-  if (path.relative('consumables/html/base-elements', glob).substr(0, 2) === '..') {
-    res.status(404).end();
-  } else {
-    Promise.all([getContent(glob), allLinks])
-      .then(results => {
-        if (typeof results[0] === 'undefined') {
-          res.status(404).end();
-        } else {
-          res.render('demo-all', {
-            html: results[0],
-            links: results[1]
-          });
-        }
-      })
-      .catch((error) => {
-        console.error(error.stack); // eslint-disable-line no-console
-        res.status(500).end();
-      });
-  }
-});
-
-app.get('/global/:component', (req, res) => {
-  const glob = `consumables/html/global/${req.params.component}/**/*.html`;
-
-  if (path.relative('consumables/html/global', glob).substr(0, 2) === '..') {
-    res.status(404).end();
-  } else {
-    Promise.all([getContent(glob), allLinks])
-      .then(results => {
-        if (typeof results[0] === 'undefined') {
-          res.status(404).end();
-        } else {
-          res.render('demo-all', {
-            html: results[0],
-            links: results[1]
+            html: results[0]
           });
         }
       })

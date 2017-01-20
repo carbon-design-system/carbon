@@ -1,7 +1,7 @@
-@import '../../../../globals/scss/colors';
-@import '../../../../globals/scss/helpers';
-@import '../../../../globals/scss/typography';
-@import '../../../../globals/scss/import-once';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/helpers';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
 
 @include exports('tooltips') {
 

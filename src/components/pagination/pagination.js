@@ -4,7 +4,7 @@ import initComponent from '../../globals/js/mixins/init-component-by-search';
 import '../../../demo/polyfills/array-from';
 import '../../../demo/polyfills/custom-event';
 import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign'
+import '../../../demo/polyfills/object-assign';
 
 class Pagination extends mixin(createComponent, initComponent) {
   /**

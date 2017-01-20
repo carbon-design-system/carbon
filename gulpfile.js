@@ -23,7 +23,6 @@ const babel = require('gulp-babel');
 const merge = require('merge-stream');
 const gutil = require('gulp-util');
 
-
 const Server = require('karma').Server;
 const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
@@ -52,12 +51,12 @@ gulp.task('browser-sync', () => {
 // Use: npm run prebuild
 gulp.task('clean', () => {
   return del([
-    'consumables/css/*.css',
-    'consumables/js/{es5,umd}/**/*.{js,map}',
+    'dist',
     'demo/**/*.{js,map}',
     '!demo/js/demo-switcher.js',
     '!demo/js/theme-switcher.js',
     '!demo/index.js',
+    '!demo/polyfills/*.js',
   ]);
 });
 
@@ -67,13 +66,12 @@ gulp.task('clean', () => {
 
 function buildScripts(options) {
   options = options || {};
-  options.target = (options.target || './consumables/js/es5/bluemix-components.js')
-    .replace(/\.js$/, options.excludePolyfills ? '-without-polyfills.js' : '.js')
+  options.target = (options.target || './dist/bluemix-components.js')
     .replace(/\.js$/, options.prod ? '.min.js' : '.js');
   return new Promise((resolve, reject) => {
     webpack({
       devtool: 'source-maps',
-      entry: options.entry || './consumables/js/es2015/index.js',
+      entry: options.entry || './index.js',
       output: Object.assign({
         path: path.dirname(options.target),
         filename: path.basename(options.target),
@@ -90,14 +88,6 @@ function buildScripts(options) {
           },
         ],
       },
-      externals: options.excludePolyfills ? {
-        '../polyfills/array-from': 'Array.from',
-        '../polyfills/custom-event': 'CustomEvent',
-        './element-matches': 'Element.matches',
-        '../polyfills/element-matches': 'Element.matches',
-        '../polyfills/math-sign': 'Math.sign',
-        '../polyfills/object-assign': 'Object.assign',
-      } : {},
       plugins: options.prod ? [new webpack.optimize.UglifyJsPlugin()] : [],
     }, (err, stats) => {
       if (err) {
@@ -113,18 +103,10 @@ function buildScripts(options) {
   });
 }
 
-gulp.task('scripts:consumables', () => {
-  return Promise.all([
-    buildScripts(), // Expanded ES5
-    buildScripts({ prod: true }), // Minified ES5
-    buildScripts({ excludePolyfills: true }), // Expanded ES5
-    buildScripts({ excludePolyfills: true, prod: true }), // Minified ES5
-  ]);
-});
 
 gulp.task('scripts:umd', () => {
-  const filesMain = './consumables/js/es2015/*.js';
-  const filesOthers = './consumables/js/{misc,polyfills}/**/*.js';
+  const filesMain = './src/components/**/*.js';
+  const filesOthers = './src/globals/js/**/*.js';
 
   const babelOpts = {
     plugins: ['transform-es2015-modules-umd', 'transform-runtime'],
@@ -132,20 +114,25 @@ gulp.task('scripts:umd', () => {
 
   const mainStream = gulp.src(filesMain)
     .pipe(babel(babelOpts))
-    .pipe(gulp.dest('./consumables/js/umd/lib'));
+    .pipe(gulp.dest('./dist/js/umd/lib'));
 
   const othersStream = gulp.src(filesOthers)
     .pipe(babel(babelOpts))
-    .pipe(gulp.dest('./consumables/js/umd'));
+    .pipe(gulp.dest('./dist/js/umd'));
 
   return merge(mainStream, othersStream);
 });
 
+gulp.task('scripts:consumables', () => {
+  return Promise.all([
+    buildScripts(), // Expanded ES5
+    buildScripts({ prod: true }), // Minified ES5
+  ]);
+});
 
 gulp.task('scripts:dev', () => {
   return Promise.all([
     buildScripts({
-      excludePolyfills: cloptions['exclude-polyfills'], // For testing "polyfills excluded" version
       target: './demo/demo.js',
       entry: './demo/index.js',
     }),
@@ -158,7 +145,7 @@ gulp.task('scripts:dev', () => {
 
 gulp.task('sass:consumables', () => {
   function buildStyles(prod) {
-    return gulp.src('globals/scss/styles.scss')
+    return gulp.src('src/globals/scss/styles.scss')
       .pipe(sourcemaps.init())
       .pipe(sass({
         outputStyle: prod ? 'compressed' : 'expanded',
@@ -175,7 +162,7 @@ gulp.task('sass:consumables', () => {
         }
       }))
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest('consumables/css'))
+      .pipe(gulp.dest('dist'))
       .pipe(browserSync.stream());
   }
 
@@ -198,35 +185,13 @@ gulp.task('sass:dev', () => {
     .pipe(browserSync.stream());
 });
 
-// Temporary
-// gulp.task('sass:json', () => {
-//   const src = '_colors.scss';
-//   const dest = 'colors.json';
-//   const filePath = path.resolve(__dirname, `consumables/scss/global/colors/`);
-//   const colors = JSON.stringify(scssToJson(`${filePath}/${src}`), null, 2);
-//
-//   fs.writeFile(`${filePath}/${dest}`, colors, (err) => {
-//     if (err) return console.log(err);
-//     console.log('colors > colors.json!');
-//   });
-// });
-
 /////////////////////////////
 // Lint
 /////////////////////////////
 
-// Temporary: gulp-sass-lint does not seem to be using our .sass-lint.yml
-// gulp.task('lint:sass', () => {
-//   return gulp.src('consumables/**/*.scss')
-//     .pipe(sassLint())
-//     .pipe(sassLint.format())
-//     .pipe(sassLint.failOnError());
-// });
-
-gulp.task('lint:scripts', function () {
+gulp.task('lint', function () {
   return gulp.src([
-    'consumables/js/{es2015,misc,polyfills}/**/*.js',
-    '!**/examples/**/*.js',
+    'src/**/*.js'
   ])
     .pipe(eslint())
     .pipe(eslint.format())
@@ -241,8 +206,6 @@ gulp.task('lint:scripts', function () {
       }
     }));
 });
-
-gulp.task('lint', [/*'lint:sass',*/ 'lint:scripts']);
 
 /////////////////////////////
 // Test
@@ -260,7 +223,7 @@ gulp.task('test', (done) => {
 /////////////////////////////
 
 gulp.task('jsdoc', function (cb) {
-  gulp.src('./consumables/js/{es2015,mixins}/**/*.js')
+  gulp.src('./src/components/**/*.js')
     .pipe(babel({
       plugins: ['transform-class-properties'],
       babelrc: false,
@@ -288,15 +251,15 @@ gulp.task('jsdoc', function (cb) {
 //////////////////////////////
 
 gulp.task('watch', () => {
-  gulp.watch('consumables/**/*.html').on('change', browserSync.reload);
-  gulp.watch(['consumables/js/{es2015,misc,polyfills}/**/*.js'], ['scripts:dev']);
-  gulp.watch(['consumables/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
+  gulp.watch('src/**/**/*.html').on('change', browserSync.reload);
+  gulp.watch(['src/**/**/*.js'], ['scripts:dev']);
+  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
 });
 
 gulp.task('serve', ['browser-sync', 'watch']);
 
 // Use: npm run build
-gulp.task('build', ['sass:consumables', 'scripts:consumables', 'scripts:umd']);
+gulp.task('build', ['sass:consumables', 'scripts:consumables']);
 gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {
