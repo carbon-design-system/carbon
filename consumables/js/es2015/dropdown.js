@@ -38,7 +38,7 @@ class Dropdown extends mixin(createComponent, initComponent) {
 
     this.setCloseOnBlur();
 
-    this.element.addEventListener('keypress', (event) => { this.toggle(event); });
+    this.element.addEventListener('keydown', (event) => { this.handleKeyDown(event); });
     this.element.addEventListener('click', (event) => {
       const item = eventMatches(event, this.options.selectorItem);
       if (item) {
@@ -61,17 +61,71 @@ class Dropdown extends mixin(createComponent, initComponent) {
   }
 
   /**
-   * Opens and closes the dropdown menu.
+   * Handles keydown event.
    * @param {Event} event The event triggering this method.
    */
-  toggle(event) {
-    if (event.which === 13 || event.which === 32 || event.type === 'click') {
-      const isOfSelf = this.element.contains(event.target);
+  handleKeyDown(event) {
+    const isOpen = this.element.classList.contains('bx--dropdown--open');
+    const direction = {
+      38: this.constructor.NAVIGATE.BACKWARD,
+      40: this.constructor.NAVIGATE.FORWARD,
+    }[event.which];
+    if (isOpen && direction !== undefined) {
+      this.navigate(direction);
+    } else {
+      this.toggle(event);
+    }
+  }
 
-      if (isOfSelf) {
-        this.element.classList.toggle('bx--dropdown--open');
-      } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
-        this.element.classList.remove('bx--dropdown--open');
+  /**
+   * Opens and closes the dropdown menu.
+   * @param {Event} [event] The event triggering this method.
+   */
+  toggle(event) {
+    if (([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem))
+     || event.which === 27 || event.type === 'click') {
+      const isOpen = this.element.classList.contains('bx--dropdown--open');
+      const isOfSelf = this.element.contains(event.target);
+      const actions = {
+        add: isOfSelf && event.which === 40 && !isOpen,
+        remove: (!isOfSelf || event.which === 27) && isOpen,
+        toggle: isOfSelf && event.which !== 27 && event.which !== 40,
+      };
+      Object.keys(actions).forEach((action) => {
+        if (actions[action]) {
+          this.element.classList[action]('bx--dropdown--open');
+          this.element.focus();
+        }
+      });
+    }
+  }
+
+  /**
+   * @returns {Element} Currently highlighted element.
+   */
+  getCurrentNavigation() {
+    const focused = this.element.ownerDocument.activeElement;
+    return focused.matches(this.options.selectorItem) ? focused : null;
+  }
+
+  /**
+   * Moves up/down the focus.
+   * @param {number} direction The direction of navigating.
+   */
+  navigate(direction) {
+    const items = [...this.element.querySelectorAll(this.options.selectorItem)];
+    const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+    const getNextItem = (old) => {
+      const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
+      const handleOverflow = (i, l) => i - (i < l ? 0 : l);
+      // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
+      const index = Math.max(items.indexOf(old) + direction, -1);
+      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+    };
+    for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+      if (!current.matches(this.options.selectorItemSelected)) {
+        current.focus();
+        break;
       }
     }
   }
@@ -155,6 +209,19 @@ class Dropdown extends mixin(createComponent, initComponent) {
     classSelected: 'bx--dropdown--selected',
     eventBeforeSelected: 'dropdown-beingselected',
     eventAfterSelected: 'dropdown-selected',
+  };
+
+  /**
+   * Enum for navigating backward/forward.
+   * @readonly
+   * @member Dropdown.NAVIGATE
+   * @type {Object}
+   * @property {number} BACKWARD Navigating backward.
+   * @property {number} FORWARD Navigating forward.
+   */
+  static NAVIGATE = {
+    BACKWARD: -1,
+    FORWARD: 1,
   };
 }
 
