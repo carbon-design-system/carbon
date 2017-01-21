@@ -30,10 +30,10 @@ export default function (ToMix) {
           const launcher = eventMatches(event, `[${effectiveOptions.attribInitTarget}]`);
 
           if (launcher) {
-            event.delegateTarget = launcher;
+            event.delegateTarget = launcher; // eslint-disable-line
 
             const elements
-              = [... launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))];
+              = [...launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))];
             if (elements.length > 1) {
               throw new Error('Target widget must be unique.');
             }

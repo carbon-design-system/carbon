@@ -14,6 +14,7 @@
   ],
   "rules": {
     "class-methods-use-this": 0,
+    "consistent-return": 0,
     "max-len": [2, 130, 4],
     "no-plusplus": 0,
     "no-underscore-dangle": [2, { "allowAfterThis": true, "allowAfterSuper": true }]

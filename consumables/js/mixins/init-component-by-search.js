@@ -20,7 +20,7 @@ export default function (ToMix) {
       if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
         this.create(target, options);
       } else {
-        [... target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, options));
+        [...target.querySelectorAll(effectiveOptions.selectorInit)].forEach(element => this.create(element, options));
       }
     }
   }
