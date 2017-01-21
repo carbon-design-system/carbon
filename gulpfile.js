@@ -124,7 +124,7 @@ gulp.task('scripts:consumables', () => {
 
 gulp.task('scripts:umd', () => {
   const filesMain = './consumables/js/es2015/*.js';
-  const filesOthers = './consumables/js/{misc,polyfills}/**/*.js';
+  const filesOthers = './consumables/js/{misc,polyfills,mixins}/**/*.js';
 
   const babelOpts = {
     plugins: ['transform-es2015-modules-umd', 'transform-runtime'],
@@ -225,7 +225,7 @@ gulp.task('sass:dev', () => {
 
 gulp.task('lint:scripts', function () {
   return gulp.src([
-    'consumables/js/{es2015,misc,polyfills}/**/*.js',
+    'consumables/js/{es2015,misc,polyfills,mixins}/**/*.js',
     '!**/examples/**/*.js',
   ])
     .pipe(eslint())
