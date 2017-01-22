@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/get', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/keys', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/get', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/get'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/keys'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/get'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.get, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global.toConsumableArray, global.keys, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.get, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.dropdown = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _get2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _eventMatches, _on) {
+})(this, function (exports, _weakMap, _toConsumableArray2, _keys, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _get2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _eventMatches, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -20,6 +20,8 @@
   var _weakMap2 = _interopRequireDefault(_weakMap);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+  var _keys2 = _interopRequireDefault(_keys);
 
   var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
@@ -85,8 +87,8 @@
 
       _this.setCloseOnBlur();
 
-      _this.element.addEventListener('keypress', function (event) {
-        _this.toggle(event);
+      _this.element.addEventListener('keydown', function (event) {
+        _this.handleKeyDown(event);
       });
       _this.element.addEventListener('click', function (event) {
         var item = (0, _eventMatches2.default)(event, _this.options.selectorItem);
@@ -114,22 +116,75 @@
         (0, _get3.default)(Dropdown.prototype.__proto__ || (0, _getPrototypeOf2.default)(Dropdown.prototype), 'release', this).call(this);
       }
     }, {
+      key: 'handleKeyDown',
+      value: function handleKeyDown(event) {
+        var isOpen = this.element.classList.contains('bx--dropdown--open');
+        var direction = {
+          38: this.constructor.NAVIGATE.BACKWARD,
+          40: this.constructor.NAVIGATE.FORWARD
+        }[event.which];
+        if (isOpen && direction !== undefined) {
+          this.navigate(direction);
+        } else {
+          this.toggle(event);
+        }
+      }
+    }, {
       key: 'toggle',
       value: function toggle(event) {
-        if (event.which === 13 || event.which === 32 || event.type === 'click') {
-          var isOfSelf = this.element.contains(event.target);
+        var _this2 = this;
 
-          if (isOfSelf) {
-            this.element.classList.toggle('bx--dropdown--open');
-          } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
-            this.element.classList.remove('bx--dropdown--open');
+        if ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem) || event.which === 27 || event.type === 'click') {
+          (function () {
+            var isOpen = _this2.element.classList.contains('bx--dropdown--open');
+            var isOfSelf = _this2.element.contains(event.target);
+            var actions = {
+              add: isOfSelf && event.which === 40 && !isOpen,
+              remove: (!isOfSelf || event.which === 27) && isOpen,
+              toggle: isOfSelf && event.which !== 27 && event.which !== 40
+            };
+            (0, _keys2.default)(actions).forEach(function (action) {
+              if (actions[action]) {
+                _this2.element.classList[action]('bx--dropdown--open');
+                _this2.element.focus();
+              }
+            });
+          })();
+        }
+      }
+    }, {
+      key: 'getCurrentNavigation',
+      value: function getCurrentNavigation() {
+        var focused = this.element.ownerDocument.activeElement;
+        return focused.matches(this.options.selectorItem) ? focused : null;
+      }
+    }, {
+      key: 'navigate',
+      value: function navigate(direction) {
+        var items = [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorItem)));
+        var start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+        var getNextItem = function getNextItem(old) {
+          var handleUnderflow = function handleUnderflow(i, l) {
+            return i + (i >= 0 ? 0 : l);
+          };
+          var handleOverflow = function handleOverflow(i, l) {
+            return i - (i < l ? 0 : l);
+          };
+          // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
+          var index = Math.max(items.indexOf(old) + direction, -1);
+          return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+        };
+        for (var current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+          if (!current.matches(this.options.selectorItemSelected)) {
+            current.focus();
+            break;
           }
         }
       }
     }, {
       key: 'select',
       value: function select(itemToSelect) {
-        var _this2 = this;
+        var _this3 = this;
 
         var eventStart = new CustomEvent(this.options.eventBeforeSelected, {
           bubbles: true,
@@ -146,7 +201,7 @@
 
           [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorItemSelected))).forEach(function (item) {
             if (itemToSelect !== item) {
-              item.classList.remove(_this2.options.classSelected);
+              item.classList.remove(_this3.options.classSelected);
             }
           });
 
@@ -162,13 +217,13 @@
     }, {
       key: 'setCloseOnBlur',
       value: function setCloseOnBlur() {
-        var _this3 = this;
+        var _this4 = this;
 
         var hasFocusin = 'onfocusin' in window;
         var focusinEventName = hasFocusin ? 'focusin' : 'focus';
         this.hFocusIn = (0, _on2.default)(this.element.ownerDocument, focusinEventName, function (event) {
-          if (!_this3.element.contains(event.target)) {
-            _this3.element.classList.remove('bx--dropdown--open');
+          if (!_this4.element.contains(event.target)) {
+            _this4.element.classList.remove('bx--dropdown--open');
           }
         }, !hasFocusin);
       }
@@ -184,6 +239,10 @@
     classSelected: 'bx--dropdown--selected',
     eventBeforeSelected: 'dropdown-beingselected',
     eventAfterSelected: 'dropdown-selected'
+  };
+  Dropdown.NAVIGATE = {
+    BACKWARD: -1,
+    FORWARD: 1
   };
   exports.default = Dropdown;
 });

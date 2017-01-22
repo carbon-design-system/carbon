@@ -2801,8 +2801,8 @@ var BluemixComponents =
 	
 	    _this.setCloseOnBlur();
 	
-	    _this.element.addEventListener('keypress', function (event) {
-	      _this.toggle(event);
+	    _this.element.addEventListener('keydown', function (event) {
+	      _this.handleKeyDown(event);
 	    });
 	    _this.element.addEventListener('click', function (event) {
 	      var item = (0, _eventMatches2.default)(event, _this.options.selectorItem);
@@ -2831,20 +2831,90 @@ var BluemixComponents =
 	    }
 	
 	    /**
-	     * Opens and closes the dropdown menu.
+	     * Handles keydown event.
 	     * @param {Event} event The event triggering this method.
+	     */
+	
+	  }, {
+	    key: 'handleKeyDown',
+	    value: function handleKeyDown(event) {
+	      var isOpen = this.element.classList.contains('bx--dropdown--open');
+	      var direction = {
+	        38: this.constructor.NAVIGATE.BACKWARD,
+	        40: this.constructor.NAVIGATE.FORWARD
+	      }[event.which];
+	      if (isOpen && direction !== undefined) {
+	        this.navigate(direction);
+	      } else {
+	        this.toggle(event);
+	      }
+	    }
+	
+	    /**
+	     * Opens and closes the dropdown menu.
+	     * @param {Event} [event] The event triggering this method.
 	     */
 	
 	  }, {
 	    key: 'toggle',
 	    value: function toggle(event) {
-	      if (event.which === 13 || event.which === 32 || event.type === 'click') {
-	        var isOfSelf = this.element.contains(event.target);
+	      var _this2 = this;
 	
-	        if (isOfSelf) {
-	          this.element.classList.toggle('bx--dropdown--open');
-	        } else if (!isOfSelf && this.element.classList.contains('bx--dropdown--open')) {
-	          this.element.classList.remove('bx--dropdown--open');
+	      if ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem) || event.which === 27 || event.type === 'click') {
+	        (function () {
+	          var isOpen = _this2.element.classList.contains('bx--dropdown--open');
+	          var isOfSelf = _this2.element.contains(event.target);
+	          var actions = {
+	            add: isOfSelf && event.which === 40 && !isOpen,
+	            remove: (!isOfSelf || event.which === 27) && isOpen,
+	            toggle: isOfSelf && event.which !== 27 && event.which !== 40
+	          };
+	          Object.keys(actions).forEach(function (action) {
+	            if (actions[action]) {
+	              _this2.element.classList[action]('bx--dropdown--open');
+	              _this2.element.focus();
+	            }
+	          });
+	        })();
+	      }
+	    }
+	
+	    /**
+	     * @returns {Element} Currently highlighted element.
+	     */
+	
+	  }, {
+	    key: 'getCurrentNavigation',
+	    value: function getCurrentNavigation() {
+	      var focused = this.element.ownerDocument.activeElement;
+	      return focused.matches(this.options.selectorItem) ? focused : null;
+	    }
+	
+	    /**
+	     * Moves up/down the focus.
+	     * @param {number} direction The direction of navigating.
+	     */
+	
+	  }, {
+	    key: 'navigate',
+	    value: function navigate(direction) {
+	      var items = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorItem)));
+	      var start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+	      var getNextItem = function getNextItem(old) {
+	        var handleUnderflow = function handleUnderflow(i, l) {
+	          return i + (i >= 0 ? 0 : l);
+	        };
+	        var handleOverflow = function handleOverflow(i, l) {
+	          return i - (i < l ? 0 : l);
+	        };
+	        // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
+	        var index = Math.max(items.indexOf(old) + direction, -1);
+	        return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+	      };
+	      for (var current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+	        if (!current.matches(this.options.selectorItemSelected)) {
+	          current.focus();
+	          break;
 	        }
 	      }
 	    }
@@ -2860,7 +2930,7 @@ var BluemixComponents =
 	  }, {
 	    key: 'select',
 	    value: function select(itemToSelect) {
-	      var _this2 = this;
+	      var _this3 = this;
 	
 	      var eventStart = new CustomEvent(this.options.eventBeforeSelected, {
 	        bubbles: true,
@@ -2877,7 +2947,7 @@ var BluemixComponents =
 	
 	        [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorItemSelected))).forEach(function (item) {
 	          if (itemToSelect !== item) {
-	            item.classList.remove(_this2.options.classSelected);
+	            item.classList.remove(_this3.options.classSelected);
 	          }
 	        });
 	
@@ -2898,13 +2968,13 @@ var BluemixComponents =
 	  }, {
 	    key: 'setCloseOnBlur',
 	    value: function setCloseOnBlur() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      var hasFocusin = 'onfocusin' in window;
 	      var focusinEventName = hasFocusin ? 'focusin' : 'focus';
 	      this.hFocusIn = (0, _on2.default)(this.element.ownerDocument, focusinEventName, function (event) {
-	        if (!_this3.element.contains(event.target)) {
-	          _this3.element.classList.remove('bx--dropdown--open');
+	        if (!_this4.element.contains(event.target)) {
+	          _this4.element.classList.remove('bx--dropdown--open');
 	        }
 	      }, !hasFocusin);
 	    }
@@ -2932,6 +3002,16 @@ var BluemixComponents =
 	     * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
 	     */
 	
+	
+	    /**
+	     * Enum for navigating backward/forward.
+	     * @readonly
+	     * @member Dropdown.NAVIGATE
+	     * @type {Object}
+	     * @property {number} BACKWARD Navigating backward.
+	     * @property {number} FORWARD Navigating forward.
+	     */
+	
 	  }]);
 	
 	  return Dropdown;
@@ -2945,6 +3025,10 @@ var BluemixComponents =
 	  classSelected: 'bx--dropdown--selected',
 	  eventBeforeSelected: 'dropdown-beingselected',
 	  eventAfterSelected: 'dropdown-selected'
+	};
+	Dropdown.NAVIGATE = {
+	  BACKWARD: -1,
+	  FORWARD: 1
 	};
 	exports.default = Dropdown;
 
