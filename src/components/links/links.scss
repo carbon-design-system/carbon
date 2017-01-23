@@ -14,30 +14,18 @@
   @include font-size('14');
   @include font-smoothing;
   font-weight: 700;
-  color: $color__blue-30;
+  color: $brand-01;
   text-decoration: underline;
   transition: $transition--base;
 
-  @include light-ui {
-    color: $color__blue-51;
-  }
-
   &:visited {
-    color: $color__blue-30;
-
-    @include light-ui {
-      color: $color__blue-51;
-    }
+    color: $brand-01;
   }
 
   &:active,
   &:hover,
   &:focus {
-    color: $color__blue-20;
-
-    @include light-ui {
-      color: $color__blue-40;
-    }
+    color: $brand-02;
   }
 }
 

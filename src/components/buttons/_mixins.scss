@@ -66,9 +66,9 @@
 
 
 @mixin btn--primary(
-  $bg: $color__blue-30,
-  $hover-bg: $color__blue-20,
-  $text: $color__blue-90
+  $bg: $brand-01,
+  $hover-bg: $brand-02,
+  $text: $inverse-01
 ) {
   @include btn--base;
   color: $text;
@@ -87,25 +87,12 @@
   &:active {
     background-color: darken($bg, 20%);
   }
-
-  @include light-ui {
-    background-color: $color__blue-51;
-    color: $color__white;
-
-    &:hover,
-    &:focus {
-      background-color: $color__blue-40;
-    }
-
-    &:active {
-      background-color: darken($color__blue-51, 20%);
-    }
-  }
 }
 
 @mixin btn--secondary(
-  $hover-bg: $color__blue-30,
-  $text: $hover-bg
+  $hover-bg: $brand-01,
+  $text: $hover-bg,
+  $hover-text: $inverse-01
 ) {
   @include btn--base;
   color: $text;
@@ -114,7 +101,7 @@
 
   &:hover,
   &:focus {
-    color: $text;
+    color: $hover-text;
     background-color: $hover-bg;
 
     &:disabled {
@@ -126,34 +113,22 @@
   &:active {
     background-color: darken($hover-bg, 20%);
   }
-
-  @include light-ui {
-    border: 2px solid $color__blue-51;
-    color: $color__blue-51;
-
-    &:hover {
-      border: 2px solid $color__blue-51;
-      color: $color__white;
-      background-color: $color__blue-51;
-    }
-  }
 }
 
 @mixin btn--danger {
   @include btn--base;
-  color: $color__white;
+  color: $ui-05;
   background-color: transparent;
-  border-color: $color__white;
   border: 2px solid currentColor;
 
   &:hover,
   &:focus {
-    color: $color__white;
+    color: $inverse-01;
     border: 2px solid transparent;
-    background-color: $color__red-50; // white text on red 50 - AA a11y pass
+    background-color: $support-01;
 
     &:disabled {
-      color: $color__white;
+      color: $inverse-01;
       background-color: transparent;
       border: 2px solid currentColor;
     }
