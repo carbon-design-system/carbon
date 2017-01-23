@@ -25,29 +25,21 @@
     // Styled Radio Button - default
     @include reset;
     @include font-size('16');
-    background-color: $color__inputs--bg;
+    background-color: $field-01;
     border-radius: 50%;
-    border: 2px solid $color__navy-gray-7;
+    border: 2px solid $ui-05;
     display: inline-block;
     height: rem(18px);
     margin-right: .75rem;
     padding: 0;
     width: rem(18px);
-
-    @include light-ui {
-      background-color: $color__inputs--bg--light-ui;
-    }
   }
 
   &:checked + &__label &__appearance {
     // Styled Radio - checked - background
     align-items: center;
-    border-color: $color__blue-30;
+    border-color: $brand-01;
     display: flex;
-    
-    @include light-ui {
-      border-color: $color__blue-51;
-    }
 
     &:before {
       // Styled Radio - checked - dot
@@ -58,11 +50,7 @@
       width: .5rem;
       height: .5rem;
       border-radius: 50%;
-      background-color: $color__blue-30;
-      
-      @include light-ui {
-        background-color: $color__blue-51;
-      }
+      background-color: $brand-01;
     }
   }
 
