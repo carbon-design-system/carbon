@@ -31,14 +31,10 @@
     height: rem(18px);
     width: rem(18px);
     margin-right: .75rem;
-    background-color: $color__inputs--bg;
+    background-color: $field-01;
     border-radius: 2px;
-    border: 2px solid $color__navy-gray-7;
+    border: 2px solid $ui-05;
     overflow: hidden;
-
-    @include light-ui {
-      background-color: $color__inputs--bg--light-ui;
-    }
   }
 
   .bx--checkbox {
@@ -47,13 +43,8 @@
     &:checked + &__label &__appearance {
       display: flex;
       align-items: baseline;
-      background-color: $color__blue-30;
-      border-color: $color__blue-30;
-
-      @include light-ui {
-        background-color: $color__blue-51;
-        border-color: $color__blue-51;
-      }
+      background-color: $brand-01;
+      border-color: $brand-01;
 
       // Box Styles - checked state - checkmark
       &:before {
@@ -61,16 +52,10 @@
         width: rem(12px);
         height: rem(6px);
         background: transparent;
-        border: 2px solid $color__blue-90;
+        border: 2px solid $inverse-01;
         border-top: none;
         border-right: none;
         transform: rotate(-45deg);
-
-        @include light-ui {
-          border: 2px solid $color__white;
-          border-top: none;
-          border-right: none;
-        }
       }
     }
 
@@ -93,13 +78,9 @@
   // SVG Checkmark - default
   .bx--checkbox__checkmark {
     display: none;
-    fill: $color__blue-90;
+    fill: $inverse-01;
     width: rem(15px);
     height: rem(15px);
-
-    @include light-ui {
-      fill: $color__white;
-    }
   }
 
   // SVG Checkmark - checked
