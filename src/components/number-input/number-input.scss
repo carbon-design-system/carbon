@@ -21,20 +21,12 @@
   }
 
   .bx--number__icon {
-    fill: $color--blue-30;
+    fill: $brand-01;
     height: .5rem;
     width: .5rem;
 
     &:hover {
-      fill: $color__blue-20;
-    }
-    
-    @include light-ui {
-      fill: $color__blue-51;
-
-      &:hover {
-        fill: $color__blue-40;
-      }
+      fill: $brand-02;
     }
   }
 
@@ -64,8 +56,8 @@
     font-weight: 300;
     margin: .25rem 0;
     height: rem(40px);
-    color: $color__white;
-    background-color: $color__inputs--bg;
+    color: $text-01;
+    background-color: $field-01;
     border: none;
     border-radius: 0;
 
@@ -81,11 +73,6 @@
     &:disabled {
       opacity: .5;
       cursor: not-allowed;
-    }
-
-    @include light-ui {
-      color: $color__blue-90;
-      background-color: $color__inputs--bg--light-ui;
     }
   }
 
