@@ -5,8 +5,10 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helpers';
 @import '../../globals/scss/typography';
-@import 'vars';
 @import '../../globals/scss/import-once';
+
+$toggle-circle: 24px;
+$toggle-bar: 4px;
 
 @include exports('toggle') {
   .bx--toggle {
@@ -40,7 +42,7 @@
         height: $toggle-bar;
         top: $toggle-circle / 2;
         left: 1px;
-        background-color: $color__navy-gray-7;
+        background-color: $ui-05;
         transition-duration: $transition--base;
         cursor: pointer;
       }
@@ -50,20 +52,14 @@
         position: absolute;
         top: 0;
         display: block;
-        border: $toggle-bar / 2 solid $color__navy-gray-7;
+        border: $toggle-bar / 2 solid $ui-05;
         cursor: pointer;
         width: $toggle-circle;
         height: $toggle-circle;
-        background-color: $color__navy-gray-3;
+        background-color: $ui-01;
         border-radius: 50%;
         content: '';
         transition-duration: $transition--base;
-
-        @include light-ui {
-          background-color: $color__white;
-          box-shadow: none;
-          border: $toggle-bar / 2 solid $color__navy-gray-7;
-        }
       }
     }
 
@@ -100,24 +96,15 @@
     &:checked + &__label &__appearance {
       // bar
       &::before {
-        background-color: $color__blue-30;
-        
-        @include light-ui {
-          background-color: $color__blue-51;
-        }
+        background-color: $brand-01;
       }
 
       // circle
       &::after {
         transform: translateX($toggle-circle);
-        background-color: $color__blue-30;
+        background-color: $brand-01;
         box-shadow: none;
-        border-color: $color__blue-30;
-        
-        @include light-ui {
-          background-color: $color__blue-51;
-          border-color: $color__blue-51;
-        }
+        border-color: $brand-01;
       }
     }
   }
