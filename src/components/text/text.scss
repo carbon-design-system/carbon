@@ -18,16 +18,10 @@
     height: rem(40px);
     min-width: 9.375rem;
     padding: .825rem 0 .825rem 1rem;
-    font-weight: 300;
+    font-weight: 400;
     margin: .25rem 0 0;
-    color: $color__white;
-    background-color: $color__inputs--bg;
-
-    @include light-ui {
-      color: $color__blue-90;
-      background-color: $color__inputs--bg--light-ui;
-      font-weight: 400;
-    }
+    color: $text-01;
+    background-color: $field-01;
 
     &::-webkit-input-placeholder {
       @include placeholder-colors;
