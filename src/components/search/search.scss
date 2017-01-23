@@ -6,8 +6,6 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/helpers';
 @import '../../globals/scss/typography';
-@import 'extends';
-@import 'mixins';
 @import '../../globals/scss/import-once';
 
 @include exports('search') {
@@ -25,19 +23,14 @@
     @include reset;
     @include helvetica;
     appearance: none;
-    background-color: $color__inputs--bg;
+    background-color: $field-01;
     border: none;
-    color: $color__white;
+    color: $text-01;
     font-weight: 700;
     padding-left: 2.875rem;
     width: 100%;
     height: rem(51px);
     z-index: z('overflowOptions');
-
-    @include light-ui {
-      color: $color__blue-90;
-      background-color: $color__inputs--bg--light-ui;
-    }
 
     &:focus {
       @include focus-outline;
@@ -57,16 +50,13 @@
   &__icon {
     &--magnifier {
       @include reset;
-      fill: $color__navy-gray-7;
+      fill: $ui-05;
       position: absolute;
       width: 1.25rem;
       height: 1.25rem;
       left: 1rem;
       top: 1rem;
-
-      @include light-ui {
-        fill: $color__blue-90;
-      }
+      z-index: 2;
 
       @include breakpoint(500px) {
         width: 1.4rem;
@@ -76,7 +66,7 @@
 
     &--filter {
       @include reset;
-      fill: $color__navy-gray-7;
+      fill: $inverse-01;
       position: absolute;
       right: .85rem;
       width: 1rem;
@@ -88,10 +78,6 @@
         width: 1rem;
         height: 1rem;
       }
-
-      @include light-ui {
-        fill: $color__white;
-      }
     }
   }
 
@@ -100,9 +86,9 @@
     @include font-size('16');
     padding: 1.52rem;
     font-weight: 600;
-    color: $color__navy-gray-8;
+    color: $inverse-01;
     cursor: pointer;
-    background-color: $color__navy-gray-3;
+    background-color: $brand-01;
     border: none;
     position: relative;
     transition-duration: .25s;
@@ -113,23 +99,9 @@
       margin-left: 0;
     }
 
-    @include light-ui {
-      background-color: $color__blue-51;
-      color: $color__white;
-    }
-
     &:hover,
     &:focus {
-      background-color: $color__navy-gray-6;
-      color: $color__white;
-
-      @include light-ui {
-        background-color: $color__blue-40;
-      }
-
-      .bx--search__icon--filter {
-        fill: $color__white;
-      }
+      background-color: $brand-02;
     }
 
     .filter__text {
@@ -171,7 +143,7 @@
     min-width: rem(44px);
     position: relative;
     padding: 0;
-    background-color: $color__navy-gray-3;
+    background-color: $ui-01;
     border: none;
     margin-left: 2px;
     cursor: pointer;
@@ -179,33 +151,16 @@
 
     &:hover,
     &:focus {
-      background-color: $color__blue-30;
+      background-color: $brand-01;
 
       .bx--search__icon {
-        fill: $color__blue-90;
+        fill: $inverse-01;
       }
     }
 
     &__container {
       &--hidden {
         opacity: 0;
-      }
-    }
-
-    @include light-ui {
-      background-color: $color__white;
-
-      .bx--search__icon {
-        fill: $color__blue-51;
-      }
-
-      &:hover,
-      &:focus {
-        background-color: $color__blue-51;
-
-        .bx--search__icon {
-          fill: $color__white;
-        }
       }
     }
   }
@@ -217,7 +172,7 @@
     transform: translate(-50%, -50%);
     width: 1rem;
     height: 1rem;
-    fill: $color__blue-30;
+    fill: $brand-01;
     opacity: inherit;
   }
 }
