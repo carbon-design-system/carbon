@@ -12,12 +12,6 @@
 
 .bx--dropdown {
   @include dropdown;
-  background-color: $color__inputs--bg;
-
-  @include light-ui {
-    background-color: $color__inputs--bg--light-ui;
-    color: $color__blue-90;
-  }
 
   &:focus {
     @include focus-outline;
@@ -33,15 +27,11 @@
 
   // Before selection is made, text color is gray (default)
   &[data-value=''] &__menu-text {
-    color: rgba(255, 255, 255, .5);
-
-    @include light-ui {
-      color: $color__navy-gray-7;
-    }
+    color: $text-03;
   }
 
   &__arrow {
-    fill: $color__blue-30;
+    fill: $brand-01;
     position: absolute;
     right: .75rem;
     top: .6rem;
@@ -53,10 +43,6 @@
 
     .bx--dropdown--open & {
       transform: rotate(180deg);
-    }
-
-    @include light-ui {
-      fill: $color__blue-51;
     }
   }
 
@@ -74,11 +60,7 @@
     @include layer('overlay');
     display: flex;
     flex-direction: column;
-    background-color: $color__navy-gray-3;
-
-    @include light-ui {
-      background-color: $color__white;
-    }
+    background-color: $ui-01;
   }
 
   &__list-item {
@@ -99,27 +81,10 @@
     padding-left: 1rem;
     padding-right: 1.5rem;
 
-    .bx--dropdown--selected & {
-      color: $color__white;
-    }
-
     &:hover,
     &:focus {
-      background-color: $color__blue-30;
-      color: $color__blue-90;
-
-      @include light-ui {
-        background-color: $color__blue-51;
-        color: $color__white;
-
-        .bx--dropdown__link {
-          color: $color__white;
-        }
-      }
-    }
-
-    @include light-ui {
-      color: $color__blue-90;
+      background-color: $brand-01;
+      color: $inverse-01;
     }
   }
 }

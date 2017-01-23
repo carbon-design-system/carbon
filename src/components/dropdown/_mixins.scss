@@ -1,11 +1,11 @@
-@mixin dropdown($text: $color__white) {
+@mixin dropdown($text: $text-01) {
   @include reset;
   @include font-size('14');
   position: relative;
   list-style: none;
   display: block;
-  background-color: $color__inputs--bg;
+  background-color: $field-01;
   width: 100%;
   cursor: pointer;
-  color: $color__white;
+  color: $text-01;
 }
