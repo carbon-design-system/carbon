@@ -21,29 +21,20 @@
     &:after {
       position: absolute;
       display: none;
-      background: $color__navy-gray-3;
-
-      @include light-ui {
-        background: $color__white;
-      }
+      background: $ui-01;
     }
 
     &:before {
       @include font-size('14');
       @include layer('overlay');
       padding: 1rem;
-      border: 1px $color__navy-gray-2 solid;
+      border: 1px solid $ui-04;
       margin-left: 50%;
-      color: $color__white;
+      color: $text-01;
       content: attr(data-tooltip);
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
-
-      @include light-ui {
-        border: 1px solid $color__gray-1;
-        color: $color__blue-90;
-      }
     }
 
     &:after {
@@ -51,15 +42,10 @@
       left: 0;
       width: .6rem;
       height: .6rem;
-      border-right: 1px solid $color__navy-gray-2;
-      border-bottom: 1px solid $color__navy-gray-2;
+      border-right: 1px solid $ui-04;
+      border-bottom: 1px solid $ui-04;
       margin: 0 auto;
       content: '';
-
-      @include light-ui {
-        border-right: 1px solid $color__navy-gray-8;
-        border-bottom: 1px solid $color__navy-gray-8;
-      }
     }
 
     &:hover,
@@ -76,7 +62,7 @@
     height: 1rem;
     width: 1rem;
     margin-left: .5rem;
-    fill: $color__blue-51;
+    fill: $brand-01;
   }
 
   // Tooltip caret - top position
