@@ -21,44 +21,27 @@
 
     .bx--module__inner {
       @include layer('raised');
-      background-color: $color__navy-gray-3;
-
-      @include light-ui {
-        background-color: $color__white;
-        border: 1px solid $color__navy-gray-8;
-
-      }
+      background-color: $ui-01;
+      border: 1px solid $ui-04;
     }
 
     .bx--module__header {
       display: flex;
       align-items: center;
       padding: 1rem 1.5rem;
-      border-bottom: 1px solid $color__navy-gray-6;
-
-      @include light-ui {
-        border-bottom: 1px solid $color__navy-gray-8;
-      }
+      border-bottom: 1px solid $ui-04;
     }
 
     .bx--module__title {
       @include font-size('14');
       @include font-smoothing;
       font-weight: 700;
-      color: $color__navy-gray-8;
-
-      @include light-ui {
-        color: $color__blue-90;
-      }
+      color: $text-01;
     }
 
     .bx--module__text {
       @include font-size('14');
-      color: $color__navy-gray-8;
-
-      @include light-ui {
-        color: $color__blue-90;
-      }
+      color: $text-01;
     }
 
     .bx--module__content {
