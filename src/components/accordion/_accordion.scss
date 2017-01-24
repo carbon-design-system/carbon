@@ -12,19 +12,11 @@
   &__item {
     @include reset;
     transition: all $transition--base $bx--standard-easing;
-    border-top: 1px solid $color__blue-90;
+    border-top: 1px solid $ui-04;
     overflow: hidden;
 
-    @include light-ui {
-      border-top: 1px solid $color__gray-1;
-    }
-
     &:last-child {
-      border-bottom: 1px solid $color__blue-90;
-
-      @include light-ui {
-        border-bottom: 1px solid $color__gray-1;
-      }
+      border-bottom: 1px solid $ui-04;
     }
   }
 
@@ -40,11 +32,7 @@
     transition: all $transition--base $bx--standard-easing;
     height: .625rem;
     width: .625rem;
-    fill: $color__white;
-
-    @include light-ui {
-      fill: $color__navy-gray-7;
-    }
+    fill: $ui-05;
   }
 
   &__title {
@@ -76,11 +64,7 @@
 
   .bx--accordion__arrow {
     transform: rotate(90deg);
-    fill: $color__blue-30;
-
-    @include light-ui {
-      fill: $color__blue-51;
-    }
+    fill: $brand-01;
   }
 }
 
