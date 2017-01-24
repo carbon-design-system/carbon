@@ -21,24 +21,3 @@
   0% { stroke-dashoffset: $loading__gap; }
   100% { stroke-dashoffset: 240; }
 }
-
-/** DEPRECATED **/
-
-/* IE Specific */
-// @keyframes ie-init-rotate {
-//   0% {
-//     transform: rotate(0deg);
-//     opacity: 0;
-//   }
-//
-//   100% {
-//     transform: rotate(360deg);
-//     opacity: 1;
-//   }
-// }
-// @keyframes ie-rotate-end-p2 {
-//   100% {
-//     opacity: 0;
-//     transform: rotate(-360deg);
-//   }
-// }

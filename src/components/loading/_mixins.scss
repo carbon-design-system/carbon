@@ -31,24 +31,3 @@
     animation-fill-mode: forwards;
   }
 }
-
-//--------------------------------
-// ☠ DEPRECATED - Animations - Loading (IE only)
-//--------------------------------
-// IE only: stroke effects do not apply so opacity is used to fade in and out
-
-@mixin animation__loading--spin--ie {
-  animation-name: ie-init-rotate, rotate;
-  animation-duration: 1000ms, 500ms;
-  animation-timing-function: cubic-bezier(.6, 0, 1, 1), linear;
-  animation-fill-mode: forwards, none;
-  animation-iteration-count: 1, infinite;
-}
-
-@mixin animation__loading--stop--ie {
-  animation-name: rotate-end-p1, ie-rotate-end-p2;
-  animation-duration: 700ms, 700ms;
-  animation-timing-function: cubic-bezier(0, 0, .7, 1.1), cubic-bezier(0, 0, 1, 1);
-  animation-delay: 0, 700ms;
-  animation-fill-mode: forwards, forwards;
-}
