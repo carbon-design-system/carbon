@@ -27,8 +27,11 @@ class InteriorLeftNavList extends Component {
     open: this.props.open,
   };
 
-  handleListClick = () => {
-    this.setState({ open: !this.state.open });
+  handleListClick = (evt) => {
+    // 13 = Enter, 32 = Spacebar
+    if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
+      this.setState({ open: !this.state.open });
+    }
   };
 
   render() {
@@ -64,6 +67,7 @@ class InteriorLeftNavList extends Component {
         className={classNames}
         tabIndex={tabIndex}
         onClick={this.handleListClick}
+        onKeyPress={this.handleListClick}
         {...other}
       >
         <a className="left-nav-list__item-link">

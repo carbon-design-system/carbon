@@ -22,8 +22,12 @@ import Dropdown from '../../components/Dropdown';
 import DropdownItem from '../../components/DropdownItem';
 import FileUploader from '../../components/FileUploader';
 import Form from '../../components/Form';
-import FormGroup from '../../components/FormGroup' ;
+import FormGroup from '../../components/FormGroup';
 import Icon from '../../components/Icon';
+import InteriorLeftNav from '../../components/InteriorLeftNav';
+import InteriorLeftNavHeader from '../../components/InteriorLeftNavHeader';
+import InteriorLeftNavList from '../../components/InteriorLeftNavList';
+import InteriorLeftNavItem from '../../components/InteriorLeftNavItem';
 import Link from '../../components/Link';
 import ListItem from '../../components/ListItem';
 import Loading from '../../components/Loading';
@@ -309,6 +313,53 @@ describe('a11y scan', () => {
     );
 
     AAT.getCompliance(wrapper.html(), 'Icon', (data) => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('InteriorLeftNav', (done) => {
+    const wrapper = render(
+      <InteriorLeftNav
+        previousPageText="Projects"
+        previousPageHref="#projects"
+      />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'InteriorLeftNav', (data) => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('InteriorLeftNavHeader', (done) => {
+    const wrapper = render(
+      <InteriorLeftNavHeader />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'InteriorLeftNavHeader', (data) => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('InteriorLeftNavItem', (done) => {
+    const wrapper = render(
+      <InteriorLeftNavItem title="test-title" href="#" />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'InteriorLeftNavItem', (data) => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('InteriorLeftNavList', (done) => {
+    const wrapper = render(
+      <InteriorLeftNavList title="test-title" />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'InteriorLeftNavList', (data) => {
       expect(AAT.assertCompliance(data)).toEqual(0);
       done();
     });

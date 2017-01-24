@@ -32,6 +32,7 @@ const InteriorLeftNavItem = ({ title, className, href, activeHref, onClick, tabI
       tabIndex={tabIndex}
       className={classNames}
       onClick={(evt) => onClick(evt, href)}
+      onKeyPress={(evt) => onClick(evt, href)}
       {...other}
     >
       <a

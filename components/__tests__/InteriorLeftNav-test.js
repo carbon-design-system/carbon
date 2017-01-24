@@ -40,16 +40,29 @@ describe('InteriorLeftNav', () => {
   describe('actions', () => {
     const interiorLeftNav = mount(
       <InteriorLeftNav>
-        <InteriorLeftNavList className="test-child" />
-        <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
+        <InteriorLeftNavList />
+        <InteriorLeftNavItem href="#first" title="test-title" />
       </InteriorLeftNav>
     );
 
+    const item = interiorLeftNav.find(InteriorLeftNavItem).first();
+
     it('handles item click as expected', () => {
-      const leftNavItem = interiorLeftNav.find(InteriorLeftNavItem).last();
-      expect(interiorLeftNav.state().activeHref).toEqual('blank');
-      leftNavItem.simulate('click');
-      expect(interiorLeftNav.state().activeHref).toEqual('#');
+      interiorLeftNav.setState({ activeHref: '#' });
+      item.simulate('click');
+      expect(interiorLeftNav.state().activeHref).toEqual('#first');
+    });
+
+    it('should set activeHref to items href on Enter', () => {
+      interiorLeftNav.setState({ activeHref: '#' });
+      item.simulate('keypress', { which: 13 });
+      expect(interiorLeftNav.state().activeHref).toEqual('#first');
+    });
+
+    it('should set activeHref to items href on Space', () => {
+      interiorLeftNav.setState({ activeHref: '#' });
+      item.simulate('keypress', { which: 32 });
+      expect(interiorLeftNav.state().activeHref).toEqual('#first');
     });
   });
 });

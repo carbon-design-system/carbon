@@ -2,7 +2,7 @@ import React from 'react';
 import InteriorLeftNavList from '../InteriorLeftNavList';
 import InteriorLeftNavItem from '../InteriorLeftNavItem';
 import Icon from '../Icon';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 describe('InteriorLeftNavList', () => {
   describe('Renders as expected', () => {
@@ -19,6 +19,13 @@ describe('InteriorLeftNavList', () => {
     const closedList = shallow(
       <InteriorLeftNavList>
         <InteriorLeftNavItem href="#" title="test-title" />
+      </InteriorLeftNavList>
+    );
+
+    const expectedChildrenList = shallow(
+      <InteriorLeftNavList>
+        <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
+        <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
       </InteriorLeftNavList>
     );
 
@@ -52,33 +59,41 @@ describe('InteriorLeftNavList', () => {
       expect(icon.props().className).toEqual('left-nav-list__item-icon bx--inline-left-nav__icon');
     });
     it('should render children as expected', () => {
-      const interiorLeftNavList = shallow(
-        <InteriorLeftNavList>
-          <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
-          <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
-        </InteriorLeftNavList>
-      );
-      expect(interiorLeftNavList.find('a').length).toEqual(1);
-      expect(interiorLeftNavList.find('.left-nav-list--nested').length).toEqual(1);
-      expect(interiorLeftNavList.find('.test-child').length).toEqual(2);
+      expect(expectedChildrenList.find('a').length).toEqual(1);
+      expect(expectedChildrenList.find('.left-nav-list--nested').length).toEqual(1);
+      expect(expectedChildrenList.find('.test-child').length).toEqual(2);
     });
   });
 
   describe('actions', () => {
-    const openList = shallow(
+    const list = mount(
       <InteriorLeftNavList
-        className="extra-class"
         title="test-title"
-        open
       >
         <InteriorLeftNavItem href="#" title="test-title" />
       </InteriorLeftNavList>
     );
 
     it('handles click to leftNavList as expected', () => {
-      expect(openList.state().open).toEqual(true);
-      openList.simulate('click');
-      expect(openList.state().open).toEqual(false);
+      list.setState({ open: false });
+      list.simulate('click');
+      expect(list.state().open).toEqual(true);
+    });
+
+    it('should toggle the leftNavList on Enter', () => {
+      list.setState({ open: false });
+      list.simulate('keypress', { which: 13 });
+      expect(list.state().open).toEqual(true);
+      list.simulate('keypress', { which: 13 });
+      expect(list.state().open).toEqual(false);
+    });
+
+    it('should toggle the leftNavList on Space', () => {
+      list.setState({ open: false });
+      list.simulate('keypress', { which: 32 });
+      expect(list.state().open).toEqual(true);
+      list.simulate('keypress', { which: 32 });
+      expect(list.state().open).toEqual(false);
     });
   });
 });

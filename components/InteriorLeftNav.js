@@ -27,7 +27,10 @@ class InteriorLeftNav extends Component {
 
   handleItemClick = (evt, href) => {
     evt.stopPropagation();
-    this.setState({ activeHref: href });
+    // 13 = Enter, 32 = Spacebar
+    if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
+      this.setState({ activeHref: href });
+    }
   };
 
   render() {
