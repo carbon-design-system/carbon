@@ -28,7 +28,7 @@
   "dependencies": {
     "adaro": "1.0.4",
     "bluebird": "~3.1.1",
-    "eslint": "^1.10.3",
+    "eslint": "^3.0.0",
     "express": "4.13.4",
     "globby": "4.0.0",
     "lodash.debounce": "^4.0.6"
