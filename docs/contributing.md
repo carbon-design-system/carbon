@@ -8,6 +8,51 @@ Set up your SSH Key GitHub Enterprise account and install node.js 4 or higher.
 
 Contributing to bluemix-components requires that you can run this repo locally on your computer.
 
+## Class names
+
+Prefix all class names with `bx--`.
+
+```html
+<div class="bx--inline-notification bx--inline-notification--error" role="alert">
+  <div class="bx--inline-notification__details">...</div>
+</div>
+```
+
+```scss
+.bx--inline-notification {
+  ...
+}
+
+.bx--inline-notification__details {
+  ...
+}
+```
+
+Follow modified BEM convention for naming classes.
+
+```scss
+.bx--component-name__element
+.bx--component-name--modifier
+```
+
+## Files and folders
+
+All components belong in `src/components` in their own folder.
+
+Name files and folders using __singular__ form; not plural.
+
+```
+button
+  - button.html
+  - _button.scss
+  - button.js
+```
+
+Also note that all variants of a component can live in a single HTML, SCSS and JS file respectively.
+For example, while there are many button variants (primary, secondary, etc.), they're all contained in those single source files in the button folder.
+
+
+
 ## 1. Fork The Repo:
 
 Go to [bluemix-components](https://github.ibm.com/Bluemix/bluemix-components) and click the "Fork" button in the top-right corner.
@@ -157,3 +202,5 @@ Stay up to date with the activity in your pull request. Maintainers from the Des
 When you need to make a change, add, commit and push to your branch normally.
 
 Once all revisiions to your pull request are complete, someone from Design Systems will squash and merge your commits for you.
+
+
