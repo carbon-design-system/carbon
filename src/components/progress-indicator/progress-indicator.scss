@@ -37,12 +37,9 @@
 
     &::after,
     &::before {
-      @include light-ui {
-        background-color: $color__navy-gray-7;
-      }
       content: '';
       position: absolute;
-      background-color: $color__navy-gray-7;
+      background-color: $ui-05;
       top: 50%;
       left: .5rem;
       width: 1px;
@@ -86,49 +83,32 @@
 
     &--active {
       .bx--progress-indicator__icon {
-        @include light-ui {
-          background-color: $color__blue-51;
-          fill: $color__blue-51;
-        }
-        fill: $color__blue-30;
+        fill: $brand-01;
         transform: scale(1);
-        background-color: $color__blue-30;
+        background-color: $brand-01;
         z-index: 2;
       }
 
       &::before {
-        @include light-ui {
-          background-color: $color__blue-51;
-        }
-        background-color: $color__blue-30;
+        background-color: $brand-01;
       }
 
       .bx--progress-indicator__label {
-        @include light-ui {
-          color: $color__blue-51;
-        }
-        color: $color__blue-30;
+        color: $brand-01;
         font-weight: 700;
       }
     }
 
     &--complete {
       .bx--progress-indicator__icon {
-        @include light-ui {
-          background-color: transparent;
-          fill: $color__blue-51;
-        }
-        fill: $color__blue-30;
+        fill: $brand-01;
         transform: scale(1);
         background-color: transparent;
       }
 
       &::after,
       &::before {
-        @include light-ui {
-          background-color: $color__blue-51;
-        }
-        background-color: $color__blue-30;
+        background-color: $brand-01;
         top: calc(50% + .5rem);
         width: 1px;
         height: calc(100% - 1rem);
@@ -141,10 +121,7 @@
       }
 
       .bx--progress-indicator__label {
-        @include light-ui {
-          color: $color__blue-51;
-        }
-        color: $color__blue-30;
+        color: $brand-01;
       }
     }
   }
@@ -154,8 +131,8 @@
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
-    fill: $color__navy-gray-7;
-    background-color: $color__navy-gray-7;
+    fill: $ui-05;
+    background-color: $ui-05;
   }
 
   &__label {
@@ -164,11 +141,7 @@
     text-align: center;
     display: block;
     padding: 0 0 0 .5rem;
-    color: $color__navy-gray-7;
-
-    @include light-ui {
-      color: $color__navy-gray-6;
-    }
+    color: $text-03;
 
     @include breakpoint(700px) {
       padding: .5rem 0;
