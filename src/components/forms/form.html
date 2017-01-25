@@ -1,164 +1,83 @@
 <form class="bx--form">
-  <!-- Checkbox -->
-  <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">Checkbox</legend>
-    <input id="unique-checkbox-in-form-1" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
-    <label for="unique-checkbox-in-form-1" class="bx--checkbox__label">
-      <span class="bx--checkbox__appearance"></span>
-      Checkbox label text
-    </label>
-    <br>
-    <input id="unique-checkbox-in-form-2" class="bx--checkbox" type="checkbox" value="blue" name="checkbox" checked>
-    <label for="unique-checkbox-in-form-2" class="bx--checkbox__label">
-      <span class="bx--checkbox__appearance"></span>
-      Checkbox label text
-    </label>
-    <br>
-    <input disabled id="unique-checkbox-in-form-disabled" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
-    <label for="unique-checkbox-in-form-disabled" class="bx--checkbox__label">
-      <span class="bx--checkbox__appearance"></span>
-      Checkbox label text - Disabled
-    </label>
-  </fieldset>
 
-  <!-- Number Input -->
   <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">Number Input</legend>
-    <div data-numberinput class="bx--number">
-      <label for="numberinput-id-1" class="bx--form__label">Number Input</label>
-      <input id="numberinput-id-1" type="number" pattern="[0-9]*" step="1" min="0" max="10" value="0" class="bx--number__input" />
-      <span class="bx--number__arrow--up bx--number__arrow--icon-up">
-        <svg class="icon--up bx--number__arrow--icon-up">
-          <use class="icon--up bx--number__arrow--icon-up" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://new-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-up"></use>
-        </svg>
-      </span>
-      <span class="bx--number__arrow--down bx--number__arrow--icon-down">
-        <svg class="icon--down bx--number__arrow--icon-down">
-          <use class="icon--down bx--number__arrow--icon-down" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://new-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#support--chevron-down"></use>
-        </svg>
-      </span>
+    <legend class="bx--form__legend">Account</legend>
+
+    <div class="bx--form__row">
+      <div class="bx--form__row-item">
+        <label for="text1" class="bx--form__label">Username</label>
+        <input data-invalid id="text1" type="text" class="bx--text__input" placeholder="Enter username here">
+        <div class='bx--form__requirements'>
+          Username is taken.
+        </div>
+      </div>
+    </div>
+
+    <div class="bx--form__row">
+      <div class="bx--form__row-item">
+        <label for="text1" class="bx--form__label">Password</label>
+        <input data-invalid required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="text1" type="password" class="bx--text__input" placeholder="Enter password">
+        <div class='bx--form__requirements'>
+          Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.
+        </div>
+      </div>
+
+      <div class="bx--form__row-item">
+        <label for="text1" class="bx--form__label">Re-enter password</label>
+        <input data-invalid required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" id="text1" type="password" class="bx--text__input" placeholder="Re-enter password">
+        <div class='bx--form__requirements'>
+          Password does not match.
+        </div>
+      </div>
     </div>
   </fieldset>
 
-  <!-- Toggle -->
   <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">Toggle</legend>
-    <input class="bx--toggle" id="toggle1" type="checkbox">
-    <label class="bx--toggle__label" for="toggle1">
-      <span class="bx--toggle__text--left">off</span>
-      <span class="bx--toggle__appearance"></span>
-      <span class="bx--toggle__text--right">on</span>
-    </label>
-    <br>
-    <input disabled class="bx--toggle" id="toggle-disabled" type="checkbox">
-    <label class="bx--toggle__label" for="toggle-disabled">
-      <span class="bx--toggle__text--left">off</span>
-      <span class="bx--toggle__appearance"></span>
-      <span class="bx--toggle__text--right">on</span>
-    </label>
-  </fieldset>
+    <legend class="bx--form__legend">Contact</legend>
 
-  <!-- File Uploader -->
-  <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">File Uploader</legend>
-    <label data-file-appearance-in-form class="bx--file__label" for="file-in-form">Choose Files...</label>
-    <input
-      data-file-uploader
-      data-multiple-caption="{count} files selected"
-      data-label="[data-file-appearance-in-form]"
-      class="bx--file__input"
-      type="file"
-      name="file-in-form"
-      id="file-in-form"
-      multiple />
-  </fieldset>
+    <div class="bx--form__row">
+      <div class="bx--form__row-item">
+        <label for="text1" class="bx--form__label">First name</label>
+        <input id="text1" type="text" class="bx--text__input" placeholder="First name">
+      </div>
 
-  <!-- Radio -->
-  <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">Radio</legend>
-    <input id="unique-radio-1" class="bx--radio" type="radio" value="red" name="radio">
-    <label for="unique-radio-1" class="bx--radio__label">
-      <span class="bx--radio__appearance"></span>
-      Radio label text
-    </label>
-    <br>
-    <input id="unique-radio-2" class="bx--radio" type="radio" value="blue" name="radio" checked>
-    <label for="unique-radio-2" class="bx--radio__label">
-      <span class="bx--radio__appearance"></span>
-      Radio label text
-    </label>
-    <br>
-    <input disabled id="unique-radio-disabled" class="bx--radio" type="radio" value="blue" name="radio">
-    <label for="unique-radio-disabled" class="bx--radio__label">
-      <span class="bx--radio__appearance"></span>
-      Radio label text - disabled
-    </label>
-  </fieldset>
-
-  <!-- Search -->
-  <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">Search</legend>
-    <div class="bx--search" role="search">
-      <svg class="bx--search__icon--magnifier">
-        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--search" x="" y=""/>
-      </svg>
-      <label for="search__input" class="bx--search__label">Search</label>
-      <input type="search" class="bx--search__input" id="search__input" placeholder="Search Atlas Offerings">
-      <button class="bx--search__filter" type="button">
-        <svg class="bx--search__icon--filter">
-          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#common--arrows" x="" y=""/>
-        </svg>
-        <span class="filter__text">Filter</span>
-      </button>
+      <div class="bx--form__row-item">
+        <label for="text1" class="bx--form__label">Last name</label>
+        <input id="text1" type="text" class="bx--text__input" placeholder="Last name">
+      </div>
     </div>
   </fieldset>
 
-  <!-- Select -->
   <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">Select</legend>
-    <div class="bx--select">
-      <label for="select-id" class="bx--form__label">Select</label>
-      <select id="select-id" class="bx--select__input">
-        <option class="bx--select__option" value="" disabled selected hidden>Pick an option</option>
-        <option class="bx--select__option" value="volvo">Volvo</option>
-        <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
-        <option class="bx--select__option" value="saab">Saab</option>
-        <option class="bx--select__option" value="opel">Opel</option>
-        <option class="bx--select__option" value="audi">Audi</option>
-      </select>
-      <svg class="bx--select__arrow">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
-      </svg>
-    </div>
-    <br>
-    <div class="bx--select">
-      <label for="select-id-disabled" class="bx--form__label">Select</label>
-      <select id="select-id-disabled" class="bx--select__input" disabled>
-        <option class="bx--select__option" value="" disabled selected hidden>Pick an option</option>
-        <option class="bx--select__option" value="volvo">Volvo</option>
-        <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
-        <option class="bx--select__option" value="saab">Saab</option>
-        <option class="bx--select__option" value="opel">Opel</option>
-        <option class="bx--select__option" value="audi">Audi</option>
-      </select>
-      <svg class="bx--select__arrow">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
-      </svg>
-    </div>
-  </fieldset>
+    <legend class="bx--form__legend--hidden">Marketing</legend>
 
-  <!-- Text -->
-  <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">Text</legend>
-    <label for="text1" class="bx--form__label">Text Field Label:</label>
-    <input id="text1" type="text" class="bx--text__input" placeholder="Hint text here">
-  </fieldset>
+    <p>Keep me informed of products, services and offerings from IBM companies worldwide:</p>
 
-  <!-- Textarea -->
-  <fieldset class="bx--form__fieldset">
-    <legend class="bx--form__legend">Textarea</legend>
-    <label for="textarea1" class="bx--form__label">Text Area Label:</label>
-    <textarea id="textarea1" class="bx--textarea__input" rows="4" cols="50" placeholder="Hint text here"></textarea>
+    <div class="bx--form__row bx--form__row--column">
+      <div class="bx--form__row-item">
+        <input id="form-example-telephone" class="bx--checkbox bx--checkbox--svg" type="checkbox" value="green" name="checkbox">
+        <label for="form-example-telephone" class="bx--checkbox__label">
+          <span class="bx--checkbox__appearance">
+            <svg class="bx--checkbox__checkmark">
+              <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#checkmark"></use>
+            </svg>
+          </span>
+          By telephone
+        </label>
+      </div>
+
+      <div class="bx--form__row-item">
+        <input checked id="form-example-email" class="bx--checkbox bx--checkbox--svg" type="checkbox" value="green" name="checkbox">
+        <label for="form-example-email" class="bx--checkbox__label">
+          <span class="bx--checkbox__appearance">
+            <svg class="bx--checkbox__checkmark">
+              <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#checkmark"></use>
+            </svg>
+          </span>
+          By email
+        </label>
+      </div>
+    </div>
   </fieldset>
 
   <button class="bx--btn" type="submit">Submit</button>

@@ -28,7 +28,7 @@
   input[data-invalid],
   select[data-invalid],
   textarea[data-invalid]  {
-    box-shadow: 0 2px 0px 0px $color__red-40;
+    box-shadow: 0 2px 0px 0px $support-01;
 
     ~ .bx--form__requirements {
       max-height: rem(200px);
@@ -96,7 +96,7 @@
   &::before {
     content: '*';
     display: inline-block;
-    color: $color__red-40;
+    color: $support-01;
   }
 }
 
