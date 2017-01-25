@@ -14,22 +14,14 @@
   @include reset;
   @include font-size('14');
   @include font-smoothing;
-  color: $color__navy-gray-8;
-  background-color: $color__navy_gray_5;
+  color: $text-01;
+  background-color: $field-01;
   font-weight: 700;
   cursor: pointer;
-
-  @include light-ui {
-    color: $color__blue-90;
-    background-color: $color__inputs--bg--light-ui;
-  }
+  width: 100%;
 
   @include breakpoint(bp--sm--major) {
     background: none;
-
-    @include light-ui {
-      background: none;
-    }
   }
 
   &__trigger {
@@ -43,11 +35,7 @@
     svg {
       width: rem(12px);
       height: rem(12px);
-      fill: $color__blue-30;
-
-      @include light-ui {
-        fill: $color__blue-51;
-      }
+      fill: $brand-01;
     }
 
     @include breakpoint(bp--sm--major) {
@@ -59,11 +47,7 @@
     @include reset;
     text-decoration: none;
     font-weight: 700;
-    color: $color__white;
-
-    @include light-ui {
-      color: $color__blue-90;
-    }
+    color: $text-01;
   }
 
   &__nav {
@@ -88,55 +72,31 @@
   &__nav-item {
     @include reset;
     @include font-size('14');
-    background-color: $color__navy_gray_4;
+    background-color: $ui-01;
     padding: 1rem;
 
-    @include light-ui {
-      background-color: $color__white;
-    }
-
     &:hover {
-      background-color: $color__blue-30;
-
-      @include light-ui {
-        background-color: $color__blue-51;
-      }
+      background-color: $brand-01;
 
       .bx--tabs__nav-link {
-        color: $color__blue-90;
-
-        @include light-ui {
-          color: $color__white;
-        }
+        color: $inverse-01;
 
         @include breakpoint(bp--sm--major) {
-          color: $color__blue-30;
-
-          @include light-ui {
-            color: $color__blue-51;
-          }
+          color: $brand-01;
         }
       }
 
       @include breakpoint(bp--sm--major) {
-        background: none;
-
-        @include light-ui {
-          background-color: transparent;
-        }
+        background: transparent;
       }
     }
 
     @include breakpoint(bp--sm--major) {
-      background: none;
+      background: transparent;
       padding: 0;
 
       &+& {
         margin-left: rem(48px);
-      }
-
-      @include light-ui {
-        background-color: transparent;
       }
     }
   }
@@ -144,45 +104,28 @@
   &__nav-link {
     @include reset;
     display: inline-block;
-    color: $color__white;
+    color: $text-01;
     text-decoration: none;
-
-    @include light-ui {
-      color: $color__blue-90;
-    }
 
     @include breakpoint(bp--sm--major) {
       padding: 1rem 0;
       margin-bottom: 1px;
 
       &:hover {
-        color: $color__blue-30;
-
-        @include light-ui {
-          color: $color__blue-51;
-        }
+        color: $brand-01;
       }
     }
   }
 }
 
 .bx--tabs--selected {
-  color: $color__white;
   border: none;
 
   @include breakpoint(bp--sm--major) {
-    border-bottom: 2px solid $color__blue-30;
-
-    @include light-ui {
-      border-bottom: 2px solid $color__blue-51;
-    }
+    border-bottom: 2px solid $brand-01;
 
     a {
-      color: $color__blue-30;
-
-      @include light-ui {
-        color: $color__blue-51;
-      }
+      color: $brand-01;
     }
   }
 }
