@@ -16,25 +16,16 @@
   position: fixed;
   top: rem(90px);
   height: 100%;
-  background-color: $color__navy-gray-3;
-  border-right: 1px solid $color__blue-90;
-
-  @include light-ui {
-    background-color: $color__white;
-    border-right: 1px solid $color__gray-1;
-  }
+  background-color: $ui-01;
+  border-right: 1px solid $ui-04;
 
   .left-nav-list {
     @include reset;
     list-style: none;
     display: flex;
     flex-direction: column;
-    background-color: $color__navy-gray-3;
+    background-color: $ui-01;
     padding-top: 1.5rem;
-
-    @include light-ui {
-      background-color: $color__white;
-    }
 
     &__item {
       @include reset;
@@ -44,12 +35,8 @@
 
       &--active {
         & > .left-nav-list__item-link {
-          @include light-ui {
-            background-color: $color__gray-2;
-            color: $color__blue-51;
-          }
-          background-color: $color__blue-90;
-          color: $color__blue-30;
+          background-color: $ui-03;
+          color: $brand-01;
           font-weight: 600;
         }
       }
@@ -57,11 +44,7 @@
       &-link {
         @include reset;
         @include font-size('14');
-        @include light-ui {
-          color: $color__blue-90;
-        }
-
-        color: $color__white;
+        color: $text-01;
         font-weight: 400;
         position: relative;
         display: flex;
@@ -77,11 +60,7 @@
         display: flex;
 
         .bx--inline-left-nav__icon {
-          @include light-ui {
-            fill: $color__blue-51;
-          }
-
-          fill: $color__white;
+          fill: $brand-01;
           width: rem(10px);
           height: rem(10px);
           transition: $transition--base;
@@ -101,10 +80,7 @@
         }
 
         & > .left-nav-list__item-link {
-          @include light-ui {
-            color: $color__blue-51;
-          }
-          color: $color__blue-30;
+          color: $brand-01;
         }
 
         .left-nav-list__item-icon .bx--inline-left-nav__icon {
@@ -114,12 +90,8 @@
 
       &:not(.left-nav-list__item--has-children):hover {
         & > .left-nav-list__item-link {
-          @include light-ui {
-            background-color: $color__gray-2;
-            color: $color__blue-51;
-          }
-          background-color: $color__blue-90;
-          color: $color__blue-30;
+          background-color: $ui-03;
+          color: $brand-01;
         }
       }
     }
@@ -131,10 +103,7 @@
 
       &:hover {
         > .left-nav-list__item-link {
-          @include light-ui {
-            color: $color__blue-51;
-          }
-          color: $color__blue-30;
+          color: $brand-01;
         }
       }
     }
@@ -156,10 +125,7 @@
 
       &-link {
         @include font-size('14');
-        @include light-ui {
-          color: $color__blue-90;
-        }
-        color: $color__white;
+        color: $text-01;
         padding: .75rem 1.35rem .75rem 4.5rem;
         font-weight: 400;
         display: flex;
@@ -172,20 +138,13 @@
       }
 
       &--active {
-        @include light-ui {
-          color: $color__blue-51;
-          background-color: $color__gray-2;
-        }
-        color: $color__white;
+        color: $brand-01;
+        background-color: $ui-03;
 
         & > .left-nav-list__item-link {
-          @include light-ui {
-            background-color: $color__gray-2;
-            color: $color__blue-51;
-          }
-          background-color: $color__blue-90;
+          background-color: $ui-03;
           font-weight: 600;
-          color: $color__blue-30;
+          color: $brand-01;
         }
       }
     }
@@ -193,50 +152,33 @@
 
   &__header {
     @include reset;
-    @include light-ui {
-      border-bottom: 1px solid $color__gray-1;
-    }
-
-    border-bottom: 1px solid $color__blue-90;
+    border-bottom: 1px solid $ui-04;
     cursor: pointer;
 
     &--link {
       @include reset;
       @include font-smoothing;
       @include font-size('14');
-      @include light-ui {
-        color: $color__blue-90;
-      }
-
       height: rem(50px);
       text-decoration: none;
       padding: 1.5rem 0 1rem 1.5rem;
       display: flex;
       font-weight: 600;
       align-items: center;
-      color: $color__white;
+      color: $text-01;
 
       .bx--inline-left-nav__icon {
-        @include light-ui {
-          fill: $color__blue-51;
-        }
         width: rem(15px);
         height: rem(15px);
         margin-right: 1.25rem;
-        fill: $color__blue-30;
+        fill: $brand-01;
       }
 
       &:hover {
-        @include light-ui {
-          color: $color__blue-40;
-        }
-        color: $color__blue-20;
+        color: $brand-02;
 
         & > .bx--inline-left-nav__icon {
-          @include light-ui {
-            fill: $color__blue-40;
-          }
-          fill: $color__blue-20;
+          fill: $brand-02;
         }
       }
 
