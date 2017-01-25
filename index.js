@@ -18,7 +18,7 @@ import Loading from './src/components/loading/loading';
 import Dropdown from './src/components/dropdown/dropdown';
 import Card from './src/components/card/card';
 import NumberInput from './src/components/number-input/number-input';
-import ResponsiveTable from './src/components/responsiveTables/responsive-table';
+import DataTable from './src/components/data-table/data-table';
 import DetailPageHeader from './src/components/detail-page-header/detail-page-header';
 import LeftNav from './src/components/unified-header/left-nav';
 import InlineLeftNav from './src/components/inline-left-nav/inline-left-nav';
@@ -130,7 +130,7 @@ export {
    *  Data table -responsive
    *  @type Table
    */
-  ResponsiveTable,
+  DataTable,
 
   /**
    * Detail page header.
@@ -181,7 +181,7 @@ const init = () => {
     Dropdown.init();
     Card.init();
     NumberInput.init();
-    ResponsiveTable.init();
+    DataTable.init();
     DetailPageHeader.init();
     LeftNav.init();
     InlineLeftNav.init();

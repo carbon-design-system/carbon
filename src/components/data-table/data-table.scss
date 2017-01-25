@@ -5,7 +5,7 @@
 @import '../../components/overflow-menu/overflow-menu';
 @import '../../globals/scss/import-once';
 
-@include exports('responsiveTables') {
+@include exports('data-table') {
 
 .bx--responsive-table-container {
   @include reset;
@@ -16,13 +16,11 @@
 
 .bx--responsive-table {
   @include reset;
-  background-color: $color__navy-gray-3;
+  background-color: $ui-01;
   width: 100%;
   min-width: 500px;
-
-  @include light-ui {
-    background-color: #fff;
-  }
+  border-collapse: collapse;
+  border-spacing: 0;
 
   td {
     @include reset;
@@ -33,15 +31,15 @@
 
   th {
     @include reset;
+    font-size: rem(12px);
     padding: rem(9px);
     vertical-align: middle;
+    font-weight: 700;
   }
 
   table {
     @include reset;
-    border-collapse: collapse;
-    border-spacing: 0;
-    background-color: inherit;
+    
   }
 
   &--tall {
@@ -60,7 +58,7 @@
 
 .bx--table-head {
   @include reset;
-  border-bottom: 1px solid $color__blue-30;
+  border-bottom: 1px solid $brand-01;
 }
 
 .bx--table-header {
@@ -76,18 +74,10 @@
 .bx--table-body {
   > .bx--parent-row,
   > .bx--parent-row + .bx--expandable-row {
-    background-color: $color__navy-gray-3;
-
-    @include light-ui {
-      background-color: #fff;
-    }
+    background-color: $ui-01;
 
     &--even {
-      background-color: $color__blue-90;
-
-      @include light-ui {
-        background-color: $color__gray-2;
-      }
+      background-color: $ui-03;
     }
   }
 }
@@ -95,7 +85,7 @@
 // expandable styles
 .bx--expandable-row {
   > td {
-    border-left: 4px solid $color__blue-30;
+    border-left: 4px solid $brand-01;
     padding: 2rem;
   }
 
@@ -113,13 +103,9 @@
   cursor: pointer;
 
   &__svg {
-    fill: $color__navy-gray-8;
+    fill: $text-02;
     transform: rotate(0deg);
     transition: transform 200ms $bx--standard-easing;
-
-    @include light-ui {
-      fill: $color__navy-gray-6;
-    }
   }
 
   &[data-previous-value="collapsed"] {
@@ -136,15 +122,11 @@
 
 .bx--table-sort {
   &__svg {
-    fill: $color__navy-gray-8;
+    fill: $text-02;
     width: 8px;
     height: 8px;
     transform: rotate(0deg);
     transition: transform 200ms $bx--standard-easing;
-
-    @include light-ui {
-      fill: $color__navy-gray-6;
-    }
   }
 
   &--ascending {
@@ -177,11 +159,7 @@
     margin: 0 auto;
 
     &__icon {
-      fill: $color__navy-gray-8;
-
-      @include light-ui {
-        fill: $color__navy-gray-6;
-      }
+      fill: $text-02;
     }
 
     &__options {

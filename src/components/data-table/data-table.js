@@ -9,9 +9,9 @@ import '../../../demo/polyfills/object-assign';
 import '../../../demo/polyfills/custom-event';
 import optimizedResize from '../../globals/js/misc/resize';
 
-class ResponsiveTable extends mixin(createComponent, initComponent, eventedState) {
+class DataTable extends mixin(createComponent, initComponent, eventedState) {
   /**
-   * Responsive Table
+   * Data Table
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @extends EventedState
@@ -231,4 +231,4 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
   }
 }
 
-export default ResponsiveTable;
+export default DataTable;

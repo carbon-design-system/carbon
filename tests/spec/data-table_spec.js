@@ -2,8 +2,8 @@ import '../../demo/polyfills/custom-event';
 import '../../demo/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
-import ResponsiveTable from '../../src/components/responsiveTables/responsive-table.js';
-import HTML from '../../src/components/responsiveTables/responsive-tables.html';
+import ResponsiveTable from '../../src/components/data-table/data-table.js';
+import HTML from '../../src/components/data-table/data-table.html';
 
 describe('Test responsive table', function () {
   describe('Constructor', function () {
