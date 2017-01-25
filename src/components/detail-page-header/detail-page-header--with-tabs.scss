@@ -7,7 +7,6 @@
 @import '../../globals/scss/helpers';
 @import '../../globals/scss/typography';
 @import '../tabs/tabs';
-@import 'extends';
 @import 'mixins';
 @import '../../globals/scss/import-once';
 
@@ -40,17 +39,12 @@
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: $color__navy-gray-3;
+    background-color: $ui-01;
 
     @include breakpoint(bp--xs--major) {
       flex-direction: column;
       padding-bottom: .5rem;
       align-items: flex-start;
-      background-color: $color__navy-gray-3;
-    }
-
-    @include light-ui {
-      background-color: $color__white;
     }
   }
 
@@ -69,11 +63,7 @@
     @include font-size('14');
     display: none;
     text-align: left;
-    color: $color__white;
-
-    @include light-ui {
-      color: $color__blue-90;
-    }
+    color: $text-01;
 
     @include breakpoint(bp--xs--major) {
       display: inline-block;
@@ -85,12 +75,8 @@
   &__link-wrapper {
     @include reset;
     @include font-smoothing;
-    color: $color__navy-gray-8;
+    color: $text-01;
     text-decoration: none;
-
-    @include light-ui {
-      color: $color__blue-90;
-    }
   }
 
   &__arrow {
@@ -111,22 +97,13 @@
     padding-left: .5rem;
     margin-left: .5rem;
     font-weight: 200;
-    border-left: 1px solid $color__navy-gray-7;
-    color: $color__navy-gray-8;
-
-    @include light-ui {
-      color: $color__navy-gray-6;
-      border-left: 1px solid $color__navy-gray-7;
-    }
+    border-left: 1px solid $ui-05;
+    color: $text-02;
 
     @include breakpoint(bp--xs--major) {
       padding-left: 0;
       margin-left: 0;
       border-left: none;
-
-      @include light-ui {
-        border-left: none;
-      }
     }
 
     @include breakpoint(bp--sm--major) {

@@ -1,11 +1,7 @@
 @mixin detail-page-header {
   @include reset;
-  background-color: $color__navy-gray-3;
+  background-color: $ui-01;
   width: 100%;
-
-  @include light-ui {
-    background-color: $color__white;
-  }
 }
 
 @mixin detail-page-header-animated {
@@ -23,11 +19,7 @@
 @mixin detail-page-header__arrow {
   width: 16px;
   height: 16px;
-  fill: $color__blue-30;
-
-  @include light-ui {
-    fill: $color__blue-51;
-  }
+  fill: $brand-01;
 
   @include breakpoint(bp--xs--major) {
     position: relative;
@@ -40,15 +32,6 @@
   @include grid-container;
   padding-top: 0;
   padding-bottom: 1rem;
-  background-color: $color__navy-gray-3;
-
-  @include light-ui {
-    background-color: $color__white;
-  }
-
-  @include breakpoint(bp--xs--major) {
-    background-color: $color__navy-gray-3;
-  }
 
   @include breakpoint(bp--sm--major) {
     padding-bottom: 0;

@@ -51,6 +51,7 @@
   }
 
   &__nav {
+    @include layer('overlay');
     @include reset;
     list-style: none;
     display: flex;
@@ -62,6 +63,7 @@
       margin-right: rem(16px);
       margin-left: rem(16px);
       background: none;
+      box-shadow: none;
     }
 
     @include breakpoint(bp--lg--major) {

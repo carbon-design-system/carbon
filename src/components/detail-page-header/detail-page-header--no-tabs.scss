@@ -21,15 +21,10 @@
 
   &__link-wrapper {
     @include reset;
-    color: $color__white;
+    color: $text-01;
     text-decoration: none;
-    background-color: $color__navy-gray-3;
+    background-color: $ui-01;
     cursor: pointer;
-
-    @include light-ui {
-      color: $color__navy-gray-3;
-      background-color: $color__white;
-    }
   }
 
   &__link-text {
@@ -49,13 +44,8 @@
     padding-left: .5rem;
     margin-left: .5rem;
     font-weight: 200;
-    border-left: 1px solid $color__navy-gray-7;
-    color: $color__navy-gray-8;
-
-    @include light-ui {
-      color: $color__navy-gray-6;
-      border-left: 1px solid $color__navy-gray-7;
-    }
+    border-left: 1px solid $ui-05;
+    color: $text-02;
 
     @include breakpoint(bp--xs--major) {
       margin-left: -.2rem;
