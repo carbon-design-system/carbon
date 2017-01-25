@@ -66,6 +66,10 @@ Bluemix Components React is published on a private npm registry maintained by th
 
 Please refer to the [Contribution Guidelines](CONTRIBUTING.md) before starting any work.
 
+### Installation
+
+Follow the instructions for installing the `@console` npm modules as explained [above](#getting-started). Additionally, if you want to run [accessibility testing](#a11y-testing), see the instructions [here](https://github.ibm.com/Whitewater/npm-enterprise#option-2-using-npm-enterprise-for-private-packages-only) for installing [`@ibma/aat`](https://github.ibm.com/IBMa/Tools-Auto-Node/blob/master/src/README.md)
+
 ### Using the server
 
 We recommend the use of [React Storybook](https://github.com/storybooks/react-storybook) for developing components.
