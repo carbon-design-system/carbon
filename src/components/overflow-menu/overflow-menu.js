@@ -1,6 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 import '../../../demo/polyfills/array-from';
 import '../../../demo/polyfills/element-matches';
@@ -8,7 +8,7 @@ import '../../../demo/polyfills/object-assign';
 import toggleClass from '../../../demo/polyfills/toggle-class';
 import on from '../../globals/js/misc/on';
 
-class OverflowMenu extends mixin(createComponent, initComponent, eventedState) {
+class OverflowMenu extends mixin(createComponent, initComponentBySearch, eventedState) {
   constructor(element, options) {
     super(element, options);
 

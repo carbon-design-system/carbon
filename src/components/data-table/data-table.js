@@ -1,6 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../../demo/polyfills/event-matches';
 import '../../../demo/polyfills/array-from';
@@ -9,7 +9,7 @@ import '../../../demo/polyfills/object-assign';
 import '../../../demo/polyfills/custom-event';
 import optimizedResize from '../../globals/js/misc/resize';
 
-class DataTable extends mixin(createComponent, initComponent, eventedState) {
+class DataTable extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * Data Table
    * @extends CreateComponent

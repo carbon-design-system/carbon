@@ -1,10 +1,10 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
 import '../../../demo/polyfills/element-matches';
 import '../../../demo/polyfills/object-assign';
 
-class FabButton extends mixin(createComponent, initComponent) {
+class FabButton extends mixin(createComponent, initComponentByEvent) {
   /**
    * Floating action button.
    * @extends CreateComponent

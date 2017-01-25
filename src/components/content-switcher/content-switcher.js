@@ -1,6 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../../demo/polyfills/event-matches';
 import '../../../demo/polyfills/array-from';
@@ -9,7 +9,7 @@ import '../../../demo/polyfills/element-matches';
 import '../../../demo/polyfills/object-assign';
 import toggleClass from '../../../demo/polyfills/toggle-class';
 
-class ContentSwitcher extends mixin(createComponent, initComponent, eventedState) {
+class ContentSwitcher extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * Set of content switcher buttons.
    * @extends CreateComponent

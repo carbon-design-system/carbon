@@ -1,6 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import '../../../demo/polyfills/array-from';
 import '../../../demo/polyfills/element-matches';
 import '../../../demo/polyfills/object-assign';
@@ -9,7 +9,7 @@ import toggleClass from '../../../demo/polyfills/toggle-class';
 import eventMatches from '../../../demo/polyfills/event-matches';
 import on from '../../globals/js/misc/on';
 
-class LeftNav extends mixin(createComponent, initComponent) {
+class LeftNav extends mixin(createComponent, initComponentBySearch) {
   /**
    * Left Navigation.
    * @extends CreateComponent

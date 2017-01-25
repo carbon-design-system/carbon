@@ -1,12 +1,12 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import '../../../demo/polyfills/array-from';
 import '../../../demo/polyfills/custom-event';
 import '../../../demo/polyfills/element-matches';
 import '../../../demo/polyfills/object-assign';
 
-class NumberInput extends mixin(createComponent, initComponent) {
+class NumberInput extends mixin(createComponent, initComponentBySearch) {
   /**
    * Number input UI.
    * @extends CreateComponent

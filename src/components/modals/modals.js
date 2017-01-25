@@ -1,6 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentByLauncher from '../../globals/js/mixins/init-component-by-launcher';
 import eventedState from '../../globals/js/mixins/evented-state';
 import '../../../demo/polyfills/array-from';
 import '../../../demo/polyfills/element-matches';
@@ -20,7 +20,7 @@ function getTransitionDuration(element) {
   return durations.length > 0 ? Math.max(...durations) : 0;
 }
 
-class Modal extends mixin(createComponent, initComponent, eventedState) {
+class Modal extends mixin(createComponent, initComponentByLauncher, eventedState) {
   /**
    * Modal dialog.
    * @extends CreateComponent

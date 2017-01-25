@@ -1,13 +1,13 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import '../../../demo/polyfills/array-from';
 import '../../../demo/polyfills/element-matches';
 import '../../../demo/polyfills/object-assign';
 import '../../../demo/polyfills/custom-event';
 import on from '../../globals/js/misc/on';
 
-class ProfileSwitcher extends mixin(createComponent, initComponent) {
+class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
   /**
    * Profile Switcher.
    * @extends CreateComponent

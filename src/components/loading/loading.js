@@ -1,12 +1,12 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponent from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import '../../../demo/polyfills/array-from';
 import '../../../demo/polyfills/element-matches';
 import '../../../demo/polyfills/object-assign';
 import toggleClass from '../../../demo/polyfills/toggle-class';
 
-class Loading extends mixin(createComponent, initComponent) {
+class Loading extends mixin(createComponent, initComponentBySearch) {
   /**
    * Spinner indicating loading state.
    * @extends CreateComponent

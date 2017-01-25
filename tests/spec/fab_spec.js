@@ -105,12 +105,12 @@ describe('Test floating action button', function () {
       document.body.appendChild(element);
     });
 
-    xit(`Should create an instance upon clicking`, function () {
+    it(`Should create an instance upon clicking`, function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.dataset.state).to.equal('closed');
     });
 
-    xit(`Shouldn't create a new instance upon clicking if one has been there already`, function () {
+    it(`Shouldn't create a new instance upon clicking if one has been there already`, function () {
       const stubComponentsSet = sinon.stub(FabButton.components, 'set');
       try {
         element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -121,7 +121,7 @@ describe('Test floating action button', function () {
       }
     });
 
-    xit(`Should provide a way to remove event listener`, function () {
+    it(`Should provide a way to remove event listener`, function () {
       const container = document.createElement('div');
       const elementInContainer = document.createElement('a');
 

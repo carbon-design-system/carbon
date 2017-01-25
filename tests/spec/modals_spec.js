@@ -407,7 +407,7 @@ describe('Test modal', function () {
       }
     });
 
-    xit(`Should launch modal upon button click`, async function () {
+    it(`Should launch modal upon button click`, async function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.modalTarget = `#${id}`;
@@ -442,7 +442,7 @@ describe('Test modal', function () {
       expect(spyFocus).have.been.calledOnce;
     });
 
-    xit(`Shouldn't focus on modal unless its root element has an area`, async function () {
+    it(`Shouldn't focus on modal unless its root element has an area`, async function () {
       const id = `__element_${Math.random().toString(36).substr(2)}`;
       element = document.createElement('a');
       element.dataset.modalTarget = `#${id}`;
