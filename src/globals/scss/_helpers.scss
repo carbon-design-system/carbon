@@ -18,6 +18,12 @@ $transition--base: 250ms;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+
+    & > *, 
+    & > *:before, 
+    & > *:after {
+      box-sizing: inherit;
+    }
   }
 }
 
