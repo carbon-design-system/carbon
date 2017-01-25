@@ -5,7 +5,7 @@
 $typography-css: true !default;
 $use-globals: true !default;
 $use-fonts: false !default;
-$use-reset: false !default;
+$use-reset: true !default;
 
 @import 'global/global';
 
