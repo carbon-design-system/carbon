@@ -21,11 +21,7 @@
   hr {
     margin: .25rem 0 0;
     border: none;
-    border-bottom: 1px solid $color__navy-gray-2;
-
-    @include light-ui {
-      border-bottom: 1px solid $color__gray-1;
-    }
+    border-bottom: 1px solid $ui-04;
   }
 
   // Initial styling for the options pane
@@ -37,35 +33,26 @@
     right: rem(-20px);
     position: absolute;
     display: none;
-    padding: .3rem 0 .5rem;
+    padding: .5rem 0 .5rem;
     margin: 2.2rem 0 0 -10rem;
     z-index: z('overflowOptions');
-    background: $color__navy-gray-3;
-
-    @include light-ui {
-      background: $color__white;
-      border: 1px solid $color__gray-1;
-    }
+    background: $ui-01;
+    border: 1px solid $ui-04;
 
     // rectangle to make little arrow
     &:before {
       position: absolute;
-      top: -.4rem;
+      top: -.45rem;
       right: rem(30px);
       z-index: z('overflowHidden');
       display: block;
       width: .75rem;
       height: .75rem;
-      background-color: $color__navy-gray-3;
+      background-color: $ui-01;
+      border-top: 1px solid $ui-04;
+      border-left: 1px solid $ui-04;
       content: '';
       transform: rotate(45deg);
-
-      @include light-ui {
-        top: -.45rem;
-        background-color: $color__white;
-        border-top: 1px solid $color__gray-1;
-        border-left: 1px solid $color__gray-1;
-      }
     }
   }
 
@@ -75,52 +62,31 @@
     @include helvetica;
     @include font-size('14');
     width: 100%;
-    padding: .5rem 1.25rem;
-    font-weight: 200;
-    color: $color__white;
+    padding: .5rem 1rem;
+    font-weight: 400;
+    color: $text-01;
     text-align: left;
     cursor: pointer;
     background: none;
     border: none;
 
-    @include light-ui {
-      color: $color__blue-90;
-    }
-
     &:hover {
-      background: $color__blue-30;
-      color: $color__blue-90;
-
-      @include light-ui {
-        background: $color__blue-51;
-        color: $color__white;
-      }
+      background: $brand-01;
+      color: $inverse-01;
     }
 
     &--delete:hover {
-      background-color: $color__red-40;
-
-      @include light-ui {
-        background-color: $color__red-50;
-      }
+      background-color: $support-01;
     }
   }
 
   &__icon {
     height: 20px;
-    fill: $color__navy-gray-8;
-
-    @include light-ui {
-      fill: $color__navy-gray-7;
-    }
+    fill: $ui-05;
   }
 
   &:active,
   &.bx--overflow-menu--open {
-    .bx--overflow-menu__icon {
-      color: $color__white;
-    }
-
     .bx--overflow-menu__options {
       display: block;
     }
