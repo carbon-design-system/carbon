@@ -35,29 +35,33 @@ module.exports = function (config) {
     webpack: {
       devtool: 'inline-source-maps',
       module: {
-        loaders: [
+        rules: [
           {
             test: /\.js?$/,
             exclude: /node_modules/,
-            loader: 'babel',
-            query: {
-              presets: ['es2015', 'stage-1'],
-              plugins: [['transform-runtime', { polyfill: false }]].concat(cloptions.debug ? [] : [
-                [
-                  'istanbul',
-                  {
-                    include: [
-                      'src/components/**/*.js',
+            use: [
+              {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['es2015', 'stage-1'],
+                  plugins: [['transform-runtime', { polyfill: false }]].concat(cloptions.debug ? [] : [
+                    [
+                      'istanbul',
+                      {
+                        include: [
+                          'src/components/**/*.js',
+                        ],
+                      },
                     ],
-                  },
-                ],
-              ]),
-            },
+                  ]),
+                },
+              },
+            ],
           },
           {
             test: /\.html?$/,
             exclude: /node_modules/,
-            loaders: ['html'],
+            use: ['html-loader'],
           },
         ],
       },

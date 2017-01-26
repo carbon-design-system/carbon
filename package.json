@@ -75,7 +75,7 @@
     "karma-safari-launcher": "~0.1.1",
     "karma-sinon-chai": "^1.1.0",
     "karma-sourcemap-loader": "~0.3.7",
-    "karma-webpack": "~1.7.0",
+    "karma-webpack": "^2.0.0",
     "lolex": "1.4.0",
     "merge-stream": "^1.0.0",
     "minimist": "~1.2.0",
@@ -87,7 +87,7 @@
     "sinon-chai": "2.8.0",
     "svgxuse": "1.1.22",
     "validate-commit-msg": "^2.8.2",
-    "webpack": "~1.12.9"
+    "webpack": "^2.0.0"
   },
   "repository": {
     "type": "git"
