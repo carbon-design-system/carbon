@@ -176,6 +176,12 @@ export {
    * @type Accordion
    */
   Accordion,
+
+  /**
+   * Inline Left Navigation Menu.
+   * @type InlineLeftNav
+   */
+  InlineLeftNav,
 };
 
 /**
