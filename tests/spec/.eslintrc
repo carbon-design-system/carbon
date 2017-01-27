@@ -9,7 +9,7 @@
     "modules": true
   },
   "extends": [
-    "airbnb/base"
+    "airbnb-base"
   ],
   "globals": {
     "describe": true,
