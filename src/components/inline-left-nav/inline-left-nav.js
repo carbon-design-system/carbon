@@ -6,7 +6,7 @@ import '../../../demo/polyfills/element-matches';
 import '../../../demo/polyfills/object-assign';
 import '../../../demo/polyfills/custom-event';
 import toggleClass from '../../../demo/polyfills/toggle-class';
-import eventMatches from '../../../demo/polyfills/event-matches';
+import eventMatches from '../../globals/js/misc/event-matches';
 
 class InlineLeftNav extends mixin(createComponent, initComponentBySearch) {
   /**

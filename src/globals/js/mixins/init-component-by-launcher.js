@@ -1,4 +1,4 @@
-import eventMatches from '../../../../demo/polyfills/event-matches';
+import eventMatches from '../misc/event-matches';
 import on from '../misc/on';
 
 export default function (ToMix) {
