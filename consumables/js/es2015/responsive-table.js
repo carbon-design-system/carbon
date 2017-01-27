@@ -30,14 +30,13 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
     super(element, options);
 
     this.container = element.parentNode; // requires the immediate parent to be the container
-    this.expandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
-    this.expandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
-    this.parentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
+    this.expandCells = [];
+    this.expandableRows = [];
+    this.parentRows = [];
+    this.overflowInitialized = false;
 
-    this.zebraStripe();
-    this.initExpandableRows();
-    this.initOverflowMenus();
+    this.refreshRows();
 
     this.element.addEventListener('click', (evt) => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
@@ -80,8 +79,8 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
   /**
    * Zebra stripes - done in javascript to handle expandable rows
    */
-  zebraStripe = () => {
-    this.parentRows.forEach((item, index) => {
+  zebraStripe = (parentRows) => {
+    parentRows.forEach((item, index) => {
       if (index % 2 === 0) {
         item.classList.add(this.options.classParentRowEven);
         if (item.nextElementSibling && item.nextElementSibling.classList.contains(this.options.classExpandableRow)) {
@@ -94,8 +93,8 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
   /**
    * Find all expandable rows and remove them from the DOM
    */
-  initExpandableRows = () => {
-    this.expandableRows.forEach((item) => {
+  initExpandableRows = (expandableRows) => {
+    expandableRows.forEach((item) => {
       item.classList.remove(this.options.classExpandableRowHidden);
       this.tableBody.removeChild(item);
     });
@@ -106,15 +105,19 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
    * options outside of the table. This appends to the body and tags a resize
    * listener to reposition when needed
    */
-  initOverflowMenus = () => {
+  initOverflowMenus = (parentRows) => {
     if (!this.element.querySelector(this.options.selectorOverflowMenu)) {
       return false;
     }
 
-    const menuMap = [...this.element.querySelectorAll(this.options.selectorOverflowMenu)].map(menu => ({
-      element: menu,
-      optionMenu: menu.querySelector(this.options.selectorOverflowMenuOptions),
-    }));
+    const menuMap = parentRows.map((row) => {
+      const menu = row.querySelector(this.options.selectorOverflowMenu);
+
+      return {
+        element: menu,
+        optionMenu: menu.querySelector(this.options.selectorOverflowMenuOptions),
+      };
+    });
 
     optimizedResize.add(() => {
       menuMap.forEach((menu) => {
@@ -128,7 +131,11 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
       document.body.appendChild(menu.optionMenu);
     });
 
-    this.element.addEventListener('overflow-menu-shown', this.placeOverflow);
+    if (!this.overflowInitialized) {
+      this.element.addEventListener('overflow-menu-shown', this.placeOverflow);
+      this.overflowInitialized = true;
+    }
+
     return true;
   }
 
@@ -136,18 +143,33 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
    * When called, finds the position of the icon supplied and positions
    * the menu relative to that
    *
+   * MAGIC NUMBERS
+   * 38 = center of arrow position
+   * 5 = visual top nudge
    * Uses fixed because getBoundingClientRect is relative to viewport
    */
   placeOverflow = (evt) => {
+    const MAGIC = {
+      top: 5,
+      right: 38,
+    };
+
     const { element, optionMenu } = evt.detail;
 
     const icon = element.querySelector(this.options.selectorOverflowMenuIcon);
+    const elementHeight = element.offsetHeight;
     const position = icon.getBoundingClientRect();
+    const centerIcon = position.left + ((position.right - position.left) / 2);
+    const topCalc = `${(position.bottom + elementHeight + element.ownerDocument.defaultView.scrollY) - MAGIC.TOP}px`;
+    const rightCalc = `${document.documentElement.clientWidth - centerIcon - MAGIC.RIGHT}px`;
 
-    optionMenu.style.position = 'absolute';
-    optionMenu.style.top = `${position.top + element.ownerDocument.defaultView.scrollY}px`;
-    optionMenu.style.left = `${position.right}px`;
-    optionMenu.style.right = 'auto';
+    this.element.ownerDocument.defaultView.requestAnimationFrame(() => {
+      optionMenu.style.position = 'absolute';
+      optionMenu.style.top = topCalc;
+      optionMenu.style.left = 'auto';
+      optionMenu.style.right = rightCalc;
+      optionMenu.style.margin = 0;
+    });
   }
 
   /**
@@ -195,6 +217,43 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
       inputs.forEach((item) => { item.checked = false; }); // eslint-disable-line no-param-reassign
       element.dataset.previousValue = 'toggled';
     }
+  }
+
+  /**
+   * On fire, create the parent child rows + striping
+   */
+  refreshRows = () => {
+    const newExpandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
+    const newExpandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
+    const newParentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
+
+    // check if this is a refresh or the first time
+    if (this.parentRows.length > 0) {
+      const diffParentRows = newParentRows.filter(newRow => !this.parentRows.some(oldRow => oldRow === newRow));
+
+      // check if there are expandable rows
+      if (newExpandableRows.length > 0) {
+        const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
+        const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
+        this.initExpandableRows(diffExpandableRows);
+        this.expandableRows = mergedExpandableRows;
+      }
+
+      this.zebraStripe(newParentRows);
+      this.initOverflowMenus(diffParentRows);
+    } else {
+      this.zebraStripe(newParentRows);
+
+      if (newExpandableRows.length > 0) {
+        this.initExpandableRows(newExpandableRows);
+        this.expandableRows = newExpandableRows;
+      }
+
+      this.initOverflowMenus(newParentRows);
+    }
+
+    this.expandCells = newExpandCells;
+    this.parentRows = newParentRows;
   }
 
   static components = new WeakMap();

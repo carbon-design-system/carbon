@@ -6,204 +6,204 @@
 @import '../../import-once';
 
 @include exports('responsiveTables') {
-
-.bx--responsive-table-container {
-  @include reset;
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 100%;
-}
-
-.bx--responsive-table {
-  @include reset;
-  background-color: $color__navy-gray-3;
-  width: 100%;
-  min-width: 500px;
-
-  @include light-ui {
-    background-color: #fff;
-  }
-
-  td {
+  .bx--responsive-table-container {
     @include reset;
-    font-size: rem(14px);
-    padding: rem(9px);
-    vertical-align: middle;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
   }
 
-  th {
-    @include reset;
-    padding: rem(9px);
-    vertical-align: middle;
-  }
-
-  table {
+  .bx--responsive-table {
     @include reset;
     border-collapse: collapse;
     border-spacing: 0;
-    background-color: inherit;
-  }
-
-  &--tall {
-    td, th {
-      padding-top: rem(15px);
-      padding-bottom: rem(15px);
-    }
-  }
-
-  &--static-size {
-    @include reset;
-    border-collapse: collapse;
-    width: auto;
-  }
-}
-
-.bx--table-head {
-  @include reset;
-  border-bottom: 1px solid $color__blue-30;
-}
-
-.bx--table-header {
-  @include reset;
-  font-weight: 700;
-  font-size: rem(12px);
-  letter-spacing: 1px;
-  text-align: left;
-  text-transform: uppercase;
-}
-
-// zebra stripes
-.bx--table-body {
-  > .bx--parent-row,
-  > .bx--parent-row + .bx--expandable-row {
     background-color: $color__navy-gray-3;
+    width: 100%;
+    min-width: 500px;
 
     @include light-ui {
       background-color: #fff;
     }
 
-    &--even {
-      background-color: $color__blue-90;
+    td {
+      font-size: rem(14px);
+      padding: rem(9px);
+      vertical-align: middle;
+    }
+
+    th {
+      padding: rem(9px);
+      vertical-align: middle;
+    }
+
+    table {
+      @include reset;
+      border-collapse: collapse;
+      border-spacing: 0;
+      background-color: inherit;
 
       @include light-ui {
-        background-color: $color__gray-2;
+        background-color: inherit;
+      }
+    }
+
+    &--tall {
+      td, th {
+        padding-top: rem(15px);
+        padding-bottom: rem(15px);
+      }
+    }
+
+    &--static-size {
+      @include reset;
+      border-collapse: collapse;
+      width: auto;
+    }
+  }
+
+  .bx--table-head {
+    @include reset;
+    border-bottom: 1px solid $color__blue-30;
+  }
+
+  .bx--table-header {
+    @include reset;
+    font-weight: 700;
+    font-size: rem(12px);
+    letter-spacing: 1px;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  // zebra stripes
+  .bx--table-body {
+    > .bx--parent-row,
+    > .bx--parent-row + .bx--expandable-row {
+      background-color: $color__navy-gray-3;
+
+      @include light-ui {
+        background-color: #fff;
+      }
+
+      &--even {
+        background-color: $color__blue-90;
+
+        @include light-ui {
+          background-color: $color__gray-2;
+        }
       }
     }
   }
-}
 
-// expandable styles
-.bx--expandable-row {
-  > td {
-    border-left: 4px solid $color__blue-30;
-    padding: 2rem;
-  }
+  // expandable styles
+  .bx--expandable-row {
+    > td {
+      border-left: 4px solid $color__blue-30;
+      padding: 2rem;
+    }
 
-  &--hidden {
-    visibility: hidden;
-  }
-}
-
-// actions
-.bx--table-expand {
-  padding-left: rem(8px);
-  padding-right: rem(12px);
-  text-align: center;
-  width: rem(20px);
-  cursor: pointer;
-
-  &__svg {
-    fill: $color__navy-gray-8;
-    transform: rotate(0deg);
-    transition: transform 200ms $bx--standard-easing;
-
-    @include light-ui {
-      fill: $color__navy-gray-6;
+    &--hidden {
+      visibility: hidden;
     }
   }
 
-  &[data-previous-value="collapsed"] {
-    .bx--table-expand__svg {
-      transform: rotate(90deg);
-      transition: transform 200ms $bx--standard-easing;
-    }
-  }
-}
+  // actions
+  .bx--table-expand {
+    padding-left: rem(8px);
+    padding-right: rem(12px);
+    text-align: center;
+    width: rem(20px);
+    cursor: pointer;
 
-[data-event="sort"] {
-  cursor: pointer;
-}
-
-.bx--table-sort {
-  &__svg {
-    fill: $color__navy-gray-8;
-    width: 8px;
-    height: 8px;
-    transform: rotate(0deg);
-    transition: transform 200ms $bx--standard-easing;
-
-    @include light-ui {
-      fill: $color__navy-gray-6;
-    }
-  }
-
-  &--ascending {
-    .bx--table-sort__svg {
-      transform: rotate(180deg);
-      transition: transform 200ms $bx--standard-easing;
-    }
-  }
-}
-
-.bx--table-select {
-  @include reset;
-  width: rem(30px);
-  text-align: center;
-
-  .bx--checkbox__appearance {
-    margin: 0;
-  }
-
-  .bx--checkbox__label {
-    display: inline-flex;
-  }
-}
-
-.bx--table-overflow {
-  width: rem(40px);
-
-  .bx--overflow-menu {
-    @include reset;
-    margin: 0 auto;
-
-    &__icon {
+    &__svg {
       fill: $color__navy-gray-8;
+      transform: rotate(0deg);
+      transition: transform 200ms $bx--standard-easing;
 
       @include light-ui {
         fill: $color__navy-gray-6;
       }
     }
 
-    &__options {
-      right: -0.25rem;
+    &[data-previous-value="collapsed"] {
+      .bx--table-expand__svg {
+        transform: rotate(90deg);
+        transition: transform 200ms $bx--standard-easing;
+      }
+    }
+  }
 
-      &:before {
-        right: 0.7rem;
+  [data-event="sort"] {
+    cursor: pointer;
+  }
+
+  .bx--table-sort {
+    &__svg {
+      fill: $color__navy-gray-8;
+      width: 8px;
+      height: 8px;
+      transform: rotate(0deg);
+      transition: transform 200ms $bx--standard-easing;
+
+      @include light-ui {
+        fill: $color__navy-gray-6;
       }
     }
 
-    &:active {
-      .bx--overflow-menu__icon {
+    &--ascending {
+      .bx--table-sort__svg {
+        transform: rotate(180deg);
+        transition: transform 200ms $bx--standard-easing;
+      }
+    }
+  }
+
+  .bx--table-select {
+    @include reset;
+    width: rem(30px);
+    text-align: center;
+
+    .bx--checkbox__appearance {
+      margin: 0;
+    }
+
+    .bx--checkbox__label {
+      display: inline-flex;
+    }
+  }
+
+  .bx--table-overflow {
+    width: rem(40px);
+
+    .bx--overflow-menu {
+      @include reset;
+      margin: 0 auto;
+
+      &__icon {
+        fill: $color__navy-gray-8;
+
+        @include light-ui {
+          fill: $color__navy-gray-6;
+        }
+      }
+
+      &__options {
+        &:before {
+          right: 0.7rem;
+        }
+      }
+
+      &:active {
+        .bx--overflow-menu__icon {
+          border: 0;
+          box-shadow: none;
+        }
+      }
+
+      &.bx--overflow-menu--open .bx--overflow-menu__icon {
         border: 0;
         box-shadow: none;
       }
     }
-
-    &.bx--overflow-menu--open .bx--overflow-menu__icon {
-      border: 0;
-      box-shadow: none;
-    }
   }
-}
-
 }
