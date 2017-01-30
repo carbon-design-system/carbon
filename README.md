@@ -17,7 +17,7 @@ View available React Components [here](https://pages.github.ibm.com/Bluemix/blue
 
 Bluemix Components React is published on a private npm registry maintained by the Bluemix Ops Console team.
 
-1. You'll need to create a `.npmrc` file and authenticate to the Whitewater `npm` registry using [these instructions](https://github.ibm.com/Whitewater/npm-enterprise) Add the following to your `.npmrc` file in your project folder in order to access the Console registry:
+1. You'll need to create a `.npmrc` file in your project folder, or in your home directory, and add the following to it in order to access the Console registry:
 
   ```
   //dev-console-npm.stage1.ng.bluemix.net/:_authToken="u6vjQywpRv51/eKBiRcAFA=="
@@ -68,7 +68,7 @@ Please refer to the [Contribution Guidelines](CONTRIBUTING.md) before starting a
 
 ### Installation
 
-Follow the instructions for installing the `@console` npm modules as explained [above](#getting-started). Additionally, if you want to run [accessibility testing](#a11y-testing), see the instructions [here](https://github.ibm.com/Whitewater/npm-enterprise#option-2-using-npm-enterprise-for-private-packages-only) for installing [`@ibma/aat`](https://github.ibm.com/IBMa/Tools-Auto-Node/blob/master/src/README.md)
+Follow the instructions for installing the `@console` npm modules as explained [above](#getting-started). Additionally, you'll need to authenticate to the Whitewater `npm` instance in order to fetch the `@ibma` modules by following [these instructions](https://github.ibm.com/Whitewater/npm-enterprise#option-2-using-npm-enterprise-for-private-packages-only).
 
 ### Using the server
 
