@@ -13,7 +13,8 @@
     "test-a11y": "jest '/a11y/'",
     "build-storybook": "build-storybook -s .storybook -o .gh-pages/storybook",
     "gh-pages": "node scripts/gh-pages.js",
-    "build-es5": "babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js"
+    "build-es5": "babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
+    "commitmsg": "validate-commit-msg"
   },
   "keywords": [
     "react",
@@ -88,6 +89,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
     "css-loader": "0.23.1",
+    "cz-conventional-changelog-components": "^1.0.0",
     "enzyme": "^2.6.0",
     "eslint": "^2.13.1",
     "eslint-config-airbnb": "^9.0.1",
@@ -95,6 +97,7 @@
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
     "gh-pages": "0.11.0",
+    "husky": "^0.13.1",
     "jest": "^18.1.0",
     "lcov2badge": "^0.1.0",
     "node-sass": "3.8.0",
@@ -102,12 +105,25 @@
     "react-addons-test-utils": "^15.3.1",
     "sass-loader": "4.0.0",
     "shelljs": "^0.7.5",
-    "style-loader": "0.13.1"
+    "style-loader": "0.13.1",
+    "validate-commit-msg": "^2.10.1"
   },
   "jest": {
     "coverageDirectory": "./.gh-pages/coverage",
     "moduleNameMapper": {
       "^.+\\.(scss)$": "<rootDir>/lib/styleMock.js"
+    }
+  },
+  "config": {
+    "validate-commit-msg": {
+      "types": [ "feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert" ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "Subject does not match subject pattern!"
+    },
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-components"
     }
   }
 }
