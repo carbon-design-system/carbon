@@ -63,7 +63,7 @@
                   var launcher = (0, _eventMatches2.default)(event, '[' + effectiveOptions.attribInitTarget + ']');
 
                   if (launcher) {
-                    event.delegateTarget = launcher;
+                    event.delegateTarget = launcher; // eslint-disable-line
 
                     var elements = [].concat((0, _toConsumableArray3.default)(launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))));
                     if (elements.length > 1) {
