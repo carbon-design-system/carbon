@@ -56,13 +56,20 @@ describe('AccordionItem', () => {
 
   describe('Check that functions passed in as props are called', () => {
     const onClick = jest.fn();
+    const onHeadingClick = jest.fn();
     const wrapper = mount(
-      <AccordionItem onClick={onClick} />
+      <AccordionItem onClick={onClick} onHeadingClick={onHeadingClick} />
     );
+    const heading = wrapper.find('.bx--accordion__heading');
 
     it('should call onClick', () => {
       wrapper.simulate('click');
       expect(onClick).toBeCalled();
+    });
+
+    it('should call onHeadingClick', () => {
+      heading.simulate('click');
+      expect(onHeadingClick).toBeCalled();
     });
   });
 
@@ -72,10 +79,11 @@ describe('AccordionItem', () => {
         Lorem ipsum.
       </AccordionItem>
     );
+    const heading = toggler.find('.bx--accordion__heading');
 
     it('should set state to open when clicked', () => {
       expect(toggler.state().open).toBeUndefined();
-      toggler.simulate('click');
+      heading.simulate('click');
       expect(toggler.state().open).toEqual(true);
     });
   });

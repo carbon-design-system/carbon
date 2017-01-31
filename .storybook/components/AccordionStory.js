@@ -4,7 +4,7 @@ import Accordion from '../../components/Accordion';
 import AccordionItem from '../../components/AccordionItem';
 
 const props = {
-  onClick: ({ isOpen }) => { console.log(`Is open: ${isOpen}`); }, // eslint-disable-line no-console
+  onHeadingClick: ({ isOpen }) => { console.log(`Is open: ${isOpen}`); }, // eslint-disable-line no-console
 };
 
 storiesOf('Accordion', module)
