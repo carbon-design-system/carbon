@@ -122,7 +122,7 @@ module.exports = function (config) {
             // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
             // That said, new files should never be added, except for misc code that is very broser-specific
             '../src/components/accordion/accordion.js',
-            '../src/components/buttons/copy-btn.js',
+            '../src/components/copy-button/copy-button.js',
             '../src/components/detail-page-header/detail-page-header.js',
             '../src/components/inline-left-nav/inline-left-nav.js',
             '../src/components/pagination/pagination.js',

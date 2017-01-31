@@ -1,12 +1,3 @@
-$bx--ease-in: cubic-bezier(.25, 0, 1, 1); // Used primarily for removing elements from the screen.
-$bx--ease-out: cubic-bezier(0, 0, .25, 1); // Used for adding elements to the screen or changing on-screen states at a users's input.
-$bx--standard-easing: cubic-bezier(.5, 0, .1, 1); // Used for the majority of animations.
-$color__box-shadow: rgba(0, 0, 0, .1);
-$color__inputs--bg: rgba(255, 255, 255, .1);
-$color__inputs--bg--light-ui: rgba($color__blue-51, .1);
-$color__box-shadow: rgba(0, 0, 0, .1);
-$transition--base: 250ms;
-
 @mixin reset {
   // Main reset block for most elements:
   // http://cssreset.com/scripts/eric-meyer-reset-css/
@@ -99,5 +90,66 @@ $transition--base: 250ms;
 @mixin light-ui {
   .bx--global-light-ui & {
     @content;
+  }
+}
+
+@mixin button-base {
+  @include reset;
+  @include helvetica;
+  @include font-smoothing;
+  @include letter-spacing;
+  @include font-size('14');
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  height: rem(40px);
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: $transition--base;
+  transition-timing-function: ease-in;
+  white-space: nowrap;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+
+  &:focus {
+    @include focus-outline;
+  }
+
+  .bx--btn__icon {
+    width: rem(16px);
+    height: rem(16px);
+    margin-left: .5rem;
+    transition-duration: $transition--base;
+  }
+}
+
+@mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
+  background-color: $bg-color;
+  border: 2px solid $border-color;
+  color: $font-color;
+
+  &:hover,
+  &:focus {
+    background-color: $hover-bg-color;
+  }
+
+  &:disabled:hover,
+  &:disabled:focus {
+    background-color: $bg-color;
+  }
+
+  &:active {
+    background-color: darken($bg-color, 20%);
+  }
+
+  .bx--btn__icon {
+    fill: $icon-color;
   }
 }

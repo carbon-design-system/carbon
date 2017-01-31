@@ -3,12 +3,14 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/layer';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/helpers';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
 @import '../tabs/tabs';
 @import 'mixins';
-@import '../../globals/scss/import-once';
 
 @include exports('detail-page-header--with-tabs') {
 

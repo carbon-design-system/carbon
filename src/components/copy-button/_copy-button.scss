@@ -1,25 +1,20 @@
-//-----------------------------
-// Primary Button
-//-----------------------------
-
-@import '../../globals/scss/colors';
-@import '../../globals/scss/helpers';
-@import '../../globals/scss/typography';
+@import '../button/button';
 @import '../../globals/scss/import-once';
-@import 'mixins';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/colors';
 
-@include exports('button--copy') {
+@include exports('copy-button') {
 
-  // Copy Buttons
   .bx--btn--copy {
-    @include btn--primary;
+    display: inline-flex;
+    align-items: center;
     height: rem(32px);
     padding: 0 .55rem .125rem;
     position: relative;
     overflow: visible;
 
-    .bx--btn--right-icon__icon {
-      margin-top: rem(2px);
+    .bx--btn__icon {
       margin-left: rem(5px);
     }
   }

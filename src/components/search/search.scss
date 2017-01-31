@@ -4,8 +4,10 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/helpers';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 
 @include exports('search') {

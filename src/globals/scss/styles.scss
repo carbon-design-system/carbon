@@ -8,20 +8,22 @@ $css--body: true !default;
 $css--reset: false !default;
 
 @import 'colors';
-@import 'import-once';
-@import 'helpers';
+@import 'vars';
+@import 'mixins';
 @import 'layout';
+@import 'layer';
 @import 'typography';
+@import 'import-once';
 @import 'css--reset';
 @import 'css--font-face';
 @import 'css--helpers';
 @import 'css--body';
-@import 'layer';
 
 //-------------------------
 // 🍅 Base Elements
 //-------------------------
-@import '../../components/buttons/buttons';
+@import '../../components/button/button';
+@import '../../components/copy-button/copy-button';
 @import '../../components/file-uploader/file-uploader';
 @import '../../components/checkbox/checkbox';
 @import '../../components/radio/radio';

@@ -1,0 +1,8 @@
+$bx--ease-in: cubic-bezier(.25, 0, 1, 1); // Used primarily for removing elements from the screen.
+$bx--ease-out: cubic-bezier(0, 0, .25, 1); // Used for adding elements to the screen or changing on-screen states at a users's input.
+$bx--standard-easing: cubic-bezier(.5, 0, .1, 1); // Used for the majority of animations.
+$color__box-shadow: rgba(0, 0, 0, .1);
+$color__inputs--bg: rgba(255, 255, 255, .1);
+$color__inputs--bg--light-ui: rgba($color__blue-51, .1);
+$color__box-shadow: rgba(0, 0, 0, .1);
+$transition--base: 250ms;

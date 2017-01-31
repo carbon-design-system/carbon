@@ -26,7 +26,7 @@ import ProfileSwitcher from './src/components/unified-header/profile-switcher';
 import Pagination from './src/components/pagination/pagination';
 import SearchWithOptions from './src/components/search/search-with-options';
 import Accordion from './src/components/accordion/accordion';
-import CopyBtn from './src/components/buttons/copy-btn';
+import CopyButton from './src/components/copy-button/copy-button';
 
 const settings = {};
 
@@ -195,7 +195,7 @@ const init = () => {
     Pagination.init();
     SearchWithOptions.init();
     Accordion.init();
-    CopyBtn.init();
+    CopyButton.init();
   }
 };
 

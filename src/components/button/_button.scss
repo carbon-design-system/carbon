@@ -1,0 +1,102 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/import-once';
+
+@include exports('button') {
+
+  // <button> elements cannot be used as flex containers
+  button.bx--btn {
+    display: inline-block;
+  }
+  
+  // Reset intrisic padding in Firefox (see #731)
+  button.bx--btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  // Vertically center icon inside <button>
+  button.bx--btn .bx--btn__icon {
+    position: relative;
+    vertical-align: middle;
+    top: -1px;
+
+    // Targets IE10+ browsers: Reset <svg> position for vertical centering
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      top: 0;
+    }
+  }
+
+  .bx--btn {
+    @include button-base;
+  }
+
+  .bx--btn--primary {
+    @include button-theme(
+      $brand-01,   // bg-color
+      transparent, // border-color
+      $inverse-01, // font-color
+      $brand-02,   // hover-bg-color
+      $ui-01       // icon-color
+    );
+  }
+
+  .bx--btn--secondary {
+    @include button-theme(
+      transparent, // bg-color
+      $brand-01,   // border-color
+      $brand-01,   // font-color
+      $brand-01,   // hover-bg-color
+      currentColor // icon-color
+    );
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $brand-01;
+    }
+  }
+
+  .bx--btn--danger {
+    @include button-theme(
+      transparent,  // bg-color
+      currentColor, // border-color
+      $ui-05,       // font-color
+      $support-01,  // hover-bg-color
+      $ui-05        // icon-color
+    );
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+      border: 2px solid transparent;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $ui-05;
+      border: 2px solid currentColor;
+    }
+
+    &:hover > .bx--btn__icon,
+    &:focus > .bx--btn__icon {
+      fill: $inverse-01;
+    }
+  }
+
+  .bx--btn--sm {
+    height: 2rem;
+    padding: 0 .5rem;
+  }
+
+  .bx--btn--secondary + .bx--btn--primary {
+    margin-left: 1rem;
+  }
+}

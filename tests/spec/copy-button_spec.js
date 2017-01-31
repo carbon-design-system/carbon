@@ -1,12 +1,12 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import '../../demo/polyfills/custom-event';
-import CopyBtn from '../../src/components/buttons/copy-btn';
+import CopyButton from '../../src/components/copy-button/copy-button';
 
 const HTML = `
-<button data-copy-btn class="bx--btn--copy">
+<button data-copy-btn class="bx--btn bx--btn--primary bx--btn--copy">
   Copy
-  <svg class="bx--btn--right-icon__icon">
-    <use class="bx--btn--right-icon__use" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#copy--code"></use>
+  <svg class="bx--btn__icon">
+    <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#add--glyph"></use>
   </svg>
   <div class="bx--btn--copy__feedback" data-feedback="Copied!"></div>
 </button>
@@ -16,13 +16,13 @@ describe('Test Copy Button', function () {
   describe('Constructor', function () {
     it(`Should throw if root element is not given`, function () {
       expect(() => {
-        new CopyBtn();
+        new CopyButton();
       }).to.throw(Error);
     });
 
     it(`Should throw if root element is not a DOM element`, function () {
       expect(() => {
-        new CopyBtn(document.createTextNode(''));
+        new CopyButton(document.createTextNode(''));
       }).to.throw(Error);
     });
   });
@@ -39,7 +39,7 @@ describe('Test Copy Button', function () {
       document.body.appendChild(container);
       element = document.querySelector('[data-copy-btn]');
       feedbackTooltip = document.querySelector('[data-feedback]');
-      copyBtn = new CopyBtn(element);
+      copyBtn = new CopyButton(element);
     });
 
     it(`Should not show the feedback tooltip before click`, function () {

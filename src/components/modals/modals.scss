@@ -2,7 +2,14 @@
 // Modals
 //-----------------------------
 
-@import '../buttons/buttons';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+@import '../button/button';
 @import '../checkbox/checkbox';
 @import '../file-uploader/file-uploader';
 @import '../radio/radio';
@@ -10,11 +17,6 @@
 @import '../select/select';
 @import '../text/text';
 @import '../textarea/textarea';
-@import '../../globals/scss/colors';
-@import '../../globals/scss/helpers';
-@import '../../globals/scss/layout';
-@import '../../globals/scss/typography';
-@import '../../globals/scss/import-once';
 
 @include exports('modals') {
 
@@ -56,7 +58,6 @@
     background: $color__navy-gray-8;
 
     .bx--btn--secondary {
-      @include btn--secondary($color__navy-gray-6);
       color: $color__navy-gray-6;
       margin-right: 1rem;
 

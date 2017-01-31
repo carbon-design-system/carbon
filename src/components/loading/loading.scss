@@ -2,10 +2,11 @@ $loading__gap: 40;
 $loading__size: rem(168px);
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/helpers';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/import-once';
 @import 'keyframes';
 @import 'mixins';
-@import '../../globals/scss/import-once';
 
 @include exports('loading') {
 

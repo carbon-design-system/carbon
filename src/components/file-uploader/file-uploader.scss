@@ -2,7 +2,10 @@
 // File Uploader
 //-----------------------------
 
-@import '../buttons/buttons';
+@import '../button/button';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/mixins';
 @import '../../globals/scss/import-once';
 
 @include exports('file-uploader') {
@@ -41,7 +44,6 @@
   }
 
   .bx--file-uploader__label {
-    @include btn--secondary;
     display: inline-flex;
     margin: 0;
   }

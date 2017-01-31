@@ -3,10 +3,11 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/helpers';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
-@import '../buttons/buttons';
+@import '../button/button';
 @import '../checkbox/checkbox';
 @import '../text/text';
 
