@@ -1,10 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/custom-event';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
 
 class NumberInput extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -17,9 +13,9 @@ class NumberInput extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
     this.options.ie = this.options.ie || 'ActiveXObject' in window;
     // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
-    // Also <svg> does not seems to have `Element.classList`.
-    this.element.querySelector('.bx--number__arrow--up').addEventListener('click', (event) => { this.handleClick(event); });
-    this.element.querySelector('.bx--number__arrow--down').addEventListener('click', (event) => { this.handleClick(event); });
+    // <svg> does not have `Element.classList` in IE11
+    this.element.querySelector('.up-icon').addEventListener('click', (event) => { this.handleClick(event); });
+    this.element.querySelector('.down-icon').addEventListener('click', (event) => { this.handleClick(event); });
   }
 
   /**
@@ -27,20 +23,18 @@ class NumberInput extends mixin(createComponent, initComponentBySearch) {
    * @param {Event} event The event triggering this method.
    */
   handleClick(event) {
-    const state = event.currentTarget.classList;
-    const numberInput = this.element.querySelector('.bx--number__input');
+    const numberInput = this.element.querySelector('.bx--number input');
+    const target = event.currentTarget.getAttribute('class').split(' ');
 
-    if (state.contains('bx--number__arrow--up')) {
+    if (target.indexOf('up-icon') >= 0) {
       if (this.options.ie) {
         ++numberInput.value;
       } else {
         numberInput.stepUp();
       }
-    } else if (state.contains('bx--number__arrow--down')) {
-      if (this.options.ie) {
-        if (numberInput.value > 0) {
-          --numberInput.value;
-        }
+    } else if (target.indexOf('down-icon') >= 0) {
+      if (this.options.ie || numberInput.value > 0) {
+        --numberInput.value;
       } else {
         numberInput.stepDown();
       }

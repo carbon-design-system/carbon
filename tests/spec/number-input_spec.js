@@ -6,19 +6,17 @@ import NumberInput from '../../src/components/number-input/number-input';
 
 const HTML = `
   <div data-numberinput class="bx--number">
-    <label for="numberinput-id" class="bx--form__label">Number input</label>
-    <input id="numberinput-id" type="number" pattern="[0-9]*" step="1" min="0" max="10" value="0" class="bx--number__input" />
-    <span class="bx--number__arrow--up">
-      <svg class="icon--up">
-        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--up"></use>
+    <input type="number" min="0" max="100" value="1">
+    <div class="bx--number__icon-wrapper">
+      <svg class="up-icon">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--up"></use>
       </svg>
-    </span>
-    <span class="bx--number__arrow--down">
-      <svg class="icon--down">
-        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--down"></use>
+      <svg class="down-icon">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--down"></use>
       </svg>
-    </span>
-  </div>`;
+    </div>
+  </div>
+`;
 
 describe('Test Number Input', function () {
   describe('Constructor', function () {
@@ -53,7 +51,7 @@ describe('Test Number Input', function () {
     });
 
     it(`Should increase the value`, async function () {
-      const upArrowNode = document.querySelector('.bx--number__arrow--up');
+      const upArrowNode = document.querySelector('.up-icon');
       const e = await new Promise((resolve) => {
         events.on(document.body, 'change', resolve);
         upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -63,7 +61,7 @@ describe('Test Number Input', function () {
     });
 
     it(`Should decrease the value`, async function () {
-      const downArrowNode = document.querySelector('.bx--number__arrow--down');
+      const downArrowNode = document.querySelector('.down-icon');
       inputNode.value = '1';
       const e = await new Promise((resolve) => {
         events.on(document.body, 'change', resolve);

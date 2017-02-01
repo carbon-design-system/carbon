@@ -1,0 +1,78 @@
+//-----------------------------
+// Number Input
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+
+@include exports('number-input') {
+  .bx--number {
+    @include reset;
+    display: flex;
+  }
+
+  .bx--number input[type="number"] {
+    @include font-size('14');
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 100%;
+    min-width: 9.375rem;
+    padding-left: 1rem;
+    font-weight: 300;
+    margin: .25rem 0;
+    height: rem(40px);
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+  }
+
+  .bx--number input[type="number"] {
+    appearance: textfield; // Firefox: Hide spinner (up and down buttons)
+
+    &::-ms-clear {
+      display: none; // IE: Hide "clear-field" `x` button on input field
+    }
+
+    &::-webkit-inner-spin-button {
+      appearance: none; // Safari: Hide number spinner
+    }
+  }
+
+  .bx--number__controls {
+    @include reset;
+    position: relative;
+    display: block;
+    left: -1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bx--number__controls .up-icon,
+  .bx--number__controls .down-icon {
+    fill: $brand-01;
+    width: rem(10px);
+    height: rem(5px);
+    padding-left: .55rem;
+    padding-right: .55rem;
+
+    &:hover {
+      cursor: pointer;
+      fill: $brand-02;
+    }
+  }
+
+  .bx--number__controls .down-icon {
+    padding-bottom: 12px;
+  }
+
+  .bx--number__controls .up-icon {
+    margin-bottom: 6px;
+    padding-top: 12px;
+  }
+}
