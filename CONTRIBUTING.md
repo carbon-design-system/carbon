@@ -7,6 +7,7 @@ Want to contribute to this repository? Please read below first:
  - [Doc Fixes](#doc-fixes)
  - [Submission Guidelines](#submission-guidelines)
  - [Coding Standards](#coding-standards)
+ - [Commit Message Guidelines](#commit-message-guidlines)
  - [Testing](#testing)
 
 ## Issues and Bugs
@@ -124,6 +125,13 @@ We enforce some style rules for code in this repository using [eslint](http://es
 
 If you decide to not install a linter addon, or cannot, you can run `npm run lint` to get a report of any style issues. Any issues not fixed will be caught during CI, and will prevent merging.
 
+## Commit Message Guidelines
+
+We use commit message guidelines based on the [Angular Commit Conventions](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit), using `Commitizen` as a CLI wizard to walk developers through writing their commit message.  
+
+This CLI wizard can either be installed by the developer to the global `npm` scope by running `npm i -g commitizen`, or it can be used as a dev dependency on this project by running `npm run commit`.
+
+After the commit message has been submitted, it is checked by [`husky`](https://www.npmjs.com/package/husky) and [`validate-commit-msg`](https://www.npmjs.com/package/validate-commit-msg) to ensure it is syntactically correct.
 
 ## Testing
 
