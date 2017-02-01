@@ -7,7 +7,7 @@
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
-@import '../forms/forms';
+@import '../form/form';
 
 @include exports('select') {
 

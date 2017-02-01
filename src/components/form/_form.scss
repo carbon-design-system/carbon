@@ -1,0 +1,52 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+
+@include exports('form') {
+  .bx--form-item {
+    flex: 1;
+    margin-right: 1rem;
+    margin-bottom: 1.5rem;
+
+    &:last-of-type {
+      margin-right: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .bx--label {
+    @include reset;
+    @include font-size('14');
+    @include letter-spacing;
+    font-weight: 700;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
+  input[data-invalid],
+  select[data-invalid],
+  textarea[data-invalid]  {
+    box-shadow: 0 2px 0px 0px $support-01;
+
+    ~ .bx--form-requirement {
+      max-height: rem(200px);
+    }
+  }
+
+  .bx--form-requirement {
+    @include reset;
+    @include font-size('11');
+    margin: .75rem 0 0;
+    max-height: 0;
+    overflow: hidden;
+    font-weight: 700;
+    line-height: 1.5;
+
+    &::before {
+      content: '*';
+      display: inline-block;
+      color: $support-01;
+    }
+  }
+}
