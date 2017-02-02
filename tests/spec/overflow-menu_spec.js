@@ -1,9 +1,9 @@
+import { delay } from 'bluebird';
 import '../../demo/polyfills/custom-event';
 import '../../demo/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import OverflowMenu from '../../src/components/overflow-menu/overflow-menu';
-import { delay } from 'bluebird';
 
 const HTML = `
   <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
@@ -23,13 +23,13 @@ const HTML = `
 
 describe('Test Overflow menu', function () {
   describe('Constructor', function () {
-    it(`Should throw if root element is not given`, function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new OverflowMenu();
       }).to.throw(Error);
     });
 
-    it(`Should throw if root element is not a DOM element`, function () {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new OverflowMenu(document.createTextNode(''));
       }).to.throw(Error);
@@ -48,7 +48,7 @@ describe('Test Overflow menu', function () {
       menu = new OverflowMenu(element);
     });
 
-    it(`Should set and remove "bx--overflow-menu--open" class on the element on click event`, function () {
+    it('Should set and remove "bx--overflow-menu--open" class on the element on click event', function () {
       // Initial click to open overflow-menu:
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.classList.contains('bx--overflow-menu--open')).to.be.true;
@@ -58,7 +58,7 @@ describe('Test Overflow menu', function () {
       expect(element.classList.contains('bx--overflow-menu--open')).to.be.false;
     });
 
-    it(`Should set and remove "bx--overflow-menu--open" class on the options menu`, function () {
+    it('Should set and remove "bx--overflow-menu--open" class on the options menu', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menu.optionMenu.classList.contains('bx--overflow-menu--open')).to.be.true;
 
@@ -112,7 +112,7 @@ describe('Test Overflow menu', function () {
       expect(spyOverflowEvent).to.have.been.called;
     });
 
-    it(`Should provide a way to cancel hiding overflow menu`, function () {
+    it('Should provide a way to cancel hiding overflow menu', function () {
       const spyOverflowEvent = sinon.spy();
       events.on(element.ownerDocument.body, 'overflow-menu-beinghidden', (e) => {
         e.preventDefault();
@@ -156,7 +156,7 @@ describe('Test Overflow menu', function () {
 
     before(function () {
       document.body.appendChild(container);
-      elements = [... document.querySelectorAll('[data-overflow-menu]')];
+      elements = [...document.querySelectorAll('[data-overflow-menu]')];
       element1 = elements[0];
       element2 = elements[1];
       element3 = elements[2];

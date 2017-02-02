@@ -7,19 +7,19 @@ describe('Test inline left nav', function () {
   describe('Constructor', function () {
     let inlineLeftNav;
 
-    it(`Should throw if root element is not given`, function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         inlineLeftNav = new InlineLeftNav();
       }).to.throw(Error);
     });
 
-    it(`Should throw if root element is not a DOM element`, function () {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         inlineLeftNav = new InlineLeftNav(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it(`Should set default options`, function () {
+    it('Should set default options', function () {
       const container = document.createElement('div');
       container.innerHTML = inlineLeftNavHtml;
       expect((inlineLeftNav = new InlineLeftNav(container.querySelector('[data-inline-left-nav]'))).options).to.deep.equal({

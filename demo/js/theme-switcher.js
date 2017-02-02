@@ -7,7 +7,7 @@ export default class ThemeSwitcher {
 
     this.element = element;
     this.constructor.components.set(this.element, this);
-    this.element.addEventListener('click', (event) => this.handleClick(event));
+    this.element.addEventListener('click', event => this.handleClick(event));
   }
 
   static create(element) {
@@ -21,7 +21,7 @@ export default class ThemeSwitcher {
     if (target.nodeType === Node.ELEMENT_NODE && target.dataset.numberinput !== undefined) {
       this.create(target);
     } else {
-      [... target.querySelectorAll('[data-theme-switcher]')].forEach(element => this.create(element));
+      [...target.querySelectorAll('[data-theme-switcher]')].forEach(element => this.create(element));
     }
   }
 

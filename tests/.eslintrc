@@ -1,15 +1,5 @@
 {
   "root": false,
-  "env": {
-    "browser": false,
-    "es6": false
-  },
-  "ecmaFeatures": {
-    "modules": false
-  },
-  "extends": [
-    "airbnb/legacy"
-  ],
   "rules": {
     "func-names": 0,
     "no-var": 0,

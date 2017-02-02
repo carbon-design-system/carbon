@@ -4,13 +4,13 @@ import LeftNav from '../../src/components/unified-header/left-nav';
 
 describe('Test Left Navigation', function () {
   describe('Constructor', function () {
-    it(`Should throw if root element is not given`, function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new LeftNav();
       }).to.throw(Error);
     });
 
-    it(`Should throw if root element is not a DOM element`, function () {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new LeftNav(document.createTextNode(''));
       }).to.throw(Error);
@@ -52,18 +52,18 @@ describe('Test Left Navigation', function () {
 //       document.body.appendChild(element);
 //     });
 
-//     it(`Should show the left navigation when the toggle button is clicked`, function () {
+//     it('Should show the left navigation when the toggle button is clicked', function () {
 //       leftNavToggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 //       expect(leftNavList.classList.contains('left-nav--active')).to.be.true;
 //     });
 
-//     it(`Should hide the left navigation when the document is clicked outside the left navigation`, function () {
+//     it('Should hide the left navigation when the document is clicked outside the left navigation', function () {
 //       leftNavList.classList.add('left-nav--active');
 //       document.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 //       expect(leftNavList.classList.contains('left-nav--active')).to.be.false;
 //     });
 
-//     // it(`Should remove click event listener on document object once the instance is released`, function () {
+//     // it('Should remove click event listener on document object once the instance is released', function () {
 //     //   leftNavList.classList.add('left-nav--active');
 //     //   leftNav.release();
 //     //   console.log(leftNavList);

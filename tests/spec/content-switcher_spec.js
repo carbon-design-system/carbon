@@ -1,13 +1,12 @@
+import Promise, { promisify } from 'bluebird'; // For testing on browsers not supporting Promise
 import '../../demo/polyfills/custom-event';
-import Promise from 'bluebird'; // For testing on browsers not supporting Promise
-import { promisify } from 'bluebird';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import ContentSwitcher from '../../src/components/content-switcher/content-switcher';
 
 describe('Test content switcher', function () {
   describe('Constructor', function () {
-    it(`Should set default options`, function () {
+    it('Should set default options', function () {
       const contentSwitcher = new ContentSwitcher(document.createElement('div'));
       expect(contentSwitcher.options).to.deep.equal({
         selectorInit: '[data-content-switcher]',
@@ -32,7 +31,7 @@ describe('Test content switcher', function () {
     before(function () {
       element = document.createElement('div');
 
-      buttonNodes = [... new Array(2)].map((item, i) => {
+      buttonNodes = [...new Array(2)].map((item, i) => {
         const buttonNode = document.createElement('input');
         buttonNode.type = 'radio';
         buttonNode.value = i;
@@ -42,14 +41,15 @@ describe('Test content switcher', function () {
         return element.appendChild(buttonNode);
       });
 
+      // eslint-disable-next-line arrow-body-style
       (paneNodes = buttonNodes.map((buttonNode, i) => {
-        return [... new Array(2)].map(() => {
+        return [...new Array(2)].map(() => {
           const paneNode = document.createElement('div');
           paneNode.className = `${id}_${i}`;
           return paneNode;
         });
       })).forEach((nodes) => {
-        nodes.forEach((node) => document.body.appendChild(node));
+        nodes.forEach((node) => { document.body.appendChild(node); });
       });
 
       document.body.appendChild(element);
@@ -62,7 +62,7 @@ describe('Test content switcher', function () {
       });
     });
 
-    it(`Should update active item upon clicking`, async function () {
+    it('Should update active item upon clicking', async function () {
       const eventAfterSelected = await new Promise((resolve) => {
         events.on(element, 'content-switcher-selected', resolve);
         buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -72,14 +72,14 @@ describe('Test content switcher', function () {
       expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
     });
 
-    it(`Should update active item upon an API call`, async function () {
+    it('Should update active item upon an API call', async function () {
       const item = await promisify(contentSwitcher.setActive, { context: contentSwitcher })(buttonNodes[1]);
       expect(item).to.equal(buttonNodes[1]);
       expect(buttonNodes[0].classList.contains('bx--content-switcher--selected')).to.be.false;
       expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.true;
     });
 
-    it(`Should provide a way to cancel switching item upon clicking`, async function () {
+    it('Should provide a way to cancel switching item upon clicking', async function () {
       const eventBeforeSelected = await new Promise((resolve) => {
         events.on(element, 'content-switcher-beingselected', (event) => {
           event.preventDefault();
@@ -92,7 +92,7 @@ describe('Test content switcher', function () {
       expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
 
-    it(`Should provide a way to cancel switching item upon an API call`, async function () {
+    it('Should provide a way to cancel switching item upon an API call', async function () {
       let errorBeforeSelected;
       let eventBeforeSelected;
       events.on(element, 'content-switcher-beingselected', (event) => {
@@ -111,7 +111,7 @@ describe('Test content switcher', function () {
       expect(buttonNodes[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
 
-    it(`Should select target pane`, function () {
+    it('Should select target pane', function () {
       try {
         buttonNodes[0].dataset.target = `.${id}_0`;
         buttonNodes[1].dataset.target = `.${id}_1`;
@@ -123,7 +123,8 @@ describe('Test content switcher', function () {
           expect(node.getAttribute('hidden'), 'hidden of selected item').to.not.exist;
         });
       } finally {
-        buttonNodes.forEach((buttonNode) => buttonNode.dataset.target = undefined);
+        // eslint-disable-next-line no-param-reassign
+        buttonNodes.forEach((buttonNode) => { buttonNode.dataset.target = undefined; });
       }
     });
 
@@ -133,7 +134,7 @@ describe('Test content switcher', function () {
 
     after(function () {
       contentSwitcher.release();
-      paneNodes.forEach((nodes) => nodes.forEach((node) => document.body.removeChild(node)));
+      paneNodes.forEach((nodes) => { nodes.forEach((node) => { document.body.removeChild(node); }); });
       document.body.removeChild(element);
     });
   });
@@ -147,7 +148,7 @@ describe('Test content switcher', function () {
 
       document.body.appendChild(element);
 
-      linkNodes = [... new Array(2)].map(() => {
+      linkNodes = [...new Array(2)].map(() => {
         const buttonNode = document.createElement('button');
         const linkNode = document.createElement('a');
         buttonNode.appendChild(linkNode);
@@ -161,7 +162,7 @@ describe('Test content switcher', function () {
       });
     });
 
-    it(`Should update active item upon clicking`, function () {
+    it('Should update active item upon clicking', function () {
       linkNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(linkNodes[0].getAttribute('aria-selected')).to.equal('false');
       expect(linkNodes[1].getAttribute('aria-selected')).to.equal('true');

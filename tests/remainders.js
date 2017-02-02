@@ -1,4 +1,6 @@
-import './utils/es6-weak-map-global'; // For PhantomJS
+'use strict';
+
+require('./utils/es6-weak-map-global'); // For PhantomJS
 
 // Ref: https://github.com/karma-runner/karma-coverage/issues/125#issuecomment-241229152
 [

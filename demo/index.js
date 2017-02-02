@@ -1,6 +1,7 @@
-export * from '../index';
 import ThemeSwitcher from './js/theme-switcher';
 import DemoSwitcher from './js/demo-switcher';
+
+export * from '../index';
 
 const init = () => {
   ThemeSwitcher.init();

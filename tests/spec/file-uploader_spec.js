@@ -173,7 +173,7 @@ describe('File Uploader', function () {
       expect(foo).to.deep.equal({
         state: 'edit',
         selector: `[data-for=${instance.uniqueStateContainerID}]`,
-        stateContainers: [... element.ownerDocument.querySelectorAll(`[data-for=${instance.uniqueStateContainerID}]`)],
+        stateContainers: [...element.ownerDocument.querySelectorAll(`[data-for=${instance.uniqueStateContainerID}]`)],
       });
     });
 

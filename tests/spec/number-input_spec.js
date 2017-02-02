@@ -1,6 +1,6 @@
+import Promise from 'bluebird'; // For testing on browsers not supporting Promise
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import '../../demo/polyfills/custom-event';
-import Promise from 'bluebird'; // For testing on browsers not supporting Promise
 import EventManager from '../utils/event-manager';
 import NumberInput from '../../src/components/number-input/number-input';
 
@@ -9,10 +9,12 @@ const HTML = `
     <input type="number" min="0" max="100" value="1">
     <div class="bx--number__icon-wrapper">
       <svg class="up-icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--up"></use>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+         xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--up"></use>
       </svg>
       <svg class="down-icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--down"></use>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+         xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--down"></use>
       </svg>
     </div>
   </div>
@@ -20,13 +22,13 @@ const HTML = `
 
 describe('Test Number Input', function () {
   describe('Constructor', function () {
-    it(`Should throw if root element is not given`, function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new NumberInput();
       }).to.throw(Error);
     });
 
-    it(`Should throw if root element is not a DOM element`, function () {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new NumberInput(document.createTextNode(''));
       }).to.throw(Error);
@@ -50,7 +52,7 @@ describe('Test Number Input', function () {
       inputNode.value = '0';
     });
 
-    it(`Should increase the value`, async function () {
+    it('Should increase the value', async function () {
       const upArrowNode = document.querySelector('.up-icon');
       const e = await new Promise((resolve) => {
         events.on(document.body, 'change', resolve);
@@ -60,7 +62,7 @@ describe('Test Number Input', function () {
       expect(inputNode.value).to.equal('1');
     });
 
-    it(`Should decrease the value`, async function () {
+    it('Should decrease the value', async function () {
       const downArrowNode = document.querySelector('.down-icon');
       inputNode.value = '1';
       const e = await new Promise((resolve) => {

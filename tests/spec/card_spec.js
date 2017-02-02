@@ -4,19 +4,19 @@ import Card from '../../src/components/card/card';
 
 describe('Test card', function () {
   describe('Constructor', function () {
-    it(`Should throw if root element is not given`, function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new Card();
       }).to.throw(Error);
     });
 
-    it(`Should throw if root element is not a DOM element`, function () {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new Card(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it(`Should set default options`, function () {
+    it('Should set default options', function () {
       const cardlist = new Card(document.createElement('div'));
       expect(cardlist.options).to.deep.equal({
         selectorInit: '[data-card-list]',
@@ -32,7 +32,7 @@ describe('Test card', function () {
 
     before(function () {
       element = document.createElement('div');
-      cardNodes = [... new Array(2)].map(() => {
+      cardNodes = [...new Array(2)].map(() => {
         const cardNode = document.createElement('div');
         cardNode.classList.add('bx--card');
         cardNode.tabIndex = 0;
@@ -46,32 +46,32 @@ describe('Test card', function () {
       cardNodes[0].focus();
     });
 
-    it(`Should focus on the new active card upon right key with old spec`, function () {
+    it('Should focus on the new active card upon right key with old spec', function () {
       spyFocus = sinon.spy(cardNodes[1], 'focus');
       cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { keyIdentifier: 'Right' }));
       expect(spyFocus).to.be.calledOnce;
     });
 
-    it(`Should focus on the new active card upon right key with new spec`, function () {
+    it('Should focus on the new active card upon right key with new spec', function () {
       spyFocus = sinon.spy(cardNodes[1], 'focus');
       cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { key: 'ArrowRight' }));
       expect(spyFocus).to.be.calledOnce;
     });
 
-    it(`Should handle out of range index`, function () {
+    it('Should handle out of range index', function () {
       cardNodes[1].focus();
       spyFocus = sinon.spy(cardNodes[0], 'focus');
       cardNodes[1].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { key: 'ArrowRight' }));
       expect(spyFocus).to.be.calledOnce;
     });
 
-    it(`Should focus on the new active card upon left key with old spec`, function () {
+    it('Should focus on the new active card upon left key with old spec', function () {
       spyFocus = sinon.spy(cardNodes[1], 'focus');
       cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { keyIdentifier: 'Left' }));
       expect(spyFocus).to.be.calledOnce;
     });
 
-    it(`Should focus on the new active card upon left key with new spec`, function () {
+    it('Should focus on the new active card upon left key with new spec', function () {
       spyFocus = sinon.spy(cardNodes[1], 'focus');
       cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { key: 'ArrowLeft' }));
       expect(spyFocus).to.be.calledOnce;

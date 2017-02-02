@@ -5,6 +5,7 @@ const Promise = require('bluebird');
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+
 const app = express();
 const adaro = require('adaro');
 
@@ -15,8 +16,8 @@ const htmlFiles = {
   all: [
     'src/components/**/*.html',
     '!src/components/unified-header/*.html',
-    '!src/components/inline-left-nav/*.html'
-  ]
+    '!src/components/inline-left-nav/*.html',
+  ],
 };
 
 const directoryOrder = [
@@ -32,49 +33,40 @@ app.use(express.static('demo'));
 app.use(express.static('src'));
 app.use('/docs/js', express.static('docs/js'));
 
-const getContent = (glob) => {
-  return globby(glob)
-    .then(paths => {
+const getContent = glob =>
+  globby(glob)
+    .then((paths) => { // eslint-disable-line arrow-body-style
       return paths.length === 0 ? undefined : paths
-        .map(file => {
-          return fs.readFileSync(file, { 'encoding': 'utf8' });
-        })
-        .reduce((a, b) => {
-          return a.concat(b);
-        });
+        .map(file => fs.readFileSync(file, { encoding: 'utf8' }))
+        .reduce((a, b) => a.concat(b));
     });
-}
 
 const allLinks = globby(directoryOrder)
-  .then(paths => {
+  .then((paths) => { // eslint-disable-line arrow-body-style
     return paths
-      .map(path => {
+      .map((filePath) => {
         const indices = [];
-        for (let i = 0; i < path.length; i++) {
-          if (path[i] === '/') {
+        for (let i = 0; i < filePath.length; i++) {
+          if (filePath[i] === '/') {
             indices.push(i);
           }
         }
-        return path.slice(0, indices[1]);
+        return filePath.slice(0, indices[1]);
       })
-      .filter((path, index, paths) => {
-        return paths.indexOf(path) === index;
-      })
-      .map(path => {
-        return {
-          url: path
-        }
-      })
+      .filter((filePath, index, a) => a.indexOf(filePath) === index)
+      .map(filePath => ({
+        url: filePath,
+      }));
   });
 
 
 app.get('/', (req, res) => {
   Promise.all([
-    getContent(htmlFiles.all)
+    getContent(htmlFiles.all),
   ])
-  .then(results => {
+  .then((results) => {
     res.render('demo-all', {
-      html: results[0]
+      html: results[0],
     });
   })
   .catch((error) => {
@@ -90,12 +82,12 @@ app.get('/components/:component', (req, res) => {
     res.status(404).end();
   } else {
     Promise.all([getContent(glob), allLinks])
-      .then(results => {
+      .then((results) => {
         if (typeof results[0] === 'undefined') {
           res.status(404).end();
         } else {
           res.render('demo-all', {
-            html: results[0]
+            html: results[0],
           });
         }
       })
@@ -107,5 +99,5 @@ app.get('/components/:component', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Listening on port: ${port}`);
+  console.log(`Listening on port: ${port}`); // eslint-disable-line no-console
 });

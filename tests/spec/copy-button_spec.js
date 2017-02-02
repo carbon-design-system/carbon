@@ -14,13 +14,13 @@ const HTML = `
 
 describe('Test Copy Button', function () {
   describe('Constructor', function () {
-    it(`Should throw if root element is not given`, function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new CopyButton();
       }).to.throw(Error);
     });
 
-    it(`Should throw if root element is not a DOM element`, function () {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new CopyButton(document.createTextNode(''));
       }).to.throw(Error);
@@ -42,16 +42,16 @@ describe('Test Copy Button', function () {
       copyBtn = new CopyButton(element);
     });
 
-    it(`Should not show the feedback tooltip before click`, function () {
+    it('Should not show the feedback tooltip before click', function () {
       expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
     });
 
-    it(`Should show the feedback tooltip on click`, function () {
+    it('Should show the feedback tooltip on click', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
     });
 
-    it(`Should hide the feedback tooltip after specified timeout value`, function () {
+    it('Should hide the feedback tooltip after specified timeout value', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
       setTimeout(() => {

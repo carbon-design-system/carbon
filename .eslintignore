@@ -1,5 +1,5 @@
-**/gulpfile.js
-**/server.js
 **/examples/*
+**/coverage/*
 dist
+demo/demo.js
 node_modules

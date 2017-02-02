@@ -1,6 +1,10 @@
 {
   "root": true,
   "parser": "babel-eslint",
+  "parserOptions" : {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+  },
   "env": {
     "browser": true,
     "es6": true
@@ -9,7 +13,7 @@
     "modules": true
   },
   "extends": [
-    "airbnb/base"
+    "airbnb-base"
   ],
   "globals": {
     "describe": true,
@@ -22,8 +26,10 @@
     "sinon": true
   },
   "rules": {
+    "max-len": [2, 130, 4],
     "func-names": 0,
     "no-new": 0,
+    "no-underscore-dangle": 0,
     "no-unused-expressions": 0,
     "prefer-arrow-callback": 0
   }

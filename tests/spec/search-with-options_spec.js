@@ -7,19 +7,19 @@ describe('Test search with options', function () {
   describe('Constructor', function () {
     let searchWithOptions;
 
-    it(`Should throw if root element is not given`, function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         searchWithOptions = new SearchWithOptions();
       }).to.throw(Error);
     });
 
-    it(`Should throw if root element is not a DOM element`, function () {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         searchWithOptions = new SearchWithOptions(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it(`Should set default options`, function () {
+    it('Should set default options', function () {
       const container = document.createElement('div');
       container.innerHTML = searchWithOptionsHtml;
       expect(new SearchWithOptions(container.querySelector('[data-search-with-options]')).options).to.deep.equal({

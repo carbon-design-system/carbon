@@ -1,3 +1,4 @@
+// eslint-disable-next-line consistent-return
 const missingNativeCustomEvent = (() => {
   try {
     new CustomEvent('test-event'); // eslint-disable-line no-new

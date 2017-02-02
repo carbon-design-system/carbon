@@ -7,19 +7,19 @@ describe('Test profile switcher', function () {
   describe('Constructor', function () {
     let profileSwitcher;
 
-    it(`Should throw if root element is not given`, function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new ProfileSwitcher();
       }).to.throw(Error);
     });
 
-    it(`Should throw if root element is not a DOM element`, function () {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new ProfileSwitcher(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it(`Should set default options`, function () {
+    it('Should set default options', function () {
       const container = document.createElement('div');
       container.innerHTML = unifiedHeaderHtml;
       profileSwitcher = new ProfileSwitcher(container.querySelector('[data-profile-switcher]'));

@@ -1,11 +1,9 @@
 'use strict';
 
-//////////////////////////////
-// Requires
-//////////////////////////////
+/**
+ * Requires
+ */
 
-const fs = require('fs');
-const scssToJson = require('scss-to-json');
 const path = require('path');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
@@ -13,7 +11,6 @@ const del = require('del');
 const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
-const sassLint = require('gulp-sass-lint');
 const eslint = require('gulp-eslint');
 const sourcemaps = require('gulp-sourcemaps');
 const jsdoc = require('gulp-jsdoc3');
@@ -31,9 +28,9 @@ const cloptions = require('minimist')(process.argv.slice(2), {
   boolean: ['keepalive'],
 });
 
-//////////////////////////////
-// BrowserSync
-//////////////////////////////
+/**
+ * BrowserSync
+ */
 
 gulp.task('browser-sync', () => {
   browserSync.init({
@@ -44,28 +41,26 @@ gulp.task('browser-sync', () => {
   });
 });
 
-//////////////////////////////
-// Clean
-//////////////////////////////
+/**
+ * Clean
+ */
 
 // Use: npm run prebuild
-gulp.task('clean', () => {
-  return del([
-    'dist',
-    'demo/**/*.{js,map}',
-    '!demo/js/demo-switcher.js',
-    '!demo/js/theme-switcher.js',
-    '!demo/index.js',
-    '!demo/polyfills/*.js',
-  ]);
-});
+gulp.task('clean', () => del([
+  'dist',
+  'demo/**/*.{js,map}',
+  '!demo/js/demo-switcher.js',
+  '!demo/js/theme-switcher.js',
+  '!demo/index.js',
+  '!demo/polyfills/*.js',
+]));
 
-//////////////////////////////
-// JavaScript Tasks
-//////////////////////////////
+/**
+ * JavaScript Tasks
+ */
 
 function buildScripts(options) {
-  options = options || {};
+  options = options || {}; // eslint-disable-line no-param-reassign
   options.target = (options.target || './dist/bluemix-components.js')
     .replace(/\.js$/, options.prod ? '.min.js' : '.js');
   return new Promise((resolve, reject) => {
@@ -123,25 +118,21 @@ gulp.task('scripts:umd', () => {
   return merge(mainStream, othersStream);
 });
 
-gulp.task('scripts:consumables', () => {
-  return Promise.all([
-    buildScripts(), // Expanded ES5
-    buildScripts({ prod: true }), // Minified ES5
-  ]);
-});
+gulp.task('scripts:consumables', () => Promise.all([
+  buildScripts(), // Expanded ES5
+  buildScripts({ prod: true }), // Minified ES5
+]));
 
-gulp.task('scripts:dev', () => {
-  return Promise.all([
-    buildScripts({
-      target: './demo/demo.js',
-      entry: './demo/index.js',
-    }),
-  ]);
-});
+gulp.task('scripts:dev', () => Promise.all([
+  buildScripts({
+    target: './demo/demo.js',
+    entry: './demo/index.js',
+  }),
+]));
 
-//////////////////////////////
-// Sass Tasks
-//////////////////////////////
+/**
+ * Sass Tasks
+ */
 
 gulp.task('sass:consumables', () => {
   function buildStyles(prod) {
@@ -153,12 +144,12 @@ gulp.task('sass:consumables', () => {
       .pipe(autoprefixer({
         browsers: ['> 1%', 'last 2 versions'],
       }))
-      .pipe(rename(function (path) {
-        if (path.basename === 'styles') {
-          path.basename = 'bluemix-components';
+      .pipe(rename((filePath) => {
+        if (filePath.basename === 'styles') {
+          filePath.basename = 'bluemix-components';
         }
         if (prod) {
-          path.extname = '.min' + path.extname;
+          filePath.extname = `.min${filePath.extname}`;
         }
       }))
       .pipe(sourcemaps.write())
@@ -170,8 +161,8 @@ gulp.task('sass:consumables', () => {
   buildStyles(true); // Minified CSS
 });
 
-gulp.task('sass:dev', () => {
-  return gulp.src('demo/**/demo.scss')
+gulp.task('sass:dev', () =>
+  gulp.src('demo/**/demo.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'expanded',
@@ -182,34 +173,36 @@ gulp.task('sass:dev', () => {
     .pipe(rename({ dirname: '' }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('demo'))
-    .pipe(browserSync.stream());
-});
+    .pipe(browserSync.stream()));
 
-/////////////////////////////
-// Lint
-/////////////////////////////
+/**
+ * Lint
+ */
 
-gulp.task('lint', function () {
-  return gulp.src([
-    'src/**/*.js'
+gulp.task('lint', () =>
+  gulp.src([
+    'gulpfile.js',
+    'server.js',
+    'src/**/*.js',
+    'tests/**/*.js',
+    'demo/**/*.js',
   ])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-    .pipe(eslint.results(function(results) {
-      let count = results.warningCount;
-      if (count > 0) {
-        throw new gutil.PluginError('gulp-eslint', {
-          name: 'ESLintWarning',
-          message: 'Has ' + count + ' warning' + (count > 1 ? 's' : ''),
-        });
-      }
-    }));
-});
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError())
+  .pipe(eslint.results((results) => {
+    const count = results.warningCount;
+    if (count > 0) {
+      throw new gutil.PluginError('gulp-eslint', {
+        name: 'ESLintWarning',
+        message: `Has ${count} warning${count > 1 ? 's' : ''}`,
+      });
+    }
+  })));
 
-/////////////////////////////
-// Test
-/////////////////////////////
+/**
+ * Test
+ */
 
 gulp.task('test', (done) => {
   new Server({
@@ -218,11 +211,11 @@ gulp.task('test', (done) => {
   }, done).start();
 });
 
-/////////////////////////////
-// JSDoc
-/////////////////////////////
+/**
+ * JSDoc
+ */
 
-gulp.task('jsdoc', function (cb) {
+gulp.task('jsdoc', (cb) => {
   gulp.src('./src/components/**/*.js')
     .pipe(babel({
       plugins: ['transform-class-properties'],
@@ -230,10 +223,10 @@ gulp.task('jsdoc', function (cb) {
     }))
     .pipe(gulp.dest('./docs/js/tmp'))
     .on('end', () => {
-      gulp.src(['README.md', 'docs/js/tmp/**/*.js'], {read: false})
-        .pipe(jsdoc(Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), {
+      gulp.src(['README.md', 'docs/js/tmp/**/*.js'], { read: false })
+        .pipe(jsdoc(Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), { // eslint-disable-line global-require
           opts: {
-            destination: './docs/js'
+            destination: './docs/js',
           },
         }), (err) => {
           if (err) {
@@ -246,9 +239,9 @@ gulp.task('jsdoc', function (cb) {
     .on('error', cb);
 });
 
-//////////////////////////////
-// Running Tasks
-//////////////////////////////
+/**
+ * Running Tasks
+ */
 
 gulp.task('watch', () => {
   gulp.watch('src/**/**/*.html').on('change', browserSync.reload);
@@ -263,5 +256,6 @@ gulp.task('build', ['sass:consumables', 'scripts:consumables']);
 gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {
+  // eslint-disable-next-line no-console
   console.log('\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n');
 });

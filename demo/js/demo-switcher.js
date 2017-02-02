@@ -7,7 +7,7 @@ export default class DemoSwitcher {
 
     this.element = element;
     this.constructor.components.set(this.element, this);
-    this.element.addEventListener('click', (event) => this.handleClick(event));
+    this.element.addEventListener('click', event => this.handleClick(event));
   }
 
   static create(element) {
@@ -21,7 +21,7 @@ export default class DemoSwitcher {
     if (target.nodeType === Node.ELEMENT_NODE && target.dataset.demoSwitcher !== undefined) {
       this.create(target);
     } else {
-      [... target.querySelectorAll('[data-demo-switcher]')].forEach(element => this.create(element));
+      [...target.querySelectorAll('[data-demo-switcher]')].forEach(element => this.create(element));
     }
   }
 

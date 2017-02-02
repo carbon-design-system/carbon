@@ -1,8 +1,12 @@
 'use strict';
 
-var path = require('path');
+/* eslint-disable import/no-extraneous-dependencies, global-require */
 
-var cloptions = require('minimist')(process.argv.slice(2), {
+const path = require('path');
+
+const convertFilePath = file => path.relative(__dirname, path.resolve(__dirname, '..', file));
+
+const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
     b: 'browsers',
     f: 'files',
@@ -18,9 +22,7 @@ module.exports = function (config) {
 
     frameworks: ['mocha', 'sinon-chai'],
 
-    files: cloptions.files ? (Array.isArray(cloptions.files) ? cloptions.files : [cloptions.files]).map(function (file) {
-      return path.relative(__dirname, path.resolve(__dirname, '..', file));
-    }) : [
+    files: cloptions.files ? (Array.isArray(cloptions.files) ? cloptions.files : [cloptions.files]).map(convertFilePath) : [
       'remainders.js', // For generatoring coverage report for untested files
       'spec/**/*.js',
     ],
@@ -95,8 +97,8 @@ module.exports = function (config) {
       require('karma-ie-launcher'),
     ],
 
-    reporters: (function () {
-      var reporters = ['mocha'];
+    reporters: (() => {
+      const reporters = ['mocha'];
       if (!cloptions.debug) {
         reporters.push('coverage');
       }
@@ -144,9 +146,8 @@ module.exports = function (config) {
     autoWatch: true,
     autoWatchBatchDelay: 400,
 
-    browsers: (Array.isArray(cloptions.browsers) ? cloptions.browsers : [cloptions.browsers || 'PhantomJS']).map(function (browser) {
-      return browser + (browser === 'Chrome' && process.env.TRAVIS ? '_Travis' : '');
-    }),
+    browsers: (Array.isArray(cloptions.browsers) ? cloptions.browsers : [cloptions.browsers || 'PhantomJS'])
+      .map(browser => browser + (browser === 'Chrome' && process.env.TRAVIS ? '_Travis' : '')),
 
     singleRun: false,
 
