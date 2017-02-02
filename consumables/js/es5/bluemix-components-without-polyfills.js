@@ -3307,14 +3307,13 @@ var BluemixComponents =
 	    _initialiseProps.call(_this);
 	
 	    _this.container = element.parentNode; // requires the immediate parent to be the container
-	    _this.expandCells = [].concat(_toConsumableArray(_this.element.querySelectorAll(_this.options.selectorExpandCells)));
-	    _this.expandableRows = [].concat(_toConsumableArray(_this.element.querySelectorAll(_this.options.selectorExpandableRows)));
-	    _this.parentRows = [].concat(_toConsumableArray(_this.element.querySelectorAll(_this.options.selectorParentRows)));
 	    _this.tableBody = _this.element.querySelector(_this.options.selectorTableBody);
+	    _this.expandCells = [];
+	    _this.expandableRows = [];
+	    _this.parentRows = [];
+	    _this.overflowInitialized = false;
 	
-	    _this.zebraStripe();
-	    _this.initExpandableRows();
-	    _this.initOverflowMenus();
+	    _this.refreshRows();
 	
 	    _this.element.addEventListener('click', function (evt) {
 	      var eventElement = (0, _eventMatches2.default)(evt, _this.options.eventTrigger);
@@ -3368,6 +3367,9 @@ var BluemixComponents =
 	     * When called, finds the position of the icon supplied and positions
 	     * the menu relative to that
 	     *
+	     * MAGIC NUMBERS
+	     * 38 = center of arrow position
+	     * 5 = visual top nudge
 	     * Uses fixed because getBoundingClientRect is relative to viewport
 	     */
 	
@@ -3384,6 +3386,11 @@ var BluemixComponents =
 	
 	    /**
 	     * On trigger, check all checkboxes
+	     */
+	
+	
+	    /**
+	     * On fire, create the parent child rows + striping
 	     */
 	
 	  }]);
@@ -3439,8 +3446,8 @@ var BluemixComponents =
 	    });
 	  };
 	
-	  this.zebraStripe = function () {
-	    _this2.parentRows.forEach(function (item, index) {
+	  this.zebraStripe = function (parentRows) {
+	    parentRows.forEach(function (item, index) {
 	      if (index % 2 === 0) {
 	        item.classList.add(_this2.options.classParentRowEven);
 	        if (item.nextElementSibling && item.nextElementSibling.classList.contains(_this2.options.classExpandableRow)) {
@@ -3450,19 +3457,21 @@ var BluemixComponents =
 	    });
 	  };
 	
-	  this.initExpandableRows = function () {
-	    _this2.expandableRows.forEach(function (item) {
+	  this.initExpandableRows = function (expandableRows) {
+	    expandableRows.forEach(function (item) {
 	      item.classList.remove(_this2.options.classExpandableRowHidden);
 	      _this2.tableBody.removeChild(item);
 	    });
 	  };
 	
-	  this.initOverflowMenus = function () {
+	  this.initOverflowMenus = function (parentRows) {
 	    if (!_this2.element.querySelector(_this2.options.selectorOverflowMenu)) {
 	      return false;
 	    }
 	
-	    var menuMap = [].concat(_toConsumableArray(_this2.element.querySelectorAll(_this2.options.selectorOverflowMenu))).map(function (menu) {
+	    var menuMap = parentRows.map(function (row) {
+	      var menu = row.querySelector(_this2.options.selectorOverflowMenu);
+	
 	      return {
 	        element: menu,
 	        optionMenu: menu.querySelector(_this2.options.selectorOverflowMenuOptions)
@@ -3481,23 +3490,39 @@ var BluemixComponents =
 	      document.body.appendChild(menu.optionMenu);
 	    });
 	
-	    _this2.element.addEventListener('overflow-menu-shown', _this2.placeOverflow);
+	    if (!_this2.overflowInitialized) {
+	      _this2.element.addEventListener('overflow-menu-shown', _this2.placeOverflow);
+	      _this2.overflowInitialized = true;
+	    }
+	
 	    return true;
 	  };
 	
 	  this.placeOverflow = function (evt) {
+	    var MAGIC = {
+	      top: 5,
+	      right: 38
+	    };
+	
 	    var _evt$detail = evt.detail,
 	        element = _evt$detail.element,
 	        optionMenu = _evt$detail.optionMenu;
 	
 	
 	    var icon = element.querySelector(_this2.options.selectorOverflowMenuIcon);
+	    var elementHeight = element.offsetHeight;
 	    var position = icon.getBoundingClientRect();
+	    var centerIcon = position.left + (position.right - position.left) / 2;
+	    var topCalc = position.bottom + elementHeight + element.ownerDocument.defaultView.scrollY - MAGIC.TOP + 'px';
+	    var rightCalc = document.documentElement.clientWidth - centerIcon - MAGIC.RIGHT + 'px';
 	
-	    optionMenu.style.position = 'absolute';
-	    optionMenu.style.top = position.top + element.ownerDocument.defaultView.scrollY + 'px';
-	    optionMenu.style.left = position.right + 'px';
-	    optionMenu.style.right = 'auto';
+	    _this2.element.ownerDocument.defaultView.requestAnimationFrame(function () {
+	      optionMenu.style.position = 'absolute';
+	      optionMenu.style.top = topCalc;
+	      optionMenu.style.left = 'auto';
+	      optionMenu.style.right = rightCalc;
+	      optionMenu.style.margin = 0;
+	    });
 	  };
 	
 	  this.toggleRowExpand = function (detail) {
@@ -3544,6 +3569,46 @@ var BluemixComponents =
 	      }); // eslint-disable-line no-param-reassign
 	      element.dataset.previousValue = 'toggled';
 	    }
+	  };
+	
+	  this.refreshRows = function () {
+	    var newExpandCells = [].concat(_toConsumableArray(_this2.element.querySelectorAll(_this2.options.selectorExpandCells)));
+	    var newExpandableRows = [].concat(_toConsumableArray(_this2.element.querySelectorAll(_this2.options.selectorExpandableRows)));
+	    var newParentRows = [].concat(_toConsumableArray(_this2.element.querySelectorAll(_this2.options.selectorParentRows)));
+	
+	    // check if this is a refresh or the first time
+	    if (_this2.parentRows.length > 0) {
+	      var diffParentRows = newParentRows.filter(function (newRow) {
+	        return !_this2.parentRows.some(function (oldRow) {
+	          return oldRow === newRow;
+	        });
+	      });
+	
+	      // check if there are expandable rows
+	      if (newExpandableRows.length > 0) {
+	        var diffExpandableRows = diffParentRows.map(function (newRow) {
+	          return newRow.nextElementSibling;
+	        });
+	        var mergedExpandableRows = [].concat(_toConsumableArray(_this2.expandableRows), _toConsumableArray(diffExpandableRows));
+	        _this2.initExpandableRows(diffExpandableRows);
+	        _this2.expandableRows = mergedExpandableRows;
+	      }
+	
+	      _this2.zebraStripe(newParentRows);
+	      _this2.initOverflowMenus(diffParentRows);
+	    } else {
+	      _this2.zebraStripe(newParentRows);
+	
+	      if (newExpandableRows.length > 0) {
+	        _this2.initExpandableRows(newExpandableRows);
+	        _this2.expandableRows = newExpandableRows;
+	      }
+	
+	      _this2.initOverflowMenus(newParentRows);
+	    }
+	
+	    _this2.expandCells = newExpandCells;
+	    _this2.parentRows = newParentRows;
 	  };
 	};
 	
@@ -5779,6 +5844,10 @@ var BluemixComponents =
 	
 	var _initComponentBySearch2 = _interopRequireDefault(_initComponentBySearch);
 	
+	var _eventMatches = __webpack_require__(11);
+	
+	var _eventMatches2 = _interopRequireDefault(_eventMatches);
+	
 	__webpack_require__(8);
 	
 	__webpack_require__(6);
@@ -5788,8 +5857,6 @@ var BluemixComponents =
 	__webpack_require__(15);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -5811,64 +5878,62 @@ var BluemixComponents =
 	
 	    var _this = _possibleConstructorReturn(this, (Accordion.__proto__ || Object.getPrototypeOf(Accordion)).call(this, element, options));
 	
-	    [].concat(_toConsumableArray(_this.element.querySelectorAll(_this.options.accordionItem))).forEach(function (item) {
-	      item.addEventListener('click', function (event) {
-	        _this.handleClick(event);
-	      });
-	      item.addEventListener('keypress', function (event) {
+	    _this.element.addEventListener('click', function (event) {
+	      var item = (0, _eventMatches2.default)(event, _this.options.accordionItem);
+	      if (item && !(0, _eventMatches2.default)(event, _this.options.accordionContent)) {
+	        item.classList.toggle(_this.options.classActive);
+	      }
+	    });
+	
+	    _this.element.addEventListener('keypress', function (event) {
+	      var item = (0, _eventMatches2.default)(event, _this.options.accordionItem);
+	      if (item && !(0, _eventMatches2.default)(event, _this.options.accordionContent)) {
 	        _this.handleKeypress(event);
-	      });
+	      }
 	    });
 	    return _this;
 	  }
 	
 	  /**
-	   * Handles toggling of active state of accordion
+	   * Handles toggling of active state of accordion via keyboard
 	   * @param {Event} event The event triggering this method.
 	   */
 	
 	
 	  _createClass(Accordion, [{
-	    key: 'handleClick',
-	    value: function handleClick(event) {
-	      event.currentTarget.classList.toggle('bx--accordion__item--active');
+	    key: 'handleKeypress',
+	    value: function handleKeypress(event) {
+	      if (event.keyCode === 13 || event.keyCode === 32) {
+	        event.target.classList.toggle(this.options.classActive);
+	      }
 	    }
 	
 	    /**
-	     * Handles toggling of active state of accordion via keyboard
-	     * @param {Event} event The event triggering this method.
+	     * The component options.
+	     * If `options` is specified in the constructor,
+	     * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
+	     * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
+	     * @property {string} selectorInit The CSS selector to find accordion UIs.
 	     */
 	
-	  }, {
-	    key: 'handleKeypress',
-	    value: function handleKeypress(event) {
-	      if (event.keyCode === 13 || event.keyCode === 32) this.handleClick(event);
-	    }
+	
+	    /**
+	     * The map associating DOM element and accordion UI instance.
+	     * @type {WeakMap}
+	     */
+	
 	  }]);
 	
 	  return Accordion;
 	}((0, _mixin3.default)(_createComponent2.default, _initComponentBySearch2.default));
 	
-	/**
-	 * The map associating DOM element and accordion UI instance.
-	 * @type {WeakMap}
-	 */
-	
-	
-	Accordion.components = new WeakMap();
-	
-	/**
-	 * The component options.
-	 * If `options` is specified in the constructor,
-	 * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
-	 * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
-	 * @property {string} selectorInit The CSS selector to find accordion UIs.
-	 */
 	Accordion.options = {
 	  selectorInit: '[data-accordion]',
-	  accordionItem: '[data-accordion-item]'
+	  accordionItem: '.bx--accordion__item',
+	  accordionContent: '.bx--accordion__content',
+	  classActive: 'bx--accordion__item--active'
 	};
-	
+	Accordion.components = new WeakMap();
 	exports.default = Accordion;
 
 /***/ },
