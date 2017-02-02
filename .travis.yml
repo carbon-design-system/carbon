@@ -2,16 +2,15 @@ language: node_js
 cache:
   directories:
   - node_modules
-node_js: 
+node_js:
   - "4"
   - "6"
-
 group: bluezone
-
 addons:
   firefox: "latest-esr"
-
 before_install:
+  - echo "@console:registry=http://dev-console-npm.stage1.ng.bluemix.net/" >> ~/.npmrc
+  - echo "//dev-console-npm.stage1.ng.bluemix.net/:_authToken=\${NPM_TOKEN}" >> ~/.npmrc
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@~3.8.0; npm cache clean; fi
   - tar -xjf /tmp/firefox-latest-esr.tar.bz2 --directory /tmp
   - export PATH="/tmp/firefox:$PATH"
@@ -20,13 +19,11 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 install:
   - npm install || (cat npm-debug.log; false)
-
 script:
   - npm run build
   - npm test -- -b PhantomJS -b Chrome -b Firefox
   - find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm test -- -d -f
   - npm run lint
-
 deploy:
   provider: script
   script: sh travis.ci/deploy.sh

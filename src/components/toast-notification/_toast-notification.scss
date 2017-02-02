@@ -1,0 +1,107 @@
+//-----------------------------
+// Notifications
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/import-once';
+
+@mixin notification--color($color) {
+  border-left: 6px solid $color;
+
+  @include light-ui {
+    color: $color__blue-90;
+  }
+}
+
+@include exports('toast-notifications') {
+
+  .bx--toast-notification {
+    @include reset;
+    @include font-smoothing;
+    @include light-ui {
+      background-color: $color__white;
+      border-right: 3px solid $color__navy-gray-8;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    min-height: rem(108.17px);
+    padding: 1rem .625rem .5rem 1rem;
+    background-color: $color__navy-gray-3;
+    color: $color__white;
+  }
+
+  .bx--toast-notification--error {
+    @include notification--color($color__red-40);
+  }
+
+  .bx--toast-notification--success {
+    @include notification--color($color__green-30);
+  }
+
+  .bx--toast-notification--info {
+    @include notification--color($color__blue-20);
+  }
+
+  .bx--toast-notification--warning {
+    @include notification--color($color__yellow-30);
+  }
+
+  .bx--global-light-ui .bx--notification--error {
+    @include notification--color($color__red-50);
+  }
+
+  .bx--toast-notification__close-button {
+    @include light-ui {
+      background-color: $color__white;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    min-width: 42px;
+    min-height: 42px;
+    align-self: flex-start;
+  }
+
+  .bx--toast-notification__icon {
+    height: 10px;
+    width: 10px;
+    fill: $color__navy-gray-7;
+
+    @include light-ui {
+      fill: $color__blue-90;
+    }
+  }
+
+  .bx--toast-notification__title {
+    @include font-size('14');
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .bx--toast-notification__subtitle {
+    @include font-size('12');
+    @include light-ui {
+      color: $color__navy-gray-6;
+    }
+    margin-top: 0;
+    margin-bottom: .75rem;
+  }
+
+  .bx--toast-notification__caption {
+    @include font-size('12');
+    @include light-ui {
+      color: $color__navy-gray-6;
+    }
+  }
+}
