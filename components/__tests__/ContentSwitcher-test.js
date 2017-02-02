@@ -64,4 +64,37 @@ describe('ContentSwitcher', () => {
       expect(secondChild.props().selected).toEqual(true);
     });
   });
+
+  describe('when child component onKeyDown is invoked', () => {
+    const onChange = jest.fn();
+    const mockData = {
+      index: 1,
+    };
+
+    const wrapper = mount(
+      <ContentSwitcher onChange={onChange}>
+        <Switch kind="anchor" text="one" />
+        <Switch kind="anchor" text="two" />
+      </ContentSwitcher>
+    );
+
+    const children = wrapper.find(Switch);
+    const firstChild = children.first();
+    const secondChild = children.last();
+
+    firstChild.props().onKeyDown(mockData);
+
+    it('should invoke onChange', () => {
+      expect(onChange).toBeCalledWith(mockData);
+    });
+
+    it('should set the correct selectedIndex', () => {
+      expect(wrapper.state('selectedIndex')).toEqual(mockData.index);
+    });
+
+    it('should set selected to true on the correct child', () => {
+      expect(firstChild.props().selected).toEqual(false);
+      expect(secondChild.props().selected).toEqual(true);
+    });
+  });
 });

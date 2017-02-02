@@ -48,9 +48,13 @@ describe('Switch', () => {
   describe('events', () => {
     const buttonOnClick = jest.fn();
     const linkOnClick = jest.fn();
+    const buttonOnKey = jest.fn();
+    const linkOnKey = jest.fn();
     const index = 1;
     const name = 'first';
     const text = 'test';
+    const spaceKey = 32;
+    const enterKey = 13;
 
     const buttonWrapper = shallow(
       <Switch
@@ -58,6 +62,7 @@ describe('Switch', () => {
         name={name}
         kind="button"
         onClick={buttonOnClick}
+        onKeyDown={buttonOnKey}
         text={text}
       />
     );
@@ -66,8 +71,9 @@ describe('Switch', () => {
       <Switch
         index={index}
         name={name}
-        kind="button"
+        kind="anchor"
         onClick={linkOnClick}
+        onKeyDown={linkOnKey}
         text={text}
       />
     );
@@ -80,6 +86,19 @@ describe('Switch', () => {
     it('should invoke link onClick handler', () => {
       linkWrapper.simulate('click', { preventDefault() { } });
       expect(buttonOnClick).toBeCalledWith({ index, name, text });
+    });
+    it('should invoke button onKeyDown handler', () => {
+      buttonWrapper.simulate('keydown', { which: spaceKey });
+      expect(buttonOnKey).toBeCalledWith({ index, name, text });
+      buttonWrapper.simulate('keydown', { which: enterKey });
+      expect(buttonOnKey).toBeCalledWith({ index, name, text });
+    });
+
+    it('should invoke link onKeyDown handler', () => {
+      linkWrapper.simulate('keydown', { which: spaceKey });
+      expect(linkOnKey).toBeCalledWith({ index, name, text });
+      linkWrapper.simulate('keydown', { which: enterKey });
+      expect(linkOnKey).toBeCalledWith({ index, name, text });
     });
   });
 });

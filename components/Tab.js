@@ -6,6 +6,7 @@ class Tab extends React.Component {
     className: PropTypes.string,
     handleTabClick: PropTypes.func,
     handleTabAnchorFocus: PropTypes.func,
+    handleTabKeyDown: PropTypes.func,
     href: PropTypes.string,
     index: PropTypes.number,
     label: PropTypes.string.isRequired,
@@ -40,6 +41,7 @@ class Tab extends React.Component {
       className,
       handleTabClick,
       handleTabAnchorFocus, // eslint-disable-line
+      handleTabKeyDown,
       href,
       index,
       label,
@@ -65,6 +67,7 @@ class Tab extends React.Component {
         },
         onKeyDown: (evt) => {
           this.setTabFocus(evt);
+          handleTabKeyDown(index, label, evt);
           onKeyDown(evt);
         },
         role: 'presentation',

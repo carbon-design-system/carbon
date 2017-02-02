@@ -90,14 +90,33 @@ describe('OverflowMenu', () => {
       expect(rootWrapper.state().open).toEqual(true);
     });
 
-    it('should be in a closed state after Enter is pressed', () => {
-      const rootWrapper = mount(<OverflowMenu />);
+    it('should toggle state in response to Enter or Space', () => {
+      const enterKey = 13;
+      const spaceKey = 32;
+      const rootWrapper = shallow(<OverflowMenu />);
+      const menu = rootWrapper.childAt(0);
 
       rootWrapper.setState({ open: true });
 
-      const keyboardEvent = new KeyboardEvent('keypress', { which: 13 });
-      document.dispatchEvent(keyboardEvent);
 
+      menu.simulate('keydown', { which: spaceKey });
+      expect(rootWrapper.state().open).toEqual(false);
+      menu.simulate('keydown', { which: enterKey });
+      expect(rootWrapper.state().open).toEqual(true);
+    });
+
+    it('should be hidden when it loses focus', () => {
+      const rootWrapper = mount(
+        <OverflowMenu className="extra-class">
+          <div className="test-child"></div>
+          <div className="test-child"></div>
+        </OverflowMenu>
+      );
+      const menu = rootWrapper.childAt(0);
+
+      rootWrapper.setState({ open: true });
+
+      menu.simulate('blur');
       expect(rootWrapper.state().open).toEqual(false);
     });
 

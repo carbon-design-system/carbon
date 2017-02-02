@@ -164,6 +164,8 @@ describe('Tabs', () => {
       const lastTab = wrapper.find('.lastTab');
       const leftKey = 37;
       const rightKey = 39;
+      const spaceKey = 32;
+      const enterKey = 13;
 
       describe('state: selected', () => {
         it('updates selected state when pressing arrow keys', () => {
@@ -180,6 +182,13 @@ describe('Tabs', () => {
 
         it('loops focus and selected state from firstTab to lastTab', () => {
           firstTab.simulate('keydown', { which: leftKey });
+          expect(wrapper.state().selected).toEqual(1);
+        });
+
+        it('updates selected state when pressing space or enter key', () => {
+          firstTab.simulate('keydown', { which: spaceKey });
+          expect(wrapper.state().selected).toEqual(0);
+          lastTab.simulate('keydown', { which: enterKey });
           expect(wrapper.state().selected).toEqual(1);
         });
       });

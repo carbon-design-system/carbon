@@ -13,6 +13,7 @@ const propTypes = {
     PropTypes.number,
   ]),
   onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
   selected: PropTypes.bool,
   text: PropTypes.string.isRequired,
 };
@@ -21,6 +22,7 @@ const defaultProps = {
   selected: false,
   kind: 'anchor',
   onClick: () => { },
+  onKeyDown: () => { },
 };
 
 const Switch = (props) => {
@@ -30,6 +32,7 @@ const Switch = (props) => {
     kind,
     name,
     onClick,
+    onKeyDown,
     selected,
     text,
     ...other,
@@ -40,6 +43,14 @@ const Switch = (props) => {
     onClick({ index, name, text });
   };
 
+  const handleKeyDown = (e) => {
+    const key = e.key || e.which;
+
+    if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      onKeyDown({ index, name, text });
+    }
+  };
+
   const classes = classNames(
     className,
     'bx--content-switcher__btn',
@@ -48,6 +59,7 @@ const Switch = (props) => {
 
   const commonProps = {
     onClick: handleClick,
+    onKeyDown: handleKeyDown,
     className: classes,
   };
 

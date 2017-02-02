@@ -33,6 +33,7 @@ class Tabs extends React.Component {
     return React.Children.map(this.props.children, (tab) => tab);
   }
 
+  // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
   handleTabClick = (index, label, evt) => {
     evt.preventDefault();
     this.setState({
@@ -40,6 +41,18 @@ class Tabs extends React.Component {
       selectedLabel: label,
       dropdownHidden: !this.state.dropdownHidden,
     });
+  }
+
+  handleTabKeyDown = (index, label, evt) => {
+    const key = evt.key || evt.which;
+
+    if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      this.setState({
+        selected: index,
+        selectedLabel: label,
+        dropdownHidden: !this.state.dropdownHidden,
+      });
+    }
   }
 
   handleTabAnchorFocus = (index) => {
@@ -65,7 +78,6 @@ class Tabs extends React.Component {
       dropdownHidden: !this.state.dropdownHidden,
     });
   }
-
 
   render() {
     const {
@@ -93,6 +105,7 @@ class Tabs extends React.Component {
           handleTabClick: this.handleTabClick,
           handleTabAnchorFocus: this.handleTabAnchorFocus,
           ref: `tab${index}`,
+          handleTabKeyDown: this.handleTabKeyDown,
         });
 
         return newTab;

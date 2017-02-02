@@ -32,18 +32,10 @@ class OverflowMenu extends Component {
     open: this.props.open,
   }
 
-  componentDidMount() {
-    document.addEventListener('keypress', this.handleKeyPress);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.open !== this.props.open) {
       this.setState({ open: nextProps.open });
     }
-  }
-  /* istanbul ignore next */
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.handleKeyPress);
   }
 
   handleClick = (evt) => {
@@ -51,14 +43,20 @@ class OverflowMenu extends Component {
     this.props.onClick(evt);
   }
 
+  handleKeyPress = (evt) => {
+    const key = evt.key || evt.which;
+
+    if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      this.setState({ open: !this.state.open });
+    }
+  }
+
   handleClickOutside = () => {
     this.setState({ open: false });
   }
 
-  handleKeyPress = (evt) => {
-    const key = evt.key || evt.which;
-
-    if (key === 'Enter' || key === 13) {
+  handleBlur = (evt) => {
+    if (!this.refs.overflow.contains(evt.relatedTarget)) {
       this.setState({ open: false });
     }
   }
@@ -86,6 +84,8 @@ class OverflowMenu extends Component {
           ref="overflow"
           className={overflowMenuClasses}
           onClick={this.handleClick}
+          onKeyDown={this.handleKeyPress}
+          onBlur={this.handleBlur}
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}

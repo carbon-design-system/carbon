@@ -17,13 +17,14 @@ class ContentSwitcher extends React.Component {
     return React.Children.map(children, (child, index) =>
       React.cloneElement(child, {
         index,
-        onClick: this.handleChildClick,
+        onClick: this.handleChildChange,
+        onKeyDown: this.handleChildChange,
         selected: index === this.state.selectedIndex,
       })
     );
   }
 
-  handleChildClick = (data) => {
+  handleChildChange = (data) => {
     const { selectedIndex } = this.state;
     const { index } = data;
 
