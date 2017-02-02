@@ -11,12 +11,17 @@ Contributing to bluemix-components requires that you can run this repo locally o
 ## Class names
 
 Prefix all class names with `bx--`.
+This prefix prevents potential conflicts with class names from the user.
+
+__HTML__
 
 ```html
 <div class="bx--inline-notification bx--inline-notification--error" role="alert">
   <div class="bx--inline-notification__details">...</div>
 </div>
 ```
+
+__SCSS__
 
 ```scss
 .bx--inline-notification {
@@ -28,12 +33,39 @@ Prefix all class names with `bx--`.
 }
 ```
 
-Follow modified BEM convention for naming classes.
+Follow BEM naming convention for classes. Again, the only thing we do differently is prefix all classes with `bx--`.
 
 ```scss
-.bx--component-name__element
-.bx--component-name--modifier
+.bx--block__element
+.bx--block--modifier
 ```
+
+For bluemix-components, `block` would be a component-based name.
+
+```scss
+.bx--component__element
+.bx--component--modifier
+```
+
+### Start a new `block` or `element`?
+
+A nested element can use a new block name as long as the styles are independent of the parent.
+
+```html
+<div class="bx--component">
+  <button class="bx--component-button">Button</button>
+</div>
+```
+:point_up: The `bx--component-button` class implies that this button has independent styles from its parent.
+Generally, it's preferred to start a new block.
+
+### Red Flags
+
+Avoid names with multiple `__element` names:
+
+- :x: `.bx--card__list__item`
+- :white_check_mark: `.bx--card-item`
+- :white_check_mark: `.bx--card__item`
 
 ## Files and folders
 
