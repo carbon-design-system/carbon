@@ -226,4 +226,20 @@ describe('Tabs', () => {
       });
     });
   });
+
+  describe('Allow initial state to draw from props', () => {
+    const wrapper = mount(
+      <Tabs selected={1}>
+        <Tab label="firstTab" className="firstTab">content</Tab>
+        <Tab label="lastTab" className="lastTab">content</Tab>
+      </Tabs>
+    );
+
+    const children = wrapper.find(Tab);
+
+    it('Should apply the selected property on the selected tab', () => {
+      expect(children.first().props().selected).toEqual(false);
+      expect(children.last().props().selected).toEqual(true);
+    });
+  });
 });

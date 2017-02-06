@@ -32,6 +32,22 @@ describe('ContentSwitcher', () => {
     });
   });
 
+  describe('Allow initial state to draw from props', () => {
+    const wrapper = shallow(
+      <ContentSwitcher selectedIndex={1} onChange={() => {}} className="extra-class">
+        <Switch kind="anchor" text="one" />
+        <Switch kind="anchor" text="two" />
+      </ContentSwitcher>
+    );
+
+    const children = wrapper.find(Switch);
+
+    it('Should apply the selected property on the selected child', () => {
+      expect(children.first().props().selected).toEqual(false);
+      expect(children.last().props().selected).toEqual(true);
+    });
+  });
+
   describe('when child component onClick is invoked', () => {
     const onChange = jest.fn();
     const mockData = {

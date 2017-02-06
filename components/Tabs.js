@@ -16,16 +16,18 @@ class Tabs extends React.Component {
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
     triggerHref: PropTypes.string,
+    selected: PropTypes.number,
   }
 
   static defaultProps = {
     href: '#',
     triggerHref: '#',
+    selected: 0,
   }
 
   state = {
     dropdownHidden: true,
-    selected: 0,
+    selected: this.props.selected,
     selectedLabel: React.Children.toArray(this.props.children)[0].props.label,
   }
 

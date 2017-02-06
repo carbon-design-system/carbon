@@ -7,10 +7,15 @@ class ContentSwitcher extends React.Component {
     children: PropTypes.node,
     className: PropTypes.string,
     onChange: PropTypes.func.isRequired,
+    selectedIndex: PropTypes.number,
+  }
+
+  static defaultProps = {
+    selectedIndex: 0,
   }
 
   state = {
-    selectedIndex: 0,
+    selectedIndex: this.props.selectedIndex,
   }
 
   getChildren(children) {
@@ -38,6 +43,7 @@ class ContentSwitcher extends React.Component {
     const {
       children,
       className,
+        selectedIndex, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 
