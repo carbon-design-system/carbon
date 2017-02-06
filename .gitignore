@@ -2,6 +2,7 @@
 # Hide package manager
 node_modules
 bower_components
+.npmrc
 
 # Ignore built files and static folder
 demo/*.css
