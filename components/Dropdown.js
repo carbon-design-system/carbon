@@ -26,11 +26,37 @@ class Dropdown extends PureComponent {
     onChange: () => {},
   }
 
-  state = {
-    open: this.props.open,
-    selectedText: this.props.defaultText,
-    value: '',
-  };
+  constructor(props) {
+    super(props);
+    const {
+      children,
+      selectedText,
+      value,
+      defaultText,
+      open,
+    } = props;
+
+    let matchingChild;
+    React.Children.forEach(children, child => {
+      if (child.props.itemText === selectedText || child.props.value === value) {
+        matchingChild = child;
+      }
+    });
+
+    if (matchingChild) {
+      this.state = {
+        open,
+        selectedText: matchingChild.props.itemText,
+        value: matchingChild.props.value,
+      };
+    } else {
+      this.state = {
+        open,
+        selectedText: defaultText,
+        value: '',
+      };
+    }
+  }
 
   close = () => {
     this.setState({ open: false });

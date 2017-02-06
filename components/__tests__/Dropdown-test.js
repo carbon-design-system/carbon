@@ -61,6 +61,24 @@ describe('Dropdown', () => {
       const matches = mounted.props().iconDescription === mounted.find(Icon).props().description;
       expect(matches).toEqual(true);
     });
+
+    it('should start with the selected text over the default text when present in props', () => {
+      const dropdown = shallow(
+        <Dropdown defaultText="Choose something..." selectedText="Value">
+          <DropdownItem itemText="Value" value="Value" />
+        </Dropdown>
+      );
+      expect(dropdown.state().selectedText).toEqual('Value');
+    });
+
+    it('should select default text when provided selected text does not match any children', () => {
+      const dropdown = shallow(
+        <Dropdown defaultText="Choose something..." selectedText="NotValue">
+          <DropdownItem itemText="Value" value="Value" />
+        </Dropdown>
+      );
+      expect(dropdown.state().selectedText).toEqual('Choose something...');
+    });
   });
 
   describe('events', () => {
