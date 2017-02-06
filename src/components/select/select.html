@@ -1,14 +1,20 @@
-<div class="bx--select">
-  <label for="select-id" class="bx--form__label">Select</label>
-  <select id="select-id" class="bx--select__input">
-    <option class="bx--select__option" value="" disabled selected hidden>Pick an option</option>
-    <option class="bx--select__option" value="volvo">Volvo</option>
-    <option class="bx--select__option" value="solong">A much longer option that is worth having around to check how text flows around the background image</option>
-    <option class="bx--select__option" value="saab">Saab</option>
-    <option class="bx--select__option" value="opel">Opel</option>
-    <option class="bx--select__option" value="audi">Audi</option>
-  </select>
-  <svg class="bx--select__arrow">
-    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
-  </svg>
+<div class="bx--form-item">
+  <label for="select-id" class="bx--label">Select</label>
+  <div class="bx--select">
+    <select id="select-id" class="bx--select-input">
+      <option class="bx--select-option" disabled selected hidden>Pick an option</option>
+      <option class="bx--select-option" value="solong">A much longer option that is worth having around to check how text flows</option>
+      <optgroup class="bx--select-optgroup" label="Category 1">
+        <option class="bx--select-option" value="option1">Option 1</option>
+        <option class="bx--select-option" value="option2">Option 2</option>
+      </optgroup>
+      <optgroup class="bx--select-optgroup" label="Category 2">
+        <option class="bx--select-option" value="option1">Option 1</option>
+        <option class="bx--select-option" value="option2">Option 2</option>
+      </optgroup>
+    </select>
+    <svg class="bx--select__arrow">
+      <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#caret--down"></use>
+    </svg>
+  </div>
 </div>
