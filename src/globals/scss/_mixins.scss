@@ -10,8 +10,8 @@
     font: inherit;
     vertical-align: baseline;
 
-    & > *, 
-    & > *:before, 
+    & > *,
+    & > *:before,
     & > *:after {
       box-sizing: inherit;
     }
@@ -55,11 +55,11 @@
 @mixin box-shadow($size: 'small') {
   // Large - For dropdowns
   @if ($size == 'large') {
-    box-shadow: 6px 6px 6px 0 $color__box-shadow;
+    box-shadow: 6px 6px 6px 0 $box-shadow;
   }
 
   @if ($size == 'small') {
-    box-shadow: 0px 3px 3px 0 $color__box-shadow;
+    box-shadow: 0px 3px 3px 0 $box-shadow;
   }
 }
 

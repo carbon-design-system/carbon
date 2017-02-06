@@ -21,7 +21,7 @@
     padding: .5rem 0 .5rem 1rem;
     margin: .25rem 0;
     color: $color__white;
-    background-color: $color__inputs--bg;
+    background-color: $field-01;
 
     &:focus {
       @include focus-outline;
@@ -39,7 +39,6 @@
 
     @include light-ui {
       color: $color__blue-90;
-      background-color: $color__inputs--bg--light-ui;
       font-weight: 400;
     }
   }

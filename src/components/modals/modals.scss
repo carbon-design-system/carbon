@@ -125,7 +125,7 @@
     .bx--search {
       &__input, &__label {
         color: $color__navy-gray-6;
-        background-color: $color__inputs--bg--light-ui;
+        background-color: $field-01;
 
         &::placeholder {
           color: $color__navy-gray-7;

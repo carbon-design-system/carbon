@@ -12,7 +12,7 @@
   width: rem(72px);
   height: rem(72px);
   text-decoration: none;
-  filter: drop-shadow(0px 3px 3px 0 $color__box-shadow);
+  filter: drop-shadow(0px 3px 3px 0 $box-shadow);
 
   &__hidden {
     @include hidden;
