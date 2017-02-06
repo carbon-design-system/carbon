@@ -1,0 +1,91 @@
+//-----------------------------
+// Dropdown
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+
+@include exports('dropdown') {
+  .bx--dropdown {
+    @include reset;
+    @include font-size('14');
+    position: relative;
+    list-style: none;
+    display: block;
+    background-color: $field-01;
+    width: 100%;
+    cursor: pointer;
+    color: $text-01;
+
+    &:focus {
+      @include focus-outline;
+    }
+  }
+
+  .bx--dropdown__arrow {
+    fill: $brand-01;
+    position: absolute;
+    right: 1rem;
+    top: .6rem;
+    width: .75rem;
+    height: 1.5rem;
+    pointer-events: none;
+    transition: transform $transition--base ease-in-out;
+    transform-origin: 50% 45%;
+  }
+
+  .bx--dropdown[data-value=''] .bx--dropdown-text {
+    color: $text-03;
+  }
+
+  .bx--dropdown-text {
+    padding-top: rem(13px);
+    padding-bottom: rem(13px);
+    padding-left: 1rem;
+    font-weight: 700;
+  }
+
+  .bx--dropdown-list {
+    @include reset;
+    display: none;
+    list-style: none;
+  }
+
+  .bx--dropdown-link {
+    display: block;
+    color: currentColor;
+    text-decoration: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+
+    &:hover,
+    &:focus {
+      background-color: $brand-01;
+      color: $inverse-01;
+    }
+  }
+
+  .bx--dropdown--selected {
+    display: none;
+  }
+
+  .bx--dropdown--open {
+    .bx--dropdown__arrow {
+      transform: rotate(-180deg);
+    }
+
+    .bx--dropdown-list {
+      @include font-size('14');
+      @include layer('overlay');
+      display: flex;
+      flex-direction: column;
+      background-color: $ui-01;
+    }
+  }
+}

@@ -204,8 +204,8 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
    */
   static options = {
     selectorInit: '[data-dropdown]',
-    selectorItem: '[data-option] > .bx--dropdown__link',
-    selectorItemSelected: '[data-option] > .bx--dropdown__link.bx--dropdown--selected',
+    selectorItem: '.bx--dropdown-link',
+    selectorItemSelected: '.bx--dropdown--selected',
     classSelected: 'bx--dropdown--selected',
     eventBeforeSelected: 'dropdown-beingselected',
     eventAfterSelected: 'dropdown-selected',

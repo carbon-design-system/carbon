@@ -52,7 +52,7 @@ describe('Dropdown', function () {
 
       itemNode = document.createElement('a');
       itemNode.textContent = 0;
-      itemNode.classList.add('bx--dropdown__link');
+      itemNode.classList.add('bx--dropdown-link');
       itemNode.classList.add('bx--dropdown--selected');
 
       itemContainerNode.appendChild(itemNode);
@@ -177,7 +177,7 @@ describe('Dropdown', function () {
 
         const itemNode = document.createElement('a');
         itemNode.textContent = i;
-        itemNode.classList.add('bx--dropdown__link');
+        itemNode.classList.add('bx--dropdown-link');
         if (i === 0) {
           itemNode.classList.add('bx--dropdown--selected');
         }
@@ -252,7 +252,7 @@ describe('Dropdown', function () {
 
         const itemNode = document.createElement('a');
         itemNode.textContent = i;
-        itemNode.classList.add('bx--dropdown__link');
+        itemNode.classList.add('bx--dropdown-link');
 
         itemContainerNode.appendChild(itemNode);
         list.appendChild(itemContainerNode);
@@ -394,7 +394,7 @@ describe('Dropdown', function () {
 
       const itemNode = document.createElement('a');
       itemNode.textContent = 'foo';
-      itemNode.classList.add('bx--dropdown__link');
+      itemNode.classList.add('bx--dropdown-link');
 
       itemContainerNode.appendChild(itemNode);
       list.appendChild(itemContainerNode);
@@ -409,7 +409,7 @@ describe('Dropdown', function () {
 
     beforeEach(function () {
       dropdown.element.classList.add('bx--dropdown--open');
-      element.querySelector('.bx--dropdown__link').focus();
+      element.querySelector('.bx--dropdown-link').focus();
     });
 
     it('Should close when dropdown loses focus', function () {
