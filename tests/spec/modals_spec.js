@@ -391,7 +391,8 @@ describe('Test modal', function () {
       const targets = [...new Array(2)].map(() => {
         const item = document.createElement('div');
         item.className = className;
-        item.style.width = item.style.height = '200px';
+        item.style.width = '200px';
+        item.style.height = '200px';
         return item;
       });
 
@@ -414,7 +415,8 @@ describe('Test modal', function () {
 
       target = document.createElement('div');
       target.setAttribute('id', id);
-      target.style.width = target.style.height = '200px';
+      target.style.width = '200px';
+      target.style.height = '200px';
 
       spyFocus = sinon.spy(target, 'focus');
 
@@ -449,7 +451,8 @@ describe('Test modal', function () {
 
       target = document.createElement('div');
       target.setAttribute('id', id);
-      target.style.width = target.style.height = '0';
+      target.style.width = '0';
+      target.style.height = '0';
 
       spyFocus = sinon.spy(target, 'focus');
 
@@ -473,7 +476,8 @@ describe('Test modal', function () {
 
       target = document.createElement('div');
       target.setAttribute('id', id);
-      target.style.width = target.style.height = '200px';
+      target.style.width = '200px';
+      target.style.height = '200px';
 
       document.body.appendChild(element);
       document.body.appendChild(target);
