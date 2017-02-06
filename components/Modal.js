@@ -20,11 +20,13 @@ class Modal extends Component {
     onRequestSubmit: PropTypes.func,
     onKeyDown: PropTypes.func,
     iconDescription: PropTypes.string,
+    primaryButtonDisabled: PropTypes.bool,
   }
 
   static defaultProps = {
     onRequestClose: () => {},
     onRequestSubmit: () => {},
+    primaryButtonDisabled: false,
     onKeyDown: () => {},
     passiveModal: false,
     iconDescription: 'close the modal',
@@ -55,6 +57,7 @@ class Modal extends Component {
       onRequestClose,
       onRequestSubmit,
       iconDescription,
+      primaryButtonDisabled,
       ...other,
     } = this.props;
 
@@ -96,7 +99,7 @@ class Modal extends Component {
         <div className="bx--modal__buttons">
           <div className="bx--modal__buttons-container">
             <Button kind="secondary" onClick={onRequestClose}>{secondaryButtonText}</Button>
-            <Button kind="primary" onClick={onRequestSubmit}>{primaryButtonText}</Button>
+            <Button kind="primary" disabled={primaryButtonDisabled} onClick={onRequestSubmit}>{primaryButtonText}</Button>
           </div>
         </div>
       </div>);

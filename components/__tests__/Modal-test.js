@@ -44,6 +44,17 @@ describe('Modal', () => {
       const matches = mounted.props().iconDescription === mounted.find(Icon).props().description;
       expect(matches).toEqual(true);
     });
+
+    it('enables primary button by default', () => {
+      const primaryButton = mounted.find('.bx--modal__buttons-container .bx--btn');
+      expect(primaryButton.prop('disabled')).toEqual(false);
+    });
+
+    it('disables primary button when diablePrimaryButton prop is passed', () => {
+      mounted.setProps({ primaryButtonDisabled: true });
+      const primaryButton = mounted.find('.bx--modal__buttons-container .bx--btn');
+      expect(primaryButton.prop('disabled')).toEqual(true);
+    });
   });
 
   describe('Adds props as expected to the right children', () => {
