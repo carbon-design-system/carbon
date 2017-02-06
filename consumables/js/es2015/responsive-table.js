@@ -150,8 +150,8 @@ class ResponsiveTable extends mixin(createComponent, initComponent, eventedState
    */
   placeOverflow = (evt) => {
     const MAGIC = {
-      top: 5,
-      right: 38,
+      TOP: 5,
+      RIGHT: 38,
     };
 
     const { element, optionMenu } = evt.detail;
