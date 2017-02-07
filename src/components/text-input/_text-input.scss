@@ -9,35 +9,39 @@
 @import '../../globals/scss/import-once';
 
 @include exports('text') {
-
-.bx--text {
-  &__input {
+  .bx--text-input {
     @include reset;
     @include font-size('14');
     display: block;
     width: 100%;
     height: rem(40px);
-    min-width: 9.375rem;
-    padding: .825rem 0 .825rem 1rem;
-    font-weight: 400;
-    margin: .25rem 0 0;
+    min-width: 10rem;
+    padding: .825rem 1rem;
+    margin: .625rem 0 2rem;
     color: $text-01;
     background-color: $field-01;
+    border: 1px solid transparent;
 
     &::-webkit-input-placeholder {
       @include placeholder-colors;
     }
 
+    &:hover {
+      border: 1px solid $nav-07;
+    }
+
     &:focus {
       @include focus-outline;
-      outline: auto 2px -webkit-focus-ring-color; // webkit default
+      outline: auto 2px -webkit-focus-ring-color;
     }
 
     &:disabled {
       opacity: .5;
       cursor: not-allowed;
     }
-  }
-}
 
+    &:disabled:hover {
+      border: 1px solid transparent;
+    }
+  }
 }

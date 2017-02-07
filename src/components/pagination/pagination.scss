@@ -5,7 +5,7 @@
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/import-once';
 @import '../select/select';
-@import '../text/text';
+@import '../text-input/text-input';
 
 @include exports('pagination') {
 

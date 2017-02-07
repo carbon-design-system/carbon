@@ -18,13 +18,15 @@
   .bx--label {
     @include reset;
     @include font-size('14');
-    @include letter-spacing;
     font-weight: 700;
     display: inline-block;
     vertical-align: baseline;
   }
 
-  .bx--select[data-invalid],
+  .bx--label--disabled {
+    opacity: .5;
+  }
+
   input[data-invalid],
   textarea[data-invalid]  {
     box-shadow: 0 2px 0px 0px $support-01;
