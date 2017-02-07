@@ -1,0 +1,54 @@
+//-----------------------------
+// List
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+
+@include exports('lists') {
+
+  .bx--list--nested,
+  .bx--list--unordered,
+  .bx--list--ordered {
+    @include reset;
+    @include font-size('14');
+    @include font-smoothing;
+    margin-left: 2rem;
+    line-height: 1.5;
+  }
+
+  .bx--list--unordered,
+  .bx--list--ordered {
+    padding: 1rem;
+  }
+
+  .bx--list__item {
+    font-weight: 700;
+    padding-left: .25rem;
+  }
+
+  .bx--list--unordered > .bx--list__item {
+    list-style-type: disc;
+  }
+
+  .bx--list--ordered > .bx--list__item {
+    list-style-type: decimal;
+  }
+
+  .bx--list--nested {
+    margin-left: .5rem;
+  }
+
+  .bx--list--nested > .bx--list__item {
+    list-style-type: none;
+    font-weight: 400;
+  }
+
+  .bx--list--nested > .bx--list__item:before {
+    content: '-';
+    padding-right: .25rem;
+  }
+}
