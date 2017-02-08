@@ -7,26 +7,26 @@
 // - JavaScript classes for use with components and base-elements.
 // - The following statements import classes from actual locations to
 //   be consumed from this file instead of their actual locations.
-import initCheckbox from './src/components/checkbox/checkbox';
-import FileUploader from './src/components/file-uploader/file-uploader';
-import FabButton from './src/components/fab/fab';
-import ContentSwitcher from './src/components/content-switcher/content-switcher';
-import Tab from './src/components/tabs/tabs';
-import OverflowMenu from './src/components/overflow-menu/overflow-menu';
-import Modal from './src/components/modals/modals';
-import Loading from './src/components/loading/loading';
-import Dropdown from './src/components/dropdown/dropdown';
-import Card from './src/components/card/card';
-import NumberInput from './src/components/number-input/number-input';
-import DataTable from './src/components/data-table/data-table';
-import DetailPageHeader from './src/components/detail-page-header/detail-page-header';
-import LeftNav from './src/components/unified-header/left-nav';
-import InlineLeftNav from './src/components/inline-left-nav/inline-left-nav';
-import ProfileSwitcher from './src/components/unified-header/profile-switcher';
-import Pagination from './src/components/pagination/pagination';
-import SearchWithOptions from './src/components/search/search-with-options';
-import Accordion from './src/components/accordion/accordion';
-import CopyButton from './src/components/copy-button/copy-button';
+import initCheckbox from './components/checkbox/checkbox';
+import FileUploader from './components/file-uploader/file-uploader';
+import FabButton from './components/fab/fab';
+import ContentSwitcher from './components/content-switcher/content-switcher';
+import Tab from './components/tabs/tabs';
+import OverflowMenu from './components/overflow-menu/overflow-menu';
+import Modal from './components/modals/modals';
+import Loading from './components/loading/loading';
+import Dropdown from './components/dropdown/dropdown';
+import Card from './components/card/card';
+import NumberInput from './components/number-input/number-input';
+import DataTable from './components/data-table/data-table';
+import DetailPageHeader from './components/detail-page-header/detail-page-header';
+import LeftNav from './components/unified-header/left-nav';
+import InlineLeftNav from './components/inline-left-nav/inline-left-nav';
+import ProfileSwitcher from './components/unified-header/profile-switcher';
+import Pagination from './components/pagination/pagination';
+import SearchWithOptions from './components/search/search-with-options';
+import Accordion from './components/accordion/accordion';
+import CopyButton from './components/copy-button/copy-button';
 
 const settings = {};
 

@@ -66,7 +66,7 @@ function buildScripts(options) {
   return new Promise((resolve, reject) => {
     webpack({
       devtool: 'source-maps',
-      entry: options.entry || './index.js',
+      entry: options.entry || './src/index.js',
       output: Object.assign({
         path: path.dirname(options.target),
         filename: path.basename(options.target),
