@@ -23,10 +23,6 @@
     background-color: $field-01;
     border: 1px solid transparent;
 
-    &:hover {
-      border: 1px solid $nav-07;
-    }
-
     &:focus {
       @include focus-outline;
       outline: auto 2px -webkit-focus-ring-color; // webkit default
