@@ -8,46 +8,45 @@
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/import-once';
 
-@include exports('radio') {
+@include exports('radio-button') {
 
-.bx--radio {
-  @include hidden;
+  .bx--radio-button-group {
+    display: flex;
+    align-items: center;
+  }
 
-  &__label {
-    // Radio Label - fonts and positioning
-    @include reset;
-    @include font-smoothing;
+  .bx--radio-button {
+    @include hidden;
+  }
+
+  .bx--radio-button__label {
+    @include font-size('14');
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin-right: 1rem;
   }
 
-  &__appearance {
-    // Styled Radio Button - default
+  .bx--radio-button__appearance {
     @include reset;
-    @include font-size('16');
-    background-color: $field-01;
+    background-color: $inverse-01;
     border-radius: 50%;
     border: 2px solid $ui-05;
-    display: inline-block;
     height: rem(18px);
-    margin-right: .75rem;
-    padding: 0;
     width: rem(18px);
+    margin-right: rem(10px);
   }
 
-  &:checked + &__label &__appearance {
-    // Styled Radio - checked - background
-    align-items: center;
-    border-color: $brand-01;
+  .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: $brand-01;
 
     &:before {
-      // Styled Radio - checked - dot
       content: '';
       display: inline-block;
       position: relative;
-      left: 3px;
       width: .5rem;
       height: .5rem;
       border-radius: 50%;
@@ -55,16 +54,12 @@
     }
   }
 
-  &:disabled + &__label {
-    // Styled Radio and Label - disabled
+  .bx--radio-button:disabled + .bx--radio-button__label {
     opacity: .5;
     cursor: not-allowed;
   }
 
-  &:focus + &__label &__appearance {
-    // Styled Radio - Focus outline (Firefox and Webkit)
+  .bx--radio-button:focus + .bx--radio-button__label .bx--radio-button__appearance {
     @include focus-outline;
   }
-}
-
 }
