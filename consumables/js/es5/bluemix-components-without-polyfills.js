@@ -731,8 +731,6 @@ var BluemixComponents =
 	  value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	exports.default = function (ToMix) {
@@ -774,30 +772,24 @@ var BluemixComponents =
 	        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	          this.create(target, options);
 	        } else {
-	          var _ret = function () {
-	            var handles = effectiveOptions.initEventNames.map(function (name) {
-	              return (0, _on2.default)(target, name, function (event) {
-	                var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
-	                if (element && !_this2.components.has(element)) {
-	                  var component = _this2.create(element, options);
-	                  if (typeof component.createdByEvent === 'function') {
-	                    component.createdByEvent(event);
-	                  }
-	                }
-	              });
-	            });
-	            return {
-	              v: {
-	                release: function release() {
-	                  for (var handle = handles.pop(); handle; handle = handles.pop()) {
-	                    handle.release();
-	                  }
+	          var handles = effectiveOptions.initEventNames.map(function (name) {
+	            return (0, _on2.default)(target, name, function (event) {
+	              var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
+	              if (element && !_this2.components.has(element)) {
+	                var component = _this2.create(element, options);
+	                if (typeof component.createdByEvent === 'function') {
+	                  component.createdByEvent(event);
 	                }
 	              }
-	            };
-	          }();
-	
-	          if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	            });
+	          });
+	          return {
+	            release: function release() {
+	              for (var handle = handles.pop(); handle; handle = handles.pop()) {
+	                handle.release();
+	              }
+	            }
+	          };
 	        }
 	      }
 	    }]);
@@ -2013,8 +2005,6 @@ var BluemixComponents =
 	  value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	exports.default = function (ToMix) {
@@ -2058,44 +2048,38 @@ var BluemixComponents =
 	        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	          this.create(target, options);
 	        } else {
-	          var _ret = function () {
-	            var handles = effectiveOptions.initEventNames.map(function (name) {
-	              return (0, _on2.default)(target, name, function (event) {
-	                var launcher = (0, _eventMatches2.default)(event, '[' + effectiveOptions.attribInitTarget + ']');
+	          var handles = effectiveOptions.initEventNames.map(function (name) {
+	            return (0, _on2.default)(target, name, function (event) {
+	              var launcher = (0, _eventMatches2.default)(event, '[' + effectiveOptions.attribInitTarget + ']');
 	
-	                if (launcher) {
-	                  event.delegateTarget = launcher; // eslint-disable-line
+	              if (launcher) {
+	                event.delegateTarget = launcher; // eslint-disable-line
 	
-	                  var elements = [].concat(_toConsumableArray(launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))));
-	                  if (elements.length > 1) {
-	                    throw new Error('Target widget must be unique.');
-	                  }
-	
-	                  if (elements.length === 1) {
-	                    if (launcher.tagName === 'A') {
-	                      event.preventDefault();
-	                    }
-	
-	                    var component = _this2.create(elements[0], options);
-	                    if (typeof component.createdByLauncher === 'function') {
-	                      component.createdByLauncher(event);
-	                    }
-	                  }
+	                var elements = [].concat(_toConsumableArray(launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))));
+	                if (elements.length > 1) {
+	                  throw new Error('Target widget must be unique.');
 	                }
-	              });
-	            });
-	            return {
-	              v: {
-	                release: function release() {
-	                  for (var handle = handles.pop(); handle; handle = handles.pop()) {
-	                    handle.release();
+	
+	                if (elements.length === 1) {
+	                  if (launcher.tagName === 'A') {
+	                    event.preventDefault();
+	                  }
+	
+	                  var component = _this2.create(elements[0], options);
+	                  if (typeof component.createdByLauncher === 'function') {
+	                    component.createdByLauncher(event);
 	                  }
 	                }
 	              }
-	            };
-	          }();
-	
-	          if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	            });
+	          });
+	          return {
+	            release: function release() {
+	              for (var handle = handles.pop(); handle; handle = handles.pop()) {
+	                handle.release();
+	              }
+	            }
+	          };
 	        }
 	      }
 	    }]);
@@ -2801,21 +2785,19 @@ var BluemixComponents =
 	      var _this2 = this;
 	
 	      if ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem) || event.which === 27 || event.type === 'click') {
-	        (function () {
-	          var isOpen = _this2.element.classList.contains('bx--dropdown--open');
-	          var isOfSelf = _this2.element.contains(event.target);
-	          var actions = {
-	            add: isOfSelf && event.which === 40 && !isOpen,
-	            remove: (!isOfSelf || event.which === 27) && isOpen,
-	            toggle: isOfSelf && event.which !== 27 && event.which !== 40
-	          };
-	          Object.keys(actions).forEach(function (action) {
-	            if (actions[action]) {
-	              _this2.element.classList[action]('bx--dropdown--open');
-	              _this2.element.focus();
-	            }
-	          });
-	        })();
+	        var isOpen = this.element.classList.contains('bx--dropdown--open');
+	        var isOfSelf = this.element.contains(event.target);
+	        var actions = {
+	          add: isOfSelf && event.which === 40 && !isOpen,
+	          remove: (!isOfSelf || event.which === 27) && isOpen,
+	          toggle: isOfSelf && event.which !== 27 && event.which !== 40
+	        };
+	        Object.keys(actions).forEach(function (action) {
+	          if (actions[action]) {
+	            _this2.element.classList[action]('bx--dropdown--open');
+	            _this2.element.focus();
+	          }
+	        });
 	      }
 	    }
 	
@@ -3500,8 +3482,8 @@ var BluemixComponents =
 	
 	  this.placeOverflow = function (evt) {
 	    var MAGIC = {
-	      top: 5,
-	      right: 38
+	      TOP: 5,
+	      RIGHT: 38
 	    };
 	
 	    var _evt$detail = evt.detail,
@@ -4401,8 +4383,6 @@ var BluemixComponents =
 	  value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -4854,68 +4834,62 @@ var BluemixComponents =
 	      // Sorry
 	      var leftNavSectionItem = (0, _eventMatches2.default)(evt, this.options.selectorLeftNavSection);
 	      if (leftNavSectionItem) {
-	        var _ret = function () {
-	          // currently selected
-	          var selectedLeftNavSectionItem = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSection);
-	          var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(_this10.options.selectorLeftNavCurrentSectionTitle);
-	          var selectedLeftNavSectionItemIcon = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSectionIcon);
-	          var selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
-	          var selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
+	        // currently selected
+	        var selectedLeftNavSectionItem = this.element.querySelector(this.options.selectorLeftNavCurrentSection);
+	        var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(this.options.selectorLeftNavCurrentSectionTitle);
+	        var selectedLeftNavSectionItemIcon = this.element.querySelector(this.options.selectorLeftNavCurrentSectionIcon);
+	        var selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
+	        var selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
 	
-	          // clicked on item
-	          var leftNavSectionItemLink = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionLink);
-	          var leftNavSectionItemIcon = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionIcon);
-	          var leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
-	          var leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
+	        // clicked on item
+	        var leftNavSectionItemLink = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionLink);
+	        var leftNavSectionItemIcon = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionIcon);
+	        var leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
+	        var leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
 	
-	          if (_this10.leftNavSectionActive) {
-	            return {
-	              v: void 0
-	            };
-	          }
-	          _this10.leftNavSectionActive = true;
+	        if (this.leftNavSectionActive) {
+	          return;
+	        }
+	        this.leftNavSectionActive = true;
 	
-	          var newLeftNavSectionItem = document.createElement('li');
-	          newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
-	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection);
-	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection + '--' + selectedLeftNavSectionValue);
+	        var newLeftNavSectionItem = document.createElement('li');
+	        newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
+	        newLeftNavSectionItem.classList.add(this.options.classNavSection);
+	        newLeftNavSectionItem.classList.add(this.options.classNavSection + '--' + selectedLeftNavSectionValue);
 	
-	          var newLeftNavSectionItemAnchor = document.createElement('a');
-	          newLeftNavSectionItemAnchor.setAttribute('href', 'javascript:void(0)'); // eslint-disable-line no-script-url
-	          newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
-	          newLeftNavSectionItemAnchor.classList.add(_this10.options.classNavSectionAnchor);
+	        var newLeftNavSectionItemAnchor = document.createElement('a');
+	        newLeftNavSectionItemAnchor.setAttribute('href', 'javascript:void(0)'); // eslint-disable-line no-script-url
+	        newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
+	        newLeftNavSectionItemAnchor.classList.add(this.options.classNavSectionAnchor);
 	
-	          var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
-	          // IE11 doesn't support classList on SVG, must revert to className
-	          newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
-	          newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
-	          newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
+	        var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
+	        // IE11 doesn't support classList on SVG, must revert to className
+	        newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
+	        newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
+	        newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
 	
-	          var newLeftNavSectionItemLink = document.createElement('span');
-	          newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
-	          newLeftNavSectionItemLink.classList.add(_this10.options.classNavSectionLink);
-	          newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
+	        var newLeftNavSectionItemLink = document.createElement('span');
+	        newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
+	        newLeftNavSectionItemLink.classList.add(this.options.classNavSectionLink);
+	        newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
 	
-	          _this10.animateNavSection(leftNavSectionItem);
-	          _this10.animateNavList(leftNavSectionValue);
+	        this.animateNavSection(leftNavSectionItem);
+	        this.animateNavList(leftNavSectionValue);
 	
-	          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
-	          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
-	          newLeftNavSectionItem.appendChild(newLeftNavSectionItemAnchor);
-	          leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
+	        newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
+	        newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
+	        newLeftNavSectionItem.appendChild(newLeftNavSectionItemAnchor);
+	        leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
 	
-	          setTimeout(function () {
-	            selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
-	            selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionValue);
-	            selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionValue);
-	            selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
+	        setTimeout(function () {
+	          selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
+	          selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionValue);
+	          selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionValue);
+	          selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
 	
-	            leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
-	            _this10.leftNavSectionActive = false;
-	          }, 450); // Wait for nav items to animate
-	        }();
-	
-	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	          leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
+	          _this10.leftNavSectionActive = false;
+	        }, 450); // Wait for nav items to animate
 	      }
 	    }
 	  }, {

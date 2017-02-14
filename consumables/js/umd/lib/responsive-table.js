@@ -213,8 +213,8 @@
 
     this.placeOverflow = function (evt) {
       var MAGIC = {
-        top: 5,
-        right: 38
+        TOP: 5,
+        RIGHT: 38
       };
 
       var _evt$detail = evt.detail,
