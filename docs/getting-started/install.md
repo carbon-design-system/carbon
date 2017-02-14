@@ -88,13 +88,7 @@ $ bower install bluemix-components --save
 
 ## Download
 
-Download the latest version of Bluemix Components (`6.7.0`).
-
-* [Download .zip](https://github.ibm.com/Bluemix/bluemix-components/archive/6.7.0.zip)
-* [Download tar.gz](https://github.ibm.com/Bluemix/bluemix-components/archive/6.7.0.tar.gz)
-
-See [tags](https://github.ibm.com/Bluemix/bluemix-components/tags) on GitHub Enterprise for older versions.
-See [releases](https://github.ibm.com/Bluemix/bluemix-components/releases) for release notes and changelogs.
+Download the latest version of Bluemix Components from the [releases](https://github.ibm.com/Bluemix/bluemix-components/releases) page.
 
 ## Bluemix Boilerplate
 
