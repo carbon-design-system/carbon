@@ -109,7 +109,8 @@
     "patterns",
     "sass",
     "scss",
-    "style guide"
+    "style guide",
+    "eyeglass-module"
   ],
   "config": {
     "validate-commit-msg": {
@@ -132,5 +133,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "eyeglass": {
+    "sassDir": "consumables/scss",
+    "exports": false,
+    "name": "bluemix-components",
+    "needs": "^1.2.1"
   }
 }
