@@ -1,0 +1,52 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+@import 'mixins';
+
+@include exports('tags') {
+  .bx--tag {
+    @include font-size('12');
+    display: inline-flex;
+    align-items: center;
+    padding: 0 .625rem;
+    height: 1.25rem;
+    margin: .1875rem;
+    border-radius: rem(15px);
+
+    &:not(:first-child) {
+      margin-left: 0;
+    }
+  }
+
+  .bx--tag--ibm {
+    @include tag-theme($color__blue-10, $color__blue-60);
+  }
+
+  .bx--tag--beta {
+    @include tag-theme($color__gray-1, $color__navy-gray-4);
+  }
+
+  .bx--tag--third-party {
+    @include tag-theme($color__teal-10, $color__teal-60);
+  }
+
+  .bx--tag--local,
+  .bx--tag--dedicated,
+  .bx--tag--custom {
+    @include tag-theme($color__purple-10, $color__purple-60);
+  }
+
+  .bx--tag--experimental {
+    @include tag-theme($color__orange-10, $color__orange-60);
+  }
+
+  .bx--tag--community {
+    @include tag-theme($color__green-10, $color__green-60);
+  }
+
+  .bx--tag--private {
+    @include tag-theme($color__yellow-10, $color__yellow-60);
+  }
+}
