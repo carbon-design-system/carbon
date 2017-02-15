@@ -1,0 +1,25 @@
+### SCSS Mixins
+
+Mixins are located in [src/globals/scss/_mixins.scss](https://github.ibm.com/Bluemix/bluemix-components/blob/7.x/src/globals/scss/_mixins.scss)
+
+| Name                | Params | Description                         |
+|---------------------|--------|-------------------------------------|
+| inline-notification--color | $color: String | Applies given $color to border and icon |
+| notification--color | $color: String | Applies given $color to left border |
+
+
+### CSS Modifiers
+
+Use these modifiers with `.bx--inline-notification` class.
+
+| Selector                         | Description                        |
+|----------------------------------|------------------------------------|
+| .bx--toast-notification--error   | Apply error color to border and icon   |
+| .bx--toast-notification--success | Apply success color to border and icon |
+| .bx--toast-notification--info    | Apply info color to border and icon    |
+| .bx--toast-notification--warning | Apply warning color to border and icon |
+| .bx--toast-notification--error   | Apply error color on left border   |
+| .bx--toast-notification--success | Apply success color on left border |
+| .bx--toast-notification--info    | Apply info color on left border    |
+| .bx--toast-notification--warning | Apply warning color on left border |
+

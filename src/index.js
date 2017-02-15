@@ -27,6 +27,7 @@ import Pagination from './components/pagination/pagination';
 import SearchWithOptions from './components/search/search-with-options';
 import Accordion from './components/accordion/accordion';
 import CopyButton from './components/copy-button/copy-button';
+import Notification from './components/notification/notification';
 
 const settings = {};
 
@@ -161,6 +162,12 @@ export {
    * @type InlineLeftNav
    */
   InlineLeftNav,
+
+  /**
+   * Notification.
+   * @type InlineLeftNav
+   */
+  Notification,
 };
 
 /**
@@ -196,6 +203,7 @@ const init = () => {
     SearchWithOptions.init();
     Accordion.init();
     CopyButton.init();
+    Notification.init();
   }
 };
 

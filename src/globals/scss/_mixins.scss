@@ -1,22 +1,20 @@
-@mixin reset {
-  // Main reset block for most elements:
-  // http://cssreset.com/scripts/eric-meyer-reset-css/
-  @if global-variable-exists(use-reset) and $use-reset == false {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+//----------------------------------------------
+// Mixins
+// ---------------------------------------------
+//
+//   Category             ||  Description
+//   ===========================================
+//   Misc                 ||  General helper @mixins
+//   Deprecated           ||  Not used anymore
+//   Button               ||  -
+//   Inline Notification  ||  -
+//   Toast Notification   ||  -
+//   ===========================================
 
-    & > *,
-    & > *:before,
-    & > *:after {
-      box-sizing: inherit;
-    }
-  }
-}
+
+//----------------------------------------------
+// Misc
+// ---------------------------------------------
 
 @mixin text-overflow($width) {
   display: block;
@@ -42,14 +40,6 @@
 
 @mixin placeholder-colors {
   color: $text-03;
-}
-
-@mixin text-overflow($width) {
-  display: block;
-  width: $width;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 @mixin box-shadow($size: 'small') {
@@ -87,11 +77,19 @@
   white-space: nowrap;
 }
 
+//----------------------------------------------
+// Deprecated
+// ---------------------------------------------
+
 @mixin light-ui {
   .bx--global-light-ui & {
     @content;
   }
 }
+
+//----------------------------------------------
+// Button
+// ---------------------------------------------
 
 @mixin button-base {
   @include reset;
@@ -153,3 +151,25 @@
     fill: $icon-color;
   }
 }
+
+//----------------------------------------------
+// Inline Notification
+// ---------------------------------------------
+
+@mixin inline-notification--color($color) {
+  border: 1px solid $color;
+  border-left: 6px solid $color;
+
+  .bx--inline-notification__icon {
+    fill: $color;
+  }
+}
+
+//----------------------------------------------
+// Toast Notification
+// ---------------------------------------------
+
+@mixin notification--color($color) {
+  border-left: 6px solid $color;
+}
+
