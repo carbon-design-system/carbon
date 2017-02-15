@@ -1,0 +1,56 @@
+@import '../../global/colors/colors';
+@import '../../global/typography/typography';
+@import '../../import-once';
+@import '../../base-elements/links/links';
+
+@include exports('breadcrumb') {
+  .bx--breadcrumb {
+    @include font-size('14');
+    display: none;
+
+    @include breakpoint(bp--xs--major) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .bx--breadcrumb-item:last-child {
+    margin-right: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .bx--breadcrumb--lg .bx--breadcrumb-item:last-child {
+    margin-right: 1rem;
+
+    &::after {
+      display: block;
+    }
+  }
+
+  .bx--breadcrumb-item {
+    margin-right: rem(20.66px);
+    display: flex;
+    align-items: center;
+  }
+
+  .bx--breadcrumb-item::after {
+    content: '/';
+    margin-left: 1rem;
+    color: $text-03;
+  }
+
+  .bx--breadcrumb .bx--link {
+    white-space: nowrap;
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      color: $brand-01;
+      border-bottom: 1px solid $brand-01;
+    }
+  }
+}
