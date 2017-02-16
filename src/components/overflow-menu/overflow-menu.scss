@@ -12,96 +12,104 @@
 
 @include exports('overflow-menu') {
 
-.bx--overflow-menu {
-  @include reset;
-  display: flex;
-  width: 2rem;
-  margin: 0 1rem 0 1rem;
-  cursor: pointer;
-  position: relative;
+  .bx--overflow-menu {
+    @include reset;
+    position: relative;
 
-  // horizontal rule styling
-  hr {
-    margin: .25rem 0 0;
-    border: none;
-    border-bottom: 1px solid $ui-04;
+    &:focus {
+      outline: 2px solid $color__blue-30;
+    }
   }
 
-  // Initial styling for the options pane
-  &__options {
+  .bx--overflow-menu__icon {
+    width: rem(4px);
+    height: rem(20px);
+    padding: .5rem;
+    fill: $ui-05;
+    cursor: pointer;
+  }
+
+  .bx--overflow-menu-options {
     @include reset;
     @include layer('overlay');
-    list-style: none;
-    left: auto;
-    right: rem(-20px);
-    position: absolute;
     display: none;
-    padding: .5rem 0 .5rem;
-    margin: 2.2rem 0 0 -10rem;
-    z-index: z('overflowOptions');
-    background: $ui-01;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    z-index: 1;
+    background-color: $inverse-01;
     border: 1px solid $ui-04;
-
-    // rectangle to make little arrow
-    &:before {
-      position: absolute;
-      top: -.45rem;
-      right: rem(30px);
-      z-index: z('overflowHidden');
-      display: block;
-      width: .75rem;
-      height: .75rem;
-      background-color: $ui-01;
-      border-top: 1px solid $ui-04;
-      border-left: 1px solid $ui-04;
-      content: '';
-      transform: rotate(45deg);
-    }
+    width: 11.25rem;
+    list-style: none;
+    margin-top: .25rem;
+    padding: .285rem 0 .5rem;
+    left: -20px;
   }
 
-  &__btn,
-  &__btn--delete {
-    @include reset;
-    @include helvetica;
-    @include font-size('14');
-    width: 100%;
-    padding: .5rem 1rem;
-    font-weight: 400;
-    color: $text-01;
-    text-align: left;
-    cursor: pointer;
-    background: none;
-    border: none;
-
-    &:hover {
-      background: $brand-01;
-      color: $inverse-01;
-    }
-
-    &--delete:hover {
-      background-color: $support-01;
-    }
-  }
-
-  &__icon {
-    height: 20px;
-    fill: $ui-05;
-  }
-
-  &:active,
-  &.bx--overflow-menu--open {
-    .bx--overflow-menu__options {
-      display: block;
-    }
-  }
-
-  &.bx--overflow-menu--open {
+  .bx--overflow-menu--open .bx--overflow-menu-options {
     display: flex;
   }
 
-  &--open {
+  .bx--overflow-menu-options:before {
+    content: '';
+    position: absolute;
     display: block;
+    width: rem(8px);
+    height: rem(8px);
+    z-index: -1;
+    transform: rotate(45deg);
+    background-color: $inverse-01;
+    border-top: 1px solid $ui-04;
+    border-left: 1px solid $ui-04;
+    top: -6px;
+    left: 24px;
   }
-}
 
+  .bx--overflow-menu-options__option {
+    @include reset;
+    display: flex;
+    background-color: transparent;
+    align-items: center;
+    width: 100%;
+    padding: .5625rem 0;
+  }
+
+  .bx--overflow-menu-options__btn {
+    @include reset;
+    @include font-size('14');
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: inline-block;
+    background-color: transparent;
+    text-align: left;
+    padding: 0 1rem;
+    cursor: pointer;
+  }
+
+  .bx--overflow-menu-options__option:hover {
+    background-color: $brand-01;
+  }
+
+  .bx--overflow-menu-options__option:hover .bx--overflow-menu-options__btn {
+    color: $inverse-01;
+  }
+
+  .bx--overflow-menu-options__option--danger {
+    border-top: 1px solid $ui-04;
+  }
+
+  .bx--overflow-menu-options__option--danger:hover {
+    background-color: $support-01;
+  }
+
+  .bx--overflow-menu--flip {
+    .bx--overflow-menu-options {
+      left: -140px;
+    }
+
+    .bx--overflow-menu-options:before {
+      left: 145px;
+    }
+  }
 }

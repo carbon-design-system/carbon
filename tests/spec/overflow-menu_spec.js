@@ -4,22 +4,7 @@ import '../../demo/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import OverflowMenu from '../../src/components/overflow-menu/overflow-menu';
-
-const HTML = `
-  <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
-    <svg class="bx--overflow-menu__icon">
-      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/sprite.svg#app-actions--overflow-menu"></use>
-    </svg>
-    <ul class="bx--overflow-menu__options">
-      <li><button type="button" class="bx--overflow-menu__btn">Stop app</button></li>
-      <li><button type="button" class="bx--overflow-menu__btn">Restart app</button></li>
-      <li><button type="button" class="bx--overflow-menu__btn">Rename app</button></li>
-      <li><button type="button" class="bx--overflow-menu__btn">Edit routes and access</button></li>
-      <hr/>
-      <li><button type="button" class="bx--overflow-menu__btn--delete">Delete app</button></li>
-    </ul>
-  </div>
-`;
+import HTML from '../../src/components/overflow-menu/overflow-menu.html';
 
 describe('Test Overflow menu', function () {
   describe('Constructor', function () {
@@ -44,7 +29,7 @@ describe('Test Overflow menu', function () {
 
     before(function () {
       document.body.appendChild(container);
-      element = document.querySelector('[data-overflow-menu]');
+      element = document.querySelector('.bx--overflow-menu');
       menu = new OverflowMenu(element);
     });
 
@@ -58,18 +43,8 @@ describe('Test Overflow menu', function () {
       expect(element.classList.contains('bx--overflow-menu--open')).to.be.false;
     });
 
-    it('Should set and remove "bx--overflow-menu--open" class on the options menu', function () {
-      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(menu.optionMenu.classList.contains('bx--overflow-menu--open')).to.be.true;
-
-      // Secondary click to close overflow-menu:
-      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(menu.optionMenu.classList.contains('bx--overflow-menu--open')).to.be.false;
-    });
-
     afterEach(function () {
       element.classList.remove('bx--overflow-menu--open');
-      menu.optionMenu.classList.remove('bx--overflow-menu--open');
     });
 
     after(function () {
@@ -88,7 +63,7 @@ describe('Test Overflow menu', function () {
 
     before(function () {
       document.body.appendChild(container);
-      element = document.querySelector('[data-overflow-menu]');
+      element = document.querySelector('.bx--overflow-menu');
       menu = new OverflowMenu(element);
     });
 
@@ -101,7 +76,6 @@ describe('Test Overflow menu', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent, 'overflow-menu-shown event').not.to.have.been.called;
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.false;
-      expect(menu.optionMenu.classList.contains('bx--overflow-menu--open'), 'State of dropdown menu').to.be.false;
     });
 
     it('Should emit an event after showing', async function () {
@@ -122,7 +96,6 @@ describe('Test Overflow menu', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent, 'overflow-menu-hidden event').not.to.have.been.called;
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.true;
-      expect(menu.optionMenu.classList.contains('bx--overflow-menu--open'), 'State of dropdown menu').to.be.true;
     });
 
     it('Should emit an event after hiding', async function () {
@@ -156,7 +129,7 @@ describe('Test Overflow menu', function () {
 
     before(function () {
       document.body.appendChild(container);
-      elements = [...document.querySelectorAll('[data-overflow-menu]')];
+      elements = [...document.querySelectorAll('.bx--overflow-menu')];
       element1 = elements[0];
       element2 = elements[1];
       element3 = elements[2];

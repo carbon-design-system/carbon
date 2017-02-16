@@ -43,7 +43,6 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
-    toggleClass(this.optionMenu, 'bx--overflow-menu--open', state === 'shown');
     toggleClass(this.element, 'bx--overflow-menu--open', state === 'shown');
     callback();
   }
@@ -97,7 +96,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
 
   static options = {
     selectorInit: '[data-overflow-menu]',
-    selectorOptionMenu: '.bx--overflow-menu__options',
+    selectorOptionMenu: '.bx--overflow-menu-options',
     eventBeforeShown: 'overflow-menu-beingshown',
     eventAfterShown: 'overflow-menu-shown',
     eventBeforeHidden: 'overflow-menu-beinghidden',
