@@ -13,12 +13,9 @@
     @include reset;
     @include font-size('14');
     width: 100%;
-    min-height: 10rem;
     min-width: 10rem;
-    max-width: 100%;
-    max-height: 100%;
     padding: 1rem;
-    margin: .625rem 0 2rem;
+    margin-top: .625rem;
     color: $text-01;
     background-color: $field-01;
     border: 1px solid transparent;
