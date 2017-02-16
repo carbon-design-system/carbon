@@ -1,0 +1,85 @@
+//----------------------------------------------
+// Mixins
+// ---------------------------------------------
+//
+//   Category             ||  Description
+//   ===========================================
+//   Misc                 ||  General helper @mixins
+//   Deprecated           ||  Not used anymore
+//   ===========================================
+
+
+//----------------------------------------------
+// Misc
+// ---------------------------------------------
+
+@mixin text-overflow($width) {
+  display: block;
+  width: $width;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin reset {
+  // Main reset block for most elements:
+  // http://cssreset.com/scripts/eric-meyer-reset-css/
+  @if global-variable-exists(css--reset) and $css--reset == false {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+}
+
+@mixin placeholder-colors {
+  color: $text-03;
+}
+
+@mixin box-shadow($size: 'small') {
+  // Large - For dropdowns
+  @if ($size == 'large') {
+    box-shadow: 6px 6px 6px 0 $box-shadow;
+  }
+
+  @if ($size == 'small') {
+    box-shadow: 0px 3px 3px 0 $box-shadow;
+  }
+}
+
+@mixin focus-outline {
+  outline: 1px dotted; // for non-webkit browsers
+  outline: auto 5px -webkit-focus-ring-color; // webkit default
+}
+
+@mixin rotate($deg, $speed, $origin: center) {
+  transform: rotate($deg);
+  transition: transform $speed;
+  transform-origin: $origin;
+}
+
+@mixin hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  visibility: visible;
+  white-space: nowrap;
+}
+
+//----------------------------------------------
+// Deprecated
+// ---------------------------------------------
+
+@mixin light-ui {
+  .bx--global-light-ui & {
+    @content;
+  }
+}

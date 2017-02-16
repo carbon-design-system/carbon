@@ -1,0 +1,20 @@
+//----------------------------------------------
+// Inline Notification
+// ---------------------------------------------
+
+@mixin inline-notification--color($color) {
+  border: 1px solid $color;
+  border-left: 6px solid $color;
+
+  .bx--inline-notification__icon {
+    fill: $color;
+  }
+}
+
+//----------------------------------------------
+// Toast Notification
+// ---------------------------------------------
+
+@mixin notification--color($color) {
+  border-left: 6px solid $color;
+}

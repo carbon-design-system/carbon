@@ -2,8 +2,8 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/layout';
-@import '../../globals/scss/mixins';
 @import '../../globals/scss/import-once';
+@import 'mixins';
 
 @include exports('button') {
 
@@ -11,7 +11,7 @@
   button.bx--btn {
     display: inline-block;
   }
-  
+
   // Reset intrisic padding in Firefox (see #731)
   button.bx--btn::-moz-focus-inner {
     padding: 0;
