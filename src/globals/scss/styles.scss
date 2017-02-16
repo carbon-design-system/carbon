@@ -37,6 +37,7 @@ $css--reset: false !default;
 @import '../../components/link/link';
 @import '../../components/list/list';
 @import '../../components/data-table/data-table';
+@import '../../components/snippet/snippet';
 
 //-------------------------
 // 🍕 Components
@@ -60,6 +61,7 @@ $css--reset: false !default;
 @import '../../components/pagination/pagination';
 @import '../../components/accordion/accordion';
 @import '../../components/progress-indicator/progress-indicator';
+@import '../../components/breadcrumb/breadcrumb';
 
 //-------------------------------------
 // 🙈 Hidden (Not exposed on website)

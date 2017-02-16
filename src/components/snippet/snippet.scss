@@ -1,0 +1,77 @@
+@import 'mixins';
+
+.bx--snippet--code {
+  @include bx--snippet;
+  background-color: $field-01;
+  padding: 1rem 2.5rem 1rem 1rem;
+}
+
+.bx--snippet code {
+  @include font-size('16');
+}
+
+.bx--snippet--code .bx--snippet-container {
+  max-height: rem(192px);
+  overflow-y: scroll;
+  margin-right: 1rem;
+}
+
+.bx--snippet--code .bx--snippet-container code pre {
+  white-space: pre-wrap;
+}
+
+.bx--snippet--terminal {
+  @include bx--snippet;
+  background-color: $text-01;
+  color: $inverse-01;
+  height: 3.5rem;
+  padding: 0 2.5rem 0 1rem;
+}
+
+.bx--snippet--terminal .bx--snippet-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 1rem;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+.bx--snippet__icon {
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  fill: $brand-01;
+  height: rem(24px);
+  width: rem(18px);
+  transition: $transition--base;
+
+  &:hover {
+    fill: $brand-02;
+  }
+}
+
+.bx--snippet--terminal .bx--snippet__icon {
+  fill: $brand-02;
+
+  &:hover {
+    fill: $brand-01;
+  }
+}
+
+.bx--snippet-button {
+  @include reset;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.bx--snippet .bx--btn--copy__feedback {
+  @include helvetica;
+  z-index: z('overlay');
+  font-weight: 700;
+  left: inherit;
+  top: 2rem;
+  right: 1.75rem;
+}

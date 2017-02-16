@@ -1,0 +1,45 @@
+<div class="bx--snippet bx--snippet--code">
+  <div class="bx--snippet-container">
+    <code>
+      <pre>
+@mixin bx--snippet($type) {
+  @if $type == 'terminal' {
+    background-color: red;
+  } @else if $type == 'code' {
+    background-color: blue;
+  } @else if $type == 'text' {
+    background-color: white;
+  }
+
+  @if $type == 'terminal' {
+    background-color: red;
+  } @else if $type == 'code' {
+    background-color: blue;
+  } @else if $type == 'text' {
+    background-color: white;
+  }
+}
+      </pre>
+    </code>
+  </div>
+  <button data-copy-btn class="bx--snippet-button">
+    <svg class="bx--snippet__icon">
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#copy"></use>
+    </svg>
+    <div class="bx--btn--copy__feedback" data-feedback="Copied!"></div>
+  </button>
+</div>
+
+<div class="bx--snippet bx--snippet--terminal">
+  <div class="bx--snippet-container">
+    <code>
+node -v
+    </code>
+  </div>
+  <button data-copy-btn class="bx--snippet-button">
+    <svg class="bx--snippet__icon">
+      <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#copy"></use>
+    </svg>
+    <div class="bx--btn--copy__feedback" data-feedback="Copied!"></div>
+  </button>
+</div>
