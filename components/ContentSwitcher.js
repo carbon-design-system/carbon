@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import '@console/bluemix-components/consumables/scss/components/content-switcher/content-switcher.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/content-switcher/content-switcher.scss');
+}
+
 
 class ContentSwitcher extends React.Component {
   static propTypes = {

@@ -1,7 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
-import '@console/bluemix-components/consumables/scss/components/notifications/notifications.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/notifications/notifications.scss');
+}
 
 class Notification extends Component {
   static propTypes = {

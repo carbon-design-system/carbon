@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import '@console/bluemix-components/consumables/scss/components/tags/tags.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/tags/tags.scss');
+}
 
 const TYPES = {
   beta: 'Beta',

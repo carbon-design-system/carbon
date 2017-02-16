@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import '@console/bluemix-components/consumables/scss/base-elements/links/links.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/base-elements/links/links.scss');
+}
 
 const propTypes = {
   children: PropTypes.node,

@@ -2,7 +2,9 @@ import React, { PropTypes, PureComponent } from 'react';
 import classNames from 'classnames';
 import ClickListener from '../internal/ClickListener';
 import Icon from './Icon';
-import '@console/bluemix-components/consumables/scss/components/dropdown/dropdown.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/dropdown/dropdown.scss');
+}
 
 class Dropdown extends PureComponent {
 

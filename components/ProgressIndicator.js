@@ -1,6 +1,8 @@
 import React, { PropTypes, Children } from 'react';
 import classnames from 'classnames';
-import '@console/bluemix-components/consumables/scss/components/progress-indicator/progress-indicator.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/progress-indicator/progress-indicator.scss');
+}
 
 const propTypes = {
   children: PropTypes.node,

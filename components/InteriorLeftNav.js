@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import InteriorLeftNavHeader from './InteriorLeftNavHeader';
 import classnames from 'classnames';
-import '@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
+}
 
 class InteriorLeftNav extends Component {
 

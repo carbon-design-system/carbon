@@ -62,6 +62,7 @@
         4
       ],
       "no-underscore-dangle": 0,
+      "global-require": 0,
       "react/prefer-stateless-function": 0
     },
     "env": {

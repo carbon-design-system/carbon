@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
-import '@console/bluemix-components/consumables/scss/base-elements/select/select.scss';
-import '@console/bluemix-components/consumables/scss/base-elements/forms/forms.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/base-elements/select/select.scss');
+  require('@console/bluemix-components/consumables/scss/base-elements/forms/forms.scss');
+}
 
 const propTypes = {
   children: PropTypes.node,

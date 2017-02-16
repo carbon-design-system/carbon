@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 import Button from './Button';
-import '@console/bluemix-components/consumables/scss/components/modals/modals.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/modals/modals.scss');
+}
 
 class Modal extends Component {
 

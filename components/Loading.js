@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import '@console/bluemix-components/consumables/scss/components/loading/loading.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/loading/loading.scss');
+}
 
 const propTypes = {
   active: React.PropTypes.bool,

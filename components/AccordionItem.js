@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import Icon from './Icon';
-import '@console/bluemix-components/consumables/scss/components/accordion/accordion.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/accordion/accordion.scss');
+}
 
 class AccordionItem extends Component {
   static propTypes = {

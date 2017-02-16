@@ -62,6 +62,21 @@ Bluemix Components React is published on a private npm registry maintained by th
   );
   ```
 
+7. If you want to turn off the automatic `scss`, pass into your webpack configuration an environment variable `importSASS` and set it to false.
+
+```js
+const webpack = require('webpack');
+
+module.exports = {
+  ...,
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.importSASS': false,
+    })
+  ],
+};
+```
+
 ## Development
 
 Please refer to the [Contribution Guidelines](CONTRIBUTING.md) before starting any work.
@@ -88,7 +103,7 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 
 ## a11y testing
 
-This project is scanned according to [IBM a11y standards](https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/Wa7b684534a33_4971_b961_4529f9ad4a2e/page/CI%20162%20compliance%20information) when PRs are opened against it using [`@ibma/aat`](https://github.ibm.com/IBMa/Tools-Auto-Node/blob/master/src/README.md) to scan the components in the form of rendered HTML.  
+This project is scanned according to [IBM a11y standards](https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/Wa7b684534a33_4971_b961_4529f9ad4a2e/page/CI%20162%20compliance%20information) when PRs are opened against it using [`@ibma/aat`](https://github.ibm.com/IBMa/Tools-Auto-Node/blob/master/src/README.md) to scan the components in the form of rendered HTML.
 
 These tests can also be ran locally at any time by running:
 

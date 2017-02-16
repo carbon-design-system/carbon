@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import RadioButton from './RadioButton';
 import warning from 'warning';
-import '@console/bluemix-components/consumables/scss/base-elements/radio/radio.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/base-elements/radio/radio.scss');
+}
 
 class RadioButtonGroup extends React.Component {
 

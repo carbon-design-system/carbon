@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import '@console/bluemix-components/consumables/scss/base-elements/select/select.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/base-elements/select/select.scss');
+}
 
 const propTypes = {
   value: React.PropTypes.any.isRequired,

@@ -2,7 +2,9 @@ import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import ClickListener from '../internal/ClickListener';
 import Icon from './Icon';
-import '@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss');
+}
 
 class OverflowMenu extends Component {
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import '@console/bluemix-components/consumables/scss/components/card/card.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/card/card.scss');
+}
 
 const propTypes = {
   children: React.PropTypes.node,

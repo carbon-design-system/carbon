@@ -1,7 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
-import '@console/bluemix-components/consumables/scss/base-elements/search/search.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/base-elements/search/search.scss');
+}
 
 class Search extends React.Component {
 

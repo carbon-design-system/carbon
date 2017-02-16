@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import '@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss');
+}
 
 const propTypes = {
   className: React.PropTypes.string,

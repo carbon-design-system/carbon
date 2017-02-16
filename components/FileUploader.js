@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import '@console/bluemix-components/consumables/scss/base-elements/file-uploader/file-uploader.scss';
+if (process.env.importSASS || process.env.importSASS === undefined) {
+  require('@console/bluemix-components/consumables/scss/base-elements/file-uploader/file-uploader.scss');
+}
 
 class FileUploader extends React.Component {
 
