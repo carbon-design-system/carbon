@@ -24,7 +24,7 @@ import LeftNav from './components/unified-header/left-nav';
 import InlineLeftNav from './components/inline-left-nav/inline-left-nav';
 import ProfileSwitcher from './components/unified-header/profile-switcher';
 import Pagination from './components/pagination/pagination';
-import SearchWithOptions from './components/search/search-with-options';
+import Search from './components/search/search';
 import Accordion from './components/accordion/accordion';
 import CopyButton from './components/copy-button/copy-button';
 import Notification from './components/notification/notification';
@@ -140,6 +140,12 @@ export {
   DetailPageHeader,
 
   /**
+   * Search.
+   * @type Search
+   */
+  Search,
+
+  /**
    * Profile Switcher.
    * @type ProfileSwitcher
    */
@@ -200,7 +206,7 @@ const init = () => {
     InlineLeftNav.init();
     ProfileSwitcher.init();
     Pagination.init();
-    SearchWithOptions.init();
+    Search.init();
     Accordion.init();
     CopyButton.init();
     Notification.init();
