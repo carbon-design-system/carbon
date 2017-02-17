@@ -9,90 +9,59 @@
 @import '../../globals/scss/import-once';
 
 @include exports('checkbox') {
-
-  // Input Element - visually hidden
   .bx--checkbox {
     @include hidden;
   }
 
-  // Label Element - fonts and positioning
-  .bx--checkbox__label {
-    @include reset;
+  .bx--checkbox-label {
     @include font-smoothing;
+    @include font-size('14');
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin-bottom: 1rem;
   }
 
-  .bx--checkbox__appearance {
+  .bx--checkbox-appearance {
     @include reset;
-    @include font-size('16');
     display: inline-block;
     height: rem(18px);
     width: rem(18px);
-    margin-right: .75rem;
-    background-color: $field-01;
+    margin-right: .5rem;
+    background-color: $ui-01;
     border-radius: 2px;
     border: 2px solid $ui-05;
-    overflow: hidden;
   }
 
-  .bx--checkbox {
-    // Box Styles - checked state - background
-    &:checked + &__appearance,
-    &:checked + &__label &__appearance {
-      display: flex;
-      align-items: baseline;
-      background-color: $brand-01;
-      border-color: $brand-01;
-
-      // Box Styles - checked state - checkmark
-      &:before {
-        content: '';
-        width: rem(12px);
-        height: rem(6px);
-        background: transparent;
-        border: 2px solid $inverse-01;
-        border-top: none;
-        border-right: none;
-        transform: rotate(-45deg);
-      }
-    }
-
-    // Disabled
-    &:disabled + &__label,
-    &__label &:disabled,
-    &:disabled + &__appearance,
-    &:disabled + &__appearance + &__label-text {
-      opacity: .5;
-      cursor: not-allowed;
-    }
-
-    // Focus
-    &:focus + &__label &__appearance,
-    &:focus + &__appearance {
-      @include focus-outline;
-    }
+  .bx--checkbox:checked + .bx--checkbox-appearance,
+  .bx--checkbox:checked + .bx--checkbox-label .bx--checkbox-appearance {
+    display: flex;
+    align-items: baseline;
+    background-color: $brand-01;
+    border-color: $brand-01;
   }
 
-  // SVG Checkmark - default
-  .bx--checkbox__checkmark {
+  .bx--checkbox:disabled + .bx--checkbox-label,
+  .bx--checkbox:disabled + .bx--checkbox-appearance,
+  .bx--checkbox:disabled ~ .bx--checkbox-label-text {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  .bx--checkbox:focus + .bx--checkbox-label .bx--checkbox-appearance,
+  .bx--checkbox:focus + .bx--checkbox-appearance {
+    @include focus-outline;
+  }
+
+  .bx--checkbox-checkmark {
     display: none;
     fill: $inverse-01;
     width: rem(15px);
     height: rem(15px);
   }
 
-  // SVG Checkmark - checked
-  .bx--checkbox--svg {
-    &:checked + .bx--checkbox__appearance:before,
-    &:checked + .bx--checkbox__label .bx--checkbox__appearance:before {
-      content: none;
-    }
-
-    &:checked + .bx--checkbox__appearance .bx--checkbox__checkmark,
-    &:checked + .bx--checkbox__label .bx--checkbox__appearance .bx--checkbox__checkmark {
-      display: block;
-    }
+  .bx--checkbox:checked + .bx--checkbox-appearance .bx--checkbox-checkmark,
+  .bx--checkbox:checked + .bx--checkbox-label .bx--checkbox-appearance .bx--checkbox-checkmark {
+    display: block;
   }
 }
