@@ -59,7 +59,7 @@
 }
 
 @include exports('reset') {
-  @if global-variable-exists(use-reset) and $use-reset == true {
+  @if global-variable-exists(use-reset) == false or $use-reset == true {
     @include reset-styles;
   }
 }
