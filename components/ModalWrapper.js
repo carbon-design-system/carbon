@@ -1,9 +1,8 @@
 import React from 'react';
 import Modal from './Modal';
 import Button from './Button';
-if (process.env.importSASS || process.env.importSASS === undefined) {
-  require('@console/bluemix-components/consumables/scss/components/modals/modals.scss');
-}
+// eslint-disable-next-line max-len, import/no-unresolved
+import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/modals/modals.scss';
 
 class ModalWrapper extends React.Component {
 

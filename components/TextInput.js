@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-if (process.env.importSASS || process.env.importSASS === undefined) {
-  require('@console/bluemix-components/consumables/scss/base-elements/text/text.scss');
-}
+// eslint-disable-next-line max-len, import/no-unresolved
+import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/base-elements/text/text.scss';
 
 const propTypes = {
   className: PropTypes.string,

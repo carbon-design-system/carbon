@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Icon from './Icon';
 import TabContent from './TabContent';
-if (process.env.importSASS || process.env.importSASS === undefined) {
-  require('@console/bluemix-components/consumables/scss/components/tabs/tabs.scss');
-}
+// eslint-disable-next-line max-len, import/no-unresolved
+import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/tabs/tabs.scss';
 
 class Tabs extends React.Component {
 

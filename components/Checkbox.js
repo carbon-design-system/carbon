@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
-if (process.env.importSASS || process.env.importSASS === undefined) {
-  require('@console/bluemix-components/consumables/scss/base-elements/checkbox/checkbox.scss');
-}
+// eslint-disable-next-line max-len, import/no-unresolved
+import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/base-elements/checkbox/checkbox.scss';
 
 const propTypes = {
   checked: PropTypes.bool,

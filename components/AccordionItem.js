@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import Icon from './Icon';
-if (process.env.importSASS || process.env.importSASS === undefined) {
-  require('@console/bluemix-components/consumables/scss/components/accordion/accordion.scss');
-}
+// eslint-disable-next-line max-len, import/no-unresolved
+import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/accordion/accordion.scss';
 
 class AccordionItem extends Component {
   static propTypes = {

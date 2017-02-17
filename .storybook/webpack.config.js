@@ -1,6 +1,5 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
   module: {
@@ -14,11 +13,6 @@ module.exports = {
   sassLoader: {
     includePaths: [path.resolve(__dirname, '..', 'node_modules')],
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.importSASS': true,
-    })
-  ],
   postcss() {
     return [autoprefixer];
   },

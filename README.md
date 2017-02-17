@@ -62,19 +62,11 @@ Bluemix Components React is published on a private npm registry maintained by th
   );
   ```
 
-7. If you want to turn off the automatic `scss`, pass into your webpack configuration an environment variable `importSASS` and set it to false.
+7. If you want to turn off the automatic `scss`, simply set EXCLUDE_SASS environment variable, like:
 
-```js
-const webpack = require('webpack');
-
-module.exports = {
-  ...,
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.importSASS': false,
-    })
-  ],
-};
+```sh
+> EXCLUDE_SASS=true
+> {your build command}
 ```
 
 ## Development

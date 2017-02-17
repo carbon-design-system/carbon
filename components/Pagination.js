@@ -8,9 +8,8 @@ import TextInput from './TextInput';
 
 import { equals } from '../lib/array';
 
-if (process.env.importSASS || process.env.importSASS === undefined) {
-  require('@console/bluemix-components/consumables/scss/components/pagination/pagination.scss');
-}
+// eslint-disable-next-line max-len, import/no-unresolved
+import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/pagination/pagination.scss';
 
 class Pagination extends Component {
   static propTypes = {
