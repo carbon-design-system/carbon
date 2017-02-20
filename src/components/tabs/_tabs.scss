@@ -11,28 +11,32 @@
 @import '../../globals/scss/import-once';
 
 @include exports('tabs') {
+  .bx--tabs {
+    @include reset;
+    @include font-size('14');
+    @include font-smoothing;
+    @include helvetica;
+    color: $text-01;
+    font-weight: 700;
+    cursor: pointer;
+    height: auto;
+    width: 100%;
+    position: relative;
 
-.bx--tabs {
-  @include reset;
-  @include font-size('14');
-  @include font-smoothing;
-  color: $text-01;
-  background-color: $field-01;
-  font-weight: 700;
-  cursor: pointer;
-  width: 100%;
-
-  @include breakpoint(bp--sm--major) {
-    background: none;
+    @include breakpoint(bp--sm--major) {
+      background: none;
+      min-height: rem(49px);
+    }
   }
 
-  &__trigger {
+  .bx--tabs-trigger {
     @include reset;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: rem(13px) rem(16px);
     cursor: pointer;
+    background-color: $field-01;
 
     svg {
       width: rem(12px);
@@ -45,16 +49,18 @@
     }
   }
 
-  &__trigger-text {
+  .bx--tabs-trigger-text {
     @include reset;
     text-decoration: none;
     font-weight: 700;
     color: $text-01;
   }
 
-  &__nav {
+  .bx--tabs__nav {
     @include layer('overlay');
     @include reset;
+    position: absolute;
+    width: 100%;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -73,27 +79,19 @@
     }
   }
 
-  &__nav-item {
+  .bx--tabs__nav--hidden {
+    display: none;
+
+    @include breakpoint(bp--sm--major) {
+      display: flex;
+    }
+  }
+
+  .bx--tabs__nav-item {
     @include reset;
     @include font-size('14');
     background-color: $ui-01;
     padding: 1rem;
-
-    &:hover {
-      background-color: $brand-01;
-
-      .bx--tabs__nav-link {
-        color: $inverse-01;
-
-        @include breakpoint(bp--sm--major) {
-          color: $brand-01;
-        }
-      }
-
-      @include breakpoint(bp--sm--major) {
-        background: transparent;
-      }
-    }
 
     @include breakpoint(bp--sm--major) {
       background: transparent;
@@ -103,43 +101,49 @@
         margin-left: rem(48px);
       }
     }
+
+    &:hover {
+      background-color: $brand-01;
+
+      @include breakpoint(bp--sm--major) {
+        background: transparent;
+      }
+    }
   }
 
-  &__nav-link {
+  .bx--tabs__nav-item--selected {
+    border: none;
+
+    @include breakpoint(bp--sm--major) {
+      border-bottom: 2px solid $brand-01;
+
+      .bx--tabs__nav-link {
+        color: $brand-01;
+      }
+    }
+  }
+
+  .bx--tabs__nav-item:hover .bx--tabs__nav-link {
+    color: $inverse-01;
+
+    @include breakpoint(bp--sm--major) {
+      color: $brand-01;
+    }
+  }
+
+
+  .bx--tabs__nav-link {
     @include reset;
     display: inline-block;
     color: $text-01;
     text-decoration: none;
 
     @include breakpoint(bp--sm--major) {
-      padding: 1rem 0;
-      margin-bottom: 1px;
+      padding: 1rem 0 rem(14px);
 
       &:hover {
         color: $brand-01;
       }
     }
   }
-}
-
-.bx--tabs--selected {
-  border: none;
-
-  @include breakpoint(bp--sm--major) {
-    border-bottom: 2px solid $brand-01;
-
-    a {
-      color: $brand-01;
-    }
-  }
-}
-
-.bx--tabs--hidden {
-  display: none;
-
-  @include breakpoint(bp--sm--major) {
-    display: flex;
-  }
-}
-
 }

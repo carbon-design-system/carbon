@@ -154,13 +154,13 @@ class Tab extends ContentSwitcher {
   static options = Object.assign(Object.create(ContentSwitcher.options), {
     selectorInit: '[data-tabs]',
     selectorMenu: '.bx--tabs__nav',
-    selectorTrigger: '.bx--tabs__trigger',
-    selectorTriggerText: '.bx--tabs__trigger-text',
+    selectorTrigger: '.bx--tabs-trigger',
+    selectorTriggerText: '.bx--tabs-trigger-text',
     selectorButton: '.bx--tabs__nav-item',
-    selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
+    selectorButtonSelected: '.bx--tabs__nav-item--selected',
     selectorLink: '.bx--tabs__nav-link',
-    classActive: 'bx--tabs--selected',
-    classHidden: 'bx--tabs--hidden',
+    classActive: 'bx--tabs__nav-item--selected',
+    classHidden: 'bx--tabs__nav--hidden',
     eventBeforeSelected: 'tab-beingselected',
     eventAfterSelected: 'tab-selected',
   });

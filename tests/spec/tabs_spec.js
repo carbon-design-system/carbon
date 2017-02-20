@@ -12,13 +12,13 @@ describe('Test tabs', function () {
         expect(tab.options).to.deep.equal({
           selectorInit: '[data-tabs]',
           selectorMenu: '.bx--tabs__nav',
-          selectorTrigger: '.bx--tabs__trigger',
-          selectorTriggerText: '.bx--tabs__trigger-text',
+          selectorTrigger: '.bx--tabs-trigger',
+          selectorTriggerText: '.bx--tabs-trigger-text',
           selectorButton: '.bx--tabs__nav-item',
-          selectorButtonSelected: '.bx--tabs__nav-item.bx--tabs--selected',
+          selectorButtonSelected: '.bx--tabs__nav-item--selected',
           selectorLink: '.bx--tabs__nav-link',
-          classActive: 'bx--tabs--selected',
-          classHidden: 'bx--tabs--hidden',
+          classActive: 'bx--tabs__nav-item--selected',
+          classHidden: 'bx--tabs__nav--hidden',
           eventBeforeSelected: 'tab-beingselected',
           eventAfterSelected: 'tab-selected',
         });
@@ -29,7 +29,7 @@ describe('Test tabs', function () {
 
     it('Should initialize currently selected tab item for narrow screen', function () {
       const triggerTextNode = document.createElement('div');
-      triggerTextNode.classList.add('bx--tabs__trigger-text');
+      triggerTextNode.classList.add('bx--tabs-trigger-text');
 
       const element = document.createElement('div');
       element.appendChild(triggerTextNode);
@@ -38,7 +38,7 @@ describe('Test tabs', function () {
         const buttonNode = document.createElement('div');
         buttonNode.classList.add('bx--tabs__nav-item');
         if (i === 0) {
-          buttonNode.classList.add('bx--tabs--selected');
+          buttonNode.classList.add('bx--tabs__nav-item--selected');
         }
         buttonNode.textContent = i;
         element.appendChild(buttonNode);
@@ -69,7 +69,7 @@ describe('Test tabs', function () {
       stubUpdateTriggerText = sinon.stub(Tab.prototype, 'updateTriggerText');
 
       triggerNode = document.createElement('div');
-      triggerNode.classList.add('bx--tabs__trigger');
+      triggerNode.classList.add('bx--tabs-trigger');
 
       menuNode = document.createElement('div');
       menuNode.classList.add('bx--tabs__nav');
@@ -84,18 +84,18 @@ describe('Test tabs', function () {
     });
 
     it('Should show drop down upon hitting trigger button', function () {
-      menuNode.classList.add('bx--tabs--hidden');
+      menuNode.classList.add('bx--tabs__nav--hidden');
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(menuNode.classList.contains('bx--tabs--hidden')).to.be.false;
+      expect(menuNode.classList.contains('bx--tabs__nav--hidden')).to.be.false;
     });
 
     it('Should hide drop down upon hitting trigger button', function () {
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(menuNode.classList.contains('bx--tabs--hidden')).to.be.true;
+      expect(menuNode.classList.contains('bx--tabs__nav--hidden')).to.be.true;
     });
 
     afterEach(function () {
-      menuNode.classList.remove('bx--tabs--hidden');
+      menuNode.classList.remove('bx--tabs__nav--hidden');
     });
 
     after(function () {
@@ -114,7 +114,7 @@ describe('Test tabs', function () {
       stubUpdateMenuState = sinon.stub(Tab.prototype, 'updateMenuState');
 
       triggerTextNode = document.createElement('div');
-      triggerTextNode.classList.add('bx--tabs__trigger-text');
+      triggerTextNode.classList.add('bx--tabs-trigger-text');
 
       element = document.createElement('div');
       element.appendChild(triggerTextNode);
@@ -126,7 +126,7 @@ describe('Test tabs', function () {
         buttonNode.classList.add('bx--tabs__nav-item');
         buttonNode.textContent = i;
         if (i === 0) {
-          buttonNode.classList.add('bx--tabs--selected');
+          buttonNode.classList.add('bx--tabs__nav-item--selected');
         }
         return element.appendChild(buttonNode);
       });
@@ -136,14 +136,14 @@ describe('Test tabs', function () {
 
     beforeEach(function () {
       buttonNodes.forEach((buttonNode, i) => {
-        buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--tabs--selected');
+        buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--tabs__nav-item--selected');
       });
     });
 
     it('Should update active tab upon clicking', function () {
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should update currently selected tab item for narrow screen', function () {
@@ -154,36 +154,36 @@ describe('Test tabs', function () {
     it('Should update active tab upon right key with old spec', function () {
       const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { keyIdentifier: 'Right' }));
       expect(defaultPrevented).to.be.true;
-      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should update active tab upon right key with new spec', function () {
       const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
       expect(defaultPrevented).to.be.true;
-      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should handle out of range index', function () {
       element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
       element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
-      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.true;
-      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.false;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
     });
 
     it('Should update active tab upon left key with old spec', function () {
       const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { keyIdentifier: 'Left' }));
       expect(defaultPrevented).to.be.true;
-      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should update active tab upon left key with new spec', function () {
       const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowLeft' }));
       expect(defaultPrevented).to.be.true;
-      expect(buttonNodes[0].classList.contains('bx--tabs--selected')).to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs--selected')).to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should focus on the new active tab upon keyboard navigation', function () {
