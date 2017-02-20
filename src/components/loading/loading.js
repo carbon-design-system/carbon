@@ -1,9 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
 import toggleClass from '../../../demo/polyfills/toggle-class';
 
 class Loading extends mixin(createComponent, initComponentBySearch) {
@@ -36,6 +33,15 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
     this.active = active;
     toggleClass(this.element, 'bx--loading--stop', !this.active);
 
+    /**
+     * If overlay is the parentNode then toggle it too.
+     */
+    const parentNode = this.element.parentNode;
+
+    if (parentNode && parentNode.classList.contains('bx--loading-overlay')) {
+      toggleClass(parentNode, this.options.classLoadingOverlayStop, !this.active);
+    }
+
     return this;
   }
 
@@ -48,10 +54,35 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
   }
 
   /**
-   * @returns {boolean} `true` if this spinner is rolling roll.
+   * @returns {boolean} `true` if this spinner is rolling.
    */
   isActive() {
     return this.active;
+  }
+
+  /**
+   * Sets state to inactive and deletes the loading element.
+   */
+  end() {
+    this.set(false);
+    this.element.addEventListener('animationend', (evt) => {
+      if (evt.animationName === 'rotate-end-p2') {
+        this._deleteElement();
+      }
+    });
+  }
+
+  /**
+   * Delete component from the DOM.
+   */
+  _deleteElement() {
+    const parentNode = this.element.parentNode;
+
+    parentNode.removeChild(this.element);
+
+    if (parentNode.classList.contains(this.options.selectorLoadingOverlay)) {
+      parentNode.remove();
+    }
   }
 
   /**
@@ -71,6 +102,8 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
    */
   static options = {
     selectorInit: '[data-loading]',
+    selectorLoadingOverlay: '.bx--loading-overlay',
+    classLoadingOverlayStop: 'bx--loading-overlay--stop',
     active: true,
   };
 }

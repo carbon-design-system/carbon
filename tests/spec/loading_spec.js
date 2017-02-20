@@ -1,5 +1,7 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
+import '../../demo/polyfills/custom-event';
 import Loading from '../../src/components/loading/loading';
+import LoadingHTML from '../../src/components/loading/loading.html';
 
 describe('Test Loading', function () {
   describe('Constructor', function () {
@@ -25,12 +27,6 @@ describe('Test Loading', function () {
       const spinner = new Loading(document.createElement('div'), options);
       expect(spinner.isActive()).to.equal(false);
     });
-
-    it('Should set class to bx--loading--ie', function () {
-      const isIE = window.ActiveXObject || 'ActiveXObject' in window;
-      const spinner = new Loading(document.createElement('div'));
-      if (isIE) expect(spinner.element.classList.contains('bx--loading--ie')).to.be.true;
-    });
   });
 
   describe('set()', function () {
@@ -54,22 +50,12 @@ describe('Test Loading', function () {
     });
 
     it('Should remove and add bx--loading--stop class attribute of DOM element', function () {
-      const isIE = window.ActiveXObject || 'ActiveXObject' in window;
       const spinner = new Loading(document.createElement('div'));
       spinner.set(false);
       expect(spinner.element.classList.contains('bx--loading--stop'), 'Class for stopped state').to.be.true;
-      if (isIE) expect(spinner.element.classList.contains('bx--loading--stop--ie'), 'IE class for stopped state').to.be.true;
 
       spinner.set(true);
       expect(spinner.element.classList.contains('bx--loading--stop'), 'Class for started state').to.be.false;
-      if (isIE) expect(spinner.element.classList.contains('bx--loading--stop--ie'), 'IE class for started state').to.be.false;
-    });
-
-    it('Should set bx--loading--ie attributes of DOM element', function () {
-      const isIE = window.ActiveXObject || 'ActiveXObject' in window;
-      const spinner = new Loading(document.createElement('div'));
-      spinner.set(true);
-      if (isIE) expect(spinner.element.classList.contains('bx--loading--ie')).to.be.true;
     });
   });
 
@@ -87,6 +73,28 @@ describe('Test Loading', function () {
     it('Should return spinner state', function () {
       const spinner = new Loading(document.createElement('div'));
       expect(spinner.isActive()).to.equal(true);
+    });
+  });
+
+  describe('end()', function () {
+    it('Should set state to inactive', function () {
+      const spinner = new Loading(document.createElement('div'));
+      spinner.end();
+      expect(spinner.isActive()).to.equal(false);
+    });
+
+    it('Should remove loading element from the DOM', function () {
+      const container = document.createElement('div');
+      container.innerHTML = LoadingHTML;
+      document.body.appendChild(container);
+      const spinnerEl = document.querySelector('[data-loading]');
+      const spinner = new Loading(spinnerEl);
+      spinner.end();
+      // Call private delete method since phantomjs doesn't support
+      // animationend.
+      spinner._deleteElement();
+      const spinnerElAfter = document.querySelector('[data-loading]');
+      expect(spinnerElAfter).to.be.a('null');
     });
   });
 
