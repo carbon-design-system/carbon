@@ -85,6 +85,7 @@ describe('Test card', function () {
     });
 
     after(function () {
+      document.body.focus(); // Removing focused element seems to cause IE bug `document.activeElement` returning an empty object
       const card = Card.components.get(element);
       document.body.removeChild(element);
       if (card) {
