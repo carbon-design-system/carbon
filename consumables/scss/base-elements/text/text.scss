@@ -23,6 +23,7 @@
       margin: .25rem 0 0;
       color: $color__white;
       background-color: $color__inputs--bg;
+      border: 1px solid transparent;
 
       @include light-ui {
         color: $color__blue-90;
