@@ -69,6 +69,7 @@ class InteriorLeftNavList extends Component {
         tabIndex={tabIndex}
         onClick={this.handleListClick}
         onKeyPress={this.handleListClick}
+        role="menuitem"
         {...other}
       >
         <a className="left-nav-list__item-link">
@@ -84,7 +85,7 @@ class InteriorLeftNavList extends Component {
         <ul
           role="menu"
           className="left-nav-list left-nav-list--nested"
-          aria-hidden="true"
+          aria-hidden
         >
           {newChildren}
         </ul>

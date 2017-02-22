@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import InteriorLeftNavHeader from './InteriorLeftNavHeader';
+import InteriorLeftNavList from './InteriorLeftNavList';
 import classnames from 'classnames';
 // eslint-disable-next-line max-len, import/no-unresolved
 import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss';
@@ -7,15 +8,8 @@ import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/con
 class InteriorLeftNav extends Component {
 
   static propTypes = {
-    previousPageText: PropTypes.string,
-    previousPageHref: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
-  };
-
-  static defaultProps = {
-    previousPageText: 'Previous Page',
-    previousPageHref: '#',
   };
 
   state = {
@@ -36,17 +30,26 @@ class InteriorLeftNav extends Component {
 
   render() {
     const {
-      previousPageText,
-      previousPageHref,
       className,
       children,
       ...other,
     } = this.props;
 
-    const newChildren = React.Children.map(children, child => {
+    const headerChild = [];
+    const listChildren = [];
+
+    React.Children.forEach(children, child => {
+      if (child.type === InteriorLeftNavHeader) {
+        headerChild.push(child);
+      } else {
+        listChildren.push(child);
+      }
+    });
+
+    const newChildren = React.Children.map(listChildren, child => {
       let newChild;
 
-      if (child.type.name === 'InteriorLeftNavList') {
+      if (child.type === InteriorLeftNavList) {
         newChild = React.cloneElement(child, {
           onItemClick: this.handleItemClick,
           activeHref: this.state.activeHref,
@@ -67,12 +70,14 @@ class InteriorLeftNav extends Component {
     );
 
     return (
-      <nav className={classNames} {...other}>
-        <InteriorLeftNavHeader
-          previousPageText={previousPageText}
-          previousPageHref={previousPageHref}
-        />
-        <ul className="left-nav-list">
+      <nav
+        role="navigation"
+        aria-label="Interior Left Navigation"
+        className={classNames}
+        {...other}
+      >
+        {headerChild.length > 0 && headerChild}
+        <ul className="left-nav-list" role="menubar">
           {newChildren}
         </ul>
       </nav>

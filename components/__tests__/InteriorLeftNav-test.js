@@ -10,8 +10,6 @@ describe('InteriorLeftNav', () => {
     const wrapper = shallow(
       <InteriorLeftNav
         className="extra-class"
-        previousPageText="Projects"
-        previousPageHref="#projects"
       />
     );
 
@@ -27,6 +25,7 @@ describe('InteriorLeftNav', () => {
     it('should render children as expected', () => {
       const interiorLeftNav = shallow(
         <InteriorLeftNav>
+          <InteriorLeftNavHeader />
           <InteriorLeftNavList className="test-child" />
           <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
         </InteriorLeftNav>

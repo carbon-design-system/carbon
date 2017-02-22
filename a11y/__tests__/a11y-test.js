@@ -320,10 +320,7 @@ describe('a11y scan', () => {
 
   it('InteriorLeftNav', (done) => {
     const wrapper = render(
-      <InteriorLeftNav
-        previousPageText="Projects"
-        previousPageHref="#projects"
-      />
+      <InteriorLeftNav />
     );
 
     AAT.getCompliance(wrapper.html(), 'InteriorLeftNav', (data) => {
@@ -334,7 +331,10 @@ describe('a11y scan', () => {
 
   it('InteriorLeftNavHeader', (done) => {
     const wrapper = render(
-      <InteriorLeftNavHeader />
+      <InteriorLeftNavHeader
+        previousPageText="Projects"
+        previousPageHref="#projects"
+      />
     );
 
     AAT.getCompliance(wrapper.html(), 'InteriorLeftNavHeader', (data) => {

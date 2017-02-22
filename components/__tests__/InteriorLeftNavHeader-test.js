@@ -1,13 +1,20 @@
 import React from 'react';
 import InteriorLeftNavHeader from '../InteriorLeftNavHeader';
 import Icon from '../Icon';
-import { shallow } from 'enzyme';
+import Link from '../Link';
+import { shallow, mount } from 'enzyme';
 
 describe('InteriorLeftNavHeader', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(
       <InteriorLeftNavHeader
         className="extra-class"
+      />
+    );
+    const mounted = mount(
+      <InteriorLeftNavHeader
+        previousPageText="text"
+        previousPageHref="href"
       />
     );
 
@@ -27,6 +34,14 @@ describe('InteriorLeftNavHeader', () => {
     it('should use correct icon class names', () => {
       const icon = wrapper.find(Icon);
       expect(icon.props().className).toEqual('bx--inline-left-nav__icon');
+    });
+    it('should have previousPageText', () => {
+      const link = mounted.find(Link);
+      expect(link.find('a').text()).toContain('text');
+    });
+    it('should have previousPageHref', () => {
+      const link = mounted.find(Link);
+      expect(link.props().href).toEqual('href');
     });
   });
 });
