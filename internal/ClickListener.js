@@ -1,3 +1,5 @@
+/* global document */
+
 import React, { PropTypes } from 'react';
 
 class ClickListener extends React.Component {

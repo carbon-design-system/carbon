@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react';
 import Link from './Link';
 import Icon from './Icon';
 import classnames from 'classnames';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
+}
 
 const propTypes = {
   previousPageText: PropTypes.string,

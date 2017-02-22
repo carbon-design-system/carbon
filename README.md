@@ -62,12 +62,24 @@ Bluemix Components React is published on a private npm registry maintained by th
   );
   ```
 
-7. If you want to turn off the automatic `scss`, simply set EXCLUDE_SASS environment variable, like:
+7. If you want to turn off the automatic `scss`, set `EXCLUDE_SASS` environment variable, like:
 
 ```sh
 > EXCLUDE_SASS=true
 > {your build command}
 ```
+
+For WebPack build, you'll need to have Babel, etc. eliminate dead code `EXCLUDE_SASS` environment variable creates. Here's a WebPack2 configuration for example:
+
+  ```javascript
+  {
+    test: /node_modules\/@console\/bluemix-components-react\/.*\.js$/,
+    loader: 'babel-loader',
+    query: {
+      plugins: ['transform-inline-environment-variables', 'minify-dead-code-elimination'],
+    },
+  },
+  ```
 
 ## Development
 

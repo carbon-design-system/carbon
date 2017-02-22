@@ -1,9 +1,12 @@
+/* global window */
+
 import React, { Component, PropTypes } from 'react';
 import InteriorLeftNavHeader from './InteriorLeftNavHeader';
 import InteriorLeftNavList from './InteriorLeftNavList';
 import classnames from 'classnames';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
+}
 
 class InteriorLeftNav extends Component {
 

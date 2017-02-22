@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
 import Icon from '../components/Icon';
 import classNames from 'classnames';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/base-elements/buttons/button--secondary.scss';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/base-elements/buttons/button--danger.scss';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/base-elements/buttons/button--primary.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/base-elements/buttons/button--secondary.scss');
+  import('@console/bluemix-components/consumables/scss/base-elements/buttons/button--danger.scss');
+  import('@console/bluemix-components/consumables/scss/base-elements/buttons/button--primary.scss');
+}
 
 const propTypes = {
   children: PropTypes.node,

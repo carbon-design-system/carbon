@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/global/global.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/global/global.scss');
+}
 
 class AppContainer extends Component {
   static propTypes = {

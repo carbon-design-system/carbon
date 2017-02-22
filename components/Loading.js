@@ -1,7 +1,10 @@
+/* global window */
+
 import React from 'react';
 import classNames from 'classnames';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/loading/loading.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/components/loading/loading.scss');
+}
 
 const propTypes = {
   active: React.PropTypes.bool,

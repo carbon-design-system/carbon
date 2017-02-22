@@ -1,7 +1,8 @@
 import React, { PropTypes, Children } from 'react';
 import classnames from 'classnames';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/progress-indicator/progress-indicator.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/components/progress-indicator/progress-indicator.scss');
+}
 
 const propTypes = {
   children: PropTypes.node,

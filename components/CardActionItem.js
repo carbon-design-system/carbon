@@ -1,8 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/card/card.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/components/card/card.scss');
+}
 
 const propTypes = {
   className: React.PropTypes.string,

@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import Icon from './Icon';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/detail-page-header/detail-page-header--no-tabs.scss';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/detail-page-header/detail-page-header--with-tabs.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/components/detail-page-header/detail-page-header--no-tabs.scss');
+  import('@console/bluemix-components/consumables/scss/components/detail-page-header/detail-page-header--with-tabs.scss');
+}
 
 const propTypes = {
   hideBreadcrumb: PropTypes.bool,

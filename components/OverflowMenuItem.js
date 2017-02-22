@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss');
+}
 
 const propTypes = {
   className: React.PropTypes.string,

@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-// eslint-disable-next-line max-len, import/no-unresolved
-import '../env-defined-then-loader?-EXCLUDE_SASS!@console/bluemix-components/consumables/scss/base-elements/select/select.scss';
+if (!process.env.EXCLUDE_SASS) {
+  import('@console/bluemix-components/consumables/scss/base-elements/select/select.scss');
+}
 
 const propTypes = {
   children: PropTypes.node,
