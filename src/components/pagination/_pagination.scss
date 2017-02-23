@@ -1,0 +1,103 @@
+$css--helpers: true;
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/import-once';
+@import '../select/select';
+@import '../text-input/text-input';
+
+@include exports('pagination') {
+
+  .bx--pagination {
+    @include reset;
+    @include helvetica;
+    width: 100%;
+    background-color: $ui-01;
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid $ui-04;
+  }
+
+  .bx--pagination__left {
+    display: flex;
+    align-items: center;
+  }
+
+  .bx--pagination__right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .bx--pagination__text {
+    @include font-size('12');
+    color: $text-02;
+    display: none;
+
+    @include breakpoint('530px') {
+      display: initial;
+    }
+  }
+
+  .bx--pagination__button-icon {
+    height: rem(12px);
+    width: rem(12px);
+    fill: $text-02;
+    pointer-events: none;
+    transition: $transition--base;
+  }
+
+  .bx--pagination__button {
+    @include reset;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    &:hover {
+
+      .bx--pagination__button-icon {
+        fill: $brand-01;
+      }
+    }
+  }
+
+  .bx--pagination__button--backward {
+    margin-left: rem(20px);
+    margin-right: rem(28px);
+  }
+
+  .bx--pagination__button--forward {
+    margin-left: rem(28px);
+  }
+
+  .bx--select {
+    margin-right: rem(10px);
+  }
+
+  .bx--select-input {
+    height: rem(24px);
+    width: rem(54px);
+    padding: 0 rem(8px);
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .bx--select__arrow {
+    right: .5rem;
+    top: .625rem;
+  }
+
+  .bx--text-input {
+    height: rem(24px);
+    min-width: rem(24px);
+    width: rem(24px);
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+    text-align: center;
+  }
+}
