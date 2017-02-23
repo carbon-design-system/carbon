@@ -29,4 +29,16 @@ storiesOf('Tooltip', module)
         <Tooltip position="bottom" text="This is some tooltip text"><div>Tooltip - hover</div></Tooltip>
       </div>
     ),
+  )
+  .addWithInfo(
+    'no icon',
+    `
+      Tooltips are used to supply additional information to an element when hovering over it. By default,
+      the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
+    `,
+    () => (
+      <div style={{ marginTop: '2rem' }}>
+        <Tooltip text="This is some tooltip text" showIcon={false}><div>Tooltip - hover</div></Tooltip>
+      </div>
+    ),
   );

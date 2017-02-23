@@ -45,12 +45,17 @@ describe('Tooltip', () => {
 
   describe('Renders as expected with specified properties', () => {
     const wrapper = mount(
-      <Tooltip text="Basic Tooltip Text" position="bottom"><a href="#">A Link</a></Tooltip>
+      <Tooltip text="Basic Tooltip Text" position="bottom" showIcon={false}><a href="#">A Link</a></Tooltip>
     );
     const tooltip = wrapper.find('div').first();
     describe('tooltip container', () => {
       it('sets the tooltip\'s position', () => {
         expect(tooltip.hasClass('bx--tooltip__bottom')).toEqual(true);
+      });
+
+      it('does not render info icon', () => {
+        const icon = tooltip.find(Icon);
+        expect(icon.length).toBe(0);
       });
     });
   });
