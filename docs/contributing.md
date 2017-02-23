@@ -124,7 +124,6 @@ When you do `git remote -v`, you'll see these remotes:
 * `upstream`: connection to the original project.
 * `bthan`: connection to [Brian Han's](https://github.ibm.com/bthan/bluemix-components) fork.
 
-
 ## 4. Work in a Branch
 
 * Always work in a branch.
@@ -157,34 +156,80 @@ git commit -m "fix(table): IE11 positioning error" -m "Fixes #34"
 
 ## 5. Test your JavaScript code
 
-If you're contributing JavaScript, test your changes by running our test commands:
+If you're contributing to our JavaScript code, test your changes by running our test commands:
 
 ```sh
-gulp test
+gulp test:unit
 ```
 
-If you add any features to our JavaScript code, make sure adding test so that your code is covered.
+If you add any features to our JavaScript code, make sure to add tests so that your code is covered.
 Tests are written in [Mocha](https://mochajs.org)/[Chai](http://chaijs.com).
 You can see if your code is covered by looking at bluemix-components/tests/coverage/\*/index.html after running test.
 
 If your change may hit some browser quirks, use `-b` option, like:
 
 ```sh
-gulp test -b IE
+gulp test:unit -b IE -b Firefox
 ```
+
+(Other browsers tests can run with are: `Safari`, `Chrome` and `PhantomJS`)
 
 If you are very sure that your change affects a specific set of components, you can use `-f` option, like:
 
 ```sh
-gulp test -f tests/spec/fab_spec.js
+gulp test:unit -f tests/spec/fab_spec.js
 ```
 
 Other options for testing are:
 
 * `-d`/`--debug`: Stop generating code coverage report. Useful to debug your code when running test.
 * `-k`/`--keepalive`: Keep running test runner even after test ends. Test will restart running when you make changes to any test files or any files under test.
+* `-v`/`--verbose`: Let Karma emit detailed log.
 
-## 6. Make a Pull Request
+## 6. Test your HTML/CSS code for a11y
+
+If you're contributing to our HTML/CSS code, a11y compliance of your code should be tested.
+
+To do so - First, (if you haven't done already) set up NPM auth token for `@ibma` scope, by:
+
+1. Create GHE token, by:
+  1. https://github.ibm.com/settings/tokens/new
+  1. Check off `read:org`, `repo`, `user:email` and click on Generate token
+  1. Copy the token and put it to secure place, as you can never see the token again in GHE
+1. Add the following to `$HOME/.npmrc`:
+
+  ```
+  @ibma:registry=https://npm-registry.whitewater.ibm.com/
+  //npm-registry.whitewater.ibm.com/:_authToken={{THE_GHE_TOKEN_CREATED_IN_THE_EARLIER_STEP}}
+  ```
+
+1. `> npm install @ibma/karma-ibma` You’ll be asked to access a long URL. Hit such long URL in browser.
+1. `> npm login -—scope=@ibma`. You'll be asked for username, password, and email address. Type GHE username, IBM intranet password, and IBM email address there, respectively.
+1. `> npm install @ibma/karma-ibma` (again). You will be asked to access a long URL (again). Hit such long URL in browser/
+1. `> npm install @ibma/karma-ibma` (another again). You can now see that NPM successfully runs.
+
+Ref: https://github.ibm.com/Whitewater/npm/blob/master/README.md
+
+Then you can test your changes by running our test commands:
+
+```sh
+gulp test:a11y
+```
+
+If you are very sure that your change affects a specific set of components, you can use `-f` option, like:
+
+```sh
+gulp test:a11y -f consumables/html/components/fab/fab.html
+```
+
+If you get a test failure, you can refer to the corresponding one in http://ausgsa.ibm.com/projects/h/haactools/w3/magicbutton/plugincfg/rulepack/help/ to the file name what the test failure log points to (e.g. if the log shows idhi_accessibility_check_g377.html, the help can be found at http://ausgsa.ibm.com/projects/h/haactools/w3/magicbutton/plugincfg/rulepack/help/idhi_accessibility_check_g377.html), or inspect RPT rule code by the following:
+
+1. The error log should show something like `wcag20.tech.h59.linkValid`. Searching for that in https://github.ibm.com/IBMa/Tools-Rules-HTML/blob/master/src/accessibility/metadata/wcag20-tech-meta.js - In this example the search gives you something like `WCAG20_Link_Valid`
+2. Searching for the RPT rule implementation in https://github.ibm.com/IBMa/Tools-Rules-HTML/tree/master/src/accessibility/rules (e.g. by using GitHub search like https://github.ibm.com/IBMa/Tools-Rules-HTML/search?utf8=✓&q=WCAG20_Link_Valid which guides you to https://github.ibm.com/IBMa/Tools-Rules-HTML/blob/master/src/accessibility/rules/rpt-link-rules.js). It will give you some ideas on why RPT is complaining against the DOM your application creates.
+
+The a11y test may report potential issues that should be handled in application-level, not in bluemix-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.ibm.com/Bluemix/bluemix-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
+
+## 7. Make a Pull Request
 
 **Note:** Before you make a pull request, [search](https://github.ibm.com/Bluemix/bluemix-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.
 
@@ -225,7 +270,7 @@ Write a title and description then click "Create pull request"
 * [How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
 
 
-## 7. Updating a Pull Request
+## 8. Updating a Pull Request
 
 Stay up to date with the activity in your pull request. Maintainers from the Design System team will be reviewing your work and making comments, asking questions and suggesting changes to be made before they merge your code.
 

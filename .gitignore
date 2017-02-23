@@ -24,6 +24,7 @@ jsconfig.json
 .vscode
 
 # Test reports
+tests/a11y-results
 tests/coverage
 
 # JSDoc

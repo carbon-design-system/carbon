@@ -204,9 +204,18 @@ gulp.task('lint', () =>
  * Test
  */
 
-gulp.task('test', (done) => {
+gulp.task('test', ['test:unit', 'test:a11y']);
+
+gulp.task('test:unit', (done) => {
   new Server({
     configFile: path.resolve(__dirname, 'tests/karma.conf.js'),
+    singleRun: !cloptions.keepalive,
+  }, done).start();
+});
+
+gulp.task('test:a11y', ['sass:consumables'], (done) => {
+  new Server({
+    configFile: path.resolve(__dirname, 'tests/karma-ibma.conf.js'),
     singleRun: !cloptions.keepalive,
   }, done).start();
 });
