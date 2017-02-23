@@ -2,11 +2,6 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByLauncher from '../../globals/js/mixins/init-component-by-launcher';
 import eventedState from '../../globals/js/mixins/evented-state';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
-import '../../../demo/polyfills/custom-event';
-import toggleClass from '../../../demo/polyfills/toggle-class';
 
 /**
  * @param {Element} element The element to obtain transition duration from.
@@ -116,8 +111,8 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedState
 
     this.element.addEventListener('transitionend', finishedTransition);
     const transitionDuration = getTransitionDuration(this.element);
-    toggleClass(this.element, this.options.classVisible, visible);
-    toggleClass(this.element.ownerDocument.body, this.options.classNoScroll, visible);
+    this.element.classList.toggle(this.options.classVisible, visible);
+    this.element.ownerDocument.body.classList.toggle(this.options.classNoScroll, visible);
     if (transitionDuration === 0) {
       finishedTransition();
     }

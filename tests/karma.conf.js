@@ -2,9 +2,9 @@
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
-const path = require('path');
-
-const convertFilePath = file => path.relative(__dirname, path.resolve(__dirname, '..', file));
+function ensureArray(as) {
+  return !as || Array.isArray(as) ? as : [as];
+}
 
 const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
@@ -18,20 +18,25 @@ const cloptions = require('minimist')(process.argv.slice(2), {
 
 module.exports = function (config) {
   config.set({
-    basePath: '',
+    basePath: '..',
 
     frameworks: ['mocha', 'sinon-chai'],
 
-    files: cloptions.files ? (Array.isArray(cloptions.files) ? cloptions.files : [cloptions.files]).map(convertFilePath) : [
-      'remainders.js', // For generatoring coverage report for untested files
-      'spec/**/*.js',
-    ],
+    files: (() => {
+      const list = ensureArray(cloptions.files || [
+        'tests/remainders.js', // For generatoring coverage report for untested files
+        'tests/spec/**/*.js',
+      ]);
+      list.unshift('demo/polyfills/index.js');
+      return list;
+    })(),
 
     exclude: [],
 
     preprocessors: {
-      'remainders.js': ['webpack', 'sourcemap'], // For generatoring coverage report for untested files
-      'spec/**/*.js': ['webpack', 'sourcemap'],
+      'tests/remainders.js': ['webpack', 'sourcemap'], // For generatoring coverage report for untested files
+      'tests/spec/**/*.js': ['webpack', 'sourcemap'],
+      'demo/polyfills/**/*.js': ['webpack', 'sourcemap'],
     },
 
     webpack: {
@@ -122,7 +127,7 @@ module.exports = function (config) {
     })(),
 
     coverageReporter: Object.assign({
-      dir: 'coverage',
+      dir: 'tests/coverage',
       reporters: [
         { type: 'html' },
         { type: 'text' },
@@ -139,15 +144,15 @@ module.exports = function (config) {
             // - Not meeting the code coverage standard set here, which shouldn't have happened
             // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
             // That said, new files should never be added, except for misc code that is very broser-specific
-            '../src/components/accordion/accordion.js',
-            '../src/components/copy-button/copy-button.js',
-            '../src/components/detail-page-header/detail-page-header.js',
-            '../src/components/inline-left-nav/inline-left-nav.js',
-            '../src/components/pagination/pagination.js',
-            '../src/components/search/search-with-options.js',
-            '../src/components/unified-header/left-nav.js',
-            '../src/components/unified-header/profile-switcher.js',
-            '../src/globals/js/misc/resize.js',
+            'src/components/accordion/accordion.js',
+            'src/components/copy-button/copy-button.js',
+            'src/components/detail-page-header/detail-page-header.js',
+            'src/components/inline-left-nav/inline-left-nav.js',
+            'src/components/pagination/pagination.js',
+            'src/components/search/search-with-options.js',
+            'src/components/unified-header/left-nav.js',
+            'src/components/unified-header/profile-switcher.js',
+            'src/globals/js/misc/resize.js',
           ],
         },
       },

@@ -1,4 +1,3 @@
-import '../../demo/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import LeftNav from '../../src/components/unified-header/left-nav';
 

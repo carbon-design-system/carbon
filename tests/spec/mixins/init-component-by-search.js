@@ -1,7 +1,4 @@
 import '../../utils/es6-weak-map-global'; // For PhantomJS
-import '../../../demo/polyfills/custom-event';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
 import mixin from '../../../src/globals/js/misc/mixin';
 import initComponentBySearch from '../../../src/globals/js/mixins/init-component-by-search';
 

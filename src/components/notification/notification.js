@@ -2,8 +2,6 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/custom-event';
 
 class Notification extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**

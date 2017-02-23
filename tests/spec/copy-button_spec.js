@@ -1,5 +1,4 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../demo/polyfills/custom-event';
 import CopyButton from '../../src/components/copy-button/copy-button';
 
 const HTML = `

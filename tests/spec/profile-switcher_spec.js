@@ -1,5 +1,4 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../demo/polyfills/custom-event';
 import ProfileSwitcher from '../../src/components/unified-header/profile-switcher';
 import unifiedHeaderHtml from '../../src/components/unified-header/unified-header.html';
 

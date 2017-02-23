@@ -2,10 +2,6 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
-import '../../../demo/polyfills/custom-event';
 import on from '../../globals/js/misc/on';
 
 class Dropdown extends mixin(createComponent, initComponentBySearch) {

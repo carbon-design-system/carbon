@@ -1,8 +1,4 @@
 import eventMatches from '../../globals/js/misc/event-matches';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/math-sign';
-import '../../../demo/polyfills/object-assign';
 import ContentSwitcher from '../content-switcher/content-switcher';
 
 class Tab extends ContentSwitcher {

@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import CustomEventPolyfill from 'custom-event';
+
 // eslint-disable-next-line consistent-return
 const missingNativeCustomEvent = (() => {
   try {
@@ -7,12 +10,5 @@ const missingNativeCustomEvent = (() => {
   }
 })();
 if (missingNativeCustomEvent) {
-  window.CustomEvent = function CustomEvent(type, init = {}) {
-    const event = document.createEvent('HTMLEvents');
-    event.initEvent(type, init.bubbles, init.cancelable);
-    if (init.detail) {
-      event.detail = init.detail;
-    }
-    return event;
-  };
+  window.CustomEvent = CustomEventPolyfill;
 }

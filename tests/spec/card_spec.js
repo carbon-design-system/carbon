@@ -1,4 +1,3 @@
-import '../../demo/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import Card from '../../src/components/card/card';
 

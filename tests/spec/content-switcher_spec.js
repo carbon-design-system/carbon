@@ -1,5 +1,4 @@
 import Promise, { promisify } from 'bluebird'; // For testing on browsers not supporting Promise
-import '../../demo/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import ContentSwitcher from '../../src/components/content-switcher/content-switcher';

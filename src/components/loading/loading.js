@@ -1,7 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import toggleClass from '../../../demo/polyfills/toggle-class';
 
 class Loading extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -31,7 +30,7 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
     }
 
     this.active = active;
-    toggleClass(this.element, 'bx--loading--stop', !this.active);
+    this.element.classList.toggle('bx--loading--stop', !this.active);
 
     /**
      * If overlay is the parentNode then toggle it too.
@@ -39,7 +38,7 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
     const parentNode = this.element.parentNode;
 
     if (parentNode && parentNode.classList.contains('bx--loading-overlay')) {
-      toggleClass(parentNode, this.options.classLoadingOverlayStop, !this.active);
+      parentNode.classList.toggle(this.options.classLoadingOverlayStop, !this.active);
     }
 
     return this;

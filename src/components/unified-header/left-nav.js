@@ -1,11 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
-import '../../../demo/polyfills/custom-event';
-import toggleClass from '../../../demo/polyfills/toggle-class';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
@@ -340,7 +335,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
   handleNestedListClick(listItem) {
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
     this.hideAllFlyoutMenus();
-    toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
+    listItem.classList.toggle(this.options.classExpandedLeftNavListItem, !isOpen);
     const listItems = [...listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
     listItems.forEach((item) => {
       if (isOpen) {

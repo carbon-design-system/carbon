@@ -1,5 +1,4 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../demo/polyfills/custom-event';
 import Pagination from '../../src/components/pagination/pagination';
 
 describe('Test pagination', function () {

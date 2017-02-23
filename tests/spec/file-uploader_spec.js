@@ -1,4 +1,3 @@
-import '../../demo/polyfills/custom-event';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import FileUploader from '../../src/components/file-uploader/file-uploader';
 

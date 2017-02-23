@@ -1,6 +1,4 @@
 import eventMatches from '../misc/event-matches';
-import '../../../../demo/polyfills/object-assign';
-import '../../../../demo/polyfills/element-matches';
 import on from '../misc/on';
 
 export default function (ToMix) {

@@ -1,5 +1,4 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../demo/polyfills/custom-event';
 import Search from '../../src/components/search/search';
 import searchHTML from '../../src/components/search/search-large.html';
 

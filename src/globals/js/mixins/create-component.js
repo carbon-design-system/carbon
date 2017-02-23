@@ -1,5 +1,3 @@
-import '../../../../demo/polyfills/object-assign';
-
 export default function (ToMix) {
   class CreateComponent extends ToMix {
     /**

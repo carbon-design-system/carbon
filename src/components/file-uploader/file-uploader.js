@@ -1,9 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
-import '../../../demo/polyfills/array-from';
 
 const initialStateHTML = (name, id) =>
   (`

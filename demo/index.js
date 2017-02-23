@@ -1,3 +1,5 @@
+import './polyfills/index';
+
 import ThemeSwitcher from './js/theme-switcher';
 import DemoSwitcher from './js/demo-switcher';
 

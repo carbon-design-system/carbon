@@ -1,6 +1,3 @@
-import '../../../../demo/polyfills/element-matches';
-import '../../../../demo/polyfills/object-assign';
-
 export default function (ToMix) {
   /**
    * Mix-in class to instantiate components by searching for their root elements.

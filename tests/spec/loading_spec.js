@@ -1,5 +1,4 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../demo/polyfills/custom-event';
 import Loading from '../../src/components/loading/loading';
 import LoadingHTML from '../../src/components/loading/loading.html';
 

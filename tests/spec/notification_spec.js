@@ -1,5 +1,3 @@
-import '../../demo/polyfills/custom-event';
-import '../../demo/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import Notification from '../../src/components/notification/notification';

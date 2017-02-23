@@ -1,5 +1,4 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../demo/polyfills/custom-event';
 import EventManager from '../utils/event-manager';
 import Dropdown from '../../src/components/dropdown/dropdown';
 

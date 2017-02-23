@@ -1,8 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
 
 class FabButton extends mixin(createComponent, initComponentByEvent) {
   /**

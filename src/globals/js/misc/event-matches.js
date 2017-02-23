@@ -1,5 +1,3 @@
-import '../../../../demo/polyfills/element-matches'; // TODO: To be removed
-
 export default function eventMatches(event, selector) {
   // <svg> in IE does not have `Element#msMatchesSelector()` (that should be copied to `Element#matches()` by a polyfill).
   // Also a weird behavior is seen in IE where DOM tree seems broken when `event.target` is on <svg>.

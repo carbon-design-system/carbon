@@ -1,6 +1,4 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
-import '../../demo/polyfills/custom-event';
-import '../../demo/polyfills/object-assign';
 import Tab from '../../src/components/tabs/tabs';
 
 describe('Test tabs', function () {

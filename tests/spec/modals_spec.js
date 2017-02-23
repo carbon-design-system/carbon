@@ -1,6 +1,4 @@
 import Promise, { delay, promisify } from 'bluebird'; // For testing on browsers not supporting Promise
-import '../../demo/polyfills/custom-event';
-import '../../demo/polyfills/object-assign';
 import EventManager from '../utils/event-manager';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import Modal from '../../src/components/modals/modals';

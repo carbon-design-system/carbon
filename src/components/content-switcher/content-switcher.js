@@ -3,11 +3,6 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/custom-event';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
-import toggleClass from '../../../demo/polyfills/toggle-class';
 
 class ContentSwitcher extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
@@ -71,12 +66,12 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
 
     selectorButtons.forEach((button) => {
       if (button !== item) {
-        toggleClass(button, this.options.classActive, false);
+        button.classList.toggle(this.options.classActive, false);
         [...button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => element.setAttribute('hidden', ''));
       }
     });
 
-    toggleClass(item, this.options.classActive, true);
+    item.classList.toggle(this.options.classActive, true);
     [...item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => element.removeAttribute('hidden'));
 
     if (callback) {

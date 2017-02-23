@@ -2,10 +2,6 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
-import '../../../demo/polyfills/array-from';
-import '../../../demo/polyfills/element-matches';
-import '../../../demo/polyfills/object-assign';
-import toggleClass from '../../../demo/polyfills/toggle-class';
 import on from '../../globals/js/misc/on';
 
 class OverflowMenu extends mixin(createComponent, initComponentBySearch, eventedState) {
@@ -43,7 +39,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
-    toggleClass(this.element, 'bx--overflow-menu--open', state === 'shown');
+    this.element.classList.toggle('bx--overflow-menu--open', state === 'shown');
     callback();
   }
 

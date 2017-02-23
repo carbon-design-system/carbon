@@ -1,6 +1,4 @@
 import { delay } from 'bluebird';
-import '../../demo/polyfills/custom-event';
-import '../../demo/polyfills/object-assign';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import OverflowMenu from '../../src/components/overflow-menu/overflow-menu';

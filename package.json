@@ -46,6 +46,8 @@
     "babel-runtime": "^6.22.0",
     "browser-sync": "~2.10.0",
     "chai": "~3.4.1",
+    "core-js": "^2.4.0",
+    "custom-event": "^1.0.0",
     "cz-conventional-changelog": "^1.2.0",
     "del": "~2.0.2",
     "es6-weak-map": "^2.0.1",
