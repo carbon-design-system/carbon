@@ -3,22 +3,7 @@ import '../utils/es6-weak-map-global'; // For PhantomJS
 import '../../demo/polyfills/custom-event';
 import EventManager from '../utils/event-manager';
 import NumberInput from '../../src/components/number-input/number-input';
-
-const HTML = `
-  <div data-numberinput class="bx--number">
-    <input type="number" min="0" max="100" value="1">
-    <div class="bx--number__icon-wrapper">
-      <svg class="up-icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-         xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--up"></use>
-      </svg>
-      <svg class="down-icon">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-         xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#caret--down"></use>
-      </svg>
-    </div>
-  </div>
-`;
+import HTML from '../../src/components/number-input/number-input.html';
 
 describe('Test Number Input', function () {
   describe('Constructor', function () {
@@ -120,6 +105,10 @@ describe('Test Number Input', function () {
           second && second.release();
         }
       }
+    });
+
+    after(function () {
+      document.body.removeChild(element);
     });
   });
 });
