@@ -28,7 +28,7 @@
     "npm": "~3.0.0"
   },
   "dependencies": {
-    "@console/bluemix-icons": "3.4.0",
+    "@console/bluemix-icons": "3.5.1",
     "adaro": "1.0.4",
     "bluebird": "~3.1.1",
     "eslint": "^3.0.0",
