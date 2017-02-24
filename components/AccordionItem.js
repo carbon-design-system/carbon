@@ -30,7 +30,10 @@ class AccordionItem extends Component {
     this.props.onHeadingClick({ isOpen: open, event: evt });
   }
   handleKeyPress = (evt) => {
-    if (evt.which === 13 || evt.which === 32) {
+    const isKeyPressTarget = evt.target === evt.currentTarget;
+    const isValidKeyPress = [13, 32].indexOf(evt.which) !== -1;
+
+    if (isKeyPressTarget && isValidKeyPress) {
       this.handleHeadingClick(evt);
     }
   }

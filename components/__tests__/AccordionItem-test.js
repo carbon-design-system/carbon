@@ -89,11 +89,16 @@ describe('AccordionItem', () => {
   });
 
   describe('Check that the keyboard toggles its open state', () => {
-    const toggler = mount(
-      <AccordionItem title="A heading">
-        Lorem ipsum.
-      </AccordionItem>
-    );
+    let toggler;
+
+    beforeEach(() => {
+      toggler = mount(
+        <AccordionItem title="A heading">
+          Lorem ipsum.
+          <input className="testInput" />
+        </AccordionItem>
+      );
+    });
 
     it('should toggle state when using enter or space', () => {
       expect(toggler.state().open).toBeUndefined();
@@ -103,6 +108,15 @@ describe('AccordionItem', () => {
       expect(toggler.state().open).toEqual(false);
       toggler.simulate('keypress', { which: 97 });
       expect(toggler.state().open).toEqual(false);
+    });
+
+    it('should not toggle if a keypress is made in a child element', () => {
+      const input = toggler.find('.testInput');
+      expect(toggler.state().open).toBeUndefined();
+      toggler.simulate('keypress', { which: 32 });
+      expect(toggler.state().open).toEqual(true);
+      input.simulate('keypress', { which: 32 });
+      expect(toggler.state().open).toEqual(true);
     });
   });
 });
