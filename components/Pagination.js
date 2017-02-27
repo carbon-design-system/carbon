@@ -24,6 +24,7 @@ class Pagination extends Component {
     pageRangeText: PropTypes.func,
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
     totalItems: PropTypes.number.isRequired,
+    disabled: React.PropTypes.bool,
   }
   static defaultProps = {
     backwardText: 'Backward',
@@ -33,6 +34,7 @@ class Pagination extends Component {
     onChange: () => {},
     pageNumberText: 'Page Number',
     pageRangeText: (current, total) => `${current} of ${total} pages`,
+    disabled: false,
   }
   static uuid = 0
   state = {
@@ -111,7 +113,7 @@ class Pagination extends Component {
           <button
             className="bx--pagination__button bx--pagination__button--backward"
             onClick={this.decrementPage}
-            disabled={page === 1}
+            disabled={this.props.disabled || (page === 1)}
           >
             <div>
               <Icon name="chevron--left" description={backwardText} />
@@ -128,7 +130,7 @@ class Pagination extends Component {
           <button
             className="bx--pagination__button bx--pagination__button--forward"
             onClick={this.incrementPage}
-            disabled={page === Math.ceil(totalItems / pageSize)}
+            disabled={this.props.disabled || (page === Math.ceil(totalItems / pageSize))}
           >
             <div>
               <Icon name="chevron--right" description={forwardText} />
