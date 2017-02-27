@@ -15,7 +15,6 @@ addons:
 before_install:
   - echo "@console:registry=http://dev-console-npm.stage1.ng.bluemix.net/" >> ~/.npmrc
   - echo "//dev-console-npm.stage1.ng.bluemix.net/:_authToken=\${NPM_TOKEN}" >> ~/.npmrc
-  - if [[ `npm -v` != 3* ]]; then npm i -g npm@~3.8.0; npm cache clean; fi
   - if [[ -n "${NPM_TOKEN_WHITEWATER}" ]]; then echo "@ibma:registry=https://npm-registry.whitewater.ibm.com/" >> .npmrc; fi
   - if [[ -n "${NPM_TOKEN_WHITEWATER}" ]]; then echo "//npm-registry.whitewater.ibm.com/:_authToken=${NPM_TOKEN_WHITEWATER}" >> .npmrc; fi
   - tar -xjf /tmp/firefox-latest-esr.tar.bz2 --directory /tmp
