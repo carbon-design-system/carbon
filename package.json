@@ -105,7 +105,8 @@
     "classnames": "2.2.5",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "warning": "3.0.0"
+    "warning": "3.0.0",
+    "uuid": "3.0.1"
   },
   "devDependencies": {
     "@ibma/aat": "^1.0.29",

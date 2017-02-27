@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import uuidV4 from 'uuid/v4';
 import icons from '@console/bluemix-icons';
 
 const propTypes = {
@@ -85,7 +86,7 @@ export function svgShapes(svgData) {
 
 const Icon = ({ className, width, height, fill, fillRule, name, style, description, ...other }) => {
   const icon = findIcon(name);
-  const id = icon.id;
+  const id = `${icon.id}_${uuidV4()}`;
   const props = {
     className,
     fill,
