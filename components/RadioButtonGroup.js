@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import RadioButton from './RadioButton';
 import warning from 'warning';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/base-elements/radio/radio.scss');
@@ -46,27 +45,23 @@ class RadioButtonGroup extends React.Component {
   }
 
   getRadioButtons = () => {
-    const children = React.Children.map(this.props.children, (radioButton) => {
+    const children = React.Children.map(this.props.children, (child) => {
       const {
         value,
-        ...other,
-      } = radioButton.props;
+      } = child.props;
       /* istanbul ignore if */
-      if (radioButton.props.hasOwnProperty('checked')) {
+      if (child.props.hasOwnProperty('checked')) {
         warning(false, `Instead of using the checked property on the RadioButton, set
             the defaultSelected property or valueSelected property on the RadioButtonGroup.`);
       }
 
-      return (
-        <RadioButton
-          {...other}
-          name={this.props.name}
-          key={value}
-          value={value}
-          onChange={this.handleChange}
-          checked={value === this.state.selected}
-        />
-      );
+      return React.cloneElement(child, {
+        name: this.props.name,
+        key: value,
+        value,
+        onChange: this.handleChange,
+        checked: value === this.state.selected,
+      });
     });
 
     return children;
