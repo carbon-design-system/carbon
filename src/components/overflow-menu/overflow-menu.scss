@@ -27,6 +27,10 @@
     padding: .5rem;
     fill: $ui-05;
     cursor: pointer;
+
+    &:hover {
+      fill: $brand-02;
+    }
   }
 
   .bx--overflow-menu-options {
