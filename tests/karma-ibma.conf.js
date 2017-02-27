@@ -55,8 +55,22 @@ module.exports = function (config) {
               {
                 loader: 'babel-loader',
                 options: {
-                  presets: ['es2015', 'stage-1'],
+                  presets: [
+                    [
+                      'env',
+                      {
+                        modules: false,
+                        chrome: 'latest',
+                        edge: 'latest',
+                        firefox: 'latest',
+                        safari: 'latest',
+                        ie: '11',
+                        ios: 'latest',
+                      },
+                    ],
+                  ],
                   plugins: [
+                    'transform-class-properties',
                     ['transform-runtime', { polyfill: false }],
                   ],
                 },
