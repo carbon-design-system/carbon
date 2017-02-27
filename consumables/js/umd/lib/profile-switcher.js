@@ -181,10 +181,14 @@
         if (linkedElement) {
           if (this.element.isLinked) {
             if (this.element.linkedAccount) {
-              linkedElement.appendChild(this.element.linkedAccount);
-            }
-            if (this.element.linkedIcon) {
-              linkedElement.appendChild(this.element.linkedIcon);
+              if (linkedElement.textContent.length) {
+                linkedElement.querySelector(this.options.selectorAccountSlLinked).textContent = this.element.linkedAccount.textContent;
+              } else {
+                linkedElement.appendChild(this.element.linkedAccount);
+                if (this.element.linkedIcon) {
+                  linkedElement.appendChild(this.element.linkedIcon);
+                }
+              }
             }
           } else {
             linkedElement.textContent = '';
