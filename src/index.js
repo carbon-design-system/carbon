@@ -28,6 +28,7 @@ import Search from './components/search/search';
 import Accordion from './components/accordion/accordion';
 import CopyButton from './components/copy-button/copy-button';
 import Notification from './components/notification/notification';
+import Toolbar from './components/toolbar/toolbar';
 
 const settings = {};
 
@@ -174,6 +175,12 @@ export {
    * @type InlineLeftNav
    */
   Notification,
+
+  /**
+   * Toolbar.
+   * @type Toolbar
+   */
+  Toolbar,
 };
 
 /**
@@ -210,6 +217,7 @@ const init = () => {
     Accordion.init();
     CopyButton.init();
     Notification.init();
+    Toolbar.init();
   }
 };
 
