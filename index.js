@@ -41,6 +41,8 @@ export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
 export PrimaryButton from './components/PrimaryButton';
+export ProgressIndicator from './components/ProgressIndicator';
+export ProgressIndicatorStep from './components/ProgressIndicatorStep';
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
