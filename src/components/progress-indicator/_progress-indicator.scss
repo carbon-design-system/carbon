@@ -1,0 +1,111 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+
+@include exports('progress-indicator') {
+  .bx--progress {
+    @include reset;
+    @include helvetica;
+    display: flex;
+    list-style: none;
+  }
+
+  .bx--progress-step {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 7rem;
+    transition: $transition--base all $bx--standard-easing;
+    overflow: visible;
+  }
+
+  .bx--progress-line {
+    position: absolute;
+    top: .625rem;
+    right: 99.5%;
+    height: 1px;
+    width: calc(100% - 24px);
+    border: 1px inset transparent;
+
+    .bx--progress-step:first-child & {
+      display: none;
+    }
+  }
+
+  .bx--progress-step svg {
+    position: relative;
+    z-index: 1;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    margin-bottom: .5rem;
+  }
+
+  .bx--progress-label {
+    line-height: 1;
+    width: 75%;
+  }
+
+  .bx--progress-step--current {
+    circle:first-child {
+      stroke: $brand-01;
+      stroke-width: 5;
+      fill: transparent;
+    }
+
+    circle:last-child {
+      fill: $brand-01;
+    }
+
+    .bx--progress-label {
+      @include font-smoothing;
+      color: $brand-01;
+      font-weight: 700;
+    }
+    .bx--progress-line {
+      background-color: $brand-01;
+    }
+  }
+
+  .bx--progress-step--incomplete {
+    circle {
+      stroke: $ui-05;
+      stroke-width: 5;
+      fill: transparent;
+    }
+
+    .bx--progress-label {
+      color: $ui-05;
+    }
+
+    .bx--progress-line {
+      background-color: $ui-05;
+    }
+  }
+
+  .bx--progress-step--complete {
+    circle {
+      stroke: $brand-01;
+      stroke-width: 5;
+      fill: transparent;
+    }
+
+    polygon {
+      fill: $brand-01;
+    }
+
+    .bx--progress-label {
+      @include font-smoothing;
+      color: $brand-01;
+      font-weight: 700;
+    }
+    .bx--progress-line {
+      background-color: $brand-01;
+    }
+  }
+}
+
