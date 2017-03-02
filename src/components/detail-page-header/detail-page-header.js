@@ -15,21 +15,36 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    // Debounce scroll event calls to handleScroll
-    const debouncedScroll = debounce(this.handleScroll.bind(this), 50);
-
+    this.previousScrollY = 0;
+    // Debounce scroll event calls to handleScroll (default: 50)
+    const debouncedScroll = debounce(this._handleScroll.bind(this), 25);
     this.hScroll = on(this.element.ownerDocument.defaultView, 'scroll', debouncedScroll);
   }
 
   /**
    * Adds class to header based on users position on the page
    */
-  handleScroll() {
-    if (this.element.ownerDocument.defaultView.scrollY > 101) {
-      this.element.classList.add(this.options.slideUp);
+  _handleScroll() {
+    let scrollPosition;
+    if (this.element.ownerDocument.defaultView.scrollY) {
+      scrollPosition = this.element.ownerDocument.defaultView.scrollY;
     } else {
-      this.element.classList.remove(this.options.slideUp);
+      scrollPosition = this.element.ownerDocument.defaultView.pageYOffset;
     }
+
+    if (scrollPosition > 86) {
+      this.element.dataset.headerActive = true;
+      if (scrollPosition < this.previousScrollY) {
+        this.element.classList.remove(this.options.scroll);
+      } else {
+        this.element.classList.add(this.options.scroll);
+      }
+    } else {
+      this.element.classList.remove(this.options.scroll);
+      this.element.dataset.headerActive = false;
+    }
+
+    this.previousScrollY = scrollPosition;
   }
 
   /**
@@ -58,7 +73,8 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
    * @property {string} selectorInit The CSS selector to find detail page headers.
    */
   static options = {
-    slideUp: 'bx--detail-page-header--with-tabs--animated-slide-up',
+    scroll: 'bx--detail-page-header--scroll',
+    scrollUp: 'bx--detail-page-header--scroll-up',
     selectorInit: '[data-detail-page-header]',
   };
 }

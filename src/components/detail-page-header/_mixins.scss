@@ -1,45 +1,20 @@
+$transition-time: 300ms;
+
 @mixin detail-page-header {
   @include reset;
-  background-color: $ui-01;
-  width: 100%;
-}
-
-@mixin detail-page-header-animated {
-  @include reset;
-  transition: 185ms transform;
-  will-change: transform;
-  transition-timing-function: cubic-bezier(.5, 0, .1, 1);
+  @include helvetica;
+  display: flex;
+  justify-content: space-between;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: rem(86px);
+  transition: transform $transition-time $bx--standard-easing 0s,
+  max-height $transition-time $bx--standard-easing 0s,
+  box-shadow $transition-time $bx--standard-easing 0s,
+  height $transition-time $bx--standard-easing 0s;
+  will-change: transform, height, max-height, box-shadow;
   z-index: z('header');
-}
 
-@mixin detail-page-header__arrow {
-  width: 16px;
-  height: 16px;
-  fill: $brand-01;
-
-  @include breakpoint(bp--xs--major) {
-    position: relative;
-    left: rem(-20px);
-  }
-}
-
-@mixin detail-page-header__tab-overrides {
-  @include reset;
-  @include grid-container;
-  padding-top: 0;
-  padding-bottom: 1rem;
-
-  @include breakpoint(bp--sm--major) {
-    padding-bottom: 0;
-  }
-
-  .bx--tabs__nav {
-    @include breakpoint(bp--sm--major) {
-      margin: 0;
-    }
+  &[data-header-active='true'] {
+    @include layer('global-header');
   }
 }

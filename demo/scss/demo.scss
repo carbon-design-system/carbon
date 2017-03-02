@@ -9,6 +9,7 @@
   padding: 1rem;
   margin-top: 5rem;
   transition: .2s;
+  min-height: 2000px;
   background-color: $color__navy-gray-2;
 
   @include light-ui {
@@ -69,4 +70,24 @@
       margin-right: 1rem;
     }
   }
+}
+
+.test-header {
+  position: fixed;
+  background-color: $ui-05;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 86px;
+  z-index: 8000;
+}
+
+.test-nav {
+  position: fixed;
+  background-color: $ui-04;
+  width: 200px;
+  height: calc(100vh - 86px);
+  bottom: 0;
+  left: 0;
+  z-index: 8000;
 }

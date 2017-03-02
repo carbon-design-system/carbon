@@ -1,32 +1,77 @@
-<header class="bx--detail-page-header--with-tabs">
-  <div class="bx--detail-page-header--with-tabs__container">
-    <div class="bx--detail-page-header--with-tabs__breadcrumb">
-      <a href="#" class="bx--detail-page-header--with-tabs__link-wrapper">
-        <svg class="bx--detail-page-header--with-tabs__arrow">
-          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--back"></use>
-        </svg>
-        <p class="bx--detail-page-header--with-tabs__breadcrumb-title">Breadcrumb title</p>
-      </a>
+<div class="test-header"></div>
+<header data-detail-page-header class="bx--detail-page-header bx--detail-page-header--with-tabs">
+  <div class="bx--detail-page-header-content">
+    <div class="bx--breadcrumb">
+      <div class="bx--breadcrumb-item">
+        <a href="#" class="bx--link">Breadcrumb 1</a>
+      </div>
+      <div class="bx--breadcrumb-item">
+        <a href="#" class="bx--link">Breadcrumb 2</a>
+      </div>
+      <div class="bx--breadcrumb-item">
+        <a href="#" class="bx--link">Breadcrumb 3</a>
+      </div>
     </div>
-    <div class="bx--detail-page-header--with-tabs__info">
-      <p class="bx--detail-page-header--with-tabs__info-title">Detail Page Header</p>
-    </div>
-  </div>
-  <div class="bx--detail-page-header--with-tabs__tabs-container">
-    <nav data-tabs class="bx--tabs" role="navigation">
-      <div class="bx--tabs__trigger">
-        <a href="javascript:void(0)" class="bx--tabs__trigger-text"></a>
-        <svg>
-          <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v4/img/sprite.svg#service--down-arrow"></use>
+    <div class="bx--detail-page-header-title-container">
+      <div class="bx--detail-page-header-icon-container">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path fill="#D8D8D8" d="M0 0h24v24H0z" fill-rule="evenodd"/>
         </svg>
       </div>
-      <ul class="bx--tabs__nav bx--tabs--hidden" role="tablist">
-        <li class="bx--tabs__nav-item bx--tabs--selected" data-target=".demo--panel--overview" role="presentation"><a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">Overview</a></li>
-        <li class="bx--tabs__nav-item" data-target=".demo--panel--containers" role="presentation"><a id="tab-link-2" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-2" aria-selected="false">Containers Files</a></li>
-        <li class="bx--tabs__nav-item" data-target=".demo--panel--connected" role="presentation"><a id="tab-link-3" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-3" aria-selected="false">Connected Objects</a></li>
-        <li class="bx--tabs__nav-item" data-target=".demo--panel--manage" role="presentation"><a id="tab-link-4" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-4" aria-selected="false">Manage</a></li>
-        <li class="bx--tabs__nav-item" data-target=".demo--panel--api-reference" role="presentation"><a id="tab-link-5" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-5" aria-selected="false">API Reference</a></li>
+      <h1 class="bx--detail-page-header-title">Title</h1>
+      <div class="bx--detail-page-header-status-container">
+        <div class="bx--detail-page-header-status-icon"></div>
+        <span class="bx--detail-page-header-status-text">Running</span>
+      </div>
+    </div>
+    <nav data-tabs class="bx--tabs" role="navigation">
+      <div class="bx--tabs-trigger">
+        <a href="javascript:void(0)" class="bx--tabs-trigger-text"></a>
+        <svg>
+          <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#caret--down"></use>
+        </svg>
+      </div>
+      <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+        <li class="bx--tabs__nav-item bx--tabs__nav-item--selected" data-target=".tab-1" role="presentation">
+          <a id="tab-link-1" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-1" aria-selected="true">Tab Label 1</a>
+        </li>
+        <li class="bx--tabs__nav-item" data-target=".tab-2" role="presentation">
+          <a id="tab-link-2" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-2" aria-selected="false">Tab Label 2</a>
+        </li>
+        <li class="bx--tabs__nav-item" data-target=".tab-3" role="presentation">
+          <a id="tab-link-3" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-3" aria-selected="false">Tab Label 3</a>
+        </li>
+        <li class="bx--tabs__nav-item" data-target=".tab-4" role="presentation">
+          <a id="tab-link-4" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-4" aria-selected="false">Tab Label 4</a>
+        </li>
+        <li class="bx--tabs__nav-item" data-target=".tab-5" role="presentation">
+          <a id="tab-link-5" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab" aria-controls="tab-panel-5" aria-selected="false">Tab Label 5</a>
+        </li>
       </ul>
     </nav>
+  </div>
+  <div class="bx--detail-page-header-menu">
+    <div data-overflow-menu tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu bx--overflow-menu--flip">
+      <svg class="bx--overflow-menu__icon">
+        <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#overflow-menu"></use>
+      </svg>
+      <ul class="bx--overflow-menu-options">
+        <li class="bx--overflow-menu-options__option">
+          <button class="bx--overflow-menu-options__btn">Stop app</button>
+        </li>
+        <li class="bx--overflow-menu-options__option">
+          <button class="bx--overflow-menu-options__btn">Restart app</button>
+        </li>
+        <li class="bx--overflow-menu-options__option">
+          <button class="bx--overflow-menu-options__btn">Rename app</button>
+        </li>
+        <li class="bx--overflow-menu-options__option">
+          <button class="bx--overflow-menu-options__btn">Edit routes</button>
+        </li>
+        <li class="bx--overflow-menu-options__option bx--overflow-menu-options__option--danger">
+          <button class="bx--overflow-menu-options__btn">Delete app</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </header>

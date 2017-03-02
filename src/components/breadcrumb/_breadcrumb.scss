@@ -6,6 +6,7 @@
 @include exports('breadcrumb') {
   .bx--breadcrumb {
     @include font-size('14');
+    @include helvetica;
     display: none;
 
     @include breakpoint(bp--xs--major) {
