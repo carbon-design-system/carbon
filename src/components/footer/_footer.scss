@@ -1,0 +1,67 @@
+//-----------------------------
+// Footer
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/typography';
+@import '../button/button';
+@import '../link/link';
+
+.bx--footer--bottom-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.bx--footer {
+  @include reset;
+  @include helvetica;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border-top: 2px solid $brand-01;
+  background-color: $ui-01;
+  min-height: 3.5rem;
+  z-index: z('footer');
+  padding: rem(20px) 5%;
+  width: 100%;
+}
+
+.bx--footer-info {
+  display: flex;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.bx--footer-info__item {
+  @include font-size('18');
+  @include line-height('body');
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-right: rem(64px);
+}
+
+.bx--footer-info__item > .bx--link {
+  font-weight: 700;
+}
+
+.bx--footer-info__item > .bx--footer-label {
+  @include font-size('14');
+  @include line-height('body');
+  margin: 0;
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+}
+
+.bx--footer-cta {
+  margin-left: auto;
+}
+
+
