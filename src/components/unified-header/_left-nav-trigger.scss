@@ -2,16 +2,32 @@
 
 @include exports('left-nav-trigger') {
 
-.bx--left-nav__trigger {
-  @include reset;
-  width: rem(60px);
-  height: $height--global-nav;
-  position: relative;
-  transition: $transition--base $bx--standard-easing;
-  cursor: pointer;
-  z-index: 9999;
+  .bx--left-nav__trigger {
+    @include reset;
+    width: rem(60px);
+    height: rem(50px);
+    position: relative;
+    transition: $transition--base $bx--standard-easing;
+    cursor: pointer;
+    z-index: 9999;
 
-  &--btn {
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $color__blue-30;
+
+      span,
+      span:before,
+      span:after {
+        background: $color__white;
+      }
+    }
+  }
+
+  .bx--left-nav__trigger--btn {
     @include reset;
     position: absolute;
     top: 1.5rem;
@@ -60,27 +76,12 @@
     }
   }
 
-  &:focus {
-    outline: 0;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: $color__blue-30;
+  .bx--left-nav__trigger--apps {
 
     span,
     span:before,
     span:after {
-      background: $color__white;
-    }
-  }
-
-  &--apps {
-
-    span,
-    span:before,
-    span:after {
-      background: $color__teal-40;
+      background: $nav-05;
     }
 
     &:focus {
@@ -89,7 +90,7 @@
 
     &:hover,
     &:focus {
-      background-color: $color__teal-50;
+      background-color: $nav-06;
 
       span,
       span:before,
@@ -97,8 +98,9 @@
         background: $color__white;
       }
     }
+  }
 
-    &.bx--left-nav__trigger--active {
+  .bx--left-nav__trigger--apps.bx--left-nav__trigger--active {
 
       span {
         background: transparent;
@@ -106,12 +108,12 @@
 
       span:before,
       span:after {
-        background: $color__teal-50;
+        background: $nav-06;
       }
 
       &:hover,
       &:focus {
-        background-color: $color__teal-50;
+        background-color: $nav-06;
 
         span:before,
         span:after {
@@ -119,14 +121,13 @@
         }
       }
     }
-  }
 
-  &--services {
+  .bx--left-nav__trigger--services {
 
     span,
     span:before,
     span:after {
-      background: $color__purple-30;
+      background: $nav-03;
     }
 
     &:focus {
@@ -135,7 +136,7 @@
 
     &:hover,
     &:focus {
-      background-color: $color__purple-60;
+      background-color: $nav-04;
 
       span,
       span:before,
@@ -143,36 +144,36 @@
         background: $color__white;
       }
     }
+  }
 
-    &.bx--left-nav__trigger--active {
+  .bx--left-nav__trigger--services.bx--left-nav__trigger--active {
 
-      span {
-        background: transparent;
-      }
+    span {
+      background: transparent;
+    }
+
+    span:before,
+    span:after {
+      background: $nav-04;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $nav-04;
 
       span:before,
       span:after {
-        background: $color__purple-60;
-      }
-
-      &:hover,
-      &:focus {
-        background-color: $color__purple-60;
-
-        span:before,
-        span:after {
-          background: $color__white;
-        }
+        background: $color__white;
       }
     }
   }
 
-  &--infrastructure {
+  .bx--left-nav__trigger--infrastructure {
 
     span,
     span:before,
     span:after {
-      background: $color__blue-40;
+      background: $nav-07;
     }
 
     &:focus {
@@ -181,7 +182,7 @@
 
     &:hover,
     &:focus {
-      background-color: $color__blue-51;
+      background-color: $nav-08;
 
       span,
       span:before,
@@ -189,29 +190,27 @@
         background: $color__white;
       }
     }
+  }
 
-    &.bx--left-nav__trigger--active {
+  .bx--left-nav__trigger--infrastructure.bx--left-nav__trigger--active {
 
-      span {
-        background: transparent;
-      }
+    span {
+      background: transparent;
+    }
+
+    span:before,
+    span:after {
+      background: $nav-08;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $nav-08;
 
       span:before,
       span:after {
-        background: $color__blue-51;
-      }
-
-      &:hover,
-      &:focus {
-        background-color: $color__blue-51;
-
-        span:before,
-        span:after {
-          background: $color__white;
-        }
+        background: $color__white;
       }
     }
   }
-}
-
 }

@@ -1,15 +1,15 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
-@import 'vars';
 @import 'mixins';
 @import 'left-nav-trigger';
 @import 'global-header';
 @import 'topnav';
-@import 'left-nav-new';
+@import 'left-nav';
+@import 'account-switcher';
 
 @include exports('unified-header') {
   .bx--unified-header {

@@ -1,0 +1,290 @@
+@import '../../globals/scss/import-once';
+
+@include exports('account-switcher') {
+
+  .bx--account-switcher {
+    @include reset;
+    list-style: none;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: rem(350px);
+  }
+
+  .bx--account-switcher__linked-icon {
+    fill: $inverse-01;
+    height: 1rem;
+    width: 1rem;
+    margin: 0 .5rem;
+    transform: rotate(45deg);
+  }
+
+  .bx--account-switcher__toggle {
+    z-index: 9000;
+    height: rem(36px);
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $inverse-01;
+    padding: 0 1rem;
+    background-color: $nav-01;
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      outline: 0;
+      background-color: $color__navy-gray-3; // anna
+
+      .bx--account-switcher__toggle--text {
+        color: $color__blue-30; // anna 
+      }
+
+      svg {
+        fill: $color__blue-30; // anna
+      }
+    }
+  }
+
+  .bx--account-switcher__toggle--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .bx--account-switcher__toggle--text {
+    @include font-size('11');
+    letter-spacing: .5px;
+    overflow: hidden;
+    display: inline-flex;
+    white-space: nowrap;
+    padding-right: .5rem;
+    font-weight: 300;
+  }
+
+  .bx--account-switcher__toggle--text[data-switcher-account-sl],
+  .bx--account-switcher__toggle--text[data-switcher-account] {
+    @include font-smoothing;
+    font-weight: 600; 
+  }
+
+  .bx--account-switcher__toggle--text[data-switcher-account] {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .bx--account-switcher__toggle--text[data-switcher-account] .bx--account-switcher__linked-icon {
+    margin-right: 0;
+  }
+
+  .bx--account-switcher__toggle--text > [data-dropdown-account-linked] {
+    margin-left: .5rem;
+    margin-right: 0;
+  }
+
+  .bx--account-switcher__toggle--text:last-child {
+    padding-right: 0;
+  }
+
+  .bx--account-switcher__menu {
+    @include reset;
+    list-style: none;
+  }
+
+  .bx--account-switcher__menu__container {
+    @include box-shadow('large');
+    transition: $transition--base all $bx--standard-easing;
+    position: absolute;
+    width: auto;
+    min-width: rem(350px);
+    height: auto;
+    background-color: $color__navy-gray-3; // anna
+    visibility: hidden;
+    opacity: 0;
+    top: 100%;
+    right: 0;
+    transform: translateY(-10%);
+    color: $inverse-01;
+    z-index: 8000;
+  }
+
+  .bx--account-switcher--open {
+    color: $color__blue-30; // anna
+
+    .bx--account-switcher__toggle {
+      color: $color__blue-30; // anna
+      background-color: $color__navy-gray-3; // anna
+    }
+
+    .bx--account-switcher__linked-icon {
+      fill: $color__blue-30; // anna
+    }
+
+    .bx--account-switcher__menu__container {
+      visibility: visible;
+      max-height: rem(2000px);
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .bx--account-switcher__menu__item {
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
+
+    &:first-child {
+      border-bottom: 1px solid $color__navy-gray-5; // anna
+    }
+
+    &:nth-child(n+2) {
+      padding: 1rem 1rem 0;
+    }
+
+    &:last-child {
+      display: flex;
+      margin-left: auto;
+      justify-content: flex-start;
+      max-width: 75%;
+      padding: .75rem 0 1rem 1.5rem;
+
+      a {
+        @include font-size('11');
+        padding-right: 1rem;
+        color: $color__blue-30; // anna
+
+        &:visited {
+          color: $color__blue-30; // anna 
+        }
+
+        &:hover {
+          color: $color__blue-40; // anna
+        }
+      }
+    }
+  }
+
+  .bx--account-switcher__menu__item--title {
+    @include font-size('14');
+    @include font-smoothing;
+    font-weight: 700;
+    height: 44px;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown {
+    @include font-size('14');
+    flex: 3;
+    background-color: $color__navy-gray-5; // anna
+    display: block;
+    flex-direction: column;
+    min-width: 200px;
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown[data-value=''] .bx--dropdown-text {
+    color: $color__white; // anna
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown--scroll {
+    max-height: 180px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      background: $color__navy-gray-4; // anna
+      width: .5rem;
+      height: .5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color__navy-gray-7; // anna
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: $color__navy-gray-8; // anna
+    }
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown li {
+    @include font-smoothing;
+    font-weight: 400;
+    max-width: 400px;
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown__arrow {
+    fill: $color__blue-30; // anna
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown-text {
+    padding-right: 2rem;
+    align-self: flex-start;
+    background-color: $color__navy-gray-5; // anna
+
+    .bx--account-switcher__linked-icon {
+      fill: $color__white; // anna
+      vertical-align: middle;
+    }
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown-list {
+    position: relative;
+    transform: translateY(-10px);
+    max-height: 0;
+    height: auto;
+    width: 100%;
+    top: 0;
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown-item {
+    background-color: $color__navy-gray-3; // anna
+
+    > .bx--dropdown-link:hover,
+    .bx--dropdown-link:focus {
+      background-color: $color__blue-30; // anna
+      color: $color__blue-90; // anna
+
+      svg {
+        fill: $color__blue-90; // anna
+      }
+    }
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown-link {
+    height: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    span {
+      pointer-events: none;
+    }
+
+    svg {
+      fill: $color__white; // anna
+      pointer-events: none;
+      vertical-align: middle;
+    }
+  }
+
+  .bx--account-switcher__menu__item .bx--dropdown--open {
+    .bx--dropdown-text {
+      color: $color__white; // anna
+    }
+
+    .bx--dropdown-list {
+      display: flex;
+      flex-direction: column;
+      max-height:  2000px;
+      z-index: 10;
+    }
+
+    .bx--dropdown-item {
+      background-color: $color__navy-gray-4; // anna
+    }
+  }
+}

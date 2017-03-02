@@ -6,29 +6,28 @@
 
 @mixin link-style {
   &:hover {
-    color: $color__blue-30;
 
-    .bx--global-light-ui.bx--left-nav__main-nav[data-left-nav-list="apps"] & {
-      color: $color__teal-50;
+    .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+      color: $nav-06;
 
       .bx--left-nav-list__item-link--taxonomy-icon {
-        fill: $color__teal-50;
+        fill: $nav-06;
       }
     }
 
-    .bx--global-light-ui.bx--left-nav__main-nav[data-left-nav-list="Services"] & {
-      color: $color__purple-60;
+    .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+      color: $nav-04;
 
       .bx--left-nav-list__item-link--taxonomy-icon {
-        fill: $color__purple-60;
+        fill: $nav-04;
       }
     }
 
-    .bx--global-light-ui.bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
-      color: $color__blue-51;
+    .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+      color: $nav-08;
 
       .bx--left-nav-list__item-link--taxonomy-icon {
-        fill: $color__blue-51;
+        fill: $nav-08;
       }
     }
   }

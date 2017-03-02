@@ -79,13 +79,13 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
    */
   toggle(event) {
     if (([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem))
-     || event.which === 27 || event.type === 'click') {
+    || event.which === 27 || event.type === 'click') {
       const isOpen = this.element.classList.contains('bx--dropdown--open');
       const isOfSelf = this.element.contains(event.target);
       const actions = {
         add: isOfSelf && event.which === 40 && !isOpen,
         remove: (!isOfSelf || event.which === 27) && isOpen,
-        toggle: isOfSelf && event.which !== 27 && event.which !== 40,
+        toggle: isOfSelf && event.which !== 27 && event.which !== 40 && event.target.nodeName !== 'A',
       };
       Object.keys(actions).forEach((action) => {
         if (actions[action]) {

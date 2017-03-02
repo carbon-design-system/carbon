@@ -1,441 +1,598 @@
-.bx--left-nav__trigger {
-  width: rem(60px);
-  height: $height--global-nav;
-  position: relative;
-  transition: $transition--base $bx--standard-easing;
-  // background-color: #efefef;
-  cursor: pointer;
-  z-index: 9999;
+@import '../../globals/scss/import-once';
 
+@include exports('left-nav') {
 
-  @include light-ui {
-    z-index: 8000;
+  .bx--global-header__left-nav {
+    @include layer('left-nav');
+    @include reset;
+    position: fixed;
+    z-index: 9000;
+    width: rem(250px);
+    top: rem(36px);
+    left: 0;
+    height: 100%;
+    transform: translate3d(-100%, 0, 0);
+    transition: 300ms $bx--standard-easing;
+    box-shadow: none;
+    visibility: hidden;
   }
 
-  &--btn {
-    position: absolute;
-    top: 1.5rem;
-    left: rem(20px);
+  .bx--global-header__left-nav.bx--left-nav--active {
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0px 1px 15px 2px rgba(0, 0, 0, .1);
+    visibility: visible;
+  }
+
+  .bx--left-nav {
+    @include reset;
+    display: block;
     width: 100%;
-    transition: $transition--base $bx--standard-easing;
-    display: flex;
-
-    span,
-    span:before,
-    span:after {
-      height: rem(2px);
-      width: rem(20px);
-      cursor: pointer;
-      position: absolute;
-      display: block;
-      content: '';
-      transition: all $transition--base ease;
-      background: $color__blue-30;
-    }
-
-    span:before {
-      top: rem(-6px);
-    }
-
-    span:after {
-      bottom: rem(-6px);
-    }
-
-    .bx--left-nav__trigger--active & {
-      left: rem(16px);
-
-      span {
-        background-color: transparent;
-      }
-
-      span:before,
-      span:after {
-        top: 0;
-        width: rem(26.5px);
-      }
-
-      span:before {
-        transform: rotate(45deg);
-      }
-
-      span:after {
-        transform: rotate(-45deg);
-      }
-    }
+    height: 100%;
+    background-color: $ui-01;
+    padding: 0 0 4rem 0;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
-  &:focus {
-    outline: 0;
+  .bx--left-nav__close-row {
+    @include reset;
+    height: rem(50px);
+    width: 100%;
+    background-color: $ui-01;
   }
 
-  &:hover,
-  &:focus {
-    background-color: $color__blue-30;
-
-    span,
-    span:before,
-    span:after {
-      background: $color__white;
-    }
-  }
-
-  &--active {
-
-    &:hover,
-    &:focus {
-      span {
-        background: transparent;
-      }
-
-      span:before,
-      span:after {
-        background: $color__white;
-      }
-    }
-  }
-}
-
-.bx--left-nav__header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 1.5rem;
-  height: $height--global-nav;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 1.125rem 1rem;
-
-  @include light-ui {
-    background-color: $color__navy-gray-1;
-    justify-content: space-between;
+  .bx--left-nav__header {
+    @include reset;
+    align-items: center;
+    height: rem(50px);
+    cursor: pointer;
     position: relative;
+    display: flex;
+    background-color: $nav-01;
+    justify-content: space-between;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1.125rem 1.5rem;
+    padding: 1.125rem rem(20px);
 
     &[data-left-nav-current-section='apps'] {
-      background-color: $color__teal-50;
+      background-color: $nav-06;
     }
 
-    &[data-left-nav-current-section='Infrastructure'] {
-      background-color: $color__blue-50;
+    &[data-left-nav-current-section='infrastructure'] {
+      background-color: $nav-08;
     }
 
-    &[data-left-nav-current-section='Services'] {
-      background-color: $color__purple-60;
-    }
-  }
-
-  &--title {
-    display: none;
-
-    @include light-ui {
-      @include font-size('18');
-      @include font-smoothing;
-      display: block;
-      color: $color__white;
-      font-weight: 700;
-      color: $color__white;
+    &[data-left-nav-current-section='services'] {
+      background-color: $nav-04;
     }
   }
 
-  &--close-icon {
+  .bx--left-nav__header--title {
+    @include font-size('16');
+    @include font-smoothing;
+    color: $inverse-01;
+    font-weight: 700;
+    margin-right: auto;
+  }
+
+  .bx--left-nav__header--taxonomy-icon {
+    width: rem(24px);
+    height: rem(24px);
+    fill: $inverse-01;
+    margin-right: 1rem;
+  }
+
+  .bx--left-nav__header--close-icon {
     width: rem(14px);
     height: rem(14px);
-    fill: $color__blue-30;
-    display: none;
-
-    @include light-ui {
-      display: block;
-      fill: $color__white;
-    }
-  }
-}
-
-.bx--left-nav-list {
-  display: flex;
-  flex-direction: column;
-  margin-top: rem(50px);
-  margin-bottom: 5rem;
-  background-color: $color__navy-gray-1;
-
-  @include light-ui {
-    background-color: $color__white;
-    margin-top: 1rem;
+    display: block;
+    fill: $inverse-01;
   }
 
-  & > .bx--left-nav-list__item {
-    opacity: 1;
-    position: static;
-
-    &.animate {
-      animation: animate .3s both cubic-bezier(0, 0, .25, 1) .1s;
-    }
-  }
-
-  &__item {
-    cursor: pointer;
+  .bx--left-nav__sections {
+    @include reset;
+    list-style: none;
+    padding: 0 0 1rem;
     width: 100%;
-    padding: 0;
-    margin-bottom: 0;
-    background-color: $color__navy-gray-1;
-
-    @include light-ui {
-      background-color: $color__white;
-    }
-
-    &--active {
-
-      & > .bx--left-nav-list__item-link {
-        background-color: $color__blue-30;
-        color: $color__white;
-
-        .bx--left-nav-list__item-link--taxonomy-icon {
-          fill: $color__white;
-        }
-
-        @include light-ui {
-          background-color: $color__blue-51;
-          color: $color__white;
-        }
-      }
-    }
-
-    &-link {
-      @include font-size('14');
-      font-weight: 400;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      color: $color__white;
-      text-decoration: none;
-      transition: background-color $transition--base $bx--standard-easing;
-      padding: .6rem 1.25rem;
-
-      @include light-ui {
-        color: $color__navy-gray-3;
-      }
-
-      &--taxonomy-icon {
-        fill: $color__blue-30;
-        width: rem(20px);
-        height: rem(20px);
-        transition: $transition--base $bx--standard-easing;
-        margin-right: 1rem;
-
-        @include light-ui {
-          fill: $color__blue-40;
-        }
-      }
-
-      &--icon {
-        display: flex;
-        margin-left: auto;
-
-        .icon {
-          fill: $color__blue-40;
-          width: rem(10px);
-          height: rem(10px);
-          transition: $transition--base $bx--standard-easing;
-        }
-      }
-    }
-
-    &:focus {
-      outline: 0;
-    }
-
-    &:hover,
-    &:focus {
-      & > .bx--left-nav-list__item-link {
-        background-color: $color__blue-30;
-        color: $color__white;
-
-        @include light-ui {
-          background-color: $color__blue-51;
-          color: $color__white;
-        }
-      }
-
-      .bx--left-nav-list__item-link--taxonomy-icon {
-        fill: $color__white;
-      }
-    }
+    z-index: 8000;
+    position: relative;
+    border-bottom: 1px solid $ui-04;
+    background-color: $color__white;
   }
 
-  &__item--has-children {
-
-    .bx--left-nav-list__item-link {
-      padding-right: 1.5rem;
-    }
+  .bx--left-nav__section {
+    @include reset;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: $transition--base $bx--standard-easing;
+    background-color: $ui-01;
 
     &:hover {
 
-      & > .bx--left-nav-list__item-link {
-        background-color: $color__white;
-        color: $color__blue-90;
+      &[data-left-nav-section="apps"] {
+        background-color: $nav-06;
       }
 
-      .bx--left-nav-list__item-link--taxonomy-icon {
-        fill: $color__navy-gray-3;
+      &[data-left-nav-section="services"] {
+        background-color: $nav-04;
       }
-    }
 
-    &.bx--left-nav-list__item--active {
+      &[data-left-nav-section="infrastructure"] {
+        background-color: $color__blue-50;
+      }
 
-      & > .bx--left-nav-list__item-link {
-        background-color: $color__white;
-        color: $color__blue-51;
+      .bx--left-nav__section--link {
+        @include font-smoothing;
+        font-weight: 700;
+        color: $inverse-01;
+      }
+
+      .bx--left-nav__section--taxonomy-icon {
+        fill: $inverse-01;
       }
     }
   }
-}
 
-.bx--left-nav-list--nested {
-  max-height: 0;
-  transition: .3s ease-in-out;
-  padding: 0;
-  opacity: 0;
-  overflow: hidden;
-  margin-bottom: 0;
+  .bx--left-nav__section--active {
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    background-color: $ui-01;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: .8rem 0;
 
-  .bx--left-nav-list__item--expanded & {
-    max-height: 20rem;
-    transition: .3s ease-in;
-    opacity: 1;
-
-    .bx--left-nav-list__item {
-      opacity: 1;
+    &[data-left-nav-section='apps'] {
+      background-color: $nav-06;
     }
 
-    .bx--left-nav-list__item-icon .icon {
+    &[data-left-nav-section='infrastructure'] {
+      background-color: $nav-08;
+    }
+
+    &[data-left-nav-section='services'] {
+      background-color: $nav-04;
+    }
+  }
+
+  .bx--left-nav__section--transition {
+    @extend .bx--left-nav__section--active;
+    position: absolute;
+    z-index: 9999;
+    transition: all .3s $bx--ease-out;
+
+    &--50 {
+      transform: translateY(100px);
+    }
+
+    &--100 {
+      transform: translateY(150px);
+    }
+
+    &--0 {
+      transform: translateY(50px);
+    }
+
+    .bx--left-nav__section--taxonomy-icon {
+      fill: $inverse-01;
+    }
+  }
+
+  .bx--left-nav__section--taxonomy-icon {
+    width: rem(24px);
+    height: rem(24px);
+    fill: $text-01;
+    margin-right: 1rem;
+  }
+
+  .bx--left-nav__section--anchor {
+    @include reset;
+    display: flex;
+    width: 100%;
+    padding: 0 1.25rem;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .bx--left-nav__section--link {
+    @include reset;
+    @include font-size('16');
+    display: flex;
+    align-items: center;
+    color: $text-01;
+    height: rem(50px);
+  }
+
+  // MAIN NAV
+  .bx--left-nav__main-nav {
+    @include reset;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5rem;
+    margin-top: 0;
+    transition: all 250ms $bx--ease-out;
+    padding-top: 1rem;
+    background-color: $inverse-01;
+  }
+
+  .bx--left-nav__main-nav--hidden {
+    display: none;
+  }
+
+  .bx--left-nav__main-nav--top {
+    margin-top: -100vh;
+  }
+
+  .bx--main-nav__parent-item {
+    @include reset;
+    opacity: 1;
+    transition: opacity 200ms $bx--standard-easing;
+    cursor: pointer;
+    width: 100%;
+    padding: 0;
+    margin-bottom: .25rem;
+    background-color: $ui-01;
+  }
+
+  .bx--main-nav__parent-item--fade {
+    opacity: 0;
+  }
+
+  .bx--main-nav__parent-item--hidden {
+    display: none;
+  }
+
+  .bx--main-nav__parent-item--expanded {
+    .bx--parent-item__link--down-icon svg {
       transform: rotate(180deg);
     }
   }
 
-  .bx--left-nav-list__item {
-    width: 100%;
-    position: static;
-    padding: 0;
-    transition: $transition--base;
-    opacity: 0;
+  .bx--parent-item__link {
+    @include reset;
+    @include font-size('14');
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    padding: .5rem rem(20px);
+    transition: background-color $transition--base $bx--standard-easing;
+    color: $text-01;
 
-    &-link {
-      @include font-size('14');
-      color: $color__navy-gray-3;
-      padding: .5rem 1.35rem .5rem 2rem;
-      font-weight: 400;
+    .bx--parent-item__link--taxonomy-icon {
+      width: rem(24px);
+      height: rem(24px);
+      transition: $transition--base $bx--standard-easing;
+      margin-right: 1rem;
+      fill: $text-01;
+    }
+
+    .bx--parent-item__link--down-icon {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      margin-left: auto;
+
+      svg {
+        width: rem(10px);
+        height: rem(10px);
+        transition: $transition--base $bx--standard-easing;
+        fill: $text-01;
+      }
     }
 
     &:hover {
-      background-color: $color__blue-51;
-      outline: none;
 
-      & > .bx--left-nav-list__item-link {
-        color: $color__white;
+      .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+        color: $nav-06;
+
+        .bx--parent-item__link--taxonomy-icon,
+        .bx--parent-item__link--down-icon svg {
+          fill: $nav-06;
+        }
       }
 
-      .bx--left-nav-list--flyout--arrow-icon {
-        fill: $color__white;
-      }
-    }
+      .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+        color: $nav-04;
 
-    &--active {
-      background-color: $color__blue-51;
-      color: $color__white;
-
-      .bx--left-nav-list--flyout--arrow-icon {
-        fill: $color__white;
+        .bx--parent-item__link--taxonomy-icon,
+        .bx--parent-item__link--down-icon svg {
+          fill: $nav-04;
+        }
       }
 
-      & > .bx--left-nav-list__item-link {
-        background-color: $color__blue-51;
-        color: $color__white;
+      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+        color: $nav-08;
+
+        .bx--parent-item__link--taxonomy-icon,
+        .bx--parent-item__link--down-icon svg {
+          fill: $nav-08;
+        }
       }
     }
   }
-}
 
-.bx--left-nav-list--flyout {
-  display: none;
-  box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, .25);
-  background-color: $color__white;
-  padding: 0 0 .5rem;
-  min-width: auto;
-  white-space: nowrap;
-  outline: none;
-  position: absolute;
-  z-index: 9999;
+  .bx--main-nav__parent-item.bx--active-list-item {
 
-  &:before {
-    content: '';
-    display: block;
+    .bx--parent-item__link {
+      color: $inverse-01;
+
+      .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+        background-color: $nav-06;
+
+        &:hover {
+          color: $inverse-01;
+
+          .bx--parent-item__link--taxonomy-icon,
+          .bx--parent-item__link--down-icon svg {
+            fill: $inverse-01;
+          }
+        }
+      }
+
+      .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+        background-color: $nav-04;
+
+        &:hover {
+          color: $inverse-01;
+
+          .bx--parent-item__link--taxonomy-icon,
+          .bx--parent-item__link--down-icon svg {
+            fill: $inverse-01;
+          }
+        }
+      }
+
+      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+        background-color: $nav-08;
+
+        &:hover {
+          color: $inverse-01;
+
+          .bx--parent-item__link--taxonomy-icon,
+          .bx--parent-item__link--down-icon svg {
+            fill: $inverse-01;
+          }
+        }
+      }
+    }
+
+    .bx--parent-item__link--taxonomy-icon {
+      fill: $inverse-01;
+    }
+
+    .bx--parent-item__link--down-icon svg {
+      fill: $inverse-01;
+    }
+
+    &:hover {
+      color: $inverse-01;
+    }
+  }
+
+  .bx--main-nav__nested-list {
+    @include reset;
+    @include list;
+    list-style: none;
+    max-height: 0;
+    transition: 300ms $bx--standard-easing;
+    padding: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+
+  .bx--main-nav__parent-item--expanded .bx--main-nav__nested-list {
+    max-height: 20rem;
+    transition: 300ms $bx--standard-easing;
+    opacity: 1;
+    margin-top: .5rem;
+    overflow: visible;
+
+    .bx--nested-list__item {
+      opacity: 1;
+    }
+  }
+
+  .bx--nested-list__item {
+    width: 100%;
+    position: static;
+    margin-bottom: .25rem;
+    padding: 0;
+    transition: $transition--base;
+    opacity: 0;
+  }
+
+  .bx--nested-list__item--link {
+    @include font-size('14');
+    color: $text-01;
+    padding: .5rem 1.35rem .5rem 2rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    position: relative;
+    margin-right: auto;
+
+    &:hover {
+      .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+        color: $nav-06;
+
+        .bx--left-nav-list__item-link--taxonomy-icon {
+          fill: $nav-06;
+        }
+      }
+
+      .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+        color: $nav-04;
+
+        .bx--left-nav-list__item-link--taxonomy-icon {
+          fill: $nav-04;
+        }
+      }
+
+      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+        color: $nav-08;
+
+        .bx--left-nav-list__item-link--taxonomy-icon {
+          fill: $nav-08;
+        }
+      }
+    }
+  }
+
+  .bx--nested-list__item--icon svg {
+    width: rem(10px);
+    height: rem(10px);
+    fill: $text-01;
+  }
+
+  .bx--nested-list__item.bx--active-list-item {
+
+    .bx--nested-list__item--link {
+
+      .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+        background-color: $nav-06;
+
+        &:hover {
+          color: $inverse-01;
+
+          .bx--parent-item__link--taxonomy-icon {
+            fill: $inverse-01;
+          }
+        }
+      }
+
+      .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+        background-color: $nav-04;
+
+        &:hover {
+          color: $inverse-01;
+
+          .bx--parent-item__link--taxonomy-icon {
+            fill: $inverse-01;
+          }
+        }
+      }
+
+      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+        background-color: $nav-08;
+
+        &:hover {
+          color: $inverse-01;
+
+          .bx--parent-item__link--taxonomy-icon {
+            fill: $inverse-01;
+          }
+        }
+      }
+    }
+
+    .bx--nested-list__item--icon svg {
+      fill: $text-01;
+    }
+  }
+
+  .bx--nested-list__flyout-menu {
+    @include layer('overlay');
+    display: none;
+    min-width: auto;
+    white-space: nowrap;
+    outline: none;
     position: absolute;
-    width: 120%;
-    height: 120%;
-    top: -3rem;
-    left: 0;
-    padding: 2rem;
-    z-index: - 1;
+    z-index: 9999;
+    color: $inverse-01;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      top: -3rem;
+      left: 0;
+      padding: 2rem;
+      z-index: -1;
+    }
   }
 
-  &--displayed {
+  .bx--nested-list__flyout-menu--displayed {
+    @include reset;
     display: block;
-    border-left: 1px solid $color__navy-gray-9;
-    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, .15);
-
-    & > .bx--left-nav-list__item {
-      .bx--left-nav-list__item-link {
-        color: $color__blue-90;
-        background-color: $color__white;
-      }
-
-      &:hover {
-        .bx--left-nav-list__item-link {
-          background-color: $color__blue-51;
-          color: $color__white;
-          padding-right: 1.5rem;
-        }
-      }
-
-      &--active {
-        .bx--left-nav-list__item-link {
-          background-color: $color__blue-51;
-          color: $color__white;
-        }
-      }
-    }
+    border-left: 1px solid $ui-04;
   }
 
-  &--arrow {
-    &-icon {
-      width: rem(10px);
-      height: rem(10px);
-      fill: $color__blue-90;
-    }
+  .bx--flyout-menu__item--link {
+    @include font-size('14');
+    padding: 0 1.75rem 0 1rem;
+    color: $text-01;
+    text-decoration: none;
   }
 
-  .bx--left-nav-list__item {
+  .bx--flyout-menu__item {
+    @include reset;
+    background-color: $ui-01;
     margin: 0;
     height: rem(37px);
     display: flex;
     align-items: center;
 
-    &-link {
-      @include font-size('14');
-      padding: 0 1.75rem 0 1rem;
+    &:hover {
+      .bx--left-nav__main-nav[data-left-nav-list="apps"] & .bx--flyout-menu__item--link {
+        color: $nav-06;
+      }
+
+      .bx--left-nav__main-nav[data-left-nav-list="services"] & .bx--flyout-menu__item--link {
+        color: $nav-04;
+      }
+
+      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & .bx--flyout-menu__item--link {
+        color: $nav-08;
+      }
+    }
+  }
+
+  .bx--flyout-menu__item.bx--active-list-item {
+
+    .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+      background-color: $nav-06;
+
+      & .bx--flyout-menu__item--link {
+        color: $inverse-01;
+
+        &:hover {
+          color: $inverse-01;
+        }
+      }
     }
 
-    &--active {
-      .bx--left-nav-list__item-link {
-        color: $color__white;
-        background-color: $color__blue-51;
+    .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+      background-color: $nav-04;
+
+      & .bx--flyout-menu__item--link {
+        color: $inverse-01;
+
+        &:hover {
+          color: $inverse-01;
+        }
+      }
+    }
+
+    .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+      background-color: $nav-08;
+
+      & .bx--flyout-menu__item--link {
+        color: $inverse-01;
+
+        &:hover {
+          color: $inverse-01;
+        }
       }
     }
   }
