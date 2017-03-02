@@ -22,7 +22,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', (event) => { this.handleClick(event); });
+    this.element.addEventListener('click', (event) => { this._handleClick(event); });
   }
 
   /**
@@ -30,7 +30,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * If the click is on a content switcher button, activates it.
    * @param {Event} event The event triggering this method.
    */
-  handleClick(event) {
+  _handleClick(event) {
     const button = eventMatches(event, this.options.selectorButton);
 
     if (button) {
@@ -124,8 +124,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    */
   static options = {
     selectorInit: '[data-content-switcher]',
-    selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
-    selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
+    selectorButton: 'input[type="radio"], .bx--content-switcher-btn',
     classActive: 'bx--content-switcher--selected',
     eventBeforeSelected: 'content-switcher-beingselected',
     eventAfterSelected: 'content-switcher-selected',

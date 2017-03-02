@@ -1,5 +1,76 @@
-//-----------------------------
-// Content Switcher
-//-----------------------------
+@import '../../globals/scss/colors';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/import-once';
 
-@import 'content-switcher--default';
+@include exports('content-switcher') {
+
+  .bx--content-switcher {
+    @include helvetica;
+    display: flex;
+    height: rem(40px);
+  }
+
+  .bx--content-switcher-btn {
+    @include reset;
+    @include font-smoothing;
+    @include font-size('14');
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    margin: 0;
+    text-decoration: none;
+    border: 1px solid $brand-01;
+    color: $brand-01;
+
+    &:focus {
+      @include focus-outline;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:active {
+      background-color: $brand-02;
+      border-color: $brand-02;
+      color: $inverse-01;
+    }
+  }
+
+  .bx--content-switcher-btn:not(:last-of-type) {
+    border-right: none;
+  }
+
+  .bx--content-switcher-btn:first-of-type {
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+
+    &:hover {
+      border-color: $brand-02;
+    }
+  }
+
+  .bx--content-switcher-btn:last-of-type {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    &:hover {
+      border-color: $brand-02;
+    }
+  }
+
+  .bx--content-switcher-btn.bx--content-switcher--selected {
+    background-color: $brand-01;
+    color: $inverse-01;
+    font-weight: 400;
+    outline: 1px solid transparent;
+
+    &:hover {
+      border-color: $brand-01;
+    }
+  }
+}

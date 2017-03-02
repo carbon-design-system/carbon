@@ -24,7 +24,7 @@ class Tab extends ContentSwitcher {
   constructor(element, options) {
     super(element, options);
 
-    this.element.addEventListener('keydown', (event) => { this.handleKeyDown(event); });
+    this.element.addEventListener('keydown', (event) => { this._handleKeyDown(event); });
 
     const selected = this.element.querySelector(this.options.selectorButtonSelected);
     if (selected) {
@@ -54,12 +54,12 @@ class Tab extends ContentSwitcher {
    * * If the click is on the button to open the drop down menu, does so.
    * @param {Event} event The event triggering this method.
    */
-  handleClick(event) {
-    super.handleClick(event);
+  _handleClick(event) {
+    super._handleClick(event);
     const button = eventMatches(event, this.options.selectorButton);
     const trigger = eventMatches(event, this.options.selectorTrigger);
     if (button) {
-      super.handleClick(event);
+      super._handleClick(event);
       this.updateMenuState();
     }
     if (trigger) {
@@ -73,7 +73,7 @@ class Tab extends ContentSwitcher {
    * * Down/Right keys are used to go to next tab.
    * @param {Event} event The event triggering this method.
    */
-  handleKeyDown(event) {
+  _handleKeyDown(event) {
     const triggerNode = this.element.querySelector(this.options.selectorTrigger);
     if (triggerNode && triggerNode.offsetParent) {
       return;

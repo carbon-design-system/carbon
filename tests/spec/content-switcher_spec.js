@@ -9,8 +9,7 @@ describe('Test content switcher', function () {
       const contentSwitcher = new ContentSwitcher(document.createElement('div'));
       expect(contentSwitcher.options).to.deep.equal({
         selectorInit: '[data-content-switcher]',
-        selectorButton: 'input[type="radio"], .bx--content-switcher__btn',
-        selectorButtonSelected: 'input[type="radio"].bx--content-switcher--selected',
+        selectorButton: 'input[type="radio"], .bx--content-switcher-btn',
         classActive: 'bx--content-switcher--selected',
         eventBeforeSelected: 'content-switcher-beingselected',
         eventAfterSelected: 'content-switcher-selected',

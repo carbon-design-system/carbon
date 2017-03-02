@@ -13,8 +13,6 @@
 
 | Name                | Params          | Description                                                               |
 |---------------------|-----------------|---------------------------------------------------------------------------|
-| `handleClick`       | event: `Object` | Handles the click event                                                   |
-| `handleKeyDown`     | event: `Object` | Handles the keydown event                                                 |
 | `updateMenuState`   |                 | Toggles the dropdown menu used in narrow mode                             |
 | `updateTriggerText` | target: `Object | Updates the dropdown menu text indicating the currently selected tab item |
 
