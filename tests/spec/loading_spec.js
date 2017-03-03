@@ -75,25 +75,64 @@ describe('Test Loading', function () {
     });
   });
 
-  describe('end()', function () {
-    it('Should set state to inactive', function () {
-      const spinner = new Loading(document.createElement('div'));
-      spinner.end();
-      expect(spinner.isActive()).to.equal(false);
+  describe('_deleteElement()', function () {
+    let element;
+    let instance;
+    let wrapper;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = LoadingHTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-loading]');
+      instance = new Loading(element);
+    });
+
+    it('Should be called', function () {
+      const spy = sinon.spy(instance, '_deleteElement');
+      instance._deleteElement();
+      expect(spy).to.have.been.called;
     });
 
     it('Should remove loading element from the DOM', function () {
-      const container = document.createElement('div');
-      container.innerHTML = LoadingHTML;
-      document.body.appendChild(container);
-      const spinnerEl = document.querySelector('[data-loading]');
-      const spinner = new Loading(spinnerEl);
-      spinner.end();
-      // Call private delete method since phantomjs doesn't support
-      // animationend.
-      spinner._deleteElement();
-      const spinnerElAfter = document.querySelector('[data-loading]');
-      expect(spinnerElAfter).to.be.a('null');
+      instance._deleteElement();
+      const loadingEl = document.querySelector('[data-loading]');
+      expect(loadingEl).to.be.a('null');
+    });
+
+    afterEach(function () {
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('end()', function () {
+    let element;
+    let instance;
+    let wrapper;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = LoadingHTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-loading]');
+      instance = new Loading(element);
+    });
+
+    it('Should be called', function () {
+      const spy = sinon.spy(instance, 'end');
+      instance.end();
+      expect(spy).to.have.been.called;
+    });
+
+    it('Should set state to inactive', function () {
+      instance.end();
+      expect(instance.isActive()).to.equal(false);
+    });
+
+    afterEach(function () {
+      instance.release();
+      document.body.removeChild(wrapper);
     });
   });
 

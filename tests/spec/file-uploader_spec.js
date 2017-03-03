@@ -1,42 +1,21 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import FileUploader from '../../src/components/file-uploader/file-uploader';
-
-const HTML = `
-<div class="bx--file-uploader">
-  <label
-    for="files1"
-    class="bx--file-uploader__label"
-    tabindex="0">Add other files</label>
-  <input
-    type="file"
-    class="bx--file-uploader__input"
-    id="files1"
-    data-file-uploader
-    data-target="[data-file-container]"
-    multiple
-  />
-  <div data-file-container class="bx--file-uploader__container"></div>
-</div>
-
-<div class="bx--file-uploader">
-  <label
-    for="files2"
-    class="bx--file-uploader__label"
-    tabindex="0">Add other files</label>
-  <input
-    type="file"
-    class="bx--file-uploader__input"
-    id="files2"
-    data-file-uploader
-    data-target="#bob"
-    multiple
-  />
-  <div id="bob" class="bx--file-uploader__container"></div>
-</div>
-`;
+import HTML from '../../src/components/file-uploader/file-uploader.html';
 
 describe('File Uploader', function () {
   describe('Constructor', function () {
+    let instance;
+    let element;
+    let wrapper;
+
+    before(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-file]');
+      instance = new FileUploader(element);
+    });
+
     it('should throw if root element is not given', function () {
       expect(() => {
         new FileUploader();
@@ -50,55 +29,29 @@ describe('File Uploader', function () {
     });
 
     it('should set default options', function () {
-      const fileUploader = new FileUploader(document.createElement('div'));
-      expect(fileUploader.options).to.deep.equal({
-        selectorInit: '[data-file-uploader]',
+      expect(instance.options).to.deep.equal({
+        selectorInit: '[data-file]',
+        selectorInput: 'input[type="file"].bx--file-input',
         selectorContainer: '[data-file-container]',
+        selectorCloseButton: '.bx--file-close',
+        eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
+        eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
       });
     });
 
-    it('should search for an element with options.selectorInit', function () {
-      const element = document.createElement('div');
-      element.dataset.id = 'foo';
-      const fileUploader = new FileUploader(element, { selectorInit: '[data-id="foo"]' });
-      expect(fileUploader.options.selectorInit).to.equal('[data-id="foo"]');
+    it('should access container element', function () {
+      const container = element.querySelector('[data-file-container]');
+      expect(instance.container).to.equal(container);
     });
 
-    it('should have matching id and uniqueStateContainerID values', function () {
-      const element = document.createElement('div');
-      element.id = 'uniqueID';
-      const fileUploader = new FileUploader(element);
-      expect(fileUploader.uniqueStateContainerID).to.equal(element.id);
+    it('should access the input element', function () {
+      const input = element.querySelector('input');
+      expect(instance.input).to.equal(input);
     });
 
-    it('should have empty default state', function () {
-      const element = document.createElement('div');
-      const fileUploader = new FileUploader(element);
-      expect(fileUploader.state).to.equal('');
-    });
-  });
-
-  describe('HTML state - initial', function () {
-    let instance;
-    let element;
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = HTML;
-
-    before(function () {
-      document.body.appendChild(wrapper);
-      element = document.querySelector('#files1[data-file-uploader]');
-      instance = new FileUploader(element);
-    });
-
-    it('should call #injectInitialStateHTML() on change event', function () {
-      const spyStateChange = sinon.spy(instance, 'injectInitialStateHTML');
-      element.dispatchEvent(new CustomEvent('change', { bubbles: true }));
-      expect(spyStateChange).to.have.been.called;
-    });
-
-    it('should set this.state to "default"', function () {
-      element.dispatchEvent(new CustomEvent('change', { bubbles: true }));
-      expect(instance.state).to.equal('default');
+    it('should access id for input', function () {
+      const input = element.querySelector('input');
+      expect(instance.inputId).to.equal(input.id);
     });
 
     after(function () {
@@ -107,86 +60,211 @@ describe('File Uploader', function () {
     });
   });
 
-  describe('Injecting HTML state', function () {
+  describe('HTML methods', function () {
     let instance;
     let element;
-    let containerElement;
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = HTML;
+    let wrapper;
 
-    before(function () {
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
       document.body.appendChild(wrapper);
-      element = document.querySelector('#files1');
+      element = document.querySelector('[data-file]');
       instance = new FileUploader(element);
-      containerElement = document.querySelector('.bx--file-uploader__container');
     });
 
-    it('should set dataset.state to "upload"', function () {
-      instance.injectStateHTML('upload', containerElement, '<div></div>');
-      expect(element.dataset.state).to.equal('upload');
+    it('_filenamesHTML method should use name', function () {
+      const filenamesHTML = instance._filenamesHTML('testName', 'testId');
+      const div = document.createElement('div');
+      div.innerHTML = filenamesHTML;
+      document.body.appendChild(div);
+      const nameElement = document.querySelector('.bx--file-filename');
+
+      expect(nameElement.innerHTML).to.equal('testName');
+
+      document.body.removeChild(div);
     });
 
-    it('should set dataset.state to "edit"', function () {
-      instance.injectStateHTML('edit', containerElement, '<div></div>');
-      expect(element.dataset.state).to.equal('edit');
+    it('_filenamesHTML method should use id param to for [data-for] attr', function () {
+      const filenamesHTML = instance._filenamesHTML('testName', 'testId');
+      const div = document.createElement('div');
+      div.innerHTML = filenamesHTML;
+      document.body.appendChild(div);
+      const idElement = document.querySelector('.bx--file__state-container');
+
+      expect(idElement.dataset.for).to.equal('testId');
+
+      document.body.removeChild(div);
     });
 
-    it('should insert given HTML to given target', function () {
-      containerElement.innerHTML = '';
-      instance.injectStateHTML('edit', containerElement, '<div></div>');
-      expect(containerElement.innerHTML).to.equal('<div></div>');
+    it('_uploadHTML method should return expected HTML string', function () {
+      const uploadHTML = instance._uploadHTML();
+      const div = document.createElement('div');
+      div.innerHTML = uploadHTML;
+      document.body.appendChild(div);
+      const uploadElement = document.querySelector('[data-loading]');
+
+      expect(uploadElement.classList.contains('bx--loading')).to.be.true;
+
+      document.body.removeChild(div);
     });
 
-    after(function () {
+    it('_closeButtonHTML method should return expected HTML string', function () {
+      const closeButtonHTML = instance._closeButtonHTML();
+      const div = document.createElement('div');
+      div.innerHTML = closeButtonHTML;
+      document.body.appendChild(div);
+      const closeButtonElement = document.querySelector('[width="16"]');
+
+      expect(closeButtonElement.classList.contains('bx--file-close')).to.be.true;
+
+      document.body.removeChild(div);
+    });
+
+    it('_checkmarkHTML method should return expected HTML string', function () {
+      const checkmarkHTML = instance._checkmarkHTML();
+      const div = document.createElement('div');
+      div.innerHTML = checkmarkHTML;
+      document.body.appendChild(div);
+      const closeButtonElement = document.querySelector('[width="16"]');
+
+      expect(closeButtonElement.classList.contains('bx--file-complete')).to.be.true;
+
+      document.body.removeChild(div);
+    });
+
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('HTML state - edit', function () {
+  describe('_removeState()', function () {
     let instance;
     let element;
-    let containerElement;
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = HTML;
+    let wrapper;
 
-    before(function () {
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
       document.body.appendChild(wrapper);
-      element = document.querySelector('#files1[data-file-uploader]');
+      element = document.querySelector('[data-file]');
       instance = new FileUploader(element);
-      instance.state = 'default';
-      containerElement = document.querySelector(instance.options.selectorContainer);
-      containerElement.innerHTML = `
-      <span class="bx--file-uploader__selected-file">
-        <p class="bx--file-uploader__filename">testName</p>
-        <span 
-          data-for="${instance.uniqueStateContainerID}" 
-          class="bx--file-uploader__state-container"
-        ></span>
-      </span>`;
     });
 
-
-    it('should return object with all given params', function () {
-      const foo = instance.setStateHTML('edit');
-      expect(foo).to.deep.equal({
-        state: 'edit',
-        selector: `[data-for=${instance.uniqueStateContainerID}]`,
-        stateContainers: [...element.ownerDocument.querySelectorAll(`[data-for=${instance.uniqueStateContainerID}]`)],
-      });
-    });
-
-    it('should throw if .bx--file-uploader__container is empty', function () {
-      containerElement.innerHTML = '';
+    it('should throw if element param is not given', function () {
       expect(() => {
-        instance.setStateHTML('edit');
+        instance._removeState(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it('#setStateHTML("edit") should be called', function () {
-      const stub = sinon.stub(instance, 'setStateHTML');
-      stub('edit');
-      expect(stub).to.have.been.called;
+    it('should be called', function () {
+      const parentEl = document.createElement('div');
+      const childEl = document.createElement('span');
+      parentEl.appendChild(childEl);
+      const spy = sinon.spy(instance, '_removeState');
+      instance._removeState(parentEl);
+      expect(spy).to.have.been.called;
+      spy.restore();
+    });
+
+    it('should remove the firstChild of given element', function () {
+      const parentEl = document.createElement('div');
+      parentEl.classList.add('foo');
+      const childEl = document.createElement('span');
+      parentEl.appendChild(childEl);
+      document.body.appendChild(parentEl);
+      instance._removeState(parentEl);
+      expect(document.querySelector('.foo').firstChild).to.be.a('null');
+      document.body.removeChild(parentEl);
+    });
+
+    afterEach(function () {
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('_getStateContainers', function () {
+    let instance;
+    let element;
+    let wrapper;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-file]');
+      instance = new FileUploader(element);
+    });
+
+    it('should throw if stateContainers are empty', function () {
+      expect(() => {
+        instance._getStateContainers();
+      }).to.throw(Error);
+    });
+
+    it('should throw if id for input[type="file"] does not equal [data-for] attribute on state container', function () {
+      const filenameElement = instance._filenamesHTML('name', 'unmatching-id');
+      instance.container.insertAdjacentHTML('beforeend', filenameElement);
+      expect(() => {
+        instance._getStateContainers();
+      }).to.throw(Error);
+    });
+
+    it('should be called', function () {
+      const filenameElement = instance._filenamesHTML('name', instance.inputId);
+      instance.container.insertAdjacentHTML('beforeend', filenameElement);
+      const spy = sinon.spy(instance, '_getStateContainers');
+      instance._getStateContainers();
+      expect(spy).to.have.been.called;
+    });
+
+    it('should return an array', function () {
+      const filenameElement = instance._filenamesHTML('name', instance.inputId);
+      instance.container.insertAdjacentHTML('beforeend', filenameElement);
+      const array = instance._getStateContainers();
+      expect(array).to.be.a('array');
+    });
+
+    it('should have a length', function () {
+      const filenameElement = instance._filenamesHTML('name', instance.inputId);
+      instance.container.insertAdjacentHTML('beforeend', filenameElement);
+      const array = instance._getStateContainers();
+      expect(array.length).to.equal(1);
+    });
+
+    it('should have an empty stateContainer', function () {
+      const filenameElement = instance._filenamesHTML('name', instance.inputId);
+      instance.container.insertAdjacentHTML('beforeend', filenameElement);
+      const stateContainer = document.querySelector('.bx--file__state-container');
+      expect(stateContainer.innerHTML).to.equal('');
+    });
+
+    afterEach(function () {
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('Displaying filenames with _displayFilenames', function () {
+    let instance;
+    let element;
+    let wrapper;
+
+    before(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-file]');
+      instance = new FileUploader(element);
+    });
+
+    it('should be called on input change event', function () {
+      const spy = sinon.spy(instance, '_displayFilenames');
+      instance.input.dispatchEvent(new CustomEvent('change', { bubbles: true }));
+
+      expect(spy).to.have.been.called;
     });
 
     after(function () {
@@ -195,32 +273,33 @@ describe('File Uploader', function () {
     });
   });
 
-  describe('HTML state - upload', function () {
+  describe('_handleStateChange', function () {
     let instance;
     let element;
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = HTML;
+    let wrapper;
 
-    before(function () {
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+
+      wrapper.innerHTML = HTML;
       document.body.appendChild(wrapper);
-      element = document.querySelector('#files1[data-file-uploader]');
+      element = document.querySelector('[data-file]');
       instance = new FileUploader(element);
-      instance.injectInitialStateHTML();
     });
 
-    it('should throw if .bx--file-uploader__container is empty', function () {
-      expect(() => {
-        instance.setStateHTML('upload');
-      }).to.throw(Error);
+    it('should be called', function () {
+      const testHTML = '<ul><li class="test">...</li><li class="test">...</li></ul>';
+      const div = document.createElement('div');
+      div.id = 'bob';
+      div.innerHTML = testHTML;
+      document.body.appendChild(div);
+      const spy = sinon.spy(instance, '_handleStateChange');
+      instance._handleStateChange([...document.querySelectorAll('.test')], 1, div);
+      expect(spy).to.have.been.called;
+      document.body.removeChild(div);
     });
 
-    it('#setStateHTML("upload") should be called', function () {
-      const stub = sinon.stub(instance, 'setStateHTML');
-      stub('upload');
-      expect(stub).to.have.been.called;
-    });
-
-    after(function () {
+    afterEach(function () {
       instance.release();
       document.body.removeChild(wrapper);
     });

@@ -1,16 +1,20 @@
-<div class="bx--file-uploader">
-  <label
-    for="files1"
-    class="bx--file-uploader__label bx--btn bx--btn--secondary"
-    tabindex="0">Add other files</label>
-  <input
-    type="file"
-    class="bx--file-uploader__input"
-    id="files1"
-    data-file-uploader
-    data-target="[data-file-container]"
-    multiple
-  />
-  <div data-file-container class="bx--file-uploader__container"></div>
+<div class="bx--form-item">
+  <strong class="bx--label">Account photo</strong>
+  <p class="bx--label-description">only .jpg and .png files. 500kb max file size.</p>
+  <div class="bx--file" data-file>
+    <label
+      for="your-file-importer-id-here"
+      class="bx--file-btn bx--btn bx--btn--secondary"
+      role="button"
+      tabindex="0">Add files</label>
+    <input
+      type="file"
+      class="bx--file-input"
+      id="your-file-importer-id-here"
+      data-file-uploader
+      data-target="[data-file-container]"
+      multiple
+    />
+    <div data-file-container class="bx--file-container"></div>
+  </div>
 </div>
-
