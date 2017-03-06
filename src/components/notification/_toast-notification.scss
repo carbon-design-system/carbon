@@ -3,10 +3,9 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/mixins';
 
@@ -15,6 +14,7 @@
 
   .bx--toast-notification {
     @include reset;
+    @include helvetica;
     @include font-smoothing;
     @include box-shadow('small');
     display: flex;
