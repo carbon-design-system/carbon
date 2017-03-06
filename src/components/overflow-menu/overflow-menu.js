@@ -2,6 +2,7 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
+import { initMenu, placeMenu } from '../../globals/js/misc/menu-placement';
 import on from '../../globals/js/misc/on';
 
 class OverflowMenu extends mixin(createComponent, initComponentBySearch, eventedState) {
@@ -10,17 +11,24 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
 
     this.optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
 
+    this.menuPlacementScope = this.element.ownerDocument.querySelector(this.options.selectorPlacementScope);
+
+    initMenu(this.element, this.optionMenu, this.menuPlacementScope);
+
+    this.resizeEvent = on(this.menuPlacementScope, 'resizeEvent', () => {
+      placeMenu(this.element, this.optionMenu, this.options.objMenuOffset, this.options.menuDirection);
+    });
     /**
      * The handle to release click event listener on document object.
      * @member {Handle}
      */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this.handleDocumentClick(event); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this._handleDocumentClick(event); });
 
     /**
      * The handle to release keypress event listener on document object.
      * @member {Handle}
      */
-    this.hDocumentKeyPress = on(this.element.ownerDocument, 'keypress', (event) => { this.handleKeyPress(event); });
+    this.hDocumentKeyPress = on(this.element.ownerDocument, 'keypress', (event) => { this._handleKeyPress(event); });
   }
 
   /**
@@ -40,10 +48,12 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    */
   _changeState(state, detail, callback) {
     this.element.classList.toggle('bx--overflow-menu--open', state === 'shown');
+    this.optionMenu.classList.toggle('bx--overflow-menu-options--open');
+    placeMenu(this.element, this.optionMenu, this.options.objMenuOffset, this.options.menuDirection);
     callback();
   }
 
-  handleDocumentClick(event) {
+  _handleDocumentClick(event) {
     const isOfSelf = this.element.contains(event.target);
     const shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
     const state = shouldBeOpen ? 'shown' : 'hidden';
@@ -59,7 +69,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     });
   }
 
-  handleKeyPress(event) {
+  _handleKeyPress(event) {
     const key = event.key || event.which;
     if (key === 'Enter' || key === 13) {
       const isOfSelf = this.element.contains(event.target);
@@ -85,6 +95,9 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     if (this.hDocumentKeyPress) {
       this.hDocumentKeyPress = this.hDocumentKeyPress.release();
     }
+    if (this.resizeEvent) {
+      this.resizeEvent = this.resizeEvent.release();
+    }
     super.release();
   }
 
@@ -92,11 +105,14 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
 
   static options = {
     selectorInit: '[data-overflow-menu]',
+    selectorPlacementScope: 'body',
     selectorOptionMenu: '.bx--overflow-menu-options',
     eventBeforeShown: 'overflow-menu-beingshown',
     eventAfterShown: 'overflow-menu-shown',
     eventBeforeHidden: 'overflow-menu-beinghidden',
     eventAfterHidden: 'overflow-menu-hidden',
+    objMenuOffset: { top: 3, left: -30 },
+    menuDirection: 'bottom',
   };
 }
 

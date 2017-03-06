@@ -27,7 +27,7 @@ describe('Test Overflow menu', function () {
 
     before(function () {
       document.body.appendChild(container);
-      element = document.querySelector('.bx--overflow-menu');
+      element = document.querySelector('[data-overflow-menu]');
       menu = new OverflowMenu(element);
     });
 
@@ -163,55 +163,28 @@ describe('Test Overflow menu', function () {
   });
 
   describe('Managing instances', function () {
+    let menu;
     let element;
+    let container;
 
-    before(function () {
-      element = document.createElement('div');
-    });
-
-    it('Should prevent creating duplicate instances', function () {
-      let first;
-      let second;
-      try {
-        first = OverflowMenu.create(element);
-        second = OverflowMenu.create(element);
-        expect(first).to.equal(second);
-      } finally {
-        first && first.release();
-        if (first !== second) {
-          second && second.release();
-        }
-      }
-    });
-
-    it('Should let create a new instance for an element if an earlier one has been released', function () {
-      let first;
-      let second;
-      try {
-        first = OverflowMenu.create(element);
-        first.release();
-        second = OverflowMenu.create(element);
-        expect(first).not.to.equal(second);
-      } finally {
-        first && first.release();
-        if (first !== second) {
-          second && second.release();
-        }
-      }
+    beforeEach(function () {
+      container = document.createElement('div');
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
+      element = document.querySelector('[data-overflow-menu]');
+      menu = OverflowMenu.create(element);
     });
 
     it('Should remove click event listener on document object once the instance is released', function () {
       element.classList.add('bx--overflow-menu--open');
-      document.body.appendChild(element);
-      OverflowMenu.create(element).release();
+      menu.release();
       document.body.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.classList.contains('bx--overflow-menu--open')).to.be.true;
     });
 
     it('Should remove keypress event listener on document object once the instance is released', function () {
       element.classList.add('bx--overflow-menu--open');
-      document.body.appendChild(element);
-      OverflowMenu.create(element).release();
+      menu.release();
       const event = new CustomEvent('keypress', { bubbles: true });
       event.key = 'Enter';
       document.body.dispatchEvent(event);
@@ -219,9 +192,8 @@ describe('Test Overflow menu', function () {
     });
 
     afterEach(function () {
-      if (document.body.contains(element)) {
-        document.body.removeChild(element);
-      }
+      document.body.removeChild(container);
+      menu.release();
     });
   });
 });
