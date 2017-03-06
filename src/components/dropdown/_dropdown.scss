@@ -4,7 +4,8 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
@@ -12,6 +13,7 @@
 @include exports('dropdown') {
   .bx--dropdown {
     @include reset;
+    @include helvetica;
     @include font-size('14');
     position: relative;
     list-style: none;
