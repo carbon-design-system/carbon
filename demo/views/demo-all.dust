@@ -11,7 +11,7 @@
     }
   </style>
 </head>
-<body>
+<body class="bx--global-light-ui">
   {header|s}
   {detailHeader|s}
   <button class="bx--btn theme-switcher" data-theme-switcher>Theme Switcher</button>

@@ -22,10 +22,12 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
     this.hookListItemsEvents();
   }
 
-  hookListItemsEvents() {
-    const leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
-    leftNavList.addEventListener('click', (evt) => {
+  hookListItemsEvents = () => {
+    this.element.addEventListener('click', (evt) => {
       const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+      const collapseEl = eventMatches(evt, this.options.selectorLeftNavCollapse);
+      const collapsedBar = eventMatches(evt, `.${this.options.classLeftNavCollapsed}`);
+
       if (leftNavItem) {
         const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
         const hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
@@ -37,14 +39,22 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
           this.addActiveListItem(leftNavItem);
         }
       }
+
+      if (collapseEl || collapsedBar) {
+        evt.preventDefault();
+        this.toggleLeftNav();
+      }
     });
-    [...this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach((item) => {
-      item.addEventListener('keydown', (evt) => {
-        const leftNavItemWithChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
-        if (leftNavItemWithChildren && evt.which === 13) {
-          this.handleNestedListClick(leftNavItemWithChildren, evt);
-        }
-      });
+
+    this.element.addEventListener('keydown', (evt) => {
+      const leftNavItemWithChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+      const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+
+      if (leftNavItemWithChildren && evt.which === 13) {
+        this.handleNestedListClick(leftNavItemWithChildren, evt);
+      } else if (leftNavItem && evt.which === 13) {
+        this.addActiveListItem(leftNavItem);
+      }
     });
   }
 
@@ -69,8 +79,14 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
    * @param {Event} event The event triggering this method.
    */
   handleNestedListClick(listItem, evt) {
+    const allNestedItems = [...document.querySelectorAll(this.options.selectorLeftNavListItemHasChildren)];
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
-    if (!('leftNavItemLink' in evt.target.dataset)) {
+    allNestedItems.forEach((currentItem) => {
+      if (currentItem !== listItem) {
+        toggleClass(currentItem, this.options.classExpandedLeftNavListItem, false);
+      }
+    });
+    if (!('inlineLeftNavItemLink' in evt.target.dataset)) {
       toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
     }
     const list = listItem.querySelector(this.options.selectorLeftNavNestedList);
@@ -84,6 +100,28 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
         item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = 0;
       }
     });
+  }
+
+  toggleLeftNav = () => {
+    const collapsed = this.element.dataset.collapsed === 'true';
+
+    if (!collapsed) {
+      this.element.dataset.collapsed = true;
+      this.element.classList.add(this.options.classLeftNavCollapsing);
+
+      window.setTimeout(() => {
+        this.element.classList.add(this.options.classLeftNavCollapsed);
+      }, 250);
+    } else {
+      this.element.dataset.collapsed = false;
+      this.element.classList.remove(this.options.classLeftNavCollapsed);
+      this.element.classList.remove(this.options.classLeftNavCollapsing);
+      this.element.classList.add(this.options.classLeftNavExpanding);
+
+      window.setTimeout(() => {
+        this.element.classList.remove(this.options.classLeftNavExpanding);
+      }, 250);
+    }
   }
 
   /**
@@ -111,9 +149,13 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
     selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
     selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
     selectorLeftNavListItemHasChildren: '[data-inline-left-nav-with-children]',
+    selectorLeftNavCollapse: '[data-inline-left-nav-collapse]',
     // CSS Class Selectors
     classActiveLeftNavListItem: 'left-nav-list__item--active',
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
+    classLeftNavCollapsing: 'bx--inline-left-nav--collapsing',
+    classLeftNavCollapsed: 'bx--inline-left-nav--collapsed',
+    classLeftNavExpanding: 'bx--inline-left-nav--expanding',
   };
 }
 

@@ -30,7 +30,8 @@
     "bluebird": "~3.1.1",
     "express": "4.13.4",
     "globby": "4.0.0",
-    "lodash.debounce": "^4.0.6"
+    "lodash.debounce": "^4.0.6",
+    "svgxuse": "1.1.22"
   },
   "devDependencies": {
     "babel-core": "~6.3.15",
@@ -84,7 +85,6 @@
     "scss-to-json": "1.1.0",
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0",
-    "svgxuse": "1.1.22",
     "validate-commit-msg": "^2.8.2",
     "webpack": "~1.12.9"
   },
