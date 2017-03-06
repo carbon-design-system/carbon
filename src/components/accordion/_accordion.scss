@@ -1,6 +1,6 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
@@ -8,6 +8,7 @@
 
   .bx--accordion {
     @include reset;
+    @include helvetica;
     list-style: none;
   }
 
@@ -36,6 +37,7 @@
   }
 
   .bx--accordion__title {
+    margin: 0;
     margin-left: 1rem;
   }
 
