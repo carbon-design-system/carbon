@@ -3,8 +3,7 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
@@ -14,6 +13,7 @@
   .bx--list--unordered,
   .bx--list--ordered {
     @include reset;
+    @include helvetica;
     @include font-size('14');
     @include font-smoothing;
     margin-left: 2rem;
