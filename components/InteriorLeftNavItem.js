@@ -6,7 +6,7 @@ if (!process.env.EXCLUDE_SASS) {
 
 const propTypes = {
   className: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  children: PropTypes.node,
   href: PropTypes.string.isRequired,
   activeHref: PropTypes.string,
   tabIndex: PropTypes.number,
@@ -19,7 +19,7 @@ const defaultProps = {
   onClick: () => {},
 };
 
-const InteriorLeftNavItem = ({ title, className, href, activeHref, onClick, tabIndex, ...other }) => {
+const InteriorLeftNavItem = ({ children, className, href, activeHref, onClick, tabIndex, ...other }) => {
   const classNames = classnames(
     'left-nav-list__item',
     className,
@@ -27,6 +27,12 @@ const InteriorLeftNavItem = ({ title, className, href, activeHref, onClick, tabI
       'left-nav-list__item--active': (activeHref === href),
     },
   );
+
+  const child = React.Children.only(children);
+  const newChild = React.cloneElement(child, {
+    tabIndex,
+    className: 'left-nav-list__item-link',
+  });
 
   return (
     <li
@@ -37,13 +43,7 @@ const InteriorLeftNavItem = ({ title, className, href, activeHref, onClick, tabI
       onKeyPress={(evt) => onClick(evt, href)}
       {...other}
     >
-      <a
-        href={href}
-        tabIndex={tabIndex}
-        className="left-nav-list__item-link"
-      >
-        {title}
-      </a>
+      {newChild}
     </li>
   );
 };

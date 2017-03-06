@@ -28,6 +28,9 @@ describe('InteriorLeftNav', () => {
           <InteriorLeftNavHeader />
           <InteriorLeftNavList className="test-child" />
           <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
+          <InteriorLeftNavItem href="#">
+            <a href="#">test-title</a>
+          </InteriorLeftNavItem>
         </InteriorLeftNav>
       );
       expect(interiorLeftNav.find(InteriorLeftNavHeader).length).toEqual(1);
@@ -40,7 +43,9 @@ describe('InteriorLeftNav', () => {
     const interiorLeftNav = mount(
       <InteriorLeftNav>
         <InteriorLeftNavList />
-        <InteriorLeftNavItem href="#first" title="test-title" />
+        <InteriorLeftNavItem href="#first">
+          <a href="#first">test-title</a>
+        </InteriorLeftNavItem>
       </InteriorLeftNav>
     );
 

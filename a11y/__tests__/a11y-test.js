@@ -345,7 +345,9 @@ describe('a11y scan', () => {
 
   it('InteriorLeftNavItem', (done) => {
     const wrapper = render(
-      <InteriorLeftNavItem title="test-title" href="#" />
+      <InteriorLeftNavItem href="#">
+        <a href="#">test-title</a>
+      </InteriorLeftNavItem>
     );
 
     AAT.getCompliance(wrapper.html(), 'InteriorLeftNavItem', (data) => {

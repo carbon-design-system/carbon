@@ -12,20 +12,28 @@ describe('InteriorLeftNavList', () => {
         title="test-title"
         open
       >
-        <InteriorLeftNavItem href="#" title="test-title" />
+        <InteriorLeftNavItem href="#">
+          <a href="#">test-title</a>
+        </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
 
     const closedList = shallow(
       <InteriorLeftNavList>
-        <InteriorLeftNavItem href="#" title="test-title" />
+        <InteriorLeftNavItem href="#">
+          <a href="#">test-title</a>
+        </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
 
     const expectedChildrenList = shallow(
       <InteriorLeftNavList>
-        <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
-        <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
+        <InteriorLeftNavItem href="#" className="test-child">
+          <a href="#">test-title</a>
+        </InteriorLeftNavItem>
+        <InteriorLeftNavItem href="#" className="test-child">
+          <a href="#">test-title</a>
+        </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
 
@@ -59,7 +67,7 @@ describe('InteriorLeftNavList', () => {
       expect(icon.props().className).toEqual('left-nav-list__item-icon bx--inline-left-nav__icon');
     });
     it('should render children as expected', () => {
-      expect(expectedChildrenList.find('a').length).toEqual(1);
+      expect(expectedChildrenList.find('.left-nav-list__item-link').length).toEqual(1);
       expect(expectedChildrenList.find('.left-nav-list--nested').length).toEqual(1);
       expect(expectedChildrenList.find('.test-child').length).toEqual(2);
     });
@@ -70,7 +78,9 @@ describe('InteriorLeftNavList', () => {
       <InteriorLeftNavList
         title="test-title"
       >
-        <InteriorLeftNavItem href="#" title="test-title" />
+        <InteriorLeftNavItem href="#">
+          <a href="#">test-title</a>
+        </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
 

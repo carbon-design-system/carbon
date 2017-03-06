@@ -7,16 +7,18 @@ describe('InteriorLeftNavItem', () => {
     const wrapper = shallow(
       <InteriorLeftNavItem
         className="extra-class"
-        title="test-title"
         href="test-href"
-      />
+      >
+        <a href="test-href" >test-title</a>
+      </InteriorLeftNavItem>
     );
     const matchingHrefs = shallow(
       <InteriorLeftNavItem
-        title="test-title"
         href="www.google.com"
         activeHref="www.google.com"
-      />
+      >
+        <a href="www.google.com" >test-title</a>
+      </InteriorLeftNavItem>
     );
 
     it('renders a interior left nav item', () => {
