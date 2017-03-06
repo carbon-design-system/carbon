@@ -731,6 +731,8 @@ var BluemixComponents =
 	  value: true
 	});
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	exports.default = function (ToMix) {
@@ -772,24 +774,30 @@ var BluemixComponents =
 	        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	          this.create(target, options);
 	        } else {
-	          var handles = effectiveOptions.initEventNames.map(function (name) {
-	            return (0, _on2.default)(target, name, function (event) {
-	              var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
-	              if (element && !_this2.components.has(element)) {
-	                var component = _this2.create(element, options);
-	                if (typeof component.createdByEvent === 'function') {
-	                  component.createdByEvent(event);
+	          var _ret = function () {
+	            var handles = effectiveOptions.initEventNames.map(function (name) {
+	              return (0, _on2.default)(target, name, function (event) {
+	                var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
+	                if (element && !_this2.components.has(element)) {
+	                  var component = _this2.create(element, options);
+	                  if (typeof component.createdByEvent === 'function') {
+	                    component.createdByEvent(event);
+	                  }
+	                }
+	              });
+	            });
+	            return {
+	              v: {
+	                release: function release() {
+	                  for (var handle = handles.pop(); handle; handle = handles.pop()) {
+	                    handle.release();
+	                  }
 	                }
 	              }
-	            });
-	          });
-	          return {
-	            release: function release() {
-	              for (var handle = handles.pop(); handle; handle = handles.pop()) {
-	                handle.release();
-	              }
-	            }
-	          };
+	            };
+	          }();
+	
+	          if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	        }
 	      }
 	    }]);
@@ -2005,6 +2013,8 @@ var BluemixComponents =
 	  value: true
 	});
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	exports.default = function (ToMix) {
@@ -2048,38 +2058,44 @@ var BluemixComponents =
 	        if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
 	          this.create(target, options);
 	        } else {
-	          var handles = effectiveOptions.initEventNames.map(function (name) {
-	            return (0, _on2.default)(target, name, function (event) {
-	              var launcher = (0, _eventMatches2.default)(event, '[' + effectiveOptions.attribInitTarget + ']');
+	          var _ret = function () {
+	            var handles = effectiveOptions.initEventNames.map(function (name) {
+	              return (0, _on2.default)(target, name, function (event) {
+	                var launcher = (0, _eventMatches2.default)(event, '[' + effectiveOptions.attribInitTarget + ']');
 	
-	              if (launcher) {
-	                event.delegateTarget = launcher; // eslint-disable-line
+	                if (launcher) {
+	                  event.delegateTarget = launcher; // eslint-disable-line
 	
-	                var elements = [].concat(_toConsumableArray(launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))));
-	                if (elements.length > 1) {
-	                  throw new Error('Target widget must be unique.');
-	                }
-	
-	                if (elements.length === 1) {
-	                  if (launcher.tagName === 'A') {
-	                    event.preventDefault();
+	                  var elements = [].concat(_toConsumableArray(launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))));
+	                  if (elements.length > 1) {
+	                    throw new Error('Target widget must be unique.');
 	                  }
 	
-	                  var component = _this2.create(elements[0], options);
-	                  if (typeof component.createdByLauncher === 'function') {
-	                    component.createdByLauncher(event);
+	                  if (elements.length === 1) {
+	                    if (launcher.tagName === 'A') {
+	                      event.preventDefault();
+	                    }
+	
+	                    var component = _this2.create(elements[0], options);
+	                    if (typeof component.createdByLauncher === 'function') {
+	                      component.createdByLauncher(event);
+	                    }
 	                  }
 	                }
-	              }
+	              });
 	            });
-	          });
-	          return {
-	            release: function release() {
-	              for (var handle = handles.pop(); handle; handle = handles.pop()) {
-	                handle.release();
+	            return {
+	              v: {
+	                release: function release() {
+	                  for (var handle = handles.pop(); handle; handle = handles.pop()) {
+	                    handle.release();
+	                  }
+	                }
 	              }
-	            }
-	          };
+	            };
+	          }();
+	
+	          if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	        }
 	      }
 	    }]);
@@ -2785,19 +2801,21 @@ var BluemixComponents =
 	      var _this2 = this;
 	
 	      if ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem) || event.which === 27 || event.type === 'click') {
-	        var isOpen = this.element.classList.contains('bx--dropdown--open');
-	        var isOfSelf = this.element.contains(event.target);
-	        var actions = {
-	          add: isOfSelf && event.which === 40 && !isOpen,
-	          remove: (!isOfSelf || event.which === 27) && isOpen,
-	          toggle: isOfSelf && event.which !== 27 && event.which !== 40
-	        };
-	        Object.keys(actions).forEach(function (action) {
-	          if (actions[action]) {
-	            _this2.element.classList[action]('bx--dropdown--open');
-	            _this2.element.focus();
-	          }
-	        });
+	        (function () {
+	          var isOpen = _this2.element.classList.contains('bx--dropdown--open');
+	          var isOfSelf = _this2.element.contains(event.target);
+	          var actions = {
+	            add: isOfSelf && event.which === 40 && !isOpen,
+	            remove: (!isOfSelf || event.which === 27) && isOpen,
+	            toggle: isOfSelf && event.which !== 27 && event.which !== 40
+	          };
+	          Object.keys(actions).forEach(function (action) {
+	            if (actions[action]) {
+	              _this2.element.classList[action]('bx--dropdown--open');
+	              _this2.element.focus();
+	            }
+	          });
+	        })();
 	      }
 	    }
 	
@@ -4383,6 +4401,8 @@ var BluemixComponents =
 	  value: true
 	});
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -4834,62 +4854,68 @@ var BluemixComponents =
 	      // Sorry
 	      var leftNavSectionItem = (0, _eventMatches2.default)(evt, this.options.selectorLeftNavSection);
 	      if (leftNavSectionItem) {
-	        // currently selected
-	        var selectedLeftNavSectionItem = this.element.querySelector(this.options.selectorLeftNavCurrentSection);
-	        var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(this.options.selectorLeftNavCurrentSectionTitle);
-	        var selectedLeftNavSectionItemIcon = this.element.querySelector(this.options.selectorLeftNavCurrentSectionIcon);
-	        var selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
-	        var selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
+	        var _ret = function () {
+	          // currently selected
+	          var selectedLeftNavSectionItem = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSection);
+	          var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(_this10.options.selectorLeftNavCurrentSectionTitle);
+	          var selectedLeftNavSectionItemIcon = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSectionIcon);
+	          var selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
+	          var selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
 	
-	        // clicked on item
-	        var leftNavSectionItemLink = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionLink);
-	        var leftNavSectionItemIcon = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionIcon);
-	        var leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
-	        var leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
+	          // clicked on item
+	          var leftNavSectionItemLink = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionLink);
+	          var leftNavSectionItemIcon = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionIcon);
+	          var leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
+	          var leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
 	
-	        if (this.leftNavSectionActive) {
-	          return;
-	        }
-	        this.leftNavSectionActive = true;
+	          if (_this10.leftNavSectionActive) {
+	            return {
+	              v: void 0
+	            };
+	          }
+	          _this10.leftNavSectionActive = true;
 	
-	        var newLeftNavSectionItem = document.createElement('li');
-	        newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
-	        newLeftNavSectionItem.classList.add(this.options.classNavSection);
-	        newLeftNavSectionItem.classList.add(this.options.classNavSection + '--' + selectedLeftNavSectionValue);
+	          var newLeftNavSectionItem = document.createElement('li');
+	          newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
+	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection);
+	          newLeftNavSectionItem.classList.add(_this10.options.classNavSection + '--' + selectedLeftNavSectionValue);
 	
-	        var newLeftNavSectionItemAnchor = document.createElement('a');
-	        newLeftNavSectionItemAnchor.setAttribute('href', 'javascript:void(0)'); // eslint-disable-line no-script-url
-	        newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
-	        newLeftNavSectionItemAnchor.classList.add(this.options.classNavSectionAnchor);
+	          var newLeftNavSectionItemAnchor = document.createElement('a');
+	          newLeftNavSectionItemAnchor.setAttribute('href', 'javascript:void(0)'); // eslint-disable-line no-script-url
+	          newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
+	          newLeftNavSectionItemAnchor.classList.add(_this10.options.classNavSectionAnchor);
 	
-	        var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
-	        // IE11 doesn't support classList on SVG, must revert to className
-	        newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
-	        newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
-	        newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
+	          var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
+	          // IE11 doesn't support classList on SVG, must revert to className
+	          newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
+	          newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
+	          newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
 	
-	        var newLeftNavSectionItemLink = document.createElement('span');
-	        newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
-	        newLeftNavSectionItemLink.classList.add(this.options.classNavSectionLink);
-	        newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
+	          var newLeftNavSectionItemLink = document.createElement('span');
+	          newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
+	          newLeftNavSectionItemLink.classList.add(_this10.options.classNavSectionLink);
+	          newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
 	
-	        this.animateNavSection(leftNavSectionItem);
-	        this.animateNavList(leftNavSectionValue);
+	          _this10.animateNavSection(leftNavSectionItem);
+	          _this10.animateNavList(leftNavSectionValue);
 	
-	        newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
-	        newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
-	        newLeftNavSectionItem.appendChild(newLeftNavSectionItemAnchor);
-	        leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
+	          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
+	          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
+	          newLeftNavSectionItem.appendChild(newLeftNavSectionItemAnchor);
+	          leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
 	
-	        setTimeout(function () {
-	          selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
-	          selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionValue);
-	          selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionValue);
-	          selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
+	          setTimeout(function () {
+	            selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
+	            selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionValue);
+	            selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionValue);
+	            selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
 	
-	          leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
-	          _this10.leftNavSectionActive = false;
-	        }, 450); // Wait for nav items to animate
+	            leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
+	            _this10.leftNavSectionActive = false;
+	          }, 450); // Wait for nav items to animate
+	        }();
+	
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	      }
 	    }
 	  }, {
@@ -5051,53 +5077,82 @@ var BluemixComponents =
 	
 	    var _this = _possibleConstructorReturn(this, (InlineLeftNav.__proto__ || Object.getPrototypeOf(InlineLeftNav)).call(this, element, options));
 	
+	    _this.hookListItemsEvents = function () {
+	      _this.element.addEventListener('click', function (evt) {
+	        var leftNavItem = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItem);
+	        var collapseEl = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavCollapse);
+	        var collapsedBar = (0, _eventMatches2.default)(evt, '.' + _this.options.classLeftNavCollapsed);
+	
+	        if (leftNavItem) {
+	          var childItem = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavNestedListItem);
+	          var hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
+	          if (childItem) {
+	            _this.addActiveListItem(childItem);
+	          } else if (hasChildren) {
+	            _this.handleNestedListClick(leftNavItem, evt);
+	          } else {
+	            _this.addActiveListItem(leftNavItem);
+	          }
+	        }
+	
+	        if (collapseEl || collapsedBar) {
+	          evt.preventDefault();
+	          _this.toggleLeftNav();
+	        }
+	      });
+	
+	      _this.element.addEventListener('keydown', function (evt) {
+	        var leftNavItemWithChildren = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItemHasChildren);
+	        var leftNavItem = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItem);
+	
+	        if (leftNavItemWithChildren && evt.which === 13) {
+	          _this.handleNestedListClick(leftNavItemWithChildren, evt);
+	        } else if (leftNavItem && evt.which === 13) {
+	          _this.addActiveListItem(leftNavItem);
+	        }
+	      });
+	    };
+	
+	    _this.toggleLeftNav = function () {
+	      var collapsed = _this.element.dataset.collapsed === 'true';
+	
+	      if (!collapsed) {
+	        _this.element.dataset.collapsed = true;
+	        _this.element.classList.add(_this.options.classLeftNavCollapsing);
+	
+	        window.setTimeout(function () {
+	          _this.element.classList.add(_this.options.classLeftNavCollapsed);
+	        }, 250);
+	      } else {
+	        _this.element.dataset.collapsed = false;
+	        _this.element.classList.remove(_this.options.classLeftNavCollapsed);
+	        _this.element.classList.remove(_this.options.classLeftNavCollapsing);
+	        _this.element.classList.add(_this.options.classLeftNavExpanding);
+	
+	        window.setTimeout(function () {
+	          _this.element.classList.remove(_this.options.classLeftNavExpanding);
+	        }, 250);
+	      }
+	    };
+	
 	    _this.constructor.components.set(_this.element, _this);
 	    _this.hookListItemsEvents();
 	    return _this;
 	  }
 	
 	  _createClass(InlineLeftNav, [{
-	    key: 'hookListItemsEvents',
-	    value: function hookListItemsEvents() {
-	      var _this2 = this;
-	
-	      var leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
-	      leftNavList.addEventListener('click', function (evt) {
-	        var leftNavItem = (0, _eventMatches2.default)(evt, _this2.options.selectorLeftNavListItem);
-	        if (leftNavItem) {
-	          var childItem = (0, _eventMatches2.default)(evt, _this2.options.selectorLeftNavNestedListItem);
-	          var hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
-	          if (childItem) {
-	            _this2.addActiveListItem(childItem);
-	          } else if (hasChildren) {
-	            _this2.handleNestedListClick(leftNavItem, evt);
-	          } else {
-	            _this2.addActiveListItem(leftNavItem);
-	          }
-	        }
-	      });
-	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavListItem))).forEach(function (item) {
-	        item.addEventListener('keydown', function (evt) {
-	          var leftNavItemWithChildren = (0, _eventMatches2.default)(evt, _this2.options.selectorLeftNavListItemHasChildren);
-	          if (leftNavItemWithChildren && evt.which === 13) {
-	            _this2.handleNestedListClick(leftNavItemWithChildren, evt);
-	          }
-	        });
-	      });
-	    }
-	  }, {
 	    key: 'addActiveListItem',
 	    value: function addActiveListItem(item) {
-	      var _this3 = this;
+	      var _this2 = this;
 	
 	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavListItem))).forEach(function (currentItem) {
 	        if (!(item === currentItem)) {
-	          currentItem.classList.remove(_this3.options.classActiveLeftNavListItem);
+	          currentItem.classList.remove(_this2.options.classActiveLeftNavListItem);
 	        }
 	      });
 	      [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem))).forEach(function (currentItem) {
 	        if (!(item === currentItem)) {
-	          currentItem.classList.remove(_this3.options.classActiveLeftNavListItem);
+	          currentItem.classList.remove(_this2.options.classActiveLeftNavListItem);
 	        }
 	      });
 	      item.classList.add(this.options.classActiveLeftNavListItem);
@@ -5113,10 +5168,16 @@ var BluemixComponents =
 	  }, {
 	    key: 'handleNestedListClick',
 	    value: function handleNestedListClick(listItem, evt) {
-	      var _this4 = this;
+	      var _this3 = this;
 	
+	      var allNestedItems = [].concat(_toConsumableArray(document.querySelectorAll(this.options.selectorLeftNavListItemHasChildren)));
 	      var isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
-	      if (!('leftNavItemLink' in evt.target.dataset)) {
+	      allNestedItems.forEach(function (currentItem) {
+	        if (currentItem !== listItem) {
+	          (0, _toggleClass2.default)(currentItem, _this3.options.classExpandedLeftNavListItem, false);
+	        }
+	      });
+	      if (!('inlineLeftNavItemLink' in evt.target.dataset)) {
 	        (0, _toggleClass2.default)(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
 	      }
 	      var list = listItem.querySelector(this.options.selectorLeftNavNestedList);
@@ -5124,10 +5185,10 @@ var BluemixComponents =
 	      listItems.forEach(function (item) {
 	        if (isOpen) {
 	          // eslint-disable-next-line no-param-reassign
-	          item.querySelector(_this4.options.selectorLeftNavListItemLink).tabIndex = -1;
+	          item.querySelector(_this3.options.selectorLeftNavListItemLink).tabIndex = -1;
 	        } else {
 	          // eslint-disable-next-line no-param-reassign
-	          item.querySelector(_this4.options.selectorLeftNavListItemLink).tabIndex = 0;
+	          item.querySelector(_this3.options.selectorLeftNavListItemLink).tabIndex = 0;
 	        }
 	      });
 	    }
@@ -5164,9 +5225,13 @@ var BluemixComponents =
 	  selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
 	  selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
 	  selectorLeftNavListItemHasChildren: '[data-inline-left-nav-with-children]',
+	  selectorLeftNavCollapse: '[data-inline-left-nav-collapse]',
 	  // CSS Class Selectors
 	  classActiveLeftNavListItem: 'left-nav-list__item--active',
-	  classExpandedLeftNavListItem: 'left-nav-list__item--expanded'
+	  classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
+	  classLeftNavCollapsing: 'bx--inline-left-nav--collapsing',
+	  classLeftNavCollapsed: 'bx--inline-left-nav--collapsed',
+	  classLeftNavExpanding: 'bx--inline-left-nav--expanding'
 	};
 	exports.default = InlineLeftNav;
 

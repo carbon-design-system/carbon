@@ -135,19 +135,21 @@
         var _this2 = this;
 
         if ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem) || event.which === 27 || event.type === 'click') {
-          var isOpen = this.element.classList.contains('bx--dropdown--open');
-          var isOfSelf = this.element.contains(event.target);
-          var actions = {
-            add: isOfSelf && event.which === 40 && !isOpen,
-            remove: (!isOfSelf || event.which === 27) && isOpen,
-            toggle: isOfSelf && event.which !== 27 && event.which !== 40
-          };
-          (0, _keys2.default)(actions).forEach(function (action) {
-            if (actions[action]) {
-              _this2.element.classList[action]('bx--dropdown--open');
-              _this2.element.focus();
-            }
-          });
+          (function () {
+            var isOpen = _this2.element.classList.contains('bx--dropdown--open');
+            var isOfSelf = _this2.element.contains(event.target);
+            var actions = {
+              add: isOfSelf && event.which === 40 && !isOpen,
+              remove: (!isOfSelf || event.which === 27) && isOpen,
+              toggle: isOfSelf && event.which !== 27 && event.which !== 40
+            };
+            (0, _keys2.default)(actions).forEach(function (action) {
+              if (actions[action]) {
+                _this2.element.classList[action]('bx--dropdown--open');
+                _this2.element.focus();
+              }
+            });
+          })();
         }
       }
     }, {

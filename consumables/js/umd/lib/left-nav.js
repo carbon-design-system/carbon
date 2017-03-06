@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/get', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/toggle-class', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
+    define(['exports', 'babel-runtime/core-js/weak-map', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/get', 'babel-runtime/helpers/inherits', '../misc/mixin', '../mixins/create-component', '../mixins/init-component-by-search', '../polyfills/toggle-class', '../polyfills/event-matches', '../misc/on', '../polyfills/array-from', '../polyfills/element-matches', '../polyfills/object-assign', '../polyfills/custom-event'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/get'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/toggle-class'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
+    factory(exports, require('babel-runtime/core-js/weak-map'), require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/get'), require('babel-runtime/helpers/inherits'), require('../misc/mixin'), require('../mixins/create-component'), require('../mixins/init-component-by-search'), require('../polyfills/toggle-class'), require('../polyfills/event-matches'), require('../misc/on'), require('../polyfills/array-from'), require('../polyfills/element-matches'), require('../polyfills/object-assign'), require('../polyfills/custom-event'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.weakMap, global.toConsumableArray, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.get, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.toggleClass, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
+    factory(mod.exports, global.weakMap, global._typeof, global.toConsumableArray, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.get, global.inherits, global.mixin, global.createComponent, global.initComponentBySearch, global.toggleClass, global.eventMatches, global.on, global.arrayFrom, global.elementMatches, global.objectAssign, global.customEvent);
     global.leftNav = mod.exports;
   }
-})(this, function (exports, _weakMap, _toConsumableArray2, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _get2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _toggleClass, _eventMatches, _on) {
+})(this, function (exports, _weakMap, _typeof2, _toConsumableArray2, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _get2, _inherits2, _mixin2, _createComponent, _initComponentBySearch, _toggleClass, _eventMatches, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -18,6 +18,8 @@
   });
 
   var _weakMap2 = _interopRequireDefault(_weakMap);
+
+  var _typeof3 = _interopRequireDefault(_typeof2);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
@@ -405,62 +407,68 @@
         // Sorry
         var leftNavSectionItem = (0, _eventMatches2.default)(evt, this.options.selectorLeftNavSection);
         if (leftNavSectionItem) {
-          // currently selected
-          var selectedLeftNavSectionItem = this.element.querySelector(this.options.selectorLeftNavCurrentSection);
-          var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(this.options.selectorLeftNavCurrentSectionTitle);
-          var selectedLeftNavSectionItemIcon = this.element.querySelector(this.options.selectorLeftNavCurrentSectionIcon);
-          var selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
-          var selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
+          var _ret = function () {
+            // currently selected
+            var selectedLeftNavSectionItem = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSection);
+            var selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(_this10.options.selectorLeftNavCurrentSectionTitle);
+            var selectedLeftNavSectionItemIcon = _this10.element.querySelector(_this10.options.selectorLeftNavCurrentSectionIcon);
+            var selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
+            var selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
 
-          // clicked on item
-          var leftNavSectionItemLink = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionLink);
-          var leftNavSectionItemIcon = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionIcon);
-          var leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
-          var leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
+            // clicked on item
+            var leftNavSectionItemLink = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionLink);
+            var leftNavSectionItemIcon = leftNavSectionItem.querySelector(_this10.options.selectorLeftNavSectionIcon);
+            var leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
+            var leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
 
-          if (this.leftNavSectionActive) {
-            return;
-          }
-          this.leftNavSectionActive = true;
+            if (_this10.leftNavSectionActive) {
+              return {
+                v: void 0
+              };
+            }
+            _this10.leftNavSectionActive = true;
 
-          var newLeftNavSectionItem = document.createElement('li');
-          newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
-          newLeftNavSectionItem.classList.add(this.options.classNavSection);
-          newLeftNavSectionItem.classList.add(this.options.classNavSection + '--' + selectedLeftNavSectionValue);
+            var newLeftNavSectionItem = document.createElement('li');
+            newLeftNavSectionItem.setAttribute('data-left-nav-section', selectedLeftNavSectionValue);
+            newLeftNavSectionItem.classList.add(_this10.options.classNavSection);
+            newLeftNavSectionItem.classList.add(_this10.options.classNavSection + '--' + selectedLeftNavSectionValue);
 
-          var newLeftNavSectionItemAnchor = document.createElement('a');
-          newLeftNavSectionItemAnchor.setAttribute('href', 'javascript:void(0)'); // eslint-disable-line no-script-url
-          newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
-          newLeftNavSectionItemAnchor.classList.add(this.options.classNavSectionAnchor);
+            var newLeftNavSectionItemAnchor = document.createElement('a');
+            newLeftNavSectionItemAnchor.setAttribute('href', 'javascript:void(0)'); // eslint-disable-line no-script-url
+            newLeftNavSectionItemAnchor.setAttribute('tabindex', 0);
+            newLeftNavSectionItemAnchor.classList.add(_this10.options.classNavSectionAnchor);
 
-          var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
-          // IE11 doesn't support classList on SVG, must revert to className
-          newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
-          newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
-          newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
+            var newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
+            // IE11 doesn't support classList on SVG, must revert to className
+            newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
+            newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
+            newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
 
-          var newLeftNavSectionItemLink = document.createElement('span');
-          newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
-          newLeftNavSectionItemLink.classList.add(this.options.classNavSectionLink);
-          newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
+            var newLeftNavSectionItemLink = document.createElement('span');
+            newLeftNavSectionItemLink.setAttribute('data-left-nav-section-link', '');
+            newLeftNavSectionItemLink.classList.add(_this10.options.classNavSectionLink);
+            newLeftNavSectionItemLink.textContent = selectedLeftNavSectionItemTitle.textContent;
 
-          this.animateNavSection(leftNavSectionItem);
-          this.animateNavList(leftNavSectionValue);
+            _this10.animateNavSection(leftNavSectionItem);
+            _this10.animateNavList(leftNavSectionValue);
 
-          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
-          newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
-          newLeftNavSectionItem.appendChild(newLeftNavSectionItemAnchor);
-          leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
+            newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemIcon);
+            newLeftNavSectionItemAnchor.appendChild(newLeftNavSectionItemLink);
+            newLeftNavSectionItem.appendChild(newLeftNavSectionItemAnchor);
+            leftNavSections.insertBefore(newLeftNavSectionItem, leftNavSections.firstChild);
 
-          setTimeout(function () {
-            selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
-            selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionValue);
-            selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionValue);
-            selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
+            setTimeout(function () {
+              selectedLeftNavSectionItemTitle.textContent = leftNavSectionItemLink.textContent;
+              selectedLeftNavSectionItem.setAttribute('data-left-nav-current-section', leftNavSectionValue);
+              selectedLeftNavSectionItemIcon.setAttribute('data-left-nav-current-section-icon', leftNavSectionValue);
+              selectedLeftNavSectionItemUse.setAttribute('xlink:href', leftNavSectionItemIconUse.getAttribute('xlink:href'));
 
-            leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
-            _this10.leftNavSectionActive = false;
-          }, 450); // Wait for nav items to animate
+              leftNavSectionItem.parentNode.removeChild(leftNavSectionItem); // Cant use .remove() because of IE11
+              _this10.leftNavSectionActive = false;
+            }, 450); // Wait for nav items to animate
+          }();
+
+          if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
         }
       }
     }, {

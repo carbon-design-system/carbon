@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/inherits', '../polyfills/event-matches', '../misc/on'], factory);
+    define(['exports', 'babel-runtime/helpers/typeof', 'babel-runtime/core-js/object/create', 'babel-runtime/core-js/object/assign', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/inherits', '../polyfills/event-matches', '../misc/on'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/inherits'), require('../polyfills/event-matches'), require('../misc/on'));
+    factory(exports, require('babel-runtime/helpers/typeof'), require('babel-runtime/core-js/object/create'), require('babel-runtime/core-js/object/assign'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/inherits'), require('../polyfills/event-matches'), require('../misc/on'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.create, global.assign, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.inherits, global.eventMatches, global.on);
+    factory(mod.exports, global._typeof, global.create, global.assign, global.getPrototypeOf, global.classCallCheck, global.createClass, global.possibleConstructorReturn, global.inherits, global.eventMatches, global.on);
     global.initComponentByEvent = mod.exports;
   }
-})(this, function (exports, _create, _assign, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _inherits2, _eventMatches, _on) {
+})(this, function (exports, _typeof2, _create, _assign, _getPrototypeOf, _classCallCheck2, _createClass2, _possibleConstructorReturn2, _inherits2, _eventMatches, _on) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -55,24 +55,30 @@
           if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
             this.create(target, options);
           } else {
-            var handles = effectiveOptions.initEventNames.map(function (name) {
-              return (0, _on2.default)(target, name, function (event) {
-                var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
-                if (element && !_this2.components.has(element)) {
-                  var component = _this2.create(element, options);
-                  if (typeof component.createdByEvent === 'function') {
-                    component.createdByEvent(event);
+            var _ret = function () {
+              var handles = effectiveOptions.initEventNames.map(function (name) {
+                return (0, _on2.default)(target, name, function (event) {
+                  var element = (0, _eventMatches2.default)(event, effectiveOptions.selectorInit);
+                  if (element && !_this2.components.has(element)) {
+                    var component = _this2.create(element, options);
+                    if (typeof component.createdByEvent === 'function') {
+                      component.createdByEvent(event);
+                    }
+                  }
+                });
+              });
+              return {
+                v: {
+                  release: function release() {
+                    for (var handle = handles.pop(); handle; handle = handles.pop()) {
+                      handle.release();
+                    }
                   }
                 }
-              });
-            });
-            return {
-              release: function release() {
-                for (var handle = handles.pop(); handle; handle = handles.pop()) {
-                  handle.release();
-                }
-              }
-            };
+              };
+            }();
+
+            if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
           }
         }
       }]);
@@ -81,6 +87,8 @@
 
     return InitComponentByEvent;
   };
+
+  var _typeof3 = _interopRequireDefault(_typeof2);
 
   var _create2 = _interopRequireDefault(_create);
 

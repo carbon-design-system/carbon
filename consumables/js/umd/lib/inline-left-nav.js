@@ -62,53 +62,82 @@
 
       var _this = (0, _possibleConstructorReturn3.default)(this, (InlineLeftNav.__proto__ || (0, _getPrototypeOf2.default)(InlineLeftNav)).call(this, element, options));
 
+      _this.hookListItemsEvents = function () {
+        _this.element.addEventListener('click', function (evt) {
+          var leftNavItem = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItem);
+          var collapseEl = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavCollapse);
+          var collapsedBar = (0, _eventMatches2.default)(evt, '.' + _this.options.classLeftNavCollapsed);
+
+          if (leftNavItem) {
+            var childItem = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavNestedListItem);
+            var hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
+            if (childItem) {
+              _this.addActiveListItem(childItem);
+            } else if (hasChildren) {
+              _this.handleNestedListClick(leftNavItem, evt);
+            } else {
+              _this.addActiveListItem(leftNavItem);
+            }
+          }
+
+          if (collapseEl || collapsedBar) {
+            evt.preventDefault();
+            _this.toggleLeftNav();
+          }
+        });
+
+        _this.element.addEventListener('keydown', function (evt) {
+          var leftNavItemWithChildren = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItemHasChildren);
+          var leftNavItem = (0, _eventMatches2.default)(evt, _this.options.selectorLeftNavListItem);
+
+          if (leftNavItemWithChildren && evt.which === 13) {
+            _this.handleNestedListClick(leftNavItemWithChildren, evt);
+          } else if (leftNavItem && evt.which === 13) {
+            _this.addActiveListItem(leftNavItem);
+          }
+        });
+      };
+
+      _this.toggleLeftNav = function () {
+        var collapsed = _this.element.dataset.collapsed === 'true';
+
+        if (!collapsed) {
+          _this.element.dataset.collapsed = true;
+          _this.element.classList.add(_this.options.classLeftNavCollapsing);
+
+          window.setTimeout(function () {
+            _this.element.classList.add(_this.options.classLeftNavCollapsed);
+          }, 250);
+        } else {
+          _this.element.dataset.collapsed = false;
+          _this.element.classList.remove(_this.options.classLeftNavCollapsed);
+          _this.element.classList.remove(_this.options.classLeftNavCollapsing);
+          _this.element.classList.add(_this.options.classLeftNavExpanding);
+
+          window.setTimeout(function () {
+            _this.element.classList.remove(_this.options.classLeftNavExpanding);
+          }, 250);
+        }
+      };
+
       _this.constructor.components.set(_this.element, _this);
       _this.hookListItemsEvents();
       return _this;
     }
 
     (0, _createClass3.default)(InlineLeftNav, [{
-      key: 'hookListItemsEvents',
-      value: function hookListItemsEvents() {
-        var _this2 = this;
-
-        var leftNavList = this.element.querySelector(this.options.selectorLeftNavList);
-        leftNavList.addEventListener('click', function (evt) {
-          var leftNavItem = (0, _eventMatches2.default)(evt, _this2.options.selectorLeftNavListItem);
-          if (leftNavItem) {
-            var childItem = (0, _eventMatches2.default)(evt, _this2.options.selectorLeftNavNestedListItem);
-            var hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
-            if (childItem) {
-              _this2.addActiveListItem(childItem);
-            } else if (hasChildren) {
-              _this2.handleNestedListClick(leftNavItem, evt);
-            } else {
-              _this2.addActiveListItem(leftNavItem);
-            }
-          }
-        });
-        [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorLeftNavListItem))).forEach(function (item) {
-          item.addEventListener('keydown', function (evt) {
-            var leftNavItemWithChildren = (0, _eventMatches2.default)(evt, _this2.options.selectorLeftNavListItemHasChildren);
-            if (leftNavItemWithChildren && evt.which === 13) {
-              _this2.handleNestedListClick(leftNavItemWithChildren, evt);
-            }
-          });
-        });
-      }
-    }, {
       key: 'addActiveListItem',
       value: function addActiveListItem(item) {
-        var _this3 = this;
+        var _this2 = this;
 
         [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorLeftNavListItem))).forEach(function (currentItem) {
           if (!(item === currentItem)) {
-            currentItem.classList.remove(_this3.options.classActiveLeftNavListItem);
+            currentItem.classList.remove(_this2.options.classActiveLeftNavListItem);
           }
         });
         [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem))).forEach(function (currentItem) {
           if (!(item === currentItem)) {
-            currentItem.classList.remove(_this3.options.classActiveLeftNavListItem);
+            currentItem.classList.remove(_this2.options.classActiveLeftNavListItem);
           }
         });
         item.classList.add(this.options.classActiveLeftNavListItem);
@@ -116,10 +145,16 @@
     }, {
       key: 'handleNestedListClick',
       value: function handleNestedListClick(listItem, evt) {
-        var _this4 = this;
+        var _this3 = this;
 
+        var allNestedItems = [].concat((0, _toConsumableArray3.default)(document.querySelectorAll(this.options.selectorLeftNavListItemHasChildren)));
         var isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
-        if (!('leftNavItemLink' in evt.target.dataset)) {
+        allNestedItems.forEach(function (currentItem) {
+          if (currentItem !== listItem) {
+            (0, _toggleClass2.default)(currentItem, _this3.options.classExpandedLeftNavListItem, false);
+          }
+        });
+        if (!('inlineLeftNavItemLink' in evt.target.dataset)) {
           (0, _toggleClass2.default)(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
         }
         var list = listItem.querySelector(this.options.selectorLeftNavNestedList);
@@ -127,10 +162,10 @@
         listItems.forEach(function (item) {
           if (isOpen) {
             // eslint-disable-next-line no-param-reassign
-            item.querySelector(_this4.options.selectorLeftNavListItemLink).tabIndex = -1;
+            item.querySelector(_this3.options.selectorLeftNavListItemLink).tabIndex = -1;
           } else {
             // eslint-disable-next-line no-param-reassign
-            item.querySelector(_this4.options.selectorLeftNavListItemLink).tabIndex = 0;
+            item.querySelector(_this3.options.selectorLeftNavListItemLink).tabIndex = 0;
           }
         });
       }
@@ -148,9 +183,13 @@
     selectorLeftNavListItemLink: '[data-inline-left-nav-item-link]',
     selectorLeftNavNestedListItem: '[data-inline-left-nav-nested-item]',
     selectorLeftNavListItemHasChildren: '[data-inline-left-nav-with-children]',
+    selectorLeftNavCollapse: '[data-inline-left-nav-collapse]',
     // CSS Class Selectors
     classActiveLeftNavListItem: 'left-nav-list__item--active',
-    classExpandedLeftNavListItem: 'left-nav-list__item--expanded'
+    classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
+    classLeftNavCollapsing: 'bx--inline-left-nav--collapsing',
+    classLeftNavCollapsed: 'bx--inline-left-nav--collapsed',
+    classLeftNavExpanding: 'bx--inline-left-nav--expanding'
   };
   exports.default = InlineLeftNav;
 });
