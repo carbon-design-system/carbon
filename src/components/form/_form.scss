@@ -1,10 +1,11 @@
 @import '../../globals/scss/colors';
-@import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
 
 @include exports('form') {
   .bx--form-item {
+    @include helvetica;
     flex: 1;
     margin-right: 1rem;
     margin-bottom: 1.5rem;
@@ -17,6 +18,7 @@
 
   .bx--label {
     @include reset;
+    @include helvetica;
     @include font-size('14');
     font-weight: 700;
     display: inline-block;
