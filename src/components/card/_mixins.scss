@@ -3,53 +3,24 @@
   @include font-size('12');
   display: none;
   align-items: center;
-  margin-left: 1rem;
+
+  &::before {
+    content: ' ';
+    height: 1rem;
+    width: 1rem;
+    border-radius: 100%;
+    margin-right: .25rem;
+  }
 
   @if ($status == 'running') {
-
     &::before {
-      content: ' ';
-      height: rem(20px);
-      width: rem(20px);
-      border-radius: 100%;
-      margin-right: .75rem;
       background-color: $support-02;
     }
   }
 
   @else if ($status == 'not-running') {
-
     &::before {
-      content: ' ';
-      height: rem(20px);
-      width: rem(20px);
-      border-radius: 100%;
-      margin-right: .75rem;
       background-color: $support-01;
-    }
-  }
-
-  @else if ($status == 'stopped') {
-
-    &::before {
-      content: ' ';
-      height: rem(20px);
-      width: rem(20px);
-      border-radius: 100%;
-      margin-right: .75rem;
-      background-color: $ui-05;
-    }
-  }
-
-  @else if ($status == 'limited') {
-
-    &::before {
-      content: ' ';
-      height: rem(20px);
-      width: rem(20px);
-      border-radius: 100%;
-      margin-right: .75rem;
-      background-color: $support-03;
     }
   }
 }

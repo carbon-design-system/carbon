@@ -14,7 +14,7 @@ class Card extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('keydown', (event) => { this.cardKeyPress(event); });
+    this.element.addEventListener('keydown', (event) => { this._cardKeyPress(event); });
   }
 
   /**
@@ -22,7 +22,7 @@ class Card extends mixin(createComponent, initComponentBySearch) {
    * right arrow key for going forward, left arrow key for going backward.
    * @param {Event} event The event triggering this method.
    */
-  cardKeyPress(event) {
+  _cardKeyPress(event) {
     const direction = {
       Left: -1,
       Right: 1,

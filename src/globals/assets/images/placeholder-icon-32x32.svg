@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Placeholder Icon - 32 x 32</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="32" height="32"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="32" height="32" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Placeholder-Icon---32-x-32" fill="#EFC100">
+            <g id="Icon-Placeholder_32x32px">
+                <use id="Rectangle-4" stroke="#EFC100" mask="url(#mask-2)" stroke-width="2" fill-opacity="0.5" xlink:href="#path-1"></use>
+                <text id="Icon" font-family="HelveticaNeue-CondensedBold, Helvetica Neue" font-size="10" font-style="condensed" font-weight="bold">
+                    <tspan x="7.495" y="13">Icon</tspan>
+                    <tspan x="4.09" y="25">32x32</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

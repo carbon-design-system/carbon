@@ -4,97 +4,102 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../overflow-menu/overflow-menu';
 @import '../button/button';
+@import '../link/link';
 @import 'mixins';
 
 @include exports('card') {
 
-.bx--card {
-  @include reset;
-  @include layer('raised');
-  display: flex;
-  flex-direction: column;
-  width: rem(200px);
-  height: rem(235px);
-  background-color: $ui-01;
-  border: 1px solid $ui-04;
-}
-
-.bx--card {
-
-  &__card-overview {
+  .bx--card {
     @include reset;
+    @include helvetica;
+    @include layer('raised');
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    flex-direction: column;
+    width: rem(200px);
+    height: rem(240px);
+    background-color: $ui-01;
+    border: 1px solid $ui-04;
+  }
+
+  .bx--card__card-overview {
+    @include reset;
+    position: relative;
+    display: flex;
+    justify-content: center;
     text-align: center;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
     height: 12rem;
 
     .bx--overflow-menu {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
       z-index: z('overflowOptions');
       margin: 0;
-      padding-top: 1rem;
     }
   }
 
-  &__card-footer {
-    @include reset;
+  .bx--card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: rem(53px);
+    height: rem(48px);
     background-color: $ui-03;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-}
 
-.bx--card-overview__about {
-  @include reset;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 1rem;
-  margin-right: -2rem;
+  .bx--card-footer__link {
+    @include font-size('14');
+  }
+
+  .bx--card-overview__about {
+    @include reset;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+  }
 
   .bx--about__title {
-    @include reset;
-    font-weight: 300;
-    padding-top: 1rem;
-    margin-bottom: 1rem;
+    font-weight: 400;
+    padding-top: 1.5rem;
+  }
 
-    &--name {
-      @include reset;
-      @include font-size('18');
-      @include font-smoothing;
-      @include text-overflow(rem(180px));
-      font-weight: 400;
-      margin-bottom: .25rem;
-    }
+  .bx--about__title--name {
+    @include font-size('18');
+    @include text-overflow(rem(180px));
+    font-weight: 400;
+    margin: 0;
+  }
 
-    &--link {
-      @include reset;
-      @include font-size('12');
-      @include text-overflow(rem(180px));
-      color: $text-02;
-      text-decoration: none;
-    }
+  .bx--about__title--link {
+    @include font-size('12');
+    @include text-overflow(rem(180px));
+    font-weight: 400;
+  }
 
-    &--additional-info {
-      @include font-size('12');
-      @include text-overflow(rem(180px));
-      padding: 0;
-      color: $text-02;
+  .bx--about__title--additional-info {
+    @include font-size('12');
+    @include text-overflow(rem(180px));
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    color: $text-02;
 
-      &:first-child {
-        padding-top: .25rem;
-      }
+    &:first-child {
+      padding-top: .25rem;
     }
   }
 
@@ -103,57 +108,48 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: rem(55px);
-    height: rem(55px);
+    width: rem(50px);
+    height: rem(50px);
     background-color: $ui-01;
     border: 1px solid $ui-04;
     border-radius: 100%;
 
 
-    &--img {
-      width: rem(35px);
-      height: rem(35px);
+    .bx--about__icon--img {
+      width: rem(32px);
+      height: rem(32px);
       overflow: hidden;
-      fill: $brand-02;
     }
   }
-}
 
-// APP CARD STYLES
-.bx--card-footer__app-status {
-  @include reset;
+  // APP CARD STYLES
+  .bx--card-footer__app-status {
+    @include reset;
 
-  .active {
-    display: flex;
+    .active {
+      display: flex;
+    }
   }
 
-  &--running {
+  .bx--card-footer__app-status--running {
     @include app-status('running');
   }
 
-  &--not-running {
+  .bx--card-footer__app-status--not-running {
     @include app-status('not-running');
   }
 
-  &--stopped {
+  .bx--card-footer__app-status--stopped {
     @include app-status('stopped');
   }
 
-  &--limited {
+  .bx--card-footer__app-status--limited {
     @include app-status('limited');
   }
 
-  .bx--running__text,
-  .bx--not-running__text,
-  .bx--stopped__text {
-    font-weight: 200;
-    color: $text-01;
+  .bx--card-footer__app-actions {
+    display: flex;
   }
-}
-
-.bx--card-footer__app-actions {
-  display: flex;
-  margin-right: .5rem;
 
   .bx--app-actions__button {
     @include font-size('16');
@@ -169,69 +165,14 @@
         fill: $brand-01;
       }
     }
-
-    &--icon {
-      width: 1rem;
-      height: 1rem;
-      margin: 0 .3rem;
-      transition: .2s;
-      fill: $ui-05;
-      cursor: pointer;
-    }
   }
-}
 
-// SERVICE CARD STYLES
-.bx--card--service__card-footer {
-  height: 3.3rem;
-}
-
-.bx--card--service__card-overview {
-  height: 12rem;
-}
-
-.bx--card-footer__credentials-button {
-  @include font-size('12');
-  margin-left: .5rem;
-
-  &:hover {
-    color: $inverse-01;
+  .bx--app-actions__button--icon {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 .3rem;
+    transition: 200ms;
+    fill: $ui-05;
+    cursor: pointer;
   }
-}
-
-.bx--card-footer__docs-link {
-  @include font-size('12');
-  padding: 0 .625rem;
-  color: $brand-01;
-}
-
-// QUOTA CARD STYLES
-.bx--card--quota {
-
-  &__overview {
-    display: flex;
-    flex-direction: column;
-    height: 15.325rem;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem 2rem 2.5rem 2rem;
-    text-align: center;
-  }
-}
-
-.card--quota {
-  background-color: $ui-01;
-
-  .bx--overview__description {
-    @include font-size('14');
-    color: $text-01;
-    font-weight: 200;
-
-    .bx--overview__main-number {
-      @include font-size('46');
-      color: $brand-01;
-    }
-  }
-}
-
 }
