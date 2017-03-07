@@ -1,12 +1,11 @@
 @import '../../globals/scss/colors';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import 'mixins';
 
 @include exports('tags') {
   .bx--tag {
+    @include helvetica;
     @include font-size('12');
     display: inline-flex;
     align-items: center;
