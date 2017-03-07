@@ -1,9 +1,8 @@
 $css--helpers: true;
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/import-once';
 @import '../select/select';
