@@ -1,0 +1,90 @@
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
+
+@include exports('accordion') {
+
+.bx--accordion {
+  @include reset;
+  box-sizing: border-box;
+  list-style: none;
+
+  &__item {
+    @include reset;
+    box-sizing: border-box;
+    transition: all $transition--base $bx--standard-easing;
+    border-top: 1px solid $color__navy-gray-2;
+    overflow: hidden;
+
+    @include light-ui {
+      border-top: 1px solid $color__gray-1;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $color__navy-gray-2;
+
+      @include light-ui {
+        border-bottom: 1px solid $color__gray-1;
+      }
+    }
+  }
+
+  &__heading {
+    @include reset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: .5rem 0;
+  }
+
+  &__arrow {
+    transition: all $transition--base $bx--standard-easing;
+    height: .625rem;
+    width: .625rem;
+    fill: $color__white;
+
+    @include light-ui {
+      fill: $color__blue-90;
+    }
+  }
+
+  &__title {
+    @include reset;
+    box-sizing: border-box;
+    margin-left: 1rem;
+  }
+
+  &__content {
+    @include reset;
+    @include font-size('14');
+    box-sizing: border-box;
+    transition: all $transition--base $bx--standard-easing;
+    padding: 0 1rem 0 1.75rem;
+    max-height: 0;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.bx--accordion__item--active {
+  .bx--accordion__content {
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
+    padding-bottom: 1.5rem;
+    padding-top: .5rem;
+  }
+
+  .bx--accordion__arrow {
+    transform: rotate(90deg);
+    fill: $color__blue-30;
+
+    @include light-ui {
+      fill: $color__blue-51;
+    }
+  }
+}
+
+}

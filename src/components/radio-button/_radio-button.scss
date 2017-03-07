@@ -4,8 +4,8 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
 
 @include exports('radio-button') {
@@ -21,6 +21,7 @@
 
   .bx--radio-button__label {
     @include font-size('14');
+    @include helvetica;
     display: flex;
     align-items: center;
     cursor: pointer;

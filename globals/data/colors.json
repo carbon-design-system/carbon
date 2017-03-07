@@ -1,0 +1,237 @@
+{
+  "ui-colors": [
+    {
+      "name": "IBM Blue 20",
+      "hex": "#7cc7ff",
+      "scss": "$color__blue-20"
+    },
+    {
+      "name": "IBM Blue 30",
+      "hex": "#5aaafa",
+      "scss": "$color__blue-30"
+    },
+    {
+      "name": "IBM Blue 40",
+      "hex": "#5596e6",
+      "scss": "$color__blue-40"
+    },
+    {
+      "name": "IBM Blue 50",
+      "hex": "#4178be",
+      "scss": "$color__blue-50"
+    },
+    {
+      "name": "Navy-Gray 3",
+      "hex": "#2d3f49",
+      "scss": "$color__navy-gray-3"
+    },
+    {
+      "name": "Navy-Gray 2",
+      "hex": "#20343e",
+      "scss": "$color__navy-gray-2"
+    },
+    {
+      "name": "IBM Blue 90",
+      "hex": "#152935",
+      "scss": "$color__blue-90"
+    },
+    {
+      "name": "Navy-Gray 1",
+      "hex": "#0f212e",
+      "scss": "$color__navy-gray-1"
+    },
+    {
+      "name": "Navy-Gray 7",
+      "hex": "#8c9ba5",
+      "scss": "$color__navy-gray-7"
+    },
+    {
+      "name": "Navy-Gray 6",
+      "hex": "#5a6872",
+      "scss": "$color__navy-gray-6"
+    },
+    {
+      "name": "Navy-Gray 5",
+      "hex": "#42535c",
+      "scss": "$color__navy-gray-5"
+    },
+    {
+      "name": "Navy-Gray 4",
+      "hex": "#394b54",
+      "scss": "$color__navy-gray-4"
+    },
+    {
+      "white": true,
+      "name": "White",
+      "hex": "#fff",
+      "scss": "$color__white"
+    },
+    {
+      "name": "Navy-Gray 8",
+      "hex": "#dfe6eb",
+      "scss": "$color__navy-gray-8"
+    },
+    {
+      "name": "Navy-Gray 9",
+      "hex": "#eff2f5",
+      "scss": "$color__navy-gray-9"
+    }
+  ],
+  "accent-colors": [
+    {
+      "name": "IBM Teal 20",
+      "hex": "#6eedd8",
+      "scss": "$color__teal-20"
+    },
+    {
+      "name": "IBM Teal 30",
+      "hex": "#41d6c3",
+      "scss": "$color__teal-30"
+    },
+    {
+      "name": "IBM Teal 40",
+      "hex": "#00b4a0",
+      "scss": "$color__teal-40"
+    },
+    {
+      "name": "IBM Green 30",
+      "hex": "#8cd211",
+      "scss": "$color__green-30"
+    },
+    {
+      "name": "IBM Yellow 30",
+      "hex": "#efc100",
+      "scss": "$color__yellow-30"
+    },
+    {
+      "name": "IBM Orange 30",
+      "hex": "#ff7832",
+      "scss": "$color__orange-30"
+    },
+    {
+      "name": "IBM Red 40",
+      "hex": "#ff5050",
+      "scss": "$color__red-40"
+    },
+    {
+      "name": "IBM Red 50",
+      "hex": "#e71d32",
+      "scss": "$color__red-50"
+    },
+    {
+      "name": "IBM Purple 40",
+      "hex": "#af6ee8",
+      "scss": "$color__purple-40"
+    }
+  ],
+  "light-ui-colors": [
+    {
+      "white": true,
+      "name": "White",
+      "hex": "#ffffff",
+      "scss": "$color__white"
+    },
+    {
+      "name": "Gray 3",
+      "hex": "#f5f7fa",
+      "scss": "$color__gray-3"
+    },
+    {
+      "name": "Gray 2",
+      "hex": "#f0f3f6",
+      "scss": "$color__gray-2"
+    },
+    {
+      "name": "Gray 1",
+      "hex": "#dfe3e6",
+      "scss": "$color__gray-1"
+    },
+    {
+      "name": "IBM Blue 51",
+      "hex": "#3d70b2",
+      "scss": "$color__blue-51"
+    },
+    {
+      "name": "IBM Blue 40",
+      "hex": "#5596e6",
+      "scss": "$color__blue-40"
+    },
+    {
+      "name": "IBM Blue 30",
+      "hex": "#5aaafa",
+      "scss": "$color__blue-30"
+    },
+    {
+      "name": "IBM Blue 20",
+      "hex": "#7cc7ff",
+      "scss": "$color__blue-20"
+    },
+    {
+      "name": "Navy-Gray 1",
+      "hex": "#0f212e",
+      "scss": "$color__navy-gray-1"
+    },
+    {
+      "name": "IBM Blue 90",
+      "hex": "#152935",
+      "scss": "$color__blue-90"
+    },
+    {
+      "name": "Navy-Gray 3",
+      "hex": "#2d3f49",
+      "scss": "$color__navy-gray-3"
+    },
+    {
+      "name": "Navy-Gray 6",
+      "hex": "#5a6872",
+      "scss": "$color__navy-gray-6"
+    },
+    {
+      "name": "Navy-Gray 7",
+      "hex": "#8c9ba5",
+      "scss": "$color__navy-gray-7"
+    }
+  ],
+  "light-ui-accent-colors": [
+    {
+      "name": "IBM Teal 20",
+      "hex": "#6fedd8",
+      "scss": "$color__teal-20"
+    },
+    {
+      "name": "IBM Teal 50",
+      "hex": "#008571",
+      "scss": "$color__teal-50"
+    },
+    {
+      "name": "IBM Green 40",
+      "hex": "#5aa700",
+      "scss": "$color__green-40"
+    },
+    {
+      "name": "IBM Green 50",
+      "hex": "#4b8400",
+      "scss": "$color__green-50"
+    },
+    {
+      "name": "IBM Yellow 30",
+      "hex": "#efc100",
+      "scss": "$color__yellow-30"
+    },
+    {
+      "name": "IBM Red 40",
+      "hex": "#ff5050",
+      "scss": "$color__red-40"
+    },
+    {
+      "name": "IBM Red 50",
+      "hex": "#e71d32",
+      "scss": "$color__red-50"
+    },
+    {
+      "name": "IBM Purple 60",
+      "hex": "#734098",
+      "scss": "$color__purple-60"
+    }
+  ]
+}

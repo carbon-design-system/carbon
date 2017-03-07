@@ -1,0 +1,204 @@
+//-----------------------------
+// Tabs
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/import-once';
+
+@include exports('tabs') {
+
+.bx--tabs {
+  @include reset;
+  @include font-size('14');
+  @include font-smoothing;
+  box-sizing: border-box;
+  color: $color__navy-gray-8;
+  background-color: $color__navy_gray_5;
+  font-weight: 700;
+  cursor: pointer;
+
+  @include light-ui {
+    color: $color__blue-90;
+    background-color: $color__inputs--bg--light-ui;
+  }
+
+  @include breakpoint(bp--sm--major) {
+    background: none;
+
+    @include light-ui {
+      background: none;
+    }
+  }
+
+  &__trigger {
+    @include reset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(13px) rem(16px);
+    cursor: pointer;
+
+    svg {
+      width: rem(12px);
+      height: rem(12px);
+      fill: $color__blue-30;
+
+      @include light-ui {
+        fill: $color__blue-51;
+      }
+    }
+
+    @include breakpoint(bp--sm--major) {
+      display: none;
+    }
+  }
+
+  &__trigger-text {
+    @include reset;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 700;
+    color: $color__white;
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
+  }
+
+  &__nav {
+    @include reset;
+    list-style: none;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint(bp--sm--major) {
+      @include font-size('16');
+      flex-direction: row;
+      margin-right: rem(16px);
+      margin-left: rem(16px);
+      background: none;
+    }
+
+    @include breakpoint(bp--lg--major) {
+      margin-left: 0;
+    }
+  }
+
+  &__nav-item {
+    @include reset;
+    @include font-size('14');
+    box-sizing: border-box;
+    background-color: $color__navy_gray_4;
+    padding: 1rem;
+
+    @include light-ui {
+      background-color: $color__white;
+    }
+
+    &:hover {
+      background-color: $color__blue-30;
+
+      @include light-ui {
+        background-color: $color__blue-51;
+      }
+
+      .bx--tabs__nav-link {
+        color: $color__blue-90;
+
+        @include light-ui {
+          color: $color__white;
+        }
+
+        @include breakpoint(bp--sm--major) {
+          color: $color__blue-30;
+
+          @include light-ui {
+            color: $color__blue-51;
+          }
+        }
+      }
+
+      @include breakpoint(bp--sm--major) {
+        background: none;
+
+        @include light-ui {
+          background-color: transparent;
+        }
+      }
+    }
+
+    @include breakpoint(bp--sm--major) {
+      background: none;
+      padding: 0;
+
+      &+& {
+        margin-left: rem(48px);
+      }
+
+      @include light-ui {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__nav-link {
+    @include reset;
+    box-sizing: border-box;
+    display: inline-block;
+    color: $color__white;
+    text-decoration: none;
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
+
+    @include breakpoint(bp--sm--major) {
+      padding: 1rem 0;
+      margin-bottom: 1px;
+
+      &:hover {
+        color: $color__blue-30;
+
+        @include light-ui {
+          color: $color__blue-51;
+        }
+      }
+    }
+  }
+}
+
+.bx--tabs--selected {
+  color: $color__white;
+  border: none;
+
+  @include breakpoint(bp--sm--major) {
+    border-bottom: 2px solid $color__blue-30;
+
+    @include light-ui {
+      border-bottom: 2px solid $color__blue-51;
+    }
+
+    a {
+      color: $color__blue-30;
+
+      @include light-ui {
+        color: $color__blue-51;
+      }
+    }
+  }
+}
+
+.bx--tabs--hidden {
+  display: none;
+
+  @include breakpoint(bp--sm--major) {
+    display: flex;
+  }
+}
+
+}

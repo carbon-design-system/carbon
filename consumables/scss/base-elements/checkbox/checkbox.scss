@@ -1,0 +1,114 @@
+//-----------------------------
+// Checkbox
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/import-once';
+
+@include exports('checkbox') {
+
+  // Input Element - visually hidden
+  .bx--checkbox {
+    @include hidden;
+  }
+
+  // Label Element - fonts and positioning
+  .bx--checkbox__label {
+    @include reset;
+    @include font-smoothing;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .bx--checkbox__appearance {
+    @include reset;
+    @include font-size('16');
+    box-sizing: border-box;
+    display: inline-block;
+    height: rem(18px);
+    width: rem(18px);
+    margin-right: .75rem;
+    background-color: $color__inputs--bg;
+    border-radius: 2px;
+    border: 2px solid $color__navy-gray-7;
+    overflow: hidden;
+
+    @include light-ui {
+      background-color: $color__inputs--bg--light-ui;
+    }
+  }
+
+  .bx--checkbox {
+    // Box Styles - checked state - background
+    &:checked + &__appearance,
+    &:checked + &__label &__appearance {
+      display: flex;
+      align-items: baseline;
+      background-color: $color__blue-30;
+      border-color: $color__blue-30;
+
+      // Box Styles - checked state - checkmark
+      &:before {
+        content: '';
+        width: rem(12px);
+        height: rem(6px);
+        background: transparent;
+        border: 2px solid $color__blue-90;
+        border-top: none;
+        border-right: none;
+        transform: rotate(-45deg);
+
+        @include light-ui {
+          border: 2px solid $color__white;
+          border-top: none;
+          border-right: none;
+        }
+      }
+    }
+
+    // Disabled
+    &:disabled + &__label,
+    &__label &:disabled,
+    &:disabled + &__appearance,
+    &:disabled + &__appearance + &__label-text {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    // Focus
+    &:focus + &__label &__appearance,
+    &:focus + &__appearance {
+      @include focus-outline;
+    }
+  }
+
+  // SVG Checkmark - default
+  .bx--checkbox__checkmark {
+    display: none;
+    fill: $color__blue-90;
+    width: rem(15px);
+    height: rem(15px);
+
+    @include light-ui {
+      fill: $color__white;
+    }
+  }
+
+  // SVG Checkmark - checked
+  .bx--checkbox--svg {
+    &:checked + .bx--checkbox__appearance:before,
+    &:checked + .bx--checkbox__label .bx--checkbox__appearance:before {
+      content: none;
+    }
+
+    &:checked + .bx--checkbox__appearance .bx--checkbox__checkmark,
+    &:checked + .bx--checkbox__label .bx--checkbox__appearance .bx--checkbox__checkmark {
+      display: block;
+    }
+  }
+}

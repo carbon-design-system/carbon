@@ -1,0 +1,49 @@
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import 'vars';
+@import 'keyframes';
+@import 'mixins';
+@import 'extends';
+@import '../../../../globals/scss/import-once';
+
+@include exports('loading') {
+
+.bx--loading {
+  @include reset;
+  @include animation__loading--spin;
+  box-sizing: border-box;
+  width: $loading__size;
+  height: $loading__size;
+
+  // Animation (Spin by default)
+  &__svg {
+    fill: transparent;
+    stroke: $color__teal-30;
+    stroke-width: 7;
+    stroke-linecap: butt;
+    stroke-dasharray: 240;
+    stroke-dashoffset: $loading__gap;
+
+    @include light-ui {
+      stroke: $color__teal-20;
+    }
+  }
+
+  &.bx--loading--stop {
+    @include animation__loading--stop;
+  }
+
+  /** ☠ DEPRECATED **/
+
+  // Animation for IE (Spin by default)
+  // &.bx--loading--ie {
+  //   @include animation__loading--spin--ie;
+  // }
+  //
+  // &.bx--loading--stop--ie {
+  //   @include animation__loading--stop--ie;
+  // }
+}
+
+}
+

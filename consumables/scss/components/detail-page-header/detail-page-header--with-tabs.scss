@@ -1,0 +1,146 @@
+//-----------------------------
+// Detail Page Header (with tabs)
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/layout';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../tabs/tabs';
+@import 'extends';
+@import 'mixins';
+@import '../../../../globals/scss/import-once';
+
+@include exports('detail-page-header--with-tabs') {
+
+.bx--detail-page-header--with-tabs {
+  @include detail-page-header;
+
+  &--animated {
+    @include detail-page-header-animated;
+
+    &-slide-up {
+      transform: translateY(-101px);
+
+      @media (max-width: 770px) {
+        transform: translateY(-87px);
+
+        .bx--detail-page-header--with-tabs__tabs-container {
+          padding-top: 1rem;
+        }
+      }
+    }
+  }
+
+  &__container {
+    @include reset;
+    @include grid-container;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: $color__navy-gray-3;
+
+    @include breakpoint(bp--xs--major) {
+      flex-direction: column;
+      padding-bottom: .5rem;
+      align-items: flex-start;
+      background-color: $color__navy-gray-3;
+    }
+
+    @include light-ui {
+      background-color: $color__white;
+    }
+  }
+
+  &__breadcrumb {
+    @include reset;
+    box-sizing: border-box;
+    font-weight: 600;
+    color: $color__navy-gray-8;
+    cursor: pointer;
+
+    @include breakpoint(bp--xs--major) {
+      padding-bottom: .5rem;
+    }
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
+  }
+
+  &__breadcrumb-title {
+    @include reset;
+    @include font-size('14');
+    box-sizing: border-box;
+    display: none;
+    text-align: left;
+
+    @include breakpoint(bp--xs--major) {
+      display: inline-block;
+      padding-left: 0;
+      margin-left: -16px;
+    }
+  }
+
+  &__link-wrapper {
+    @include reset;
+    @include font-smoothing;
+    box-sizing: border-box;
+    color: $color__navy-gray-8;
+    text-decoration: none;
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
+  }
+
+  &__arrow {
+    @include detail-page-header__arrow;
+    top: 3px;
+  }
+
+  &__info {
+    @include reset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  &__info-title {
+    @include reset;
+    @include font-size('23');
+    @include font-smoothing;
+    box-sizing: border-box;
+    padding-left: .5rem;
+    margin-left: .5rem;
+    font-weight: 200;
+    border-left: 1px solid $color__navy-gray-4;
+
+    @include light-ui {
+      color: $color__navy-gray-6;
+      border-left: 1px solid $color__gray-1;
+    }
+
+    @include breakpoint(bp--xs--major) {
+      padding-left: 0;
+      margin-left: 0;
+      border-left: none;
+
+      @include light-ui {
+        border-left: none;
+      }
+    }
+
+    @include breakpoint(bp--sm--major) {
+      @include font-size('32');
+    }
+  }
+
+  &__tabs-container {
+    @include detail-page-header__tab-overrides;
+  }
+}
+
+}

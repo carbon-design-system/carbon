@@ -1,0 +1,101 @@
+//-----------------------------
+// Select
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/layout';
+@import '../forms/forms';
+@import '../../../../globals/scss/import-once';
+
+@include exports('select') {
+
+.bx--select {
+  @include reset;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+
+  &__input {
+    @include reset;
+    @include helvetica;
+    @include font-size('14');
+    box-sizing: border-box;
+    appearance: none;
+    display: block;
+    width: 100%;
+    padding: .75rem 2.75rem .75rem 1rem;
+    height: rem(40px);
+    margin: .25rem 0 0;
+    color: $color__white;
+    background-color: $color__inputs--bg;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+
+    @include light-ui {
+      color: $color__blue-90;
+      background-color: $color__inputs--bg--light-ui;
+    }
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      @include focus-outline;
+      outline: auto 2px -webkit-focus-ring-color; // webkit default
+    }
+
+    &:disabled  {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__arrow {
+    fill: $color__blue-30;
+    position: absolute;
+    right: 1rem;
+    top: 2.65rem;
+    width: .75rem;
+    height: .75rem;
+    pointer-events: none;
+
+    @include light-ui {
+      fill: $color__blue-51;
+    }
+  }
+
+  &__optgroup,
+  &__option {
+    @include reset;
+    box-sizing: border-box;
+    color: $color__blue-90; // For the options to show in IE11
+  }
+}
+
+// Override some Firefox user-agent styles
+@-moz-document url-prefix() {
+  .bx--select__option {
+    background-color: $color__navy-gray-5;
+    color: $color__white;
+
+    @include light-ui {
+      color: $color__blue-90;
+      background-color: $color__white;
+    }
+  }
+
+  .bx--select__optgroup {
+    color: $color__white;
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
+  }
+}
+
+}

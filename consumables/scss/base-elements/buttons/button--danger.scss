@@ -1,0 +1,18 @@
+//-----------------------------
+// Danger Button
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import 'vars';
+@import 'mixins';
+@import 'extends';
+@import '../../../../globals/scss/import-once';
+
+@include exports('button--danger') {
+  // Danger Buttons
+  .bx--btn--danger {
+    @include btn--danger;
+  }
+}

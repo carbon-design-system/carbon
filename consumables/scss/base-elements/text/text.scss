@@ -1,0 +1,50 @@
+//-----------------------------
+// Text
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
+
+@include exports('text') {
+
+.bx--text {
+
+  &__input {
+    @include reset;
+    @include font-size('14');
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: rem(40px);
+    min-width: 9.375rem;
+    padding: .825rem 0 .825rem 1rem;
+    font-weight: 300;
+    margin: .25rem 0 0;
+    color: $color__white;
+    background-color: $color__inputs--bg;
+
+    @include light-ui {
+      color: $color__blue-90;
+      background-color: $color__inputs--bg--light-ui;
+      font-weight: 400;
+    }
+
+    &::-webkit-input-placeholder {
+      @include placeholder-colors;
+    }
+
+    &:focus {
+      @include focus-outline;
+      outline: auto 2px -webkit-focus-ring-color; // webkit default
+    }
+
+    &:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+}

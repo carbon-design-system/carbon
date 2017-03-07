@@ -1,0 +1,141 @@
+//-----------------------------
+// Overflow Menu
+//-----------------------------
+
+@import '../../../../globals/scss/colors';
+@import '../../../../globals/scss/helpers';
+@import '../../../../globals/scss/typography';
+@import '../../../../globals/scss/import-once';
+
+@include exports('overflow-menu') {
+
+.bx--overflow-menu {
+  @include reset;
+  box-sizing: border-box;
+  display: flex;
+  width: 2rem;
+  margin: 0 1rem 0 1rem;
+  cursor: pointer;
+  position: relative;
+
+  // horizontal rule styling
+  hr {
+    margin: .25rem 0 0;
+    border: none;
+    border-bottom: 1px solid $color__navy-gray-2;
+
+    @include light-ui {
+      border-bottom: 1px solid $color__gray-1;
+    }
+  }
+
+  // Initial styling for the options pane
+  &__options {
+    @include reset;
+    @include box-shadow;
+    box-sizing: border-box;
+    list-style: none;
+    left: auto;
+    right: rem(-20px);
+    position: absolute;
+    display: none;
+    padding: .3rem 0 .5rem;
+    margin: 2.2rem 0 0 -10rem;
+    z-index: z('overflowOptions');
+    background: $color__navy-gray-3;
+
+    @include light-ui {
+      background: $color__white;
+      border: 1px solid $color__gray-1;
+    }
+
+    // rectangle to make little arrow
+    &:before {
+      position: absolute;
+      top: -.4rem;
+      right: rem(30px);
+      z-index: z('overflowHidden');
+      display: block;
+      width: .75rem;
+      height: .75rem;
+      background-color: $color__navy-gray-3;
+      content: '';
+      transform: rotate(45deg);
+
+      @include light-ui {
+        top: -.45rem;
+        background-color: $color__white;
+        border-top: 1px solid $color__gray-1;
+        border-left: 1px solid $color__gray-1;
+      }
+    }
+  }
+
+  &__btn,
+  &__btn--delete {
+    @include reset;
+    @include helvetica;
+    @include font-size('14');
+    box-sizing: border-box;
+    width: 100%;
+    padding: .5rem 1.25rem;
+    font-weight: 200;
+    color: $color__navy-gray-8;
+    text-align: left;
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    @include light-ui {
+      color: $color__blue-90;
+    }
+
+    &:hover {
+      background: $color__blue-30;
+      color: $color__blue-90;
+
+      @include light-ui {
+        background: $color__blue-51;
+        color: $color__white;
+      }
+    }
+
+    &--delete:hover {
+      background-color: $color__red-40;
+
+      @include light-ui {
+        background-color: $color__red-50;
+      }
+    }
+  }
+
+  &__icon {
+    height: 20px;
+    fill: $color__navy-gray-8;
+
+    @include light-ui {
+      fill: $color__navy-gray-7;
+    }
+  }
+
+  &:active,
+  &.bx--overflow-menu--open {
+    .bx--overflow-menu__icon {
+      color: $color__white;
+    }
+
+    .bx--overflow-menu__options {
+      display: block;
+    }
+  }
+
+  &.bx--overflow-menu--open {
+    display: flex;
+  }
+
+  &--open {
+    display: block;
+  }
+}
+
+}
