@@ -1,9 +1,8 @@
 $loading__gap: 40;
-$loading__size: rem(168px);
+$loading__size: 10.5rem;
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
 @import 'keyframes';
 @import 'mixins';
@@ -11,6 +10,7 @@ $loading__size: rem(168px);
 @include exports('loading') {
 
   .bx--loading {
+    @include reset;
     @include animation__loading--spin;
     width: $loading__size;
     height: $loading__size;

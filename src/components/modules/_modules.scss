@@ -3,16 +3,15 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
 @include exports('modules') {
   .bx--module {
     @include reset;
+    @include helvetica;
     display: flex;
     flex-direction: column;
     padding: rem(10px);
