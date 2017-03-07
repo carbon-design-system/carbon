@@ -3,9 +3,8 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
 
 @include exports('number-input') {
@@ -16,6 +15,7 @@
 
   .bx--number input[type="number"] {
     @include font-size('14');
+    @include helvetica;
     box-sizing: border-box;
     display: inline-flex;
     width: 100%;
@@ -56,23 +56,13 @@
   .bx--number__controls .up-icon,
   .bx--number__controls .down-icon {
     fill: $brand-01;
-    width: rem(10px);
-    height: rem(5px);
-    padding-left: .55rem;
-    padding-right: .55rem;
+    width: rem(9px);
+    height: rem(20px);
+    position: relative;
 
     &:hover {
       cursor: pointer;
       fill: $brand-02;
     }
-  }
-
-  .bx--number__controls .down-icon {
-    padding-bottom: 12px;
-  }
-
-  .bx--number__controls .up-icon {
-    margin-bottom: 6px;
-    padding-top: 12px;
   }
 }
