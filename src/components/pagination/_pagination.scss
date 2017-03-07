@@ -74,30 +74,32 @@ $css--helpers: true;
     margin-left: rem(28px);
   }
 
-  .bx--select {
-    margin-right: rem(10px);
-  }
+  .bx--pagination {
+    .bx--select {
+      margin-right: rem(10px);
+    }
 
-  .bx--select-input {
-    height: rem(24px);
-    width: rem(54px);
-    padding: 0 rem(8px);
-    margin: 0;
-    font-weight: 700;
-  }
+    .bx--select-input {
+      height: rem(24px);
+      width: rem(54px);
+      padding: 0 rem(8px);
+      margin: 0;
+      font-weight: 700;
+    }
 
-  .bx--select__arrow {
-    right: .5rem;
-    top: .625rem;
-  }
+    .bx--select__arrow {
+      right: .5rem;
+      top: .625rem;
+    }
 
-  .bx--text-input {
-    height: rem(24px);
-    min-width: rem(24px);
-    width: rem(24px);
-    padding: 0;
-    margin: 0;
-    font-weight: 700;
-    text-align: center;
+    .bx--text-input {
+      height: rem(24px);
+      min-width: rem(24px);
+      width: rem(24px);
+      padding: 0;
+      margin: 0;
+      font-weight: 700;
+      text-align: center;
+    }
   }
 }
