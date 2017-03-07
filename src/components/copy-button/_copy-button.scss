@@ -9,10 +9,6 @@
 @include exports('copy-button') {
 
   .bx--btn--copy {
-    display: inline-flex;
-    align-items: center;
-    height: rem(32px);
-    padding: 0 .55rem .125rem;
     position: relative;
     overflow: visible;
 
