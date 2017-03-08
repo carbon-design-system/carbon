@@ -3,9 +3,7 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/layout';
@@ -13,7 +11,6 @@
 
 @include exports('tabs') {
   .bx--tabs {
-    @include reset;
     @include font-size('14');
     @include font-smoothing;
     @include helvetica;
@@ -31,7 +28,6 @@
   }
 
   .bx--tabs-trigger {
-    @include reset;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,7 +47,6 @@
   }
 
   .bx--tabs-trigger-text {
-    @include reset;
     text-decoration: none;
     font-weight: 700;
     color: $text-01;
@@ -59,7 +54,8 @@
 
   .bx--tabs__nav {
     @include layer('overlay');
-    @include reset;
+    margin: 0;
+    padding: 0;
     position: absolute;
     width: 100%;
     list-style: none;
@@ -89,7 +85,6 @@
   }
 
   .bx--tabs__nav-item {
-    @include reset;
     @include font-size('14');
     background-color: $ui-01;
     padding: 1rem;
@@ -134,7 +129,6 @@
 
 
   .bx--tabs__nav-link {
-    @include reset;
     display: inline-block;
     color: $text-01;
     text-decoration: none;
