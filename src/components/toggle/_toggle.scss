@@ -4,7 +4,7 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/mixins';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
@@ -14,6 +14,7 @@
   }
 
   .bx--toggle__label {
+    @include helvetica;
     position: relative;
     display: flex;
     align-items: center;
@@ -23,7 +24,6 @@
   }
 
   .bx--toggle__appearance {
-    @include reset;
     position: relative;
     width: 48px;
 
@@ -40,7 +40,7 @@
     }
 
     &:after {
-      @include reset;
+      box-sizing: border-box;
       position: absolute;
       display: block;
       border: 2px solid $ui-05;
