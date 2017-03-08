@@ -4,6 +4,7 @@
 
   .bx--top-nav {
     @include reset;
+    @include helvetica;
     display: flex;
     justify-content: space-between;
     background-color: $nav-01;
@@ -30,6 +31,7 @@
 
    .bx--dropdown {
       @include font-size('12');
+      list-style: none;
       background-color: $nav-01;
       color: $inverse-01;
       height: 100%;
@@ -220,7 +222,7 @@
     }
 
     .bx--dropdown--open .bx--dropdown-text {
-      color: $color__blue-30; // anna 
+      color: $color__blue-30; // anna
     }
 
     .bx--dropdown:hover,
@@ -229,7 +231,7 @@
       background-color: $color__navy-gray-3; // anna
 
       .bx--dropdown-text {
-        color: $color__blue-30; // anna 
+        color: $color__blue-30; // anna
       }
 
       .bx--dropdown__arrow use {
