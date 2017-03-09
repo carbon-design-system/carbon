@@ -32,7 +32,7 @@ describe('CopyButton', () => {
       expect(wrapper.hasClass('bx--btn--copy')).toBe(true);
       expect(wrapper.find('.bx--btn--copy__feedback').length).toBe(1);
       expect(wrapper.find(Icon).length).toBe(1);
-      expect(wrapper.find(Icon).props().name).toBe('copy--code');
+      expect(wrapper.find(Icon).props().name).toBe('add--glyph');
     });
 
     it('Should have default props', () => {

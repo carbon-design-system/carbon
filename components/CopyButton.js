@@ -51,7 +51,7 @@ export default class CopyButton extends Component {
     return (
       <button type="button" className={classNames} onClick={this.handleClick} disabled={disabled} {...other}>
         {children}
-        <Icon className="bx--btn--right-icon__icon bx--btn--right-icon__use" name="copy--code" description="" />
+        <Icon className="bx--btn--right-icon__icon bx--btn--right-icon__use" name="add--glyph" description="" />
         <div className={feedbackClassNames} data-feedback={feedback} />
       </button>
     );
