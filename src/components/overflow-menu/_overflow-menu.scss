@@ -115,11 +115,9 @@
   }
 
   .bx--overflow-menu--flip {
-    .bx--overflow-menu-options {
-      left: -140px;
-    }
+    left: -140px;
 
-    .bx--overflow-menu-options:before {
+    &:before {
       left: 145px;
     }
   }

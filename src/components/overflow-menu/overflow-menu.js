@@ -40,6 +40,15 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   }
 
   /**
+   * Checks if flip class is present if so use the flip offset option.
+   * @private
+   */
+  _checkMenuFlip() {
+    if (this.optionMenu.classList.contains('bx--overflow-menu--flip')) {
+      this.options.objMenuOffset = this.options.objMenuOffsetFlip;
+    }
+  }
+  /**
    * Changes the shown/hidden state.
    * @private
    * @param {string} state The new state.
@@ -49,6 +58,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   _changeState(state, detail, callback) {
     this.element.classList.toggle('bx--overflow-menu--open', state === 'shown');
     this.optionMenu.classList.toggle('bx--overflow-menu-options--open');
+    this._checkMenuFlip();
     placeMenu(this.element, this.optionMenu, this.options.objMenuOffset, this.options.menuDirection);
     callback();
   }
