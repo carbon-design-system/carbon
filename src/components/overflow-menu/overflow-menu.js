@@ -111,7 +111,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     eventAfterShown: 'overflow-menu-shown',
     eventBeforeHidden: 'overflow-menu-beinghidden',
     eventAfterHidden: 'overflow-menu-hidden',
-    objMenuOffset: { top: 3, left: -30 },
+    objMenuOffset: { top: 3, left: -29 },
     menuDirection: 'bottom',
   };
 }

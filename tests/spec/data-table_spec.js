@@ -53,18 +53,6 @@ describe('Test responsive table', function () {
       });
     });
 
-    it('Should move any overflow menus to the body', function () {
-      const rows = [...element.querySelectorAll('tbody > tr')];
-      const bodyOptions = document.body.querySelector('.bx--overflow-menu__options');
-
-      rows.forEach((row) => {
-        const overflowOptions = row.querySelector('.bx--overflow-menu__options');
-        expect(overflowOptions).to.be.null;
-      });
-
-      expect(document.body.contains(bodyOptions)).to.be.true;
-    });
-
     after(function () {
       document.body.removeChild(container);
       table.release();
@@ -113,7 +101,7 @@ describe('Test responsive table', function () {
     it('The event should trigger the function', function () {
       const rowExpansion = document.querySelector('.bx--table-expand');
 
-      const spyToggleRowExpand = sinon.spy(expanseTable, 'toggleRowExpand');
+      const spyToggleRowExpand = sinon.spy(expanseTable, '_toggleRowExpand');
       rowExpansion.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       expect(spyToggleRowExpand).to.have.been.called;

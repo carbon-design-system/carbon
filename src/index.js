@@ -130,8 +130,8 @@ export {
   NumberInput,
 
   /**
-   *  Data table -responsive
-   *  @type Table
+   *  DataTable
+   *  @type DataTable
    */
   DataTable,
 
