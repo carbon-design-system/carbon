@@ -29,6 +29,7 @@ import Accordion from './components/accordion/accordion';
 import CopyButton from './components/copy-button/copy-button';
 import Notification from './components/notification/notification';
 import Toolbar from './components/toolbar/toolbar';
+import Tooltip from './components/tooltip/tooltip';
 import ProgressIndicator from './components/progress-indicator/progress-indicator';
 
 const settings = {};
@@ -183,6 +184,12 @@ export {
    */
   Toolbar,
 
+  /**
+   * Tooltip.
+   * @type Tooltip
+   */
+  Tooltip,
+
   /** ProgressIndicator.
    * @type InlineLeftNav
    */
@@ -224,6 +231,7 @@ const init = () => {
     CopyButton.init();
     Notification.init();
     Toolbar.init();
+    Tooltip.init();
     ProgressIndicator.init();
   }
 };

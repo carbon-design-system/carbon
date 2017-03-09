@@ -45,20 +45,20 @@ export function placeMenu(menu, menuContents, offset, direction) {
   let leftCalc;
 
   if (direction === 'left') {
-    topCalc = (centerVertical + scroll) + offset.top;
+    topCalc = (((centerVertical - (menuContentsHeight / 2)) + scroll)) + offset.top;
     leftCalc = (centerHorizontal - (menuWidth / 2) - menuContentsWidth) + offset.left;
   }
   if (direction === 'top') {
-    topCalc = ((centerVertical - (menuHeight / 2) - menuContentsHeight) + scroll) + offset.top;
-    leftCalc = centerHorizontal + offset.left;
+    topCalc = ((centerVertical - (menuHeight / 2) - menuContentsHeight) + scroll) - offset.top;
+    leftCalc = (centerHorizontal - (menuContentsWidth / 2)) + offset.left;
   }
   if (direction === 'right') {
-    topCalc = (centerVertical + scroll) + offset.top;
+    topCalc = (((centerVertical - (menuContentsHeight / 2)) + scroll)) + offset.top;
     leftCalc = (centerHorizontal + (menuWidth / 2)) + offset.left;
   }
   if (direction === 'bottom') {
     topCalc = ((centerVertical + (menuHeight / 2) + scroll)) + offset.top;
-    leftCalc = centerHorizontal + offset.left;
+    leftCalc = (centerHorizontal - (menuContentsWidth / 2)) + offset.left;
   }
 
   if (topCalc) {
