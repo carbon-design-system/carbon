@@ -104,23 +104,40 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
 
   toggleLeftNav = () => {
     const collapsed = this.element.dataset.collapsed === 'true';
+    const eventStart = new CustomEvent(this.options.eventBeforeLeftNavToggled, {
+      bubbles: true,
+      cancelable: true,
+      detail: { collapsed: !collapsed }, // shows where the toggle is going, not where it is
+    });
 
-    if (!collapsed) {
-      this.element.dataset.collapsed = true;
-      this.element.classList.add(this.options.classLeftNavCollapsing);
+    if (this.element.dispatchEvent(eventStart)) {
+      if (!collapsed) {
+        this.element.dataset.collapsed = true;
+        this.element.classList.add(this.options.classLeftNavCollapsing);
 
-      window.setTimeout(() => {
-        this.element.classList.add(this.options.classLeftNavCollapsed);
-      }, 250);
-    } else {
-      this.element.dataset.collapsed = false;
-      this.element.classList.remove(this.options.classLeftNavCollapsed);
-      this.element.classList.remove(this.options.classLeftNavCollapsing);
-      this.element.classList.add(this.options.classLeftNavExpanding);
+        window.setTimeout(() => {
+          this.element.classList.remove(this.options.classLeftNavCollapsing);
+          this.element.classList.add(this.options.classLeftNavCollapsed);
+          this.element.dispatchEvent(new CustomEvent(this.options.eventAfterLeftNavToggled, {
+            bubbles: true,
+            cancelable: true,
+            detail: { collapsed: true },
+          }));
+        }, 250);
+      } else {
+        this.element.dataset.collapsed = false;
+        this.element.classList.remove(this.options.classLeftNavCollapsed);
+        this.element.classList.add(this.options.classLeftNavExpanding);
 
-      window.setTimeout(() => {
-        this.element.classList.remove(this.options.classLeftNavExpanding);
-      }, 250);
+        window.setTimeout(() => {
+          this.element.classList.remove(this.options.classLeftNavExpanding);
+          this.element.dispatchEvent(new CustomEvent(this.options.eventAfterLeftNavToggled, {
+            bubbles: true,
+            cancelable: true,
+            detail: { collapsed: false },
+          }));
+        }, 250);
+      }
     }
   }
 
@@ -156,6 +173,9 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
     classLeftNavCollapsing: 'bx--inline-left-nav--collapsing',
     classLeftNavCollapsed: 'bx--inline-left-nav--collapsed',
     classLeftNavExpanding: 'bx--inline-left-nav--expanding',
+    // Event
+    eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
+    eventAfterLeftNavToggled: 'left-nav-toggled',
   };
 }
 

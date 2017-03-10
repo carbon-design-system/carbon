@@ -36,6 +36,8 @@ describe('Test inline left nav', function () {
         classLeftNavCollapsing: 'bx--inline-left-nav--collapsing',
         classLeftNavCollapsed: 'bx--inline-left-nav--collapsed',
         classLeftNavExpanding: 'bx--inline-left-nav--expanding',
+        eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
+        eventAfterLeftNavToggled: 'left-nav-toggled',
       });
     });
 
