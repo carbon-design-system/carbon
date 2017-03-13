@@ -21,7 +21,6 @@ export Form from './components/Form';
 export FormGroup from './components/FormGroup' ;
 export Icon from './components/Icon';
 export InteriorLeftNav from './components/InteriorLeftNav';
-export InteriorLeftNavHeader from './components/InteriorLeftNavHeader';
 export InteriorLeftNavList from './components/InteriorLeftNavList';
 export InteriorLeftNavItem from './components/InteriorLeftNavItem';
 export Link from './components/Link';

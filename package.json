@@ -100,10 +100,11 @@
     }
   },
   "dependencies": {
-    "@console/bluemix-components": "6.16.0",
+    "@console/bluemix-components": "6.17.0",
     "@console/bluemix-icons": "4.1.1",
     "classnames": "2.2.5",
     "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.3.2",
     "warning": "3.0.0"
   },

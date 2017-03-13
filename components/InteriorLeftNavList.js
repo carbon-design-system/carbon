@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
+import InteriorLeftNavItem from './InteriorLeftNavItem';
 import Icon from './Icon';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
@@ -12,9 +13,11 @@ class InteriorLeftNavList extends Component {
     tabIndex: PropTypes.number,
     title: PropTypes.string,
     open: PropTypes.bool,
+    onListClick: PropTypes.func,
     onItemClick: PropTypes.func,
     activeHref: PropTypes.string,
     iconDescription: PropTypes.string,
+    id: PropTypes.string,
   };
 
   static defaultProps = {
@@ -22,29 +25,53 @@ class InteriorLeftNavList extends Component {
     tabIndex: 0,
     activeHref: '#',
     iconDescription: 'display sub navigation items',
-    onItemClick: () => {},
+    onListClick: /* istanbul ignore next */() => {},
+    onItemClick: /* istanbul ignore next */() => {},
   };
 
   state = {
     open: this.props.open,
   };
 
-  handleListClick = (evt) => {
-    // 13 = Enter, 32 = Spacebar
+  toggle = (evt) => {
     if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
+      if (!this.state.open) {
+        this.props.onListClick(this.props.id);
+      }
       this.setState({ open: !this.state.open });
     }
+  };
+
+  close = () => this.state.open && this.setState({ open: false });
+
+  buildNewItemChild = (child, index) => {
+    const {
+      onItemClick,
+      activeHref,
+    } = this.props;
+
+    const key = `listitem-${index}`;
+    return (
+      <InteriorLeftNavItem
+        {...child.props}
+        key={key}
+        onClick={onItemClick}
+        activeHref={activeHref}
+        tabIndex={this.state.open ? 0 : -1}
+      />
+    );
   };
 
   render() {
     const {
       tabIndex,
-      onItemClick,
       title,
       children,
       className,
-      activeHref,
       iconDescription,
+      onListClick, // eslint-disable-line no-unused-vars
+      onItemClick, // eslint-disable-line no-unused-vars
+      activeHref, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 
@@ -56,20 +83,16 @@ class InteriorLeftNavList extends Component {
       },
       className);
 
-    const newChildren = React.Children.map(children, child =>
-      React.cloneElement(child, {
-        onClick: onItemClick,
-        tabIndex: this.state.open ? 0 : -1,
-        activeHref,
-      })
+    const newChildren = React.Children.map(children, (child, index) =>
+      this.buildNewItemChild(child, index)
     );
 
     return (
       <li
         className={classNames}
         tabIndex={tabIndex}
-        onClick={this.handleListClick}
-        onKeyPress={this.handleListClick}
+        onClick={this.toggle}
+        onKeyPress={this.toggle}
         role="menuitem"
         {...other}
       >

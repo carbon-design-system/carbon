@@ -25,7 +25,6 @@ import Form from '../../components/Form';
 import FormGroup from '../../components/FormGroup';
 import Icon from '../../components/Icon';
 import InteriorLeftNav from '../../components/InteriorLeftNav';
-import InteriorLeftNavHeader from '../../components/InteriorLeftNavHeader';
 import InteriorLeftNavList from '../../components/InteriorLeftNavList';
 import InteriorLeftNavItem from '../../components/InteriorLeftNavItem';
 import Link from '../../components/Link';
@@ -324,20 +323,6 @@ describe('a11y scan', () => {
     );
 
     AAT.getCompliance(wrapper.html(), 'InteriorLeftNav', (data) => {
-      expect(AAT.assertCompliance(data)).toEqual(0);
-      done();
-    });
-  });
-
-  it('InteriorLeftNavHeader', (done) => {
-    const wrapper = render(
-      <InteriorLeftNavHeader
-        previousPageText="Projects"
-        previousPageHref="#projects"
-      />
-    );
-
-    AAT.getCompliance(wrapper.html(), 'InteriorLeftNavHeader', (data) => {
       expect(AAT.assertCompliance(data)).toEqual(0);
       done();
     });

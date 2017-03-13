@@ -1,13 +1,12 @@
 import React from 'react';
 import InteriorLeftNav from '../InteriorLeftNav';
-import InteriorLeftNavHeader from '../InteriorLeftNavHeader';
 import InteriorLeftNavList from '../InteriorLeftNavList';
 import InteriorLeftNavItem from '../InteriorLeftNavItem';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 describe('InteriorLeftNav', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <InteriorLeftNav
         className="extra-class"
       />
@@ -23,19 +22,34 @@ describe('InteriorLeftNav', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
     it('should render children as expected', () => {
-      const interiorLeftNav = shallow(
+      const interiorLeftNav = mount(
         <InteriorLeftNav>
-          <InteriorLeftNavHeader />
           <InteriorLeftNavList className="test-child" />
-          <InteriorLeftNavItem href="#" title="test-title" className="test-child" />
-          <InteriorLeftNavItem href="#">
+          <InteriorLeftNavItem href="#" title="test-title" className="test-child">
             <a href="#">test-title</a>
           </InteriorLeftNavItem>
         </InteriorLeftNav>
       );
-      expect(interiorLeftNav.find(InteriorLeftNavHeader).length).toEqual(1);
-      expect(interiorLeftNav.find('.left-nav-list').length).toEqual(1);
+      expect(interiorLeftNav.find('.left-nav-list').length).toEqual(2);
       expect(interiorLeftNav.find('.test-child').length).toEqual(2);
+      expect(interiorLeftNav.find('.bx--inline-left-nav-collapse').length).toEqual(1);
+    });
+  });
+
+  describe('clicking on one list should close any currently opened lists', () => {
+    const twoLists = mount(
+      <InteriorLeftNav>
+        <InteriorLeftNavList className="first" />
+        <InteriorLeftNavList className="second" open />
+      </InteriorLeftNav>
+    );
+    const first = twoLists.find('.first');
+    const second = twoLists.find('.second');
+
+    it('should close the second list when the first is clicked', () => {
+      expect(second.hasClass('left-nav-list__item--expanded')).toBe(true);
+      first.simulate('click');
+      expect(second.hasClass('left-nav-list__item--expanded')).toBe(false);
     });
   });
 
@@ -50,6 +64,7 @@ describe('InteriorLeftNav', () => {
     );
 
     const item = interiorLeftNav.find(InteriorLeftNavItem).first();
+    const toggler = interiorLeftNav.find('.bx--inline-left-nav-collapse').first();
 
     it('handles item click as expected', () => {
       interiorLeftNav.setState({ activeHref: '#' });
@@ -67,6 +82,12 @@ describe('InteriorLeftNav', () => {
       interiorLeftNav.setState({ activeHref: '#' });
       item.simulate('keypress', { which: 32 });
       expect(interiorLeftNav.state().activeHref).toEqual('#first');
+    });
+
+    it('should close the nav when the toggler is clicked', () => {
+      toggler.simulate('click');
+      expect(interiorLeftNav.hasClass('bx--inline-left-nav--collapsed')).toBe(true);
+      expect(interiorLeftNav.state().open).toBe(false);
     });
   });
 });

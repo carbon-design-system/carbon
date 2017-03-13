@@ -1,9 +1,11 @@
 /* global window */
 
 import React, { Component, PropTypes } from 'react';
-import InteriorLeftNavHeader from './InteriorLeftNavHeader';
-import InteriorLeftNavList from './InteriorLeftNavList';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
+import InteriorLeftNavList from './InteriorLeftNavList';
+import InteriorLeftNavItem from './InteriorLeftNavItem';
+import Icon from './Icon';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
 }
@@ -17,6 +19,7 @@ class InteriorLeftNav extends Component {
 
   state = {
     activeHref: '#',
+    open: true,
   };
 
   componentDidMount = () => {
@@ -25,10 +28,56 @@ class InteriorLeftNav extends Component {
 
   handleItemClick = (evt, href) => {
     evt.stopPropagation();
+
     // 13 = Enter, 32 = Spacebar
-    if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
+    const acceptableEvent = (evt.which === 13 || evt.which === 32 || evt.type === 'click');
+    const diffHref = (href !== this.state.activeHref);
+    if (acceptableEvent && diffHref) {
       this.setState({ activeHref: href });
     }
+  };
+
+  handleListClick = (id) => {
+    this.props.children.forEach((child, index) => {
+      if (child.type.name === 'InteriorLeftNavList') {
+        const childId = `list-${index}`;
+        if (childId !== id) {
+          this.refs[childId].close();
+        }
+      }
+    });
+  };
+
+  toggle = (evt) => {
+    evt.stopPropagation();
+    this.setState({ open: !this.state.open });
+  };
+
+  buildNewListChild = (child, index) => {
+    const key = `list-${index}`;
+    return (
+      <InteriorLeftNavList
+        {...child.props}
+        key={key}
+        ref={key}
+        id={key}
+        onListClick={this.handleListClick}
+        onItemClick={this.handleItemClick}
+        activeHref={this.state.activeHref}
+      />
+    );
+  };
+
+  buildNewItemChild = (child, index) => {
+    const key = `item-${index}`;
+    return (
+      <InteriorLeftNavItem
+        {...child.props}
+        key={key}
+        onClick={this.handleItemClick}
+        activeHref={this.state.activeHref}
+      />
+    );
   };
 
   render() {
@@ -38,30 +87,12 @@ class InteriorLeftNav extends Component {
       ...other,
     } = this.props;
 
-    const headerChild = [];
-    const listChildren = [];
-
-    React.Children.forEach(children, child => {
-      if (child.type === InteriorLeftNavHeader) {
-        headerChild.push(child);
-      } else {
-        listChildren.push(child);
-      }
-    });
-
-    const newChildren = React.Children.map(listChildren, child => {
+    const newChildren = React.Children.map(children, (child, index) => {
       let newChild;
-
-      if (child.type === InteriorLeftNavList) {
-        newChild = React.cloneElement(child, {
-          onItemClick: this.handleItemClick,
-          activeHref: this.state.activeHref,
-        });
+      if (child.type.name === 'InteriorLeftNavList') {
+        newChild = this.buildNewListChild(child, index);
       } else {
-        newChild = React.cloneElement(child, {
-          onClick: this.handleItemClick,
-          activeHref: this.state.activeHref,
-        });
+        newChild = this.buildNewItemChild(child, index);
       }
 
       return newChild;
@@ -69,7 +100,11 @@ class InteriorLeftNav extends Component {
 
     const classNames = classnames(
       'bx--inline-left-nav',
-      className
+      'bx--inline-left-nav--collapseable',
+      {
+        'bx--inline-left-nav--collapsed': !this.state.open,
+      },
+      className,
     );
 
     return (
@@ -77,12 +112,35 @@ class InteriorLeftNav extends Component {
         role="navigation"
         aria-label="Interior Left Navigation"
         className={classNames}
+        onClick={!this.state.open && this.toggle}
         {...other}
       >
-        {headerChild.length > 0 && headerChild}
-        <ul className="left-nav-list" role="menubar">
-          {newChildren}
-        </ul>
+        <ReactCSSTransitionGroup
+          transitionName={{
+            enter: 'bx--inline-left-nav--collapseable',
+            enterActive: 'bx--inline-left-nav--expanding',
+            leave: 'bx--inline-left-nav--collapsed',
+            leaveActive: 'bx--inline-left-nav--collapsing',
+          }}
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
+          <ul key="main_list" className="left-nav-list" role="menubar">
+            {newChildren}
+          </ul>
+        </ReactCSSTransitionGroup>
+        <div
+          className="bx--inline-left-nav-collapse"
+          onClick={this.toggle}
+        >
+          <a className="bx--inline-left-nav-collapse__link" href="#">
+            <Icon
+              name="chevron--left"
+              description="close/open iln"
+              className="bx--inline-left-nav-collapse__arrow"
+            />
+          </a>
+        </div>
       </nav>
     );
   }

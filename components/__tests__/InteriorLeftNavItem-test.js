@@ -43,4 +43,29 @@ describe('InteriorLeftNavItem', () => {
       expect(wrapper.find('a').hasClass('left-nav-list__item-link')).toEqual(true);
     });
   });
+
+  describe('actions', () => {
+    const onClick = jest.fn();
+
+    const wrapper = shallow(
+      <InteriorLeftNavItem onClick={onClick} href="#">
+        <a href="#">test-title</a>
+      </InteriorLeftNavItem>
+    );
+
+    it('handles click to leftNavList as expected', () => {
+      wrapper.simulate('click');
+      expect(onClick).toBeCalled();
+    });
+
+    it('should toggle the leftNavList on Enter', () => {
+      wrapper.simulate('keypress', { which: 13 });
+      expect(onClick).toBeCalled();
+    });
+
+    it('should toggle the leftNavList on Space', () => {
+      wrapper.simulate('keypress', { which: 32 });
+      expect(onClick).toBeCalled();
+    });
+  });
 });

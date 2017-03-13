@@ -16,7 +16,7 @@ const propTypes = {
 const defaultProps = {
   activeHref: '#',
   tabIndex: 0,
-  onClick: () => {},
+  onClick: /* istanbul ignore next */() => {},
 };
 
 const InteriorLeftNavItem = ({ children, className, href, activeHref, onClick, tabIndex, ...other }) => {

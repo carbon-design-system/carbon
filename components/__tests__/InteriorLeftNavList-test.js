@@ -73,6 +73,29 @@ describe('InteriorLeftNavList', () => {
     });
   });
 
+  describe('Check that functions passed in as props are called', () => {
+    const onListClick = jest.fn();
+    const wrapper = mount(
+      <InteriorLeftNavList onListClick={onListClick} />
+    );
+
+    it('should call onListClick', () => {
+      wrapper.simulate('click');
+      expect(onListClick).toBeCalled();
+    });
+  });
+
+  describe('calling the close method should close the list when open', () => {
+    const wrapper = shallow(
+      <InteriorLeftNavList open />
+    );
+
+    it('should close the list', () => {
+      wrapper.instance().close();
+      expect(wrapper.state().open).toEqual(false);
+    });
+  });
+
   describe('actions', () => {
     const list = mount(
       <InteriorLeftNavList
