@@ -2,6 +2,7 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
+import svgToggleClass from '../../globals/js/misc/svg-toggle-class';
 
 class Search extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -29,7 +30,7 @@ class Search extends mixin(createComponent, initComponentBySearch) {
 
     if (closeIcon) {
       closeIcon.addEventListener('click', () => {
-        closeIcon.classList.add(this.options.classClearHidden);
+        svgToggleClass(closeIcon, this.options.classClearHidden, true);
         input.value = '';
         input.focus();
       });
@@ -61,11 +62,7 @@ class Search extends mixin(createComponent, initComponentBySearch) {
    * @param {HTMLElement} icon The element serving as close icon.
    */
   showClear(value, icon) {
-    if (value.length > 0) {
-      icon.classList.remove(this.options.classClearHidden);
-    } else {
-      icon.classList.add(this.options.classClearHidden);
-    }
+    svgToggleClass(icon, this.options.classClearHidden, value.length === 0);
   }
 
   /**

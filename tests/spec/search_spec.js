@@ -89,13 +89,15 @@ describe('Test Search', function () {
     });
 
     it('Clear icon should be hidden by default', function () {
-      expect(clearIcon.classList.contains('bx--search-close--hidden')).to.be.true;
+      // IE11 doesn't have `.classList` for `<svg>`
+      expect(clearIcon.getAttribute('class').trim().split(/\s+/).indexOf('bx--search-close--hidden') >= 0).to.be.true;
     });
 
     it('Clear icon should be shown when input has value', function () {
       input.value = 'testing';
       input.dispatchEvent(new CustomEvent('input', { bubbles: true }));
-      expect(clearIcon.classList.contains('bx--search-close--hidden')).to.be.false;
+      // IE11 doesn't have `.classList` for `<svg>`
+      expect(clearIcon.getAttribute('class').trim().split(/\s+/).indexOf('bx--search-close--hidden') < 0).to.be.true;
     });
 
     it('Should clear the input when clicked', function () {
