@@ -100,23 +100,39 @@
 
       _this.toggleLeftNav = function () {
         var collapsed = _this.element.dataset.collapsed === 'true';
+        var eventStart = new CustomEvent(_this.options.eventBeforeLeftNavToggled, {
+          bubbles: true,
+          cancelable: true,
+          detail: { collapsed: !collapsed } });
 
-        if (!collapsed) {
-          _this.element.dataset.collapsed = true;
-          _this.element.classList.add(_this.options.classLeftNavCollapsing);
+        if (_this.element.dispatchEvent(eventStart)) {
+          if (!collapsed) {
+            _this.element.dataset.collapsed = true;
+            _this.element.classList.add(_this.options.classLeftNavCollapsing);
 
-          window.setTimeout(function () {
-            _this.element.classList.add(_this.options.classLeftNavCollapsed);
-          }, 250);
-        } else {
-          _this.element.dataset.collapsed = false;
-          _this.element.classList.remove(_this.options.classLeftNavCollapsed);
-          _this.element.classList.remove(_this.options.classLeftNavCollapsing);
-          _this.element.classList.add(_this.options.classLeftNavExpanding);
+            window.setTimeout(function () {
+              _this.element.classList.remove(_this.options.classLeftNavCollapsing);
+              _this.element.classList.add(_this.options.classLeftNavCollapsed);
+              _this.element.dispatchEvent(new CustomEvent(_this.options.eventAfterLeftNavToggled, {
+                bubbles: true,
+                cancelable: true,
+                detail: { collapsed: true }
+              }));
+            }, 250);
+          } else {
+            _this.element.dataset.collapsed = false;
+            _this.element.classList.remove(_this.options.classLeftNavCollapsed);
+            _this.element.classList.add(_this.options.classLeftNavExpanding);
 
-          window.setTimeout(function () {
-            _this.element.classList.remove(_this.options.classLeftNavExpanding);
-          }, 250);
+            window.setTimeout(function () {
+              _this.element.classList.remove(_this.options.classLeftNavExpanding);
+              _this.element.dispatchEvent(new CustomEvent(_this.options.eventAfterLeftNavToggled, {
+                bubbles: true,
+                cancelable: true,
+                detail: { collapsed: false }
+              }));
+            }, 250);
+          }
         }
       };
 
@@ -189,7 +205,10 @@
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
     classLeftNavCollapsing: 'bx--inline-left-nav--collapsing',
     classLeftNavCollapsed: 'bx--inline-left-nav--collapsed',
-    classLeftNavExpanding: 'bx--inline-left-nav--expanding'
+    classLeftNavExpanding: 'bx--inline-left-nav--expanding',
+    // Event
+    eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
+    eventAfterLeftNavToggled: 'left-nav-toggled'
   };
   exports.default = InlineLeftNav;
 });
