@@ -170,6 +170,14 @@ describe('Pagination', () => {
           expect(actualPage).toBe(2);
           expect(pager.state().page).toBe(2);
         });
+        it('should jump to page number if prop page is provided', () => {
+          const pager = mount(
+            <Pagination pageSizes={[5, 10]} totalItems={50} page={3} />
+          );
+          expect(pager.state().page).toBe(3);
+          pager.setProps({ page: 2 });
+          expect(pager.state().page).toBe(2);
+        });
       });
     });
   });
