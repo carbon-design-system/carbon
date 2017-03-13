@@ -69,8 +69,8 @@ class Tab extends ContentSwitcher {
 
   /**
    * Handles arrow keys on tab container.
-   * * Up/Left keys are used to go to previous tab.
-   * * Down/Right keys are used to go to next tab.
+   * * Left keys are used to go to previous tab.
+   * * Right keys are used to go to next tab.
    * @param {Event} event The event triggering this method.
    */
   _handleKeyDown(event) {
@@ -80,11 +80,9 @@ class Tab extends ContentSwitcher {
     }
 
     const direction = {
-      Left: -1,
-      Right: 1,
-      ArrowLeft: -1,
-      ArrowRight: 1,
-    }[event.key || event.keyIdentifier];
+      37: this.constructor.NAVIGATE.BACKWARD,
+      39: this.constructor.NAVIGATE.FORWARD,
+    }[event.which];
 
     if (direction) {
       const buttons = [...this.element.querySelectorAll(this.options.selectorButton)];
@@ -160,6 +158,19 @@ class Tab extends ContentSwitcher {
     eventBeforeSelected: 'tab-beingselected',
     eventAfterSelected: 'tab-selected',
   });
+
+  /**
+   * Enum for navigating backward/forward.
+   * @readonly
+   * @member Tab.NAVIGATE
+   * @type {Object}
+   * @property {number} BACKWARD Navigating backward.
+   * @property {number} FORWARD Navigating forward.
+   */
+  static NAVIGATE = {
+    BACKWARD: -1,
+    FORWARD: 1,
+  };
 }
 
 export default Tab;

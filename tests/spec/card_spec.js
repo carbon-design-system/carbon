@@ -45,34 +45,22 @@ describe('Test card', function () {
       cardNodes[0].focus();
     });
 
-    it('Should focus on the new active card upon right key with old spec', function () {
+    it('Should focus on the new active card upon right key', function () {
       spyFocus = sinon.spy(cardNodes[1], 'focus');
-      cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { keyIdentifier: 'Right' }));
-      expect(spyFocus).to.be.calledOnce;
-    });
-
-    it('Should focus on the new active card upon right key with new spec', function () {
-      spyFocus = sinon.spy(cardNodes[1], 'focus');
-      cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { key: 'ArrowRight' }));
+      cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { which: 39 }));
       expect(spyFocus).to.be.calledOnce;
     });
 
     it('Should handle out of range index', function () {
       cardNodes[1].focus();
       spyFocus = sinon.spy(cardNodes[0], 'focus');
-      cardNodes[1].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { key: 'ArrowRight' }));
+      cardNodes[1].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { which: 39 }));
       expect(spyFocus).to.be.calledOnce;
     });
 
-    it('Should focus on the new active card upon left key with old spec', function () {
+    it('Should focus on the new active card upon left key', function () {
       spyFocus = sinon.spy(cardNodes[1], 'focus');
-      cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { keyIdentifier: 'Left' }));
-      expect(spyFocus).to.be.calledOnce;
-    });
-
-    it('Should focus on the new active card upon left key with new spec', function () {
-      spyFocus = sinon.spy(cardNodes[1], 'focus');
-      cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { key: 'ArrowLeft' }));
+      cardNodes[0].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { which: 37 }));
       expect(spyFocus).to.be.calledOnce;
     });
 

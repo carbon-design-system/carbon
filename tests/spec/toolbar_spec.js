@@ -59,14 +59,14 @@ describe('Test accordion', function () {
 
     it('Should open search on enter or spacebar keydown', function () {
       const event = new CustomEvent('keydown', { bubbles: true });
-      event.keyCode = 32;
+      event.which = 32;
       search.dispatchEvent(event);
       expect(search.classList.contains('bx--toolbar-search--active')).to.be.true;
     });
 
     it('Should close search on esc keydown', function () {
       const event = new CustomEvent('keydown', { bubbles: true });
-      event.keyCode = 27;
+      event.which = 27;
       search.dispatchEvent(event);
       expect(search.classList.contains('bx--toolbar-search--active')).to.be.false;
     });

@@ -149,36 +149,22 @@ describe('Test tabs', function () {
       expect(triggerTextNode.textContent).to.equal(buttonNodes[1].textContent);
     });
 
-    it('Should update active tab upon right key with old spec', function () {
-      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { keyIdentifier: 'Right' }));
-      expect(defaultPrevented).to.be.true;
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
-    });
-
-    it('Should update active tab upon right key with new spec', function () {
-      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
+    it('Should update active tab upon right key', function () {
+      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
       expect(defaultPrevented).to.be.true;
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
       expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should handle out of range index', function () {
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
+      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
+      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
       expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
     });
 
-    it('Should update active tab upon left key with old spec', function () {
-      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { keyIdentifier: 'Left' }));
-      expect(defaultPrevented).to.be.true;
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
-    });
-
-    it('Should update active tab upon left key with new spec', function () {
-      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowLeft' }));
+    it('Should update active tab upon left key', function () {
+      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 37 }));
       expect(defaultPrevented).to.be.true;
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
       expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
@@ -190,7 +176,7 @@ describe('Test tabs', function () {
       link.classList.add('bx--tabs__nav-link');
       buttonNodes[1].appendChild(link);
       try {
-        element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { key: 'ArrowRight' }));
+        element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
         expect(spyFocus).to.be.calledOnce;
       } finally {
         spyFocus.restore();

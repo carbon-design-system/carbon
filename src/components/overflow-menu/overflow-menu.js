@@ -80,8 +80,8 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   }
 
   _handleKeyPress(event) {
-    const key = event.key || event.which;
-    if (key === 'Enter' || key === 13) {
+    const key = event.which;
+    if (key === 13) {
       const isOfSelf = this.element.contains(event.target);
       const shouldBeOpen = isOfSelf && !this.element.classList.contains('bx--overflow-menu--open');
       const state = shouldBeOpen ? 'shown' : 'hidden';

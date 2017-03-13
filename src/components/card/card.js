@@ -24,11 +24,9 @@ class Card extends mixin(createComponent, initComponentBySearch) {
    */
   _cardKeyPress(event) {
     const direction = {
-      Left: -1,
-      Right: 1,
-      ArrowLeft: -1,
-      ArrowRight: 1,
-    }[event.key || event.keyIdentifier];
+      37: this.constructor.NAVIGATE.BACKWARD,
+      39: this.constructor.NAVIGATE.FORWARD,
+    }[event.which];
     const card = eventMatches(event, this.options.selectorCard);
 
     if (direction && card && card === document.activeElement) {
@@ -59,6 +57,19 @@ class Card extends mixin(createComponent, initComponentBySearch) {
   static options = {
     selectorInit: '[data-card-list]',
     selectorCard: '.bx--card',
+  };
+
+  /**
+   * Enum for navigating backward/forward.
+   * @readonly
+   * @member Card.NAVIGATE
+   * @type {Object}
+   * @property {number} BACKWARD Navigating backward.
+   * @property {number} FORWARD Navigating forward.
+   */
+  static NAVIGATE = {
+    BACKWARD: -1,
+    FORWARD: 1,
   };
 }
 

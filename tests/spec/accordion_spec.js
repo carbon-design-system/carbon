@@ -74,21 +74,21 @@ describe('Test accordion', function () {
 
     it('Should not set active state on other keypress', function () {
       const event = new CustomEvent('keypress', { bubbles: true });
-      event.keyCode = 86;
+      event.which = 86;
       listItem.dispatchEvent(event);
       expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
     });
 
     it('Should set active state on enter or spacebar press', function () {
       const event = new CustomEvent('keypress', { bubbles: true });
-      event.keyCode = 32;
+      event.which = 32;
       listItem.dispatchEvent(event);
       expect(listItem.classList.contains('bx--accordion__item--active')).to.be.true;
     });
 
     it('Should remove active state on second enter or spacebar press', function () {
       const event = new CustomEvent('keypress', { bubbles: true });
-      event.keyCode = 32;
+      event.which = 32;
       listItem.dispatchEvent(event);
       expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
     });

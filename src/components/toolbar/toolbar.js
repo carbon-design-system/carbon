@@ -62,11 +62,11 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
     const shouldBeOpen = isOfSelf && !this.element.classList.contains(this.options.classSearchActive);
 
     if (searchInput) {
-      if ((event.keyCode === 13 || event.keyCode === 32) && !shouldBeOpen) {
+      if ((event.which === 13 || event.which === 32) && !shouldBeOpen) {
         searchInput.classList.add(this.options.classSearchActive);
       }
 
-      if (event.keyCode === 27) {
+      if (event.which === 27) {
         searchInput.classList.remove(this.options.classSearchActive);
       }
     }

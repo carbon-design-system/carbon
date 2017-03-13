@@ -32,7 +32,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
    * @param {Event} event The event triggering this method.
    */
   handleKeypress(event) {
-    if (event.keyCode === 13 || event.keyCode === 32) {
+    if (event.which === 13 || event.which === 32) {
       event.target.classList.toggle(this.options.classActive);
     }
   }
