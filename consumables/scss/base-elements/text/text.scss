@@ -13,6 +13,7 @@
 
     &__input {
       @include reset;
+      @include helvetica;
       @include font-size('14');
       display: block;
       width: 100%;
@@ -20,7 +21,7 @@
       min-width: 9.375rem;
       padding: .825rem 0 .825rem 1rem;
       font-weight: 300;
-      margin: .25rem 0 0;
+      margin-top: rem(2px);
       color: $color__white;
       background-color: $color__inputs--bg;
       border: 1px solid transparent;
