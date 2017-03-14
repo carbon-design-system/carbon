@@ -56,4 +56,30 @@ storiesOf('Select', module)
         <SelectItem value="option-2" text="Option 2" />
         <SelectItem value="option-3" text="Option 3" />
       </Select>
+  ))
+  .addWithInfo(
+    'no label',
+    `
+      Select dropdowns display a list below its title when selected. They are used primarily in forms,
+      where a user chooses one option from a list. Once the user selects an item, the dropdown will
+      dissapear and the field will reflect the user's choice. Create SelectItem components for each
+      option in the list. The example below shows a Select component without a label.
+    `,
+    () => (
+      <Select
+        {...selectProps}
+        onChange={action('onChange')} // eslint-disable-line no-console
+        id="select-3"
+        defaultValue="placeholder-item"
+        hideLabel
+      >
+        <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
+        <SelectItemGroup label="Starter">
+          <SelectItem value="option-1" text="Option 1" />
+          <SelectItem value="option-2" text="Option 2" />
+        </SelectItemGroup>
+        <SelectItemGroup label="Advanced">
+          <SelectItem value="option-3" text="Option 3" />
+        </SelectItemGroup>
+      </Select>
   ));

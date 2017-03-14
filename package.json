@@ -100,7 +100,7 @@
     }
   },
   "dependencies": {
-    "@console/bluemix-components": "6.17.0",
+    "@console/bluemix-components": "6.18.1",
     "@console/bluemix-icons": "4.1.1",
     "classnames": "2.2.5",
     "react": "^15.3.2",

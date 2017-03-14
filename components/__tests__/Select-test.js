@@ -52,6 +52,12 @@ describe('Select', () => {
         const matches = wrapper.props().iconDescription === wrapper.find(Icon).props().description;
         expect(matches).toEqual(true);
       });
+
+      it('should have correct class when label is hidden', () => {
+        const icon = wrapper.find(Icon);
+        wrapper.setProps({ hideLabel: true });
+        expect(icon.hasClass('bx--select__arrow--no-label')).toEqual(true);
+      });
     });
 
     describe('select', () => {
