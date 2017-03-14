@@ -64,6 +64,10 @@
     @include light-ui {
       fill: $color__blue-51;
     }
+
+    &--no-label {
+      top: 1rem;
+    }
   }
 
   &__optgroup,
