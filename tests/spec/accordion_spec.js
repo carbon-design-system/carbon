@@ -1,21 +1,6 @@
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import Accordion from '../../src/components/accordion/accordion';
-
-const HTML = `
-<ul data-accordion class="bx--accordion">
-  <li tabindex="0" data-accordion-item class="bx--accordion__item">
-    <div class="bx--accordion__heading">
-      <svg class="bx--accordion__arrow">
-        <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#chevron--right"></use>
-      </svg>
-      <p class="bx--accordion__title">Label</p>
-    </div>
-    <div class="bx--accordion__content">
-      <p>Lorem ipsum dolor sit amet, elit, et dolore magna aliqua. Ut enim ad minim veniam, laboris nisi ut.</p>
-    </div>
-  </li>
-</ul>
-`;
+import HTML from '../../src/components/accordion/accordion.html';
 
 describe('Test accordion', function () {
   describe('Constructor', function () {
@@ -29,6 +14,16 @@ describe('Test accordion', function () {
       expect(() => {
         new Accordion(document.createTextNode(''));
       }).to.throw(Error);
+    });
+
+    it('Should set default options', function () {
+      const instance = new Accordion(document.createElement('div'));
+      expect(instance.options).to.deep.equal({
+        selectorInit: '[data-accordion]',
+        selectorAccordionItem: '.bx--accordion__item',
+        selectorAccordionContent: '.bx--accordion__content',
+        classActive: 'bx--accordion__item--active',
+      });
     });
   });
 
@@ -81,14 +76,14 @@ describe('Test accordion', function () {
 
     it('Should set active state on enter or spacebar press', function () {
       const event = new CustomEvent('keypress', { bubbles: true });
-      event.which = 32;
+      event.which = 13;
       listItem.dispatchEvent(event);
       expect(listItem.classList.contains('bx--accordion__item--active')).to.be.true;
     });
 
     it('Should remove active state on second enter or spacebar press', function () {
       const event = new CustomEvent('keypress', { bubbles: true });
-      event.which = 32;
+      event.which = 13;
       listItem.dispatchEvent(event);
       expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
     });

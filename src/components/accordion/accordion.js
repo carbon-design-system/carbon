@@ -13,16 +13,16 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
     this.element.addEventListener('click', (event) => {
-      const item = eventMatches(event, this.options.accordionItem);
-      if (item && !eventMatches(event, this.options.accordionContent)) {
+      const item = eventMatches(event, this.options.selectorAccordionItem);
+      if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
         item.classList.toggle(this.options.classActive);
       }
     });
 
     this.element.addEventListener('keypress', (event) => {
-      const item = eventMatches(event, this.options.accordionItem);
-      if (item && !eventMatches(event, this.options.accordionContent)) {
-        this.handleKeypress(event);
+      const item = eventMatches(event, this.options.selectorAccordionItem);
+      if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
+        this._handleKeypress(event);
       }
     });
   }
@@ -31,7 +31,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
    * Handles toggling of active state of accordion via keyboard
    * @param {Event} event The event triggering this method.
    */
-  handleKeypress(event) {
+  _handleKeypress(event) {
     if (event.which === 13 || event.which === 32) {
       event.target.classList.toggle(this.options.classActive);
     }
@@ -46,8 +46,8 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
    */
   static options = {
     selectorInit: '[data-accordion]',
-    accordionItem: '.bx--accordion__item',
-    accordionContent: '.bx--accordion__content',
+    selectorAccordionItem: '.bx--accordion__item',
+    selectorAccordionContent: '.bx--accordion__content',
     classActive: 'bx--accordion__item--active',
   };
 
