@@ -83,6 +83,7 @@
     "karma-webpack": "^2.0.0",
     "lolex": "1.4.0",
     "merge-stream": "^1.0.0",
+    "minimatch": "^3.0.0",
     "minimist": "~1.2.0",
     "mocha": "~2.4.4",
     "nodemon": "1.9.1",

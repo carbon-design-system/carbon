@@ -2,6 +2,8 @@
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
+const minimatch = require('minimatch');
+
 const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
     b: 'browsers',
@@ -29,6 +31,14 @@ module.exports = function (config) {
       const files = (!cloptions.files || Array.isArray(cloptions.files) ? cloptions.files : [cloptions.files]) || [
         'src/**/*.html',
       ];
+      const specFiles = files.filter(file => minimatch(file, 'tests/spec/**'));
+      if (specFiles.length > 0) {
+        const explanationArgs = specFiles.map(file => `-f ${file}`).join(' ');
+        // eslint-disable-next-line no-console
+        console.warn('WARNING: The given files contain unit test specs.');
+        // eslint-disable-next-line no-console
+        console.warn(`You may have wanted:\n\tgulp test:unit ${explanationArgs}`);
+      }
       files.push({
         pattern: 'dist/**/*.css',
         watched: true,

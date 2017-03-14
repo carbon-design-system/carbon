@@ -2,6 +2,8 @@
 
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
+const minimatch = require('minimatch');
+
 function ensureArray(as) {
   return !as || Array.isArray(as) ? as : [as];
 }
@@ -27,6 +29,14 @@ module.exports = function (config) {
         'tests/remainders.js', // For generatoring coverage report for untested files
         'tests/spec/**/*.js',
       ]);
+      const htmlFiles = list.filter(file => minimatch(file, 'src/components/**/*.html'));
+      if (htmlFiles.length > 0) {
+        const explanationArgs = htmlFiles.map(file => `-f ${file}`).join(' ');
+        // eslint-disable-next-line no-console
+        console.warn('WARNING: The given files contain component sample HTML.');
+        // eslint-disable-next-line no-console
+        console.warn(`You may have wanted:\n\tgulp test:a11y ${explanationArgs}`);
+      }
       list.unshift('demo/polyfills/index.js');
       return list;
     })(),
