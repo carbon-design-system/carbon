@@ -1,5 +1,3 @@
-## Accordion: Migrating to 7.x
-
 ### HTML
 
 Updating HTML pertains mainly to SVG icon paths. It's recommended to use bluemix-icons locally in your project. 
@@ -16,7 +14,7 @@ For more details on installing and using bluemix-icons, see install and usage gu
 
 ### SCSS
 
-The `_accordion.scss` file is now located in __src/components/accordion__. You'll need to update any `@import` statements for this file to reflect this change.
+The `_accordion.scss` file is now located at __src/components/accordion/_accordion.scss__. You'll need to update any `@import` statements for this file to reflect this change.
 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/accordion/accordion';
