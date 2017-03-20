@@ -22,10 +22,6 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    if (this.element.dataset.dropdown !== 'navigation') {
-      this.element.dataset.dropdown = '';
-    }
-
     /**
      * The handle to release click event listener on document object.
      * @member {Handle}

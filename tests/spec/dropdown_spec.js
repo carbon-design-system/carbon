@@ -22,15 +22,6 @@ describe('Dropdown', function () {
       document.body.appendChild(element);
       expect(element.classList.contains('bx--dropdown--open')).to.be.false;
     });
-
-    it('Should instantiate with data-dropdown attribute', function () {
-      const element = document.createElement('ul');
-      new Dropdown(element);
-      document.body.appendChild(element);
-      expect(element.dataset.dropdown).to.equal('');
-      expect(element.dataset.dropdown).to.not.equal(null);
-      expect(element.dataset.dropdown).to.not.equal(undefined);
-    });
   });
 
   describe('Toggle', function () {
