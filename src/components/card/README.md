@@ -13,7 +13,6 @@ Use the class of `active` to display the status classes above.
 
 ### Javascript
 
-[For details on initializing and getting components, look here]
 
 #### Options
 
@@ -21,5 +20,3 @@ Use the class of `active` to display the status classes above.
 |---------------|-------------------|-----------------------------------------------|
 | selectorInit  | [data-card-list]  | The data attribute to find the accordion      |
 | selectorCard  | .bx--card         | The css class to find the card item component |
-
-### FAQ
