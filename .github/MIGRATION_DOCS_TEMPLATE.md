@@ -12,6 +12,12 @@ The `_breadcrumb.scss` file is now located at __src/components/breadcrumb/_bread
 
 { Other migration details about using new SCSS for a component }
 
+| Old Class              | New Class            | Note    |
+|------------------------|----------------------|---------|
+| bx--class              | bx--new-class        | Changed |
+| bx--text__input        |                      | Removed |
+|                        | bx--new-class        | Added   |
+
 
 ### JavaScript
 
