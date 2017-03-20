@@ -64,6 +64,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
     }[event.which];
     if (isOpen && direction !== undefined) {
       this.navigate(direction);
+      event.preventDefault(); // Prevents up/down keys from scrolling container
     } else {
       this.toggle(event);
     }
@@ -81,7 +82,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
       const actions = {
         add: isOfSelf && event.which === 40 && !isOpen,
         remove: (!isOfSelf || event.which === 27) && isOpen,
-        toggle: isOfSelf && event.which !== 27 && event.which !== 40 && event.target.nodeName !== 'A',
+        toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
       Object.keys(actions).forEach((action) => {
         if (actions[action]) {
@@ -138,7 +139,10 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
 
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
-        this.element.firstElementChild.innerHTML = itemToSelect.innerHTML;
+        const text = this.element.querySelector(this.options.selectorText);
+        if (text) {
+          text.innerHTML = itemToSelect.innerHTML;
+        }
         itemToSelect.classList.add(this.options.classSelected);
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
@@ -186,6 +190,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
    * @member Dropdown.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find selectors.
+   * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
    * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
@@ -196,6 +201,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
    */
   static options = {
     selectorInit: '[data-dropdown]',
+    selectorText: '.bx--dropdown-text',
     selectorItem: '.bx--dropdown-link',
     selectorItemSelected: '.bx--dropdown--selected',
     classSelected: 'bx--dropdown--selected',

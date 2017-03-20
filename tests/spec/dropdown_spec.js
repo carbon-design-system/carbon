@@ -71,6 +71,12 @@ describe('Dropdown', function () {
       expect(element.getAttribute('class')).to.equal('bx--dropdown');
     });
 
+    it('Should close dropdown when clicking on an item', function () {
+      element.classList.add('bx--dropdown--open');
+      itemNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(element.getAttribute('class')).to.equal('bx--dropdown');
+    });
+
     it('Should open dropdown with enter key', function () {
       stubFocus = sinon.stub(element, 'focus');
       element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 13 }));
@@ -156,6 +162,7 @@ describe('Dropdown', function () {
     before(function () {
       element = document.createElement('ul');
       textNode = element.appendChild(document.createElement('li'));
+      textNode.classList.add('bx--dropdown-text');
       textNode.textContent = '0';
 
       const listContainer = element.appendChild(document.createElement('li'));
@@ -198,6 +205,14 @@ describe('Dropdown', function () {
       expect(textNode.textContent).to.equal('0');
     });
 
+    it('Should not cause an error if text does not exist', function () {
+      textNode.parentNode.removeChild(textNode);
+      expect(() => {
+        itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      }, 'Error').not.to.throw(Error);
+      expect(textNode.textContent, 'Text').to.equal('0');
+    });
+
     it('Should provide a way to cancel switching item', function () {
       events.on(element, 'dropdown-beingselected', (e) => {
         expect(e.detail.item).to.equal(itemNodes[1]);
@@ -213,6 +228,10 @@ describe('Dropdown', function () {
       itemNodes[0].classList.add('bx--dropdown--selected');
       itemNodes[1].classList.remove('bx--dropdown--selected');
       textNode.textContent = '0';
+      if (!textNode.parentNode) {
+        element.appendChild(textNode);
+      }
+      element.setAttribute('data-dropdown-type', '');
       events.reset();
     });
 
@@ -263,7 +282,9 @@ describe('Dropdown', function () {
 
     it('Should select the first one for forward navigation if there is no selection', function () {
       stubsFocus.push(...itemNodes.map(item => sinon.stub(item, 'focus')));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 40 }));
+      const defaultPrevented
+        = !element.dispatchEvent(Object.assign(new CustomEvent('keydown', { cancelable: true }), { which: 40 }));
+      expect(defaultPrevented, 'Canceling event').to.be.true;
       expect(stubsFocus[0], 'Focus on 1st item').to.have.been.calledOnce;
       expect(stubsFocus[1], 'Focus on 2nd item').not.to.have.been.called;
       expect(stubsFocus[2], 'Focus on 3rd item').not.to.have.been.called;
@@ -280,7 +301,9 @@ describe('Dropdown', function () {
     it('Should start with selection for forward navigation', function () {
       itemNodes[0].classList.add('bx--dropdown--selected');
       stubsFocus.push(...itemNodes.map(item => sinon.stub(item, 'focus')));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 40 }));
+      const defaultPrevented
+        = !element.dispatchEvent(Object.assign(new CustomEvent('keydown', { cancelable: true }), { which: 40 }));
+      expect(defaultPrevented, 'Canceling event').to.be.true;
       expect(stubsFocus[0], 'Focus on 1st item').not.to.have.been.called;
       expect(stubsFocus[1], 'Focus on 2nd item').to.have.been.calledOnce;
       expect(stubsFocus[2], 'Focus on 3rd item').not.to.have.been.called;
@@ -289,7 +312,9 @@ describe('Dropdown', function () {
     it('Should start with selection for backward navigation', function () {
       itemNodes[2].classList.add('bx--dropdown--selected');
       stubsFocus.push(...itemNodes.map(item => sinon.stub(item, 'focus')));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 38 }));
+      const defaultPrevented
+        = !element.dispatchEvent(Object.assign(new CustomEvent('keydown', { cancelable: true }), { which: 38 }));
+      expect(defaultPrevented, 'Canceling event').to.be.true;
       expect(stubsFocus[0], 'Focus on 1st item').not.to.have.been.called;
       expect(stubsFocus[1], 'Focus on 2nd item').to.have.been.calledOnce;
       expect(stubsFocus[2], 'Focus on 3rd item').not.to.have.been.called;
@@ -298,7 +323,9 @@ describe('Dropdown', function () {
     it('Should handle overflow for forward navigation', function () {
       itemNodes[2].classList.add('bx--dropdown--selected');
       stubsFocus.push(...itemNodes.map(item => sinon.stub(item, 'focus')));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 40 }));
+      const defaultPrevented
+        = !element.dispatchEvent(Object.assign(new CustomEvent('keydown', { cancelable: true }), { which: 40 }));
+      expect(defaultPrevented, 'Canceling event').to.be.true;
       expect(stubsFocus[0], 'Focus on 1st item').to.have.been.calledOnce;
       expect(stubsFocus[1], 'Focus on 2nd item').not.to.have.been.called;
       expect(stubsFocus[2], 'Focus on 3rd item').not.to.have.been.called;
@@ -317,7 +344,9 @@ describe('Dropdown', function () {
       stubGetCurrentNavigation = sinon.stub(dropdown, 'getCurrentNavigation', function () { return itemNodes[0]; });
       itemNodes[2].classList.add('bx--dropdown--selected');
       stubsFocus.push(...itemNodes.map(item => sinon.stub(item, 'focus')));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 40 }));
+      const defaultPrevented
+        = !element.dispatchEvent(Object.assign(new CustomEvent('keydown', { cancelable: true }), { which: 40 }));
+      expect(defaultPrevented, 'Canceling event').to.be.true;
       expect(stubsFocus[0], 'Focus on 1st item').not.to.have.been.called;
       expect(stubsFocus[1], 'Focus on 2nd item').to.have.been.calledOnce;
       expect(stubsFocus[2], 'Focus on 3rd item').not.to.have.been.called;
@@ -337,7 +366,9 @@ describe('Dropdown', function () {
       stubGetCurrentNavigation = sinon.stub(dropdown, 'getCurrentNavigation', function () { return itemNodes[0]; });
       itemNodes[1].classList.add('bx--dropdown--selected');
       stubsFocus.push(...itemNodes.map(item => sinon.stub(item, 'focus')));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 40 }));
+      const defaultPrevented
+        = !element.dispatchEvent(Object.assign(new CustomEvent('keydown', { cancelable: true }), { which: 40 }));
+      expect(defaultPrevented, 'Canceling event').to.be.true;
       expect(stubsFocus[0], 'Focus on 1st item').not.to.have.been.called;
       expect(stubsFocus[1], 'Focus on 2nd item').not.to.have.been.called;
       expect(stubsFocus[2], 'Focus on 3rd item').to.have.been.calledOnce;
@@ -346,7 +377,9 @@ describe('Dropdown', function () {
     it('Should not navigate unless dropdown is open', function () {
       element.classList.remove('bx--dropdown--open');
       stubsFocus.push(...itemNodes.map(item => sinon.stub(item, 'focus')));
-      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 40 }));
+      const defaultPrevented
+        = !element.dispatchEvent(Object.assign(new CustomEvent('keydown', { cancelable: true }), { which: 40 }));
+      expect(defaultPrevented, 'Canceling event').not.to.be.true;
       expect(stubsFocus[0], 'Focus on 1st item').not.to.have.been.called;
       expect(stubsFocus[1], 'Focus on 2nd item').not.to.have.been.called;
       expect(stubsFocus[2], 'Focus on 3rd item').not.to.have.been.called;
