@@ -15,6 +15,6 @@ $transition-time: 300ms;
   z-index: z('header');
 
   &[data-header-active='true'] {
-    @include layer('global-header');
+    @include layer('sticky-nav');
   }
 }

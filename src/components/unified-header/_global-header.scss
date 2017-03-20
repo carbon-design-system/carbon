@@ -3,7 +3,7 @@
 @include exports('global-header') {
 
   .bx--global-header {
-    @include layer('global-header');
+    @include layer('sticky-nav');
     @include helvetica;
     width: 100%;
     position: fixed;
@@ -63,7 +63,7 @@
   .bx--global-header .bx--logo__image {
     cursor: pointer;
     position: relative;
-    margin-right: 1.125rem;    
+    margin-right: 1.125rem;
   }
 
   .bx--global-header .bx--logo__text {
@@ -76,7 +76,7 @@
 
     &--bold {
       font-weight: 700;
-    }  
+    }
   }
 
   .bx--global-header__left-container {
