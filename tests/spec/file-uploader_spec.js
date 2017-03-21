@@ -116,7 +116,7 @@ describe('File Uploader', function () {
       document.body.appendChild(div);
       const closeButtonElement = document.querySelector('[width="16"]');
 
-      expect(closeButtonElement.classList.contains('bx--file-close')).to.be.true;
+      expect(closeButtonElement.getAttribute('class').trim().split(/\s+/).indexOf('bx--file-close') >= 0).to.be.true;
 
       document.body.removeChild(div);
     });
@@ -128,7 +128,7 @@ describe('File Uploader', function () {
       document.body.appendChild(div);
       const closeButtonElement = document.querySelector('[width="16"]');
 
-      expect(closeButtonElement.classList.contains('bx--file-complete')).to.be.true;
+      expect(closeButtonElement.getAttribute('class').trim().split(/\s+/).indexOf('bx--file-complete') >= 0).to.be.true;
 
       document.body.removeChild(div);
     });
