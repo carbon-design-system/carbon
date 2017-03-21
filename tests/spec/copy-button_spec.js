@@ -31,6 +31,7 @@ describe('Test Copy Button', function () {
     let element;
     let feedbackTooltip;
     let copyBtn;
+    let clock;
 
     before(function () {
       container = document.createElement('div');
@@ -39,6 +40,10 @@ describe('Test Copy Button', function () {
       element = document.querySelector('[data-copy-btn]');
       feedbackTooltip = document.querySelector('[data-feedback]');
       copyBtn = new CopyButton(element);
+    });
+
+    beforeEach(function () {
+      clock = sinon.useFakeTimers();
     });
 
     it('Should not show the feedback tooltip before click', function () {
@@ -53,9 +58,15 @@ describe('Test Copy Button', function () {
     it('Should hide the feedback tooltip after specified timeout value', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
-      setTimeout(() => {
-        expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
-      }, 2000);
+      clock.tick(2000);
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
+    });
+
+    afterEach(function () {
+      if (clock) {
+        clock.restore();
+        clock = null;
+      }
     });
 
     after(function () {
