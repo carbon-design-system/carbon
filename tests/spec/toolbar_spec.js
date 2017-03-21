@@ -77,4 +77,48 @@ describe('Test accordion', function () {
       }
     });
   });
+
+  describe('Exclusive search box', function () {
+    let container;
+    const toolbars = [];
+
+    before(function () {
+      container = document.createElement('div');
+      container.innerHTML = ToolbarHTML + ToolbarHTML;
+      document.body.appendChild(container);
+      toolbars.push(...[...container.querySelectorAll('[data-toolbar]')].map(elem => new Toolbar(elem)));
+    });
+
+    beforeEach(function () {
+      toolbars.forEach((toolbar) => {
+        toolbar.element.querySelector(toolbar.options.selectorSearch).classList.remove(toolbar.classSearchActive);
+      });
+    });
+
+    it('Should make the search box exclusive upon clicking on one of the search boxes', function () {
+      const searches = toolbars.map(toolbar => toolbar.element.querySelector(toolbar.options.selectorSearch));
+      searches[0].classList.add(toolbars[0].classSearchActive);
+      searches[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(searches[0].classList.contains('bx--toolbar-search--active')).to.be.false;
+      expect(searches[1].classList.contains('bx--toolbar-search--active')).to.be.true;
+    });
+
+    it('Should make the search box exclusive upon hitting space bar on one of the search boxes', function () {
+      const searches = toolbars.map(toolbar => toolbar.element.querySelector(toolbar.options.selectorSearch));
+      searches[0].classList.add(toolbars[0].classSearchActive);
+      searches[1].dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { which: 32 }));
+      expect(searches[0].classList.contains('bx--toolbar-search--active')).to.be.false;
+      expect(searches[1].classList.contains('bx--toolbar-search--active')).to.be.true;
+    });
+
+    after(function () {
+      for (let toolbar = toolbars.pop(); toolbar; toolbar = toolbars.pop()) {
+        toolbar.release();
+      }
+      if (document.body.contains(container)) {
+        document.body.removeChild(container);
+        container = null;
+      }
+    });
+  });
 });

@@ -106,7 +106,10 @@ class Tab extends ContentSwitcher {
    * Shows/hides the drop down menu used in narrow mode.
    */
   _updateMenuState() {
-    this.element.querySelector(this.options.selectorMenu).classList.toggle(this.options.classHidden);
+    const menu = this.element.querySelector(this.options.selectorMenu);
+    if (menu) {
+      menu.classList.toggle(this.options.classHidden);
+    }
   }
 
   /**
@@ -114,7 +117,10 @@ class Tab extends ContentSwitcher {
    * @param {HTMLElement} target The newly selected tab item.
    */
   _updateTriggerText(target) {
-    this.element.querySelector(this.options.selectorTriggerText).textContent = target.textContent;
+    const triggerText = this.element.querySelector(this.options.selectorTriggerText);
+    if (triggerText) {
+      triggerText.textContent = target.textContent;
+    }
   }
 
   /**
