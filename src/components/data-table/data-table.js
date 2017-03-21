@@ -162,7 +162,6 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
       }
 
       this.zebraStripe(newParentRows);
-      this.initOverflowMenus(diffParentRows);
     } else {
       this.zebraStripe(newParentRows);
 
@@ -170,8 +169,6 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
         this.initExpandableRows(newExpandableRows);
         this.expandableRows = newExpandableRows;
       }
-
-      this.initOverflowMenus(newParentRows);
     }
 
     this.expandCells = newExpandCells;
