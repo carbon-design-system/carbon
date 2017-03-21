@@ -1,4 +1,3 @@
-import { delay } from 'bluebird';
 import '../utils/es6-weak-map-global'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import OverflowMenu from '../../src/components/overflow-menu/overflow-menu';
@@ -65,7 +64,7 @@ describe('Test Overflow menu', function () {
       menu = new OverflowMenu(element);
     });
 
-    it('Should provide a way to cancel showing overflow menu', async function () {
+    it('Should provide a way to cancel showing overflow menu', function () {
       const spyOverflowEvent = sinon.spy();
       events.on(element.ownerDocument.body, 'overflow-menu-beingshown', (e) => {
         e.preventDefault();
@@ -76,11 +75,10 @@ describe('Test Overflow menu', function () {
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.false;
     });
 
-    it('Should emit an event after showing', async function () {
+    it('Should emit an event after showing', function () {
       const spyOverflowEvent = sinon.spy();
       events.on(document, 'overflow-menu-shown', spyOverflowEvent);
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      await delay(200);
       expect(spyOverflowEvent).to.have.been.called;
     });
 
@@ -96,13 +94,11 @@ describe('Test Overflow menu', function () {
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.true;
     });
 
-    it('Should emit an event after hiding', async function () {
+    it('Should emit an event after hiding', function () {
       const spyOverflowEvent = sinon.spy();
       events.on(document, 'overflow-menu-hidden', spyOverflowEvent);
-
       element.classList.add('bx--overflow-menu--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      await delay(200);
       expect(spyOverflowEvent).to.have.been.called;
     });
 

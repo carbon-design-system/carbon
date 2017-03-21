@@ -1,0 +1,134 @@
+//-----------------------------
+// Modals
+//-----------------------------
+
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+
+@import '../button/button';
+
+@include exports('modal') {
+  .bx--modal {
+    @include reset;
+    @include helvetica;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: z('hidden');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: '';
+    opacity: 0;
+    background-color: rgba($ui-03, .5);
+    transition: opacity 200ms,
+                z-index 0s 200ms,
+                visibility 0s 200ms;
+    visibility: hidden;
+
+    &.is-visible {
+      z-index: z('modal');
+      opacity: 1;
+      transition: opacity 200ms;
+      visibility: visible;
+    }
+  }
+
+  .bx--modal-container {
+    @include reset;
+    @include layer('pop-out');
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $ui-01;
+    border-top: $brand-01 4px solid;
+    min-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    padding: rem(32px) 3% 0rem 3%;
+
+    @media (min-width: 600px) {
+      height: auto;
+      min-width: 500px;
+      max-width: 75%;
+      max-height: 90%;
+      padding: rem(44px) rem(48px) 0 rem(48px);
+    }
+
+    @media (min-width: 1024px) {
+      max-width: 50%;
+      max-height: 80%;
+    }
+  }
+
+  .bx--modal-header {
+    margin-bottom: rem(24px);
+  }
+
+  .bx--modal-header__label {
+    @include reset;
+    @include font-size('12');
+    color: $text-01;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: rem(8px);
+  }
+
+  .bx--modal-header__heading {
+    @include reset;
+    @include font-size('26');
+    font-weight: 300;
+    color: $text-02;
+  }
+
+  .bx--modal-content {
+    margin-bottom: rem(48px);
+    overflow-y: auto;
+
+    > * {
+      @include reset;
+    }
+  }
+
+  .bx--modal-footer {
+    margin-top: auto;
+    text-align: right;
+    background-color: $ui-03;
+    margin-left: rem(-24px);
+    margin-right: rem(-24px);
+    padding: rem(24px) rem(24px);
+
+    @media (min-width: 600px) {
+      margin-left: rem(-48px);
+      margin-right: rem(-48px);
+      padding: rem(24px) rem(48px);
+    }
+  }
+
+  .bx--modal-close {
+    position: absolute;
+    top: rem(16px);
+    right: rem(16px);
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+
+  .bx--modal-close__icon {
+    transition: 200ms;
+    fill: $ui-05;
+    width: rem(12px);
+    height: rem(12px);
+  }
+}
+

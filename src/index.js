@@ -13,7 +13,7 @@ import FabButton from './components/fab/fab';
 import ContentSwitcher from './components/content-switcher/content-switcher';
 import Tab from './components/tabs/tabs';
 import OverflowMenu from './components/overflow-menu/overflow-menu';
-import Modal from './components/modals/modals';
+import Modal from './components/modal/modal';
 import Loading from './components/loading/loading';
 import Dropdown from './components/dropdown/dropdown';
 import Card from './components/card/card';

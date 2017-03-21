@@ -30,7 +30,7 @@ export default function (ToMix) {
           const launcher = eventMatches(event, `[${effectiveOptions.attribInitTarget}]`);
 
           if (launcher) {
-            event.delegateTarget = launcher; // eslint-disable-line 
+            event.delegateTarget = launcher; // eslint-disable-line
             const elements
               = [...launcher.ownerDocument.querySelectorAll(launcher.getAttribute(effectiveOptions.attribInitTarget))];
             if (elements.length > 1) {
