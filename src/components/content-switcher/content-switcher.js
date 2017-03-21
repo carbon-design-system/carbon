@@ -84,7 +84,8 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * If the selected button has `data-target` attribute, DOM elements it points to as a CSS selector will be shown.
    * DOM elements associated with unselected buttons in the same way will be hidden.
    * @param {HTMLElement} item The button to be selected.
-   * @param {ChangeState~callback} callback The callback called once selection is finished or is canceled.
+   * @param {ChangeState~callback} callback The callback is called once selection is finished
+   * or is canceled. Will only invoke callback if it's passed in.
    */
   setActive(item, callback) {
     this.changeState({
@@ -92,8 +93,10 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
       item,
     }, (error) => {
       if (error) {
-        callback(Object.assign(error, { item }));
-      } else {
+        if (callback) {
+          callback(Object.assign(error, { item }));
+        }
+      } else if (callback) {
         callback(null, item);
       }
     });
