@@ -73,9 +73,8 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
    * @property {string} selectorInit The CSS selector to find detail page headers.
    */
   static options = {
-    scroll: 'bx--detail-page-header--scroll',
-    scrollUp: 'bx--detail-page-header--scroll-up',
     selectorInit: '[data-detail-page-header]',
+    scroll: 'bx--detail-page-header--scroll',
   };
 }
 

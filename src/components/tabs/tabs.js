@@ -28,7 +28,7 @@ class Tab extends ContentSwitcher {
 
     const selected = this.element.querySelector(this.options.selectorButtonSelected);
     if (selected) {
-      this.updateTriggerText(selected);
+      this._updateTriggerText(selected);
     }
   }
 
@@ -42,7 +42,7 @@ class Tab extends ContentSwitcher {
   _changeState(detail, callback) {
     super._changeState(detail, (error, ...data) => {
       if (!error) {
-        this.updateTriggerText(detail.item);
+        this._updateTriggerText(detail.item);
       }
       callback(error, ...data);
     });
@@ -60,10 +60,10 @@ class Tab extends ContentSwitcher {
     const trigger = eventMatches(event, this.options.selectorTrigger);
     if (button) {
       super._handleClick(event);
-      this.updateMenuState();
+      this._updateMenuState();
     }
     if (trigger) {
-      this.updateMenuState();
+      this._updateMenuState();
     }
   }
 
@@ -105,7 +105,7 @@ class Tab extends ContentSwitcher {
   /**
    * Shows/hides the drop down menu used in narrow mode.
    */
-  updateMenuState() {
+  _updateMenuState() {
     this.element.querySelector(this.options.selectorMenu).classList.toggle(this.options.classHidden);
   }
 
@@ -113,7 +113,7 @@ class Tab extends ContentSwitcher {
    * Updates the text indicating the currently selected tab item.
    * @param {HTMLElement} target The newly selected tab item.
    */
-  updateTriggerText(target) {
+  _updateTriggerText(target) {
     this.element.querySelector(this.options.selectorTriggerText).textContent = target.textContent;
   }
 

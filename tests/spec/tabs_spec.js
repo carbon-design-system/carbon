@@ -4,7 +4,7 @@ import Tab from '../../src/components/tabs/tabs';
 describe('Test tabs', function () {
   describe('Constructor', function () {
     it('Should set default options', function () {
-      const stubUpdateTriggerText = sinon.stub(Tab.prototype, 'updateTriggerText');
+      const stubUpdateTriggerText = sinon.stub(Tab.prototype, '_updateTriggerText');
       try {
         const tab = new Tab(document.createElement('div'));
         expect(tab.options).to.deep.equal({
@@ -64,7 +64,7 @@ describe('Test tabs', function () {
     let menuNode;
 
     before(function () {
-      stubUpdateTriggerText = sinon.stub(Tab.prototype, 'updateTriggerText');
+      stubUpdateTriggerText = sinon.stub(Tab.prototype, '_updateTriggerText');
 
       triggerNode = document.createElement('div');
       triggerNode.classList.add('bx--tabs-trigger');
@@ -109,7 +109,7 @@ describe('Test tabs', function () {
     let triggerTextNode;
 
     before(function () {
-      stubUpdateMenuState = sinon.stub(Tab.prototype, 'updateMenuState');
+      stubUpdateMenuState = sinon.stub(Tab.prototype, '_updateMenuState');
 
       triggerTextNode = document.createElement('div');
       triggerTextNode.classList.add('bx--tabs-trigger-text');

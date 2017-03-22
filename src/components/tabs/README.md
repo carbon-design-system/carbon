@@ -1,20 +1,13 @@
-### CSS Modifiers
+### SCSS
 
-| Name                          | Description                                                 |
-|-------------------------------|-------------------------------------------------------------|
+#### Modifiers
+
+| Name                          | Description                                                   | 
+|-------------------------------|---------------------------------------------------------------|
 | `.bx--tabs__nav--hidden`        | Applies specific styles to hide the narrow tab menu options |
 | `.bx--tabs__nav-item--selected` | Applies specific styles to the currently selected tab item  |
 
 ### Javascript
-
-[For details on initializing and getting components, look here]
-
-#### Public Methods
-
-| Name                | Params          | Description                                                               |
-|---------------------|-----------------|---------------------------------------------------------------------------|
-| `updateMenuState`   |                 | Toggles the dropdown menu used in narrow mode                             |
-| `updateTriggerText` | target: `Object | Updates the dropdown menu text indicating the currently selected tab item |
 
 #### Options
 
@@ -34,7 +27,7 @@
 
 #### Events
 
-| Event Name             | Description                                            |
-|------------------------|--------------------------------------------------------|
+| Event Name          | Description                                                                                                     |
+|---------------------|-----------------------------------------------------------------------------------------------------------------|
 | `tab-beingselected` | The name of the custom event fired before a tab is selected. Cancellation of this event stops selection of tab. |
-| `tab-selected`      | The name of the custom event fired after a tab is selected  |
+| `tab-selected`      | The name of the custom event fired after a tab is selected                                                      |
