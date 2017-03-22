@@ -12,4 +12,4 @@ The `_checkbox.scss` file is now located in __src/components/checkbox__. You'll 
 ```
 
 Almost all checkbox classes have been changed to use less BEM underscore syntax.
-To use the newest checkbox styles, it might be best to copy and paste the latest checkbox HTML provided by the design-system.
+To use the newest checkbox styles, it will be best to copy and paste the latest checkbox HTML provided by the design-system.

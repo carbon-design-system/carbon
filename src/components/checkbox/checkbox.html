@@ -1,25 +1,28 @@
-<!-- input + label -->
-<div class="bx--form-item">
-  <input id="bx--checkbox" class="bx--checkbox" type="checkbox" value="green" name="checkbox">
-  <label for="bx--checkbox" class="bx--checkbox-label">
-    <span class="bx--checkbox-appearance">
-      <svg class="bx--checkbox-checkmark">
-        <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#checkmark"></use>
-      </svg>
-    </span>
-    Checkbox (input + label)
-  </label>
-</div>
+<fieldset class="bx--fieldset">
+  <legend class="bx--label">Favorite Colors</legend>
+  <!-- input + label -->
+  <div class="bx--form-item bx--checkbox-wrapper">
+    <input id="bx--checkbox-red" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
+    <label for="bx--checkbox-red" class="bx--checkbox-label">
+      <span class="bx--checkbox-appearance">
+        <svg class="bx--checkbox-checkmark">
+          <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#checkmark"></use>
+        </svg>
+      </span>
+      Red
+    </label>
+  </div>
+  <!-- label > input -->
+  <div class="bx--form-item bx--checkbox-wrapper">
+    <label for="bx--checkbox-blue" class="bx--checkbox-label">
+      <input id="bx--checkbox-blue" class="bx--checkbox" type="checkbox" value="yellow" name="checkbox">
+      <span class="bx--checkbox-appearance">
+        <svg class="bx--checkbox-checkmark">
+          <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#checkmark"></use>
+        </svg>
+      </span>
+      <span class="bx--checkbox-label-text">Blue</span>
+    </label>
+  </div>
+</fieldset>
 
-<!-- label > input -->
-<div class="bx--form-item">
-  <label class="bx--checkbox-label">
-    <input class="bx--checkbox" type="checkbox" value="yellow" name="checkbox">
-    <span class="bx--checkbox-appearance">
-      <svg class="bx--checkbox-checkmark">
-        <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#checkmark"></use>
-      </svg>
-    </span>
-    <span class="bx--checkbox-label-text">Checkbox (label > input)</span>
-  </label>
-</div>

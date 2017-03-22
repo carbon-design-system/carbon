@@ -9,6 +9,11 @@
 @import '../../globals/scss/import-once';
 
 @include exports('checkbox') {
+
+  .bx--checkbox-wrapper {
+    margin-top: 1rem;
+  }
+
   .bx--checkbox {
     @include hidden;
   }

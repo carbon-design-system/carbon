@@ -45,3 +45,14 @@ With `label` wrapping `input`
   </label>
 </div>
 ```
+
+#### Fieldset and Legend
+
+As a best practice, groups of checkboxes should make use of `<fieldset>` and `<legend>` (see Form README for details).
+This is especially true for forms submitting data.
+
+But, there are exceptions to the rule. For example, Data Tables make use of checkboxes as a way to select rows of data. 
+Checkboxes in this context would represent an entire row of data in its associated table row.
+
+
+

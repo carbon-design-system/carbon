@@ -75,6 +75,7 @@ Or you can change the `<fieldset>` element to be a `<section>` if that's what yo
 #### Fieldset and Legend
 
 It's best practice to wrap any groups of checkboxes or radio inputs with `<fieldset>` and use `<legend>` to label the group.
+This best practice applies mainly to composing forms where users are submitting data.
 
 Here's an example from [MDN](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/How_to_structure_an_HTML_form) that explains why this is a best practice.
 

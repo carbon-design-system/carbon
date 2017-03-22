@@ -26,5 +26,6 @@ Quite a few class names have changed. See table below.
 | bx--form__row-item     | bx--form-item        | Changed |
 | bx--form__label        | bx--label            | Changed |
 | bx--form__requirements | bx--form-requirement | Changed |
-| bx--form__row          | N/A                  |	Removed |
-| bx--form__row--column  | N/A                  |	Removed |
+| bx--form__row          | N/A                  | Removed |
+| bx--form__row--column  | N/A                  | Removed |
+|                        | bx--fieldset         | Added   |

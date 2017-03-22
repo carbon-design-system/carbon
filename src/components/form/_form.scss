@@ -4,6 +4,10 @@
 @import '../../globals/scss/import-once';
 
 @include exports('form') {
+  .bx--fieldset {
+    @include reset;
+  }
+
   .bx--form-item {
     @include helvetica;
     flex: 1;
