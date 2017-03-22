@@ -6,6 +6,18 @@ import HTML from '../../src/components/number-input/number-input.html';
 
 describe('Test Number Input', function () {
   describe('Constructor', function () {
+    let element;
+    let instance;
+    let container;
+
+    before(function () {
+      container = document.createElement('div');
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
+      element = document.querySelector('[data-numberinput]');
+      instance = new NumberInput(element);
+    });
+
     it('Should throw if root element is not given', function () {
       expect(() => {
         new NumberInput();
@@ -16,6 +28,54 @@ describe('Test Number Input', function () {
       expect(() => {
         new NumberInput(document.createTextNode(''));
       }).to.throw(Error);
+    });
+
+    it('should set default options', function () {
+      expect(instance.options).to.deep.equal({
+        selectorInit: '[data-numberinput]',
+      });
+    });
+
+    after(function () {
+      document.body.removeChild(container);
+      instance.release();
+    });
+  });
+
+  describe('_handleClick', function () {
+    let element;
+    let instance;
+    let container;
+
+    beforeEach(function () {
+      container = document.createElement('div');
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
+      element = document.querySelector('[data-numberinput]');
+      instance = new NumberInput(element);
+    });
+
+    it('Should be called on click', function () {
+      const spy = sinon.spy(instance, '_handleClick');
+      const event = new CustomEvent('click', { bubbles: true });
+      const clickTarget = element.querySelector('.up-icon');
+      clickTarget.dispatchEvent(event);
+      expect(spy).to.have.been.called;
+      spy.restore();
+    });
+
+    it('Should emit a change event', function () {
+      const spyOnChange = sinon.spy();
+      document.body.addEventListener('change', spyOnChange);
+      const event = new CustomEvent('click', { bubbles: true });
+      const clickTarget = element.querySelector('.up-icon');
+      clickTarget.dispatchEvent(event);
+      expect(spyOnChange).to.have.been.called;
+    });
+
+    afterEach(function () {
+      document.body.removeChild(container);
+      instance.release();
     });
   });
 
@@ -69,9 +129,12 @@ describe('Test Number Input', function () {
 
   describe('Managing instances', function () {
     let element;
+    let container;
 
     before(function () {
-      document.body.innerHTML = HTML;
+      container = document.createElement('div');
+      container.innerHTML = HTML;
+      document.body.appendChild(container);
       element = document.querySelector('[data-numberinput]');
     });
 
@@ -107,7 +170,7 @@ describe('Test Number Input', function () {
     });
 
     after(function () {
-      document.body.removeChild(element);
+      document.body.removeChild(container);
     });
   });
 });

@@ -1,31 +1,31 @@
 #### Javascript
 
-[For details on initializing and getting components, look here]
-
 ##### Public Methods
 
-| Name         | Params | Description                                                                                                                         |
-|--------------|------------|--------|-----------------------------------------------------------------------------------------------------------------------------|
+| Name       | Params                                 | Description                                                                                                                                                                                                                                                       |
+|------------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `setState` | `state`: String, `selectIndex`: number | After files are added, call this method to change `state` of the filenames (`'upload'`, `'complete'`, `'edit'`). State is changed on all filenames when `selectIndex` is `undefined`. Give a `selectIndex` to select the index of the filename you want to change |
 
 ##### Options
 
-| Option            | Default Selector        | Description                                           |
-|-------------------|-------------------------|-------------------------------------------------------|
-| `selectorInit`      | `[data-file]` | Element for initializing instance                     |
-| `selectorInput`      | `[input[type="file"].bx--file-input]` | Input element                  |
-| `selectorContainer` | `[data-file-container]`  | Element for injecting HTML for upload and edit states |
-| `selectorCloseButton` | `.bx--file-close`  | Close button for removing filename nodes |
+| Option                | Default Selector                      | Description                                           |
+|-----------------------|---------------------------------------|-------------------------------------------------------|
+| `selectorInit`        | `[data-file]`                         | Element for initializing instance                     |
+| `selectorInput`       | `[input[type="file"].bx--file-input]` | Input element                                         |
+| `selectorContainer`   | `[data-file-container]`               | Element for injecting HTML for upload and edit states |
+| `selectorCloseButton` | `.bx--file-close`                     | Close button for removing filename nodes              |
 
 ##### Events
 
-| Event Name | Description                                                     |
-|------------|-----------------------------------------------------------------|
-| `change`     | When files are added to File Uploader, a change event is fired. This also triggers custom events; see `eventBeforeDisplayFilesFileuploader` and `eventAfterDisplayFilesFileuploader` |
-| `eventBeforeDeleteFilenameFileuploader`     | Triggered before clicking on close button(s) inside filename node(s).|
-| `eventAfterDeleteFilenameFileuploader`     | Triggered after clicking on close button(s) inside filename node(s).|
+| Event Name                              | Description                                                                                                                                                                          |
+|-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `change`                                | When files are added to File Uploader, a change event is fired. This also triggers custom events; see `eventBeforeDisplayFilesFileuploader` and `eventAfterDisplayFilesFileuploader` |
+| `eventBeforeDeleteFilenameFileuploader` | Triggered before clicking on close button(s) inside filename node(s).                                                                                                                |
+| `eventAfterDeleteFilenameFileuploader`  | Triggered after clicking on close button(s) inside filename node(s).                                                                                                                 |
 
-#### HTML 
+### FAQ 
+
+#### Using and understanding File Uploader
 
 When files are added to File Uploader, a `change` event is fired.
 The `change` event triggers a private method to inject HTML into the `selectorContainer` element displaying all added filenames.
@@ -35,11 +35,9 @@ The `change` event triggers a private method to inject HTML into the `selectorCo
 Trigger additional states using `setState()` public method. 
 Additional states are **edit**, **complete** and **upload**.
 
-**Edit**: injects close icons into each filename state container. A `click` event listener is also added to remove the filename when close button is clicked.
+**Edit** injects close icons into each filename state container. A `click` event listener is also added to remove the filename when close button is clicked.
 
 ![file-uploader-flow-edit](https://media.github.ibm.com/user/76/files/f2abbdcc-ec52-11e6-938c-535458ffee6d)
-
-**CSS**:
 
 ```scss
 .bx--file__state-container .bx--file-close {
@@ -50,21 +48,18 @@ Additional states are **edit**, **complete** and **upload**.
 }
 ```
 
-**Upload**: injects Loading components into each filename state container.
+**Upload** injects Loading components into each filename state container.
 
-Developers using File Uploader will be able to use JavaScript to inject a Loading component when selected files are _actually_ being uploaded. It looks like this:
+Developers using File Uploader will be able to use JavaScript to inject a Loading component when selected files are _actually_ being uploaded. 
+Users can select a __single__ file or __multiple__ files.
+By default, any file type is accepted.
+It's up to the developer and their design team to specify and implement validations for which file types are acceptable.
 
 ![file-uploader-flow-upload](https://media.github.ibm.com/user/76/files/ae239d28-ec52-11e6-8aff-03cd541a1003)
 
-- Users can select a __single__ file or __multiple__ files
-- By default, any file type is accepted
-  - It's up to the developer and their design team to specify and implement validations for which file types are acceptable.
-
-**Complete**: injects checkmark icons into each filename state container.
+**Complete** injects checkmark icons into each filename state container.
 
 ![complete](https://media.github.ibm.com/user/76/files/cf833552-000a-11e7-953c-89152f30046b)
-
-**CSS**:
 
 ```css
 .bx--loading {
@@ -78,9 +73,7 @@ Developers using File Uploader will be able to use JavaScript to inject a Loadin
 }
 ```
 
-### FAQ
-
-__WCAG AA Color Accessibility__
+#### WCAG AA Color Accessibility
 
 File Uploader color contrast ratios are accessible.
 Since File Uploader (specifically filename elements) low-opacity colors, 
@@ -89,11 +82,11 @@ verifying color ratios with IBM a11y tool may not yield passing results.
 However, evaluating resulting background colors as solid colors will pass.
 
 | Opacity + UI background color | Actual background color | Text color | WCAG AA Color Ratio | Passes 4.5?        |
-|--------------------------|-------------------------|------------|---------------------|--------------------|
-| `#5a6872` at 10% on `#ffffff`   | `#cedbec`               | `#152935`  | 10.70               | :white_check_mark: |
-| `#5a6872` at 10% on `#f5f7fa`   | `#c6d5e8`               | `#152935`  | 10.07               | :white_check_mark: |
+|-------------------------------|-------------------------|------------|---------------------|--------------------|
+| `#5a6872` at 10% on `#ffffff` | `#cedbec`               | `#152935`  | 10.70               | :white_check_mark: |
+| `#5a6872` at 10% on `#f5f7fa` | `#c6d5e8`               | `#152935`  | 10.07               | :white_check_mark: |
 
-__Truncating long filenames__
+#### Truncating long filenames
 
 By default, filenames are truncated so that any filename that goes beyond `300px` will be cutoff.
 
