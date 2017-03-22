@@ -39,7 +39,7 @@ class InteriorLeftNav extends Component {
 
   handleListClick = (id) => {
     this.props.children.forEach((child, index) => {
-      if (child.type.name === 'InteriorLeftNavList') {
+      if (child.type === InteriorLeftNavList) {
         const childId = `list-${index}`;
         if (childId !== id) {
           this.refs[childId].close();
@@ -89,7 +89,7 @@ class InteriorLeftNav extends Component {
 
     const newChildren = React.Children.map(children, (child, index) => {
       let newChild;
-      if (child.type.name === 'InteriorLeftNavList') {
+      if (child.type === InteriorLeftNavList) {
         newChild = this.buildNewListChild(child, index);
       } else {
         newChild = this.buildNewItemChild(child, index);
@@ -133,7 +133,7 @@ class InteriorLeftNav extends Component {
           className="bx--inline-left-nav-collapse"
           onClick={this.toggle}
         >
-          <a className="bx--inline-left-nav-collapse__link" href="#">
+          <a className="bx--inline-left-nav-collapse__link">
             <Icon
               name="chevron--left"
               description="close/open iln"
