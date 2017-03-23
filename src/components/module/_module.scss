@@ -21,7 +21,7 @@
     .bx--module__inner {
       @include layer('raised');
       background-color: $ui-01;
-      border: 1px solid $ui-04;
+      border: 1px solid transparent;
     }
 
     .bx--module__header {
@@ -34,6 +34,7 @@
     .bx--module__title {
       @include font-size('14');
       @include font-smoothing;
+      letter-spacing: 0;
       font-weight: 700;
       color: $text-01;
     }

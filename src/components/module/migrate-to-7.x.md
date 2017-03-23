@@ -1,6 +1,6 @@
 ### HTML
 
-The Modules component has changed significantly! Here's one example of how the component can be composed.
+The Module component has changed significantly! Here's one example of how the component can be composed.
 
 ``` html
 <div class="bx--module bx--module--double">
@@ -17,15 +17,15 @@ The Modules component has changed significantly! Here's one example of how the c
 </div>
 ```
 
-For more examples see the `modules.html` file.
+For more examples see the `module.html` file.
 
 
 ### SCSS
 
-The `_modules.scss` file is now located at __src/components/modules/modules.scss__. You'll need to update any `@import` statements for this file to reflect this change.
+The `_module.scss` file is now located at __src/components/modules/module.scss__. You'll need to update any `@import` statements for this file to reflect this change.
 
 ```scss
-@import 'path_to_node_modules/@console/bluemix-components/src/components/modules/modules';
+@import 'path_to_node_modules/@console/bluemix-components/src/components/module/module';
 ```
 
 | Old Class                   | New Class                       | Note    |
