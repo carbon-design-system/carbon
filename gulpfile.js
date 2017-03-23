@@ -1,25 +1,32 @@
 'use strict';
 
-/**
- * Requires
- */
-
+// Node
 const path = require('path');
+
+// Styles
+const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
+
+// Javascript deps
+const babel = require('gulp-babel');
+const eslint = require('gulp-eslint');
+const uglify = require('gulp-uglify');
+const pump = require('pump');
+
+// BrowserSync
 const browserSync = require('browser-sync').create();
-const del = require('del');
+
+// Gulp
 const gulp = require('gulp');
 const rename = require('gulp-rename');
-const sass = require('gulp-sass');
-const eslint = require('gulp-eslint');
 const sourcemaps = require('gulp-sourcemaps');
-const jsdoc = require('gulp-jsdoc3');
-
-const webpack = require('webpack');
-const babel = require('gulp-babel');
-const merge = require('merge-stream');
 const gutil = require('gulp-util');
 
+// Generic utility
+const del = require('del');
+const exec = require('child_process').exec;
+
+// Test environment
 const Server = require('karma').Server;
 const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
@@ -47,6 +54,11 @@ gulp.task('browser-sync', () => {
 
 // Use: npm run prebuild
 gulp.task('clean', () => del([
+  'sass',
+  'css',
+  'es',
+  'umd',
+  'scripts',
   'dist',
   'demo/**/*.{js,map}',
   '!demo/js/demo-switcher.js',
@@ -59,82 +71,74 @@ gulp.task('clean', () => del([
  * JavaScript Tasks
  */
 
-function buildScripts(options) {
-  options = options || {}; // eslint-disable-line no-param-reassign
-  options.target = (options.target || './dist/bluemix-components.js')
-    .replace(/\.js$/, options.prod ? '.min.js' : '.js');
-  return new Promise((resolve, reject) => {
-    webpack({
-      devtool: 'source-maps',
-      entry: options.entry || './src/index.js',
-      output: Object.assign({
-        path: path.dirname(options.target),
-        filename: path.basename(options.target),
-      }, options.noExport ? {} : {
-        libraryTarget: 'var',
-        library: 'BluemixComponents',
-      }),
-      module: {
-        rules: [
-          {
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            use: ['babel-loader'],
-          },
-        ],
-      },
-      plugins: options.prod ? [new webpack.optimize.UglifyJsPlugin()] : [],
-    }, (err, stats) => {
-      if (err) {
-        reject(new gutil.PluginError('webpack', err));
-      } else {
-        gutil.log('[webpack]', stats.toString({
-          progress: true,
-          colors: true,
-        }));
-        resolve();
-      }
-    });
+gulp.task('scripts:dev', (cb) => {
+  exec('./node_modules/.bin/rollup -c tools/rollup.config.dev.js', (err) => {
+    browserSync.reload();
+    cb(err);
   });
-}
-
-
-gulp.task('scripts:umd', () => {
-  const filesMain = './src/components/**/*.js';
-  const filesOthers = './src/globals/js/**/*.js';
-
-  const babelOpts = {
-    plugins: ['transform-es2015-modules-umd', 'transform-runtime'],
-  };
-
-  const mainStream = gulp.src(filesMain)
-    .pipe(babel(babelOpts))
-    .pipe(gulp.dest('./dist/js/umd/lib'));
-
-  const othersStream = gulp.src(filesOthers)
-    .pipe(babel(babelOpts))
-    .pipe(gulp.dest('./dist/js/umd'));
-
-  return merge(mainStream, othersStream);
 });
 
-gulp.task('scripts:consumables', () => Promise.all([
-  buildScripts(), // Expanded ES5
-  buildScripts({ prod: true }), // Minified ES5
-]));
+gulp.task('scripts:umd', () => {
+  const srcFiles = ['./src/**/*.js'];
+  const babelOpts = {
+    presets: [
+      ['env', {
+        targets: {
+          browsers: ['last 1 version', 'ie >= 11'],
+        },
+      }],
+    ],
+    plugins: ['transform-es2015-modules-umd', 'transform-class-properties'],
+  };
 
-gulp.task('scripts:dev', () => Promise.all([
-  buildScripts({
-    target: './demo/demo.js',
-    entry: './demo/index.js',
-  }),
-]));
+  return gulp.src(srcFiles)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('umd/'));
+});
+
+
+gulp.task('scripts:es', () => {
+  const srcFiles = ['./src/**/*.js'];
+  const babelOpts = {
+    presets: [
+      ['env', {
+        modules: false,
+        targets: {
+          browsers: ['last 1 version', 'ie >= 11'],
+        },
+      }],
+    ],
+    plugins: ['transform-class-properties'],
+  };
+
+  return gulp.src(srcFiles)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('es/'));
+});
+
+gulp.task('scripts:rollup', (cb) => {
+  exec('./node_modules/.bin/rollup -c tools/rollup.config.js', (err) => {
+    cb(err);
+  });
+});
+
+gulp.task('scripts:compiled', ['scripts:rollup'], (cb) => {
+  const srcFile = './scripts/carbon-components.js';
+
+  pump([
+    gulp.src(srcFile),
+    uglify(),
+    rename('carbon-components.min.js'),
+    gulp.dest('scripts'),
+  ], cb);
+});
 
 /**
  * Sass Tasks
  */
 
-gulp.task('sass:consumables', () => {
+
+gulp.task('sass:compiled', () => {
   function buildStyles(prod) {
     return gulp.src('src/globals/scss/styles.scss')
       .pipe(sourcemaps.init())
@@ -146,14 +150,14 @@ gulp.task('sass:consumables', () => {
       }))
       .pipe(rename((filePath) => {
         if (filePath.basename === 'styles') {
-          filePath.basename = 'bluemix-components';
+          filePath.basename = 'carbon-components';
         }
         if (prod) {
           filePath.extname = `.min${filePath.extname}`;
         }
       }))
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest('dist'))
+      .pipe(gulp.dest('css'))
       .pipe(browserSync.stream());
   }
 
@@ -174,6 +178,13 @@ gulp.task('sass:dev', () =>
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream()));
+
+gulp.task('sass:source', () => {
+  const srcFiles = './src/**/*.scss';
+
+  return gulp.src(srcFiles)
+    .pipe(gulp.dest('sass'));
+});
 
 /**
  * Lint
@@ -213,45 +224,14 @@ gulp.task('test:unit', (done) => {
   }, done).start();
 });
 
-gulp.task('test:a11y', ['sass:consumables'], (done) => {
+gulp.task('test:a11y', ['sass:compiled'], (done) => {
   new Server({
     configFile: path.resolve(__dirname, 'tests/karma-ibma.conf.js'),
     singleRun: !cloptions.keepalive,
   }, done).start();
 });
 
-/**
- * JSDoc
- */
-
-gulp.task('jsdoc', (cb) => {
-  gulp.src('./src/components/**/*.js')
-    .pipe(babel({
-      plugins: ['transform-class-properties'],
-      babelrc: false,
-    }))
-    .pipe(gulp.dest('./docs/js/tmp'))
-    .on('end', () => {
-      gulp.src(['README.md', 'docs/js/tmp/**/*.js'], { read: false })
-        .pipe(jsdoc(Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), { // eslint-disable-line global-require
-          opts: {
-            destination: './docs/js',
-          },
-        }), (err) => {
-          if (err) {
-            cb(err);
-          } else {
-            del('./docs/js/tmp', cb);
-          }
-        }));
-    })
-    .on('error', cb);
-});
-
-/**
- * Running Tasks
- */
-
+// Watch Tasks
 gulp.task('watch', () => {
   gulp.watch('src/**/**/*.html').on('change', browserSync.reload);
   gulp.watch(['src/**/**/*.js'], ['scripts:dev']);
@@ -260,8 +240,14 @@ gulp.task('watch', () => {
 
 gulp.task('serve', ['browser-sync', 'watch']);
 
-// Use: npm run build
-gulp.task('build', ['sass:consumables', 'scripts:consumables']);
+// Build task collection
+gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled']);
+gulp.task('build:styles', ['sass:compiled', 'sass:source']);
+
+// Mapped to npm run build
+gulp.task('build', ['build:scripts', 'build:styles']);
+
+// For demo environment
 gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {

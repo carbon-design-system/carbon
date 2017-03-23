@@ -39,7 +39,7 @@ const settings = {};
  * 1. Export ES2015 classes as modules (used with base-elements and components)
  * 2. Build an ES5-compatible files for prototyping.
  *    See /path/to/bluemix-components/dist/dist-demo.html for details.
- * @exports BluemixComponents
+ * @exports CarbomComponents
  * @example <caption>Consume ES2015 modules from this file using import (Usage pattern 1.)</caption>
  * import { Fab, FileUploader } from '/path/to/your/project/node_modules/@console/bluemix-components';
  */
@@ -49,7 +49,7 @@ export {
    * @type Object
    * @property {boolean} [disableAutoInit]
    *   Disables automatic instantiation of components.
-   *   By default (`BluemixComponents.disableAutoInit` is `false`),
+   *   By default (`CarbonComponents.disableAutoInit` is `false`),
    *   bluemix-components attempts to instantiate components automatically
    *   by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
    *   or upon DOM events (e.g. clicking) on such elements.

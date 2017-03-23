@@ -27,5 +27,10 @@ jsconfig.json
 tests/a11y-results
 tests/coverage
 
-# JSDoc
-docs/js
+# built files
+es
+umd
+scripts
+css
+sass
+html

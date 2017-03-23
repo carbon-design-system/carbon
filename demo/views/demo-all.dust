@@ -39,7 +39,7 @@
   <!-- true = JavaScript will not initialize automatically -->
   <!-- false = JavaScript will initialize automatically -->
   <script>
-    BluemixComponents.settings.disableAutoInit = false;
+    CarbonComponents.settings.disableAutoInit = false;
   </script>
 </body>
 </html>
