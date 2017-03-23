@@ -26,11 +26,11 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
      * The handle to release click event listener on document object.
      * @member {Handle}
      */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this.toggle(event); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this._toggle(event); });
 
-    this.setCloseOnBlur();
+    this._setCloseOnBlur();
 
-    this.element.addEventListener('keydown', (event) => { this.handleKeyDown(event); });
+    this.element.addEventListener('keydown', (event) => { this._handleKeyDown(event); });
     this.element.addEventListener('click', (event) => {
       const item = eventMatches(event, this.options.selectorItem);
       if (item) {
@@ -56,7 +56,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
    * Handles keydown event.
    * @param {Event} event The event triggering this method.
    */
-  handleKeyDown(event) {
+  _handleKeyDown(event) {
     const isOpen = this.element.classList.contains('bx--dropdown--open');
     const direction = {
       38: this.constructor.NAVIGATE.BACKWARD,
@@ -66,7 +66,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
       this.navigate(direction);
       event.preventDefault(); // Prevents up/down keys from scrolling container
     } else {
-      this.toggle(event);
+      this._toggle(event);
     }
   }
 
@@ -74,7 +74,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
    * Opens and closes the dropdown menu.
    * @param {Event} [event] The event triggering this method.
    */
-  toggle(event) {
+  _toggle(event) {
     if (([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem))
     || event.which === 27 || event.type === 'click') {
       const isOpen = this.element.classList.contains('bx--dropdown--open');
@@ -166,7 +166,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
   /**
    * Sets an event handler to document for "close on blur" behavior.
    */
-  setCloseOnBlur() {
+  _setCloseOnBlur() {
     const hasFocusin = 'onfocusin' in window;
     const focusinEventName = hasFocusin ? 'focusin' : 'focus';
     this.hFocusIn = on(this.element.ownerDocument, focusinEventName, (event) => {
