@@ -157,7 +157,7 @@ module.exports = function (config) {
             'src/components/accordion/accordion.js',
             'src/components/copy-button/copy-button.js',
             'src/components/detail-page-header/detail-page-header.js',
-            'src/components/inline-left-nav/inline-left-nav.js',
+            'src/components/interior-left-nav/interior-left-nav.js',
             'src/components/pagination/pagination.js',
             'src/components/search/search-with-options.js',
             'src/components/unified-header/left-nav.js',
