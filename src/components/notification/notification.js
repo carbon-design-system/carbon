@@ -14,7 +14,9 @@ class Notification extends mixin(createComponent, initComponentBySearch, evented
     super(element, options);
     this.button = element.querySelector(this.options.selectorButton) || false;
     this.button.addEventListener('click', (evt) => {
-      this.remove(evt);
+      if (evt.currentTarget === this.button) {
+        this.remove();
+      }
     });
   }
 
@@ -26,10 +28,8 @@ class Notification extends mixin(createComponent, initComponentBySearch, evented
     callback();
   }
 
-  remove = (evt) => {
-    if (evt.currentTarget === this.button) {
-      this.changeState('delete-notification');
-    }
+  remove() {
+    this.changeState('delete-notification');
   }
 
   /**

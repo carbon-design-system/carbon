@@ -23,3 +23,21 @@ Use these modifiers with `.bx--inline-notification` class.
 | .bx--toast-notification--info    | Apply info color on left border    |
 | .bx--toast-notification--warning | Apply warning color on left border |
 
+## JavaScript
+
+
+#### Public Methods
+
+| Name        | Params | Description                                                                       |
+|-------------|--------|-----------------------------------------------------------------------------------|
+| remove      |        | Removes the component, deletes the instance, and removes document event listeners |
+
+
+#### Options
+
+| Option                        | Default Selector             | Description                                               |
+|-------------------------------|------------------------------|-----------------------------------------------------------|
+| selectorInit                  | `[data-notification]`        | The selector to find instances of the component           |
+| selectorButton                | `[data-notification-btn]`    | The selector to find the close button in the component    |
+| eventBeforeDeleteNotification | `notification-before-delete` | Event before deleting the notification                    |
+| eventAfterDeleteNotification  | `notification-after-delete`  | Event after deleting the notification                     |
