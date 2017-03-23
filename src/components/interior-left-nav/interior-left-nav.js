@@ -3,7 +3,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-class InlineLeftNav extends mixin(createComponent, initComponentBySearch) {
+class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
   /**
    * Spinner indicating loading state.
    * @extends CreateComponent
@@ -83,7 +83,7 @@ class InlineLeftNav extends mixin(createComponent, initComponentBySearch) {
 
   /**
    * The map associating DOM element and spinner instance.
-   * @member InlineLeftNav.components
+   * @member InteriorLeftNav.components
    * @type {WeakMap}
    */
   static components = new WeakMap();
@@ -91,9 +91,9 @@ class InlineLeftNav extends mixin(createComponent, initComponentBySearch) {
   /**
    * The component options.
    * If `options` is specified in the constructor,
-   * {@linkcode InlineLeftNav.create .create()}, or {@linkcode InlineLeftNav.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode InlineLeftNav.init .init()} works.
-   * @member InlineLeftNav.options
+   * {@linkcode InteriorLeftNav.create .create()}, or {@linkcode InteriorLeftNav.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode InteriorLeftNav.init .init()} works.
+   * @member InteriorLeftNav.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find inline left navs.
    */
@@ -112,4 +112,4 @@ class InlineLeftNav extends mixin(createComponent, initComponentBySearch) {
   };
 }
 
-export default InlineLeftNav;
+export default InteriorLeftNav;

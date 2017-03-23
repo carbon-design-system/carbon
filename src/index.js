@@ -21,7 +21,7 @@ import NumberInput from './components/number-input/number-input';
 import DataTable from './components/data-table/data-table';
 import DetailPageHeader from './components/detail-page-header/detail-page-header';
 import LeftNav from './components/unified-header/left-nav';
-import InlineLeftNav from './components/inline-left-nav/inline-left-nav';
+import InteriorLeftNav from './components/interior-left-nav/interior-left-nav';
 import ProfileSwitcher from './components/unified-header/profile-switcher';
 import Pagination from './components/pagination/pagination';
 import Search from './components/search/search';
@@ -168,13 +168,13 @@ export {
 
   /**
    * Inline Left Navigation Menu.
-   * @type InlineLeftNav
+   * @type InteriorLeftNav
    */
-  InlineLeftNav,
+  InteriorLeftNav,
 
   /**
    * Notification.
-   * @type InlineLeftNav
+   * @type InteriorLeftNav
    */
   Notification,
 
@@ -191,7 +191,7 @@ export {
   Tooltip,
 
   /** ProgressIndicator.
-   * @type InlineLeftNav
+   * @type InteriorLeftNav
    */
   ProgressIndicator,
 };
@@ -223,7 +223,7 @@ const init = () => {
     DataTable.init();
     DetailPageHeader.init();
     LeftNav.init();
-    InlineLeftNav.init();
+    InteriorLeftNav.init();
     ProfileSwitcher.init();
     Pagination.init();
     Search.init();

@@ -1,0 +1,45 @@
+### SCSS
+
+#### Modifiers
+
+Use these modifiers with `.bx--inline-left-nav` class.
+
+| Selector                           | Description                        |
+|------------------------------------|------------------------------------|
+| .left-nav-list--nested             | Applied to nested nav lists        |
+| .left-nav-list__item--expanded     | Applied to expanded nav list items |
+| .left-nav-list__item--active       | Applied to active nav list items   |
+| .bx--inline-left-nav__header--link | Applied to links in nav header     |
+
+
+### Javascript
+
+Initializing and getting component instances.
+
+#### Public Methods
+
+| Name                  | Params                 | Description                                                                                                                           |
+|-----------------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| hookListItemsEvents   |                        | description of method                                                                                                                 |
+| addActiveListItem     | item                   | description of method                                                                                                                 |
+| handleNestedListClick | listItem, evt: `Event` | Handles click on a list item that contains a nested list in the left navigation. The nested list is expanded and the icon is rotated. |
+
+#### Options
+
+| Option                             | Default Selector                     | Description                                   |
+|------------------------------------|--------------------------------------|-----------------------------------------------|
+| selectorInit                       | [data-inline-left-nav]               | Selector to find inline left nav              |
+| selectorLeftNavList                | [data-inline-left-nav-list]          | Selector to find nav list                     |
+| selectorLeftNavNestedList          | [data-inline-left-nav-nested-list]   | Selector to find nested nav list              |
+| selectorLeftNavListItemLink        | [data-inline-left-nav-item-link]     | Selector to find nav list item link           |
+| selectorLeftNavNestedListItem      | [data-inline-left-nav-nested-item]   | Selector to find nested nav list item         |
+| selectorLeftNavListItemHasChildren | [data-inline-left-nav-with-children] | Selector to find nav list items with children |
+| classActiveLeftNavListItem         | left-nav-list__item--active          | Class for active nav list item                |
+| classExpandedLeftNavListItem       | left-nav-list__item--expanded        | Class for expanded nav list items             |
+
+#### Classes
+
+| Name                         | Description                       |
+|------------------------------|-----------------------------------|
+| classActiveLeftNavListItem   | Class for active nav list item    |
+| classExpandedLeftNavListItem | Class for expanded nav list items |
