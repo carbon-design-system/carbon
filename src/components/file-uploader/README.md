@@ -37,6 +37,9 @@ Additional states are **edit**, **complete** and **upload**.
 
 **Edit** injects close icons into each filename state container. A `click` event listener is also added to remove the filename when close button is clicked.
 
+---
+***
+> 
 ![file-uploader-flow-edit](https://media.github.ibm.com/user/76/files/f2abbdcc-ec52-11e6-938c-535458ffee6d)
 
 ```scss
@@ -55,10 +58,16 @@ Users can select a __single__ file or __multiple__ files.
 By default, any file type is accepted.
 It's up to the developer and their design team to specify and implement validations for which file types are acceptable.
 
+---
+***
+> 
 ![file-uploader-flow-upload](https://media.github.ibm.com/user/76/files/ae239d28-ec52-11e6-8aff-03cd541a1003)
 
 **Complete** injects checkmark icons into each filename state container.
 
+---
+***
+> 
 ![complete](https://media.github.ibm.com/user/76/files/cf833552-000a-11e7-953c-89152f30046b)
 
 ```css

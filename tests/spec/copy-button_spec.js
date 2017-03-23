@@ -2,10 +2,10 @@ import '../utils/es6-weak-map-global'; // For PhantomJS
 import CopyButton from '../../src/components/copy-button/copy-button';
 
 const HTML = `
-<button data-copy-btn class="bx--btn bx--btn--primary bx--btn--copy">
-  Copy
+<button data-copy-btn class="bx--btn bx--btn--primary bx--btn--copy bx--btn--sm">
+  Copy button
   <svg class="bx--btn__icon">
-    <use xlink:href="https://dev-console.stage1.ng.bluemix.net/api/v5/img/bluemix-icons.svg#add--glyph"></use>
+    <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#icon--add--glyph"></use>
   </svg>
   <div class="bx--btn--copy__feedback" data-feedback="Copied!"></div>
 </button>
