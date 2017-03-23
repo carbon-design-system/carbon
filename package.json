@@ -53,7 +53,6 @@
     "custom-event": "^1.0.0",
     "cz-conventional-changelog": "^1.2.0",
     "del": "~2.0.2",
-    "es6-weak-map": "^2.0.1",
     "eslint": "^3.0.0",
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",

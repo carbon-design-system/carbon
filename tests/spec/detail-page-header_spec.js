@@ -1,4 +1,4 @@
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import DetailPageHeader from '../../src/components/detail-page-header/detail-page-header';
 
 describe('Test detail page header', function () {

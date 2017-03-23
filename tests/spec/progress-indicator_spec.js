@@ -1,5 +1,5 @@
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import '../../demo/polyfills/custom-event';
-import '../utils/es6-weak-map-global'; // For PhantomJS
 import ProgressIndicator from '../../src/components/progress-indicator/progress-indicator';
 import HTML from '../../src/components/progress-indicator/progress-indicator.html';
 

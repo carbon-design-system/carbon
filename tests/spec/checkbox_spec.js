@@ -1,4 +1,4 @@
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import initCheckbox from '../../src/components/checkbox/checkbox';
 
 describe('Test checkbox', function () {

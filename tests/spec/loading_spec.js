@@ -1,4 +1,4 @@
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Loading from '../../src/components/loading/loading';
 import LoadingHTML from '../../src/components/loading/loading.html';
 

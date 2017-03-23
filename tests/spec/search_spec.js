@@ -1,4 +1,4 @@
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Search from '../../src/components/search/search';
 import searchHTML from '../../src/components/search/search-large.html';
 

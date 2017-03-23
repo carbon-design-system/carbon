@@ -1,4 +1,4 @@
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import InteriorLeftNav from '../../src/components/interior-left-nav/interior-left-nav';
 import InteriorLeftNavHtml from '../../src/components/interior-left-nav/interior-left-nav.html';
 
