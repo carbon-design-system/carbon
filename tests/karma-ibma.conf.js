@@ -3,6 +3,9 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
 const minimatch = require('minimatch');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+const babel = require('rollup-plugin-babel');
 
 const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
@@ -51,51 +54,44 @@ module.exports = function (config) {
 
     preprocessors: {
       'src/**/*.html': ['html2js'],
-      'tests/a11y/**/*.js': ['webpack', 'sourcemap'],
+      'tests/a11y/**/*.js': ['rollup', 'sourcemap'],
     },
 
-    webpack: {
-      devtool: 'inline-source-maps',
-      module: {
-        rules: [
-          {
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            use: [
+    rollupPreprocessor: {
+      plugins: [
+        resolve({
+          jsnext: true,
+          main: true,
+        }),
+        commonjs({
+          include: ['node_modules/**'],
+          namedExports: {
+            'node_modules/bluebird/js/release/bluebird.js': ['promisify'],
+          },
+        }),
+        babel({
+          exclude: 'node_modules/**',
+          runtimeHelpers: true,
+          presets: [
+            [
+              'env',
               {
-                loader: 'babel-loader',
-                options: {
-                  presets: [
-                    [
-                      'env',
-                      {
-                        modules: false,
-                        chrome: 'latest',
-                        edge: 'latest',
-                        firefox: 'latest',
-                        safari: 'latest',
-                        ie: '11',
-                        ios: 'latest',
-                      },
-                    ],
-                  ],
-                  plugins: [
-                    'transform-class-properties',
-                    ['transform-runtime', { polyfill: false }],
-                  ],
+                modules: false,
+                targets: {
+                  browsers: ['last 1 version', 'ie >= 11'],
                 },
               },
             ],
-          },
-        ],
-      },
-    },
-
-    webpackMiddleware: {
-      noInfo: !cloptions.verbose,
-      stats: cloptions.verbose ? {
-        colors: true,
-      } : {},
+          ],
+          plugins: [
+            'transform-class-properties',
+            ['transform-runtime', { polyfill: false }],
+          ],
+        }),
+      ],
+      format: 'iife',
+      moduleName: 'test',
+      sourceMap: 'inline',
     },
 
     customLaunchers: {
@@ -111,7 +107,7 @@ module.exports = function (config) {
       require('karma-html2js-preprocessor'),
       require('karma-sourcemap-loader'),
       require('karma-mocha-reporter'),
-      require('karma-webpack'),
+      require('karma-rollup-plugin'),
       require('karma-phantomjs-launcher'),
       require('karma-chrome-launcher'),
       require('karma-firefox-launcher'),
