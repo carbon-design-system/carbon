@@ -15,15 +15,22 @@ class InteriorLeftNav extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    activeHref: PropTypes.string,
   };
 
   state = {
-    activeHref: '#',
+    activeHref: this.props.activeHref || '#',
     open: true,
   };
 
   componentDidMount = () => {
     this.setState({ activeHref: window.location.pathname });
+  };
+
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.activeHref) {
+      this.setState({ activeHref: nextProps.activeHref });
+    }
   };
 
   handleItemClick = (evt, href) => {
@@ -84,6 +91,7 @@ class InteriorLeftNav extends Component {
     const {
       className,
       children,
+      activeHref, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 
