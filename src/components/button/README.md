@@ -34,7 +34,7 @@ Be aware that only `--glyph` icons should be used with buttons.
 <button class="bx--btn bx--btn--secondary" type="button">
   Secondary
   <svg class="bx--btn__icon">
-    <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#add--glyph"></use>
+    <use xlink:href="/carbon-icons/bluemix-icons.svg#add--glyph"></use>
   </svg>
 </button>
 ```

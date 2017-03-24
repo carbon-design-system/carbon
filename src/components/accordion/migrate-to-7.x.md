@@ -6,7 +6,7 @@ Update `<use xlink:href>` to a local path of bluemix-icons.svg, which should loo
 
 ```html
 <svg class="bx--accordion__arrow">
-  <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#chevron--right"></use>
+  <use xlink:href="/carbon-icons/bluemix-icons.svg#chevron--right"></use>
 </svg>
 ```
 

@@ -22,7 +22,7 @@ With `input` and `label` as siblings
   <label for="bx--checkbox" class="bx--checkbox-label">
     <span class="bx--checkbox-appearance">
       <svg class="bx--checkbox-checkmark">
-        <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#checkmark"></use>
+        <use xlink:href="/carbon-icons/bluemix-icons.svg#checkmark"></use>
       </svg>
     </span>
     Checkbox (input + label)
@@ -38,7 +38,7 @@ With `label` wrapping `input`
     <input class="bx--checkbox" type="checkbox" value="yellow" name="checkbox">
     <span class="bx--checkbox-appearance">
       <svg class="bx--checkbox-checkmark">
-        <use xlink:href="/@console/bluemix-icons/bluemix-icons.svg#checkmark"></use>
+        <use xlink:href="/carbon-icons/bluemix-icons.svg#checkmark"></use>
       </svg>
     </span>
     <span class="bx--checkbox-label-text">Checkbox (label > input)</span>
