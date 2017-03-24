@@ -1,7 +1,7 @@
 {
   "name": "carbon-components",
-  "version": "7.0.0-rc.2",
-  "description": "Bluemix Components is a component library for Bluemix",
+  "version": "7.0.0-rc.3",
+  "description": "Carbon Components is a component library for Carbon",
   "main": "umd/index.js",
   "module": "es/index.js",
   "maintainers": [
@@ -138,7 +138,7 @@
     "src/**/*"
   ],
   "keywords": [
-    "bluemix",
+    "carbon",
     "component",
     "components",
     "css",
