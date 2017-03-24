@@ -1,6 +1,6 @@
 {
   "name": "carbon-components",
-  "version": "7.0.0-rc.1",
+  "version": "7.0.0-rc.2",
   "description": "Bluemix Components is a component library for Bluemix",
   "main": "umd/index.js",
   "module": "es/index.js",
@@ -48,7 +48,7 @@
     "npm": "~3.0.0"
   },
   "dependencies": {
-    "@console/bluemix-icons": "5.0.1",
+    "carbon-icons": "5.0.1",
     "adaro": "1.0.4",
     "bluebird": "~3.1.1",
     "eslint": "^3.0.0",
@@ -133,7 +133,8 @@
     "umd/**/*",
     "scripts/**/*",
     "sass/**/*",
-    "css/**/*"
+    "css/**/*",
+    "src/**/*"
   ],
   "keywords": [
     "bluemix",

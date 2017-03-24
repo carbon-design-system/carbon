@@ -41,7 +41,7 @@ const cloptions = require('minimist')(process.argv.slice(2), {
 
 gulp.task('browser-sync', () => {
   browserSync.init({
-    logPrefix: 'Bluemix Components',
+    logPrefix: 'Carbon Components',
     open: false,
     proxy: 'localhost:8080',
     timestamps: false,

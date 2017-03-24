@@ -9,15 +9,15 @@ module.exports = {
   plugins: [
     resolve({
       jsnext: true,
-      main: true
+      main: true,
     }),
     commonjs({
       include: 'node_modules/**',
       sourceMap: false,
     }),
     babel({
-      exclude: 'node_modules/**' // only transpile our source code
+      exclude: 'node_modules/**',
     }),
   ],
-  dest: 'demo/demo.js'
+  dest: 'demo/demo.js',
 };
