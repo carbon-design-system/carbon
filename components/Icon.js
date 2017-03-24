@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import uid from '../lib/uniqueId';
 import icons from '@console/bluemix-icons';
 
 const propTypes = {
@@ -86,7 +85,6 @@ export function svgShapes(svgData) {
 
 const Icon = ({ className, width, height, fill, fillRule, name, style, description, ...other }) => {
   const icon = findIcon(name);
-  const id = uid(icon.id);
   const props = {
     className,
     fill,
@@ -102,8 +100,8 @@ const Icon = ({ className, width, height, fill, fillRule, name, style, descripti
   const svgContent = (icon) ? svgShapes(icon.svgData) : '';
 
   return (
-    <svg {...props} aria-labelledby={id}>
-      <title id={id}>{description}</title>
+    <svg {...props} aria-label={description}>
+      <title>{description}</title>
       {svgContent}
     </svg>
   );

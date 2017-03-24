@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderToString } from 'react-dom/server';
 import Icon, { findIcon, svgShapes, getSvgData, icons } from '../Icon';
 import { mount } from 'enzyme';
 
@@ -21,20 +22,15 @@ describe('Icon', () => {
       expect(wrapper.props().description).toEqual('close the thing');
     });
 
-    it('Renders with `id` on <title>', () => {
-      const id = wrapper.find('title').props().id;
-      expect(id).not.toBeUndefined();
+    it('Renders with a <title>', () => {
+      const title = wrapper.find('title');
+      expect(title).toBeDefined();
+      expect(title.text()).toEqual('close the thing');
     });
 
-    it('Renders `aria-labelledby` on <svg>', () => {
-      const aria = wrapper.find('svg').props()['aria-labelledby'];
-      expect(aria).not.toBeUndefined();
-    });
-
-    it('`id` and `aria-labelledby` should be equal', () => {
-      const id = wrapper.find('title').props().id;
-      const aria = wrapper.find('svg').props()['aria-labelledby'];
-      expect(id).toEqual(aria);
+    it('Renders `aria-label` on <svg>', () => {
+      const aria = wrapper.find('svg').props()['aria-label'];
+      expect(aria).toEqual('close the thing');
     });
 
     it('should have expected viewBox on <svg>', () => {
@@ -45,16 +41,20 @@ describe('Icon', () => {
       expect(wrapper.props().className).toEqual('extra-class');
     });
 
-    it('should recieve width props', () => {
+    it('should receive width props', () => {
       expect(wrapper.props().width).toEqual('20');
     });
 
-    it('should recieve height props', () => {
+    it('should receive height props', () => {
       expect(wrapper.props().height).toEqual('20');
     });
 
-    it('should recieve style props', () => {
+    it('should receive style props', () => {
       expect(wrapper.props().style).toEqual({ transition: '2s' });
+    });
+
+    it('renders the same html consistently', () => {
+      expect(renderToString(<Icon {...props} />)).toEqual(renderToString(<Icon {...props} />));
     });
   });
 
