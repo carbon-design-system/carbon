@@ -48,13 +48,13 @@
     "npm": "~3.0.0"
   },
   "dependencies": {
-    "carbon-icons": "5.0.1",
     "adaro": "1.0.4",
     "bluebird": "~3.1.1",
+    "carbon-icons": "5.0.1",
     "eslint": "^3.0.0",
     "express": "4.13.4",
     "globby": "4.0.0",
-    "lodash-es": "^4.17.4"
+    "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
     "babel-core": "^6.22.0",
@@ -134,6 +134,7 @@
     "scripts/**/*",
     "sass/**/*",
     "css/**/*",
+    "html/**/*",
     "src/**/*"
   ],
   "keywords": [

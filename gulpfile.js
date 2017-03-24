@@ -39,7 +39,7 @@ const cloptions = require('minimist')(process.argv.slice(2), {
  * BrowserSync
  */
 
-gulp.task('browser-sync', () => {
+gulp.task('browser-sync', ['build:dev'], () => {
   browserSync.init({
     logPrefix: 'Carbon Components',
     open: false,
@@ -59,6 +59,7 @@ gulp.task('clean', () => del([
   'es',
   'umd',
   'scripts',
+  'html',
   'dist',
   'demo/**/*.{js,map}',
   '!demo/js/demo-switcher.js',
@@ -186,6 +187,13 @@ gulp.task('sass:source', () => {
     .pipe(gulp.dest('sass'));
 });
 
+gulp.task('html:source', () => {
+  const srcFiles = './src/components/**/*.html';
+
+  return gulp.src(srcFiles)
+    .pipe(gulp.dest('html'));
+});
+
 /**
  * Lint
  */
@@ -245,7 +253,7 @@ gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled']);
 gulp.task('build:styles', ['sass:compiled', 'sass:source']);
 
 // Mapped to npm run build
-gulp.task('build', ['build:scripts', 'build:styles']);
+gulp.task('build', ['build:scripts', 'build:styles', 'html:source']);
 
 // For demo environment
 gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
