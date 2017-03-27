@@ -160,6 +160,7 @@ module.exports = function (config) {
             'src/components/interior-left-nav/interior-left-nav.js',
             'src/components/pagination/pagination.js',
             'src/components/search/search-with-options.js',
+            'src/components/tooltip/tooltip.js',
             'src/components/unified-header/left-nav.js',
             'src/components/unified-header/profile-switcher.js',
             'src/globals/js/misc/resize.js',
