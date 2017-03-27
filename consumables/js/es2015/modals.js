@@ -53,11 +53,7 @@ class Modal extends mixin(createComponent, initComponent, eventedState) {
    * @param {Event} event The event triggering the creation.
    */
   createdByLauncher(event) {
-    this.show(event, (error, shownAlready) => {
-      if (!error && !shownAlready && this.element.offsetWidth > 0 && this.element.offsetHeight > 0) {
-        this.element.focus();
-      }
-    });
+    this.show(event);
   }
 
   /**
@@ -105,14 +101,20 @@ class Modal extends mixin(createComponent, initComponent, eventedState) {
    */
   _changeState(state, detail, callback) {
     let finished;
+    const visible = state === 'shown';
     const finishedTransition = () => {
       if (!finished) {
         finished = true;
         this.element.removeEventListener('transitionend', finishedTransition);
+        if (visible && this.element.offsetWidth > 0 && this.element.offsetHeight > 0) {
+          // Sets focus to modal's container element so that hitting tab navigates user to first navigable element in modal.
+          // Application can override this behavior by hooking to `modal-shown` event and setting focus to an element.
+          // (e.g. default input box, default button)
+          this.element.focus();
+        }
         callback();
       }
     };
-    const visible = state === 'shown';
 
     this.element.addEventListener('transitionend', finishedTransition);
     const transitionDuration = getTransitionDuration(this.element);
