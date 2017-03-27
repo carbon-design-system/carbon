@@ -21,6 +21,7 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const gutil = require('gulp-util');
+const jsdoc = require('gulp-jsdoc3');
 
 // Generic utility
 const del = require('del');
@@ -218,6 +219,34 @@ gulp.task('lint', () =>
       });
     }
   })));
+
+/**
+ * JSDoc
+ */
+
+gulp.task('jsdoc', (cb) => {
+  gulp.src('./src/**/*.js')
+    .pipe(babel({
+      plugins: ['transform-class-properties'],
+      babelrc: false,
+    }))
+    .pipe(gulp.dest('./docs/js/tmp'))
+    .on('end', () => {
+      gulp.src(['README.md', 'docs/js/tmp/**/*.js'], { read: false })
+        .pipe(jsdoc(Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), { // eslint-disable-line global-require
+          opts: {
+            destination: './docs/js',
+          },
+        }), (err) => {
+          if (err) {
+            cb(err);
+          } else {
+            del('./docs/js/tmp', cb);
+          }
+        }));
+    })
+    .on('error', cb);
+});
 
 /**
  * Test
