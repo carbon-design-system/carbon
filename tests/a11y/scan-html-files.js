@@ -5,18 +5,19 @@ describe('Test a11y compliance', function () {
   this.timeout(30000);
 
   before(async function () {
-    await new Promise((resolve) => {
+    await new Promise((resolve, reject) => {
       const link = document.getElementById('library-style');
       if (link.loaded) {
         resolve();
       } else {
         link.addEventListener('load', resolve);
+        link.addEventListener('error', () => { reject(new Error('Failed to load carbon-components.css.')); });
       }
     });
   });
 
-  it('Should have a11y-compliant bluemix-components.css', async function () {
-    await testAATCompliance(document.getElementById('html-fragment-container'), 'bluemix-components.css');
+  it('Should have a11y-compliant carbon-components.css', async function () {
+    await testAATCompliance(document.getElementById('html-fragment-container'), 'carbon-components.css');
   });
 
   Object.keys(window.__html__).forEach((file) => {

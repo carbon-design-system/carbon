@@ -19,9 +19,10 @@ const shouldIssueBeIgnoredForRule = {
             // We should make sure we have alternate way of conveying:
             // - required field (*)
             // - list item (-)
+            // - breakcrumb separator (/)
             // - activity log item (filled circle)
             // NOTE: PhantomJS keeps surrounding singlequotes in rule.style.content
-            || /^\s*([*\-\u2022]|['"]\s*[*\-\u2022]?\s*['"])\s*$/i.test(rule.style.content)
+            || /^\s*([*\-\u2022]|['"]\s*[*\-/\u2022]?\s*['"])\s*$/i.test(rule.style.content)
             || /^\s*$/.test(rule.style.content);
         };
         return Array.prototype.every.call(sheet.cssRules, testNonePseudoContent);

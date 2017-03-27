@@ -9,7 +9,7 @@
       overflow: hidden;
     }
   </style>
-  <link id="library-style" rel="stylesheet" onload="this.loaded = true" href="/base/dist/bluemix-components.css">
+  <link id="library-style" rel="stylesheet" onload="this.loaded = true" href="/base/css/carbon-components.css">
   <div role="main">
     <a class="offleft" href="#maincontent">Skip to main content</a>
     <a name="maincontent"></a>

@@ -40,7 +40,7 @@ module.exports = function (config) {
         console.warn(`You may have wanted:\n\tgulp test:unit ${explanationArgs}`);
       }
       files.push({
-        pattern: 'dist/**/*.css',
+        pattern: 'css/**/*.css',
         watched: true,
         included: false,
         served: true,
