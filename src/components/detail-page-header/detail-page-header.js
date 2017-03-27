@@ -26,8 +26,8 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
    */
   _handleScroll() {
     let scrollPosition;
-    if (this.element.ownerDocument.defaultView.scrollY) {
-      scrollPosition = this.element.ownerDocument.defaultView.scrollY;
+    if (this.element.ownerDocument.defaultView.pageYOffset) {
+      scrollPosition = this.element.ownerDocument.defaultView.pageYOffset;
     } else {
       scrollPosition = this.element.ownerDocument.defaultView.pageYOffset;
     }

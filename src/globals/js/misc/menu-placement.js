@@ -32,7 +32,7 @@ export function placeMenu(menu, menuContents, offset, direction) {
   const menuPosition = menu.getBoundingClientRect();
   const menuHeight = menuPosition.height;
   const menuWidth = menuPosition.width;
-  const scroll = menu.ownerDocument.defaultView.scrollY;
+  const scroll = menu.ownerDocument.defaultView.pageYOffset;
 
   const menuContentsPosition = menuContents.getBoundingClientRect();
   const menuContentsHeight = menuContentsPosition.height;
