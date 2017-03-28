@@ -11,8 +11,13 @@ Use these classes inside `.bx--card-footer`.
 
 Use the class of `active` to display the status classes above.
 
-### Javascript
+### JavaScript
 
+#### Public Methods
+
+| Name    | Params | Description          |
+|---------|--------|----------------------|
+| release |        | Deletes the instance |
 
 #### Options
 

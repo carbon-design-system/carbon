@@ -4,10 +4,10 @@
 
 Mixins specific to button are located in [src/components/button/_mixins.scss]().
 
-| Name         | Params                                                        | Description                                                                            |
-|--------------|---------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| button-base  |                                                               | Base styles used in every button. Used in `@mixin button-theme` by default             |
-| button-theme | bg-color, boder-color, font-color, hover-bg-color, icon-color | Used to create variant styles for a button (Variations like, primary, secondary, etc.) |
+| Name         | Params                                                         | Description                                                                            |
+|--------------|----------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| button-base  |                                                                | Base styles used in every button. Used in `@mixin button-theme` by default             |
+| button-theme | bg-color, border-color, font-color, hover-bg-color, icon-color | Used to create variant styles for a button (Variations like, primary, secondary, etc.) |
 
 
 #### Modifiers

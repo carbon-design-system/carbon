@@ -1,6 +1,4 @@
-### Javascript
-
-Initializing and getting component instances.
+### JavaScript
 
 #### Options
 

@@ -1,4 +1,4 @@
-### Javascript
+### JavaScript
 
 #### Public Methods
 
@@ -29,7 +29,8 @@
 
 ### FAQ
 
-#### How do I point multiple elements to the same modal?**
+#### How do I point multiple elements to the same modal?
+
 To trigger the same modal, you need to add the `data-modal-target` attribute to a element, and then point it to the same id. For example
 
 ```html

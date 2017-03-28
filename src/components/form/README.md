@@ -1,4 +1,14 @@
-### Form
+### SCSS
+
+#### Modifiers
+
+Modifiers are used with various form-related classes.
+
+| Selector                         | Description                         |
+|----------------------------------|-------------------------------------|
+| .bx--label--disabled             | Applies disabled styles for a label |
+
+### FAQ
 
 #### Using Form Requirement
 
@@ -36,6 +46,7 @@ Now that `data-invalid` is added to the `input`, the `bx--form-requirement` will
 
 Bluemix Components provides inputs (checkboxes, text-inputs, etc.) and some default styles for forms: 
 - `.bx--form-item`
+- `.bx--fieldset`
 - `.bx--label`
 - `.bx--form-requirement`
 

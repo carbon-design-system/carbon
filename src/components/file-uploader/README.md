@@ -1,27 +1,28 @@
-#### Javascript
+### JavaScript
 
-##### Public Methods
+#### Public Methods
 
-| Name       | Params                                 | Description                                                                                                                                                                                                                                                       |
-|------------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `setState` | `state`: String, `selectIndex`: number | After files are added, call this method to change `state` of the filenames (`'upload'`, `'complete'`, `'edit'`). State is changed on all filenames when `selectIndex` is `undefined`. Give a `selectIndex` to select the index of the filename you want to change |
+| Name     | Params                                 | Description                                                                                                       |
+|----------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| setState | state: `String`, selectIndex: `Number` | After files are added, call this method to change `state` of the filenames (`'upload'`, `'complete'`, `'edit'`).  |
+| release  |                                        | Deletes the instance                                                                                              |
 
-##### Options
+#### Options
 
-| Option                | Default Selector                      | Description                                           |
-|-----------------------|---------------------------------------|-------------------------------------------------------|
-| `selectorInit`        | `[data-file]`                         | Element for initializing instance                     |
-| `selectorInput`       | `[input[type="file"].bx--file-input]` | Input element                                         |
-| `selectorContainer`   | `[data-file-container]`               | Element for injecting HTML for upload and edit states |
-| `selectorCloseButton` | `.bx--file-close`                     | Close button for removing filename nodes              |
+| Option              | Default Selector                    | Description                                           |
+|---------------------|-------------------------------------|-------------------------------------------------------|
+| selectorInit        | [data-file]                         | Element for initializing instance                     |
+| selectorInput       | [input[type="file"].bx--file-input] | Input element                                         |
+| selectorContainer   | [data-file-container]               | Element for injecting HTML for upload and edit states |
+| selectorCloseButton | .bx--file-close                     | Close button for removing filename nodes              |
 
-##### Events
+#### Events
 
-| Event Name                              | Description                                                                                                                                                                          |
-|-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `change`                                | When files are added to File Uploader, a change event is fired. This also triggers custom events; see `eventBeforeDisplayFilesFileuploader` and `eventAfterDisplayFilesFileuploader` |
-| `eventBeforeDeleteFilenameFileuploader` | Triggered before clicking on close button(s) inside filename node(s).                                                                                                                |
-| `eventAfterDeleteFilenameFileuploader`  | Triggered after clicking on close button(s) inside filename node(s).                                                                                                                 |
+| Event Name                            | Description                                                                                                                                                                       |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| change                                | When files are added to File Uploader, a change event is fired. This also triggers custom events; see eventBeforeDisplayFilesFileuploader and eventAfterDisplayFilesFileuploader` |
+| eventBeforeDeleteFilenameFileuploader | Triggered before clicking on close button(s) inside filename node(s).                                                                                                             |
+| eventAfterDeleteFilenameFileuploader  | Triggered after clicking on close button(s) inside filename node(s).                                                                                                              |
 
 ### FAQ 
 
@@ -70,7 +71,7 @@ It's up to the developer and their design team to specify and implement validati
 > 
 ![complete](https://media.github.ibm.com/user/76/files/cf833552-000a-11e7-953c-89152f30046b)
 
-```css
+```scss
 .bx--loading {
   width: 2rem;
   height: 2rem;

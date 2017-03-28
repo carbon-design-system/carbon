@@ -2,6 +2,8 @@
 
 #### Modifiers
 
+Modifier classes for Data Tables are used with various classes.
+
 | Selector                     | Description                                                                                                                                                                                                   |
 |------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `bx--responsive-table--tall` | Makes tables taller. Specifically, rendered height of a table row will be `44px` (by default, table rows are `32px` without this modifier). Apply this class to `div.bx--responsive-tabler-container` element |
@@ -11,7 +13,7 @@
 | `bx--expandable-row--hidden` | The class for hidden expandable rows                                                                                                                                                                          |
 | `bx--table-sort--ascending`  | The class modifier for sorting columns in ascending order                                                                                                                                                     |
 
-### Javascript
+### JavaScript
 
 #### Public Methods
 

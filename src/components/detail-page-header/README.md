@@ -20,9 +20,7 @@ Use these modifiers with `.bx--detail-page-header` class.
 | .bx--detail-page-header--scroll    | Applies styles for Detail Page Header with scroll animation |
 
 
-### Javascript
-
-Initializing and getting component instances.
+### JavaScript
 
 #### Public Methods
 

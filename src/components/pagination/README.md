@@ -2,7 +2,7 @@
 
 #### Modifiers
 
-Use these modifiers with `.bx--root-class` class.
+Use these modifiers with `.bx--pagination__button` class.
 
 | Selector                          | Description                        |
 |-----------------------------------|------------------------------------|
@@ -10,7 +10,7 @@ Use these modifiers with `.bx--root-class` class.
 | .bx--pagination__button--forward  | Applies styles for forward button  |
 
 
-### Javascript
+### JavaScript
 
 #### Options
 

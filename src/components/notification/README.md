@@ -1,14 +1,16 @@
-### SCSS Mixins
+### SCSS 
+
+#### Mixins
 
 Mixins are located in [src/globals/scss/_mixins.scss](https://github.ibm.com/Bluemix/bluemix-components/blob/7.x/src/globals/scss/_mixins.scss)
 
-| Name                | Params | Description                         |
-|---------------------|--------|-------------------------------------|
+| Name                       | Params         | Description                             |
+|----------------------------|----------------|-----------------------------------------|
 | inline-notification--color | $color: String | Applies given $color to border and icon |
-| notification--color | $color: String | Applies given $color to left border |
+| notification--color        | $color: String | Applies given $color to left border     |
 
 
-### CSS Modifiers
+#### Modifiers
 
 Use these modifiers with `.bx--inline-notification` class.
 
@@ -23,14 +25,14 @@ Use these modifiers with `.bx--inline-notification` class.
 | .bx--toast-notification--info    | Apply info color on left border    |
 | .bx--toast-notification--warning | Apply warning color on left border |
 
-## JavaScript
-
+### JavaScript
 
 #### Public Methods
 
-| Name        | Params | Description                                                                       |
-|-------------|--------|-----------------------------------------------------------------------------------|
-| remove      |        | Removes the component, deletes the instance, and removes document event listeners |
+| Name    | Params | Description                                                                       |
+|---------|--------|-----------------------------------------------------------------------------------|
+| remove  |        | Removes the component, deletes the instance, and removes document event listeners |
+| release |        | Delete the instance                                                               |
 
 
 #### Options

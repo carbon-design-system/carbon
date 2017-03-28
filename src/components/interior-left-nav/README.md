@@ -12,17 +12,15 @@ Use these modifiers with `.bx--inline-left-nav` class.
 | .bx--inline-left-nav__header--link | Applied to links in nav header     |
 
 
-### Javascript
-
-Initializing and getting component instances.
+### JavaScript
 
 #### Public Methods
 
 | Name                  | Params                 | Description                                                                                                                           |
 |-----------------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| hookListItemsEvents   |                        | description of method                                                                                                                 |
-| addActiveListItem     | item                   | description of method                                                                                                                 |
+| addActiveListItem     | item: `HTMLElement`    | add active list item                                                                                                                  |
 | handleNestedListClick | listItem, evt: `Event` | Handles click on a list item that contains a nested list in the left navigation. The nested list is expanded and the icon is rotated. |
+| release               |                        | Deletes the instance                                                                                                                  |
 
 #### Options
 

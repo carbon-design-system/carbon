@@ -18,15 +18,14 @@ Use these modifiers with `.bx--root-class` class.
 | .bx--something                   | Description here                   |
 
 
-### Javascript
-
-Initializing and getting component instances.
+### JavaScript
 
 #### Public Methods
 
-| Name  | Params | Description  |
-|-------------------|----------------------------------------|-----------------------|
-| myAwesomeFunction | param1 : `Boolean`, param2 : `Number`  | description of method |
+| Name       | Params                             | Description          |
+|------------|------------------------------------|----------------------|
+| release    |                                    | Deletes the instance |
+| methodName | param1: `String`, param2: `Object` | Description here     |
 
 #### Options
 

@@ -1,6 +1,4 @@
-### Javascript
-
-Initializing and getting component instances.
+### JavaScript
 
 #### Functions
 
@@ -8,6 +6,7 @@ Initializing and getting component instances.
 |--------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | initCheckbox | doc : `Object`  | Watches for change in checkbox in the given document. This will use listener function to force change checked attribute so that DOM mutation overserver in svgxuse is triggered. |
 | listener     | event : `Event` | Callback function used in initCheckbox function. On change events, checks if a checkbox input is checked and will set or remove checked attribute accordingly                    |
+
 ### FAQ
 
 #### Two ways to write checkbox HTML
@@ -48,7 +47,7 @@ With `label` wrapping `input`
 
 #### Fieldset and Legend
 
-As a best practice, groups of checkboxes should make use of `<fieldset>` and `<legend>` (see Form README for details).
+As a best practice, groups of checkboxes should make use of `<fieldset>` and `<legend>` (see Form for details).
 This is especially true for forms submitting data.
 
 But, there are exceptions to the rule. For example, Data Tables make use of checkboxes as a way to select rows of data. 

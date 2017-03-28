@@ -1,4 +1,6 @@
-### CSS Modifiers
+### SCSS
+
+#### Modifiers
 
 Use these modifiers with `.bx--loading` class.
 
@@ -8,21 +10,19 @@ Use these modifiers with `.bx--loading` class.
 | .bx--loading--stop         | Class for stopping the loading animation |
 | .bx--loading-overlay--stop | Class for hiding the overlay             |
 
-### Javascript
+### JavaScript
 
-[For details on initializing and getting components, look here]
+#### Public Methods
 
-### Public Methods
+| Name     | Params           | Description                                                 |
+|----------|------------------|-------------------------------------------------------------|
+| release  |                  | Deletes the instance                                        |
+| set      | active : Boolean | Sets the active/inactive state                              |
+| toggle   |                  | Toggles active/inactive state                               |
+| isActive |                  | Returns current state                                       |
+| end      |                  | Runs end animation and then delete the element from the DOM |
 
-| Name              | Params           | Description                    |
-|-------------------|------------------|--------------------------------|
-| release           |                  | Deletes the instance           |
-| set               | active : Boolean | Sets the active/inactive state |
-| toggle            |                  | Toggles active/inactive state  |
-| isActive          |                  | Returns current state          |
-| end               |                  | Runs end animation and then delete the element from the DOM |
-
-### Options
+#### Options
 
 | Option                  | Default Selector          | Description                                                      |
 |-------------------------|---------------------------|------------------------------------------------------------------|
