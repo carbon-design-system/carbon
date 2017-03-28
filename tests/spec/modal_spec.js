@@ -109,7 +109,6 @@ describe('Test modal', function () {
       }).to.throw(Error);
     });
 
-
     it('Should have hide() not hide if not visible', function () {
       const spy = sinon.spy();
       events.on(element, 'modal-beinghidden', spy);
@@ -179,25 +178,67 @@ describe('Test modal', function () {
 
     it('Should handle the ESC key to close the modal', function () {
       element.classList.add('is-visible');
-      const spy = sinon.spy();
-      events.on(element, 'modal-beinghidden', spy);
+      const spyBeforeHidden = sinon.spy();
+      const spyAfterHidden = sinon.spy();
+      events.on(element, 'modal-beinghidden', spyBeforeHidden);
+      events.on(element, 'modal-hidden', spyAfterHidden);
       element.ownerDocument.body.dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { which: 27 }));
+      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
       expect(element.classList.contains('is-visible')).to.be.false;
-      expect(spy).to.be.called;
+      expect(spyBeforeHidden).to.be.called;
+      expect(spyAfterHidden).to.be.called;
+      const eventDataBeforeHidden = spyBeforeHidden.firstCall.args[0].detail;
+      const eventDataAfterHidden = spyAfterHidden.firstCall.args[0].detail;
+      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden')
+        .to.equal(element.ownerDocument.body);
+      expect(eventDataBeforeHidden.launchingEvent.target, 'Launching event for modal-beinghidden')
+        .to.equal(element.ownerDocument.body);
+      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden')
+        .to.equal(element.ownerDocument.body);
+      expect(eventDataAfterHidden.launchingEvent.target, 'Launching event for modal-hidden')
+        .to.equal(element.ownerDocument.body);
     });
 
     it('Should handle any elements with data-modal-close attribute to close the modal', function () {
       modal.show();
+      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      const spyBeforeHidden = sinon.spy();
+      const spyAfterHidden = sinon.spy();
+      events.on(modal.element, 'modal-beinghidden', spyBeforeHidden);
+      events.on(modal.element, 'modal-hidden', spyAfterHidden);
       const closeButton = element.querySelector('[data-modal-close]');
       closeButton.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.classList.contains('is-visible')).to.be.false;
+      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      expect(element.classList.contains('is-visible'), 'Visible state').to.be.false;
+      expect(spyBeforeHidden).to.have.been.called;
+      expect(spyAfterHidden).to.have.been.called;
+      const eventDataBeforeHidden = spyBeforeHidden.firstCall.args[0].detail;
+      const eventDataAfterHidden = spyAfterHidden.firstCall.args[0].detail;
+      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden').to.equal(closeButton);
+      expect(eventDataBeforeHidden.launchingEvent.target, 'Launching event for modal-beinghidden').to.equal(closeButton);
+      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden').to.equal(closeButton);
+      expect(eventDataAfterHidden.launchingEvent.target, 'Launching event for modal-hidden').to.equal(closeButton);
     });
 
     it('Should handle any click outside the modal element to close the modal', function () {
       modal.show();
+      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      const spyBeforeHidden = sinon.spy();
+      const spyAfterHidden = sinon.spy();
+      events.on(modal.element, 'modal-beinghidden', spyBeforeHidden);
+      events.on(modal.element, 'modal-hidden', spyAfterHidden);
       const containerArea = document.querySelector('.bx--modal');
       containerArea.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
       expect(element.classList.contains('is-visible')).to.be.false;
+      expect(spyBeforeHidden).to.have.been.called;
+      expect(spyAfterHidden).to.have.been.called;
+      const eventDataBeforeHidden = spyBeforeHidden.firstCall.args[0].detail;
+      const eventDataAfterHidden = spyAfterHidden.firstCall.args[0].detail;
+      expect(eventDataBeforeHidden.launchingElement, 'Launching element for modal-beinghidden').to.equal(element);
+      expect(eventDataBeforeHidden.launchingEvent.target, 'Launching event for modal-beinghidden').to.equal(element);
+      expect(eventDataAfterHidden.launchingElement, 'Launching element for modal-hidden').to.equal(element);
+      expect(eventDataAfterHidden.launchingEvent.target, 'Launching event for modal-hidden').to.equal(element);
     });
 
     afterEach(function () {

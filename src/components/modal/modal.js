@@ -31,13 +31,19 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedState
     this._hookCloseActions();
   }
 
-  // when .init() is called from initComponentByLauncher, run this method
+  /**
+   * A method that runs when `.init()` is called from `initComponentByLauncher`.
+   * @param {Event} evt The event fired on the launcher button.
+   */
   createdByLauncher(evt) {
     this.show(evt);
   }
 
-  // when .changeState() is called from eventedState, determine whether or
-  // not to emit events and callback function
+  /**
+   * Determines whether or not to emit events and callback function when `.changeState()` is called from `eventedState`.
+   * @param {string} state The new state.
+   * @returns {boolean} `true` if the given `state` is different from current state.
+   */
   shouldStateBeChanged(state) {
     if (state === 'shown') {
       return !this.element.classList.contains(this.options.classVisible);
@@ -97,6 +103,9 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedState
   _hookCloseActions() {
     this.element.addEventListener('click', (evt) => {
       const closeButton = eventMatches(evt, this.options.selectorModalClose);
+      if (closeButton) {
+        evt.delegateTarget = closeButton; // eslint-disable-line no-param-reassign
+      }
       if (closeButton || evt.target === this.element) {
         this.hide(evt);
       }
