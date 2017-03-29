@@ -158,7 +158,7 @@ gulp.task('sass:compiled', () => {
           filePath.extname = `.min${filePath.extname}`;
         }
       }))
-      .pipe(sourcemaps.write())
+      .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('css'))
       .pipe(browserSync.stream());
   }
