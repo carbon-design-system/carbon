@@ -40,6 +40,12 @@ class OverflowMenu extends Component {
     }
   }
 
+  closeMenu = () => {
+    this.setState({
+      open: false,
+    });
+  }
+
   handleClick = (evt) => {
     this.setState({ open: !this.state.open });
     this.props.onClick(evt);
@@ -47,6 +53,7 @@ class OverflowMenu extends Component {
 
   handleKeyPress = (evt) => {
     const key = evt.key || evt.which;
+    console.log('here');
 
     if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
       this.setState({ open: !this.state.open });
@@ -54,13 +61,7 @@ class OverflowMenu extends Component {
   }
 
   handleClickOutside = () => {
-    this.setState({ open: false });
-  }
-
-  handleBlur = (evt) => {
-    if (!this.refs.overflow.contains(evt.relatedTarget)) {
-      this.setState({ open: false });
-    }
+    this.closeMenu();
   }
 
   render() {
@@ -70,6 +71,7 @@ class OverflowMenu extends Component {
       ariaLabel,
       children,
       iconDescription,
+      onClick, // eslint-disable-line
       ...other,
     } = this.props;
 
@@ -79,27 +81,32 @@ class OverflowMenu extends Component {
       { 'bx--overflow-menu--open': this.state.open },
     );
 
+    const childrenWithProps = React.Children.map(children, child =>
+      React.cloneElement(child, {
+        closeMenu: this.closeMenu,
+      })
+    );
+
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
           {...other}
-          ref="overflow"
-          className={overflowMenuClasses}
-          onClick={this.handleClick}
           onKeyDown={this.handleKeyPress}
-          onBlur={this.handleBlur}
+          ref={overflow => this.overflow = overflow} // eslint-disable-line
+          className={overflowMenuClasses}
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
         >
           <Icon
+            onClick={this.handleClick}
             className="bx--overflow-menu__icon"
             name="overflow-menu"
             description={iconDescription}
             width="100%"
           />
           <ul className="bx--overflow-menu__options">
-            {children}
+            {childrenWithProps}
           </ul>
         </div>
       </ClickListener>

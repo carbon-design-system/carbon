@@ -82,11 +82,12 @@ describe('OverflowMenu', () => {
       expect(menu.hasClass(openClass)).toEqual(true);
     });
 
-    it('should be in an open state after menu is clicked', () => {
+    it('should be in an open state after icon is clicked', () => {
       const rootWrapper = mount(<OverflowMenu />);
       const menu = rootWrapper.childAt(0);
+      const icon = menu.find(Icon);
 
-      menu.simulate('click');
+      icon.simulate('click');
       expect(rootWrapper.state().open).toEqual(true);
     });
 
@@ -98,26 +99,10 @@ describe('OverflowMenu', () => {
 
       rootWrapper.setState({ open: true });
 
-
       menu.simulate('keydown', { which: spaceKey });
       expect(rootWrapper.state().open).toEqual(false);
       menu.simulate('keydown', { which: enterKey });
       expect(rootWrapper.state().open).toEqual(true);
-    });
-
-    it('should be hidden when it loses focus', () => {
-      const rootWrapper = mount(
-        <OverflowMenu className="extra-class">
-          <div className="test-child"></div>
-          <div className="test-child"></div>
-        </OverflowMenu>
-      );
-      const menu = rootWrapper.childAt(0);
-
-      rootWrapper.setState({ open: true });
-
-      menu.simulate('blur');
-      expect(rootWrapper.state().open).toEqual(false);
     });
 
     it('should be in a closed state after handleOutsideClick() is invoked', () => {

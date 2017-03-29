@@ -4,18 +4,18 @@ import OverflowMenu from '../../components/OverflowMenu';
 import OverflowMenuItem from '../../components/OverflowMenuItem';
 
 const overflowMenuEvents = {
-  onClick: action('onClick'),
+  onClick: () => console.log('onClick overflowmenu'),
   className: 'some-class',
 };
 
 const overflowMenuItemEvents = {
-  onClick: action('onClick'),
+  onClick: () => console.log('onClick item'),
   className: 'some-class',
 };
 
 storiesOf('OverflowMenu', module)
   .addWithInfo(
-    '',
+    'Default',
     `
       Overflow Menu is used when additional options are available to the user and there is a space constraint.
       Create Overflow Menu Item components for each option on the menu.
