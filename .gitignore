@@ -32,6 +32,7 @@ es
 umd
 scripts
 css
-sass
+scss
 html
 docs/js
+

@@ -55,7 +55,7 @@ gulp.task('browser-sync', ['build:dev'], () => {
 
 // Use: npm run prebuild
 gulp.task('clean', () => del([
-  'sass',
+  'scss',
   'css',
   'es',
   'umd',
@@ -185,7 +185,7 @@ gulp.task('sass:source', () => {
   const srcFiles = './src/**/*.scss';
 
   return gulp.src(srcFiles)
-    .pipe(gulp.dest('sass'));
+    .pipe(gulp.dest('scss'));
 });
 
 gulp.task('html:source', () => {

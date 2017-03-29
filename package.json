@@ -1,6 +1,6 @@
 {
   "name": "carbon-components",
-  "version": "7.0.0-rc.3",
+  "version": "7.0.0-rc.4",
   "description": "Carbon Components is a component library for Carbon",
   "main": "umd/index.js",
   "module": "es/index.js",
@@ -132,7 +132,7 @@
     "es/**/*",
     "umd/**/*",
     "scripts/**/*",
-    "sass/**/*",
+    "scss/**/*",
     "css/**/*",
     "html/**/*",
     "src/**/*"
