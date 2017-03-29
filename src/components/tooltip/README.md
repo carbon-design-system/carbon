@@ -17,25 +17,10 @@
 
 #### Options
 
-| Option                 | Default Selector       | Description                                                                            |
-|------------------------|------------------------|----------------------------------------------------------------------------------------|
-| selectorInit           | [data-tooltip]         | The CSS selector to find the tooltip.                                                  |
-| selectorPlacementScope | body                   | The CSS selector to find the element you wish the append the tooltip to.               |
-| objMenuOffset          | `{ top: 10, left: 0 }` | An object containing the top and left offset values in px                              |
-| tooltipDirection       | bottom                 | The direction you wish the tooltip to display. Left, top, right, and bottom are valid. |
-| eventBeforeShown       | tooltip-beingshown     | The name of the custom event fired before a tooltip is shown.                          |
-| eventAfterShown        | tooltip-shown          | The name of the custom event fired after a tooltip is shown.                           |
-| eventBeforeHidden      | tooltip-beinghidden    | The name of the custom event fired before a tooltip is hidden.                         |
-| eventAfterHidden       | tooltip-hidden         | The name of the custom event fired after a tooltip is hidden.                          |
-
-#### Events
-
-| Event Name        | Description                                                                                                 |
-|-------------------|-------------------------------------------------------------------------------------------------------------|
-| eventBeforeShown  | The name of the custom event fired before a tooltip is shown. Cancellation of this event stops it shown.    |
-| eventAfterShown   | The name of the custom event fired after a tooltip is shown.                                                |
-| eventBeforeHidden | The name of the custom event fired before a tooltip is closed. Cancellation of this event stops it closing. |
-| eventAfterHidden  | The name of the custom event fired after a tooltip is hidden.                                               |
+| Option                   | Default Selector                | Description                                                                            |
+|--------------------------|---------------------------------|----------------------------------------------------------------------------------------|
+| `selectorInit`           | `[data-tooltip-trigger]`        | The CSS selector to find the tooltip.
+| `objMenuOffset`          | `{ top: 10, left: 0 }`          | An object containing the top and left offset values in px
 
 ### Simple tooltip
 

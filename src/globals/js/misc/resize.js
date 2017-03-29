@@ -17,19 +17,17 @@ const optimizedResize = (function optimizedResize() {
   function resize() {
     if (!running) {
       running = true;
-
-      if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(runCallbacks);
-      } else {
-        setTimeout(runCallbacks, 66);
-      }
+      window.requestAnimationFrame(runCallbacks);
     }
   }
 
   // adds callback to loop
   function addCallback(callback) {
     if (callback) {
-      callbacks.push(callback);
+      const index = callbacks.indexOf(callback);
+      if (index < 0) {
+        callbacks.push(callback);
+      }
     }
   }
 
@@ -40,6 +38,14 @@ const optimizedResize = (function optimizedResize() {
         window.addEventListener('resize', resize);
       }
       addCallback(callback);
+      return {
+        release() {
+          const index = callbacks.indexOf(callback);
+          if (index >= 0) {
+            callbacks.splice(index, 1);
+          }
+        },
+      };
     },
   };
 }());

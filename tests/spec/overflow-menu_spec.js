@@ -66,37 +66,37 @@ describe('Test Overflow menu', function () {
 
     it('Should provide a way to cancel showing overflow menu', function () {
       const spyOverflowEvent = sinon.spy();
-      events.on(element.ownerDocument.body, 'overflow-menu-beingshown', (e) => {
+      events.on(element.ownerDocument.body, 'floating-menu-beingshown', (e) => {
         e.preventDefault();
       });
-      events.on(element.ownerDocument.body, 'overflow-menu-shown', spyOverflowEvent);
+      events.on(element.ownerDocument.body, 'floating-menu-shown', spyOverflowEvent);
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(spyOverflowEvent, 'overflow-menu-shown event').not.to.have.been.called;
+      expect(spyOverflowEvent, 'floating-menu-shown event').not.to.have.been.called;
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.false;
     });
 
     it('Should emit an event after showing', function () {
       const spyOverflowEvent = sinon.spy();
-      events.on(document, 'overflow-menu-shown', spyOverflowEvent);
+      events.on(document, 'floating-menu-shown', spyOverflowEvent);
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent).to.have.been.called;
     });
 
     it('Should provide a way to cancel hiding overflow menu', function () {
       const spyOverflowEvent = sinon.spy();
-      events.on(element.ownerDocument.body, 'overflow-menu-beinghidden', (e) => {
+      events.on(element.ownerDocument.body, 'floating-menu-beinghidden', (e) => {
         e.preventDefault();
       });
-      events.on(element.ownerDocument.body, 'overflow-menu-hidden', spyOverflowEvent);
+      events.on(element.ownerDocument.body, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(spyOverflowEvent, 'overflow-menu-hidden event').not.to.have.been.called;
+      expect(spyOverflowEvent, 'floating-menu-hidden event').not.to.have.been.called;
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.true;
     });
 
     it('Should emit an event after hiding', function () {
       const spyOverflowEvent = sinon.spy();
-      events.on(document, 'overflow-menu-hidden', spyOverflowEvent);
+      events.on(document, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent).to.have.been.called;

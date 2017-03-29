@@ -1,127 +1,81 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import eventedState from '../../globals/js/mixins/evented-state';
-import { initMenu, placeMenu } from '../../globals/js/misc/menu-placement';
-import on from '../../globals/js/misc/on';
+import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
+import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+import FloatingMenu from '../floating-menu/floating-menu';
+import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 
-class Tooltip extends mixin(createComponent, initComponentBySearch, eventedState) {
+class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHideState) {
+  /**
+   * Tooltip.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   */
   constructor(element, options) {
     super(element, options);
-
-    this.tooltipTrigger = this.element;
-
-    this.tooltip = this.tooltipTrigger.ownerDocument.querySelector(this.tooltipTrigger.dataset.tooltipTarget);
-
-    this.menuPlacementScope = this.tooltipTrigger.ownerDocument.querySelector(this.options.selectorPlacementScope);
-
-    initMenu(this.tooltipTrigger, this.tooltip, this.menuPlacementScope);
-
-    this.resizeEvent = on(this.menuPlacementScope, 'resizeEvent', () => {
-      placeMenu(this.tooltipTrigger, this.tooltip, this.options.objMenuOffset, this.options.tooltipDirection);
+    ['mouseover', 'mouseout', 'focus', 'blur'].forEach((name) => {
+      this.element.addEventListener(name, (event) => { this._handleHover(event); });
     });
-
-    this.tooltipTrigger.addEventListener('mouseover', (event) => { this._handleHover(event, 'shown'); });
-    this.tooltipTrigger.addEventListener('mouseout', (event) => { this._handleHover(event, 'hidden'); });
-
-    this.tooltipTrigger.addEventListener('focus', (event) => { this._handleHover(event, 'shown'); });
-    this.tooltipTrigger.addEventListener('blur', (event) => { this._handleHover(event, 'hidden'); });
   }
 
   /**
-   * Checks to see if a direction is specified in the markup
-   * and if so overrides the direction from this.options.
-   * @private
+   * A method called when this widget is created upon events.
+   * @param {Event} event The event triggering the creation.
    */
-  _checkDirection() {
-    if (this.tooltip.dataset.tooltipDirection) {
-      this.options.tooltipDirection = this.tooltip.dataset.tooltipDirection;
-    }
+  createdByEvent(event) {
+    this._handleHover(event);
   }
 
-  /**
-   * Sets a class to position the tooltip caret correctly.
-   * @private
-   * @param {string} direction The direction the tooltip is positioned relative to the trigger.
-   */
-  _positionCaret(direction) {
-    if (direction === 'left') {
-      this.tooltip.classList.add('bx--tooltip-caret--right');
-    }
-    if (direction === 'top') {
-      this.tooltip.classList.add('bx--tooltip-caret--bottom');
-    }
-    if (direction === 'right') {
-      this.tooltip.classList.add('bx--tooltip-caret--left');
-    }
-    if (direction === 'bottom') {
-      this.tooltip.classList.add('bx--tooltip-caret--top');
-    }
-  }
   /**
    * Changes the shown/hidden state.
-   * @private
    * @param {string} state The new state.
    * @param {Object} detail The detail of the event trigging this action.
    * @param {Function} callback Callback called when change in state completes.
-   */
-  _changeState(state, detail, callback) {
-    this.tooltip.classList.toggle('bx--tooltip--shown', state === 'shown');
-    this._checkDirection();
-    this._positionCaret(this.options.tooltipDirection);
-    placeMenu(this.tooltipTrigger, this.tooltip, this.options.objMenuOffset, this.options.tooltipDirection);
-    callback();
-  }
+   // */
+  changeState(state, detail, callback) {
+    if (!this.tooltip) {
+      const tooltip = this.element.ownerDocument.querySelector(this.element.getAttribute(this.options.attribTooltipTarget));
+      if (!tooltip) {
+        throw new Error('Cannot find the target tooltip.');
+      }
 
-  _handleHover(event, state) {
-    this.changeState(state, {
-      element: this.tooltipTrigger,
-      optionMenu: this.optionMenu,
-      evt: event,
-    });
-  }
-
-  /**
-   * Shows the tooltip.
-   */
-  show() {
-    this.changeState('shown', {
-      element: this.tooltipTrigger,
-      optionMenu: this.optionMenu,
-    });
-  }
-
-  /**
-   * Hides the tooltip.
-   */
-  hide() {
-    this.changeState('hidden', {
-      element: this.tooltipTrigger,
-      optionMenu: this.optionMenu,
-    });
-  }
-
-  /**
-   * Releases instance and any global event listeners.
-   */
-  release() {
-    if (this.resizeEvent) {
-      this.resizeEvent = this.resizeEvent.release();
+      // Lazily create a component instance for tooltip
+      this.tooltip = FloatingMenu.create(tooltip, {
+        refNode: this.element,
+        classShown: this.options.classShown,
+        offset: this.options.objMenuOffset,
+      });
+      this.children.push(this.tooltip);
     }
-    super.release();
+
+    // Delegates the action of changing state to the tooltip.
+    // (And thus the before/after shown/hidden events are fired from the tooltip)
+    this.tooltip.changeState(state, Object.assign(detail, { delegatorNode: this.element }), callback);
+  }
+
+  /**
+   * Handles hover/focus events.
+   * @param {Event} event The event.
+   * @private
+   */
+  _handleHover(event) {
+    const state = {
+      mouseover: 'shown',
+      mouseout: 'hidden',
+      focus: 'shown',
+      blur: 'hidden',
+    }[event.type];
+    this.changeState(state, getLaunchingDetails(event));
   }
 
   static components = new WeakMap();
 
   static options = {
-    selectorInit: '[data-tooltip-target]',
-    selectorPlacementScope: 'body',
-    eventBeforeShown: 'tooltip-beingshown',
-    eventAfterShown: 'tooltip-shown',
-    eventBeforeHidden: 'tooltip-beinghidden',
-    eventAfterHidden: 'tooltip-hidden',
+    selectorInit: '[data-tooltip-trigger]',
+    classShown: 'bx--tooltip--shown',
+    attribTooltipTarget: 'data-tooltip-target',
     objMenuOffset: { top: 10, left: 0 },
-    tooltipDirection: 'bottom',
+    initEventNames: ['mouseover', 'focus'],
   };
 }
 

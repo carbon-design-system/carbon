@@ -10,75 +10,62 @@
     @include helvetica;
     @include font-size('14');
     @include layer('overlay');
-    position: relative;
+    position: absolute;
     display: none;
     max-width: rem(244px);
     background: $ui-01;
     padding: 1rem;
     border: 1px solid $ui-04;
     color: $text-01;
+
+    &:before {
+      position: absolute;
+      background: $ui-01;
+      left: 0;
+      top: rem(-6px);
+      right: 0;
+      transform: rotate(-135deg);
+      width: .6rem;
+      height: .6rem;
+      border-right: 1px solid $ui-04;
+      border-bottom: 1px solid $ui-04;
+      margin: 0 auto;
+      content: '';
+    }
+
+    &[data-floating-menu-direction='left'] {
+      margin-left: -.6rem;
+
+      &:before {
+        left: auto;
+        top: 44.7%;
+        right: rem(-6px);
+        transform: rotate(-45deg);
+      }
+    }
+
+    &[data-floating-menu-direction='top'] {
+      &:before {
+        top: auto;
+        bottom: rem(-6px);
+        transform: rotate(45deg);
+      }
+    }
+
+    &[data-floating-menu-direction='right'] {
+      margin-left: .6rem;
+
+      &:before {
+        left: rem(-6px);
+        top: 44.7%;
+        right: auto;
+        transform: rotate(135deg);
+      }
+    }
   }
 
   .bx--tooltip--shown {
     display: block;
-  }
-
-  .bx--tooltip-caret--left:before {
-    position: absolute;
-    background: $ui-01;
-    top: 44.7%;
-    left: rem(-6px);
-    transform: rotate(135deg);
-    width: .6rem;
-    height: .6rem;
-    border-right: 1px solid $ui-04;
-    border-bottom: 1px solid $ui-04;
-    margin: 0 auto;
-    content: '';
-  }
-
-  .bx--tooltip-caret--top:before {
-    position: absolute;
-    background: $ui-01;
-    right: 0;
-    left: 0;
-    top: rem(-6px);
-    transform: rotate(-135deg);
-    width: .6rem;
-    height: .6rem;
-    border-right: 1px solid $ui-04;
-    border-bottom: 1px solid $ui-04;
-    margin: 0 auto;
-    content: '';
-  }
-
-  .bx--tooltip-caret--right:before {
-    position: absolute;
-    background: $ui-01;
-    top: 44.7%;
-    right: rem(-6px);
-    transform: rotate(-45deg);
-    width: .6rem;
-    height: .6rem;
-    border-right: 1px solid $ui-04;
-    border-bottom: 1px solid $ui-04;
-    margin: 0 auto;
-    content: '';
-  }
-
-  .bx--tooltip-caret--bottom:before {
-    position: absolute;
-    background: $ui-01;
-    right: 0;
-    left: 0;
-    bottom: rem(-6px);
-    transform: rotate(45deg);
-    width: .6rem;
-    height: .6rem;
-    border-right: 1px solid $ui-04;
-    border-bottom: 1px solid $ui-04;
-    margin: 0 auto;
-    content: '';
   }
 
   // Simple CSS only tooltip

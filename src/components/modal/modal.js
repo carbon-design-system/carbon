@@ -1,15 +1,15 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByLauncher from '../../globals/js/mixins/init-component-by-launcher';
-import eventedState from '../../globals/js/mixins/evented-state';
+import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-class Modal extends mixin(createComponent, initComponentByLauncher, eventedState) {
+class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowHideState) {
   /**
    * Modal dialog.
    * @extends CreateComponent
    * @extends InitComponentByLauncher
-   * @extends EventedState
+   * @extends EventedShowHideState
    * @param {HTMLElement} element The element working as a modal dialog.
    * @param {Object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
@@ -75,31 +75,6 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedState
     this.element.addEventListener('transitionend', transitionEnd);
   }
 
-  _getLaunchingDetails(evt) {
-    if (evt === null || evt === undefined || typeof evt === 'function') {
-      return {
-        launchingElement: null,
-        launchingEvent: null,
-      };
-    }
-
-    const launchingElement = evt.delegateTarget || evt.currentTarget || evt;
-    const launchingEvent = evt.currentTarget && evt;
-
-    if (launchingElement && !launchingElement.nodeType) {
-      throw new TypeError('DOM Node should be given for launching element.');
-    }
-
-    if (launchingEvent && !launchingEvent.type) {
-      throw new TypeError('DOM event should be given for launching event.');
-    }
-
-    return {
-      launchingElement,
-      launchingEvent,
-    };
-  }
-
   _hookCloseActions() {
     this.element.addEventListener('click', (evt) => {
       const closeButton = eventMatches(evt, this.options.selectorModalClose);
@@ -123,40 +98,6 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedState
     };
 
     this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
-  }
-
-  /**
-   * Shows this modal dialog.
-   */
-  show(evt, callback) {
-    if (!evt || typeof evt === 'function') {
-      callback = evt; // eslint-disable-line no-param-reassign
-    }
-
-    const launchingDetails = this._getLaunchingDetails(evt);
-
-    if (callback && typeof callback === 'function') {
-      this.changeState('shown', launchingDetails, callback);
-    } else {
-      this.changeState('shown', launchingDetails);
-    }
-  }
-
-  /**
-   * Hides this modal dialog.
-   */
-  hide(evt, callback) {
-    if (!evt || typeof evt === 'function') {
-      callback = evt; // eslint-disable-line no-param-reassign
-    }
-
-    const launchingDetails = this._getLaunchingDetails(evt);
-
-    if (callback && typeof callback === 'function') {
-      this.changeState('hidden', launchingDetails, callback);
-    } else {
-      this.changeState('hidden', launchingDetails);
-    }
   }
 
   release() {

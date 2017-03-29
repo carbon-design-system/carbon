@@ -31,6 +31,7 @@ import Notification from './components/notification/notification';
 import Toolbar from './components/toolbar/toolbar';
 import Tooltip from './components/tooltip/tooltip';
 import ProgressIndicator from './components/progress-indicator/progress-indicator';
+import FloatingMenu from './components/floating-menu/floating-menu';
 
 const settings = {};
 
@@ -194,6 +195,12 @@ export {
    * @type InteriorLeftNav
    */
   ProgressIndicator,
+
+  /**
+   * Floating menu.
+   * @type FloatingMenu
+   */
+  FloatingMenu,
 };
 
 /**
@@ -233,6 +240,7 @@ const init = () => {
     Toolbar.init();
     Tooltip.init();
     ProgressIndicator.init();
+    // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
   }
 };
 

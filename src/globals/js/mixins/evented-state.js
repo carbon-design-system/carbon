@@ -54,7 +54,8 @@ export default function (ToMix) {
         detail,
       });
 
-      const canceled = !this.element.dispatchEvent(eventStart);
+      const fireOnNode = (detail && detail.delegatorNode) || this.element;
+      const canceled = !fireOnNode.dispatchEvent(eventStart);
 
       if (canceled) {
         if (callback) {
@@ -65,7 +66,7 @@ export default function (ToMix) {
       } else {
         const changeStateArgs = [state, detail].filter(Boolean);
         this._changeState(...changeStateArgs, () => {
-          this.element.dispatchEvent(new CustomEvent(this.options[`eventAfter${eventNameSuffix}`], {
+          fireOnNode.dispatchEvent(new CustomEvent(this.options[`eventAfter${eventNameSuffix}`], {
             bubbles: true,
             cancelable: true,
             detail,
