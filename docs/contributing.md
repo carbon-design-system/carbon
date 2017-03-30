@@ -4,9 +4,9 @@
 
 Set up your SSH Key GitHub Enterprise account and install node.js 4 or higher.
 * [Generating SSH Keys - GitHub](https://help.github.com/articles/generating-ssh-keys/)
-* [`NVM` (node version manager)](https://github.com/creationix/nvm) to use the latest version of `node.js` (4 or higher).
+* [`NVM` (node version manager)](https://github.com/creationix/nvm) to use the `Node 6`.
 
-Contributing to bluemix-components requires that you can run this repo locally on your computer.
+Contributing to carbon-components requires that you can run this repo locally on your computer.
 
 ## Class names
 
@@ -36,15 +36,9 @@ __SCSS__
 Follow BEM naming convention for classes. Again, the only thing we do differently is prefix all classes with `bx--`.
 
 ```scss
+.bx--block
 .bx--block__element
 .bx--block--modifier
-```
-
-For bluemix-components, `block` would be a component-based name.
-
-```scss
-.bx--component__element
-.bx--component--modifier
 ```
 
 ### Start a new `block` or `element`?
@@ -83,13 +77,9 @@ button
 Also note that all variants of a component can live in a single HTML, SCSS and JS file respectively.
 For example, while there are many button variants (primary, secondary, etc.), they're all contained in those single source files in the button folder.
 
-
-
 ## 1. Fork The Repo:
 
-Go to [bluemix-components](https://github.ibm.com/Bluemix/bluemix-components) and click the "Fork" button in the top-right corner.
-
-![fork](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/9136/2dbf657c-ca8e-11e5-9558-605d0e372cbd.png)
+Go to [bluemix-components](https://github.com/carbon-design-system/carbon-components) and click the "Fork" button in the top-right corner.
 
 ## 2. Clone Your Fork:
 
@@ -100,20 +90,19 @@ Go to [bluemix-components](https://github.ibm.com/Bluemix/bluemix-components) an
 In your terminal:
 
 ```sh
-git clone git@github.ibm.com:{ YOUR_USERNAME }/bluemix-components.git
-cd bluemix-components
+git clone git@github.com:{ YOUR_USERNAME }/carbon-components.git
+cd carbon-components
 ```
 
 See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more details.
-
 
 ## 3. Add Remotes
 
 When you clone your personal repo, you will see `origin` is set up for you already by default. This should be pointing to your personal repo.
 
 ```sh
-git remote add upstream git@github.ibm.com:Bluemix/bluemix-components.git
-git remote add {{YOUR_NAME_HERE}} git@github.ibm.com:{{YOUR_NAME_HERE}}/bluemix-components.git
+git remote add upstream git@github.com:carbon-design-system/carbon-components.git
+git remote add {{YOUR_NAME_HERE}} git@github.com:{{YOUR_NAME_HERE}}/carbon-components.git
 
 # List all your remotes
 git remote -v
@@ -122,7 +111,7 @@ git remote -v
 When you do `git remote -v`, you'll see these remotes:
 * `origin`: connection to your fork
 * `upstream`: connection to the original project.
-* `bthan`: connection to [Brian Han's](https://github.ibm.com/bthan/bluemix-components) fork.
+* `bthan`: connection to [Brian Han's](https://github.com/bthan/carbon-components) fork.
 
 ## 4. Work in a Branch
 
@@ -211,11 +200,11 @@ If you are very sure that your change affects a specific set of components, you 
 gulp test:a11y -f consumables/html/components/fab/fab.html
 ```
 
-The a11y test may report potential issues that should be handled in application-level, not in bluemix-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.ibm.com/Bluemix/bluemix-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
+The a11y test may report potential issues that should be handled in application-level, not in bluemix-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/carbon-design-system/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
 
 ## 7. Make a Pull Request
 
-**Note:** Before you make a pull request, [search](https://github.ibm.com/Bluemix/bluemix-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.
+**Note:** Before you make a pull request, [search](https://github.com/carbon-design-system/carbon-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.
 
 When you're at a good stopping place and you're ready for feedback from other contributors and maintainers, **push your commits to your fork**:
 
@@ -223,9 +212,7 @@ When you're at a good stopping place and you're ready for feedback from other co
 git push origin { YOUR_BRANCH_NAME }
 ```
 
-In your browser, navigate to [Bluemix/bluemix-components](https://github.ibm.com/Bluemix/bluemix-components) and click the button that reads "Compare & pull request"
-
-![pull request](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/9135/2dadf224-ca8e-11e5-8eba-bdbe6d698b08.png)
+In your browser, navigate to [Bluemix/bluemix-components](https://github.com/carbon-design-system/carbon-components) and click the button that reads "Compare & pull request"
 
 > **Is it a Breaking Change?**
 
@@ -246,13 +233,9 @@ Before you create a pull request, change the base branch depending on what kind 
 * Pull requests with **non-breaking changes** like patches and minor updates use the `master` as the base branch.
 * Pull requests with **breaking changes** use the latest `major version number` branch as the base branch (i.e. `7.0.0` or whatever the next major version is).
 
-![base-branch](https://media.github.ibm.com/user/76/files/897f441c-16ca-11e6-9704-eb6f8ac4452a)
-
 Write a title and description then click "Create pull request"
 
-![write pull request](https://uploads.github.ibm.com/github-enterprise-assets/0000/0076/0000/9126/099cd824-ca88-11e5-89d7-94458a4d9ae3.png)
 * [How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
-
 
 ## 8. Updating a Pull Request
 
@@ -263,5 +246,3 @@ Stay up to date with the activity in your pull request. Maintainers from the Des
 When you need to make a change, add, commit and push to your branch normally.
 
 Once all revisiions to your pull request are complete, someone from Design Systems will squash and merge your commits for you.
-
-

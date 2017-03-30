@@ -1,8 +1,6 @@
-### SCSS 
+### SCSS
 
 #### Mixins
-
-Mixins are located in [src/globals/scss/_mixins.scss](https://github.ibm.com/Bluemix/bluemix-components/blob/7.x/src/globals/scss/_mixins.scss)
 
 | Name                       | Params         | Description                             |
 |----------------------------|----------------|-----------------------------------------|

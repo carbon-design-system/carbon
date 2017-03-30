@@ -209,7 +209,6 @@ export {
  * or upon DOM events (e.g. clicking) on such elements.
  * See each components' static `.init()` methods for details.
  *
- * HeaderNav is not instantiated - see PR https://github.ibm.com/Bluemix/bluemix-components/pull/1318
  *
  * @private
  */

@@ -1,3 +1,3 @@
 # `scss`
 
-See [docs/styles](https://github.ibm.com/Bluemix/bluemix-components/tree/master/docs/styles) for more details.
+See [docs](http://carbondesignsystem.com/getting-started/developers) for more details.
