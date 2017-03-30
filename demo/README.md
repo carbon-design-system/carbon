@@ -6,10 +6,10 @@ Contributors and users can ignore this folder -- this is only for project mainta
 ```
 demo
 ├── README.md
-├── bluemix-components.js
-├── bluemix-components.js.map
-├── bluemix-components.min.js
-├── bluemix-components.min.js.map
+├── carbon-components.js
+├── carbon-components.js.map
+├── carbon-components.min.js
+├── carbon-components.min.js.map
 ├── demo.css
 ├── scss
 │   ├── _demo-colors.scss

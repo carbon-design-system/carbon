@@ -79,12 +79,12 @@ For example, while there are many button variants (primary, secondary, etc.), th
 
 ## 1. Fork The Repo:
 
-Go to [bluemix-components](https://github.com/carbon-design-system/carbon-components) and click the "Fork" button in the top-right corner.
+Go to [carbon-components](https://github.com/carbon-design-system/carbon-components) and click the "Fork" button in the top-right corner.
 
 ## 2. Clone Your Fork:
 
 * Go to your GitHub profile.
-* Find bluemix-components.
+* Find carbon-components.
 * Copy the **SSH clone URL**.
 
 In your terminal:
@@ -153,7 +153,7 @@ gulp test:unit
 
 If you add any features to our JavaScript code, make sure to add tests so that your code is covered.
 Tests are written in [Mocha](https://mochajs.org)/[Chai](http://chaijs.com).
-You can see if your code is covered by looking at bluemix-components/tests/coverage/\*/index.html after running test.
+You can see if your code is covered by looking at carbon-components/tests/coverage/\*/index.html after running test.
 
 If your change may hit some browser quirks, use `-b` option, like:
 
@@ -200,7 +200,7 @@ If you are very sure that your change affects a specific set of components, you 
 gulp test:a11y -f consumables/html/components/fab/fab.html
 ```
 
-The a11y test may report potential issues that should be handled in application-level, not in bluemix-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/carbon-design-system/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
+The a11y test may report potential issues that should be handled in application-level, not in carbon-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/carbon-design-system/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
 
 ## 7. Make a Pull Request
 
@@ -212,7 +212,7 @@ When you're at a good stopping place and you're ready for feedback from other co
 git push origin { YOUR_BRANCH_NAME }
 ```
 
-In your browser, navigate to [Bluemix/bluemix-components](https://github.com/carbon-design-system/carbon-components) and click the button that reads "Compare & pull request"
+In your browser, navigate to [carbon-design-system/carbon-components](https://github.com/carbon-design-system/carbon-components) and click the button that reads "Compare & pull request"
 
 > **Is it a Breaking Change?**
 
