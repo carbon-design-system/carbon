@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf, action } from '@kadira/storybook';
 import InteriorLeftNav from '../../components/InteriorLeftNav';
 import InteriorLeftNavItem from '../../components/InteriorLeftNavItem';
 import InteriorLeftNavList from '../../components/InteriorLeftNavList';
@@ -13,7 +13,7 @@ storiesOf('InteriorLeftNav', module)
       breadth of content and tasks users expect to see.
     `,
     () => (
-      <InteriorLeftNav>
+      <InteriorLeftNav onToggle={action('onToggle')}>
         <InteriorLeftNavList title="Example Item 1">
           <InteriorLeftNavItem href="#example-item-1A">
             <a href="#example-item-1A">Example Item 1A</a>

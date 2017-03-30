@@ -54,8 +54,9 @@ describe('InteriorLeftNav', () => {
   });
 
   describe('actions', () => {
+    const onToggleClick = jest.fn();
     const interiorLeftNav = mount(
-      <InteriorLeftNav>
+      <InteriorLeftNav onToggle={onToggleClick}>
         <InteriorLeftNavList />
         <InteriorLeftNavItem href="#first">
           <a href="#first">test-title</a>

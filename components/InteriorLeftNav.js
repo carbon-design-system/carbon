@@ -16,7 +16,12 @@ class InteriorLeftNav extends Component {
     children: PropTypes.node,
     className: PropTypes.string,
     activeHref: PropTypes.string,
+    onToggle: PropTypes.func,
   };
+
+  static defaultProps = {
+    onToggle: () => {},
+  }
 
   state = {
     activeHref: this.props.activeHref || '#',
@@ -57,6 +62,7 @@ class InteriorLeftNav extends Component {
 
   toggle = (evt) => {
     evt.stopPropagation();
+    this.props.onToggle(!this.state.open);
     this.setState({ open: !this.state.open });
   };
 
@@ -92,6 +98,7 @@ class InteriorLeftNav extends Component {
       className,
       children,
       activeHref, // eslint-disable-line no-unused-vars
+      onToggle, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 
