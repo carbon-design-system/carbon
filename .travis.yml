@@ -4,7 +4,6 @@ cache:
   - node_modules
 node_js:
   - "6"
-group: bluezone
 dist: trusty
 
 addons:
@@ -13,8 +12,6 @@ addons:
       - google-chrome-stable
   firefox: "latest-esr"
 before_install:
-  - echo "@console:registry=http://dev-console-npm.stage1.ng.bluemix.net/" >> ~/.npmrc
-  - echo "//dev-console-npm.stage1.ng.bluemix.net/:_authToken=\${NPM_TOKEN}" >> ~/.npmrc
   - if [[ -n "${AAT_TOKEN}" ]]; then sed -e "s|\${AAT_TOKEN}|$AAT_TOKEN|g" < .aat.yml.src > .aat.yml; fi
   - tar -xjf /tmp/firefox-latest-esr.tar.bz2 --directory /tmp
   - export PATH="/tmp/firefox:$PATH"
@@ -32,8 +29,3 @@ script:
   - find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm run test:unit -- -d -f
   - if [[ -n "${AAT_TOKEN}" ]]; then (npm run test:a11y || true); fi
   - npm run lint
-deploy:
-  provider: script
-  script: sh travis.ci/deploy.sh
-  on:
-    all_branches: true
