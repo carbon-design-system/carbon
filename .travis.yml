@@ -15,8 +15,7 @@ addons:
 before_install:
   - echo "@console:registry=http://dev-console-npm.stage1.ng.bluemix.net/" >> ~/.npmrc
   - echo "//dev-console-npm.stage1.ng.bluemix.net/:_authToken=\${NPM_TOKEN}" >> ~/.npmrc
-  - if [[ -n "${NPM_TOKEN_WHITEWATER}" ]]; then echo "@ibma:registry=https://npm-registry.whitewater.ibm.com/" >> .npmrc; fi
-  - if [[ -n "${NPM_TOKEN_WHITEWATER}" ]]; then echo "//npm-registry.whitewater.ibm.com/:_authToken=${NPM_TOKEN_WHITEWATER}" >> .npmrc; fi
+  - if [[ -n "${AAT_TOKEN}" ]]; then sed -e "s|\${AAT_TOKEN}|$AAT_TOKEN|g" < .aat.yml.src > .aat.yml; fi
   - tar -xjf /tmp/firefox-latest-esr.tar.bz2 --directory /tmp
   - export PATH="/tmp/firefox:$PATH"
   - export CHROME_BIN=google-chrome
@@ -25,13 +24,13 @@ before_install:
 install:
   - npm prune
   - npm install || (cat npm-debug.log; false)
-  - if [[ -n "${NPM_TOKEN_WHITEWATER}" ]]; then npm i @ibma/karma-ibma; fi
+  - npm i https://aat.mybluemix.net/dist/karma-ibma.tgz
 
 script:
   - npm run build
   - npm run test:unit -- -b PhantomJS -b Chrome -b Firefox
   - find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm run test:unit -- -d -f
-  - if [[ -n "${NPM_TOKEN_WHITEWATER}" ]]; then (npm run test:a11y || true); fi
+  - if [[ -n "${AAT_TOKEN}" ]]; then (npm run test:a11y || true); fi
   - npm run lint
 deploy:
   provider: script

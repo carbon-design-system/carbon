@@ -36,3 +36,5 @@ scss
 html
 docs/js
 
+# a11y testing
+.aat.yml

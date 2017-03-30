@@ -190,25 +190,14 @@ Other options for testing are:
 
 If you're contributing to our HTML/CSS code, a11y compliance of your code should be tested.
 
-To do so - First, (if you haven't done already) set up NPM auth token for `@ibma` scope, by:
+To do so - First, (if you haven't done already) set up an auth token for a11y rules, by:
 
-1. Create GHE token, by:
-  1. https://github.ibm.com/settings/tokens/new
-  1. Check off `read:org`, `repo`, `user:email` and click on Generate token
-  1. Copy the token and put it to secure place, as you can never see the token again in GHE
-1. Add the following to `$HOME/.npmrc`:
-
-  ```
-  @ibma:registry=https://npm-registry.whitewater.ibm.com/
-  //npm-registry.whitewater.ibm.com/:_authToken={{THE_GHE_TOKEN_CREATED_IN_THE_EARLIER_STEP}}
-  ```
-
-1. `> npm install @ibma/karma-ibma` You’ll be asked to access a long URL. Hit such long URL in browser.
-1. `> npm login -—scope=@ibma`. You'll be asked for username, password, and email address. Type GHE username, IBM intranet password, and IBM email address there, respectively.
-1. `> npm install @ibma/karma-ibma` (again). You will be asked to access a long URL (again). Hit such long URL in browser/
-1. `> npm install @ibma/karma-ibma` (another again). You can now see that NPM successfully runs.
-
-Ref: https://github.ibm.com/Whitewater/npm/blob/master/README.md
+1. Create AAT token, by:
+  1. Go to https://aat.mybluemix.net/auth/
+  1. Enter IBM ID/password as you log into Bluemix
+  1. Accept user agreement
+  1. Hit Copy Authentication Token button
+1. `> sed -e "s|\${NPM_TOKEN}|(The token obtained in above step)|g" < .aat.yml.src > .aat.yml`
 
 Then you can test your changes by running our test commands:
 
@@ -221,11 +210,6 @@ If you are very sure that your change affects a specific set of components, you 
 ```sh
 gulp test:a11y -f consumables/html/components/fab/fab.html
 ```
-
-If you get a test failure, you can refer to the corresponding one in http://ausgsa.ibm.com/projects/h/haactools/w3/magicbutton/plugincfg/rulepack/help/ to the file name what the test failure log points to (e.g. if the log shows idhi_accessibility_check_g377.html, the help can be found at http://ausgsa.ibm.com/projects/h/haactools/w3/magicbutton/plugincfg/rulepack/help/idhi_accessibility_check_g377.html), or inspect RPT rule code by the following:
-
-1. The error log should show something like `wcag20.tech.h59.linkValid`. Searching for that in https://github.ibm.com/IBMa/Tools-Rules-HTML/blob/master/src/accessibility/metadata/wcag20-tech-meta.js - In this example the search gives you something like `WCAG20_Link_Valid`
-2. Searching for the RPT rule implementation in https://github.ibm.com/IBMa/Tools-Rules-HTML/tree/master/src/accessibility/rules (e.g. by using GitHub search like https://github.ibm.com/IBMa/Tools-Rules-HTML/search?utf8=✓&q=WCAG20_Link_Valid which guides you to https://github.ibm.com/IBMa/Tools-Rules-HTML/blob/master/src/accessibility/rules/rpt-link-rules.js). It will give you some ideas on why RPT is complaining against the DOM your application creates.
 
 The a11y test may report potential issues that should be handled in application-level, not in bluemix-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.ibm.com/Bluemix/bluemix-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
 

@@ -51,3 +51,5 @@ label:
 # optional - Where the scan results should be saved.
 # Default: results
 outputFolder: tests/a11y-results
+
+authToken: ${AAT_TOKEN}
