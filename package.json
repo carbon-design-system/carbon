@@ -1,52 +1,32 @@
 {
   "name": "carbon-components",
-  "version": "7.0.0-rc.4",
-  "description": "Carbon Components is a component library for Carbon",
-  "main": "umd/index.js",
+  "description": "Carbon Components is a component library for IBM Cloud",
+  "homepage": "http://carbondesignsystem.com/",
+  "version": "7.0.0",
   "module": "es/index.js",
-  "maintainers": [
-    {
-      "name": "Brian Han",
-      "email": "bthan@us.ibm.com"
-    },
-    {
-      "name": "Mari Johannessen",
-      "email": "mjohannessen@us.ibm.com"
-    },
-    {
-      "name": "TJ Egan",
-      "email": "twegan@us.ibm.com"
-    },
-    {
-      "name": "Ian Fleming",
-      "email": "ianfleming@us.ibm.com"
-    },
-    {
-      "name": "Akira Sudoh",
-      "email": "asudoh@jp.ibm.com"
-    },
-    {
-      "name": "Chris Dhanaraj",
-      "email": "chrisdhanaraj@us.ibm.com"
-    }
+  "main": "umd/index.js",
+  "repository": {
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/carbon-design-system/carbon-components/issues"
+  },
+  "keywords": [
+    "carbon",
+    "component",
+    "components",
+    "css",
+    "html",
+    "ibm",
+    "javascript",
+    "js",
+    "library",
+    "pattern",
+    "patterns",
+    "sass",
+    "scss",
+    "style guide"
   ],
-  "scripts": {
-    "prepublish": "npm run build",
-    "prebuild": "gulp clean",
-    "build": "gulp build",
-    "commitmsg": "validate-commit-msg",
-    "dev": "gulp serve & npm run serve",
-    "serve": "nodemon -e dust,js server.js",
-    "start": "node server.js",
-    "lint": "gulp lint",
-    "test": "gulp test",
-    "test:unit": "gulp test:unit",
-    "test:a11y": "gulp test:a11y"
-  },
-  "engines": {
-    "node": "~4.0.0",
-    "npm": "~3.0.0"
-  },
   "dependencies": {
     "adaro": "1.0.4",
     "bluebird": "~3.1.1",
@@ -125,54 +105,75 @@
     "vinyl-named": "^1.1.0",
     "webpack": "^2.0.0"
   },
-  "repository": {
-    "type": "git"
-  },
   "files": [
+    "css/**/*",
     "es/**/*",
-    "umd/**/*",
+    "html/**/*",
     "scripts/**/*",
     "scss/**/*",
-    "css/**/*",
-    "html/**/*",
-    "src/**/*"
+    "src/**/*",
+    "umd/**/*"
   ],
-  "keywords": [
-    "carbon",
-    "component",
-    "components",
-    "css",
-    "html",
-    "ibm",
-    "javascript",
-    "js",
-    "library",
-    "pattern",
-    "patterns",
-    "sass",
-    "scss",
-    "style guide"
-  ],
+  "scripts": {
+    "build": "gulp build",
+    "commitmsg": "validate-commit-msg",
+    "dev": "gulp serve & npm run serve",
+    "lint": "gulp lint",
+    "prebuild": "gulp clean",
+    "prepublish": "npm run build",
+    "serve": "nodemon -e dust,js server.js",
+    "start": "node server.js",
+    "test": "gulp test",
+    "test:a11y": "gulp test:a11y",
+    "test:unit": "gulp test:unit"
+  },
+  "license": "Apache-2",
   "config": {
-    "validate-commit-msg": {
-      "types": [
-        "feat",
-        "fix",
-        "docs",
-        "style",
-        "refactor",
-        "perf",
-        "test",
-        "chore",
-        "revert"
-      ],
-      "warnOnFail": false,
-      "maxSubjectLength": 100,
-      "subjectPattern": ".+",
-      "subjectPatternErrorMsg": "Subject does not match subject pattern!"
-    },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "Subject does not match subject pattern!",
+      "types": [
+        "chore",
+        "docs",
+        "feat",
+        "fix",
+        "perf",
+        "refactor",
+        "revert",
+        "style",
+        "test"
+      ],
+      "warnOnFail": false
     }
-  }
+  },
+  "maintainers": [
+    {
+      "name": "Brian Han",
+      "email": "bthan@us.ibm.com"
+    },
+    {
+      "name": "Mari Johannessen",
+      "email": "mjohannessen@us.ibm.com"
+    },
+    {
+      "name": "TJ Egan",
+      "email": "twegan@us.ibm.com"
+    },
+    {
+      "name": "Ian Fleming",
+      "email": "ianfleming@us.ibm.com"
+    },
+    {
+      "name": "Akira Sudoh",
+      "email": "asudoh@jp.ibm.com"
+    },
+    {
+      "name": "Chris Dhanaraj",
+      "email": "chrisdhanaraj@us.ibm.com"
+    }
+  ]
 }
