@@ -31,17 +31,14 @@
 When files are added to File Uploader, a `change` event is fired.
 The `change` event triggers a private method to inject HTML into the `selectorContainer` element displaying all added filenames.
 
-![file-uploader-flow](https://media.github.ibm.com/user/76/files/5e736240-ec52-11e6-9251-32ffed4bc70b)
+![file](https://cloud.githubusercontent.com/assets/4185382/24562175/7fcb4502-160f-11e7-8d9c-5ef4bdd67194.gif)
 
 Trigger additional states using `setState()` public method. 
 Additional states are **edit**, **complete** and **upload**.
 
 **Edit** injects close icons into each filename state container. A `click` event listener is also added to remove the filename when close button is clicked.
 
----
-***
-> 
-![file-uploader-flow-edit](https://media.github.ibm.com/user/76/files/f2abbdcc-ec52-11e6-938c-535458ffee6d)
+![edit](https://cloud.githubusercontent.com/assets/4185382/24562305/f3660b28-160f-11e7-9c67-c47829597931.gif)
 
 ```scss
 .bx--file__state-container .bx--file-close {
@@ -59,17 +56,12 @@ Users can select a __single__ file or __multiple__ files.
 By default, any file type is accepted.
 It's up to the developer and their design team to specify and implement validations for which file types are acceptable.
 
----
-***
-> 
-![file-uploader-flow-upload](https://media.github.ibm.com/user/76/files/ae239d28-ec52-11e6-8aff-03cd541a1003)
+![upload](https://cloud.githubusercontent.com/assets/4185382/24562332/114feabe-1610-11e7-9aba-3ca74ef9e8cc.gif)
 
 **Complete** injects checkmark icons into each filename state container.
 
----
-***
 > 
-![complete](https://media.github.ibm.com/user/76/files/cf833552-000a-11e7-953c-89152f30046b)
+![complete](https://cloud.githubusercontent.com/assets/4185382/24562373/2f901fbc-1610-11e7-97f4-153f16bcbcfc.pngtrun)
 
 ```scss
 .bx--loading {
@@ -101,7 +93,7 @@ However, evaluating resulting background colors as solid colors will pass.
 By default, filenames are truncated so that any filename that goes beyond `300px` will be cutoff.
 
 
-![image](https://media.github.ibm.com/user/76/files/9e8debe0-ed36-11e6-818f-e1efccb253cd)
+![image](https://cloud.githubusercontent.com/assets/4185382/24562399/4a00f560-1610-11e7-97c1-9113fb299160.png)
 
 Truncating filenames is enabled through the use of `@mixin text-overflow($size)`.
 
