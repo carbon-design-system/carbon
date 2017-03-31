@@ -79,6 +79,7 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-rollup-plugin": "^0.2.0",
     "karma-safari-launcher": "^1.0.0",
+    "karma-sauce-launcher": "^1.1.0",
     "karma-sinon-chai": "^1.1.0",
     "karma-sourcemap-loader": "~0.3.7",
     "lolex": "1.4.0",
