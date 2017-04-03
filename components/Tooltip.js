@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import Icon from './Icon';
 import classNames from 'classnames';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/tooltips/tooltips.scss');
-}
 
 const propTypes = {
   children: PropTypes.node,

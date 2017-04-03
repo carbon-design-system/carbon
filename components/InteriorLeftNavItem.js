@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
-}
 
 const propTypes = {
   className: PropTypes.string,

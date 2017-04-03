@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import uid from '../lib/uniqueId';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/base-elements/radio/radio.scss');
-}
 
 class RadioButton extends React.Component {
 

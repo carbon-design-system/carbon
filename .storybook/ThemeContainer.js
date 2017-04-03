@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import ThemeSwitcher from './ThemeSwitcher';
 import AppContainer from '../components/AppContainer';
 import './_theme-container.scss';
 
@@ -21,12 +20,6 @@ class ThemeContainer extends React.Component {
       alignItems: 'center',
     },
   }
-  state = {
-    theme: document.getElementsByTagName('body')[0].classList.contains('bx--global-light-ui') ? 'light' : 'dark',
-  }
-  handleThemeUpdate = (themeValue) => {
-    this.setState({ theme: themeValue });
-  }
   render() {
     const {
       story,
@@ -34,10 +27,9 @@ class ThemeContainer extends React.Component {
     } = this.props;
     return (
       <div>
-        <AppContainer theme={this.state.theme} style={style}>
+        <AppContainer style={style}>
           {story()}
         </AppContainer>
-        <ThemeSwitcher updateTheme={this.handleThemeUpdate} />
       </div>
     );
   }

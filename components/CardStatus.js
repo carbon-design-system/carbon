@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/card/card.scss');
-}
 
 const propTypes = {
   status: PropTypes.number,

@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Icon from './Icon';
 import TabContent from './TabContent';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/tabs/tabs.scss');
-}
 
 class Tabs extends React.Component {
 

@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/base-elements/text/text.scss');
-}
 
 const propTypes = {
   className: PropTypes.string,

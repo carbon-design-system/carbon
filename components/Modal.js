@@ -2,9 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 import Button from './Button';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/modals/modals.scss');
-}
 
 class Modal extends Component {
 

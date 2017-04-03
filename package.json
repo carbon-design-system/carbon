@@ -39,7 +39,7 @@
       "email": "mjohannessen@us.ibm.com"
     },
     {
-      "name": "T.J. Eagan",
+      "name": "TJ Egan",
       "email": "twegan@us.ibm.com"
     },
     {
@@ -100,7 +100,6 @@
     }
   },
   "dependencies": {
-    "@console/bluemix-components": "6.18.1",
     "@console/bluemix-icons": "4.1.1",
     "classnames": "2.2.5",
     "react": "^15.3.2",
@@ -122,6 +121,7 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
+    "carbon-components": "^7.0.1",
     "commitizen": "^2.9.5",
     "css-loader": "0.23.1",
     "cz-conventional-changelog-components": "^1.0.0",

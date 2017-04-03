@@ -1,11 +1,6 @@
 import React, { PropTypes } from 'react';
 import Icon from '../components/Icon';
 import classNames from 'classnames';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/base-elements/buttons/button--secondary.scss');
-  import('@console/bluemix-components/consumables/scss/base-elements/buttons/button--danger.scss');
-  import('@console/bluemix-components/consumables/scss/base-elements/buttons/button--primary.scss');
-}
 
 const propTypes = {
   children: PropTypes.node,

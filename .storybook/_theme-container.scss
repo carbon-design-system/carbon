@@ -1,3 +1,6 @@
-$use-globals: true;
+// $css--font-face: false !default;
+// $css--helpers: true !default;
+// $css--body: true !default;
+// $css--reset: false !default;
 
-@import '@console/bluemix-components/consumables/scss/global/global.scss';
+@import 'carbon-components/scss/globals/scss/styles';

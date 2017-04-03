@@ -2,9 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import ClickListener from '../internal/ClickListener';
 import Icon from './Icon';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss');
-}
 
 class OverflowMenu extends Component {
 

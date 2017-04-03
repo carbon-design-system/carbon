@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
-if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/base-elements/checkbox/checkbox.scss');
-}
 
 const propTypes = {
   checked: PropTypes.bool,
