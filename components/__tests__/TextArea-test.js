@@ -17,7 +17,7 @@ describe('Textarea', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textarea.hasClass('bx--textarea__input')).toEqual(true);
+        expect(textarea.hasClass('bx--text-area')).toEqual(true);
       });
 
       it('applies extra classes specified via className', () => {
@@ -76,7 +76,7 @@ describe('Textarea', () => {
       });
 
       it('has the expected classes', () => {
-        expect(renderedLabel.hasClass('bx--form__label')).toEqual(true);
+        expect(renderedLabel.hasClass('bx--label')).toEqual(true);
       });
     });
   });

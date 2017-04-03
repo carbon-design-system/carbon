@@ -45,15 +45,15 @@ const Textarea = ({ className, id, labelText, onChange, onClick, ...other }) => 
     },
   };
 
-  const textareaClasses = classNames('bx--textarea__input', className);
+  const textareaClasses = classNames('bx--text-area', className);
   const label = labelText ? (
-    <label htmlFor={id} className="bx--form__label">
+    <label htmlFor={id} className="bx--label">
       {labelText}
     </label>
   ) : null;
 
   return (
-    <div>
+    <div className="bx--form-item">
       {label}
       <textarea
         {...other}
