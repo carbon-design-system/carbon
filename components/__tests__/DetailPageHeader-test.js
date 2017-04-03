@@ -124,12 +124,20 @@ describe('DetailPageHeader', () => {
       expect(link.text()).toEqual('test breadcrumb');
       expect(icon.props().description).toEqual('test breadcrumb');
     });
+
+    it('should not render inlineContent when inlineContent is not passed', () => {
+      expect(wrapper.find('.bx--detail-page-header--with-tabs__info-inline-content').length).toEqual(0);
+    });
   });
 
   describe('props when a child is passed', () => {
     const onBackLinkClick = jest.fn();
+    const inlineContent = (
+      <div className="inlineContent">Status</div>
+    );
     const wrapper = mount(
       <DetailPageHeader
+        inlineContent={inlineContent}
         title="test title"
         onBackLinkClick={onBackLinkClick}
       >
@@ -157,6 +165,13 @@ describe('DetailPageHeader', () => {
     it('should display title when one is passed as props', () => {
       const title = wrapper.find('.bx--detail-page-header--with-tabs__info-title');
       expect(title.text()).toEqual('test title');
+    });
+
+    it('should display inlineContent when one is passed as props', () => {
+      const inlineContentWrapper = wrapper.find('.bx--detail-page-header--with-tabs__info-inline-content');
+      expect(inlineContentWrapper.length).toEqual(1);
+      expect(inlineContentWrapper.find('.inlineContent').length).toEqual(1);
+      expect(inlineContentWrapper.find('.inlineContent').text()).toEqual('Status');
     });
   });
 });

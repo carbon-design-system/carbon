@@ -10,6 +10,7 @@ const propTypes = {
   hideBreadcrumb: PropTypes.bool,
   breadcrumbTitle: PropTypes.string,
   children: PropTypes.node,
+  inlineContent: PropTypes.node,
   onBackLinkClick: function onBackLinkClick(...args) {
     // First argument is props. Require only if hideBreadcrumb is false
     const type = !args[0].hideBreadcrumb ? PropTypes.func.isRequired : PropTypes.func;
@@ -31,6 +32,7 @@ const DetailPageHeader = ({
   children,
   onBackLinkClick,
   title,
+  inlineContent,
   ...other,
 }) => {
   const hasChildren = React.Children.count(children) > 0;
@@ -55,7 +57,10 @@ const DetailPageHeader = ({
             </a>
           </div>
           <div className="bx--detail-page-header--with-tabs__info">
-            <p className="bx--detail-page-header--with-tabs__info-title">{title}</p>
+            <h2 className="bx--detail-page-header--with-tabs__info-title">{title}</h2>
+            { inlineContent &&
+              <div className="bx--detail-page-header--with-tabs__info-inline-content">{inlineContent}</div>
+            }
           </div>
         </div>
         <div className="bx--detail-page-header--with-tabs__tabs-container">{children}</div>
