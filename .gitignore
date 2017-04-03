@@ -13,3 +13,6 @@ dist
 
 # a11y files
 a11y/results
+
+# misc
+yarn.lock
