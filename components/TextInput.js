@@ -47,10 +47,10 @@ const TextInput = ({ labelText, className, id, placeholder, type, onChange, onCl
   };
 
   const textInputClasses = classNames(
-    'bx--text__input',
+    'bx--text-input',
     className,
   );
-  const labelClasses = classNames('bx--form__label', { 'bx--visually-hidden': hideLabel });
+  const labelClasses = classNames('bx--label', { 'bx--visually-hidden': hideLabel });
 
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
@@ -59,7 +59,7 @@ const TextInput = ({ labelText, className, id, placeholder, type, onChange, onCl
   ) : null;
 
   return (
-    <div>
+    <div className="bx--form-item">
       {label}
       <input {...other} {...textInputProps} className={textInputClasses} />
     </div>

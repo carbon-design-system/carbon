@@ -17,7 +17,7 @@ describe('TextInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textInput.hasClass('bx--text__input')).toEqual(true);
+        expect(textInput.hasClass('bx--text-input')).toEqual(true);
       });
 
       it('should add extra classes that are passed via className', () => {
@@ -62,7 +62,7 @@ describe('TextInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(renderedLabel.hasClass('bx--form__label')).toEqual(true);
+        expect(renderedLabel.hasClass('bx--label')).toEqual(true);
       });
 
       it('should set label as expected', () => {
