@@ -1,13 +1,13 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Icon, { findIcon, svgShapes, getSvgData, icons } from '../Icon';
+import Icon, { findIcon, svgShapes, getSvgData, icons, isPrefixed } from '../Icon';
 import { mount } from 'enzyme';
 
 describe('Icon', () => {
   describe('Renders as expected', () => {
     const props = {
       className: 'extra-class',
-      name: 'search',
+      name: 'search--glyph',
       width: '20',
       height: '20',
       description: 'close the thing',
@@ -96,7 +96,7 @@ describe('Icon', () => {
 
   describe('svgShapes', () => {
     it('returns with SVG XML when given a valid icon name', () => {
-      const data = getSvgData('search');
+      const data = getSvgData('icon--search');
       const content = svgShapes(data);
       expect(content.length).toBeGreaterThan(0);
     });
@@ -108,6 +108,18 @@ describe('Icon', () => {
       const content = svgShapes(svgData);
       expect(content.length).toBeGreaterThan(0);
       expect(content).toEqual(['']);
+    });
+  });
+
+  describe('isPrefixed', () => {
+    it('returns true when given a name with icon-- prefix', () => {
+      const prefixed = isPrefixed('icon--search--glyph');
+      expect(prefixed).toBe(true);
+    });
+
+    it('returns false when given a name without icon-- prefix', () => {
+      const prefixed = isPrefixed('search--glyph');
+      expect(prefixed).toBe(false);
     });
   });
 

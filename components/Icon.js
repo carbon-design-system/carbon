@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import icons from '@console/bluemix-icons';
+import icons from 'carbon-icons';
 
 const propTypes = {
   name: PropTypes.string.isRequired,
@@ -83,13 +83,18 @@ export function svgShapes(svgData) {
   return svgElements;
 }
 
+export function isPrefixed(name) {
+  return name.split('--')[0] === 'icon';
+}
+
 const Icon = ({ className, width, height, fill, fillRule, name, style, description, ...other }) => {
-  const icon = findIcon(name);
+  const icon = isPrefixed(name) ? findIcon(name) : findIcon(`icon--${name}`);
+
   const props = {
     className,
     fill,
     fillRule,
-    name,
+    name: isPrefixed ? name : `icon--${name}`,
     style,
     viewBox: icon.viewBox,
     width: width || icon.width,
