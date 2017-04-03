@@ -1,21 +1,22 @@
 import React, { PropTypes } from 'react';
-import uid from '../lib/uniqueId';
-import icons from '@console/bluemix-icons';
+import icons from 'carbon-icons';
 
 const propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  viewBox: PropTypes.string,
   className: PropTypes.string,
+  description: PropTypes.string.isRequired,
   fill: PropTypes.string,
   fillRule: PropTypes.string,
-  width: PropTypes.string,
   height: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  role: PropTypes.string,
   style: PropTypes.object,
+  viewBox: PropTypes.string,
+  width: PropTypes.string,
 };
 
 const defaultProps = {
   fillRule: 'evenodd',
+  role: 'img',
 };
 
 /**
@@ -84,26 +85,30 @@ export function svgShapes(svgData) {
   return svgElements;
 }
 
-const Icon = ({ className, width, height, fill, fillRule, name, style, description, ...other }) => {
-  const icon = findIcon(name);
-  const id = uid(icon.id);
+export function isPrefixed(name) {
+  return name.split('--')[0] === 'icon';
+}
+
+const Icon = ({ className, description, fill, fillRule, height, name, role, style, width, ...other }) => {
+  const icon = isPrefixed(name) ? findIcon(name) : findIcon(`icon--${name}`);
   const props = {
     className,
     fill,
     fillRule,
-    name,
+    height: height || icon.height,
+    name: isPrefixed ? name : `icon--${name}`,
+    role,
     style,
     viewBox: icon.viewBox,
     width: width || icon.width,
-    height: height || icon.height,
     ...other,
   };
 
   const svgContent = (icon) ? svgShapes(icon.svgData) : '';
 
   return (
-    <svg {...props} aria-labelledby={id}>
-      <title id={id}>{description}</title>
+    <svg {...props}>
+      <title>{description}</title>
       {svgContent}
     </svg>
   );
