@@ -2,7 +2,7 @@
   "name": "carbon-components",
   "description": "Carbon Components is a component library for IBM Cloud",
   "homepage": "http://carbondesignsystem.com/",
-  "version": "7.1.0",
+  "version": "0.0.0-development",
   "module": "es/index.js",
   "main": "umd/index.js",
   "repository": {
@@ -103,7 +103,8 @@
     "svgxuse": "1.1.22",
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0",
-    "webpack": "^2.0.0"
+    "webpack": "^2.0.0",
+    "semantic-release": "^6.3.2"
   },
   "files": [
     "css/**/*",
@@ -125,7 +126,8 @@
     "start": "node server.js",
     "test": "gulp test",
     "test:a11y": "gulp test:a11y",
-    "test:unit": "gulp test:unit"
+    "test:unit": "gulp test:unit",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "license": "Apache-2",
   "config": {
