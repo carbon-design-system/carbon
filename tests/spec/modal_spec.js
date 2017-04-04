@@ -28,6 +28,7 @@ describe('Test modal', function () {
       expect(modal.options).to.deep.equal({
         selectorInit: '[data-modal]',
         selectorModalClose: '[data-modal-close]',
+        selectorPrimaryFocus: '[data-modal-primary-focus]',
         classVisible: 'is-visible',
         attribInitTarget: 'data-modal-target',
         initEventNames: ['click'],
@@ -54,6 +55,8 @@ describe('Test modal', function () {
     before(function () {
       container = document.createElement('div');
       container.innerHTML = ModalHtml;
+      // Reset primary focus eleemnt for testing
+      delete container.querySelector('[data-modal-primary-focus]').dataset.modalPrimaryFocus;
       document.body.appendChild(container);
       element = container.querySelector('[data-modal]');
     });
@@ -101,6 +104,31 @@ describe('Test modal', function () {
       modal.show(spy);
       modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
       expect(spy).have.been.calledOnce;
+    });
+
+    it('Should focus on modal upon showning', function () {
+      const spy = sinon.spy(modal.element, 'focus');
+      try {
+        modal.show();
+        modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+        expect(spy).to.have.been.calledOnce;
+      } finally {
+        spy.restore();
+      }
+    });
+
+    it('Should support specifying the primary focus element', function () {
+      const primaryButton = modal.element.querySelector('.bx--btn--primary');
+      const spy = sinon.spy(primaryButton, 'focus');
+      primaryButton.dataset.modalPrimaryFocus = '';
+      try {
+        modal.show();
+        modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+        expect(spy).to.have.been.calledOnce;
+      } finally {
+        delete primaryButton.dataset.modalPrimaryFocus;
+        spy.restore();
+      }
     });
 
     it('Should sanity check hide()\'s arguments', function () {

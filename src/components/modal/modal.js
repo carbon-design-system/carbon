@@ -62,7 +62,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     const transitionEnd = () => {
       this.element.removeEventListener('transitionend', transitionEnd);
       if (state === 'shown' && this.element.offsetWidth > 0 && this.element.offsetHeight > 0) {
-        this.element.focus();
+        (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
       }
       callback();
     };
@@ -141,6 +141,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
   static options = {
     selectorInit: '[data-modal]',
     selectorModalClose: '[data-modal-close]',
+    selectorPrimaryFocus: '[data-modal-primary-focus]',
     classVisible: 'is-visible',
     attribInitTarget: 'data-modal-target',
     initEventNames: ['click'],
