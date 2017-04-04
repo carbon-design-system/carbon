@@ -1,4 +1,4 @@
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import OverflowMenu from '../../src/components/overflow-menu/overflow-menu';
 import HTML from '../../src/components/overflow-menu/overflow-menu.html';

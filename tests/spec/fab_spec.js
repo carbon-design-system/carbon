@@ -1,4 +1,4 @@
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import FabButton from '../../src/components/fab/fab';
 
 describe('Test floating action button', function () {

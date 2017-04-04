@@ -1,5 +1,5 @@
 import Promise, { promisify } from 'bluebird'; // For testing on browsers not supporting Promise
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import ContentSwitcher from '../../src/components/content-switcher/content-switcher';
 import HTML from '../../src/components/content-switcher/content-switcher.html';

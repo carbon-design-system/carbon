@@ -1,4 +1,4 @@
-import '../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import LeftNav from '../../src/components/unified-header/left-nav';
 
 describe('Test Left Navigation', function () {

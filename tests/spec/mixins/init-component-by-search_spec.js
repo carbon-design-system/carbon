@@ -1,4 +1,4 @@
-import '../../utils/es6-weak-map-global'; // For PhantomJS
+import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import mixin from '../../../src/globals/js/misc/mixin';
 import initComponentBySearch from '../../../src/globals/js/mixins/init-component-by-search';
 
