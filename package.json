@@ -2,7 +2,7 @@
   "name": "carbon-components",
   "description": "Carbon Components is a component library for IBM Cloud",
   "homepage": "http://carbondesignsystem.com/",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "module": "es/index.js",
   "main": "umd/index.js",
   "repository": {
@@ -30,7 +30,7 @@
   "dependencies": {
     "adaro": "1.0.4",
     "bluebird": "~3.1.1",
-    "carbon-icons": "5.0.1",
+    "carbon-icons": "5.1.2",
     "eslint": "^3.0.0",
     "express": "4.13.4",
     "globby": "4.0.0",
