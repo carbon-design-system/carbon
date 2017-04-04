@@ -9,6 +9,15 @@
     body {
       padding-top: 72px;
     }
+
+    .offleft {
+      position: absolute;
+      top: 0;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
   </style>
 </head>
 <body class="bx--body bx--global-light-ui">
@@ -30,6 +39,9 @@
   <div class="demo--container" data-card-list>
     {html|s}
   </div>
+
+  <!-- Pseudo element to demonstrate focus-wrap behavior (focus trap) -->
+  <input type="text" class="offleft">
 
   <!-- Scripts -->
   <!-- <script src="../../dist/bluemix-components.min.js"></script> -->

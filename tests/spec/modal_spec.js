@@ -280,6 +280,49 @@ describe('Test modal', function () {
     });
   });
 
+  describe('Wrapping focus while modal is open', function () {
+    let container;
+    let modal;
+    let element;
+    let input;
+
+    if (!document.hasFocus()) {
+      return;
+    }
+
+    before(function () {
+      container = document.createElement('div');
+      container.innerHTML = ModalHtml;
+      // Reset primary focus eleemnt for testing
+      delete container.querySelector('[data-modal-primary-focus]').dataset.modalPrimaryFocus;
+      document.body.appendChild(container);
+      element = container.querySelector('[data-modal]');
+      input = document.createElement('input');
+      input.type = 'text';
+      document.body.appendChild(input);
+      modal = new Modal(element);
+    });
+
+    it('Should bring back focus when modal loses focus', async function () {
+      modal.show();
+      modal.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      input.focus();
+      expect(element.contains(document.activeElement)).to.be.true;
+    });
+
+    after(function () {
+      if (modal) {
+        modal = modal.release();
+      }
+      if (document.body.contains(input)) {
+        input.parentNode.removeChild(input);
+      }
+      if (document.body.contains(element)) {
+        element.parentNode.removeChild(element);
+      }
+    });
+  });
+
   describe('Init Component by Launch functionality', function () {
     let container;
     let modal;
