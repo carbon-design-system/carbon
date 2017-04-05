@@ -2,17 +2,17 @@
   <svg class="bx--search-magnifier">
     <use xlink:href="/carbon-icons/bluemix-icons.svg#icon--search--glyph"/>
   </svg>
-  <label class="bx--label" for="search__input">Search</label>
-  <input class="bx--search-input" type="text" id="search__input" placeholder="Search">
+  <label class="bx--label" id="search-input-label-2" for="search__input-1">Search</label>
+  <input class="bx--search-input" type="text" role="search" id="search__input-1" placeholder="Search" aria-labelledby="search-input-label-2">
   <svg class="bx--search-close bx--search-close--hidden">
     <use xlink:href="/carbon-icons/bluemix-icons.svg#icon--close--glyph"/>
   </svg>
-  <button class="bx--search-button" type="button">
+  <button class="bx--search-button" type="button" aria-label="Filter button">
     <svg class="bx--search-filter">
       <use xlink:href="/carbon-icons/bluemix-icons.svg#icon--filter--glyph"/>
     </svg>
   </button>
-  <button class="bx--search-button" type="button" data-search-toggle>
+  <button class="bx--search-button" type="button" data-search-toggle aria-label="Grid and list toggle button">
     <div data-search-view="grid">
       <svg class="bx--search-view">
         <use xlink:href="/carbon-icons/bluemix-icons.svg#icon--grid"/>
