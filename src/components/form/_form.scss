@@ -6,6 +6,7 @@
 @include exports('form') {
   .bx--fieldset {
     @include reset;
+    margin-bottom: 2rem;
   }
 
   .bx--form-item {
@@ -27,6 +28,7 @@
     font-weight: 700;
     display: inline-block;
     vertical-align: baseline;
+    margin-bottom: rem(10px);
   }
 
   .bx--label--disabled {
