@@ -13,7 +13,7 @@ describe('Select', () => {
       </Select>
     );
 
-    const selectContainer = wrapper.find('div');
+    const selectContainer = wrapper.find('.bx--form-item > div');
     const label = wrapper.find('label');
     const select = wrapper.find('select');
 
@@ -52,12 +52,6 @@ describe('Select', () => {
         const matches = wrapper.props().iconDescription === wrapper.find(Icon).props().description;
         expect(matches).toEqual(true);
       });
-
-      it('should have correct class when label is hidden', () => {
-        const icon = wrapper.find(Icon);
-        wrapper.setProps({ hideLabel: true });
-        expect(icon.hasClass('bx--select__arrow--no-label')).toEqual(true);
-      });
     });
 
     describe('select', () => {
@@ -66,7 +60,7 @@ describe('Select', () => {
       });
 
       it('has the expected classes', () => {
-        expect(select.hasClass('bx--select__input')).toEqual(true);
+        expect(select.hasClass('bx--select-input')).toEqual(true);
       });
 
       it('has the expected id', () => {
@@ -95,7 +89,7 @@ describe('Select', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--form__label')).toEqual(true);
+        expect(label.hasClass('bx--label')).toEqual(true);
       });
 
       it('has the expected htmlFor value', () => {

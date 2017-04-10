@@ -50,6 +50,7 @@ import Search from '../../components/Search';
 import SecondaryButton from '../../components/SecondaryButton';
 import Select from '../../components/Select';
 import SelectItem from '../../components/SelectItem';
+import SelectItemGroup from '../../components/SelectItemGroup';
 import Switch from '../../components/Switch';
 import Tab from '../../components/Tab';
 import TabContent from '../../components/TabContent';
@@ -516,6 +517,17 @@ describe('a11y scan', () => {
     );
 
     AAT.getCompliance(wrapper.html(), 'SelectItem', (data) => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('SelectItemGroup', (done) => {
+    const wrapper = render(
+      <SelectItemGroup label="text" />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'SelectItemGroup', (data) => {
       expect(AAT.assertCompliance(data)).toEqual(0);
       done();
     });

@@ -9,7 +9,7 @@ describe('SelectItemGroup', () => {
     );
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass('bx--select__optgroup')).toEqual(true);
+      expect(wrapper.hasClass('bx--select-optgroup')).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {

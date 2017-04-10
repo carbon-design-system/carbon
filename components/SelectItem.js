@@ -18,7 +18,7 @@ const defaultProps = {
 
 const SelectItem = ({ className, value, disabled, hidden, text, ...other }) => {
   const selectItemClasses = classNames({
-    'bx--select__option': true,
+    'bx--select-option': true,
     [className]: className,
   });
 

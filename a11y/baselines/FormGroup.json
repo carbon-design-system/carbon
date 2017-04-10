@@ -5,7 +5,6 @@
             "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
             "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
             "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
-            "rpt.g1.styleTrigger": "Web pages must be readable without requiring style sheets or equivalent facilitation is provided.",
             "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks."
         },
         "lang": "en-us"
@@ -77,9 +76,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1484674561052
+        "startScan": 1491324748001
     },
-    "scanID": "515bc093-9ec3-4f6a-9070-dbb0970e8739",
+    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
     "toolID": "@ibma/aat-v1.1.0",
     "label": "FormGroup"
 }

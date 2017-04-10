@@ -148,9 +148,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1487698560555
+        "startScan": 1491324748145
     },
-    "scanID": "922d93db-7fc7-47a1-9883-ece8bf58931e",
+    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
     "toolID": "@ibma/aat-v1.1.0",
     "label": "InteriorLeftNavList"
 }

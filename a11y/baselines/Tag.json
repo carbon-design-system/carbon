@@ -19,7 +19,7 @@
                     "help": "idhi_accessibility_check_g273.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -35,7 +35,7 @@
                     "help": "idhi_accessibility_check_g490.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -51,7 +51,7 @@
                     "help": "idhi_accessibility_check_g1046.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]",
-                    "snippet": "<body>",
+                    "snippet": "<body style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -76,9 +76,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1484166799835
+        "startScan": 1491323866959
     },
-    "scanID": "9a1cb5ab-da99-41bb-a4c7-72bff169c1fa",
-    "toolID": "@ibma/aat-v1.0.24",
+    "scanID": "8421a61d-33a9-4af1-8a4a-ee0b2d60d1be",
+    "toolID": "@ibma/aat-v1.1.0",
     "label": "Tag"
 }

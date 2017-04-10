@@ -20,7 +20,7 @@
                     "help": "idhi_accessibility_check_g273.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -36,7 +36,7 @@
                     "help": "idhi_accessibility_check_g490.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -52,7 +52,7 @@
                     "help": "idhi_accessibility_check_g1046.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]",
-                    "snippet": "<body>",
+                    "snippet": "<body style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -68,7 +68,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/p[1]",
-                    "snippet": "<p class=\"bx--about__title--name\" id=\"card-app-title\">",
+                    "snippet": "<p style=\"\" class=\"bx--about__title--name\" id=\"card-app-title\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -93,9 +93,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1484166790127
+        "startScan": 1491324747899
     },
-    "scanID": "9a1cb5ab-da99-41bb-a4c7-72bff169c1fa",
-    "toolID": "@ibma/aat-v1.0.24",
+    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
+    "toolID": "@ibma/aat-v1.1.0",
     "label": "CardContent"
 }

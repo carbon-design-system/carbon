@@ -5,8 +5,7 @@
             "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
             "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
             "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
-            "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks.",
-            "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role."
+            "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks."
         },
         "lang": "en-us"
     },
@@ -60,22 +59,6 @@
                         "width": 0
                     },
                     "level": "violation"
-                },
-                {
-                    "severityCode": "eISHigh",
-                    "messageCode": "wcag20.tech.aria.OrphanedContent",
-                    "ruleId": "1088",
-                    "help": "idhi_accessibility_check_g1088.html",
-                    "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/button[1]",
-                    "snippet": "<button style=\"\" type=\"button\" class=\"bx--btn--danger\" tabindex=\"0\">",
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "level": "violation"
                 }
             ],
             "frameIdx": 0
@@ -83,7 +66,7 @@
     ],
     "summary": {
         "counts": {
-            "violation": 4
+            "violation": 3
         },
         "scanTime": 0,
         "policies": [
@@ -93,9 +76,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324748081
+        "startScan": 1491324895049
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
+    "scanID": "8c62b943-e90c-42c3-bdf9-507c51975cec",
     "toolID": "@ibma/aat-v1.1.0",
-    "label": "DangerButton"
+    "label": "SelectItemGroup"
 }

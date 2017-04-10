@@ -13,7 +13,7 @@ const defaultProps = {
 };
 
 const SelectItemGroup = ({ children, className, disabled, label, ...other }) => {
-  const classNames = classnames('bx--select__optgroup', className);
+  const classNames = classnames('bx--select-optgroup', className);
   return <optgroup className={classNames} label={label} disabled={disabled} {...other}>{children}</optgroup>;
 };
 

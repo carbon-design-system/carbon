@@ -5,7 +5,6 @@
             "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
             "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
             "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
-            "rpt.g1.styleTrigger": "Web pages must be readable without requiring style sheets or equivalent facilitation is provided.",
             "wcag20.tech.h36-h44-h65-h91.inputExplicitLabel": "Each form control must have associated label."
         },
         "lang": "en-us"
@@ -77,9 +76,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1484678431846
+        "startScan": 1491324748419
     },
-    "scanID": "9e5cb07a-8291-41ab-bf80-a339e8358d2e",
+    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
     "toolID": "@ibma/aat-v1.1.0",
     "label": "Search"
 }

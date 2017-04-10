@@ -22,7 +22,7 @@
                     "help": "idhi_accessibility_check_g3.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/li[1]",
-                    "snippet": "<li role=\"presentation\" class=\"bx--tabs__nav-item\">",
+                    "snippet": "<li style=\"\" role=\"presentation\" class=\"bx--tabs__nav-item\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -38,7 +38,7 @@
                     "help": "idhi_accessibility_check_g273.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -54,7 +54,7 @@
                     "help": "idhi_accessibility_check_g490.html",
                     "msgArgs": [],
                     "xpath": "/html[1]",
-                    "snippet": "<html>",
+                    "snippet": "<html style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -70,7 +70,7 @@
                     "help": "idhi_accessibility_check_g1046.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]",
-                    "snippet": "<body>",
+                    "snippet": "<body style=\"\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -89,7 +89,7 @@
                         "tablist"
                     ],
                     "xpath": "/html[1]/body[1]/li[1]/a[1]",
-                    "snippet": "<a tabindex=\"0\" role=\"tab\" href=\"#\" class=\"bx--tabs__nav-link\">",
+                    "snippet": "<a style=\"\" tabindex=\"0\" role=\"tab\" href=\"#\" class=\"bx--tabs__nav-link\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -105,7 +105,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/li[1]/a[1]",
-                    "snippet": "<a tabindex=\"0\" role=\"tab\" href=\"#\" class=\"bx--tabs__nav-link\">",
+                    "snippet": "<a style=\"\" tabindex=\"0\" role=\"tab\" href=\"#\" class=\"bx--tabs__nav-link\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -130,9 +130,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1484166795619
+        "startScan": 1491324748374
     },
-    "scanID": "9a1cb5ab-da99-41bb-a4c7-72bff169c1fa",
-    "toolID": "@ibma/aat-v1.0.24",
+    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
+    "toolID": "@ibma/aat-v1.1.0",
     "label": "Tab"
 }

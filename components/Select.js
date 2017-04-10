@@ -25,20 +25,21 @@ const Select = ({ className, id, labelText, disabled, children, iconDescription,
     'bx--select': true,
     [className]: className,
   });
-  const labelClasses = classNames('bx--form__label', { 'bx--visually-hidden': hideLabel });
-  const iconClasses = classNames('bx--select__arrow', { 'bx--select__arrow--no-label': hideLabel });
+  const labelClasses = classNames('bx--label', { 'bx--visually-hidden': hideLabel });
   return (
-    <div className={selectClasses}>
+    <div className="bx--form-item">
       <label htmlFor={id} className={labelClasses}>{labelText}</label>
-      <select
-        {...other}
-        id={id}
-        className="bx--select__input"
-        disabled={disabled}
-      >
-        {children}
-      </select>
-      <Icon name="caret--down" className={iconClasses} fill="#5aaafa" description={iconDescription} />
+      <div className={selectClasses}>
+        <select
+          {...other}
+          id={id}
+          className="bx--select-input"
+          disabled={disabled}
+        >
+          {children}
+        </select>
+        <Icon name="caret--down" className="bx--select__arrow" description={iconDescription} />
+      </div>
     </div>
   );
 };
