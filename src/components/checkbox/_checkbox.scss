@@ -9,9 +9,16 @@
 @import '../../globals/scss/import-once';
 
 @include exports('checkbox') {
+  .bx--form-item.bx--checkbox-wrapper {
+    margin-bottom: 1rem;
 
-  .bx--checkbox-wrapper {
-    margin-top: 1rem;
+    &:first-of-type {
+      margin-top: rem(6px);
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 
   .bx--checkbox {
@@ -26,7 +33,6 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 1rem;
   }
 
   .bx--checkbox-appearance {
