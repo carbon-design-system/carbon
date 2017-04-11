@@ -3,6 +3,10 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
 const minimatch = require('minimatch');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+const babel = require('rollup-plugin-babel');
+const string = require('rollup-plugin-string');
 
 function ensureArray(as) {
   return !as || Array.isArray(as) ? as : [as];
@@ -26,7 +30,8 @@ module.exports = function (config) {
 
     files: (() => {
       const list = ensureArray(cloptions.files || [
-        'tests/remainders.js', // For generatoring coverage report for untested files
+        'node_modules/core-js/modules/es6.weak-map.js', // For generatoring coverage report for untested files
+        'src/{components,globals}/**/*.js', // For generatoring coverage report for untested files
         'tests/spec/**/*.js',
       ]);
       const htmlFiles = list.filter(file => minimatch(file, 'src/components/**/*.html'));
@@ -44,67 +49,59 @@ module.exports = function (config) {
     exclude: [],
 
     preprocessors: {
-      'tests/remainders.js': ['webpack', 'sourcemap'], // For generatoring coverage report for untested files
-      'tests/spec/**/*.js': ['webpack', 'sourcemap'],
-      'demo/polyfills/**/*.js': ['webpack', 'sourcemap'],
+      '**/core-js/**/*.js': ['rollup', 'sourcemap'], // For generatoring coverage report for untested files
+      'src/**/*.js': ['rollup', 'sourcemap'], // For generatoring coverage report for untested files
+      'tests/spec/**/*.js': ['rollup', 'sourcemap'],
+      'demo/polyfills/**/*.js': ['rollup', 'sourcemap'],
     },
 
-    webpack: {
-      devtool: 'inline-source-maps',
-      module: {
-        rules: [
-          {
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            use: [
+    rollupPreprocessor: {
+      plugins: [
+        resolve({
+          jsnext: true,
+          main: true,
+        }),
+        string({
+          include: '**/*.html',
+        }),
+        commonjs({
+          include: ['node_modules/**'],
+          namedExports: {
+            'node_modules/bluebird/js/release/bluebird.js': ['promisify'],
+          },
+        }),
+        babel({
+          exclude: 'node_modules/**',
+          runtimeHelpers: true,
+          presets: [
+            [
+              'env',
               {
-                loader: 'babel-loader',
-                options: {
-                  presets: [
-                    [
-                      'env',
-                      {
-                        modules: false,
-                        chrome: 'latest',
-                        edge: 'latest',
-                        firefox: 'latest',
-                        safari: 'latest',
-                        ie: '11',
-                        ios: 'latest',
-                      },
-                    ],
-                  ],
-                  plugins: [
-                    'transform-class-properties',
-                    ['transform-runtime', { polyfill: false }],
-                  ].concat(cloptions.debug ? [] : [
-                    [
-                      'istanbul',
-                      {
-                        include: [
-                          'src/components/**/*.js',
-                        ],
-                      },
-                    ],
-                  ]),
+                modules: false,
+                targets: {
+                  browsers: ['last 1 version', 'ie >= 11'],
                 },
               },
             ],
-          },
-          {
-            test: /\.html?$/,
-            exclude: /node_modules/,
-            use: ['html-loader'],
-          },
-        ],
-      },
-    },
-
-    webpackMiddleware: {
-      noInfo: !cloptions.verbose,
-      stats: cloptions.verbose ? {
-        colors: true,
-      } : {},
+          ],
+          plugins: [
+            'transform-class-properties',
+            ['transform-runtime', { polyfill: false }],
+          ].concat(cloptions.debug ? [] : [
+            [
+              'istanbul',
+              {
+                include: [
+                  'src/components/**/*.js',
+                ],
+              },
+            ],
+          ]),
+        }),
+      ],
+      format: 'iife',
+      moduleName: 'test',
+      sourceMap: 'inline',
     },
 
     customLaunchers: {
@@ -120,7 +117,7 @@ module.exports = function (config) {
       require('karma-sourcemap-loader'),
       require('karma-mocha-reporter'),
       require('karma-coverage'),
-      require('karma-webpack'),
+      require('karma-rollup-plugin'),
       require('karma-phantomjs-launcher'),
       require('karma-chrome-launcher'),
       require('karma-firefox-launcher'),
