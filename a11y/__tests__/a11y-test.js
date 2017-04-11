@@ -5,6 +5,8 @@ import AAT from '@ibma/aat';
 import Accordion from '../../components/Accordion';
 import AccordionItem from '../../components/AccordionItem';
 import AppContainer from '../../components/AppContainer';
+import Breadcrumb from '../../components/Breadcrumb';
+import BreadcrumbItem from '../../components/BreadcrumbItem';
 import Button from '../../components/Button';
 import ButtonSet from '../../components/ButtonSet';
 import Card from '../../components/Card';
@@ -105,6 +107,28 @@ describe('a11y scan', () => {
     );
 
     AAT.getCompliance(wrapper.html(), 'AppContainer', (data) => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('Breadcrumb', (done) => {
+    const wrapper = render(
+      <Breadcrumb />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'Breadcrumb', (data) => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('BreadcrumbItem', (done) => {
+    const wrapper = render(
+      <BreadcrumbItem />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'BreadcrumbItem', (data) => {
       expect(AAT.assertCompliance(data)).toEqual(0);
       done();
     });
