@@ -180,8 +180,8 @@ export {
    */
   FloatingMenu,
   /**
-   * Floating menu.
-   * @type FloatingMenu
+   * CopyButton.
+   * @type CopyButton
    */
   CopyButton,
 };
