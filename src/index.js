@@ -19,7 +19,8 @@ import Dropdown from './components/dropdown/dropdown';
 import Card from './components/card/card';
 import NumberInput from './components/number-input/number-input';
 import DataTable from './components/data-table/data-table';
-import DetailPageHeader from './components/detail-page-header/detail-page-header';
+import DetailPageHeader
+  from './components/detail-page-header/detail-page-header';
 import LeftNav from './components/unified-header/left-nav';
 import InteriorLeftNav from './components/interior-left-nav/interior-left-nav';
 import ProfileSwitcher from './components/unified-header/profile-switcher';
@@ -30,7 +31,8 @@ import CopyButton from './components/copy-button/copy-button';
 import Notification from './components/notification/notification';
 import Toolbar from './components/toolbar/toolbar';
 import Tooltip from './components/tooltip/tooltip';
-import ProgressIndicator from './components/progress-indicator/progress-indicator';
+import ProgressIndicator
+  from './components/progress-indicator/progress-indicator';
 import FloatingMenu from './components/floating-menu/floating-menu';
 
 const settings = {};
@@ -57,150 +59,131 @@ export {
    *   See each components' static `.init()` methods for details.
    */
   settings,
-
   /**
    * Watches for change in checkbox in the given document and force changing `checked` attribute
    * so that DOM mutation observer in {@link https://www.npmjs.com/package/svgxuse svgxuse} is triggered.
    * @type initCheckbox
    */
   initCheckbox,
-
   /**
    * Floating action button.
    * @type FabButton
    */
   FabButton,
-
   /**
    * File uploader.
    * @type FileUploader
    */
   FileUploader,
-
   /**
    * Content switcher.
    * @type ContentSwitcher
    */
   ContentSwitcher,
-
   /**
    * Container of tabs.
    * @type Tab
    */
   Tab,
-
   /**
    * Overflow menu.
    * @type OverflowMenu
    */
   OverflowMenu,
-
   /**
    * Modal dialog.
    * @type Modal
    */
   Modal,
-
   /**
    * Left Navigation Menu
    * @type LeftNav
    */
-   LeftNav,
-
+  LeftNav,
   /**
    * Spinner indicating loading state.
    * @type Loading
    */
   Loading,
-
   /**
    * A selector with drop downs.
    * @type Dropdown
    */
   Dropdown,
-
   /**
    * The container for cards.
    * @type Card
    */
   Card,
-
   /**
    * Number input UI.
    * @type NumberInput
    */
   NumberInput,
-
   /**
    *  DataTable
    *  @type DataTable
    */
   DataTable,
-
   /**
    * Detail page header.
    * @type DetailPageHeader
    */
   DetailPageHeader,
-
   /**
    * Search.
    * @type Search
    */
   Search,
-
   /**
    * Profile Switcher.
    * @type ProfileSwitcher
    */
   ProfileSwitcher,
-
   /**
    * Pagination.
    * @type Pagination
    */
   Pagination,
-
   /**
    * Accordion.
    * @type Accordion
    */
   Accordion,
-
   /**
    * Inline Left Navigation Menu.
    * @type InteriorLeftNav
    */
   InteriorLeftNav,
-
   /**
    * Notification.
    * @type InteriorLeftNav
    */
   Notification,
-
   /**
    * Toolbar.
    * @type Toolbar
    */
   Toolbar,
-
   /**
    * Tooltip.
    * @type Tooltip
    */
   Tooltip,
-
   /** ProgressIndicator.
    * @type InteriorLeftNav
    */
   ProgressIndicator,
-
   /**
    * Floating menu.
    * @type FloatingMenu
    */
   FloatingMenu,
+  /**
+   * CopyButton.
+   * @type CopyButton
+   */
+  CopyButton,
 };
 
 /**
