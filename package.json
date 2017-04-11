@@ -6,7 +6,8 @@
   "module": "es/index.js",
   "main": "umd/index.js",
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon-components.git"
   },
   "bugs": {
     "url": "https://github.com/carbon-design-system/carbon-components/issues"
@@ -98,13 +99,13 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-uglify": "^1.0.1",
     "scss-to-json": "1.1.0",
+    "semantic-release": "^6.3.2",
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0",
     "svgxuse": "1.1.22",
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0",
-    "webpack": "^2.0.0",
-    "semantic-release": "^6.3.2"
+    "webpack": "^2.0.0"
   },
   "files": [
     "css/**/*",
