@@ -1,17 +1,56 @@
+$button-font-weight: 700 !default;
+$button-font-size: .875rem !default;
+$button-border-radius: 0 !default;
+$button-height: 40px !default;
+$button-padding: 0 1rem !default;
+$button-padding-sm: 0 .5rem !default;
+$button-border-width: 2px !default;
+
+$button-font-weight: 400;
+$button-font-size: 1rem;
+$button-border-radius: 1rem;
+$button-height: 32px;
+$button-padding: 0 2rem;
+$button-padding-sm: 0 1rem;
+$button-border-width: 1px;
+
+
+// Watson
+$brand-01: #047cc0;
+$brand-02: #175d8d;
+$brand-03: #95c4f3;
+$inverse-01: #ffffff;
+$ui-01: #f6f6f6;
+$ui-02: #ffffff;
+$ui-03: #eaeaea;
+$ui-04: #eaeaea;
+$ui-05: #777677;
+$text-01: #272727;
+$text-02: #595859;
+$text-03: #777677;
+$field-01: #eaeaea;
+$support-01: #e62325;
+$support-02: #34bc6e;
+$support-03: #fed500;
+$support-04: #5c1f1b;
+$nav-01: #1b2834;
+$nav-02: #1c496d;
+
 @mixin button-base {
   @include reset;
   @include helvetica;
   @include font-smoothing;
   @include letter-spacing;
-  @include font-size('14');
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-weight: 700;
-  height: rem(40px);
-  padding: 0 1rem;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  height: rem($button-height);
+  padding: $button-padding;
+  border-radius: $button-border-radius;
   text-align: center;
   text-decoration: none;
   transition-duration: $transition--base;
@@ -37,7 +76,9 @@
 
 @mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
   background-color: $bg-color;
-  border: 2px solid $border-color;
+  border-width: $button-border-width;
+  border-style: solid;
+  border-color: $border-color;
   color: $font-color;
 
   &:hover,
