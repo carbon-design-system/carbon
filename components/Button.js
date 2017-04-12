@@ -15,7 +15,7 @@ const propTypes = {
   icon: PropTypes.string,
   iconDescription: (props) => {
     if (props.icon && !props.iconDescription) {
-      return new Error('\'icon\' property specified without also providing an \'iconDescription\'.');
+      return new Error('icon property specified without also providing an iconDescription property.');
     }
     return undefined;
   },
@@ -32,8 +32,9 @@ const defaultProps = {
 const Button = ({ children, className, disabled, small, kind, href,
                   tabIndex, type, icon, iconDescription, ...other }) => {
   const buttonClasses = classNames(className, {
+    'bx--btn': true,
     'bx--btn--sm': small,
-    'bx--btn': kind === 'primary',
+    'bx--btn--primary': kind === 'primary',
     'bx--btn--danger': kind === 'danger',
     'bx--btn--secondary': kind === 'secondary',
   });
@@ -46,7 +47,7 @@ const Button = ({ children, className, disabled, small, kind, href,
   const buttonImage = icon ? <Icon
     name={icon}
     description={iconDescription}
-    className="bx--btn--right-icon__icon bx--btn--right-icon__use"
+    className="bx--btn__icon"
   /> : null;
 
   const button = (

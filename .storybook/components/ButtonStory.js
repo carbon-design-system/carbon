@@ -31,6 +31,7 @@ storiesOf('Buttons', module)
         </Button>
         &nbsp;
         <Button {...buttonEvents} href="#" className="some-class">Primary Link</Button>
+        &nbsp;
       </div>
   ))
   .addWithInfo(
@@ -59,10 +60,14 @@ storiesOf('Buttons', module)
     () => (
       <div>
         <Button small {...buttonEvents} className="some-class">
-          Small Button
+          Small Primary Button
         </Button>
         &nbsp;
-        <Button small {...buttonEvents} href="#" className="some-class">Small Link</Button>
+        <Button small {...buttonEvents} kind="secondary">Small Secondary Button</Button>
+        &nbsp;
+        <Button small {...buttonEvents} kind="danger">Small Danger Button</Button>
+        &nbsp;
+        <Button small {...buttonEvents} href="#" className="some-class">Small Primary Link</Button>
       </div>
   ))
   .addWithInfo(
@@ -83,9 +88,13 @@ storiesOf('Buttons', module)
     `,
     () => (
       <div>
-        <Button icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</Button>
+        <Button icon="search--glyph" iconDescription="Search" {...buttonEvents}>With an Icon</Button>
         &nbsp;
-        <Button kind="secondary" icon="search" iconDescription="Search" {...buttonEvents}>With an Icon</Button>
+        <Button kind="secondary" icon="search--glyph" iconDescription="Search" {...buttonEvents}>With an Icon</Button>
+        &nbsp;
+        <Button small kind="primary" icon="search--glyph" iconDescription="Search" {...buttonEvents}>With an Icon</Button>
+        &nbsp;
+        <Button small kind="secondary" icon="search--glyph" iconDescription="Search" {...buttonEvents}>With an Icon</Button>
       </div>
   ))
   .addWithInfo(
@@ -103,5 +112,16 @@ storiesOf('Buttons', module)
         </Button>
         &nbsp;
         <Button kind="danger" {...buttonEvents} href="#" className="some-class">Danger Link</Button>
+      </div>
+  ))
+  .addWithInfo(
+    'Sets of Buttons',
+    `
+      When an action required by the user has more than one option, always use a a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
+    `,
+    () => (
+      <div>
+        <Button kind="secondary" {...buttonEvents} className="some-class">Negative</Button>
+        <Button kind="primary" {...buttonEvents} className="some-class">Positive</Button>
       </div>
   ));

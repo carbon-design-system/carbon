@@ -88,8 +88,7 @@ describe('Button', () => {
     const iconButton = mount(<Button icon="search" iconDescription="Search">Search</Button>);
     const icon = iconButton.find('svg');
     it('should have the appropriate icon', () => {
-      expect(icon.hasClass('bx--btn--right-icon__icon')).toBe(true);
-      expect(icon.hasClass('bx--btn--right-icon__use')).toBe(true);
+      expect(icon.hasClass('bx--btn__icon')).toBe(true);
     });
 
     it('should return error if icon given without description', () => {
@@ -97,7 +96,7 @@ describe('Button', () => {
         icon: 'search',
       };
       // eslint-disable-next-line quotes
-      const error = new Error(`'icon' property specified without also providing an 'iconDescription'.`);
+      const error = new Error('icon property specified without also providing an iconDescription property.');
       expect(Button.propTypes.iconDescription(props)).toEqual(error);
     });
   });

@@ -32,8 +32,7 @@ describe('DangerButton', () => {
       const iconButton = mount(<DangerButton icon="search" iconDescription="Search">Search</DangerButton>);
       const icon = iconButton.find('svg');
       it('should have the appropriate icon', () => {
-        expect(icon.hasClass('bx--btn--right-icon__icon')).toBe(true);
-        expect(icon.hasClass('bx--btn--right-icon__use')).toBe(true);
+        expect(icon.hasClass('bx--btn__icon')).toBe(true);
       });
     });
   });

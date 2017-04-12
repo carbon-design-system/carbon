@@ -6,7 +6,7 @@ describe('Icon', () => {
   describe('Renders as expected', () => {
     const props = {
       className: 'extra-class',
-      name: 'search',
+      name: 'search--glyph',
       width: '20',
       height: '20',
       description: 'close the thing',

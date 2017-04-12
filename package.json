@@ -100,8 +100,7 @@
     }
   },
   "dependencies": {
-    "@console/bluemix-icons": "4.1.1",
-    "carbon-icons": "^5.1.2",
+    "carbon-icons": "5.1.2",
     "classnames": "2.2.5",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.4.2",
