@@ -12,26 +12,26 @@ class Notification extends Component {
     caption: PropTypes.string,
     onCloseButtonClick: PropTypes.func,
     iconDescription: PropTypes.string.isRequired,
-  }
+  };
 
   static defaultProps = {
     onCloseButtonClick: () => {},
     iconDescription: 'closes notification',
-  }
+  };
 
   state = {
     open: true,
   };
 
-  handleCloseButtonClick = (evt) => {
+  handleCloseButtonClick = evt => {
     this.setState({ open: false });
     this.props.onCloseButtonClick(evt);
-  }
+  };
 
-  useIconName = (kindProp) => {
+  useIconName = kindProp => {
     const isSuccess = kindProp === 'success';
-    return (isSuccess) ? 'checkmark--outline' : kindProp;
-  }
+    return isSuccess ? 'checkmark--glyph' : `${kindProp}--glyph`;
+  };
 
   render() {
     if (!this.state.open) {
@@ -46,19 +46,20 @@ class Notification extends Component {
       subtitle,
       title,
       kind,
-      ...other,
+      ...other
     } = this.props;
 
     const notificationClasses = {
       toast: classNames(
-        'bx--notification--new',
-        { [`bx--notification--${this.props.kind}`]: this.props.kind },
+        'bx--toast-notification',
+        { [`bx--toast-notification--${this.props.kind}`]: this.props.kind },
         className,
       ),
-      inline: classNames({
-        [`bx--notification-inline--${this.props.kind}`]: this.props.kind,
-        [this.props.className]: this.props.className,
-      }),
+      inline: classNames(
+        'bx--inline-notification',
+        { [`bx--inline-notification--${this.props.kind}`]: this.props.kind },
+        className,
+      ),
     };
 
     const commonProps = {
@@ -78,15 +79,18 @@ class Notification extends Component {
         {...commonProps.alert}
         className={notificationClasses.toast}
       >
-        <div className="bx--notification__details">
-          <h3 className="bx--notification__title">{title}</h3>
-          <p className="bx--notification__subtitle">{subtitle}</p>
-          <p className="bx--notification__caption">{caption}</p>
+        <div className="bx--toast-notification__details">
+          <h3 className="bx--toast-notification__title">{title}</h3>
+          <p className="bx--toast-notification__subtitle">{subtitle}</p>
+          <p className="bx--toast-notification__caption">{caption}</p>
         </div>
-        <button {...commonProps.button} className="bx--notification__close-button">
+        <button
+          {...commonProps.button}
+          className="bx--toast-notification__close-button"
+        >
           <Icon
             description={this.props.iconDescription}
-            className="bx--notification__icon"
+            className="bx--toast-notification__icon"
             aria-label="close"
             name="close"
           />
@@ -100,22 +104,25 @@ class Notification extends Component {
         {...commonProps.alert}
         className={notificationClasses.inline}
       >
-        <div className="bx--notification-inline__details">
+        <div className="bx--inline-notification__details">
           <Icon
             description={this.props.iconDescription}
-            className="bx--notification-inline__icon--left"
+            className="bx--inline-notification__icon"
             aria-label="close"
             name={this.useIconName(kind)}
           />
-          <div className="bx--notification-inline__text">
-            <p className="bx--notification-inline__title">{title}</p>
-            <p className="bx--notification-inline__subtitle">{subtitle}</p>
+          <div className="bx--inline-notification__text-wrapper">
+            <p className="bx--inline-notification__title">{title}</p>
+            <p className="bx--inline-notification__subtitle">{subtitle}</p>
           </div>
         </div>
-        <button {...commonProps.button} className="bx--notification-inline__close-button">
+        <button
+          {...commonProps.button}
+          className="bx--inline-notification__close-button"
+        >
           <Icon
             description={this.props.iconDescription}
-            className="bx--notification-inline__icon--right"
+            className="bx--inline-notification__close-icon"
             aria-label="close"
             name="close"
           />
@@ -123,7 +130,7 @@ class Notification extends Component {
       </div>
     );
 
-    return (caption) ? toastHTML : inlineHTML;
+    return caption ? toastHTML : inlineHTML;
   }
 }
 

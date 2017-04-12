@@ -31,32 +31,32 @@ describe('Notification', () => {
         expect(inline.find(Icon).length).toEqual(2);
       });
 
-      it('renders checkmark--outline icon for success inline notification', () => {
-        const icon = inline.find('[name="checkmark--outline"]');
-        expect(icon.props().name).toEqual('checkmark--outline');
+      it('renders checkmark--glyph icon for success inline notification', () => {
+        const icon = inline.find('[name="checkmark--glyph"]');
+        expect(icon.props().name).toEqual('checkmark--glyph');
       });
 
       it('renders error notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'error' });
-        expect(inline.find(Icon).some('[name="error"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="error--glyph"]')).toBe(true);
       });
 
       it('renders warning notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'warning' });
-        expect(inline.find(Icon).some('[name="warning"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="warning--glyph"]')).toBe(true);
       });
 
       it('renders info notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'info' });
-        expect(inline.find(Icon).some('[name="info"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="info--glyph"]')).toBe(true);
       });
 
       it('renders HTML for toast notifications when caption exists', () => {
-        expect(toast.hasClass('bx--notification--new')).toBe(true);
+        expect(toast.hasClass('bx--toast-notification')).toBe(true);
       });
 
       it('renders HTML for inline notifications when caption does not exist', () => {
-        expect(inline.hasClass('bx--notification--new')).toBe(false);
+        expect(inline.hasClass('bx--inline-notification')).toBe(true);
       });
     });
 
@@ -75,8 +75,12 @@ describe('Notification', () => {
         kinds.forEach(kind => {
           inline.setProps({ kind });
           toast.setProps({ kind });
-          expect(inline.hasClass(`bx--notification-inline--${kind}`)).toEqual(true);
-          expect(toast.hasClass(`bx--notification--${kind}`)).toEqual(true);
+          expect(inline.hasClass(`bx--inline-notification--${kind}`)).toEqual(
+            true,
+          );
+          expect(toast.hasClass(`bx--toast-notification--${kind}`)).toEqual(
+            true,
+          );
         });
       });
     });
