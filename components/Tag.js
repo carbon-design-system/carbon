@@ -6,7 +6,6 @@ const TYPES = {
   community: 'Community',
   custom: 'Custom',
   dedicated: 'Dedicated',
-  deprecated: 'Deprecated',
   experimental: 'Experimental',
   ibm: 'IBM',
   local: 'Local',
@@ -21,12 +20,11 @@ const propTypes = {
 };
 
 const Tag = ({ children, className, type, ...other }) => {
-  const tagClass = `tag--${type}`;
-  const tagClasses = classNames(
-    tagClass,
-    className,
+  const tagClass = `bx--tag--${type}`;
+  const tagClasses = classNames('bx--tag', tagClass, className);
+  return (
+    <span className={tagClasses} {...other}>{children || TYPES[type]}</span>
   );
-  return <span className={tagClasses} {...other}>{children || TYPES[type]}</span>;
 };
 
 Tag.propTypes = propTypes;
