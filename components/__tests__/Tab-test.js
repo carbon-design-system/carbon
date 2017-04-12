@@ -45,13 +45,13 @@ describe('Tab', () => {
       expect(wrapper.find('a').props().href).toEqual('#other-content');
     });
 
-    it('should not have [className="bx--tabs--selected"] by default', () => {
-      expect(wrapper.hasClass('bx--tabs--selected')).toBe(false);
+    it('should not have [className="bx--tabs__nav-item--selected"] by default', () => {
+      expect(wrapper.hasClass('bx--tabs__nav-item--selected')).toBe(false);
     });
 
-    it('adds [className="bx--tabs--selected"] when selected prop is true', () => {
+    it('adds [className="bx--tabs__nav-item--selected"] when selected prop is true', () => {
       wrapper.setProps({ selected: true });
-      expect(wrapper.hasClass('bx--tabs--selected')).toBe(true);
+      expect(wrapper.hasClass('bx--tabs__nav-item--selected')).toBe(true);
     });
   });
 

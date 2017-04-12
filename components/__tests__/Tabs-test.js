@@ -11,7 +11,7 @@ describe('Tabs', () => {
         <Tabs className="extra-class">
           <Tab label="firstTab">content1</Tab>
           <Tab label="lastTab">content2</Tab>
-        </Tabs>
+        </Tabs>,
       );
 
       it('renders [role="navigation"] props on <nav> by default', () => {
@@ -36,22 +36,22 @@ describe('Tabs', () => {
         <Tabs className="extra-class">
           <Tab label="firstTab">content1</Tab>
           <Tab label="lastTab">content2</Tab>
-        </Tabs>
+        </Tabs>,
       );
 
-      const trigger = wrapper.find('div.bx--tabs__trigger');
+      const trigger = wrapper.find('div.bx--tabs-trigger');
       const tablist = wrapper.find('ul');
 
       it('renders default className for trigger', () => {
-        expect(trigger.hasClass('bx--tabs__trigger')).toBe(true);
+        expect(trigger.hasClass('bx--tabs-trigger')).toBe(true);
       });
 
       it('renders hidden className by default', () => {
-        expect(tablist.hasClass('bx--tabs--hidden')).toBe(true);
+        expect(tablist.hasClass('bx--tabs__nav--hidden')).toBe(true);
       });
 
       it('renders default className for triggerText', () => {
-        expect(trigger.find('a').hasClass('bx--tabs__trigger-text')).toBe(true);
+        expect(trigger.find('a').hasClass('bx--tabs-trigger-text')).toBe(true);
       });
 
       it('renders <Icon>', () => {
@@ -64,7 +64,7 @@ describe('Tabs', () => {
         <Tabs>
           <Tab label="firstTab">content1</Tab>
           <Tab label="lastTab">content2</Tab>
-        </Tabs>
+        </Tabs>,
       );
 
       const firstTab = wrapper.find('[label="firstTab"]');
@@ -91,12 +91,14 @@ describe('Tabs', () => {
       <Tabs>
         <Tab label="firstTab">content1</Tab>
         <Tab label="lastTab">content2</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     it('renders expected className', () => {
       const tabContentClass = 'tab-content';
-      expect(wrapper.find('.tab-content').first().hasClass(tabContentClass)).toBe(true);
+      expect(
+        wrapper.find('.tab-content').first().hasClass(tabContentClass),
+      ).toBe(true);
     });
 
     it('renders content children as expected', () => {
@@ -105,12 +107,12 @@ describe('Tabs', () => {
 
     it('renders hidden props with boolean value', () => {
       const hiddenProp = wrapper.find('.tab-content').first().props().hidden;
-      expect(typeof(hiddenProp)).toBe('boolean');
+      expect(typeof hiddenProp).toBe('boolean');
     });
 
     it('renders selected props with boolean value', () => {
       const selectedProp = wrapper.find('.tab-content').first().props().hidden;
-      expect(typeof(selectedProp)).toBe('boolean');
+      expect(typeof selectedProp).toBe('boolean');
     });
   });
 
@@ -120,12 +122,12 @@ describe('Tabs', () => {
         <Tabs>
           <Tab label="firstTab" className="firstTab">content1</Tab>
           <Tab label="lastTab" className="lastTab">content2</Tab>
-        </Tabs>
+        </Tabs>,
       );
 
       describe('state: dropdownHidden', () => {
         it('toggles dropdownHidden state after trigger is clicked', () => {
-          const trigger = wrapper.find('.bx--tabs__trigger');
+          const trigger = wrapper.find('.bx--tabs-trigger');
 
           trigger.simulate('click');
           expect(wrapper.state().dropdownHidden).toEqual(false);
@@ -134,7 +136,7 @@ describe('Tabs', () => {
         });
 
         it('toggles hidden state after trigger-text is clicked', () => {
-          const triggerText = wrapper.find('.bx--tabs__trigger-text');
+          const triggerText = wrapper.find('.bx--tabs-trigger-text');
 
           triggerText.simulate('click');
           expect(wrapper.state().dropdownHidden).toEqual(false);
@@ -157,7 +159,7 @@ describe('Tabs', () => {
         <Tabs>
           <Tab label="firstTab" className="firstTab">content</Tab>
           <Tab label="lastTab" className="lastTab">content</Tab>
-        </Tabs>
+        </Tabs>,
       );
 
       const firstTab = wrapper.find('.firstTab');
@@ -200,7 +202,7 @@ describe('Tabs', () => {
       <Tabs>
         <Tab label="firstTab" className="firstTab">content</Tab>
         <Tab label="lastTab" className="lastTab">content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     describe('dropdownHidden', () => {
@@ -217,7 +219,7 @@ describe('Tabs', () => {
 
     describe('selectedLabel', () => {
       it('should be a string', () => {
-        const string = typeof(wrapper.state().selectedLabel);
+        const string = typeof wrapper.state().selectedLabel;
         expect(string).toBe('string');
       });
 
@@ -232,7 +234,7 @@ describe('Tabs', () => {
       <Tabs selected={1}>
         <Tab label="firstTab" className="firstTab">content</Tab>
         <Tab label="lastTab" className="lastTab">content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const children = wrapper.find(Tab);

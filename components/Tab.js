@@ -14,7 +14,7 @@ class Tab extends React.Component {
     onKeyDown: PropTypes.func,
     selected: PropTypes.bool,
     tabIndex: PropTypes.number,
-  }
+  };
 
   static defaultProps = {
     tabIndex: 0,
@@ -22,7 +22,7 @@ class Tab extends React.Component {
     selected: false,
     onClick: () => {},
     onKeyDown: () => {},
-  }
+  };
 
   setTabFocus(evt) {
     const leftKey = 37;
@@ -49,23 +49,23 @@ class Tab extends React.Component {
       tabIndex,
       onClick,
       onKeyDown,
-      ...other,
+      ...other
     } = this.props;
 
     const classes = classNames(
       'bx--tabs__nav-item',
-      { 'bx--tabs--selected': selected },
+      { 'bx--tabs__nav-item--selected': selected },
       className,
     );
 
     const props = {
       li: {
         className: classes,
-        onClick: (evt) => {
+        onClick: evt => {
           handleTabClick(index, label, evt);
           onClick(evt);
         },
-        onKeyDown: (evt) => {
+        onKeyDown: evt => {
           this.setTabFocus(evt);
           handleTabKeyDown(index, label, evt);
           onKeyDown(evt);

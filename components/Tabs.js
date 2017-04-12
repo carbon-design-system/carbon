@@ -5,7 +5,6 @@ import Icon from './Icon';
 import TabContent from './TabContent';
 
 class Tabs extends React.Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -16,22 +15,22 @@ class Tabs extends React.Component {
     onKeyDown: PropTypes.func,
     triggerHref: PropTypes.string,
     selected: PropTypes.number,
-  }
+  };
 
   static defaultProps = {
     href: '#',
     triggerHref: '#',
     selected: 0,
-  }
+  };
 
   state = {
     dropdownHidden: true,
     selected: this.props.selected,
     selectedLabel: React.Children.toArray(this.props.children)[0].props.label,
-  }
+  };
 
   getTabs() {
-    return React.Children.map(this.props.children, (tab) => tab);
+    return React.Children.map(this.props.children, tab => tab);
   }
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
@@ -42,7 +41,7 @@ class Tabs extends React.Component {
       selectedLabel: label,
       dropdownHidden: !this.state.dropdownHidden,
     });
-  }
+  };
 
   handleTabKeyDown = (index, label, evt) => {
     const key = evt.key || evt.which;
@@ -54,9 +53,9 @@ class Tabs extends React.Component {
         dropdownHidden: !this.state.dropdownHidden,
       });
     }
-  }
+  };
 
-  handleTabAnchorFocus = (index) => {
+  handleTabAnchorFocus = index => {
     const tabCount = React.Children.count(this.props.children) - 1;
 
     if (index < 0) {
@@ -72,47 +71,42 @@ class Tabs extends React.Component {
       ReactDOM.findDOMNode(tab.refs.tabAnchor).focus();
       this.setState({ selected: index });
     }
-  }
+  };
 
   handleDropdownClick = () => {
     this.setState({
       dropdownHidden: !this.state.dropdownHidden,
     });
-  }
+  };
 
   render() {
     const {
       className,
       triggerHref,
-      ...other,
+      ...other
     } = this.props;
 
     const classes = {
-      tabs: classNames(
-        'bx--tabs',
-        className,
-      ),
-      tablist: classNames(
-        'bx--tabs__nav',
-        { 'bx--tabs--hidden': this.state.dropdownHidden },
-      ),
+      tabs: classNames('bx--tabs', className),
+      tablist: classNames('bx--tabs__nav', {
+        'bx--tabs__nav--hidden': this.state.dropdownHidden,
+      }),
     };
 
-    const tabsWithProps = this.getTabs()
-      .map((tab, index) => {
-        const newTab = React.cloneElement(tab, {
-          index,
-          selected: index === this.state.selected,
-          handleTabClick: this.handleTabClick,
-          handleTabAnchorFocus: this.handleTabAnchorFocus,
-          ref: `tab${index}`,
-          handleTabKeyDown: this.handleTabKeyDown,
-        });
-
-        return newTab;
+    const tabsWithProps = this.getTabs().map((tab, index) => {
+      const newTab = React.cloneElement(tab, {
+        index,
+        selected: index === this.state.selected,
+        handleTabClick: this.handleTabClick,
+        handleTabAnchorFocus: this.handleTabAnchorFocus,
+        ref: `tab${index}`,
+        handleTabKeyDown: this.handleTabKeyDown,
       });
 
-    const tabContentWithProps = React.Children.map(tabsWithProps, (tab) => {
+      return newTab;
+    });
+
+    const tabContentWithProps = React.Children.map(tabsWithProps, tab => {
       const {
         children,
         selected,
@@ -136,11 +130,11 @@ class Tabs extends React.Component {
       },
       trigger: {
         div: {
-          className: 'bx--tabs__trigger',
+          className: 'bx--tabs-trigger',
           onClick: this.handleDropdownClick,
         },
         anchor: {
-          className: 'bx--tabs__trigger-text',
+          className: 'bx--tabs-trigger-text',
           href: triggerHref,
           onClick: this.handleDropdownClick,
         },
