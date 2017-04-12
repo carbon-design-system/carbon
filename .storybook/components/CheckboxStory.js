@@ -4,8 +4,6 @@ import Checkbox from '../../components/Checkbox';
 
 const checkboxEvents = {
   className: 'some-class',
-  labelText: 'Checkbox',
-  id: 'checkbox-1',
   onChange: action('onChange'),
 };
 
@@ -19,7 +17,11 @@ storiesOf('Checkbox', module)
       checked property instead.
     `,
     () => (
-      <Checkbox defaultChecked {...checkboxEvents} />
+      <fieldset className="bx--fieldset">
+        <legend className="bx--label">Favorite Colors</legend>
+        <Checkbox defaultChecked {...checkboxEvents} id="red" labelText="Red" />
+        <Checkbox defaultChecked {...checkboxEvents} id="blue" labelText="Blue" />
+      </fieldset>
     ),
   )
   .addWithInfo(
@@ -30,7 +32,11 @@ storiesOf('Checkbox', module)
       unchecked. To use the component in a controlled way, you should set the checked property instead.
     `,
     () => (
-      <Checkbox {...checkboxEvents} />
+      <fieldset className="bx--fieldset">
+        <legend className="bx--label">Favorite Colors</legend>
+        <Checkbox {...checkboxEvents} id="red" labelText="Red" />
+        <Checkbox {...checkboxEvents} id="blue" labelText="Blue" />
+      </fieldset>
     )
   )
   .addWithInfo(
@@ -40,5 +46,9 @@ storiesOf('Checkbox', module)
       The example below shows a disabled Checkbox component.
     `,
     () => (
-      <Checkbox disabled {...checkboxEvents} />
+      <fieldset disabled className="bx--fieldset">
+        <legend className="bx--label">Favorite Colors</legend>
+        <Checkbox {...checkboxEvents} id="red" labelText="Red" />
+        <Checkbox {...checkboxEvents} id="blue" labelText="Blue" />
+      </fieldset>
   ));

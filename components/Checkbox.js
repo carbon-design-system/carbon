@@ -19,30 +19,32 @@ const defaultProps = {
 const Checkbox = ({ className, id, labelText, onChange, ...other }) => {
   let input;
   const wrapperClasses = classNames(
-    'bx--checkbox__label',
-    [className]: className,
+    'bx--checkbox-label',
+    className
   );
 
   return (
-    <label htmlFor={id} className={wrapperClasses}>
-      <input
-        {...other}
-        type="checkbox"
-        onChange={evt => { onChange(input.checked, id, evt); }}
-        className="bx--checkbox bx--checkbox--svg"
-        id={id}
-        ref={el => { input = el; }}
-      />
-
-      <span className="bx--checkbox__appearance">
-        <Icon
-          className="bx--checkbox__checkmark"
-          description="checkmark"
-          name="checkmark"
+    <div className="bx--form-item bx--checkbox-wrapper">
+      <label htmlFor={id} className={wrapperClasses}>
+        <input
+          {...other}
+          type="checkbox"
+          onChange={evt => { onChange(input.checked, id, evt); }}
+          className="bx--checkbox"
+          id={id}
+          ref={el => { input = el; }}
         />
-      </span>
-      <span className="bx--checkbox__label-text">{labelText}</span>
-    </label>
+
+        <span className="bx--checkbox-appearance">
+          <Icon
+            className="bx--checkbox-checkmark"
+            description="checkmark"
+            name="checkmark"
+          />
+        </span>
+        <span className="bx--checkbox-label-text">{labelText}</span>
+      </label>
+    </div>
   );
 };
 

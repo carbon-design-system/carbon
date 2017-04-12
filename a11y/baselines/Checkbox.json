@@ -67,8 +67,8 @@
                     "ruleId": "1088",
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/label[1]/input[1]",
-                    "snippet": "<input style=\"\" id=\"test id\" class=\"bx--checkbox bx--checkbox--svg\" type=\"checkbox\">",
+                    "xpath": "/html[1]/body[1]/div[1]/label[1]/input[1]",
+                    "snippet": "<input style=\"\" id=\"test id\" class=\"bx--checkbox\" type=\"checkbox\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -93,9 +93,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324747939
+        "startScan": 1491838931853
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
+    "scanID": "dd4610e0-9991-4fd0-a373-d58c6a6c7d19",
     "toolID": "@ibma/aat-v1.1.0",
     "label": "Checkbox"
 }
