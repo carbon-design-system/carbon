@@ -14,7 +14,7 @@ const defaultProps = {
 
 const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
   const dropdownItemClasses = classNames({
-    'bx--dropdown__list-item': true,
+    'bx--dropdown-item': true,
     [className]: className,
   });
 
@@ -33,7 +33,7 @@ const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
       className={dropdownItemClasses}
       onClick={handleClick}
     >
-      <a href="#" onClick={/* istanbul ignore next */(evt) => evt.preventDefault()} className="bx--dropdown__link">{itemText}</a>
+      <a href="#" onClick={/* istanbul ignore next */(evt) => evt.preventDefault()} className="bx--dropdown-link">{itemText}</a>
     </li>
   );
 };

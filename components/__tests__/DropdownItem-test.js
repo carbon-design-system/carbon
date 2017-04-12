@@ -16,7 +16,7 @@ describe('DropdownItem', () => {
     });
 
     it('has the expected classes', () => {
-      expect(item.hasClass('bx--dropdown__list-item')).toEqual(true);
+      expect(item.hasClass('bx--dropdown-item')).toEqual(true);
     });
 
     it('should add extra classes that are passed via className', () => {
