@@ -48,36 +48,25 @@ class NumberInput extends Component {
     }
   }
 
-  handleUpArrowClick = (evt) => {
-    let { value } = this.state;
-    const { disabled, max, step } = this.props;
+  handleArrowClick = (evt, direction) => {
+    let value = (typeof(this.state.value) === 'string') ? Number(this.state.value) : this.state.value;
+    const { disabled, min, max, step } = this.props;
+    const conditional = (direction === 'down')
+      ? ((min !== undefined && value > min) || min === undefined)
+      : ((max !== undefined && value < max) || max === undefined);
 
-    if (!disabled) {
-      if ((max !== undefined && value < max) || max === undefined) {
-        value += step;
-        this.setState({
-          value,
-        });
 
-        this.props.onClick(evt);
-        this.props.onChange(evt);
-      }
-    }
-  }
+    if (!disabled && conditional) {
+      value = (direction === 'down')
+        ? value - step
+        : value + step;
 
-  handleDownArrowClick = (evt) => {
-    let { value } = this.state;
-    const { disabled, min, step } = this.props;
+      this.setState({
+        value,
+      });
 
-    if (!disabled) {
-      if ((min !== undefined && value > min) || min === undefined) {
-        value -= step;
-        this.setState({
-          value,
-        });
-        this.props.onClick(evt);
-        this.props.onChange(evt);
-      }
+      this.props.onClick(evt);
+      this.props.onChange(evt);
     }
   }
 
@@ -110,29 +99,32 @@ class NumberInput extends Component {
     };
 
     return (
-      <div className={numberInputClasses}>
-        <label htmlFor={id} className="bx--form__label">{label}</label>
-        <input
-          className="bx--number__input"
-          type="number"
-          pattern="[0-9]*"
-          {...other}
-          {...props}
-        />
-        <span onClick={this.handleUpArrowClick} className="bx--number__arrow--up">
-          <Icon
-            className="bx--number__icon"
-            name="caret--up"
-            description={this.props.iconDescription}
+      <div className="bx--form-item">
+        <label htmlFor={id} className="bx--label">{label}</label>
+        <div className={numberInputClasses}>
+          <input
+            type="number"
+            pattern="[0-9]*"
+            {...other}
+            {...props}
           />
-        </span>
-        <span onClick={this.handleDownArrowClick} className="bx--number__arrow--down">
-          <Icon
-            className="bx--number__icon"
-            name="caret--down"
-            description={this.props.iconDescription}
-          />
-        </span>
+          <div className="bx--number__controls">
+            <Icon
+              onClick={(evt) => this.handleArrowClick(evt, 'up')}
+              className="up-icon"
+              name="caret--up"
+              description={this.props.iconDescription}
+              viewBox="0 -6 10 5"
+            />
+            <Icon
+              onClick={(evt) => this.handleArrowClick(evt, 'down')}
+              className="down-icon"
+              name="caret--down"
+              viewBox="0 6 10 5"
+              description={this.props.iconDescription}
+            />
+          </div>
+        </div>
       </div>
     );
   }

@@ -12,6 +12,7 @@ describe('numberInput', () => {
     const label = wrapper.find('label');
     const numberInput = wrapper.find('input');
     const container = wrapper.find('.bx--number');
+    const formItem = wrapper.find('.bx--form-item');
 
     describe('input', () => {
       it('renders a numberInput', () => {
@@ -19,7 +20,11 @@ describe('numberInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(numberInput.hasClass('bx--number__input')).toEqual(true);
+        expect(container.hasClass('bx--number')).toEqual(true);
+      });
+
+      it('has renders with form-item wrapper', () => {
+        expect(formItem.hasClass('bx--form-item')).toEqual(true);
       });
 
       it('applies extra classes via className', () => {
@@ -72,8 +77,8 @@ describe('numberInput', () => {
       });
 
       it('should have iconDescription match Icon component description prop', () => {
-        const iconUpText = wrapper.find('.bx--number__arrow--up title').text();
-        const iconDownText = wrapper.find('.bx--number__arrow--down title').text();
+        const iconUpText = wrapper.find('.up-icon title').text();
+        const iconDownText = wrapper.find('.down-icon title').text();
         const iconDescription = wrapper.props().iconDescription;
 
         const matches = (iconDescription === iconUpText) && (iconDescription === iconDownText);
@@ -87,7 +92,7 @@ describe('numberInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--form__label')).toEqual(true);
+        expect(label.hasClass('bx--label')).toEqual(true);
       });
     });
   });
@@ -107,8 +112,8 @@ describe('numberInput', () => {
       );
 
       const input = wrapper.find('input');
-      const upArrow = wrapper.find('.bx--number__arrow--up');
-      const downArrow = wrapper.find('.bx--number__arrow--down');
+      const upArrow = wrapper.find('.up-icon');
+      const downArrow = wrapper.find('.down-icon');
 
       it('should not invoke onClick when up arrow is clicked', () => {
         upArrow.simulate('click');
@@ -141,8 +146,8 @@ describe('numberInput', () => {
       );
 
       const input = wrapper.find('input');
-      const upArrow = wrapper.find('.bx--number__arrow--up');
-      const downArrow = wrapper.find('.bx--number__arrow--down');
+      const upArrow = wrapper.find('.up-icon');
+      const downArrow = wrapper.find('.down-icon');
 
       it('should invoke onClick when numberInput is clicked', () => {
         input.simulate('click');
