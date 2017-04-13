@@ -39,7 +39,7 @@ before_install:
 install:
   - npm prune
   - npm install || (cat npm-debug.log; false)
-  - npm i https://aat.mybluemix.net/dist/karma-ibma.tgz
+  - if [[ -n "${AAT_TOKEN}" && "$TEST_SUITE" == "a11y" ]]; then npm i https://aat.mybluemix.net/dist/karma-ibma.tgz; fi
 
 script:
   - if [[ "$TEST_SUITE" == "misc" ]]; then npm run build; fi
