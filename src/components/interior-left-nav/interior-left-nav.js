@@ -20,27 +20,27 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
   }
 
   hookListItemsEvents = () => {
-    this.element.addEventListener('click', evt => {
+    this.element.addEventListener('click', (evt) => {
       const leftNavItem = eventMatches(
         evt,
-        this.options.selectorLeftNavListItem
+        this.options.selectorLeftNavListItem,
       );
       const collapseEl = eventMatches(
         evt,
-        this.options.selectorLeftNavCollapse
+        this.options.selectorLeftNavCollapse,
       );
       const collapsedBar = eventMatches(
         evt,
-        `.${this.options.classLeftNavCollapsed}`
+        `.${this.options.classLeftNavCollapsed}`,
       );
 
       if (leftNavItem) {
         const childItem = eventMatches(
           evt,
-          this.options.selectorLeftNavNestedListItem
+          this.options.selectorLeftNavNestedListItem,
         );
         const hasChildren = leftNavItem.classList.contains(
-          'left-nav-list__item--has-children'
+          'left-nav-list__item--has-children',
         );
         if (childItem) {
           this.addActiveListItem(childItem);
@@ -57,14 +57,14 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
       }
     });
 
-    this.element.addEventListener('keydown', evt => {
+    this.element.addEventListener('keydown', (evt) => {
       const leftNavItemWithChildren = eventMatches(
         evt,
-        this.options.selectorLeftNavListItemHasChildren
+        this.options.selectorLeftNavListItemHasChildren,
       );
       const leftNavItem = eventMatches(
         evt,
-        this.options.selectorLeftNavListItem
+        this.options.selectorLeftNavListItem,
       );
 
       if (leftNavItemWithChildren && evt.which === 13) {
@@ -78,16 +78,16 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
   addActiveListItem(item) {
     [
       ...this.element.querySelectorAll(this.options.selectorLeftNavListItem),
-    ].forEach(currentItem => {
+    ].forEach((currentItem) => {
       if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
     });
     [
       ...this.element.querySelectorAll(
-        this.options.selectorLeftNavNestedListItem
+        this.options.selectorLeftNavNestedListItem,
       ),
-    ].forEach(currentItem => {
+    ].forEach((currentItem) => {
       if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
@@ -104,18 +104,18 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
   handleNestedListClick(listItem, evt) {
     const allNestedItems = [
       ...document.querySelectorAll(
-        this.options.selectorLeftNavListItemHasChildren
+        this.options.selectorLeftNavListItemHasChildren,
       ),
     ];
     const isOpen = listItem.classList.contains(
-      this.options.classExpandedLeftNavListItem
+      this.options.classExpandedLeftNavListItem,
     );
-    allNestedItems.forEach(currentItem => {
+    allNestedItems.forEach((currentItem) => {
       if (currentItem !== listItem) {
         toggleClass(
           currentItem,
           this.options.classExpandedLeftNavListItem,
-          false
+          false,
         );
       }
     });
@@ -126,16 +126,16 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     const listItems = [
       ...list.querySelectorAll(this.options.selectorLeftNavNestedListItem),
     ];
-    listItems.forEach(item => {
+    listItems.forEach((item) => {
       if (isOpen) {
         // eslint-disable-next-line no-param-reassign
         item.querySelector(
-          this.options.selectorLeftNavListItemLink
+          this.options.selectorLeftNavListItemLink,
         ).tabIndex = -1;
       } else {
         // eslint-disable-next-line no-param-reassign
         item.querySelector(
-          this.options.selectorLeftNavListItemLink
+          this.options.selectorLeftNavListItemLink,
         ).tabIndex = 0;
       }
     });
@@ -163,10 +163,10 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
                 bubbles: true,
                 cancelable: true,
                 detail: { collapsed: true },
-              })
+              }),
             );
           },
-          250
+          250,
         );
       } else {
         this.element.dataset.collapsed = false;
@@ -181,10 +181,10 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
                 bubbles: true,
                 cancelable: true,
                 detail: { collapsed: false },
-              })
+              }),
             );
           },
-          250
+          250,
         );
       }
     }
