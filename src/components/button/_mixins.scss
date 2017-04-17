@@ -3,15 +3,16 @@
   @include helvetica;
   @include font-smoothing;
   @include letter-spacing;
-  @include font-size('14');
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-weight: 700;
-  height: rem(40px);
-  padding: 0 1rem;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  height: rem($button-height);
+  padding: $button-padding;
+  border-radius: $button-border-radius;
   text-align: center;
   text-decoration: none;
   transition-duration: $transition--base;
@@ -31,13 +32,14 @@
     width: rem(16px);
     height: rem(16px);
     margin-left: .5rem;
-    transition-duration: $transition--base;
   }
 }
 
 @mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
   background-color: $bg-color;
-  border: 2px solid $border-color;
+  border-width: $button-border-width;
+  border-style: solid;
+  border-color: $border-color;
   color: $font-color;
 
   &:hover,
@@ -56,148 +58,5 @@
 
   .bx--btn__icon {
     fill: $icon-color;
-  }
-}
-
-/* ☠️️ Deprecated - after updating the following components, can be deleted in 7.x
-  - footer
-  - form
-  - modal
-*/
-
-@mixin btn--browser-fixes {
-  $class: &;
-
-  @at-root button#{$class} {
-    // CSS selector becomes: button.& {}, where & === is whatever class the ampersand equals
-    // <button> elements cannot be used as flex containers
-    display: inline-block;
-
-    svg {
-      // Vertically centering icon inside <button>
-      position: relative;
-      vertical-align: middle;
-      top: -1px;
-    }
-
-    // Targets IE10+ browsers
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      // Reset <svg> position for vertical centering
-      svg { top: 0; }
-    }
-  }
-
-  &::-moz-focus-inner {
-    // Reset intrisic padding in Firefox (see #731)
-    padding: 0;
-    border: 0;
-  }
-}
-
-@mixin btn--base {
-  @include reset;
-  @include btn--browser-fixes;
-  @include helvetica;
-  @include font-smoothing;
-  @include letter-spacing;
-  @include font-size('14');
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-weight: 700;
-  height: rem(40px);
-  padding: 0 1rem;
-  text-align: center;
-  text-decoration: none;
-  transition-duration: $transition--base;
-  transition-timing-function: ease-in;
-  white-space: nowrap;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: .5;
-  }
-
-  &:focus {
-    @include focus-outline;
-  }
-
-  svg {
-    width: rem(16px);
-    height: rem(16px);
-    margin-left: .5rem;
-  }
-}
-
-
-@mixin btn--primary(
-  $bg: $brand-01,
-  $hover-bg: $brand-02,
-  $text: $inverse-01
-) {
-  @include btn--base;
-  color: $text;
-  background-color: $bg;
-  border: 2px solid transparent;
-
-  &:hover,
-  &:focus {
-    background-color: $hover-bg;
-
-    &:disabled {
-      background-color: $bg;
-    }
-  }
-
-  &:active {
-    background-color: darken($bg, 20%);
-  }
-}
-
-@mixin btn--secondary(
-  $hover-bg: $brand-01,
-  $text: $hover-bg,
-  $hover-text: $inverse-01
-) {
-  @include btn--base;
-  color: $text;
-  background-color: transparent;
-  border: 2px solid $hover-bg;
-
-  &:hover,
-  &:focus {
-    color: $hover-text;
-    background-color: $hover-bg;
-
-    &:disabled {
-      color: $text;
-      background-color: transparent;
-    }
-  }
-
-  &:active {
-    background-color: darken($hover-bg, 20%);
-  }
-}
-
-@mixin btn--danger {
-  @include btn--base;
-  color: $ui-05;
-  background-color: transparent;
-  border: 2px solid currentColor;
-
-  &:hover,
-  &:focus {
-    color: $inverse-01;
-    border: 2px solid transparent;
-    background-color: $support-01;
-
-    &:disabled {
-      color: $inverse-01;
-      background-color: transparent;
-      border: 2px solid currentColor;
-    }
   }
 }
