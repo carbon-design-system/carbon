@@ -7,7 +7,7 @@ rulePack: https://cc-rules.w3ibm.mybluemix.net/js/latest/
 # i.e. Multiple policies: CI162_5_2_DCP080115,CI162_5_2_DCP070116 or refer to below as a list
 # Default: CI162_5_2_DCP070116
 policies:
-    - IBM_Accessibility_2017_02
+    - CI162_5_2_DCP080115
 
 # optional - Specify one or many violation levels on which to fail the test
 #            i.e. If specified violation then the testcase will only fail if

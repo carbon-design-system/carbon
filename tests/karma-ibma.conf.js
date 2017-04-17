@@ -3,9 +3,6 @@
 /* eslint-disable import/no-extraneous-dependencies, global-require */
 
 const minimatch = require('minimatch');
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const babel = require('rollup-plugin-babel');
 
 const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
@@ -19,8 +16,10 @@ const cloptions = require('minimist')(process.argv.slice(2), {
   },
 });
 
-module.exports = function (config) {
-  const browsers = (Array.isArray(cloptions.browsers) ? cloptions.browsers : [cloptions.browsers]);
+module.exports = function(config) {
+  const browsers = Array.isArray(cloptions.browsers)
+    ? cloptions.browsers
+    : [cloptions.browsers];
   if (browsers.some(browser => browser.toLowerCase() === 'ie')) {
     console.warn('IE cannot be used for a11y testing!'); // eslint-disable-line no-console
   }
@@ -31,16 +30,18 @@ module.exports = function (config) {
     frameworks: ['mocha', 'AAT'],
 
     files: (() => {
-      const files = (!cloptions.files || Array.isArray(cloptions.files) ? cloptions.files : [cloptions.files]) || [
-        'src/**/*.html',
-      ];
+      const files = (!cloptions.files || Array.isArray(cloptions.files)
+        ? cloptions.files
+        : [cloptions.files]) || ['src/**/*.html'];
       const specFiles = files.filter(file => minimatch(file, 'tests/spec/**'));
       if (specFiles.length > 0) {
         const explanationArgs = specFiles.map(file => `-f ${file}`).join(' ');
         // eslint-disable-next-line no-console
         console.warn('WARNING: The given files contain unit test specs.');
         // eslint-disable-next-line no-console
-        console.warn(`You may have wanted:\n\tgulp test:unit ${explanationArgs}`);
+        console.warn(
+          `You may have wanted:\n\tgulp test:unit ${explanationArgs}`
+        );
       }
       files.push({
         pattern: 'css/**/*.css',
@@ -48,50 +49,62 @@ module.exports = function (config) {
         included: false,
         served: true,
       });
-      files.push('tests/a11y/scan-html-files.js', 'tests/a11y/karma-setup-context.js');
+      files.push(
+        'tests/a11y/scan-html-files.js',
+        'tests/a11y/karma-setup-context.js'
+      );
       return files;
     })(),
 
     preprocessors: {
       'src/**/*.html': ['html2js'],
-      'tests/a11y/**/*.js': ['rollup', 'sourcemap'],
+      'tests/a11y/**/*.js': ['webpack', 'sourcemap'],
     },
 
-    rollupPreprocessor: {
-      plugins: [
-        resolve({
-          jsnext: true,
-          main: true,
-        }),
-        commonjs({
-          include: ['node_modules/**'],
-          namedExports: {
-            'node_modules/bluebird/js/release/bluebird.js': ['promisify'],
-          },
-        }),
-        babel({
-          exclude: 'node_modules/**',
-          runtimeHelpers: true,
-          presets: [
-            [
-              'env',
+    webpack: {
+      devtool: 'inline-source-maps',
+      module: {
+        rules: [
+          {
+            test: /\.js?$/,
+            exclude: /node_modules/,
+            use: [
               {
-                modules: false,
-                targets: {
-                  browsers: ['last 1 version', 'ie >= 11'],
+                loader: 'babel-loader',
+                options: {
+                  presets: [
+                    [
+                      'env',
+                      {
+                        modules: false,
+                        chrome: 'latest',
+                        edge: 'latest',
+                        firefox: 'latest',
+                        safari: 'latest',
+                        ie: '11',
+                        ios: 'latest',
+                      },
+                    ],
+                  ],
+                  plugins: [
+                    'transform-class-properties',
+                    ['transform-runtime', { polyfill: false }],
+                  ],
                 },
               },
             ],
-          ],
-          plugins: [
-            'transform-class-properties',
-            ['transform-runtime', { polyfill: false }],
-          ],
-        }),
-      ],
-      format: 'iife',
-      moduleName: 'test',
-      sourceMap: 'inline',
+          },
+        ],
+      },
+    },
+
+    webpackMiddleware: {
+      noInfo: !cloptions.verbose,
+      stats: cloptions.verbose
+        ? {
+            colors: true,
+          }
+        : {},
     },
 
     customLaunchers: {
@@ -107,7 +120,7 @@ module.exports = function (config) {
       require('karma-html2js-preprocessor'),
       require('karma-sourcemap-loader'),
       require('karma-mocha-reporter'),
-      require('karma-rollup-plugin'),
+      require('karma-webpack'),
       require('karma-phantomjs-launcher'),
       require('karma-chrome-launcher'),
       require('karma-firefox-launcher'),
@@ -126,8 +139,12 @@ module.exports = function (config) {
     autoWatch: true,
     autoWatchBatchDelay: 400,
 
-    browsers: (Array.isArray(cloptions.browsers) ? cloptions.browsers : [cloptions.browsers])
-      .map(browser => browser + (browser === 'Chrome' && process.env.TRAVIS ? '_Travis' : '')),
+    browsers: (Array.isArray(cloptions.browsers)
+      ? cloptions.browsers
+      : [cloptions.browsers]).map(
+      browser =>
+        browser + (browser === 'Chrome' && process.env.TRAVIS ? '_Travis' : '')
+    ),
 
     browserNoActivityTimeout: 60000,
 

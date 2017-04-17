@@ -1,0 +1,25 @@
+{
+    "counts": {
+        "violation": 0,
+        "potentialviolation": 0,
+        "recommendation": 0,
+        "potentialrecommendation": 0,
+        "manual": 0
+    },
+    "startReport": 1492458966254,
+    "endReport": 1492458973335,
+    "toolID": "@ibma/karma-ibma-v2.1.0",
+    "reportLevels": [
+        "violation",
+        "potentialviolation",
+        "recommendation",
+        "potentialrecommendation",
+        "manual"
+    ],
+    "failLevels": [
+        "violation",
+        "potentialviolation"
+    ],
+    "scanID": "9daa026a-5f11-42da-88c7-6818db18f392",
+    "pageScanSummary": []
+}
