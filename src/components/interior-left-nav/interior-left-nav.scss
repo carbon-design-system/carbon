@@ -10,23 +10,21 @@
 @import '../../globals/scss/import-once';
 
 @include exports('interior-left-nav') {
-
   .bx--interior-left-nav {
     @include reset;
-    @include layer('flat');
     width: rem(250px);
     position: fixed;
     top: rem(90px);
     height: 100%;
-    background-color: $ui-01;
-    border-right: 1px solid $ui-04;
+    background-color: $color__white;
+    border-right: 1px solid $color__gray-1;
 
     .left-nav-list {
       @include reset;
       list-style: none;
       display: flex;
       flex-direction: column;
-      background-color: $ui-01;
+      background-color: $color__white;
       padding-top: 1.5rem;
 
       &__item {
@@ -37,8 +35,8 @@
 
         &--active {
           & > .left-nav-list__item-link {
-            background-color: $ui-03;
-            color: $brand-01;
+            background-color: $color__gray-2;
+            color: $color__blue-51;
             font-weight: 600;
           }
         }
@@ -46,7 +44,7 @@
         &-link {
           @include reset;
           @include font-size('14');
-          color: $text-01;
+          color: $color__blue-90;
           font-weight: 400;
           position: relative;
           display: flex;
@@ -62,9 +60,9 @@
           display: flex;
 
           .bx--interior-left-nav__icon {
-            fill: $brand-01;
-            width: rem(10px);
-            height: rem(10px);
+            fill: $color__blue-51;
+            width: rem(8px);
+            height: rem(8px);
             transition: $transition--base;
           }
         }
@@ -72,7 +70,7 @@
         &--expanded {
           .left-nav-list--nested {
             max-height: 20rem;
-            transition: .3s ease-in;
+            transition: $transition--base;
             overflow: inherit;
             opacity: 1;
 
@@ -82,7 +80,7 @@
           }
 
           & > .left-nav-list__item-link {
-            color: $brand-01;
+            color: $color__blue-51;
           }
 
           .left-nav-list__item-icon .bx--interior-left-nav__icon {
@@ -92,8 +90,8 @@
 
         &:not(.left-nav-list__item--has-children):hover {
           & > .left-nav-list__item-link {
-            background-color: $ui-03;
-            color: $brand-01;
+            background-color: $color__gray-2;
+            color: $color__blue-51;
           }
         }
       }
@@ -105,7 +103,7 @@
 
         &:hover {
           > .left-nav-list__item-link {
-            color: $brand-01;
+            color: $color__blue-51;
           }
         }
       }
@@ -127,7 +125,7 @@
 
         &-link {
           @include font-size('14');
-          color: $text-01;
+          color: $color__blue-90;
           padding: .75rem 1.35rem .75rem 4.5rem;
           font-weight: 400;
           display: flex;
@@ -140,55 +138,189 @@
         }
 
         &--active {
-          color: $brand-01;
-          background-color: $ui-03;
+          color: $color__blue-51;
+          background-color: $color__gray-2;
 
           & > .left-nav-list__item-link {
-            background-color: $ui-03;
             font-weight: 600;
-            color: $brand-01;
+            background-color: $color__gray-2;
+            color: $color__blue-51;
           }
         }
       }
     }
+  }
 
-    &__header {
-      @include reset;
-      border-bottom: 1px solid $ui-04;
-      cursor: pointer;
+  .bx--interior-left-nav--collapseable {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: rem(200px);
+    padding-top: rem(20px);
+    transition: background-color 300ms $bx--standard-easing,
+                width 300ms $bx--standard-easing;
 
-      &--link {
-        @include reset;
-        @include font-smoothing;
-        @include font-size('14');
-        height: rem(50px);
-        text-decoration: none;
-        padding: 1.5rem 0 1rem 1.5rem;
-        display: flex;
-        font-weight: 600;
-        align-items: center;
-        color: $text-01;
+    ul, li, hr,
+    .bx--interior-left-nav-collapse__target {
+      opacity: 1;
+    }
 
-        .bx--interior-left-nav__icon {
-          width: rem(15px);
-          height: rem(15px);
-          margin-right: 1.25rem;
-          fill: $brand-01;
-        }
+    .left-nav-list,
+    .left-nav-list__item-link {
+      background-color: inherit;
+    }
 
-        &:hover {
-          color: $brand-02;
+    .left-nav-list__item--expanded > .left-nav-list {
+      padding-top: rem(6px);
+      padding-bottom: rem(6px);
+    }
 
-          & > .bx--interior-left-nav__icon {
-            fill: $brand-02;
-          }
-        }
+    .left-nav-list__item--expanded > .left-nav-list__item-link {
+      color: $color__blue-90;
+    }
 
-        .previous-page {
-          @include reset;
-          margin-left: .3rem;
-        }
+    .left-nav-line {
+      margin: rem(24px) rem(20px);
+      border: 1px solid $color__gray-1;
+    }
+
+    .left-nav-list {
+      padding-top: 0;
+
+      @include light-ui {
+        background-color: inherit;
       }
+    }
+
+    .left-nav-list__item--active > .left-nav-list__item-link {
+      position: relative;
+      background-color: #fff;
+
+      &:before {
+        top: 0;
+        position: absolute;
+        background-color: $color__blue-51;
+        height: 100%;
+        left: 0;
+        width: 4px;
+        content: '';
+      }
+    }
+
+    .left-nav-list__item {
+      margin-bottom: rem(5px);
+    }
+
+    .left-nav-list__item-link,
+    .left-nav-list--nested .left-nav-list__item-link {
+      padding: rem(9px) rem(20px);
+    }
+
+    .left-nav-list--nested .left-nav-list__item-link {
+      font-size: rem(12px);
+      padding-left: rem(40px);
+    }
+
+    .bx--interior-left-nav-collapse {
+      cursor: pointer;
+      background-color: rgba($color__blue-51, .10);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: auto;
+      margin-bottom: rem(90px);
+      padding: rem(14px) rem(16px);
+
+      &:hover,
+      &:focus {
+        background-color: rgba($color__blue-51, .30);
+      }
+    }
+
+    .bx--interior-left-nav-collapse__target {
+      margin-left: rem(10px);
+      margin-right: rem(10px);
+    }
+
+    .bx--interior-left-nav-collapse__link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      font-size: rem(14px);
+    }
+
+    .bx--interior-left-nav-collapse__arrow {
+      transform: rotate(0);
+      fill: $color__blue-51;
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  .bx--interior-left-nav--collapsing,
+  .bx--interior-left-nav--collapsed {
+    width: rem(48px);
+    transition: background-color 300ms $bx--standard-easing,
+                width 300ms $bx--standard-easing;
+    cursor: pointer;
+    background-color: rgba($color__blue-51, .10);
+
+    &:hover,
+    &:focus {
+      background-color: rgba($color__blue-51, .30);
+    }
+
+    ul, li, hr,
+    .bx--interior-left-nav-collapse__target {
+      opacity: 0;
+      transition: opacity 300ms $bx--standard-easing;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .bx--interior-left-nav-collapse {
+      background-color: transparent;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .bx--interior-left-nav-collapse__arrow {
+      transform: rotate(180deg);
+      transition: transform 300ms $bx--standard-easing;
+    }
+  }
+
+  .bx--interior-left-nav--collapsed {
+    ul, li, hr,
+    .bx--interior-left-nav-collapse__target {
+      display: none;
+    }
+
+    .bx--interior-left-nav-collapse {
+      justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .bx--interior-left-nav--expanding {
+    width: rem(200px);
+    transition: width 300ms $bx--standard-easing;
+    background-color: #fff;
+
+    ul, li, hr,
+    .bx--interior-left-nav-collapse__target {
+      opacity: 1;
+      transition: opacity 300ms $bx--standard-easing;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .bx--interior-left-nav-collapse__arrow {
+      transform: rotate(0deg);
+      transition: transform 300ms $bx--standard-easing;
     }
   }
 }
