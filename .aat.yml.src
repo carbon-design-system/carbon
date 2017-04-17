@@ -53,4 +53,3 @@ label:
 outputFolder: tests/a11y-results
 
 authToken: ${AAT_TOKEN}
-
