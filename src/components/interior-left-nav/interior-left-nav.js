@@ -10,7 +10,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
    * Interior left nav.
    * @extends CreateComponent
    * @extends InitComponentBySearch
-   * @param {HTMLElement} element The element working as a interior left nav.
+   * @param {HTMLElement} element The element working as an interior left nav.
    * @param {Object} options The component options.
    */
   constructor(element, options) {
