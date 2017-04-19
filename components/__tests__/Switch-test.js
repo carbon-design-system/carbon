@@ -21,7 +21,7 @@ describe('Switch', () => {
     });
 
     it('should have the expected class', () => {
-      const cls = 'bx--content-switcher__btn';
+      const cls = 'bx--content-switcher-btn';
 
       expect(buttonWrapper.hasClass(cls)).toEqual(true);
       expect(linkWrapper.hasClass(cls)).toEqual(true);
@@ -40,8 +40,12 @@ describe('Switch', () => {
       buttonWrapper.setProps({ selected });
       linkWrapper.setProps({ selected });
 
-      expect(buttonWrapper.hasClass('bx--content-switcher--selected')).toEqual(true);
-      expect(linkWrapper.hasClass('bx--content-switcher--selected')).toEqual(true);
+      expect(buttonWrapper.hasClass('bx--content-switcher--selected')).toEqual(
+        true,
+      );
+      expect(linkWrapper.hasClass('bx--content-switcher--selected')).toEqual(
+        true,
+      );
     });
   });
 
@@ -64,7 +68,7 @@ describe('Switch', () => {
         onClick={buttonOnClick}
         onKeyDown={buttonOnKey}
         text={text}
-      />
+      />,
     );
 
     const linkWrapper = shallow(
@@ -75,16 +79,16 @@ describe('Switch', () => {
         onClick={linkOnClick}
         onKeyDown={linkOnKey}
         text={text}
-      />
+      />,
     );
 
     it('should invoke button onClick handler', () => {
-      buttonWrapper.simulate('click', { preventDefault() { } });
+      buttonWrapper.simulate('click', { preventDefault() {} });
       expect(buttonOnClick).toBeCalledWith({ index, name, text });
     });
 
     it('should invoke link onClick handler', () => {
-      linkWrapper.simulate('click', { preventDefault() { } });
+      linkWrapper.simulate('click', { preventDefault() {} });
       expect(buttonOnClick).toBeCalledWith({ index, name, text });
     });
     it('should invoke button onKeyDown handler', () => {

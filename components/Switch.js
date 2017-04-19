@@ -4,14 +4,8 @@ import classNames from 'classnames';
 const propTypes = {
   className: PropTypes.string,
   index: PropTypes.number,
-  kind: PropTypes.oneOf([
-    'button',
-    'anchor',
-  ]).isRequired,
-  name: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  kind: PropTypes.oneOf(['button', 'anchor']).isRequired,
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   selected: PropTypes.bool,
@@ -21,11 +15,11 @@ const propTypes = {
 const defaultProps = {
   selected: false,
   kind: 'anchor',
-  onClick: () => { },
-  onKeyDown: () => { },
+  onClick: () => {},
+  onKeyDown: () => {},
 };
 
-const Switch = (props) => {
+const Switch = props => {
   const {
     className,
     index,
@@ -35,15 +29,15 @@ const Switch = (props) => {
     onKeyDown,
     selected,
     text,
-    ...other,
+    ...other
   } = props;
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.preventDefault();
     onClick({ index, name, text });
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     const key = e.key || e.which;
 
     if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
@@ -51,11 +45,9 @@ const Switch = (props) => {
     }
   };
 
-  const classes = classNames(
-    className,
-    'bx--content-switcher__btn',
-    { 'bx--content-switcher--selected': selected },
-  );
+  const classes = classNames(className, 'bx--content-switcher-btn', {
+    'bx--content-switcher--selected': selected,
+  });
 
   const commonProps = {
     onClick: handleClick,
