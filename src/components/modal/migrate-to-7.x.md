@@ -19,6 +19,12 @@ With that said, it will be best to copy and paste the new HTML for Modal to capt
 
 The `_modal.scss` file is now located at __src/components/modal/_modal.scss__. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/modal/modal';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/modal/modal';
 ```

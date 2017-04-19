@@ -6,6 +6,12 @@ No changes.
 
 The `_code-snippet.scss` file is now located at __src/components/code-snippet/_code-snippet.scss__. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/code-snippet/code-snippet';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/code-snippet/code-snippet';
 ```

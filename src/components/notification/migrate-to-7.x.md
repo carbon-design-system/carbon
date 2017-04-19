@@ -10,9 +10,16 @@ The majority of the class names have changed along with some structural changes.
 
 The `_notification.scss` file is now located at __src/components/notification/notification.scss__. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/notification/notification';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/notification/notification';
 ```
+
 Quite a few class names have changed. See table below.
 
 | Old Class                      | New Class: Inline                     | New Class: Toast                     |

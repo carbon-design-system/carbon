@@ -15,6 +15,12 @@ See Forms for more details on using labels and form validation.
 
 The `_text-input.scss` file is now located at __src/components/text-input/_text-input.scss__. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/text-input/text-input';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/text-input/text-input';
 ```

@@ -7,6 +7,12 @@ A lot of classes have been removed, see SCSS for more details.
 
 The `_detail-page-header.scss` file is now located at __src/components/detail-page-header/_detail-page-header.scss__. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/detail-page-header/detail-page-header';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/detail-page-header/detail-page-header';
 ```
