@@ -1,40 +1,48 @@
-/* global window */
-
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  active: React.PropTypes.bool,
-  className: React.PropTypes.string,
-};
+class Loading extends React.Component {
+  static propTypes = {
+    active: React.PropTypes.bool,
+    className: React.PropTypes.string,
+    withOverlay: React.PropTypes.bool,
+    small: React.PropTypes.bool,
+  };
 
-const defaultProps = {
-  active: true,
-};
+  static defaultProps = {
+    active: true,
+    withOverlay: true,
+    small: false,
+  };
 
-const Loading = ({ className, active, ...other }) => {
-  const isIe = window.ActiveXObject || 'ActiveXObject' in window;
+  render() {
+    const {
+      active,
+      className,
+      withOverlay,
+      small,
+      ...other
+    } = this.props;
 
-  const loadingClasses = classNames(
-    'bx--loading',
-    className,
-    {
-      'bx--loading--ie': isIe,
+    const loadingClasses = classNames('bx--loading', className, {
+      'bx--loading--small': small,
       'bx--loading--stop': !active,
-      'bx--loading--stop--ie': !active && isIe,
-    },
-  );
+    });
 
-  return (
-    <div {...other} className={loadingClasses}>
-      <svg className="bx--loading__svg" viewBox="-75 -75 150 150">
-        <circle cx="0" cy="0" r="37.5" />
-      </svg>
-    </div>
-  );
-};
+    const loading = (
+      <div {...other} className={loadingClasses}>
+        <svg className="bx--loading__svg" viewBox="-75 -75 150 150">
+          <circle cx="0" cy="0" r="37.5" />
+        </svg>
+      </div>
+    );
 
-Loading.propTypes = propTypes;
-Loading.defaultProps = defaultProps;
+    return withOverlay
+      ? <div className="bx--loading-overlay">
+          {loading}
+        </div>
+      : loading;
+  }
+}
 
 export default Loading;

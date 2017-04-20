@@ -2,18 +2,20 @@
 
 import React from 'react';
 import Loading from '../Loading';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 describe('Loading', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <Loading className="extra-class" />
-    );
+    const wrapper = mount(<Loading className="extra-class" />);
+    const overlay = wrapper.find('.bx--loading-overlay');
+    const loader = wrapper.find('.bx--loading');
+    const svg = loader.find('svg');
 
-    const loader = wrapper.find('div');
-    const svg = wrapper.find('svg');
+    it('should render with an overlay', () => {
+      expect(overlay.length).toEqual(1);
+    });
 
-    it('should render a loader', () => {
+    it('should render with a loader', () => {
       expect(loader.length).toEqual(1);
     });
 
@@ -21,7 +23,11 @@ describe('Loading', () => {
       expect(svg.length).toEqual(1);
     });
 
-    it('has the expected classes', () => {
+    it('overlay has the expected class', () => {
+      expect(overlay.hasClass('bx--loading-overlay')).toEqual(true);
+    });
+
+    it('loader has the expected classes', () => {
       expect(loader.hasClass('bx--loading')).toEqual(true);
     });
 
@@ -35,46 +41,20 @@ describe('Loading', () => {
   });
 
   describe('Sets props and state as expected', () => {
-    const wrapper = mount(
-      <Loading className="extra-class" />
-    );
+    const wrapper = mount(<Loading className="extra-class" />);
 
-    const loader = wrapper.find('div');
     it('should remove and add bx--loading--stop class', () => {
+      const loader = wrapper.find('.bx--loading');
       wrapper.setProps({ active: false });
       expect(loader.hasClass('bx--loading--stop')).toEqual(true);
       wrapper.setProps({ active: true });
       expect(loader.hasClass('bx--loading--stop')).toEqual(false);
     });
-  });
 
-  describe('Has expected IE classes in IE environment', () => {
-    let wrapper;
-    let loader;
-
-    beforeAll(() => {
-      window.ActiveXObject = {};
-      wrapper = mount(
-        <Loading className="extra-class" />
-      );
-      loader = wrapper.find('div');
-    });
-
-    afterAll(() => {
-      window.ActiveXObject = undefined;
-    });
-
-    it('has the expected classes', () => {
-      expect(loader.hasClass('bx--loading')).toEqual(true);
-      expect(loader.hasClass('bx--loading--ie')).toEqual(true);
-    });
-
-    it('should remove and add bx--loading--stop--ie class', () => {
-      wrapper.setProps({ active: false });
-      expect(loader.hasClass('bx--loading--stop')).toEqual(true);
-      expect(loader.hasClass('bx--loading--stop--ie')).toEqual(true);
-      wrapper.setProps({ active: true });
-      expect(loader.hasClass('bx--loading--stop--ie')).toEqual(false);
+    it('should not render overlay when withOverlay is set to false', () => {
+      wrapper.setProps({ withOverlay: false });
+      const overlay = wrapper.find('.bx--loading-overlay');
+      expect(overlay.length).toEqual(0);
     });
   });
 });
