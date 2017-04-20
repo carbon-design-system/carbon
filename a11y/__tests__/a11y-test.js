@@ -34,11 +34,7 @@ import ListItem from '../../components/ListItem';
 import Loading from '../../components/Loading';
 import Modal from '../../components/Modal';
 import ModalWrapper from '../../components/ModalWrapper';
-import Module from '../../components/Module';
-import ModuleBody from '../../components/ModuleBody';
-import ModuleFooter from '../../components/ModuleFooter';
-import ModuleHeader from '../../components/ModuleHeader';
-import ModulesContainer from '../../components/ModulesContainer';
+import { Module, ModuleBody, ModuleHeader } from '../../components/Module';
 import Notification from '../../components/Notification';
 import NumberInput from '../../components/NumberInput';
 import OrderedList from '../../components/OrderedList';
@@ -417,34 +413,10 @@ describe('a11y scan', () => {
     });
   });
 
-  it('ModuleFooter', done => {
-    const wrapper = render(<ModuleFooter />);
-
-    AAT.getCompliance(wrapper.html(), 'ModuleFooter', data => {
-      expect(AAT.assertCompliance(data)).toEqual(0);
-      done();
-    });
-  });
-
   it('ModuleHeader', done => {
     const wrapper = render(<ModuleHeader>ModuleHeader</ModuleHeader>);
 
     AAT.getCompliance(wrapper.html(), 'ModuleHeader', data => {
-      expect(AAT.assertCompliance(data)).toEqual(0);
-      done();
-    });
-  });
-
-  it('ModulesContainer', done => {
-    const wrapper = render(
-      <ModulesContainer>
-        <Module>
-          <ModuleHeader>ModuleHeader</ModuleHeader>
-        </Module>
-      </ModulesContainer>
-    );
-
-    AAT.getCompliance(wrapper.html(), 'ModulesContainer', data => {
       expect(AAT.assertCompliance(data)).toEqual(0);
       done();
     });

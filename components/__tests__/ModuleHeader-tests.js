@@ -1,11 +1,11 @@
 import React from 'react';
-import ModuleHeader from '../ModuleHeader';
+import { ModuleHeader } from '../Module';
 import { shallow } from 'enzyme';
 
 describe('ModuleHeader', () => {
   describe('Renders as expected', () => {
     const moduleHeader = shallow(
-      <ModuleHeader className="extra-class">Header</ModuleHeader>
+      <ModuleHeader className="extra-class">Header</ModuleHeader>,
     );
 
     it('renders a ModuleHeader', () => {

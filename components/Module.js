@@ -4,15 +4,47 @@ import classNames from 'classnames';
 const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  width: PropTypes.oneOf(['full', 'half', 'one-third', 'two-third']),
+  size: PropTypes.oneOf(['single', 'double']),
+};
+
+const moduleBodyPropTypes = {
+  children: PropTypes.node,
+  centered: PropTypes.bool,
+  className: PropTypes.string,
+};
+
+const moduleHeaderPropTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 const defaultProps = {
-  width: 'full',
+  size: 'double',
 };
 
-const Module = ({ children, className, width, ...other }) => {
-  const wrapperClasses = classNames(`bx--module--${width}`, className);
+const moduleBodydefaultProps = {
+  centered: false,
+};
+
+const Module = ({ children, className, size, ...other }) => {
+  const wrapperClasses = classNames(
+    `bx--module bx--module--${size}`,
+    className,
+  );
+
+  return (
+    <div className={wrapperClasses} {...other}>
+      <div className="bx--module__inner">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+const ModuleBody = ({ children, className, centered, ...other }) => {
+  const wrapperClasses = classNames('bx--module__content', className, {
+    'bx--module__content--centered': centered,
+  });
 
   return (
     <div className={wrapperClasses} {...other}>
@@ -21,7 +53,20 @@ const Module = ({ children, className, width, ...other }) => {
   );
 };
 
-Module.propTypes = propTypes;
-Module.defaultProps = defaultProps;
+const ModuleHeader = ({ children, className, ...other }) => {
+  const wrapperClasses = classNames('bx--module__header', className);
 
-export default Module;
+  return (
+    <div className={wrapperClasses} {...other}>
+      <h1 className="bx--module__title">{children}</h1>
+    </div>
+  );
+};
+
+Module.propTypes = propTypes;
+ModuleBody.propTypes = moduleBodyPropTypes;
+Module.defaultProps = defaultProps;
+ModuleBody.defaultProps = moduleBodydefaultProps;
+ModuleHeader.propTypes = moduleHeaderPropTypes;
+
+export { Module, ModuleBody, ModuleHeader };
