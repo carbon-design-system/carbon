@@ -26,30 +26,17 @@ describe('OverflowMenuItem', () => {
       });
 
       const button = wrapper.find('button');
-      expect(button.hasClass('bx--overflow-menu__btn')).toEqual(true);
+      expect(button.hasClass('bx--overflow-menu-options__btn')).toEqual(true);
     });
 
-    it('should have the correct classes when isDelete is true', () => {
+    it('should have the correct class when hasDivider is true', () => {
       const wrapper = shallowRender({
         itemText: 'testing',
         onSelect() {},
-        isDelete: true,
+        hasDivider: true,
       });
 
-      const button = wrapper.find('button');
-      expect(button.hasClass('bx--overflow-menu__btn')).toEqual(true);
-      expect(button.hasClass('bx--overflow-menu__btn--delete')).toEqual(true);
-    });
-
-    it('should render the correct element structure when isLastItem is true', () => {
-      const wrapper = shallowRender({
-        itemText: 'testing',
-        onSelect() {},
-        isLastItem: true,
-      });
-
-      expect(wrapper.type()).toEqual('span');
-      expect(wrapper.find('button').length).toEqual(1);
+      expect(wrapper.hasClass('bx--overflow-menu--divider')).toEqual(true);
     });
   });
 });

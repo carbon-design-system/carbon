@@ -41,8 +41,7 @@ storiesOf('OverflowMenu', module)
         <OverflowMenuItem
           {...overflowMenuItemEvents}
           itemText="Delete App"
-          isDelete
-          isLastItem
+          hasDivider
         />
       </OverflowMenu>
   ));

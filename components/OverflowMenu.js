@@ -7,6 +7,7 @@ class OverflowMenu extends Component {
 
   static propTypes = {
     open: PropTypes.bool,
+    flipped: PropTypes.bool,
     children: PropTypes.node,
     className: PropTypes.string,
     tabIndex: PropTypes.number,
@@ -23,6 +24,7 @@ class OverflowMenu extends Component {
     ariaLabel: 'list of options',
     iconDescription: 'open and close list of options',
     open: false,
+    flipped: false,
     onClick: () => {},
     tabIndex: 0,
   }
@@ -73,7 +75,13 @@ class OverflowMenu extends Component {
     const overflowMenuClasses = classNames(
       this.props.className,
       'bx--overflow-menu',
-      { 'bx--overflow-menu--open': this.state.open },
+    );
+
+    const overflowMenuOptionsClasses = classNames(
+      'bx--overflow-menu-options',
+      { 'bx--overflow-menu--flip': this.props.flipped,
+        'bx--overflow-menu-options--open': this.state.open
+      }
     );
 
     return (
@@ -95,7 +103,7 @@ class OverflowMenu extends Component {
             description={iconDescription}
             width="100%"
           />
-          <ul className="bx--overflow-menu__options">
+          <ul className={overflowMenuOptionsClasses}>
             {children}
           </ul>
         </div>

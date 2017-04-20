@@ -15,7 +15,7 @@ describe('CardFooter', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--card__card-footer')).toEqual(true);
+      expect(wrapper.hasClass('bx--card-footer')).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {

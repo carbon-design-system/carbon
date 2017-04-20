@@ -32,7 +32,7 @@ describe('OverflowMenu', () => {
       const list = menu.find('ul');
 
       expect(list.length).toEqual(1);
-      expect(list.hasClass('bx--overflow-menu__options')).toEqual(true);
+      expect(list.hasClass('bx--overflow-menu-options')).toEqual(true);
     });
 
     it('should add extra classes that are passed via className', () => {
@@ -74,12 +74,12 @@ describe('OverflowMenu', () => {
 
     it('should set expected class when state is open', () => {
       const rootWrapper = mount(<OverflowMenu />);
-      const menu = rootWrapper.childAt(0);
-      const openClass = 'bx--overflow-menu--open';
+      const menuOptions = rootWrapper.find('ul');
+      const openClass = 'bx--overflow-menu-options--open';
 
-      expect(menu.hasClass(openClass)).not.toEqual(true);
+      expect(menuOptions.hasClass(openClass)).not.toEqual(true);
       rootWrapper.setState({ open: true });
-      expect(menu.hasClass(openClass)).toEqual(true);
+      expect(menuOptions.hasClass(openClass)).not.toEqual(false);
     });
 
     it('should be in an open state after menu is clicked', () => {

@@ -8,7 +8,7 @@ const propTypes = {
 
 const CardFooter = ({ children, className, ...other }) => {
   const cardFooterClasses = classNames({
-    'bx--card__card-footer': true,
+    'bx--card-footer': true,
     [className]: className,
   });
 

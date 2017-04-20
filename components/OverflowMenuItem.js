@@ -4,8 +4,8 @@ import classNames from 'classnames';
 const propTypes = {
   className: React.PropTypes.string,
   itemText: React.PropTypes.string.isRequired,
-  isDelete: React.PropTypes.bool,
   isLastItem: React.PropTypes.bool,
+  hasDivider: React.PropTypes.bool,
   onBlur: React.PropTypes.func,
   onClick: React.PropTypes.func,
   onFocus: React.PropTypes.func,
@@ -18,36 +18,34 @@ const propTypes = {
 };
 
 const defaultProps = {
-  isDelete: false,
   isLastItem: false,
+  hasDivider: false
 };
 
-const OverflowMenuItem = ({ className, itemText, isDelete, isLastItem, ...other }) => {
-  const overflowMenuItemClasses = classNames(
+const OverflowMenuItem = ({ className, itemText, hasDivider, ...other }) => {
+  const overflowMenuBtnClasses = classNames(
     [className]: className,
-    'bx--overflow-menu__btn',
-    { 'bx--overflow-menu__btn--delete': isDelete },
+    'bx--overflow-menu-options__btn',
+  );
+
+  const overflowMenuItemClasses = classNames(
+    'bx--overflow-menu-options__option': true,
+    { 'bx--overflow-menu--divider': hasDivider }
   );
 
   const item = (
-    <li>
+    <li className={overflowMenuItemClasses}>
       <button
         {...other}
         type="button"
-        className={overflowMenuItemClasses}
+        className={overflowMenuBtnClasses}
       >
         {itemText}
       </button>
     </li>
   );
 
-  const overflowMenuItem = isLastItem ?
-    <span>
-      <hr />
-      {item}
-    </span> : item;
-
-  return overflowMenuItem;
+  return item;
 };
 
 OverflowMenuItem.propTypes = propTypes;

@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import Button from './Button';
 import Icon from './Icon';
 
 const propTypes = {
@@ -10,22 +9,15 @@ const propTypes = {
   cardLink: React.PropTypes.node,
   cardInfo: React.PropTypes.array,
   className: React.PropTypes.string,
-  fullSize: React.PropTypes.bool,
-  amount: React.PropTypes.string,
-  desc: React.PropTypes.string,
-  buttonText: React.PropTypes.string,
 };
 
 const defaultProps = {
   cardIcon: 'app-services',
-  fullSize: false,
 };
 
-const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardInfo, fullSize, desc,
-                       amount, buttonText, ...other }) => {
+const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardInfo, ...other }) => {
   const cardContentClasses = classNames({
-    'bx--card__card-overview': !fullSize,
-    'bx--card--quota__overview': fullSize,
+    'bx--card__card-overview': true,
     [className]: className,
   });
 
@@ -37,25 +29,14 @@ const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardI
 
   const cardInfoContent = (cardInfo)
   ? cardInfo.map((info, key) =>
-    <p key={key} className="bx--about__title--additional-info">{info}</p>
+    <h4 key={key} className="bx--about__title--additional-info">{info}</h4>
     )
   : '';
 
   const cardLinkContentArray = Object.keys(cardLinkContent);
   const cardInfoContentArray = Object.keys(cardInfoContent);
 
-  const cardContent = (fullSize)
-  ? (
-    <div {...other} className={cardContentClasses}>
-      <p className="bx--overview__description">
-        <span className="bx--overview__main-number">{amount}</span>
-        <br />
-        {desc}
-      </p>
-      <Button kind="secondary" className="bx--overview__details-button">{buttonText}</Button>
-    </div>
-    )
-  : (
+  return (
     <div {...other} className={cardContentClasses}>
     {children}
       <div className="bx--card-overview__about">
@@ -73,9 +54,7 @@ const CardContent = ({ className, children, cardIcon, cardTitle, cardLink, cardI
         </div>
       </div>
     </div>
-    );
-
-  return cardContent;
+  );
 };
 
 CardContent.propTypes = propTypes;
