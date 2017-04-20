@@ -22,6 +22,7 @@ import DetailPageHeader from '../../components/DetailPageHeader';
 import Dropdown from '../../components/Dropdown';
 import DropdownItem from '../../components/DropdownItem';
 import FileUploader from '../../components/FileUploader';
+import Footer from '../../components/Footer';
 import Form from '../../components/Form';
 import FormGroup from '../../components/FormGroup';
 import Icon from '../../components/Icon';
@@ -207,6 +208,17 @@ describe('a11y scan', () => {
     const wrapper = render(<CopyButton>Label</CopyButton>);
 
     AAT.getCompliance(wrapper.html(), 'CopyButton', data => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('Footer', done => {
+    const wrapper = render(
+      <Footer />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'Footer', data => {
       expect(AAT.assertCompliance(data)).toEqual(0);
       done();
     });
