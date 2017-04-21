@@ -4,8 +4,14 @@ Main changes to HTML are for changes to Overflow Menu, Checkbox and icons that a
 
 ### SCSS
 
-The `_data-table.scss` file is now located at __src/components/data-table/_data-table.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_data-table.scss` file is now located at `src/components/data-table/_data-table.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/data-table/data-table';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/data-table/data-table';
 ```

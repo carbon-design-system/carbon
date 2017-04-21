@@ -13,8 +13,14 @@ Use the smaller, simpler HTML for content-switcher from now on:
 
 ### SCSS
 
-The `_content-switcher.scss` file is now located at __src/components/content-switcher/_content-switcher.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_content-switcher.scss` file is now located at `src/components/content-switcher/_content-switcher.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/content-switcher/content-switcher';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/content-switcher/content-switcher';
 ```

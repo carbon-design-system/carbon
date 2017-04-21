@@ -4,8 +4,14 @@ The new HTML is structurally the same. However, we've now added the `[data-searc
 
 ### SCSS
 
-The `_search.scss` file is now located at __src/components/search/search.scss__. You'll need to update any `@import` statements for this file to reflect this change.
+The `_search.scss` file is now located at `src/components/search/_search.scss`. You'll need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/search/search';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/search/search';
 ```

@@ -14,11 +14,18 @@ For full usage guidelines of the new HTML see the component README file.
 
 ### SCSS
 
-The `_form.scss` file is now located at __src/components/form/form.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_form.scss` file is now located at `src/components/form/_form.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/form/form';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/form/form';
 ```
+
 Quite a few class names have changed. See table below.
 
 | Old Class              | New Class            | Note    |

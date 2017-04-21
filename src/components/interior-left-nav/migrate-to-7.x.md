@@ -15,8 +15,14 @@ All data-attributes containing the words `inline-left-nav` have been changed to 
 
 ### SCSS
 
-The `_interior-left-nav.scss` file is now located at __src/components/interior-left-nav/_interior-left-nav.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_interior-left-nav.scss` file is now located at `src/components/interior-left-nav/_interior-left-nav.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/interior-left-nav/interior-left-nav';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/interior-left-nav/interior-left-nav';
 ```

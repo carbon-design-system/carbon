@@ -4,11 +4,18 @@ No changes.
 
 ### SCSS
 
-The `_select.scss` file is now located at __src/components/select/select.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_select.scss` file is now located at `src/components/select/_select.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/select/select';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/select/select';
 ```
+
 Quite a few class names have changed. See table below.
 
 | Old Class            | New Class           | Note    |

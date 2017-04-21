@@ -8,8 +8,14 @@ There's also a new `.bx--file-container` element that is used to display filenam
 
 ### SCSS
 
-The `_file-uploader.scss` file is now located at __src/components/file-uploader/_file-uploader.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_file-uploader.scss` file is now located at `src/components/file-uploader/_file-uploader.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/file-uploader/file-uploader';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/file-uploader/file-uploader';
 ```

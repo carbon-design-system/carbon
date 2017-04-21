@@ -1,7 +1,13 @@
 ### SCSS
 
-The `_button.scss` file is now located at __src/components/button/_button.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_button.scss` file is now located at `src/components/button/_button.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/button/button';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/button/button';
 ```

@@ -4,8 +4,14 @@ No changes.
 
 ### SCSS
 
-The `_pagination.scss` file is now located at __src/components/pagination/_pagination.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_pagination.scss` file is now located at `src/components/pagination/_pagination.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
+**New**: 
+```scss
+@import 'path_to_node_modules/carbon-components/src/components/pagination/pagination';
+```
+
+**Old**: 
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/pagination/pagination';
 ```
