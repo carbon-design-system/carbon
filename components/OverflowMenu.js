@@ -53,7 +53,6 @@ class OverflowMenu extends Component {
 
   handleKeyPress = (evt) => {
     const key = evt.key || evt.which;
-    console.log('here');
 
     if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
       this.setState({ open: !this.state.open });
