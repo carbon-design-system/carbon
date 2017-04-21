@@ -8,11 +8,12 @@ The majority of the class names have changed along with some structural changes.
 
 ### SCSS
 
-The `_notification.scss` file is now located at __src/components/notification/notification.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_notification.scss` is now split in to two files. They are located at `src/components/notification/_inline-notification.scss` and `src/components/notification/_toast-notification.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss
-@import 'path_to_node_modules/carbon-components/src/components/notification/notification';
+@import 'path_to_node_modules/carbon-components/src/components/notification/_toast-notification.scss';
+@import 'path_to_node_modules/carbon-components/src/components/notification/_inline-notification.scss';
 ```
 
 **Old**: 

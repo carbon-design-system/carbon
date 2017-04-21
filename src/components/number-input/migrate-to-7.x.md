@@ -7,7 +7,7 @@ In general, it will be easiest to simply copy and paste the new HTML to replace 
 
 ### SCSS
 
-The `_number-input.scss` file is now located at __src/components/number-input/_number-input.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_number-input.scss` file is now located at `src/components/number-input/_number-input.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

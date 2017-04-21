@@ -17,7 +17,7 @@ With that said, it will be best to copy and paste the new HTML for Modal to capt
 
 ### SCSS
 
-The `_modal.scss` file is now located at __src/components/modal/_modal.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_modal.scss` file is now located at `src/components/modal/_modal.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

@@ -5,7 +5,7 @@ A lot of classes have been removed, see SCSS for more details.
 
 ### SCSS
 
-The `_detail-page-header.scss` file is now located at __src/components/detail-page-header/_detail-page-header.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_detail-page-header.scss` file is now located at `src/components/detail-page-header/_detail-page-header.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

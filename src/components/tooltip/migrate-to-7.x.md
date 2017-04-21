@@ -6,7 +6,7 @@ There are now two major variations of this component. The original tooltip is no
 
 ### SCSS
 
-The `_tooltip.scss` file is now located at __src/components/tooltip/tooltip.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_tooltip.scss` file is now located at `src/components/tooltip/_tooltip.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

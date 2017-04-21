@@ -22,7 +22,7 @@ For more examples see the `module.html` file.
 
 ### SCSS
 
-The `_module.scss` file is now located at __src/components/modules/module.scss__. You'll need to update any `@import` statements for this file to reflect this change.
+The `_module.scss` file is now located at `src/components/modules/_module.scss`. You'll need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

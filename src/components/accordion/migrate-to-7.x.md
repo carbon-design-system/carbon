@@ -14,7 +14,7 @@ For more details on installing and using bluemix-icons, see install and usage gu
 
 ### SCSS
 
-The `_accordion.scss` file is now located at __src/components/accordion/_accordion.scss__. You'll need to update any `@import` statements for this file to reflect this change.
+The `_accordion.scss` file is now located at `src/components/accordion/_accordion.scss`. You'll need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

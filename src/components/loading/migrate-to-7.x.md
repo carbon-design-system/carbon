@@ -5,7 +5,7 @@ No class names have changed.
 
 ### SCSS
 
-The `_loading.scss` file is now located at __src/components/loading/loading.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_loading.scss` file is now located at `src/components/loading/_loading.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

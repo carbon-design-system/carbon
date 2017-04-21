@@ -4,7 +4,7 @@ Main changes to HTML are for changes to Overflow Menu, Checkbox and icons that a
 
 ### SCSS
 
-The `_data-table.scss` file is now located at __src/components/data-table/_data-table.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_data-table.scss` file is now located at `src/components/data-table/_data-table.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

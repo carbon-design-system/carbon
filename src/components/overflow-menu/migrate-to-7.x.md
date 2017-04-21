@@ -4,7 +4,7 @@ Structure stays the same but some class names have been changed. See below.
 
 ### SCSS
 
-The `_overflow-menu.scss` file is now located at `__src/components/overflow-menu/_overflow-menu.scss.` You will need to update any `@import` statements for this file to reflect this change.
+The `_overflow-menu.scss` file is now located at `src/components/overflow-menu/_overflow-menu.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

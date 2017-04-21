@@ -14,7 +14,7 @@ For full usage guidelines of the new HTML see the component README file.
 
 ### SCSS
 
-The `_form.scss` file is now located at __src/components/form/form.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_form.scss` file is now located at `src/components/form/_form.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

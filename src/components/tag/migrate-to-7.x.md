@@ -4,7 +4,7 @@ HTML has not changed except for class attributes. See SCSS for more details.
 
 ### SCSS
 
-The `_tag.scss` file is now located at __src/components/tag/_tag.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_tag.scss` file is now located at `src/components/tag/_tag.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

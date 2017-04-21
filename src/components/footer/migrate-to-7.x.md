@@ -5,7 +5,7 @@ Now there's only one variant of HTML for Footer that more closely resembles what
 
 ### SCSS
 
-The `_footer.scss` file is now located at __src/components/footer/_footer.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_footer.scss` file is now located at `src/components/footer/_footer.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

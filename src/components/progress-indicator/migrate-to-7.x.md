@@ -6,7 +6,7 @@ SVGs representing incomplete, complete and current steps now rely on inline SVGs
 
 ### SCSS
 
-The `_progress-indicator.scss` file is now located at __src/components/progress-indicator/_progress-indicator.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_progress-indicator.scss` file is now located at `src/components/progress-indicator/_progress-indicator.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss

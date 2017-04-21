@@ -13,7 +13,7 @@ See Forms for more details on using labels and form validation.
 
 ### SCSS
 
-The `_text-input.scss` file is now located at __src/components/text-input/_text-input.scss__. You will need to update any `@import` statements for this file to reflect this change.
+The `_text-input.scss` file is now located at `src/components/text-input/_text-input.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
 **New**: 
 ```scss
