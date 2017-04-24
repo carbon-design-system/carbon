@@ -9,8 +9,7 @@
             "rpt.g3.listMisuse": "List elements missing, or improperly structured.  Do not use list elements for formatting.",
             "wcag20.tech.aria.RequiredParent": "An element with WAI-ARIA role {0} is not contained in or owned by an element with one of the following WAI-ARIA roles: {1}. See rule help for remediation guidance.",
             "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role.",
-            "wcag20.tech.aria.MissingKeyboardHandler": "The {0} element with WAI-ARIA role {1} might not be keyboard accessible. See rule help for remediation guidance.",
-            "rpt.g1110.widgetLabels": "A WAI-ARIA widget must have an accessible name (see message help text for details)."
+            "wcag20.tech.aria.MissingKeyboardHandler": "The {0} element with WAI-ARIA role {1} might not be keyboard accessible. See rule help for remediation guidance."
         },
         "lang": "en-us"
     },
@@ -115,22 +114,6 @@
                         "width": 0
                     },
                     "level": "violation"
-                },
-                {
-                    "severityCode": "eISHigh",
-                    "messageCode": "rpt.g1110.widgetLabels",
-                    "ruleId": "1110",
-                    "help": "idhi_accessibility_check_g1110.html",
-                    "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/li[1]/ul[1]",
-                    "snippet": "<ul style=\"\" aria-hidden=\"true\" class=\"left-nav-list left-nav-list--nested\" role=\"menu\">",
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "level": "violation"
                 }
             ],
             "frameIdx": 0
@@ -138,7 +121,7 @@
     ],
     "summary": {
         "counts": {
-            "violation": 7
+            "violation": 6
         },
         "scanTime": 0,
         "policies": [
@@ -148,9 +131,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1487698560555
+        "startScan": 1491921614285
     },
-    "scanID": "922d93db-7fc7-47a1-9883-ece8bf58931e",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "38ab4a0d-bc71-455a-aa52-d07075672196",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "InteriorLeftNavList"
 }

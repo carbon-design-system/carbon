@@ -109,6 +109,7 @@ class InteriorLeftNavList extends Component {
         <ul
           role="menu"
           className="left-nav-list left-nav-list--nested"
+          aria-label={title}
           aria-hidden
         >
           {newChildren}
