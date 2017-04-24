@@ -8,12 +8,8 @@ jest.useFakeTimers();
 describe('CopyButton', () => {
   describe('Renders common props as expected', () => {
     const wrapper = shallow(
-      <CopyButton tabIndex={2} className="extra-class"><div className="test"></div></CopyButton>
+      <CopyButton tabIndex={2} className="extra-class" />,
     );
-
-    it('Renders children as expected', () => {
-      expect(wrapper.find('.test').length).toBe(1);
-    });
 
     it('Should set tabIndex if one is passed via props', () => {
       expect(wrapper.props().tabIndex).toEqual(2);
@@ -25,18 +21,14 @@ describe('CopyButton', () => {
   });
 
   describe('Renders button props as expected', () => {
-    const wrapper = shallow(<CopyButton>Copy</CopyButton>);
+    const wrapper = shallow(<CopyButton />);
 
     it('Renders children as expected', () => {
       expect(wrapper.is('button')).toBe(true);
-      expect(wrapper.hasClass('bx--btn--copy')).toBe(true);
+      expect(wrapper.hasClass('bx--snippet-button')).toBe(true);
       expect(wrapper.find('.bx--btn--copy__feedback').length).toBe(1);
       expect(wrapper.find(Icon).length).toBe(1);
-      expect(wrapper.find(Icon).props().name).toBe('add--glyph');
-    });
-
-    it('Should have default props', () => {
-      expect(wrapper.props().disabled).toBe(false);
+      expect(wrapper.find(Icon).props().name).toBe('copy');
     });
 
     it('Should be able to disable the button', () => {
@@ -46,32 +38,42 @@ describe('CopyButton', () => {
     });
 
     it('Should have a default feedback timeout', () => {
-      const timeoutWrapper = mount(<CopyButton>Copy</CopyButton>);
+      const timeoutWrapper = mount(<CopyButton />);
       expect(timeoutWrapper.props().feedbackTimeout).toBe(2000);
     });
 
     it('Should be able to set the timeout for displaying feedback', () => {
-      const timeoutWrapper = mount(<CopyButton feedbackTimeout={5000}>Copy</CopyButton>);
+      const timeoutWrapper = mount(<CopyButton feedbackTimeout={5000} />);
       expect(timeoutWrapper.props().feedbackTimeout).toBe(5000);
     });
 
     it('Should be able to specify the feedback message', () => {
-      const feedbackWrapper = mount(<CopyButton feedback="Copied!">Copy</CopyButton>);
-      expect(feedbackWrapper.find('.bx--btn--copy__feedback').props()['data-feedback']).toBe('Copied!');
+      const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
+      expect(
+        feedbackWrapper.find('.bx--btn--copy__feedback').props()[
+          'data-feedback'
+        ],
+      ).toBe('Copied!');
     });
   });
 
   describe('Renders feedback as expected', () => {
     it('Should make the feedback visible', () => {
-      const feedbackWrapper = mount(<CopyButton feedback="Copied!">Copy</CopyButton>);
+      const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
       const feedback = feedbackWrapper.find('.bx--btn--copy__feedback');
-      expect(feedback.hasClass('bx--btn--copy__feedback--displayed')).toBe(false);
+      expect(feedback.hasClass('bx--btn--copy__feedback--displayed')).toBe(
+        false,
+      );
       feedbackWrapper.setState({ showFeedback: true });
-      expect(feedback.hasClass('bx--btn--copy__feedback--displayed')).toBe(true);
+      expect(feedback.hasClass('bx--btn--copy__feedback--displayed')).toBe(
+        true,
+      );
     });
 
     it('Should show feedback for a limited amount of time', () => {
-      const feedbackWrapper = mount(<CopyButton feedback="Copied!" feedbackTimeout={5000}>Copy</CopyButton>);
+      const feedbackWrapper = mount(
+        <CopyButton feedback="Copied!" feedbackTimeout={5000} />,
+      );
       expect(feedbackWrapper.state().showFeedback).toBe(false);
       feedbackWrapper.simulate('click');
       expect(feedbackWrapper.state().showFeedback).toBe(true);
@@ -85,7 +87,7 @@ describe('CopyButton', () => {
   describe('Triggers appropriate events', () => {
     it('should call the click handler', () => {
       const onClick = jest.fn();
-      const clickWrapper = mount(<CopyButton onClick={onClick}>Copy</CopyButton>);
+      const clickWrapper = mount(<CopyButton onClick={onClick} />);
       clickWrapper.simulate('click');
       expect(onClick).toBeCalled();
     });

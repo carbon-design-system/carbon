@@ -15,6 +15,7 @@ import CardContent from '../../components/CardContent';
 import CardFooter from '../../components/CardFooter';
 import CardStatus from '../../components/CardStatus';
 import Checkbox from '../../components/Checkbox';
+import CodeSnippet from '../../components/CodeSnippet';
 import ContentSwitcher from '../../components/ContentSwitcher';
 import CopyButton from '../../components/CopyButton';
 import DangerButton from '../../components/DangerButton';
@@ -132,7 +133,7 @@ describe('a11y scan', () => {
         iconName="test iconName"
         description="test description"
         name="test name"
-      />
+      />,
     );
 
     AAT.getCompliance(wrapper.html(), 'CardActionItem', data => {
@@ -186,12 +187,23 @@ describe('a11y scan', () => {
     });
   });
 
+  it('CodeSnippet', done => {
+    const wrapper = render(
+      <CodeSnippet type="terminal">{'node -v'}</CodeSnippet>,
+    );
+
+    AAT.getCompliance(wrapper.html(), 'CodeSnippet', data => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
   it('ContentSwitcher', done => {
     const wrapper = render(
       <ContentSwitcher onChange={() => {}} className="extra-class">
         <Switch kind="anchor" text="one" />
         <Switch kind="anchor" text="two" />
-      </ContentSwitcher>
+      </ContentSwitcher>,
     );
 
     AAT.getCompliance(wrapper.html(), 'ContentSwitcher', data => {
@@ -210,9 +222,7 @@ describe('a11y scan', () => {
   });
 
   it('Footer', done => {
-    const wrapper = render(
-      <Footer />
-    );
+    const wrapper = render(<Footer />);
 
     AAT.getCompliance(wrapper.html(), 'Footer', data => {
       expect(AAT.assertCompliance(data)).toEqual(0);
@@ -226,7 +236,7 @@ describe('a11y scan', () => {
         <Button type="submit" className="some-class">
           Submit
         </Button>
-      </Form>
+      </Form>,
     );
 
     AAT.getCompliance(wrapper.html(), 'Form', data => {
@@ -246,7 +256,7 @@ describe('a11y scan', () => {
 
   it('FileUploader', done => {
     const wrapper = render(
-      <FileUploader id="test id" labelDescription="test label" />
+      <FileUploader id="test id" labelDescription="test label" />,
     );
 
     AAT.getCompliance(wrapper.html(), 'FileUploader', data => {
@@ -257,7 +267,7 @@ describe('a11y scan', () => {
 
   it('DropdownItem', done => {
     const wrapper = render(
-      <DropdownItem value="test value" itemText="test itemText" />
+      <DropdownItem value="test value" itemText="test itemText" />,
     );
 
     AAT.getCompliance(wrapper.html(), 'DropdownItem', data => {
@@ -277,7 +287,7 @@ describe('a11y scan', () => {
 
   it('DetailPageHeader', done => {
     const wrapper = render(
-      <DetailPageHeader onBackLinkClick={() => {}} title="test title" />
+      <DetailPageHeader onBackLinkClick={() => {}} title="test title" />,
     );
 
     AAT.getCompliance(wrapper.html(), 'DetailPageHeader', data => {
@@ -317,7 +327,7 @@ describe('a11y scan', () => {
     const wrapper = render(
       <InteriorLeftNavItem href="#">
         <a href="#">test-title</a>
-      </InteriorLeftNavItem>
+      </InteriorLeftNavItem>,
     );
 
     AAT.getCompliance(wrapper.html(), 'InteriorLeftNavItem', data => {
@@ -369,7 +379,7 @@ describe('a11y scan', () => {
         modalLabel="modal label"
         primaryButtonText="primaryButtonText"
         secondaryButtonText="secondaryButtonText"
-      />
+      />,
     );
 
     AAT.getCompliance(wrapper.html(), 'Modal', data => {
@@ -386,7 +396,7 @@ describe('a11y scan', () => {
         secondaryButtonText="secondaryButtonText"
         primaryButtonText="primaryButtonText"
         buttonTriggerText="buttonTriggerText"
-      />
+      />,
     );
 
     AAT.getCompliance(wrapper.html(), 'ModalWrapper', data => {
@@ -424,7 +434,7 @@ describe('a11y scan', () => {
 
   it('Notification', done => {
     const wrapper = render(
-      <Notification kind="success" title="test title" subtitle="test title" />
+      <Notification kind="success" title="test title" subtitle="test title" />,
     );
 
     AAT.getCompliance(wrapper.html(), 'Notification', data => {
@@ -525,7 +535,7 @@ describe('a11y scan', () => {
 
   it('RadioButton', done => {
     const wrapper = render(
-      <RadioButton value="test value" labelText="label" />
+      <RadioButton value="test value" labelText="label" />,
     );
 
     AAT.getCompliance(wrapper.html(), 'RadioButton', data => {
@@ -585,7 +595,7 @@ describe('a11y scan', () => {
         <Tab label="Overview">
           <div className="some-content">Overview Content</div>
         </Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     AAT.getCompliance(wrapper.html(), 'Tabs', data => {

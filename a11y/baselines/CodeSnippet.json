@@ -21,7 +21,7 @@
                     "ruleId": "41",
                     "help": "idhi_accessibility_check_g41.html",
                     "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/button[1]",
+                    "xpath": "/html[1]/body[1]/div[1]/button[1]",
                     "snippet": "<button style=\"\" class=\"bx--snippet-button\" type=\"button\">",
                     "bounds": {
                         "left": 0,
@@ -53,7 +53,7 @@
                     "ruleId": "484",
                     "help": "idhi_accessibility_check_g484.html",
                     "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/button[1]/svg[1]/title[1]",
+                    "xpath": "/html[1]/body[1]/div[1]/button[1]/svg[1]/title[1]",
                     "snippet": "<title>",
                     "bounds": {
                         "left": 0,
@@ -101,7 +101,7 @@
                     "ruleId": "1088",
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/button[1]",
+                    "xpath": "/html[1]/body[1]/div[1]/button[1]",
                     "snippet": "<button style=\"\" class=\"bx--snippet-button\" type=\"button\">",
                     "bounds": {
                         "left": 0,
@@ -127,9 +127,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1492624185386
+        "startScan": 1492623932695
     },
-    "scanID": "1786426e-dc84-47a7-8a68-66c005ffba4a",
+    "scanID": "728b7a8c-aee6-4549-a847-838a560a4019",
     "toolID": "@ibma/aat-v1.2.0",
-    "label": "CopyButton"
+    "label": "CodeSnippet"
 }
