@@ -39,28 +39,22 @@
       color: $text-01;
     }
 
-    .bx--module__text {
-      @include font-size('14');
-      color: $text-01;
-    }
-
     .bx--module__content {
       display: flex;
       flex-direction: column;
       flex: 3;
       padding: 1.5rem;
+
+      p {
+        @include font-size('14');
+        color: $text-01;
+      }
     }
 
     .bx--module__content--centered {
       align-items: center;
       justify-content: center;
       padding: 5rem;
-
-      .bx--module__text {
-        text-align: center;
-        margin-bottom: 1.5rem;
-        width: 100%;
-      }
     }
 
     .bx--module__content--scrollable {
