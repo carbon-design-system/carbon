@@ -20,7 +20,7 @@ class Pagination extends Component {
     totalItems: PropTypes.number.isRequired,
     disabled: React.PropTypes.bool,
     page: PropTypes.number,
-  }
+  };
   static defaultProps = {
     backwardText: 'Backward',
     itemRangeText: (min, max, total) => `${min}-${max} of ${total} items`,
@@ -31,12 +31,12 @@ class Pagination extends Component {
     pageRangeText: (current, total) => `${current} of ${total} pages`,
     disabled: false,
     page: 1,
-  }
-  static uuid = 0
+  };
+  static uuid = 0;
   state = {
     page: this.props.page,
     pageSize: this.props.pageSizes[0],
-  }
+  };
   componentWillReceiveProps({ pageSizes, page }) {
     if (!equals(pageSizes, this.props.pageSizes)) {
       this.setState({ pageSize: pageSizes[0], page: 1 });
@@ -45,29 +45,31 @@ class Pagination extends Component {
       this.setState({ page });
     }
   }
-  id = Pagination.uuid++
-  handleSizeChange = (evt) => {
+  id = Pagination.uuid++;
+  handleSizeChange = evt => {
     const pageSize = Number(evt.target.value);
     this.setState({ pageSize, page: 1 });
     this.props.onChange({ page: 1, pageSize });
-  }
-  handlePageInputChange = (evt) => {
+  };
+  handlePageInputChange = evt => {
     const page = Number(evt.target.value);
-    if (page > 0 && page <= Math.ceil(this.props.totalItems / this.state.pageSize)) {
+    if (
+      page > 0 && page <= Math.ceil(this.props.totalItems / this.state.pageSize)
+    ) {
       this.setState({ page });
       this.props.onChange({ page, pageSize: this.state.pageSize });
     }
-  }
+  };
   incrementPage = () => {
     const page = this.state.page + 1;
     this.setState({ page });
     this.props.onChange({ page, pageSize: this.state.pageSize });
-  }
+  };
   decrementPage = () => {
     const page = this.state.page - 1;
     this.setState({ page });
     this.props.onChange({ page, pageSize: this.state.pageSize });
-  }
+  };
   render() {
     const {
       backwardText,
@@ -81,7 +83,7 @@ class Pagination extends Component {
       totalItems,
       onChange, // eslint-disable-line no-unused-vars
       page: pageNumber, // eslint-disable-line no-unused-vars
-      ...other,
+      ...other
     } = this.props;
 
     const {
@@ -100,11 +102,19 @@ class Pagination extends Component {
             onChange={this.handleSizeChange}
             value={pageSize}
           >
-            {pageSizes.map(size => <SelectItem key={size} value={size} text={String(size)} />)}
+            {pageSizes.map(size => (
+              <SelectItem key={size} value={size} text={String(size)} />
+            ))}
           </Select>
-          <span className="bx--pagination__text">{itemsPerPageText}&nbsp;&nbsp;|&nbsp;&nbsp;</span>
           <span className="bx--pagination__text">
-            {itemRangeText(pageSize * (page - 1) + 1, Math.min(page * pageSize, totalItems), totalItems)}
+            {itemsPerPageText}&nbsp;&nbsp;|&nbsp;&nbsp;
+          </span>
+          <span className="bx--pagination__text">
+            {itemRangeText(
+              pageSize * (page - 1) + 1,
+              Math.min(page * pageSize, totalItems),
+              totalItems,
+            )}
           </span>
         </div>
         <div className="bx--pagination__right">
@@ -114,11 +124,13 @@ class Pagination extends Component {
           <button
             className="bx--pagination__button bx--pagination__button--backward"
             onClick={this.decrementPage}
-            disabled={this.props.disabled || (page === 1)}
+            disabled={this.props.disabled || page === 1}
           >
-            <div>
-              <Icon name="chevron--left" description={backwardText} />
-            </div>
+            <Icon
+              className="bx--pagination__button-icon"
+              name="chevron--left"
+              description={backwardText}
+            />
           </button>
           <TextInput
             id={`bx-pagination-input-${this.id}`}
@@ -131,15 +143,18 @@ class Pagination extends Component {
           <button
             className="bx--pagination__button bx--pagination__button--forward"
             onClick={this.incrementPage}
-            disabled={this.props.disabled || (page === Math.ceil(totalItems / pageSize))}
+            disabled={
+              this.props.disabled || page === Math.ceil(totalItems / pageSize)
+            }
           >
-            <div>
-              <Icon name="chevron--right" description={forwardText} />
-            </div>
+            <Icon
+              className="bx--pagination__button-icon"
+              name="chevron--right"
+              description={forwardText}
+            />
           </button>
         </div>
       </div>
-
     );
   }
 }
