@@ -54,8 +54,12 @@
 
   .bx--dropdown-list {
     @include reset;
+    @include layer('overlay');
+    width: 100%;
     display: none;
     list-style: none;
+    position: absolute;
+    z-index: z('dropdown');
   }
 
   .bx--dropdown-link {
@@ -85,7 +89,6 @@
 
     .bx--dropdown-list {
       @include font-size('14');
-      @include layer('overlay');
       display: flex;
       flex-direction: column;
       background-color: $ui-01;
