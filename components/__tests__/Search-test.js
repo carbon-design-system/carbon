@@ -28,11 +28,11 @@ describe('Search', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textInput.hasClass('bx--search__input')).toEqual(true);
+        expect(textInput.hasClass('bx--search-input')).toEqual(true);
       });
 
       it('should set type as expected', () => {
-        expect(textInput.props().type).toEqual('search');
+        expect(textInput.props().type).toEqual('text');
         wrapper.setProps({ type: 'email' });
         expect(textInput.props().type).toEqual('email');
       });
@@ -56,7 +56,7 @@ describe('Search', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass('bx--search__label')).toEqual(true);
+        expect(label.hasClass('bx--label')).toEqual(true);
       });
 
       it('should set label as expected', () => {
@@ -70,7 +70,6 @@ describe('Search', () => {
       describe('buttons', () => {
         const btns = wrapper.find('button');
         const sortBtn = btns.first();
-        const toggleBtn = btns.last();
 
         it('should be two buttons', () => {
           expect(btns.length).toBe(2);
@@ -84,11 +83,7 @@ describe('Search', () => {
         });
 
         it('has expected class for sort button', () => {
-          expect(sortBtn.hasClass('bx--search__sort')).toEqual(true);
-        });
-
-        it('has expected class for toggle-layout button', () => {
-          expect(toggleBtn.hasClass('bx--search__toggle-layout')).toEqual(true);
+          expect(sortBtn.hasClass('bx--search-button')).toEqual(true);
         });
       });
 
@@ -98,25 +93,25 @@ describe('Search', () => {
           expect(icons.at(0).props().name).toEqual('search--glyph');
         });
 
-        it('renders three Icons', () => {
+        it('renders four Icons', () => {
           wrapper.setProps({ small: false });
           const icons = wrapper.find(Icon);
-          expect(icons.length).toEqual(3);
+          expect(icons.length).toEqual(4);
         });
 
         it('should use "filter--glyph" icon for sort button', () => {
-          const icon = wrapper.find(Icon).at(1);
+          const icon = wrapper.find(Icon).at(2);
           expect(icon.props().name).toEqual('filter--glyph');
         });
 
         it('should use "list" icon for toggle button', () => {
-          const icon = wrapper.find(Icon).at(2);
+          const icon = wrapper.find(Icon).at(3);
           expect(icon.props().name).toEqual('list');
         });
 
         it('should use "grid" icon when format state is not "list"', () => {
           wrapper.setState({ format: 'not-list' });
-          const icon = wrapper.find(Icon).at(2);
+          const icon = wrapper.find(Icon).at(3);
           expect(icon.props().name).toEqual('grid');
         });
       });
@@ -145,7 +140,7 @@ describe('Search', () => {
 
       it('renders one Icon', () => {
         const icons = small.find(Icon);
-        expect(icons.length).toEqual(1);
+        expect(icons.length).toEqual(2);
       });
     });
   });
@@ -187,14 +182,14 @@ describe('Search', () => {
       );
 
       it('should default to "list" layout', () => {
-        const icon = wrapper.find(Icon).at(2);
+        const icon = wrapper.find(Icon).at(3);
         expect(icon.props().name).toEqual('list');
       });
 
       it('should toggle layout to "grid" when clicked', () => {
         const button = wrapper.find('button').at(1);
         button.simulate('click');
-        const icon = wrapper.find(Icon).at(2);
+        const icon = wrapper.find(Icon).at(3);
         expect(icon.props().name).toEqual('grid');
       });
       it('should toggle layout to "list" when clicked and currently set to "grid"', () => {
@@ -203,7 +198,7 @@ describe('Search', () => {
           format: 'grid',
         });
         button.simulate('click');
-        const icon = wrapper.find(Icon).at(2);
+        const icon = wrapper.find(Icon).at(3);
         expect(icon.props().name).toEqual('list');
       });
     });
