@@ -110,14 +110,14 @@ const instance = ContentSwitcher.init();
 instance.setActive(button);
 ```
 
-> The `setActive` method also takes an optional `callback` function parameter. The most typical example of using this is acting on a newly selected content-switcher button. 
-> ```js
-> contentSwitcher.setActive(button, function (error, item) {
->  if (!error) {
->    // Having no error means that content switching is not canceled, so go on…
->    item.ownerDocument.querySelector(item.dataset.target).querySelector('input').focus(); // `item` is the newly selected button
->  }
->});
+ The `setActive` method also takes an optional `callback` function parameter. The most typical example of using this is acting on a newly selected content-switcher button. 
+ ```js
+ contentSwitcher.setActive(button, function (error, item) {
+  if (!error) {
+    // Having no error means that content switching is not canceled, so go on…
+    item.ownerDocument.querySelector(item.dataset.target).querySelector('input').focus(); // `item` is the newly selected button
+  }
+});
 ```
 
 #### Using buttons or anchor elements are both fine
