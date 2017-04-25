@@ -12,12 +12,14 @@ class Notification extends mixin(createComponent, initComponentBySearch, evented
    */
   constructor(element, options) {
     super(element, options);
-    this.button = element.querySelector(this.options.selectorButton) || false;
-    this.button.addEventListener('click', (evt) => {
-      if (evt.currentTarget === this.button) {
-        this.remove();
-      }
-    });
+    this.button = element.querySelector(this.options.selectorButton);
+    if (this.button) {
+      this.button.addEventListener('click', (evt) => {
+        if (evt.currentTarget === this.button) {
+          this.remove();
+        }
+      });
+    }
   }
 
   _changeState = (state, callback) => {

@@ -29,6 +29,10 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     this.parentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
 
+    if (!this.tableBody) {
+      throw new Error('Cannot find the table body.');
+    }
+
     this._zebraStripe();
     this._initExpandableRows();
 

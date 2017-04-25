@@ -19,11 +19,12 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
     } else {
       const boundTable = this.element.ownerDocument.querySelector(this.element.dataset.tableTarget);
       const rowHeightBtns = this.element.querySelector(this.options.selectorRowHeight);
-
-      rowHeightBtns.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
-      // [...this.element.querySelectorAll(this.options.selectorRowHeight)].forEach((item) => {
-      //   item.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
-      // });
+      if (rowHeightBtns) {
+        rowHeightBtns.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
+        // [...this.element.querySelectorAll(this.options.selectorRowHeight)].forEach((item) => {
+        //   item.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
+        // });
+      }
     }
 
     this.hDocumentKeyDown = on(this.element.ownerDocument, 'keydown', (evt) => { this._handleKeyDown(evt); });
@@ -37,19 +38,22 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
    */
   _handleDocumentClick(event) {
     const searchInput = eventMatches(event, this.options.selectorSearch);
-    const isOfSelf = this.element.querySelector(this.options.selectorSearch).contains(event.target);
-    const isOfToolbar = this.element.contains(event.target);
-    const shouldBeOpen = isOfSelf && !this.element.classList.contains(this.options.classSearchActive);
+    const isOfSelfSearchInput = searchInput && this.element.contains(searchInput);
 
-    if (searchInput && shouldBeOpen) {
-      searchInput.classList.add(this.options.classSearchActive);
-      searchInput.querySelector('input').focus();
+    if (isOfSelfSearchInput) {
+      const shouldBeOpen = isOfSelfSearchInput && !this.element.classList.contains(this.options.classSearchActive);
+      searchInput.classList.toggle(this.options.classSearchActive, shouldBeOpen);
+      if (shouldBeOpen) {
+        searchInput.querySelector('input').focus();
+      }
     }
-    if (!searchInput && !isOfToolbar) {
-      [...this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)].forEach((item) => {
+
+    const targetComponentElement = eventMatches(event, this.options.selectorInit);
+    [...this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)].forEach((item) => {
+      if (!targetComponentElement || !targetComponentElement.contains(item)) {
         item.classList.remove(this.options.classSearchActive);
-      });
-    }
+      }
+    });
   }
 
   /**

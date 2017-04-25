@@ -1,6 +1,7 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
 class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
@@ -31,29 +32,28 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
 
     this.element.addEventListener('dropdown-beingselected', (event) => {
       if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
-        if (event.detail.item.querySelector(this.options.classLinkedIcon) !== null) {
-          this.element.linkedAccount = event.detail.item.querySelector(this.options.selectorAccountSlLinked).cloneNode(true);
-          this.element.isLinked = true;
-          this.element.linkedIcon = event.detail.item.querySelector(this.options.classLinkedIcon).cloneNode(true);
-        } else {
-          this.element.linkedAccount = '';
-          this.element.isLinked = false;
-          this.element.linkedIcon = '';
-        }
+        const linkedIconNode = event.detail.item.querySelector(this.options.classLinkedIcon);
+        this.element.isLinked = !!linkedIconNode;
+        this.element.linkedIcon = linkedIconNode && linkedIconNode.cloneNode(true);
+        const linkedAccountNode = event.detail.item.querySelector(this.options.selectorAccountSlLinked);
+        this.element.linkedAccount = linkedAccountNode && linkedAccountNode.cloneNode(true);
       }
     });
 
-    this.element.querySelector(this.options.selectorToggle).addEventListener('keydown', (event) => { this.toggle(event); });
+    const toggleNode = this.element.querySelector(this.options.selectorToggle);
+    if (toggleNode) {
+      toggleNode.addEventListener('keydown', (event) => { this.toggle(event); });
 
-    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseenter', (event) => {
-      this.getLinkedData(event);
-      this.determineSwitcherValues(true);
-    });
+      toggleNode.addEventListener('mouseenter', (event) => {
+        this.getLinkedData(event);
+        this.determineSwitcherValues(true);
+      });
 
-    this.element.querySelector(this.options.selectorToggle).addEventListener('mouseleave', (event) => {
-      this.getLinkedData(event);
-      this.determineSwitcherValues(false);
-    });
+      toggleNode.addEventListener('mouseleave', (event) => {
+        this.getLinkedData(event);
+        this.determineSwitcherValues(false);
+      });
+    }
 
     this.element.ownerDocument.addEventListener('keyup', () => this.handleBlur());
   }
@@ -98,7 +98,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
   handleDocumentClick(evt) {
     const clickTarget = evt.target;
     const isOfSelf = this.element.contains(clickTarget);
-    const isToggle = this.element.ownerDocument.querySelector(this.options.selectorToggle).contains(clickTarget);
+    const isToggle = eventMatches(evt, this.options.selectorToggle);
     const isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
 
     if (isOfSelf) {
@@ -178,35 +178,56 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
     let spaceShort;
 
     if (isHovered && !isOpen) {
-      nameElement.textContent = nameDropdownValue;
-      orgElement.textContent = orgDropdownValue;
-      spaceElement.textContent = spaceDropdownValue;
-      regionElement.textContent = regionDropdownValue;
-      menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
-    } else {
-      if (nameDropdownValue.length > 25) {
-        nameShort = `${nameDropdownValue.substr(0, 25)}...`;
-        nameElement.textContent = nameShort;
-      } else {
+      if (nameElement) {
         nameElement.textContent = nameDropdownValue;
       }
-
-      if (orgDropdownValue.length > 25) {
-        orgShort = `${orgDropdownValue.slice(0, 12)}...${orgDropdownValue.slice(-13)}`;
-        orgElement.textContent = orgShort;
-      } else {
+      if (orgElement) {
         orgElement.textContent = orgDropdownValue;
       }
-
-      if (spaceDropdownValue.length > 25) {
-        spaceShort = `${spaceDropdownValue.substr(0, 25)}...`;
-        spaceElement.textContent = spaceShort;
-      } else {
+      if (spaceElement) {
         spaceElement.textContent = spaceDropdownValue;
       }
+      if (regionElement) {
+        regionElement.textContent = regionDropdownValue;
+      }
+      if (menuElement) {
+        menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
+      }
+    } else {
+      if (nameElement) {
+        if (nameDropdownValue.length > 25) {
+          nameShort = `${nameDropdownValue.substr(0, 25)}...`;
+          nameElement.textContent = nameShort;
+        } else {
+          nameElement.textContent = nameDropdownValue;
+        }
+      }
 
-      regionElement.textContent = regionDropdownValue;
-      menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
+      if (orgElement) {
+        if (orgDropdownValue.length > 25) {
+          orgShort = `${orgDropdownValue.slice(0, 12)}...${orgDropdownValue.slice(-13)}`;
+          orgElement.textContent = orgShort;
+        } else {
+          orgElement.textContent = orgDropdownValue;
+        }
+      }
+
+      if (spaceElement) {
+        if (spaceDropdownValue.length > 25) {
+          spaceShort = `${spaceDropdownValue.substr(0, 25)}...`;
+          spaceElement.textContent = spaceShort;
+        } else {
+          spaceElement.textContent = spaceDropdownValue;
+        }
+      }
+
+      if (regionElement) {
+        regionElement.textContent = regionDropdownValue;
+      }
+
+      if (menuElement) {
+        menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
+      }
     }
   }
 

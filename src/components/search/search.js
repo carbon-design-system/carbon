@@ -27,6 +27,9 @@ class Search extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
     const closeIcon = this.element.querySelector(this.options.selectorClearIcon);
     const input = this.element.querySelector(this.options.selectorSearchInput);
+    if (!input) {
+      throw new Error('Cannot find the search input.');
+    }
 
     if (closeIcon) {
       closeIcon.addEventListener('click', () => {

@@ -19,10 +19,12 @@ class CopyButton extends mixin(createComponent, InitComponentBySearch) {
    */
   handleClick() {
     const feedback = this.element.querySelector(this.options.feedbackTooltip);
-    feedback.classList.add(this.options.classShowFeedback);
-    setTimeout(() => {
-      feedback.classList.remove(this.options.classShowFeedback);
-    }, this.options.timeoutValue);
+    if (feedback) {
+      feedback.classList.add(this.options.classShowFeedback);
+      setTimeout(() => {
+        feedback.classList.remove(this.options.classShowFeedback);
+      }, this.options.timeoutValue);
+    }
   }
 
   /**
