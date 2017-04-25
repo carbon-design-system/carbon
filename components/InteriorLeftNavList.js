@@ -22,15 +22,15 @@ class InteriorLeftNavList extends Component {
     tabIndex: 0,
     activeHref: '#',
     iconDescription: 'display sub navigation items',
-    onListClick: /* istanbul ignore next */() => {},
-    onItemClick: /* istanbul ignore next */() => {},
+    onListClick: /* istanbul ignore next */ () => {},
+    onItemClick: /* istanbul ignore next */ () => {},
   };
 
   state = {
     open: this.props.open,
   };
 
-  toggle = (evt) => {
+  toggle = evt => {
     if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
       if (!this.state.open) {
         this.props.onListClick(this.props.id);
@@ -69,7 +69,7 @@ class InteriorLeftNavList extends Component {
       onListClick, // eslint-disable-line no-unused-vars
       onItemClick, // eslint-disable-line no-unused-vars
       activeHref, // eslint-disable-line no-unused-vars
-      ...other,
+      ...other
     } = this.props;
 
     const classNames = classnames(
@@ -78,11 +78,11 @@ class InteriorLeftNavList extends Component {
       {
         'left-nav-list__item--expanded': this.state.open,
       },
-      className);
+      className,
+    );
 
     const newChildren = React.Children.map(children, (child, index) =>
-      this.buildNewItemChild(child, index)
-    );
+      this.buildNewItemChild(child, index));
 
     return (
       <li
@@ -99,7 +99,7 @@ class InteriorLeftNavList extends Component {
             <Icon
               name="chevron--down"
               description={iconDescription}
-              className="left-nav-list__item-icon bx--inline-left-nav__icon"
+              className="left-nav-list__item-icon bx--interior-left-nav__icon"
             />
           </div>
         </a>

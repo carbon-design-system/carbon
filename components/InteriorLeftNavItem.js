@@ -3,32 +3,33 @@ import classnames from 'classnames';
 
 const propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node,
   href: PropTypes.string.isRequired,
   activeHref: PropTypes.string,
   tabIndex: PropTypes.number,
   onClick: PropTypes.func,
+  label: PropTypes.string.isRequired,
+  blankTarget: PropTypes.bool,
 };
 
 const defaultProps = {
   activeHref: '#',
   tabIndex: 0,
-  onClick: /* istanbul ignore next */() => {},
+  onClick: /* istanbul ignore next */ () => {},
 };
 
-const InteriorLeftNavItem = ({ children, className, href, activeHref, onClick, tabIndex, ...other }) => {
-  const classNames = classnames(
-    'left-nav-list__item',
+const InteriorLeftNavItem = (
+  {
     className,
-    {
-      'left-nav-list__item--active': (activeHref === href),
-    },
-  );
-
-  const child = React.Children.only(children);
-  const newChild = React.cloneElement(child, {
+    href,
+    activeHref,
+    onClick,
     tabIndex,
-    className: 'left-nav-list__item-link',
+    label,
+    ...other
+  }
+) => {
+  const classNames = classnames('left-nav-list__item', className, {
+    'left-nav-list__item--active': activeHref === href,
   });
 
   return (
@@ -36,11 +37,13 @@ const InteriorLeftNavItem = ({ children, className, href, activeHref, onClick, t
       role="menuitem"
       tabIndex={tabIndex}
       className={classNames}
-      onClick={(evt) => onClick(evt, href)}
-      onKeyPress={(evt) => onClick(evt, href)}
+      onClick={evt => onClick(evt, href)}
+      onKeyPress={evt => onClick(evt, href)}
       {...other}
     >
-      {newChild}
+      <a className="left-nav-list__item-link" href={href} tabIndex={tabIndex}>
+        {label}
+      </a>
     </li>
   );
 };

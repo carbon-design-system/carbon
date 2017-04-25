@@ -8,6 +8,8 @@
             "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks.",
             "rpt.g3.listMisuse": "List elements missing, or improperly structured.  Do not use list elements for formatting.",
             "wcag20.tech.aria.RequiredParent": "An element with WAI-ARIA role {0} is not contained in or owned by an element with one of the following WAI-ARIA roles: {1}. See rule help for remediation guidance.",
+            "rpt.g1110.widgetLabels": "A WAI-ARIA widget must have an accessible name (see message help text for details).",
+            "wcag20.tech.h30-h91.aHasText": "Hyperlinks must contain link text or an image with alt text.",
             "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role."
         },
         "lang": "en-us"
@@ -65,6 +67,22 @@
                 },
                 {
                     "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.h30-h91.aHasText",
+                    "ruleId": "495",
+                    "help": "idhi_accessibility_check_g495.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]/body[1]/li[1]/a[1]",
+                    "snippet": "<a style=\"\" tabindex=\"0\" href=\"#\" class=\"left-nav-list__item-link\">",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISHigh",
                     "messageCode": "wcag20.tech.g1.bodyFirstASkips",
                     "ruleId": "1046",
                     "help": "idhi_accessibility_check_g1046.html",
@@ -105,7 +123,23 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/li[1]/a[1]",
-                    "snippet": "<a style=\"\" class=\"left-nav-list__item-link\" tabindex=\"0\" href=\"#\">",
+                    "snippet": "<a style=\"\" tabindex=\"0\" href=\"#\" class=\"left-nav-list__item-link\">",
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "rpt.g1110.widgetLabels",
+                    "ruleId": "1110",
+                    "help": "idhi_accessibility_check_g1110.html",
+                    "msgArgs": [],
+                    "xpath": "/html[1]/body[1]/li[1]",
+                    "snippet": "<li style=\"\" class=\"left-nav-list__item left-nav-list__item--active\" tabindex=\"0\" role=\"menuitem\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -120,7 +154,7 @@
     ],
     "summary": {
         "counts": {
-            "violation": 6
+            "violation": 8
         },
         "scanTime": 0,
         "policies": [
@@ -130,9 +164,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324748131
+        "startScan": 1493133941186
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "f063f08a-2f57-4f0a-8f1f-4d0dcaa87276",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "InteriorLeftNavItem"
 }

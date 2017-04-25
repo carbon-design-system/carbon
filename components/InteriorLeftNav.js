@@ -1,21 +1,25 @@
 /* global window */
 
 import React, { Component, PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 import InteriorLeftNavList from './InteriorLeftNavList';
 import InteriorLeftNavItem from './InteriorLeftNavItem';
 import Icon from './Icon';
 
 class InteriorLeftNav extends Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    activeHref: PropTypes.string,
+    onToggle: PropTypes.func,
+  };
+
+  static defaultProps = {
+    onToggle: () => {},
   };
 
   state = {
-    activeHref: '#',
+    activeHref: this.props.activeHref || '#',
     open: true,
   };
 
@@ -23,18 +27,26 @@ class InteriorLeftNav extends Component {
     this.setState({ activeHref: window.location.pathname });
   };
 
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.activeHref) {
+      this.setState({ activeHref: nextProps.activeHref });
+    }
+  };
+
   handleItemClick = (evt, href) => {
     evt.stopPropagation();
 
     // 13 = Enter, 32 = Spacebar
-    const acceptableEvent = (evt.which === 13 || evt.which === 32 || evt.type === 'click');
-    const diffHref = (href !== this.state.activeHref);
+    const acceptableEvent = evt.which === 13 ||
+      evt.which === 32 ||
+      evt.type === 'click';
+    const diffHref = href !== this.state.activeHref;
     if (acceptableEvent && diffHref) {
       this.setState({ activeHref: href });
     }
   };
 
-  handleListClick = (id) => {
+  handleListClick = id => {
     this.props.children.forEach((child, index) => {
       if (child.type === InteriorLeftNavList) {
         const childId = `list-${index}`;
@@ -45,8 +57,9 @@ class InteriorLeftNav extends Component {
     });
   };
 
-  toggle = (evt) => {
+  toggle = evt => {
     evt.stopPropagation();
+    this.props.onToggle(!this.state.open);
     this.setState({ open: !this.state.open });
   };
 
@@ -81,7 +94,9 @@ class InteriorLeftNav extends Component {
     const {
       className,
       children,
-      ...other,
+      activeHref, // eslint-disable-line no-unused-vars
+      onToggle, // eslint-disable-line no-unused-vars
+      ...other
     } = this.props;
 
     const newChildren = React.Children.map(children, (child, index) => {
@@ -96,10 +111,10 @@ class InteriorLeftNav extends Component {
     });
 
     const classNames = classnames(
-      'bx--inline-left-nav',
-      'bx--inline-left-nav--collapseable',
+      'bx--interior-left-nav',
+      'bx--interior-left-nav--collapseable',
       {
-        'bx--inline-left-nav--collapsed': !this.state.open,
+        'bx--interior-left-nav--collapsed': !this.state.open,
       },
       className,
     );
@@ -112,29 +127,15 @@ class InteriorLeftNav extends Component {
         onClick={!this.state.open && this.toggle}
         {...other}
       >
-        <ReactCSSTransitionGroup
-          transitionName={{
-            enter: 'bx--inline-left-nav--collapseable',
-            enterActive: 'bx--inline-left-nav--expanding',
-            leave: 'bx--inline-left-nav--collapsed',
-            leaveActive: 'bx--inline-left-nav--collapsing',
-          }}
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
-        >
-          <ul key="main_list" className="left-nav-list" role="menubar">
-            {newChildren}
-          </ul>
-        </ReactCSSTransitionGroup>
-        <div
-          className="bx--inline-left-nav-collapse"
-          onClick={this.toggle}
-        >
-          <a className="bx--inline-left-nav-collapse__link">
+        <ul key="main_list" className="left-nav-list" role="menubar">
+          {newChildren}
+        </ul>
+        <div className="bx--interior-left-nav-collapse" onClick={this.toggle}>
+          <a className="bx--interior-left-nav-collapse__link">
             <Icon
               name="chevron--left"
               description="close/open iln"
-              className="bx--inline-left-nav-collapse__arrow"
+              className="bx--interior-left-nav-collapse__arrow"
             />
           </a>
         </div>

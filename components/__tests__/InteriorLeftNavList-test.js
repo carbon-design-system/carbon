@@ -7,15 +7,11 @@ import { shallow, mount } from 'enzyme';
 describe('InteriorLeftNavList', () => {
   describe('Renders as expected', () => {
     const openList = shallow(
-      <InteriorLeftNavList
-        className="extra-class"
-        title="test-title"
-        open
-      >
+      <InteriorLeftNavList className="extra-class" title="test-title" open>
         <InteriorLeftNavItem href="#">
           <a href="#">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNavList>
+      </InteriorLeftNavList>,
     );
 
     const closedList = shallow(
@@ -23,7 +19,7 @@ describe('InteriorLeftNavList', () => {
         <InteriorLeftNavItem href="#">
           <a href="#">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNavList>
+      </InteriorLeftNavList>,
     );
 
     const expectedChildrenList = shallow(
@@ -34,14 +30,16 @@ describe('InteriorLeftNavList', () => {
         <InteriorLeftNavItem href="#" className="test-child">
           <a href="#">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNavList>
+      </InteriorLeftNavList>,
     );
 
     it('renders a interior left nav list', () => {
       expect(openList.length).toEqual(1);
     });
     it('has the expected classes', () => {
-      expect(openList.hasClass('left-nav-list__item--has-children')).toEqual(true);
+      expect(openList.hasClass('left-nav-list__item--has-children')).toEqual(
+        true,
+      );
     });
     it('should add extra classes that are passed via className', () => {
       expect(openList.hasClass('extra-class')).toEqual(true);
@@ -56,7 +54,9 @@ describe('InteriorLeftNavList', () => {
       expect(openList.hasClass('left-nav-list__item--expanded')).toEqual(true);
     });
     it('should not have the expanded class when closed', () => {
-      expect(closedList.hasClass('left-nav-list__item--expanded')).toEqual(false);
+      expect(closedList.hasClass('left-nav-list__item--expanded')).toEqual(
+        false,
+      );
     });
     it('should use correct icon', () => {
       const icon = openList.find(Icon);
@@ -64,20 +64,24 @@ describe('InteriorLeftNavList', () => {
     });
     it('should use correct icon class names', () => {
       const icon = openList.find(Icon);
-      expect(icon.props().className).toEqual('left-nav-list__item-icon bx--inline-left-nav__icon');
+      expect(icon.props().className).toEqual(
+        'left-nav-list__item-icon bx--interior-left-nav__icon',
+      );
     });
     it('should render children as expected', () => {
-      expect(expectedChildrenList.find('.left-nav-list__item-link').length).toEqual(1);
-      expect(expectedChildrenList.find('.left-nav-list--nested').length).toEqual(1);
+      expect(
+        expectedChildrenList.find('.left-nav-list__item-link').length,
+      ).toEqual(1);
+      expect(
+        expectedChildrenList.find('.left-nav-list--nested').length,
+      ).toEqual(1);
       expect(expectedChildrenList.find('.test-child').length).toEqual(2);
     });
   });
 
   describe('Check that functions passed in as props are called', () => {
     const onListClick = jest.fn();
-    const wrapper = mount(
-      <InteriorLeftNavList onListClick={onListClick} />
-    );
+    const wrapper = mount(<InteriorLeftNavList onListClick={onListClick} />);
 
     it('should call onListClick', () => {
       wrapper.simulate('click');
@@ -86,9 +90,7 @@ describe('InteriorLeftNavList', () => {
   });
 
   describe('calling the close method should close the list when open', () => {
-    const wrapper = shallow(
-      <InteriorLeftNavList open />
-    );
+    const wrapper = shallow(<InteriorLeftNavList open />);
 
     it('should close the list', () => {
       wrapper.instance().close();
@@ -98,13 +100,11 @@ describe('InteriorLeftNavList', () => {
 
   describe('actions', () => {
     const list = mount(
-      <InteriorLeftNavList
-        title="test-title"
-      >
+      <InteriorLeftNavList title="test-title">
         <InteriorLeftNavItem href="#">
           <a href="#">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNavList>
+      </InteriorLeftNavList>,
     );
 
     it('handles click to leftNavList as expected', () => {

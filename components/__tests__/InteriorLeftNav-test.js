@@ -6,17 +6,13 @@ import { mount } from 'enzyme';
 
 describe('InteriorLeftNav', () => {
   describe('Renders as expected', () => {
-    const wrapper = mount(
-      <InteriorLeftNav
-        className="extra-class"
-      />
-    );
+    const wrapper = mount(<InteriorLeftNav className="extra-class" />);
 
     it('renders a interior left nav', () => {
       expect(wrapper.length).toEqual(1);
     });
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--inline-left-nav')).toEqual(true);
+      expect(wrapper.hasClass('bx--interior-left-nav')).toEqual(true);
     });
     it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
@@ -25,14 +21,20 @@ describe('InteriorLeftNav', () => {
       const interiorLeftNav = mount(
         <InteriorLeftNav>
           <InteriorLeftNavList className="test-child" />
-          <InteriorLeftNavItem href="#" title="test-title" className="test-child">
+          <InteriorLeftNavItem
+            href="#"
+            title="test-title"
+            className="test-child"
+          >
             <a href="#">test-title</a>
           </InteriorLeftNavItem>
-        </InteriorLeftNav>
+        </InteriorLeftNav>,
       );
       expect(interiorLeftNav.find('.left-nav-list').length).toEqual(2);
       expect(interiorLeftNav.find('.test-child').length).toEqual(2);
-      expect(interiorLeftNav.find('.bx--inline-left-nav-collapse').length).toEqual(1);
+      expect(
+        interiorLeftNav.find('.bx--interior-left-nav-collapse').length,
+      ).toEqual(1);
     });
   });
 
@@ -41,7 +43,7 @@ describe('InteriorLeftNav', () => {
       <InteriorLeftNav>
         <InteriorLeftNavList className="first" />
         <InteriorLeftNavList className="second" open />
-      </InteriorLeftNav>
+      </InteriorLeftNav>,
     );
     const first = twoLists.find('.first');
     const second = twoLists.find('.second');
@@ -60,11 +62,13 @@ describe('InteriorLeftNav', () => {
         <InteriorLeftNavItem href="#first">
           <a href="#first">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNav>
+      </InteriorLeftNav>,
     );
 
     const item = interiorLeftNav.find(InteriorLeftNavItem).first();
-    const toggler = interiorLeftNav.find('.bx--inline-left-nav-collapse').first();
+    const toggler = interiorLeftNav
+      .find('.bx--interior-left-nav-collapse')
+      .first();
 
     it('handles item click as expected', () => {
       interiorLeftNav.setState({ activeHref: '#' });
@@ -86,7 +90,9 @@ describe('InteriorLeftNav', () => {
 
     it('should close the nav when the toggler is clicked', () => {
       toggler.simulate('click');
-      expect(interiorLeftNav.hasClass('bx--inline-left-nav--collapsed')).toBe(true);
+      expect(interiorLeftNav.hasClass('bx--interior-left-nav--collapsed')).toBe(
+        true,
+      );
       expect(interiorLeftNav.state().open).toBe(false);
     });
   });
