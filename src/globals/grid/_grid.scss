@@ -1,0 +1,77 @@
+.bx--grid {
+  margin: 0 3%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @include breakpoint('bp--xs--major') {
+    margin: 0 5%;
+  }
+}
+
+.bx--row {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.bx--col {
+  height: 100%;
+  background-color: $color__navy-gray-9;
+  margin-left: 10px;
+
+  @include breakpoint(bp--xs--major) {
+    margin-left: 20px;
+  }
+
+  $i: 1;
+  @while $i <= 12 {
+    $perc: unquote((100 / (12 / $i)) + "%");
+    &.bx--col--s#{$i} {
+      width: $perc;
+      left: auto;
+      right: auto;
+    }
+    $i: $i + 1;
+  }
+
+  &:nth-child(1) {
+    margin-left: 0;
+  }
+
+  @include breakpoint(bp--sm--major) {
+    $i: 1;
+    @while $i <= 12 {
+      $perc: unquote((100 / (12 / $i)) + "%");
+      &.bx--col--m#{$i} {
+        width: $perc;
+        left: auto;
+        right: auto;
+      }
+      $i: $i + 1;
+    }
+  }
+
+  @include breakpoint(bp--lg--major) {
+    $i: 1;
+    @while $i <= 12 {
+      $perc: unquote((100 / (12 / $i)) + "%");
+      &.bx--col--l#{$i} {
+        width: $perc;
+        left: auto;
+        right: auto;
+      }
+      $i: $i + 1;
+    }
+  }
+}
