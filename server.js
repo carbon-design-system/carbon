@@ -34,14 +34,14 @@ app.use(express.static('src'));
 app.use('/docs/js', express.static('docs/js'));
 
 const getContent = glob =>
-  globby(glob).then(paths => {
-    // eslint-disable-line arrow-body-style
-    return paths.length === 0
-      ? undefined
-      : paths
-          .map(file => fs.readFileSync(file, { encoding: 'utf8' }))
-          .reduce((a, b) => a.concat(b));
-  });
+  globby(glob).then(
+    paths =>
+      (paths.length === 0
+        ? undefined
+        : paths
+            .map(file => fs.readFileSync(file, { encoding: 'utf8' }))
+            .reduce((a, b) => a.concat(b)))
+  );
 
 const allLinks = globby(directoryOrder).then(paths => {
   // eslint-disable-line arrow-body-style
