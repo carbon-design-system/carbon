@@ -1,13 +1,13 @@
 'use strict';
 
-const globby = require('globby');
-const Promise = require('bluebird');
+const globby = require('globby'); // eslint-disable-line
+const Promise = require('bluebird'); // eslint-disable-line
 const fs = require('fs');
 const path = require('path');
-const express = require('express');
+const express = require('express'); // eslint-disable-line
 
 const app = express();
-const adaro = require('adaro');
+const adaro = require('adaro'); // eslint-disable-line
 
 const port = process.env.PORT || 8080;
 
@@ -34,45 +34,44 @@ app.use(express.static('src'));
 app.use('/docs/js', express.static('docs/js'));
 
 const getContent = glob =>
-  globby(glob)
-    .then((paths) => { // eslint-disable-line arrow-body-style
-      return paths.length === 0 ? undefined : paths
-        .map(file => fs.readFileSync(file, { encoding: 'utf8' }))
-        .reduce((a, b) => a.concat(b));
-    });
-
-const allLinks = globby(directoryOrder)
-  .then((paths) => { // eslint-disable-line arrow-body-style
-    return paths
-      .map((filePath) => {
-        const indices = [];
-        for (let i = 0; i < filePath.length; i++) {
-          if (filePath[i] === '/') {
-            indices.push(i);
-          }
-        }
-        return filePath.slice(0, indices[1]);
-      })
-      .filter((filePath, index, a) => a.indexOf(filePath) === index)
-      .map(filePath => ({
-        url: filePath,
-      }));
+  globby(glob).then(paths => {
+    // eslint-disable-line arrow-body-style
+    return paths.length === 0
+      ? undefined
+      : paths
+          .map(file => fs.readFileSync(file, { encoding: 'utf8' }))
+          .reduce((a, b) => a.concat(b));
   });
 
+const allLinks = globby(directoryOrder).then(paths => {
+  // eslint-disable-line arrow-body-style
+  return paths
+    .map(filePath => {
+      const indices = [];
+      for (let i = 0; i < filePath.length; i++) {
+        if (filePath[i] === '/') {
+          indices.push(i);
+        }
+      }
+      return filePath.slice(0, indices[1]);
+    })
+    .filter((filePath, index, a) => a.indexOf(filePath) === index)
+    .map(filePath => ({
+      url: filePath,
+    }));
+});
 
 app.get('/', (req, res) => {
-  Promise.all([
-    getContent(htmlFiles.all),
-  ])
-  .then((results) => {
-    res.render('demo-all', {
-      html: results[0],
+  Promise.all([getContent(htmlFiles.all)])
+    .then(results => {
+      res.render('demo-all', {
+        html: results[0],
+      });
+    })
+    .catch(error => {
+      console.error(error.stack); // eslint-disable-line no-console
+      res.status(500).end();
     });
-  })
-  .catch((error) => {
-    console.error(error.stack); // eslint-disable-line no-console
-    res.status(500).end();
-  });
 });
 
 app.get('/components/:component', (req, res) => {
@@ -82,7 +81,7 @@ app.get('/components/:component', (req, res) => {
     res.status(404).end();
   } else {
     Promise.all([getContent(glob), allLinks])
-      .then((results) => {
+      .then(results => {
         if (typeof results[0] === 'undefined') {
           res.status(404).end();
         } else {
@@ -91,7 +90,7 @@ app.get('/components/:component', (req, res) => {
           });
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console
         res.status(500).end();
       });

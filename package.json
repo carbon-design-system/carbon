@@ -28,6 +28,9 @@
     "scss",
     "style guide"
   ],
+  "dependencies": {
+    "lodash.debounce": "^4.0.8"
+  },
   "peerDependencies": {
     "carbon-icons": "5.1.2"
   },
@@ -79,7 +82,6 @@
     "karma-safari-launcher": "^1.0.0",
     "karma-sinon-chai": "^1.1.0",
     "karma-sourcemap-loader": "~0.3.7",
-    "lodash.debounce": "^4.0.8",
     "lolex": "1.4.0",
     "merge-stream": "^1.0.0",
     "minimatch": "^3.0.0",
