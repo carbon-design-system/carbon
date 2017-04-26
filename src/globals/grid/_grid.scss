@@ -5,7 +5,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
 
   @include breakpoint('bp--xs--major') {
     margin: 0 5%;
@@ -14,15 +13,8 @@
 
 .bx--row {
   display: flex;
-  margin: 0 auto;
   width: 100%;
   height: 100%;
-
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
 }
 
 .bx--col {
@@ -39,8 +31,6 @@
     $perc: unquote((100 / (12 / $i)) + "%");
     &.bx--col--s#{$i} {
       width: $perc;
-      left: auto;
-      right: auto;
     }
     $i: $i + 1;
   }
@@ -55,8 +45,6 @@
       $perc: unquote((100 / (12 / $i)) + "%");
       &.bx--col--m#{$i} {
         width: $perc;
-        left: auto;
-        right: auto;
       }
       $i: $i + 1;
     }
