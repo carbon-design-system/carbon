@@ -12,7 +12,7 @@
   }
 
   .bx--tooltip__trigger {
-    @include font-size('18');
+    @include font-size('16');
     display: inline-flex;
     align-items: center;
     color: $text-01;
@@ -22,6 +22,17 @@
       fill: $brand-01;
       margin-left: .625rem;
       cursor: pointer;
+
+      &:focus {
+        fill: $brand-02;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      svg {
+        fill: $brand-02;
+      }
     }
   }
 
@@ -146,6 +157,11 @@
 
     &:hover,
     &:focus {
+
+      svg {
+        fill: $brand-02;
+      }
+
       &:before,
       &:after {
         position: absolute;
