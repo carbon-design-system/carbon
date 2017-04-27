@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use strict';
 
 const globby = require('globby'); // eslint-disable-line
