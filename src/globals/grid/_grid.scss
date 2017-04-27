@@ -29,41 +29,28 @@ $i: 0;
 
 @while $i <= 12 {
   @media (max-width: 720px) {
-    .bx--col-xs#{$i} {
+    .bx--col-xs-#{$i} {
       @include column-size($i);
     }
   }
 
-  @media (min-width: 720px) {
-    .bx--col-s#{$i} {
+  @media (min-width: 720px) and (max-width: 970px) {
+    .bx--col-s-#{$i} {
       @include column-size($i);
     }
   }
 
-  @media (min-width: 970px) {
-    .bx--col-md#{$i} {
+  @media (min-width: 970px) and (max-width: 1170px) {
+    .bx--col-md-#{$i} {
       @include column-size($i);
     }
   }
 
   @media (min-width: 1170px) {
-    .bx--col-lg#{$i} {
+    .bx--col-lg-#{$i} {
       @include column-size($i);
     }
   }
 
   $i: $i + 1;
-}
-
-
-// Demo styles
-
-.bx--row {
-  height: 50px;
-}
-
-[class*="bx--col"] {
-  height: 100%;
-  background-color: $color__gray-1;
-  border: 1px solid $color__navy-gray-7;
 }
