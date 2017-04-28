@@ -26,6 +26,7 @@ class Pagination extends Component {
     totalItems: PropTypes.number.isRequired,
     disabled: React.PropTypes.bool,
     page: PropTypes.number,
+    pageSize: PropTypes.number,
   }
   static defaultProps = {
     backwardText: 'Backward',
@@ -41,14 +42,19 @@ class Pagination extends Component {
   static uuid = 0
   state = {
     page: this.props.page,
-    pageSize: this.props.pageSizes[0],
+    pageSize: ((this.props.pageSize && this.props.pageSizes.includes(this.props.pageSize)) ?
+      this.props.pageSize : this.props.pageSizes[0]),
   }
-  componentWillReceiveProps({ pageSizes, page }) {
+  componentWillReceiveProps({ pageSizes, page, pageSize }) {
     if (!equals(pageSizes, this.props.pageSizes)) {
       this.setState({ pageSize: pageSizes[0], page: 1 });
     }
-    if (!equals(page, this.props.page)) {
+    if (page !== this.props.page) {
       this.setState({ page });
+    }
+
+    if (pageSize !== this.props.pageSize) {
+      this.setState({ pageSize });
     }
   }
   id = Pagination.uuid++

@@ -97,6 +97,19 @@ describe('Pagination', () => {
           pager.setProps({ pageSizes: [3, 6] });
           expect(pager.state().page).toEqual(1);
         });
+        it('should default to pageSize if pageSize is provided', () => {
+          const pager = mount(
+            <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
+          );
+          expect(pager.state().pageSize).toEqual(10);
+        });
+        it('should default to pageSize if on change to pageSize', () => {
+          const pager = mount(
+            <Pagination pageSizes={[5, 10]} totalItems={50} />
+          );
+          pager.setProps({ pageSize: 10 });
+          expect(pager.state().pageSize).toEqual(10);
+        });
       });
     });
 
