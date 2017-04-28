@@ -205,6 +205,13 @@ describe('Dropdown', function () {
       expect(textNode.textContent).to.equal('0');
     });
 
+    it('Should not add "selected" modifier class if dropdown type is navigation', function () {
+      element.setAttribute('data-dropdown-type', 'navigation');
+      itemNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(itemNodes[0].classList.contains('bx--dropdown--selected'), 'Unselected item').to.be.false;
+      expect(itemNodes[1].classList.contains('bx--dropdown--selected'), 'Selected item').to.be.false;
+    });
+
     it('Should not cause an error if text does not exist', function () {
       textNode.parentNode.removeChild(textNode);
       expect(() => {

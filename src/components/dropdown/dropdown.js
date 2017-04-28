@@ -153,8 +153,6 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
         }
       });
 
-      itemToSelect.classList.add(this.options.classSelected);
-
       this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
         bubbles: true,
         cancelable: true,
