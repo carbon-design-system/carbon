@@ -6,14 +6,15 @@
   "scripts": {
     "check": "npm run lint && npm run test",
     "coverage": "./node_modules/.bin/jest '/(components|lib|internal)/' --coverage && node scripts/create-badge.js",
-    "lint": "./node_modules/.bin/eslint --ignore-pattern dist .",
     "storybook": "./node_modules/.bin/start-storybook -p 9001",
     "test": "./node_modules/.bin/jest '/(components|lib|internal)/'",
     "test-watch": "./node_modules/.bin/jest '/(components|lib|internal)/' --watch",
     "test-a11y": "./node_modules/.bin/jest '/a11y/'",
+    "lint": "./node_modules/.bin/eslint --ignore-pattern dist .",
     "build-storybook": "./node_modules/.bin/build-storybook -s .storybook -o .gh-pages/storybook",
     "gh-pages": "node scripts/gh-pages.js",
     "build-es5": "./node_modules/.bin/babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
+    "precommit": "lint-staged",
     "commitmsg": "./node_modules/.bin/validate-commit-msg",
     "commit": "git cz"
   },
@@ -54,47 +55,26 @@
   "license": "MIT",
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": "airbnb",
+    "extends": [
+      "eslint:recommended",
+      "plugin:jsx-a11y/recommended"
+    ],
+    "plugins": [
+      "react",
+      "jsx-a11y"
+    ],
     "rules": {
-      "arrow-parens": 0,
-      "comma-dangle": 0,
-      "max-len": [
-        2,
-        130,
-        4
-      ],
-      "no-underscore-dangle": 0,
-      "global-require": 0,
-      "no-mixed-operators": 0,
-      "no-plusplus": 0,
-      "no-prototype-builtins": 0,
-      "no-useless-return": 0,
-      "semi-spacing": 0,
-      "space-unary-ops": 0,
-      "import/first": 0,
-      "import/newline-after-import": 0,
-      "import/no-extraneous-dependencies": [
-        2,
-        {
-          "devDependencies": true,
-          "optionalDependencies": false,
-          "peerDependencies": true
-        }
-      ],
-      "import/prefer-default-export": 0,
-      "jsx-a11y/href-no-hash": 0,
-      "jsx-a11y/no-static-element-interactions": 0,
-      "jsx-a11y/tabindex-no-positive": 0,
-      "react/forbid-prop-types": 0,
-      "react/jsx-filename-extension": 0,
-      "react/jsx-indent": 0,
-      "react/jsx-wrap-multilines": 0,
-      "react/no-find-dom-node": 0,
-      "react/no-string-refs": 0,
-      "react/prefer-stateless-function": 0,
-      "react/self-closing-comp": 0
+      "react/jsx-uses-vars": 1,
+      "react/jsx-uses-react": 1,
+      "jsx-a11y/onclick-has-role": 1,
+      "jsx-a11y/click-events-have-key-events": 1,
+      "jsx-a11y/href-no-hash": 1,
+      "jsx-a11y/onclick-has-focus": 1
     },
     "env": {
+      "node": true,
+      "browser": true,
+      "es6": true,
       "jest": true,
       "jasmine": true
     }
@@ -116,8 +96,6 @@
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^18.0.0",
-    "babel-plugin-dynamic-import-node": "^1.0.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
@@ -127,16 +105,16 @@
     "cz-conventional-changelog-components": "^1.0.0",
     "enzyme": "^2.6.0",
     "eslint": "^3.0.0",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
     "gh-pages": "0.11.0",
     "husky": "^0.13.1",
     "jest": "^18.1.0",
     "lcov2badge": "^0.1.0",
+    "lint-staged": "^3.4.0",
     "node-sass": "3.8.0",
     "postcss-loader": "^0.9.1",
+    "prettier": "^1.2.2",
     "react-addons-test-utils": "^15.3.1",
     "sass-loader": "4.0.0",
     "shelljs": "^0.7.5",
@@ -148,6 +126,12 @@
     "moduleNameMapper": {
       "^.+\\.(scss)$": "<rootDir>/lib/styleMock.js"
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --trailing-comma es5 --single-quote --write",
+      "git add"
+    ]
   },
   "config": {
     "validate-commit-msg": {
