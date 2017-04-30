@@ -15,4 +15,4 @@ npm install -S carbon-components
 # :books: Documentation
 
 * See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
-* [Contributing](blob/master/docs/contributing.md): Guidelines for making contributions to this repo.
+* [Contributing](/docs/contributing.md): Guidelines for making contributions to this repo.
