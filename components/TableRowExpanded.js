@@ -6,36 +6,29 @@ const propTypes = {
   className: PropTypes.string,
   colSpan: PropTypes.number,
   expanded: PropTypes.bool,
+  even: PropTypes.bool,
 };
 
 const defaultProps = {
   expanded: false,
 };
 
-const TableRowExpanded = (props) => {
-  const {
-    children,
-    className,
-    colSpan,
-    expanded,
-    ...other,
-  } = props;
+const TableRowExpanded = props => {
+  const { children, className, even, colSpan, expanded, ...other } = props;
 
-  const tableRowClasses = classNames(
-    className,
-    'bx--table-row',
-    'bx--expandable-row',
-  );
+  const tableRowClasses = classNames({
+    [className]: className,
+    'bx--table-row': true,
+    'bx--expandable-row': true,
+    'bx--expandable-row--even': even,
+  });
 
   if (!expanded) {
     return false;
   }
 
   return (
-    <tr
-      {...other}
-      className={tableRowClasses}
-    >
+    <tr {...other} className={tableRowClasses}>
       <td colSpan={colSpan}>
         {children}
       </td>
@@ -47,4 +40,3 @@ TableRowExpanded.propTypes = propTypes;
 TableRowExpanded.defaultProps = defaultProps;
 
 export default TableRowExpanded;
-
