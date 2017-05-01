@@ -1,79 +1,163 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes, Children } from 'react';
 import classnames from 'classnames';
-import Icon from './Icon';
+import debounce from 'lodash.debounce';
 
-const propTypes = {
-  hideBreadcrumb: PropTypes.bool,
-  breadcrumbTitle: PropTypes.string,
-  children: PropTypes.node,
-  onBackLinkClick: function onBackLinkClick(...args) {
-    // First argument is props. Require only if hideBreadcrumb is false
-    const type = !args[0].hideBreadcrumb ? PropTypes.func.isRequired : PropTypes.func;
-    return type.apply(this, args);
-  },
-  title: PropTypes.string.isRequired,
-  role: PropTypes.string,
-};
+class DetailPageHeader extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+    title: PropTypes.string.isRequired,
+    role: PropTypes.string,
+    statusColor: PropTypes.string,
+    statusContent: PropTypes.node,
+    statusText: PropTypes.string,
+    hasTabs: PropTypes.bool,
+    isScrolled: PropTypes.bool,
+    isScrollingDownward: PropTypes.bool,
+  };
 
-const defaultProps = {
-  hideBreadcrumb: false,
-  breadcrumbTitle: 'back',
-  role: 'banner', // a11y compliance
-};
+  static defaultProps = {
+    statusText: 'Running',
+    role: 'banner', // a11y compliance
+    hasTabs: false,
+  };
 
-const DetailPageHeader = ({
-  hideBreadcrumb,
-  breadcrumbTitle,
-  children,
-  onBackLinkClick,
-  title,
-  ...other,
-}) => {
-  const hasChildren = React.Children.count(children) > 0;
+  state = {
+    isScrolled: this.props.isScrolled || false,
+    isScrollingDownward: this.props.isScrollingDownward || false,
+    lastPosition: 0,
+  };
 
-  if (hasChildren) {
-    const breadcrumbClasses = classnames(
-      'bx--detail-page-header--with-tabs__breadcrumb',
-      {
-        'bx--visually-hidden': hideBreadcrumb,
+  componentDidMount() {
+    const debouncedScroll = debounce(this.handleScroll, 25);
+    window.addEventListener('scroll', debouncedScroll); // eslint-disable-line no-undef
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isScrolled !== this.props.isScrolled) {
+      this.setState({ isScrolled: nextProps.isScrolled });
+    }
+
+    if (nextProps.isScrollingDownward !== this.props.isScrollingDownward) {
+      this.setState({ isScrollingDownward: nextProps.isScrollingDownward });
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll); // eslint-disable-line no-undef
+  }
+
+  handleScroll = () => {
+    const { lastPosition } = this.state;
+
+    const currentPosition = window.pageYOffset; // eslint-disable-line no-undef
+
+    if (currentPosition > 86) {
+      if (currentPosition > lastPosition) {
+        this.setState({
+          isScrolled: true,
+          isScrollingDownward: true,
+          lastPosition: currentPosition,
+        });
+      } else {
+        this.setState({
+          isScrolled: true,
+          isScrollingDownward: false,
+          lastPosition: currentPosition,
+        });
       }
+    } else {
+      this.setState({
+        isScrolled: false,
+        isScrollingDownward: false,
+        lastPosition: currentPosition,
+      });
+    }
+  };
+  render() {
+    const {
+      children,
+      title,
+      hasTabs,
+      statusColor,
+      statusContent,
+      statusText,
+      ...other
+    } = this.props;
+
+    const { isScrolled, isScrollingDownward } = this.state;
+
+    const defaultIcon = (
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <path fill="#D8D8D8" d="M0 0h24v24H0z" fillRule="evenodd" />
+      </svg>
     );
+
+    const withTabs = hasTabs
+      ? 'bx--detail-page-header--with-tabs'
+      : 'bx--detail-page-header--no-tabs';
+
+    const scrolled = isScrollingDownward
+      ? 'bx--detail-page-header--scroll'
+      : null;
+
+    const classNames = classnames('bx--detail-page-header', withTabs, scrolled);
+
+    let breadcrumb;
+    let tabs;
+    let overflow;
+    let icon;
+
+    Children.map(children, child => {
+      if (child.type.name === 'Breadcrumb') {
+        breadcrumb = child;
+      }
+
+      if (child.type.name === 'Tabs') {
+        tabs = child;
+      }
+
+      if (child.type.name === 'OverflowMenu') {
+        overflow = child;
+      }
+
+      if (child.type.name === 'Icon') {
+        icon = child;
+      }
+
+      return null;
+    });
+
+    const statusStyles = {
+      backgroundColor: statusColor,
+    };
+
+    icon = icon === undefined ? defaultIcon : icon;
+
     return (
-      <header
-        {...other}
-        className="bx--detail-page-header--with-tabs"
-      >
-        <div className="bx--detail-page-header--with-tabs__container">
-          <div className={breadcrumbClasses}>
-            <a href="#" className="bx--detail-page-header--with-tabs__link-wrapper" onClick={onBackLinkClick}>
-              <Icon description={breadcrumbTitle} name="arrow--left" className="bx--detail-page-header--with-tabs__arrow" />
-              <p className="bx--detail-page-header--with-tabs__breadcrumb-title">{breadcrumbTitle}</p>
-            </a>
+      <header {...other} className={classNames} data-header-active={isScrolled}>
+        <div className="bx--detail-page-header-content">
+          {breadcrumb}
+          <div className="bx--detail-page-header-title-container">
+            <div className="bx--detail-page-header-icon-container">
+              {icon}
+            </div>
+            <h1 className="bx--detail-page-header-title">{title}</h1>
+            <div className="bx--detail-page-header-status-container">
+              <div
+                style={statusStyles}
+                className="bx--detail-page-header-status-icon"
+              />
+              <span className="bx--detail-page-header-status-text">
+                {statusText}{statusContent}
+              </span>
+            </div>
           </div>
-          <div className="bx--detail-page-header--with-tabs__info">
-            <p className="bx--detail-page-header--with-tabs__info-title">{title}</p>
-          </div>
+          {tabs}
         </div>
-        <div className="bx--detail-page-header--with-tabs__tabs-container">{children}</div>
+        <div className="bx--detail-page-header-menu">{overflow}</div>
       </header>
     );
   }
-
-  return (
-    <header
-      {...other}
-      className="bx--detail-page-header--no-tabs"
-    >
-      <a href="#" className="bx--detail-page-header--no-tabs__link-wrapper" onClick={onBackLinkClick}>
-        <Icon description={breadcrumbTitle} name="arrow--left" className="bx--detail-page-header--no-tabs__arrow" />
-        <p className="bx--detail-page-header--no-tabs__link-text">{breadcrumbTitle}</p>
-      </a>
-      <p className="bx--detail-page-header--no-tabs__info-title">{title}</p>
-    </header>
-  );
-};
-
-DetailPageHeader.propTypes = propTypes;
-DetailPageHeader.defaultProps = defaultProps;
+}
 
 export default DetailPageHeader;

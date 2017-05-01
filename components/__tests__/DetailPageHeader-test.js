@@ -2,161 +2,130 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import DetailPageHeader from '../DetailPageHeader';
 import Icon from '../Icon';
+import Breadcrumb from '../Breadcrumb';
+import BreadcrumbItem from '../BreadcrumbItem';
+import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
+import Tab from '../Tab';
+import Tabs from '../Tabs';
 
 describe('DetailPageHeader', () => {
-  describe('component is rendered correctly when no child is passed', () => {
-    const wrapper = shallow(
-      <DetailPageHeader
-        title="test"
-        onBackLinkClick={() => {}}
-      />
+  describe('component is rendered correctly without tabs', () => {
+    const wrapper = mount(
+      <DetailPageHeader title="test" statusText="Stopped" statusColor="#BADA55">
+        <Icon name="watson" />
+        <Breadcrumb>
+          <BreadcrumbItem href="www.google.com">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="www.google.com">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="www.google.com">Breadcrumb 3</BreadcrumbItem>
+        </Breadcrumb>
+        <OverflowMenu>
+          <OverflowMenuItem itemText="Stop App" />
+          <OverflowMenuItem itemText="Restart App" />
+          <OverflowMenuItem itemText="Rename App" />
+          <OverflowMenuItem iteomText="Edit Routes and Access" />
+          <OverflowMenuItem itemText="Delete App" isDelete isLastItem />
+        </OverflowMenu>
+      </DetailPageHeader>
     );
 
     it('should render wrapper with the correct class', () => {
+      expect(wrapper.hasClass('bx--detail-page-header')).toEqual(true);
       expect(wrapper.hasClass('bx--detail-page-header--no-tabs')).toEqual(true);
     });
 
-    it('should render a link with the correct class', () => {
-      const link = wrapper.find('a');
-      const hasLinkWrapperClass = link.hasClass('bx--detail-page-header--no-tabs__link-wrapper');
-
-      expect(hasLinkWrapperClass).toEqual(true);
+    it('should render an icon', () => {
+      const container = wrapper.find('.bx--detail-page-header-icon-container');
+      const icon = container.find(Icon);
+      const hasIcon = icon.length === 1;
+      expect(hasIcon).toEqual(true);
     });
 
-    it('should render an icon with the correct class', () => {
-      const link = wrapper.find('a');
-      const icon = link.find(Icon);
+    it('should render an icon, even without one passed in', () => {
+      const noIcon = shallow(<DetailPageHeader />);
+      const container = noIcon.find('.bx--detail-page-header-icon-container');
+      const icon = container.find('svg');
       const hasIcon = icon.length === 1;
-      const hasIconClass = hasIcon && icon.props().className === 'bx--detail-page-header--no-tabs__arrow';
-
       expect(hasIcon).toEqual(true);
-      expect(hasIconClass).toEqual(true);
     });
 
     it('should render correct icon', () => {
-      expect(wrapper.find(Icon).at(0).props().name).toEqual('arrow--left');
+      expect(wrapper.find(Icon).at(0).props().name).toEqual('watson');
     });
 
-    it('should render an element with a link text class', () => {
-      const link = wrapper.find('a');
-      const hasLinkText = link.find('.bx--detail-page-header--no-tabs__link-text').length === 1;
-
-      expect(hasLinkText).toEqual(true);
+    it('should render Breadcrumb', () => {
+      const breadcrumb = wrapper.find(Breadcrumb).length === 1;
+      expect(breadcrumb).toEqual(true);
     });
 
+    it('should render BreadcrumbItem', () => {
+      const breadcrumbItem = wrapper.find(BreadcrumbItem).length === 3;
+      expect(breadcrumbItem).toEqual(true);
+    });
+
+    it('should render OverflowMenu', () => {
+      const overflow = wrapper.find(OverflowMenu).length === 1;
+      expect(overflow).toEqual(true);
+    });
 
     it('should render an element with a title class', () => {
-      const hasTitle = wrapper.find('.bx--detail-page-header--no-tabs__info-title').length === 1;
+      const hasTitle =
+        wrapper.find('.bx--detail-page-header-title').length === 1;
       expect(hasTitle).toEqual(true);
+    });
+
+    it('should render the correct title', () => {
+      expect(wrapper.props().title).toEqual('test');
+    });
+
+    it('should render the correct status text', () => {
+      expect(wrapper.props().statusText).toEqual('Stopped');
+    });
+
+    it('should render the correct status color', () => {
+      expect(wrapper.props().statusColor).toEqual('#BADA55');
     });
   });
 
-  describe('component is rendered correctly when a child is passed', () => {
+  describe('component is rendered correctly with tabs', () => {
     const wrapper = shallow(
-      <DetailPageHeader
-        title="test"
-        onBackLinkClick={() => {}}
-      >
-        <div className="child"></div>
+      <DetailPageHeader hasTabs title="test">
+        <Icon name="watson" />
+        <Breadcrumb>
+          <BreadcrumbItem href="www.google.com">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="www.google.com">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="www.google.com">Breadcrumb 3</BreadcrumbItem>
+        </Breadcrumb>
+        <OverflowMenu>
+          <OverflowMenuItem itemText="Stop App" />
+          <OverflowMenuItem itemText="Restart App" />
+          <OverflowMenuItem itemText="Rename App" />
+          <OverflowMenuItem itemText="Edit Routes and Access" />
+          <OverflowMenuItem itemText="Delete App" isDelete isLastItem />
+        </OverflowMenu>
+        <Tabs>
+          <Tab label="Overview" />
+          <Tab label="Apple" />
+          <Tab label="Banana" />
+          <Tab label="Orange" />
+        </Tabs>
       </DetailPageHeader>
     );
 
     it('should render a wrapper with the correct class', () => {
-      expect(wrapper.hasClass('bx--detail-page-header--with-tabs')).toEqual(true);
+      expect(wrapper.hasClass('bx--detail-page-header--with-tabs')).toEqual(
+        true
+      );
     });
 
-    it('should render an element with a container class', () => {
-      expect(wrapper.find('.bx--detail-page-header--with-tabs__container').length).toEqual(1);
+    it('should render Tabs', () => {
+      const tabs = wrapper.find(Tabs).length === 1;
+      expect(tabs).toEqual(true);
     });
 
-    it('should render a tabs container with a child element within it', () => {
-      const tabsContainer = wrapper.find('.bx--detail-page-header--with-tabs__tabs-container');
-
-      expect(tabsContainer.length).toEqual(1);
-      expect(tabsContainer.find('.child').length).toEqual(1);
-    });
-
-    it('should render an element with the breadcrumb class and expected child elements', () => {
-      const breadcrumb = wrapper.find('.bx--detail-page-header--with-tabs__breadcrumb');
-      const link = breadcrumb.find('a');
-      const icon = breadcrumb.find(Icon);
-
-      expect(breadcrumb.length).toEqual(1);
-      expect(link.hasClass('bx--detail-page-header--with-tabs__link-wrapper')).toEqual(true);
-      expect(icon.props().className).toEqual('bx--detail-page-header--with-tabs__arrow');
-      expect(link.find('.bx--detail-page-header--with-tabs__breadcrumb-title').length).toEqual(1);
-    });
-
-    it('should be able to hide the breadcrumb', () => {
-      wrapper.setProps({ hideBreadcrumb: true });
-      const breadcrumb = wrapper.find('.bx--detail-page-header--with-tabs__breadcrumb');
-      expect(breadcrumb.hasClass('bx--visually-hidden')).toBe(true);
-    });
-  });
-
-  describe('props with no child passed', () => {
-    const onBackLinkClick = jest.fn();
-    const wrapper = mount(
-      <DetailPageHeader
-        title="test"
-        onBackLinkClick={onBackLinkClick}
-      />
-    );
-
-    it('should invoke onBackLinkClick when link is clicked', () => {
-      wrapper.find('a').simulate('click');
-      expect(onBackLinkClick).toBeCalled();
-    });
-
-    it('should display title when one is passed as props', () => {
-      const title = wrapper.find('.bx--detail-page-header--no-tabs__info-title');
-      expect(title.text()).toEqual('test');
-    });
-
-    it('should set breadcrumbTitle when one is passed as props', () => {
-      const link = wrapper.find('.bx--detail-page-header--no-tabs__link-text');
-      const icon = wrapper.find(Icon);
-
-      expect(link.text()).toEqual('back');
-      expect(icon.props().description).toEqual('back');
-
-      wrapper.setProps({ breadcrumbTitle: 'test breadcrumb' });
-      expect(link.text()).toEqual('test breadcrumb');
-      expect(icon.props().description).toEqual('test breadcrumb');
-    });
-  });
-
-  describe('props when a child is passed', () => {
-    const onBackLinkClick = jest.fn();
-    const wrapper = mount(
-      <DetailPageHeader
-        title="test title"
-        onBackLinkClick={onBackLinkClick}
-      >
-        <div className="child"></div>
-      </DetailPageHeader>
-    );
-
-    it('should invoke onBackLinkClick when link is clicked', () => {
-      wrapper.find('a').simulate('click');
-      expect(onBackLinkClick).toBeCalled();
-    });
-
-    it('should set breadcrumbTitle when one is passed as props', () => {
-      const breadcrumb = wrapper.find('.bx--detail-page-header--with-tabs__breadcrumb-title');
-      const icon = wrapper.find(Icon);
-
-      expect(breadcrumb.text()).toEqual('back');
-      expect(icon.props().description).toEqual('back');
-
-      wrapper.setProps({ breadcrumbTitle: 'test breadcrumb' });
-      expect(breadcrumb.text()).toEqual('test breadcrumb');
-      expect(icon.props().description).toEqual('test breadcrumb');
-    });
-
-    it('should display title when one is passed as props', () => {
-      const title = wrapper.find('.bx--detail-page-header--with-tabs__info-title');
-      expect(title.text()).toEqual('test title');
+    it('should render 4 Tab', () => {
+      const tabs = wrapper.find(Tab).length === 4;
+      expect(tabs).toEqual(true);
     });
   });
 });
