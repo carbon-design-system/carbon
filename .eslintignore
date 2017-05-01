@@ -3,3 +3,4 @@
 dist
 demo/demo.js
 node_modules
+server.js

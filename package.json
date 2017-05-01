@@ -29,15 +29,13 @@
     "style guide"
   ],
   "dependencies": {
-    "adaro": "1.0.4",
-    "bluebird": "~3.1.1",
-    "carbon-icons": "5.1.2",
-    "eslint": "^3.0.0",
-    "express": "4.13.4",
-    "globby": "4.0.0",
     "lodash.debounce": "^4.0.8"
   },
+  "peerDependencies": {
+    "carbon-icons": "5.1.2"
+  },
   "devDependencies": {
+    "adaro": "1.0.4",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -47,8 +45,9 @@
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-env": "^1.0.0",
     "babel-runtime": "^6.22.0",
+    "bluebird": "~3.1.1",
     "browser-sync": "~2.10.0",
-    "chai": "~3.4.1",
+    "chai": "^3.5.0",
     "core-js": "^2.4.0",
     "custom-event": "^1.0.0",
     "cz-conventional-changelog": "^1.2.0",
@@ -56,6 +55,8 @@
     "eslint": "^3.0.0",
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",
+    "express": "4.13.4",
+    "globby": "4.0.0",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.1",
     "gulp-babel": "^6.1.2",
@@ -98,8 +99,8 @@
     "rollup-plugin-uglify": "^1.0.1",
     "scss-to-json": "1.1.0",
     "semantic-release": "^6.3.2",
-    "sinon": "1.17.3",
-    "sinon-chai": "2.8.0",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.9.0",
     "svgxuse": "1.1.22",
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0"
