@@ -47,15 +47,14 @@ class RadioButton extends React.Component {
         <input
           {...other}
           type="radio"
-          className="bx--radio"
+          className="bx--radio-button"
           onChange={this.handleChange}
           id={this.uid}
         />
-        <label htmlFor={this.uid} className="bx--radio__label">
-          <span className="bx--radio__appearance"></span>
+        <label htmlFor={this.uid} className="bx--radio-button__label">
+          <span className="bx--radio-button__appearance"></span>
           {labelText}
         </label>
-        <br />
       </div>
 
     );

@@ -22,6 +22,7 @@ class RadioButtonGroup extends React.Component {
 
   static defaultProps = {
     onChange: /* istanbul ignore next */() => {},
+    className: 'bx--radio-button-group'
   }
 
   state = {
@@ -80,11 +81,13 @@ class RadioButtonGroup extends React.Component {
     const { disabled, className } = this.props;
 
     return (
-      <div
-        className={className}
-        disabled={disabled}
-      >
-        {this.getRadioButtons()}
+      <div className="bx--form-item">
+        <div
+          className={className}
+          disabled={disabled}
+        >
+            {this.getRadioButtons()}
+        </div>
       </div>
     );
   }

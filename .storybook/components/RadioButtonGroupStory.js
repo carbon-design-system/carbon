@@ -2,6 +2,7 @@ import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
 import RadioButtonGroup from '../../components/RadioButtonGroup';
 import RadioButton from '../../components/RadioButton';
+import FormGroup from '../../components/FormGroup';
 
 const radioProps = {
   className: 'some-class',
@@ -20,30 +21,33 @@ storiesOf('RadioButtonGroup', module)
        at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
     `,
     () => (
-      <RadioButtonGroup
-        onChange={action('onChange')}
-        name="radio-button-group"
-        defaultSelected="default-selected"
-      >
-        <RadioButton
-          value="standard"
-          id="radio-1"
-          labelText="Standard Radio Button"
-          {...radioProps}
-        />
-        <RadioButton
-          value="default-selected"
-          labelText="Default Selected Radio Button"
-          id="radio-2"
-          {...radioProps}
-        />
-        <RadioButton
-          value="disabled"
-          labelText="Disabled Radio Button"
-          id="radio-3"
-          disabled
-          {...radioProps}
-        />
-      </RadioButtonGroup>
+      <FormGroup legendText="Radio Group">
+        <RadioButtonGroup
+          onChange={action('onChange')}
+          name="radio-button-group"
+          defaultSelected="default-selected"
+          legend="Group Legend"
+        >
+          <RadioButton
+            value="standard"
+            id="radio-1"
+            labelText="Standard Radio Button"
+            {...radioProps}
+          />
+          <RadioButton
+            value="default-selected"
+            labelText="Default Selected Radio Button"
+            id="radio-2"
+            {...radioProps}
+          />
+          <RadioButton
+            value="disabled"
+            labelText="Disabled Radio Button"
+            id="radio-3"
+            disabled
+            {...radioProps}
+          />
+        </RadioButtonGroup>
+      </FormGroup>
     ),
   );
