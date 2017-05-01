@@ -11,6 +11,7 @@ class FileUploader extends React.Component {
     tabIndex: React.PropTypes.number,
     id: React.PropTypes.string.isRequired,
     labelDescription: React.PropTypes.string,
+    multiple: React.PropTypes.bool,
     multipleFilesText: React.PropTypes.func,
     buttonText: React.PropTypes.string,
     onChange: React.PropTypes.func,
@@ -20,6 +21,7 @@ class FileUploader extends React.Component {
     className: 'bx--file__label',
     tabIndex: 0,
     labelDescription: '',
+    multiple: true,
     multipleFilesText: count => `${count} files selected`,
     buttonText: 'Choose Files',
     onChange: () => {},
@@ -54,6 +56,7 @@ class FileUploader extends React.Component {
       tabIndex,
       id,
       labelDescription,  // eslint-disable-line no-unused-vars
+      multiple,
       multipleFilesText,
       buttonText,
       onChange, // eslint-disable-line no-unused-vars
@@ -63,6 +66,7 @@ class FileUploader extends React.Component {
     const fileUploaderProps = {
       tabIndex,
       type: 'file',
+      multiple,
       id,
       onChange: this.updateLabel,
     };
@@ -87,7 +91,6 @@ class FileUploader extends React.Component {
           className="bx--file__input"
           {...fileUploaderProps}
           {...other}
-          multiple
         />
       </div>
     );

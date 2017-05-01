@@ -48,6 +48,11 @@ describe('FileUploader', () => {
       expect(label.hasClass('bx--file__label')).toBe(true);
       expect(label.hasClass('extra-class')).toBe(true);
     });
+    it('should set multiple if one is passed via props', () => {
+      const rootWrapper = shallow(<FileUploader id="testID" multiple={false} />);
+      const input = rootWrapper.find('input');
+      expect(input.props().multiple).toBe(false);
+    });
     it('should set the button text via props', () => {
       const rootWrapper = shallow(<FileUploader id="testID" buttonText="Upload" />);
       const label = rootWrapper.find('label');
