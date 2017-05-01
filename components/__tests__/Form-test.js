@@ -4,9 +4,7 @@ import { shallow, mount } from 'enzyme';
 
 describe('Form', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <Form className="extra-class" />
-    );
+    const wrapper = shallow(<Form className="extra-class" />);
 
     it('renders children as expected', () => {
       expect(wrapper.find('.child').length).toBe(0);
@@ -25,18 +23,18 @@ describe('Form', () => {
     it('should render wrapper as expected', () => {
       const form = shallow(
         <Form>
-          <div className="test-child1"></div>
-          <div className="test-child2"></div>
-        </Form>
+          <div className="test-child1" />
+          <div className="test-child2" />
+        </Form>,
       );
       expect(form.length).toEqual(1);
     });
     it('should render children as expected', () => {
       const form1 = shallow(
         <Form>
-          <div className="test-child"></div>
-          <div className="test-child"></div>
-        </Form>
+          <div className="test-child" />
+          <div className="test-child" />
+        </Form>,
       );
       expect(form1.find('.test-child').length).toBe(2);
     });
@@ -45,16 +43,11 @@ describe('Form', () => {
       const onSubmit = jest.fn();
       const form1 = mount(
         <Form>
-          <button
-            className="button"
-            type="submit"
-            onSubmit={onSubmit}
-          >
+          <button className="button" type="submit" onSubmit={onSubmit}>
             Submit
           </button>
-        </Form>
-
-    );
+        </Form>,
+      );
       const btn = form1.find('button');
       btn.simulate('submit');
       expect(onSubmit).toBeCalled();

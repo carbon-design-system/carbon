@@ -4,10 +4,7 @@ import classNames from 'classnames';
 const propTypes = {
   className: PropTypes.string,
   cols: PropTypes.number,
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
   id: PropTypes.string,
   labelText: PropTypes.string,
@@ -15,10 +12,9 @@ const propTypes = {
   onClick: PropTypes.func,
   placeholder: PropTypes.string,
   rows: PropTypes.number,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  invalid: PropTypes.bool,
+  invalidText: PropTypes.string,
 };
 
 const defaultProps = {
@@ -28,9 +24,21 @@ const defaultProps = {
   placeholder: 'Hint text here',
   rows: 4,
   cols: 50,
+  invalid: false,
 };
 
-const Textarea = ({ className, id, labelText, onChange, onClick, ...other }) => {
+const Textarea = (
+  {
+    className,
+    id,
+    labelText,
+    onChange,
+    onClick,
+    invalid,
+    invalidText,
+    ...other
+  },
+) => {
   const textareaProps = {
     id,
     onChange: evt => {
@@ -46,20 +54,32 @@ const Textarea = ({ className, id, labelText, onChange, onClick, ...other }) => 
   };
 
   const textareaClasses = classNames('bx--text-area', className);
-  const label = labelText ? (
-    <label htmlFor={id} className="bx--label">
-      {labelText}
-    </label>
-  ) : null;
+  const label = labelText
+    ? <label htmlFor={id} className="bx--label">
+        {labelText}
+      </label>
+    : null;
+
+  const error = invalid
+    ? <div className="bx--form-requirement">
+        {invalidText}
+      </div>
+    : null;
+
+  const input = invalid
+    ? <textarea
+      {...other}
+      {...textareaProps}
+      className={textareaClasses}
+      data-invalid
+    />
+    : <textarea {...other} {...textareaProps} className={textareaClasses} />;
 
   return (
     <div className="bx--form-item">
       {label}
-      <textarea
-        {...other}
-        {...textareaProps}
-        className={textareaClasses}
-      />
+      {input}
+      {error}
     </div>
   );
 };

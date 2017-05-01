@@ -3,10 +3,7 @@ import classNames from 'classnames';
 
 const propTypes = {
   className: PropTypes.string,
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
   labelText: PropTypes.string,
@@ -14,11 +11,10 @@ const propTypes = {
   onClick: PropTypes.func,
   placeholder: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hideLabel: PropTypes.bool,
+  invalid: PropTypes.bool,
+  invalidText: PropTypes.string,
 };
 
 const defaultProps = {
@@ -27,9 +23,24 @@ const defaultProps = {
   type: 'text',
   onChange: () => {},
   onClick: () => {},
+  invalid: false,
 };
 
-const TextInput = ({ labelText, className, id, placeholder, type, onChange, onClick, hideLabel, ...other }) => {
+const TextInput = (
+  {
+    labelText,
+    className,
+    id,
+    placeholder,
+    type,
+    onChange,
+    onClick,
+    hideLabel,
+    invalid,
+    invalidText,
+    ...other
+  },
+) => {
   const textInputProps = {
     id,
     onChange: evt => {
@@ -46,22 +57,37 @@ const TextInput = ({ labelText, className, id, placeholder, type, onChange, onCl
     type,
   };
 
-  const textInputClasses = classNames(
-    'bx--text-input',
-    className,
-  );
-  const labelClasses = classNames('bx--label', { 'bx--visually-hidden': hideLabel });
+  const textInputClasses = classNames('bx--text-input', className);
+  const labelClasses = classNames('bx--label', {
+    'bx--visually-hidden': hideLabel,
+  });
 
-  const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
-      {labelText}
-    </label>
-  ) : null;
+  const label = labelText
+    ? <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    : null;
+
+  const error = invalid
+    ? <div className="bx--form-requirement">
+        {invalidText}
+      </div>
+    : null;
+
+  const input = invalid
+    ? <input
+      {...other}
+      {...textInputProps}
+      data-invalid
+      className={textInputClasses}
+    />
+    : <input {...other} {...textInputProps} className={textInputClasses} />;
 
   return (
     <div className="bx--form-item">
       {label}
-      <input {...other} {...textInputProps} className={textInputClasses} />
+      {input}
+      {error}
     </div>
   );
 };

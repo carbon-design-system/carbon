@@ -15,26 +15,30 @@ const defaultProps = {
   messageText: undefined,
 };
 
-const FormGroup = ({ legendText, invalid, children, className, message, messageText, ...other }) => {
-  const classNamesLegend = classnames('bx--form__legend', className);
-  const classNamesFieldset = classnames('bx--form__fieldset', className);
+const FormGroup = (
+  { legendText, invalid, children, className, message, messageText, ...other },
+) => {
+  const classNamesLegend = classnames('bx--label', className);
+  const classNamesFieldset = classnames('bx--fieldset', className);
 
   return (
-    <fieldset {...(invalid && { 'data-invalid': '' })} className={classNamesFieldset} {...other}>
+    <fieldset
+      {...invalid && { 'data-invalid': '' }}
+      className={classNamesFieldset}
+      {...other}
+    >
       <legend className={classNamesLegend}>
         {legendText}
       </legend>
       {children}
-      {message ? (
-        <div className="bx--form__requirements">
-          {messageText}
-        </div>
-        ) :
-        null}
+      {message
+        ? <div className="bx--form__requirements">
+            {messageText}
+          </div>
+        : null}
     </fieldset>
   );
 };
-
 
 FormGroup.propTypes = propTypes;
 FormGroup.defaultProps = defaultProps;

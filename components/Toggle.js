@@ -20,10 +20,10 @@ const defaultProps = {
 
 const Toggle = ({ className, defaultToggled, toggled, onToggle, id, labelA, labelB, ...other }) => {
   let input;
-  const wrapperClasses = classNames(
-    'toggleWrapper',
+  const wrapperClasses = classNames({
+    'bx--form-item': true,
     [className]: className
-  );
+  });
 
   const checkedProps = {};
 

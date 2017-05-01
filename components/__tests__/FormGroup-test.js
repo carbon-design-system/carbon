@@ -4,9 +4,7 @@ import { shallow } from 'enzyme';
 
 describe('FormGroup', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <FormGroup className="extra-class" />
-    );
+    const wrapper = shallow(<FormGroup className="extra-class" />);
 
     it('renders children as expected', () => {
       expect(wrapper.find('.child').length).toBe(0);
@@ -15,7 +13,7 @@ describe('FormGroup', () => {
       expect(wrapper.length).toBe(1);
     });
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--form__fieldset')).toEqual(true);
+      expect(wrapper.hasClass('bx--fieldset')).toEqual(true);
     });
     it('renders extra classes passed in via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
@@ -30,18 +28,18 @@ describe('FormGroup', () => {
     it('should render wrapper as expected', () => {
       const formGroup = shallow(
         <FormGroup>
-          <div className="test-child1"></div>
-          <div className="test-child2"></div>
-        </FormGroup>
+          <div className="test-child1" />
+          <div className="test-child2" />
+        </FormGroup>,
       );
       expect(formGroup.length).toEqual(1);
     });
     it('should render children as expected', () => {
       const formGroup1 = shallow(
         <FormGroup>
-          <div className="test-child"></div>
-          <div className="test-child"></div>
-        </FormGroup>
+          <div className="test-child" />
+          <div className="test-child" />
+        </FormGroup>,
       );
       expect(formGroup1.find('.test-child').length).toBe(2);
     });
