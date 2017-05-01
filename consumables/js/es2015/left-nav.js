@@ -42,7 +42,7 @@ class LeftNav extends mixin(createCoponent, initComponent) {
     super(element, options);
     this.leftNavSectionActive = false;
     this.hookOpenActions();
-    this.hookListSectionEvents();
+    //this.hookListSectionEvents();
     this.hookListItemsEvents();
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this.handleDocumentClick(evt); });
   }
