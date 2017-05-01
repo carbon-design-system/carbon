@@ -1,0 +1,53 @@
+// mdn resize function
+
+const OptimizedResize = (function optimizedResize() {
+  const callbacks = [];
+  let running = false;
+
+  // run the actual callbacks
+  function runCallbacks() {
+    callbacks.forEach((callback) => {
+      callback();
+    });
+
+    running = false;
+  }
+
+  // fired on resize event
+  function resize() {
+    if (!running) {
+      running = true;
+      window.requestAnimationFrame(runCallbacks); // eslint-disable-line no-undef
+    }
+  }
+
+  // adds callback to loop
+  function addCallback(callback) {
+    if (callback) {
+      const index = callbacks.indexOf(callback);
+      if (index < 0) {
+        callbacks.push(callback);
+      }
+    }
+  }
+
+  return {
+    // public method to add additional callback
+    add: (callback) => {
+      if (!callbacks.length) {
+        window.addEventListener('resize', resize); // eslint-disable-line no-undef
+      }
+      addCallback(callback);
+      return {
+        release() {
+          const index = callbacks.indexOf(callback);
+          if (index >= 0) {
+            callbacks.splice(index, 1);
+          }
+        },
+      };
+    },
+  };
+}());
+
+export default OptimizedResize;

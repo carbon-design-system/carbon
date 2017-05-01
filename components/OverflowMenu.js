@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import ClickListener from '../internal/ClickListener';
+import FloatingMenu from '../internal/FloatingMenu';
+import OptimizedResize from '../internal/OptimizedResize';
 import Icon from './Icon';
 
 class OverflowMenu extends Component {
@@ -8,6 +10,7 @@ class OverflowMenu extends Component {
   static propTypes = {
     open: PropTypes.bool,
     flipped: PropTypes.bool,
+    floatingMenu: PropTypes.bool,
     children: PropTypes.node,
     className: PropTypes.string,
     tabIndex: PropTypes.number,
@@ -18,25 +21,46 @@ class OverflowMenu extends Component {
     onKeyDown: PropTypes.func,
     handleClick: PropTypes.func,
     iconDescription: PropTypes.string.isRequired,
+    iconName: PropTypes.string,
+    menuOffset: PropTypes.object,
+    menuOffsetFlip: PropTypes.object
   }
 
   static defaultProps = {
     ariaLabel: 'list of options',
     iconDescription: 'open and close list of options',
+    iconName: 'overflow-menu',
     open: false,
     flipped: false,
+    floatingMenu: false,
     onClick: () => {},
     tabIndex: 0,
+    menuOffset: { top: 0, left: -9 },
+    menuOffsetFlip: { top: 0, left: -10 },
   }
 
   state = {
     open: this.props.open,
   }
 
+  componentDidMount() {
+    this.getMenuPosition();
+    this.hResize = OptimizedResize.add(() => { this.getMenuPosition(); });
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.open !== this.props.open) {
       this.setState({ open: nextProps.open });
     }
+  }
+
+  componentWillUnmount() {
+    this.hResize.release();
+  }
+
+  getMenuPosition = () => {
+    const menuPosition = this.menuEl.getBoundingClientRect();
+    this.setState({ menuPosition });
   }
 
   handleClick = (evt) => {
@@ -57,7 +81,7 @@ class OverflowMenu extends Component {
   }
 
   handleBlur = (evt) => {
-    if (!this.refs.overflow.contains(evt.relatedTarget)) {
+    if (!this.menuEl.contains(evt.relatedTarget)) {
       this.setState({ open: false });
     }
   }
@@ -69,6 +93,11 @@ class OverflowMenu extends Component {
       ariaLabel,
       children,
       iconDescription,
+      iconName,
+      flipped,
+      floatingMenu,
+      menuOffset,
+      menuOffsetFlip,
       ...other,
     } = this.props;
 
@@ -88,7 +117,6 @@ class OverflowMenu extends Component {
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
           {...other}
-          ref="overflow"
           className={overflowMenuClasses}
           onClick={this.handleClick}
           onKeyDown={this.handleKeyPress}
@@ -96,16 +124,29 @@ class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
+          ref={node => { this.menuEl = node; }}
         >
           <Icon
             className="bx--overflow-menu__icon"
-            name="overflow-menu"
+            name={iconName}
             description={iconDescription}
             width="100%"
           />
+          { floatingMenu ? (
+          <FloatingMenu
+            menuPosition={this.state.menuPosition}
+            menuDirection="bottom"
+            menuOffset={flipped ? menuOffsetFlip : menuOffset}
+          >
+            <ul className={overflowMenuOptionsClasses}>
+              {children}
+            </ul>
+          </FloatingMenu>
+        ) : (
           <ul className={overflowMenuOptionsClasses}>
             {children}
           </ul>
+        )}
         </div>
       </ClickListener>
     );
