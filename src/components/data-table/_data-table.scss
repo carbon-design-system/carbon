@@ -109,11 +109,11 @@
     border: 1px solid transparent;
 
     &:first-child:hover {
-      border: 1px solid $brand-02;
+      border-left: 2px solid $brand-02;
+      outline: 1px solid $brand-02;
     }
 
     &:not(:first-child):hover {
-      border: 1px solid $brand-02;
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
     }
@@ -148,6 +148,10 @@
     height: 12px;
     margin-left: rem(7px);
     margin-right: rem(2px);
+
+    @media all and (min--moz-device-pixel-ratio:0) and (min-resolution: 3e1dpcm) {
+        margin-top: 2px;
+      }
   }
 
   .bx--table-expand[data-previous-value='collapsed'] .bx--table-expand__svg {
@@ -182,6 +186,10 @@
     .bx--checkbox-label {
       display: inline-flex;
       margin: 0;
+
+      @media all and (min--moz-device-pixel-ratio:0) and (min-resolution: 3e1dpcm) {
+        margin-top: 2px;
+      }
     }
 
     .bx--checkbox-appearance {
