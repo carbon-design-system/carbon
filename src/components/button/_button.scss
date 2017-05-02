@@ -73,10 +73,13 @@
       $ui-05        // icon-color
     );
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: $inverse-01;
       border: 2px solid transparent;
+    }
+
+    &:focus {
+      color: $inverse-01;
     }
 
     &:hover:disabled,

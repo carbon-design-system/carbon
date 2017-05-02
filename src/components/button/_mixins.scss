@@ -24,10 +24,6 @@
     opacity: .5;
   }
 
-  // &:focus {
-  //   @include focus-outline;
-  // }
-
   .bx--btn__icon {
     width: rem(16px);
     height: rem(16px);
@@ -42,8 +38,8 @@
   border-color: $border-color;
   color: $font-color;
 
-  &:hover,
-  &:focus {
+  &:focus,
+  &:hover {
     background-color: $hover-bg-color;
   }
 
