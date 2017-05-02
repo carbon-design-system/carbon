@@ -24,9 +24,9 @@
     opacity: .5;
   }
 
-  &:focus {
-    @include focus-outline;
-  }
+  // &:focus {
+  //   @include focus-outline;
+  // }
 
   .bx--btn__icon {
     width: rem(16px);
@@ -45,6 +45,11 @@
   &:hover,
   &:focus {
     background-color: $hover-bg-color;
+  }
+
+  &:focus {
+    border: 1px solid $ui-02;
+    outline: 2px solid $hover-bg-color;
   }
 
   &:disabled:hover,
