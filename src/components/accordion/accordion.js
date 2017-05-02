@@ -26,10 +26,6 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
         this._handleKeypress(event);
       }
     });
-
-    this.element.ownerDocument.body.addEventListener('keydown', event => {
-      console.log(document.activeElement);
-    });
   }
 
   /**

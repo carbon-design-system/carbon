@@ -16,7 +16,7 @@
     border-top: 1px solid $ui-04;
     overflow: hidden;
 
-    &.focus {
+    &:focus {
       outline: none;
 
       .bx--accordion__arrow {
@@ -40,7 +40,7 @@
     transition: all $transition--base $bx--standard-easing;
     height: .75rem;
     width: .75rem;
-    padding: .25rem;
+    padding: .25rem .125rem .25rem .25rem;
     margin-left: .075rem;
     fill: $ui-05;
   }
