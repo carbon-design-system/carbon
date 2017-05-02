@@ -28,7 +28,6 @@
     border: 1px solid $ui-04;
 
     &:focus {
-      outline: none;
       @include focus-outline('border');
     }
   }
