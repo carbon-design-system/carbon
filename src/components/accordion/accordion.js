@@ -13,14 +13,14 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', event => {
+    this.element.addEventListener('click', (event) => {
       const item = eventMatches(event, this.options.selectorAccordionItem);
       if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
         item.classList.toggle(this.options.classActive);
       }
     });
 
-    this.element.addEventListener('keypress', event => {
+    this.element.addEventListener('keypress', (event) => {
       const item = eventMatches(event, this.options.selectorAccordionItem);
       if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
         this._handleKeypress(event);
