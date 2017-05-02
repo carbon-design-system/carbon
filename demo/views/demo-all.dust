@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
@@ -11,7 +12,8 @@
     }
   </style>
 </head>
-<body class="bx--body bx--global-light-ui">
+
+<body class="bx--body">
   <button class="bx--btn theme-switcher" data-theme-switcher>Theme Switcher</button>
   <div data-demo-switcher class="demo-switcher__container">
     <input id="flex-col" data-demo-col class="bx--radio" type="radio" value="col" name="radio">
@@ -42,4 +44,5 @@
     CarbonComponents.settings.disableAutoInit = false;
   </script>
 </body>
+
 </html>
