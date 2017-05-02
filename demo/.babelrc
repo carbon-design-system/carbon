@@ -9,5 +9,5 @@
         }
     }]
   ],
-  "plugins": ["transform-class-properties", "external-helpers"],
+  "plugins": ["transform-class-properties", "babel-plugin-external-helpers"],
 }
