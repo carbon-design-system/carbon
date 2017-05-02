@@ -18,7 +18,7 @@ class FloatingMenu extends React.Component {
   };
 
   componentDidMount() {
-    this.menu = document.createElement('div');
+    this.menu = ReactDOM.findDOMNode(this).ownerDocument.createElement('div');
     this.menu.ownerDocument.body.appendChild(this.menu);
     this.renderLayer();
   }
@@ -90,7 +90,7 @@ class FloatingMenu extends React.Component {
   };
 
   render() {
-    return null;
+    return <div hidden />;
   }
 }
 
