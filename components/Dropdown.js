@@ -1,10 +1,10 @@
-import React, { PropTypes, PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import ClickListener from '../internal/ClickListener';
 import Icon from './Icon';
 
 class Dropdown extends PureComponent {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -16,28 +16,25 @@ class Dropdown extends PureComponent {
     selectedText: PropTypes.string,
     open: PropTypes.bool,
     iconDescription: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     tabIndex: 0,
     open: false,
     iconDescription: 'open list of options',
     onChange: () => {},
-  }
+  };
 
   constructor(props) {
     super(props);
-    const {
-      children,
-      selectedText,
-      value,
-      defaultText,
-      open,
-    } = props;
+    const { children, selectedText, value, defaultText, open } = props;
 
     let matchingChild;
     React.Children.forEach(children, child => {
-      if (child.props.itemText === selectedText || child.props.value === value) {
+      if (
+        child.props.itemText === selectedText ||
+        child.props.value === value
+      ) {
         matchingChild = child;
       }
     });
@@ -59,16 +56,16 @@ class Dropdown extends PureComponent {
 
   close = () => {
     this.setState({ open: false });
-  }
+  };
 
-  toggle = (evt) => {
+  toggle = evt => {
     // Open on click, enter, or space
     if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
       this.setState({ open: !this.state.open });
     }
-  }
+  };
 
-  handleItemClick = (info) => {
+  handleItemClick = info => {
     this.props.onChange(info);
     this.setState({
       selectedText: info.itemText,
@@ -81,7 +78,7 @@ class Dropdown extends PureComponent {
       tabIndex,
       defaultText, // eslint-disable-line no-unused-vars
       iconDescription,
-      ...other,
+      ...other
     } = this.props;
 
     const children = React.Children.map(this.props.children, child =>
@@ -108,7 +105,11 @@ class Dropdown extends PureComponent {
         >
           <li className="bx--dropdown-text">{this.state.selectedText}</li>
           <li>
-            <Icon name="caret--down" className="bx--dropdown__arrow" description={iconDescription} />
+            <Icon
+              name="caret--down"
+              className="bx--dropdown__arrow"
+              description={iconDescription}
+            />
           </li>
           <li>
             <ul className="bx--dropdown-list">{children}</ul>

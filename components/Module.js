@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
@@ -29,7 +30,7 @@ const moduleBodydefaultProps = {
 const Module = ({ children, className, size, ...other }) => {
   const wrapperClasses = classNames(
     `bx--module bx--module--${size}`,
-    className,
+    className
   );
 
   return (

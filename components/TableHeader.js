@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 
@@ -9,39 +10,32 @@ const propTypes = {
   sortDir: PropTypes.string,
 };
 
-const TableHeader = (props) => {
-  const {
-    children,
-    className,
-    iconClassName,
-    sortDir,
-    ...other,
-  } = props;
+const TableHeader = props => {
+  const { children, className, iconClassName, sortDir, ...other } = props;
 
-  const tableHeaderClasses = classNames(
-    className,
-    'bx--table-header',
-  );
+  const tableHeaderClasses = classNames(className, 'bx--table-header');
 
-  const iconClasses = classNames(
-    iconClassName,
-    'bx--table-sort__svg',
-  );
+  const iconClasses = classNames(iconClassName, 'bx--table-sort__svg');
 
   let sortContent;
   if (sortDir) {
     sortContent = sortDir === 'DESC'
-      ? <Icon name="caret--down" description="descending sort" className={iconClasses} />
-      : <Icon name="caret--up" description="ascending sort" className={iconClasses} />;
+      ? <Icon
+          name="caret--down"
+          description="descending sort"
+          className={iconClasses}
+        />
+      : <Icon
+          name="caret--up"
+          description="ascending sort"
+          className={iconClasses}
+        />;
   } else {
     sortContent = '';
   }
 
   return (
-    <th
-      {...other}
-      className={tableHeaderClasses}
-    >
+    <th {...other} className={tableHeaderClasses}>
       {children}
       {sortContent}
     </th>
@@ -51,4 +45,3 @@ const TableHeader = (props) => {
 TableHeader.propTypes = propTypes;
 
 export default TableHeader;
-

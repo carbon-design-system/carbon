@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Icon from '../components/Icon';
 import classNames from 'classnames';
 
@@ -13,9 +14,11 @@ const propTypes = {
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
   role: PropTypes.string,
   icon: PropTypes.string,
-  iconDescription: (props) => {
+  iconDescription: props => {
     if (props.icon && !props.iconDescription) {
-      return new Error('icon property specified without also providing an iconDescription property.');
+      return new Error(
+        'icon property specified without also providing an iconDescription property.'
+      );
     }
     return undefined;
   },
@@ -29,8 +32,19 @@ const defaultProps = {
   kind: 'primary',
 };
 
-const Button = ({ children, className, disabled, small, kind, href,
-                  tabIndex, type, icon, iconDescription, ...other }) => {
+const Button = ({
+  children,
+  className,
+  disabled,
+  small,
+  kind,
+  href,
+  tabIndex,
+  type,
+  icon,
+  iconDescription,
+  ...other
+}) => {
   const buttonClasses = classNames(className, {
     'bx--btn': true,
     'bx--btn--sm': small,
@@ -44,37 +58,29 @@ const Button = ({ children, className, disabled, small, kind, href,
     className: buttonClasses,
   };
 
-  const buttonImage = icon ? <Icon
-    name={icon}
-    description={iconDescription}
-    className="bx--btn__icon"
-  /> : null;
+  const buttonImage = icon
+    ? <Icon
+        name={icon}
+        description={iconDescription}
+        className="bx--btn__icon"
+      />
+    : null;
 
   const button = (
-    <button
-      {...other}
-      {...commonProps}
-      disabled={disabled}
-      type={type}
-    >
+    <button {...other} {...commonProps} disabled={disabled} type={type}>
       {children}
       {buttonImage}
     </button>
   );
 
   const anchor = (
-    <a
-      {...other}
-      {...commonProps}
-      href={href}
-      role="button"
-    >
+    <a {...other} {...commonProps} href={href} role="button">
       {children}
       {buttonImage}
     </a>
   );
 
-  return (href) ? anchor : button;
+  return href ? anchor : button;
 };
 
 Button.propTypes = propTypes;

@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
 class Loading extends React.Component {
   static propTypes = {
-    active: React.PropTypes.bool,
-    className: React.PropTypes.string,
-    withOverlay: React.PropTypes.bool,
-    small: React.PropTypes.bool,
+    active: PropTypes.bool,
+    className: PropTypes.string,
+    withOverlay: PropTypes.bool,
+    small: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -16,13 +17,7 @@ class Loading extends React.Component {
   };
 
   render() {
-    const {
-      active,
-      className,
-      withOverlay,
-      small,
-      ...other
-    } = this.props;
+    const { active, className, withOverlay, small, ...other } = this.props;
 
     const loadingClasses = classNames('bx--loading', className, {
       'bx--loading--small': small,

@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
-  children: React.PropTypes.node,
-  className: React.PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 const CardFooter = ({ children, className, ...other }) => {

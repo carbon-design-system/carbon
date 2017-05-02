@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 
@@ -53,12 +54,12 @@ class Notification extends Component {
       toast: classNames(
         'bx--toast-notification',
         { [`bx--toast-notification--${this.props.kind}`]: this.props.kind },
-        className,
+        className
       ),
       inline: classNames(
         'bx--inline-notification',
         { [`bx--inline-notification--${this.props.kind}`]: this.props.kind },
-        className,
+        className
       ),
     };
 

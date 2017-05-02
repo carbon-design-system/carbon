@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 
 const propTypes = {
@@ -11,7 +12,6 @@ const Form = ({ className, children, ...other }) => {
 
   return <form className={classNames} {...other}> {children} </form>;
 };
-
 
 Form.propTypes = propTypes;
 

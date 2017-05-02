@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 import uid from '../lib/uniqueId';
 
 class RadioButton extends React.Component {
-
   static propTypes = {
     checked: PropTypes.bool,
     className: PropTypes.string,
@@ -13,34 +13,28 @@ class RadioButton extends React.Component {
     labelText: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   };
 
   static defaultProps = {
-    onChange: () => { },
+    onChange: () => {},
   };
 
   componentWillMount() {
     this.uid = this.props.id || uid();
   }
 
-  handleChange = (evt) => {
+  handleChange = evt => {
     this.props.onChange(this.props.value, this.props.name, evt);
   };
 
   render() {
     const wrapperClasses = classNames(
       'radioButtonWrapper',
-      this.props.className,
+      this.props.className
     );
 
-    const {
-      labelText,
-      ...other,
-    } = this.props;
+    const { labelText, ...other } = this.props;
 
     return (
       <div className={wrapperClasses}>
@@ -52,11 +46,10 @@ class RadioButton extends React.Component {
           id={this.uid}
         />
         <label htmlFor={this.uid} className="bx--radio-button__label">
-          <span className="bx--radio-button__appearance"></span>
+          <span className="bx--radio-button__appearance" />
           {labelText}
         </label>
       </div>
-
     );
   }
 }

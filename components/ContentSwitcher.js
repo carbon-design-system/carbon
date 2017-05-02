@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 class ContentSwitcher extends React.Component {
@@ -7,15 +8,15 @@ class ContentSwitcher extends React.Component {
     className: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     selectedIndex: PropTypes.number,
-  }
+  };
 
   static defaultProps = {
     selectedIndex: 0,
-  }
+  };
 
   state = {
     selectedIndex: this.props.selectedIndex,
-  }
+  };
 
   getChildren(children) {
     return React.Children.map(children, (child, index) =>
@@ -28,7 +29,7 @@ class ContentSwitcher extends React.Component {
     );
   }
 
-  handleChildChange = (data) => {
+  handleChildChange = data => {
     const { selectedIndex } = this.state;
     const { index } = data;
 
@@ -36,26 +37,20 @@ class ContentSwitcher extends React.Component {
       this.setState({ selectedIndex: index });
       this.props.onChange(data);
     }
-  }
+  };
 
   render() {
     const {
       children,
       className,
-        selectedIndex, // eslint-disable-line no-unused-vars
-      ...other,
+      selectedIndex, // eslint-disable-line no-unused-vars
+      ...other
     } = this.props;
 
-    const classes = classNames(
-      'bx--content-switcher',
-      className,
-    );
+    const classes = classNames('bx--content-switcher', className);
 
     return (
-      <div
-        {...other}
-        className={classes}
-      >
+      <div {...other} className={classes}>
         {this.getChildren(children)}
       </div>
     );

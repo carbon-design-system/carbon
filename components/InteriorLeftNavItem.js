@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 
 const propTypes = {
@@ -17,17 +18,15 @@ const defaultProps = {
   onClick: /* istanbul ignore next */ () => {},
 };
 
-const InteriorLeftNavItem = (
-  {
-    className,
-    href,
-    activeHref,
-    onClick,
-    tabIndex,
-    label,
-    ...other
-  }
-) => {
+const InteriorLeftNavItem = ({
+  className,
+  href,
+  activeHref,
+  onClick,
+  tabIndex,
+  label,
+  ...other
+}) => {
   const classNames = classnames('left-nav-list__item', className, {
     'left-nav-list__item--active': activeHref === href,
   });

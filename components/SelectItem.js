@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
-  value: React.PropTypes.any.isRequired,
-  className: React.PropTypes.string,
-  disabled: React.PropTypes.bool,
-  hidden: React.PropTypes.bool,
-  text: React.PropTypes.string.isRequired,
+  value: PropTypes.any.isRequired,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  hidden: PropTypes.bool,
+  text: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -29,7 +30,8 @@ const SelectItem = ({ className, value, disabled, hidden, text, ...other }) => {
       value={value}
       disabled={disabled}
       hidden={hidden}
-    >{text}
+    >
+      {text}
     </option>
   );
 };

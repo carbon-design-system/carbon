@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 import Icon from './Icon';
 
@@ -27,12 +28,9 @@ export default class CopyButton extends Component {
   }
   handleClick = evt => {
     this.setState({ showFeedback: true });
-    this.timeoutId = setTimeout(
-      () => {
-        this.setState({ showFeedback: false });
-      },
-      this.props.feedbackTimeout,
-    );
+    this.timeoutId = setTimeout(() => {
+      this.setState({ showFeedback: false });
+    }, this.props.feedbackTimeout);
 
     this.props.onClick(evt);
   }; // eslint-disable-line no-unused-vars

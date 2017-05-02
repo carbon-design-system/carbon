@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 import Icon from './Icon';
 import Select from './Select';
@@ -18,7 +19,7 @@ class Pagination extends Component {
     pageRangeText: PropTypes.func,
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
     totalItems: PropTypes.number.isRequired,
-    disabled: React.PropTypes.bool,
+    disabled: PropTypes.bool,
     page: PropTypes.number,
   };
   static defaultProps = {
@@ -54,7 +55,8 @@ class Pagination extends Component {
   handlePageInputChange = evt => {
     const page = Number(evt.target.value);
     if (
-      page > 0 && page <= Math.ceil(this.props.totalItems / this.state.pageSize)
+      page > 0 &&
+      page <= Math.ceil(this.props.totalItems / this.state.pageSize)
     ) {
       this.setState({ page });
       this.props.onChange({ page, pageSize: this.state.pageSize });
@@ -86,10 +88,7 @@ class Pagination extends Component {
       ...other
     } = this.props;
 
-    const {
-      page,
-      pageSize,
-    } = this.state;
+    const { page, pageSize } = this.state;
     const classNames = classnames('bx--pagination', className);
 
     return (
@@ -113,7 +112,7 @@ class Pagination extends Component {
             {itemRangeText(
               pageSize * (page - 1) + 1,
               Math.min(page * pageSize, totalItems),
-              totalItems,
+              totalItems
             )}
           </span>
         </div>

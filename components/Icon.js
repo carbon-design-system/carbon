@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import icons from 'carbon-icons';
 
 const propTypes = {
@@ -48,7 +49,7 @@ export function findIcon(name, iconsObj = icons) {
  */
 export function getSvgData(iconName) {
   const name = findIcon(iconName);
-  return (name) ? name.svgData : false;
+  return name ? name.svgData : false;
 }
 
 /**
@@ -89,7 +90,18 @@ export function isPrefixed(name) {
   return name.split('--')[0] === 'icon';
 }
 
-const Icon = ({ className, description, fill, fillRule, height, name, role, style, width, ...other }) => {
+const Icon = ({
+  className,
+  description,
+  fill,
+  fillRule,
+  height,
+  name,
+  role,
+  style,
+  width,
+  ...other
+}) => {
   const icon = isPrefixed(name) ? findIcon(name) : findIcon(`icon--${name}`);
   const props = {
     className,
@@ -104,7 +116,7 @@ const Icon = ({ className, description, fill, fillRule, height, name, role, styl
     ...other,
   };
 
-  const svgContent = (icon) ? svgShapes(icon.svgData) : '';
+  const svgContent = icon ? svgShapes(icon.svgData) : '';
 
   return (
     <svg {...props}>

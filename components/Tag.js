@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const TYPES = {
@@ -14,7 +15,7 @@ const TYPES = {
 };
 
 const propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   className: PropTypes.string,
   type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
 };

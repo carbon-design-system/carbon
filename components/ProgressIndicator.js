@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 
 const propTypes = {
@@ -7,7 +8,7 @@ const propTypes = {
   current: PropTypes.bool,
   complete: PropTypes.bool,
   incomplete: PropTypes.bool,
-  description: PropTypes.string
+  description: PropTypes.string,
 };
 
 const ProgressStep = ({ ...props }) => {
@@ -17,7 +18,7 @@ const ProgressStep = ({ ...props }) => {
     className,
     current,
     complete,
-    incomplete
+    incomplete,
   } = props;
 
   const classes = classnames({
@@ -25,7 +26,7 @@ const ProgressStep = ({ ...props }) => {
     'bx--progress-step--current': current,
     'bx--progress-step--complete': complete,
     'bx--progress-step--incomplete': incomplete,
-    [className]: className
+    [className]: className,
   });
 
   return (
@@ -64,15 +65,15 @@ class ProgressIndicator extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    currentIndex: PropTypes.number
+    currentIndex: PropTypes.number,
   };
 
   static defaultProps = {
-    currentIndex: 0
+    currentIndex: 0,
   };
 
   state = {
-    currentIndex: this.props.currentIndex
+    currentIndex: this.props.currentIndex,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -85,15 +86,15 @@ class ProgressIndicator extends Component {
     React.Children.map(this.props.children, (child, index) => {
       if (index === this.state.currentIndex) {
         return React.cloneElement(child, {
-          current: true
+          current: true,
         });
       } else if (index < this.state.currentIndex) {
         return React.cloneElement(child, {
-          complete: true
+          complete: true,
         });
       } else if (index > this.state.currentIndex) {
         return React.cloneElement(child, {
-          incomplete: true
+          incomplete: true,
         });
       }
       return null;
@@ -103,7 +104,7 @@ class ProgressIndicator extends Component {
     const { className, currentIndex, ...other } = this.props;
     const classes = classnames({
       'bx--progress': true,
-      [className]: className
+      [className]: className,
     });
     if (currentIndex) {
       return (

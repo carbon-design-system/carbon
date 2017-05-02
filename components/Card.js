@@ -1,19 +1,20 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
-  children: React.PropTypes.node,
-  className: React.PropTypes.string,
-  tabIndex: React.PropTypes.number,
-  onBlur: React.PropTypes.func,
-  onClick: React.PropTypes.func,
-  onFocus: React.PropTypes.func,
-  onKeyDown: React.PropTypes.func,
-  onKeyUp: React.PropTypes.func,
-  onMouseDown: React.PropTypes.func,
-  onMouseEnter: React.PropTypes.func,
-  onMouseLeave: React.PropTypes.func,
-  onMouseUp: React.PropTypes.func,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  tabIndex: PropTypes.number,
+  onBlur: PropTypes.func,
+  onClick: PropTypes.func,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  onMouseUp: PropTypes.func,
 };
 
 const defaultProps = {
@@ -27,11 +28,7 @@ const Card = ({ children, className, tabIndex, ...other }) => {
   });
 
   return (
-    <div
-      {...other}
-      className={cardClasses}
-      tabIndex={tabIndex}
-    >
+    <div {...other} className={cardClasses} tabIndex={tabIndex}>
       {children}
     </div>
   );

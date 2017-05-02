@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 
@@ -13,15 +14,12 @@ const propTypes = {
 };
 
 const defaultProps = {
-  onChange: () => { },
+  onChange: () => {},
 };
 
 const Checkbox = ({ className, id, labelText, onChange, ...other }) => {
   let input;
-  const wrapperClasses = classNames(
-    'bx--checkbox-label',
-    className
-  );
+  const wrapperClasses = classNames('bx--checkbox-label', className);
 
   return (
     <div className="bx--form-item bx--checkbox-wrapper">
@@ -29,10 +27,14 @@ const Checkbox = ({ className, id, labelText, onChange, ...other }) => {
         <input
           {...other}
           type="checkbox"
-          onChange={evt => { onChange(input.checked, id, evt); }}
+          onChange={evt => {
+            onChange(input.checked, id, evt);
+          }}
           className="bx--checkbox"
           id={id}
-          ref={el => { input = el; }}
+          ref={el => {
+            input = el;
+          }}
         />
 
         <span className="bx--checkbox-appearance">

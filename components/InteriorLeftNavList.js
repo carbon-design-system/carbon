@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 import InteriorLeftNavItem from './InteriorLeftNavItem';
 import Icon from './Icon';
@@ -42,10 +43,7 @@ class InteriorLeftNavList extends Component {
   close = () => this.state.open && this.setState({ open: false });
 
   buildNewItemChild = (child, index) => {
-    const {
-      onItemClick,
-      activeHref,
-    } = this.props;
+    const { onItemClick, activeHref } = this.props;
 
     const key = `listitem-${index}`;
     return (
@@ -78,11 +76,12 @@ class InteriorLeftNavList extends Component {
       {
         'left-nav-list__item--expanded': this.state.open,
       },
-      className,
+      className
     );
 
     const newChildren = React.Children.map(children, (child, index) =>
-      this.buildNewItemChild(child, index));
+      this.buildNewItemChild(child, index)
+    );
 
     return (
       <li

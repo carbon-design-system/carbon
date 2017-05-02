@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, Children } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component, Children } from 'react';
 import classnames from 'classnames';
 import debounce from 'lodash.debounce';
 

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 import Link from './Link';
 import Button from './Button';
@@ -25,23 +26,21 @@ const defaultProps = {
   buttonText: 'Create',
 };
 
-const Footer = (
-  {
-    className,
-    children,
-    labelOne,
-    linkTextOne,
-    linkHrefOne,
-    labelTwo,
-    linkTextTwo,
-    linkHrefTwo,
-    buttonText,
-    ...other
-  },
-) => {
+const Footer = ({
+  className,
+  children,
+  labelOne,
+  linkTextOne,
+  linkHrefOne,
+  labelTwo,
+  linkTextTwo,
+  linkHrefTwo,
+  buttonText,
+  ...other
+}) => {
   const classNames = classnames(
     'bx--footer bx--footer--bottom-fixed',
-    className,
+    className
   );
 
   const footer = children

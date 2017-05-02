@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
@@ -27,18 +28,16 @@ const defaultProps = {
   invalid: false,
 };
 
-const Textarea = (
-  {
-    className,
-    id,
-    labelText,
-    onChange,
-    onClick,
-    invalid,
-    invalidText,
-    ...other
-  },
-) => {
+const Textarea = ({
+  className,
+  id,
+  labelText,
+  onChange,
+  onClick,
+  invalid,
+  invalidText,
+  ...other
+}) => {
   const textareaProps = {
     id,
     onChange: evt => {
@@ -68,11 +67,11 @@ const Textarea = (
 
   const input = invalid
     ? <textarea
-      {...other}
-      {...textareaProps}
-      className={textareaClasses}
-      data-invalid
-    />
+        {...other}
+        {...textareaProps}
+        className={textareaClasses}
+        data-invalid
+      />
     : <textarea {...other} {...textareaProps} className={textareaClasses} />;
 
   return (

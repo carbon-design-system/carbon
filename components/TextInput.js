@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
@@ -26,21 +27,19 @@ const defaultProps = {
   invalid: false,
 };
 
-const TextInput = (
-  {
-    labelText,
-    className,
-    id,
-    placeholder,
-    type,
-    onChange,
-    onClick,
-    hideLabel,
-    invalid,
-    invalidText,
-    ...other
-  },
-) => {
+const TextInput = ({
+  labelText,
+  className,
+  id,
+  placeholder,
+  type,
+  onChange,
+  onClick,
+  hideLabel,
+  invalid,
+  invalidText,
+  ...other
+}) => {
   const textInputProps = {
     id,
     onChange: evt => {
@@ -76,11 +75,11 @@ const TextInput = (
 
   const input = invalid
     ? <input
-      {...other}
-      {...textInputProps}
-      data-invalid
-      className={textInputClasses}
-    />
+        {...other}
+        {...textInputProps}
+        data-invalid
+        className={textInputClasses}
+      />
     : <input {...other} {...textInputProps} className={textInputClasses} />;
 
   return (

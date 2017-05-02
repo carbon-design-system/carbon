@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const propTypes = {
   selected: PropTypes.bool,
@@ -9,19 +10,11 @@ const defaultProps = {
   selected: false,
 };
 
-const TabContent = (props) => {
-  const {
-    selected,
-    children,
-    ...other,
-  } = props;
+const TabContent = props => {
+  const { selected, children, ...other } = props;
 
   return (
-    <div
-      {...other}
-      selected={selected}
-      hidden={!selected}
-    >
+    <div {...other} selected={selected} hidden={!selected}>
       {children}
     </div>
   );

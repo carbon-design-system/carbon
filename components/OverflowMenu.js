@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import ClickListener from '../internal/ClickListener';
 import FloatingMenu from '../internal/FloatingMenu';
@@ -6,7 +7,6 @@ import OptimizedResize from '../internal/OptimizedResize';
 import Icon from './Icon';
 
 class OverflowMenu extends Component {
-
   static propTypes = {
     open: PropTypes.bool,
     flipped: PropTypes.bool,
@@ -23,8 +23,8 @@ class OverflowMenu extends Component {
     iconDescription: PropTypes.string.isRequired,
     iconName: PropTypes.string,
     menuOffset: PropTypes.object,
-    menuOffsetFlip: PropTypes.object
-  }
+    menuOffsetFlip: PropTypes.object,
+  };
 
   static defaultProps = {
     ariaLabel: 'list of options',
@@ -37,15 +37,17 @@ class OverflowMenu extends Component {
     tabIndex: 0,
     menuOffset: { top: 0, left: -9 },
     menuOffsetFlip: { top: 0, left: -10 },
-  }
+  };
 
   state = {
     open: this.props.open,
-  }
+  };
 
   componentDidMount() {
     this.getMenuPosition();
-    this.hResize = OptimizedResize.add(() => { this.getMenuPosition(); });
+    this.hResize = OptimizedResize.add(() => {
+      this.getMenuPosition();
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,30 +63,30 @@ class OverflowMenu extends Component {
   getMenuPosition = () => {
     const menuPosition = this.menuEl.getBoundingClientRect();
     this.setState({ menuPosition });
-  }
+  };
 
-  handleClick = (evt) => {
+  handleClick = evt => {
     this.setState({ open: !this.state.open });
     this.props.onClick(evt);
-  }
+  };
 
-  handleKeyPress = (evt) => {
+  handleKeyPress = evt => {
     const key = evt.key || evt.which;
 
     if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
       this.setState({ open: !this.state.open });
     }
-  }
+  };
 
   handleClickOutside = () => {
     this.setState({ open: false });
-  }
+  };
 
-  handleBlur = (evt) => {
+  handleBlur = evt => {
     if (!this.menuEl.contains(evt.relatedTarget)) {
       this.setState({ open: false });
     }
-  }
+  };
 
   render() {
     const {
@@ -98,20 +100,18 @@ class OverflowMenu extends Component {
       floatingMenu,
       menuOffset,
       menuOffsetFlip,
-      ...other,
+      ...other
     } = this.props;
 
     const overflowMenuClasses = classNames(
       this.props.className,
-      'bx--overflow-menu',
+      'bx--overflow-menu'
     );
 
-    const overflowMenuOptionsClasses = classNames(
-      'bx--overflow-menu-options',
-      { 'bx--overflow-menu--flip': this.props.flipped,
-        'bx--overflow-menu-options--open': this.state.open
-      }
-    );
+    const overflowMenuOptionsClasses = classNames('bx--overflow-menu-options', {
+      'bx--overflow-menu--flip': this.props.flipped,
+      'bx--overflow-menu-options--open': this.state.open,
+    });
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
@@ -124,7 +124,9 @@ class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
-          ref={node => { this.menuEl = node; }}
+          ref={node => {
+            this.menuEl = node;
+          }}
         >
           <Icon
             className="bx--overflow-menu__icon"
@@ -132,21 +134,19 @@ class OverflowMenu extends Component {
             description={iconDescription}
             width="100%"
           />
-          { floatingMenu ? (
-          <FloatingMenu
-            menuPosition={this.state.menuPosition}
-            menuDirection="bottom"
-            menuOffset={flipped ? menuOffsetFlip : menuOffset}
-          >
-            <ul className={overflowMenuOptionsClasses}>
-              {children}
-            </ul>
-          </FloatingMenu>
-        ) : (
-          <ul className={overflowMenuOptionsClasses}>
-            {children}
-          </ul>
-        )}
+          {floatingMenu
+            ? <FloatingMenu
+                menuPosition={this.state.menuPosition}
+                menuDirection="bottom"
+                menuOffset={flipped ? menuOffsetFlip : menuOffset}
+              >
+                <ul className={overflowMenuOptionsClasses}>
+                  {children}
+                </ul>
+              </FloatingMenu>
+            : <ul className={overflowMenuOptionsClasses}>
+                {children}
+              </ul>}
         </div>
       </ClickListener>
     );

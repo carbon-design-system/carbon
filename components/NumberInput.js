@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import Icon from './Icon';
 import classNames from 'classnames';
 
 class NumberInput extends Component {
-
   static propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -16,7 +16,7 @@ class NumberInput extends Component {
     onClick: PropTypes.func,
     step: PropTypes.number,
     value: PropTypes.number,
-  }
+  };
 
   static defaultProps = {
     disabled: false,
@@ -26,11 +26,11 @@ class NumberInput extends Component {
     onClick: () => {},
     step: 1,
     value: 0,
-  }
+  };
 
   state = {
     value: this.props.min || this.props.value,
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.value) {
@@ -38,7 +38,7 @@ class NumberInput extends Component {
     }
   }
 
-  handleChange = (evt) => {
+  handleChange = evt => {
     if (!this.props.disabled) {
       this.setState({
         value: evt.target.value,
@@ -46,20 +46,19 @@ class NumberInput extends Component {
 
       this.props.onChange(evt);
     }
-  }
+  };
 
   handleArrowClick = (evt, direction) => {
-    let value = (typeof(this.state.value) === 'string') ? Number(this.state.value) : this.state.value;
+    let value = typeof this.state.value === 'string'
+      ? Number(this.state.value)
+      : this.state.value;
     const { disabled, min, max, step } = this.props;
-    const conditional = (direction === 'down')
-      ? ((min !== undefined && value > min) || min === undefined)
-      : ((max !== undefined && value < max) || max === undefined);
-
+    const conditional = direction === 'down'
+      ? (min !== undefined && value > min) || min === undefined
+      : (max !== undefined && value < max) || max === undefined;
 
     if (!disabled && conditional) {
-      value = (direction === 'down')
-        ? value - step
-        : value + step;
+      value = direction === 'down' ? value - step : value + step;
 
       this.setState({
         value,
@@ -68,7 +67,7 @@ class NumberInput extends Component {
       this.props.onClick(evt);
       this.props.onChange(evt);
     }
-  }
+  };
 
   render() {
     const {
@@ -80,13 +79,10 @@ class NumberInput extends Component {
       max,
       min,
       step,
-      ...other,
+      ...other
     } = this.props;
 
-    const numberInputClasses = classNames(
-      'bx--number',
-      className,
-    );
+    const numberInputClasses = classNames('bx--number', className);
 
     const props = {
       disabled,
@@ -102,22 +98,17 @@ class NumberInput extends Component {
       <div className="bx--form-item">
         <label htmlFor={id} className="bx--label">{label}</label>
         <div className={numberInputClasses}>
-          <input
-            type="number"
-            pattern="[0-9]*"
-            {...other}
-            {...props}
-          />
+          <input type="number" pattern="[0-9]*" {...other} {...props} />
           <div className="bx--number__controls">
             <Icon
-              onClick={(evt) => this.handleArrowClick(evt, 'up')}
+              onClick={evt => this.handleArrowClick(evt, 'up')}
               className="up-icon"
               name="caret--up"
               description={this.props.iconDescription}
               viewBox="0 -6 10 5"
             />
             <Icon
-              onClick={(evt) => this.handleArrowClick(evt, 'down')}
+              onClick={evt => this.handleArrowClick(evt, 'down')}
               className="down-icon"
               name="caret--down"
               viewBox="0 6 10 5"

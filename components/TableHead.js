@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
@@ -6,23 +7,13 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const TableHead = (props) => {
-  const {
-    children,
-    className,
-    ...other,
-  } = props;
+const TableHead = props => {
+  const { children, className, ...other } = props;
 
-  const tableHeadClasses = classNames(
-    className,
-    'bx--table-head',
-  );
+  const tableHeadClasses = classNames(className, 'bx--table-head');
 
   return (
-    <thead
-      {...other}
-      className={tableHeadClasses}
-    >
+    <thead {...other} className={tableHeadClasses}>
       {children}
     </thead>
   );
@@ -31,4 +22,3 @@ const TableHead = (props) => {
 TableHead.propTypes = propTypes;
 
 export default TableHead;
-

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 
 const propTypes = {
@@ -15,9 +16,15 @@ const defaultProps = {
   messageText: undefined,
 };
 
-const FormGroup = (
-  { legendText, invalid, children, className, message, messageText, ...other },
-) => {
+const FormGroup = ({
+  legendText,
+  invalid,
+  children,
+  className,
+  message,
+  messageText,
+  ...other
+}) => {
   const classNamesLegend = classnames('bx--label', className);
   const classNamesFieldset = classnames('bx--fieldset', className);
 

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 class Tab extends React.Component {
@@ -55,7 +56,7 @@ class Tab extends React.Component {
     const classes = classNames(
       'bx--tabs__nav-item',
       { 'bx--tabs__nav-item--selected': selected },
-      className,
+      className
     );
 
     const props = {

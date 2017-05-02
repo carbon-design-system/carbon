@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 
@@ -20,12 +21,23 @@ const defaultProps = {
   iconDescription: 'open list of options',
 };
 
-const Select = ({ className, id, labelText, disabled, children, iconDescription, hideLabel, ...other }) => {
+const Select = ({
+  className,
+  id,
+  labelText,
+  disabled,
+  children,
+  iconDescription,
+  hideLabel,
+  ...other
+}) => {
   const selectClasses = classNames({
     'bx--select': true,
     [className]: className,
   });
-  const labelClasses = classNames('bx--label', { 'bx--visually-hidden': hideLabel });
+  const labelClasses = classNames('bx--label', {
+    'bx--visually-hidden': hideLabel,
+  });
   return (
     <div className="bx--form-item">
       <label htmlFor={id} className={labelClasses}>{labelText}</label>
@@ -38,7 +50,11 @@ const Select = ({ className, id, labelText, disabled, children, iconDescription,
         >
           {children}
         </select>
-        <Icon name="caret--down" className="bx--select__arrow" description={iconDescription} />
+        <Icon
+          name="caret--down"
+          className="bx--select__arrow"
+          description={iconDescription}
+        />
       </div>
     </div>
   );

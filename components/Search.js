@@ -1,9 +1,9 @@
-import React, { PropTypes, Component } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from './Icon';
 
 class Search extends Component {
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -26,15 +26,15 @@ class Search extends Component {
     format: 'list',
     value: '',
     hasContent: false,
-  }
+  };
 
-  toggleClearIcon = (evt) => {
+  toggleClearIcon = evt => {
     const hasContent = evt.target.value.length > 0;
     this.setState({
       hasContent,
-      value: evt.target.value
+      value: evt.target.value,
     });
-  }
+  };
 
   clearInput = () => {
     this.setState({
@@ -42,7 +42,7 @@ class Search extends Component {
       hasContent: false,
     });
     this.input.focus();
-  }
+  };
 
   toggleLayout = () => {
     if (this.state.format === 'list') {
@@ -54,13 +54,17 @@ class Search extends Component {
         format: 'list',
       });
     }
-  }
+  };
 
   // eslint-disable-next-line consistent-return
   searchFilterBtn = () => {
     if (!this.props.small) {
       return (
-        <button className="bx--search-button" type="button" aria-label={this.props.searchButtonLabelText}>
+        <button
+          className="bx--search-button"
+          type="button"
+          aria-label={this.props.searchButtonLabelText}
+        >
           <Icon
             name="filter--glyph"
             description="filter"
@@ -69,7 +73,7 @@ class Search extends Component {
         </button>
       );
     }
-  }
+  };
 
   // eslint-disable-next-line consistent-return
   searchLayoutBtn = () => {
@@ -81,32 +85,36 @@ class Search extends Component {
           onClick={this.toggleLayout}
           aria-label={this.props.layoutButtonLabelText}
         >
-          {this.state.format === 'list' ? (
-            <div className="bx--search__toggle-layout__container">
-              <Icon
-                name="list"
-                description="list"
-                className="bx--search-view"
-              />
-            </div>
-          ) : (
-            <div
-              className="bx--search__toggle-layout__container"
-            >
-              <Icon
-                name="grid"
-                description="toggle-layout"
-                className="bx--search-view"
-              />
-            </div>
-          )}
+          {this.state.format === 'list'
+            ? <div className="bx--search__toggle-layout__container">
+                <Icon
+                  name="list"
+                  description="list"
+                  className="bx--search-view"
+                />
+              </div>
+            : <div className="bx--search__toggle-layout__container">
+                <Icon
+                  name="grid"
+                  description="toggle-layout"
+                  className="bx--search-view"
+                />
+              </div>}
         </button>
       );
     }
-  }
+  };
 
   render() {
-    const { className, type, id, placeHolderText, labelText, small, ...other } = this.props;
+    const {
+      className,
+      type,
+      id,
+      placeHolderText,
+      labelText,
+      small,
+      ...other
+    } = this.props;
 
     const searchClasses = classNames({
       'bx--search bx--search-with-options': true,
@@ -136,7 +144,9 @@ class Search extends Component {
           placeholder={placeHolderText}
           value={this.state.value}
           onInput={this.toggleClearIcon}
-          ref={(input) => { this.input = input; }}
+          ref={input => {
+            this.input = input;
+          }}
         />
         <Icon
           name="close--glyph"

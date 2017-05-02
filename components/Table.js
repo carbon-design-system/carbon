@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
@@ -7,22 +8,14 @@ const propTypes = {
   containerClassName: PropTypes.string,
 };
 
-const Table = (props) => {
-  const {
-    children,
-    className,
-    containerClassName,
-    ...other,
-  } = props;
+const Table = props => {
+  const { children, className, containerClassName, ...other } = props;
 
-  const tableClasses = classNames(
-    className,
-    'bx--responsive-table'
-  );
+  const tableClasses = classNames(className, 'bx--responsive-table');
 
   const tableContainerClasses = classNames(
     containerClassName,
-    'bx--responsive-table-container',
+    'bx--responsive-table-container'
   );
 
   return (
@@ -41,8 +34,6 @@ const Table = (props) => {
   );
 };
 
-
 Table.propTypes = propTypes;
 
 export default Table;
-

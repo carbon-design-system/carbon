@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 import Icon from './Icon';
 
@@ -10,30 +11,30 @@ class AccordionItem extends Component {
     open: PropTypes.bool,
     onClick: PropTypes.func,
     onHeadingClick: PropTypes.func,
-  }
+  };
   static defaultProps = {
     onClick: () => {},
     onHeadingClick: () => {},
-  }
+  };
   state = {
     open: this.props.open,
-  }
-  handleClick = (evt) => {
+  };
+  handleClick = evt => {
     this.props.onClick(evt);
-  }
-  handleHeadingClick = (evt) => {
+  };
+  handleHeadingClick = evt => {
     const open = !this.state.open;
     this.setState({ open });
     this.props.onHeadingClick({ isOpen: open, event: evt });
-  }
-  handleKeyPress = (evt) => {
+  };
+  handleKeyPress = evt => {
     const isKeyPressTarget = evt.target === evt.currentTarget;
     const isValidKeyPress = [13, 32].indexOf(evt.which) !== -1;
 
     if (isKeyPressTarget && isValidKeyPress) {
       this.handleHeadingClick(evt);
     }
-  }
+  };
   render() {
     const {
       className,
@@ -41,19 +42,33 @@ class AccordionItem extends Component {
       children,
       onClick, // eslint-disable-line no-unused-vars
       onHeadingClick, // eslint-disable-line no-unused-vars
-      ...other,
+      ...other
     } = this.props;
 
-    const classNames = classnames({
-      'bx--accordion__item--active': this.state.open,
-    },
-    'bx--accordion__item',
-    className,
+    const classNames = classnames(
+      {
+        'bx--accordion__item--active': this.state.open,
+      },
+      'bx--accordion__item',
+      className
     );
     return (
-      <li className={classNames} onClick={this.handleClick} onKeyPress={this.handleKeyPress} {...other} tabIndex="0">
-        <div className="bx--accordion__heading" onClick={this.handleHeadingClick} >
-          <Icon className="bx--accordion__arrow" name="chevron--right" description="Expand/Collapse" />
+      <li
+        className={classNames}
+        onClick={this.handleClick}
+        onKeyPress={this.handleKeyPress}
+        {...other}
+        tabIndex="0"
+      >
+        <div
+          className="bx--accordion__heading"
+          onClick={this.handleHeadingClick}
+        >
+          <Icon
+            className="bx--accordion__arrow"
+            name="chevron--right"
+            description="Expand/Collapse"
+          />
           <p className="bx--accordion__title">{title}</p>
         </div>
         <div className="bx--accordion__content">{children}</div>

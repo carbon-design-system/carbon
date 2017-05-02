@@ -1,14 +1,15 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
-  className: React.PropTypes.string,
-  defaultToggled: React.PropTypes.bool,
-  onToggle: React.PropTypes.func,
-  id: React.PropTypes.string.isRequired,
-  toggled: React.PropTypes.bool,
-  labelA: React.PropTypes.string.isRequired,
-  labelB: React.PropTypes.string.isRequired,
+  className: PropTypes.string,
+  defaultToggled: PropTypes.bool,
+  onToggle: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  toggled: PropTypes.bool,
+  labelA: PropTypes.string.isRequired,
+  labelB: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -18,11 +19,20 @@ const defaultProps = {
   onToggle: () => {},
 };
 
-const Toggle = ({ className, defaultToggled, toggled, onToggle, id, labelA, labelB, ...other }) => {
+const Toggle = ({
+  className,
+  defaultToggled,
+  toggled,
+  onToggle,
+  id,
+  labelA,
+  labelB,
+  ...other
+}) => {
   let input;
   const wrapperClasses = classNames({
     'bx--form-item': true,
-    [className]: className
+    [className]: className,
   });
 
   const checkedProps = {};
@@ -41,13 +51,17 @@ const Toggle = ({ className, defaultToggled, toggled, onToggle, id, labelA, labe
         type="checkbox"
         id={id}
         className="bx--toggle"
-        onChange={evt => { onToggle(input.checked, id, evt); }}
-        ref={el => { input = el; }}
+        onChange={evt => {
+          onToggle(input.checked, id, evt);
+        }}
+        ref={el => {
+          input = el;
+        }}
       />
 
       <label className="bx--toggle__label" htmlFor={id}>
         <span className="bx--toggle__text--left">{labelA}</span>
-        <span className="bx--toggle__appearance"></span>
+        <span className="bx--toggle__appearance" />
         <span className="bx--toggle__text--right">{labelB}</span>
       </label>
     </div>

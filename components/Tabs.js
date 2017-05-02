@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Icon from './Icon';
@@ -80,11 +81,7 @@ class Tabs extends React.Component {
   };
 
   render() {
-    const {
-      className,
-      triggerHref,
-      ...other
-    } = this.props;
+    const { className, triggerHref, ...other } = this.props;
 
     const classes = {
       tabs: classNames('bx--tabs', className),
@@ -107,10 +104,7 @@ class Tabs extends React.Component {
     });
 
     const tabContentWithProps = React.Children.map(tabsWithProps, tab => {
-      const {
-        children,
-        selected,
-      } = tab.props;
+      const { children, selected } = tab.props;
 
       return (
         <TabContent

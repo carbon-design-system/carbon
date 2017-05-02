@@ -1,17 +1,17 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
 class FileUploader extends React.Component {
-
   static propTypes = {
-    className: React.PropTypes.string,
-    tabIndex: React.PropTypes.number,
-    id: React.PropTypes.string.isRequired,
-    labelDescription: React.PropTypes.string,
-    multipleFilesText: React.PropTypes.func,
-    buttonText: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-  }
+    className: PropTypes.string,
+    tabIndex: PropTypes.number,
+    id: PropTypes.string.isRequired,
+    labelDescription: PropTypes.string,
+    multipleFilesText: PropTypes.func,
+    buttonText: PropTypes.string,
+    onChange: PropTypes.func,
+  };
 
   static defaultProps = {
     className: 'bx--file__label',
@@ -20,14 +20,14 @@ class FileUploader extends React.Component {
     multipleFilesText: count => `${count} files selected`,
     buttonText: 'Choose Files',
     onChange: () => {},
-  }
+  };
 
   state = {
     count: 0,
     text: this.props.labelDescription,
-  }
+  };
 
-  updateLabel = (evt) => {
+  updateLabel = evt => {
     const element = evt.target;
     let fileName = '';
 
@@ -43,18 +43,18 @@ class FileUploader extends React.Component {
       this.setState({ text: fileName });
     }
     this.props.onChange(evt);
-  }
+  };
 
   render() {
     const {
       className,
       tabIndex,
       id,
-      labelDescription,  // eslint-disable-line no-unused-vars
+      labelDescription, // eslint-disable-line no-unused-vars
       multipleFilesText,
       buttonText,
       onChange, // eslint-disable-line no-unused-vars
-      ...other,
+      ...other
     } = this.props;
 
     const fileUploaderProps = {
@@ -76,7 +76,9 @@ class FileUploader extends React.Component {
           data-button-title={buttonText}
           className={fileUploaderClasses}
           htmlFor={id}
-        >{this.state.text}</label>
+        >
+          {this.state.text}
+        </label>
         <input
           data-file-uploader
           data-multiple-caption={multipleFilesText(this.state.count)}

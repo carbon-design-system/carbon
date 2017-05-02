@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
@@ -12,19 +13,13 @@ const defaultProps = {
   expanded: false,
 };
 
-const TableRowExpanded = (props) => {
-  const {
-    children,
-    className,
-    colSpan,
-    expanded,
-    ...other,
-  } = props;
+const TableRowExpanded = props => {
+  const { children, className, colSpan, expanded, ...other } = props;
 
   const tableRowClasses = classNames(
     className,
     'bx--table-row',
-    'bx--expandable-row',
+    'bx--expandable-row'
   );
 
   if (!expanded) {
@@ -32,10 +27,7 @@ const TableRowExpanded = (props) => {
   }
 
   return (
-    <tr
-      {...other}
-      className={tableRowClasses}
-    >
+    <tr {...other} className={tableRowClasses}>
       <td colSpan={colSpan}>
         {children}
       </td>
@@ -47,4 +39,3 @@ TableRowExpanded.propTypes = propTypes;
 TableRowExpanded.defaultProps = defaultProps;
 
 export default TableRowExpanded;
-

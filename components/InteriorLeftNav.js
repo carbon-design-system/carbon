@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 /* global window */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 import InteriorLeftNavList from './InteriorLeftNavList';
 import InteriorLeftNavItem from './InteriorLeftNavItem';
@@ -37,9 +38,8 @@ class InteriorLeftNav extends Component {
     evt.stopPropagation();
 
     // 13 = Enter, 32 = Spacebar
-    const acceptableEvent = evt.which === 13 ||
-      evt.which === 32 ||
-      evt.type === 'click';
+    const acceptableEvent =
+      evt.which === 13 || evt.which === 32 || evt.type === 'click';
     const diffHref = href !== this.state.activeHref;
     if (acceptableEvent && diffHref) {
       this.setState({ activeHref: href });
@@ -116,7 +116,7 @@ class InteriorLeftNav extends Component {
       {
         'bx--interior-left-nav--collapsed': !this.state.open,
       },
-      className,
+      className
     );
 
     return (

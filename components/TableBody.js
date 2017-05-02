@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
@@ -6,23 +7,13 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const TableBody = (props) => {
-  const {
-    children,
-    className,
-    ...other,
-  } = props;
+const TableBody = props => {
+  const { children, className, ...other } = props;
 
-  const tableBodyClasses = classNames(
-    className,
-    'bx--table-body',
-  );
+  const tableBodyClasses = classNames(className, 'bx--table-body');
 
   return (
-    <tbody
-      {...other}
-      className={tableBodyClasses}
-    >
+    <tbody {...other} className={tableBodyClasses}>
       {children}
     </tbody>
   );
@@ -31,4 +22,3 @@ const TableBody = (props) => {
 TableBody.propTypes = propTypes;
 
 export default TableBody;
-

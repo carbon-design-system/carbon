@@ -1,16 +1,14 @@
-import React, { PropTypes, Component } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 class AppContainer extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-  }
+  };
 
   render() {
-    const {
-      children,
-      ...other,
-    } = this.props;
+    const { children, ...other } = this.props;
 
     return (
       <div {...other} className="bx--body">

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
 const propTypes = {
@@ -31,7 +32,13 @@ function createCardStatusContent(status, labels) {
     return (
       <div className={cardStatusClassName}>
         <div className={cardStatusTextClassName}>
-          {labels[`${statusText.replace(/(-(\w))/g, (match, separator, letter) => letter.toUpperCase())}Text`]}
+          {
+            labels[
+              `${statusText.replace(/(-(\w))/g, (match, separator, letter) =>
+                letter.toUpperCase()
+              )}Text`
+            ]
+          }
         </div>
       </div>
     );
@@ -39,7 +46,14 @@ function createCardStatusContent(status, labels) {
   return '';
 }
 
-const CardStatus = ({ className, status, runningText, notRunningText, stoppedText, ...other }) => {
+const CardStatus = ({
+  className,
+  status,
+  runningText,
+  notRunningText,
+  stoppedText,
+  ...other
+}) => {
   const cardStatusClasses = classNames({
     'bx--card-footer__app-status': true,
     [className]: className,
