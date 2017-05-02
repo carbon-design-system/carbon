@@ -22,18 +22,9 @@ storiesOf('OverflowMenu', module)
     `,
     () => (
       <OverflowMenu {...overflowMenuEvents}>
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Stop App"
-        />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Restart App"
-        />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Rename App"
-        />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Stop App" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Restart App" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Rename App" />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
           itemText="Edit Routes and Access"
@@ -45,7 +36,8 @@ storiesOf('OverflowMenu', module)
           isDelete
         />
       </OverflowMenu>
-  ))
+    )
+  )
   .addWithInfo(
     'floating menu',
     `
@@ -54,18 +46,9 @@ storiesOf('OverflowMenu', module)
     `,
     () => (
       <OverflowMenu {...overflowMenuEvents} floatingMenu>
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Stop App"
-        />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Restart App"
-        />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Rename App"
-        />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Stop App" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Restart App" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Rename App" />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
           itemText="Edit Routes and Access"
@@ -77,4 +60,5 @@ storiesOf('OverflowMenu', module)
           isDelete
         />
       </OverflowMenu>
-  ));
+    )
+  );

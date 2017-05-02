@@ -24,6 +24,7 @@ class OverflowMenu extends Component {
     iconName: PropTypes.string,
     menuOffset: PropTypes.object,
     menuOffsetFlip: PropTypes.object,
+    iconClass: PropTypes.string,
   };
 
   static defaultProps = {
@@ -100,18 +101,27 @@ class OverflowMenu extends Component {
       floatingMenu,
       menuOffset,
       menuOffsetFlip,
+      iconClass,
       ...other
     } = this.props;
 
     const overflowMenuClasses = classNames(
       this.props.className,
-      'bx--overflow-menu'
+      'bx--overflow-menu',
+      {
+        'bx--overflow-menu--open': this.state.open,
+      }
     );
 
     const overflowMenuOptionsClasses = classNames('bx--overflow-menu-options', {
       'bx--overflow-menu--flip': this.props.flipped,
       'bx--overflow-menu-options--open': this.state.open,
     });
+
+    const overflowMenuIconClasses = classNames(
+      'bx--overflow-menu__icon',
+      iconClass
+    );
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
@@ -129,10 +139,10 @@ class OverflowMenu extends Component {
           }}
         >
           <Icon
-            className="bx--overflow-menu__icon"
+            className={overflowMenuIconClasses}
             name={iconName}
             description={iconDescription}
-            width="100%"
+            style={{ width: '100%' }}
           />
           {floatingMenu
             ? <FloatingMenu

@@ -6,6 +6,7 @@
 @import 'carbon-components/scss/globals/scss/styles';
 
 html {
+  @include helvetica;
   background-color: #F5F7FA;
 }
 

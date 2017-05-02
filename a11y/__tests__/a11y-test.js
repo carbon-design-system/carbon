@@ -59,6 +59,14 @@ import TextArea from '../../components/TextArea';
 import TextInput from '../../components/TextInput';
 import Toggle from '../../components/Toggle';
 import Tooltip from '../../components/Tooltip';
+import {
+  Toolbar,
+  ToolbarItem,
+  ToolbarOption,
+  ToolbarTitle,
+  ToolbarDivider,
+} from '../../components/Toolbar';
+import ToolbarSearch from '../../components/ToolbarSearch';
 import UnorderedList from '../../components/UnorderedList';
 
 describe('a11y scan', () => {
@@ -653,6 +661,64 @@ describe('a11y scan', () => {
     const wrapper = render(<TextArea id="id" labelText="labelText" />);
 
     AAT.getCompliance(wrapper.html(), 'TextArea', data => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('Toolbar', done => {
+    const wrapper = render(<Toolbar><div>Children</div></Toolbar>);
+
+    AAT.getCompliance(wrapper.html(), 'Toolbar', data => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('ToolbarItem', done => {
+    const wrapper = render(
+      <ToolbarItem type="search" placeHolderText="Search" />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'ToolbarItem', data => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('ToolbarTitle', done => {
+    const wrapper = render(<ToolbarTitle title="Filter by" />);
+
+    AAT.getCompliance(wrapper.html(), 'ToolbarTitle', data => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('ToolbarOption', done => {
+    const wrapper = render(<ToolbarOption />);
+
+    AAT.getCompliance(wrapper.html(), 'ToolbarOption', data => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('ToolbarDivider', done => {
+    const wrapper = render(<ToolbarDivider />);
+
+    AAT.getCompliance(wrapper.html(), 'ToolbarDivider', data => {
+      expect(AAT.assertCompliance(data)).toEqual(0);
+      done();
+    });
+  });
+
+  it('ToolbarSearch', done => {
+    const wrapper = render(
+      <ToolbarSearch placeHolderText="Placeholder text" />
+    );
+
+    AAT.getCompliance(wrapper.html(), 'ToolbarSearch', data => {
       expect(AAT.assertCompliance(data)).toEqual(0);
       done();
     });

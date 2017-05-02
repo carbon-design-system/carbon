@@ -36,7 +36,7 @@ const OverflowMenuItem = ({
   );
 
   const overflowMenuItemClasses = classNames(
-    ('bx--overflow-menu-options__option': true),
+    'bx--overflow-menu-options__option',
     {
       'bx--overflow-menu--divider': hasDivider,
       'bx--overflow-menu-options__option--danger': isDelete,

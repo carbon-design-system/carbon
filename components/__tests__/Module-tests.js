@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 describe('Module', () => {
   describe('Renders as expected', () => {
     const testModule = shallow(
-      <Module className="extra-class"><ModuleBody>Body</ModuleBody></Module>,
+      <Module className="extra-class"><ModuleBody>Body</ModuleBody></Module>
     );
 
     it('renders a Module', () => {
