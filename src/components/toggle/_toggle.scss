@@ -82,8 +82,15 @@
     }
   }
 
-  .bx--toggle:focus + .bx--toggle__label .bx--toggle__appearance {
-    @include focus-outline;
+  .bx--toggle:focus + .bx--toggle__label {
+    .bx--toggle__appearance:before {
+      outline: 1px solid transparent;
+    }
+
+    .bx--toggle__appearance:after {
+      box-shadow: 0 0 0 3px $color__blue-20;
+      outline: 1px solid transparent;
+    }
   }
 
   .bx--toggle:disabled + .bx--toggle__label {
