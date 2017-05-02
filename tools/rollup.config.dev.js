@@ -17,6 +17,7 @@ module.exports = {
     }),
     babel({
       exclude: 'node_modules/**',
+      plugins: ['external-helpers'],
     }),
   ],
   dest: 'demo/demo.js',
