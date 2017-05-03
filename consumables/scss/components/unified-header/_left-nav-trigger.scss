@@ -31,7 +31,7 @@
       display: block;
       content: '';
       transition: all $transition--base ease;
-      background: $color__blue-40;
+      background: $color__white;
     }
 
     span:before {
@@ -54,12 +54,17 @@
         span {
           background: transparent;
         }
+        span:before,
+        span:after {
+          background: $color__blue-40;
+        }
       }
 
       span:before,
       span:after {
         top: 0;
         width: rem(25.46px);
+        background: $color__blue-90;
       }
 
       span:before {
@@ -73,157 +78,18 @@
   }
 
   &:focus {
-    outline: 0;
+    outline: -webkit-focus-ring-color auto 5px;
   }
 
   &:hover,
   &:focus {
-    background-color: $color__blue-30;
 
     span,
     span:before,
     span:after {
-      background: $color__white;
+      background: $color__blue-30;
     }
   }
-
-  // &--apps {
-
-  //   span,
-  //   span:before,
-  //   span:after {
-  //     background: $color__teal-40;
-  //   }
-
-  //   &:focus {
-  //     outline: 0;
-  //   }
-
-  //   &:hover,
-  //   &:focus {
-  //     background-color: $color__teal-50;
-
-  //     span,
-  //     span:before,
-  //     span:after {
-  //       background: $color__white;
-  //     }
-  //   }
-
-  //   &.bx--left-nav__trigger--active {
-
-  //     span {
-  //       background: transparent;
-  //     }
-
-  //     span:before,
-  //     span:after {
-  //       background: $color__teal-50;
-  //     }
-
-  //     &:hover,
-  //     &:focus {
-  //       background-color: $color__teal-50;
-
-  //       span:before,
-  //       span:after {
-  //         background: $color__white;
-  //       }
-  //     }
-  //   }
-  // }
-
-  // &--services {
-
-  //   span,
-  //   span:before,
-  //   span:after {
-  //     background: $color__purple-30;
-  //   }
-
-  //   &:focus {
-  //     outline: 0;
-  //   }
-
-  //   &:hover,
-  //   &:focus {
-  //     background-color: $color__purple-60;
-
-  //     span,
-  //     span:before,
-  //     span:after {
-  //       background: $color__white;
-  //     }
-  //   }
-
-  //   &.bx--left-nav__trigger--active {
-
-  //     span {
-  //       background: transparent;
-  //     }
-
-  //     span:before,
-  //     span:after {
-  //       background: $color__purple-60;
-  //     }
-
-  //     &:hover,
-  //     &:focus {
-  //       background-color: $color__purple-60;
-
-  //       span:before,
-  //       span:after {
-  //         background: $color__white;
-  //       }
-  //     }
-  //   }
-  // }
-
-  // &--infrastructure {
-
-  //   span,
-  //   span:before,
-  //   span:after {
-  //     background: $color__blue-40;
-  //   }
-
-  //   &:focus {
-  //     outline: 0;
-  //   }
-
-  //   &:hover,
-  //   &:focus {
-  //     background-color: $color__blue-51;
-
-  //     span,
-  //     span:before,
-  //     span:after {
-  //       background: $color__white;
-  //     }
-  //   }
-
-  //   &.bx--left-nav__trigger--active {
-
-  //     span {
-  //       background: transparent;
-  //     }
-
-  //     span:before,
-  //     span:after {
-  //       background: $color__blue-51;
-  //     }
-
-  //     &:hover,
-  //     &:focus {
-  //       background-color: $color__blue-51;
-
-  //       span:before,
-  //       span:after {
-  //         background: $color__white;
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 }
