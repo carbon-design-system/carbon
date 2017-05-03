@@ -41,39 +41,40 @@
     span:after {
       bottom: rem(-6px);
     }
+    
+  }
 
-    .bx--left-nav__trigger--active & {
-      left: rem(18px);
+  &.bx--left-nav__trigger--active .bx--left-nav__trigger--btn {
+    left: rem(18px);
 
+    span {
+      background: transparent !important;
+    }
+
+    &:hover,
+    &:focus {
       span {
-        background: transparent !important;
+        background: transparent;
       }
-
-      &:hover,
-      &:focus {
-        span {
-          background: transparent;
-        }
-        span:before,
-        span:after {
-          background: $color__blue-40;
-        }
-      }
-
       span:before,
       span:after {
-        top: 0;
-        width: rem(25.46px);
-        background: $color__blue-90;
+        background: $color__blue-40;
       }
+    }
 
-      span:before {
-        transform: rotate(45deg);
-      }
+    span:before,
+    span:after {
+      top: 0;
+      width: rem(25.46px);
+      background: $color__blue-90;
+    }
 
-      span:after {
-        transform: rotate(-45deg);
-      }
+    span:before {
+      transform: rotate(45deg);
+    }
+
+    span:after {
+      transform: rotate(-45deg);
     }
   }
 
