@@ -11,6 +11,20 @@
   cursor: pointer;
   z-index: 9999;
 
+  &:focus {
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+
+  &:hover,
+  &:focus {
+
+    span,
+    span:before,
+    span:after {
+      background: $color__blue-40;
+    }
+  }
+
   &--btn {
     @include reset;
     position: absolute;
@@ -44,18 +58,12 @@
     
   }
 
-  &.bx--left-nav__trigger--active .bx--left-nav__trigger--btn {
-    left: rem(18px);
-
-    span {
-      background: transparent !important;
-    }
-
+  &.bx--left-nav__trigger--active {
     &:hover,
     &:focus {
-      span {
-        background: transparent;
-      }
+      // span {
+      //   background: transparent;
+      // }
       span:before,
       span:after {
         background: $color__blue-40;
@@ -76,21 +84,14 @@
     span:after {
       transform: rotate(-45deg);
     }
-  }
 
-  &:focus {
-    outline: -webkit-focus-ring-color auto 5px;
-  }
+    .bx--left-nav__trigger--btn {
+      left: rem(18px);
 
-  &:hover,
-  &:focus {
-
-    span,
-    span:before,
-    span:after {
-      background: $color__blue-30;
+      span {
+        background: transparent !important;
+      }
     }
   }
 }
-
 }
