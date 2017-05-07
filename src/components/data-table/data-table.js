@@ -26,25 +26,15 @@ class DataTable
     super(element, options);
 
     this.container = element.parentNode; // requires the immediate parent to be the container
-    this.expandCells = [
-      ...this.element.querySelectorAll(this.options.selectorExpandCells),
-    ];
-    this.expandableRows = [
-      ...this.element.querySelectorAll(this.options.selectorExpandableRows),
-    ];
-    this.parentRows = [
-      ...this.element.querySelectorAll(this.options.selectorParentRows),
-    ];
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
+    this.expandCells = [];
+    this.expandableRows = [];
+    this.parentRows = [];
+    this.overflowInitialized = false;
 
-    if (!this.tableBody) {
-      throw new Error('Cannot find the table body.');
-    }
+    this.refreshRows();
 
-    this._zebraStripe();
-    this._initExpandableRows();
-
-    this.element.addEventListener('click', evt => {
+    this.element.addEventListener('click', (evt) => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
       if (eventElement) {
         this._toggleState(eventElement, evt);
@@ -85,22 +75,25 @@ class DataTable
   /**
    * Zebra stripes - done in javascript to handle expandable rows
    */
-  _zebraStripe = () => {
-    this.parentRows.forEach((item, index) => {
+  _zebraStripe = (parentRows) => {
+    parentRows.forEach((item, index) => {
       if (index % 2 === 0) {
         item.classList.add(this.options.classParentRowEven);
         if (item.nextElementSibling && item.nextElementSibling.classList.contains(this.options.classExpandableRow)) {
           item.nextElementSibling.classList.add(this.options.classExpandableRowEven);
         }
+      } else {
+        item.classList.remove(this.options.classParentRowEven);
       }
     });
-  };
+  }
+
 
   /**
    * Find all expandable rows and remove them from the DOM
    */
-  _initExpandableRows = () => {
-    this.expandableRows.forEach((item) => {
+  _initExpandableRows = (expandableRows) => {
+    expandableRows.forEach((item) => {
       item.classList.remove(this.options.classExpandableRowHidden);
       this.tableBody.removeChild(item);
     });
@@ -132,7 +125,7 @@ class DataTable
   /**
    * On trigger, flip the sort icon
    */
-  _toggleSort = detail => {
+  _toggleSort = (detail) => {
     const { element, previousValue } = detail;
 
     if (!previousValue || previousValue === 'descending') {
@@ -169,31 +162,18 @@ class DataTable
    * On fire, create the parent child rows + striping
    */
   refreshRows = () => {
-    const newExpandCells = [
-      ...this.element.querySelectorAll(this.options.selectorExpandCells),
-    ];
-    const newExpandableRows = [
-      ...this.element.querySelectorAll(this.options.selectorExpandableRows),
-    ];
-    const newParentRows = [
-      ...this.element.querySelectorAll(this.options.selectorParentRows),
-    ];
+    const newExpandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
+    const newExpandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
+    const newParentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
 
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
-      const diffParentRows = newParentRows.filter(
-        newRow => !this.parentRows.some(oldRow => oldRow === newRow),
-      );
+      const diffParentRows = newParentRows.filter(newRow => !this.parentRows.some(oldRow => oldRow === newRow));
 
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
-        const diffExpandableRows = diffParentRows.map(
-          newRow => newRow.nextElementSibling,
-        );
-        const mergedExpandableRows = [
-          ...this.expandableRows,
-          ...diffExpandableRows,
-        ];
+        const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
+        const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
         this._initExpandableRows(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
@@ -210,7 +190,7 @@ class DataTable
 
     this.expandCells = newExpandCells;
     this.parentRows = newParentRows;
-  };
+  }
 
   static components = new WeakMap();
 
