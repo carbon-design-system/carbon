@@ -29,10 +29,8 @@
     "style guide"
   ],
   "dependencies": {
+    "carbon-icons": "5.1.2",
     "lodash.debounce": "^4.0.8"
-  },
-  "peerDependencies": {
-    "carbon-icons": "5.1.2"
   },
   "devDependencies": {
     "adaro": "1.0.4",

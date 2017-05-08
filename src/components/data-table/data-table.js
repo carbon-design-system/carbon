@@ -1,10 +1,12 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch
+  from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-class DataTable extends mixin(createComponent, initComponentBySearch, eventedState) {
+class DataTable
+  extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * Data Table
    * @extends CreateComponent
@@ -24,17 +26,13 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     super(element, options);
 
     this.container = element.parentNode; // requires the immediate parent to be the container
-    this.expandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
-    this.expandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
-    this.parentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
+    this.expandCells = [];
+    this.expandableRows = [];
+    this.parentRows = [];
+    this.overflowInitialized = false;
 
-    if (!this.tableBody) {
-      throw new Error('Cannot find the table body.');
-    }
-
-    this._zebraStripe();
-    this._initExpandableRows();
+    this.refreshRows();
 
     this.element.addEventListener('click', (evt) => {
       const eventElement = eventMatches(evt, this.options.eventTrigger);
@@ -62,8 +60,8 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
    */
   _toggleState = (element, evt) => {
     const data = element.dataset;
-    const label = (data.label) ? data.label : '';
-    const previousValue = (data.previousValue) ? data.previousValue : '';
+    const label = data.label ? data.label : '';
+    const previousValue = data.previousValue ? data.previousValue : '';
     const initialEvt = evt;
     this.changeState({
       group: data.event,
@@ -72,48 +70,57 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
       previousValue,
       initialEvt,
     });
-  }
+  };
 
   /**
    * Zebra stripes - done in javascript to handle expandable rows
    */
-  _zebraStripe = () => {
-    this.parentRows.forEach((item, index) => {
+  _zebraStripe = (parentRows) => {
+    parentRows.forEach((item, index) => {
       if (index % 2 === 0) {
         item.classList.add(this.options.classParentRowEven);
         if (item.nextElementSibling && item.nextElementSibling.classList.contains(this.options.classExpandableRow)) {
           item.nextElementSibling.classList.add(this.options.classExpandableRowEven);
         }
+      } else {
+        item.classList.remove(this.options.classParentRowEven);
       }
     });
   }
 
+
   /**
    * Find all expandable rows and remove them from the DOM
    */
-  _initExpandableRows = () => {
-    this.expandableRows.forEach((item) => {
+  _initExpandableRows = (expandableRows) => {
+    expandableRows.forEach((item) => {
       item.classList.remove(this.options.classExpandableRowHidden);
       this.tableBody.removeChild(item);
     });
-  }
+  };
 
   /**
    * On trigger, insert the expandable row back in
    */
   _toggleRowExpand = (detail) => {
     const element = detail.element;
-    const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
+    const parent = eventMatches(
+      detail.initialEvt,
+      this.options.eventParentContainer,
+    );
 
     const index = this.expandCells.indexOf(element);
-    if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
+    if (
+      element.dataset.previousValue === undefined ||
+      element.dataset.previousValue === 'expanded'
+    ) {
       element.dataset.previousValue = 'collapsed';
       this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
     } else {
       this.tableBody.removeChild(parent.nextElementSibling);
       element.dataset.previousValue = 'expanded';
     }
-  }
+  };
 
   /**
    * On trigger, flip the sort icon
@@ -128,22 +135,28 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
       element.dataset.previousValue = 'descending';
       element.classList.remove(this.options.classTableSortAscending);
     }
-  }
+  };
 
   /**
    * On trigger, check all checkboxes
    */
   _toggleSelectAll = (detail) => {
     const { element, previousValue } = detail;
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+    const inputs = [
+      ...this.element.querySelectorAll(this.options.selectorCheckbox),
+    ];
     if (!previousValue || previousValue === 'toggled') {
-      inputs.forEach((item) => { item.checked = true; }); // eslint-disable-line no-param-reassign
+      inputs.forEach((item) => {
+        item.checked = true; // eslint-disable-line no-param-reassign
+      });
       element.dataset.previousValue = 'off';
     } else {
-      inputs.forEach((item) => { item.checked = false; }); // eslint-disable-line no-param-reassign
+      inputs.forEach((item) => {
+        item.checked = false; // eslint-disable-line no-param-reassign
+      });
       element.dataset.previousValue = 'toggled';
     }
-  }
+  };
 
   /**
    * On fire, create the parent child rows + striping
@@ -161,16 +174,16 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
         const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
-        this.initExpandableRows(diffExpandableRows);
+        this._initExpandableRows(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
 
-      this.zebraStripe(newParentRows);
+      this._zebraStripe(newParentRows);
     } else {
-      this.zebraStripe(newParentRows);
+      this._zebraStripe(newParentRows);
 
       if (newExpandableRows.length > 0) {
-        this.initExpandableRows(newExpandableRows);
+        this._initExpandableRows(newExpandableRows);
         this.expandableRows = newExpandableRows;
       }
     }
@@ -207,7 +220,7 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     eventAfterSelectAll: 'responsive-table-aftertoggleselectall',
     eventTrigger: '[data-event]',
     eventParentContainer: '[data-parent-row]',
-  }
+  };
 }
 
 export default DataTable;
