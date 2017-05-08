@@ -58,7 +58,7 @@ class LeftNav extends mixin(createCoponent, initComponent) {
 
   hookOpenActions() {
     const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
-    
+
     openBtn.addEventListener('click', () => {
       this.toggleMenu();
     });
