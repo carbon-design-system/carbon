@@ -21,6 +21,23 @@
       border-right: 1px solid $color__gray-1;
     }
 
+    .left-nav-group {
+      @include reset;
+      padding-top: .5625rem;
+
+      @include light-ui {
+        background-color: $color__white;
+      }
+
+      &__title {
+        text-transform: uppercase;
+        color: $color__blue-51;
+        padding: .25rem 1.25rem;
+        font-size: 70%;
+        font-weight: 600;
+      }
+    }
+
     .left-nav-list {
       @include reset;
       list-style: none;
@@ -28,10 +45,6 @@
       flex-direction: column;
       background-color: $color__navy-gray-3;
       padding-top: 1.5rem;
-
-      @include light-ui {
-        background-color: $color__white;
-      }
 
       &__item {
         @include reset;
