@@ -5,6 +5,7 @@
 $css--font-face: false !default;
 $css--helpers: true !default;
 $css--body: true !default;
+$css--typography: true !default;
 $css--reset: false !default;
 
 @import 'colors';
@@ -16,6 +17,7 @@ $css--reset: false !default;
 @import 'import-once';
 @import 'css--reset';
 @import 'css--font-face';
+@import 'css--typography';
 @import 'css--helpers';
 @import 'css--body';
 
