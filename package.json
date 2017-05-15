@@ -1,6 +1,6 @@
 {
   "name": "@console/bluemix-components-react",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "A React wrapper for bluemix-components",
   "main": "dist/index.js",
   "scripts": {
