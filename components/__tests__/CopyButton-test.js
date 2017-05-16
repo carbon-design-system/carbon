@@ -8,7 +8,7 @@ jest.useFakeTimers();
 describe('CopyButton', () => {
   describe('Renders common props as expected', () => {
     const wrapper = shallow(
-      <CopyButton tabIndex={2} className="extra-class"><div className="test"></div></CopyButton>
+      <CopyButton tabIndex={2} className="extra-class"><div className="test" /></CopyButton>
     );
 
     it('Renders children as expected', () => {
@@ -32,7 +32,7 @@ describe('CopyButton', () => {
       expect(wrapper.hasClass('bx--btn--copy')).toBe(true);
       expect(wrapper.find('.bx--btn--copy__feedback').length).toBe(1);
       expect(wrapper.find(Icon).length).toBe(1);
-      expect(wrapper.find(Icon).props().name).toBe('add--glyph');
+      expect(wrapper.find(Icon).props().name).toBe('copy--glyph');
     });
 
     it('Should have default props', () => {
@@ -57,7 +57,9 @@ describe('CopyButton', () => {
 
     it('Should be able to specify the feedback message', () => {
       const feedbackWrapper = mount(<CopyButton feedback="Copied!">Copy</CopyButton>);
-      expect(feedbackWrapper.find('.bx--btn--copy__feedback').props()['data-feedback']).toBe('Copied!');
+      expect(feedbackWrapper.find('.bx--btn--copy__feedback').props()['data-feedback']).toBe(
+        'Copied!'
+      );
     });
   });
 
@@ -71,7 +73,9 @@ describe('CopyButton', () => {
     });
 
     it('Should show feedback for a limited amount of time', () => {
-      const feedbackWrapper = mount(<CopyButton feedback="Copied!" feedbackTimeout={5000}>Copy</CopyButton>);
+      const feedbackWrapper = mount(
+        <CopyButton feedback="Copied!" feedbackTimeout={5000}>Copy</CopyButton>
+      );
       expect(feedbackWrapper.state().showFeedback).toBe(false);
       feedbackWrapper.simulate('click');
       expect(feedbackWrapper.state().showFeedback).toBe(true);
