@@ -54,27 +54,29 @@ gulp.task('browser-sync', ['build:dev'], () => {
  */
 
 // Use: npm run prebuild
-gulp.task('clean', () => del([
-  'scss',
-  'css',
-  'es',
-  'umd',
-  'scripts',
-  'html',
-  'dist',
-  'demo/**/*.{js,map}',
-  '!demo/js/demo-switcher.js',
-  '!demo/js/theme-switcher.js',
-  '!demo/index.js',
-  '!demo/polyfills/*.js',
-]));
+gulp.task('clean', () =>
+  del([
+    'scss',
+    'css',
+    'es',
+    'umd',
+    'scripts',
+    'html',
+    'dist',
+    'demo/**/*.{js,map}',
+    '!demo/js/demo-switcher.js',
+    '!demo/js/theme-switcher.js',
+    '!demo/index.js',
+    '!demo/polyfills/*.js',
+  ])
+);
 
 /**
  * JavaScript Tasks
  */
 
-gulp.task('scripts:dev', (cb) => {
-  exec('./node_modules/.bin/rollup -c tools/rollup.config.dev.js', (err) => {
+gulp.task('scripts:dev', cb => {
+  exec('./node_modules/.bin/rollup -c tools/rollup.config.dev.js', err => {
     browserSync.reload();
     cb(err);
   });
@@ -84,81 +86,96 @@ gulp.task('scripts:umd', () => {
   const srcFiles = ['./src/**/*.js'];
   const babelOpts = {
     presets: [
-      ['env', {
-        targets: {
-          browsers: ['last 1 version', 'ie >= 11'],
+      [
+        'env',
+        {
+          targets: {
+            browsers: ['last 1 version', 'ie >= 11'],
+          },
         },
-      }],
+      ],
     ],
     plugins: ['transform-es2015-modules-umd', 'transform-class-properties'],
   };
 
-  return gulp.src(srcFiles)
-    .pipe(babel(babelOpts))
-    .pipe(gulp.dest('umd/'));
+  return gulp.src(srcFiles).pipe(babel(babelOpts)).pipe(gulp.dest('umd/'));
 });
-
 
 gulp.task('scripts:es', () => {
   const srcFiles = ['./src/**/*.js'];
   const babelOpts = {
     presets: [
-      ['env', {
-        modules: false,
-        targets: {
-          browsers: ['last 1 version', 'ie >= 11'],
+      [
+        'env',
+        {
+          modules: false,
+          targets: {
+            browsers: ['last 1 version', 'ie >= 11'],
+          },
         },
-      }],
+      ],
     ],
     plugins: ['transform-class-properties'],
   };
 
-  return gulp.src(srcFiles)
-    .pipe(babel(babelOpts))
-    .pipe(gulp.dest('es/'));
+  return gulp.src(srcFiles).pipe(babel(babelOpts)).pipe(gulp.dest('es/'));
 });
 
-gulp.task('scripts:rollup', (cb) => {
-  exec('./node_modules/.bin/rollup -c tools/rollup.config.js', (err) => {
+gulp.task('scripts:rollup', cb => {
+  exec('./node_modules/.bin/rollup -c tools/rollup.config.js', err => {
     cb(err);
   });
 });
 
-gulp.task('scripts:compiled', ['scripts:rollup'], (cb) => {
+gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
 
-  pump([
-    gulp.src(srcFile),
-    uglify(),
-    rename('carbon-components.min.js'),
-    gulp.dest('scripts'),
-  ], cb);
+  pump(
+    [
+      gulp.src(srcFile),
+      uglify(),
+      rename('carbon-components.min.js'),
+      gulp.dest('scripts'),
+    ],
+    cb
+  );
 });
 
 /**
  * Sass Tasks
  */
 
-
 gulp.task('sass:compiled', () => {
   function buildStyles(prod) {
-    return gulp.src('src/globals/scss/styles.scss')
+    return gulp
+      .src('src/globals/scss/styles.scss')
       .pipe(sourcemaps.init())
-      .pipe(sass({
-        outputStyle: prod ? 'compressed' : 'expanded',
-      }).on('error', sass.logError))
-      .pipe(autoprefixer({
-        browsers: ['> 1%', 'last 2 versions'],
-      }))
-      .pipe(rename((filePath) => {
-        if (filePath.basename === 'styles') {
-          filePath.basename = 'carbon-components';
-        }
-        if (prod) {
-          filePath.extname = `.min${filePath.extname}`;
-        }
-      }))
-      .pipe(sourcemaps.write('./'))
+      .pipe(
+        sass({
+          outputStyle: prod ? 'compressed' : 'expanded',
+        }).on('error', sass.logError)
+      )
+      .pipe(
+        autoprefixer({
+          browsers: ['> 1%', 'last 2 versions'],
+        })
+      )
+      .pipe(
+        rename(filePath => {
+          if (filePath.basename === 'styles') {
+            filePath.basename = 'carbon-components';
+          }
+          if (prod) {
+            filePath.extname = `.min${filePath.extname}`;
+          }
+        })
+      )
+      .pipe(
+        sourcemaps.write('.', {
+          includeContent: false,
+          sourceRoot: '../src',
+        })
+      )
       .pipe(gulp.dest('css'))
       .pipe(browserSync.stream());
   }
@@ -168,31 +185,35 @@ gulp.task('sass:compiled', () => {
 });
 
 gulp.task('sass:dev', () =>
-  gulp.src('demo/**/demo.scss')
+  gulp
+    .src('demo/**/demo.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass({
-      outputStyle: 'expanded',
-    }).on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['> 1%', 'last 2 versions'],
-    }))
+    .pipe(
+      sass({
+        outputStyle: 'expanded',
+      }).on('error', sass.logError)
+    )
+    .pipe(
+      autoprefixer({
+        browsers: ['> 1%', 'last 2 versions'],
+      })
+    )
     .pipe(rename({ dirname: '' }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('demo'))
-    .pipe(browserSync.stream()));
+    .pipe(browserSync.stream())
+);
 
 gulp.task('sass:source', () => {
   const srcFiles = './src/**/*.scss';
 
-  return gulp.src(srcFiles)
-    .pipe(gulp.dest('scss'));
+  return gulp.src(srcFiles).pipe(gulp.dest('scss'));
 });
 
 gulp.task('html:source', () => {
   const srcFiles = './src/components/**/*.html';
 
-  return gulp.src(srcFiles)
-    .pipe(gulp.dest('html'));
+  return gulp.src(srcFiles).pipe(gulp.dest('html'));
 });
 
 /**
@@ -200,50 +221,62 @@ gulp.task('html:source', () => {
  */
 
 gulp.task('lint', () =>
-  gulp.src([
-    'gulpfile.js',
-    'server.js',
-    'src/**/*.js',
-    'tests/**/*.js',
-    'demo/**/*.js',
-  ])
-  .pipe(eslint())
-  .pipe(eslint.format())
-  .pipe(eslint.failAfterError())
-  .pipe(eslint.results((results) => {
-    const count = results.warningCount;
-    if (count > 0) {
-      throw new gutil.PluginError('gulp-eslint', {
-        name: 'ESLintWarning',
-        message: `Has ${count} warning${count > 1 ? 's' : ''}`,
-      });
-    }
-  })));
+  gulp
+    .src([
+      'gulpfile.js',
+      'server.js',
+      'src/**/*.js',
+      'tests/**/*.js',
+      'demo/**/*.js',
+    ])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+    .pipe(
+      eslint.results(results => {
+        const count = results.warningCount;
+        if (count > 0) {
+          throw new gutil.PluginError('gulp-eslint', {
+            name: 'ESLintWarning',
+            message: `Has ${count} warning${count > 1 ? 's' : ''}`,
+          });
+        }
+      })
+    )
+);
 
 /**
  * JSDoc
  */
 
-gulp.task('jsdoc', (cb) => {
-  gulp.src('./src/**/*.js')
-    .pipe(babel({
-      plugins: ['transform-class-properties'],
-      babelrc: false,
-    }))
+gulp.task('jsdoc', cb => {
+  gulp
+    .src('./src/**/*.js')
+    .pipe(
+      babel({
+        plugins: ['transform-class-properties'],
+        babelrc: false,
+      })
+    )
     .pipe(gulp.dest('./docs/js/tmp'))
     .on('end', () => {
-      gulp.src(['README.md', 'docs/js/tmp/**/*.js'], { read: false })
-        .pipe(jsdoc(Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), { // eslint-disable-line global-require
-          opts: {
-            destination: './docs/js',
-          },
-        }), (err) => {
-          if (err) {
-            cb(err);
-          } else {
-            del('./docs/js/tmp', cb);
+      gulp.src(['README.md', 'docs/js/tmp/**/*.js'], { read: false }).pipe(
+        jsdoc(
+          Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), {
+            // eslint-disable-line global-require
+            opts: {
+              destination: './docs/js',
+            },
+          }),
+          err => {
+            if (err) {
+              cb(err);
+            } else {
+              del('./docs/js/tmp', cb);
+            }
           }
-        }));
+        )
+      );
     })
     .on('error', cb);
 });
@@ -254,18 +287,24 @@ gulp.task('jsdoc', (cb) => {
 
 gulp.task('test', ['test:unit', 'test:a11y']);
 
-gulp.task('test:unit', (done) => {
-  new Server({
-    configFile: path.resolve(__dirname, 'tests/karma.conf.js'),
-    singleRun: !cloptions.keepalive,
-  }, done).start();
+gulp.task('test:unit', done => {
+  new Server(
+    {
+      configFile: path.resolve(__dirname, 'tests/karma.conf.js'),
+      singleRun: !cloptions.keepalive,
+    },
+    done
+  ).start();
 });
 
-gulp.task('test:a11y', ['sass:compiled'], (done) => {
-  new Server({
-    configFile: path.resolve(__dirname, 'tests/karma-ibma.conf.js'),
-    singleRun: !cloptions.keepalive,
-  }, done).start();
+gulp.task('test:a11y', ['sass:compiled'], done => {
+  new Server(
+    {
+      configFile: path.resolve(__dirname, 'tests/karma-ibma.conf.js'),
+      singleRun: !cloptions.keepalive,
+    },
+    done
+  ).start();
 });
 
 // Watch Tasks
@@ -289,5 +328,7 @@ gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {
   // eslint-disable-next-line no-console
-  console.log('\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n');
+  console.log(
+    '\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n'
+  );
 });
