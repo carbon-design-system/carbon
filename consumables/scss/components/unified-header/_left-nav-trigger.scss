@@ -12,12 +12,11 @@
   z-index: 9999;
 
   &:focus {
-    outline: -webkit-focus-ring-color auto 5px;
+    @include focus-outline;
   }
 
   &:hover,
   &:focus {
-
     span,
     span:before,
     span:after {
@@ -61,9 +60,6 @@
   &.bx--left-nav__trigger--active {
     &:hover,
     &:focus {
-      // span {
-      //   background: transparent;
-      // }
       span:before,
       span:after {
         background: $color__blue-40;
@@ -89,7 +85,7 @@
       left: rem(18px);
 
       span {
-        background: transparent !important;
+        background: transparent;
       }
     }
   }
