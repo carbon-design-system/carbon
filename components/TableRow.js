@@ -10,13 +10,15 @@ const propTypes = {
   header: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node,
+  even: PropTypes.bool,
 };
 
 const TableRow = props => {
-  const { header, className, children, ...other } = props;
+  const { even, header, className, children, ...other } = props;
 
   const tableRowClasses = classNames(className, 'bx--table-row', {
     'bx--parent-row': !header,
+    'bx--parent-row--even': even,
   });
 
   return (

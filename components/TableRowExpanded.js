@@ -7,6 +7,7 @@ const propTypes = {
   className: PropTypes.string,
   colSpan: PropTypes.number,
   expanded: PropTypes.bool,
+  even: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -14,13 +15,14 @@ const defaultProps = {
 };
 
 const TableRowExpanded = props => {
-  const { children, className, colSpan, expanded, ...other } = props;
+  const { children, className, even, colSpan, expanded, ...other } = props;
 
-  const tableRowClasses = classNames(
-    className,
-    'bx--table-row',
-    'bx--expandable-row'
-  );
+  const tableRowClasses = classNames({
+    [className]: className,
+    'bx--table-row': true,
+    'bx--expandable-row': true,
+    'bx--expandable-row--even': even,
+  });
 
   if (!expanded) {
     return false;

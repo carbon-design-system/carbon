@@ -100,7 +100,7 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
-    "carbon-components": "^7.3.1",
+    "carbon-components": "^7.4.1",
     "commitizen": "^2.9.5",
     "css-loader": "0.23.1",
     "cz-conventional-changelog-components": "^1.0.0",
