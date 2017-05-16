@@ -186,7 +186,7 @@ gulp.task('sass:compiled', () => {
 
 gulp.task('sass:dev', () =>
   gulp
-    .src('demo/**/demo.scss')
+    .src('demo/scss/demo.scss')
     .pipe(sourcemaps.init())
     .pipe(
       sass({
@@ -198,8 +198,7 @@ gulp.task('sass:dev', () =>
         browsers: ['> 1%', 'last 2 versions'],
       })
     )
-    .pipe(rename({ dirname: '' }))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream())
 );
