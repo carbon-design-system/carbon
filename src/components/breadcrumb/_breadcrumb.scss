@@ -47,5 +47,11 @@
       color: $brand-01;
       border-bottom: 1px solid $brand-01;
     }
+
+    @-moz-document url-prefix() {
+      & {
+        border-bottom: none;
+      }
+    }
   }
 }

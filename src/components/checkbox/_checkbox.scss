@@ -75,5 +75,11 @@
   .bx--checkbox:checked + .bx--checkbox-appearance .bx--checkbox-checkmark,
   .bx--checkbox:checked + .bx--checkbox-label .bx--checkbox-appearance .bx--checkbox-checkmark {
     display: block;
+
+    @-moz-document url-prefix() {
+      & {
+        stroke: $brand-01;
+      }
+    }
   }
 }
