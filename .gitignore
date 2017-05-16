@@ -1,4 +1,3 @@
-
 # Hide package manager
 node_modules
 bower_components
@@ -28,13 +27,13 @@ tests/a11y-results
 tests/coverage
 
 # built files
-es
-umd
-scripts
-css
-scss
-html
-docs/js
+/es
+/umd
+/scripts
+/css/**
+/scss
+/html
+/docs/js
 
 # a11y testing
 .aat.yml
