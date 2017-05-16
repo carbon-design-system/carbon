@@ -5,7 +5,7 @@
 @import 'import-once';
 
 @mixin css-body {
-  .bx--body {
+  body {
     @include reset;
     @include helvetica;
     color: $text-01;
