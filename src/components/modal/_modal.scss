@@ -122,6 +122,11 @@
     cursor: pointer;
     background-color: transparent;
     border: none;
+    padding: .25rem .25rem .125rem;
+
+    &:focus {
+      @include focus-outline('border');
+    }
   }
 
   .bx--modal-close__icon {
