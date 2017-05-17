@@ -1,46 +1,49 @@
+/* eslint react/no-multi-comp: "off" */
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 import classNames from 'classnames';
+import Icon from './Icon';
+import uid from '../lib/uniqueId';
 
-class FileUploader extends React.Component {
+class FileUploaderButton extends Component {
   static propTypes = {
     className: PropTypes.string,
-    tabIndex: PropTypes.number,
-    id: PropTypes.string.isRequired,
-    labelDescription: PropTypes.string,
-    multipleFilesText: PropTypes.func,
-    buttonText: PropTypes.string,
+    disableLabelChanges: PropTypes.bool,
+    id: PropTypes.string,
+    labelText: PropTypes.string,
+    listFiles: PropTypes.bool,
+    multiple: PropTypes.bool,
     onChange: PropTypes.func,
+    role: PropTypes.string,
   };
-
   static defaultProps = {
-    className: 'bx--file__label',
-    tabIndex: 0,
-    labelDescription: '',
-    multipleFilesText: count => `${count} files selected`,
-    buttonText: 'Choose Files',
+    disableLabelChanges: false,
+    labelText: 'Add file',
+    multiple: false,
     onChange: () => {},
+    role: 'button',
   };
-
   state = {
-    count: 0,
-    text: this.props.labelDescription,
+    labelText: this.props.labelText,
   };
-
-  updateLabel = evt => {
-    const element = evt.target;
-    let fileName = '';
-
-    if (element.files && element.files.length > 1) {
-      fileName = this.props.multipleFilesText(element.files.length);
-      this.setState({ count: element.files.length });
-    } else {
-      fileName = element.value.split('\\').pop();
-      this.setState({ count: 1 });
+  componentWillMount() {
+    this.uid = this.props.id || uid();
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.labelText !== this.props.labelText) {
+      this.setState({ labelText: nextProps.labelText });
     }
+  }
 
-    if (fileName) {
-      this.setState({ text: fileName });
+  handleChange = evt => {
+    const files = evt.target.files;
+    const length = evt.target.files.length;
+    if (files && !this.props.disableLabelChanges) {
+      if (length > 1) {
+        this.setState({ labelText: `${length} files` });
+      } else if (length === 1) {
+        this.setState({ labelText: files[0].name });
+      }
     }
     this.props.onChange(evt);
   };
@@ -48,50 +51,175 @@ class FileUploader extends React.Component {
   render() {
     const {
       className,
-      tabIndex,
-      id,
-      labelDescription, // eslint-disable-line no-unused-vars
-      multipleFilesText,
-      buttonText,
-      onChange, // eslint-disable-line no-unused-vars
+      disableLabelChanges, // eslint-disable-line
+      labelText, // eslint-disable-line
+      multiple,
+      role,
       ...other
     } = this.props;
-
-    const fileUploaderProps = {
-      tabIndex,
-      type: 'file',
-      id,
-      onChange: this.updateLabel,
-    };
-
-    const fileUploaderClasses = classNames(className, {
-      'bx--file__label': true,
-      [this.props.className]: this.props.className,
+    const classes = classNames({
+      'bx--file': true,
+      [className]: className,
     });
 
-    const fileUploader = (
-      <div className="fileUploaderWrapper">
-        <label
-          data-file-appearance
-          data-button-title={buttonText}
-          className={fileUploaderClasses}
-          htmlFor={id}
-        >
-          {this.state.text}
+    return (
+      <div className={classes}>
+        <label className="bx--btn bx--btn--primary" htmlFor={this.uid} role={role} {...other}>
+          {this.state.labelText}
         </label>
         <input
-          data-file-uploader
-          data-multiple-caption={multipleFilesText(this.state.count)}
-          data-label="[data-file-appearance]"
-          className="bx--file__input"
-          {...fileUploaderProps}
-          {...other}
-          multiple
+          hidden
+          id={this.uid}
+          type="file"
+          multiple={multiple}
+          onChange={this.handleChange}
         />
       </div>
     );
-    return fileUploader;
+  }
+}
+
+class Filename extends Component {
+  static propTypes = {
+    name: PropTypes.string,
+    style: PropTypes.object,
+    status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
+  };
+
+  static defaultProps = {
+    status: 'uploading',
+    style: {},
+  };
+
+  render() {
+    const { name, status, style, ...other } = this.props;
+    const tempStyle = Object.assign(style, { marginRight: '-1px' }); // temp style correction for loading component position
+    return (
+      <span>
+        {status === 'uploading'
+          ? <div className="bx--loading" style={tempStyle} {...other}>
+              <svg className="bx--loading__svg" viewBox="-42 -42 84 84">
+                <circle cx="0" cy="0" r="37.5" />
+              </svg>
+            </div>
+          : null}
+        {status === 'edit'
+          ? <Icon
+              className="bx--file-close"
+              name="close--glyph"
+              description={`Remove the file named: ${name}`}
+              style={style}
+              {...other}
+            />
+          : null}
+        {status === 'complete'
+          ? <Icon
+              className="bx--file-complete"
+              name="checkmark--glyph"
+              description={`The file named, ${name}, has been uploaded.`}
+              style={style}
+              {...other}
+            />
+          : null}
+      </span>
+    );
+  }
+}
+
+class FileUploader extends Component {
+  static propTypes = {
+    buttonLabel: PropTypes.string,
+    filenameStatus: PropTypes.oneOf(['edit', 'complete', 'uploading']).isRequired,
+    labelDescription: PropTypes.string,
+    labelTitle: PropTypes.string,
+    multiple: PropTypes.bool,
+    onChange: PropTypes.func,
+    onClick: PropTypes.func,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    filenameStatus: 'uploading',
+    buttonLabel: 'Add file',
+    multiple: false,
+    onChange: () => {},
+    onClick: () => {},
+  };
+
+  state = {
+    filenames: [],
+    filenameStatus: '',
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.filenameStatus !== this.props.filenameStatus) {
+      this.setState({ filenameStatus: nextProps.filenameStatus });
+    }
+  }
+  nodes = [];
+  handleChange = evt => {
+    this.setState({ filenames: [...evt.target.files].map(file => file.name) });
+    this.props.onChange(evt);
+  };
+
+  handleClick = (evt, index) => {
+    const filteredArray = this.state.filenames.filter(
+      filename => filename !== this.nodes[index].innerText.trim()
+    );
+    this.setState({ filenames: filteredArray });
+    this.props.onClick(evt);
+  };
+
+  render() {
+    const {
+      buttonLabel,
+      filenameStatus,
+      labelDescription,
+      labelTitle,
+      className,
+      multiple,
+      ...other
+    } = this.props;
+
+    const classes = classNames({
+      'bx--form-item': true,
+      [className]: className,
+    });
+
+    return (
+      <div className={classes} {...other}>
+        <strong className="bx--label">{labelTitle}</strong>
+        <p className="bx--label-description">{labelDescription}</p>
+        <FileUploaderButton
+          labelText={buttonLabel}
+          multiple={multiple}
+          onChange={this.handleChange}
+          disableLabelChanges
+        />
+        <div className="bx--file-container">
+          {this.state.filenames.length === 0
+            ? null
+            : this.state.filenames.map((name, index) => (
+                <span
+                  key={index}
+                  className="bx--file__selected-file"
+                  ref={node => (this.nodes[index] = node)} // eslint-disable-line
+                  {...other}
+                >
+                  <p className="bx--file-filename">{name}</p>
+                  <span className="bx--file__state-container">
+                    <Filename
+                      status={filenameStatus}
+                      onClick={evt => this.handleClick(evt, index)}
+                    />
+                  </span>
+                </span>
+              ))}
+        </div>
+      </div>
+    );
   }
 }
 
 export default FileUploader;
+export { FileUploaderButton, Filename };

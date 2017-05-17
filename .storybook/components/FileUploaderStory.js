@@ -1,31 +1,41 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import FileUploader from '../../components/FileUploader';
+import FileUploader, {
+  FileUploaderButton,
+  Filename,
+} from '../../components/FileUploader';
 
 const fileUploaderEvents = {
-  onBlur: () => { console.log('blur'); }, // eslint-disable-line no-console
-  onClick: () => { console.log('click'); }, // eslint-disable-line no-console
-  onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
-  onMouseDown: () => { console.log('mouseDown'); }, // eslint-disable-line no-console
-  onMouseEnter: () => { console.log('mouseEnter'); }, // eslint-disable-line no-console
-  onMouseLeave: () => { console.log('mouseLeave'); }, // eslint-disable-line no-console
-  onMouseUp: () => { console.log('mouseUp'); }, // eslint-disable-line no-console
   className: 'some-class',
 };
 
 storiesOf('FileUploader', module)
   .addWithInfo(
-    '',
+    'FileUploaderButton',
     `
-      The File Uploader components allow the user to upload any necessary files.
+      The FileUploaderButton can be used as a standalone component if you do not need the extra UI that comes with FileUploader. The FileUploaderButton is used in FileUploader.
     `,
     () => (
-      <div style={{ width: '400px' }}>
-        <FileUploader
-          {...fileUploaderEvents}
-          className="some-class"
-          id="file-1"
-          labelDescription="Choose Files..."
-        />
-      </div>
-  ));
+      <FileUploaderButton
+        labelText="Add files"
+        className="bob"
+        onChange={evt => console.log('hi')}
+        multiple
+      />
+    )
+  )
+  .addWithInfo(
+    'FileUploader',
+    `
+      The FileUploader components allow the user to upload any necessary files. This uses the FileUploaderButton and Filename components. Filename components will appear below the FileUploaderButton when files are added. Use the filenameStatus prop to control what icon appears in Filename ('edit', 'complete', or 'uploading').
+    `,
+    () => (
+      <FileUploader
+        labelTitle="Upload"
+        labelDescription="only .jpg files at 500mb or less"
+        buttonLabel="Add files"
+        filenameStatus="edit"
+        multiple
+      />
+    )
+  );

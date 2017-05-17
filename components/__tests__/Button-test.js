@@ -85,7 +85,9 @@ describe('Button', () => {
   });
 
   describe('Renders icon buttons', () => {
-    const iconButton = mount(<Button icon="search" iconDescription="Search">Search</Button>);
+    const iconButton = mount(
+      <Button icon="search" iconDescription="Search">Search</Button>
+    );
     const icon = iconButton.find('svg');
     it('should have the appropriate icon', () => {
       expect(icon.hasClass('bx--btn__icon')).toBe(true);
@@ -93,10 +95,12 @@ describe('Button', () => {
 
     it('should return error if icon given without description', () => {
       const props = {
-        icon: 'search',
+        icon: 'search'
       };
       // eslint-disable-next-line quotes
-      const error = new Error('icon property specified without also providing an iconDescription property.');
+      const error = new Error(
+        'icon property specified without also providing an iconDescription property.'
+      );
       expect(Button.propTypes.iconDescription(props)).toEqual(error);
     });
   });
@@ -118,8 +122,9 @@ describe('Primary Button', () => {
 
 describe('Secondary Button', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Button kind="secondary" className="extra-class" />);
-
+    const wrapper = shallow(
+      <Button kind="secondary" className="extra-class" />
+    );
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass('bx--btn--secondary')).toEqual(true);
@@ -130,7 +135,6 @@ describe('Secondary Button', () => {
     });
   });
 });
-
 
 describe('Small Button', () => {
   describe('Renders as expected', () => {

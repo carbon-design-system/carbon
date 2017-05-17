@@ -18,7 +18,7 @@ export DangerButton from './components/DangerButton';
 export DetailPageHeader from './components/DetailPageHeader';
 export Dropdown from './components/Dropdown';
 export DropdownItem from './components/DropdownItem';
-export FileUploader from './components/FileUploader';
+export { FileUploader, FileUploaderButton } from './components/FileUploader';
 export Footer from './components/Footer';
 export Form from './components/Form';
 export FormGroup from './components/FormGroup' ;

@@ -1,104 +1,113 @@
 import React from 'react';
-import FileUploader from '../FileUploader';
-import { mount, shallow } from 'enzyme';
+import FileUploader, { FileUploaderButton, Filename } from '../FileUploader';
+import { mount } from 'enzyme';
 
-describe('FileUploader', () => {
+describe('Filename', () => {
+  const mountWrapper = mount(<Filename name={'trees.jpg'} />);
   describe('Renders as expected with default props', () => {
-    const rootWrapper = shallow(<FileUploader id="testID" />);
-    it('has the expected classes', () => {
-      expect(rootWrapper.hasClass('fileUploaderWrapper')).toBe(true);
+    it('should render correct icon when status prop is complete', () => {
+      mountWrapper.setProps({ status: 'complete' });
+      expect(mountWrapper.find('Icon').props().name).toEqual('checkmark--glyph');
     });
-    it('should render a label with expected props, children', () => {
-      const label = rootWrapper.find('label');
-      expect(label.length).toBe(1);
-      expect(label.hasClass('bx--file__label')).toBe(true);
-      expect(label.props()['data-button-title']).toBe('Choose Files');
+    it('should render correct icon when status prop is edit', () => {
+      mountWrapper.setProps({ status: 'edit' });
+      expect(mountWrapper.find('Icon').props().name).toEqual('close--glyph');
     });
-    it('should render an input with expected props', () => {
-      const input = rootWrapper.find('input');
-      expect(input.length).toEqual(1);
-      expect(input.hasClass('bx--file__input')).toEqual(true);
-      expect(input.props().tabIndex).toEqual(0);
-      expect(input.props()['data-multiple-caption']).toEqual('0 files selected');
-      expect(input.props()['data-label']).toEqual('[data-file-appearance]');
-      expect(input.props()['data-file-uploader']).toEqual(true);
-      expect(input.props().multiple).toEqual(true);
+    it('should render correct component when status prop is uploading', () => {
+      mountWrapper.setProps({ status: 'uploading' });
+      expect(mountWrapper.find('.bx--loading').hasClass('bx--loading')).toEqual(true);
     });
   });
 
-  describe('should set props if passed in', () => {
-    it('should set tabIndex if one is passed via props', () => {
-      const rootWrapper = shallow(<FileUploader tabIndex={2} id="testID" />);
-      const input = rootWrapper.find('input');
-      expect(input.props().tabIndex).toEqual(2);
+  describe('click on edit icon (close--glyph)', () => {
+    it('should have a click event', () => {
+      const onClick = jest.fn();
+      mountWrapper.setProps({ onClick, status: 'edit' });
+      mountWrapper.find('Icon').simulate('click');
+      expect(onClick).toBeCalled();
     });
-    it('should set labelDescription if one is passed via props', () => {
-      const rootWrapper = shallow(<FileUploader id="testID" labelDescription="test description" />);
-      const label = rootWrapper.find('label');
-      expect(label.props().children).toEqual('test description');
+  });
+});
+
+describe('FileUploaderButton', () => {
+  const button = <FileUploaderButton className="extra-class" />;
+  const mountWrapper = mount(button);
+
+  describe('Renders as expected with default props', () => {
+    it('renders with expected className', () => {
+      expect(mountWrapper.hasClass('bx--file')).toBe(true);
     });
-    it('should set id if one is passed via props', () => {
-      const rootWrapper = shallow(<FileUploader id="testID" />);
-      const label = rootWrapper.find('label');
-      expect(label.props().htmlFor).toEqual('testID');
+
+    it('renders with given className', () => {
+      expect(mountWrapper.hasClass('extra-class')).toBe(true);
     });
-    it('should set className if one is passed via props', () => {
-      const rootWrapper = shallow(<FileUploader id="testID" className="extra-class" />);
-      const label = rootWrapper.find('label');
-      expect(label.hasClass('bx--file__label')).toBe(true);
-      expect(label.hasClass('extra-class')).toBe(true);
+
+    it('renders with default labelText prop', () => {
+      expect(mountWrapper.props().labelText).toEqual('Add file');
     });
-    it('should set the button text via props', () => {
-      const rootWrapper = shallow(<FileUploader id="testID" buttonText="Upload" />);
-      const label = rootWrapper.find('label');
-      expect(label.props()['data-button-title']).toBe('Upload');
+
+    it('renders with default multiple prop', () => {
+      expect(mountWrapper.props().multiple).toEqual(false);
     });
-    it('should support a custom label for multiple file upload', () => {
-      const rootWrapper = mount(<FileUploader id="testID" multipleFilesText={count => `${count} files!`} />);
-      const input = rootWrapper.find('input');
-      expect(input.props()['data-multiple-caption']).toEqual('0 files!');
+
+    it('renders with default disableLabelChanges prop', () => {
+      expect(mountWrapper.props().disableLabelChanges).toEqual(false);
+    });
+
+    it('renders with default role', () => {
+      expect(mountWrapper.props().role).toEqual('button');
     });
   });
 
-  describe('updateLabel method should work as intended', () => {
-    it('should properly update label for single file upload', () => {
-      const rootWrapper = mount(<FileUploader id="testID" />);
-      const input = rootWrapper.find('input');
-      const label = rootWrapper.find('label');
-      expect(input.props()['data-multiple-caption']).toEqual('0 files selected');
+  describe('Unique id props', () => {
+    it('each FileUploaderButton should have a unique ID', () => {
+      const mountedButtons = mount(
+        <div>
+          <FileUploaderButton className="extra-class" />
+          <FileUploaderButton className="extra-class" />
+        </div>
+      );
+      const firstButton = mountedButtons.find(FileUploaderButton).at(0);
+      const lastButton = mountedButtons.find(FileUploaderButton).at(1);
+      const isEqual = firstButton === lastButton;
+      expect(isEqual).toBe(false);
+    });
+  });
 
-      const evt = {
-        target: {
-          dataset: {
-            label: '[data-file-appearance=true]',
-            multipleCaption: '0 files selected',
-          },
-          value: 'testFile1',
-        },
-      };
-
-      input.simulate('change', evt);
-      expect(label.props().children).toEqual('testFile1');
+  describe('Update labelText', () => {
+    it('should have equal state and props', () => {
+      expect(mountWrapper.state().labelText).toEqual(mountWrapper.props().labelText);
     });
 
-    it('should properly update label for multiple file upload', () => {
-      const rootWrapper = mount(<FileUploader id="testID" />);
-      const input = rootWrapper.find('input');
-      const label = rootWrapper.find('label');
-      expect(input.props()['data-multiple-caption']).toEqual('0 files selected');
+    it('should update state with props', () => {
+      mountWrapper.setProps({ labelText: 'new label' });
+      expect(mountWrapper.state().labelText).toEqual(mountWrapper.props().labelText);
+    });
+  });
+});
+describe('FileUploader', () => {
+  const fileUploader = <FileUploader className="extra-class" />;
+  const mountWrapper = mount(fileUploader);
 
-      const evt = {
-        target: {
-          dataset: {
-            label: '[data-file-appearance=true]',
-            multipleCaption: '0 files selected',
-          },
-          files: ['testFile1', 'testFile2'],
-        },
-      };
+  describe('Renders as expected with defaults', () => {
+    it('should render with default className', () => {
+      expect(mountWrapper.hasClass('bx--form-item')).toEqual(true);
+    });
 
-      input.simulate('change', evt);
-      expect(label.props().children).toEqual('2 files selected');
+    it('should render with given className', () => {
+      expect(mountWrapper.hasClass('extra-class')).toEqual(true);
+    });
+
+    it('renders with FileUploaderButton with disableLabelChanges set to true', () => {
+      expect(mountWrapper.find('FileUploaderButton').props().disableLabelChanges).toEqual(
+        true
+      );
+    });
+    it('renders input with hidden prop', () => {
+      expect(mountWrapper.find('input').props().hidden).toEqual(true);
+    });
+    it('renders with empty div.bx--file-container by default', () => {
+      expect(mountWrapper.find('div.bx--file-container').text()).toEqual('');
     });
   });
 });
