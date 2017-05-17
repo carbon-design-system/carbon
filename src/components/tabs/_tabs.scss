@@ -42,7 +42,7 @@
     }
 
     &:focus {
-      outline: 1px solid $brand-01;
+      @include focus-outline('border');
     }
 
     @include breakpoint(bp--sm--major) {
@@ -56,7 +56,7 @@
     color: $text-01;
 
     &:focus {
-      outline: 1px solid $brand-01;
+      @include focus-outline('border');
     }
   }
 
