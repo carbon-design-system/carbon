@@ -41,6 +41,20 @@
   outline: auto 5px -webkit-focus-ring-color; // webkit default
 }
 
+@mixin focus-outline($type: 'border') {
+  @if ($type == 'border') {
+    outline: 1px solid $brand-01;
+  }
+
+  @if ($type == 'underline') {
+
+  }
+
+  @if ($type == 'blurry-border') {
+
+  }
+}
+
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
   transition: transform $speed;
