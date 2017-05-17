@@ -27,7 +27,7 @@
 
     &:focus {
       outline: 1px solid transparent;
-      box-shadow: 0 0 0 3px $color__blue-20;
+      box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 2;
     }
 
@@ -57,7 +57,7 @@
     }
 
     &:focus {
-      box-shadow: -2px 0 0 3px $color__blue-20;
+      box-shadow: -2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 0;
     }
   }
@@ -71,7 +71,7 @@
     }
 
     &:focus {
-      box-shadow: 2px 0 0 3px $color__blue-20;
+      box-shadow: 2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 0;
     }
   }
