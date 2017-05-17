@@ -24,7 +24,6 @@ $i: 0;
   @include reset;
   padding: 0 $gutter-size;
   flex: 1;
-  flex-basis: 100%;
 }
 
 @while $i <= 12 {
@@ -34,13 +33,13 @@ $i: 0;
     }
   }
 
-  @media (min-width: 720px) and (max-width: 970px) {
+  @media (min-width: 720px) {
     .bx--col-s-#{$i} {
       @include column-size($i);
     }
   }
 
-  @media (min-width: 970px) and (max-width: 1170px) {
+  @media (min-width: 970px) {
     .bx--col-md-#{$i} {
       @include column-size($i);
     }
