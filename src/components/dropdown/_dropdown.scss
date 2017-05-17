@@ -24,8 +24,12 @@
     color: $text-01;
 
     &:focus {
-      @include focus-outline;
-      outline: auto 2px -webkit-focus-ring-color;
+      @include focus-outline('border');
+    }
+
+    &.bx--dropdown--open:focus {
+      outline: 1px solid transparent;
+      box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
     }
   }
 
@@ -75,6 +79,7 @@
     &:focus {
       background-color: $brand-01;
       color: $inverse-01;
+      outline: 1px solid transparent;
     }
   }
 
@@ -92,6 +97,12 @@
       display: flex;
       flex-direction: column;
       background-color: $ui-01;
+    }
+
+    &:focus {
+      .bx--dropdown-list {
+        box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      }
     }
   }
 }
