@@ -35,7 +35,7 @@
     width: 100%;
 
     &:focus {
-      @include focus-outline;
+      @include focus-outline('border');
     }
 
     &::placeholder {
@@ -103,12 +103,15 @@
     width: 1rem;
   }
 
-  .bx--search-button:hover {
+  .bx--search-button:hover,
+  .bx--search-button:focus {
     cursor: pointer;
     background-color: $brand-01;
+    outline: 1px solid transparent;
   }
 
-  .bx--search-button:hover svg {
+  .bx--search-button:hover svg,
+  .bx--search-button:focus svg {
     fill: $ui-01;
   }
 
