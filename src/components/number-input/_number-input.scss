@@ -27,6 +27,10 @@
     background-color: $field-01;
     border: none;
     border-radius: 0;
+
+    &:focus {
+      @include focus-outline('border');
+    }
   }
 
   .bx--number input[type="number"] {

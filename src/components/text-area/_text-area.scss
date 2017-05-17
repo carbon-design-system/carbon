@@ -23,8 +23,7 @@
     border: 1px solid transparent;
 
     &:focus {
-      @include focus-outline;
-      outline: auto 2px -webkit-focus-ring-color; // webkit default
+      @include focus-outline('border');
     }
 
     &::-webkit-input-placeholder {
