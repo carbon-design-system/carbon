@@ -76,7 +76,9 @@ class Tab extends ContentSwitcher {
   _handleKeyDown(event) {
     const triggerNode = this.element.querySelector(this.options.selectorTrigger);
     if (triggerNode && triggerNode.offsetParent) {
-      return;
+      if (event.which === 13) {
+        this._updateMenuState();
+      }
     }
 
     const direction = {
