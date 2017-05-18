@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from './Modal';
 import Button from './Button';
 if (!process.env.EXCLUDE_SASS) {
@@ -8,21 +9,21 @@ if (!process.env.EXCLUDE_SASS) {
 class ModalWrapper extends React.Component {
 
   static propTypes = {
-    status: React.PropTypes.string,
-    handleOpen: React.PropTypes.func,
-    children: React.PropTypes.node,
-    id: React.PropTypes.string,
-    buttonTriggerText: React.PropTypes.string,
-    modalLabel: React.PropTypes.string,
-    modalHeading: React.PropTypes.string,
-    modalText: React.PropTypes.string,
-    passiveModal: React.PropTypes.bool,
-    withHeader: React.PropTypes.bool,
-    modalBeforeContent: React.PropTypes.bool,
-    primaryButtonText: React.PropTypes.string,
-    secondaryButtonText: React.PropTypes.string,
-    modalProps: React.PropTypes.object,
-    handleSubmit: React.PropTypes.func,
+    status: PropTypes.string,
+    handleOpen: PropTypes.func,
+    children: PropTypes.node,
+    id: PropTypes.string,
+    buttonTriggerText: PropTypes.string,
+    modalLabel: PropTypes.string,
+    modalHeading: PropTypes.string,
+    modalText: PropTypes.string,
+    passiveModal: PropTypes.bool,
+    withHeader: PropTypes.bool,
+    modalBeforeContent: PropTypes.bool,
+    primaryButtonText: PropTypes.string,
+    secondaryButtonText: PropTypes.string,
+    modalProps: PropTypes.object,
+    handleSubmit: PropTypes.func,
   }
 
   static defaultProps = {

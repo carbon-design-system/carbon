@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from './Icon';
 if (!process.env.EXCLUDE_SASS) {
@@ -8,15 +9,15 @@ if (!process.env.EXCLUDE_SASS) {
 class Search extends React.Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    type: React.PropTypes.string,
-    small: React.PropTypes.bool,
-    placeHolderText: React.PropTypes.string,
-    labelText: React.PropTypes.string,
-    id: React.PropTypes.string,
-    searchButtonLabelText: React.PropTypes.string,
-    layoutButtonLabelText: React.PropTypes.string,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    type: PropTypes.string,
+    small: PropTypes.bool,
+    placeHolderText: PropTypes.string,
+    labelText: PropTypes.string,
+    id: PropTypes.string,
+    searchButtonLabelText: PropTypes.string,
+    layoutButtonLabelText: PropTypes.string,
   };
 
   static defaultProps = {

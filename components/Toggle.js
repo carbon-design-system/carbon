@@ -1,17 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/base-elements/toggle/toggle.scss');
 }
 
 const propTypes = {
-  className: React.PropTypes.string,
-  defaultToggled: React.PropTypes.bool,
-  onToggle: React.PropTypes.func,
-  id: React.PropTypes.string.isRequired,
-  toggled: React.PropTypes.bool,
-  labelA: React.PropTypes.string.isRequired,
-  labelB: React.PropTypes.string.isRequired,
+  className: PropTypes.string,
+  defaultToggled: PropTypes.bool,
+  onToggle: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  toggled: PropTypes.bool,
+  labelA: PropTypes.string.isRequired,
+  labelB: PropTypes.string.isRequired,
 };
 
 const defaultProps = {

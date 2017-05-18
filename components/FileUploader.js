@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/base-elements/file-uploader/file-uploader.scss');
@@ -7,14 +8,14 @@ if (!process.env.EXCLUDE_SASS) {
 class FileUploader extends React.Component {
 
   static propTypes = {
-    className: React.PropTypes.string,
-    tabIndex: React.PropTypes.number,
-    id: React.PropTypes.string.isRequired,
-    labelDescription: React.PropTypes.string,
-    multiple: React.PropTypes.bool,
-    multipleFilesText: React.PropTypes.func,
-    buttonText: React.PropTypes.string,
-    onChange: React.PropTypes.func,
+    className: PropTypes.string,
+    tabIndex: PropTypes.number,
+    id: PropTypes.string.isRequired,
+    labelDescription: PropTypes.string,
+    multiple: PropTypes.bool,
+    multipleFilesText: PropTypes.func,
+    buttonText: PropTypes.string,
+    onChange: PropTypes.func,
   }
 
   static defaultProps = {

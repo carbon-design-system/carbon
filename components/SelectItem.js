@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/base-elements/select/select.scss');
 }
 
 const propTypes = {
-  value: React.PropTypes.any.isRequired,
-  className: React.PropTypes.string,
-  disabled: React.PropTypes.bool,
-  hidden: React.PropTypes.bool,
-  text: React.PropTypes.string.isRequired,
+  value: PropTypes.any.isRequired,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  hidden: PropTypes.bool,
+  text: PropTypes.string.isRequired,
 };
 
 const defaultProps = {

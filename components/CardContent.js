@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Button from './Button';
 import Icon from './Icon';
@@ -7,16 +8,16 @@ if (!process.env.EXCLUDE_SASS) {
 }
 
 const propTypes = {
-  children: React.PropTypes.node,
-  cardIcon: React.PropTypes.string,
-  cardTitle: React.PropTypes.string,
-  cardLink: React.PropTypes.node,
-  cardInfo: React.PropTypes.array,
-  className: React.PropTypes.string,
-  fullSize: React.PropTypes.bool,
-  amount: React.PropTypes.string,
-  desc: React.PropTypes.string,
-  buttonText: React.PropTypes.string,
+  children: PropTypes.node,
+  cardIcon: PropTypes.string,
+  cardTitle: PropTypes.string,
+  cardLink: PropTypes.node,
+  cardInfo: PropTypes.array,
+  className: PropTypes.string,
+  fullSize: PropTypes.bool,
+  amount: PropTypes.string,
+  desc: PropTypes.string,
+  buttonText: PropTypes.string,
 };
 
 const defaultProps = {

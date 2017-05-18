@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from './Icon';
 if (!process.env.EXCLUDE_SASS) {
@@ -6,11 +7,11 @@ if (!process.env.EXCLUDE_SASS) {
 }
 
 const propTypes = {
-  className: React.PropTypes.string,
-  id: React.PropTypes.string,
-  ariaLabel: React.PropTypes.string,
-  iconName: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string.isRequired,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  iconName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
 };
 
 const CardActionItem = ({ className, id, ariaLabel, iconName, description, ...other }) => {

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Icon from './Icon';
 import classNames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
@@ -34,4 +35,3 @@ Tooltip.propTypes = propTypes;
 Tooltip.defaultProps = defaultProps;
 
 export default Tooltip;
-

@@ -1,24 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/components/overflow-menu/overflow-menu.scss');
 }
 
 const propTypes = {
-  className: React.PropTypes.string,
-  itemText: React.PropTypes.string.isRequired,
-  closeMenu: React.PropTypes.func,
-  isDelete: React.PropTypes.bool,
-  isLastItem: React.PropTypes.bool,
-  onBlur: React.PropTypes.func,
-  onClick: React.PropTypes.func,
-  onFocus: React.PropTypes.func,
-  onKeyDown: React.PropTypes.func,
-  onKeyUp: React.PropTypes.func,
-  onMouseDown: React.PropTypes.func,
-  onMouseEnter: React.PropTypes.func,
-  onMouseLeave: React.PropTypes.func,
-  onMouseUp: React.PropTypes.func,
+  className: PropTypes.string,
+  itemText: PropTypes.string.isRequired,
+  closeMenu: PropTypes.func,
+  isDelete: PropTypes.bool,
+  isLastItem: PropTypes.bool,
+  onBlur: PropTypes.func,
+  onClick: PropTypes.func,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  onMouseUp: PropTypes.func,
 };
 
 const defaultProps = {

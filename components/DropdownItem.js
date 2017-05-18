@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/components/dropdown/dropdown.scss');
 }
 
 const propTypes = {
-  value: React.PropTypes.string.isRequired,
-  itemText: React.PropTypes.string.isRequired,
-  className: React.PropTypes.string,
-  onClick: React.PropTypes.func,
+  value: PropTypes.string.isRequired,
+  itemText: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {

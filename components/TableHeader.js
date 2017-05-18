@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from './Icon';
 
@@ -51,4 +52,3 @@ const TableHeader = (props) => {
 TableHeader.propTypes = propTypes;
 
 export default TableHeader;
-

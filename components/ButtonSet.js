@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
   import('@console/bluemix-components/consumables/scss/base-elements/buttons/button--sets.scss');
@@ -7,8 +8,8 @@ if (!process.env.EXCLUDE_SASS) {
 
 class ButtonSet extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string,
+    children: PropTypes.node,
+    className: PropTypes.string,
   }
 
   render() {
