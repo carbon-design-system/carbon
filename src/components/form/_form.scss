@@ -36,7 +36,8 @@
   }
 
   input[data-invalid],
-  textarea[data-invalid]  {
+  textarea[data-invalid],
+  select[data-invalid]  {
     box-shadow: 0 2px 0px 0px $support-01;
 
     ~ .bx--form-requirement {
