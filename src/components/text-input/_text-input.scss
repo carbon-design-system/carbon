@@ -28,8 +28,7 @@
     }
 
     &:focus {
-      @include focus-outline;
-      outline: auto 2px -webkit-focus-ring-color;
+      @include focus-outline('border');
     }
 
     &:disabled {
