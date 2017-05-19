@@ -34,6 +34,24 @@
         width: 100%;
         padding: 0;
 
+        &:focus {
+          outline: 1px solid transparent;
+
+          &:not(.left-nav-list__item--has-children) {
+            background-color: $color__gray-2;
+          }
+
+          .left-nav-list__item-link {
+            color: $color__blue-51;
+            text-decoration: underline;
+          }
+
+          .left-nav-list--nested .left-nav-list__item-link {
+            color: $color__blue-90;
+            text-decoration: none;
+          }
+        }
+
         &--active {
           & > .left-nav-list__item-link {
             background-color: $color__gray-2;
@@ -132,6 +150,13 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
+
+          &:focus {
+            outline: 1px solid transparent;
+            background-color: $color__gray-2;
+            color: $color__blue-51;
+            text-decoration: underline;
+          }
         }
 
         &:hover {
@@ -144,7 +169,6 @@
 
           & > .left-nav-list__item-link {
             font-weight: 600;
-            background-color: $color__gray-2;
             color: $color__blue-51;
           }
         }
@@ -248,6 +272,11 @@
       align-items: center;
       text-decoration: none;
       font-size: rem(14px);
+      padding: .25rem;
+
+      &:focus {
+        @include focus-outline('border');
+      }
     }
 
     .bx--interior-left-nav-collapse__arrow {
