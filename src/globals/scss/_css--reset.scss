@@ -73,6 +73,9 @@
 
     * {
       box-sizing: border-box;
+      
+      // Remove outlines on elements
+      outline: none;
     }
   }
 }
