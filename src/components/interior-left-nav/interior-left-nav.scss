@@ -27,6 +27,7 @@
       flex-direction: column;
       background-color: $color__white;
       padding-top: 1.5rem;
+      overflow: auto;
 
       &__item {
         @include reset;
