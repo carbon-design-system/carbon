@@ -72,6 +72,6 @@
 
 @include exports('css--font-face') {
   @if global-variable-exists('css--font-face') and $css--font-face == true {
-    @include font-face-css('https://unpkg.com/carbon-components/src/globals/fonts/');
+    @include font-face-css('https://unpkg.com/carbon-components/src/globals/fonts');
   }
 }
