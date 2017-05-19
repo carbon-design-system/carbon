@@ -62,6 +62,6 @@
   }
 
   .bx--radio-button:focus + .bx--radio-button__label .bx--radio-button__appearance {
-    @include focus-outline;
+    @include focus-outline('blurred');
   }
 }
