@@ -40,6 +40,14 @@
       padding: rem(9px) rem(6px);
       vertical-align: middle;
       font-weight: 700;
+
+      &:focus {
+        outline: 1px solid transparent;
+
+        span {
+          @include focus-outline('border');
+        }
+      }
     }
 
     table {
@@ -108,12 +116,14 @@
   .bx--table-body .bx--table-row {
     border: 1px solid transparent;
 
-    &:first-child:hover {
+    &:first-child:hover,
+    &:first-child:focus {
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
     }
 
-    &:not(:first-child):hover {
+    &:not(:first-child):hover,
+    &:not(:first-child):focus {
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
     }
@@ -138,6 +148,14 @@
     text-align: center;
     width: rem(20px);
     cursor: pointer;
+
+    &:focus {
+      outline: 1px solid transparent;
+
+      svg {
+        @include focus-outline('border');
+      }
+    }
   }
 
   .bx--table-expand__svg {

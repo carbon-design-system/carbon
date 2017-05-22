@@ -40,6 +40,15 @@ class DataTable
         this._toggleState(eventElement, evt);
       }
     });
+
+    this.element.addEventListener('keydown', (evt) => {
+      if (evt.which === 13) {
+        const eventElement = eventMatches(evt, this.options.eventTrigger);
+        if (eventElement) {
+          this._toggleState(eventElement, evt);
+        }
+      }
+    });
   }
 
   /**
