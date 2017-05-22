@@ -1,12 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import Tooltip from '../../components/Tooltip';
-import Link from '../../components/Link';
 import UnderReviewDecorator from '../UnderReviewDecorator';
 
 storiesOf('Tooltip', module)
   .addDecorator(UnderReviewDecorator)
-	.addWithInfo(
+  .addWithInfo(
     'default',
     `
       Tooltips are used to supply additional information to an element when hovering over it. By default,
@@ -14,9 +13,17 @@ storiesOf('Tooltip', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Tooltip text="This is some tooltip text" className="some-class"><Link href="#">Tooltip - hover</Link></Tooltip>
+        <Tooltip triggerText="Tooltip">
+          <p className="bx--tooltip__label">Tooltip label</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaeca cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </Tooltip>
       </div>
-    ),
+    )
   )
   .addWithInfo(
     'position',
@@ -26,9 +33,17 @@ storiesOf('Tooltip', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Tooltip position="bottom" text="This is some tooltip text"><div>Tooltip - hover</div></Tooltip>
+        <Tooltip triggerText="Tooltip Top" direction="top">
+          <p className="bx--tooltip__label">Tooltip label</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaeca cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </Tooltip>
       </div>
-    ),
+    )
   )
   .addWithInfo(
     'no icon',
@@ -38,7 +53,15 @@ storiesOf('Tooltip', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Tooltip text="This is some tooltip text" showIcon={false}><div>Tooltip - hover</div></Tooltip>
+        <Tooltip triggerText="No Icon Tooltip" showIcon={false}>
+          <p className="bx--tooltip__label">Tooltip label</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaeca cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </Tooltip>
       </div>
-    ),
+    )
   );

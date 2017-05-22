@@ -36,8 +36,8 @@ class OverflowMenu extends Component {
     floatingMenu: false,
     onClick: () => {},
     tabIndex: 0,
-    menuOffset: { top: 0, left: -9 },
-    menuOffsetFlip: { top: 0, left: -10 },
+    menuOffset: { top: 0, left: 60.5 },
+    menuOffsetFlip: { top: 0, left: -60.5 },
   };
 
   state = {

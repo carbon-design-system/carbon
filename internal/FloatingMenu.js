@@ -9,7 +9,7 @@ class FloatingMenu extends React.Component {
     menuDirection: PropTypes.oneOf(['left', 'top', 'right', 'bottom'])
       .isRequired,
     menuOffset: PropTypes.object.isRequired,
-    extraStyles: PropTypes.object,
+    styles: PropTypes.object,
   };
 
   static defaultProps = {
@@ -20,6 +20,17 @@ class FloatingMenu extends React.Component {
   componentDidMount() {
     this.menu = ReactDOM.findDOMNode(this).ownerDocument.createElement('div');
     this.menu.ownerDocument.body.appendChild(this.menu);
+
+    const style = {
+      display: 'block',
+      opacity: 0,
+    };
+    const childrenWithProps = React.cloneElement(this.props.children, {
+      style,
+    });
+    ReactDOM.render(childrenWithProps, this.menu);
+
+    this.getMenuPosition();
     this.renderLayer();
   }
 
@@ -31,6 +42,16 @@ class FloatingMenu extends React.Component {
     ReactDOM.unmountComponentAtNode(this.menu);
     this.menu.ownerDocument.body.removeChild(this.menu);
   }
+
+  getMenuPosition = () => {
+    const {
+      width: menuWidth,
+      height: menuHeight,
+    } = this.menu.firstChild.getBoundingClientRect();
+
+    this.menuWidth = menuWidth;
+    this.menuHeight = menuHeight;
+  };
 
   positionFloatingMenu = () => {
     const menuOffset = this.props.menuOffset;
@@ -44,29 +65,24 @@ class FloatingMenu extends React.Component {
       bottom: refBottom,
     } = this.props.menuPosition;
 
-    const {
-      width: menuWidth,
-      height: menuHeight,
-    } = this.menu.getBoundingClientRect();
-
     const refCenterHorizontal = (refLeft + refRight) / 2;
     const refCenterVertical = (refTop + refBottom) / 2;
 
     return {
       left: () => ({
-        left: refLeft - menuWidth - menuOffset.left,
-        top: refCenterVertical - menuHeight / 2 + scroll + menuOffset.top,
+        left: refLeft - this.menuWidth - menuOffset.left,
+        top: refCenterVertical - this.menuHeight / 2 + scroll + menuOffset.top,
       }),
       top: () => ({
-        left: refCenterHorizontal - menuWidth / 2 + menuOffset.left,
-        top: refTop - menuHeight + scroll - menuOffset.top,
+        left: refCenterHorizontal - this.menuWidth / 2 + menuOffset.left,
+        top: refTop - this.menuHeight + scroll - menuOffset.top,
       }),
       right: () => ({
         left: refRight + menuOffset.left,
-        top: refCenterVertical - menuHeight / 2 + scroll + menuOffset.top,
+        top: refCenterVertical - this.menuHeight / 2 + scroll + menuOffset.top,
       }),
       bottom: () => ({
-        left: refCenterHorizontal - menuWidth / 2 + menuOffset.left,
+        left: refCenterHorizontal - this.menuWidth / 2 + menuOffset.left,
         top: refBottom + scroll + menuOffset.top,
       }),
     }[this.props.menuDirection]();
@@ -81,12 +97,15 @@ class FloatingMenu extends React.Component {
       position: 'absolute',
       right: 'auto',
       margin: 0,
+      opacity: 1,
     };
 
-    const style = Object.assign(coreStyles, this.props.extraStyles);
-    Object.assign(this.menu.style, style);
+    const style = Object.assign(coreStyles, this.props.styles);
+    const childrenWithProps = React.cloneElement(this.props.children, {
+      style,
+    });
 
-    ReactDOM.render(this.props.children, this.menu);
+    ReactDOM.render(childrenWithProps, this.menu);
   };
 
   render() {

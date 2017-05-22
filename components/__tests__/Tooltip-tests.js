@@ -1,62 +1,72 @@
 import React from 'react';
 import Icon from '../Icon';
+import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
 import { mount } from 'enzyme';
 
 describe('Tooltip', () => {
   describe('Renders as expected with defaults', () => {
     const wrapper = mount(
-      <Tooltip text="Basic Tooltip Text" className="extra-class"><a href="#">A Link</a></Tooltip>
+      <Tooltip triggerText="Tooltip">
+        <p className="bx--tooltip__label">Tooltip label</p>
+        <p>Lorem ipsum dolor sit amet</p>
+      </Tooltip>
     );
-    const tooltip = wrapper.find('div').first();
 
-    describe('tooltip container', () => {
+    const trigger = wrapper.find('.bx--tooltip__trigger');
+
+    describe('tooltip trigger', () => {
       it('renders a tooltip container', () => {
-        expect(tooltip.length).toEqual(1);
-      });
-
-      it('has the expected classes', () => {
-        expect(tooltip.hasClass('bx--tooltip__top')).toEqual(true);
-      });
-
-      it('applies extra classes to the tooltip container', () => {
-        expect(tooltip.hasClass('extra-class')).toEqual(true);
-      });
-
-      it('has the tooltip text specified', () => {
-        expect(tooltip.props()['data-tooltip']).toEqual('Basic Tooltip Text');
+        expect(trigger.length).toEqual(1);
       });
 
       it('renders the info icon', () => {
-        const icon = tooltip.find(Icon);
+        const icon = trigger.find(Icon);
         expect(icon.length).toBe(1);
-        expect(icon.props().className).toBe('bx--tooltip__icon');
-        expect(icon.props().name).toBe('info');
-      });
-    });
-
-    describe('children', () => {
-      it('should wrap the children in the tooltip container', () => {
-        const child = tooltip.find('a').first();
-        expect(child.length).toEqual(1);
+        expect(icon.props().name).toBe('info--glyph');
       });
     });
   });
 
   describe('Renders as expected with specified properties', () => {
     const wrapper = mount(
-      <Tooltip text="Basic Tooltip Text" position="bottom" showIcon={false}><a href="#">A Link</a></Tooltip>
+      <Tooltip triggerText="Tooltip" direction="bottom" showIcon={false}>
+        <p className="bx--tooltip__label">Tooltip label</p>
+        <p>Lorem ipsum dolor sit amet</p>
+      </Tooltip>
     );
-    const tooltip = wrapper.find('div').first();
+
+    const trigger = wrapper.find('.bx--tooltip__trigger');
+    const floatingMenu = wrapper.find(FloatingMenu);
+
     describe('tooltip container', () => {
-      it('sets the tooltip\'s position', () => {
-        expect(tooltip.hasClass('bx--tooltip__bottom')).toEqual(true);
+      it("sets the tooltip's position", () => {
+        expect(floatingMenu.prop('menuDirection')).toEqual('bottom');
       });
 
       it('does not render info icon', () => {
-        const icon = tooltip.find(Icon);
-        expect(icon.length).toBe(0);
+        const icon = trigger.find(Icon);
+        expect(icon.exists()).toBe(false);
       });
+    });
+  });
+
+  describe('events', () => {
+    it('hover changes state', () => {
+      const wrapper = mount(
+        <Tooltip triggerText="Tooltip">
+          <p className="bx--tooltip__label">Tooltip label</p>
+          <p>Lorem ipsum dolor sit amet</p>
+        </Tooltip>
+      );
+
+      const icon = wrapper.find(Icon);
+
+      icon.simulate('mouseover');
+      expect(wrapper.state().open).toEqual(true);
+
+      icon.simulate('mouseout');
+      expect(wrapper.state().open).toEqual(false);
     });
   });
 });

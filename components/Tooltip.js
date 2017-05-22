@@ -1,44 +1,118 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import Icon from './Icon';
 import classNames from 'classnames';
+import FloatingMenu from '../internal/FloatingMenu';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  position: PropTypes.oneOf(['bottom', 'top']),
-  text: PropTypes.string.isRequired,
-  showIcon: PropTypes.bool,
-};
+class Tooltip extends Component {
+  static propTypes = {
+    open: PropTypes.bool,
+    children: PropTypes.node,
+    className: PropTypes.string,
+    direction: PropTypes.oneOf(['bottom', 'top']),
+    triggerText: PropTypes.string,
+    showIcon: PropTypes.bool,
+    iconName: PropTypes.string,
+    iconDescription: PropTypes.string,
+  };
 
-const defaultProps = {
-  position: 'top',
-  showIcon: true,
-};
+  static defaultProps = {
+    open: false,
+    direction: 'bottom',
+    showIcon: true,
+    iconName: 'info--glyph',
+    iconDescription: 'tooltip',
+  };
 
-const Tooltip = ({
-  children,
-  className,
-  position,
-  text,
-  showIcon,
-  ...other
-}) => {
-  const tooltipClasses = classNames(`bx--tooltip__${position}`, className);
-  return (
-    <div className={tooltipClasses} data-tooltip={text} {...other}>
-      {children}
-      {showIcon &&
-        <Icon
-          className="bx--tooltip__icon"
-          name="info"
-          description="Information"
-        />}
-    </div>
-  );
-};
+  state = {
+    open: this.props.open,
+  };
 
-Tooltip.propTypes = propTypes;
-Tooltip.defaultProps = defaultProps;
+  componentDidMount() {
+    this.getTriggerPosition();
+  }
+
+  getTriggerPosition = () => {
+    const triggerPosition = this.triggerEl.getBoundingClientRect();
+    this.setState({ triggerPosition });
+  };
+
+  handleMouse = direction => {
+    if (direction === 'over') {
+      this.setState({ open: true });
+    } else {
+      this.setState({ open: false });
+    }
+  };
+
+  render() {
+    const {
+      children,
+      className,
+      direction,
+      triggerText,
+      showIcon,
+      iconName,
+      iconDescription,
+      ...other
+    } = this.props;
+
+    const tooltipClasses = classNames(
+      'bx--tooltip',
+      { 'bx--tooltip--shown': this.state.open },
+      className
+    );
+
+    const menuOffset = { left: 4, top: 10 };
+
+    return (
+      <div>
+        {showIcon
+          ? <div className="bx--tooltip__trigger">
+              {triggerText}
+              <div
+                ref={node => {
+                  this.triggerEl = node;
+                }}
+                onMouseOver={() => this.handleMouse('over')}
+                onMouseOut={() => this.handleMouse('out')}
+                onFocus={() => this.handleMouse('over')}
+                onBlur={() => this.handleMouse('out')}
+              >
+                <Icon
+                  name={iconName}
+                  description={iconDescription}
+                  tabIndex="0"
+                />
+              </div>
+            </div>
+          : <div
+              className="bx--tooltip__trigger"
+              ref={node => {
+                this.triggerEl = node;
+              }}
+              onMouseOver={() => this.handleMouse('over')}
+              onMouseOut={() => this.handleMouse('out')}
+              onFocus={() => this.handleMouse('over')}
+              onBlur={() => this.handleMouse('out')}
+            >
+              {triggerText}
+            </div>}
+        <FloatingMenu
+          menuPosition={this.state.triggerPosition}
+          menuDirection={direction}
+          menuOffset={menuOffset}
+        >
+          <div
+            className={tooltipClasses}
+            {...other}
+            data-floating-menu-direction={direction}
+          >
+            {children}
+          </div>
+        </FloatingMenu>
+      </div>
+    );
+  }
+}
 
 export default Tooltip;
