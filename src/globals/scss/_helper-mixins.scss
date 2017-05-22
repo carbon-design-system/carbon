@@ -41,24 +41,6 @@
     outline: 1px solid $brand-01;
   }
 
-  @if ($type == 'underline') {
-
-  }
-
-  @if ($type == 'blurry-border') {
-
-  }
-}
-
-@mixin focus-outline($type: 'border') {
-  @if ($type == 'border') {
-    outline: 1px solid $brand-01;
-  }
-
-  @if ($type == 'underline') {
-
-  }
-
   @if ($type == 'blurred') {
     box-shadow: 0 0 0 3px $color__blue-20;
     outline: 1px solid transparent;
