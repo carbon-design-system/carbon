@@ -88,8 +88,7 @@
     }
 
     .bx--toggle__appearance:after {
-      box-shadow: 0 0 0 3px $color__blue-20;
-      outline: 1px solid transparent;
+      @include focus-outline('blurred');
     }
   }
 
