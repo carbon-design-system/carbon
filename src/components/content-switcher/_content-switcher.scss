@@ -35,9 +35,13 @@
       cursor: pointer;
     }
 
-    &:hover,
-    &:active,
     &:focus {
+      border-color: $brand-02;
+      text-decoration: underline;
+    }
+
+    &:hover,
+    &:active {
       background-color: $brand-02;
       border-color: $brand-02;
       color: $inverse-01;
