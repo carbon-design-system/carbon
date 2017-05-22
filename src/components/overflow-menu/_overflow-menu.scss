@@ -19,7 +19,7 @@
     cursor: pointer;
 
     &:focus {
-      outline: 2px solid $color__blue-30;
+      @include focus-outline('border');
     }
   }
 
@@ -28,7 +28,8 @@
     height: rem(20px);
     fill: $ui-05;
 
-    &:hover {
+    &:hover,
+    &:focus {
       fill: $brand-01;
     }
   }
@@ -75,7 +76,7 @@
     background-color: transparent;
     align-items: center;
     width: 100%;
-    padding: .5625rem 0;
+    padding: 0;
   }
 
   .bx--overflow-menu--divider {
@@ -93,8 +94,20 @@
     display: inline-block;
     background-color: transparent;
     text-align: left;
-    padding: 0 1rem;
+    padding: .5625rem 1rem;
     cursor: pointer;
+
+    &:focus {
+      outline: 1px solid transparent;
+      background-color: $brand-01;
+      color: $inverse-01;
+    }
+
+    .bx--overflow-menu-options__option--danger & {
+      &:focus {
+        background-color: $support-01;
+      }
+    }
   }
 
   .bx--overflow-menu-options__option:hover {

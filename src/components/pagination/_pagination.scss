@@ -62,6 +62,10 @@ $css--helpers: true;
         fill: $brand-01;
       }
     }
+
+    &:focus {
+      @include focus-outline('border');
+    }
   }
 
   .bx--pagination__button--backward {
@@ -84,6 +88,10 @@ $css--helpers: true;
       padding: 0 rem(8px);
       margin: 0;
       font-weight: 700;
+
+      &:focus {
+        @include focus-outline('border');
+      }
     }
 
     .bx--select__arrow {
@@ -99,6 +107,10 @@ $css--helpers: true;
       margin: 0;
       font-weight: 700;
       text-align: center;
+
+      &:focus {
+        @include focus-outline('border');
+      }
     }
   }
 }
