@@ -92,9 +92,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1492625922553
+        "startScan": 1495228784953
     },
-    "scanID": "4e47e583-10ab-4dcf-9259-167d461ffc72",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
     "toolID": "@ibma/aat-v1.2.0",
     "label": "ModuleHeader"
 }

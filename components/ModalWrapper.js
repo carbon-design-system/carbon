@@ -18,7 +18,6 @@ class ModalWrapper extends React.Component {
     modalBeforeContent: PropTypes.bool,
     primaryButtonText: PropTypes.string,
     secondaryButtonText: PropTypes.string,
-    modalProps: PropTypes.object,
     handleSubmit: PropTypes.func,
   };
 
@@ -52,7 +51,6 @@ class ModalWrapper extends React.Component {
       passiveModal,
       primaryButtonText,
       secondaryButtonText,
-      modalProps,
       ...other
     } = this.props;
 
@@ -66,13 +64,19 @@ class ModalWrapper extends React.Component {
       open: this.state.open,
       onRequestClose: this.handleClose,
       onRequestSubmit: this.props.handleSubmit,
-      ref: 'modal',
     };
 
     return (
-      <div>
+      <div
+        onKeyDown={evt => {
+          if (evt.which === 27) {
+            this.handleClose();
+            this.props.onKeyDown(evt);
+          }
+        }}
+      >
         <Button onClick={this.handleOpen}>{buttonTriggerText}</Button>
-        <Modal {...modalProps} {...props} {...other}>
+        <Modal {...props} {...other}>
           {this.props.children}
         </Modal>
       </div>

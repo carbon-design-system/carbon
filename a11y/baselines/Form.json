@@ -68,7 +68,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/form[1]/button[1]",
-                    "snippet": "<button style=\"\" type=\"submit\" class=\"some-class bx--btn\" tabindex=\"0\">",
+                    "snippet": "<button style=\"\" type=\"submit\" class=\"some-class bx--btn bx--btn--primary\" tabindex=\"0\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -93,9 +93,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324747991
+        "startScan": 1495228845620
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "df72a328-2d78-47bc-8523-572407e2e242",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "Form"
 }

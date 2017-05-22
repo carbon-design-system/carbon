@@ -93,9 +93,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491838931853
+        "startScan": 1495228845509
     },
-    "scanID": "dd4610e0-9991-4fd0-a373-d58c6a6c7d19",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "df72a328-2d78-47bc-8523-572407e2e242",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "Checkbox"
 }

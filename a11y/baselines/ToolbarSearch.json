@@ -93,9 +93,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1493053523417
+        "startScan": 1495228785443
     },
-    "scanID": "92a8fe6d-a93f-44ee-9136-eb56da14498d",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
     "toolID": "@ibma/aat-v1.2.0",
     "label": "ToolbarSearch"
 }

@@ -68,7 +68,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/div[1]/input[1]",
-                    "snippet": "<input style=\"\" class=\"bx--text__input bx--text__input\" id=\"test id\" type=\"text\">",
+                    "snippet": "<input style=\"\" class=\"bx--text-input bx--text__input\" id=\"test id\" type=\"text\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -93,9 +93,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491323866968
+        "startScan": 1495228785315
     },
-    "scanID": "8421a61d-33a9-4af1-8a4a-ee0b2d60d1be",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "TextInput"
 }

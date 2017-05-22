@@ -67,8 +67,8 @@
                     "ruleId": "1088",
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/div[1]/div[1]/h4[1]",
-                    "snippet": "<h4 style=\"\" class=\"bx--modal-content__label\">",
+                    "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/h4[1]",
+                    "snippet": "<h4 style=\"\" class=\"bx--modal-header__label\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -83,8 +83,8 @@
                     "ruleId": "1088",
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
-                    "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/button[1]",
-                    "snippet": "<button style=\"\" type=\"button\" class=\"bx--btn--secondary\" tabindex=\"0\">",
+                    "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/button[1]",
+                    "snippet": "<button style=\"\" type=\"button\" class=\"bx--btn bx--btn--secondary\" tabindex=\"0\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -109,9 +109,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324748206
+        "startScan": 1495229530092
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "0584ca24-4382-41b4-8d11-a633103039df",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "Modal"
 }

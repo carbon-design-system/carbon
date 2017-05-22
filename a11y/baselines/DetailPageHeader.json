@@ -2,7 +2,6 @@
     "issueMessages": {
         "messages": {
             "wcag20.tech.h57.htmlLangValid": "Html element must have lang and/or xml:lang attribute that conforms to BCP: 47.",
-            "rpt.g481.htmlSkipNav": "Provide a mechanism to bypass blocks of content that are repeated on multiple Web pages.",
             "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
             "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode."
         },
@@ -59,9 +58,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324748061
+        "startScan": 1495228845718
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "df72a328-2d78-47bc-8523-572407e2e242",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "DetailPageHeader"
 }

@@ -21,7 +21,7 @@
                     "help": "idhi_accessibility_check_g3.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/li[1]",
-                    "snippet": "<li style=\"\" class=\"bx--dropdown__list-item\" value=\"test value\">",
+                    "snippet": "<li style=\"\" class=\"bx--dropdown-item\" value=\"test value\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -85,7 +85,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/li[1]/a[1]",
-                    "snippet": "<a style=\"\" class=\"bx--dropdown__link\" href=\"#\">",
+                    "snippet": "<a style=\"\" class=\"bx--dropdown-link\" href=\"#\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -110,9 +110,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324748029
+        "startScan": 1495228845681
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "df72a328-2d78-47bc-8523-572407e2e242",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "DropdownItem"
 }

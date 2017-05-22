@@ -6,6 +6,7 @@
             "wcag20.tech.h25.docHasTitle": "There must be a non-empty title element in the head of the document.",
             "haac.g1132.BackgroundImgHasTextOrTitle": "Verify that important background image information is conveyed when the system is in high contrast mode.",
             "wcag20.tech.g1.bodyFirstASkips": "The page must provide a link to skip directly to the main page content as the first link on each page or use WAI-ARIA landmarks.",
+            "rpt.g1.styleTrigger": "Web pages must be readable without requiring style sheets or equivalent facilitation is provided.",
             "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role."
         },
         "lang": "en-us"
@@ -68,7 +69,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/div[1]/div[1]/ul[1]",
-                    "snippet": "<ul style=\"\" class=\"bx--overflow-menu__options\">",
+                    "snippet": "<ul style=\"\" class=\"bx--overflow-menu-options\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -93,9 +94,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491323866902
+        "startScan": 1495228785237
     },
-    "scanID": "8421a61d-33a9-4af1-8a4a-ee0b2d60d1be",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "OverflowMenu"
 }

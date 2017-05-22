@@ -93,9 +93,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491323866979
+        "startScan": 1495228785325
     },
-    "scanID": "8421a61d-33a9-4af1-8a4a-ee0b2d60d1be",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "Toggle"
 }

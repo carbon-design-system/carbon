@@ -127,9 +127,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1492624185386
+        "startScan": 1495228845579
     },
-    "scanID": "1786426e-dc84-47a7-8a68-66c005ffba4a",
+    "scanID": "df72a328-2d78-47bc-8523-572407e2e242",
     "toolID": "@ibma/aat-v1.2.0",
     "label": "CopyButton"
 }

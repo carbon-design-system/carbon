@@ -101,7 +101,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/footer[1]/div[2]/button[1]",
-                    "snippet": "<button style=\"\" type=\"submit\" class=\"bx--btn\" tabindex=\"0\">",
+                    "snippet": "<button style=\"\" type=\"submit\" class=\"bx--btn bx--btn--primary\" tabindex=\"0\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -126,9 +126,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1492461837916
+        "startScan": 1495228845599
     },
-    "scanID": "13eaaa18-d69a-4996-b0db-4401b8ce994c",
+    "scanID": "df72a328-2d78-47bc-8523-572407e2e242",
     "toolID": "@ibma/aat-v1.2.0",
     "label": "Footer"
 }

@@ -76,9 +76,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1493053456957
+        "startScan": 1495228785431
     },
-    "scanID": "1ec6489b-8c97-4a32-8bdb-19f3854006ce",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
     "toolID": "@ibma/aat-v1.2.0",
     "label": "ToolbarDivider"
 }

@@ -41,38 +41,47 @@ describe('Modal', () => {
     });
 
     it('should have iconDescription match Icon component description prop', () => {
-      const matches = mounted.props().iconDescription === mounted.find(Icon).props().description;
+      const matches =
+        mounted.props().iconDescription ===
+        mounted.find(Icon).props().description;
       expect(matches).toEqual(true);
     });
 
     it('enables primary button by default', () => {
-      const primaryButton = mounted.find('.bx--modal__buttons-container .bx--btn--primary');
+      const primaryButton = mounted
+        .find('.bx--modal__buttons-container .bx--btn')
+        .at(0);
       expect(primaryButton.prop('disabled')).toEqual(false);
     });
 
     it('disables primary button when diablePrimaryButton prop is passed', () => {
       mounted.setProps({ primaryButtonDisabled: true });
-      const primaryButton = mounted.find('.bx--modal__buttons-container .bx--btn--primary');
-      expect(primaryButton.prop('disabled')).toEqual(true);
+      const primaryButton = mounted
+        .find('.bx--modal__buttons-container .bx--btn')
+        .at(1);
+      expect(primaryButton.props().disabled).toEqual(true);
     });
   });
 
   describe('Adds props as expected to the right children', () => {
     it('should set label if one is passed via props', () => {
       const wrapper = shallow(<Modal modalLabel="modal-1" />);
-      const label = wrapper.find('.bx--modal-content__label');
+      const label = wrapper.find('.bx--modal-header__label');
       expect(label.props().children).toEqual('modal-1');
     });
 
     it('should set modal heading if one is passed via props', () => {
       const wrapper = shallow(<Modal modalHeading="modal-1" />);
-      const heading = wrapper.find('.bx--modal-content__heading');
+      const heading = wrapper.find('.bx--modal-header__heading');
       expect(heading.props().children).toEqual('modal-1');
     });
 
     it('should set button text if one is passed via props', () => {
-      const wrapper = shallow(<Modal primaryButtonText="Submit" secondaryButtonText="Cancel" />);
-      const modalButtons = wrapper.find('.bx--modal__buttons-container').props().children;
+      const wrapper = shallow(
+        <Modal primaryButtonText="Submit" secondaryButtonText="Cancel" />
+      );
+      const modalButtons = wrapper.find('.bx--modal__buttons-container').props()
+        .children;
       expect(modalButtons[0].props.children).toEqual('Cancel');
       expect(modalButtons[1].props.children).toEqual('Submit');
     });
@@ -100,7 +109,7 @@ describe('Modal', () => {
     it('should set open state to false when close button is clicked', () => {
       const wrapper = mount(<ModalWrapper />);
       const modal = wrapper.childAt(1);
-      const closeBtn = modal.find('.bx--modal__close');
+      const closeBtn = modal.find('.bx--modal-close');
       wrapper.setState({ open: true });
       expect(wrapper.state().open).toEqual(true);
       closeBtn.simulate('click');
@@ -110,7 +119,7 @@ describe('Modal', () => {
     it('should stay open when "inner modal" is clicked', () => {
       const wrapper = mount(<ModalWrapper />);
       const modal = wrapper.childAt(1);
-      const div = modal.find('.bx--modal-inner');
+      const div = modal.find('.bx--modal-container');
       wrapper.setState({ open: true });
       div.simulate('click');
       expect(wrapper.state().open).toEqual(true);

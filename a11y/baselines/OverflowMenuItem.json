@@ -21,7 +21,7 @@
                     "help": "idhi_accessibility_check_g3.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/li[1]",
-                    "snippet": "<li style=\"\">",
+                    "snippet": "<li style=\"\" class=\"bx--overflow-menu-options__option\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -85,7 +85,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/li[1]/button[1]",
-                    "snippet": "<button style=\"\" class=\" bx--overflow-menu__btn\" type=\"button\">",
+                    "snippet": "<button style=\"\" class=\" bx--overflow-menu-options__btn\" type=\"button\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -110,9 +110,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491323866887
+        "startScan": 1495228785200
     },
-    "scanID": "8421a61d-33a9-4af1-8a4a-ee0b2d60d1be",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "OverflowMenuItem"
 }

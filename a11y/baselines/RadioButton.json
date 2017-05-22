@@ -68,7 +68,7 @@
                     "help": "idhi_accessibility_check_g1088.html",
                     "msgArgs": [],
                     "xpath": "/html[1]/body[1]/div[1]/input[1]",
-                    "snippet": "<input style=\"\" id=\"id21\" class=\"bx--radio\" value=\"test value\" type=\"radio\">",
+                    "snippet": "<input style=\"\" id=\"id3\" class=\"bx--radio-button\" value=\"test value\" type=\"radio\">",
                     "bounds": {
                         "left": 0,
                         "top": 0,
@@ -93,9 +93,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324748450
+        "startScan": 1495228785135
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "RadioButton"
 }

@@ -110,9 +110,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491339881178
+        "startScan": 1495228845416
     },
-    "scanID": "066cdfe1-6efc-41ea-8ee8-3f376e6326f9",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "df72a328-2d78-47bc-8523-572407e2e242",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "BreadcrumbItem"
 }

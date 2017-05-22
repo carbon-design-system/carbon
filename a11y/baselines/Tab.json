@@ -130,9 +130,9 @@
         "reportLevels": [
             "violation"
         ],
-        "startScan": 1491324748374
+        "startScan": 1495228785049
     },
-    "scanID": "95b1a0ca-ffee-4649-a9e4-4b7003b54257",
-    "toolID": "@ibma/aat-v1.1.0",
+    "scanID": "fe400783-dea3-4ae9-91c2-f1d9056c4861",
+    "toolID": "@ibma/aat-v1.2.0",
     "label": "Tab"
 }

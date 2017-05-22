@@ -21,7 +21,6 @@ class Modal extends Component {
     iconDescription: PropTypes.string,
     primaryButtonDisabled: PropTypes.bool,
   };
-
   static defaultProps = {
     onRequestClose: () => {},
     onRequestSubmit: () => {},
@@ -44,7 +43,6 @@ class Modal extends Component {
       this.props.onRequestClose();
     }
   };
-
   render() {
     const {
       modalHeading,
@@ -68,48 +66,54 @@ class Modal extends Component {
     });
 
     const modalLabelContent = modalLabel
-      ? <h4 className="bx--modal-content__label">{modalLabel}</h4>
+      ? <h4 className="bx--modal-header__label">{modalLabel}</h4>
       : '';
 
     const modalBody = passiveModal
-      ? <div ref="modalInner" className="bx--modal-inner">
+      ? <div ref="modalInner" className="bx--modal-container">
+          <div className="bx--modal-header">
+            <button
+              className="bx--modal-close"
+              type="button"
+              onClick={onRequestClose}
+            >
+              <Icon
+                name="close"
+                className="bx--modal-close__icon"
+                description={iconDescription}
+              />
+            </button>
+            {modalLabelContent}
+            <h2 className="bx--modal-header__heading">
+              {modalHeading}
+            </h2>
+          </div>
           <div className="bx--modal-content">
-            <div className="bx--modal__header">
-              <button
-                className="bx--modal__close"
-                type="button"
-                onClick={onRequestClose}
-              >
-                <Icon
-                  name="close"
-                  className="bx--modal__close--icon"
-                  description={iconDescription}
-                />
-              </button>
-              {modalLabelContent}
-              <h2 className="bx--modal-content__heading">{modalHeading}</h2>
-            </div>
             {this.props.children}
           </div>
         </div>
-      : <div ref="modalInner" className="bx--modal-inner">
-          {modalLabelContent}
-          <h2 className="bx--modal-content__heading">{modalHeading}</h2>
-          <button
-            className="bx--modal__close"
-            type="button"
-            onClick={onRequestClose}
-          >
-            <Icon
-              name="close"
-              className="bx--modal__close--icon"
-              description={iconDescription}
-            />
-          </button>
+      : <div ref="modalInner" className="bx--modal-container">
+          <div className="bx--modal-header">
+            {modalLabelContent}
+            <h2 className="bx--modal-header__heading">
+              {modalHeading}
+            </h2>
+            <button
+              className="bx--modal-close"
+              type="button"
+              onClick={onRequestClose}
+            >
+              <Icon
+                name="close"
+                className="bx--modal-close__icon"
+                description={iconDescription}
+              />
+            </button>
+          </div>
           <div className="bx--modal-content">
             {this.props.children}
           </div>
-          <div className="bx--modal__buttons">
+          <div className="bx--modal-footer">
             <div className="bx--modal__buttons-container">
               <Button kind="secondary" onClick={onRequestClose}>
                 {secondaryButtonText}
