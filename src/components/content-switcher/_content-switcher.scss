@@ -26,11 +26,18 @@
     color: $brand-01;
 
     &:focus {
-      @include focus-outline;
+      outline: 1px solid transparent;
+      box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+      z-index: 2;
     }
 
     &:hover {
       cursor: pointer;
+    }
+
+    &:focus {
+      border-color: $brand-02;
+      text-decoration: underline;
     }
 
     &:hover,
@@ -52,6 +59,11 @@
     &:hover {
       border-color: $brand-02;
     }
+
+    &:focus {
+      box-shadow: -2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+      z-index: 0;
+    }
   }
 
   .bx--content-switcher-btn:last-of-type {
@@ -60,6 +72,11 @@
 
     &:hover {
       border-color: $brand-02;
+    }
+
+    &:focus {
+      box-shadow: 2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+      z-index: 0;
     }
   }
 
