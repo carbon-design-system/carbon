@@ -100,7 +100,7 @@
 
     &:hover {
       color: $inverse-01;
-      border: 2px solid transparent;
+      border: $button-border-width solid transparent;
     }
 
     &:focus {
@@ -110,7 +110,7 @@
     &:hover:disabled,
     &:focus:disabled {
       color: $ui-05;
-      border: 2px solid currentColor;
+      border: $button-border-width solid currentColor;
     }
 
     &:hover > .bx--btn__icon,
