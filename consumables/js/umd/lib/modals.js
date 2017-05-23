@@ -106,21 +106,15 @@
     (0, _createClass3.default)(Modal, [{
       key: 'createdByLauncher',
       value: function createdByLauncher(event) {
-        var _this2 = this;
-
-        this.show(event, function (error, shownAlready) {
-          if (!error && !shownAlready && _this2.element.offsetWidth > 0 && _this2.element.offsetHeight > 0) {
-            _this2.element.focus();
-          }
-        });
+        this.show(event);
       }
     }, {
       key: 'hookCloseActions',
       value: function hookCloseActions() {
-        var _this3 = this;
+        var _this2 = this;
 
         this.element.addEventListener('click', function (event) {
-          if (event.currentTarget === event.target) _this3.hide(event);
+          if (event.currentTarget === event.target) _this2.hide(event);
         });
 
         if (this.keydownHandler) {
@@ -130,7 +124,7 @@
 
         this.keydownHandler = function (event) {
           if (event.which === 27) {
-            _this3.hide(event);
+            _this2.hide(event);
           }
         };
 
@@ -138,7 +132,7 @@
 
         [].concat((0, _toConsumableArray3.default)(this.element.querySelectorAll('[data-modal-close]'))).forEach(function (element) {
           element.addEventListener('click', function (event) {
-            _this3.hide(event);
+            _this2.hide(event);
           });
         });
       }
@@ -150,17 +144,23 @@
     }, {
       key: '_changeState',
       value: function _changeState(state, detail, callback) {
-        var _this4 = this;
+        var _this3 = this;
 
         var finished = void 0;
+        var visible = state === 'shown';
         var finishedTransition = function finishedTransition() {
           if (!finished) {
             finished = true;
-            _this4.element.removeEventListener('transitionend', finishedTransition);
+            _this3.element.removeEventListener('transitionend', finishedTransition);
+            if (visible && _this3.element.offsetWidth > 0 && _this3.element.offsetHeight > 0) {
+              // Sets focus to modal's container element so that hitting tab navigates user to first navigable element in modal.
+              // Application can override this behavior by hooking to `modal-shown` event and setting focus to an element.
+              // (e.g. default input box, default button)
+              _this3.element.focus();
+            }
             callback();
           }
         };
-        var visible = state === 'shown';
 
         this.element.addEventListener('transitionend', finishedTransition);
         var transitionDuration = getTransitionDuration(this.element);
