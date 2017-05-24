@@ -88,6 +88,10 @@
     height: 1rem;
     fill: $text-01;
     cursor: pointer;
+
+    &:focus {
+      @include focus-outline('border');
+    }
   }
 
   .bx--file__state-container .bx--file-close {

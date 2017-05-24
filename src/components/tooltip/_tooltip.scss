@@ -24,6 +24,7 @@
       cursor: pointer;
 
       &:focus {
+        @include focus-outline('border');
         fill: $brand-02;
       }
     }
@@ -166,6 +167,14 @@
       &:after {
         position: absolute;
         display: block;
+      }
+    }
+
+    &:focus {
+      outline: 1px solid transparent;
+
+      svg {
+        @include focus-outline('border');
       }
     }
   }
