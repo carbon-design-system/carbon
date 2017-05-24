@@ -13,6 +13,14 @@
     visibility: visible;
     white-space: nowrap;
   }
+
+  .bx--body {
+    @include reset;
+    @include helvetica;
+    color: $text-01;
+    background-color: $ui-02;
+    line-height: 1;
+  }
 }
 
 @include exports('css--helpers') {
