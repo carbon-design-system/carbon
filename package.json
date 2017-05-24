@@ -110,7 +110,7 @@
     "warning": "3.0.0"
   },
   "devDependencies": {
-    "@ibma/aat": "^1.0.29",
+    "@ibma/aat": "1.2.0",
     "@kadira/react-storybook-addon-info": "3.2.1",
     "@kadira/react-storybook-decorator-centered": "^1.0.0",
     "@kadira/storybook": "^2.35.3",
