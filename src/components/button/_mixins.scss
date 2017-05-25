@@ -28,6 +28,8 @@
     width: rem(16px);
     height: rem(16px);
     margin-left: .5rem;
+    transition-duration: $transition--base;
+    transition-timing-function: ease-in;
   }
 }
 
