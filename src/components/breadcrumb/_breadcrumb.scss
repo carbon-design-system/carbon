@@ -48,6 +48,7 @@
       border-bottom: 1px solid $brand-01;
     }
 
+    // Applies to Firefox only
     @-moz-document url-prefix() {
       & {
         border-bottom: none;
