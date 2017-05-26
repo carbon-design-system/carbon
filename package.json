@@ -29,6 +29,7 @@
     "style guide"
   ],
   "dependencies": {
+    "carbon-icons": "^6.0.4",
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
