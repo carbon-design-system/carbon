@@ -1,29 +1,25 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/css--helpers';
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 
-.bx--descriptive-list-container {
-  @include reset;
-  @include helvetica;
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 99.9%;
+.bx--descriptive-list-thead {
+  display: table-header-group;
+  vertical-align: middle;
+}
 
-  fieldset {
-    @include reset;
-  }
-
-  input[type='radio'],
-  legend {
-    @include hidden;
-  }
+.bx--descriptive-list-tbody {
+  display: table-row-group;
+  vertical-align: middle;
 }
 
 .bx--descriptive-list-row {
+  cursor: pointer;
+  display: table-row;
   height: rem(32px);
   padding-left: 1rem;
 
@@ -34,20 +30,27 @@
 
 .bx--descriptive-list {
   @include reset;
+  @include helvetica;
+  display: table;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-collapse: separate;
+  border-spacing: 2px;
   background-color: $ui-01;
   width: 100%;
   min-width: 500px;
   border-collapse: collapse;
   border-spacing: 0;
-  border: 2px solid $ui-04;
 
-  td {
+  .bx--descriptive-list-td {
+    display: table-cell;
     font-size: rem(14px);
     padding: 0 rem(6px);
     vertical-align: middle;
   }
 
-  th {
+  .bx--descriptive-list-th {
+    display: table-cell;
     font-size: rem(12px);
     padding: rem(9px) rem(6px);
     vertical-align: middle;
