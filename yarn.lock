@@ -1049,9 +1049,9 @@ caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   version "1.0.30000649"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000649.tgz#1ee1754a6df235450c8b7cd15e0ebf507221a86a"
 
-carbon-icons@5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-5.1.2.tgz#efb36eb482ec6eb664d11af934a487745045be2e"
+carbon-icons@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-6.0.3.tgz#068b3d4bc919f12c646ef9056985708387c67013"
 
 caseless@~0.11.0:
   version "0.11.0"
