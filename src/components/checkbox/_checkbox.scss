@@ -62,7 +62,7 @@
 
   .bx--checkbox:focus + .bx--checkbox-label .bx--checkbox-appearance,
   .bx--checkbox:focus + .bx--checkbox-appearance {
-    @include focus-outline;
+    @include focus-outline('blurred');
   }
 
   .bx--checkbox-checkmark {
@@ -75,5 +75,11 @@
   .bx--checkbox:checked + .bx--checkbox-appearance .bx--checkbox-checkmark,
   .bx--checkbox:checked + .bx--checkbox-label .bx--checkbox-appearance .bx--checkbox-checkmark {
     display: block;
+
+    @-moz-document url-prefix() {
+      & {
+        stroke: $brand-01;
+      }
+    }
   }
 }

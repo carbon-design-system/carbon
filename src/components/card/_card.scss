@@ -26,6 +26,10 @@
     height: rem(240px);
     background-color: $ui-01;
     border: 1px solid $ui-04;
+
+    &:focus {
+      @include focus-outline('border');
+    }
   }
 
   .bx--card__card-overview {
@@ -153,23 +157,28 @@
   .bx--app-actions__button {
     @include font-size('16');
     display: inline-block;
-    padding: 0;
-    margin: 0;
+    padding: .125rem 0 0;
+    margin: 0 .175rem;
     cursor: pointer;
     background: none;
     border: none;
 
-    &:hover {
+    &:hover,
+    &:focus {
       .bx--app-actions__button--icon {
         fill: $brand-01;
       }
+    }
+
+    &:focus {
+      @include focus-outline('border');
     }
   }
 
   .bx--app-actions__button--icon {
     width: 1rem;
     height: 1rem;
-    margin: 0 .3rem;
+    margin: 0 .125rem;
     transition: 200ms;
     fill: $ui-05;
     cursor: pointer;
