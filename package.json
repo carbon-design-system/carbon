@@ -29,7 +29,6 @@
     "style guide"
   ],
   "dependencies": {
-    "carbon-icons": "5.1.2",
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
@@ -99,7 +98,6 @@
     "semantic-release": "^6.3.2",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
-    "svgxuse": "1.1.22",
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0"
   },
