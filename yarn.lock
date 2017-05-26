@@ -1049,6 +1049,10 @@ caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   version "1.0.30000649"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000649.tgz#1ee1754a6df235450c8b7cd15e0ebf507221a86a"
 
+carbon-icons@5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-5.1.2.tgz#efb36eb482ec6eb664d11af934a487745045be2e"
+
 caseless@~0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.11.0.tgz#715b96ea9841593cc33067923f5ec60ebda4f7d7"
@@ -5823,10 +5827,6 @@ supports-color@^3.1.0, supports-color@^3.2.3:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-3.2.3.tgz#65ac0504b3954171d8a64946b2ae3cbb8a5f54f6"
   dependencies:
     has-flag "^1.0.0"
-
-svgxuse@1.1.22:
-  version "1.1.22"
-  resolved "https://registry.yarnpkg.com/svgxuse/-/svgxuse-1.1.22.tgz#94ffebbba0126f15f848fc5918f558433273829b"
 
 table@^3.7.8:
   version "3.8.3"
