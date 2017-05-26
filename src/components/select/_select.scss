@@ -23,7 +23,6 @@
     display: block;
     width: 100%;
     padding: .75rem 2.75rem .75rem 1rem;
-    height: rem(40px);
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -69,6 +68,28 @@
 
     .bx--select-optgroup {
       color: $text-01;
+    }
+  }
+}
+
+.bx--select--inline {
+  display: flex;
+  align-items: center;
+
+  .bx--label {
+    white-space: nowrap;
+    margin: 0 .5rem 0 0;
+    font-weight: 400;
+  }
+
+  .bx--select-input {
+    background-color: transparent;
+    color: $brand-01;
+    font-weight: 600;
+
+    &:disabled ~ * {
+      opacity: .5;
+      cursor: not-allowed;
     }
   }
 }
