@@ -28,7 +28,6 @@ const directoryOrder = [
 app.engine('dust', adaro.dust());
 app.set('view engine', 'dust');
 app.set('views', path.resolve(__dirname, 'demo/views'));
-app.use(express.static('node_modules'));
 app.use(express.static('demo'));
 app.use(express.static('src'));
 app.use('/docs/js', express.static('docs/js'));
@@ -36,11 +35,11 @@ app.use('/docs/js', express.static('docs/js'));
 const getContent = glob =>
   globby(glob).then(
     paths =>
-      (paths.length === 0
+      paths.length === 0
         ? undefined
         : paths
             .map(file => fs.readFileSync(file, { encoding: 'utf8' }))
-            .reduce((a, b) => a.concat(b)))
+            .reduce((a, b) => a.concat(b))
   );
 
 const allLinks = globby(directoryOrder).then(paths => {
