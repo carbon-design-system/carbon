@@ -7,27 +7,6 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 
-.bx--descriptive-list-thead {
-  display: table-header-group;
-  vertical-align: middle;
-}
-
-.bx--descriptive-list-tbody {
-  display: table-row-group;
-  vertical-align: middle;
-}
-
-.bx--descriptive-list-row {
-  cursor: pointer;
-  display: table-row;
-  height: rem(32px);
-  padding-left: 1rem;
-
-  &.bx--descriptive-list-row--header-row {
-    border-bottom: 1px solid $brand-01;
-  }
-}
-
 .bx--descriptive-list {
   @include reset;
   @include helvetica;
@@ -41,41 +20,56 @@
   min-width: 500px;
   border-collapse: collapse;
   border-spacing: 0;
+}
 
-  .bx--descriptive-list-td {
-    display: table-cell;
-    font-size: rem(14px);
-    padding: 0 rem(6px);
-    vertical-align: middle;
+.bx--descriptive-list-row {
+  cursor: pointer;
+  display: table-row;
+  height: rem(32px);
+  padding-left: 1rem;
+
+  &.bx--descriptive-list-row--header-row {
+    border-bottom: 1px solid $brand-01;
   }
 
-  .bx--descriptive-list-th {
-    display: table-cell;
-    font-size: rem(12px);
-    padding: rem(9px) rem(6px);
-    vertical-align: middle;
-    font-weight: 700;
-
-    &:focus {
-      outline: 1px solid transparent;
-
-      span {
-        @include focus-outline('border');
-      }
-    }
+  &:hover {
+    background-color: rgba($brand-02, .1);
   }
+}
+
+.bx--descriptive-list-thead {
+  display: table-header-group;
+  vertical-align: middle;
 }
 
 .bx--descriptive-list-th {
   @include reset;
-  font-weight: 700;
+  display: table-cell;
   font-size: rem(12px);
+  font-weight: 700;
+  height: rem(40px);
   letter-spacing: 1px;
+  padding: rem(9px) rem(6px);
   text-align: left;
   text-transform: uppercase;
-  height: rem(40px);
+  vertical-align: middle;
+
+  &:focus {
+    outline: 1px solid black;
+  }
 }
 
+.bx--descriptive-list-tbody {
+  display: table-row-group;
+  vertical-align: middle;
+}
+
+.bx--descriptive-list-td {
+  display: table-cell;
+  font-size: rem(14px);
+  padding: 0 rem(6px);
+  vertical-align: middle;
+}
 
 .bx--descriptive-list-svg {
   fill: transparent;
