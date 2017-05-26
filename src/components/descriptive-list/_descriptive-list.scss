@@ -1,11 +1,15 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
-@import '../../globals/scss/css--helpers';
+// @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
+
+.bx--descriptive-list-input {
+  @include hidden;
+}
 
 .bx--descriptive-list {
   @include reset;
@@ -25,14 +29,13 @@
 .bx--descriptive-list-row {
   cursor: pointer;
   display: table-row;
-  height: rem(32px);
   padding-left: 1rem;
 
   &.bx--descriptive-list-row--header-row {
     border-bottom: 1px solid $brand-01;
   }
 
-  &:hover {
+  &:hover:not(.bx--descriptive-list-row--header-row) {
     background-color: rgba($brand-02, .1);
   }
 }
@@ -53,10 +56,6 @@
   text-align: left;
   text-transform: uppercase;
   vertical-align: middle;
-
-  &:focus {
-    outline: 1px solid black;
-  }
 }
 
 .bx--descriptive-list-tbody {
@@ -65,20 +64,31 @@
 }
 
 .bx--descriptive-list-td {
+  position: relative;
   display: table-cell;
-  font-size: rem(14px);
-  padding: 0 rem(6px);
+  padding: 1rem .5rem;
   vertical-align: middle;
+  font-size: rem(14px);
+}
+
+.bx--descriptive-list-content {
+  @include line-height('body');
+}
+
+.bx--descriptive-list-content--nowrap {
+  white-space: nowrap;
 }
 
 .bx--descriptive-list-svg {
+  display: inline-block;
   fill: transparent;
+  padding: 0 .4rem;
 
   .bx--descriptive-list-row:hover & {
-    fill: salmon;
+    fill: rgba($brand-02, .1);
   }
 
-  input[type="radio"]:checked + label & {
-    fill: red;
+  .bx--descriptive-list-input:checked + .bx--descriptive-list-row & {
+    fill: $brand-02;
   }
 }
