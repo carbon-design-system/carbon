@@ -20,8 +20,9 @@ $css--reset: false !default;
 @import 'css--body';
 
 //-------------------------
-// 🍅 Base Elements
+// 🍕 Components
 //-------------------------
+
 @import '../../components/button/button';
 @import '../../components/copy-button/copy-button';
 @import '../../components/file-uploader/file-uploader';
@@ -37,11 +38,8 @@ $css--reset: false !default;
 @import '../../components/link/link';
 @import '../../components/list/list';
 @import '../../components/data-table/data-table';
+@import '../../components/descriptive-list/descriptive-list';
 @import '../../components/code-snippet/code-snippet';
-
-//-------------------------
-// 🍕 Components
-//-------------------------
 @import '../../components/overflow-menu/overflow-menu';
 @import '../../components/card/card';
 @import '../../components/content-switcher/content-switcher';
