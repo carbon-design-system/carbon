@@ -30,6 +30,8 @@
   ],
   "dependencies": {
     "carbon-icons": "^6.0.4",
+    "flatpickr": "^2.6.3",
+    "koa": "^2.2.0",
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
