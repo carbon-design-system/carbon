@@ -1,21 +1,22 @@
-<div class="bx--responsive-table-container bx--select-list-container">
-  <fieldset class="bx--fieldset">
-    <legend class="bx--visually-hidden" aria-label="choose a service"></legend>
-    <table class="bx--responsive-table bx--select-list">
-      <thead class="bx--table-head">
-        <tr class="bx--table-row bx--select-list__header-row">
-          <th class="bx--table-header"></th>
-          <th class="bx--table-header">service</th>
-          <th class="bx--table-header">type</th>
-        </tr>
-      </thead>
-      <tbody class="bx--table-body">
-        <label for="first-row">
-          <input class="" type="radio" id="first-row" name="services" checked />
-          <tr class="bx--table-row bx--select-list__row">
+<form action="POST">
+  <div class="bx--descriptive-list-container">
+    <fieldset>
+      <legend aria-label="choose a service"></legend>
+      <table class="bx--descriptive-list">
+        <thead>
+          <tr class="bx--descriptive-list-row bx--descriptive-list-row--header-row">
+            <th class="bx--descriptive-list-th"></th>
+            <th class="bx--descriptive-list-th">service</th>
+            <th class="bx--descriptive-list-th">type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bx--descriptive-list-row">
             <td>
+              <input value="apache spark" type="radio" id="1" name="services" aria-label="apache spark" title="apache spark" checked />
+              <label for="1">
               <svg
-                class="bx--select-list-svg"
+                class="bx--descriptive-list-svg"
                 width="16"
                 height="16"
                 viewBox="0 0 16 16"
@@ -23,38 +24,64 @@
                 <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z">
                 </path>
               </svg>
+              </label>
             </td>
             <td>
-              Apache Spark
+              <label for="1">Apache Spark</label>
             </td>
             <td>
-              IBM
+              <label for="1">IBM</label>
             </td>
           </tr>
-        </label>
-        <tr class="bx--table-row bx--select-list__row">
-          <td>
-            <input class="bx--visually-hidden" type="radio" id="second-row" name="services" />
-            <label for="second-row" aria-label="apache spark">
+          <tr class="bx--descriptive-list-row">
+            <td>
+              <input value="BigInsights for Hadoop" type="radio" id="2" name="services" aria-label="BigInsights for Hadoop" title="BigInsights for Hadoop"
+              />
+              <label for="2">
               <svg
-                class="bx--select-list-svg"
+                class="bx--descriptive-list-svg"
                 width="16"
                 height="16"
                 viewBox="0 0 16 16"
                 fill-rule="evenodd">
-                <path
-                   d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z">                </path>
+                <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z">
+                </path>
               </svg>
-            </label>
-          </td>
-          <td>
-            <label for="second-row">BigInsights for Hadoop</label>
-          </td>
-          <td>
-            <label for="second-row">Community</label>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </fieldset>
-</div>
+              </label>
+            </td>
+            <td>
+              <label for="2">BigInsights for Hadoop</label>
+            </td>
+            <td>
+              <label for="2">Communtiy</label>
+            </td>
+          </tr>
+          <tr class="bx--descriptive-list-row">
+            <td>
+              <input value="Cloudant NoSQL DB" type="radio" id="3" name="services" aria-label="Cloudant NoSQL DB" title="Cloudant NoSQL DB"
+              />
+              <label for="3">
+              <svg
+                class="bx--descriptive-list-svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill-rule="evenodd">
+                <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z">
+                </path>
+              </svg>
+              </label>
+            </td>
+            <td>
+              <label for="3">Cloudant NoSQL DB</label>
+            </td>
+            <td>
+              <label for="3">IBM</label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </fieldset>
+  </div>
+  <button type="submit">submit</button>
+</form>

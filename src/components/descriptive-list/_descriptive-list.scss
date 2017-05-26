@@ -1,0 +1,87 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/import-once';
+
+.bx--descriptive-list-container {
+  @include reset;
+  @include helvetica;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 99.9%;
+
+  fieldset {
+    @include reset;
+  }
+
+  input[type='radio'],
+  legend {
+    @include hidden;
+  }
+}
+
+.bx--descriptive-list-row {
+  height: rem(32px);
+  padding-left: 1rem;
+
+  &.bx--descriptive-list-row--header-row {
+    border-bottom: 1px solid $brand-01;
+  }
+}
+
+.bx--descriptive-list {
+  @include reset;
+  background-color: $ui-01;
+  width: 100%;
+  min-width: 500px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 2px solid $ui-04;
+
+  td {
+    font-size: rem(14px);
+    padding: 0 rem(6px);
+    vertical-align: middle;
+  }
+
+  th {
+    font-size: rem(12px);
+    padding: rem(9px) rem(6px);
+    vertical-align: middle;
+    font-weight: 700;
+
+    &:focus {
+      outline: 1px solid transparent;
+
+      span {
+        @include focus-outline('border');
+      }
+    }
+  }
+}
+
+.bx--descriptive-list-th {
+  @include reset;
+  font-weight: 700;
+  font-size: rem(12px);
+  letter-spacing: 1px;
+  text-align: left;
+  text-transform: uppercase;
+  height: rem(40px);
+}
+
+
+.bx--descriptive-list-svg {
+  fill: transparent;
+
+  .bx--descriptive-list-row:hover & {
+    fill: salmon;
+  }
+
+  input[type="radio"]:checked + label & {
+    fill: red;
+  }
+}
