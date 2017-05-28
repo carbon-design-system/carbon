@@ -19,7 +19,7 @@ const TYPES = {
 };
 
 const propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
   className: PropTypes.string,
   type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
 };

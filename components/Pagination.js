@@ -25,7 +25,7 @@ class Pagination extends Component {
     pageRangeText: PropTypes.func,
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
     totalItems: PropTypes.number.isRequired,
-    disabled: React.PropTypes.bool,
+    disabled: PropTypes.bool,
     page: PropTypes.number,
     pageSize: PropTypes.number,
   }
