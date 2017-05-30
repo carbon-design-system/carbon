@@ -17,32 +17,51 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
 
     this.element.addEventListener('keydown', (evt) => {
-      if (evt.which === 13) {
-        this._handleKeyDown(evt);
-      }
-
-      if (evt.which === 32) {
-        evt.preventDefault();
-        this._handleKeyDown(evt);
-      }
+      this._handleKeyDown(evt);
     });
   }
 
-  _handleKeyDown = (evt) => {
-    const selectedRow = eventMatches(evt, this.options.selectorRow);
+  _handleKeyDown(evt) {
+    const direction = {
+      38: this.constructor.NAVIGATE.BACKWARD,
+      40: this.constructor.NAVIGATE.FORWARD,
+    }[event.which];
 
-    if (selectedRow) {
-      const id = `#${selectedRow.getAttribute('for')}`;
-      const input = document.querySelector(`${id}.bx--structured-list-input`);
-      input.checked = true;
+    if (direction) {
+      const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
+      const selectedRow = eventMatches(evt, this.options.selectorRow);
+      let nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
+
+      if (nextIndex < 0) {
+        nextIndex = 0;
+        rows[0].focus();
+        const id = `#${rows[0].getAttribute('for')}`;
+        const input = document.querySelector(`${id}.bx--structured-list-input`);
+        input.checked = true;
+      } else if (nextIndex === rows.length) {
+        rows[rows.length - 1].focus();
+        const id = `#${rows[rows.length - 1].getAttribute('for')}`;
+        const input = document.querySelector(`${id}.bx--structured-list-input`);
+        input.checked = true;
+      } else {
+        rows[nextIndex].focus();
+        const id = `#${rows[nextIndex].getAttribute('for')}`;
+        const input = document.querySelector(`${id}.bx--structured-list-input`);
+        input.checked = true;
+      }
     }
+  }
+
+  static NAVIGATE = {
+    BACKWARD: -1,
+    FORWARD: 1,
   };
 
   static components = new WeakMap();
 
   static options = {
     selectorInit: '[data-structured-list]',
-    selectorRow: '.bx--structured-list-row',
+    selectorRow: '.bx--structured-list-tbody .bx--structured-list-row',
   };
 }
 
