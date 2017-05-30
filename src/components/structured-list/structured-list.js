@@ -21,6 +21,10 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     });
   }
 
+  _getRowId(array, index) {
+    return `#${array[index].getAttribute('for')}`;
+  }
+
   _handleKeyDown(evt) {
     const direction = {
       38: this.constructor.NAVIGATE.BACKWARD,
@@ -31,23 +35,23 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
       const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
       const selectedRow = eventMatches(evt, this.options.selectorRow);
       const nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
+      let input;
 
       if (nextIndex < 0) {
         rows[rows.length - 1].focus();
-        const id = `#${rows[rows.length - 1].getAttribute('for')}`;
-        const input = document.querySelector(`${id}.bx--structured-list-input`);
-        input.checked = true;
+        input = document.querySelector(
+          `${this._getRowId(rows, rows.length - 1)}.bx--structured-list-input`,
+        );
       } else if (nextIndex === rows.length) {
         rows[0].focus();
-        const id = `#${rows[0].getAttribute('for')}`;
-        const input = document.querySelector(`${id}.bx--structured-list-input`);
-        input.checked = true;
+        input = document.querySelector(`${this._getRowId(rows, 0)}.bx--structured-list-input`);
       } else {
         rows[nextIndex].focus();
-        const id = `#${rows[nextIndex].getAttribute('for')}`;
-        const input = document.querySelector(`${id}.bx--structured-list-input`);
-        input.checked = true;
+        input = document.querySelector(
+          `${this._getRowId(rows, nextIndex)}.bx--structured-list-input`,
+        );
       }
+      input.checked = true;
     }
   }
 
