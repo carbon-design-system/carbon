@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Icon from './Icon';
 if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/accordion/accordion.scss');
+  import('carbon-components/consumables/scss/components/accordion/accordion.scss');
 }
 
 class AccordionItem extends Component {

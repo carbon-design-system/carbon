@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from './Modal';
 import Button from './Button';
 if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/modals/modals.scss');
+  import('carbon-components/consumables/scss/components/modals/modals.scss');
 }
 
 class ModalWrapper extends React.Component {

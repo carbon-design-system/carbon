@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/base-elements/file-uploader/file-uploader.scss');
+  import('carbon-components/consumables/scss/base-elements/file-uploader/file-uploader.scss');
 }
 
 class FileUploader extends React.Component {

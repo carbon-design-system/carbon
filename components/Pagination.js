@@ -10,7 +10,7 @@ import TextInput from './TextInput';
 import { equals } from '../lib/array';
 
 if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/pagination/pagination.scss');
+  import('carbon-components/consumables/scss/components/pagination/pagination.scss');
 }
 
 class Pagination extends Component {

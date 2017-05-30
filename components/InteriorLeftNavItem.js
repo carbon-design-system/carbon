@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
+  import('carbon-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
 }
 
 const propTypes = {

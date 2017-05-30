@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/accordion/accordion.scss');
+  import('carbon-components/consumables/scss/components/accordion/accordion.scss');
 }
 
 const propTypes = {

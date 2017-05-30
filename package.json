@@ -1,26 +1,26 @@
 {
-  "name": "@console/bluemix-components-react",
+  "name": "carbon-components-react",
   "version": "2.2.1",
-  "description": "A React wrapper for bluemix-components",
+  "description": "A React wrapper for carbon-components",
   "main": "dist/index.js",
   "scripts": {
     "check": "npm run lint && npm run test",
-    "coverage": "jest '/(components|lib|internal)/' --coverage && node scripts/create-badge.js",
     "lint": "eslint --ignore-pattern dist .",
-    "storybook": "start-storybook -p 9001",
+    "storybook": "start-storybook -p 8080",
     "test": "jest '/(components|lib|internal)/'",
     "test-watch": "jest '/(components|lib|internal)/' --watch",
     "test-a11y": "jest '/a11y/'",
     "build-storybook": "build-storybook -s .storybook -o .gh-pages/storybook",
-    "gh-pages": "node scripts/gh-pages.js",
-    "build-es5": "babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
+    "build": "babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
     "commitmsg": "validate-commit-msg",
     "commit": "git cz"
   },
   "keywords": [
     "react",
     "bluemix",
-    "bluemix-components"
+    "bluemix-components",
+    "carbon",
+    "carbon-components"
   ],
   "files": [
     "dist/**/*"
@@ -51,7 +51,7 @@
       "email": "chrisdhanaraj@us.ibm.com"
     }
   ],
-  "license": "MIT",
+  "license": "Apache-2",
   "eslintConfig": {
     "parser": "babel-eslint",
     "extends": "airbnb",
@@ -100,7 +100,7 @@
     }
   },
   "dependencies": {
-    "@console/bluemix-components": "6.18.1",
+    "carbon-components": "6.18.1",
     "carbon-icons": "5.1.2",
     "classnames": "2.2.5",
     "prop-types": "^15.5.8",

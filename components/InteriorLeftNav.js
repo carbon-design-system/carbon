@@ -8,7 +8,7 @@ import InteriorLeftNavList from './InteriorLeftNavList';
 import InteriorLeftNavItem from './InteriorLeftNavItem';
 import Icon from './Icon';
 if (!process.env.EXCLUDE_SASS) {
-  import('@console/bluemix-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
+  import('carbon-components/consumables/scss/components/inline-left-nav/inline-left-nav.scss');
 }
 
 class InteriorLeftNav extends Component {
