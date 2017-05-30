@@ -31,10 +31,10 @@
   "dependencies": {
     "carbon-icons": "^6.0.4",
     "flatpickr": "^2.6.3",
-    "koa": "^2.2.0",
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
+    "@ibma/karma-ibma": "^2.2.0",
     "adaro": "1.0.4",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",
