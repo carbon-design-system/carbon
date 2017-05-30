@@ -1,7 +1,6 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
-// @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/layout';
@@ -24,6 +23,10 @@
   min-width: 500px;
   border-collapse: collapse;
   border-spacing: 0;
+
+  &.bx--descriptive-list--border {
+    border: 1px solid $ui-04;
+  }
 }
 
 .bx--descriptive-list-row {
@@ -33,7 +36,7 @@
   border-bottom: 1px solid $ui-04;
 
   &.bx--descriptive-list-row--header-row {
-    border-bottom: 1px solid $brand-01;
+    border-bottom: 2px solid $brand-01;
   }
 
   &:hover:not(.bx--descriptive-list-row--header-row) {
