@@ -16,19 +16,27 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    this.labels = [...this.element.querySelectorAll('input.bx--structured-list-input')];
-
     this.element.addEventListener('keydown', (evt) => {
       if (evt.which === 13) {
-        const selectedRow = eventMatches(event, this.options.selectorRow);
-        if (selectedRow) {
-          const id = `#${selectedRow.getAttribute('for')}`;
-          const input = document.querySelector(`${id}.bx--structured-list-input`);
-          input.checked = !input.checked;
-        }
+        this._handleKeyDown(evt);
+      }
+
+      if (evt.which === 32) {
+        evt.preventDefault();
+        this._handleKeyDown(evt);
       }
     });
   }
+
+  _handleKeyDown = (evt) => {
+    const selectedRow = eventMatches(evt, this.options.selectorRow);
+
+    if (selectedRow) {
+      const id = `#${selectedRow.getAttribute('for')}`;
+      const input = document.querySelector(`${id}.bx--structured-list-input`);
+      input.checked = true;
+    }
+  };
 
   static components = new WeakMap();
 
