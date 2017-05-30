@@ -18,6 +18,7 @@
   transition-duration: $transition--base;
   transition-timing-function: ease-in;
   white-space: nowrap;
+  line-height: 16px;
 
   &:disabled {
     cursor: not-allowed;
