@@ -55,17 +55,16 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     if (direction) {
       const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
       const nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
+      let adjustedNextIndex = nextIndex;
 
       if (nextIndex < 0) {
-        rows[rows.length - 1].focus();
-        input = this._getInput(rows[rows.length - 1]);
+        adjustedNextIndex = rows.length - 1;
       } else if (nextIndex === rows.length) {
-        rows[0].focus();
-        input = this._getInput(rows[0]);
-      } else {
-        rows[nextIndex].focus();
-        input = this._getInput(rows[nextIndex]);
+        adjustedNextIndex = 0;
       }
+
+      rows[adjustedNextIndex].focus();
+      input = this._getInput(rows[adjustedNextIndex]);
       input.checked = true;
     }
   }
