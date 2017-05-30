@@ -22,4 +22,7 @@ Use these modifiers with `.bx--structured-list` class.
 
 #### Keydown event
 
-Once `StructuredList` instance is initialized, use structured-list--selection.html and users will be able to make row selections with keyboard using `tab` and `enter` keys. 
+Once `StructuredList` instance is initialized, use structured-list--selection.html and users will be able to make row selections with keyboard:
+
+- `tab` key for navigation 
+- `enter` (`13`) or `space` (`32`) keys for selection 
