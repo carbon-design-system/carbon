@@ -17,39 +17,54 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
 
     this.element.addEventListener('keydown', (evt) => {
-      this._handleKeyDown(evt);
+      this._arrowKeydown(evt);
+      this._selectKeydown(evt);
     });
   }
 
-  _getRowId(array, index) {
-    return `#${array[index].getAttribute('for')}`;
+  _selectKeydown(evt) {
+    const selectedRow = eventMatches(evt, this.options.selectorRow);
+    if (selectedRow) {
+      const input = this.element.querySelector(
+        `#${selectedRow.getAttribute('for')}.bx--structured-list-input`,
+      );
+      if (evt.which === 13) {
+        input.checked = true;
+      }
+
+      if (evt.which === 32) {
+        input.checked = true;
+        evt.preventDefault();
+      }
+    }
   }
 
-  _handleKeyDown(evt) {
+  _getInput(item) {
+    const id = `#${item.getAttribute('for')}`;
+    return this.element.querySelector(`${id}.bx--structured-list-input`);
+  }
+
+  _arrowKeydown(evt) {
+    let input;
+    const selectedRow = eventMatches(evt, this.options.selectorRow);
     const direction = {
       38: this.constructor.NAVIGATE.BACKWARD,
       40: this.constructor.NAVIGATE.FORWARD,
-    }[event.which];
+    }[evt.which];
 
     if (direction) {
       const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
-      const selectedRow = eventMatches(evt, this.options.selectorRow);
       const nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
-      let input;
 
       if (nextIndex < 0) {
         rows[rows.length - 1].focus();
-        input = document.querySelector(
-          `${this._getRowId(rows, rows.length - 1)}.bx--structured-list-input`,
-        );
+        input = this._getInput(rows[rows.length - 1]);
       } else if (nextIndex === rows.length) {
         rows[0].focus();
-        input = document.querySelector(`${this._getRowId(rows, 0)}.bx--structured-list-input`);
+        input = this._getInput(rows[0]);
       } else {
         rows[nextIndex].focus();
-        input = document.querySelector(
-          `${this._getRowId(rows, nextIndex)}.bx--structured-list-input`,
-        );
+        input = this._getInput(rows[nextIndex]);
       }
       input.checked = true;
     }
