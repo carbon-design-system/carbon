@@ -16,8 +16,6 @@
   display: table;
   overflow-x: auto;
   overflow-y: hidden;
-  border-collapse: separate;
-  border-spacing: 2px;
   background-color: $ui-01;
   width: 100%;
   min-width: 500px;
@@ -41,6 +39,10 @@
 
   &:hover:not(.bx--structured-list-row--header-row) {
     background-color: rgba($brand-02, .1);
+  }
+
+  &:focus:not(.bx--structured-list-row--header-row) {
+    @include focus-outline('border');
   }
 }
 
