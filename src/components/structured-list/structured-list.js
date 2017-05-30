@@ -33,8 +33,8 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
       }
 
       if (evt.which === 32) {
-        input.checked = true;
         evt.preventDefault();
+        input.checked = true;
       }
     }
   }

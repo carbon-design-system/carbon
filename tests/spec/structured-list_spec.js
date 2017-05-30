@@ -31,7 +31,14 @@ describe('StructuredList', function () {
     it('should set default options', function () {
       expect(instance.options).to.deep.equal({
         selectorInit: '[data-structured-list]',
-        selectorRow: '.bx--structured-list-row',
+        selectorRow: '.bx--structured-list-tbody .bx--structured-list-row',
+      });
+    });
+
+    it('should set static NAVIGATE property', function () {
+      expect(instance.constructor.NAVIGATE).to.deep.equal({
+        BACKWARD: -1,
+        FORWARD: 1,
       });
     });
 
@@ -41,12 +48,13 @@ describe('StructuredList', function () {
     });
   });
 
-  describe('_handleKeyDown()', function () {
+  describe('_selectKeydown(evt)', function () {
     let instance;
     let element;
     let wrapper;
+    let spy;
 
-    before(function () {
+    beforeEach(function () {
       wrapper = document.createElement('div');
       wrapper.innerHTML = HTML;
       document.body.appendChild(wrapper);
@@ -55,7 +63,7 @@ describe('StructuredList', function () {
     });
 
     it('should be called on "enter" keydown event', function () {
-      const spy = sinon.spy(instance, '_handleKeyDown');
+      spy = sinon.spy(instance, '_selectKeydown');
       instance.element.dispatchEvent(
         Object.assign(
           new CustomEvent('keydown', {
@@ -65,11 +73,10 @@ describe('StructuredList', function () {
         ),
       );
       expect(spy).to.have.been.called;
-      spy.restore();
     });
 
     it('should be called on "space" keydown event', function () {
-      const spy = sinon.spy(instance, '_handleKeyDown');
+      spy = sinon.spy(instance, '_selectKeydown');
       instance.element.dispatchEvent(
         Object.assign(
           new CustomEvent('keydown', {
@@ -79,22 +86,57 @@ describe('StructuredList', function () {
         ),
       );
       expect(spy).to.have.been.called;
+    });
+
+    afterEach(function () {
       spy.restore();
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('_arrowKeydown(evt)', function () {
+    let instance;
+    let element;
+    let wrapper;
+    let spy;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-structured-list]');
+      instance = new StructuredList(element);
     });
 
-    it('on "space" keydown event, it should preventDefault event', function () {
-      const event = Object.assign(
-        new CustomEvent('keydown', {
-          bubbles: true,
-        }),
-        { which: 32 },
-        { preventDefault: sinon.spy() },
+    it('should be called on "up" keydown event', function () {
+      spy = sinon.spy(instance, '_arrowKeydown');
+      instance.element.dispatchEvent(
+        Object.assign(
+          new CustomEvent('keydown', {
+            bubbles: true,
+          }),
+          { which: 38 },
+        ),
       );
-      instance.element.dispatchEvent(event);
-      expect(event.preventDefault).to.have.been.called;
+      expect(spy).to.have.been.called;
     });
 
-    after(function () {
+    it('should be called on "down" keydown event', function () {
+      spy = sinon.spy(instance, '_arrowKeydown');
+      instance.element.dispatchEvent(
+        Object.assign(
+          new CustomEvent('keydown', {
+            bubbles: true,
+          }),
+          { which: 40 },
+        ),
+      );
+      expect(spy).to.have.been.called;
+    });
+
+    afterEach(function () {
+      spy.restore();
       instance.release();
       document.body.removeChild(wrapper);
     });
