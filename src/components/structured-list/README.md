@@ -8,6 +8,7 @@ Use these modifiers with `.bx--structured-list` class.
 |---------------------------------|--------------------------------------------|
 | .bx--structured-list--border    | Applies border around structured-list      |
 | .bx--structured-list--condensed | Applies condensed styles for all body rows |
+| .bx--structured-list-content--nowrap | Applies `white-space: nowrap;` on content |
 
 ### Javascript                                                                                                                                 
 

@@ -30,15 +30,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     if (direction) {
       const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
       const selectedRow = eventMatches(evt, this.options.selectorRow);
-      let nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
+      const nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
 
-      if (nextIndex < 0) {
-        nextIndex = 0;
-        rows[0].focus();
-        const id = `#${rows[0].getAttribute('for')}`;
-        const input = document.querySelector(`${id}.bx--structured-list-input`);
-        input.checked = true;
-      } else if (nextIndex === rows.length) {
+      if (nextIndex < 0 || nextIndex === rows.length) {
         rows[rows.length - 1].focus();
         const id = `#${rows[rows.length - 1].getAttribute('for')}`;
         const input = document.querySelector(`${id}.bx--structured-list-input`);

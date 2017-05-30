@@ -31,7 +31,12 @@
   cursor: pointer;
   display: table-row;
   padding-left: 1rem;
+  padding-right: 1rem;
   border-bottom: 1px solid $ui-04;
+
+  .bx--structured-list-input:checked + & {
+    background-color: rgba($brand-02, .1);
+  }
 
   &.bx--structured-list-row--header-row {
     border-bottom: 2px solid $brand-01;
@@ -45,6 +50,7 @@
     @include focus-outline('border');
   }
 }
+
 
 .bx--structured-list-thead {
   display: table-header-group;
@@ -62,6 +68,14 @@
   text-align: left;
   text-transform: uppercase;
   vertical-align: middle;
+
+  &:first-child {
+    padding-left: 1rem;
+  }
+
+  &:last-child {
+    padding-right: 1rem;
+  }
 }
 
 .bx--structured-list-tbody {
@@ -73,8 +87,15 @@
   position: relative;
   display: table-cell;
   padding: 1rem .5rem;
-  vertical-align: middle;
   font-size: rem(14px);
+
+  &:first-child {
+    padding-left: 1rem;
+  }
+
+  &:last-child {
+    padding-right: 1rem;
+  }
 
   .bx--structured-list--condensed & {
     padding: .5rem;
@@ -82,7 +103,7 @@
 }
 
 .bx--structured-list-content {
-  @include line-height('body');
+  font-size: rem(14px);
 }
 
 .bx--structured-list-content--nowrap {
@@ -92,7 +113,7 @@
 .bx--structured-list-svg {
   display: inline-block;
   fill: transparent;
-  padding: 0 .4rem;
+  padding-right: .4rem;
 
   .bx--structured-list-row:hover & {
     fill: rgba($brand-02, .1);
@@ -102,3 +123,4 @@
     fill: $brand-02;
   }
 }
+
