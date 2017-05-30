@@ -32,7 +32,7 @@ import Toolbar from './components/toolbar/toolbar';
 import Tooltip from './components/tooltip/tooltip';
 import ProgressIndicator from './components/progress-indicator/progress-indicator';
 import FloatingMenu from './components/floating-menu/floating-menu';
-import DescriptiveList from './components/descriptive-list/descriptive-list';
+import StructuredList from './components/structured-list/structured-list';
 
 const settings = {};
 
@@ -184,10 +184,10 @@ export {
    */
   CopyButton,
   /**
-   * DescriptiveList.
-   * @type DescriptiveList
+   * StructuredList.
+   * @type StructuredList
    */
-  DescriptiveList,
+  StructuredList,
 };
 
 /**
@@ -226,7 +226,7 @@ const init = () => {
     Toolbar.init();
     Tooltip.init();
     ProgressIndicator.init();
-    DescriptiveList.init();
+    StructuredList.init();
     // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
   }
 };

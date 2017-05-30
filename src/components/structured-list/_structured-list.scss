@@ -6,11 +6,11 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 
-.bx--descriptive-list-input {
+.bx--structured-list-input {
   @include hidden;
 }
 
-.bx--descriptive-list {
+.bx--structured-list {
   @include reset;
   @include helvetica;
   display: table;
@@ -24,32 +24,32 @@
   border-collapse: collapse;
   border-spacing: 0;
 
-  &.bx--descriptive-list--border {
+  &.bx--structured-list--border {
     border: 1px solid $ui-04;
   }
 }
 
-.bx--descriptive-list-row {
+.bx--structured-list-row {
   cursor: pointer;
   display: table-row;
   padding-left: 1rem;
   border-bottom: 1px solid $ui-04;
 
-  &.bx--descriptive-list-row--header-row {
+  &.bx--structured-list-row--header-row {
     border-bottom: 2px solid $brand-01;
   }
 
-  &:hover:not(.bx--descriptive-list-row--header-row) {
+  &:hover:not(.bx--structured-list-row--header-row) {
     background-color: rgba($brand-02, .1);
   }
 }
 
-.bx--descriptive-list-thead {
+.bx--structured-list-thead {
   display: table-header-group;
   vertical-align: middle;
 }
 
-.bx--descriptive-list-th {
+.bx--structured-list-th {
   @include reset;
   display: table-cell;
   font-size: rem(12px);
@@ -62,12 +62,12 @@
   vertical-align: middle;
 }
 
-.bx--descriptive-list-tbody {
+.bx--structured-list-tbody {
   display: table-row-group;
   vertical-align: middle;
 }
 
-.bx--descriptive-list-td {
+.bx--structured-list-td {
   position: relative;
   display: table-cell;
   padding: 1rem .5rem;
@@ -75,24 +75,24 @@
   font-size: rem(14px);
 }
 
-.bx--descriptive-list-content {
+.bx--structured-list-content {
   @include line-height('body');
 }
 
-.bx--descriptive-list-content--nowrap {
+.bx--structured-list-content--nowrap {
   white-space: nowrap;
 }
 
-.bx--descriptive-list-svg {
+.bx--structured-list-svg {
   display: inline-block;
   fill: transparent;
   padding: 0 .4rem;
 
-  .bx--descriptive-list-row:hover & {
+  .bx--structured-list-row:hover & {
     fill: rgba($brand-02, .1);
   }
 
-  .bx--descriptive-list-input:checked + .bx--descriptive-list-row & {
+  .bx--structured-list-input:checked + .bx--structured-list-row & {
     fill: $brand-02;
   }
 }

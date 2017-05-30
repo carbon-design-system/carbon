@@ -3,9 +3,9 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-class DescriptiveList extends mixin(createComponent, initComponentBySearch) {
+class StructuredList extends mixin(createComponent, initComponentBySearch) {
   /**
-   * DescriptiveList
+   * StructuredList
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @param {HTMLElement} element The root element of tables
@@ -16,14 +16,14 @@ class DescriptiveList extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    this.labels = [...this.element.querySelectorAll('input.bx--descriptive-list-input')];
+    this.labels = [...this.element.querySelectorAll('input.bx--structured-list-input')];
 
     this.element.addEventListener('keydown', (evt) => {
       if (evt.which === 13) {
         const selectedRow = eventMatches(event, this.options.selectorRow);
         if (selectedRow) {
           const id = `#${selectedRow.getAttribute('for')}`;
-          const input = document.querySelector(`${id}.bx--descriptive-list-input`);
+          const input = document.querySelector(`${id}.bx--structured-list-input`);
           input.checked = !input.checked;
         }
       }
@@ -33,9 +33,9 @@ class DescriptiveList extends mixin(createComponent, initComponentBySearch) {
   static components = new WeakMap();
 
   static options = {
-    selectorInit: '[data-descriptive-list]',
-    selectorRow: '.bx--descriptive-list-row',
+    selectorInit: '[data-structured-list]',
+    selectorRow: '.bx--structured-list-row',
   };
 }
 
-export default DescriptiveList;
+export default StructuredList;
