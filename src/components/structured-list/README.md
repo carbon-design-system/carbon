@@ -33,3 +33,5 @@ Use these modifiers with `.bx--structured-list-td` class.
 Once `StructuredList` instance is initialized, use structured-list--selection.html and users will be able to make row selections with keyboard similar to radio buttons.
 
 - `up` and `down` arrow keys for navigation (focus and select)
+- `tab` and `shift + tab` for navigation (focus only)
+- `enter` and `space` for selecting
