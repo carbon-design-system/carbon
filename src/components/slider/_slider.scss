@@ -16,6 +16,13 @@
     width: 100%;
   }
 
+  .bx--slider--disabled {
+    opacity: .5;
+    & > * {
+      cursor: not-allowed !important; // fix
+    }
+  }
+
   .bx--slider__track {
     position: absolute;
     width: 100%;
@@ -29,7 +36,6 @@
     height: rem(4px);
     background: $brand-01;
     transform-origin: left;
-    transform: scaleX(.5);
   }
 
   .bx--slider__thumb {
