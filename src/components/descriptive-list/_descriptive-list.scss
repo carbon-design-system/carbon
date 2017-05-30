@@ -30,6 +30,7 @@
   cursor: pointer;
   display: table-row;
   padding-left: 1rem;
+  border-bottom: 1px solid $ui-04;
 
   &.bx--descriptive-list-row--header-row {
     border-bottom: 1px solid $brand-01;
