@@ -33,6 +33,7 @@
   padding-left: 1rem;
   padding-right: 1rem;
   border-bottom: 1px solid $ui-04;
+  transition: $transition--base $bx--standard-easing;
 
   .bx--structured-list-input:checked + & {
     background-color: rgba($brand-02, .1);
@@ -40,6 +41,7 @@
 
   &.bx--structured-list-row--header-row {
     border-bottom: 2px solid $brand-01;
+    cursor: inherit;
   }
 
   &:hover:not(.bx--structured-list-row--header-row) {
@@ -113,6 +115,8 @@
   display: inline-block;
   fill: transparent;
   padding-right: .4rem;
+  vertical-align: middle;
+  transition: $transition--base $bx--standard-easing;
 
   .bx--structured-list-row:hover & {
     fill: rgba($brand-02, .1);
