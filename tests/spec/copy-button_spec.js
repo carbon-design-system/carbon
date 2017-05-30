@@ -4,8 +4,8 @@ import CopyButton from '../../src/components/copy-button/copy-button';
 const HTML = `
 <button data-copy-btn class="bx--btn bx--btn--primary bx--btn--copy bx--btn--sm">
   Copy button
-  <svg class="bx--btn__icon">
-    <use xlink:href="/carbon-icons/bluemix-icons.svg#icon--add--glyph"></use>
+  <svg class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
+    <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm4 9H9v3H7V9H4V7h3V4h2v3h3v2z"></path>
   </svg>
   <div class="bx--btn--copy__feedback" data-feedback="Copied!"></div>
 </button>
@@ -47,19 +47,23 @@ describe('Test Copy Button', function () {
     });
 
     it('Should not show the feedback tooltip before click', function () {
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be
+        .false;
     });
 
     it('Should show the feedback tooltip on click', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be
+        .true;
     });
 
     it('Should hide the feedback tooltip after specified timeout value', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be
+        .true;
       clock.tick(2000);
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be
+        .false;
     });
 
     afterEach(function () {
