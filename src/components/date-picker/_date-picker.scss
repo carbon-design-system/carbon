@@ -9,12 +9,22 @@
     position: relative;
   }
 
-  .bx--date-picker__icon {
-    position: absolute;
-    bottom: .65rem;
-    left: .65rem;
-    fill: $brand-01;
-    cursor: pointer;
+  .bx--date-picker[data-date-picker="no-calendar"] {
+    .bx--date-picker__input {
+      width: 8.125rem;
+    }
+  }
+
+  .bx--date-picker[data-date-picker="no-calendar"][data-date-picker-mm-yy] {
+    .bx--date-picker__input {
+      width: 6.125rem;
+    }
+  }
+
+  .bx--date-picker[data-date-picker="basic"] {
+    .bx--date-picker__input {
+      width: 9.75rem;
+    }
   }
 
   .bx--date-picker__input {
@@ -22,9 +32,9 @@
     @include helvetica;
     @include font-size('14');
     display: block;
-    width: 9.5rem;
+    max-width: rem(165px);
     height: rem(40px);
-    padding: 0 1rem 0 2.5rem;
+    padding: 0 1rem;
     color: $text-01;
     background-color: $field-01;
     border: 1px solid transparent;
@@ -42,279 +52,304 @@
     &:disabled:hover {
       border: 1px solid transparent;
     }
+
+    &::-webkit-input-placeholder {
+      @include placeholder-colors;
+    }
+  }
+
+  .bx--date-picker__icon {
+    position: absolute;
+    bottom: .7rem;
+    left: .925rem;
+    fill: $brand-01;
+    cursor: pointer;
+  }
+
+  .bx--date-picker__icon + .bx--date-picker__input {
+    padding-left: 2.75rem;
   }
 
   .bx--date-picker-range {
     display: flex;
     align-items: center;
     position: relative;
-
-    > div:first-child {
-      margin-right: .5rem;
-    }
-
-    .bx--date-picker__icon {
-      right: -1.5rem;
-      left: auto;
-    }
-
-    .bx--date-picker__input {
-      width: 8rem;
-      padding-left: 1rem;
-    }
   }
 
-  .bx--date-picker__calendar:not(.rangeMode) {
-    .bx--date-picker__day.selected {
-      background: none;
-      border: 2px solid $brand-01;
-      color: $text-01;
-    }
+  .bx--date-picker-range > .bx--date-picker__container:first-child {
+    margin-right: .5rem;
+  }
+
+  .bx--date-picker-range .bx--date-picker__icon {
+    right: -1.75rem;
+    left: auto;
+  }
+
+  .bx--date-picker-range .bx--date-picker__input {
+    width: 8.125rem;
+  }
+
+  .bx--date-picker-range.bx--date-picker__calendar .bx--date-picker__day.selected {
+    background: none;
+    border: 2px solid $brand-01;
+    color: $text-01;
   }
 
   .bx--date-picker__calendar {
-    @include layer('overlay');
+    @include layer('pop-out');
     padding: 1rem;
-    width: 285px;
-    height: 230px;
+    width: rem(285px);
+    height: rem(230px);
     border-radius: 0;
     border: none;
     overflow: hidden;
 
-    &.inline,
-    &.open {
-      overflow: hidden;
-      top: 0px;
+    &:before,
+    &:after {
+      display: none;
     }
+  }
 
-    .flatpickr-prev-month,
-    .flatpickr-next-month {
-      padding: 0;
+  .bx--date-picker__month .flatpickr-prev-month,
+  .bx--date-picker__month .flatpickr-next-month {
+    padding: 0;
 
-      &:hover {
-        svg {
-          fill: $brand-01;
-        }
-      }
-    }
-
-    .flatpickr-current-month {
-      @include font-size('12');
-      text-transform: uppercase;
-      padding: 0;
-
+    &:hover {
       svg {
-        fill: $text-01;
+        fill: $brand-01;
       }
+    }
+  }
+
+  .bx--date-picker__month .flatpickr-current-month {
+    @include font-size('12');
+    text-transform: uppercase;
+    padding: 0;
+
+    svg {
+      fill: $text-01;
     }
 
     .cur-month {
       margin-right: .25rem;
     }
+  }
 
-    .numInputWrapper .numInput {
-      font-weight: 700;
-      color: $text-01;
-      background-color: $field-01;
-      border: none;
-      border-radius: 0;
-      padding: .125rem;
-      padding-left: .4rem;
+  .bx--date-picker__month .numInputWrapper .numInput {
+    font-weight: 700;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+    padding: .125rem;
+    padding-left: .4rem;
+  }
+
+  .bx--date-picker__month .numInputWrapper span.arrowUp,
+  .bx--date-picker__month .numInputWrapper span.arrowDown {
+    left: 2.6rem;
+    border: none;
+    width: 12px;
+
+    &:hover {
+      background: none;
+
+      &:after {
+        border-bottom-color: $brand-02;
+        border-top-color: $brand-02;
+      }
     }
 
-    .numInputWrapper span.arrowUp,
-    .numInputWrapper span.arrowDown {
-      left: 2.6rem;
-      border: none;
-      width: 12px;
+    &:after {
+      border-bottom-color: $brand-01;
+      border-top-color: $brand-01;
+    }
+  }
+
+  .bx--date-picker__month .numInputWrapper span.arrowUp {
+    top: 1px;
+  }
+
+  .bx--date-picker__month .numInputWrapper span.arrowDown {
+    top: 9px;
+  }
+
+  .bx--date-picker__weekdays {
+    width: rem(250px);
+    max-width: rem(250px);
+    min-width: rem(250px);
+  }
+
+  .bx--date-picker__weekday {
+    font-weight: 700;
+    color: $text-01;
+  }
+
+  .bx--date-picker__day {
+    @include font-size('12');
+    height: rem(25px);
+    line-height: rem(30px);
+    width: rem(25px);
+    flex-basis: rem(25px);
+    margin: .125rem .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: .5px;
+    color: $text-01;
+
+    &:hover {
+      background: $ui-04;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.today {
+      border: 2px solid $brand-01;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      color: $ui-05;
 
       &:hover {
         background: none;
-
-        &:after {
-          border-bottom-color: $brand-02;
-          border-top-color: $brand-02;
-        }
-      }
-
-      &:after {
-        border-bottom-color: $brand-01;
-        border-top-color: $brand-01;
       }
     }
 
-    .numInputWrapper span.arrowUp {
-      top: 1px;
+    &.inRange {
+      background: $brand-02;
+      box-shadow: -6px 0 0 $brand-02, 6px 0 0 $brand-02;
+      border-radius: 0;
     }
 
-    .numInputWrapper span.arrowDown {
-      top: 9px;
+    &.selected {
+      background: $brand-01;
+      color: $inverse-01;
     }
 
-    .bx--date-picker__weekdays {
-      width: 250px;
-      max-width: 250px;
-      min-width: 250px;
+    &.startRange.inRange,
+    &.endRange.inRange {
+      border-radius: 150px;
     }
 
-    .bx--date-picker__weekday {
-      font-weight: 700;
+    &.startRange.selected {
+      box-shadow: none;
+      z-index: 2;
+
+      + span.inRange:not(.endRange):not(.bx--date-picker__day--prev) {
+        box-shadow: -20px 0 0 $brand-02, 12px 0 0 $brand-02;
+      }
+
+      + .bx--date-picker__day--prev.inRange {
+        box-shadow: -20px 0 0 $brand-02, 20px 0 0 $brand-02;
+      }
+
+      + .endRange.selected:not(.inRange) {
+        box-shadow: none;
+      }
+    }
+
+    &.endRange.inRange {
+      box-shadow: -15px 0 0 $brand-02;
+      background: $ui-01;
       color: $text-01;
-    }
-
-    .bx--date-picker__day {
-      @include font-size('12');
-      height: 25px;
-      line-height: 30px;
-      width: 25px;
-      flex-basis: 25px;
-      margin: .125rem .25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-left: .5px;
-      color: $text-01;
-
-      &:hover {
-        background: $ui-04;
-      }
-
-      &:focus {
-        outline: none;
-      }
-
-      &.inRange {
-        background: $brand-02;
-        box-shadow: -6px 0 0 $brand-02, 6px 0 0 $brand-02;
-        border-radius: 0;
-      }
+      border: 2px solid $brand-01;
+      z-index: 3;
 
       &.selected {
         background: $brand-01;
+        border: none;
         color: $inverse-01;
-      }
-
-      &.startRange.inRange,
-      &.endRange.inRange {
-        border-radius: 150px;
-      }
-
-      // &.startRange.inRange,
-      &.startRange.selected {
-        // box-shadow: 15px 0 0 $brand-02;
         box-shadow: none;
-        z-index: 2;
-
-        + span.inRange:not(.endRange) {
-          box-shadow: -20px 0 0 $brand-02, 12px 0 0 $brand-02;
-        }
-
-        + .prev.inRange {
-          box-shadow: -20px 0 0 $brand-02, 20px 0 0 $brand-02;
-        }
-
-        + .endRange.selected:not(.inRange) {
-          box-shadow: none;
-        }
       }
+    }
 
-      &.endRange.inRange {
-        box-shadow: -15px 0 0 $brand-02;
-        background: $ui-01;
-        color: $text-01;
-        border: 2px solid $brand-01;
-        z-index: 3;
+    &.bx--date-picker__day--prev.inRange {
+      box-shadow: -12px 0 0 $brand-02, 20px 0 0 $brand-02;
+    }
 
-        &.selected {
-          background: $brand-01;
-          border: none;
-          color: $inverse-01;
-          box-shadow: none;
-        }
-      }
+    &.startRange.inRange:not(.selected) {
+      box-shadow: 15px 0 0 $brand-02;
+      background: $ui-01;
+      border: 2px solid $brand-01;
+    }
 
-      &.prev.inRange {
-        box-shadow: -12px 0 0 $brand-02, 20px 0 0 $brand-02;
-      }
+    &.selected.startRange:not(.inRange) {
+      box-shadow: 15px 0 0 $brand-02;
+    }
 
-      &.startRange.inRange:not(.selected) {
-        box-shadow: 15px 0 0 $brand-02;
-        background: $ui-01;
-        border: 2px solid $brand-01;
-      }
+    &.selected.endRange:not(.inRange) {
+      box-shadow: -15px 0 0 $brand-02;
+      z-index: 3;
+    }
 
-      &.selected.startRange:not(.inRange) {
-        box-shadow: 15px 0 0 $brand-02;
-      }
+    &.startRange.bx--date-picker__day--prev.selected:not(.inRange) {
+      box-shadow: 18px 0 0 $brand-02;
+      z-index: 1;
 
-      &.selected.endRange:not(.inRange) {
-        box-shadow: -15px 0 0 $brand-02;
+      + .endRange.selected {
+        box-shadow: none;
         z-index: 3;
       }
 
-      &.startRange.prev.selected:not(.inRange) {
-        box-shadow: 18px 0 0 $brand-02;
+      + .endRange.inRange {
+        box-shadow: none;
+      }
+    }
+
+    &.startRange.inRange {
+      z-index: 3;
+
+      + .endRange.inRange {
+        box-shadow: -18px 0 0 $brand-02;
         z-index: 1;
-
-        + .endRange.selected {
-          box-shadow: none;
-          z-index: 3;
-        }
-
-        + .endRange.inRange {
-          box-shadow: none;
-        }
       }
 
-      &.startRange.inRange {
+      + span.inRange:not(.endRange) {
+        &:before {
+          position: absolute;
+          content: '';
+          top: 0;
+          left: -12px;
+          width: 25px;
+          height: 24px;
+          background: $brand-02;
+          z-index: -1;
+        }
+      }
+    }
+
+    &.bx--date-picker__day--prev.startRange.inRange {
+      z-index: 1;
+      box-shadow: 18px 0 0 $brand-02;
+
+      + .endRange.inRange {
         z-index: 3;
-        + .endRange.inRange {
-          box-shadow: -18px 0 0 $brand-02;
-          z-index: 1;
-        }
-        + span.inRange:not(.endRange) {
-          &:before {
-            position: absolute;
-            content: '';
-            top: 0;
-            left: -12px;
-            width: 25px;
-            height: 24px;
-            background: $brand-02;
-            z-index: -1;
-          }
-        }
-      }
-
-      &.prev.startRange.inRange {
-        z-index: 1;
-        box-shadow: 18px 0 0 $brand-02;
-        + .endRange.inRange {
-          z-index: 3;
-          box-shadow: none;
-        }
+        box-shadow: none;
       }
     }
+  }
 
-    .dayContainer,
-    .bx--date-picker__days {
-      width: 285px;
-      max-width: 285px;
-      min-width: 285px;
-    }
+  .bx--date-picker__days {
+    width: rem(285px);
+    max-width: rem(285px);
+    min-width: rem(285px);
+  }
 
-    .bx--date-picker__weekdays {
-      width: 285px;
-    }
+  .bx--date-picker__weekdays {
+    width: rem(285px);
+  }
 
-    .flatpickr-innerContainer,
-    .flatpickr-rContainer,
-    .flatpickr-days,
-    .dayContainer {
-      width: 250px;
-      max-width: 250px;
-      min-width: 250px;
-      height: 173px;
-    }
+  .flatpickr-innerContainer,
+  .flatpickr-rContainer,
+  .flatpickr-days,
+  .dayContainer {
+    width: rem(250px);
+    max-width: rem(250px);
+    min-width: rem(250px);
+    height: rem(173px);
   }
 }
