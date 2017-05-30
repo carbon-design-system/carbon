@@ -46,8 +46,8 @@
   }
 
   &:focus {
-    border: 2px solid $ui-02;
-    outline: 2px solid $hover-bg-color;
+    border: $button-border-width solid $ui-02;
+    outline: $button-border-width solid $hover-bg-color;
   }
 
   &:disabled:hover,
