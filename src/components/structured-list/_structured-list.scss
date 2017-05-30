@@ -73,6 +73,10 @@
   padding: 1rem .5rem;
   vertical-align: middle;
   font-size: rem(14px);
+
+  .bx--structured-list--condensed & {
+    padding: .5rem;
+  }
 }
 
 .bx--structured-list-content {
