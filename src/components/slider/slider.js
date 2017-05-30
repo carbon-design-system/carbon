@@ -25,9 +25,8 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
     this._updatePosition();
     // this.element.addEventListener('click', (evt) => { this._handleClick(evt); });
     this.element.addEventListener('mousedown', (evt) => { this._handleMouseDown(evt); });
-    this.element.ownerDocument.addEventListener('mousemove', (evt) => { this._handleMouseMove(evt); });
     this.element.ownerDocument.addEventListener('mouseup', (evt) => { this._handleMouseUp(evt); });
-
+    this.element.ownerDocument.addEventListener('mousemove', (evt) => { this._handleMouseMove(evt); });
     this.element.addEventListener('keydown', (evt) => { this._handleKeyDown(evt); });
   }
 
@@ -46,6 +45,7 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
   }
 
   _handleKeyDown(evt) {
+    // console.log('press');
     this._updatePosition(evt);
   }
 
@@ -54,6 +54,7 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
 
     let direction;
     if (evt) {
+      console.log(evt.clientX, this.element.getBoundingClientRect().left);
       if (evt.which === 40 || evt.which === 37 || change < 0) {
         direction = 'decreasing';
       }
@@ -61,6 +62,8 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
         direction = 'increasing';
       }
     }
+
+    // console.log('direction is ', direction);
 
     const {
       left,
@@ -75,11 +78,12 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
     this.dragging = true;
 
     requestAnimationFrame(() => {
+      // console.log('state is ', this.dragging);
       this.dragging = false;
 
       this.thumb.style.left = `${left}%`;
       this.filledTrack.style.transform = `scaleX(${left / 100})`;
-      if (newValue) { this.setValue(newValue); }
+      this.input.value = newValue;
     });
   }
 
@@ -91,14 +95,17 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
       step,
     } = this.getInputProps();
     const stepSize = step / this.track.getBoundingClientRect().width;
+    // console.log(step, stepSize);
     const valuePercentage = (((value - min) / (max - min)) * 100);
     let left;
     let newValue;
+    console.log('direction in math is ', direction);
     if (direction) {
       left = direction === 'decreasing' ? valuePercentage - stepSize : valuePercentage + stepSize;
       newValue = direction === 'decreasing' ? Number(value) - Number(step) : Number(value) + Number(step);
     } else {
       left = valuePercentage;
+      newValue = value;
     }
     if (newValue <= min) {
       left = 0;
@@ -123,6 +130,7 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
 
   setValue(value) {
     this.input.value = value;
+    this._updatePosition();
   }
 
   release() {
