@@ -1,9 +1,9 @@
-@import '../../globals/scss/import-once';
-@import '../../globals/scss/layer';
-@import '../../globals/scss/typography';
 @import '../../globals/scss/colors';
-@import '../../globals/scss/css--reset';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/import-once';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
 @import '../button/button';
 
 @include exports('copy-button') {
