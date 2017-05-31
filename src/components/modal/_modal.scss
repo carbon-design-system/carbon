@@ -91,7 +91,6 @@
 
   .bx--modal-content {
     margin-bottom: rem(48px);
-    overflow-y: auto;
 
     > * {
       @include reset;
