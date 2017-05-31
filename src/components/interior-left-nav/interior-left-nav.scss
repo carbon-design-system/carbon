@@ -13,6 +13,7 @@
 @include exports('interior-left-nav') {
   .bx--interior-left-nav {
     @include reset;
+    @include helvetica;
     width: rem(250px);
     position: fixed;
     top: rem(90px);
@@ -21,7 +22,6 @@
     border-right: 1px solid $color__gray-1;
 
     .left-nav-list {
-      @include reset;
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -30,7 +30,6 @@
       overflow: auto;
 
       &__item {
-        @include reset;
         cursor: pointer;
         width: 100%;
         padding: 0;
@@ -62,7 +61,6 @@
         }
 
         &-link {
-          @include reset;
           @include font-size('14');
           color: $color__blue-90;
           font-weight: 400;
@@ -76,7 +74,6 @@
         }
 
         &-icon {
-          @include reset;
           display: flex;
 
           .bx--interior-left-nav__icon {
