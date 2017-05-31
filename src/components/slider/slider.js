@@ -20,10 +20,15 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
     this.thumb = this.element.querySelector(this.options.selectorThumb);
     this.input = this.element.querySelector(this.options.selectorInput);
 
+    if (this.element.dataset.sliderInputBox) {
+      this.boundInput = this.element.ownerDocument.querySelector(this.element.dataset.sliderInputBox);
+      this._updateInput();
+    }
+
     this.dragging = false;
 
     this._updatePosition();
-    // this.element.addEventListener('click', (evt) => { this._handleClick(evt); });
+
     this.thumb.addEventListener('mousedown', (evt) => { this._handleMouseDown(evt); });
     this.element.ownerDocument.addEventListener('mouseup', (evt) => { this._handleMouseUp(evt); });
     this.element.ownerDocument.addEventListener('mousemove', (evt) => { this._handleMouseMove(evt); });
@@ -52,6 +57,7 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
   _handleClick(evt) {
     this._updatePosition(evt);
   }
+
 
   _updatePosition(evt) {
     // const change = evt ? evt.movementX : 0;
@@ -87,6 +93,8 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
       this.thumb.style.left = `${left}%`;
       this.filledTrack.style.transform = `scaleX(${left / 100})`;
       this.input.value = newValue;
+      this._updateInput();
+      console.log(newValue);
     });
   }
 
@@ -170,6 +178,12 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
   setValue(value) {
     this.input.value = value;
     this._updatePosition();
+  }
+
+  _updateInput() {
+    if (this.boundInput) {
+      this.boundInput.value = this.input.value;
+    }
   }
 
   release() {
