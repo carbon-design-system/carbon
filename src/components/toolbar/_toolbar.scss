@@ -93,6 +93,10 @@ $css--helpers: true;
     border: 0;
     height: rem(32px);
     width: rem(32px);
+
+    &:focus {
+      @include focus-outline;
+    }
   }
 
   .bx--toolbar-filter-icon {
