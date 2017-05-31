@@ -32,13 +32,13 @@
     @include helvetica;
     @include font-size('14');
     display: block;
-    max-width: rem(165px);
-    height: rem(40px);
-    padding: 0 1rem;
-    color: $text-01;
-    background-color: $field-01;
-    border: 1px solid transparent;
     position: relative;
+    height: rem(40px);
+    max-width: rem(165px);
+    padding: 0 1rem;
+    background-color: $field-01;
+    color: $text-01;
+    border: 1px solid transparent;
 
     &:focus {
       @include focus-outline('border');
@@ -64,6 +64,7 @@
     left: .925rem;
     fill: $brand-01;
     cursor: pointer;
+    z-index: 1;
   }
 
   .bx--date-picker__icon + .bx--date-picker__input {
@@ -89,15 +90,14 @@
     width: 8.125rem;
   }
 
-  .bx--date-picker-range.bx--date-picker__calendar .bx--date-picker__day.selected {
-    background: none;
-    border: 2px solid $brand-01;
-    color: $text-01;
-  }
-
-  .bx--date-picker__calendar {
+  .bx--date-picker__calendar,
+  .flatpickr-calendar.open {
     @include layer('pop-out');
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .875rem 1rem .25rem;
     width: rem(285px);
     height: rem(230px);
     border-radius: 0;
@@ -110,14 +110,18 @@
     }
   }
 
+  .bx--date-picker__month {
+    width: 100%;
+    margin-bottom: .2rem;
+  }
+
   .bx--date-picker__month .flatpickr-prev-month,
   .bx--date-picker__month .flatpickr-next-month {
     padding: 0;
+    line-height: rem(20px);
 
-    &:hover {
-      svg {
-        fill: $brand-01;
-      }
+    &:hover svg {
+      fill: $brand-01;
     }
   }
 
@@ -125,14 +129,14 @@
     @include font-size('12');
     text-transform: uppercase;
     padding: 0;
+  }
 
-    svg {
-      fill: $text-01;
-    }
+  .bx--date-picker__month .flatpickr-current-month svg {
+    fill: $text-01;
+  }
 
-    .cur-month {
-      margin-right: .25rem;
-    }
+  .bx--date-picker__month .flatpickr-current-month .cur-month {
+    margin-right: .25rem;
   }
 
   .bx--date-picker__month .numInputWrapper .numInput {
@@ -141,15 +145,14 @@
     background-color: $field-01;
     border: none;
     border-radius: 0;
-    padding: .125rem;
-    padding-left: .4rem;
+    padding: .125rem .125rem .125rem .4rem;
   }
 
   .bx--date-picker__month .numInputWrapper span.arrowUp,
   .bx--date-picker__month .numInputWrapper span.arrowDown {
     left: 2.6rem;
     border: none;
-    width: 12px;
+    width: rem(12px);
 
     &:hover {
       background: none;
@@ -174,13 +177,8 @@
     top: 9px;
   }
 
-  .bx--date-picker__weekdays {
-    width: rem(250px);
-    max-width: rem(250px);
-    min-width: rem(250px);
-  }
-
-  .bx--date-picker__weekday {
+  span.bx--date-picker__weekday {
+    @include font-size('12');
     font-weight: 700;
     color: $text-01;
   }
@@ -188,14 +186,13 @@
   .bx--date-picker__day {
     @include font-size('12');
     height: rem(25px);
-    line-height: rem(30px);
-    width: rem(25px);
-    flex-basis: rem(25px);
-    margin: .125rem .25rem;
+    width: rem(32px);
+    line-height: rem(25px);
+    flex-basis: rem(32px);
+    margin: rem(.5px) 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: .5px;
     color: $text-01;
     border-radius: 0;
 
@@ -206,146 +203,78 @@
     &:focus {
       outline: none;
     }
+  }
 
-    &.today {
-      border: 2px solid $brand-01;
-    }
+  .bx--date-picker__day.today {
+    border: 2px solid $brand-01;
+  }
 
-    &.disabled {
-      cursor: not-allowed;
-      color: $ui-05;
+  .bx--date-picker__day.today.no-border {
+    border: none;
+  }
 
-      &:hover {
-        background: none;
-      }
-    }
+  .bx--date-picker__day.disabled {
+    cursor: not-allowed;
+    color: $ui-05;
 
-    &.inRange {
-      background: $brand-02;
-      box-shadow: -6px 0 0 $brand-02, 6px 0 0 $brand-02;
-      border-radius: 0;
-    }
-
-    &.selected {
-      background: $brand-01;
-      color: $inverse-01;
-    }
-
-    &.startRange.selected {
-      box-shadow: none;
-      z-index: 2;
-
-      + span.inRange:not(.endRange):not(.bx--date-picker__day--prev) {
-        box-shadow: -20px 0 0 $brand-02, 12px 0 0 $brand-02;
-      }
-
-      + .bx--date-picker__day--prev.inRange {
-        box-shadow: -20px 0 0 $brand-02, 20px 0 0 $brand-02;
-      }
-
-      + .endRange.selected:not(.inRange) {
-        box-shadow: none;
-      }
-    }
-
-    &.endRange.inRange {
-      box-shadow: -15px 0 0 $brand-02;
-      background: $ui-01;
-      color: $text-01;
-      border: 2px solid $brand-01;
-      z-index: 3;
-
-      &.selected {
-        background: $brand-01;
-        border: none;
-        color: $inverse-01;
-        box-shadow: none;
-      }
-    }
-
-    &.bx--date-picker__day--prev.inRange {
-      box-shadow: -12px 0 0 $brand-02, 20px 0 0 $brand-02;
-    }
-
-    &.startRange.inRange:not(.selected) {
-      box-shadow: 15px 0 0 $brand-02;
-      background: $ui-01;
-      border: 2px solid $brand-01;
-    }
-
-    &.selected.startRange:not(.inRange) {
-      box-shadow: 15px 0 0 $brand-02;
-    }
-
-    &.selected.endRange:not(.inRange) {
-      box-shadow: -15px 0 0 $brand-02;
-      z-index: 3;
-    }
-
-    &.startRange.bx--date-picker__day--prev.selected:not(.inRange) {
-      box-shadow: 18px 0 0 $brand-02;
-      z-index: 1;
-
-      + .endRange.selected {
-        box-shadow: none;
-        z-index: 3;
-      }
-
-      + .endRange.inRange {
-        box-shadow: none;
-      }
-    }
-
-    &.startRange.inRange {
-      z-index: 3;
-
-      + .endRange.inRange {
-        box-shadow: -18px 0 0 $brand-02;
-        z-index: 1;
-      }
-
-      + span.inRange:not(.endRange) {
-        &:before {
-          position: absolute;
-          content: '';
-          top: 0;
-          left: -12px;
-          width: 25px;
-          height: 24px;
-          background: $brand-02;
-          z-index: -1;
-        }
-      }
-    }
-
-    &.bx--date-picker__day--prev.startRange.inRange {
-      z-index: 1;
-      box-shadow: 18px 0 0 $brand-02;
-
-      + .endRange.inRange {
-        z-index: 3;
-        box-shadow: none;
-      }
+    &:hover {
+      background: transparent;
     }
   }
 
-  .bx--date-picker__days {
-    width: rem(285px);
-    max-width: rem(285px);
-    min-width: rem(285px);
+  .bx--date-picker__day.inRange {
+    background: $brand-02;
+    box-shadow: -6px 0 0 $brand-02, 6px 0 0 $brand-02;
   }
 
-  .bx--date-picker__weekdays {
-    width: rem(285px);
+  .bx--date-picker__day.selected {
+    background: $brand-01;
+    color: $inverse-01;
+  }
+
+  .bx--date-picker__day.startRange.selected {
+    box-shadow: none;
+    z-index: 2;
+  }
+
+  .bx--date-picker__day.endRange.inRange {
+    background: $ui-01;
+    color: $text-01;
+    border: 2px solid $brand-01;
+    z-index: 3;
+    box-shadow: none;
+  }
+
+  .bx--date-picker__day.endRange.inRange.selected {
+    background: $brand-01;
+    border: none;
+    color: $inverse-01;
+    box-shadow: none;
+  }
+
+  .bx--date-picker__day.startRange.inRange:not(.selected) {
+    box-shadow: none;
+    background: $ui-01;
+    border: 2px solid $brand-01;
+    z-index: 3;
+  }
+
+  .bx--date-picker__days,
+  .dayContainer {
+    width: rem(225px);
+    min-width: rem(225px);
+    max-width: rem(225px);
+    height: rem(132px);
   }
 
   .flatpickr-innerContainer,
-  .flatpickr-rContainer,
-  .flatpickr-days,
-  .dayContainer {
-    width: rem(250px);
-    max-width: rem(250px);
-    min-width: rem(250px);
-    height: rem(173px);
+  .flatpickr-rContainer {
+    width: rem(225px);
+    height: rem(168px);
+  }
+
+  .bx--date-picker__weekdays {
+    width: rem(225px);
+    margin-bottom: .325rem;
   }
 }

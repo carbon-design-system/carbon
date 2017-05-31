@@ -21,7 +21,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
   }
 
   _initDatePicker = (type) => {
-    const date = (type === 'basic')
+    const date = (type === 'single')
     ? this.element.querySelector(this.options.selectorDatePickerInput)
     : this.element.querySelector(this.options.selectorDatePickerInputFrom);
     const calendar = new Flatpickr(date, {
@@ -131,13 +131,12 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       }
     });
     [...calendarContainer.querySelectorAll('.flatpickr-day')].forEach((item) => {
-      if ((item.classList.contains('selected') && item.classList.contains('inRange'))
-         || (item.classList.contains('selected') && item.classList.contains('endRange'))) {
-        if (item.previousElementSibling) {
-          item.previousElementSibling.classList.add(this.options.classPrevDay);
-        }
-      }
       item.classList.add(this.options.classDay);
+      if (item.classList.contains('today') && calendar.selectedDates.length > 0) {
+        item.classList.add('no-border');
+      } else if (item.classList.contains('today') && calendar.selectedDates.length === 0) {
+        item.classList.remove('no-border');
+      }
     });
   }
 
@@ -183,7 +182,6 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     classDays: 'bx--date-picker__days',
     classWeekday: 'bx--date-picker__weekday',
     classDay: 'bx--date-picker__day',
-    classPrevDay: 'bx--date-picker__day--prev',
   };
 
   /**
