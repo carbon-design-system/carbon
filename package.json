@@ -9,11 +9,9 @@
     "storybook": "./node_modules/.bin/start-storybook -p 9001",
     "test": "./node_modules/.bin/jest '/(components|lib|internal)/'",
     "test-watch": "./node_modules/.bin/jest '/(components|lib|internal)/' --watch",
-    "test-a11y": "./node_modules/.bin/jest '/a11y/'",
     "lint": "./node_modules/.bin/eslint --ignore-pattern dist .",
     "build-storybook": "./node_modules/.bin/build-storybook -s .storybook -o .gh-pages/storybook",
-    "gh-pages": "node scripts/gh-pages.js",
-    "build-es5": "./node_modules/.bin/babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
+    "build": "./node_modules/.bin/babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
     "precommit": "lint-staged",
     "commitmsg": "./node_modules/.bin/validate-commit-msg",
     "commit": "git cz"
@@ -79,13 +77,16 @@
       "jasmine": true
     }
   },
-  "dependencies": {
+  "peerDependencies": {
+    "carbon-components": "^7.0.0",
     "carbon-icons": "^5.1.2",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
+  "dependencies": {
     "classnames": "2.2.5",
     "lodash.debounce": "^4.0.8",
-    "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.4.2",
-    "react-dom": "^15.3.2",
     "warning": "3.0.0"
   },
   "devDependencies": {
@@ -100,7 +101,6 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
-    "carbon-components": "^7.4.1",
     "commitizen": "^2.9.5",
     "css-loader": "0.23.1",
     "cz-conventional-changelog-components": "^1.0.0",
