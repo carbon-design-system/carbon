@@ -1,8 +1,9 @@
 @import '../../globals/scss/colors';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
 
 @include exports('tooltip') {
 
@@ -12,6 +13,7 @@
   }
 
   .bx--tooltip__trigger {
+    @include helvetica;
     @include font-size('16');
     display: inline-flex;
     align-items: center;
