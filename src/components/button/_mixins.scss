@@ -18,6 +18,7 @@
   transition-duration: $transition--base;
   transition-timing-function: ease-in;
   white-space: nowrap;
+  line-height: 16px;
 
   &:disabled {
     cursor: not-allowed;
@@ -46,8 +47,8 @@
   }
 
   &:focus {
-    border: 1px solid $ui-02;
-    outline: 2px solid $hover-bg-color;
+    border: $button-border-width solid $ui-02;
+    outline: $button-border-width solid $hover-bg-color;
   }
 
   &:disabled:hover,

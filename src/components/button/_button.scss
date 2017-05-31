@@ -69,6 +69,38 @@
     }
   }
 
+  .bx--btn--ghost {
+    @include button-theme(
+      transparent, // bg-color
+      transparent,   // border-color
+      $brand-01,   // font-color
+      $brand-01,   // hover-bg-color
+      $brand-01 // icon-color
+    );
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+
+      .bx--btn__icon {
+        fill: $inverse-01;
+      }
+    }
+
+    .bx--btn__icon {
+      margin-left: .275rem;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $brand-01;
+
+      .bx--btn__icon {
+        fill: $brand-01;
+      }
+    }
+  }
+
   .bx--btn--danger {
     @include button-theme(
       transparent,  // bg-color
@@ -80,7 +112,7 @@
 
     &:hover {
       color: $inverse-01;
-      border: 2px solid transparent;
+      border: $button-border-width solid transparent;
     }
 
     &:focus {
@@ -90,7 +122,7 @@
     &:hover:disabled,
     &:focus:disabled {
       color: $ui-05;
-      border: 2px solid currentColor;
+      border: $button-border-width solid currentColor;
     }
 
     &:hover > .bx--btn__icon,
