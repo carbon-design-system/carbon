@@ -36,6 +36,7 @@
     height: rem(4px);
     background: $brand-01;
     transform-origin: left;
+    pointer-events: none;
   }
 
   .bx--slider__thumb {

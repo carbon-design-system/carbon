@@ -24,10 +24,11 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
 
     this._updatePosition();
     // this.element.addEventListener('click', (evt) => { this._handleClick(evt); });
-    this.element.addEventListener('mousedown', (evt) => { this._handleMouseDown(evt); });
+    this.thumb.addEventListener('mousedown', (evt) => { this._handleMouseDown(evt); });
     this.element.ownerDocument.addEventListener('mouseup', (evt) => { this._handleMouseUp(evt); });
     this.element.ownerDocument.addEventListener('mousemove', (evt) => { this._handleMouseMove(evt); });
-    this.element.addEventListener('keydown', (evt) => { this._handleKeyDown(evt); });
+    this.thumb.addEventListener('keydown', (evt) => { this._handleKeyDown(evt); });
+    this.track.addEventListener('click', (evt) => { this._handleClick(evt); });
   }
 
   _handleMouseDown() {
@@ -45,30 +46,33 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
   }
 
   _handleKeyDown(evt) {
-    // console.log('press');
+    this._updatePosition(evt);
+  }
+
+  _handleClick(evt) {
     this._updatePosition(evt);
   }
 
   _updatePosition(evt) {
-    const change = evt ? evt.movementX : 0;
+    // const change = evt ? evt.movementX : 0;
 
     let direction;
     if (evt) {
-      console.log(evt.clientX, this.element.getBoundingClientRect().left);
-      if (evt.which === 40 || evt.which === 37 || change < 0) {
+      // if (evt.which === 40 || evt.which === 37 || change < 0) {
+      if (evt.which === 40 || evt.which === 37) {
         direction = 'decreasing';
       }
-      if (evt.which === 38 || evt.which === 39 || change > 0) {
+      // if (evt.which === 38 || evt.which === 39 || change > 0) {
+      if (evt.which === 38 || evt.which === 39) {
         direction = 'increasing';
       }
     }
 
-    // console.log('direction is ', direction);
 
     const {
       left,
       newValue,
-    } = this._doMath(change, direction);
+    } = this._doMath(evt, direction);
 
 
     if (this.dragging) {
@@ -78,7 +82,6 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
     this.dragging = true;
 
     requestAnimationFrame(() => {
-      // console.log('state is ', this.dragging);
       this.dragging = false;
 
       this.thumb.style.left = `${left}%`;
@@ -87,36 +90,72 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
     });
   }
 
-  _doMath(change, direction) {
+  _doMath(evt, direction) {
     const {
       value,
       min,
       max,
       step,
     } = this.getInputProps();
+
     const stepSize = step / this.track.getBoundingClientRect().width;
-    // console.log(step, stepSize);
     const valuePercentage = (((value - min) / (max - min)) * 100);
+
     let left;
     let newValue;
-    console.log('direction in math is ', direction);
-    if (direction) {
-      left = direction === 'decreasing' ? valuePercentage - stepSize : valuePercentage + stepSize;
-      newValue = direction === 'decreasing' ? Number(value) - Number(step) : Number(value) + Number(step);
-    } else {
-      left = valuePercentage;
-      newValue = value;
+    left = valuePercentage;
+    newValue = value;
+
+    if (evt && evt.clientX) {
+      const track = this.track.getBoundingClientRect();
+      const unrounded = ((evt.clientX - track.left) / track.width) * 100;
+      const step2 = 1 / step;
+      left = Math.round((unrounded * step2) / step2);
+      // left = this.decimalAdjust('round', unrounded, step);
+      newValue = (max - min) * (left / 100);
     }
+
+    if (direction) {
+      left = direction === 'decreasing' ?
+        valuePercentage - stepSize
+        : valuePercentage + stepSize;
+      newValue = direction === 'decreasing' ? Number(value) - Number(step) : Number(value) + Number(step);
+    }
+
     if (newValue <= min) {
       left = 0;
       newValue = min;
     }
-    if (newValue >= max) {
+    if (newValue >= Number(max)) {
       left = 100;
       newValue = max;
     }
     return { left, newValue };
   }
+
+  // decimalAdjust(type, value, exp) {
+  //   // If the exp is undefined or zero...
+  //   if (typeof exp === 'undefined' || +exp === 0) {
+  //     return Math[type](value);
+  //   }
+  //   value = +value;
+  //   exp = +exp;
+  //   // If the value is not a number or the exp is not an integer...
+  //   if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+  //     return NaN;
+  //   }
+  //   // If the value is negative...
+  //   if (value < 0) {
+  //     return -decimalAdjust(type, -value, exp);
+  //   }
+  //   // Shift
+  //   value = value.toString().split('e');
+  //   value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+  //   // Shift back
+  //   value = value.toString().split('e');
+  //   return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+  // }
+
 
   getInputProps() {
     const values = {
