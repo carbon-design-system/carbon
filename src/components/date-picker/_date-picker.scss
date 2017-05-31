@@ -54,7 +54,7 @@
     }
 
     &::-webkit-input-placeholder {
-      @include placeholder-colors;
+      color: $text-03;
     }
   }
 
@@ -197,6 +197,7 @@
     justify-content: center;
     padding-left: .5px;
     color: $text-01;
+    border-radius: 0;
 
     &:hover {
       background: $ui-04;
@@ -228,11 +229,6 @@
     &.selected {
       background: $brand-01;
       color: $inverse-01;
-    }
-
-    &.startRange.inRange,
-    &.endRange.inRange {
-      border-radius: 150px;
     }
 
     &.startRange.selected {
