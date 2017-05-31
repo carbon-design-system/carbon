@@ -94,14 +94,18 @@
     margin-left: .25rem;
     background-color: $ui-01;
     position: relative;
+    padding: 0;
   }
 
   .bx--search-button svg {
+    position: relative;
+    top: -1px;
+    box-sizing: border-box;
+    vertical-align: middle;
     transition: $transition--base;
     fill: $brand-01;
     height: 1rem;
     width: 1rem;
-    vertical-align: middle;
   }
 
   .bx--search-button:hover,
