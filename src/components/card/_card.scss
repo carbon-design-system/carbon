@@ -1,7 +1,3 @@
-//-----------------------------
-// Card
-//-----------------------------
-
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
@@ -85,17 +81,21 @@
     @include text-overflow(rem(180px));
     font-weight: 400;
     margin: 0;
+    line-height: 1.2;
   }
 
   .bx--about__title--link {
     @include font-size('12');
     @include text-overflow(rem(180px));
+    display: inline;
     font-weight: 400;
+    text-align: center;
   }
 
   .bx--about__title--additional-info {
     @include font-size('12');
     @include text-overflow(rem(180px));
+    display: inline;
     font-weight: 400;
     padding: 0;
     margin: 0;
