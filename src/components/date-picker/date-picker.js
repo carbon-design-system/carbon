@@ -52,14 +52,11 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
         this.element.querySelector(this.options.selectorDatePickerInputTo).focus();
         calendar.open();
       });
-       this.element.querySelector(this.options.selectorDatePickerIcon).addEventListener('click', () => {
-        calendar.open();
-      });
-      calendar.onClose = (selectedDates) => {
-        this._updateInputFields(selectedDates, true, date, this.element.querySelector(this.options.selectorDatePickerInputTo));
-      };
       this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInputTo));
     }
+    this.element.querySelector(this.options.selectorDatePickerIcon).addEventListener('click', () => {
+      calendar.open();
+    });
     this._addInputLogic(date);
   }
 
@@ -81,10 +78,10 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
 
   _addInputLogic = (input) => {
     const inputField = input;
+    let lastKey;
     inputField.addEventListener('focus', () => {
       inputField.value = inputField.value.replace(/\s+/g, '');
     });
-    let lastKey;
     inputField.addEventListener('keydown', (e) => {
       lastKey = e.which;
     });
