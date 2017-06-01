@@ -15,7 +15,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-
+    this.rows = [...this.element.ownerDocument.querySelectorAll(this.options.selectorRow)];
     this.element.addEventListener('keydown', (evt) => {
       this._arrowKeydown(evt);
       this._selectKeydown(evt);
@@ -46,24 +46,40 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     }[evt.which];
   }
 
+  _nextIndex(array, arrayItem, direction) {
+    // console.log(array.indexOf(arrayItem) + direction);
+    return array.indexOf(arrayItem) + direction; // -1, 0, 1, 2, 3, 4...
+  }
+
+  _handleChecked(index) {
+    const id = `#${this.rows[index].getAttribute('for')}`;
+    const input = this.element.ownerDocument.querySelector(`${id}.bx--structured-list-input`);
+    input.checked = true;
+  }
+
   _arrowKeydown(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     const direction = this._direction(evt);
 
     if (direction && selectedRow !== undefined) {
-      const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
-      const nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
-      let adjustedNextIndex = nextIndex;
+      const firstIndex = 0;
+      const nextIndex = this._nextIndex(this.rows, selectedRow, direction);
+      const lastIndex = this.rows.length - 1;
 
-      if (nextIndex < 0) {
-        adjustedNextIndex = rows.length - 1;
-      } else if (nextIndex === rows.length) {
-        adjustedNextIndex = 0;
+      switch (nextIndex) {
+        case -1:
+          this.rows[lastIndex].focus();
+          this._handleChecked(lastIndex);
+          break;
+        case this.rows.length:
+          this.rows[firstIndex].focus();
+          this._handleChecked(firstIndex);
+          break;
+        default:
+          this.rows[nextIndex].focus();
+          this._handleChecked(nextIndex);
+          break;
       }
-      rows[adjustedNextIndex].focus();
-      const id = `#${rows[adjustedNextIndex].getAttribute('for')}`;
-      const input = this.element.querySelector(`${id}.bx--structured-list-input`);
-      input.checked = true;
     }
   }
 
@@ -71,7 +87,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
 
   static options = {
     selectorInit: '[data-structured-list]',
-    selectorRow: '.bx--structured-list-tbody .bx--structured-list-row',
+    selectorRow: '[data-structured-list] .bx--structured-list-tbody .bx--structured-list-row',
   };
 }
 
