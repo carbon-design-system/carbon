@@ -55,6 +55,8 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     const id = `#${this.rows[index].getAttribute('for')}`;
     const input = this.element.ownerDocument.querySelector(`${id}.bx--structured-list-input`);
     input.checked = true;
+
+    return { id, input };
   }
 
   _arrowKeydown(evt) {

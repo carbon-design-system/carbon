@@ -31,7 +31,17 @@ describe('StructuredList', function () {
     it('should set default options', function () {
       expect(instance.options).to.deep.equal({
         selectorInit: '[data-structured-list]',
-        selectorRow: '.bx--structured-list-tbody .bx--structured-list-row',
+        selectorRow: '[data-structured-list] .bx--structured-list-tbody .bx--structured-list-row',
+      });
+    });
+
+    it('this.rows should have length', function () {
+      expect(instance.rows.length).to.equal(4);
+    });
+
+    it('elements in this.rows should have correct class', function () {
+      instance.rows.forEach((row) => {
+        expect(row.classList.contains('bx--structured-list-row')).to.equal(true);
       });
     });
 
@@ -126,6 +136,107 @@ describe('StructuredList', function () {
         ),
       );
       expect(spy).to.have.been.called;
+    });
+
+    it('should return -1 on "up" key', function () {
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 38 },
+      );
+      const direction = instance._direction(event);
+      expect(direction).to.equal(-1);
+    });
+
+    it('should return 1 on "down" key', function () {
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 40 },
+      );
+      const direction = instance._direction(event);
+      expect(direction).to.equal(1);
+    });
+
+    it('should return undefined on other key presses', function () {
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 70 },
+      );
+      const direction = instance._direction(event);
+      expect(direction).to.be.undefined;
+    });
+
+    afterEach(function () {
+      spy.restore();
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('_nextIndex()', function () {
+    let instance;
+    let element;
+    let wrapper;
+    let spy;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-structured-list]');
+      instance = new StructuredList(element);
+    });
+
+    it('should be called', function () {
+      spy = sinon.spy(instance, '_nextIndex');
+      instance._nextIndex([0, 1, 2, 3], 0, 1);
+      expect(spy).to.have.been.called;
+    });
+
+    it('should return a number', function () {
+      const result = instance._nextIndex([0, 1, 2, 3], 0, 1);
+      expect(typeof result).to.equal('number');
+    });
+
+    afterEach(function () {
+      spy.restore();
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('_handleChecked()', function () {
+    let instance;
+    let element;
+    let wrapper;
+    let spy;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-structured-list]');
+      instance = new StructuredList(element);
+    });
+
+    it('should be called', function () {
+      spy = sinon.spy(instance, '_handleChecked');
+      instance._handleChecked(0);
+      expect(spy).to.have.been.called;
+    });
+
+    it('should return { id, input }', function () {
+      const input = instance.element.querySelector('#apache-id.bx--structured-list-input');
+      const result = instance._handleChecked(0);
+      expect(result).to.deep.equal({
+        id: '#apache-id',
+        input,
+      });
     });
 
     afterEach(function () {
