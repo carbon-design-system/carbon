@@ -8,11 +8,17 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
+@import '../form/form';
 
 @include exports('slider') {
+  .bx--slider-container {
+    width: 30rem;
+    display: flex;
+    align-items: center;
+  }
+
   .bx--slider {
     position: relative;
-    max-width: 30rem;
     width: 100%;
   }
 
@@ -59,5 +65,13 @@
 
   .bx--slider__input {
     display: none;
+  }
+
+  .bx-slider-text-input {
+    max-width: rem(32px);
+    min-width: 0;
+    padding: 0;
+    margin-left: 1rem;
+    text-align: center;
   }
 }
