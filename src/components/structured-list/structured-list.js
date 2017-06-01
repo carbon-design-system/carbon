@@ -53,14 +53,12 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     if (direction && selectedRow !== undefined) {
       const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
       const nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
-      let adjustedNextIndex;
+      let adjustedNextIndex = nextIndex;
 
       if (nextIndex < 0) {
         adjustedNextIndex = rows.length - 1;
       } else if (nextIndex === rows.length) {
         adjustedNextIndex = 0;
-      } else {
-        adjustedNextIndex = nextIndex;
       }
       rows[adjustedNextIndex].focus();
       const id = `#${rows[adjustedNextIndex].getAttribute('for')}`;
