@@ -51,7 +51,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
       40: this.constructor.NAVIGATE.FORWARD,
     }[evt.which];
 
-    if (direction && selectedRow) {
+    if (direction && selectedRow !== undefined) {
       const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
       const nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
       let adjustedNextIndex;
