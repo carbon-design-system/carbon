@@ -14,6 +14,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     super(element, options);
 
     this.sliderActive = false;
+    this.dragging = false;
 
     this.track = this.element.querySelector(this.options.selectorTrack);
     this.filledTrack = this.element.querySelector(this.options.selectorFilledTrack);
@@ -26,8 +27,6 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
       this.boundInput.addEventListener('change', (evt) => { this._handleTextInput(evt); });
     }
 
-    this.dragging = false;
-
     this._updatePosition();
 
     this.thumb.addEventListener('mousedown', (evt) => { this._handleMouseDown(evt); });
@@ -35,7 +34,6 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     this.element.ownerDocument.addEventListener('mousemove', (evt) => { this._handleMouseMove(evt); });
     this.thumb.addEventListener('keydown', (evt) => { this._handleKeyDown(evt); });
     this.track.addEventListener('click', (evt) => { this._handleClick(evt); });
-    this.element.addEventListener('slider-after-value-change', (evt) => { console.log(evt); });
   }
 
   _handleMouseDown() {
@@ -70,21 +68,10 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
 
 
   _updatePosition(evt) {
-    let direction;
-    if (evt) {
-      if (evt.which === 40 || evt.which === 37) {
-        direction = 'decreasing';
-      }
-      if (evt.which === 38 || evt.which === 39) {
-        direction = 'increasing';
-      }
-    }
-
-
     const {
       left,
       newValue,
-    } = this._doMath(evt, direction);
+    } = this._calcValue(evt);
 
 
     if (this.dragging) {
@@ -104,7 +91,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     });
   }
 
-  _doMath(evt, direction) {
+  _calcValue(evt) {
     const {
       value,
       min,
@@ -112,7 +99,6 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
       step,
     } = this.getInputProps();
 
-    const stepSize = step / this.track.getBoundingClientRect().width;
     const range = max - min;
     const valuePercentage = (((value - min) / range) * 100);
 
@@ -121,22 +107,37 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     left = valuePercentage;
     newValue = value;
 
-    if (evt && evt.clientX) {
-      const track = this.track.getBoundingClientRect();
-      const unrounded = ((evt.clientX - track.left) / track.width);
-      const rounded = Math.round(((range * unrounded) / step)) * step;
-      left = (((rounded - min) / range) * 100);
-      newValue = rounded;
+    if (evt) {
+      const type = evt.type;
+
+      if (type === 'keydown') {
+        console.log(evt.which);
+        let direction;
+        if (evt.which === 40 || evt.which === 37) {
+          direction = 'decreasing';
+        }
+        if (evt.which === 38 || evt.which === 39) {
+          direction = 'increasing';
+        }
+        const stepSize = step / this.track.getBoundingClientRect().width;
+        if (direction) {
+          left = direction === 'decreasing' ?
+            valuePercentage - stepSize
+            : valuePercentage + stepSize;
+          newValue = direction === 'decreasing' ? Number(value) - Number(step) : Number(value) + Number(step);
+        }
+      }
+
+      if (type === 'mousemove' || type === 'click') {
+        const track = this.track.getBoundingClientRect();
+        const unrounded = ((evt.clientX - track.left) / track.width);
+        const rounded = Math.round(((range * unrounded) / step)) * step;
+        left = (((rounded - min) / range) * 100);
+        newValue = rounded;
+      }
     }
 
-    if (direction) {
-      left = direction === 'decreasing' ?
-        valuePercentage - stepSize
-        : valuePercentage + stepSize;
-      newValue = direction === 'decreasing' ? Number(value) - Number(step) : Number(value) + Number(step);
-    }
-
-    if (newValue <= min) {
+    if (newValue <= Number(min)) {
       left = 0;
       newValue = min;
     }
