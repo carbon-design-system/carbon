@@ -16,7 +16,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     if (this.element.dataset.datePicker === 'no-calendar') {
       this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInput));
     } else {
-      this._initDatePicker(this.element.dataset.datePicker);
+      this.element.calendar = this._initDatePicker(this.element.dataset.datePicker);
     }
   }
 
@@ -27,7 +27,6 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     const calendar = new Flatpickr(date, {
       allowInput: true,
       dateFormat: 'm/d/Y',
-      minDate: 'today',
       mode: this.element.dataset.datePicker,
       onClose: (selectedDates) => {
         this._updateInputFields(selectedDates, type);
@@ -58,6 +57,25 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       calendar.open();
     });
     this._addInputLogic(date);
+    return calendar;
+  }
+
+  getCalendar = () => this.element.calendar;
+
+  setMinDate = (date) => {
+    this.element.calendar.set('minDate', date);
+  }
+
+  setMaxDate = (date) => {
+    this.element.calendar.set('maxDate', date);
+  }
+
+  setDisabledDates = (dates) => {
+    this.element.calendar.set('disable', dates);
+  }
+
+  setDefaultDates = (dates) => {
+    this.element.calendar.set('defaultDate', dates);
   }
 
   _rightArrowHTML() {
@@ -154,13 +172,8 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
   }
 
   _formatDate = (date) => {
-    const month = (date.getMonth() + 1) < 10
-    ? `0${(date.getMonth() + 1)}`
-    : (date.getMonth() + 1);
-    const day = date.getDate() < 10
-    ? `0${date.getDate()}`
-    : date.getDate();
-    return `${month} / ${day} / ${date.getFullYear()}`;
+    const formattedDate = new Intl.DateTimeFormat().format(date).split('/');
+    return `${formattedDate[0]} / ${formattedDate[1]} / ${formattedDate[2]}`;
   }
 
   /**
