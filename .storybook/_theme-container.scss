@@ -1,9 +1,4 @@
-// $css--font-face: false !default;
-// $css--helpers: true !default;
-// $css--body: true !default;
-// $css--reset: false !default;
-
-@import 'carbon-components/scss/globals/scss/styles';
+@import '../node_modules/carbon-components/scss/globals/scss/styles';
 
 html {
   @include helvetica;

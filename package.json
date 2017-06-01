@@ -1,20 +1,19 @@
 {
-  "name": "@console/bluemix-components-react",
-  "version": "2.0.0",
+  "name": "carbon-components-react",
+  "version": "3.0.0",
   "description": "A React wrapper for bluemix-components",
   "main": "dist/index.js",
+  "module": "es/index.js",
   "scripts": {
     "check": "npm run lint && npm run test",
-    "coverage": "./node_modules/.bin/jest '/(components|lib|internal)/' --coverage && node scripts/create-badge.js",
-    "storybook": "./node_modules/.bin/start-storybook -p 9001",
-    "test": "./node_modules/.bin/jest '/(components|lib|internal)/'",
-    "test-watch": "./node_modules/.bin/jest '/(components|lib|internal)/' --watch",
-    "lint": "./node_modules/.bin/eslint --ignore-pattern dist .",
-    "build-storybook": "./node_modules/.bin/build-storybook -s .storybook -o .gh-pages/storybook",
-    "build": "./node_modules/.bin/babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
-    "precommit": "lint-staged",
-    "commitmsg": "./node_modules/.bin/validate-commit-msg",
-    "commit": "git cz"
+    "lint": "eslint {components,internal}/**",
+    "test": "jest '/(components|lib|internal)/'",
+    "test-watch": "jest '/(components|lib|internal)/' --watch",
+    "build": "babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
+    "commitmsg": "validate-commit-msg",
+    "commit": "git cz",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "keywords": [
     "react",
@@ -92,8 +91,9 @@
   "devDependencies": {
     "@ibma/aat": "1.2.0",
     "@kadira/react-storybook-addon-info": "3.2.1",
-    "@kadira/react-storybook-decorator-centered": "^1.0.0",
-    "@kadira/storybook": "2.20.0",
+    "@storybook/addon-centered": "3.0.0",
+    "@storybook/addon-info": "^3.0.0",
+    "@storybook/react": "^3.0.0",
     "autoprefixer": "^6.3.7",
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.0",
@@ -101,6 +101,7 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
+    "carbon-components": "^7.5.7",
     "commitizen": "^2.9.5",
     "css-loader": "0.23.1",
     "cz-conventional-changelog-components": "^1.0.0",
@@ -117,14 +118,16 @@
     "postcss-loader": "^0.9.1",
     "prettier": "^1.2.2",
     "prop-types": "^15.5.8",
+    "react": "^15.5.4",
     "react-addons-test-utils": "^15.3.1",
+    "react-dom": "^15.5.4",
     "sass-loader": "4.0.0",
     "shelljs": "^0.7.5",
     "style-loader": "0.13.1",
     "validate-commit-msg": "^2.10.1"
   },
   "jest": {
-    "coverageDirectory": "./.gh-pages/coverage",
+    "coverageDirectory": "./coverage",
     "moduleNameMapper": {
       "^.+\\.(scss)$": "<rootDir>/lib/styleMock.js"
     }

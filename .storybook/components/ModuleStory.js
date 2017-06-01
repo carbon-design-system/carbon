@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import { Module, ModuleHeader, ModuleBody } from '../../components/Module';
 import UnderReviewDecorator from '../UnderReviewDecorator';
 

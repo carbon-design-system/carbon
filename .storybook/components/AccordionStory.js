@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf, action } from '@kadira/storybook';
+import { storiesOf, action } from '@storybook/react';
 import Accordion from '../../components/Accordion';
 import AccordionItem from '../../components/AccordionItem';
 import Select from '../../components/Select';

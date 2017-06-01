@@ -1,21 +1,17 @@
 import React from 'react';
-import { configure, setAddon, addDecorator } from '@kadira/storybook';
-import infoAddon from '@kadira/react-storybook-addon-info';
+import { configure, setAddon, addDecorator } from '@storybook/react';
+import infoAddon from '@storybook/addon-info';
 import ThemeContainer from './ThemeContainer';
-
-const appContainerDecorator = (story) => (
-  <ThemeContainer story={story} />
-);
-addDecorator(appContainerDecorator);
 
 setAddon(infoAddon);
 
-function requireAll(requireContext) {
-  return requireContext.keys().map(requireContext);
-}
+const appContainerDecorator = story => <ThemeContainer story={story} />;
+addDecorator(appContainerDecorator);
+
+const req = require.context('./components', true, /\.js$/);
 
 function loadStories() {
-  requireAll(require.context('./', true, /Story\.js$/));
+  req.keys().forEach(filename => req(filename));
 }
 
 configure(loadStories, module);

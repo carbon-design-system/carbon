@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import TooltipSimple from '../../components/TooltipSimple';
 
 storiesOf('TooltipSimple', module)

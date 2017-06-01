@@ -1,5 +1,5 @@
 import React from 'react';
-import { action, storiesOf } from '@kadira/storybook';
+import { action, storiesOf } from '@storybook/react';
 import Breadcrumb from '../../components/Breadcrumb';
 import BreadcrumbItem from '../../components/BreadcrumbItem';
 import OverflowMenu from '../../components/OverflowMenu';

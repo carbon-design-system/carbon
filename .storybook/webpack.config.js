@@ -1,19 +1,25 @@
-const autoprefixer = require('autoprefixer');
 const path = require('path');
 
 module.exports = {
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'postcss', 'sass'],
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+            },
+          },
+        ],
       },
     ],
-  },
-  sassLoader: {
-    includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-  },
-  postcss() {
-    return [autoprefixer];
   },
 };

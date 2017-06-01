@@ -3,14 +3,11 @@
     [
       "env",
       {
-        "chrome": "latest",
-        "edge": "latest",
-        "firefox": "latest",
-        "safari": "latest",
-        "ie": "11",
-        "ios": "latest"
-      }
-    ],
+        "modules": false,
+        "targets": {
+          "browsers": ["last 1 version", "ie >= 11"]
+        }
+    }],
     "react",
     "stage-1"
   ]
