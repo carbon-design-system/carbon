@@ -1,11 +1,11 @@
-const fs = require('fs');
 const execSync = require('child_process').execSync;
 const inInstall = require('in-publish').inInstall;
-const prettyBytes = require('pretty-bytes');
-const gzipSize = require('gzip-size');
 const path = require('path');
 
 if (inInstall()) process.exit(0);
+
+const babelPath = path.resolve(__dirname, '../node_modules/.bin/babel');
+const dirs = ['components', 'lib', 'internal'];
 
 const exec = (command, extraEnv) =>
   execSync(command, {
@@ -13,16 +13,20 @@ const exec = (command, extraEnv) =>
     env: Object.assign({}, process.env, extraEnv),
   });
 
+const compile = (dirs, type) => {
+  dirs.forEach(dir => {
+    exec(`${babelPath} ${dir} --out-dir ${type}/${dir} --ignore __tests__`, {
+      BABEL_ENV: type,
+    });
+  });
+
+  exec(`${babelPath} index.js -d ${type}`, {
+    BABEL_ENV: type,
+  });
+};
+
 console.log('Building CommonJS modules ...');
-
-const babelPath = path.resolve(__dirname, '../node_modules/.bin/babel');
-
-exec(`${babelPath} components internal lib index.js -d cjs`, {
-  BABEL_ENV: 'cjs',
-});
+compile(dirs, 'cjs');
 
 console.log('\nBuilding ES modules ...');
-
-exec(`${babelPath} components internal lib index.js -d es`, {
-  BABEL_ENV: 'es',
-});
+compile(dirs, 'es');

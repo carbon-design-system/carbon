@@ -1,6 +1,6 @@
 {
   "presets": [
-    "./scripts/env-preset",
+    "./scripts/env",
     "react",
     "stage-1"
   ]
