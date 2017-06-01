@@ -1,9 +1,9 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-// import eventMatches from '../../globals/js/misc/event-matches';
+import eventedState from '../../globals/js/mixins/evented-state';
 
-class Slider extends mixin(createComponent, initComponentBySearch) {
+class Slider extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * Slider.
    * @extends CreateComponent
@@ -35,6 +35,7 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
     this.element.ownerDocument.addEventListener('mousemove', (evt) => { this._handleMouseMove(evt); });
     this.thumb.addEventListener('keydown', (evt) => { this._handleKeyDown(evt); });
     this.track.addEventListener('click', (evt) => { this._handleClick(evt); });
+    this.element.addEventListener('slider-after-value-change', (evt) => { console.log(evt); });
   }
 
   _handleMouseDown() {
@@ -61,6 +62,10 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
 
   _handleTextInput(evt) {
     this.setValue(evt.target.value);
+  }
+
+  _changeState = (state, detail, callback) => {
+    callback();
   }
 
 
@@ -95,6 +100,7 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
       this.filledTrack.style.transform = `scaleX(${left / 100})`;
       this.input.value = newValue;
       this._updateInput();
+      this.changeState('slider-value-change', { value: newValue });
     });
   }
 
@@ -121,7 +127,6 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
       const rounded = Math.round(((range * unrounded) / step)) * step;
       left = (((rounded - min) / range) * 100);
       newValue = rounded;
-      console.log(unrounded, rounded, left);
     }
 
     if (direction) {
@@ -195,6 +200,8 @@ class Slider extends mixin(createComponent, initComponentBySearch) {
     selectorFilledTrack: '.bx--slider__filled-track',
     selectorThumb: '.bx--slider__thumb',
     selectorInput: '.bx--slider__input',
+    eventBeforeSliderValueChange: 'slider-before-value-change',
+    eventAfterSliderValueChange: 'slider-after-value-change',
   }
 }
 
