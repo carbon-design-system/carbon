@@ -111,7 +111,6 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
       const type = evt.type;
 
       if (type === 'keydown') {
-        console.log(evt.which);
         let direction;
         if (evt.which === 40 || evt.which === 37) {
           direction = 'decreasing';
@@ -119,12 +118,14 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
         if (evt.which === 38 || evt.which === 39) {
           direction = 'increasing';
         }
-        const stepSize = step / this.track.getBoundingClientRect().width;
+        const multiplier = evt.shiftKey === true ? (range / step) / 6 : 1;
+        const stepMultiplied = step * multiplier;
+        const stepSize = stepMultiplied / this.track.getBoundingClientRect().width;
         if (direction) {
           left = direction === 'decreasing' ?
             valuePercentage - stepSize
             : valuePercentage + stepSize;
-          newValue = direction === 'decreasing' ? Number(value) - Number(step) : Number(value) + Number(step);
+          newValue = direction === 'decreasing' ? Number(value) - Number(stepMultiplied) : Number(value) + Number(stepMultiplied);
         }
       }
 
