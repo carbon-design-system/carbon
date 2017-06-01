@@ -1,0 +1,21 @@
+<div class="bx--form-item">
+  <label for="time-picker-1" class="bx--label">Label</label>
+  <div id="time-picker-1" data-time-picker class="bx--time-picker">
+    <div data-time-picker-input class="bx--time-picker__input">
+      <input data-time-picker-input-field type="number" class="bx--time-picker__input-field bx--time-picker__input-field--hours" placeholder="hh" step="1" min="0" />
+      <span class="bx--time-picker__separator">:</span>
+      <input data-time-picker-input-field type="number" class="bx--time-picker__input-field bx--time-picker__input-field--mins" placeholder="mm" step="1" min="0" />
+      <input data-time-picker-input-field type="text" class="bx--time-picker__input-field bx--time-picker__input-field--text" pattern="[a-zA-Z]{2,2}" placeholder="am" maxlength="2" />
+    </div>
+    <div class="bx--time-picker__select bx--select bx--select--inline">
+      <select id="select-id" class="bx--select-input">
+        <option class="bx--select-option" value="CST">CST</option>
+        <option class="bx--select-option" value="EST">EST</option>
+        <option class="bx--select-option" value="MT">MT</option>
+      </select>
+      <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+        <path d="M10 0L5 5 0 0z"></path>
+      </svg>
+    </div>
+  </div>
+</div>
