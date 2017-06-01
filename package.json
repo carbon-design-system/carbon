@@ -9,7 +9,7 @@
     "lint": "eslint {components,internal}/**",
     "test": "jest '/(components|lib|internal)/'",
     "test-watch": "jest '/(components|lib|internal)/' --watch",
-    "build": "babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
+    "build": "node scripts/build.js",
     "commitmsg": "validate-commit-msg",
     "commit": "git cz",
     "storybook": "start-storybook -p 8080",
