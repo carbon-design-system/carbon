@@ -39,32 +39,33 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     }
   }
 
-  _getInput(item) {
-    const id = `#${item.getAttribute('for')}`;
-    return this.element.querySelector(`${id}.bx--structured-list-input`);
-  }
+  // _getInput(item) {
+  //   const id = `#${item.getAttribute('for')}`;
+  //   return this.element.querySelector(`${id}.bx--structured-list-input`);
+  // }
 
   _arrowKeydown(evt) {
-    let input;
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     const direction = {
       38: this.constructor.NAVIGATE.BACKWARD,
       40: this.constructor.NAVIGATE.FORWARD,
     }[evt.which];
 
-    if (direction) {
+    if (direction && selectedRow) {
       const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
       const nextIndex = Math.max(rows.indexOf(selectedRow) + direction, -1);
-      let adjustedNextIndex = nextIndex;
+      let adjustedNextIndex;
 
       if (nextIndex < 0) {
         adjustedNextIndex = rows.length - 1;
       } else if (nextIndex === rows.length) {
         adjustedNextIndex = 0;
+      } else {
+        adjustedNextIndex = nextIndex;
       }
-
       rows[adjustedNextIndex].focus();
-      input = this._getInput(rows[adjustedNextIndex]);
+      const id = `#${rows[adjustedNextIndex].getAttribute('for')}`;
+      const input = this.element.querySelector(`${id}.bx--structured-list-input`);
       input.checked = true;
     }
   }
