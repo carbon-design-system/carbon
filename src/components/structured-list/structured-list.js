@@ -39,12 +39,16 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     }
   }
 
+  _direction(evt) {
+    return {
+      38: -1, // backward
+      40: 1, // forward
+    }[evt.which];
+  }
+
   _arrowKeydown(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    const direction = {
-      38: this.constructor.NAVIGATE.BACKWARD,
-      40: this.constructor.NAVIGATE.FORWARD,
-    }[evt.which];
+    const direction = this._direction(evt);
 
     if (direction && selectedRow !== undefined) {
       const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
@@ -64,11 +68,6 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
       input.checked = true;
     }
   }
-
-  static NAVIGATE = {
-    BACKWARD: -1,
-    FORWARD: 1,
-  };
 
   static components = new WeakMap();
 

@@ -35,13 +35,6 @@ describe('StructuredList', function () {
       });
     });
 
-    it('should set static NAVIGATE property', function () {
-      expect(instance.constructor.NAVIGATE).to.deep.equal({
-        BACKWARD: -1,
-        FORWARD: 1,
-      });
-    });
-
     after(function () {
       instance.release();
       document.body.removeChild(wrapper);
@@ -83,6 +76,53 @@ describe('StructuredList', function () {
             bubbles: true,
           }),
           { which: 32 },
+        ),
+      );
+      expect(spy).to.have.been.called;
+    });
+
+    afterEach(function () {
+      spy.restore();
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('_direction(evt)', function () {
+    let instance;
+    let element;
+    let wrapper;
+    let spy;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-structured-list]');
+      instance = new StructuredList(element);
+    });
+
+    it('should be called on "up" keydown event', function () {
+      spy = sinon.spy(instance, '_direction');
+      instance.element.dispatchEvent(
+        Object.assign(
+          new CustomEvent('keydown', {
+            bubbles: true,
+          }),
+          { which: 38 },
+        ),
+      );
+      expect(spy).to.have.been.called;
+    });
+
+    it('should be called on "down" keydown event', function () {
+      spy = sinon.spy(instance, '_direction');
+      instance.element.dispatchEvent(
+        Object.assign(
+          new CustomEvent('keydown', {
+            bubbles: true,
+          }),
+          { which: 40 },
         ),
       );
       expect(spy).to.have.been.called;
