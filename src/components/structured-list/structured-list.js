@@ -39,11 +39,6 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     }
   }
 
-  // _getInput(item) {
-  //   const id = `#${item.getAttribute('for')}`;
-  //   return this.element.querySelector(`${id}.bx--structured-list-input`);
-  // }
-
   _arrowKeydown(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     const direction = {
