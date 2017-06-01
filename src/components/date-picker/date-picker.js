@@ -115,13 +115,10 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     });
     inputField.addEventListener('blur', () => {
       if ((inputField.value.length === 7 || inputField.value.length === 10) && inputField.value.indexOf('/') > -1) {
-        const inputValue = inputField.value;
-        const inputValueArr = inputValue.split('/');
+        const inputValueArr = inputField.value.split('/');
         let newInputValue = '';
-        let increment = 0;
-        inputValueArr.forEach((val) => {
-          increment++;
-          if (increment === inputValueArr.length) {
+        inputValueArr.forEach((val, index) => {
+          if (index === inputValueArr.length) {
             newInputValue += `${val}`;
           } else {
             newInputValue += `${val} / `;
