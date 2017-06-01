@@ -12,7 +12,7 @@
     "build": "babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
     "commitmsg": "validate-commit-msg",
     "commit": "git cz",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 8080",
     "build-storybook": "build-storybook"
   },
   "keywords": [
@@ -95,7 +95,7 @@
     "@storybook/addon-info": "^3.0.0",
     "@storybook/react": "^3.0.0",
     "autoprefixer": "^6.3.7",
-    "babel-cli": "^6.18.0",
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^18.0.0",
     "babel-preset-env": "^1.4.0",

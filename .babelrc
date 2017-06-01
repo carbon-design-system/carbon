@@ -1,13 +1,6 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "modules": false,
-        "targets": {
-          "browsers": ["last 1 version", "ie >= 11"]
-        }
-    }],
+    "./scripts/env-preset",
     "react",
     "stage-1"
   ]

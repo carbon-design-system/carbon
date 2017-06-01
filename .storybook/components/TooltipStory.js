@@ -1,10 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Tooltip from '../../components/Tooltip';
-import UnderReviewDecorator from '../UnderReviewDecorator';
 
 storiesOf('Tooltip', module)
-  .addDecorator(UnderReviewDecorator)
   .addWithInfo(
     'default',
     `
