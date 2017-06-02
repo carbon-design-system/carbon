@@ -53,6 +53,6 @@ $loading__size: 10.5rem;
   }
 
   .bx--loading-overlay--stop {
-    background-color: transparent;
+    display: none;
   }
 }
