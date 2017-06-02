@@ -54,11 +54,16 @@
     border-radius: 50%;
     top: 0;
     transform: translate(-50%, -50%);
-    transition: transform 100ms $bx--standard-easing;
+    transition: transform 100ms $bx--standard-easing, background 100ms $bx--standard-easing;
     cursor: pointer;
     outline: none;
 
     &:hover, &:focus {
+      transform: translate(-50%, -50%) scale(1.05);
+      background: darken($brand-01, 5%);
+    }
+
+    &:active {
       transform: translate(-50%, -50%) scale(1.25);
     }
   }

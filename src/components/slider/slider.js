@@ -2,6 +2,7 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
+import on from '../../globals/js/misc/on';
 
 class Slider extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
@@ -24,42 +25,24 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     if (this.element.dataset.sliderInputBox) {
       this.boundInput = this.element.ownerDocument.querySelector(this.element.dataset.sliderInputBox);
       this._updateInput();
-      this.boundInput.addEventListener('change', (evt) => { this._handleTextInput(evt); });
+      this.boundInput.addEventListener('change', (evt) => { this.setValue(evt.target.value); });
     }
 
     this._updatePosition();
 
-    this.thumb.addEventListener('mousedown', (evt) => { this._handleMouseDown(evt); });
-    this.element.ownerDocument.addEventListener('mouseup', (evt) => { this._handleMouseUp(evt); });
-    this.element.ownerDocument.addEventListener('mousemove', (evt) => { this._handleMouseMove(evt); });
-    this.thumb.addEventListener('keydown', (evt) => { this._handleKeyDown(evt); });
-    this.track.addEventListener('click', (evt) => { this._handleClick(evt); });
-  }
-
-  _handleMouseDown() {
-    this.sliderActive = true;
-  }
-
-  _handleMouseMove(evt) {
-    if (this.sliderActive === true) {
+    this.thumb.addEventListener('mousedown', () => { this.sliderActive = true; });
+    this.hDocumentMouseUp = on(this.element.ownerDocument, 'mouseup', () => { this.sliderActive = false; });
+    this.hDocumentMouseMove = on(this.element.ownerDocument, 'mousemove', (evt) => {
+      if (this.sliderActive === true) {
+        this._updatePosition(evt);
+      }
+    });
+    this.thumb.addEventListener('keydown', (evt) => {
       this._updatePosition(evt);
-    }
-  }
-
-  _handleMouseUp() {
-    this.sliderActive = false;
-  }
-
-  _handleKeyDown(evt) {
-    this._updatePosition(evt);
-  }
-
-  _handleClick(evt) {
-    this._updatePosition(evt);
-  }
-
-  _handleTextInput(evt) {
-    this.setValue(evt.target.value);
+    });
+    this.track.addEventListener('click', (evt) => {
+      this._updatePosition(evt);
+    });
   }
 
   _changeState = (state, detail, callback) => {
@@ -108,24 +91,22 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     newValue = value;
 
     if (evt) {
-      const type = evt.type;
+      const { type } = evt;
 
       if (type === 'keydown') {
-        let direction;
-        if (evt.which === 40 || evt.which === 37) {
-          direction = 'decreasing';
-        }
-        if (evt.which === 38 || evt.which === 39) {
-          direction = 'increasing';
-        }
-        const multiplier = evt.shiftKey === true ? (range / step) / 6 : 1;
-        const stepMultiplied = step * multiplier;
-        const stepSize = stepMultiplied / this.track.getBoundingClientRect().width;
-        if (direction) {
-          left = direction === 'decreasing' ?
-            valuePercentage - stepSize
-            : valuePercentage + stepSize;
-          newValue = direction === 'decreasing' ? Number(value) - Number(stepMultiplied) : Number(value) + Number(stepMultiplied);
+        const direction = {
+          40: -1, // decreasing
+          37: -1, // decreasing
+          38: 1, // increasing
+          39: 1, // increasing
+        }[evt.which];
+
+        if (direction !== undefined) {
+          const multiplier = evt.shiftKey === true ? (range / step) / 6 : 1;
+          const stepMultiplied = step * multiplier;
+          const stepSize = stepMultiplied / this.track.getBoundingClientRect().width;
+          left = valuePercentage + (stepSize * direction);
+          newValue = Number(value) + (stepMultiplied * direction);
         }
       }
 
@@ -181,6 +162,12 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
   }
 
   release() {
+    if (this.hDocumentMouseUp) {
+      this.hDocumentMouseUp = this.hDocumentMouseUp.release();
+    }
+    if (this.hDocumentMouseMove) {
+      this.hDocumentMouseMove = this.hDocumentMouseMove.release();
+    }
     super.release();
   }
 
