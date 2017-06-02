@@ -168,9 +168,19 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     }
   }
 
+  // _formatDate = (date) => {
+  //   const formattedDate = new Intl.DateTimeFormat().format(date).split('/');
+  //   return `${formattedDate[0]} / ${formattedDate[1]} / ${formattedDate[2]}`;
+  // }
+
   _formatDate = (date) => {
-    const formattedDate = new Intl.DateTimeFormat().format(date).split('/');
-    return `${formattedDate[0]} / ${formattedDate[1]} / ${formattedDate[2]}`;
+    const month = (date.getMonth() + 1) < 10
+    ? `0${(date.getMonth() + 1)}`
+    : (date.getMonth() + 1);
+    const day = date.getDate() < 10
+    ? `0${date.getDate()}`
+    : date.getDate();
+    return `${month} / ${day} / ${date.getFullYear()}`;
   }
 
   /**
