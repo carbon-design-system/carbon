@@ -102,7 +102,9 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
         }[evt.which];
 
         if (direction !== undefined) {
-          const multiplier = evt.shiftKey === true ? (range / step) / 6 : 1;
+          const multiplier = evt.shiftKey === true
+            ? (range / step) / this.options.stepMuliplier
+            : 1;
           const stepMultiplied = step * multiplier;
           const stepSize = stepMultiplied / this.track.getBoundingClientRect().width;
           left = valuePercentage + (stepSize * direction);
@@ -191,6 +193,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     selectorInput: '.bx--slider__input',
     eventBeforeSliderValueChange: 'slider-before-value-change',
     eventAfterSliderValueChange: 'slider-after-value-change',
+    stepMuliplier: 6,
   }
 }
 
