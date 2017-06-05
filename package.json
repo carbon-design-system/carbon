@@ -12,7 +12,7 @@
     "build": "node scripts/build.js",
     "commitmsg": "validate-commit-msg",
     "commit": "git cz",
-    "storybook": "start-storybook -p 8090",
+    "storybook": "start-storybook -p 8080",
     "build-storybook": "build-storybook"
   },
   "keywords": [
