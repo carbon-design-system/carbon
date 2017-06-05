@@ -82,13 +82,6 @@ describe('Test data picker', function () {
       expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
     });
 
-    // it('Should update the input field with the selected date', function () {
-    //   datePicker.calendar.open();
-    //   datePicker.calendar.calendarContainer.querySelector('.bx--date-picker__day').dispatchEvent(new CustomEvent('click', { bubbles: true }));
-    //   console.debug(datePicker.calendar);
-    //   console.debug(datePickerInput.value);
-    // });
-
     after(function () {
       datePicker.release();
       document.body.removeChild(container);
