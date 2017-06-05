@@ -31,7 +31,7 @@ describe('StructuredList', function () {
     it('should set default options', function () {
       expect(instance.options).to.deep.equal({
         selectorInit: '[data-structured-list]',
-        selectorRow: '[data-structured-list] .bx--structured-list-tbody .bx--structured-list-row',
+        selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
       });
     });
 
@@ -228,15 +228,6 @@ describe('StructuredList', function () {
       spy = sinon.spy(instance, '_handleChecked');
       instance._handleChecked(0);
       expect(spy).to.have.been.called;
-    });
-
-    it('should return { id, input }', function () {
-      const input = instance.element.querySelector('#apache-id.bx--structured-list-input');
-      const result = instance._handleChecked(0);
-      expect(result).to.deep.equal({
-        id: '#apache-id',
-        input,
-      });
     });
 
     afterEach(function () {

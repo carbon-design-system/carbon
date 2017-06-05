@@ -47,16 +47,17 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
   }
 
   _nextIndex(array, arrayItem, direction) {
-    // console.log(array.indexOf(arrayItem) + direction);
-    return array.indexOf(arrayItem) + direction; // -1, 0, 1, 2, 3, 4...
+    return array.indexOf(arrayItem) + direction; // returns -1, 0, 1, 2, 3, 4...
+  }
+
+  _getInput(index) {
+    const id = `#${this.rows[index].getAttribute('for')}`;
+    return this.element.ownerDocument.querySelector(`${id}.bx--structured-list-input`);
   }
 
   _handleChecked(index) {
-    const id = `#${this.rows[index].getAttribute('for')}`;
-    const input = this.element.ownerDocument.querySelector(`${id}.bx--structured-list-input`);
+    const input = this._getInput(index);
     input.checked = true;
-
-    return { id, input };
   }
 
   _arrowKeydown(evt) {
@@ -89,7 +90,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
 
   static options = {
     selectorInit: '[data-structured-list]',
-    selectorRow: '[data-structured-list] .bx--structured-list-tbody .bx--structured-list-row',
+    selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
   };
 }
 
