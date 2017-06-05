@@ -6,7 +6,7 @@ Use these modifiers with `.bx--structured-list` class.
 
 | Selector                             | Description                                                                                  |
 |--------------------------------------|----------------------------------------------------------------------------------------------|
-| .bx--structured-list--border         | Applies border around structured-list                                                        |
+| .bx--structured-list--border         | Applies border around structured-list and white background-color                             |
 | .bx--structured-list--condensed      | Applies condensed styles for all body rows                                                   |
 | .bx--structured-list-content--nowrap | Applies `white-space: nowrap;` on content. Prevents titles from wrapping in small viewports. |
 
