@@ -9,21 +9,21 @@
     position: relative;
   }
 
-  .bx--date-picker[data-date-picker="no-calendar"] {
+  .bx--date-picker[data-date-picker-type="no-calendar"] {
     .bx--date-picker__input {
       width: 8.125rem;
     }
   }
 
-  .bx--date-picker[data-date-picker="no-calendar"][data-date-picker-mm-yy] {
+  .bx--date-picker[data-date-picker-type="no-calendar"][data-date-picker-mm-yy] {
     .bx--date-picker__input {
       width: 6.125rem;
     }
   }
 
-  .bx--date-picker[data-date-picker="basic"] {
+  .bx--date-picker[data-date-picker-type="single"] {
     .bx--date-picker__input {
-      width: 9.75rem;
+      width: rem(160px);
     }
   }
 
@@ -34,7 +34,7 @@
     display: block;
     position: relative;
     height: rem(40px);
-    max-width: 9.75rem;
+    max-width: rem(160px);
     padding: 0 1rem;
     background-color: $field-01;
     color: $text-01;
@@ -61,14 +61,14 @@
   .bx--date-picker__icon {
     position: absolute;
     bottom: .7rem;
-    left: .925rem;
+    left: 1rem;
     fill: $brand-01;
     cursor: pointer;
     z-index: 1;
   }
 
   .bx--date-picker__icon + .bx--date-picker__input {
-    padding-left: 2.75rem;
+    padding-left: 2.9rem;
   }
 
   .bx--date-picker-range {
@@ -87,7 +87,7 @@
   }
 
   .bx--date-picker-range .bx--date-picker__input {
-    width: 8.125rem;
+    width: rem(128px);
   }
 
   .bx--date-picker__calendar,
@@ -186,9 +186,9 @@
   .bx--date-picker__day {
     @include font-size('12');
     height: rem(25px);
-    width: rem(32px);
+    width: 1.8rem;
     line-height: rem(25px);
-    flex-basis: rem(32px);
+    flex-basis: 1.8rem;
     margin: rem(.5px) 0;
     display: flex;
     align-items: center;
@@ -225,11 +225,13 @@
   .bx--date-picker__day.inRange {
     background: $brand-02;
     box-shadow: -6px 0 0 $brand-02, 6px 0 0 $brand-02;
+    border: 2px solid transparent;
   }
 
   .bx--date-picker__day.selected {
     background: $brand-01;
     color: $inverse-01;
+    border: 2px solid transparent;
   }
 
   .bx--date-picker__day.startRange.selected {

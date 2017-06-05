@@ -30,7 +30,7 @@
   ],
   "dependencies": {
     "carbon-icons": "^6.0.4",
-    "flatpickr": "^2.6.3",
+    "flatpickr": "next",
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {

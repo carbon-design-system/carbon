@@ -31,7 +31,7 @@ describe('Test data picker', function () {
     });
 
     it('Should not add a calendar', function () {
-      expect(element.calendar).to.be.undefined;
+      expect(datePicker.calendar).to.be.undefined;
     });
 
     after(function () {
@@ -57,35 +57,35 @@ describe('Test data picker', function () {
     });
 
     it('Should add a calendar', function () {
-      expect(element.calendar).not.to.be.undefined;
+      expect(datePicker.calendar).not.to.be.undefined;
     });
 
     it('Should show the calendar when the input field is clicked', function () {
       datePickerInput.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-      expect(element.calendar.calendarContainer.classList.contains('open')).to.be.true;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
     });
 
     it('Should show the calendar when the calendar icon is clicked', function () {
       datePickerIcon.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.calendar.calendarContainer.classList.contains('open')).to.be.true;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
     });
 
     it('Should hide the calendar on click outside the date picker', function () {
-      element.calendar.close();
+      datePicker.calendar.close();
       container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.calendar.calendarContainer.classList.contains('open')).to.be.false;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
     });
 
     it('Should hide the calendar on click outside the date picker', function () {
-      element.calendar.close();
+      datePicker.calendar.close();
       container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.calendar.calendarContainer.classList.contains('open')).to.be.false;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
     });
 
     // it('Should update the input field with the selected date', function () {
-    //   element.calendar.open();
-    //   element.calendar.calendarContainer.querySelector('.bx--date-picker__day').dispatchEvent(new CustomEvent('click', { bubbles: true }));
-    //   console.debug(element.calendar);
+    //   datePicker.calendar.open();
+    //   datePicker.calendar.calendarContainer.querySelector('.bx--date-picker__day').dispatchEvent(new CustomEvent('click', { bubbles: true }));
+    //   console.debug(datePicker.calendar);
     //   console.debug(datePickerInput.value);
     // });
 
