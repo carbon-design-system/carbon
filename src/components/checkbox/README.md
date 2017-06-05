@@ -20,8 +20,8 @@ With `input` and `label` as siblings
   <input id="bx--checkbox" class="bx--checkbox" type="checkbox" value="green" name="checkbox">
   <label for="bx--checkbox" class="bx--checkbox-label">
     <span class="bx--checkbox-appearance">
-      <svg class="bx--checkbox-checkmark">
-        <use xlink:href="/carbon-icons/bluemix-icons.svg#checkmark"></use>
+      <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
+        <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
       </svg>
     </span>
     Checkbox (input + label)
@@ -36,14 +36,16 @@ With `label` wrapping `input`
   <label class="bx--checkbox-label">
     <input class="bx--checkbox" type="checkbox" value="yellow" name="checkbox">
     <span class="bx--checkbox-appearance">
-      <svg class="bx--checkbox-checkmark">
-        <use xlink:href="/carbon-icons/bluemix-icons.svg#checkmark"></use>
+      <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
+        <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
       </svg>
     </span>
     <span class="bx--checkbox-label-text">Checkbox (label > input)</span>
   </label>
 </div>
 ```
+
+Also note that it's now recommended to use inline SVG when possible.
 
 #### Fieldset and Legend
 
