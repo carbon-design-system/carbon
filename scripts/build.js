@@ -1,11 +1,13 @@
 const execSync = require('child_process').execSync;
 const inInstall = require('in-publish').inInstall;
 const path = require('path');
+const rimraf = require('rimraf');
 
 if (inInstall()) process.exit(0);
 
 const babelPath = path.resolve(__dirname, '../node_modules/.bin/babel');
 const dirs = ['components', 'lib', 'internal'];
+const rootDir = path.resolve(__dirname, '../');
 
 const exec = (command, extraEnv) =>
   execSync(command, {
@@ -25,8 +27,17 @@ const compile = (dirs, type) => {
   });
 };
 
-console.log('Building CommonJS modules ...');
-compile(dirs, 'cjs');
+console.log('Deleting old build folders ...');
+rimraf(`${rootDir}/cjs`, err => {
+  if (err) throw err;
 
-console.log('\nBuilding ES modules ...');
-compile(dirs, 'es');
+  rimraf(`${rootDir}/es`, err => {
+    if (err) throw err;
+
+    console.log('Building CommonJS modules ...');
+    compile(dirs, 'cjs');
+
+    console.log('\nBuilding ES modules ...');
+    compile(dirs, 'es');
+  });
+});

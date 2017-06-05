@@ -12,7 +12,7 @@
     "build": "node scripts/build.js",
     "commitmsg": "validate-commit-msg",
     "commit": "git cz",
-    "storybook": "start-storybook -p 8080",
+    "storybook": "start-storybook -p 8090",
     "build-storybook": "build-storybook"
   },
   "keywords": [
@@ -121,6 +121,7 @@
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.5.4",
+    "rimraf": "^2.6.1",
     "sass-loader": "4.0.0",
     "shelljs": "^0.7.5",
     "style-loader": "0.13.1",
