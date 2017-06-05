@@ -51,7 +51,7 @@ describe('StructuredList', function () {
     });
   });
 
-  describe('_selectKeydown(evt)', function () {
+  describe('_handleKeydownChecked(evt)', function () {
     let instance;
     let element;
     let wrapper;
@@ -66,29 +66,39 @@ describe('StructuredList', function () {
     });
 
     it('should be called on "enter" keydown event', function () {
-      spy = sinon.spy(instance, '_selectKeydown');
-      instance.element.dispatchEvent(
-        Object.assign(
-          new CustomEvent('keydown', {
-            bubbles: true,
-          }),
-          { which: 13 },
-        ),
+      spy = sinon.spy(instance, '_handleKeydownChecked');
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 13 },
       );
+      instance.element.dispatchEvent(event);
       expect(spy).to.have.been.called;
     });
 
     it('should be called on "space" keydown event', function () {
-      spy = sinon.spy(instance, '_selectKeydown');
-      instance.element.dispatchEvent(
-        Object.assign(
-          new CustomEvent('keydown', {
-            bubbles: true,
-          }),
-          { which: 32 },
-        ),
+      spy = sinon.spy(instance, '_handleKeydownChecked');
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 32 },
       );
+      instance.element.dispatchEvent(event);
       expect(spy).to.have.been.called;
+    });
+
+    it('should not be called with another keydown event', function () {
+      spy = sinon.spy(instance, '_handleKeydownChecked');
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 40 },
+      );
+      instance.element.dispatchEvent(event);
+      expect(spy).to.not.have.been.called;
     });
 
     afterEach(function () {
@@ -114,27 +124,25 @@ describe('StructuredList', function () {
 
     it('should be called on "up" keydown event', function () {
       spy = sinon.spy(instance, '_direction');
-      instance.element.dispatchEvent(
-        Object.assign(
-          new CustomEvent('keydown', {
-            bubbles: true,
-          }),
-          { which: 38 },
-        ),
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 38 },
       );
+      instance.element.dispatchEvent(event);
       expect(spy).to.have.been.called;
     });
 
     it('should be called on "down" keydown event', function () {
       spy = sinon.spy(instance, '_direction');
-      instance.element.dispatchEvent(
-        Object.assign(
-          new CustomEvent('keydown', {
-            bubbles: true,
-          }),
-          { which: 40 },
-        ),
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 40 },
       );
+      instance.element.dispatchEvent(event);
       expect(spy).to.have.been.called;
     });
 
@@ -199,7 +207,8 @@ describe('StructuredList', function () {
     });
 
     it('should return a number', function () {
-      const result = instance._nextIndex([0, 1, 2, 3], 0, 1);
+      const array = [0, 1, 2, 3];
+      const result = instance._nextIndex(array, 0, 1);
       expect(typeof result).to.equal('number');
     });
 
@@ -210,7 +219,7 @@ describe('StructuredList', function () {
     });
   });
 
-  describe('_handleChecked()', function () {
+  describe('_handleInputChecked()', function () {
     let instance;
     let element;
     let wrapper;
@@ -225,8 +234,8 @@ describe('StructuredList', function () {
     });
 
     it('should be called', function () {
-      spy = sinon.spy(instance, '_handleChecked');
-      instance._handleChecked(0);
+      spy = sinon.spy(instance, '_handleInputChecked');
+      instance._handleInputChecked(0);
       expect(spy).to.have.been.called;
     });
 
@@ -237,7 +246,7 @@ describe('StructuredList', function () {
     });
   });
 
-  describe('_arrowKeydown(evt)', function () {
+  describe('_handleKeydownArrow(evt)', function () {
     let instance;
     let element;
     let wrapper;
@@ -252,29 +261,39 @@ describe('StructuredList', function () {
     });
 
     it('should be called on "up" keydown event', function () {
-      spy = sinon.spy(instance, '_arrowKeydown');
-      instance.element.dispatchEvent(
-        Object.assign(
-          new CustomEvent('keydown', {
-            bubbles: true,
-          }),
-          { which: 38 },
-        ),
+      spy = sinon.spy(instance, '_handleKeydownArrow');
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 38 },
       );
+      instance.element.dispatchEvent(event);
       expect(spy).to.have.been.called;
     });
 
     it('should be called on "down" keydown event', function () {
-      spy = sinon.spy(instance, '_arrowKeydown');
-      instance.element.dispatchEvent(
-        Object.assign(
-          new CustomEvent('keydown', {
-            bubbles: true,
-          }),
-          { which: 40 },
-        ),
+      spy = sinon.spy(instance, '_handleKeydownArrow');
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 40 },
       );
+      instance.element.dispatchEvent(event);
       expect(spy).to.have.been.called;
+    });
+
+    it('should not be called with another keydown event', function () {
+      spy = sinon.spy(instance, '_handleKeydownArrow');
+      const event = Object.assign(
+        new CustomEvent('keydown', {
+          bubbles: true,
+        }),
+        { which: 13 },
+      );
+      instance.element.dispatchEvent(event);
+      expect(spy).to.not.have.been.called;
     });
 
     afterEach(function () {

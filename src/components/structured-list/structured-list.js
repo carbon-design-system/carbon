@@ -17,26 +17,13 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
     this.rows = [...this.element.ownerDocument.querySelectorAll(this.options.selectorRow)];
     this.element.addEventListener('keydown', (evt) => {
-      this._arrowKeydown(evt);
-      this._selectKeydown(evt);
+      if (evt.which === 38 || evt.which === 40) {
+        this._handleKeydownArrow(evt);
+      }
+      if (evt.which === 13 || evt.which === 32) {
+        this._handleKeydownChecked(evt);
+      }
     });
-  }
-
-  _selectKeydown(evt) {
-    const selectedRow = eventMatches(evt, this.options.selectorRow);
-    if (selectedRow) {
-      const input = this.element.querySelector(
-        `#${selectedRow.getAttribute('for')}.bx--structured-list-input`,
-      );
-      if (evt.which === 13) {
-        input.checked = true;
-      }
-
-      if (evt.which === 32) {
-        evt.preventDefault();
-        input.checked = true;
-      }
-    }
   }
 
   _direction(evt) {
@@ -55,12 +42,22 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     return this.element.ownerDocument.querySelector(`${id}.bx--structured-list-input`);
   }
 
-  _handleChecked(index) {
+  _handleInputChecked(index) {
     const input = this._getInput(index);
     input.checked = true;
   }
 
-  _arrowKeydown(evt) {
+  _handleKeydownChecked(evt) {
+    const selectedRow = eventMatches(evt, this.options.selectorRow);
+    if (selectedRow) {
+      const input = this.element.querySelector(
+        `#${selectedRow.getAttribute('for')}.bx--structured-list-input`,
+      );
+      input.checked = true;
+    }
+  }
+
+  _handleKeydownArrow(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     const direction = this._direction(evt);
 
@@ -72,15 +69,15 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
       switch (nextIndex) {
         case -1:
           this.rows[lastIndex].focus();
-          this._handleChecked(lastIndex);
+          this._handleInputChecked(lastIndex);
           break;
         case this.rows.length:
           this.rows[firstIndex].focus();
-          this._handleChecked(firstIndex);
+          this._handleInputChecked(firstIndex);
           break;
         default:
           this.rows[nextIndex].focus();
-          this._handleChecked(nextIndex);
+          this._handleInputChecked(nextIndex);
           break;
       }
     }
