@@ -309,7 +309,7 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
 // Watch Tasks
 gulp.task('watch', () => {
   gulp.watch('src/**/**/*.html').on('change', browserSync.reload);
-  gulp.watch(['src/**/**/*.js'], ['scripts:dev']);
+  gulp.watch(['src/**/**/*.js'], ['scripts:dev', 'scripts:compiled']);
   gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
 });
 

@@ -30,7 +30,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     if (type === 'no-calendar') {
       this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInput));
     } else {
-      this.element.calendar = this._initDatePicker(type);
+      this.calendar = this._initDatePicker(type);
     }
   }
 
@@ -70,26 +70,23 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       calendar.open();
     });
     this._addInputLogic(date);
-    console.log('here');
     return calendar;
   }
 
-  getCalendar = () => this.element.calendar;
-
   setMinDate = (date) => {
-    this.element.calendar.set('minDate', date);
+    this.calendar.set('minDate', date);
   }
 
   setMaxDate = (date) => {
-    this.element.calendar.set('maxDate', date);
+    this.calendar.set('maxDate', date);
   }
 
   setDisabledDates = (dates) => {
-    this.element.calendar.set('disable', dates);
+    this.calendar.set('disable', dates);
   }
 
   setDefaultDates = (dates) => {
-    this.element.calendar.set('defaultDate', dates);
+    this.calendar.set('defaultDate', dates);
   }
 
   _rightArrowHTML() {
@@ -110,13 +107,9 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
 
   _addInputLogic = (input) => {
     const inputField = input;
-    inputField.addEventListener('focus', () => {
-      inputField.value = inputField.value.replace(/\s+/g, '');
-    });
     inputField.addEventListener('change', () => {
       if (inputField.value.length === 10) {
-        const inputDate = new Date(inputField.value);
-        this.getCalendar().setDate(inputDate);
+        this.calendar.setDate(this.calendar.parseDate(new Date(inputField.value)));
       }
     });
   }
@@ -160,7 +153,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     }
   }
 
-  _formatDate = date => this.element.calendar.formatDate(date, this.element.calendar.config.dateFormat);
+  _formatDate = date => this.calendar.formatDate(date, this.calendar.config.dateFormat);
 
   release() {
     if (this.calendar) {
