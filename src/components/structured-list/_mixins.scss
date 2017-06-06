@@ -35,8 +35,8 @@
 @mixin padding-th($padding: $structured-list-padding) {
   padding-left: 0;
   padding-right: $padding;
-  padding-top: rem(9px);
-  padding-bottom: rem(9px);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
   &:last-child {
     padding-right: 0;
