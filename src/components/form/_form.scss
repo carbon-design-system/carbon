@@ -41,7 +41,7 @@
     box-shadow: 0 2px 0px 0px $support-01;
 
     ~ .bx--form-requirement {
-      max-height: rem(200px);
+      opacity: 1;
     }
   }
 
@@ -49,7 +49,7 @@
     @include reset;
     @include font-size('11');
     margin: .75rem 0 0;
-    max-height: 0;
+    opacity: 0;
     overflow: hidden;
     font-weight: 700;
     line-height: 1.5;

@@ -31,6 +31,16 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInput));
     } else {
       this.calendar = this._initDatePicker(type);
+      this.element.addEventListener('keydown', (e) => {
+        if (e.which === 40) {
+          this.calendar.calendarContainer.focus();
+        }
+      });
+      this.calendar.calendarContainer.addEventListener('keydown', (e) => {
+        if (e.which === 9 && type === 'range') {
+          this.element.querySelector(this.options.selectorDatePickerInputFrom).focus();
+        }
+      });
     }
   }
 
@@ -43,9 +53,23 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       mode: type,
       onClose: (selectedDates) => {
         this._updateInputFields(selectedDates, type);
+        if (type === 'range') {
+          if (calendar.selectedDates.length === 1) {
+            date.focus();
+          } else {
+            this.element.querySelector(this.options.selectorDatePickerInputTo).focus();
+          }
+        }
       },
       onChange: () => {
         this._updateClassNames(calendar);
+        if (type === 'range') {
+          if (calendar.selectedDates.length === 1) {
+            this.element.querySelector(this.options.selectorDatePickerInputTo).classList.add('bx--focused');
+          } else {
+            this.element.querySelector(this.options.selectorDatePickerInputTo).classList.remove('bx--focused');
+          }
+        }
       },
       onMonthChange: () => {
         this._updateClassNames(calendar);

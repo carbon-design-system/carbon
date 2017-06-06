@@ -17,7 +17,7 @@
 
   .bx--date-picker[data-date-picker-type="no-calendar"][data-date-picker-mm-yy] {
     .bx--date-picker__input {
-      width: 6.125rem;
+      width: 6.2rem;
     }
   }
 
@@ -40,7 +40,8 @@
     color: $text-01;
     border: 1px solid transparent;
 
-    &:focus {
+    &:focus,
+    &.bx--focused {
       @include focus-outline('border');
     }
 
@@ -60,7 +61,7 @@
 
   .bx--date-picker__icon {
     position: absolute;
-    bottom: .7rem;
+    top: 2.25rem;
     left: 1rem;
     fill: $brand-01;
     cursor: pointer;
@@ -103,10 +104,15 @@
     border-radius: 0;
     border: none;
     overflow: hidden;
+    margin-top: -1px;
 
     &:before,
     &:after {
       display: none;
+    }
+
+    &:focus {
+      outline: 1px solid $brand-01;
     }
   }
 
@@ -146,6 +152,10 @@
     border: none;
     border-radius: 0;
     padding: .125rem .125rem .125rem .4rem;
+
+    &:focus {
+      outline: 1px solid $brand-01;
+    }
   }
 
   .bx--date-picker__month .numInputWrapper span.arrowUp,
@@ -202,6 +212,7 @@
 
     &:focus {
       outline: none;
+      background: $ui-04;
     }
   }
 
