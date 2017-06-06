@@ -3,7 +3,8 @@
   padding-right: $structured-list-padding / 2;
 
   &:first-child {
-    padding-left: $structured-list-padding;
+    padding-left: $structured-list-padding / 2;
+    padding-right: $structured-list-padding / 4;
   }
   &:last-child {
     padding-right: $structured-list-padding;
