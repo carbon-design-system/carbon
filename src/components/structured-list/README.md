@@ -1,5 +1,22 @@
 ### SCSS
 
+#### Variables
+
+All configurable variables are located in [src/globals/scss/_vars.scss](https://github.com/carbon-design-system/carbon-components/blob/master/src/globals/scss/_vars.scss)
+
+| name                     | description                                                                               |
+|--------------------------|-------------------------------------------------------------------------------------------|
+| $structured-list-padding | Set padding value for structured-list. This will change gutter sizes between table cells. |
+
+#### Mixins
+
+Mixins specific to structured-list are located in [src/components/structured-list/_mixins.scss](https://github.com/carbon-design-system/carbon-components/blob/master/src/components/structured-list/_mixins.scss)
+
+| name                | params    | description                                                                                                         |
+|---------------------|-----------|---------------------------------------------------------------------------------------------------------------------|
+| data-padding-td     |           | Handles padding for `<td>` elements in structured-list but only for JavaScript variant                              |
+| padding--table-cell | cell-type |  Handles padding for `<td>` or `<th>` elements in simple structured-list components. The cell-type default is 'td'. |
+
 #### Modifiers
 
 Use these modifiers with `.bx--structured-list` class.
