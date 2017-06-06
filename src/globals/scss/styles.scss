@@ -6,6 +6,7 @@ $css--font-face: false !default;
 $css--helpers: true !default;
 $css--body: true !default;
 $css--reset: false !default;
+$css--use-layer: true !default;
 
 @import 'colors';
 @import 'vars';

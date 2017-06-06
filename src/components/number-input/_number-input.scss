@@ -25,7 +25,7 @@
     height: rem(40px);
     color: $text-01;
     background-color: $field-01;
-    border: none;
+    border: $input-border;
     border-radius: 0;
 
     &:focus {
