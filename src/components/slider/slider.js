@@ -193,7 +193,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     selectorInput: '.bx--slider__input',
     eventBeforeSliderValueChange: 'slider-before-value-change',
     eventAfterSliderValueChange: 'slider-after-value-change',
-    stepMuliplier: 6,
+    stepMuliplier: 4,
   }
 }
 

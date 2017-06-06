@@ -12,7 +12,7 @@
 
 @include exports('slider') {
   .bx--slider-container {
-    width: 30rem;
+    max-width: rem(600px);
     display: flex;
     align-items: center;
   }
@@ -58,12 +58,15 @@
     cursor: pointer;
     outline: none;
 
-    &:hover, &:focus {
+    &:hover {
       transform: translate(-50%, -50%) scale(1.05);
-      background: darken($brand-01, 5%);
+    }
+    &:focus {
+      @include focus-outline('blurred');
     }
 
     &:active {
+      background: darken($brand-01, 5%);
       transform: translate(-50%, -50%) scale(1.25);
     }
   }
