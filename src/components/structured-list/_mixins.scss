@@ -1,0 +1,26 @@
+@mixin data-padding-td {
+  padding-left: $structured-list-padding / 2;
+  padding-right: $structured-list-padding / 2;
+
+  &:first-child {
+    padding-left: $structured-list-padding;
+  }
+  &:last-child {
+    padding-right: $structured-list-padding;
+  }
+}
+
+@mixin padding--table-cell($cell-type: 'td') {
+  @if $cell-type == 'th' {
+    padding-top: rem(9px);
+    padding-bottom: rem(9px);
+  }
+
+  @if $cell-type = 'td' {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  padding-left: 0;
+  padding-right: $structured-list-padding;
+}

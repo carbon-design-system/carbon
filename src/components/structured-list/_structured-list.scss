@@ -32,8 +32,6 @@
 
   .bx--structured-list-row {
     display: table-row;
-    padding-left: 1rem;
-    padding-right: 1rem;
     border-bottom: 1px solid $ui-04;
     transition: $transition--base $bx--standard-easing;
 
@@ -63,23 +61,24 @@
 
   .bx--structured-list-th {
     @include reset;
+    @include padding--table-cell('th');
     display: table-cell;
     font-size: rem(12px);
     font-weight: 700;
     height: rem(40px);
     letter-spacing: 1px;
-    padding: rem(9px) rem(6px);
     text-align: left;
     text-transform: uppercase;
     vertical-align: middle;
 
-    &:first-child {
-      padding-left: 1rem;
-    }
-
     &:last-child {
-      padding-right: 1rem;
+      padding-right: 0;
     }
+  }
+
+  [data-structured-list] .bx--structured-list-td,
+  [data-structured-list] .bx--structured-list-th {
+    @include data-padding-td;
   }
 
   .bx--structured-list-tbody {
@@ -88,17 +87,13 @@
   }
 
   .bx--structured-list-td {
+    @include padding--table-cell('td');
     position: relative;
     display: table-cell;
-    padding: 1rem .5rem;
     font-size: rem(14px);
 
-    &:first-child {
-      padding-left: 1rem;
-    }
-
     &:last-child {
-      padding-right: 1rem;
+      padding-right: $structured-list-padding;
     }
 
     .bx--structured-list--condensed & {
@@ -117,7 +112,6 @@
   .bx--structured-list-svg {
     display: inline-block;
     fill: transparent;
-    padding-right: .4rem;
     vertical-align: middle;
     transition: $transition--base $bx--standard-easing;
 
