@@ -10,12 +10,15 @@ All configurable variables are located in [src/globals/scss/_vars.scss](https://
 
 #### Mixins
 
-Mixins specific to structured-list are located in [src/components/structured-list/_mixins.scss](https://github.com/carbon-design-system/carbon-components/blob/master/src/components/structured-list/_mixins.scss)
+Mixins specific to structured-list are located in [src/components/structured-list/_mixins.scss](https://github.com/carbon-design-system/carbon-components/blob/master/src/components/structured-list/_mixins.scss).
+All mixins listed below take an optional `$padding` parameter. Default value for `$padding` is equal to `$structured-list-padding: 2rem !default;`, which is also overridable.
 
-| name                | params    | description                                                                                                         |
-|---------------------|-----------|---------------------------------------------------------------------------------------------------------------------|
-| data-padding-td     |           | Handles padding for `<td>` elements in structured-list but only for JavaScript variant                              |
-| padding--table-cell | cell-type |  Handles padding for `<td>` or `<th>` elements in simple structured-list components. The cell-type default is 'td'. |
+| name                          | params  | description                                                                                                                                            |
+|-------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| padding-td--condensed         | padding | Customizes padding when `.bx--structured-list--condensed` modifier class is used. Default padding is the value of `$structured-list-padding` (`2rem`). |
+| padding--data-structured-list | padding | Customizes padding. Only used when `[data-structured-list]` attribute is on HTML indicating that this component uses `<input type="radio">` controls.  |
+| padding-td                    | padding | Customizes padding for `.bx--structured-list-td`                                                                                                       |
+| padding-th                    | padding | Customizes padding for `.bx--structured-list-th`                                                                                                       |
 
 #### Modifiers
 
