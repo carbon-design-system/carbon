@@ -70,6 +70,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       calendar.open();
     });
     this._addInputLogic(date);
+    console.log('here');
     return calendar;
   }
 
