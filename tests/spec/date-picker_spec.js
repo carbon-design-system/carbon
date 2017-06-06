@@ -60,6 +60,10 @@ describe('Test data picker', function () {
       expect(datePicker.calendar).not.to.be.undefined;
     });
 
+    it('Should be a single calendar and not range mode', function () {
+      expect(datePicker.calendar.config.mode === 'single').to.be.true;
+    });
+
     it('Should show the calendar when the input field is clicked', function () {
       datePickerInput.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
       expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
@@ -80,6 +84,13 @@ describe('Test data picker', function () {
       datePicker.calendar.close();
       container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
+    });
+
+    it('Should update the selected date in the calendar when input changes', function () {
+      datePickerInput.value = '10/10/2017';
+      datePickerInput.dispatchEvent(new CustomEvent('change', { bubbles: true }));
+      expect(datePicker.calendar.selectedDates[0].valueOf())
+      .to.equal(datePicker.calendar.parseDate(datePickerInput.value).valueOf());
     });
 
     after(function () {
