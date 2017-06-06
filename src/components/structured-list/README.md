@@ -59,3 +59,22 @@ Once `StructuredList` instance is initialized, use [structured-list--selection.h
 **Chrome**: `up` and `down` arrow keys will set `focus` on `<label>` elements and associated `<input type="radio">` will recieve `checked` attribute via `StructuredList` JavaScript.
 
 **Firefox**: `up` and `down` arrows keys will set focus on `<input type="radio">` through the associated `<label>` and will only set the `checked` attribute on the input. Arrow keys will not set focus on the `<label>`.
+
+#### Add visual styles to text
+
+You can add text to each cell in a structured-list.
+Use CSS to add visual styles to text.
+
+**HTML**
+```html
+<div class="bx--structured-list-td">
+  <p class="bx--structured-list-content bold">Apache Spark</p>
+</div>
+```
+
+**CSS**
+```css
+.bold {
+  font-weight: 700;
+}
+```
