@@ -37,7 +37,7 @@
     max-width: 8rem;
 
     &:focus,
-    &.focused {
+    &.bx--focused {
       @include focus-outline('border');
     }
   }

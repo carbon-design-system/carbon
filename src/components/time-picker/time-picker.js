@@ -36,11 +36,11 @@ class TimePicker extends mixin(createComponent, initComponentBySearch) {
       const isText = (input.type === 'text');
       let lastKey;
       input.addEventListener('focus', () => {
-        this.element.querySelector(this.options.selectorTimePickerInput).classList.add('focused');
+        this.element.querySelector(this.options.selectorTimePickerInput).classList.add('bx--focused');
         input.select();
       });
       input.addEventListener('blur', () => {
-        this.element.querySelector(this.options.selectorTimePickerInput).classList.remove('focused');
+        this.element.querySelector(this.options.selectorTimePickerInput).classList.remove('bx--focused');
       });
       input.addEventListener('change', () => {
         if (curInput.value.length === 1 && !isText) {
@@ -52,9 +52,10 @@ class TimePicker extends mixin(createComponent, initComponentBySearch) {
       });
       input.addEventListener('input', () => {
         if (isText) {
-          if (curInput.value === 'a' || curInput.value === 'A') {
+          curInput.value = curInput.value.toUpperCase();
+          if (curInput.value === 'A') {
             curInput.value = 'am';
-          } else if (curInput.value === 'p' || curInput.value === 'P') {
+          } else if (curInput.value === 'P') {
             curInput.value = 'pm';
           } else {
             curInput.value = '';

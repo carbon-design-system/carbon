@@ -284,7 +284,7 @@ gulp.task('jsdoc', cb => {
  * Test
  */
 
-gulp.task('test', ['test:unit', 'test:a11y']);
+gulp.task('test', ['test:unit']);
 
 gulp.task('test:unit', done => {
   new Server(
