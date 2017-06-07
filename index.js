@@ -21,7 +21,7 @@ export DropdownItem from './components/DropdownItem';
 export { FileUploader, FileUploaderButton } from './components/FileUploader';
 export Footer from './components/Footer';
 export Form from './components/Form';
-export FormGroup from './components/FormGroup' ;
+export FormGroup from './components/FormGroup';
 export Icon from './components/Icon';
 export InteriorLeftNav from './components/InteriorLeftNav';
 export InteriorLeftNavList from './components/InteriorLeftNavList';
@@ -39,7 +39,10 @@ export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
 export PrimaryButton from './components/PrimaryButton';
-export { ProgressIndicator, ProgressStep } from './components/ProgressIndicator';
+export {
+  ProgressIndicator,
+  ProgressStep,
+} from './components/ProgressIndicator';
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
@@ -62,4 +65,5 @@ export TextArea from './components/TextArea';
 export TextInput from './components/TextInput';
 export Toggle from './components/Toggle';
 export Tooltip from './components/Tooltip';
+export TooltipSimple from './components/TooltipSimple';
 export UnorderedList from './components/UnorderedList';
