@@ -1,6 +1,6 @@
 #### Using Form Validation
 
-Bluemix Components provides HTML attributes and CSS to enable form validation for each input or control.
+Carbon Components provides HTML attributes and CSS to enable form validation for each input or control.
 
 For example, here's a __Select__ that provides a message if an option is not selected.
 
