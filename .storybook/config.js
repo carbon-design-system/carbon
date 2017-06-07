@@ -1,26 +1,16 @@
 import React from 'react';
 import { configure, setAddon, addDecorator } from '@storybook/react';
 import infoAddon from '@storybook/addon-info';
+import { checkA11y } from 'storybook-addon-a11y';
+import Container from './Container';
 
+addDecorator(checkA11y);
+addDecorator(story => <Container story={story} />);
 setAddon(infoAddon);
 
-const req = require.context('./components', true, /\.js$/);
-
 function loadStories() {
+  const req = require.context('./components', true, /\.js$/);
   req.keys().forEach(filename => req(filename));
 }
-
-addDecorator(story => (
-  <div
-    style={{
-      padding: '3em',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    }}
-  >
-    {story()}
-  </div>
-));
 
 configure(loadStories, module);
