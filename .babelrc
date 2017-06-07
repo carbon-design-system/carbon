@@ -1,16 +1,6 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "chrome": "latest",
-        "edge": "latest",
-        "firefox": "latest",
-        "safari": "latest",
-        "ie": "11",
-        "ios": "latest"
-      }
-    ],
+    "./scripts/env",
     "react",
     "stage-1"
   ]

@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf, action } from '@kadira/storybook';
+import { storiesOf, action } from '@storybook/react';
 import ContentSwitcher from '../../components/ContentSwitcher';
 import Switch from '../../components/Switch';
 

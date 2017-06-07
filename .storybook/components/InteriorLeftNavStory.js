@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import InteriorLeftNav from '../../components/InteriorLeftNav';
 import InteriorLeftNavItem from '../../components/InteriorLeftNavItem';
 import InteriorLeftNavList from '../../components/InteriorLeftNavList';

@@ -10,7 +10,8 @@ node_modules
 .DS_Store
 
 # distribution files
-dist
+cjs
+es
 
 # a11y files
 a11y/results

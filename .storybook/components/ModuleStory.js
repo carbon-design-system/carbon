@@ -1,10 +1,8 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import { Module, ModuleHeader, ModuleBody } from '../../components/Module';
-import UnderReviewDecorator from '../UnderReviewDecorator';
 
 storiesOf('Module', module)
-  .addDecorator(UnderReviewDecorator)
   .addWithInfo(
     'Single',
     `
@@ -34,7 +32,7 @@ storiesOf('Module', module)
           </p>
         </ModuleBody>
       </Module>
-    ),
+    )
   )
   .addWithInfo(
     'Double',
@@ -63,7 +61,7 @@ storiesOf('Module', module)
           </p>
         </ModuleBody>
       </Module>
-    ),
+    )
   )
   .addWithInfo(
     'No Header',
@@ -85,7 +83,7 @@ storiesOf('Module', module)
           </p>
         </ModuleBody>
       </Module>
-    ),
+    )
   )
   .addWithInfo(
     'No Header - Centered Content',
@@ -113,5 +111,5 @@ storiesOf('Module', module)
           </p>
         </ModuleBody>
       </Module>
-    ),
+    )
   );

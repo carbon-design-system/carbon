@@ -1,5 +1,5 @@
 import React from 'react';
-import { action, storiesOf } from '@kadira/storybook';
+import { action, storiesOf } from '@storybook/react';
 import Checkbox from '../../components/Checkbox';
 import Form from '../../components/Form';
 import FormGroup from '../../components/FormGroup';

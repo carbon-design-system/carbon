@@ -1,22 +1,19 @@
 {
-  "name": "@console/bluemix-components-react",
-  "version": "2.0.0",
+  "name": "carbon-components-react",
+  "version": "3.0.0-beta.2",
   "description": "A React wrapper for bluemix-components",
-  "main": "dist/index.js",
+  "main": "cjs/index.js",
+  "module": "es/index.js",
   "scripts": {
     "check": "npm run lint && npm run test",
-    "coverage": "./node_modules/.bin/jest '/(components|lib|internal)/' --coverage && node scripts/create-badge.js",
-    "storybook": "./node_modules/.bin/start-storybook -p 9001",
-    "test": "./node_modules/.bin/jest '/(components|lib|internal)/'",
-    "test-watch": "./node_modules/.bin/jest '/(components|lib|internal)/' --watch",
-    "test-a11y": "./node_modules/.bin/jest '/a11y/'",
-    "lint": "./node_modules/.bin/eslint --ignore-pattern dist .",
-    "build-storybook": "./node_modules/.bin/build-storybook -s .storybook -o .gh-pages/storybook",
-    "gh-pages": "node scripts/gh-pages.js",
-    "build-es5": "./node_modules/.bin/babel . -d dist --ignore a11y,__tests__,node_modules,scripts,deploy.js",
-    "precommit": "lint-staged",
-    "commitmsg": "./node_modules/.bin/validate-commit-msg",
-    "commit": "git cz"
+    "lint": "eslint {components,internal}/**",
+    "test": "jest '/(components|lib|internal)/'",
+    "test-watch": "jest '/(components|lib|internal)/' --watch",
+    "build": "node scripts/build.js",
+    "commitmsg": "validate-commit-msg",
+    "commit": "git cz",
+    "storybook": "start-storybook -p 8080",
+    "build-storybook": "build-storybook"
   },
   "keywords": [
     "react",
@@ -79,30 +76,32 @@
       "jasmine": true
     }
   },
-  "dependencies": {
+  "peerDependencies": {
+    "carbon-components": "^7.0.0",
     "carbon-icons": "^5.1.2",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
+  "dependencies": {
     "classnames": "2.2.5",
     "lodash.debounce": "^4.0.8",
-    "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.4.2",
-    "react-dom": "^15.3.2",
     "warning": "3.0.0"
   },
   "devDependencies": {
-    "@ibma/aat": "1.2.0",
     "@kadira/react-storybook-addon-info": "3.2.1",
-    "@kadira/react-storybook-decorator-centered": "^1.0.0",
-    "@kadira/storybook": "2.20.0",
-    "autoprefixer": "^6.3.7",
-    "babel-cli": "^6.18.0",
+    "@storybook/addon-centered": "3.0.0",
+    "@storybook/addon-info": "^3.0.0",
+    "@storybook/react": "^3.0.0",
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^18.0.0",
-    "babel-preset-env": "^1.4.0",
+    "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
-    "carbon-components": "^7.4.1",
+    "carbon-components": "^7.5.7",
     "commitizen": "^2.9.5",
-    "css-loader": "0.23.1",
+    "css-loader": "^0.28.4",
     "cz-conventional-changelog-components": "^1.0.0",
     "enzyme": "^2.6.0",
     "eslint": "^3.0.0",
@@ -114,17 +113,20 @@
     "lcov2badge": "^0.1.0",
     "lint-staged": "^3.4.0",
     "node-sass": "3.8.0",
-    "postcss-loader": "^0.9.1",
+    "postcss-loader": "^2.0.5",
     "prettier": "^1.2.2",
     "prop-types": "^15.5.8",
+    "react": "^15.5.4",
     "react-addons-test-utils": "^15.3.1",
-    "sass-loader": "4.0.0",
+    "react-dom": "^15.5.4",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.5",
     "shelljs": "^0.7.5",
-    "style-loader": "0.13.1",
+    "storybook-addon-a11y": "^3.0.0",
     "validate-commit-msg": "^2.10.1"
   },
   "jest": {
-    "coverageDirectory": "./.gh-pages/coverage",
+    "coverageDirectory": "./coverage",
     "moduleNameMapper": {
       "^.+\\.(scss)$": "<rootDir>/lib/styleMock.js"
     }

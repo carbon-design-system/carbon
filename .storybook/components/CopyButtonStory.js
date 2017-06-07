@@ -1,5 +1,5 @@
 import React from 'react';
-import { action, storiesOf } from '@kadira/storybook';
+import { action, storiesOf } from '@storybook/react';
 import CopyButton from '../../components/CopyButton';
 
 storiesOf('CopyButton', module).addWithInfo(

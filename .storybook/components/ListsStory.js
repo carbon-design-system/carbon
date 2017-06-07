@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import OrderedList from '../../components/OrderedList';
 import UnorderedList from '../../components/UnorderedList';
 import ListItem from '../../components/ListItem';
