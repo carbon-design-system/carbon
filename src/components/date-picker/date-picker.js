@@ -88,9 +88,9 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     }));
     if (type === 'range') {
       this.element.querySelector(this.options.selectorDatePickerInputTo).addEventListener('click', () => {
-        this._updateClassNames(calendar);
         this.element.querySelector(this.options.selectorDatePickerInputTo).focus();
         calendar.open();
+        this._updateClassNames(calendar);
       });
       this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInputTo));
     }
