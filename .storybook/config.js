@@ -4,7 +4,7 @@ import infoAddon from '@storybook/addon-info';
 import { checkA11y } from 'storybook-addon-a11y';
 import Container from './Container';
 
-addDecorator(checkA11y);
+// addDecorator(checkA11y);
 addDecorator(story => <Container story={story} />);
 setAddon(infoAddon);
 
