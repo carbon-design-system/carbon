@@ -21,7 +21,8 @@
     "bluemix-components"
   ],
   "files": [
-    "dist/**/*"
+    "cjs/**/*",
+    "es/**/*"
   ],
   "contributors": [
     {
