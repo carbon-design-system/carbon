@@ -55,23 +55,24 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       onClose: (selectedDates) => {
         this._updateClassNames(calendar);
         this._updateInputFields(selectedDates, type);
-        // if (type === 'range') {
-        //   if (calendar.selectedDates.length === 1) {
-        //     date.focus();
-        //   } else {
-        //     this.element.querySelector(this.options.selectorDatePickerInputTo).focus();
-        //   }
-        // }
+        if (type === 'range') {
+          if (calendar.selectedDates.length === 1) {
+            date.focus();
+          } else {
+            this.element.querySelector(this.options.selectorDatePickerInputTo).focus();
+          }
+          this.element.querySelector(this.options.selectorDatePickerInputTo).classList.remove('bx--focused');
+        }
       },
       onChange: () => {
         this._updateClassNames(calendar);
-        // if (type === 'range') {
-        //   if (calendar.selectedDates.length === 1) {
-        //     this.element.querySelector(this.options.selectorDatePickerInputTo).classList.add('bx--focused');
-        //   } else {
-        //     this.element.querySelector(this.options.selectorDatePickerInputTo).classList.remove('bx--focused');
-        //   }
-        // }
+        if (type === 'range') {
+          if (calendar.selectedDates.length === 1 && calendar.isOpen) {
+            this.element.querySelector(this.options.selectorDatePickerInputTo).classList.add('bx--focused');
+          } else {
+            this.element.querySelector(this.options.selectorDatePickerInputTo).classList.remove('bx--focused');
+          }
+        }
       },
       onMonthChange: () => {
         this._updateClassNames(calendar);
@@ -136,7 +137,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
   _addInputLogic = (input) => {
     const inputField = input;
     inputField.addEventListener('change', () => {
-      const inputDate = this.calendar.parseDate(new Date(inputField.value), this.options.dateFormat);
+      const inputDate = this.calendar.parseDate(new Date(inputField.value));
       if (!(isNaN(inputDate.valueOf()))) {
         this.calendar.setDate(inputDate);
       }
@@ -178,10 +179,10 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       } else if (selectedDates.length === 1) {
         this.element.querySelector(this.options.selectorDatePickerInputFrom).value = this._formatDate(selectedDates[0]);
       }
-      this._updateClassNames(this.calendar);
     } else if (selectedDates.length === 1) {
       this.element.querySelector(this.options.selectorDatePickerInput).value = this._formatDate(selectedDates[0]);
     }
+    this._updateClassNames(this.calendar);
   }
 
   _formatDate = date => this.calendar.formatDate(date, this.calendar.config.dateFormat);
@@ -216,7 +217,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     classWeekday: 'bx--date-picker__weekday',
     classDay: 'bx--date-picker__day',
     attribType: 'data-date-picker-type',
-    dateFormat: 'm / d / Y',
+    dateFormat: 'm/d/Y',
   };
 
   /**

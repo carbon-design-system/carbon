@@ -14,19 +14,19 @@
 
   .bx--date-picker[data-date-picker-type="no-calendar"] {
     .bx--date-picker__input {
-      width: 8.125rem;
+      width: 7.125rem;
     }
   }
 
   .bx--date-picker[data-date-picker-type="no-calendar"][data-date-picker-mm-yy] {
     .bx--date-picker__input {
-      width: 6.2rem;
+      width: 5.7rem;
     }
   }
 
   .bx--date-picker[data-date-picker-type="single"] {
     .bx--date-picker__input {
-      width: rem(160px);
+      width: 9rem;
     }
   }
 
@@ -37,7 +37,7 @@
     display: block;
     position: relative;
     height: rem(40px);
-    max-width: rem(160px);
+    max-width: 9rem;
     padding: 0 1rem;
     background-color: $field-01;
     color: $text-01;
@@ -91,7 +91,7 @@
   }
 
   .bx--date-picker-range .bx--date-picker__input {
-    width: rem(128px);
+    width: 7rem;
   }
 
   .bx--date-picker__calendar,

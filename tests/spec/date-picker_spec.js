@@ -2,6 +2,7 @@ import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import DatePicker from '../../src/components/date-picker/date-picker';
 import noCalHTML from '../../src/components/date-picker/date-picker--without-calendar.html';
 import singleCalHTML from '../../src/components/date-picker/date-picker--single-calendar.html';
+import rangeCalHTML from '../../src/components/date-picker/date-picker--range-calendar.html';
 
 describe('Test data picker', function () {
   describe('Constructor', function () {
@@ -80,12 +81,6 @@ describe('Test data picker', function () {
       expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
     });
 
-    it('Should hide the calendar on click outside the date picker', function () {
-      datePicker.calendar.close();
-      container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
-    });
-
     it('Should update the selected date in the calendar when input changes', function () {
       datePickerInput.value = '10/10/2017';
       datePickerInput.dispatchEvent(new CustomEvent('change', { bubbles: true }));
@@ -93,14 +88,65 @@ describe('Test data picker', function () {
       .to.equal(datePicker.calendar.parseDate(datePickerInput.value).valueOf());
     });
 
-    it('Should update the selected date when a day is selected', function () {
-      datePicker.calendar.open();
-      datePicker.calendar.calendarContainer.querySelector('.flatpickr-day')
-      .dispatchEvent(new CustomEvent('click', { bubbles: false }));
-      console.debug(datePicker.calendar.calendarContainer.querySelector('.flatpickr-day').getAttribute('aria-label'));
-      console.debug(datePicker.calendar.selectedDates);
+    after(function () {
+      datePicker.release();
+      document.body.removeChild(container);
+    });
+  });
+
+  describe('Creating a date picker with a range mode calendar', function () {
+    let element;
+    let datePicker;
+    let datePickerInputFrom;
+    let datePickerInputTo;
+    let datePickerIcon;
+    const container = document.createElement('div');
+    container.innerHTML = rangeCalHTML;
+
+    before(function () {
+      document.body.appendChild(container);
+      element = document.querySelector('[data-date-picker]');
+      datePicker = new DatePicker(element);
+      datePickerInputFrom = document.querySelector('[data-date-picker-input-from]');
+      datePickerInputTo = document.querySelector('[data-date-picker-input-from]');
+      datePickerIcon = document.querySelector('[data-date-picker-icon]');
     });
 
+    it('Should add a calendar', function () {
+      expect(datePicker.calendar).not.to.be.undefined;
+    });
+
+    it('Should be a range calendar', function () {
+      expect(datePicker.calendar.config.mode === 'range').to.be.true;
+    });
+
+    it('Should show the calendar when the first input field is clicked', function () {
+      datePickerInputFrom.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
+    });
+
+    it('Should show the calendar when the second input field is clicked', function () {
+      datePickerInputTo.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
+    });
+
+    it('Should show the calendar when the calendar icon is clicked', function () {
+      datePickerIcon.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
+    });
+
+    it('Should hide the calendar on click outside the date picker', function () {
+      datePicker.calendar.close();
+      container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
+    });
+
+    it('Should update the selected date in the calendar when input changes', function () {
+      datePickerInputFrom.value = '10/10/2017';
+      datePickerInputFrom.dispatchEvent(new CustomEvent('change', { bubbles: true }));
+      expect(datePicker.calendar.selectedDates[0].valueOf())
+      .to.equal(datePicker.calendar.parseDate(datePickerInputFrom.value).valueOf());
+    });
 
     after(function () {
       datePicker.release();
