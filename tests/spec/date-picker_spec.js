@@ -93,6 +93,15 @@ describe('Test data picker', function () {
       .to.equal(datePicker.calendar.parseDate(datePickerInput.value).valueOf());
     });
 
+    it('Should update the selected date when a day is selected', function () {
+      datePicker.calendar.open();
+      datePicker.calendar.calendarContainer.querySelector('.flatpickr-day')
+      .dispatchEvent(new CustomEvent('click', { bubbles: false }));
+      console.debug(datePicker.calendar.calendarContainer.querySelector('.flatpickr-day').getAttribute('aria-label'));
+      console.debug(datePicker.calendar.selectedDates);
+    });
+
+
     after(function () {
       datePicker.release();
       document.body.removeChild(container);
