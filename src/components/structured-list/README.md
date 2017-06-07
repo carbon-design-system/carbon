@@ -11,7 +11,7 @@ All configurable variables are located in [src/globals/scss/_vars.scss](https://
 #### Mixins
 
 Mixins specific to structured-list are located in [src/components/structured-list/_mixins.scss](https://github.com/carbon-design-system/carbon-components/blob/master/src/components/structured-list/_mixins.scss).
-All mixins listed below take an optional `$padding` parameter. Default value for `$padding` is equal to `$structured-list-padding: 2rem !default;`, which is also overridable.
+All mixins listed below take an optional `$padding` parameter. Default value for `$padding` is equal to `$structured-list-padding: 2rem !default;`, which can be overwritten.
 
 | name                          | params  | description                                                                                                                                            |
 |-------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
