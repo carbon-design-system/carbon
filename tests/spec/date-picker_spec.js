@@ -1,8 +1,8 @@
 import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import DatePicker from '../../src/components/date-picker/date-picker';
-import noCalHTML from '../../src/components/date-picker/date-picker--without-calendar.html';
-import singleCalHTML from '../../src/components/date-picker/date-picker--single-calendar.html';
-import rangeCalHTML from '../../src/components/date-picker/date-picker--range-calendar.html';
+import noCalHTML from '../../src/components/date-picker/date-picker--simple.html';
+import singleCalHTML from '../../src/components/date-picker/date-picker--single.html';
+import rangeCalHTML from '../../src/components/date-picker/date-picker--range.html';
 
 describe('Test data picker', function () {
   describe('Constructor', function () {

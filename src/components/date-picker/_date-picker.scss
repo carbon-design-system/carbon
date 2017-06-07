@@ -12,19 +12,19 @@
     position: relative;
   }
 
-  .bx--date-picker[data-date-picker-type="no-calendar"] {
+  .bx--date-picker.bx--date-picker--simple {
     .bx--date-picker__input {
       width: 7.125rem;
     }
   }
 
-  .bx--date-picker[data-date-picker-type="no-calendar"][data-date-picker-mm-yy] {
+  .bx--date-picker.bx--date-picker--simple.bx--date-picker--short {
     .bx--date-picker__input {
       width: 5.7rem;
     }
   }
 
-  .bx--date-picker[data-date-picker-type="single"] {
+  .bx--date-picker.bx--date-picker--single {
     .bx--date-picker__input {
       width: 9rem;
     }
@@ -75,22 +75,22 @@
     padding-left: 2.9rem;
   }
 
-  .bx--date-picker-range {
+  .bx--date-picker--range {
     display: flex;
     align-items: center;
     position: relative;
   }
 
-  .bx--date-picker-range > .bx--date-picker__container:first-child {
+  .bx--date-picker--range > .bx--date-picker__container:first-child {
     margin-right: .5rem;
   }
 
-  .bx--date-picker-range .bx--date-picker__icon {
+  .bx--date-picker--range .bx--date-picker__icon {
     right: -1.75rem;
     left: auto;
   }
 
-  .bx--date-picker-range .bx--date-picker__input {
+  .bx--date-picker--range .bx--date-picker__input {
     width: 7rem;
   }
 

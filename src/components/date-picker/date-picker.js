@@ -27,22 +27,18 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
     const type = this.element.getAttribute(this.options.attribType);
-    if (type === 'no-calendar') {
-      this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInput));
-    } else {
-      this.calendar = this._initDatePicker(type);
-      this.element.addEventListener('keydown', (e) => {
-        if (e.which === 40) {
-          this.calendar.calendarContainer.focus();
-        }
-      });
-      this.calendar.calendarContainer.addEventListener('keydown', (e) => {
-        if (e.which === 9 && type === 'range') {
-          this._updateClassNames(this.calendar);
-          this.element.querySelector(this.options.selectorDatePickerInputFrom).focus();
-        }
-      });
-    }
+    this.calendar = this._initDatePicker(type);
+    this.element.addEventListener('keydown', (e) => {
+      if (e.which === 40) {
+        this.calendar.calendarContainer.focus();
+      }
+    });
+    this.calendar.calendarContainer.addEventListener('keydown', (e) => {
+      if (e.which === 9 && type === 'range') {
+        this._updateClassNames(this.calendar);
+        this.element.querySelector(this.options.selectorDatePickerInputFrom).focus();
+      }
+    });
   }
 
   _initDatePicker = (type) => {
@@ -100,22 +96,6 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
     this._updateClassNames(calendar);
     this._addInputLogic(date);
     return calendar;
-  }
-
-  setMinDate = (date) => {
-    this.calendar.set('minDate', date);
-  }
-
-  setMaxDate = (date) => {
-    this.calendar.set('maxDate', date);
-  }
-
-  setDisabledDates = (dates) => {
-    this.calendar.set('disable', dates);
-  }
-
-  setDefaultDates = (dates) => {
-    this.calendar.set('defaultDate', dates);
   }
 
   _rightArrowHTML() {
