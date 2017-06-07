@@ -38,8 +38,7 @@
     width: rem(18px);
     margin-right: .5rem;
     background-color: $ui-01;
-    border-radius: 2px;
-    border: 2px solid $ui-05;
+    border: $checkbox-border-width solid $ui-05;
   }
 
   .bx--checkbox:checked + .bx--checkbox-appearance,
