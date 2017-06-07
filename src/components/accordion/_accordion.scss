@@ -33,6 +33,8 @@
   .bx--accordion__heading {
     display: flex;
     align-items: center;
+    justify-content: $accordion-justify-content;
+    flex-direction: $accordion-flex-direction;
     cursor: pointer;
     padding: .5rem 0;
   }
@@ -42,18 +44,17 @@
     height: 1.25rem;
     width: 1.25rem;
     padding: .25rem .125rem .25rem .25rem;
-    margin-left: .075rem;
+    margin: $accordion-arrow-margin;
     fill: $ui-05;
   }
 
   .bx--accordion__title {
-    margin: 0;
-    margin-left: 1rem;
+    margin: $accordion-title-margin;
   }
 
   .bx--accordion__content {
     transition: all $transition--base $bx--standard-easing;
-    padding: 0 1rem 0 1.75rem;
+    padding: $accordion-content-padding;
     height: 0;
     visibility: hidden;
     opacity: 0;
