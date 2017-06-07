@@ -51,18 +51,18 @@ describe('Test slider', function () {
       slider = new Slider(document.querySelector('[data-slider]'));
     });
     it('Should setValue as expected', function () {
-      slider.setValue(1);
-      expect(slider.getInputProps().value).to.equal('1');
+      slider.setValue(100);
+      expect(slider.getInputProps().value).to.equal('100');
     });
     it('Should stepUp as expected', function () {
-      slider.setValue(0.5);
+      slider.setValue(50);
       slider.stepUp();
-      expect(slider.getInputProps().value).to.equal('0.51');
+      expect(slider.getInputProps().value).to.equal('51');
     });
     it('Should stepDown as expected', function () {
-      slider.setValue(0.5);
+      slider.setValue(50);
       slider.stepDown();
-      expect(slider.getInputProps().value).to.equal('0.49');
+      expect(slider.getInputProps().value).to.equal('49');
     });
     afterEach(function () {
       if (slider) {
@@ -84,14 +84,19 @@ describe('Test slider', function () {
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 39;
       thumb.dispatchEvent(event);
-      expect(slider.getInputProps().value).to.equal('0.51');
+      expect(slider.getInputProps().value).to.equal('51');
+      event.which = 38;
+      thumb.dispatchEvent(event);
+      expect(slider.getInputProps().value).to.equal('52');
     });
-    it('Should stepUp value on down/left key', function () {
+    it('Should stepDown value on down/left key', function () {
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 40;
       thumb.dispatchEvent(event);
-      // console.debug(slider.getInputProps().value);
-      expect(slider.getInputProps().value).to.equal('0.49');
+      expect(slider.getInputProps().value).to.equal('49');
+      event.which = 38;
+      thumb.dispatchEvent(event);
+      expect(slider.getInputProps().value).to.equal('48');
     });
     afterEach(function () {
       if (slider) {
@@ -99,7 +104,7 @@ describe('Test slider', function () {
       }
     });
   });
-  describe('Click and drag on slider', function () {
+  describe('Click on slider', function () {
     let slider;
     let track;
     beforeEach(function () {
@@ -107,14 +112,12 @@ describe('Test slider', function () {
       container.innerHTML = SliderHTML;
       document.body.appendChild(container);
       slider = new Slider(document.querySelector('[data-slider]'));
-      // thumb = document.querySelector('.bx--slider__thumb');
       track = document.querySelector('.bx--slider__track');
     });
     it('Should change value on click', function () {
       const event = new CustomEvent('click', { bubbles: true });
-      event.clientX = 100;
+      event.clientX = 10;
       track.dispatchEvent(event);
-      // console.debug(slider.getInputProps().value);
       expect(slider.getInputProps().value).to.equal('0');
     });
     afterEach(function () {

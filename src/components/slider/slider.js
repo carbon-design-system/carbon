@@ -106,12 +106,11 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
             ? (range / step) / this.options.stepMuliplier
             : 1;
           const stepMultiplied = step * multiplier;
-          const stepSize = stepMultiplied / this.track.getBoundingClientRect().width;
+          const stepSize = (stepMultiplied / range) * 100;
           left = valuePercentage + (stepSize * direction);
           newValue = Number(value) + (stepMultiplied * direction);
         }
       }
-
       if (type === 'mousemove' || type === 'click') {
         const track = this.track.getBoundingClientRect();
         const unrounded = ((evt.clientX - track.left) / track.width);
