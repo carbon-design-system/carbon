@@ -15,17 +15,28 @@
     max-width: rem(600px);
     display: flex;
     align-items: center;
+    user-select: none;
   }
 
   .bx--slider {
     position: relative;
     width: 100%;
+    margin: 0 rem(12px);
   }
 
   .bx--slider--disabled {
     opacity: .5;
     & > * {
       cursor: not-allowed !important; // fix
+    }
+  }
+
+  .bx--slider__range-label {
+    @include font-size('14');
+    color: $text-02;
+
+    &:last-of-type {
+      margin-right: 1rem;
     }
   }
 
@@ -79,7 +90,6 @@
     max-width: rem(32px);
     min-width: 0;
     padding: 0;
-    margin-left: 1rem;
     text-align: center;
   }
 }
