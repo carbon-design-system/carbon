@@ -3,12 +3,12 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/mixins';
-
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 
 @include exports('inline-notifications') {
   .bx--inline-notification {
