@@ -16,5 +16,5 @@ es
 # a11y files
 a11y/results
 
-# misc
-yarn.lock
+# we yarn folks here
+package-lock.json

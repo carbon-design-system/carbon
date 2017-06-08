@@ -7,10 +7,7 @@ module.exports = {
       {
         "modules": BABEL_ENV === 'es' ? false : "commonjs",
         "targets": {
-          "browsers": [
-            "last 1 version",
-            "ie >= 11"
-          ]
+          "browsers": ['last 1 versions', 'Firefox ESR']
         }
       }
     ],
