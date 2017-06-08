@@ -1,6 +1,5 @@
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
-export AppContainer from './components/AppContainer';
 export Breadcrumb from './components/Breadcrumb';
 export BreadcrumbItem from './components/BreadcrumbItem';
 export Button from './components/Button';
