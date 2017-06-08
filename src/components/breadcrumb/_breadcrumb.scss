@@ -2,6 +2,7 @@
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--typography';
 @import '../link/link';
 
 @include exports('breadcrumb') {
@@ -42,8 +43,7 @@
     text-decoration: none;
     border-bottom: 1px solid transparent;
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       outline: none;
       color: $brand-01;
       border-bottom: 1px solid $brand-01;
