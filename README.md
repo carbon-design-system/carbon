@@ -13,7 +13,7 @@ View available React Components [here](https://react.carbondesignsystem.com). Us
 ### Getting Started
 
 ```
-npm install -S carbon-components-react carbon-components
+npm install -S carbon-components-react carbon-components carbon-components-icons
 ```
 
 1. These components require the use of [Webpack](http://webpack.github.io/docs/tutorials/getting-started/) in your project. See our [`webpack.config.js`](/.storybook/webpack.config.js) for an example configuration.
