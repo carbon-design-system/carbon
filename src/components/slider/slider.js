@@ -65,7 +65,6 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
 
     requestAnimationFrame(() => {
       this.dragging = false;
-
       this.thumb.style.left = `${left}%`;
       this.filledTrack.style.transform = `scaleX(${left / 100})`;
       this.input.value = newValue;
@@ -128,6 +127,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
       left = 100;
       newValue = max;
     }
+
     return { left, newValue };
   }
 
