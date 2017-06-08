@@ -1,6 +1,6 @@
 {
   "name": "carbon-components-react",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "A React wrapper for carbon-components",
   "main": "dist/index.js",
   "scripts": {
