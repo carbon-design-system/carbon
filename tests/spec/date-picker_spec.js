@@ -1,6 +1,5 @@
 import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import DatePicker from '../../src/components/date-picker/date-picker';
-import noCalHTML from '../../src/components/date-picker/date-picker--simple.html';
 import singleCalHTML from '../../src/components/date-picker/date-picker--single.html';
 import rangeCalHTML from '../../src/components/date-picker/date-picker--range.html';
 
@@ -16,28 +15,6 @@ describe('Test data picker', function () {
       expect(() => {
         new DatePicker(document.createTextNode(''));
       }).to.throw(Error);
-    });
-  });
-
-  describe('Creating a date picker without calendar', function () {
-    let element;
-    let datePicker;
-    const container = document.createElement('div');
-    container.innerHTML = noCalHTML;
-
-    before(function () {
-      document.body.appendChild(container);
-      element = document.querySelector('[data-date-picker]');
-      datePicker = new DatePicker(element);
-    });
-
-    it('Should not add a calendar', function () {
-      expect(datePicker.calendar).to.be.undefined;
-    });
-
-    after(function () {
-      datePicker.release();
-      document.body.removeChild(container);
     });
   });
 
