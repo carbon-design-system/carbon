@@ -29,7 +29,7 @@
   width: 100%;
   height: 100%;
   background-color: $color__navy-gray-1;
-  padding: 1rem 0 4rem 0;
+  padding: .5rem 0 3rem 0;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -65,12 +65,12 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   margin-top: 0; // Have to use margin, because setting position to anything other than static breaks the flyouts.
   transition: all 250ms $bx---ease-out;
   background-color: $color__navy-gray-1;
   &:last-child {
-    padding-bottom: 4rem;
+    padding-bottom: 0;
   }
 
   @include light-ui {
@@ -110,7 +110,7 @@
   justify-content: flex-start;
   color: $color__white;
   text-decoration: none;
-  padding: .5rem rem(20px);
+  padding: .4rem rem(20px);
   transition: background-color $transition--base $bx--standard-easing;
 
   @include light-ui {
@@ -119,8 +119,8 @@
 
   &--taxonomy-icon {
     fill: $color__blue-30;
-    width: rem(24px);
-    height: rem(24px);
+    width: rem(18px);
+    height: rem(18px);
     margin-right: 1rem;
 
     @include light-ui {
