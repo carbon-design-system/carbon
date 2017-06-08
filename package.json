@@ -1,6 +1,6 @@
 {
   "name": "carbon-components-react",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0",
   "description": "A React wrapper for bluemix-components",
   "main": "cjs/index.js",
   "module": "es/index.js",
