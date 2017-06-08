@@ -4,8 +4,9 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 @import '../button/button';
 @import '../link/link';
 
@@ -63,5 +64,3 @@
 .bx--footer-cta {
   margin-left: auto;
 }
-
-
