@@ -1,6 +1,6 @@
 {
   "name": "carbon-components-react",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "A React wrapper for carbon-components",
   "main": "dist/index.js",
   "scripts": {
@@ -110,7 +110,6 @@
     "warning": "3.0.0"
   },
   "devDependencies": {
-    "@ibma/aat": "1.2.0",
     "@kadira/react-storybook-addon-info": "3.2.1",
     "@kadira/react-storybook-decorator-centered": "^1.0.0",
     "@kadira/storybook": "^2.35.3",
