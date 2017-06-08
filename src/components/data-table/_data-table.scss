@@ -1,6 +1,7 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/layout';
+@import '../../globals/scss/css--typography';
 @import '../checkbox/checkbox';
 @import '../../globals/scss/import-once';
 @import '../../components/overflow-menu/overflow-menu';
@@ -67,8 +68,7 @@
       width: auto;
       border: 2px solid $ui-04;
 
-      tr td:first-child,
-      tr th:first-child {
+      tr td:first-child, tr th:first-child {
         padding-left: 1.5rem;
       }
     }
@@ -103,8 +103,7 @@
 
   // zebra stripes
   .bx--table-body {
-    > .bx--parent-row,
-    > .bx--parent-row + .bx--expandable-row {
+    > .bx--parent-row, > .bx--parent-row + .bx--expandable-row {
       background-color: $ui-01;
 
       &--even {
@@ -116,14 +115,12 @@
   .bx--table-body .bx--table-row {
     border: 1px solid transparent;
 
-    &:first-child:hover,
-    &:first-child:focus {
+    &:first-child:hover, &:first-child:focus {
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
     }
 
-    &:not(:first-child):hover,
-    &:not(:first-child):focus {
+    &:not(:first-child):hover, &:not(:first-child):focus {
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
     }
@@ -167,9 +164,9 @@
     margin-left: rem(7px);
     margin-right: rem(2px);
 
-    @media all and (min--moz-device-pixel-ratio:0) and (min-resolution: 3e1dpcm) {
-        margin-top: 2px;
-      }
+    @media all and (min--moz-device-pixel-ratio: 0) and (min-resolution: 3e1dpcm) {
+      margin-top: 2px;
+    }
   }
 
   .bx--table-expand[data-previous-value='collapsed'] .bx--table-expand__svg {
@@ -205,7 +202,7 @@
       display: inline-flex;
       margin: 0;
 
-      @media all and (min--moz-device-pixel-ratio:0) and (min-resolution: 3e1dpcm) {
+      @media all and (min--moz-device-pixel-ratio: 0) and (min-resolution: 3e1dpcm) {
         margin-top: 2px;
       }
     }
