@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@kadira/storybook';
 import Card from '../../components/Card';
 import OverflowMenu from '../../components/OverflowMenu';
@@ -47,8 +48,8 @@ const virtualServerCardLinks = [
 
 class ControlledCard extends Component {
   static propTypes = {
-    status: React.PropTypes.number,
-    stopApp: React.PropTypes.func,
+    status: PropTypes.number,
+    stopApp: PropTypes.func,
   }
 
   static defaultProps = {
