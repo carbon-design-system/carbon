@@ -17,6 +17,16 @@ function flattenOptions(options) {
   return o;
 }
 
+// Weekdays shorthand for english locale
+Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
+  const currentDay = Flatpickr.l10ns.en.weekdays.shorthand;
+  if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
+    currentDay[index] = 'Th';
+  } else {
+    currentDay[index] = currentDay[index].charAt(0);
+  }
+});
+
 class DatePicker extends mixin(createComponent, initComponentBySearch) {
   /**
    * DatePicker.
@@ -135,11 +145,6 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       const currentItem = item;
       currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
       currentItem.classList.add(this.options.classWeekday);
-      if (currentItem.innerHTML === 'Thu' || currentItem.innerHTML === 'Th') {
-        currentItem.innerHTML = 'Th';
-      } else {
-        currentItem.innerHTML = item.innerHTML.charAt(0);
-      }
     });
     [...calendarContainer.querySelectorAll('.flatpickr-day')].forEach((item) => {
       item.classList.add(this.options.classDay);
