@@ -1,11 +1,12 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 @import '../tabs/tabs';
 @import '../overflow-menu/overflow-menu';
 @import '../breadcrumb/breadcrumb';
@@ -45,8 +46,8 @@
   .bx--detail-page-header .bx--breadcrumb {
     display: none;
     transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
-    visibility $transition--base $bx--standard-easing $transition-time / 2,
-    transform $transition--base $bx--standard-easing 0s;
+      visibility $transition--base $bx--standard-easing $transition-time / 2,
+      transform $transition--base $bx--standard-easing 0s;
     will-change: opacity, visibility, transform;
 
     @include breakpoint(bp--sm--major) {
@@ -136,7 +137,7 @@
     display: flex;
     align-items: flex-start;
     transition: top $transition--base $bx--standard-easing 0s,
-    transform $transition--base $bx--standard-easing 0s;
+      transform $transition--base $bx--standard-easing 0s;
     will-change: transform, top;
 
     @include breakpoint(bp--sm--major) {
@@ -148,7 +149,7 @@
 
   .bx--detail-page-header .bx--tabs {
     transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
-    visibility $transition--base $bx--standard-easing $transition-time / 2;
+      visibility $transition--base $bx--standard-easing $transition-time / 2;
     will-change: opacity, visibility, transform;
   }
 
@@ -173,8 +174,7 @@
 
   // Scroll
   .bx--detail-page-header--scroll {
-    .bx--breadcrumb,
-    .bx--tabs {
+    .bx--breadcrumb, .bx--tabs {
       transition-delay: 0s;
 
       @include breakpoint(bp--sm--major) {
