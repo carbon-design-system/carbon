@@ -1,7 +1,6 @@
 @import '../../globals/scss/import-once';
 
 @include exports('global-header') {
-
   .bx--global-header {
     @include layer('sticky-nav');
     @include helvetica;
@@ -30,9 +29,7 @@
     color: $color__white; // anna
     position: relative;
 
-    &:hover,
-    &:focus {
-
+    &:hover, &:focus {
       .bx--logo__text {
         color: $color__blue-20; // anna
       }
@@ -44,6 +41,7 @@
     display: flex;
     align-items: center;
     font-weight: 400;
+    font-size: 1.125rem;
     line-height: inherit;
     color: $color__blue-30; // anna
 
@@ -154,8 +152,7 @@
         color: $color__blue-30; // anna
       }
 
-      .bx--dropdown__menu-text,
-      .bx--dropdown__list {
+      .bx--dropdown__menu-text, .bx--dropdown__list {
         outline: 0;
       }
     }
