@@ -46,14 +46,11 @@
   <input type="text" class="offleft">
 
   <!-- Scripts -->
-  <!-- <script src="../../dist/bluemix-components.min.js"></script> -->
-  <script src="/demo.js"></script>
+  <script src="/carbon-components.min.js"></script>
+  <!-- <script src="/demo.js"></script> -->
   <!-- Disable Auto Init with this flag -->
   <!-- true = JavaScript will not initialize automatically -->
   <!-- false = JavaScript will initialize automatically -->
-  <script>
-    CarbonComponents.settings.disableAutoInit = false;
-  </script>
 </body>
 
 </html>
