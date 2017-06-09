@@ -15,7 +15,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('keydown', evt => {
+    this.element.addEventListener('keydown', (evt) => {
       if (evt.which === 38 || evt.which === 40) {
         this._handleKeydownArrow(evt);
       }
@@ -51,7 +51,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     if (selectedRow) {
       const input = this.element.querySelector(
-        `#${selectedRow.getAttribute('for')}.bx--structured-list-input`
+        `#${selectedRow.getAttribute('for')}.bx--structured-list-input`,
       );
       input.checked = true;
     }
