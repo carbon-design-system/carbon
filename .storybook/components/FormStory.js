@@ -131,7 +131,7 @@ const buttonEvents = {
 };
 
 storiesOf('Form', module).addWithInfo(
-  '',
+  'Default',
   `
     Forms are widely used to collect user input.
 
@@ -233,5 +233,5 @@ storiesOf('Form', module).addWithInfo(
         Submit
       </Button>
     </Form>
-  ),
+  )
 );

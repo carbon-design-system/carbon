@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'carbon-components/scss/globals/scss/styles.scss';
+import './_container.scss';
 
 export default class Container extends Component {
   render() {

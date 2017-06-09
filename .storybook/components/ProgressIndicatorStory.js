@@ -2,11 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import {
   ProgressIndicator,
-  ProgressStep
+  ProgressStep,
 } from '../../components/ProgressIndicator';
 
 storiesOf('Progress Indicator', module).addWithInfo(
-  '',
+  'Default',
   `
       For React usage, ProgressIndicator holds the currentIndex state to indicate which ProgerssStep is the current step. The ProgressIndicator component should always be used with ProgressStep components as its children. Changing currentIndex prop will automatically set the ProgressStep components props (complete, incomplete, current).
       For general usage, Progress Indicators display steps in a process. It should indicate when steps have been complete, the active step,

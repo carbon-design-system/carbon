@@ -10,17 +10,15 @@ const props = {
 };
 
 storiesOf('Pagination', module)
-  .addDecorator((story) => (
+  .addDecorator(story => (
     <div style={{ width: '800px' }}>
       {story()}
     </div>
   ))
   .addWithInfo(
-    '',
+    'Default',
     `
       Description coming soon.
     `,
-    () => (
-      <Pagination {...props} totalItems={103} />
-    )
+    () => <Pagination {...props} totalItems={103} />
   );

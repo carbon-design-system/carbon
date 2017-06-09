@@ -3,7 +3,7 @@ import { action, storiesOf } from '@storybook/react';
 import CopyButton from '../../components/CopyButton';
 
 storiesOf('CopyButton', module).addWithInfo(
-  '',
+  'Default',
   `
       The copy button can be used when the user needs to copy information, such as a code snippet, to their clipboard.
     `,
@@ -13,5 +13,5 @@ storiesOf('CopyButton', module).addWithInfo(
       onClick={action('onClick')}
       feedbackTimeout={3000}
     />
-  ),
+  )
 );

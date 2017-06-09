@@ -103,6 +103,7 @@ const Icon = ({
   ...other
 }) => {
   const icon = isPrefixed(name) ? findIcon(name) : findIcon(`icon--${name}`);
+
   const props = {
     className,
     fill,

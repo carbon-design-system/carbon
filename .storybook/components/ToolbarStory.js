@@ -22,7 +22,7 @@ const checkboxEvents = {
 };
 
 storiesOf('Toolbar', module).addWithInfo(
-  '',
+  'Default',
   `
     Toolbar stuff
   `,

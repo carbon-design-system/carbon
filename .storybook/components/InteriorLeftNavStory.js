@@ -5,7 +5,7 @@ import InteriorLeftNavItem from '../../components/InteriorLeftNavItem';
 import InteriorLeftNavList from '../../components/InteriorLeftNavList';
 
 storiesOf('InteriorLeftNav', module).addWithInfo(
-  '',
+  'Default',
   `
       Interior left navigation organizes the content structure and provides
       context to support user orientation. This pattern accommodates the
