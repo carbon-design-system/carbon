@@ -34,19 +34,10 @@
     width: 4.8rem;
     color: $text-01;
     height: rem(40px);
-    appearance: textfield;
     padding: 0 1rem;
 
     &:focus {
       @include focus-outline('border');
-    }
-
-    &::-ms-clear {
-      display: none;
-    }
-
-    &::-webkit-inner-spin-button {
-      appearance: none;
     }
   }
 }
