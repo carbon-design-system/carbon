@@ -3,6 +3,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByLauncher from '../../globals/js/mixins/init-component-by-launcher';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 
 class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowHideState) {
   /**
@@ -67,6 +68,16 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
       callback();
     };
 
+    if (this._handleFocusinListener) {
+      this._handleFocusinListener = this._handleFocusinListener.release();
+    }
+
+    if (state === 'shown') {
+      const hasFocusin = 'onfocusin' in this.element.ownerDocument.defaultView;
+      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+      this._handleFocusinListener = on(this.element.ownerDocument, focusinEventName, this._handleFocusin, !hasFocusin);
+    }
+
     if (state === 'hidden') {
       this.element.classList.toggle(this.options.classVisible, false);
     } else if (state === 'shown') {
@@ -100,10 +111,24 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
   }
 
+  /**
+   * Handles `focusin` (or `focus` depending on browser support of `focusin`) event to do wrap-focus behavior.
+   * @param {Event} evt The event.
+   * @private
+   */
+  _handleFocusin = (evt) => {
+    if (this.element.classList.contains(this.options.classVisible) && !this.element.contains(evt.target)) {
+      this.element.focus();
+    }
+  };
+
   release() {
     if (this.keydownHandler) {
       this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
       this.keydownHandler = null;
+    }
+    if (this._handleFocusinListener) {
+      this._handleFocusinListener = this._handleFocusinListener.release();
     }
     super.release();
   }
