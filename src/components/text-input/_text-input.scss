@@ -21,7 +21,7 @@
     padding: 0 1rem;
     color: $text-01;
     background-color: $field-01;
-    border: 1px solid transparent;
+    border: $input-border;
 
     &::-webkit-input-placeholder {
       @include placeholder-colors;
@@ -37,7 +37,7 @@
     }
 
     &:disabled:hover {
-      border: 1px solid transparent;
+      border: $input-border;
     }
   }
 }

@@ -35,10 +35,12 @@ $layer-shadows: (
 
 // Layer mixin
 @mixin layer($layer) {
-  @if map-has-key($layer-shadows, $layer) {
-    box-shadow: #{map-get($layer-shadows, $layer)};
-  }
-  @else {
-    @warn '#{$layer} is not a valid layer.';
+  @if global-variable-exists('css--use-layer') == false or $css--use-layer == true  {
+    @if map-has-key($layer-shadows, $layer) {
+      box-shadow: #{map-get($layer-shadows, $layer)};
+    }
+    @else {
+      @warn '#{$layer} is not a valid layer.';
+    }
   }
 }

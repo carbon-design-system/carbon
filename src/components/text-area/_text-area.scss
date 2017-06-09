@@ -20,7 +20,7 @@
     padding: 1rem;
     color: $text-01;
     background-color: $field-01;
-    border: 1px solid transparent;
+    border: $input-border;
 
     &:focus {
       @include focus-outline('border');
@@ -36,7 +36,7 @@
     }
 
     &:disabled:hover {
-      border: 1px solid transparent;
+      border: $input-border;
     }
   }
 }
