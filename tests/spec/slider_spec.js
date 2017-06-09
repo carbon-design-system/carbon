@@ -78,14 +78,15 @@ describe('Test slider', function () {
     let slider;
     let thumb;
     let mockRaf;
+    let rafStub;
     beforeEach(function () {
+      mockRaf = createMockRaf();
+      rafStub = sinon.stub(window, 'requestAnimationFrame').callsFake(mockRaf.raf);
       container = document.createElement('div');
       container.innerHTML = SliderHTML;
       document.body.appendChild(container);
       slider = new Slider(document.querySelector('[data-slider]'));
       thumb = document.querySelector('.bx--slider__thumb');
-      mockRaf = createMockRaf();
-      sinon.stub(window, 'requestAnimationFrame').callsFake(mockRaf.raf);
       mockRaf.step({ count: 1 });
     });
     it('Should stepUp value on up/right key', function () {
@@ -112,8 +113,8 @@ describe('Test slider', function () {
     });
     afterEach(function () {
       if (mockRaf) {
-        mockRaf.restore();
-        mockRaf = null;
+        rafStub.restore();
+        rafStub = null;
       }
       if (slider) {
         slider = slider.release();
@@ -126,14 +127,15 @@ describe('Test slider', function () {
     let slider;
     let track;
     let mockRaf;
+    let rafStub;
     beforeEach(function () {
+      mockRaf = createMockRaf();
+      rafStub = sinon.stub(window, 'requestAnimationFrame').callsFake(mockRaf.raf);
       container = document.createElement('div');
       container.innerHTML = SliderHTML;
       document.body.appendChild(container);
       slider = new Slider(document.querySelector('[data-slider]'));
       track = document.querySelector('.bx--slider__track');
-      mockRaf = createMockRaf();
-      sinon.stub(window, 'requestAnimationFrame').callsFake(mockRaf.raf);
       mockRaf.step({ count: 1 });
     });
     it('Should change value on click', function () {
@@ -145,8 +147,8 @@ describe('Test slider', function () {
     });
     afterEach(function () {
       if (mockRaf) {
-        mockRaf.restore();
-        mockRaf = null;
+        rafStub.restore();
+        rafStub = null;
       }
       if (slider) {
         slider = slider.release();
