@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/carbon-design-system/carbon-components.svg?branch=master)](https://travis-ci.org/carbon-design-system/carbon-components)
+
 # Carbon Components
 
  The Carbon Design System is a series of individual styles and components, that when combined make beautiful, intuitive designs. These designs are systemic and logical, as they all follow the same universal principles.
