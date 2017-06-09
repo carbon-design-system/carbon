@@ -1,11 +1,20 @@
 ### FAQ
 
-The time picker consists of a mandatory input field and two optional inline selects. The inline selects are only used when the user is required to select either a time zone or when the time format is 12 hours.
+The time picker consists of a mandatory input field and two optional inline select components. The inline select components are only used when the user is required to select either a time zone and/or when specifying AM/PM is required.
 
-The time picker uses form validation, and the valid pattern should be specified in the pattern attribute of the input field. Here are some examples:
+The time picker uses form validation, and the valid pattern should be specified in the pattern attribute of the input field. You can read more about patterns [here](https://www.w3schools.com/tags/att_input_pattern.asp).
 
-For military time (24 hours):
-``
+Here are some examples:
 
-For 12 hours:
-``
+#### 24-hour military time
+
+`<input type="text" class="bx--time-picker__input-field" pattern="[01]?[0-9]|2[0-3]):[0-5][0-9]" placeholder="hh:mm" maxlength="5" />`
+
+#### 12-hour am-pm clock
+`
+`<input type="text" class="bx--time-picker__input-field" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)" placeholder="hh:mm" maxlength="5" />`
+`
+
+#### Localization
+
+In order for the component to be localized, please make sure you update the validation pattern, the AM/PM select component (if it is needed), and the time zone select component (if it is needed). 
