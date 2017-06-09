@@ -8,6 +8,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--typography';
 
 @include exports('tabs') {
   .bx--tabs {
@@ -97,8 +98,7 @@
     background-color: $ui-01;
     padding: 0;
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       background-color: $brand-01;
 
       @include breakpoint(bp--sm--major) {
@@ -111,7 +111,7 @@
       background: transparent;
       padding: .725rem 0 rem(10px);
 
-      &+& {
+      & + & {
         margin-left: rem(48px);
       }
     }
@@ -140,7 +140,6 @@
       color: $brand-01;
     }
   }
-
 
   .bx--tabs__nav-link {
     display: inline-block;

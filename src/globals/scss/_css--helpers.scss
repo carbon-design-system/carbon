@@ -1,3 +1,5 @@
+@import 'css--reset';
+@import 'typography';
 @import 'import-once';
 
 @mixin css-helpers {
@@ -24,7 +26,7 @@
 }
 
 @include exports('css--helpers') {
-  @if global-variable-exists('css--helpers') and $css--helpers == true {
+  @if global-variable-exists('css--helpers') == false or $css--helpers == true {
     @include css-helpers;
   }
 }

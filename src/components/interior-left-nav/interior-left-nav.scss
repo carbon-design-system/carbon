@@ -3,16 +3,18 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 
 @include exports('interior-left-nav') {
   .bx--interior-left-nav {
     @include reset;
+    @include helvetica;
     width: rem(250px);
     position: fixed;
     top: rem(90px);
@@ -21,7 +23,6 @@
     border-right: 1px solid $color__gray-1;
 
     .left-nav-list {
-      @include reset;
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -30,7 +31,6 @@
       overflow: auto;
 
       &__item {
-        @include reset;
         cursor: pointer;
         width: 100%;
         padding: 0;
@@ -62,7 +62,6 @@
         }
 
         &-link {
-          @include reset;
           @include font-size('14');
           color: $color__blue-90;
           font-weight: 400;
@@ -76,7 +75,6 @@
         }
 
         &-icon {
-          @include reset;
           display: flex;
 
           .bx--interior-left-nav__icon {
@@ -183,16 +181,13 @@
     flex-direction: column;
     width: rem(200px);
     padding-top: rem(20px);
-    transition: background-color 300ms $bx--standard-easing,
-                width 300ms $bx--standard-easing;
+    transition: background-color 300ms $bx--standard-easing, width 300ms $bx--standard-easing;
 
-    ul, li, hr,
-    .bx--interior-left-nav-collapse__target {
+    ul, li, hr, .bx--interior-left-nav-collapse__target {
       opacity: 1;
     }
 
-    .left-nav-list,
-    .left-nav-list__item-link {
+    .left-nav-list, .left-nav-list__item-link {
       background-color: inherit;
     }
 
@@ -237,8 +232,7 @@
       margin-bottom: rem(5px);
     }
 
-    .left-nav-list__item-link,
-    .left-nav-list--nested .left-nav-list__item-link {
+    .left-nav-list__item-link, .left-nav-list--nested .left-nav-list__item-link {
       padding: rem(9px) rem(20px);
     }
 
@@ -257,8 +251,7 @@
       margin-bottom: rem(90px);
       padding: rem(14px) rem(16px);
 
-      &:hover,
-      &:focus {
+      &:hover, &:focus {
         background-color: rgba($color__blue-51, .30);
       }
     }
@@ -288,21 +281,17 @@
     }
   }
 
-  .bx--interior-left-nav--collapsing,
-  .bx--interior-left-nav--collapsed {
+  .bx--interior-left-nav--collapsing, .bx--interior-left-nav--collapsed {
     width: rem(48px);
-    transition: background-color 300ms $bx--standard-easing,
-                width 300ms $bx--standard-easing;
+    transition: background-color 300ms $bx--standard-easing, width 300ms $bx--standard-easing;
     cursor: pointer;
     background-color: rgba($color__blue-51, .10);
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       background-color: rgba($color__blue-51, .30);
     }
 
-    ul, li, hr,
-    .bx--interior-left-nav-collapse__target {
+    ul, li, hr, .bx--interior-left-nav-collapse__target {
       opacity: 0;
       transition: opacity 300ms $bx--standard-easing;
       overflow: hidden;
@@ -324,8 +313,7 @@
   }
 
   .bx--interior-left-nav--collapsed {
-    ul, li, hr,
-    .bx--interior-left-nav-collapse__target {
+    ul, li, hr, .bx--interior-left-nav-collapse__target {
       display: none;
     }
 
@@ -341,8 +329,7 @@
     transition: width 300ms $bx--standard-easing;
     background-color: #fff;
 
-    ul, li, hr,
-    .bx--interior-left-nav-collapse__target {
+    ul, li, hr, .bx--interior-left-nav-collapse__target {
       opacity: 1;
       transition: opacity 300ms $bx--standard-easing;
       overflow: hidden;

@@ -1,17 +1,14 @@
-//-----------------------------
-// File Uploader
-//-----------------------------
-
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--typography';
 @import '../button/button';
 @import '../form/form';
+@import '../loading/loading';
 
 @include exports('file-uploader') {
-
   .bx--file {
     width: 100%;
   }
@@ -58,20 +55,18 @@
   .bx--file-filename {
     @include font-size('12');
     @include text-overflow(100%);
+    display: inline-flex;
+    align-items: center;
     color: $text-01;
     margin-right: 1rem;
+    height: 1.875rem;
   }
-
 
   .bx--file__state-container {
     display: flex;
     align-items: center;
-  }
 
-  .bx--file__state-container {
     .bx--loading {
-      // width: 2rem;
-      // height: 2rem;
       width: 1.125rem;
       height: 1.125rem;
       margin-right: -7px;
@@ -82,8 +77,7 @@
     }
   }
 
-  .bx--file__state-container .bx--file-close,
-  .bx--file__state-container .bx--file-complete {
+  .bx--file__state-container .bx--file-close, .bx--file__state-container .bx--file-complete {
     width: 1rem;
     height: 1rem;
     fill: $text-01;

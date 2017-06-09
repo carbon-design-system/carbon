@@ -1,21 +1,17 @@
-//-----------------------------
-// Card
-//-----------------------------
-
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../overflow-menu/overflow-menu';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 @import '../button/button';
 @import '../link/link';
 @import 'mixins';
 
 @include exports('card') {
-
   .bx--card {
     @include reset;
     @include helvetica;
@@ -85,17 +81,21 @@
     @include text-overflow(rem(180px));
     font-weight: 400;
     margin: 0;
+    line-height: 1.2;
   }
 
   .bx--about__title--link {
     @include font-size('12');
     @include text-overflow(rem(180px));
+    display: inline;
     font-weight: 400;
+    text-align: center;
   }
 
   .bx--about__title--additional-info {
     @include font-size('12');
     @include text-overflow(rem(180px));
+    display: inline;
     font-weight: 400;
     padding: 0;
     margin: 0;
@@ -116,7 +116,6 @@
     background-color: $ui-01;
     border: 1px solid $ui-04;
     border-radius: 100%;
-
 
     .bx--about__icon--img {
       width: rem(32px);
@@ -163,8 +162,7 @@
     background: none;
     border: none;
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       .bx--app-actions__button--icon {
         fill: $brand-01;
       }

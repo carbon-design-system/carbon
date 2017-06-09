@@ -3,12 +3,12 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/mixins';
-
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 
 @include exports('inline-notifications') {
   .bx--inline-notification {
@@ -17,6 +17,7 @@
     @include font-smoothing;
     @include font-size('14');
     display: flex;
+    justify-content: space-between;
     background-color: transparent;
     padding: .75rem 1rem;
     min-height: rem(40px);

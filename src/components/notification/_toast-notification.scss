@@ -3,15 +3,14 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/mixins';
-
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 
 @include exports('toast-notifications') {
-
   .bx--toast-notification {
     @include reset;
     @include helvetica;
@@ -79,7 +78,7 @@
     font-weight: 700;
     letter-spacing: 0;
     line-height: 1;
-    padding-bottom: .125rem
+    padding-bottom: .125rem;
   }
 
   .bx--toast-notification__subtitle {

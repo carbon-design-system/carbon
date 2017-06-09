@@ -4,11 +4,12 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 
 @include exports('dropdown') {
   .bx--dropdown {
@@ -76,8 +77,7 @@
     padding-left: 1rem;
     padding-right: 1.5rem;
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       background-color: $brand-01;
       color: $inverse-01;
       outline: 1px solid transparent;

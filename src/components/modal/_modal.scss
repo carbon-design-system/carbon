@@ -6,9 +6,10 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 
 @import '../button/button';
 
@@ -28,9 +29,7 @@
     content: '';
     opacity: 0;
     background-color: rgba($ui-03, .5);
-    transition: opacity 200ms,
-                z-index 0s 200ms,
-                visibility 0s 200ms;
+    transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
     visibility: hidden;
 
     &.is-visible {
@@ -91,7 +90,6 @@
 
   .bx--modal-content {
     margin-bottom: rem(48px);
-    overflow-y: auto;
 
     > * {
       @include reset;
@@ -136,4 +134,3 @@
     height: rem(12px);
   }
 }
-

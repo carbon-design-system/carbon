@@ -1,17 +1,19 @@
 @import '../../globals/scss/colors';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
 
 @include exports('tooltip') {
-
   .bx--tooltip--simple {
     display: flex;
     align-items: center;
   }
 
   .bx--tooltip__trigger {
+    @include helvetica;
     @include font-size('16');
     display: inline-flex;
     align-items: center;
@@ -29,8 +31,7 @@
       }
     }
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       svg {
         fill: $brand-02;
       }
@@ -123,8 +124,7 @@
     }
 
     // Tooltip - renders as a combo of :before and :after elements
-    &:before,
-    &:after {
+    &:before, &:after {
       @include helvetica;
       position: absolute;
       display: none;
@@ -156,15 +156,12 @@
       content: '';
     }
 
-    &:hover,
-    &:focus {
-
+    &:hover, &:focus {
       svg {
         fill: $brand-02;
       }
 
-      &:before,
-      &:after {
+      &:before, &:after {
         position: absolute;
         display: block;
       }
@@ -185,10 +182,9 @@
       bottom: 1.8rem;
     }
 
-
     &:after {
       bottom: 1.5rem;
-      transform:rotate(45deg);
+      transform: rotate(45deg);
     }
   }
 
@@ -200,7 +196,7 @@
 
     &:after {
       top: 1.5rem;
-      transform:rotate(-135deg);
+      transform: rotate(-135deg);
     }
   }
 }

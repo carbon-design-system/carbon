@@ -5,8 +5,9 @@
 $css--font-face: false !default;
 $css--helpers: true !default;
 $css--body: true !default;
-$css--reset: false !default;
 $css--use-layer: true !default;
+$css--reset: true !default;
+$css--typography: true !default;
 
 @import 'colors';
 @import 'vars';
@@ -19,6 +20,7 @@ $css--use-layer: true !default;
 @import 'css--font-face';
 @import 'css--helpers';
 @import 'css--body';
+@import 'css--typography';
 
 //-------------------------
 // 🍕 Components

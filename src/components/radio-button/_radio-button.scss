@@ -5,8 +5,9 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
+@import '../form/form';
+@import '../../globals/scss/css--reset';
 
 @include exports('radio-button') {
 
