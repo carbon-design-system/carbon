@@ -1,0 +1,118 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/import-once';
+
+@include exports('structured-list') {
+  [data-structured-list] .bx--structured-list-td,
+  [data-structured-list] .bx--structured-list-th {
+    @include padding--data-structured-list;
+  }
+
+  .bx--structured-list-input {
+    @include hidden;
+  }
+
+  .bx--structured-list {
+    @include reset;
+    @include helvetica;
+    display: table;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    min-width: 500px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 5rem;
+    background-color: transparent;
+
+    &.bx--structured-list--border {
+      border: 1px solid $ui-04;
+      background-color: $ui-01;
+    }
+
+    &.bx--structured-list--condensed .bx--structured-list-td {
+      @include padding-td--condensed;
+    }
+  }
+
+  .bx--structured-list-row {
+    display: table-row;
+    border-bottom: 1px solid $ui-04;
+    transition: $transition--base $bx--standard-easing;
+
+    [data-structured-list] &:hover:not(.bx--structured-list-row--header-row) {
+      background-color: rgba($brand-02, .1);
+      cursor: pointer;
+    }
+
+    .bx--structured-list-input:checked + & {
+      background-color: rgba($brand-02, .1);
+    }
+
+    &.bx--structured-list-row--header-row {
+      border-bottom: 2px solid $brand-01;
+      cursor: inherit;
+    }
+
+    &:focus:not(.bx--structured-list-row--header-row) {
+      @include focus-outline('border');
+    }
+  }
+
+  .bx--structured-list-thead {
+    display: table-header-group;
+    vertical-align: middle;
+  }
+
+  .bx--structured-list-th {
+    @include reset;
+    @include padding-th;
+    display: table-cell;
+    font-size: rem(12px);
+    font-weight: 700;
+    height: rem(40px);
+    letter-spacing: 1px;
+    text-align: left;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  .bx--structured-list-tbody {
+    display: table-row-group;
+    vertical-align: middle;
+  }
+
+  .bx--structured-list-td {
+    @include padding-td;
+    position: relative;
+    display: table-cell;
+    font-size: rem(14px);
+  }
+
+  .bx--structured-list-content {
+    font-size: rem(14px);
+  }
+
+  .bx--structured-list-content--nowrap {
+    white-space: nowrap;
+  }
+
+  .bx--structured-list-svg {
+    display: inline-block;
+    fill: transparent;
+    vertical-align: middle;
+    transition: $transition--base $bx--standard-easing;
+
+    .bx--structured-list-row:hover & {
+      fill: rgba($brand-02, .1);
+    }
+
+    .bx--structured-list-input:checked + .bx--structured-list-row & {
+      fill: $brand-02;
+    }
+  }
+}

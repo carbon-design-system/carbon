@@ -1,0 +1,44 @@
+// Used only for .bx--structured-list--condensed
+@mixin padding-td--condensed($padding: $structured-list-padding) {
+  padding: $padding / 4;
+}
+
+// Used only for [data-structured-list]
+@mixin padding--data-structured-list($padding: $structured-list-padding) {
+  padding-left: $padding / 2;
+  padding-right: $padding / 2;
+
+  // Controls gutter sizes for check
+  &:first-child {
+    padding-left: $padding / 2;
+    padding-right: $padding / 4;
+  }
+
+  &:last-child {
+    padding-right: $padding;
+  }
+}
+
+// Used only for normal structured-list
+@mixin padding-td($padding: $structured-list-padding) {
+  padding-left: 0;
+  padding-right: $padding;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  &:last-child {
+    padding-right: $padding;
+  }
+}
+
+// Used only for normal structured-list
+@mixin padding-th($padding: $structured-list-padding) {
+  padding-left: 0;
+  padding-right: $padding;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
