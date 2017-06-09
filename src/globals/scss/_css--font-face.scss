@@ -2,7 +2,7 @@ $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts/' !defa
 
 @import 'import-once';
 
-@mixin font-face-css($font-path) {
+@mixin font-face-css {
   // Default font directory, `!default` flag allows user override.
   // (font files are configured to be served as static assets from server.js)
 
@@ -57,6 +57,6 @@ $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts/' !defa
 
 @include exports('css--font-face') {
   @if global-variable-exists('css--font-face') and $css--font-face == true {
-    @include font-face-css($font-path);
+    @include font-face-css;
   }
 }
