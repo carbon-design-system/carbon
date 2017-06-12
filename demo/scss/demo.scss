@@ -9,7 +9,6 @@
   padding: 1rem;
   margin-top: 5rem;
   transition: .2s;
-  // min-height: 2000px;
   background-color: $ui-02;
 
   &.flex-col {
@@ -46,13 +45,6 @@
   max-width: 960px;
   height: 100%;
   padding: 3em 1em 1em;
-}
-
-.theme-switcher {
-  margin: 1rem 0;
-  position: fixed;
-  top: 0;
-  right: 1rem;
 }
 
 .demo-switcher {
