@@ -187,7 +187,6 @@ export {
    */
   CopyButton,
   /**
-<<<<<<< HEAD
    * StructuredList.
    * @type StructuredList
    */
@@ -197,12 +196,11 @@ export {
    * @type DatePicker
    */
   DatePicker,
-=======
+  /**
    * Slider.
    * @type Slider
    */
   Slider,
->>>>>>> feat(slider): WIP adding slider component
 };
 
 /**
@@ -241,12 +239,9 @@ const init = () => {
     Toolbar.init();
     Tooltip.init();
     ProgressIndicator.init();
-<<<<<<< HEAD
     StructuredList.init();
     DatePicker.init();
-=======
     Slider.init();
->>>>>>> feat(slider): WIP adding slider component
     // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
   }
 };
