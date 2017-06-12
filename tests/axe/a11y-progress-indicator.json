@@ -1,0 +1,90 @@
+[
+  {
+    "inapplicable": [],
+    "incomplete": [],
+    "timestamp": 1497302875471,
+    "url": "http://localhost:3000/components/progress-indicator/",
+    "violations": [
+      {
+        "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+        "help": "Elements must have sufficient color contrast",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.2/color-contrast?application=webdriverjs",
+        "id": "color-contrast",
+        "impact": "critical",
+        "nodes": [
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#f5f7fa",
+                  "contrastRatio": 2.66,
+                  "fgColor": "#8c9ba5",
+                  "fontSize": "12.0pt",
+                  "fontWeight": "normal",
+                  "missingData": null
+                },
+                "id": "color-contrast",
+                "impact": "critical",
+                "message": "Element has insufficient color contrast of 2.66 (foreground color: #8c9ba5, background color: #f5f7fa, font size: 12.0pt, font weight: normal)",
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"demo--container\" data-card-list=\"\">",
+                    "target": [
+                      "html > .bx--body > .demo--container"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<p class=\"bx--progress-label\">Label 3</p>",
+            "impact": "critical",
+            "none": [],
+            "target": [
+              "html > .bx--body > .demo--container > .bx--progress > li:nth-of-type(3) > .bx--progress-label"
+            ]
+          },
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#f5f7fa",
+                  "contrastRatio": 2.66,
+                  "fgColor": "#8c9ba5",
+                  "fontSize": "12.0pt",
+                  "fontWeight": "normal",
+                  "missingData": null
+                },
+                "id": "color-contrast",
+                "impact": "critical",
+                "message": "Element has insufficient color contrast of 2.66 (foreground color: #8c9ba5, background color: #f5f7fa, font size: 12.0pt, font weight: normal)",
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"demo--container\" data-card-list=\"\">",
+                    "target": [
+                      "html > .bx--body > .demo--container"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<p class=\"bx--progress-label\">Label 4</p>",
+            "impact": "critical",
+            "none": [],
+            "target": [
+              "html > .bx--body > .demo--container > .bx--progress > li:nth-of-type(4) > .bx--progress-label"
+            ]
+          }
+        ],
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143"
+        ]
+      }
+    ],
+    "time": 354,
+    "status": 200
+  }
+]
