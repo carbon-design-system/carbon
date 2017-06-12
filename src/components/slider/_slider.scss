@@ -77,10 +77,23 @@
     &:focus {
       @include focus-outline('blurred');
     }
-
     &:active {
       background: darken($brand-01, 5%);
       transform: translate(-50%, -50%) scale(1.25);
+    }
+  }
+
+  .bx--slider--disabled .bx--slider__thumb {
+    &:hover {
+      transform: translate(-50%, -50%);
+    }
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+    &:active {
+      background: $brand-01;
+      transform: translate(-50%, -50%);
     }
   }
 

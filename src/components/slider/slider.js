@@ -33,15 +33,22 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     this.thumb.addEventListener('mousedown', () => { this.sliderActive = true; });
     this.hDocumentMouseUp = on(this.element.ownerDocument, 'mouseup', () => { this.sliderActive = false; });
     this.hDocumentMouseMove = on(this.element.ownerDocument, 'mousemove', (evt) => {
-      if (this.sliderActive === true) {
+      const disabled = this.element.classlist.contains('bx--slider--disabled');
+      if (this.sliderActive === true && !disabled) {
         this._updatePosition(evt);
       }
     });
     this.thumb.addEventListener('keydown', (evt) => {
-      this._updatePosition(evt);
+      const disabled = this.element.classlist.contains('bx--slider--disabled');
+      if (!disabled) {
+        this._updatePosition(evt);
+      }
     });
     this.track.addEventListener('click', (evt) => {
-      this._updatePosition(evt);
+      const disabled = this.element.classlist.contains('bx--slider--disabled');
+      if (!disabled) {
+        this._updatePosition(evt);
+      }
     });
   }
 
