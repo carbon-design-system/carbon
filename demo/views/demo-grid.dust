@@ -18,7 +18,6 @@
   <!-- Scripts -->
   <!-- <script src="../../dist/bluemix-components.min.js"></script> -->
   <script src="/demo.js"></script>
-  <script src="/svgxuse/svgxuse.min.js"></script>
   <!-- Disable Auto Init with this flag -->
   <!-- true = JavaScript will not initialize automatically -->
   <!-- false = JavaScript will initialize automatically -->
