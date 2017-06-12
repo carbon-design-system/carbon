@@ -66,7 +66,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     requestAnimationFrame(() => {
       this.dragging = false;
       this.thumb.style.left = `${left}%`;
-      this.filledTrack.style.transform = `scaleX(${left / 100})`;
+      this.filledTrack.style.transform = `translate(0%, -50%) scaleX(${left / 100})`;
       this.input.value = newValue;
       this._updateInput();
       this.changeState('slider-value-change', { value: newValue });

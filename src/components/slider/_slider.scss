@@ -46,6 +46,7 @@
     height: rem(4px);
     background: $ui-05;
     cursor: pointer;
+    transform: translate(0%, -50%);
   }
 
   .bx--slider__filled-track {
@@ -55,6 +56,7 @@
     background: $brand-01;
     transform-origin: left;
     pointer-events: none;
+    transform: translate(0%, -50%);
   }
 
   .bx--slider__thumb {
