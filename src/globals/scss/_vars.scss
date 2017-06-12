@@ -44,9 +44,6 @@ $button-padding: 0 1rem !default;
 $button-padding-sm: 0 .5rem !default;
 $button-border-width: 2px !default;
 
-// Structured Theme Variables
-$structured-list-padding: 2rem !default;
-
 // Accordion (Reverse)
 $accordion-flex-direction: row !default;
 $accordion-justify-content: flex-start !default;
@@ -69,3 +66,6 @@ $modal-border-top: $brand-01 4px solid !default;
 
 // Radio Button
 $radio-border-width: 2px !default;
+
+// Structured Theme Variables
+$structured-list-padding: 2rem !default;
