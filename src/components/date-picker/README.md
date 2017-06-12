@@ -1,6 +1,6 @@
 ### JavaScript
 
-The date picker is built on top of [Flatpickr](https://chmln.github.io/flatpickr/), so the [events](https://chmln.github.io/flatpickr/events/) and [config options](https://chmln.github.io/flatpickr/options/) that comes with Flatpickr is therefore available to the date picker by using the reference ``. This includes methods for setting a min date, max date, disabling date(s), specifiying a range of dates, and more.
+The date picker is built on top of [Flatpickr](https://chmln.github.io/flatpickr/), so the [events](https://chmln.github.io/flatpickr/events/) and [config options](https://chmln.github.io/flatpickr/options/) that come with Flatpickr is therefore available to the date picker. This includes methods for setting a min date, max date, disabling date(s), specifiying a range of dates, and more.
 
 #### Public Methods
 
@@ -39,7 +39,8 @@ There are 3 different date picker types:
 | A single date picker | [data-date-picker-type="single"] |
 | A ranged date picker | [data-date-picker-type="range"] |
 
-**The simple date picker** is a text input without a calendar. You can specify the pattern for the text input to make sure the user enters the correct date format. The default pattern that ships with the simple date picker is `\d{1,2}/\d{4}` (for short date pickers) and `\d{1,2}/\d{1,2}/\d{4}`. The simple date picker does not require any JavaScript.
+**The simple date picker** is a text input without a calendar. You can specify the pattern for the text input to make sure the user enters the correct date format. The default regex pattern that ships with the
+simple date picker is \d{1,2}/\d{4} ('dd/yyyy' for short date pickers) and \d{1,2}/\d{1,2}/\d{4} ('dd/mm/yyyy' or mm/dd/yyyy). The simple date picker does not require any JavaScript.
 
 **The single date picker** is a text input with a calendar instance attached to it. It also ships with a calendar icon inside the input field. The calendar will open when the input is focused, and the user can both type in a date or select a day from the calendar. The single date picker requires JavaScript, so the data attributes `data-date-picker` and `data-date-picker-type="single"` are required on the parent div, and the data attribute `data-date-picker-input` is required on the input field.
 

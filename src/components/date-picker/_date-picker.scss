@@ -8,7 +8,12 @@
 @import 'flatpickr.scss';
 
 @include exports('date-picker') {
-  .bx--date-picker__container {
+  .bx--date-picker {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .bx--date-picker-container {
     position: relative;
   }
 
@@ -77,11 +82,10 @@
 
   .bx--date-picker--range {
     display: flex;
-    align-items: center;
     position: relative;
   }
 
-  .bx--date-picker--range > .bx--date-picker__container:first-child {
+  .bx--date-picker--range > .bx--date-picker-container:first-child {
     margin-right: .5rem;
   }
 
