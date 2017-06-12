@@ -1,17 +1,33 @@
 @import '../../src/globals/scss/styles';
 
 .demo--container {
-  @include grid-container;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem;
-  margin-top: 5rem;
+  padding-top: 1em;
   transition: .2s;
   background-color: $ui-02;
 
-  &.flex-col {
+  .demo--collapsed & {
+    padding-left: 3rem;
+  }
+
+  .demo--standalone & {
+    padding-left: 0;
+  }
+}
+
+.demo--container__panel {
+  @include grid-container;
+  width: 100%;
+  max-width: 960px;
+  height: 100%;
+  // min-height: 2000px;
+  padding: 1em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .demo--container.flex-col & {
     flex-direction: column;
     margin: 0 auto;
 
@@ -20,7 +36,7 @@
     }
   }
 
-  &.flex-row {
+  .demo--container.flex-row & {
     flex-direction: row;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -33,49 +49,81 @@
   &.mobile {
     max-width: 600px;
   }
+
+  &[hidden] {
+    display: none;
+  }
 }
 
-.demo--panels {
-  width: 100%;
-  height: 15rem;
-}
-
-.demo--panel {
-  width: 100%;
-  max-width: 960px;
-  height: 100%;
-  padding: 3em 1em 1em;
+.bx--global-header--demo {
+  top: 0;
+  height: 5.375em;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  z-index: 0;
 }
 
 .demo-switcher {
   &__container {
     display: flex;
-    position: fixed;
-    top: 1.5rem;
-    left: 1rem;
+    align-items: center;
 
     label {
+      color: #fff;
       margin-right: 1rem;
     }
   }
 }
 
-.test-header {
-  position: fixed;
-  background-color: $ui-05;
-  width: 100%;
-  top: 0;
-  left: 0;
-  height: 86px;
-  z-index: 8000;
+.demo--standalone {
+  .test-header {
+    position: fixed;
+    background-color: $ui-05;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 86px;
+    z-index: 8000;
+  }
+
+  .test-nav {
+    position: fixed;
+    background-color: $ui-04;
+    width: 200px;
+    height: calc(100vh - 86px);
+    bottom: 0;
+    left: 0;
+    z-index: 8000;
+  }
 }
 
-.test-nav {
-  position: fixed;
-  background-color: $ui-04;
-  width: 200px;
-  height: calc(100vh - 86px);
-  bottom: 0;
-  left: 0;
-  z-index: 8000;
+.demo--navigated {
+  .test-header {
+    display: none;
+  }
+
+  .test-nav {
+    display: none;
+  }
+
+  .demo--container {
+    padding-left: 12.5rem;
+  }
+
+  .bx--detail-page-header--with-tabs {
+    margin-left: 12.5em;
+  }
+
+  &.demo--collapsed .bx--detail-page-header--with-tabs {
+    margin-left: 3rem;
+  }
+}
+
+// carbon-components no longer owns alternate theme, hiding the theme switcher for now
+.theme-switcher {
+  .demo--navigated &,
+  .demo--standalone & {
+    display: none;
+  }
 }
