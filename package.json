@@ -58,6 +58,7 @@
     "globby": "4.0.0",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.1",
+    "gulp-axe-webdriver": "^1.4.0",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.0",
     "gulp-jsdoc3": "^0.2.1",
@@ -123,6 +124,7 @@
     "start": "node server.js",
     "test": "gulp test",
     "test:unit": "gulp test:unit",
+    "test:a11y": "gulp test:a11y",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "license": "Apache-2",
