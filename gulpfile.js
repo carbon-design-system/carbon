@@ -131,12 +131,7 @@ gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
 
   pump(
-    [
-      gulp.src(srcFile),
-      uglify(),
-      rename('carbon-components.min.js'),
-      gulp.dest('scripts'),
-    ],
+    [gulp.src(srcFile), uglify(), rename('carbon-components.min.js'), gulp.dest('scripts')],
     cb
   );
 });
@@ -221,13 +216,7 @@ gulp.task('html:source', () => {
 
 gulp.task('lint', () =>
   gulp
-    .src([
-      'gulpfile.js',
-      'server.js',
-      'src/**/*.js',
-      'tests/**/*.js',
-      'demo/**/*.js',
-    ])
+    .src(['gulpfile.js', 'server.js', 'src/**/*.js', 'tests/**/*.js', 'demo/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
@@ -284,7 +273,8 @@ gulp.task('jsdoc', cb => {
  * Test
  */
 
-gulp.task('test', ['test:unit', 'test:a11y']);
+// gulp.task('test', ['test:unit', 'test:a11y']);
+gulp.task('test', ['test:unit']);
 
 gulp.task('test:unit', done => {
   new Server(
@@ -296,15 +286,15 @@ gulp.task('test:unit', done => {
   ).start();
 });
 
-gulp.task('test:a11y', ['sass:compiled'], done => {
-  new Server(
-    {
-      configFile: path.resolve(__dirname, 'tests/karma-ibma.conf.js'),
-      singleRun: !cloptions.keepalive,
-    },
-    done
-  ).start();
-});
+// gulp.task('test:a11y', ['sass:compiled'], done => {
+//   new Server(
+//     {
+//       configFile: path.resolve(__dirname, 'tests/karma-ibma.conf.js'),
+//       singleRun: !cloptions.keepalive,
+//     },
+//     done
+//   ).start();
+// });
 
 // Watch Tasks
 gulp.task('watch', () => {
