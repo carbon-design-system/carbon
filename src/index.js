@@ -19,7 +19,9 @@ import Dropdown from './components/dropdown/dropdown';
 import Card from './components/card/card';
 import NumberInput from './components/number-input/number-input';
 import DataTable from './components/data-table/data-table';
-import DetailPageHeader from './components/detail-page-header/detail-page-header';
+import DatePicker from './components/date-picker/date-picker';
+import DetailPageHeader
+  from './components/detail-page-header/detail-page-header';
 import LeftNav from './components/unified-header/left-nav';
 import InteriorLeftNav from './components/interior-left-nav/interior-left-nav';
 import ProfileSwitcher from './components/unified-header/profile-switcher';
@@ -188,6 +190,11 @@ export {
    * @type StructuredList
    */
   StructuredList,
+  /**
+   * DatePicker.
+   * @type DatePicker
+   */
+  DatePicker,
 };
 
 /**
@@ -227,6 +234,7 @@ const init = () => {
     Tooltip.init();
     ProgressIndicator.init();
     StructuredList.init();
+    DatePicker.init();
     // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
   }
 };

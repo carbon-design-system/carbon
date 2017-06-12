@@ -30,6 +30,7 @@ app.set('view engine', 'dust');
 app.set('views', path.resolve(__dirname, 'demo/views'));
 app.use(express.static('demo'));
 app.use(express.static('src'));
+app.use(express.static('scripts'));
 app.use('/docs/js', express.static('docs/js'));
 
 const getContent = glob =>

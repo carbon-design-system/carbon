@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
-  <title>Bluemix Components</title>
+  <title>Carbon Components</title>
   <link rel="stylesheet" href="/demo.css">
   <style>
     body {
@@ -46,14 +46,8 @@
   <input type="text" class="offleft">
 
   <!-- Scripts -->
-  <!-- <script src="../../dist/bluemix-components.min.js"></script> -->
-  <script src="/demo.js"></script>
-  <!-- Disable Auto Init with this flag -->
-  <!-- true = JavaScript will not initialize automatically -->
-  <!-- false = JavaScript will initialize automatically -->
-  <script>
-    CarbonComponents.settings.disableAutoInit = false;
-  </script>
+  <script src="/carbon-components.min.js"></script>
+  <!-- <script src="/demo.js"></script> -->
 </body>
 
 </html>

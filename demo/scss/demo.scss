@@ -1,4 +1,5 @@
 @import '../../src/globals/scss/styles';
+
 .demo--container {
   @include grid-container;
   box-sizing: border-box;
@@ -8,7 +9,7 @@
   padding: 1rem;
   margin-top: 5rem;
   transition: .2s;
-  min-height: 2000px;
+  // min-height: 2000px;
   background-color: $ui-02;
 
   &.flex-col {

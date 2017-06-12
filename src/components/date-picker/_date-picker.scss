@@ -1,0 +1,300 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/layer';
+@import '../form/form';
+@import 'flatpickr.scss';
+
+@include exports('date-picker') {
+  .bx--date-picker {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .bx--date-picker-container {
+    position: relative;
+  }
+
+  .bx--date-picker.bx--date-picker--simple {
+    .bx--date-picker__input {
+      width: 7.125rem;
+    }
+  }
+
+  .bx--date-picker.bx--date-picker--simple.bx--date-picker--short {
+    .bx--date-picker__input {
+      width: 5.7rem;
+    }
+  }
+
+  .bx--date-picker.bx--date-picker--single {
+    .bx--date-picker__input {
+      width: 9rem;
+    }
+  }
+
+  .bx--date-picker__input {
+    @include reset;
+    @include helvetica;
+    @include font-size('14');
+    display: block;
+    position: relative;
+    height: rem(40px);
+    max-width: 9rem;
+    padding: 0 1rem;
+    background-color: $field-01;
+    color: $text-01;
+    border: 1px solid transparent;
+
+    &:focus,
+    &.bx--focused {
+      @include focus-outline('border');
+    }
+
+    &:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      border: 1px solid transparent;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $text-03;
+    }
+  }
+
+  .bx--date-picker__icon {
+    position: absolute;
+    top: 2.25rem;
+    left: 1rem;
+    fill: $brand-01;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .bx--date-picker__icon + .bx--date-picker__input {
+    padding-left: 2.9rem;
+  }
+
+  .bx--date-picker--range {
+    display: flex;
+    position: relative;
+  }
+
+  .bx--date-picker--range > .bx--date-picker-container:first-child {
+    margin-right: .5rem;
+  }
+
+  .bx--date-picker--range .bx--date-picker__icon {
+    right: -1.75rem;
+    left: auto;
+  }
+
+  .bx--date-picker--range .bx--date-picker__input {
+    width: 7rem;
+  }
+
+  .bx--date-picker__calendar,
+  .flatpickr-calendar.open {
+    @include layer('pop-out');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .875rem 1rem .25rem;
+    width: rem(285px);
+    height: rem(230px);
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+    margin-top: -1px;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    &:focus {
+      outline: 1px solid $brand-01;
+    }
+  }
+
+  .bx--date-picker__month {
+    width: 100%;
+    margin-bottom: .2rem;
+  }
+
+  .bx--date-picker__month .flatpickr-prev-month,
+  .bx--date-picker__month .flatpickr-next-month {
+    padding: 0;
+    line-height: rem(20px);
+
+    &:hover svg {
+      fill: $brand-01;
+    }
+  }
+
+  .bx--date-picker__month .flatpickr-current-month {
+    @include font-size('12');
+    text-transform: uppercase;
+    padding: 0;
+  }
+
+  .bx--date-picker__month .flatpickr-current-month svg {
+    fill: $text-01;
+  }
+
+  .bx--date-picker__month .flatpickr-current-month .cur-month {
+    margin-right: .25rem;
+  }
+
+  .bx--date-picker__month .numInputWrapper .numInput {
+    font-weight: 700;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    border-radius: 0;
+    padding: .125rem .125rem .125rem .4rem;
+
+    &:focus {
+      outline: 1px solid $brand-01;
+    }
+  }
+
+  .bx--date-picker__month .numInputWrapper span.arrowUp,
+  .bx--date-picker__month .numInputWrapper span.arrowDown {
+    left: 2.6rem;
+    border: none;
+    width: rem(12px);
+
+    &:hover {
+      background: none;
+
+      &:after {
+        border-bottom-color: $brand-02;
+        border-top-color: $brand-02;
+      }
+    }
+
+    &:after {
+      border-bottom-color: $brand-01;
+      border-top-color: $brand-01;
+    }
+  }
+
+  .bx--date-picker__month .numInputWrapper span.arrowUp {
+    top: 1px;
+  }
+
+  .bx--date-picker__month .numInputWrapper span.arrowDown {
+    top: 9px;
+  }
+
+  span.bx--date-picker__weekday {
+    @include font-size('12');
+    font-weight: 700;
+    color: $text-01;
+  }
+
+  .bx--date-picker__day {
+    @include font-size('12');
+    height: rem(25px);
+    width: 1.8rem;
+    line-height: rem(25px);
+    flex-basis: 1.8rem;
+    margin: rem(.5px) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-01;
+    border-radius: 0;
+
+    &:hover {
+      background: $ui-04;
+    }
+
+    &:focus {
+      outline: none;
+      background: $ui-04;
+    }
+  }
+
+  .bx--date-picker__day.today {
+    border: 2px solid $brand-01;
+  }
+
+  .bx--date-picker__day.today.no-border {
+    border: none;
+  }
+
+  .bx--date-picker__day.disabled {
+    cursor: not-allowed;
+    color: $ui-05;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .bx--date-picker__day.inRange {
+    background: $brand-02;
+    box-shadow: -6px 0 0 $brand-02, 6px 0 0 $brand-02;
+    border: 2px solid transparent;
+  }
+
+  .bx--date-picker__day.selected {
+    background: $brand-01;
+    color: $inverse-01;
+    border: 2px solid transparent;
+  }
+
+  .bx--date-picker__day.startRange.selected {
+    box-shadow: none;
+    z-index: 2;
+  }
+
+  .bx--date-picker__day.endRange.inRange {
+    background: $ui-01;
+    color: $text-01;
+    border: 2px solid $brand-01;
+    z-index: 3;
+    box-shadow: none;
+  }
+
+  .bx--date-picker__day.endRange.inRange.selected {
+    background: $brand-01;
+    border: none;
+    color: $inverse-01;
+    box-shadow: none;
+  }
+
+  .bx--date-picker__day.startRange.inRange:not(.selected) {
+    box-shadow: none;
+    background: $ui-01;
+    border: 2px solid $brand-01;
+    z-index: 3;
+  }
+
+  .bx--date-picker__days,
+  .dayContainer {
+    width: rem(225px);
+    min-width: rem(225px);
+    max-width: rem(225px);
+    height: rem(132px);
+  }
+
+  .flatpickr-innerContainer,
+  .flatpickr-rContainer {
+    width: rem(225px);
+    height: rem(168px);
+  }
+
+  .bx--date-picker__weekdays {
+    width: rem(225px);
+    margin-bottom: .325rem;
+  }
+}
