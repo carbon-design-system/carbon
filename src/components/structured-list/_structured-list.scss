@@ -95,6 +95,7 @@
     display: table-cell;
   }
 
+  // Deprecated class
   .bx--structured-list-content {
     @include font-size('14');
   }
