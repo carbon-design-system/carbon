@@ -23,6 +23,8 @@ const cloptions = require('minimist')(process.argv.slice(2), {
 });
 
 module.exports = function (config) {
+  const objectToStringPolyfillPath = require.resolve('core-js/library/modules/es6.object.to-string.js');
+
   config.set({
     basePath: '..',
 
@@ -57,6 +59,15 @@ module.exports = function (config) {
 
     rollupPreprocessor: {
       plugins: [
+        {
+          // eslint-disable-next-line consistent-return
+          load(id) {
+            // core-js/library/modules/es6.object.to-string.js is a zero-length file
+            if (id === objectToStringPolyfillPath) {
+              return 'export default undefined';
+            }
+          },
+        },
         resolve({
           jsnext: true,
           main: true,
