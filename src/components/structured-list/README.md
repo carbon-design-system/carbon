@@ -29,6 +29,7 @@ Use these modifiers with `.bx--structured-list` class.
 | .bx--structured-list--border         | Applies border around structured-list and white background-color                             |
 | .bx--structured-list--condensed      | Applies condensed styles for all body rows                                                   |
 | .bx--structured-list-content--nowrap | Applies `white-space: nowrap;` on content. Prevents titles from wrapping in small viewports. |
+| .bx--structured-list--selection      | Applies styles used for selection variant of structured-list.                                |
 
 
 Use these modifiers with `.bx--structured-list-td` class. 
@@ -67,8 +68,8 @@ Use CSS to add visual styles to text.
 
 **HTML**
 ```html
-<div class="bx--structured-list-td">
-  <p class="bx--structured-list-content bold">Apache Spark</p>
+<div class="bx--structured-list-td bold">
+  Apache Spark
 </div>
 ```
 
