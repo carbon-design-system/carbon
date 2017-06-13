@@ -1,6 +1,5 @@
 {
   "name": "carbon-components-react",
-  "version": "3.0.1",
   "description": "A React wrapper for carbon-components",
   "main": "cjs/index.js",
   "module": "es/index.js",
@@ -14,7 +13,8 @@
     "commit": "git cz",
     "storybook": "start-storybook -p 8080",
     "build-storybook": "build-storybook",
-    "start": "npm run storybook"
+    "start": "npm run storybook",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "react",
@@ -126,7 +126,8 @@
     "sass-loader": "^6.0.5",
     "shelljs": "^0.7.5",
     "storybook-addon-a11y": "^3.0.0",
-    "validate-commit-msg": "^2.10.1"
+    "validate-commit-msg": "^2.10.1",
+    "semantic-release": "^6.3.6"
   },
   "jest": {
     "coverageDirectory": "./coverage",
@@ -161,5 +162,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog-components"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon-components-react.git"
   }
 }

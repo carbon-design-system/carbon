@@ -1,14 +1,17 @@
 language: node_js
-node_js:
-- '6'
 cache:
   directories:
-  - node_modules
+    - node_modules
+notifications:
+  email: false
+node_js:
+  - '6'
+before_script:
+  - npm prune
 script:
 - npm run lint
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: sh scripts/deploy.sh
+after_success:
+  - npm run semantic-release
+branches:
   on:
     branch: master
