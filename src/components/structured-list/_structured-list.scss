@@ -95,6 +95,10 @@
     display: table-cell;
   }
 
+  .bx--structured-list-content {
+    @include font-size('14');
+  }
+
   .bx--structured-list-content--nowrap {
     white-space: nowrap;
   }
