@@ -33,19 +33,19 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     this.thumb.addEventListener('mousedown', () => { this.sliderActive = true; });
     this.hDocumentMouseUp = on(this.element.ownerDocument, 'mouseup', () => { this.sliderActive = false; });
     this.hDocumentMouseMove = on(this.element.ownerDocument, 'mousemove', (evt) => {
-      const disabled = this.element.classlist.contains('bx--slider--disabled');
+      const disabled = this.element.classList.contains('bx--slider--disabled');
       if (this.sliderActive === true && !disabled) {
         this._updatePosition(evt);
       }
     });
     this.thumb.addEventListener('keydown', (evt) => {
-      const disabled = this.element.classlist.contains('bx--slider--disabled');
+      const disabled = this.element.classList.contains('bx--slider--disabled');
       if (!disabled) {
         this._updatePosition(evt);
       }
     });
     this.track.addEventListener('click', (evt) => {
-      const disabled = this.element.classlist.contains('bx--slider--disabled');
+      const disabled = this.element.classList.contains('bx--slider--disabled');
       if (!disabled) {
         this._updatePosition(evt);
       }
@@ -199,7 +199,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     selectorInput: '.bx--slider__input',
     eventBeforeSliderValueChange: 'slider-before-value-change',
     eventAfterSliderValueChange: 'slider-after-value-change',
-    stepMuliplier: 4,
+    stepMultiplier: 4,
   }
 }
 
