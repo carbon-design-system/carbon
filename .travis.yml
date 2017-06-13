@@ -7,6 +7,7 @@ cache:
 env:
   - TEST_SUITE=misc
   - TEST_SUITE=unit
+  - TEST_SUITE=unit-sauce
   - TEST_SUITE=unit-each
   - TEST_SUITE=a11y
 
@@ -42,11 +43,11 @@ install:
   - if [[ -n "${AAT_TOKEN}" && "$TEST_SUITE" == "a11y" ]]; then npm i https://aat.mybluemix.net/dist/karma-ibma.tgz; fi
 
 script:
-  - if [[ "$TEST_SUITE" == "misc" ]]; then npm run build; fi
+  - if [[ "$TEST_SUITE" == "misc" ]]; then npm run lint; npm run build; fi
   - if [[ "$TEST_SUITE" == "unit" ]]; then npm run test:unit -- -b PhantomJS -b Chrome -b Firefox; fi
+  - if [[ "$TEST_SUITE" == "unit-sauce" && -n "${SAUCE_ACCESS_KEY}" ]]; then npm run test:unit -- -s -d -b Chrome -b Firefox -b Safari -b MicrosoftEdge -b IE; fi
   - if [[ "$TEST_SUITE" == "unit-each" ]]; then find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm run test:unit -- -d -f; fi
   - if [[ -n "${AAT_TOKEN}" && "$TEST_SUITE" == "a11y" ]]; then npm run test:a11y; fi
-  - if [[ "$TEST_SUITE" == "misc" ]]; then npm run lint; fi
 
 after_success:
   - npm run semantic-release
