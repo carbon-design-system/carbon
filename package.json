@@ -8,6 +8,7 @@
     "lint": "eslint {components,internal}/**",
     "test": "jest '/(components|lib|internal)/'",
     "test-watch": "jest '/(components|lib|internal)/' --watch",
+    "prepublish": "npm run build",
     "build": "node scripts/build.js",
     "commitmsg": "validate-commit-msg",
     "commit": "git cz",
