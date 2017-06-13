@@ -285,6 +285,8 @@ module.exports = function (config) {
 
     logLevel: config.LOG_INFO,
 
+    browserNoActivityTimeout: 60000,
+
     autoWatch: true,
     autoWatchBatchDelay: 400,
 
