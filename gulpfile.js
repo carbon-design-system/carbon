@@ -310,7 +310,7 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
       ? `a11y-html.json`
       : `a11y-${componentName}.json`,
     urls: componentName === undefined
-      ? dirs.map(dir => `http://localhost:3000/components/${dir}/`)
+      ? ['http://localhost:3000']
       : [`http://localhost:3000/components/${componentName}/`],
   };
 
