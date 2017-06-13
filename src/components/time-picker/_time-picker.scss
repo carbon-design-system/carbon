@@ -1,0 +1,41 @@
+//-----------------------------
+// Time Picker
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/import-once';
+
+@include exports('time-picker') {
+  .bx--time-picker {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .bx--time-picker .bx--select-input {
+    padding-right: rem(32px);
+  }
+
+  .bx--time-picker .bx--select__arrow {
+    right: .875rem;
+  }
+
+  .bx--time-picker__input-field {
+    @include reset;
+    @include helvetica;
+    @include font-size('14');
+    display: flex;
+    align-items: center;
+    background-color: $field-01;
+    border: 1px solid transparent;
+    width: 4.8rem;
+    color: $text-01;
+    height: rem(40px);
+    padding: 0 1rem;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+}
