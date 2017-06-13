@@ -6,22 +6,12 @@ Contributors and users can ignore this folder -- this is only for project mainta
 ```
 demo
 ├── README.md
-├── carbon-components.js
-├── carbon-components.js.map
-├── carbon-components.min.js
-├── carbon-components.min.js.map
+├── index.js
 ├── demo.css
 ├── scss
-│   ├── _demo-colors.scss
-│   ├── _demo-major-second.scss
-│   ├── _demo-typography.scss
 │   └── demo.scss
 └── views
-    ├── colors.html
     ├── demo-all.dust
-    ├── demo-es5.html
-    ├── typography-major-second.html
-    └── typography.html
 ```
 
 `views`: HTML files that are rendered when running `npm run dev` or `npm run serve`
