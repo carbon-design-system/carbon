@@ -8,14 +8,24 @@ const propTypes = {
   activeHref: PropTypes.string,
   tabIndex: PropTypes.number,
   onClick: PropTypes.func,
-  label: PropTypes.string.isRequired,
   blankTarget: PropTypes.bool,
+  children: PropTypes.node,
+  label: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
   activeHref: '#',
   tabIndex: 0,
+  label: 'InteriorLeftNavItem Label',
   onClick: /* istanbul ignore next */ () => {},
+};
+
+const newChild = (children, tabIndex) => {
+  const child = React.Children.only(children);
+  return React.cloneElement(React.Children.only(child), {
+    tabIndex,
+    className: 'left-nav-list__item-link',
+  });
 };
 
 const InteriorLeftNavItem = ({
@@ -24,6 +34,7 @@ const InteriorLeftNavItem = ({
   activeHref,
   onClick,
   tabIndex,
+  children,
   label,
   ...other
 }) => {
@@ -40,9 +51,11 @@ const InteriorLeftNavItem = ({
       onKeyPress={evt => onClick(evt, href)}
       {...other}
     >
-      <a className="left-nav-list__item-link" href={href} tabIndex={tabIndex}>
-        {label}
-      </a>
+      {children
+        ? newChild(children, tabIndex)
+        : <a className="left-nav-list__item-link" href={href} tabIndex={tabIndex}>
+            {label}
+          </a>}
     </li>
   );
 };
