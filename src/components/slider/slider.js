@@ -109,7 +109,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
 
         if (direction !== undefined) {
           const multiplier = evt.shiftKey === true
-            ? (range / step) / this.options.stepMuliplier
+            ? (range / step) / this.options.stepMultiplier
             : 1;
           const stepMultiplied = step * multiplier;
           const stepSize = (stepMultiplied / range) * 100;

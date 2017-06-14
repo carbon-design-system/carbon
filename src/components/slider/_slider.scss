@@ -9,13 +9,19 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 @import '../form/form';
+@import '../text-input/text-input';
 
 @include exports('slider') {
   .bx--slider-container {
     max-width: rem(600px);
+    min-width: rem(200px);
     display: flex;
     align-items: center;
     user-select: none;
+
+    @media screen and (min-width: 768px) {
+      min-width: rem(350px);
+    }
   }
 
   .bx--slider {
@@ -26,8 +32,19 @@
 
   .bx--slider--disabled {
     opacity: .5;
-    & > * {
-      cursor: not-allowed !important; // fix
+  }
+
+  .bx--slider--disabled .bx--slider__thumb {
+    &:hover {
+      transform: translate(-50%, -50%);
+    }
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+    &:active {
+      background: $brand-01;
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -83,20 +100,6 @@
     }
   }
 
-  .bx--slider--disabled .bx--slider__thumb {
-    &:hover {
-      transform: translate(-50%, -50%);
-    }
-    &:focus {
-      box-shadow: none;
-      outline: none;
-    }
-    &:active {
-      background: $brand-01;
-      transform: translate(-50%, -50%);
-    }
-  }
-
   .bx--slider__input {
     display: none;
   }
@@ -104,7 +107,9 @@
   .bx-slider-text-input {
     max-width: rem(32px);
     min-width: 0;
+    height: 2rem;
     padding: 0;
     text-align: center;
+    font-weight: 700;
   }
 }
