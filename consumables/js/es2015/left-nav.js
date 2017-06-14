@@ -29,7 +29,7 @@ class LeftNav extends mixin(createCoponent, initComponent) {
   constructor(element, options) {
     super(element, options);
     this.leftNavSectionActive = false;
-    this.focusIndex = -1;
+    this.focusIndex = 0;
     this.hookOpenActions();
     this.hookListItemsEvents();
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this.handleDocumentClick(evt); });
@@ -56,45 +56,53 @@ class LeftNav extends mixin(createCoponent, initComponent) {
     if (leftNavContainer.getAttribute('aria-expanded') === 'false') {
       leftNavContainer.setAttribute('aria-expanded', 'true');
       toggleOpenNode.setAttribute('aria-expanded', 'true');
-      toggleOpenNode.setAttribute('aria-label', 'Close Navigation');
-      // this.element.ownerDocument.addEventListener('keydown', this.onKeyDown);
+      // commenting out because translation of this label needs to happen, will do in Common
+      // toggleOpenNode.setAttribute('aria-label', 'Close Navigation'); 
+      this.focusIndex = 0;
     } else {
       leftNavContainer.setAttribute('aria-expanded', 'false');
       toggleOpenNode.removeAttribute('aria-expanded');
-      toggleOpenNode.setAttribute('aria-label', 'Navigation');
-      // this.element.ownerDocument.removeEventListener('keydown', this.onKeyDown);
+      // toggleOpenNode.setAttribute('aria-label', 'Navigation');
     }
   }
 
-  onKeyDown (evt, newThis) {
-    console.log('========== hitting start of on key down function ========');
-    var activeElement = document.activeElement;
+  onKeyDown (evt) {
     const leftNavContainer = document.querySelector('[data-left-nav]');
-    var navItems = leftNavContainer.getElementsByClassName('bx--parent-item__link');
-    // const hasFocus = document.querySelector(':focus');
-    // hasFocus.classList.add('focus');
-    console.log (navItems);
-    console.log('2 '+navItems[2]);
+    var navItems = [...leftNavContainer.getElementsByClassName('bx--parent-item__link')];
+    var button = [...document.getElementsByClassName('bx--left-nav__trigger')];
+    navItems.unshift(button[0]);
 
-      switch (evt.which) {
-        case 38: // arrow up
-          newThis.focusIndex--;
-          navItems[newThis.focusIndex].focus();
-          break;
+    switch (evt.which) {
+      case 9: // tab
+        if (evt.shiftKey) { 
+          if ( this.focusIndex > 0 ) { this.focusIndex--; }
+          else { this.closeMenu(); }
+        } else { 
+          if ( this.focusIndex < navItems.length-1 ) { this.focusIndex++; }
+          else { this.closeMenu(); }
+        }
+        break;
 
-        case 40: // arrow down
-          newThis.focusIndex++;
-          navItems[newThis.focusIndex].focus();
-          break;
+      case 38: // arrow up
+        if ( this.focusIndex > 0 ) { this.focusIndex--; }
+        navItems[this.focusIndex].focus();
+        break;
 
-        case 36: // home
-          navItems[0].focus();
-          break;
+      case 40: // arrow down
+        if ( this.focusIndex < navItems.length-1 ) { this.focusIndex++; }
+        navItems[this.focusIndex].focus();
+        break;
 
-        case 35: // end
-          navItems[navItems.length-1].focus();
-          break;
-      }
+      case 36: // home
+        this.focusIndex = 1;
+        navItems[this.focusIndex].focus();
+        break;
+
+      case 35: // end
+        this.focusIndex = navItems.length-1;
+        navItems[this.focusIndex].focus();
+        break;
+    }
   }
 
   hookOpenActions() {
@@ -110,31 +118,13 @@ class LeftNav extends mixin(createCoponent, initComponent) {
         this.closeMenu();
       }
       else {
-        console.log('keypress');
         const toggleOpen = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
         if(toggleOpen.classList.contains(this.options.classActiveTrigger)) {
-          console.log('>>>>>>> toggle is open <<<<<<<<');
-          this.onKeyDown(evt, this);
+          this.onKeyDown = this.onKeyDown.bind(this);
+          this.onKeyDown(evt);
         }
       }
     });
-
-    //up and down keys
-    // console.log("what is options selector Left Nav: ", this.options.selectorLeftNav);
-    // console.log("left nav container?: ", this.options.selectorInit);
-    //
-    // const navContainer = this.element.ownerDocument.querySelector(this.options.selectorInit);
-    // console.log('what is nav container? ', navContainer);
-    // this.element.ownerDocument.addEventListener('keydown', (evt) => {
-    //   //check if toggle is open
-    //   console.log('keeeeey is dooooown');
-    //   // const toggleOpen = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
-    //   // if(toggleOpen) {
-    //   //   console.log('>>>>>>> toggle is open <<<<<<<<');
-    //   //   this.onKeyDown(evt);
-    //   // }
-    // });
-
   }
 
   /**
