@@ -87,14 +87,17 @@
   }
 
   .bx--structured-list-td {
+    @include reset;
+    @include font-size('14');
+    @include line-height('body');
     @include padding-td;
     position: relative;
     display: table-cell;
-    font-size: rem(14px);
   }
 
+  // Deprecated class
   .bx--structured-list-content {
-    font-size: rem(14px);
+    @include font-size('14');
   }
 
   .bx--structured-list-content--nowrap {
