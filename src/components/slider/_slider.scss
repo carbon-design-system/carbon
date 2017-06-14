@@ -1,0 +1,115 @@
+//-----------------------------
+// Slider
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/import-once';
+@import '../form/form';
+@import '../text-input/text-input';
+
+@include exports('slider') {
+  .bx--slider-container {
+    max-width: rem(600px);
+    min-width: rem(200px);
+    display: flex;
+    align-items: center;
+    user-select: none;
+
+    @media screen and (min-width: 768px) {
+      min-width: rem(350px);
+    }
+  }
+
+  .bx--slider {
+    position: relative;
+    width: 100%;
+    margin: 0 1rem;
+  }
+
+  .bx--slider--disabled {
+    opacity: .5;
+  }
+
+  .bx--slider--disabled .bx--slider__thumb {
+    &:hover {
+      transform: translate(-50%, -50%);
+    }
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+    &:active {
+      background: $brand-01;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .bx--slider__range-label {
+    @include font-size('14');
+    color: $text-02;
+
+    &:last-of-type {
+      margin-right: 1rem;
+    }
+  }
+
+  .bx--slider__track {
+    position: absolute;
+    width: 100%;
+    height: rem(4px);
+    background: $ui-05;
+    cursor: pointer;
+    transform: translate(0%, -50%);
+  }
+
+  .bx--slider__filled-track {
+    position: absolute;
+    width: 100%;
+    height: rem(4px);
+    background: $brand-01;
+    transform-origin: left;
+    pointer-events: none;
+    transform: translate(0%, -50%);
+  }
+
+  .bx--slider__thumb {
+    position: absolute;
+    height: rem(24px);
+    width: rem(24px);
+    background: $brand-01;
+    border-radius: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    transition: transform 100ms $bx--standard-easing, background 100ms $bx--standard-easing;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+    &:focus {
+      @include focus-outline('blurred');
+    }
+    &:active {
+      background: darken($brand-01, 5%);
+      transform: translate(-50%, -50%) scale(1.25);
+    }
+  }
+
+  .bx--slider__input {
+    display: none;
+  }
+
+  .bx-slider-text-input {
+    max-width: rem(32px);
+    min-width: 0;
+    height: 2rem;
+    padding: 0;
+    text-align: center;
+    font-weight: 700;
+  }
+}
