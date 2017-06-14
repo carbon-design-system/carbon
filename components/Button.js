@@ -8,7 +8,7 @@ const propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   small: PropTypes.bool,
-  kind: PropTypes.oneOf(['primary', 'secondary', 'danger']).isRequired,
+  kind: PropTypes.oneOf(['primary', 'secondary', 'danger', 'ghost']).isRequired,
   href: PropTypes.string,
   tabIndex: PropTypes.number,
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
@@ -51,6 +51,7 @@ const Button = ({
     'bx--btn--primary': kind === 'primary',
     'bx--btn--danger': kind === 'danger',
     'bx--btn--secondary': kind === 'secondary',
+    'bx--btn--ghost': kind === 'ghost',
   });
 
   const commonProps = {
@@ -59,11 +60,7 @@ const Button = ({
   };
 
   const buttonImage = icon
-    ? <Icon
-        name={icon}
-        description={iconDescription}
-        className="bx--btn__icon"
-      />
+    ? <Icon name={icon} description={iconDescription} className="bx--btn__icon" />
     : null;
 
   const button = (
