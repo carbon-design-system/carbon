@@ -7,6 +7,7 @@ const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   id: PropTypes.string.isRequired,
+  inline: PropTypes.bool,
   labelText: PropTypes.string,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
@@ -18,12 +19,14 @@ const propTypes = {
 const defaultProps = {
   disabled: false,
   labelText: 'Select',
+  inline: false,
   iconDescription: 'open list of options',
 };
 
 const Select = ({
   className,
   id,
+  inline,
   labelText,
   disabled,
   children,
@@ -33,6 +36,7 @@ const Select = ({
 }) => {
   const selectClasses = classNames({
     'bx--select': true,
+    'bx--select--inline': inline,
     [className]: className,
   });
   const labelClasses = classNames('bx--label', {
@@ -40,21 +44,13 @@ const Select = ({
   });
   return (
     <div className="bx--form-item">
-      <label htmlFor={id} className={labelClasses}>{labelText}</label>
+      {!inline ? <label htmlFor={id} className={labelClasses}>{labelText}</label> : null}
       <div className={selectClasses}>
-        <select
-          {...other}
-          id={id}
-          className="bx--select-input"
-          disabled={disabled}
-        >
+        {inline ? <label htmlFor={id} className={labelClasses}>{labelText}</label> : null}
+        <select {...other} id={id} className="bx--select-input" disabled={disabled}>
           {children}
         </select>
-        <Icon
-          name="caret--down"
-          className="bx--select__arrow"
-          description={iconDescription}
-        />
+        <Icon name="caret--down" className="bx--select__arrow" description={iconDescription} />
       </div>
     </div>
   );

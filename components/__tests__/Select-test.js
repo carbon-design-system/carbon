@@ -49,7 +49,8 @@ describe('Select', () => {
       });
 
       it('should have iconDescription match Icon component description prop', () => {
-        const matches = wrapper.props().iconDescription === wrapper.find(Icon).props().description;
+        const matches =
+          wrapper.props().iconDescription === wrapper.find(Icon).props().description;
         expect(matches).toEqual(true);
       });
     });
@@ -99,6 +100,20 @@ describe('Select', () => {
       it('renders children as expected', () => {
         expect(label.props().children).toEqual('Select');
       });
+    });
+  });
+  describe('Renders as expected', () => {
+    const wrapper = mount(
+      <Select id="testing" labelText="Select" className="extra-class" inline>
+        <SelectItem />
+        <SelectItem />
+      </Select>
+    );
+
+    const selectContainer = wrapper.find('.bx--form-item > div');
+
+    it('has the expected classes', () => {
+      expect(selectContainer.hasClass('bx--select--inline')).toEqual(true);
     });
   });
 });
