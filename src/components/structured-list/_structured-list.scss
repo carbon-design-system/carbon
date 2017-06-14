@@ -7,6 +7,12 @@
 @import '../../globals/scss/import-once';
 
 @include exports('structured-list') {
+  .bx--structured-list--selection .bx--structured-list-td,
+  .bx--structured-list--selection .bx--structured-list-th {
+    @include padding--data-structured-list;
+  }
+
+  // Deprecated
   [data-structured-list] .bx--structured-list-td,
   [data-structured-list] .bx--structured-list-th {
     @include padding--data-structured-list;
@@ -44,6 +50,12 @@
     border-bottom: 1px solid $ui-04;
     transition: $transition--base $bx--standard-easing;
 
+    .bx--structured-list--selection &:hover:not(.bx--structured-list-row--header-row) {
+      background-color: rgba($brand-02, .1);
+      cursor: pointer;
+    }
+
+    // Deprecated
     [data-structured-list] &:hover:not(.bx--structured-list-row--header-row) {
       background-color: rgba($brand-02, .1);
       cursor: pointer;
