@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 import Card from '../../components/Card';
 import OverflowMenu from '../../components/OverflowMenu';
@@ -30,8 +31,8 @@ const overflowMenuItemProps = {
 
 class ControlledCard extends Component {
   static propTypes = {
-    status: React.PropTypes.number,
-    simple: React.PropTypes.bool,
+    status: PropTypes.number,
+    simple: PropTypes.bool,
   }
 
   static defaultProps = {
