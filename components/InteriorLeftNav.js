@@ -20,12 +20,8 @@ class InteriorLeftNav extends Component {
   };
 
   state = {
-    activeHref: this.props.activeHref || '#',
+    activeHref: this.props.activeHref || window.location.pathname,
     open: true,
-  };
-
-  componentDidMount = () => {
-    this.setState({ activeHref: window.location.pathname });
   };
 
   componentWillReceiveProps = nextProps => {
