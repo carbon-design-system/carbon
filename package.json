@@ -92,7 +92,6 @@
     "warning": "3.0.0"
   },
   "devDependencies": {
-    "@kadira/react-storybook-addon-info": "3.2.1",
     "@storybook/addon-centered": "3.0.0",
     "@storybook/addon-info": "^3.0.0",
     "@storybook/react": "^3.0.0",
