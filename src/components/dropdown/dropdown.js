@@ -98,7 +98,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
    */
   getCurrentNavigation() {
     const focused = this.element.ownerDocument.activeElement;
-    return focused.matches(this.options.selectorItem) ? focused : null;
+    return focused.nodeType === Node.ELEMENT_NODE && focused.matches(this.options.selectorItem) ? focused : null;
   }
 
   /**
