@@ -56,40 +56,49 @@ class LeftNav extends mixin(createCoponent, initComponent) {
     if (leftNavContainer.getAttribute('aria-expanded') === 'false') {
       leftNavContainer.setAttribute('aria-expanded', 'true');
       toggleOpenNode.setAttribute('aria-expanded', 'true');
-      // commenting out because translation of this label needs to happen, will do in Common
-      // toggleOpenNode.setAttribute('aria-label', 'Close Navigation'); 
       this.focusIndex = 0;
     } else {
       leftNavContainer.setAttribute('aria-expanded', 'false');
       toggleOpenNode.removeAttribute('aria-expanded');
-      // toggleOpenNode.setAttribute('aria-label', 'Navigation');
     }
   }
 
-  onKeyDown (evt) {
+  onKeyDown(evt) {
     const leftNavContainer = document.querySelector('[data-left-nav]');
-    var navItems = [...leftNavContainer.getElementsByClassName('bx--parent-item__link')];
-    var button = [...document.getElementsByClassName('bx--left-nav__trigger')];
+    const navItems = [...leftNavContainer.getElementsByClassName('bx--parent-item__link')];
+    const button = [...document.getElementsByClassName('bx--left-nav__trigger')];
     navItems.unshift(button[0]);
 
     switch (evt.which) {
       case 9: // tab
-        if (evt.shiftKey) { 
-          if ( this.focusIndex > 0 ) { this.focusIndex--; }
-          else { this.closeMenu(); }
-        } else { 
-          if ( this.focusIndex < navItems.length-1 ) { this.focusIndex++; }
-          else { this.closeMenu(); }
+        if (evt.shiftKey) {
+          if (this.focusIndex > 0) {
+            this.focusIndex--;
+          } else {
+            this.closeMenu();
+          }
+        }
+
+        if (!evt.shiftKey) {
+          if (this.focusIndex < navItems.length - 1) {
+            this.focusIndex++;
+          } else {
+            this.closeMenu();
+          }
         }
         break;
 
       case 38: // arrow up
-        if ( this.focusIndex > 0 ) { this.focusIndex--; }
+        if (this.focusIndex > 0) {
+          this.focusIndex--;
+        }
         navItems[this.focusIndex].focus();
         break;
 
       case 40: // arrow down
-        if ( this.focusIndex < navItems.length-1 ) { this.focusIndex++; }
+        if (this.focusIndex < navItems.length - 1) {
+          this.focusIndex++;
+        }
         navItems[this.focusIndex].focus();
         break;
 
@@ -99,8 +108,11 @@ class LeftNav extends mixin(createCoponent, initComponent) {
         break;
 
       case 35: // end
-        this.focusIndex = navItems.length-1;
+        this.focusIndex = navItems.length - 1;
         navItems[this.focusIndex].focus();
+        break;
+
+      default:
         break;
     }
   }
@@ -116,10 +128,9 @@ class LeftNav extends mixin(createCoponent, initComponent) {
     this.element.ownerDocument.addEventListener('keydown', (evt) => {
       if ((evt.which === 27) && this.element.classList.contains(this.options.classActiveLeftNav)) {
         this.closeMenu();
-      }
-      else {
+      } else {
         const toggleOpen = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
-        if(toggleOpen.classList.contains(this.options.classActiveTrigger)) {
+        if (toggleOpen.classList.contains(this.options.classActiveTrigger)) {
           this.onKeyDown = this.onKeyDown.bind(this);
           this.onKeyDown(evt);
         }
