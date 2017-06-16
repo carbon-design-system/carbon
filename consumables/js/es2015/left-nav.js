@@ -127,6 +127,7 @@ class LeftNav extends mixin(createCoponent, initComponent) {
     // on esc press
     this.element.ownerDocument.addEventListener('keydown', (evt) => {
       if ((evt.which === 27) && this.element.classList.contains(this.options.classActiveLeftNav)) {
+        openBtn.focus();
         this.closeMenu();
       } else {
         const toggleOpen = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
