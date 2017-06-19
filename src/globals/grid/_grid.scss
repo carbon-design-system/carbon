@@ -2,7 +2,7 @@ $gutter-size: 10px;
 $i: 0;
 
 @mixin column-size($col-num) {
-  flex-basis: (100% * $col-num / 12);
+  flex: 0 0 (100% * $col-num / 12);
   max-width: (100% * $col-num / 12);
 }
 
@@ -22,30 +22,58 @@ $i: 0;
 
 [class*="bx--col"] {
   @include reset;
-  padding: 0 $gutter-size;
+  width: 100%;
+  min-height: 1px;
+}
+
+.bx--col {
+  flex-basis: 0;
   flex: 1;
+  flex-grow: 1;
+  max-width: 100%;
 }
 
 @while $i <= 12 {
   @media (max-width: 720px) {
-    .bx--col-xs-#{$i} {
+    .bx--col-#{$i} {
       @include column-size($i);
     }
   }
 
   @media (min-width: 720px) {
-    .bx--col-s-#{$i} {
+    .bx--col-sm {
+      flex-basis: 0;
+      flex: 1;
+      flex-grow: 1;
+      max-width: 100%;
+    }
+
+    .bx--col-sm-#{$i} {
       @include column-size($i);
     }
   }
 
   @media (min-width: 970px) {
+    .bx--col-md {
+      flex-basis: 0;
+      flex: 1;
+      flex-grow: 1;
+      max-width: 100%;
+    }
+
     .bx--col-md-#{$i} {
       @include column-size($i);
     }
   }
 
   @media (min-width: 1170px) {
+    .bx--col-lg {
+      flex-basis: 0;
+      flex: 1;
+      flex-grow: 1;
+      max-width: 100%;
+    }
+
     .bx--col-lg-#{$i} {
       @include column-size($i);
     }
