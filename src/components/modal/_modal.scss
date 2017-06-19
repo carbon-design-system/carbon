@@ -89,6 +89,7 @@
   }
 
   .bx--modal-content {
+    overflow-y: auto;
     margin-bottom: rem(48px);
 
     > * {
