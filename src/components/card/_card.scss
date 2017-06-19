@@ -60,6 +60,10 @@
 
   .bx--card-footer__link {
     @include font-size('14');
+
+    &:focus {
+      @include focus-outline('border');
+    }
   }
 
   .bx--card-overview__about {
