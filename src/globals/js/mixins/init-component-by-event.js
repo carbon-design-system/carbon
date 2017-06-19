@@ -24,15 +24,20 @@ export default function (ToMix) {
       if (target.nodeType === Node.ELEMENT_NODE && target.matches(effectiveOptions.selectorInit)) {
         this.create(target, options);
       } else {
-        const handles = effectiveOptions.initEventNames.map(name => on(target, name, (event) => {
-          const element = eventMatches(event, effectiveOptions.selectorInit);
-          if (element && !this.components.has(element)) {
-            const component = this.create(element, options);
-            if (typeof component.createdByEvent === 'function') {
-              component.createdByEvent(event);
+        // To work around non-bubbling `focus` event, use `focusin` event instead of it's available, and "capture mode" otherwise
+        const hasFocusin = 'onfocusin' in (target.nodeType === Node.ELEMENT_NODE ? target.ownerDocument : target).defaultView;
+        const handles = effectiveOptions.initEventNames.map((name) => {
+          const eventName = name === 'focus' && hasFocusin ? 'focusin' : name;
+          return on(target, eventName, (event) => {
+            const element = eventMatches(event, effectiveOptions.selectorInit);
+            if (element && !this.components.has(element)) {
+              const component = this.create(element, options);
+              if (typeof component.createdByEvent === 'function') {
+                component.createdByEvent(event);
+              }
             }
-          }
-        }));
+          }, name === 'focus' && !hasFocusin);
+        });
         return {
           release() {
             for (let handle = handles.pop(); handle; handle = handles.pop()) {
