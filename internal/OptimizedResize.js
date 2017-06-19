@@ -1,4 +1,5 @@
 // mdn resize function
+import window from 'window-or-global';
 
 const OptimizedResize = (function optimizedResize() {
   const callbacks = [];
@@ -17,7 +18,7 @@ const OptimizedResize = (function optimizedResize() {
   function resize() {
     if (!running) {
       running = true;
-      window.requestAnimationFrame(runCallbacks); // eslint-disable-line no-undef
+      window.requestAnimationFrame(runCallbacks);
     }
   }
 
@@ -35,7 +36,7 @@ const OptimizedResize = (function optimizedResize() {
     // public method to add additional callback
     add: (callback) => {
       if (!callbacks.length) {
-        window.addEventListener('resize', resize); // eslint-disable-line no-undef
+        window.addEventListener('resize', resize);
       }
       addCallback(callback);
       return {

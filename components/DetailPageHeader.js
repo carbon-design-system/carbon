@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component, Children } from 'react';
 import classnames from 'classnames';
 import debounce from 'lodash.debounce';
+import window from 'window-or-global';
 
 class DetailPageHeader extends Component {
   static propTypes = {
@@ -30,7 +31,7 @@ class DetailPageHeader extends Component {
 
   componentDidMount() {
     const debouncedScroll = debounce(this.handleScroll, 25);
-    window.addEventListener('scroll', debouncedScroll); // eslint-disable-line no-undef
+    window.addEventListener('scroll', debouncedScroll);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,13 +45,13 @@ class DetailPageHeader extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll); // eslint-disable-line no-undef
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll = () => {
     const { lastPosition } = this.state;
 
-    const currentPosition = window.pageYOffset; // eslint-disable-line no-undef
+    const currentPosition = window.pageYOffset || 0;
 
     if (currentPosition > 86) {
       if (currentPosition > lastPosition) {

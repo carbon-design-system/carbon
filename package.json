@@ -88,6 +88,7 @@
   "dependencies": {
     "classnames": "2.2.5",
     "lodash.debounce": "^4.0.8",
+    "window-or-global": "^1.0.1",
     "react-addons-css-transition-group": "^15.4.2",
     "warning": "3.0.0"
   },

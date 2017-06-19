@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import window from 'window-or-global';
 
 class FloatingMenu extends React.Component {
   static propTypes = {
@@ -56,7 +57,7 @@ class FloatingMenu extends React.Component {
   positionFloatingMenu = () => {
     const menuOffset = this.props.menuOffset;
 
-    const scroll = window.scrollY; // eslint-disable-line no-undef
+    const scroll = window.scrollY || 0;
 
     const {
       left: refLeft,
