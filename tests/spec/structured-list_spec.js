@@ -125,6 +125,18 @@ describe('StructuredList', function () {
       expect(spy).to.have.been.called;
     });
 
+    it('should toggle classActive on a selectorRow', function () {
+      spy = sinon.spy(instance, '_handleClick');
+      const event = Object.assign(
+        new CustomEvent('click', {
+          bubbles: true,
+        }),
+      );
+      const rows = instance.element.querySelectorAll(instance.options.selectorRow);
+      rows[1].dispatchEvent(event);
+      expect(rows[1].classList.contains(instance.options.classActive)).to.equal(true);
+    });
+
     afterEach(function () {
       spy.restore();
       instance.release();
