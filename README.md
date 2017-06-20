@@ -1,5 +1,7 @@
 # Carbon Components React
 
+[![Build Status](https://travis-ci.org/carbon-design-system/carbon-components-react.svg?branch=master)](https://travis-ci.org/carbon-design-system/carbon-components-react)
+
 **React component library for building websites and UIs with Carbon**
 
 This repository provides a collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using [React](https://facebook.github.io/react/).
