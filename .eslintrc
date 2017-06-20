@@ -2,7 +2,7 @@
   "root": true,
   "parserOptions" : {
     "ecmaVersion": 6,
-    "sourceType": "script",
+    "sourceType": "script"
   },
   "env": {
     "node": true,
