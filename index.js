@@ -17,7 +17,10 @@ export DangerButton from './components/DangerButton';
 export DetailPageHeader from './components/DetailPageHeader';
 export Dropdown from './components/Dropdown';
 export DropdownItem from './components/DropdownItem';
-export { FileUploader, FileUploaderButton } from './components/FileUploader';
+export FileUploader, {
+  Filename,
+  FileUploaderButton,
+} from './components/FileUploader';
 export Footer from './components/Footer';
 export Form from './components/Form';
 export FormGroup from './components/FormGroup';
@@ -48,6 +51,7 @@ export Search from './components/Search';
 export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
+export SelectItemGroup from './components/SelectItemGroup';
 export Switch from './components/Switch';
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
@@ -59,7 +63,7 @@ export TableHead from './components/TableHead';
 export TableHeader from './components/TableHeader';
 export TableRow from './components/TableRow';
 export TableRowExpanded from './components/TableRowExpanded';
-export Tag from './components/Tag';
+export Tag, { types } from './components/Tag';
 export TextArea from './components/TextArea';
 export TextInput from './components/TextInput';
 export Toggle from './components/Toggle';
