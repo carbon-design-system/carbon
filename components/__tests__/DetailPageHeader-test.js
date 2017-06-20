@@ -13,7 +13,7 @@ describe('DetailPageHeader', () => {
   describe('component is rendered correctly without tabs', () => {
     const wrapper = mount(
       <DetailPageHeader title="test" statusText="Stopped" statusColor="#BADA55">
-        <Icon name="watson" />
+        <Icon description="watson" name="watson" />
         <Breadcrumb>
           <BreadcrumbItem href="www.google.com">Breadcrumb 1</BreadcrumbItem>
           <BreadcrumbItem href="www.google.com">Breadcrumb 2</BreadcrumbItem>
@@ -23,8 +23,8 @@ describe('DetailPageHeader', () => {
           <OverflowMenuItem itemText="Stop App" />
           <OverflowMenuItem itemText="Restart App" />
           <OverflowMenuItem itemText="Rename App" />
-          <OverflowMenuItem iteomText="Edit Routes and Access" />
-          <OverflowMenuItem itemText="Delete App" isDelete isLastItem />
+          <OverflowMenuItem itemText="Edit Routes and Access" />
+          <OverflowMenuItem itemText="Delete App" isDelete />
         </OverflowMenu>
       </DetailPageHeader>
     );
@@ -42,7 +42,7 @@ describe('DetailPageHeader', () => {
     });
 
     it('should render an icon, even without one passed in', () => {
-      const noIcon = shallow(<DetailPageHeader />);
+      const noIcon = shallow(<DetailPageHeader title="test" />);
       const container = noIcon.find('.bx--detail-page-header-icon-container');
       const icon = container.find('svg');
       const hasIcon = icon.length === 1;
@@ -90,7 +90,7 @@ describe('DetailPageHeader', () => {
   describe('component is rendered correctly with tabs', () => {
     const wrapper = shallow(
       <DetailPageHeader hasTabs title="test">
-        <Icon name="watson" />
+        <Icon description="watson" name="watson" />
         <Breadcrumb>
           <BreadcrumbItem href="www.google.com">Breadcrumb 1</BreadcrumbItem>
           <BreadcrumbItem href="www.google.com">Breadcrumb 2</BreadcrumbItem>
@@ -101,7 +101,7 @@ describe('DetailPageHeader', () => {
           <OverflowMenuItem itemText="Restart App" />
           <OverflowMenuItem itemText="Rename App" />
           <OverflowMenuItem itemText="Edit Routes and Access" />
-          <OverflowMenuItem itemText="Delete App" isDelete isLastItem />
+          <OverflowMenuItem itemText="Delete App" isDelete />
         </OverflowMenu>
         <Tabs>
           <Tab label="Overview" />
