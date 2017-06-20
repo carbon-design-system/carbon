@@ -97,6 +97,29 @@ app.get('/components/:component', (req, res) => {
   }
 });
 
+app.get('/grid', (req, res) => {
+  const glob = 'src/globals/grid/grid.html';
+
+  if (path.relative('src/globals', glob).substr(0, 2) === '..') {
+    res.status(404).end();
+  } else {
+    Promise.all([getContent(glob), allLinks])
+      .then(results => {
+        if (typeof results[0] === 'undefined') {
+          res.status(404).end();
+        } else {
+          res.render('demo-grid', {
+            html: results[0],
+          });
+        }
+      })
+      .catch(error => {
+        console.error(error.stack); // eslint-disable-line no-console
+        res.status(500).end();
+      });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`); // eslint-disable-line no-console
 });

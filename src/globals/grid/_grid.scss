@@ -1,0 +1,66 @@
+$gutter-size: 10px;
+$i: 0;
+
+@mixin column-size($col-num) {
+  flex-basis: (100% * $col-num / 12);
+  max-width: (100% * $col-num / 12);
+}
+
+.bx--grid {
+  margin: 0 3%;
+
+  @include breakpoint('bp--xs--major') {
+    margin: 0 5%;
+  }
+}
+
+.bx--row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 $gutter-size * -1;
+}
+
+[class*="bx--col"] {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding: 0 $gutter-size;
+}
+
+.bx--col-xs,
+.bx--col-sm,
+.bx--col-md,
+.bx--col-lg {
+  flex-basis: 0;
+  flex: 1;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+@while $i <= 12 {
+
+  .bx--col-xs-#{$i} {
+    @include column-size($i);
+  }
+
+  @media (min-width: 720px) {
+    .bx--col-sm-#{$i} {
+      @include column-size($i);
+    }
+  }
+
+  @media (min-width: 970px) {
+    .bx--col-md-#{$i} {
+      @include column-size($i);
+    }
+  }
+
+  @media (min-width: 1170px) {
+    .bx--col-lg-#{$i} {
+      @include column-size($i);
+    }
+  }
+
+  $i: $i + 1;
+}
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Carbon Components</title>
+  <link rel="stylesheet" href="/demo.css">
+  <style>
+    body {
+      padding-top: 72px;
+    }
+  </style>
+</head>
+<body class="bx--body">
+
+  {html|s}
+
+  <!-- Scripts -->
+  <!-- <script src="../../dist/bluemix-components.min.js"></script> -->
+  <script src="/demo.js"></script>
+  <!-- Disable Auto Init with this flag -->
+  <!-- true = JavaScript will not initialize automatically -->
+  <!-- false = JavaScript will initialize automatically -->
+  <script>
+    CarbonComponents.settings.disableAutoInit = false;
+  </script>
+</body>
+</html>

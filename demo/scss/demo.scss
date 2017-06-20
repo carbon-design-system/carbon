@@ -79,3 +79,13 @@
   left: 0;
   z-index: 8000;
 }
+
+.bx--row {
+  min-height: 50px;
+}
+
+[class*="bx--col"] {
+  padding: 1rem;
+  background-color: $color__gray-1;
+  border: 10px solid $ui-02;
+}
