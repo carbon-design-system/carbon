@@ -15,7 +15,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('keydown', evt => {
+    this.element.addEventListener('keydown', (evt) => {
       if (evt.which === 38 || evt.which === 40) {
         this._handleKeydownArrow(evt);
       }
@@ -23,7 +23,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
         this._handleKeydownChecked(evt);
       }
     });
-    this.element.addEventListener('click', evt => {
+    this.element.addEventListener('click', (evt) => {
       this._handleClick(evt);
     });
   }
@@ -53,7 +53,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
   _handleClick(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row =>
-      row.classList.remove(this.options.classActive)
+      row.classList.remove(this.options.classActive),
     );
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
@@ -64,12 +64,12 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
   _handleKeydownChecked(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
     [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row =>
-      row.classList.remove(this.options.classActive)
+      row.classList.remove(this.options.classActive),
     );
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
       const input = this.element.querySelector(
-        `#${selectedRow.getAttribute('for')}.bx--structured-list-input`
+        `#${selectedRow.getAttribute('for')}.bx--structured-list-input`,
       );
       input.checked = true;
     }
