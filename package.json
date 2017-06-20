@@ -88,9 +88,9 @@
   "dependencies": {
     "classnames": "2.2.5",
     "lodash.debounce": "^4.0.8",
-    "window-or-global": "^1.0.1",
     "react-addons-css-transition-group": "^15.4.2",
-    "warning": "3.0.0"
+    "warning": "3.0.0",
+    "window-or-global": "^1.0.1"
   },
   "devDependencies": {
     "@storybook/addon-centered": "3.0.0",
@@ -99,6 +99,7 @@
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^18.0.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
@@ -125,10 +126,10 @@
     "react-dom": "^15.5.4",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.5",
+    "semantic-release": "^6.3.6",
     "shelljs": "^0.7.5",
     "storybook-addon-a11y": "^3.0.0",
-    "validate-commit-msg": "^2.10.1",
-    "semantic-release": "^6.3.6"
+    "validate-commit-msg": "^2.10.1"
   },
   "jest": {
     "coverageDirectory": "./coverage",
