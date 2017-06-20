@@ -100,6 +100,38 @@ describe('StructuredList', function () {
     });
   });
 
+  describe('_handleClick(evt)', function () {
+    let instance;
+    let element;
+    let wrapper;
+    let spy;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-structured-list]');
+      instance = new StructuredList(element);
+    });
+
+    it('should be called on "click" keydown event', function () {
+      spy = sinon.spy(instance, '_handleClick');
+      const event = Object.assign(
+        new CustomEvent('click', {
+          bubbles: true,
+        }),
+      );
+      instance.element.dispatchEvent(event);
+      expect(spy).to.have.been.called;
+    });
+
+    afterEach(function () {
+      spy.restore();
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
   describe('_direction(evt)', function () {
     let instance;
     let element;
