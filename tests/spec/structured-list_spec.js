@@ -33,6 +33,7 @@ describe('StructuredList', function () {
         selectorInit: '[data-structured-list]',
         selectorRow:
           '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
+        classActive: 'bx--structured-list-row--selected',
       });
     });
 
