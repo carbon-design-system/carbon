@@ -62,7 +62,7 @@ class Tooltip extends Component {
       className
     );
 
-    const menuOffset = { left: 4, top: 10 };
+    const menuOffset = { left: 5, top: 10 };
 
     return (
       <div>
