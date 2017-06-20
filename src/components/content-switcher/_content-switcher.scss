@@ -52,9 +52,13 @@
     border-right: none;
   }
 
+  .bx--content-switcher-btn:not(:first-of-type) {
+    border-left: $content-switcher-option-border;
+  }
+
   .bx--content-switcher-btn:first-of-type {
-    border-bottom-left-radius: 8px;
-    border-top-left-radius: 8px;
+    border-bottom-left-radius: $content-switcher-border-radius;
+    border-top-left-radius: $content-switcher-border-radius;
 
     &:hover {
       border-color: $brand-02;
@@ -67,8 +71,8 @@
   }
 
   .bx--content-switcher-btn:last-of-type {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: $content-switcher-border-radius;
+    border-bottom-right-radius: $content-switcher-border-radius;
 
     &:hover {
       border-color: $brand-02;

@@ -34,7 +34,7 @@
     @include reset;
     background-color: $inverse-01;
     border-radius: 50%;
-    border: 2px solid $ui-05;
+    border: $radio-border-width solid $ui-05;
     height: rem(18px);
     width: rem(18px);
     margin-right: rem(10px);

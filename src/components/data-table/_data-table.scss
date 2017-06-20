@@ -97,7 +97,7 @@
     font-size: rem(12px);
     letter-spacing: 1px;
     text-align: left;
-    text-transform: uppercase;
+    text-transform: $data-table-heading-transform;
     height: rem(40px);
   }
 

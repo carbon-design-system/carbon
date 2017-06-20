@@ -44,5 +44,28 @@ $button-padding: 0 1rem !default;
 $button-padding-sm: 0 .5rem !default;
 $button-border-width: 2px !default;
 
+// Accordion (Reverse)
+$accordion-flex-direction: row !default;
+$accordion-justify-content: flex-start !default;
+$accordion-arrow-margin: 0 0 0 .25rem !default;
+$accordion-title-margin: 0 0 0 1rem !default;
+$accordion-content-padding: 0 1rem 0 1.75rem !default;
+
+// Checkbox
+$checkbox-border-width: 2px !default;
+
+// Content Switcher
+$content-switcher-border-radius: 8px !default;
+$content-switcher-option-border: 1px solid $brand-01 !default;
+
+// Data Table
+$data-table-heading-transform: uppercase !default;
+
+// Modal
+$modal-border-top: $brand-01 4px solid !default;
+
+// Radio Button
+$radio-border-width: 2px !default;
+
 // Structured Theme Variables
 $structured-list-padding: 2rem !default;
