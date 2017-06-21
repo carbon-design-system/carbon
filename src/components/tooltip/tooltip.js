@@ -5,11 +5,7 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import FloatingMenu from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 
-class Tooltip extends mixin(
-  createComponent,
-  initComponentByEvent,
-  eventedShowHideState,
-) {
+class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHideState) {
   /**
    * Tooltip.
    * @extends CreateComponent
@@ -18,9 +14,7 @@ class Tooltip extends mixin(
   constructor(element, options) {
     super(element, options);
     ['mouseover', 'mouseout', 'focus', 'blur'].forEach((name) => {
-      this.element.addEventListener(name, (event) => {
-        this._handleHover(event);
-      });
+      this.element.addEventListener(name, (event) => { this._handleHover(event); });
     });
   }
 
@@ -40,9 +34,7 @@ class Tooltip extends mixin(
    // */
   changeState(state, detail, callback) {
     if (!this.tooltip) {
-      const tooltip = this.element.ownerDocument.querySelector(
-        this.element.getAttribute(this.options.attribTooltipTarget),
-      );
+      const tooltip = this.element.ownerDocument.querySelector(this.element.getAttribute(this.options.attribTooltipTarget));
       if (!tooltip) {
         throw new Error('Cannot find the target tooltip.');
       }
@@ -58,11 +50,7 @@ class Tooltip extends mixin(
 
     // Delegates the action of changing state to the tooltip.
     // (And thus the before/after shown/hidden events are fired from the tooltip)
-    this.tooltip.changeState(
-      state,
-      Object.assign(detail, { delegatorNode: this.element }),
-      callback,
-    );
+    this.tooltip.changeState(state, Object.assign(detail, { delegatorNode: this.element }), callback);
   }
 
   /**
