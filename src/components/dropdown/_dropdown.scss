@@ -54,7 +54,11 @@
     padding-top: rem(13px);
     padding-bottom: rem(13px);
     padding-left: 1rem;
+    padding-right: 2.25rem;
     font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     border: $input-border;
   }
 
