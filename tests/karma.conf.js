@@ -122,6 +122,8 @@ const travisLaunchers = {
 };
 
 module.exports = function (config) {
+  const objectToStringPolyfillPath = require.resolve('core-js/library/modules/es6.object.to-string.js');
+
   if (cloptions.sauce) {
     if (!process.env.TRAVIS) {
       throw new Error([
@@ -168,6 +170,15 @@ module.exports = function (config) {
 
     rollupPreprocessor: {
       plugins: [
+        {
+          // eslint-disable-next-line consistent-return
+          load(id) {
+            // core-js/library/modules/es6.object.to-string.js is a zero-length file
+            if (id === objectToStringPolyfillPath) {
+              return 'export default undefined';
+            }
+          },
+        },
         resolve({
           jsnext: true,
           main: true,
