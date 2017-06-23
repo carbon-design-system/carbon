@@ -83,12 +83,6 @@ class OverflowMenu extends Component {
     this.setState({ open: false });
   };
 
-  handleBlur = evt => {
-    if (!this.menuEl.contains(evt.relatedTarget)) {
-      this.setState({ open: false });
-    }
-  };
-
   render() {
     const {
       id,
@@ -130,7 +124,6 @@ class OverflowMenu extends Component {
           className={overflowMenuClasses}
           onClick={this.handleClick}
           onKeyDown={this.handleKeyPress}
-          onBlur={this.handleBlur}
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}

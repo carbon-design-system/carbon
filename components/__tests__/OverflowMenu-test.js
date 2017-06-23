@@ -7,8 +7,8 @@ describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
     const rootWrapper = shallow(
       <OverflowMenu className="extra-class">
-        <div className="test-child"></div>
-        <div className="test-child"></div>
+        <div className="test-child" />
+        <div className="test-child" />
       </OverflowMenu>
     );
     const menu = rootWrapper.childAt(0);
@@ -51,7 +51,9 @@ describe('OverflowMenu', () => {
 
     it('should set ariaLabel if one is passed via props', () => {
       rootWrapper.setProps({ ariaLabel: 'test label' });
-      expect(rootWrapper.childAt(0).props()['aria-label']).toEqual('test label');
+      expect(rootWrapper.childAt(0).props()['aria-label']).toEqual(
+        'test label'
+      );
     });
 
     it('should set id if one is passed via props', () => {
@@ -60,7 +62,9 @@ describe('OverflowMenu', () => {
     });
 
     it('should apply a tabindex to the menu', () => {
-      const defaultMenu = shallow(<OverflowMenu><div>Child</div></OverflowMenu>).childAt(0);
+      const defaultMenu = shallow(
+        <OverflowMenu><div>Child</div></OverflowMenu>
+      ).childAt(0);
       expect(defaultMenu.props().tabIndex).toBe(0);
     });
   });
@@ -98,27 +102,28 @@ describe('OverflowMenu', () => {
 
       rootWrapper.setState({ open: true });
 
-
       menu.simulate('keydown', { which: spaceKey });
       expect(rootWrapper.state().open).toEqual(false);
       menu.simulate('keydown', { which: enterKey });
       expect(rootWrapper.state().open).toEqual(true);
     });
 
-    it('should be hidden when it loses focus', () => {
-      const rootWrapper = mount(
-        <OverflowMenu className="extra-class">
-          <div className="test-child"></div>
-          <div className="test-child"></div>
-        </OverflowMenu>
-      );
-      const menu = rootWrapper.childAt(0);
+    // Removed until a better solution appears
+    //
+    // it('should be hidden when it loses focus', () => {
+    //   const rootWrapper = mount(
+    //     <OverflowMenu className="extra-class">
+    //       <div className="test-child"></div>
+    //       <div className="test-child"></div>
+    //     </OverflowMenu>
+    //   );
+    //   const menu = rootWrapper.childAt(0);
 
-      rootWrapper.setState({ open: true });
+    //   rootWrapper.setState({ open: true });
 
-      menu.simulate('blur');
-      expect(rootWrapper.state().open).toEqual(false);
-    });
+    //   menu.simulate('blur');
+    //   expect(rootWrapper.state().open).toEqual(false);
+    // });
 
     it('should be in a closed state after handleOutsideClick() is invoked', () => {
       const rootWrapper = shallow(<OverflowMenu />);
