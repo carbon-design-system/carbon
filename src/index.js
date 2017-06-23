@@ -37,6 +37,8 @@ import FloatingMenu from './components/floating-menu/floating-menu';
 import StructuredList from './components/structured-list/structured-list';
 import Slider from './components/slider/slider';
 
+export { default as watch } from './globals/js/watch';
+
 const settings = {};
 
 /**
@@ -204,45 +206,52 @@ export {
 };
 
 /**
+ * List of component classes to be auto-instantiated.
+ * @private
+ */
+export const componentClasses = [
+  FabButton,
+  FileUploader,
+  ContentSwitcher,
+  Tab,
+  OverflowMenu,
+  Modal,
+  Loading,
+  Dropdown,
+  Card,
+  NumberInput,
+  DataTable,
+  DetailPageHeader,
+  LeftNav,
+  InteriorLeftNav,
+  ProfileSwitcher,
+  Pagination,
+  Search,
+  Accordion,
+  CopyButton,
+  Notification,
+  Toolbar,
+  Tooltip,
+  ProgressIndicator,
+  StructuredList,
+  DatePicker,
+  Slider,
+  // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
+];
+
+/**
  * Instantiates components automatically
  * by searching for elements with `data-component-name` (e.g. `data-loading`) attribute
  * or upon DOM events (e.g. clicking) on such elements.
  * See each components' static `.init()` methods for details.
- *
- *
  * @private
  */
-
 const init = () => {
   if (!settings.disableAutoInit) {
     initCheckbox();
-    FabButton.init();
-    FileUploader.init();
-    ContentSwitcher.init();
-    Tab.init();
-    OverflowMenu.init();
-    Modal.init();
-    Loading.init();
-    Dropdown.init();
-    Card.init();
-    NumberInput.init();
-    DataTable.init();
-    DetailPageHeader.init();
-    LeftNav.init();
-    InteriorLeftNav.init();
-    ProfileSwitcher.init();
-    Pagination.init();
-    Search.init();
-    Accordion.init();
-    CopyButton.init();
-    Notification.init();
-    Toolbar.init();
-    Tooltip.init();
-    ProgressIndicator.init();
-    StructuredList.init();
-    DatePicker.init();
-    Slider.init();
-    // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
+    componentClasses.forEach((Clz) => {
+      Clz.init();
+    });
   }
 };
 
