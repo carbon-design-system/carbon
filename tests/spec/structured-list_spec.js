@@ -33,6 +33,7 @@ describe('StructuredList', function () {
         selectorInit: '[data-structured-list]',
         selectorRow:
           '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
+        classActive: 'bx--structured-list-row--selected',
       });
     });
 
@@ -90,6 +91,50 @@ describe('StructuredList', function () {
       );
       instance.element.dispatchEvent(event);
       expect(spy).to.not.have.been.called;
+    });
+
+    afterEach(function () {
+      spy.restore();
+      instance.release();
+      document.body.removeChild(wrapper);
+    });
+  });
+
+  describe('_handleClick(evt)', function () {
+    let instance;
+    let element;
+    let wrapper;
+    let spy;
+
+    beforeEach(function () {
+      wrapper = document.createElement('div');
+      wrapper.innerHTML = HTML;
+      document.body.appendChild(wrapper);
+      element = document.querySelector('[data-structured-list]');
+      instance = new StructuredList(element);
+    });
+
+    it('should be called on "click" keydown event', function () {
+      spy = sinon.spy(instance, '_handleClick');
+      const event = Object.assign(
+        new CustomEvent('click', {
+          bubbles: true,
+        }),
+      );
+      instance.element.dispatchEvent(event);
+      expect(spy).to.have.been.called;
+    });
+
+    it('should toggle classActive on a selectorRow', function () {
+      spy = sinon.spy(instance, '_handleClick');
+      const event = Object.assign(
+        new CustomEvent('click', {
+          bubbles: true,
+        }),
+      );
+      const rows = instance.element.querySelectorAll(instance.options.selectorRow);
+      rows[1].dispatchEvent(event);
+      expect(rows[1].classList.contains(instance.options.classActive)).to.equal(true);
     });
 
     afterEach(function () {

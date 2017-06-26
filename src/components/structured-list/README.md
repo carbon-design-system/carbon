@@ -24,12 +24,13 @@ All mixins listed below take an optional `$padding` parameter. Default value for
 
 Use these modifiers with `.bx--structured-list` class.
 
-| Selector                             | Description                                                                                  |
-|--------------------------------------|----------------------------------------------------------------------------------------------|
-| .bx--structured-list--border         | Applies border around structured-list and white background-color                             |
-| .bx--structured-list--condensed      | Applies condensed styles for all body rows                                                   |
-| .bx--structured-list-content--nowrap | Applies `white-space: nowrap;` on content. Prevents titles from wrapping in small viewports. |
-| .bx--structured-list--selection      | Applies styles used for selection variant of structured-list.                                |
+| Selector                             | Description                                                                                                  |
+|--------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| .bx--structured-list--border         | Applies border around structured-list and white background-color                                             |
+| .bx--structured-list--condensed      | Applies condensed styles for all body rows                                                                   |
+| .bx--structured-list-content--nowrap | Applies `white-space: nowrap;` on content. Prevents titles from wrapping in small viewports.                 |
+| .bx--structured-list--selection      | Applies styles used for selection variant of structured-list.                                                |
+| .bx--structured-list-row--selected   | Applies modifier class to label row. This changes the background color to indicate that the row is selected. |
 
 
 Use these modifiers with `.bx--structured-list-td` class. 
@@ -46,6 +47,7 @@ Use these modifiers with `.bx--structured-list-td` class.
 |-----------------------|-------------------------------------------------------|--------------------------------------------------|
 | `selectorInit`        | `[data-structured-list]`                              | The selector to find the StructuredList element. |
 | `selectorStepElement` | `.bx--structured-list-tbody .bx--structured-list-row` | The selector to find the step element.           |
+| `classActive`         | `'bx--structured-list-row--selected'`                 | The class to indicate a selected row             |
 
 ### FAQ
 

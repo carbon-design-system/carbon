@@ -19,7 +19,7 @@
   }
 
   .bx--structured-list-input {
-    @include hidden;
+    display: none;
   }
 
   .bx--structured-list {
@@ -61,7 +61,7 @@
       cursor: pointer;
     }
 
-    .bx--structured-list-input:checked + & {
+    &.bx--structured-list-row--selected {
       background-color: rgba($brand-02, .1);
     }
 
@@ -107,11 +107,6 @@
     display: table-cell;
   }
 
-  // Deprecated class
-  .bx--structured-list-content {
-    @include font-size('14');
-  }
-
   .bx--structured-list-content--nowrap {
     white-space: nowrap;
   }
@@ -126,8 +121,14 @@
       fill: rgba($brand-02, .1);
     }
 
-    .bx--structured-list-input:checked + .bx--structured-list-row & {
+    .bx--structured-list-input:checked + .bx--structured-list-row &,
+    .bx--structured-list-input:checked + .bx--structured-list-td & {
       fill: $brand-02;
     }
+  }
+
+  // Deprecated class
+  .bx--structured-list-content {
+    @include font-size('14');
   }
 }
