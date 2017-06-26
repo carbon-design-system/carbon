@@ -48,6 +48,9 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState) {
   _getContainer() {
     const element = this.element;
     const body = element.ownerDocument.body;
+    if (typeof element.closest === 'function') {
+      return element.closest(this.options.selectorContainer) || body;
+    }
     for (let traverse = element; traverse && traverse !== body; traverse = traverse.parentNode) {
       if (traverse.matches(this.options.selectorContainer)) {
         return traverse;
