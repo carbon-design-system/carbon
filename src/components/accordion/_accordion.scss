@@ -10,6 +10,7 @@
     @include reset;
     @include helvetica;
     list-style: none;
+    width: 100%;
   }
 
   .bx--accordion__item {
@@ -66,7 +67,7 @@
 }
 
 .bx--accordion__item--active {
-  overflow: initial;
+  overflow: visible;
 
   .bx--accordion__content {
     padding-top: 1rem;
