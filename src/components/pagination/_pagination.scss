@@ -38,7 +38,7 @@ $css--helpers: true;
     display: none;
 
     @include breakpoint('530px') {
-      display: initial;
+      display: block;
     }
   }
 
