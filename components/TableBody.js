@@ -7,35 +7,38 @@ const propTypes = {
   className: PropTypes.string,
 };
 
+/**
+ * Adds striping to TableRows if the `even` prop wasn’t explicitly set.
+ * @param  {array} rows  React elements that are children of the TableBody
+ * @return {array}       the updated child elements
+ */
+const handleRowStriping = rows => {
+  let count = 0;
+
+  return rows.map(child => {
+    // Only make changes if it's a TableRow
+    if (child.type.name === 'TableRow') {
+      // manually increase the TableRow count
+      count++;
+
+      // Don’t override user-set `even` prop
+      const even = 'even' in child.props ? child.props.even : count % 2 === 1;
+
+      // Return a clone of the element with the `even` prop set.
+      return React.cloneElement(child, { even });
+    }
+
+    return child;
+  });
+};
+
 const TableBody = props => {
   const { children, className, ...other } = props;
 
   const tableBodyClasses = classNames(className, 'bx--table-body');
 
   const childArray = React.Children.toArray(children);
-  const hasExpandedRows = childArray.some(child => child.type.name === 'TableRowExpanded');
-
-  const childrenWithProps = hasExpandedRows
-    ? childArray.map((child, index) => {
-        if (Math.floor(index / 2) % 2 === 0) {
-          // eslint-disable-line
-          return React.cloneElement(child, {
-            even: true,
-          });
-        }
-
-        return child; // eslint-disable-line
-      }) // eslint-disable-line
-    : childArray.map((child, index) => {
-        if (index % 2 === 0) {
-          // eslint-disable-line
-          return React.cloneElement(child, {
-            even: true,
-          });
-        }
-
-        return child; // eslint-disable-line
-      }); // eslint-disable-line
+  const childrenWithProps = handleRowStriping(childArray);
 
   return (
     <tbody {...other} className={tableBodyClasses}>
