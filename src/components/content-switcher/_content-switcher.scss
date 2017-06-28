@@ -28,16 +28,15 @@
     &:focus {
       outline: 1px solid transparent;
       box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+      background-color: $brand-02;
       z-index: 2;
+      border-color: $brand-02;
+      text-decoration: underline;
+      color: $inverse-01;
     }
 
     &:hover {
       cursor: pointer;
-    }
-
-    &:focus {
-      border-color: $brand-02;
-      text-decoration: underline;
     }
 
     &:hover,
