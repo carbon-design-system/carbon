@@ -103,11 +103,19 @@
 
   // zebra stripes
   .bx--table-body {
-    > .bx--parent-row, > .bx--parent-row + .bx--expandable-row {
+    > .bx--parent-row, > .bx--parent-row {
       background-color: $ui-01;
+
+      & + .bx--expandable-row {
+        background-color: $ui-01;
+      }
 
       &--even {
         background-color: $ui-03;
+
+        & + .bx--expandable-row {
+          background-color: $ui-03;
+        }
       }
     }
   }
