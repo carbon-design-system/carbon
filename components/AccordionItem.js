@@ -12,21 +12,33 @@ class AccordionItem extends Component {
     onClick: PropTypes.func,
     onHeadingClick: PropTypes.func,
   };
+
   static defaultProps = {
+    open: false,
     onClick: () => {},
     onHeadingClick: () => {},
   };
+
   state = {
     open: this.props.open,
   };
+
+  componentWillReceiveProps({ open }) {
+    if (open !== this.props.open) {
+      this.setState({ open });
+    }
+  }
+
   handleClick = evt => {
     this.props.onClick(evt);
   };
+
   handleHeadingClick = evt => {
     const open = !this.state.open;
     this.setState({ open });
     this.props.onHeadingClick({ isOpen: open, event: evt });
   };
+
   handleKeyPress = evt => {
     const isKeyPressTarget = evt.target === evt.currentTarget;
     const isValidKeyPress = [13, 32].indexOf(evt.which) !== -1;
@@ -35,6 +47,7 @@ class AccordionItem extends Component {
       this.handleHeadingClick(evt);
     }
   };
+
   render() {
     const {
       className,
@@ -60,10 +73,7 @@ class AccordionItem extends Component {
         {...other}
         tabIndex="0"
       >
-        <div
-          className="bx--accordion__heading"
-          onClick={this.handleHeadingClick}
-        >
+        <div className="bx--accordion__heading" onClick={this.handleHeadingClick}>
           <Icon
             className="bx--accordion__arrow"
             name="chevron--right"
