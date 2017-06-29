@@ -19,6 +19,10 @@ $css--helpers: true;
     display: flex;
     align-items: center;
     border: 1px solid $ui-04;
+
+    .bx--form-item {
+      flex: auto;
+    }
   }
 
   .bx--pagination__left {
