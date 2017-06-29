@@ -1,22 +1,37 @@
-## Overview
+<!-- Feel free to remove sections that aren't relevant.
 
-Convert this issue to an **Epic** if there are multiple `Scenarios`.
-Each `Scenario` should be it's own issue that belongs to this **Epic**.
+## Title line template: [Title]: Brief description
 
-{{ long description }}
+-->
 
-```gherkin
-Feature: {{feature}}
-  As a {{persona}}
-  I want {{need}}
-  So that {{rationale}}
+## Detailed description
 
-  Scenario: {{scenario}}
-    Given {{thing}}
-    When {{action}}
-    Then {{result}}
-```
+Describe in detail the issue you're having. Is this a feature request (new component, new icon), a bug, or a general issue?
 
-## Other
 
-{{ Other notes here about this User Story that does not fit within `Feature` or `Scenario` }}
+> Is this issue related to a specific component? 
+
+
+> What did you expect to happen? What happened instead? What would you like to see changed?
+
+
+
+> What browser are you working in? 
+
+
+
+> What version of the Carbon Design System are you using? 
+
+
+## Steps to reproduce the issue
+
+1. Step one
+2. Step two
+3. Step three
+4. etc.
+
+
+## Additional information
+
+* Screenshots or code
+* Notes
