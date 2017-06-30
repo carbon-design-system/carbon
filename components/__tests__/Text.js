@@ -4,7 +4,9 @@ import { mount, shallow } from 'enzyme';
 
 describe('TextInput', () => {
   describe('renders as expected', () => {
-    const wrapper = mount(<TextInput id="test" className="extra-class" />);
+    const wrapper = mount(
+      <TextInput id="test" className="extra-class" />
+    );
 
     const label = wrapper.find('label');
     const textInput = wrapper.find('input');
@@ -75,7 +77,12 @@ describe('TextInput', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <TextInput id="test" onClick={onClick} onChange={onChange} disabled />
+        <TextInput
+          id="test"
+          onClick={onClick}
+          onChange={onChange}
+          disabled
+        />
       );
 
       const input = wrapper.find('input');
@@ -96,7 +103,11 @@ describe('TextInput', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <TextInput id="test" onClick={onClick} onChange={onChange} />
+        <TextInput
+          id="test"
+          onClick={onClick}
+          onChange={onChange}
+        />
       );
 
       const input = wrapper.find('input');

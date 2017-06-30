@@ -66,6 +66,8 @@ export TableRowExpanded from './components/TableRowExpanded';
 export Tag, { types } from './components/Tag';
 export TextArea from './components/TextArea';
 export TextInput from './components/TextInput';
+export TimePicker from './components/TimePicker';
+export TimePickerSelect from './components/TimePickerSelect';
 export Toggle from './components/Toggle';
 export Tooltip from './components/Tooltip';
 export TooltipSimple from './components/TooltipSimple';

@@ -1,11 +1,12 @@
 import React from 'react';
-import TextInput from '../TextInput';
+import TimePicker from '../TimePicker';
 import { mount, shallow } from 'enzyme';
 
-describe('TextInput', () => {
+describe('TimePicker', () => {
   describe('renders as expected', () => {
-    const wrapper = mount(<TextInput id="test" className="extra-class" />);
+    const wrapper = mount(<TimePicker id="test" className="extra-class" />);
 
+    const timePicker = wrapper.childAt(0);
     const label = wrapper.find('label');
     const textInput = wrapper.find('input');
 
@@ -15,17 +16,15 @@ describe('TextInput', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textInput.hasClass('bx--text-input')).toEqual(true);
+        expect(timePicker.hasClass('bx--time-picker')).toEqual(true);
       });
 
       it('should add extra classes that are passed via className', () => {
-        expect(textInput.hasClass('extra-class')).toEqual(true);
+        expect(timePicker.hasClass('extra-class')).toEqual(true);
       });
 
       it('should set type as expected', () => {
         expect(textInput.props().type).toEqual('text');
-        wrapper.setProps({ type: 'email' });
-        expect(textInput.props().type).toEqual('email');
       });
 
       it('should set value as expected', () => {
@@ -41,9 +40,8 @@ describe('TextInput', () => {
       });
 
       it('should set placeholder as expected', () => {
-        expect(textInput.props().placeholder).not.toBeDefined();
-        wrapper.setProps({ placeholder: 'Enter text' });
-        expect(textInput.props().placeholder).toEqual('Enter text');
+        wrapper.setProps({ placeholder: 'ss:mm' });
+        expect(textInput.props().placeholder).toEqual('ss:mm');
       });
     });
 
@@ -52,7 +50,7 @@ describe('TextInput', () => {
         expect(label.length).toBe(0);
       });
 
-      wrapper.setProps({ labelText: 'Email Input' });
+      wrapper.setProps({ labelText: 'Enter a time' });
       const renderedLabel = wrapper.find('label');
 
       it('renders a label', () => {
@@ -64,18 +62,18 @@ describe('TextInput', () => {
       });
 
       it('should set label as expected', () => {
-        expect(renderedLabel.text()).toEqual('Email Input');
+        expect(renderedLabel.text()).toEqual('Enter a time');
       });
     });
   });
 
   describe('events', () => {
-    describe('disabled textinput', () => {
+    describe('disabled time picker', () => {
       const onClick = jest.fn();
       const onChange = jest.fn();
 
-      const wrapper = shallow(
-        <TextInput id="test" onClick={onClick} onChange={onChange} disabled />
+      const wrapper = mount(
+        <TimePicker id="test" onClick={onClick} onChange={onChange} disabled />
       );
 
       const input = wrapper.find('input');
@@ -96,7 +94,7 @@ describe('TextInput', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <TextInput id="test" onClick={onClick} onChange={onChange} />
+        <TimePicker id="test" onClick={onClick} onChange={onChange} />
       );
 
       const input = wrapper.find('input');
