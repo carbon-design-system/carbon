@@ -14,6 +14,8 @@ export CodeSnippet from './components/CodeSnippet';
 export ContentSwitcher from './components/ContentSwitcher';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
+export DatePicker from './components/DatePicker';
+export DatePickerInput from './components/DatePickerInput';
 export DetailPageHeader from './components/DetailPageHeader';
 export Dropdown from './components/Dropdown';
 export DropdownItem from './components/DropdownItem';
@@ -69,6 +71,13 @@ export TextInput from './components/TextInput';
 export TimePicker from './components/TimePicker';
 export TimePickerSelect from './components/TimePickerSelect';
 export Toggle from './components/Toggle';
+export Toolbar, {
+  ToolbarItem,
+  ToolbarTitle,
+  ToolbarOption,
+  ToolbarDivider,
+} from './components/Toolbar';
+export ToolbarSearch from './ToolbarSearch';
 export Tooltip from './components/Tooltip';
 export TooltipSimple from './components/TooltipSimple';
 export UnorderedList from './components/UnorderedList';

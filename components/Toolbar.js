@@ -39,15 +39,13 @@ const ToolbarItem = ({ children, type, placeHolderText }) => {
   return toolbarItem;
 };
 
-const ToolbarTitle = ({ title }) => (
+const ToolbarTitle = ({ title }) =>
   <li className="bx--toolbar-menu__title">
     {title}
-  </li>
-);
+  </li>;
 
-const ToolbarOption = ({ children }) => (
-  <li className="bx--toolbar-menu__option">{children}</li>
-);
+const ToolbarOption = ({ children }) =>
+  <li className="bx--toolbar-menu__option">{children}</li>;
 
 const ToolbarDivider = () => <hr className="bx--toolbar-menu__divider" />;
 
@@ -56,4 +54,5 @@ ToolbarItem.propTypes = toolbarItemPropTypes;
 ToolbarTitle.propTypes = toolbarTitlePropTypes;
 ToolbarOption.propTypes = toolbarOptionPropTypes;
 
-export { Toolbar, ToolbarItem, ToolbarTitle, ToolbarOption, ToolbarDivider };
+export default Toolbar;
+export { ToolbarItem, ToolbarTitle, ToolbarOption, ToolbarDivider };

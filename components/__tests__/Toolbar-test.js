@@ -1,6 +1,5 @@
 import React from 'react';
-import {
-  Toolbar,
+import Toolbar, {
   ToolbarItem,
   ToolbarTitle,
   ToolbarOption,
