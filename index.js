@@ -77,7 +77,7 @@ export Toolbar, {
   ToolbarOption,
   ToolbarDivider,
 } from './components/Toolbar';
-export ToolbarSearch from './ToolbarSearch';
+export ToolbarSearch from './components/ToolbarSearch';
 export Tooltip from './components/Tooltip';
 export TooltipSimple from './components/TooltipSimple';
 export UnorderedList from './components/UnorderedList';
