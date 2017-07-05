@@ -1,10 +1,11 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class Dropdown extends mixin(createComponent, initComponentBySearch) {
+class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
   /**
    * A selector with drop downs.
    * @extends CreateComponent
@@ -27,8 +28,6 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
      * @member {Handle}
      */
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this._toggle(event); });
-
-    this._setCloseOnBlur();
 
     this.element.addEventListener('keydown', (event) => { this._handleKeyDown(event); });
     this.element.addEventListener('click', (event) => {
@@ -162,16 +161,10 @@ class Dropdown extends mixin(createComponent, initComponentBySearch) {
   }
 
   /**
-   * Sets an event handler to document for "close on blur" behavior.
+   * Closes the dropdown menu if this component loses focus.
    */
-  _setCloseOnBlur() {
-    const hasFocusin = 'onfocusin' in window;
-    const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-    this.hFocusIn = on(this.element.ownerDocument, focusinEventName, (event) => {
-      if (!this.element.contains(event.target)) {
-        this.element.classList.remove('bx--dropdown--open');
-      }
-    }, !hasFocusin);
+  handleBlur() {
+    this.element.classList.remove('bx--dropdown--open');
   }
 
   /**

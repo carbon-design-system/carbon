@@ -19,20 +19,28 @@ describe('Test floating menu', function () {
   });
 
   describe('Setting menu direction', function () {
+    let menu;
+
     it('Should use bottom by default', function () {
-      expect(new FloatingMenu(document.createElement('div')).options.direction).to.equal('bottom');
+      expect((menu = new FloatingMenu(document.createElement('div'))).options.direction).to.equal('bottom');
     });
 
     it('Should read the direction from data-floating-menu-direction', function () {
       const element = document.createElement('div');
       element.dataset.floatingMenuDirection = 'left';
-      expect(new FloatingMenu(element).options.direction).to.equal('left');
+      expect((menu = new FloatingMenu(element)).options.direction).to.equal('left');
     });
 
     it('Should use options.direction over data-floating-menu-direction', function () {
       const element = document.createElement('div');
       element.dataset.floatingMenuDirection = 'left';
-      expect(new FloatingMenu(element, { direction: 'right' }).options.direction).to.equal('right');
+      expect((menu = new FloatingMenu(element, { direction: 'right' })).options.direction).to.equal('right');
+    });
+
+    afterEach(function () {
+      if (menu) {
+        menu = menu.release();
+      }
     });
   });
 
@@ -373,6 +381,87 @@ describe('Test floating menu', function () {
       if (menu) {
         menu.release();
         menu = null;
+      }
+      if (refNode) {
+        if (refNode.parentNode) {
+          refNode.parentNode.removeChild(refNode);
+        }
+        refNode = null;
+      }
+      if (element) {
+        if (element.parentNode) {
+          element.parentNode.removeChild(element);
+        }
+        element = null;
+      }
+    });
+  });
+
+  describe('Managing focus', function () {
+    let menu;
+    let element;
+    let primaryFocusNode;
+    let refNode;
+    let input;
+    let spyFocusRefNode;
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = HTML;
+
+    before(function () {
+      element = tempDiv.querySelector('ul.bx--overflow-menu-options');
+      document.body.appendChild(element);
+      primaryFocusNode = element.querySelector('[data-floating-menu-primary-focus]');
+      refNode = document.createElement('div');
+      document.body.appendChild(refNode);
+      input = document.createElement('input');
+      document.body.appendChild(input);
+      menu = new FloatingMenu(element, {
+        refNode,
+        classShown: 'my-floating-menu-open',
+        classRefShown: 'my-floating-menu-trigger-open',
+      });
+      spyFocusRefNode = sinon.spy(refNode, 'focus');
+    });
+
+    it('Should close menu when both the trigger button and the menu lose focus', function () {
+      primaryFocusNode.focus();
+      menu.changeState('shown', {});
+      input.focus();
+      expect(element.classList.contains('bx--overflow-menu-options--open')).to.be.false;
+    });
+
+    it('Should focus back on the trigger button when floating menu loses focus', function () {
+      const hasFocusin = 'onfocusin' in window;
+      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+      primaryFocusNode.focus();
+      menu.changeState('shown', {});
+      // Firefox does not fire `onfocus` event with `input.focus()` call, presumably when the window does not have focus
+      input.dispatchEvent(Object.assign(new CustomEvent(focusinEventName, { bubbles: true }), {
+        relatedTarget: primaryFocusNode,
+      }));
+      expect(spyFocusRefNode).to.have.been.calledOnce;
+    });
+
+    afterEach(function () {
+      element.classList.remove('bx--overflow-menu-options--open');
+      if (spyFocusRefNode) {
+        spyFocusRefNode.reset();
+      }
+    });
+
+    after(function () {
+      if (spyFocusRefNode) {
+        spyFocusRefNode.restore();
+        spyFocusRefNode = null;
+      }
+      if (menu) {
+        menu = menu.release();
+      }
+      if (input) {
+        if (input.parentNode) {
+          input.parentNode.removeChild(input);
+        }
+        input = null;
       }
       if (refNode) {
         if (refNode.parentNode) {
