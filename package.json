@@ -104,6 +104,7 @@
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
+    "bowser": "^1.6.1",
     "carbon-components": "^7.5.7",
     "carbon-icons": "^6.0.4",
     "commitizen": "^2.9.5",
