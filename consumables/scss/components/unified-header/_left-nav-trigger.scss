@@ -10,6 +10,8 @@
   transition: $transition--base $bx--standard-easing;
   cursor: pointer;
   z-index: 9999;
+  border: 0;
+  background: none;
 
   &:focus {
     @include focus-outline;
@@ -17,6 +19,8 @@
 
   &:hover,
   &:focus {
+    background: transparent;
+    
     span,
     span:before,
     span:after {

@@ -29,6 +29,7 @@ class LeftNav extends mixin(createCoponent, initComponent) {
   constructor(element, options) {
     super(element, options);
     this.leftNavSectionActive = false;
+    this.focusIndex = 0;
     this.hookOpenActions();
     this.hookListItemsEvents();
     this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this.handleDocumentClick(evt); });
@@ -52,26 +53,88 @@ class LeftNav extends mixin(createCoponent, initComponent) {
     this.element.classList.toggle(this.options.classActiveLeftNav);
     const toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
     toggleOpenNode.classList.toggle(this.options.classActiveTrigger);
-    if (leftNavContainer.getAttribute('aria-expanded') === 'false') leftNavContainer.setAttribute('aria-expanded', 'true');
-    else leftNavContainer.setAttribute('aria-expanded', 'false');
+    if (leftNavContainer.getAttribute('aria-expanded') === 'false') {
+      leftNavContainer.setAttribute('aria-expanded', 'true');
+      toggleOpenNode.setAttribute('aria-expanded', 'true');
+      this.focusIndex = 0;
+    } else {
+      leftNavContainer.setAttribute('aria-expanded', 'false');
+      toggleOpenNode.removeAttribute('aria-expanded');
+    }
+  }
+
+  onKeyDown(evt) {
+    const leftNavContainer = document.querySelector('[data-left-nav]');
+    const navItems = [...leftNavContainer.getElementsByClassName('bx--parent-item__link')];
+    const button = [...document.getElementsByClassName('bx--left-nav__trigger')];
+    navItems.unshift(button[0]);
+
+    switch (evt.which) {
+      case 9: // tab
+        if (evt.shiftKey) {
+          if (this.focusIndex > 0) {
+            this.focusIndex--;
+          } else {
+            this.closeMenu();
+          }
+        }
+
+        if (!evt.shiftKey) {
+          if (this.focusIndex < navItems.length - 1) {
+            this.focusIndex++;
+          } else {
+            this.closeMenu();
+          }
+        }
+        break;
+
+      case 38: // arrow up
+        if (this.focusIndex > 0) {
+          this.focusIndex--;
+        }
+        navItems[this.focusIndex].focus();
+        break;
+
+      case 40: // arrow down
+        if (this.focusIndex < navItems.length - 1) {
+          this.focusIndex++;
+        }
+        navItems[this.focusIndex].focus();
+        break;
+
+      case 36: // home
+        this.focusIndex = 1;
+        navItems[this.focusIndex].focus();
+        break;
+
+      case 35: // end
+        this.focusIndex = navItems.length - 1;
+        navItems[this.focusIndex].focus();
+        break;
+
+      default:
+        break;
+    }
   }
 
   hookOpenActions() {
     const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
-
+    // on btn click or enter press or space press
     openBtn.addEventListener('click', () => {
       this.toggleMenu();
     });
 
-    openBtn.addEventListener('keydown', (evt) => {
-      if (evt.which === 13) {
-        this.toggleMenu();
-      }
-    });
-
+    // on esc press
     this.element.ownerDocument.addEventListener('keydown', (evt) => {
       if ((evt.which === 27) && this.element.classList.contains(this.options.classActiveLeftNav)) {
+        openBtn.focus();
         this.closeMenu();
+      } else {
+        const toggleOpen = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+        if (toggleOpen.classList.contains(this.options.classActiveTrigger)) {
+          this.onKeyDown = this.onKeyDown.bind(this);
+          this.onKeyDown(evt);
+        }
       }
     });
   }
@@ -82,10 +145,12 @@ class LeftNav extends mixin(createCoponent, initComponent) {
   hookListItemsEvents() {
     const leftNavList = [...this.element.querySelectorAll(this.options.selectorLeftNavList)];
     leftNavList.forEach((list) => {
+      // on mouse click
       list.addEventListener('click', (evt) => {
         const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
         if (leftNavItem) this.addActiveListItem(leftNavItem);
       });
+      // on enter press
       list.addEventListener('keydown', (evt) => {
         if (evt.which === 13) {
           const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
