@@ -63,7 +63,11 @@ describe('Pagination', () => {
             actualPageSize = pageSize;
           };
           const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} onChange={handler} />
+            <Pagination
+              pageSizes={[5, 10]}
+              totalItems={50}
+              onChange={handler}
+            />
           );
           expect(pager.state().pageSize).toBe(5);
           pager.find('select').simulate('change', { target: { value: 10 } });
@@ -81,7 +85,11 @@ describe('Pagination', () => {
             actualPage = page;
           };
           const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} onChange={handler} />
+            <Pagination
+              pageSizes={[5, 10]}
+              totalItems={50}
+              onChange={handler}
+            />
           );
           pager.setState({ page: 2 });
           expect(pager.state().page).toBe(2);
@@ -96,6 +104,19 @@ describe('Pagination', () => {
           pager.setState({ page: 2 });
           pager.setProps({ pageSizes: [3, 6] });
           expect(pager.state().page).toEqual(1);
+        });
+        it('should default to pageSize if pageSize is provided', () => {
+          const pager = mount(
+            <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
+          );
+          expect(pager.state().pageSize).toEqual(10);
+        });
+        it('should default to pageSize if on change to pageSize', () => {
+          const pager = mount(
+            <Pagination pageSizes={[5, 10]} totalItems={50} />
+          );
+          pager.setProps({ pageSize: 10 });
+          expect(pager.state().pageSize).toEqual(10);
         });
       });
     });
@@ -112,8 +133,12 @@ describe('Pagination', () => {
       it('should have two buttons for navigation', () => {
         const buttons = right.find('.bx--pagination__button');
         expect(buttons.length).toBe(2);
-        expect(buttons.at(0).hasClass('bx--pagination__button--backward')).toBe(true);
-        expect(buttons.at(1).hasClass('bx--pagination__button--forward')).toBe(true);
+        expect(buttons.at(0).hasClass('bx--pagination__button--backward')).toBe(
+          true
+        );
+        expect(buttons.at(1).hasClass('bx--pagination__button--forward')).toBe(
+          true
+        );
       });
       it('should disable backward navigation for the first page', () => {
         const buttons = right.find('.bx--pagination__button');
@@ -122,7 +147,11 @@ describe('Pagination', () => {
       });
       it('should disable forward navigation for the last page', () => {
         const smallPage = shallow(
-          <Pagination className="extra-class" pageSizes={[100]} totalItems={50} />
+          <Pagination
+            className="extra-class"
+            pageSizes={[100]}
+            totalItems={50}
+          />
         );
         const buttons = smallPage.find('.bx--pagination__button');
         expect(buttons.at(0).props().disabled).toBe(true);
@@ -136,7 +165,11 @@ describe('Pagination', () => {
             actualPage = page;
           };
           const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} onChange={handler} />
+            <Pagination
+              pageSizes={[5, 10]}
+              totalItems={50}
+              onChange={handler}
+            />
           );
           expect(pager.state().page).toBe(1);
           pager.find('.bx--pagination__button--forward').simulate('click');
@@ -149,7 +182,11 @@ describe('Pagination', () => {
             actualPage = page;
           };
           const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} onChange={handler} />
+            <Pagination
+              pageSizes={[5, 10]}
+              totalItems={50}
+              onChange={handler}
+            />
           );
           pager.setState({ page: 2 });
           expect(pager.state().page).toBe(2);
@@ -163,10 +200,16 @@ describe('Pagination', () => {
             actualPage = page;
           };
           const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} onChange={handler} />
+            <Pagination
+              pageSizes={[5, 10]}
+              totalItems={50}
+              onChange={handler}
+            />
           );
           expect(pager.state().page).toBe(1);
-          pager.find('.bx--text__input').simulate('change', { target: { value: 2 } });
+          pager
+            .find('.bx--text__input')
+            .simulate('change', { target: { value: 2 } });
           expect(actualPage).toBe(2);
           expect(pager.state().page).toBe(2);
         });
