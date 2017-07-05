@@ -24,23 +24,14 @@ class Search extends Component {
 
   state = {
     format: 'list',
-    value: '',
-    hasContent: false,
   };
 
   toggleClearIcon = evt => {
-    const hasContent = evt.target.value.length > 0;
-    this.setState({
-      hasContent,
-      value: evt.target.value,
-    });
+    this.input.value = evt.target.value;
   };
 
   clearInput = () => {
-    this.setState({
-      value: '',
-      hasContent: false,
-    });
+    this.input.value = '';
     this.input.focus();
   };
 
@@ -123,9 +114,11 @@ class Search extends Component {
       [className]: className,
     });
 
+    const hasContent = Boolean(this.input) && Boolean(this.input.value);
+
     const clearClasses = classNames({
       'bx--search-close': true,
-      'bx--search-close--hidden': !this.state.hasContent,
+      'bx--search-close--hidden': hasContent,
     });
 
     return (
@@ -142,7 +135,6 @@ class Search extends Component {
           className="bx--search-input"
           id={id}
           placeholder={placeHolderText}
-          value={this.state.value}
           onInput={this.toggleClearIcon}
           ref={input => {
             this.input = input;
