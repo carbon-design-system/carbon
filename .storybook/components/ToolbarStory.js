@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@storybook/react';
-import {
-  Toolbar,
+import Toolbar, {
   ToolbarItem,
   ToolbarTitle,
   ToolbarOption,
@@ -26,7 +25,7 @@ storiesOf('Toolbar', module).addWithInfo(
   `
     Toolbar stuff
   `,
-  () => (
+  () =>
     <Toolbar {...toolbarProps} className="some-class">
       <ToolbarItem type="search" placeHolderText="Search" />
       <ToolbarItem>
@@ -79,5 +78,4 @@ storiesOf('Toolbar', module).addWithInfo(
         </OverflowMenu>
       </ToolbarItem>
     </Toolbar>
-  )
 );
