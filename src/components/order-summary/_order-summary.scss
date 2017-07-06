@@ -3,8 +3,9 @@
   background-color: $ui-01;
   padding-bottom: 1.25rem;
   width: 18rem;
-  height: 100%;
-  position: relative;
+  height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .bx--order-header {
@@ -119,9 +120,9 @@
 .bx--order-footer {
   display: flex;
   align-items: center;
-  position: absolute;
-  bottom: 1.25rem;
-  right: 1.2rem;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-right: 1.25rem;
 }
 
 .bx--order-footer-text {
