@@ -6,8 +6,8 @@
   "scripts": {
     "check": "npm run lint && npm run test",
     "lint": "eslint {components,internal}/**",
-    "test": "jest '/(components|lib|internal)/'",
-    "test-watch": "jest '/(components|lib|internal)/' --watch",
+    "test": "jest '/(__tests__|components|lib|internal)/'",
+    "test-watch": "jest '/(__tests__|components|lib|internal)/' --watch",
     "prepublish": "npm run build",
     "build": "node scripts/build.js",
     "commitmsg": "validate-commit-msg",
