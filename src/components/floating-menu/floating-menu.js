@@ -46,17 +46,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState) {
    * @returns {Element} The element that this menu should be placed to.
    */
   _getContainer() {
-    const element = this.element;
-    const body = element.ownerDocument.body;
-    if (typeof element.closest === 'function') {
-      return element.closest(this.options.selectorContainer) || body;
-    }
-    for (let traverse = element; traverse && traverse !== body; traverse = traverse.parentNode) {
-      if (traverse.matches(this.options.selectorContainer)) {
-        return traverse;
-      }
-    }
-    return body;
+    return this.element.closest(this.options.selectorContainer) || this.element.ownerDocument.body;
   }
 
   /**
