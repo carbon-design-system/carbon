@@ -45,7 +45,9 @@ class OverflowMenu extends Component {
   };
 
   componentDidMount() {
-    this.getMenuPosition();
+    requestAnimationFrame(() => {
+      this.getMenuPosition();
+    });
     this.hResize = OptimizedResize.add(() => {
       this.getMenuPosition();
     });

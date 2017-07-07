@@ -137,7 +137,10 @@
     "coverageDirectory": "./coverage",
     "moduleNameMapper": {
       "^.+\\.(scss)$": "<rootDir>/lib/styleMock.js"
-    }
+    },
+    "setupFiles": [
+      "<rootDir>/setup-jest.js"
+    ]
   },
   "lint-staged": {
     "*.js": [

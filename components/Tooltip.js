@@ -29,7 +29,9 @@ class Tooltip extends Component {
   };
 
   componentDidMount() {
-    this.getTriggerPosition();
+    requestAnimationFrame(() => {
+      this.getTriggerPosition();
+    });
   }
 
   getTriggerPosition = () => {
