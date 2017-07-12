@@ -32,8 +32,8 @@
     @include reset;
     position: relative;
     display: flex;
-    justify-content: center;
-    text-align: center;
+    justify-content: $card-flex-align;
+    text-align: $card-text-align;
     padding-left: 1rem;
     padding-top: 1rem;
     padding-right: 1rem;
@@ -71,7 +71,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: center;
+    align-items: $card-flex-align;
     padding-top: 1rem;
   }
 

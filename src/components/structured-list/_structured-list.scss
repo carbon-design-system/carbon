@@ -89,7 +89,7 @@
     height: rem(40px);
     letter-spacing: 1px;
     text-align: left;
-    text-transform: uppercase;
+    text-transform: $structured-list-text-transform;
     vertical-align: middle;
   }
 
