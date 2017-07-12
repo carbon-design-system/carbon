@@ -16,11 +16,13 @@ const propTypes = {
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   onMouseUp: PropTypes.func,
+  closeMenu: React.PropTypes.func,
 };
 
 const defaultProps = {
   hasDivider: false,
   isDelete: false,
+  onClick: () => {},
 };
 
 const OverflowMenuItem = ({
@@ -28,6 +30,8 @@ const OverflowMenuItem = ({
   itemText,
   hasDivider,
   isDelete,
+  closeMenu,
+  onClick,
   ...other
 }) => {
   const overflowMenuBtnClasses = classNames(
@@ -43,9 +47,19 @@ const OverflowMenuItem = ({
     }
   );
 
+  const handleClick = evt => {
+    onClick(evt);
+    closeMenu();
+  };
+
   const item = (
     <li className={overflowMenuItemClasses}>
-      <button {...other} type="button" className={overflowMenuBtnClasses}>
+      <button
+        {...other}
+        type="button"
+        className={overflowMenuBtnClasses}
+        onClick={handleClick}
+      >
         {itemText}
       </button>
     </li>

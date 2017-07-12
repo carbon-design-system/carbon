@@ -86,11 +86,12 @@ describe('OverflowMenu', () => {
       expect(menuOptions.hasClass(openClass)).not.toEqual(false);
     });
 
-    it('should be in an open state after menu is clicked', () => {
+    it('should be in an open state after icon is clicked', () => {
       const rootWrapper = mount(<OverflowMenu />);
       const menu = rootWrapper.childAt(0);
+      const icon = menu.find(Icon);
 
-      menu.simulate('click');
+      icon.simulate('click');
       expect(rootWrapper.state().open).toEqual(true);
     });
 
