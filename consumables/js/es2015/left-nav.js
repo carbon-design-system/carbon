@@ -66,8 +66,13 @@ class LeftNav extends mixin(createCoponent, initComponent) {
   onKeyDown(evt) {
     const leftNavContainer = document.querySelector('[data-left-nav]');
     const navItems = [...leftNavContainer.getElementsByClassName('bx--parent-item__link')];
+
+    const visibleNavItems = navItems.filter( (item) => {
+      return window.getComputedStyle(item.parentElement).display != 'none';
+    });
+
     const button = [...document.getElementsByClassName('bx--left-nav__trigger')];
-    navItems.unshift(button[0]);
+    visibleNavItems.unshift(button[0]);
 
     switch (evt.which) {
       case 9: // tab
@@ -80,7 +85,7 @@ class LeftNav extends mixin(createCoponent, initComponent) {
         }
 
         if (!evt.shiftKey) {
-          if (this.focusIndex < navItems.length - 1) {
+          if (this.focusIndex < visibleNavItems.length - 1) {
             this.focusIndex++;
           } else {
             this.closeMenu();
@@ -92,24 +97,24 @@ class LeftNav extends mixin(createCoponent, initComponent) {
         if (this.focusIndex > 0) {
           this.focusIndex--;
         }
-        navItems[this.focusIndex].focus();
+        visibleNavItems[this.focusIndex].focus();
         break;
 
       case 40: // arrow down
-        if (this.focusIndex < navItems.length - 1) {
+        if (this.focusIndex < visibleNavItems.length - 1) {
           this.focusIndex++;
         }
-        navItems[this.focusIndex].focus();
+        visibleNavItems[this.focusIndex].focus();
         break;
 
       case 36: // home
         this.focusIndex = 1;
-        navItems[this.focusIndex].focus();
+        visibleNavItems[this.focusIndex].focus();
         break;
 
       case 35: // end
-        this.focusIndex = navItems.length - 1;
-        navItems[this.focusIndex].focus();
+        this.focusIndex = visibleNavItems.length - 1;
+        visibleNavItems[this.focusIndex].focus();
         break;
 
       default:
