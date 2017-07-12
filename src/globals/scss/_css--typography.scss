@@ -6,6 +6,100 @@
 @import 'import-once';
 
 @mixin typography {
+  // really big
+  .bx--type-giga {
+    @include font-size('74');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 300;
+  }
+  .bx--type-mega {
+    @include font-size('52');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 300;
+  }
+
+  // normal sizes
+  .bx--type-alpha {
+    @include font-size('36');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 300;
+  }
+  .bx--type-beta {
+    @include font-size('29');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 300;
+  }
+  .bx--type-gamma {
+    @include font-size('23');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 300;
+  }
+  .bx--type-delta {
+    @include font-size('18');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 300;
+  }
+  .bx--type-epsilon {
+    @include font-size('16');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 700;
+  }
+  .bx--type-zeta {
+    @include font-size('14');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 700;
+  }
+  .bx--type-omega {
+    @include font-size('12');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  // really small
+  .bx--type-caption {
+    @include font-size('12');
+    @include reset;
+    @include line-height('body');
+  }
+  .bx--type-legal {
+    @include font-size('11');
+    @include reset;
+    @include line-height('body');
+  }
+
+  .bx--type-caps { text-transform: uppercase; }
+
+  strong, .bx--type-strong {
+    @include reset;
+    font-weight: 700;
+  }
+
+  p {
+    @include reset;
+    @include font-size('16');
+    @include line-height('body');
+  }
+
+  em {
+    @include reset;
+    font-style: italic;
+  }
+
+  a {
+    @include reset;
+    color: $brand-01;
+  }
+
   h1 {
     @include reset;
     @include font-size('32');
@@ -43,29 +137,6 @@
     @include reset;
     @include font-size('14');
     @include line-height('heading');
-  }
-
-  p {
-    @include reset;
-    @include font-size('16');
-    @include line-height('body');
-  }
-
-  strong {
-    @include reset;
-    @include font-smoothing;
-    @include letter-spacing;
-    font-weight: 700;
-  }
-
-  em {
-    @include reset;
-    font-style: italic;
-  }
-
-  a {
-    @include reset;
-    color: $brand-01;
   }
 }
 
