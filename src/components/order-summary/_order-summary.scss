@@ -73,6 +73,19 @@
 
 .bx--order-total-container {
   padding: 1.125rem 1.25rem 0;
+
+  .bx--btn {
+    width: 100%;
+    margin-top: 1rem;
+
+    &:first-of-type {
+      margin-top: 2rem;
+    }
+
+    &:last-of-type {
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 .bx--order-total {
@@ -102,19 +115,6 @@
   @include font-size('11');
   color: $text-02;
   font-style: italic;
-}
-
-.bx--btn {
-  width: 100%;
-  margin-top: 1rem;
-
-  &:first-of-type {
-    margin-top: 2rem;
-  }
-
-  &:last-of-type {
-    margin-bottom: 2rem;
-  }
 }
 
 .bx--order-footer {
