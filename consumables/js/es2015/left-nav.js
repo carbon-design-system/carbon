@@ -43,6 +43,7 @@ class LeftNav extends mixin(createCoponent, initComponent) {
     const toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
     toggleOpenNode.classList.remove(this.options.classActiveTrigger);
     this.element.querySelector(this.options.selectorLeftNav).parentNode.setAttribute('aria-expanded', 'false');
+    toggleOpenNode.removeAttribute('aria-expanded');
   }
 
   /**
