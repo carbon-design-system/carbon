@@ -133,7 +133,27 @@
 }
 
 [class*="bx--col"] {
-  padding: 1rem;
   background-color: $color__gray-1;
-  border: 10px solid $ui-02;
+
+  p {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.col-example {
+  background-color: rgba(blue, 0.2);
+  height: 100%;
+}
+
+.red {
+  background-color: rgba(red, 0.2);
+}
+
+.green {
+  background-color: rgba(green, 0.2);
+}
+
+.indigo {
+  background-color: rgba(indigo, 0.2);
 }
