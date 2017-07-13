@@ -124,7 +124,7 @@ class OverflowMenu extends Component {
       iconClass
     );
 
-    const childrenWithProps = React.Children.map(children, child =>
+    const childrenWithProps = React.Children.toArray(children).map(child =>
       React.cloneElement(child, {
         closeMenu: this.closeMenu,
       })
