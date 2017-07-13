@@ -20,19 +20,31 @@ class Search extends Component {
     type: 'text',
     small: false,
     placeHolderText: '',
+    onChange: () => {},
   };
 
   state = {
     format: 'list',
-  };
-
-  toggleClearIcon = evt => {
-    this.input.value = evt.target.value;
+    hasContent: this.props.value || this.props.defaultValue || false,
   };
 
   clearInput = () => {
-    this.input.value = '';
-    this.input.focus();
+    if (this.props.value) {
+      this.props.onChange({
+        target: {
+          value: '',
+        },
+      });
+    } else {
+      this.input.value = '';
+    }
+
+    this.setState(
+      {
+        hasContent: false,
+      },
+      () => this.input.focus()
+    );
   };
 
   toggleLayout = () => {
@@ -45,6 +57,14 @@ class Search extends Component {
         format: 'list',
       });
     }
+  };
+
+  handleChange = evt => {
+    this.setState({
+      hasContent: evt.target.value !== '',
+    });
+
+    this.props.onChange(evt);
   };
 
   // eslint-disable-next-line consistent-return
@@ -107,6 +127,8 @@ class Search extends Component {
       ...other
     } = this.props;
 
+    const { hasContent } = this.state;
+
     const searchClasses = classNames({
       'bx--search bx--search-with-options': true,
       'bx--search--lg': !small,
@@ -114,11 +136,9 @@ class Search extends Component {
       [className]: className,
     });
 
-    const hasContent = Boolean(this.input) && Boolean(this.input.value);
-
     const clearClasses = classNames({
       'bx--search-close': true,
-      'bx--search-close--hidden': hasContent,
+      'bx--search-close--hidden': !hasContent,
     });
 
     return (
@@ -128,14 +148,16 @@ class Search extends Component {
           description="search"
           className="bx--search-magnifier"
         />
-        <label htmlFor={id} className="bx--label">{labelText}</label>
+        <label htmlFor={id} className="bx--label">
+          {labelText}
+        </label>
         <input
           {...other}
           type={type}
           className="bx--search-input"
           id={id}
           placeholder={placeHolderText}
-          onInput={this.toggleClearIcon}
+          onChange={this.handleChange}
           ref={input => {
             this.input = input;
           }}
