@@ -61,6 +61,7 @@
     @include font-size('12');
     @include reset;
     @include line-height('heading');
+    @include letter-spacing;
     font-weight: 700;
     text-transform: uppercase;
   }
