@@ -68,9 +68,9 @@ class LeftNav extends mixin(createCoponent, initComponent) {
     const leftNavContainer = document.querySelector('[data-left-nav]');
     const navItems = [...leftNavContainer.getElementsByClassName('bx--parent-item__link')];
 
-    const visibleNavItems = navItems.filter( (item) => {
-      return window.getComputedStyle(item.parentElement).display != 'none';
-    });
+    const visibleNavItems = navItems.filter(item =>
+      window.getComputedStyle(item.parentElement).display !== 'none',
+    );
 
     const button = [...document.getElementsByClassName('bx--left-nav__trigger')];
     visibleNavItems.unshift(button[0]);
