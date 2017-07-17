@@ -52,9 +52,14 @@
       $brand-01 // icon-color
     );
 
+
     &:hover,
     &:focus {
       color: $inverse-01;
+    }
+
+    &:active {
+      color: $brand-01;
     }
 
     &:hover > .bx--btn__icon,
