@@ -16,7 +16,7 @@ const propTypes = {
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   onMouseUp: PropTypes.func,
-  closeMenu: React.PropTypes.func,
+  closeMenu: PropTypes.func,
 };
 
 const defaultProps = {
