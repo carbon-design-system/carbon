@@ -109,6 +109,11 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       }
 
       this.changeState(state, getLaunchingDetails(event));
+
+      if (state === 'shown') {
+        const firstFocusableEl = this.optionMenu.element.querySelector('button, a, input, select, [tabindex]');
+        firstFocusableEl.focus();
+      }
     }
   }
 
