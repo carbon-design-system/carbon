@@ -10,7 +10,7 @@ This repository provides a collection of [Carbon Components](https://github.com/
 
 ### List of Available Components
 
-View available React Components [here](https://react.carbondesignsystem.com). Usage information is available when you click the blue **?** icon in the top right corner of the selected component.
+View available React Components [here](http://react.carbondesignsystem.com). Usage information is available when you click the blue **?** icon in the top right corner of the selected component.
 
 ### Getting Started
 
