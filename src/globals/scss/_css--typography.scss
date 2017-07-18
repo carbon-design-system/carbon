@@ -20,43 +20,7 @@
     font-weight: 300;
   }
 
-  // normal sizes
-  .bx--type-alpha {
-    @include font-size('36');
-    @include reset;
-    @include line-height('heading');
-    font-weight: 300;
-  }
-  .bx--type-beta {
-    @include font-size('29');
-    @include reset;
-    @include line-height('heading');
-    font-weight: 300;
-  }
-  .bx--type-gamma {
-    @include font-size('23');
-    @include reset;
-    @include line-height('heading');
-    font-weight: 300;
-  }
-  .bx--type-delta {
-    @include font-size('18');
-    @include reset;
-    @include line-height('heading');
-    font-weight: 300;
-  }
-  .bx--type-epsilon {
-    @include font-size('16');
-    @include reset;
-    @include line-height('heading');
-    font-weight: 700;
-  }
-  .bx--type-zeta {
-    @include font-size('14');
-    @include reset;
-    @include line-height('heading');
-    font-weight: 700;
-  }
+  // really small
   .bx--type-omega {
     @include font-size('12');
     @include reset;
@@ -65,8 +29,6 @@
     font-weight: 700;
     text-transform: uppercase;
   }
-
-  // really small
   .bx--type-caption {
     @include font-size('12');
     @include reset;
@@ -101,40 +63,40 @@
     color: $brand-01;
   }
 
-  h1 {
+  h1, .bx--type-alpha {
     @include reset;
     @include font-size('32');
     @include line-height('heading');
     @include letter-spacing;
   }
 
-  h2 {
+  h2, .bx--type-beta {
     @include reset;
     @include font-size('26');
     @include line-height('heading');
     @include letter-spacing;
   }
 
-  h3 {
+  h3, .bx--type-gamma {
     @include reset;
     @include font-size('20');
     @include line-height('heading');
     @include letter-spacing;
   }
 
-  h4 {
+  h4, .bx--type-delta {
     @include reset;
     @include font-size('18');
     @include line-height('heading');
   }
 
-  h5 {
+  h5, .bx--type-epsilon {
     @include reset;
     @include font-size('16');
     @include line-height('heading');
   }
 
-  h6 {
+  h6, .bx--type-zeta {
     @include reset;
     @include font-size('14');
     @include line-height('heading');
