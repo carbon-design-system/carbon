@@ -23,6 +23,8 @@
 
       .bx--accordion__arrow {
         @include focus-outline('border');
+        overflow: visible; // safari fix
+        outline-offset: -.5px; // safari fix
       }
     }
 
