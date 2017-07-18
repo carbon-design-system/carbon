@@ -1,6 +1,7 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch
+  from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
 
 class Accordion extends mixin(createComponent, initComponentBySearch) {
@@ -12,14 +13,14 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', event => {
+    this.element.addEventListener('click', (event) => {
       const item = eventMatches(event, this.options.selectorAccordionItem);
       if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
         item.classList.toggle(this.options.classActive);
       }
     });
 
-    this.element.addEventListener('keypress', event => {
+    this.element.addEventListener('keypress', (event) => {
       const item = eventMatches(event, this.options.selectorAccordionItem);
       if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
         this._handleKeypress(event);
