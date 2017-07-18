@@ -1,5 +1,16 @@
 export { Module, ModuleBody, ModuleHeader } from './components/Module';
-export { ProgressIndicator, ProgressStep } from './components/ProgressIndicator';
+export {
+  ProgressIndicator,
+  ProgressStep,
+} from './components/ProgressIndicator';
+export {
+  StructuredListWrapper,
+  StructuredListHead,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListInput,
+  StructuredListCell,
+} from './components/StructuredList';
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
 export Breadcrumb from './components/Breadcrumb';
@@ -21,7 +32,10 @@ export DatePickerInput from './components/DatePickerInput';
 export DetailPageHeader from './components/DetailPageHeader';
 export Dropdown from './components/Dropdown';
 export DropdownItem from './components/DropdownItem';
-export FileUploader, { Filename, FileUploaderButton } from './components/FileUploader';
+export FileUploader, {
+  Filename,
+  FileUploaderButton,
+} from './components/FileUploader';
 export Footer from './components/Footer';
 export Form from './components/Form';
 export FormGroup from './components/FormGroup';
@@ -48,7 +62,6 @@ export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
-export StructuredList from './components/StructuredList';
 export Switch from './components/Switch';
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
