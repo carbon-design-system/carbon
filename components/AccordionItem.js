@@ -14,6 +14,7 @@ class AccordionItem extends Component {
   };
 
   static defaultProps = {
+    title: 'title',
     open: false,
     onClick: () => {},
     onHeadingClick: () => {},
