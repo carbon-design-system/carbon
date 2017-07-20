@@ -4512,6 +4512,7 @@ var BluemixComponents =
 	    var _this = _possibleConstructorReturn(this, (LeftNav.__proto__ || Object.getPrototypeOf(LeftNav)).call(this, element, options));
 	
 	    _this.leftNavSectionActive = false;
+	    _this.focusIndex = 0;
 	    _this.hookOpenActions();
 	    _this.hookListItemsEvents();
 	    _this.hDocumentClick = (0, _on2.default)(_this.element.ownerDocument, 'click', function (evt) {
@@ -4532,6 +4533,7 @@ var BluemixComponents =
 	      var toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
 	      toggleOpenNode.classList.remove(this.options.classActiveTrigger);
 	      this.element.querySelector(this.options.selectorLeftNav).parentNode.setAttribute('aria-expanded', 'false');
+	      toggleOpenNode.removeAttribute('aria-expanded');
 	    }
 	
 	    /**
@@ -4545,7 +4547,79 @@ var BluemixComponents =
 	      this.element.classList.toggle(this.options.classActiveLeftNav);
 	      var toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
 	      toggleOpenNode.classList.toggle(this.options.classActiveTrigger);
-	      if (leftNavContainer.getAttribute('aria-expanded') === 'false') leftNavContainer.setAttribute('aria-expanded', 'true');else leftNavContainer.setAttribute('aria-expanded', 'false');
+	      if (leftNavContainer.getAttribute('aria-expanded') === 'false') {
+	        leftNavContainer.setAttribute('aria-expanded', 'true');
+	        toggleOpenNode.setAttribute('aria-expanded', 'true');
+	        this.focusIndex = 0;
+	      } else {
+	        leftNavContainer.setAttribute('aria-expanded', 'false');
+	        toggleOpenNode.removeAttribute('aria-expanded');
+	      }
+	    }
+	  }, {
+	    key: 'onKeyDown',
+	    value: function onKeyDown(evt) {
+	      var leftNavContainer = document.querySelector('[data-left-nav]');
+	      var navItems = [].concat(_toConsumableArray(leftNavContainer.getElementsByClassName('bx--parent-item__link')));
+	
+	      var visibleNavItems = navItems.filter(function (item) {
+	        return window.getComputedStyle(item.parentElement).display !== 'none';
+	      });
+	
+	      var button = [].concat(_toConsumableArray(document.getElementsByClassName('bx--left-nav__trigger')));
+	      visibleNavItems.unshift(button[0]);
+	
+	      switch (evt.which) {
+	        case 9:
+	          // tab
+	          if (evt.shiftKey) {
+	            if (this.focusIndex > 0) {
+	              this.focusIndex--;
+	            } else {
+	              this.closeMenu();
+	            }
+	          }
+	
+	          if (!evt.shiftKey) {
+	            if (this.focusIndex < visibleNavItems.length - 1) {
+	              this.focusIndex++;
+	            } else {
+	              this.closeMenu();
+	            }
+	          }
+	          break;
+	
+	        case 38:
+	          // arrow up
+	          if (this.focusIndex > 0) {
+	            this.focusIndex--;
+	          }
+	          visibleNavItems[this.focusIndex].focus();
+	          break;
+	
+	        case 40:
+	          // arrow down
+	          if (this.focusIndex < visibleNavItems.length - 1) {
+	            this.focusIndex++;
+	          }
+	          visibleNavItems[this.focusIndex].focus();
+	          break;
+	
+	        case 36:
+	          // home
+	          this.focusIndex = 1;
+	          visibleNavItems[this.focusIndex].focus();
+	          break;
+	
+	        case 35:
+	          // end
+	          this.focusIndex = visibleNavItems.length - 1;
+	          visibleNavItems[this.focusIndex].focus();
+	          break;
+	
+	        default:
+	          break;
+	      }
 	    }
 	  }, {
 	    key: 'hookOpenActions',
@@ -4553,20 +4627,22 @@ var BluemixComponents =
 	      var _this2 = this;
 	
 	      var openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
-	
+	      // on btn click or enter press or space press
 	      openBtn.addEventListener('click', function () {
 	        _this2.toggleMenu();
 	      });
 	
-	      openBtn.addEventListener('keydown', function (evt) {
-	        if (evt.which === 13) {
-	          _this2.toggleMenu();
-	        }
-	      });
-	
+	      // on esc press
 	      this.element.ownerDocument.addEventListener('keydown', function (evt) {
 	        if (evt.which === 27 && _this2.element.classList.contains(_this2.options.classActiveLeftNav)) {
+	          openBtn.focus();
 	          _this2.closeMenu();
+	        } else {
+	          var toggleOpen = _this2.element.ownerDocument.querySelector(_this2.options.selectorLeftNavToggleOpen);
+	          if (toggleOpen.classList.contains(_this2.options.classActiveTrigger)) {
+	            _this2.onKeyDown = _this2.onKeyDown.bind(_this2);
+	            _this2.onKeyDown(evt);
+	          }
 	        }
 	      });
 	    }
@@ -4582,10 +4658,12 @@ var BluemixComponents =
 	
 	      var leftNavList = [].concat(_toConsumableArray(this.element.querySelectorAll(this.options.selectorLeftNavList)));
 	      leftNavList.forEach(function (list) {
+	        // on mouse click
 	        list.addEventListener('click', function (evt) {
 	          var leftNavItem = (0, _eventMatches2.default)(evt, _this3.options.selectorLeftNavListItem);
 	          if (leftNavItem) _this3.addActiveListItem(leftNavItem);
 	        });
+	        // on enter press
 	        list.addEventListener('keydown', function (evt) {
 	          if (evt.which === 13) {
 	            var leftNavItem = (0, _eventMatches2.default)(evt, _this3.options.selectorLeftNavListItem);
@@ -4809,7 +4887,8 @@ var BluemixComponents =
 	      var eventStart = new CustomEvent(_this.options.eventBeforeLeftNavToggled, {
 	        bubbles: true,
 	        cancelable: true,
-	        detail: { collapsed: !collapsed } });
+	        detail: { collapsed: !collapsed } // shows where the toggle is going, not where it is
+	      });
 	
 	      if (_this.element.dispatchEvent(eventStart)) {
 	        if (!collapsed) {
