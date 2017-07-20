@@ -79,7 +79,7 @@
     </nav>
   {/links}
 
-  <div class="demo--container">
+  <div class="demo--container" data-floating-menu-container>
     {?links}
       {#links}
         {?items}
