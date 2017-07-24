@@ -121,7 +121,7 @@ When you do `git remote -v`, you'll see these remotes:
 
 > __Writing commit messages__
 >
-> - `<type>` indidcates the type of commit that's being made. This can be: `feat`, `fix`, `perf`, `docs`, `chore`, `style`, `refactor`
+> - `<type>` indicates the type of commit that's being made. This can be: `feat`, `fix`, `perf`, `docs`, `chore`, `style`, `refactor`
 > - `<scope>` The scope could be anything specifying place of the commit change or the thing(s) that changed.
 >
 > __Commit message format:__
@@ -245,4 +245,4 @@ Stay up to date with the activity in your pull request. Maintainers from the Des
 
 When you need to make a change, add, commit and push to your branch normally.
 
-Once all revisiions to your pull request are complete, someone from Design Systems will squash and merge your commits for you.
+Once all revisions to your pull request are complete, someone from Design Systems will squash and merge your commits for you.
