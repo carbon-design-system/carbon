@@ -11,13 +11,16 @@ const propTypes = {
   id: PropTypes.string.isRequired,
   labelText: PropTypes.string,
   onChange: PropTypes.func,
+  iconDescription: PropTypes.string,
 };
 
 const defaultProps = {
   onChange: () => {},
+  labelText: 'Provide checkbox label text',
+  iconDescription: 'Provide icon description for a11y'
 };
 
-const Checkbox = ({ className, id, labelText, onChange, ...other }) => {
+const Checkbox = ({ className, id, labelText, onChange, iconDescription, ...other }) => {
   let input;
   const wrapperClasses = classNames('bx--checkbox-label', className);
 
@@ -40,7 +43,7 @@ const Checkbox = ({ className, id, labelText, onChange, ...other }) => {
         <span className="bx--checkbox-appearance">
           <Icon
             className="bx--checkbox-checkmark"
-            description="checkmark"
+            description={iconDescription}
             name="checkmark"
           />
         </span>
