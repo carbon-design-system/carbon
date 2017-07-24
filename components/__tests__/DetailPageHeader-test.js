@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
+import window from 'window-or-global';
 import DetailPageHeader from '../DetailPageHeader';
 import Icon from '../Icon';
 import Breadcrumb from '../Breadcrumb';
@@ -128,4 +129,32 @@ describe('DetailPageHeader', () => {
       expect(tabs).toEqual(true);
     });
   });
+
+  describe('scroll event listener', () => {
+    let addEvent;
+    let removeEvent;
+
+    beforeEach(() => {
+      addEvent = jest.spyOn(window, 'addEventListener').mockImplementation(() => null);
+      removeEvent = jest.spyOn(window, 'removeEventListener').mockImplementation(() => null);
+    });
+
+    afterEach(() => {
+      addEvent.mockRestore();
+      removeEvent.mockRestore();
+    });
+
+    it('should pass in the same method when adding and removing the scroll event listener', () => {
+      const wrapper = mount(<DetailPageHeader title="test"/>);
+      wrapper.unmount();
+      expect(addEvent.mock.calls.length).toBe(1);
+      expect(removeEvent.mock.calls.length).toBe(1);
+      const addArgs = addEvent.mock.calls[0];
+      const removeArgs = removeEvent.mock.calls[0];
+      expect(addArgs[0]).toBe("scroll");
+      expect(removeArgs[0]).toBe("scroll");
+      expect(addArgs[1]).toBe(removeArgs[1]); // the scroll handler function
+    });
+  });
+  
 });

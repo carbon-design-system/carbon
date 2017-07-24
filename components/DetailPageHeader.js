@@ -30,8 +30,8 @@ class DetailPageHeader extends Component {
   };
 
   componentDidMount() {
-    const debouncedScroll = debounce(this.handleScroll, 25);
-    window.addEventListener('scroll', debouncedScroll);
+    this._debouncedScroll = debounce(this.handleScroll, 25);
+    window.addEventListener('scroll', this._debouncedScroll);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,7 +45,7 @@ class DetailPageHeader extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this._debouncedScroll);
   }
 
   handleScroll = () => {
