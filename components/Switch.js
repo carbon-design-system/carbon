@@ -16,6 +16,7 @@ const propTypes = {
 const defaultProps = {
   selected: false,
   kind: 'anchor',
+  text: 'Provide text',
   onClick: () => {},
   onKeyDown: () => {},
 };
