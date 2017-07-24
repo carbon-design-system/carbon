@@ -83,12 +83,13 @@
 
   .bx--table-row {
     @include reset;
-    height: rem(32px);
+    height: $data-table-row-height;
     padding-left: 1rem;
   }
 
   .bx--table-head .bx--table-row {
-    border-bottom: 1px solid $brand-01;
+    border-bottom: $data-table-heading-border-bottom;
+    height: rem(32px);
   }
 
   .bx--table-header {
