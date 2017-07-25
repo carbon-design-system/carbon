@@ -7,11 +7,13 @@ export default class CopyButton extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    iconDescription: PropTypes.string,
     feedback: PropTypes.string,
     feedbackTimeout: PropTypes.number,
     onClick: PropTypes.func,
   };
   static defaultProps = {
+    iconDescription: 'Copy to clipboard',
     feedback: 'Copied!',
     feedbackTimeout: 2000,
     onClick: () => {},
@@ -36,6 +38,7 @@ export default class CopyButton extends Component {
   }; // eslint-disable-line no-unused-vars
   render() {
     const {
+      iconDescription,
       className,
       feedback,
       feedbackTimeout, // eslint-disable-line no-unused-vars
@@ -53,7 +56,7 @@ export default class CopyButton extends Component {
         onClick={this.handleClick}
         {...other}
       >
-        <Icon className="bx--snippet__icon" name="copy" description="" />
+        <Icon className="bx--snippet__icon" name="copy" description={iconDescription} />
         <div className={feedbackClassNames} data-feedback={feedback} />
       </button>
     );

@@ -25,6 +25,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  iconDescription: 'Provide icon description if icon is used',
   tabIndex: 0,
   type: 'button',
   disabled: false,
