@@ -1,13 +1,16 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 
-class StructuredList extends mixin(createComponent, initComponentBySearch) {
+class StructuredList extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * StructuredList
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The root element of tables
    * @param {Object} [options] the... options
    * @param {string} [options.selectorInit] selector initialization
@@ -15,17 +18,21 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('keydown', evt => {
-      if (evt.which === 38 || evt.which === 40) {
-        this._handleKeydownArrow(evt);
-      }
-      if (evt.which === 13 || evt.which === 32) {
-        this._handleKeydownChecked(evt);
-      }
-    });
-    this.element.addEventListener('click', evt => {
-      this._handleClick(evt);
-    });
+    this.manage(
+      on(this.element, 'keydown', evt => {
+        if (evt.which === 38 || evt.which === 40) {
+          this._handleKeydownArrow(evt);
+        }
+        if (evt.which === 13 || evt.which === 32) {
+          this._handleKeydownChecked(evt);
+        }
+      })
+    );
+    this.manage(
+      on(this.element, 'click', evt => {
+        this._handleClick(evt);
+      })
+    );
   }
 
   _direction(evt) {

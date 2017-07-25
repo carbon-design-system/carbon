@@ -2,13 +2,17 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
+import handles from '../../globals/js/mixins/handles';
+import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 
-class FileUploader extends mixin(createComponent, initComponentBySearch, eventedState) {
+class FileUploader extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
    * File uploader.
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @extends eventedState
+   * @extends Handles
    * @param {HTMLElement} element The element working as a file uploader.
    * @param {Object} [options] The component options. See static options.
    */
@@ -26,7 +30,8 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
     }
 
     this.inputId = this.input.getAttribute('id');
-    this.input.addEventListener('change', () => this._displayFilenames());
+    this.manage(on(this.input, 'change', () => this._displayFilenames()));
+    this.manage(on(this.container, 'click', this._handleDeleteButton));
   }
 
   _filenamesHTML(name, id) {
@@ -64,7 +69,9 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
     if (state === 'delete-filename-fileuploader') {
       this.container.removeChild(detail.filenameElement);
     }
-    callback();
+    if (typeof callback === 'function') {
+      callback();
+    }
   };
 
   _getStateContainers() {
@@ -116,20 +123,26 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
     }
   }
 
+  /**
+   * Handles delete button.
+   * @param {Event} evt The event triggering this action.
+   * @private
+   */
+  _handleDeleteButton = evt => {
+    const target = eventMatches(evt, `[data-for=${this.inputId}]`);
+    if (target) {
+      this._changeState('delete-filename-fileuploader', {
+        initialEvt: evt,
+        filenameElement: target.parentNode,
+      });
+    }
+  };
+
   setState(state, selectIndex) {
     const stateContainers = this._getStateContainers();
 
     if (state === 'edit') {
       this._handleStateChange(stateContainers, selectIndex, this._closeButtonHTML());
-      stateContainers.forEach(el => {
-        el.addEventListener('click', evt => {
-          const detail = {
-            initialEvt: evt,
-            filenameElement: evt.currentTarget.parentNode,
-          };
-          this._changeState('delete-filename-fileuploader', detail);
-        });
-      });
     }
 
     if (state === 'upload') {

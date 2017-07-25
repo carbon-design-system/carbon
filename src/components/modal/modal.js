@@ -2,15 +2,17 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByLauncher from '../../globals/js/mixins/init-component-by-launcher';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowHideState) {
+class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowHideState, handles) {
   /**
    * Modal dialog.
    * @extends CreateComponent
    * @extends InitComponentByLauncher
    * @extends EventedShowHideState
+   * @extends Handles
    * @param {HTMLElement} element The element working as a modal dialog.
    * @param {Object} [options] The component options.
    * @param {string} [options.classVisible] The CSS class for the visible state.
@@ -31,6 +33,22 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     super(element, options);
     this._hookCloseActions();
   }
+
+  /**
+   * The handle for `focusin` event listener.
+   * Used for "focus-wrap" feature.
+   * @type {Handle}
+   * @private
+   */
+  _handleFocusinListener;
+
+  /**
+   * The handle for `keydown` event listener.
+   * Used for "close-on-escape-key" feature.
+   * @type {Handle}
+   * @private
+   */
+  _handleKeydownListener;
 
   /**
    * A method that runs when `.init()` is called from `initComponentByLauncher`.
@@ -60,8 +78,11 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
+    let handleTransitionEnd;
     const transitionEnd = () => {
-      this.element.removeEventListener('transitionend', transitionEnd);
+      if (handleTransitionEnd) {
+        handleTransitionEnd = this.unmanage(handleTransitionEnd).release();
+      }
       if (state === 'shown' && this.element.offsetWidth > 0 && this.element.offsetHeight > 0) {
         (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
       }
@@ -69,13 +90,15 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     };
 
     if (this._handleFocusinListener) {
-      this._handleFocusinListener = this._handleFocusinListener.release();
+      this._handleFocusinListener = this.unmanage(this._handleFocusinListener).release();
     }
 
     if (state === 'shown') {
       const hasFocusin = 'onfocusin' in this.element.ownerDocument.defaultView;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      this._handleFocusinListener = on(this.element.ownerDocument, focusinEventName, this._handleFocusin, !hasFocusin);
+      this._handleFocusinListener = this.manage(
+        on(this.element.ownerDocument, focusinEventName, this._handleFocusin, !hasFocusin)
+      );
     }
 
     if (state === 'hidden') {
@@ -83,32 +106,33 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     } else if (state === 'shown') {
       this.element.classList.toggle(this.options.classVisible, true);
     }
-    this.element.addEventListener('transitionend', transitionEnd);
+    handleTransitionEnd = this.manage(on(this.element, 'transitionend', transitionEnd));
   }
 
   _hookCloseActions() {
-    this.element.addEventListener('click', evt => {
-      const closeButton = eventMatches(evt, this.options.selectorModalClose);
-      if (closeButton) {
-        evt.delegateTarget = closeButton; // eslint-disable-line no-param-reassign
-      }
-      if (closeButton || evt.target === this.element) {
-        this.hide(evt);
-      }
-    });
+    this.manage(
+      on(this.element, 'click', evt => {
+        const closeButton = eventMatches(evt, this.options.selectorModalClose);
+        if (closeButton) {
+          evt.delegateTarget = closeButton; // eslint-disable-line no-param-reassign
+        }
+        if (closeButton || evt.target === this.element) {
+          this.hide(evt);
+        }
+      })
+    );
 
-    if (this.keydownHandler) {
-      this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
-      this.keydownHandler = null;
+    if (this._handleKeydownListener) {
+      this._handleKeydownListener = this.unmanage(this._handleKeydownListener).release();
     }
 
-    this.keydownHandler = evt => {
-      if (evt.which === 27) {
-        this.hide(evt);
-      }
-    };
-
-    this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
+    this._handleKeydownListener = this.manage(
+      on(this.element.ownerDocument.body, 'keydown', evt => {
+        if (evt.which === 27) {
+          this.hide(evt);
+        }
+      })
+    );
   }
 
   /**
@@ -125,17 +149,6 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
       this.element.focus();
     }
   };
-
-  release() {
-    if (this.keydownHandler) {
-      this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
-      this.keydownHandler = null;
-    }
-    if (this._handleFocusinListener) {
-      this._handleFocusinListener = this._handleFocusinListener.release();
-    }
-    super.release();
-  }
 
   /**
    * The map associating DOM element and modal instance.

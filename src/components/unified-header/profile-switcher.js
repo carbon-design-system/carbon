@@ -1,14 +1,16 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
+class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Profile Switcher.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a profile switcher.
    * @param {Object} [options] The component options
    * @param {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
@@ -28,38 +30,48 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
-      this.handleDocumentClick(evt);
-    });
+    this.manage(
+      on(this.element.ownerDocument, 'click', evt => {
+        this.handleDocumentClick(evt);
+      })
+    );
 
-    this.element.addEventListener('dropdown-beingselected', event => {
-      if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
-        const linkedIconNode = event.detail.item.querySelector(this.options.classLinkedIcon);
-        this.element.isLinked = !!linkedIconNode;
-        this.element.linkedIcon = linkedIconNode && linkedIconNode.cloneNode(true);
-        const linkedAccountNode = event.detail.item.querySelector(this.options.selectorAccountSlLinked);
-        this.element.linkedAccount = linkedAccountNode && linkedAccountNode.cloneNode(true);
-      }
-    });
+    this.manage(
+      on(this.element, 'dropdown-beingselected', event => {
+        if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
+          const linkedIconNode = event.detail.item.querySelector(this.options.classLinkedIcon);
+          this.element.isLinked = !!linkedIconNode;
+          this.element.linkedIcon = linkedIconNode && linkedIconNode.cloneNode(true);
+          const linkedAccountNode = event.detail.item.querySelector(this.options.selectorAccountSlLinked);
+          this.element.linkedAccount = linkedAccountNode && linkedAccountNode.cloneNode(true);
+        }
+      })
+    );
 
     const toggleNode = this.element.querySelector(this.options.selectorToggle);
     if (toggleNode) {
-      toggleNode.addEventListener('keydown', event => {
-        this.toggle(event);
-      });
+      this.manage(
+        on(toggleNode, 'keydown', event => {
+          this.toggle(event);
+        })
+      );
 
-      toggleNode.addEventListener('mouseenter', event => {
-        this.getLinkedData(event);
-        this.determineSwitcherValues(true);
-      });
+      this.manage(
+        on(toggleNode, 'mouseenter', event => {
+          this.getLinkedData(event);
+          this.determineSwitcherValues(true);
+        })
+      );
 
-      toggleNode.addEventListener('mouseleave', event => {
-        this.getLinkedData(event);
-        this.determineSwitcherValues(false);
-      });
+      this.manage(
+        on(toggleNode, 'mouseleave', event => {
+          this.getLinkedData(event);
+          this.determineSwitcherValues(false);
+        })
+      );
     }
 
-    this.element.ownerDocument.addEventListener('keyup', () => this.handleBlur());
+    this.manage(on(this.element.ownerDocument, 'keyup', () => this.handleBlur()));
   }
 
   /**
@@ -233,13 +245,6 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
         menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
       }
     }
-  }
-
-  release() {
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    super.release();
   }
 
   /**

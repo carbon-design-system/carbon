@@ -1,12 +1,15 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
-class Loading extends mixin(createComponent, initComponentBySearch) {
+class Loading extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Spinner indicating loading state.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a spinner.
    * @param {Object} [options] The component options.
    * @param {boolean} [options.active] `true` if this spinner should roll.
@@ -64,11 +67,16 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
    */
   end() {
     this.set(false);
-    this.element.addEventListener('animationend', evt => {
-      if (evt.animationName === 'rotate-end-p2') {
-        this._deleteElement();
-      }
-    });
+    let handleAnimationEnd = this.manage(
+      on(this.element, 'animationend', evt => {
+        if (handleAnimationEnd) {
+          handleAnimationEnd = this.unmanage(handleAnimationEnd).release();
+        }
+        if (evt.animationName === 'rotate-end-p2') {
+          this._deleteElement();
+        }
+      })
+    );
   }
 
   /**

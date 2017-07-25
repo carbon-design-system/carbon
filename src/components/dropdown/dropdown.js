@@ -10,6 +10,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * A selector with drop downs.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends TrackBlur
    * @param {HTMLElement} element The element working as a selector.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
@@ -23,36 +24,24 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
   constructor(element, options) {
     super(element, options);
 
-    /**
-     * The handle to release click event listener on document object.
-     * @member {Handle}
-     */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', event => {
-      this._toggle(event);
-    });
-
-    this.element.addEventListener('keydown', event => {
-      this._handleKeyDown(event);
-    });
-    this.element.addEventListener('click', event => {
-      const item = eventMatches(event, this.options.selectorItem);
-      if (item) {
-        this.select(item);
-      }
-    });
-  }
-
-  /**
-   * Cleans up stuffs specific to this widget.
-   */
-  release() {
-    if (this.hFocusIn) {
-      this.hFocusIn = this.hFocusIn.release();
-    }
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    super.release();
+    this.manage(
+      on(this.element.ownerDocument, 'click', event => {
+        this._toggle(event);
+      })
+    );
+    this.manage(
+      on(this.element, 'keydown', event => {
+        this._handleKeyDown(event);
+      })
+    );
+    this.manage(
+      on(this.element, 'click', event => {
+        const item = eventMatches(event, this.options.selectorItem);
+        if (item) {
+          this.select(item);
+        }
+      })
+    );
   }
 
   /**

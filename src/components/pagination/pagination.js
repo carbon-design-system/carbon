@@ -1,8 +1,10 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
-class Pagination extends mixin(createComponent, initComponentBySearch) {
+class Pagination extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Pagination component.
    * @extends CreateComponent
@@ -28,41 +30,45 @@ class Pagination extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    this.element.addEventListener('click', evt => {
-      if (evt.target.matches(this.options.selectorPageBackward)) {
-        const detail = {
-          initialEvt: evt,
-          element: evt.target,
-          direction: 'backward',
-        };
-        this._emitEvent(this.options.eventPageChange, detail);
-      } else if (evt.target.matches(this.options.selectorPageForward)) {
-        const detail = {
-          initialEvt: evt,
-          element: evt.target,
-          direction: 'forward',
-        };
-        this._emitEvent(this.options.eventPageChange, detail);
-      }
-    });
+    this.manage(
+      on(this.element, 'click', evt => {
+        if (evt.target.matches(this.options.selectorPageBackward)) {
+          const detail = {
+            initialEvt: evt,
+            element: evt.target,
+            direction: 'backward',
+          };
+          this._emitEvent(this.options.eventPageChange, detail);
+        } else if (evt.target.matches(this.options.selectorPageForward)) {
+          const detail = {
+            initialEvt: evt,
+            element: evt.target,
+            direction: 'forward',
+          };
+          this._emitEvent(this.options.eventPageChange, detail);
+        }
+      })
+    );
 
-    this.element.addEventListener('input', evt => {
-      if (evt.target.matches(this.options.selectorItemsPerPageInput)) {
-        const detail = {
-          initialEvt: evt,
-          element: evt.target,
-          value: evt.target.value,
-        };
-        this._emitEvent(this.options.eventItemsPerPage, detail);
-      } else if (evt.target.matches(this.options.selectorPageNumberInput)) {
-        const detail = {
-          initialEvt: evt,
-          element: evt.target,
-          value: evt.target.value,
-        };
-        this._emitEvent(this.options.eventPageNumber, detail);
-      }
-    });
+    this.manage(
+      on(this.element, 'input', evt => {
+        if (evt.target.matches(this.options.selectorItemsPerPageInput)) {
+          const detail = {
+            initialEvt: evt,
+            element: evt.target,
+            value: evt.target.value,
+          };
+          this._emitEvent(this.options.eventItemsPerPage, detail);
+        } else if (evt.target.matches(this.options.selectorPageNumberInput)) {
+          const detail = {
+            initialEvt: evt,
+            element: evt.target,
+            value: evt.target.value,
+          };
+          this._emitEvent(this.options.eventPageNumber, detail);
+        }
+      })
+    );
   }
 
   /**
