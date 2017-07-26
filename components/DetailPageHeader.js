@@ -3,6 +3,10 @@ import React, { Component, Children } from 'react';
 import classnames from 'classnames';
 import debounce from 'lodash.debounce';
 import window from 'window-or-global';
+import Breadcrumb from './Breadcrumb';
+import Tabs from './Tabs';
+import OverflowMenu from './OverflowMenu';
+import Icon from './Icon';
 
 class DetailPageHeader extends Component {
   static propTypes = {
@@ -110,19 +114,19 @@ class DetailPageHeader extends Component {
     let icon;
 
     Children.map(children, child => {
-      if (child.type.name === 'Breadcrumb') {
+      if (child.type === Breadcrumb) {
         breadcrumb = child;
       }
 
-      if (child.type.name === 'Tabs') {
+      if (child.type === Tabs) {
         tabs = child;
       }
 
-      if (child.type.name === 'OverflowMenu') {
+      if (child.type === OverflowMenu) {
         overflow = child;
       }
 
-      if (child.type.name === 'Icon') {
+      if (child.type === Icon) {
         icon = child;
       }
 

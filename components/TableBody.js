@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import TableRow from './TableRow';
 
 const propTypes = {
   children: PropTypes.node,
@@ -17,7 +18,7 @@ const handleRowStriping = rows => {
 
   return rows.map(child => {
     // Only make changes if it's a TableRow
-    if (child.type.name === 'TableRow') {
+    if (child.type === TableRow) {
       // manually increase the TableRow count
       count++;
 

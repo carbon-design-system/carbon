@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Flatpickr from 'flatpickr';
 import ReactDOM from 'react-dom';
+import DatePickerInput from './DatePickerInput';
 
 // Weekdays shorthand for english locale
 Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
@@ -203,9 +204,9 @@ class DatePicker extends Component {
       '.bx--date-picker__input'
     );
     if (this.props.datePickerType === 'range') {
-      const toInput = ReactDOM.findDOMNode(
-        this.toInputField
-      ).querySelector('.bx--date-picker__input');
+      const toInput = ReactDOM.findDOMNode(this.toInputField).querySelector(
+        '.bx--date-picker__input'
+      );
       if (selectedDates.length === 2) {
         input.value = this.formatDate(selectedDates[0]);
         toInput.value = this.formatDate(selectedDates[1]);
@@ -253,23 +254,23 @@ class DatePicker extends Component {
 
     const childArray = React.Children.toArray(children);
     const childrenWithProps = childArray.map((child, index) => {
-      if (index === 0 && child.type.name === 'DatePickerInput') {
+      if (index === 0 && child.type === DatePickerInput) {
         return React.cloneElement(child, {
           datePickerType,
-          ref: (inputField) => this.inputField = inputField,
+          ref: inputField => (this.inputField = inputField),
         });
-      } else if (index === 1 && child.type.name === 'DatePickerInput') {
+      } else if (index === 1 && child.type === DatePickerInput) {
         return React.cloneElement(child, {
           datePickerType,
-          ref: (toInputField) => this.toInputField = toInputField,
+          ref: toInputField => (this.toInputField = toInputField),
         });
       } else if (index === 0) {
         return React.cloneElement(child, {
-          ref: (inputField) => this.inputField = inputField,
+          ref: inputField => (this.inputField = inputField),
         });
       } else if (index === 1) {
         return React.cloneElement(child, {
-          ref: (toInputField) => this.toInputField = toInputField,
+          ref: toInputField => (this.toInputField = toInputField),
         });
       }
     });
