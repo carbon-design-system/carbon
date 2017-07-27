@@ -13,7 +13,6 @@ $css--helpers: true;
 @import '../search/search';
 
 @include exports('toolbar') {
-
   .bx--toolbar {
     @include helvetica;
     display: flex;
@@ -100,7 +99,8 @@ $css--helpers: true;
   }
 
   .bx--toolbar-filter-icon {
-    width: 1.2rem;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .bx--toolbar-menu__title {
