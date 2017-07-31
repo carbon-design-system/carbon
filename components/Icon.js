@@ -12,12 +12,13 @@ const propTypes = {
   role: PropTypes.string,
   style: PropTypes.object,
   viewBox: PropTypes.string,
-  width: PropTypes.string,
+  width: PropTypes.string
 };
 
 const defaultProps = {
   fillRule: 'evenodd',
   role: 'img',
+  description: 'Provide a description that will be used as the title'
 };
 
 /**
@@ -61,27 +62,25 @@ export function getSvgData(iconName) {
  * svgShapes(svgData);
  */
 export function svgShapes(svgData) {
-  const svgElements = Object.keys(svgData)
-    .filter(key => svgData[key])
-    .map(svgProp => {
-      const data = svgData[svgProp];
+  const svgElements = Object.keys(svgData).filter(key => svgData[key]).map(svgProp => {
+    const data = svgData[svgProp];
 
-      if (svgProp === 'circles') {
-        return data.map(circle => {
-          const circleProps = {
-            cx: circle.cx,
-            cy: circle.cy,
-            r: circle.r,
-          };
+    if (svgProp === 'circles') {
+      return data.map(circle => {
+        const circleProps = {
+          cx: circle.cx,
+          cy: circle.cy,
+          r: circle.r
+        };
 
-          return <circle {...circleProps} />;
-        });
-      } else if (svgProp === 'paths') {
-        return data.map(path => <path d={path.d} />);
-      }
+        return <circle {...circleProps} />;
+      });
+    } else if (svgProp === 'paths') {
+      return data.map(path => <path d={path.d} />);
+    }
 
-      return '';
-    });
+    return '';
+  });
 
   return svgElements;
 }
@@ -114,13 +113,13 @@ const Icon = ({
     style,
     viewBox: icon.viewBox,
     width: width || icon.width,
-    ...other,
+    ...other
   };
 
   const svgContent = icon ? svgShapes(icon.svgData) : '';
 
   return (
-    <svg {...props}>
+    <svg {...props} aria-label={description}>
       <title>{description}</title>
       {svgContent}
     </svg>
