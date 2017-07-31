@@ -1438,7 +1438,7 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bowser@^1.6.0, bowser@^1.6.1:
+bowser@^1.6.0, bowser@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/bowser/-/bowser-1.7.0.tgz#169de4018711f994242bff9a8009e77a1f35e003"
 
@@ -3018,9 +3018,9 @@ flatpickr@2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-2.6.3.tgz#457357532deb135f3da64b425bf4435737961564"
 
-flatpickr@^3.0.5-1:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-3.0.5.tgz#a73ccaa1fc3609219ca91dd334ce0c45a7f012f1"
+flatpickr@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-3.0.6.tgz#81540f1a0f010fa3b96d929943b6396bbb25b1b6"
 
 flatten@^1.0.2:
   version "1.0.2"
@@ -5140,8 +5140,8 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
 "nwmatcher@>= 1.3.9 < 2.0.0":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/nwmatcher/-/nwmatcher-1.4.1.tgz#7ae9b07b0ea804db7e25f05cb5fe4097d4e4949f"
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/nwmatcher/-/nwmatcher-1.4.0.tgz#b4389362170e7ef9798c3c7716d80ebc0106fccf"
 
 oauth-sign@~0.8.1:
   version "0.8.2"
@@ -6274,6 +6274,10 @@ request@~2.74.0:
     stringstream "~0.0.4"
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
+
+requestanimationframe@^0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/requestanimationframe/-/requestanimationframe-0.0.23.tgz#ed79972ec0a052df8acc6b91c5750cb19e7f0908"
 
 require-directory@^2.1.1:
   version "2.1.1"

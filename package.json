@@ -87,7 +87,7 @@
   },
   "dependencies": {
     "classnames": "2.2.5",
-    "flatpickr": "^3.0.5-1",
+    "flatpickr": "^3.0.6",
     "lodash.debounce": "^4.0.8",
     "react-addons-css-transition-group": "^15.4.2",
     "warning": "3.0.0",
@@ -126,6 +126,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.6.1",
+    "requestanimationframe": "^0.0.23",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.5",
     "semantic-release": "^6.3.6",

@@ -63,6 +63,7 @@ export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
 export Switch from './components/Switch';
+export Slider from './components/Slider';
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
 export Table from './components/Table';
