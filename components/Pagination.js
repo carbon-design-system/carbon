@@ -14,25 +14,35 @@ class Pagination extends Component {
     itemRangeText: PropTypes.func,
     forwardText: PropTypes.string,
     itemsPerPageText: PropTypes.string,
+    itemText: PropTypes.func,
     onChange: PropTypes.func,
     pageNumberText: PropTypes.string,
     pageRangeText: PropTypes.func,
+    pageText: PropTypes.func,
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
-    totalItems: PropTypes.number.isRequired,
+    totalItems: PropTypes.number,
     disabled: PropTypes.bool,
     page: PropTypes.number,
     pageSize: PropTypes.number,
+    pagesUnknown: PropTypes.bool,
+    isLastPage: PropTypes.bool,
+    pageInputDisabled: PropTypes.bool,
   };
   static defaultProps = {
     backwardText: 'Backward',
     itemRangeText: (min, max, total) => `${min}-${max} of ${total} items`,
     forwardText: 'Forward',
-    itemsPerPageText: 'Items per page',
+    itemsPerPageText: 'items per page',
     onChange: () => {},
     pageNumberText: 'Page Number',
     pageRangeText: (current, total) => `${current} of ${total} pages`,
     disabled: false,
     page: 1,
+    pagesUnknown: false,
+    isLastPage: false,
+    pageInputDisabled: false,
+    itemText: (min, max) => `${min}-${max} items`,
+    pageText: (page) => `page ${page}`,
   };
   static uuid = 0;
   state = {
@@ -91,6 +101,11 @@ class Pagination extends Component {
       pageNumberText,
       pageRangeText,
       pageSizes,
+      itemText,
+      pageText,
+      pagesUnknown,
+      isLastPage,
+      pageInputDisabled,
       totalItems,
       onChange, // eslint-disable-line no-unused-vars
       page: pageNumber, // eslint-disable-line no-unused-vars
@@ -118,16 +133,24 @@ class Pagination extends Component {
             {itemsPerPageText}&nbsp;&nbsp;|&nbsp;&nbsp;
           </span>
           <span className="bx--pagination__text">
-            {itemRangeText(
-              pageSize * (page - 1) + 1,
-              Math.min(page * pageSize, totalItems),
-              totalItems
+            {pagesUnknown ?
+              itemText(
+                pageSize * (page - 1) + 1,
+                page * pageSize,
+              ) :
+              itemRangeText(
+                pageSize * (page - 1) + 1,
+                Math.min(page * pageSize, totalItems),
+                totalItems
             )}
           </span>
         </div>
         <div className="bx--pagination__right">
           <span className="bx--pagination__text">
-            {pageRangeText(page, Math.ceil(totalItems / pageSize))}
+            {pagesUnknown ?
+              pageText(page) :
+              pageRangeText(page, Math.ceil(totalItems / pageSize))
+            }
           </span>
           <button
             className="bx--pagination__button bx--pagination__button--backward"
@@ -140,19 +163,22 @@ class Pagination extends Component {
               description={backwardText}
             />
           </button>
-          <TextInput
-            id={`bx-pagination-input-${this.id}`}
-            placeholder="0"
-            value={page}
-            onChange={this.handlePageInputChange}
-            labelText={pageNumberText}
-            hideLabel
-          />
+          {pageInputDisabled ?
+            <span className="bx--pagination__text">|</span> :
+            <TextInput
+              id={`bx-pagination-input-${this.id}`}
+              placeholder="0"
+              value={page}
+              onChange={this.handlePageInputChange}
+              labelText={pageNumberText}
+              hideLabel
+            />
+          }
           <button
             className="bx--pagination__button bx--pagination__button--forward"
             onClick={this.incrementPage}
             disabled={
-              this.props.disabled || page === Math.ceil(totalItems / pageSize)
+              this.props.disabled || page === Math.ceil(totalItems / pageSize) || isLastPage
             }
           >
             <Icon

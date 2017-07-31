@@ -16,9 +16,16 @@ storiesOf('Pagination', module)
     </div>
   ))
   .addWithInfo(
-    'Default',
+    'with known total number of items',
     `
-      Description coming soon.
+      The pagination component is used to paginate through items with known total.
     `,
     () => <Pagination {...props} totalItems={103} />
+  )
+  .addWithInfo(
+    'with unknown total number of items',
+    `
+      The pagination component is used to paginate through items with unknown total.
+    `,
+    () => <Pagination {...props} pagesUnknown={true} isLastPage={false} pageInputDisabled={true} />
   );
