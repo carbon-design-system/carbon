@@ -44,7 +44,7 @@ describe('CardContent', () => {
         const icon = wrapper.find(Icon);
         expect(icon.hasClass('bx--about__icon--img')).toBe(true);
         expect(icon.props().name).toBe('testIcon');
-        expect(icon.props().description).toBe('About');
+        expect(icon.props().description).toBe('card icon');
       });
 
       describe('renders a title div', () => {

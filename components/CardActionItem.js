@@ -11,6 +11,11 @@ const propTypes = {
   description: PropTypes.string.isRequired,
 };
 
+const defaultProps = {
+  ariaLabel: '',
+  description: 'card action'
+}
+
 const CardActionItem = ({
   className,
   id,
@@ -41,5 +46,6 @@ const CardActionItem = ({
 };
 
 CardActionItem.propTypes = propTypes;
+CardActionItem.defaultProps = defaultProps;
 
 export default CardActionItem;

@@ -10,10 +10,13 @@ const propTypes = {
   cardLink: PropTypes.node,
   cardInfo: PropTypes.array,
   className: PropTypes.string,
+  iconDescription: PropTypes.string
 };
 
 const defaultProps = {
+  iconDescription: 'card icon',
   cardIcon: 'app-services',
+  cardTitle: 'card title'
 };
 
 const CardContent = ({
@@ -23,23 +26,24 @@ const CardContent = ({
   cardTitle,
   cardLink,
   cardInfo,
+  iconDescription,
   ...other
 }) => {
   const cardContentClasses = classNames({
     'bx--card__card-overview': true,
-    [className]: className,
+    [className]: className
   });
 
   const cardLinkContent = cardLink
-    ? cardLink.map((link, key) => (
+    ? cardLink.map((link, key) =>
         <a key={key} href={link} className="bx--about__title--link">{link}</a>
-      ))
+      )
     : '';
 
   const cardInfoContent = cardInfo
-    ? cardInfo.map((info, key) => (
+    ? cardInfo.map((info, key) =>
         <h4 key={key} className="bx--about__title--additional-info">{info}</h4>
-      ))
+      )
     : '';
 
   const cardLinkContentArray = Object.keys(cardLinkContent);
@@ -53,7 +57,7 @@ const CardContent = ({
           <Icon
             className="bx--about__icon--img"
             name={cardIcon}
-            description="About"
+            description={iconDescription}
           />
         </div>
         <div className="bx--about__title">
