@@ -6,7 +6,7 @@ export default class TimePicker extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
     labelText: PropTypes.string,
     onClick: PropTypes.func,
     type: PropTypes.string,

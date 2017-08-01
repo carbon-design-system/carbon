@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 class DatePickerInput extends Component {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     children: PropTypes.node,
   };
 
@@ -12,6 +13,7 @@ class DatePickerInput extends Component {
     type: 'text',
     disabled: false,
     invalid: false,
+    labelText: 'Please provide label text'
   };
 
   render() {

@@ -35,7 +35,7 @@ storiesOf('DatePicker', module)
           {...datePickerInputProps}
           {...simpleShortDatePickerInputProps}
         />
-      </DatePicker>
+      </DatePicker>,
   )
   .addWithInfo(
     'simple and normal',
@@ -45,7 +45,7 @@ storiesOf('DatePicker', module)
     () =>
       <DatePicker id="date-picker" datePickerType="simple">
         <DatePickerInput {...datePickerInputProps} />
-      </DatePicker>
+      </DatePicker>,
   )
   .addWithInfo(
     'single with calendar',
@@ -55,7 +55,7 @@ storiesOf('DatePicker', module)
     () =>
       <DatePicker id="date-picker" datePickerType="single" dateFormat="m/d/Y">
         <DatePickerInput {...datePickerInputProps} />
-      </DatePicker>
+      </DatePicker>,
   )
   .addWithInfo(
     'range with calendar',
@@ -66,5 +66,5 @@ storiesOf('DatePicker', module)
       <DatePicker id="date-picker" datePickerType="range" dateFormat="m/d/Y">
         <DatePickerInput {...datePickerInputProps} />
         <DatePickerInput {...datePickerInputProps} id="date-picker-id-2" />
-      </DatePicker>
+      </DatePicker>,
   );
