@@ -4,6 +4,15 @@ export {
   ProgressStep,
 } from './components/ProgressIndicator';
 export {
+  OrderSummary,
+  OrderSummaryHeader,
+  OrderSummaryCategory,
+  OrderSummaryList,
+  OrderSummaryListItem,
+  OrderSummaryTotal,
+  OrderSummaryFooter,
+} from './components/OrderSummary';
+export {
   StructuredListWrapper,
   StructuredListHead,
   StructuredListBody,
