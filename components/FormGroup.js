@@ -8,12 +8,13 @@ const propTypes = {
   className: PropTypes.string,
   invalid: PropTypes.bool,
   message: PropTypes.bool,
-  messageText: PropTypes.string,
+  messageText: PropTypes.string
 };
 const defaultProps = {
   invalid: false,
   message: false,
-  messageText: undefined,
+  messageText: 'Provide message text',
+  legendText: 'Provide legend text'
 };
 
 const FormGroup = ({
