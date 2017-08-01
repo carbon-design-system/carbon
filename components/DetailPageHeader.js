@@ -22,6 +22,7 @@ class DetailPageHeader extends Component {
   };
 
   static defaultProps = {
+    title: 'Provide a title',
     statusText: 'Running',
     role: 'banner', // a11y compliance
     hasTabs: false,
