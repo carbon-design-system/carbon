@@ -13,7 +13,7 @@ class Tooltip extends Component {
     triggerText: PropTypes.string,
     showIcon: PropTypes.bool,
     iconName: PropTypes.string,
-    iconDescription: PropTypes.string,
+    iconDescription: PropTypes.string
   };
 
   static defaultProps = {
@@ -22,10 +22,11 @@ class Tooltip extends Component {
     showIcon: true,
     iconName: 'info--glyph',
     iconDescription: 'tooltip',
+    triggerText: 'Provide triggerText'
   };
 
   state = {
-    open: this.props.open,
+    open: this.props.open
   };
 
   componentDidMount() {
@@ -82,11 +83,7 @@ class Tooltip extends Component {
                 onFocus={() => this.handleMouse('over')}
                 onBlur={() => this.handleMouse('out')}
               >
-                <Icon
-                  name={iconName}
-                  description={iconDescription}
-                  tabIndex="0"
-                />
+                <Icon name={iconName} description={iconDescription} tabIndex="0" />
               </div>
             </div>
           : <div
