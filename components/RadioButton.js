@@ -13,11 +13,12 @@ class RadioButton extends React.Component {
     labelText: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
   };
 
   static defaultProps = {
-    onChange: () => {},
+    labelText: 'Provide labelText',
+    onChange: () => {}
   };
 
   componentWillMount() {
@@ -29,10 +30,7 @@ class RadioButton extends React.Component {
   };
 
   render() {
-    const wrapperClasses = classNames(
-      'radioButtonWrapper',
-      this.props.className
-    );
+    const wrapperClasses = classNames('radioButtonWrapper', this.props.className);
 
     const { labelText, ...other } = this.props;
 
