@@ -4,20 +4,6 @@ import { mount } from 'enzyme';
 
 describe('Filename', () => {
   const mountWrapper = mount(<Filename name={'trees.jpg'} />);
-  describe('Renders as expected with default props', () => {
-    it('should render correct icon when status prop is complete', () => {
-      mountWrapper.setProps({ status: 'complete' });
-      expect(mountWrapper.find('Icon').props().name).toEqual('checkmark--glyph');
-    });
-    it('should render correct icon when status prop is edit', () => {
-      mountWrapper.setProps({ status: 'edit' });
-      expect(mountWrapper.find('Icon').props().name).toEqual('close--glyph');
-    });
-    it('should render correct component when status prop is uploading', () => {
-      mountWrapper.setProps({ status: 'uploading' });
-      expect(mountWrapper.find('.bx--loading').hasClass('bx--loading')).toEqual(true);
-    });
-  });
 
   describe('click on edit icon (close--glyph)', () => {
     it('should have a click event', () => {

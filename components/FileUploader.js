@@ -14,17 +14,17 @@ class FileUploaderButton extends Component {
     listFiles: PropTypes.bool,
     multiple: PropTypes.bool,
     onChange: PropTypes.func,
-    role: PropTypes.string,
+    role: PropTypes.string
   };
   static defaultProps = {
     disableLabelChanges: false,
     labelText: 'Add file',
     multiple: false,
     onChange: () => {},
-    role: 'button',
+    role: 'button'
   };
   state = {
-    labelText: this.props.labelText,
+    labelText: this.props.labelText
   };
   componentWillMount() {
     this.uid = this.props.id || uid();
@@ -59,12 +59,17 @@ class FileUploaderButton extends Component {
     } = this.props;
     const classes = classNames({
       'bx--file': true,
-      [className]: className,
+      [className]: className
     });
 
     return (
       <div className={classes}>
-        <label className="bx--btn bx--btn--primary" htmlFor={this.uid} role={role} {...other}>
+        <label
+          className="bx--btn bx--btn--primary"
+          htmlFor={this.uid}
+          role={role}
+          {...other}
+        >
           {this.state.labelText}
         </label>
         <input
@@ -81,18 +86,19 @@ class FileUploaderButton extends Component {
 
 class Filename extends Component {
   static propTypes = {
-    name: PropTypes.string,
     style: PropTypes.object,
     status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
+    iconDescription: PropTypes.string
   };
 
   static defaultProps = {
+    iconDescription: 'Provide icon description',
     status: 'uploading',
-    style: {},
+    style: {}
   };
 
   render() {
-    const { name, status, style, ...other } = this.props;
+    const { status, style, iconDescription, ...other } = this.props;
     const tempStyle = Object.assign(style, { marginRight: '-1px' }); // temp style correction for loading component position
     return (
       <span>
@@ -107,7 +113,7 @@ class Filename extends Component {
           ? <Icon
               className="bx--file-close"
               name="close--glyph"
-              description={`Remove the file named: ${name}`}
+              description={iconDescription}
               style={style}
               {...other}
             />
@@ -116,7 +122,7 @@ class Filename extends Component {
           ? <Icon
               className="bx--file-complete"
               name="checkmark--glyph"
-              description={`The file named, ${name}, has been uploaded.`}
+              description={iconDescription}
               style={style}
               {...other}
             />
@@ -128,6 +134,7 @@ class Filename extends Component {
 
 class FileUploader extends Component {
   static propTypes = {
+    iconDescription: PropTypes.string,
     buttonLabel: PropTypes.string,
     filenameStatus: PropTypes.oneOf(['edit', 'complete', 'uploading']).isRequired,
     labelDescription: PropTypes.string,
@@ -135,28 +142,30 @@ class FileUploader extends Component {
     multiple: PropTypes.bool,
     onChange: PropTypes.func,
     onClick: PropTypes.func,
-    className: PropTypes.string,
+    className: PropTypes.string
   };
 
   static defaultProps = {
+    iconDescription: 'Provide icon description',
     filenameStatus: 'uploading',
     buttonLabel: 'Add file',
     multiple: false,
     onChange: () => {},
-    onClick: () => {},
+    onClick: () => {}
   };
 
   state = {
     filenames: [],
-    filenameStatus: '',
+    filenameStatus: ''
   };
+
+  nodes = [];
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.filenameStatus !== this.props.filenameStatus) {
       this.setState({ filenameStatus: nextProps.filenameStatus });
     }
   }
-  nodes = [];
   handleChange = evt => {
     this.setState({ filenames: [...evt.target.files].map(file => file.name) });
     this.props.onChange(evt);
@@ -172,6 +181,7 @@ class FileUploader extends Component {
 
   render() {
     const {
+      iconDescription,
       buttonLabel,
       filenameStatus,
       labelDescription,
@@ -183,7 +193,7 @@ class FileUploader extends Component {
 
     const classes = classNames({
       'bx--form-item': true,
-      [className]: className,
+      [className]: className
     });
 
     return (
@@ -199,7 +209,7 @@ class FileUploader extends Component {
         <div className="bx--file-container">
           {this.state.filenames.length === 0
             ? null
-            : this.state.filenames.map((name, index) => (
+            : this.state.filenames.map((name, index) =>
                 <span
                   key={index}
                   className="bx--file__selected-file"
@@ -211,10 +221,11 @@ class FileUploader extends Component {
                     <Filename
                       status={filenameStatus}
                       onClick={evt => this.handleClick(evt, index)}
+                      iconDescription={iconDescription}
                     />
                   </span>
                 </span>
-              ))}
+              )}
         </div>
       </div>
     );
