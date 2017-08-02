@@ -16,13 +16,14 @@ const propTypes = {
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   onMouseUp: PropTypes.func,
-  closeMenu: PropTypes.func,
+  closeMenu: PropTypes.func
 };
 
 const defaultProps = {
   hasDivider: false,
   isDelete: false,
-  onClick: () => {},
+  itemText: 'Provide itemText',
+  onClick: () => {}
 };
 
 const OverflowMenuItem = ({
@@ -39,13 +40,10 @@ const OverflowMenuItem = ({
     'bx--overflow-menu-options__btn'
   );
 
-  const overflowMenuItemClasses = classNames(
-    'bx--overflow-menu-options__option',
-    {
-      'bx--overflow-menu--divider': hasDivider,
-      'bx--overflow-menu-options__option--danger': isDelete,
-    }
-  );
+  const overflowMenuItemClasses = classNames('bx--overflow-menu-options__option', {
+    'bx--overflow-menu--divider': hasDivider,
+    'bx--overflow-menu-options__option--danger': isDelete
+  });
 
   const handleClick = evt => {
     onClick(evt);
