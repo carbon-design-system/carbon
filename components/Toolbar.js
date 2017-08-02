@@ -5,21 +5,29 @@ import classNames from 'classnames';
 
 const propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 const toolbarItemPropTypes = {
   children: PropTypes.node,
   type: PropTypes.string,
-  placeHolderText: PropTypes.string,
+  placeHolderText: PropTypes.string
 };
 
 const toolbarTitlePropTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string
+};
+
+const toolbarTitleDefaultProps = {
+  title: PropTypes.string
+};
+
+const toolbarItemDefaultProps = {
+  placeHolderText: 'Provide placeHolderText'
 };
 
 const toolbarOptionPropTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 const Toolbar = ({ children, className, ...other }) => {
@@ -53,6 +61,9 @@ Toolbar.propTypes = propTypes;
 ToolbarItem.propTypes = toolbarItemPropTypes;
 ToolbarTitle.propTypes = toolbarTitlePropTypes;
 ToolbarOption.propTypes = toolbarOptionPropTypes;
+
+ToolbarItem.defaultProps = toolbarItemDefaultProps;
+ToolbarTitle.defaultProps = toolbarTitleDefaultProps;
 
 export default Toolbar;
 export { ToolbarItem, ToolbarTitle, ToolbarOption, ToolbarDivider };
