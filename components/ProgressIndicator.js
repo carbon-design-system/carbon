@@ -8,25 +8,22 @@ const propTypes = {
   current: PropTypes.bool,
   complete: PropTypes.bool,
   incomplete: PropTypes.bool,
-  description: PropTypes.string,
+  description: PropTypes.string
+};
+
+const defaultProps = {
+  label: 'Provide label'
 };
 
 const ProgressStep = ({ ...props }) => {
-  const {
-    label,
-    description,
-    className,
-    current,
-    complete,
-    incomplete,
-  } = props;
+  const { label, description, className, current, complete, incomplete } = props;
 
   const classes = classnames({
     'bx--progress-step': true,
     'bx--progress-step--current': current,
     'bx--progress-step--complete': complete,
     'bx--progress-step--incomplete': incomplete,
-    [className]: className,
+    [className]: className
   });
 
   return (
@@ -59,21 +56,23 @@ const ProgressStep = ({ ...props }) => {
     </li>
   );
 };
+
 ProgressStep.propTypes = propTypes;
+ProgressStep.defaultProps = defaultProps;
 
 class ProgressIndicator extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    currentIndex: PropTypes.number,
+    currentIndex: PropTypes.number
   };
 
   static defaultProps = {
-    currentIndex: 0,
+    currentIndex: 0
   };
 
   state = {
-    currentIndex: this.props.currentIndex,
+    currentIndex: this.props.currentIndex
   };
 
   componentWillReceiveProps(nextProps) {
@@ -86,15 +85,15 @@ class ProgressIndicator extends Component {
     React.Children.map(this.props.children, (child, index) => {
       if (index === this.state.currentIndex) {
         return React.cloneElement(child, {
-          current: true,
+          current: true
         });
       } else if (index < this.state.currentIndex) {
         return React.cloneElement(child, {
-          complete: true,
+          complete: true
         });
       } else if (index > this.state.currentIndex) {
         return React.cloneElement(child, {
-          incomplete: true,
+          incomplete: true
         });
       }
       return null;
@@ -104,7 +103,7 @@ class ProgressIndicator extends Component {
     const { className, currentIndex, ...other } = this.props;
     const classes = classnames({
       'bx--progress': true,
-      [className]: className,
+      [className]: className
     });
     if (currentIndex) {
       return (
