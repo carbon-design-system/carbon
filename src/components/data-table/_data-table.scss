@@ -124,12 +124,9 @@
   .bx--table-body .bx--table-row {
     border: 1px solid transparent;
 
-    &:first-child:hover, &:first-child:focus {
+    &:hover, &:focus {
       border: 1px double $brand-02;
-    }
-
-    &:not(:first-child):hover, &:not(:first-child):focus {
-      border: 1px double $brand-02;
+      outline: 0;
     }
   }
 
