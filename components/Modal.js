@@ -19,7 +19,7 @@ class Modal extends Component {
     onRequestSubmit: PropTypes.func,
     onKeyDown: PropTypes.func,
     iconDescription: PropTypes.string,
-    primaryButtonDisabled: PropTypes.bool,
+    primaryButtonDisabled: PropTypes.bool
   };
   static defaultProps = {
     onRequestClose: () => {},
@@ -28,6 +28,8 @@ class Modal extends Component {
     onKeyDown: () => {},
     passiveModal: false,
     iconDescription: 'close the modal',
+    modalHeading: 'Provide a heading',
+    modalLabel: 'Provide a label'
   };
 
   handleKeyDown = evt => {
@@ -62,7 +64,7 @@ class Modal extends Component {
       'bx--modal': true,
       'bx--modal-tall': !passiveModal,
       'is-visible': open,
-      [this.props.className]: this.props.className,
+      [this.props.className]: this.props.className
     });
 
     const modalLabelContent = modalLabel
@@ -72,11 +74,7 @@ class Modal extends Component {
     const modalBody = passiveModal
       ? <div ref="modalInner" className="bx--modal-container">
           <div className="bx--modal-header">
-            <button
-              className="bx--modal-close"
-              type="button"
-              onClick={onRequestClose}
-            >
+            <button className="bx--modal-close" type="button" onClick={onRequestClose}>
               <Icon
                 name="close"
                 className="bx--modal-close__icon"
@@ -98,11 +96,7 @@ class Modal extends Component {
             <h2 className="bx--modal-header__heading">
               {modalHeading}
             </h2>
-            <button
-              className="bx--modal-close"
-              type="button"
-              onClick={onRequestClose}
-            >
+            <button className="bx--modal-close" type="button" onClick={onRequestClose}>
               <Icon
                 name="close"
                 className="bx--modal-close__icon"
