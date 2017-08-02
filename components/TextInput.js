@@ -15,7 +15,7 @@ const propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hideLabel: PropTypes.bool,
   invalid: PropTypes.bool,
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.string
 };
 
 const defaultProps = {
@@ -25,6 +25,8 @@ const defaultProps = {
   onChange: () => {},
   onClick: () => {},
   invalid: false,
+  labelText: 'Provide labelText',
+  invalidText: 'Provide invalidText'
 };
 
 const TextInput = ({
@@ -53,12 +55,12 @@ const TextInput = ({
       }
     },
     placeholder,
-    type,
+    type
   };
 
   const textInputClasses = classNames('bx--text-input', className);
   const labelClasses = classNames('bx--label', {
-    'bx--visually-hidden': hideLabel,
+    'bx--visually-hidden': hideLabel
   });
 
   const label = labelText
@@ -74,12 +76,7 @@ const TextInput = ({
     : null;
 
   const input = invalid
-    ? <input
-        {...other}
-        {...textInputProps}
-        data-invalid
-        className={textInputClasses}
-      />
+    ? <input {...other} {...textInputProps} data-invalid className={textInputClasses} />
     : <input {...other} {...textInputProps} className={textInputClasses} />;
 
   return (

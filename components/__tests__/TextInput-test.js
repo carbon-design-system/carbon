@@ -6,7 +6,6 @@ describe('TextInput', () => {
   describe('renders as expected', () => {
     const wrapper = mount(<TextInput id="test" className="extra-class" />);
 
-    const label = wrapper.find('label');
     const textInput = wrapper.find('input');
 
     describe('input', () => {
@@ -48,10 +47,6 @@ describe('TextInput', () => {
     });
 
     describe('label', () => {
-      it('does not render a label by default', () => {
-        expect(label.length).toBe(0);
-      });
-
       wrapper.setProps({ labelText: 'Email Input' });
       const renderedLabel = wrapper.find('label');
 
@@ -102,8 +97,8 @@ describe('TextInput', () => {
       const input = wrapper.find('input');
       const eventObject = {
         target: {
-          defaultValue: 'test',
-        },
+          defaultValue: 'test'
+        }
       };
 
       it('should invoke onClick when input is clicked', () => {

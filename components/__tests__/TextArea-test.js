@@ -4,11 +4,8 @@ import Textarea from '../TextArea';
 
 describe('Textarea', () => {
   describe('should render as expected', () => {
-    const wrapper = mount(
-      <Textarea id="testing" className="extra-class" />
-    );
+    const wrapper = mount(<Textarea id="testing" className="extra-class" />);
 
-    const label = wrapper.find('label');
     const textarea = wrapper.find('textarea');
 
     describe('textarea', () => {
@@ -60,10 +57,6 @@ describe('Textarea', () => {
     });
 
     describe('label', () => {
-      it('should not render a label by default', () => {
-        expect(label.length).toEqual(0);
-      });
-
       wrapper.setProps({ labelText: 'testLabel' });
       const renderedLabel = wrapper.find('label');
 
@@ -87,12 +80,7 @@ describe('Textarea', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <Textarea
-          id="test"
-          onClick={onClick}
-          onChange={onChange}
-          disabled
-        />
+        <Textarea id="test" onClick={onClick} onChange={onChange} disabled />
       );
 
       const textarea = wrapper.find('textarea');
@@ -112,15 +100,11 @@ describe('Textarea', () => {
       const onClick = jest.fn();
       const onChange = jest.fn();
       const eventObject = {
-        target: { value: 'test' },
+        target: { value: 'test' }
       };
 
       const wrapper = shallow(
-        <Textarea
-          id="test"
-          onClick={onClick}
-          onChange={onChange}
-        />
+        <Textarea id="test" onClick={onClick} onChange={onChange} />
       );
 
       const textarea = wrapper.find('textarea');
