@@ -12,16 +12,18 @@ class Notification extends Component {
     subtitle: PropTypes.string.isRequired,
     caption: PropTypes.string,
     onCloseButtonClick: PropTypes.func,
-    iconDescription: PropTypes.string.isRequired,
+    iconDescription: PropTypes.string.isRequired
   };
 
   static defaultProps = {
     onCloseButtonClick: () => {},
     iconDescription: 'closes notification',
+    title: 'Provide a title',
+    subtitle: 'Provide a subtitle'
   };
 
   state = {
-    open: true,
+    open: true
   };
 
   handleCloseButtonClick = evt => {
@@ -60,35 +62,28 @@ class Notification extends Component {
         'bx--inline-notification',
         { [`bx--inline-notification--${this.props.kind}`]: this.props.kind },
         className
-      ),
+      )
     };
 
     const commonProps = {
       alert: {
         role: 'alert',
-        kind,
+        kind
       },
       button: {
         type: 'button',
-        onClick: this.handleCloseButtonClick,
-      },
+        onClick: this.handleCloseButtonClick
+      }
     };
 
     const toastHTML = (
-      <div
-        {...other}
-        {...commonProps.alert}
-        className={notificationClasses.toast}
-      >
+      <div {...other} {...commonProps.alert} className={notificationClasses.toast}>
         <div className="bx--toast-notification__details">
           <h3 className="bx--toast-notification__title">{title}</h3>
           <p className="bx--toast-notification__subtitle">{subtitle}</p>
           <p className="bx--toast-notification__caption">{caption}</p>
         </div>
-        <button
-          {...commonProps.button}
-          className="bx--toast-notification__close-button"
-        >
+        <button {...commonProps.button} className="bx--toast-notification__close-button">
           <Icon
             description={this.props.iconDescription}
             className="bx--toast-notification__icon"
@@ -100,11 +95,7 @@ class Notification extends Component {
     );
 
     const inlineHTML = (
-      <div
-        {...other}
-        {...commonProps.alert}
-        className={notificationClasses.inline}
-      >
+      <div {...other} {...commonProps.alert} className={notificationClasses.inline}>
         <div className="bx--inline-notification__details">
           <Icon
             description={this.props.iconDescription}
@@ -117,10 +108,7 @@ class Notification extends Component {
             <p className="bx--inline-notification__subtitle">{subtitle}</p>
           </div>
         </div>
-        <button
-          {...commonProps.button}
-          className="bx--inline-notification__close-button"
-        >
+        <button {...commonProps.button} className="bx--inline-notification__close-button">
           <Icon
             description={this.props.iconDescription}
             className="bx--inline-notification__close-icon"
