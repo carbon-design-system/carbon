@@ -1,6 +1,4 @@
 [![Build Status](https://travis-ci.org/carbon-design-system/carbon-components.svg?branch=master)](https://travis-ci.org/carbon-design-system/carbon-components)
-[![All Contributors](https://img.shields.io/badge/all_contributors-24-orange.svg?style=flat-square)](#contributors)
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
 
 # Carbon Components
 
