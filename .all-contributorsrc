@@ -74,7 +74,8 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/11670886?v=4",
       "profile": "https://github.com/aagonzales",
       "contributions": [
-        "design"
+        "design",
+        "doc"
       ]
     },
     {
@@ -83,7 +84,8 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/29312997?v=4",
       "profile": "https://github.com/tay-aitken",
       "contributions": [
-        "design"
+        "design",
+        "doc"
       ]
     },
     {
@@ -93,7 +95,29 @@
       "profile": "http://www.bethanysonefeld.com",
       "contributions": [
         "design",
-        "blog"
+        "blog",
+        "doc"
+      ]
+    },
+    {
+      "login": "tsaitsaitsai",
+      "name": "tsaitsaitsai",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/25189046?v=4",
+      "profile": "https://github.com/tsaitsaitsai",
+      "contributions": [
+        "design",
+        "doc"
+      ]
+    },
+    {
+      "login": "asudoh",
+      "name": "Akira Sudoh",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1259051?v=4",
+      "profile": "http://streetphoto.jp/",
+      "contributions": [
+        "code",
+        "review",
+        "tool"
       ]
     },
     {
@@ -130,17 +154,6 @@
       "profile": "http://bobbysmith.io",
       "contributions": [
         "code"
-      ]
-    },
-    {
-      "login": "asudoh",
-      "name": "Akira Sudoh",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/1259051?v=4",
-      "profile": "http://streetphoto.jp/",
-      "contributions": [
-        "code",
-        "review",
-        "tool"
       ]
     },
     {
