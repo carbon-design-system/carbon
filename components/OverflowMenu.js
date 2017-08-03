@@ -89,6 +89,10 @@ class OverflowMenu extends Component {
     this.setState({ open: false });
   };
 
+  bindMenuEl = menuEl => {
+    this.menuEl = menuEl;
+  };
+
   render() {
     const {
       id,
@@ -139,9 +143,7 @@ class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
-          ref={node => {
-            this.menuEl = node;
-          }}
+          ref={this.bindMenuEl}
         >
           <Icon
             onClick={this.handleClick}
