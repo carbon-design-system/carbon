@@ -1,0 +1,227 @@
+{
+  "projectName": "carbon-components-react",
+  "projectOwner": "carbon-design-system",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "hellobrian",
+      "name": "Brian Han",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4185382?v=4",
+      "profile": "https://github.com/hellobrian",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "chrisdhanaraj",
+      "name": "Chris Dhanaraj",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1266014?v=4",
+      "profile": "http://twitter.com/chrisdhanaraj",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "nsand",
+      "name": "Nick Sandonato",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/181819?v=4",
+      "profile": "https://github.com/nsand",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tw15egan",
+      "name": "TJ Egan",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/11928039?v=4",
+      "profile": "http://tw15egan.github.io/portfolio",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "marijohannessen",
+      "name": "Mari Johannessen",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5447411?v=4",
+      "profile": "http://www.marijohannessen.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sam1463",
+      "name": "Sam Doyle",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/8836958?v=4",
+      "profile": "https://github.com/sam1463",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "shimmerjs",
+      "name": "alex weidner",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6420214?v=4",
+      "profile": "https://github.com/shimmerjs",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "CiaranHannigan",
+      "name": "Ciaran Hannigan",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/13645183?v=4",
+      "profile": "https://github.com/CiaranHannigan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "iangfleming",
+      "name": "Ian Fleming",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5481782?v=4",
+      "profile": "http://ianfleming.me/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "eddiemonge",
+      "name": "Eddie Monge",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/127535?v=4",
+      "profile": "http://eddiemonge.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "reicruz",
+      "name": "Reinaldo Cruz",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4438261?v=4",
+      "profile": "http://www.reicruz.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ycao56",
+      "name": "Yu Cao",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/16092291?v=4",
+      "profile": "https://github.com/ycao56",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mbecvarik",
+      "name": "Megan Becvarik",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/20566244?v=4",
+      "profile": "https://github.com/mbecvarik",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "AsthaJain1",
+      "name": "Astha",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/21059894?v=4",
+      "profile": "https://github.com/AsthaJain1",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jlengstorf",
+      "name": "Jason Lengstorf",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/163561?v=4",
+      "profile": "https://code.lengstorf.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "nfriedly",
+      "name": "Nathan Friedly",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/114976?v=4",
+      "profile": "http://nfriedly.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mhamann",
+      "name": "Matt Hamann",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/130131?v=4",
+      "profile": "http://mhamann.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gferreri",
+      "name": "Greg",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2159110?v=4",
+      "profile": "https://github.com/gferreri",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "AnthonyOliveri",
+      "name": "Anthony Oliveri",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5459406?v=4",
+      "profile": "https://github.com/AnthonyOliveri",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jlpadilla",
+      "name": "Jorge Padilla",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4671325?v=4",
+      "profile": "https://github.com/jlpadilla",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "germanattanasio",
+      "name": "German Attanasio",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/313157?v=4",
+      "profile": "http://germanattanasio.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ritch",
+      "name": "Ritchie Martori",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/462228?v=4",
+      "profile": "https://github.com/ritch",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "asudoh",
+      "name": "Akira Sudoh",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1259051?v=4",
+      "profile": "http://streetphoto.jp/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "holmansze",
+      "name": "holmansze",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/30137991?v=4",
+      "profile": "https://github.com/holmansze",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}
