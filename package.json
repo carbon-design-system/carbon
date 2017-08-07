@@ -17,15 +17,8 @@
     "start": "npm run storybook",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "keywords": [
-    "react",
-    "carbon",
-    "carbon-components"
-  ],
-  "files": [
-    "cjs/**/*",
-    "es/**/*"
-  ],
+  "keywords": ["react", "carbon", "carbon-components"],
+  "files": ["cjs/**/*", "es/**/*"],
   "contributors": [
     {
       "name": "Brian Han",
@@ -55,14 +48,8 @@
   "license": "MIT",
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": [
-      "eslint:recommended",
-      "plugin:jsx-a11y/recommended"
-    ],
-    "plugins": [
-      "react",
-      "jsx-a11y"
-    ],
+    "extends": ["eslint:recommended", "plugin:jsx-a11y/recommended"],
+    "plugins": ["react", "jsx-a11y"],
     "rules": {
       "react/jsx-uses-vars": 1,
       "react/jsx-uses-react": 1,
@@ -81,7 +68,7 @@
   },
   "peerDependencies": {
     "carbon-components": "^7.0.0",
-    "carbon-icons": "^5.1.2",
+    "carbon-icons": "^5.1.2 || ^6.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   },
@@ -139,15 +126,10 @@
     "moduleNameMapper": {
       "^.+\\.(scss)$": "<rootDir>/lib/styleMock.js"
     },
-    "setupFiles": [
-      "<rootDir>/setup-jest.js"
-    ]
+    "setupFiles": ["<rootDir>/setup-jest.js"]
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --trailing-comma es5 --single-quote --write",
-      "git add"
-    ]
+    "*.js": ["prettier --trailing-comma es5 --single-quote --write", "git add"]
   },
   "config": {
     "validate-commit-msg": {
