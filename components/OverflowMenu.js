@@ -64,8 +64,10 @@ class OverflowMenu extends Component {
   }
 
   getMenuPosition = () => {
-    const menuPosition = this.menuEl.getBoundingClientRect();
-    this.setState({ menuPosition });
+    if (this.menuEl) {
+      const menuPosition = this.menuEl.getBoundingClientRect();
+      this.setState({ menuPosition });
+    }
   };
 
   handleClick = evt => {
