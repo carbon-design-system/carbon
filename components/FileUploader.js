@@ -14,13 +14,17 @@ class FileUploaderButton extends Component {
     listFiles: PropTypes.bool,
     multiple: PropTypes.bool,
     onChange: PropTypes.func,
-    role: PropTypes.string
+    onClick: PropTypes.func,
+    role: PropTypes.string,
+    tabIndex: PropTypes.number
   };
   static defaultProps = {
+    tabIndex: 0,
     disableLabelChanges: false,
     labelText: 'Add file',
     multiple: false,
     onChange: () => {},
+    onClick: () => {},
     role: 'button'
   };
   state = {
@@ -55,6 +59,7 @@ class FileUploaderButton extends Component {
       labelText, // eslint-disable-line
       multiple,
       role,
+      tabIndex,
       ...other
     } = this.props;
     const classes = classNames({
@@ -63,7 +68,15 @@ class FileUploaderButton extends Component {
     });
 
     return (
-      <div className={classes}>
+      <div
+        className={classes}
+        tabIndex={tabIndex}
+        onKeyDown={evt => {
+          if (evt.which === 13 || evt.which === 32) {
+            this.input.click();
+          }
+        }}
+      >
         <label
           className="bx--btn bx--btn--primary"
           htmlFor={this.uid}
@@ -74,6 +87,7 @@ class FileUploaderButton extends Component {
         </label>
         <input
           hidden
+          ref={input => (this.input = input)}
           id={this.uid}
           type="file"
           multiple={multiple}
@@ -88,17 +102,19 @@ class Filename extends Component {
   static propTypes = {
     style: PropTypes.object,
     status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
-    iconDescription: PropTypes.string
+    tabIndex: PropTypes.number,
+    onKeyDown: PropTypes.func
   };
 
   static defaultProps = {
-    iconDescription: 'Provide icon description',
+    onKeyDown: () => {},
     status: 'uploading',
-    style: {}
+    style: {},
+    tabIndex: 0
   };
 
   render() {
-    const { status, style, iconDescription, ...other } = this.props;
+    const { iconDescription, status, style, tabIndex, onKeyDown, ...other } = this.props;
     const tempStyle = Object.assign(style, { marginRight: '-1px' }); // temp style correction for loading component position
     return (
       <span>
@@ -115,6 +131,8 @@ class Filename extends Component {
               name="close--glyph"
               description={iconDescription}
               style={style}
+              tabIndex={tabIndex}
+              onKeyDown={onKeyDown}
               {...other}
             />
           : null}
@@ -222,6 +240,11 @@ class FileUploader extends Component {
                       status={filenameStatus}
                       onClick={evt => this.handleClick(evt, index)}
                       iconDescription={iconDescription}
+                      onKeyDown={evt => {
+                        if (evt.which === 13 || evt.which === 32) {
+                          this.handleClick(evt, index);
+                        }
+                      }}
                     />
                   </span>
                 </span>
