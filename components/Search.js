@@ -13,15 +13,15 @@ class Search extends Component {
     labelText: PropTypes.string,
     id: PropTypes.string,
     searchButtonLabelText: PropTypes.string,
-    layoutButtonLabelText: PropTypes.string,
-    onSearchCloseButtonClick: PropTypes.func
+    layoutButtonLabelText: PropTypes.string
   };
 
   static defaultProps = {
     type: 'text',
     small: false,
     placeHolderText: '',
-    onChange: () => {}
+    onChange: () => {},
+    labelText: 'Provide labelText'
   };
 
   state = {
