@@ -15,20 +15,21 @@ class InteriorLeftNavList extends Component {
     onItemClick: PropTypes.func,
     activeHref: PropTypes.string,
     iconDescription: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.string
   };
 
   static defaultProps = {
+    title: 'Provide title',
     open: false,
     tabIndex: 0,
     activeHref: '#',
     iconDescription: 'display sub navigation items',
     onListClick: /* istanbul ignore next */ () => {},
-    onItemClick: /* istanbul ignore next */ () => {},
+    onItemClick: /* istanbul ignore next */ () => {}
   };
 
   state = {
-    open: this.props.open,
+    open: this.props.open
   };
 
   toggle = evt => {
@@ -74,7 +75,7 @@ class InteriorLeftNavList extends Component {
       'left-nav-list__item',
       'left-nav-list__item--has-children',
       {
-        'left-nav-list__item--expanded': this.state.open,
+        'left-nav-list__item--expanded': this.state.open
       },
       className
     );
@@ -102,11 +103,7 @@ class InteriorLeftNavList extends Component {
             />
           </div>
         </a>
-        <ul
-          role="menu"
-          className="left-nav-list left-nav-list--nested"
-          aria-hidden
-        >
+        <ul role="menu" className="left-nav-list left-nav-list--nested" aria-hidden>
           {newChildren}
         </ul>
       </li>
