@@ -1,7 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import initComponentBySearch
-  from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
 
 class Accordion extends mixin(createComponent, initComponentBySearch) {
@@ -13,19 +12,41 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', (event) => {
+    this.element.addEventListener('click', event => {
       const item = eventMatches(event, this.options.selectorAccordionItem);
       if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
-        item.classList.toggle(this.options.classActive);
+        this._toggle(item);
       }
     });
 
-    this.element.addEventListener('keypress', (event) => {
-      const item = eventMatches(event, this.options.selectorAccordionItem);
-      if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
-        this._handleKeypress(event);
-      }
-    });
+    /**
+     *
+     *  DEPRECATE in v8
+     *
+     *  Swapping to a button elemenet instead of a div
+     *  automatically maps click events to keypress as well
+     *  This event listener now is only added if user is using
+     *  the older markup
+     */
+
+    if (!this._checkIfButton()) {
+      this.element.addEventListener('keypress', event => {
+        const item = eventMatches(event, this.options.selectorAccordionItem);
+
+        if (
+          item &&
+          !eventMatches(event, this.options.selectorAccordionContent)
+        ) {
+          this._handleKeypress(event);
+        }
+      });
+    }
+  }
+
+  _checkIfButton() {
+    return (
+      this.element.firstElementChild.firstElementChild.nodeName === 'BUTTON'
+    );
   }
 
   /**
@@ -34,8 +55,24 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
    */
   _handleKeypress(event) {
     if (event.which === 13 || event.which === 32) {
-      event.target.classList.toggle(this.options.classActive);
+      this._toggle(event.target);
     }
+  }
+
+  _toggle(element) {
+    const heading = element.querySelector(
+      this.options.selectorAccordionItemHeading
+    );
+    const expanded = heading.getAttribute('aria-expanded');
+
+    if (expanded !== null) {
+      heading.setAttribute(
+        'aria-expanded',
+        expanded === 'true' ? 'false' : 'true'
+      );
+    }
+
+    element.classList.toggle(this.options.classActive);
   }
 
   /**
@@ -48,6 +85,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
   static options = {
     selectorInit: '[data-accordion]',
     selectorAccordionItem: '.bx--accordion__item',
+    selectorAccordionItemHeading: '.bx--accordion__heading',
     selectorAccordionContent: '.bx--accordion__content',
     classActive: 'bx--accordion__item--active',
   };
