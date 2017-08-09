@@ -8,21 +8,24 @@ class Tab extends React.Component {
     handleTabClick: PropTypes.func,
     handleTabAnchorFocus: PropTypes.func,
     handleTabKeyDown: PropTypes.func,
-    href: PropTypes.string,
+    href: PropTypes.string.isRequired,
     index: PropTypes.number,
     label: PropTypes.string.isRequired,
-    onClick: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    selected: PropTypes.bool,
-    tabIndex: PropTypes.number,
+    role: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onKeyDown: PropTypes.func.isRequired,
+    selected: PropTypes.bool.isRequired,
+    tabIndex: PropTypes.number.isRequired
   };
 
   static defaultProps = {
+    role: 'presentation',
+    label: 'provide a label',
     tabIndex: 0,
     href: '#',
     selected: false,
     onClick: () => {},
-    onKeyDown: () => {},
+    onKeyDown: () => {}
   };
 
   setTabFocus(evt) {
@@ -46,6 +49,7 @@ class Tab extends React.Component {
       href,
       index,
       label,
+      role,
       selected,
       tabIndex,
       onClick,
@@ -59,33 +63,31 @@ class Tab extends React.Component {
       className
     );
 
-    const props = {
-      li: {
-        className: classes,
-        onClick: evt => {
+    return (
+      <li
+        {...other}
+        className={classes}
+        onClick={evt => {
           handleTabClick(index, label, evt);
           onClick(evt);
-        },
-        onKeyDown: evt => {
+        }}
+        onKeyDown={evt => {
           this.setTabFocus(evt);
           handleTabKeyDown(index, label, evt);
           onKeyDown(evt);
-        },
-        role: 'presentation',
-        selected,
-      },
-      anchor: {
-        className: 'bx--tabs__nav-link',
-        href,
-        ref: 'tabAnchor',
-        role: 'tab',
-        tabIndex,
-      },
-    };
-
-    return (
-      <li {...other} {...props.li}>
-        <a {...props.anchor}>{label}</a>
+        }}
+        role={role}
+        selected={selected}
+      >
+        <a
+          className="bx--tabs__nav-link"
+          href={href}
+          role="tab"
+          tabIndex={tabIndex}
+          ref="tabAnchor"
+        >
+          {label}
+        </a>
       </li>
     );
   }

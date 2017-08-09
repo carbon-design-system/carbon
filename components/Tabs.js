@@ -10,23 +10,27 @@ class Tabs extends React.Component {
     className: PropTypes.string,
     firstSelectedLabel: PropTypes.string,
     hidden: PropTypes.bool,
-    href: PropTypes.string,
+    href: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
-    triggerHref: PropTypes.string,
+    triggerHref: PropTypes.string.isRequired,
     selected: PropTypes.number,
+    iconDescription: PropTypes.string.isRequired
   };
 
   static defaultProps = {
+    iconDescription: 'show menu options',
+    role: 'navigation',
     href: '#',
     triggerHref: '#',
-    selected: 0,
+    selected: 0
   };
 
   state = {
     dropdownHidden: true,
     selected: this.props.selected,
-    selectedLabel: React.Children.toArray(this.props.children)[0].props.label,
+    selectedLabel: React.Children.toArray(this.props.children)[0].props.label
   };
 
   getTabs() {
@@ -39,7 +43,7 @@ class Tabs extends React.Component {
     this.setState({
       selected: index,
       selectedLabel: label,
-      dropdownHidden: !this.state.dropdownHidden,
+      dropdownHidden: !this.state.dropdownHidden
     });
   };
 
@@ -50,7 +54,7 @@ class Tabs extends React.Component {
       this.setState({
         selected: index,
         selectedLabel: label,
-        dropdownHidden: !this.state.dropdownHidden,
+        dropdownHidden: !this.state.dropdownHidden
       });
     }
   };
@@ -75,19 +79,12 @@ class Tabs extends React.Component {
 
   handleDropdownClick = () => {
     this.setState({
-      dropdownHidden: !this.state.dropdownHidden,
+      dropdownHidden: !this.state.dropdownHidden
     });
   };
 
   render() {
-    const { className, triggerHref, ...other } = this.props;
-
-    const classes = {
-      tabs: classNames('bx--tabs', className),
-      tablist: classNames('bx--tabs__nav', {
-        'bx--tabs__nav--hidden': this.state.dropdownHidden,
-      }),
-    };
+    const { iconDescription, className, triggerHref, role, ...other } = this.props;
 
     const tabsWithProps = this.getTabs().map((tab, index) => {
       const newTab = React.cloneElement(tab, {
@@ -96,7 +93,7 @@ class Tabs extends React.Component {
         handleTabClick: this.handleTabClick,
         handleTabAnchorFocus: this.handleTabAnchorFocus,
         ref: `tab${index}`,
-        handleTabKeyDown: this.handleTabKeyDown,
+        handleTabKeyDown: this.handleTabKeyDown
       });
 
       return newTab;
@@ -106,46 +103,33 @@ class Tabs extends React.Component {
       const { children, selected } = tab.props;
 
       return (
-        <TabContent
-          className="tab-content"
-          hidden={!selected}
-          selected={selected}
-        >
+        <TabContent className="tab-content" hidden={!selected} selected={selected}>
           {children}
         </TabContent>
       );
     });
 
-    const props = {
-      nav: {
-        className: classes.tabs,
-        role: 'navigation',
-      },
-      trigger: {
-        div: {
-          className: 'bx--tabs-trigger',
-          onClick: this.handleDropdownClick,
-        },
-        anchor: {
-          className: 'bx--tabs-trigger-text',
-          href: triggerHref,
-          onClick: this.handleDropdownClick,
-        },
-      },
-      tablist: {
-        className: classes.tablist,
-        role: 'tablist',
-      },
+    const classes = {
+      tabs: classNames('bx--tabs', className),
+      tablist: classNames('bx--tabs__nav', {
+        'bx--tabs__nav--hidden': this.state.dropdownHidden
+      })
     };
 
     return (
       <div>
-        <nav {...other} {...props.nav}>
-          <div {...props.trigger.div}>
-            <a {...props.trigger.anchor}>{this.state.selectedLabel}</a>
-            <Icon description="show menu options" name="caret--down" />
+        <nav {...other} className={classes.tabs} role={role}>
+          <div className="bx--tabs-trigger" onClick={this.handleDropdownClick}>
+            <a
+              className="bx--tabs-trigger-text"
+              href={triggerHref}
+              onClick={this.handleDropdownClick}
+            >
+              {this.state.selectedLabel}
+            </a>
+            <Icon description={iconDescription} name="caret--down" />
           </div>
-          <ul {...props.tablist}>
+          <ul role="tablist" className={classes.tablist}>
             {tabsWithProps}
           </ul>
         </nav>
