@@ -54,6 +54,7 @@
     "rules": {
       "react/jsx-uses-vars": 1,
       "react/jsx-uses-react": 1,
+      "react/no-find-dom-node": 1,
       "jsx-a11y/onclick-has-role": 1,
       "jsx-a11y/click-events-have-key-events": 1,
       "jsx-a11y/href-no-hash": 1,

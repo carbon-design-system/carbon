@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Icon from './Icon';
 import TabContent from './TabContent';
@@ -61,15 +60,15 @@ class Tabs extends React.Component {
 
     if (index < 0) {
       const tab = this.refs[`tab${tabCount}`];
-      ReactDOM.findDOMNode(tab.refs.tabAnchor).focus();
+      tab.refs.tabAnchor.focus();
       this.setState({ selected: tabCount });
     } else if (index > tabCount) {
       const tab = this.refs.tab0;
-      ReactDOM.findDOMNode(tab.refs.tabAnchor).focus();
+      tab.refs.tabAnchor.focus();
       this.setState({ selected: 0 });
     } else {
       const tab = this.refs[`tab${index}`];
-      ReactDOM.findDOMNode(tab.refs.tabAnchor).focus();
+      tab.refs.tabAnchor.focus();
       this.setState({ selected: index });
     }
   };

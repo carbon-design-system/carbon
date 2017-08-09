@@ -19,7 +19,7 @@ class FloatingMenu extends React.Component {
   };
 
   componentDidMount() {
-    this.menu = ReactDOM.findDOMNode(this).ownerDocument.createElement('div');
+    this.menu = this.doc.createElement('div');
     this.menu.ownerDocument.body.appendChild(this.menu);
 
     const style = {
@@ -110,7 +110,7 @@ class FloatingMenu extends React.Component {
   };
 
   render() {
-    return <div hidden />;
+    return <div ref={(node) => { this.doc = node && node.ownerDocument; }} hidden />;
   }
 }
 
