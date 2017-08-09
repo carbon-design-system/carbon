@@ -6,8 +6,9 @@
   "scripts": {
     "check": "npm run lint && npm run test",
     "lint": "eslint {components,internal}/**",
-    "test": "jest '/(__tests__|components|lib|internal)/'",
+    "test": "jest '/(__tests__|components|lib|internal)/' && npm run test-ssr",
     "test-watch": "jest '/(__tests__|components|lib|internal)/' --watch",
+    "test-ssr": "npm run build && node server-side-rendering-tests/*.js",
     "prepublish": "npm run build",
     "build": "node scripts/build.js",
     "commitmsg": "validate-commit-msg",
@@ -74,7 +75,7 @@
   },
   "dependencies": {
     "classnames": "2.2.5",
-    "flatpickr": "^3.0.6",
+    "flatpickr": "^3.0.7",
     "lodash.debounce": "^4.0.8",
     "react-addons-css-transition-group": "^15.4.2",
     "warning": "3.0.0",
