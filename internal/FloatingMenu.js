@@ -19,20 +19,22 @@ class FloatingMenu extends React.Component {
   };
 
   componentDidMount() {
-    this.menu = this.doc.createElement('div');
-    this.menu.ownerDocument.body.appendChild(this.menu);
+    if (this.doc) {
+      this.menu = this.doc.createElement('div');
+      this.menu.ownerDocument.body.appendChild(this.menu);
 
-    const style = {
-      display: 'block',
-      opacity: 0,
-    };
-    const childrenWithProps = React.cloneElement(this.props.children, {
-      style,
-    });
-    ReactDOM.render(childrenWithProps, this.menu);
+      const style = {
+        display: 'block',
+        opacity: 0,
+      };
+      const childrenWithProps = React.cloneElement(this.props.children, {
+        style,
+      });
+      ReactDOM.render(childrenWithProps, this.menu);
 
-    this.getMenuPosition();
-    this.renderLayer();
+      this.getMenuPosition();
+      this.renderLayer();
+    }
   }
 
   componentDidUpdate() {
