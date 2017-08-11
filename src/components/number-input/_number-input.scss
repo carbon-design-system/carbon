@@ -54,16 +54,27 @@
     align-items: center;
   }
 
-  .bx--number__controls .up-icon,
-  .bx--number__controls .down-icon {
-    fill: $brand-01;
-    width: rem(9px);
+  .bx--number__control-btn {
+    @include button-reset;
+    width: rem(20px);
     height: rem(20px);
-    position: relative;
+
+    &:focus {
+      @include focus-outline;
+    }
 
     &:hover {
       cursor: pointer;
+    }
+
+    &:hover svg {
       fill: $brand-02;
     }
+  }
+
+  .bx--number__controls svg {
+    fill: $brand-01;
+    width: rem(9px);
+    height: rem(20px);
   }
 }
