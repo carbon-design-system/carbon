@@ -76,5 +76,11 @@
     fill: $brand-01;
     width: rem(9px);
     height: rem(20px);
+
+    // Hover styles for use with old HTML w/o button
+    &:hover {
+      cursor: pointer;
+      fill: $brand-02;
+    }
   }
 }
