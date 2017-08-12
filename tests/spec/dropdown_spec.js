@@ -138,6 +138,12 @@ describe('Dropdown', function () {
       expect(stubFocus, 'Focus requested').not.to.have.been.called;
     });
 
+    it('Should not open when the disabled class is applied', function () {
+      element.classList.add('bx--dropdown--disabled');
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(element.classList.contains('bx--dropdown--open'), 'Open state').to.be.false;
+    });
+
     afterEach(function () {
       if (stubFocus) {
         stubFocus.restore();

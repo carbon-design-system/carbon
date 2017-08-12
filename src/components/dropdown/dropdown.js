@@ -74,8 +74,14 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @param {Event} [event] The event triggering this method.
    */
   _toggle(event) {
-    if (([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem))
-    || event.which === 27 || event.type === 'click') {
+    const isDisabled = this.element.classList.contains('bx--dropdown--disabled');
+
+    if (isDisabled) {
+      return;
+    }
+
+    if (([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem)) ||
+    event.which === 27 || event.type === 'click') {
       const isOpen = this.element.classList.contains('bx--dropdown--open');
       const isOfSelf = this.element.contains(event.target);
       const actions = {
