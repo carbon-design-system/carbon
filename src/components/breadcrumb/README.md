@@ -14,9 +14,7 @@ Setting this to `display: none` will remove the associated slash.
 }
 ```
 
-
-
-Add `.bx--breadcrumb--no-trailing-slash` to `.bx--breadcrumb` to remove leading slashes. 
+Or you can add `.bx--breadcrumb--no-trailing-slash` to `.bx--breadcrumb` to remove leading slashes. 
 
 ```html
 /* Removes the slash from the last breadcrumb-item */
