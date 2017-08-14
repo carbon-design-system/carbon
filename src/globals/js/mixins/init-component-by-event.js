@@ -8,6 +8,12 @@ export default function (ToMix) {
    */
   class InitComponentByEvent extends ToMix {
     /**
+     * `true` suggests that this component is lazily initialized upon an action/event, etc.
+     * @type {boolean}
+     */
+    static forLazyInit = true;
+
+    /**
      * Instantiates this component in the given element.
      * If the given element indicates that it's an component of this class, instantiates it.
      * Otherwise, instantiates this component by clicking on this component in the given node.
@@ -30,6 +36,7 @@ export default function (ToMix) {
           const eventName = name === 'focus' && hasFocusin ? 'focusin' : name;
           return on(target, eventName, (event) => {
             const element = eventMatches(event, effectiveOptions.selectorInit);
+            // Instantiated components handles events by themselves
             if (element && !this.components.has(element)) {
               const component = this.create(element, options);
               if (typeof component.createdByEvent === 'function') {

@@ -1,9 +1,11 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+import trackBlur from '../../globals/js/mixins/track-blur';
+import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
 
-class FloatingMenu extends mixin(createComponent, eventedShowHideState) {
+class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlur) {
   /**
    * Floating menu.
    * @extends CreateComponent
@@ -42,18 +44,23 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState) {
   }
 
   /**
+   * Focuses back on the trigger button if this component loses focus.
+   */
+  handleBlur(event) {
+    if (this.element.classList.contains(this.options.classShown)) {
+      this.changeState('hidden', getLaunchingDetails(event));
+      if (this.element.contains(event.relatedTarget) && event.target !== this.options.refNode) {
+        this.options.refNode.focus();
+      }
+    }
+  }
+
+  /**
    * @private
    * @returns {Element} The element that this menu should be placed to.
    */
   _getContainer() {
-    const element = this.element;
-    const body = element.ownerDocument.body;
-    for (let traverse = element; traverse && traverse !== body; traverse = traverse.parentNode) {
-      if (traverse.matches(this.options.selectorContainer)) {
-        return traverse;
-      }
-    }
-    return body;
+    return this.element.closest(this.options.selectorContainer) || this.element.ownerDocument.body;
   }
 
   /**
@@ -169,6 +176,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState) {
       }
       this._getContainer().appendChild(this.element);
       this._place();
+      (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
     }
     if (state === 'hidden' && this.hResize) {
       this.hResize.release();
@@ -187,6 +195,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState) {
 
   static options = {
     selectorContainer: '[data-floating-menu-container]',
+    selectorPrimaryFocus: '[data-floating-menu-primary-focus]',
     attribDirection: 'data-floating-menu-direction',
     classShown: '', // Should be provided from options arg in constructor
     classRefShown: '', // Should be provided from options arg in constructor

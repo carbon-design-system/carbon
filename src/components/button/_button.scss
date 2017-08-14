@@ -5,7 +5,6 @@
 @import '../../globals/scss/css--reset';
 
 @include exports('button') {
-
   // <button> elements cannot be used as flex containers
   button.bx--btn {
     display: inline-block;
@@ -35,26 +34,30 @@
 
   .bx--btn--primary {
     @include button-theme(
-      $brand-01,   // bg-color
-      transparent, // border-color
-      $inverse-01, // font-color
-      $brand-02,   // hover-bg-color
-      $ui-01       // icon-color
+      $brand-01,
+      transparent,
+      $inverse-01,
+      $brand-02,
+      $ui-01
     );
   }
 
   .bx--btn--secondary {
     @include button-theme(
-      transparent, // bg-color
-      $brand-01,   // border-color
-      $brand-01,   // font-color
-      $brand-01,   // hover-bg-color
-      $brand-01 // icon-color
+      transparent,
+      $brand-01,
+      $brand-01,
+      $brand-01,
+      $brand-01
     );
 
     &:hover,
     &:focus {
       color: $inverse-01;
+    }
+
+    &:active {
+      color: $brand-01;
     }
 
     &:hover > .bx--btn__icon,
@@ -70,11 +73,11 @@
 
   .bx--btn--ghost {
     @include button-theme(
-      transparent, // bg-color
-      transparent,   // border-color
-      $brand-01,   // font-color
-      $brand-01,   // hover-bg-color
-      $brand-01 // icon-color
+      transparent,
+      transparent,
+      $brand-01,
+      $brand-01,
+      $brand-01
     );
 
     &:hover,
@@ -102,11 +105,11 @@
 
   .bx--btn--danger {
     @include button-theme(
-      transparent,  // bg-color
-      currentColor, // border-color
-      $ui-05,       // font-color
-      $support-01,  // hover-bg-color
-      $ui-05        // icon-color
+      transparent,
+      $support-01,
+      $support-01,
+      $support-01,
+      $support-01
     );
 
     &:hover {

@@ -159,7 +159,9 @@ module.exports = function (config) {
       return list;
     })(),
 
-    exclude: [],
+    exclude: [
+      'src/globals/js/watch.js', // watch.js imports index.js, which runs automatic instantiation
+    ],
 
     preprocessors: {
       '**/core-js/**/*.js': ['rollup', 'sourcemap'], // For generatoring coverage report for untested files
@@ -189,7 +191,7 @@ module.exports = function (config) {
         commonjs({
           include: ['node_modules/**'],
           namedExports: {
-            'node_modules/bluebird/js/release/bluebird.js': ['promisify'],
+            'node_modules/bluebird/js/release/bluebird.js': ['delay', 'promisify'],
           },
         }),
         babel({

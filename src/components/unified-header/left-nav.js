@@ -220,6 +220,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
             const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
             const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
             const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
+            const hasLinkItem = !(leftNavItem.querySelector(this.options.selectorLeftNavListItemLink) === undefined);
             if (flyoutItem) {
               this.addActiveListItem(flyoutItem);
             } else if (childItem) {
@@ -234,6 +235,9 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
               }
             } else if (hasChildren) {
               this.handleNestedListClick(leftNavItem);
+            } else if (hasLinkItem) {
+              const link = leftNavItem.querySelector(this.options.selectorLeftNavListItemLink);
+              link.click();
             } else {
               this.addActiveListItem(leftNavItem);
             }

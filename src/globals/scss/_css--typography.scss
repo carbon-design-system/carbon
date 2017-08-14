@@ -6,56 +6,51 @@
 @import 'import-once';
 
 @mixin typography {
-  h1 {
+  // really big
+  .bx--type-giga {
+    @include font-size('74');
     @include reset;
-    @include font-size('32');
+    @include line-height('heading');
+    font-weight: 300;
+  }
+  .bx--type-mega {
+    @include font-size('52');
+    @include reset;
+    @include line-height('heading');
+    font-weight: 300;
+  }
+
+  // really small
+  .bx--type-omega {
+    @include font-size('12');
+    @include reset;
     @include line-height('heading');
     @include letter-spacing;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .bx--type-caption {
+    @include font-size('12');
+    @include reset;
+    @include line-height('body');
+  }
+  .bx--type-legal {
+    @include font-size('11');
+    @include reset;
+    @include line-height('body');
   }
 
-  h2 {
-    @include reset;
-    @include font-size('26');
-    @include line-height('heading');
-    @include letter-spacing;
-  }
+  .bx--type-caps { text-transform: uppercase; }
 
-  h3 {
+  strong, .bx--type-strong {
     @include reset;
-    @include font-size('20');
-    @include line-height('heading');
-    @include letter-spacing;
-  }
-
-  h4 {
-    @include reset;
-    @include font-size('18');
-    @include line-height('heading');
-  }
-
-  h5 {
-    @include reset;
-    @include font-size('16');
-    @include line-height('heading');
-  }
-
-  h6 {
-    @include reset;
-    @include font-size('14');
-    @include line-height('heading');
+    font-weight: 700;
   }
 
   p {
     @include reset;
     @include font-size('16');
     @include line-height('body');
-  }
-
-  strong {
-    @include reset;
-    @include font-smoothing;
-    @include letter-spacing;
-    font-weight: 700;
   }
 
   em {
@@ -66,6 +61,45 @@
   a {
     @include reset;
     color: $brand-01;
+  }
+
+  h1, .bx--type-alpha {
+    @include reset;
+    @include font-size('32');
+    @include line-height('heading');
+    @include letter-spacing;
+  }
+
+  h2, .bx--type-beta {
+    @include reset;
+    @include font-size('26');
+    @include line-height('heading');
+    @include letter-spacing;
+  }
+
+  h3, .bx--type-gamma {
+    @include reset;
+    @include font-size('20');
+    @include line-height('heading');
+    @include letter-spacing;
+  }
+
+  h4, .bx--type-delta {
+    @include reset;
+    @include font-size('18');
+    @include line-height('heading');
+  }
+
+  h5, .bx--type-epsilon {
+    @include reset;
+    @include font-size('16');
+    @include line-height('heading');
+  }
+
+  h6, .bx--type-zeta {
+    @include reset;
+    @include font-size('14');
+    @include line-height('heading');
   }
 }
 

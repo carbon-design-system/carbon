@@ -37,5 +37,10 @@
     &:focus {
       @include focus-outline('border');
     }
+
+    &:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
   }
 }
