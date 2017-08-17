@@ -175,8 +175,9 @@ class Slider extends Component {
       minLabel,
       max,
       maxLabel,
-      labelText, 
+      labelText,
       step,
+      stepMuliplier, // eslint-disable-line no-unused-vars
       required,
       disabled,
       name,
