@@ -33,6 +33,12 @@ class Tabs extends React.Component {
     selectedLabel: React.Children.toArray(this.props.children)[0].props.label
   };
 
+  componentWillReceiveProps({ selected }) {
+    if (selected !== this.props.selected) {
+      this.setState({ selected });
+    }
+  }
+
   getTabs() {
     return React.Children.map(this.props.children, tab => tab);
   }

@@ -156,7 +156,7 @@ describe('Tabs', () => {
 
     describe('keydown', () => {
       const wrapper = mount(
-        <Tabs>
+        <Tabs selected={0}>
           <Tab label="firstTab" className="firstTab">content</Tab>
           <Tab label="lastTab" className="lastTab">content</Tab>
         </Tabs>,
@@ -244,4 +244,20 @@ describe('Tabs', () => {
       expect(children.last().props().selected).toEqual(true);
     });
   });
+});
+
+describe('props update', () => {
+  const wrapper = mount(
+    <Tabs selected={0}>
+      <Tab label="firstTab" className="firstTab">content</Tab>
+      <Tab label="lastTab" className="lastTab">content</Tab>
+    </Tabs>,
+  );
+
+  it('updates selected state when selected prop changes', () => {
+    wrapper.setProps({selected: 1});
+    expect(wrapper.state().selected).toEqual(1);
+    wrapper.setProps({selected: 0});
+    expect(wrapper.state().selected).toEqual(0);
+  })
 });
