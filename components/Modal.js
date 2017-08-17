@@ -19,8 +19,10 @@ class Modal extends Component {
     onRequestSubmit: PropTypes.func,
     onKeyDown: PropTypes.func,
     iconDescription: PropTypes.string,
-    primaryButtonDisabled: PropTypes.bool
+    primaryButtonDisabled: PropTypes.bool,
+    onSecondarySubmit: PropTypes.func
   };
+
   static defaultProps = {
     onRequestClose: () => {},
     onRequestSubmit: () => {},
@@ -45,6 +47,7 @@ class Modal extends Component {
       this.props.onRequestClose();
     }
   };
+
   render() {
     const {
       modalHeading,
@@ -55,10 +58,13 @@ class Modal extends Component {
       open,
       onRequestClose,
       onRequestSubmit,
+      onSecondarySubmit,
       iconDescription,
       primaryButtonDisabled,
       ...other
     } = this.props;
+
+    const onSecondaryButtonClick = onSecondarySubmit ? onSecondarySubmit : onRequestClose;
 
     const modalClasses = classNames({
       'bx--modal': true,
@@ -109,7 +115,7 @@ class Modal extends Component {
           </div>
           <div className="bx--modal-footer">
             <div className="bx--modal__buttons-container">
-              <Button kind="secondary" onClick={onRequestClose}>
+              <Button kind="secondary" onClick={onSecondaryButtonClick}>
                 {secondaryButtonText}
               </Button>
               <Button

@@ -142,5 +142,21 @@ describe('Modal', () => {
       wrapper.simulate('keyDown', { which: 27 });
       expect(onRequestClose).toBeCalled();
     });
+
+    it('should close by default on secondary button click', () => {
+      const onRequestClose = jest.fn();
+      const modal = mount(<Modal onRequestClose={onRequestClose} />);
+      const secondaryBtn = modal.find('.bx--btn--secondary');
+      secondaryBtn.simulate('click');
+      expect(onRequestClose).toBeCalled();
+    });
+
+    it('should handle custom secondary button events', () => {
+      const onSecondarySubmit = jest.fn();
+      const modal = mount(<Modal onSecondarySubmit={onSecondarySubmit} />);
+      const secondaryBtn = modal.find('.bx--btn--secondary');
+      secondaryBtn.simulate('click');
+      expect(onSecondarySubmit).toBeCalled();
+    });
   });
 });
