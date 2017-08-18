@@ -139,7 +139,12 @@ gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
 
   pump(
-    [gulp.src(srcFile), uglify(), rename('carbon-components.min.js'), gulp.dest('scripts')],
+    [
+      gulp.src(srcFile),
+      uglify(),
+      rename('carbon-components.min.js'),
+      gulp.dest('scripts'),
+    ],
     cb
   );
 });
@@ -224,7 +229,14 @@ gulp.task('html:source', () => {
 
 gulp.task('lint', () =>
   gulp
-    .src(['gulpfile.js', 'server.js', 'src/**/*.js', 'tests/**/*.js', 'tools/**/*.js', 'demo/**/*.js'])
+    .src([
+      'gulpfile.js',
+      'server.js',
+      'src/**/*.js',
+      'tests/**/*.js',
+      'tools/**/*.js',
+      'demo/**/*.js',
+    ])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
@@ -308,13 +320,16 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
     showOnlyViolations: true,
     exclude: '.offleft, #flex-col, #flex-row',
     tags: ['wcag2aa', 'wcag2a'],
-    folderOutputReport: componentName === undefined ? 'tests/axe/allHtml' : 'tests/axe',
-    saveOutputIn: componentName === undefined
-      ? `a11y-html.json`
-      : `a11y-${componentName}.json`,
-    urls: componentName === undefined
-      ? ['http://localhost:3000']
-      : [`http://localhost:3000/components/${componentName}/`],
+    folderOutputReport:
+      componentName === undefined ? 'tests/axe/allHtml' : 'tests/axe',
+    saveOutputIn:
+      componentName === undefined
+        ? `a11y-html.json`
+        : `a11y-${componentName}.json`,
+    urls:
+      componentName === undefined
+        ? ['http://localhost:3000']
+        : [`http://localhost:3000/components/${componentName}/`],
   };
 
   return axe(options, done);

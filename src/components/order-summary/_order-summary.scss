@@ -1,0 +1,147 @@
+.bx--order-summary {
+  @include font-size('14');
+  background-color: $ui-01;
+  padding-bottom: 1.25rem;
+  width: 18rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.bx--order-header {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 1.25rem;
+  border-bottom: 1px solid $ui-05;
+
+  .bx--dropdown {
+    flex: 1;
+    background-color: $ui-01;
+    margin-right: rem(1px);
+  }
+
+  .bx--dropdown-text {
+    max-width: rem(100px);
+  }
+
+  .bx--dropdown-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bx--dropdown[data-value=''] .bx--dropdown-text,
+   .bx--dropdown-text {
+    color: $brand-01;
+  }
+}
+
+.bx--order-header-title {
+  @include font-size('14');
+  font-weight: 700;
+  flex: 2;
+}
+
+.bx--order-list {
+  padding: 1.25rem 0;
+  margin: 0 1.25rem;
+  border-bottom: 1px solid $ui-05;
+}
+
+.bx--order-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.125rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.bx--order-detail {
+  @include font-size('14');
+  color: $text-02;
+  padding-right: 1.25rem;
+  line-height: 1.25;
+}
+
+.bx--order-price {
+  @include font-size('12');
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.bx--order-total-container {
+  padding: 1.125rem 1.25rem 0;
+
+  .bx--btn {
+    width: 100%;
+    margin-top: 1rem;
+
+    &:first-of-type {
+      margin-top: 2rem;
+    }
+
+    &:last-of-type {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.bx--order-total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.bx--order-total-text {
+  font-weight: 700;
+}
+
+.bx--order-total-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-weight: 700;
+
+  span {
+    @include font-size('12');
+    color: $text-02;
+    font-weight: 400;
+  }
+}
+
+.bx--order-total-subtitle {
+  @include font-size('11');
+  color: $text-02;
+  font-style: italic;
+}
+
+.bx--order-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-right: 1.25rem;
+}
+
+.bx--order-footer-text {
+  @include font-size('14');
+  color: $text-02;
+  line-height: 1;
+}
+
+.bx--order-category {
+  margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.bx--order-category-title {
+  @include font-size('12');
+  font-weight: 700;
+  margin-bottom: rem(4px);
+  text-transform: uppercase;
+}

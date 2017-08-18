@@ -8,10 +8,12 @@
 //   Deprecated           ||  Not used anymore
 //   ===========================================
 
-
 //----------------------------------------------
 // Misc
 // ---------------------------------------------
+
+@import 'css--reset';
+@import 'typography';
 
 @mixin text-overflow($width) {
   display: block;
@@ -64,6 +66,20 @@
   border: 0;
   visibility: visible;
   white-space: nowrap;
+}
+
+@mixin button-reset($width: true) {
+  @include reset;
+  @include helvetica;
+  @include font-smoothing;
+  @include letter-spacing;
+  background: none;
+  appearance: none;
+  border: 0;
+
+  @if ($width == true) {
+    width: 100%;
+  }
 }
 
 //----------------------------------------------

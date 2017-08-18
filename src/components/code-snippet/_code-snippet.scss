@@ -8,7 +8,7 @@
 @include exports('snippet') {
   .bx--snippet--code {
     @include bx--snippet;
-    background-color: $field-01;
+    background-color: $snippet-background-color;
     padding: 1rem 2.5rem 1rem 1rem;
   }
 
@@ -57,10 +57,10 @@
   }
 
   .bx--snippet--terminal .bx--snippet__icon {
-    fill: $brand-02;
+    fill: $inverse-01;
 
     &:hover {
-      fill: $brand-01;
+      fill: $brand-02;
     }
   }
 

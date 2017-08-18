@@ -24,62 +24,100 @@ app.use(express.static('scripts'));
 app.use('/docs/js', express.static('docs/js'));
 
 const getContent = glob =>
-   globby(glob)
-    .then((filePaths) => {
-      if (filePaths.length === 0) {
-        return undefined;
-      }
-      return Promise.all(filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' })))
-        .then(contents => contents.reduce((a, b) => a.concat(b)));
-    });
+  globby(glob).then(filePaths => {
+    if (filePaths.length === 0) {
+      return undefined;
+    }
+    return Promise.all(
+      filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))
+    ).then(contents => contents.reduce((a, b) => a.concat(b)));
+  });
 
 const getEachContent = glob =>
-  globby(glob)
-    .then((filePaths) => { // eslint-disable-line arrow-body-style
-      return Promise.all(filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' })))
-        .then(contents => contents.map((content, i) => ({ name: path.basename(filePaths[i], '.html'), content })));
-    });
-
-const componentDirs = readdir('src/components')
-  .then((items) => { // eslint-disable-line arrow-body-style
-    return Promise.all(items.map(item => stat(path.resolve('src/components', item))))
-      .then(stats => items.filter((item, i) => stats[i].isDirectory()));
+  globby(glob).then(filePaths => {
+    // eslint-disable-line arrow-body-style
+    return Promise.all(
+      filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))
+    ).then(contents =>
+      contents.map((content, i) => ({
+        name: path.basename(filePaths[i], '.html'),
+        content,
+      }))
+    );
   });
+
+const componentDirs = readdir('src/components').then(items => {
+  // eslint-disable-line arrow-body-style
+  return Promise.all(
+    items.map(item => stat(path.resolve('src/components', item)))
+  ).then(stats => items.filter((item, i) => stats[i].isDirectory()));
+});
 
 const topRouteHandler = (req, res) => {
   const name = req.params.component;
 
-  if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+  if (
+    name &&
+    path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
+      '..'
+  ) {
     res.status(404).end();
   } else {
     componentDirs
-      .then((dirs) => { // eslint-disable-line arrow-body-style
-        return Promise.all(dirs.map(dir => getEachContent(path.resolve('src/components', dir, '**/*.html'))))
-          .then(subItemsList => subItemsList.map((subItems, i) => { // eslint-disable-line arrow-body-style
-            return subItems.length > 0 && Object.assign({
-              name: dirs[i],
-              selected: name === dirs[i] || subItems.find(subItem => name === subItem.name),
-            }, subItems.length <= 1 ? {
-              content: subItems[0].content,
-            } : {}, subItems.length <= 1 ? {} : {
-              items: subItems.map(subItem => Object.assign(subItem, { selected: name === subItem.name })),
-            });
-          }))
+      .then(dirs => {
+        // eslint-disable-line arrow-body-style
+        return Promise.all(
+          dirs.map(dir =>
+            getEachContent(path.resolve('src/components', dir, '**/*.html'))
+          )
+        )
+          .then(subItemsList =>
+            subItemsList.map((subItems, i) => {
+              // eslint-disable-line arrow-body-style
+              return (
+                subItems.length > 0 &&
+                Object.assign(
+                  {
+                    name: dirs[i],
+                    selected:
+                      name === dirs[i] ||
+                      subItems.find(subItem => name === subItem.name),
+                  },
+                  subItems.length <= 1
+                    ? {
+                        content: subItems[0].content,
+                      }
+                    : {},
+                  subItems.length <= 1
+                    ? {}
+                    : {
+                        items: subItems.map(subItem =>
+                          Object.assign(subItem, {
+                            selected: name === subItem.name,
+                          })
+                        ),
+                      }
+                )
+              );
+            })
+          )
           .then(links => links.filter(Boolean))
-          .then((links) => {
+          .then(links => {
             if (!name) {
               const firstLink = links[0];
-              (firstLink.items ? firstLink.items[0] : firstLink).selected = true;
+              (firstLink.items
+                ? firstLink.items[0]
+                : firstLink).selected = true;
             }
             return links;
           });
       })
-      .then((links) => {
+      .then(links => {
         res.render('demo-all', {
           links,
         });
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console
         res.status(500).end();
       });
@@ -96,7 +134,7 @@ app.get('/components/:component', (req, res) => {
     res.status(404).end();
   } else {
     getContent(glob)
-      .then((html) => {
+      .then(html => {
         if (typeof html === 'undefined') {
           res.status(404).end();
         } else {
@@ -105,7 +143,7 @@ app.get('/components/:component', (req, res) => {
           });
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console
         res.status(500).end();
       });
@@ -118,7 +156,7 @@ app.get('/grid', (req, res) => {
   if (path.relative('src/globals', glob).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
-    Promise.all([getContent(glob), allLinks])
+    Promise.all([getContent(glob)])
       .then(results => {
         if (typeof results[0] === 'undefined') {
           res.status(404).end();

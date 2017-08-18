@@ -41,3 +41,26 @@ Use these modifiers with `.bx--inline-notification` class.
 | selectorButton                | `[data-notification-btn]`    | The selector to find the close button in the component    |
 | eventBeforeDeleteNotification | `notification-before-delete` | Event before deleting the notification                    |
 | eventAfterDeleteNotification  | `notification-after-delete`  | Event after deleting the notification                     |
+
+
+### FAQ 
+
+#### Using aria live regions and alert roles
+
+Using `role="alert"` is an aggressive call to action that the prompts a screen reader user to take immediate action on something that changed in the UI. This is usually reserved for things that are important or time-sensitive like:
+
+- An invalid value was entered into a form field 
+- The user's login session is about to expire
+- The connection to the server was lost, local changes will not be saved
+
+Use the alert role sparingly and only in situations where the user's immediate attention is required. 
+Dynamic changes that are less urgent should use a less aggressive method, such as `aria-live="polite"` or other live region roles. 
+
+Don't use an alert role on all notifications.
+
+By default, we recommend that error and warning notifications use `role="alert"`, while success and info notifications use `aria-live="polite"`. 
+But as always, this will depend on the urgency of the notification. 
+
+**Sources:**
+- [Use the alert role - MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_alert_role)
+- [ARIA Live Regions - MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions)

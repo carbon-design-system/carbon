@@ -134,17 +134,17 @@ describe('Test Overflow menu', function () {
 
     it('Should open one menu on a single click event', function () {
       element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element1.classList.contains('bx--overflow-menu--open')).to.be.true;
-      expect(element2.classList.contains('bx--overflow-menu--open')).to.be.false;
-      expect(element3.classList.contains('bx--overflow-menu--open')).to.be.false;
+      expect(element1.classList.contains('bx--overflow-menu--open'), '1st overflow menu').to.be.true;
+      expect(element2.classList.contains('bx--overflow-menu--open'), '2nd overflow menu').to.be.false;
+      expect(element3.classList.contains('bx--overflow-menu--open'), '3rd overflow menu').to.be.false;
     });
 
     it('Should open one menu on multiple click events', function () {
       element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       element2.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element1.classList.contains('bx--overflow-menu--open')).to.be.false;
-      expect(element2.classList.contains('bx--overflow-menu--open')).to.be.true;
-      expect(element3.classList.contains('bx--overflow-menu--open')).to.be.false;
+      expect(element1.classList.contains('bx--overflow-menu--open'), '1st overflow menu').to.be.false;
+      expect(element2.classList.contains('bx--overflow-menu--open'), '2nd overflow menu').to.be.true;
+      expect(element3.classList.contains('bx--overflow-menu--open'), '3rd overflow menu').to.be.false;
     });
 
     afterEach(function () {
@@ -154,6 +154,43 @@ describe('Test Overflow menu', function () {
     });
 
     after(function () {
+      document.body.removeChild(container);
+    });
+  });
+
+  describe('Managing focus', function () {
+    let menu;
+    let element;
+    let firstItemNode;
+    let spyFocusFirstItemNode;
+    const container = document.createElement('div');
+    container.innerHTML = HTML;
+
+    before(function () {
+      document.body.appendChild(container);
+      element = document.querySelector('.bx--overflow-menu');
+      firstItemNode = element.querySelector('[data-floating-menu-primary-focus]');
+      spyFocusFirstItemNode = sinon.spy(firstItemNode, 'focus');
+      menu = new OverflowMenu(element);
+    });
+
+    it('Should focus on the floating menu when the menu is open', function () {
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(spyFocusFirstItemNode).to.have.been.calledOnce;
+    });
+
+    afterEach(function () {
+      if (spyFocusFirstItemNode) {
+        spyFocusFirstItemNode.reset();
+      }
+    });
+
+    after(function () {
+      if (spyFocusFirstItemNode) {
+        spyFocusFirstItemNode.restore();
+        spyFocusFirstItemNode = null;
+      }
+      menu.release();
       document.body.removeChild(container);
     });
   });

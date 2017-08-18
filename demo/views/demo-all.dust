@@ -26,13 +26,13 @@
 <body class="bx--body{?links} demo--navigated{:else} demo--standalone{/links}">
   <header role="banner" class="bx--global-header bx--global-header--demo">
     <div data-demo-switcher class="demo-switcher__container bx--radio-button-group">
-      <input id="flex-col" data-demo-col class="bx--radio-button" type="radio" value="col" name="radio">
+      <input id="flex-col" data-demo-col class="bx--radio-button" type="radio" value="col" name="radio-flex-col">
       <label for="flex-col" data-demo-col class="bx--radio-button__label">
         <span data-demo-col class="bx--radio-button__appearance"></span>
         Flex - Column
       </label>
       <br>
-      <input id="flex-row" data-demo-row class="bx--radio-button" type="radio" value="row" name="radio">
+      <input id="flex-row" data-demo-row class="bx--radio-button" type="radio" value="row" name="radio-flex-row">
       <label for="flex-row" data-demo-row class="bx--radio-button__label">
         <span data-demo-row class="bx--radio-button__appearance"></span>
         Flex - Row
@@ -41,12 +41,12 @@
     <button class="bx--btn bx--btn--primary theme-switcher" data-theme-switcher>Theme Switcher</button>
   </header>
   {?links}
-    <nav role="navigation" aria-label="Interior Left Navigation" data-interior-left-nav class="bx--interior-left-nav bx--interior-left-nav--collapseable">
-      <ul role="menubar" class="left-nav-list" data-interior-left-nav-list aria-hidden="false">
-        {#links}
-          {?items}
-            <li role="menuitem" tabindex="0" class="left-nav-list__item left-nav-list__item--has-children{?selected} left-nav-list__item--expanded{/selected}" data-interior-left-nav-item data-interior-left-nav-with-children>
-              <a class="left-nav-list__item-link">
+  <nav role="navigation" aria-label="Interior Left Navigation" data-interior-left-nav class="bx--interior-left-nav bx--interior-left-nav--collapseable">
+    <ul role="menubar" class="left-nav-list" data-interior-left-nav-list aria-hidden="false">
+      {#links} {?items}
+      <li role="menuitem" tabindex="0" class="left-nav-list__item left-nav-list__item--has-children{?selected} left-nav-list__item--expanded{/selected}"
+        data-interior-left-nav-item data-interior-left-nav-with-children>
+        <a class="left-nav-list__item-link">
                 {name}
                 <div class="left-nav-list__item-icon">
                   <svg class="bx--interior-left-nav__icon" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
@@ -54,56 +54,51 @@
                   </svg>
                 </div>
               </a>
-              <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--nested" data-interior-left-nav-nested-list>
-                {#items}
-                  <li class="left-nav-list__item{?selected} left-nav-list__item--active{/selected}" data-interior-left-nav-nested-item data-demo-name="{name}" role="menuitem" tabindex="-1">
-                    <a class="left-nav-list__item-link" data-interior-left-nav-item-link data-interior-left-nav-leaf-item-link tabindex="-1">{name}</a>
-                  </li>
-                {/items}
-              </ul>
-            </li>
-          {:else}
-            <li role="menuitem" tabindex="0" class="left-nav-list__item{?selected} left-nav-list__item--active{/selected}" data-interior-left-nav-item data-demo-name="{name}">
-              <a class="left-nav-list__item-link" data-interior-left-nav-leaf-item-link>{name}</a>
-            </li>
+        <ul role="menu" aria-hidden="true" class="left-nav-list left-nav-list--nested" data-interior-left-nav-nested-list>
+          {#items}
+          <li class="left-nav-list__item{?selected} left-nav-list__item--active{/selected}" data-interior-left-nav-nested-item data-demo-name="{name}"
+            role="menuitem" tabindex="-1">
+            <a class="left-nav-list__item-link" data-interior-left-nav-item-link data-interior-left-nav-leaf-item-link tabindex="-1">{name}</a>
+          </li>
           {/items}
-        {/links}
-      </ul>
-      <div class="bx--interior-left-nav-collapse" data-interior-left-nav-collapse>
-        <a class="bx--interior-left-nav-collapse__link" href="#">
-          <svg class="bx--interior-left-nav-collapse__arrow" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
-            <path d="M7.5 10.6L2.8 6l4.7-4.6L6.1 0 0 6l6.1 6z"></path>
-          </svg>
-        </a>
-      </div>
-    </nav>
+        </ul>
+      </li>
+      {:else}
+      <li role="menuitem" tabindex="0" class="left-nav-list__item{?selected} left-nav-list__item--active{/selected}" data-interior-left-nav-item
+        data-demo-name="{name}">
+        <a class="left-nav-list__item-link" data-interior-left-nav-leaf-item-link>{name}</a>
+      </li>
+      {/items} {/links}
+    </ul>
+    <div class="bx--interior-left-nav-collapse" data-interior-left-nav-collapse>
+      <a class="bx--interior-left-nav-collapse__link" href="#">
+        <svg class="bx--interior-left-nav-collapse__arrow" width="8" height="12" viewBox="0 0 8 12" fill-rule="evenodd">
+          <title>toggle left-nav collapse or expand</title>
+          <path d="M7.5 10.6L2.8 6l4.7-4.6L6.1 0 0 6l6.1 6z"></path>
+        </svg>
+      </a>
+    </div>
+  </nav>
   {/links}
 
-  <div class="demo--container">
-    {?links}
-      {#links}
-        {?items}
-          {#items}
-            <div class="demo--container__panel" data-card-list data-demo-name="{name}"{^selected} hidden{/selected}>
-              {content|s}
-            </div>
-          {/items}
-        {:else}
-          <div class="demo--container__panel" data-card-list data-demo-name="{name}"{^selected} hidden{/selected}>
-            {content|s}
-          </div>
-        {/items}
-      {/links}
-    {/links}
-    {?content}
-      <div class="demo--container__panel" data-card-list data-demo-name="{name}">
-        {content|s}
-      </div>
+  <div class="demo--container" data-floating-menu-container>
+    {?links} {#links} {?items} {#items}
+    <div class="demo--container__panel" data-card-list data-demo-name="{name}" {^selected} hidden{/selected}>
+      {content|s}
+    </div>
+    {/items} {:else}
+    <div class="demo--container__panel" data-card-list data-demo-name="{name}" {^selected} hidden{/selected}>
+      {content|s}
+    </div>
+    {/items} {/links} {/links} {?content}
+    <div class="demo--container__panel" data-card-list data-demo-name="{name}">
+      {content|s}
+    </div>
     {/content}
   </div>
 
   <!-- Pseudo element to demonstrate focus-wrap behavior (focus trap) -->
-  <input type="text" class="offleft">
+  <input aria-label="inpute-text-offleft" type="text" class="offleft" />
 
   <!-- Scripts -->
   <!-- <script src="/carbon-components.min.js"></script> -->

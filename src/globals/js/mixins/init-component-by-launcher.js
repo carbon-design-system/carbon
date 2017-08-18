@@ -8,6 +8,12 @@ export default function (ToMix) {
    */
   class InitComponentByLauncher extends ToMix {
     /**
+     * `true` suggests that this component is lazily initialized upon an action/event, etc.
+     * @type {boolean}
+     */
+    static forLazyInit = true;
+
+    /**
      * Instantiates this component in the given element.
      * If the given element indicates that it's an component of this class, instantiates it.
      * Otherwise, instantiates this component by clicking on launcher buttons

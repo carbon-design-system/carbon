@@ -29,6 +29,10 @@
     color: $text-03;
   }
 
+  .bx--breadcrumb--no-trailing-slash .bx--breadcrumb-item:last-child::after {
+    content: '';
+  }
+  
   .bx--breadcrumb-item:last-child {
     margin-right: 0;
 
