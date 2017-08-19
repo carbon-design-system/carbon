@@ -113,14 +113,7 @@
   }
 
   .bx--dropdown--disabled {
-    background-color: rgba($field-01, 0.05);
-
-    &:first-child .bx--dropdown-text {
-      color: rgba($text-03, 0.5);
-    }
-
-    .bx--dropdown__arrow {
-      fill: rgba($brand-01, 0.5);
-    }
+    opacity: .5;
+    cursor: not-allowed;
   }
 }
