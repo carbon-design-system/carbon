@@ -41,8 +41,15 @@ class LeftNav extends mixin(createCoponent, initComponent) {
   closeMenu() {
     this.element.classList.remove(this.options.classActiveLeftNav);
     const toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+    if (!toggleOpenNode) {
+      throw new TypeError('Cannot find the trigger button.');
+    }
     toggleOpenNode.classList.remove(this.options.classActiveTrigger);
-    this.element.querySelector(this.options.selectorLeftNav).parentNode.setAttribute('aria-expanded', 'false');
+    const leftNavContainer = this.element.querySelector(this.options.selectorLeftNav);
+    if (!leftNavContainer) {
+      throw new TypeError('Cannot find the nav.');
+    }
+    leftNavContainer.parentNode.setAttribute('aria-expanded', 'false');
     toggleOpenNode.removeAttribute('aria-expanded');
   }
 
@@ -50,22 +57,32 @@ class LeftNav extends mixin(createCoponent, initComponent) {
    * Toggles the menu to open and close.
    */
   toggleMenu() {
-    const leftNavContainer = this.element.querySelector(this.options.selectorLeftNav).parentNode;
+    const leftNavContainer = this.element.querySelector(this.options.selectorLeftNav);
+    if (!leftNavContainer) {
+      throw new TypeError('Cannot find the nav.');
+    }
+    const element = leftNavContainer.parentNode;
     this.element.classList.toggle(this.options.classActiveLeftNav);
     const toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+    if (!toggleOpenNode) {
+      throw new TypeError('Cannot find the trigger button.');
+    }
     toggleOpenNode.classList.toggle(this.options.classActiveTrigger);
-    if (leftNavContainer.getAttribute('aria-expanded') === 'false') {
-      leftNavContainer.setAttribute('aria-expanded', 'true');
+    if (element.getAttribute('aria-expanded') === 'false') {
+      element.setAttribute('aria-expanded', 'true');
       toggleOpenNode.setAttribute('aria-expanded', 'true');
       this.focusIndex = 0;
     } else {
-      leftNavContainer.setAttribute('aria-expanded', 'false');
+      element.setAttribute('aria-expanded', 'false');
       toggleOpenNode.removeAttribute('aria-expanded');
     }
   }
 
   onKeyDown(evt) {
     const leftNavContainer = document.querySelector('[data-left-nav]');
+    if (!leftNavContainer) {
+      throw new TypeError('Cannot find the nav.');
+    }
     const navItems = [...leftNavContainer.getElementsByClassName('bx--parent-item__link')];
 
     const visibleNavItems = navItems.filter(item =>
@@ -125,6 +142,9 @@ class LeftNav extends mixin(createCoponent, initComponent) {
 
   hookOpenActions() {
     const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+    if (!openBtn) {
+      throw new TypeError('Cannot find the trigger button.');
+    }
     // on btn click or enter press or space press
     openBtn.addEventListener('click', () => {
       this.toggleMenu();
@@ -136,8 +156,11 @@ class LeftNav extends mixin(createCoponent, initComponent) {
         openBtn.focus();
         this.closeMenu();
       } else {
-        const toggleOpen = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
-        if (toggleOpen.classList.contains(this.options.classActiveTrigger)) {
+        const toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+        if (!toggleOpenNode) {
+          throw new TypeError('Cannot find the trigger button.');
+        }
+        if (toggleOpenNode.classList.contains(this.options.classActiveTrigger)) {
           this.onKeyDown = this.onKeyDown.bind(this);
           this.onKeyDown(evt);
         }
@@ -193,9 +216,14 @@ class LeftNav extends mixin(createCoponent, initComponent) {
   handleDocumentClick(evt) {
     const clickTarget = evt.target;
     const isOfSelf = this.element.contains(clickTarget);
-    const isToggleBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen).contains(clickTarget);
+    const toggleOpenNode = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
+    if (!toggleOpenNode) {
+      throw new TypeError('Cannot find the trigger button.');
+    }
+    const isToggleBtn = toggleOpenNode.contains(clickTarget);
     const isOpen = this.element.classList.contains(this.options.classActiveLeftNav);
-    const isUnifiedHeader = this.element.ownerDocument.querySelector('[data-unified-header]').contains(clickTarget);
+    const unifiedHeader = this.element.ownerDocument.querySelector('[data-unified-header]');
+    const isUnifiedHeader = unifiedHeader && unifiedHeader.contains(clickTarget);
     const shouldClose = !isOfSelf && isOpen && !isToggleBtn && !isUnifiedHeader;
 
     if (isOfSelf && this.element.tagName === 'A') {
