@@ -35,6 +35,7 @@ import ProgressIndicator from './components/progress-indicator/progress-indicato
 import FloatingMenu from './components/floating-menu/floating-menu';
 import StructuredList from './components/structured-list/structured-list';
 import Slider from './components/slider/slider';
+import Tile from './components/tile/tile';
 
 export { default as watch } from './globals/js/watch';
 
@@ -202,6 +203,11 @@ export {
    * @type Slider
    */
   Slider,
+  /**
+   * Tile.
+   * @type Tile
+   */
+  Tile,
 };
 
 /**
@@ -235,6 +241,7 @@ export const componentClasses = [
   StructuredList,
   DatePicker,
   Slider,
+  Tile,
   // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
 ];
 

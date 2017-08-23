@@ -1,0 +1,92 @@
+//-----------------------------
+// Modules
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
+
+@include exports('tile') {
+  .bx--tile-container {
+    width: 100%;
+
+    .bx--grid {
+      margin: 0;
+      padding: 0;
+    }
+
+    .bx--col {
+      background: none;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .bx--tile {
+    @include layer('raised');
+    width: 100%;
+    min-width: 8rem;
+    min-height: 4rem;
+    background-color: $ui-01;
+    border: 1px solid $ui-03;
+    position: relative;
+    padding: 1rem;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .bx--tile--clickable,
+  .bx--tile--selectable,
+  .bx--tile--expandable {
+    transition: $transition--base $bx--standard-easing;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid $ui-04;
+
+      .bx--tile__checkmark {
+        opacity: 1;
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .bx--tile--clickable.bx--tile--clicked {
+    @include layer('flat');
+    border: 1px solid $ui-04;
+  }
+
+  .bx--tile__checkmark,
+  .bx--tile__chevron {
+    position: absolute;
+    right: 1rem;
+    transition: $transition--base $bx--standard-easing;
+  }
+
+  .bx--tile__checkmark {
+    height: 1rem;
+    top: 1rem;
+    opacity: 0;
+
+    svg {
+      fill: rgba($brand-01, .25);
+    }
+  }
+
+  .bx--tile__chevron {
+    position: absolute;
+    bottom: 1rem;
+    height: .5rem;
+
+    svg {
+      fill: $ui-05;
+    }
+  }
+}
