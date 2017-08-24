@@ -23,6 +23,11 @@ const sourcemaps = require('gulp-sourcemaps');
 const gutil = require('gulp-util');
 const jsdoc = require('gulp-jsdoc3');
 
+// Rollup
+const rollup = require('rollup');
+const rollupConfigDev = require('./tools/rollup.config.dev');
+const rollupConfigProd = require('./tools/rollup.config');
+
 // Generic utility
 const del = require('del');
 const exec = require('child_process').exec;
@@ -80,12 +85,12 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
-gulp.task('scripts:dev', cb => {
-  exec('./node_modules/.bin/rollup -c tools/rollup.config.dev.js', err => {
-    browserSync.reload();
-    cb(err);
-  });
-});
+gulp.task('scripts:dev', () =>
+  rollup.rollup(rollupConfigDev)
+    .then(bundle => bundle.write(rollupConfigDev))
+    .then(() => {
+      browserSync.reload();
+    }));
 
 gulp.task('scripts:umd', () => {
   const srcFiles = ['./src/**/*.js'];
@@ -126,11 +131,9 @@ gulp.task('scripts:es', () => {
   return gulp.src(srcFiles).pipe(babel(babelOpts)).pipe(gulp.dest('es/'));
 });
 
-gulp.task('scripts:rollup', cb => {
-  exec('./node_modules/.bin/rollup -c tools/rollup.config.js', err => {
-    cb(err);
-  });
-});
+gulp.task('scripts:rollup', () =>
+  rollup.rollup(rollupConfigProd)
+    .then(bundle => bundle.write(rollupConfigProd)));
 
 gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
@@ -231,6 +234,7 @@ gulp.task('lint', () =>
       'server.js',
       'src/**/*.js',
       'tests/**/*.js',
+      'tools/**/*.js',
       'demo/**/*.js',
     ])
     .pipe(eslint())
