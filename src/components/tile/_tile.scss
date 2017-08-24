@@ -1,5 +1,5 @@
 //-----------------------------
-// Modules
+// Tiles
 //-----------------------------
 
 @import '../../globals/scss/colors';
@@ -8,6 +8,8 @@
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
+
+$expandableTileMaxHeight: 10rem;
 
 @include exports('tile') {
   .bx--tile-container {
@@ -51,14 +53,21 @@
       .bx--tile__checkmark {
         opacity: 1;
       }
-    }
 
-    &:focus {
-      outline: none;
+      .bx--tile__chevron svg {
+        fill: $brand-01;
+      }
     }
   }
 
-  .bx--tile--clickable.bx--tile--clicked {
+  .bx--tile--clickable,
+  .bx--tile--expandable {
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  .bx--tile--is-clicked {
     @include layer('flat');
     border: 1px solid $ui-04;
   }
@@ -86,7 +95,38 @@
     height: .5rem;
 
     svg {
+      transform-origin: center;
+      transition: $transition--base $bx--standard-easing;
       fill: $ui-05;
+    }
+  }
+
+  .bx--tile--expandable {
+    height: 10rem; // demo
+    max-height: $expandableTileMaxHeight;
+  }
+
+  .bx--tile--is-expanded {
+    height: 20rem; // demo
+    max-height: 200rem; // demo
+
+    .bx--tile__chevron svg {
+      transform: rotate(-180deg) translateY(4px);
+    }
+  }
+
+  .bx--tile--is-selected,
+  .bx--tile--is-selected:hover,
+  .bx--tile--is-selected:focus {
+    border: 1px solid $brand-01;
+    outline: 1px solid transparent;
+
+    .bx--tile__checkmark {
+      opacity: 1;
+    }
+
+    .bx--tile__checkmark svg {
+      fill: $brand-01;
     }
   }
 }

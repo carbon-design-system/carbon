@@ -13,10 +13,24 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
+    const tileType = this.element.dataset.tile;
+    this._hookActions(tileType);
+  }
 
-    document.querySelector('[data-tile]').addEventListener('click', () => {
-      document.querySelector('[data-tile]').classList.toggle('clicked');
-    });
+  _hookActions = (type) => {
+    if (type === 'expandable') {
+      this.element.addEventListener('click', () => {
+        this.element.classList.toggle(this.options.classExpandedTile);
+      });
+    } else if (type === 'clickable') {
+      this.element.addEventListener('click', () => {
+        this.element.classList.toggle(this.options.classClickableTile);
+      });
+    } else if (type === 'selectable') {
+      this.element.addEventListener('click', () => {
+        this.element.classList.toggle(this.options.classSelectableTile);
+      });
+    }
   }
 
   release() {
@@ -40,13 +54,15 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    * If `options` is specified in the constructor,
    * properties in this object are overriden for the instance being created.
    * @property {string} selectorInit The CSS selector to find Tile instances.
-   * @property {string} selectorSearch The CSS selector to find search inputs in a Tile.
-   * @property {string} selectorRowHeight The CSS selector to find the row height inputs in a Tile.
-   * @property {string} classTallRows The CSS class for making table rows into tall rows.
-   * @property {string} classSearchActive The CSS class the active state of the search input.
    */
   static options = {
     selectorInit: '[data-tile]',
+    selectorClickableTile: '[data-tile-clickable]',
+    selectorExpandableTile: '[data-tile-expandable]',
+    selectorSelectableTile: '[data-tile-selectable]',
+    classExpandedTile: 'bx--tile--is-expanded',
+    classClickableTile: 'bx--tile--is-clicked',
+    classSelectableTile: 'bx--tile--is-selected',
   }
 }
 
