@@ -9,9 +9,10 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
-$expandableTileMaxHeight: 10rem;
-
 @include exports('tile') {
+  $tileMaxHeight: 10rem !default;
+  $tileExpandedMaxHeight: 100rem !default;
+
   .bx--tile-container {
     width: 100%;
 
@@ -28,6 +29,7 @@ $expandableTileMaxHeight: 10rem;
 
   .bx--tile {
     @include layer('raised');
+    display: block;
     width: 100%;
     min-width: 8rem;
     min-height: 4rem;
@@ -49,7 +51,10 @@ $expandableTileMaxHeight: 10rem;
 
     &:hover {
       border: 1px solid $ui-04;
+    }
 
+    &:hover,
+    &:focus {
       .bx--tile__checkmark {
         opacity: 1;
       }
@@ -102,13 +107,13 @@ $expandableTileMaxHeight: 10rem;
   }
 
   .bx--tile--expandable {
-    height: 10rem; // demo
-    max-height: $expandableTileMaxHeight;
+    max-height: $tileMaxHeight;
+    overflow: hidden;
   }
 
   .bx--tile--is-expanded {
-    height: 20rem; // demo
-    max-height: 200rem; // demo
+    max-height: $tileExpandedMaxHeight;
+    overflow: visible;
 
     .bx--tile__chevron svg {
       transform: rotate(-180deg) translateY(4px);

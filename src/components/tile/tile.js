@@ -1,8 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import eventMatches from '../../globals/js/misc/event-matches';
-import on from '../../globals/js/misc/on';
 
 class Tile extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -18,28 +16,27 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
   }
 
   _hookActions = (type) => {
+    let className;
     if (type === 'expandable') {
-      this.element.addEventListener('click', () => {
-        this.element.classList.toggle(this.options.classExpandedTile);
-      });
+      className = this.options.classExpandedTile;
     } else if (type === 'clickable') {
-      this.element.addEventListener('click', () => {
-        this.element.classList.toggle(this.options.classClickableTile);
-      });
+      className = this.options.classClickableTile;
     } else if (type === 'selectable') {
-      this.element.addEventListener('click', () => {
-        this.element.classList.toggle(this.options.classSelectableTile);
-      });
+      className = this.options.classSelectableTile;
+    } else {
+      className = '';
     }
+    this.element.addEventListener('click', () => {
+      this.element.classList.toggle(className);
+    });
+    this.element.addEventListener('keydown', (e) => {
+      if (e.which === 13 || e.which === 32) {
+        this.element.classList.toggle(className);
+      }
+    });
   }
 
   release() {
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    if (this.hDocumentKeyPress) {
-      this.hDocumentKeyPress = this.hDocumentKeyPress.release();
-    }
     super.release();
   }
 
