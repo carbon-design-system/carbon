@@ -182,7 +182,7 @@ class Pagination extends Component {
           {pageInputDisabled
             ? <span className="bx--pagination__text">|</span>
             : <TextInput
-              id={`bx-pagination-input-${this.id}`}
+              id={`bx-pagination-input-${inputId}`}
               placeholder="0"
               value={statePage}
               onChange={this.handlePageInputChange}
