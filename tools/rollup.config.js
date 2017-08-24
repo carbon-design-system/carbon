@@ -13,11 +13,8 @@ module.exports = {
       sourceMap: false,
     }),
     babel({
-      exclude:
-      [
-        'node_modules/**',
-      ], // only transpile our source code
-
+      exclude: ['node_modules/**'], // only transpile our source code
+      plugins: ['external-helpers'],
     }),
   ],
   dest: 'scripts/carbon-components.js',
