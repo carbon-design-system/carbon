@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import FloatingMenu from '../../src/components/floating-menu/floating-menu';
 import HTML from '../../src/components/overflow-menu/overflow-menu.html'; // Use ul.bx--overflow-menu-options for testing

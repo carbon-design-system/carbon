@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import EventManager from '../utils/event-manager';
 import ResponsiveTable from '../../src/components/data-table/data-table';
 import HTML from '../../src/components/data-table/data-table.html';

@@ -107,6 +107,10 @@ const customLaunchers = {
     base: 'Chrome',
     flags: ['--no-sandbox'],
   },
+  ChromeHeadless_Travis: {
+    base: 'ChromeHeadless',
+    flags: ['--no-sandbox'],
+  },
 };
 
 const sauceLaunchers = {
@@ -244,7 +248,6 @@ module.exports = function (config) {
       require('karma-mocha-reporter'),
       require('karma-coverage'),
       require('karma-rollup-plugin'),
-      require('karma-phantomjs-launcher'),
       require('karma-chrome-launcher'),
       require('karma-firefox-launcher'),
       require('karma-safari-launcher'),
@@ -296,14 +299,14 @@ module.exports = function (config) {
 
     colors: true,
 
-    logLevel: config.LOG_INFO,
+    logLevel: cloptions.verbose ? config.LOG_DEBUG : config.LOG_INFO,
 
     browserNoActivityTimeout: 60000,
 
     autoWatch: true,
     autoWatchBatchDelay: 400,
 
-    browsers: flatten(ensureArray(cloptions.browsers || 'PhantomJS')
+    browsers: flatten(ensureArray(cloptions.browsers || 'ChromeHeadless')
       .map((browser) => {
         const browserLower = browser.toLowerCase();
         return (cloptions.sauce && sauceLaunchers[browserLower])

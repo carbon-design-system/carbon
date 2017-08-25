@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import createMockRaf from 'mock-raf';
 import Slider from '../../src/components/slider/slider';
 import SliderHTML from '../../src/components/slider/slider.html';
