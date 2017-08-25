@@ -26,7 +26,8 @@
     "patterns",
     "sass",
     "scss",
-    "style guide"
+    "style guide",
+    "eyeglass-module"
   ],
   "dependencies": {
     "carbon-icons": "^6.0.4",
@@ -178,5 +179,11 @@
       "name": "Chris Dhanaraj",
       "email": "chrisdhanaraj@us.ibm.com"
     }
-  ]
+  ],
+  "eyeglass": {
+    "sassDir": "scss",
+    "exports": false,
+    "name": "carbon-components",
+    "needs": "^1.2.1"
+  }
 }
