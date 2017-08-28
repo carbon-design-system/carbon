@@ -53,7 +53,7 @@
     }
 
     &:focus {
-      @include focus-outline();
+      @include focus-outline;
     }
 
     &:last-of-type {
@@ -75,10 +75,10 @@
 
     &:hover,
     &:focus {
-      @include focus-outline();
+      @include focus-outline;
     }
   }
   .bx--carousel__item--active {
-    @include focus-outline();
+    @include focus-outline;
   }
 }
