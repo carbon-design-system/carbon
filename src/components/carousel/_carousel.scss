@@ -41,6 +41,15 @@
   .bx--carousel__btn {
     @include button-reset(false);
     cursor: pointer;
+    padding: 0;
+
+    &:first-child {
+      margin-right: 1.25rem;
+    }
+
+    &:last-child {
+      margin-left: 1.25rem;
+    }
 
     &:focus {
       @include focus-outline();
@@ -52,6 +61,7 @@
 
     svg {
       height: rem(24px);
+      width: rem(16px);
       fill: $brand-01;
     }
   }
