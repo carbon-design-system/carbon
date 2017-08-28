@@ -36,6 +36,8 @@ import FloatingMenu from './components/floating-menu/floating-menu';
 import StructuredList from './components/structured-list/structured-list';
 import Slider from './components/slider/slider';
 import Tile from './components/tile/tile';
+import Carousel from './components/carousel/carousel';
+import Lightbox from './components/lightbox/lightbox';
 
 export { default as watch } from './globals/js/watch';
 
@@ -208,6 +210,16 @@ export {
    * @type Tile
    */
   Tile,
+  /**
+   * Carousel.
+   * @type Carousel
+   */
+  Carousel,
+  /**
+   * Lightbox.
+   * @type Lightbox
+   */
+  Lightbox,
 };
 
 /**
@@ -242,6 +254,8 @@ export const componentClasses = [
   DatePicker,
   Slider,
   Tile,
+  Carousel,
+  Lightbox,
   // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
 ];
 
