@@ -31,8 +31,7 @@ describe('StructuredList', function() {
     it('should set default options', function() {
       expect(instance.options).to.deep.equal({
         selectorInit: '[data-structured-list]',
-        selectorRow:
-          '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
+        selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
         classActive: 'bx--structured-list-row--selected',
       });
     });

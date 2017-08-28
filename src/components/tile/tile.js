@@ -15,26 +15,25 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     this._hookActions(tileType);
   }
 
+  getClass = (type) => {
+    const typeObj = {
+      expandable: this.options.classExpandedTile,
+      clickable: this.options.classClickableTile,
+      selectable: this.options.classSelectableTile,
+    };
+    return typeObj[type];
+  };
+
   _hookActions = (type) => {
-    let className;
-    if (type === 'expandable') {
-      className = this.options.classExpandedTile;
-    } else if (type === 'clickable') {
-      className = this.options.classClickableTile;
-    } else if (type === 'selectable') {
-      className = this.options.classSelectableTile;
-    } else {
-      className = '';
-    }
     this.element.addEventListener('click', () => {
-      this.element.classList.toggle(className);
+      this.element.classList.toggle(this.getClass(type));
     });
     this.element.addEventListener('keydown', (e) => {
       if (e.which === 13 || e.which === 32) {
-        this.element.classList.toggle(className);
+        this.element.classList.toggle(this.getClass(type));
       }
     });
-  }
+  };
 
   release() {
     super.release();
@@ -60,7 +59,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     classExpandedTile: 'bx--tile--is-expanded',
     classClickableTile: 'bx--tile--is-clicked',
     classSelectableTile: 'bx--tile--is-selected',
-  }
+  };
 }
 
 export default Tile;

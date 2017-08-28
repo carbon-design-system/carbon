@@ -114,6 +114,7 @@
   .bx--tile--is-expanded {
     max-height: $tileExpandedMaxHeight;
     overflow: visible;
+    transition: 500ms $bx--standard-easing;
 
     .bx--tile__chevron svg {
       transform: rotate(-180deg) translateY(4px);
