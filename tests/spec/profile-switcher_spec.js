@@ -2,26 +2,28 @@ import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import ProfileSwitcher from '../../src/components/unified-header/profile-switcher';
 import unifiedHeaderHtml from '../../src/components/unified-header/unified-header.html';
 
-describe('Test profile switcher', function () {
-  describe('Constructor', function () {
+describe('Test profile switcher', function() {
+  describe('Constructor', function() {
     let profileSwitcher;
 
-    it('Should throw if root element is not given', function () {
+    it('Should throw if root element is not given', function() {
       expect(() => {
         new ProfileSwitcher();
       }).to.throw(Error);
     });
 
-    it('Should throw if root element is not a DOM element', function () {
+    it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new ProfileSwitcher(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it('Should set default options', function () {
+    it('Should set default options', function() {
       const container = document.createElement('div');
       container.innerHTML = unifiedHeaderHtml;
-      profileSwitcher = new ProfileSwitcher(container.querySelector('[data-profile-switcher]'));
+      profileSwitcher = new ProfileSwitcher(
+        container.querySelector('[data-profile-switcher]')
+      );
       expect(profileSwitcher.options).to.deep.equal({
         selectorInit: '[data-profile-switcher]',
         selectorProfileSwitcher: '[data-profile-switcher]',
@@ -45,7 +47,7 @@ describe('Test profile switcher', function () {
       });
     });
 
-    afterEach(function () {
+    afterEach(function() {
       if (profileSwitcher) {
         profileSwitcher = profileSwitcher.release();
       }

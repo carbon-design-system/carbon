@@ -98,7 +98,8 @@
     background-color: $ui-01;
     padding: 0;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background-color: $brand-01;
 
       @include breakpoint(bp--sm--major) {
@@ -109,7 +110,7 @@
 
     @include breakpoint(bp--sm--major) {
       background: transparent;
-      padding: .725rem 0 rem(10px);
+      padding: 0.725rem 0 rem(10px);
 
       & + & {
         margin-left: rem(48px);
@@ -155,7 +156,7 @@
     }
 
     @include breakpoint(bp--sm--major) {
-      padding: .05rem;
+      padding: 0.05rem;
       width: auto;
 
       &:hover {

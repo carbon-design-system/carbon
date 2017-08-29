@@ -29,7 +29,8 @@
     color: $color__white; // anna
     position: relative;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       .bx--logo__text {
         color: $color__blue-20; // anna
       }
@@ -152,7 +153,8 @@
         color: $color__blue-30; // anna
       }
 
-      .bx--dropdown__menu-text, .bx--dropdown__list {
+      .bx--dropdown__menu-text,
+      .bx--dropdown__list {
         outline: 0;
       }
     }
@@ -186,7 +188,7 @@
     top: 100%;
     width: auto;
     z-index: -1;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
   }
 
   .bx--global-header__menu .bx--dropdown-item {
@@ -195,7 +197,7 @@
   }
 
   .bx--global-header__menu .bx--dropdown-link {
-    padding: .5rem .75rem;
+    padding: 0.5rem 0.75rem;
     color: $color__white; // anna
 
     &:hover {

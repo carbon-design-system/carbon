@@ -1,7 +1,6 @@
 @import '../../globals/scss/import-once';
 
 @include exports('left-nav-trigger') {
-
   .bx--left-nav__trigger {
     @include reset;
     width: rem(60px);
@@ -77,7 +76,6 @@
   }
 
   .bx--left-nav__trigger--apps {
-
     span,
     span:before,
     span:after {
@@ -101,29 +99,27 @@
   }
 
   .bx--left-nav__trigger--apps.bx--left-nav__trigger--active {
+    span {
+      background: transparent;
+    }
 
-      span {
-        background: transparent;
-      }
+    span:before,
+    span:after {
+      background: $nav-06;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $nav-06;
 
       span:before,
       span:after {
-        background: $nav-06;
-      }
-
-      &:hover,
-      &:focus {
-        background-color: $nav-06;
-
-        span:before,
-        span:after {
-          background: $color__white;
-        }
+        background: $color__white;
       }
     }
+  }
 
   .bx--left-nav__trigger--services {
-
     span,
     span:before,
     span:after {
@@ -147,7 +143,6 @@
   }
 
   .bx--left-nav__trigger--services.bx--left-nav__trigger--active {
-
     span {
       background: transparent;
     }
@@ -169,7 +164,6 @@
   }
 
   .bx--left-nav__trigger--infrastructure {
-
     span,
     span:before,
     span:after {
@@ -193,7 +187,6 @@
   }
 
   .bx--left-nav__trigger--infrastructure.bx--left-nav__trigger--active {
-
     span {
       background: transparent;
     }

@@ -54,7 +54,7 @@
     }
 
     &:disabled {
-      opacity: .5;
+      opacity: 0.5;
       cursor: not-allowed;
     }
 
@@ -86,7 +86,7 @@
   }
 
   .bx--date-picker--range > .bx--date-picker-container:first-child {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 
   .bx--date-picker--range .bx--date-picker__icon {
@@ -105,7 +105,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: .875rem 1rem .25rem;
+    padding: 0.875rem 1rem 0.25rem;
     width: rem(285px);
     height: rem(230px);
     border-radius: 0;
@@ -126,7 +126,7 @@
   .bx--date-picker__month,
   .flatpickr-month {
     width: 100%;
-    margin-bottom: .2rem;
+    margin-bottom: 0.2rem;
   }
 
   .bx--date-picker__month .flatpickr-prev-month,
@@ -155,7 +155,7 @@
 
   .bx--date-picker__month .flatpickr-current-month .cur-month,
   .flatpickr-month .flatpickr-current-month .cur-month {
-    margin-right: .25rem;
+    margin-right: 0.25rem;
   }
 
   .bx--date-picker__month .numInputWrapper .numInput,
@@ -165,7 +165,7 @@
     background-color: $field-01;
     border: none;
     border-radius: 0;
-    padding: .125rem .125rem .125rem .4rem;
+    padding: 0.125rem 0.125rem 0.125rem 0.4rem;
 
     &:focus {
       outline: 1px solid $brand-01;
@@ -219,7 +219,7 @@
     width: 1.8rem;
     line-height: rem(25px);
     flex-basis: 1.8rem;
-    margin: rem(.5px) 0;
+    margin: rem(0.5px) 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,6 +318,6 @@
   .bx--date-picker__weekdays,
   .flatpickr-weekdays {
     width: rem(225px);
-    margin-bottom: .325rem;
+    margin-bottom: 0.325rem;
   }
 }

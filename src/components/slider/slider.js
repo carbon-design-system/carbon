@@ -4,7 +4,11 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import eventedState from '../../globals/js/mixins/evented-state';
 import on from '../../globals/js/misc/on';
 
-class Slider extends mixin(createComponent, initComponentBySearch, eventedState) {
+class Slider extends mixin(
+  createComponent,
+  initComponentBySearch,
+  eventedState
+) {
   /**
    * Slider.
    * @extends CreateComponent
@@ -18,33 +22,49 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     this.dragging = false;
 
     this.track = this.element.querySelector(this.options.selectorTrack);
-    this.filledTrack = this.element.querySelector(this.options.selectorFilledTrack);
+    this.filledTrack = this.element.querySelector(
+      this.options.selectorFilledTrack
+    );
     this.thumb = this.element.querySelector(this.options.selectorThumb);
     this.input = this.element.querySelector(this.options.selectorInput);
 
     if (this.element.dataset.sliderInputBox) {
-      this.boundInput = this.element.ownerDocument.querySelector(this.element.dataset.sliderInputBox);
+      this.boundInput = this.element.ownerDocument.querySelector(
+        this.element.dataset.sliderInputBox
+      );
       this._updateInput();
-      this.boundInput.addEventListener('change', (evt) => { this.setValue(evt.target.value); });
+      this.boundInput.addEventListener('change', evt => {
+        this.setValue(evt.target.value);
+      });
     }
 
     this._updatePosition();
 
-    this.thumb.addEventListener('mousedown', () => { this.sliderActive = true; });
-    this.hDocumentMouseUp = on(this.element.ownerDocument, 'mouseup', () => { this.sliderActive = false; });
-    this.hDocumentMouseMove = on(this.element.ownerDocument, 'mousemove', (evt) => {
-      const disabled = this.element.classList.contains('bx--slider--disabled');
-      if (this.sliderActive === true && !disabled) {
-        this._updatePosition(evt);
-      }
+    this.thumb.addEventListener('mousedown', () => {
+      this.sliderActive = true;
     });
-    this.thumb.addEventListener('keydown', (evt) => {
+    this.hDocumentMouseUp = on(this.element.ownerDocument, 'mouseup', () => {
+      this.sliderActive = false;
+    });
+    this.hDocumentMouseMove = on(
+      this.element.ownerDocument,
+      'mousemove',
+      evt => {
+        const disabled = this.element.classList.contains(
+          'bx--slider--disabled'
+        );
+        if (this.sliderActive === true && !disabled) {
+          this._updatePosition(evt);
+        }
+      }
+    );
+    this.thumb.addEventListener('keydown', evt => {
       const disabled = this.element.classList.contains('bx--slider--disabled');
       if (!disabled) {
         this._updatePosition(evt);
       }
     });
-    this.track.addEventListener('click', (evt) => {
+    this.track.addEventListener('click', evt => {
       const disabled = this.element.classList.contains('bx--slider--disabled');
       if (!disabled) {
         this._updatePosition(evt);
@@ -54,15 +74,10 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
 
   _changeState = (state, detail, callback) => {
     callback();
-  }
-
+  };
 
   _updatePosition(evt) {
-    const {
-      left,
-      newValue,
-    } = this._calcValue(evt);
-
+    const { left, newValue } = this._calcValue(evt);
 
     if (this.dragging) {
       return;
@@ -73,7 +88,8 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     requestAnimationFrame(() => {
       this.dragging = false;
       this.thumb.style.left = `${left}%`;
-      this.filledTrack.style.transform = `translate(0%, -50%) scaleX(${left / 100})`;
+      this.filledTrack.style.transform = `translate(0%, -50%) scaleX(${left /
+        100})`;
       this.input.value = newValue;
       this._updateInput();
       this.changeState('slider-value-change', { value: newValue });
@@ -81,15 +97,10 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
   }
 
   _calcValue(evt) {
-    const {
-      value,
-      min,
-      max,
-      step,
-    } = this.getInputProps();
+    const { value, min, max, step } = this.getInputProps();
 
     const range = max - min;
-    const valuePercentage = (((value - min) / range) * 100);
+    const valuePercentage = (value - min) / range * 100;
 
     let left;
     let newValue;
@@ -108,20 +119,21 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
         }[evt.which];
 
         if (direction !== undefined) {
-          const multiplier = evt.shiftKey === true
-            ? (range / step) / this.options.stepMultiplier
-            : 1;
+          const multiplier =
+            evt.shiftKey === true
+              ? range / step / this.options.stepMultiplier
+              : 1;
           const stepMultiplied = step * multiplier;
-          const stepSize = (stepMultiplied / range) * 100;
-          left = valuePercentage + (stepSize * direction);
-          newValue = Number(value) + (stepMultiplied * direction);
+          const stepSize = stepMultiplied / range * 100;
+          left = valuePercentage + stepSize * direction;
+          newValue = Number(value) + stepMultiplied * direction;
         }
       }
       if (type === 'mousemove' || type === 'click') {
         const track = this.track.getBoundingClientRect();
-        const unrounded = ((evt.clientX - track.left) / track.width);
-        const rounded = Math.round(((range * unrounded) / step)) * step;
-        left = (((rounded - min) / range) * 100);
+        const unrounded = (evt.clientX - track.left) / track.width;
+        const rounded = Math.round(range * unrounded / step) * step;
+        left = (rounded - min) / range * 100;
         newValue = rounded;
       }
     }
@@ -200,7 +212,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     eventBeforeSliderValueChange: 'slider-before-value-change',
     eventAfterSliderValueChange: 'slider-after-value-change',
     stepMultiplier: 4,
-  }
+  };
 }
 
 export default Slider;

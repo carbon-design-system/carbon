@@ -15,7 +15,7 @@
 //
 
 // Box shadow variables
-$box-shadow: rgba(0, 0, 0, .1);
+$box-shadow: rgba(0, 0, 0, 0.1);
 $box-shadow--raised: 0 1px 2px 0 $box-shadow;
 $box-shadow--overlay: 0 4px 8px 0 $box-shadow;
 $box-shadow--sticky-nav: 0 6px 12px 0 $box-shadow;
@@ -35,11 +35,10 @@ $layer-shadows: (
 
 // Layer mixin
 @mixin layer($layer) {
-  @if global-variable-exists('css--use-layer') == false or $css--use-layer == true  {
+  @if global-variable-exists('css--use-layer') == false or $css--use-layer == true {
     @if map-has-key($layer-shadows, $layer) {
       box-shadow: #{map-get($layer-shadows, $layer)};
-    }
-    @else {
+    } @else {
       @warn '#{$layer} is not a valid layer.';
     }
   }

@@ -8,7 +8,6 @@ $loading__size: 10.5rem;
 @import 'mixins';
 
 @include exports('loading') {
-
   .bx--loading {
     @include reset;
     @include animation__loading--spin;
@@ -45,7 +44,7 @@ $loading__size: 10.5rem;
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba($ui-01, .6);
+    background-color: rgba($ui-01, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;

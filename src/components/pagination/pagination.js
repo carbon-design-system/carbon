@@ -28,7 +28,7 @@ class Pagination extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    this.element.addEventListener('click', (evt) => {
+    this.element.addEventListener('click', evt => {
       if (evt.target.matches(this.options.selectorPageBackward)) {
         const detail = {
           initialEvt: evt,
@@ -46,7 +46,7 @@ class Pagination extends mixin(createComponent, initComponentBySearch) {
       }
     });
 
-    this.element.addEventListener('input', (evt) => {
+    this.element.addEventListener('input', evt => {
       if (evt.target.matches(this.options.selectorItemsPerPageInput)) {
         const detail = {
           initialEvt: evt,
@@ -78,7 +78,7 @@ class Pagination extends mixin(createComponent, initComponentBySearch) {
     });
 
     this.element.dispatchEvent(event);
-  }
+  };
 
   /**
    * The map associating DOM element and pagination instance.

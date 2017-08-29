@@ -63,11 +63,11 @@
   }
 
   .bx--toggle__text--left {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 
   .bx--toggle__text--right {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
   }
 
   .bx--toggle:checked + .bx--toggle__label .bx--toggle__appearance {
@@ -95,7 +95,7 @@
 
   .bx--toggle:disabled + .bx--toggle__label {
     cursor: not-allowed;
-    opacity: .5;
+    opacity: 0.5;
   }
 
   .bx--toggle:disabled + .bx--toggle__label .bx--toggle__appearance {

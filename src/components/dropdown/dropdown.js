@@ -5,7 +5,11 @@ import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
+class Dropdown extends mixin(
+  createComponent,
+  initComponentBySearch,
+  trackBlur
+) {
   /**
    * A selector with drop downs.
    * @extends CreateComponent
@@ -27,10 +31,14 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
      * The handle to release click event listener on document object.
      * @member {Handle}
      */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this._toggle(event); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', event => {
+      this._toggle(event);
+    });
 
-    this.element.addEventListener('keydown', (event) => { this._handleKeyDown(event); });
-    this.element.addEventListener('click', (event) => {
+    this.element.addEventListener('keydown', event => {
+      this._handleKeyDown(event);
+    });
+    this.element.addEventListener('click', event => {
       const item = eventMatches(event, this.options.selectorItem);
       if (item) {
         this.select(item);
@@ -74,14 +82,20 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @param {Event} [event] The event triggering this method.
    */
   _toggle(event) {
-    const isDisabled = this.element.classList.contains('bx--dropdown--disabled');
+    const isDisabled = this.element.classList.contains(
+      'bx--dropdown--disabled'
+    );
 
     if (isDisabled) {
       return;
     }
 
-    if (([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem)) ||
-    event.which === 27 || event.type === 'click') {
+    if (
+      ([13, 32, 40].indexOf(event.which) >= 0 &&
+        !event.target.matches(this.options.selectorItem)) ||
+      event.which === 27 ||
+      event.type === 'click'
+    ) {
       const isOpen = this.element.classList.contains('bx--dropdown--open');
       const isOfSelf = this.element.contains(event.target);
       const actions = {
@@ -89,7 +103,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
         remove: (!isOfSelf || event.which === 27) && isOpen,
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
-      Object.keys(actions).forEach((action) => {
+      Object.keys(actions).forEach(action => {
         if (actions[action]) {
           this.element.classList[action]('bx--dropdown--open');
           this.element.focus();
@@ -103,7 +117,10 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    */
   getCurrentNavigation() {
     const focused = this.element.ownerDocument.activeElement;
-    return focused.nodeType === Node.ELEMENT_NODE && focused.matches(this.options.selectorItem) ? focused : null;
+    return focused.nodeType === Node.ELEMENT_NODE &&
+    focused.matches(this.options.selectorItem)
+      ? focused
+      : null;
   }
 
   /**
@@ -112,15 +129,23 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    */
   navigate(direction) {
     const items = [...this.element.querySelectorAll(this.options.selectorItem)];
-    const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
-    const getNextItem = (old) => {
+    const start =
+      this.getCurrentNavigation() ||
+      this.element.querySelector(this.options.selectorItemSelected);
+    const getNextItem = old => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
       const handleOverflow = (i, l) => i - (i < l ? 0 : l);
       // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
       const index = Math.max(items.indexOf(old) + direction, -1);
-      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+      return items[
+        handleUnderflow(handleOverflow(index, items.length), items.length)
+      ];
     };
-    for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+    for (
+      let current = getNextItem(start);
+      current && current !== start;
+      current = getNextItem(current)
+    ) {
       if (!current.matches(this.options.selectorItemSelected)) {
         current.focus();
         break;
@@ -152,17 +177,21 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
-      [...this.element.querySelectorAll(this.options.selectorItemSelected)].forEach((item) => {
+      [
+        ...this.element.querySelectorAll(this.options.selectorItemSelected),
+      ].forEach(item => {
         if (itemToSelect !== item) {
           item.classList.remove(this.options.classSelected);
         }
       });
 
-      this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
-        bubbles: true,
-        cancelable: true,
-        detail: { item: itemToSelect },
-      }));
+      this.element.dispatchEvent(
+        new CustomEvent(this.options.eventAfterSelected, {
+          bubbles: true,
+          cancelable: true,
+          detail: { item: itemToSelect },
+        })
+      );
     }
   }
 

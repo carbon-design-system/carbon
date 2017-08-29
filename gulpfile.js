@@ -28,9 +28,11 @@ const rollup = require('rollup');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
 
+// JSDoc
+const jsdocConfig = require('gulp-jsdoc3/dist/jsdocConfig.json');
+
 // Generic utility
 const del = require('del');
-const exec = require('child_process').exec;
 
 // Test environment
 const Server = require('karma').Server;
@@ -42,7 +44,6 @@ const cloptions = require('minimist')(process.argv.slice(2), {
 });
 
 // Axe A11y Test
-const fs = require('fs');
 const axe = require('gulp-axe-webdriver');
 const axeArgs = require('minimist')(process.argv.slice(2));
 
@@ -86,11 +87,13 @@ gulp.task('clean', () =>
  */
 
 gulp.task('scripts:dev', () =>
-  rollup.rollup(rollupConfigDev)
+  rollup
+    .rollup(rollupConfigDev)
     .then(bundle => bundle.write(rollupConfigDev))
     .then(() => {
       browserSync.reload();
-    }));
+    })
+);
 
 gulp.task('scripts:umd', () => {
   const srcFiles = ['./src/**/*.js'];
@@ -108,7 +111,10 @@ gulp.task('scripts:umd', () => {
     plugins: ['transform-es2015-modules-umd', 'transform-class-properties'],
   };
 
-  return gulp.src(srcFiles).pipe(babel(babelOpts)).pipe(gulp.dest('umd/'));
+  return gulp
+    .src(srcFiles)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('umd/'));
 });
 
 gulp.task('scripts:es', () => {
@@ -128,12 +134,15 @@ gulp.task('scripts:es', () => {
     plugins: ['transform-class-properties'],
   };
 
-  return gulp.src(srcFiles).pipe(babel(babelOpts)).pipe(gulp.dest('es/'));
+  return gulp
+    .src(srcFiles)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('es/'));
 });
 
 gulp.task('scripts:rollup', () =>
-  rollup.rollup(rollupConfigProd)
-    .then(bundle => bundle.write(rollupConfigProd)));
+  rollup.rollup(rollupConfigProd).then(bundle => bundle.write(rollupConfigProd))
+);
 
 gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
@@ -270,7 +279,7 @@ gulp.task('jsdoc', cb => {
     .on('end', () => {
       gulp.src(['README.md', 'docs/js/tmp/**/*.js'], { read: false }).pipe(
         jsdoc(
-          Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), {
+          Object.assign(jsdocConfig, {
             // eslint-disable-line global-require
             opts: {
               destination: './docs/js',
@@ -306,7 +315,6 @@ gulp.task('test:unit', done => {
 });
 
 gulp.task('test:a11y', ['sass:compiled'], done => {
-  const dirs = fs.readdirSync('./src/components');
   const componentName = axeArgs.name === undefined ? undefined : axeArgs.name;
   const options = {
     a11yCheckOptions: {

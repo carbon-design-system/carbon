@@ -10,7 +10,6 @@
 @import '../../globals/scss/css--reset';
 
 @include exports('radio-button') {
-
   .bx--radio-button-group {
     display: flex;
     align-items: center;
@@ -50,15 +49,15 @@
       content: '';
       display: inline-block;
       position: relative;
-      width: .5rem;
-      height: .5rem;
+      width: 0.5rem;
+      height: 0.5rem;
       border-radius: 50%;
       background-color: $brand-01;
     }
   }
 
   .bx--radio-button:disabled + .bx--radio-button__label {
-    opacity: .5;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 

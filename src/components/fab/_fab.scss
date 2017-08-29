@@ -6,48 +6,47 @@
 @import '../../globals/scss/import-once';
 
 @include exports('fab') {
+  .bx--fab {
+    @include reset;
+    @include rotate(0, $transition--base);
+    display: inline-block;
+    width: rem(72px);
+    height: rem(72px);
+    text-decoration: none;
+    filter: drop-shadow(0px 3px 3px 0 $box-shadow);
 
-.bx--fab {
-  @include reset;
-  @include rotate(0, $transition--base);
-  display: inline-block;
-  width: rem(72px);
-  height: rem(72px);
-  text-decoration: none;
-  filter: drop-shadow(0px 3px 3px 0 $box-shadow);
+    &__hidden {
+      @include hidden;
+      color: $color__white;
+    }
 
-  &__hidden {
-    @include hidden;
-    color: $color__white;
+    // Styles for "Open" state
+    &__svg {
+      width: 100%;
+
+      .bx--fab__hexagon {
+        transition: fill $transition--base;
+        fill: $color__blue-40;
+      }
+
+      .bx--fab__plus-icon {
+        @include rotate(0, $transition--base);
+        fill: $color__white;
+      }
+    }
+
+    // Styles for "Closed" state
+    &[data-state='closed'] {
+      @include rotate(90deg, $transition--base);
+
+      .bx--fab__hexagon {
+        transition: fill $transition--base;
+        fill: $color__navy-gray-5;
+      }
+
+      .bx--fab__plus-icon {
+        @include rotate(-45deg, $transition--base);
+      }
+    }
   }
-
-  // Styles for "Open" state
-  &__svg {
-    width: 100%;
-
-    .bx--fab__hexagon {
-      transition: fill $transition--base;
-      fill: $color__blue-40;
-    }
-
-    .bx--fab__plus-icon {
-      @include rotate(0, $transition--base);
-      fill: $color__white;
-    }
-  }
-
-  // Styles for "Closed" state
-  &[data-state='closed'] {
-    @include rotate(90deg, $transition--base);
-
-    .bx--fab__hexagon {
-      transition: fill $transition--base;
-      fill: $color__navy-gray-5;
-    }
-
-    .bx--fab__plus-icon {
-      @include rotate(-45deg, $transition--base);
-    }
-  }
-}
 }

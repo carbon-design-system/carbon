@@ -1,8 +1,9 @@
 export default class DemoSwitcher {
-
   constructor(element = {}) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError('DOM element should be given to initialize this widget.');
+      throw new TypeError(
+        'DOM element should be given to initialize this widget.'
+      );
     }
 
     this.element = element;
@@ -15,13 +16,23 @@ export default class DemoSwitcher {
   }
 
   static init(target = document) {
-    if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
-      throw new Error('DOM document or DOM element should be given to search for and initialize this widget.');
+    if (
+      target.nodeType !== Node.ELEMENT_NODE &&
+      target.nodeType !== Node.DOCUMENT_NODE
+    ) {
+      throw new Error(
+        'DOM document or DOM element should be given to search for and initialize this widget.'
+      );
     }
-    if (target.nodeType === Node.ELEMENT_NODE && target.dataset.demoSwitcher !== undefined) {
+    if (
+      target.nodeType === Node.ELEMENT_NODE &&
+      target.dataset.demoSwitcher !== undefined
+    ) {
       this.create(target);
     } else {
-      [...target.querySelectorAll('[data-demo-switcher]')].forEach(element => this.create(element));
+      [...target.querySelectorAll('[data-demo-switcher]')].forEach(element =>
+        this.create(element)
+      );
     }
   }
 

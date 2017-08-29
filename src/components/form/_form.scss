@@ -32,12 +32,12 @@
   }
 
   .bx--label--disabled {
-    opacity: .5;
+    opacity: 0.5;
   }
 
   input[data-invalid],
   textarea[data-invalid],
-  select[data-invalid]  {
+  select[data-invalid] {
     box-shadow: 0 2px 0px 0px $support-01;
 
     ~ .bx--form-requirement {
@@ -48,7 +48,7 @@
   .bx--form-requirement {
     @include reset;
     @include font-size('11');
-    margin: .75rem 0 0;
+    margin: 0.75rem 0 0;
     max-height: 0;
     overflow: hidden;
     font-weight: 700;

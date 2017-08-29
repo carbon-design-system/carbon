@@ -17,19 +17,29 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
     if (!this.element.dataset.tableTarget) {
       console.warn('There is no table bound to this toolbar!'); // eslint-disable-line no-console
     } else {
-      const boundTable = this.element.ownerDocument.querySelector(this.element.dataset.tableTarget);
-      const rowHeightBtns = this.element.querySelector(this.options.selectorRowHeight);
+      const boundTable = this.element.ownerDocument.querySelector(
+        this.element.dataset.tableTarget
+      );
+      const rowHeightBtns = this.element.querySelector(
+        this.options.selectorRowHeight
+      );
       if (rowHeightBtns) {
-        rowHeightBtns.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
+        rowHeightBtns.addEventListener('click', event => {
+          this._handleRowHeightChange(event, boundTable);
+        });
         // [...this.element.querySelectorAll(this.options.selectorRowHeight)].forEach((item) => {
         //   item.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
         // });
       }
     }
 
-    this.hDocumentKeyDown = on(this.element.ownerDocument, 'keydown', (evt) => { this._handleKeyDown(evt); });
+    this.hDocumentKeyDown = on(this.element.ownerDocument, 'keydown', evt => {
+      this._handleKeyDown(evt);
+    });
 
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this._handleDocumentClick(evt); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
+      this._handleDocumentClick(evt);
+    });
   }
 
   /**
@@ -38,18 +48,31 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
    */
   _handleDocumentClick(event) {
     const searchInput = eventMatches(event, this.options.selectorSearch);
-    const isOfSelfSearchInput = searchInput && this.element.contains(searchInput);
+    const isOfSelfSearchInput =
+      searchInput && this.element.contains(searchInput);
 
     if (isOfSelfSearchInput) {
-      const shouldBeOpen = isOfSelfSearchInput && !this.element.classList.contains(this.options.classSearchActive);
-      searchInput.classList.toggle(this.options.classSearchActive, shouldBeOpen);
+      const shouldBeOpen =
+        isOfSelfSearchInput &&
+        !this.element.classList.contains(this.options.classSearchActive);
+      searchInput.classList.toggle(
+        this.options.classSearchActive,
+        shouldBeOpen
+      );
       if (shouldBeOpen) {
         searchInput.querySelector('input').focus();
       }
     }
 
-    const targetComponentElement = eventMatches(event, this.options.selectorInit);
-    [...this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)].forEach((item) => {
+    const targetComponentElement = eventMatches(
+      event,
+      this.options.selectorInit
+    );
+    [
+      ...this.element.ownerDocument.querySelectorAll(
+        this.options.selectorSearch
+      ),
+    ].forEach(item => {
       if (!targetComponentElement || !targetComponentElement.contains(item)) {
         item.classList.remove(this.options.classSearchActive);
       }
@@ -63,7 +86,9 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
   _handleKeyDown(event) {
     const searchInput = eventMatches(event, this.options.selectorSearch);
     const isOfSelf = this.element.contains(event.target);
-    const shouldBeOpen = isOfSelf && !this.element.classList.contains(this.options.classSearchActive);
+    const shouldBeOpen =
+      isOfSelf &&
+      !this.element.classList.contains(this.options.classSearchActive);
 
     if (searchInput) {
       if ((event.which === 13 || event.which === 32) && !shouldBeOpen) {
@@ -123,7 +148,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
     selectorRowHeight: '[data-row-height]',
     classTallRows: 'bx--responsive-table--tall',
     classSearchActive: 'bx--toolbar-search--active',
-  }
+  };
 }
 
 export default Toolbar;

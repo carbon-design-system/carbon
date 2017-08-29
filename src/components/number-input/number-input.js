@@ -13,8 +13,14 @@ class NumberInput extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
     // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
     // <svg> does not have `Element.classList` in IE11
-    this.element.querySelector('.up-icon').addEventListener('click', (event) => { this._handleClick(event); });
-    this.element.querySelector('.down-icon').addEventListener('click', (event) => { this._handleClick(event); });
+    this.element.querySelector('.up-icon').addEventListener('click', event => {
+      this._handleClick(event);
+    });
+    this.element
+      .querySelector('.down-icon')
+      .addEventListener('click', event => {
+        this._handleClick(event);
+      });
   }
 
   /**
@@ -32,10 +38,12 @@ class NumberInput extends mixin(createComponent, initComponentBySearch) {
     }
 
     // Programmatic change in value (including `stepUp()`/`stepDown()`) won't fire change event
-    numberInput.dispatchEvent(new CustomEvent('change', {
-      bubbles: true,
-      cancelable: false,
-    }));
+    numberInput.dispatchEvent(
+      new CustomEvent('change', {
+        bubbles: true,
+        cancelable: false,
+      })
+    );
   }
 
   /**
