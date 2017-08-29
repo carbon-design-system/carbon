@@ -5,9 +5,9 @@ const resolve = require('rollup-plugin-node-resolve');
 const babel = require('rollup-plugin-babel');
 
 module.exports = {
-  entry: 'demo/index.js',
+  input: 'demo/index.js',
   format: 'iife',
-  moduleName: 'CarbonComponents',
+  name: 'CarbonComponents',
   plugins: [
     resolve({
       jsnext: true,
@@ -22,5 +22,5 @@ module.exports = {
       plugins: ['external-helpers'],
     }),
   ],
-  dest: 'demo/demo.js',
+  file: 'demo/demo.js',
 };
