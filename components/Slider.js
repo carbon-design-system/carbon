@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextInput from './TextInput';
 
-class Slider extends Component {
+class Slider extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     hideTextInput: PropTypes.bool,
@@ -37,12 +37,12 @@ class Slider extends Component {
   };
 
   componentDidMount() {
-    this.updatePosition()
+    this.updatePosition();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps !== this.props) {
-      this.updatePosition()
+      this.updatePosition();
     }
   }
 
@@ -62,28 +62,31 @@ class Slider extends Component {
     this.setState({ dragging: true });
 
     requestAnimationFrame(() => {
-      this.setState({ dragging: false });
-      const {
-        left,
-        newValue,
-      } = this.calcValue(evt);
+      this.setState((prevState, props) => {
+        const {
+          left,
+          newValue,
+        } = this.calcValue(evt, prevState, props);
 
-      this.setState({
-        left,
-        value: newValue,
-       });
+        props.onChange({ value: newValue });
+        return {
+          dragging: false,
+          left,
+          value: newValue,
+        }
+      });
     });
   }
 
-  calcValue = (evt) => {
+  calcValue = (evt, prevState, props) => {
     const {
       min,
       max,
       step,
       stepMuliplier,
-    } = this.props;
+    } = props;
 
-    const { value } = this.state;
+    const { value } = prevState;
 
     const range = max - min;
     const valuePercentage = (((value - min) / range) * 100);
@@ -162,7 +165,7 @@ class Slider extends Component {
 
   handleChange = (evt) => {
     this.setState({ value: evt.target.value });
-    this.updatePosition();
+    this.updatePosition(evt);
   }
 
   render() {
@@ -170,7 +173,6 @@ class Slider extends Component {
       className,
       hideTextInput,
       id,
-      onChange,
       min,
       minLabel,
       max,
@@ -212,7 +214,7 @@ class Slider extends Component {
             ref={node => {
               this.element = node;
             }}
-            onClick={(evt) => this.updatePosition(evt)}
+            onClick={this.updatePosition}
             {...other}
           >
             <div
@@ -227,9 +229,9 @@ class Slider extends Component {
               className="bx--slider__thumb"
               tabIndex="0"
               style={thumbStyle}
-              onMouseDown={() => this.handleMouseStart()}
-              onTouchStart={() => this.handleTouchStart()}
-              onKeyDown={(evt) => this.updatePosition(evt)}
+              onMouseDown={this.handleMouseStart}
+              onTouchStart={this.handleTouchStart}
+              onKeyDown={this.updatePosition}
             >
             </div>
             <input
@@ -241,11 +243,7 @@ class Slider extends Component {
               min={min}
               max={max}
               step={step}
-              onChange={evt => {
-                if (!disabled) {
-                  onChange(evt);
-                }
-              }}
+              onChange={this.handleChange}
             />
           </div>
           <span className="bx--slider__range-label">{max}{maxLabel}</span>
@@ -254,7 +252,7 @@ class Slider extends Component {
               id="input-for-slider"
               className="bx-slider-text-input"
               value={value}
-              onChange={(evt) => this.handleChange(evt)}
+              onChange={this.handleChange}
             />
           : null }
         </div>
