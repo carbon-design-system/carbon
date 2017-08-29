@@ -1,10 +1,9 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+// import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import eventMatches from '../../globals/js/misc/event-matches';
-import on from '../../globals/js/misc/on';
-// import eventMatches from '../../globals/js/misc/event-matches';
+// import on from '../../globals/js/misc/on';
 
 class Lightbox extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
@@ -16,9 +15,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
     this.updateSlide();
     this.updateFilmstrip();
 
-    this.element.addEventListener('click', evt => {
-      this.handleClick(evt);
-    });
+    this.element.addEventListener('click', evt => this.handleClick(evt));
 
     this.element.parentNode.addEventListener('modal-beingshown', evt => {
       if (!evt.detail.launchingElement.dataset.carouselItemIndex) {
@@ -53,21 +50,23 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
       this.updateSlide();
       this.updateFilmstrip();
     }
+    const filmstripBtn = eventMatches(evt, this.options.selectorFilmstripBtn);
+    if (filmstripBtn) {
+      this.activeIndex = filmstripBtn.dataset.carouselItemIndex;
+      this.updateSlide();
+      this.updateFilmstrip();
+    }
   };
 
   updateSlide = () => {
     const items = [...this.element.querySelectorAll(this.options.selectorLightboxItem)];
-    items.forEach(item => {
-      item.classList.remove(this.options.classActiveItem);
-    });
+    items.forEach(item => item.classList.remove(this.options.classActiveItem));
     items[this.activeIndex].classList.add(this.options.classActiveItem);
   };
 
   updateFilmstrip = () => {
     const items = [...this.element.querySelectorAll(this.options.selectorFilmstripItem)];
-    items.forEach(item => {
-      item.classList.remove(this.options.classFilmstripActiveItem);
-    });
+    items.forEach(item => item.classList.remove(this.options.classFilmstripActiveItem));
     items[this.activeIndex].classList.add(this.options.classFilmstripActiveItem);
   };
 
@@ -76,6 +75,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
     selectorScrollRight: '[data-scroll-right]',
     selectorScrollLeft: '[data-scroll-left]',
     selectorLightboxItem: '.bx--lightbox__item',
+    selectorFilmstripBtn: '.bx--filmstrip-btn',
     selectorFilmstripItem: '.bx--carousel__item',
     classActiveItem: 'bx--lightbox__item--shown',
     classFilmstripActiveItem: 'bx--carousel__item--active',
