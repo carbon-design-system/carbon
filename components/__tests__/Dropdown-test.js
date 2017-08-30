@@ -29,6 +29,14 @@ describe('Dropdown', () => {
       expect(dropdownWrapper.hasClass('bx--dropdown')).toEqual(true);
     });
 
+    it('has the expected classes when disabled', () => {
+      const wrapper = shallow(
+        <Dropdown defaultText="Choose something.." disabled/>
+      ).childAt(0);
+
+      expect(wrapper.hasClass('bx--dropdown--disabled')).toEqual(true);
+    });
+
     it('should add extra classes that are passed via className', () => {
       expect(dropdownWrapper.hasClass('extra-class')).toEqual(true);
     });
@@ -127,6 +135,23 @@ describe('Dropdown', () => {
       wrapper.setState({ open: true });
       const listener = wrapper.find(ClickListener);
       listener.props().onClickOutside();
+      expect(wrapper.state().open).toBe(false);
+    });
+
+    it('should not open when disabled', () => {
+      const wrapper = mount(
+        <Dropdown onClick={onClick} disabled>
+          <DropdownItem className="test-child" itemText="test-child" value="test-child" />
+        </Dropdown>
+      );
+      const dropdown = wrapper.find('.bx--dropdown--disabled');
+
+      dropdown.simulate('click');
+      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(false);
+      dropdown.simulate('keypress', { which: 13 });
+      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(false);
+      dropdown.simulate('keypress', { which: 32 });
+      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(false);
       expect(wrapper.state().open).toBe(false);
     });
   });

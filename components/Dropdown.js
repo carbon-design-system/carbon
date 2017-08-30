@@ -16,11 +16,13 @@ class Dropdown extends PureComponent {
     selectedText: PropTypes.string,
     open: PropTypes.bool,
     iconDescription: PropTypes.string,
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
     tabIndex: 0,
     open: false,
+    disabled: false,
     iconDescription: 'open list of options',
     onChange: () => {},
   };
@@ -59,6 +61,10 @@ class Dropdown extends PureComponent {
   };
 
   toggle = evt => {
+    if (this.props.disabled) {
+      return;
+    }
+
     // Open on click, enter, or space
     if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
       this.setState({ open: !this.state.open });
@@ -78,6 +84,7 @@ class Dropdown extends PureComponent {
       tabIndex,
       defaultText, // eslint-disable-line no-unused-vars
       iconDescription,
+      disabled,
       ...other
     } = this.props;
 
@@ -90,6 +97,7 @@ class Dropdown extends PureComponent {
     const dropdownClasses = classNames({
       'bx--dropdown': true,
       'bx--dropdown--open': this.state.open,
+      'bx--dropdown--disabled': disabled,
       [this.props.className]: this.props.className,
     });
 
