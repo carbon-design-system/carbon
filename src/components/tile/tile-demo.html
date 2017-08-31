@@ -4,11 +4,20 @@
     <div class="bx--row">
       <div class="bx--col bx--col-md-12">
         <div data-tile="expandable" class="bx--tile bx--tile--expandable" tabindex="0">
-          <div class="tile-demo-content" style="height: 500px"></div>
-          <div class="bx--tile__chevron">
-            <svg width='12' height='8' viewBox='0 0 12 8' fill-rule='evenodd'>
-              <path d='M10.6 0L6 4.7 1.4 0 0 1.4l6 6.1 6-6.1z'></path>
+          <button class="bx--tile__chevron">
+            <svg width="12" height="8" viewBox="0 0 12 8" fill-rule="evenodd">
+              <path d="M10.6 0L6 4.7 1.4 0 0 1.4l6 6.1 6-6.1z"></path>
             </svg>
+          </button>
+          <div class="bx--tile-content">
+            <span data-tile-atf class="bx--tile-content__above-the-fold" style="height: 200px">
+              <!-- Above the fold content here -->
+              <h2>Above the fold content here</h2>
+            </span>
+            <span class="bx--tile-content__below-the-fold" style="height: 400px">
+              <!-- Rest of the content here -->
+              <h2>Below the fold content here</h2>
+            </span>
           </div>
         </div>
       </div>

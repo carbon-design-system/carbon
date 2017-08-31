@@ -11,11 +11,11 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    const tileType = this.element.dataset.tile;
-    this._hookActions(tileType);
+    this.tileType = this.element.dataset.tile;
+    this._hookActions(this._getClass(this.tileType));
   }
 
-  getClass = (type) => {
+  _getClass = (type) => {
     const typeObj = {
       expandable: this.options.classExpandedTile,
       clickable: this.options.classClickableTile,
@@ -24,16 +24,36 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     return typeObj[type];
   };
 
-  _hookActions = (type) => {
+  _hookActions = (tileClass) => {
+    const isExpandable = this.tileType === 'expandable';
+    if (isExpandable) {
+      const aboveTheFold = this.element.querySelector(this.options.selectorAboveTheFold);
+      if (aboveTheFold) {
+        this.tileHeight = this.element.getBoundingClientRect().height;
+        this.atfHeight = aboveTheFold.getBoundingClientRect().height;
+        this.element.style.maxHeight = `${this.atfHeight}px`;
+      }
+    }
     this.element.addEventListener('click', () => {
-      this.element.classList.toggle(this.getClass(type));
+      this.element.classList.toggle(tileClass);
+      if (isExpandable) {
+        this._setTileHeight();
+      }
     });
     this.element.addEventListener('keydown', (e) => {
       if (e.which === 13 || e.which === 32) {
-        this.element.classList.toggle(this.getClass(type));
+        this.element.classList.toggle(tileClass);
+        if (isExpandable) {
+          this._setTileHeight();
+        }
       }
     });
   };
+
+  _setTileHeight = () => {
+    const isExpanded = this.element.classList.contains(this.options.classExpandedTile);
+    this.element.style.maxHeight = (isExpanded) ? `${this.tileHeight}px` : `${this.atfHeight}px`;
+  }
 
   release() {
     super.release();
@@ -56,6 +76,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     selectorClickableTile: '[data-tile-clickable]',
     selectorExpandableTile: '[data-tile-expandable]',
     selectorSelectableTile: '[data-tile-selectable]',
+    selectorAboveTheFold: '[data-tile-atf]',
     classExpandedTile: 'bx--tile--is-expanded',
     classClickableTile: 'bx--tile--is-clicked',
     classSelectableTile: 'bx--tile--is-selected',

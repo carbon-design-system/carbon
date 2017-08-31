@@ -10,9 +10,6 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tile') {
-  $tileMaxHeight: 10rem !default;
-  $tileExpandedMaxHeight: 100rem !default;
-
   .bx--tile-container {
     width: 100%;
 
@@ -31,6 +28,7 @@
     @include layer('raised');
     display: block;
     width: 100%;
+    height: 100%;
     min-width: 8rem;
     min-height: 4rem;
     background-color: $ui-01;
@@ -82,6 +80,8 @@
     position: absolute;
     right: 1rem;
     transition: $transition--base $bx--standard-easing;
+    border: none;
+    background: transparent;
   }
 
   .bx--tile__checkmark {
@@ -107,17 +107,32 @@
   }
 
   .bx--tile--expandable {
-    max-height: $tileMaxHeight;
     overflow: hidden;
+    cursor: default;
+    transition: $transition--base $bx--standard-easing;
+  }
+
+  .bx--tile-content__above-the-fold {
+    display: block;
+  }
+
+  .bx--tile-content__below-the-fold {
+    display: block;
+    opacity: 0;
+    transition: $transition--base $bx--standard-easing;
   }
 
   .bx--tile--is-expanded {
-    max-height: $tileExpandedMaxHeight;
     overflow: visible;
-    transition: calc($transition--base * 2) $bx--standard-easing;
+    transition: $transition--base $bx--standard-easing;
 
     .bx--tile__chevron svg {
       transform: rotate(-180deg) translateY(4px);
+    }
+
+    .bx--tile-content__below-the-fold {
+      opacity: 1;
+      transition: $transition--base $bx--standard-easing;
     }
   }
 
@@ -134,5 +149,10 @@
     .bx--tile__checkmark svg {
       fill: $brand-01;
     }
+  }
+
+  .bx--tile-content {
+    width: 100%;
+    height: 100%;
   }
 }
