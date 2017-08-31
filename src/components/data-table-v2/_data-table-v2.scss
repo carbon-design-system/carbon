@@ -1,0 +1,143 @@
+.bx--table-toolbar {
+  display: flex;
+  padding-bottom: 8px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  .icon-content {
+    margin-left: auto;
+  }
+}
+
+.bx--batch-actions {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background-color: $brand-01;
+  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1);
+
+  .bx--btn {
+    color: #fff;
+  }
+
+  .bx--btn__icon {
+    fill: #fff;
+  }
+}
+
+.bx--batch-actions--active {
+  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1);
+  opacity: 1;
+}
+
+.bx--batch-actions--out {
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1);
+}
+
+.bx--action-icons {
+  margin-left: auto;
+  svg {
+    padding: 0 12px;
+    fill: #fff;
+    height: 16px;
+    width: auto;
+  }
+}
+
+.bx--data-table-v2 {
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    background-color: $ui-02;
+    font-size: rem(12px);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  tbody {
+    background-color: #fff;
+    font-size: rem(14px);
+  }
+
+  tr {
+    height: 48px;
+    border-top: 1px solid $brand-01;
+
+    &:last-of-type {
+      td {
+        border-bottom: 1px solid $ui-04;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      td {
+        background-color: rgba($brand-02, 0.1);
+        border-top: 1px solid $brand-01;
+        border-bottom: 1px solid $brand-01;
+
+        &:first-of-type {
+          border-left: 1px solid $brand-01;
+        }
+
+        &:last-of-type {
+          border-right: 1px solid $brand-01;
+        }
+      }
+    }
+  }
+
+  th,
+  td {
+    border-top: 1px solid $ui-04;
+    padding-left: 12px;
+    padding-right: 12px;
+    vertical-align: middle;
+    text-align: left;
+
+    &:first-of-type {
+      padding-left: 24px;
+      border-left: 1px solid $ui-04;
+    }
+
+    &:last-of-type {
+      padding-right: 24px;
+      border-right: 1px solid $ui-04;
+    }
+  }
+
+  // Overrrides
+  .bx--checkbox-appearance {
+    margin-right: 0;
+  }
+}
+
+.bx--data-table-v2--compact {
+  tbody tr {
+    height: 24px;
+  }
+}
+
+.bx--data-table-v2--short {
+  tbody tr {
+    height: 32px;
+  }
+}
+
+.bx--data-table-v2--tall {
+  tbody tr {
+    height: 64px;
+  }
+}
