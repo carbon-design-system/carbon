@@ -131,7 +131,7 @@ class Filename extends Component {
     } else if (status === 'edit') {
       return (
         <Icon
-          iconDescription={iconDescription}
+          description={iconDescription}
           className="bx--file-close"
           name="close--glyph"
           style={style}
@@ -141,7 +141,7 @@ class Filename extends Component {
     } else if (status === 'complete') {
       return (
         <Icon
-          iconDescription={iconDescription}
+          description={iconDescription}
           className="bx--file-complete"
           name="checkmark--glyph"
           style={style}
