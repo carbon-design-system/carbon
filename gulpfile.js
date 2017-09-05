@@ -346,7 +346,7 @@ gulp.task('watch', () => {
 gulp.task('serve', ['browser-sync', 'watch']);
 
 // Build task collection
-gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled']);
+gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev']);
 gulp.task('build:styles', ['sass:compiled', 'sass:source']);
 
 // Mapped to npm run build

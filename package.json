@@ -29,6 +29,9 @@
     "style guide",
     "eyeglass-module"
   ],
+  "engines": {
+    "node": "^6.0.0"
+  },
   "dependencies": {
     "carbon-icons": "^6.0.4",
     "flatpickr": "2.6.3",
