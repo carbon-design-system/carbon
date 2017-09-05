@@ -71,27 +71,33 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
     const items = [
       ...this.element.querySelectorAll(this.options.selectorFilmstripIndicator),
     ];
-    items.forEach(item => {
-      item.classList.remove(activeClass);
-    });
+    items.forEach(item => item.classList.remove(activeClass));
+
     if (activeIndex === 0) {
+      console.log('first');
       items[0].classList.add(activeClass);
     }
 
-    if (activeIndex > 0 && activeIndex >= items.length) {
-      items[items.length - 1].classList.add(activeClass);
-    } else {
+    if (activeIndex > 0 && activeIndex <= items.length) {
+      console.log('middle');
       items[1].classList.add(activeClass);
+    }
+
+    if (activeIndex > items.length) {
+      console.log('last');
+      items[2].classList.add(activeClass);
     }
   };
 
   updateSlide = () => {
+    console.log('updateSlide');
     const items = [...this.element.querySelectorAll(this.options.selectorLightboxItem)];
     items.forEach(item => item.classList.remove(this.options.classActiveItem));
     items[this.activeIndex].classList.add(this.options.classActiveItem);
   };
 
   updateFilmstrip = () => {
+    console.log('updateFilmstrip');
     const items = [...this.element.querySelectorAll(this.options.selectorFilmstripItem)];
     items.forEach(item => item.classList.remove(this.options.classFilmstripActiveItem));
     items[this.activeIndex].classList.add(this.options.classFilmstripActiveItem);
