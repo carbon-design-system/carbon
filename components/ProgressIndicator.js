@@ -29,7 +29,9 @@ const ProgressStep = ({ ...props }) => {
   return (
     <li className={classes}>
       <svg>
-        <title>{description}</title>
+        <title>
+          {description}
+        </title>
         {current
           ? <g>
               <circle
@@ -51,7 +53,9 @@ const ProgressStep = ({ ...props }) => {
           : null}
         {incomplete ? <circle cx="12" cy="12" r="12" /> : null}
       </svg>
-      <p className="bx--progress-label">{label}</p>
+      <p className="bx--progress-label">
+        {label}
+      </p>
       <span className="bx--progress-line" />
     </li>
   );
@@ -100,20 +104,16 @@ class ProgressIndicator extends Component {
     });
 
   render() {
-    const { className, currentIndex, ...other } = this.props;
+    const { className, currentIndex, ...other } = this.props; // eslint-disable-line no-unused-vars
     const classes = classnames({
       'bx--progress': true,
       [className]: className
     });
-    if (currentIndex) {
-      return (
-        <ul className={classes} {...other}>
-          {this.renderSteps()}
-        </ul>
-      );
-    }
-
-    return null;
+    return (
+      <ul className={classes} {...other}>
+        {this.renderSteps()}
+      </ul>
+    );
   }
 }
 
