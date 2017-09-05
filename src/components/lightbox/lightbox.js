@@ -37,6 +37,8 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
         this.activeIndex++;
         this.updateSlide();
         this.updateFilmstrip();
+        this.updateFilmstripIndicator();
+        this.sideScroll('right');
       }
     }
 
@@ -45,6 +47,8 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
         this.activeIndex--;
         this.updateSlide();
         this.updateFilmstrip();
+        this.updateFilmstripIndicator();
+        this.sideScroll('left');
       }
     }
 
@@ -53,6 +57,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
       this.activeIndex = filmstripItem.dataset.carouselItemIndex;
       this.updateSlide();
       this.updateFilmstrip();
+      this.updateFilmstripIndicator();
     }
 
     const filmstripBtn = eventMatches(evt, this.options.selectorFilmstripBtn);
@@ -61,7 +66,6 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
       this.updateSlide();
       this.updateFilmstrip();
       this.updateFilmstripIndicator();
-      // this.sideScroll('right');
     }
   };
 
