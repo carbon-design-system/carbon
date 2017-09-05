@@ -1,7 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-// import eventMatches from '../../globals/js/misc/event-matches';
 
 class Carousel extends mixin(createComponent, initComponentBySearch) {
   /**
