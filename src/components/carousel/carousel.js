@@ -15,25 +15,25 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
     this.filmstrip = this.element.querySelector(this.options.selectorFilmstrip);
     this.carouselItem = this.element.querySelector(this.options.selectorCarouselItem);
 
-    this.element.addEventListener('click', evt => {
-      if (evt.target.matches(this.options.selectorScrollRight)) {
-        this.sideScroll('right');
-      }
-      if (evt.target.matches(this.options.selectorScrollLeft)) {
-        this.sideScroll('left');
-      }
-    });
+    this.element.addEventListener('click', evt => this.handleClick(evt));
   }
+
+  handleClick = evt =>
+    evt.target.matches(this.options.selectorScrollRight)
+      ? this.sideScroll('right')
+      : this.sideScroll('left');
 
   sideScroll = direction => {
     const filmstripWidth = this.filmstrip.getBoundingClientRect().width;
     const itemWidth = this.carouselItem.getBoundingClientRect().width + 20;
     const re = /\.*translateX\((.*)px\)/i;
+
     const translateXValue = this.filmstrip.style.transform
       ? Number(this.filmstrip.style.transform.split(re)[1])
       : 0;
-    direction = direction === 'right' ? -1 : 1;
-    const itemWidthDirection = itemWidth * direction;
+    const directionValue = direction === 'right' ? -1 : 1;
+
+    const itemWidthDirection = itemWidth * directionValue;
     let newTranslateValue = itemWidthDirection + translateXValue;
     if (newTranslateValue > 0) {
       newTranslateValue = 0;
