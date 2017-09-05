@@ -8,8 +8,6 @@
 @include exports('lightbox') {
   .bx--lightbox {
     width: rem(1056px);
-    // height: rem(594px);
-    // height: rem(786px);
     @include layer('pop-out');
   }
   .bx--lightbox__main {
@@ -29,6 +27,10 @@
     &:last-of-type {
       right: rem(-32px);
       transform: rotate(180deg);
+    }
+
+    &:focus {
+      @include focus-outline;
     }
 
     svg {

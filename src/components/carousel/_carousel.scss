@@ -11,7 +11,7 @@
     align-items: center;
   }
   .bx--carousel-container {
-    max-width: rem(808px);
+    max-width: rem(810px);
     overflow: hidden;
     padding: 0 1px;
   }
@@ -20,6 +20,7 @@
     justify-content: space-between;
     transition: transform 100ms $bx--ease-in;
     padding: rem(24px) 0;
+    width: auto;
   }
   .bx--filmstrip-btn {
     @include button-reset;
@@ -37,23 +38,7 @@
       @include focus-outline;
     }
   }
-  .bx--filmstrip-indicator-ctn {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  .bx--filmstrip-indicator {
-    position: relative;
-    left: -1px;
-    height: rem(10px);
-    width: rem(10px);
-    border: 1px solid $brand-01;
-    background: transparent;
-    border-radius: 50%;
-  }
-  .bx--filmstrip-indicator--active {
-    background: $brand-01;
-  }
+
   .bx--carousel__btn {
     @include button-reset(false);
     cursor: pointer;
