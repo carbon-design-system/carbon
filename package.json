@@ -30,7 +30,7 @@
     "eyeglass-module"
   ],
   "engines": {
-    "node": "^6.0.0"
+    "node": "^6.0.0 || ^8.0.0"
   },
   "dependencies": {
     "carbon-icons": "^6.0.4",
@@ -59,6 +59,7 @@
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",
     "express": "4.13.4",
+    "freshy": "^1.0.3",
     "globby": "4.0.0",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.1",
