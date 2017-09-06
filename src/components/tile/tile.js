@@ -13,10 +13,12 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
     this.tileType = this.element.dataset.tile;
+    this.tileHeight = 0; // Tracks expandable tile height
+    this.atfHeight = 0; // Tracks above the fold height
     this._hookActions(this._getClass(this.tileType));
   }
 
-  _getClass = (type) => {
+  _getClass = type => {
     const typeObj = {
       expandable: this.options.classExpandedTile,
       clickable: this.options.classClickableTile,
@@ -25,17 +27,19 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     return typeObj[type];
   };
 
-  _hookActions = (tileClass) => {
+  _hookActions = tileClass => {
     const isExpandable = this.tileType === 'expandable';
     if (isExpandable) {
-      const aboveTheFold = this.element.querySelector(this.options.selectorAboveTheFold);
+      const aboveTheFold = this.element.querySelector(
+        this.options.selectorAboveTheFold
+      );
       if (aboveTheFold) {
         this.tileHeight = this.element.getBoundingClientRect().height;
         this.atfHeight = aboveTheFold.getBoundingClientRect().height;
         this.element.style.maxHeight = `${this.atfHeight}px`;
       }
     }
-    this.element.addEventListener('click', (evt) => {
+    this.element.addEventListener('click', evt => {
       const input = eventMatches(evt, this.options.selectorTileInput);
       if (!input) {
         this.element.classList.toggle(tileClass);
@@ -44,7 +48,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
         this._setTileHeight();
       }
     });
-    this.element.addEventListener('keydown', (evt) => {
+    this.element.addEventListener('keydown', evt => {
       if (evt.which === 13 || evt.which === 32) {
         this.element.classList.toggle(tileClass);
         if (isExpandable) {
@@ -55,9 +59,13 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
   };
 
   _setTileHeight = () => {
-    const isExpanded = this.element.classList.contains(this.options.classExpandedTile);
-    this.element.style.maxHeight = (isExpanded) ? `${this.tileHeight}px` : `${this.atfHeight}px`;
-  }
+    const isExpanded = this.element.classList.contains(
+      this.options.classExpandedTile
+    );
+    this.element.style.maxHeight = isExpanded
+      ? `${this.tileHeight}px`
+      : `${this.atfHeight}px`;
+  };
 
   release() {
     super.release();
