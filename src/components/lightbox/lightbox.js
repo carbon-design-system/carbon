@@ -7,7 +7,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
     this.activeIndex = this.element.dataset.lightboxIndex;
     this.totalSlides =
-      [...this.element.querySelectorAll(this.options.selectorLightboxItem)].length - 1;
+      this.element.querySelectorAll(this.options.selectorLightboxItem).length - 1;
 
     this.updateSlide();
 
