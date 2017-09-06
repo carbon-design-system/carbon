@@ -54,13 +54,32 @@
     align-items: center;
   }
 
-  .bx--number__controls .up-icon,
-  .bx--number__controls .down-icon {
+  .bx--number__control-btn {
+    @include button-reset;
+    position: relative;
+    bottom: 0;
+    width: rem(20px);
+    height: rem(10px);
+
+    &:focus {
+      @include focus-outline;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover svg {
+      fill: $brand-02;
+    }
+  }
+
+  .bx--number__controls svg {
     fill: $brand-01;
     width: rem(9px);
-    height: rem(20px);
-    position: relative;
+    height: rem(9px);
 
+    // Hover styles for use with old HTML w/o button
     &:hover {
       cursor: pointer;
       fill: $brand-02;
