@@ -29,6 +29,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
 
   _hookActions = tileClass => {
     const isExpandable = this.tileType === 'expandable';
+    const isSelectable = this.tileType === 'selectable';
     if (isExpandable) {
       const aboveTheFold = this.element.querySelector(
         this.options.selectorAboveTheFold
@@ -49,10 +50,14 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
       }
     });
     this.element.addEventListener('keydown', evt => {
-      if (evt.which === 13 || evt.which === 32) {
+      const chevron = eventMatches(evt, '.bx--tile__chevron');
+      const input = this.element.querySelector(this.options.selectorTileInput);
+      if ((evt.which === 13 || evt.which === 32) && !chevron) {
         this.element.classList.toggle(tileClass);
         if (isExpandable) {
           this._setTileHeight();
+        } else if (isSelectable) {
+          input.checked = !input.checked;
         }
       }
     });
