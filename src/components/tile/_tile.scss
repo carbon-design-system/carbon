@@ -145,12 +145,14 @@
   .bx--tile--is-selected:focus {
     border: 1px solid $brand-01;
     outline: 1px solid transparent;
+  }
 
-    .bx--tile__checkmark {
+  .bx--tile-input:checked {
+    & + .bx--tile__checkmark {
       opacity: 1;
     }
 
-    .bx--tile__checkmark svg {
+    & + .bx--tile__checkmark svg {
       fill: $brand-01;
     }
   }
@@ -158,5 +160,9 @@
   .bx--tile-content {
     width: 100%;
     height: 100%;
+  }
+
+  .bx--tile-input {
+    display: none;
   }
 }

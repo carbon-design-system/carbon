@@ -1,6 +1,7 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import eventMatches from '../../globals/js/misc/event-matches';
 
 class Tile extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -34,14 +35,17 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
         this.element.style.maxHeight = `${this.atfHeight}px`;
       }
     }
-    this.element.addEventListener('click', () => {
-      this.element.classList.toggle(tileClass);
+    this.element.addEventListener('click', (evt) => {
+      const input = eventMatches(evt, this.options.selectorTileInput);
+      if (!input) {
+        this.element.classList.toggle(tileClass);
+      }
       if (isExpandable) {
         this._setTileHeight();
       }
     });
-    this.element.addEventListener('keydown', (e) => {
-      if (e.which === 13 || e.which === 32) {
+    this.element.addEventListener('keydown', (evt) => {
+      if (evt.which === 13 || evt.which === 32) {
         this.element.classList.toggle(tileClass);
         if (isExpandable) {
           this._setTileHeight();
@@ -73,10 +77,8 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    */
   static options = {
     selectorInit: '[data-tile]',
-    selectorClickableTile: '[data-tile-clickable]',
-    selectorExpandableTile: '[data-tile-expandable]',
-    selectorSelectableTile: '[data-tile-selectable]',
     selectorAboveTheFold: '[data-tile-atf]',
+    selectorTileInput: '[data-tile-input]',
     classExpandedTile: 'bx--tile--is-expanded',
     classClickableTile: 'bx--tile--is-clicked',
     classSelectableTile: 'bx--tile--is-selected',

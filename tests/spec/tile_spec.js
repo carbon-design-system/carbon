@@ -28,10 +28,8 @@ describe('Test tile', function () {
 
       expect(tile.options).to.deep.equal({
         selectorInit: '[data-tile]',
-        selectorClickableTile: '[data-tile-clickable]',
-        selectorExpandableTile: '[data-tile-expandable]',
-        selectorSelectableTile: '[data-tile-selectable]',
         selectorAboveTheFold: '[data-tile-atf]',
+        selectorTileInput: '[data-tile-input]',
         classExpandedTile: 'bx--tile--is-expanded',
         classClickableTile: 'bx--tile--is-clicked',
         classSelectableTile: 'bx--tile--is-selected',
@@ -124,7 +122,7 @@ describe('Test tile', function () {
     });
   });
 
-  describe('Test expandable tile', function () {
+  describe('Test selectable tile', function () {
     let instance;
     let tileElement;
     const container = document.createElement('div');
