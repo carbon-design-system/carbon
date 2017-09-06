@@ -103,7 +103,8 @@
         var eventStart = new CustomEvent(_this.options.eventBeforeLeftNavToggled, {
           bubbles: true,
           cancelable: true,
-          detail: { collapsed: !collapsed } });
+          detail: { collapsed: !collapsed } // shows where the toggle is going, not where it is
+        });
 
         if (_this.element.dispatchEvent(eventStart)) {
           if (!collapsed) {

@@ -94,6 +94,8 @@
   UnifiedHeader.components = new _weakMap2.default();
   UnifiedHeader.options = {
     selectorInit: '[data-unified-header]'
+    // Data Attribute selectors
+    // CSS Class Selectors
   };
   exports.default = UnifiedHeader;
 });

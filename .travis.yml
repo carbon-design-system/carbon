@@ -2,11 +2,9 @@ language: node_js
 cache:
   directories:
   - node_modules
-node_js: 
+node_js:
   - "4"
   - "6"
-
-group: bluezone
 
 addons:
   firefox: "latest-esr"
@@ -26,9 +24,3 @@ script:
   - npm test -- -b PhantomJS -b Chrome -b Firefox
   - find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm test -- -d -f
   - npm run lint
-
-deploy:
-  provider: script
-  script: sh travis.ci/deploy.sh
-  on:
-    all_branches: true
