@@ -4,23 +4,23 @@ import clickableTile from '../../src/components/tile/clickable-tile.html';
 import expandableTile from '../../src/components/tile/expandable-tile.html';
 import selectableTile from '../../src/components/tile/selectable-tile.html';
 
-describe('Test tile', function () {
-  describe('Constructor', function () {
+describe('Test tile', function() {
+  describe('Constructor', function() {
     let tile;
 
-    it('Should throw if root element is not given', function () {
+    it('Should throw if root element is not given', function() {
       expect(() => {
         tile = new Tile();
       }).to.throw(Error);
     });
 
-    it('Should throw if root element is not a DOM element', function () {
+    it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         tile = new Tile(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it('Should set default options', function () {
+    it('Should set default options', function() {
       const container = document.createElement('div');
       container.innerHTML = clickableTile;
       document.body.appendChild(container);
@@ -36,114 +36,119 @@ describe('Test tile', function () {
       });
     });
 
-    afterEach(function () {
+    afterEach(function() {
       if (tile) {
         tile = tile.release();
       }
     });
   });
 
-  describe('Test _hookActions', function () {
+  describe('Test _hookActions', function() {
     let instance;
     let tileElement;
     let spy;
     const container = document.createElement('div');
     container.innerHTML = clickableTile;
 
-    before(function () {
+    before(function() {
       document.body.appendChild(container);
       tileElement = container.querySelector('[data-tile]');
       instance = new Tile(tileElement);
     });
 
-    it('Should be called', function () {
+    it('Should be called', function() {
       spy = sinon.spy(instance, '_hookActions');
       instance._hookActions();
       expect(spy).to.have.been.called;
     });
 
-    after(function () {
+    after(function() {
       instance.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Test clickable tile', function () {
+  describe('Test clickable tile', function() {
     let instance;
     let tileElement;
     const container = document.createElement('div');
     container.innerHTML = clickableTile;
 
-    before(function () {
+    before(function() {
       document.body.appendChild(container);
       tileElement = container.querySelector('[data-tile]');
       instance = new Tile(tileElement);
     });
 
-    it('Should not have the is-clicked class before its been clicked', function () {
-      expect(tileElement.classList.contains('bx--tile--is-clicked')).to.be.false;
+    it('Should not have the is-clicked class before its been clicked', function() {
+      expect(tileElement.classList.contains('bx--tile--is-clicked')).to.be
+        .false;
     });
 
-    it('Should have the is-clicked class after its been clicked', function () {
+    it('Should have the is-clicked class after its been clicked', function() {
       tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(tileElement.classList.contains('bx--tile--is-clicked')).to.be.true;
     });
 
-    after(function () {
+    after(function() {
       instance.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Test expandable tile', function () {
+  describe('Test expandable tile', function() {
     let instance;
     let tileElement;
     const container = document.createElement('div');
     container.innerHTML = expandableTile;
 
-    before(function () {
+    before(function() {
       document.body.appendChild(container);
       tileElement = container.querySelector('[data-tile]');
       instance = new Tile(tileElement);
     });
 
-    it('Should not have the is-clicked class before its been clicked', function () {
-      expect(tileElement.classList.contains('bx--tile--is-expanded')).to.be.false;
+    it('Should not have the is-clicked class before its been clicked', function() {
+      expect(tileElement.classList.contains('bx--tile--is-expanded')).to.be
+        .false;
     });
 
-    it('Should have the is-clicked class after its been clicked', function () {
+    it('Should have the is-clicked class after its been clicked', function() {
       tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(tileElement.classList.contains('bx--tile--is-expanded')).to.be.true;
+      expect(tileElement.classList.contains('bx--tile--is-expanded')).to.be
+        .true;
     });
 
-    after(function () {
+    after(function() {
       instance.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Test selectable tile', function () {
+  describe('Test selectable tile', function() {
     let instance;
     let tileElement;
     const container = document.createElement('div');
     container.innerHTML = selectableTile;
 
-    before(function () {
+    before(function() {
       document.body.appendChild(container);
       tileElement = container.querySelector('[data-tile]');
       instance = new Tile(tileElement);
     });
 
-    it('Should not have the is-clicked class before its been clicked', function () {
-      expect(tileElement.classList.contains('bx--tile--is-selected')).to.be.false;
+    it('Should not have the is-clicked class before its been clicked', function() {
+      expect(tileElement.classList.contains('bx--tile--is-selected')).to.be
+        .false;
     });
 
-    it('Should have the is-clicked class after its been clicked', function () {
+    it('Should have the is-clicked class after its been clicked', function() {
       tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(tileElement.classList.contains('bx--tile--is-selected')).to.be.true;
+      expect(tileElement.classList.contains('bx--tile--is-selected')).to.be
+        .true;
     });
 
-    after(function () {
+    after(function() {
       instance.release();
       document.body.removeChild(container);
     });
