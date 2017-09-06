@@ -2,7 +2,7 @@
   {
     "inapplicable": [],
     "incomplete": [],
-    "timestamp": 1503953808228,
+    "timestamp": 1504713103847,
     "url": "http://localhost:3000",
     "violations": [
       {
@@ -84,7 +84,7 @@
         ]
       }
     ],
-    "time": 370,
+    "time": 358,
     "status": 404
   }
 ]

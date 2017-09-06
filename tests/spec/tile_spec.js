@@ -31,6 +31,7 @@ describe('Test tile', function () {
         selectorClickableTile: '[data-tile-clickable]',
         selectorExpandableTile: '[data-tile-expandable]',
         selectorSelectableTile: '[data-tile-selectable]',
+        selectorAboveTheFold: '[data-tile-atf]',
         classExpandedTile: 'bx--tile--is-expanded',
         classClickableTile: 'bx--tile--is-clicked',
         classSelectableTile: 'bx--tile--is-selected',
@@ -60,31 +61,6 @@ describe('Test tile', function () {
     it('Should be called', function () {
       spy = sinon.spy(instance, '_hookActions');
       instance._hookActions();
-      expect(spy).to.have.been.called;
-    });
-
-    after(function () {
-      instance.release();
-      document.body.removeChild(container);
-    });
-  });
-
-  describe('Test _getClass', function () {
-    let instance;
-    let tileElement;
-    let spy;
-    const container = document.createElement('div');
-    container.innerHTML = clickableTile;
-
-    before(function () {
-      document.body.appendChild(container);
-      tileElement = container.querySelector('[data-tile]');
-      instance = new Tile(tileElement);
-    });
-
-    it('Should be called on click', function () {
-      spy = sinon.spy(instance, '_getClass');
-      tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spy).to.have.been.called;
     });
 
