@@ -13,11 +13,11 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
 
     this.element.addEventListener('click', evt => this.handleClick(evt));
     this.element.parentNode.addEventListener('modal-beingshown', evt =>
-      this.handleShowModal(evt)
+      this.showLightbox(evt)
     );
   }
 
-  handleShowModal = evt => {
+  showLightbox = evt => {
     if (!evt.detail.launchingElement.dataset.carouselItemIndex) {
       throw new Error(
         'launchingElement must have carouselItemIndex data attribute to indicated what item to display'
