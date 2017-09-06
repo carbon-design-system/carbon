@@ -2,21 +2,21 @@ import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Search from '../../src/components/search/search';
 import searchHTML from '../../src/components/search/search-large.html';
 
-describe('Test Search', function () {
-  describe('Constructor', function () {
-    it('Should throw if root element is not given', function () {
+describe('Test Search', function() {
+  describe('Constructor', function() {
+    it('Should throw if root element is not given', function() {
       expect(() => {
         new Search();
       }).to.throw(Error);
     });
 
-    it('Should throw if root element is not a DOM element', function () {
+    it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Search(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it('Should set default options', function () {
+    it('Should set default options', function() {
       const container = document.createElement('div');
       container.innerHTML = searchHTML;
       const search = new Search(container);
@@ -36,7 +36,7 @@ describe('Test Search', function () {
     });
   });
 
-  describe('Toggling between views', function () {
+  describe('Toggling between views', function() {
     let gridIcon;
     let listIcon;
     let toggle;
@@ -44,68 +44,85 @@ describe('Test Search', function () {
     const container = document.createElement('div');
     container.innerHTML = searchHTML;
 
-    before(function () {
+    before(function() {
       document.body.appendChild(container);
       instance = new Search(document.querySelector('[data-search]'));
-      toggle = container.querySelector('.bx--search-button[data-search-toggle]');
+      toggle = container.querySelector(
+        '.bx--search-button[data-search-toggle]'
+      );
       gridIcon = container.querySelector('div[data-search-view="grid"]');
       listIcon = container.querySelector('div[data-search-view="list"]');
     });
 
-    it('Should show grid view by default', function () {
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.false;
+    it('Should show grid view by default', function() {
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be
+        .false;
     });
 
-    it('Should show list view after click', function () {
+    it('Should show list view after click', function() {
       toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.true;
-      expect(listIcon.classList.contains('bx--search-view--hidden')).to.be.false;
+      expect(listIcon.classList.contains('bx--search-view--hidden')).to.be
+        .false;
     });
 
-    it('Should show grid view after second click', function () {
+    it('Should show grid view after second click', function() {
       toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.false;
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be
+        .false;
       expect(listIcon.classList.contains('bx--search-view--hidden')).to.be.true;
     });
 
-    after(function () {
+    after(function() {
       instance.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Clearing the search bar', function () {
+  describe('Clearing the search bar', function() {
     let input;
     let clearIcon;
     let instance;
     const container = document.createElement('div');
     container.innerHTML = searchHTML;
 
-    before(function () {
+    before(function() {
       document.body.appendChild(container);
       instance = new Search(document.querySelector('[data-search]'));
       input = container.querySelector('.bx--search-input');
       clearIcon = container.querySelector('.bx--search-close');
     });
 
-    it('Clear icon should be hidden by default', function () {
+    it('Clear icon should be hidden by default', function() {
       // IE11 doesn't have `.classList` for `<svg>`
-      expect(clearIcon.getAttribute('class').trim().split(/\s+/).indexOf('bx--search-close--hidden') >= 0).to.be.true;
+      expect(
+        clearIcon
+          .getAttribute('class')
+          .trim()
+          .split(/\s+/)
+          .indexOf('bx--search-close--hidden') >= 0
+      ).to.be.true;
     });
 
-    it('Clear icon should be shown when input has value', function () {
+    it('Clear icon should be shown when input has value', function() {
       input.value = 'testing';
       input.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       // IE11 doesn't have `.classList` for `<svg>`
-      expect(clearIcon.getAttribute('class').trim().split(/\s+/).indexOf('bx--search-close--hidden') < 0).to.be.true;
+      expect(
+        clearIcon
+          .getAttribute('class')
+          .trim()
+          .split(/\s+/)
+          .indexOf('bx--search-close--hidden') < 0
+      ).to.be.true;
     });
 
-    it('Should clear the input when clicked', function () {
+    it('Should clear the input when clicked', function() {
       clearIcon.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(input.value).to.equal('');
     });
 
-    after(function () {
+    after(function() {
       instance.release();
       document.body.removeChild(container);
     });

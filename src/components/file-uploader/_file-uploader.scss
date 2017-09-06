@@ -27,7 +27,7 @@
     @include font-size('14');
     @include line-height('body');
     color: $text-02;
-    margin-top: .25rem;
+    margin-top: 0.25rem;
     margin-bottom: 1.25rem;
   }
 
@@ -77,7 +77,8 @@
     }
   }
 
-  .bx--file__state-container .bx--file-close, .bx--file__state-container .bx--file-complete {
+  .bx--file__state-container .bx--file-close,
+  .bx--file__state-container .bx--file-complete {
     width: 1rem;
     height: 1rem;
     fill: $text-01;

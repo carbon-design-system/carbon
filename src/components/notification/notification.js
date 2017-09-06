@@ -3,7 +3,11 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 
-class Notification extends mixin(createComponent, initComponentBySearch, eventedState) {
+class Notification extends mixin(
+  createComponent,
+  initComponentBySearch,
+  eventedState
+) {
   /**
    * InlineNotification.
    * @extends CreateComponent
@@ -14,7 +18,7 @@ class Notification extends mixin(createComponent, initComponentBySearch, evented
     super(element, options);
     this.button = element.querySelector(this.options.selectorButton);
     if (this.button) {
-      this.button.addEventListener('click', (evt) => {
+      this.button.addEventListener('click', evt => {
         if (evt.currentTarget === this.button) {
           this.remove();
         }
@@ -28,7 +32,7 @@ class Notification extends mixin(createComponent, initComponentBySearch, evented
       this.release();
     }
     callback();
-  }
+  };
 
   remove() {
     this.changeState('delete-notification');

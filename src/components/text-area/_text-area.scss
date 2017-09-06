@@ -9,7 +9,6 @@
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
-
 @include exports('text-area') {
   .bx--text-area {
     @include reset;
@@ -31,7 +30,7 @@
     }
 
     &:disabled {
-      opacity: .5;
+      opacity: 0.5;
       cursor: not-allowed;
     }
 

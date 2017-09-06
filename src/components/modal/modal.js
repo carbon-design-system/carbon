@@ -5,7 +5,11 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowHideState) {
+class Modal extends mixin(
+  createComponent,
+  initComponentByLauncher,
+  eventedShowHideState
+) {
   /**
    * Modal dialog.
    * @extends CreateComponent
@@ -62,8 +66,14 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
   _changeState(state, detail, callback) {
     const transitionEnd = () => {
       this.element.removeEventListener('transitionend', transitionEnd);
-      if (state === 'shown' && this.element.offsetWidth > 0 && this.element.offsetHeight > 0) {
-        (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
+      if (
+        state === 'shown' &&
+        this.element.offsetWidth > 0 &&
+        this.element.offsetHeight > 0
+      ) {
+        (this.element.querySelector(this.options.selectorPrimaryFocus) ||
+          this.element)
+          .focus();
       }
       callback();
     };
@@ -75,7 +85,12 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     if (state === 'shown') {
       const hasFocusin = 'onfocusin' in this.element.ownerDocument.defaultView;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      this._handleFocusinListener = on(this.element.ownerDocument, focusinEventName, this._handleFocusin, !hasFocusin);
+      this._handleFocusinListener = on(
+        this.element.ownerDocument,
+        focusinEventName,
+        this._handleFocusin,
+        !hasFocusin
+      );
     }
 
     if (state === 'hidden') {
@@ -87,7 +102,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
   }
 
   _hookCloseActions() {
-    this.element.addEventListener('click', (evt) => {
+    this.element.addEventListener('click', evt => {
       const closeButton = eventMatches(evt, this.options.selectorModalClose);
       if (closeButton) {
         evt.delegateTarget = closeButton; // eslint-disable-line no-param-reassign
@@ -98,17 +113,23 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     });
 
     if (this.keydownHandler) {
-      this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
+      this.element.ownerDocument.body.removeEventListener(
+        'keydown',
+        this.keydownHandler
+      );
       this.keydownHandler = null;
     }
 
-    this.keydownHandler = (evt) => {
+    this.keydownHandler = evt => {
       if (evt.which === 27) {
         this.hide(evt);
       }
     };
 
-    this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
+    this.element.ownerDocument.body.addEventListener(
+      'keydown',
+      this.keydownHandler
+    );
   }
 
   /**
@@ -116,15 +137,21 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @param {Event} evt The event.
    * @private
    */
-  _handleFocusin = (evt) => {
-    if (this.element.classList.contains(this.options.classVisible) && !this.element.contains(evt.target)) {
+  _handleFocusin = evt => {
+    if (
+      this.element.classList.contains(this.options.classVisible) &&
+      !this.element.contains(evt.target)
+    ) {
       this.element.focus();
     }
   };
 
   release() {
     if (this.keydownHandler) {
-      this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
+      this.element.ownerDocument.body.removeEventListener(
+        'keydown',
+        this.keydownHandler
+      );
       this.keydownHandler = null;
     }
     if (this._handleFocusinListener) {

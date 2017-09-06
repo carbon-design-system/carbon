@@ -9,9 +9,9 @@
     @include font-size('12');
     display: inline-flex;
     align-items: center;
-    padding: 0 .625rem;
+    padding: 0 0.625rem;
     height: 1.25rem;
-    margin: .1875rem;
+    margin: 0.1875rem;
     border-radius: rem(15px);
 
     &:not(:first-child) {

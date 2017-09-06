@@ -1,6 +1,10 @@
 function listener(event) {
   const element = event.target;
-  if (element.tagName === 'INPUT' && element.type === 'checkbox' && element.hasAttribute('checked') !== element.checked) {
+  if (
+    element.tagName === 'INPUT' &&
+    element.type === 'checkbox' &&
+    element.hasAttribute('checked') !== element.checked
+  ) {
     if (element.checked) {
       element.setAttribute('checked', '');
     } else {

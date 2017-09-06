@@ -3,9 +3,9 @@
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
 $major-second-typescale-map: (
-  '11' : .6875rem,
-  '12' : .75rem,
-  '14' : .875rem,
+  '11' : 0.6875rem,
+  '12' : 0.75rem,
+  '14' : 0.875rem,
   '16' : 1rem,
   '18' : 1.125rem,
   '20' : 1.25rem,
@@ -39,8 +39,7 @@ $major-second-typescale-map: (
 @mixin font-size($size) {
   @if map-has-key($major-second-typescale-map, $size) {
     font-size: map-get($major-second-typescale-map, $size);
-  }
-  @else {
+  } @else {
     @warn 'This is not a step of the Bluemix Type Scale!';
   }
 }
@@ -52,7 +51,7 @@ $major-second-typescale-map: (
   } @else if $el == 'body' {
     line-height: 1.5;
   } @else {
-    @warn 'Invalid argument used for @mixin line-height($el). Please use "heading" or "body".';
+    @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
   }
 }
 
@@ -64,5 +63,5 @@ $major-second-typescale-map: (
 
 // Only applied to h1, h2, h3, bold weights and always to All Caps.
 @mixin letter-spacing {
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }

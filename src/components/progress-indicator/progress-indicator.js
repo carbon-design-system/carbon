@@ -33,11 +33,12 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * Returns all steps with details about element and index.
    */
   getSteps() {
-    return [...this.element.querySelectorAll(this.options.selectorStepElement)]
-      .map((element, index) => ({
-        element,
-        index,
-      }));
+    return [
+      ...this.element.querySelectorAll(this.options.selectorStepElement),
+    ].map((element, index) => ({
+      element,
+      index,
+    }));
   }
 
   /**
@@ -45,7 +46,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    */
   getCurrent() {
     const currentEl = this.element.querySelector(this.options.selectorCurrent);
-    return this.getSteps().filter(step => (step.element === currentEl))[0];
+    return this.getSteps().filter(step => step.element === currentEl)[0];
   }
 
   /**
@@ -61,7 +62,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
     }
 
     if (changed) {
-      this.getSteps().forEach((step) => {
+      this.getSteps().forEach(step => {
         if (step.index < newCurrentStep) {
           this._updateStep({
             element: step.element,
@@ -97,11 +98,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * @param {Object} [args.html] new inline SVG to insert
    */
   _updateStep(args) {
-    const {
-      element,
-      className,
-      html,
-    } = args;
+    const { element, className, html } = args;
 
     if (element.firstElementChild) {
       element.removeChild(element.firstElementChild);
@@ -119,35 +116,29 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * Returns HTML string for an SVG used to represent a compelted step (checkmark)
    */
   _getSVGComplete() {
-    return (
-      `<svg width="24px" height="24px" viewBox="0 0 24 24">
+    return `<svg width="24px" height="24px" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="12"></circle>
         <polygon points="10.3 13.6 7.7 11 6.3 12.4 10.3 16.4 17.8 9 16.4 7.6"></polygon>
-      </svg>`
-    );
+      </svg>`;
   }
 
   /**
    * Returns HTML string for an SVG used to represent current step (circles, like a radio button, but not.)
    */
   _getCurrentSVG() {
-    return (
-      `<svg>
+    return `<svg>
         <circle cx="12" cy="12" r="12"></circle>
         <circle cx="12" cy="12" r="6"></circle>
-      </svg>`
-    );
+      </svg>`;
   }
 
   /**
    * Returns HTML string for an SVG used to represent incomple step (grey empty circle)
    */
   _getIncompleteSVG() {
-    return (
-      `<svg>
+    return `<svg>
         <circle cx="12" cy="12" r="12"></circle>
-      </svg>`
-    );
+      </svg>`;
   }
 
   static components = new WeakMap();

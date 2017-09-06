@@ -6,8 +6,7 @@
 
 @mixin link-style {
   &:hover {
-
-    .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+    .bx--left-nav__main-nav[data-left-nav-list='apps'] & {
       color: $nav-06;
 
       .bx--left-nav-list__item-link--taxonomy-icon {
@@ -15,7 +14,7 @@
       }
     }
 
-    .bx--left-nav__main-nav[data-left-nav-list="Services"] & {
+    .bx--left-nav__main-nav[data-left-nav-list='Services'] & {
       color: $nav-04;
 
       .bx--left-nav-list__item-link--taxonomy-icon {
@@ -23,7 +22,7 @@
       }
     }
 
-    .bx--left-nav__main-nav[data-left-nav-list="Infrastructure"] & {
+    .bx--left-nav__main-nav[data-left-nav-list='Infrastructure'] & {
       color: $nav-08;
 
       .bx--left-nav-list__item-link--taxonomy-icon {

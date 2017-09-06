@@ -5,7 +5,6 @@
 @import '../../globals/scss/import-once';
 
 @include exports('content-switcher') {
-
   .bx--content-switcher {
     @include helvetica;
     display: flex;

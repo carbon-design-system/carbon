@@ -41,7 +41,7 @@
     justify-content: $accordion-justify-content;
     flex-direction: $accordion-flex-direction;
     cursor: pointer;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
 
     // new version of markup uses focus on the heading,
     // not the list element itself
@@ -60,7 +60,7 @@
     transition: all $transition--base $bx--standard-easing;
     height: 1.25rem;
     width: 1.25rem;
-    padding: .25rem .125rem .25rem .25rem;
+    padding: 0.25rem 0.125rem 0.25rem 0.25rem;
     margin: $accordion-arrow-margin;
     fill: $ui-05;
   }

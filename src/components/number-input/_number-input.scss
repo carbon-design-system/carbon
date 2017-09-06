@@ -11,7 +11,7 @@
     display: flex;
   }
 
-  .bx--number input[type="number"] {
+  .bx--number input[type='number'] {
     @include font-size('14');
     @include helvetica;
     box-sizing: border-box;
@@ -31,7 +31,7 @@
     }
   }
 
-  .bx--number input[type="number"] {
+  .bx--number input[type='number'] {
     appearance: textfield; // Firefox: Hide spinner (up and down buttons)
 
     &::-ms-clear {

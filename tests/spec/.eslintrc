@@ -1,9 +1,9 @@
 {
   "root": true,
   "parser": "babel-eslint",
-  "parserOptions" : {
+  "parserOptions": {
     "ecmaVersion": 6,
-    "sourceType": "module",
+    "sourceType": "module"
   },
   "env": {
     "browser": true,
@@ -13,7 +13,7 @@
     "modules": true
   },
   "extends": [
-    "airbnb-base"
+    "carbon-base"
   ],
   "globals": {
     "describe": true,
@@ -26,6 +26,16 @@
     "sinon": true
   },
   "rules": {
+    "comma-dangle": [
+      2,
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
     "max-len": [2, 130, 4],
     "func-names": 0,
     "no-new": 0,

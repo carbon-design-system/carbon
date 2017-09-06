@@ -18,7 +18,7 @@
   }
 
   .bx--time-picker .bx--select__arrow {
-    right: .875rem;
+    right: 0.875rem;
   }
 
   .bx--time-picker__input-field {
@@ -39,7 +39,7 @@
     }
 
     &:disabled {
-      opacity: .5;
+      opacity: 0.5;
       cursor: not-allowed;
     }
   }
