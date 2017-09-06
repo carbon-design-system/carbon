@@ -108,13 +108,21 @@ describe('Test tile', function() {
       instance = new Tile(tileElement);
     });
 
-    it('Should not have the is-clicked class before its been clicked', function() {
+    it('Should not have the is-expanded class before its been clicked', function() {
       expect(tileElement.classList.contains('bx--tile--is-expanded')).to.be
         .false;
     });
 
-    it('Should have the is-clicked class after its been clicked', function() {
+    it('Should have the is-expanded class after its been clicked', function() {
       tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(tileElement.classList.contains('bx--tile--is-expanded')).to.be
+        .true;
+    });
+
+    it('Should have the is-expanded class after enter has been pressed', function() {
+      tileElement.dispatchEvent(new CustomEvent('keydown', { bubbles: true }), {
+        which: 13,
+      });
       expect(tileElement.classList.contains('bx--tile--is-expanded')).to.be
         .true;
     });
