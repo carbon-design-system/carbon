@@ -1,7 +1,6 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import eventMatches from '../../globals/js/misc/event-matches';
 
 class Lightbox extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
@@ -13,17 +12,20 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
     this.updateSlide();
 
     this.element.addEventListener('click', evt => this.handleClick(evt));
-
-    this.element.parentNode.addEventListener('modal-beingshown', evt => {
-      if (!evt.detail.launchingElement.dataset.carouselItemIndex) {
-        throw new Error(
-          'launchingElement must have carouselItemIndex data attribute to indicated what item to display'
-        );
-      }
-      this.activeIndex = evt.detail.launchingElement.dataset.carouselItemIndex;
-      this.updateSlide();
-    });
+    this.element.parentNode.addEventListener('modal-beingshown', evt =>
+      this.handleShowModal(evt)
+    );
   }
+
+  handleShowModal = evt => {
+    if (!evt.detail.launchingElement.dataset.carouselItemIndex) {
+      throw new Error(
+        'launchingElement must have carouselItemIndex data attribute to indicated what item to display'
+      );
+    }
+    this.activeIndex = evt.detail.launchingElement.dataset.carouselItemIndex;
+    this.updateSlide();
+  };
 
   handleClick = evt => {
     if (evt.target.matches(this.options.selectorScrollRight)) {
