@@ -96,13 +96,17 @@
 
   .bx--tile__chevron {
     position: absolute;
-    bottom: 1rem;
-    height: .5rem;
+    bottom: .5rem;
+    height: 1rem;
 
     svg {
       transform-origin: center;
       transition: $transition--base $bx--standard-easing;
       fill: $ui-05;
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 
