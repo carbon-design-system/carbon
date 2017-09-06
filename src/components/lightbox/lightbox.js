@@ -45,6 +45,11 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
 
   updateSlide = () => {
     const items = [...this.element.querySelectorAll(this.options.selectorLightboxItem)];
+    if (this.activeIndex < 0 || this.activeIndex >= items.length) {
+      throw new RangeError(
+        'carouselItemIndex data attribute must be in range of lightbox items length'
+      );
+    }
     items.forEach(item => item.classList.remove(this.options.classActiveItem));
     items[this.activeIndex].classList.add(this.options.classActiveItem);
   };
