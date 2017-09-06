@@ -54,6 +54,10 @@
     }
   }
 
+  .bx--tile--selectable {
+    padding-right: 3rem;
+  }
+
   .bx--tile--selectable:focus {
     outline: none;
     border: 1px solid $brand-01;
