@@ -19,6 +19,12 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
   constructor(element, options) {
     super(element, options);
     this.constructor.components.set(this.element, this);
+
+    this.keepOpen =
+    this.element.dataset.keepOpen === undefined
+      ? this.options.keepOpen
+      : Boolean(this.element.dataset.keepOpen);
+
     this.hookListItemsEvents();
   }
 
@@ -81,16 +87,21 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
   handleNestedListClick(listItem, evt) {
     const allNestedItems = [...document.querySelectorAll(this.options.selectorLeftNavListItemHasChildren)];
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
-    allNestedItems.forEach((currentItem) => {
-      if (currentItem !== listItem) {
-        toggleClass(currentItem, this.options.classExpandedLeftNavListItem, false);
-      }
-    });
+    const list = listItem.querySelector(this.options.selectorLeftNavNestedList);
+    const listItems = [...list.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
+
+    if (!this.keepOpen) {
+      allNestedItems.forEach((currentItem) => {
+        if (currentItem !== listItem) {
+          toggleClass(currentItem, this.options.classExpandedLeftNavListItem, false);
+        }
+      });
+    }
+
     if (!('inlineLeftNavItemLink' in evt.target.dataset)) {
       toggleClass(listItem, this.options.classExpandedLeftNavListItem, !isOpen);
     }
-    const list = listItem.querySelector(this.options.selectorLeftNavNestedList);
-    const listItems = [...list.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
+
     listItems.forEach((item) => {
       if (isOpen) {
         // eslint-disable-next-line no-param-reassign
@@ -176,6 +187,8 @@ class InlineLeftNav extends mixin(createComponent, initComponent) {
     // Event
     eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
     eventAfterLeftNavToggled: 'left-nav-toggled',
+    // Option
+    keepOpen: false,
   };
 }
 
