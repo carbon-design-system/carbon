@@ -50,13 +50,10 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
       }
     });
     this.element.addEventListener('keydown', evt => {
-      const chevron = eventMatches(evt, '.bx--tile__chevron');
       const input = this.element.querySelector(this.options.selectorTileInput);
-      if ((evt.which === 13 || evt.which === 32) && !chevron) {
-        this.element.classList.toggle(tileClass);
-        if (isExpandable) {
-          this._setTileHeight();
-        } else if (isSelectable) {
+      if (evt.which === 13 || evt.which === 32) {
+        if (!isExpandable) {
+          this.element.classList.toggle(tileClass);
           input.checked = !input.checked;
         }
       }
