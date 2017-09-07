@@ -58,7 +58,9 @@ describe('Lightbox', () => {
     it('should be called on click', () => {
       const spy = sinon.spy(instance, 'updateSlide');
       const event = new CustomEvent('click', { bubbles: true });
-      const rightButton = element.querySelector(instance.options.selectorScrollRight);
+      const rightButton = element.querySelector(
+        instance.options.selectorScrollRight
+      );
       rightButton.dispatchEvent(event);
       expect(spy).to.have.been.called;
       spy.restore();

@@ -7,27 +7,28 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
     this.activeIndex = this.element.dataset.lightboxIndex;
     this.totalSlides =
-      this.element.querySelectorAll(this.options.selectorLightboxItem).length - 1;
+      this.element.querySelectorAll(this.options.selectorLightboxItem).length -
+      1;
 
     this.updateSlide();
 
     this.element.addEventListener('click', evt => this.handleClick(evt));
     this.element.parentNode.addEventListener('modal-beingshown', evt =>
-      this.showLightbox(evt),
+      this.showLightbox(evt)
     );
   }
 
-  showLightbox = (evt) => {
+  showLightbox = evt => {
     if (!evt.detail.launchingElement.dataset.carouselItemIndex) {
       throw new Error(
-        'launchingElement must have carouselItemIndex data attribute to indicated what item to display',
+        'launchingElement must have carouselItemIndex data attribute to indicated what item to display'
       );
     }
     this.activeIndex = evt.detail.launchingElement.dataset.carouselItemIndex;
     this.updateSlide();
   };
 
-  handleClick = (evt) => {
+  handleClick = evt => {
     if (evt.target.matches(this.options.selectorScrollRight)) {
       if (this.activeIndex < this.totalSlides) {
         this.activeIndex++;
@@ -44,10 +45,12 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
   };
 
   updateSlide = () => {
-    const items = [...this.element.querySelectorAll(this.options.selectorLightboxItem)];
+    const items = [
+      ...this.element.querySelectorAll(this.options.selectorLightboxItem),
+    ];
     if (this.activeIndex < 0 || this.activeIndex >= items.length) {
       throw new RangeError(
-        'carouselItemIndex data attribute must be in range of lightbox items length',
+        'carouselItemIndex data attribute must be in range of lightbox items length'
       );
     }
     items.forEach(item => item.classList.remove(this.options.classActiveItem));

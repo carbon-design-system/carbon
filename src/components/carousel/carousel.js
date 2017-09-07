@@ -12,20 +12,22 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
     this.filmstrip = this.element.querySelector(this.options.selectorFilmstrip);
-    this.carouselItem = this.element.querySelector(this.options.selectorCarouselItem);
+    this.carouselItem = this.element.querySelector(
+      this.options.selectorCarouselItem
+    );
 
     this.element.addEventListener('click', evt => this.handleClick(evt));
   }
 
-  handleClick = (evt) => {
+  handleClick = evt => {
     if (evt.target.matches(this.options.selectorScrollRight)) {
       this.sideScroll('right');
     } else {
       this.sideScroll('left');
     }
-  }
+  };
 
-  sideScroll = (direction) => {
+  sideScroll = direction => {
     const filmstripWidth = this.filmstrip.getBoundingClientRect().width;
     const itemWidth = this.carouselItem.getBoundingClientRect().width + 20;
     const re = /\.*translateX\((.*)px\)/i;
