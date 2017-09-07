@@ -172,6 +172,29 @@ app.get('/grid', (req, res) => {
   }
 });
 
+app.get('/tile-demo', (req, res) => {
+  const glob = 'src/components/tile/tile-demo.html';
+
+  if (path.relative('src/components', glob).substr(0, 2) === '..') {
+    res.status(404).end();
+  } else {
+    Promise.all([getContent(glob)])
+      .then(results => {
+        if (typeof results[0] === 'undefined') {
+          res.status(404).end();
+        } else {
+          res.render('demo-grid', {
+            html: results[0],
+          });
+        }
+      })
+      .catch(error => {
+        console.error(error.stack); // eslint-disable-line no-console
+        res.status(500).end();
+      });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`); // eslint-disable-line no-console
 });
