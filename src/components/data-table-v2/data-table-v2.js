@@ -13,7 +13,7 @@ class DataTable extends mixin(
    * Data Table
    * @extends CreateComponent
    * @extends InitComponentBySearch
-   * @extends EventedState
+   * @extends   EventedState
    * @param {HTMLElement} element The root element of tables
    * @param {Object} [options] the... options
    * @param {string} [options.selectorInit] selector initialization
@@ -36,7 +36,7 @@ class DataTable extends mixin(
   static components = new WeakMap();
 
   static options = {
-    selectorInit: '[data-responsive-table]',
+    selectorInit: '[data-table-v2]',
   };
 }
 

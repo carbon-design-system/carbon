@@ -1,13 +1,55 @@
+@import '../../globals/scss/helper-mixins';
+
 .bx--table-toolbar {
   display: flex;
   padding-bottom: 8px;
   width: 100%;
   position: relative;
-  overflow: hidden;
+}
 
-  .icon-content {
-    margin-left: auto;
+.bx--toolbar-content {
+  display: flex;
+  margin-left: auto;
+}
+
+.bx--toolbar-action {
+  @include button-reset;
+  cursor: pointer;
+  padding-left: 12px;
+  padding-right: 12px;
+
+  &:hover {
+    > .bx--toolbar-action__icon {
+      fill: $brand-01;
+    }
   }
+
+  &:focus {
+    @include focus-outline;
+    > .bx--toolbar-action__icon {
+      fill: $brand-01;
+    }
+  }
+
+  &:active {
+    > .bx--toolbar-action__icon {
+      fill: darken($brand-01, 5%);
+    }
+  }
+
+  &:last-of-type {
+    padding-right: 0;
+  }
+
+  ~ .bx--btn {
+    margin-left: 12px;
+  }
+}
+
+.bx--toolbar-action__icon {
+  height: auto;
+  width: 16px;
+  fill: $ui-05;
 }
 
 .bx--batch-actions {
@@ -32,6 +74,23 @@
   .bx--btn__icon {
     fill: #fff;
   }
+
+  .bx--btn--ghost {
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      color: $brand-01;
+
+      .bx--btn__icon {
+        fill: $brand-01;
+      }
+    }
+
+    &:focus {
+      border: 2px solid $brand-01;
+      outline: 2px solid $ui-02;
+    }
+  }
 }
 
 .bx--batch-actions--active {
@@ -44,6 +103,10 @@
   transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1);
 }
 
+.bx--action-list {
+  margin-left: -0.5rem;
+}
+
 .bx--action-icons {
   margin-left: auto;
   svg {
@@ -52,6 +115,18 @@
     height: 16px;
     width: auto;
   }
+}
+
+.bx--batch-summary {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.bx--batch-summary__para {
+  font-size: rem(14px);
+  margin-right: 24px;
 }
 
 .bx--data-table-v2 {
