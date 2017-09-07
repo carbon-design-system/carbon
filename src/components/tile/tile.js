@@ -29,7 +29,6 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
 
   _hookActions = tileClass => {
     const isExpandable = this.tileType === 'expandable';
-    const isSelectable = this.tileType === 'selectable';
     if (isExpandable) {
       const aboveTheFold = this.element.querySelector(
         this.options.selectorAboveTheFold
