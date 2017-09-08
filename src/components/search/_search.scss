@@ -39,7 +39,6 @@
 
     &::placeholder {
       @include placeholder-colors;
-      font-style: italic;
       font-weight: 400;
     }
   }
