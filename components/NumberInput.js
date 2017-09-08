@@ -27,10 +27,19 @@ class NumberInput extends Component {
     step: 1,
     value: 0,
   };
+  
+  constructor (props) {
+    super(props)
 
-  state = {
-    value: this.props.min || this.props.value,
-  };
+    let value = props.value;
+    if (props.min || props.min === 0) {
+      value = Math.max(props.min, value);
+    }
+
+    this.state = {
+      value
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.value) {

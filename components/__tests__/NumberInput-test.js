@@ -54,6 +54,36 @@ describe('numberInput', () => {
         wrapper.setProps({ disabled: true });
         expect(numberInput.props().disabled).toEqual(true);
       });
+  
+      describe('initial rendering', () => {
+
+        const getWrapper = (min, max, value) => mount(<NumberInput min={min} max={max} value={value} id="test" label="Number Input" className="extra-class" />);
+        const getNumberInput = (wrapper) => wrapper.find('input');
+
+        it('should set value as expected when value > min', () => {
+          const wrapper = getWrapper(-1, 100, 0);
+          const numberInput = getNumberInput(wrapper);
+          expect(numberInput.props().value).toEqual(0);
+        })
+
+        it('should set value as expected when min === 0 and value > min', () => {
+          const wrapper = getWrapper(0, 100, 1);
+          const numberInput = getNumberInput(wrapper);
+          expect(numberInput.props().value).toEqual(1);
+        });
+
+        it('should set value to equal min when value < min', () => {
+          let wrapper = getWrapper(5, 100, 0);
+          let numberInput = wrapper.find('input');
+          expect(numberInput.props().value).toEqual(5);
+        })
+
+        it('should set value when min is undefined', () => {
+          let wrapper = getWrapper(undefined, 100, 5);
+          let numberInput = wrapper.find('input');
+          expect(numberInput.props().value).toEqual(5);
+        })
+      })
     });
 
     describe('Icon', () => {
