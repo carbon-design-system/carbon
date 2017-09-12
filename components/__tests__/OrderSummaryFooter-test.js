@@ -34,6 +34,8 @@ describe('OrderSummaryFooter', () => {
         'Contact Bluemix Sales'
       );
       expect(orderSummaryFooter.props().href).toEqual('www.google.com');
+      expect(orderSummaryFooter.props().target).toEqual('_blank');
+      expect(orderSummaryFooter.props().rel).toEqual('noreferrer noopener');
     });
 
     it('should render children as expected', () => {

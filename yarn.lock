@@ -1662,11 +1662,7 @@ carbon-components@^7.13.0:
     flatpickr "2.6.3"
     lodash.debounce "^4.0.8"
 
-carbon-icons@^6.0.4:
-  version "6.0.6"
-  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-6.0.6.tgz#63e72520e7f1c0fe2c3da716dd36cd84ef90cb9c"
-
-carbon-icons@^6.1.0:
+carbon-icons@^6.0.4, carbon-icons@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-6.1.0.tgz#012951c20ee978060818a034099c163a9086d50e"
 
