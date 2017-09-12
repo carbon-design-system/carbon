@@ -116,5 +116,9 @@
   .bx--dropdown--disabled {
     opacity: 0.5;
     cursor: not-allowed;
+
+    &:focus {
+      outline: none;
+    }
   }
 }
