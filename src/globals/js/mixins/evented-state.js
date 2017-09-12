@@ -1,4 +1,4 @@
-export default function (ToMix) {
+export default function(ToMix) {
   /**
    * Mix-in class to manage events associated with states.
    * @class EventedState
@@ -14,7 +14,9 @@ export default function (ToMix) {
      * @private
      */
     _changeState() {
-      throw new Error('_changeState() should be overriden to perform actual change in state.');
+      throw new Error(
+        '_changeState() should be overriden to perform actual change in state.'
+      );
     }
 
     /**
@@ -27,10 +29,16 @@ export default function (ToMix) {
      */
     changeState(...args) {
       const state = typeof args[0] === 'string' ? args.shift() : undefined;
-      const detail = Object(args[0]) === args[0] && typeof args[0] !== 'function' ? args.shift() : undefined;
+      const detail =
+        Object(args[0]) === args[0] && typeof args[0] !== 'function'
+          ? args.shift()
+          : undefined;
       const callback = typeof args[0] === 'function' ? args.shift() : undefined;
 
-      if (typeof this.shouldStateBeChanged === 'function' && !this.shouldStateBeChanged(state, detail)) {
+      if (
+        typeof this.shouldStateBeChanged === 'function' &&
+        !this.shouldStateBeChanged(state, detail)
+      ) {
         if (callback) {
           callback(null, true);
         }
@@ -44,33 +52,43 @@ export default function (ToMix) {
 
       const eventNameSuffix = [data.group, state]
         .filter(Boolean)
-        .join('-').split('-') // Group or state may contain hyphen
+        .join('-')
+        .split('-') // Group or state may contain hyphen
         .map(item => item[0].toUpperCase() + item.substr(1))
         .join('');
 
-      const eventStart = new CustomEvent(this.options[`eventBefore${eventNameSuffix}`], {
-        bubbles: true,
-        cancelable: true,
-        detail,
-      });
+      console.log(`eventBefore${eventNameSuffix}`);
+
+      const eventStart = new CustomEvent(
+        this.options[`eventBefore${eventNameSuffix}`],
+        {
+          bubbles: true,
+          cancelable: true,
+          detail,
+        }
+      );
 
       const fireOnNode = (detail && detail.delegatorNode) || this.element;
       const canceled = !fireOnNode.dispatchEvent(eventStart);
 
       if (canceled) {
         if (callback) {
-          const error = new Error(`Changing state (${JSON.stringify(data)}) has been canceled.`);
+          const error = new Error(
+            `Changing state (${JSON.stringify(data)}) has been canceled.`
+          );
           error.canceled = true;
           callback(error);
         }
       } else {
         const changeStateArgs = [state, detail].filter(Boolean);
         this._changeState(...changeStateArgs, () => {
-          fireOnNode.dispatchEvent(new CustomEvent(this.options[`eventAfter${eventNameSuffix}`], {
-            bubbles: true,
-            cancelable: true,
-            detail,
-          }));
+          fireOnNode.dispatchEvent(
+            new CustomEvent(this.options[`eventAfter${eventNameSuffix}`], {
+              bubbles: true,
+              cancelable: true,
+              detail,
+            })
+          );
           if (callback) {
             callback();
           }

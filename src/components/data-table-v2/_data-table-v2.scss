@@ -64,8 +64,15 @@
   width: 100%;
   height: 100%;
   z-index: 99999;
-  background-color: $brand-01;
-  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1);
+  background-color: transparent;
+  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1),
+    background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
+  pointer-events: none;
+  visibility: hidden;
+
+  &:focus {
+    @include focus-outline;
+  }
 
   .bx--btn {
     color: #fff;
@@ -94,13 +101,12 @@
 }
 
 .bx--batch-actions--active {
-  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1);
+  visibility: visible;
+  background-color: $brand-01;
+  pointer-events: all;
+  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1),
+    background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
   opacity: 1;
-}
-
-.bx--batch-actions--out {
-  opacity: 0;
-  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1);
 }
 
 .bx--action-list {
@@ -127,6 +133,16 @@
 .bx--batch-summary__para {
   font-size: rem(14px);
   margin-right: 24px;
+}
+
+.bx--batch-summary__cancel {
+  @include button-reset(auto);
+  font-size: rem(14px);
+  font-weight: 700;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  letter-spacing: 0;
+  cursor: pointer;
 }
 
 .bx--data-table-v2 {
@@ -196,6 +212,25 @@
   // Overrrides
   .bx--checkbox-appearance {
     margin-right: 0;
+  }
+
+  .bx--overflow-menu:focus {
+    outline: 0;
+
+    svg {
+      @include focus-outline;
+      fill: $brand-01;
+    }
+  }
+
+  .bx--overflow-menu__icon {
+    transform: rotate(90deg);
+  }
+}
+
+.bx--data-table-v2--zebra {
+  tbody tr:nth-child(even) {
+    background-color: $ui-02;
   }
 }
 
