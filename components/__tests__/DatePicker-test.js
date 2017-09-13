@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(
-      <DatePicker className="extra-class">
+      <DatePicker onChange={() => {}} className="extra-class">
         <div className="test-child"></div>
         <div className="test-child"></div>
       </DatePicker>
@@ -56,13 +56,13 @@ describe('DatePicker', () => {
     });
 
     it('should not initalize a calendar', () => {
-      expect(wrapper.state().cal).toEqual({});
+      expect(wrapper.cal).toEqual(undefined);
     });
   });
 
   describe('Single date picker', () => {
     const wrapper = mount(
-      <DatePicker datePickerType="single" className="extra-class">
+      <DatePicker onChange={() => {}} datePickerType="single" className="extra-class">
         <div className="test-child">
           <input type="text" className="bx--date-picker__input" />
         </div>
@@ -77,11 +77,11 @@ describe('DatePicker', () => {
     });
 
     it('should initalize a calendar', () => {
-      expect(wrapper.state().cal).not.toBe({});
+      expect(wrapper.node.cal).toBeDefined();
     });
 
     it('should update the classnames', () => {
-      expect(wrapper.state().cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
+      expect(wrapper.node.cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
     });
 
     it('should not render an icon', () => {
@@ -91,7 +91,7 @@ describe('DatePicker', () => {
 
   describe('Range date picker', () => {
     const wrapper = mount(
-      <DatePicker datePickerType="range" className="extra-class">
+      <DatePicker onChange={() => {}} datePickerType="range" className="extra-class">
         <div className="test-child">
           <input type="text" className="bx--date-picker__input" id="input-from" />
         </div>
@@ -108,11 +108,11 @@ describe('DatePicker', () => {
     });
 
     it('should initalize a calendar', () => {
-      expect(wrapper.state().cal).not.toBe({});
+      expect(wrapper.node.cal).toBeDefined();
     });
 
     it('should update the classnames', () => {
-      expect(wrapper.state().cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
+      expect(wrapper.node.cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
     });
 
     it('should render an icon', () => {

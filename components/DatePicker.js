@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Flatpickr from 'flatpickr';
+import flatpickr from 'flatpickr';
+import rangePlugin from 'flatpickr/dist/plugins/rangePlugin'
 import DatePickerInput from './DatePickerInput';
 
 // Weekdays shorthand for english locale
-Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
-  const currentDay = Flatpickr.l10ns.en.weekdays.shorthand;
+flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
+  const currentDay = flatpickr.l10ns.en.weekdays.shorthand;
   if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
     currentDay[index] = 'Th';
   } else {
@@ -15,10 +16,6 @@ Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
 });
 
 class DatePicker extends Component {
-  state = {
-    cal: {},
-  };
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -37,7 +34,22 @@ class DatePicker extends Component {
       this.props.datePickerType === 'single' ||
       this.props.datePickerType === 'range'
     ) {
-      this.initDatePickerCalendar();
+      this.cal = flatpickr(this.inputField, {
+        mode: this.props.datePickerType,
+        allowInput: true,
+        dateFormat: this.props.dateFormat,
+        plugins: this.props.datePickerType === 'range' ? [new rangePlugin({ input: this.toInputField })] : '',
+        clickOpens: true,
+        onChange: () => {
+          this.props.onChange();
+        },
+        onReady: (selectedDates, dateStr, instance) => {
+          this.updateClassNames(instance);
+        },
+        nextArrow: this.rightArrowHTML(),
+        leftArrow: this.leftArrowHTML()
+      });
+      this.addKeyboardEvents(this.cal);
     }
   }
 
@@ -46,7 +58,7 @@ class DatePicker extends Component {
       this.props.datePickerType === 'range' ||
       this.props.datePickerType === 'single'
     ) {
-      this.state.cal.destroy();
+      this.cal.destroy();
     }
   }
 
@@ -57,12 +69,11 @@ class DatePicker extends Component {
         cal.calendarContainer.focus();
       }
     });
-    cal.calendarContainer.addEventListener('keydown', e => {
-      if (e.which === 9 && this.props.datePickerType === 'range') {
-        this._updateClassNames(cal);
-        input.focus();
-      }
-    });
+    if (this.toInputField) {
+      this.toInputField.addEventListener('blur', () => {
+        this.cal.close();
+      });
+    }
   };
 
   rightArrowHTML() {
@@ -79,82 +90,13 @@ class DatePicker extends Component {
       </svg>`;
   }
 
-  initDatePickerCalendar = () => {
-    const input = this.inputField;
-    const calendar = new Flatpickr(input, {
-      mode: this.props.datePickerType,
-      allowInput: true,
-      dateFormat: this.props.dateFormat,
-      onClose: selectedDates => {
-        this.updateClassNames(calendar);
-        this.updateInputFields(selectedDates);
-        if (this.props.datePickerType === 'range') {
-          const toInputField = this.toInputField;
-          if (calendar.selectedDates.length === 1) {
-            input.focus();
-          } else {
-            toInputField.focus();
-          }
-          toInputField.classList.remove('bx--focused');
-        }
-      },
-      onChange: () => {
-        this.updateClassNames(calendar);
-        if (this.props.datePickerType === 'range') {
-          const toInputField = this.toInputField;
-          if (calendar.selectedDates.length === 1 && calendar.isOpen) {
-            toInputField.classList.add('bx--focused');
-          } else {
-            toInputField.classList.remove('bx--focused');
-          }
-        }
-      },
-      onMonthChange: () => {
-        this.updateClassNames(calendar);
-      },
-      onYearChange: () => {
-        this.updateClassNames(calendar);
-      },
-      onOpen: () => {
-        this.updateClassNames(calendar);
-      },
-      nextArrow: this.rightArrowHTML(),
-      prevArrow: this.leftArrowHTML(),
-    });
-    if (this.props.datePickerType === 'range') {
-      const toInputField = this.toInputField;
-      toInputField.addEventListener('click', () => {
-        toInputField.focus();
-        calendar.open();
-        this.updateClassNames(calendar);
-      });
-      this.addInputLogic(toInputField);
-    }
-    this.setState({
-      cal: calendar,
-    });
-    this.addKeyboardEvents(calendar);
-    this.updateClassNames(calendar);
-    this.addInputLogic(input);
-  };
-
-  addInputLogic = input => {
-    const inputField = input;
-    inputField.addEventListener('change', () => {
-      const inputDate = this.state.cal.parseDate(new Date(inputField.value));
-      if (!isNaN(inputDate.valueOf())) {
-        this.state.cal.setDate(inputDate);
-      }
-      this.updateClassNames(this.state.cal);
-    });
-  };
-
   openCalendar = () => {
-    this.state.cal.open();
+    this.cal.open();
   };
 
   updateClassNames = calendar => {
     const calendarContainer = calendar.calendarContainer;
+    const daysContainer = calendar.days;
     calendarContainer.classList.add('bx--date-picker__calendar');
     calendarContainer
       .querySelector('.flatpickr-month')
@@ -172,7 +114,7 @@ class DatePicker extends Component {
       currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
       currentItem.classList.add('bx--date-picker__weekday');
     });
-    [...calendarContainer.querySelectorAll('.flatpickr-day')].forEach(item => {
+    [...daysContainer.querySelectorAll('.flatpickr-day')].forEach(item => {
       item.classList.add('bx--date-picker__day');
       if (
         item.classList.contains('today') &&
@@ -187,24 +129,6 @@ class DatePicker extends Component {
       }
     });
   };
-
-  updateInputFields = selectedDates => {
-    const input = this.inputField;
-    if (this.props.datePickerType === 'range') {
-      const toInput = this.toInputField;
-      if (selectedDates.length === 2) {
-        input.value = this.formatDate(selectedDates[0]);
-        toInput.value = this.formatDate(selectedDates[1]);
-      } else if (selectedDates.length === 1) {
-        input.value = this.formatDate(selectedDates[0]);
-      }
-    } else if (selectedDates.length === 1) {
-      input.value = this.formatDate(selectedDates[0]);
-    }
-    this.updateClassNames(this.state.cal);
-  };
-
-  formatDate = date => this.state.cal.formatDate(date, this.props.dateFormat);
 
   assignInputFieldRef = (node) => {
     this.inputField = !node ? null :
@@ -277,7 +201,6 @@ class DatePicker extends Component {
         });
       }
     });
-
     return (
       <div className="bx--form-item">
         <div className={datePickerClasses} {...other}>
