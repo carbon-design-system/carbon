@@ -85,6 +85,14 @@ export Tag, { types } from './components/Tag';
 export Tabs from './components/Tabs';
 export TextArea from './components/TextArea';
 export TextInput from './components/TextInput';
+export {
+  Tile,
+  ClickableTile,
+  SelectableTile,
+  ExpandableTile,
+  TileAboveTheFoldContent,
+  TileBelowTheFoldContent
+} from './components/Tile';
 export TimePicker from './components/TimePicker';
 export TimePickerSelect from './components/TimePickerSelect';
 export Toggle from './components/Toggle';
