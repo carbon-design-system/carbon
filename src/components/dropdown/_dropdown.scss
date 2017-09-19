@@ -42,7 +42,7 @@
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
-    transition: transform $transition--base ease-in-out;
+    transition: transform $transition--expansion $bx--standard-easing;
     transform-origin: 50% 45%;
   }
 
@@ -66,10 +66,13 @@
     @include reset;
     @include layer('overlay');
     width: 100%;
-    display: none;
     list-style: none;
     position: absolute;
     z-index: z('dropdown');
+    max-height: 0;
+    overflow: hidden;
+    transition: $transition--expansion $bx--ease-out;
+    opacity: 0;
   }
 
   .bx--dropdown-link {
@@ -104,6 +107,10 @@
       display: flex;
       flex-direction: column;
       background-color: $ui-01;
+      max-height: 50rem;
+      overflow: visible;
+      transition: $transition--expansion $bx--ease-in;
+      opacity: 1;
     }
 
     &:focus {

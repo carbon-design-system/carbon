@@ -70,7 +70,7 @@
   }
 
   .bx--accordion__content {
-    transition: all $transition--base $bx--standard-easing;
+    transition: all $transition--expansion $bx--ease-out;
     padding: $accordion-content-padding;
     height: 0;
     visibility: hidden;
@@ -91,6 +91,7 @@
     height: auto;
     visibility: visible;
     opacity: 1;
+    transition: all $transition--expansion $bx--ease-in;
   }
 
   .bx--accordion__arrow {
