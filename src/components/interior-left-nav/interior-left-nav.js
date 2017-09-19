@@ -161,10 +161,13 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     });
 
     if (this.element.dispatchEvent(eventStart)) {
+      const svgTitle = this.element
+        .querySelector(this.options.selectorLeftNavArrow)
+        .querySelector('title');
       if (!collapsed) {
         this.element.dataset.collapsed = true;
         this.element.classList.add(this.options.classLeftNavCollapsing);
-
+        svgTitle.innerHTML = 'Expand nav pane';
         window.setTimeout(() => {
           this.element.classList.remove(this.options.classLeftNavCollapsing);
           this.element.classList.add(this.options.classLeftNavCollapsed);
@@ -180,7 +183,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
         this.element.dataset.collapsed = false;
         this.element.classList.remove(this.options.classLeftNavCollapsed);
         this.element.classList.add(this.options.classLeftNavExpanding);
-
+        svgTitle.innerHTML = 'Collapse nav pane';
         window.setTimeout(() => {
           this.element.classList.remove(this.options.classLeftNavExpanding);
           this.element.dispatchEvent(
@@ -222,6 +225,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     selectorLeftNavListItemHasChildren:
       '[data-interior-left-nav-with-children]',
     selectorLeftNavCollapse: '[data-interior-left-nav-collapse]',
+    selectorLeftNavArrow: '[data-interior-left-nav-arrow]',
     // CSS Class Selectors
     classActiveLeftNavListItem: 'left-nav-list__item--active',
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
