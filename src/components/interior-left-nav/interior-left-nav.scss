@@ -219,7 +219,7 @@
 
     .left-nav-list__item--active > .left-nav-list__item-link {
       position: relative;
-      background-color: #fff;
+      background-color: transparent;
 
       &:before {
         top: 0;
