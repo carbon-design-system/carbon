@@ -16,12 +16,14 @@ class FileUploaderButton extends Component {
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     role: PropTypes.string,
-    tabIndex: PropTypes.number
+    tabIndex: PropTypes.number,
+    buttonKind: PropTypes.oneOf(['primary', 'secondary'])
   };
   static defaultProps = {
     tabIndex: 0,
     disableLabelChanges: false,
     labelText: 'Add file',
+    buttonKind: 'primary',
     multiple: false,
     onChange: () => {},
     onClick: () => {},
@@ -60,6 +62,7 @@ class FileUploaderButton extends Component {
       multiple,
       role,
       tabIndex,
+      buttonKind,
       ...other
     } = this.props;
     const classes = classNames({
@@ -78,7 +81,7 @@ class FileUploaderButton extends Component {
         }}
       >
         <label
-          className="bx--btn bx--btn--primary"
+          className={`bx--btn bx--btn--${buttonKind}`}
           htmlFor={this.uid}
           role={role}
           {...other}
@@ -158,6 +161,7 @@ class FileUploader extends Component {
   static propTypes = {
     iconDescription: PropTypes.string,
     buttonLabel: PropTypes.string,
+    buttonKind: PropTypes.oneOf(['primary', 'secondary']),
     filenameStatus: PropTypes.oneOf(['edit', 'complete', 'uploading']).isRequired,
     labelDescription: PropTypes.string,
     labelTitle: PropTypes.string,
@@ -171,6 +175,7 @@ class FileUploader extends Component {
     iconDescription: 'Provide icon description',
     filenameStatus: 'uploading',
     buttonLabel: 'Add file',
+    buttonKind: 'primary',
     multiple: false,
     onChange: () => {},
     onClick: () => {}
@@ -205,6 +210,7 @@ class FileUploader extends Component {
     const {
       iconDescription,
       buttonLabel,
+      buttonKind,
       filenameStatus,
       labelDescription,
       labelTitle,
@@ -229,6 +235,7 @@ class FileUploader extends Component {
         <FileUploaderButton
           labelText={buttonLabel}
           multiple={multiple}
+          buttonKind={buttonKind}
           onChange={this.handleChange}
           disableLabelChanges
         />

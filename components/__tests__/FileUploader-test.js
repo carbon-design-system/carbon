@@ -32,6 +32,14 @@ describe('FileUploaderButton', () => {
       expect(mountWrapper.props().labelText).toEqual('Add file');
     });
 
+    it('renders with default buttonKind prop', () => {
+      expect(mountWrapper.props().buttonKind).toEqual('primary');
+    });
+
+    it('renders with expected button className', () => {
+      expect(mountWrapper.find('.bx--btn--primary').exists()).toBe(true);
+    });
+
     it('renders with default multiple prop', () => {
       expect(mountWrapper.props().multiple).toEqual(false);
     });
@@ -71,6 +79,7 @@ describe('FileUploaderButton', () => {
     });
   });
 });
+
 describe('FileUploader', () => {
   const fileUploader = <FileUploader className="extra-class" />;
   const mountWrapper = mount(fileUploader);
