@@ -50,7 +50,7 @@ storiesOf('OrderSummary', module)
           linkText="Contact Bluemix Sales"
           href="www.google.com"
         />
-      </OrderSummary>
+      </OrderSummary>,
   )
   .addWithInfo(
     'Category',
@@ -101,5 +101,5 @@ storiesOf('OrderSummary', module)
           linkText="Contact Bluemix Sales"
           href="www.google.com"
         />
-      </OrderSummary>
+      </OrderSummary>,
   );
