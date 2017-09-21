@@ -120,8 +120,8 @@ class Slider extends PureComponent {
       if (type === 'mousemove' || type === 'click' || type === 'touchmove') {
         const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
         const track = this.track.getBoundingClientRect();
-        const unrounded = ((clientX - track.left) / track.width);
-        const rounded = Math.round(((range * unrounded) / step)) * step;
+        const ratio = ((clientX - track.left) / track.width);
+        const rounded = min + (Math.round(((range * ratio) / step)) * step);
         left = (((rounded - min) / range) * 100);
         newValue = rounded;
       }
