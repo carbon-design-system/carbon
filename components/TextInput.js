@@ -25,7 +25,7 @@ const defaultProps = {
   onChange: () => {},
   onClick: () => {},
   invalid: false,
-  labelText: 'Provide labelText',
+  labelText: '',
   invalidText: 'Provide invalidText'
 };
 
