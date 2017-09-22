@@ -86,11 +86,13 @@ gulp.task('clean', () =>
  */
 
 gulp.task('scripts:dev', () =>
-  rollup.rollup(rollupConfigDev)
+  rollup
+    .rollup(rollupConfigDev)
     .then(bundle => bundle.write(rollupConfigDev))
     .then(() => {
       browserSync.reload();
-    }));
+    })
+);
 
 gulp.task('scripts:umd', () => {
   const srcFiles = ['./src/**/*.js'];
@@ -108,7 +110,10 @@ gulp.task('scripts:umd', () => {
     plugins: ['transform-es2015-modules-umd', 'transform-class-properties'],
   };
 
-  return gulp.src(srcFiles).pipe(babel(babelOpts)).pipe(gulp.dest('umd/'));
+  return gulp
+    .src(srcFiles)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('umd/'));
 });
 
 gulp.task('scripts:es', () => {
@@ -128,12 +133,15 @@ gulp.task('scripts:es', () => {
     plugins: ['transform-class-properties'],
   };
 
-  return gulp.src(srcFiles).pipe(babel(babelOpts)).pipe(gulp.dest('es/'));
+  return gulp
+    .src(srcFiles)
+    .pipe(babel(babelOpts))
+    .pipe(gulp.dest('es/'));
 });
 
 gulp.task('scripts:rollup', () =>
-  rollup.rollup(rollupConfigProd)
-    .then(bundle => bundle.write(rollupConfigProd)));
+  rollup.rollup(rollupConfigProd).then(bundle => bundle.write(rollupConfigProd))
+);
 
 gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
@@ -346,7 +354,12 @@ gulp.task('watch', () => {
 gulp.task('serve', ['browser-sync', 'watch']);
 
 // Build task collection
-gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled']);
+gulp.task('build:scripts', [
+  'scripts:umd',
+  'scripts:es',
+  'scripts:compiled',
+  'scripts:dev',
+]);
 gulp.task('build:styles', ['sass:compiled', 'sass:source']);
 
 // Mapped to npm run build

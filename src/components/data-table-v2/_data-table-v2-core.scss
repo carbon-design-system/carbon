@@ -1,0 +1,100 @@
+.bx--data-table-v2-container {
+  width: 100%;
+}
+
+.bx--data-table-v2 {
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    background-color: $ui-02;
+    font-size: rem(12px);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  tbody {
+    background-color: #fff;
+    font-size: rem(14px);
+  }
+
+  tr {
+    height: 48px;
+
+    &:last-of-type {
+      td {
+        border-bottom: 1px solid $ui-04;
+      }
+    }
+
+    &:hover {
+      td {
+        background-color: rgba($brand-02, 0.1);
+        border-top: 1px solid $brand-01;
+        border-bottom: 1px solid $brand-01;
+
+        &:first-of-type {
+          border-left: 1px solid $brand-01;
+        }
+
+        &:last-of-type {
+          border-right: 1px solid $brand-01;
+        }
+      }
+    }
+  }
+
+  th,
+  td {
+    border-top: 1px solid $ui-04;
+    padding-left: 12px;
+    padding-right: 12px;
+    vertical-align: middle;
+    text-align: left;
+
+    &:first-of-type {
+      padding-left: 24px;
+      border-left: 1px solid $ui-04;
+    }
+
+    &:last-of-type {
+      padding-right: 24px;
+      border-right: 1px solid $ui-04;
+    }
+  }
+
+  // Overrrides
+  .bx--checkbox-appearance {
+    margin-right: 0;
+  }
+
+  .bx--overflow-menu__icon {
+    transform: rotate(90deg);
+  }
+}
+
+// Options
+
+.bx--data-table-v2--zebra {
+  tbody tr:nth-child(even) {
+    background-color: $ui-02;
+  }
+}
+
+.bx--data-table-v2--compact {
+  tbody tr {
+    height: 24px;
+  }
+}
+
+.bx--data-table-v2--short {
+  tbody tr {
+    height: 32px;
+  }
+}
+
+.bx--data-table-v2--tall {
+  tbody tr {
+    height: 64px;
+  }
+}
