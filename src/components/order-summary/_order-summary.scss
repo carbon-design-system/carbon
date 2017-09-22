@@ -1,3 +1,10 @@
+//-----------------------------
+// Order Summary
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/mixins';
+
 .bx--order-summary {
   @include font-size('14');
   background-color: $ui-01;
