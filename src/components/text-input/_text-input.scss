@@ -12,7 +12,7 @@
 @include exports('text-input') {
   .bx--text-input {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-size('14');
     display: block;
     width: 100%;

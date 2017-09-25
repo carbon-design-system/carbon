@@ -12,7 +12,7 @@
   .bx--list--unordered,
   .bx--list--ordered {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-size('14');
     @include font-smoothing;
     margin-left: 2rem;

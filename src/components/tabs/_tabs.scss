@@ -14,7 +14,7 @@
   .bx--tabs {
     @include font-size('14');
     @include font-smoothing;
-    @include helvetica;
+    @include font-family;
     color: $text-01;
     font-weight: 700;
     cursor: pointer;

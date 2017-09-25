@@ -37,7 +37,7 @@
 
   .bx--date-picker__input {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-size('14');
     display: block;
     position: relative;
@@ -95,7 +95,7 @@
   }
 
   .bx--date-picker--range .bx--date-picker__input {
-    width: 7rem;
+    width: 7.075rem;
   }
 
   .bx--date-picker__calendar,

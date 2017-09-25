@@ -13,7 +13,7 @@
 @include exports('inline-notifications') {
   .bx--inline-notification {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-smoothing;
     @include font-size('14');
     display: flex;

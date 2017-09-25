@@ -9,7 +9,7 @@
 @include exports('data-table') {
   .bx--responsive-table-container {
     @include reset;
-    @include helvetica;
+    @include font-family;
     overflow-x: auto;
     overflow-y: hidden;
     width: 99.9%;

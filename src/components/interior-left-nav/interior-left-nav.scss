@@ -14,7 +14,7 @@
 @include exports('interior-left-nav') {
   .bx--interior-left-nav {
     @include reset;
-    @include helvetica;
+    @include font-family;
     width: rem(250px);
     position: fixed;
     top: rem(90px);

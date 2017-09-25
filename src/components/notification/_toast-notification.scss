@@ -13,7 +13,7 @@
 @include exports('toast-notifications') {
   .bx--toast-notification {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-smoothing;
     @include box-shadow('small');
     display: flex;

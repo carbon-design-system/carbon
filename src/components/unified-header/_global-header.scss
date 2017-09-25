@@ -3,7 +3,7 @@
 @include exports('global-header') {
   .bx--global-header {
     @include layer('sticky-nav');
-    @include helvetica;
+    @include font-family;
     width: 100%;
     position: fixed;
     top: rem(36px);

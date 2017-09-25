@@ -22,7 +22,7 @@
 
   .bx--radio-button__label {
     @include font-size('14');
-    @include helvetica;
+    @include font-family;
     display: flex;
     align-items: center;
     cursor: pointer;

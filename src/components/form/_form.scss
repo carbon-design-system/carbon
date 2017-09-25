@@ -10,7 +10,7 @@
   }
 
   .bx--form-item {
-    @include helvetica;
+    @include font-family;
     flex: 1;
     margin-right: 1rem;
     margin-bottom: 1.5rem;
@@ -23,7 +23,7 @@
 
   .bx--label {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-size('14');
     font-weight: $input-label-weight;
     display: inline-block;

@@ -15,7 +15,7 @@
   }
 
   .bx--toggle__label {
-    @include helvetica;
+    @include font-family;
     position: relative;
     display: flex;
     align-items: center;

@@ -24,7 +24,7 @@
 
   .bx--structured-list {
     @include reset;
-    @include helvetica;
+    @include font-family;
     display: table;
     overflow-x: auto;
     overflow-y: hidden;

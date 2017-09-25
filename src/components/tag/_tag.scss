@@ -5,7 +5,7 @@
 
 @include exports('tags') {
   .bx--tag {
-    @include helvetica;
+    @include font-family;
     @include font-size('12');
     display: inline-flex;
     align-items: center;

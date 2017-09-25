@@ -17,7 +17,7 @@
   }
 
   .bx--select-input {
-    @include helvetica;
+    @include font-family;
     @include font-size('14');
     appearance: none;
     display: block;
