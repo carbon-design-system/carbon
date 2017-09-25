@@ -20,13 +20,13 @@
     justify-content: space-between;
     width: 16.875rem;
     padding-top: 1rem;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
     padding-right: 1rem;
     padding-left: 1rem;
     background-color: $inverse-01;
     color: $text-01;
-    margin-top: .5rem;
-    margin-bottom: .5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     margin-right: 1rem;
 
     &:first-child {
@@ -78,7 +78,7 @@
     font-weight: 700;
     letter-spacing: 0;
     line-height: 1;
-    padding-bottom: .125rem;
+    padding-bottom: 0.125rem;
   }
 
   .bx--toast-notification__subtitle {

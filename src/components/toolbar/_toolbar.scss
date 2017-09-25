@@ -107,11 +107,11 @@ $css--helpers: true;
     @include font-size('12');
     @include letter-spacing;
     font-weight: 700;
-    padding: .5rem 1.25rem;
+    padding: 0.5rem 1.25rem;
   }
 
   .bx--toolbar-menu__option {
-    padding: .5rem 1.25rem;
+    padding: 0.5rem 1.25rem;
   }
 
   .bx--toolbar-menu__divider {

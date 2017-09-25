@@ -1,7 +1,6 @@
 @import '../../globals/scss/import-once';
 
 @include exports('left-nav') {
-
   .bx--global-header__left-nav {
     @include layer('temporary-nav');
     @include reset;
@@ -19,7 +18,7 @@
 
   .bx--global-header__left-nav.bx--left-nav--active {
     transform: translate3d(0, 0, 0);
-    box-shadow: 0px 1px 15px 2px rgba(0, 0, 0, .1);
+    box-shadow: 0px 1px 15px 2px rgba(0, 0, 0, 0.1);
     visibility: visible;
   }
 
@@ -110,16 +109,15 @@
     background-color: $ui-01;
 
     &:hover {
-
-      &[data-left-nav-section="apps"] {
+      &[data-left-nav-section='apps'] {
         background-color: $nav-06;
       }
 
-      &[data-left-nav-section="services"] {
+      &[data-left-nav-section='services'] {
         background-color: $nav-04;
       }
 
-      &[data-left-nav-section="infrastructure"] {
+      &[data-left-nav-section='infrastructure'] {
         background-color: $color__blue-50;
       }
 
@@ -145,7 +143,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: .8rem 0;
+    padding: 0.8rem 0;
 
     &[data-left-nav-section='apps'] {
       background-color: $nav-06;
@@ -164,7 +162,7 @@
     @extend .bx--left-nav__section--active;
     position: absolute;
     z-index: 9999;
-    transition: all .3s $bx--ease-out;
+    transition: all 0.3s $bx--ease-out;
 
     &--50 {
       transform: translateY(100px);
@@ -236,7 +234,7 @@
     cursor: pointer;
     width: 100%;
     padding: 0;
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
     background-color: $ui-01;
   }
 
@@ -262,7 +260,7 @@
     align-items: center;
     justify-content: flex-start;
     text-decoration: none;
-    padding: .5rem rem(20px);
+    padding: 0.5rem rem(20px);
     transition: background-color $transition--base $bx--standard-easing;
     color: $text-01;
 
@@ -287,8 +285,7 @@
     }
 
     &:hover {
-
-      .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='apps'] & {
         color: $nav-06;
 
         .bx--parent-item__link--taxonomy-icon,
@@ -297,7 +294,7 @@
         }
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='services'] & {
         color: $nav-04;
 
         .bx--parent-item__link--taxonomy-icon,
@@ -306,7 +303,7 @@
         }
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
         color: $nav-08;
 
         .bx--parent-item__link--taxonomy-icon,
@@ -318,11 +315,10 @@
   }
 
   .bx--main-nav__parent-item.bx--active-list-item {
-
     .bx--parent-item__link {
       color: $inverse-01;
 
-      .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='apps'] & {
         background-color: $nav-06;
 
         &:hover {
@@ -335,7 +331,7 @@
         }
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='services'] & {
         background-color: $nav-04;
 
         &:hover {
@@ -348,7 +344,7 @@
         }
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
         background-color: $nav-08;
 
         &:hover {
@@ -391,7 +387,7 @@
     max-height: 20rem;
     transition: 300ms $bx--standard-easing;
     opacity: 1;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     overflow: visible;
 
     .bx--nested-list__item {
@@ -402,7 +398,7 @@
   .bx--nested-list__item {
     width: 100%;
     position: static;
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
     padding: 0;
     transition: $transition--base;
     opacity: 0;
@@ -411,7 +407,7 @@
   .bx--nested-list__item--link {
     @include font-size('14');
     color: $text-01;
-    padding: .5rem 1.35rem .5rem 2rem;
+    padding: 0.5rem 1.35rem 0.5rem 2rem;
     font-weight: 400;
     display: flex;
     align-items: center;
@@ -421,7 +417,7 @@
     margin-right: auto;
 
     &:hover {
-      .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='apps'] & {
         color: $nav-06;
 
         .bx--left-nav-list__item-link--taxonomy-icon {
@@ -429,7 +425,7 @@
         }
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='services'] & {
         color: $nav-04;
 
         .bx--left-nav-list__item-link--taxonomy-icon {
@@ -437,7 +433,7 @@
         }
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
         color: $nav-08;
 
         .bx--left-nav-list__item-link--taxonomy-icon {
@@ -454,10 +450,8 @@
   }
 
   .bx--nested-list__item.bx--active-list-item {
-
     .bx--nested-list__item--link {
-
-      .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='apps'] & {
         background-color: $nav-06;
 
         &:hover {
@@ -469,7 +463,7 @@
         }
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='services'] & {
         background-color: $nav-04;
 
         &:hover {
@@ -481,7 +475,7 @@
         }
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+      .bx--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
         background-color: $nav-08;
 
         &:hover {
@@ -544,23 +538,22 @@
     align-items: center;
 
     &:hover {
-      .bx--left-nav__main-nav[data-left-nav-list="apps"] & .bx--flyout-menu__item--link {
+      .bx--left-nav__main-nav[data-left-nav-list='apps'] & .bx--flyout-menu__item--link {
         color: $nav-06;
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="services"] & .bx--flyout-menu__item--link {
+      .bx--left-nav__main-nav[data-left-nav-list='services'] & .bx--flyout-menu__item--link {
         color: $nav-04;
       }
 
-      .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & .bx--flyout-menu__item--link {
+      .bx--left-nav__main-nav[data-left-nav-list='infrastructure'] & .bx--flyout-menu__item--link {
         color: $nav-08;
       }
     }
   }
 
   .bx--flyout-menu__item.bx--active-list-item {
-
-    .bx--left-nav__main-nav[data-left-nav-list="apps"] & {
+    .bx--left-nav__main-nav[data-left-nav-list='apps'] & {
       background-color: $nav-06;
 
       & .bx--flyout-menu__item--link {
@@ -572,7 +565,7 @@
       }
     }
 
-    .bx--left-nav__main-nav[data-left-nav-list="services"] & {
+    .bx--left-nav__main-nav[data-left-nav-list='services'] & {
       background-color: $nav-04;
 
       & .bx--flyout-menu__item--link {
@@ -584,7 +577,7 @@
       }
     }
 
-    .bx--left-nav__main-nav[data-left-nav-list="infrastructure"] & {
+    .bx--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
       background-color: $nav-08;
 
       & .bx--flyout-menu__item--link {

@@ -71,7 +71,7 @@
           justify-content: space-between;
           text-decoration: none;
           transition: background-color $transition--base;
-          padding: .75rem 1.5rem .75rem rem(59px);
+          padding: 0.75rem 1.5rem 0.75rem rem(59px);
         }
 
         &-icon {
@@ -130,7 +130,7 @@
     .left-nav-list--nested {
       max-height: 0;
       overflow: hidden;
-      transition: .3s ease-in-out;
+      transition: 0.3s ease-in-out;
       padding: 0;
       opacity: 0;
 
@@ -144,7 +144,7 @@
         &-link {
           @include font-size('14');
           color: $color__blue-90;
-          padding: .75rem 1.35rem .75rem 4.5rem;
+          padding: 0.75rem 1.35rem 0.75rem 4.5rem;
           font-weight: 400;
           display: flex;
           align-items: center;
@@ -183,11 +183,15 @@
     padding-top: rem(20px);
     transition: background-color 300ms $bx--standard-easing, width 300ms $bx--standard-easing;
 
-    ul, li, hr, .bx--interior-left-nav-collapse__target {
+    ul,
+    li,
+    hr,
+    .bx--interior-left-nav-collapse__target {
       opacity: 1;
     }
 
-    .left-nav-list, .left-nav-list__item-link {
+    .left-nav-list,
+    .left-nav-list__item-link {
       background-color: inherit;
     }
 
@@ -215,7 +219,7 @@
 
     .left-nav-list__item--active > .left-nav-list__item-link {
       position: relative;
-      background-color: #fff;
+      background-color: transparent;
 
       &:before {
         top: 0;
@@ -232,7 +236,8 @@
       margin-bottom: rem(5px);
     }
 
-    .left-nav-list__item-link, .left-nav-list--nested .left-nav-list__item-link {
+    .left-nav-list__item-link,
+    .left-nav-list--nested .left-nav-list__item-link {
       padding: rem(9px) rem(20px);
     }
 
@@ -243,7 +248,7 @@
 
     .bx--interior-left-nav-collapse {
       cursor: pointer;
-      background-color: rgba($color__blue-51, .10);
+      background-color: rgba($color__blue-51, 0.1);
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -251,8 +256,9 @@
       margin-bottom: rem(90px);
       padding: rem(14px) rem(16px);
 
-      &:hover, &:focus {
-        background-color: rgba($color__blue-51, .30);
+      &:hover,
+      &:focus {
+        background-color: rgba($color__blue-51, 0.3);
       }
     }
 
@@ -266,7 +272,7 @@
       align-items: center;
       text-decoration: none;
       font-size: rem(14px);
-      padding: .25rem;
+      padding: 0.25rem;
 
       &:focus {
         @include focus-outline('border');
@@ -281,17 +287,22 @@
     }
   }
 
-  .bx--interior-left-nav--collapsing, .bx--interior-left-nav--collapsed {
+  .bx--interior-left-nav--collapsing,
+  .bx--interior-left-nav--collapsed {
     width: rem(48px);
     transition: background-color 300ms $bx--standard-easing, width 300ms $bx--standard-easing;
     cursor: pointer;
-    background-color: rgba($color__blue-51, .10);
+    background-color: rgba($color__blue-51, 0.1);
 
-    &:hover, &:focus {
-      background-color: rgba($color__blue-51, .30);
+    &:hover,
+    &:focus {
+      background-color: rgba($color__blue-51, 0.3);
     }
 
-    ul, li, hr, .bx--interior-left-nav-collapse__target {
+    ul,
+    li,
+    hr,
+    .bx--interior-left-nav-collapse__target {
       opacity: 0;
       transition: opacity 300ms $bx--standard-easing;
       overflow: hidden;
@@ -313,7 +324,10 @@
   }
 
   .bx--interior-left-nav--collapsed {
-    ul, li, hr, .bx--interior-left-nav-collapse__target {
+    ul,
+    li,
+    hr,
+    .bx--interior-left-nav-collapse__target {
       display: none;
     }
 
@@ -329,7 +343,10 @@
     transition: width 300ms $bx--standard-easing;
     background-color: #fff;
 
-    ul, li, hr, .bx--interior-left-nav-collapse__target {
+    ul,
+    li,
+    hr,
+    .bx--interior-left-nav-collapse__target {
       opacity: 1;
       transition: opacity 300ms $bx--standard-easing;
       overflow: hidden;

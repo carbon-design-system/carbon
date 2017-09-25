@@ -15,12 +15,27 @@
   }
 }
 
+.bx--tile-container {
+  width: 100%;
+
+  .bx--tile {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .bx--col {
+    background: none;
+    margin-bottom: 1rem;
+  }
+}
+
 .demo--container__panel {
   @include grid-container;
   width: 100%;
   max-width: 960px;
   height: 100%;
-  // min-height: 2000px;
+  min-height: 2000px;
   padding: 1em;
 
   display: flex;

@@ -9,9 +9,12 @@ import watch from '../../src/globals/js/watch';
 
 settings.disableAutoInit = true;
 
-describe('Test watch mode', function () {
+describe('Test watch mode', function() {
   const watchOptions = { foo: 'Foo' };
-  const ClassInitedBySearch = class extends mixin(createComponent, initComponentBySearch) {
+  const ClassInitedBySearch = class extends mixin(
+    createComponent,
+    initComponentBySearch
+  ) {
     release = spyReleaseComponentBySearch;
     static options = {
       selectorInit: '[data-my-component-inited-by-search]',
@@ -20,9 +23,15 @@ describe('Test watch mode', function () {
   };
 
   const spyInitComponentBySearch = sinon.spy(ClassInitedBySearch, 'init');
-  const spyReleaseComponentBySearch = sinon.spy(ClassInitedBySearch.prototype, 'release');
+  const spyReleaseComponentBySearch = sinon.spy(
+    ClassInitedBySearch.prototype,
+    'release'
+  );
 
-  const ClassInitedByEvent = class extends mixin(createComponent, initComponentByEvent) {
+  const ClassInitedByEvent = class extends mixin(
+    createComponent,
+    initComponentByEvent
+  ) {
     release = spyReleaseComponentByEvent;
     static options = {
       selectorInit: '[data-my-component-inited-by-event]',
@@ -32,9 +41,15 @@ describe('Test watch mode', function () {
   };
 
   const spyInitComponentByEvent = sinon.spy(ClassInitedByEvent, 'init');
-  const spyReleaseComponentByEvent = sinon.spy(ClassInitedByEvent.prototype, 'release');
+  const spyReleaseComponentByEvent = sinon.spy(
+    ClassInitedByEvent.prototype,
+    'release'
+  );
 
-  const ClassInitedByLauncher = class extends mixin(createComponent, initComponentByLauncher) {
+  const ClassInitedByLauncher = class extends mixin(
+    createComponent,
+    initComponentByLauncher
+  ) {
     release = spyReleaseComponentByLauncher;
     static options = {
       selectorInit: '[data-my-component-inited-by-launcher]',
@@ -45,45 +60,66 @@ describe('Test watch mode', function () {
   };
 
   const spyInitComponentByLauncher = sinon.spy(ClassInitedByLauncher, 'init');
-  const spyReleaseComponentByLauncher = sinon.spy(ClassInitedByLauncher.prototype, 'release');
+  const spyReleaseComponentByLauncher = sinon.spy(
+    ClassInitedByLauncher.prototype,
+    'release'
+  );
 
-  componentClasses.splice(0, componentClasses.length, ClassInitedBySearch, ClassInitedByEvent, ClassInitedByLauncher);
+  componentClasses.splice(
+    0,
+    componentClasses.length,
+    ClassInitedBySearch,
+    ClassInitedByEvent,
+    ClassInitedByLauncher
+  );
 
-  describe('Handling regular components', function () {
+  describe('Handling regular components', function() {
     let lastTarget;
     let stubObserve;
     let handle;
     let element;
 
-    before(function () {
+    before(function() {
       const origObserve = MutationObserver.prototype.observe;
-      stubObserve = sinon.stub(MutationObserver.prototype, 'observe').callsFake(function stubObserveImpl(target, options) {
-        lastTarget = target;
-        origObserve.call(this, target, options);
-      });
+      stubObserve = sinon
+        .stub(MutationObserver.prototype, 'observe')
+        .callsFake(function stubObserveImpl(target, options) {
+          lastTarget = target;
+          origObserve.call(this, target, options);
+        });
     });
 
-    it('Should throw if given element is neither a DOM element or a document', function () {
+    it('Should throw if given element is neither a DOM element or a document', function() {
       expect(() => {
         handle = watch(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it('Should look at document if no element is given', function () {
+    it('Should look at document if no element is given', function() {
       handle = watch();
       expect(lastTarget).to.equal(document);
     });
 
-    it('Should instantiate the components', async function () {
+    it('Should instantiate the components', async function() {
       handle = watch(document, watchOptions);
 
       spyInitComponentBySearch.reset();
 
       expect(lastTarget, 'Watch target').to.equal(document);
-      expect(spyInitComponentByEvent, 'Call count of ClassInitedByEvent.init()').to.have.been.calledOnce;
-      expect(spyInitComponentByEvent, 'Args of ClassInitedByEvent.init()').to.have.been.calledWith(document, watchOptions);
-      expect(spyInitComponentByLauncher, 'Call count of ClassInitedByLauncher.init()').to.have.been.calledOnce;
-      expect(spyInitComponentByLauncher, 'Args of ClassInitedByLauncher.init()').to.have.been.calledWith(document, watchOptions);
+      expect(spyInitComponentByEvent, 'Call count of ClassInitedByEvent.init()')
+        .to.have.been.calledOnce;
+      expect(
+        spyInitComponentByEvent,
+        'Args of ClassInitedByEvent.init()'
+      ).to.have.been.calledWith(document, watchOptions);
+      expect(
+        spyInitComponentByLauncher,
+        'Call count of ClassInitedByLauncher.init()'
+      ).to.have.been.calledOnce;
+      expect(
+        spyInitComponentByLauncher,
+        'Args of ClassInitedByLauncher.init()'
+      ).to.have.been.calledWith(document, watchOptions);
 
       element = document.createElement('div');
       element.dataset.myComponentInitedBySearch = '';
@@ -91,11 +127,17 @@ describe('Test watch mode', function () {
 
       await delay(0); // Wait for mutation observer to deliver records
 
-      expect(spyInitComponentBySearch, 'Call count of ClassInitedBySearch.init()').to.have.been.calledOnce;
-      expect(spyInitComponentBySearch.args[0][1], 'Option arg of ClassInitedBySearch.init()').to.deep.equal(watchOptions);
+      expect(
+        spyInitComponentBySearch,
+        'Call count of ClassInitedBySearch.init()'
+      ).to.have.been.calledOnce;
+      expect(
+        spyInitComponentBySearch.args[0][1],
+        'Option arg of ClassInitedBySearch.init()'
+      ).to.deep.equal(watchOptions);
     });
 
-    it('Should release the components', async function () {
+    it('Should release the components', async function() {
       handle = watch();
 
       element = document.createElement('div');
@@ -109,17 +151,25 @@ describe('Test watch mode', function () {
       elementInitedByEvent.dataset.myComponentInitedByEvent = '';
       element.appendChild(elementInitedByEvent);
 
-      elementInitedByEvent.dispatchEvent(new CustomEvent('instantiating-event', { bubbles: true, cancelable: true }));
+      elementInitedByEvent.dispatchEvent(
+        new CustomEvent('instantiating-event', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
 
       const elementInitedByLauncher = document.createElement('div');
       elementInitedByLauncher.dataset.myComponentInitedByLauncher = '';
       element.appendChild(elementInitedByLauncher);
 
       const launcherButton = document.createElement('button');
-      launcherButton.dataset.initTarget = '[data-my-component-inited-by-launcher]';
+      launcherButton.dataset.initTarget =
+        '[data-my-component-inited-by-launcher]';
       element.appendChild(launcherButton);
 
-      launcherButton.dispatchEvent(new CustomEvent('launching-event', { bubbles: true, cancelable: true }));
+      launcherButton.dispatchEvent(
+        new CustomEvent('launching-event', { bubbles: true, cancelable: true })
+      );
 
       await delay(0); // Wait for mutation observer to deliver records
 
@@ -132,7 +182,7 @@ describe('Test watch mode', function () {
       expect(spyReleaseComponentByLauncher).to.have.been.calledOnce;
     });
 
-    it('Should release the components even if the removed node is of the component', async function () {
+    it('Should release the components even if the removed node is of the component', async function() {
       handle = watch();
 
       element = document.createElement('div');
@@ -148,16 +198,26 @@ describe('Test watch mode', function () {
       expect(spyReleaseComponentBySearch).to.have.been.calledOnce;
     });
 
-    it('Should stop instantiating components once the handle is released', async function () {
+    it('Should stop instantiating components once the handle is released', async function() {
       handle = watch(document, watchOptions);
 
       spyInitComponentBySearch.reset();
 
       expect(lastTarget, 'Watch target').to.equal(document);
-      expect(spyInitComponentByEvent, 'Call count of ClassInitedByEvent.init()').to.have.been.calledOnce;
-      expect(spyInitComponentByEvent, 'Args of ClassInitedByEvent.init()').to.have.been.calledWith(document, watchOptions);
-      expect(spyInitComponentByLauncher, 'Call count of ClassInitedByLauncher.init()').to.have.been.calledOnce;
-      expect(spyInitComponentByLauncher, 'Args of ClassInitedByLauncher.init()').to.have.been.calledWith(document, watchOptions);
+      expect(spyInitComponentByEvent, 'Call count of ClassInitedByEvent.init()')
+        .to.have.been.calledOnce;
+      expect(
+        spyInitComponentByEvent,
+        'Args of ClassInitedByEvent.init()'
+      ).to.have.been.calledWith(document, watchOptions);
+      expect(
+        spyInitComponentByLauncher,
+        'Call count of ClassInitedByLauncher.init()'
+      ).to.have.been.calledOnce;
+      expect(
+        spyInitComponentByLauncher,
+        'Args of ClassInitedByLauncher.init()'
+      ).to.have.been.calledWith(document, watchOptions);
 
       element = document.createElement('div');
       element.dataset.myComponentInitedBySearch = '';
@@ -167,10 +227,13 @@ describe('Test watch mode', function () {
 
       await delay(0); // Wait for mutation observer to deliver records
 
-      expect(spyInitComponentBySearch, 'Call count of ClassInitedBySearch.init()').not.to.have.been.called;
+      expect(
+        spyInitComponentBySearch,
+        'Call count of ClassInitedBySearch.init()'
+      ).not.to.have.been.called;
     });
 
-    afterEach(function () {
+    afterEach(function() {
       if (element && element.parentNode) {
         element.parentNode.removeChild(element);
         element = null;
@@ -180,30 +243,30 @@ describe('Test watch mode', function () {
       }
     });
 
-    after(function () {
+    after(function() {
       stubObserve.restore();
     });
   });
 
-  describe('Handling checkbox', function () {
+  describe('Handling checkbox', function() {
     let element;
     let handle;
 
-    before(function () {
+    before(function() {
       handle = watch();
       element = document.createElement('input');
       element.type = 'checkbox';
       document.body.appendChild(element);
     });
 
-    it('Should add checked attribute when it is checked', function () {
+    it('Should add checked attribute when it is checked', function() {
       element.removeAttribute('checked');
       element.checked = true;
       element.dispatchEvent(new CustomEvent('change', { bubbles: true }));
       expect(element.hasAttribute('checked')).to.be.true;
     });
 
-    after(function () {
+    after(function() {
       if (element && element.parentNode) {
         element.parentNode.removeChild(element);
         element = null;
@@ -214,7 +277,7 @@ describe('Test watch mode', function () {
     });
   });
 
-  afterEach(function () {
+  afterEach(function() {
     spyReleaseComponentByLauncher.reset();
     spyReleaseComponentByEvent.reset();
     spyReleaseComponentBySearch.reset();

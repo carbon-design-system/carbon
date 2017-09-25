@@ -28,34 +28,49 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this.handleDocumentClick(evt); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
+      this.handleDocumentClick(evt);
+    });
 
-    this.element.addEventListener('dropdown-beingselected', (event) => {
-      if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
-        const linkedIconNode = event.detail.item.querySelector(this.options.classLinkedIcon);
+    this.element.addEventListener('dropdown-beingselected', event => {
+      if (
+        event.target.querySelector(this.options.selectorAccountDropdown) !==
+        null
+      ) {
+        const linkedIconNode = event.detail.item.querySelector(
+          this.options.classLinkedIcon
+        );
         this.element.isLinked = !!linkedIconNode;
-        this.element.linkedIcon = linkedIconNode && linkedIconNode.cloneNode(true);
-        const linkedAccountNode = event.detail.item.querySelector(this.options.selectorAccountSlLinked);
-        this.element.linkedAccount = linkedAccountNode && linkedAccountNode.cloneNode(true);
+        this.element.linkedIcon =
+          linkedIconNode && linkedIconNode.cloneNode(true);
+        const linkedAccountNode = event.detail.item.querySelector(
+          this.options.selectorAccountSlLinked
+        );
+        this.element.linkedAccount =
+          linkedAccountNode && linkedAccountNode.cloneNode(true);
       }
     });
 
     const toggleNode = this.element.querySelector(this.options.selectorToggle);
     if (toggleNode) {
-      toggleNode.addEventListener('keydown', (event) => { this.toggle(event); });
+      toggleNode.addEventListener('keydown', event => {
+        this.toggle(event);
+      });
 
-      toggleNode.addEventListener('mouseenter', (event) => {
+      toggleNode.addEventListener('mouseenter', event => {
         this.getLinkedData(event);
         this.determineSwitcherValues(true);
       });
 
-      toggleNode.addEventListener('mouseleave', (event) => {
+      toggleNode.addEventListener('mouseleave', event => {
         this.getLinkedData(event);
         this.determineSwitcherValues(false);
       });
     }
 
-    this.element.ownerDocument.addEventListener('keyup', () => this.handleBlur());
+    this.element.ownerDocument.addEventListener('keyup', () =>
+      this.handleBlur()
+    );
   }
 
   /**
@@ -67,15 +82,23 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
     if (event.which === 13 || event.which === 32) {
       if (isOfSelf) {
         this.element.classList.toggle(this.options.classSwitcherOpen);
-      } else if (!isOfSelf && this.element.classList.contains(this.options.classSwitcherOpen)) {
+      } else if (
+        !isOfSelf &&
+        this.element.classList.contains(this.options.classSwitcherOpen)
+      ) {
         this.element.classList.remove(this.options.classSwitcherOpen);
       }
     }
   }
 
   getLinkedData(event) {
-    if (event.target.querySelector(this.options.selectorLinkedAccount) !== null) {
-      if (event.target.querySelector(this.options.selectorLinkedAccount).textContent.length > 1) {
+    if (
+      event.target.querySelector(this.options.selectorLinkedAccount) !== null
+    ) {
+      if (
+        event.target.querySelector(this.options.selectorLinkedAccount)
+          .textContent.length > 1
+      ) {
         this.element.isLinked = true;
       } else {
         this.element.isLinked = false;
@@ -84,7 +107,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
   }
 
   handleBlur() {
-    if (!(this.element.contains(document.activeElement))) {
+    if (!this.element.contains(document.activeElement)) {
       this.element.classList.remove(this.options.classSwitcherOpen);
     }
   }
@@ -99,7 +122,9 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
     const clickTarget = evt.target;
     const isOfSelf = this.element.contains(clickTarget);
     const isToggle = eventMatches(evt, this.options.selectorToggle);
-    const isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
+    const isOpen = this.element.classList.contains(
+      this.options.classSwitcherOpen
+    );
 
     if (isOfSelf) {
       if (isToggle && isOpen) {
@@ -122,20 +147,29 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
    * @param {boolean} isHovered boolean value passed by the event listener on bx--toggle.
    */
   determineSwitcherValues(isHovered) {
-    const linkedElement = this.element.querySelector(this.options.selectorLinkedAccount);
-    const nameElement = this.element.querySelector(this.options.selectorAccount);
-    const regionElement = this.element.querySelector(this.options.selectorRegion);
+    const linkedElement = this.element.querySelector(
+      this.options.selectorLinkedAccount
+    );
+    const nameElement = this.element.querySelector(
+      this.options.selectorAccount
+    );
+    const regionElement = this.element.querySelector(
+      this.options.selectorRegion
+    );
     const orgElement = this.element.querySelector(this.options.selectorOrg);
     const spaceElement = this.element.querySelector(this.options.selectorSpace);
     const menuElement = this.element.querySelector(this.options.selectorMenu);
-    const isOpen = this.element.classList.contains(this.options.classSwitcherOpen);
+    const isOpen = this.element.classList.contains(
+      this.options.classSwitcherOpen
+    );
 
     if (linkedElement) {
       if (this.element.isLinked) {
         if (this.element.linkedAccount) {
           if (linkedElement.textContent.length) {
-            linkedElement.querySelector(this.options.selectorAccountSlLinked).textContent =
-             this.element.linkedAccount.textContent;
+            linkedElement.querySelector(
+              this.options.selectorAccountSlLinked
+            ).textContent = this.element.linkedAccount.textContent;
           } else {
             linkedElement.appendChild(this.element.linkedAccount);
             if (this.element.linkedIcon) {
@@ -148,29 +182,38 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
       }
     }
 
-
     let nameDropdownValue = '';
     if (this.element.querySelector(this.options.selectorAccountDropdown)) {
       if (this.element.isLinked) {
-        nameDropdownValue = this.element.querySelector(this.options.selectorAccountLinked).textContent;
+        nameDropdownValue = this.element.querySelector(
+          this.options.selectorAccountLinked
+        ).textContent;
       } else {
-        nameDropdownValue = this.element.querySelector(this.options.selectorAccountDropdown).textContent;
+        nameDropdownValue = this.element.querySelector(
+          this.options.selectorAccountDropdown
+        ).textContent;
       }
     }
 
     let regionDropdownValue = '';
     if (this.element.querySelector(this.options.selectorRegionDropdown)) {
-      regionDropdownValue = this.element.querySelector(this.options.selectorRegionDropdown).textContent;
+      regionDropdownValue = this.element.querySelector(
+        this.options.selectorRegionDropdown
+      ).textContent;
     }
 
     let orgDropdownValue = '';
     if (this.element.querySelector(this.options.selectorOrgDropdown)) {
-      orgDropdownValue = this.element.querySelector(this.options.selectorOrgDropdown).textContent;
+      orgDropdownValue = this.element.querySelector(
+        this.options.selectorOrgDropdown
+      ).textContent;
     }
 
     let spaceDropdownValue = '';
     if (this.element.querySelector(this.options.selectorSpaceDropdown)) {
-      spaceDropdownValue = this.element.querySelector(this.options.selectorSpaceDropdown).textContent;
+      spaceDropdownValue = this.element.querySelector(
+        this.options.selectorSpaceDropdown
+      ).textContent;
     }
 
     let nameShort;
@@ -191,7 +234,8 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
         regionElement.textContent = regionDropdownValue;
       }
       if (menuElement) {
-        menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
+        menuElement.style.width = `${this.element.getBoundingClientRect()
+          .width}px`;
       }
     } else {
       if (nameElement) {
@@ -205,7 +249,10 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
 
       if (orgElement) {
         if (orgDropdownValue.length > 25) {
-          orgShort = `${orgDropdownValue.slice(0, 12)}...${orgDropdownValue.slice(-13)}`;
+          orgShort = `${orgDropdownValue.slice(
+            0,
+            12
+          )}...${orgDropdownValue.slice(-13)}`;
           orgElement.textContent = orgShort;
         } else {
           orgElement.textContent = orgDropdownValue;
@@ -226,7 +273,8 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
       }
 
       if (menuElement) {
-        menuElement.style.width = `${this.element.getBoundingClientRect().width}px`;
+        menuElement.style.width = `${this.element.getBoundingClientRect()
+          .width}px`;
       }
     }
   }

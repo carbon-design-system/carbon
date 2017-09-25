@@ -81,7 +81,8 @@
     padding-left: 1rem;
     padding-right: 1.5rem;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background-color: $brand-01;
       color: $inverse-01;
       outline: 1px solid transparent;
@@ -113,7 +114,11 @@
   }
 
   .bx--dropdown--disabled {
-    opacity: .5;
+    opacity: 0.5;
     cursor: not-allowed;
+
+    &:focus {
+      outline: none;
+    }
   }
 }

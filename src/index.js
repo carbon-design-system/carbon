@@ -20,8 +20,7 @@ import Card from './components/card/card';
 import NumberInput from './components/number-input/number-input';
 import DataTable from './components/data-table/data-table';
 import DatePicker from './components/date-picker/date-picker';
-import DetailPageHeader
-  from './components/detail-page-header/detail-page-header';
+import DetailPageHeader from './components/detail-page-header/detail-page-header';
 import LeftNav from './components/unified-header/left-nav';
 import InteriorLeftNav from './components/interior-left-nav/interior-left-nav';
 import ProfileSwitcher from './components/unified-header/profile-switcher';
@@ -36,6 +35,9 @@ import ProgressIndicator from './components/progress-indicator/progress-indicato
 import FloatingMenu from './components/floating-menu/floating-menu';
 import StructuredList from './components/structured-list/structured-list';
 import Slider from './components/slider/slider';
+import Tile from './components/tile/tile';
+import Carousel from './components/carousel/carousel';
+import Lightbox from './components/lightbox/lightbox';
 
 export { default as watch } from './globals/js/watch';
 
@@ -203,6 +205,21 @@ export {
    * @type Slider
    */
   Slider,
+  /**
+   * Tile.
+   * @type Tile
+   */
+  Tile,
+  /**
+   * Carousel.
+   * @type Carousel
+   */
+  Carousel,
+  /**
+   * Lightbox.
+   * @type Lightbox
+   */
+  Lightbox,
 };
 
 /**
@@ -236,6 +253,9 @@ export const componentClasses = [
   StructuredList,
   DatePicker,
   Slider,
+  Tile,
+  Carousel,
+  Lightbox,
   // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
 ];
 
@@ -249,7 +269,7 @@ export const componentClasses = [
 const init = () => {
   if (!settings.disableAutoInit) {
     initCheckbox();
-    componentClasses.forEach((Clz) => {
+    componentClasses.forEach(Clz => {
       Clz.init();
     });
   }

@@ -11,7 +11,6 @@
 @import '../../globals/scss/import-once';
 
 @include exports('search') {
-
   .bx--search {
     display: flex;
     position: relative;
@@ -40,7 +39,6 @@
 
     &::placeholder {
       @include placeholder-colors;
-      font-style: italic;
       font-weight: 400;
     }
   }
@@ -60,11 +58,11 @@
     position: absolute;
     height: 1rem;
     width: 1rem;
-    top: calc(50% - .5rem);
+    top: calc(50% - 0.5rem);
   }
 
   .bx--search-magnifier {
-    left: .75rem;
+    left: 0.75rem;
     fill: $ui-05;
   }
 
@@ -77,7 +75,7 @@
   }
 
   .bx--search--sm .bx--search-close {
-    right: .75rem;
+    right: 0.75rem;
   }
 
   .bx--search--lg .bx--search-close {
@@ -91,7 +89,7 @@
     height: rem(40px);
     width: rem(40px);
     min-width: rem(40px);
-    margin-left: .25rem;
+    margin-left: 0.25rem;
     background-color: $ui-01;
     position: relative;
     padding: 0;

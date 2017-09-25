@@ -51,18 +51,18 @@
     transition: $transition--base $bx--standard-easing;
 
     .bx--structured-list--selection &:hover:not(.bx--structured-list-row--header-row) {
-      background-color: rgba($brand-02, .1);
+      background-color: rgba($brand-02, 0.1);
       cursor: pointer;
     }
 
     // Deprecated
     [data-structured-list] &:hover:not(.bx--structured-list-row--header-row) {
-      background-color: rgba($brand-02, .1);
+      background-color: rgba($brand-02, 0.1);
       cursor: pointer;
     }
 
     &.bx--structured-list-row--selected {
-      background-color: rgba($brand-02, .1);
+      background-color: rgba($brand-02, 0.1);
     }
 
     &.bx--structured-list-row--header-row {
@@ -118,7 +118,7 @@
     transition: $transition--base $bx--standard-easing;
 
     .bx--structured-list-row:hover & {
-      fill: rgba($brand-02, .1);
+      fill: rgba($brand-02, 0.1);
     }
 
     .bx--structured-list-input:checked + .bx--structured-list-row &,

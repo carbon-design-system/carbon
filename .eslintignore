@@ -3,4 +3,3 @@
 dist
 demo/demo.js
 node_modules
-gulpfile.js

@@ -1,0 +1,84 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
+
+@include exports('carousel') {
+  .bx--carousel {
+    display: flex;
+    align-items: center;
+  }
+  .bx--carousel-container {
+    max-width: rem(810px);
+    overflow: hidden;
+    padding: 0 1px;
+  }
+  .bx--filmstrip {
+    display: flex;
+    justify-content: space-between;
+    transition: transform 100ms $bx--ease-in;
+    padding: rem(24px) 0;
+    width: auto;
+  }
+  .bx--filmstrip-btn {
+    @include button-reset;
+    height: rem(20px);
+    width: rem(20px);
+    margin-bottom: 1rem;
+    margin-right: rem(3px);
+    margin-left: rem(3px);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      @include focus-outline;
+    }
+  }
+
+  .bx--carousel__btn {
+    @include button-reset(false);
+    cursor: pointer;
+    padding: 0;
+
+    &:first-child {
+      margin-right: 1.25rem;
+    }
+
+    &:last-child {
+      margin-left: 1.25rem;
+    }
+
+    &:focus {
+      @include focus-outline;
+    }
+
+    &:last-of-type {
+      transform: rotate(180deg);
+    }
+
+    svg {
+      height: rem(24px);
+      width: rem(16px);
+      fill: $brand-01;
+    }
+  }
+  .bx--carousel__item {
+    @include button-reset;
+    padding: 0;
+    line-height: 0;
+    margin-right: rem(20px);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      @include focus-outline;
+    }
+  }
+  .bx--carousel__item--active {
+    @include focus-outline;
+  }
+}

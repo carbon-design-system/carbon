@@ -8,7 +8,6 @@
 @import '../../globals/scss/import-once';
 
 @include exports('lists') {
-
   .bx--list--nested,
   .bx--list--unordered,
   .bx--list--ordered {
@@ -27,7 +26,7 @@
 
   .bx--list__item {
     font-weight: 700;
-    padding-left: .25rem;
+    padding-left: 0.25rem;
   }
 
   .bx--list--unordered > .bx--list__item {
@@ -39,7 +38,7 @@
   }
 
   .bx--list--nested {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
   }
 
   .bx--list--nested > .bx--list__item {
@@ -49,6 +48,6 @@
 
   .bx--list--nested > .bx--list__item:before {
     content: '-';
-    padding-right: .25rem;
+    padding-right: 0.25rem;
   }
 }

@@ -28,7 +28,7 @@
     justify-content: center;
     content: '';
     opacity: 0;
-    background-color: rgba($ui-03, .5);
+    background-color: rgba($ui-03, 0.5);
     transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
     visibility: hidden;
 
@@ -121,7 +121,7 @@
     cursor: pointer;
     background-color: transparent;
     border: none;
-    padding: .25rem .25rem .125rem;
+    padding: 0.25rem 0.25rem 0.125rem;
 
     &:focus {
       @include focus-outline('border');

@@ -1,7 +1,6 @@
 @import '../../globals/scss/import-once';
 
 @include exports('topnav') {
-
   .bx--top-nav {
     @include reset;
     @include helvetica;
@@ -28,8 +27,7 @@
 
   .bx--top-nav__left-container,
   .bx--top-nav__right-container {
-
-   .bx--dropdown {
+    .bx--dropdown {
       @include font-size('12');
       list-style: none;
       background-color: $nav-01;
@@ -41,7 +39,7 @@
 
     .bx--dropdown__arrow {
       fill: $inverse-01;
-      right: .75rem;
+      right: 0.75rem;
       width: rem(12px);
       height: rem(24px);
     }
@@ -89,7 +87,6 @@
 
   .bx--top-nav__left-container,
   .bx--top-nav__right-container {
-
     .bx--dropdown--open {
       background-color: $color__navy-gray-3; // anna
     }
@@ -133,10 +130,10 @@
   }
 
   .bx--top-nav__left-container__link--icon {
-    width: .675rem;
-    height: .7rem;
+    width: 0.675rem;
+    height: 0.7rem;
     fill: $inverse-01;
-    margin-right: .3rem;
+    margin-right: 0.3rem;
   }
 
   .bx--top-nav__left-container__item {
@@ -146,7 +143,6 @@
   }
 
   .bx--top-nav__left-container {
-
     .bx--dropdown {
       &:focus,
       &:hover {
@@ -164,26 +160,26 @@
     }
 
     .bx--dropdown-list {
-      padding-bottom: .5rem;
+      padding-bottom: 0.5rem;
     }
 
     .bx--dropdown__arrow {
-      top: .3rem;
-      left: .75rem;
+      top: 0.3rem;
+      left: 0.75rem;
       opacity: 0;
       transform: rotate(0);
-      animation: $transition--base cubic-bezier(.64, .57, .67, 1.53) 650ms 1 normal forwards fade;
+      animation: $transition--base cubic-bezier(0.64, 0.57, 0.67, 1.53) 650ms 1 normal forwards fade;
     }
 
     .bx--dropdown-text {
-      animation: $transition--base cubic-bezier(.6, .22, .38, 2.03) 1 normal forwards pop-in;
+      animation: $transition--base cubic-bezier(0.6, 0.22, 0.38, 2.03) 1 normal forwards pop-in;
       opacity: 0;
-      transform: scale(.5);
-      padding: .725rem 1rem .725rem 2rem;
+      transform: scale(0.5);
+      padding: 0.725rem 1rem 0.725rem 2rem;
     }
 
     .bx--dropdown-link {
-      padding: .6rem .75rem;
+      padding: 0.6rem 0.75rem;
 
       &:hover,
       &:focus {
@@ -199,9 +195,8 @@
 
   .bx--top-nav__right-container__item[data-trial],
   .bx--top-nav__right-container__item[data-credit] {
-
     .bx--dropdown-text {
-      padding: .75rem 2rem .75rem 1rem;
+      padding: 0.75rem 2rem 0.75rem 1rem;
       color: $inverse-01;
     }
 
@@ -214,7 +209,7 @@
     }
 
     .bx--dropdown__arrow {
-      top: .5rem;
+      top: 0.5rem;
     }
 
     .bx--dropdown--open .bx--dropdown-list {
@@ -291,7 +286,6 @@
   }
 
   .bx--top-nav__right-container__item:last-child {
-
     .bx--dropdown {
       &:focus,
       &:hover {
@@ -394,7 +388,7 @@
     }
 
     p {
-      padding: 0 .5rem;
+      padding: 0 0.5rem;
     }
   }
 

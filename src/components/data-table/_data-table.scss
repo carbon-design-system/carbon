@@ -56,7 +56,8 @@
     }
 
     &--tall {
-      td, th {
+      td,
+      th {
         padding-top: rem(15px);
         padding-bottom: rem(15px);
       }
@@ -68,14 +69,16 @@
       width: auto;
       border: 2px solid $ui-04;
 
-      tr td:first-child, tr th:first-child {
+      tr td:first-child,
+      tr th:first-child {
         padding-left: 1.5rem;
       }
     }
   }
 
   .bx--responsive-table--tall {
-    td, th {
+    td,
+    th {
       padding-top: rem(10px);
       padding-bottom: rem(10px);
     }
@@ -104,7 +107,8 @@
 
   // zebra stripes
   .bx--table-body {
-    > .bx--parent-row, > .bx--parent-row {
+    > .bx--parent-row,
+    > .bx--parent-row {
       background-color: $ui-01;
 
       & + .bx--expandable-row {
@@ -124,12 +128,14 @@
   .bx--table-body .bx--table-row {
     border: 1px solid transparent;
 
-    &:first-child:hover, &:first-child:focus {
+    &:first-child:hover,
+    &:first-child:focus {
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
     }
 
-    &:not(:first-child):hover, &:not(:first-child):focus {
+    &:not(:first-child):hover,
+    &:not(:first-child):focus {
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
     }
