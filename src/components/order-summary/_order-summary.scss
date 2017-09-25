@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/mixins';
+@import '../dropdown/_dropdown.scss';
 
 .bx--order-summary {
   @include font-size('14');
