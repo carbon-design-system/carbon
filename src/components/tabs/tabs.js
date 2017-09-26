@@ -28,9 +28,7 @@ class Tab extends ContentSwitcher {
       this._handleKeyDown(event);
     });
 
-    const selected = this.element.querySelector(
-      this.options.selectorButtonSelected
-    );
+    const selected = this.element.querySelector(this.options.selectorButtonSelected);
     if (selected) {
       this._updateTriggerText(selected);
     }
@@ -78,9 +76,7 @@ class Tab extends ContentSwitcher {
    * @param {Event} event The event triggering this method.
    */
   _handleKeyDown(event) {
-    const triggerNode = this.element.querySelector(
-      this.options.selectorTrigger
-    );
+    const triggerNode = this.element.querySelector(this.options.selectorTrigger);
     if (triggerNode && triggerNode.offsetParent) {
       if (event.which === 13) {
         this._updateMenuState();
@@ -93,20 +89,11 @@ class Tab extends ContentSwitcher {
     }[event.which];
 
     if (direction) {
-      const buttons = [
-        ...this.element.querySelectorAll(this.options.selectorButton),
-      ];
-      const button = this.element.querySelector(
-        this.options.selectorButtonSelected
-      );
-      const nextIndex = Math.max(
-        buttons.indexOf(button) + direction,
-        -1 /* For `button` not found in `buttons` */
-      );
+      const buttons = [...this.element.querySelectorAll(this.options.selectorButton)];
+      const button = this.element.querySelector(this.options.selectorButtonSelected);
+      const nextIndex = Math.max(buttons.indexOf(button) + direction, -1 /* For `button` not found in `buttons` */);
       const nextIndexLooped =
-        nextIndex >= 0 && nextIndex < buttons.length
-          ? nextIndex
-          : nextIndex - Math.sign(nextIndex) * buttons.length;
+        nextIndex >= 0 && nextIndex < buttons.length ? nextIndex : nextIndex - Math.sign(nextIndex) * buttons.length;
       this.setActive(buttons[nextIndexLooped], (error, item) => {
         if (item) {
           const link = item.querySelector(this.options.selectorLink);
@@ -134,9 +121,7 @@ class Tab extends ContentSwitcher {
    * @param {HTMLElement} target The newly selected tab item.
    */
   _updateTriggerText(target) {
-    const triggerText = this.element.querySelector(
-      this.options.selectorTriggerText
-    );
+    const triggerText = this.element.querySelector(this.options.selectorTriggerText);
     if (triggerText) {
       triggerText.textContent = target.textContent;
     }

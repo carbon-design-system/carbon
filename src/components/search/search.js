@@ -25,9 +25,7 @@ class Search extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    const closeIcon = this.element.querySelector(
-      this.options.selectorClearIcon
-    );
+    const closeIcon = this.element.querySelector(this.options.selectorClearIcon);
     const input = this.element.querySelector(this.options.selectorSearchInput);
     if (!input) {
       throw new Error('Cannot find the search input.');
@@ -56,9 +54,7 @@ class Search extends mixin(createComponent, initComponentBySearch) {
    * @param {HTMLElement} element The element contining the layout toggle.
    */
   toggleLayout(element) {
-    [
-      ...element.querySelectorAll(this.options.selectorSearchView),
-    ].forEach(item => {
+    [...element.querySelectorAll(this.options.selectorSearchView)].forEach(item => {
       item.classList.toggle(this.options.classLayoutHidden);
     });
   }

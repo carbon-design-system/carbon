@@ -31,8 +31,7 @@ describe('StructuredList', function() {
     it('should set default options', function() {
       expect(instance.options).to.deep.equal({
         selectorInit: '[data-structured-list]',
-        selectorRow:
-          '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
+        selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
         classActive: 'bx--structured-list-row--selected',
       });
     });
@@ -132,13 +131,9 @@ describe('StructuredList', function() {
           bubbles: true,
         })
       );
-      const rows = instance.element.querySelectorAll(
-        instance.options.selectorRow
-      );
+      const rows = instance.element.querySelectorAll(instance.options.selectorRow);
       rows[1].dispatchEvent(event);
-      expect(rows[1].classList.contains(instance.options.classActive)).to.equal(
-        true
-      );
+      expect(rows[1].classList.contains(instance.options.classActive)).to.equal(true);
     });
 
     afterEach(function() {

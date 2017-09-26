@@ -4,11 +4,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-class DataTable extends mixin(
-  createComponent,
-  initComponentBySearch,
-  eventedState
-) {
+class DataTable extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * Data Table
    * @extends CreateComponent
@@ -90,15 +86,8 @@ class DataTable extends mixin(
     parentRows.forEach((item, index) => {
       if (index % 2 === 0) {
         item.classList.add(this.options.classParentRowEven);
-        if (
-          item.nextElementSibling &&
-          item.nextElementSibling.classList.contains(
-            this.options.classExpandableRow
-          )
-        ) {
-          item.nextElementSibling.classList.add(
-            this.options.classExpandableRowEven
-          );
+        if (item.nextElementSibling && item.nextElementSibling.classList.contains(this.options.classExpandableRow)) {
+          item.nextElementSibling.classList.add(this.options.classExpandableRowEven);
         }
       } else {
         item.classList.remove(this.options.classParentRowEven);
@@ -121,21 +110,12 @@ class DataTable extends mixin(
    */
   _toggleRowExpand = detail => {
     const element = detail.element;
-    const parent = eventMatches(
-      detail.initialEvt,
-      this.options.eventParentContainer
-    );
+    const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
 
     const index = this.expandCells.indexOf(element);
-    if (
-      element.dataset.previousValue === undefined ||
-      element.dataset.previousValue === 'expanded'
-    ) {
+    if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
       element.dataset.previousValue = 'collapsed';
-      this.tableBody.insertBefore(
-        this.expandableRows[index],
-        this.parentRows[index + 1]
-      );
+      this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
     } else {
       this.tableBody.removeChild(parent.nextElementSibling);
       element.dataset.previousValue = 'expanded';
@@ -162,9 +142,7 @@ class DataTable extends mixin(
    */
   _toggleSelectAll = detail => {
     const { element, previousValue } = detail;
-    const inputs = [
-      ...this.element.querySelectorAll(this.options.selectorCheckbox),
-    ];
+    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
     if (!previousValue || previousValue === 'toggled') {
       inputs.forEach(item => {
         item.checked = true; // eslint-disable-line no-param-reassign
@@ -182,31 +160,18 @@ class DataTable extends mixin(
    * On fire, create the parent child rows + striping
    */
   refreshRows = () => {
-    const newExpandCells = [
-      ...this.element.querySelectorAll(this.options.selectorExpandCells),
-    ];
-    const newExpandableRows = [
-      ...this.element.querySelectorAll(this.options.selectorExpandableRows),
-    ];
-    const newParentRows = [
-      ...this.element.querySelectorAll(this.options.selectorParentRows),
-    ];
+    const newExpandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
+    const newExpandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
+    const newParentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
 
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
-      const diffParentRows = newParentRows.filter(
-        newRow => !this.parentRows.some(oldRow => oldRow === newRow)
-      );
+      const diffParentRows = newParentRows.filter(newRow => !this.parentRows.some(oldRow => oldRow === newRow));
 
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
-        const diffExpandableRows = diffParentRows.map(
-          newRow => newRow.nextElementSibling
-        );
-        const mergedExpandableRows = [
-          ...this.expandableRows,
-          ...diffExpandableRows,
-        ];
+        const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
+        const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
         this._initExpandableRows(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }

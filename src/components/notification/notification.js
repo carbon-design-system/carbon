@@ -3,11 +3,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 
-class Notification extends mixin(
-  createComponent,
-  initComponentBySearch,
-  eventedState
-) {
+class Notification extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * InlineNotification.
    * @extends CreateComponent

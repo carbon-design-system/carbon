@@ -69,18 +69,10 @@ describe('Test Overflow menu', function() {
       events.on(element.ownerDocument.body, 'floating-menu-beingshown', e => {
         e.preventDefault();
       });
-      events.on(
-        element.ownerDocument.body,
-        'floating-menu-shown',
-        spyOverflowEvent
-      );
+      events.on(element.ownerDocument.body, 'floating-menu-shown', spyOverflowEvent);
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(spyOverflowEvent, 'floating-menu-shown event').not.to.have.been
-        .called;
-      expect(
-        element.classList.contains('bx--overflow-menu--open'),
-        'State of root element'
-      ).to.be.false;
+      expect(spyOverflowEvent, 'floating-menu-shown event').not.to.have.been.called;
+      expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.false;
     });
 
     it('Should emit an event after showing', function() {
@@ -95,19 +87,11 @@ describe('Test Overflow menu', function() {
       events.on(element.ownerDocument.body, 'floating-menu-beinghidden', e => {
         e.preventDefault();
       });
-      events.on(
-        element.ownerDocument.body,
-        'floating-menu-hidden',
-        spyOverflowEvent
-      );
+      events.on(element.ownerDocument.body, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(spyOverflowEvent, 'floating-menu-hidden event').not.to.have.been
-        .called;
-      expect(
-        element.classList.contains('bx--overflow-menu--open'),
-        'State of root element'
-      ).to.be.true;
+      expect(spyOverflowEvent, 'floating-menu-hidden event').not.to.have.been.called;
+      expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').to.be.true;
     });
 
     it('Should emit an event after hiding', function() {
@@ -150,35 +134,17 @@ describe('Test Overflow menu', function() {
 
     it('Should open one menu on a single click event', function() {
       element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(
-        element1.classList.contains('bx--overflow-menu--open'),
-        '1st overflow menu'
-      ).to.be.true;
-      expect(
-        element2.classList.contains('bx--overflow-menu--open'),
-        '2nd overflow menu'
-      ).to.be.false;
-      expect(
-        element3.classList.contains('bx--overflow-menu--open'),
-        '3rd overflow menu'
-      ).to.be.false;
+      expect(element1.classList.contains('bx--overflow-menu--open'), '1st overflow menu').to.be.true;
+      expect(element2.classList.contains('bx--overflow-menu--open'), '2nd overflow menu').to.be.false;
+      expect(element3.classList.contains('bx--overflow-menu--open'), '3rd overflow menu').to.be.false;
     });
 
     it('Should open one menu on multiple click events', function() {
       element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       element2.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(
-        element1.classList.contains('bx--overflow-menu--open'),
-        '1st overflow menu'
-      ).to.be.false;
-      expect(
-        element2.classList.contains('bx--overflow-menu--open'),
-        '2nd overflow menu'
-      ).to.be.true;
-      expect(
-        element3.classList.contains('bx--overflow-menu--open'),
-        '3rd overflow menu'
-      ).to.be.false;
+      expect(element1.classList.contains('bx--overflow-menu--open'), '1st overflow menu').to.be.false;
+      expect(element2.classList.contains('bx--overflow-menu--open'), '2nd overflow menu').to.be.true;
+      expect(element3.classList.contains('bx--overflow-menu--open'), '3rd overflow menu').to.be.false;
     });
 
     afterEach(function() {
@@ -203,9 +169,7 @@ describe('Test Overflow menu', function() {
     before(function() {
       document.body.appendChild(container);
       element = document.querySelector('.bx--overflow-menu');
-      firstItemNode = element.querySelector(
-        '[data-floating-menu-primary-focus]'
-      );
+      firstItemNode = element.querySelector('[data-floating-menu-primary-focus]');
       spyFocusFirstItemNode = sinon.spy(firstItemNode, 'focus');
       menu = new OverflowMenu(element);
     });

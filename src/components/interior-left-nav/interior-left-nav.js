@@ -16,37 +16,20 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     super(element, options);
     this.constructor.components.set(this.element, this);
 
-    this.keepOpen =
-      this.element.dataset.keepOpen === undefined
-        ? this.options.keepOpen
-        : Boolean(this.element.dataset.keepOpen);
+    this.keepOpen = this.element.dataset.keepOpen === undefined ? this.options.keepOpen : Boolean(this.element.dataset.keepOpen);
 
     this.hookListItemsEvents();
   }
 
   hookListItemsEvents = () => {
     this.element.addEventListener('click', evt => {
-      const leftNavItem = eventMatches(
-        evt,
-        this.options.selectorLeftNavListItem
-      );
-      const collapseEl = eventMatches(
-        evt,
-        this.options.selectorLeftNavCollapse
-      );
-      const collapsedBar = eventMatches(
-        evt,
-        `.${this.options.classLeftNavCollapsed}`
-      );
+      const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+      const collapseEl = eventMatches(evt, this.options.selectorLeftNavCollapse);
+      const collapsedBar = eventMatches(evt, `.${this.options.classLeftNavCollapsed}`);
 
       if (leftNavItem) {
-        const childItem = eventMatches(
-          evt,
-          this.options.selectorLeftNavNestedListItem
-        );
-        const hasChildren = leftNavItem.classList.contains(
-          'left-nav-list__item--has-children'
-        );
+        const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
+        const hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
         if (childItem) {
           this.addActiveListItem(childItem);
         } else if (hasChildren) {
@@ -63,14 +46,8 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     });
 
     this.element.addEventListener('keydown', evt => {
-      const leftNavItemWithChildren = eventMatches(
-        evt,
-        this.options.selectorLeftNavListItemHasChildren
-      );
-      const leftNavItem = eventMatches(
-        evt,
-        this.options.selectorLeftNavListItem
-      );
+      const leftNavItemWithChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+      const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
 
       if (leftNavItemWithChildren && evt.which === 13) {
         this.handleNestedListClick(leftNavItemWithChildren, evt);
@@ -81,18 +58,12 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
   };
 
   addActiveListItem(item) {
-    [
-      ...this.element.querySelectorAll(this.options.selectorLeftNavListItem),
-    ].forEach(currentItem => {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavListItem)].forEach(currentItem => {
       if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
     });
-    [
-      ...this.element.querySelectorAll(
-        this.options.selectorLeftNavNestedListItem
-      ),
-    ].forEach(currentItem => {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach(currentItem => {
       if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
@@ -107,27 +78,15 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
    * @param {Event} event The event triggering this method.
    */
   handleNestedListClick(listItem, evt) {
-    const allNestedItems = [
-      ...this.element.querySelectorAll(
-        this.options.selectorLeftNavListItemHasChildren
-      ),
-    ];
-    const isOpen = listItem.classList.contains(
-      this.options.classExpandedLeftNavListItem
-    );
+    const allNestedItems = [...this.element.querySelectorAll(this.options.selectorLeftNavListItemHasChildren)];
+    const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
     const list = listItem.querySelector(this.options.selectorLeftNavNestedList);
-    const listItems = [
-      ...list.querySelectorAll(this.options.selectorLeftNavNestedListItem),
-    ];
+    const listItems = [...list.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
 
     if (!this.keepOpen) {
       allNestedItems.forEach(currentItem => {
         if (currentItem !== listItem) {
-          toggleClass(
-            currentItem,
-            this.options.classExpandedLeftNavListItem,
-            false
-          );
+          toggleClass(currentItem, this.options.classExpandedLeftNavListItem, false);
         }
       });
     }
@@ -140,14 +99,10 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     listItems.forEach(item => {
       if (isOpen) {
         // eslint-disable-next-line no-param-reassign
-        item.querySelector(
-          this.options.selectorLeftNavListItemLink
-        ).tabIndex = -1;
+        item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = -1;
       } else {
         // eslint-disable-next-line no-param-reassign
-        item.querySelector(
-          this.options.selectorLeftNavListItemLink
-        ).tabIndex = 0;
+        item.querySelector(this.options.selectorLeftNavListItemLink).tabIndex = 0;
       }
     });
   }
@@ -219,8 +174,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     selectorLeftNavListItem: '[data-interior-left-nav-item]',
     selectorLeftNavListItemLink: '[data-interior-left-nav-item-link]',
     selectorLeftNavNestedListItem: '[data-interior-left-nav-nested-item]',
-    selectorLeftNavListItemHasChildren:
-      '[data-interior-left-nav-with-children]',
+    selectorLeftNavListItemHasChildren: '[data-interior-left-nav-with-children]',
     selectorLeftNavCollapse: '[data-interior-left-nav-collapse]',
     // CSS Class Selectors
     classActiveLeftNavListItem: 'left-nav-list__item--active',

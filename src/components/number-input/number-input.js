@@ -16,11 +16,9 @@ class NumberInput extends mixin(createComponent, initComponentBySearch) {
     this.element.querySelector('.up-icon').addEventListener('click', event => {
       this._handleClick(event);
     });
-    this.element
-      .querySelector('.down-icon')
-      .addEventListener('click', event => {
-        this._handleClick(event);
-      });
+    this.element.querySelector('.down-icon').addEventListener('click', event => {
+      this._handleClick(event);
+    });
   }
 
   /**

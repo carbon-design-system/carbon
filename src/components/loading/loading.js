@@ -38,10 +38,7 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
     const parentNode = this.element.parentNode;
 
     if (parentNode && parentNode.classList.contains('bx--loading-overlay')) {
-      parentNode.classList.toggle(
-        this.options.classLoadingOverlayStop,
-        !this.active
-      );
+      parentNode.classList.toggle(this.options.classLoadingOverlayStop, !this.active);
     }
 
     return this;

@@ -47,29 +47,24 @@ describe('Test Search', function() {
     before(function() {
       document.body.appendChild(container);
       instance = new Search(document.querySelector('[data-search]'));
-      toggle = container.querySelector(
-        '.bx--search-button[data-search-toggle]'
-      );
+      toggle = container.querySelector('.bx--search-button[data-search-toggle]');
       gridIcon = container.querySelector('div[data-search-view="grid"]');
       listIcon = container.querySelector('div[data-search-view="list"]');
     });
 
     it('Should show grid view by default', function() {
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be
-        .false;
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.false;
     });
 
     it('Should show list view after click', function() {
       toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.true;
-      expect(listIcon.classList.contains('bx--search-view--hidden')).to.be
-        .false;
+      expect(listIcon.classList.contains('bx--search-view--hidden')).to.be.false;
     });
 
     it('Should show grid view after second click', function() {
       toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be
-        .false;
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.false;
       expect(listIcon.classList.contains('bx--search-view--hidden')).to.be.true;
     });
 

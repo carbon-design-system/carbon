@@ -18,11 +18,7 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
     this.previousScrollY = 0;
     // Debounce scroll event calls to handleScroll (default: 50)
     const debouncedScroll = debounce(this._handleScroll.bind(this), 25);
-    this.hScroll = on(
-      this.element.ownerDocument.defaultView,
-      'scroll',
-      debouncedScroll
-    );
+    this.hScroll = on(this.element.ownerDocument.defaultView, 'scroll', debouncedScroll);
   }
 
   /**

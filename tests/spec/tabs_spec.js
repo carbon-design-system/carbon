@@ -4,10 +4,7 @@ import Tab from '../../src/components/tabs/tabs';
 describe('Test tabs', function() {
   describe('Constructor', function() {
     it('Should set default options', function() {
-      const stubUpdateTriggerText = sinon.stub(
-        Tab.prototype,
-        '_updateTriggerText'
-      );
+      const stubUpdateTriggerText = sinon.stub(Tab.prototype, '_updateTriggerText');
       try {
         const tab = new Tab(document.createElement('div'));
         expect(tab.options).to.deep.equal({
@@ -137,18 +134,14 @@ describe('Test tabs', function() {
 
     beforeEach(function() {
       buttonNodes.forEach((buttonNode, i) => {
-        buttonNode.classList[i === 0 ? 'add' : 'remove'](
-          'bx--tabs__nav-item--selected'
-        );
+        buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--tabs__nav-item--selected');
       });
     });
 
     it('Should update active tab upon clicking', function() {
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected'))
-        .to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected'))
-        .to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should update currently selected tab item for narrow screen', function() {
@@ -157,38 +150,24 @@ describe('Test tabs', function() {
     });
 
     it('Should update active tab upon right key', function() {
-      const defaultPrevented = element.dispatchEvent(
-        Object.assign(new CustomEvent('keydown'), { which: 39 })
-      );
+      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
       expect(defaultPrevented).to.be.true;
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected'))
-        .to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected'))
-        .to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should handle out of range index', function() {
-      element.dispatchEvent(
-        Object.assign(new CustomEvent('keydown'), { which: 39 })
-      );
-      element.dispatchEvent(
-        Object.assign(new CustomEvent('keydown'), { which: 39 })
-      );
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected'))
-        .to.be.true;
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected'))
-        .to.be.false;
+      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
+      element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
     });
 
     it('Should update active tab upon left key', function() {
-      const defaultPrevented = element.dispatchEvent(
-        Object.assign(new CustomEvent('keydown'), { which: 37 })
-      );
+      const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 37 }));
       expect(defaultPrevented).to.be.true;
-      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected'))
-        .to.be.false;
-      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected'))
-        .to.be.true;
+      expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
+      expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
     it('Should focus on the new active tab upon keyboard navigation', function() {
@@ -197,9 +176,7 @@ describe('Test tabs', function() {
       link.classList.add('bx--tabs__nav-link');
       buttonNodes[1].appendChild(link);
       try {
-        element.dispatchEvent(
-          Object.assign(new CustomEvent('keydown'), { which: 39 })
-        );
+        element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
         expect(spyFocus).to.be.calledOnce;
       } finally {
         spyFocus.restore();

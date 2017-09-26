@@ -47,9 +47,7 @@ describe('ToastNotification', function() {
 
     it('should search for close-button element with options.selectorButton', function() {
       const toastInstance = new Notification(toastElement);
-      const toastButton = toastElement.querySelector(
-        toastInstance.options.selectorButton
-      );
+      const toastButton = toastElement.querySelector(toastInstance.options.selectorButton);
       expect(toastButton).to.equal(toastInstance.button);
       toastInstance.release();
     });
@@ -81,37 +79,22 @@ describe('ToastNotification', function() {
     });
 
     it('should remove notification on click event', function() {
-      instance.button.dispatchEvent(
-        new CustomEvent('click', { bubbles: true })
-      );
-      expect(document.querySelector('.bx--toast-notification--error')).to.be
-        .null;
+      instance.button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(document.querySelector('.bx--toast-notification--error')).to.be.null;
     });
 
     it('should emit notification-before-delete event on click', function() {
       const spyNotificationCloseEvent = sinon.spy();
-      events.on(
-        element,
-        'notification-before-delete',
-        spyNotificationCloseEvent
-      );
-      instance.button.dispatchEvent(
-        new CustomEvent('click', { bubbles: true })
-      );
+      events.on(element, 'notification-before-delete', spyNotificationCloseEvent);
+      instance.button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       expect(spyNotificationCloseEvent).to.have.been.called;
     });
 
     it('should emit notification-after-delete event on click', function() {
       const spyNotificationCloseEvent = sinon.spy();
-      events.on(
-        element,
-        'notification-after-delete',
-        spyNotificationCloseEvent
-      );
-      instance.button.dispatchEvent(
-        new CustomEvent('click', { bubbles: true })
-      );
+      events.on(element, 'notification-after-delete', spyNotificationCloseEvent);
+      instance.button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       expect(spyNotificationCloseEvent).to.have.been.called;
     });

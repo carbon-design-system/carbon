@@ -18,9 +18,7 @@ describe('Test pagination', function() {
     });
 
     it('Should set default options', function() {
-      expect(
-        (pagination = new Pagination(document.createElement('div'))).options
-      ).to.deep.equal({
+      expect((pagination = new Pagination(document.createElement('div'))).options).to.deep.equal({
         selectorInit: '[data-pagination]',
         selectorItemsPerPageInput: '[data-items-per-page]',
         selectorPageNumberInput: '[data-page-number-input]',
