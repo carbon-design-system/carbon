@@ -33,10 +33,8 @@ describe('File Uploader', function() {
         selectorInput: 'input[type="file"].bx--file-input',
         selectorContainer: '[data-file-container]',
         selectorCloseButton: '.bx--file-close',
-        eventBeforeDeleteFilenameFileuploader:
-          'fileuploader-before-delete-filename',
-        eventAfterDeleteFilenameFileuploader:
-          'fileuploader-after-delete-filename',
+        eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
+        eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
       });
     });
 
@@ -250,9 +248,7 @@ describe('File Uploader', function() {
     it('should have an empty stateContainer', function() {
       const filenameElement = instance._filenamesHTML('name', instance.inputId);
       instance.container.insertAdjacentHTML('beforeend', filenameElement);
-      const stateContainer = document.querySelector(
-        '.bx--file__state-container'
-      );
+      const stateContainer = document.querySelector('.bx--file__state-container');
       expect(stateContainer.innerHTML).to.equal('');
     });
 
@@ -277,9 +273,7 @@ describe('File Uploader', function() {
 
     it('should be called on input change event', function() {
       const spy = sinon.spy(instance, '_displayFilenames');
-      instance.input.dispatchEvent(
-        new CustomEvent('change', { bubbles: true })
-      );
+      instance.input.dispatchEvent(new CustomEvent('change', { bubbles: true }));
 
       expect(spy).to.have.been.called;
     });
@@ -305,18 +299,13 @@ describe('File Uploader', function() {
     });
 
     it('should be called', function() {
-      const testHTML =
-        '<ul><li class="test">...</li><li class="test">...</li></ul>';
+      const testHTML = '<ul><li class="test">...</li><li class="test">...</li></ul>';
       const div = document.createElement('div');
       div.id = 'bob';
       div.innerHTML = testHTML;
       document.body.appendChild(div);
       const spy = sinon.spy(instance, '_handleStateChange');
-      instance._handleStateChange(
-        [...document.querySelectorAll('.test')],
-        1,
-        div
-      );
+      instance._handleStateChange([...document.querySelectorAll('.test')], 1, div);
       expect(spy).to.have.been.called;
       document.body.removeChild(div);
     });

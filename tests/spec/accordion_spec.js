@@ -62,14 +62,12 @@ describe('Test accordion', function() {
 
     it('Should set active state on click', function() {
       buttonItem.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be
-        .true;
+      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.true;
     });
 
     it('Should remove active state on second click', function() {
       buttonItem.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be
-        .false;
+      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
     });
 
     after(function() {
@@ -96,24 +94,21 @@ describe('Test accordion', function() {
       const event = new CustomEvent('keypress', { bubbles: true });
       event.which = 86;
       listItem.dispatchEvent(event);
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be
-        .false;
+      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
     });
 
     it('Should set active state on enter or spacebar press', function() {
       const event = new CustomEvent('keypress', { bubbles: true });
       event.which = 13;
       listItem.dispatchEvent(event);
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be
-        .true;
+      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.true;
     });
 
     it('Should remove active state on second enter or spacebar press', function() {
       const event = new CustomEvent('keypress', { bubbles: true });
       event.which = 13;
       listItem.dispatchEvent(event);
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be
-        .false;
+      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
     });
 
     after(function() {

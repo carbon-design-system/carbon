@@ -25,10 +25,7 @@ describe('Test init component by search', function() {
     document.body.appendChild(container);
     Class.init();
     expect(spyCreate, 'Call count of create()').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([
-      container,
-      {},
-    ]);
+    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, {}]);
   });
 
   it('Should search from document if document node is given', function() {
@@ -37,10 +34,7 @@ describe('Test init component by search', function() {
     document.body.appendChild(container);
     Class.init(container.ownerDocument, options);
     expect(spyCreate, 'Call count of create()').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([
-      container,
-      options,
-    ]);
+    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, options]);
   });
 
   it('Should create an instance if the given element is of the widget', function() {
@@ -48,10 +42,7 @@ describe('Test init component by search', function() {
     container.dataset.myComponent = '';
     Class.init(container, options);
     expect(spyCreate, 'Call count of create()').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([
-      container,
-      options,
-    ]);
+    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, options]);
   });
 
   afterEach(function() {

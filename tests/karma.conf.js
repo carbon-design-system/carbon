@@ -114,12 +114,7 @@ const customLaunchers = {
 };
 
 const sauceLaunchers = {
-  chrome: [
-    'sl_chrome_sierra',
-    'sl_chrome_linux',
-    'sl_chrome_win7',
-    'sl_chrome_android',
-  ],
+  chrome: ['sl_chrome_sierra', 'sl_chrome_linux', 'sl_chrome_win7', 'sl_chrome_android'],
   firefox: ['sl_firefox_sierra', 'sl_firefox_linux', 'sl_firefox_win7'],
   safari: ['sl_safari_sierra', 'sl_safari_elcapitan'],
   microsoftedge: ['sl_microsoftedge_win10'],
@@ -131,9 +126,7 @@ const travisLaunchers = {
 };
 
 module.exports = function(config) {
-  const objectToStringPolyfillPath = require.resolve(
-    'core-js/library/modules/es6.object.to-string.js'
-  );
+  const objectToStringPolyfillPath = require.resolve('core-js/library/modules/es6.object.to-string.js');
 
   if (cloptions.sauce) {
     if (!process.env.TRAVIS) {
@@ -145,9 +138,7 @@ module.exports = function(config) {
       );
     }
     if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
-      throw new Error(
-        'Missing SAUCE_USERNAME or SAUCE_ACCESS_KEY environment variables.'
-      );
+      throw new Error('Missing SAUCE_USERNAME or SAUCE_ACCESS_KEY environment variables.');
     }
   }
 
@@ -164,17 +155,13 @@ module.exports = function(config) {
           'tests/spec/**/*.js',
         ]
       );
-      const htmlFiles = list.filter(file =>
-        minimatch(file, 'src/components/**/*.html')
-      );
+      const htmlFiles = list.filter(file => minimatch(file, 'src/components/**/*.html'));
       if (htmlFiles.length > 0) {
         const explanationArgs = htmlFiles.map(file => `-f ${file}`).join(' ');
         // eslint-disable-next-line no-console
         console.warn('WARNING: The given files contain component sample HTML.');
         // eslint-disable-next-line no-console
-        console.warn(
-          `You may have wanted:\n\tgulp test:a11y ${explanationArgs}`
-        );
+        console.warn(`You may have wanted:\n\tgulp test:a11y ${explanationArgs}`);
       }
       list.unshift('demo/polyfills/index.js');
       return list;
@@ -212,10 +199,7 @@ module.exports = function(config) {
         commonjs({
           include: ['node_modules/**'],
           namedExports: {
-            'node_modules/bluebird/js/release/bluebird.js': [
-              'delay',
-              'promisify',
-            ],
+            'node_modules/bluebird/js/release/bluebird.js': ['delay', 'promisify'],
           },
         }),
         babel({
@@ -232,10 +216,7 @@ module.exports = function(config) {
               },
             ],
           ],
-          plugins: [
-            'transform-class-properties',
-            ['transform-runtime', { polyfill: false }],
-          ].concat(
+          plugins: ['transform-class-properties', ['transform-runtime', { polyfill: false }]].concat(
             cloptions.debug
               ? []
               : [
@@ -257,10 +238,8 @@ module.exports = function(config) {
     customLaunchers,
 
     sauceLabs: {
-      testName: `carbon-components #${process.env
-        .TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`,
-      buildLabel: `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env
-        .TRAVIS_BUILD_ID})`,
+      testName: `carbon-components #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`,
+      buildLabel: `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`,
       recordScreenshots: true,
       tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
     },
@@ -336,9 +315,7 @@ module.exports = function(config) {
       ensureArray(cloptions.browsers || 'ChromeHeadless').map(browser => {
         const browserLower = browser.toLowerCase();
         return (
-          (cloptions.sauce && sauceLaunchers[browserLower]) ||
-          (process.env.TRAVIS && travisLaunchers[browserLower]) ||
-          browser
+          (cloptions.sauce && sauceLaunchers[browserLower]) || (process.env.TRAVIS && travisLaunchers[browserLower]) || browser
         );
       })
     ),

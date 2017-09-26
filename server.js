@@ -28,17 +28,15 @@ const getContent = glob =>
     if (filePaths.length === 0) {
       return undefined;
     }
-    return Promise.all(
-      filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))
-    ).then(contents => contents.reduce((a, b) => a.concat(b)));
+    return Promise.all(filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))).then(contents =>
+      contents.reduce((a, b) => a.concat(b))
+    );
   });
 
 const getEachContent = glob =>
   globby(glob).then(filePaths =>
     // eslint-disable-line arrow-body-style
-    Promise.all(
-      filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))
-    ).then(contents =>
+    Promise.all(filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))).then(contents =>
       contents.map((content, i) => ({
         name: path.basename(filePaths[i], '.html'),
         content,
@@ -48,29 +46,21 @@ const getEachContent = glob =>
 
 const componentDirs = readdir('src/components').then(items =>
   // eslint-disable-line arrow-body-style
-  Promise.all(
-    items.map(item => stat(path.resolve('src/components', item)))
-  ).then(stats => items.filter((item, i) => stats[i].isDirectory()))
+  Promise.all(items.map(item => stat(path.resolve('src/components', item)))).then(stats =>
+    items.filter((item, i) => stats[i].isDirectory())
+  )
 );
 
 const topRouteHandler = (req, res) => {
   const name = req.params.component;
 
-  if (
-    name &&
-    path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
-      '..'
-  ) {
+  if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
     componentDirs
       .then(dirs =>
         // eslint-disable-line arrow-body-style
-        Promise.all(
-          dirs.map(dir =>
-            getEachContent(path.resolve('src/components', dir, '**/*.html'))
-          )
-        )
+        Promise.all(dirs.map(dir => getEachContent(path.resolve('src/components', dir, '**/*.html'))))
           .then(subItemsList =>
             subItemsList.map(
               (subItems, i) =>
@@ -79,9 +69,7 @@ const topRouteHandler = (req, res) => {
                 Object.assign(
                   {
                     name: dirs[i],
-                    selected:
-                      name === dirs[i] ||
-                      subItems.find(subItem => name === subItem.name),
+                    selected: name === dirs[i] || subItems.find(subItem => name === subItem.name),
                   },
                   subItems.length <= 1
                     ? {
@@ -104,9 +92,7 @@ const topRouteHandler = (req, res) => {
           .then(links => {
             if (!name) {
               const firstLink = links[0];
-              (firstLink.items
-                ? firstLink.items[0]
-                : firstLink).selected = true;
+              (firstLink.items ? firstLink.items[0] : firstLink).selected = true;
             }
             return links;
           })

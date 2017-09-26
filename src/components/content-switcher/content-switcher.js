@@ -4,11 +4,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-class ContentSwitcher extends mixin(
-  createComponent,
-  initComponentBySearch,
-  eventedState
-) {
+class ContentSwitcher extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * Set of content switcher buttons.
    * @extends CreateComponent
@@ -60,9 +56,7 @@ class ContentSwitcher extends mixin(
     // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
     const itemLink = item.querySelector(this.options.selectorLink);
     if (itemLink) {
-      [
-        ...this.element.querySelectorAll(this.options.selectorLink),
-      ].forEach(link => {
+      [...this.element.querySelectorAll(this.options.selectorLink)].forEach(link => {
         if (link !== itemLink) {
           link.setAttribute('aria-selected', 'false');
         }
@@ -70,23 +64,17 @@ class ContentSwitcher extends mixin(
       itemLink.setAttribute('aria-selected', 'true');
     }
 
-    const selectorButtons = [
-      ...this.element.querySelectorAll(this.options.selectorButton),
-    ];
+    const selectorButtons = [...this.element.querySelectorAll(this.options.selectorButton)];
 
     selectorButtons.forEach(button => {
       if (button !== item) {
         button.classList.toggle(this.options.classActive, false);
-        [
-          ...button.ownerDocument.querySelectorAll(button.dataset.target),
-        ].forEach(element => element.setAttribute('hidden', ''));
+        [...button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => element.setAttribute('hidden', ''));
       }
     });
 
     item.classList.toggle(this.options.classActive, true);
-    [
-      ...item.ownerDocument.querySelectorAll(item.dataset.target),
-    ].forEach(element => element.removeAttribute('hidden'));
+    [...item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => element.removeAttribute('hidden'));
 
     if (callback) {
       callback();

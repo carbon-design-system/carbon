@@ -33,10 +33,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
       this.element.addEventListener('keypress', event => {
         const item = eventMatches(event, this.options.selectorAccordionItem);
 
-        if (
-          item &&
-          !eventMatches(event, this.options.selectorAccordionContent)
-        ) {
+        if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
           this._handleKeypress(event);
         }
       });
@@ -44,9 +41,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
   }
 
   _checkIfButton() {
-    return (
-      this.element.firstElementChild.firstElementChild.nodeName === 'BUTTON'
-    );
+    return this.element.firstElementChild.firstElementChild.nodeName === 'BUTTON';
   }
 
   /**
@@ -60,16 +55,11 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
   }
 
   _toggle(element) {
-    const heading = element.querySelector(
-      this.options.selectorAccordionItemHeading
-    );
+    const heading = element.querySelector(this.options.selectorAccordionItemHeading);
     const expanded = heading.getAttribute('aria-expanded');
 
     if (expanded !== null) {
-      heading.setAttribute(
-        'aria-expanded',
-        expanded === 'true' ? 'false' : 'true'
-      );
+      heading.setAttribute('aria-expanded', expanded === 'true' ? 'false' : 'true');
     }
 
     element.classList.toggle(this.options.classActive);

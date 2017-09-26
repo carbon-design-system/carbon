@@ -12,9 +12,7 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
     this.filmstrip = this.element.querySelector(this.options.selectorFilmstrip);
-    this.carouselItem = this.element.querySelector(
-      this.options.selectorCarouselItem
-    );
+    this.carouselItem = this.element.querySelector(this.options.selectorCarouselItem);
 
     this.element.addEventListener('click', evt => this.handleClick(evt));
   }
@@ -32,9 +30,7 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
     const itemWidth = this.carouselItem.getBoundingClientRect().width + 20;
     const re = /\.*translateX\((.*)px\)/i;
 
-    const translateXValue = this.filmstrip.style.transform
-      ? Number(this.filmstrip.style.transform.split(re)[1])
-      : 0;
+    const translateXValue = this.filmstrip.style.transform ? Number(this.filmstrip.style.transform.split(re)[1]) : 0;
     const directionValue = direction === 'right' ? -1 : 1;
 
     const itemWidthDirection = itemWidth * directionValue;

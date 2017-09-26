@@ -6,9 +6,7 @@ import HTML from '../../src/components/content-switcher/content-switcher.html';
 describe('Test content switcher', function() {
   describe('Constructor', function() {
     it('Should set default options', function() {
-      const contentSwitcher = new ContentSwitcher(
-        document.createElement('div')
-      );
+      const contentSwitcher = new ContentSwitcher(document.createElement('div'));
       expect(contentSwitcher.options).to.deep.equal({
         selectorInit: '[data-content-switcher]',
         selectorButton: 'input[type="radio"], .bx--content-switcher-btn',
@@ -46,12 +44,8 @@ describe('Test content switcher', function() {
     it('Should update active item upon clicking', function() {
       const event = new CustomEvent('click', { bubbles: true });
       buttons[1].dispatchEvent(event);
-      expect(
-        buttons[1].classList.contains(instance.options.classActive)
-      ).to.equal(true);
-      expect(
-        buttons[0].classList.contains(instance.options.classActive)
-      ).to.equal(false);
+      expect(buttons[1].classList.contains(instance.options.classActive)).to.equal(true);
+      expect(buttons[0].classList.contains(instance.options.classActive)).to.equal(false);
     });
 
     it('Should provide a way to cancel switching item upon clicking', async function() {
@@ -63,10 +57,8 @@ describe('Test content switcher', function() {
         buttons[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
       expect(eventBeforeSelected.detail.item).to.equal(buttons[1]);
-      expect(buttons[0].classList.contains('bx--content-switcher--selected')).to
-        .be.true;
-      expect(buttons[1].classList.contains('bx--content-switcher--selected')).to
-        .be.false;
+      expect(buttons[0].classList.contains('bx--content-switcher--selected')).to.be.true;
+      expect(buttons[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
 
     afterEach(function() {
@@ -94,21 +86,15 @@ describe('Test content switcher', function() {
 
     it('Should update selected item when using setActive method', function() {
       instance.setActive(buttons[1]);
-      expect(buttons[0].classList.contains('bx--content-switcher--selected')).to
-        .be.false;
-      expect(buttons[1].classList.contains('bx--content-switcher--selected')).to
-        .be.true;
+      expect(buttons[0].classList.contains('bx--content-switcher--selected')).to.be.false;
+      expect(buttons[1].classList.contains('bx--content-switcher--selected')).to.be.true;
     });
 
     it('Should update active item upon an API call', async function() {
-      const item = await promisify(instance.setActive, { context: instance })(
-        buttons[1]
-      );
+      const item = await promisify(instance.setActive, { context: instance })(buttons[1]);
       expect(item).to.equal(buttons[1]);
-      expect(buttons[0].classList.contains('bx--content-switcher--selected')).to
-        .be.false;
-      expect(buttons[1].classList.contains('bx--content-switcher--selected')).to
-        .be.true;
+      expect(buttons[0].classList.contains('bx--content-switcher--selected')).to.be.false;
+      expect(buttons[1].classList.contains('bx--content-switcher--selected')).to.be.true;
     });
 
     it('Should provide a way to cancel switching item upon an API call', async function() {
@@ -126,10 +112,8 @@ describe('Test content switcher', function() {
       expect(eventBeforeSelected.detail.item).to.equal(buttons[1]);
       expect(errorBeforeSelected.canceled).to.be.true;
       expect(errorBeforeSelected.item).to.equal(buttons[1]);
-      expect(buttons[0].classList.contains('bx--content-switcher--selected')).to
-        .be.true;
-      expect(buttons[1].classList.contains('bx--content-switcher--selected')).to
-        .be.false;
+      expect(buttons[0].classList.contains('bx--content-switcher--selected')).to.be.true;
+      expect(buttons[1].classList.contains('bx--content-switcher--selected')).to.be.false;
     });
 
     afterEach(function() {
@@ -182,9 +166,7 @@ describe('Test content switcher', function() {
 
     beforeEach(function() {
       buttonNodes.forEach((buttonNode, i) => {
-        buttonNode.classList[i === 0 ? 'add' : 'remove'](
-          'bx--content-switcher--selected'
-        );
+        buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--content-switcher--selected');
       });
     });
 
@@ -192,16 +174,12 @@ describe('Test content switcher', function() {
       try {
         buttonNodes[0].dataset.target = `.${id}_0`;
         buttonNodes[1].dataset.target = `.${id}_1`;
-        buttonNodes[1].dispatchEvent(
-          new CustomEvent('click', { bubbles: true })
-        );
+        buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
         paneNodes[0].forEach(node => {
-          expect(node.getAttribute('hidden'), 'hidden of unselected item').to
-            .exist;
+          expect(node.getAttribute('hidden'), 'hidden of unselected item').to.exist;
         });
         paneNodes[1].forEach(node => {
-          expect(node.getAttribute('hidden'), 'hidden of selected item').to.not
-            .exist;
+          expect(node.getAttribute('hidden'), 'hidden of selected item').to.not.exist;
         });
       } finally {
         // eslint-disable-next-line no-param-reassign

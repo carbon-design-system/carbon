@@ -28,9 +28,7 @@ describe('Test floating action button', function() {
     it('Should cancel the event for <a>', function() {
       // eslint-disable-next-line max-len
       // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
-      expect(
-        element.dispatchEvent(new CustomEvent('click', { cancelable: true }))
-      ).to.be.false;
+      expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).to.be.false;
     });
 
     it('Should turn to open state from closed state', function() {
@@ -137,9 +135,7 @@ describe('Test floating action button', function() {
       document.body.appendChild(container);
       try {
         FabButton.init(container).release();
-        elementInContainer.dispatchEvent(
-          new CustomEvent('click', { bubbles: true })
-        );
+        elementInContainer.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(elementInContainer.dataset.state).not.to.equal('closed');
       } finally {
         document.body.removeChild(container);

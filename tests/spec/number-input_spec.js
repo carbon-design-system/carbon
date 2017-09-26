@@ -110,9 +110,7 @@ describe('Test Number Input', function() {
       inputNode.value = '1';
       const e = await new Promise(resolve => {
         events.on(document.body, 'change', resolve);
-        downArrowNode.dispatchEvent(
-          new CustomEvent('click', { bubbles: true })
-        );
+        downArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
       expect(e.cancelable).to.be.false;
       expect(inputNode.value).to.equal('0');

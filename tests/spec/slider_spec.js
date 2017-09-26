@@ -80,9 +80,7 @@ describe('Test slider', function() {
     let rafStub;
     beforeEach(function() {
       mockRaf = createMockRaf();
-      rafStub = sinon
-        .stub(window, 'requestAnimationFrame')
-        .callsFake(mockRaf.raf);
+      rafStub = sinon.stub(window, 'requestAnimationFrame').callsFake(mockRaf.raf);
       container = document.createElement('div');
       container.innerHTML = SliderHTML;
       document.body.appendChild(container);
@@ -131,9 +129,7 @@ describe('Test slider', function() {
     let rafStub;
     beforeEach(function() {
       mockRaf = createMockRaf();
-      rafStub = sinon
-        .stub(window, 'requestAnimationFrame')
-        .callsFake(mockRaf.raf);
+      rafStub = sinon.stub(window, 'requestAnimationFrame').callsFake(mockRaf.raf);
       container = document.createElement('div');
       container.innerHTML = SliderHTML;
       document.body.appendChild(container);

@@ -46,27 +46,19 @@ describe('Test Copy Button', function() {
     });
 
     it('Should not show the feedback tooltip before click', function() {
-      expect(
-        feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
-      ).to.be.false;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
     });
 
     it('Should show the feedback tooltip on click', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(
-        feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
-      ).to.be.true;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
     });
 
     it('Should hide the feedback tooltip after specified timeout value', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(
-        feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
-      ).to.be.true;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
       clock.tick(2000);
-      expect(
-        feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')
-      ).to.be.false;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
     });
 
     afterEach(function() {

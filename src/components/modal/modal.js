@@ -5,11 +5,7 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class Modal extends mixin(
-  createComponent,
-  initComponentByLauncher,
-  eventedShowHideState
-) {
+class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowHideState) {
   /**
    * Modal dialog.
    * @extends CreateComponent
@@ -66,14 +62,8 @@ class Modal extends mixin(
   _changeState(state, detail, callback) {
     const transitionEnd = () => {
       this.element.removeEventListener('transitionend', transitionEnd);
-      if (
-        state === 'shown' &&
-        this.element.offsetWidth > 0 &&
-        this.element.offsetHeight > 0
-      ) {
-        (this.element.querySelector(this.options.selectorPrimaryFocus) ||
-          this.element)
-          .focus();
+      if (state === 'shown' && this.element.offsetWidth > 0 && this.element.offsetHeight > 0) {
+        (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
       }
       callback();
     };
@@ -85,12 +75,7 @@ class Modal extends mixin(
     if (state === 'shown') {
       const hasFocusin = 'onfocusin' in this.element.ownerDocument.defaultView;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      this._handleFocusinListener = on(
-        this.element.ownerDocument,
-        focusinEventName,
-        this._handleFocusin,
-        !hasFocusin
-      );
+      this._handleFocusinListener = on(this.element.ownerDocument, focusinEventName, this._handleFocusin, !hasFocusin);
     }
 
     if (state === 'hidden') {
@@ -113,10 +98,7 @@ class Modal extends mixin(
     });
 
     if (this.keydownHandler) {
-      this.element.ownerDocument.body.removeEventListener(
-        'keydown',
-        this.keydownHandler
-      );
+      this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
       this.keydownHandler = null;
     }
 
@@ -126,10 +108,7 @@ class Modal extends mixin(
       }
     };
 
-    this.element.ownerDocument.body.addEventListener(
-      'keydown',
-      this.keydownHandler
-    );
+    this.element.ownerDocument.body.addEventListener('keydown', this.keydownHandler);
   }
 
   /**
@@ -138,20 +117,14 @@ class Modal extends mixin(
    * @private
    */
   _handleFocusin = evt => {
-    if (
-      this.element.classList.contains(this.options.classVisible) &&
-      !this.element.contains(evt.target)
-    ) {
+    if (this.element.classList.contains(this.options.classVisible) && !this.element.contains(evt.target)) {
       this.element.focus();
     }
   };
 
   release() {
     if (this.keydownHandler) {
-      this.element.ownerDocument.body.removeEventListener(
-        'keydown',
-        this.keydownHandler
-      );
+      this.element.ownerDocument.body.removeEventListener('keydown', this.keydownHandler);
       this.keydownHandler = null;
     }
     if (this._handleFocusinListener) {

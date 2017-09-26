@@ -20,9 +20,7 @@ describe('Test profile switcher', function() {
     it('Should set default options', function() {
       const container = document.createElement('div');
       container.innerHTML = unifiedHeaderHtml;
-      profileSwitcher = new ProfileSwitcher(
-        container.querySelector('[data-profile-switcher]')
-      );
+      profileSwitcher = new ProfileSwitcher(container.querySelector('[data-profile-switcher]'));
       expect(profileSwitcher.options).to.deep.equal({
         selectorInit: '[data-profile-switcher]',
         selectorProfileSwitcher: '[data-profile-switcher]',

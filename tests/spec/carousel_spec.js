@@ -59,9 +59,7 @@ describe('Carousel', () => {
     it('should be called on click', () => {
       const spy = sinon.spy(instance, 'sideScroll');
       const event = new CustomEvent('click', { bubbles: true });
-      const rightButton = element.querySelector(
-        instance.options.selectorScrollRight
-      );
+      const rightButton = element.querySelector(instance.options.selectorScrollRight);
       rightButton.dispatchEvent(event);
       expect(spy).to.have.been.called;
       spy.restore();
@@ -69,9 +67,7 @@ describe('Carousel', () => {
 
     it('should scroll right on click', () => {
       const initalStyle = instance.filmstrip.style.transform;
-      const rightButton = element.querySelector(
-        instance.options.selectorScrollRight
-      );
+      const rightButton = element.querySelector(instance.options.selectorScrollRight);
       const event = new CustomEvent('click', { bubbles: true });
       rightButton.dispatchEvent(event);
       expect(initalStyle).to.not.equal(instance.filmstrip.style.transform);
@@ -79,9 +75,7 @@ describe('Carousel', () => {
 
     it('should scroll left on click', () => {
       const initalStyle = instance.filmstrip.style.transform;
-      const leftButton = element.querySelector(
-        instance.options.selectorScrollLeft
-      );
+      const leftButton = element.querySelector(instance.options.selectorScrollLeft);
       const event = new CustomEvent('click', { bubbles: true });
       leftButton.dispatchEvent(event);
       expect(initalStyle).to.not.equal(instance.filmstrip.style.transform);

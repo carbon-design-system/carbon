@@ -50,16 +50,10 @@ describe('Test Loading', function() {
     it('Should remove and add bx--loading--stop class attribute of DOM element', function() {
       const spinner = new Loading(document.createElement('div'));
       spinner.set(false);
-      expect(
-        spinner.element.classList.contains('bx--loading--stop'),
-        'Class for stopped state'
-      ).to.be.true;
+      expect(spinner.element.classList.contains('bx--loading--stop'), 'Class for stopped state').to.be.true;
 
       spinner.set(true);
-      expect(
-        spinner.element.classList.contains('bx--loading--stop'),
-        'Class for started state'
-      ).to.be.false;
+      expect(spinner.element.classList.contains('bx--loading--stop'), 'Class for started state').to.be.false;
     });
   });
 

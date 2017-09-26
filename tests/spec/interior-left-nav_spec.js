@@ -93,17 +93,13 @@ describe('Test interior left nav', function() {
       element = document.querySelector('[data-interior-left-nav]');
       instance3 = new InteriorLeftNav(element);
 
-      const nested = document.querySelectorAll(
-        '.left-nav-list__item--has-children'
-      );
+      const nested = document.querySelectorAll('.left-nav-list__item--has-children');
 
       for (let i = 0; i < nested.length; i += 1) {
         nested[i].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       }
 
-      const expanded = document.querySelectorAll(
-        '.left-nav-list__item--expanded'
-      );
+      const expanded = document.querySelectorAll('.left-nav-list__item--expanded');
       expect(expanded.length).to.equal(nested.length);
     });
   });
@@ -122,9 +118,7 @@ describe('Test interior left nav', function() {
     });
 
     it('should be called', function() {
-      const item = document.querySelector(
-        instance.options.selectorLeftNavListItem
-      );
+      const item = document.querySelector(instance.options.selectorLeftNavListItem);
       const spy = sinon.spy(instance, 'addActiveListItem');
       instance.addActiveListItem(item);
       expect(spy).to.have.been.called;

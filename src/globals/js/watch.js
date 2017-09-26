@@ -3,11 +3,7 @@ import { componentClasses } from '../../index';
 
 const forEach = Array.prototype.forEach;
 
-const createAndReleaseComponentsUponDOMMutation = (
-  records,
-  componentClassesForWatchInit,
-  options
-) => {
+const createAndReleaseComponentsUponDOMMutation = (records, componentClassesForWatchInit, options) => {
   records.forEach(record => {
     forEach.call(record.addedNodes, node => {
       if (node.nodeType === Node.ELEMENT_NODE) {
@@ -25,15 +21,12 @@ const createAndReleaseComponentsUponDOMMutation = (
               instance.release();
             }
           } else {
-            forEach.call(
-              node.querySelectorAll(Clz.options.selectorInit),
-              element => {
-                const instance = Clz.components.get(element);
-                if (instance) {
-                  instance.release();
-                }
+            forEach.call(node.querySelectorAll(Clz.options.selectorInit), element => {
+              const instance = Clz.components.get(element);
+              if (instance) {
+                instance.release();
               }
-            );
+            });
           }
         });
       }
@@ -48,30 +41,17 @@ const createAndReleaseComponentsUponDOMMutation = (
  * @returns {Handle} The handle to stop watching.
  */
 export default function(target = document, options = {}) {
-  if (
-    target.nodeType !== Node.ELEMENT_NODE &&
-    target.nodeType !== Node.DOCUMENT_NODE
-  ) {
-    throw new TypeError(
-      'DOM document or DOM element should be given to watch for DOM node to create/release components.'
-    );
+  if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
+    throw new TypeError('DOM document or DOM element should be given to watch for DOM node to create/release components.');
   }
 
-  const handles = componentClasses
-    .map(Clz => Clz.init(target, options))
-    .filter(Boolean);
+  const handles = componentClasses.map(Clz => Clz.init(target, options)).filter(Boolean);
   handles.push(initCheckbox());
 
-  const componentClassesForWatchInit = componentClasses.filter(
-    Clz => !Clz.forLazyInit
-  );
+  const componentClassesForWatchInit = componentClasses.filter(Clz => !Clz.forLazyInit);
 
   let observer = new MutationObserver(records => {
-    createAndReleaseComponentsUponDOMMutation(
-      records,
-      componentClassesForWatchInit,
-      options
-    );
+    createAndReleaseComponentsUponDOMMutation(records, componentClassesForWatchInit, options);
   });
   observer.observe(target, {
     childList: true,

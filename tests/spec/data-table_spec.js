@@ -91,11 +91,7 @@ describe('Test responsive table', function() {
     it('Clicking a row expand table cell should trigger the event', function() {
       const rowExpansion = document.querySelector('.bx--table-expand');
       const spyToggleRowExpandEvent = sinon.spy();
-      events.on(
-        element.ownerDocument.body,
-        'responsive-table-aftertoggleexpand',
-        spyToggleRowExpandEvent
-      );
+      events.on(element.ownerDocument.body, 'responsive-table-aftertoggleexpand', spyToggleRowExpandEvent);
       rowExpansion.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       expect(spyToggleRowExpandEvent).to.have.been.called;
