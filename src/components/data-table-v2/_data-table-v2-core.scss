@@ -1,5 +1,7 @@
 .bx--data-table-v2-container {
   width: 100%;
+  min-width: 500px;
+  overflow-x: auto;
 }
 
 .bx--data-table-v2 {
@@ -8,9 +10,8 @@
 
   thead {
     background-color: $ui-02;
-    font-size: rem(12px);
+    font-size: rem(14px);
     font-weight: 700;
-    text-transform: uppercase;
   }
 
   tbody {
@@ -78,6 +79,27 @@
 .bx--data-table-v2--zebra {
   tbody tr:nth-child(even) {
     background-color: $ui-02;
+  }
+}
+
+.bx--data-table-v2--no-border {
+  tr {
+    &:last-of-type {
+      td {
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  th,
+  td {
+    &:first-of-type {
+      border-left-color: transparent;
+    }
+
+    &:last-of-type {
+      border-right-color: 1px solid $ui-04;
+    }
   }
 }
 

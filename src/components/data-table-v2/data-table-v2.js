@@ -32,6 +32,7 @@ class DataTableV2 extends mixin(
     this.batchActionEl = this.element.querySelector('.bx--batch-actions');
     this.countEl = this.element.querySelector('[data-items-selected]');
     this.cancelEl = this.element.querySelector('.bx--batch-summary__cancel');
+    this.tableHeaders = this.element.querySelectorAll('th');
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
     this.expandCells = [];
     this.expandableRows = [];
@@ -102,10 +103,29 @@ class DataTableV2 extends mixin(
     this.batchActionEl.addEventListener('transitionend', transition);
   };
 
-  _actionBarAnimate = () => {};
+  _toggleSort = detail => {
+    const { element, previousValue } = detail;
 
-  _toggleRowExpand = () => {};
-  _toggleSort = () => {};
+    this.tableHeaders.forEach(header => {
+      const sortEl = header.querySelector('.bx--table-sort-v2');
+
+      if ((sortEl !== null) & (sortEl !== element)) {
+        sortEl.classList.remove(this.options.classTableSortActive);
+        sortEl.classList.remove(this.options.classTableSortAscending);
+      }
+    });
+
+    if (!previousValue || previousValue === 'descending') {
+      element.dataset.previousValue = 'ascending';
+      element.classList.add(this.options.classTableSortActive);
+      element.classList.add(this.options.classTableSortAscending);
+    } else {
+      element.dataset.previousValue = 'descending';
+      element.classList.add(this.options.classTableSortActive);
+      element.classList.remove(this.options.classTableSortAscending);
+    }
+  };
+
   _toggleSelect = detail => {
     const { element } = detail;
     const checked = element.checked;
@@ -280,9 +300,13 @@ class DataTableV2 extends mixin(
     classExpandableRowEven: 'bx--expandable-row--even-v2',
     classExpandableRowHidden: 'bx--expandable-row--hidden-v2',
     classExpandableRowHover: 'bx--expandable-row--hover-v2',
+    classTableSortAscending: 'bx--table-sort-v2--ascending',
+    classTableSortActive: 'bx--table-sort-v2--active',
     classParentRowEven: 'bx--parent-row--even-v2',
     eventBeforeExpand: 'responsive-table-beforetoggleexpand',
     eventAfterExpand: 'responsive-table-aftertoggleexpand',
+    eventBeforeSort: 'responsive-table-beforetogglesort',
+    eventAfterSort: 'responsive-table-aftertogglesort',
     eventTrigger: '[data-event]',
     eventParentContainer: '[data-parent-row]',
   };
