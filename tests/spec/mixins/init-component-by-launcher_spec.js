@@ -33,11 +33,7 @@ describe('Test init component by launcher', function() {
   it('Should do nothing if there is no target modals for a button upon button click', function() {
     launcherButton = document.createElement('a');
     document.body.appendChild(launcherButton);
-    expect(
-      launcherButton.dispatchEvent(
-        new CustomEvent('click', { bubbles: true, cancelable: true })
-      )
-    ).to.be.true;
+    expect(launcherButton.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.true;
   });
 
   it('Should create an instance if the given element is of the widget', function() {
@@ -45,10 +41,7 @@ describe('Test init component by launcher', function() {
     container.dataset.myComponent = '';
     context = Class.init(container, initOptions);
     expect(spyCreate, 'Call count of create()').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([
-      container,
-      initOptions,
-    ]);
+    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, initOptions]);
   });
 
   it('Should throw if launcher targets to multiple components', function() {
@@ -83,17 +76,11 @@ describe('Test init component by launcher', function() {
     launcherButton.dataset.initTarget = '[data-my-component]';
     document.body.appendChild(launcherButton);
     context = Class.init();
-    expect(spyCreate, 'Call count of create() before hitting launcher button')
-      .not.have.been.called;
+    expect(spyCreate, 'Call count of create() before hitting launcher button').not.have.been.called;
     launcherButton.dispatchEvent(new CustomEvent('foo', { bubbles: true }));
-    expect(spyCreate, 'Call count of create() after hitting launcher button').to
-      .be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([
-      container,
-      {},
-    ]);
-    expect(spyCreatedByLauncher, 'Call count of createdByLauncher()').to.have
-      .been.calledOnce;
+    expect(spyCreate, 'Call count of create() after hitting launcher button').to.be.calledOnce;
+    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, {}]);
+    expect(spyCreatedByLauncher, 'Call count of createdByLauncher()').to.have.been.calledOnce;
   });
 
   it('Should cancel the event if launcher button is <a>', function() {
@@ -104,11 +91,7 @@ describe('Test init component by launcher', function() {
     launcherButton.dataset.initTarget = '[data-my-component]';
     document.body.appendChild(launcherButton);
     context = Class.init();
-    expect(
-      launcherButton.dispatchEvent(
-        new CustomEvent('foo', { bubbles: true, cancelable: true })
-      )
-    ).to.be.false;
+    expect(launcherButton.dispatchEvent(new CustomEvent('foo', { bubbles: true, cancelable: true }))).to.be.false;
   });
 
   afterEach(function() {

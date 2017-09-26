@@ -69,9 +69,7 @@ describe('ProgressIndicator', function() {
     });
 
     it('should remove the svg contained inside given element param', function() {
-      const el = instance.element.querySelector(
-        instance.options.selectorIncomplete
-      );
+      const el = instance.element.querySelector(instance.options.selectorIncomplete);
       instance._updateStep({
         element: el,
         className: instance.options.classComplete,
@@ -80,16 +78,12 @@ describe('ProgressIndicator', function() {
     });
 
     it('should update className with given className param', function() {
-      const el = instance.element.querySelector(
-        instance.options.selectorIncomplete
-      );
+      const el = instance.element.querySelector(instance.options.selectorIncomplete);
       instance._updateStep({
         element: el,
         className: instance.options.classComplete,
       });
-      expect(el.classList.contains(instance.options.classComplete)).to.equal(
-        true
-      );
+      expect(el.classList.contains(instance.options.classComplete)).to.equal(true);
     });
 
     afterEach(function() {
@@ -162,9 +156,7 @@ describe('ProgressIndicator', function() {
 
     it('element value should have correct className: classCurrent', function() {
       const el = instance.getCurrent().element;
-      expect(el.classList.contains(instance.options.classCurrent)).to.equal(
-        true
-      );
+      expect(el.classList.contains(instance.options.classCurrent)).to.equal(true);
     });
 
     afterEach(function() {
@@ -193,9 +185,7 @@ describe('ProgressIndicator', function() {
     it('should update className of new currentIndex', function() {
       instance.setCurrent(2);
       const el = instance.getCurrent().element;
-      expect(el.classList.contains(instance.options.classCurrent)).to.equal(
-        true
-      );
+      expect(el.classList.contains(instance.options.classCurrent)).to.equal(true);
     });
 
     it('should set state of previous steps to complete', function() {
@@ -206,12 +196,8 @@ describe('ProgressIndicator', function() {
         .map(step => step)
         .filter(step => step.index < 2)[0];
 
-      expect(
-        previousStep.element.classList.contains(instance.options.classComplete)
-      ).to.equal(true);
-      expect(
-        previousStep.element.classList.contains(instance.options.classCurrent)
-      ).to.equal(false);
+      expect(previousStep.element.classList.contains(instance.options.classComplete)).to.equal(true);
+      expect(previousStep.element.classList.contains(instance.options.classCurrent)).to.equal(false);
     });
 
     it('should set state of next steps to incomplete', function() {
@@ -222,15 +208,9 @@ describe('ProgressIndicator', function() {
         .map(step => step)
         .filter(step => step.index > 2)[0];
 
-      expect(
-        nextStep.element.classList.contains(instance.options.classIncomplete)
-      ).to.equal(true);
-      expect(
-        nextStep.element.classList.contains(instance.options.classComplete)
-      ).to.equal(false);
-      expect(
-        nextStep.element.classList.contains(instance.options.classCurrent)
-      ).to.equal(false);
+      expect(nextStep.element.classList.contains(instance.options.classIncomplete)).to.equal(true);
+      expect(nextStep.element.classList.contains(instance.options.classComplete)).to.equal(false);
+      expect(nextStep.element.classList.contains(instance.options.classCurrent)).to.equal(false);
     });
 
     afterEach(function() {

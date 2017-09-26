@@ -42,9 +42,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
   _getInput(index) {
     const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
     const id = `#${rows[index].getAttribute('for')}`;
-    return this.element.ownerDocument.querySelector(
-      `${id}.bx--structured-list-input`
-    );
+    return this.element.ownerDocument.querySelector(`${id}.bx--structured-list-input`);
   }
 
   _handleInputChecked(index) {
@@ -54,9 +52,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
 
   _handleClick(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row =>
-      row.classList.remove(this.options.classActive)
-    );
+    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
     }
@@ -65,14 +61,10 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
   // Handle Enter or Space keydown events for selecting <label> rows
   _handleKeydownChecked(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row =>
-      row.classList.remove(this.options.classActive)
-    );
+    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
-      const input = this.element.querySelector(
-        `#${selectedRow.getAttribute('for')}.bx--structured-list-input`
-      );
+      const input = this.element.querySelector(`#${selectedRow.getAttribute('for')}.bx--structured-list-input`);
       input.checked = true;
     }
   }
@@ -113,8 +105,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch) {
 
   static options = {
     selectorInit: '[data-structured-list]',
-    selectorRow:
-      '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
+    selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
     classActive: 'bx--structured-list-row--selected',
   };
 }

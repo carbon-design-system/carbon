@@ -3,11 +3,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
 
-class FileUploader extends mixin(
-  createComponent,
-  initComponentBySearch,
-  eventedState
-) {
+class FileUploader extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * File uploader.
    * @extends CreateComponent
@@ -72,14 +68,10 @@ class FileUploader extends mixin(
   };
 
   _getStateContainers() {
-    const stateContainers = [
-      ...this.element.querySelectorAll(`[data-for=${this.inputId}]`),
-    ];
+    const stateContainers = [...this.element.querySelectorAll(`[data-for=${this.inputId}]`)];
 
     if (stateContainers.length === 0) {
-      throw new TypeError(
-        'State container elements not found; invoke _displayFilenames() first'
-      );
+      throw new TypeError('State container elements not found; invoke _displayFilenames() first');
     }
 
     if (stateContainers[0].dataset.for !== this.inputId) {
@@ -93,21 +85,15 @@ class FileUploader extends mixin(
    * Inject selected files into DOM. Invoked on change event.
    */
   _displayFilenames() {
-    const container = this.element.querySelector(
-      this.options.selectorContainer
-    );
-    const HTMLString = [...this.input.files]
-      .map(file => this._filenamesHTML(file.name, this.inputId))
-      .join('');
+    const container = this.element.querySelector(this.options.selectorContainer);
+    const HTMLString = [...this.input.files].map(file => this._filenamesHTML(file.name, this.inputId)).join('');
 
     container.insertAdjacentHTML('afterbegin', HTMLString);
   }
 
   _removeState(element) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) {
-      throw new TypeError(
-        'DOM element should be given to initialize this widget.'
-      );
+      throw new TypeError('DOM element should be given to initialize this widget.');
     }
     while (element.firstChild) {
       element.removeChild(element.firstChild);
@@ -134,11 +120,7 @@ class FileUploader extends mixin(
     const stateContainers = this._getStateContainers();
 
     if (state === 'edit') {
-      this._handleStateChange(
-        stateContainers,
-        selectIndex,
-        this._closeButtonHTML()
-      );
+      this._handleStateChange(stateContainers, selectIndex, this._closeButtonHTML());
       stateContainers.forEach(el => {
         el.addEventListener('click', evt => {
           const detail = {
@@ -155,11 +137,7 @@ class FileUploader extends mixin(
     }
 
     if (state === 'complete') {
-      this._handleStateChange(
-        stateContainers,
-        selectIndex,
-        this._checkmarkHTML()
-      );
+      this._handleStateChange(stateContainers, selectIndex, this._checkmarkHTML());
     }
   }
 
@@ -175,8 +153,7 @@ class FileUploader extends mixin(
     selectorInput: 'input[type="file"].bx--file-input',
     selectorContainer: '[data-file-container]',
     selectorCloseButton: '.bx--file-close',
-    eventBeforeDeleteFilenameFileuploader:
-      'fileuploader-before-delete-filename',
+    eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
     eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
   };
 }

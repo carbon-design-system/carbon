@@ -28,9 +28,7 @@ export default function(ToMix) {
      * @abstract
      */
     handleBlur() {
-      throw new Error(
-        'Components inheriting TrackBlur mix-in must implement handleBlur() method.'
-      );
+      throw new Error('Components inheriting TrackBlur mix-in must implement handleBlur() method.');
     }
 
     release() {
