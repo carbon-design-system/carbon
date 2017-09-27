@@ -22,6 +22,10 @@
     background-color: $color__white;
     border-right: 1px solid $color__gray-1;
 
+    &--v6 {
+      top: rem(50px);
+    }
+
     .left-nav-list {
       list-style: none;
       display: flex;
@@ -255,6 +259,10 @@
       margin-top: auto;
       margin-bottom: rem(90px);
       padding: rem(14px) rem(16px);
+
+      &--v6 {
+        margin-bottom: rem(50px);
+      }
 
       &:hover,
       &:focus {
