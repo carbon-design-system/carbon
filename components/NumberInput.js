@@ -22,13 +22,13 @@ class NumberInput extends Component {
     disabled: false,
     iconDescription: 'choose a number',
     label: ' ',
-    onChange: () => {},
-    onClick: () => {},
+    onChange: () => { },
+    onClick: () => { },
     step: 1,
     value: 0,
   };
-  
-  constructor (props) {
+
+  constructor(props) {
     super(props)
 
     let value = props.value;
@@ -109,20 +109,28 @@ class NumberInput extends Component {
         <div className={numberInputClasses}>
           <input type="number" pattern="[0-9]*" {...other} {...props} />
           <div className="bx--number__controls">
-            <Icon
+            <button
+              className="bx--number__control-btn"
               onClick={evt => this.handleArrowClick(evt, 'up')}
-              className="up-icon"
-              name="caret--up"
-              description={this.props.iconDescription}
-              viewBox="0 -6 10 5"
-            />
-            <Icon
+            >
+              <Icon
+                className="up-icon"
+                name="caret--up"
+                description={this.props.iconDescription}
+                viewBox="0 2 10 5"
+              />
+            </button>
+            <button
+              className="bx--number__control-btn"
               onClick={evt => this.handleArrowClick(evt, 'down')}
-              className="down-icon"
-              name="caret--down"
-              viewBox="0 6 10 5"
-              description={this.props.iconDescription}
-            />
+            >
+              <Icon
+                className="down-icon"
+                name="caret--down"
+                viewBox="0 2 10 5"
+                description={this.props.iconDescription}
+              />
+            </button>
           </div>
         </div>
       </div>
