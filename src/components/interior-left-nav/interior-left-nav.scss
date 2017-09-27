@@ -15,9 +15,8 @@
   .bx--interior-left-nav {
     @include reset;
     @include helvetica;
-    width: rem(250px);
     position: fixed;
-    top: rem(90px);
+    top: 5.4rem;
     height: 100%;
     background-color: $color__white;
     border-right: 1px solid $color__gray-1;
@@ -27,7 +26,6 @@
       display: flex;
       flex-direction: column;
       background-color: $color__white;
-      padding-top: 1.5rem;
       overflow: auto;
 
       &__item {
@@ -71,7 +69,7 @@
           justify-content: space-between;
           text-decoration: none;
           transition: background-color $transition--base;
-          padding: 0.75rem 1.5rem 0.75rem rem(59px);
+          padding: 0.75rem 0;
         }
 
         &-icon {
@@ -115,10 +113,6 @@
       }
 
       &__item--has-children {
-        .left-nav-list__item-link {
-          padding-right: 1.5rem;
-        }
-
         &:hover {
           > .left-nav-list__item-link {
             color: $color__blue-51;
@@ -144,7 +138,7 @@
         &-link {
           @include font-size('14');
           color: $color__blue-90;
-          padding: 0.75rem 1.35rem 0.75rem 4.5rem;
+          padding: 0.75rem 0;
           font-weight: 400;
           display: flex;
           align-items: center;
@@ -179,8 +173,6 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    width: rem(200px);
-    padding-top: rem(20px);
     transition: background-color 300ms $bx--standard-easing, width 300ms $bx--standard-easing;
 
     ul,
@@ -238,7 +230,7 @@
 
     .left-nav-list__item-link,
     .left-nav-list--nested .left-nav-list__item-link {
-      padding: rem(9px) rem(20px);
+      padding: rem(9px) 0;
     }
 
     .left-nav-list--nested .left-nav-list__item-link {

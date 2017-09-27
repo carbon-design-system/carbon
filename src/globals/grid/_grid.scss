@@ -1,3 +1,5 @@
+@import 'node_modules/@ibm/grid/src/ibm-grid';
+
 // map functions
 @function breakpoint($breakpoint) {
   @if map-has-key($grid-breakpoints, $breakpoint) {

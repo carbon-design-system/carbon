@@ -2,7 +2,6 @@
 
 .demo--container {
   box-sizing: border-box;
-  padding-top: 1em;
   transition: .2s;
   background-color: $ui-02;
 
@@ -31,12 +30,9 @@
 }
 
 .demo--container__panel {
-  @include grid-container;
   width: 100%;
-  max-width: 960px;
   height: 100%;
   min-height: 2000px;
-  padding: 1em;
 
   display: flex;
   flex-direction: column;
@@ -75,8 +71,6 @@
   height: 5.375em;
   display: flex;
   align-items: center;
-  padding: 1em;
-  z-index: 0;
 }
 
 .demo-switcher {
@@ -120,10 +114,6 @@
 
   .test-nav {
     display: none;
-  }
-
-  .demo--container {
-    padding-left: 12.5rem;
   }
 
   .bx--detail-page-header--with-tabs {

@@ -13,7 +13,6 @@
   .bx--tile {
     @include layer('raised');
     display: block;
-    min-width: 8rem;
     min-height: 4rem;
     background-color: $ui-01;
     border: 1px solid $ui-03;

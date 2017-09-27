@@ -4,10 +4,11 @@
   .bx--global-header {
     @include layer('sticky-nav');
     @include helvetica;
-    width: 100%;
+    width: 100vw;
     position: fixed;
-    top: rem(36px);
     left: 0;
+    right: 0;
+    top: rem(36px);
     display: flex;
     justify-content: space-between;
     height: rem(50px);
