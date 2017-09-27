@@ -60,7 +60,6 @@
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",
     "express": "4.13.4",
-    "freshy": "^1.0.3",
     "globby": "4.0.0",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.1",
