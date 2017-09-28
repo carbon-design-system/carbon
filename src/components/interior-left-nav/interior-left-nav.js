@@ -129,7 +129,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
               bubbles: true,
               cancelable: true,
               detail: { collapsed: true },
-            }),
+            })
           );
         }, 250);
       } else {
@@ -144,7 +144,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
               bubbles: true,
               cancelable: true,
               detail: { collapsed: false },
-            }),
+            })
           );
         }, 250);
       }
