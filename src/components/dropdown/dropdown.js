@@ -4,7 +4,9 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import motionGenerator from '../../globals/js/misc/motion-generator.js';
 
+const ITEM_HEIGHT = 46;
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
   /**
    * A selector with drop downs.
@@ -40,6 +42,25 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
         this.select(item);
       }
     });
+
+    //-----------------------------------------------------
+    //  system 360 motion
+
+    //  - how many dropdown items there are
+    let 
+      listEl = this.element.querySelector('.bx--dropdown-list'),
+      motion = motionGenerator(listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT, 40)
+    ;
+
+    //  - call motion generator and store generated motion parameters
+    this._motionParams = {
+      listEl,
+      motion
+    }
+
+    // apply motion params to the element
+    listEl.style.transitionDuration = `${motion.mechanical.duration}ms`;
+
   }
 
   /**
@@ -80,6 +101,8 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
   _toggle(event) {
     const isDisabled = this.element.classList.contains('bx--dropdown--disabled');
 
+    this.element.classList
+
     if (isDisabled) {
       return;
     }
@@ -97,9 +120,30 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
       Object.keys(actions).forEach(action => {
+
         if (actions[action]) {
           this.element.classList[action]('bx--dropdown--open');
           this.element.focus();
+
+          //-----------------------------------------------------
+          //  system 360 motion - adjust height
+          let opener = shouldOpen => this._motionParams.listEl.style.height = shouldOpen === true ? `${this._motionParams.listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT}px` : 0;
+          switch(action){
+            case 'add':{
+              opener(true);
+              break;
+            }
+
+            case 'remove':{
+              opener(false);
+              break; 
+            }
+
+            case 'toggle':{
+              opener(isOpen !== true);
+            }
+          }
+
         }
       });
     }
@@ -213,6 +257,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     classSelected: 'bx--dropdown--selected',
     eventBeforeSelected: 'dropdown-beingselected',
     eventAfterSelected: 'dropdown-selected',
+    itemHeight:'[data-dropdown-item-height]'
   };
 
   /**
