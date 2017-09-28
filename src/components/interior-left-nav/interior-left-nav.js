@@ -116,7 +116,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     });
 
     if (this.element.dispatchEvent(eventStart)) {
-      const svgTitle = this.element.querySelector(this.options.selectorLeftNavArrow).querySelector('title');
+      const svgTitle = this.element.querySelector(this.options.selectorLeftNavArrowTitle);
       if (!collapsed) {
         this.element.dataset.collapsed = true;
         this.element.classList.add(this.options.classLeftNavCollapsing);
@@ -177,7 +177,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     selectorLeftNavNestedListItem: '[data-interior-left-nav-nested-item]',
     selectorLeftNavListItemHasChildren: '[data-interior-left-nav-with-children]',
     selectorLeftNavCollapse: '[data-interior-left-nav-collapse]',
-    selectorLeftNavArrow: '[data-interior-left-nav-arrow]',
+    selectorLeftNavArrowTitle: '[data-interior-left-nav-arrow] title',
     // CSS Class Selectors
     classActiveLeftNavListItem: 'left-nav-list__item--active',
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
