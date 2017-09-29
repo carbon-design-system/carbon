@@ -10,6 +10,7 @@
     @include font-size('14');
     @include helvetica;
     display: none;
+    width: 100%;
 
     @include breakpoint(bp--xs--major) {
       display: flex;

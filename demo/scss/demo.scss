@@ -2,12 +2,7 @@
 
 .demo--container {
   box-sizing: border-box;
-  transition: .2s;
   background-color: $ui-02;
-
-  .demo--collapsed & {
-    padding-left: 3rem;
-  }
 
   .demo--standalone & {
     padding-left: 0;
@@ -71,6 +66,7 @@
   height: 5.375em;
   display: flex;
   align-items: center;
+  z-index: 6000;
 }
 
 .demo-switcher {
@@ -114,10 +110,6 @@
 
   .test-nav {
     display: none;
-  }
-
-  .bx--detail-page-header--with-tabs {
-    margin-left: 12.5em;
   }
 
   &.demo--collapsed .bx--detail-page-header--with-tabs {

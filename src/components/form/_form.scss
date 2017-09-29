@@ -11,6 +11,7 @@
 
   .bx--form-item {
     @include helvetica;
+    display: inline-block;
     flex: 1;
     margin-right: 1rem;
     margin-bottom: 1.5rem;

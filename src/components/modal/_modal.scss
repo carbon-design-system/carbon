@@ -31,6 +31,7 @@
     background-color: rgba($ui-03, 0.5);
     transition: opacity 200ms, z-index 0s 200ms, visibility 0s 200ms;
     visibility: hidden;
+    width: 100vw;
 
     &.is-visible {
       z-index: z('modal');

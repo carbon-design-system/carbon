@@ -26,8 +26,11 @@
   background-color: $ui-01;
   min-height: 3.5rem;
   z-index: z('footer');
-  padding: rem(20px) 5%;
   width: 100%;
+}
+
+.bx--footer-row {
+  display: flex;
 }
 
 .bx--footer-info {
@@ -44,7 +47,6 @@
   display: flex;
   flex-direction: column;
   margin: 0;
-  margin-right: rem(64px);
 }
 
 .bx--footer-info__item > .bx--link {
