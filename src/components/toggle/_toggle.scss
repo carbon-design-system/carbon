@@ -19,7 +19,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    transition-duration: $transition--base;
+    transition-duration: 60ms; // shix change
+    transition-timing-function: $bx--ease-out; // shix change
     cursor: pointer;
     margin: 1rem 0;
   }
@@ -36,7 +37,8 @@
       height: 4px;
       top: -2px;
       background-color: $ui-05;
-      transition-duration: $transition--base;
+      transition-duration: 60ms; // shix change
+      transition-timing-function: $bx--ease-out; // shix change
       cursor: pointer;
     }
 
@@ -52,7 +54,9 @@
       background-color: $ui-01;
       border-radius: 50%;
       content: '';
-      transition-duration: $transition--base;
+      transition-duration: 60ms; // shix change
+      transition-timing-function: $bx--ease-out; // shix change
+      // transition-duration: 60ms;
     }
   }
 
