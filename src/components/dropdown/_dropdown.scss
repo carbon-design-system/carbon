@@ -42,7 +42,7 @@
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
-    transition: transform $transition--base ease-in-out;
+    transition: transform 150ms ease-in-out;
     transform-origin: 50% 45%;
   }
 
@@ -66,10 +66,20 @@
     @include reset;
     @include layer('overlay');
     width: 100%;
-    display: none;
+    display:flex;
+    flex-direction:column;
+    height:0;
     list-style: none;
     position: absolute;
     z-index: z('dropdown');
+    transition:height 0.144s cubic-bezier(0.2, 0, 1, 0.9);
+    overflow:hidden;
+    background-color: $ui-01;
+
+    .bx--dropdown-item{
+      opacity:0;
+      transition:opacity 0.144s cubic-bezier(0.2, 0, 1, 0.9);
+    }
   }
 
   .bx--dropdown-link {
@@ -91,7 +101,7 @@
   }
 
   .bx--dropdown--selected {
-    display: none;
+    background-color:$field-01;
   }
 
   .bx--dropdown--open {
@@ -103,7 +113,41 @@
       @include font-size('14');
       display: flex;
       flex-direction: column;
-      background-color: $ui-01;
+      
+      height:300px;
+      transition:height 0.144s cubic-bezier(0, 0, 0.38, 0.9);
+
+      .bx--dropdown-item{
+        opacity:1;
+        $delayUnit:0.02s;
+        $fadeDuration:0.2s;
+        transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *9;
+
+        &:nth-child(1){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *1;
+        }
+        &:nth-child(2){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *2;
+        }
+        &:nth-child(3){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *3;
+        }
+        &:nth-child(4){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *4;
+        }
+        &:nth-child(5){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *5;
+        }
+        &:nth-child(6){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *6;
+        }
+        &:nth-child(7){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *7;
+        }
+        &:nth-child(8){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *8;
+        }
+      }
     }
 
     &:focus {
