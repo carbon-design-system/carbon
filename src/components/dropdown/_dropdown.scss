@@ -26,6 +26,10 @@
 
     &:focus {
       @include focus-outline('border');
+
+      .bx--dropdown-list{
+        box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      }
     }
 
     &.bx--dropdown--open:focus {
