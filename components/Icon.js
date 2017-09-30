@@ -66,17 +66,18 @@ export function svgShapes(svgData) {
     const data = svgData[svgProp];
 
     if (svgProp === 'circles') {
-      return data.map(circle => {
+      return data.map((circle, index) => {
         const circleProps = {
           cx: circle.cx,
           cy: circle.cy,
-          r: circle.r
+          r: circle.r,
+          key: `circle${index}`
         };
 
         return <circle {...circleProps} />;
       });
     } else if (svgProp === 'paths') {
-      return data.map(path => <path d={path.d} />);
+      return data.map((path, index) => <path d={path.d} key={`key${index}`} />);
     }
 
     return '';
