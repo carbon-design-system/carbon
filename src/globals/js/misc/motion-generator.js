@@ -1,1 +1,1 @@
-export {default} from '@wonilsuh/motion-generator';
+export {default} from '@ibm/motion';

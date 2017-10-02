@@ -1,0 +1,6 @@
+applications:
+- name: system-360-motion-in-carbon
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  disk_quota: 256MB
+  memory: 128MB
+path: server.js

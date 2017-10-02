@@ -4,7 +4,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
-import motionGenerator from '../../globals/js/misc/motion-generator.js';
+import ibmMotion from '../../globals/js/misc/motion-generator.js';
 
 const ITEM_HEIGHT = 46;
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
@@ -46,16 +46,18 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     //-----------------------------------------------------
     //  system 360 motion
 
+    console.log('ibmMotion===', ibmMotion);
+
     //  - how many dropdown items there are
     let 
       listEl = this.element.querySelector('.bx--dropdown-list'),
-      motion = motionGenerator(listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT, 40)
+      motion = ibmMotion.getMotion(listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT, 40)
     ;
 
     //  - call motion generator and store generated motion parameters
     this._motionParams = {
       listEl,
-      motion
+      motion:ibmMotion
     }
 
     // apply motion params to the element
