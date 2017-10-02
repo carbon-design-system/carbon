@@ -29,6 +29,10 @@
     "style guide",
     "eyeglass-module"
   ],
+  "engines": {
+    "node": "^6.0.0 || ^8.0.0",
+    "npm": "^4.0.0 || ^5.0.0"
+  },
   "dependencies": {
     "carbon-icons": "^6.0.4",
     "flatpickr": "2.6.3",
@@ -127,13 +131,14 @@
     "dev": "gulp serve & npm run serve",
     "lint": "gulp lint",
     "prebuild": "gulp clean",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "serve": "nodemon -e dust,js server.js",
     "start": "node server.js",
     "test": "gulp test",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release":
+      "semantic-release pre && npm publish && semantic-release post"
   },
   "license": "Apache-2",
   "config": {
