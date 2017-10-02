@@ -44,8 +44,8 @@
       </div>
     </header>
     {?links}
-    <nav role="navigation" aria-label="Interior Left Navigation" data-interior-left-nav class="ibm-col-sm-2 ibm-col-md-2 ibm-col-lg-4 ibm-col-bleed-left bx--interior-left-nav bx--interior-left-nav--collapseable">
-      <ul role="menubar" class="left-nav-list" data-interior-left-nav-list aria-hidden="false">
+    <nav role="navigation" aria-label="Interior Left Navigation" data-interior-left-nav class="ibm-col-sm-2 ibm-col-md-2 ibm-col-lg-4 ibm-col-full ibm-col-bleed-left bx--interior-left-nav bx--interior-left-nav--collapseable">
+      <ul role="menubar" class="left-nav-list ibm-col-full_padding" data-interior-left-nav-list aria-hidden="false">
         {#links} {?items}
         <li role="menuitem" tabindex="0" class="left-nav-list__item left-nav-list__item--has-children{?selected} left-nav-list__item--expanded{/selected}"
           data-interior-left-nav-item data-interior-left-nav-with-children>

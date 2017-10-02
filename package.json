@@ -37,9 +37,8 @@
     "@ibm/grid": "^0.1.0",
     "carbon-icons": "^6.0.4",
     "flatpickr": "2.6.3",
-    "lodash.debounce": "^4.0.8"
-  },
-  "devDependencies": {
+    "lodash.debounce": "^4.0.8",
+    "object-assign": "^4.1.1",
     "adaro": "1.0.4",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",
@@ -116,6 +115,8 @@
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0"
   },
+  "devDependencies": {
+  },
   "files": [
     "css/**/*",
     "es/**/*",
@@ -138,8 +139,7 @@
     "test": "gulp test",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
-    "semantic-release":
-      "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "license": "Apache-2",
   "config": {

@@ -202,8 +202,6 @@
     }
 
     .left-nav-list {
-      padding-top: 0;
-
       @include light-ui {
         background-color: inherit;
       }
@@ -245,7 +243,7 @@
       justify-content: flex-end;
       align-items: center;
       margin-top: auto;
-      margin-bottom: rem(90px);
+      margin-bottom: rem(86px);
       padding: rem(14px) rem(16px);
 
       &:hover,
@@ -281,7 +279,6 @@
 
   .bx--interior-left-nav--collapsing,
   .bx--interior-left-nav--collapsed {
-    width: rem(48px);
     transition: background-color 300ms $bx--standard-easing, width 300ms $bx--standard-easing;
     cursor: pointer;
     background-color: rgba($color__blue-51, 0.1);
@@ -331,7 +328,6 @@
   }
 
   .bx--interior-left-nav--expanding {
-    width: rem(200px);
     transition: width 300ms $bx--standard-easing;
     background-color: #fff;
 

@@ -17,6 +17,11 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     this.constructor.components.set(this.element, this);
 
     this.keepOpen = this.element.dataset.keepOpen === undefined ? this.options.keepOpen : Boolean(this.element.dataset.keepOpen);
+    this.sizeClassnames = Object.values(this.element.classList).filter(classname =>
+      classname.includes('ibm-col-sm-') ||
+      classname.includes('ibm-col-md-') ||
+      classname.includes('ibm-col-lg-')
+    );
 
     this.hookListItemsEvents();
   }
@@ -118,11 +123,12 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     if (this.element.dispatchEvent(eventStart)) {
       if (!collapsed) {
         this.element.dataset.collapsed = true;
-        this.element.classList.add(this.options.classLeftNavCollapsing);
+        this.element.classList.add(...this.options.classLeftNavCollapsing);
+        this.element.classList.remove(...this.sizeClassnames);
 
         window.setTimeout(() => {
-          this.element.classList.remove(this.options.classLeftNavCollapsing);
-          this.element.classList.add(this.options.classLeftNavCollapsed);
+          this.element.classList.remove(...this.options.classLeftNavCollapsing);
+          this.element.classList.add(...this.options.classLeftNavCollapsed);
           this.element.dispatchEvent(
             new CustomEvent(this.options.eventAfterLeftNavToggled, {
               bubbles: true,
@@ -133,8 +139,9 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
         }, 250);
       } else {
         this.element.dataset.collapsed = false;
-        this.element.classList.remove(this.options.classLeftNavCollapsed);
+        this.element.classList.remove(...this.options.classLeftNavCollapsed);
         this.element.classList.add(this.options.classLeftNavExpanding);
+        this.element.classList.add(...this.sizeClassnames);
 
         window.setTimeout(() => {
           this.element.classList.remove(this.options.classLeftNavExpanding);
@@ -179,8 +186,8 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     // CSS Class Selectors
     classActiveLeftNavListItem: 'left-nav-list__item--active',
     classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
-    classLeftNavCollapsing: 'bx--interior-left-nav--collapsing',
-    classLeftNavCollapsed: 'bx--interior-left-nav--collapsed',
+    classLeftNavCollapsing: ['ibm-col-sm-1', 'ibm-col-md-1', 'ibm-col-lg-1', 'bx--interior-left-nav--collapsing'],
+    classLeftNavCollapsed: ['ibm-col-sm-1', 'ibm-col-md-1', 'ibm-col-lg-1', 'bx--interior-left-nav--collapsed'],
     classLeftNavExpanding: 'bx--interior-left-nav--expanding',
     // Event
     eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
