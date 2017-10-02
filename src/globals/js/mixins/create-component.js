@@ -1,4 +1,4 @@
-export default function (ToMix) {
+export default function(ToMix) {
   class CreateComponent extends ToMix {
     /**
      * Mix-in class to manage lifecycle of component.

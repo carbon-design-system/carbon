@@ -1,6 +1,6 @@
 import on from '../misc/on';
 
-export default function (ToMix) {
+export default function(ToMix) {
   class TrackBlur extends ToMix {
     /**
      * Mix-in class to add an handler for losing focus.
@@ -11,11 +11,16 @@ export default function (ToMix) {
       super(element, options);
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      this.hFocusIn = on(this.element.ownerDocument, focusinEventName, (event) => {
-        if (!this.element.contains(event.target)) {
-          this.handleBlur(event);
-        }
-      }, !hasFocusin);
+      this.hFocusIn = on(
+        this.element.ownerDocument,
+        focusinEventName,
+        event => {
+          if (!this.element.contains(event.target)) {
+            this.handleBlur(event);
+          }
+        },
+        !hasFocusin
+      );
     }
 
     /**

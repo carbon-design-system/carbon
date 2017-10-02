@@ -121,15 +121,17 @@ const travisLaunchers = {
   chrome: 'Chrome_Travis',
 };
 
-module.exports = function (config) {
+module.exports = function(config) {
   const objectToStringPolyfillPath = require.resolve('core-js/library/modules/es6.object.to-string.js');
 
   if (cloptions.sauce) {
     if (!process.env.TRAVIS) {
-      throw new Error([
-        'You need extra caution when you run Sauce testing locally.',
-        'You can comment out lines here if you know what you are doing.',
-      ].join(' '));
+      throw new Error(
+        [
+          'You need extra caution when you run Sauce testing locally.',
+          'You can comment out lines here if you know what you are doing.',
+        ].join(' ')
+      );
     }
     if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
       throw new Error('Missing SAUCE_USERNAME or SAUCE_ACCESS_KEY environment variables.');
@@ -142,11 +144,13 @@ module.exports = function (config) {
     frameworks: ['mocha', 'sinon-chai'],
 
     files: (() => {
-      const list = ensureArray(cloptions.files || [
-        'node_modules/core-js/modules/es6.weak-map.js', // For generatoring coverage report for untested files
-        'src/{components,globals}/**/*.js', // For generatoring coverage report for untested files
-        'tests/spec/**/*.js',
-      ]);
+      const list = ensureArray(
+        cloptions.files || [
+          'node_modules/core-js/modules/es6.weak-map.js', // For generatoring coverage report for untested files
+          'src/{components,globals}/**/*.js', // For generatoring coverage report for untested files
+          'tests/spec/**/*.js',
+        ]
+      );
       const htmlFiles = list.filter(file => minimatch(file, 'src/components/**/*.html'));
       if (htmlFiles.length > 0) {
         const explanationArgs = htmlFiles.map(file => `-f ${file}`).join(' ');
@@ -208,24 +212,23 @@ module.exports = function (config) {
               },
             ],
           ],
-          plugins: [
-            'transform-class-properties',
-            ['transform-runtime', { polyfill: false }],
-          ].concat(cloptions.debug ? [] : [
-            [
-              'istanbul',
-              {
-                include: [
-                  'src/components/**/*.js',
-                ],
-              },
-            ],
-          ]),
+          plugins: ['transform-class-properties', ['transform-runtime', { polyfill: false }]].concat(
+            cloptions.debug
+              ? []
+              : [
+                  [
+                    'istanbul',
+                    {
+                      include: ['src/components/**/*.js'],
+                    },
+                  ],
+                ]
+          ),
         }),
       ],
       format: 'iife',
-      moduleName: 'test',
-      sourceMap: 'inline',
+      name: 'test',
+      sourcemap: 'inline',
     },
 
     customLaunchers,
@@ -243,7 +246,7 @@ module.exports = function (config) {
       require('karma-sourcemap-loader'),
       require('karma-mocha-reporter'),
       require('karma-coverage'),
-      require('karma-rollup-plugin'),
+      require('karma-rollup-preprocessor'),
       require('karma-phantomjs-launcher'),
       require('karma-chrome-launcher'),
       require('karma-firefox-launcher'),
@@ -259,38 +262,40 @@ module.exports = function (config) {
       return reporters;
     })(),
 
-    coverageReporter: Object.assign({
-      dir: 'tests/coverage',
-      reporters: [
-        { type: 'html' },
-        { type: 'text' },
-      ],
-    }, cloptions.files ? {} : {
-      check: {
-        each: {
-          statements: 40,
-          branches: 40,
-          functions: 40,
-          lines: 40,
-          excludes: [
-            // Files in this exclude list are of either:
-            // - Not meeting the code coverage standard set here, which shouldn't have happened
-            // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
-            // That said, new files should never be added, except for misc code that is very broser-specific
-            'src/components/accordion/accordion.js',
-            'src/components/copy-button/copy-button.js',
-            'src/components/detail-page-header/detail-page-header.js',
-            'src/components/interior-left-nav/interior-left-nav.js',
-            'src/components/pagination/pagination.js',
-            'src/components/search/search-with-options.js',
-            'src/components/tooltip/tooltip.js',
-            'src/components/unified-header/left-nav.js',
-            'src/components/unified-header/profile-switcher.js',
-            'src/globals/js/misc/resize.js',
-          ],
-        },
+    coverageReporter: Object.assign(
+      {
+        dir: 'tests/coverage',
+        reporters: [{ type: 'html' }, { type: 'text' }],
       },
-    }),
+      cloptions.files
+        ? {}
+        : {
+            check: {
+              each: {
+                statements: 40,
+                branches: 40,
+                functions: 40,
+                lines: 40,
+                excludes: [
+                  // Files in this exclude list are of either:
+                  // - Not meeting the code coverage standard set here, which shouldn't have happened
+                  // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
+                  // That said, new files should never be added, except for misc code that is very broser-specific
+                  'src/components/accordion/accordion.js',
+                  'src/components/copy-button/copy-button.js',
+                  'src/components/detail-page-header/detail-page-header.js',
+                  'src/components/interior-left-nav/interior-left-nav.js',
+                  'src/components/pagination/pagination.js',
+                  'src/components/search/search-with-options.js',
+                  'src/components/tooltip/tooltip.js',
+                  'src/components/unified-header/left-nav.js',
+                  'src/components/unified-header/profile-switcher.js',
+                  'src/globals/js/misc/resize.js',
+                ],
+              },
+            },
+          }
+    ),
 
     port: 9876,
 
@@ -303,17 +308,17 @@ module.exports = function (config) {
     autoWatch: true,
     autoWatchBatchDelay: 400,
 
-    browsers: flatten(ensureArray(cloptions.browsers || 'PhantomJS')
-      .map((browser) => {
+    browsers: flatten(
+      ensureArray(cloptions.browsers || 'PhantomJS').map(browser => {
         const browserLower = browser.toLowerCase();
-        return (cloptions.sauce && sauceLaunchers[browserLower])
-          || (process.env.TRAVIS && travisLaunchers[browserLower])
-          || browser;
-      })),
+        return (
+          (cloptions.sauce && sauceLaunchers[browserLower]) || (process.env.TRAVIS && travisLaunchers[browserLower]) || browser
+        );
+      })
+    ),
 
     singleRun: false,
 
     concurrency: Infinity,
   });
 };
-

@@ -1,6 +1,8 @@
 const missingNativeDOMTokenListToggleForce = (() => {
   const elem = document.createElement('div');
-  const randomClass = `_random_class_${Math.random().toString(36).slice(2)}`;
+  const randomClass = `_random_class_${Math.random()
+    .toString(36)
+    .slice(2)}`;
   elem.classList.toggle(randomClass, false);
   return elem.classList.contains(randomClass);
 })();

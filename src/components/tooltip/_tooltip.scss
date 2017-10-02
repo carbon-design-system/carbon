@@ -22,7 +22,7 @@
 
     svg {
       fill: $brand-01;
-      margin-left: .625rem;
+      margin-left: 0.625rem;
       cursor: pointer;
 
       &:focus {
@@ -31,7 +31,8 @@
       }
     }
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       svg {
         fill: $brand-02;
       }
@@ -55,7 +56,7 @@
 
     .bx--tooltip__label {
       font-weight: 700;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
 
     &:before {
@@ -65,8 +66,8 @@
       top: rem(-6px);
       right: 0;
       transform: rotate(-135deg);
-      width: .6rem;
-      height: .6rem;
+      width: 0.6rem;
+      height: 0.6rem;
       border-right: 1px solid $ui-04;
       border-bottom: 1px solid $ui-04;
       margin: 0 auto;
@@ -93,7 +94,7 @@
     }
 
     &[data-floating-menu-direction='right'] {
-      margin-left: .6rem;
+      margin-left: 0.6rem;
 
       &:before {
         left: rem(-6px);
@@ -109,7 +110,8 @@
   }
 
   // Simple CSS only tooltip
-  .bx--tooltip--simple__top, .bx--tooltip--simple__bottom {
+  .bx--tooltip--simple__top,
+  .bx--tooltip--simple__bottom {
     @include helvetica;
     @include reset;
     @include font-size('18');
@@ -120,11 +122,12 @@
 
     svg {
       fill: $brand-01;
-      margin-left: .625rem;
+      margin-left: 0.625rem;
     }
 
     // Tooltip - renders as a combo of :before and :after elements
-    &:before, &:after {
+    &:before,
+    &:after {
       @include helvetica;
       position: absolute;
       display: none;
@@ -148,20 +151,22 @@
     &:after {
       right: 0;
       left: 0;
-      width: .6rem;
-      height: .6rem;
+      width: 0.6rem;
+      height: 0.6rem;
       border-right: 1px solid $ui-04;
       border-bottom: 1px solid $ui-04;
       margin: 0 auto;
       content: '';
     }
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       svg {
         fill: $brand-02;
       }
 
-      &:before, &:after {
+      &:before,
+      &:after {
         position: absolute;
         display: block;
       }

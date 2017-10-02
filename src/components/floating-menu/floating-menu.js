@@ -77,17 +77,9 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
 
     const scroll = refNode.ownerDocument.defaultView.pageYOffset;
 
-    const {
-      left: refLeft,
-      top: refTop,
-      right: refRight,
-      bottom: refBottom,
-    } = refNode.getBoundingClientRect();
+    const { left: refLeft, top: refTop, right: refRight, bottom: refBottom } = refNode.getBoundingClientRect();
 
-    const {
-      width: menuWidth,
-      height: menuHeight,
-    } = element.getBoundingClientRect();
+    const { width: menuWidth, height: menuHeight } = element.getBoundingClientRect();
 
     const refCenterHorizontal = (refLeft + refRight) / 2;
     const refCenterVertical = (refTop + refBottom) / 2;
@@ -95,18 +87,18 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     return {
       left: () => ({
         left: refLeft - menuWidth - offset.left,
-        top: ((refCenterVertical - (menuHeight / 2)) + scroll) + offset.top,
+        top: refCenterVertical - menuHeight / 2 + scroll + offset.top,
       }),
       top: () => ({
-        left: (refCenterHorizontal - (menuWidth / 2)) + offset.left,
-        top: ((refTop - menuHeight) + scroll) - offset.top,
+        left: refCenterHorizontal - menuWidth / 2 + offset.left,
+        top: refTop - menuHeight + scroll - offset.top,
       }),
       right: () => ({
         left: refRight + offset.left,
-        top: ((refCenterVertical - (menuHeight / 2)) + scroll) + offset.top,
+        top: refCenterVertical - menuHeight / 2 + scroll + offset.top,
       }),
       bottom: () => ({
-        left: (refCenterHorizontal - (menuWidth / 2)) + offset.left,
+        left: refCenterHorizontal - menuWidth / 2 + offset.left,
         top: refBottom + scroll + offset.top,
       }),
     }[direction]();
@@ -117,7 +109,9 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @private
    */
   _testStyles() {
-    if (!this.options.debugStyle) { return; }
+    if (!this.options.debugStyle) {
+      return;
+    }
     const element = this.element;
     const computedStyle = element.ownerDocument.defaultView.getComputedStyle(element);
     const styles = {
@@ -125,7 +119,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       right: 'auto',
       margin: 0,
     };
-    Object.keys(styles).forEach((key) => {
+    Object.keys(styles).forEach(key => {
       const expected = typeof styles[key] === 'number' ? parseFloat(styles[key]) : styles[key];
       const actual = computedStyle.getPropertyValue(key);
       if (expected !== actual) {
@@ -152,8 +146,10 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @returns {boolean} `true` of the current state is different from the given new state.
    */
   shouldStateBeChanged(state) {
-    return (state === 'shown' || state === 'hidden')
-      && state !== (this.element.classList.contains(this.options.classShown) ? 'shown' : 'hidden');
+    return (
+      (state === 'shown' || state === 'hidden') &&
+      state !== (this.element.classList.contains(this.options.classShown) ? 'shown' : 'hidden')
+    );
   }
 
   /**
@@ -172,7 +168,9 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     }
     if (state === 'shown') {
       if (!this.hResize) {
-        this.hResize = optimizedResize.add(() => { this._place(); });
+        this.hResize = optimizedResize.add(() => {
+          this._place();
+        });
       }
       this._getContainer().appendChild(this.element);
       this._place();

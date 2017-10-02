@@ -1,8 +1,12 @@
-$bx--ease-in: cubic-bezier(.25, 0, 1, 1); // Used primarily for removing elements from the screen.
-$bx--ease-out: cubic-bezier(0, 0, .25, 1); // Used for adding elements to the screen or changing on-screen states at a users's input.
-$bx--standard-easing: cubic-bezier(.5, 0, .1, 1); // Used for the majority of animations.
+$bx--ease-in: cubic-bezier(0.25, 0, 1, 1); // Used primarily for removing elements from the screen.
+$bx--ease-out: cubic-bezier(
+  0,
+  0,
+  0.25,
+  1
+); // Used for adding elements to the screen or changing on-screen states at a users's input.
+$bx--standard-easing: cubic-bezier(0.5, 0, 0.1, 1); // Used for the majority of animations.
 $transition--base: 250ms;
-
 
 // Color Theme Variables
 $brand-01: $color__blue-51 !default;
@@ -17,7 +21,7 @@ $ui-05: $color__navy-gray-7 !default;
 $text-01: $color__blue-90 !default;
 $text-02: $color__navy-gray-6 !default;
 $text-03: $color__navy-gray-6 !default;
-$field-01: rgba($color__blue-51, .1) !default;
+$field-01: rgba($color__blue-51, 0.1) !default;
 $support-01: $color__red-50 !default;
 $support-02: $color__green-40 !default;
 $support-03: $color__yellow-30 !default;
@@ -37,17 +41,17 @@ $input-label-weight: 700 !default;
 
 // Button Theme Variables
 $button-font-weight: 700 !default;
-$button-font-size: .875rem !default;
+$button-font-size: 0.875rem !default;
 $button-border-radius: 0 !default;
 $button-height: 40px !default;
 $button-padding: 0 1rem !default;
-$button-padding-sm: 0 .5rem !default;
+$button-padding-sm: 0 0.5rem !default;
 $button-border-width: 2px !default;
 
 // Accordion (Reverse)
 $accordion-flex-direction: row !default;
 $accordion-justify-content: flex-start !default;
-$accordion-arrow-margin: 0 0 0 .25rem !default;
+$accordion-arrow-margin: 0 0 0 0.25rem !default;
 $accordion-title-margin: 0 0 0 1rem !default;
 $accordion-content-padding: 0 1rem 0 1.75rem !default;
 
@@ -77,7 +81,7 @@ $modal-footer-background-color: $ui-03 !default;
 // Progress Indicator
 $progress-indicator-bar-width: 1px inset transparent !default;
 $progress-indicator-stroke-width: 5 !default;
-$progress-indicator-line-offset: .625rem !default;
+$progress-indicator-line-offset: 0.625rem !default;
 
 // Radio Button
 $radio-border-width: 2px !default;

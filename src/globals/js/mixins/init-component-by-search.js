@@ -1,4 +1,4 @@
-export default function (ToMix) {
+export default function(ToMix) {
   /**
    * Mix-in class to instantiate components by searching for their root elements.
    * @class InitComponentBySearch

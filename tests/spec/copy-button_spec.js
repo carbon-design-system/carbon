@@ -11,29 +11,29 @@ const HTML = `
 </button>
 `;
 
-describe('Test Copy Button', function () {
-  describe('Constructor', function () {
-    it('Should throw if root element is not given', function () {
+describe('Test Copy Button', function() {
+  describe('Constructor', function() {
+    it('Should throw if root element is not given', function() {
       expect(() => {
         new CopyButton();
       }).to.throw(Error);
     });
 
-    it('Should throw if root element is not a DOM element', function () {
+    it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new CopyButton(document.createTextNode(''));
       }).to.throw(Error);
     });
   });
 
-  describe('Showing and hiding feedback tooltip', function () {
+  describe('Showing and hiding feedback tooltip', function() {
     let container;
     let element;
     let feedbackTooltip;
     let copyBtn;
     let clock;
 
-    before(function () {
+    before(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -42,38 +42,34 @@ describe('Test Copy Button', function () {
       copyBtn = new CopyButton(element);
     });
 
-    beforeEach(function () {
+    beforeEach(function() {
       clock = sinon.useFakeTimers();
     });
 
-    it('Should not show the feedback tooltip before click', function () {
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be
-        .false;
+    it('Should not show the feedback tooltip before click', function() {
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
     });
 
-    it('Should show the feedback tooltip on click', function () {
+    it('Should show the feedback tooltip on click', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be
-        .true;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
     });
 
-    it('Should hide the feedback tooltip after specified timeout value', function () {
+    it('Should hide the feedback tooltip after specified timeout value', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be
-        .true;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.true;
       clock.tick(2000);
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be
-        .false;
+      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).to.be.false;
     });
 
-    afterEach(function () {
+    afterEach(function() {
       if (clock) {
         clock.restore();
         clock = null;
       }
     });
 
-    after(function () {
+    after(function() {
       document.body.removeChild(container);
       copyBtn.release();
     });

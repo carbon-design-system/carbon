@@ -4,24 +4,24 @@ import { componentClasses } from '../../index';
 const forEach = Array.prototype.forEach;
 
 const createAndReleaseComponentsUponDOMMutation = (records, componentClassesForWatchInit, options) => {
-  records.forEach((record) => {
-    forEach.call(record.addedNodes, (node) => {
+  records.forEach(record => {
+    forEach.call(record.addedNodes, node => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        componentClassesForWatchInit.forEach((Clz) => {
+        componentClassesForWatchInit.forEach(Clz => {
           Clz.init(node, options);
         });
       }
     });
-    forEach.call(record.removedNodes, (node) => {
+    forEach.call(record.removedNodes, node => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        componentClasses.forEach((Clz) => {
+        componentClasses.forEach(Clz => {
           if (node.matches(Clz.options.selectorInit)) {
             const instance = Clz.components.get(node);
             if (instance) {
               instance.release();
             }
           } else {
-            forEach.call(node.querySelectorAll(Clz.options.selectorInit), (element) => {
+            forEach.call(node.querySelectorAll(Clz.options.selectorInit), element => {
               const instance = Clz.components.get(element);
               if (instance) {
                 instance.release();
@@ -40,7 +40,7 @@ const createAndReleaseComponentsUponDOMMutation = (records, componentClassesForW
  * @param {Object} [options] The component options.
  * @returns {Handle} The handle to stop watching.
  */
-export default function (target = document, options = {}) {
+export default function(target = document, options = {}) {
   if (target.nodeType !== Node.ELEMENT_NODE && target.nodeType !== Node.DOCUMENT_NODE) {
     throw new TypeError('DOM document or DOM element should be given to watch for DOM node to create/release components.');
   }
@@ -50,7 +50,7 @@ export default function (target = document, options = {}) {
 
   const componentClassesForWatchInit = componentClasses.filter(Clz => !Clz.forLazyInit);
 
-  let observer = new MutationObserver((records) => {
+  let observer = new MutationObserver(records => {
     createAndReleaseComponentsUponDOMMutation(records, componentClassesForWatchInit, options);
   });
   observer.observe(target, {

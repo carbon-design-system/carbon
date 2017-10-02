@@ -39,12 +39,12 @@ class Search extends mixin(createComponent, initComponentBySearch) {
       });
     }
 
-    this.element.addEventListener('click', (evt) => {
+    this.element.addEventListener('click', evt => {
       const toggleItem = eventMatches(evt, this.options.selectorIconContainer);
       if (toggleItem) this.toggleLayout(toggleItem);
     });
 
-    input.addEventListener('input', (evt) => {
+    input.addEventListener('input', evt => {
       if (closeIcon) this.showClear(evt.target.value, closeIcon);
     });
   }
@@ -54,7 +54,7 @@ class Search extends mixin(createComponent, initComponentBySearch) {
    * @param {HTMLElement} element The element contining the layout toggle.
    */
   toggleLayout(element) {
-    [...element.querySelectorAll(this.options.selectorSearchView)].forEach((item) => {
+    [...element.querySelectorAll(this.options.selectorSearchView)].forEach(item => {
       item.classList.toggle(this.options.classLayoutHidden);
     });
   }

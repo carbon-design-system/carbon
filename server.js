@@ -28,60 +28,48 @@ const getContent = glob =>
     if (filePaths.length === 0) {
       return undefined;
     }
-    return Promise.all(
-      filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))
-    ).then(contents => contents.reduce((a, b) => a.concat(b)));
+    return Promise.all(filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))).then(contents =>
+      contents.reduce((a, b) => a.concat(b))
+    );
   });
 
 const getEachContent = glob =>
-  globby(glob).then(filePaths => {
+  globby(glob).then(filePaths =>
     // eslint-disable-line arrow-body-style
-    return Promise.all(
-      filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))
-    ).then(contents =>
+    Promise.all(filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))).then(contents =>
       contents.map((content, i) => ({
         name: path.basename(filePaths[i], '.html'),
         content,
       }))
-    );
-  });
+    )
+  );
 
-const componentDirs = readdir('src/components').then(items => {
+const componentDirs = readdir('src/components').then(items =>
   // eslint-disable-line arrow-body-style
-  return Promise.all(
-    items.map(item => stat(path.resolve('src/components', item)))
-  ).then(stats => items.filter((item, i) => stats[i].isDirectory()));
-});
+  Promise.all(items.map(item => stat(path.resolve('src/components', item)))).then(stats =>
+    items.filter((item, i) => stats[i].isDirectory())
+  )
+);
 
 const topRouteHandler = (req, res) => {
   const name = req.params.component;
 
-  if (
-    name &&
-    path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
-      '..'
-  ) {
+  if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
     componentDirs
-      .then(dirs => {
+      .then(dirs =>
         // eslint-disable-line arrow-body-style
-        return Promise.all(
-          dirs.map(dir =>
-            getEachContent(path.resolve('src/components', dir, '**/*.html'))
-          )
-        )
+        Promise.all(dirs.map(dir => getEachContent(path.resolve('src/components', dir, '**/*.html'))))
           .then(subItemsList =>
-            subItemsList.map((subItems, i) => {
-              // eslint-disable-line arrow-body-style
-              return (
+            subItemsList.map(
+              (subItems, i) =>
+                // eslint-disable-line arrow-body-style
                 subItems.length > 0 &&
                 Object.assign(
                   {
                     name: dirs[i],
-                    selected:
-                      name === dirs[i] ||
-                      subItems.find(subItem => name === subItem.name),
+                    selected: name === dirs[i] || subItems.find(subItem => name === subItem.name),
                   },
                   subItems.length <= 1
                     ? {
@@ -98,20 +86,17 @@ const topRouteHandler = (req, res) => {
                         ),
                       }
                 )
-              );
-            })
+            )
           )
           .then(links => links.filter(Boolean))
           .then(links => {
             if (!name) {
               const firstLink = links[0];
-              (firstLink.items
-                ? firstLink.items[0]
-                : firstLink).selected = true;
+              (firstLink.items ? firstLink.items[0] : firstLink).selected = true;
             }
             return links;
-          });
-      })
+          })
+      )
       .then(links => {
         res.render('demo-all', {
           links,
@@ -154,6 +139,29 @@ app.get('/grid', (req, res) => {
   const glob = 'src/globals/grid/grid.html';
 
   if (path.relative('src/globals', glob).substr(0, 2) === '..') {
+    res.status(404).end();
+  } else {
+    Promise.all([getContent(glob)])
+      .then(results => {
+        if (typeof results[0] === 'undefined') {
+          res.status(404).end();
+        } else {
+          res.render('demo-grid', {
+            html: results[0],
+          });
+        }
+      })
+      .catch(error => {
+        console.error(error.stack); // eslint-disable-line no-console
+        res.status(500).end();
+      });
+  }
+});
+
+app.get('/tile-demo', (req, res) => {
+  const glob = 'src/components/tile/tile-demo.html';
+
+  if (path.relative('src/components', glob).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
     Promise.all([getContent(glob)])

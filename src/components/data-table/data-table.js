@@ -121,16 +121,10 @@ class DataTable extends mixin(
    */
   _toggleRowExpand = detail => {
     const element = detail.element;
-    const parent = eventMatches(
-      detail.initialEvt,
-      this.options.eventParentContainer
-    );
+    const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
 
     const index = this.expandCells.indexOf(element);
-    if (
-      element.dataset.previousValue === undefined ||
-      element.dataset.previousValue === 'expanded'
-    ) {
+    if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
       element.dataset.previousValue = 'collapsed';
       this.tableBody.insertBefore(
         this.expandableRows[index],
@@ -162,9 +156,7 @@ class DataTable extends mixin(
    */
   _toggleSelectAll = detail => {
     const { element, previousValue } = detail;
-    const inputs = [
-      ...this.element.querySelectorAll(this.options.selectorCheckbox),
-    ];
+    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
     if (!previousValue || previousValue === 'toggled') {
       inputs.forEach(item => {
         item.checked = true; // eslint-disable-line no-param-reassign

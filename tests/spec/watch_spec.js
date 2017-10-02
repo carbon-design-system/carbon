@@ -10,7 +10,7 @@ import watch from '../../src/globals/js/watch';
 
 settings.disableAutoInit = true;
 
-describe('Test watch mode', function () {
+describe('Test watch mode', function() {
   const watchOptions = { foo: 'Foo' };
   const ClassInitedBySearch = class extends mixin(createComponent, initComponentBySearch) {
     release = spyReleaseComponentBySearch;
@@ -50,13 +50,13 @@ describe('Test watch mode', function () {
 
   componentClasses.splice(0, componentClasses.length, ClassInitedBySearch, ClassInitedByEvent, ClassInitedByLauncher);
 
-  describe('Handling regular components', function () {
+  describe('Handling regular components', function() {
     let lastTarget;
     let stubObserve;
     let handle;
     let element;
 
-    before(function () {
+    before(function() {
       const origObserve = MutationObserver.prototype.observe;
       stubObserve = sinon.stub(MutationObserver.prototype, 'observe').callsFake(function stubObserveImpl(target, options) {
         lastTarget = target;
@@ -64,18 +64,18 @@ describe('Test watch mode', function () {
       });
     });
 
-    it('Should throw if given element is neither a DOM element or a document', function () {
+    it('Should throw if given element is neither a DOM element or a document', function() {
       expect(() => {
         handle = watch(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it('Should look at document if no element is given', function () {
+    it('Should look at document if no element is given', function() {
       handle = watch();
       expect(lastTarget).to.equal(document);
     });
 
-    it('Should instantiate the components', async function () {
+    it('Should instantiate the components', async function() {
       handle = watch(document, watchOptions);
 
       spyInitComponentBySearch.reset();
@@ -96,7 +96,7 @@ describe('Test watch mode', function () {
       expect(spyInitComponentBySearch.args[0][1], 'Option arg of ClassInitedBySearch.init()').to.deep.equal(watchOptions);
     });
 
-    it('Should release the components', async function () {
+    it('Should release the components', async function() {
       handle = watch();
 
       element = document.createElement('div');
@@ -110,7 +110,12 @@ describe('Test watch mode', function () {
       elementInitedByEvent.dataset.myComponentInitedByEvent = '';
       element.appendChild(elementInitedByEvent);
 
-      elementInitedByEvent.dispatchEvent(new CustomEvent('instantiating-event', { bubbles: true, cancelable: true }));
+      elementInitedByEvent.dispatchEvent(
+        new CustomEvent('instantiating-event', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
 
       const elementInitedByLauncher = document.createElement('div');
       elementInitedByLauncher.dataset.myComponentInitedByLauncher = '';
@@ -133,7 +138,7 @@ describe('Test watch mode', function () {
       expect(spyReleaseComponentByLauncher).to.have.been.calledOnce;
     });
 
-    it('Should release the components even if the removed node is of the component', async function () {
+    it('Should release the components even if the removed node is of the component', async function() {
       handle = watch();
 
       element = document.createElement('div');
@@ -149,7 +154,7 @@ describe('Test watch mode', function () {
       expect(spyReleaseComponentBySearch).to.have.been.calledOnce;
     });
 
-    it('Should stop instantiating components once the handle is released', async function () {
+    it('Should stop instantiating components once the handle is released', async function() {
       handle = watch(document, watchOptions);
 
       spyInitComponentBySearch.reset();
@@ -171,7 +176,7 @@ describe('Test watch mode', function () {
       expect(spyInitComponentBySearch, 'Call count of ClassInitedBySearch.init()').not.to.have.been.called;
     });
 
-    afterEach(function () {
+    afterEach(function() {
       if (element && element.parentNode) {
         element.parentNode.removeChild(element);
         element = null;
@@ -181,30 +186,30 @@ describe('Test watch mode', function () {
       }
     });
 
-    after(function () {
+    after(function() {
       stubObserve.restore();
     });
   });
 
-  describe('Handling checkbox', function () {
+  describe('Handling checkbox', function() {
     let element;
     let handle;
 
-    before(function () {
+    before(function() {
       handle = watch();
       element = document.createElement('input');
       element.type = 'checkbox';
       document.body.appendChild(element);
     });
 
-    it('Should add checked attribute when it is checked', function () {
+    it('Should add checked attribute when it is checked', function() {
       element.removeAttribute('checked');
       element.checked = true;
       element.dispatchEvent(new CustomEvent('change', { bubbles: true }));
       expect(element.hasAttribute('checked')).to.be.true;
     });
 
-    after(function () {
+    after(function() {
       if (element && element.parentNode) {
         element.parentNode.removeChild(element);
         element = null;
@@ -215,7 +220,7 @@ describe('Test watch mode', function () {
     });
   });
 
-  afterEach(function () {
+  afterEach(function() {
     spyReleaseComponentByLauncher.reset();
     spyReleaseComponentByEvent.reset();
     spyReleaseComponentBySearch.reset();

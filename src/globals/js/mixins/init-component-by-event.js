@@ -1,7 +1,7 @@
 import eventMatches from '../misc/event-matches';
 import on from '../misc/on';
 
-export default function (ToMix) {
+export default function(ToMix) {
   /**
    * Mix-in class to instantiate components upon events.
    * @class InitComponentByEvent
@@ -32,18 +32,23 @@ export default function (ToMix) {
       } else {
         // To work around non-bubbling `focus` event, use `focusin` event instead of it's available, and "capture mode" otherwise
         const hasFocusin = 'onfocusin' in (target.nodeType === Node.ELEMENT_NODE ? target.ownerDocument : target).defaultView;
-        const handles = effectiveOptions.initEventNames.map((name) => {
+        const handles = effectiveOptions.initEventNames.map(name => {
           const eventName = name === 'focus' && hasFocusin ? 'focusin' : name;
-          return on(target, eventName, (event) => {
-            const element = eventMatches(event, effectiveOptions.selectorInit);
-            // Instantiated components handles events by themselves
-            if (element && !this.components.has(element)) {
-              const component = this.create(element, options);
-              if (typeof component.createdByEvent === 'function') {
-                component.createdByEvent(event);
+          return on(
+            target,
+            eventName,
+            event => {
+              const element = eventMatches(event, effectiveOptions.selectorInit);
+              // Instantiated components handles events by themselves
+              if (element && !this.components.has(element)) {
+                const component = this.create(element, options);
+                if (typeof component.createdByEvent === 'function') {
+                  component.createdByEvent(event);
+                }
               }
-            }
-          }, name === 'focus' && !hasFocusin);
+            },
+            name === 'focus' && !hasFocusin
+          );
         });
         return {
           release() {

@@ -64,7 +64,7 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
    */
   end() {
     this.set(false);
-    this.element.addEventListener('animationend', (evt) => {
+    this.element.addEventListener('animationend', evt => {
       if (evt.animationName === 'rotate-end-p2') {
         this._deleteElement();
       }

@@ -14,7 +14,9 @@ class Card extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('keydown', (event) => { this._cardKeyPress(event); });
+    this.element.addEventListener('keydown', event => {
+      this._cardKeyPress(event);
+    });
   }
 
   /**
@@ -32,8 +34,8 @@ class Card extends mixin(createComponent, initComponentBySearch) {
     if (direction && card && card === document.activeElement) {
       const cards = [...this.element.querySelectorAll(this.options.selectorCard)];
       const nextIndex = Math.max(cards.indexOf(card) + direction, -1 /* For `card` not found in `cards` */);
-      const nextIndexLooped = nextIndex >= 0 && nextIndex < cards.length ? nextIndex :
-        nextIndex - (Math.sign(nextIndex) * cards.length);
+      const nextIndexLooped =
+        nextIndex >= 0 && nextIndex < cards.length ? nextIndex : nextIndex - Math.sign(nextIndex) * cards.length;
       cards[nextIndexLooped].focus();
     }
   }

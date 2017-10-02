@@ -1,3 +1,11 @@
+//-----------------------------
+// Order Summary
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/mixins';
+@import '../dropdown/_dropdown.scss';
+
 .bx--order-summary {
   @include font-size('14');
   background-color: $ui-01;
@@ -31,7 +39,7 @@
   }
 
   .bx--dropdown[data-value=''] .bx--dropdown-text,
-   .bx--dropdown-text {
+  .bx--dropdown-text {
     color: $brand-01;
   }
 }

@@ -1,9 +1,9 @@
 import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Tab from '../../src/components/tabs/tabs';
 
-describe('Test tabs', function () {
-  describe('Constructor', function () {
-    it('Should set default options', function () {
+describe('Test tabs', function() {
+  describe('Constructor', function() {
+    it('Should set default options', function() {
       const stubUpdateTriggerText = sinon.stub(Tab.prototype, '_updateTriggerText');
       try {
         const tab = new Tab(document.createElement('div'));
@@ -25,7 +25,7 @@ describe('Test tabs', function () {
       }
     });
 
-    it('Should initialize currently selected tab item for narrow screen', function () {
+    it('Should initialize currently selected tab item for narrow screen', function() {
       const triggerTextNode = document.createElement('div');
       triggerTextNode.classList.add('bx--tabs-trigger-text');
 
@@ -46,7 +46,7 @@ describe('Test tabs', function () {
       expect(triggerTextNode.textContent).to.equal('0');
     });
 
-    it('Should deal with a condition with no selected item when constructor runs', function () {
+    it('Should deal with a condition with no selected item when constructor runs', function() {
       const element = document.createElement('div');
       const buttonNode = document.createElement('div');
       buttonNode.classList.add('bx--tabs__nav-item');
@@ -57,13 +57,13 @@ describe('Test tabs', function () {
     });
   });
 
-  describe('Toggling drop down for narrow screen', function () {
+  describe('Toggling drop down for narrow screen', function() {
     let stubUpdateTriggerText;
     let element;
     let triggerNode;
     let menuNode;
 
-    before(function () {
+    before(function() {
       stubUpdateTriggerText = sinon.stub(Tab.prototype, '_updateTriggerText');
 
       triggerNode = document.createElement('div');
@@ -81,34 +81,34 @@ describe('Test tabs', function () {
       new Tab(element);
     });
 
-    it('Should show drop down upon hitting trigger button', function () {
+    it('Should show drop down upon hitting trigger button', function() {
       menuNode.classList.add('bx--tabs__nav--hidden');
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs__nav--hidden')).to.be.false;
     });
 
-    it('Should hide drop down upon hitting trigger button', function () {
+    it('Should hide drop down upon hitting trigger button', function() {
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs__nav--hidden')).to.be.true;
     });
 
-    afterEach(function () {
+    afterEach(function() {
       menuNode.classList.remove('bx--tabs__nav--hidden');
     });
 
-    after(function () {
+    after(function() {
       document.body.removeChild(element);
       stubUpdateTriggerText.restore();
     });
   });
 
-  describe('Setting active tab', function () {
+  describe('Setting active tab', function() {
     let stubUpdateMenuState;
     let element;
     let buttonNodes;
     let triggerTextNode;
 
-    before(function () {
+    before(function() {
       stubUpdateMenuState = sinon.stub(Tab.prototype, '_updateMenuState');
 
       triggerTextNode = document.createElement('div');
@@ -132,45 +132,45 @@ describe('Test tabs', function () {
       new Tab(element);
     });
 
-    beforeEach(function () {
+    beforeEach(function() {
       buttonNodes.forEach((buttonNode, i) => {
         buttonNode.classList[i === 0 ? 'add' : 'remove']('bx--tabs__nav-item--selected');
       });
     });
 
-    it('Should update active tab upon clicking', function () {
+    it('Should update active tab upon clicking', function() {
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
       expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
-    it('Should update currently selected tab item for narrow screen', function () {
+    it('Should update currently selected tab item for narrow screen', function() {
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(triggerTextNode.textContent).to.equal(buttonNodes[1].textContent);
     });
 
-    it('Should update active tab upon right key', function () {
+    it('Should update active tab upon right key', function() {
       const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
       expect(defaultPrevented).to.be.true;
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
       expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
-    it('Should handle out of range index', function () {
+    it('Should handle out of range index', function() {
       element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
       element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 39 }));
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
       expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
     });
 
-    it('Should update active tab upon left key', function () {
+    it('Should update active tab upon left key', function() {
       const defaultPrevented = element.dispatchEvent(Object.assign(new CustomEvent('keydown'), { which: 37 }));
       expect(defaultPrevented).to.be.true;
       expect(buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')).to.be.false;
       expect(buttonNodes[1].classList.contains('bx--tabs__nav-item--selected')).to.be.true;
     });
 
-    it('Should focus on the new active tab upon keyboard navigation', function () {
+    it('Should focus on the new active tab upon keyboard navigation', function() {
       const link = document.createElement('a');
       const spyFocus = sinon.spy(link, 'focus');
       link.classList.add('bx--tabs__nav-link');
@@ -184,7 +184,7 @@ describe('Test tabs', function () {
       }
     });
 
-    after(function () {
+    after(function() {
       document.body.removeChild(element);
       stubUpdateMenuState.restore();
     });

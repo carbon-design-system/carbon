@@ -13,8 +13,10 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    */
   constructor(element, options) {
     super(element, options);
-    ['mouseover', 'mouseout', 'focus', 'blur'].forEach((name) => {
-      this.element.addEventListener(name, (event) => { this._handleHover(event); });
+    ['mouseover', 'mouseout', 'focus', 'blur'].forEach(name => {
+      this.element.addEventListener(name, event => {
+        this._handleHover(event);
+      });
     });
   }
 

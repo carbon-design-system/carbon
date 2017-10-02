@@ -28,9 +28,11 @@ const rollup = require('rollup');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
 
+// JSDoc
+const jsdocConfig = require('gulp-jsdoc3/dist/jsdocConfig.json');
+
 // Generic utility
 const del = require('del');
-const exec = require('child_process').exec;
 
 // Test environment
 const Server = require('karma').Server;
@@ -42,7 +44,6 @@ const cloptions = require('minimist')(process.argv.slice(2), {
 });
 
 // Axe A11y Test
-const fs = require('fs');
 const axe = require('gulp-axe-webdriver');
 const axeArgs = require('minimist')(process.argv.slice(2));
 
@@ -139,22 +140,12 @@ gulp.task('scripts:es', () => {
     .pipe(gulp.dest('es/'));
 });
 
-gulp.task('scripts:rollup', () =>
-  rollup.rollup(rollupConfigProd).then(bundle => bundle.write(rollupConfigProd))
-);
+gulp.task('scripts:rollup', () => rollup.rollup(rollupConfigProd).then(bundle => bundle.write(rollupConfigProd)));
 
 gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
 
-  pump(
-    [
-      gulp.src(srcFile),
-      uglify(),
-      rename('carbon-components.min.js'),
-      gulp.dest('scripts'),
-    ],
-    cb
-  );
+  pump([gulp.src(srcFile), uglify(), rename('carbon-components.min.js'), gulp.dest('scripts')], cb);
 });
 
 /**
@@ -237,14 +228,7 @@ gulp.task('html:source', () => {
 
 gulp.task('lint', () =>
   gulp
-    .src([
-      'gulpfile.js',
-      'server.js',
-      'src/**/*.js',
-      'tests/**/*.js',
-      'tools/**/*.js',
-      'demo/**/*.js',
-    ])
+    .src(['gulpfile.js', 'server.js', 'src/**/*.js', 'tests/**/*.js', 'tools/**/*.js', 'demo/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
@@ -278,7 +262,7 @@ gulp.task('jsdoc', cb => {
     .on('end', () => {
       gulp.src(['README.md', 'docs/js/tmp/**/*.js'], { read: false }).pipe(
         jsdoc(
-          Object.assign(require('gulp-jsdoc3/dist/jsdocConfig.json'), {
+          Object.assign(jsdocConfig, {
             // eslint-disable-line global-require
             opts: {
               destination: './docs/js',
@@ -314,7 +298,6 @@ gulp.task('test:unit', done => {
 });
 
 gulp.task('test:a11y', ['sass:compiled'], done => {
-  const dirs = fs.readdirSync('./src/components');
   const componentName = axeArgs.name === undefined ? undefined : axeArgs.name;
   const options = {
     a11yCheckOptions: {
@@ -328,16 +311,9 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
     showOnlyViolations: true,
     exclude: '.offleft, #flex-col, #flex-row',
     tags: ['wcag2aa', 'wcag2a'],
-    folderOutputReport:
-      componentName === undefined ? 'tests/axe/allHtml' : 'tests/axe',
-    saveOutputIn:
-      componentName === undefined
-        ? `a11y-html.json`
-        : `a11y-${componentName}.json`,
-    urls:
-      componentName === undefined
-        ? ['http://localhost:3000']
-        : [`http://localhost:3000/components/${componentName}/`],
+    folderOutputReport: componentName === undefined ? 'tests/axe/allHtml' : 'tests/axe',
+    saveOutputIn: componentName === undefined ? `a11y-html.json` : `a11y-${componentName}.json`,
+    urls: componentName === undefined ? ['http://localhost:3000'] : [`http://localhost:3000/components/${componentName}/`],
   };
 
   return axe(options, done);
@@ -354,12 +330,7 @@ gulp.task('watch', () => {
 gulp.task('serve', ['browser-sync', 'watch']);
 
 // Build task collection
-gulp.task('build:scripts', [
-  'scripts:umd',
-  'scripts:es',
-  'scripts:compiled',
-  'scripts:dev',
-]);
+gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev']);
 gulp.task('build:styles', ['sass:compiled', 'sass:source']);
 
 // Mapped to npm run build
@@ -370,7 +341,5 @@ gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {
   // eslint-disable-next-line no-console
-  console.log(
-    '\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n'
-  );
+  console.log('\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n');
 });

@@ -20,10 +20,10 @@
     left: rem(200px);
     background-color: $ui-02;
     width: calc(100% - 200px);
-    padding: .875rem 3%;
+    padding: 0.875rem 3%;
 
     @include breakpoint(bp--sm--major) {
-      padding: .75rem 5%;
+      padding: 0.75rem 5%;
       height: rem(88px);
       max-height: rem(88px);
     }
@@ -33,12 +33,12 @@
     @include detail-page-header;
     min-height: rem(66px);
     background-color: $ui-01;
-    padding: .75rem 3% 0;
+    padding: 0.75rem 3% 0;
     left: 0;
     width: 100%;
 
     @include breakpoint(bp--sm--major) {
-      padding: .75rem 5% 0;
+      padding: 0.75rem 5% 0;
       height: rem(124px);
     }
   }
@@ -46,8 +46,7 @@
   .bx--detail-page-header .bx--breadcrumb {
     display: none;
     transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
-      visibility $transition--base $bx--standard-easing $transition-time / 2,
-      transform $transition--base $bx--standard-easing 0s;
+      visibility $transition--base $bx--standard-easing $transition-time / 2, transform $transition--base $bx--standard-easing 0s;
     will-change: opacity, visibility, transform;
 
     @include breakpoint(bp--sm--major) {
@@ -57,7 +56,7 @@
   }
 
   .bx--detail-page-header--no-tabs .bx--breadcrumb {
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
     transform: translate3d(0, 0, 0);
   }
 
@@ -77,7 +76,7 @@
     margin-top: rem(3px);
 
     @include breakpoint(bp--sm--major) {
-      margin-top: .5rem;
+      margin-top: 0.5rem;
     }
   }
 
@@ -104,7 +103,7 @@
     border: 1px solid $ui-05;
     height: rem(36px);
     width: rem(36px);
-    margin-right: .625rem;
+    margin-right: 0.625rem;
   }
 
   .bx--detail-page-header-title {
@@ -128,16 +127,15 @@
     height: rem(12px);
     width: rem(12px);
     background-color: $support-02;
-    margin-left: .625rem;
+    margin-left: 0.625rem;
   }
 
   .bx--detail-page-header-menu {
     position: absolute;
-    right: .75rem;
+    right: 0.75rem;
     display: flex;
     align-items: flex-start;
-    transition: top $transition--base $bx--standard-easing 0s,
-      transform $transition--base $bx--standard-easing 0s;
+    transition: top $transition--base $bx--standard-easing 0s, transform $transition--base $bx--standard-easing 0s;
     will-change: transform, top;
 
     @include breakpoint(bp--sm--major) {
@@ -154,7 +152,7 @@
   }
 
   .bx--detail-page-header--with-tabs .bx--tabs {
-    padding: .75rem 0;
+    padding: 0.75rem 0;
     display: none;
 
     @include breakpoint(bp--sm--major) {
@@ -174,7 +172,8 @@
 
   // Scroll
   .bx--detail-page-header--scroll {
-    .bx--breadcrumb, .bx--tabs {
+    .bx--breadcrumb,
+    .bx--tabs {
       transition-delay: 0s;
 
       @include breakpoint(bp--sm--major) {
@@ -186,11 +185,11 @@
 
   // Scroll -- With Tabs
   .bx--detail-page-header--scroll.bx--detail-page-header--with-tabs {
-    padding: .75rem 3% 0;
+    padding: 0.75rem 3% 0;
     transition-delay: $transition-time / 2;
 
     @include breakpoint(bp--sm--major) {
-      padding: .75rem 5% 0;
+      padding: 0.75rem 5% 0;
       transform: translate3d(0, -50%, 0);
     }
 

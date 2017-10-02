@@ -24,7 +24,9 @@ class Tab extends ContentSwitcher {
   constructor(element, options) {
     super(element, options);
 
-    this.element.addEventListener('keydown', (event) => { this._handleKeyDown(event); });
+    this.element.addEventListener('keydown', event => {
+      this._handleKeyDown(event);
+    });
 
     const selected = this.element.querySelector(this.options.selectorButtonSelected);
     if (selected) {
@@ -90,8 +92,8 @@ class Tab extends ContentSwitcher {
       const buttons = [...this.element.querySelectorAll(this.options.selectorButton)];
       const button = this.element.querySelector(this.options.selectorButtonSelected);
       const nextIndex = Math.max(buttons.indexOf(button) + direction, -1 /* For `button` not found in `buttons` */);
-      const nextIndexLooped = nextIndex >= 0 && nextIndex < buttons.length ? nextIndex :
-        nextIndex - (Math.sign(nextIndex) * buttons.length);
+      const nextIndexLooped =
+        nextIndex >= 0 && nextIndex < buttons.length ? nextIndex : nextIndex - Math.sign(nextIndex) * buttons.length;
       this.setActive(buttons[nextIndexLooped], (error, item) => {
         if (item) {
           const link = item.querySelector(this.options.selectorLink);

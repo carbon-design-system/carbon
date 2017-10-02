@@ -4,13 +4,13 @@ import EventManager from '../utils/event-manager';
 import NumberInput from '../../src/components/number-input/number-input';
 import HTML from '../../src/components/number-input/number-input.html';
 
-describe('Test Number Input', function () {
-  describe('Constructor', function () {
+describe('Test Number Input', function() {
+  describe('Constructor', function() {
     let element;
     let instance;
     let container;
 
-    before(function () {
+    before(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -18,36 +18,36 @@ describe('Test Number Input', function () {
       instance = new NumberInput(element);
     });
 
-    it('Should throw if root element is not given', function () {
+    it('Should throw if root element is not given', function() {
       expect(() => {
         new NumberInput();
       }).to.throw(Error);
     });
 
-    it('Should throw if root element is not a DOM element', function () {
+    it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new NumberInput(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it('should set default options', function () {
+    it('should set default options', function() {
       expect(instance.options).to.deep.equal({
         selectorInit: '[data-numberinput]',
       });
     });
 
-    after(function () {
+    after(function() {
       document.body.removeChild(container);
       instance.release();
     });
   });
 
-  describe('_handleClick', function () {
+  describe('_handleClick', function() {
     let element;
     let instance;
     let container;
 
-    beforeEach(function () {
+    beforeEach(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -55,7 +55,7 @@ describe('Test Number Input', function () {
       instance = new NumberInput(element);
     });
 
-    it('Should be called on click', function () {
+    it('Should be called on click', function() {
       const spy = sinon.spy(instance, '_handleClick');
       const event = new CustomEvent('click', { bubbles: true });
       const clickTarget = element.querySelector('.up-icon');
@@ -64,7 +64,7 @@ describe('Test Number Input', function () {
       spy.restore();
     });
 
-    it('Should emit a change event', function () {
+    it('Should emit a change event', function() {
       const spyOnChange = sinon.spy();
       document.body.addEventListener('change', spyOnChange);
       const event = new CustomEvent('click', { bubbles: true });
@@ -73,20 +73,20 @@ describe('Test Number Input', function () {
       expect(spyOnChange).to.have.been.called;
     });
 
-    afterEach(function () {
+    afterEach(function() {
       document.body.removeChild(container);
       instance.release();
     });
   });
 
-  describe('Adding and Subtracting', function () {
+  describe('Adding and Subtracting', function() {
     let element;
     let instance;
     let inputNode;
     let container;
     const events = new EventManager();
 
-    before(function () {
+    before(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -96,9 +96,9 @@ describe('Test Number Input', function () {
       inputNode.value = '0';
     });
 
-    it('Should increase the value', async function () {
+    it('Should increase the value', async function() {
       const upArrowNode = document.querySelector('.up-icon');
-      const e = await new Promise((resolve) => {
+      const e = await new Promise(resolve => {
         events.on(document.body, 'change', resolve);
         upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
@@ -106,10 +106,10 @@ describe('Test Number Input', function () {
       expect(inputNode.value).to.equal('1');
     });
 
-    it('Should decrease the value', async function () {
+    it('Should decrease the value', async function() {
       const downArrowNode = document.querySelector('.down-icon');
       inputNode.value = '1';
-      const e = await new Promise((resolve) => {
+      const e = await new Promise(resolve => {
         events.on(document.body, 'change', resolve);
         downArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
@@ -117,28 +117,28 @@ describe('Test Number Input', function () {
       expect(inputNode.value).to.equal('0');
     });
 
-    afterEach(function () {
+    afterEach(function() {
       events.reset();
     });
 
-    after(function () {
+    after(function() {
       document.body.removeChild(container);
       instance.release();
     });
   });
 
-  describe('Managing instances', function () {
+  describe('Managing instances', function() {
     let element;
     let container;
 
-    before(function () {
+    before(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
       element = document.querySelector('[data-numberinput]');
     });
 
-    it('Should prevent creating duplicate instances', function () {
+    it('Should prevent creating duplicate instances', function() {
       let first;
       let second;
       try {
@@ -153,7 +153,7 @@ describe('Test Number Input', function () {
       }
     });
 
-    it('Should let create a new instance for an element if an earlier one has been released', function () {
+    it('Should let create a new instance for an element if an earlier one has been released', function() {
       let first;
       let second;
       try {
@@ -169,7 +169,7 @@ describe('Test Number Input', function () {
       }
     });
 
-    after(function () {
+    after(function() {
       document.body.removeChild(container);
     });
   });

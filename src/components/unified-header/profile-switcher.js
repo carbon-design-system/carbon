@@ -28,9 +28,11 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this.handleDocumentClick(evt); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
+      this.handleDocumentClick(evt);
+    });
 
-    this.element.addEventListener('dropdown-beingselected', (event) => {
+    this.element.addEventListener('dropdown-beingselected', event => {
       if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
         const linkedIconNode = event.detail.item.querySelector(this.options.classLinkedIcon);
         this.element.isLinked = !!linkedIconNode;
@@ -42,14 +44,16 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
 
     const toggleNode = this.element.querySelector(this.options.selectorToggle);
     if (toggleNode) {
-      toggleNode.addEventListener('keydown', (event) => { this.toggle(event); });
+      toggleNode.addEventListener('keydown', event => {
+        this.toggle(event);
+      });
 
-      toggleNode.addEventListener('mouseenter', (event) => {
+      toggleNode.addEventListener('mouseenter', event => {
         this.getLinkedData(event);
         this.determineSwitcherValues(true);
       });
 
-      toggleNode.addEventListener('mouseleave', (event) => {
+      toggleNode.addEventListener('mouseleave', event => {
         this.getLinkedData(event);
         this.determineSwitcherValues(false);
       });
@@ -84,7 +88,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
   }
 
   handleBlur() {
-    if (!(this.element.contains(document.activeElement))) {
+    if (!this.element.contains(document.activeElement)) {
       this.element.classList.remove(this.options.classSwitcherOpen);
     }
   }
@@ -134,8 +138,9 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
       if (this.element.isLinked) {
         if (this.element.linkedAccount) {
           if (linkedElement.textContent.length) {
-            linkedElement.querySelector(this.options.selectorAccountSlLinked).textContent =
-             this.element.linkedAccount.textContent;
+            linkedElement.querySelector(
+              this.options.selectorAccountSlLinked
+            ).textContent = this.element.linkedAccount.textContent;
           } else {
             linkedElement.appendChild(this.element.linkedAccount);
             if (this.element.linkedIcon) {
@@ -147,7 +152,6 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
         linkedElement.textContent = '';
       }
     }
-
 
     let nameDropdownValue = '';
     if (this.element.querySelector(this.options.selectorAccountDropdown)) {

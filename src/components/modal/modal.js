@@ -87,7 +87,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
   }
 
   _hookCloseActions() {
-    this.element.addEventListener('click', (evt) => {
+    this.element.addEventListener('click', evt => {
       const closeButton = eventMatches(evt, this.options.selectorModalClose);
       if (closeButton) {
         evt.delegateTarget = closeButton; // eslint-disable-line no-param-reassign
@@ -102,7 +102,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
       this.keydownHandler = null;
     }
 
-    this.keydownHandler = (evt) => {
+    this.keydownHandler = evt => {
       if (evt.which === 27) {
         this.hide(evt);
       }
@@ -116,7 +116,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @param {Event} evt The event.
    * @private
    */
-  _handleFocusin = (evt) => {
+  _handleFocusin = evt => {
     if (this.element.classList.contains(this.options.classVisible) && !this.element.contains(evt.target)) {
       this.element.focus();
     }

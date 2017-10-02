@@ -27,13 +27,17 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
      * The handle to release click event listener on document object.
      * @member {Handle}
      */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this._handleDocumentClick(event); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', event => {
+      this._handleDocumentClick(event);
+    });
 
     /**
      * The handle to release keypress event listener on document object.
      * @member {Handle}
      */
-    this.hDocumentKeyPress = on(this.element.ownerDocument, 'keypress', (event) => { this._handleKeyPress(event); });
+    this.hDocumentKeyPress = on(this.element.ownerDocument, 'keypress', event => {
+      this._handleKeyPress(event);
+    });
   }
 
   /**

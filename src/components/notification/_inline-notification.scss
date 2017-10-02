@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     background-color: transparent;
-    padding: .75rem 1rem;
+    padding: 0.75rem 1rem;
     min-height: rem(40px);
     color: $text-03;
     margin-top: 1rem;
@@ -67,7 +67,7 @@
   .bx--inline-notification__title {
     @include font-size('14');
     font-weight: 700;
-    margin-right: .25rem;
+    margin-right: 0.25rem;
     line-height: 1.125;
   }
 

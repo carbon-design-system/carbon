@@ -30,37 +30,34 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   }
 
   _filenamesHTML(name, id) {
-    return (`<span class="bx--file__selected-file">
+    return `<span class="bx--file__selected-file">
       <p class="bx--file-filename">${name}</p>
       <span data-for="${id}" class="bx--file__state-container"></span>
-    </span>`);
+    </span>`;
   }
 
   _uploadHTML() {
-    return (`
+    return `
       <div data-loading class="bx--loading">
         <svg class="bx--loading__svg" viewBox="-42 -42 84 84">
           <circle cx="0" cy="0" r="37.5" />
         </svg>
-      </div>`
-    );
+      </div>`;
   }
 
   _closeButtonHTML() {
-    return (`
+    return `
       <svg class="bx--file-close" tabindex="0" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
         <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8
           9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z" />
-      </svg>`
-    );
+      </svg>`;
   }
 
   _checkmarkHTML() {
-    return (`
+    return `
       <svg class="bx--file-complete" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
        <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z"/>
-      </svg>`
-    );
+      </svg>`;
   }
 
   _changeState = (state, detail, callback) => {
@@ -68,7 +65,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
       this.container.removeChild(detail.filenameElement);
     }
     callback();
-  }
+  };
 
   _getStateContainers() {
     const stateContainers = [...this.element.querySelectorAll(`[data-for=${this.inputId}]`)];
@@ -89,9 +86,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
    */
   _displayFilenames() {
     const container = this.element.querySelector(this.options.selectorContainer);
-    const HTMLString = [...this.input.files]
-    .map(file => this._filenamesHTML(file.name, this.inputId))
-    .join('');
+    const HTMLString = [...this.input.files].map(file => this._filenamesHTML(file.name, this.inputId)).join('');
 
     container.insertAdjacentHTML('afterbegin', HTMLString);
   }
@@ -107,7 +102,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
 
   _handleStateChange(elements, selectIndex, html) {
     if (selectIndex === undefined) {
-      elements.forEach((el) => {
+      elements.forEach(el => {
         this._removeState(el);
         el.insertAdjacentHTML('beforeend', html);
       });
@@ -126,8 +121,8 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
 
     if (state === 'edit') {
       this._handleStateChange(stateContainers, selectIndex, this._closeButtonHTML());
-      stateContainers.forEach((el) => {
-        el.addEventListener('click', (evt) => {
+      stateContainers.forEach(el => {
+        el.addEventListener('click', evt => {
           const detail = {
             initialEvt: evt,
             filenameElement: evt.currentTarget.parentNode,

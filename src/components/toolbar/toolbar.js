@@ -20,16 +20,22 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
       const boundTable = this.element.ownerDocument.querySelector(this.element.dataset.tableTarget);
       const rowHeightBtns = this.element.querySelector(this.options.selectorRowHeight);
       if (rowHeightBtns) {
-        rowHeightBtns.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
+        rowHeightBtns.addEventListener('click', event => {
+          this._handleRowHeightChange(event, boundTable);
+        });
         // [...this.element.querySelectorAll(this.options.selectorRowHeight)].forEach((item) => {
         //   item.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
         // });
       }
     }
 
-    this.hDocumentKeyDown = on(this.element.ownerDocument, 'keydown', (evt) => { this._handleKeyDown(evt); });
+    this.hDocumentKeyDown = on(this.element.ownerDocument, 'keydown', evt => {
+      this._handleKeyDown(evt);
+    });
 
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this._handleDocumentClick(evt); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
+      this._handleDocumentClick(evt);
+    });
   }
 
   /**
@@ -49,7 +55,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
     }
 
     const targetComponentElement = eventMatches(event, this.options.selectorInit);
-    [...this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)].forEach((item) => {
+    [...this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)].forEach(item => {
       if (!targetComponentElement || !targetComponentElement.contains(item)) {
         item.classList.remove(this.options.classSearchActive);
       }
@@ -123,7 +129,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
     selectorRowHeight: '[data-row-height]',
     classTallRows: 'bx--responsive-table--tall',
     classSearchActive: 'bx--toolbar-search--active',
-  }
+  };
 }
 
 export default Toolbar;

@@ -3,23 +3,23 @@ import createMockRaf from 'mock-raf';
 import Slider from '../../src/components/slider/slider';
 import SliderHTML from '../../src/components/slider/slider.html';
 
-describe('Test slider', function () {
-  describe('Constructor', function () {
+describe('Test slider', function() {
+  describe('Constructor', function() {
     let slider;
 
-    it('Should throw if root element is not given', function () {
+    it('Should throw if root element is not given', function() {
       expect(() => {
         slider = new Slider();
       }).to.throw(Error);
     });
 
-    it('Should throw if root element is not a DOM element', function () {
+    it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         slider = new Slider(document.createTextNode(''));
       }).to.throw(Error);
     });
 
-    it('Should set default options', function () {
+    it('Should set default options', function() {
       const container = document.createElement('div');
       container.innerHTML = SliderHTML;
       document.body.appendChild(container);
@@ -37,49 +37,49 @@ describe('Test slider', function () {
       });
     });
 
-    afterEach(function () {
+    afterEach(function() {
       if (slider) {
         slider = slider.release();
       }
     });
   });
-  describe('Programatic change', function () {
+  describe('Programatic change', function() {
     let slider;
     let container;
-    beforeEach(function () {
+    beforeEach(function() {
       container = document.createElement('div');
       container.innerHTML = SliderHTML;
       document.body.appendChild(container);
       slider = new Slider(document.querySelector('[data-slider]'));
     });
-    it('Should setValue as expected', function () {
+    it('Should setValue as expected', function() {
       slider.setValue(100);
       expect(slider.getInputProps().value).to.equal('100');
     });
-    it('Should stepUp as expected', function () {
+    it('Should stepUp as expected', function() {
       slider.setValue(50);
       slider.stepUp();
       expect(slider.getInputProps().value).to.equal('51');
     });
-    it('Should stepDown as expected', function () {
+    it('Should stepDown as expected', function() {
       slider.setValue(50);
       slider.stepDown();
       expect(slider.getInputProps().value).to.equal('49');
     });
-    afterEach(function () {
+    afterEach(function() {
       if (slider) {
         slider = slider.release();
         document.body.innerHTML = '';
       }
     });
   });
-  describe('Keydown on slider', function () {
+  describe('Keydown on slider', function() {
     let container;
     let slider;
     let thumb;
     let mockRaf;
     let rafStub;
-    beforeEach(function () {
+    beforeEach(function() {
       mockRaf = createMockRaf();
       rafStub = sinon.stub(window, 'requestAnimationFrame').callsFake(mockRaf.raf);
       container = document.createElement('div');
@@ -89,7 +89,7 @@ describe('Test slider', function () {
       thumb = document.querySelector('.bx--slider__thumb');
       mockRaf.step({ count: 1 });
     });
-    it('Should stepUp value on up/right key', function () {
+    it('Should stepUp value on up/right key', function() {
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 39;
       thumb.dispatchEvent(event);
@@ -100,7 +100,7 @@ describe('Test slider', function () {
       mockRaf.step({ count: 1 });
       expect(slider.getInputProps().value).to.equal('52');
     });
-    it('Should stepDown value on down/left key', function () {
+    it('Should stepDown value on down/left key', function() {
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 40;
       thumb.dispatchEvent(event);
@@ -111,7 +111,7 @@ describe('Test slider', function () {
       mockRaf.step({ count: 1 });
       expect(slider.getInputProps().value).to.equal('48');
     });
-    afterEach(function () {
+    afterEach(function() {
       if (mockRaf) {
         rafStub.restore();
         rafStub = null;
@@ -122,13 +122,13 @@ describe('Test slider', function () {
       }
     });
   });
-  describe('Click on slider', function () {
+  describe('Click on slider', function() {
     let container;
     let slider;
     let track;
     let mockRaf;
     let rafStub;
-    beforeEach(function () {
+    beforeEach(function() {
       mockRaf = createMockRaf();
       rafStub = sinon.stub(window, 'requestAnimationFrame').callsFake(mockRaf.raf);
       container = document.createElement('div');
@@ -138,14 +138,14 @@ describe('Test slider', function () {
       track = document.querySelector('.bx--slider__track');
       mockRaf.step({ count: 1 });
     });
-    it('Should change value on click', function () {
+    it('Should change value on click', function() {
       const event = new CustomEvent('click', { bubbles: true });
       event.clientX = 0;
       track.dispatchEvent(event);
       mockRaf.step({ count: 1 });
       expect(slider.getInputProps().value).to.equal('0');
     });
-    afterEach(function () {
+    afterEach(function() {
       if (mockRaf) {
         rafStub.restore();
         rafStub = null;

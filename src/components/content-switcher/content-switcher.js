@@ -22,7 +22,9 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', (event) => { this._handleClick(event); });
+    this.element.addEventListener('click', event => {
+      this._handleClick(event);
+    });
   }
 
   /**
@@ -54,7 +56,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
     // `options.selectorLink` is not defined in this class itself, code here primary is for inherited classes
     const itemLink = item.querySelector(this.options.selectorLink);
     if (itemLink) {
-      [...this.element.querySelectorAll(this.options.selectorLink)].forEach((link) => {
+      [...this.element.querySelectorAll(this.options.selectorLink)].forEach(link => {
         if (link !== itemLink) {
           link.setAttribute('aria-selected', 'false');
         }
@@ -64,7 +66,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
 
     const selectorButtons = [...this.element.querySelectorAll(this.options.selectorButton)];
 
-    selectorButtons.forEach((button) => {
+    selectorButtons.forEach(button => {
       if (button !== item) {
         button.classList.toggle(this.options.classActive, false);
         [...button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => element.setAttribute('hidden', ''));
@@ -88,18 +90,21 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * or is canceled. Will only invoke callback if it's passed in.
    */
   setActive(item, callback) {
-    this.changeState({
-      group: 'selected',
-      item,
-    }, (error) => {
-      if (error) {
-        if (callback) {
-          callback(Object.assign(error, { item }));
+    this.changeState(
+      {
+        group: 'selected',
+        item,
+      },
+      error => {
+        if (error) {
+          if (callback) {
+            callback(Object.assign(error, { item }));
+          }
+        } else if (callback) {
+          callback(null, item);
         }
-      } else if (callback) {
-        callback(null, item);
       }
-    });
+    );
   }
 
   /**

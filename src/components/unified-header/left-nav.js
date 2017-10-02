@@ -39,7 +39,9 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     this.hookOpenActions();
     this.hookListSectionEvents();
     this.hookListItemsEvents();
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (evt) => { this.handleDocumentClick(evt); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
+      this.handleDocumentClick(evt);
+    });
   }
 
   /**
@@ -82,7 +84,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
       selectedNav.classList.add(`${this.options.classNavSectionTransition}--100`); // Second move 100px
     }
     selectedNav.setAttribute('data-left-nav-section', selectedNavValue);
-    /* Not sure what trick more performant*/
+    /* Not sure what trick more performant */
     setTimeout(() => {
       selectedNav.classList.add(`${this.options.classNavSectionTransition}--0`);
     }, 100); // Could probably use a promise here
@@ -99,8 +101,9 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    * Adds a transitional animation to the navigation items on nav section click
    */
   animateNavList(selectedNavTitle) {
-    const currentLeftNavList
-      = this.element.querySelector(`${this.options.selectorLeftNavList}:not(.bx--left-nav__main-nav--hidden)`);
+    const currentLeftNavList = this.element.querySelector(
+      `${this.options.selectorLeftNavList}:not(.bx--left-nav__main-nav--hidden)`
+    );
     const newLeftNavList = this.element.querySelector(`[data-left-nav-list=${selectedNavTitle}]`);
     const currentLeftNavItems = [...currentLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)].reverse();
     const newLeftNavItems = [...newLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)];
@@ -108,7 +111,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     const fadeOutTime = 300;
     let counter = 0;
     const counterIteration = fadeOutTime / currentLeftNavItems.length; // Length of animation divided by number of items
-    currentLeftNavItems.forEach((item) => {
+    currentLeftNavItems.forEach(item => {
       item.setAttribute('tabIndex', '-1');
       setTimeout(() => {
         item.classList.add(this.options.classItemFade);
@@ -116,7 +119,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
       counter += counterIteration;
     });
 
-    newLeftNavItems.forEach((item) => {
+    newLeftNavItems.forEach(item => {
       item.setAttribute('tabIndex', '0');
       item.classList.remove(this.options.classItemFade);
     });
@@ -126,7 +129,9 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
       currentLeftNavList.classList.add(this.options.classListTop);
       currentLeftNavList.setAttribute('aria-hidden', 'true');
       newLeftNavList.classList.remove(this.options.classListHidden);
-      setTimeout(() => { newLeftNavList.classList.remove(this.options.classListTop); }, 100);
+      setTimeout(() => {
+        newLeftNavList.classList.remove(this.options.classListTop);
+      }, 100);
       newLeftNavList.setAttribute('aria-hidden', 'false');
     }, fadeOutTime + 100); // Wait for items to fade out.
   }
@@ -140,7 +145,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
       this.toggleMenu();
     });
 
-    openBtn.addEventListener('keydown', (evt) => {
+    openBtn.addEventListener('keydown', evt => {
       if (evt.which === 13) {
         this.element.tabIndex = '0';
         this.toggleMenu();
@@ -153,7 +158,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
         this.closeMenu();
       });
 
-      closeBtn.addEventListener('keydown', (evt) => {
+      closeBtn.addEventListener('keydown', evt => {
         if (evt.which === 13) {
           this.element.tabIndex = '-1';
           this.closeMenu();
@@ -161,8 +166,8 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
       });
     }
 
-    this.element.ownerDocument.addEventListener('keydown', (evt) => {
-      if ((evt.which === 27) && this.element.classList.contains(this.options.classActiveLeftNav)) {
+    this.element.ownerDocument.addEventListener('keydown', evt => {
+      if (evt.which === 27 && this.element.classList.contains(this.options.classActiveLeftNav)) {
         this.closeMenu();
       }
     });
@@ -173,11 +178,11 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    */
   hookListSectionEvents() {
     const leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
-    leftNavSections.addEventListener('click', (evt) => {
+    leftNavSections.addEventListener('click', evt => {
       this.handleSectionItemClick(evt, leftNavSections);
     });
 
-    leftNavSections.addEventListener('keydown', (evt) => {
+    leftNavSections.addEventListener('keydown', evt => {
       if (evt.which === 13) {
         this.handleSectionItemClick(evt, leftNavSections);
         this.element.querySelector(this.options.selectorLeftNavCurrentSectionTitle).focus();
@@ -190,8 +195,8 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    */
   hookListItemsEvents() {
     const leftNavList = [...this.element.querySelectorAll(this.options.selectorLeftNavList)];
-    leftNavList.forEach((list) => {
-      list.addEventListener('click', (evt) => {
+    leftNavList.forEach(list => {
+      list.addEventListener('click', evt => {
         const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
         if (leftNavItem) {
           const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
@@ -213,7 +218,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
           }
         }
       });
-      list.addEventListener('keydown', (evt) => {
+      list.addEventListener('keydown', evt => {
         if (evt.which === 13) {
           const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
           if (leftNavItem) {
@@ -228,10 +233,10 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
                 this.addActiveListItem(childItem);
               } else {
                 childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
-                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top
-                  = `${childItem.offsetTop - this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
-                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left
-                  = `${childItem.offsetLeft + Math.round(childItem.offsetWidth)}px`;
+                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${childItem.offsetTop -
+                  this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
+                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${childItem.offsetLeft +
+                  Math.round(childItem.offsetWidth)}px`;
               }
             } else if (hasChildren) {
               this.handleNestedListClick(leftNavItem);
@@ -246,15 +251,15 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
       });
     });
     const flyouts = [...this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)];
-    flyouts.forEach((flyout) => {
+    flyouts.forEach(flyout => {
       flyout.addEventListener('mouseenter', () => {
         flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
         // eslint-disable-next-line no-param-reassign
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top
-          = `${flyout.offsetTop - this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${flyout.offsetTop -
+          this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
         // eslint-disable-next-line no-param-reassign
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left
-          = `${flyout.offsetLeft + Math.round(flyout.offsetWidth)}px`;
+        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${flyout.offsetLeft +
+          Math.round(flyout.offsetWidth)}px`;
         flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.toggle(this.options.classFlyoutDisplayed);
       });
       flyout.addEventListener('mouseleave', () => {
@@ -269,7 +274,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    */
   hideAllFlyoutMenus() {
     const flyoutMenus = [...this.element.querySelectorAll(this.options.selectorLeftNavFlyoutMenu)];
-    flyoutMenus.forEach((menu) => {
+    flyoutMenus.forEach(menu => {
       menu.setAttribute('aria-hidden', 'true');
       menu.classList.remove(this.options.classFlyoutDisplayed);
     });
@@ -280,7 +285,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    * @param {Object} item The active list item.
    */
   addActiveListItem(item) {
-    [...this.element.querySelectorAll(this.options.selectorLeftNavAllListItems)].forEach((currentItem) => {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavAllListItems)].forEach(currentItem => {
       if (!(item === currentItem)) {
         if (!currentItem.contains(item)) {
           currentItem.classList.remove(this.options.classActiveLeftNavListItem);
@@ -289,7 +294,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
         }
       }
     });
-    [...this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach((currentItem) => {
+    [...this.element.querySelectorAll(this.options.selectorLeftNavNestedListItem)].forEach(currentItem => {
       if (!(item === currentItem)) {
         currentItem.classList.remove(this.options.classActiveLeftNavListItem);
       }
@@ -341,7 +346,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     this.hideAllFlyoutMenus();
     listItem.classList.toggle(this.options.classExpandedLeftNavListItem, !isOpen);
     const listItems = [...listItem.querySelectorAll(this.options.selectorLeftNavNestedListItem)];
-    listItems.forEach((item) => {
+    listItems.forEach(item => {
       if (isOpen) {
         listItem.querySelector(this.options.selectorLeftNavNestedList).setAttribute('aria-hidden', 'true');
         // eslint-disable-next-line no-param-reassign
@@ -354,13 +359,15 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     });
   }
 
-  handleSectionItemClick(evt, leftNavSections) { // Sorry
+  handleSectionItemClick(evt, leftNavSections) {
+    // Sorry
     const leftNavSectionItem = eventMatches(evt, this.options.selectorLeftNavSection);
     if (leftNavSectionItem) {
       // currently selected
       const selectedLeftNavSectionItem = this.element.querySelector(this.options.selectorLeftNavCurrentSection);
-      const selectedLeftNavSectionItemTitle
-        = selectedLeftNavSectionItem.querySelector(this.options.selectorLeftNavCurrentSectionTitle);
+      const selectedLeftNavSectionItemTitle = selectedLeftNavSectionItem.querySelector(
+        this.options.selectorLeftNavCurrentSectionTitle
+      );
       const selectedLeftNavSectionItemIcon = this.element.querySelector(this.options.selectorLeftNavCurrentSectionIcon);
       const selectedLeftNavSectionItemUse = selectedLeftNavSectionItemIcon.querySelector('use');
       const selectedLeftNavSectionValue = selectedLeftNavSectionItem.dataset.leftNavCurrentSection;
@@ -370,7 +377,6 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
       const leftNavSectionItemIcon = leftNavSectionItem.querySelector(this.options.selectorLeftNavSectionIcon);
       const leftNavSectionItemIconUse = leftNavSectionItemIcon.querySelector('use');
       const leftNavSectionValue = leftNavSectionItem.dataset.leftNavSection;
-
 
       if (this.leftNavSectionActive) {
         return;

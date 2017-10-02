@@ -27,10 +27,14 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
      * The handle to release click event listener on document object.
      * @member {Handle}
      */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', (event) => { this._toggle(event); });
+    this.hDocumentClick = on(this.element.ownerDocument, 'click', event => {
+      this._toggle(event);
+    });
 
-    this.element.addEventListener('keydown', (event) => { this._handleKeyDown(event); });
-    this.element.addEventListener('click', (event) => {
+    this.element.addEventListener('keydown', event => {
+      this._handleKeyDown(event);
+    });
+    this.element.addEventListener('click', event => {
       const item = eventMatches(event, this.options.selectorItem);
       if (item) {
         this.select(item);
@@ -80,8 +84,11 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       return;
     }
 
-    if (([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem)) ||
-    event.which === 27 || event.type === 'click') {
+    if (
+      ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem)) ||
+      event.which === 27 ||
+      event.type === 'click'
+    ) {
       const isOpen = this.element.classList.contains('bx--dropdown--open');
       const isOfSelf = this.element.contains(event.target);
       const actions = {
@@ -89,7 +96,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
         remove: (!isOfSelf || event.which === 27) && isOpen,
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
-      Object.keys(actions).forEach((action) => {
+      Object.keys(actions).forEach(action => {
         if (actions[action]) {
           this.element.classList[action]('bx--dropdown--open');
           this.element.focus();
@@ -113,7 +120,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
   navigate(direction) {
     const items = [...this.element.querySelectorAll(this.options.selectorItem)];
     const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
-    const getNextItem = (old) => {
+    const getNextItem = old => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
       const handleOverflow = (i, l) => i - (i < l ? 0 : l);
       // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
@@ -152,17 +159,19 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
-      [...this.element.querySelectorAll(this.options.selectorItemSelected)].forEach((item) => {
+      [...this.element.querySelectorAll(this.options.selectorItemSelected)].forEach(item => {
         if (itemToSelect !== item) {
           item.classList.remove(this.options.classSelected);
         }
       });
 
-      this.element.dispatchEvent(new CustomEvent(this.options.eventAfterSelected, {
-        bubbles: true,
-        cancelable: true,
-        detail: { item: itemToSelect },
-      }));
+      this.element.dispatchEvent(
+        new CustomEvent(this.options.eventAfterSelected, {
+          bubbles: true,
+          cancelable: true,
+          detail: { item: itemToSelect },
+        })
+      );
     }
   }
 

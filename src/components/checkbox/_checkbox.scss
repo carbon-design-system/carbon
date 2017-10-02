@@ -36,9 +36,10 @@
     display: inline-block;
     height: rem(18px);
     width: rem(18px);
-    margin-right: .5rem;
+    margin-right: 0.5rem;
     background-color: $ui-01;
     border: $checkbox-border-width solid $ui-05;
+    min-width: 18px;
   }
 
   .bx--checkbox:checked + .bx--checkbox-appearance,
@@ -52,7 +53,7 @@
   .bx--checkbox:disabled + .bx--checkbox-label,
   .bx--checkbox:disabled + .bx--checkbox-appearance,
   .bx--checkbox:disabled ~ .bx--checkbox-label-text {
-    opacity: .5;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 
