@@ -47,6 +47,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    * @param {Function} callback Callback called when change in state completes.
    */
   changeState(state, detail, callback) {
+    console.log('OverflowMenu.changeState...', this.options.selectorOptionMenu);
     if (!this.optionMenu) {
       const optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
       if (!optionMenu) {

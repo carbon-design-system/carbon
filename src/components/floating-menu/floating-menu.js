@@ -160,12 +160,11 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
+    console.log('FloatingMenu._changeState...', state, this.options);
+
     const shown = state === 'shown';
     const { refNode, classShown, classRefShown } = this.options;
-    this.element.classList.toggle(classShown, shown);
-    if (classRefShown) {
-      refNode.classList.toggle(classRefShown, shown);
-    }
+
     if (state === 'shown') {
       if (!this.hResize) {
         this.hResize = optimizedResize.add(() => {
@@ -175,11 +174,19 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       this._getContainer().appendChild(this.element);
       this._place();
       (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
+
+      // this.element.style.height = this.element.querySelectorAll(this.options.);
     }
     if (state === 'hidden' && this.hResize) {
       this.hResize.release();
       this.hResize = null;
     }
+
+    this.element.classList.toggle(classShown, shown);
+    if (classRefShown) {
+      refNode.classList.toggle(classRefShown, shown);
+    }
+    
     callback();
   }
 
