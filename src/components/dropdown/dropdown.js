@@ -51,17 +51,24 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     //  - how many dropdown items there are
     let 
       listEl = this.element.querySelector('.bx--dropdown-list'),
-      motion = ibmMotion.getMotion(listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT, 40)
+      motion = ibmMotion.getMotion(listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT, 40),
+      duration = ibmMotion.getDuration(
+        listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT, 
+        40,
+        ibmMotion.constants.PROPERTY_MOVE,
+        ibmMotion.constants.MOMENT_PRODUCTIVE,
+        ibmMotion.constants.EASE_OUT
+      )
     ;
 
     //  - call motion generator and store generated motion parameters
     this._motionParams = {
       listEl,
-      motion:ibmMotion
+      motion:motion
     }
 
     // apply motion params to the element
-    listEl.style.transitionDuration = `${motion.mechanical.duration}ms`;
+    listEl.style.transitionDuration = `${duration}ms`;
 
   }
 
@@ -129,7 +136,11 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
 
           //-----------------------------------------------------
           //  system 360 motion - adjust height
-          let opener = shouldOpen => this._motionParams.listEl.style.height = shouldOpen === true ? `${this._motionParams.listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT}px` : 0;
+          let opener = shouldOpen => 
+            this._motionParams.listEl.style.height = shouldOpen === true 
+              ? `${this._motionParams.listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT}px` 
+              : 0
+          ;
           switch(action){
             case 'add':{
               opener(true);
