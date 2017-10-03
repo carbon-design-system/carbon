@@ -43,33 +43,6 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       }
     });
 
-    //-----------------------------------------------------
-    //  system 360 motion
-
-    console.log('ibmMotion===', ibmMotion);
-
-    //  - how many dropdown items there are
-    let 
-      listEl = this.element.querySelector('.bx--dropdown-list'),
-      motion = ibmMotion.getMotion(listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT, 40),
-      duration = ibmMotion.getDuration(
-        listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT, 
-        40,
-        ibmMotion.constants.PROPERTY_MOVE,
-        ibmMotion.constants.MOMENT_PRODUCTIVE,
-        ibmMotion.constants.EASE_OUT
-      )
-    ;
-
-    //  - call motion generator and store generated motion parameters
-    this._motionParams = {
-      listEl,
-      motion:motion
-    }
-
-    // apply motion params to the element
-    listEl.style.transitionDuration = `${duration}ms`;
-
   }
 
   /**
@@ -110,8 +83,6 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
   _toggle(event) {
     const isDisabled = this.element.classList.contains('bx--dropdown--disabled');
 
-    this.element.classList
-
     if (isDisabled) {
       return;
     }
@@ -135,10 +106,34 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
           this.element.focus();
 
           //-----------------------------------------------------
-          //  system 360 motion - adjust height
+          //  s360 motion
+
+          let 
+            listEl = this.element.querySelector('.bx--dropdown-list'),
+            // get duration from the IBM Motion pacakge
+            duration = ibmMotion.getDuration(
+              itemHeightTotal, 
+              40,
+              ibmMotion.constants.PROPERTY_MOVE,
+              ibmMotion.constants.MOMENT_PRODUCTIVE,
+              ibmMotion.constants.EASE_OUT
+            ),
+            // for iterator to calculate the total actual height
+            itemHeightTotal = 0
+          ;
+
+          // iterate through children and accumulate height
+          for(let childrenIterator = 0; childrenIterator < listEl.children.length; childrenIterator++){
+            itemHeightTotal += listEl.children[childrenIterator].offsetHeight;
+          }
+
+          // apply duration
+          listEl.style.transitionDuration = `${duration}ms`;
+
+          // to set the height
           let opener = shouldOpen => 
-            this._motionParams.listEl.style.height = shouldOpen === true 
-              ? `${this._motionParams.listEl.querySelectorAll('.bx--dropdown-item').length *ITEM_HEIGHT}px` 
+            listEl.style.height = shouldOpen === true 
+              ? `${itemHeightTotal+10}px` 
               : 0
           ;
           switch(action){
