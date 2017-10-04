@@ -9,7 +9,6 @@
 @include exports('data-table') {
   .bx--responsive-table-container {
     @include reset;
-    @include helvetica;
     overflow-x: auto;
     overflow-y: hidden;
     width: 99.9%;
@@ -32,7 +31,7 @@
     }
 
     td p {
-      @include font-size('14');
+      @include singleTypePrescription('b', false);
     }
 
     th {
@@ -40,7 +39,7 @@
       font-size: rem(12px);
       padding: rem(9px) rem(6px);
       vertical-align: middle;
-      font-weight: 700;
+      font-weight: 600;
 
       &:focus {
         outline: 1px solid transparent;
@@ -97,11 +96,10 @@
 
   .bx--table-header {
     @include reset;
-    font-weight: 700;
+    font-weight: 600;
     font-size: rem(12px);
     letter-spacing: 1px;
     text-align: left;
-    text-transform: $data-table-heading-transform;
     height: rem(40px);
   }
 

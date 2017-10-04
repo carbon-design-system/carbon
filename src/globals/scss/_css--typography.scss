@@ -8,13 +8,13 @@
 @mixin typography {
   // really big
   .bx--type-giga {
-    @include font-size('74');
+    @include singleTypePrescription('k');
     @include reset;
     @include line-height('heading');
     font-weight: 300;
   }
   .bx--type-mega {
-    @include font-size('52');
+    @include singleTypePrescription('j');
     @include reset;
     @include line-height('heading');
     font-weight: 300;
@@ -22,37 +22,31 @@
 
   // really small
   .bx--type-omega {
-    @include font-size('12');
+    @include singleTypePrescription('a', false);
     @include reset;
     @include line-height('heading');
-    @include letter-spacing;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: 600;
   }
   .bx--type-caption {
-    @include font-size('12');
+    @include singleTypePrescription('a', false);
     @include reset;
     @include line-height('body');
   }
   .bx--type-legal {
-    @include font-size('11');
+    @include singleTypePrescription('a', false);
     @include reset;
     @include line-height('body');
-  }
-
-  .bx--type-caps {
-    text-transform: uppercase;
   }
 
   strong,
   .bx--type-strong {
     @include reset;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   p {
     @include reset;
-    @include font-size('16');
+    @include singleTypePrescription('d', false);
     @include line-height('body');
   }
 
@@ -69,45 +63,42 @@
   h1,
   .bx--type-alpha {
     @include reset;
-    @include font-size('32');
+    @include singleTypePrescription('h', false);
     @include line-height('heading');
-    @include letter-spacing;
   }
 
   h2,
   .bx--type-beta {
     @include reset;
-    @include font-size('26');
+    @include singleTypePrescription('g', false);
     @include line-height('heading');
-    @include letter-spacing;
   }
 
   h3,
   .bx--type-gamma {
     @include reset;
-    @include font-size('20');
+    @include singleTypePrescription('e', false);
     @include line-height('heading');
-    @include letter-spacing;
   }
 
   h4,
   .bx--type-delta {
     @include reset;
-    @include font-size('18');
+    @include singleTypePrescription('e', false);
     @include line-height('heading');
   }
 
   h5,
   .bx--type-epsilon {
     @include reset;
-    @include font-size('16');
+    @include singleTypePrescription('d', false);
     @include line-height('heading');
   }
 
   h6,
   .bx--type-zeta {
     @include reset;
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     @include line-height('heading');
   }
 }

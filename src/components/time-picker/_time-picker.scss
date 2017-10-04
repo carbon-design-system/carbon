@@ -23,8 +23,8 @@
 
   .bx--time-picker__input-field {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
+    
+    @include singleTypePrescription('b', false);
     display: flex;
     align-items: center;
     background-color: $field-01;

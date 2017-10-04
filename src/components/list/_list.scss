@@ -12,9 +12,8 @@
   .bx--list--unordered,
   .bx--list--ordered {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
-    @include font-smoothing;
+    @include singleTypePrescription('b', false);
+
     margin-left: 2rem;
     line-height: 1.5;
   }
@@ -25,7 +24,7 @@
   }
 
   .bx--list__item {
-    font-weight: 700;
+    font-weight: 600;
     padding-left: 0.25rem;
   }
 
@@ -43,7 +42,7 @@
 
   .bx--list--nested > .bx--list__item {
     list-style-type: none;
-    font-weight: 400;
+    
   }
 
   .bx--list--nested > .bx--list__item:before {

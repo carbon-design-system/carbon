@@ -14,7 +14,7 @@ $css--helpers: true;
 
 @include exports('toolbar') {
   .bx--toolbar {
-    @include helvetica;
+    
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -104,9 +104,8 @@ $css--helpers: true;
   }
 
   .bx--toolbar-menu__title {
-    @include font-size('12');
-    @include letter-spacing;
-    font-weight: 700;
+    @include singleTypePrescription('a', false);
+    font-weight: 600;
     padding: 0.5rem 1.25rem;
   }
 

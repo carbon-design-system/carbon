@@ -1,8 +1,5 @@
 @mixin button-base {
   @include reset;
-  @include helvetica;
-  @include font-smoothing;
-  @include letter-spacing;
   cursor: pointer;
   display: inline-flex;
   align-items: center;

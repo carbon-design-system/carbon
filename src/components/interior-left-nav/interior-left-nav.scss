@@ -14,7 +14,6 @@
 @include exports('interior-left-nav') {
   .bx--interior-left-nav {
     @include reset;
-    @include helvetica;
     width: rem(250px);
     position: fixed;
     top: rem(90px);
@@ -66,9 +65,9 @@
         }
 
         &-link {
-          @include font-size('14');
+          @include singleTypePrescription('b', false);
           color: $color__blue-90;
-          font-weight: 400;
+          
           position: relative;
           display: flex;
           align-items: center;
@@ -146,10 +145,10 @@
         opacity: 0;
 
         &-link {
-          @include font-size('14');
+          @include singleTypePrescription('b', false);
           color: $color__blue-90;
           padding: 0.75rem 1.35rem 0.75rem 4.5rem;
-          font-weight: 400;
+          
           display: flex;
           align-items: center;
           justify-content: space-between;

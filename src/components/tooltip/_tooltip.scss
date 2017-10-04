@@ -13,12 +13,12 @@
   }
 
   .bx--tooltip__trigger {
-    @include helvetica;
-    @include font-size('16');
+    
+    @include singleTypePrescription('d', false);
     display: inline-flex;
     align-items: center;
     color: $text-01;
-    font-weight: 700;
+    font-weight: 600;
 
     svg {
       fill: $brand-01;
@@ -50,12 +50,12 @@
     border: 1px solid $ui-04;
 
     p {
-      @include helvetica;
-      @include font-size('14');
+      
+      @include singleTypePrescription('b', false);
     }
 
     .bx--tooltip__label {
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: 0.5rem;
     }
 
@@ -112,9 +112,9 @@
   // Simple CSS only tooltip
   .bx--tooltip--simple__top,
   .bx--tooltip--simple__bottom {
-    @include helvetica;
+    
     @include reset;
-    @include font-size('18');
+    @include singleTypePrescription('e', false);
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -128,14 +128,14 @@
     // Tooltip - renders as a combo of :before and :after elements
     &:before,
     &:after {
-      @include helvetica;
+      
       position: absolute;
       display: none;
       background: $ui-01;
     }
 
     &:before {
-      @include font-size('14');
+      @include singleTypePrescription('b', false);
       @include layer('overlay');
       max-width: rem(240px);
       padding: 1.5rem;

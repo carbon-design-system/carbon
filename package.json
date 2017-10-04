@@ -34,6 +34,7 @@
     "npm": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
+    "@ibm/type": "^0.1.4",
     "carbon-icons": "^6.0.4",
     "flatpickr": "2.6.3",
     "lodash.debounce": "^4.0.8"
@@ -125,10 +126,10 @@
     "umd/**/*"
   ],
   "scripts": {
-    "build": "gulp build",
+    "build": "gulp fonts & gulp build",
     "build-dev": "gulp build:dev",
     "commitmsg": "validate-commit-msg",
-    "dev": "gulp serve & npm run serve",
+    "dev": "gulp fonts & gulp serve & npm run serve",
     "lint": "gulp lint",
     "prebuild": "gulp clean",
     "prepublishOnly": "npm run build",
@@ -137,8 +138,7 @@
     "test": "gulp test",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
-    "semantic-release":
-      "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "license": "Apache-2",
   "config": {

@@ -23,7 +23,7 @@
   </style>
 </head>
 
-<body class="bx--body{?links} demo--navigated{:else} demo--standalone{/links}">
+<body class="bx--body{?links} demo--navigated{:else} demo--standalone{/links} ibm">
   <header role="banner" class="bx--global-header bx--global-header--demo">
     <div data-demo-switcher class="demo-switcher__container bx--radio-button-group">
       <input id="flex-col" data-demo-col class="bx--radio-button" type="radio" value="col" name="radio-flex-col">

@@ -18,7 +18,6 @@
 
 .bx--footer {
   @include reset;
-  @include helvetica;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -39,7 +38,7 @@
 }
 
 .bx--footer-info__item {
-  @include font-size('18');
+  @include singleTypePrescription('e', false);
   @include line-height('body');
   display: flex;
   flex-direction: column;
@@ -48,11 +47,11 @@
 }
 
 .bx--footer-info__item > .bx--link {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .bx--footer-info__item > .bx--footer-label {
-  @include font-size('14');
+  @include singleTypePrescription('b', false);
   @include line-height('body');
   margin: 0;
 

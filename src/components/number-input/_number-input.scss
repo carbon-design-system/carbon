@@ -12,8 +12,7 @@
   }
 
   .bx--number input[type='number'] {
-    @include font-size('14');
-    @include helvetica;
+    @include singleTypePrescription('b', false);
     box-sizing: border-box;
     display: inline-flex;
     width: 100%;

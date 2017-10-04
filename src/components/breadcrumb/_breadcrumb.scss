@@ -7,8 +7,7 @@
 
 @include exports('breadcrumb') {
   .bx--breadcrumb {
-    @include font-size('14');
-    @include helvetica;
+    @include singleTypePrescription('b', false);
     display: none;
 
     @include breakpoint(bp--xs--major) {
@@ -43,7 +42,7 @@
 
   .bx--breadcrumb .bx--link {
     white-space: nowrap;
-    font-weight: 400;
+    
     text-decoration: none;
     border-bottom: 1px solid transparent;
 

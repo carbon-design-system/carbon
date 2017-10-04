@@ -107,7 +107,7 @@
   }
 
   .bx--detail-page-header-title {
-    @include font-size('29');
+    @include singleTypePrescription('g', false);;
     font-weight: 300;
     color: $text-02;
   }

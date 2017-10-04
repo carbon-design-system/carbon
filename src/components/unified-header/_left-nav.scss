@@ -68,10 +68,10 @@
   }
 
   .bx--left-nav__header--title {
-    @include font-size('16');
-    @include font-smoothing;
+    @include singleTypePrescription('d', false);
+
     color: $inverse-01;
-    font-weight: 700;
+    font-weight: 600;
     margin-right: auto;
   }
 
@@ -122,8 +122,8 @@
       }
 
       .bx--left-nav__section--link {
-        @include font-smoothing;
-        font-weight: 700;
+    
+        font-weight: 600;
         color: $inverse-01;
       }
 
@@ -199,7 +199,7 @@
 
   .bx--left-nav__section--link {
     @include reset;
-    @include font-size('16');
+    @include singleTypePrescription('d', false);
     display: flex;
     align-items: center;
     color: $text-01;
@@ -254,8 +254,8 @@
 
   .bx--parent-item__link {
     @include reset;
-    @include font-size('14');
-    font-weight: 400;
+    @include singleTypePrescription('b', false);
+    
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -405,10 +405,10 @@
   }
 
   .bx--nested-list__item--link {
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     color: $text-01;
     padding: 0.5rem 1.35rem 0.5rem 2rem;
-    font-weight: 400;
+    
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -523,7 +523,7 @@
   }
 
   .bx--flyout-menu__item--link {
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     padding: 0 1.75rem 0 1rem;
     color: $text-01;
     text-decoration: none;

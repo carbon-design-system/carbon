@@ -16,7 +16,6 @@
 @include exports('modal') {
   .bx--modal {
     @include reset;
-    @include helvetica;
     position: fixed;
     top: 0;
     right: 0;
@@ -73,17 +72,16 @@
 
   .bx--modal-header__label {
     @include reset;
-    @include font-size('12');
+    @include singleTypePrescription('a', false);
     color: $text-01;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: 600;
     letter-spacing: 0.5px;
     margin-bottom: rem(8px);
   }
 
   .bx--modal-header__heading {
     @include reset;
-    @include font-size('26');
+    @include singleTypePrescription('g', false);
     font-weight: 300;
     color: $text-02;
   }

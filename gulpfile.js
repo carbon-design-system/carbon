@@ -152,6 +152,12 @@ gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
  * Sass Tasks
  */
 
+gulp.task('fonts', function () {
+	gulp.src("node_modules/@ibm/type/dist/fonts/**/*.*")
+		.pipe(gulp.dest('demo/fonts'))
+		.pipe(gulp.dest('css/fonts'));
+});
+
 gulp.task('sass:compiled', () => {
   function buildStyles(prod) {
     return gulp

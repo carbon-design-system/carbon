@@ -17,8 +17,8 @@
   }
 
   .bx--select-input {
-    @include helvetica;
-    @include font-size('14');
+    
+    @include singleTypePrescription('b', false);
     appearance: none;
     display: block;
     width: 100%;
@@ -79,7 +79,7 @@
   .bx--label {
     white-space: nowrap;
     margin: 0 0.5rem 0 0;
-    font-weight: 400;
+    
   }
 
   .bx--select-input {

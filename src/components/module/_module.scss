@@ -12,7 +12,6 @@
 @include exports('modules') {
   .bx--module {
     @include reset;
-    @include helvetica;
     display: flex;
     flex-direction: column;
     padding: rem(10px);
@@ -33,10 +32,10 @@
     }
 
     .bx--module__title {
-      @include font-size('14');
-      @include font-smoothing;
+      @include singleTypePrescription('b', false);
+  
       letter-spacing: 0;
-      font-weight: 700;
+      font-weight: 600;
       color: $text-01;
     }
 
@@ -47,7 +46,7 @@
       padding: 1.5rem;
 
       p {
-        @include font-size('14');
+        @include singleTypePrescription('b', false);
       }
     }
 
