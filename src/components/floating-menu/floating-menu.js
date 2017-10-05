@@ -186,6 +186,24 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     if (classRefShown) {
       refNode.classList.toggle(classRefShown, shown);
     }
+
+    if(state === 'shown'){
+      /*-----------------------------------------------------
+       *  system 360 motion
+       */
+      let targetHeight = 
+        parseFloat(window.getComputedStyle(document.body).getPropertyValue('font-size')) *0.5625 *2
+      ;
+      for(let optionId = 0; optionId < this.element.children.length; optionId++){
+        // console.log('optionId==='+optionId, this.element.children[optionId].offsetHeight);
+        targetHeight += this.element.children[optionId].offsetHeight;
+      }
+
+      console.log('targetHeight===', targetHeight);
+      this.element.style.height = `${targetHeight}px`;
+    }else{
+      this.element.style.height = `${0}px`;
+    }
     
     callback();
   }

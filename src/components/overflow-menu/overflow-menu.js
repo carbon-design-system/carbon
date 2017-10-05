@@ -69,7 +69,29 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
 
     // Delegates the action of changing state to the menu.
     // (And thus the before/after shown/hidden events are fired from the menu)
-    this.optionMenu.changeState(state, Object.assign(detail, { delegatorNode: this.element }), callback);
+    this.optionMenu.changeState(state, Object.assign(detail, { delegatorNode: this.element }), () => {
+
+      // if(state === 'shown'){
+      //   /*-----------------------------------------------------
+      //    *  system 360 motion
+      //    */
+      //   let targetHeight = 
+      //     parseFloat(window.getComputedStyle(document.body).getPropertyValue('font-size')) *0.5625 *2
+      //   ;
+      //   for(let optionId = 0; optionId < this.optionMenu.element.children.length; optionId++){
+      //     // console.log('optionId==='+optionId, this.optionMenu.element.children[optionId].offsetHeight);
+      //     targetHeight += this.optionMenu.element.children[optionId].offsetHeight;
+      //   }
+
+      //   console.log('targetHeight===', targetHeight);
+      //   this.optionMenu.element.style.height = `${targetHeight}px`;
+      // }else{
+      //   this.optionMenu.element.style.height = `${0}px`;
+      // }
+        
+
+      callback != null ? callback() : null;
+    });
   }
 
   /**
@@ -84,6 +106,8 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     const state = shouldBeOpen ? 'shown' : 'hidden';
 
     if (isOfSelf) {
+      console.log(`OverflowMenu._handleDocumentClick...shouldBeOpen===${shouldBeOpen}, isOfSelf===${isOfSelf}, classList===${element.classList}`, this.element);
+
       if (element.tagName === 'A') {
         event.preventDefault();
       }
