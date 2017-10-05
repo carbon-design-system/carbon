@@ -191,6 +191,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       /*-----------------------------------------------------
        *  system 360 motion
        */
+
       let targetHeight = 
         parseFloat(window.getComputedStyle(document.body).getPropertyValue('font-size')) *0.5625 *2
       ;
@@ -199,8 +200,18 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
         targetHeight += this.element.children[optionId].offsetHeight;
       }
 
-      console.log('targetHeight===', targetHeight);
-      this.element.style.height = `${targetHeight}px`;
+      //-----------------------------------------------------
+      //  test run to get the actual height
+      this.element.visibility = 'hidden';
+      this.element.style.height = 'auto';
+      targetHeight = this.element.offsetHeight;
+      this.element.style.height = '0px';
+      this.element.style.visibility = 'visible';
+
+      clearTimeout(this.__system_360_motion_timer);// needs timer so that the test run can finish rendering.
+      this.__system_360_motion_timer = setTimeout( () => {
+        this.element.style.height = `${targetHeight}px`;
+      }, 1);
     }else{
       this.element.style.height = `${0}px`;
     }
