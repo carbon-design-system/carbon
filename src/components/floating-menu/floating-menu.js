@@ -4,6 +4,7 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
+import ibmMotion from '../../globals/js/misc/motion-generator.js';
 
 class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlur) {
   /**
@@ -146,6 +147,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @returns {boolean} `true` of the current state is different from the given new state.
    */
   shouldStateBeChanged(state) {
+    console.log('FloatingMenu.shouldStateBeChanged...');
     return (
       (state === 'shown' || state === 'hidden') &&
       state !== (this.element.classList.contains(this.options.classShown) ? 'shown' : 'hidden')
@@ -160,7 +162,6 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
-    console.log('FloatingMenu._changeState...', state, this.options);
 
     const shown = state === 'shown';
     const { refNode, classShown, classRefShown } = this.options;
@@ -187,32 +188,56 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       refNode.classList.toggle(classRefShown, shown);
     }
 
+    /**
+     *  system 360 motion
+     */
     if(state === 'shown'){
-      /*-----------------------------------------------------
-       *  system 360 motion
-       */
-
-      let targetHeight = 
-        parseFloat(window.getComputedStyle(document.body).getPropertyValue('font-size')) *0.5625 *2
-      ;
-      for(let optionId = 0; optionId < this.element.children.length; optionId++){
-        // console.log('optionId==='+optionId, this.element.children[optionId].offsetHeight);
-        targetHeight += this.element.children[optionId].offsetHeight;
-      }
 
       //-----------------------------------------------------
       //  test run to get the actual height
-      this.element.visibility = 'hidden';
+      this.element.style.visibility = 'hidden';
       this.element.style.height = 'auto';
-      targetHeight = this.element.offsetHeight;
+      let 
+        targetHeight = this.element.offsetHeight,
+        elementWidth = this.element.offsetWidth
+      ;
+
       this.element.style.height = '0px';
       this.element.style.visibility = 'visible';
 
-      clearTimeout(this.__system_360_motion_timer);// needs timer so that the test run can finish rendering.
+      //-----------------------------------------------------
+      //  get dynamic duration
+      let duration = ibmMotion.getDuration(
+        targetHeight, 
+        targetHeight *elementWidth,
+        ibmMotion.constants.PROPERTY_MOVE,
+        ibmMotion.constants.MOMENT_PRODUCTIVE,
+        ibmMotion.constants.EASE_OUT
+      );
+
+      //-----------------------------------------------------
+      //   needs timer so that the test run can finish rendering.
+      clearTimeout(this.__system_360_motion_timer);
       this.__system_360_motion_timer = setTimeout( () => {
+        this.element.style.transitionDuration = `${duration}ms`;
         this.element.style.height = `${targetHeight}px`;
-      }, 1);
+      }, 2);
+
     }else{
+      //-----------------------------------------------------
+      //  get dynamic duration
+      let 
+        currentHeight = this.element.offsetHeight,
+        elementWidth = this.element.offsetWidth,
+        duration = ibmMotion.getDuration(
+          currentHeight, 
+          currentHeight *elementWidth,
+          ibmMotion.constants.PROPERTY_MOVE,
+          ibmMotion.constants.MOMENT_PRODUCTIVE,
+          ibmMotion.constants.EASE_OUT
+        )
+      ;
+      this.element.style.transitionDuration = `${duration}ms`;
       this.element.style.height = `${0}px`;
     }
     

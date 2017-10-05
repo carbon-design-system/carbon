@@ -56,10 +56,11 @@
     flex-direction:column;
     overflow:hidden;
     height:0;
-    padding:0;
+    opacity:0;
     transition:
       height 144ms cubic-bezier(0.2, 0, 1, 0.9),
-      padding 144ms cubic-bezier(0.2, 0, 1, 0.9)
+      padding 144ms cubic-bezier(0.2, 0, 1, 0.9),
+      opacity 144ms cubic-bezier(0.2, 0, 1, 0.9)
     ;
   }
 
@@ -97,11 +98,14 @@
 
     /* s360 motion */
     // height:240px;
-    padding: 0.285rem 0 0.5rem;
+    // padding: 0.285rem 0 0.5rem;
     border: 0px solid $ui-04;
+    opacity:1;
+
     transition:
       height 144ms cubic-bezier(0, 0, 0.38, 0.9),
-      padding 144ms cubic-bezier(0, 0, 0.38, 0.9)
+      padding 144ms cubic-bezier(0, 0, 0.38, 0.9),
+      opacity 144ms cubic-bezier(0, 0, 0.38, 0.9)
     ;
 
     .bx--overflow-menu-options__option {

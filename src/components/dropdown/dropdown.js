@@ -105,19 +105,12 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
           this.element.classList[action]('bx--dropdown--open');
           this.element.focus();
 
-          //-----------------------------------------------------
-          //  s360 motion
+          /**
+           * system 360 motion
+           */
 
           let 
             listEl = this.element.querySelector('.bx--dropdown-list'),
-            // get duration from the IBM Motion pacakge
-            duration = ibmMotion.getDuration(
-              itemHeightTotal, 
-              40,
-              ibmMotion.constants.PROPERTY_MOVE,
-              ibmMotion.constants.MOMENT_PRODUCTIVE,
-              ibmMotion.constants.EASE_OUT
-            ),
             // for iterator to calculate the total actual height
             itemHeightTotal = 0
           ;
@@ -126,6 +119,15 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
           for(let childrenIterator = 0; childrenIterator < listEl.children.length; childrenIterator++){
             itemHeightTotal += listEl.children[childrenIterator].offsetHeight;
           }
+
+          // get duration from the IBM Motion pacakge
+          let duration = ibmMotion.getDuration(
+            itemHeightTotal, 
+            this.element.offsetWidth *itemHeightTotal,
+            ibmMotion.constants.PROPERTY_MOVE,
+            ibmMotion.constants.MOMENT_PRODUCTIVE,
+            ibmMotion.constants.EASE_OUT
+          );
 
           // apply duration
           listEl.style.transitionDuration = `${duration}ms`;
