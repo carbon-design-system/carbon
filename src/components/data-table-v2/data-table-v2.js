@@ -4,11 +4,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-class DataTableV2 extends mixin(
-  createComponent,
-  initComponentBySearch,
-  eventedState
-) {
+class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedState) {
   /**
    * Data Table
    * @extends CreateComponent
@@ -41,10 +37,7 @@ class DataTableV2 extends mixin(
     this.refreshRows();
 
     this.element.addEventListener('mouseover', evt => {
-      const eventElement = eventMatches(
-        evt,
-        this.options.selectorExpandableRows
-      );
+      const eventElement = eventMatches(evt, this.options.selectorExpandableRows);
 
       if (eventElement) {
         this._toggleExpandableHover(eventElement, true);
@@ -52,10 +45,7 @@ class DataTableV2 extends mixin(
     });
 
     this.element.addEventListener('mouseout', evt => {
-      const eventElement = eventMatches(
-        evt,
-        this.options.selectorExpandableRows
-      );
+      const eventElement = eventMatches(evt, this.options.selectorExpandableRows);
 
       if (eventElement) {
         this._toggleExpandableHover(eventElement, false);
@@ -143,9 +133,7 @@ class DataTableV2 extends mixin(
   _toggleSelectAll = detail => {
     const checked = detail.element.checked;
 
-    const inputs = [
-      ...this.element.querySelectorAll(this.options.selectorCheckbox),
-    ];
+    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
 
     this.state.checkboxCount = checked ? inputs.length - 1 : 0;
 
@@ -158,9 +146,7 @@ class DataTableV2 extends mixin(
   };
 
   _batchCancel = () => {
-    const inputs = [
-      ...this.element.querySelectorAll(this.options.selectorCheckbox),
-    ];
+    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
 
     inputs.forEach(item => {
       item.checked = false;
@@ -180,22 +166,13 @@ class DataTableV2 extends mixin(
 
   _toggleRowExpand = detail => {
     const element = detail.element;
-    const parent = eventMatches(
-      detail.initialEvt,
-      this.options.eventParentContainer
-    );
+    const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
 
     const index = this.expandCells.indexOf(element);
-    if (
-      element.dataset.previousValue === undefined ||
-      element.dataset.previousValue === 'expanded'
-    ) {
+    if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
       element.dataset.previousValue = 'collapsed';
       parent.classList.add(this.options.classExpandableRow);
-      this.tableBody.insertBefore(
-        this.expandableRows[index],
-        this.parentRows[index + 1]
-      );
+      this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
     } else {
       parent.classList.remove(this.options.classExpandableRow);
       this.tableBody.removeChild(parent.nextElementSibling);
@@ -219,12 +196,37 @@ class DataTableV2 extends mixin(
   };
 
   _toggleExpandableHover = (element, flag) => {
-    element.previousElementSibling.classList[flag ? 'add' : 'remove'](
-      this.options.classExpandableRowHover
-    );
-    element.classList[flag ? 'add' : 'remove'](
-      this.options.classExpandableRowHover
-    );
+    element.previousElementSibling.classList[flag ? 'add' : 'remove'](this.options.classExpandableRowHover);
+    element.classList[flag ? 'add' : 'remove'](this.options.classExpandableRowHover);
+  };
+
+  _toggleInlineEdit = detail => {
+    const labelEl = detail.element.parentElement;
+    const inputEl = labelEl.nextElementSibling;
+    const inputTargetEl = inputEl.querySelector('[data-inline-target]');
+
+    labelEl.classList.add(this.options.classInlineEditLabelInactive);
+    inputEl.classList.add(this.options.classInlineEditInputActive);
+
+    const focusListener = () => {
+      this.changeState({
+        group: 'inline-edit-save',
+        element: detail.element,
+        labelEl,
+        inputEl,
+      });
+
+      inputTargetEl.removeEventListener('focusout', focusListener);
+    };
+
+    inputTargetEl.addEventListener('focusout', focusListener);
+  };
+
+  _saveInlineEdit = evt => {
+    const { labelEl, inputEl } = evt;
+
+    labelEl.classList.remove(this.options.classInlineEditLabelInactive);
+    inputEl.classList.remove(this.options.classInlineEditInputActive);
   };
 
   _keydownHandler = evt => {
@@ -239,31 +241,18 @@ class DataTableV2 extends mixin(
   }
 
   refreshRows = () => {
-    const newExpandCells = [
-      ...this.element.querySelectorAll(this.options.selectorExpandCells),
-    ];
-    const newExpandableRows = [
-      ...this.element.querySelectorAll(this.options.selectorExpandableRows),
-    ];
-    const newParentRows = [
-      ...this.element.querySelectorAll(this.options.selectorParentRows),
-    ];
+    const newExpandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
+    const newExpandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
+    const newParentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
 
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
-      const diffParentRows = newParentRows.filter(
-        newRow => !this.parentRows.some(oldRow => oldRow === newRow)
-      );
+      const diffParentRows = newParentRows.filter(newRow => !this.parentRows.some(oldRow => oldRow === newRow));
 
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
-        const diffExpandableRows = diffParentRows.map(
-          newRow => newRow.nextElementSibling
-        );
-        const mergedExpandableRows = [
-          ...this.expandableRows,
-          ...diffExpandableRows,
-        ];
+        const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
+        const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
         this._initExpandableRows(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
@@ -286,6 +275,8 @@ class DataTableV2 extends mixin(
     select: '_toggleSelect',
     'batch-cancel': '_batchCancel',
     'select-all': '_toggleSelectAll',
+    'inline-edit': '_toggleInlineEdit',
+    'inline-edit-save': '_saveInlineEdit',
   };
 
   static options = {
@@ -303,10 +294,16 @@ class DataTableV2 extends mixin(
     classTableSortAscending: 'bx--table-sort-v2--ascending',
     classTableSortActive: 'bx--table-sort-v2--active',
     classParentRowEven: 'bx--parent-row--even-v2',
-    eventBeforeExpand: 'responsive-table-beforetoggleexpand',
-    eventAfterExpand: 'responsive-table-aftertoggleexpand',
-    eventBeforeSort: 'responsive-table-beforetogglesort',
-    eventAfterSort: 'responsive-table-aftertogglesort',
+    classInlineEditLabelInactive: 'bx--inline-edit-label--inactive',
+    classInlineEditInputActive: 'bx--inline-edit-input--active',
+    eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
+    eventAfterExpand: 'data-table-v2-aftertoggleexpand',
+    eventBeforeSort: 'data-table-v2-beforetogglesort',
+    eventAfterSort: 'data-table-v2-aftertogglesort',
+    eventBeforeInlineEdit: 'data-table-v2-before-inline-edit-toggle',
+    eventAfterInlineEdit: 'data-table-v2-after-inline-edit-toggle',
+    eventBeforeInlineEditSave: 'data-table-v2-before-inline-edit-save',
+    eventAfterInlineEditSave: 'data-table-v2-after-inline-edit-save',
     eventTrigger: '[data-event]',
     eventParentContainer: '[data-parent-row]',
   };
