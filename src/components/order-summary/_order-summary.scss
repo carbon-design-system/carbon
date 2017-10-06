@@ -140,5 +140,6 @@
 
 .bx--order-category-title {
   @include singleTypePrescription('a', false);
+  font-weight: 600;
   margin-bottom: rem(4px);
 }

@@ -83,8 +83,9 @@
   .bx--structured-list-th {
     @include reset;
     @include padding-th;
+    @include singleTypePrescription('a', false);
     display: table-cell;
-    font-size: rem(12px);
+    font-weight: 600;
     height: rem(40px);
     text-align: left;
     vertical-align: middle;

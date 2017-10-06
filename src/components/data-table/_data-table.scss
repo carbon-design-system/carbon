@@ -36,7 +36,8 @@
 
     th {
       @include reset;
-      font-size: rem(12px);
+      @include singleTypePrescription('a', false);
+      font-weight: 600;
       padding: rem(9px) rem(6px);
       vertical-align: middle;
 
@@ -95,7 +96,6 @@
 
   .bx--table-header {
     @include reset;
-    font-size: rem(12px);
     text-align: left;
     height: rem(40px);
   }

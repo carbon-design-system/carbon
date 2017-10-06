@@ -36,6 +36,7 @@
   }
 
   .bx--global-header__title--current-page {
+    @include singleTypePrescription('e', false);
     display: flex;
     align-items: center;
     font-size: 1.125rem;

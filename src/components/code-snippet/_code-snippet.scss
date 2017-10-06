@@ -13,7 +13,7 @@
   }
 
   .bx--snippet code {
-    @include singleTypePrescription('c', false);
+    @include singleTypePrescription('b', false);
   }
 
   .bx--snippet--code .bx--snippet-container {
