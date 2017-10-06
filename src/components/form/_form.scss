@@ -23,7 +23,6 @@
   .bx--label {
     @include reset;
     @include singleTypePrescription('b', false);
-    font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
     margin-bottom: rem(10px);
@@ -49,8 +48,6 @@
     margin: 0.75rem 0 0;
     max-height: 0;
     overflow: hidden;
-    font-weight: 600;
-    line-height: 1.5;
 
     &::before {
       content: '*';

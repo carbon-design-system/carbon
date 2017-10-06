@@ -65,14 +65,11 @@
 
   .bx--inline-notification__title {
     @include singleTypePrescription('b', false);
-    font-weight: 600;
     margin-right: 0.25rem;
-    line-height: 1.125;
   }
 
   .bx--inline-notification__subtitle {
     @include singleTypePrescription('b', false);
-    line-height: 1.125;
   }
 
   .bx--inline-notification__close-button {

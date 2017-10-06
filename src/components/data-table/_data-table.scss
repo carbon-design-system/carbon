@@ -39,7 +39,6 @@
       font-size: rem(12px);
       padding: rem(9px) rem(6px);
       vertical-align: middle;
-      font-weight: 600;
 
       &:focus {
         outline: 1px solid transparent;
@@ -96,9 +95,7 @@
 
   .bx--table-header {
     @include reset;
-    font-weight: 600;
     font-size: rem(12px);
-    letter-spacing: 1px;
     text-align: left;
     height: rem(40px);
   }

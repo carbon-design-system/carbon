@@ -85,7 +85,6 @@
   .bx--select-input {
     background-color: transparent;
     color: $brand-01;
-    font-weight: 600;
 
     &:disabled ~ * {
       opacity: 0.5;

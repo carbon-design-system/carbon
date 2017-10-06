@@ -54,18 +54,10 @@
 
   .bx--account-switcher__toggle--text {
     @include singleTypePrescription('a', false);
-    letter-spacing: 0.5px;
     overflow: hidden;
     display: inline-flex;
     white-space: nowrap;
     padding-right: 0.5rem;
-    font-weight: 300;
-  }
-
-  .bx--account-switcher__toggle--text[data-switcher-account-sl],
-  .bx--account-switcher__toggle--text[data-switcher-account] {
-
-    font-weight: 600;
   }
 
   .bx--account-switcher__toggle--text[data-switcher-account] {
@@ -168,8 +160,6 @@
 
   .bx--account-switcher__menu__item--title {
     @include singleTypePrescription('b', false);
-
-    font-weight: 600;
     height: 44px;
     min-width: 100px;
     display: flex;

@@ -133,7 +133,6 @@
   .flatpickr-month .flatpickr-prev-month,
   .flatpickr-month .flatpickr-next-month {
     padding: 0;
-    line-height: rem(20px);
 
     &:hover svg {
       fill: $brand-01;
@@ -158,7 +157,6 @@
 
   .bx--date-picker__month .numInputWrapper .numInput,
   .flatpickr-month .numInputWrapper .numInput {
-    font-weight: 600;
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -206,7 +204,6 @@
   span.bx--date-picker__weekday,
   span.flatpickr-weekday {
     @include singleTypePrescription('a', false);
-    font-weight: 600;
     color: $text-01;
   }
 
@@ -215,7 +212,6 @@
     @include singleTypePrescription('a', false);
     height: rem(25px);
     width: 1.8rem;
-    line-height: rem(25px);
     flex-basis: 1.8rem;
     margin: rem(0.5px) 0;
     display: flex;

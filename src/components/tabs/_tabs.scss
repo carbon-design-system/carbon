@@ -13,10 +13,7 @@
 @include exports('tabs') {
   .bx--tabs {
     @include singleTypePrescription('b', false);
-
-    
     color: $text-01;
-    font-weight: 600;
     cursor: pointer;
     height: auto;
     width: 100%;
@@ -53,7 +50,6 @@
 
   .bx--tabs-trigger-text {
     text-decoration: none;
-    font-weight: 600;
     color: $text-01;
 
     &:focus {
@@ -72,7 +68,7 @@
     flex-direction: column;
 
     @include breakpoint(bp--sm--major) {
-      @include singleTypePrescription('d', false);
+      @include singleTypePrescription('c', false);
       flex-direction: row;
       margin-right: rem(16px);
       margin-left: rem(16px);

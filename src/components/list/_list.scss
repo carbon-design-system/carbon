@@ -13,9 +13,7 @@
   .bx--list--ordered {
     @include reset;
     @include singleTypePrescription('b', false);
-
     margin-left: 2rem;
-    line-height: 1.5;
   }
 
   .bx--list--unordered,
@@ -24,7 +22,6 @@
   }
 
   .bx--list__item {
-    font-weight: 600;
     padding-left: 0.25rem;
   }
 

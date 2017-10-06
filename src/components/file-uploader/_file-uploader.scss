@@ -25,7 +25,6 @@
   .bx--label-description {
     @include reset;
     @include singleTypePrescription('b', false);
-    @include line-height('body');
     color: $text-02;
     margin-top: 0.25rem;
     margin-bottom: 1.25rem;

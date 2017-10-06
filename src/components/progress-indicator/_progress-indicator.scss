@@ -45,7 +45,6 @@
   }
 
   .bx--progress-label {
-    line-height: 1;
     width: 75%;
   }
 
@@ -61,9 +60,7 @@
     }
 
     .bx--progress-label {
-  
       color: $brand-01;
-      font-weight: 600;
     }
     .bx--progress-line {
       background-color: $brand-01;
@@ -98,9 +95,7 @@
     }
 
     .bx--progress-label {
-  
       color: $brand-01;
-      font-weight: 600;
     }
     .bx--progress-line {
       background-color: $brand-01;

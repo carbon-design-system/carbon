@@ -33,9 +33,6 @@
 
     .bx--module__title {
       @include singleTypePrescription('b', false);
-  
-      letter-spacing: 0;
-      font-weight: 600;
       color: $text-01;
     }
 

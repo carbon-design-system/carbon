@@ -15,7 +15,6 @@
     @include reset;
     @include singleTypePrescription('b', false);
 
-    font-weight: 600;
     color: $brand-01;
     text-decoration: underline;
     transition: $transition--base;

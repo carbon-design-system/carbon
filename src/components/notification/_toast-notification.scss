@@ -74,9 +74,6 @@
 
   .bx--toast-notification__title {
     @include singleTypePrescription('b', false);
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: 1;
     padding-bottom: 0.125rem;
   }
 
@@ -85,12 +82,10 @@
     color: $text-03;
     margin-top: 0;
     margin-bottom: 1rem;
-    line-height: 1.2;
   }
 
   .bx--toast-notification__caption {
     @include singleTypePrescription('a', false);
     color: $text-03;
-    line-height: 1;
   }
 }

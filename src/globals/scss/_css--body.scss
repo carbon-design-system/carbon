@@ -8,10 +8,8 @@
 @mixin css-body {
   body {
     @include reset;
-    
     color: $text-01;
     background-color: $ui-02;
-    line-height: 1;
   }
 }
 

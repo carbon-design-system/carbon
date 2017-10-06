@@ -271,7 +271,6 @@
 .flatpickr-current-month {
   font-size: 135%;
   line-height: inherit;
-  font-weight: 300;
   color: inherit;
   position: absolute;
   width: 75%;
@@ -310,7 +309,6 @@
 }
 .flatpickr-current-month span.cur-month {
   font-family: inherit;
-  font-weight: 600;
   color: inherit;
   display: inline-block;
   margin-left: 0.5ch;
@@ -340,7 +338,6 @@
   display: inline-block;
   font-size: inherit;
   font-family: inherit;
-  font-weight: 300;
   line-height: inherit;
   height: auto;
   border: 0;
@@ -382,7 +379,6 @@ span.flatpickr-weekday {
   -webkit-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  font-weight: bolder;
 }
 .dayContainer,
 .flatpickr-weeks {
@@ -648,13 +644,6 @@ span.flatpickr-weekday {
   position: relative;
   box-sizing: border-box;
 }
-.flatpickr-time input.flatpickr-hour {
-  font-weight: bold;
-}
-.flatpickr-time input.flatpickr-minute,
-.flatpickr-time input.flatpickr-second {
-  
-}
 .flatpickr-time input:focus {
   outline: 0;
   border: 0;
@@ -666,7 +655,6 @@ span.flatpickr-weekday {
   float: left;
   line-height: inherit;
   color: #393939;
-  font-weight: bold;
   width: 2%;
   -webkit-user-select: none;
      -moz-user-select: none;

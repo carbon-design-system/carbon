@@ -68,10 +68,8 @@
   }
 
   .bx--left-nav__header--title {
-    @include singleTypePrescription('d', false);
-
+    @include singleTypePrescription('c', false);
     color: $inverse-01;
-    font-weight: 600;
     margin-right: auto;
   }
 
@@ -122,8 +120,6 @@
       }
 
       .bx--left-nav__section--link {
-    
-        font-weight: 600;
         color: $inverse-01;
       }
 
@@ -199,7 +195,7 @@
 
   .bx--left-nav__section--link {
     @include reset;
-    @include singleTypePrescription('d', false);
+    @include singleTypePrescription('c', false);
     display: flex;
     align-items: center;
     color: $text-01;

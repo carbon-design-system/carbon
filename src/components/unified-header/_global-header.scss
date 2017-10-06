@@ -3,7 +3,6 @@
 @include exports('global-header') {
   .bx--global-header {
     @include layer('sticky-nav');
-    
     width: 100%;
     position: fixed;
     top: rem(36px);
@@ -11,7 +10,6 @@
     display: flex;
     justify-content: space-between;
     height: rem(50px);
-    line-height: 1.5;
     background-color: $nav-02;
     z-index: 9000;
   }
@@ -38,12 +36,9 @@
   }
 
   .bx--global-header__title--current-page {
-
     display: flex;
     align-items: center;
-    
     font-size: 1.125rem;
-    line-height: inherit;
     color: $color__blue-30; // anna
 
     .bx--unified-header--apps & {
@@ -72,10 +67,6 @@
     cursor: pointer;
     text-decoration: none;
     color: $color__white; // anna
-
-    &--bold {
-      font-weight: 600;
-    }
   }
 
   .bx--global-header__left-container {
@@ -118,9 +109,7 @@
 
   .bx--global-header__menu__item--link {
     @include reset;
-
     @include singleTypePrescription('b', false);
-    font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;

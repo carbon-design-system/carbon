@@ -46,7 +46,6 @@
 
 .bx--order-header-title {
   @include singleTypePrescription('b', false);
-  font-weight: 600;
   flex: 2;
 }
 
@@ -70,12 +69,10 @@
   @include singleTypePrescription('b', false);
   color: $text-02;
   padding-right: 1.25rem;
-  line-height: 1.25;
 }
 
 .bx--order-price {
   @include singleTypePrescription('a', false);
-  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -102,15 +99,10 @@
   margin-bottom: 1rem;
 }
 
-.bx--order-total-text {
-  font-weight: 600;
-}
-
 .bx--order-total-price {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font-weight: 600;
 
   span {
     @include singleTypePrescription('a', false);
@@ -136,7 +128,6 @@
 .bx--order-footer-text {
   @include singleTypePrescription('b', false);
   color: $text-02;
-  line-height: 1;
 }
 
 .bx--order-category {
@@ -149,6 +140,5 @@
 
 .bx--order-category-title {
   @include singleTypePrescription('a', false);
-  font-weight: 600;
   margin-bottom: rem(4px);
 }

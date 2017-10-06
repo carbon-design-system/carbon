@@ -85,9 +85,7 @@
     @include padding-th;
     display: table-cell;
     font-size: rem(12px);
-    font-weight: 600;
     height: rem(40px);
-    letter-spacing: 1px;
     text-align: left;
     vertical-align: middle;
   }
@@ -100,7 +98,6 @@
   .bx--structured-list-td {
     @include reset;
     @include singleTypePrescription('b', false);
-    @include line-height('body');
     @include padding-td;
     position: relative;
     display: table-cell;

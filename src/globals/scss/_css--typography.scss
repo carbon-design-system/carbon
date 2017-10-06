@@ -10,13 +10,11 @@
   .bx--type-giga {
     @include singleTypePrescription('k');
     @include reset;
-    @include line-height('heading');
     font-weight: 300;
   }
   .bx--type-mega {
     @include singleTypePrescription('j');
     @include reset;
-    @include line-height('heading');
     font-weight: 300;
   }
 
@@ -24,18 +22,15 @@
   .bx--type-omega {
     @include singleTypePrescription('a', false);
     @include reset;
-    @include line-height('heading');
     font-weight: 600;
   }
   .bx--type-caption {
     @include singleTypePrescription('a', false);
     @include reset;
-    @include line-height('body');
   }
   .bx--type-legal {
     @include singleTypePrescription('a', false);
     @include reset;
-    @include line-height('body');
   }
 
   strong,
@@ -46,8 +41,7 @@
 
   p {
     @include reset;
-    @include singleTypePrescription('d', false);
-    @include line-height('body');
+    @include singleTypePrescription('c', false);
   }
 
   em {
@@ -64,42 +58,36 @@
   .bx--type-alpha {
     @include reset;
     @include singleTypePrescription('h', false);
-    @include line-height('heading');
   }
 
   h2,
   .bx--type-beta {
     @include reset;
     @include singleTypePrescription('g', false);
-    @include line-height('heading');
   }
 
   h3,
   .bx--type-gamma {
     @include reset;
     @include singleTypePrescription('e', false);
-    @include line-height('heading');
   }
 
   h4,
   .bx--type-delta {
     @include reset;
     @include singleTypePrescription('e', false);
-    @include line-height('heading');
   }
 
   h5,
   .bx--type-epsilon {
     @include reset;
-    @include singleTypePrescription('d', false);
-    @include line-height('heading');
+    @include singleTypePrescription('c', false);
   }
 
   h6,
   .bx--type-zeta {
     @include reset;
     @include singleTypePrescription('b', false);
-    @include line-height('heading');
   }
 }
 

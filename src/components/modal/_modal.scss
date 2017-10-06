@@ -74,15 +74,12 @@
     @include reset;
     @include singleTypePrescription('a', false);
     color: $text-01;
-    font-weight: 600;
-    letter-spacing: 0.5px;
     margin-bottom: rem(8px);
   }
 
   .bx--modal-header__heading {
     @include reset;
     @include singleTypePrescription('g', false);
-    font-weight: 300;
     color: $text-02;
   }
 

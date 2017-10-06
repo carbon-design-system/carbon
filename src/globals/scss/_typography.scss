@@ -45,19 +45,3 @@ $major-second-typescale-map: (
     @warn 'This is not a step of the Bluemix Type Scale!';
   }
 }
-
-// There are two line heights to choose from. One for headings and one for body text
-@mixin line-height($el) {
-  @if $el == 'heading' {
-    line-height: 1.25;
-  } @else if $el == 'body' {
-    line-height: 1.5;
-  } @else {
-    @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
-  }
-}
-
-// Only applied to h1, h2, h3, bold weights and always to All Caps.
-@mixin letter-spacing {
-  letter-spacing: 0.5px;
-}

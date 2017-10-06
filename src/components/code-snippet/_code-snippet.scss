@@ -13,7 +13,7 @@
   }
 
   .bx--snippet code {
-    @include singleTypePrescription('d', false);
+    @include singleTypePrescription('c', false);
   }
 
   .bx--snippet--code .bx--snippet-container {
@@ -83,7 +83,6 @@
 
   .bx--snippet .bx--btn--copy__feedback {
     z-index: z('overlay');
-    font-weight: 600;
     left: inherit;
     top: 1rem;
     right: 1.25rem;

@@ -82,9 +82,7 @@
   .bx--about__title--name {
     @include singleTypePrescription('e', false);
     @include text-overflow(rem(180px));
-    
     margin: 0;
-    line-height: 1.2;
   }
 
   .bx--about__title--link {
@@ -157,7 +155,7 @@
   }
 
   .bx--app-actions__button {
-    @include singleTypePrescription('d', false);
+    @include singleTypePrescription('c', false);
     display: inline-block;
     padding: 0.125rem 0 0;
     margin: 0 0.175rem;

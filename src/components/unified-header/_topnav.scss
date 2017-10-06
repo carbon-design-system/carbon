@@ -50,7 +50,6 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      font-weight: 600;
     }
 
     .bx--dropdown-list {
@@ -116,7 +115,6 @@
     align-items: flex-start;
     text-decoration: none;
     color: $inverse-01;
-    font-weight: 600;
     margin-right: 1rem;
 
     &:hover,
@@ -268,9 +266,7 @@
 
     .bx--dropdown__credit-content div {
       .bx--dropdown__credit-content--heading {
-    
         @include singleTypePrescription('a', false);
-        font-weight: 600;
       }
 
       .bx--dropdown__credit-content--desc {
@@ -367,9 +363,7 @@
     margin-left: 1rem;
 
     p {
-  
       @include singleTypePrescription('b', false);
-      font-weight: 600;
     }
   }
 
