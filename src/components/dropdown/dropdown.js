@@ -42,7 +42,6 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
         this.select(item);
       }
     });
-
   }
 
   /**
