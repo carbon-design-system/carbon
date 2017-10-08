@@ -46,8 +46,6 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     //-----------------------------------------------------
     //  system 360 motion
 
-    console.log('ibmMotion===', ibmMotion);
-
     //  - how many dropdown items there are
     let 
       listEl = this.element.querySelector('.bx--dropdown-list'),
