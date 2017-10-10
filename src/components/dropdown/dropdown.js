@@ -98,39 +98,50 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
 
-      /**
-       * system 360 motion
-       */
-
-      const listEl = this.element.querySelector('.bx--dropdown-list');
-      // for iterator to calculate the total actual height
-      let itemHeightTotal = 0;
-
-      // iterate through children and accumulate height
-      for (let childrenIterator = 0; childrenIterator < listEl.children.length; childrenIterator++) {
-        itemHeightTotal += listEl.children[childrenIterator].offsetHeight;
-      }
-
-      itemHeightTotal = 300;
-
-      // // get duration from the IBM Motion pacakge
-      const duration = ibmMotion.getDuration(
-        itemHeightTotal,
-        this.element.offsetWidth * itemHeightTotal,
-        ibmMotion.constants.PROPERTY_MOVE,
-        ibmMotion.constants.MOMENT_PRODUCTIVE,
-        ibmMotion.constants.EASE_OUT
-      );
-
-      // // apply duration
-      listEl.style.transitionDuration = `${duration}ms`;
-
       Object.keys(actions).forEach(action => {
         if (actions[action]) {
           this.element.classList[action]('bx--dropdown--open');
           this.element.focus();
 
-          if((action === 'toggle' && isOpen !== true) || action === 'open') listEl.style.height = shouldOpen === true ? (itemHeightTotal + 10)+'px' : 0;
+          /**
+           * System 360 motion
+           */
+
+          // for iterator to calculate the total actual height
+          let itemHeightTotal = 0;
+
+          // the list to be open
+          const listEl = this.element.querySelector('.bx--dropdown-list');
+
+          // let's restart timer
+          clearTimeout(this._toggleAnimationTimeoutID);
+          this._toggleAnimationTimeoutID = setTimeout(() => {
+
+            // if needs to open, get the height
+            if ((action === 'toggle' && isOpen !== true) || action === 'open') {
+
+              // // apply duration
+              listEl.style.transitionDuration = `${duration}ms`;
+
+              // iterate through children and accumulate height
+              for (let childrenIterator = 0; childrenIterator < listEl.children.length; childrenIterator++) {
+                itemHeightTotal += listEl.children[childrenIterator].offsetHeight;
+              }
+
+              // // get duration from the IBM Motion pacakge
+              const duration = ibmMotion.getDuration(
+                itemHeightTotal,
+                this.element.offsetWidth * itemHeightTotal,
+                ibmMotion.constants.PROPERTY_MOVE,
+                ibmMotion.constants.MOMENT_PRODUCTIVE,
+                ibmMotion.constants.EASE_OUT
+              );
+
+              itemHeightTotal += 10;
+            }
+            
+            listEl.style.height = `${itemHeightTotal}px`;
+          }, 2);
         }
       });
     }
