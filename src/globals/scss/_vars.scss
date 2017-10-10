@@ -2,7 +2,8 @@
 
 $bx--ease-in: cubic-bezier(0.2, 0, 1, 0.9); // Used primarily for removing elements from the screen.
 $bx--ease-out: cubic-bezier(0, 0, 0.38, 0.9); // Used for adding elements to the screen or changing on-screen states at a users's input.
-$bx--standard-easing: cubic-bezier(0.2, 0.2, 0.38, 0.9); // Used for the majority of animations.
+$bx--ease-in-out: cubic-bezier(0.2, 0.2, 0.38, 0.9); // Used for the majority of animations.
+$bx--standard-easing: $bx--ease-in-out; //proposing deprecating the term standard-easing
 $transition--base: 200ms;
 
 // Color Theme Variables
