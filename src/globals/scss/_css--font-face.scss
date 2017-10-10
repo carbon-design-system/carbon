@@ -1,6 +1,7 @@
 $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts' !default;
 
 @import 'import-once';
+@import 'css--plex-core';
 
 @mixin helvetica-font-face {
   // Default font directory, `!default` flag allows user override.
