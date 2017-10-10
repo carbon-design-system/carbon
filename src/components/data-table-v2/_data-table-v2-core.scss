@@ -6,7 +6,9 @@
 
 .bx--data-table-v2 {
   border-collapse: collapse;
+  border-spacing: 0;
   width: 100%;
+  border-bottom: 1px solid $ui-04;
 
   thead {
     background-color: $ui-02;
@@ -21,12 +23,6 @@
 
   tr {
     height: 48px;
-
-    &:last-of-type {
-      td {
-        border-bottom: 1px solid $ui-04;
-      }
-    }
 
     &:hover {
       td {
@@ -43,6 +39,10 @@
         }
       }
     }
+  }
+
+  th {
+    border-top: 1px solid $ui-04;
   }
 
   th,

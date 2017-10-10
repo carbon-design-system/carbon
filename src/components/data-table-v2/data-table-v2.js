@@ -37,18 +37,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.refreshRows();
 
     this.element.addEventListener('mouseover', evt => {
-      const eventElement = eventMatches(evt, this.options.selectorExpandableRows);
+      const eventElement = eventMatches(evt, this.options.selectorChildRow);
 
       if (eventElement) {
-        this._toggleExpandableHover(eventElement, true);
-      }
-    });
-
-    this.element.addEventListener('mouseout', evt => {
-      const eventElement = eventMatches(evt, this.options.selectorExpandableRows);
-
-      if (eventElement) {
-        this._toggleExpandableHover(eventElement, false);
+        this._expandableHoverToggle(eventElement, true);
       }
     });
 
@@ -63,11 +55,74 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     this.state = {
       checkboxCount: 0,
-      toggleBar: false,
     };
   }
 
-  _toggleBatchActionBar = toggleOn => {
+  _sortToggle = detail => {
+    const { element, previousValue } = detail;
+
+    this.tableHeaders.forEach(header => {
+      const sortEl = header.querySelector('.bx--table-sort-v2');
+
+      if ((sortEl !== null) & (sortEl !== element)) {
+        sortEl.classList.remove(this.options.classTableSortActive);
+        sortEl.classList.remove(this.options.classTableSortAscending);
+      }
+    });
+
+    if (!previousValue || previousValue === 'descending') {
+      element.dataset.previousValue = 'ascending';
+      element.classList.add(this.options.classTableSortActive);
+      element.classList.add(this.options.classTableSortAscending);
+    } else {
+      element.dataset.previousValue = 'descending';
+      element.classList.add(this.options.classTableSortActive);
+      element.classList.remove(this.options.classTableSortAscending);
+    }
+  };
+
+  _selectToggle = detail => {
+    const { element } = detail;
+    const checked = element.checked;
+
+    // increment the  count
+    this.state.checkboxCount += checked ? 1 : -1;
+    this.countEl.textContent = this.state.checkboxCount;
+
+    // toggle on/off all-checkbox if all are selected
+
+    // toggle on/off batch action bar
+    this._actionBarToggle(this.state.checkboxCount > 0);
+  };
+
+  _selectAllToggle = detail => {
+    const checked = detail.element.checked;
+
+    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+
+    this.state.checkboxCount = checked ? inputs.length - 1 : 0;
+
+    inputs.forEach(item => {
+      item.checked = checked;
+    });
+
+    this._actionBarToggle(this.state.checkboxCount > 0);
+    this.countEl.textContent = this.state.checkboxCount;
+  };
+
+  _actionBarCancel = () => {
+    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+
+    inputs.forEach(item => {
+      item.checked = false;
+    });
+
+    this.state.checkboxCount = 0;
+    this._actionBarToggle(false);
+    this.countEl.textContent = this.state.checkboxCount;
+  };
+
+  _actionBarToggle = toggleOn => {
     const transition = evt => {
       this.batchActionEl.removeEventListener('transitionend', transition);
 
@@ -93,78 +148,14 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.batchActionEl.addEventListener('transitionend', transition);
   };
 
-  _toggleSort = detail => {
-    const { element, previousValue } = detail;
-
-    this.tableHeaders.forEach(header => {
-      const sortEl = header.querySelector('.bx--table-sort-v2');
-
-      if ((sortEl !== null) & (sortEl !== element)) {
-        sortEl.classList.remove(this.options.classTableSortActive);
-        sortEl.classList.remove(this.options.classTableSortAscending);
-      }
-    });
-
-    if (!previousValue || previousValue === 'descending') {
-      element.dataset.previousValue = 'ascending';
-      element.classList.add(this.options.classTableSortActive);
-      element.classList.add(this.options.classTableSortAscending);
-    } else {
-      element.dataset.previousValue = 'descending';
-      element.classList.add(this.options.classTableSortActive);
-      element.classList.remove(this.options.classTableSortAscending);
-    }
-  };
-
-  _toggleSelect = detail => {
-    const { element } = detail;
-    const checked = element.checked;
-
-    // increment the  count
-    this.state.checkboxCount += checked ? 1 : -1;
-    this.countEl.textContent = this.state.checkboxCount;
-
-    // toggle on/off all-checkbox if all are selected
-
-    // toggle on/off batch action bar
-    this._toggleBatchActionBar(this.state.checkboxCount > 0);
-  };
-
-  _toggleSelectAll = detail => {
-    const checked = detail.element.checked;
-
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
-
-    this.state.checkboxCount = checked ? inputs.length - 1 : 0;
-
-    inputs.forEach(item => {
-      item.checked = checked;
-    });
-
-    this._toggleBatchActionBar(this.state.checkboxCount > 0);
-    this.countEl.textContent = this.state.checkboxCount;
-  };
-
-  _batchCancel = () => {
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
-
-    inputs.forEach(item => {
-      item.checked = false;
-    });
-
-    this.state.checkboxCount = 0;
-    this._toggleBatchActionBar(false);
-    this.countEl.textContent = this.state.checkboxCount;
-  };
-
-  _initExpandableRows = expandableRows => {
+  _expandableRowsInit = expandableRows => {
     expandableRows.forEach(item => {
       item.classList.remove(this.options.classExpandableRowHidden);
       this.tableBody.removeChild(item);
     });
   };
 
-  _toggleRowExpand = detail => {
+  _rowExpandToggle = detail => {
     const element = detail.element;
     const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
 
@@ -180,27 +171,17 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     }
   };
 
-  _toggleState = (element, evt) => {
-    const data = element.dataset;
-    const label = data.label ? data.label : '';
-    const previousValue = data.previousValue ? data.previousValue : '';
-    const initialEvt = evt;
+  _expandableHoverToggle = (element, flag) => {
+    element.previousElementSibling.classList.add(this.options.classExpandableRowHover);
 
-    this.changeState({
-      group: data.event,
-      element,
-      label,
-      previousValue,
-      initialEvt,
-    });
+    const mouseout = evt => {
+      element.previousElementSibling.classList.remove(this.options.classExpandableRowHover);
+    };
+
+    element.addEventListener('mouseout', mouseout);
   };
 
-  _toggleExpandableHover = (element, flag) => {
-    element.previousElementSibling.classList[flag ? 'add' : 'remove'](this.options.classExpandableRowHover);
-    element.classList[flag ? 'add' : 'remove'](this.options.classExpandableRowHover);
-  };
-
-  _toggleInlineEdit = detail => {
+  _inlineEditToggle = detail => {
     const labelEl = detail.element.parentElement;
     const inputEl = labelEl.nextElementSibling;
     const inputTargetEl = inputEl.querySelector('[data-inline-target]');
@@ -222,11 +203,26 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     inputTargetEl.addEventListener('focusout', focusListener);
   };
 
-  _saveInlineEdit = evt => {
+  _inlineEditSave = evt => {
     const { labelEl, inputEl } = evt;
 
     labelEl.classList.remove(this.options.classInlineEditLabelInactive);
     inputEl.classList.remove(this.options.classInlineEditInputActive);
+  };
+
+  _toggleState = (element, evt) => {
+    const data = element.dataset;
+    const label = data.label ? data.label : '';
+    const previousValue = data.previousValue ? data.previousValue : '';
+    const initialEvt = evt;
+
+    this.changeState({
+      group: data.event,
+      element,
+      label,
+      previousValue,
+      initialEvt,
+    });
   };
 
   _keydownHandler = evt => {
@@ -253,12 +249,12 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
         const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
-        this._initExpandableRows(diffExpandableRows);
+        this._expandableRowsInit(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
     } else {
       if (newExpandableRows.length > 0) {
-        this._initExpandableRows(newExpandableRows);
+        this._expandableRowsInit(newExpandableRows);
         this.expandableRows = newExpandableRows;
       }
     }
@@ -269,14 +265,15 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   static components = new WeakMap();
 
+  // UI Events
   static eventHandlers = {
-    expand: '_toggleRowExpand',
-    sort: '_toggleSort',
-    select: '_toggleSelect',
-    'batch-cancel': '_batchCancel',
-    'select-all': '_toggleSelectAll',
-    'inline-edit': '_toggleInlineEdit',
-    'inline-edit-save': '_saveInlineEdit',
+    expand: '_rowExpandToggle',
+    sort: '_sortToggle',
+    select: '_selectToggle',
+    'select-all': '_selectAllToggle',
+    'action-bar-cancel': '_actionBarCancel',
+    'inline-edit': '_inlineEditToggle',
+    'inline-edit-save': '_inlineEditSave',
   };
 
   static options = {
@@ -286,6 +283,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     selectorExpandCells: '.bx--table-expand-v2',
     selectorExpandableRows: '.bx--expandable-row-v2',
     selectorParentRows: '.bx--parent-row-v2',
+    selectorChildRow: '[data-child-row]',
     selectorTableBody: 'tbody',
     classExpandableRow: 'bx--expandable-row-v2',
     classExpandableRowEven: 'bx--expandable-row--even-v2',

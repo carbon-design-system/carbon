@@ -1,10 +1,14 @@
-.bx--data-table-v2 .bx--expandable-row-v2 {
+tr.bx--expandable-row-v2 {
   // hide on init
   &.bx--expandable-row--hidden-v2 {
     display: none;
   }
 
-  td:first-of-type {
+  td {
+    background-color: #fff;
+  }
+
+  > td:first-of-type {
     position: relative;
 
     &:before {
@@ -18,69 +22,52 @@
     }
   }
 
-  &:hover {
-    border: 0;
+  + tr[data-child-row] {
+    td {
+      border-top: 0;
+      padding-bottom: rem(8px);
+    }
+  }
 
+  &:hover {
     > td {
-      border-bottom: 0;
       background-color: rgba($brand-02, 0.1);
     }
 
     > td:first-of-type {
-      border-left: 1px solid $ui-04;
+      border-left: 1px solid transparent;
     }
 
-    ~ .bx--expandable-row-v2 {
+    > td:last-of-type {
+      border-right: 1px solid $brand-01;
+    }
+
+    &[data-parent-row] > td {
+      border-bottom: 0;
+    }
+
+    + tr[data-child-row] {
       > td {
         background-color: rgba($brand-02, 0.1);
         border-bottom: 1px solid $brand-01;
-      }
-
-      > td:first-of-type {
-        border-left: 1px solid $ui-02;
-      }
-
-      > td:last-of-type {
         border-right: 1px solid $brand-01;
       }
     }
   }
-
-  ~ .bx--expandable-row-v2 {
-    border-top: 0;
-
-    > td {
-      border-top: 0;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-  }
 }
 
-.bx--expandable-row--hover-v2 {
-  td {
+tr.bx--expandable-row--hover-v2 {
+  > td {
     background-color: rgba($brand-02, 0.1);
     border-top: 1px solid $brand-01;
-
-    &:first-of-type {
-      border-left: 1px solid $ui-02;
-    }
-
-    &:last-of-type {
-      border-right: 1px solid $brand-01;
-    }
   }
 
-  ~ .bx--expandable-row--hover-v2 {
-    > td,
-    > td:last-of-type {
-      border-bottom: 1px solid $brand-01;
-    }
+  > td:last-of-type {
+    border-right: 1px solid $brand-01;
   }
 }
 
-.bx--table-expand-v2[data-previous-value='collapsed']
-  .bx--table-expand-v2__svg {
+.bx--table-expand-v2[data-previous-value='collapsed'] .bx--table-expand-v2__svg {
   transform: rotate(90deg);
   transition: transform 200ms $bx--standard-easing;
 }
