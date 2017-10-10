@@ -1,4 +1,4 @@
-$font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts' !default;
+$font-path: './globals/fonts' !default;
 
 @import 'import-once';
 @import 'css--plex-core';
