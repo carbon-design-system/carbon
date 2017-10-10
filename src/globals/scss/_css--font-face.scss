@@ -56,40 +56,6 @@ $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts' !defau
   }
 }
 
-@mixin plex-font-face {
-  @font-face {
-    font-family: 'IBM Plex Sans';
-    font-style: normal;
-    font-weight: 300;
-    src: url('#{$font-path}/IBMPlexSans-Light.woff2') format('woff2'),
-      url('/fonts/web/woff/IBMPlexSans-Light.woff') format('woff');
-  }
-
-  @font-face {
-    font-family: 'IBM Plex Sans';
-    font-style: normal;
-    font-weight: 400;
-    src: url('#{$font-path}/IBMPlexSans-Regular.woff2') format('woff2'),
-      url('#{$font-path}/IBMPlexSans-Regular.woff') format('woff');
-  }
-
-  @font-face {
-    font-family: 'IBM Plex Sans';
-    font-style: semibold;
-    font-weight: 600;
-    src: url('#{$font-path}/IBMPlexSans-SemiBold.woff2') format('woff2'),
-      url('#{$font-path}/IBMPlexSans-SemiBold.woff') format('woff');
-  }
-
-  @font-face {
-    font-family: 'IBM Plex Sans';
-    font-style: bold;
-    font-weight: 600;
-    src: url('#{$font-path}/IBMPlexSans-SemiBold.woff2') format('woff2'),
-    url('#{$font-path}/IBMPlexSans-SemiBold.woff') format('woff');
-  }
-}
-
 @include exports('css--font-face') {
   @if global-variable-exists('css--plex') and $css--plex == true {
     @include plex-font-face;

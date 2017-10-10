@@ -29,7 +29,7 @@ $weights: (
   )
 );
 
-@include exports('css--plex-core') {
+@mixin plex-font-face {
   @each $family, $fallbacks in $families {
     @each $weight, $styles in $weights {
       @each $unicode, $range in $unicodes {
