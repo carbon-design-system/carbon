@@ -1,1 +1,1 @@
-export {default} from '@ibm/motion';
+export { default } from '@ibm/motion';

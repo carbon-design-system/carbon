@@ -4,7 +4,7 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
-import ibmMotion from '../../globals/js/misc/motion-generator.js';
+import ibmMotion from '../../globals/js/misc/motion-generator';
 
 class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlur) {
   /**
@@ -147,7 +147,6 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @returns {boolean} `true` of the current state is different from the given new state.
    */
   shouldStateBeChanged(state) {
-    console.log('FloatingMenu.shouldStateBeChanged...');
     return (
       (state === 'shown' || state === 'hidden') &&
       state !== (this.element.classList.contains(this.options.classShown) ? 'shown' : 'hidden')
@@ -162,7 +161,6 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
-
     const shown = state === 'shown';
     const { refNode, classShown, classRefShown } = this.options;
 
@@ -191,25 +189,22 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     /**
      *  system 360 motion
      */
-    if(state === 'shown'){
-
+    if (state === 'shown') {
       //-----------------------------------------------------
       //  test run to get the actual height
       this.element.style.visibility = 'hidden';
       this.element.style.height = 'auto';
-      let 
-        targetHeight = this.element.offsetHeight,
-        elementWidth = this.element.offsetWidth
-      ;
+      const targetHeight = this.element.offsetHeight;
+      const elementWidth = this.element.offsetWidth;
 
       this.element.style.height = '0px';
       this.element.style.visibility = 'visible';
 
       //-----------------------------------------------------
       //  get dynamic duration
-      let duration = ibmMotion.getDuration(
-        targetHeight, 
-        targetHeight *elementWidth,
+      const duration = ibmMotion.getDuration(
+        targetHeight,
+        targetHeight * elementWidth,
         ibmMotion.constants.PROPERTY_MOVE,
         ibmMotion.constants.MOMENT_PRODUCTIVE,
         ibmMotion.constants.EASE_OUT
@@ -218,29 +213,25 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       //-----------------------------------------------------
       //   needs timer so that the test run can finish rendering.
       clearTimeout(this.__system_360_motion_timer);
-      this.__system_360_motion_timer = setTimeout( () => {
+      this.__system_360_motion_timer = setTimeout(() => {
         this.element.style.transitionDuration = `${duration}ms`;
         this.element.style.height = `${targetHeight}px`;
       }, 2);
-
-    }else{
+    } else {
       //-----------------------------------------------------
       //  get dynamic duration
-      let 
-        currentHeight = this.element.offsetHeight,
-        elementWidth = this.element.offsetWidth,
-        duration = ibmMotion.getDuration(
-          currentHeight, 
-          currentHeight *elementWidth,
-          ibmMotion.constants.PROPERTY_MOVE,
-          ibmMotion.constants.MOMENT_PRODUCTIVE,
-          ibmMotion.constants.EASE_OUT
-        )
-      ;
+      const currentHeight = this.element.offsetHeight;
+      const elementWidth = this.element.offsetWidth;
+      const duration = ibmMotion.getDuration(
+        currentHeight,
+        currentHeight * elementWidth,
+        ibmMotion.constants.PROPERTY_MOVE,
+        ibmMotion.constants.MOMENT_PRODUCTIVE,
+        ibmMotion.constants.EASE_OUT
+      );
       this.element.style.transitionDuration = `${duration}ms`;
       this.element.style.height = `${0}px`;
     }
-    
     callback();
   }
 
