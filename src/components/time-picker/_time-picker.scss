@@ -24,7 +24,7 @@
   .bx--time-picker__input-field {
     @include reset;
     @include font-family;
-    @include font-size('14');
+    @include typescale('zeta');
     display: flex;
     align-items: center;
     background-color: $field-01;

@@ -13,7 +13,7 @@
   .bx--list--ordered {
     @include reset;
     @include font-family;
-    @include font-size('14');
+    @include typescale('zeta');
     @include font-smoothing;
     margin-left: 2rem;
     line-height: 1.5;

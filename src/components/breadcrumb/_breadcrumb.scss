@@ -7,7 +7,7 @@
 
 @include exports('breadcrumb') {
   .bx--breadcrumb {
-    @include font-size('14');
+    @include typescale('zeta');
     @include font-family;
     display: none;
 

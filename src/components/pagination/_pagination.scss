@@ -36,7 +36,7 @@ $css--helpers: true;
   }
 
   .bx--pagination__text {
-    @include font-size('12');
+    @include typescale('omega');
     color: $text-02;
     display: none;
 

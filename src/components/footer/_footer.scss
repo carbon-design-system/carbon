@@ -39,7 +39,7 @@
 }
 
 .bx--footer-info__item {
-  @include font-size('18');
+  @include typescale('delta');
   @include line-height('body');
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@
 }
 
 .bx--footer-info__item > .bx--footer-label {
-  @include font-size('14');
+  @include typescale('zeta');
   @include line-height('body');
   margin: 0;
 

@@ -14,7 +14,7 @@
 
   .bx--tooltip__trigger {
     @include font-family;
-    @include font-size('16');
+    @include typescale('epsilon');
     display: inline-flex;
     align-items: center;
     color: $text-01;
@@ -51,7 +51,7 @@
 
     p {
       @include font-family;
-      @include font-size('14');
+      @include typescale('zeta');
     }
 
     .bx--tooltip__label {
@@ -114,7 +114,7 @@
   .bx--tooltip--simple__bottom {
     @include font-family;
     @include reset;
-    @include font-size('18');
+    @include typescale('delta');
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -135,7 +135,7 @@
     }
 
     &:before {
-      @include font-size('14');
+      @include typescale('zeta');
       @include layer('overlay');
       max-width: rem(240px);
       padding: 1.5rem;

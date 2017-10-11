@@ -12,7 +12,7 @@
   }
 
   .bx--number input[type='number'] {
-    @include font-size('14');
+    @include typescale('zeta');
     @include font-family;
     box-sizing: border-box;
     display: inline-flex;

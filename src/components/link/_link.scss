@@ -14,7 +14,7 @@
   .bx--link {
     @include reset;
     @include font-family;
-    @include font-size('14');
+    @include typescale('zeta');
     @include font-smoothing;
     font-weight: 700;
     color: $brand-01;

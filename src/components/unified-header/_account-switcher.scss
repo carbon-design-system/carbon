@@ -53,7 +53,7 @@
   }
 
   .bx--account-switcher__toggle--text {
-    @include font-size('11');
+    @include typescale('legal');
     letter-spacing: 0.5px;
     overflow: hidden;
     display: inline-flex;
@@ -151,7 +151,7 @@
       padding: 0.75rem 0 1rem 1.5rem;
 
       a {
-        @include font-size('11');
+        @include typescale('legal');
         padding-right: 1rem;
         color: $color__blue-30; // anna
 
@@ -167,9 +167,9 @@
   }
 
   .bx--account-switcher__menu__item--title {
-    @include font-size('14');
+    @include typescale('zeta');
     @include font-smoothing;
-    font-weight: 700;
+    font-weight: 600;
     height: 44px;
     min-width: 100px;
     display: flex;
@@ -178,7 +178,7 @@
   }
 
   .bx--account-switcher__menu__item .bx--dropdown {
-    @include font-size('14');
+    @include typescale('zeta');
     flex: 3;
     background-color: $color__navy-gray-5; // anna
     display: block;

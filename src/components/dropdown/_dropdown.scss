@@ -16,7 +16,7 @@
   .bx--dropdown {
     @include reset;
     @include font-family;
-    @include font-size('14');
+    @include typescale('zeta');
     position: relative;
     list-style: none;
     display: block;
@@ -104,7 +104,7 @@
     }
 
     .bx--dropdown-list {
-      @include font-size('14');
+      @include typescale('zeta');
       display: flex;
       flex-direction: column;
       background-color: $ui-01;

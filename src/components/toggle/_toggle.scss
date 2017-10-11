@@ -58,7 +58,7 @@
 
   .bx--toggle__text--left,
   .bx--toggle__text--right {
-    @include font-size('14');
+    @include typescale('zeta');
     position: relative;
   }
 

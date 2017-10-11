@@ -40,10 +40,10 @@ $nav-08: $color__blue-51 !default;
 
 // Global
 $input-border: 1px solid transparent !default;
-$input-label-weight: 700 !default;
+$input-label-weight: 600 !default;
 
 // Button Theme Variables
-$button-font-weight: 700 !default;
+$button-font-weight: 600 !default;
 $button-font-size: 0.875rem !default;
 $button-border-radius: 0 !default;
 $button-height: 40px !default;
@@ -91,4 +91,4 @@ $radio-border-width: 2px !default;
 
 // Structured Theme Variables
 $structured-list-padding: 2rem !default;
-$structured-list-text-transform: uppercase !default;
+$structured-list-text-transform: none !default;
