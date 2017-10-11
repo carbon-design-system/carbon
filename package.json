@@ -1,6 +1,7 @@
 {
   "name": "carbon-components-react",
   "description": "A React wrapper for carbon-components",
+  "license": "Apache-2",
   "main": "cjs/index.js",
   "module": "es/index.js",
   "scripts": {
@@ -53,7 +54,6 @@
       "email": "chrisdhanaraj@us.ibm.com"
     }
   ],
-  "license": "MIT",
   "eslintConfig": {
     "parser": "babel-eslint",
     "extends": [
