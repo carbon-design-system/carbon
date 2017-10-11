@@ -69,6 +69,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @returns {Object} The menu position, with `top` and `left` properties.
    */
   _getPos() {
+    console.log('FloatingMenu._getPos...');
     const element = this.element;
     const { refNode, offset, direction } = this.options;
 
@@ -147,6 +148,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @returns {boolean} `true` of the current state is different from the given new state.
    */
   shouldStateBeChanged(state) {
+    console.log('FloatingMenu.shouldStateBeChanged...');
     return (
       (state === 'shown' || state === 'hidden') &&
       state !== (this.element.classList.contains(this.options.classShown) ? 'shown' : 'hidden')
@@ -161,6 +163,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
+    console.log('FloatingMenu._changeState...');
     const shown = state === 'shown';
     const { refNode, classShown, classRefShown } = this.options;
 
@@ -216,6 +219,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     } else {
       const currentHeight = this.element.offsetHeight;
       const elementWidth = this.element.offsetWidth;
+      
       window.requestAnimationFrame(() => {
         //-----------------------------------------------------
         //  get dynamic duration
