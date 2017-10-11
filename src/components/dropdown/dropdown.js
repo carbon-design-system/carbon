@@ -103,14 +103,10 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
         if (actions[action]) {
           this.element.classList[action]('bx--dropdown--open');
 
-          // let's restart timer
-          clearTimeout(this._toggleAnimationTimeoutID);
-          this._toggleAnimationTimeoutID = setTimeout(() => {
-
-            /**
-             * System 360 motion
-             */
-
+          /**
+           * System 360 motion
+           */
+          window.requestAnimationFrame(() => {
             // the list element to be open
             const listEl = this.element.querySelector('.bx--dropdown-list');
 
@@ -128,25 +124,13 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
 
             // width for duration calculation
             const elementWidth = listEl.offsetWidth;
-            
-            let duration = getDuration(
-              fullHeight,
-              fullHeight * elementWidth,
-              'move',
-              'natural',
-              'easeInOut'
-            );
-
+            const duration = getDuration(fullHeight, fullHeight * elementWidth, 'move', 'natural', 'easeInOut');
             // apply duration
             listEl.style.transitionDuration = `${duration}ms`;
-            
-            switch(action){
-              case 'add':listEl.style.height = fullHeight;break;
-              case 'toggle':listEl.style.height = (isOpen !== true) ? fullHeight+'px' : 0;break;
-              case 'remove':listEl.style.height = 0;
-            }
-          }, 2);
-
+            if (action === 'add') listEl.style.height = fullHeight;
+            else if (action === 'remove') listEl.style.height = 0;
+            else listEl.style.height = isOpen !== true ? `${fullHeight}px` : 0;
+          });
           this.element.focus();
         }
       });
@@ -227,8 +211,10 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * Closes the dropdown menu if this component loses focus.
    */
   handleBlur() {
-    this.element.querySelector('.bx--dropdown-list').style.height = 0;
     this.element.classList.remove('bx--dropdown--open');
+    window.requestAnimationFrame(() => {
+      this.element.querySelector('.bx--dropdown-list').style.height = 0;
+    });
   }
 
   /**

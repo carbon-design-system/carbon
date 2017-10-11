@@ -1,1 +1,1 @@
-export {default} from '@ibm/motion/dist/getCurve.js';
+export { default } from '@ibm/motion/dist/getCurve.js';

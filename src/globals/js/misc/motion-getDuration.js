@@ -1,1 +1,1 @@
-export {default} from '@ibm/motion/dist/getDuration.js';
+export { default } from '@ibm/motion/dist/getDuration.js';
