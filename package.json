@@ -39,7 +39,7 @@
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
-    "@ibm/motion": "^0.1.0",
+    "@ibm/motion": "^0.2.0",
     "adaro": "1.0.4",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",

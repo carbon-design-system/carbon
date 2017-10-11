@@ -46,7 +46,7 @@
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
-    transition: transform 150ms ease-in-out;
+    transition: transform 150ms $bx--standard-easing;
     transform-origin: 50% 45%;
   }
 
@@ -76,13 +76,13 @@
     list-style: none;
     position: absolute;
     z-index: z('dropdown');
-    transition:height 0.144s cubic-bezier(0.2, 0, 1, 0.9);
+    transition:height 0.144s $bx--standard-easing;
     overflow:hidden;
     background-color: $ui-01;
 
     .bx--dropdown-item{
       opacity:0;
-      transition:opacity 0.144s cubic-bezier(0.2, 0, 1, 0.9);
+      transition:opacity 0.144s $bx--standard-easing;
     }
   }
 

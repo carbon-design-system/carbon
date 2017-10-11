@@ -4,7 +4,8 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
-import ibmMotion from '../../globals/js/misc/motion-generator';
+// import ibmMotion from '../../globals/js/misc/motion-generator';
+import getDuration from '../../globals/js/misc/motion-getDuration';
 
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
   /**
@@ -101,47 +102,52 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       Object.keys(actions).forEach(action => {
         if (actions[action]) {
           this.element.classList[action]('bx--dropdown--open');
-          this.element.focus();
-
-          /**
-           * System 360 motion
-           */
-
-          // for iterator to calculate the total actual height
-          let itemHeightTotal = 0;
-
-          // the list to be open
-          const listEl = this.element.querySelector('.bx--dropdown-list');
 
           // let's restart timer
           clearTimeout(this._toggleAnimationTimeoutID);
           this._toggleAnimationTimeoutID = setTimeout(() => {
 
-            // if needs to open, get the height
-            if ((action === 'toggle' && isOpen !== true) || action === 'open') {
+            /**
+             * System 360 motion
+             */
 
-              // // apply duration
-              listEl.style.transitionDuration = `${duration}ms`;
+            // the list element to be open
+            const listEl = this.element.querySelector('.bx--dropdown-list');
 
-              // iterate through children and accumulate height
-              for (let childrenIterator = 0; childrenIterator < listEl.children.length; childrenIterator++) {
-                itemHeightTotal += listEl.children[childrenIterator].offsetHeight;
-              }
+            // the height when it's open
+            let fullHeight = listEl.offsetHeight;
 
-              // // get duration from the IBM Motion pacakge
-              const duration = ibmMotion.getDuration(
-                itemHeightTotal,
-                this.element.offsetWidth * itemHeightTotal,
-                ibmMotion.constants.PROPERTY_MOVE,
-                ibmMotion.constants.MOMENT_PRODUCTIVE,
-                ibmMotion.constants.EASE_OUT
-              );
-
-              itemHeightTotal += 10;
+            // if not open, then let's do that invisible expansion to grab the real height
+            if (isOpen !== true) {
+              listEl.style.visibility = 'hidden';
+              listEl.style.height = 'auto';
+              fullHeight = listEl.offsetHeight;
+              listEl.style.height = '0px';
+              listEl.style.visibility = 'visible';
             }
+
+            // width for duration calculation
+            const elementWidth = listEl.offsetWidth;
             
-            listEl.style.height = `${itemHeightTotal}px`;
+            let duration = getDuration(
+              fullHeight,
+              fullHeight * elementWidth,
+              'move',
+              'natural',
+              'easeInOut'
+            );
+
+            // apply duration
+            listEl.style.transitionDuration = `${duration}ms`;
+            
+            switch(action){
+              case 'add':listEl.style.height = fullHeight;break;
+              case 'toggle':listEl.style.height = (isOpen !== true) ? fullHeight+'px' : 0;break;
+              case 'remove':listEl.style.height = 0;
+            }
           }, 2);
+
+          this.element.focus();
         }
       });
     }
@@ -221,6 +227,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * Closes the dropdown menu if this component loses focus.
    */
   handleBlur() {
+    this.element.querySelector('.bx--dropdown-list').style.height = 0;
     this.element.classList.remove('bx--dropdown--open');
   }
 

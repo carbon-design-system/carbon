@@ -214,8 +214,8 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       //   needs timer so that the test run can finish rendering.
       clearTimeout(this.__system_360_motion_timer);
       this.__system_360_motion_timer = setTimeout(() => {
-        this.element.style.transitionDuration = `${duration}ms`;
-        this.element.style.height = `${targetHeight}px`;
+        this.element.style.transitionDuration = duration+'ms';
+        this.element.style.height = targetHeight+'px';
       }, 2);
     } else {
       //-----------------------------------------------------
@@ -229,8 +229,8 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
         ibmMotion.constants.MOMENT_PRODUCTIVE,
         ibmMotion.constants.EASE_OUT
       );
-      this.element.style.transitionDuration = `${duration}ms`;
-      this.element.style.height = `${0}px`;
+      this.element.style.transitionDuration = duration+'ms';
+      this.element.style.height = '0px';
     }
     callback();
   }
