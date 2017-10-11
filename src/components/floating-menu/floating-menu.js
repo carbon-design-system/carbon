@@ -200,33 +200,35 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       this.element.style.height = '0px';
       this.element.style.visibility = 'visible';
 
-      //-----------------------------------------------------
-      //  get dynamic duration
-      const duration = ibmMotion.getDuration(
-        targetHeight,
-        targetHeight * elementWidth,
-        ibmMotion.constants.PROPERTY_MOVE,
-        ibmMotion.constants.MOMENT_PRODUCTIVE,
-        ibmMotion.constants.EASE_OUT
-      );
       window.requestAnimationFrame(() => {
+        //-----------------------------------------------------
+        //  get dynamic duration
+        const duration = ibmMotion.getDuration(
+          targetHeight,
+          targetHeight * elementWidth,
+          ibmMotion.constants.PROPERTY_MOVE,
+          ibmMotion.constants.MOMENT_PRODUCTIVE,
+          ibmMotion.constants.EASE_OUT
+        );
         this.element.style.transitionDuration = `${duration}ms`;
         this.element.style.height = `${targetHeight}px`;
       });
     } else {
-      //-----------------------------------------------------
-      //  get dynamic duration
       const currentHeight = this.element.offsetHeight;
       const elementWidth = this.element.offsetWidth;
-      const duration = ibmMotion.getDuration(
-        currentHeight,
-        currentHeight * elementWidth,
-        ibmMotion.constants.PROPERTY_MOVE,
-        ibmMotion.constants.MOMENT_PRODUCTIVE,
-        ibmMotion.constants.EASE_OUT
-      );
-      this.element.style.transitionDuration = `${duration}ms`;
-      this.element.style.height = '0px';
+      window.requestAnimationFrame(() => {
+        //-----------------------------------------------------
+        //  get dynamic duration
+        const duration = ibmMotion.getDuration(
+          currentHeight,
+          currentHeight * elementWidth,
+          ibmMotion.constants.PROPERTY_MOVE,
+          ibmMotion.constants.MOMENT_PRODUCTIVE,
+          ibmMotion.constants.EASE_OUT
+        );
+        this.element.style.transitionDuration = `${duration}ms`;
+        this.element.style.height = '0px';
+      });
     }
     callback();
   }
