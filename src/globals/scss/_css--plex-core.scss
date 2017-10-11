@@ -10,8 +10,13 @@ $unicodes: (
 );
 
 $families: (
-  "Mono": "\"ibm-plex-mono\", \"Menlo\", \"DejaVu Sans Mono\", \"Bitstream Vera Sans Mono\", Courier, monospace",
-  "Sans": "\"ibm-plex-sans\", \"Helvetica Neue\", Arial, sans-serif",
+  "Mono": unquote("\'ibm-plex-mono\'"),
+  "Sans": unquote("\'ibm-plex-sans\'"),
+);
+
+$fallbacks: (
+  "Mono": unquote("\'ibm-plex-mono\', \'Menlo\', \'DejaVu Sans Mono\', \'Bitstream Vera Sans Mono\', Courier, monospace"),
+  "Sans": unquote("\'ibm-plex-sans\', \'Helvetica Neue\', Arial, sans-serif"),
 );
 
 $weights: (
@@ -30,11 +35,11 @@ $weights: (
 );
 
 @mixin plex-font-face {
-  @each $family, $fallbacks in $families {
+  @each $family, $name in $families {
     @each $weight, $styles in $weights {
       @each $unicode, $range in $unicodes {
         @font-face {
-          font-family: $fallbacks;
+          font-family: $name;
           font-style: map-get($styles, "font-style");
           font-weight: map-get($styles, "font-weight");
           src: url('#{$font-path}/IBMPlex#{$family}-#{$weight}-#{$unicode}.woff2') format('woff2'),
