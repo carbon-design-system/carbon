@@ -91,7 +91,10 @@ class Dropdown extends PureComponent {
 
     const children = React.Children.map(this.props.children, child =>
       React.cloneElement(child, {
-        onClick: this.handleItemClick,
+        onClick: (...args) => {
+          child.props.onClick && child.props.onClick(...args);
+          this.handleItemClick(...args);
+        },
       }),
     );
 
