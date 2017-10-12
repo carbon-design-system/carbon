@@ -53,19 +53,11 @@
   }
 
   .bx--account-switcher__toggle--text {
-    @include font-size('11');
-    letter-spacing: 0.5px;
+    @include singleTypePrescription('a', false);
     overflow: hidden;
     display: inline-flex;
     white-space: nowrap;
     padding-right: 0.5rem;
-    font-weight: 300;
-  }
-
-  .bx--account-switcher__toggle--text[data-switcher-account-sl],
-  .bx--account-switcher__toggle--text[data-switcher-account] {
-    @include font-smoothing;
-    font-weight: 600;
   }
 
   .bx--account-switcher__toggle--text[data-switcher-account] {
@@ -151,7 +143,7 @@
       padding: 0.75rem 0 1rem 1.5rem;
 
       a {
-        @include font-size('11');
+        @include singleTypePrescription('a', false);
         padding-right: 1rem;
         color: $color__blue-30; // anna
 
@@ -167,9 +159,7 @@
   }
 
   .bx--account-switcher__menu__item--title {
-    @include font-size('14');
-    @include font-smoothing;
-    font-weight: 700;
+    @include singleTypePrescription('b', false);
     height: 44px;
     min-width: 100px;
     display: flex;
@@ -178,7 +168,7 @@
   }
 
   .bx--account-switcher__menu__item .bx--dropdown {
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     flex: 3;
     background-color: $color__navy-gray-5; // anna
     display: block;
@@ -211,8 +201,8 @@
   }
 
   .bx--account-switcher__menu__item .bx--dropdown li {
-    @include font-smoothing;
-    font-weight: 400;
+
+    
     max-width: 400px;
   }
 

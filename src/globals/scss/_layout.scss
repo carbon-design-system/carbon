@@ -1,4 +1,4 @@
-$breakpoints: (bp--xs--major: 500px, bp--sm--major: 768px, bp--md--major: 992px, bp--lg--major: 1200px);
+$bx--breakpoints: (bp--xs--major: 500px, bp--sm--major: 768px, bp--md--major: 992px, bp--lg--major: 1200px);
 
 $padding: ('mobile': 3%, 'xs': 5%);
 
@@ -20,8 +20,8 @@ $padding: ('mobile': 3%, 'xs': 5%);
 //-------------------------------------
 
 @mixin breakpoint($size) {
-  @if map-has-key($breakpoints, $size) {
-    @media screen and (min-width: map-get($breakpoints, $size)) {
+  @if map-has-key($bx--breakpoints, $size) {
+    @media screen and (min-width: map-get($bx--breakpoints, $size)) {
       @content;
     }
   } @else {

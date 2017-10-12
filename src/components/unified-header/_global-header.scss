@@ -3,7 +3,6 @@
 @include exports('global-header') {
   .bx--global-header {
     @include layer('sticky-nav');
-    @include helvetica;
     width: 100%;
     position: fixed;
     top: rem(36px);
@@ -11,7 +10,6 @@
     display: flex;
     justify-content: space-between;
     height: rem(50px);
-    line-height: 1.5;
     background-color: $nav-02;
     z-index: 9000;
   }
@@ -38,12 +36,10 @@
   }
 
   .bx--global-header__title--current-page {
-    @include font-smoothing;
+    @include singleTypePrescription('e', false);
     display: flex;
     align-items: center;
-    font-weight: 400;
     font-size: 1.125rem;
-    line-height: inherit;
     color: $color__blue-30; // anna
 
     .bx--unified-header--apps & {
@@ -66,16 +62,12 @@
   }
 
   .bx--global-header .bx--logo__text {
-    @include font-size('18');
-    @include font-smoothing;
-    font-weight: 400;
+    @include singleTypePrescription('e', false);
+
+    
     cursor: pointer;
     text-decoration: none;
     color: $color__white; // anna
-
-    &--bold {
-      font-weight: 700;
-    }
   }
 
   .bx--global-header__left-container {
@@ -118,9 +110,7 @@
 
   .bx--global-header__menu__item--link {
     @include reset;
-    @include font-smoothing;
-    @include font-size('14');
-    font-weight: 700;
+    @include singleTypePrescription('b', false);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -161,7 +151,7 @@
   }
 
   .bx--global-header__menu .bx--dropdown-text {
-    @include font-smoothing;
+
     display: flex;
     justify-content: center;
     padding-top: 0;

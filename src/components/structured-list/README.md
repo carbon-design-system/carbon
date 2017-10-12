@@ -78,6 +78,6 @@ Use CSS to add visual styles to text.
 **CSS**
 ```css
 .bold {
-  font-weight: 700;
+  font-weight: 600;
 }
 ```

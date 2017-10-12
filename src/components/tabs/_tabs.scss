@@ -12,11 +12,8 @@
 
 @include exports('tabs') {
   .bx--tabs {
-    @include font-size('14');
-    @include font-smoothing;
-    @include helvetica;
+    @include singleTypePrescription('b', false);
     color: $text-01;
-    font-weight: 700;
     cursor: pointer;
     height: auto;
     width: 100%;
@@ -53,7 +50,6 @@
 
   .bx--tabs-trigger-text {
     text-decoration: none;
-    font-weight: 700;
     color: $text-01;
 
     &:focus {
@@ -72,7 +68,7 @@
     flex-direction: column;
 
     @include breakpoint(bp--sm--major) {
-      @include font-size('16');
+      @include singleTypePrescription('c', false);
       flex-direction: row;
       margin-right: rem(16px);
       margin-left: rem(16px);
@@ -94,7 +90,7 @@
   }
 
   .bx--tabs__nav-item {
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     background-color: $ui-01;
     padding: 0;
 

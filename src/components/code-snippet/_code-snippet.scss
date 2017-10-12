@@ -13,7 +13,7 @@
   }
 
   .bx--snippet code {
-    @include font-size('16');
+    @include singleTypePrescription('b', false);
   }
 
   .bx--snippet--code .bx--snippet-container {
@@ -82,9 +82,7 @@
   }
 
   .bx--snippet .bx--btn--copy__feedback {
-    @include helvetica;
     z-index: z('overlay');
-    font-weight: 700;
     left: inherit;
     top: 1rem;
     right: 1.25rem;

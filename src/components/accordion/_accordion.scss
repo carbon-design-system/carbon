@@ -8,7 +8,6 @@
 @include exports('accordion') {
   .bx--accordion {
     @include reset;
-    @include helvetica;
     list-style: none;
     width: 100%;
   }
@@ -77,7 +76,8 @@
     opacity: 0;
 
     p {
-      @include font-size('14');
+      @include singleTypePrescription('b', false);
+      @include singleTypePrescription('b', false);
     }
   }
 }

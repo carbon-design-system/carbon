@@ -25,7 +25,7 @@ $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts/' !defa
   @font-face {
     font-family: 'IBM Helvetica';
     font-style: normal;
-    font-weight: 400;
+    
     src: url('#{$font-path}/helvetica-neue-roman.woff2') format('woff2'),
       url('#{$font-path}/helvetica-neue-roman.woff') format('woff');
   }
@@ -33,7 +33,7 @@ $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts/' !defa
   @font-face {
     font-family: 'IBM Helvetica';
     font-style: italic;
-    font-weight: 400;
+    
     src: url('#{$font-path}/helvetica-neue-roman-italic.woff2') format('woff2'),
       url('#{$font-path}/helvetica-neue-roman-italic.woff') format('woff');
   }
@@ -41,7 +41,7 @@ $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts/' !defa
   @font-face {
     font-family: 'IBM Helvetica';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     src: url('#{$font-path}/helvetica-neue-bold.woff2') format('woff2'),
       url('#{$font-path}/helvetica-neue-bold.woff') format('woff');
   }
@@ -49,7 +49,7 @@ $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts/' !defa
   @font-face {
     font-family: 'IBM Helvetica';
     font-style: italic;
-    font-weight: 700;
+    font-weight: 600;
     src: url('#{$font-path}/helvetica-neue-bold-italic.woff2') format('woff2'),
       url('#{$font-path}/helvetica-neue-bold-italic.woff') format('woff');
   }

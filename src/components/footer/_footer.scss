@@ -18,7 +18,6 @@
 
 .bx--footer {
   @include reset;
-  @include helvetica;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -39,21 +38,15 @@
 }
 
 .bx--footer-info__item {
-  @include font-size('18');
-  @include line-height('body');
+  @include singleTypePrescription('e', false);
   display: flex;
   flex-direction: column;
   margin: 0;
   margin-right: rem(64px);
 }
 
-.bx--footer-info__item > .bx--link {
-  font-weight: 700;
-}
-
 .bx--footer-info__item > .bx--footer-label {
-  @include font-size('14');
-  @include line-height('body');
+  @include singleTypePrescription('b', false);
   margin: 0;
 
   @media screen and (max-width: 600px) {

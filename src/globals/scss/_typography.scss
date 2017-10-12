@@ -1,4 +1,6 @@
 @import 'vars';
+@import './node_modules/@ibm/type/src/core';
+@import './node_modules/@ibm/type/src/styles';
 
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
@@ -42,26 +44,4 @@ $major-second-typescale-map: (
   } @else {
     @warn 'This is not a step of the Bluemix Type Scale!';
   }
-}
-
-// There are two line heights to choose from. One for headings and one for body text
-@mixin line-height($el) {
-  @if $el == 'heading' {
-    line-height: 1.25;
-  } @else if $el == 'body' {
-    line-height: 1.5;
-  } @else {
-    @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
-  }
-}
-
-// Only applied to bold weight text
-@mixin font-smoothing {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-// Only applied to h1, h2, h3, bold weights and always to All Caps.
-@mixin letter-spacing {
-  letter-spacing: 0.5px;
 }

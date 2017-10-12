@@ -49,7 +49,7 @@
   }
 
   .bx--slider__range-label {
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     color: $text-02;
 
     &:last-of-type {
@@ -111,6 +111,5 @@
     height: 2rem;
     padding: 0;
     text-align: center;
-    font-weight: 700;
   }
 }

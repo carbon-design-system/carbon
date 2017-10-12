@@ -24,8 +24,7 @@
 
   .bx--label-description {
     @include reset;
-    @include font-size('14');
-    @include line-height('body');
+    @include singleTypePrescription('b', false);
     color: $text-02;
     margin-top: 0.25rem;
     margin-bottom: 1.25rem;
@@ -53,7 +52,7 @@
   }
 
   .bx--file-filename {
-    @include font-size('12');
+    @include singleTypePrescription('a', false);
     @include text-overflow(100%);
     display: inline-flex;
     align-items: center;

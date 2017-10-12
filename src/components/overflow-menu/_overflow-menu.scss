@@ -86,9 +86,8 @@
 
   .bx--overflow-menu-options__btn {
     @include reset;
-    @include font-size('14');
-    @include helvetica;
-    font-weight: 400;
+    @include singleTypePrescription('b', false);
+    
     width: 100%;
     height: 100%;
     border: none;

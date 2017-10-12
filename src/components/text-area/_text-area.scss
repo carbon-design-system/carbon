@@ -12,8 +12,8 @@
 @include exports('text-area') {
   .bx--text-area {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
+    
+    @include singleTypePrescription('b', false);
     width: 100%;
     min-width: 10rem;
     padding: 1rem;

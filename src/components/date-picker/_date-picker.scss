@@ -37,8 +37,7 @@
 
   .bx--date-picker__input {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     display: block;
     position: relative;
     height: rem(40px);
@@ -134,7 +133,6 @@
   .flatpickr-month .flatpickr-prev-month,
   .flatpickr-month .flatpickr-next-month {
     padding: 0;
-    line-height: rem(20px);
 
     &:hover svg {
       fill: $brand-01;
@@ -143,8 +141,7 @@
 
   .bx--date-picker__month .flatpickr-current-month,
   .flatpickr-month .flatpickr-current-month {
-    @include font-size('12');
-    text-transform: uppercase;
+    @include singleTypePrescription('a', false);
     padding: 0;
   }
 
@@ -160,7 +157,6 @@
 
   .bx--date-picker__month .numInputWrapper .numInput,
   .flatpickr-month .numInputWrapper .numInput {
-    font-weight: 700;
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -207,17 +203,15 @@
 
   span.bx--date-picker__weekday,
   span.flatpickr-weekday {
-    @include font-size('12');
-    font-weight: 700;
+    @include singleTypePrescription('a', false);
     color: $text-01;
   }
 
   .bx--date-picker__day,
   .flatpickr-day {
-    @include font-size('12');
+    @include singleTypePrescription('a', false);
     height: rem(25px);
     width: 1.8rem;
-    line-height: rem(25px);
     flex-basis: 1.8rem;
     margin: rem(0.5px) 0;
     display: flex;

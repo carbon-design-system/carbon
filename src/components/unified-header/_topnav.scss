@@ -3,7 +3,7 @@
 @include exports('topnav') {
   .bx--top-nav {
     @include reset;
-    @include helvetica;
+    
     display: flex;
     justify-content: space-between;
     background-color: $nav-01;
@@ -28,7 +28,7 @@
   .bx--top-nav__left-container,
   .bx--top-nav__right-container {
     .bx--dropdown {
-      @include font-size('12');
+      @include singleTypePrescription('a', false);
       list-style: none;
       background-color: $nav-01;
       color: $inverse-01;
@@ -45,12 +45,11 @@
     }
 
     .bx--dropdown-text {
-      @include font-smoothing;
+  
       max-width: rem(200px);
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      font-weight: 700;
     }
 
     .bx--dropdown-list {
@@ -108,15 +107,14 @@
   }
 
   .bx--top-nav__left-container__link {
-    @include font-size('11');
-    @include font-smoothing;
+    @include singleTypePrescription('a', false);
+
     display: flex;
     justify-content: flex-start;
     background-color: $nav-01;
     align-items: flex-start;
     text-decoration: none;
     color: $inverse-01;
-    font-weight: 700;
     margin-right: 1rem;
 
     &:hover,
@@ -256,25 +254,23 @@
 
     .bx--dropdown__trial-content .bx--link,
     .bx--dropdown__credit-content .bx--link {
-      @include font-size('11');
+      @include singleTypePrescription('a', false);
       color: $color__blue-30; // anna
       margin-top: 1rem;
       text-align: center;
     }
 
     .bx--dropdown__trial-content--desc {
-      @include font-size('12');
+      @include singleTypePrescription('a', false);
     }
 
     .bx--dropdown__credit-content div {
       .bx--dropdown__credit-content--heading {
-        @include font-smoothing;
-        @include font-size('12');
-        font-weight: 600;
+        @include singleTypePrescription('a', false);
       }
 
       .bx--dropdown__credit-content--desc {
-        @include font-size('14');
+        @include singleTypePrescription('b', false);
       }
 
       &:last-child {
@@ -367,9 +363,7 @@
     margin-left: 1rem;
 
     p {
-      @include font-smoothing;
-      @include font-size('14');
-      font-weight: 700;
+      @include singleTypePrescription('b', false);
     }
   }
 
@@ -379,7 +373,7 @@
     align-items: center;
 
     a {
-      @include font-size('12');
+      @include singleTypePrescription('a', false);
       color: $color__blue-30; // anna
 
       &:hover {

@@ -15,8 +15,7 @@
 @include exports('dropdown') {
   .bx--dropdown {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     position: relative;
     list-style: none;
     display: block;
@@ -56,7 +55,6 @@
     padding-bottom: rem(13px);
     padding-left: 1rem;
     padding-right: 2.25rem;
-    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -104,7 +102,7 @@
     }
 
     .bx--dropdown-list {
-      @include font-size('14');
+      @include singleTypePrescription('b', false);
       display: flex;
       flex-direction: column;
       background-color: $ui-01;

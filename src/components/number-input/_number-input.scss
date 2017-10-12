@@ -12,14 +12,12 @@
   }
 
   .bx--number input[type='number'] {
-    @include font-size('14');
-    @include helvetica;
+    @include singleTypePrescription('b', false);
     box-sizing: border-box;
     display: inline-flex;
     width: 100%;
     min-width: 9.375rem;
     padding-left: 1rem;
-    font-weight: 300;
     height: rem(40px);
     color: $text-01;
     background-color: $field-01;

@@ -23,12 +23,11 @@
 
   .bx--search-input {
     @include reset;
-    @include helvetica;
+    
     appearance: none;
     border: none;
     background-color: $field-01;
     color: $text-01;
-    font-weight: 700;
     padding: 0 2.5rem 0 2.5rem;
     text-overflow: ellipsis;
     width: 100%;
@@ -39,17 +38,17 @@
 
     &::placeholder {
       @include placeholder-colors;
-      font-weight: 400;
+      
     }
   }
 
   .bx--search--sm .bx--search-input {
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     height: rem(32px);
   }
 
   .bx--search--lg .bx--search-input {
-    @include font-size('14');
+    @include singleTypePrescription('b', false);
     height: rem(40px);
   }
 

@@ -1,15 +1,11 @@
 @mixin button-base {
   @include reset;
-  @include helvetica;
-  @include font-smoothing;
-  @include letter-spacing;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   font-size: $button-font-size;
-  font-weight: $button-font-weight;
   height: rem($button-height);
   padding: $button-padding;
   border-radius: $button-border-radius;
