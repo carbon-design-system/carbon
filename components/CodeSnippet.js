@@ -8,13 +8,21 @@ const propTypes = {
   className: PropTypes.string,
   children: PropTypes.string,
   onClick: PropTypes.func,
+  wrappedContentRef: PropTypes.func,
 };
 
 const defaultProps = {
   type: 'terminal',
 };
 
-const CodeSnippet = ({ className, type, children, onClick, ...other }) => {
+const CodeSnippet = ({
+  className,
+  type,
+  children,
+  onClick,
+  wrappedContentRef,
+  ...other,
+}) => {
   const snippetType = type === 'terminal'
     ? 'bx--snippet--terminal'
     : 'bx--snippet--code';
@@ -23,7 +31,7 @@ const CodeSnippet = ({ className, type, children, onClick, ...other }) => {
     <div className={wrapperClasses} {...other}>
       <div className="bx--snippet-container">
         <code>
-          <pre>{children}</pre>
+          <pre ref={wrappedContentRef}>{children}</pre>
         </code>
       </div>
       <CopyButton onClick={onClick} />
