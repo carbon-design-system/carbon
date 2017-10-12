@@ -32,6 +32,10 @@ $major-second-typescale-map: (
   @return ($px / $base-font-size) * 1em;
 }
 
+@mixin helvetica {
+  font-family: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
+}
+
 @mixin font-family {
   @if global-variable-exists('css--plex') and $css--plex == true {
     font-family: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif;
