@@ -4,7 +4,6 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
-// import ibmMotion from '../../globals/js/misc/motion-generator';
 import getDuration from '../../globals/js/misc/motion-getDuration';
 
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
