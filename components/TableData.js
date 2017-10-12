@@ -32,6 +32,12 @@ const TableData = props => {
             name="chevron--right"
             description="expand row"
             style={style}
+            tabIndex={0}
+            onKeyPress={evt => {
+              if (props.onClick && (evt.which === 13 || evt.which === 32)) {
+                props.onClick(evt)
+              }
+            }}
           />}
     </td>
   );
