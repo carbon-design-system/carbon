@@ -124,7 +124,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
 
             // width for duration calculation
             const elementWidth = listEl.offsetWidth;
-            const duration = getDuration(fullHeight, fullHeight * elementWidth, 'move', 'natural', 'easeInOut');
+            const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'natural', 'easeInOut');
             // apply duration
             listEl.style.transitionDuration = `${duration}ms`;
             if (action === 'add') listEl.style.height = fullHeight;

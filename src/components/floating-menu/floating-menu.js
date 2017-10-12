@@ -4,7 +4,7 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
-import ibmMotion from '../../globals/js/misc/motion-generator';
+import getDuration from '../../globals/js/misc/motion-getDuration';
 
 class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlur) {
   /**
@@ -181,55 +181,39 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       this.hResize = null;
     }
 
+    /**
+     *  system 360 motion
+     */
+    let duration;
+    let fullHeight;
+    let targetHeight;
+    let elementWidth;
+    //  get the size of the element
+    if (state === 'shown') {
+      this.element.style.visibility = 'hidden';
+      this.element.style.height = 'auto';
+      fullHeight = this.element.offsetHeight;
+      targetHeight = fullHeight;
+      elementWidth = this.element.offsetWidth;
+      this.element.style.height = '0px';
+      this.element.style.visibility = 'visible';
+    } else {
+      fullHeight = this.element.offsetHeight;
+      targetHeight = 0;
+      elementWidth = this.element.offsetWidth;
+    }
+    window.requestAnimationFrame(() => {
+      //  get dynamic duration
+      duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'natural', 'easeOut');
+      this.element.style.transitionDuration = `${duration}ms`;
+      this.element.style.height = `${targetHeight}px`;
+    });
+
     this.element.classList.toggle(classShown, shown);
     if (classRefShown) {
       refNode.classList.toggle(classRefShown, shown);
     }
-
-    /**
-     *  system 360 motion
-     */
-    if (state === 'shown') {
-      //-----------------------------------------------------
-      //  test run to get the actual height
-      this.element.style.visibility = 'hidden';
-      this.element.style.height = 'auto';
-      const targetHeight = this.element.offsetHeight;
-      const elementWidth = this.element.offsetWidth;
-
-      this.element.style.height = '0px';
-      this.element.style.visibility = 'visible';
-
-      window.requestAnimationFrame(() => {
-        //-----------------------------------------------------
-        //  get dynamic duration
-        const duration = ibmMotion.getDuration(
-          targetHeight,
-          targetHeight * elementWidth,
-          ibmMotion.constants.PROPERTY_MOVE,
-          ibmMotion.constants.MOMENT_PRODUCTIVE,
-          ibmMotion.constants.EASE_OUT
-        );
-        this.element.style.transitionDuration = `${duration}ms`;
-        this.element.style.height = `${targetHeight}px`;
-      });
-    } else {
-      const currentHeight = this.element.offsetHeight;
-      const elementWidth = this.element.offsetWidth;
-      window.requestAnimationFrame(() => {
-        //-----------------------------------------------------
-        //  get dynamic duration
-        const duration = ibmMotion.getDuration(
-          currentHeight,
-          currentHeight * elementWidth,
-          ibmMotion.constants.PROPERTY_MOVE,
-          ibmMotion.constants.MOMENT_PRODUCTIVE,
-          ibmMotion.constants.EASE_OUT
-        );
-        this.element.style.transitionDuration = `${duration}ms`;
-        this.element.style.height = '0px';
-      });
-    }
+    
     callback();
   }
 
