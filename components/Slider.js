@@ -208,7 +208,10 @@ class Slider extends PureComponent {
       <div className="bx--form-item">
         <label htmlFor={id} className="bx--label">{labelText}</label>
         <div className="bx--slider-container">
-          <span className="bx--slider__range-label">{min}{minLabel}</span>
+          <span className="bx--slider__range-label">
+            <span>{min}</span>
+            <span>{minLabel}</span>
+          </span>
           <div
             className={sliderClasses}
             ref={node => {
@@ -246,7 +249,10 @@ class Slider extends PureComponent {
               onChange={this.handleChange}
             />
           </div>
-          <span className="bx--slider__range-label">{max}{maxLabel}</span>
+          <span className="bx--slider__range-label">
+            <span>{max}</span>
+            <span>{maxLabel}</span>
+          </span>
           {!hideTextInput ?
             <TextInput
               id="input-for-slider"
