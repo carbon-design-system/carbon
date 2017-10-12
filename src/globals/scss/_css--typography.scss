@@ -8,13 +8,14 @@
 @mixin typography {
   // really big
   .bx--type-giga {
-    @include font-size('74');
+    @include typescale('giga');
     @include reset;
     @include line-height('heading');
     font-weight: 300;
   }
+
   .bx--type-mega {
-    @include font-size('52');
+    @include typescale('mega');
     @include reset;
     @include line-height('heading');
     font-weight: 300;
@@ -22,22 +23,25 @@
 
   // really small
   .bx--type-omega {
-    @include font-size('12');
+    @include typescale('omega');
     @include reset;
     @include line-height('heading');
     @include letter-spacing;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: 600;
   }
+
   .bx--type-caption {
-    @include font-size('12');
+    @include typescale('caption');
     @include reset;
     @include line-height('body');
+    font-weight: 400;
   }
+
   .bx--type-legal {
-    @include font-size('11');
+    @include typescale('legal');
     @include reset;
     @include line-height('body');
+    font-weight: 400;
   }
 
   .bx--type-caps {
@@ -52,8 +56,9 @@
 
   p {
     @include reset;
-    @include font-size('16');
+    @include typescale('p');
     @include line-height('body');
+    font-weight: 400;
   }
 
   em {
@@ -69,46 +74,52 @@
   h1,
   .bx--type-alpha {
     @include reset;
-    @include font-size('32');
+    @include typescale('alpha');
     @include line-height('heading');
     @include letter-spacing;
+    font-weight: 300;
   }
 
   h2,
   .bx--type-beta {
     @include reset;
-    @include font-size('26');
+    @include typescale('beta');
     @include line-height('heading');
     @include letter-spacing;
+    font-weight: 300;
   }
 
   h3,
   .bx--type-gamma {
     @include reset;
-    @include font-size('20');
+    @include typescale('gamma');
     @include line-height('heading');
     @include letter-spacing;
+    font-weight: 300;
   }
 
   h4,
   .bx--type-delta {
     @include reset;
-    @include font-size('18');
+    @include typescale('delta');
     @include line-height('heading');
+    font-weight: 600;
   }
 
   h5,
   .bx--type-epsilon {
     @include reset;
-    @include font-size('16');
+    @include typescale('epsilon');
     @include line-height('heading');
+    font-weight: 600;
   }
 
   h6,
   .bx--type-zeta {
     @include reset;
-    @include font-size('14');
+    @include typescale('zeta');
     @include line-height('heading');
+    font-weight: 600;
   }
 }
 

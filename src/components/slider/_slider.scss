@@ -49,7 +49,7 @@
   }
 
   .bx--slider__range-label {
-    @include font-size('14');
+    @include typescale('zeta');
     color: $text-02;
 
     &:last-of-type {

@@ -2,27 +2,28 @@
 
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
-$major-second-typescale-map: (
-  '11' : 0.6875rem,
-  '12' : 0.75rem,
-  '14' : 0.875rem,
-  '16' : 1rem,
-  '18' : 1.125rem,
-  '20' : 1.25rem,
-  '23' : 1.4375rem,
-  '26' : 1.625rem,
-  '29' : 1.8125rem,
-  '32' : 2rem,
-  '36' : 2.25rem,
-  '41' : 2.5625rem,
-  '46' : 2.875rem,
-  '52' : 3.25rem,
-  '58' : 3.625rem,
-  '66' : 4.125rem,
-  '74' : 4.625rem,
-  '83' : 5.1875rem,
-  '94' : 5.875rem
+$typescale-map: (
+  'giga'    : 4.75rem,
+  'mega'    : 3.375rem,
+  'alpha'   : 2.25rem,
+  'beta'    : 1.75rem,
+  'gamma'   : 1.25rem,
+  'delta'   : 1.125rem,
+  'epsilon' : 1rem,
+  'zeta'    : 0.875rem,
+  'omega'   : 0.75rem,
+  'caption' : 0.75rem,
+  'legal'   : 0.6875rem,
+  'p'       : 1rem,
 );
+
+@mixin typescale($size) {
+  @if map-has-key($typescale-map, $size) {
+    font-size: map-get($typescale-map, $size);
+  } @else {
+    @warn 'This is not a step of the Carbon Type Scale!';
+  }
+}
 
 @function rem($px) {
   @return ($px / $base-font-size) * 1rem;
@@ -41,14 +42,6 @@ $major-second-typescale-map: (
     font-family: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif;
   } @else {
     font-family: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
-  }
-}
-
-@mixin font-size($size) {
-  @if map-has-key($major-second-typescale-map, $size) {
-    font-size: map-get($major-second-typescale-map, $size);
-  } @else {
-    @warn 'This is not a step of the Bluemix Type Scale!';
   }
 }
 
@@ -72,4 +65,37 @@ $major-second-typescale-map: (
 // Only applied to h1, h2, h3, bold weights and always to All Caps.
 @mixin letter-spacing {
   letter-spacing: 0.5px;
+}
+
+// ☠️ Deprecated ☠️
+$major-second-typescale-map: (
+  '11' : 0.6875rem,
+  '12' : 0.75rem,
+  '14' : 0.875rem,
+  '16' : 1rem,
+  '18' : 1.125rem,
+  '20' : 1.25rem,
+  '23' : 1.4375rem,
+  '26' : 1.625rem,
+  '29' : 1.8125rem,
+  '32' : 2rem,
+  '36' : 2.25rem,
+  '41' : 2.5625rem,
+  '46' : 2.875rem,
+  '52' : 3.25rem,
+  '58' : 3.625rem,
+  '66' : 4.125rem,
+  '74' : 4.625rem,
+  '83' : 5.1875rem,
+  '94' : 5.875rem
+);
+
+// ☠️ Deprecated ☠️
+@mixin font-size($size) {
+  @if map-has-key($major-second-typescale-map, $size) {
+    font-size: map-get($major-second-typescale-map, $size);
+    @warn 'This mixin will be deprecated in V9';
+  } @else {
+    @warn 'This is not a step of the Carbon Type Scale!';
+  }
 }

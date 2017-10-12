@@ -24,7 +24,7 @@
   .bx--label {
     @include reset;
     @include font-family;
-    @include font-size('14');
+    @include typescale('zeta');
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
@@ -47,7 +47,7 @@
 
   .bx--form-requirement {
     @include reset;
-    @include font-size('11');
+    @include typescale('omega');
     margin: 0.75rem 0 0;
     max-height: 0;
     overflow: hidden;

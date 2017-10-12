@@ -26,18 +26,18 @@
 
     td {
       @include reset;
-      font-size: rem(14px);
+      @include typescale('zeta');
       padding: 0 rem(6px);
       vertical-align: middle;
     }
 
     td p {
-      @include font-size('14');
+      @include typescale('zeta');
     }
 
     th {
       @include reset;
-      font-size: rem(12px);
+      @include typescale('omega');
       padding: rem(9px) rem(6px);
       vertical-align: middle;
       font-weight: 700;
@@ -97,8 +97,8 @@
 
   .bx--table-header {
     @include reset;
+    @include typescale('omega');
     font-weight: 700;
-    font-size: rem(12px);
     letter-spacing: 1px;
     text-align: left;
     text-transform: $data-table-heading-transform;

@@ -13,7 +13,7 @@
   }
 
   .bx--snippet code {
-    @include font-size('16');
+    @include typescale('epsilon');
   }
 
   .bx--snippet--code .bx--snippet-container {

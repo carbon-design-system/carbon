@@ -13,7 +13,7 @@
   .bx--text-input {
     @include reset;
     @include font-family;
-    @include font-size('14');
+    @include typescale('zeta');
     display: block;
     width: 100%;
     height: rem(40px);

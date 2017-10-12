@@ -44,12 +44,12 @@
   }
 
   .bx--search--sm .bx--search-input {
-    @include font-size('14');
+    @include typescale('zeta');
     height: rem(32px);
   }
 
   .bx--search--lg .bx--search-input {
-    @include font-size('14');
+    @include typescale('zeta');
     height: rem(40px);
   }
 

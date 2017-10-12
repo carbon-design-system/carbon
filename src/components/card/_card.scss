@@ -59,7 +59,7 @@
   }
 
   .bx--card-footer__link {
-    @include font-size('14');
+    @include typescale('zeta');
 
     &:focus {
       @include focus-outline('border');
@@ -81,7 +81,7 @@
   }
 
   .bx--about__title--name {
-    @include font-size('18');
+    @include typescale('delta');
     @include text-overflow(rem(180px));
     font-weight: 400;
     margin: 0;
@@ -89,7 +89,7 @@
   }
 
   .bx--about__title--link {
-    @include font-size('12');
+    @include typescale('omega');
     @include text-overflow(rem(180px));
     display: inline;
     font-weight: 400;
@@ -97,7 +97,7 @@
   }
 
   .bx--about__title--additional-info {
-    @include font-size('12');
+    @include typescale('omega');
     @include text-overflow(rem(180px));
     display: inline;
     font-weight: 400;
@@ -158,7 +158,7 @@
   }
 
   .bx--app-actions__button {
-    @include font-size('16');
+    @include typescale('epsilon');
     display: inline-block;
     padding: 0.125rem 0 0;
     margin: 0 0.175rem;

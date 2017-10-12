@@ -6,7 +6,7 @@
 @include exports('tags') {
   .bx--tag {
     @include font-family;
-    @include font-size('12');
+    @include typescale('omega');
     display: inline-flex;
     align-items: center;
     padding: 0 0.625rem;
