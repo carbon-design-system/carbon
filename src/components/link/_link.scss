@@ -16,7 +16,7 @@
     @include font-family;
     @include typescale('zeta');
     @include font-smoothing;
-    font-weight: 700;
+    font-weight: 600;
     color: $brand-01;
     text-decoration: underline;
     transition: $transition--base;

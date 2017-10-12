@@ -46,7 +46,7 @@
 
 .bx--order-header-title {
   @include typescale('zeta');
-  font-weight: 700;
+  font-weight: 600;
   flex: 2;
 }
 
@@ -75,7 +75,7 @@
 
 .bx--order-price {
   @include typescale('omega');
-  font-weight: 700;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -103,14 +103,14 @@
 }
 
 .bx--order-total-text {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .bx--order-total-price {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font-weight: 700;
+  font-weight: 600;
 
   span {
     @include typescale('omega');
@@ -149,7 +149,7 @@
 
 .bx--order-category-title {
   @include typescale('omega');
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: rem(4px);
   text-transform: uppercase;
 }
