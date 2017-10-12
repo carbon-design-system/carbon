@@ -202,7 +202,6 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       window.requestAnimationFrame(() => {
         element.style.height = '0px';
       });
-
     }
 
     this.element.classList.toggle(classShown, shown);
