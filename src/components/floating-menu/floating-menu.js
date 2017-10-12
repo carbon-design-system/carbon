@@ -136,20 +136,6 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    */
   _place() {
     const element = this.element;
-    element.style.visibility = 'hidden';
-    element.style.height = 'auto';
-    const fullHeight = element.offsetHeight;
-    const targetHeight = fullHeight;
-    const elementWidth = element.offsetWidth;
-    element.style.height = '0px';
-    element.style.visibility = 'visible';
-
-    const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'natural', 'easeOut');
-    element.style.transitionDuration = `${duration}ms`;
-
-    window.requestAnimationFrame(() => {
-      element.style.height = `${targetHeight}px`;
-    });
     const { left, top } = this._getPos();
     element.style.left = `${left}px`;
     element.style.top = `${top}px`;
@@ -175,6 +161,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
+    const element = this.element;
     const shown = state === 'shown';
     const { refNode, classShown, classRefShown } = this.options;
 
@@ -186,17 +173,33 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       }
       this._getContainer().appendChild(this.element);
       this._place();
-      (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
+      (element.querySelector(this.options.selectorPrimaryFocus) || element).focus();
+
+      window.requestAnimationFrame(() => {
+        element.style.visibility = 'hidden';
+        element.style.height = 'auto';
+        const fullHeight = element.offsetHeight;
+        const targetHeight = fullHeight;
+        const elementWidth = element.offsetWidth;
+        element.style.height = '0px';
+        element.style.visibility = 'visible';
+
+        const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'mechanical', 'easeOut');
+        element.style.transitionDuration = `${duration}ms`;
+
+        window.requestAnimationFrame(() => {
+          element.style.height = `${targetHeight}px`;
+        });
+      });
 
       // this.element.style.height = this.element.querySelectorAll(this.options.);
     }
     if (state === 'hidden' && this.hResize) {
       this.hResize.release();
       this.hResize = null;
-      const element = this.element;
       const fullHeight = element.offsetHeight;
       const elementWidth = element.offsetWidth;
-      const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'natural', 'easeOut');
+      const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'mechanical', 'easeOut');
       element.style.transitionDuration = `${duration}ms`;
 
       window.requestAnimationFrame(() => {

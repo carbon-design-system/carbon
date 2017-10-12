@@ -1,1 +1,90 @@
-[]
+[
+  {
+    "inapplicable": [],
+    "incomplete": [],
+    "timestamp": 1507823900823,
+    "url": "http://localhost:3000",
+    "violations": [
+      {
+        "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+        "help": "Elements must have sufficient color contrast",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.4/color-contrast?application=webdriverjs",
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "all": [],
+            "any": [
+              {
+                "data": {
+                  "bgColor": "#4285f4",
+                  "contrastRatio": 3.56,
+                  "fgColor": "#ffffff",
+                  "fontSize": "9.8pt",
+                  "fontWeight": "normal",
+                  "missingData": null
+                },
+                "id": "color-contrast",
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.56 (foreground color: #ffffff, background color: #4285f4, font size: 9.8pt, font weight: normal)",
+                "relatedNodes": [
+                  {
+                    "html": "<button id=\"reload-button\" class=\"blue-button text-button\" onclick=\"trackClick(this.trackingId);\n                     reloadButtonClick(this.url);\" jsselect=\"reloadButton\" jsvalues=\".url:reloadUrl; .trackingId:reloadTrackingId\" jscontent=\"msg\" jstcache=\"8\">Reload</button>",
+                    "target": [
+                      "#reload-button"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "html": "<button id=\"reload-button\" class=\"blue-button text-button\" onclick=\"trackClick(this.trackingId);\n                     reloadButtonClick(this.url);\" jsselect=\"reloadButton\" jsvalues=\".url:reloadUrl; .trackingId:reloadTrackingId\" jscontent=\"msg\" jstcache=\"8\">Reload</button>",
+            "impact": "serious",
+            "none": [],
+            "target": [
+              "#reload-button"
+            ]
+          }
+        ],
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143"
+        ]
+      },
+      {
+        "description": "Ensures <meta name=\"viewport\"> does not disable text scaling and zooming",
+        "help": "Zooming and scaling must not be disabled",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.4/meta-viewport?application=webdriverjs",
+        "id": "meta-viewport",
+        "impact": "critical",
+        "nodes": [
+          {
+            "all": [],
+            "any": [
+              {
+                "data": null,
+                "id": "meta-viewport",
+                "impact": "critical",
+                "message": "<meta> tag disables zooming on mobile devices",
+                "relatedNodes": []
+              }
+            ],
+            "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0,\n                                 maximum-scale=1.0, user-scalable=no\">",
+            "impact": "critical",
+            "none": [],
+            "target": [
+              "head > meta[name=\"viewport\"]"
+            ]
+          }
+        ],
+        "tags": [
+          "cat.sensory-and-visual-cues",
+          "wcag2aa",
+          "wcag144"
+        ]
+      }
+    ],
+    "time": 459,
+    "status": 404
+  }
+]
