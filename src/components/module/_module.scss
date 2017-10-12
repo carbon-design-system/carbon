@@ -12,7 +12,7 @@
 @include exports('modules') {
   .bx--module {
     @include reset;
-    @include helvetica;
+    @include font-family;
     display: flex;
     flex-direction: column;
     padding: rem(10px);

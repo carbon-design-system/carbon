@@ -6,7 +6,7 @@
 
 @include exports('content-switcher') {
   .bx--content-switcher {
-    @include helvetica;
+    @include font-family;
     display: flex;
     height: rem(40px);
   }
@@ -15,6 +15,7 @@
     @include reset;
     @include font-smoothing;
     @include font-size('14');
+    @include font-family;
     background-color: transparent;
     display: flex;
     align-items: center;

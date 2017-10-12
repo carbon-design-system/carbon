@@ -2,7 +2,7 @@ $transition-time: 300ms;
 
 @mixin detail-page-header {
   @include reset;
-  @include helvetica;
+  @include font-family;
   display: flex;
   justify-content: space-between;
   position: fixed;

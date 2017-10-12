@@ -7,7 +7,7 @@
 @include exports('progress-indicator') {
   .bx--progress {
     @include reset;
-    @include helvetica;
+    @include font-family;
     display: flex;
     list-style: none;
   }

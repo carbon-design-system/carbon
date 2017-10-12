@@ -14,7 +14,7 @@
 @include exports('card') {
   .bx--card {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include layer('raised');
     display: flex;
     flex-direction: column;

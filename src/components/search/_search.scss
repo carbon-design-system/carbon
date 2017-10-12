@@ -23,7 +23,7 @@
 
   .bx--search-input {
     @include reset;
-    @include helvetica;
+    @include font-family;
     appearance: none;
     border: none;
     background-color: $field-01;

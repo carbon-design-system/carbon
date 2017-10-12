@@ -3,7 +3,7 @@
 @include exports('topnav') {
   .bx--top-nav {
     @include reset;
-    @include helvetica;
+    @include font-family;
     display: flex;
     justify-content: space-between;
     background-color: $nav-01;

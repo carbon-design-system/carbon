@@ -13,7 +13,7 @@
 @include exports('link') {
   .bx--link {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-size('14');
     @include font-smoothing;
     font-weight: 700;

@@ -14,7 +14,7 @@ $css--helpers: true;
 
 @include exports('toolbar') {
   .bx--toolbar {
-    @include helvetica;
+    @include font-family;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;

@@ -8,7 +8,7 @@
 @include exports('accordion') {
   .bx--accordion {
     @include reset;
-    @include helvetica;
+    @include font-family;
     list-style: none;
     width: 100%;
   }

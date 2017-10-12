@@ -16,7 +16,7 @@
 @include exports('modal') {
   .bx--modal {
     @include reset;
-    @include helvetica;
+    @include font-family;
     position: fixed;
     top: 0;
     right: 0;
