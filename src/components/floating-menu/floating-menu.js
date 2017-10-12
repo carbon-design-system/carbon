@@ -184,11 +184,11 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     /**
      *  system 360 motion
      */
+    //  get the size of the element
     let duration;
     let fullHeight;
     let targetHeight;
     let elementWidth;
-    //  get the size of the element
     if (state === 'shown') {
       this.element.style.visibility = 'hidden';
       this.element.style.height = 'auto';
@@ -202,6 +202,11 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       targetHeight = 0;
       elementWidth = this.element.offsetWidth;
     }
+
+    this.element.classList.toggle(classShown, shown);
+    if (classRefShown) {
+      refNode.classList.toggle(classRefShown, shown);
+    }
     window.requestAnimationFrame(() => {
       //  get dynamic duration
       duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'natural', 'easeOut');
@@ -209,11 +214,6 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       this.element.style.height = `${targetHeight}px`;
     });
 
-    this.element.classList.toggle(classShown, shown);
-    if (classRefShown) {
-      refNode.classList.toggle(classRefShown, shown);
-    }
-    
     callback();
   }
 
