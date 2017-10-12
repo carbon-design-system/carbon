@@ -92,7 +92,7 @@
         &--expanded {
           .left-nav-list--nested {
             max-height: 20rem;
-            transition: $transition--base;
+            transition: $transition--expansion $bx--ease-in;
             overflow: inherit;
             opacity: 1;
 
@@ -134,7 +134,7 @@
     .left-nav-list--nested {
       max-height: 0;
       overflow: hidden;
-      transition: 0.3s ease-in-out;
+      transition: $transition--expansion $bx--ease-out;
       padding: 0;
       opacity: 0;
 
