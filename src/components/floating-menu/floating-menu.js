@@ -136,6 +136,20 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    */
   _place() {
     const element = this.element;
+    element.style.visibility = 'hidden';
+    element.style.height = 'auto';
+    const fullHeight = element.offsetHeight;
+    const targetHeight = fullHeight;
+    const elementWidth = element.offsetWidth;
+    element.style.height = '0px';
+    element.style.visibility = 'visible';
+
+    const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'natural', 'easeOut');
+    element.style.transitionDuration = `${duration}ms`;
+
+    window.requestAnimationFrame(() => {
+      element.style.height = `${targetHeight}px`;
+    });
     const { left, top } = this._getPos();
     element.style.left = `${left}px`;
     element.style.top = `${top}px`;
@@ -179,43 +193,22 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     if (state === 'hidden' && this.hResize) {
       this.hResize.release();
       this.hResize = null;
+      const element = this.element;
+      const fullHeight = element.offsetHeight;
+      const elementWidth = element.offsetWidth;
+      const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'natural', 'easeOut');
+      element.style.transitionDuration = `${duration}ms`;
+
+      window.requestAnimationFrame(() => {
+        element.style.height = '0px';
+      });
+
     }
 
     this.element.classList.toggle(classShown, shown);
     if (classRefShown) {
       refNode.classList.toggle(classRefShown, shown);
     }
-
-    /**
-     *  system 360 motion
-     */
-    window.requestAnimationFrame(() => {
-      const element = this.element;
-      let fullHeight; // this is the height when it's fully open
-      let targetHeight; // this is the final height once all of this is done - 0 when closed, full height when open.
-      let elementWidth; // width for duration calculation
-      // if to be shown, do invisible size check. if to be closed, simply grab the height.
-      if (state === 'shown') {
-        element.style.visibility = 'hidden';
-        element.style.height = 'auto';
-        fullHeight = element.offsetHeight;
-        targetHeight = fullHeight;
-        elementWidth = element.offsetWidth;
-        element.style.height = '0px';
-        element.style.visibility = 'visible';
-      } else {
-        fullHeight = element.offsetHeight;
-        targetHeight = 0;
-        elementWidth = element.offsetWidth;
-      }
-      // get dynamic duration and set the style.
-      const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'natural', 'easeOut');
-      element.style.transitionDuration = `${duration}ms`;
-      // on the next frame, set the final height. this is necessary because of the height check.
-      window.requestAnimationFrame(() => {
-        element.style.height = `${targetHeight}px`;
-      });
-    });
 
     callback();
   }
