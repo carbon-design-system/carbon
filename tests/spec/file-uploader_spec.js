@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import FileUploader from '../../src/components/file-uploader/file-uploader';
 import HTML from '../../src/components/file-uploader/file-uploader.html';
 

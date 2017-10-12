@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import CopyButton from '../../src/components/copy-button/copy-button';
 
 const HTML = `

@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Tooltip from '../../src/components/tooltip/tooltip';
 import HTML from '../../src/components/tooltip/tooltip.html';
 
