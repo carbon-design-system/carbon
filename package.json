@@ -113,6 +113,7 @@
     "css-loader": "^0.28.4",
     "cz-conventional-changelog-components": "^1.0.0",
     "enzyme": "^2.6.0",
+    "enzyme-to-json": "^2.0.1",
     "eslint": "^3.0.0",
     "eslint-plugin-jsx-a11y": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
@@ -122,8 +123,10 @@
     "lcov2badge": "^0.1.0",
     "lint-staged": "^3.4.0",
     "node-sass": "3.8.0",
+    "object-assign": "^4.1.1",
     "postcss-loader": "^2.0.5",
     "prettier": "^1.2.2",
+    "promise": "^8.0.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -134,16 +137,8 @@
     "semantic-release": "^6.3.6",
     "shelljs": "^0.7.5",
     "storybook-addon-a11y": "^3.0.0",
-    "validate-commit-msg": "^2.10.1"
-  },
-  "jest": {
-    "coverageDirectory": "./coverage",
-    "moduleNameMapper": {
-      "^.+\\.(scss)$": "<rootDir>/lib/styleMock.js"
-    },
-    "setupFiles": [
-      "<rootDir>/setup-jest.js"
-    ]
+    "validate-commit-msg": "^2.10.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "lint-staged": {
     "*.js": [
@@ -176,5 +171,39 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon-components-react.git"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "components/**/*.js"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/jest/setup.js"
+    ],
+    "testMatch": [
+      "<rootDir>/**/__tests__/**/*.js?(x)",
+      "<rootDir>/**/?(*.)(spec|test).js?(x)"
+    ],
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/config/jest/jsTransform.js",
+      "^.+\\.s?css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "testPathIgnorePatterns": [
+      "/config/",
+      "/lib/",
+      "/es/",
+      "/cjs/"
+    ],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
