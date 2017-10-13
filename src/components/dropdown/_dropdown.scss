@@ -27,6 +27,10 @@
 
     &:focus {
       @include focus-outline('border');
+
+      .bx--dropdown-list{
+        box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      }
     }
 
     &.bx--dropdown--open:focus {
@@ -67,13 +71,20 @@
     @include reset;
     @include layer('overlay');
     width: 100%;
+    display:flex;
+    flex-direction:column;
+    height:0;
     list-style: none;
     position: absolute;
     z-index: z('dropdown');
-    max-height: 0;
-    overflow: hidden;
-    transition: $transition--expansion $bx--ease-out;
-    opacity: 0;
+    transition:height 0.144s $bx--standard-easing;
+    overflow:hidden;
+    background-color: $ui-01;
+
+    .bx--dropdown-item{
+      opacity:0;
+      transition:opacity 0.144s $bx--standard-easing;
+    }
   }
 
   .bx--dropdown-link {
@@ -95,7 +106,7 @@
   }
 
   .bx--dropdown--selected {
-    display: none;
+    background-color:$field-01;
   }
 
   .bx--dropdown--open {
@@ -107,11 +118,41 @@
       @include typescale('zeta');
       display: flex;
       flex-direction: column;
-      background-color: $ui-01;
-      max-height: 50rem;
-      overflow: visible;
-      transition: $transition--expansion $bx--ease-in;
-      opacity: 1;
+      
+      height:300px;
+      transition:height 0.144s cubic-bezier(0, 0, 0.38, 0.9);
+
+      .bx--dropdown-item{
+        opacity:1;
+        $delayUnit:0.02s;
+        $fadeDuration:0.2s;
+        transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *9;
+
+        &:nth-child(1){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *1;
+        }
+        &:nth-child(2){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *2;
+        }
+        &:nth-child(3){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *3;
+        }
+        &:nth-child(4){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *4;
+        }
+        &:nth-child(5){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *5;
+        }
+        &:nth-child(6){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *6;
+        }
+        &:nth-child(7){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *7;
+        }
+        &:nth-child(8){
+          transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *8;
+        }
+      }
     }
 
     &:focus {

@@ -4,6 +4,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import getDuration from '../../globals/js/misc/motion-getDuration';
 
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
   /**
@@ -96,9 +97,39 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
         remove: (!isOfSelf || event.which === 27) && isOpen,
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
+
       Object.keys(actions).forEach(action => {
         if (actions[action]) {
           this.element.classList[action]('bx--dropdown--open');
+
+          /**
+           * System 360 motion
+           */
+          window.requestAnimationFrame(() => {
+            // the list element to be open
+            const listEl = this.element.querySelector('.bx--dropdown-list');
+
+            // the height when it's open
+            let fullHeight = listEl.offsetHeight;
+
+            // if not open, then let's do that invisible expansion to grab the real height
+            if (isOpen !== true) {
+              listEl.style.visibility = 'hidden';
+              listEl.style.height = 'auto';
+              fullHeight = listEl.offsetHeight;
+              listEl.style.height = '0px';
+              listEl.style.visibility = 'visible';
+            }
+
+            // width for duration calculation
+            const elementWidth = listEl.offsetWidth;
+            const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'mechanical', 'easeInOut');
+            // apply duration
+            listEl.style.transitionDuration = `${duration}ms`;
+            if (action === 'add') listEl.style.height = fullHeight;
+            else if (action === 'remove') listEl.style.height = 0;
+            else listEl.style.height = isOpen !== true ? `${fullHeight}px` : 0;
+          });
           this.element.focus();
         }
       });
@@ -180,6 +211,9 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    */
   handleBlur() {
     this.element.classList.remove('bx--dropdown--open');
+    window.requestAnimationFrame(() => {
+      this.element.querySelector('.bx--dropdown-list').style.height = 0;
+    });
   }
 
   /**
@@ -213,6 +247,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     classSelected: 'bx--dropdown--selected',
     eventBeforeSelected: 'dropdown-beingselected',
     eventAfterSelected: 'dropdown-selected',
+    itemHeight: '[data-dropdown-item-height]',
   };
 
   /**

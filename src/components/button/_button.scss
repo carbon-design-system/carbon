@@ -54,15 +54,18 @@
     &:hover,
     &:focus {
       color: $inverse-01;
+
+      .bx--btn__icon {
+        fill: $inverse-01;
+      }
     }
 
     &:active {
       color: $brand-01;
-    }
 
-    &:hover > .bx--btn__icon,
-    &:focus > .bx--btn__icon {
-      fill: $inverse-01;
+      .bx--btn__icon {   // shix gives active state icon color
+        fill: $brand-01;
+      }
     }
 
     &:hover:disabled,
@@ -93,6 +96,17 @@
       margin-left: 0.275rem;
     }
 
+    // shix added active state: start
+
+    &:active {
+      color: $brand-01;
+    }
+    &:active > .bx--btn__icon {
+      fill: $brand-01;
+    }
+
+    // shix added active state: end
+
     &:hover:disabled,
     &:focus:disabled {
       color: $brand-01;
@@ -115,21 +129,37 @@
     &:hover {
       color: $inverse-01;
       border: $button-border-width solid transparent;
+
+      .bx--btn__icon {
+        fill: $inverse-01;
+      }
+
     }
 
     &:focus {
       color: $inverse-01;
+      .bx--btn__icon {
+        fill: $inverse-01;
+      }
     }
+
+
+    // shix added active state: start
+
+    &:active {
+      color: $support-01;
+    }
+    &:active > .bx--btn__icon {
+      fill: $support-01;
+    }
+
+    // shix added active state: end
+
 
     &:hover:disabled,
     &:focus:disabled {
       color: $ui-05;
       border: $button-border-width solid currentColor;
-    }
-
-    &:hover > .bx--btn__icon,
-    &:focus > .bx--btn__icon {
-      fill: $inverse-01;
     }
   }
 

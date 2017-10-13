@@ -2,13 +2,17 @@
   {
     "inapplicable": [],
     "incomplete": [],
+<<<<<<< HEAD
+    "timestamp": 1507823900823,
+=======
     "timestamp": 1505852198360,
+>>>>>>> master
     "url": "http://localhost:3000",
     "violations": [
       {
         "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
         "help": "Elements must have sufficient color contrast",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.3/color-contrast?application=webdriverjs",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.4/color-contrast?application=webdriverjs",
         "id": "color-contrast",
         "impact": "serious",
         "nodes": [
@@ -54,7 +58,7 @@
       {
         "description": "Ensures <meta name=\"viewport\"> does not disable text scaling and zooming",
         "help": "Zooming and scaling must not be disabled",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.3/meta-viewport?application=webdriverjs",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.4/meta-viewport?application=webdriverjs",
         "id": "meta-viewport",
         "impact": "critical",
         "nodes": [
@@ -65,7 +69,7 @@
                 "data": null,
                 "id": "meta-viewport",
                 "impact": "critical",
-                "message": "<meta> tag disables zooming",
+                "message": "<meta> tag disables zooming on mobile devices",
                 "relatedNodes": []
               }
             ],
@@ -84,7 +88,11 @@
         ]
       }
     ],
+<<<<<<< HEAD
+    "time": 459,
+=======
     "time": 342,
+>>>>>>> master
     "status": 404
   }
 ]

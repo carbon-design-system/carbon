@@ -4,6 +4,7 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
+import getDuration from '../../globals/js/misc/motion-getDuration';
 
 class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlur) {
   /**
@@ -160,12 +161,10 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
+    const element = this.element;
     const shown = state === 'shown';
     const { refNode, classShown, classRefShown } = this.options;
-    this.element.classList.toggle(classShown, shown);
-    if (classRefShown) {
-      refNode.classList.toggle(classRefShown, shown);
-    }
+
     if (state === 'shown') {
       if (!this.hResize) {
         this.hResize = optimizedResize.add(() => {
@@ -174,12 +173,45 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       }
       this._getContainer().appendChild(this.element);
       this._place();
-      (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
+      (element.querySelector(this.options.selectorPrimaryFocus) || element).focus();
+
+      window.requestAnimationFrame(() => {
+        element.style.visibility = 'hidden';
+        element.style.height = 'auto';
+        const fullHeight = element.offsetHeight;
+        const targetHeight = fullHeight;
+        const elementWidth = element.offsetWidth;
+        element.style.height = '0px';
+        element.style.visibility = 'visible';
+
+        const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'mechanical', 'easeOut');
+        element.style.transitionDuration = `${duration}ms`;
+
+        window.requestAnimationFrame(() => {
+          element.style.height = `${targetHeight}px`;
+        });
+      });
+
+      // this.element.style.height = this.element.querySelectorAll(this.options.);
     }
     if (state === 'hidden' && this.hResize) {
       this.hResize.release();
       this.hResize = null;
+      const fullHeight = element.offsetHeight;
+      const elementWidth = element.offsetWidth;
+      const duration = getDuration(fullHeight, fullHeight * elementWidth, 'scale', 'mechanical', 'easeOut');
+      element.style.transitionDuration = `${duration}ms`;
+
+      window.requestAnimationFrame(() => {
+        element.style.height = '0px';
+      });
     }
+
+    this.element.classList.toggle(classShown, shown);
+    if (classRefShown) {
+      refNode.classList.toggle(classRefShown, shown);
+    }
+
     callback();
   }
 

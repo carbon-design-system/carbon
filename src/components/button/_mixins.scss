@@ -15,8 +15,9 @@
   border-radius: $button-border-radius;
   text-align: center;
   text-decoration: none;
-  transition-duration: $transition--base;
-  transition-timing-function: ease-in;
+  //transition-duration: $transition--base;
+  transition-timing-function: $bx--ease-out;  //shix changes
+  transition-duration: .1s; //shix changes
   white-space: nowrap;
   line-height: 16px;
 
@@ -29,8 +30,9 @@
     width: rem(16px);
     height: rem(16px);
     margin-left: 0.5rem;
-    transition-duration: $transition--base;
-    transition-timing-function: ease-in;
+    //transition-duration: $transition--base;
+    transition-timing-function: $bx--ease-out;  //shix changes
+    transition-duration: .1s;  //shix changes
   }
 }
 

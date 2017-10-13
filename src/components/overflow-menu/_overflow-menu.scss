@@ -44,16 +44,24 @@
     position: absolute;
     z-index: 1;
     background-color: $inverse-01;
-    border: 1px solid $ui-04;
+    border: 0px solid $ui-04;
     width: 11.25rem;
     list-style: none;
     margin-top: 0.25rem;
     padding: 0.285rem 0 0.5rem;
     left: -20px;
-  }
 
-  .bx--overflow-menu-options--open {
-    display: flex;
+    /* s360 motion */
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    height:0;
+    opacity:0;
+    transition:
+      height 144ms cubic-bezier(0.2, 0, 1, 0.9),
+      padding 144ms cubic-bezier(0.2, 0, 1, 0.9),
+      opacity 144ms cubic-bezier(0.2, 0, 1, 0.9)
+    ;
   }
 
   .bx--overflow-menu-options:before {
@@ -71,6 +79,9 @@
     left: 24px;
   }
 
+  $delayUnit:0.02s;
+  $fadeDuration:0.2s;
+
   .bx--overflow-menu-options__option {
     @include reset;
     display: flex;
@@ -78,6 +89,65 @@
     align-items: center;
     width: 100%;
     padding: 0;
+    opacity:0;
+    min-height:2rem;
+    transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit;
+  }
+
+  .bx--overflow-menu-options--open {
+
+    /* s360 motion */
+    // height:240px;
+    // padding: 0.285rem 0 0.5rem;
+    border: 0px solid $ui-04;
+    opacity:1;
+
+    transition:
+      height 144ms cubic-bezier(0, 0, 0.38, 0.9),
+      padding 144ms cubic-bezier(0, 0, 0.38, 0.9),
+      opacity 144ms cubic-bezier(0, 0, 0.38, 0.9)
+    ;
+
+    .bx--overflow-menu-options__option {
+      opacity:1;
+      transition:opacity $fadeDuration cubic-bezier(0, 0, 0.38, 0.9) $delayUnit *9;
+
+      &:nth-child(1){
+        transition-delay:$delayUnit *1;
+      }
+
+      &:nth-child(2){
+        transition-delay:$delayUnit *2;
+      }
+
+      &:nth-child(3){
+        transition-delay:$delayUnit *3;
+      }
+
+      &:nth-child(4){
+        transition-delay:$delayUnit *4;
+      }
+
+      &:nth-child(5){
+        transition-delay:$delayUnit *5;
+      }
+
+      &:nth-child(6){
+        transition-delay:$delayUnit *6;
+      }
+
+      &:nth-child(7){
+        transition-delay:$delayUnit *7;
+      }
+
+      &:nth-child(8){
+        transition-delay:$delayUnit *8;
+      }
+
+      &:nth-child(9){
+        transition-delay:$delayUnit *9;
+      }
+    }
   }
 
   .bx--overflow-menu--divider {

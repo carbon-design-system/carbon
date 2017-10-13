@@ -68,7 +68,9 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
 
     // Delegates the action of changing state to the menu.
     // (And thus the before/after shown/hidden events are fired from the menu)
-    this.optionMenu.changeState(state, Object.assign(detail, { delegatorNode: this.element }), callback);
+    this.optionMenu.changeState(state, Object.assign(detail, { delegatorNode: this.element }), () => {
+      if (callback != null) callback();
+    });
   }
 
   /**
