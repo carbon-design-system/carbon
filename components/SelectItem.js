@@ -29,8 +29,7 @@ const SelectItem = ({ className, value, disabled, hidden, text, ...other }) => {
       className={selectItemClasses}
       value={value}
       disabled={disabled}
-      hidden={hidden}
-    >
+      hidden={hidden}>
       {text}
     </option>
   );

@@ -15,7 +15,7 @@ class Tab extends React.Component {
     onClick: PropTypes.func.isRequired,
     onKeyDown: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
-    tabIndex: PropTypes.number.isRequired
+    tabIndex: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -25,7 +25,7 @@ class Tab extends React.Component {
     href: '#',
     selected: false,
     onClick: () => {},
-    onKeyDown: () => {}
+    onKeyDown: () => {},
   };
 
   setTabFocus(evt) {
@@ -77,15 +77,13 @@ class Tab extends React.Component {
           onKeyDown(evt);
         }}
         role={role}
-        selected={selected}
-      >
+        selected={selected}>
         <a
           className="bx--tabs__nav-link"
           href={href}
           role="tab"
           tabIndex={tabIndex}
-          ref="tabAnchor"
-        >
+          ref="tabAnchor">
           {label}
         </a>
       </li>

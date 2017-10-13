@@ -145,8 +145,7 @@ class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
-          ref={this.bindMenuEl}
-        >
+          ref={this.bindMenuEl}>
           <Icon
             onClick={this.handleClick}
             className={overflowMenuIconClasses}
@@ -154,19 +153,18 @@ class OverflowMenu extends Component {
             description={iconDescription}
             style={{ width: '100%' }}
           />
-          {floatingMenu
-            ? <FloatingMenu
-                menuPosition={this.state.menuPosition}
-                menuDirection="bottom"
-                menuOffset={flipped ? menuOffsetFlip : menuOffset}
-              >
-                <ul className={overflowMenuOptionsClasses}>
-                  {childrenWithProps}
-                </ul>
-              </FloatingMenu>
-            : <ul className={overflowMenuOptionsClasses}>
+          {floatingMenu ? (
+            <FloatingMenu
+              menuPosition={this.state.menuPosition}
+              menuDirection="bottom"
+              menuOffset={flipped ? menuOffsetFlip : menuOffset}>
+              <ul className={overflowMenuOptionsClasses}>
                 {childrenWithProps}
-              </ul>}
+              </ul>
+            </FloatingMenu>
+          ) : (
+            <ul className={overflowMenuOptionsClasses}>{childrenWithProps}</ul>
+          )}
         </div>
       </ClickListener>
     );

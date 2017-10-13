@@ -9,7 +9,11 @@ const propTypes = {
 
 const ListItem = ({ children, className, ...other }) => {
   const classNames = classnames('bx--list__item', className);
-  return <li className={classNames} {...other}>{children}</li>;
+  return (
+    <li className={classNames} {...other}>
+      {children}
+    </li>
+  );
 };
 
 ListItem.propTypes = propTypes;

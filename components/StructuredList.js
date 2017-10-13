@@ -8,12 +8,12 @@ class StructuredListWrapper extends Component {
     children: PropTypes.node,
     className: PropTypes.string,
     border: PropTypes.bool,
-    selection: PropTypes.bool
+    selection: PropTypes.bool,
   };
 
   static defaultProps = {
     border: false,
-    selection: false
+    selection: false,
   };
 
   render() {
@@ -21,7 +21,7 @@ class StructuredListWrapper extends Component {
 
     const classes = classNames('bx--structured-list', className, {
       'bx--structured-list--border': border,
-      'bx--structured-list--selection': selection
+      'bx--structured-list--selection': selection,
     });
 
     return (
@@ -35,14 +35,18 @@ class StructuredListWrapper extends Component {
 class StructuredListHead extends Component {
   static propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   render() {
     const { children, className, ...other } = this.props;
 
     const classes = classNames('bx--structured-list-thead', className);
-    return <div className={classes} {...other}>{children}</div>;
+    return (
+      <div className={classes} {...other}>
+        {children}
+      </div>
+    );
   }
 }
 
@@ -54,13 +58,13 @@ class StructuredListInput extends Component {
     name: PropTypes.string,
     title: PropTypes.string,
     defaultChecked: PropTypes.bool,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
     onChange: () => {},
     value: 'value',
-    title: 'title'
+    title: 'title',
   };
 
   componentWillMount() {
@@ -93,7 +97,7 @@ class StructuredListRow extends Component {
     label: PropTypes.bool,
     htmlFor: PropTypes.string,
     tabIndex: PropTypes.number,
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
@@ -101,7 +105,7 @@ class StructuredListRow extends Component {
     head: false,
     label: false,
     tabIndex: 0,
-    onKeyDown: () => {}
+    onKeyDown: () => {},
   };
 
   render() {
@@ -117,22 +121,23 @@ class StructuredListRow extends Component {
     } = this.props;
 
     const classes = classNames('bx--structured-list-row', className, {
-      'bx--structured-list-row--header-row': head
+      'bx--structured-list-row--header-row': head,
     });
 
-    return label
-      ? <label
-          {...other}
-          tabIndex={tabIndex}
-          className={classes}
-          htmlFor={htmlFor}
-          onKeyDown={onKeyDown}
-        >
-          {children}
-        </label>
-      : <div {...other} className={classes}>
-          {children}
-        </div>;
+    return label ? (
+      <label
+        {...other}
+        tabIndex={tabIndex}
+        className={classes}
+        htmlFor={htmlFor}
+        onKeyDown={onKeyDown}>
+        {children}
+      </label>
+    ) : (
+      <div {...other} className={classes}>
+        {children}
+      </div>
+    );
   }
 }
 
@@ -141,22 +146,26 @@ class StructuredListBody extends Component {
     children: PropTypes.node,
     className: PropTypes.string,
     head: PropTypes.bool,
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
-    onKeyDown: () => {}
+    onKeyDown: () => {},
   };
 
   state = {
     labelRows: null,
-    rowSelected: 0
+    rowSelected: 0,
   };
 
   render() {
     const { children, className, ...other } = this.props;
     const classes = classNames('bx--structured-list-tbody', className);
-    return <div className={classes} {...other}>{children}</div>;
+    return (
+      <div className={classes} {...other}>
+        {children}
+      </div>
+    );
   }
 }
 
@@ -165,12 +174,12 @@ class StructuredListCell extends Component {
     children: PropTypes.node,
     className: PropTypes.string,
     head: PropTypes.bool,
-    noWrap: PropTypes.bool
+    noWrap: PropTypes.bool,
   };
 
   static defaultProps = {
     head: false,
-    noWrap: false
+    noWrap: false,
   };
 
   render() {
@@ -179,10 +188,14 @@ class StructuredListCell extends Component {
     const classes = classNames(className, {
       'bx--structured-list-th': head,
       'bx--structured-list-td': !head,
-      'bx--structured-list-content--nowrap': noWrap
+      'bx--structured-list-content--nowrap': noWrap,
     });
 
-    return <div className={classes} {...other}>{children}</div>;
+    return (
+      <div className={classes} {...other}>
+        {children}
+      </div>
+    );
   }
 }
 
@@ -192,5 +205,5 @@ export {
   StructuredListBody,
   StructuredListRow,
   StructuredListInput,
-  StructuredListCell
+  StructuredListCell,
 };

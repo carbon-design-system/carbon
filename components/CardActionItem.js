@@ -13,8 +13,8 @@ const propTypes = {
 
 const defaultProps = {
   ariaLabel: '',
-  description: 'card action'
-}
+  description: 'card action',
+};
 
 const CardActionItem = ({
   className,
@@ -34,8 +34,7 @@ const CardActionItem = ({
       {...other}
       className={cardActionItemClasses}
       id={id}
-      aria-label={ariaLabel}
-    >
+      aria-label={ariaLabel}>
       <Icon
         className="bx--app-actions__button--icon"
         name={iconName}

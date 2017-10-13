@@ -15,7 +15,7 @@ const propTypes = {
   rows: PropTypes.number,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   invalid: PropTypes.bool,
-  invalidText: PropTypes.string
+  invalidText: PropTypes.string,
 };
 
 const defaultProps = {
@@ -27,7 +27,7 @@ const defaultProps = {
   cols: 50,
   invalid: false,
   labelText: 'Provide labelText',
-  invalidText: 'Provide invalidText'
+  invalidText: 'Provide invalidText',
 };
 
 const Textarea = ({
@@ -51,25 +51,30 @@ const Textarea = ({
       if (!other.disabled) {
         onClick(evt);
       }
-    }
+    },
   };
 
   const textareaClasses = classNames('bx--text-area', className);
-  const label = labelText
-    ? <label htmlFor={id} className="bx--label">
-        {labelText}
-      </label>
-    : null;
+  const label = labelText ? (
+    <label htmlFor={id} className="bx--label">
+      {labelText}
+    </label>
+  ) : null;
 
-  const error = invalid
-    ? <div className="bx--form-requirement">
-        {invalidText}
-      </div>
-    : null;
+  const error = invalid ? (
+    <div className="bx--form-requirement">{invalidText}</div>
+  ) : null;
 
-  const input = invalid
-    ? <textarea {...other} {...textareaProps} className={textareaClasses} data-invalid />
-    : <textarea {...other} {...textareaProps} className={textareaClasses} />;
+  const input = invalid ? (
+    <textarea
+      {...other}
+      {...textareaProps}
+      className={textareaClasses}
+      data-invalid
+    />
+  ) : (
+    <textarea {...other} {...textareaProps} className={textareaClasses} />
+  );
 
   return (
     <div className="bx--form-item">

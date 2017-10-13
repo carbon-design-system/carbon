@@ -112,7 +112,14 @@ class FloatingMenu extends React.Component {
   };
 
   render() {
-    return <div ref={(node) => { this.doc = node && node.ownerDocument; }} hidden />;
+    return (
+      <div
+        ref={node => {
+          this.doc = node && node.ownerDocument;
+        }}
+        hidden
+      />
+    );
   }
 }
 

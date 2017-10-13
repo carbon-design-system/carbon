@@ -16,7 +16,11 @@ const OrderedList = ({ children, className, nested, ...other }) => {
   const classNames = classnames('bx--list--ordered', className, {
     'bx--list--nested': nested,
   });
-  return <ol className={classNames} {...other}>{children}</ol>;
+  return (
+    <ol className={classNames} {...other}>
+      {children}
+    </ol>
+  );
 };
 
 OrderedList.propTypes = propTypes;

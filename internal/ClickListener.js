@@ -28,8 +28,7 @@ class ClickListener extends React.Component {
       <div
         ref={el => {
           this.element = el;
-        }}
-      >
+        }}>
         {this.props.children}
       </div>
     );

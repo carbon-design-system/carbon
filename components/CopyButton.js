@@ -54,9 +54,12 @@ export default class CopyButton extends Component {
         type="button"
         className={classNames}
         onClick={this.handleClick}
-        {...other}
-      >
-        <Icon className="bx--snippet__icon" name="copy" description={iconDescription} />
+        {...other}>
+        <Icon
+          className="bx--snippet__icon"
+          name="copy"
+          description={iconDescription}
+        />
         <div className={feedbackClassNames} data-feedback={feedback} />
       </button>
     );

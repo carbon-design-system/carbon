@@ -26,8 +26,7 @@ const Table = props => {
         style={{
           borderCollapse: 'collapse',
           borderSpacing: 0,
-        }}
-      >
+        }}>
         {children}
       </table>
     </div>

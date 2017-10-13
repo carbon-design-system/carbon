@@ -32,11 +32,11 @@ class Loading extends React.Component {
       </div>
     );
 
-    return withOverlay
-      ? <div className="bx--loading-overlay">
-          {loading}
-        </div>
-      : loading;
+    return withOverlay ? (
+      <div className="bx--loading-overlay">{loading}</div>
+    ) : (
+      loading
+    );
   }
 }
 

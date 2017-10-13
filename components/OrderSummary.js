@@ -38,9 +38,7 @@ class OrderSummaryHeader extends Component {
 
     return (
       <section className={classes} {...other}>
-        <p className="bx--order-header-title">
-          {title}
-        </p>
+        <p className="bx--order-header-title">{title}</p>
         {children}
       </section>
     );
@@ -82,12 +80,8 @@ class OrderSummaryCategory extends Component {
 
     return (
       <li className={classes} {...other}>
-        <p className="bx--order-category-title">
-          {categoryText}
-        </p>
-        <ul>
-          {children}
-        </ul>
+        <p className="bx--order-category-title">{categoryText}</p>
+        <ul>{children}</ul>
       </li>
     );
   }
@@ -111,12 +105,8 @@ class OrderSummaryListItem extends Component {
 
     return (
       <li className={classes} {...other}>
-        <p className="bx--order-detail">
-          {text}
-        </p>
-        <p className="bx--order-price">
-          {price}
-        </p>
+        <p className="bx--order-detail">{text}</p>
+        <p className="bx--order-price">{price}</p>
       </li>
     );
   }
@@ -151,14 +141,10 @@ class OrderSummaryTotal extends Component {
     return (
       <section className={classes} {...other}>
         <div className="bx--order-total">
-          <p className="bx--order-total-text">
-            {summaryText}
-          </p>
+          <p className="bx--order-total-text">{summaryText}</p>
           <p className="bx--order-total-price">
             {summaryPrice}
-            <span>
-              {summaryDetails}
-            </span>
+            <span>{summaryDetails}</span>
           </p>
         </div>
         {children}

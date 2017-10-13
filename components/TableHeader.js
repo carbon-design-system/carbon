@@ -19,17 +19,20 @@ const TableHeader = props => {
 
   let sortContent;
   if (sortDir) {
-    sortContent = sortDir === 'DESC'
-      ? <Icon
+    sortContent =
+      sortDir === 'DESC' ? (
+        <Icon
           name="caret--down"
           description="descending sort"
           className={iconClasses}
         />
-      : <Icon
+      ) : (
+        <Icon
           name="caret--up"
           description="ascending sort"
           className={iconClasses}
-        />;
+        />
+      );
   } else {
     sortContent = '';
   }

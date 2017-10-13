@@ -72,7 +72,7 @@ class ClickableTile extends Component {
       {
         'bx--tile--is-clicked': this.state.clicked,
       },
-      className,
+      className
     );
 
     return (
@@ -81,8 +81,7 @@ class ClickableTile extends Component {
         className={classes}
         {...other}
         onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}
-      >
+        onKeyDown={this.handleKeyDown}>
         {children}
       </a>
     );
@@ -151,7 +150,7 @@ class SelectableTile extends Component {
       {
         'bx--tile--is-selected': this.state.selected,
       },
-      className,
+      className
     );
 
     return (
@@ -161,8 +160,7 @@ class SelectableTile extends Component {
         tabIndex={tabIndex}
         {...other}
         onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}
-      >
+        onKeyDown={this.handleKeyDown}>
         <input
           ref={input => {
             this.input = input;
@@ -179,9 +177,7 @@ class SelectableTile extends Component {
         <div className="bx--tile__checkmark">
           <Icon name="checkmark--glyph" description="Tile checkmark" />
         </div>
-        <div className="bx--tile-content">
-          {children}
-        </div>
+        <div className="bx--tile-content">{children}</div>
       </label>
     );
   }
@@ -235,7 +231,7 @@ class ExpandableTile extends Component {
       },
       () => {
         this.setMaxHeight();
-      },
+      }
     );
     this.props.handleClick();
   };
@@ -260,7 +256,7 @@ class ExpandableTile extends Component {
       {
         'bx--tile--is-expanded': this.state.expanded,
       },
-      className,
+      className
     );
     const tileStyle = {
       maxHeight: this.state.tileMaxHeight,
@@ -278,8 +274,7 @@ class ExpandableTile extends Component {
         {...other}
         role="button"
         onClick={this.handleClick}
-        tabIndex={tabIndex}
-      >
+        tabIndex={tabIndex}>
         <button className="bx--tile__chevron">
           <Icon name="chevron--down" description="Tile chevron" />
         </button>
@@ -287,8 +282,7 @@ class ExpandableTile extends Component {
           ref={tileContent => {
             this.tileContent = tileContent;
           }}
-          className="bx--tile-content"
-        >
+          className="bx--tile-content">
           {content}
         </div>
       </div>
@@ -305,11 +299,7 @@ class TileAboveTheFoldContent extends Component {
   render() {
     const { children } = this.props;
 
-    return (
-      <span className="bx--tile-content__above-the-fold">
-        {children}
-      </span>
-    );
+    return <span className="bx--tile-content__above-the-fold">{children}</span>;
   }
 }
 
@@ -322,11 +312,7 @@ class TileBelowTheFoldContent extends Component {
   render() {
     const { children } = this.props;
 
-    return (
-      <span className="bx--tile-content__below-the-fold">
-        {children}
-      </span>
-    );
+    return <span className="bx--tile-content__below-the-fold">{children}</span>;
   }
 }
 

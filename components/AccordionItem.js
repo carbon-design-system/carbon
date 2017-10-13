@@ -72,9 +72,10 @@ class AccordionItem extends Component {
         onClick={this.handleClick}
         onKeyPress={this.handleKeyPress}
         {...other}
-        tabIndex="0"
-      >
-        <div className="bx--accordion__heading" onClick={this.handleHeadingClick}>
+        tabIndex="0">
+        <div
+          className="bx--accordion__heading"
+          onClick={this.handleHeadingClick}>
           <Icon
             className="bx--accordion__arrow"
             name="chevron--right"

@@ -20,7 +20,7 @@ class Modal extends Component {
     onKeyDown: PropTypes.func,
     iconDescription: PropTypes.string,
     primaryButtonDisabled: PropTypes.bool,
-    onSecondarySubmit: PropTypes.func
+    onSecondarySubmit: PropTypes.func,
   };
 
   static defaultProps = {
@@ -31,7 +31,7 @@ class Modal extends Component {
     passiveModal: false,
     iconDescription: 'close the modal',
     modalHeading: 'Provide a heading',
-    modalLabel: 'Provide a label'
+    modalLabel: 'Provide a label',
   };
 
   handleKeyDown = evt => {
@@ -62,13 +62,15 @@ class Modal extends Component {
       ...other
     } = this.props;
 
-    const onSecondaryButtonClick = onSecondarySubmit ? onSecondarySubmit : onRequestClose;
+    const onSecondaryButtonClick = onSecondarySubmit
+      ? onSecondarySubmit
+      : onRequestClose;
 
     const modalClasses = classNames({
       'bx--modal': true,
       'bx--modal-tall': !passiveModal,
       'is-visible': open,
-      [this.props.className]: this.props.className
+      [this.props.className]: this.props.className,
     });
 
     const modalButton = (
@@ -124,8 +126,7 @@ class Modal extends Component {
         onKeyDown={this.handleKeyDown}
         onClick={this.handleClick}
         className={modalClasses}
-        tabIndex={-1}
-      >
+        tabIndex={-1}>
         {modalBody}
       </div>
     );

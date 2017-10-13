@@ -8,13 +8,13 @@ const propTypes = {
   className: PropTypes.string,
   invalid: PropTypes.bool,
   message: PropTypes.bool,
-  messageText: PropTypes.string
+  messageText: PropTypes.string,
 };
 const defaultProps = {
   invalid: false,
   message: false,
   messageText: 'Provide message text',
-  legendText: 'Provide legend text'
+  legendText: 'Provide legend text',
 };
 
 const FormGroup = ({
@@ -33,17 +33,12 @@ const FormGroup = ({
     <fieldset
       {...invalid && { 'data-invalid': '' }}
       className={classNamesFieldset}
-      {...other}
-    >
-      <legend className={classNamesLegend}>
-        {legendText}
-      </legend>
+      {...other}>
+      <legend className={classNamesLegend}>{legendText}</legend>
       {children}
-      {message
-        ? <div className="bx--form__requirements">
-            {messageText}
-          </div>
-        : null}
+      {message ? (
+        <div className="bx--form__requirements">{messageText}</div>
+      ) : null}
     </fieldset>
   );
 };

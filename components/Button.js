@@ -60,9 +60,9 @@ const Button = ({
     className: buttonClasses,
   };
 
-  const buttonImage = icon
-    ? <Icon name={icon} description={iconDescription} className="bx--btn__icon" />
-    : null;
+  const buttonImage = icon ? (
+    <Icon name={icon} description={iconDescription} className="bx--btn__icon" />
+  ) : null;
 
   const button = (
     <button {...other} {...commonProps} disabled={disabled} type={type}>

@@ -16,7 +16,7 @@ class Tabs extends React.Component {
     onKeyDown: PropTypes.func,
     triggerHref: PropTypes.string.isRequired,
     selected: PropTypes.number,
-    iconDescription: PropTypes.string.isRequired
+    iconDescription: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -24,13 +24,13 @@ class Tabs extends React.Component {
     role: 'navigation',
     href: '#',
     triggerHref: '#',
-    selected: 0
+    selected: 0,
   };
 
   state = {
     dropdownHidden: true,
     selected: this.props.selected,
-    selectedLabel: React.Children.toArray(this.props.children)[0].props.label
+    selectedLabel: React.Children.toArray(this.props.children)[0].props.label,
   };
 
   componentWillReceiveProps({ selected }) {
@@ -49,7 +49,7 @@ class Tabs extends React.Component {
     this.setState({
       selected: index,
       selectedLabel: label,
-      dropdownHidden: !this.state.dropdownHidden
+      dropdownHidden: !this.state.dropdownHidden,
     });
   };
 
@@ -60,7 +60,7 @@ class Tabs extends React.Component {
       this.setState({
         selected: index,
         selectedLabel: label,
-        dropdownHidden: !this.state.dropdownHidden
+        dropdownHidden: !this.state.dropdownHidden,
       });
     }
   };
@@ -85,12 +85,18 @@ class Tabs extends React.Component {
 
   handleDropdownClick = () => {
     this.setState({
-      dropdownHidden: !this.state.dropdownHidden
+      dropdownHidden: !this.state.dropdownHidden,
     });
   };
 
   render() {
-    const { iconDescription, className, triggerHref, role, ...other } = this.props;
+    const {
+      iconDescription,
+      className,
+      triggerHref,
+      role,
+      ...other
+    } = this.props;
 
     const tabsWithProps = this.getTabs().map((tab, index) => {
       const newTab = React.cloneElement(tab, {
@@ -99,7 +105,7 @@ class Tabs extends React.Component {
         handleTabClick: this.handleTabClick,
         handleTabAnchorFocus: this.handleTabAnchorFocus,
         ref: `tab${index}`,
-        handleTabKeyDown: this.handleTabKeyDown
+        handleTabKeyDown: this.handleTabKeyDown,
       });
 
       return newTab;
@@ -109,7 +115,10 @@ class Tabs extends React.Component {
       const { children, selected } = tab.props;
 
       return (
-        <TabContent className="tab-content" hidden={!selected} selected={selected}>
+        <TabContent
+          className="tab-content"
+          hidden={!selected}
+          selected={selected}>
           {children}
         </TabContent>
       );
@@ -118,8 +127,8 @@ class Tabs extends React.Component {
     const classes = {
       tabs: classNames('bx--tabs', className),
       tablist: classNames('bx--tabs__nav', {
-        'bx--tabs__nav--hidden': this.state.dropdownHidden
-      })
+        'bx--tabs__nav--hidden': this.state.dropdownHidden,
+      }),
     };
 
     return (
@@ -129,8 +138,7 @@ class Tabs extends React.Component {
             <a
               className="bx--tabs-trigger-text"
               href={triggerHref}
-              onClick={this.handleDropdownClick}
-            >
+              onClick={this.handleDropdownClick}>
               {this.state.selectedLabel}
             </a>
             <Icon description={iconDescription} name="caret--down" />

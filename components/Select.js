@@ -44,13 +44,29 @@ const Select = ({
   });
   return (
     <div className="bx--form-item">
-      {!inline ? <label htmlFor={id} className={labelClasses}>{labelText}</label> : null}
+      {!inline ? (
+        <label htmlFor={id} className={labelClasses}>
+          {labelText}
+        </label>
+      ) : null}
       <div className={selectClasses}>
-        {inline ? <label htmlFor={id} className={labelClasses}>{labelText}</label> : null}
-        <select {...other} id={id} className="bx--select-input" disabled={disabled}>
+        {inline ? (
+          <label htmlFor={id} className={labelClasses}>
+            {labelText}
+          </label>
+        ) : null}
+        <select
+          {...other}
+          id={id}
+          className="bx--select-input"
+          disabled={disabled}>
           {children}
         </select>
-        <Icon name="caret--down" className="bx--select__arrow" description={iconDescription} />
+        <Icon
+          name="caret--down"
+          className="bx--select__arrow"
+          description={iconDescription}
+        />
       </div>
     </div>
   );

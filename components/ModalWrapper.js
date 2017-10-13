@@ -74,8 +74,7 @@ class ModalWrapper extends React.Component {
             this.handleClose();
             this.props.onKeyDown(evt);
           }
-        }}
-      >
+        }}>
         <Button onClick={this.handleOpen}>{buttonTriggerText}</Button>
         <Modal {...props} {...other}>
           {this.props.children}

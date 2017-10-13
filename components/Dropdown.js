@@ -113,11 +113,8 @@ class Dropdown extends PureComponent {
           onKeyPress={this.toggle}
           value={this.state.value}
           className={dropdownClasses}
-          tabIndex={tabIndex}
-        >
-          <li className="bx--dropdown-text">
-            {this.state.selectedText}
-          </li>
+          tabIndex={tabIndex}>
+          <li className="bx--dropdown-text">{this.state.selectedText}</li>
           <li>
             <Icon
               name="caret--down"
@@ -126,9 +123,7 @@ class Dropdown extends PureComponent {
             />
           </li>
           <li>
-            <ul className="bx--dropdown-list">
-              {children}
-            </ul>
+            <ul className="bx--dropdown-list">{children}</ul>
           </li>
         </ul>
       </ClickListener>

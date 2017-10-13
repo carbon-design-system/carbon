@@ -30,9 +30,7 @@ const TableRowExpanded = props => {
 
   return (
     <tr {...other} className={tableRowClasses}>
-      <td colSpan={colSpan}>
-        {children}
-      </td>
+      <td colSpan={colSpan}>{children}</td>
     </tr>
   );
 };

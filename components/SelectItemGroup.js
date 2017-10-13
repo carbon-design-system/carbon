@@ -6,18 +6,28 @@ const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
   disabled: false,
-  label: 'Provide label'
+  label: 'Provide label',
 };
 
-const SelectItemGroup = ({ children, className, disabled, label, ...other }) => {
+const SelectItemGroup = ({
+  children,
+  className,
+  disabled,
+  label,
+  ...other
+}) => {
   const classNames = classnames('bx--select-optgroup', className);
   return (
-    <optgroup className={classNames} label={label} disabled={disabled} {...other}>
+    <optgroup
+      className={classNames}
+      label={label}
+      disabled={disabled}
+      {...other}>
       {children}
     </optgroup>
   );

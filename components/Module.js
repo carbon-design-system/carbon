@@ -35,9 +35,7 @@ const Module = ({ children, className, size, ...other }) => {
 
   return (
     <div className={wrapperClasses} {...other}>
-      <div className="bx--module__inner">
-        {children}
-      </div>
+      <div className="bx--module__inner">{children}</div>
     </div>
   );
 };

@@ -10,7 +10,12 @@ const propTypes = {
 const Form = ({ className, children, ...other }) => {
   const classNames = classnames('bx--form', className);
 
-  return <form className={classNames} {...other}> {children} </form>;
+  return (
+    <form className={classNames} {...other}>
+      {' '}
+      {children}{' '}
+    </form>
+  );
 };
 
 Form.propTypes = propTypes;

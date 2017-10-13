@@ -18,20 +18,20 @@ class DetailPageHeader extends Component {
     statusText: PropTypes.string,
     hasTabs: PropTypes.bool,
     isScrolled: PropTypes.bool,
-    isScrollingDownward: PropTypes.bool
+    isScrollingDownward: PropTypes.bool,
   };
 
   static defaultProps = {
     title: 'Provide a title',
     statusText: 'Running',
     role: 'banner', // a11y compliance
-    hasTabs: false
+    hasTabs: false,
   };
 
   state = {
     isScrolled: this.props.isScrolled || false,
     isScrollingDownward: this.props.isScrollingDownward || false,
-    lastPosition: 0
+    lastPosition: 0,
   };
 
   componentDidMount() {
@@ -63,20 +63,20 @@ class DetailPageHeader extends Component {
         this.setState({
           isScrolled: true,
           isScrollingDownward: true,
-          lastPosition: currentPosition
+          lastPosition: currentPosition,
         });
       } else {
         this.setState({
           isScrolled: true,
           isScrollingDownward: false,
-          lastPosition: currentPosition
+          lastPosition: currentPosition,
         });
       }
     } else {
       this.setState({
         isScrolled: false,
         isScrollingDownward: false,
-        lastPosition: currentPosition
+        lastPosition: currentPosition,
       });
     }
   };
@@ -103,7 +103,9 @@ class DetailPageHeader extends Component {
       ? 'bx--detail-page-header--with-tabs'
       : 'bx--detail-page-header--no-tabs';
 
-    const scrolled = isScrollingDownward ? 'bx--detail-page-header--scroll' : null;
+    const scrolled = isScrollingDownward
+      ? 'bx--detail-page-header--scroll'
+      : null;
 
     const classNames = classnames('bx--detail-page-header', withTabs, scrolled);
 
@@ -133,7 +135,7 @@ class DetailPageHeader extends Component {
     });
 
     const statusStyles = {
-      backgroundColor: statusColor
+      backgroundColor: statusColor,
     };
 
     icon = icon === undefined ? defaultIcon : icon;
@@ -143,15 +145,16 @@ class DetailPageHeader extends Component {
         <div className="bx--detail-page-header-content">
           {breadcrumb}
           <div className="bx--detail-page-header-title-container">
-            <div className="bx--detail-page-header-icon-container">
-              {icon}
-            </div>
+            <div className="bx--detail-page-header-icon-container">{icon}</div>
             <h1 className="bx--detail-page-header-title">{title}</h1>
             <div className="bx--detail-page-header-status-container">
-              <div style={statusStyles} className="bx--detail-page-header-status-icon" />
-              {' '}
+              <div
+                style={statusStyles}
+                className="bx--detail-page-header-status-icon"
+              />{' '}
               <span className="bx--detail-page-header-status-text">
-                {statusText}{statusContent}
+                {statusText}
+                {statusContent}
               </span>
             </div>
           </div>

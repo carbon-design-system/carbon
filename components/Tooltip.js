@@ -13,7 +13,7 @@ class Tooltip extends Component {
     triggerText: PropTypes.string,
     showIcon: PropTypes.bool,
     iconName: PropTypes.string,
-    iconDescription: PropTypes.string
+    iconDescription: PropTypes.string,
   };
 
   static defaultProps = {
@@ -22,11 +22,11 @@ class Tooltip extends Component {
     showIcon: true,
     iconName: 'info--glyph',
     iconDescription: 'tooltip',
-    triggerText: 'Provide triggerText'
+    triggerText: 'Provide triggerText',
   };
 
   state = {
-    open: this.props.open
+    open: this.props.open,
   };
 
   componentDidMount() {
@@ -71,43 +71,45 @@ class Tooltip extends Component {
 
     return (
       <div>
-        {showIcon
-          ? <div className="bx--tooltip__trigger">
-              {triggerText}
-              <div
-                ref={node => {
-                  this.triggerEl = node;
-                }}
-                onMouseOver={() => this.handleMouse('over')}
-                onMouseOut={() => this.handleMouse('out')}
-                onFocus={() => this.handleMouse('over')}
-                onBlur={() => this.handleMouse('out')}
-              >
-                <Icon name={iconName} description={iconDescription} tabIndex="0" />
-              </div>
-            </div>
-          : <div
-              className="bx--tooltip__trigger"
+        {showIcon ? (
+          <div className="bx--tooltip__trigger">
+            {triggerText}
+            <div
               ref={node => {
                 this.triggerEl = node;
               }}
               onMouseOver={() => this.handleMouse('over')}
               onMouseOut={() => this.handleMouse('out')}
               onFocus={() => this.handleMouse('over')}
-              onBlur={() => this.handleMouse('out')}
-            >
-              {triggerText}
-            </div>}
+              onBlur={() => this.handleMouse('out')}>
+              <Icon
+                name={iconName}
+                description={iconDescription}
+                tabIndex="0"
+              />
+            </div>
+          </div>
+        ) : (
+          <div
+            className="bx--tooltip__trigger"
+            ref={node => {
+              this.triggerEl = node;
+            }}
+            onMouseOver={() => this.handleMouse('over')}
+            onMouseOut={() => this.handleMouse('out')}
+            onFocus={() => this.handleMouse('over')}
+            onBlur={() => this.handleMouse('out')}>
+            {triggerText}
+          </div>
+        )}
         <FloatingMenu
           menuPosition={this.state.triggerPosition}
           menuDirection={direction}
-          menuOffset={menuOffset}
-        >
+          menuOffset={menuOffset}>
           <div
             className={tooltipClasses}
             {...other}
-            data-floating-menu-direction={direction}
-          >
+            data-floating-menu-direction={direction}>
             {children}
           </div>
         </FloatingMenu>

@@ -5,29 +5,29 @@ import classNames from 'classnames';
 
 const propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 const toolbarItemPropTypes = {
   children: PropTypes.node,
   type: PropTypes.string,
-  placeHolderText: PropTypes.string
+  placeHolderText: PropTypes.string,
 };
 
 const toolbarTitlePropTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 const toolbarTitleDefaultProps = {
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 const toolbarItemDefaultProps = {
-  placeHolderText: 'Provide placeHolderText'
+  placeHolderText: 'Provide placeHolderText',
 };
 
 const toolbarOptionPropTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const Toolbar = ({ children, className, ...other }) => {
@@ -41,19 +41,22 @@ const Toolbar = ({ children, className, ...other }) => {
 };
 
 const ToolbarItem = ({ children, type, placeHolderText }) => {
-  const toolbarItem = type === 'search'
-    ? <ToolbarSearch placeHolderText={placeHolderText} />
-    : children;
+  const toolbarItem =
+    type === 'search' ? (
+      <ToolbarSearch placeHolderText={placeHolderText} />
+    ) : (
+      children
+    );
   return toolbarItem;
 };
 
-const ToolbarTitle = ({ title }) =>
-  <li className="bx--toolbar-menu__title">
-    {title}
-  </li>;
+const ToolbarTitle = ({ title }) => (
+  <li className="bx--toolbar-menu__title">{title}</li>
+);
 
-const ToolbarOption = ({ children }) =>
-  <li className="bx--toolbar-menu__option">{children}</li>;
+const ToolbarOption = ({ children }) => (
+  <li className="bx--toolbar-menu__option">{children}</li>
+);
 
 const ToolbarDivider = () => <hr className="bx--toolbar-menu__divider" />;
 

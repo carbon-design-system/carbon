@@ -12,13 +12,13 @@ const propTypes = {
   role: PropTypes.string,
   style: PropTypes.object,
   viewBox: PropTypes.string,
-  width: PropTypes.string
+  width: PropTypes.string,
 };
 
 const defaultProps = {
   fillRule: 'evenodd',
   role: 'img',
-  description: 'Provide a description that will be used as the title'
+  description: 'Provide a description that will be used as the title',
 };
 
 /**
@@ -62,26 +62,30 @@ export function getSvgData(iconName) {
  * svgShapes(svgData);
  */
 export function svgShapes(svgData) {
-  const svgElements = Object.keys(svgData).filter(key => svgData[key]).map(svgProp => {
-    const data = svgData[svgProp];
+  const svgElements = Object.keys(svgData)
+    .filter(key => svgData[key])
+    .map(svgProp => {
+      const data = svgData[svgProp];
 
-    if (svgProp === 'circles') {
-      return data.map((circle, index) => {
-        const circleProps = {
-          cx: circle.cx,
-          cy: circle.cy,
-          r: circle.r,
-          key: `circle${index}`
-        };
+      if (svgProp === 'circles') {
+        return data.map((circle, index) => {
+          const circleProps = {
+            cx: circle.cx,
+            cy: circle.cy,
+            r: circle.r,
+            key: `circle${index}`,
+          };
 
-        return <circle {...circleProps} />;
-      });
-    } else if (svgProp === 'paths') {
-      return data.map((path, index) => <path d={path.d} key={`key${index}`} />);
-    }
+          return <circle {...circleProps} />;
+        });
+      } else if (svgProp === 'paths') {
+        return data.map((path, index) => (
+          <path d={path.d} key={`key${index}`} />
+        ));
+      }
 
-    return '';
-  });
+      return '';
+    });
 
   return svgElements;
 }
@@ -114,7 +118,7 @@ const Icon = ({
     style,
     viewBox: icon.viewBox,
     width: width || icon.width,
-    ...other
+    ...other,
   };
 
   const svgContent = icon ? svgShapes(icon.svgData) : '';

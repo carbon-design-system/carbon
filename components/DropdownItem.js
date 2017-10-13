@@ -32,13 +32,11 @@ const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
       {...other}
       value={value}
       className={dropdownItemClasses}
-      onClick={handleClick}
-    >
+      onClick={handleClick}>
       <a
         href="#"
         onClick={/* istanbul ignore next */ evt => evt.preventDefault()}
-        className="bx--dropdown-link"
-      >
+        className="bx--dropdown-link">
         {itemText}
       </a>
     </li>

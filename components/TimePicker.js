@@ -76,17 +76,15 @@ export default class TimePicker extends Component {
       'bx--visually-hidden': hideLabel,
     });
 
-    const label = labelText
-      ? <label htmlFor={id} className={labelClasses}>
-          {labelText}
-        </label>
-      : null;
+    const label = labelText ? (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    ) : null;
 
-    const error = invalid
-      ? <div className="bx--form-requirement">
-          {invalidText}
-        </div>
-      : null;
+    const error = invalid ? (
+      <div className="bx--form-requirement">{invalidText}</div>
+    ) : null;
 
     return (
       <div className="bx--form-item">

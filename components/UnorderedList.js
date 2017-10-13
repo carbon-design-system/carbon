@@ -16,7 +16,11 @@ const UnorderedList = ({ children, className, nested, ...other }) => {
   const classNames = classnames('bx--list--unordered', className, {
     'bx--list--nested': nested,
   });
-  return <ul className={classNames} {...other}>{children}</ul>;
+  return (
+    <ul className={classNames} {...other}>
+      {children}
+    </ul>
+  );
 };
 
 UnorderedList.propTypes = propTypes;

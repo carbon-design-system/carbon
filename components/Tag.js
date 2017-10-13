@@ -24,7 +24,9 @@ const Tag = ({ children, className, type, ...other }) => {
   const tagClass = `bx--tag--${type}`;
   const tagClasses = classNames('bx--tag', tagClass, className);
   return (
-    <span className={tagClasses} {...other}>{children || TYPES[type]}</span>
+    <span className={tagClasses} {...other}>
+      {children || TYPES[type]}
+    </span>
   );
 };
 

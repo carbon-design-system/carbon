@@ -43,25 +43,27 @@ const Footer = ({
     className
   );
 
-  const footer = children
-    ? <footer {...other} className={classNames}>{children}</footer>
-    : <footer {...other} className={classNames}>
-        <div className="bx--footer-info">
-          <div className="bx--footer-info__item">
-            <p className="bx--footer-label">{labelOne}</p>
-            <Link href={linkHrefOne}>{linkTextOne}</Link>
-          </div>
-          <div className="bx--footer-info__item">
-            <p className="bx--footer-label">{labelTwo}</p>
-            <Link href={linkHrefTwo}>{linkTextTwo}</Link>
-          </div>
+  const footer = children ? (
+    <footer {...other} className={classNames}>
+      {children}
+    </footer>
+  ) : (
+    <footer {...other} className={classNames}>
+      <div className="bx--footer-info">
+        <div className="bx--footer-info__item">
+          <p className="bx--footer-label">{labelOne}</p>
+          <Link href={linkHrefOne}>{linkTextOne}</Link>
         </div>
-        <div className="bx--footer-cta">
-          <Button type="submit">
-            {buttonText}
-          </Button>
+        <div className="bx--footer-info__item">
+          <p className="bx--footer-label">{labelTwo}</p>
+          <Link href={linkHrefTwo}>{linkTextTwo}</Link>
         </div>
-      </footer>;
+      </div>
+      <div className="bx--footer-cta">
+        <Button type="submit">{buttonText}</Button>
+      </div>
+    </footer>
+  );
 
   return footer;
 };

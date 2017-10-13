@@ -21,7 +21,7 @@ export default class TimePickerSelect extends Component {
     inline: true,
     iconDescription: 'open list of options',
     hideLabel: true,
-    labelText: 'Provide label text'
+    labelText: 'Provide label text',
   };
 
   render() {
@@ -48,11 +48,11 @@ export default class TimePickerSelect extends Component {
       'bx--visually-hidden': hideLabel,
     });
 
-    const label = labelText
-      ? <label htmlFor={id} className={labelClasses}>
-          {labelText}
-        </label>
-      : null;
+    const label = labelText ? (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    ) : null;
 
     return (
       <div className={selectClasses}>
@@ -61,8 +61,7 @@ export default class TimePickerSelect extends Component {
           {...other}
           id={id}
           className="bx--select-input"
-          disabled={disabled}
-        >
+          disabled={disabled}>
           {children}
         </select>
         <Icon

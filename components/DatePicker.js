@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import flatpickr from 'flatpickr';
-import rangePlugin from 'flatpickr/dist/plugins/rangePlugin'
+import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import DatePickerInput from './DatePickerInput';
 
 // Weekdays shorthand for english locale
@@ -38,7 +38,10 @@ class DatePicker extends Component {
         mode: this.props.datePickerType,
         allowInput: true,
         dateFormat: this.props.dateFormat,
-        plugins: this.props.datePickerType === 'range' ? [new rangePlugin({ input: this.toInputField })] : '',
+        plugins:
+          this.props.datePickerType === 'range'
+            ? [new rangePlugin({ input: this.toInputField })]
+            : '',
         clickOpens: true,
         onChange: () => {
           this.props.onChange();
@@ -47,7 +50,7 @@ class DatePicker extends Component {
           this.updateClassNames(instance);
         },
         nextArrow: this.rightArrowHTML(),
-        leftArrow: this.leftArrowHTML()
+        leftArrow: this.leftArrowHTML(),
       });
       this.addKeyboardEvents(this.cal);
     }
@@ -130,22 +133,28 @@ class DatePicker extends Component {
     });
   };
 
-  assignInputFieldRef = (node) => {
-    this.inputField = !node ? null :
-      // Child is a regular DOM node, seen in tests
-      node.nodeType === Node.ELEMENT_NODE ? node.querySelector('.bx--date-picker__input') :
-      // Child is a React component
-      node.input && node.input.nodeType === Node.ELEMENT_NODE ? node.input :
-      null;
+  assignInputFieldRef = node => {
+    this.inputField = !node
+      ? null
+      : // Child is a regular DOM node, seen in tests
+        node.nodeType === Node.ELEMENT_NODE
+        ? node.querySelector('.bx--date-picker__input')
+        : // Child is a React component
+          node.input && node.input.nodeType === Node.ELEMENT_NODE
+          ? node.input
+          : null;
   };
 
-  assignToInputFieldRef = (node) => {
-    this.toInputField = !node ? null :
-      // Child is a regular DOM node, seen in tests
-      node.nodeType === Node.ELEMENT_NODE ? node.querySelector('.bx--date-picker__input') :
-      // Child is a React component
-      node.input && node.input.nodeType === Node.ELEMENT_NODE ? node.input :
-      null;
+  assignToInputFieldRef = node => {
+    this.toInputField = !node
+      ? null
+      : // Child is a regular DOM node, seen in tests
+        node.nodeType === Node.ELEMENT_NODE
+        ? node.querySelector('.bx--date-picker__input')
+        : // Child is a React component
+          node.input && node.input.nodeType === Node.ELEMENT_NODE
+          ? node.input
+          : null;
   };
 
   render() {
@@ -165,19 +174,21 @@ class DatePicker extends Component {
       'bx--date-picker--range': datePickerType === 'range',
     });
 
-    const datePickerIcon = datePickerType === 'range'
-      ? <svg
+    const datePickerIcon =
+      datePickerType === 'range' ? (
+        <svg
           onClick={this.openCalendar}
           className="bx--date-picker__icon"
           width="17"
           height="19"
-          viewBox="0 0 17 19"
-        >
+          viewBox="0 0 17 19">
           <path d="M12 0h2v2.7h-2zM3 0h2v2.7H3z" />
           <path d="M0 2v17h17V2H0zm15 15H2V7h13v10z" />
           <path d="M9.9 15H8.6v-3.9H7.1v-.9c.9 0 1.7-.3 1.8-1.2h1v6z" />
         </svg>
-      : '';
+      ) : (
+        ''
+      );
 
     const childArray = React.Children.toArray(children);
     const childrenWithProps = childArray.map((child, index) => {

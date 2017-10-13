@@ -49,13 +49,14 @@ const InteriorLeftNavItem = ({
       className={classNames}
       onClick={evt => onClick(evt, href)}
       onKeyPress={evt => onClick(evt, href)}
-      {...other}
-    >
-      {children
-        ? newChild(children, tabIndex)
-        : <a className="left-nav-list__item-link" href={href} tabIndex={tabIndex}>
-            {label}
-          </a>}
+      {...other}>
+      {children ? (
+        newChild(children, tabIndex)
+      ) : (
+        <a className="left-nav-list__item-link" href={href} tabIndex={tabIndex}>
+          {label}
+        </a>
+      )}
     </li>
   );
 };

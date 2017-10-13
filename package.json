@@ -17,7 +17,8 @@
     "storybook": "start-storybook -p 9000",
     "build-storybook": "build-storybook",
     "start": "npm run storybook",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "prettier": "prettier --write **/*.js"
   },
   "keywords": [
     "react",
@@ -125,7 +126,7 @@
     "node-sass": "3.8.0",
     "object-assign": "^4.1.1",
     "postcss-loader": "^2.0.5",
-    "prettier": "^1.2.2",
+    "prettier": "^1.7.4",
     "promise": "^8.0.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
@@ -140,9 +141,15 @@
     "validate-commit-msg": "^2.10.1",
     "whatwg-fetch": "^2.0.3"
   },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
   "lint-staged": {
     "*.js": [
-      "prettier --trailing-comma es5 --single-quote --write",
+      "prettier",
       "git add"
     ]
   },

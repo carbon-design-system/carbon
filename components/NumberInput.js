@@ -22,14 +22,14 @@ class NumberInput extends Component {
     disabled: false,
     iconDescription: 'choose a number',
     label: ' ',
-    onChange: () => { },
-    onClick: () => { },
+    onChange: () => {},
+    onClick: () => {},
     step: 1,
     value: 0,
   };
 
   constructor(props) {
-    super(props)
+    super(props);
 
     let value = props.value;
     if (props.min || props.min === 0) {
@@ -37,7 +37,7 @@ class NumberInput extends Component {
     }
 
     this.state = {
-      value
+      value,
     };
   }
 
@@ -58,13 +58,15 @@ class NumberInput extends Component {
   };
 
   handleArrowClick = (evt, direction) => {
-    let value = typeof this.state.value === 'string'
-      ? Number(this.state.value)
-      : this.state.value;
+    let value =
+      typeof this.state.value === 'string'
+        ? Number(this.state.value)
+        : this.state.value;
     const { disabled, min, max, step } = this.props;
-    const conditional = direction === 'down'
-      ? (min !== undefined && value > min) || min === undefined
-      : (max !== undefined && value < max) || max === undefined;
+    const conditional =
+      direction === 'down'
+        ? (min !== undefined && value > min) || min === undefined
+        : (max !== undefined && value < max) || max === undefined;
 
     if (!disabled && conditional) {
       value = direction === 'down' ? value - step : value + step;
@@ -105,14 +107,15 @@ class NumberInput extends Component {
 
     return (
       <div className="bx--form-item">
-        <label htmlFor={id} className="bx--label">{label}</label>
+        <label htmlFor={id} className="bx--label">
+          {label}
+        </label>
         <div className={numberInputClasses}>
           <input type="number" pattern="[0-9]*" {...other} {...props} />
           <div className="bx--number__controls">
             <button
               className="bx--number__control-btn"
-              onClick={evt => this.handleArrowClick(evt, 'up')}
-            >
+              onClick={evt => this.handleArrowClick(evt, 'up')}>
               <Icon
                 className="up-icon"
                 name="caret--up"
@@ -122,8 +125,7 @@ class NumberInput extends Component {
             </button>
             <button
               className="bx--number__control-btn"
-              onClick={evt => this.handleArrowClick(evt, 'down')}
-            >
+              onClick={evt => this.handleArrowClick(evt, 'down')}>
               <Icon
                 className="down-icon"
                 name="caret--down"

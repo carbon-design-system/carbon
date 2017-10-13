@@ -10,7 +10,7 @@ const propTypes = {
   text: PropTypes.string.isRequired,
   showIcon: PropTypes.bool,
   iconName: PropTypes.string,
-  iconDescription: PropTypes.string
+  iconDescription: PropTypes.string,
 };
 
 const defaultProps = {
@@ -18,7 +18,7 @@ const defaultProps = {
   showIcon: true,
   iconName: 'info--glyph',
   iconDescription: 'tooltip',
-  text: 'Provide text'
+  text: 'Provide text',
 };
 
 const TooltipSimple = ({
@@ -37,7 +37,11 @@ const TooltipSimple = ({
   return (
     <div className={tooltipWrapperClasses}>
       {children}
-      <div tabIndex="0" className={tooltipClasses} data-tooltip-text={text} {...other}>
+      <div
+        tabIndex="0"
+        className={tooltipClasses}
+        data-tooltip-text={text}
+        {...other}>
         {showIcon && <Icon name={iconName} description={iconDescription} />}
       </div>
     </div>

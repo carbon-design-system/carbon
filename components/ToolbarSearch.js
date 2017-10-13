@@ -12,7 +12,7 @@ class ToolbarSearch extends Component {
     small: PropTypes.bool,
     placeHolderText: PropTypes.string,
     labelText: PropTypes.string,
-    id: PropTypes.string
+    id: PropTypes.string,
   };
 
   static defaultProps = {
@@ -20,23 +20,23 @@ class ToolbarSearch extends Component {
     id: 'search__input',
     labelText: 'Provide labelText',
     placeHolderText: 'Provide placeHolderText',
-    role: 'search'
+    role: 'search',
   };
 
   state = {
-    expanded: false
+    expanded: false,
   };
 
   expandSearch = () => {
     this.setState({
-      expanded: !this.state.expanded
+      expanded: !this.state.expanded,
     });
     this.input.focus();
   };
 
   handleClickOutside = () => {
     this.setState({
-      expanded: false
+      expanded: false,
     });
   };
 
@@ -54,13 +54,15 @@ class ToolbarSearch extends Component {
     const searchClasses = classNames({
       'bx--search bx--search--sm bx--toolbar-search': true,
       'bx--toolbar-search--active': this.state.expanded,
-      [className]: className
+      [className]: className,
     });
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div className={searchClasses} role={role}>
-          <label htmlFor={id} className="bx--label">{labelText}</label>
+          <label htmlFor={id} className="bx--label">
+            {labelText}
+          </label>
           <input
             {...other}
             type={type}
@@ -71,7 +73,9 @@ class ToolbarSearch extends Component {
               this.input = input;
             }}
           />
-          <button className="bx--toolbar-search__btn" onClick={this.expandSearch}>
+          <button
+            className="bx--toolbar-search__btn"
+            onClick={this.expandSearch}>
             <Icon
               name="search--glyph"
               description="search"

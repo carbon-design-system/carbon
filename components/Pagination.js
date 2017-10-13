@@ -49,10 +49,10 @@ class Pagination extends Component {
 
   state = {
     page: this.props.page,
-    pageSize: this.props.pageSize &&
-      this.props.pageSizes.includes(this.props.pageSize)
-      ? this.props.pageSize
-      : this.props.pageSizes[0],
+    pageSize:
+      this.props.pageSize && this.props.pageSizes.includes(this.props.pageSize)
+        ? this.props.pageSize
+        : this.props.pageSizes[0],
   };
 
   componentWillMount() {
@@ -138,11 +138,10 @@ class Pagination extends Component {
             labelText={itemsPerPageText}
             hideLabel
             onChange={this.handleSizeChange}
-            value={statePageSize}
-          >
-            {pageSizes.map(size =>
+            value={statePageSize}>
+            {pageSizes.map(size => (
               <SelectItem key={size} value={size} text={String(size)} />
-            )}
+            ))}
           </Select>
           <span className="bx--pagination__text">
             {itemsPerPageText}&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -150,38 +149,36 @@ class Pagination extends Component {
           <span className="bx--pagination__text">
             {pagesUnknown
               ? itemText(
-                statePageSize * (statePage - 1) + 1,
-                statePage * statePageSize,
-              )
+                  statePageSize * (statePage - 1) + 1,
+                  statePage * statePageSize
+                )
               : itemRangeText(
-                statePageSize * (statePage - 1) + 1,
-                Math.min(statePage * statePageSize, totalItems),
-                totalItems
-              )
-            }
+                  statePageSize * (statePage - 1) + 1,
+                  Math.min(statePage * statePageSize, totalItems),
+                  totalItems
+                )}
           </span>
         </div>
         <div className="bx--pagination__right">
           <span className="bx--pagination__text">
             {pagesUnknown
               ? pageText(statePage)
-              : pageRangeText(statePage, Math.ceil(totalItems / statePageSize))
-            }
+              : pageRangeText(statePage, Math.ceil(totalItems / statePageSize))}
           </span>
           <button
             className="bx--pagination__button bx--pagination__button--backward"
             onClick={this.decrementPage}
-            disabled={this.props.disabled || statePage === 1}
-          >
+            disabled={this.props.disabled || statePage === 1}>
             <Icon
               className="bx--pagination__button-icon"
               name="chevron--left"
               description={backwardText}
             />
           </button>
-          {pageInputDisabled
-            ? <span className="bx--pagination__text">|</span>
-            : <TextInput
+          {pageInputDisabled ? (
+            <span className="bx--pagination__text">|</span>
+          ) : (
+            <TextInput
               id={`bx-pagination-input-${inputId}`}
               placeholder="0"
               value={statePage}
@@ -189,7 +186,7 @@ class Pagination extends Component {
               labelText={pageNumberText}
               hideLabel
             />
-          }
+          )}
           <button
             className="bx--pagination__button bx--pagination__button--forward"
             onClick={this.incrementPage}
@@ -197,8 +194,7 @@ class Pagination extends Component {
               this.props.disabled ||
               statePage === Math.ceil(totalItems / statePageSize) ||
               isLastPage
-            }
-          >
+            }>
             <Icon
               className="bx--pagination__button-icon"
               name="chevron--right"
