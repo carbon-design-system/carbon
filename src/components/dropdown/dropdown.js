@@ -87,19 +87,39 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     if (
       ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem)) ||
       event.which === 27 ||
-      event.type === 'click'
+      event.type === 'click' ||
+      event.type === 'blur'
     ) {
-      const isOpen = this.element.classList.contains('bx--dropdown--open');
-      const isOfSelf = this.element.contains(event.target);
+      const element = this.element;
+      const listEl = element.querySelector('.bx--dropdown-list');
+      const isOpen = element.classList.contains('bx--dropdown--open');
+      const isOfSelf = element.contains(event.target);
       const actions = {
         add: isOfSelf && event.which === 40 && !isOpen,
         remove: (!isOfSelf || event.which === 27) && isOpen,
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
+      const shouldOpen = actions.add === true || (actions.toggle === true && isOpen !== true);
+      const onTransitionEnd = () => {
+        listEl.removeEventListener('transitionend', onTransitionEnd);
+        listEl.style.height = '';
+        if (shouldOpen === true) listEl.classList.add('bx--dropdown-list--open');
+        else listEl.classList.remove('bx--dropdown-list--open');
+      };
+      const w = element.ownerDocument.defaultView;
       Object.keys(actions).forEach(action => {
         if (actions[action]) {
-          this.element.classList[action]('bx--dropdown--open');
-          this.element.focus();
+          element.classList[action]('bx--dropdown--open');
+          element.focus();
+          w.requestAnimationFrame(() => {
+            const height = listEl.scrollHeight;
+            if (shouldOpen === true) listEl.classList.add('bx--dropdown-list--open');
+            listEl.addEventListener('transitionend', onTransitionEnd);
+            listEl.style.height = shouldOpen === true ? '0px' : `${height}px`;
+            w.requestAnimationFrame(() => {
+              listEl.style.height = shouldOpen === true ? `${height}px` : '0px';
+            });
+          });
         }
       });
     }
@@ -179,7 +199,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * Closes the dropdown menu if this component loses focus.
    */
   handleBlur() {
-    this.element.classList.remove('bx--dropdown--open');
+    this._toggle({ type: 'blur' });
   }
 
   /**
