@@ -24,9 +24,9 @@
 
   .bx--checkbox-label {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-smoothing;
-    @include font-size('14');
+    @include typescale('zeta');
     display: flex;
     align-items: center;
     cursor: pointer;

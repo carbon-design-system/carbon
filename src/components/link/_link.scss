@@ -13,8 +13,8 @@
 @include exports('link') {
   .bx--link {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
+    @include font-family;
+    @include typescale('zeta');
     @include font-smoothing;
     font-weight: 700;
     color: $brand-01;

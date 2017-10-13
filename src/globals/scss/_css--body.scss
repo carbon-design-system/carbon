@@ -8,7 +8,7 @@
 @mixin css-body {
   body {
     @include reset;
-    @include helvetica;
+    @include font-family;
     color: $text-01;
     background-color: $ui-02;
     line-height: 1;

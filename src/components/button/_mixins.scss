@@ -1,6 +1,6 @@
 @mixin button-base {
   @include reset;
-  @include helvetica;
+  @include font-family;
   @include font-smoothing;
   @include letter-spacing;
   cursor: pointer;

@@ -10,12 +10,13 @@
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
+@import '../../globals/scss/layout';
 
 @include exports('dropdown') {
   .bx--dropdown {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
+    @include font-family;
+    @include typescale('zeta');
     position: relative;
     list-style: none;
     display: block;
@@ -46,7 +47,7 @@
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
-    transition: transform 150ms $bx--standard-easing;
+    transition: transform $transition--expansion $bx--standard-easing;
     transform-origin: 50% 45%;
   }
 
@@ -114,7 +115,7 @@
     }
 
     .bx--dropdown-list {
-      @include font-size('14');
+      @include typescale('zeta');
       display: flex;
       flex-direction: column;
       

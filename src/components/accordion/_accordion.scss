@@ -8,7 +8,7 @@
 @include exports('accordion') {
   .bx--accordion {
     @include reset;
-    @include helvetica;
+    @include font-family;
     list-style: none;
     width: 100%;
   }
@@ -70,14 +70,14 @@
   }
 
   .bx--accordion__content {
-    transition: all $transition--base $bx--standard-easing;
+    transition: all $transition--expansion $bx--ease-out;
     padding: $accordion-content-padding;
     height: 0;
     visibility: hidden;
     opacity: 0;
 
     p {
-      @include font-size('14');
+      @include typescale('zeta');
     }
   }
 }
@@ -91,6 +91,7 @@
     height: auto;
     visibility: visible;
     opacity: 1;
+    transition: all $transition--expansion $bx--ease-in;
   }
 
   .bx--accordion__arrow {

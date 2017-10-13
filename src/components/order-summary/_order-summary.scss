@@ -7,7 +7,7 @@
 @import '../dropdown/_dropdown.scss';
 
 .bx--order-summary {
-  @include font-size('14');
+  @include typescale('zeta');
   background-color: $ui-01;
   padding-bottom: 1.25rem;
   width: 18rem;
@@ -45,7 +45,7 @@
 }
 
 .bx--order-header-title {
-  @include font-size('14');
+  @include typescale('zeta');
   font-weight: 700;
   flex: 2;
 }
@@ -67,14 +67,14 @@
 }
 
 .bx--order-detail {
-  @include font-size('14');
+  @include typescale('zeta');
   color: $text-02;
   padding-right: 1.25rem;
   line-height: 1.25;
 }
 
 .bx--order-price {
-  @include font-size('12');
+  @include typescale('omega');
   font-weight: 700;
   white-space: nowrap;
 }
@@ -113,14 +113,14 @@
   font-weight: 700;
 
   span {
-    @include font-size('12');
+    @include typescale('omega');
     color: $text-02;
     font-weight: 400;
   }
 }
 
 .bx--order-total-subtitle {
-  @include font-size('11');
+  @include typescale('legal');
   color: $text-02;
   font-style: italic;
 }
@@ -134,7 +134,7 @@
 }
 
 .bx--order-footer-text {
-  @include font-size('14');
+  @include typescale('zeta');
   color: $text-02;
   line-height: 1;
 }
@@ -148,7 +148,7 @@
 }
 
 .bx--order-category-title {
-  @include font-size('12');
+  @include typescale('omega');
   font-weight: 700;
   margin-bottom: rem(4px);
   text-transform: uppercase;

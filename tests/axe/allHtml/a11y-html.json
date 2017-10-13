@@ -2,7 +2,11 @@
   {
     "inapplicable": [],
     "incomplete": [],
+<<<<<<< HEAD
     "timestamp": 1507823900823,
+=======
+    "timestamp": 1505852198360,
+>>>>>>> master
     "url": "http://localhost:3000",
     "violations": [
       {
@@ -84,7 +88,11 @@
         ]
       }
     ],
+<<<<<<< HEAD
     "time": 459,
+=======
+    "time": 342,
+>>>>>>> master
     "status": 404
   }
 ]

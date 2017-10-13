@@ -11,7 +11,7 @@ $css--helpers: true;
 @include exports('pagination') {
   .bx--pagination {
     @include reset;
-    @include helvetica;
+    @include font-family;
     width: 100%;
     background-color: $ui-01;
     padding: 0.5rem 1rem;
@@ -36,7 +36,7 @@ $css--helpers: true;
   }
 
   .bx--pagination__text {
-    @include font-size('12');
+    @include typescale('omega');
     color: $text-02;
     display: none;
 

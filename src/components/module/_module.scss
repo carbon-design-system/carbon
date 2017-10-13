@@ -12,7 +12,7 @@
 @include exports('modules') {
   .bx--module {
     @include reset;
-    @include helvetica;
+    @include font-family;
     display: flex;
     flex-direction: column;
     padding: rem(10px);
@@ -33,7 +33,7 @@
     }
 
     .bx--module__title {
-      @include font-size('14');
+      @include typescale('zeta');
       @include font-smoothing;
       letter-spacing: 0;
       font-weight: 700;
@@ -47,7 +47,7 @@
       padding: 1.5rem;
 
       p {
-        @include font-size('14');
+        @include typescale('zeta');
       }
     }
 
