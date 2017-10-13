@@ -2,13 +2,13 @@
   {
     "inapplicable": [],
     "incomplete": [],
-    "timestamp": 1505852198360,
+    "timestamp": 1507924957909,
     "url": "http://localhost:3000",
     "violations": [
       {
         "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
         "help": "Elements must have sufficient color contrast",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.3/color-contrast?application=webdriverjs",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.4/color-contrast?application=webdriverjs",
         "id": "color-contrast",
         "impact": "serious",
         "nodes": [
@@ -54,7 +54,7 @@
       {
         "description": "Ensures <meta name=\"viewport\"> does not disable text scaling and zooming",
         "help": "Zooming and scaling must not be disabled",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/2.3/meta-viewport?application=webdriverjs",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.4/meta-viewport?application=webdriverjs",
         "id": "meta-viewport",
         "impact": "critical",
         "nodes": [
@@ -65,7 +65,7 @@
                 "data": null,
                 "id": "meta-viewport",
                 "impact": "critical",
-                "message": "<meta> tag disables zooming",
+                "message": "<meta> tag disables zooming on mobile devices",
                 "relatedNodes": []
               }
             ],
@@ -84,7 +84,7 @@
         ]
       }
     ],
-    "time": 342,
+    "time": 636,
     "status": 404
   }
 ]
