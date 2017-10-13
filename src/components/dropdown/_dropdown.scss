@@ -56,7 +56,7 @@
     padding-bottom: rem(13px);
     padding-left: 1rem;
     padding-right: 2.25rem;
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -70,10 +70,15 @@
     list-style: none;
     position: absolute;
     z-index: z('dropdown');
-    max-height: 0;
+    height: 0px;
     overflow: hidden;
-    transition: $transition--expansion $bx--ease-out;
-    opacity: 0;
+    background-color: $ui-01;
+    transition: height $transition--expansion $bx--ease-in-out 0ms;
+
+    .bx--dropdown-item{
+      opacity:0;
+      transition:opacity $transition--fade $bx--ease-in 0.2s;
+    }
   }
 
   .bx--dropdown-link {
@@ -103,20 +108,55 @@
       transform: rotate(-180deg);
     }
 
-    .bx--dropdown-list {
-      @include typescale('zeta');
-      display: flex;
-      flex-direction: column;
-      background-color: $ui-01;
-      max-height: 50rem;
-      overflow: visible;
-      transition: $transition--expansion $bx--ease-in;
-      opacity: 1;
-    }
-
     &:focus {
       .bx--dropdown-list {
         box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      }
+    }
+  }
+
+  .bx--dropdown-list--open {
+    @include typescale('zeta');
+    display: flex;
+    flex-direction: column;
+    height:auto;
+    transition: height $transition--expansion $bx--ease-in-out;
+
+    .bx--dropdown-item{
+      opacity:1;
+      transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*9;
+
+      &:nth-child(1){
+        opacity:1;
+        transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*1;
+      }
+      &:nth-child(2){
+        opacity:1;
+        transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*2;
+      }
+      &:nth-child(3){
+        opacity:1;
+        transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*3;
+      }
+      &:nth-child(4){
+        opacity:1;
+        transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*4;
+      }
+      &:nth-child(5){
+        opacity:1;
+        transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*5;
+      }
+      &:nth-child(6){
+        opacity:1;
+        transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*6;
+      }
+      &:nth-child(7){
+        opacity:1;
+        transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*7;
+      }
+      &:nth-child(8){
+        opacity:1;
+        transition:opacity $transition--fade $bx--ease-out $transition--delay-unit*8;
       }
     }
   }
