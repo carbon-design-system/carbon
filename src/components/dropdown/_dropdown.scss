@@ -43,7 +43,7 @@
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
-    transition: transform $transition--expansion $bx--standard-easing;
+    transition: transform $transition--expansion $bx--ease-in-out;
     transform-origin: 50% 45%;
   }
 
