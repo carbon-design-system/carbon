@@ -16,7 +16,7 @@
     @include font-smoothing;
     @include font-family;
     color: $text-01;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
     height: auto;
     width: 100%;
@@ -53,7 +53,7 @@
 
   .bx--tabs-trigger-text {
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     color: $text-01;
 
     &:focus {

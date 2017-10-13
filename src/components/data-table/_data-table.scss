@@ -40,7 +40,7 @@
       @include typescale('omega');
       padding: rem(9px) rem(6px);
       vertical-align: middle;
-      font-weight: 700;
+      font-weight: 600;
 
       &:focus {
         outline: 1px solid transparent;
@@ -98,7 +98,7 @@
   .bx--table-header {
     @include reset;
     @include typescale('omega');
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 1px;
     text-align: left;
     text-transform: $data-table-heading-transform;

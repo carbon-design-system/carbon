@@ -160,7 +160,7 @@
 
   .bx--date-picker__month .numInputWrapper .numInput,
   .flatpickr-month .numInputWrapper .numInput {
-    font-weight: 700;
+    font-weight: 600;
     color: $text-01;
     background-color: $field-01;
     border: none;
@@ -208,7 +208,7 @@
   span.bx--date-picker__weekday,
   span.flatpickr-weekday {
     @include typescale('omega');
-    font-weight: 700;
+    font-weight: 600;
     color: $text-01;
   }
 

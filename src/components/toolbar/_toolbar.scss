@@ -106,7 +106,7 @@ $css--helpers: true;
   .bx--toolbar-menu__title {
     @include typescale('omega');
     @include letter-spacing;
-    font-weight: 700;
+    font-weight: 600;
     padding: 0.5rem 1.25rem;
   }
 
