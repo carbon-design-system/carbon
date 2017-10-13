@@ -4,6 +4,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import getDuration from '../../globals/js/misc/motion-getDuration';
 
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
   /**
@@ -103,6 +104,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       const onTransitionEnd = () => {
         listEl.removeEventListener('transitionend', onTransitionEnd);
         listEl.style.height = '';
+        // listEl.style.transitionDuration = '';
         if (shouldOpen === true) listEl.classList.add('bx--dropdown-list--open');
         else listEl.classList.remove('bx--dropdown-list--open');
       };
@@ -117,6 +119,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
             listEl.addEventListener('transitionend', onTransitionEnd);
             listEl.style.height = shouldOpen === true ? '0px' : `${height}px`;
             w.requestAnimationFrame(() => {
+              listEl.style.transitionDuration = `${getDuration(height, listEl.offsetWidth, 'scale', 'mechanical')}ms`;
               listEl.style.height = shouldOpen === true ? `${height}px` : '0px';
             });
           });
