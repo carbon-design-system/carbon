@@ -95,11 +95,6 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       const listEl = element.querySelector('.bx--dropdown-list');
       const isOpen = element.classList.contains('bx--dropdown--open');
       const isOfSelf = element.contains(event.target);
-<<<<<<< HEAD
-=======
-      const shouldOpen =
-        (isOfSelf && event.which === 40 && !isOpen) || (isOfSelf && event.which !== 27 && event.which !== 40 && isOpen !== true);
->>>>>>> fix(dropdown): lint error fixes
       const actions = {
         add: isOfSelf && event.which === 40 && !isOpen,
         remove: (!isOfSelf || event.which === 27) && isOpen,
