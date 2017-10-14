@@ -126,7 +126,9 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       this.children.push(this.collapsible);
     }
     this.collapsible.changeState(state, detail, () => {
-      this.element.focus();
+      if (!detail.launchingEvent || !/^focus(in)?$/.test(detail.launchingEvent.type)) {
+        this.element.focus();
+      }
       if (callback) {
         callback();
       }
