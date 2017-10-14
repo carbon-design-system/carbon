@@ -4,7 +4,8 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
-import getDuration from '../../globals/js/misc/motion-getDuration';
+import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
+import CollapsibleElement from '../collapsible-element/collapsible-element';
 
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
   /**
@@ -61,7 +62,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @param {Event} event The event triggering this method.
    */
   _handleKeyDown(event) {
-    const isOpen = this.element.classList.contains('bx--dropdown--open');
+    const isOpen = this.element.classList.contains(this.options.classOpen);
     const direction = {
       38: this.constructor.NAVIGATE.BACKWARD,
       40: this.constructor.NAVIGATE.FORWARD,
@@ -88,44 +89,48 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     if (
       ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem)) ||
       event.which === 27 ||
-      event.type === 'click' ||
-      event.type === 'blur'
+      /^(click|focus(in)?)$/.test(event.type)
     ) {
-      const element = this.element;
-      const listEl = element.querySelector('.bx--dropdown-list');
-      const isOpen = element.classList.contains('bx--dropdown--open');
-      const isOfSelf = element.contains(event.target);
-      const actions = {
-        add: isOfSelf && event.which === 40 && !isOpen,
-        remove: (!isOfSelf || event.which === 27) && isOpen,
-        toggle: isOfSelf && event.which !== 27 && event.which !== 40,
+      const isOpen = this.element.classList.contains(this.options.classOpen);
+      const isOfSelf = this.element.contains(event.target);
+      const isToggle = isOfSelf && event.which !== 27 && event.which !== 40;
+      const states = {
+        expanded: ((isOfSelf && event.which === 40) || isToggle) && !isOpen,
+        collapsed: (!isOfSelf || event.which === 27 || /^focus(in)?$/.test(event.type) || isToggle) && isOpen,
       };
-      const shouldOpen = actions.add === true || (actions.toggle === true && isOpen !== true);
-      const onTransitionEnd = () => {
-        listEl.removeEventListener('transitionend', onTransitionEnd);
-        listEl.style.height = '';
-        // listEl.style.transitionDuration = '';
-        if (shouldOpen === true) listEl.classList.add('bx--dropdown-list--open');
-        else listEl.classList.remove('bx--dropdown-list--open');
-      };
-      const w = element.ownerDocument.defaultView;
-      Object.keys(actions).forEach(action => {
-        if (actions[action]) {
-          element.classList[action]('bx--dropdown--open');
-          element.focus();
-          w.requestAnimationFrame(() => {
-            const height = listEl.scrollHeight;
-            if (shouldOpen === true) listEl.classList.add('bx--dropdown-list--open');
-            listEl.addEventListener('transitionend', onTransitionEnd);
-            listEl.style.height = shouldOpen === true ? '0px' : `${height}px`;
-            w.requestAnimationFrame(() => {
-              listEl.style.transitionDuration = `${getDuration(height, listEl.offsetWidth, 'scale', 'mechanical')}ms`;
-              listEl.style.height = shouldOpen === true ? `${height}px` : '0px';
-            });
-          });
-        }
-      });
+      const state = Object.keys(states).find(key => states[key]);
+      if (state) {
+        this.changeState(state, getLaunchingDetails(event));
+      }
     }
+  }
+
+  /**
+   * Changes the open/closed state.
+   * @param {string} state The new state.
+   * @param {Object} detail The detail of the event trigging this action.
+   * @param {Function} [callback] Callback called when change in state completes.
+   */
+  changeState(state, detail, callback) {
+    if (!this.collapsible) {
+      const list = this.element.querySelector(this.options.selectorList);
+      if (!list) {
+        throw new TypeError('Cannot find the container for the dropdown items.');
+      }
+      // Lazily create a component instance for collapsible
+      this.collapsible = CollapsibleElement.create(list, {
+        stateNode: this.element,
+        classExpanded: this.options.classOpen,
+        classTransient: this.options.classTransient,
+      });
+      this.children.push(this.collapsible);
+    }
+    this.collapsible.changeState(state, detail, () => {
+      this.element.focus();
+      if (callback) {
+        callback();
+      }
+    });
   }
 
   /**
@@ -200,9 +205,10 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
 
   /**
    * Closes the dropdown menu if this component loses focus.
+   * @param {Event} event The event trigging this action.
    */
-  handleBlur() {
-    this._toggle({ type: 'blur' });
+  handleBlur(event) {
+    this._toggle(event);
   }
 
   /**
@@ -220,8 +226,11 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find selectors.
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
+   * @property {string} [selectorList] The CSS selector to find the container for the dropdown items.
    * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
+   * @property {string} [classOpen] The CSS class for the open state.
+   * @property {string} [classTransient] The CSS class for the transient state.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
    * @property {string} [eventBeforeSelected]
    *   The name of the custom event fired before a drop down item is selected.
@@ -231,8 +240,11 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
   static options = {
     selectorInit: '[data-dropdown]',
     selectorText: '.bx--dropdown-text',
+    selectorList: '.bx--dropdown-list',
     selectorItem: '.bx--dropdown-link',
     selectorItemSelected: '.bx--dropdown--selected',
+    classOpen: 'bx--dropdown--open',
+    classTransient: 'bx--dropdown--transient',
     classSelected: 'bx--dropdown--selected',
     eventBeforeSelected: 'dropdown-beingselected',
     eventAfterSelected: 'dropdown-selected',
