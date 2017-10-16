@@ -38,10 +38,9 @@
   .bx--progress-step svg {
     position: relative;
     z-index: 1;
-    width: 1.5rem;
-    height: 1.5rem;
     border-radius: 50%;
     margin-bottom: 0.5rem;
+    margin-left: -4px;
   }
 
   .bx--progress-label {
@@ -51,9 +50,11 @@
 
   .bx--progress-step--current {
     circle:first-child {
-      stroke: $brand-01;
-      stroke-width: $progress-indicator-stroke-width;
-      fill: transparent;
+      fill: $brand-01;
+    }
+    
+    path {
+      fill: $brand-01;
     }
 
     circle:last-child {
@@ -76,6 +77,10 @@
       stroke-width: $progress-indicator-stroke-width;
       fill: transparent;
     }
+    
+    path {
+      fill: $ui-05;
+    }
 
     .bx--progress-label {
       color: $text-02;
@@ -88,12 +93,13 @@
 
   .bx--progress-step--complete {
     circle {
+      fill: $brand-01;
       stroke: $brand-01;
       stroke-width: $progress-indicator-stroke-width;
       fill: transparent;
     }
 
-    polygon {
+    path {
       fill: $brand-01;
     }
 

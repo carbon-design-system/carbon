@@ -57,9 +57,9 @@
   .bx--number__control-btn {
     @include button-reset;
     position: relative;
-    bottom: 0;
-    width: rem(20px);
-    height: rem(10px);
+    bottom: rem(2px);
+    height: rem(14px);
+    padding: 0;
 
     &:focus {
       @include focus-outline;
@@ -76,8 +76,6 @@
 
   .bx--number__controls svg {
     fill: $brand-01;
-    width: rem(9px);
-    height: rem(9px);
 
     // Hover styles for use with old HTML w/o button
     &:hover {

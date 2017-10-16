@@ -26,7 +26,6 @@
 
     &:last-of-type {
       right: rem(-32px);
-      transform: rotate(180deg);
     }
 
     &:focus {
@@ -34,7 +33,6 @@
     }
 
     svg {
-      height: rem(24px);
       fill: $ui-05;
     }
   }

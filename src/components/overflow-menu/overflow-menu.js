@@ -134,8 +134,8 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     classShown: 'bx--overflow-menu--open',
     classMenuShown: 'bx--overflow-menu-options--open',
     classMenuFlip: 'bx--overflow-menu--flip',
-    objMenuOffset: { top: 3, left: 61 },
-    objMenuOffsetFlip: { top: 3, left: -61 },
+    objMenuOffset: { top: 3, left: 66 },
+    objMenuOffsetFlip: { top: 3, left: -55 },
   };
 }
 

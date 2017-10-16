@@ -58,9 +58,6 @@
 
   .bx--accordion__arrow {
     transition: all $transition--base $bx--standard-easing;
-    height: 1.25rem;
-    width: 1.25rem;
-    padding: 0.25rem 0.125rem 0.25rem 0.25rem;
     margin: $accordion-arrow-margin;
     fill: $ui-05;
   }

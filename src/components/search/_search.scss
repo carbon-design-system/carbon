@@ -56,9 +56,7 @@
   .bx--search-magnifier,
   .bx--search-close {
     position: absolute;
-    height: 1rem;
-    width: 1rem;
-    top: calc(50% - 0.5rem);
+    top: calc(50% - 0.65rem);
   }
 
   .bx--search-magnifier {
@@ -102,8 +100,6 @@
     vertical-align: middle;
     transition: $transition--base;
     fill: $brand-01;
-    height: 1rem;
-    width: 1rem;
   }
 
   .bx--search-button:hover,

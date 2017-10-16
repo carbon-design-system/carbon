@@ -15,6 +15,10 @@
 
   .bx--date-picker-container {
     position: relative;
+
+    > .bx--date-picker__icon {
+      top: 2.25rem;
+    }
   }
 
   .bx--date-picker.bx--date-picker--simple {
@@ -69,7 +73,7 @@
 
   .bx--date-picker__icon {
     position: absolute;
-    top: 2.25rem;
+    top: 1.85rem;
     left: 1rem;
     fill: $brand-01;
     cursor: pointer;
@@ -90,7 +94,7 @@
   }
 
   .bx--date-picker--range .bx--date-picker__icon {
-    right: -1.75rem;
+    right: -2.75rem;
     left: auto;
   }
 
