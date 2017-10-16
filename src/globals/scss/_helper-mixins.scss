@@ -70,7 +70,7 @@
 
 @mixin button-reset($width: true) {
   @include reset;
-  @include helvetica;
+  @include font-family;
   @include font-smoothing;
   @include letter-spacing;
   background: none;

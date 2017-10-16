@@ -12,8 +12,8 @@
 @include exports('text-input') {
   .bx--text-input {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
+    @include font-family;
+    @include typescale('zeta');
     display: block;
     width: 100%;
     height: rem(40px);

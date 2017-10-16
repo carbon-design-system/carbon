@@ -1,8 +1,9 @@
-$font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts/' !default;
+$font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
 @import 'import-once';
+@import 'css--plex-core';
 
-@mixin font-face-css {
+@mixin helvetica-font-face {
   // Default font directory, `!default` flag allows user override.
   // (font files are configured to be served as static assets from server.js)
 
@@ -56,7 +57,9 @@ $font-path: 'https://unpkg.com/carbon-components@7.0.0/src/globals/fonts/' !defa
 }
 
 @include exports('css--font-face') {
-  @if global-variable-exists('css--font-face') and $css--font-face == true {
-    @include font-face-css;
+  @if global-variable-exists('css--plex') and $css--plex == true {
+    @include plex-font-face;
+  } @else {
+    @include helvetica-font-face;
   }
 }

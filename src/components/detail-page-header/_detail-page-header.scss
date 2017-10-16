@@ -107,9 +107,13 @@
   }
 
   .bx--detail-page-header-title {
-    @include font-size('29');
+    @include typescale('gamma');
     font-weight: 300;
     color: $text-02;
+
+    @include breakpoint(bp--sm--major) {
+      @include typescale('beta');
+    }
   }
 
   .bx--detail-page-header-status-container {

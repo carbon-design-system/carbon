@@ -49,7 +49,7 @@
   }
 
   .bx--slider__range-label {
-    @include font-size('14');
+    @include typescale('zeta');
     color: $text-02;
 
     &:last-of-type {
@@ -84,7 +84,8 @@
     border-radius: 50%;
     top: 0;
     transform: translate(-50%, -50%);
-    transition: transform 100ms $bx--standard-easing, background 100ms $bx--standard-easing;
+    transition: transform 100ms $bx--standard-easing, background 100ms $bx--standard-easing,
+      left $transition--base $bx--standard-easing;
     cursor: pointer;
     outline: none;
 
@@ -110,6 +111,6 @@
     height: 2rem;
     padding: 0;
     text-align: center;
-    font-weight: 700;
+    font-weight: 600;
   }
 }

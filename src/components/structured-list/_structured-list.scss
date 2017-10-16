@@ -24,7 +24,7 @@
 
   .bx--structured-list {
     @include reset;
-    @include helvetica;
+    @include font-family;
     display: table;
     overflow-x: auto;
     overflow-y: hidden;
@@ -83,11 +83,10 @@
   .bx--structured-list-th {
     @include reset;
     @include padding-th;
+    @include typescale('zeta');
     display: table-cell;
-    font-size: rem(12px);
-    font-weight: 700;
+    font-weight: 600;
     height: rem(40px);
-    letter-spacing: 1px;
     text-align: left;
     text-transform: $structured-list-text-transform;
     vertical-align: middle;
@@ -100,7 +99,7 @@
 
   .bx--structured-list-td {
     @include reset;
-    @include font-size('14');
+    @include typescale('zeta');
     @include line-height('body');
     @include padding-td;
     position: relative;
@@ -129,6 +128,6 @@
 
   // Deprecated class
   .bx--structured-list-content {
-    @include font-size('14');
+    @include typescale('zeta');
   }
 }

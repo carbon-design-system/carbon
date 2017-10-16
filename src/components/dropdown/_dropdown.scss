@@ -10,12 +10,13 @@
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
+@import '../../globals/scss/layout';
 
 @include exports('dropdown') {
   .bx--dropdown {
     @include reset;
-    @include helvetica;
-    @include font-size('14');
+    @include font-family;
+    @include typescale('zeta');
     position: relative;
     list-style: none;
     display: block;
@@ -40,7 +41,7 @@
     right: 1rem;
     top: .65rem;
     pointer-events: none;
-    transition: transform $transition--base ease-in-out;
+    transition: transform $transition--expansion $bx--standard-easing;
     transform-origin: 50% 45%;
   }
 
@@ -53,7 +54,7 @@
     padding-bottom: rem(13px);
     padding-left: 1rem;
     padding-right: 2.25rem;
-    font-weight: 700;
+    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -64,10 +65,13 @@
     @include reset;
     @include layer('overlay');
     width: 100%;
-    display: none;
     list-style: none;
     position: absolute;
     z-index: z('dropdown');
+    max-height: 0;
+    overflow: hidden;
+    transition: $transition--expansion $bx--ease-out;
+    opacity: 0;
   }
 
   .bx--dropdown-link {
@@ -98,10 +102,14 @@
     }
 
     .bx--dropdown-list {
-      @include font-size('14');
+      @include typescale('zeta');
       display: flex;
       flex-direction: column;
       background-color: $ui-01;
+      max-height: 50rem;
+      overflow: visible;
+      transition: $transition--expansion $bx--ease-in;
+      opacity: 1;
     }
 
     &:focus {

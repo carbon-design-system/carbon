@@ -17,8 +17,8 @@
   }
 
   .bx--select-input {
-    @include helvetica;
-    @include font-size('14');
+    @include font-family;
+    @include typescale('zeta');
     appearance: none;
     display: block;
     width: 100%;

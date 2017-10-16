@@ -3,7 +3,7 @@
 @include exports('global-header') {
   .bx--global-header {
     @include layer('sticky-nav');
-    @include helvetica;
+    @include font-family;
     width: 100%;
     position: fixed;
     top: rem(36px);
@@ -66,7 +66,7 @@
   }
 
   .bx--global-header .bx--logo__text {
-    @include font-size('18');
+    @include typescale('delta');
     @include font-smoothing;
     font-weight: 400;
     cursor: pointer;
@@ -74,7 +74,7 @@
     color: $color__white; // anna
 
     &--bold {
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 
@@ -119,8 +119,8 @@
   .bx--global-header__menu__item--link {
     @include reset;
     @include font-smoothing;
-    @include font-size('14');
-    font-weight: 700;
+    @include typescale('zeta');
+    font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;

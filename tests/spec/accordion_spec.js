@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Accordion from '../../src/components/accordion/accordion';
 import HTML from '../../src/components/accordion/accordion.html';
 import LegacyHTML from '../../src/components/accordion/legacyaccordion.html';
