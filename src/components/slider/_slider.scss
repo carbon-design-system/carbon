@@ -105,12 +105,17 @@
     display: none;
   }
 
-  .bx-slider-text-input {
-    width: rem(32px);
+  .bx--slider-text-input {
+    width: rem(44px);
     min-width: 0;
     height: 2rem;
     padding: 0;
     text-align: center;
     font-weight: 600;
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
   }
 }
