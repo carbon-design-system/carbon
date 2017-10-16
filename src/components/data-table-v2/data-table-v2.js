@@ -24,10 +24,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     super(element, options);
 
     this.container = element.parentNode;
-    this.toolbarEl = this.element.querySelector('.bx--table-toolbar');
-    this.batchActionEl = this.element.querySelector('.bx--batch-actions');
-    this.countEl = this.element.querySelector('[data-items-selected]');
-    this.cancelEl = this.element.querySelector('.bx--batch-summary__cancel');
+    this.toolbarEl = this.element.querySelector(this.options.selectorToolbar);
+    this.batchActionEl = this.element.querySelector(this.options.selectorActions);
+    this.countEl = this.element.querySelector(this.options.selectorCount);
+    this.cancelEl = this.element.querySelector(this.options.selectorActionCancel);
     this.tableHeaders = this.element.querySelectorAll('th');
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
     this.expandCells = [];
@@ -89,8 +89,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.state.checkboxCount += checked ? 1 : -1;
     this.countEl.textContent = this.state.checkboxCount;
 
-    // toggle on/off all-checkbox if all are selected
-
     // toggle on/off batch action bar
     this._actionBarToggle(this.state.checkboxCount > 0);
   };
@@ -130,7 +128,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
         if (this.batchActionEl.dataset.active === 'false') {
           this.batchActionEl.setAttribute('tabIndex', -1);
         } else {
-          this.toolbarEl.style.visibility = 'hidden';
           this.batchActionEl.setAttribute('tabIndex', 0);
         }
       }
@@ -174,40 +171,12 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   _expandableHoverToggle = (element, flag) => {
     element.previousElementSibling.classList.add(this.options.classExpandableRowHover);
 
-    const mouseout = evt => {
+    const mouseout = () => {
       element.previousElementSibling.classList.remove(this.options.classExpandableRowHover);
+      element.removeEventListener('mouseout', mouseout);
     };
 
     element.addEventListener('mouseout', mouseout);
-  };
-
-  _inlineEditToggle = detail => {
-    const labelEl = detail.element.parentElement;
-    const inputEl = labelEl.nextElementSibling;
-    const inputTargetEl = inputEl.querySelector('[data-inline-target]');
-
-    labelEl.classList.add(this.options.classInlineEditLabelInactive);
-    inputEl.classList.add(this.options.classInlineEditInputActive);
-
-    const focusListener = () => {
-      this.changeState({
-        group: 'inline-edit-save',
-        element: detail.element,
-        labelEl,
-        inputEl,
-      });
-
-      inputTargetEl.removeEventListener('focusout', focusListener);
-    };
-
-    inputTargetEl.addEventListener('focusout', focusListener);
-  };
-
-  _inlineEditSave = evt => {
-    const { labelEl, inputEl } = evt;
-
-    labelEl.classList.remove(this.options.classInlineEditLabelInactive);
-    inputEl.classList.remove(this.options.classInlineEditInputActive);
   };
 
   _toggleState = (element, evt) => {
@@ -272,13 +241,14 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     select: '_selectToggle',
     'select-all': '_selectAllToggle',
     'action-bar-cancel': '_actionBarCancel',
-    'inline-edit': '_inlineEditToggle',
-    'inline-edit-save': '_inlineEditSave',
   };
 
   static options = {
     selectorInit: '[data-table-v2]',
+    selectorToolbar: '.bx--table--toolbar',
     selectorActions: '.bx--batch-actions',
+    selectorCount: '[data-items-selected]',
+    selectorActionCancel: '.bx--batch-summary__cancel',
     selectorCheckbox: '.bx--checkbox',
     selectorExpandCells: '.bx--table-expand-v2',
     selectorExpandableRows: '.bx--expandable-row-v2',
@@ -292,16 +262,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     classTableSortAscending: 'bx--table-sort-v2--ascending',
     classTableSortActive: 'bx--table-sort-v2--active',
     classParentRowEven: 'bx--parent-row--even-v2',
-    classInlineEditLabelInactive: 'bx--inline-edit-label--inactive',
-    classInlineEditInputActive: 'bx--inline-edit-input--active',
     eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
     eventAfterExpand: 'data-table-v2-aftertoggleexpand',
     eventBeforeSort: 'data-table-v2-beforetogglesort',
     eventAfterSort: 'data-table-v2-aftertogglesort',
-    eventBeforeInlineEdit: 'data-table-v2-before-inline-edit-toggle',
-    eventAfterInlineEdit: 'data-table-v2-after-inline-edit-toggle',
-    eventBeforeInlineEditSave: 'data-table-v2-before-inline-edit-save',
-    eventAfterInlineEditSave: 'data-table-v2-after-inline-edit-save',
     eventTrigger: '[data-event]',
     eventParentContainer: '[data-parent-row]',
   };
