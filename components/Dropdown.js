@@ -29,6 +29,14 @@ class Dropdown extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = this.resetState(props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.resetState(nextProps));
+  }
+
+  resetState(props) {
     const { children, selectedText, value, defaultText, open } = props;
 
     let matchingChild;
@@ -42,18 +50,17 @@ class Dropdown extends PureComponent {
     });
 
     if (matchingChild) {
-      this.state = {
+      return {
         open,
         selectedText: matchingChild.props.itemText,
         value: matchingChild.props.value,
       };
-    } else {
-      this.state = {
-        open,
-        selectedText: defaultText,
-        value: '',
-      };
     }
+    return {
+      open,
+      selectedText: defaultText,
+      value: '',
+    };
   }
 
   close = () => {

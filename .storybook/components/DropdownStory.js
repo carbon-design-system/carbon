@@ -78,4 +78,25 @@ storiesOf('Dropdown', module)
         <DropdownItem itemText="Droplet Execution Agent" value="dea" />
         <DropdownItem itemText="Router" value="router" />
       </Dropdown>
+    ))
+    .addWithInfo(
+      'with pre-selected value',
+      `
+        The Dropdown component is used for navigating or filtering existing content.
+        You can also have an option preselected in the dropdown.
+      `,
+      () => (
+        <Dropdown
+          {...dropdownEvents}
+          onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
+          defaultText="Choose something.."
+          value="all"
+          selectedText="Cloud Foundry API"
+        >
+          <DropdownItem itemText="All" value="all" />
+          <DropdownItem itemText="Cloud Foundry API" value="cloudFoundry" />
+          <DropdownItem itemText="Staging" value="staging" />
+          <DropdownItem itemText="Droplet Execution Agent" value="dea" />
+          <DropdownItem itemText="Router" value="router" />
+        </Dropdown>
     ));
