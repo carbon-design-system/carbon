@@ -28,6 +28,13 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
       this.boundInput.addEventListener('change', evt => {
         this.setValue(evt.target.value);
       });
+      this.boundInput.addEventListener('focus', evt => {
+        evt.target.select();
+      });
+      // workaround for safari
+      this.boundInput.addEventListener('mouseup', evt => {
+        evt.preventDefault();
+      });
     }
 
     this._updatePosition();
