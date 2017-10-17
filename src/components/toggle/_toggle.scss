@@ -13,14 +13,16 @@
   .bx--toggle {
     @include hidden;
   }
+  
+  $toggle-transition-duration:60ms;
 
   .bx--toggle__label {
     @include font-family;
     position: relative;
     display: flex;
     align-items: center;
-    transition-duration: 60ms; // shix change
-    transition-timing-function: $bx--ease-out; // shix change
+    transition-duration: $toggle-transition-duration;
+    transition-timing-function: $bx--ease-out;
     cursor: pointer;
     margin: 1rem 0;
   }
@@ -37,8 +39,8 @@
       height: 4px;
       top: -2px;
       background-color: $ui-05;
-      transition-duration: 60ms; // shix change
-      transition-timing-function: $bx--ease-out; // shix change
+      transition-duration: $toggle-transition-duration;
+      transition-timing-function: $bx--ease-out;
       cursor: pointer;
     }
 
@@ -54,8 +56,8 @@
       background-color: $ui-01;
       border-radius: 50%;
       content: '';
-      transition-duration: 60ms; // shix change
-      transition-timing-function: $bx--ease-out; // shix change
+      transition-duration: $toggle-transition-duration;
+      transition-timing-function: $bx--ease-out;
     }
   }
 
