@@ -83,8 +83,6 @@
 
           .bx--interior-left-nav__icon {
             fill: $color__blue-51;
-            width: rem(8px);
-            height: rem(8px);
             transition: $transition--base;
           }
         }
@@ -120,7 +118,7 @@
 
       &__item--has-children {
         .left-nav-list__item-link {
-          padding-right: 1.5rem;
+          padding-right: 1.25rem;
         }
 
         &:hover {
@@ -258,7 +256,6 @@
       align-items: center;
       margin-top: auto;
       margin-bottom: rem(90px);
-      padding: rem(14px) rem(16px);
 
       &--v6 {
         margin-bottom: rem(50px);
@@ -290,8 +287,6 @@
     .bx--interior-left-nav-collapse__arrow {
       transform: rotate(0);
       fill: $color__blue-51;
-      height: 12px;
-      width: 12px;
     }
   }
 

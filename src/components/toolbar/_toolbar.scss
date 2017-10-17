@@ -58,7 +58,6 @@ $css--helpers: true;
 
       .bx--search-magnifier {
         transform: scale(1);
-        top: rem(9px);
       }
 
       .bx--search-input {
@@ -81,6 +80,7 @@ $css--helpers: true;
 
   .bx--toolbar-search {
     width: 1.8rem;
+    top: -.5rem;
     transition: all 175ms $bx--standard-easing;
   }
 

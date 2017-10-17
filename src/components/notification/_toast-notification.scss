@@ -55,8 +55,12 @@
     border: none;
     cursor: pointer;
     margin: 0;
-    width: 12px;
-    height: 12px;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    right: -8px;
+    top: -2px;
+}
     position: relative;
 
     &:focus {
@@ -94,4 +98,3 @@
     color: $text-03;
     line-height: 1;
   }
-}

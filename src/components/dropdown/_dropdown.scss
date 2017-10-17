@@ -39,9 +39,7 @@
     fill: $brand-01;
     position: absolute;
     right: 1rem;
-    top: 1.175rem;
-    width: rem(10px);
-    height: rem(5px);
+    top: .65rem;
     pointer-events: none;
     transition: transform $transition--expansion $bx--standard-easing;
     transform-origin: 50% 45%;

@@ -48,8 +48,6 @@
   }
 
   .bx--inline-notification__icon {
-    height: 16px;
-    width: 16px;
     min-width: 22px;
   }
 
@@ -91,11 +89,9 @@
   }
 
   .bx--inline-notification__close-icon {
-    height: 10px;
-    width: 10px;
     fill: $text-03;
     position: absolute;
-    top: 3px;
-    right: 1px;
+    top: 0;
+    right: -2px;
   }
 }
