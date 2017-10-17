@@ -1,6 +1,6 @@
 @mixin button-base {
   @include reset;
-  @include helvetica;
+  @include font-family;
   @include font-smoothing;
   @include letter-spacing;
   cursor: pointer;
@@ -16,8 +16,8 @@
   text-align: center;
   text-decoration: none;
   //transition-duration: $transition--base;
-  transition-timing-function: $bx--ease-out;  //shix changes
-  transition-duration: .1s; //shix changes
+  transition-timing-function: $bx--ease-out;
+  transition-duration: $transition--fade;
   white-space: nowrap;
   line-height: 16px;
 
