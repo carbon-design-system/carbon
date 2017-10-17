@@ -137,7 +137,6 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       this.batchActionEl.dataset.active = true;
       this.batchActionEl.classList.add('bx--batch-actions--active');
     } else {
-      this.toolbarEl.style.visibility = '';
       this.batchActionEl.dataset.active = false;
       this.batchActionEl.classList.remove('bx--batch-actions--active');
     }
@@ -256,12 +255,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     selectorChildRow: '[data-child-row]',
     selectorTableBody: 'tbody',
     classExpandableRow: 'bx--expandable-row-v2',
-    classExpandableRowEven: 'bx--expandable-row--even-v2',
     classExpandableRowHidden: 'bx--expandable-row--hidden-v2',
     classExpandableRowHover: 'bx--expandable-row--hover-v2',
     classTableSortAscending: 'bx--table-sort-v2--ascending',
     classTableSortActive: 'bx--table-sort-v2--active',
-    classParentRowEven: 'bx--parent-row--even-v2',
     eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
     eventAfterExpand: 'data-table-v2-aftertoggleexpand',
     eventBeforeSort: 'data-table-v2-beforetogglesort',
