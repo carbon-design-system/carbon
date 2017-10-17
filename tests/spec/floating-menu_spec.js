@@ -79,12 +79,26 @@ describe('Test floating menu', function() {
       expect(spy, 'floating-menu-beingshown event').not.have.been.called;
     });
 
-    it('Should have show() method show menu', function() {
+    // it('Should have show() method show menu', function() {
+    //   const spy = sinon.spy();
+    //   events.on(menu.element, 'floating-menu-shown', spy);
+    //   menu.show();
+    //   expect(element.classList.contains('my-floating-menu-open'), 'Menu state').to.be.true;
+    //   expect(refNode.classList.contains('my-floating-menu-trigger-open'), 'Trigger button state').to.be.true;
+    //   expect(spy, 'floating-menu-shown event').have.been.calledOnce;
+    // });
+
+    it('Should have show() method show menu', async function() {
       const spy = sinon.spy();
       events.on(menu.element, 'floating-menu-shown', spy);
       menu.show();
       expect(element.classList.contains('my-floating-menu-open'), 'Menu state').to.be.true;
       expect(refNode.classList.contains('my-floating-menu-trigger-open'), 'Trigger button state').to.be.true;
+      const e = await new Promise(resolve => {
+        events.on(menu.element, 'transitionend', resolve);
+        menu.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
+      });
+      expect(e.cancelable).to.be.false;
       expect(spy, 'floating-menu-shown event').have.been.calledOnce;
     });
 
