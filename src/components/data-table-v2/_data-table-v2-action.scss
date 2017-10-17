@@ -41,6 +41,7 @@
 
   ~ .bx--btn {
     margin-left: 12px;
+    margin-right: 2px;
   }
 }
 
@@ -63,8 +64,7 @@
   height: 100%;
   z-index: 99999;
   background-color: transparent;
-  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1),
-    background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
+  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1), background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
   pointer-events: none;
   visibility: hidden;
 
@@ -102,8 +102,7 @@
   visibility: visible;
   background-color: $brand-01;
   pointer-events: all;
-  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1),
-    background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
+  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1), background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
   opacity: 1;
 }
 
