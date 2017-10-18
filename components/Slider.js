@@ -20,6 +20,7 @@ class Slider extends PureComponent {
     children: PropTypes.node,
     disabled: PropTypes.bool,
     name: PropTypes.bool,
+    inputType: PropTypes.string,
   };
 
   static defaultProps = {
@@ -28,6 +29,7 @@ class Slider extends PureComponent {
     disabled: false,
     minLabel: '',
     maxLabel: '',
+    inputType: 'text',
   };
 
   state = {
@@ -201,6 +203,7 @@ class Slider extends PureComponent {
       labelText,
       step,
       stepMuliplier, // eslint-disable-line no-unused-vars
+      inputType,
       required,
       disabled,
       name,
@@ -275,6 +278,7 @@ class Slider extends PureComponent {
           </span>
           {!hideTextInput
             ? <TextInput
+                type={inputType}
                 id="input-for-slider"
                 className="bx-slider-text-input"
                 value={value}
