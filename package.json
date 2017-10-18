@@ -136,7 +136,7 @@
     "test": "gulp test",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
-    "semantic-release": 
+    "semantic-release":
       "semantic-release pre && npm publish && semantic-release post"
   },
   "license": "Apache-2",
