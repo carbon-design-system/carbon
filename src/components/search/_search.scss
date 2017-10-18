@@ -23,12 +23,12 @@
 
   .bx--search-input {
     @include reset;
-    @include helvetica;
+    @include font-family;
     appearance: none;
     border: none;
     background-color: $field-01;
     color: $text-01;
-    font-weight: 700;
+    font-weight: 600;
     padding: 0 2.5rem 0 2.5rem;
     text-overflow: ellipsis;
     width: 100%;
@@ -44,12 +44,12 @@
   }
 
   .bx--search--sm .bx--search-input {
-    @include font-size('14');
+    @include typescale('zeta');
     height: rem(32px);
   }
 
   .bx--search--lg .bx--search-input {
-    @include font-size('14');
+    @include typescale('zeta');
     height: rem(40px);
   }
 

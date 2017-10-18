@@ -14,7 +14,7 @@
 @include exports('interior-left-nav') {
   .bx--interior-left-nav {
     @include reset;
-    @include helvetica;
+    @include font-family;
     width: rem(250px);
     position: fixed;
     top: rem(90px);
@@ -66,7 +66,7 @@
         }
 
         &-link {
-          @include font-size('14');
+          @include typescale('zeta');
           color: $color__blue-90;
           font-weight: 400;
           position: relative;
@@ -92,7 +92,7 @@
         &--expanded {
           .left-nav-list--nested {
             max-height: 20rem;
-            transition: $transition--base;
+            transition: $transition--expansion $bx--ease-in;
             overflow: inherit;
             opacity: 1;
 
@@ -134,7 +134,7 @@
     .left-nav-list--nested {
       max-height: 0;
       overflow: hidden;
-      transition: 0.3s ease-in-out;
+      transition: $transition--expansion $bx--ease-out;
       padding: 0;
       opacity: 0;
 
@@ -146,7 +146,7 @@
         opacity: 0;
 
         &-link {
-          @include font-size('14');
+          @include typescale('zeta');
           color: $color__blue-90;
           padding: 0.75rem 1.35rem 0.75rem 4.5rem;
           font-weight: 400;
@@ -246,7 +246,7 @@
     }
 
     .left-nav-list--nested .left-nav-list__item-link {
-      font-size: rem(12px);
+      @include typescale('omega');
       padding-left: rem(40px);
     }
 
@@ -276,10 +276,10 @@
     }
 
     .bx--interior-left-nav-collapse__link {
+      @include typescale('zeta');
       display: flex;
       align-items: center;
       text-decoration: none;
-      font-size: rem(14px);
       padding: 0.25rem;
 
       &:focus {

@@ -13,9 +13,9 @@
 @include exports('inline-notifications') {
   .bx--inline-notification {
     @include reset;
-    @include helvetica;
+    @include font-family;
     @include font-smoothing;
-    @include font-size('14');
+    @include typescale('zeta');
     display: flex;
     justify-content: space-between;
     background-color: transparent;
@@ -65,14 +65,14 @@
   }
 
   .bx--inline-notification__title {
-    @include font-size('14');
-    font-weight: 700;
+    @include typescale('zeta');
+    font-weight: 600;
     margin-right: 0.25rem;
     line-height: 1.125;
   }
 
   .bx--inline-notification__subtitle {
-    @include font-size('14');
+    @include typescale('zeta');
     line-height: 1.125;
   }
 

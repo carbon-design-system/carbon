@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import StructuredList from '../../src/components/structured-list/structured-list';
 import HTML from '../../src/components/structured-list/structured-list--selection.html';
 

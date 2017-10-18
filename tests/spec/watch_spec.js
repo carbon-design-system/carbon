@@ -1,5 +1,4 @@
 import { delay } from 'bluebird'; // For testing on browsers not supporting Promise
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import { componentClasses, settings } from '../../src/index';
 import mixin from '../../src/globals/js/misc/mixin';
 import createComponent from '../../src/globals/js/mixins/create-component';

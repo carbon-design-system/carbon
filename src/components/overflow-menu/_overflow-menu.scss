@@ -86,8 +86,8 @@
 
   .bx--overflow-menu-options__btn {
     @include reset;
-    @include font-size('14');
-    @include helvetica;
+    @include typescale('zeta');
+    @include font-family;
     font-weight: 400;
     width: 100%;
     height: 100%;

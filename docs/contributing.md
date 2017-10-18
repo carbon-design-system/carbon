@@ -161,7 +161,7 @@ If your change may hit some browser quirks, use `-b` option, like:
 gulp test:unit -b IE -b Firefox
 ```
 
-(Other browsers tests can run with are: `Safari`, `Chrome` and `PhantomJS`)
+(Other browsers tests can run with are: `Safari`, `Chrome` and `ChromeHeadless`)
 
 If you are very sure that your change affects a specific set of components, you can use `-f` option, like:
 

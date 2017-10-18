@@ -1,3 +1,5 @@
+@import 'colors';
+
 $bx--ease-in: cubic-bezier(0.25, 0, 1, 1); // Used primarily for removing elements from the screen.
 $bx--ease-out: cubic-bezier(
   0,
@@ -7,6 +9,7 @@ $bx--ease-out: cubic-bezier(
 ); // Used for adding elements to the screen or changing on-screen states at a users's input.
 $bx--standard-easing: cubic-bezier(0.5, 0, 0.1, 1); // Used for the majority of animations.
 $transition--base: 250ms;
+$transition--expansion: 300ms;
 
 // Color Theme Variables
 $brand-01: $color__blue-51 !default;
@@ -37,10 +40,10 @@ $nav-08: $color__blue-51 !default;
 
 // Global
 $input-border: 1px solid transparent !default;
-$input-label-weight: 700 !default;
+$input-label-weight: 600 !default;
 
 // Button Theme Variables
-$button-font-weight: 700 !default;
+$button-font-weight: 600 !default;
 $button-font-size: 0.875rem !default;
 $button-border-radius: 0 !default;
 $button-height: 40px !default;
@@ -88,4 +91,4 @@ $radio-border-width: 2px !default;
 
 // Structured Theme Variables
 $structured-list-padding: 2rem !default;
-$structured-list-text-transform: uppercase !default;
+$structured-list-text-transform: none !default;

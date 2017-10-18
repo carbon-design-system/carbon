@@ -1,4 +1,3 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import DatePicker from '../../src/components/date-picker/date-picker';
 import singleCalHTML from '../../src/components/date-picker/date-picker--single.html';
 import rangeCalHTML from '../../src/components/date-picker/date-picker--range.html';
