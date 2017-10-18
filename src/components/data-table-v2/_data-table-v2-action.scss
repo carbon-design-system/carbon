@@ -3,6 +3,15 @@
   padding-bottom: rem(8px);
   width: 100%;
   position: relative;
+
+  .bx--search-input {
+    position: relative;
+
+    &:focus {
+      box-shadow: inset 0px 0px 0px 1px $brand-01;
+      outline: 0;
+    }
+  }
 }
 
 .bx--toolbar-content {

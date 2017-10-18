@@ -70,6 +70,16 @@
     margin-right: 0;
   }
 
+  .bx--overflow-menu {
+    &:focus {
+      outline: 0;
+
+      .bx--overflow-menu__icon {
+        @include focus-outline;
+      }
+    }
+  }
+
   .bx--overflow-menu__icon {
     transform: rotate(90deg);
   }
