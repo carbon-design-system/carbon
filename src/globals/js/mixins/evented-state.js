@@ -14,9 +14,7 @@ export default function(ToMix) {
      * @private
      */
     _changeState() {
-      throw new Error(
-        '_changeState() should be overriden to perform actual change in state.'
-      );
+      throw new Error('_changeState() should be overriden to perform actual change in state.');
     }
 
     /**
@@ -29,16 +27,10 @@ export default function(ToMix) {
      */
     changeState(...args) {
       const state = typeof args[0] === 'string' ? args.shift() : undefined;
-      const detail =
-        Object(args[0]) === args[0] && typeof args[0] !== 'function'
-          ? args.shift()
-          : undefined;
+      const detail = Object(args[0]) === args[0] && typeof args[0] !== 'function' ? args.shift() : undefined;
       const callback = typeof args[0] === 'function' ? args.shift() : undefined;
 
-      if (
-        typeof this.shouldStateBeChanged === 'function' &&
-        !this.shouldStateBeChanged(state, detail)
-      ) {
+      if (typeof this.shouldStateBeChanged === 'function' && !this.shouldStateBeChanged(state, detail)) {
         if (callback) {
           callback(null, true);
         }
@@ -57,25 +49,18 @@ export default function(ToMix) {
         .map(item => item[0].toUpperCase() + item.substr(1))
         .join('');
 
-      console.log(`eventBefore${eventNameSuffix}`);
-
-      const eventStart = new CustomEvent(
-        this.options[`eventBefore${eventNameSuffix}`],
-        {
-          bubbles: true,
-          cancelable: true,
-          detail,
-        }
-      );
+      const eventStart = new CustomEvent(this.options[`eventBefore${eventNameSuffix}`], {
+        bubbles: true,
+        cancelable: true,
+        detail,
+      });
 
       const fireOnNode = (detail && detail.delegatorNode) || this.element;
       const canceled = !fireOnNode.dispatchEvent(eventStart);
 
       if (canceled) {
         if (callback) {
-          const error = new Error(
-            `Changing state (${JSON.stringify(data)}) has been canceled.`
-          );
+          const error = new Error(`Changing state (${JSON.stringify(data)}) has been canceled.`);
           error.canceled = true;
           callback(error);
         }

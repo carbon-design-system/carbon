@@ -80,6 +80,7 @@ tr.bx--expandable-row--hover-v2 {
 
     svg {
       @include focus-outline('border');
+      outline-offset: -0.5px; // safari fix
     }
   }
 }
@@ -89,6 +90,6 @@ tr.bx--expandable-row--hover-v2 {
   transform: rotate(0deg);
   transition: transform 200ms $bx--standard-easing;
   height: 16px;
-  width: auto;
+  width: 13px;
   padding: 2px;
 }

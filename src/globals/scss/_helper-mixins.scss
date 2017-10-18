@@ -73,6 +73,7 @@
   @include font-family;
   @include font-smoothing;
   @include letter-spacing;
+  display: inline-block;
   background: none;
   appearance: none;
   border: 0;

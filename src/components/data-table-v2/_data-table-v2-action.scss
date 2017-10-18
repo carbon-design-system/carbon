@@ -46,8 +46,9 @@
 }
 
 .bx--toolbar-action__icon {
-  height: auto;
-  width: rem(16px);
+  height: rem(16px);
+  width: auto;
+  max-width: 16px;
   fill: $ui-05;
 }
 
