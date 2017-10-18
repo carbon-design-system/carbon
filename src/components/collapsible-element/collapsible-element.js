@@ -34,7 +34,6 @@ class CollapsibleElement extends mixin(createComponent, eventedState) {
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
-    console.log('CollapsibleElement._changeState...');
     const element = this.element;
     const stateNode = this.options.stateNode || element;
     const expanded = state === 'expanded' || state === 'shown';
@@ -50,7 +49,7 @@ class CollapsibleElement extends mixin(createComponent, eventedState) {
       }
       element.style.height = '';
       element.style.transitionDuration = '';
-      callback('CollapsibleElement');
+      callback();
     };
 
     if (classExpanded) {

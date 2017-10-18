@@ -60,7 +60,6 @@ describe('Test floating menu', function() {
       menu = new FloatingMenu(element, {
         refNode,
         classShown: 'my-floating-menu-open',
-        transientClass: 'my-flaoting-menu-transient',
         classRefShown: 'my-floating-menu-trigger-open',
       });
       stubRAF = sinon.stub(window, 'requestAnimationFrame', callback => {
