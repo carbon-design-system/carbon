@@ -1,6 +1,6 @@
 .bx--table-toolbar {
   display: flex;
-  padding-bottom: 8px;
+  padding-bottom: rem(8px);
   width: 100%;
   position: relative;
 }
@@ -13,8 +13,8 @@
 .bx--toolbar-action {
   @include button-reset;
   cursor: pointer;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: rem(12px);
+  padding-right: rem(12px);
 
   &:hover {
     > .bx--toolbar-action__icon {
@@ -40,14 +40,14 @@
   }
 
   ~ .bx--btn {
-    margin-left: 12px;
-    margin-right: 2px;
+    margin-left: rem(12px);
+    margin-right: rem(2px);
   }
 }
 
 .bx--toolbar-action__icon {
   height: auto;
-  width: 16px;
+  width: rem(16px);
   fill: $ui-05;
 }
 
@@ -58,8 +58,8 @@
   opacity: 0;
   left: 0;
   top: 0;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: rem(24px);
+  padding-right: rem(24px);
   width: 100%;
   height: 100%;
   z-index: 99999;
@@ -73,17 +73,17 @@
   }
 
   .bx--btn {
-    color: #fff;
+    color: $ui-01;
   }
 
   .bx--btn__icon {
-    fill: #fff;
+    fill: $ui-01;
   }
 
   .bx--btn--ghost {
     &:hover,
     &:focus {
-      background-color: #fff;
+      background-color: $ui-01;
       color: $brand-01;
 
       .bx--btn__icon {
@@ -113,9 +113,9 @@
 .bx--action-icons {
   margin-left: auto;
   svg {
-    padding: 0 12px;
-    fill: #fff;
-    height: 16px;
+    padding: 0 rem(12px);
+    fill: $ui-01;
+    height: rem(16px);
     width: auto;
   }
 }
@@ -124,20 +124,27 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  color: #fff;
+  color: $ui-01;
 }
 
 .bx--batch-summary__para {
-  font-size: rem(14px);
-  margin-right: 24px;
+  @include typescale('zeta');
+  margin-right: rem(24px);
 }
 
 .bx--batch-summary__cancel {
   @include button-reset(auto);
-  font-size: rem(14px);
-  font-weight: 700;
-  color: #fff;
-  border-bottom: 1px solid #fff;
-  letter-spacing: 0;
+  @include typescale('zeta');
+  -webkit-font-smoothing: auto;
+  font-weight: 400;
+  color: $ui-01;
+  border-bottom: 1px solid $ui-01;
+  letter-spacing: 1;
   cursor: pointer;
+
+  &:hover,
+  &:focus {
+    letter-spacing: 0;
+    font-weight: 700;
+  }
 }

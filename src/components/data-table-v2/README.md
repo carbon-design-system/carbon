@@ -63,3 +63,12 @@ The update to tables splits out the `scss` files into multiple partial files wit
 | eventTrigger             | [data-event]                     | Data attribute for clickable events        |
 | eventParentContainer     | [data-parent-row]                | Data attribute for event container         |
 
+### FAQ
+
+**How do I sort the tables**
+The table component does not sort the table for you, rather it emits an event and toggles the sort UI. It is up to the user to re-render the table rows sorted; you can see this in action `here`.
+
+**How do I use the expandable rows**
+
+
+**How do I activate the batch actions pane**

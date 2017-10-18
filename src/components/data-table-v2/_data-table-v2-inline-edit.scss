@@ -43,10 +43,10 @@
 
 .bx--inline-edit-input--active {
   display: block;
-  margin-left: -12px;
+  margin-left: rem(-12px);
 
   input {
-    padding-left: 12px;
+    padding-left: rem(12px);
   }
 }
 
