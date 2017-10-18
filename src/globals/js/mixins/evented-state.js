@@ -66,7 +66,7 @@ export default function(ToMix) {
         }
       } else {
         const changeStateArgs = [state, detail].filter(Boolean);
-        this._changeState(...changeStateArgs, () => {
+        this._changeState(...changeStateArgs, (caller) => {
           fireOnNode.dispatchEvent(
             new CustomEvent(this.options[`eventAfter${eventNameSuffix}`], {
               bubbles: true,

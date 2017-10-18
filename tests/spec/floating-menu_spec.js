@@ -47,6 +47,7 @@ describe('Test floating menu', function() {
     let menu;
     let element;
     let refNode;
+    let stubRAF;
     const events = new EventManager();
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = HTML;
@@ -59,7 +60,11 @@ describe('Test floating menu', function() {
       menu = new FloatingMenu(element, {
         refNode,
         classShown: 'my-floating-menu-open',
+        transientClass: 'my-flaoting-menu-transient',
         classRefShown: 'my-floating-menu-trigger-open',
+      });
+      stubRAF = sinon.stub(window, 'requestAnimationFrame', callback => {
+        callback();
       });
     });
 
@@ -79,26 +84,13 @@ describe('Test floating menu', function() {
       expect(spy, 'floating-menu-beingshown event').not.have.been.called;
     });
 
-    // it('Should have show() method show menu', function() {
-    //   const spy = sinon.spy();
-    //   events.on(menu.element, 'floating-menu-shown', spy);
-    //   menu.show();
-    //   expect(element.classList.contains('my-floating-menu-open'), 'Menu state').to.be.true;
-    //   expect(refNode.classList.contains('my-floating-menu-trigger-open'), 'Trigger button state').to.be.true;
-    //   expect(spy, 'floating-menu-shown event').have.been.calledOnce;
-    // });
-
-    it('Should have show() method show menu', async function() {
+    it('Should have show() method show menu', function() {
       const spy = sinon.spy();
       events.on(menu.element, 'floating-menu-shown', spy);
       menu.show();
       expect(element.classList.contains('my-floating-menu-open'), 'Menu state').to.be.true;
       expect(refNode.classList.contains('my-floating-menu-trigger-open'), 'Trigger button state').to.be.true;
-      const e = await new Promise(resolve => {
-        events.on(menu.element, 'transitionend', resolve);
-        menu.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
-      });
-      expect(e.cancelable).to.be.false;
+      menu.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
       expect(spy, 'floating-menu-shown event').have.been.calledOnce;
     });
 
@@ -131,6 +123,7 @@ describe('Test floating menu', function() {
       const spy = sinon.spy();
       events.on(element, 'floating-menu-hidden', spy);
       menu.hide();
+      menu.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
       expect(element.classList.contains('my-floating-menu-open'), 'Menu state').to.be.false;
       expect(element.classList.contains('my-floating-menu-trigger-open'), 'Trigger button state').to.be.false;
       expect(spy, 'floating-menu-hidden event').to.be.called;
@@ -152,6 +145,7 @@ describe('Test floating menu', function() {
       const spy = sinon.spy();
       events.on(refNode, 'floating-menu-shown', spy);
       menu.changeState('shown', { delegatorNode: refNode });
+      menu.element.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
       expect(spy, 'floating-menu-shown event').have.been.calledOnce;
     });
 
@@ -177,6 +171,10 @@ describe('Test floating menu', function() {
           element.parentNode.removeChild(element);
         }
         element = null;
+      }
+      if (stubRAF) {
+        stubRAF.restore();
+        stubRAF = null;
       }
     });
   });

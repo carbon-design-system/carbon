@@ -58,7 +58,7 @@
     margin-top: 0.25rem;
     padding: 0.285rem 0 0.5rem;
     transition: 
-      height 0.5s ease-in-out
+      height $transition--expansion $bx--ease-in-out
     ;
     height:auto;
     opacity:1;
