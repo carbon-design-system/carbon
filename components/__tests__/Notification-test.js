@@ -111,6 +111,11 @@ describe('ToastNotification', () => {
       toast.setProps({ kind: 'success' });
       expect(toast.props().kind).toEqual('success');
     });
+
+    it('can render any node for the subtitle and caption', () => {
+      toast.setProps({ subtitle: <button />, caption: <button /> });
+      expect(toast.length).toEqual(1);
+    });
   });
   describe('events and state', () => {
     it('initial open state set to true', () => {
@@ -215,6 +220,11 @@ describe('InlineNotification', () => {
     it('sets a new kind when passed in via props', () => {
       inline.setProps({ kind: 'success' });
       expect(inline.props().kind).toEqual('success');
+    });
+
+    it('can render any node for the subtitle', () => {
+      inline.setProps({ subtitle: <button /> });
+      expect(inline.length).toEqual(1);
     });
   });
 

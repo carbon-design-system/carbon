@@ -4,6 +4,7 @@ import Notification, {
   ToastNotification,
   InlineNotification
 } from '../../components/Notification';
+import Link from '../../components/Link';
 
 const notificationProps = {
   toast: {
@@ -12,6 +13,7 @@ const notificationProps = {
     title: 'this is a title',
     subtitle: 'subtitle',
     caption: 'caption',
+    captionNode: <Link href="#">the caption can be any node</Link>,
     iconDescription: 'describes the close button',
     style: { minWidth: '30rem', marginBottom: '.5rem' }
   },
@@ -21,7 +23,8 @@ const notificationProps = {
     title: 'this is a title',
     subtitle: 'subtitle',
     iconDescription: 'describes the close button'
-  }
+  },
+  subtitleNode: <Link href="#">the subtitle can be any node</Link>,
 };
 
 storiesOf('Notifications', module)
@@ -48,13 +51,18 @@ storiesOf('Notifications', module)
     `
   ...
   `,
-    () =>
-      <div>
-        <ToastNotification {...notificationProps.toast} kind="error" />
-        <ToastNotification {...notificationProps.toast} kind="info" />
-        <ToastNotification {...notificationProps.toast} kind="success" />
-        <ToastNotification {...notificationProps.toast} kind="warning" />
-      </div>
+    () => {
+      const { toast } = notificationProps;
+      return (
+        <div>
+          <ToastNotification {...toast} kind="error" />
+          <ToastNotification {...toast} kind="info" />
+          <ToastNotification {...toast} kind="success" />
+          <ToastNotification {...toast} kind="warning" />
+          <ToastNotification {...{ ...toast, subtitle: notificationProps.subtitleNode, caption: toast.captionNode}} kind="info" />
+        </div>
+      )
+    }
   )
   .addWithInfo(
     'inline',
@@ -67,5 +75,6 @@ storiesOf('Notifications', module)
         <InlineNotification {...notificationProps.inline} kind="info" />
         <InlineNotification {...notificationProps.inline} kind="success" />
         <InlineNotification {...notificationProps.inline} kind="warning" />
+        <InlineNotification {...{ ...notificationProps.inline, subtitle: notificationProps.subtitleNode}} kind="info" />
       </div>
   );

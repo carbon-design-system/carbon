@@ -59,8 +59,8 @@ class NotificationButton extends Component {
 class NotificationTextDetails extends Component {
   static propTypes = {
     title: PropTypes.string,
-    subtitle: PropTypes.string,
-    caption: PropTypes.string,
+    subtitle: PropTypes.node,
+    caption: PropTypes.node,
     notificationType: PropTypes.oneOf(['toast', 'inline']),
   };
 
@@ -78,8 +78,8 @@ class NotificationTextDetails extends Component {
       return (
         <div {...other} className="bx--toast-notification__details">
           <h3 className="bx--toast-notification__title">{title}</h3>
-          <p className="bx--toast-notification__subtitle">{subtitle}</p>
-          <p className="bx--toast-notification__caption">{caption}</p>
+          <div className="bx--toast-notification__subtitle">{subtitle}</div>
+          <div className="bx--toast-notification__caption">{caption}</div>
         </div>
       );
     }
@@ -88,7 +88,7 @@ class NotificationTextDetails extends Component {
       return (
         <div {...other} className="bx--inline-notification__text-wrapper">
           <p className="bx--inline-notification__title">{title}</p>
-          <p className="bx--inline-notification__subtitle">{subtitle}</p>
+          <div className="bx--inline-notification__subtitle">{subtitle}</div>
         </div>
       );
     }
@@ -101,9 +101,9 @@ class ToastNotification extends Component {
     className: PropTypes.string,
     kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
     title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
+    subtitle: PropTypes.node.isRequired,
     role: PropTypes.string.isRequired,
-    caption: PropTypes.string,
+    caption: PropTypes.node,
     onCloseButtonClick: PropTypes.func,
     iconDescription: PropTypes.string.isRequired,
     notificationType: PropTypes.string,
@@ -182,7 +182,7 @@ class InlineNotification extends Component {
     className: PropTypes.string,
     kind: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
     title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
+    subtitle: PropTypes.node.isRequired,
     role: PropTypes.string.isRequired,
     onCloseButtonClick: PropTypes.func,
     iconDescription: PropTypes.string.isRequired,
