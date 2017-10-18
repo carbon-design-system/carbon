@@ -135,10 +135,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     if (toggleOn) {
       this.batchActionEl.dataset.active = true;
-      this.batchActionEl.classList.add('bx--batch-actions--active');
+      this.batchActionEl.classList.add(this.options.classActionBarActive);
     } else {
       this.batchActionEl.dataset.active = false;
-      this.batchActionEl.classList.remove('bx--batch-actions--active');
+      this.batchActionEl.classList.remove(this.options.classActionBarActive);
     }
 
     this.batchActionEl.addEventListener('transitionend', transition);
@@ -259,6 +259,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     classExpandableRowHover: 'bx--expandable-row--hover-v2',
     classTableSortAscending: 'bx--table-sort-v2--ascending',
     classTableSortActive: 'bx--table-sort-v2--active',
+    classActionBarActive: 'bx--batch-actions--active',
     eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
     eventAfterExpand: 'data-table-v2-aftertoggleexpand',
     eventBeforeSort: 'data-table-v2-beforetogglesort',

@@ -99,7 +99,7 @@
     }
 
     &:last-of-type {
-      border-right-color: 1px solid $ui-04;
+      border-right-color: $ui-04;
     }
   }
 }

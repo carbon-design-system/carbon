@@ -64,7 +64,7 @@
   height: 100%;
   z-index: 99999;
   background-color: transparent;
-  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1), background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
+  transition: opacity 200ms $bx--standard-easing, background-color 200ms $bx--standard-easing;
   pointer-events: none;
   visibility: hidden;
 
