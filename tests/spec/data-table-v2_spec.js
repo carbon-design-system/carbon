@@ -74,11 +74,7 @@ describe('Dropdown', function() {
     it('Should emit an event on row expansion click', function() {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       const spyToggleRowExpandEvent = sinon.spy();
-      events.on(
-        element.ownerDocument.body,
-        'data-table-v2-aftertoggleexpand',
-        spyToggleRowExpandEvent
-      );
+      events.on(element.ownerDocument.body, 'data-table-v2-aftertoggleexpand', spyToggleRowExpandEvent);
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyToggleRowExpandEvent).to.have.been.called;
     });
@@ -117,18 +113,13 @@ describe('Dropdown', function() {
     it('Should toggle the class on click', function() {
       const firstSort = document.querySelector('[data-event="sort"');
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).to.be
-        .true;
+      expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).to.be.true;
     });
 
     it('Should emit an event on sort click', function() {
       const firstSort = document.querySelector('[data-event="sort"');
       const spyToggleSortEvent = sinon.spy();
-      events.on(
-        element.ownerDocument.body,
-        'data-table-v2-aftertogglesort',
-        spyToggleSortEvent
-      );
+      events.on(element.ownerDocument.body, 'data-table-v2-aftertogglesort', spyToggleSortEvent);
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyToggleSortEvent).to.have.been.called;
     });
@@ -162,8 +153,7 @@ describe('Dropdown', function() {
       firstSelect.click();
 
       const batchActions = document.querySelector('.bx--batch-actions');
-      expect(batchActions.classList.contains('bx--batch-actions--active')).to.be
-        .true;
+      expect(batchActions.classList.contains('bx--batch-actions--active')).to.be.true;
     });
 
     // it('Should close the action bar on a cancel click', function() {});
@@ -173,8 +163,7 @@ describe('Dropdown', function() {
       firstSelect.click();
 
       const batchActions = document.querySelector('.bx--batch-actions');
-      expect(batchActions.classList.contains('bx--batch-actions--active')).to.be
-        .false;
+      expect(batchActions.classList.contains('bx--batch-actions--active')).to.be.false;
     });
 
     // it('Should close the action bar on ESC key', function() {});
@@ -184,8 +173,7 @@ describe('Dropdown', function() {
       firstSelect.click();
 
       const batchActions = document.querySelector('.bx--batch-actions');
-      expect(batchActions.classList.contains('bx--batch-actions--active')).to.be
-        .true;
+      expect(batchActions.classList.contains('bx--batch-actions--active')).to.be.true;
     });
 
     afterEach(function() {
