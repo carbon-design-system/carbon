@@ -54,7 +54,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.element.addEventListener('keydown', this._keydownHandler);
 
     this.state = {
-      checkboxCount: 0
+      checkboxCount: 0,
     };
   }
 
@@ -64,8 +64,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.tableHeaders.forEach(header => {
       const sortEl = header.querySelector('.bx--table-sort-v2');
 
-      if ((sortEl !== null) & (sortEl !== element)) {
-        // eslint-disable-line
+      if (sortEl !== null && sortEl !== element) {
         sortEl.classList.remove(this.options.classTableSortActive);
         sortEl.classList.remove(this.options.classTableSortAscending);
       }
@@ -190,7 +189,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       element,
       label,
       previousValue,
-      initialEvt
+      initialEvt,
     });
   };
 
@@ -238,7 +237,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     sort: '_sortToggle',
     select: '_selectToggle',
     'select-all': '_selectAllToggle',
-    'action-bar-cancel': '_actionBarCancel'
+    'action-bar-cancel': '_actionBarCancel',
   };
 
   static options = {
@@ -264,7 +263,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     eventBeforeSort: 'data-table-v2-beforetogglesort',
     eventAfterSort: 'data-table-v2-aftertogglesort',
     eventTrigger: '[data-event]',
-    eventParentContainer: '[data-parent-row]'
+    eventParentContainer: '[data-parent-row]',
   };
 }
 

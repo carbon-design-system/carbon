@@ -75,7 +75,7 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
       element,
       label,
       previousValue,
-      initialEvt
+      initialEvt,
     });
   };
 
@@ -195,7 +195,7 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   static eventHandlers = {
     expand: '_toggleRowExpand',
     sort: '_toggleSort',
-    'select-all': '_toggleSelectAll'
+    'select-all': '_toggleSelectAll',
   };
 
   static options = {
@@ -217,7 +217,7 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     eventBeforeSelectAll: 'responsive-table-beforetoggleselectall',
     eventAfterSelectAll: 'responsive-table-aftertoggleselectall',
     eventTrigger: '[data-event]',
-    eventParentContainer: '[data-parent-row]'
+    eventParentContainer: '[data-parent-row]',
   };
 }
 
