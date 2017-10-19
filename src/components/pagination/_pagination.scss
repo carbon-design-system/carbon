@@ -9,6 +9,10 @@ $css--helpers: true;
 @import '../text-input/text-input';
 
 @include exports('pagination') {
+  .bx--data-table-v2-container + .bx--pagination {
+    border-top: 0;
+  }
+
   .bx--pagination {
     @include reset;
     @include font-family;
