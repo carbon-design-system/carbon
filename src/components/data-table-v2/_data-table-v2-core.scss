@@ -70,9 +70,20 @@
     margin-right: 0;
   }
 
+  .bx--table-overflow {
+    &:hover {
+      .bx--overflow-menu {
+        opacity: 1;
+      }
+    }
+  }
+
   .bx--overflow-menu {
+    opacity: 0;
+
     &:focus {
       outline: 0;
+      opacity: 1;
 
       .bx--overflow-menu__icon {
         box-shadow: inset 0px 0px 0px 1px $brand-01;
