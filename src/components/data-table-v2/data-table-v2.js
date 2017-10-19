@@ -4,7 +4,11 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import eventedState from '../../globals/js/mixins/evented-state';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedState) {
+class DataTableV2 extends mixin(
+  createComponent,
+  initComponentBySearch,
+  eventedState
+) {
   /**
    * Data Table
    * @extends CreateComponent
@@ -25,9 +29,13 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     this.container = element.parentNode;
     this.toolbarEl = this.element.querySelector(this.options.selectorToolbar);
-    this.batchActionEl = this.element.querySelector(this.options.selectorActions);
+    this.batchActionEl = this.element.querySelector(
+      this.options.selectorActions
+    );
     this.countEl = this.element.querySelector(this.options.selectorCount);
-    this.cancelEl = this.element.querySelector(this.options.selectorActionCancel);
+    this.cancelEl = this.element.querySelector(
+      this.options.selectorActionCancel
+    );
     this.tableHeaders = this.element.querySelectorAll('th');
     this.tableBody = this.element.querySelector(this.options.selectorTableBody);
     this.expandCells = [];
@@ -64,7 +72,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.tableHeaders.forEach(header => {
       const sortEl = header.querySelector('.bx--table-sort-v2');
 
-      if ((sortEl !== null) & (sortEl !== element)) {
+      if ((sortEl !== null) & (sortEl !== element)) { // eslint-disable-line
         sortEl.classList.remove(this.options.classTableSortActive);
         sortEl.classList.remove(this.options.classTableSortAscending);
       }
@@ -96,7 +104,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   _selectAllToggle = detail => {
     const checked = detail.element.checked;
 
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+    const inputs = [
+      ...this.element.querySelectorAll(this.options.selectorCheckbox),
+    ];
 
     this.state.checkboxCount = checked ? inputs.length - 1 : 0;
 
@@ -109,7 +119,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   };
 
   _actionBarCancel = () => {
-    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+    const inputs = [
+      ...this.element.querySelectorAll(this.options.selectorCheckbox),
+    ];
 
     inputs.forEach(item => {
       item.checked = false;
@@ -153,13 +165,22 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   _rowExpandToggle = detail => {
     const element = detail.element;
-    const parent = eventMatches(detail.initialEvt, this.options.eventParentContainer);
+    const parent = eventMatches(
+      detail.initialEvt,
+      this.options.eventParentContainer
+    );
 
     const index = this.expandCells.indexOf(element);
-    if (element.dataset.previousValue === undefined || element.dataset.previousValue === 'expanded') {
+    if (
+      element.dataset.previousValue === undefined ||
+      element.dataset.previousValue === 'expanded'
+    ) {
       element.dataset.previousValue = 'collapsed';
       parent.classList.add(this.options.classExpandableRow);
-      this.tableBody.insertBefore(this.expandableRows[index], this.parentRows[index + 1]);
+      this.tableBody.insertBefore(
+        this.expandableRows[index],
+        this.parentRows[index + 1]
+      );
     } else {
       parent.classList.remove(this.options.classExpandableRow);
       this.tableBody.removeChild(parent.nextElementSibling);
@@ -167,11 +188,15 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     }
   };
 
-  _expandableHoverToggle = (element, flag) => {
-    element.previousElementSibling.classList.add(this.options.classExpandableRowHover);
+  _expandableHoverToggle = element => {
+    element.previousElementSibling.classList.add(
+      this.options.classExpandableRowHover
+    );
 
     const mouseout = () => {
-      element.previousElementSibling.classList.remove(this.options.classExpandableRowHover);
+      element.previousElementSibling.classList.remove(
+        this.options.classExpandableRowHover
+      );
       element.removeEventListener('mouseout', mouseout);
     };
 
@@ -205,26 +230,37 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   }
 
   refreshRows = () => {
-    const newExpandCells = [...this.element.querySelectorAll(this.options.selectorExpandCells)];
-    const newExpandableRows = [...this.element.querySelectorAll(this.options.selectorExpandableRows)];
-    const newParentRows = [...this.element.querySelectorAll(this.options.selectorParentRows)];
+    const newExpandCells = [
+      ...this.element.querySelectorAll(this.options.selectorExpandCells),
+    ];
+    const newExpandableRows = [
+      ...this.element.querySelectorAll(this.options.selectorExpandableRows),
+    ];
+    const newParentRows = [
+      ...this.element.querySelectorAll(this.options.selectorParentRows),
+    ];
 
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
-      const diffParentRows = newParentRows.filter(newRow => !this.parentRows.some(oldRow => oldRow === newRow));
+      const diffParentRows = newParentRows.filter(
+        newRow => !this.parentRows.some(oldRow => oldRow === newRow)
+      );
 
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
-        const diffExpandableRows = diffParentRows.map(newRow => newRow.nextElementSibling);
-        const mergedExpandableRows = [...this.expandableRows, ...diffExpandableRows];
+        const diffExpandableRows = diffParentRows.map(
+          newRow => newRow.nextElementSibling
+        );
+        const mergedExpandableRows = [
+          ...this.expandableRows,
+          ...diffExpandableRows,
+        ];
         this._expandableRowsInit(diffExpandableRows);
         this.expandableRows = mergedExpandableRows;
       }
-    } else {
-      if (newExpandableRows.length > 0) {
-        this._expandableRowsInit(newExpandableRows);
-        this.expandableRows = newExpandableRows;
-      }
+    } else if (newExpandableRows.length > 0) {
+      this._expandableRowsInit(newExpandableRows);
+      this.expandableRows = newExpandableRows;
     }
 
     this.expandCells = newExpandCells;
