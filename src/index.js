@@ -19,6 +19,7 @@ import Dropdown from './components/dropdown/dropdown';
 import Card from './components/card/card';
 import NumberInput from './components/number-input/number-input';
 import DataTable from './components/data-table/data-table';
+import DataTableV2 from './components/data-table-v2/data-table-v2';
 import DatePicker from './components/date-picker/date-picker';
 import DetailPageHeader from './components/detail-page-header/detail-page-header';
 import LeftNav from './components/unified-header/left-nav';
@@ -132,6 +133,11 @@ export {
    */
   DataTable,
   /**
+   *  DataTableV2
+   *  @type DataTableV2
+   */
+  DataTableV2,
+  /**
    * Detail page header.
    * @type DetailPageHeader
    */
@@ -238,6 +244,7 @@ export const componentClasses = [
   Card,
   NumberInput,
   DataTable,
+  DataTableV2,
   DetailPageHeader,
   LeftNav,
   InteriorLeftNav,

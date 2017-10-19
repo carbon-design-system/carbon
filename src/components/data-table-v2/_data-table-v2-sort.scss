@@ -1,0 +1,55 @@
+.bx--table-sort-v2--ascending {
+  .bx--table-sort-v2__icon {
+    transform: rotate(180deg);
+    transition: transform 200ms $bx--standard-easing;
+  }
+}
+
+.bx--table-sort-v2--active {
+  .bx--table-sort-v2__icon {
+    opacity: 1;
+  }
+}
+
+.bx--data-table-v2 th {
+  &:hover {
+    .bx--table-sort-v2__icon {
+      opacity: 1;
+    }
+  }
+}
+
+.bx--table-sort-v2 {
+  @include button-reset(false);
+  position: relative;
+  left: 2px;
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &:focus {
+    outline: 0;
+
+    svg {
+      opacity: 1;
+      outline: 1px solid $brand-01;
+      fill: $brand-01;
+      outline-offset: -0.5px; // safari fix
+    }
+  }
+}
+
+.bx--table-sort-v2__icon {
+  position: relative;
+  left: 2px;
+  transition: transform 200ms $bx--standard-easing;
+  transform: rotate(0);
+  opacity: 0;
+  fill: $ui-05;
+  height: rem(9px);
+  padding: 2px;
+  width: auto;
+  max-width: 14px;
+}

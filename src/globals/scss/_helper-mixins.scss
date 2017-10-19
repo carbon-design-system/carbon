@@ -73,12 +73,19 @@
   @include font-family;
   @include font-smoothing;
   @include letter-spacing;
+  display: inline-block;
   background: none;
   appearance: none;
   border: 0;
+  padding: 0;
+  cursor: pointer;
 
   @if ($width == true) {
     width: 100%;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
   }
 }
 

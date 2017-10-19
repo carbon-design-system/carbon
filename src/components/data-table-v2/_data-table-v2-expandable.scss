@@ -1,0 +1,95 @@
+tr.bx--expandable-row-v2 {
+  // hide on init
+  &.bx--expandable-row--hidden-v2 {
+    display: none;
+  }
+
+  td {
+    background-color: $ui-01;
+  }
+
+  > td:first-of-type {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 2px;
+      background-color: $brand-01;
+    }
+  }
+
+  + tr[data-child-row] {
+    td {
+      border-top: 0;
+      padding-bottom: rem(8px);
+    }
+  }
+
+  &:hover {
+    > td {
+      background-color: rgba($brand-02, 0.1);
+    }
+
+    > td:first-of-type {
+      border-left: 1px solid transparent;
+    }
+
+    > td:last-of-type {
+      border-right: 1px solid $brand-01;
+    }
+
+    &[data-parent-row] > td {
+      border-bottom: 0;
+    }
+
+    + tr[data-child-row] {
+      > td {
+        background-color: rgba($brand-02, 0.1);
+        border-bottom: 1px solid $brand-01;
+        border-right: 1px solid $brand-01;
+      }
+    }
+  }
+}
+
+tr.bx--expandable-row--hover-v2 {
+  > td {
+    background-color: rgba($brand-02, 0.1);
+    border-top: 1px solid $brand-01;
+  }
+
+  > td:last-of-type {
+    border-right: 1px solid $brand-01;
+  }
+}
+
+.bx--table-expand-v2[data-previous-value='collapsed'] .bx--table-expand-v2__svg {
+  transform: rotate(90deg);
+  transition: transform 200ms $bx--standard-easing;
+}
+
+.bx--table-expand-v2__button {
+  @include button-reset(false);
+
+  &:focus {
+    outline: 1px solid transparent;
+
+    svg {
+      box-shadow: inset 0px 0px 0px 1px $brand-01;
+    }
+  }
+}
+
+.bx--table-expand-v2__svg {
+  fill: $ui-05;
+  transform: rotate(0deg);
+  transition: transform 200ms $bx--standard-easing;
+  height: 16px;
+  width: auto;
+  max-width: 16px;
+  padding: 2px;
+}

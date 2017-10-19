@@ -1,0 +1,65 @@
+.bx--inline-edit-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    .bx--inline-edit-label__icon {
+      opacity: 1;
+    }
+  }
+}
+
+.bx--inline-edit-label--inactive {
+  display: none;
+}
+
+.bx--inline-edit-label__action {
+  @include button-reset(false);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    @include focus-outline;
+    padding: 2px;
+
+    .bx--inline-edit-label__icon {
+      width: auto;
+      opacity: 1;
+    }
+  }
+}
+
+.bx--inline-edit-label__icon {
+  fill: $ui-05;
+  opacity: 0;
+}
+
+.bx--inline-edit-input {
+  display: none;
+}
+
+.bx--inline-edit-input--active {
+  display: block;
+  margin-left: rem(-12px);
+
+  input {
+    padding-left: rem(12px);
+  }
+}
+
+.bx--data-table-v2--short {
+  input {
+    height: rem(32px);
+  }
+
+  select {
+    padding: 0.45rem 2.75rem 0.45rem 1rem;
+  }
+
+  .bx--select__arrow {
+    top: 0.875rem;
+  }
+}

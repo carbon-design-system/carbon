@@ -9,6 +9,10 @@ $css--helpers: true;
 @import '../text-input/text-input';
 
 @include exports('pagination') {
+  .bx--data-table-v2-container + .bx--pagination {
+    border-top: 0;
+  }
+
   .bx--pagination {
     @include reset;
     @include font-family;
@@ -84,6 +88,11 @@ $css--helpers: true;
       margin-right: rem(10px);
     }
 
+    .bx--select--inline {
+      margin-right: 0;
+      width: rem(48px);
+    }
+
     .bx--select-input {
       height: rem(24px);
       width: rem(54px);
@@ -113,6 +122,43 @@ $css--helpers: true;
       &:focus {
         @include focus-outline('border');
       }
+    }
+  }
+
+  .bx--pagination--inline {
+    height: 42px;
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+    margin-right: -1rem;
+
+    .bx--pagination__button {
+      height: 100%;
+      border-left: 1px solid $ui-04;
+      border-right: 1px solid $ui-04;
+      padding-left: 0.9rem;
+      padding-right: 0.9rem;
+      margin: 0;
+    }
+
+    .bx--pagination__button--forward {
+      border-right: 0;
+    }
+
+    .bx--pagination__button--backward {
+      margin-left: 1rem;
+    }
+
+    .bx--select--inline {
+      position: relative;
+      top: -1.5px;
+    }
+
+    .bx--select-input {
+      padding-left: 0.9rem;
+    }
+
+    .bx--select__arrow {
+      right: 0.7rem;
     }
   }
 }

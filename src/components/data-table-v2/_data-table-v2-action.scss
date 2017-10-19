@@ -1,0 +1,160 @@
+.bx--table-toolbar {
+  display: flex;
+  padding-bottom: rem(8px);
+  width: 100%;
+  position: relative;
+
+  .bx--search-input {
+    position: relative;
+
+    &:focus {
+      box-shadow: inset 0px 0px 0px 1px $brand-01;
+      outline: 0;
+    }
+  }
+}
+
+.bx--toolbar-content {
+  display: flex;
+  margin-left: auto;
+}
+
+.bx--toolbar-action {
+  @include button-reset;
+  cursor: pointer;
+  padding-left: rem(12px);
+  padding-right: rem(12px);
+
+  &:hover {
+    > .bx--toolbar-action__icon {
+      fill: $brand-01;
+    }
+  }
+
+  &:focus {
+    @include focus-outline;
+    > .bx--toolbar-action__icon {
+      fill: $brand-01;
+    }
+  }
+
+  &:active {
+    > .bx--toolbar-action__icon {
+      fill: darken($brand-01, 5%);
+    }
+  }
+
+  &:last-of-type {
+    padding-right: 0;
+  }
+
+  ~ .bx--btn {
+    margin-left: rem(12px);
+    margin-right: rem(2px);
+  }
+}
+
+.bx--toolbar-action__icon {
+  height: rem(16px);
+  width: auto;
+  max-width: 16px;
+  fill: $ui-05;
+}
+
+.bx--batch-actions {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  padding-left: rem(24px);
+  padding-right: rem(24px);
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background-color: transparent;
+  transition: opacity 200ms $bx--standard-easing, background-color 200ms $bx--standard-easing;
+  pointer-events: none;
+  visibility: hidden;
+
+  &:focus {
+    @include focus-outline;
+  }
+
+  .bx--btn {
+    color: $ui-01;
+  }
+
+  .bx--btn__icon {
+    fill: $ui-01;
+  }
+
+  .bx--btn--ghost {
+    &:hover,
+    &:focus {
+      background-color: $ui-01;
+      color: $brand-01;
+
+      .bx--btn__icon {
+        fill: $brand-01;
+      }
+    }
+
+    &:focus {
+      border: 2px solid $brand-01;
+      outline: 2px solid $ui-02;
+    }
+  }
+}
+
+.bx--batch-actions--active {
+  visibility: visible;
+  background-color: $brand-01;
+  pointer-events: all;
+  transition: opacity 200ms cubic-bezier(0.5, 0, 0.1, 1), background-color 200ms cubic-bezier(0.5, 0, 0.1, 1);
+  opacity: 1;
+}
+
+.bx--action-list {
+  margin-left: -0.5rem;
+}
+
+.bx--action-icons {
+  margin-left: auto;
+  svg {
+    padding: 0 rem(12px);
+    fill: $ui-01;
+    height: rem(16px);
+    width: auto;
+  }
+}
+
+.bx--batch-summary {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: $ui-01;
+}
+
+.bx--batch-summary__para {
+  @include typescale('zeta');
+  margin-right: rem(24px);
+}
+
+.bx--batch-summary__cancel {
+  @include button-reset(auto);
+  @include typescale('zeta');
+  -webkit-font-smoothing: auto;
+  font-weight: 400;
+  color: $ui-01;
+  border-bottom: 1px solid $ui-01;
+  letter-spacing: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+}

@@ -58,10 +58,10 @@
     "del": "~2.0.2",
     "eslint": "^3.0.0",
     "eslint-config-airbnb-base": "^11.0.0",
-    "eslint-config-carbon-base": "^1.0.0",
-    "eslint-config-prettier": "^2.3.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-prettier": "^2.2.0",
+    "eslint-config-carbon-base": "^1.0.1",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.3.1",
     "express": "4.13.4",
     "globby": "4.0.0",
     "gulp": "~3.9.0",
@@ -135,8 +135,7 @@
     "test": "gulp test",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
-    "semantic-release":
-      "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "license": "Apache-2",
   "config": {
