@@ -87,7 +87,6 @@
     "karma-mocha-reporter": "~1.1.5",
     "karma-rollup-preprocessor": "^5.0.0",
     "karma-safari-launcher": "^1.0.0",
-    "karma-sauce-launcher": "^1.1.0",
     "karma-sinon-chai": "^1.1.0",
     "karma-sourcemap-loader": "~0.3.7",
     "lolex": "1.4.0",
@@ -113,15 +112,7 @@
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0"
   },
-  "files": [
-    "css/**/*",
-    "es/**/*",
-    "html/**/*",
-    "scripts/**/*",
-    "scss/**/*",
-    "src/**/*",
-    "umd/**/*"
-  ],
+  "files": ["css/**/*", "es/**/*", "html/**/*", "scripts/**/*", "scss/**/*", "src/**/*", "umd/**/*"],
   "scripts": {
     "build": "gulp build",
     "build-dev": "gulp build:dev",
@@ -146,17 +137,7 @@
       "maxSubjectLength": 100,
       "subjectPattern": ".+",
       "subjectPatternErrorMsg": "Subject does not match subject pattern!",
-      "types": [
-        "chore",
-        "docs",
-        "feat",
-        "fix",
-        "perf",
-        "refactor",
-        "revert",
-        "style",
-        "test"
-      ],
+      "types": ["chore", "docs", "feat", "fix", "perf", "refactor", "revert", "style", "test"],
       "warnOnFail": false
     }
   },
