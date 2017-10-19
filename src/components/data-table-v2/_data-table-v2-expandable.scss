@@ -79,8 +79,7 @@ tr.bx--expandable-row--hover-v2 {
     outline: 1px solid transparent;
 
     svg {
-      @include focus-outline('border');
-      outline-offset: -0.5px; // safari fix
+      box-shadow: inset 0px 0px 0px 1px $brand-01;
     }
   }
 }

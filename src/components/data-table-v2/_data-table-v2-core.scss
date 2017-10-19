@@ -75,7 +75,7 @@
       outline: 0;
 
       .bx--overflow-menu__icon {
-        @include focus-outline;
+        box-shadow: inset 0px 0px 0px 1px $brand-01;
       }
     }
   }
