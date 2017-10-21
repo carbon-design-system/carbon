@@ -120,7 +120,9 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
       if (!collapsed) {
         this.element.dataset.collapsed = true;
         this.element.classList.add(this.options.classLeftNavCollapsing);
-        svgTitle.textContent = this.options.expandTitle;
+        if (svgTitle) {
+          svgTitle.textContent = this.options.expandTitle;
+        }
         window.setTimeout(() => {
           this.element.classList.remove(this.options.classLeftNavCollapsing);
           this.element.classList.add(this.options.classLeftNavCollapsed);
@@ -136,7 +138,9 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
         this.element.dataset.collapsed = false;
         this.element.classList.remove(this.options.classLeftNavCollapsed);
         this.element.classList.add(this.options.classLeftNavExpanding);
-        svgTitle.textContent = this.options.collapsePane;
+        if (svgTitle) {
+          svgTitle.textContent = this.options.collapsePane;
+        }
         window.setTimeout(() => {
           this.element.classList.remove(this.options.classLeftNavExpanding);
           this.element.dispatchEvent(
