@@ -97,9 +97,9 @@
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {
-    "@storybook/addon-centered": "3.0.0",
-    "@storybook/addon-info": "^3.0.0",
-    "@storybook/react": "^3.0.0",
+    "@storybook/addon-centered": "3.2.13",
+    "@storybook/addon-info": "^3.2.13",
+    "@storybook/react": "^3.2.13",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^18.0.0",
