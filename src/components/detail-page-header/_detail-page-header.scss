@@ -13,233 +13,239 @@
 @import 'mixins';
 
 @include exports('detail-page-header') {
-  .bx--detail-page-header--no-tabs {
-    @include detail-page-header;
-    max-height: rem(66px);
-    height: rem(66px);
-    left: rem(200px);
-    background-color: $ui-02;
-    width: calc(100% - 200px);
-    padding: 0.875rem 3%;
+  @include deprecate(
+    'Accessing the `detail-page-header` component from the ' +
+      '`carbon-components` package is deprecated. Use the ' +
+      '`carbon-addons-bluemix` package instead.'
+  ) {
+    .bx--detail-page-header--no-tabs {
+      @include detail-page-header;
+      max-height: rem(66px);
+      height: rem(66px);
+      left: rem(200px);
+      background-color: $ui-02;
+      width: calc(100% - 200px);
+      padding: 0.875rem 3%;
 
-    @include breakpoint(bp--sm--major) {
-      padding: 0.75rem 5%;
-      height: rem(88px);
-      max-height: rem(88px);
+      @include breakpoint(bp--sm--major) {
+        padding: 0.75rem 5%;
+        height: rem(88px);
+        max-height: rem(88px);
+      }
     }
-  }
 
-  .bx--detail-page-header--with-tabs {
-    @include detail-page-header;
-    min-height: rem(66px);
-    background-color: $ui-01;
-    padding: 0.75rem 3% 0;
-    left: 0;
-    width: 100%;
+    .bx--detail-page-header--with-tabs {
+      @include detail-page-header;
+      min-height: rem(66px);
+      background-color: $ui-01;
+      padding: 0.75rem 3% 0;
+      left: 0;
+      width: 100%;
 
-    @include breakpoint(bp--sm--major) {
-      padding: 0.75rem 5% 0;
-      height: rem(124px);
+      @include breakpoint(bp--sm--major) {
+        padding: 0.75rem 5% 0;
+        height: rem(124px);
+      }
     }
-  }
 
-  .bx--detail-page-header .bx--breadcrumb {
-    display: none;
-    transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
-      visibility $transition--base $bx--standard-easing $transition-time / 2, transform $transition--base $bx--standard-easing 0s;
-    will-change: opacity, visibility, transform;
+    .bx--detail-page-header .bx--breadcrumb {
+      display: none;
+      transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
+        visibility $transition--base $bx--standard-easing $transition-time / 2, transform $transition--base $bx--standard-easing 0s;
+      will-change: opacity, visibility, transform;
 
-    @include breakpoint(bp--sm--major) {
+      @include breakpoint(bp--sm--major) {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+    }
+
+    .bx--detail-page-header--no-tabs .bx--breadcrumb {
+      margin-bottom: 0.75rem;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .bx--detail-page-header-title-container {
       display: flex;
-      flex-wrap: nowrap;
+      align-items: center;
+      min-height: rem(36px);
+      height: rem(36px);
+      transition: transform $transition-time $bx--standard-easing 0s;
+
+      @include breakpoint(bp--sm--major) {
+        padding-bottom: 0;
+      }
     }
-  }
 
-  .bx--detail-page-header--no-tabs .bx--breadcrumb {
-    margin-bottom: 0.75rem;
-    transform: translate3d(0, 0, 0);
-  }
+    .bx--detail-page-header--with-tabs .bx--detail-page-header-title-container {
+      margin-top: rem(3px);
 
-  .bx--detail-page-header-title-container {
-    display: flex;
-    align-items: center;
-    min-height: rem(36px);
-    height: rem(36px);
-    transition: transform $transition-time $bx--standard-easing 0s;
+      @include breakpoint(bp--sm--major) {
+        margin-top: 0.5rem;
+      }
+    }
 
-    @include breakpoint(bp--sm--major) {
+    .bx--detail-page-header--no-tabs .bx--detail-page-header-title-container {
       padding-bottom: 0;
     }
-  }
 
-  .bx--detail-page-header--with-tabs .bx--detail-page-header-title-container {
-    margin-top: rem(3px);
+    .bx--detail-page-header-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
 
-    @include breakpoint(bp--sm--major) {
-      margin-top: 0.5rem;
+      @include breakpoint(bp--sm--major) {
+        justify-content: space-between;
+      }
     }
-  }
 
-  .bx--detail-page-header--no-tabs .bx--detail-page-header-title-container {
-    padding-bottom: 0;
-  }
-
-  .bx--detail-page-header-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    @include breakpoint(bp--sm--major) {
-      justify-content: space-between;
-    }
-  }
-
-  .bx--detail-page-header-icon-container {
-    @include reset;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 1px solid $ui-05;
-    height: rem(36px);
-    width: rem(36px);
-    margin-right: 0.625rem;
-  }
-
-  .bx--detail-page-header-title {
-    @include typescale('gamma');
-    font-weight: 300;
-    color: $text-02;
-
-    @include breakpoint(bp--sm--major) {
-      @include typescale('beta');
-    }
-  }
-
-  .bx--detail-page-header-status-container {
-    display: none;
-    margin-top: rem(8px);
-
-    @include breakpoint(bp--sm--major) {
-      display: inline-block;
-    }
-  }
-
-  .bx--detail-page-header-status-icon {
-    display: inline-block;
-    border-radius: 50%;
-    height: rem(12px);
-    width: rem(12px);
-    background-color: $support-02;
-    margin-left: 0.625rem;
-  }
-
-  .bx--detail-page-header-menu {
-    position: absolute;
-    right: 0.75rem;
-    display: flex;
-    align-items: flex-start;
-    transition: top $transition--base $bx--standard-easing 0s, transform $transition--base $bx--standard-easing 0s;
-    will-change: transform, top;
-
-    @include breakpoint(bp--sm--major) {
+    .bx--detail-page-header-icon-container {
+      @include reset;
+      display: inline-flex;
+      justify-content: center;
       align-items: center;
-      top: 50%;
-      transform: translate3d(0, -50%, 0);
+      border-radius: 50%;
+      border: 1px solid $ui-05;
+      height: rem(36px);
+      width: rem(36px);
+      margin-right: 0.625rem;
     }
-  }
 
-  .bx--detail-page-header .bx--tabs {
-    transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
-      visibility $transition--base $bx--standard-easing $transition-time / 2;
-    will-change: opacity, visibility, transform;
-  }
-
-  .bx--detail-page-header--with-tabs .bx--tabs {
-    padding: 0.75rem 0;
-    display: none;
-
-    @include breakpoint(bp--sm--major) {
-      display: block;
-      padding: 0;
-      min-height: rem(46px);
-    }
-  }
-
-  .bx--detail-page-header--with-tabs .bx--tabs__nav {
-    margin-left: 0;
-  }
-
-  .bx--detail-page-header--with-tabs .bx--tabs__nav-link {
-    white-space: nowrap;
-  }
-
-  // Scroll
-  .bx--detail-page-header--scroll {
-    .bx--breadcrumb,
-    .bx--tabs {
-      transition-delay: 0s;
+    .bx--detail-page-header-title {
+      @include typescale('gamma');
+      font-weight: 300;
+      color: $text-02;
 
       @include breakpoint(bp--sm--major) {
-        opacity: 0;
-        visibility: hidden;
+        @include typescale('beta');
       }
     }
-  }
 
-  // Scroll -- With Tabs
-  .bx--detail-page-header--scroll.bx--detail-page-header--with-tabs {
-    padding: 0.75rem 3% 0;
-    transition-delay: $transition-time / 2;
+    .bx--detail-page-header-status-container {
+      display: none;
+      margin-top: rem(8px);
 
-    @include breakpoint(bp--sm--major) {
-      padding: 0.75rem 5% 0;
-      transform: translate3d(0, -50%, 0);
+      @include breakpoint(bp--sm--major) {
+        display: inline-block;
+      }
     }
 
-    .bx--tabs {
-      display: block;
+    .bx--detail-page-header-status-icon {
+      display: inline-block;
+      border-radius: 50%;
+      height: rem(12px);
+      width: rem(12px);
+      background-color: $support-02;
+      margin-left: 0.625rem;
     }
 
     .bx--detail-page-header-menu {
+      position: absolute;
+      right: 0.75rem;
+      display: flex;
+      align-items: flex-start;
+      transition: top $transition--base $bx--standard-easing 0s, transform $transition--base $bx--standard-easing 0s;
+      will-change: transform, top;
+
+      @include breakpoint(bp--sm--major) {
+        align-items: center;
+        top: 50%;
+        transform: translate3d(0, -50%, 0);
+      }
+    }
+
+    .bx--detail-page-header .bx--tabs {
+      transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
+        visibility $transition--base $bx--standard-easing $transition-time / 2;
+      will-change: opacity, visibility, transform;
+    }
+
+    .bx--detail-page-header--with-tabs .bx--tabs {
+      padding: 0.75rem 0;
+      display: none;
+
+      @include breakpoint(bp--sm--major) {
+        display: block;
+        padding: 0;
+        min-height: rem(46px);
+      }
+    }
+
+    .bx--detail-page-header--with-tabs .bx--tabs__nav {
+      margin-left: 0;
+    }
+
+    .bx--detail-page-header--with-tabs .bx--tabs__nav-link {
+      white-space: nowrap;
+    }
+
+    // Scroll
+    .bx--detail-page-header--scroll {
+      .bx--breadcrumb,
+      .bx--tabs {
+        transition-delay: 0s;
+
+        @include breakpoint(bp--sm--major) {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
+
+    // Scroll -- With Tabs
+    .bx--detail-page-header--scroll.bx--detail-page-header--with-tabs {
+      padding: 0.75rem 3% 0;
       transition-delay: $transition-time / 2;
 
       @include breakpoint(bp--sm--major) {
-        top: 75%;
+        padding: 0.75rem 5% 0;
+        transform: translate3d(0, -50%, 0);
+      }
+
+      .bx--tabs {
+        display: block;
+      }
+
+      .bx--detail-page-header-menu {
+        transition-delay: $transition-time / 2;
+
+        @include breakpoint(bp--sm--major) {
+          top: 75%;
+        }
+      }
+
+      .bx--detail-page-header-title-container {
+        transition-delay: $transition-time / 2;
+        @include breakpoint(bp--sm--major) {
+          transform: translate3d(0, 100%, 0);
+        }
       }
     }
 
-    .bx--detail-page-header-title-container {
-      transition-delay: $transition-time / 2;
+    // Scroll -- No Tabs
+    .bx--detail-page-header--scroll.bx--detail-page-header--no-tabs {
       @include breakpoint(bp--sm--major) {
-        transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, rem(-22px), 0);
       }
-    }
-  }
 
-  // Scroll -- No Tabs
-  .bx--detail-page-header--scroll.bx--detail-page-header--no-tabs {
-    @include breakpoint(bp--sm--major) {
-      transform: translate3d(0, rem(-22px), 0);
-    }
-
-    .bx--breadcrumb {
-      transform: translate3d(0, -100%, 0);
-      transition-delay: 0s;
-      margin-bottom: 0;
-    }
-
-    .bx--detail-page-header-title-container {
-      padding: 0;
-
-      @include breakpoint(bp--sm--major) {
-        margin-bottom: rem(3px);
+      .bx--breadcrumb {
+        transform: translate3d(0, -100%, 0);
+        transition-delay: 0s;
+        margin-bottom: 0;
       }
-    }
 
-    .bx--detail-page-header-menu {
-      @include breakpoint(bp--sm--major) {
-        transform: translate3d(0, rem(-8px), 0);
+      .bx--detail-page-header-title-container {
+        padding: 0;
+
+        @include breakpoint(bp--sm--major) {
+          margin-bottom: rem(3px);
+        }
+      }
+
+      .bx--detail-page-header-menu {
+        @include breakpoint(bp--sm--major) {
+          transform: translate3d(0, rem(-8px), 0);
+        }
       }
     }
   }
