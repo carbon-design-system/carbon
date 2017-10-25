@@ -62,7 +62,6 @@ $typescale-map: (
   -moz-osx-font-smoothing: grayscale;
 }
 
-// Only applied to h1, h2, h3, bold weights and always to All Caps.
 @mixin letter-spacing {
   letter-spacing: 0.5px;
 }

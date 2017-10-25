@@ -26,7 +26,6 @@
     @include typescale('omega');
     @include reset;
     @include line-height('heading');
-    @include letter-spacing;
     font-weight: 600;
   }
 
@@ -76,7 +75,6 @@
     @include reset;
     @include typescale('alpha');
     @include line-height('heading');
-    @include letter-spacing;
     font-weight: 300;
   }
 
@@ -85,7 +83,6 @@
     @include reset;
     @include typescale('beta');
     @include line-height('heading');
-    @include letter-spacing;
     font-weight: 300;
   }
 
@@ -94,7 +91,6 @@
     @include reset;
     @include typescale('gamma');
     @include line-height('heading');
-    @include letter-spacing;
     font-weight: 300;
   }
 
