@@ -37,23 +37,39 @@
 
   .bx--overflow-menu-options {
     @include reset;
-    @include layer('overlay');
-    display: none;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
     z-index: 1;
-    background-color: $inverse-01;
-    border: 1px solid $ui-04;
     width: 11.25rem;
     list-style: none;
-    margin-top: 0.25rem;
-    padding: 0.285rem 0 0.5rem;
     left: -20px;
+    overflow:hidden;
+    height:0;
+    opacity:0;
   }
 
+  .bx--overflow-menu-options--transient,
   .bx--overflow-menu-options--open {
-    display: flex;
+    @include layer('overlay');
+    background-color: $inverse-01;
+    border: 1px solid $ui-04;
+    display: block;
+    margin-top: 0.25rem;
+    padding: 0.285rem 0 0.5rem;
+    transition: 
+      height $transition--expansion $bx--ease-in-out
+    ;
+    height:auto;
+    opacity:1;
+
+    .bx--overflow-menu-options__option{
+      opacity:1;
+    }
+  }
+
+  .bx--overflow-menu-options--open{
+    overflow:visible;
   }
 
   .bx--overflow-menu-options:before {
@@ -78,6 +94,33 @@
     align-items: center;
     width: 100%;
     padding: 0;
+    opacity:0;
+    transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 9;
+
+    &:nth-child(1) {
+      transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 1;
+    }
+    &:nth-child(2) {
+      transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 2;
+    }
+    &:nth-child(3) {
+      transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 3;
+    }
+    &:nth-child(4) {
+      transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 4;
+    }
+    &:nth-child(5) {
+      transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 5;
+    }
+    &:nth-child(6) {
+      transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 6;
+    }
+    &:nth-child(7) {
+      transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 7;
+    }
+    &:nth-child(8) {
+      transition: opacity $transition--fade $bx--ease-out $transition--delay-unit * 8;
+    }
   }
 
   .bx--overflow-menu--divider {

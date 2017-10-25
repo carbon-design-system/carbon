@@ -52,6 +52,8 @@ describe('Test Overflow menu', function() {
   describe('Custom event emission', function() {
     let menu;
     let element;
+    let stubRAF;
+    let menuOptionsEl;
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
@@ -60,7 +62,11 @@ describe('Test Overflow menu', function() {
     before(function() {
       document.body.appendChild(container);
       element = document.querySelector('.bx--overflow-menu');
+      menuOptionsEl = element.querySelector('.bx--overflow-menu-options');
       menu = new OverflowMenu(element);
+      stubRAF = sinon.stub(window, 'requestAnimationFrame', callback => {
+        callback();
+      });
     });
 
     it('Should provide a way to cancel showing overflow menu', function() {
@@ -76,8 +82,9 @@ describe('Test Overflow menu', function() {
 
     it('Should emit an event after showing', function() {
       const spyOverflowEvent = sinon.spy();
-      events.on(document, 'floating-menu-shown', spyOverflowEvent);
+      events.on(element, 'floating-menu-shown', spyOverflowEvent);
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      menuOptionsEl.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
       expect(spyOverflowEvent).to.have.been.called;
     });
 
@@ -98,6 +105,7 @@ describe('Test Overflow menu', function() {
       events.on(document, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      menuOptionsEl.dispatchEvent(new CustomEvent('transitionend', { bubbles: true }));
       expect(spyOverflowEvent).to.have.been.called;
     });
 
@@ -109,6 +117,10 @@ describe('Test Overflow menu', function() {
     after(function() {
       menu.release();
       document.body.removeChild(container);
+      if (stubRAF) {
+        stubRAF.restore();
+        stubRAF = null;
+      }
     });
   });
 
