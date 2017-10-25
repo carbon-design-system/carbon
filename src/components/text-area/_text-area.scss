@@ -20,6 +20,7 @@
     color: $text-01;
     background-color: $field-01;
     border: $input-border;
+    resize: vertical;
 
     &:focus {
       @include focus-outline('border');
