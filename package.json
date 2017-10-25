@@ -34,6 +34,7 @@
     "npm": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
+    "@ibm/motion": "^0.2.1",
     "carbon-icons": "^6.0.4",
     "flatpickr": "2.6.3",
     "lodash.debounce": "^4.0.8"
