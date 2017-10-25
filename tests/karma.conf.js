@@ -7,6 +7,7 @@ const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 const string = require('rollup-plugin-string');
+const replace = require('rollup-plugin-replace');
 
 function ensureArray(as) {
   return !as || Array.isArray(as) ? as : [as];
@@ -137,6 +138,9 @@ module.exports = function(config) {
                   ],
                 ]
           ),
+        }),
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('development'),
         }),
       ],
       format: 'iife',
