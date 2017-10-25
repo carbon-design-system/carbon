@@ -1,8 +1,11 @@
+import warning from 'warning';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
 import toggleClass from '../../globals/js/misc/svg-toggle-class';
+
+let didWarnAboutDeprecation = false;
 
 class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -19,6 +22,12 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     this.keepOpen = this.element.dataset.keepOpen === undefined ? this.options.keepOpen : Boolean(this.element.dataset.keepOpen);
 
     this.hookListItemsEvents();
+    warning(
+      didWarnAboutDeprecation,
+      'Accessing the `module` component from the `carbon-components` package ' +
+        'is deprecated. Use the `carbon-addons-bluemix` package instead.'
+    );
+    didWarnAboutDeprecation = true;
   }
 
   hookListItemsEvents = () => {

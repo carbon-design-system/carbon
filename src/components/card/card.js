@@ -4,7 +4,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
 
-// let didWarnAboutDeprecation = false;
+let didWarnAboutDeprecation = false;
 
 class Card extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -20,14 +20,12 @@ class Card extends mixin(createComponent, initComponentBySearch) {
     this.element.addEventListener('keydown', event => {
       this._cardKeyPress(event);
     });
-    // if (__DEV__) {
-      // warning(
-        // didWarnAboutDeprecation,
-        // 'Accessing the `card` component from the `carbon-components` package ' +
-          // 'is deprecated. Use the `carbon-addons-bluemix` package instead.'
-      // );
-      // didWarnAboutDeprecation = true;
-    // }
+    warning(
+      didWarnAboutDeprecation,
+      'Accessing the `card` component from the `carbon-components` package ' +
+        'is deprecated. Use the `carbon-addons-bluemix` package instead.'
+    );
+    didWarnAboutDeprecation = true;
   }
 
   /**

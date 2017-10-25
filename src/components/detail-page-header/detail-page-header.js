@@ -1,8 +1,11 @@
+import warning from 'warning';
 import debounce from 'lodash.debounce';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import on from '../../globals/js/misc/on';
+
+let didWarnAboutDeprecation = false;
 
 class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -19,6 +22,12 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
     // Debounce scroll event calls to handleScroll (default: 50)
     const debouncedScroll = debounce(this._handleScroll.bind(this), 25);
     this.hScroll = on(this.element.ownerDocument.defaultView, 'scroll', debouncedScroll);
+    warning(
+      didWarnAboutDeprecation,
+      'Accessing the `module` component from the `carbon-components` package ' +
+        'is deprecated. Use the `carbon-addons-bluemix` package instead.'
+    );
+    didWarnAboutDeprecation = true;
   }
 
   /**
