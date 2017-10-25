@@ -22,12 +22,15 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
     // Debounce scroll event calls to handleScroll (default: 50)
     const debouncedScroll = debounce(this._handleScroll.bind(this), 25);
     this.hScroll = on(this.element.ownerDocument.defaultView, 'scroll', debouncedScroll);
-    warning(
-      didWarnAboutDeprecation,
-      'Accessing the `module` component from the `carbon-components` package ' +
-        'is deprecated. Use the `carbon-addons-bluemix` package instead.'
-    );
-    didWarnAboutDeprecation = true;
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'Accessing the `detail-page-header` component from the ' +
+          '`carbon-components` package is deprecated. Use the ' +
+          '`carbon-addons-bluemix` package instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
   }
 
   /**

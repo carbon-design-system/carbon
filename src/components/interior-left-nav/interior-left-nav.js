@@ -22,12 +22,15 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
     this.keepOpen = this.element.dataset.keepOpen === undefined ? this.options.keepOpen : Boolean(this.element.dataset.keepOpen);
 
     this.hookListItemsEvents();
-    warning(
-      didWarnAboutDeprecation,
-      'Accessing the `module` component from the `carbon-components` package ' +
-        'is deprecated. Use the `carbon-addons-bluemix` package instead.'
-    );
-    didWarnAboutDeprecation = true;
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'Accessing the `interior-left-nav` component from the' +
+          '`carbon-components` package is deprecated. Use the' +
+          '`carbon-addons-bluemix` package instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
   }
 
   hookListItemsEvents = () => {

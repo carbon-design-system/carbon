@@ -43,6 +43,7 @@
     "adaro": "1.0.4",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",
+    "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-istanbul": "^3.0.0",
     "babel-plugin-transform-class-properties": "^6.22.0",
@@ -104,6 +105,7 @@
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-filesize": "^1.2.1",
     "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-string": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.0",
     "scss-to-json": "1.1.0",
@@ -113,7 +115,15 @@
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0"
   },
-  "files": ["css/**/*", "es/**/*", "html/**/*", "scripts/**/*", "scss/**/*", "src/**/*", "umd/**/*"],
+  "files": [
+    "css/**/*",
+    "es/**/*",
+    "html/**/*",
+    "scripts/**/*",
+    "scss/**/*",
+    "src/**/*",
+    "umd/**/*"
+  ],
   "scripts": {
     "build": "gulp build",
     "build-dev": "gulp build:dev",
@@ -138,7 +148,17 @@
       "maxSubjectLength": 100,
       "subjectPattern": ".+",
       "subjectPatternErrorMsg": "Subject does not match subject pattern!",
-      "types": ["chore", "docs", "feat", "fix", "perf", "refactor", "revert", "style", "test"],
+      "types": [
+        "chore",
+        "docs",
+        "feat",
+        "fix",
+        "perf",
+        "refactor",
+        "revert",
+        "style",
+        "test"
+      ],
       "warnOnFail": false
     }
   },
