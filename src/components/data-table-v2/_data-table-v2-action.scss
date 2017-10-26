@@ -1,5 +1,6 @@
 .bx--table-toolbar {
   display: flex;
+  padding-top: rem(8px);
   padding-bottom: rem(8px);
   width: 100%;
   position: relative;
@@ -59,6 +60,7 @@
   width: auto;
   max-width: 16px;
   fill: $ui-05;
+  transition: $transition--base;
 }
 
 .bx--batch-actions {
