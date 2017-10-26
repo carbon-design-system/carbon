@@ -106,13 +106,21 @@
     "rollup-plugin-string": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.0",
     "scss-to-json": "1.1.0",
-    "semantic-release": "^6.3.2",
+    "semantic-release": "^8.2.3",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0"
   },
-  "files": ["css/**/*", "es/**/*", "html/**/*", "scripts/**/*", "scss/**/*", "src/**/*", "umd/**/*"],
+  "files": [
+    "css/**/*",
+    "es/**/*",
+    "html/**/*",
+    "scripts/**/*",
+    "scss/**/*",
+    "src/**/*",
+    "umd/**/*"
+  ],
   "scripts": {
     "build": "gulp build",
     "build-dev": "gulp build:dev",
@@ -137,7 +145,17 @@
       "maxSubjectLength": 100,
       "subjectPattern": ".+",
       "subjectPatternErrorMsg": "Subject does not match subject pattern!",
-      "types": ["chore", "docs", "feat", "fix", "perf", "refactor", "revert", "style", "test"],
+      "types": [
+        "chore",
+        "docs",
+        "feat",
+        "fix",
+        "perf",
+        "refactor",
+        "revert",
+        "style",
+        "test"
+      ],
       "warnOnFail": false
     }
   },
