@@ -110,6 +110,15 @@
       vertical-align: baseline;
     }
 
+    // Chrome 62 fix
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    input[type="file"] {
+      border-radius: 0;
+    }
+
     /* HTML5 display-role reset for older browsers */
     article,
     aside,
