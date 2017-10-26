@@ -106,7 +106,7 @@
     "rollup-plugin-string": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.0",
     "scss-to-json": "1.1.0",
-    "semantic-release": "^8.2.3",
+    "semantic-release": "^6.3.2",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
     "validate-commit-msg": "^2.8.2",
