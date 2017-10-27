@@ -9,6 +9,9 @@
     "browser": true,
     "es6": true
   },
+  "globals": {
+    "__DEV__": true
+  },
   "extends": [
     "carbon-base"
   ],

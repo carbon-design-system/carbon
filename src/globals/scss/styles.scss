@@ -8,7 +8,7 @@ $css--body: true !default;
 $css--use-layer: true !default;
 $css--reset: true !default;
 $css--typography: true !default;
-$css--plex: false !default;
+$css--plex: true !default;
 
 @import 'colors';
 @import 'vars';
@@ -23,6 +23,25 @@ $css--plex: false !default;
 @import 'css--body';
 @import 'css--typography';
 @import '../grid/grid';
+
+//-------------------------
+// ☠️  Manage deprecations
+//-------------------------
+
+/**
+ * We flag this variable as true if someone uses the globals/scss/styles.scss
+ * entry-point. This allows us to collect all the messages and display them at
+ * the end of the file instead of bringing it up per-component.
+ *
+ * If a consumer instead gets the components by importing the partial directly,
+ * this variable _will not_ be set to true, so the deprecation message will be
+ * displayed after the @import.
+ */
+$deprecations--entry: true;
+// Collect all deprecation reasons into this list throughout the import cycle.
+$deprecations--reasons: ();
+// This message will be prepended to any deprecation notice
+$deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.';
 
 //-------------------------
 // 🍕 Components
@@ -79,3 +98,14 @@ $css--plex: false !default;
 //-------------------------------------
 @import '../../components/footer/footer';
 @import '../../components/fab/fab';
+
+// Cycle through all the deprecation reasons, if any exist, that have been
+// accumulated through the @import process.
+@if (length($deprecations--reasons) > 0) {
+  @each $reason in $deprecations--reasons {
+    $deprecations--message: '#{$deprecations--message}
+REASON: #{$reason}';
+  }
+
+  @warn $deprecations--message;
+}

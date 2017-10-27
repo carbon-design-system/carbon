@@ -3,6 +3,7 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
@@ -10,65 +11,70 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('modules') {
-  .bx--module {
-    @include reset;
-    @include font-family;
-    display: flex;
-    flex-direction: column;
-    padding: rem(10px);
-    flex: 1 0 auto;
-    margin: 0;
-
-    .bx--module__inner {
-      @include layer('raised');
-      background-color: $ui-01;
-      border: 1px solid transparent;
-    }
-
-    .bx--module__header {
-      display: flex;
-      align-items: center;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid $ui-04;
-    }
-
-    .bx--module__title {
-      @include typescale('zeta');
-      @include font-smoothing;
-      letter-spacing: 0;
-      font-weight: 600;
-      color: $text-01;
-    }
-
-    .bx--module__content {
+  @include deprecate(
+    'Accessing the `module` component from the `carbon-components` package ' +
+      'is deprecated. Use the `carbon-addons-bluemix` package instead.'
+  ) {
+    .bx--module {
+      @include reset;
+      @include font-family;
       display: flex;
       flex-direction: column;
-      flex: 3;
-      padding: 1.5rem;
+      padding: rem(10px);
+      flex: 1 0 auto;
+      margin: 0;
 
-      p {
-        @include typescale('zeta');
+      .bx--module__inner {
+        @include layer('raised');
+        background-color: $ui-01;
+        border: 1px solid transparent;
       }
-    }
 
-    .bx--module__content--centered {
-      align-items: center;
-      justify-content: center;
-      padding: 5rem;
-    }
+      .bx--module__header {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid $ui-04;
+      }
 
-    .bx--module__content--scrollable {
-      max-height: rem(300px);
-      overflow-y: scroll;
-      margin-bottom: 2rem;
-    }
+      .bx--module__title {
+        @include typescale('zeta');
+        @include font-smoothing;
+        letter-spacing: 0;
+        font-weight: 600;
+        color: $text-01;
+      }
 
-    &.bx--module--single {
-      max-width: rem(500px);
-    }
+      .bx--module__content {
+        display: flex;
+        flex-direction: column;
+        flex: 3;
+        padding: 1.5rem;
 
-    &.bx--module--double {
-      max-width: rem(1000px);
+        p {
+          @include typescale('zeta');
+        }
+      }
+
+      .bx--module__content--centered {
+        align-items: center;
+        justify-content: center;
+        padding: 5rem;
+      }
+
+      .bx--module__content--scrollable {
+        max-height: rem(300px);
+        overflow-y: scroll;
+        margin-bottom: 2rem;
+      }
+
+      &.bx--module--single {
+        max-width: rem(500px);
+      }
+
+      &.bx--module--double {
+        max-width: rem(1000px);
+      }
     }
   }
 }
