@@ -36,12 +36,14 @@
   "dependencies": {
     "carbon-icons": "^6.0.4",
     "flatpickr": "2.6.3",
-    "lodash.debounce": "^4.0.8"
+    "lodash.debounce": "^4.0.8",
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "adaro": "1.0.4",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",
+    "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-istanbul": "^3.0.0",
     "babel-plugin-transform-class-properties": "^6.22.0",
@@ -103,6 +105,7 @@
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-filesize": "^1.2.1",
     "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-string": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.0",
     "scss-to-json": "1.1.0",

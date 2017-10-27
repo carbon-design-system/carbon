@@ -89,6 +89,21 @@
   }
 }
 
+/**
+ * Generic `deprecate` mixin that is being used to indicate that a component is
+ * no longer going to be present in the next major release of Carbon.
+ */
+@mixin deprecate($reason) {
+  @if ($deprecations--entry == true) {
+    $deprecations--reasons: append($deprecations--reasons, $reason) !global;
+    @content;
+  } @else {
+    @warn '#{$deprecations--message}
+  REASON: #{$reason}';
+    @content;
+  }
+}
+
 //----------------------------------------------
 // Deprecated
 // ---------------------------------------------
