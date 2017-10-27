@@ -39,6 +39,10 @@
           border-right: 1px solid $brand-01;
         }
       }
+
+      .bx--overflow-menu {
+        opacity: 1;
+      }
     }
   }
 
@@ -50,7 +54,6 @@
   td {
     border-top: 1px solid $ui-04;
     padding-left: rem(12px);
-    padding-right: rem(12px);
     vertical-align: middle;
     text-align: left;
 
@@ -68,14 +71,6 @@
   // Overrrides
   .bx--checkbox-appearance {
     margin-right: 0;
-  }
-
-  .bx--table-overflow {
-    &:hover {
-      .bx--overflow-menu {
-        opacity: 1;
-      }
-    }
   }
 
   .bx--overflow-menu {

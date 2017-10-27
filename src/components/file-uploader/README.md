@@ -60,7 +60,6 @@ It's up to the developer and their design team to specify and implement validati
 
 **Complete** injects checkmark icons into each filename state container.
 
-> 
 ![complete](https://cloud.githubusercontent.com/assets/4185382/24562373/2f901fbc-1610-11e7-97f4-153f16bcbcfc.pngtrun)
 
 ```scss
@@ -69,7 +68,6 @@ It's up to the developer and their design team to specify and implement validati
   height: 2rem;
   margin-right: -7px;
 }
-
 .bx--loading__svg {
   stroke: $ui-05;
 }

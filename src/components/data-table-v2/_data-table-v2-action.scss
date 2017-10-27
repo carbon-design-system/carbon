@@ -1,5 +1,6 @@
 .bx--table-toolbar {
   display: flex;
+  padding-top: rem(8px);
   padding-bottom: rem(8px);
   width: 100%;
   position: relative;
@@ -59,6 +60,7 @@
   width: auto;
   max-width: 16px;
   fill: $ui-05;
+  transition: $transition--base;
 }
 
 .bx--batch-actions {
@@ -146,15 +148,19 @@
   @include button-reset(auto);
   @include typescale('zeta');
   -webkit-font-smoothing: auto;
-  font-weight: 400;
   color: $ui-01;
   border-bottom: 1px solid $ui-01;
-  letter-spacing: 1;
+  font-weight: 600;
   cursor: pointer;
+}
 
-  &:hover,
-  &:focus {
-    letter-spacing: 0;
-    font-weight: 700;
-  }
+.bx--batch-actions ~ .bx--toolbar-search-container,
+.bx--batch-actions ~ .bx--toolbar-content {
+  opacity: 1;
+  transition: opacity $transition--base;
+}
+
+.bx--batch-actions--active ~ .bx--toolbar-search-container,
+.bx--batch-actions--active ~ .bx--toolbar-content {
+  opacity: 0;
 }

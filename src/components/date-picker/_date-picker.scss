@@ -158,6 +158,12 @@
     margin-right: 0.25rem;
   }
 
+  .numInputWrapper,
+  .flatpickr-current-month .numInputWrapper {
+    min-width: rem(38px);
+    width: rem(38px);
+  }
+
   .bx--date-picker__month .numInputWrapper .numInput,
   .flatpickr-month .numInputWrapper .numInput {
     font-weight: 600;
@@ -165,7 +171,9 @@
     background-color: $field-01;
     border: none;
     border-radius: 0;
-    padding: 0.125rem 0.125rem 0.125rem 0.4rem;
+    min-width: rem(38px);
+    width: rem(38px);
+    padding: .25rem;
 
     &:focus {
       outline: 1px solid $brand-01;

@@ -102,15 +102,13 @@ Use `setActive` class method to preset the selection on a Content Switcher; doin
 ```js
 // Get HTMLelement for button to preselect it with setActive
 const button = document.querySelector('[data-target=".demo--panel--opt-2"]');
-
 // Initialize an instance of ContentSwitcher with init(), create() or new ContentSwitcher(element)
 const instance = ContentSwitcher.init();
-
 // Use setActive
 instance.setActive(button);
 ```
 
- The `setActive` method also takes an optional `callback` function parameter. The most typical example of using this is acting on a newly selected content-switcher button. 
+The `setActive` method also takes an optional `callback` function parameter. The most typical example of using this is acting on a newly selected content-switcher button. 
  ```js
  contentSwitcher.setActive(button, function (error, item) {
   if (!error) {
@@ -131,7 +129,6 @@ Both uses of HTML will render the same visual styles and interactions.
   <a href="javascript:void(0)" class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">Option 2</a>
   <a href="javascript:void(0)" class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">Option 3</a>
 </div>
-
 <div data-content-switcher class="bx--content-switcher">
   <button class="bx--content-switcher-btn bx--content-switcher--selected" data-target=".demo--panel--opt-1">Option 1</button>
   <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">Option 2</button>
