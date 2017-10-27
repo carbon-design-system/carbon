@@ -2117,13 +2117,14 @@ caniuse-lite@^1.0.30000744, caniuse-lite@^1.0.30000748:
   version "1.0.30000749"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000749.tgz#2ff382865aead8cca35dacfbab04f58effa4c01c"
 
-carbon-components@^7.20.0:
-  version "7.23.2"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-7.23.2.tgz#85b159f602f583e6b190625339a21fc401ebcd53"
+carbon-components@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-8.0.0.tgz#fb720e63321ae5fbba56e07e417c213146c61b17"
   dependencies:
     carbon-icons "^6.0.4"
     flatpickr "2.6.3"
     lodash.debounce "^4.0.8"
+    warning "^3.0.0"
 
 carbon-icons@^6.0.4, carbon-icons@^6.1.0:
   version "6.1.0"
