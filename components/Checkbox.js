@@ -9,7 +9,7 @@ const propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  labelText: PropTypes.string,
+  labelText: PropTypes.node,
   onChange: PropTypes.func,
   iconDescription: PropTypes.string,
 };
