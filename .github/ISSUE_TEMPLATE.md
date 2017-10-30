@@ -35,3 +35,6 @@ Describe in detail the issue you're having. Is this a feature request (new compo
 
 * Screenshots or code
 * Notes
+
+## Add labels
+Please choose the appropriate label(s) from our existing label list to ensure that your issue is properly categorized. This will help us to better understand and address your issue.
