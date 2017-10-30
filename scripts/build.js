@@ -5,7 +5,8 @@ const rimraf = require('rimraf');
 
 if (inInstall()) process.exit(0);
 
-const babelPath = path.resolve(__dirname, '../node_modules/.bin/babel');
+let babelPath = path.resolve(__dirname, '../node_modules/.bin/babel');
+babelPath = babelPath.replace(/ /g, '\\ ');
 const dirs = ['components', 'lib', 'internal'];
 const rootDir = path.resolve(__dirname, '../');
 
