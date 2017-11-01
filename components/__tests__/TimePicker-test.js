@@ -4,65 +4,78 @@ import { mount, shallow } from 'enzyme';
 
 describe('TimePicker', () => {
   describe('renders as expected', () => {
-    const wrapper = mount(<TimePicker id="test" className="extra-class" />);
-
-    const timePicker = wrapper.childAt(0);
-    const label = wrapper.find('label');
-    const textInput = wrapper.find('input');
-
     describe('input', () => {
-      it('renders as expected', () => {
-        expect(textInput.length).toBe(1);
+      let wrapper;
+      let timePicker;
+      let textInput;
+
+      beforeEach(() => {
+        wrapper = mount(<TimePicker id="test" className="extra-class" />);
+
+        timePicker = () => wrapper.find('.bx--time-picker');
+        textInput = () => wrapper.find('input');
       });
 
-      it('has the expected classes', () => {
-        expect(timePicker.hasClass('bx--time-picker')).toEqual(true);
+      it('renders as expected', () => {
+        expect(textInput().length).toBe(1);
       });
 
       it('should add extra classes that are passed via className', () => {
-        expect(timePicker.hasClass('extra-class')).toEqual(true);
+        expect(timePicker().hasClass('extra-class')).toEqual(true);
       });
 
       it('should set type as expected', () => {
-        expect(textInput.props().type).toEqual('text');
+        expect(textInput().props().type).toEqual('text');
       });
 
       it('should set value as expected', () => {
-        expect(textInput.props().defaultValue).toEqual(undefined);
+        expect(textInput().props().defaultValue).toEqual(undefined);
         wrapper.setProps({ defaultValue: 'test' });
-        expect(textInput.props().defaultValue).toEqual('test');
+        expect(textInput().props().defaultValue).toEqual('test');
       });
 
       it('should set disabled as expected', () => {
-        expect(textInput.props().disabled).toEqual(false);
+        expect(textInput().props().disabled).toEqual(false);
         wrapper.setProps({ disabled: true });
-        expect(textInput.props().disabled).toEqual(true);
+        expect(textInput().props().disabled).toEqual(true);
       });
 
       it('should set placeholder as expected', () => {
         wrapper.setProps({ placeholder: 'ss:mm' });
-        expect(textInput.props().placeholder).toEqual('ss:mm');
+        expect(textInput().props().placeholder).toEqual('ss:mm');
       });
     });
 
     describe('label', () => {
-      it('does not render a label by default', () => {
-        expect(label.length).toBe(0);
+      let wrapper;
+      let label;
+
+      beforeEach(() => {
+        wrapper = mount(<TimePicker id="test" className="extra-class" />);
+
+        label = () => wrapper.find('label');
       });
 
-      wrapper.setProps({ labelText: 'Enter a time' });
-      const renderedLabel = wrapper.find('label');
+      it('does not render a label by default', () => {
+        expect(label().length).toBe(0);
+      });
 
       it('renders a label', () => {
-        expect(renderedLabel.length).toBe(1);
+        wrapper.setProps({ labelText: 'Enter a time' });
+        const renderedlabel = wrapper.find('label');
+        expect(renderedlabel.length).toBe(1);
       });
 
       it('has the expected classes', () => {
-        expect(renderedLabel.hasClass('bx--label')).toEqual(true);
+        wrapper.setProps({ labelText: 'Enter a time' });
+        const renderedlabel = wrapper.find('label');
+        expect(renderedlabel.hasClass('bx--label')).toEqual(true);
       });
 
       it('should set label as expected', () => {
-        expect(renderedLabel.text()).toEqual('Enter a time');
+        wrapper.setProps({ labelText: 'Enter a time' });
+        const renderedlabel = wrapper.find('label');
+        expect(renderedlabel.text()).toEqual('Enter a time');
       });
     });
   });

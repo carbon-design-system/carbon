@@ -62,10 +62,8 @@ describe('ContentSwitcher', () => {
     );
 
     const children = wrapper.find(Switch);
-    const firstChild = children.first();
-    const secondChild = children.last();
 
-    firstChild.props().onClick(mockData);
+    children.first().props().onClick(mockData);
 
     it('should invoke onChange', () => {
       expect(onChange).toBeCalledWith(mockData);
@@ -76,6 +74,9 @@ describe('ContentSwitcher', () => {
     });
 
     it('should set selected to true on the correct child', () => {
+      wrapper.update();
+      const firstChild = wrapper.find(Switch).first();
+      const secondChild = wrapper.find(Switch).last();
       expect(firstChild.props().selected).toEqual(false);
       expect(secondChild.props().selected).toEqual(true);
     });
@@ -95,10 +96,8 @@ describe('ContentSwitcher', () => {
     );
 
     const children = wrapper.find(Switch);
-    const firstChild = children.first();
-    const secondChild = children.last();
 
-    firstChild.props().onKeyDown(mockData);
+    children.first().props().onKeyDown(mockData);
 
     it('should invoke onChange', () => {
       expect(onChange).toBeCalledWith(mockData);
@@ -109,6 +108,9 @@ describe('ContentSwitcher', () => {
     });
 
     it('should set selected to true on the correct child', () => {
+      wrapper.update();
+      const firstChild = wrapper.find(Switch).first();
+      const secondChild = wrapper.find(Switch).last();
       expect(firstChild.props().selected).toEqual(false);
       expect(secondChild.props().selected).toEqual(true);
     });

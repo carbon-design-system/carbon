@@ -147,7 +147,7 @@ describe('Tabs', () => {
 
       describe('state: selectedLabel', () => {
         it('sets a new value for selectedLabel state when Tab is clicked', () => {
-          const lastTab = wrapper.find('.lastTab');
+          const lastTab = wrapper.find('.lastTab').last();
           lastTab.simulate('click');
           expect(wrapper.state().selectedLabel).toEqual('lastTab');
         });
@@ -162,8 +162,8 @@ describe('Tabs', () => {
         </Tabs>,
       );
 
-      const firstTab = wrapper.find('.firstTab');
-      const lastTab = wrapper.find('.lastTab');
+      const firstTab = wrapper.find('.firstTab').last();
+      const lastTab = wrapper.find('.lastTab').last();
       const leftKey = 37;
       const rightKey = 39;
       const spaceKey = 32;

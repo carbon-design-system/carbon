@@ -34,20 +34,20 @@ describe('Search', () => {
       it('should set type as expected', () => {
         expect(textInput.props().type).toEqual('text');
         wrapper.setProps({ type: 'email' });
-        expect(textInput.props().type).toEqual('email');
+        expect(wrapper.find('input').props().type).toEqual('email');
       });
 
       it('should set value as expected', () => {
         expect(textInput.props().defaultValue).toEqual(undefined);
         wrapper.setProps({ defaultValue: 'test' });
-        expect(textInput.props().defaultValue).toEqual('test');
-        expect(textInput.props().value).toEqual(undefined);
+        expect(wrapper.find('input').props().defaultValue).toEqual('test');
+        expect(wrapper.find('input').props().value).toEqual(undefined);
       });
 
       it('should set placeholder as expected', () => {
         expect(textInput.props().placeholder).toEqual('');
         wrapper.setProps({ placeHolderText: 'Enter text' });
-        expect(textInput.props().placeholder).toEqual('Enter text');
+        expect(wrapper.find('input').props().placeholder).toEqual('Enter text');
       });
     });
 
@@ -77,8 +77,8 @@ describe('Search', () => {
         });
 
         it('should have type="button"', () => {
-          const type1 = btns.get(0).getAttribute('type');
-          const type2 = btns.get(1).getAttribute('type');
+          const type1 = btns.first().instance().getAttribute('type');
+          const type2 = btns.last().instance().getAttribute('type');
           expect(type1).toEqual('button');
           expect(type2).toEqual('button');
         });

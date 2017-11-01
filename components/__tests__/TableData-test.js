@@ -35,7 +35,7 @@ describe('TableData', () => {
         </table>
       );
 
-      icon = wrapper.find('.bx--table-expand__svg');
+      icon = wrapper.find('.bx--table-expand__svg').first();
     })
 
     afterEach(() => {

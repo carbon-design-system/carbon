@@ -90,17 +90,18 @@ describe('Modal', () => {
   describe('events', () => {
     it('should set expected class when state is open', () => {
       const wrapper = mount(<ModalWrapper />);
-      const modal = wrapper.childAt(1);
+      const modal = wrapper.find(Modal);
       const modalContainer = modal.find('.bx--modal');
       const openClass = 'is-visible';
+
       expect(modalContainer.hasClass(openClass)).not.toEqual(true);
       wrapper.setState({ open: true });
-      expect(modalContainer.hasClass(openClass)).toEqual(true);
+      expect(wrapper.find('.bx--modal').hasClass(openClass)).toEqual(true);
     });
 
     it('should set state to open when trigger button is clicked', () => {
       const wrapper = mount(<ModalWrapper />);
-      const triggerBtn = wrapper.childAt(0);
+      const triggerBtn = wrapper.children().childAt(0);
       expect(wrapper.state().open).not.toEqual(true);
       triggerBtn.simulate('click');
       expect(wrapper.state().open).toEqual(true);
@@ -108,7 +109,7 @@ describe('Modal', () => {
 
     it('should set open state to false when close button is clicked', () => {
       const wrapper = mount(<ModalWrapper />);
-      const modal = wrapper.childAt(1);
+      const modal = wrapper.find(Modal);
       const closeBtn = modal.find('.bx--modal-close');
       wrapper.setState({ open: true });
       expect(wrapper.state().open).toEqual(true);
@@ -118,7 +119,7 @@ describe('Modal', () => {
 
     it('should stay open when "inner modal" is clicked', () => {
       const wrapper = mount(<ModalWrapper />);
-      const modal = wrapper.childAt(1);
+      const modal = wrapper.find(Modal);
       const div = modal.find('.bx--modal-container');
       wrapper.setState({ open: true });
       div.simulate('click');
@@ -127,7 +128,7 @@ describe('Modal', () => {
 
     it('should close when "outer modal" is clicked...not "inner modal"', () => {
       const wrapper = mount(<ModalWrapper />);
-      const modal = wrapper.childAt(1);
+      const modal = wrapper.find(Modal);
       const div = modal.find('.bx--modal');
       wrapper.setState({ open: true });
       div.simulate('click');

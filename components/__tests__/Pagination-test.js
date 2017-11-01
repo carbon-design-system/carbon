@@ -36,9 +36,11 @@ describe('Pagination', () => {
 
     describe('pagination size container', () => {
       const left = pagination.find('.bx--pagination__left');
+
       it('should render a left container', () => {
         expect(left.length).toBe(1);
       });
+
       it('should have a size dropdown', () => {
         const select = left.find(Select);
         const items = select.find(SelectItem);
@@ -47,10 +49,12 @@ describe('Pagination', () => {
         expect(items.at(0).props().value).toBe(5);
         expect(items.at(1).props().value).toBe(10);
       });
+
       it('should label the dropdown', () => {
         const label = left.find('.bx--pagination__text').first();
         expect(label.text()).toBe('items per page\u00a0\u00a0|\u00a0\u00a0');
       });
+
       it('should show the item range out of the total', () => {
         const label = left.find('.bx--pagination__text').at(1);
         expect(label.text()).toBe('1-5 of 50 items');
@@ -68,6 +72,7 @@ describe('Pagination', () => {
         it('should render a left container', () => {
           expect(left.length).toBe(1);
         });
+
         it('should have a size dropdown', () => {
           const select = left.find(Select);
           const items = select.find(SelectItem);
@@ -76,10 +81,12 @@ describe('Pagination', () => {
           expect(items.at(0).props().value).toBe(5);
           expect(items.at(1).props().value).toBe(10);
         });
+
         it('should label the dropdown', () => {
           const label = left.find('.bx--pagination__text').first();
           expect(label.text()).toBe('items per page\u00a0\u00a0|\u00a0\u00a0');
         });
+
         it('should show the item range without the total', () => {
           const label = left.find('.bx--pagination__text').at(1);
           expect(label.text()).toBe('1-5 items');
@@ -109,6 +116,7 @@ describe('Pagination', () => {
           expect(labels.at(1).text()).toBe('1-10 of 50 items');
           expect(labels.at(2).text()).toBe('1 of 5 pages');
         });
+
         it('should reset the page when page size changes', () => {
           let actualPage;
           const handler = ({ page }) => {
@@ -127,6 +135,7 @@ describe('Pagination', () => {
           expect(actualPage).toBe(1);
           expect(pager.state().page).toBe(1);
         });
+
         it('should return to first page on changes to pageSizes', () => {
           const pager = mount(
             <Pagination pageSizes={[5, 10]} totalItems={50} />
@@ -135,12 +144,14 @@ describe('Pagination', () => {
           pager.setProps({ pageSizes: [3, 6] });
           expect(pager.state().page).toEqual(1);
         });
+
         it('should default to pageSize if pageSize is provided', () => {
           const pager = mount(
             <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
           );
           expect(pager.state().pageSize).toEqual(10);
         });
+
         it('should default to pageSize if on change to pageSize', () => {
           const pager = mount(
             <Pagination pageSizes={[5, 10]} totalItems={50} />
@@ -153,13 +164,16 @@ describe('Pagination', () => {
 
     describe('pagination paging container', () => {
       const right = pagination.find('.bx--pagination__right');
+
       it('should render a right container', () => {
         expect(right.length).toBe(1);
       });
+
       it('should show the current page out of the total number of pages', () => {
         const label = right.find('.bx--pagination__text').first();
         expect(label.text()).toBe('1 of 10 pages');
       });
+
       it('should have two buttons for navigation', () => {
         const buttons = right.find('.bx--pagination__button');
         expect(buttons.length).toBe(2);
@@ -170,11 +184,13 @@ describe('Pagination', () => {
           true
         );
       });
+
       it('should disable backward navigation for the first page', () => {
         const buttons = right.find('.bx--pagination__button');
         expect(buttons.at(0).props().disabled).toBe(true);
         expect(buttons.at(1).props().disabled).toBe(false);
       });
+
       it('should disable forward navigation for the last page', () => {
         const smallPage = shallow(
           <Pagination
@@ -199,13 +215,16 @@ describe('Pagination', () => {
         );
 
         const right = pager.find('.bx--pagination__right');
+
         it('should render a right container', () => {
           expect(right.length).toBe(1);
         });
+
         it('should show the current page without the total number of pages', () => {
           const label = right.find('.bx--pagination__text').first();
           expect(label.text()).toBe('page 1');
         });
+
         it('should have two buttons for navigation', () => {
           const buttons = right.find('.bx--pagination__button');
           expect(buttons.length).toBe(2);
@@ -216,11 +235,13 @@ describe('Pagination', () => {
             true
           );
         });
+
         it('should disable backward navigation for the first page', () => {
           const buttons = right.find('.bx--pagination__button');
           expect(buttons.at(0).props().disabled).toBe(true);
           expect(buttons.at(1).props().disabled).toBe(false);
         });
+
         it('should disable forward navigation for the last page', () => {
           const smallPage = shallow(
             <Pagination
@@ -233,6 +254,7 @@ describe('Pagination', () => {
           expect(buttons.at(0).props().disabled).toBe(true);
           expect(buttons.at(1).props().disabled).toBe(true);
         });
+
         it('should hide text input if disabled', () => {
           const noTextInput = shallow(
             <Pagination
@@ -264,6 +286,7 @@ describe('Pagination', () => {
           expect(actualPage).toBe(2);
           expect(pager.state().page).toBe(2);
         });
+
         it('should go to the previous page when clicking backward', () => {
           let actualPage;
           const handler = ({ page }) => {
@@ -282,6 +305,7 @@ describe('Pagination', () => {
           expect(actualPage).toBe(1);
           expect(pager.state().page).toBe(1);
         });
+
         it('should jump to the page entered in the input field', () => {
           let actualPage;
           const handler = ({ page }) => {
@@ -297,10 +321,12 @@ describe('Pagination', () => {
           expect(pager.state().page).toBe(1);
           pager
             .find('.bx--text__input')
+            .last()
             .simulate('change', { target: { value: 2 } });
           expect(actualPage).toBe(2);
           expect(pager.state().page).toBe(2);
         });
+
         it('should jump to page number if prop page is provided', () => {
           const pager = mount(
             <Pagination pageSizes={[5, 10]} totalItems={50} page={3} />

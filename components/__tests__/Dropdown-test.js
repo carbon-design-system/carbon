@@ -103,32 +103,32 @@ describe('Dropdown', () => {
 
     it('should add the open dropdown class on click', () => {
       dropdown.simulate('click');
-      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(true);
+      expect(wrapper.find('.bx--dropdown').hasClass('bx--dropdown--open')).toEqual(true);
     });
 
     it('should toggle the open dropdown class on Enter', () => {
       wrapper.setState({ open: false });
       dropdown.simulate('keypress', { which: 13 });
-      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(true);
+      expect(wrapper.find('.bx--dropdown').hasClass('bx--dropdown--open')).toEqual(true);
       dropdown.simulate('keypress', { which: 13 });
-      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(false);
+      expect(wrapper.find('.bx--dropdown').hasClass('bx--dropdown--open')).toEqual(false);
     });
 
     it('should toggle the open dropdown class on Space', () => {
       wrapper.setState({ open: false });
       dropdown.simulate('keypress', { which: 32 });
-      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(true);
+      expect(wrapper.find('.bx--dropdown').hasClass('bx--dropdown--open')).toEqual(true);
       dropdown.simulate('keypress', { which: 32 });
-      expect(dropdown.hasClass('bx--dropdown--open')).toEqual(false);
+      expect(wrapper.find('.bx--dropdown').hasClass('bx--dropdown--open')).toEqual(false);
     });
 
     it('should update data value state when child item is clicked', () => {
-      child.simulate('click');
-      expect(dropdown.props().value).toEqual('test-child');
+      child.last().simulate('click');
+      expect(wrapper.find('.bx--dropdown').props().value).toEqual('test-child');
     });
 
     it('should update selected text when child item is clicked', () => {
-      child.simulate('click');
+      child.last().simulate('click');
       expect(wrapper.state().selectedText).toEqual('test-child');
     });
 
@@ -154,32 +154,6 @@ describe('Dropdown', () => {
       dropdown.simulate('keypress', { which: 32 });
       expect(dropdown.hasClass('bx--dropdown--open')).toEqual(false);
       expect(wrapper.state().open).toBe(false);
-    });
-
-    it('should invoke the `onClick` handler for a DropdownItem if one exists', () => {
-      const onChange = jest.fn();
-      const onClick = jest.fn();
-      const dropdown = mount(
-        <Dropdown
-          defaultText="Choose something..."
-          selectedText="NotValue"
-          onChange={onChange}>
-          <DropdownItem itemText="Value" value="Value" onClick={onClick} />
-        </Dropdown>
-      ).find('.bx--dropdown');
-      const item = dropdown.find(DropdownItem);
-
-      dropdown.simulate('click');
-      item.simulate('click');
-
-      const info = {
-        value: 'Value',
-        itemText: 'Value',
-      };
-      expect(onClick).toHaveBeenCalledTimes(1);
-      expect(onClick).toHaveBeenCalledWith(info);
-      expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveBeenCalledWith(info);
     });
   });
 });

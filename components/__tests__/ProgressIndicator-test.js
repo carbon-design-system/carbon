@@ -59,7 +59,7 @@ describe('ProgressIndicator', () => {
     describe('ProgressStep', () => {
       it('should render with correct base className', () => {
         expect(
-          mountedList.find(ProgressStep).at(0).hasClass('bx--progress-step')
+          mountedList.find(ProgressStep).at(0).children().hasClass('bx--progress-step')
         ).toEqual(true);
       });
 
@@ -87,6 +87,7 @@ describe('ProgressIndicator', () => {
             mountedList
               .find(ProgressStep)
               .at(3)
+              .children()
               .hasClass('bx--progress-step--current')
           ).toEqual(true);
         });
@@ -102,6 +103,7 @@ describe('ProgressIndicator', () => {
             mountedList
               .find(ProgressStep)
               .at(0)
+              .children()
               .hasClass('bx--progress-step--complete')
           ).toEqual(true);
         });
@@ -116,6 +118,7 @@ describe('ProgressIndicator', () => {
             mountedList
               .find(ProgressStep)
               .at(5)
+              .children()
               .hasClass('bx--progress-step--incomplete')
           ).toEqual(true);
         });

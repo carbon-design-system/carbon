@@ -39,8 +39,15 @@ describe('Slider', () => {
   describe('updatePosition method', () => {
     const mockFn = jest.fn();
     const wrapper = mount(
-      <Slider id="slider" className="extra-class" value={50} min={0} max={100} step={1} onChange={mockFn} >
-      </Slider>
+      <Slider
+        id="slider"
+        className="extra-class"
+        value={50}
+        min={0}
+        max={100}
+        step={1}
+        onChange={mockFn}
+      />
     );
 
     it('sets correct state from event with a right/up keydown', () => {

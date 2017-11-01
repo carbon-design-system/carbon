@@ -13,11 +13,11 @@ describe('DatePicker', () => {
     const datepicker = wrapper.childAt(0);
 
     it('has the expected classes', () => {
-      expect(datepicker.hasClass('bx--date-picker')).toBe(true);
+      expect(datepicker.children().hasClass('bx--date-picker')).toBe(true);
     });
 
     it('should add extra classes that are passed via className', () => {
-      expect(datepicker.hasClass('extra-class')).toBe(true);
+      expect(datepicker.children().hasClass('extra-class')).toBe(true);
     });
 
     it('should add the date picker type as expected', () => {
@@ -52,7 +52,7 @@ describe('DatePicker', () => {
     const datepicker = wrapper.childAt(0);
 
     it('has the simple date picker class', () => {
-      expect(datepicker.hasClass('bx--date-picker--simple')).toBe(true);
+      expect(datepicker.children().hasClass('bx--date-picker--simple')).toBe(true);
     });
 
     it('should not initalize a calendar', () => {
@@ -73,15 +73,15 @@ describe('DatePicker', () => {
     const icon = wrapper.find('svg');
 
     it('has the single date picker class', () => {
-      expect(datepicker.hasClass('bx--date-picker--single')).toBe(true);
+      expect(datepicker.children().hasClass('bx--date-picker--single')).toBe(true);
     });
 
     it('should initalize a calendar', () => {
-      expect(wrapper.node.cal).toBeDefined();
+      expect(wrapper.instance().cal).toBeDefined();
     });
 
     it('should update the classnames', () => {
-      expect(wrapper.node.cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
+      expect(wrapper.instance().cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
     });
 
     it('should not render an icon', () => {
@@ -104,15 +104,15 @@ describe('DatePicker', () => {
     const icon = wrapper.find('svg');
 
     it('has the range date picker class', () => {
-      expect(datepicker.hasClass('bx--date-picker--range')).toBe(true);
+      expect(datepicker.children().hasClass('bx--date-picker--range')).toBe(true);
     });
 
     it('should initalize a calendar', () => {
-      expect(wrapper.node.cal).toBeDefined();
+      expect(wrapper.instance().cal).toBeDefined();
     });
 
     it('should update the classnames', () => {
-      expect(wrapper.node.cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
+      expect(wrapper.instance().cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
     });
 
     it('should render an icon', () => {

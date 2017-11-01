@@ -11,12 +11,15 @@ describe('InteriorLeftNav', () => {
     it('renders a interior left nav', () => {
       expect(wrapper.length).toEqual(1);
     });
+
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--interior-left-nav')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--interior-left-nav')).toEqual(true);
     });
+
     it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
+
     it('should render children as expected', () => {
       const interiorLeftNav = mount(
         <InteriorLeftNav>
@@ -31,7 +34,7 @@ describe('InteriorLeftNav', () => {
         </InteriorLeftNav>,
       );
       expect(interiorLeftNav.find('.left-nav-list').length).toEqual(2);
-      expect(interiorLeftNav.find('.test-child').length).toEqual(2);
+      expect(interiorLeftNav.find('.test-child').length).toEqual(4);
       expect(
         interiorLeftNav.find('.bx--interior-left-nav-collapse').length,
       ).toEqual(1);
@@ -45,13 +48,13 @@ describe('InteriorLeftNav', () => {
         <InteriorLeftNavList className="second" open />
       </InteriorLeftNav>,
     );
-    const first = twoLists.find('.first');
-    const second = twoLists.find('.second');
+    const first = () => twoLists.find('li.first');
+    const second = () => twoLists.find('li.second');
 
     it('should close the second list when the first is clicked', () => {
-      expect(second.hasClass('left-nav-list__item--expanded')).toBe(true);
-      first.simulate('click');
-      expect(second.hasClass('left-nav-list__item--expanded')).toBe(false);
+      expect(second().hasClass('left-nav-list__item--expanded')).toBe(true);
+      first().simulate('click');
+      expect(second().hasClass('left-nav-list__item--expanded')).toBe(false);
     });
   });
 
@@ -90,7 +93,7 @@ describe('InteriorLeftNav', () => {
 
     it('should close the nav when the toggler is clicked', () => {
       toggler.simulate('click');
-      expect(interiorLeftNav.hasClass('bx--interior-left-nav--collapsed')).toBe(
+      expect(interiorLeftNav.children().hasClass('bx--interior-left-nav--collapsed')).toBe(
         true,
       );
       expect(interiorLeftNav.state().open).toBe(false);

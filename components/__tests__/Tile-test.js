@@ -83,7 +83,7 @@ describe('Tile', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--tile--selectable')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--tile--selectable')).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -91,9 +91,9 @@ describe('Tile', () => {
     });
 
     it('toggles the selectable class on click', () => {
-      expect(wrapper.hasClass('bx--tile--is-selected')).toEqual(false);
+      expect(wrapper.children().hasClass('bx--tile--is-selected')).toEqual(false);
       wrapper.simulate('click');
-      expect(wrapper.hasClass('bx--tile--is-selected')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--tile--is-selected')).toEqual(true);
     });
 
     it('toggles the selectable state on click', () => {
@@ -111,9 +111,8 @@ describe('Tile', () => {
     });
 
     it('the input should be checked when state is selected', () => {
-      const input = wrapper.find('input');
       wrapper.setState({ selected: true });
-      expect(input.props().checked).toEqual(true);
+      expect(wrapper.find('input').props().checked).toEqual(true);
     });
   });
 
@@ -134,7 +133,7 @@ describe('Tile', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass('bx--tile--expandable')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--tile--expandable')).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -142,9 +141,9 @@ describe('Tile', () => {
     });
 
     it('toggles the expandable class on click', () => {
-      expect(wrapper.hasClass('bx--tile--is-expanded')).toEqual(false);
+      expect(wrapper.children().hasClass('bx--tile--is-expanded')).toEqual(false);
       wrapper.simulate('click');
-      expect(wrapper.hasClass('bx--tile--is-expanded')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--tile--is-expanded')).toEqual(true);
     });
 
     it('toggles the expandable state on click', () => {

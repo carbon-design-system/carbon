@@ -18,7 +18,7 @@ describe('Toggle', () => {
     it('should set defaultChecked as expected', () => {
       expect(input.props().defaultChecked).toEqual(false);
       wrapper.setProps({ defaultToggled: true });
-      expect(input.props().defaultChecked).toEqual(true);
+      expect(wrapper.find('input').props().defaultChecked).toEqual(true);
     });
 
     it('Can set defaultToggled state', () => {
@@ -52,11 +52,11 @@ describe('Toggle', () => {
       <Toggle id="test" toggled />
     );
 
-    const input = wrapper.find('input');
-    expect(input.props().checked).toEqual(true);
+    const input = () => wrapper.find('input');
+    expect(input().props().checked).toEqual(true);
 
     wrapper.setProps({ toggled: false });
-    expect(input.props().checked).toEqual(false);
+    expect(input().props().checked).toEqual(false);
   });
 
   describe('events', () => {
@@ -68,7 +68,7 @@ describe('Toggle', () => {
       );
 
       const input = wrapper.find('input');
-      const inputElement = input.get(0);
+      const inputElement = input.instance();
 
       inputElement.checked = true;
       wrapper.find('input').simulate('change');

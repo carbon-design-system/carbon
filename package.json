@@ -5,10 +5,9 @@
   "main": "cjs/index.js",
   "module": "es/index.js",
   "scripts": {
-    "check": "npm run lint && npm run test",
+    "ci-check": "npm run lint && npm run test && npm run test-ssr",
     "lint": "eslint {components,internal}/**",
-    "test": "jest '/(__tests__|components|lib|internal)/' && npm run test-ssr",
-    "test-watch": "jest '/(__tests__|components|lib|internal)/' --watch",
+    "test": "jest",
     "test-ssr": "npm run build && node server-side-rendering-tests/*.js",
     "prepublish": "npm run build",
     "build": "node scripts/build.js",
@@ -113,8 +112,9 @@
     "commitizen": "^2.9.5",
     "css-loader": "^0.28.4",
     "cz-conventional-changelog-components": "^1.0.0",
-    "enzyme": "^2.6.0",
-    "enzyme-to-json": "^2.0.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-15": "^1.0.1",
+    "enzyme-to-json": "^3.1.2",
     "eslint": "^3.0.0",
     "eslint-plugin-jsx-a11y": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
@@ -150,6 +150,7 @@
   "lint-staged": {
     "*.js": [
       "prettier",
+      "lint",
       "git add"
     ]
   },

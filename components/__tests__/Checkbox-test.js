@@ -50,16 +50,16 @@ describe('Checkbox', () => {
       });
 
       describe('input', () => {
-        const input = wrapper.find('input');
+        const input = () => wrapper.find('input');
 
         it('has id set as expected', () => {
-          expect(input.props().id).toEqual('testing');
+          expect(input().props().id).toEqual('testing');
         });
 
         it('defaultChecked prop sets defaultChecked on input', () => {
-          expect(input.props().defaultChecked).toBeUndefined();
+          expect(input().props().defaultChecked).toBeUndefined();
           wrapper.setProps({ defaultChecked: true });
-          expect(input.props().defaultChecked).toEqual(true);
+          expect(input().props().defaultChecked).toEqual(true);
         });
       });
     });
@@ -70,11 +70,11 @@ describe('Checkbox', () => {
       <Checkbox id="test" disabled />
     );
 
-    const input = wrapper.find('input');
-    expect(input.props().disabled).toEqual(true);
+    const input = () => wrapper.find('input');
+    expect(input().props().disabled).toEqual(true);
 
     wrapper.setProps({ disabled: false });
-    expect(input.props().disabled).toEqual(false);
+    expect(input().props().disabled).toEqual(false);
   });
 
   it('checked prop on component sets checked prop on input', () => {
@@ -82,11 +82,11 @@ describe('Checkbox', () => {
       <Checkbox id="test" checked />
     );
 
-    const input = wrapper.find('input');
-    expect(input.props().checked).toEqual(true);
+    const input = () => wrapper.find('input');
+    expect(input().props().checked).toEqual(true);
 
     wrapper.setProps({ checked: false });
-    expect(input.props().checked).toEqual(false);
+    expect(input().props().checked).toEqual(false);
   });
 
   describe('events', () => {
@@ -98,7 +98,7 @@ describe('Checkbox', () => {
       );
 
       const input = wrapper.find('input');
-      const inputElement = input.get(0);
+      const inputElement = input.instance();
 
       inputElement.checked = true;
       wrapper.find('input').simulate('change');

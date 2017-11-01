@@ -64,7 +64,7 @@ describe('CardContent', () => {
         it('has expected links', () => {
           const links = title.childAt(1);
           expect(links.length).toBe(1);
-          expect(links.node.type).toBe('a');
+          expect(links.getElement().type).toBe('a');
           expect(links.hasClass('bx--about__title--link')).toBe(true);
           expect(links.props().href).toBe('http://test-card-link.mybluemix.net');
           expect(links.props().children).toBe('http://test-card-link.mybluemix.net');
@@ -73,13 +73,13 @@ describe('CardContent', () => {
         it('has expected info paragraphs', () => {
           const info1 = title.childAt(2);
           expect(info1.length).toBe(1);
-          expect(info1.node.type).toBe('h4');
+          expect(info1.getElement().type).toBe('h4');
           expect(info1.hasClass('bx--about__title--additional-info')).toBe(true);
           expect(info1.props().children).toBe('testInfo1');
 
           const info2 = title.childAt(3);
           expect(info2.length).toBe(1);
-          expect(info2.node.type).toBe('h4');
+          expect(info2.getElement().type).toBe('h4');
           expect(info2.hasClass('bx--about__title--additional-info')).toBe(true);
           expect(info2.props().children).toBe('testInfo2');
         });

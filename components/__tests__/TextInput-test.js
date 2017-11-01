@@ -6,43 +6,43 @@ describe('TextInput', () => {
   describe('renders as expected', () => {
     const wrapper = mount(<TextInput id="test" className="extra-class" />);
 
-    const textInput = wrapper.find('input');
+    const textInput = () => wrapper.find('input');
 
     describe('input', () => {
       it('renders as expected', () => {
-        expect(textInput.length).toBe(1);
+        expect(textInput().length).toBe(1);
       });
 
       it('has the expected classes', () => {
-        expect(textInput.hasClass('bx--text-input')).toEqual(true);
+        expect(textInput().hasClass('bx--text-input')).toEqual(true);
       });
 
       it('should add extra classes that are passed via className', () => {
-        expect(textInput.hasClass('extra-class')).toEqual(true);
+        expect(textInput().hasClass('extra-class')).toEqual(true);
       });
 
       it('should set type as expected', () => {
-        expect(textInput.props().type).toEqual('text');
+        expect(textInput().props().type).toEqual('text');
         wrapper.setProps({ type: 'email' });
-        expect(textInput.props().type).toEqual('email');
+        expect(textInput().props().type).toEqual('email');
       });
 
       it('should set value as expected', () => {
-        expect(textInput.props().defaultValue).toEqual(undefined);
+        expect(textInput().props().defaultValue).toEqual(undefined);
         wrapper.setProps({ defaultValue: 'test' });
-        expect(textInput.props().defaultValue).toEqual('test');
+        expect(textInput().props().defaultValue).toEqual('test');
       });
 
       it('should set disabled as expected', () => {
-        expect(textInput.props().disabled).toEqual(false);
+        expect(textInput().props().disabled).toEqual(false);
         wrapper.setProps({ disabled: true });
-        expect(textInput.props().disabled).toEqual(true);
+        expect(textInput().props().disabled).toEqual(true);
       });
 
       it('should set placeholder as expected', () => {
-        expect(textInput.props().placeholder).not.toBeDefined();
+        expect(textInput().props().placeholder).not.toBeDefined();
         wrapper.setProps({ placeholder: 'Enter text' });
-        expect(textInput.props().placeholder).toEqual('Enter text');
+        expect(textInput().props().placeholder).toEqual('Enter text');
       });
     });
 

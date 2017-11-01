@@ -81,10 +81,10 @@ describe('RadioButton', () => {
       defaultChecked: true,
     });
 
-    const input = wrapper.find('input');
-    expect(input.props().defaultChecked).toEqual(true);
+    const input = () => wrapper.find('input');
+    expect(input().props().defaultChecked).toEqual(true);
     wrapper.setProps({ defaultChecked: false });
-    expect(input.props().defaultChecked).toEqual(false);
+    expect(input().props().defaultChecked).toEqual(false);
   });
 
   it('should set id if one is passed in', () => {
@@ -101,7 +101,7 @@ describe('RadioButton', () => {
       const onChange = jest.fn();
       const wrapper = render({ onChange });
       const input = wrapper.find('input');
-      const inputElement = input.get(0);
+      const inputElement = input.instance();
 
       inputElement.checked = true;
       wrapper.find('input').simulate('change');

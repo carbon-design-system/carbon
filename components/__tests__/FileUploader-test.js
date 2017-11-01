@@ -21,7 +21,7 @@ describe('FileUploaderButton', () => {
 
   describe('Renders as expected with default props', () => {
     it('renders with expected className', () => {
-      expect(mountWrapper.hasClass('bx--file')).toBe(true);
+      expect(mountWrapper.children().hasClass('bx--file')).toBe(true);
     });
 
     it('renders with given className', () => {
@@ -86,7 +86,7 @@ describe('FileUploader', () => {
 
   describe('Renders as expected with defaults', () => {
     it('should render with default className', () => {
-      expect(mountWrapper.hasClass('bx--form-item')).toEqual(true);
+      expect(mountWrapper.children().hasClass('bx--form-item')).toEqual(true);
     });
 
     it('should render with given className', () => {

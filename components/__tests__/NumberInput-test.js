@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import Icon from '../Icon';
 import NumberInput from '../NumberInput';
 
-describe('numberInput', () => {
+describe('NumberInput', () => {
   describe('should render as expected', () => {
     const wrapper = mount(
       <NumberInput min={0} max={100} id="test" label="Number Input" className="extra-class" />
@@ -34,27 +34,27 @@ describe('numberInput', () => {
       it('should set a min as expected', () => {
         expect(numberInput.props().min).toEqual(0);
         wrapper.setProps({ min: 10 });
-        expect(numberInput.props().min).toEqual(10);
+        expect(wrapper.find('input').props().min).toEqual(10);
       });
 
       it('should set a max as expected', () => {
         expect(numberInput.props().max).toEqual(100);
         wrapper.setProps({ max: 10 });
-        expect(numberInput.props().min).toEqual(10);
+        expect(wrapper.find('input').props().min).toEqual(10);
       });
 
       it('should set step as expected', () => {
         expect(numberInput.props().step).toEqual(1);
         wrapper.setProps({ step: 10 });
-        expect(numberInput.props().step).toEqual(10);
+        expect(wrapper.find('input').props().step).toEqual(10);
       });
 
       it('should set disabled as expected', () => {
         expect(numberInput.props().disabled).toEqual(false);
         wrapper.setProps({ disabled: true });
-        expect(numberInput.props().disabled).toEqual(true);
+        expect(wrapper.find('input').props().disabled).toEqual(true);
       });
-  
+
       describe('initial rendering', () => {
 
         const getWrapper = (min, max, value) => mount(<NumberInput min={min} max={max} value={value} id="test" label="Number Input" className="extra-class" />);
@@ -176,8 +176,8 @@ describe('numberInput', () => {
       );
 
       const input = wrapper.find('input');
-      const upArrow = wrapper.find('.up-icon');
-      const downArrow = wrapper.find('.down-icon');
+      const upArrow = wrapper.find('.up-icon').last();
+      const downArrow = wrapper.find('.down-icon').last();
 
       it('should invoke onClick when numberInput is clicked', () => {
         input.simulate('click');

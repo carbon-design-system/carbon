@@ -51,7 +51,7 @@ describe('AccordionItem', () => {
       const item = toggler.find('li');
       expect(item.hasClass('bx--accordion__item--active')).toEqual(false);
       toggler.setState({ open: true });
-      expect(item.hasClass('bx--accordion__item--active')).toEqual(true);
+      expect(toggler.find('li').hasClass('bx--accordion__item--active')).toEqual(true);
     });
   });
 

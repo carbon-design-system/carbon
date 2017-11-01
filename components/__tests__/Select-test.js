@@ -70,13 +70,13 @@ describe('Select', () => {
 
       it('should set defaultValue as expected', () => {
         wrapper.setProps({ defaultValue: 'select-1' });
-        expect(select.props().defaultValue).toEqual('select-1');
+        expect(wrapper.find('select').props().defaultValue).toEqual('select-1');
       });
 
       it('should set disabled as expected', () => {
         expect(select.props().disabled).toEqual(false);
         wrapper.setProps({ disabled: true });
-        expect(select.props().disabled).toEqual(true);
+        expect(wrapper.find('select').props().disabled).toEqual(true);
       });
 
       it('renders children as expected', () => {

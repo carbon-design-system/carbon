@@ -19,8 +19,8 @@ describe('OrderSummaryFooter', () => {
     });
 
     it('should render with the appropriate classes', () => {
-      expect(orderSummaryFooter.hasClass('bx--order-footer')).toEqual(true);
-      expect(orderSummaryFooter.hasClass('some-class')).toEqual(true);
+      expect(orderSummaryFooter.children().hasClass('bx--order-footer')).toEqual(true);
+      expect(orderSummaryFooter.children().hasClass('some-class')).toEqual(true);
     });
 
     it('should render with the correct footer text', () => {

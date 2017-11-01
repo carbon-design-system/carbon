@@ -60,12 +60,12 @@ describe('CopyButton', () => {
   describe('Renders feedback as expected', () => {
     it('Should make the feedback visible', () => {
       const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
-      const feedback = feedbackWrapper.find('.bx--btn--copy__feedback');
-      expect(feedback.hasClass('bx--btn--copy__feedback--displayed')).toBe(
+      const feedback = () => feedbackWrapper.find('.bx--btn--copy__feedback');
+      expect(feedback().hasClass('bx--btn--copy__feedback--displayed')).toBe(
         false,
       );
       feedbackWrapper.setState({ showFeedback: true });
-      expect(feedback.hasClass('bx--btn--copy__feedback--displayed')).toBe(
+      expect(feedback().hasClass('bx--btn--copy__feedback--displayed')).toBe(
         true,
       );
     });

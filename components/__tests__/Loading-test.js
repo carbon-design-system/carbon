@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Loading from '../Loading';
 import { mount } from 'enzyme';
@@ -43,11 +42,10 @@ describe('Loading', () => {
     const wrapper = mount(<Loading className="extra-class" />);
 
     it('should remove and add bx--loading--stop class', () => {
-      const loader = wrapper.find('.bx--loading');
       wrapper.setProps({ active: false });
-      expect(loader.hasClass('bx--loading--stop')).toEqual(true);
+      expect(wrapper.find('.bx--loading').hasClass('bx--loading--stop')).toEqual(true);
       wrapper.setProps({ active: true });
-      expect(loader.hasClass('bx--loading--stop')).toEqual(false);
+      expect(wrapper.find('.bx--loading').hasClass('bx--loading--stop')).toEqual(false);
     });
 
     it('should not render overlay when withOverlay is set to false', () => {

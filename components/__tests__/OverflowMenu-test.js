@@ -83,7 +83,7 @@ describe('OverflowMenu', () => {
 
       expect(menuOptions.hasClass(openClass)).not.toEqual(true);
       rootWrapper.setState({ open: true });
-      expect(menuOptions.hasClass(openClass)).not.toEqual(false);
+      expect(rootWrapper.find('ul').hasClass(openClass)).not.toEqual(false);
     });
 
     it('should be in an open state after icon is clicked', () => {

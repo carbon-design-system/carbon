@@ -31,8 +31,8 @@ describe('DetailPageHeader', () => {
     );
 
     it('should render wrapper with the correct class', () => {
-      expect(wrapper.hasClass('bx--detail-page-header')).toEqual(true);
-      expect(wrapper.hasClass('bx--detail-page-header--no-tabs')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--detail-page-header')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--detail-page-header--no-tabs')).toEqual(true);
     });
 
     it('should render an icon', () => {
@@ -156,5 +156,4 @@ describe('DetailPageHeader', () => {
       expect(addArgs[1]).toBe(removeArgs[1]); // the scroll handler function
     });
   });
-  
 });

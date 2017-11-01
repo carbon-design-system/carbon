@@ -26,30 +26,30 @@ describe('RadioButtonGroup', () => {
 
       it('sets disabled attribute if disabled prop is set', () => {
         wrapper.setProps({ disabled: true });
-        expect(div.props().disabled).toEqual(true);
+        expect(wrapper.first().props().disabled).toEqual(true);
       });
     });
 
     describe('children', () => {
-      const radioButton = wrapper.find(RadioButton);
+      const radioButton = () => wrapper.find(RadioButton);
 
       it('renders expected number of children', () => {
-        expect(radioButton.length).toEqual(2);
+        expect(radioButton().length).toEqual(2);
       });
 
       it('should set checked property based on defaultSelected prop', () => {
-        expect(radioButton.last().props().checked).toEqual(true);
+        expect(radioButton().last().props().checked).toEqual(true);
       });
 
       it('should set checked property based on valueSelected prop', () => {
         wrapper.setProps({ valueSelected: 'male' });
-        expect(radioButton.first().props().checked).toEqual(true);
+        expect(radioButton().first().props().checked).toEqual(true);
         wrapper.setProps({ valueSelected: 'female' });
-        expect(radioButton.last().props().checked).toEqual(true);
+        expect(radioButton().last().props().checked).toEqual(true);
       });
 
       it('should set expected props on children', () => {
-        const firstChild = radioButton.first();
+        const firstChild = radioButton().first();
         expect(firstChild.props().name).toEqual('gender');
         expect(firstChild.props().value).toEqual('male');
       });
@@ -74,7 +74,8 @@ describe('RadioButtonGroup', () => {
 
     it('invoking onChange sets checked on correct child', () => {
       firstRadio.props().onChange(...args);
-      expect(firstRadio.props().checked).toEqual(true);
+      wrapper.update();
+      expect(wrapper.find(RadioButton).first().props().checked).toEqual(true);
     });
 
     it('should invoke onChange with correct arguments', () => {
