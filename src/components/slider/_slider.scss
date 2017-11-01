@@ -84,10 +84,13 @@
     border-radius: 50%;
     top: 0;
     transform: translate(-50%, -50%);
-    transition: transform 100ms $bx--standard-easing, background 100ms $bx--standard-easing,
-      left $transition--base $bx--standard-easing;
+    transition: transform 100ms $bx--standard-easing, background 100ms $bx--standard-easing;
     cursor: pointer;
     outline: none;
+
+    &--clicked {
+      transition: left $transition--base $bx--standard-easing;
+    }
 
     &:hover {
       transform: translate(-50%, -50%) scale(1.05);
@@ -107,7 +110,7 @@
 
   .bx--slider-text-input,
   .bx-slider-text-input {
-    width: rem(44px);
+    width: rem(60px);
     min-width: 0;
     height: 2rem;
     padding: 0;
