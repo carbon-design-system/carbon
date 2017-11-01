@@ -18,10 +18,25 @@ class FloatingMenu extends React.Component {
     menuDirection: 'bottom',
   };
 
-  componentDidMount() {
-    if (this.doc) {
-      this.menu = this.doc.createElement('div');
-      this.menu.ownerDocument.body.appendChild(this.menu);
+  constructor() {
+    super();
+    this.state = {};
+  }
+
+  onNewMenuRef = menu => {
+    if (!menu) {
+      return;
+    }
+    const doc = menu.ownerDocument;
+    if (typeof ReactDOM.createPortal === 'function') {
+      this.setState({ doc });
+      if (menu.firstChild) {
+        this.menu = menu;
+        this.getMenuPosition();
+      }
+    } else {
+      this.menu = doc.createElement('div');
+      doc.body.appendChild(this.menu);
 
       const style = {
         display: 'block',
@@ -35,15 +50,37 @@ class FloatingMenu extends React.Component {
       this.getMenuPosition();
       this.renderLayer();
     }
-  }
+  };
 
   componentDidUpdate() {
-    this.renderLayer();
+    if (typeof ReactDOM.createPortal !== 'function') {
+      this.renderLayer();
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if (typeof ReactDOM.createPortal === 'function') {
+      const hasChange = props.menuPosition !== this.props.menuPosition || props.menuDirection !== this.props.menuDirection || props.menuOffset !== this.props.menuOffset;
+      if (hasChange) {
+        requestAnimationFrame(() => {
+          if (this.menuWidth !== undefined && this.menuHeight !== undefined) {
+            this.setState({ floatingPosition: this.positionFloatingMenu() });
+          }
+        });
+      }
+    }
   }
 
   componentWillUnmount() {
-    ReactDOM.unmountComponentAtNode(this.menu);
-    this.menu.ownerDocument.body.removeChild(this.menu);
+    if (typeof ReactDOM.createPortal !== 'function') {
+      ReactDOM.unmountComponentAtNode(this.menu);
+      if (this.menu && this.menu.parentNode) {
+        this.menu.parentNode.removeChild(this.menu);
+      }
+    }
+    this.menuWidth = undefined;
+    this.menuHeight = undefined;
+    this.menu = null;
   }
 
   getMenuPosition = () => {
@@ -91,8 +128,8 @@ class FloatingMenu extends React.Component {
     }[this.props.menuDirection]();
   };
 
-  renderLayer = () => {
-    const pos = this.positionFloatingMenu();
+  getChildrenWithProps = (transientStyles = {}) => {
+    const pos = this.state.floatingPosition || this.positionFloatingMenu();
 
     const coreStyles = {
       left: `${pos.left}px`,
@@ -103,22 +140,29 @@ class FloatingMenu extends React.Component {
       opacity: 1,
     };
 
-    const style = Object.assign(coreStyles, this.props.styles);
-    const childrenWithProps = React.cloneElement(this.props.children, {
+    const style = Object.assign(coreStyles, this.props.styles, transientStyles);
+    return React.cloneElement(this.props.children, {
       style,
     });
+  };
 
-    ReactDOM.render(childrenWithProps, this.menu);
+  renderLayer = () => {
+    ReactDOM.render(this.getChildrenWithProps(), this.menu);
   };
 
   render() {
+    if (this.state.doc && typeof ReactDOM.createPortal === 'function') {
+      const childrenWithProps = this.getChildrenWithProps(this.menuWidth !== undefined && this.menuHeight !== undefined ? {} : {
+        display: 'block',
+        opacity: 1,
+      });
+      return ReactDOM.createPortal((
+        <div ref={this.onNewMenuRef}>{childrenWithProps}</div> // Add wrapper `<div>` to align to React15 version
+      ), this.state.doc.body);
+    }
+
     return (
-      <div
-        ref={node => {
-          this.doc = node && node.ownerDocument;
-        }}
-        hidden
-      />
+      <div ref={this.onNewMenuRef} hidden />
     );
   }
 }
