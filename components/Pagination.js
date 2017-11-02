@@ -138,7 +138,8 @@ class Pagination extends Component {
             labelText={itemsPerPageText}
             hideLabel
             onChange={this.handleSizeChange}
-            value={statePageSize}>
+            value={statePageSize}
+          >
             {pageSizes.map(size => (
               <SelectItem key={size} value={size} text={String(size)} />
             ))}
@@ -168,7 +169,8 @@ class Pagination extends Component {
           <button
             className="bx--pagination__button bx--pagination__button--backward"
             onClick={this.decrementPage}
-            disabled={this.props.disabled || statePage === 1}>
+            disabled={this.props.disabled || statePage === 1}
+          >
             <Icon
               className="bx--pagination__button-icon"
               name="chevron--left"
@@ -192,9 +194,10 @@ class Pagination extends Component {
             onClick={this.incrementPage}
             disabled={
               this.props.disabled ||
-              statePage === Math.ceil(totalItems / statePageSize) ||
+              statePage >= Math.ceil(totalItems / statePageSize) ||
               isLastPage
-            }>
+            }
+          >
             <Icon
               className="bx--pagination__button-icon"
               name="chevron--right"

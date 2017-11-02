@@ -62,10 +62,7 @@ describe('Pagination', () => {
 
       describe('pagination size container when total pages unknown', () => {
         const pager = mount(
-          <Pagination
-            pageSizes={[5, 10]}
-            pagesUnknown={true}
-          />
+          <Pagination pageSizes={[5, 10]} pagesUnknown={true} />
         );
         const left = pager.find('.bx--pagination__left');
 
@@ -204,14 +201,9 @@ describe('Pagination', () => {
         expect(buttons.at(1).props().disabled).toBe(true);
       });
 
-
-//wip2
       describe('pagination paging container when total pages unknown', () => {
         const pager = mount(
-          <Pagination
-            pageSizes={[5, 10]}
-            pagesUnknown={true}
-          />
+          <Pagination pageSizes={[5, 10]} pagesUnknown={true} />
         );
 
         const right = pager.find('.bx--pagination__right');
@@ -228,12 +220,12 @@ describe('Pagination', () => {
         it('should have two buttons for navigation', () => {
           const buttons = right.find('.bx--pagination__button');
           expect(buttons.length).toBe(2);
-          expect(buttons.at(0).hasClass('bx--pagination__button--backward')).toBe(
-            true
-          );
-          expect(buttons.at(1).hasClass('bx--pagination__button--forward')).toBe(
-            true
-          );
+          expect(
+            buttons.at(0).hasClass('bx--pagination__button--backward')
+          ).toBe(true);
+          expect(
+            buttons.at(1).hasClass('bx--pagination__button--forward')
+          ).toBe(true);
         });
 
         it('should disable backward navigation for the first page', () => {
@@ -263,7 +255,9 @@ describe('Pagination', () => {
               pageInputDisabled={true}
             />
           );
-          const right = noTextInput.find('.bx--pagination__right .bx--text__input');
+          const right = noTextInput.find(
+            '.bx--pagination__right .bx--text__input'
+          );
           expect(right.length).toEqual(0);
         });
       });
@@ -334,6 +328,11 @@ describe('Pagination', () => {
           expect(pager.state().page).toBe(3);
           pager.setProps({ page: 2 });
           expect(pager.state().page).toBe(2);
+        });
+        it('should not increment page if there is only 1 page', () => {
+          const pager = mount(<Pagination pageSizes={[10]} totalItems={5} />);
+          const buttons = pager.find('.bx--pagination__button');
+          expect(buttons.at(1).props().disabled).toBe(true);
         });
       });
     });
