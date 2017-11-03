@@ -101,6 +101,7 @@
   .bx--date-picker__calendar,
   .flatpickr-calendar.open {
     @include layer('pop-out');
+    background-color: $ui-01;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -135,6 +136,7 @@
   .flatpickr-month .flatpickr-next-month {
     padding: 0;
     line-height: rem(20px);
+    fill: $text-01;
 
     &:hover svg {
       fill: $brand-01;
@@ -156,6 +158,7 @@
   .bx--date-picker__month .flatpickr-current-month .cur-month,
   .flatpickr-month .flatpickr-current-month .cur-month {
     margin-right: 0.25rem;
+    color: $text-01;
   }
 
   .numInputWrapper,
