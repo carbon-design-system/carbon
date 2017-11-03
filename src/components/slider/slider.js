@@ -120,9 +120,9 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
       }
       if (type === 'mousemove' || type === 'click') {
         if (type === 'click') {
-          document.querySelector(this.options.selectorThumb).classList.add('bx--slider__thumb--clicked');
+          this.element.querySelector(this.options.selectorThumb).classList.add('bx--slider__thumb--clicked');
         } else {
-          document.querySelector(this.options.selectorThumb).classList.remove('bx--slider__thumb--clicked');
+          this.element.querySelector(this.options.selectorThumb).classList.remove('bx--slider__thumb--clicked');
         }
 
         const track = this.track.getBoundingClientRect();

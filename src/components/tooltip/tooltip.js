@@ -13,7 +13,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    */
   constructor(element, options) {
     super(element, options);
-    ['mouseover', 'mouseout', 'focus', 'blur'].forEach(name => {
+    ['mouseover', 'mouseout', 'focus', 'blur', 'touchleave', 'touchcancel'].forEach(name => {
       this.element.addEventListener(name, event => {
         this._handleHover(event);
       });
@@ -66,6 +66,8 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
       mouseout: 'hidden',
       focus: 'shown',
       blur: 'hidden',
+      touchleave: 'hidden',
+      touchcancel: 'hidden',
     }[event.type];
     this.changeState(state, getLaunchingDetails(event));
   }
