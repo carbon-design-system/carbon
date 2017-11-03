@@ -22,6 +22,7 @@
     display: block;
     background-color: $field-01;
     width: 100%;
+    height: rem(40px);
     cursor: pointer;
     color: $text-01;
 
@@ -52,6 +53,7 @@
   }
 
   .bx--dropdown-text {
+    height: rem(40px);
     padding-top: rem(13px);
     padding-bottom: rem(13px);
     padding-left: 1rem;
