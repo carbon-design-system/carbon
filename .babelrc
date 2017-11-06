@@ -1,8 +1,0 @@
-{
-  "presets": [
-    "./scripts/env",
-    "react",
-    "stage-1"
-  ],
-  "plugins": ["transform-object-assign"]
-}

@@ -1,7 +1,7 @@
 # Ignore generated folders
 node_modules
-cjs
 es
+lib
 storybook-static
 
 # Logs

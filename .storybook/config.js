@@ -9,7 +9,7 @@ addDecorator(story => <Container story={story} />);
 setAddon(infoAddon);
 
 function loadStories() {
-  const req = require.context('./components', true, /\.js$/);
+  const req = require.context('../src/components', true, /\-story\.js$/);
   req.keys().forEach(filename => req(filename));
 }
 
