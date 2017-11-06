@@ -49,6 +49,7 @@ $loading__size: 10.5rem;
     justify-content: center;
     align-items: center;
     transition: background-color 2000ms $bx--standard-easing;
+    z-index: z('overlay');
   }
 
   .bx--loading-overlay--stop {
