@@ -34,6 +34,14 @@ The update to tables splits out the `scss` files into multiple partial files wit
 
 #### Events
 
+| Key                      | Value                            | Description                                |
+|--------------------------|----------------------------------|--------------------------------------------|
+| eventBeforeExpand        | data-table-v2-beforetoggleexpand | Row expansion event                        |
+| eventAfterExpand         | data-table-v2-aftertoggleexpand  | Row expansion event                        |
+| eventBeforeSort          | data-table-v2-beforetogglesort   | Sort event                                 |
+| eventAfterSort           | data-table-v2-aftertogglesort    | Sort event                                 |
+| eventTrigger             | [data-event]                     | Data attribute for clickable events        |
+| eventParentContainer     | [data-parent-row]                | Data attribute for event container         |
 
 
 #### Options
@@ -56,12 +64,7 @@ The update to tables splits out the `scss` files into multiple partial files wit
 | classExpandableRowHover  | bx--expandable-row--hover-v2     | Hover styles class                         |
 | classTableSortAscending  | bx--table-sort-v2--ascending     | Ascending sort icon class                  |
 | classTableSortActive     | bx--table-sort-v2--active        | Active sort icon class                     |
-| eventBeforeExpand        | data-table-v2-beforetoggleexpand | Row expansion event                        |
-| eventAfterExpand         | data-table-v2-aftertoggleexpand  | Row expansion event                        |
-| eventBeforeSort          | data-table-v2-beforetogglesort   | Sort event                                 |
-| eventAfterSort           | data-table-v2-aftertogglesort    | Sort event                                 |
-| eventTrigger             | [data-event]                     | Data attribute for clickable events        |
-| eventParentContainer     | [data-parent-row]                | Data attribute for event container         |
+
 
 ### FAQ
 
@@ -69,6 +72,7 @@ The update to tables splits out the `scss` files into multiple partial files wit
 The table component does not sort the table for you, rather it emits an event and toggles the sort UI. It is up to the user to re-render the table rows sorted; you can see this in action `here`.
 
 **How do I use the expandable rows**
-
+If you would like to programmatically expand table rows, you can add the `bx--expandable-row-v2` to the `selectorParentRows` elements.
 
 **How do I activate the batch actions pane**
+If you would like to programmatically activate the batch actions pane, you can add `bx--batch-actions--active` to the `bx--batch-actions` element.
