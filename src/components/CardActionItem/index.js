@@ -1,2 +1,1 @@
-import CardActionItem from './CardActionItem';
-export default CardActionItem;
+export default from './CardActionItem';

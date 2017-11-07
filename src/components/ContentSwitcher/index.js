@@ -1,2 +1,1 @@
-import ContentSwitcher from './ContentSwitcher';
-export default ContentSwitcher;
+export default from './ContentSwitcher';

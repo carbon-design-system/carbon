@@ -1,2 +1,1 @@
-import TimePickerSelect from './TimePickerSelect';
-export default TimePickerSelect;
+export default from './TimePickerSelect';

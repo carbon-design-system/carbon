@@ -1,2 +1,1 @@
-import InteriorLeftNav from './InteriorLeftNav';
-export default InteriorLeftNav;
+export default from './InteriorLeftNav';

@@ -2,11 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
-
 const Breadcrumb = ({ children, className, ...other }) => {
   const classNames = classnames('bx--breadcrumb', className);
   return (
@@ -16,6 +11,9 @@ const Breadcrumb = ({ children, className, ...other }) => {
   );
 };
 
-Breadcrumb.propTypes = propTypes;
+Breadcrumb.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
 
 export default Breadcrumb;

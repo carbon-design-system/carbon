@@ -2,21 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  status: PropTypes.number,
-  className: PropTypes.string,
-  runningText: PropTypes.string,
-  notRunningText: PropTypes.string,
-  stoppedText: PropTypes.string,
-};
-
-const defaultProps = {
-  status: 0,
-  runningText: 'Running',
-  notRunningText: 'Not Running',
-  stoppedText: 'Stopped',
-};
-
 const appStatus = {
   RUNNING: 0,
   NOT_RUNNING: 1,
@@ -71,8 +56,21 @@ const CardStatus = ({
   );
 };
 
-CardStatus.propTypes = propTypes;
-CardStatus.defaultProps = defaultProps;
+CardStatus.propTypes = {
+  status: PropTypes.number,
+  className: PropTypes.string,
+  runningText: PropTypes.string,
+  notRunningText: PropTypes.string,
+  stoppedText: PropTypes.string,
+};
+
+CardStatus.defaultProps = {
+  status: 0,
+  runningText: 'Running',
+  notRunningText: 'Not Running',
+  stoppedText: 'Stopped',
+};
+
 CardStatus.appStatus = appStatus;
 
 export default CardStatus;

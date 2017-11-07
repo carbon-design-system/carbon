@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-class Search extends Component {
+export default class Search extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -172,5 +172,3 @@ class Search extends Component {
     );
   }
 }
-
-export default Search;

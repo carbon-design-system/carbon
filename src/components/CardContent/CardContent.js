@@ -3,22 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-const propTypes = {
-  children: PropTypes.node,
-  cardIcon: PropTypes.string,
-  cardTitle: PropTypes.string,
-  cardLink: PropTypes.node,
-  cardInfo: PropTypes.array,
-  className: PropTypes.string,
-  iconDescription: PropTypes.string,
-};
-
-const defaultProps = {
-  iconDescription: 'card icon',
-  cardIcon: 'app-services',
-  cardTitle: 'card title',
-};
-
 const CardContent = ({
   className,
   children,
@@ -76,7 +60,20 @@ const CardContent = ({
   );
 };
 
-CardContent.propTypes = propTypes;
-CardContent.defaultProps = defaultProps;
+CardContent.propTypes = {
+  children: PropTypes.node,
+  cardIcon: PropTypes.string,
+  cardTitle: PropTypes.string,
+  cardLink: PropTypes.node,
+  cardInfo: PropTypes.array,
+  className: PropTypes.string,
+  iconDescription: PropTypes.string,
+};
+
+CardContent.defaultProps = {
+  iconDescription: 'card icon',
+  cardIcon: 'app-services',
+  cardTitle: 'card title',
+};
 
 export default CardContent;

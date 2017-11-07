@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Icon from '../Icon';
 import uid from '../../tools/uniqueId';
 
-class FileUploaderButton extends Component {
+export class FileUploaderButton extends Component {
   static propTypes = {
     className: PropTypes.string,
     disableLabelChanges: PropTypes.bool,
@@ -99,7 +99,7 @@ class FileUploaderButton extends Component {
   }
 }
 
-class Filename extends Component {
+export class Filename extends Component {
   static propTypes = {
     style: PropTypes.object,
     status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
@@ -154,7 +154,7 @@ class Filename extends Component {
   }
 }
 
-class FileUploader extends Component {
+export default class FileUploader extends Component {
   static propTypes = {
     iconDescription: PropTypes.string,
     buttonLabel: PropTypes.string,
@@ -272,6 +272,3 @@ class FileUploader extends Component {
     );
   }
 }
-
-export default FileUploader;
-export { FileUploaderButton, Filename };

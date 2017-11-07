@@ -1,2 +1,1 @@
-import AccordionItem from './AccordionItem';
-export default AccordionItem;
+export default from './AccordionItem';

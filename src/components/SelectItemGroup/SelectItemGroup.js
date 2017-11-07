@@ -2,18 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-};
-
-const defaultProps = {
-  disabled: false,
-  label: 'Provide label',
-};
-
 const SelectItemGroup = ({
   children,
   className,
@@ -33,7 +21,16 @@ const SelectItemGroup = ({
   );
 };
 
-SelectItemGroup.propTypes = propTypes;
-SelectItemGroup.defaultProps = defaultProps;
+SelectItemGroup.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  label: PropTypes.string.isRequired,
+};
+
+SelectItemGroup.defaultProps = {
+  disabled: false,
+  label: 'Provide label',
+};
 
 export default SelectItemGroup;

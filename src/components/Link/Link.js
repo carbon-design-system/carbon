@@ -2,12 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  href: PropTypes.string,
-};
-
 const Link = ({ children, className, href, ...other }) => {
   const classNames = classnames('bx--link', className);
   return (
@@ -17,6 +11,10 @@ const Link = ({ children, className, href, ...other }) => {
   );
 };
 
-Link.propTypes = propTypes;
+Link.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  href: PropTypes.string,
+};
 
 export default Link;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import uid from '../../tools/uniqueId';
 
-class StructuredListWrapper extends Component {
+export class StructuredListWrapper extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -32,7 +32,7 @@ class StructuredListWrapper extends Component {
   }
 }
 
-class StructuredListHead extends Component {
+export class StructuredListHead extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -50,7 +50,7 @@ class StructuredListHead extends Component {
   }
 }
 
-class StructuredListInput extends Component {
+export class StructuredListInput extends Component {
   static propTypes = {
     className: PropTypes.string,
     id: PropTypes.string,
@@ -89,7 +89,7 @@ class StructuredListInput extends Component {
   }
 }
 
-class StructuredListRow extends Component {
+export class StructuredListRow extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -141,7 +141,7 @@ class StructuredListRow extends Component {
   }
 }
 
-class StructuredListBody extends Component {
+export class StructuredListBody extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -169,7 +169,7 @@ class StructuredListBody extends Component {
   }
 }
 
-class StructuredListCell extends Component {
+export class StructuredListCell extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -198,12 +198,3 @@ class StructuredListCell extends Component {
     );
   }
 }
-
-export {
-  StructuredListWrapper,
-  StructuredListHead,
-  StructuredListBody,
-  StructuredListRow,
-  StructuredListInput,
-  StructuredListCell,
-};

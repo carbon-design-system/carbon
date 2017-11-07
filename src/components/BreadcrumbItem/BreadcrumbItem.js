@@ -3,12 +3,6 @@ import React from 'react';
 import classnames from 'classnames';
 import Link from '../Link';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  href: PropTypes.string,
-};
-
 const BreadcrumbItem = ({ children, className, href, ...other }) => {
   const classNames = classnames('bx--breadcrumb-item', className);
   return (
@@ -18,6 +12,10 @@ const BreadcrumbItem = ({ children, className, href, ...other }) => {
   );
 };
 
-BreadcrumbItem.propTypes = propTypes;
+BreadcrumbItem.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  href: PropTypes.string,
+};
 
 export default BreadcrumbItem;

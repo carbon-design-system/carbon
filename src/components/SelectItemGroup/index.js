@@ -1,2 +1,1 @@
-import SelectItemGroup from './SelectItemGroup';
-export default SelectItemGroup;
+export default from './SelectItemGroup';

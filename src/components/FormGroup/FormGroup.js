@@ -2,21 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  legendText: PropTypes.string,
-  className: PropTypes.string,
-  invalid: PropTypes.bool,
-  message: PropTypes.bool,
-  messageText: PropTypes.string,
-};
-const defaultProps = {
-  invalid: false,
-  message: false,
-  messageText: 'Provide message text',
-  legendText: 'Provide legend text',
-};
-
 const FormGroup = ({
   legendText,
   invalid,
@@ -43,7 +28,20 @@ const FormGroup = ({
   );
 };
 
-FormGroup.propTypes = propTypes;
-FormGroup.defaultProps = defaultProps;
+FormGroup.propTypes = {
+  children: PropTypes.node,
+  legendText: PropTypes.string,
+  className: PropTypes.string,
+  invalid: PropTypes.bool,
+  message: PropTypes.bool,
+  messageText: PropTypes.string,
+};
+
+FormGroup.defaultProps = {
+  invalid: false,
+  message: false,
+  messageText: 'Provide message text',
+  legendText: 'Provide legend text',
+};
 
 export default FormGroup;

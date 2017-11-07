@@ -2,20 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-const propTypes = {
-  label: PropTypes.string,
-  className: PropTypes.string,
-  current: PropTypes.bool,
-  complete: PropTypes.bool,
-  incomplete: PropTypes.bool,
-  description: PropTypes.string,
-};
-
-const defaultProps = {
-  label: 'Provide label',
-};
-
-const ProgressStep = ({ ...props }) => {
+export const ProgressStep = ({ ...props }) => {
   const {
     label,
     description,
@@ -64,10 +51,20 @@ const ProgressStep = ({ ...props }) => {
   );
 };
 
-ProgressStep.propTypes = propTypes;
-ProgressStep.defaultProps = defaultProps;
+ProgressStep.propTypes = {
+  label: PropTypes.string,
+  className: PropTypes.string,
+  current: PropTypes.bool,
+  complete: PropTypes.bool,
+  incomplete: PropTypes.bool,
+  description: PropTypes.string,
+};
 
-class ProgressIndicator extends Component {
+ProgressStep.defaultProps = {
+  label: 'Provide label',
+};
+
+export class ProgressIndicator extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -119,5 +116,3 @@ class ProgressIndicator extends Component {
     );
   }
 }
-
-export { ProgressIndicator, ProgressStep };

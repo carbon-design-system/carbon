@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-class Loading extends React.Component {
+export default class Loading extends React.Component {
   static propTypes = {
     active: PropTypes.bool,
     className: PropTypes.string,
@@ -39,5 +39,3 @@ class Loading extends React.Component {
     );
   }
 }
-
-export default Loading;

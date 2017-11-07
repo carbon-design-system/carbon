@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextInput from '../TextInput';
 
-class Slider extends PureComponent {
+export default class Slider extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     hideTextInput: PropTypes.bool,
@@ -290,5 +290,3 @@ class Slider extends PureComponent {
     );
   }
 }
-
-export default Slider;

@@ -3,11 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import TableRow from '../TableRow';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
-
 /**
  * Adds striping to TableRows if the `even` prop wasn’t explicitly set.
  * @param  {array} rows  React elements that are children of the TableBody
@@ -48,6 +43,9 @@ const TableBody = props => {
   );
 };
 
-TableBody.propTypes = propTypes;
+TableBody.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
 
 export default TableBody;

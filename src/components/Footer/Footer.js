@@ -4,28 +4,6 @@ import classnames from 'classnames';
 import Link from '../Link';
 import Button from '../Button';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  labelOne: PropTypes.string,
-  linkTextOne: PropTypes.string,
-  linkHrefOne: PropTypes.string,
-  labelTwo: PropTypes.string,
-  linkTextTwo: PropTypes.string,
-  linkHrefTwo: PropTypes.string,
-  buttonText: PropTypes.string,
-};
-
-const defaultProps = {
-  labelOne: 'Need Help?',
-  linkTextOne: 'Contact Bluemix Sales',
-  linkHrefOne: '#',
-  labelTwo: 'Estimate Monthly Cost',
-  linkTextTwo: 'Cost Calculator',
-  linkHrefTwo: '#',
-  buttonText: 'Create',
-};
-
 const Footer = ({
   className,
   children,
@@ -68,7 +46,26 @@ const Footer = ({
   return footer;
 };
 
-Footer.propTypes = propTypes;
-Footer.defaultProps = defaultProps;
+Footer.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  labelOne: PropTypes.string,
+  linkTextOne: PropTypes.string,
+  linkHrefOne: PropTypes.string,
+  labelTwo: PropTypes.string,
+  linkTextTwo: PropTypes.string,
+  linkHrefTwo: PropTypes.string,
+  buttonText: PropTypes.string,
+};
+
+Footer.defaultProps = {
+  labelOne: 'Need Help?',
+  linkTextOne: 'Contact Bluemix Sales',
+  linkHrefOne: '#',
+  labelTwo: 'Estimate Monthly Cost',
+  linkTextTwo: 'Cost Calculator',
+  linkHrefTwo: '#',
+  buttonText: 'Create',
+};
 
 export default Footer;

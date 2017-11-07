@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-class Tab extends React.Component {
+export default class Tab extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     handleTabClick: PropTypes.func,
@@ -90,5 +90,3 @@ class Tab extends React.Component {
     );
   }
 }
-
-export default Tab;

@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import InteriorLeftNavItem from '../InteriorLeftNavItem';
 import Icon from '../Icon';
 
-class InteriorLeftNavList extends Component {
+export default class InteriorLeftNavList extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
@@ -112,5 +112,3 @@ class InteriorLeftNavList extends Component {
     );
   }
 }
-
-export default InteriorLeftNavList;

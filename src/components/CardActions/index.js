@@ -1,2 +1,1 @@
-import CardActions from './CardActions';
-export default CardActions;
+export default from './CardActions';

@@ -1,15 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const propTypes = {
-  selected: PropTypes.bool,
-  children: PropTypes.node,
-};
-
-const defaultProps = {
-  selected: false,
-};
-
 const TabContent = props => {
   const { selected, children, ...other } = props;
 
@@ -20,7 +11,13 @@ const TabContent = props => {
   );
 };
 
-TabContent.propTypes = propTypes;
-TabContent.defaultProps = defaultProps;
+TabContent.propTypes = {
+  selected: PropTypes.bool,
+  children: PropTypes.node,
+};
+
+TabContent.defaultProps = {
+  selected: false,
+};
 
 export default TabContent;

@@ -2,25 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import icons from 'carbon-icons';
 
-const propTypes = {
-  className: PropTypes.string,
-  description: PropTypes.string.isRequired,
-  fill: PropTypes.string,
-  fillRule: PropTypes.string,
-  height: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  role: PropTypes.string,
-  style: PropTypes.object,
-  viewBox: PropTypes.string,
-  width: PropTypes.string,
-};
-
-const defaultProps = {
-  fillRule: 'evenodd',
-  role: 'img',
-  description: 'Provide a description that will be used as the title',
-};
-
 /**
  * Returns a single icon Object
  * @param {string} iconName - "name" property of icon
@@ -131,9 +112,24 @@ const Icon = ({
   );
 };
 
-Icon.propTypes = propTypes;
-Icon.defaultProps = defaultProps;
+Icon.propTypes = {
+  className: PropTypes.string,
+  description: PropTypes.string.isRequired,
+  fill: PropTypes.string,
+  fillRule: PropTypes.string,
+  height: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  role: PropTypes.string,
+  style: PropTypes.object,
+  viewBox: PropTypes.string,
+  width: PropTypes.string,
+};
+
+Icon.defaultProps = {
+  fillRule: 'evenodd',
+  role: 'img',
+  description: 'Provide a description that will be used as the title',
+};
 
 export { icons };
-
 export default Icon;

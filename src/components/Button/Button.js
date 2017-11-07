@@ -3,36 +3,6 @@ import React from 'react';
 import Icon from '../Icon';
 import classNames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  small: PropTypes.bool,
-  kind: PropTypes.oneOf(['primary', 'secondary', 'danger', 'ghost']).isRequired,
-  href: PropTypes.string,
-  tabIndex: PropTypes.number,
-  type: PropTypes.oneOf(['button', 'reset', 'submit']),
-  role: PropTypes.string,
-  icon: PropTypes.string,
-  iconDescription: props => {
-    if (props.icon && !props.iconDescription) {
-      return new Error(
-        'icon property specified without also providing an iconDescription property.'
-      );
-    }
-    return undefined;
-  },
-};
-
-const defaultProps = {
-  iconDescription: 'Provide icon description if icon is used',
-  tabIndex: 0,
-  type: 'button',
-  disabled: false,
-  small: false,
-  kind: 'primary',
-};
-
 const Button = ({
   children,
   className,
@@ -81,7 +51,34 @@ const Button = ({
   return href ? anchor : button;
 };
 
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
+Button.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  small: PropTypes.bool,
+  kind: PropTypes.oneOf(['primary', 'secondary', 'danger', 'ghost']).isRequired,
+  href: PropTypes.string,
+  tabIndex: PropTypes.number,
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
+  role: PropTypes.string,
+  icon: PropTypes.string,
+  iconDescription: props => {
+    if (props.icon && !props.iconDescription) {
+      return new Error(
+        'icon property specified without also providing an iconDescription property.'
+      );
+    }
+    return undefined;
+  },
+};
+
+Button.defaultProps = {
+  iconDescription: 'Provide icon description if icon is used',
+  tabIndex: 0,
+  type: 'button',
+  disabled: false,
+  small: false,
+  kind: 'primary',
+};
 
 export default Button;

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-class DatePickerInput extends Component {
+export default class DatePickerInput extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     children: PropTypes.node,
@@ -109,5 +109,3 @@ class DatePickerInput extends Component {
     );
   }
 }
-
-export default DatePickerInput;

@@ -14,12 +14,6 @@ const TYPES = {
   'third-party': 'Third-Party',
 };
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
-};
-
 const Tag = ({ children, className, type, ...other }) => {
   const tagClass = `bx--tag--${type}`;
   const tagClasses = classNames('bx--tag', tagClass, className);
@@ -30,7 +24,11 @@ const Tag = ({ children, className, type, ...other }) => {
   );
 };
 
-Tag.propTypes = propTypes;
+Tag.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
+};
 
 export const types = Object.keys(TYPES);
 export default Tag;

@@ -1,2 +1,1 @@
-import DangerButton from './DangerButton';
-export default DangerButton;
+export default from './DangerButton';

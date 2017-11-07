@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import Icon from '../Icon';
 
-class AccordionItem extends Component {
+export default class AccordionItem extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -88,5 +88,3 @@ class AccordionItem extends Component {
     );
   }
 }
-
-export default AccordionItem;

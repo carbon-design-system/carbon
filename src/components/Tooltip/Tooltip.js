@@ -4,7 +4,7 @@ import Icon from '../Icon';
 import classNames from 'classnames';
 import FloatingMenu from '../../internal/FloatingMenu';
 
-class Tooltip extends Component {
+export default class Tooltip extends Component {
   static propTypes = {
     open: PropTypes.bool,
     children: PropTypes.node,
@@ -117,5 +117,3 @@ class Tooltip extends Component {
     );
   }
 }
-
-export default Tooltip;

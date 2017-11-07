@@ -1,2 +1,1 @@
-import TableHead from './TableHead';
-export default TableHead;
+export default from './TableHead';

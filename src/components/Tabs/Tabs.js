@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Icon from '../Icon';
 import TabContent from '../TabContent';
 
-class Tabs extends React.Component {
+export default class Tabs extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -152,5 +152,3 @@ class Tabs extends React.Component {
     );
   }
 }
-
-export default Tabs;

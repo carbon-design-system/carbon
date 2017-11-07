@@ -2,12 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  containerClassName: PropTypes.string,
-};
-
 const Table = props => {
   const { children, className, containerClassName, ...other } = props;
 
@@ -33,6 +27,10 @@ const Table = props => {
   );
 };
 
-Table.propTypes = propTypes;
+Table.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  containerClassName: PropTypes.string,
+};
 
 export default Table;

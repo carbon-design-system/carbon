@@ -2,16 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  nested: PropTypes.bool,
-};
-
-const defaultProps = {
-  nested: false,
-};
-
 const OrderedList = ({ children, className, nested, ...other }) => {
   const classNames = classnames('bx--list--ordered', className, {
     'bx--list--nested': nested,
@@ -23,7 +13,14 @@ const OrderedList = ({ children, className, nested, ...other }) => {
   );
 };
 
-OrderedList.propTypes = propTypes;
-OrderedList.defaultProps = defaultProps;
+OrderedList.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  nested: PropTypes.bool,
+};
+
+OrderedList.defaultProps = {
+  nested: false,
+};
 
 export default OrderedList;

@@ -7,7 +7,7 @@ import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import { equals } from '../../tools/array';
 
-class Pagination extends Component {
+export default class Pagination extends Component {
   static propTypes = {
     backwardText: PropTypes.string,
     className: PropTypes.string,
@@ -206,5 +206,3 @@ class Pagination extends Component {
     );
   }
 }
-
-export default Pagination;

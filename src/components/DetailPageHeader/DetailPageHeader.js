@@ -8,7 +8,7 @@ import Tabs from '../Tabs';
 import OverflowMenu from '../OverflowMenu';
 import Icon from '../Icon';
 
-class DetailPageHeader extends Component {
+export default class DetailPageHeader extends Component {
   static propTypes = {
     children: PropTypes.node,
     title: PropTypes.string.isRequired,
@@ -165,5 +165,3 @@ class DetailPageHeader extends Component {
     );
   }
 }
-
-export default DetailPageHeader;

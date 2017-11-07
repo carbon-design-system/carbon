@@ -1,2 +1,1 @@
-import TableData from './TableData';
-export default TableData;
+export default from './TableData';

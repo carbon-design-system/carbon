@@ -3,19 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-const propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
-  ariaLabel: PropTypes.string,
-  iconName: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-};
-
-const defaultProps = {
-  ariaLabel: '',
-  description: 'card action',
-};
-
 const CardActionItem = ({
   className,
   id,
@@ -44,7 +31,17 @@ const CardActionItem = ({
   );
 };
 
-CardActionItem.propTypes = propTypes;
-CardActionItem.defaultProps = defaultProps;
+CardActionItem.propTypes = {
+  className: PropTypes.string,
+  id: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  iconName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};
+
+CardActionItem.defaultProps = {
+  ariaLabel: '',
+  description: 'card action',
+};
 
 export default CardActionItem;

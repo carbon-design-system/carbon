@@ -3,13 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  iconClassName: PropTypes.string,
-  expanded: PropTypes.bool,
-};
-
 const TableData = props => {
   const { children, className, iconClassName, expanded, ...other } = props;
 
@@ -43,6 +36,11 @@ const TableData = props => {
   );
 };
 
-TableData.propTypes = propTypes;
+TableData.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  iconClassName: PropTypes.string,
+  expanded: PropTypes.bool,
+};
 
 export default TableData;

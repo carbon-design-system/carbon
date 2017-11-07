@@ -2,17 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const defaultProps = {
-  header: false,
-};
-
-const propTypes = {
-  header: PropTypes.bool,
-  className: PropTypes.string,
-  children: PropTypes.node,
-  even: PropTypes.bool,
-};
-
 const TableRow = props => {
   const { even, header, className, children, ...other } = props;
 
@@ -28,7 +17,15 @@ const TableRow = props => {
   );
 };
 
-TableRow.defaultProps = defaultProps;
-TableRow.propTypes = propTypes;
+TableRow.propTypes = {
+  header: PropTypes.bool,
+  className: PropTypes.string,
+  children: PropTypes.node,
+  even: PropTypes.bool,
+};
+
+TableRow.defaultProps = {
+  header: false,
+};
 
 export default TableRow;

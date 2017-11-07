@@ -1,2 +1,1 @@
-import TooltipSimple from './TooltipSimple';
-export default TooltipSimple;
+export default from './TooltipSimple';

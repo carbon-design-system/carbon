@@ -1,4 +1,4 @@
 node_modules
-cjs
+lib
 es
 storybook-static

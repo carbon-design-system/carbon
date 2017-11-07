@@ -1,8 +1,2 @@
-import Toolbar, {
-  ToolbarItem,
-  ToolbarTitle,
-  ToolbarOption,
-  ToolbarDivider,
-} from './Toolbar';
-export default Toolbar;
-export { ToolbarItem, ToolbarTitle, ToolbarOption, ToolbarDivider };
+export * from './Toolbar';
+export default from './Toolbar';

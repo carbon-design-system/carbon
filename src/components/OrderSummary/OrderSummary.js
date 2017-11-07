@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Link from '../Link';
 
-class OrderSummary extends Component {
+export class OrderSummary extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -21,7 +21,7 @@ class OrderSummary extends Component {
   }
 }
 
-class OrderSummaryHeader extends Component {
+export class OrderSummaryHeader extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -45,7 +45,7 @@ class OrderSummaryHeader extends Component {
   }
 }
 
-class OrderSummaryList extends Component {
+export class OrderSummaryList extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -63,7 +63,7 @@ class OrderSummaryList extends Component {
   }
 }
 
-class OrderSummaryCategory extends Component {
+export class OrderSummaryCategory extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -87,7 +87,7 @@ class OrderSummaryCategory extends Component {
   }
 }
 
-class OrderSummaryListItem extends Component {
+export class OrderSummaryListItem extends Component {
   static propTypes = {
     className: PropTypes.string,
     text: PropTypes.string,
@@ -112,7 +112,7 @@ class OrderSummaryListItem extends Component {
   }
 }
 
-class OrderSummaryTotal extends Component {
+export class OrderSummaryTotal extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -153,7 +153,7 @@ class OrderSummaryTotal extends Component {
   }
 }
 
-class OrderSummaryFooter extends Component {
+export class OrderSummaryFooter extends Component {
   static propTypes = {
     className: PropTypes.string,
     linkText: PropTypes.string,
@@ -193,13 +193,3 @@ class OrderSummaryFooter extends Component {
     );
   }
 }
-
-export {
-  OrderSummary,
-  OrderSummaryHeader,
-  OrderSummaryCategory,
-  OrderSummaryList,
-  OrderSummaryListItem,
-  OrderSummaryTotal,
-  OrderSummaryFooter,
-};

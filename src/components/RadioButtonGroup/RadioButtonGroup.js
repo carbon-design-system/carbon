@@ -3,7 +3,7 @@ import React from 'react';
 import RadioButton from '../RadioButton';
 import warning from 'warning';
 
-class RadioButtonGroup extends React.Component {
+export default class RadioButtonGroup extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -83,5 +83,3 @@ class RadioButtonGroup extends React.Component {
     );
   }
 }
-
-export default RadioButtonGroup;

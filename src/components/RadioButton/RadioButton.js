@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import uid from '../../tools/uniqueId';
 
-class RadioButton extends React.Component {
+export default class RadioButton extends React.Component {
   static propTypes = {
     checked: PropTypes.bool,
     className: PropTypes.string,
@@ -54,5 +54,3 @@ class RadioButton extends React.Component {
     );
   }
 }
-
-export default RadioButton;

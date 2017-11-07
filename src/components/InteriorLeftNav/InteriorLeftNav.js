@@ -7,7 +7,7 @@ import InteriorLeftNavList from '../InteriorLeftNavList';
 import InteriorLeftNavItem from '../InteriorLeftNavItem';
 import Icon from '../Icon';
 
-class InteriorLeftNav extends Component {
+export default class InteriorLeftNav extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -139,5 +139,3 @@ class InteriorLeftNav extends Component {
     );
   }
 }
-
-export default InteriorLeftNav;

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import ClickListener from '../../internal/ClickListener';
 import Icon from '../Icon';
 
-class Dropdown extends PureComponent {
+export default class Dropdown extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -139,5 +139,3 @@ class Dropdown extends PureComponent {
     return dropdown;
   }
 }
-
-export default Dropdown;

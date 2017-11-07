@@ -1,2 +1,1 @@
-import ToolbarSearch from './ToolbarSearch';
-export default ToolbarSearch;
+export default from './ToolbarSearch';

@@ -15,7 +15,7 @@ flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
   }
 });
 
-class DatePicker extends Component {
+export default class DatePicker extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -222,5 +222,3 @@ class DatePicker extends Component {
     );
   }
 }
-
-export default DatePicker;

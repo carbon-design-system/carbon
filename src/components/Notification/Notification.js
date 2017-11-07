@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-class NotificationButton extends Component {
+export class NotificationButton extends Component {
   static propTypes = {
     className: PropTypes.string,
     ariaLabel: PropTypes.string,
@@ -56,7 +56,7 @@ class NotificationButton extends Component {
   }
 }
 
-class NotificationTextDetails extends Component {
+export class NotificationTextDetails extends Component {
   static propTypes = {
     title: PropTypes.string,
     subtitle: PropTypes.node,
@@ -95,7 +95,7 @@ class NotificationTextDetails extends Component {
   }
 }
 
-class ToastNotification extends Component {
+export class ToastNotification extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -176,7 +176,7 @@ class ToastNotification extends Component {
   }
 }
 
-class InlineNotification extends Component {
+export class InlineNotification extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -259,7 +259,7 @@ class InlineNotification extends Component {
 
 // Deprecated
 
-class Notification extends Component {
+export default class Notification extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -369,11 +369,3 @@ class Notification extends Component {
     return caption ? toastHTML : inlineHTML;
   }
 }
-
-export default Notification;
-export {
-  ToastNotification,
-  InlineNotification,
-  NotificationButton,
-  NotificationTextDetails,
-};

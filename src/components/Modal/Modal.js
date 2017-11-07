@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Icon from '../Icon';
 import Button from '../Button';
 
-class Modal extends Component {
+export default class Modal extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -132,5 +132,3 @@ class Modal extends Component {
     );
   }
 }
-
-export default Modal;

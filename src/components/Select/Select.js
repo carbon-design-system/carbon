@@ -3,26 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  id: PropTypes.string.isRequired,
-  inline: PropTypes.bool,
-  labelText: PropTypes.string,
-  onChange: PropTypes.func,
-  disabled: PropTypes.bool,
-  defaultValue: PropTypes.any,
-  iconDescription: PropTypes.string,
-  hideLabel: PropTypes.bool,
-};
-
-const defaultProps = {
-  disabled: false,
-  labelText: 'Select',
-  inline: false,
-  iconDescription: 'open list of options',
-};
-
 const Select = ({
   className,
   id,
@@ -72,7 +52,24 @@ const Select = ({
   );
 };
 
-Select.propTypes = propTypes;
-Select.defaultProps = defaultProps;
+Select.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  inline: PropTypes.bool,
+  labelText: PropTypes.string,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  defaultValue: PropTypes.any,
+  iconDescription: PropTypes.string,
+  hideLabel: PropTypes.bool,
+};
+
+Select.defaultProps = {
+  disabled: false,
+  labelText: 'Select',
+  inline: false,
+  iconDescription: 'open list of options',
+};
 
 export default Select;

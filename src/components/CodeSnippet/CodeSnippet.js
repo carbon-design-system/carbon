@@ -3,18 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import CopyButton from '../CopyButton';
 
-const propTypes = {
-  type: PropTypes.string,
-  className: PropTypes.string,
-  children: PropTypes.string,
-  onClick: PropTypes.func,
-  wrappedContentRef: PropTypes.func,
-};
-
-const defaultProps = {
-  type: 'terminal',
-};
-
 const CodeSnippet = ({
   className,
   type,
@@ -39,7 +27,16 @@ const CodeSnippet = ({
   );
 };
 
-CodeSnippet.propTypes = propTypes;
-CodeSnippet.defaultProps = defaultProps;
+CodeSnippet.propTypes = {
+  type: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.string,
+  onClick: PropTypes.func,
+  wrappedContentRef: PropTypes.func,
+};
+
+CodeSnippet.defaultProps = {
+  type: 'terminal',
+};
 
 export default CodeSnippet;

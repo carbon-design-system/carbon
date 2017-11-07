@@ -1,1 +1,2 @@
-export { Module, ModuleBody, ModuleHeader } from './Module';
+export * from './Module';
+export default from './Module';

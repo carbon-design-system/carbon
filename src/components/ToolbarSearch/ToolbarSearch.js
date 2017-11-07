@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Icon from '../Icon';
 import ClickListener from '../../internal/ClickListener';
 
-class ToolbarSearch extends Component {
+export default class ToolbarSearch extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -87,5 +87,3 @@ class ToolbarSearch extends Component {
     );
   }
 }
-
-export default ToolbarSearch;

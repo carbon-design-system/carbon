@@ -2,18 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  colSpan: PropTypes.number,
-  expanded: PropTypes.bool,
-  even: PropTypes.bool,
-};
-
-const defaultProps = {
-  expanded: false,
-};
-
 const TableRowExpanded = props => {
   const { children, className, even, colSpan, expanded, ...other } = props;
 
@@ -35,7 +23,16 @@ const TableRowExpanded = props => {
   );
 };
 
-TableRowExpanded.propTypes = propTypes;
-TableRowExpanded.defaultProps = defaultProps;
+TableRowExpanded.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  colSpan: PropTypes.number,
+  expanded: PropTypes.bool,
+  even: PropTypes.bool,
+};
+
+TableRowExpanded.defaultProps = {
+  expanded: false,
+};
 
 export default TableRowExpanded;

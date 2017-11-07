@@ -1,2 +1,1 @@
-import CodeSnippet from './CodeSnippet';
-export default CodeSnippet;
+export default from './CodeSnippet';

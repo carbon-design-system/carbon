@@ -2,33 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  className: PropTypes.string,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  disabled: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  labelText: PropTypes.string,
-  onChange: PropTypes.func,
-  onClick: PropTypes.func,
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  hideLabel: PropTypes.bool,
-  invalid: PropTypes.bool,
-  invalidText: PropTypes.string,
-};
-
-const defaultProps = {
-  className: 'bx--text__input',
-  disabled: false,
-  type: 'text',
-  onChange: () => {},
-  onClick: () => {},
-  invalid: false,
-  labelText: '',
-  invalidText: 'Provide invalidText',
-};
-
 const TextInput = ({
   labelText,
   className,
@@ -93,7 +66,31 @@ const TextInput = ({
   );
 };
 
-TextInput.propTypes = propTypes;
-TextInput.defaultProps = defaultProps;
+TextInput.propTypes = {
+  className: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  disabled: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  hideLabel: PropTypes.bool,
+  invalid: PropTypes.bool,
+  invalidText: PropTypes.string,
+};
+
+TextInput.defaultProps = {
+  className: 'bx--text__input',
+  disabled: false,
+  type: 'text',
+  onChange: () => {},
+  onClick: () => {},
+  invalid: false,
+  labelText: '',
+  invalidText: 'Provide invalidText',
+};
 
 export default TextInput;

@@ -1,2 +1,1 @@
-import FormGroup from './FormGroup';
-export default FormGroup;
+export default from './FormGroup';

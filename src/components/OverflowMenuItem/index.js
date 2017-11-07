@@ -1,2 +1,1 @@
-import OverflowMenuItem from './OverflowMenuItem';
-export default OverflowMenuItem;
+export default from './OverflowMenuItem';

@@ -2,34 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  className: PropTypes.string,
-  cols: PropTypes.number,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  disabled: PropTypes.bool,
-  id: PropTypes.string,
-  labelText: PropTypes.string,
-  onChange: PropTypes.func,
-  onClick: PropTypes.func,
-  placeholder: PropTypes.string,
-  rows: PropTypes.number,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  invalid: PropTypes.bool,
-  invalidText: PropTypes.string,
-};
-
-const defaultProps = {
-  disabled: false,
-  onChange: () => {},
-  onClick: () => {},
-  placeholder: 'Hint text here',
-  rows: 4,
-  cols: 50,
-  invalid: false,
-  labelText: 'Provide labelText',
-  invalidText: 'Provide invalidText',
-};
-
 const Textarea = ({
   className,
   id,
@@ -85,7 +57,32 @@ const Textarea = ({
   );
 };
 
-Textarea.propTypes = propTypes;
-Textarea.defaultProps = defaultProps;
+Textarea.propTypes = {
+  className: PropTypes.string,
+  cols: PropTypes.number,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  disabled: PropTypes.bool,
+  id: PropTypes.string,
+  labelText: PropTypes.string,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  placeholder: PropTypes.string,
+  rows: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  invalid: PropTypes.bool,
+  invalidText: PropTypes.string,
+};
+
+Textarea.defaultProps = {
+  disabled: false,
+  onChange: () => {},
+  onClick: () => {},
+  placeholder: 'Hint text here',
+  rows: 4,
+  cols: 50,
+  invalid: false,
+  labelText: 'Provide labelText',
+  invalidText: 'Provide invalidText',
+};
 
 export default Textarea;

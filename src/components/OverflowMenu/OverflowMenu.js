@@ -6,7 +6,7 @@ import FloatingMenu from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
 import Icon from '../Icon';
 
-class OverflowMenu extends Component {
+export default class OverflowMenu extends Component {
   static propTypes = {
     open: PropTypes.bool,
     flipped: PropTypes.bool,
@@ -170,5 +170,3 @@ class OverflowMenu extends Component {
     );
   }
 }
-
-export default OverflowMenu;

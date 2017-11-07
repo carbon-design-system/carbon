@@ -3,7 +3,7 @@ import React from 'react';
 import Modal from '../Modal';
 import Button from '../Button';
 
-class ModalWrapper extends React.Component {
+export default class ModalWrapper extends React.Component {
   static propTypes = {
     status: PropTypes.string,
     handleOpen: PropTypes.func,
@@ -83,5 +83,3 @@ class ModalWrapper extends React.Component {
     );
   }
 }
-
-export default ModalWrapper;

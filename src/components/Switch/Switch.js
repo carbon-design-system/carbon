@@ -2,25 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  className: PropTypes.string,
-  index: PropTypes.number,
-  kind: PropTypes.oneOf(['button', 'anchor']).isRequired,
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  selected: PropTypes.bool,
-  text: PropTypes.string.isRequired,
-};
-
-const defaultProps = {
-  selected: false,
-  kind: 'anchor',
-  text: 'Provide text',
-  onClick: () => {},
-  onKeyDown: () => {},
-};
-
 const Switch = props => {
   const {
     className,
@@ -72,7 +53,23 @@ const Switch = props => {
   );
 };
 
-Switch.defaultProps = defaultProps;
-Switch.propTypes = propTypes;
+Switch.propTypes = {
+  className: PropTypes.string,
+  index: PropTypes.number,
+  kind: PropTypes.oneOf(['button', 'anchor']).isRequired,
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  selected: PropTypes.bool,
+  text: PropTypes.string.isRequired,
+};
+
+Switch.defaultProps = {
+  selected: false,
+  kind: 'anchor',
+  text: 'Provide text',
+  onClick: () => {},
+  onKeyDown: () => {},
+};
 
 export default Switch;

@@ -3,33 +3,6 @@ import PropTypes from 'prop-types';
 import ToolbarSearch from '../ToolbarSearch';
 import classNames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
-
-const toolbarItemPropTypes = {
-  children: PropTypes.node,
-  type: PropTypes.string,
-  placeHolderText: PropTypes.string,
-};
-
-const toolbarTitlePropTypes = {
-  title: PropTypes.string,
-};
-
-const toolbarTitleDefaultProps = {
-  title: PropTypes.string,
-};
-
-const toolbarItemDefaultProps = {
-  placeHolderText: 'Provide placeHolderText',
-};
-
-const toolbarOptionPropTypes = {
-  children: PropTypes.node,
-};
-
 const Toolbar = ({ children, className, ...other }) => {
   const wrapperClasses = classNames('bx--toolbar', className);
 
@@ -40,7 +13,12 @@ const Toolbar = ({ children, className, ...other }) => {
   );
 };
 
-const ToolbarItem = ({ children, type, placeHolderText }) => {
+Toolbar.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
+
+export const ToolbarItem = ({ children, type, placeHolderText }) => {
   const toolbarItem =
     type === 'search' ? (
       <ToolbarSearch placeHolderText={placeHolderText} />
@@ -50,23 +28,32 @@ const ToolbarItem = ({ children, type, placeHolderText }) => {
   return toolbarItem;
 };
 
-const ToolbarTitle = ({ title }) => (
+ToolbarItem.propTypes = {
+  children: PropTypes.node,
+  type: PropTypes.string,
+  placeHolderText: PropTypes.string,
+};
+
+ToolbarItem.defaultProps = {
+  placeHolderText: 'Provide placeHolderText',
+};
+
+export const ToolbarTitle = ({ title }) => (
   <li className="bx--toolbar-menu__title">{title}</li>
 );
 
-const ToolbarOption = ({ children }) => (
+ToolbarTitle.propTypes = {
+  title: PropTypes.string,
+};
+
+export const ToolbarOption = ({ children }) => (
   <li className="bx--toolbar-menu__option">{children}</li>
 );
 
-const ToolbarDivider = () => <hr className="bx--toolbar-menu__divider" />;
+ToolbarOption.propTypes = {
+  children: PropTypes.node,
+};
 
-Toolbar.propTypes = propTypes;
-ToolbarItem.propTypes = toolbarItemPropTypes;
-ToolbarTitle.propTypes = toolbarTitlePropTypes;
-ToolbarOption.propTypes = toolbarOptionPropTypes;
-
-ToolbarItem.defaultProps = toolbarItemDefaultProps;
-ToolbarTitle.defaultProps = toolbarTitleDefaultProps;
+export const ToolbarDivider = () => <hr className="bx--toolbar-menu__divider" />;
 
 export default Toolbar;
-export { ToolbarItem, ToolbarTitle, ToolbarOption, ToolbarDivider };

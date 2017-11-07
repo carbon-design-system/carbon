@@ -3,23 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-const propTypes = {
-  checked: PropTypes.bool,
-  defaultChecked: PropTypes.bool,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  labelText: PropTypes.node,
-  onChange: PropTypes.func,
-  iconDescription: PropTypes.string,
-};
-
-const defaultProps = {
-  onChange: () => {},
-  labelText: 'Provide checkbox label text',
-  iconDescription: 'Provide icon description for a11y',
-};
-
 const Checkbox = ({
   className,
   id,
@@ -60,7 +43,21 @@ const Checkbox = ({
   );
 };
 
-Checkbox.propTypes = propTypes;
-Checkbox.defaultProps = defaultProps;
+Checkbox.propTypes = {
+  checked: PropTypes.bool,
+  defaultChecked: PropTypes.bool,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  labelText: PropTypes.node,
+  onChange: PropTypes.func,
+  iconDescription: PropTypes.string,
+};
+
+Checkbox.defaultProps = {
+  onChange: () => {},
+  labelText: 'Provide checkbox label text',
+  iconDescription: 'Provide icon description for a11y',
+};
 
 export default Checkbox;

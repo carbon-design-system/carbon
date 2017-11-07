@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Icon from '../Icon';
 import classNames from 'classnames';
 
-class NumberInput extends Component {
+export default class NumberInput extends Component {
   static propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -139,5 +139,3 @@ class NumberInput extends Component {
     );
   }
 }
-
-export default NumberInput;

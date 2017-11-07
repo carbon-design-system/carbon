@@ -2,23 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  className: PropTypes.string,
-  defaultToggled: PropTypes.bool,
-  onToggle: PropTypes.func,
-  id: PropTypes.string.isRequired,
-  toggled: PropTypes.bool,
-  labelA: PropTypes.string.isRequired,
-  labelB: PropTypes.string.isRequired,
-};
-
-const defaultProps = {
-  defaultToggled: false,
-  labelA: 'Off',
-  labelB: 'On',
-  onToggle: () => {},
-};
-
 const Toggle = ({
   className,
   defaultToggled,
@@ -68,7 +51,21 @@ const Toggle = ({
   );
 };
 
-Toggle.propTypes = propTypes;
-Toggle.defaultProps = defaultProps;
+Toggle.propTypes = {
+  className: PropTypes.string,
+  defaultToggled: PropTypes.bool,
+  onToggle: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  toggled: PropTypes.bool,
+  labelA: PropTypes.string.isRequired,
+  labelB: PropTypes.string.isRequired,
+};
+
+Toggle.defaultProps = {
+  defaultToggled: false,
+  labelA: 'Off',
+  labelB: 'On',
+  onToggle: () => {},
+};
 
 export default Toggle;

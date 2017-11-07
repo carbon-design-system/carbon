@@ -1,2 +1,1 @@
-import OrderedList from './OrderedList';
-export default OrderedList;
+export default from './OrderedList';

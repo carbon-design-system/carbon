@@ -2,11 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
-
 const CardFooter = ({ children, className, ...other }) => {
   const cardFooterClasses = classNames({
     'bx--card-footer': true,
@@ -20,6 +15,9 @@ const CardFooter = ({ children, className, ...other }) => {
   );
 };
 
-CardFooter.propTypes = propTypes;
+CardFooter.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
 
 export default CardFooter;

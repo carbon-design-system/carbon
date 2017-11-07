@@ -2,17 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  value: PropTypes.string.isRequired,
-  itemText: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-};
-
-const defaultProps = {
-  onClick: /* istanbul ignore next */ () => {},
-};
-
 const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
   const dropdownItemClasses = classNames({
     'bx--dropdown-item': true,
@@ -43,7 +32,15 @@ const DropdownItem = ({ className, value, itemText, onClick, ...other }) => {
   );
 };
 
-DropdownItem.propTypes = propTypes;
-DropdownItem.defaultProps = defaultProps;
+DropdownItem.propTypes = {
+  value: PropTypes.string.isRequired,
+  itemText: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+DropdownItem.defaultProps = {
+  onClick: /* istanbul ignore next */ () => {},
+};
 
 export default DropdownItem;

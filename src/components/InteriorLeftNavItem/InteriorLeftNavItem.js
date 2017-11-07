@@ -2,24 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
-const propTypes = {
-  className: PropTypes.string,
-  href: PropTypes.string.isRequired,
-  activeHref: PropTypes.string,
-  tabIndex: PropTypes.number,
-  onClick: PropTypes.func,
-  blankTarget: PropTypes.bool,
-  children: PropTypes.node,
-  label: PropTypes.string.isRequired,
-};
-
-const defaultProps = {
-  activeHref: '#',
-  tabIndex: 0,
-  label: 'InteriorLeftNavItem Label',
-  onClick: /* istanbul ignore next */ () => {},
-};
-
 const newChild = (children, tabIndex) => {
   const child = React.Children.only(children);
   return React.cloneElement(React.Children.only(child), {
@@ -61,7 +43,22 @@ const InteriorLeftNavItem = ({
   );
 };
 
-InteriorLeftNavItem.propTypes = propTypes;
-InteriorLeftNavItem.defaultProps = defaultProps;
+InteriorLeftNavItem.propTypes = {
+  className: PropTypes.string,
+  href: PropTypes.string.isRequired,
+  activeHref: PropTypes.string,
+  tabIndex: PropTypes.number,
+  onClick: PropTypes.func,
+  blankTarget: PropTypes.bool,
+  children: PropTypes.node,
+  label: PropTypes.string.isRequired,
+};
+
+InteriorLeftNavItem.defaultProps = {
+  activeHref: '#',
+  tabIndex: 0,
+  label: 'InteriorLeftNavItem Label',
+  onClick: /* istanbul ignore next */ () => {},
+};
 
 export default InteriorLeftNavItem;

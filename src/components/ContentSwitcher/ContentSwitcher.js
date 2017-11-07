@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-class ContentSwitcher extends React.Component {
+export default class ContentSwitcher extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -56,5 +56,3 @@ class ContentSwitcher extends React.Component {
     );
   }
 }
-
-export default ContentSwitcher;

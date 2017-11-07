@@ -3,24 +3,6 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import classNames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  position: PropTypes.oneOf(['bottom', 'top']),
-  text: PropTypes.string.isRequired,
-  showIcon: PropTypes.bool,
-  iconName: PropTypes.string,
-  iconDescription: PropTypes.string,
-};
-
-const defaultProps = {
-  position: 'top',
-  showIcon: true,
-  iconName: 'info--glyph',
-  iconDescription: 'tooltip',
-  text: 'Provide text',
-};
-
 const TooltipSimple = ({
   children,
   className,
@@ -48,7 +30,22 @@ const TooltipSimple = ({
   );
 };
 
-TooltipSimple.propTypes = propTypes;
-TooltipSimple.defaultProps = defaultProps;
+TooltipSimple.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  position: PropTypes.oneOf(['bottom', 'top']),
+  text: PropTypes.string.isRequired,
+  showIcon: PropTypes.bool,
+  iconName: PropTypes.string,
+  iconDescription: PropTypes.string,
+};
+
+TooltipSimple.defaultProps = {
+  position: 'top',
+  showIcon: true,
+  iconName: 'info--glyph',
+  iconDescription: 'tooltip',
+  text: 'Provide text',
+};
 
 export default TooltipSimple;

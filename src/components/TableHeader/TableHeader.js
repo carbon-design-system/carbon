@@ -3,13 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  iconClassName: PropTypes.string,
-  sortDir: PropTypes.string,
-};
-
 const TableHeader = props => {
   const { children, className, iconClassName, sortDir, ...other } = props;
 
@@ -45,6 +38,11 @@ const TableHeader = props => {
   );
 };
 
-TableHeader.propTypes = propTypes;
+TableHeader.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  iconClassName: PropTypes.string,
+  sortDir: PropTypes.string,
+};
 
 export default TableHeader;

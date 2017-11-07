@@ -1,2 +1,1 @@
-import CardStatus from './CardStatus';
-export default CardStatus;
+export default from './CardStatus';

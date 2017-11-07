@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Icon from '../Icon';
 
-class Tile extends Component {
+export class Tile extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -22,7 +22,7 @@ class Tile extends Component {
   }
 }
 
-class ClickableTile extends Component {
+export class ClickableTile extends Component {
   state = {
     clicked: this.props.clicked,
   };
@@ -88,7 +88,7 @@ class ClickableTile extends Component {
   }
 }
 
-class SelectableTile extends Component {
+export class SelectableTile extends Component {
   state = {
     selected: this.props.selected,
   };
@@ -184,7 +184,7 @@ class SelectableTile extends Component {
   }
 }
 
-class ExpandableTile extends Component {
+export class ExpandableTile extends Component {
   state = {
     expanded: this.props.expanded,
     tileMaxHeight: this.props.tileMaxHeight,
@@ -292,7 +292,7 @@ class ExpandableTile extends Component {
   }
 }
 
-class TileAboveTheFoldContent extends Component {
+export class TileAboveTheFoldContent extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -305,7 +305,7 @@ class TileAboveTheFoldContent extends Component {
   }
 }
 
-class TileBelowTheFoldContent extends Component {
+export class TileBelowTheFoldContent extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -317,12 +317,3 @@ class TileBelowTheFoldContent extends Component {
     return <span className="bx--tile-content__below-the-fold">{children}</span>;
   }
 }
-
-export {
-  Tile,
-  ClickableTile,
-  SelectableTile,
-  ExpandableTile,
-  TileAboveTheFoldContent,
-  TileBelowTheFoldContent,
-};

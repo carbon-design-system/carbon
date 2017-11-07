@@ -2,21 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  value: PropTypes.any.isRequired,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  hidden: PropTypes.bool,
-  text: PropTypes.string.isRequired,
-};
-
-const defaultProps = {
-  disabled: false,
-  hidden: false,
-  value: '',
-  text: '',
-};
-
 const SelectItem = ({ className, value, disabled, hidden, text, ...other }) => {
   const selectItemClasses = classNames({
     'bx--select-option': true,
@@ -35,7 +20,19 @@ const SelectItem = ({ className, value, disabled, hidden, text, ...other }) => {
   );
 };
 
-SelectItem.propTypes = propTypes;
-SelectItem.defaultProps = defaultProps;
+SelectItem.propTypes = {
+  value: PropTypes.any.isRequired,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  hidden: PropTypes.bool,
+  text: PropTypes.string.isRequired,
+};
+
+SelectItem.defaultProps = {
+  disabled: false,
+  hidden: false,
+  value: '',
+  text: '',
+};
 
 export default SelectItem;

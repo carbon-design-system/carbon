@@ -1,2 +1,1 @@
-import RadioButtonGroup from './RadioButtonGroup';
-export default RadioButtonGroup;
+export default from './RadioButtonGroup';

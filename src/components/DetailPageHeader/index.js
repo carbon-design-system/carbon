@@ -1,2 +1,1 @@
-import DetailPageHeader from './DetailPageHeader';
-export default DetailPageHeader;
+export default from './DetailPageHeader';

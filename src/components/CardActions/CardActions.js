@@ -2,11 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
-
 const CardActions = ({ children, className, ...other }) => {
   const cardActionClasses = classNames({
     'bx--card-footer__app-actions': true,
@@ -20,6 +15,9 @@ const CardActions = ({ children, className, ...other }) => {
   );
 };
 
-CardActions.propTypes = propTypes;
+CardActions.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
 
 export default CardActions;

@@ -1,2 +1,1 @@
-import OverflowMenu from './OverflowMenu';
-export default OverflowMenu;
+export default from './OverflowMenu';

@@ -2,30 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const propTypes = {
-  className: PropTypes.string,
-  itemText: PropTypes.string.isRequired,
-  hasDivider: PropTypes.bool,
-  isDelete: PropTypes.bool,
-  onBlur: PropTypes.func,
-  onClick: PropTypes.func,
-  onFocus: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  onMouseDown: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
-  onMouseUp: PropTypes.func,
-  closeMenu: PropTypes.func,
-};
-
-const defaultProps = {
-  hasDivider: false,
-  isDelete: false,
-  itemText: 'Provide itemText',
-  onClick: () => {},
-};
-
 const OverflowMenuItem = ({
   className,
   itemText,
@@ -68,7 +44,28 @@ const OverflowMenuItem = ({
   return item;
 };
 
-OverflowMenuItem.propTypes = propTypes;
-OverflowMenuItem.defaultProps = defaultProps;
+OverflowMenuItem.propTypes = {
+  className: PropTypes.string,
+  itemText: PropTypes.string.isRequired,
+  hasDivider: PropTypes.bool,
+  isDelete: PropTypes.bool,
+  onBlur: PropTypes.func,
+  onClick: PropTypes.func,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  onMouseUp: PropTypes.func,
+  closeMenu: PropTypes.func,
+};
+
+OverflowMenuItem.defaultProps = {
+  hasDivider: false,
+  isDelete: false,
+  itemText: 'Provide itemText',
+  onClick: () => {},
+};
 
 export default OverflowMenuItem;
