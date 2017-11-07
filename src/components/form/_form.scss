@@ -31,6 +31,10 @@
     margin-bottom: rem(10px);
   }
 
+  .bx--label .bx--tooltip__trigger {
+    @include typescale('zeta');
+  }
+
   .bx--label--disabled {
     opacity: 0.5;
   }
