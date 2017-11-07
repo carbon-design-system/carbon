@@ -100,6 +100,7 @@ $deprecations--reasons: ();
 // Cycle through all the deprecation reasons, if any exist, that have been
 // accumulated through the @import process.
 @if (length($deprecations--reasons) > 0) {
+  $deprecations--message: '';
   @each $reason in $deprecations--reasons {
     $deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.
 REASON: #{$reason}';
