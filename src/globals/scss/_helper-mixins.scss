@@ -94,12 +94,14 @@
  * no longer going to be present in the next major release of Carbon.
  */
 @mixin deprecate($reason) {
+  $deprecations--entry: false !default;
+
   @if ($deprecations--entry == true) {
     $deprecations--reasons: append($deprecations--reasons, $reason) !global;
     @content;
   } @else {
-    @warn '#{$deprecations--message}
-  REASON: #{$reason}';
+    @warn 'Deprecated code was found, this code will be removed before the next release of Carbon.
+REASON: #{$reason}';
     @content;
   }
 }
