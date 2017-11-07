@@ -40,8 +40,6 @@ $css--plex: true !default;
 $deprecations--entry: true;
 // Collect all deprecation reasons into this list throughout the import cycle.
 $deprecations--reasons: ();
-// This message will be prepended to any deprecation notice
-$deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.';
 
 //-------------------------
 // 🍕 Components
@@ -103,7 +101,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 // accumulated through the @import process.
 @if (length($deprecations--reasons) > 0) {
   @each $reason in $deprecations--reasons {
-    $deprecations--message: '#{$deprecations--message}
+    $deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.
 REASON: #{$reason}';
   }
 
