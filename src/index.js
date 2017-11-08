@@ -1,3 +1,8 @@
+export ComposedModal, {
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from './components/ComposedModal';
 export { Module, ModuleBody, ModuleHeader } from './components/Module';
 export {
   ProgressIndicator,
