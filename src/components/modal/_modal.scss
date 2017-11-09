@@ -73,9 +73,9 @@
 
   .bx--modal-header__label {
     @include reset;
-    @include font-size('12');
+    @include typescale('omega');
     color: $text-01;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: rem(8px);
@@ -83,7 +83,7 @@
 
   .bx--modal-header__heading {
     @include reset;
-    @include font-size('26');
+    @include typescale('beta');
     font-weight: 300;
     color: $text-02;
   }
