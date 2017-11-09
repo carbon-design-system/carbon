@@ -119,6 +119,10 @@
       border-radius: 0;
     }
 
+    input[type="text"]::-ms-clear {
+      display: none;
+    }
+
     /* HTML5 display-role reset for older browsers */
     article,
     aside,

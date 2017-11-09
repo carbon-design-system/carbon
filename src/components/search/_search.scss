@@ -41,6 +41,10 @@
       @include placeholder-colors;
       font-weight: 400;
     }
+
+    &::-ms-clear {
+      display: none;
+    }
   }
 
   .bx--search--sm .bx--search-input {
