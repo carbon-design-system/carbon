@@ -23,6 +23,10 @@ Describe in detail the issue you're having. Is this a feature request (new compo
 > What version of the Carbon Design System are you using?
 
 
+
+> What offering/product do you work on? Any pressing ship or release dates we should be aware of?
+
+
 ## Steps to reproduce the issue
 
 1. Step one
