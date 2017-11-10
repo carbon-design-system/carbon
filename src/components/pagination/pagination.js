@@ -4,27 +4,27 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 
 class Pagination extends mixin(createComponent, initComponentBySearch) {
   /**
-  * Pagination component.
-  * @extends CreateComponent
-  * @extends InitComponentBySearch
-  * @param {HTMLElement} element The element working as a pagination component.
-  * @param {Object} [options] The component options.
-  * @property {string} [selectorInit] The CSS selector to find pagination components.
-  * @property {string} [selectorItemsPerPageInput]
-  *   The CSS selector to find the input that determines the number of items per page.
-  * @property {string} [selectorPageNumberInput] The CSS selector to find the input that changes the page displayed.
-  * @property {string} [selectorPageBackward] The CSS selector to find the button that goes back a page.
-  * @property {string} [selectorPageForward] The CSS selector to find the button that goes forward a page.
-  * @property {string} [eventItemsPerPage]
-  *   The name of the custom event fired when a user changes the number of items per page.
-  *   event.detail.value contains the number of items a user wishes to see.
-  * @property {string} [eventPageNumber]
-  *   The name of the custom event fired when a user inputs a specific page number.
-  *   event.detail.value contains the value that the user input.
-  * @property {string} [eventPageChange]
-  *   The name of the custom event fired when a user goes forward or backward a page.
-  *   event.detail.direction contains the direction a user wishes to go.
-  */
+   * Pagination component.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @param {HTMLElement} element The element working as a pagination component.
+   * @param {Object} [options] The component options.
+   * @property {string} [selectorInit] The CSS selector to find pagination components.
+   * @property {string} [selectorItemsPerPageInput]
+   *   The CSS selector to find the input that determines the number of items per page.
+   * @property {string} [selectorPageNumberInput] The CSS selector to find the input that changes the page displayed.
+   * @property {string} [selectorPageBackward] The CSS selector to find the button that goes back a page.
+   * @property {string} [selectorPageForward] The CSS selector to find the button that goes forward a page.
+   * @property {string} [eventItemsPerPage]
+   *   The name of the custom event fired when a user changes the number of items per page.
+   *   event.detail.value contains the number of items a user wishes to see.
+   * @property {string} [eventPageNumber]
+   *   The name of the custom event fired when a user inputs a specific page number.
+   *   event.detail.value contains the value that the user input.
+   * @property {string} [eventPageChange]
+   *   The name of the custom event fired when a user goes forward or backward a page.
+   *   event.detail.direction contains the direction a user wishes to go.
+   */
   constructor(element, options) {
     super(element, options);
 
