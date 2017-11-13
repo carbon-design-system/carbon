@@ -1,5 +1,6 @@
 import React from 'react';
-import { action, storiesOf } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import Checkbox from '../Checkbox';
 import Form from '../Form';
 import FormGroup from '../FormGroup';

@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { storiesOf, action } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import Accordion from '../Accordion';
 import AccordionItem from '../AccordionItem';
 import Select from '../Select';

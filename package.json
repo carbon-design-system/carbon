@@ -96,6 +96,7 @@
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.2.15",
     "@storybook/addon-centered": "3.2.13",
     "@storybook/addon-info": "^3.2.13",
     "@storybook/react": "^3.2.13",
