@@ -209,6 +209,7 @@
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "testPathIgnorePatterns": [
+      "/examples/",
       "/config/",
       "/lib/",
       "/es/",
