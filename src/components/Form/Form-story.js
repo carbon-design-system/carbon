@@ -32,7 +32,7 @@ const fieldsetCheckboxProps = {
 
 const numberInputProps = {
   className: 'some-class',
-  id: 'tj-input',
+  id: 'number-input-1',
   label: 'Number Input',
   min: 0,
   max: 100,

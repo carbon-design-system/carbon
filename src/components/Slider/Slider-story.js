@@ -13,7 +13,7 @@ storiesOf('Slider', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Slider id="slider" value={50} min={0} max={100} step={1} labelText="Slider Label" onChange={mock} />
+        <Slider id="slider" value={50} min={0} max={100} step={1} labelText="Slider Label" onChange={() => {}} />
       </div>
     )
   )

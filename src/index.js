@@ -53,6 +53,7 @@ export FileUploader, {
 export Footer from './components/Footer';
 export Form from './components/Form';
 export FormGroup from './components/FormGroup';
+export FormLabel from './components/FormLabel';
 export Icon from './components/Icon';
 export InteriorLeftNav from './components/InteriorLeftNav';
 export InteriorLeftNavItem from './components/InteriorLeftNavItem';
