@@ -128,7 +128,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
   _addInputLogic = input => {
     const inputField = input;
     inputField.addEventListener('change', () => {
-      const inputDate = this.calendar.parseDate(new Date(inputField.value));
+      const inputDate = this.calendar.parseDate(inputField.value);
       if (!isNaN(inputDate.valueOf())) {
         this.calendar.setDate(inputDate);
       }
