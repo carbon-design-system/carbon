@@ -28,6 +28,7 @@ describe('Test modal', function() {
         selectorInit: '[data-modal]',
         selectorModalClose: '[data-modal-close]',
         selectorPrimaryFocus: '[data-modal-primary-focus]',
+        selectorsFloatingMenus: ['.bx--overflow-menu-options', '.bx-tooltip'],
         classVisible: 'is-visible',
         attribInitTarget: 'data-modal-target',
         initEventNames: ['click'],

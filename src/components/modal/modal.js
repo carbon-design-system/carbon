@@ -117,7 +117,11 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @private
    */
   _handleFocusin = evt => {
-    if (this.element.classList.contains(this.options.classVisible) && !this.element.contains(evt.target)) {
+    if (
+      this.element.classList.contains(this.options.classVisible) &&
+      !this.element.contains(evt.target) &&
+      this.options.selectorsFloatingMenus.every(selector => !eventMatches(evt, selector))
+    ) {
       this.element.focus();
     }
   };
@@ -148,6 +152,9 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @type {Object}
    * @property {string} selectorInit The CSS class to find modal dialogs.
    * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
+   * @property {string[]} [selectorsFloatingMenu]
+   *   The CSS selectors of floating menus.
+   *   Used for detecting if focus-wrap behavior should be disabled temporarily.
    * @property {string} [classVisible] The CSS class for the visible state.
    * @property {string} [classNoScroll] The CSS class for hiding scroll bar in body element while modal is shown.
    * @property {string} [eventBeforeShown]
@@ -167,6 +174,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     selectorInit: '[data-modal]',
     selectorModalClose: '[data-modal-close]',
     selectorPrimaryFocus: '[data-modal-primary-focus]',
+    selectorsFloatingMenus: ['.bx--overflow-menu-options', '.bx-tooltip'],
     classVisible: 'is-visible',
     attribInitTarget: 'data-modal-target',
     initEventNames: ['click'],
