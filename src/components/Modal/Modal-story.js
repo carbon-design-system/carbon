@@ -21,8 +21,8 @@ storiesOf('Modal', module)
       <Modal
         {...modalProps}
         open
-        modalHeading="Modal Example"
-        modalLabel="Optional Label"
+        modalHeading="Modal heading"
+        modalLabel="Optional label"
         primaryButtonText="Primary Button"
         secondaryButtonText="Secondary Button"
       >
@@ -42,8 +42,8 @@ storiesOf('Modal', module)
         {...modalProps}
         open
         passiveModal
-        modalHeading="Modal Example"
-        modalLabel="Optional Label"
+        modalHeading="Modal heading"
+        modalLabel="Optional label"
         primaryButtonText="Primary Button"
         secondaryButtonText="Secondary Button"
       >

@@ -19,6 +19,6 @@ storiesOf('Link', module).addWithInfo(
     `,
   () =>
     <Link href="#" {...additionalProps}>
-      A simple link
+      Link
     </Link>
 );

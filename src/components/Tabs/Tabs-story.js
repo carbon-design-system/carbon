@@ -25,17 +25,17 @@ storiesOf('Tabs', module)
     `,
     () => (
       <Tabs {...props.tabs}>
-        <Tab {...props.tab} label="Overview">
-          <div className="some-content">Overview Content</div>
+        <Tab {...props.tab} label="Tab label 1">
+          <div className="some-content">Content for first tab goes here.</div>
         </Tab>
-        <Tab {...props.tab} label="Apple">
-          <div className="some-content">Apple Content</div>
+        <Tab {...props.tab} label="Tab label 2">
+          <div className="some-content">Content for second tab goes here.</div>
         </Tab>
-        <Tab {...props.tab} label="Banana">
-          <div className="some-content">Banana Content</div>
+        <Tab {...props.tab} label="Tab label 3">
+          <div className="some-content">Content for third tab goes here.</div>
         </Tab>
-        <Tab {...props.tab} label="Orange">
-          <div className="some-content">Orange Content</div>
+        <Tab {...props.tab} label="Tab label 4">
+          <div className="some-content">Content for fourth tab goes here.</div>
         </Tab>
       </Tabs>
   ))
@@ -47,17 +47,17 @@ storiesOf('Tabs', module)
     `,
     () => (
       <Tabs {...props.tabs} selected={3}>
-        <Tab {...props.tab} label="Overview">
-          <div className="some-content">Overview Content</div>
+        <Tab {...props.tab} label="Tab label 1">
+          <div className="some-content">Content for first tab goes here.</div>
         </Tab>
-        <Tab {...props.tab} label="Apple">
-          <div className="some-content">Apple Content</div>
+        <Tab {...props.tab} label="Tab label 2">
+          <div className="some-content">Content for second tab goes here.</div>
         </Tab>
-        <Tab {...props.tab} label="Banana">
-          <div className="some-content">Banana Content</div>
+        <Tab {...props.tab} label="Tab label 3">
+          <div className="some-content">Content for third tab goes here.</div>
         </Tab>
-        <Tab {...props.tab} label="Orange">
-          <div className="some-content">Orange Content</div>
+        <Tab {...props.tab} label="Tab label 4">
+          <div className="some-content">ontent for fourth tab goes here.</div>
         </Tab>
       </Tabs>
     )

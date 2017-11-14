@@ -20,38 +20,30 @@ storiesOf("StructuredList", module)
       <StructuredListWrapper>
         <StructuredListHead>
           <StructuredListRow head>
-            <StructuredListCell head>service</StructuredListCell>
-            <StructuredListCell head>type</StructuredListCell>
-            <StructuredListCell head>description</StructuredListCell>
+            <StructuredListCell head>ColumnA</StructuredListCell>
+            <StructuredListCell head>ColumnB</StructuredListCell>
+            <StructuredListCell head>ColumnC</StructuredListCell>
           </StructuredListRow>
         </StructuredListHead>
         <StructuredListBody>
           <StructuredListRow>
             <StructuredListCell noWrap>
-              Apache Spark
+              Row 1
             </StructuredListCell>
-            <StructuredListCell>IBM</StructuredListCell>
+            <StructuredListCell>Row 1</StructuredListCell>
             <StructuredListCell>
-              Apache Spark is an open source cluster computing framework
-              optimized for
-              extremely fast and large scale data processing,
-              which you can access via the newly integrated notebook interface
-              IBM Analytics
-              for Apache Spark.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
             </StructuredListCell>
           </StructuredListRow>
           <StructuredListRow>
             <StructuredListCell noWrap>
-              Cloudant
+              Row 2
             </StructuredListCell>
             <StructuredListCell>
-              IBM
+              Row 2
             </StructuredListCell>
             <StructuredListCell>
-              Cloudant NoSQL DB is a fully managed data layer designed for
-              modern web and
-              mobile applications that leverages a
-              flexible JSON schema.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
             </StructuredListCell>
           </StructuredListRow>
         </StructuredListBody>
@@ -67,65 +59,57 @@ storiesOf("StructuredList", module)
         <StructuredListHead>
           <StructuredListRow head>
             <StructuredListCell head>{""}</StructuredListCell>
-            <StructuredListCell head>service</StructuredListCell>
-            <StructuredListCell head>type</StructuredListCell>
-            <StructuredListCell head>description</StructuredListCell>
+            <StructuredListCell head>ColumnA</StructuredListCell>
+            <StructuredListCell head>ColumnB</StructuredListCell>
+            <StructuredListCell head>ColumnC</StructuredListCell>
           </StructuredListRow>
         </StructuredListHead>
         <StructuredListBody>
-          <StructuredListRow label htmlFor="apache-spark">
+          <StructuredListRow label htmlFor="Row 1">
             <StructuredListInput
-              id="apache-spark"
-              value="apache-spark"
-              title="apache-spark"
-              name="services"
+              id="row-1"
+              value="row-2"
+              title="row-3"
+              name="Row-1"
               defaultChecked
             />
             <StructuredListCell>
               <Icon
                 className="bx--structured-list-svg"
                 name="checkmark--glyph"
-                description="select a service"
+                description="select an option"
               />
             </StructuredListCell>
             <StructuredListCell>
-              Apache Spark
+              Row 1
             </StructuredListCell>
-            <StructuredListCell>IBM</StructuredListCell>
+            <StructuredListCell>Row 1</StructuredListCell>
             <StructuredListCell>
-              Apache Spark is an open source cluster computing framework
-              optimized for
-              extremely fast and large scale data processing,
-              which you can access via the newly integrated notebook interface
-              IBM Analytics
-              for Apache Spark.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
             </StructuredListCell>
           </StructuredListRow>
-          <StructuredListRow label htmlFor="cloudant">
+          <StructuredListRow label htmlFor="Row2">
             <StructuredListInput
-              id="cloudant"
-              value="cloudant"
-              title="cloudant"
-              name="services"
+              id="row-2"
+              value="row-2"
+              title="row-2"
+              name="row-2"
             />
             <StructuredListCell>
               <Icon
                 className="bx--structured-list-svg"
                 name="checkmark--glyph"
-                description="select a service"
+                description="select an option"
               />
             </StructuredListCell>
             <StructuredListCell>
-              Cloudant
+              Row 2
             </StructuredListCell>
             <StructuredListCell>
-              IBM
+              Row 2
             </StructuredListCell>
             <StructuredListCell>
-              Cloudant NoSQL DB is a fully managed data layer designed for
-              modern web and
-              mobile applications that leverages a
-              flexible JSON schema.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a porttitor interdum.
             </StructuredListCell>
           </StructuredListRow>
         </StructuredListBody>

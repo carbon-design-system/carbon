@@ -6,10 +6,10 @@ import TextInput from '../TextInput';
 const TextInputProps = {
   className: 'some-class',
   id: 'test2',
-  labelText: 'Text Input',
+  labelText: 'Text Input label',
   onClick: action('onClick'),
   onChange: action('onChange'),
-  placeholder: 'Hint text here',
+  placeholder: 'Placeholder text',
 };
 
 storiesOf('TextInput', module)
@@ -42,7 +42,7 @@ storiesOf('TextInput', module)
       The example below shows an enabled Text Input component with type 'email'.
     `,
     () => (
-      <TextInput {...TextInputProps} type={"email"} placeholder={"Please enter an email"} />
+      <TextInput {...TextInputProps} type={"email"} placeholder={"janedoe@us.ibm.com"} />
   ))
   .addWithInfo(
     'password',
@@ -52,5 +52,5 @@ storiesOf('TextInput', module)
       The example below shows an enabled Text Input component with type 'password'.
     `,
     () => (
-      <TextInput {...TextInputProps} type={"password"} placeholder={"Please enter a password"} />
+      <TextInput {...TextInputProps} type={"password"} placeholder={"Password must be at least 8 characters."} />
   ));

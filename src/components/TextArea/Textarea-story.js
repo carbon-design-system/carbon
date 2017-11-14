@@ -4,11 +4,11 @@ import { action } from '@storybook/addon-actions';
 import Textarea from '../TextArea';
 
 const textareaProps = {
-  labelText: 'This is a Label',
+  labelText: 'Text Area label',
   className: 'some-class',
   onChange: action('onChange'),
   onClick: action('onClick'),
-  placeholder: 'Hint text here',
+  placeholder: 'Placeholder text.',
   id: 'test2',
   cols: 50,
   rows: 4,

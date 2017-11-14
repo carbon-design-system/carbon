@@ -21,7 +21,7 @@ storiesOf('Accordion', module).addWithInfo(
     `,
   () =>
     <Accordion>
-      <AccordionItem title="Label" {...props}>
+      <AccordionItem title="Section 1 title" {...props}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et
@@ -30,7 +30,7 @@ storiesOf('Accordion', module).addWithInfo(
           ex ea commodo consequat.
         </p>
       </AccordionItem>
-      <AccordionItem title="Label with multiple words" open {...props}>
+      <AccordionItem title="Section 2 title" open {...props}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et
@@ -39,15 +39,15 @@ storiesOf('Accordion', module).addWithInfo(
           ex ea commodo consequat.
         </p>
       </AccordionItem>
-      <AccordionItem title="Label with form" {...props}>
+      <AccordionItem title="Section 3 title" {...props}>
         <Select onChange={action('onChange')} id="select-1" defaultValue="placeholder-item">
-          <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
+          <SelectItem disabled hidden value="placeholder-item" text="Choose an option" />
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
           <SelectItem value="option-3" text="Option 3" />
         </Select>
       </AccordionItem>
-      <AccordionItem title="Label" {...props}>
+      <AccordionItem title="Section 4 title" {...props}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et

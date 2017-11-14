@@ -11,7 +11,7 @@ const datePickerProps = {
 
 const datePickerInputProps = {
   className: 'some-class',
-  labelText: 'Select a date',
+  labelText: 'Date Picker label',
   onClick: action('onClick'),
   onChange: action('onChange'),
   placeholder: 'mm/dd/yyyy',

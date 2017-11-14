@@ -28,10 +28,10 @@ storiesOf('Buttons', module)
     () =>
       <div>
         <Button {...buttonEvents} className="some-class">
-          Primary Button
+          Primary button
         </Button>
         &nbsp;
-        <Button {...buttonEvents} href="#" className="some-class">Primary Link</Button>
+        <Button {...buttonEvents} href="#" className="some-class">Primary link</Button>
         &nbsp;
       </div>
   )
@@ -46,11 +46,11 @@ storiesOf('Buttons', module)
     () =>
       <div>
         <Button kind="secondary" {...buttonEvents} className="some-class">
-          Secondary Button
+          Secondary button
         </Button>
         &nbsp;
         <Button kind="secondary" {...buttonEvents} href="#" className="some-class">
-          Secondary Link
+          Secondary link
         </Button>
       </div>
   )
@@ -63,19 +63,19 @@ storiesOf('Buttons', module)
     () =>
       <div>
         <Button small {...buttonEvents} className="some-class">
-          Small Primary Button
+          Small primary button
         </Button>
         &nbsp;
-        <Button small {...buttonEvents} kind="secondary">Small Secondary Button</Button>
+        <Button small {...buttonEvents} kind="secondary">Small secondary button</Button>
         &nbsp;
         <Button small {...buttonEvents} kind="ghost" icon="add--glyph" iconDescription="Add">
-          Small Ghost Button
+          Small ghost button
         </Button>
         &nbsp;
-        <Button small {...buttonEvents} kind="danger">Small Danger Button</Button>
+        <Button small {...buttonEvents} kind="danger">Small danger button</Button>
         &nbsp;
         <Button small {...buttonEvents} href="#" className="some-class">
-          Small Primary Link
+          Small primary link
         </Button>
       </div>
   )
@@ -86,7 +86,7 @@ storiesOf('Buttons', module)
     `,
     () =>
       <div>
-        <Button {...buttonEvents} disabled>Disabled</Button>
+        <Button {...buttonEvents} disabled>Disabled button</Button>
       </div>
   )
   .addWithInfo(
@@ -98,7 +98,7 @@ storiesOf('Buttons', module)
     () =>
       <div>
         <Button icon="search--glyph" iconDescription="Search" {...buttonEvents}>
-          With an Icon
+          Primary with icon
         </Button>
         &nbsp;
         <Button
@@ -107,7 +107,7 @@ storiesOf('Buttons', module)
           iconDescription="Search"
           {...buttonEvents}
         >
-          With an Icon
+          Secondary with icon
         </Button>
         &nbsp;
         <Button
@@ -117,7 +117,7 @@ storiesOf('Buttons', module)
           iconDescription="Search"
           {...buttonEvents}
         >
-          With an Icon
+          Small primary with icon
         </Button>
         &nbsp;
         <Button
@@ -127,7 +127,7 @@ storiesOf('Buttons', module)
           iconDescription="Search"
           {...buttonEvents}
         >
-          With an Icon
+          Small secondary with icon
         </Button>
       </div>
   )
@@ -148,7 +148,7 @@ storiesOf('Buttons', module)
           iconDescription="Add"
           {...buttonEvents}
         >
-          Ghost Button
+          Ghost button
         </Button>
         &nbsp;
         <Button
@@ -159,7 +159,7 @@ storiesOf('Buttons', module)
           iconDescription="Add"
           {...buttonEvents}
         >
-          Ghost Link
+          Ghost link
         </Button>
       </div>
   )
@@ -174,11 +174,11 @@ storiesOf('Buttons', module)
     () =>
       <div>
         <Button kind="danger" {...buttonEvents} className="some-class">
-          Danger Button
+          Danger button
         </Button>
         &nbsp;
         <Button kind="danger" {...buttonEvents} href="#" className="some-class">
-          Danger Link
+          Danger link
         </Button>
       </div>
   )
@@ -189,7 +189,7 @@ storiesOf('Buttons', module)
     `,
     () =>
       <div>
-        <Button kind="secondary" {...buttonEvents} className="some-class">Negative</Button>
-        <Button kind="primary" {...buttonEvents} className="some-class">Positive</Button>
+        <Button kind="secondary" {...buttonEvents} className="some-class">Secondary button</Button>
+        <Button kind="primary" {...buttonEvents} className="some-class">Primary button</Button>
       </div>
   );

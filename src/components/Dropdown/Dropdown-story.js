@@ -30,13 +30,13 @@ storiesOf('Dropdown', module)
       <Dropdown
         {...dropdownEvents}
         onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
-        defaultText="Choose something.."
+        defaultText="Dropdown label"
       >
-        <DropdownItem itemText="All" value="all" />
-        <DropdownItem itemText="Cloud Foundry API" value="cloudFoundry" />
-        <DropdownItem itemText="Staging" value="staging" />
-        <DropdownItem itemText="Droplet Execution Agent" value="dea" />
-        <DropdownItem itemText="Router" value="router" />
+        <DropdownItem itemText="Option 1" value="option1" />
+        <DropdownItem itemText="Option 2" value="option2" />
+        <DropdownItem itemText="Option 3" value="option3" />
+        <DropdownItem itemText="Option 4" value="option4" />
+        <DropdownItem itemText="Option 5" value="option5" />
       </Dropdown>
   ))
   .addWithInfo(
@@ -49,14 +49,14 @@ storiesOf('Dropdown', module)
       <Dropdown
         {...dropdownEvents}
         onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
-        defaultText="Choose something.."
-        value="all"
+        defaultText="Option 1"
+        value="Option 1"
       >
-        <DropdownItem itemText="All" value="all" />
-        <DropdownItem itemText="Cloud Foundry API" value="cloudFoundry" />
-        <DropdownItem itemText="Staging" value="staging" />
-        <DropdownItem itemText="Droplet Execution Agent" value="dea" />
-        <DropdownItem itemText="Router" value="router" />
+        <DropdownItem itemText="Option 1" value="option1" />
+        <DropdownItem itemText="Option 2" value="option2" />
+        <DropdownItem itemText="Option 3" value="option3" />
+        <DropdownItem itemText="Option 4" value="option4" />
+        <DropdownItem itemText="Option 5" value="option5" />
       </Dropdown>
   ))
   .addWithInfo(
@@ -69,14 +69,14 @@ storiesOf('Dropdown', module)
       <Dropdown
         {...dropdownEvents}
         onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
-        defaultText="Choose something.."
+        defaultText="Dropdown label"
         disabled
       >
-        <DropdownItem itemText="All" value="all" />
-        <DropdownItem itemText="Cloud Foundry API" value="cloudFoundry" />
-        <DropdownItem itemText="Staging" value="staging" />
-        <DropdownItem itemText="Droplet Execution Agent" value="dea" />
-        <DropdownItem itemText="Router" value="router" />
+      <DropdownItem itemText="Option 1" value="option1" />
+      <DropdownItem itemText="Option 2" value="option2" />
+      <DropdownItem itemText="Option 3" value="option3" />
+      <DropdownItem itemText="Option 4" value="option4" />
+      <DropdownItem itemText="Option 5" value="option5" />
       </Dropdown>
     ))
     .addWithInfo(
@@ -89,14 +89,14 @@ storiesOf('Dropdown', module)
         <Dropdown
           {...dropdownEvents}
           onChange={(selectedItemInfo) => console.log(selectedItemInfo)} // eslint-disable-line no-console
-          defaultText="Choose something.."
+          defaultText="Dropdown label"
           value="all"
-          selectedText="Cloud Foundry API"
+          selectedText="Option 4"
         >
-          <DropdownItem itemText="All" value="all" />
-          <DropdownItem itemText="Cloud Foundry API" value="cloudFoundry" />
-          <DropdownItem itemText="Staging" value="staging" />
-          <DropdownItem itemText="Droplet Execution Agent" value="dea" />
-          <DropdownItem itemText="Router" value="router" />
-        </Dropdown>
+        <DropdownItem itemText="Option 1" value="option1" />
+        <DropdownItem itemText="Option 2" value="option2" />
+        <DropdownItem itemText="Option 3" value="option3" />
+        <DropdownItem itemText="Option 4" value="option4" />
+        <DropdownItem itemText="Option 5" value="option5" />
+      </Dropdown>
     ));

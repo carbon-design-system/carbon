@@ -19,9 +19,9 @@ storiesOf('Checkbox', module)
     `,
     () => (
       <fieldset className="bx--fieldset">
-        <legend className="bx--label">Favorite Colors</legend>
-        <Checkbox defaultChecked {...checkboxEvents} id="red" labelText="Red" />
-        <Checkbox defaultChecked {...checkboxEvents} id="blue" labelText="Blue" />
+        <legend className="bx--label">Checkbox heading</legend>
+        <Checkbox defaultChecked {...checkboxEvents} id="checkbox-label-1" labelText="Checkbox label 1" />
+        <Checkbox defaultChecked {...checkboxEvents} id="checkbox-label-2" labelText="Checkbox label 2" />
       </fieldset>
     ),
   )
@@ -34,9 +34,9 @@ storiesOf('Checkbox', module)
     `,
     () => (
       <fieldset className="bx--fieldset">
-        <legend className="bx--label">Favorite Colors</legend>
-        <Checkbox {...checkboxEvents} id="red" labelText="Red" />
-        <Checkbox {...checkboxEvents} id="blue" labelText="Blue" />
+        <legend className="bx--label">Checkbox heading</legend>
+        <Checkbox {...checkboxEvents} id="checkbox-label-1" labelText="Checkbox label 1" />
+        <Checkbox {...checkboxEvents} id="checkbox-label-2" labelText="Checkbox label 2" />
       </fieldset>
     )
   )
@@ -48,8 +48,8 @@ storiesOf('Checkbox', module)
     `,
     () => (
       <fieldset disabled className="bx--fieldset">
-        <legend className="bx--label">Favorite Colors</legend>
-        <Checkbox {...checkboxEvents} id="red" labelText="Red" />
-        <Checkbox {...checkboxEvents} id="blue" labelText="Blue" />
+        <legend className="bx--label">Checkbox heading</legend>
+        <Checkbox {...checkboxEvents} id="checkbox-label-1" labelText="Checkbox label 1" />
+        <Checkbox {...checkboxEvents} id="checkbox-label-2" labelText="Checkbox label 2" />
       </fieldset>
   ));

@@ -23,16 +23,16 @@ storiesOf('OverflowMenu', module)
     `,
     () => (
       <OverflowMenu {...overflowMenuEvents}>
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Stop App" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Restart App" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Rename App" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 1" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
-          itemText="Edit Routes and Access"
+          itemText="Option 4"
         />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
-          itemText="Delete App"
+          itemText="Danger option"
           hasDivider
           isDelete
         />
@@ -47,16 +47,16 @@ storiesOf('OverflowMenu', module)
     `,
     () => (
       <OverflowMenu {...overflowMenuEvents} floatingMenu>
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Stop App" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Restart App" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Rename App" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 1" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
-          itemText="Edit Routes and Access"
+          itemText="Option 4"
         />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
-          itemText="Delete App"
+          itemText="Danger option"
           hasDivider
           isDelete
         />

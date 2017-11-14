@@ -22,12 +22,12 @@ const additionalProps = {
 
 const checkboxEvents = {
   className: 'some-class',
-  labelText: 'Checkbox',
+  labelText: 'Checkbox label',
 };
 
 const fieldsetCheckboxProps = {
   className: 'some-class',
-  legendText: 'Checkbox',
+  legendText: 'Checkbox heading',
 };
 
 const numberInputProps = {
@@ -46,7 +46,7 @@ const toggleProps = {
 
 const fieldsetToggleProps = {
   className: 'some-class',
-  legendText: 'Toggle',
+  legendText: 'Toggle heading',
 };
 
 const fileUploaderEvents = {
@@ -64,7 +64,7 @@ const radioProps = {
 
 const fieldsetRadioProps = {
   className: 'some-class',
-  legendText: 'Radio Button',
+  legendText: 'Radio Button heading',
 };
 
 const searchProps = {
@@ -83,30 +83,28 @@ const selectProps = {
 const TextInputProps = {
   className: 'some-class',
   id: 'test2',
-  labelText: 'Text Input',
-  placeholder: 'Hint text here',
+  labelText: 'Text Input label',
+  placeholder: 'Placeholder text',
 };
 
 const PasswordProps = {
   className: 'some-class',
   id: 'test2',
   labelText: 'Password',
-  placeholder: 'Password',
 };
 
 const InvalidPasswordProps = {
   className: 'some-class',
   id: 'test2',
-  labelText: 'Password (invalid)',
-  placeholder: 'Password',
+  labelText: 'Password',
   invalid: true,
   invalidText: 'Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.',
 };
 
 const textareaProps = {
-  labelText: 'Text Area',
+  labelText: 'Text Area label',
   className: 'some-class',
-  placeholder: 'Hint text here',
+  placeholder: 'Placeholder text',
   id: 'test2',
   cols: 50,
   rows: 4,
@@ -181,7 +179,7 @@ storiesOf('Form', module).addWithInfo(
           {...searchProps}
           id="search-1"
           labelText="Search"
-          placeHolderText="Search Bluemix Offerings"
+          placeHolderText="Search"
         />
       </FormGroup>
 
@@ -190,7 +188,7 @@ storiesOf('Form', module).addWithInfo(
           disabled
           hidden
           value="placeholder-item"
-          text="Pick an option"
+          text="Choose an option"
         />
         <SelectItem value="option-1" text="Option 1" />
         <SelectItem value="option-2" text="Option 2" />

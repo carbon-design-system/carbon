@@ -23,7 +23,7 @@ storiesOf('Search', module)
         className="some-class"
         id="search-1"
         labelText="Search"
-        placeHolderText="Search Bluemix Offerings"
+        placeHolderText="Search"
         onChange={() => {
           console.log('onChange');
           action('onChange');
@@ -45,7 +45,7 @@ storiesOf('Search', module)
         small
         id="search-2"
         labelText="Search"
-        placeHolderText="Search Bluemix Offerings"
+        placeHolderText="Search"
         onChange={() => {
           console.log('onChange');
           action('onChange');
@@ -77,7 +77,7 @@ storiesOf('Search', module)
               labelText="Search"
               value={this.state.searchValue}
               onChange={this.handleChange}
-              placeHolderText="Search Bluemix Offerings"
+              placeHolderText="Search"
             />
           );
         }

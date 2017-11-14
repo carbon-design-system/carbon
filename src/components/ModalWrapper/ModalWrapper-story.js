@@ -77,12 +77,12 @@ is an action the user needs to address immediately.
       <ModalWrapper
         id="input-modal"
         buttonTriggerText="Input Modal"
-        modalHeading="Modal with Inputs"
+        modalHeading="Modal with inputs"
         handleSubmit={action('onSubmit')}
       >
-        <TextInput id="test2" placeholder="Hint text here" label="Text Input:" />
+        <TextInput id="test2" placeholder="Placeholder text" label="Label"/>
         <br />
-        <Select id="select-1" labelText="Select">
+        <Select id="select-1" labelText="Label">
           <SelectItem disabled hidden value="placeholder-item" text="Pick an option" />
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
@@ -91,20 +91,20 @@ is an action the user needs to address immediately.
         <br />
         <RadioButtonGroup name="radio-button-group" defaultSelected="default-selected">
           <RadioButton
-            value="standard"
+            value="default-selected"
             id="radio-1"
-            labelText="Standard Radio Button"
+            labelText="Radio Button label 1"
             className="some-class"
           />
           <RadioButton
-            value="default-selected"
-            labelText="Default Selected Radio Button"
+            value="standard"
+            labelText="Radio Button label 2"
             id="radio-2"
             className="some-class"
           />
           <RadioButton
-            value="disabled"
-            labelText="Disabled Radio Button"
+            value="standard"
+            labelText="Radio Button label 3"
             id="radio-3"
             className="some-class"
             disabled

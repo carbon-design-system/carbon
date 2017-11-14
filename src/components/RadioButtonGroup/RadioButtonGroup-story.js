@@ -21,7 +21,7 @@ storiesOf('RadioButtonGroup', module).addWithInfo(
        at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
     `,
   () => (
-    <FormGroup legendText="Radio Group">
+    <FormGroup legendText="Radio Button heading">
       <RadioButtonGroup
         onChange={action('onChange')}
         name="radio-button-group"
@@ -31,12 +31,12 @@ storiesOf('RadioButtonGroup', module).addWithInfo(
         <RadioButton
           value="standard"
           id="radio-1"
-          labelText="Standard Radio Button"
+          labelText="Standard Radio Button label"
           {...radioProps}
         />
         <RadioButton
           value="default-selected"
-          labelText="Default Selected Radio Button"
+          labelText="Default selected Radio Button"
           id="radio-2"
           {...radioProps}
         />

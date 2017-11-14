@@ -11,21 +11,21 @@ const notificationProps = {
   toast: {
     onCloseButtonClick: action('onCloseButtonClick'),
     className: 'some-class',
-    title: 'this is a title',
-    subtitle: 'subtitle',
-    caption: 'caption',
-    captionNode: <Link href="#">the caption can be any node</Link>,
+    title: 'Notification title',
+    subtitle: 'Subtitle text goes here.',
+    caption: 'Time stamp [00:00:00]',
+    captionNode: <Link href="#">The caption can be any node.</Link>,
     iconDescription: 'describes the close button',
     style: { minWidth: '30rem', marginBottom: '.5rem' }
   },
   inline: {
     onCloseButtonClick: action('onCloseButtonClick'),
     className: 'some-class',
-    title: 'this is a title',
-    subtitle: 'subtitle',
+    title: 'Notification title',
+    subtitle: 'Subtitle text goes here.',
     iconDescription: 'describes the close button'
   },
-  subtitleNode: <Link href="#">the subtitle can be any node</Link>,
+  subtitleNode: <Link href="#">The subtitle can be any node.</Link>,
 };
 
 storiesOf('Notifications', module)

@@ -11,7 +11,7 @@ storiesOf('TooltipSimple', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <TooltipSimple text="This is some tooltip text" className="some-class">
+        <TooltipSimple text="This is some Tooltip text." className="some-class">
           <p className="bx--tooltip__trigger">Tooltip - hover</p>
         </TooltipSimple>
       </div>
@@ -25,7 +25,7 @@ storiesOf('TooltipSimple', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <TooltipSimple position="bottom" text="This is some tooltip text">
+        <TooltipSimple position="bottom" text="This is some Tooltip text.">
           <p className="bx--tooltip__trigger">Tooltip - hover</p>
         </TooltipSimple>
       </div>
@@ -39,7 +39,7 @@ storiesOf('TooltipSimple', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <TooltipSimple text="This is some Tooltip text" showIcon={false}>
+        <TooltipSimple text="This is some Tooltip text." showIcon={false}>
           <p className="bx--tooltip__trigger">Tooltip - hover</p>
         </TooltipSimple>
       </div>
