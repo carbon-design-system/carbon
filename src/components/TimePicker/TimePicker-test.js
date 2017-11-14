@@ -105,9 +105,10 @@ describe('TimePicker', () => {
     describe('enabled textinput', () => {
       const onClick = jest.fn();
       const onChange = jest.fn();
+      const onBlur = jest.fn();
 
       const wrapper = shallow(
-        <TimePicker id="test" onClick={onClick} onChange={onChange} />
+        <TimePicker id="test" onClick={onClick} onChange={onChange} onBlur={onBlur} />
       );
 
       const input = wrapper.find('input');
@@ -117,9 +118,14 @@ describe('TimePicker', () => {
         },
       };
 
+      it('should invoke onBlur when input is clicked', () => {
+        input.simulate('blur', eventObject);
+        expect(onBlur).toBeCalledWith(eventObject);
+      });
+
       it('should invoke onClick when input is clicked', () => {
-        input.simulate('click');
-        expect(onClick).toBeCalled();
+        input.simulate('click', eventObject);
+        expect(onClick).toBeCalledWith(eventObject);
       });
 
       it('should invoke onChange when input value is changed', () => {

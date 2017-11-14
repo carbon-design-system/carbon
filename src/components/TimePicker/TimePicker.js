@@ -9,6 +9,8 @@ export default class TimePicker extends Component {
     id: PropTypes.string.isRequired,
     labelText: PropTypes.string,
     onClick: PropTypes.func,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
     type: PropTypes.string,
     pattern: PropTypes.string,
     placeholder: PropTypes.string,
@@ -17,6 +19,7 @@ export default class TimePicker extends Component {
     invalidText: PropTypes.string,
     hideLabel: PropTypes.bool,
     disabled: PropTypes.bool,
+    value: PropTypes.string,
   };
 
   static defaultProps = {
@@ -29,7 +32,22 @@ export default class TimePicker extends Component {
     disabled: false,
     onChange: () => {},
     onClick: () => {},
+    onBlur: () => {},
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: props.value,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      this.setState({ value: nextProps.value });
+    }
+  }
 
   render() {
     const {
@@ -41,6 +59,7 @@ export default class TimePicker extends Component {
       pattern,
       onChange,
       onClick,
+      onBlur,
       placeholder,
       maxLength,
       invalidText,
@@ -52,12 +71,26 @@ export default class TimePicker extends Component {
     const timePickerInputProps = {
       onChange: evt => {
         if (!other.disabled) {
+          this.setState({
+            value: evt.target.value,
+          });
           onChange(evt);
         }
       },
       onClick: evt => {
         if (!other.disabled) {
+          this.setState({
+            value: evt.target.value,
+          });
           onClick(evt);
+        }
+      },
+      onBlur: evt => {
+        if (!other.disabled) {
+          this.setState({
+            value: evt.target.value,
+          });
+          onBlur(evt);
         }
       },
       pattern,
@@ -65,6 +98,7 @@ export default class TimePicker extends Component {
       maxLength,
       id,
       type,
+      value: this.state.value,
     };
 
     const timePickerClasses = classNames({
