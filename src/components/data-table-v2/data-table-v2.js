@@ -91,11 +91,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     const row = element.parentNode.parentNode;
 
-    if (checked && row) {
-      row.classList.add('bx--data-table-v2--selected');
-    } else {
-      row.classList.remove('bx--data-table-v2--selected');
-    }
+    row.classList.toggle('bx--data-table-v2--selected');
 
     // toggle on/off batch action bar
     this._actionBarToggle(this.state.checkboxCount > 0);

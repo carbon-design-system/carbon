@@ -153,7 +153,6 @@
 .bx--batch-summary__cancel {
   @include button-reset(auto);
   @include typescale('zeta');
-  -webkit-font-smoothing: auto;
   color: $ui-01;
   border-bottom: 1px solid transparent;
   font-weight: 600;
