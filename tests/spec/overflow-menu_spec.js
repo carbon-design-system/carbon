@@ -35,6 +35,7 @@ describe('Test Overflow menu', function() {
       expect(element.classList.contains('bx--overflow-menu--open')).to.be.true;
 
       // Secondary click to close overflow-menu:
+      element.dispatchEvent(new CustomEvent('mousedown', { bubbles: true }));
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.classList.contains('bx--overflow-menu--open')).to.be.false;
     });
@@ -97,6 +98,7 @@ describe('Test Overflow menu', function() {
       const spyOverflowEvent = sinon.spy();
       events.on(document, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
+      element.dispatchEvent(new CustomEvent('mousedown', { bubbles: true }));
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent).to.have.been.called;
     });
