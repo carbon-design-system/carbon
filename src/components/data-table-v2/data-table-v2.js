@@ -89,6 +89,14 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     this.state.checkboxCount += checked ? 1 : -1;
     this.countEl.textContent = this.state.checkboxCount;
 
+    const row = element.parentNode.parentNode;
+
+    if (checked && row) {
+      row.classList.add('bx--data-table-v2--selected');
+    } else {
+      row.classList.remove('bx--data-table-v2--selected');
+    }
+
     // toggle on/off batch action bar
     this._actionBarToggle(this.state.checkboxCount > 0);
   };
@@ -102,6 +110,13 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     inputs.forEach(item => {
       item.checked = checked;
+
+      const row = item.parentNode.parentNode;
+      if (checked && row) {
+        row.classList.add('bx--data-table-v2--selected');
+      } else {
+        row.classList.remove('bx--data-table-v2--selected');
+      }
     });
 
     this._actionBarToggle(this.state.checkboxCount > 0);
