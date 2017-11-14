@@ -128,8 +128,8 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
         const track = this.track.getBoundingClientRect();
         const unrounded = (evt.clientX - track.left) / track.width;
         const rounded = Math.round(range * unrounded / step) * step;
-        left = (rounded - min) / range * 100;
-        newValue = rounded;
+        left = rounded / range * 100;
+        newValue = rounded + min;
       }
     }
 
@@ -153,10 +153,10 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
 
   getInputProps() {
     const values = {
-      value: this.input.value,
-      min: this.input.min,
-      max: this.input.max,
-      step: this.input.step ? this.input.step : 1,
+      value: Number(this.input.value),
+      min: Number(this.input.min),
+      max: Number(this.input.max),
+      step: this.input.step ? Number(this.input.step) : 1,
     };
     return values;
   }

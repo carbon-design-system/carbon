@@ -53,17 +53,17 @@ describe('Test slider', function() {
     });
     it('Should setValue as expected', function() {
       slider.setValue(100);
-      expect(slider.getInputProps().value).to.equal('100');
+      expect(slider.getInputProps().value).to.equal(100);
     });
     it('Should stepUp as expected', function() {
       slider.setValue(50);
       slider.stepUp();
-      expect(slider.getInputProps().value).to.equal('51');
+      expect(slider.getInputProps().value).to.equal(51);
     });
     it('Should stepDown as expected', function() {
       slider.setValue(50);
       slider.stepDown();
-      expect(slider.getInputProps().value).to.equal('49');
+      expect(slider.getInputProps().value).to.equal(49);
     });
     afterEach(function() {
       if (slider) {
@@ -93,22 +93,22 @@ describe('Test slider', function() {
       event.which = 39;
       thumb.dispatchEvent(event);
       mockRaf.step({ count: 1 });
-      expect(slider.getInputProps().value).to.equal('51');
+      expect(slider.getInputProps().value).to.equal(51);
       event.which = 38;
       thumb.dispatchEvent(event);
       mockRaf.step({ count: 1 });
-      expect(slider.getInputProps().value).to.equal('52');
+      expect(slider.getInputProps().value).to.equal(52);
     });
     it('Should stepDown value on down/left key', function() {
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 40;
       thumb.dispatchEvent(event);
       mockRaf.step({ count: 1 });
-      expect(slider.getInputProps().value).to.equal('49');
+      expect(slider.getInputProps().value).to.equal(49);
       event.which = 37;
       thumb.dispatchEvent(event);
       mockRaf.step({ count: 1 });
-      expect(slider.getInputProps().value).to.equal('48');
+      expect(slider.getInputProps().value).to.equal(48);
     });
     afterEach(function() {
       if (mockRaf) {
@@ -142,7 +142,7 @@ describe('Test slider', function() {
       event.clientX = 0;
       track.dispatchEvent(event);
       mockRaf.step({ count: 1 });
-      expect(slider.getInputProps().value).to.equal('0');
+      expect(slider.getInputProps().value).to.equal(0);
     });
     afterEach(function() {
       if (mockRaf) {
