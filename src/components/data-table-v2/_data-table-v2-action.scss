@@ -13,6 +13,12 @@
       outline: 0;
     }
   }
+
+  .bx--search-close {
+    height: 10px;
+    width: 10px;
+    top: calc(50% - 5px);
+  }
 }
 
 .bx--toolbar-content {
@@ -147,11 +153,16 @@
 .bx--batch-summary__cancel {
   @include button-reset(auto);
   @include typescale('zeta');
-  -webkit-font-smoothing: auto;
   color: $ui-01;
-  border-bottom: 1px solid $ui-01;
+  border-bottom: 1px solid transparent;
   font-weight: 600;
   cursor: pointer;
+  transition: border $transition--base $bx--standard-easing;
+
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid $ui-01;
+  }
 }
 
 .bx--batch-actions ~ .bx--toolbar-search-container,
