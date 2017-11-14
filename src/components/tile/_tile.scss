@@ -87,6 +87,8 @@
     opacity: 0;
 
     svg {
+      border-radius: 50%;
+      background-color: rgba($ui-01, .25);
       fill: rgba($brand-01, .25);
     }
   }
@@ -152,6 +154,7 @@
 
     & + .bx--tile__checkmark svg {
       fill: $brand-01;
+      background-color: $ui-01;
     }
   }
 
