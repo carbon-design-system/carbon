@@ -16,7 +16,7 @@ module.exports = {
     }),
     commonjs({
       include: 'node_modules/**',
-      sourceMap: false,
+      sourceMap: true,
     }),
     babel({
       exclude: 'node_modules/**',
@@ -27,4 +27,5 @@ module.exports = {
     }),
   ],
   file: 'demo/demo.js',
+  sourcemap: 'inline',
 };
