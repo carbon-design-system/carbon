@@ -13,6 +13,12 @@
       outline: 0;
     }
   }
+
+  .bx--search-close {
+    height: 10px;
+    width: 10px;
+    top: calc(50% - 5px);
+  }
 }
 
 .bx--toolbar-content {
