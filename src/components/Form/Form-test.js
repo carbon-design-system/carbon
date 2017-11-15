@@ -25,7 +25,7 @@ describe('Form', () => {
         <Form>
           <div className="test-child1" />
           <div className="test-child2" />
-        </Form>,
+        </Form>
       );
       expect(form.length).toEqual(1);
     });
@@ -34,7 +34,7 @@ describe('Form', () => {
         <Form>
           <div className="test-child" />
           <div className="test-child" />
-        </Form>,
+        </Form>
       );
       expect(form1.find('.test-child').length).toBe(2);
     });
@@ -46,7 +46,7 @@ describe('Form', () => {
           <button className="button" type="submit" onSubmit={onSubmit}>
             Submit
           </button>
-        </Form>,
+        </Form>
       );
       const btn = form1.find('button');
       btn.simulate('submit');

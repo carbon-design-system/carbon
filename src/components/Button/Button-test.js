@@ -89,7 +89,11 @@ describe('Button', () => {
   });
 
   describe('Renders icon buttons', () => {
-    const iconButton = mount(<Button icon="search" iconDescription="Search">Search</Button>);
+    const iconButton = mount(
+      <Button icon="search" iconDescription="Search">
+        Search
+      </Button>
+    );
     const icon = iconButton.find('svg');
     it('should have the appropriate icon', () => {
       expect(icon.hasClass('bx--btn__icon')).toBe(true);
@@ -124,7 +128,9 @@ describe('Primary Button', () => {
 
 describe('Secondary Button', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Button kind="secondary" className="extra-class" />);
+    const wrapper = shallow(
+      <Button kind="secondary" className="extra-class" />
+    );
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass('bx--btn--secondary')).toEqual(true);

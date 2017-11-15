@@ -13,7 +13,9 @@ describe('InteriorLeftNav', () => {
     });
 
     it('has the expected classes', () => {
-      expect(wrapper.children().hasClass('bx--interior-left-nav')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--interior-left-nav')).toEqual(
+        true
+      );
     });
 
     it('should add extra classes that are passed via className', () => {
@@ -27,16 +29,15 @@ describe('InteriorLeftNav', () => {
           <InteriorLeftNavItem
             href="#"
             title="test-title"
-            className="test-child"
-          >
+            className="test-child">
             <a href="#">test-title</a>
           </InteriorLeftNavItem>
-        </InteriorLeftNav>,
+        </InteriorLeftNav>
       );
       expect(interiorLeftNav.find('.left-nav-list').length).toEqual(2);
       expect(interiorLeftNav.find('.test-child').length).toEqual(4);
       expect(
-        interiorLeftNav.find('.bx--interior-left-nav-collapse').length,
+        interiorLeftNav.find('.bx--interior-left-nav-collapse').length
       ).toEqual(1);
     });
   });
@@ -46,7 +47,7 @@ describe('InteriorLeftNav', () => {
       <InteriorLeftNav>
         <InteriorLeftNavList className="first" />
         <InteriorLeftNavList className="second" open />
-      </InteriorLeftNav>,
+      </InteriorLeftNav>
     );
     const first = () => twoLists.find('li.first');
     const second = () => twoLists.find('li.second');
@@ -65,7 +66,7 @@ describe('InteriorLeftNav', () => {
         <InteriorLeftNavItem href="#first">
           <a href="#first">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNav>,
+      </InteriorLeftNav>
     );
 
     const item = interiorLeftNav.find(InteriorLeftNavItem).first();
@@ -93,9 +94,9 @@ describe('InteriorLeftNav', () => {
 
     it('should close the nav when the toggler is clicked', () => {
       toggler.simulate('click');
-      expect(interiorLeftNav.children().hasClass('bx--interior-left-nav--collapsed')).toBe(
-        true,
-      );
+      expect(
+        interiorLeftNav.children().hasClass('bx--interior-left-nav--collapsed')
+      ).toBe(true);
       expect(interiorLeftNav.state().open).toBe(false);
     });
   });

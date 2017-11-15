@@ -2,7 +2,7 @@ import React from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { shallow } from 'enzyme';
 
-const shallowRender = (props) => shallow(<OverflowMenuItem {...props} />);
+const shallowRender = props => shallow(<OverflowMenuItem {...props} />);
 
 describe('OverflowMenuItem', () => {
   describe('Renders as expected', () => {

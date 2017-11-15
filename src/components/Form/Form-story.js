@@ -98,7 +98,8 @@ const InvalidPasswordProps = {
   id: 'test2',
   labelText: 'Password',
   invalid: true,
-  invalidText: 'Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.',
+  invalidText:
+    'Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.',
 };
 
 const textareaProps = {
@@ -150,8 +151,7 @@ storiesOf('Form', module).addWithInfo(
         <RadioButtonGroup
           onChange={action('onChange')}
           name="radio-button-group"
-          defaultSelected="default-selected"
-        >
+          defaultSelected="default-selected">
           <RadioButton
             value="standard"
             id="radio-1"

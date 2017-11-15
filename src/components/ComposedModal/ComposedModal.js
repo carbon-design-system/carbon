@@ -82,11 +82,8 @@ export default class ComposedModal extends Component {
         ref={modal => (this.modal = modal)}
         onKeyDown={this.handleKeyDown}
         className={modalClass}
-        {...other}
-      >
-        <div className={containerClass}>
-          {childrenWithProps}
-        </div>
+        {...other}>
+        <div className={containerClass}>{childrenWithProps}</div>
       </div>
     );
   }
@@ -160,23 +157,16 @@ export class ModalHeader extends Component {
 
     return (
       <div className={headerClass} {...other}>
-        {label &&
-          <p className={labelClass}>
-            {label}
-          </p>}
+        {label && <p className={labelClass}>{label}</p>}
 
-        {title &&
-          <p className={titleClass}>
-            {title}
-          </p>}
+        {title && <p className={titleClass}>{title}</p>}
 
         {children}
 
         <button
           onClick={this.handleCloseButtonClick}
           className={closeClass}
-          type="button"
-        >
+          type="button">
           <Icon
             name="close"
             className={closeIconClass}
@@ -261,24 +251,24 @@ export class ModalFooter extends Component {
 
     return (
       <div className={footerClass} {...other}>
-        {secondaryButtonText &&
+        {secondaryButtonText && (
           <Button
             className={secondaryClass}
             onClick={this.handleRequestClose}
-            kind="secondary"
-          >
+            kind="secondary">
             {secondaryButtonText}
-          </Button>}
+          </Button>
+        )}
 
-        {primaryButtonText &&
+        {primaryButtonText && (
           <Button
             onClick={this.onRequestSubmit}
             className={primaryClass}
             disabled={primaryButtonDisabled}
-            kind="primary"
-          >
+            kind="primary">
             {primaryButtonText}
-          </Button>}
+          </Button>
+        )}
 
         {children}
       </div>

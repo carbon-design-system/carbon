@@ -22,9 +22,8 @@ storiesOf('TextArea', module)
       anticipate the user to input more than 1 sentence. The example belows shows an enabled
       Text Area component.
     `,
-    () => (
-      <Textarea {...textareaProps} />
-  ))
+    () => <Textarea {...textareaProps} />
+  )
   .addWithInfo(
     'disabled',
     `
@@ -32,6 +31,5 @@ storiesOf('TextArea', module)
       anticipate the user to input more than 1 sentence. The example belows shows an disabled
       Text Area component.
     `,
-    () => (
-      <Textarea disabled {...textareaProps} placeholder={'Disabled'} />
-  ));
+    () => <Textarea disabled {...textareaProps} placeholder={'Disabled'} />
+  );

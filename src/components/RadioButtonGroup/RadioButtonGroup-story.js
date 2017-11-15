@@ -26,8 +26,7 @@ storiesOf('RadioButtonGroup', module).addWithInfo(
         onChange={action('onChange')}
         name="radio-button-group"
         defaultSelected="default-selected"
-        legend="Group Legend"
-      >
+        legend="Group Legend">
         <RadioButton
           value="standard"
           id="radio-1"

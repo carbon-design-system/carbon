@@ -12,9 +12,7 @@ describe('CardActionItem', () => {
       iconName: 'testName',
       description: 'testDescription',
     };
-    const wrapper = shallow(
-      <CardActionItem {...props} />
-    );
+    const wrapper = shallow(<CardActionItem {...props} />);
 
     describe('Renders button as expected', () => {
       it('has the expected classes', () => {

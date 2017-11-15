@@ -6,7 +6,9 @@ import { shallow } from 'enzyme';
 describe('TableHeader', () => {
   describe('Renders as expected', () => {
     const theader = shallow(
-      <TableHeader><p>Content</p></TableHeader>
+      <TableHeader>
+        <p>Content</p>
+      </TableHeader>
     );
 
     it('should render a th with the appropriate class', () => {

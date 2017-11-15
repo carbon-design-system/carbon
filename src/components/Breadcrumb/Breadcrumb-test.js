@@ -7,7 +7,9 @@ describe('Breadcrumb', () => {
   describe('Renders as expected', () => {
     const breadcrumb = mount(
       <Breadcrumb className="parent-class">
-        <BreadcrumbItem className="some-class" href="www.google.com">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem className="some-class" href="www.google.com">
+          Breadcrumb 1
+        </BreadcrumbItem>
       </Breadcrumb>
     );
 

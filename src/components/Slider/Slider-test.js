@@ -8,8 +8,15 @@ describe('Slider', () => {
   describe('Renders as expected', () => {
     const mockFn = jest.fn();
     const wrapper = mount(
-      <Slider id="slider" className="extra-class" value={50} min={0} max={100} step={1} onChange={mockFn} >
-        <TextInput id="input-for-slider" className="bx-slider-text-input"/>
+      <Slider
+        id="slider"
+        className="extra-class"
+        value={50}
+        min={0}
+        max={100}
+        step={1}
+        onChange={mockFn}>
+        <TextInput id="input-for-slider" className="bx-slider-text-input" />
       </Slider>
     );
 
@@ -54,7 +61,7 @@ describe('Slider', () => {
       const evt = {
         type: 'keydown',
         which: '38',
-      }
+      };
       wrapper.instance().updatePosition(evt);
       expect(mockFn).lastCalledWith({ value: 51 });
       expect(wrapper.state().value).toEqual(51);
@@ -64,7 +71,7 @@ describe('Slider', () => {
       const evt = {
         type: 'keydown',
         which: '40',
-      }
+      };
       wrapper.instance().updatePosition(evt);
       expect(mockFn).lastCalledWith({ value: 50 });
       expect(wrapper.state().value).toEqual(50);
@@ -74,7 +81,7 @@ describe('Slider', () => {
       const evt = {
         type: 'click',
         clientX: '1000',
-      }
+      };
       wrapper.instance().updatePosition(evt);
       expect(mockFn).lastCalledWith({ value: 100 });
       expect(wrapper.state().value).toEqual(100);

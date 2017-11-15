@@ -21,9 +21,8 @@ storiesOf('TextInput', module)
       The example below shows an enabled Text Input component. The default type is 'text' and its
       value can be either 'string' or 'number'.
     `,
-    () => (
-      <TextInput {...TextInputProps} />
-  ))
+    () => <TextInput {...TextInputProps} />
+  )
   .addWithInfo(
     'disabled',
     `
@@ -31,9 +30,8 @@ storiesOf('TextInput', module)
       used when the input anticipated by the user is a single line of text as opposed to a paragraph.
       The example below shows a disabled Text Input component.
     `,
-    () => (
-      <TextInput disabled {...TextInputProps} />
-  ))
+    () => <TextInput disabled {...TextInputProps} />
+  )
   .addWithInfo(
     'email',
     `
@@ -42,8 +40,13 @@ storiesOf('TextInput', module)
       The example below shows an enabled Text Input component with type 'email'.
     `,
     () => (
-      <TextInput {...TextInputProps} type={"email"} placeholder={"janedoe@us.ibm.com"} />
-  ))
+      <TextInput
+        {...TextInputProps}
+        type={'email'}
+        placeholder={'Please enter an email'}
+      />
+    )
+  )
   .addWithInfo(
     'password',
     `
@@ -52,5 +55,10 @@ storiesOf('TextInput', module)
       The example below shows an enabled Text Input component with type 'password'.
     `,
     () => (
-      <TextInput {...TextInputProps} type={"password"} placeholder={"Password must be at least 8 characters."} />
-  ));
+      <TextInput
+        {...TextInputProps}
+        type={'password'}
+        placeholder={'Please enter a password'}
+      />
+    )
+  );

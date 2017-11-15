@@ -5,7 +5,9 @@ import { shallow } from 'enzyme';
 describe('Link', () => {
   describe('Renders as expected', () => {
     const link = shallow(
-      <Link href="www.google.com" className="some-class">A simple link</Link>
+      <Link href="www.google.com" className="some-class">
+        A simple link
+      </Link>
     );
     it('should use the appropriate link class', () => {
       expect(link.hasClass('bx--link')).toEqual(true);

@@ -4,9 +4,7 @@ import { mount } from 'enzyme';
 
 describe('Toggle', () => {
   describe('Renders as expected', () => {
-    const wrapper = mount(
-      <Toggle id="toggle-1" />
-    );
+    const wrapper = mount(<Toggle id="toggle-1" />);
 
     const input = wrapper.find('input');
 
@@ -38,19 +36,21 @@ describe('Toggle', () => {
 
     it('Can have a labelA', () => {
       wrapper.setProps({ labelA: 'labelA-test' });
-      expect(wrapper.find('.bx--toggle__text--left').text()).toEqual('labelA-test');
+      expect(wrapper.find('.bx--toggle__text--left').text()).toEqual(
+        'labelA-test'
+      );
     });
 
     it('Can have a labelB', () => {
       wrapper.setProps({ labelB: 'labelB-test' });
-      expect(wrapper.find('.bx--toggle__text--right').text()).toEqual('labelB-test');
+      expect(wrapper.find('.bx--toggle__text--right').text()).toEqual(
+        'labelB-test'
+      );
     });
   });
 
   it('toggled prop sets checked prop on input', () => {
-    const wrapper = mount(
-      <Toggle id="test" toggled />
-    );
+    const wrapper = mount(<Toggle id="test" toggled />);
 
     const input = () => wrapper.find('input');
     expect(input().props().checked).toEqual(true);
@@ -63,9 +63,7 @@ describe('Toggle', () => {
     it('should invoke onToggle with expected arguments', () => {
       const onToggle = jest.fn();
       const id = 'test-input';
-      const wrapper = mount(
-        <Toggle id={id} onToggle={onToggle} />
-      );
+      const wrapper = mount(<Toggle id={id} onToggle={onToggle} />);
 
       const input = wrapper.find('input');
       const inputElement = input.instance();

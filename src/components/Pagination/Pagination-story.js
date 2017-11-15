@@ -10,11 +10,7 @@ const props = {
 };
 
 storiesOf('Pagination', module)
-  .addDecorator(story =>
-    <div style={{ width: '800px' }}>
-      {story()}
-    </div>
-  )
+  .addDecorator(story => <div style={{ width: '800px' }}>{story()}</div>)
   .addWithInfo(
     'with known total number of items',
     `
@@ -27,13 +23,14 @@ storiesOf('Pagination', module)
     `
       The pagination component is used to paginate through items with unknown total.
     `,
-    () =>
+    () => (
       <Pagination
         {...props}
         pagesUnknown={true}
         isLastPage={false}
         pageInputDisabled={true}
       />
+    )
   )
   .addWithInfo(
     'multipe pagination components',

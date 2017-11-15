@@ -13,7 +13,7 @@ describe('CardContent', () => {
       cardInfo: ['testInfo1', 'testInfo2'],
     };
     const wrapper = shallow(
-      <CardContent {...props} >
+      <CardContent {...props}>
         <div className="child">Test</div>
       </CardContent>
     );
@@ -66,21 +66,29 @@ describe('CardContent', () => {
           expect(links.length).toBe(1);
           expect(links.getElement().type).toBe('a');
           expect(links.hasClass('bx--about__title--link')).toBe(true);
-          expect(links.props().href).toBe('http://test-card-link.mybluemix.net');
-          expect(links.props().children).toBe('http://test-card-link.mybluemix.net');
+          expect(links.props().href).toBe(
+            'http://test-card-link.mybluemix.net'
+          );
+          expect(links.props().children).toBe(
+            'http://test-card-link.mybluemix.net'
+          );
         });
 
         it('has expected info paragraphs', () => {
           const info1 = title.childAt(2);
           expect(info1.length).toBe(1);
           expect(info1.getElement().type).toBe('h4');
-          expect(info1.hasClass('bx--about__title--additional-info')).toBe(true);
+          expect(info1.hasClass('bx--about__title--additional-info')).toBe(
+            true
+          );
           expect(info1.props().children).toBe('testInfo1');
 
           const info2 = title.childAt(3);
           expect(info2.length).toBe(1);
           expect(info2.getElement().type).toBe('h4');
-          expect(info2.hasClass('bx--about__title--additional-info')).toBe(true);
+          expect(info2.hasClass('bx--about__title--additional-info')).toBe(
+            true
+          );
           expect(info2.props().children).toBe('testInfo2');
         });
       });

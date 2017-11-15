@@ -21,16 +21,12 @@ storiesOf('Footer', module)
     `
       Footer is used on configuration screens.
     `,
-    () => <Footer {...additionalProps} />,
+    () => <Footer {...additionalProps} />
   )
   .addWithInfo(
     'Custom',
     `
       This footer allows custom elements to be placed inside.
     `,
-    () => (
-      <Footer className="some-class">
-        This is a test Footer.
-      </Footer>
-    ),
+    () => <Footer className="some-class">This is a test Footer.</Footer>
   );

@@ -11,7 +11,7 @@ describe('Tabs', () => {
         <Tabs className="extra-class">
           <Tab label="firstTab">content1</Tab>
           <Tab label="lastTab">content2</Tab>
-        </Tabs>,
+        </Tabs>
       );
 
       it('renders [role="navigation"] props on <nav> by default', () => {
@@ -36,7 +36,7 @@ describe('Tabs', () => {
         <Tabs className="extra-class">
           <Tab label="firstTab">content1</Tab>
           <Tab label="lastTab">content2</Tab>
-        </Tabs>,
+        </Tabs>
       );
 
       const trigger = wrapper.find('div.bx--tabs-trigger');
@@ -64,7 +64,7 @@ describe('Tabs', () => {
         <Tabs>
           <Tab label="firstTab">content1</Tab>
           <Tab label="lastTab">content2</Tab>
-        </Tabs>,
+        </Tabs>
       );
 
       const firstTab = wrapper.find('[label="firstTab"]');
@@ -91,13 +91,16 @@ describe('Tabs', () => {
       <Tabs>
         <Tab label="firstTab">content1</Tab>
         <Tab label="lastTab">content2</Tab>
-      </Tabs>,
+      </Tabs>
     );
 
     it('renders expected className', () => {
       const tabContentClass = 'tab-content';
       expect(
-        wrapper.find('.tab-content').first().hasClass(tabContentClass),
+        wrapper
+          .find('.tab-content')
+          .first()
+          .hasClass(tabContentClass)
       ).toBe(true);
     });
 
@@ -106,12 +109,18 @@ describe('Tabs', () => {
     });
 
     it('renders hidden props with boolean value', () => {
-      const hiddenProp = wrapper.find('.tab-content').first().props().hidden;
+      const hiddenProp = wrapper
+        .find('.tab-content')
+        .first()
+        .props().hidden;
       expect(typeof hiddenProp).toBe('boolean');
     });
 
     it('renders selected props with boolean value', () => {
-      const selectedProp = wrapper.find('.tab-content').first().props().hidden;
+      const selectedProp = wrapper
+        .find('.tab-content')
+        .first()
+        .props().hidden;
       expect(typeof selectedProp).toBe('boolean');
     });
   });
@@ -120,9 +129,13 @@ describe('Tabs', () => {
     describe('click', () => {
       const wrapper = mount(
         <Tabs>
-          <Tab label="firstTab" className="firstTab">content1</Tab>
-          <Tab label="lastTab" className="lastTab">content2</Tab>
-        </Tabs>,
+          <Tab label="firstTab" className="firstTab">
+            content1
+          </Tab>
+          <Tab label="lastTab" className="lastTab">
+            content2
+          </Tab>
+        </Tabs>
       );
 
       describe('state: dropdownHidden', () => {
@@ -157,9 +170,13 @@ describe('Tabs', () => {
     describe('keydown', () => {
       const wrapper = mount(
         <Tabs selected={0}>
-          <Tab label="firstTab" className="firstTab">content</Tab>
-          <Tab label="lastTab" className="lastTab">content</Tab>
-        </Tabs>,
+          <Tab label="firstTab" className="firstTab">
+            content
+          </Tab>
+          <Tab label="lastTab" className="lastTab">
+            content
+          </Tab>
+        </Tabs>
       );
 
       const firstTab = wrapper.find('.firstTab').last();
@@ -200,9 +217,13 @@ describe('Tabs', () => {
   describe('default state', () => {
     const wrapper = mount(
       <Tabs>
-        <Tab label="firstTab" className="firstTab">content</Tab>
-        <Tab label="lastTab" className="lastTab">content</Tab>
-      </Tabs>,
+        <Tab label="firstTab" className="firstTab">
+          content
+        </Tab>
+        <Tab label="lastTab" className="lastTab">
+          content
+        </Tab>
+      </Tabs>
     );
 
     describe('dropdownHidden', () => {
@@ -232,9 +253,13 @@ describe('Tabs', () => {
   describe('Allow initial state to draw from props', () => {
     const wrapper = mount(
       <Tabs selected={1}>
-        <Tab label="firstTab" className="firstTab">content</Tab>
-        <Tab label="lastTab" className="lastTab">content</Tab>
-      </Tabs>,
+        <Tab label="firstTab" className="firstTab">
+          content
+        </Tab>
+        <Tab label="lastTab" className="lastTab">
+          content
+        </Tab>
+      </Tabs>
     );
 
     const children = wrapper.find(Tab);
@@ -249,15 +274,19 @@ describe('Tabs', () => {
 describe('props update', () => {
   const wrapper = mount(
     <Tabs selected={0}>
-      <Tab label="firstTab" className="firstTab">content</Tab>
-      <Tab label="lastTab" className="lastTab">content</Tab>
-    </Tabs>,
+      <Tab label="firstTab" className="firstTab">
+        content
+      </Tab>
+      <Tab label="lastTab" className="lastTab">
+        content
+      </Tab>
+    </Tabs>
   );
 
   it('updates selected state when selected prop changes', () => {
-    wrapper.setProps({selected: 1});
+    wrapper.setProps({ selected: 1 });
     expect(wrapper.state().selected).toEqual(1);
-    wrapper.setProps({selected: 0});
+    wrapper.setProps({ selected: 0 });
     expect(wrapper.state().selected).toEqual(0);
-  })
+  });
 });

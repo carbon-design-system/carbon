@@ -27,11 +27,7 @@ const overflowMenuItemProps = {
 };
 
 storiesOf('DetailPageHeader', module)
-  .addDecorator(story => (
-    <div style={{ minWidth: '60em' }}>
-      {story()}
-    </div>
-  ))
+  .addDecorator(story => <div style={{ minWidth: '60em' }}>{story()}</div>)
   .addWithInfo('without tabs', () => (
     <DetailPageHeader {...detailPageHeaderProps}>
       <Icon name="watson" />

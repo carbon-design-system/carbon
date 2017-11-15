@@ -4,7 +4,7 @@ import Notification, {
   NotificationButton,
   NotificationTextDetails,
   ToastNotification,
-  InlineNotification
+  InlineNotification,
 } from '../Notification';
 import { shallow, mount } from 'enzyme';
 
@@ -28,7 +28,9 @@ describe('NotificationButton', () => {
 
     describe('When notificationType equals "toast"', () => {
       it('button should have correct className by default', () => {
-        expect(wrapper.hasClass('bx--toast-notification__close-button')).toBe(true);
+        expect(wrapper.hasClass('bx--toast-notification__close-button')).toBe(
+          true
+        );
       });
 
       it('icon should have correct className by default', () => {
@@ -40,7 +42,9 @@ describe('NotificationButton', () => {
     describe('When notificationType equals "inline"', () => {
       it('button should have correct className', () => {
         wrapper.setProps({ notificationType: 'inline' });
-        expect(wrapper.hasClass('bx--inline-notification__close-button')).toBe(true);
+        expect(wrapper.hasClass('bx--inline-notification__close-button')).toBe(
+          true
+        );
       });
 
       it('icon should have correct className', () => {
@@ -64,7 +68,9 @@ describe('NotificationTextDetails', () => {
     describe('When notificationType equals "inline"', () => {
       it('div shoudld have correct className', () => {
         wrapper.setProps({ notificationType: 'inline' });
-        expect(wrapper.hasClass('bx--inline-notification__text-wrapper')).toBe(true);
+        expect(wrapper.hasClass('bx--inline-notification__text-wrapper')).toBe(
+          true
+        );
       });
     });
   });
@@ -209,7 +215,9 @@ describe('InlineNotification', () => {
 
       kinds.forEach(kind => {
         inline.setProps({ kind });
-        expect(inline.hasClass(`bx--inline-notification--${kind}`)).toEqual(true);
+        expect(inline.hasClass(`bx--inline-notification--${kind}`)).toEqual(
+          true
+        );
       });
     });
 
@@ -269,7 +277,7 @@ const props = {
   kind: 'success',
   title: 'title',
   subtitle: 'subtitle',
-  iconDescription: 'description'
+  iconDescription: 'description',
 };
 
 describe('[Deprecated]: Notification', () => {
@@ -329,8 +337,12 @@ describe('[Deprecated]: Notification', () => {
         kinds.forEach(kind => {
           inline.setProps({ kind });
           toast.setProps({ kind });
-          expect(inline.hasClass(`bx--inline-notification--${kind}`)).toEqual(true);
-          expect(toast.hasClass(`bx--toast-notification--${kind}`)).toEqual(true);
+          expect(inline.hasClass(`bx--inline-notification--${kind}`)).toEqual(
+            true
+          );
+          expect(toast.hasClass(`bx--toast-notification--${kind}`)).toEqual(
+            true
+          );
         });
       });
     });

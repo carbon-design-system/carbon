@@ -17,7 +17,7 @@ storiesOf('ComposedModal', module)
 
     The Modal Header / Modal Footer come with some built in props to let you accelerate towards standard Carbon modal UI. If there are customizations you need to do, see the next example of just using the interior components as containers.
   `,
-    () =>
+    () => (
       <ComposedModal open>
         <ModalHeader label="Optional Label" title="Example" />
         <ModalBody>
@@ -28,13 +28,14 @@ storiesOf('ComposedModal', module)
         </ModalBody>
         <ModalFooter primaryButtonText="save" />
       </ComposedModal>
+    )
   )
   .addWithInfo(
     'Using child nodes',
     `
     Alternatively, you can just use the Modal components as wrapper elements and figure the children out yourself. We do suggest for the header you utilize the built in props for label and title though, for the footer it's mostly a composed element so creating the two buttons yourself (using the Button component) is probably the most straight-forward pattern.
   `,
-    () =>
+    () => (
       <ComposedModal open>
         <ModalHeader>
           <h1>Testing</h1>
@@ -50,4 +51,5 @@ storiesOf('ComposedModal', module)
           <Button kind="primary">Save</Button>
         </ModalFooter>
       </ComposedModal>
+    )
   );

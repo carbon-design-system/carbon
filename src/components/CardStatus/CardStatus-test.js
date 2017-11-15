@@ -4,9 +4,7 @@ import { shallow } from 'enzyme';
 
 describe('CardStatus', () => {
   describe('Renders as expected with defaultProps', () => {
-    const wrapper = shallow(
-      <CardStatus className="extra-class" />
-    );
+    const wrapper = shallow(<CardStatus className="extra-class" />);
 
     it('has the expected classes', () => {
       expect(wrapper.hasClass('bx--card-footer__app-status')).toEqual(true);
@@ -18,7 +16,9 @@ describe('CardStatus', () => {
 
     it('renders status div', () => {
       const statusDiv = wrapper.childAt(0);
-      expect(statusDiv.hasClass('bx--card-footer__app-status--running active')).toBe(true);
+      expect(
+        statusDiv.hasClass('bx--card-footer__app-status--running active')
+      ).toBe(true);
 
       const status = statusDiv.childAt(0);
       expect(status.hasClass('bx--running__text')).toBe(true);
@@ -27,13 +27,13 @@ describe('CardStatus', () => {
   });
 
   describe('Renders as expected with specified props', () => {
-    const wrapper = shallow(
-      <CardStatus status={1} />
-    );
+    const wrapper = shallow(<CardStatus status={1} />);
 
     it('renders status div', () => {
       const statusDiv = wrapper.childAt(0);
-      expect(statusDiv.hasClass('bx--card-footer__app-status--not-running active')).toBe(true);
+      expect(
+        statusDiv.hasClass('bx--card-footer__app-status--not-running active')
+      ).toBe(true);
 
       const status = statusDiv.childAt(0);
       expect(status.hasClass('bx--not-running__text')).toBe(true);
@@ -47,9 +47,7 @@ describe('CardStatus', () => {
   });
 
   describe('updates appropriately on prop changes', () => {
-    const wrapper = shallow(
-      <CardStatus />
-    );
+    const wrapper = shallow(<CardStatus />);
 
     it('updates from Running to Not Running', () => {
       const oldStatus = wrapper.childAt(0).childAt(0);
@@ -76,7 +74,11 @@ describe('CardStatus', () => {
 
   describe('Renders as expected with specified status text', () => {
     const wrapper = shallow(
-      <CardStatus runningText="[[Running]]" notRunningText="[[Not Running]]" stoppedText="[[Stopped]]" />
+      <CardStatus
+        runningText="[[Running]]"
+        notRunningText="[[Not Running]]"
+        stoppedText="[[Stopped]]"
+      />
     );
 
     it('Shows running text', () => {

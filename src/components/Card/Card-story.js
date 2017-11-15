@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
@@ -13,19 +15,29 @@ import Button from '../Button';
 import Link from '../Link';
 
 const cardProps = {
-  onClick: () => { console.log('click'); }, // eslint-disable-line no-console
-  onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
+  onClick: () => {
+    console.log('click');
+  },
+  onFocus: () => {
+    console.log('focus');
+  },
   className: 'some-class',
 };
 
 const overflowMenuProps = {
-  onClick: () => { console.log('click'); }, // eslint-disable-line no-console
-  onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
+  onClick: () => {
+    console.log('click');
+  },
+  onFocus: () => {
+    console.log('focus');
+  },
   className: 'some-class',
 };
 
 const overflowMenuItemProps = {
-  onFocus: () => { console.log('focus'); }, // eslint-disable-line no-console
+  onFocus: () => {
+    console.log('focus');
+  },
   className: 'some-class',
 };
 
@@ -33,12 +45,12 @@ class ControlledCard extends Component {
   static propTypes = {
     status: PropTypes.number,
     simple: PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     status: CardStatus.appStatus.RUNNING,
-    simple: false
-  }
+    simple: false,
+  };
 
   constructor(props) {
     super(props);
@@ -52,47 +64,41 @@ class ControlledCard extends Component {
     this.setState({
       status: CardStatus.appStatus.STOPPED,
     });
-  }
+  };
 
   restartApp = () => {
     this.setState({
       status: CardStatus.appStatus.RUNNING,
     });
-  }
+  };
 
   deleteApp = () => {
-    console.log('Example function deleteApp() is triggered'); // eslint-disable-line no-console
-  }
+    console.log('Example function deleteApp() is triggered');
+  };
 
   renameApp = () => {
-    console.log('Example function renameApp() is triggered'); // eslint-disable-line no-console
-  }
+    console.log('Example function renameApp() is triggered');
+  };
 
   goToApp = () => {
-    console.log('Example function goToApp() is triggered'); // eslint-disable-line no-console
-  }
+    console.log('Example function goToApp() is triggered');
+  };
 
   favoriteApp = () => {
-    console.log('Example function favoriteApp() is triggered'); // eslint-disable-line no-console
-  }
+    console.log('Example function favoriteApp() is triggered');
+  };
 
   render() {
-    const cardLinks = [
-      'http://myapp.mybluemix.net',
-    ];
+    const cardLinks = ['http://myapp.mybluemix.net'];
 
-    return (
-      (this.props.simple) ? (<Card {...cardProps}>
+    return this.props.simple ? (
+      <Card {...cardProps}>
         <CardContent
           cardTitle="Card Name"
           cardIcon="app-services"
-          cardInfo={['Secondary Information']}
-        >
+          cardInfo={['Secondary Information']}>
           <OverflowMenu {...overflowMenuProps}>
-            <OverflowMenuItem
-              {...overflowMenuItemProps}
-              itemText="Stop App"
-            />
+            <OverflowMenuItem {...overflowMenuItemProps} itemText="Stop App" />
             <OverflowMenuItem
               {...overflowMenuItemProps}
               itemText="Restart App"
@@ -109,15 +115,17 @@ class ControlledCard extends Component {
           </OverflowMenu>
         </CardContent>
         <CardFooter>
-          <Button small kind="primary">View credentials</Button>
-          <Link href="#" className="bx--card-footer__link">Link</Link>
+          <Button small kind="primary">
+            View credentials
+          </Button>
+          <Link href="#" className="bx--card-footer__link">
+            Link
+          </Link>
         </CardFooter>
-      </Card>)
-      : (<Card {...cardProps}>
-        <CardContent
-          cardTitle="App Title 1"
-          cardLink={cardLinks}
-        >
+      </Card>
+    ) : (
+      <Card {...cardProps}>
+        <CardContent cardTitle="App Title 1" cardLink={cardLinks}>
           <OverflowMenu {...overflowMenuProps}>
             <OverflowMenuItem
               {...overflowMenuItemProps}
@@ -145,12 +153,24 @@ class ControlledCard extends Component {
         <CardFooter>
           <CardStatus status={this.state.status} />
           <CardActions>
-            <CardActionItem iconName="restart--glyph" onClick={this.restartApp} description="Restart App" />
-            <CardActionItem iconName="launch--glyph" onClick={this.goToApp} description="Go To App" />
-            <CardActionItem iconName="favorite" onClick={this.favoriteApp} description="Favorite App" />
+            <CardActionItem
+              iconName="restart--glyph"
+              onClick={this.restartApp}
+              description="Restart App"
+            />
+            <CardActionItem
+              iconName="launch--glyph"
+              onClick={this.goToApp}
+              description="Go To App"
+            />
+            <CardActionItem
+              iconName="favorite"
+              onClick={this.favoriteApp}
+              description="Favorite App"
+            />
           </CardActions>
         </CardFooter>
-      </Card>)
+      </Card>
     );
   }
 }
@@ -163,9 +183,8 @@ storiesOf('Card', module)
       easily-consumable content. The example below shows an empty card. Create Card Content, Card Footer,
       Card Status and Card Actions components to add content to your card.
     `,
-    () => (
-      <ControlledCard simple />
-  ))
+    () => <ControlledCard simple />
+  )
   .addWithInfo(
     'card with example functions',
     `
@@ -177,9 +196,8 @@ storiesOf('Card', module)
       to add functional buttons with icons. The example below shows a Card component with info and an Overflow Menu in the
       Card Content, plus Restart/Go To/Favorite actions in the Card Footer.
     `,
-    () => (
-      <ControlledCard status={CardStatus.appStatus.RUNNING} />
-  ))
+    () => <ControlledCard status={CardStatus.appStatus.RUNNING} />
+  )
   .addWithInfo(
     'basic card',
     `
@@ -187,6 +205,5 @@ storiesOf('Card', module)
       easily-consumable content. The example below shows an empty card. Create Card Content, Card Footer,
       Card Status and Card Actions components to add content to your card.
     `,
-    () => (
-      <Card />
-  ));
+    () => <Card />
+  );

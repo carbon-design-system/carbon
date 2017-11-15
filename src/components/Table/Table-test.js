@@ -6,13 +6,14 @@ describe('Table', () => {
   describe('Renders as expected', () => {
     const tableContainer = shallow(
       <Table>
-        <tbody>
-        </tbody>
+        <tbody />
       </Table>
     );
 
     it('has the expected classes', () => {
-      expect(tableContainer.hasClass('bx--responsive-table-container')).toEqual(true);
+      expect(tableContainer.hasClass('bx--responsive-table-container')).toEqual(
+        true
+      );
     });
 
     it('should render a table with the appropriate class', () => {

@@ -60,7 +60,10 @@ class FloatingMenu extends React.Component {
 
   componentWillReceiveProps(props) {
     if (typeof ReactDOM.createPortal === 'function') {
-      const hasChange = props.menuPosition !== this.props.menuPosition || props.menuDirection !== this.props.menuDirection || props.menuOffset !== this.props.menuOffset;
+      const hasChange =
+        props.menuPosition !== this.props.menuPosition ||
+        props.menuDirection !== this.props.menuDirection ||
+        props.menuOffset !== this.props.menuOffset;
       if (hasChange) {
         requestAnimationFrame(() => {
           if (this.menuWidth !== undefined && this.menuHeight !== undefined) {
@@ -152,18 +155,21 @@ class FloatingMenu extends React.Component {
 
   render() {
     if (this.state.doc && typeof ReactDOM.createPortal === 'function') {
-      const childrenWithProps = this.getChildrenWithProps(this.menuWidth !== undefined && this.menuHeight !== undefined ? {} : {
-        display: 'block',
-        opacity: 1,
-      });
-      return ReactDOM.createPortal((
-        <div ref={this.onNewMenuRef}>{childrenWithProps}</div> // Add wrapper `<div>` to align to React15 version
-      ), this.state.doc.body);
+      const childrenWithProps = this.getChildrenWithProps(
+        this.menuWidth !== undefined && this.menuHeight !== undefined
+          ? {}
+          : {
+              display: 'block',
+              opacity: 1,
+            }
+      );
+      return ReactDOM.createPortal(
+        <div ref={this.onNewMenuRef}>{childrenWithProps}</div>, // Add wrapper `<div>` to align to React15 version
+        this.state.doc.body
+      );
     }
 
-    return (
-      <div ref={this.onNewMenuRef} hidden />
-    );
+    return <div ref={this.onNewMenuRef} hidden />;
   }
 }
 

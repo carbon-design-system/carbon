@@ -43,9 +43,13 @@ describe('Loading', () => {
 
     it('should remove and add bx--loading--stop class', () => {
       wrapper.setProps({ active: false });
-      expect(wrapper.find('.bx--loading').hasClass('bx--loading--stop')).toEqual(true);
+      expect(
+        wrapper.find('.bx--loading').hasClass('bx--loading--stop')
+      ).toEqual(true);
       wrapper.setProps({ active: true });
-      expect(wrapper.find('.bx--loading').hasClass('bx--loading--stop')).toEqual(false);
+      expect(
+        wrapper.find('.bx--loading').hasClass('bx--loading--stop')
+      ).toEqual(false);
     });
 
     it('should not render overlay when withOverlay is set to false', () => {

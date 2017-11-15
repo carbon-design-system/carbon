@@ -11,7 +11,7 @@ storiesOf('InteriorLeftNav', module).addWithInfo(
       context to support user orientation. This pattern accommodates the
       breadth of content and tasks users expect to see.
     `,
-  () =>
+  () => (
     <InteriorLeftNav>
       <InteriorLeftNavList title="Example Item 1">
         <InteriorLeftNavItem href="#example-item-1A">
@@ -41,4 +41,5 @@ storiesOf('InteriorLeftNav', module).addWithInfo(
       <InteriorLeftNavItem href="#example-item-3" label="Link Label" />
       <InteriorLeftNavItem href="#example-item-4" label="Link Label" />
     </InteriorLeftNav>
+  )
 );

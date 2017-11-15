@@ -97,8 +97,8 @@ describe('TextInput', () => {
       const input = wrapper.find('input');
       const eventObject = {
         target: {
-          defaultValue: 'test'
-        }
+          defaultValue: 'test',
+        },
       };
 
       it('should invoke onClick when input is clicked', () => {

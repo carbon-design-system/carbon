@@ -5,7 +5,9 @@ import { shallow } from 'enzyme';
 describe('Module', () => {
   describe('Renders as expected', () => {
     const testModule = shallow(
-      <Module className="extra-class"><ModuleBody>Body</ModuleBody></Module>
+      <Module className="extra-class">
+        <ModuleBody>Body</ModuleBody>
+      </Module>
     );
 
     it('renders a Module', () => {
@@ -30,7 +32,9 @@ describe('Module', () => {
   describe('ModuleBody', () => {
     describe('Renders as expected', () => {
       const moduleBody = shallow(
-        <ModuleBody className="extra-class" centered>Body</ModuleBody>,
+        <ModuleBody className="extra-class" centered>
+          Body
+        </ModuleBody>
       );
 
       it('renders a ModuleBody', () => {
@@ -44,7 +48,7 @@ describe('Module', () => {
 
       it('has the centered class when centered prop is true', () => {
         expect(moduleBody.hasClass('bx--module__content--centered')).toEqual(
-          true,
+          true
         );
       });
 

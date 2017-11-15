@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import Table from '../Table';
-import TableHead from '../TableHead'
+import TableHead from '../TableHead';
 import TableHeader from '../TableHeader';
 import TableBody from '../TableBody';
 import TableRow from '../TableRow';
@@ -11,39 +11,26 @@ import TableData from '../TableData';
 class NestedTable extends Component {
   state = {
     toggle: [],
-  }
+  };
 
-  toggleRow = (index) => {
+  toggleRow = index => {
     const toggle = this.state.toggle;
     toggle[index] = toggle[index] ? !toggle[index] : true;
     this.setState({
       toggle,
     });
-  }
+  };
 
   render() {
     const data = [
-      [
-        'Harry',
-        'Potter',
-        'Gryffindor',
-      ],
-      [
-        'Hermoine',
-        'Granger',
-        'Slytherin!?',
-      ],
-      [
-        'Jon',
-        'Snow',
-        'Stark',
-      ],
+      ['Harry', 'Potter', 'Gryffindor'],
+      ['Hermoine', 'Granger', 'Slytherin!?'],
+      ['Jon', 'Snow', 'Stark'],
     ];
 
     const relatedData = [
       <p>The main character in Harry Potter</p>,
       <p>The other main character</p>,
-      (
       <Table>
         <TableHead>
           <TableRow header>
@@ -59,13 +46,16 @@ class NestedTable extends Component {
             <TableData>Gryffindor</TableData>
           </TableRow>
         </TableBody>
-      </Table>
-      ),
+      </Table>,
     ];
 
     const rowData = data.map((character, index) => {
-      const toggleState = this.state.toggle[index] ? this.state.toggle[index] : false;
-      const charArray = character.map((trait, charIndex) => <TableData key={`d${charIndex}`}>{trait}</TableData>);
+      const toggleState = this.state.toggle[index]
+        ? this.state.toggle[index]
+        : false;
+      const charArray = character.map((trait, charIndex) => (
+        <TableData key={`d${charIndex}`}>{trait}</TableData>
+      ));
       return [
         <TableData
           onClick={() => this.toggleRow(index)}
@@ -77,19 +67,15 @@ class NestedTable extends Component {
     });
 
     const createRows = rowData.map((row, index) => (
-      <TableRow key={`b${index}`}>
-        {row}
-      </TableRow>
+      <TableRow key={`b${index}`}>{row}</TableRow>
     ));
 
     const createExpandedRows = relatedData.map((row, index) => {
-      const toggleState = this.state.toggle[index] ? this.state.toggle[index] : false;
+      const toggleState = this.state.toggle[index]
+        ? this.state.toggle[index]
+        : false;
       return (
-        <TableRowExpanded
-          expanded={toggleState}
-          colSpan={4}
-          key={`c${index}`}
-        >
+        <TableRowExpanded expanded={toggleState} colSpan={4} key={`c${index}`}>
           {row}
         </TableRowExpanded>
       );
@@ -110,14 +96,11 @@ class NestedTable extends Component {
             <TableHeader>House</TableHeader>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {createTableBody}
-        </TableBody>
+        <TableBody>{createTableBody}</TableBody>
       </Table>
     );
   }
 }
-
 
 storiesOf('Table', module)
   .addWithInfo(
@@ -162,7 +145,7 @@ storiesOf('Table', module)
           </TableRow>
         </TableBody>
       </Table>
-    ),
+    )
   )
   .addWithInfo(
     'Nested Table',
@@ -171,7 +154,5 @@ storiesOf('Table', module)
       this functionality is driven (like most of our components) through your application
       altering props on the elements
     `,
-    () => (
-      <NestedTable />
-    ),
+    () => <NestedTable />
   );

@@ -102,7 +102,7 @@ export default class Dropdown extends PureComponent {
           child.props.onClick && child.props.onClick(...args);
           this.handleItemClick(...args);
         },
-      }),
+      })
     );
 
     const dropdownClasses = classNames({

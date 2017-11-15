@@ -14,7 +14,7 @@ describe('Footer', () => {
         linkTextTwo="Cost Calculator"
         linkHrefTwo="www.bing.com"
         buttonText="Create"
-      />,
+      />
     );
 
     it('should use the appropriate footer class', () => {
@@ -59,7 +59,7 @@ describe('Footer', () => {
       <Footer>
         <div className="test">This is a test.</div>
         <div className="test">This is a test.</div>
-      </Footer>,
+      </Footer>
     );
 
     it('should render children as expected', () => {

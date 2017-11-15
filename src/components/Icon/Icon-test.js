@@ -1,5 +1,11 @@
 import React from 'react';
-import Icon, { findIcon, svgShapes, getSvgData, icons, isPrefixed } from '../Icon';
+import Icon, {
+  findIcon,
+  svgShapes,
+  getSvgData,
+  icons,
+  isPrefixed,
+} from '../Icon';
 import { mount } from 'enzyme';
 
 describe('Icon', () => {
@@ -63,10 +69,7 @@ describe('Icon', () => {
     });
 
     it('throws if multiple icons are found from one name param', () => {
-      const json = [
-        { name: 'bob' },
-        { name: 'bob' },
-      ];
+      const json = [{ name: 'bob' }, { name: 'bob' }];
 
       expect(() => {
         findIcon('bob', json);
@@ -113,7 +116,7 @@ describe('Icon', () => {
 
   describe('JSON file', () => {
     it('should be defined', () => {
-      expect(typeof(icons)).toBeDefined();
+      expect(typeof icons).toBeDefined();
     });
 
     it('should have length > 0', () => {

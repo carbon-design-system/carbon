@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import Search from '../Search';
 
 const searchProps = {
-  className: 'some-class'
+  className: 'some-class',
 };
 
 storiesOf('Search', module)
@@ -17,7 +17,7 @@ storiesOf('Search', module)
       without the use of navigation. Search can be used as the primary means of discovering content,
       or as a filter to aid the user in finding content.
     `,
-    () =>
+    () => (
       <Search
         {...searchProps}
         className="some-class"
@@ -29,6 +29,7 @@ storiesOf('Search', module)
           action('onChange');
         }}
       />
+    )
   )
   .addWithInfo(
     'small',
@@ -38,7 +39,7 @@ storiesOf('Search', module)
       or as a filter to aid the user in finding content. With the small property, the search field will be
       more compact.
     `,
-    () =>
+    () => (
       <Search
         {...searchProps}
         className="some-class"
@@ -51,6 +52,7 @@ storiesOf('Search', module)
           action('onChange');
         }}
       />
+    )
   )
   .addWithInfo(
     'Controlled',
@@ -60,7 +62,7 @@ storiesOf('Search', module)
     () => {
       class ControlledSearch extends React.Component {
         state = {
-          searchValue: ''
+          searchValue: '',
         };
 
         handleChange = evt => {

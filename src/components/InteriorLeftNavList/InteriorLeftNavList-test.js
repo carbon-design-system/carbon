@@ -11,7 +11,7 @@ describe('InteriorLeftNavList', () => {
         <InteriorLeftNavItem href="#">
           <a href="#">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNavList>,
+      </InteriorLeftNavList>
     );
 
     const closedList = shallow(
@@ -19,7 +19,7 @@ describe('InteriorLeftNavList', () => {
         <InteriorLeftNavItem href="#">
           <a href="#">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNavList>,
+      </InteriorLeftNavList>
     );
 
     const expectedChildrenList = shallow(
@@ -30,7 +30,7 @@ describe('InteriorLeftNavList', () => {
         <InteriorLeftNavItem href="#" className="test-child">
           <a href="#">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNavList>,
+      </InteriorLeftNavList>
     );
 
     it('renders a interior left nav list', () => {
@@ -38,7 +38,7 @@ describe('InteriorLeftNavList', () => {
     });
     it('has the expected classes', () => {
       expect(openList.hasClass('left-nav-list__item--has-children')).toEqual(
-        true,
+        true
       );
     });
     it('should add extra classes that are passed via className', () => {
@@ -55,7 +55,7 @@ describe('InteriorLeftNavList', () => {
     });
     it('should not have the expanded class when closed', () => {
       expect(closedList.hasClass('left-nav-list__item--expanded')).toEqual(
-        false,
+        false
       );
     });
     it('should use correct icon', () => {
@@ -65,15 +65,15 @@ describe('InteriorLeftNavList', () => {
     it('should use correct icon class names', () => {
       const icon = openList.find(Icon);
       expect(icon.props().className).toEqual(
-        'left-nav-list__item-icon bx--interior-left-nav__icon',
+        'left-nav-list__item-icon bx--interior-left-nav__icon'
       );
     });
     it('should render children as expected', () => {
       expect(
-        expectedChildrenList.find('.left-nav-list__item-link').length,
+        expectedChildrenList.find('.left-nav-list__item-link').length
       ).toEqual(1);
       expect(
-        expectedChildrenList.find('.left-nav-list--nested').length,
+        expectedChildrenList.find('.left-nav-list--nested').length
       ).toEqual(1);
       expect(expectedChildrenList.find('.test-child').length).toEqual(2);
     });
@@ -104,7 +104,7 @@ describe('InteriorLeftNavList', () => {
         <InteriorLeftNavItem href="#">
           <a href="#">test-title</a>
         </InteriorLeftNavItem>
-      </InteriorLeftNavList>,
+      </InteriorLeftNavList>
     );
 
     it('handles click to leftNavList as expected', () => {

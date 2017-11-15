@@ -1,5 +1,12 @@
 import React from 'react';
-import { Tile, ClickableTile, SelectableTile, ExpandableTile, TileAboveTheFoldContent, TileBelowTheFoldContent } from "../Tile";
+import {
+  Tile,
+  ClickableTile,
+  SelectableTile,
+  ExpandableTile,
+  TileAboveTheFoldContent,
+  TileBelowTheFoldContent,
+} from '../Tile';
 import { shallow, mount } from 'enzyme';
 
 describe('Tile', () => {
@@ -91,9 +98,13 @@ describe('Tile', () => {
     });
 
     it('toggles the selectable class on click', () => {
-      expect(wrapper.children().hasClass('bx--tile--is-selected')).toEqual(false);
+      expect(wrapper.children().hasClass('bx--tile--is-selected')).toEqual(
+        false
+      );
       wrapper.simulate('click');
-      expect(wrapper.children().hasClass('bx--tile--is-selected')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--tile--is-selected')).toEqual(
+        true
+      );
     });
 
     it('toggles the selectable state on click', () => {
@@ -119,8 +130,12 @@ describe('Tile', () => {
   describe('Renders expandable tile as expected', () => {
     const wrapper = mount(
       <ExpandableTile className="extra-class">
-        <TileAboveTheFoldContent className="child"><div style={{ height: '200px' }}>Test</div></TileAboveTheFoldContent>
-        <TileBelowTheFoldContent className="child"><div style={{ height: '500px' }}>Test</div></TileBelowTheFoldContent>
+        <TileAboveTheFoldContent className="child">
+          <div style={{ height: '200px' }}>Test</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent className="child">
+          <div style={{ height: '500px' }}>Test</div>
+        </TileBelowTheFoldContent>
       </ExpandableTile>
     );
 
@@ -141,9 +156,13 @@ describe('Tile', () => {
     });
 
     it('toggles the expandable class on click', () => {
-      expect(wrapper.children().hasClass('bx--tile--is-expanded')).toEqual(false);
+      expect(wrapper.children().hasClass('bx--tile--is-expanded')).toEqual(
+        false
+      );
       wrapper.simulate('click');
-      expect(wrapper.children().hasClass('bx--tile--is-expanded')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--tile--is-expanded')).toEqual(
+        true
+      );
     });
 
     it('toggles the expandable state on click', () => {

@@ -17,8 +17,7 @@ storiesOf('CodeSnippet', module)
     `,
     () => (
       <CodeSnippet type="code" {...copyProps}>
-        {
-          `@mixin bx--snippet($type) {
+        {`@mixin bx--snippet($type) {
   @if $type == 'terminal' {
     background-color: red;
   } @else if $type == 'code' {
@@ -35,10 +34,9 @@ storiesOf('CodeSnippet', module)
     background-color: white;
   }
 }
-          `
-        }
+          `}
       </CodeSnippet>
-    ),
+    )
   )
   .addWithInfo(
     'terminal',
@@ -53,5 +51,5 @@ storiesOf('CodeSnippet', module)
           'node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae fuga laboriosam!'
         }
       </CodeSnippet>
-    ),
+    )
   );

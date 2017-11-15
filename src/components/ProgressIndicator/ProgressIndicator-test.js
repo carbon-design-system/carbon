@@ -59,26 +59,39 @@ describe('ProgressIndicator', () => {
     describe('ProgressStep', () => {
       it('should render with correct base className', () => {
         expect(
-          mountedList.find(ProgressStep).at(0).children().hasClass('bx--progress-step')
+          mountedList
+            .find(ProgressStep)
+            .at(0)
+            .children()
+            .hasClass('bx--progress-step')
         ).toEqual(true);
       });
 
       it('should render with a label', () => {
-        expect(mountedList.find(ProgressStep).at(0).props().label).toEqual(
-          'label'
-        );
+        expect(
+          mountedList
+            .find(ProgressStep)
+            .at(0)
+            .props().label
+        ).toEqual('label');
       });
 
       it('should render with a description', () => {
         expect(
-          mountedList.find(ProgressStep).at(0).props().description
+          mountedList
+            .find(ProgressStep)
+            .at(0)
+            .props().description
         ).toEqual('Step 1: Getting Started with Node.js');
       });
 
       it('should render description in <title> node', () => {
-        expect(mountedList.find('ProgressStep title').at(0).text()).toEqual(
-          'Step 1: Getting Started with Node.js'
-        );
+        expect(
+          mountedList
+            .find('ProgressStep title')
+            .at(0)
+            .text()
+        ).toEqual('Step 1: Getting Started with Node.js');
       });
 
       describe('current', () => {
@@ -93,7 +106,12 @@ describe('ProgressIndicator', () => {
         });
 
         it('should render a current ProgressStep with correct props', () => {
-          expect(list.find(ProgressStep).at(3).props().current).toBe(true);
+          expect(
+            list
+              .find(ProgressStep)
+              .at(3)
+              .props().current
+          ).toBe(true);
         });
       });
 
@@ -108,7 +126,12 @@ describe('ProgressIndicator', () => {
           ).toEqual(true);
         });
         it('should render any completed ProgressSteps with correct props', () => {
-          expect(list.find(ProgressStep).at(0).props().complete).toBe(true);
+          expect(
+            list
+              .find(ProgressStep)
+              .at(0)
+              .props().complete
+          ).toBe(true);
         });
       });
 
@@ -123,7 +146,12 @@ describe('ProgressIndicator', () => {
           ).toEqual(true);
         });
         it('should render any incompleted ProgressSteps with correct className', () => {
-          expect(list.find(ProgressStep).at(5).props().incomplete).toBe(true);
+          expect(
+            list
+              .find(ProgressStep)
+              .at(5)
+              .props().incomplete
+          ).toBe(true);
         });
       });
     });

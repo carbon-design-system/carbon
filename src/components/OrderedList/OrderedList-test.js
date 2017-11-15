@@ -6,7 +6,9 @@ import { shallow } from 'enzyme';
 describe('OrderedList', () => {
   describe('Renders as expected', () => {
     const list = shallow(
-      <OrderedList className="some-class"><ListItem>Item</ListItem></OrderedList>
+      <OrderedList className="some-class">
+        <ListItem>Item</ListItem>
+      </OrderedList>
     );
 
     it('should be an ol element', () => {

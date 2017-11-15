@@ -6,7 +6,13 @@ import NumberInput from '../NumberInput';
 describe('NumberInput', () => {
   describe('should render as expected', () => {
     const wrapper = mount(
-      <NumberInput min={0} max={100} id="test" label="Number Input" className="extra-class" />
+      <NumberInput
+        min={0}
+        max={100}
+        id="test"
+        label="Number Input"
+        className="extra-class"
+      />
     );
 
     const label = wrapper.find('label');
@@ -56,15 +62,24 @@ describe('NumberInput', () => {
       });
 
       describe('initial rendering', () => {
-
-        const getWrapper = (min, max, value) => mount(<NumberInput min={min} max={max} value={value} id="test" label="Number Input" className="extra-class" />);
-        const getNumberInput = (wrapper) => wrapper.find('input');
+        const getWrapper = (min, max, value) =>
+          mount(
+            <NumberInput
+              min={min}
+              max={max}
+              value={value}
+              id="test"
+              label="Number Input"
+              className="extra-class"
+            />
+          );
+        const getNumberInput = wrapper => wrapper.find('input');
 
         it('should set value as expected when value > min', () => {
           const wrapper = getWrapper(-1, 100, 0);
           const numberInput = getNumberInput(wrapper);
           expect(numberInput.props().value).toEqual(0);
-        })
+        });
 
         it('should set value as expected when min === 0 and value > min', () => {
           const wrapper = getWrapper(0, 100, 1);
@@ -76,14 +91,14 @@ describe('NumberInput', () => {
           let wrapper = getWrapper(5, 100, 0);
           let numberInput = wrapper.find('input');
           expect(numberInput.props().value).toEqual(5);
-        })
+        });
 
         it('should set value when min is undefined', () => {
           let wrapper = getWrapper(undefined, 100, 5);
           let numberInput = wrapper.find('input');
           expect(numberInput.props().value).toEqual(5);
-        })
-      })
+        });
+      });
     });
 
     describe('Icon', () => {
@@ -111,7 +126,8 @@ describe('NumberInput', () => {
         const iconDownText = wrapper.find('.down-icon title').text();
         const iconDescription = wrapper.props().iconDescription;
 
-        const matches = (iconDescription === iconUpText) && (iconDescription === iconDownText);
+        const matches =
+          iconDescription === iconUpText && iconDescription === iconDownText;
         expect(matches).toEqual(true);
       });
     });
@@ -133,12 +149,7 @@ describe('NumberInput', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <NumberInput
-          id="test"
-          onClick={onClick}
-          onChange={onChange}
-          disabled
-        />
+        <NumberInput id="test" onClick={onClick} onChange={onChange} disabled />
       );
 
       const input = wrapper.find('input');

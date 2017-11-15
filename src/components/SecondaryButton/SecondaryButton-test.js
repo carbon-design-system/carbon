@@ -29,7 +29,11 @@ describe('SecondaryButton', () => {
     });
 
     describe('Renders icon buttons', () => {
-      const iconButton = mount(<SecondaryButton icon="search" iconDescription="Search">Search</SecondaryButton>);
+      const iconButton = mount(
+        <SecondaryButton icon="search" iconDescription="Search">
+          Search
+        </SecondaryButton>
+      );
       const icon = iconButton.find('svg');
       it('should have the appropriate icon', () => {
         expect(icon.hasClass('bx--btn__icon')).toBe(true);

@@ -7,7 +7,7 @@ describe('Code Snippet', () => {
     const snippet = shallow(
       <CodeSnippet className="some-class" type="terminal">
         {'node -v'}
-      </CodeSnippet>,
+      </CodeSnippet>
     );
 
     it('should use the appropriate snippet class', () => {

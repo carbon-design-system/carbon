@@ -26,10 +26,7 @@ storiesOf('OverflowMenu', module)
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 1" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Option 4"
-        />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
           itemText="Danger option"
@@ -50,10 +47,7 @@ storiesOf('OverflowMenu', module)
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 1" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Option 4"
-        />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
           itemText="Danger option"

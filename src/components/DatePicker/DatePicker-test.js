@@ -6,8 +6,8 @@ describe('DatePicker', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(
       <DatePicker onChange={() => {}} className="extra-class">
-        <div className="test-child"></div>
-        <div className="test-child"></div>
+        <div className="test-child" />
+        <div className="test-child" />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
@@ -46,13 +46,15 @@ describe('DatePicker', () => {
   describe('Simple date picker', () => {
     const wrapper = mount(
       <DatePicker datePickerType="simple" className="extra-class">
-        <div className="test-child"></div>
+        <div className="test-child" />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
 
     it('has the simple date picker class', () => {
-      expect(datepicker.children().hasClass('bx--date-picker--simple')).toBe(true);
+      expect(datepicker.children().hasClass('bx--date-picker--simple')).toBe(
+        true
+      );
     });
 
     it('should not initalize a calendar', () => {
@@ -62,7 +64,10 @@ describe('DatePicker', () => {
 
   describe('Single date picker', () => {
     const wrapper = mount(
-      <DatePicker onChange={() => {}} datePickerType="single" className="extra-class">
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        className="extra-class">
         <div className="test-child">
           <input type="text" className="bx--date-picker__input" />
         </div>
@@ -73,7 +78,9 @@ describe('DatePicker', () => {
     const icon = wrapper.find('svg');
 
     it('has the single date picker class', () => {
-      expect(datepicker.children().hasClass('bx--date-picker--single')).toBe(true);
+      expect(datepicker.children().hasClass('bx--date-picker--single')).toBe(
+        true
+      );
     });
 
     it('should initalize a calendar', () => {
@@ -81,7 +88,11 @@ describe('DatePicker', () => {
     });
 
     it('should update the classnames', () => {
-      expect(wrapper.instance().cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
+      expect(
+        wrapper
+          .instance()
+          .cal.calendarContainer.classList.contains('bx--date-picker__calendar')
+      ).toBe(true);
     });
 
     it('should not render an icon', () => {
@@ -91,9 +102,16 @@ describe('DatePicker', () => {
 
   describe('Range date picker', () => {
     const wrapper = mount(
-      <DatePicker onChange={() => {}} datePickerType="range" className="extra-class">
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="range"
+        className="extra-class">
         <div className="test-child">
-          <input type="text" className="bx--date-picker__input" id="input-from" />
+          <input
+            type="text"
+            className="bx--date-picker__input"
+            id="input-from"
+          />
         </div>
         <div className="test-child">
           <input type="text" className="bx--date-picker__input" id="input-to" />
@@ -104,7 +122,9 @@ describe('DatePicker', () => {
     const icon = wrapper.find('svg');
 
     it('has the range date picker class', () => {
-      expect(datepicker.children().hasClass('bx--date-picker--range')).toBe(true);
+      expect(datepicker.children().hasClass('bx--date-picker--range')).toBe(
+        true
+      );
     });
 
     it('should initalize a calendar', () => {
@@ -112,7 +132,11 @@ describe('DatePicker', () => {
     });
 
     it('should update the classnames', () => {
-      expect(wrapper.instance().cal.calendarContainer.classList.contains('bx--date-picker__calendar')).toBe(true);
+      expect(
+        wrapper
+          .instance()
+          .cal.calendarContainer.classList.contains('bx--date-picker__calendar')
+      ).toBe(true);
     });
 
     it('should render an icon', () => {

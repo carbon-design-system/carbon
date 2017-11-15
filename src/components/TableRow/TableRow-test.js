@@ -6,7 +6,7 @@ describe('TableRow', () => {
   describe('Renders as expected', () => {
     const tableRow = shallow(
       <TableRow>
-        <td></td>
+        <td />
       </TableRow>
     );
 

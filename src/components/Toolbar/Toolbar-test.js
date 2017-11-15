@@ -86,7 +86,9 @@ describe('Toolbar', () => {
       const toolbarTitle = withToolbarTitle.find(ToolbarTitle);
 
       it('should render a toolbar title with the expected className', () => {
-        expect(toolbarTitle.children().hasClass('bx--toolbar-menu__title')).toEqual(true);
+        expect(
+          toolbarTitle.children().hasClass('bx--toolbar-menu__title')
+        ).toEqual(true);
       });
 
       it('should render a toolbar title with the expected title', () => {
@@ -108,9 +110,9 @@ describe('Toolbar', () => {
       const toolbarOption = withToolbarOption.find(ToolbarOption);
 
       it('should render a toolbar option with the expected className', () => {
-        expect(toolbarOption.children().hasClass('bx--toolbar-menu__option')).toEqual(
-          true
-        );
+        expect(
+          toolbarOption.children().hasClass('bx--toolbar-menu__option')
+        ).toEqual(true);
       });
 
       it('should render with the expected children', () => {
@@ -130,9 +132,9 @@ describe('Toolbar', () => {
       const toolbarDivider = withToolbarDivider.find(ToolbarDivider);
 
       it('should render a toolbar divider with the expected className', () => {
-        expect(toolbarDivider.children().hasClass('bx--toolbar-menu__divider')).toEqual(
-          true
-        );
+        expect(
+          toolbarDivider.children().hasClass('bx--toolbar-menu__divider')
+        ).toEqual(true);
       });
     });
   });

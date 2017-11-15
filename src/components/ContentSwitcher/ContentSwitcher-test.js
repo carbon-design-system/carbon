@@ -34,7 +34,10 @@ describe('ContentSwitcher', () => {
 
   describe('Allow initial state to draw from props', () => {
     const wrapper = shallow(
-      <ContentSwitcher selectedIndex={1} onChange={() => {}} className="extra-class">
+      <ContentSwitcher
+        selectedIndex={1}
+        onChange={() => {}}
+        className="extra-class">
         <Switch kind="anchor" text="one" />
         <Switch kind="anchor" text="two" />
       </ContentSwitcher>
@@ -63,7 +66,10 @@ describe('ContentSwitcher', () => {
 
     const children = wrapper.find(Switch);
 
-    children.first().props().onClick(mockData);
+    children
+      .first()
+      .props()
+      .onClick(mockData);
 
     it('should invoke onChange', () => {
       expect(onChange).toBeCalledWith(mockData);
@@ -97,7 +103,10 @@ describe('ContentSwitcher', () => {
 
     const children = wrapper.find(Switch);
 
-    children.first().props().onKeyDown(mockData);
+    children
+      .first()
+      .props()
+      .onKeyDown(mockData);
 
     it('should invoke onChange', () => {
       expect(onChange).toBeCalledWith(mockData);

@@ -46,8 +46,7 @@ describe('TooltipSimple', () => {
       <TooltipSimple
         text="Basic TooltipSimple Text"
         position="bottom"
-        showIcon={false}
-      >
+        showIcon={false}>
         <a href="/">A Link</a>
       </TooltipSimple>
     );

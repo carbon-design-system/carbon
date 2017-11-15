@@ -9,7 +9,7 @@ describe('CopyButton', () => {
   describe('Renders common props as expected', () => {
     const wrapper = shallow(
       // eslint-disable-next-line jsx-a11y/tabindex-no-positive
-      <CopyButton tabIndex={2} className="extra-class" />,
+      <CopyButton tabIndex={2} className="extra-class" />
     );
 
     it('Should set tabIndex if one is passed via props', () => {
@@ -53,7 +53,7 @@ describe('CopyButton', () => {
       expect(
         feedbackWrapper.find('.bx--btn--copy__feedback').props()[
           'data-feedback'
-        ],
+        ]
       ).toBe('Copied!');
     });
   });
@@ -63,17 +63,17 @@ describe('CopyButton', () => {
       const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
       const feedback = () => feedbackWrapper.find('.bx--btn--copy__feedback');
       expect(feedback().hasClass('bx--btn--copy__feedback--displayed')).toBe(
-        false,
+        false
       );
       feedbackWrapper.setState({ showFeedback: true });
       expect(feedback().hasClass('bx--btn--copy__feedback--displayed')).toBe(
-        true,
+        true
       );
     });
 
     it('Should show feedback for a limited amount of time', () => {
       const feedbackWrapper = mount(
-        <CopyButton feedback="Copied!" feedbackTimeout={5000} />,
+        <CopyButton feedback="Copied!" feedbackTimeout={5000} />
       );
       expect(feedbackWrapper.state().showFeedback).toBe(false);
       feedbackWrapper.simulate('click');

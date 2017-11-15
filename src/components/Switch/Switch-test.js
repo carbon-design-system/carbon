@@ -41,10 +41,10 @@ describe('Switch', () => {
       linkWrapper.setProps({ selected });
 
       expect(buttonWrapper.hasClass('bx--content-switcher--selected')).toEqual(
-        true,
+        true
       );
       expect(linkWrapper.hasClass('bx--content-switcher--selected')).toEqual(
-        true,
+        true
       );
     });
   });
@@ -68,7 +68,7 @@ describe('Switch', () => {
         onClick={buttonOnClick}
         onKeyDown={buttonOnKey}
         text={text}
-      />,
+      />
     );
 
     const linkWrapper = shallow(
@@ -79,7 +79,7 @@ describe('Switch', () => {
         onClick={linkOnClick}
         onKeyDown={linkOnKey}
         text={text}
-      />,
+      />
     );
 
     it('should invoke button onClick handler', () => {

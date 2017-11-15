@@ -16,9 +16,7 @@ storiesOf('Tag', module).addWithInfo(
           <Tag key={type} className="some-class" type={type} />
         ))}
       </div>
-      <div>
-        {<Tag type="experimental">Custom Message</Tag>}
-      </div>
+      <div>{<Tag type="experimental">Custom Message</Tag>}</div>
     </div>
   )
 );

@@ -25,15 +25,18 @@ storiesOf('Buttons', module)
 
       The example below shows Primary Button component .
     `,
-    () =>
+    () => (
       <div>
         <Button {...buttonEvents} className="some-class">
           Primary button
         </Button>
         &nbsp;
-        <Button {...buttonEvents} href="#" className="some-class">Primary link</Button>
+        <Button {...buttonEvents} href="#" className="some-class">
+          Primary link
+        </Button>
         &nbsp;
       </div>
+    )
   )
   .addWithInfo(
     'Secondary Buttons',
@@ -43,16 +46,21 @@ storiesOf('Buttons', module)
       Modify the behavior of the button by changing its property events.
       The example below shows a Secondary Button component.
     `,
-    () =>
+    () => (
       <div>
         <Button kind="secondary" {...buttonEvents} className="some-class">
           Secondary button
         </Button>
         &nbsp;
-        <Button kind="secondary" {...buttonEvents} href="#" className="some-class">
+        <Button
+          kind="secondary"
+          {...buttonEvents}
+          href="#"
+          className="some-class">
           Secondary link
         </Button>
       </div>
+    )
   )
   .addWithInfo(
     'Small Buttons',
@@ -60,34 +68,47 @@ storiesOf('Buttons', module)
       Small buttons may be used when there is not enough vertical space for a regular sized button. This issue is most
       commonly found in tables. Small buttons should have three words or less.
     `,
-    () =>
+    () => (
       <div>
         <Button small {...buttonEvents} className="some-class">
           Small primary button
         </Button>
         &nbsp;
-        <Button small {...buttonEvents} kind="secondary">Small secondary button</Button>
-        &nbsp;
-        <Button small {...buttonEvents} kind="ghost" icon="add--glyph" iconDescription="Add">
-          Small ghost button
+        <Button small {...buttonEvents} kind="secondary">
+          Small secondary Button
         </Button>
         &nbsp;
-        <Button small {...buttonEvents} kind="danger">Small danger button</Button>
+        <Button
+          small
+          {...buttonEvents}
+          kind="ghost"
+          icon="add--glyph"
+          iconDescription="Add">
+          Small ghost Button
+        </Button>
+        &nbsp;
+        <Button small {...buttonEvents} kind="danger">
+          Small danger Button
+        </Button>
         &nbsp;
         <Button small {...buttonEvents} href="#" className="some-class">
           Small primary link
         </Button>
       </div>
+    )
   )
   .addWithInfo(
     'Disabled Button',
     `
       Disabled Buttons may be used when the user cannot proceed until input is collected.
     `,
-    () =>
+    () => (
       <div>
-        <Button {...buttonEvents} disabled>Disabled button</Button>
+        <Button {...buttonEvents} disabled>
+          Disabled button
+        </Button>
       </div>
+    )
   )
   .addWithInfo(
     'Button with Icon',
@@ -95,7 +116,7 @@ storiesOf('Buttons', module)
       When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are
       always paired with text.
     `,
-    () =>
+    () => (
       <div>
         <Button icon="search--glyph" iconDescription="Search" {...buttonEvents}>
           Primary with icon
@@ -105,8 +126,7 @@ storiesOf('Buttons', module)
           kind="secondary"
           icon="search--glyph"
           iconDescription="Search"
-          {...buttonEvents}
-        >
+          {...buttonEvents}>
           Secondary with icon
         </Button>
         &nbsp;
@@ -115,8 +135,7 @@ storiesOf('Buttons', module)
           kind="primary"
           icon="search--glyph"
           iconDescription="Search"
-          {...buttonEvents}
-        >
+          {...buttonEvents}>
           Small primary with icon
         </Button>
         &nbsp;
@@ -125,11 +144,11 @@ storiesOf('Buttons', module)
           kind="secondary"
           icon="search--glyph"
           iconDescription="Search"
-          {...buttonEvents}
-        >
+          {...buttonEvents}>
           Small secondary with icon
         </Button>
       </div>
+    )
   )
   .addWithInfo(
     'Ghost Buttons',
@@ -139,15 +158,14 @@ storiesOf('Buttons', module)
       on the page. Modify the behavior of the button by changing its event properties. The example below
       shows an enabled Danger Button component.
     `,
-    () =>
+    () => (
       <div>
         <Button
           kind="ghost"
           className="some-class"
           icon="add--glyph"
           iconDescription="Add"
-          {...buttonEvents}
-        >
+          {...buttonEvents}>
           Ghost button
         </Button>
         &nbsp;
@@ -157,11 +175,11 @@ storiesOf('Buttons', module)
           className="some-class"
           icon="add--glyph"
           iconDescription="Add"
-          {...buttonEvents}
-        >
+          {...buttonEvents}>
           Ghost link
         </Button>
       </div>
+    )
   )
   .addWithInfo(
     'Danger Buttons',
@@ -171,7 +189,7 @@ storiesOf('Buttons', module)
       on the page. Modify the behavior of the button by changing its event properties. The example below
       shows an enabled Danger Button component.
     `,
-    () =>
+    () => (
       <div>
         <Button kind="danger" {...buttonEvents} className="some-class">
           Danger button
@@ -181,15 +199,21 @@ storiesOf('Buttons', module)
           Danger link
         </Button>
       </div>
+    )
   )
   .addWithInfo(
     'Sets of Buttons',
     `
       When an action required by the user has more than one option, always use a a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
     `,
-    () =>
+    () => (
       <div>
-        <Button kind="secondary" {...buttonEvents} className="some-class">Secondary button</Button>
-        <Button kind="primary" {...buttonEvents} className="some-class">Primary button</Button>
+        <Button kind="secondary" {...buttonEvents} className="some-class">
+          Secondary button
+        </Button>
+        <Button kind="primary" {...buttonEvents} className="some-class">
+          Primary button
+        </Button>
       </div>
+    )
   );

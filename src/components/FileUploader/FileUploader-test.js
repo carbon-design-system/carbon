@@ -70,12 +70,16 @@ describe('FileUploaderButton', () => {
 
   describe('Update labelText', () => {
     it('should have equal state and props', () => {
-      expect(mountWrapper.state().labelText).toEqual(mountWrapper.props().labelText);
+      expect(mountWrapper.state().labelText).toEqual(
+        mountWrapper.props().labelText
+      );
     });
 
     it('should update state with props', () => {
       mountWrapper.setProps({ labelText: 'new label' });
-      expect(mountWrapper.state().labelText).toEqual(mountWrapper.props().labelText);
+      expect(mountWrapper.state().labelText).toEqual(
+        mountWrapper.props().labelText
+      );
     });
   });
 });
@@ -94,9 +98,9 @@ describe('FileUploader', () => {
     });
 
     it('renders with FileUploaderButton with disableLabelChanges set to true', () => {
-      expect(mountWrapper.find('FileUploaderButton').props().disableLabelChanges).toEqual(
-        true
-      );
+      expect(
+        mountWrapper.find('FileUploaderButton').props().disableLabelChanges
+      ).toEqual(true);
     });
     it('renders input with hidden prop', () => {
       expect(mountWrapper.find('input').props().hidden).toEqual(true);

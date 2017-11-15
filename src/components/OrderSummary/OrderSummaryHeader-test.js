@@ -22,8 +22,12 @@ describe('OrderSummaryHeader', () => {
     });
 
     it('should render with the appropriate classes', () => {
-      expect(orderSummaryHeader.children().hasClass('bx--order-header')).toEqual(true);
-      expect(orderSummaryHeader.children().hasClass('some-class')).toEqual(true);
+      expect(
+        orderSummaryHeader.children().hasClass('bx--order-header')
+      ).toEqual(true);
+      expect(orderSummaryHeader.children().hasClass('some-class')).toEqual(
+        true
+      );
     });
 
     it('should render with the correct title', () => {

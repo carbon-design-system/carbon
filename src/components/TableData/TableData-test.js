@@ -4,9 +4,7 @@ import { mount, shallow } from 'enzyme';
 
 describe('TableData', () => {
   describe('Renders as expected', () => {
-    const td = shallow(
-      <TableData>Content</TableData>
-    );
+    const td = shallow(<TableData>Content</TableData>);
 
     it('should render a table data element', () => {
       expect(td.find('td').length).toEqual(1);
@@ -29,18 +27,20 @@ describe('TableData', () => {
         <table>
           <tbody>
             <tr>
-              <TableData expanded onClick={onClick}>Content</TableData>
+              <TableData expanded onClick={onClick}>
+                Content
+              </TableData>
             </tr>
           </tbody>
         </table>
       );
 
       icon = wrapper.find('.bx--table-expand__svg').first();
-    })
+    });
 
     afterEach(() => {
-      onClick.mockClear()
-    })
+      onClick.mockClear();
+    });
 
     it('should fire onClick on click', () => {
       icon.simulate('click');

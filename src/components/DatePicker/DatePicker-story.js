@@ -7,7 +7,7 @@ import DatePickerInput from '../DatePickerInput';
 const datePickerProps = {
   id: 'date-picker',
   onChange: action('onChange'),
-}
+};
 
 const datePickerInputProps = {
   className: 'some-class',
@@ -30,42 +30,55 @@ storiesOf('DatePicker', module)
     `
       A simple Date Picker consists of an input field and no calendar.
     `,
-    () =>
-      <DatePicker {... datePickerProps} short datePickerType="simple">
+    () => (
+      <DatePicker {...datePickerProps} short datePickerType="simple">
         <DatePickerInput
           {...datePickerInputProps}
           {...simpleShortDatePickerInputProps}
         />
-      </DatePicker>,
+      </DatePicker>
+    )
   )
   .addWithInfo(
     'simple and normal',
     `
       A simple Date Picker consists of an input field and no calendar.
     `,
-    () =>
+    () => (
       <DatePicker id="date-picker" datePickerType="simple">
         <DatePickerInput {...datePickerInputProps} />
-      </DatePicker>,
+      </DatePicker>
+    )
   )
   .addWithInfo(
     'single with calendar',
     `
       A single Date Picker consists of an input field and a calendar.
     `,
-    () =>
-      <DatePicker {... datePickerProps} datePickerType="single" dateFormat="m/d/Y">
+    () => (
+      <DatePicker
+        {...datePickerProps}
+        datePickerType="single"
+        dateFormat="m/d/Y">
         <DatePickerInput {...datePickerInputProps} />
-      </DatePicker>,
+      </DatePicker>
+    )
   )
   .addWithInfo(
     'range with calendar',
     `
       A range Date Picker consists of two input fields and a calendar.
     `,
-    () =>
-      <DatePicker {... datePickerProps} datePickerType="range" dateFormat="m/d/Y">
+    () => (
+      <DatePicker
+        {...datePickerProps}
+        datePickerType="range"
+        dateFormat="m/d/Y">
         <DatePickerInput {...datePickerInputProps} id="date-picker-input-id" />
-        <DatePickerInput {...datePickerInputProps} id="date-picker-input-id-2" />
-      </DatePicker>,
+        <DatePickerInput
+          {...datePickerInputProps}
+          id="date-picker-input-id-2"
+        />
+      </DatePicker>
+    )
   );

@@ -6,7 +6,7 @@ describe('TableHead', () => {
   describe('Renders as expected', () => {
     const thead = shallow(
       <TableHead>
-        <tr></tr>
+        <tr />
       </TableHead>
     );
 

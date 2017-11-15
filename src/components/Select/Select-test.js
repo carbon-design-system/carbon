@@ -50,7 +50,8 @@ describe('Select', () => {
 
       it('should have iconDescription match Icon component description prop', () => {
         const matches =
-          wrapper.props().iconDescription === wrapper.find(Icon).props().description;
+          wrapper.props().iconDescription ===
+          wrapper.find(Icon).props().description;
         expect(matches).toEqual(true);
       });
     });

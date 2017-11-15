@@ -31,8 +31,12 @@ describe('DetailPageHeader', () => {
     );
 
     it('should render wrapper with the correct class', () => {
-      expect(wrapper.children().hasClass('bx--detail-page-header')).toEqual(true);
-      expect(wrapper.children().hasClass('bx--detail-page-header--no-tabs')).toEqual(true);
+      expect(wrapper.children().hasClass('bx--detail-page-header')).toEqual(
+        true
+      );
+      expect(
+        wrapper.children().hasClass('bx--detail-page-header--no-tabs')
+      ).toEqual(true);
     });
 
     it('should render an icon', () => {
@@ -51,7 +55,12 @@ describe('DetailPageHeader', () => {
     });
 
     it('should render correct icon', () => {
-      expect(wrapper.find(Icon).at(0).props().name).toEqual('watson');
+      expect(
+        wrapper
+          .find(Icon)
+          .at(0)
+          .props().name
+      ).toEqual('watson');
     });
 
     it('should render Breadcrumb', () => {
@@ -135,8 +144,12 @@ describe('DetailPageHeader', () => {
     let removeEvent;
 
     beforeEach(() => {
-      addEvent = jest.spyOn(window, 'addEventListener').mockImplementation(() => null);
-      removeEvent = jest.spyOn(window, 'removeEventListener').mockImplementation(() => null);
+      addEvent = jest
+        .spyOn(window, 'addEventListener')
+        .mockImplementation(() => null);
+      removeEvent = jest
+        .spyOn(window, 'removeEventListener')
+        .mockImplementation(() => null);
     });
 
     afterEach(() => {
@@ -145,14 +158,14 @@ describe('DetailPageHeader', () => {
     });
 
     it('should pass in the same method when adding and removing the scroll event listener', () => {
-      const wrapper = mount(<DetailPageHeader title="test"/>);
+      const wrapper = mount(<DetailPageHeader title="test" />);
       wrapper.unmount();
       expect(addEvent.mock.calls.length).toBe(1);
       expect(removeEvent.mock.calls.length).toBe(1);
       const addArgs = addEvent.mock.calls[0];
       const removeArgs = removeEvent.mock.calls[0];
-      expect(addArgs[0]).toBe("scroll");
-      expect(removeArgs[0]).toBe("scroll");
+      expect(addArgs[0]).toBe('scroll');
+      expect(removeArgs[0]).toBe('scroll');
       expect(addArgs[1]).toBe(removeArgs[1]); // the scroll handler function
     });
   });

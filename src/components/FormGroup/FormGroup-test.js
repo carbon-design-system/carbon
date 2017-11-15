@@ -30,7 +30,7 @@ describe('FormGroup', () => {
         <FormGroup>
           <div className="test-child1" />
           <div className="test-child2" />
-        </FormGroup>,
+        </FormGroup>
       );
       expect(formGroup.length).toEqual(1);
     });
@@ -39,7 +39,7 @@ describe('FormGroup', () => {
         <FormGroup>
           <div className="test-child" />
           <div className="test-child" />
-        </FormGroup>,
+        </FormGroup>
       );
       expect(formGroup1.find('.test-child').length).toBe(2);
     });

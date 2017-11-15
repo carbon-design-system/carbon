@@ -54,6 +54,8 @@ ToolbarOption.propTypes = {
   children: PropTypes.node,
 };
 
-export const ToolbarDivider = () => <hr className="bx--toolbar-menu__divider" />;
+export const ToolbarDivider = () => (
+  <hr className="bx--toolbar-menu__divider" />
+);
 
 export default Toolbar;

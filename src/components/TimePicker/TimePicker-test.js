@@ -108,7 +108,12 @@ describe('TimePicker', () => {
       const onBlur = jest.fn();
 
       const wrapper = shallow(
-        <TimePicker id="test" onClick={onClick} onChange={onChange} onBlur={onBlur} />
+        <TimePicker
+          id="test"
+          onClick={onClick}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
       );
 
       const input = wrapper.find('input');

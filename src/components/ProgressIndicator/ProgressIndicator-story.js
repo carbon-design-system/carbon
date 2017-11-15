@@ -1,9 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import {
-  ProgressIndicator,
-  ProgressStep,
-} from '../ProgressIndicator';
+import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 
 storiesOf('Progress Indicator', module).addWithInfo(
   'Default',

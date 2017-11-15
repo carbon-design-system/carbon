@@ -7,27 +7,25 @@ const additionalProps = {
   className: 'some-class',
 };
 
-storiesOf('FormLabel', module).addWithInfo(
-  'Default',
-  `
+storiesOf('FormLabel', module)
+  .addWithInfo(
+    'Default',
+    `
     Form label.
 
   `,
-  () => (
-    <FormLabel {...additionalProps}>
-      Label
-    </FormLabel>
+    () => <FormLabel {...additionalProps}>Label</FormLabel>
   )
-).addWithInfo(
-  'With tooltip',
-  `
+  .addWithInfo(
+    'With tooltip',
+    `
     Form label with tooltip.
   `,
-  () => (
-    <FormLabel {...additionalProps}>
-      <Tooltip triggerText="Label">
-        This is the content of the tooltip.
-      </Tooltip>
-    </FormLabel>
-  )
-);
+    () => (
+      <FormLabel {...additionalProps}>
+        <Tooltip triggerText="Label">
+          This is the content of the tooltip.
+        </Tooltip>
+      </FormLabel>
+    )
+  );

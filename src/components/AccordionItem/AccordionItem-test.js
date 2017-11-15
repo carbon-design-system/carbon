@@ -12,7 +12,9 @@ describe('AccordionItem', () => {
     );
 
     it('renders children as expected', () => {
-      expect(wrapper.find('.bx--accordion__content').text()).toBe('Lorem ipsum.');
+      expect(wrapper.find('.bx--accordion__content').text()).toBe(
+        'Lorem ipsum.'
+      );
     });
 
     it('renders heading as expected', () => {
@@ -51,7 +53,9 @@ describe('AccordionItem', () => {
       const item = toggler.find('li');
       expect(item.hasClass('bx--accordion__item--active')).toEqual(false);
       toggler.setState({ open: true });
-      expect(toggler.find('li').hasClass('bx--accordion__item--active')).toEqual(true);
+      expect(
+        toggler.find('li').hasClass('bx--accordion__item--active')
+      ).toEqual(true);
     });
   });
 
@@ -76,9 +80,7 @@ describe('AccordionItem', () => {
 
   describe('Check that clicking the item toggles its open state', () => {
     const toggler = mount(
-      <AccordionItem title="A heading">
-        Lorem ipsum.
-      </AccordionItem>
+      <AccordionItem title="A heading">Lorem ipsum.</AccordionItem>
     );
     const heading = toggler.find('.bx--accordion__heading');
 

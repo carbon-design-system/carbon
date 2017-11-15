@@ -1,10 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import {
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from '../ComposedModal';
+import { ModalHeader, ModalBody, ModalFooter } from '../ComposedModal';
 
 describe('<ModalHeader />', () => {
   describe('Renders as expected', () => {

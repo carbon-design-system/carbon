@@ -63,7 +63,9 @@ describe('OverflowMenu', () => {
 
     it('should apply a tabindex to the menu', () => {
       const defaultMenu = shallow(
-        <OverflowMenu><div>Child</div></OverflowMenu>
+        <OverflowMenu>
+          <div>Child</div>
+        </OverflowMenu>
       ).childAt(0);
       expect(defaultMenu.props().tabIndex).toBe(0);
     });

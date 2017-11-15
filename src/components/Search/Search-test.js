@@ -77,8 +77,14 @@ describe('Search', () => {
         });
 
         it('should have type="button"', () => {
-          const type1 = btns.first().instance().getAttribute('type');
-          const type2 = btns.last().instance().getAttribute('type');
+          const type1 = btns
+            .first()
+            .instance()
+            .getAttribute('type');
+          const type2 = btns
+            .last()
+            .instance()
+            .getAttribute('type');
           expect(type1).toEqual('button');
           expect(type2).toEqual('button');
         });
@@ -152,11 +158,7 @@ describe('Search', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <Search
-          id="test"
-          onClick={onClick}
-          onChange={onChange}
-        />
+        <Search id="test" onClick={onClick} onChange={onChange} />
       );
 
       const input = wrapper.find('input');
@@ -178,9 +180,7 @@ describe('Search', () => {
     });
 
     describe('enabled toggling layout', () => {
-      const wrapper = mount(
-        <Search id="test" />
-      );
+      const wrapper = mount(<Search id="test" />);
 
       it('should default to "list" layout', () => {
         const icon = wrapper.find(Icon).at(3);

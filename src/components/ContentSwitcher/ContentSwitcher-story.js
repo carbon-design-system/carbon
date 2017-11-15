@@ -17,7 +17,8 @@ storiesOf('ContentSwitcher', module)
         <Switch kind="anchor" name="two" text="Second section" />
         <Switch kind="anchor" name="three" text="Third section" />
       </ContentSwitcher>
-  ))
+    )
+  )
   .addWithInfo(
     'Selected',
     `
@@ -29,4 +30,5 @@ storiesOf('ContentSwitcher', module)
         <Switch kind="anchor" name="two" text="Second section" />
         <Switch kind="anchor" name="three" text="Third section" />
       </ContentSwitcher>
-  ));
+    )
+  );

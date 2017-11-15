@@ -26,7 +26,7 @@ storiesOf('Toolbar', module).addWithInfo(
   `
     Toolbar stuff
   `,
-  () =>
+  () => (
     <Toolbar {...toolbarProps} className="some-class">
       <ToolbarItem type="search" placeHolderText="Search" />
       <ToolbarItem>
@@ -79,4 +79,5 @@ storiesOf('Toolbar', module).addWithInfo(
         </OverflowMenu>
       </ToolbarItem>
     </Toolbar>
+  )
 );

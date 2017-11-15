@@ -21,13 +21,12 @@ storiesOf('OrderSummary', module)
     `
       This component is used to display the items a user will be purchasing. This version does not include OrderSummaryCategory.
     `,
-    () =>
+    () => (
       <OrderSummary>
         <OrderSummaryHeader title="Order Summary">
           <Dropdown
             onChange={selectedItemInfo => console.log(selectedItemInfo)}
-            defaultText="USD"
-          >
+            defaultText="USD">
             <DropdownItem itemText="USD" value="usd" />
             <DropdownItem itemText="GBP" value="gbp" />
             <DropdownItem itemText="NOK" value="nok" />
@@ -42,8 +41,7 @@ storiesOf('OrderSummary', module)
         <OrderSummaryTotal
           summaryText="Total due now:"
           summaryPrice="$0.00"
-          summaryDetails="estimated"
-        >
+          summaryDetails="estimated">
           <Button>Primary Button</Button>
           <Button kind="secondary">Primary Button</Button>
         </OrderSummaryTotal>
@@ -52,20 +50,20 @@ storiesOf('OrderSummary', module)
           linkText="Contact Bluemix Sales"
           href="www.google.com"
         />
-      </OrderSummary>,
+      </OrderSummary>
+    )
   )
   .addWithInfo(
     'Category',
     `
       This component is used to display the items a user will be purchasing. The category version of OrderSummary can break the items being purchased into categories.
     `,
-    () =>
+    () => (
       <OrderSummary>
         <OrderSummaryHeader title="Order Summary">
           <Dropdown
             onChange={selectedItemInfo => console.log(selectedItemInfo)}
-            defaultText="USD"
-          >
+            defaultText="USD">
             <DropdownItem itemText="USD" value="usd" />
             <DropdownItem itemText="GBP" value="gbp" />
             <DropdownItem itemText="NOK" value="nok" />
@@ -93,8 +91,7 @@ storiesOf('OrderSummary', module)
         <OrderSummaryTotal
           summaryText="Total due now:"
           summaryPrice="$0.00"
-          summaryDetails="estimated"
-        >
+          summaryDetails="estimated">
           <Button>Primary Button</Button>
           <Button kind="secondary">Primary Button</Button>
         </OrderSummaryTotal>
@@ -103,5 +100,6 @@ storiesOf('OrderSummary', module)
           linkText="Contact Bluemix Sales"
           href="www.google.com"
         />
-      </OrderSummary>,
+      </OrderSummary>
+    )
   );

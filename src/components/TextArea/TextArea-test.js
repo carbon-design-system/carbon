@@ -100,7 +100,7 @@ describe('TextArea', () => {
       const onClick = jest.fn();
       const onChange = jest.fn();
       const eventObject = {
-        target: { value: 'test' }
+        target: { value: 'test' },
       };
 
       const wrapper = shallow(

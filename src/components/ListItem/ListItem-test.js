@@ -4,9 +4,7 @@ import { shallow } from 'enzyme';
 
 describe('ListItem', () => {
   describe('Renders as expected', () => {
-    const item = shallow(
-      <ListItem className="some-class">An Item</ListItem>
-    );
+    const item = shallow(<ListItem className="some-class">An Item</ListItem>);
 
     it('should render as an li element', () => {
       expect(item.find('li').length).toEqual(1);

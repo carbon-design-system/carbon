@@ -29,9 +29,7 @@ describe('Card', () => {
 
   describe('Check that functions passed in as props are called', () => {
     const onClick = jest.fn();
-    const wrapper = mount(
-      <Card onClick={onClick} />
-    );
+    const wrapper = mount(<Card onClick={onClick} />);
 
     it('should call onClick', () => {
       wrapper.simulate('click');

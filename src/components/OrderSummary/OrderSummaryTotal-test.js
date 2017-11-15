@@ -10,14 +10,9 @@ describe('OrderSummaryTotal', () => {
         summaryText="Total due now:"
         summaryPrice="$0.00"
         summaryDetails="estimated"
-        className="some-class"
-      >
-        <Button>
-          Primary Button
-        </Button>
-        <Button kind="secondary">
-          Primary Button
-        </Button>
+        className="some-class">
+        <Button>Primary Button</Button>
+        <Button kind="secondary">Primary Button</Button>
       </OrderSummaryTotal>
     );
 

@@ -60,7 +60,9 @@ describe('StructuredListHead', () => {
     });
 
     it('Should accept other props from ...other', () => {
-      const wrapperProps = shallow(<StructuredListHead title="title">hi</StructuredListHead>);
+      const wrapperProps = shallow(
+        <StructuredListHead title="title">hi</StructuredListHead>
+      );
       expect(wrapperProps.props().title).toEqual('title');
     });
   });
@@ -106,7 +108,9 @@ describe('StructuredListRow', () => {
     it('should use correct class when head prop is true', () => {
       wrapper.setProps({ head: true });
 
-      expect(wrapper.hasClass('bx--structured-list-row--header-row')).toEqual(true);
+      expect(wrapper.hasClass('bx--structured-list-row--header-row')).toEqual(
+        true
+      );
     });
 
     it('should use <div> HTML by default (or when label prop is false)', () => {
@@ -120,7 +124,9 @@ describe('StructuredListRow', () => {
     });
 
     it('Should accept other props from ...other', () => {
-      const wrapperProps = shallow(<StructuredListRow title="title">hi</StructuredListRow>);
+      const wrapperProps = shallow(
+        <StructuredListRow title="title">hi</StructuredListRow>
+      );
       expect(wrapperProps.props().title).toEqual('title');
     });
   });
@@ -141,7 +147,9 @@ describe('StructuredListBody', () => {
     });
 
     it('Should accept other props from ...other', () => {
-      const wrapperProps = shallow(<StructuredListBody title="title">hi</StructuredListBody>);
+      const wrapperProps = shallow(
+        <StructuredListBody title="title">hi</StructuredListBody>
+      );
       expect(wrapperProps.props().title).toEqual('title');
     });
   });
@@ -168,11 +176,15 @@ describe('StructuredListCell', () => {
 
     it('should use correct class when noWrap prop is true', () => {
       wrapper.setProps({ noWrap: true });
-      expect(wrapper.hasClass('bx--structured-list-content--nowrap')).toEqual(true);
+      expect(wrapper.hasClass('bx--structured-list-content--nowrap')).toEqual(
+        true
+      );
     });
 
     it('Should accept other props from ...other', () => {
-      const wrapperProps = shallow(<StructuredListCell title="title">hi</StructuredListCell>);
+      const wrapperProps = shallow(
+        <StructuredListCell title="title">hi</StructuredListCell>
+      );
       expect(wrapperProps.props().title).toEqual('title');
     });
   });

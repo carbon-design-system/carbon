@@ -38,7 +38,8 @@ storiesOf('Tabs', module)
           <div className="some-content">Content for fourth tab goes here.</div>
         </Tab>
       </Tabs>
-  ))
+    )
+  )
   .addWithInfo(
     'Selected Example',
     `

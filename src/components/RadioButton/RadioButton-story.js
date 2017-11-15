@@ -42,4 +42,5 @@ storiesOf('RadioButton', module)
         disabled
         {...radioProps}
       />
-  ));
+    )
+  );

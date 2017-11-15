@@ -17,9 +17,7 @@ const babelOptions = {
     'react',
     'stage-1',
   ],
-  plugins: [
-    'transform-object-assign',
-  ],
+  plugins: ['transform-object-assign'],
 };
 
 module.exports = createTransformer(babelOptions);

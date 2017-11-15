@@ -2,9 +2,7 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import FileUploader, {
-  FileUploaderButton,
-} from '../FileUploader';
+import FileUploader, { FileUploaderButton } from '../FileUploader';
 
 storiesOf('FileUploader', module)
   .addWithInfo(

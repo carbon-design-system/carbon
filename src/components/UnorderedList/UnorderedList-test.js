@@ -6,7 +6,9 @@ import { shallow } from 'enzyme';
 describe('UnorderedList', () => {
   describe('Renders as expected', () => {
     const list = shallow(
-      <UnorderedList className="some-class"><ListItem>Item</ListItem></UnorderedList>
+      <UnorderedList className="some-class">
+        <ListItem>Item</ListItem>
+      </UnorderedList>
     );
 
     it('should be a ul element', () => {

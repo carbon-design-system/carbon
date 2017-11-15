@@ -13,7 +13,15 @@ storiesOf('Slider', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Slider id="slider" value={50} min={0} max={100} step={1} labelText="Slider label" onChange={() => {}} />
+        <Slider
+          id="slider"
+          value={50}
+          min={0}
+          max={100}
+          step={1}
+          labelText="Slider Label"
+          onChange={() => {}}
+        />
       </div>
     )
   )
@@ -24,7 +32,16 @@ storiesOf('Slider', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Slider id="slider" value={50} min={0} max={100} step={1} labelText="Slider label" hideTextInput={true} onChange={mock}/>
+        <Slider
+          id="slider"
+          value={50}
+          min={0}
+          max={100}
+          step={1}
+          labelText="Slider Label"
+          hideTextInput={true}
+          onChange={mock}
+        />
       </div>
     )
   )
@@ -35,7 +52,16 @@ storiesOf('Slider', module)
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>
-        <Slider id="slider" value={50} min={0} max={100} step={1} labelText="Slider label" onChange={mock} disabled/>
+        <Slider
+          id="slider"
+          value={50}
+          min={0}
+          max={100}
+          step={1}
+          labelText="Slider Label"
+          onChange={mock}
+          disabled
+        />
       </div>
     )
   );

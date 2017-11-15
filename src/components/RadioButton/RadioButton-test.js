@@ -2,14 +2,15 @@ import React from 'react';
 import RadioButton from '../RadioButton';
 import { mount } from 'enzyme';
 
-const render = (props) => mount(
-  <RadioButton
-    {...props}
-    className="extra-class"
-    name="test-name"
-    value="test-value"
-  />
-);
+const render = props =>
+  mount(
+    <RadioButton
+      {...props}
+      className="extra-class"
+      name="test-name"
+      value="test-value"
+    />
+  );
 
 describe('RadioButton', () => {
   describe('renders as expected', () => {
@@ -46,8 +47,7 @@ describe('RadioButton', () => {
 
     describe('label', () => {
       it('should set htmlFor', () => {
-        expect(label.props().htmlFor)
-          .toEqual(input.props().id);
+        expect(label.props().htmlFor).toEqual(input.props().id);
       });
 
       it('should set the correct class', () => {
