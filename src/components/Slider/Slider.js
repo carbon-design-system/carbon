@@ -29,7 +29,7 @@ export default class Slider extends PureComponent {
     disabled: false,
     minLabel: '',
     maxLabel: '',
-    inputType: 'text',
+    inputType: 'number',
   };
 
   state = {
@@ -241,7 +241,8 @@ export default class Slider extends PureComponent {
               this.element = node;
             }}
             onClick={this.updatePosition}
-            {...other}>
+            {...other}
+          >
             <div
               className="bx--slider__track"
               ref={node => {
@@ -276,15 +277,15 @@ export default class Slider extends PureComponent {
             <span>{max}</span>
             <span>{maxLabel}</span>
           </span>
-          {!hideTextInput
-            ? <TextInput
-                type={inputType}
-                id="input-for-slider"
-                className="bx-slider-text-input"
-                value={value}
-                onChange={this.handleChange}
-              />
-            : null}
+          {!hideTextInput && (
+            <TextInput
+              type={inputType}
+              id="input-for-slider"
+              className="bx-slider-text-input"
+              value={value}
+              onChange={this.handleChange}
+            />
+          )}
         </div>
       </div>
     );
