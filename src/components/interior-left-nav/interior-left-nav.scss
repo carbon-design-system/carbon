@@ -69,6 +69,11 @@
             }
           }
 
+          &__item-label {
+            @include typescale('zeta');
+            cursor: default;
+          }
+
           &-link {
             @include typescale('zeta');
             color: $color__blue-90;
@@ -245,7 +250,8 @@
       }
 
       .left-nav-list__item-link,
-      .left-nav-list--nested .left-nav-list__item-link {
+      .left-nav-list--nested .left-nav-list__item-link,
+      .left-nav-list__item-label {
         padding: rem(9px) rem(20px);
       }
 
