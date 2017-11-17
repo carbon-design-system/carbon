@@ -38,6 +38,12 @@ describe('DatePicker', () => {
       expect(wrapper.props().dateFormat).toEqual('d/m/Y');
     });
 
+    it('has the value as expected', () => {
+          expect(wrapper.props().value).toEqual(undefined);
+          wrapper.setProps({ value: '11/08/2017' });
+          expect(wrapper.props().value).toEqual('11/08/2017');
+    });
+
     it('should render the children as expected', () => {
       expect(wrapper.props().children.length).toEqual(2);
     });
@@ -55,6 +61,12 @@ describe('DatePicker', () => {
       expect(datepicker.children().hasClass('bx--date-picker--simple')).toBe(
         true
       );
+    });
+
+    it('has the value as expected', () => {
+          expect(wrapper.props().value).toEqual(undefined);
+          wrapper.setProps({ value: '11/08/2017' });
+          expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
     it('should not initalize a calendar', () => {
@@ -93,6 +105,12 @@ describe('DatePicker', () => {
           .instance()
           .cal.calendarContainer.classList.contains('bx--date-picker__calendar')
       ).toBe(true);
+    });
+
+    it('has the value as expected', () => {
+          expect(wrapper.props().value).toEqual(undefined);
+          wrapper.setProps({ value: '11/08/2017' });
+          expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
     it('should not render an icon', () => {
@@ -137,6 +155,12 @@ describe('DatePicker', () => {
           .instance()
           .cal.calendarContainer.classList.contains('bx--date-picker__calendar')
       ).toBe(true);
+    });
+
+    it('has the value as expected', () => {
+          expect(wrapper.props().value).toEqual(undefined);
+          wrapper.setProps({ value: '11/08/2017' });
+          expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
     it('should render an icon', () => {
