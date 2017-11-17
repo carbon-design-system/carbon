@@ -161,3 +161,28 @@ describe('Modal', () => {
     });
   });
 });
+describe('Modal Wrapper', () => {
+  describe('Renders as expected', () => {
+    const wrapper = mount(<ModalWrapper/>);
+
+    it('should default to primary button', () => {
+      expect(wrapper.find('.bx--btn--primary').length).toEqual(2);
+    });
+
+    it('should render ghost button when ghost is passed', () => {
+      wrapper.setProps({ triggerButtonkind: 'ghost' });
+      expect(wrapper.find('.bx--btn--ghost').length).toEqual(1);
+
+    });
+
+    it('should render danger button when danger is passed', () => {
+      wrapper.setProps({ triggerButtonkind: 'danger' });
+      expect(wrapper.find('.bx--btn--danger').length).toEqual(1);
+    });
+
+    it('should render secondary button when secondary is passed', () => {
+      wrapper.setProps({ triggerButtonkind: 'secondary' });
+      expect(wrapper.find('.bx--btn--secondary').length).toEqual(2);
+    });
+  });
+});
