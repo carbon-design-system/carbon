@@ -209,6 +209,7 @@ export class ModalFooter extends Component {
     primaryButtonDisabled: PropTypes.bool,
     onRequestClose: PropTypes.func,
     onRequestSubmit: PropTypes.func,
+    closeModal: PropTypes.func,
     children: PropTypes.node,
   };
 
@@ -230,6 +231,7 @@ export class ModalFooter extends Component {
       secondaryButtonText,
       primaryButtonText,
       primaryButtonDisabled,
+      closeModal, // eslint-disable-line
       onRequestClose, // eslint-disable-line
       onRequestSubmit, // eslint-disable-line
       children,
