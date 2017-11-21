@@ -48,6 +48,7 @@
     background: $ui-01;
     padding: 1.5rem;
     border: 1px solid $ui-04;
+    z-index: z('floating');
 
     p {
       @include font-family;
