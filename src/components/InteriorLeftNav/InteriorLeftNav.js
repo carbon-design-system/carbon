@@ -47,7 +47,7 @@ export default class InteriorLeftNav extends Component {
     this.props.children.forEach((child, index) => {
       if (child.type === InteriorLeftNavList) {
         const childId = `list-${index}`;
-        if (childId !== id) {
+        if (childId !== id && !child.props.isExpanded) {
           this.refs[childId].close();
         }
       }
@@ -93,7 +93,7 @@ export default class InteriorLeftNav extends Component {
       children,
       activeHref, // eslint-disable-line no-unused-vars
       onToggle, // eslint-disable-line no-unused-vars
-      ...other
+      ...other,
     } = this.props;
 
     const newChildren = React.Children.map(children, (child, index) => {

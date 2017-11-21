@@ -16,6 +16,7 @@ export default class InteriorLeftNavList extends Component {
     activeHref: PropTypes.string,
     iconDescription: PropTypes.string,
     id: PropTypes.string,
+    isExpanded: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -26,6 +27,7 @@ export default class InteriorLeftNavList extends Component {
     iconDescription: 'display sub navigation items',
     onListClick: /* istanbul ignore next */ () => {},
     onItemClick: /* istanbul ignore next */ () => {},
+    isExpanded: false,
   };
 
   state = {
@@ -68,7 +70,6 @@ export default class InteriorLeftNavList extends Component {
       onListClick, // eslint-disable-line no-unused-vars
       onItemClick, // eslint-disable-line no-unused-vars
       activeHref, // eslint-disable-line no-unused-vars
-      ...other
     } = this.props;
 
     const classNames = classnames(
@@ -91,7 +92,7 @@ export default class InteriorLeftNavList extends Component {
         onClick={this.toggle}
         onKeyPress={this.toggle}
         role="menuitem"
-        {...other}>
+       >
         <a className="left-nav-list__item-link">
           {title}
           <div className="left-nav-list__item-icon">
