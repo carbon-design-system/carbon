@@ -30,6 +30,17 @@
     &:focus {
       @include focus-outline('border');
     }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:disabled ~ .bx--number__controls {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 
   .bx--number input[type='number'] {
