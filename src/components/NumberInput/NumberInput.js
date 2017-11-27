@@ -51,9 +51,10 @@ export default class NumberInput extends Component {
     if (!this.props.disabled) {
       this.setState({
         value: evt.target.value,
+      }, (evt) => {
+        this.props.onChange(evt);
       });
 
-      this.props.onChange(evt);
     }
   };
 
@@ -73,10 +74,10 @@ export default class NumberInput extends Component {
 
       this.setState({
         value,
+      }, (evt) => {
+        this.props.onClick(evt);
+        this.props.onChange(evt);
       });
-
-      this.props.onClick(evt);
-      this.props.onChange(evt);
     }
   };
 
