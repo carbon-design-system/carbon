@@ -142,14 +142,24 @@ describe('DetailPageHeader', () => {
   describe('scroll event listener', () => {
     let addEvent;
     let removeEvent;
+    const spyAddEventListener = jest.fn();
+    const spyRemoveEventListener = jest.fn();
 
     beforeEach(() => {
       addEvent = jest
         .spyOn(window, 'addEventListener')
-        .mockImplementation(() => null);
+        .mockImplementation((type, ...args) => {
+          if (type === 'scroll') {
+            spyAddEventListener(type, ...args);
+          }
+        });
       removeEvent = jest
         .spyOn(window, 'removeEventListener')
-        .mockImplementation(() => null);
+        .mockImplementation((type, ...args) => {
+          if (type === 'scroll') {
+            spyRemoveEventListener(type, ...args);
+          }
+        });
     });
 
     afterEach(() => {
@@ -160,12 +170,10 @@ describe('DetailPageHeader', () => {
     it('should pass in the same method when adding and removing the scroll event listener', () => {
       const wrapper = mount(<DetailPageHeader title="test" />);
       wrapper.unmount();
-      expect(addEvent.mock.calls.length).toBe(1);
-      expect(removeEvent.mock.calls.length).toBe(1);
-      const addArgs = addEvent.mock.calls[0];
-      const removeArgs = removeEvent.mock.calls[0];
-      expect(addArgs[0]).toBe('scroll');
-      expect(removeArgs[0]).toBe('scroll');
+      expect(spyAddEventListener.mock.calls.length).toBe(1);
+      expect(spyRemoveEventListener.mock.calls.length).toBe(1);
+      const addArgs = spyAddEventListener.mock.calls[0];
+      const removeArgs = spyRemoveEventListener.mock.calls[0];
       expect(addArgs[1]).toBe(removeArgs[1]); // the scroll handler function
     });
   });
