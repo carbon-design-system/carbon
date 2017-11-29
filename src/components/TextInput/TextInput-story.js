@@ -12,12 +12,17 @@ const TextInputProps = {
   placeholder: 'Placeholder text',
 };
 
+const introText = `
+  Text fields enable the user to interact with and input data. A single line
+  field is used when the input anticipated by the user is a single line of
+  text as opposed to a paragraph.
+`;
+
 storiesOf('TextInput', module)
   .addWithInfo(
     'enabled',
     `
-      Text fields enable the user to interact with and input data. A single line field field is
-      used when the input anticipated by the user is a single line of text as opposed to a paragraph.
+      ${introText}
       The example below shows an enabled Text Input component. The default type is 'text' and its
       value can be either 'string' or 'number'.
     `,
@@ -26,8 +31,7 @@ storiesOf('TextInput', module)
   .addWithInfo(
     'disabled',
     `
-      Text fields enable the user to interact with and input data. A single line field field is
-      used when the input anticipated by the user is a single line of text as opposed to a paragraph.
+      ${introText}
       The example below shows a disabled Text Input component.
     `,
     () => <TextInput disabled {...TextInputProps} />
@@ -35,8 +39,7 @@ storiesOf('TextInput', module)
   .addWithInfo(
     'email',
     `
-      Text fields enable the user to interact with and input data. A single line field field is
-      used when the input anticipated by the user is a single line of text as opposed to a paragraph.
+      ${introText}
       The example below shows an enabled Text Input component with type 'email'.
     `,
     () => (
@@ -50,8 +53,7 @@ storiesOf('TextInput', module)
   .addWithInfo(
     'password',
     `
-      Text fields enable the user to interact with and input data. A single line field field is
-      used when the input anticipated by the user is a single line of text as opposed to a paragraph.
+      ${introText}
       The example below shows an enabled Text Input component with type 'password'.
     `,
     () => (
@@ -59,6 +61,20 @@ storiesOf('TextInput', module)
         {...TextInputProps}
         type={'password'}
         placeholder={'Please enter a password'}
+      />
+    )
+  )
+  .addWithInfo(
+    'invalid',
+    `
+      ${introText}
+      The example below shows an invalid entry in the Text Input.
+    `,
+    () => (
+      <TextInput
+        {...TextInputProps}
+        invalid={true}
+        invalidText={'A valid value is required'}
       />
     )
   );
