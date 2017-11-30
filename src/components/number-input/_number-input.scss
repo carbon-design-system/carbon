@@ -30,6 +30,17 @@
     &:focus {
       @include focus-outline('border');
     }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:disabled ~ .bx--number__controls {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 
   .bx--number input[type='number'] {
@@ -85,5 +96,14 @@
       cursor: pointer;
       fill: $brand-02;
     }
+  }
+}
+
+.bx--number[data-invalid] {
+  input[type='number'] {
+    box-shadow: 0 2px 0px 0px $support-01;
+  }
+  ~ .bx--form-requirement {
+    max-height: rem(200px);
   }
 }
