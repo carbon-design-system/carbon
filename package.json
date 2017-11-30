@@ -30,7 +30,7 @@
     "eyeglass-module"
   ],
   "engines": {
-    "node": "6.x || 7.x || 9.x",
+    "node": ">=6.x",
     "yarn": "1.3.2"
   },
   "dependencies": {
