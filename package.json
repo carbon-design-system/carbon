@@ -7,12 +7,13 @@
   "scripts": {
     "build": "node scripts/build.js",
     "build-storybook": "build-storybook",
-    "ci-check": "yarn lint && yarn test && yarn test-ssr",
-    "commit": "git cz",
+    "ci-check": "yarn prettier:diff && yarn lint && yarn test && yarn test-ssr",
     "commitmsg": "validate-commit-msg",
-    "lint": "eslint src/**",
+    "lint": "eslint src",
+    "precommit": "lint-staged",
     "prepublish": "yarn build",
     "prettier": "prettier --write \"**/*.{scss,css,js}\"",
+    "prettier:diff": "prettier --list-different \"**/*.{scss,css,js}\"",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "start": "yarn storybook",
     "storybook": "start-storybook -p 9000",
@@ -162,6 +163,10 @@
     "*.js": [
       "prettier",
       "lint",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "prettier",
       "git add"
     ]
   },
