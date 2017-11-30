@@ -72,7 +72,7 @@ describe('ProgressIndicator', () => {
           mountedList
             .find(ProgressStep)
             .at(0)
-            .props().label
+            .prop('label')
         ).toEqual('label');
       });
 
@@ -81,7 +81,7 @@ describe('ProgressIndicator', () => {
           mountedList
             .find(ProgressStep)
             .at(0)
-            .props().description
+            .prop('description')
         ).toEqual('Step 1: Getting Started with Node.js');
       });
 
@@ -110,7 +110,7 @@ describe('ProgressIndicator', () => {
             list
               .find(ProgressStep)
               .at(3)
-              .props().current
+              .prop('current')
           ).toBe(true);
         });
       });
@@ -130,7 +130,7 @@ describe('ProgressIndicator', () => {
             list
               .find(ProgressStep)
               .at(0)
-              .props().complete
+              .prop('complete')
           ).toBe(true);
         });
       });
@@ -150,8 +150,8 @@ describe('ProgressIndicator', () => {
             list
               .find(ProgressStep)
               .at(5)
-              .props().incomplete
-          ).toBe(true);
+              .prop('complete')
+          ).toBe(false);
         });
       });
     });
