@@ -49,7 +49,6 @@ export default class Tab extends React.Component {
       href,
       index,
       label,
-      role,
       selected,
       tabIndex,
       onClick,
@@ -66,6 +65,7 @@ export default class Tab extends React.Component {
     return (
       <li
         {...other}
+        tabIndex={-1}
         className={classes}
         onClick={evt => {
           handleTabClick(index, label, evt);
@@ -76,7 +76,7 @@ export default class Tab extends React.Component {
           handleTabKeyDown(index, label, evt);
           onKeyDown(evt);
         }}
-        role={role}
+        role="presentation"
         selected={selected}>
         <a
           className="bx--tabs__nav-link"

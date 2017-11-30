@@ -39,9 +39,9 @@ describe('DatePicker', () => {
     });
 
     it('has the value as expected', () => {
-          expect(wrapper.props().value).toEqual(undefined);
-          wrapper.setProps({ value: '11/08/2017' });
-          expect(wrapper.props().value).toEqual('11/08/2017');
+      expect(wrapper.props().value).toEqual(undefined);
+      wrapper.setProps({ value: '11/08/2017' });
+      expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
     it('should render the children as expected', () => {
@@ -64,9 +64,9 @@ describe('DatePicker', () => {
     });
 
     it('has the value as expected', () => {
-          expect(wrapper.props().value).toEqual(undefined);
-          wrapper.setProps({ value: '11/08/2017' });
-          expect(wrapper.props().value).toEqual('11/08/2017');
+      expect(wrapper.props().value).toEqual(undefined);
+      wrapper.setProps({ value: '11/08/2017' });
+      expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
     it('should not initalize a calendar', () => {
@@ -108,9 +108,9 @@ describe('DatePicker', () => {
     });
 
     it('has the value as expected', () => {
-          expect(wrapper.props().value).toEqual(undefined);
-          wrapper.setProps({ value: '11/08/2017' });
-          expect(wrapper.props().value).toEqual('11/08/2017');
+      expect(wrapper.props().value).toEqual(undefined);
+      wrapper.setProps({ value: '11/08/2017' });
+      expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
     it('should not render an icon', () => {
@@ -158,9 +158,9 @@ describe('DatePicker', () => {
     });
 
     it('has the value as expected', () => {
-          expect(wrapper.props().value).toEqual(undefined);
-          wrapper.setProps({ value: '11/08/2017' });
-          expect(wrapper.props().value).toEqual('11/08/2017');
+      expect(wrapper.props().value).toEqual(undefined);
+      wrapper.setProps({ value: '11/08/2017' });
+      expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
     it('should render an icon', () => {

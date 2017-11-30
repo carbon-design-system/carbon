@@ -91,8 +91,7 @@ export default class InteriorLeftNavList extends Component {
         tabIndex={tabIndex}
         onClick={this.toggle}
         onKeyPress={this.toggle}
-        role="menuitem"
-       >
+        role="menuitem">
         <a className="left-nav-list__item-link">
           {title}
           <div className="left-nav-list__item-icon">

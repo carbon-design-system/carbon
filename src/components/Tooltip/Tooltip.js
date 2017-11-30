@@ -83,9 +83,10 @@ export default class Tooltip extends Component {
               onFocus={() => this.handleMouse('over')}
               onBlur={() => this.handleMouse('out')}>
               <Icon
+                role="button"
+                tabIndex="0"
                 name={iconName}
                 description={iconDescription}
-                tabIndex="0"
               />
             </div>
           </div>

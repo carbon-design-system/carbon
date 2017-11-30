@@ -20,7 +20,7 @@ storiesOf('Slider', module)
           max={100}
           step={1}
           labelText="Slider Label"
-          onChange={() => {}}
+          onChange={action('onChange')}
         />
       </div>
     )

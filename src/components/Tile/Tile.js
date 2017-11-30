@@ -161,7 +161,8 @@ export class SelectableTile extends Component {
         tabIndex={tabIndex}
         {...other}
         onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}>
+        onKeyDown={this.handleKeyDown}
+        role="presentation">
         <input
           ref={input => {
             this.input = input;

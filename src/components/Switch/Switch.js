@@ -12,6 +12,7 @@ const Switch = props => {
     onKeyDown,
     selected,
     text,
+    href,
     ...other
   } = props;
 
@@ -47,7 +48,7 @@ const Switch = props => {
   }
 
   return (
-    <a href="#" {...other} {...commonProps}>
+    <a href={href} {...other} {...commonProps}>
       {text}
     </a>
   );
@@ -62,12 +63,14 @@ Switch.propTypes = {
   onKeyDown: PropTypes.func,
   selected: PropTypes.bool,
   text: PropTypes.string.isRequired,
+  href: PropTypes.string,
 };
 
 Switch.defaultProps = {
   selected: false,
   kind: 'anchor',
   text: 'Provide text',
+  href: '',
   onClick: () => {},
   onKeyDown: () => {},
 };

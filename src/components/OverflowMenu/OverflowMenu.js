@@ -140,6 +140,7 @@ export default class OverflowMenu extends Component {
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
           {...other}
+          role="button"
           className={overflowMenuClasses}
           onKeyDown={this.handleKeyPress}
           aria-label={ariaLabel}

@@ -163,7 +163,7 @@ describe('Modal', () => {
 });
 describe('Modal Wrapper', () => {
   describe('Renders as expected', () => {
-    const wrapper = mount(<ModalWrapper/>);
+    const wrapper = mount(<ModalWrapper />);
 
     it('should default to primary button', () => {
       expect(wrapper.find('.bx--btn--primary').length).toEqual(2);
@@ -172,7 +172,6 @@ describe('Modal Wrapper', () => {
     it('should render ghost button when ghost is passed', () => {
       wrapper.setProps({ triggerButtonkind: 'ghost' });
       expect(wrapper.find('.bx--btn--ghost').length).toEqual(1);
-
     });
 
     it('should render danger button when danger is passed', () => {

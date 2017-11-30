@@ -2,31 +2,11 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import Dropdown from '../Dropdown';
 import DropdownItem from '../DropdownItem';
 
 const dropdownEvents = {
-  onBlur: () => {
-    console.log('blur');
-  },
-  onClick: () => {
-    console.log('click');
-  },
-  onFocus: () => {
-    console.log('focus');
-  },
-  onMouseDown: () => {
-    console.log('mouseDown');
-  },
-  onMouseEnter: () => {
-    console.log('mouseEnter');
-  },
-  onMouseLeave: () => {
-    console.log('mouseLeave');
-  },
-  onMouseUp: () => {
-    console.log('mouseUp');
-  },
   className: 'some-class',
 };
 
@@ -41,7 +21,7 @@ storiesOf('Dropdown', module)
     () => (
       <Dropdown
         {...dropdownEvents}
-        onChange={selectedItemInfo => console.log(selectedItemInfo)}
+        onChange={action('onChange')}
         defaultText="Dropdown label">
         <DropdownItem itemText="Option 1" value="option1" />
         <DropdownItem itemText="Option 2" value="option2" />

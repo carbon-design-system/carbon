@@ -72,6 +72,7 @@ export class FileUploaderButton extends Component {
 
     return (
       <div
+        role="button"
         className={classes}
         tabIndex={tabIndex}
         onKeyDown={evt => {

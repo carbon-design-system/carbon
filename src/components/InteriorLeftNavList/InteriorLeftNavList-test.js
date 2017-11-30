@@ -8,27 +8,27 @@ describe('InteriorLeftNavList', () => {
   describe('Renders as expected', () => {
     const openList = shallow(
       <InteriorLeftNavList className="extra-class" title="test-title" open>
-        <InteriorLeftNavItem href="#">
-          <a href="#">test-title</a>
+        <InteriorLeftNavItem href="">
+          <a href="">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
 
     const closedList = shallow(
       <InteriorLeftNavList>
-        <InteriorLeftNavItem href="#">
-          <a href="#">test-title</a>
+        <InteriorLeftNavItem href="">
+          <a href="">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
 
     const expectedChildrenList = shallow(
       <InteriorLeftNavList>
-        <InteriorLeftNavItem href="#" className="test-child">
-          <a href="#">test-title</a>
+        <InteriorLeftNavItem href="" className="test-child">
+          <a href="">test-title</a>
         </InteriorLeftNavItem>
-        <InteriorLeftNavItem href="#" className="test-child">
-          <a href="#">test-title</a>
+        <InteriorLeftNavItem href="" className="test-child">
+          <a href="">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
@@ -101,8 +101,8 @@ describe('InteriorLeftNavList', () => {
   describe('actions', () => {
     const list = mount(
       <InteriorLeftNavList title="test-title">
-        <InteriorLeftNavItem href="#">
-          <a href="#">test-title</a>
+        <InteriorLeftNavItem href="">
+          <a href="">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );

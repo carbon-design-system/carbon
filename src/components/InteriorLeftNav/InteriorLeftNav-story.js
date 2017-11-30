@@ -15,27 +15,27 @@ storiesOf('InteriorLeftNav', module).addWithInfo(
     <InteriorLeftNav>
       <InteriorLeftNavList title="Example Item 1">
         <InteriorLeftNavItem href="#example-item-1A">
-          <a href="#">Link Child</a>
+          <a href="">Link Child</a>
         </InteriorLeftNavItem>
         <InteriorLeftNavItem href="#example-item-1B">
-          <a href="#">Link Child</a>
+          <a href="">Link Child</a>
         </InteriorLeftNavItem>
         <InteriorLeftNavItem href="#example-item-1C">
-          <a href="#">Link Child</a>
+          <a href="">Link Child</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
       <InteriorLeftNavList title="Example Item 2">
         <InteriorLeftNavItem href="#example-item-2A">
-          <a href="#">Link Child</a>
+          <a href="">Link Child</a>
         </InteriorLeftNavItem>
         <InteriorLeftNavItem href="#example-item-2B">
-          <a href="#">Link Child</a>
+          <a href="">Link Child</a>
         </InteriorLeftNavItem>
         <InteriorLeftNavItem href="#example-item-2C">
-          <a href="#">Link Child</a>
+          <a href="">Link Child</a>
         </InteriorLeftNavItem>
         <InteriorLeftNavItem href="#example-item-2D">
-          <a href="#">Link Child</a>
+          <a href="">Link Child</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
       <InteriorLeftNavItem href="#example-item-3" label="Link Label" />

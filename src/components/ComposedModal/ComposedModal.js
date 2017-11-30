@@ -79,6 +79,7 @@ export default class ComposedModal extends Component {
 
     return (
       <div
+        role="presentation"
         ref={modal => (this.modal = modal)}
         onKeyDown={this.handleKeyDown}
         className={modalClass}

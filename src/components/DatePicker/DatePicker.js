@@ -32,10 +32,11 @@ export default class DatePicker extends Component {
 
   componentWillUpdate(nextProps) {
     if (nextProps.value !== this.props.value) {
-      if ( this.props.datePickerType === 'single' ||
-            this.props.datePickerType === 'range'
+      if (
+        this.props.datePickerType === 'single' ||
+        this.props.datePickerType === 'range'
       ) {
-        this.cal.setDate( nextProps.value );
+        this.cal.setDate(nextProps.value);
         this.updateClassNames(this.cal);
       } else {
         if (this.inputField) {

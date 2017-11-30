@@ -49,12 +49,14 @@ export default class NumberInput extends Component {
 
   handleChange = evt => {
     if (!this.props.disabled) {
-      this.setState({
-        value: evt.target.value,
-      }, (evt) => {
-        this.props.onChange(evt);
-      });
-
+      this.setState(
+        {
+          value: evt.target.value,
+        },
+        evt => {
+          this.props.onChange(evt);
+        }
+      );
     }
   };
 
@@ -72,12 +74,15 @@ export default class NumberInput extends Component {
     if (!disabled && conditional) {
       value = direction === 'down' ? value - step : value + step;
 
-      this.setState({
-        value,
-      }, (evt) => {
-        this.props.onClick(evt);
-        this.props.onChange(evt);
-      });
+      this.setState(
+        {
+          value,
+        },
+        evt => {
+          this.props.onClick(evt);
+          this.props.onChange(evt);
+        }
+      );
     }
   };
 

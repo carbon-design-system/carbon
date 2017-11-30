@@ -19,12 +19,15 @@ const TooltipSimple = ({
   return (
     <div className={tooltipWrapperClasses}>
       {children}
-      <div
-        tabIndex="0"
-        className={tooltipClasses}
-        data-tooltip-text={text}
-        {...other}>
-        {showIcon && <Icon name={iconName} description={iconDescription} />}
+      <div className={tooltipClasses} data-tooltip-text={text} {...other}>
+        {showIcon && (
+          <Icon
+            role="button"
+            tabIndex="0"
+            name={iconName}
+            description={iconDescription}
+          />
+        )}
       </div>
     </div>
   );
