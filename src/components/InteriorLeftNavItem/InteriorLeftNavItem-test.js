@@ -68,7 +68,7 @@ describe('InteriorLeftNavItem', () => {
 
     const wrapper = shallow(
       <InteriorLeftNavItem onClick={onClick} href="">
-        <a href="">test-title</a>
+        <a href="http://www.carbondesignsystem.com">test-title</a>
       </InteriorLeftNavItem>
     );
 

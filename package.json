@@ -14,21 +14,15 @@
     "prepublish": "yarn build",
     "prettier": "prettier --write \"**/*.{scss,css,js}\"",
     "prettier:diff": "prettier --list-different \"**/*.{scss,css,js}\"",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release":
+      "semantic-release pre && npm publish && semantic-release post",
     "start": "yarn storybook",
     "storybook": "start-storybook -p 9000",
     "test": "jest",
     "test-ssr": "yarn build && node ssr-tests/*.js"
   },
-  "keywords": [
-    "react",
-    "carbon",
-    "carbon-components"
-  ],
-  "files": [
-    "lib/**/*",
-    "es/**/*"
-  ],
+  "keywords": ["react", "carbon", "carbon-components"],
+  "files": ["lib/**/*", "es/**/*"],
   "contributors": [
     {
       "name": "Brian Han",
@@ -57,14 +51,8 @@
   ],
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": [
-      "eslint:recommended",
-      "plugin:jsx-a11y/recommended"
-    ],
-    "plugins": [
-      "react",
-      "jsx-a11y"
-    ],
+    "extends": ["eslint:recommended", "plugin:jsx-a11y/recommended"],
+    "plugins": ["react", "jsx-a11y"],
     "rules": {
       "react/jsx-uses-vars": 1,
       "react/jsx-uses-react": 1,
@@ -72,8 +60,16 @@
       "jsx-a11y/no-static-element-interactions": 1,
       "jsx-a11y/no-noninteractive-element-interactions": 1,
       "jsx-a11y/click-events-have-key-events": 1,
-      "jsx-a11y/href-no-hash": 1,
-      "jsx-a11y/interactive-supports-focus": 1
+      "jsx-a11y/anchor-is-valid": 1,
+      "jsx-a11y/interactive-supports-focus": 1,
+      "jsx-a11y/label-has-for": [
+        1,
+        {
+          "components": ["Label"],
+          "required": { "some": ["nesting", "id"] },
+          "allowChildren": false
+        }
+      ]
     },
     "env": {
       "node": true,
@@ -118,7 +114,7 @@
     "enzyme-adapter-react-16": "^1.1.0",
     "enzyme-to-json": "^3.1.2",
     "eslint": "^4.11.0",
-    "eslint-plugin-jsx-a11y": "^5.0.0",
+    "eslint-plugin-jsx-a11y": "^6.0.0",
     "eslint-plugin-react": "^7.4.0",
     "gh-pages": "1.0.0",
     "husky": "^0.14.3",
@@ -144,14 +140,8 @@
     "whatwg-fetch": "^2.0.3"
   },
   "babel": {
-    "presets": [
-      "./scripts/env",
-      "react",
-      "stage-1"
-    ],
-    "plugins": [
-      "transform-object-assign"
-    ]
+    "presets": ["./scripts/env", "react", "stage-1"],
+    "plugins": ["transform-object-assign"]
   },
   "prettier": {
     "jsxBracketSameLine": true,
@@ -160,15 +150,8 @@
     "trailingComma": "es5"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier",
-      "lint",
-      "git add"
-    ],
-    "*.{css,scss}": [
-      "prettier",
-      "git add"
-    ]
+    "*.js": ["prettier", "lint", "git add"],
+    "*.{css,scss}": ["prettier", "git add"]
   },
   "config": {
     "validate-commit-msg": {
@@ -197,12 +180,8 @@
     "url": "https://github.com/carbon-design-system/carbon-components-react.git"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "components/**/*.js"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/jest/setup.js"
-    ],
+    "collectCoverageFrom": ["components/**/*.js"],
+    "setupFiles": ["<rootDir>/config/jest/setup.js"],
     "testMatch": [
       "<rootDir>/**/__tests__/**/*.js?(x)",
       "<rootDir>/**/?(*-)(spec|test).js?(x)"
@@ -220,15 +199,8 @@
       "/es/",
       "/cjs/"
     ],
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
+    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
+    "moduleFileExtensions": ["js", "json"],
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   }
 }

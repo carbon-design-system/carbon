@@ -136,13 +136,11 @@ export default class InteriorLeftNav extends Component {
           className="bx--interior-left-nav-collapse"
           onClick={this.toggle}
           style={buttonStyles}>
-          <a className="bx--interior-left-nav-collapse__link">
-            <Icon
-              name="chevron--left"
-              description="close/open iln"
-              className="bx--interior-left-nav-collapse__arrow"
-            />
-          </a>
+          <Icon
+            name="chevron--left"
+            description="close/open iln"
+            className="bx--interior-left-nav-collapse__arrow"
+          />
         </button>
       </nav>
     );

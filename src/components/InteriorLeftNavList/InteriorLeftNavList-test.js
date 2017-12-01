@@ -9,7 +9,7 @@ describe('InteriorLeftNavList', () => {
     const openList = shallow(
       <InteriorLeftNavList className="extra-class" title="test-title" open>
         <InteriorLeftNavItem href="">
-          <a href="">test-title</a>
+          <a href="http://www.carbondesignsystem.com">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
@@ -17,7 +17,7 @@ describe('InteriorLeftNavList', () => {
     const closedList = shallow(
       <InteriorLeftNavList>
         <InteriorLeftNavItem href="">
-          <a href="">test-title</a>
+          <a href="http://www.carbondesignsystem.com">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
@@ -25,10 +25,10 @@ describe('InteriorLeftNavList', () => {
     const expectedChildrenList = shallow(
       <InteriorLeftNavList>
         <InteriorLeftNavItem href="" className="test-child">
-          <a href="">test-title</a>
+          <a href="http://www.carbondesignsystem.com">test-title</a>
         </InteriorLeftNavItem>
         <InteriorLeftNavItem href="" className="test-child">
-          <a href="">test-title</a>
+          <a href="http://www.carbondesignsystem.com">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
@@ -102,7 +102,7 @@ describe('InteriorLeftNavList', () => {
     const list = mount(
       <InteriorLeftNavList title="test-title">
         <InteriorLeftNavItem href="">
-          <a href="">test-title</a>
+          <a href="http://www.carbondesignsystem.com">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
     );
