@@ -1,4 +1,6 @@
 # Carbon Components React
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/carbon-design-system/carbon-components-react.svg)](https://greenkeeper.io/)
 [![All Contributors](https://img.shields.io/badge/all_contributors-24-orange.svg?style=flat-square)](#contributors)
 
 [![Build Status](https://travis-ci.org/carbon-design-system/carbon-components-react.svg?branch=master)](https://travis-ci.org/carbon-design-system/carbon-components-react)
