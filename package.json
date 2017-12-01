@@ -7,7 +7,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "build-storybook": "build-storybook",
-    "ci-check": "yarn prettier:diff && yarn lint && yarn test && yarn test-ssr",
+    "ci-check": "yarn prettier:diff && yarn lint && yarn test --runInBand && yarn test-ssr",
     "commitmsg": "validate-commit-msg",
     "lint": "eslint src",
     "precommit": "lint-staged",

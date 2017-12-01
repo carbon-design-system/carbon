@@ -11,7 +11,10 @@ cache:
 notifications:
   email: false
 
-before_install: yarn global add greenkeeper-lockfile@1
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.3.2
+  - export PATH=$HOME/.yarn/bin:$PATH
+  - yarn global add greenkeeper-lockfile@1
 
 before_script: greenkeeper-lockfile-update
 
@@ -23,6 +26,16 @@ after_script: greenkeeper-lockfile-upload
 after_success:
   - yarn semantic-release
 
-branches:
+before_deploy:
+  - yarn build-storybook
+
+deploy:
+  skip_cleanup: true
+  provider: cloudfoundry
+  username: apikey
+  password: $CLOUD_API_KEY
+  api: https://api.ng.bluemix.net
+  organization: carbon-design-system
+  space: production
   on:
     branch: master
