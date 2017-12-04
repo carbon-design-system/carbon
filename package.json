@@ -94,7 +94,7 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.15",
-    "@storybook/addon-centered": "3.2.15",
+    "@storybook/addon-centered": "3.2.17",
     "@storybook/addon-info": "^3.2.13",
     "@storybook/react": "^3.2.13",
     "babel-cli": "^6.24.1",

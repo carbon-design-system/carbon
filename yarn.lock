@@ -114,9 +114,9 @@
     react-inspector "^2.2.1"
     uuid "^3.1.0"
 
-"@storybook/addon-centered@3.2.15":
-  version "3.2.15"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-centered/-/addon-centered-3.2.15.tgz#931e5bb01960496fdff1a603763abb309065fcde"
+"@storybook/addon-centered@3.2.17":
+  version "3.2.17"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-centered/-/addon-centered-3.2.17.tgz#d5e7df9c031ef39dc1d9522c0af044bd4afcaba5"
   dependencies:
     global "^4.3.2"
 
@@ -3117,7 +3117,7 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-plugin-jsx-a11y@^6.0.0:
+eslint-plugin-jsx-a11y@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-6.0.2.tgz#659277a758b036c305a7e4a13057c301cd3be73f"
   dependencies:
