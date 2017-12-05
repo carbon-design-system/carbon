@@ -111,6 +111,12 @@ export default class NumberInput extends Component {
       value: this.state.value,
     };
 
+    const buttonProps = {
+      disabled,
+      type: 'button',
+      className: 'bx--number__control-btn',
+    };
+
     return (
       <div className="bx--form-item">
         <label htmlFor={id} className="bx--label">
@@ -120,7 +126,7 @@ export default class NumberInput extends Component {
           <input type="number" pattern="[0-9]*" {...other} {...props} />
           <div className="bx--number__controls">
             <button
-              className="bx--number__control-btn"
+              {...buttonProps}
               onClick={evt => this.handleArrowClick(evt, 'up')}>
               <Icon
                 className="up-icon"
@@ -130,7 +136,7 @@ export default class NumberInput extends Component {
               />
             </button>
             <button
-              className="bx--number__control-btn"
+              {...buttonProps}
               onClick={evt => this.handleArrowClick(evt, 'down')}>
               <Icon
                 className="down-icon"

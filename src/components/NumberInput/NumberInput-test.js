@@ -153,8 +153,13 @@ describe('NumberInput', () => {
       );
 
       const input = wrapper.find('input');
-      const upArrow = wrapper.find('.up-icon');
-      const downArrow = wrapper.find('.down-icon');
+      const upArrow = wrapper.find('.up-icon').parent();
+      const downArrow = wrapper.find('.down-icon').parent();
+
+      it('should be disabled when numberInput is disabled', () => {
+        expect(upArrow.prop('disabled')).toEqual(true);
+        expect(downArrow.prop('disabled')).toEqual(true);
+      });
 
       it('should not invoke onClick when up arrow is clicked', () => {
         upArrow.simulate('click');
@@ -187,8 +192,8 @@ describe('NumberInput', () => {
       );
 
       const input = wrapper.find('input');
-      const upArrow = wrapper.find('.up-icon').last();
-      const downArrow = wrapper.find('.down-icon').last();
+      const upArrow = wrapper.find('Icon.up-icon').closest('button');
+      const downArrow = wrapper.find('Icon.down-icon').closest('button');
 
       it('should invoke onClick when numberInput is clicked', () => {
         input.simulate('click');
