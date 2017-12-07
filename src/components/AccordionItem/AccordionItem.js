@@ -74,6 +74,7 @@ export default class AccordionItem extends Component {
         role="presentation"
         {...other}>
         <button
+          type="button"
           className="bx--accordion__heading"
           role="tab"
           onClick={this.handleHeadingClick}>
