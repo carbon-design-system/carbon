@@ -30,7 +30,59 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    //new checkbox stuff
+    position: relative;
+    padding-left: rem(25px);
   }
+
+  .bx--checkbox-label::before {
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    left: 0;
+    height: rem(18px);
+    width: rem(18px);
+    border: $checkbox-border-width solid $ui-05;
+    background-color: $ui-01;
+  }
+
+  .bx--checkbox-label::after {
+    content: '';
+    width: 10px;
+    height: 5px;
+    background: none;
+    border-left: 1.5px solid $inverse-01;
+    border-bottom: 1.5px solid $inverse-01;
+    transform: scale(0) rotate(-45deg);
+    position: absolute;
+    top: 2px;
+    left: 3px;
+  }
+  
+  .bx--checkbox:checked + .bx--checkbox-label::before {
+    background-color: $brand-01;
+    border-color: $brand-01;
+  }
+
+  .bx--checkbox:checked + .bx--checkbox-label::after {
+    opacity: 1;
+    transform: scale(1) rotate(-45deg);
+  }
+
+  .bx--checkbox:not(:checked) + .bx--checkbox-label::after {
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+  }
+
+  .bx--checkbox:focus + .bx--checkbox-label::before {
+    @include focus-outline('blurred');
+  }
+
+  .bx--checkbox-appearance {
+    @include hidden;
+  }
+
+  //current checkbox stuff
 
   .bx--checkbox-appearance {
     display: inline-block;
