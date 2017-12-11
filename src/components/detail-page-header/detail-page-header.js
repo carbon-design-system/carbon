@@ -27,7 +27,7 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
         didWarnAboutDeprecation,
         'Accessing the `detail-page-header` component from the ' +
           '`carbon-components` package is deprecated. Use the ' +
-          '`carbon-addons-bluemix` package instead.'
+          '`carbon-addons-cloud` package instead.'
       );
       didWarnAboutDeprecation = true;
     }

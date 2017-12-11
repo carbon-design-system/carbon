@@ -16,7 +16,7 @@
   @include deprecate(
     'Accessing the `detail-page-header` component from the ' +
       '`carbon-components` package is deprecated. Use the ' +
-      '`carbon-addons-bluemix` package instead.'
+      '`carbon-addons-cloud` package instead.'
   ) {
     .bx--detail-page-header--no-tabs {
       @include detail-page-header;
@@ -51,7 +51,8 @@
     .bx--detail-page-header .bx--breadcrumb {
       display: none;
       transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
-        visibility $transition--base $bx--standard-easing $transition-time / 2, transform $transition--base $bx--standard-easing 0s;
+        visibility $transition--base $bx--standard-easing $transition-time / 2,
+        transform $transition--base $bx--standard-easing 0s;
       will-change: opacity, visibility, transform;
 
       @include breakpoint(bp--sm--major) {
