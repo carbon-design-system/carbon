@@ -40,6 +40,7 @@
     content: '';
     position: absolute;
     left: 0;
+    top: -2px;
     height: rem(18px);
     width: rem(18px);
     border: $checkbox-border-width solid $ui-05;
@@ -51,8 +52,8 @@
     width: 10px;
     height: 5px;
     background: none;
-    border-left: 1.5px solid $inverse-01;
-    border-bottom: 1.5px solid $inverse-01;
+    border-left: 2px solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
     transform: scale(0) rotate(-45deg);
     position: absolute;
     top: 2px;
