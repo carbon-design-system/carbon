@@ -26,4 +26,34 @@ function initCheckbox(doc = document) {
   };
 }
 
+
+  //sets indeterminate state 
+  const intdeterminateCheckbox = [...document.querySelectorAll('[aria-checked=mixed]')];
+  for (let value of intdeterminateCheckbox) {
+    value.indeterminate = true;
+  }
+  
+
+  //checkboxes with input nested inside label
+  const nestedCheckbox = [...document.querySelectorAll('.bx--checkbox-label > .bx--checkbox')];
+  for (let checkbox of nestedCheckbox) {
+    if (checkbox.checked) {
+      checkbox.parentElement.classList.add('bx--checkbox-label__checked');
+    }
+    if (checkbox.indeterminate) {
+      checkbox.parentElement.classList.add('bx--checkbox-label__indeterminate');
+    }
+
+    checkbox.onclick=function(){
+      this.parentElement.classList.remove('bx--checkbox-label__indeterminate');
+      if (this.checked) {
+        this.parentElement.classList.add('bx--checkbox-label__checked');
+      }
+      else {
+        this.parentElement.classList.remove('bx--checkbox-label__checked');
+      }
+    }
+
+  }
+
 export default initCheckbox;
