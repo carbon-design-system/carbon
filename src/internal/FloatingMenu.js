@@ -5,7 +5,7 @@ import window from 'window-or-global';
 
 class FloatingMenu extends React.Component {
   static propTypes = {
-    children: PropTypes.any,
+    children: PropTypes.object,
     menuPosition: PropTypes.object.isRequired,
     menuDirection: PropTypes.oneOf(['left', 'top', 'right', 'bottom'])
       .isRequired,
@@ -20,7 +20,22 @@ class FloatingMenu extends React.Component {
 
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      menuOffset: {
+        left: 0,
+        top: 0,
+      },
+    };
+  }
+
+  componentWillMount() {
+    const adjustedOffsets = this.adjustOffsets(
+      this.props.menuOffset,
+      this.props.menuDirection
+    );
+    this.setState({
+      menuOffset: adjustedOffsets,
+    });
   }
 
   onNewMenuRef = menu => {
@@ -65,6 +80,13 @@ class FloatingMenu extends React.Component {
         props.menuDirection !== this.props.menuDirection ||
         props.menuOffset !== this.props.menuOffset;
       if (hasChange) {
+        const adjustedOffsets = this.adjustOffsets(
+          this.props.menuOffset,
+          this.props.menuDirection
+        );
+        this.setState({
+          menuOffset: adjustedOffsets,
+        });
         requestAnimationFrame(() => {
           if (this.menuWidth !== undefined && this.menuHeight !== undefined) {
             this.setState({ floatingPosition: this.positionFloatingMenu() });
@@ -97,7 +119,7 @@ class FloatingMenu extends React.Component {
   };
 
   positionFloatingMenu = () => {
-    const menuOffset = this.props.menuOffset;
+    const menuOffset = this.state.menuOffset;
 
     const scroll = window.scrollY || 0;
 
@@ -118,11 +140,12 @@ class FloatingMenu extends React.Component {
       }),
       top: () => ({
         left: refCenterHorizontal - this.menuWidth / 2 + menuOffset.left,
-        top: refTop - this.menuHeight + scroll - menuOffset.top,
+        top: refTop - (this.menuHeight + scroll) - menuOffset.top,
       }),
       right: () => ({
         left: refRight + menuOffset.left,
-        top: refCenterVertical - this.menuHeight / 2 + scroll + menuOffset.top,
+        top:
+          refCenterVertical - (this.menuHeight / 2 + scroll) + menuOffset.top,
       }),
       bottom: () => ({
         left: refCenterHorizontal - this.menuWidth / 2 + menuOffset.left,
@@ -148,6 +171,33 @@ class FloatingMenu extends React.Component {
       style,
     });
   };
+
+  adjustOffsets(newOffsets, menuDirection) {
+    /**
+     * we have default offsets to center the positions.
+     * right and left positions need further adjustment as follows:
+     * right: top += 3, left += 6
+     * left: top += 3
+     */
+    const defaultOffsets = {
+      left: 5,
+      top: 10,
+    };
+    const adjustedOffsets = Object.assign({}, defaultOffsets);
+    adjustedOffsets.left += newOffsets.left || 0;
+    adjustedOffsets.top += newOffsets.top || 0;
+    switch (menuDirection) {
+      case 'right':
+        adjustedOffsets.left += 8;
+        adjustedOffsets.top += 4;
+        break;
+      case 'left':
+        adjustedOffsets.top += 4;
+        break;
+    }
+
+    return adjustedOffsets;
+  }
 
   renderLayer = () => {
     ReactDOM.render(this.getChildrenWithProps(), this.menu);

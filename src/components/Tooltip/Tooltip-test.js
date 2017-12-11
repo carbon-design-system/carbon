@@ -30,7 +30,12 @@ describe('Tooltip', () => {
 
   describe('Renders as expected with specified properties', () => {
     const wrapper = mount(
-      <Tooltip triggerText="Tooltip" direction="bottom" showIcon={false}>
+      <Tooltip
+        triggerText="Tooltip"
+        direction="bottom"
+        menuOffset={{ left: 10, top: 15 }}
+        showIcon={false}>
+        {' '}
         <p className="bx--tooltip__label">Tooltip label</p>
         <p>Lorem ipsum dolor sit amet</p>
       </Tooltip>
@@ -43,7 +48,9 @@ describe('Tooltip', () => {
       it("sets the tooltip's position", () => {
         expect(floatingMenu.prop('menuDirection')).toEqual('bottom');
       });
-
+      it("sets the tooltip's offset", () => {
+        expect(floatingMenu.prop('menuOffset')).toEqual({ left: 10, top: 15 });
+      });
       it('does not render info icon', () => {
         const icon = trigger.find(Icon);
         expect(icon.exists()).toBe(false);
