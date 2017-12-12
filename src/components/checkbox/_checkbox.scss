@@ -79,7 +79,8 @@
     transform: scale(0) rotate(-45deg);
   }
 
-  .bx--checkbox:focus + .bx--checkbox-label::before {
+  .bx--checkbox:focus + .bx--checkbox-label::before,
+  .bx--checkbox-label__focus::before {
     @include focus-outline('blurred');
   }
 

@@ -13,8 +13,10 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
   constructor(element, options) {
     super(element, options);
     this.element.addEventListener('click', () => this.handleClick());
+    this.element.addEventListener('focus', () => this.handleFocus());
+    this.element.addEventListener('blur', () => this.handleBlur());
     
-
+    this.indeterminateCheckbox();
     this.initCheckbox();
   }
   
@@ -36,22 +38,34 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
       //Removes class for nested checkboxes inside labels
       if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
         this.element.parentElement.classList.remove('bx--checkbox-label__checked', 'bx--checkbox-label__indeterminate');
-
       }
     }
+  }
 
+  handleFocus() {
+    if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
+      this.element.parentElement.classList.add('bx--checkbox-label__focus');
+    }
+  }
+
+  handleBlur() {
+    if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
+      this.element.parentElement.classList.remove('bx--checkbox-label__focus');
+    }
+  }
+
+  indeterminateCheckbox() {
+    if (!this.element.getAttribute('aria-checked', 'mixed')) {
+      return;
+    }
+    this.element.indeterminate = true;
+
+    if (this.element.indeterminate = true) {
+      this.element.parentElement.classList.add('bx--checkbox-label__indeterminate');
+   }
   }
 
   initCheckbox() {
-    if (this.element.getAttribute('aria-checked', 'mixed')) {
-      this.element.indeterminate = true;
-
-       //sets class for nested checkboxe
-       if (this.element.indeterminate = true) {
-          this.element.parentElement.classList.add('bx--checkbox-label__indeterminate');
-       }
-    }
-
     if (this.element.checked) {
       this.element.setAttribute('aria-checked', 'true');
     }
