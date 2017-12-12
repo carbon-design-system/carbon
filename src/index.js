@@ -7,7 +7,7 @@
 // - JavaScript classes for use with components and base-elements.
 // - The following statements import classes from actual locations to
 //   be consumed from this file instead of their actual locations.
-import initCheckbox from './components/checkbox/checkbox';
+
 import FileUploader from './components/file-uploader/file-uploader';
 import FabButton from './components/fab/fab';
 import ContentSwitcher from './components/content-switcher/content-switcher';
@@ -39,6 +39,7 @@ import Slider from './components/slider/slider';
 import Tile from './components/tile/tile';
 import Carousel from './components/carousel/carousel';
 import Lightbox from './components/lightbox/lightbox';
+import Checkbox from './components/checkbox/checkbox';
 
 export { default as watch } from './globals/js/watch';
 
@@ -66,12 +67,6 @@ export {
    *   See each components' static `.init()` methods for details.
    */
   settings,
-  /**
-   * Watches for change in checkbox in the given document and force changing `checked` attribute
-   * so that DOM mutation observer in {@link https://www.npmjs.com/package/svgxuse svgxuse} is triggered.
-   * @type initCheckbox
-   */
-  initCheckbox,
   /**
    * Floating action button.
    * @type FabButton
@@ -226,6 +221,11 @@ export {
    * @type Lightbox
    */
   Lightbox,
+  /**
+   * Checkbox.
+   * @type Checkbox
+   */
+  Checkbox,
 };
 
 /**
@@ -263,6 +263,7 @@ export const componentClasses = [
   Tile,
   Carousel,
   Lightbox,
+  Checkbox
   // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
 ];
 
@@ -275,7 +276,7 @@ export const componentClasses = [
  */
 const init = () => {
   if (!settings.disableAutoInit) {
-    initCheckbox();
+    //initCheckbox();
     componentClasses.forEach(Clz => {
       Clz.init();
     });

@@ -1,59 +1,84 @@
-function listener(event) {
-  const element = event.target;
-  if (element.tagName === 'INPUT' && element.type === 'checkbox' && element.hasAttribute('checked') !== element.checked) {
-    if (element.checked) {
-      element.setAttribute('checked', '');
+import mixin from '../../globals/js/misc/mixin';
+import createComponent from '../../globals/js/mixins/create-component';
+import InitComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+
+class Checkbox extends mixin(createComponent, InitComponentBySearch) {
+  /**
+   * Checkbox UI.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @param {HTMLElement} element The element working as a copy button UI.
+   */
+  
+  constructor(element, options) {
+    super(element, options);
+    this.element.addEventListener('click', () => this.handleClick());
+    
+
+    this.initCheckbox();
+  }
+  
+  handleClick() {
+    
+    if (this.element.checked) {
+      this.element.setAttribute('checked', '');
+      this.element.setAttribute('aria-checked', 'true');
+
+      //Adds class for nested checkboxes inside labels
+      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
+        this.element.parentElement.classList.add('bx--checkbox-label__checked');
+        this.element.parentElement.classList.remove('bx--checkbox-label__indeterminate');
+      }
     } else {
-      element.removeAttribute('checked');
+      this.element.removeAttribute('checked');
+      this.element.setAttribute('aria-checked', 'false');
+      
+      //Removes class for nested checkboxes inside labels
+      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
+        this.element.parentElement.classList.remove('bx--checkbox-label__checked', 'bx--checkbox-label__indeterminate');
+
+      }
+    }
+
+  }
+
+  initCheckbox() {
+    if (this.element.getAttribute('aria-checked', 'mixed')) {
+      this.element.indeterminate = true;
+
+       //sets class for nested checkboxe
+       if (this.element.indeterminate = true) {
+          this.element.parentElement.classList.add('bx--checkbox-label__indeterminate');
+       }
+    }
+
+    if (this.element.checked) {
+      this.element.setAttribute('aria-checked', 'true');
+    }
+    if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.checked) {
+      this.element.parentElement.classList.add('bx--checkbox-label__checked');
     }
   }
-}
 
-/**
- * Watches for change in checkbox in the given document and force changing `checked` attribute
- * so that DOM mutation observer in {@link https://www.npmjs.com/package/svgxuse svgxuse} is triggered.
- * @param {Document} [doc=document] The document object to watch for.
- * @returns {Handle} The handle to release the event listener.
- */
-function initCheckbox(doc = document) {
-  doc.removeEventListener('change', listener); // In case this function has been called earlier
-  doc.addEventListener('change', listener);
-  return {
-    release() {
-      doc.removeEventListener('change', listener);
-      return null;
-    },
+
+  /**
+   * The map associating DOM element and copy button UI instance.
+   * @member Checkbox.components
+   * @type {WeakMap}
+   */
+  static components = new WeakMap();
+
+  /**
+   * The component options.
+   * If `options` is specified in the constructor, {@linkcode Checkbox.create .create()}, or {@linkcode Checkbox.init .init()},
+   * properties in this object are overriden for the instance being create and how {@linkcode Checkbox.init .init()} works.
+   * @member Checkbox.options
+   * @type {Object}
+   * @property {string} selectorInit The data attribute to find copy button UIs.
+   */
+  static options = {
+    selectorInit: '.bx--checkbox',
   };
 }
 
-
-  //sets indeterminate state 
-  const intdeterminateCheckbox = [...document.querySelectorAll('[aria-checked=mixed]')];
-  for (let value of intdeterminateCheckbox) {
-    value.indeterminate = true;
-  }
-  
-
-  //checkboxes with input nested inside label
-  const nestedCheckbox = [...document.querySelectorAll('.bx--checkbox-label > .bx--checkbox')];
-  for (let checkbox of nestedCheckbox) {
-    if (checkbox.checked) {
-      checkbox.parentElement.classList.add('bx--checkbox-label__checked');
-    }
-    if (checkbox.indeterminate) {
-      checkbox.parentElement.classList.add('bx--checkbox-label__indeterminate');
-    }
-
-    checkbox.onclick=function(){
-      this.parentElement.classList.remove('bx--checkbox-label__indeterminate');
-      if (this.checked) {
-        this.parentElement.classList.add('bx--checkbox-label__checked');
-      }
-      else {
-        this.parentElement.classList.remove('bx--checkbox-label__checked');
-      }
-    }
-
-  }
-
-export default initCheckbox;
+export default Checkbox;
