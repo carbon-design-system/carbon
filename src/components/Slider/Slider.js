@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import isEqual from 'lodash.isequal';
 import TextInput from '../TextInput';
 
 export default class Slider extends PureComponent {
@@ -43,7 +44,7 @@ export default class Slider extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps !== this.props) {
+    if (!isEqual(nextProps, this.props)) {
       this.updatePosition();
     }
   }
@@ -66,6 +67,9 @@ export default class Slider extends PureComponent {
     requestAnimationFrame(() => {
       this.setState((prevState, props) => {
         const { left, newValue } = this.calcValue(evt, prevState, props);
+        if (prevState.left === left && prevState.value === newValue) {
+          return { dragging: false };
+        }
 
         props.onChange({ value: newValue });
         return {
