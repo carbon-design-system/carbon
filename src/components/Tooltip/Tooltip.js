@@ -38,8 +38,10 @@ export default class Tooltip extends Component {
   }
 
   getTriggerPosition = () => {
-    const triggerPosition = this.triggerEl.getBoundingClientRect();
-    this.setState({ triggerPosition });
+    if (this.triggerEl) {
+      const triggerPosition = this.triggerEl.getBoundingClientRect();
+      this.setState({ triggerPosition });
+    }
   };
 
   handleMouse = direction => {
