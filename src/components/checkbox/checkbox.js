@@ -55,12 +55,11 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
   }
 
   indeterminateCheckbox() {
-    if (!this.element.getAttribute('aria-checked', 'mixed')) {
-      return;
+    if (this.element.getAttribute('aria-checked', 'mixed')) {
+      this.element.indeterminate = true;
     }
-    this.element.indeterminate = true;
 
-    if (this.element.indeterminate = true) {
+    if (this.element.indeterminate === true) {
       this.element.parentElement.classList.add('bx--checkbox-label__indeterminate');
    }
   }

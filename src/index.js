@@ -276,7 +276,6 @@ export const componentClasses = [
  */
 const init = () => {
   if (!settings.disableAutoInit) {
-    //initCheckbox();
     componentClasses.forEach(Clz => {
       Clz.init();
     });
