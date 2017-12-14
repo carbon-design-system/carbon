@@ -178,22 +178,31 @@ describe('NumberInput', () => {
     });
 
     describe('enabled numberInput', () => {
-      const onClick = jest.fn();
-      const onChange = jest.fn();
+      let onClick;
+      let onChange;
+      let input;
+      let upArrow;
+      let downArrow;
+      let wrapper;
 
-      const wrapper = mount(
-        <NumberInput
-          id="test"
-          onClick={onClick}
-          onChange={onChange}
-          min={0}
-          max={100}
-        />
-      );
+      beforeEach(() => {
+        onClick = jest.fn();
+        onChange = jest.fn();
 
-      const input = wrapper.find('input');
-      const upArrow = wrapper.find('Icon.up-icon').closest('button');
-      const downArrow = wrapper.find('Icon.down-icon').closest('button');
+        wrapper = mount(
+          <NumberInput
+            id="test"
+            onClick={onClick}
+            onChange={onChange}
+            min={0}
+            max={100}
+          />
+        );
+
+        input = wrapper.find('input');
+        upArrow = wrapper.find('Icon.up-icon').closest('button');
+        downArrow = wrapper.find('Icon.down-icon').closest('button');
+      });
 
       it('should invoke onClick when numberInput is clicked', () => {
         input.simulate('click');
@@ -203,18 +212,21 @@ describe('NumberInput', () => {
       it('should invoke onClick when up arrow is clicked', () => {
         upArrow.simulate('click');
         expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'up');
       });
 
       it('should only increase the value on up arrow click if value is less than max', () => {
         wrapper.setProps({ value: 100 });
         upArrow.simulate('click');
         expect(wrapper.state().value).toEqual(100);
+        expect(onClick).not.toBeCalled();
       });
 
       it('should only decrease the value on down arrow click if value is greater than min', () => {
         wrapper.setProps({ value: 0 });
         downArrow.simulate('click');
         expect(wrapper.state().value).toEqual(0);
+        expect(onClick).not.toBeCalled();
       });
 
       it('should increase by the value of step', () => {
@@ -237,14 +249,23 @@ describe('NumberInput', () => {
         expect(wrapper.state().value).toEqual(90);
       });
 
-      it('should invoke onClick when down arrow is clicked', () => {
+      it('should not invoke onClick when down arrow is clicked and value is 0', () => {
+        downArrow.simulate('click');
+        expect(onClick).not.toBeCalled();
+      });
+
+      it('should invoke onClick when down arrow is clicked and value is above min', () => {
+        wrapper.setProps({ value: 1 });
         downArrow.simulate('click');
         expect(onClick).toBeCalled();
+        expect(onChange).toBeCalled();
+        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'down');
       });
 
       it('should invoke onChange when numberInput is changed', () => {
         input.simulate('change');
         expect(onChange).toBeCalled();
+        expect(onChange).toHaveBeenCalledWith(expect.anything());
       });
     });
   });
