@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FormLabel from './FormLabel';
+import FormLabel from '../FormLabel';
 
 describe('FormLabel', () => {
   it('should render', () => {

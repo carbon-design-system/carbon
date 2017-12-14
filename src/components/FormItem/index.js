@@ -1,1 +1,1 @@
-export default from './FormLabel';
+export default from './FormItem';
