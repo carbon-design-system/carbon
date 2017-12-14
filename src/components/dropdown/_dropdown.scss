@@ -86,6 +86,8 @@
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     &:hover,
     &:focus {
