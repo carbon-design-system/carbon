@@ -5,20 +5,31 @@ import NumberInput from '../NumberInput';
 
 describe('NumberInput', () => {
   describe('should render as expected', () => {
-    const wrapper = mount(
-      <NumberInput
-        min={0}
-        max={100}
-        id="test"
-        label="Number Input"
-        className="extra-class"
-      />
-    );
+    let wrapper;
+    let label;
+    let numberInput;
+    let container;
+    let formItem;
+    let icons;
 
-    const label = wrapper.find('label');
-    const numberInput = wrapper.find('input');
-    const container = wrapper.find('.bx--number');
-    const formItem = wrapper.find('.bx--form-item');
+    beforeEach(() => {
+      wrapper = mount(
+        <NumberInput
+          min={0}
+          max={100}
+          id="test"
+          label="Number Input"
+          className="extra-class"
+          invalidText="invalid text"
+        />
+      );
+
+      label = wrapper.find('label');
+      numberInput = wrapper.find('input');
+      container = wrapper.find('.bx--number');
+      formItem = wrapper.find('.bx--form-item');
+      icons = wrapper.find(Icon);
+    });
 
     describe('input', () => {
       it('renders a numberInput', () => {
@@ -38,27 +49,41 @@ describe('NumberInput', () => {
       });
 
       it('should set a min as expected', () => {
-        expect(numberInput.props().min).toEqual(0);
+        expect(numberInput.prop('min')).toEqual(0);
         wrapper.setProps({ min: 10 });
-        expect(wrapper.find('input').props().min).toEqual(10);
+        expect(wrapper.find('input').prop('min')).toEqual(10);
       });
 
       it('should set a max as expected', () => {
-        expect(numberInput.props().max).toEqual(100);
+        expect(numberInput.prop('max')).toEqual(100);
         wrapper.setProps({ max: 10 });
-        expect(wrapper.find('input').props().min).toEqual(10);
+        expect(wrapper.find('input').prop('max')).toEqual(10);
       });
 
       it('should set step as expected', () => {
-        expect(numberInput.props().step).toEqual(1);
+        expect(numberInput.prop('step')).toEqual(1);
         wrapper.setProps({ step: 10 });
-        expect(wrapper.find('input').props().step).toEqual(10);
+        expect(wrapper.find('input').prop('step')).toEqual(10);
       });
 
       it('should set disabled as expected', () => {
-        expect(numberInput.props().disabled).toEqual(false);
+        expect(numberInput.prop('disabled')).toEqual(false);
         wrapper.setProps({ disabled: true });
-        expect(wrapper.find('input').props().disabled).toEqual(true);
+        expect(wrapper.find('input').prop('disabled')).toEqual(true);
+      });
+
+      it('should set invalid as expected', () => {
+        expect(container.prop('data-invalid')).toEqual(undefined);
+        wrapper.setProps({ invalid: true });
+        expect(wrapper.find('.bx--number').prop('data-invalid')).toEqual(true);
+      });
+
+      it('should set invalidText as expected', () => {
+        expect(wrapper.find('.bx--form-requirement').length).toEqual(0);
+        wrapper.setProps({ invalid: true });
+        const invalidText = wrapper.find('.bx--form-requirement');
+        expect(invalidText.length).toEqual(1);
+        expect(invalidText.text()).toEqual('invalid text');
       });
 
       describe('initial rendering', () => {
@@ -78,53 +103,52 @@ describe('NumberInput', () => {
         it('should set value as expected when value > min', () => {
           const wrapper = getWrapper(-1, 100, 0);
           const numberInput = getNumberInput(wrapper);
-          expect(numberInput.props().value).toEqual(0);
+          expect(numberInput.prop('value')).toEqual(0);
         });
 
         it('should set value as expected when min === 0 and value > min', () => {
           const wrapper = getWrapper(0, 100, 1);
           const numberInput = getNumberInput(wrapper);
-          expect(numberInput.props().value).toEqual(1);
+          expect(numberInput.prop('value')).toEqual(1);
         });
 
         it('should set value to equal min when value < min', () => {
           let wrapper = getWrapper(5, 100, 0);
           let numberInput = wrapper.find('input');
-          expect(numberInput.props().value).toEqual(5);
+          expect(numberInput.prop('value')).toEqual(5);
         });
 
         it('should set value when min is undefined', () => {
           let wrapper = getWrapper(undefined, 100, 5);
           let numberInput = wrapper.find('input');
-          expect(numberInput.props().value).toEqual(5);
+          expect(numberInput.prop('value')).toEqual(5);
         });
       });
     });
 
     describe('Icon', () => {
-      const icons = wrapper.find(Icon);
       it('renders two Icon components', () => {
         expect(icons.length).toEqual(2);
       });
 
       it('has the expected default iconDescription', () => {
-        expect(wrapper.props().iconDescription).toEqual('choose a number');
+        expect(wrapper.prop('iconDescription')).toEqual('choose a number');
       });
 
       it('should use correct icons', () => {
-        expect(icons.at(0).props().name).toEqual('caret--up');
-        expect(icons.at(1).props().name).toEqual('caret--down');
+        expect(icons.at(0).prop('name')).toEqual('caret--up');
+        expect(icons.at(1).prop('name')).toEqual('caret--down');
       });
 
       it('adds new iconDescription when passed via props', () => {
         wrapper.setProps({ iconDescription: 'new description' });
-        expect(wrapper.props().iconDescription).toEqual('new description');
+        expect(wrapper.prop('iconDescription')).toEqual('new description');
       });
 
       it('should have iconDescription match Icon component description prop', () => {
         const iconUpText = wrapper.find('.up-icon title').text();
         const iconDownText = wrapper.find('.down-icon title').text();
-        const iconDescription = wrapper.props().iconDescription;
+        const iconDescription = wrapper.prop('iconDescription');
 
         const matches =
           iconDescription === iconUpText && iconDescription === iconDownText;

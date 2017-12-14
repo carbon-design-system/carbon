@@ -13,24 +13,35 @@ const numberInputProps = {
   max: 100,
   value: 50,
   step: 10,
+  invalidText: 'Number is not valid',
 };
 
-storiesOf('NumberInput', module).addWithInfo(
-  'enabled',
-  `
-      Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
-      The example below shows an enabled Number Input component. The Number Input component can be
-      passed a starting value, a min, a max, and the step.
-    `,
-  () => <NumberInput {...numberInputProps} />
-);
+const introText = `
+  Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value. The Number Input component can be passed a starting value, a min, a max, and the step.
+`;
 
-storiesOf('NumberInput', module).addWithInfo(
-  'disabled',
-  `
-      Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
-      The example below shows an disabled Number Input component. The Number Input component can be
-      passed a starting value, a min, a max, and the step.
+storiesOf('NumberInput', module)
+  .addWithInfo(
+    'enabled',
+    `
+      ${introText}
+      The example below shows an enabled Number Input component.
     `,
-  () => <NumberInput disabled {...numberInputProps} />
-);
+    () => <NumberInput {...numberInputProps} />
+  )
+  .addWithInfo(
+    'disabled',
+    `
+      ${introText}
+      The example below shows an disabled Number Input component.
+    `,
+    () => <NumberInput disabled {...numberInputProps} />
+  )
+  .addWithInfo(
+    'invalid',
+    `
+      ${introText}
+      The example below shows an disabled Number Input component.
+    `,
+    () => <NumberInput {...numberInputProps} invalid />
+  );

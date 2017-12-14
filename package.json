@@ -99,7 +99,7 @@
     }
   },
   "peerDependencies": {
-    "carbon-components": "^8.0.0",
+    "carbon-components": "^8.1.11",
     "carbon-icons": "^5.1.2 || ^6.0.0",
     "react": "^16.1.0",
     "react-dom": "^16.1.0"
