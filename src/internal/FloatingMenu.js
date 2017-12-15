@@ -140,12 +140,11 @@ class FloatingMenu extends React.Component {
       }),
       top: () => ({
         left: refCenterHorizontal - this.menuWidth / 2 + menuOffset.left,
-        top: refTop - (this.menuHeight + scroll) - menuOffset.top,
+        top: refTop - this.menuHeight + scroll - menuOffset.top,
       }),
       right: () => ({
         left: refRight + menuOffset.left,
-        top:
-          refCenterVertical - (this.menuHeight / 2 + scroll) + menuOffset.top,
+        top: refCenterVertical - this.menuHeight / 2 + scroll + menuOffset.top,
       }),
       bottom: () => ({
         left: refCenterHorizontal - this.menuWidth / 2 + menuOffset.left,
