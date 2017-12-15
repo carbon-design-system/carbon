@@ -1,6 +1,13 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import InitComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+// import default from '../lightbox/lightbox';
+
+const stateChangeTypes = {
+  checked: 'true',
+  unchecked: 'false',
+  mixed: 'mixed',
+}
 
 class Checkbox extends mixin(createComponent, InitComponentBySearch) {
   /**
@@ -54,6 +61,44 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
     }
   }
 
+  /**
+   * Sets the new checkbox state.
+   * @param {boolean|string} [state]
+   *   The new checkbox state to set. `mixed` to put checkbox in indeterminate state.
+   *   If omitted, this method simply makes the style reflect `aria-checked` attribute.
+   */
+  setState(state) {
+    if (state === undefined || stateChangeTypes[state] === undefined) {
+      console.log('Give us a state of checked, unchecked or mixed');
+      return;
+    }
+
+    this.element.setAttribute('aria-checked', state);
+
+    if (state === stateChangeTypes.mixed) {
+      this.element.indeterminate = true;
+      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
+        this.element.parentElement.classList.add('bx--checkbox-label__indeterminate');
+      }  
+    }
+
+    if (state === stateChangeTypes.checked || state === stateChangeTypes.unchecked) {
+      this.element.indeterminate = false;
+
+      // Check to see if we're in the nested checkbox
+      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
+        this.element.parentElement.classList.remove('bx--checkbox-label__indeterminate');
+
+        if (state === stateChangeTypes.checked) {
+          this.element.parentElement.classList.add('bx--checkbox-label__checked');
+        }
+        if (state === stateChangeTypes.unchecked) {
+          this.element.parentElement.classList.remove('bx--checkbox-label__checked');
+        }        
+      }
+    }
+  }
+
   indeterminateCheckbox() {
     if (this.element.getAttribute('aria-checked', 'mixed')) {
       this.element.indeterminate = true;
@@ -61,6 +106,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
 
     if (this.element.indeterminate === true) {
       this.element.parentElement.classList.add('bx--checkbox-label__indeterminate');
+      this.element.setAttribute('aria-checked', 'mixed');
    }
   }
 
@@ -72,7 +118,6 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
       this.element.parentElement.classList.add('bx--checkbox-label__checked');
     }
   }
-
 
   /**
    * The map associating DOM element and copy button UI instance.
@@ -92,6 +137,8 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
   static options = {
     selectorInit: '.bx--checkbox',
   };
+
+  static stateChangeTypes = stateChangeTypes
 }
 
 export default Checkbox;
