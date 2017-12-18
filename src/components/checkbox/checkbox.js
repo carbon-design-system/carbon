@@ -1,7 +1,7 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import InitComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-// import default from '../lightbox/lightbox';
+
 
 const stateChangeTypes = {
   checked: 'true',
@@ -14,20 +14,20 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    * Checkbox UI.
    * @extends CreateComponent
    * @extends InitComponentBySearch
-   * @param {HTMLElement} element The element working as a copy button UI.
+   * @param {HTMLElement} element The element working as a checkbox UI.
    */
   
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', () => this.handleClick());
-    this.element.addEventListener('focus', () => this.handleFocus());
-    this.element.addEventListener('blur', () => this.handleBlur());
+    this.element.addEventListener('click', () => this._handleClick());
+    this.element.addEventListener('focus', () => this._handleFocus());
+    this.element.addEventListener('blur', () => this._handleBlur());
     
-    this.indeterminateCheckbox();
-    this.initCheckbox();
+    this._indeterminateCheckbox();
+    this._initCheckbox();
   }
   
-  handleClick() {
+  _handleClick() {
     
     if (this.element.checked) {
       this.element.setAttribute('checked', '');
@@ -49,13 +49,13 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
     }
   }
 
-  handleFocus() {
+  _handleFocus() {
     if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
       this.element.parentElement.classList.add('bx--checkbox-label__focus');
     }
   }
 
-  handleBlur() {
+  _handleBlur() {
     if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
       this.element.parentElement.classList.remove('bx--checkbox-label__focus');
     }
@@ -69,8 +69,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    */
   setState(state) {
     if (state === undefined || stateChangeTypes[state] === undefined) {
-      console.log('Give us a state of checked, unchecked or mixed');
-      return;
+      throw new TypeError('setState expects a value of checked, unchecked or mixed.');
     }
 
     this.element.setAttribute('aria-checked', state);
@@ -99,7 +98,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
     }
   }
 
-  indeterminateCheckbox() {
+  _indeterminateCheckbox() {
     if (this.element.getAttribute('aria-checked', 'mixed')) {
       this.element.indeterminate = true;
     }
@@ -110,7 +109,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    }
   }
 
-  initCheckbox() {
+  _initCheckbox() {
     if (this.element.checked) {
       this.element.setAttribute('aria-checked', 'true');
     }
