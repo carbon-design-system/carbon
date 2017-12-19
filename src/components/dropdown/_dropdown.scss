@@ -112,8 +112,8 @@
       display: flex;
       flex-direction: column;
       background-color: $ui-01;
-      max-height: 50rem;
-      overflow: visible;
+      max-height: 15rem;
+      overflow: auto;
       transition: $transition--expansion $bx--ease-in;
       opacity: 1;
     }
