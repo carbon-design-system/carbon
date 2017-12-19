@@ -34,19 +34,18 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
       this.element.setAttribute('aria-checked', 'true');
       this.element.checked = true;
 
-      //Adds class for nested checkboxes inside labels
+      //nested checkboxes inside labels
       if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-        this.element.parentElement.classList.add('bx--checkbox-label__checked');
-        this.element.parentElement.classList.remove('bx--checkbox-label__indeterminate');
+        this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
       }
     } else {
       this.element.removeAttribute('checked');
       this.element.setAttribute('aria-checked', 'false');
       this.element.checked = false;
       
-      //Removes class for nested checkboxes inside labels
+      //nested checkboxes inside labels
       if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-        this.element.parentElement.classList.remove('bx--checkbox-label__checked', 'bx--checkbox-label__indeterminate');
+        this.element.parentElement.setAttribute('data-contained-checkbox-state', 'false');
       }
     }
   }
@@ -69,41 +68,24 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    *   The new checkbox state to set. `mixed` to put checkbox in indeterminate state.
    *   If omitted, this method simply makes the style reflect `aria-checked` attribute.
    */
+ /**
+ * Sets the new checkbox state.
+ * @param {boolean|string} [state]
+ *   The new checkbox state to set. `mixed` to put checkbox in indeterminate state.
+ *   If omitted, this method simply makes the style reflect `aria-checked` attribute.
+ */
   setState(state) {
     if (state === undefined || stateChangeTypes[state] === undefined) {
       throw new TypeError('setState expects a value of true, false or mixed.');
     }
 
     this.element.setAttribute('aria-checked', state);
+    this.element.indeterminate = state === stateChangeTypes.mixed;
+    this.element.checked = state === stateChangeTypes.true;
 
-    if (state === stateChangeTypes.mixed) {
-      this.element.indeterminate = true;
-
-      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-        this.element.parentElement.classList.add('bx--checkbox-label__indeterminate');
-      }  
-    }
-
-    if (state === stateChangeTypes.true) {
-      this.element.indeterminate = false;
-      this.element.checked = true;
-
-      // Check to see if we're in the nested checkbox
-      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-        this.element.parentElement.classList.remove('bx--checkbox-label__indeterminate');
-        this.element.parentElement.classList.add('bx--checkbox-label__checked');     
-      }
-    }
-
-    if (state === stateChangeTypes.false) {
-      this.element.indeterminate = false;
-      this.element.checked = false;
-
-      // Check to see if we're in the nested checkbox
-      if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
-        this.element.parentElement.classList.remove('bx--checkbox-label__indeterminate');
-        this.element.parentElement.classList.remove('bx--checkbox-label__checked');       
-      }
+    const container = this.element.closest('[data-contained-checkbox-state]');
+    if (container) {
+      container.setAttribute('data-contained-checkbox-state', state);
     }
   }
 
@@ -113,7 +95,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
     }
 
     if (this.element.indeterminate === true) {
-      this.element.parentElement.classList.add('bx--checkbox-label__indeterminate');
+      this.element.parentElement.setAttribute('data-contained-checkbox-state', 'mixed');
       this.element.setAttribute('aria-checked', 'mixed');
    }
   }
@@ -124,7 +106,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
       this.element.checked = true;
     }
     if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.checked) {
-      this.element.parentElement.classList.add('bx--checkbox-label__checked');
+      this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
     }
   }
 

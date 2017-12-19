@@ -62,14 +62,14 @@
   
   .bx--checkbox:checked + .bx--checkbox-label::before,
   .bx--checkbox:indeterminate + .bx--checkbox-label::before,
-  .bx--checkbox-label__checked::before,
-  .bx--checkbox-label__indeterminate::before {
+  .bx--checkbox-label[data-contained-checkbox-state='true']::before,
+  .bx--checkbox-label[data-contained-checkbox-state='mixed']::before {
     background-color: $brand-01;
     border-color: $brand-01;
   }
 
   .bx--checkbox:checked + .bx--checkbox-label::after,
-  .bx--checkbox-label__checked::after {
+  .bx--checkbox-label[data-contained-checkbox-state="true"]::after {
     opacity: 1;
     transform: scale(1) rotate(-45deg);
   }
@@ -85,7 +85,7 @@
   }
 
   .bx--checkbox:indeterminate + .bx--checkbox-label::after,
-  .bx--checkbox-label__indeterminate::after {
+  .bx--checkbox-label[data-contained-checkbox-state="mixed"]::after { 
     transform: scale(1) rotate(0deg);
     border-left: 0 solid $inverse-01;
     border-bottom: 2px solid  $inverse-01;
