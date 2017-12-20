@@ -66,12 +66,6 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    *   The new checkbox state to set. `mixed` to put checkbox in indeterminate state.
    *   If omitted, this method simply makes the style reflect `aria-checked` attribute.
    */
-  /**
-   * Sets the new checkbox state.
-   * @param {boolean|string} [state]
-   *   The new checkbox state to set. `mixed` to put checkbox in indeterminate state.
-   *   If omitted, this method simply makes the style reflect `aria-checked` attribute.
-   */
   setState(state) {
     if (state === undefined || stateChangeTypes[state] === undefined) {
       throw new TypeError('setState expects a value of true, false or mixed.');
