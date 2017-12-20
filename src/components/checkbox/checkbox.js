@@ -28,8 +28,8 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
   }
   
   _handleClick() {
-    
-    if (this.element.checked) {
+
+    if (this.element.checked === true) {
       this.element.setAttribute('checked', '');
       this.element.setAttribute('aria-checked', 'true');
       this.element.checked = true;
@@ -38,7 +38,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
       if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
         this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
       }
-    } else {
+    } else if (this.element.checked === false) {
       this.element.removeAttribute('checked');
       this.element.setAttribute('aria-checked', 'false');
       this.element.checked = false;
@@ -101,9 +101,8 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
   }
 
   _initCheckbox() {
-    if (this.element.checked) {
+    if (this.element.checked === true) {
       this.element.setAttribute('aria-checked', 'true');
-      this.element.checked = true;
     }
     if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.checked) {
       this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
