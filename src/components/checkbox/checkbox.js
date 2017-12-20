@@ -5,7 +5,7 @@ import InitComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 const stateChangeTypes = {
   true: 'true',
   false: 'false',
-  mixed: 'mixed'
+  mixed: 'mixed',
 };
 
 class Checkbox extends mixin(createComponent, InitComponentBySearch) {
@@ -32,7 +32,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
       this.element.setAttribute('aria-checked', 'true');
       this.element.checked = true;
 
-      //nested checkboxes inside labels
+      // nested checkboxes inside labels
       if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
         this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
       }
@@ -41,7 +41,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
       this.element.setAttribute('aria-checked', 'false');
       this.element.checked = false;
 
-      //nested checkboxes inside labels
+      // nested checkboxes inside labels
       if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
         this.element.parentElement.setAttribute('data-contained-checkbox-state', 'false');
       }
@@ -123,7 +123,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    * @property {string} selectorInit The data attribute to find copy button UIs.
    */
   static options = {
-    selectorInit: '.bx--checkbox'
+    selectorInit: '.bx--checkbox',
   };
 
   static stateChangeTypes = stateChangeTypes;

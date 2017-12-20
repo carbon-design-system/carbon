@@ -29,7 +29,7 @@ describe('Test Checkbox', function() {
 
     it('should set default options', function() {
       expect(instance.options).to.deep.equal({
-        selectorInit: '.bx--checkbox'
+        selectorInit: '.bx--checkbox',
       });
     });
 

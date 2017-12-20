@@ -263,7 +263,7 @@ export const componentClasses = [
   Tile,
   Carousel,
   Lightbox,
-  Checkbox
+  Checkbox,
   // Floating menu instances are created by Tooltip, etc. and thus not for automatic instantiation
 ];
 
