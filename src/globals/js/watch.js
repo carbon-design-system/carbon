@@ -1,4 +1,3 @@
-import initCheckbox from '../../components/checkbox/checkbox';
 import { componentClasses } from '../../index';
 
 const forEach = Array.prototype.forEach;
@@ -46,7 +45,6 @@ export default function(target = document, options = {}) {
   }
 
   const handles = componentClasses.map(Clz => Clz.init(target, options)).filter(Boolean);
-  handles.push(initCheckbox());
 
   const componentClassesForWatchInit = componentClasses.filter(Clz => !Clz.forLazyInit);
 
@@ -55,7 +53,7 @@ export default function(target = document, options = {}) {
   });
   observer.observe(target, {
     childList: true,
-    subtree: true,
+    subtree: true
   });
   return {
     release() {
@@ -66,6 +64,6 @@ export default function(target = document, options = {}) {
         observer.disconnect();
         observer = null;
       }
-    },
+    }
   };
 }

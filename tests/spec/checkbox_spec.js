@@ -29,7 +29,7 @@ describe('Test Checkbox', function() {
 
     it('should set default options', function() {
       expect(instance.options).to.deep.equal({
-        selectorInit: '.bx--checkbox',
+        selectorInit: '.bx--checkbox'
       });
     });
 
@@ -39,20 +39,20 @@ describe('Test Checkbox', function() {
     });
   });
 
-  describe('Test Checkbox', function () {
+  describe('Test Checkbox', function() {
     let container;
     let elem;
     let checkbox;
-  
-    before(function () {
+
+    before(function() {
       container = document.createElement('div');
       elem = document.createElement('input');
       elem.setAttribute('type', 'checkbox');
       container.appendChild(elem);
       checkbox = Checkbox.create(elem);
     });
-  
-    beforeEach(function () {
+
+    beforeEach(function() {
       container.classList.add('bx--checkbox-label');
       container.setAttribute('data-contained-checkbox-state', 'false');
       elem.setAttribute('aria-checked', 'false');
@@ -61,21 +61,21 @@ describe('Test Checkbox', function() {
       elem.indeterminate = false;
     });
 
-    it('setState should support mixed state', function () {
+    it('setState should support mixed state', function() {
       checkbox.setState('mixed');
       expect(elem.indeterminate, 'indeterminate on element').to.be.true;
       expect(elem.checked, 'checked prop on element').to.be.false;
       expect(elem.getAttribute('aria-checked')).to.equal('mixed');
     });
 
-    it('setState should support checked state', function () {
+    it('setState should support checked state', function() {
       checkbox.setState('true');
       expect(elem.indeterminate, 'indeterminate on element').to.be.false;
       expect(elem.checked, 'checked prop on element').to.be.true;
       expect(elem.getAttribute('aria-checked')).to.equal('true');
     });
 
-    it('setState should support unchecked state', function () {
+    it('setState should support unchecked state', function() {
       checkbox.setState('false');
       expect(elem.indeterminate, 'indeterminate on element').to.be.false;
       expect(elem.checked, 'checked prop on element').to.be.false;
@@ -107,12 +107,10 @@ describe('Test Checkbox', function() {
       expect(container.classList.contains('bx--checkbox-label__focus')).to.be.false;
     });
 
-    after(function () {
+    after(function() {
       if (checkbox) {
         checkbox = checkbox.release();
       }
     });
   });
-
 });
-

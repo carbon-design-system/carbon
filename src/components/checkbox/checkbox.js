@@ -2,12 +2,11 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import InitComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 
-
 const stateChangeTypes = {
   true: 'true',
   false: 'false',
-  mixed: 'mixed',
-}
+  mixed: 'mixed'
+};
 
 class Checkbox extends mixin(createComponent, InitComponentBySearch) {
   /**
@@ -16,19 +15,18 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    * @extends InitComponentBySearch
    * @param {HTMLElement} element The element working as a checkbox UI.
    */
-  
+
   constructor(element, options) {
     super(element, options);
     this.element.addEventListener('click', () => this._handleClick());
     this.element.addEventListener('focus', () => this._handleFocus());
     this.element.addEventListener('blur', () => this._handleBlur());
-    
+
     this._indeterminateCheckbox();
     this._initCheckbox();
   }
-  
-  _handleClick() {
 
+  _handleClick() {
     if (this.element.checked === true) {
       this.element.setAttribute('checked', '');
       this.element.setAttribute('aria-checked', 'true');
@@ -42,7 +40,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
       this.element.removeAttribute('checked');
       this.element.setAttribute('aria-checked', 'false');
       this.element.checked = false;
-      
+
       //nested checkboxes inside labels
       if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
         this.element.parentElement.setAttribute('data-contained-checkbox-state', 'false');
@@ -68,12 +66,12 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    *   The new checkbox state to set. `mixed` to put checkbox in indeterminate state.
    *   If omitted, this method simply makes the style reflect `aria-checked` attribute.
    */
- /**
- * Sets the new checkbox state.
- * @param {boolean|string} [state]
- *   The new checkbox state to set. `mixed` to put checkbox in indeterminate state.
- *   If omitted, this method simply makes the style reflect `aria-checked` attribute.
- */
+  /**
+   * Sets the new checkbox state.
+   * @param {boolean|string} [state]
+   *   The new checkbox state to set. `mixed` to put checkbox in indeterminate state.
+   *   If omitted, this method simply makes the style reflect `aria-checked` attribute.
+   */
   setState(state) {
     if (state === undefined || stateChangeTypes[state] === undefined) {
       throw new TypeError('setState expects a value of true, false or mixed.');
@@ -97,7 +95,7 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
     if (this.element.indeterminate === true) {
       this.element.parentElement.setAttribute('data-contained-checkbox-state', 'mixed');
       this.element.setAttribute('aria-checked', 'mixed');
-   }
+    }
   }
 
   _initCheckbox() {
@@ -125,10 +123,10 @@ class Checkbox extends mixin(createComponent, InitComponentBySearch) {
    * @property {string} selectorInit The data attribute to find copy button UIs.
    */
   static options = {
-    selectorInit: '.bx--checkbox',
+    selectorInit: '.bx--checkbox'
   };
 
-  static stateChangeTypes = stateChangeTypes
+  static stateChangeTypes = stateChangeTypes;
 }
 
 export default Checkbox;
