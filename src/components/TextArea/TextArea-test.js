@@ -1,10 +1,10 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Textarea from '../TextArea';
+import TextArea from '../TextArea';
 
 describe('TextArea', () => {
   describe('should render as expected', () => {
-    const wrapper = mount(<Textarea id="testing" className="extra-class" />);
+    const wrapper = mount(<TextArea id="testing" className="extra-class" />);
 
     const textarea = () => wrapper.find('textarea');
 
@@ -80,7 +80,7 @@ describe('TextArea', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <Textarea id="test" onClick={onClick} onChange={onChange} disabled />
+        <TextArea id="test" onClick={onClick} onChange={onChange} disabled />
       );
 
       const textarea = wrapper.find('textarea');
@@ -104,7 +104,7 @@ describe('TextArea', () => {
       };
 
       const wrapper = shallow(
-        <Textarea id="test" onClick={onClick} onChange={onChange} />
+        <TextArea id="test" onClick={onClick} onChange={onChange} />
       );
 
       const textarea = wrapper.find('textarea');

@@ -12,7 +12,7 @@ import Button from '../Button';
 import Search from '../Search';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
-import Textarea from '../TextArea';
+import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import Toggle from '../Toggle';
 
@@ -215,7 +215,7 @@ storiesOf('Form', module).addWithInfo(
         {...InvalidPasswordProps}
       />
 
-      <Textarea {...textareaProps} />
+      <TextArea {...textareaProps} />
 
       <Button type="submit" className="some-class" {...buttonEvents}>
         Submit

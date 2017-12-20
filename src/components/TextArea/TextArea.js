@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const Textarea = ({
+const TextArea = ({
   className,
   id,
   labelText,
@@ -57,7 +57,7 @@ const Textarea = ({
   );
 };
 
-Textarea.propTypes = {
+TextArea.propTypes = {
   className: PropTypes.string,
   cols: PropTypes.number,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -73,7 +73,7 @@ Textarea.propTypes = {
   invalidText: PropTypes.string,
 };
 
-Textarea.defaultProps = {
+TextArea.defaultProps = {
   disabled: false,
   onChange: () => {},
   onClick: () => {},
@@ -85,4 +85,4 @@ Textarea.defaultProps = {
   invalidText: 'Provide invalidText',
 };
 
-export default Textarea;
+export default TextArea;
