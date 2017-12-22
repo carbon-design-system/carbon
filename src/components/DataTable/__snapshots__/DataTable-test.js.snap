@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable should render 1`] = `
+<div
+  className="bx--data-table-v2-container"
+>
+  <h4
+    className="bx--data-table-v2-header"
+  />
+  <div>
+    Children
+  </div>
+</div>
+`;

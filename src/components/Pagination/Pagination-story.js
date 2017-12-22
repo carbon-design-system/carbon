@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Pagination from '../Pagination';
+import PaginationV2 from '../PaginationV2';
 
 const props = {
   onChange: ({ page, pageSize }) => {
@@ -11,6 +12,13 @@ const props = {
 
 storiesOf('Pagination', module)
   .addDecorator(story => <div style={{ width: '800px' }}>{story()}</div>)
+  .addWithInfo(
+    'v2',
+    `
+      V2 version of the Pagination
+    `,
+    () => <PaginationV2 {...props} totalItems={103} />
+  )
   .addWithInfo(
     'with known total number of items',
     `

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTableData should render 1`] = `
+<td
+  className=""
+  data-previous-value=""
+>
+  <div>
+    Children
+  </div>
+</td>
+`;
