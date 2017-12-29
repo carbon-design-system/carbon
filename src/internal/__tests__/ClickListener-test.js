@@ -1,5 +1,3 @@
-/* global document, MouseEvent */
-
 import React from 'react';
 import ClickListener from '../ClickListener';
 import { shallow, mount } from 'enzyme';

@@ -138,7 +138,7 @@
     "eslint-plugin-react": "^7.4.0",
     "gh-pages": "1.0.0",
     "husky": "^0.14.3",
-    "jest": "^21.2.1",
+    "jest": "^22.0.0",
     "lcov2badge": "^0.1.0",
     "lint-staged": "^4.3.0",
     "node-sass": "4.6.0",

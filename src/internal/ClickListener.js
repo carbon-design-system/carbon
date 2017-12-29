@@ -12,14 +12,16 @@ class ClickListener extends React.Component {
   componentDidMount() {
     document.addEventListener('click', this.handleDocumentClick);
   }
-  /* istanbul ignore next */
+
   componentWillUnmount() {
     document.removeEventListener('click', this.handleDocumentClick);
   }
 
   handleDocumentClick = evt => {
-    if (!this.element.contains(evt.target)) {
-      this.props.onClickOutside(evt);
+    if (this.element) {
+      if (!this.element.contains(evt.target)) {
+        this.props.onClickOutside(evt);
+      }
     }
   };
 
