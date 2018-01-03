@@ -31,6 +31,7 @@ const TextInput = ({
     type,
   };
 
+  const errorId = id + '-error-msg';
   const textInputClasses = classNames('bx--text-input', className);
   const labelClasses = classNames('bx--label', {
     'bx--visually-hidden': hideLabel,
@@ -43,7 +44,9 @@ const TextInput = ({
   ) : null;
 
   const error = invalid ? (
-    <div className="bx--form-requirement">{invalidText}</div>
+    <div className="bx--form-requirement" id={errorId}>
+      {invalidText}
+    </div>
   ) : null;
 
   const input = invalid ? (
@@ -51,6 +54,8 @@ const TextInput = ({
       {...other}
       {...textInputProps}
       data-invalid
+      aria-invalid
+      aria-describedBy={errorId}
       className={textInputClasses}
     />
   ) : (
