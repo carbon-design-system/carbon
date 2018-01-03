@@ -1,19 +1,25 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import { action, decorateAction } from '@storybook/addon-actions';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 
+// Datepickers last argument contains an instance of flatpickr
+// and will cause action logger to enter an infinite loop. Just don't log that argument
+const datePickerOnChangeActions = decorateAction([
+  args => args.slice(0, args.length - 2),
+]);
+
 const datePickerProps = {
   id: 'date-picker',
-  onChange: action('onChange'),
+  onChange: datePickerOnChangeActions('onPickerChange'),
 };
 
 const datePickerInputProps = {
   className: 'some-class',
   labelText: 'Date Picker label',
   onClick: action('onClick'),
-  onChange: action('onChange'),
+  onChange: action('onInputChange'),
   placeholder: 'mm/dd/yyyy',
   pattern: 'd{1,2}/d{1,2}/d{4}',
   id: 'date-picker-input-id',
