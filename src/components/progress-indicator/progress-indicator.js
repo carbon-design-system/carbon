@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -158,17 +159,20 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * @property {string} [classCurrent] The className for the current step element.
    * @property {string} [classIncomplete] The className for a incomplete step element.
    */
-  static options = {
-    selectorInit: '[data-progress]',
-    selectorStepElement: '.bx--progress-step',
-    selectorCurrent: '.bx--progress-step--current',
-    selectorIncomplete: '.bx--progress-step--incomplete',
-    selectorComplete: '.bx--progress-step--complete',
-    classStep: 'bx--progress-step',
-    classComplete: 'bx--progress-step--complete',
-    classCurrent: 'bx--progress-step--current',
-    classIncomplete: 'bx--progress-step--incomplete',
-  };
+  static get options() {
+    const { brandPrefix } = settings;
+    return {
+      selectorInit: '[data-progress]',
+      selectorStepElement: `.${brandPrefix}--progress-step`,
+      selectorCurrent: `.${brandPrefix}--progress-step--current`,
+      selectorIncomplete: `.${brandPrefix}--progress-step--incomplete`,
+      selectorComplete: `.${brandPrefix}--progress-step--complete`,
+      classStep: `${brandPrefix}--progress-step`,
+      classComplete: `${brandPrefix}--progress-step--complete`,
+      classCurrent: `${brandPrefix}--progress-step--current`,
+      classIncomplete: `${brandPrefix}--progress-step--incomplete`,
+    };
+  }
 }
 
 export default ProgressIndicator;

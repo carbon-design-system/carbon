@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -97,15 +98,18 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [options.classClearHidden] The class used to hide the clear icon.
    * @property {string} [options.classLayoutHidden] The class used to hide nonselected layout view.
    */
-  static options = {
-    selectorInit: '[data-search]',
-    selectorSearchView: '[data-search-view]',
-    selectorSearchInput: '.bx--search-input',
-    selectorClearIcon: '.bx--search-close',
-    selectorIconContainer: '.bx--search-button[data-search-toggle]',
-    classClearHidden: 'bx--search-close--hidden',
-    classLayoutHidden: 'bx--search-view--hidden',
-  };
+  static get options() {
+    const { brandPrefix } = settings;
+    return {
+      selectorInit: '[data-search]',
+      selectorSearchView: '[data-search-view]',
+      selectorSearchInput: `.${brandPrefix}--search-input`,
+      selectorClearIcon: `.${brandPrefix}--search-close`,
+      selectorIconContainer: `.${brandPrefix}--search-button[data-search-toggle]`,
+      classClearHidden: `${brandPrefix}--search-close--hidden`,
+      classLayoutHidden: `${brandPrefix}--search-view--hidden`,
+    };
+  }
 
   /**
    * The map associating DOM element and search instance.

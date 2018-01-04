@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -205,27 +206,30 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     'select-all': '_toggleSelectAll',
   };
 
-  static options = {
-    selectorInit: '[data-responsive-table]',
-    selectorExpandCells: '.bx--table-expand',
-    selectorExpandableRows: '.bx--expandable-row',
-    selectorParentRows: '.bx--parent-row',
-    selectorTableBody: '.bx--table-body',
-    selectorCheckbox: '.bx--checkbox',
-    classParentRowEven: 'bx--parent-row--even',
-    classExpandableRow: 'bx--expandable-row',
-    classExpandableRowEven: 'bx--expandable-row--even',
-    classExpandableRowHidden: 'bx--expandable-row--hidden',
-    classTableSortAscending: 'bx--table-sort--ascending',
-    eventBeforeExpand: 'responsive-table-beforetoggleexpand',
-    eventAfterExpand: 'responsive-table-aftertoggleexpand',
-    eventBeforeSort: 'responsive-table-beforetogglesort',
-    eventAfterSort: 'responsive-table-aftertogglesort',
-    eventBeforeSelectAll: 'responsive-table-beforetoggleselectall',
-    eventAfterSelectAll: 'responsive-table-aftertoggleselectall',
-    eventTrigger: '[data-event]',
-    eventParentContainer: '[data-parent-row]',
-  };
+  static get options() {
+    const { brandPrefix } = settings;
+    return {
+      selectorInit: '[data-responsive-table]',
+      selectorExpandCells: `.${brandPrefix}--table-expand`,
+      selectorExpandableRows: `.${brandPrefix}--expandable-row`,
+      selectorParentRows: `.${brandPrefix}--parent-row`,
+      selectorTableBody: `.${brandPrefix}--table-body`,
+      selectorCheckbox: `.${brandPrefix}--checkbox`,
+      classParentRowEven: `${brandPrefix}--parent-row--even`,
+      classExpandableRow: `${brandPrefix}--expandable-row`,
+      classExpandableRowEven: `${brandPrefix}--expandable-row--even`,
+      classExpandableRowHidden: `${brandPrefix}--expandable-row--hidden`,
+      classTableSortAscending: `${brandPrefix}--table-sort--ascending`,
+      eventBeforeExpand: 'responsive-table-beforetoggleexpand',
+      eventAfterExpand: 'responsive-table-aftertoggleexpand',
+      eventBeforeSort: 'responsive-table-beforetogglesort',
+      eventAfterSort: 'responsive-table-aftertogglesort',
+      eventBeforeSelectAll: 'responsive-table-beforetoggleselectall',
+      eventAfterSelectAll: 'responsive-table-aftertoggleselectall',
+      eventTrigger: '[data-event]',
+      eventParentContainer: '[data-parent-row]',
+    };
+  }
 }
 
 export default DataTable;

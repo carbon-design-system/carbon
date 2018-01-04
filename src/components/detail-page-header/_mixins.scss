@@ -7,8 +7,8 @@ $transition-time: 300ms;
   justify-content: space-between;
   position: fixed;
   top: rem(86px);
-  transition: transform $transition-time $bx--standard-easing 0s, max-height $transition-time $bx--standard-easing 0s,
-    box-shadow $transition-time $bx--standard-easing 0s, height $transition-time $bx--standard-easing 0s;
+  transition: transform $transition-time $carbon--standard-easing 0s, max-height $transition-time $carbon--standard-easing 0s,
+    box-shadow $transition-time $carbon--standard-easing 0s, height $transition-time $carbon--standard-easing 0s;
   will-change: transform, height, max-height, box-shadow;
   z-index: z('header');
 

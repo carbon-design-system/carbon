@@ -28,7 +28,10 @@ describe('StructuredList', function() {
     });
 
     it('should set default options', function() {
-      expect(instance.options).to.deep.equal({
+      // Spread operator does not take non-owning props
+      const { selectorListInput, ...options } = Object.getPrototypeOf(instance.options);
+      expect(selectorListInput('foo'), 'selectorListInput option').to.equal('#foo.bx--structured-list-input');
+      expect(options, 'Other options').to.deep.equal({
         selectorInit: '[data-structured-list]',
         selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
         classActive: 'bx--structured-list-row--selected',

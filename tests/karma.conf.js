@@ -127,7 +127,11 @@ module.exports = function(config) {
               },
             ],
           ],
-          plugins: ['transform-class-properties', ['transform-runtime', { polyfill: false }]].concat(
+          plugins: [
+            'transform-class-properties',
+            'transform-object-rest-spread',
+            ['transform-runtime', { polyfill: false }],
+          ].concat(
             cloptions.debug
               ? []
               : [

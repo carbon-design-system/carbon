@@ -2,15 +2,16 @@
 // List
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
 @include exports('lists') {
-  .bx--list--nested,
-  .bx--list--unordered,
-  .bx--list--ordered {
+  .#{$brand-prefix}--list--nested,
+  .#{$brand-prefix}--list--unordered,
+  .#{$brand-prefix}--list--ordered {
     @include reset;
     @include font-family;
     @include typescale('zeta');
@@ -19,34 +20,34 @@
     line-height: 1.5;
   }
 
-  .bx--list--unordered,
-  .bx--list--ordered {
+  .#{$brand-prefix}--list--unordered,
+  .#{$brand-prefix}--list--ordered {
     padding: 1rem;
   }
 
-  .bx--list__item {
+  .#{$brand-prefix}--list__item {
     font-weight: 600;
     padding-left: 0.25rem;
   }
 
-  .bx--list--unordered > .bx--list__item {
+  .#{$brand-prefix}--list--unordered > .#{$brand-prefix}--list__item {
     list-style-type: disc;
   }
 
-  .bx--list--ordered > .bx--list__item {
+  .#{$brand-prefix}--list--ordered > .#{$brand-prefix}--list__item {
     list-style-type: decimal;
   }
 
-  .bx--list--nested {
+  .#{$brand-prefix}--list--nested {
     margin-left: 0.5rem;
   }
 
-  .bx--list--nested > .bx--list__item {
+  .#{$brand-prefix}--list--nested > .#{$brand-prefix}--list__item {
     list-style-type: none;
     font-weight: 400;
   }
 
-  .bx--list--nested > .bx--list__item:before {
+  .#{$brand-prefix}--list--nested > .#{$brand-prefix}--list__item:before {
     content: '-';
     padding-right: 0.25rem;
   }

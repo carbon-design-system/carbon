@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import eventMatches from '../../globals/js/misc/event-matches';
 import ContentSwitcher from '../content-switcher/content-switcher';
 import on from '../../globals/js/misc/on';
@@ -158,19 +159,22 @@ class Tab extends ContentSwitcher {
    *   Cancellation of this event stops selection of tab.
    * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
    */
-  static options = Object.assign(Object.create(ContentSwitcher.options), {
-    selectorInit: '[data-tabs]',
-    selectorMenu: '.bx--tabs__nav',
-    selectorTrigger: '.bx--tabs-trigger',
-    selectorTriggerText: '.bx--tabs-trigger-text',
-    selectorButton: '.bx--tabs__nav-item',
-    selectorButtonSelected: '.bx--tabs__nav-item--selected',
-    selectorLink: '.bx--tabs__nav-link',
-    classActive: 'bx--tabs__nav-item--selected',
-    classHidden: 'bx--tabs__nav--hidden',
-    eventBeforeSelected: 'tab-beingselected',
-    eventAfterSelected: 'tab-selected',
-  });
+  static get options() {
+    const { brandPrefix } = settings;
+    return Object.assign(Object.create(ContentSwitcher.options), {
+      selectorInit: '[data-tabs]',
+      selectorMenu: `.${brandPrefix}--tabs__nav`,
+      selectorTrigger: `.${brandPrefix}--tabs-trigger`,
+      selectorTriggerText: `.${brandPrefix}--tabs-trigger-text`,
+      selectorButton: `.${brandPrefix}--tabs__nav-item`,
+      selectorButtonSelected: `.${brandPrefix}--tabs__nav-item--selected`,
+      selectorLink: `.${brandPrefix}--tabs__nav-link`,
+      classActive: `${brandPrefix}--tabs__nav-item--selected`,
+      classHidden: `${brandPrefix}--tabs__nav--hidden`,
+      eventBeforeSelected: 'tab-beingselected',
+      eventAfterSelected: 'tab-selected',
+    });
+  }
 
   /**
    * Enum for navigating backward/forward.

@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -120,15 +121,18 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
 
   static components = new WeakMap();
 
-  static options = {
-    selectorInit: '[data-overflow-menu]',
-    selectorOptionMenu: '.bx--overflow-menu-options',
-    classShown: 'bx--overflow-menu--open',
-    classMenuShown: 'bx--overflow-menu-options--open',
-    classMenuFlip: 'bx--overflow-menu--flip',
-    objMenuOffset: { top: 3, left: 61 },
-    objMenuOffsetFlip: { top: 3, left: -61 },
-  };
+  static get options() {
+    const { brandPrefix } = settings;
+    return {
+      selectorInit: '[data-overflow-menu]',
+      selectorOptionMenu: `.${brandPrefix}--overflow-menu-options`,
+      classShown: `${brandPrefix}--overflow-menu--open`,
+      classMenuShown: `${brandPrefix}--overflow-menu-options--open`,
+      classMenuFlip: `${brandPrefix}--overflow-menu--flip`,
+      objMenuOffset: { top: 3, left: 61 },
+      objMenuOffsetFlip: { top: 3, left: -61 },
+    };
+  }
 }
 
 export default OverflowMenu;
