@@ -3,11 +3,13 @@ import React from 'react';
 
 /**
  * Generic component used for reacting to a click event happening outside of a
- * given `children` element.
+ * given child component that used the forwarded `handleRef` function through
+ * the `refKey` prop.
  */
-export default class ClickListener extends React.Component {
+export default class InnerClickListener extends React.Component {
   static propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
+    refKey: PropTypes.string.isRequired,
     onClickOutside: PropTypes.func.isRequired,
   };
 
@@ -28,35 +30,22 @@ export default class ClickListener extends React.Component {
     document.removeEventListener('click', this.handleDocumentClick);
   }
 
-  handleDocumentClick(evt) {
+  handleDocumentClick(event) {
     if (this.element) {
-      if (this.element.contains && !this.element.contains(evt.target)) {
-        this.props.onClickOutside(evt);
+      if (this.element.contains && !this.element.contains(event.target)) {
+        this.props.onClickOutside(event);
       }
     }
   }
 
   handleRef(el) {
-    const { children } = this.props;
     this.element = el;
-
-    /**
-     * One important note, `children.ref` corresponds to a `ref` prop passed in
-     * directly to the child, not necessarily a `ref` defined in the component.
-     * This means that here we target the following `ref` location:
-     *
-     * <ClickListener onClickOutside={() => {}}>
-     *   <Child ref={targetedRefHere} />
-     * </ClickListener>
-     */
-    if (children.ref && typeof children.ref === 'function') {
-      children.ref(el);
-    }
   }
 
   render() {
-    return React.cloneElement(this.props.children, {
-      ref: this.handleRef,
+    const { refKey, children } = this.props;
+    return React.cloneElement(children, {
+      [refKey]: this.handleRef,
     });
   }
 }
