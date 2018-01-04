@@ -20,7 +20,7 @@ export default class ModalWrapper extends React.Component {
     secondaryButtonText: PropTypes.string,
     handleSubmit: PropTypes.func,
     disabled: PropTypes.bool,
-    triggerButtonkind: PropTypes.oneOf([
+    triggerButtonKind: PropTypes.oneOf([
       'primary',
       'secondary',
       'danger',
@@ -31,7 +31,7 @@ export default class ModalWrapper extends React.Component {
   static defaultProps = {
     primaryButtonText: 'Save',
     secondaryButtonText: 'Cancel',
-    triggerButtonkind: 'primary',
+    triggerButtonKind: 'primary',
     disabled: false,
   };
 
@@ -55,7 +55,7 @@ export default class ModalWrapper extends React.Component {
     const {
       id,
       buttonTriggerText,
-      triggerButtonkind,
+      triggerButtonKind,
       modalLabel,
       modalHeading,
       passiveModal,
@@ -89,7 +89,7 @@ export default class ModalWrapper extends React.Component {
         }}>
         <Button
           disabled={disabled}
-          kind={triggerButtonkind}
+          kind={triggerButtonKind}
           onClick={this.handleOpen}>
           {buttonTriggerText}
         </Button>

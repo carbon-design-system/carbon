@@ -170,17 +170,17 @@ describe('Modal Wrapper', () => {
     });
 
     it('should render ghost button when ghost is passed', () => {
-      wrapper.setProps({ triggerButtonkind: 'ghost' });
+      wrapper.setProps({ triggerButtonKind: 'ghost' });
       expect(wrapper.find('.bx--btn--ghost').length).toEqual(1);
     });
 
     it('should render danger button when danger is passed', () => {
-      wrapper.setProps({ triggerButtonkind: 'danger' });
+      wrapper.setProps({ triggerButtonKind: 'danger' });
       expect(wrapper.find('.bx--btn--danger').length).toEqual(1);
     });
 
     it('should render secondary button when secondary is passed', () => {
-      wrapper.setProps({ triggerButtonkind: 'secondary' });
+      wrapper.setProps({ triggerButtonKind: 'secondary' });
       expect(wrapper.find('.bx--btn--secondary').length).toEqual(2);
     });
   });
