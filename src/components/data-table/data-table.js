@@ -2,14 +2,17 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 
-class DataTable extends mixin(createComponent, initComponentBySearch, eventedState) {
+class DataTable extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
    * Data Table
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @extends EventedState
+   * @extends Handles
    * @param {HTMLElement} element The root element of tables
    * @param {Object} [options] the... options
    * @param {string} [options.selectorInit] selector initialization
@@ -32,21 +35,25 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
 
     this.refreshRows();
 
-    this.element.addEventListener('click', evt => {
-      const eventElement = eventMatches(evt, this.options.eventTrigger);
-      if (eventElement) {
-        this._toggleState(eventElement, evt);
-      }
-    });
-
-    this.element.addEventListener('keydown', evt => {
-      if (evt.which === 13) {
+    this.manage(
+      on(this.element, 'click', evt => {
         const eventElement = eventMatches(evt, this.options.eventTrigger);
         if (eventElement) {
           this._toggleState(eventElement, evt);
         }
-      }
-    });
+      })
+    );
+
+    this.manage(
+      on(this.element, 'keydown', evt => {
+        if (evt.which === 13) {
+          const eventElement = eventMatches(evt, this.options.eventTrigger);
+          if (eventElement) {
+            this._toggleState(eventElement, evt);
+          }
+        }
+      })
+    );
   }
 
   /**

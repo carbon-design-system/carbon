@@ -1,6 +1,13 @@
 export default function(ToMix) {
   class CreateComponent extends ToMix {
     /**
+     * The component instances managed by this component.
+     * Releasing this component also releases the components in `this.children`.
+     * @type {Component[]}
+     */
+    children = [];
+
+    /**
      * Mix-in class to manage lifecycle of component.
      * The constructor sets up this component's effective options,
      * and registers this component't instance associated to an element.
@@ -20,13 +27,6 @@ export default function(ToMix) {
        * @type {Element}
        */
       this.element = element;
-
-      /**
-       * The component instances managed by this component.
-       * Releasing this component also releases the components in `this.children`.
-       * @type {Component[]}
-       */
-      this.children = [];
 
       /**
        * The component options.

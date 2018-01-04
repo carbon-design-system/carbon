@@ -3,15 +3,17 @@ import debounce from 'lodash.debounce';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
 let didWarnAboutDeprecation = false;
 
-class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
+class DetailPageHeader extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * The Detail Page Header.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a page header.
    * @param {Object} [options] The component options.
    */
@@ -21,7 +23,7 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
     this.previousScrollY = 0;
     // Debounce scroll event calls to handleScroll (default: 50)
     const debouncedScroll = debounce(this._handleScroll.bind(this), 25);
-    this.hScroll = on(this.element.ownerDocument.defaultView, 'scroll', debouncedScroll);
+    this.manage(on(this.element.ownerDocument.defaultView, 'scroll', debouncedScroll));
     if (__DEV__) {
       warning(
         didWarnAboutDeprecation,
@@ -57,14 +59,6 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch) {
     }
 
     this.previousScrollY = scrollPosition;
-  }
-
-  /**
-   * Cleans up stuffs specific to this widget.
-   */
-  release() {
-    this.hScroll.release();
-    super.release();
   }
 
   /**

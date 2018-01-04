@@ -2,23 +2,28 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
+import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
-class Notification extends mixin(createComponent, initComponentBySearch, eventedState) {
+class Notification extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
    * InlineNotification.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a InlineNotification.
    */
   constructor(element, options) {
     super(element, options);
     this.button = element.querySelector(this.options.selectorButton);
     if (this.button) {
-      this.button.addEventListener('click', evt => {
-        if (evt.currentTarget === this.button) {
-          this.remove();
-        }
-      });
+      this.manage(
+        on(this.button, 'click', evt => {
+          if (evt.currentTarget === this.button) {
+            this.remove();
+          }
+        })
+      );
     }
   }
 

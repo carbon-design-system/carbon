@@ -2,21 +2,26 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+import handles from '../../globals/js/mixins/handles';
 import FloatingMenu from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
+import on from '../../globals/js/misc/on';
 
-class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHideState) {
+class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHideState, handles) {
   /**
    * Tooltip.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    */
   constructor(element, options) {
     super(element, options);
     ['mouseover', 'mouseout', 'focus', 'blur', 'touchleave', 'touchcancel'].forEach(name => {
-      this.element.addEventListener(name, event => {
-        this._handleHover(event);
-      });
+      this.manage(
+        on(this.element, name, event => {
+          this._handleHover(event);
+        })
+      );
     });
   }
 

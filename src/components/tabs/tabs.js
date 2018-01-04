@@ -1,5 +1,6 @@
 import eventMatches from '../../globals/js/misc/event-matches';
 import ContentSwitcher from '../content-switcher/content-switcher';
+import on from '../../globals/js/misc/on';
 
 class Tab extends ContentSwitcher {
   /**
@@ -24,9 +25,11 @@ class Tab extends ContentSwitcher {
   constructor(element, options) {
     super(element, options);
 
-    this.element.addEventListener('keydown', event => {
-      this._handleKeyDown(event);
-    });
+    this.manage(
+      on(this.element, 'keydown', event => {
+        this._handleKeyDown(event);
+      })
+    );
 
     const selected = this.element.querySelector(this.options.selectorButtonSelected);
     if (selected) {
