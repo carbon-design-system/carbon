@@ -106,7 +106,7 @@
   },
   "dependencies": {
     "classnames": "2.2.5",
-    "flatpickr": "4.0.7",
+    "flatpickr": "4.2.0",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
     "warning": "3.0.0",
