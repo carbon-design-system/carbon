@@ -170,6 +170,10 @@ module.exports = function(config) {
       return reporters;
     })(),
 
+    mochaReporter: {
+      showDiff: true,
+    },
+
     coverageReporter: Object.assign(
       {
         dir: 'tests/coverage',
