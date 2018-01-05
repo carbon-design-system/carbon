@@ -8,11 +8,14 @@
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
 
-$list-box-width: rem(300px);
+$list-box-width: 100%;
 $list-box-height: rem(40px);
 $list-box-inline-height: rem(32px);
+$list-box-menu-width: rem(300px);
 
 @include exports('list-box') {
+  // The overall container element for a `list-box`. Has two variants,
+  // `disabled` and `inline`.
   .bx--list-box {
     position: relative;
     width: $list-box-width;
@@ -20,6 +23,7 @@ $list-box-inline-height: rem(32px);
     background-color: rgba($field-01, 0.1);
   }
 
+  // Disabled state for a `list-box`
   .bx--list-box--disabled {
     opacity: 0.5;
   }
@@ -30,49 +34,75 @@ $list-box-inline-height: rem(32px);
     cursor: not-allowed;
   }
 
-  .bx--list-box input[role='combobox'] {
+  // Inline variant for a `list-box`
+  .bx--list-box--inline {
     background-color: inherit;
-    font-weight: 600;
-    outline-offset: 0;
+    width: auto;
+    height: $list-box-inline-height;
   }
 
-  .bx--list-box input[role='combobox']::placeholder {
-    font-weight: 400;
+  .bx--list-box--inline .bx--list-box__label {
+    color: $brand-01;
   }
 
-  .bx--list-box--disabled input[role='combobox'] {
-    opacity: 1;
+  .bx--list-box--inline .bx--list-box__field {
+    padding: 0 0 0 rem(10px);
   }
 
-  .bx--list-box__menu {
-    @include box-shadow();
-
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: $list-box-height;
-    background-color: $ui-01;
-    max-height: rem(120px);
-    overflow-y: auto;
-    z-index: z('dropdown');
+  .bx--list-box--inline .bx--list-box__menu-icon {
+    position: static;
+    padding: 0 rem(10px) 0 rem(12px);
   }
 
-  .bx--list-box__menu-item {
+  .bx--list-box--inline > .bx--list-box__menu {
+    top: $list-box-inline-height;
+    width: $list-box-menu-width;
+  }
+
+  .bx--list-box--inline > .bx--list-box__field[aria-expanded='true'] ~ .bx--list-box__menu {
+    outline: 1px solid $brand-01;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .bx--list-box--inline > .bx--list-box__field[aria-expanded='true'] {
+    outline: none;
+  }
+
+  // The field we use for input, showing selection, etc.
+  .bx--list-box__field {
+    @include button-reset;
+    position: relative;
     display: flex;
     align-items: center;
-    font-size: rem(14px);
-    height: rem(40px);
+    width: 100%;
+    height: 100%;
     padding: 0 1rem;
     cursor: pointer;
+  }
+
+  .bx--list-box__field:focus,
+  .bx--list-box__field[aria-expanded='true'] {
+    outline: 1px solid $brand-01;
+  }
+
+  .bx--list-box__field[disabled] {
+    outline: none;
+  }
+
+  .bx--list-box__field[aria-expanded='true'] ~ .bx--list-box__menu {
+    box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01, 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  // Label for a `list-box__field`
+  .bx--list-box__label {
+    @include typescale('zeta');
+
+    color: $text-01;
+    font-weight: 600;
     user-select: none;
   }
 
-  .bx--list-box__menu-item:hover,
-  .bx--list-box__menu-item--highlighted {
-    background-color: $brand-01;
-    color: white;
-  }
-
+  // Menu status inside of a `list-box__field`
   .bx--list-box__menu-icon {
     display: inline-block;
     position: absolute;
@@ -94,6 +124,7 @@ $list-box-inline-height: rem(32px);
     transform: rotate(180deg);
   }
 
+  // Selection indicator for a `list-box__field`
   .bx--list-box__selection {
     display: inline-block;
     position: absolute;
@@ -116,7 +147,10 @@ $list-box-inline-height: rem(32px);
     outline: 1px solid $brand-01;
   }
 
+  // Modifier for a selection to show that multiple selections have been made
   .bx--list-box__selection--multi {
+    @include typescale('omega');
+
     position: static;
     display: flex;
     align-items: center;
@@ -125,7 +159,6 @@ $list-box-inline-height: rem(32px);
     background-color: $brand-01;
     height: rem(18px);
     color: white;
-    font-size: 12px;
     line-height: 0;
     padding: rem(5px);
     margin-right: rem(10px);
@@ -145,39 +178,30 @@ $list-box-inline-height: rem(32px);
     outline: none;
   }
 
-  .bx--list-box__field {
-    @include button-reset;
-    position: relative;
+  // Descendant of a `list-box` that displays a list of options to select
+  .bx--list-box__menu {
+    @include box-shadow();
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: $list-box-height;
+    width: $list-box-width;
+    background-color: $ui-01;
+    max-height: rem(120px);
+    overflow-y: auto;
+    z-index: z('dropdown');
+  }
+
+  // Descendant of a `list-box__menu` that represents a selection for a control
+  .bx--list-box__menu-item {
+    @include typescale('zeta');
+
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    height: rem(40px);
     padding: 0 1rem;
     cursor: pointer;
-  }
-
-  .bx--list-box__field:focus,
-  .bx--list-box__field[aria-expanded='true'] {
-    outline: 1px solid $brand-01;
-  }
-
-  .bx--list-box__field[disabled] {
-    outline: none;
-  }
-
-  .bx--list-box__field[aria-expanded='true'] ~ .bx--list-box__menu {
-    box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01,
-      0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .bx--combo-box > .bx--list-box__field {
-    padding: 0;
-  }
-
-  .bx--list-box__label {
-    color: $text-01;
-    font-size: 14px;
-    font-weight: 600;
     user-select: none;
   }
 
@@ -187,56 +211,27 @@ $list-box-inline-height: rem(32px);
     color: $text-01;
   }
 
-  .bx--list-box--inline {
-    background-color: inherit;
-    width: auto;
-    height: $list-box-inline-height;
-  }
+  // Tweaks for descendants
 
-  .bx--list-box--inline .bx--list-box__label {
-    color: $brand-01;
-  }
-
-  .bx--list-box--inline .bx--list-box__field {
-    padding: 0 0 0 rem(10px);
-  }
-
-  .bx--list-box--inline .bx--list-box__menu-icon {
-    position: static;
-    padding: 0 rem(10px) 0 rem(12px);
-  }
-
-  .bx--list-box--inline > .bx--list-box__menu {
-    top: $list-box-inline-height;
-    width: $list-box-width;
-  }
-
-  .bx--list-box--inline
-    > .bx--list-box__field[aria-expanded='true']
-    ~ .bx--list-box__menu {
-    outline: 1px solid $brand-01;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .bx--list-box--inline > .bx--list-box__field[aria-expanded='true'] {
-    outline: none;
-  }
-
-  .bx--dropdown-v2.bx--list-box--inline .bx--list-box__selection {
-    position: static;
-    padding: 0 rem(10px);
-  }
-
+  // In multi-select scenarios, we need to target checkbox inputs
   .bx--list-box__menu-item > .bx--form-item.bx--checkbox-wrapper {
     margin: 0;
   }
 
-  .bx--multi-select.bx--combo-box > .bx--list-box__field {
-    padding: 0 1rem;
+  // When handling input, we need to target nodes that specifically opt-in to
+  // the `combobox` role in order to make sure the text input is styled
+  // correctly.
+  .bx--list-box input[role='combobox'] {
+    background-color: inherit;
+    font-weight: 600;
+    outline-offset: 0;
   }
 
-  .bx--multi-select.bx--combo-box input[role='combobox'] {
-    padding: 0;
-    outline: none;
+  .bx--list-box input[role='combobox']::placeholder {
+    font-weight: 400;
+  }
+
+  .bx--list-box--disabled input[role='combobox'] {
+    opacity: 1;
   }
 }
