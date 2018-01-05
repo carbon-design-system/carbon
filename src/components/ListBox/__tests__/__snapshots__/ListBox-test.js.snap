@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBox should render 1`] = `
+<ListBox
+  className="bx--list-box__container"
+  disabled={false}
+  innerRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <div
+            class="bx--list-box__container bx--list-box"
+          >
+            <div
+              class="bx--list-box__field"
+              role="button"
+              tabindex="0"
+            />
+          </div>,
+        ],
+      ],
+    }
+  }
+  type="default"
+>
+  <div
+    className="bx--list-box__container bx--list-box"
+  >
+    <ListBoxField>
+      <div
+        className="bx--list-box__field"
+        role="button"
+        tabIndex="0"
+      />
+    </ListBoxField>
+  </div>
+</ListBox>
+`;

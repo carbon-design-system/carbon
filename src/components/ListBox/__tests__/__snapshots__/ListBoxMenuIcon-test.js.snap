@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBoxMenuIcon should render 1`] = `
+<ListBoxMenuIcon
+  isOpen={true}
+  translateWithId={[Function]}
+>
+  <div
+    className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+  >
+    <Icon
+      description="Close menu"
+      fillRule="evenodd"
+      name="caret--down"
+      role="img"
+    >
+      <svg
+        aria-label="Close menu"
+        className={undefined}
+        fill={undefined}
+        fillRule="evenodd"
+        height="5"
+        name="caret--down"
+        role="img"
+        style={undefined}
+        viewBox="0 0 10 5"
+        width="10"
+      >
+        <title>
+          Close menu
+        </title>
+        <path
+          d="M10 0L5 5 0 0z"
+          key="key0"
+        />
+      </svg>
+    </Icon>
+  </div>
+</ListBoxMenuIcon>
+`;
+
+exports[`ListBoxMenuIcon should render 2`] = `
+<ListBoxMenuIcon
+  isOpen={false}
+  translateWithId={[Function]}
+>
+  <div
+    className="bx--list-box__menu-icon"
+  >
+    <Icon
+      description="Open menu"
+      fillRule="evenodd"
+      name="caret--down"
+      role="img"
+    >
+      <svg
+        aria-label="Open menu"
+        className={undefined}
+        fill={undefined}
+        fillRule="evenodd"
+        height="5"
+        name="caret--down"
+        role="img"
+        style={undefined}
+        viewBox="0 0 10 5"
+        width="10"
+      >
+        <title>
+          Open menu
+        </title>
+        <path
+          d="M10 0L5 5 0 0z"
+          key="key0"
+        />
+      </svg>
+    </Icon>
+  </div>
+</ListBoxMenuIcon>
+`;

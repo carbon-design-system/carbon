@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBoxMenu should render 1`] = `
+<ListBoxMenu>
+  <div
+    className="bx--list-box__menu"
+  >
+    <ListBoxMenuItem
+      isActive={false}
+      isHighlighted={false}
+    >
+      <div
+        className="bx--list-box__menu-item"
+      >
+        Hello
+      </div>
+    </ListBoxMenuItem>
+  </div>
+</ListBoxMenu>
+`;
