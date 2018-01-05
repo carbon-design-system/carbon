@@ -4,7 +4,7 @@ import DemoSwitcher from './js/demo-switcher';
 
 import eventMatches from '../src/globals/js/misc/event-matches';
 
-export * from '../src/index';
+export * from '../src/bundle';
 
 function switchTo(name) {
   const selectedLeftNavItem = document.querySelector(`[data-demo-name=${name}].left-nav-list__item`);
