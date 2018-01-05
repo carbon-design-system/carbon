@@ -61,7 +61,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   _sortToggle = detail => {
     const { element, previousValue } = detail;
 
-    this.tableHeaders.forEach(header => {
+    [...this.tableHeaders].forEach(header => {
       const sortEl = header.querySelector('.bx--table-sort-v2');
 
       if (sortEl !== null && sortEl !== element) {
