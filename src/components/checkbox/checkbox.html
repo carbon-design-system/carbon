@@ -2,26 +2,27 @@
   <legend class="bx--label">Checkbox heading</legend>
   <!-- input + label -->
   <div class="bx--form-item bx--checkbox-wrapper">
-    <input id="bx--checkbox-red" class="bx--checkbox" type="checkbox" value="red" name="checkbox">
-    <label for="bx--checkbox-red" class="bx--checkbox-label">
-      <span class="bx--checkbox-appearance">
-        <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
-          <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
-        </svg>
-      </span>
-      Checkbox label 1
-    </label>
+    <input id="bx--checkbox-new" class="bx--checkbox" type="checkbox" value="new" name="checkbox">
+    <label for="bx--checkbox-new" class="bx--checkbox-label">Checkbox label</label>
   </div>
-  <!-- label > input -->
-  <div class="bx--form-item bx--checkbox-wrapper">
-    <label for="bx--checkbox-blue" class="bx--checkbox-label">
-      <input id="bx--checkbox-blue" class="bx--checkbox" type="checkbox" value="yellow" name="checkbox">
-      <span class="bx--checkbox-appearance">
-        <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
-          <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
-        </svg>
-      </span>
-      <span class="bx--checkbox-label-text">Checkbox label 2</span>
-    </label>
-  </div>
+    <!-- label > input -->
+    <div class="bx--form-item bx--checkbox-wrapper">
+      <label for="bx--checkbox-new2" class="bx--checkbox-label">
+        <input id="bx--checkbox-new2" class="bx--checkbox" type="checkbox" value="yellow" name="checkbox" checked>
+        Checkbox label 2
+      </label>
+    </div>
+    <!-- input + label indeterminate -->
+    <div class="bx--form-item bx--checkbox-wrapper">
+      <input id="bx--checkbox-ind" class="bx--checkbox" type="checkbox" value="new" name="checkbox" aria-checked="mixed">
+      <label for="bx--checkbox-ind" class="bx--checkbox-label">Checkbox label indeterminate</label>
+    </div>
+
+    <div class="bx--form-item bx--checkbox-wrapper">
+      <label for="bx--checkbox-ind2" class="bx--checkbox-label" data-contained-checkbox-state="mixed">
+        <input id="bx--checkbox-ind2" class="bx--checkbox" type="checkbox" value="yellow" name="checkbox" aria-checked="mixed">
+        Checkbox label 2 indeterminate
+      </label>
+    </div>
+
 </fieldset>

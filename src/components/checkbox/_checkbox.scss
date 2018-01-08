@@ -30,7 +30,74 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    position: relative;
+    padding-left: rem(25px);
   }
+
+  .bx--checkbox-label::before {
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -2px;
+    height: rem(18px);
+    width: rem(18px);
+    border: $checkbox-border-width solid $ui-05;
+    background-color: $ui-01;
+  }
+
+  .bx--checkbox-label::after {
+    content: '';
+    width: 10px;
+    height: 5px;
+    background: none;
+    border-left: 2px solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
+    transform: scale(0) rotate(-45deg);
+    position: absolute;
+    top: 2px;
+    left: 3px;
+  }
+
+  .bx--checkbox:checked + .bx--checkbox-label::before,
+  .bx--checkbox:indeterminate + .bx--checkbox-label::before,
+  .bx--checkbox-label[data-contained-checkbox-state='true']::before,
+  .bx--checkbox-label[data-contained-checkbox-state='mixed']::before {
+    background-color: $brand-01;
+    border-color: $brand-01;
+  }
+
+  .bx--checkbox:checked + .bx--checkbox-label::after,
+  .bx--checkbox-label[data-contained-checkbox-state='true']::after {
+    opacity: 1;
+    transform: scale(1) rotate(-45deg);
+  }
+
+  .bx--checkbox:not(:checked) + .bx--checkbox-label::after {
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+  }
+
+  .bx--checkbox:focus + .bx--checkbox-label::before,
+  .bx--checkbox-label__focus::before {
+    @include focus-outline('blurred');
+  }
+
+  .bx--checkbox:indeterminate + .bx--checkbox-label::after,
+  .bx--checkbox-label[data-contained-checkbox-state='mixed']::after {
+    transform: scale(1) rotate(0deg);
+    border-left: 0 solid $inverse-01;
+    border-bottom: 2px solid $inverse-01;
+    opacity: 1;
+    width: rem(12px);
+    top: rem(1px);
+  }
+
+  .bx--checkbox-appearance {
+    @include hidden;
+  }
+
+  //current checkbox stuff
 
   .bx--checkbox-appearance {
     display: inline-block;

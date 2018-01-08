@@ -1,4 +1,3 @@
-import initCheckbox from '../../components/checkbox/checkbox';
 import * as components from './components';
 
 const forEach = Array.prototype.forEach;
@@ -50,7 +49,6 @@ export default function(target = document, options = {}) {
     .filter(component => typeof component.init === 'function');
 
   const handles = componentClasses.map(Clz => Clz.init(target, options)).filter(Boolean);
-  handles.push(initCheckbox());
 
   const componentClassesForWatchInit = componentClasses.filter(Clz => !Clz.forLazyInit);
 
