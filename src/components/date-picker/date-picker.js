@@ -2,6 +2,8 @@ import Flatpickr from 'flatpickr';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
 // `this.options` create-component mix-in creates prototype chain
 // so that `options` given in constructor argument wins over the one defined in static `options` property
@@ -26,28 +28,33 @@ Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
   }
 });
 
-class DatePicker extends mixin(createComponent, initComponentBySearch) {
+class DatePicker extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * DatePicker.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as an date picker.
    */
   constructor(element, options) {
     super(element, options);
     const type = this.element.getAttribute(this.options.attribType);
     this.calendar = this._initDatePicker(type);
-    this.element.addEventListener('keydown', e => {
-      if (e.which === 40) {
-        this.calendar.calendarContainer.focus();
-      }
-    });
-    this.calendar.calendarContainer.addEventListener('keydown', e => {
-      if (e.which === 9 && type === 'range') {
-        this._updateClassNames(this.calendar);
-        this.element.querySelector(this.options.selectorDatePickerInputFrom).focus();
-      }
-    });
+    this.manage(
+      on(this.element, 'keydown', e => {
+        if (e.which === 40) {
+          this.calendar.calendarContainer.focus();
+        }
+      })
+    );
+    this.manage(
+      on(this.calendar.calendarContainer, 'keydown', e => {
+        if (e.which === 9 && type === 'range') {
+          this._updateClassNames(this.calendar);
+          this.element.querySelector(this.options.selectorDatePickerInputFrom).focus();
+        }
+      })
+    );
   }
 
   _initDatePicker = type => {
@@ -96,16 +103,20 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
       })
     );
     if (type === 'range') {
-      this.element.querySelector(this.options.selectorDatePickerInputTo).addEventListener('click', () => {
-        this.element.querySelector(this.options.selectorDatePickerInputTo).focus();
-        calendar.open();
-        this._updateClassNames(calendar);
-      });
+      this.manage(
+        on(this.element.querySelector(this.options.selectorDatePickerInputTo), 'click', () => {
+          this.element.querySelector(this.options.selectorDatePickerInputTo).focus();
+          calendar.open();
+          this._updateClassNames(calendar);
+        })
+      );
       this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInputTo));
     }
-    this.element.querySelector(this.options.selectorDatePickerIcon).addEventListener('click', () => {
-      calendar.open();
-    });
+    this.manage(
+      on(this.element.querySelector(this.options.selectorDatePickerIcon), 'click', () => {
+        calendar.open();
+      })
+    );
     this._updateClassNames(calendar);
     this._addInputLogic(date);
     return calendar;
@@ -127,13 +138,15 @@ class DatePicker extends mixin(createComponent, initComponentBySearch) {
 
   _addInputLogic = input => {
     const inputField = input;
-    inputField.addEventListener('change', () => {
-      const inputDate = this.calendar.parseDate(inputField.value);
-      if (!isNaN(inputDate.valueOf())) {
-        this.calendar.setDate(inputDate);
-      }
-      this._updateClassNames(this.calendar);
-    });
+    this.manage(
+      on(inputField, 'change', () => {
+        const inputDate = this.calendar.parseDate(inputField.value);
+        if (!isNaN(inputDate.valueOf())) {
+          this.calendar.setDate(inputDate);
+        }
+        this._updateClassNames(this.calendar);
+      })
+    );
   };
 
   _updateClassNames = calendar => {

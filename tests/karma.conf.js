@@ -61,7 +61,8 @@ module.exports = function(config) {
       const list = ensureArray(
         cloptions.files || [
           'node_modules/core-js/modules/es6.weak-map.js', // For generatoring coverage report for untested files
-          'src/{components,globals}/**/*.js', // For generatoring coverage report for untested files
+          'src/components/**/*.js', // For generatoring coverage report for untested files
+          'src/globals/js/{misc,mixins}/**/*.js', // For generatoring coverage report for untested files
           'tests/spec/**/*.js',
         ]
       );
@@ -139,6 +140,11 @@ module.exports = function(config) {
                 ]
           ),
         }),
+        babel({
+          babelrc: false,
+          include: 'src/**',
+          plugins: ['rewire'],
+        }),
         replace({
           'process.env.NODE_ENV': JSON.stringify('development'),
         }),
@@ -169,6 +175,10 @@ module.exports = function(config) {
       }
       return reporters;
     })(),
+
+    mochaReporter: {
+      showDiff: true,
+    },
 
     coverageReporter: Object.assign(
       {

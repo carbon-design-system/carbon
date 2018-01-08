@@ -2,15 +2,17 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
+import handles from '../../globals/js/mixins/handles';
 import FloatingMenu from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
 
-class OverflowMenu extends mixin(createComponent, initComponentBySearch, eventedShowHideState) {
+class OverflowMenu extends mixin(createComponent, initComponentBySearch, eventedShowHideState, handles) {
   /**
    * Overflow menu.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a modal dialog.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorOptionMenu] The CSS selector to find the menu.
@@ -22,22 +24,16 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    */
   constructor(element, options) {
     super(element, options);
-
-    /**
-     * The handle to release click event listener on document object.
-     * @member {Handle}
-     */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', event => {
-      this._handleDocumentClick(event);
-    });
-
-    /**
-     * The handle to release keypress event listener on document object.
-     * @member {Handle}
-     */
-    this.hDocumentKeyPress = on(this.element.ownerDocument, 'keypress', event => {
-      this._handleKeyPress(event);
-    });
+    this.manage(
+      on(this.element.ownerDocument, 'click', event => {
+        this._handleDocumentClick(event);
+      })
+    );
+    this.manage(
+      on(this.element.ownerDocument, 'keypress', event => {
+        this._handleKeyPress(event);
+      })
+    );
   }
 
   /**
@@ -114,16 +110,6 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
 
       this.changeState(state, getLaunchingDetails(event));
     }
-  }
-
-  release() {
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    if (this.hDocumentKeyPress) {
-      this.hDocumentKeyPress = this.hDocumentKeyPress.release();
-    }
-    super.release();
   }
 
   static components = new WeakMap();

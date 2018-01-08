@@ -72,6 +72,14 @@ $css--helpers: true;
     &:focus {
       @include focus-outline('border');
     }
+
+    &:disabled:hover {
+      cursor: default;
+      
+      .bx--pagination__button-icon {
+        fill: $ui-05;
+      }
+    }
   }
 
   .bx--pagination__button--backward {

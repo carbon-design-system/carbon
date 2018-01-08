@@ -1,6 +1,8 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
-import InitComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
 const stateChangeTypes = {
   true: 'true',
@@ -8,19 +10,32 @@ const stateChangeTypes = {
   mixed: 'mixed',
 };
 
-class Checkbox extends mixin(createComponent, InitComponentBySearch) {
+class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Checkbox UI.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a checkbox UI.
    */
 
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', () => this._handleClick());
-    this.element.addEventListener('focus', () => this._handleFocus());
-    this.element.addEventListener('blur', () => this._handleBlur());
+    this.manage(
+      on(this.element, 'click', event => {
+        this._handleClick();
+      })
+    );
+    this.manage(
+      on(this.element, 'focus', event => {
+        this._handleFocus();
+      })
+    );
+    this.manage(
+      on(this.element, 'blur', event => {
+        this._handleBlur();
+      })
+    );
 
     this._indeterminateCheckbox();
     this._initCheckbox();

@@ -1,14 +1,16 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class LeftNav extends mixin(createComponent, initComponentBySearch) {
+class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Left Navigation.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a left navigation.
    * @param {Object} [options] The component options
    * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
@@ -39,9 +41,11 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     this.hookOpenActions();
     this.hookListSectionEvents();
     this.hookListItemsEvents();
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
-      this.handleDocumentClick(evt);
-    });
+    this.manage(
+      on(this.element.ownerDocument, 'click', evt => {
+        this.handleDocumentClick(evt);
+      })
+    );
   }
 
   /**
@@ -140,37 +144,47 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
     const closeBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleClose);
 
-    openBtn.addEventListener('click', () => {
-      this.element.tabIndex = '0';
-      this.toggleMenu();
-    });
-
-    openBtn.addEventListener('keydown', evt => {
-      if (evt.which === 13) {
+    this.manage(
+      on(openBtn, 'click', () => {
         this.element.tabIndex = '0';
         this.toggleMenu();
-      }
-    });
+      })
+    );
+
+    this.manage(
+      on(openBtn, 'keydown', evt => {
+        if (evt.which === 13) {
+          this.element.tabIndex = '0';
+          this.toggleMenu();
+        }
+      })
+    );
 
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        this.element.tabIndex = '-1';
-        this.closeMenu();
-      });
-
-      closeBtn.addEventListener('keydown', evt => {
-        if (evt.which === 13) {
+      this.manage(
+        on(closeBtn, 'click', () => {
           this.element.tabIndex = '-1';
           this.closeMenu();
-        }
-      });
+        })
+      );
+
+      this.manage(
+        on(closeBtn, 'keydown', evt => {
+          if (evt.which === 13) {
+            this.element.tabIndex = '-1';
+            this.closeMenu();
+          }
+        })
+      );
     }
 
-    this.element.ownerDocument.addEventListener('keydown', evt => {
-      if (evt.which === 27 && this.element.classList.contains(this.options.classActiveLeftNav)) {
-        this.closeMenu();
-      }
-    });
+    this.manage(
+      on(this.element.ownerDocument, 'keydown', evt => {
+        if (evt.which === 27 && this.element.classList.contains(this.options.classActiveLeftNav)) {
+          this.closeMenu();
+        }
+      })
+    );
   }
 
   /**
@@ -178,16 +192,20 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    */
   hookListSectionEvents() {
     const leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
-    leftNavSections.addEventListener('click', evt => {
-      this.handleSectionItemClick(evt, leftNavSections);
-    });
-
-    leftNavSections.addEventListener('keydown', evt => {
-      if (evt.which === 13) {
+    this.manage(
+      on(leftNavSections, 'click', evt => {
         this.handleSectionItemClick(evt, leftNavSections);
-        this.element.querySelector(this.options.selectorLeftNavCurrentSectionTitle).focus();
-      }
-    });
+      })
+    );
+
+    this.manage(
+      on(leftNavSections, 'keydown', evt => {
+        if (evt.which === 13) {
+          this.handleSectionItemClick(evt, leftNavSections);
+          this.element.querySelector(this.options.selectorLeftNavCurrentSectionTitle).focus();
+        }
+      })
+    );
   }
 
   /**
@@ -196,76 +214,84 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
   hookListItemsEvents() {
     const leftNavList = [...this.element.querySelectorAll(this.options.selectorLeftNavList)];
     leftNavList.forEach(list => {
-      list.addEventListener('click', evt => {
-        const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
-        if (leftNavItem) {
-          const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
-          const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
-          const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
-          if (flyoutItem) {
-            this.addActiveListItem(flyoutItem);
-          } else if (childItem) {
-            if (childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-              const flyoutMenu = childItem.querySelector(this.options.selectorLeftNavFlyoutMenu);
-              flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
-            } else {
-              this.addActiveListItem(childItem);
-            }
-          } else if (hasChildren) {
-            this.handleNestedListClick(leftNavItem);
-          } else {
-            this.addActiveListItem(leftNavItem);
-          }
-        }
-      });
-      list.addEventListener('keydown', evt => {
-        if (evt.which === 13) {
+      this.manage(
+        on(list, 'click', evt => {
           const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
           if (leftNavItem) {
             const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
             const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
             const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
-            const hasLinkItem = !(leftNavItem.querySelector(this.options.selectorLeftNavListItemLink) === undefined);
             if (flyoutItem) {
               this.addActiveListItem(flyoutItem);
             } else if (childItem) {
-              if (!childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-                this.addActiveListItem(childItem);
+              if (childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+                const flyoutMenu = childItem.querySelector(this.options.selectorLeftNavFlyoutMenu);
+                flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
               } else {
-                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
-                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${childItem.offsetTop -
-                  this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
-                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${childItem.offsetLeft +
-                  Math.round(childItem.offsetWidth)}px`;
+                this.addActiveListItem(childItem);
               }
             } else if (hasChildren) {
               this.handleNestedListClick(leftNavItem);
-            } else if (hasLinkItem) {
-              const link = leftNavItem.querySelector(this.options.selectorLeftNavListItemLink);
-              link.click();
             } else {
               this.addActiveListItem(leftNavItem);
             }
           }
-        }
-      });
+        })
+      );
+      this.manage(
+        on(list, 'keydown', evt => {
+          if (evt.which === 13) {
+            const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+            if (leftNavItem) {
+              const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
+              const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+              const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
+              const hasLinkItem = !(leftNavItem.querySelector(this.options.selectorLeftNavListItemLink) === undefined);
+              if (flyoutItem) {
+                this.addActiveListItem(flyoutItem);
+              } else if (childItem) {
+                if (!childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+                  this.addActiveListItem(childItem);
+                } else {
+                  childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
+                  childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${childItem.offsetTop -
+                    this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
+                  childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${childItem.offsetLeft +
+                    Math.round(childItem.offsetWidth)}px`;
+                }
+              } else if (hasChildren) {
+                this.handleNestedListClick(leftNavItem);
+              } else if (hasLinkItem) {
+                const link = leftNavItem.querySelector(this.options.selectorLeftNavListItemLink);
+                link.click();
+              } else {
+                this.addActiveListItem(leftNavItem);
+              }
+            }
+          }
+        })
+      );
     });
     const flyouts = [...this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)];
     flyouts.forEach(flyout => {
-      flyout.addEventListener('mouseenter', () => {
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
-        // eslint-disable-next-line no-param-reassign
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${flyout.offsetTop -
-          this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
-        // eslint-disable-next-line no-param-reassign
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${flyout.offsetLeft +
-          Math.round(flyout.offsetWidth)}px`;
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.toggle(this.options.classFlyoutDisplayed);
-      });
-      flyout.addEventListener('mouseleave', () => {
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'true');
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
-      });
+      this.manage(
+        on(flyout, 'mouseenter', () => {
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
+          // eslint-disable-next-line no-param-reassign
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${flyout.offsetTop -
+            this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
+          // eslint-disable-next-line no-param-reassign
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${flyout.offsetLeft +
+            Math.round(flyout.offsetWidth)}px`;
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.toggle(this.options.classFlyoutDisplayed);
+        })
+      );
+      this.manage(
+        on(flyout, 'mouseleave', () => {
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'true');
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
+        })
+      );
     });
   }
 
@@ -422,13 +448,6 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
         this.leftNavSectionActive = false;
       }, 450); // Wait for nav items to animate
     }
-  }
-
-  release() {
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    super.release();
   }
 
   /**

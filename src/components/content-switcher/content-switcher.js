@@ -2,14 +2,17 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 
-class ContentSwitcher extends mixin(createComponent, initComponentBySearch, eventedState) {
+class ContentSwitcher extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
    * Set of content switcher buttons.
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @extends EventedState
+   * @extends Handles
    * @param {HTMLElement} element The element working as a set of content switcher buttons.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorButton] The CSS selector to find switcher buttons.
@@ -22,9 +25,11 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', event => {
-      this._handleClick(event);
-    });
+    this.manage(
+      on(this.element, 'click', event => {
+        this._handleClick(event);
+      })
+    );
   }
 
   /**

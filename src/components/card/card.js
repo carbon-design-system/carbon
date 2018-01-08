@@ -2,24 +2,29 @@ import warning from 'warning';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 
 let didWarnAboutDeprecation = false;
 
-class Card extends mixin(createComponent, initComponentBySearch) {
+class Card extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * The container for cards.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a container.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorCard] The CSS selector to find cards.
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('keydown', event => {
-      this._cardKeyPress(event);
-    });
+    this.manage(
+      on(this.element, 'keydown', event => {
+        this._cardKeyPress(event);
+      })
+    );
     if (__DEV__) {
       warning(
         didWarnAboutDeprecation,

@@ -1,5 +1,5 @@
 import { delay } from 'bluebird'; // For testing on browsers not supporting Promise
-import { componentClasses, settings } from '../../src/index';
+import settings from '../../src/globals/js/settings';
 import mixin from '../../src/globals/js/misc/mixin';
 import createComponent from '../../src/globals/js/mixins/create-component';
 import initComponentBySearch from '../../src/globals/js/mixins/init-component-by-search';
@@ -47,7 +47,7 @@ describe('Test watch mode', function() {
   const spyInitComponentByLauncher = sinon.spy(ClassInitedByLauncher, 'init');
   const spyReleaseComponentByLauncher = sinon.spy(ClassInitedByLauncher.prototype, 'release');
 
-  componentClasses.splice(0, componentClasses.length, ClassInitedBySearch, ClassInitedByEvent, ClassInitedByLauncher);
+  const components = { ClassInitedBySearch, ClassInitedByEvent, ClassInitedByLauncher };
 
   describe('Handling regular components', function() {
     let lastTarget;
@@ -75,104 +75,118 @@ describe('Test watch mode', function() {
     });
 
     it('Should instantiate the components', async function() {
-      handle = watch(document, watchOptions);
+      await watch.__with__({ components })(async () => {
+        handle = watch(document, watchOptions);
 
-      spyInitComponentBySearch.reset();
+        spyInitComponentBySearch.reset();
 
-      expect(lastTarget, 'Watch target').to.equal(document);
-      expect(spyInitComponentByEvent, 'Call count of ClassInitedByEvent.init()').to.have.been.calledOnce;
-      expect(spyInitComponentByEvent, 'Args of ClassInitedByEvent.init()').to.have.been.calledWith(document, watchOptions);
-      expect(spyInitComponentByLauncher, 'Call count of ClassInitedByLauncher.init()').to.have.been.calledOnce;
-      expect(spyInitComponentByLauncher, 'Args of ClassInitedByLauncher.init()').to.have.been.calledWith(document, watchOptions);
+        expect(lastTarget, 'Watch target').to.equal(document);
+        expect(spyInitComponentByEvent, 'Call count of ClassInitedByEvent.init()').to.have.been.calledOnce;
+        expect(spyInitComponentByEvent, 'Args of ClassInitedByEvent.init()').to.have.been.calledWith(document, watchOptions);
+        expect(spyInitComponentByLauncher, 'Call count of ClassInitedByLauncher.init()').to.have.been.calledOnce;
+        expect(spyInitComponentByLauncher, 'Args of ClassInitedByLauncher.init()').to.have.been.calledWith(
+          document,
+          watchOptions
+        );
 
-      element = document.createElement('div');
-      element.dataset.myComponentInitedBySearch = '';
-      document.body.appendChild(element);
+        element = document.createElement('div');
+        element.dataset.myComponentInitedBySearch = '';
+        document.body.appendChild(element);
 
-      await delay(0); // Wait for mutation observer to deliver records
+        await delay(0); // Wait for mutation observer to deliver records
 
-      expect(spyInitComponentBySearch, 'Call count of ClassInitedBySearch.init()').to.have.been.calledOnce;
-      expect(spyInitComponentBySearch.args[0][1], 'Option arg of ClassInitedBySearch.init()').to.deep.equal(watchOptions);
+        expect(spyInitComponentBySearch, 'Call count of ClassInitedBySearch.init()').to.have.been.calledOnce;
+        expect(spyInitComponentBySearch.args[0][1], 'Option arg of ClassInitedBySearch.init()').to.deep.equal(watchOptions);
+      });
     });
 
     it('Should release the components', async function() {
-      handle = watch();
+      await watch.__with__({ components })(async () => {
+        handle = watch();
 
-      element = document.createElement('div');
-      document.body.appendChild(element);
+        element = document.createElement('div');
+        document.body.appendChild(element);
 
-      const elementInitedBySearch = document.createElement('div');
-      elementInitedBySearch.dataset.myComponentInitedBySearch = '';
-      element.appendChild(elementInitedBySearch);
+        const elementInitedBySearch = document.createElement('div');
+        elementInitedBySearch.dataset.myComponentInitedBySearch = '';
+        element.appendChild(elementInitedBySearch);
 
-      const elementInitedByEvent = document.createElement('div');
-      elementInitedByEvent.dataset.myComponentInitedByEvent = '';
-      element.appendChild(elementInitedByEvent);
+        const elementInitedByEvent = document.createElement('div');
+        elementInitedByEvent.dataset.myComponentInitedByEvent = '';
+        element.appendChild(elementInitedByEvent);
 
-      elementInitedByEvent.dispatchEvent(
-        new CustomEvent('instantiating-event', {
-          bubbles: true,
-          cancelable: true,
-        })
-      );
+        elementInitedByEvent.dispatchEvent(
+          new CustomEvent('instantiating-event', {
+            bubbles: true,
+            cancelable: true,
+          })
+        );
 
-      const elementInitedByLauncher = document.createElement('div');
-      elementInitedByLauncher.dataset.myComponentInitedByLauncher = '';
-      element.appendChild(elementInitedByLauncher);
+        const elementInitedByLauncher = document.createElement('div');
+        elementInitedByLauncher.dataset.myComponentInitedByLauncher = '';
+        element.appendChild(elementInitedByLauncher);
 
-      const launcherButton = document.createElement('button');
-      launcherButton.dataset.initTarget = '[data-my-component-inited-by-launcher]';
-      element.appendChild(launcherButton);
+        const launcherButton = document.createElement('button');
+        launcherButton.dataset.initTarget = '[data-my-component-inited-by-launcher]';
+        element.appendChild(launcherButton);
 
-      launcherButton.dispatchEvent(new CustomEvent('launching-event', { bubbles: true, cancelable: true }));
+        launcherButton.dispatchEvent(new CustomEvent('launching-event', { bubbles: true, cancelable: true }));
 
-      await delay(0); // Wait for mutation observer to deliver records
+        await delay(0); // Wait for mutation observer to deliver records
 
-      document.body.removeChild(element);
+        document.body.removeChild(element);
 
-      await delay(0); // Wait for mutation observer to deliver records
+        await delay(0); // Wait for mutation observer to deliver records
 
-      expect(spyReleaseComponentBySearch).to.have.been.calledOnce;
-      expect(spyReleaseComponentByEvent).to.have.been.calledOnce;
-      expect(spyReleaseComponentByLauncher).to.have.been.calledOnce;
+        expect(spyReleaseComponentBySearch).to.have.been.calledOnce;
+        expect(spyReleaseComponentByEvent).to.have.been.calledOnce;
+        expect(spyReleaseComponentByLauncher).to.have.been.calledOnce;
+      });
     });
 
     it('Should release the components even if the removed node is of the component', async function() {
-      handle = watch();
+      await watch.__with__({ components })(async () => {
+        handle = watch();
 
-      element = document.createElement('div');
-      element.dataset.myComponentInitedBySearch = '';
-      document.body.appendChild(element);
+        element = document.createElement('div');
+        element.dataset.myComponentInitedBySearch = '';
+        document.body.appendChild(element);
 
-      await delay(0); // Wait for mutation observer to deliver records
+        await delay(0); // Wait for mutation observer to deliver records
 
-      document.body.removeChild(element);
+        document.body.removeChild(element);
 
-      await delay(0); // Wait for mutation observer to deliver records
+        await delay(0); // Wait for mutation observer to deliver records
 
-      expect(spyReleaseComponentBySearch).to.have.been.calledOnce;
+        expect(spyReleaseComponentBySearch).to.have.been.calledOnce;
+      });
     });
 
     it('Should stop instantiating components once the handle is released', async function() {
-      handle = watch(document, watchOptions);
+      await watch.__with__({ components })(async () => {
+        handle = watch(document, watchOptions);
 
-      spyInitComponentBySearch.reset();
+        spyInitComponentBySearch.reset();
 
-      expect(lastTarget, 'Watch target').to.equal(document);
-      expect(spyInitComponentByEvent, 'Call count of ClassInitedByEvent.init()').to.have.been.calledOnce;
-      expect(spyInitComponentByEvent, 'Args of ClassInitedByEvent.init()').to.have.been.calledWith(document, watchOptions);
-      expect(spyInitComponentByLauncher, 'Call count of ClassInitedByLauncher.init()').to.have.been.calledOnce;
-      expect(spyInitComponentByLauncher, 'Args of ClassInitedByLauncher.init()').to.have.been.calledWith(document, watchOptions);
+        expect(lastTarget, 'Watch target').to.equal(document);
+        expect(spyInitComponentByEvent, 'Call count of ClassInitedByEvent.init()').to.have.been.calledOnce;
+        expect(spyInitComponentByEvent, 'Args of ClassInitedByEvent.init()').to.have.been.calledWith(document, watchOptions);
+        expect(spyInitComponentByLauncher, 'Call count of ClassInitedByLauncher.init()').to.have.been.calledOnce;
+        expect(spyInitComponentByLauncher, 'Args of ClassInitedByLauncher.init()').to.have.been.calledWith(
+          document,
+          watchOptions
+        );
 
-      element = document.createElement('div');
-      element.dataset.myComponentInitedBySearch = '';
-      document.body.appendChild(element);
+        element = document.createElement('div');
+        element.dataset.myComponentInitedBySearch = '';
+        document.body.appendChild(element);
 
-      handle = handle.release();
+        handle = handle.release();
 
-      await delay(0); // Wait for mutation observer to deliver records
+        await delay(0); // Wait for mutation observer to deliver records
 
-      expect(spyInitComponentBySearch, 'Call count of ClassInitedBySearch.init()').not.to.have.been.called;
+        expect(spyInitComponentBySearch, 'Call count of ClassInitedBySearch.init()').not.to.have.been.called;
+      });
     });
 
     afterEach(function() {

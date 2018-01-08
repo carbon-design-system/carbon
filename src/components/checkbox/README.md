@@ -52,4 +52,3 @@ But, there are exceptions to the rule. For example, Data Tables make use of chec
 Checkboxes in this context would represent an entire row of data in its associated table row.
 
 
-

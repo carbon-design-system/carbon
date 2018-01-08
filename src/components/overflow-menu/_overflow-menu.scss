@@ -19,7 +19,8 @@
     cursor: pointer;
 
     &:focus {
-      @include focus-outline('border');
+      outline: 1px solid transparent;
+      box-shadow: 0 0 0 1px $brand-01;
     }
   }
 

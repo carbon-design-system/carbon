@@ -1,19 +1,24 @@
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
+import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
-class FabButton extends mixin(createComponent, initComponentByEvent) {
+class FabButton extends mixin(createComponent, initComponentByEvent, handles) {
   /**
    * Floating action button.
    * @extends CreateComponent
    * @extends InitComponentByEvent
+   * @extends Handles
    * @param {HTMLElement} element The element working as a floting action button.
    */
   constructor(element) {
     super(element);
-    element.addEventListener('click', event => {
-      this.toggle(event);
-    });
+    this.manage(
+      on(element, 'click', event => {
+        this.toggle(event);
+      })
+    );
   }
 
   /**
