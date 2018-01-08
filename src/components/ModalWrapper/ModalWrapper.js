@@ -26,6 +26,7 @@ export default class ModalWrapper extends React.Component {
       'danger',
       'ghost',
     ]),
+    shouldCloseAfterSubmit: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -36,19 +37,29 @@ export default class ModalWrapper extends React.Component {
   };
 
   state = {
-    open: false,
+    isOpen: false,
   };
 
   handleOpen = () => {
     this.setState({
-      open: true,
+      isOpen: true,
     });
   };
 
   handleClose = () => {
     this.setState({
-      open: false,
+      isOpen: false,
     });
+  };
+
+  handleOnRequestSubmit = () => {
+    const { handleSubmit, shouldCloseAfterSubmit } = this.props;
+
+    if (handleSubmit()) {
+      if (shouldCloseAfterSubmit) {
+        this.handleClose();
+      }
+    }
   };
 
   render() {
@@ -61,9 +72,7 @@ export default class ModalWrapper extends React.Component {
       passiveModal,
       primaryButtonText,
       secondaryButtonText,
-      handleSubmit,
       disabled,
-      ...other
     } = this.props;
 
     const props = {
@@ -73,9 +82,9 @@ export default class ModalWrapper extends React.Component {
       passiveModal,
       primaryButtonText,
       secondaryButtonText,
-      open: this.state.open,
+      open: this.state.isOpen,
       onRequestClose: this.handleClose,
-      onRequestSubmit: handleSubmit,
+      onRequestSubmit: this.handleOnRequestSubmit,
     };
 
     return (
@@ -93,9 +102,7 @@ export default class ModalWrapper extends React.Component {
           onClick={this.handleOpen}>
           {buttonTriggerText}
         </Button>
-        <Modal {...props} {...other}>
-          {this.props.children}
-        </Modal>
+        <Modal {...props}>{this.props.children}</Modal>
       </div>
     );
   }

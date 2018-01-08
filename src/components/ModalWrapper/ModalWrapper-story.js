@@ -31,11 +31,14 @@ storiesOf('ModalWrapper', module)
         id="transactional-modal"
         buttonTriggerText="Transactional Modal"
         modalLabel="Label (optional)"
-        modalText="This is a transactional modal"
         modalHeading="Transactional Modal"
         primaryButtonText="Save"
         secondaryButtonText="Cancel"
-        handleSubmit={action('onSubmit')}>
+        handleSubmit={() => {
+          action('onSubmit')();
+          return true;
+        }}
+        shouldCloseAfterSubmit={true}>
         <p className="bx--modal-content__text">
           Transactional modals are used to validate user decisions os to gain
           secondary confirmation from the user. Typically, the modal requests
@@ -83,7 +86,6 @@ storiesOf('ModalWrapper', module)
         id="passive modal"
         buttonTriggerText="Passive Modal"
         modalLabel="Label (optional)"
-        modalText="This is a passive modal"
         modalHeading="Passive Modal"
         passiveModal>
         <p className="bx--modal-content__text">
