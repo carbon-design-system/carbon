@@ -1,9 +1,9 @@
 import initCheckbox from '../../components/checkbox/checkbox';
-import { componentClasses } from '../../index';
+import * as components from './components';
 
 const forEach = Array.prototype.forEach;
 
-const createAndReleaseComponentsUponDOMMutation = (records, componentClassesForWatchInit, options) => {
+const createAndReleaseComponentsUponDOMMutation = (records, componentClasses, componentClassesForWatchInit, options) => {
   records.forEach(record => {
     forEach.call(record.addedNodes, node => {
       if (node.nodeType === Node.ELEMENT_NODE) {
@@ -45,13 +45,17 @@ export default function(target = document, options = {}) {
     throw new TypeError('DOM document or DOM element should be given to watch for DOM node to create/release components.');
   }
 
+  const componentClasses = Object.keys(components)
+    .map(key => components[key])
+    .filter(component => typeof component.init === 'function');
+
   const handles = componentClasses.map(Clz => Clz.init(target, options)).filter(Boolean);
   handles.push(initCheckbox());
 
   const componentClassesForWatchInit = componentClasses.filter(Clz => !Clz.forLazyInit);
 
   let observer = new MutationObserver(records => {
-    createAndReleaseComponentsUponDOMMutation(records, componentClassesForWatchInit, options);
+    createAndReleaseComponentsUponDOMMutation(records, componentClasses, componentClassesForWatchInit, options);
   });
   observer.observe(target, {
     childList: true,
