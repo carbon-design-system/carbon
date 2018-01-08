@@ -16,7 +16,7 @@
     "prepublish": "yarn build",
     "prettier": "prettier --write \"**/*.{scss,css,js}\"",
     "prettier:diff": "prettier --list-different \"**/*.{scss,css,js}\"",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release",
     "start": "yarn storybook",
     "storybook": "start-storybook -p 9000",
     "test": "jest",
@@ -155,11 +155,14 @@
     "requestanimationframe": "^0.0.23",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.5",
-    "semantic-release": "^8.2.0",
+    "semantic-release": "^11.0.2",
     "shelljs": "^0.7.5",
     "storybook-addon-a11y": "^3.0.0",
     "validate-commit-msg": "^2.10.1",
     "whatwg-fetch": "^2.0.3"
+  },
+  "release": {
+    "branch": "master"
   },
   "babel": {
     "presets": [
