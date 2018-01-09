@@ -13,7 +13,7 @@ export default class DatePickerInput extends Component {
     type: 'text',
     disabled: false,
     invalid: false,
-    labelText: 'Please provide label text',
+    labelText: '',
   };
 
   render() {

@@ -10,7 +10,7 @@ export default class Search extends Component {
     type: PropTypes.string,
     small: PropTypes.bool,
     placeHolderText: PropTypes.string,
-    labelText: PropTypes.string,
+    labelText: PropTypes.string.isRequired,
     id: PropTypes.string,
     searchButtonLabelText: PropTypes.string,
     layoutButtonLabelText: PropTypes.string,
@@ -21,7 +21,6 @@ export default class Search extends Component {
     small: false,
     placeHolderText: '',
     onChange: () => {},
-    labelText: 'Provide labelText',
   };
 
   state = {

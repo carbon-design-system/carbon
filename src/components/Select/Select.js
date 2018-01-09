@@ -61,7 +61,7 @@ Select.propTypes = {
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   defaultValue: PropTypes.any,
-  iconDescription: PropTypes.string,
+  iconDescription: PropTypes.string.isRequired,
   hideLabel: PropTypes.bool,
 };
 

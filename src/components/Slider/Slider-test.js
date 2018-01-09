@@ -16,7 +16,11 @@ describe('Slider', () => {
         max={100}
         step={1}
         onChange={mockFn}>
-        <TextInput id="input-for-slider" className="bx-slider-text-input" />
+        <TextInput
+          id="input-for-slider"
+          labelText="testlabel"
+          className="bx-slider-text-input"
+        />
       </Slider>
     );
 

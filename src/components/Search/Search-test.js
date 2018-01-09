@@ -6,7 +6,12 @@ import { mount, shallow } from 'enzyme';
 describe('Search', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
-      <Search id="test" className="extra-class" label="Search Field" />
+      <Search
+        id="test"
+        className="extra-class"
+        label="Search Field"
+        labelText="testlabel"
+      />
     );
 
     const label = wrapper.find('label');
@@ -126,7 +131,13 @@ describe('Search', () => {
 
     describe('Small Search', () => {
       const small = mount(
-        <Search id="test" small className="extra-class" label="Search Field" />
+        <Search
+          id="test"
+          small
+          className="extra-class"
+          label="Search Field"
+          labelText="testlabel"
+        />
       );
 
       const smallContainer = small.find('[role="search"]');
@@ -158,7 +169,12 @@ describe('Search', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <Search id="test" onClick={onClick} onChange={onChange} />
+        <Search
+          id="test"
+          labelText="testlabel"
+          onClick={onClick}
+          onChange={onChange}
+        />
       );
 
       const input = wrapper.find('input');
@@ -180,7 +196,7 @@ describe('Search', () => {
     });
 
     describe('enabled toggling layout', () => {
-      const wrapper = mount(<Search id="test" />);
+      const wrapper = mount(<Search labelText="testlabel" id="test" />);
 
       it('should default to "list" layout', () => {
         const icon = wrapper.find(Icon).at(3);

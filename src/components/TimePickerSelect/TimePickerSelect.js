@@ -11,9 +11,9 @@ export default class TimePickerSelect extends Component {
     inline: PropTypes.bool,
     disabled: PropTypes.bool,
     defaultValue: PropTypes.any,
-    iconDescription: PropTypes.string,
+    iconDescription: PropTypes.string.isRequired,
     hideLabel: PropTypes.bool,
-    labelText: PropTypes.string,
+    labelText: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -21,7 +21,6 @@ export default class TimePickerSelect extends Component {
     inline: true,
     iconDescription: 'open list of options',
     hideLabel: true,
-    labelText: 'Provide label text',
   };
 
   render() {

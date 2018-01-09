@@ -4,7 +4,9 @@ import { shallow } from 'enzyme';
 
 describe('FormGroup', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<FormGroup className="extra-class" />);
+    const wrapper = shallow(
+      <FormGroup className="extra-class" legendText="legendtest" />
+    );
 
     it('renders children as expected', () => {
       expect(wrapper.find('.child').length).toBe(0);
@@ -22,12 +24,12 @@ describe('FormGroup', () => {
       expect(wrapper.props()['data-invalid']).toBe(undefined);
     });
     it('should render the data-invalid attribute when invalid is set', () => {
-      const formgroup = shallow(<FormGroup invalid />);
+      const formgroup = shallow(<FormGroup legendText="legendtest" invalid />);
       expect(formgroup.props()['data-invalid']).toBe('');
     });
     it('should render wrapper as expected', () => {
       const formGroup = shallow(
-        <FormGroup>
+        <FormGroup legendText="legendtest">
           <div className="test-child1" />
           <div className="test-child2" />
         </FormGroup>
@@ -36,7 +38,7 @@ describe('FormGroup', () => {
     });
     it('should render children as expected', () => {
       const formGroup1 = shallow(
-        <FormGroup>
+        <FormGroup legendText="legendtest">
           <div className="test-child" />
           <div className="test-child" />
         </FormGroup>

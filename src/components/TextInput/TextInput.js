@@ -76,7 +76,7 @@ TextInput.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  labelText: PropTypes.string,
+  labelText: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   placeholder: PropTypes.string,
@@ -94,8 +94,7 @@ TextInput.defaultProps = {
   onChange: () => {},
   onClick: () => {},
   invalid: false,
-  labelText: '',
-  invalidText: 'Provide invalidText',
+  invalidText: '',
 };
 
 export default TextInput;

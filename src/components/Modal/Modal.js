@@ -30,8 +30,8 @@ export default class Modal extends Component {
     onKeyDown: () => {},
     passiveModal: false,
     iconDescription: 'close the modal',
-    modalHeading: 'Provide a heading',
-    modalLabel: 'Provide a label',
+    modalHeading: '',
+    modalLabel: '',
   };
 
   handleKeyDown = evt => {

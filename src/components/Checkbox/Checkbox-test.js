@@ -66,7 +66,9 @@ describe('Checkbox', () => {
   });
 
   it('disabled prop on component sets disabled prop on input', () => {
-    const wrapper = mount(<Checkbox id="test" disabled />);
+    const wrapper = mount(
+      <Checkbox id="test" labelText="testlabel" disabled />
+    );
 
     const input = () => wrapper.find('input');
     expect(input().props().disabled).toEqual(true);
@@ -76,7 +78,7 @@ describe('Checkbox', () => {
   });
 
   it('checked prop on component sets checked prop on input', () => {
-    const wrapper = mount(<Checkbox id="test" checked />);
+    const wrapper = mount(<Checkbox id="test" labelText="testlabel" checked />);
 
     const input = () => wrapper.find('input');
     expect(input().props().checked).toEqual(true);
@@ -89,7 +91,9 @@ describe('Checkbox', () => {
     it('should invoke onChange with expected arguments', () => {
       const onChange = jest.fn();
       const id = 'test-input';
-      const wrapper = mount(<Checkbox id={id} onChange={onChange} />);
+      const wrapper = mount(
+        <Checkbox labelText="testlabel" id={id} onChange={onChange} />
+      );
 
       const input = wrapper.find('input');
       const inputElement = input.instance();

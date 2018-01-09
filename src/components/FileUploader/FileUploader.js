@@ -173,7 +173,7 @@ export default class FileUploader extends Component {
   static defaultProps = {
     iconDescription: 'Provide icon description',
     filenameStatus: 'uploading',
-    buttonLabel: 'Add file',
+    buttonLabel: '',
     buttonKind: 'primary',
     multiple: false,
     onChange: () => {},

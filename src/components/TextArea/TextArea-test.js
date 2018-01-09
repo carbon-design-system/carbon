@@ -4,7 +4,9 @@ import TextArea from '../TextArea';
 
 describe('TextArea', () => {
   describe('should render as expected', () => {
-    const wrapper = mount(<TextArea id="testing" className="extra-class" />);
+    const wrapper = mount(
+      <TextArea id="testing" labelText="testlabel" className="extra-class" />
+    );
 
     const textarea = () => wrapper.find('textarea');
 
@@ -40,7 +42,6 @@ describe('TextArea', () => {
       });
 
       it('should set placeholder as expected', () => {
-        expect(textarea().props().placeholder).toEqual('Hint text here');
         wrapper.setProps({ placeholder: 'Type here' });
         expect(textarea().props().placeholder).toEqual('Type here');
       });
@@ -80,7 +81,13 @@ describe('TextArea', () => {
       const onChange = jest.fn();
 
       const wrapper = shallow(
-        <TextArea id="test" onClick={onClick} onChange={onChange} disabled />
+        <TextArea
+          id="test"
+          labelText="testlabel"
+          onClick={onClick}
+          onChange={onChange}
+          disabled
+        />
       );
 
       const textarea = wrapper.find('textarea');
@@ -104,7 +111,12 @@ describe('TextArea', () => {
       };
 
       const wrapper = shallow(
-        <TextArea id="test" onClick={onClick} onChange={onChange} />
+        <TextArea
+          id="test"
+          labelText="testlabel"
+          onClick={onClick}
+          onChange={onChange}
+        />
       );
 
       const textarea = wrapper.find('textarea');

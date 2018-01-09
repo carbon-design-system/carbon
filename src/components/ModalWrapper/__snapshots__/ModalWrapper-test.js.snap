@@ -7,6 +7,7 @@ exports[`ModalWrapper should render 1`] = `
   handleSubmit={[MockFunction]}
   id="modal"
   modalHeading="Transactional Modal"
+  modalLabel="Test Modal Label"
   primaryButtonText="Save"
   secondaryButtonText="Cancel"
   shouldCloseAfterSubmit={true}
@@ -39,7 +40,7 @@ exports[`ModalWrapper should render 1`] = `
       iconDescription="close the modal"
       id="modal"
       modalHeading="Transactional Modal"
-      modalLabel="Provide a label"
+      modalLabel="Test Modal Label"
       onKeyDown={[Function]}
       onRequestClose={[Function]}
       onRequestSubmit={[Function]}
@@ -66,7 +67,7 @@ exports[`ModalWrapper should render 1`] = `
             <h4
               className="bx--modal-header__label"
             >
-              Provide a label
+              Test Modal Label
             </h4>
             <h2
               className="bx--modal-header__heading"

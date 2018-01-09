@@ -303,6 +303,7 @@ export default class Slider extends PureComponent {
               className="bx-slider-text-input"
               value={value}
               onChange={this.handleChange}
+              labelText=""
             />
           )}
         </div>

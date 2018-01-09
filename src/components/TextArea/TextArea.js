@@ -63,7 +63,7 @@ TextArea.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
   id: PropTypes.string,
-  labelText: PropTypes.string,
+  labelText: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   placeholder: PropTypes.string,
@@ -77,12 +77,11 @@ TextArea.defaultProps = {
   disabled: false,
   onChange: () => {},
   onClick: () => {},
-  placeholder: 'Hint text here',
+  placeholder: '',
   rows: 4,
   cols: 50,
   invalid: false,
-  labelText: 'Provide labelText',
-  invalidText: 'Provide invalidText',
+  invalidText: '',
 };
 
 export default TextArea;

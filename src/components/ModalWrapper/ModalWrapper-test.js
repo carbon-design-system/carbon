@@ -10,6 +10,7 @@ describe('ModalWrapper', () => {
       id: 'modal',
       buttonTriggerText: 'Test Modal',
       modalHeading: 'Transactional Modal',
+      modalLabel: 'Test Modal Label',
       primaryButtonText: 'Save',
       secondaryButtonText: 'Cancel',
       handleSubmit: jest.fn(() => true),

@@ -18,8 +18,8 @@ export default class ToolbarSearch extends Component {
   static defaultProps = {
     type: 'search',
     id: 'search__input',
-    labelText: 'Provide labelText',
-    placeHolderText: 'Provide placeHolderText',
+    labelText: '',
+    placeHolderText: '',
     role: 'search',
   };
 

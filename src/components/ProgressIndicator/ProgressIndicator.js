@@ -53,15 +53,11 @@ export const ProgressStep = ({ ...props }) => {
 };
 
 ProgressStep.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   className: PropTypes.string,
   current: PropTypes.bool,
   complete: PropTypes.bool,
   description: PropTypes.string,
-};
-
-ProgressStep.defaultProps = {
-  label: 'Provide label',
 };
 
 export class ProgressIndicator extends Component {

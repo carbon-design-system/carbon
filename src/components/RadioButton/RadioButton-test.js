@@ -9,6 +9,7 @@ const render = props =>
       className="extra-class"
       name="test-name"
       value="test-value"
+      labelText="testlabel"
     />
   );
 
