@@ -1,4 +1,3 @@
-import initCheckbox from '../../components/checkbox/checkbox';
 import settings from './settings';
 import * as components from './components';
 
@@ -14,7 +13,6 @@ const init = () => {
     .map(key => components[key])
     .filter(component => typeof component.init === 'function');
   if (!settings.disableAutoInit) {
-    initCheckbox();
     componentClasses.forEach(Clz => {
       Clz.init();
     });

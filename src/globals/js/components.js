@@ -1,4 +1,4 @@
-export { default as initCheckbox } from '../../components/checkbox/checkbox';
+export { default as Checkbox } from '../../components/checkbox/checkbox';
 export { default as FileUploader } from '../../components/file-uploader/file-uploader';
 export { default as FabButton } from '../../components/fab/fab';
 export { default as ContentSwitcher } from '../../components/content-switcher/content-switcher';

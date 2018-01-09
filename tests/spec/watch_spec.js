@@ -204,35 +204,6 @@ describe('Test watch mode', function() {
     });
   });
 
-  describe('Handling checkbox', function() {
-    let element;
-    let handle;
-
-    before(function() {
-      handle = watch();
-      element = document.createElement('input');
-      element.type = 'checkbox';
-      document.body.appendChild(element);
-    });
-
-    it('Should add checked attribute when it is checked', function() {
-      element.removeAttribute('checked');
-      element.checked = true;
-      element.dispatchEvent(new CustomEvent('change', { bubbles: true }));
-      expect(element.hasAttribute('checked')).to.be.true;
-    });
-
-    after(function() {
-      if (element && element.parentNode) {
-        element.parentNode.removeChild(element);
-        element = null;
-      }
-      if (handle) {
-        handle = handle.release();
-      }
-    });
-  });
-
   afterEach(function() {
     spyReleaseComponentByLauncher.reset();
     spyReleaseComponentByEvent.reset();
