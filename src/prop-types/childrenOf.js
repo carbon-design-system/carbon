@@ -17,6 +17,9 @@ const childrenOf = expectedChildTypes => {
 
   const validate = (props, propName, componentName) => {
     Children.forEach(props[propName], child => {
+      if (!child) {
+        return;
+      }
       const childDisplayName = getDisplayName(child.type || child);
       if (!expectedChildTypes.includes(child.type)) {
         throw new Error(

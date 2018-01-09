@@ -101,13 +101,14 @@
     }
   },
   "peerDependencies": {
-    "carbon-components": "^8.1.11",
+    "carbon-components": "^8.2.0",
     "carbon-icons": "^5.1.2 || ^6.0.0",
     "react": "^15.3.2 || ^16.1.0",
     "react-dom": "^15.3.2 || ^16.1.0"
   },
   "dependencies": {
     "classnames": "2.2.5",
+    "downshift": "^1.23.2",
     "flatpickr": "4.2.2",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
@@ -127,7 +128,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
     "bowser": "^1.6.1",
-    "carbon-components": "^8.1.3",
+    "carbon-components": "^8.2.0",
     "carbon-icons": "^6.1.0",
     "commitizen": "^2.9.5",
     "css-loader": "^0.28.4",

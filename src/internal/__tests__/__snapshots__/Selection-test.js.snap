@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selection should render 1`] = `
+<Selection
+  initialSelectedItems={Array []}
+  render={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "clearSelection": [Function],
+            "onItemChange": [Function],
+            "selectedItems": Array [],
+          },
+        ],
+      ],
+    }
+  }
+>
+  <div />
+</Selection>
+`;
