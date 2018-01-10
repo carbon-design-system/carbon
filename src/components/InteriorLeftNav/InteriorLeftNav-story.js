@@ -14,32 +14,40 @@ storiesOf('InteriorLeftNav', module).addWithInfo(
   () => (
     <InteriorLeftNav>
       <InteriorLeftNavList title="Example Item 1">
-        <InteriorLeftNavItem href="#example-item-1A">
+        <InteriorLeftNavItem>
+          <a target="_blank" href="http://www.carbondesignsystem.com">
+            Link Child
+          </a>
+        </InteriorLeftNavItem>
+        <InteriorLeftNavItem>
           <a href="http://www.carbondesignsystem.com">Link Child</a>
         </InteriorLeftNavItem>
-        <InteriorLeftNavItem href="#example-item-1B">
-          <a href="http://www.carbondesignsystem.com">Link Child</a>
-        </InteriorLeftNavItem>
-        <InteriorLeftNavItem href="#example-item-1C">
+        <InteriorLeftNavItem>
           <a href="http://www.carbondesignsystem.com">Link Child</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
       <InteriorLeftNavList title="Example Item 2">
-        <InteriorLeftNavItem href="#example-item-2A">
+        <InteriorLeftNavItem>
           <a href="http://www.carbondesignsystem.com">Link Child</a>
         </InteriorLeftNavItem>
-        <InteriorLeftNavItem href="#example-item-2B">
+        <InteriorLeftNavItem>
           <a href="http://www.carbondesignsystem.com">Link Child</a>
         </InteriorLeftNavItem>
-        <InteriorLeftNavItem href="#example-item-2C">
+        <InteriorLeftNavItem>
           <a href="http://www.carbondesignsystem.com">Link Child</a>
         </InteriorLeftNavItem>
-        <InteriorLeftNavItem href="#example-item-2D">
+        <InteriorLeftNavItem>
           <a href="http://www.carbondesignsystem.com">Link Child</a>
         </InteriorLeftNavItem>
       </InteriorLeftNavList>
-      <InteriorLeftNavItem href="#example-item-3" label="Link Label" />
-      <InteriorLeftNavItem href="#example-item-4" label="Link Label" />
+      <InteriorLeftNavItem>
+        <a href="#example-1">Link label</a>
+      </InteriorLeftNavItem>
+      <InteriorLeftNavItem>
+        <a href="http://www.carbondesignsystem.com" target="_blank">
+          Link label 2
+        </a>
+      </InteriorLeftNavItem>
     </InteriorLeftNav>
   )
 );

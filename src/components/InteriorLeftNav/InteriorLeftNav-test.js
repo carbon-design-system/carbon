@@ -63,7 +63,7 @@ describe('InteriorLeftNav', () => {
     const interiorLeftNav = mount(
       <InteriorLeftNav>
         <InteriorLeftNavList />
-        <InteriorLeftNavItem href="#first">
+        <InteriorLeftNavItem>
           <a href="#first">test-title</a>
         </InteriorLeftNavItem>
       </InteriorLeftNav>

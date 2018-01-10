@@ -12,16 +12,18 @@ const newChild = (children, tabIndex) => {
 
 const InteriorLeftNavItem = ({
   className,
-  href,
-  activeHref,
-  onClick,
   tabIndex,
   children,
-  label,
+  onClick,
+  activeHref,
   ...other
 }) => {
+  const childHref =
+    children.props.href === undefined ? children.props.to : children.props.href;
+  const activePath =
+    window.location && window.location.hash ? window.location.hash : activeHref;
   const classNames = classnames('left-nav-list__item', className, {
-    'left-nav-list__item--active': activeHref === href,
+    'left-nav-list__item--active': activePath === childHref,
   });
 
   return (
@@ -29,36 +31,23 @@ const InteriorLeftNavItem = ({
       tabIndex={children ? -1 : tabIndex}
       role="menuitem"
       className={classNames}
-      onClick={evt => onClick(evt, href)}
-      onKeyPress={evt => onClick(evt, href)}
+      onClick={evt => onClick(evt, childHref)}
+      onKeyPress={evt => onClick(evt, childHref)}
       {...other}>
-      {children ? (
-        newChild(children, tabIndex)
-      ) : (
-        <a
-          className="left-nav-list__item-link"
-          href={href}
-          tabIndex={children ? tabIndex : -1}>
-          {label}
-        </a>
-      )}
+      {newChild(children, tabIndex)}
     </li>
   );
 };
 
 InteriorLeftNavItem.propTypes = {
   className: PropTypes.string,
-  href: PropTypes.string.isRequired,
-  activeHref: PropTypes.string,
   tabIndex: PropTypes.number,
   onClick: PropTypes.func,
-  blankTarget: PropTypes.bool,
+  onKeyPress: PropTypes.func,
   children: PropTypes.node,
-  label: PropTypes.string.isRequired,
 };
 
 InteriorLeftNavItem.defaultProps = {
-  activeHref: '#',
   tabIndex: 0,
   label: 'InteriorLeftNavItem Label',
   onClick: /* istanbul ignore next */ () => {},
