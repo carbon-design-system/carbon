@@ -44,6 +44,16 @@ export default class OverflowMenu extends Component {
     open: this.props.open,
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.open && !this.state.open) {
+      requestAnimationFrame(() => {
+        this.getMenuPosition();
+      });
+      return false; // Let `.getMenuPosition()` cause render
+    }
+    return true;
+  }
+
   componentDidMount() {
     requestAnimationFrame(() => {
       this.getMenuPosition();

@@ -85,6 +85,7 @@ describe('OverflowMenu', () => {
 
       expect(menuOptions.hasClass(openClass)).not.toEqual(true);
       rootWrapper.setState({ open: true });
+      rootWrapper.update();
       expect(rootWrapper.find('ul').hasClass(openClass)).not.toEqual(false);
     });
 
