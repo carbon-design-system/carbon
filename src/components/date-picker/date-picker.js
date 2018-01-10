@@ -18,6 +18,29 @@ function flattenOptions(options) {
   return o;
 }
 
+/**
+ * Augments Flatpickr instance so that event objects Flatpickr fires is marked as non-user-triggered events.
+ * @param {Flatpickr} calendar The Flatpickr instance.
+ * @returns {Flatpickr} The augmented Flatpickr instance.
+ * @private
+ */
+function augmentFlatpickr(calendar) {
+  const container = calendar._;
+  if (container.changeEvent) {
+    container._changeEvent = container.changeEvent; // eslint-disable-line no-underscore-dangle
+  }
+  Object.defineProperty(container, 'changeEvent', {
+    get() {
+      return this._changeEvent;
+    },
+    set(value) {
+      value.detail = Object.assign(value.detail || {}, { fromFlatpickr: true });
+      this._changeEvent = value;
+    },
+  });
+  return calendar;
+}
+
 // Weekdays shorthand for english locale
 Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
   const currentDay = Flatpickr.l10ns.en.weekdays.shorthand;
@@ -119,7 +142,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
     );
     this._updateClassNames(calendar);
     this._addInputLogic(date);
-    return calendar;
+    return augmentFlatpickr(calendar);
   };
 
   _rightArrowHTML() {
@@ -139,10 +162,12 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
   _addInputLogic = input => {
     const inputField = input;
     this.manage(
-      on(inputField, 'change', () => {
-        const inputDate = this.calendar.parseDate(inputField.value);
-        if (!isNaN(inputDate.valueOf())) {
-          this.calendar.setDate(inputDate);
+      on(inputField, 'change', evt => {
+        if (!evt.detail || !evt.detail.fromFlatpickr) {
+          const inputDate = this.calendar.parseDate(inputField.value);
+          if (!isNaN(inputDate.valueOf())) {
+            this.calendar.setDate(inputDate);
+          }
         }
         this._updateClassNames(this.calendar);
       })
