@@ -20,6 +20,7 @@ $list-box-menu-width: rem(300px);
     position: relative;
     width: $list-box-width;
     height: $list-box-height;
+    max-height: $list-box-height;
     background-color: rgba($field-01, 0.1);
   }
 
