@@ -27,11 +27,17 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     this.manage(
       on(this.element.ownerDocument, 'click', event => {
         this._handleDocumentClick(event);
+        this.wasOpenBeforeClick = undefined;
       })
     );
     this.manage(
       on(this.element.ownerDocument, 'keypress', event => {
         this._handleKeyPress(event);
+      })
+    );
+    this.manage(
+      on(this.element, 'mousedown', () => {
+        this.wasOpenBeforeClick = element.classList.contains(this.options.classShown);
       })
     );
   }
@@ -75,7 +81,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   _handleDocumentClick(event) {
     const element = this.element;
     const isOfSelf = element.contains(event.target);
-    const shouldBeOpen = isOfSelf && !element.classList.contains(this.options.classShown);
+    const shouldBeOpen = isOfSelf && !this.wasOpenBeforeClick;
     const state = shouldBeOpen ? 'shown' : 'hidden';
 
     if (isOfSelf) {
