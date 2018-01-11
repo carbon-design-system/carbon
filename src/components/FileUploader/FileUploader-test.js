@@ -48,8 +48,8 @@ describe('FileUploaderButton', () => {
       expect(mountWrapper.props().disableLabelChanges).toEqual(false);
     });
 
-    it('renders with default role', () => {
-      expect(mountWrapper.props().role).toEqual('button');
+    it('does not have default role', () => {
+      expect(mountWrapper.props().role).not.toBeTruthy();
     });
   });
 
@@ -103,7 +103,9 @@ describe('FileUploader', () => {
       ).toEqual(true);
     });
     it('renders input with hidden prop', () => {
-      expect(mountWrapper.find('input').props().hidden).toEqual(true);
+      expect(mountWrapper.find('input').props().className).toEqual(
+        'bx--visually-hidden'
+      );
     });
     it('renders with empty div.bx--file-container by default', () => {
       expect(mountWrapper.find('div.bx--file-container').text()).toEqual('');
