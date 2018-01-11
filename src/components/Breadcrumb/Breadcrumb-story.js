@@ -19,8 +19,10 @@ storiesOf('Breadcrumb', module).addWithInfo(
     `,
   () => (
     <Breadcrumb {...additionalProps}>
-      <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-      <BreadcrumbItem href="w#">Breadcrumb 2</BreadcrumbItem>
+      <BreadcrumbItem>
+        <a href="/#">Breadcrumb 1</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
     </Breadcrumb>
   )
