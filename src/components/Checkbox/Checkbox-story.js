@@ -59,6 +59,31 @@ storiesOf('Checkbox', module)
     )
   )
   .addWithInfo(
+    'enabled indeterminate',
+    `
+      Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
+      The example below shows how the Checkbox component can be used as a controlled component that is initially
+      indeterminate.
+    `,
+    () => (
+      <fieldset className="bx--fieldset">
+        <legend className="bx--label">Checkbox heading</legend>
+        <Checkbox
+          {...checkboxEvents}
+          id="checkbox-label-1"
+          labelText="Checkbox label 1"
+          indeterminate
+        />
+        <Checkbox
+          {...checkboxEvents}
+          id="checkbox-label-2"
+          labelText="Checkbox label 2"
+          indeterminate
+        />
+      </fieldset>
+    )
+  )
+  .addWithInfo(
     'disabled',
     `
       Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.

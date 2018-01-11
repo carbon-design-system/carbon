@@ -26,29 +26,6 @@ describe('Checkbox', () => {
         expect(label.hasClass('extra-class')).toEqual(true);
       });
 
-      describe('firstSpan', () => {
-        const span1 = label.find('span').first();
-        it('has the expected className', () => {
-          expect(span1.props().className).toEqual('bx--checkbox-appearance');
-        });
-
-        it('has expected children', () => {
-          const icon = span1.childAt(0);
-          expect(icon.props().className).toEqual('bx--checkbox-checkmark');
-          expect(icon.props().name).toEqual('checkmark');
-        });
-      });
-
-      describe('secondSpan', () => {
-        const span2 = label.find('span').last();
-        it('has the expected className', () => {
-          expect(span2.props().className).toEqual('bx--checkbox-label-text');
-        });
-        it('has the expected labelText', () => {
-          expect(span2.props().children).toEqual('testingLabel');
-        });
-      });
-
       describe('input', () => {
         const input = () => wrapper.find('input');
 

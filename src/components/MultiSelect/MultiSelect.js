@@ -170,7 +170,6 @@ export default class MultiSelect extends React.Component {
                               readOnly={true}
                               tabIndex="-1"
                               labelText={itemText}
-                              iconDescription="Select this item"
                             />
                           </ListBox.MenuItem>
                         );

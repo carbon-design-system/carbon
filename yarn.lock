@@ -2040,9 +2040,9 @@ caniuse-lite@^1.0.30000715, caniuse-lite@^1.0.30000744, caniuse-lite@^1.0.300007
   version "1.0.30000749"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000749.tgz#2ff382865aead8cca35dacfbab04f58effa4c01c"
 
-carbon-components@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-8.2.0.tgz#716d655d61397423fff89b905c0570f6d2dd868c"
+carbon-components@^8.2.2:
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-8.2.2.tgz#592b4950670ab019e2a734bf25b9bb72579f978d"
   dependencies:
     carbon-icons "^6.0.4"
     flatpickr "2.6.3"
