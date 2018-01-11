@@ -9,7 +9,7 @@ exports[`ListBox should render 1`] = `
       "calls": Array [
         Array [
           <div
-            class="bx--list-box__container bx--list-box"
+            class="bx--list-box__container bx--list-box bx--form-item"
           >
             <div
               class="bx--list-box__field"
@@ -24,7 +24,7 @@ exports[`ListBox should render 1`] = `
   type="default"
 >
   <div
-    className="bx--list-box__container bx--list-box"
+    className="bx--list-box__container bx--list-box bx--form-item"
   >
     <ListBoxField>
       <div
