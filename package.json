@@ -221,7 +221,13 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "components/**/*.js"
+      "src/components/**/*.js",
+      "!src/components/**/*-story.js"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "html"
     ],
     "setupFiles": [
       "<rootDir>/config/jest/setup.js"
