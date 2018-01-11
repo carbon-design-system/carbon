@@ -77,7 +77,7 @@ describe('Toolbar', () => {
     describe('with ToolbarTitle ', () => {
       const withToolbarTitle = mount(
         <ToolbarItem>
-          <OverflowMenu>
+          <OverflowMenu open={true}>
             <ToolbarTitle title="Test title" />
           </OverflowMenu>
         </ToolbarItem>
@@ -99,7 +99,7 @@ describe('Toolbar', () => {
     describe('with ToolbarOption ', () => {
       const withToolbarOption = mount(
         <ToolbarItem>
-          <OverflowMenu>
+          <OverflowMenu open={true}>
             <ToolbarOption>
               <div>Test child</div>
             </ToolbarOption>
@@ -123,7 +123,7 @@ describe('Toolbar', () => {
     describe('with ToolbarDivider ', () => {
       const withToolbarDivider = mount(
         <ToolbarItem>
-          <OverflowMenu>
+          <OverflowMenu open={true}>
             <ToolbarDivider />
           </OverflowMenu>
         </ToolbarItem>

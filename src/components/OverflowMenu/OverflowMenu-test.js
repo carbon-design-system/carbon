@@ -28,19 +28,17 @@ describe('OverflowMenu', () => {
       expect(menu.hasClass('bx--overflow-menu--open')).not.toBe(true);
     });
 
-    it('should render a ul with the appropriate class', () => {
+    it('should not render a ul unless menu is open', () => {
       const list = menu.find('ul');
-
-      expect(list.length).toEqual(1);
-      expect(list.hasClass('bx--overflow-menu-options')).toEqual(true);
+      expect(list.length).toEqual(0);
     });
 
     it('should add extra classes that are passed via className', () => {
       expect(menu.hasClass('extra-class')).toEqual(true);
     });
 
-    it('should render children as expected', () => {
-      expect(menu.find('.test-child').length).toEqual(2);
+    it('should not render children unless the menu is open', () => {
+      expect(menu.find('.test-child').length).toEqual(0);
     });
 
     it('should set tabIndex if one is passed via props', () => {
@@ -78,12 +76,36 @@ describe('OverflowMenu', () => {
       expect(rootWrapper.props().open).toEqual(false);
     });
 
+    it('should render a ul with the appropriate class', () => {
+      const rootWrapper = mount(
+        <OverflowMenu>
+          <div className="test-child" />
+          <div className="test-child" />
+        </OverflowMenu>
+      );
+      rootWrapper.setState({ open: true });
+      rootWrapper.update();
+      const list = rootWrapper.find('ul');
+      expect(list.length).toEqual(1);
+      expect(list.hasClass('bx--overflow-menu-options')).toEqual(true);
+    });
+
+    it('should render children as expected', () => {
+      const rootWrapper = mount(
+        <OverflowMenu>
+          <div className="test-child" />
+          <div className="test-child" />
+        </OverflowMenu>
+      );
+      rootWrapper.setState({ open: true });
+      rootWrapper.update();
+      expect(rootWrapper.find('.test-child').length).toEqual(2);
+    });
+
     it('should set expected class when state is open', () => {
       const rootWrapper = mount(<OverflowMenu />);
-      const menuOptions = rootWrapper.find('ul');
       const openClass = 'bx--overflow-menu-options--open';
-
-      expect(menuOptions.hasClass(openClass)).not.toEqual(true);
+      expect(rootWrapper.find('ul').length).toEqual(0);
       rootWrapper.setState({ open: true });
       rootWrapper.update();
       expect(rootWrapper.find('ul').hasClass(openClass)).not.toEqual(false);

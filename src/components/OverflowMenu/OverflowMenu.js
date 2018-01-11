@@ -122,17 +122,19 @@ export default class OverflowMenu extends Component {
       ...other
     } = this.props;
 
+    const { open } = this.state;
+
     const overflowMenuClasses = classNames(
       this.props.className,
       'bx--overflow-menu',
       {
-        'bx--overflow-menu--open': this.state.open,
+        'bx--overflow-menu--open': open,
       }
     );
 
     const overflowMenuOptionsClasses = classNames('bx--overflow-menu-options', {
       'bx--overflow-menu--flip': this.props.flipped,
-      'bx--overflow-menu-options--open': this.state.open,
+      'bx--overflow-menu-options--open': open,
     });
 
     const overflowMenuIconClasses = classNames(
@@ -164,7 +166,7 @@ export default class OverflowMenu extends Component {
             description={iconDescription}
             style={{ width: '100%' }}
           />
-          {floatingMenu ? (
+          {!open ? null : floatingMenu ? (
             <FloatingMenu
               menuPosition={this.state.menuPosition}
               menuDirection="bottom"
