@@ -69,8 +69,9 @@
   }
 
   // Overrrides
-  .bx--checkbox-appearance {
-    margin-right: 0;
+  .bx--checkbox-label {
+    margin-top: rem(-8px);
+    padding-left: rem(22px);
   }
 
   .bx--overflow-menu {
