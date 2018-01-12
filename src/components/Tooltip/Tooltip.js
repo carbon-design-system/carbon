@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import classNames from 'classnames';
 import FloatingMenu from '../../internal/FloatingMenu';
+import ClickListener from '../../internal/ClickListener';
 
 export default class Tooltip extends Component {
   static propTypes = {
@@ -15,6 +16,7 @@ export default class Tooltip extends Component {
     showIcon: PropTypes.bool,
     iconName: PropTypes.string,
     iconDescription: PropTypes.string,
+    clickToOpen: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -44,12 +46,30 @@ export default class Tooltip extends Component {
     }
   };
 
-  handleMouse = direction => {
-    if (direction === 'over') {
-      this.getTriggerPosition();
-      this.setState({ open: true });
+  handleMouse = state => {
+    if (this.props.clickToOpen) {
+      if (state === 'click') {
+        this.setState({ open: !this.state.open });
+      }
     } else {
-      this.setState({ open: false });
+      if (state === 'over') {
+        this.getTriggerPosition();
+        this.setState({ open: true });
+      } else {
+        this.setState({ open: false });
+      }
+    }
+  };
+
+  handleClickOutside = () => {
+    this.setState({ open: false });
+  };
+
+  handleKeyPress = evt => {
+    const key = evt.key || evt.which;
+
+    if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      this.setState({ open: !this.state.open });
     }
   };
 
@@ -74,10 +94,31 @@ export default class Tooltip extends Component {
 
     return (
       <div>
-        {showIcon ? (
-          <div className="bx--tooltip__trigger">
-            {triggerText}
+        <ClickListener onClickOutside={this.handleClickOutside}>
+          {showIcon ? (
+            <div className="bx--tooltip__trigger">
+              {triggerText}
+              <div
+                ref={node => {
+                  this.triggerEl = node;
+                }}
+                onMouseOver={() => this.handleMouse('over')}
+                onMouseOut={() => this.handleMouse('out')}
+                onFocus={() => this.handleMouse('over')}
+                onBlur={() => this.handleMouse('out')}>
+                <Icon
+                  onKeyDown={this.handleKeyPress}
+                  onClick={() => this.handleMouse('click')}
+                  role="button"
+                  tabIndex="0"
+                  name={iconName}
+                  description={iconDescription}
+                />
+              </div>
+            </div>
+          ) : (
             <div
+              className="bx--tooltip__trigger"
               ref={node => {
                 this.triggerEl = node;
               }}
@@ -85,27 +126,10 @@ export default class Tooltip extends Component {
               onMouseOut={() => this.handleMouse('out')}
               onFocus={() => this.handleMouse('over')}
               onBlur={() => this.handleMouse('out')}>
-              <Icon
-                role="button"
-                tabIndex="0"
-                name={iconName}
-                description={iconDescription}
-              />
+              {triggerText}
             </div>
-          </div>
-        ) : (
-          <div
-            className="bx--tooltip__trigger"
-            ref={node => {
-              this.triggerEl = node;
-            }}
-            onMouseOver={() => this.handleMouse('over')}
-            onMouseOut={() => this.handleMouse('out')}
-            onFocus={() => this.handleMouse('over')}
-            onBlur={() => this.handleMouse('out')}>
-            {triggerText}
-          </div>
-        )}
+          )}
+        </ClickListener>
         <FloatingMenu
           menuPosition={this.state.triggerPosition}
           menuDirection={direction}

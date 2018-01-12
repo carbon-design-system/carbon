@@ -173,4 +173,22 @@ storiesOf('Tooltip', module)
         </Tooltip>
       </div>
     )
+  )
+  .addWithInfo(
+    'click to open',
+    `
+      Tooltips are used to supply additional information to an element when hovering over it. The example
+      below shows the option to open on click instead of hover, which is useful when including interactive
+      elements such as links inside the tooltip.
+    `,
+    () => (
+      <div style={{ marginTop: '2rem' }}>
+        <Tooltip clickToOpen triggerText="Tooltip label">
+          <p className="bx--tooltip__label">Tooltip with link</p>
+          <a href="http://react.carbondesignsystem.com/" target="_blank">
+            Visit Carbon React
+          </a>
+        </Tooltip>
+      </div>
+    )
   );
