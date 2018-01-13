@@ -94,12 +94,8 @@
   }
 
   .bx--checkbox-appearance {
-    @include hidden;
-  }
-
-  //current checkbox stuff
-
-  .bx--checkbox-appearance {
+    position: absolute;
+    left: 0;
     display: inline-block;
     height: rem(18px);
     width: rem(18px);
