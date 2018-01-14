@@ -192,7 +192,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch, hand
    * @property {string} selectorInit The CSS selector to find interior left navs.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-interior-left-nav]',
       // Data Attribute selectors
@@ -207,9 +207,9 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch, hand
       // CSS Class Selectors
       classActiveLeftNavListItem: 'left-nav-list__item--active',
       classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
-      classLeftNavCollapsing: `${brandPrefix}--interior-left-nav--collapsing`,
-      classLeftNavCollapsed: `${brandPrefix}--interior-left-nav--collapsed`,
-      classLeftNavExpanding: `${brandPrefix}--interior-left-nav--expanding`,
+      classLeftNavCollapsing: `${prefix}--interior-left-nav--collapsing`,
+      classLeftNavCollapsed: `${prefix}--interior-left-nav--collapsed`,
+      classLeftNavExpanding: `${prefix}--interior-left-nav--expanding`,
       // Event
       eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
       eventAfterLeftNavToggled: 'left-nav-toggled',

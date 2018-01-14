@@ -8,12 +8,12 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tooltip') {
-  .#{$brand-prefix}--tooltip--simple {
+  .#{$prefix}--tooltip--simple {
     display: flex;
     align-items: center;
   }
 
-  .#{$brand-prefix}--tooltip__trigger {
+  .#{$prefix}--tooltip__trigger {
     @include font-family;
     @include typescale('epsilon');
     display: inline-flex;
@@ -40,7 +40,7 @@
     }
   }
 
-  .#{$brand-prefix}--tooltip {
+  .#{$prefix}--tooltip {
     @include layer('overlay');
     @include reset;
     position: absolute;
@@ -56,7 +56,7 @@
       @include typescale('zeta');
     }
 
-    .#{$brand-prefix}--tooltip__label {
+    .#{$prefix}--tooltip__label {
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
@@ -107,13 +107,13 @@
     }
   }
 
-  .#{$brand-prefix}--tooltip--shown {
+  .#{$prefix}--tooltip--shown {
     display: block;
   }
 
   // Simple CSS only tooltip
-  .#{$brand-prefix}--tooltip--simple__top,
-  .#{$brand-prefix}--tooltip--simple__bottom {
+  .#{$prefix}--tooltip--simple__top,
+  .#{$prefix}--tooltip--simple__bottom {
     @include font-family;
     @include reset;
     @include typescale('delta');
@@ -184,7 +184,7 @@
   }
 
   // Tooltip caret - top position
-  .#{$brand-prefix}--tooltip--simple__top {
+  .#{$prefix}--tooltip--simple__top {
     &:before {
       bottom: 1.8rem;
     }
@@ -196,7 +196,7 @@
   }
 
   // Tooltip caret - bottom position
-  .#{$brand-prefix}--tooltip--simple__bottom {
+  .#{$prefix}--tooltip--simple__bottom {
     &:before {
       top: 1.8rem;
     }

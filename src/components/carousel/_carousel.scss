@@ -7,23 +7,23 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('carousel') {
-  .#{$brand-prefix}--carousel {
+  .#{$prefix}--carousel {
     display: flex;
     align-items: center;
   }
-  .#{$brand-prefix}--carousel-container {
+  .#{$prefix}--carousel-container {
     max-width: rem(810px);
     overflow: hidden;
     padding: 0 1px;
   }
-  .#{$brand-prefix}--filmstrip {
+  .#{$prefix}--filmstrip {
     display: flex;
     justify-content: space-between;
     transition: transform 100ms $carbon--ease-in;
     padding: rem(24px) 0;
     width: auto;
   }
-  .#{$brand-prefix}--filmstrip-btn {
+  .#{$prefix}--filmstrip-btn {
     @include button-reset;
     height: rem(20px);
     width: rem(20px);
@@ -40,7 +40,7 @@
     }
   }
 
-  .#{$brand-prefix}--carousel__btn {
+  .#{$prefix}--carousel__btn {
     @include button-reset(false);
     cursor: pointer;
     padding: 0;
@@ -67,7 +67,7 @@
       fill: $brand-01;
     }
   }
-  .#{$brand-prefix}--carousel__item {
+  .#{$prefix}--carousel__item {
     @include button-reset;
     padding: 0;
     line-height: 0;
@@ -79,7 +79,7 @@
       @include focus-outline;
     }
   }
-  .#{$brand-prefix}--carousel__item--active {
+  .#{$prefix}--carousel__item--active {
     @include focus-outline;
   }
 }

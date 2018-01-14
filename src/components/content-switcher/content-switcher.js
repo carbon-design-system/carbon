@@ -137,11 +137,11 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-content-switcher]',
-      selectorButton: `input[type="radio"], .${brandPrefix}--content-switcher-btn`,
-      classActive: `${brandPrefix}--content-switcher--selected`,
+      selectorButton: `input[type="radio"], .${prefix}--content-switcher-btn`,
+      classActive: `${prefix}--content-switcher--selected`,
       eventBeforeSelected: 'content-switcher-beingselected',
       eventAfterSelected: 'content-switcher-selected',
     };

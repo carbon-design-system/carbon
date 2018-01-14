@@ -81,10 +81,10 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   static components = new WeakMap();
 
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-tooltip-trigger]',
-      classShown: `${brandPrefix}--tooltip--shown`,
+      classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
       objMenuOffset: { top: 10, left: 0 },
       initEventNames: ['mouseover', 'focus'],

@@ -8,16 +8,16 @@
 @import '../button/button';
 
 @include exports('copy-button') {
-  .#{$brand-prefix}--btn--copy {
+  .#{$prefix}--btn--copy {
     position: relative;
     overflow: visible;
 
-    .#{$brand-prefix}--btn__icon {
+    .#{$prefix}--btn__icon {
       margin-left: rem(5px);
     }
   }
 
-  .#{$brand-prefix}--btn--copy__feedback {
+  .#{$prefix}--btn--copy__feedback {
     position: absolute;
     display: none;
     top: 1.2rem;

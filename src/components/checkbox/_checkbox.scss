@@ -7,7 +7,7 @@
 @import '../../globals/scss/css--reset';
 
 @include exports('checkbox') {
-  .#{$brand-prefix}--form-item.#{$brand-prefix}--checkbox-wrapper {
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin-bottom: 1rem;
 
     &:first-of-type {
@@ -19,11 +19,11 @@
     }
   }
 
-  .#{$brand-prefix}--checkbox {
+  .#{$prefix}--checkbox {
     @include hidden;
   }
 
-  .#{$brand-prefix}--checkbox-label {
+  .#{$prefix}--checkbox-label {
     @include reset;
     @include font-family;
     @include font-smoothing;
@@ -35,7 +35,7 @@
     padding-left: rem(25px);
   }
 
-  .#{$brand-prefix}--checkbox-label::before {
+  .#{$prefix}--checkbox-label::before {
     box-sizing: border-box;
     content: '';
     position: absolute;
@@ -47,7 +47,7 @@
     background-color: $ui-01;
   }
 
-  .#{$brand-prefix}--checkbox-label::after {
+  .#{$prefix}--checkbox-label::after {
     content: '';
     width: 10px;
     height: 5px;
@@ -60,32 +60,32 @@
     left: 3px;
   }
 
-  .#{$brand-prefix}--checkbox:checked + .#{$brand-prefix}--checkbox-label::before,
-  .#{$brand-prefix}--checkbox:indeterminate + .#{$brand-prefix}--checkbox-label::before,
-  .#{$brand-prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
-  .#{$brand-prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
     background-color: $brand-01;
     border-color: $brand-01;
   }
 
-  .#{$brand-prefix}--checkbox:checked + .#{$brand-prefix}--checkbox-label::after,
-  .#{$brand-prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
     opacity: 1;
     transform: scale(1) rotate(-45deg);
   }
 
-  .#{$brand-prefix}--checkbox:not(:checked) + .#{$brand-prefix}--checkbox-label::after {
+  .#{$prefix}--checkbox:not(:checked) + .#{$prefix}--checkbox-label::after {
     opacity: 0;
     transform: scale(0) rotate(-45deg);
   }
 
-  .#{$brand-prefix}--checkbox:focus + .#{$brand-prefix}--checkbox-label::before,
-  .#{$brand-prefix}--checkbox-label__focus::before {
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label__focus::before {
     @include focus-outline('blurred');
   }
 
-  .#{$brand-prefix}--checkbox:indeterminate + .#{$brand-prefix}--checkbox-label::after,
-  .#{$brand-prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     transform: scale(1) rotate(0deg);
     border-left: 0 solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
@@ -94,7 +94,7 @@
     top: rem(1px);
   }
 
-  .#{$brand-prefix}--checkbox-appearance {
+  .#{$prefix}--checkbox-appearance {
     position: absolute;
     left: 0;
     display: inline-block;
@@ -106,35 +106,35 @@
     min-width: 18px;
   }
 
-  .#{$brand-prefix}--checkbox:checked + .#{$brand-prefix}--checkbox-appearance,
-  .#{$brand-prefix}--checkbox:checked + .#{$brand-prefix}--checkbox-label .#{$brand-prefix}--checkbox-appearance {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance {
     display: flex;
     align-items: baseline;
     background-color: $brand-01;
     border-color: $brand-01;
   }
 
-  .#{$brand-prefix}--checkbox:disabled + .#{$brand-prefix}--checkbox-label,
-  .#{$brand-prefix}--checkbox:disabled + .#{$brand-prefix}--checkbox-appearance,
-  .#{$brand-prefix}--checkbox:disabled ~ .#{$brand-prefix}--checkbox-label-text {
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:disabled ~ .#{$prefix}--checkbox-label-text {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .#{$brand-prefix}--checkbox:focus + .#{$brand-prefix}--checkbox-label .#{$brand-prefix}--checkbox-appearance,
-  .#{$brand-prefix}--checkbox:focus + .#{$brand-prefix}--checkbox-appearance {
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-appearance {
     @include focus-outline('blurred');
   }
 
-  .#{$brand-prefix}--checkbox-checkmark {
+  .#{$prefix}--checkbox-checkmark {
     display: none;
     fill: $inverse-01;
     width: 100%;
     height: 100%;
   }
 
-  .#{$brand-prefix}--checkbox:checked + .#{$brand-prefix}--checkbox-appearance .#{$brand-prefix}--checkbox-checkmark,
-  .#{$brand-prefix}--checkbox:checked + .#{$brand-prefix}--checkbox-label .#{$brand-prefix}--checkbox-appearance .#{$brand-prefix}--checkbox-checkmark {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-appearance .#{$prefix}--checkbox-checkmark,
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance .#{$prefix}--checkbox-checkmark {
     display: block;
 
     @-moz-document url-prefix() {

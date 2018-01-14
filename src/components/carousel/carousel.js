@@ -46,14 +46,14 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
   };
 
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-carousel]',
-      selectorFilmstrip: `.${brandPrefix}--filmstrip`,
+      selectorFilmstrip: `.${prefix}--filmstrip`,
       selectorScrollRight: '[data-scroll-right]',
       selectorScrollLeft: '[data-scroll-left]',
-      selectorCarouselBtn: `.${brandPrefix}--carousel__btn`,
-      selectorCarouselItem: `.${brandPrefix}--carousel__item`,
+      selectorCarouselBtn: `.${prefix}--carousel__btn`,
+      selectorCarouselItem: `.${prefix}--carousel__item`,
     };
   }
 

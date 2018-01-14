@@ -49,13 +49,13 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
   };
 
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-lightbox]',
       selectorScrollRight: '[data-scroll-right]',
       selectorScrollLeft: '[data-scroll-left]',
-      selectorLightboxItem: `.${brandPrefix}--lightbox__item`,
-      classActiveItem: `${brandPrefix}--lightbox__item--shown`,
+      selectorLightboxItem: `.${prefix}--lightbox__item`,
+      classActiveItem: `${prefix}--lightbox__item--shown`,
     };
   }
 

@@ -122,13 +122,13 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} classSearchActive The CSS class the active state of the search input.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-toolbar]',
       selectorSearch: '[data-toolbar-search]',
       selectorRowHeight: '[data-row-height]',
-      classTallRows: `${brandPrefix}--responsive-table--tall`,
-      classSearchActive: `${brandPrefix}--toolbar-search--active`,
+      classTallRows: `${prefix}--responsive-table--tall`,
+      classSearchActive: `${prefix}--toolbar-search--active`,
     };
   }
 }

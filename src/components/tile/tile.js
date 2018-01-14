@@ -80,14 +80,14 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    * @property {string} selectorInit The CSS selector to find Tile instances.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-tile]',
       selectorAboveTheFold: '[data-tile-atf]',
       selectorTileInput: '[data-tile-input]',
-      classExpandedTile: `${brandPrefix}--tile--is-expanded`,
-      classClickableTile: `${brandPrefix}--tile--is-clicked`,
-      classSelectableTile: `${brandPrefix}--tile--is-selected`,
+      classExpandedTile: `${prefix}--tile--is-expanded`,
+      classClickableTile: `${prefix}--tile--is-clicked`,
+      classSelectableTile: `${prefix}--tile--is-selected`,
     };
   }
 }

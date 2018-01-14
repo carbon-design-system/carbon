@@ -7,14 +7,14 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('lightbox') {
-  .#{$brand-prefix}--lightbox {
+  .#{$prefix}--lightbox {
     width: rem(1056px);
     @include layer('pop-out');
   }
-  .#{$brand-prefix}--lightbox__main {
+  .#{$prefix}--lightbox__main {
     position: relative;
   }
-  .#{$brand-prefix}--lightbox__btn {
+  .#{$prefix}--lightbox__btn {
     border: 0;
     background: transparent;
     cursor: pointer;
@@ -39,15 +39,15 @@
       fill: $ui-05;
     }
   }
-  .#{$brand-prefix}--lightbox__item {
+  .#{$prefix}--lightbox__item {
     display: none;
     width: 100%;
   }
-  .#{$brand-prefix}--lightbox__item--shown {
+  .#{$prefix}--lightbox__item--shown {
     display: block;
   }
 
-  .#{$brand-prefix}--lightbox__footer {
+  .#{$prefix}--lightbox__footer {
     background: $ui-01;
     overflow: hidden;
   }

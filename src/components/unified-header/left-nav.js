@@ -484,7 +484,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [classTaxonomyIcon] The class name for the taxonomy icon.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-left-nav-container]',
       // Data Attribute selectors
@@ -509,24 +509,24 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
       selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
       selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
       selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
-      selectorLeftNavMainNavHidden: `.${brandPrefix}--left-nav__main-nav--hidden`,
+      selectorLeftNavMainNavHidden: `.${prefix}--left-nav__main-nav--hidden`,
       // CSS Class Selectors
-      classActiveTrigger: `${brandPrefix}--left-nav__trigger--active`,
-      classActiveLeftNav: `${brandPrefix}--left-nav--active`,
-      classActiveLeftNavListItem: `${brandPrefix}--active-list-item`,
-      classExpandedLeftNavListItem: `${brandPrefix}--main-nav__parent-item--expanded`,
-      classFlyoutDisplayed: `${brandPrefix}--nested-list__flyout-menu--displayed`,
-      classItemHasChildren: `${brandPrefix}--main-nav__parent-item--has-children`,
-      classNavSection: `${brandPrefix}--left-nav__section`,
-      classNavSectionTransition: `${brandPrefix}--left-nav__section--transition`,
-      classNavSectionAnchor: `${brandPrefix}--left-nav__section--anchor`,
-      classNavSectionLink: `${brandPrefix}--left-nav__section--link`,
-      classNavHeaderTitle: `${brandPrefix}--left-nav__header--title`,
-      classItemFade: `${brandPrefix}--main-nav__parent-item--fade`,
-      classItemHidden: `${brandPrefix}--main-nav__parent-item--hidden`,
-      classListHidden: `${brandPrefix}--left-nav__main-nav--hidden`,
-      classListTop: `${brandPrefix}--left-nav__main-nav--top`,
-      classTaxonomyIcon: `${brandPrefix}--left-nav__section--taxonomy-icon`,
+      classActiveTrigger: `${prefix}--left-nav__trigger--active`,
+      classActiveLeftNav: `${prefix}--left-nav--active`,
+      classActiveLeftNavListItem: `${prefix}--active-list-item`,
+      classExpandedLeftNavListItem: `${prefix}--main-nav__parent-item--expanded`,
+      classFlyoutDisplayed: `${prefix}--nested-list__flyout-menu--displayed`,
+      classItemHasChildren: `${prefix}--main-nav__parent-item--has-children`,
+      classNavSection: `${prefix}--left-nav__section`,
+      classNavSectionTransition: `${prefix}--left-nav__section--transition`,
+      classNavSectionAnchor: `${prefix}--left-nav__section--anchor`,
+      classNavSectionLink: `${prefix}--left-nav__section--link`,
+      classNavHeaderTitle: `${prefix}--left-nav__header--title`,
+      classItemFade: `${prefix}--main-nav__parent-item--fade`,
+      classItemHidden: `${prefix}--main-nav__parent-item--hidden`,
+      classListHidden: `${prefix}--left-nav__main-nav--hidden`,
+      classListTop: `${prefix}--left-nav__main-nav--top`,
+      classTaxonomyIcon: `${prefix}--left-nav__section--taxonomy-icon`,
     };
   }
 

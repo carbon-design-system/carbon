@@ -111,12 +111,12 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   static components = new WeakMap();
 
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-structured-list]',
-      selectorRow: `[data-structured-list] .${brandPrefix}--structured-list-tbody > label.${brandPrefix}--structured-list-row`,
-      selectorListInput: id => `#${id}.${brandPrefix}--structured-list-input`,
-      classActive: `${brandPrefix}--structured-list-row--selected`,
+      selectorRow: `[data-structured-list] .${prefix}--structured-list-tbody > label.${prefix}--structured-list-row`,
+      selectorListInput: id => `#${id}.${prefix}--structured-list-input`,
+      classActive: `${prefix}--structured-list-row--selected`,
     };
   }
 }

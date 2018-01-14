@@ -208,15 +208,15 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
    * @property {string} selectorInit The CSS selector to find slider instances.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-slider]',
-      selectorTrack: `.${brandPrefix}--slider__track`,
-      selectorFilledTrack: `.${brandPrefix}--slider__filled-track`,
-      selectorThumb: `.${brandPrefix}--slider__thumb`,
-      selectorInput: `.${brandPrefix}--slider__input`,
-      classDisabled: `${brandPrefix}--slider--disabled`,
-      classThumbClicked: `${brandPrefix}--slider__thumb--clicked`,
+      selectorTrack: `.${prefix}--slider__track`,
+      selectorFilledTrack: `.${prefix}--slider__filled-track`,
+      selectorThumb: `.${prefix}--slider__thumb`,
+      selectorInput: `.${prefix}--slider__input`,
+      classDisabled: `${prefix}--slider--disabled`,
+      classThumbClicked: `${prefix}--slider__thumb--clicked`,
       eventBeforeSliderValueChange: 'slider-before-value-change',
       eventAfterSliderValueChange: 'slider-after-value-change',
       stepMultiplier: 4,

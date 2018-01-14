@@ -1,7 +1,7 @@
 @import '../../globals/scss/import-once';
 
 @include exports('left-nav') {
-  .#{$brand-prefix}--global-header__left-nav {
+  .#{$prefix}--global-header__left-nav {
     @include layer('temporary-nav');
     @include reset;
     position: fixed;
@@ -16,13 +16,13 @@
     visibility: hidden;
   }
 
-  .#{$brand-prefix}--global-header__left-nav.#{$brand-prefix}--left-nav--active {
+  .#{$prefix}--global-header__left-nav.#{$prefix}--left-nav--active {
     transform: translate3d(0, 0, 0);
     box-shadow: 0px 1px 15px 2px rgba(0, 0, 0, 0.1);
     visibility: visible;
   }
 
-  .#{$brand-prefix}--left-nav {
+  .#{$prefix}--left-nav {
     @include reset;
     display: block;
     width: 100%;
@@ -33,14 +33,14 @@
     overflow-x: hidden;
   }
 
-  .#{$brand-prefix}--left-nav__close-row {
+  .#{$prefix}--left-nav__close-row {
     @include reset;
     height: rem(50px);
     width: 100%;
     background-color: $ui-01;
   }
 
-  .#{$brand-prefix}--left-nav__header {
+  .#{$prefix}--left-nav__header {
     @include reset;
     align-items: center;
     height: rem(50px);
@@ -67,7 +67,7 @@
     }
   }
 
-  .#{$brand-prefix}--left-nav__header--title {
+  .#{$prefix}--left-nav__header--title {
     @include typescale('epsilon');
     @include font-smoothing;
     color: $inverse-01;
@@ -75,21 +75,21 @@
     margin-right: auto;
   }
 
-  .#{$brand-prefix}--left-nav__header--taxonomy-icon {
+  .#{$prefix}--left-nav__header--taxonomy-icon {
     width: rem(24px);
     height: rem(24px);
     fill: $inverse-01;
     margin-right: 1rem;
   }
 
-  .#{$brand-prefix}--left-nav__header--close-icon {
+  .#{$prefix}--left-nav__header--close-icon {
     width: rem(14px);
     height: rem(14px);
     display: block;
     fill: $inverse-01;
   }
 
-  .#{$brand-prefix}--left-nav__sections {
+  .#{$prefix}--left-nav__sections {
     @include reset;
     list-style: none;
     padding: 0 0 1rem;
@@ -100,7 +100,7 @@
     background-color: $color__white;
   }
 
-  .#{$brand-prefix}--left-nav__section {
+  .#{$prefix}--left-nav__section {
     @include reset;
     display: flex;
     align-items: center;
@@ -121,19 +121,19 @@
         background-color: $color__blue-50;
       }
 
-      .#{$brand-prefix}--left-nav__section--link {
+      .#{$prefix}--left-nav__section--link {
         @include font-smoothing;
         font-weight: 600;
         color: $inverse-01;
       }
 
-      .#{$brand-prefix}--left-nav__section--taxonomy-icon {
+      .#{$prefix}--left-nav__section--taxonomy-icon {
         fill: $inverse-01;
       }
     }
   }
 
-  .#{$brand-prefix}--left-nav__section--active {
+  .#{$prefix}--left-nav__section--active {
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
@@ -158,8 +158,8 @@
     }
   }
 
-  .#{$brand-prefix}--left-nav__section--transition {
-    @extend .#{$brand-prefix}--left-nav__section--active;
+  .#{$prefix}--left-nav__section--transition {
+    @extend .#{$prefix}--left-nav__section--active;
     position: absolute;
     z-index: 9999;
     transition: all 0.3s $carbon--ease-out;
@@ -176,19 +176,19 @@
       transform: translateY(50px);
     }
 
-    .#{$brand-prefix}--left-nav__section--taxonomy-icon {
+    .#{$prefix}--left-nav__section--taxonomy-icon {
       fill: $inverse-01;
     }
   }
 
-  .#{$brand-prefix}--left-nav__section--taxonomy-icon {
+  .#{$prefix}--left-nav__section--taxonomy-icon {
     width: rem(24px);
     height: rem(24px);
     fill: $text-01;
     margin-right: 1rem;
   }
 
-  .#{$brand-prefix}--left-nav__section--anchor {
+  .#{$prefix}--left-nav__section--anchor {
     @include reset;
     display: flex;
     width: 100%;
@@ -197,7 +197,7 @@
     text-decoration: none;
   }
 
-  .#{$brand-prefix}--left-nav__section--link {
+  .#{$prefix}--left-nav__section--link {
     @include reset;
     @include typescale('epsilon');
     display: flex;
@@ -207,7 +207,7 @@
   }
 
   // MAIN NAV
-  .#{$brand-prefix}--left-nav__main-nav {
+  .#{$prefix}--left-nav__main-nav {
     @include reset;
     list-style: none;
     display: flex;
@@ -219,15 +219,15 @@
     background-color: $inverse-01;
   }
 
-  .#{$brand-prefix}--left-nav__main-nav--hidden {
+  .#{$prefix}--left-nav__main-nav--hidden {
     display: none;
   }
 
-  .#{$brand-prefix}--left-nav__main-nav--top {
+  .#{$prefix}--left-nav__main-nav--top {
     margin-top: -100vh;
   }
 
-  .#{$brand-prefix}--main-nav__parent-item {
+  .#{$prefix}--main-nav__parent-item {
     @include reset;
     opacity: 1;
     transition: opacity 200ms $carbon--standard-easing;
@@ -238,21 +238,21 @@
     background-color: $ui-01;
   }
 
-  .#{$brand-prefix}--main-nav__parent-item--fade {
+  .#{$prefix}--main-nav__parent-item--fade {
     opacity: 0;
   }
 
-  .#{$brand-prefix}--main-nav__parent-item--hidden {
+  .#{$prefix}--main-nav__parent-item--hidden {
     display: none;
   }
 
-  .#{$brand-prefix}--main-nav__parent-item--expanded {
-    .#{$brand-prefix}--parent-item__link--down-icon svg {
+  .#{$prefix}--main-nav__parent-item--expanded {
+    .#{$prefix}--parent-item__link--down-icon svg {
       transform: rotate(180deg);
     }
   }
 
-  .#{$brand-prefix}--parent-item__link {
+  .#{$prefix}--parent-item__link {
     @include reset;
     @include typescale('zeta');
     font-weight: 400;
@@ -264,7 +264,7 @@
     transition: background-color $transition--base $carbon--standard-easing;
     color: $text-01;
 
-    .#{$brand-prefix}--parent-item__link--taxonomy-icon {
+    .#{$prefix}--parent-item__link--taxonomy-icon {
       width: rem(24px);
       height: rem(24px);
       transition: $transition--base $carbon--standard-easing;
@@ -272,7 +272,7 @@
       fill: $text-01;
     }
 
-    .#{$brand-prefix}--parent-item__link--down-icon {
+    .#{$prefix}--parent-item__link--down-icon {
       display: flex;
       margin-left: auto;
 
@@ -285,84 +285,84 @@
     }
 
     &:hover {
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
         color: $nav-06;
 
-        .#{$brand-prefix}--parent-item__link--taxonomy-icon,
-        .#{$brand-prefix}--parent-item__link--down-icon svg {
+        .#{$prefix}--parent-item__link--taxonomy-icon,
+        .#{$prefix}--parent-item__link--down-icon svg {
           fill: $nav-06;
         }
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
         color: $nav-04;
 
-        .#{$brand-prefix}--parent-item__link--taxonomy-icon,
-        .#{$brand-prefix}--parent-item__link--down-icon svg {
+        .#{$prefix}--parent-item__link--taxonomy-icon,
+        .#{$prefix}--parent-item__link--down-icon svg {
           fill: $nav-04;
         }
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
         color: $nav-08;
 
-        .#{$brand-prefix}--parent-item__link--taxonomy-icon,
-        .#{$brand-prefix}--parent-item__link--down-icon svg {
+        .#{$prefix}--parent-item__link--taxonomy-icon,
+        .#{$prefix}--parent-item__link--down-icon svg {
           fill: $nav-08;
         }
       }
     }
   }
 
-  .#{$brand-prefix}--main-nav__parent-item.#{$brand-prefix}--active-list-item {
-    .#{$brand-prefix}--parent-item__link {
+  .#{$prefix}--main-nav__parent-item.#{$prefix}--active-list-item {
+    .#{$prefix}--parent-item__link {
       color: $inverse-01;
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
         background-color: $nav-06;
 
         &:hover {
           color: $inverse-01;
 
-          .#{$brand-prefix}--parent-item__link--taxonomy-icon,
-          .#{$brand-prefix}--parent-item__link--down-icon svg {
+          .#{$prefix}--parent-item__link--taxonomy-icon,
+          .#{$prefix}--parent-item__link--down-icon svg {
             fill: $inverse-01;
           }
         }
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
         background-color: $nav-04;
 
         &:hover {
           color: $inverse-01;
 
-          .#{$brand-prefix}--parent-item__link--taxonomy-icon,
-          .#{$brand-prefix}--parent-item__link--down-icon svg {
+          .#{$prefix}--parent-item__link--taxonomy-icon,
+          .#{$prefix}--parent-item__link--down-icon svg {
             fill: $inverse-01;
           }
         }
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
         background-color: $nav-08;
 
         &:hover {
           color: $inverse-01;
 
-          .#{$brand-prefix}--parent-item__link--taxonomy-icon,
-          .#{$brand-prefix}--parent-item__link--down-icon svg {
+          .#{$prefix}--parent-item__link--taxonomy-icon,
+          .#{$prefix}--parent-item__link--down-icon svg {
             fill: $inverse-01;
           }
         }
       }
     }
 
-    .#{$brand-prefix}--parent-item__link--taxonomy-icon {
+    .#{$prefix}--parent-item__link--taxonomy-icon {
       fill: $inverse-01;
     }
 
-    .#{$brand-prefix}--parent-item__link--down-icon svg {
+    .#{$prefix}--parent-item__link--down-icon svg {
       fill: $inverse-01;
     }
 
@@ -371,7 +371,7 @@
     }
   }
 
-  .#{$brand-prefix}--main-nav__nested-list {
+  .#{$prefix}--main-nav__nested-list {
     @include reset;
     @include list;
     list-style: none;
@@ -383,19 +383,19 @@
     margin-bottom: 0;
   }
 
-  .#{$brand-prefix}--main-nav__parent-item--expanded .#{$brand-prefix}--main-nav__nested-list {
+  .#{$prefix}--main-nav__parent-item--expanded .#{$prefix}--main-nav__nested-list {
     max-height: 20rem;
     transition: 300ms $carbon--standard-easing;
     opacity: 1;
     margin-top: 0.5rem;
     overflow: visible;
 
-    .#{$brand-prefix}--nested-list__item {
+    .#{$prefix}--nested-list__item {
       opacity: 1;
     }
   }
 
-  .#{$brand-prefix}--nested-list__item {
+  .#{$prefix}--nested-list__item {
     width: 100%;
     position: static;
     margin-bottom: 0.25rem;
@@ -404,7 +404,7 @@
     opacity: 0;
   }
 
-  .#{$brand-prefix}--nested-list__item--link {
+  .#{$prefix}--nested-list__item--link {
     @include typescale('zeta');
     color: $text-01;
     padding: 0.5rem 1.35rem 0.5rem 2rem;
@@ -417,83 +417,83 @@
     margin-right: auto;
 
     &:hover {
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
         color: $nav-06;
 
-        .#{$brand-prefix}--left-nav-list__item-link--taxonomy-icon {
+        .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
           fill: $nav-06;
         }
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
         color: $nav-04;
 
-        .#{$brand-prefix}--left-nav-list__item-link--taxonomy-icon {
+        .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
           fill: $nav-04;
         }
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
         color: $nav-08;
 
-        .#{$brand-prefix}--left-nav-list__item-link--taxonomy-icon {
+        .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
           fill: $nav-08;
         }
       }
     }
   }
 
-  .#{$brand-prefix}--nested-list__item--icon svg {
+  .#{$prefix}--nested-list__item--icon svg {
     width: rem(10px);
     height: rem(10px);
     fill: $text-01;
   }
 
-  .#{$brand-prefix}--nested-list__item.#{$brand-prefix}--active-list-item {
-    .#{$brand-prefix}--nested-list__item--link {
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+  .#{$prefix}--nested-list__item.#{$prefix}--active-list-item {
+    .#{$prefix}--nested-list__item--link {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
         background-color: $nav-06;
 
         &:hover {
           color: $inverse-01;
 
-          .#{$brand-prefix}--parent-item__link--taxonomy-icon {
+          .#{$prefix}--parent-item__link--taxonomy-icon {
             fill: $inverse-01;
           }
         }
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
         background-color: $nav-04;
 
         &:hover {
           color: $inverse-01;
 
-          .#{$brand-prefix}--parent-item__link--taxonomy-icon {
+          .#{$prefix}--parent-item__link--taxonomy-icon {
             fill: $inverse-01;
           }
         }
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
         background-color: $nav-08;
 
         &:hover {
           color: $inverse-01;
 
-          .#{$brand-prefix}--parent-item__link--taxonomy-icon {
+          .#{$prefix}--parent-item__link--taxonomy-icon {
             fill: $inverse-01;
           }
         }
       }
     }
 
-    .#{$brand-prefix}--nested-list__item--icon svg {
+    .#{$prefix}--nested-list__item--icon svg {
       fill: $text-01;
     }
   }
 
-  .#{$brand-prefix}--nested-list__flyout-menu {
+  .#{$prefix}--nested-list__flyout-menu {
     @include layer('overlay');
     display: none;
     min-width: auto;
@@ -516,20 +516,20 @@
     }
   }
 
-  .#{$brand-prefix}--nested-list__flyout-menu--displayed {
+  .#{$prefix}--nested-list__flyout-menu--displayed {
     @include reset;
     display: block;
     border-left: 1px solid $ui-04;
   }
 
-  .#{$brand-prefix}--flyout-menu__item--link {
+  .#{$prefix}--flyout-menu__item--link {
     @include typescale('zeta');
     padding: 0 1.75rem 0 1rem;
     color: $text-01;
     text-decoration: none;
   }
 
-  .#{$brand-prefix}--flyout-menu__item {
+  .#{$prefix}--flyout-menu__item {
     @include reset;
     background-color: $ui-01;
     margin: 0;
@@ -538,25 +538,25 @@
     align-items: center;
 
     &:hover {
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='apps'] & .#{$brand-prefix}--flyout-menu__item--link {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & .#{$prefix}--flyout-menu__item--link {
         color: $nav-06;
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='services'] & .#{$brand-prefix}--flyout-menu__item--link {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & .#{$prefix}--flyout-menu__item--link {
         color: $nav-04;
       }
 
-      .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & .#{$brand-prefix}--flyout-menu__item--link {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & .#{$prefix}--flyout-menu__item--link {
         color: $nav-08;
       }
     }
   }
 
-  .#{$brand-prefix}--flyout-menu__item.#{$brand-prefix}--active-list-item {
-    .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+  .#{$prefix}--flyout-menu__item.#{$prefix}--active-list-item {
+    .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
       background-color: $nav-06;
 
-      & .#{$brand-prefix}--flyout-menu__item--link {
+      & .#{$prefix}--flyout-menu__item--link {
         color: $inverse-01;
 
         &:hover {
@@ -565,10 +565,10 @@
       }
     }
 
-    .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
+    .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & {
       background-color: $nav-04;
 
-      & .#{$brand-prefix}--flyout-menu__item--link {
+      & .#{$prefix}--flyout-menu__item--link {
         color: $inverse-01;
 
         &:hover {
@@ -577,10 +577,10 @@
       }
     }
 
-    .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
+    .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & {
       background-color: $nav-08;
 
-      & .#{$brand-prefix}--flyout-menu__item--link {
+      & .#{$prefix}--flyout-menu__item--link {
         color: $inverse-01;
 
         &:hover {

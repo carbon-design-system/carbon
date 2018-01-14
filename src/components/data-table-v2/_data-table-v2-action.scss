@@ -1,11 +1,11 @@
-.#{$brand-prefix}--table-toolbar {
+.#{$prefix}--table-toolbar {
   display: flex;
   padding-top: rem(8px);
   padding-bottom: rem(8px);
   width: 100%;
   position: relative;
 
-  .#{$brand-prefix}--search-input {
+  .#{$prefix}--search-input {
     position: relative;
 
     &:focus {
@@ -14,39 +14,39 @@
     }
   }
 
-  .#{$brand-prefix}--search-close {
+  .#{$prefix}--search-close {
     height: 10px;
     width: 10px;
     top: calc(50% - 5px);
   }
 }
 
-.#{$brand-prefix}--toolbar-content {
+.#{$prefix}--toolbar-content {
   display: flex;
   margin-left: auto;
 }
 
-.#{$brand-prefix}--toolbar-action {
+.#{$prefix}--toolbar-action {
   @include button-reset;
   cursor: pointer;
   padding-left: rem(12px);
   padding-right: rem(12px);
 
   &:hover {
-    > .#{$brand-prefix}--toolbar-action__icon {
+    > .#{$prefix}--toolbar-action__icon {
       fill: $brand-01;
     }
   }
 
   &:focus {
     @include focus-outline;
-    > .#{$brand-prefix}--toolbar-action__icon {
+    > .#{$prefix}--toolbar-action__icon {
       fill: $brand-01;
     }
   }
 
   &:active {
-    > .#{$brand-prefix}--toolbar-action__icon {
+    > .#{$prefix}--toolbar-action__icon {
       fill: darken($brand-01, 5%);
     }
   }
@@ -55,13 +55,13 @@
     padding-right: 0;
   }
 
-  ~ .#{$brand-prefix}--btn {
+  ~ .#{$prefix}--btn {
     margin-left: rem(12px);
     margin-right: rem(2px);
   }
 }
 
-.#{$brand-prefix}--toolbar-action__icon {
+.#{$prefix}--toolbar-action__icon {
   height: rem(16px);
   width: auto;
   max-width: 16px;
@@ -69,7 +69,7 @@
   transition: $transition--base;
 }
 
-.#{$brand-prefix}--batch-actions {
+.#{$prefix}--batch-actions {
   display: flex;
   align-items: center;
   position: absolute;
@@ -90,21 +90,21 @@
     @include focus-outline;
   }
 
-  .#{$brand-prefix}--btn {
+  .#{$prefix}--btn {
     color: $ui-01;
   }
 
-  .#{$brand-prefix}--btn__icon {
+  .#{$prefix}--btn__icon {
     fill: $ui-01;
   }
 
-  .#{$brand-prefix}--btn--ghost {
+  .#{$prefix}--btn--ghost {
     &:hover,
     &:focus {
       background-color: $ui-01;
       color: $brand-01;
 
-      .#{$brand-prefix}--btn__icon {
+      .#{$prefix}--btn__icon {
         fill: $brand-01;
       }
     }
@@ -116,7 +116,7 @@
   }
 }
 
-.#{$brand-prefix}--batch-actions--active {
+.#{$prefix}--batch-actions--active {
   visibility: visible;
   background-color: $brand-01;
   pointer-events: all;
@@ -124,11 +124,11 @@
   opacity: 1;
 }
 
-.#{$brand-prefix}--action-list {
+.#{$prefix}--action-list {
   margin-left: -0.5rem;
 }
 
-.#{$brand-prefix}--action-icons {
+.#{$prefix}--action-icons {
   margin-left: auto;
   svg {
     padding: 0 rem(12px);
@@ -138,19 +138,19 @@
   }
 }
 
-.#{$brand-prefix}--batch-summary {
+.#{$prefix}--batch-summary {
   margin-left: auto;
   display: flex;
   align-items: center;
   color: $ui-01;
 }
 
-.#{$brand-prefix}--batch-summary__para {
+.#{$prefix}--batch-summary__para {
   @include typescale('zeta');
   margin-right: rem(24px);
 }
 
-.#{$brand-prefix}--batch-summary__cancel {
+.#{$prefix}--batch-summary__cancel {
   @include button-reset(auto);
   @include typescale('zeta');
   color: $ui-01;
@@ -165,13 +165,13 @@
   }
 }
 
-.#{$brand-prefix}--batch-actions ~ .#{$brand-prefix}--toolbar-search-container,
-.#{$brand-prefix}--batch-actions ~ .#{$brand-prefix}--toolbar-content {
+.#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-search-container,
+.#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
   opacity: 1;
   transition: opacity $transition--base;
 }
 
-.#{$brand-prefix}--batch-actions--active ~ .#{$brand-prefix}--toolbar-search-container,
-.#{$brand-prefix}--batch-actions--active ~ .#{$brand-prefix}--toolbar-content {
+.#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
+.#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
   opacity: 0;
 }

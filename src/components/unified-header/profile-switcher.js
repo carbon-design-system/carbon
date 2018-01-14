@@ -268,7 +268,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
    *   The data attribute selector for the dropdown item containing the current space name.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-profile-switcher]',
       // Data Attribute selectors
@@ -288,8 +288,8 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
       selectorRegionDropdown: '[data-dropdown-region]',
       selectorOrgDropdown: '[data-dropdown-org]',
       selectorSpaceDropdown: '[data-dropdown-space]',
-      classSwitcherOpen: `${brandPrefix}--account-switcher--open`,
-      classLinkedIcon: `.${brandPrefix}--account-switcher__linked-icon`,
+      classSwitcherOpen: `${prefix}--account-switcher--open`,
+      classLinkedIcon: `.${prefix}--account-switcher__linked-icon`,
     };
   }
 

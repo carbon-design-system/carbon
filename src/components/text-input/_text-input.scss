@@ -11,7 +11,7 @@
 @import '../form/form';
 
 @include exports('text-input') {
-  .#{$brand-prefix}--text-input {
+  .#{$prefix}--text-input {
     @include reset;
     @include font-family;
     @include typescale('zeta');

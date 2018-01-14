@@ -207,19 +207,19 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
   };
 
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-responsive-table]',
-      selectorExpandCells: `.${brandPrefix}--table-expand`,
-      selectorExpandableRows: `.${brandPrefix}--expandable-row`,
-      selectorParentRows: `.${brandPrefix}--parent-row`,
-      selectorTableBody: `.${brandPrefix}--table-body`,
-      selectorCheckbox: `.${brandPrefix}--checkbox`,
-      classParentRowEven: `${brandPrefix}--parent-row--even`,
-      classExpandableRow: `${brandPrefix}--expandable-row`,
-      classExpandableRowEven: `${brandPrefix}--expandable-row--even`,
-      classExpandableRowHidden: `${brandPrefix}--expandable-row--hidden`,
-      classTableSortAscending: `${brandPrefix}--table-sort--ascending`,
+      selectorExpandCells: `.${prefix}--table-expand`,
+      selectorExpandableRows: `.${prefix}--expandable-row`,
+      selectorParentRows: `.${prefix}--parent-row`,
+      selectorTableBody: `.${prefix}--table-body`,
+      selectorCheckbox: `.${prefix}--checkbox`,
+      classParentRowEven: `${prefix}--parent-row--even`,
+      classExpandableRow: `${prefix}--expandable-row`,
+      classExpandableRowEven: `${prefix}--expandable-row--even`,
+      classExpandableRowHidden: `${prefix}--expandable-row--hidden`,
+      classTableSortAscending: `${prefix}--table-sort--ascending`,
       eventBeforeExpand: 'responsive-table-beforetoggleexpand',
       eventAfterExpand: 'responsive-table-aftertoggleexpand',
       eventBeforeSort: 'responsive-table-beforetogglesort',

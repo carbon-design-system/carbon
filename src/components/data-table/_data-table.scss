@@ -7,7 +7,7 @@
 @import '../../components/overflow-menu/overflow-menu';
 
 @include exports('data-table') {
-  .#{$brand-prefix}--responsive-table-container {
+  .#{$prefix}--responsive-table-container {
     @include reset;
     @include font-family;
     overflow-x: auto;
@@ -15,7 +15,7 @@
     width: 99.9%;
   }
 
-  .#{$brand-prefix}--responsive-table {
+  .#{$prefix}--responsive-table {
     @include reset;
     background-color: $ui-01;
     width: 100%;
@@ -76,7 +76,7 @@
     }
   }
 
-  .#{$brand-prefix}--responsive-table--tall {
+  .#{$prefix}--responsive-table--tall {
     td,
     th {
       padding-top: rem(10px);
@@ -84,18 +84,18 @@
     }
   }
 
-  .#{$brand-prefix}--table-row {
+  .#{$prefix}--table-row {
     @include reset;
     height: $data-table-row-height;
     padding-left: 1rem;
   }
 
-  .#{$brand-prefix}--table-head .#{$brand-prefix}--table-row {
+  .#{$prefix}--table-head .#{$prefix}--table-row {
     border-bottom: $data-table-heading-border-bottom;
     height: rem(32px);
   }
 
-  .#{$brand-prefix}--table-header {
+  .#{$prefix}--table-header {
     @include reset;
     @include typescale('omega');
     font-weight: 600;
@@ -106,26 +106,26 @@
   }
 
   // zebra stripes
-  .#{$brand-prefix}--table-body {
-    > .#{$brand-prefix}--parent-row,
-    > .#{$brand-prefix}--parent-row {
+  .#{$prefix}--table-body {
+    > .#{$prefix}--parent-row,
+    > .#{$prefix}--parent-row {
       background-color: $ui-01;
 
-      & + .#{$brand-prefix}--expandable-row {
+      & + .#{$prefix}--expandable-row {
         background-color: $ui-01;
       }
 
       &--even {
         background-color: $ui-03;
 
-        & + .#{$brand-prefix}--expandable-row {
+        & + .#{$prefix}--expandable-row {
           background-color: $ui-03;
         }
       }
     }
   }
 
-  .#{$brand-prefix}--table-body .#{$brand-prefix}--table-row {
+  .#{$prefix}--table-body .#{$prefix}--table-row {
     border: 1px solid transparent;
 
     &:first-child:hover,
@@ -142,7 +142,7 @@
   }
 
   // expandable styles
-  .#{$brand-prefix}--expandable-row {
+  .#{$prefix}--expandable-row {
     > td {
       border-left: 4px solid $brand-01;
       padding: 2rem;
@@ -154,7 +154,7 @@
   }
 
   // actions
-  .#{$brand-prefix}--table-expand {
+  .#{$prefix}--table-expand {
     padding-left: rem(8px);
     padding-right: rem(12px);
     text-align: center;
@@ -170,7 +170,7 @@
     }
   }
 
-  .#{$brand-prefix}--table-expand__svg {
+  .#{$prefix}--table-expand__svg {
     fill: $ui-05;
     transform: rotate(0deg);
     transition: transform 200ms $carbon--standard-easing;
@@ -184,7 +184,7 @@
     }
   }
 
-  .#{$brand-prefix}--table-expand[data-previous-value='collapsed'] .#{$brand-prefix}--table-expand__svg {
+  .#{$prefix}--table-expand[data-previous-value='collapsed'] .#{$prefix}--table-expand__svg {
     transform: rotate(90deg);
     transition: transform 200ms $carbon--standard-easing;
   }
@@ -193,7 +193,7 @@
     cursor: pointer;
   }
 
-  .#{$brand-prefix}--table-sort__svg {
+  .#{$prefix}--table-sort__svg {
     fill: $ui-05;
     width: 8px;
     height: 8px;
@@ -201,19 +201,19 @@
     transition: transform 200ms $carbon--standard-easing;
   }
 
-  .#{$brand-prefix}--table-sort--ascending .#{$brand-prefix}--table-sort__svg {
+  .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__svg {
     transform: rotate(180deg);
     transition: transform 200ms $carbon--standard-easing;
   }
 
-  .#{$brand-prefix}--table-select {
+  .#{$prefix}--table-select {
     @include reset;
     width: rem(30px);
     text-align: center;
     padding-left: 0;
     padding-right: 0;
 
-    .#{$brand-prefix}--checkbox-label {
+    .#{$prefix}--checkbox-label {
       display: inline-flex;
       margin: 0;
 
@@ -222,16 +222,16 @@
       }
     }
 
-    .#{$brand-prefix}--checkbox-appearance {
+    .#{$prefix}--checkbox-appearance {
       margin: 0;
     }
   }
 
-  .#{$brand-prefix}--table-overflow {
+  .#{$prefix}--table-overflow {
     width: rem(40px);
     text-align: center;
 
-    .#{$brand-prefix}--overflow-menu {
+    .#{$prefix}--overflow-menu {
       padding: 0;
     }
   }

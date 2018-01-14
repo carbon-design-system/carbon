@@ -74,10 +74,10 @@ class Card extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [selectorCard] The CSS selector to find cards.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-card-list]',
-      selectorCard: `.${brandPrefix}--card`,
+      selectorCard: `.${prefix}--card`,
     };
   }
 

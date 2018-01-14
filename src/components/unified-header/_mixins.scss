@@ -6,26 +6,26 @@
 
 @mixin link-style {
   &:hover {
-    .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
+    .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & {
       color: $nav-06;
 
-      .#{$brand-prefix}--left-nav-list__item-link--taxonomy-icon {
+      .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
         fill: $nav-06;
       }
     }
 
-    .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='Services'] & {
+    .#{$prefix}--left-nav__main-nav[data-left-nav-list='Services'] & {
       color: $nav-04;
 
-      .#{$brand-prefix}--left-nav-list__item-link--taxonomy-icon {
+      .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
         fill: $nav-04;
       }
     }
 
-    .#{$brand-prefix}--left-nav__main-nav[data-left-nav-list='Infrastructure'] & {
+    .#{$prefix}--left-nav__main-nav[data-left-nav-list='Infrastructure'] & {
       color: $nav-08;
 
-      .#{$brand-prefix}--left-nav-list__item-link--taxonomy-icon {
+      .#{$prefix}--left-nav-list__item-link--taxonomy-icon {
         fill: $nav-08;
       }
     }

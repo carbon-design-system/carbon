@@ -160,17 +160,17 @@ class Tab extends ContentSwitcher {
    * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return Object.assign(Object.create(ContentSwitcher.options), {
       selectorInit: '[data-tabs]',
-      selectorMenu: `.${brandPrefix}--tabs__nav`,
-      selectorTrigger: `.${brandPrefix}--tabs-trigger`,
-      selectorTriggerText: `.${brandPrefix}--tabs-trigger-text`,
-      selectorButton: `.${brandPrefix}--tabs__nav-item`,
-      selectorButtonSelected: `.${brandPrefix}--tabs__nav-item--selected`,
-      selectorLink: `.${brandPrefix}--tabs__nav-link`,
-      classActive: `${brandPrefix}--tabs__nav-item--selected`,
-      classHidden: `${brandPrefix}--tabs__nav--hidden`,
+      selectorMenu: `.${prefix}--tabs__nav`,
+      selectorTrigger: `.${prefix}--tabs-trigger`,
+      selectorTriggerText: `.${prefix}--tabs-trigger-text`,
+      selectorButton: `.${prefix}--tabs__nav-item`,
+      selectorButtonSelected: `.${prefix}--tabs__nav-item--selected`,
+      selectorLink: `.${prefix}--tabs__nav-link`,
+      classActive: `${prefix}--tabs__nav-item--selected`,
+      classHidden: `${prefix}--tabs__nav--hidden`,
       eventBeforeSelected: 'tab-beingselected',
       eventAfterSelected: 'tab-selected',
     });

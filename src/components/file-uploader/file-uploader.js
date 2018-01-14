@@ -163,19 +163,19 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   static components = new WeakMap();
 
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-file]',
-      selectorInput: `input[type="file"].${brandPrefix}--file-input`,
+      selectorInput: `input[type="file"].${prefix}--file-input`,
       selectorContainer: '[data-file-container]',
-      selectorCloseButton: `.${brandPrefix}--file-close`,
-      classLoading: `${brandPrefix}--loading`,
-      classLoadingSvg: `${brandPrefix}--loading__svg`,
-      classFileName: `${brandPrefix}--file-filename`,
-      classFileClose: `${brandPrefix}--file-close`,
-      classFileComplete: `${brandPrefix}--file-complete`,
-      classSelectedFile: `${brandPrefix}--file__selected-file`,
-      classStateContainer: `${brandPrefix}--file__state-container`,
+      selectorCloseButton: `.${prefix}--file-close`,
+      classLoading: `${prefix}--loading`,
+      classLoadingSvg: `${prefix}--loading__svg`,
+      classFileName: `${prefix}--file-filename`,
+      classFileClose: `${prefix}--file-close`,
+      classFileComplete: `${prefix}--file-complete`,
+      classSelectedFile: `${prefix}--file__selected-file`,
+      classStateContainer: `${prefix}--file__state-container`,
       eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
       eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
     };

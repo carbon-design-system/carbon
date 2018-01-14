@@ -9,7 +9,7 @@ $loading__size: 10.5rem;
 @import 'mixins';
 
 @include exports('loading') {
-  .#{$brand-prefix}--loading {
+  .#{$prefix}--loading {
     @include reset;
     @include animation__loading--spin;
     width: $loading__size;
@@ -17,7 +17,7 @@ $loading__size: 10.5rem;
   }
 
   // Animation (Spin by default)
-  .#{$brand-prefix}--loading__svg {
+  .#{$prefix}--loading__svg {
     fill: transparent;
     stroke: $brand-03;
     stroke-width: 7;
@@ -26,20 +26,20 @@ $loading__size: 10.5rem;
     stroke-dashoffset: $loading__gap;
   }
 
-  .#{$brand-prefix}--loading--stop {
+  .#{$prefix}--loading--stop {
     @include animation__loading--stop;
   }
 
-  .#{$brand-prefix}--loading--small {
+  .#{$prefix}--loading--small {
     width: 2rem;
     height: 2rem;
 
-    .#{$brand-prefix}--loading__svg {
+    .#{$prefix}--loading__svg {
       stroke: $ui-05;
     }
   }
 
-  .#{$brand-prefix}--loading-overlay {
+  .#{$prefix}--loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -53,7 +53,7 @@ $loading__size: 10.5rem;
     z-index: z('overlay');
   }
 
-  .#{$brand-prefix}--loading-overlay--stop {
+  .#{$prefix}--loading-overlay--stop {
     display: none;
   }
 }

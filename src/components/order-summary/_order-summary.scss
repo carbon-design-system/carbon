@@ -12,7 +12,7 @@
     'Accessing the `order-summary` component from the `carbon-components` ' +
     'package is deprecated. Use the `carbon-addons-bluemix` package instead.'
   ) {
-    .#{$brand-prefix}--order-summary {
+    .#{$prefix}--order-summary {
       @include typescale('zeta');
       background-color: $ui-01;
       padding-bottom: 1.25rem;
@@ -22,47 +22,47 @@
       flex-direction: column;
     }
 
-    .#{$brand-prefix}--order-header {
+    .#{$prefix}--order-header {
       display: flex;
       align-items: center;
       padding: 0 0 0 1.25rem;
       border-bottom: 1px solid $ui-05;
 
-      .#{$brand-prefix}--dropdown {
+      .#{$prefix}--dropdown {
         flex: 1;
         background-color: $ui-01;
         margin-right: rem(1px);
       }
 
-      .#{$brand-prefix}--dropdown-text {
+      .#{$prefix}--dropdown-text {
         max-width: rem(100px);
       }
 
-      .#{$brand-prefix}--dropdown-link {
+      .#{$prefix}--dropdown-link {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      .#{$brand-prefix}--dropdown[data-value=''] .#{$brand-prefix}--dropdown-text,
-      .#{$brand-prefix}--dropdown-text {
+      .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text,
+      .#{$prefix}--dropdown-text {
         color: $brand-01;
       }
     }
 
-    .#{$brand-prefix}--order-header-title {
+    .#{$prefix}--order-header-title {
       @include typescale('zeta');
       font-weight: 600;
       flex: 2;
     }
 
-    .#{$brand-prefix}--order-list {
+    .#{$prefix}--order-list {
       padding: 1.25rem 0;
       margin: 0 1.25rem;
       border-bottom: 1px solid $ui-05;
     }
 
-    .#{$brand-prefix}--order-item {
+    .#{$prefix}--order-item {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1.125rem;
@@ -72,23 +72,23 @@
       }
     }
 
-    .#{$brand-prefix}--order-detail {
+    .#{$prefix}--order-detail {
       @include typescale('zeta');
       color: $text-02;
       padding-right: 1.25rem;
       line-height: 1.25;
     }
 
-    .#{$brand-prefix}--order-price {
+    .#{$prefix}--order-price {
       @include typescale('omega');
       font-weight: 600;
       white-space: nowrap;
     }
 
-    .#{$brand-prefix}--order-total-container {
+    .#{$prefix}--order-total-container {
       padding: 1.125rem 1.25rem 0;
 
-      .#{$brand-prefix}--btn {
+      .#{$prefix}--btn {
         width: 100%;
         margin-top: 1rem;
 
@@ -102,17 +102,17 @@
       }
     }
 
-    .#{$brand-prefix}--order-total {
+    .#{$prefix}--order-total {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1rem;
     }
 
-    .#{$brand-prefix}--order-total-text {
+    .#{$prefix}--order-total-text {
       font-weight: 600;
     }
 
-    .#{$brand-prefix}--order-total-price {
+    .#{$prefix}--order-total-price {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -125,13 +125,13 @@
       }
     }
 
-    .#{$brand-prefix}--order-total-subtitle {
+    .#{$prefix}--order-total-subtitle {
       @include typescale('legal');
       color: $text-02;
       font-style: italic;
     }
 
-    .#{$brand-prefix}--order-footer {
+    .#{$prefix}--order-footer {
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -139,13 +139,13 @@
       padding-right: 1.25rem;
     }
 
-    .#{$brand-prefix}--order-footer-text {
+    .#{$prefix}--order-footer-text {
       @include typescale('zeta');
       color: $text-02;
       line-height: 1;
     }
 
-    .#{$brand-prefix}--order-category {
+    .#{$prefix}--order-category {
       margin-bottom: 2rem;
 
       &:last-child {
@@ -153,7 +153,7 @@
       }
     }
 
-    .#{$brand-prefix}--order-category-title {
+    .#{$prefix}--order-category-title {
       @include typescale('omega');
       font-weight: 600;
       margin-bottom: rem(4px);

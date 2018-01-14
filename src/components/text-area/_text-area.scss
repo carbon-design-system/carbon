@@ -11,7 +11,7 @@
 @import '../form/form';
 
 @include exports('text-area') {
-  .#{$brand-prefix}--text-area {
+  .#{$prefix}--text-area {
     @include reset;
     @include font-family;
     @include typescale('zeta');

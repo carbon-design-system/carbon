@@ -70,10 +70,10 @@ class NumberInput extends mixin(createComponent, initComponentBySearch, handles)
    * @property {string} [selectorInput] The CSS selector to find the `<input>` element.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-numberinput]',
-      selectorInput: `.${brandPrefix}--number input`,
+      selectorInput: `.${prefix}--number input`,
     };
   }
 }

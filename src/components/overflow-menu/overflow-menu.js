@@ -122,13 +122,13 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   static components = new WeakMap();
 
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-overflow-menu]',
-      selectorOptionMenu: `.${brandPrefix}--overflow-menu-options`,
-      classShown: `${brandPrefix}--overflow-menu--open`,
-      classMenuShown: `${brandPrefix}--overflow-menu-options--open`,
-      classMenuFlip: `${brandPrefix}--overflow-menu--flip`,
+      selectorOptionMenu: `.${prefix}--overflow-menu-options`,
+      classShown: `${prefix}--overflow-menu--open`,
+      classMenuShown: `${prefix}--overflow-menu-options--open`,
+      classMenuFlip: `${prefix}--overflow-menu--flip`,
       objMenuOffset: { top: 3, left: 61 },
       objMenuOffsetFlip: { top: 3, left: -61 },
     };

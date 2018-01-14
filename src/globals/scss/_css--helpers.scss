@@ -4,7 +4,7 @@
 @import 'import-once';
 
 @mixin css-helpers {
-  .#{$brand-prefix}--visually-hidden {
+  .#{$prefix}--visually-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -17,7 +17,7 @@
     white-space: nowrap;
   }
 
-  .#{$brand-prefix}--body {
+  .#{$prefix}--body {
     @include reset;
     @include font-family;
     color: $text-01;

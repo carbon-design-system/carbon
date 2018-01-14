@@ -15,7 +15,7 @@
 @import '../button/button';
 
 @include exports('modal') {
-  .#{$brand-prefix}--modal {
+  .#{$prefix}--modal {
     @include reset;
     @include font-family;
     position: fixed;
@@ -41,7 +41,7 @@
     }
   }
 
-  .#{$brand-prefix}--modal-container {
+  .#{$prefix}--modal-container {
     @include reset;
     @include layer('pop-out');
     position: relative;
@@ -68,11 +68,11 @@
     }
   }
 
-  .#{$brand-prefix}--modal-header {
+  .#{$prefix}--modal-header {
     margin-bottom: rem(24px);
   }
 
-  .#{$brand-prefix}--modal-header__label {
+  .#{$prefix}--modal-header__label {
     @include reset;
     @include typescale('omega');
     color: $text-01;
@@ -82,14 +82,14 @@
     margin-bottom: rem(8px);
   }
 
-  .#{$brand-prefix}--modal-header__heading {
+  .#{$prefix}--modal-header__heading {
     @include reset;
     @include typescale('beta');
     font-weight: 300;
     color: $text-02;
   }
 
-  .#{$brand-prefix}--modal-content {
+  .#{$prefix}--modal-content {
     overflow-y: auto;
     margin-bottom: rem(48px);
 
@@ -98,7 +98,7 @@
     }
   }
 
-  .#{$brand-prefix}--modal-footer {
+  .#{$prefix}--modal-footer {
     margin-top: auto;
     text-align: right;
     background-color: $modal-footer-background-color;
@@ -113,7 +113,7 @@
     }
   }
 
-  .#{$brand-prefix}--modal-close {
+  .#{$prefix}--modal-close {
     position: absolute;
     top: rem(16px);
     right: rem(16px);
@@ -129,7 +129,7 @@
     }
   }
 
-  .#{$brand-prefix}--modal-close__icon {
+  .#{$prefix}--modal-close__icon {
     transition: 200ms;
     fill: $ui-05;
     width: rem(12px);

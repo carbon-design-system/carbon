@@ -99,15 +99,15 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [options.classLayoutHidden] The class used to hide nonselected layout view.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-search]',
       selectorSearchView: '[data-search-view]',
-      selectorSearchInput: `.${brandPrefix}--search-input`,
-      selectorClearIcon: `.${brandPrefix}--search-close`,
-      selectorIconContainer: `.${brandPrefix}--search-button[data-search-toggle]`,
-      classClearHidden: `${brandPrefix}--search-close--hidden`,
-      classLayoutHidden: `${brandPrefix}--search-view--hidden`,
+      selectorSearchInput: `.${prefix}--search-input`,
+      selectorClearIcon: `.${prefix}--search-close`,
+      selectorIconContainer: `.${prefix}--search-button[data-search-toggle]`,
+      classClearHidden: `${prefix}--search-close--hidden`,
+      classLayoutHidden: `${prefix}--search-view--hidden`,
     };
   }
 

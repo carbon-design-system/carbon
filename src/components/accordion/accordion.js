@@ -81,13 +81,13 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} selectorInit The CSS selector to find accordion UIs.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-accordion]',
-      selectorAccordionItem: `.${brandPrefix}--accordion__item`,
-      selectorAccordionItemHeading: `.${brandPrefix}--accordion__heading`,
-      selectorAccordionContent: `.${brandPrefix}--accordion__content`,
-      classActive: `${brandPrefix}--accordion__item--active`,
+      selectorAccordionItem: `.${prefix}--accordion__item`,
+      selectorAccordionItemHeading: `.${prefix}--accordion__heading`,
+      selectorAccordionContent: `.${prefix}--accordion__content`,
+      classActive: `${prefix}--accordion__item--active`,
     };
   }
 

@@ -12,7 +12,7 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tabs') {
-  .#{$brand-prefix}--tabs {
+  .#{$prefix}--tabs {
     @include typescale('zeta');
     @include font-smoothing;
     @include font-family;
@@ -29,7 +29,7 @@
     }
   }
 
-  .#{$brand-prefix}--tabs-trigger {
+  .#{$prefix}--tabs-trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,7 +52,7 @@
     }
   }
 
-  .#{$brand-prefix}--tabs-trigger-text {
+  .#{$prefix}--tabs-trigger-text {
     text-decoration: none;
     font-weight: 600;
     color: $text-01;
@@ -62,7 +62,7 @@
     }
   }
 
-  .#{$brand-prefix}--tabs__nav {
+  .#{$prefix}--tabs__nav {
     @include layer('overlay');
     margin: 0;
     padding: 0;
@@ -86,7 +86,7 @@
     }
   }
 
-  .#{$brand-prefix}--tabs__nav--hidden {
+  .#{$prefix}--tabs__nav--hidden {
     display: none;
 
     @include breakpoint(bp--sm--major) {
@@ -94,7 +94,7 @@
     }
   }
 
-  .#{$brand-prefix}--tabs__nav-item {
+  .#{$prefix}--tabs__nav-item {
     @include typescale('zeta');
     background-color: $ui-01;
     padding: 0;
@@ -119,13 +119,13 @@
     }
   }
 
-  .#{$brand-prefix}--tabs__nav-item--selected {
+  .#{$prefix}--tabs__nav-item--selected {
     border: none;
 
     @include breakpoint(bp--sm--major) {
       border-bottom: 2px solid $brand-01;
 
-      .#{$brand-prefix}--tabs__nav-link {
+      .#{$prefix}--tabs__nav-link {
         color: $brand-01;
 
         &:focus {
@@ -135,7 +135,7 @@
     }
   }
 
-  .#{$brand-prefix}--tabs__nav-item:hover .#{$brand-prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
     color: $inverse-01;
 
     @include breakpoint(bp--sm--major) {
@@ -143,7 +143,7 @@
     }
   }
 
-  .#{$brand-prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-link {
     display: inline-block;
     color: $text-01;
     text-decoration: none;

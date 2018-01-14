@@ -9,20 +9,20 @@
 @import '../../globals/scss/import-once';
 
 @include exports('time-picker') {
-  .#{$brand-prefix}--time-picker {
+  .#{$prefix}--time-picker {
     display: flex;
     align-items: flex-start;
   }
 
-  .#{$brand-prefix}--time-picker .#{$brand-prefix}--select-input {
+  .#{$prefix}--time-picker .#{$prefix}--select-input {
     padding-right: rem(32px);
   }
 
-  .#{$brand-prefix}--time-picker .#{$brand-prefix}--select__arrow {
+  .#{$prefix}--time-picker .#{$prefix}--select__arrow {
     right: 0.875rem;
   }
 
-  .#{$brand-prefix}--time-picker__input-field {
+  .#{$prefix}--time-picker__input-field {
     @include reset;
     @include font-family;
     @include typescale('zeta');

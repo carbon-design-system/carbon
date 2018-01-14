@@ -10,11 +10,11 @@
 @import '../form/form';
 
 @include exports('toggle') {
-  .#{$brand-prefix}--toggle {
+  .#{$prefix}--toggle {
     @include hidden;
   }
 
-  .#{$brand-prefix}--toggle__label {
+  .#{$prefix}--toggle__label {
     @include font-family;
     position: relative;
     display: flex;
@@ -24,7 +24,7 @@
     margin: 1rem 0;
   }
 
-  .#{$brand-prefix}--toggle__appearance {
+  .#{$prefix}--toggle__appearance {
     position: relative;
     width: 48px;
 
@@ -56,21 +56,21 @@
     }
   }
 
-  .#{$brand-prefix}--toggle__text--left,
-  .#{$brand-prefix}--toggle__text--right {
+  .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle__text--right {
     @include typescale('zeta');
     position: relative;
   }
 
-  .#{$brand-prefix}--toggle__text--left {
+  .#{$prefix}--toggle__text--left {
     margin-right: 0.5rem;
   }
 
-  .#{$brand-prefix}--toggle__text--right {
+  .#{$prefix}--toggle__text--right {
     margin-left: 0.5rem;
   }
 
-  .#{$brand-prefix}--toggle:checked + .#{$brand-prefix}--toggle__label .#{$brand-prefix}--toggle__appearance {
+  .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     &:before {
       background-color: $brand-01;
     }
@@ -83,22 +83,22 @@
     }
   }
 
-  .#{$brand-prefix}--toggle:focus + .#{$brand-prefix}--toggle__label {
-    .#{$brand-prefix}--toggle__appearance:before {
+  .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
       outline: 1px solid transparent;
     }
 
-    .#{$brand-prefix}--toggle__appearance:after {
+    .#{$prefix}--toggle__appearance:after {
       @include focus-outline('blurred');
     }
   }
 
-  .#{$brand-prefix}--toggle:disabled + .#{$brand-prefix}--toggle__label {
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label {
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  .#{$brand-prefix}--toggle:disabled + .#{$brand-prefix}--toggle__label .#{$brand-prefix}--toggle__appearance {
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     &:before,
     &:after {
       cursor: not-allowed;

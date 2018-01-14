@@ -109,13 +109,13 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} selectorInit The CSS selector to find spinners.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-loading]',
-      selectorLoadingOverlay: `.${brandPrefix}--loading-overlay`,
-      classLoadingOverlay: `${brandPrefix}--loading-overlay`,
-      classLoadingStop: `${brandPrefix}--loading--stop`,
-      classLoadingOverlayStop: `${brandPrefix}--loading-overlay--stop`,
+      selectorLoadingOverlay: `.${prefix}--loading-overlay`,
+      classLoadingOverlay: `${prefix}--loading-overlay`,
+      classLoadingStop: `${prefix}--loading--stop`,
+      classLoadingOverlayStop: `${prefix}--loading-overlay--stop`,
       active: true,
     };
   }

@@ -6,14 +6,14 @@
 @import '../../globals/scss/import-once';
 
 @include exports('progress-indicator') {
-  .#{$brand-prefix}--progress {
+  .#{$prefix}--progress {
     @include reset;
     @include font-family;
     display: flex;
     list-style: none;
   }
 
-  .#{$brand-prefix}--progress-step {
+  .#{$prefix}--progress-step {
     position: relative;
     display: inline-flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     overflow: visible;
   }
 
-  .#{$brand-prefix}--progress-line {
+  .#{$prefix}--progress-line {
     position: absolute;
     top: $progress-indicator-line-offset;
     right: 100%;
@@ -31,12 +31,12 @@
     width: calc(100% - 24px);
     border: $progress-indicator-bar-width;
 
-    .#{$brand-prefix}--progress-step:first-child & {
+    .#{$prefix}--progress-step:first-child & {
       display: none;
     }
   }
 
-  .#{$brand-prefix}--progress-step svg {
+  .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
     width: 1.5rem;
@@ -45,12 +45,12 @@
     margin-bottom: 0.5rem;
   }
 
-  .#{$brand-prefix}--progress-label {
+  .#{$prefix}--progress-label {
     line-height: 1;
     width: 75%;
   }
 
-  .#{$brand-prefix}--progress-step--current {
+  .#{$prefix}--progress-step--current {
     circle:first-child {
       stroke: $brand-01;
       stroke-width: $progress-indicator-stroke-width;
@@ -61,33 +61,33 @@
       fill: $brand-01;
     }
 
-    .#{$brand-prefix}--progress-label {
+    .#{$prefix}--progress-label {
       @include font-smoothing;
       color: $brand-01;
       font-weight: 600;
     }
-    .#{$brand-prefix}--progress-line {
+    .#{$prefix}--progress-line {
       background-color: $brand-01;
     }
   }
 
-  .#{$brand-prefix}--progress-step--incomplete {
+  .#{$prefix}--progress-step--incomplete {
     circle {
       stroke: $ui-05;
       stroke-width: $progress-indicator-stroke-width;
       fill: transparent;
     }
 
-    .#{$brand-prefix}--progress-label {
+    .#{$prefix}--progress-label {
       color: $text-02;
     }
 
-    .#{$brand-prefix}--progress-line {
+    .#{$prefix}--progress-line {
       background-color: $ui-05;
     }
   }
 
-  .#{$brand-prefix}--progress-step--complete {
+  .#{$prefix}--progress-step--complete {
     circle {
       stroke: $brand-01;
       stroke-width: $progress-indicator-stroke-width;
@@ -98,12 +98,12 @@
       fill: $brand-01;
     }
 
-    .#{$brand-prefix}--progress-label {
+    .#{$prefix}--progress-label {
       @include font-smoothing;
       color: $brand-01;
       font-weight: 600;
     }
-    .#{$brand-prefix}--progress-line {
+    .#{$prefix}--progress-line {
       background-color: $brand-01;
     }
   }

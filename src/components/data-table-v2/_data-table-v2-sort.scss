@@ -1,25 +1,25 @@
-.#{$brand-prefix}--table-sort-v2--ascending {
-  .#{$brand-prefix}--table-sort-v2__icon {
+.#{$prefix}--table-sort-v2--ascending {
+  .#{$prefix}--table-sort-v2__icon {
     transform: rotate(180deg);
     transition: transform 200ms $carbon--standard-easing;
   }
 }
 
-.#{$brand-prefix}--table-sort-v2--active {
-  .#{$brand-prefix}--table-sort-v2__icon {
+.#{$prefix}--table-sort-v2--active {
+  .#{$prefix}--table-sort-v2__icon {
     opacity: 1;
   }
 }
 
-.#{$brand-prefix}--data-table-v2 th {
+.#{$prefix}--data-table-v2 th {
   &:hover {
-    .#{$brand-prefix}--table-sort-v2__icon {
+    .#{$prefix}--table-sort-v2__icon {
       opacity: 1;
     }
   }
 }
 
-.#{$brand-prefix}--table-sort-v2 {
+.#{$prefix}--table-sort-v2 {
   @include button-reset(false);
   position: relative;
   left: 2px;
@@ -41,7 +41,7 @@
   }
 }
 
-.#{$brand-prefix}--table-sort-v2__icon {
+.#{$prefix}--table-sort-v2__icon {
   position: relative;
   left: 2px;
   transition: transform 200ms $carbon--standard-easing;

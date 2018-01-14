@@ -11,7 +11,7 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tile') {
-  .#{$brand-prefix}--tile {
+  .#{$prefix}--tile {
     @include layer('raised');
     display: block;
     min-width: 8rem;
@@ -26,9 +26,9 @@
     }
   }
 
-  .#{$brand-prefix}--tile--clickable,
-  .#{$brand-prefix}--tile--selectable,
-  .#{$brand-prefix}--tile--expandable {
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--selectable,
+  .#{$prefix}--tile--expandable {
     transition: $transition--base $carbon--standard-easing;
     cursor: pointer;
 
@@ -38,39 +38,39 @@
 
     &:hover,
     &:focus {
-      .#{$brand-prefix}--tile__checkmark {
+      .#{$prefix}--tile__checkmark {
         opacity: 1;
       }
 
-      .#{$brand-prefix}--tile__chevron svg {
+      .#{$prefix}--tile__chevron svg {
         fill: $brand-01;
       }
     }
   }
 
-  .#{$brand-prefix}--tile--clickable,
-  .#{$brand-prefix}--tile--expandable {
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
     &:focus {
       @include focus-outline('border');
     }
   }
 
-  .#{$brand-prefix}--tile--selectable {
+  .#{$prefix}--tile--selectable {
     padding-right: 3rem;
   }
 
-  .#{$brand-prefix}--tile--selectable:focus {
+  .#{$prefix}--tile--selectable:focus {
     outline: none;
     border: 1px solid $brand-01;
   }
 
-  .#{$brand-prefix}--tile--is-clicked {
+  .#{$prefix}--tile--is-clicked {
     @include layer('flat');
     border: 1px solid $ui-04;
   }
 
-  .#{$brand-prefix}--tile__checkmark,
-  .#{$brand-prefix}--tile__chevron {
+  .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile__chevron {
     position: absolute;
     transition: $transition--base $carbon--standard-easing;
     border: none;
@@ -81,7 +81,7 @@
     }
   }
 
-  .#{$brand-prefix}--tile__checkmark {
+  .#{$prefix}--tile__checkmark {
     height: 1rem;
     top: 1rem;
     right: 1rem;
@@ -94,7 +94,7 @@
     }
   }
 
-  .#{$brand-prefix}--tile__chevron {
+  .#{$prefix}--tile__chevron {
     position: absolute;
     bottom: .5rem;
     right: .5rem;
@@ -111,60 +111,60 @@
     }
   }
 
-  .#{$brand-prefix}--tile--expandable {
+  .#{$prefix}--tile--expandable {
     overflow: hidden;
     cursor: default;
     transition: $transition--base $carbon--standard-easing;
   }
 
-  .#{$brand-prefix}--tile-content__above-the-fold {
+  .#{$prefix}--tile-content__above-the-fold {
     display: block;
   }
 
-  .#{$brand-prefix}--tile-content__below-the-fold {
+  .#{$prefix}--tile-content__below-the-fold {
     display: block;
     opacity: 0;
     transition: $transition--base $carbon--standard-easing;
   }
 
-  .#{$brand-prefix}--tile--is-expanded {
+  .#{$prefix}--tile--is-expanded {
     overflow: visible;
     transition: $transition--base $carbon--standard-easing;
 
-    .#{$brand-prefix}--tile__chevron svg {
+    .#{$prefix}--tile__chevron svg {
       transform: rotate(-180deg) translateY(4px);
     }
 
-    .#{$brand-prefix}--tile-content__below-the-fold {
+    .#{$prefix}--tile-content__below-the-fold {
       opacity: 1;
       transition: $transition--base $carbon--standard-easing;
     }
   }
 
-  .#{$brand-prefix}--tile--is-selected,
-  .#{$brand-prefix}--tile--is-selected:hover,
-  .#{$brand-prefix}--tile--is-selected:focus {
+  .#{$prefix}--tile--is-selected,
+  .#{$prefix}--tile--is-selected:hover,
+  .#{$prefix}--tile--is-selected:focus {
     border: 1px solid $brand-01;
     outline: none;
   }
 
-  .#{$brand-prefix}--tile-input:checked {
-    & + .#{$brand-prefix}--tile__checkmark {
+  .#{$prefix}--tile-input:checked {
+    & + .#{$prefix}--tile__checkmark {
       opacity: 1;
     }
 
-    & + .#{$brand-prefix}--tile__checkmark svg {
+    & + .#{$prefix}--tile__checkmark svg {
       fill: $brand-01;
       background-color: $ui-01;
     }
   }
 
-  .#{$brand-prefix}--tile-content {
+  .#{$prefix}--tile-content {
     width: 100%;
     height: 100%;
   }
 
-  .#{$brand-prefix}--tile-input {
+  .#{$prefix}--tile-input {
     display: none;
   }
 }

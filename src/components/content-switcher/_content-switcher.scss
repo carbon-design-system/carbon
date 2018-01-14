@@ -6,13 +6,13 @@
 @import '../../globals/scss/import-once';
 
 @include exports('content-switcher') {
-  .#{$brand-prefix}--content-switcher {
+  .#{$prefix}--content-switcher {
     @include font-family;
     display: flex;
     height: rem(40px);
   }
 
-  .#{$brand-prefix}--content-switcher-btn {
+  .#{$prefix}--content-switcher-btn {
     @include reset;
     @include font-smoothing;
     @include typescale('zeta');
@@ -48,15 +48,15 @@
     }
   }
 
-  .#{$brand-prefix}--content-switcher-btn:not(:last-of-type) {
+  .#{$prefix}--content-switcher-btn:not(:last-of-type) {
     border-right: none;
   }
 
-  .#{$brand-prefix}--content-switcher-btn:not(:first-of-type) {
+  .#{$prefix}--content-switcher-btn:not(:first-of-type) {
     border-left: $content-switcher-option-border;
   }
 
-  .#{$brand-prefix}--content-switcher-btn:first-of-type {
+  .#{$prefix}--content-switcher-btn:first-of-type {
     border-bottom-left-radius: $content-switcher-border-radius;
     border-top-left-radius: $content-switcher-border-radius;
 
@@ -70,7 +70,7 @@
     }
   }
 
-  .#{$brand-prefix}--content-switcher-btn:last-of-type {
+  .#{$prefix}--content-switcher-btn:last-of-type {
     border-top-right-radius: $content-switcher-border-radius;
     border-bottom-right-radius: $content-switcher-border-radius;
 
@@ -84,7 +84,7 @@
     }
   }
 
-  .#{$brand-prefix}--content-switcher-btn.#{$brand-prefix}--content-switcher--selected {
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     background-color: $brand-01;
     color: $inverse-01;
     font-weight: 400;

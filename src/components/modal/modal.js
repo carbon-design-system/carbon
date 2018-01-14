@@ -185,12 +185,12 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-modal]',
       selectorModalClose: '[data-modal-close]',
       selectorPrimaryFocus: '[data-modal-primary-focus]',
-      selectorsFloatingMenus: [`.${brandPrefix}--overflow-menu-options`, '.bx-tooltip'],
+      selectorsFloatingMenus: [`.${prefix}--overflow-menu-options`, '.bx-tooltip'],
       classVisible: 'is-visible',
       attribInitTarget: 'data-modal-target',
       initEventNames: ['click'],

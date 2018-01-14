@@ -7,28 +7,28 @@
 @import 'mixins';
 
 @include exports('snippet') {
-  .#{$brand-prefix}--snippet--code {
+  .#{$prefix}--snippet--code {
     @include bx--snippet;
     background-color: $snippet-background-color;
     padding: 1rem 2.5rem 1rem 1rem;
   }
 
-  .#{$brand-prefix}--snippet code {
+  .#{$prefix}--snippet code {
     @include typescale('epsilon');
   }
 
-  .#{$brand-prefix}--snippet--code .#{$brand-prefix}--snippet-container {
+  .#{$prefix}--snippet--code .#{$prefix}--snippet-container {
     max-height: rem(192px);
     overflow-y: scroll;
     margin-right: 1rem;
     position: relative;
   }
 
-  .#{$brand-prefix}--snippet--code .#{$brand-prefix}--snippet-container pre {
+  .#{$prefix}--snippet--code .#{$prefix}--snippet-container pre {
     white-space: pre-wrap;
   }
 
-  .#{$brand-prefix}--snippet--terminal {
+  .#{$prefix}--snippet--terminal {
     @include bx--snippet;
     background-color: $text-01;
     color: $inverse-01;
@@ -36,7 +36,7 @@
     padding: 0 2.5rem 0 1rem;
   }
 
-  .#{$brand-prefix}--snippet--terminal .#{$brand-prefix}--snippet-container {
+  .#{$prefix}--snippet--terminal .#{$prefix}--snippet-container {
     display: flex;
     align-items: center;
     height: 130%;
@@ -45,7 +45,7 @@
     position: relative;
   }
 
-  .#{$brand-prefix}--snippet__icon {
+  .#{$prefix}--snippet__icon {
     cursor: pointer;
     fill: $brand-01;
     height: rem(24px);
@@ -57,7 +57,7 @@
     }
   }
 
-  .#{$brand-prefix}--snippet--terminal .#{$brand-prefix}--snippet__icon {
+  .#{$prefix}--snippet--terminal .#{$prefix}--snippet__icon {
     fill: $inverse-01;
 
     &:hover {
@@ -65,7 +65,7 @@
     }
   }
 
-  .#{$brand-prefix}--snippet-button {
+  .#{$prefix}--snippet-button {
     @include reset;
     position: absolute;
     top: 0.5rem;
@@ -82,7 +82,7 @@
     }
   }
 
-  .#{$brand-prefix}--snippet .#{$brand-prefix}--btn--copy__feedback {
+  .#{$prefix}--snippet .#{$prefix}--btn--copy__feedback {
     @include font-family;
     z-index: z('overlay');
     font-weight: 600;

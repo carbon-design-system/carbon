@@ -12,7 +12,7 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('inline-notifications') {
-  .#{$brand-prefix}--inline-notification {
+  .#{$prefix}--inline-notification {
     @include reset;
     @include font-family;
     @include font-smoothing;
@@ -27,34 +27,34 @@
     margin-bottom: 1rem;
   }
 
-  .#{$brand-prefix}--inline-notification--error {
+  .#{$prefix}--inline-notification--error {
     @include inline-notification--color($support-01);
   }
 
-  .#{$brand-prefix}--inline-notification--success {
+  .#{$prefix}--inline-notification--success {
     @include inline-notification--color($support-02);
   }
 
-  .#{$brand-prefix}--inline-notification--info {
+  .#{$prefix}--inline-notification--info {
     @include inline-notification--color($support-04);
   }
 
-  .#{$brand-prefix}--inline-notification--warning {
+  .#{$prefix}--inline-notification--warning {
     @include inline-notification--color($support-03);
   }
 
-  .#{$brand-prefix}--inline-notification__details {
+  .#{$prefix}--inline-notification__details {
     display: flex;
     align-items: center;
   }
 
-  .#{$brand-prefix}--inline-notification__icon {
+  .#{$prefix}--inline-notification__icon {
     height: 16px;
     width: 16px;
     min-width: 22px;
   }
 
-  .#{$brand-prefix}--inline-notification__text-wrapper {
+  .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
     margin: 0 1rem;
@@ -65,19 +65,19 @@
     }
   }
 
-  .#{$brand-prefix}--inline-notification__title {
+  .#{$prefix}--inline-notification__title {
     @include typescale('zeta');
     font-weight: 600;
     margin-right: 0.25rem;
     line-height: 1.125;
   }
 
-  .#{$brand-prefix}--inline-notification__subtitle {
+  .#{$prefix}--inline-notification__subtitle {
     @include typescale('zeta');
     line-height: 1.125;
   }
 
-  .#{$brand-prefix}--inline-notification__close-button {
+  .#{$prefix}--inline-notification__close-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -91,7 +91,7 @@
     }
   }
 
-  .#{$brand-prefix}--inline-notification__close-icon {
+  .#{$prefix}--inline-notification__close-icon {
     height: 10px;
     width: 10px;
     fill: $text-03;

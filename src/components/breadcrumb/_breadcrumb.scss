@@ -7,7 +7,7 @@
 @import '../link/link';
 
 @include exports('breadcrumb') {
-  .#{$brand-prefix}--breadcrumb {
+  .#{$prefix}--breadcrumb {
     @include typescale('zeta');
     @include font-family;
     display: none;
@@ -18,23 +18,23 @@
     }
   }
 
-  .#{$brand-prefix}--breadcrumb-item {
+  .#{$prefix}--breadcrumb-item {
     margin-right: rem(20.66px);
     display: flex;
     align-items: center;
   }
 
-  .#{$brand-prefix}--breadcrumb-item::after {
+  .#{$prefix}--breadcrumb-item::after {
     content: '/';
     margin-left: 1rem;
     color: $text-03;
   }
 
-  .#{$brand-prefix}--breadcrumb--no-trailing-slash .#{$brand-prefix}--breadcrumb-item:last-child::after {
+  .#{$prefix}--breadcrumb--no-trailing-slash .#{$prefix}--breadcrumb-item:last-child::after {
     content: '';
   }
 
-  .#{$brand-prefix}--breadcrumb-item:last-child {
+  .#{$prefix}--breadcrumb-item:last-child {
     margin-right: 0;
 
     &::after {
@@ -42,7 +42,7 @@
     }
   }
 
-  .#{$brand-prefix}--breadcrumb .#{$brand-prefix}--link {
+  .#{$prefix}--breadcrumb .#{$prefix}--link {
     white-space: nowrap;
     font-weight: 400;
     text-decoration: none;

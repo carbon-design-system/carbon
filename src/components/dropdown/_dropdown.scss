@@ -13,7 +13,7 @@
 @import '../../globals/scss/layout';
 
 @include exports('dropdown') {
-  .#{$brand-prefix}--dropdown {
+  .#{$prefix}--dropdown {
     @include reset;
     @include font-family;
     @include typescale('zeta');
@@ -30,13 +30,13 @@
       @include focus-outline('border');
     }
 
-    &.#{$brand-prefix}--dropdown--open:focus {
+    &.#{$prefix}--dropdown--open:focus {
       outline: 1px solid transparent;
       box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
     }
   }
 
-  .#{$brand-prefix}--dropdown__arrow {
+  .#{$prefix}--dropdown__arrow {
     fill: $brand-01;
     position: absolute;
     right: 1rem;
@@ -48,11 +48,11 @@
     transform-origin: 50% 45%;
   }
 
-  .#{$brand-prefix}--dropdown[data-value=''] .#{$brand-prefix}--dropdown-text {
+  .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
     color: $text-03;
   }
 
-  .#{$brand-prefix}--dropdown-text {
+  .#{$prefix}--dropdown-text {
     height: rem(40px);
     padding-top: rem(13px);
     padding-bottom: rem(13px);
@@ -65,7 +65,7 @@
     border: $input-border;
   }
 
-  .#{$brand-prefix}--dropdown-list {
+  .#{$prefix}--dropdown-list {
     @include reset;
     @include layer('overlay');
     width: 100%;
@@ -78,7 +78,7 @@
     opacity: 0;
   }
 
-  .#{$brand-prefix}--dropdown-link {
+  .#{$prefix}--dropdown-link {
     display: block;
     color: currentColor;
     text-decoration: none;
@@ -98,16 +98,16 @@
     }
   }
 
-  .#{$brand-prefix}--dropdown--selected {
+  .#{$prefix}--dropdown--selected {
     display: none;
   }
 
-  .#{$brand-prefix}--dropdown--open {
-    .#{$brand-prefix}--dropdown__arrow {
+  .#{$prefix}--dropdown--open {
+    .#{$prefix}--dropdown__arrow {
       transform: rotate(-180deg);
     }
 
-    .#{$brand-prefix}--dropdown-list {
+    .#{$prefix}--dropdown-list {
       @include typescale('zeta');
       display: flex;
       flex-direction: column;
@@ -119,13 +119,13 @@
     }
 
     &:focus {
-      .#{$brand-prefix}--dropdown-list {
+      .#{$prefix}--dropdown-list {
         box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
       }
     }
   }
 
-  .#{$brand-prefix}--dropdown--disabled {
+  .#{$prefix}--dropdown--disabled {
     opacity: 0.5;
     cursor: not-allowed;
 

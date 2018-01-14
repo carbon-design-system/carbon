@@ -50,11 +50,11 @@ class CopyButton extends mixin(createComponent, InitComponentBySearch, handles) 
    * @property {number} timeoutValue The specified timeout value before the feedback tooltip is hidden.
    */
   static get options() {
-    const { brandPrefix } = settings;
+    const { prefix } = settings;
     return {
       selectorInit: '[data-copy-btn]',
       feedbackTooltip: '[data-feedback]',
-      classShowFeedback: `${brandPrefix}--btn--copy__feedback--displayed`,
+      classShowFeedback: `${prefix}--btn--copy__feedback--displayed`,
       timeoutValue: 2000,
     };
   }

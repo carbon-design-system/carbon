@@ -112,7 +112,7 @@ REASON: #{$reason}';
 // ---------------------------------------------
 
 @mixin light-ui {
-  .#{$brand-prefix}--global-light-ui & {
+  .#{$prefix}--global-light-ui & {
     @content;
   }
 }
