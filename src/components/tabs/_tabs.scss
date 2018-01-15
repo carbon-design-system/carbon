@@ -2,6 +2,7 @@
 // Tabs
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
@@ -11,7 +12,7 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tabs') {
-  .bx--tabs {
+  .#{$prefix}--tabs {
     @include typescale('zeta');
     @include font-smoothing;
     @include font-family;
@@ -28,7 +29,7 @@
     }
   }
 
-  .bx--tabs-trigger {
+  .#{$prefix}--tabs-trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,7 +52,7 @@
     }
   }
 
-  .bx--tabs-trigger-text {
+  .#{$prefix}--tabs-trigger-text {
     text-decoration: none;
     font-weight: 600;
     color: $text-01;
@@ -61,7 +62,7 @@
     }
   }
 
-  .bx--tabs__nav {
+  .#{$prefix}--tabs__nav {
     @include layer('overlay');
     margin: 0;
     padding: 0;
@@ -85,7 +86,7 @@
     }
   }
 
-  .bx--tabs__nav--hidden {
+  .#{$prefix}--tabs__nav--hidden {
     display: none;
 
     @include breakpoint(bp--sm--major) {
@@ -93,7 +94,7 @@
     }
   }
 
-  .bx--tabs__nav-item {
+  .#{$prefix}--tabs__nav-item {
     @include typescale('zeta');
     background-color: $ui-01;
     padding: 0;
@@ -118,13 +119,13 @@
     }
   }
 
-  .bx--tabs__nav-item--selected {
+  .#{$prefix}--tabs__nav-item--selected {
     border: none;
 
     @include breakpoint(bp--sm--major) {
       border-bottom: 2px solid $brand-01;
 
-      .bx--tabs__nav-link {
+      .#{$prefix}--tabs__nav-link {
         color: $brand-01;
 
         &:focus {
@@ -134,7 +135,7 @@
     }
   }
 
-  .bx--tabs__nav-item:hover .bx--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
     color: $inverse-01;
 
     @include breakpoint(bp--sm--major) {
@@ -142,7 +143,7 @@
     }
   }
 
-  .bx--tabs__nav-link {
+  .#{$prefix}--tabs__nav-link {
     display: inline-block;
     color: $text-01;
     text-decoration: none;

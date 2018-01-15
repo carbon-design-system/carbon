@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
@@ -5,13 +6,13 @@
 @import '../../globals/scss/import-once';
 
 @include exports('content-switcher') {
-  .bx--content-switcher {
+  .#{$prefix}--content-switcher {
     @include font-family;
     display: flex;
     height: rem(40px);
   }
 
-  .bx--content-switcher-btn {
+  .#{$prefix}--content-switcher-btn {
     @include reset;
     @include font-smoothing;
     @include typescale('zeta');
@@ -47,15 +48,15 @@
     }
   }
 
-  .bx--content-switcher-btn:not(:last-of-type) {
+  .#{$prefix}--content-switcher-btn:not(:last-of-type) {
     border-right: none;
   }
 
-  .bx--content-switcher-btn:not(:first-of-type) {
+  .#{$prefix}--content-switcher-btn:not(:first-of-type) {
     border-left: $content-switcher-option-border;
   }
 
-  .bx--content-switcher-btn:first-of-type {
+  .#{$prefix}--content-switcher-btn:first-of-type {
     border-bottom-left-radius: $content-switcher-border-radius;
     border-top-left-radius: $content-switcher-border-radius;
 
@@ -69,7 +70,7 @@
     }
   }
 
-  .bx--content-switcher-btn:last-of-type {
+  .#{$prefix}--content-switcher-btn:last-of-type {
     border-top-right-radius: $content-switcher-border-radius;
     border-bottom-right-radius: $content-switcher-border-radius;
 
@@ -83,7 +84,7 @@
     }
   }
 
-  .bx--content-switcher-btn.bx--content-switcher--selected {
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     background-color: $brand-01;
     color: $inverse-01;
     font-weight: 400;

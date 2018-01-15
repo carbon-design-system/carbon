@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
@@ -5,24 +6,24 @@
 @import '../../globals/scss/import-once';
 
 @include exports('progress-indicator') {
-  .bx--progress {
+  .#{$prefix}--progress {
     @include reset;
     @include font-family;
     display: flex;
     list-style: none;
   }
 
-  .bx--progress-step {
+  .#{$prefix}--progress-step {
     position: relative;
     display: inline-flex;
     flex-direction: column;
     flex: 1;
     min-width: 7rem;
-    transition: $transition--base all $bx--standard-easing;
+    transition: $transition--base all $carbon--standard-easing;
     overflow: visible;
   }
 
-  .bx--progress-line {
+  .#{$prefix}--progress-line {
     position: absolute;
     top: $progress-indicator-line-offset;
     right: 100%;
@@ -30,12 +31,12 @@
     width: calc(100% - 24px);
     border: $progress-indicator-bar-width;
 
-    .bx--progress-step:first-child & {
+    .#{$prefix}--progress-step:first-child & {
       display: none;
     }
   }
 
-  .bx--progress-step svg {
+  .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
     width: 1.5rem;
@@ -44,12 +45,12 @@
     margin-bottom: 0.5rem;
   }
 
-  .bx--progress-label {
+  .#{$prefix}--progress-label {
     line-height: 1;
     width: 75%;
   }
 
-  .bx--progress-step--current {
+  .#{$prefix}--progress-step--current {
     circle:first-child {
       stroke: $brand-01;
       stroke-width: $progress-indicator-stroke-width;
@@ -60,33 +61,33 @@
       fill: $brand-01;
     }
 
-    .bx--progress-label {
+    .#{$prefix}--progress-label {
       @include font-smoothing;
       color: $brand-01;
       font-weight: 600;
     }
-    .bx--progress-line {
+    .#{$prefix}--progress-line {
       background-color: $brand-01;
     }
   }
 
-  .bx--progress-step--incomplete {
+  .#{$prefix}--progress-step--incomplete {
     circle {
       stroke: $ui-05;
       stroke-width: $progress-indicator-stroke-width;
       fill: transparent;
     }
 
-    .bx--progress-label {
+    .#{$prefix}--progress-label {
       color: $text-02;
     }
 
-    .bx--progress-line {
+    .#{$prefix}--progress-line {
       background-color: $ui-05;
     }
   }
 
-  .bx--progress-step--complete {
+  .#{$prefix}--progress-step--complete {
     circle {
       stroke: $brand-01;
       stroke-width: $progress-indicator-stroke-width;
@@ -97,12 +98,12 @@
       fill: $brand-01;
     }
 
-    .bx--progress-label {
+    .#{$prefix}--progress-label {
       @include font-smoothing;
       color: $brand-01;
       font-weight: 600;
     }
-    .bx--progress-line {
+    .#{$prefix}--progress-line {
       background-color: $brand-01;
     }
   }

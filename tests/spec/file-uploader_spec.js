@@ -33,6 +33,13 @@ describe('File Uploader', function() {
         selectorInput: 'input[type="file"].bx--file-input',
         selectorContainer: '[data-file-container]',
         selectorCloseButton: '.bx--file-close',
+        classLoading: 'bx--loading',
+        classLoadingSvg: 'bx--loading__svg',
+        classFileName: 'bx--file-filename',
+        classFileClose: 'bx--file-close',
+        classFileComplete: 'bx--file-complete',
+        classSelectedFile: 'bx--file__selected-file',
+        classStateContainer: 'bx--file__state-container',
         eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
         eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
       });

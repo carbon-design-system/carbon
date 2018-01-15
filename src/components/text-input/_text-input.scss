@@ -2,6 +2,7 @@
 // Text
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
@@ -10,7 +11,7 @@
 @import '../form/form';
 
 @include exports('text-input') {
-  .bx--text-input {
+  .#{$prefix}--text-input {
     @include reset;
     @include font-family;
     @include typescale('zeta');

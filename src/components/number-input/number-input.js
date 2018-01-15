@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -33,7 +34,7 @@ class NumberInput extends mixin(createComponent, initComponentBySearch, handles)
    * @param {Event} event The event triggering this method.
    */
   _handleClick(event) {
-    const numberInput = this.element.querySelector('.bx--number input');
+    const numberInput = this.element.querySelector(this.options.selectorInput);
     const target = event.currentTarget.getAttribute('class').split(' ');
 
     if (target.indexOf('up-icon') >= 0) {
@@ -66,10 +67,15 @@ class NumberInput extends mixin(createComponent, initComponentBySearch, handles)
    * @member NumberInput.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find number input UIs.
+   * @property {string} [selectorInput] The CSS selector to find the `<input>` element.
    */
-  static options = {
-    selectorInit: '[data-numberinput]',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-numberinput]',
+      selectorInput: `.${prefix}--number input`,
+    };
+  }
 }
 
 export default NumberInput;

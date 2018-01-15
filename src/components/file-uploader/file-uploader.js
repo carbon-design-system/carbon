@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -35,16 +36,16 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   }
 
   _filenamesHTML(name, id) {
-    return `<span class="bx--file__selected-file">
-      <p class="bx--file-filename">${name}</p>
-      <span data-for="${id}" class="bx--file__state-container"></span>
+    return `<span class="${this.options.classSelectedFile}">
+      <p class="${this.options.classFileName}">${name}</p>
+      <span data-for="${id}" class="${this.options.classStateContainer}"></span>
     </span>`;
   }
 
   _uploadHTML() {
     return `
-      <div data-loading class="bx--loading">
-        <svg class="bx--loading__svg" viewBox="-42 -42 84 84">
+      <div data-loading class="${this.options.classLoading}">
+        <svg class="${this.options.classLoadingSvg}" viewBox="-42 -42 84 84">
           <circle cx="0" cy="0" r="37.5" />
         </svg>
       </div>`;
@@ -52,7 +53,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
 
   _closeButtonHTML() {
     return `
-      <svg class="bx--file-close" tabindex="0" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
+      <svg class="${this.options.classFileClose}" tabindex="0" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
         <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8
           9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z" />
       </svg>`;
@@ -60,7 +61,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
 
   _checkmarkHTML() {
     return `
-      <svg class="bx--file-complete" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
+      <svg class="${this.options.classFileComplete}" viewBox="0 0 16 16" fill-rule="evenodd" width="16" height="16">
        <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM6.7 11.5L3.4 8.1l1.4-1.4 1.9 1.9 4.1-4.1 1.4 1.4-5.5 5.6z"/>
       </svg>`;
   }
@@ -161,14 +162,24 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
    */
   static components = new WeakMap();
 
-  static options = {
-    selectorInit: '[data-file]',
-    selectorInput: 'input[type="file"].bx--file-input',
-    selectorContainer: '[data-file-container]',
-    selectorCloseButton: '.bx--file-close',
-    eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
-    eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-file]',
+      selectorInput: `input[type="file"].${prefix}--file-input`,
+      selectorContainer: '[data-file-container]',
+      selectorCloseButton: `.${prefix}--file-close`,
+      classLoading: `${prefix}--loading`,
+      classLoadingSvg: `${prefix}--loading__svg`,
+      classFileName: `${prefix}--file-filename`,
+      classFileClose: `${prefix}--file-close`,
+      classFileComplete: `${prefix}--file-complete`,
+      classSelectedFile: `${prefix}--file__selected-file`,
+      classStateContainer: `${prefix}--file__state-container`,
+      eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
+      eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
+    };
+  }
 }
 
 export default FileUploader;

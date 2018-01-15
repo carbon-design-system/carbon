@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -79,13 +80,16 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
    * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
    * @property {string} selectorInit The CSS selector to find accordion UIs.
    */
-  static options = {
-    selectorInit: '[data-accordion]',
-    selectorAccordionItem: '.bx--accordion__item',
-    selectorAccordionItemHeading: '.bx--accordion__heading',
-    selectorAccordionContent: '.bx--accordion__content',
-    classActive: 'bx--accordion__item--active',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-accordion]',
+      selectorAccordionItem: `.${prefix}--accordion__item`,
+      selectorAccordionItemHeading: `.${prefix}--accordion__heading`,
+      selectorAccordionContent: `.${prefix}--accordion__content`,
+      classActive: `${prefix}--accordion__item--active`,
+    };
+  }
 
   /**
    * The map associating DOM element and accordion UI instance.

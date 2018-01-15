@@ -2,6 +2,7 @@
 // Radio
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
@@ -10,17 +11,17 @@
 @import '../../globals/scss/css--reset';
 
 @include exports('radio-button') {
-  .bx--radio-button-group {
+  .#{$prefix}--radio-button-group {
     display: flex;
     align-items: center;
     margin-top: rem(6px);
   }
 
-  .bx--radio-button {
+  .#{$prefix}--radio-button {
     @include hidden;
   }
 
-  .bx--radio-button__label {
+  .#{$prefix}--radio-button__label {
     @include typescale('zeta');
     @include font-family;
     display: flex;
@@ -29,7 +30,7 @@
     margin-right: 1rem;
   }
 
-  .bx--radio-button__appearance {
+  .#{$prefix}--radio-button__appearance {
     @include reset;
     background-color: $inverse-01;
     border-radius: 50%;
@@ -40,7 +41,7 @@
     margin-right: rem(10px);
   }
 
-  .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance {
+  .#{$prefix}--radio-button:checked + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,12 +58,12 @@
     }
   }
 
-  .bx--radio-button:disabled + .bx--radio-button__label {
+  .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .bx--radio-button:focus + .bx--radio-button__label .bx--radio-button__appearance {
+  .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
     @include focus-outline('blurred');
   }
 }

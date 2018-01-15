@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
@@ -6,22 +7,22 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('accordion') {
-  .bx--accordion {
+  .#{$prefix}--accordion {
     @include reset;
     @include font-family;
     list-style: none;
     width: 100%;
   }
 
-  .bx--accordion__item {
-    transition: all $transition--base $bx--standard-easing;
+  .#{$prefix}--accordion__item {
+    transition: all $transition--base $carbon--standard-easing;
     border-top: 1px solid $ui-04;
     overflow: hidden;
 
     &:focus {
       outline: none;
 
-      .bx--accordion__arrow {
+      .#{$prefix}--accordion__arrow {
         @include focus-outline('border');
         overflow: visible; // safari fix
         outline-offset: -.5px; // safari fix
@@ -33,7 +34,7 @@
     }
   }
 
-  .bx--accordion__heading {
+  .#{$prefix}--accordion__heading {
     @include button-reset;
     color: $text-01;
     display: flex;
@@ -48,7 +49,7 @@
     &:focus {
       outline: none;
 
-      .bx--accordion__arrow {
+      .#{$prefix}--accordion__arrow {
         @include focus-outline('border');
         overflow: visible; // safari fix
         outline-offset: -.5px; // safari fix
@@ -56,8 +57,8 @@
     }
   }
 
-  .bx--accordion__arrow {
-    transition: all $transition--base $bx--standard-easing;
+  .#{$prefix}--accordion__arrow {
+    transition: all $transition--base $carbon--standard-easing;
     height: 1.25rem;
     width: 1.25rem;
     padding: 0.25rem 0.125rem 0.25rem 0.25rem;
@@ -65,12 +66,12 @@
     fill: $ui-05;
   }
 
-  .bx--accordion__title {
+  .#{$prefix}--accordion__title {
     margin: $accordion-title-margin;
   }
 
-  .bx--accordion__content {
-    transition: all $transition--expansion $bx--ease-out;
+  .#{$prefix}--accordion__content {
+    transition: all $transition--expansion $carbon--ease-out;
     padding: $accordion-content-padding;
     height: 0;
     visibility: hidden;
@@ -82,19 +83,19 @@
   }
 }
 
-.bx--accordion__item--active {
+.#{$prefix}--accordion__item--active {
   overflow: visible;
 
-  .bx--accordion__content {
+  .#{$prefix}--accordion__content {
     padding-top: 1rem;
     padding-bottom: 1.5rem;
     height: auto;
     visibility: visible;
     opacity: 1;
-    transition: all $transition--expansion $bx--ease-in;
+    transition: all $transition--expansion $carbon--ease-in;
   }
 
-  .bx--accordion__arrow {
+  .#{$prefix}--accordion__arrow {
     transform: rotate(90deg);
     fill: $brand-01;
   }

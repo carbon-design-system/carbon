@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -44,14 +45,17 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
     this.filmstrip.style.transform = `translateX(${newTranslateValue}px)`;
   };
 
-  static options = {
-    selectorInit: '[data-carousel]',
-    selectorFilmstrip: '.bx--filmstrip',
-    selectorScrollRight: '[data-scroll-right]',
-    selectorScrollLeft: '[data-scroll-left]',
-    selectorCarouselBtn: '.bx--carousel__btn',
-    selectorCarouselItem: '.bx--carousel__item',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-carousel]',
+      selectorFilmstrip: `.${prefix}--filmstrip`,
+      selectorScrollRight: '[data-scroll-right]',
+      selectorScrollLeft: '[data-scroll-left]',
+      selectorCarouselBtn: `.${prefix}--carousel__btn`,
+      selectorCarouselItem: `.${prefix}--carousel__item`,
+    };
+  }
 
   /**
    * The map associating DOM element and accordion UI instance.

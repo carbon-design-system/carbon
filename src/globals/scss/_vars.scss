@@ -1,13 +1,21 @@
 @import 'colors';
 
-$bx--ease-in: cubic-bezier(0.25, 0, 1, 1); // Used primarily for removing elements from the screen.
-$bx--ease-out: cubic-bezier(
+$prefix: 'bx' !default;
+
+$carbon--ease-in: cubic-bezier(0.25, 0, 1, 1); // Used primarily for removing elements from the screen.
+$carbon--ease-out: cubic-bezier(
   0,
   0,
   0.25,
   1
 ); // Used for adding elements to the screen or changing on-screen states at a users's input.
-$bx--standard-easing: cubic-bezier(0.5, 0, 0.1, 1); // Used for the majority of animations.
+$carbon--standard-easing: cubic-bezier(0.5, 0, 0.1, 1); // Used for the majority of animations.
+
+// For back-ward compatibility
+$bx--ease-in: $carbon--ease-in;
+$bx--ease-out: $carbon--ease-out;
+$bx--standard-easing: $carbon--standard-easing;
+
 $transition--base: 250ms;
 $transition--expansion: 300ms;
 

@@ -1,9 +1,10 @@
+@import 'vars';
 @import 'css--reset';
 @import 'typography';
 @import 'import-once';
 
 @mixin css-helpers {
-  .bx--visually-hidden {
+  .#{$prefix}--visually-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -16,7 +17,7 @@
     white-space: nowrap;
   }
 
-  .bx--body {
+  .#{$prefix}--body {
     @include reset;
     @include font-family;
     color: $text-01;

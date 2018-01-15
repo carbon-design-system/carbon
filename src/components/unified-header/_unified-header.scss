@@ -15,7 +15,7 @@
 @import 'account-switcher';
 
 @include exports('unified-header') {
-  .bx--unified-header {
+  .#{$prefix}--unified-header {
     @include reset;
     position: fixed;
     z-index: z('header');

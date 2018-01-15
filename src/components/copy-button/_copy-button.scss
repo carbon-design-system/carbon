@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/layer';
@@ -7,16 +8,16 @@
 @import '../button/button';
 
 @include exports('copy-button') {
-  .bx--btn--copy {
+  .#{$prefix}--btn--copy {
     position: relative;
     overflow: visible;
 
-    .bx--btn__icon {
+    .#{$prefix}--btn__icon {
       margin-left: rem(5px);
     }
   }
 
-  .bx--btn--copy__feedback {
+  .#{$prefix}--btn--copy__feedback {
     position: absolute;
     display: none;
     top: 1.2rem;

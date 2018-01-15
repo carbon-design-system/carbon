@@ -2,6 +2,7 @@
 // Search
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/helper-mixins';
@@ -11,17 +12,17 @@
 @import '../../globals/scss/import-once';
 
 @include exports('search') {
-  .bx--search {
+  .#{$prefix}--search {
     display: flex;
     position: relative;
     width: 100%;
   }
 
-  .bx--search .bx--label {
+  .#{$prefix}--search .#{$prefix}--label {
     @include hidden;
   }
 
-  .bx--search-input {
+  .#{$prefix}--search-input {
     @include reset;
     @include font-family;
     appearance: none;
@@ -47,30 +48,30 @@
     }
   }
 
-  .bx--search--sm .bx--search-input {
+  .#{$prefix}--search--sm .#{$prefix}--search-input {
     @include typescale('zeta');
     height: rem(32px);
   }
 
-  .bx--search--lg .bx--search-input {
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
     @include typescale('zeta');
     height: rem(40px);
   }
 
-  .bx--search-magnifier,
-  .bx--search-close {
+  .#{$prefix}--search-magnifier,
+  .#{$prefix}--search-close {
     position: absolute;
     height: 1rem;
     width: 1rem;
     top: calc(50% - 0.5rem);
   }
 
-  .bx--search-magnifier {
+  .#{$prefix}--search-magnifier {
     left: 0.75rem;
     fill: $ui-05;
   }
 
-  .bx--search-close {
+  .#{$prefix}--search-close {
     transition: $transition--base;
     fill: $ui-05;
     cursor: pointer;
@@ -78,15 +79,15 @@
     opacity: 1;
   }
 
-  .bx--search--sm .bx--search-close {
+  .#{$prefix}--search--sm .#{$prefix}--search-close {
     right: 0.75rem;
   }
 
-  .bx--search--lg .bx--search-close {
+  .#{$prefix}--search--lg .#{$prefix}--search-close {
     right: rem(100px);
   }
 
-  .bx--search-button {
+  .#{$prefix}--search-button {
     @include reset;
     border: 0;
     transition: $transition--base;
@@ -99,7 +100,7 @@
     padding: 0;
   }
 
-  .bx--search-button svg {
+  .#{$prefix}--search-button svg {
     position: relative;
     top: -1px;
     box-sizing: border-box;
@@ -110,24 +111,24 @@
     width: 1rem;
   }
 
-  .bx--search-button:hover,
-  .bx--search-button:focus {
+  .#{$prefix}--search-button:hover,
+  .#{$prefix}--search-button:focus {
     cursor: pointer;
     background-color: $brand-01;
     outline: 1px solid transparent;
   }
 
-  .bx--search-button:hover svg,
-  .bx--search-button:focus svg {
+  .#{$prefix}--search-button:hover svg,
+  .#{$prefix}--search-button:focus svg {
     fill: $ui-01;
   }
 
-  .bx--search-close--hidden {
+  .#{$prefix}--search-close--hidden {
     visibility: hidden;
     opacity: 0;
   }
 
-  .bx--search-view--hidden {
+  .#{$prefix}--search-view--hidden {
     display: none;
   }
 }

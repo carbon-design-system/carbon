@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -62,7 +63,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     const { element, previousValue } = detail;
 
     [...this.tableHeaders].forEach(header => {
-      const sortEl = header.querySelector('.bx--table-sort-v2');
+      const sortEl = header.querySelector(this.options.selectorTableSort);
 
       if (sortEl !== null && sortEl !== element) {
         sortEl.classList.remove(this.options.classTableSortActive);
@@ -91,7 +92,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     const row = element.parentNode.parentNode;
 
-    row.classList.toggle('bx--data-table-v2--selected');
+    row.classList.toggle(this.options.classTableSelected);
 
     // toggle on/off batch action bar
     this._actionBarToggle(this.state.checkboxCount > 0);
@@ -109,9 +110,9 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
       const row = item.parentNode.parentNode;
       if (checked && row) {
-        row.classList.add('bx--data-table-v2--selected');
+        row.classList.add(this.options.classTableSelected);
       } else {
-        row.classList.remove('bx--data-table-v2--selected');
+        row.classList.remove(this.options.classTableSelected);
       }
     });
 
@@ -251,31 +252,36 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     'action-bar-cancel': '_actionBarCancel',
   };
 
-  static options = {
-    selectorInit: '[data-table-v2]',
-    selectorToolbar: '.bx--table--toolbar',
-    selectorActions: '.bx--batch-actions',
-    selectorCount: '[data-items-selected]',
-    selectorActionCancel: '.bx--batch-summary__cancel',
-    selectorCheckbox: '.bx--checkbox',
-    selectorExpandCells: '.bx--table-expand-v2',
-    selectorExpandableRows: '.bx--expandable-row-v2',
-    selectorParentRows: '.bx--parent-row-v2',
-    selectorChildRow: '[data-child-row]',
-    selectorTableBody: 'tbody',
-    classExpandableRow: 'bx--expandable-row-v2',
-    classExpandableRowHidden: 'bx--expandable-row--hidden-v2',
-    classExpandableRowHover: 'bx--expandable-row--hover-v2',
-    classTableSortAscending: 'bx--table-sort-v2--ascending',
-    classTableSortActive: 'bx--table-sort-v2--active',
-    classActionBarActive: 'bx--batch-actions--active',
-    eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
-    eventAfterExpand: 'data-table-v2-aftertoggleexpand',
-    eventBeforeSort: 'data-table-v2-beforetogglesort',
-    eventAfterSort: 'data-table-v2-aftertogglesort',
-    eventTrigger: '[data-event]',
-    eventParentContainer: '[data-parent-row]',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-table-v2]',
+      selectorToolbar: `.${prefix}--table--toolbar`,
+      selectorActions: `.${prefix}--batch-actions`,
+      selectorCount: '[data-items-selected]',
+      selectorActionCancel: `.${prefix}--batch-summary__cancel`,
+      selectorCheckbox: `.${prefix}--checkbox`,
+      selectorExpandCells: `.${prefix}--table-expand-v2`,
+      selectorExpandableRows: `.${prefix}--expandable-row-v2`,
+      selectorParentRows: `.${prefix}--parent-row-v2`,
+      selectorChildRow: '[data-child-row]',
+      selectorTableBody: 'tbody',
+      selectorTableSort: `.${prefix}--table-sort-v2`,
+      classExpandableRow: `${prefix}--expandable-row-v2`,
+      classExpandableRowHidden: `${prefix}--expandable-row--hidden-v2`,
+      classExpandableRowHover: `${prefix}--expandable-row--hover-v2`,
+      classTableSortAscending: `${prefix}--table-sort-v2--ascending`,
+      classTableSortActive: `${prefix}--table-sort-v2--active`,
+      classActionBarActive: `${prefix}--batch-actions--active`,
+      classTableSelected: `${prefix}--data-table-v2--selected`,
+      eventBeforeExpand: 'data-table-v2-beforetoggleexpand',
+      eventAfterExpand: 'data-table-v2-aftertoggleexpand',
+      eventBeforeSort: 'data-table-v2-beforetogglesort',
+      eventAfterSort: 'data-table-v2-aftertogglesort',
+      eventTrigger: '[data-event]',
+      eventParentContainer: '[data-parent-row]',
+    };
+  }
 }
 
 export default DataTableV2;

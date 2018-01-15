@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -78,14 +79,17 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    * properties in this object are overriden for the instance being created.
    * @property {string} selectorInit The CSS selector to find Tile instances.
    */
-  static options = {
-    selectorInit: '[data-tile]',
-    selectorAboveTheFold: '[data-tile-atf]',
-    selectorTileInput: '[data-tile-input]',
-    classExpandedTile: 'bx--tile--is-expanded',
-    classClickableTile: 'bx--tile--is-clicked',
-    classSelectableTile: 'bx--tile--is-selected',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-tile]',
+      selectorAboveTheFold: '[data-tile-atf]',
+      selectorTileInput: '[data-tile-input]',
+      classExpandedTile: `${prefix}--tile--is-expanded`,
+      classClickableTile: `${prefix}--tile--is-clicked`,
+      classSelectableTile: `${prefix}--tile--is-selected`,
+    };
+  }
 }
 
 export default Tile;

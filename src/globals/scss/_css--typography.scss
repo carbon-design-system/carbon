@@ -7,14 +7,14 @@
 
 @mixin typography {
   // really big
-  .bx--type-giga {
+  .#{$prefix}--type-giga {
     @include typescale('giga');
     @include reset;
     @include line-height('heading');
     font-weight: 300;
   }
 
-  .bx--type-mega {
+  .#{$prefix}--type-mega {
     @include typescale('mega');
     @include reset;
     @include line-height('heading');
@@ -22,33 +22,33 @@
   }
 
   // really small
-  .bx--type-omega {
+  .#{$prefix}--type-omega {
     @include typescale('omega');
     @include reset;
     @include line-height('heading');
     font-weight: 600;
   }
 
-  .bx--type-caption {
+  .#{$prefix}--type-caption {
     @include typescale('caption');
     @include reset;
     @include line-height('body');
     font-weight: 400;
   }
 
-  .bx--type-legal {
+  .#{$prefix}--type-legal {
     @include typescale('legal');
     @include reset;
     @include line-height('body');
     font-weight: 400;
   }
 
-  .bx--type-caps {
+  .#{$prefix}--type-caps {
     text-transform: uppercase;
   }
 
   strong,
-  .bx--type-strong {
+  .#{$prefix}--type-strong {
     @include reset;
     font-weight: 700;
   }
@@ -71,7 +71,7 @@
   }
 
   h1,
-  .bx--type-alpha {
+  .#{$prefix}--type-alpha {
     @include reset;
     @include typescale('alpha');
     @include line-height('heading');
@@ -79,7 +79,7 @@
   }
 
   h2,
-  .bx--type-beta {
+  .#{$prefix}--type-beta {
     @include reset;
     @include typescale('beta');
     @include line-height('heading');
@@ -87,7 +87,7 @@
   }
 
   h3,
-  .bx--type-gamma {
+  .#{$prefix}--type-gamma {
     @include reset;
     @include typescale('gamma');
     @include line-height('heading');
@@ -95,7 +95,7 @@
   }
 
   h4,
-  .bx--type-delta {
+  .#{$prefix}--type-delta {
     @include reset;
     @include typescale('delta');
     @include line-height('heading');
@@ -103,7 +103,7 @@
   }
 
   h5,
-  .bx--type-epsilon {
+  .#{$prefix}--type-epsilon {
     @include reset;
     @include typescale('epsilon');
     @include line-height('heading');
@@ -111,7 +111,7 @@
   }
 
   h6,
-  .bx--type-zeta {
+  .#{$prefix}--type-zeta {
     @include reset;
     @include typescale('zeta');
     @include line-height('heading');

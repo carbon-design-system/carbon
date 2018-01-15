@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
@@ -6,28 +7,28 @@
 @import 'mixins';
 
 @include exports('snippet') {
-  .bx--snippet--code {
+  .#{$prefix}--snippet--code {
     @include bx--snippet;
     background-color: $snippet-background-color;
     padding: 1rem 2.5rem 1rem 1rem;
   }
 
-  .bx--snippet code {
+  .#{$prefix}--snippet code {
     @include typescale('epsilon');
   }
 
-  .bx--snippet--code .bx--snippet-container {
+  .#{$prefix}--snippet--code .#{$prefix}--snippet-container {
     max-height: rem(192px);
     overflow-y: scroll;
     margin-right: 1rem;
     position: relative;
   }
 
-  .bx--snippet--code .bx--snippet-container pre {
+  .#{$prefix}--snippet--code .#{$prefix}--snippet-container pre {
     white-space: pre-wrap;
   }
 
-  .bx--snippet--terminal {
+  .#{$prefix}--snippet--terminal {
     @include bx--snippet;
     background-color: $text-01;
     color: $inverse-01;
@@ -35,7 +36,7 @@
     padding: 0 2.5rem 0 1rem;
   }
 
-  .bx--snippet--terminal .bx--snippet-container {
+  .#{$prefix}--snippet--terminal .#{$prefix}--snippet-container {
     display: flex;
     align-items: center;
     height: 130%;
@@ -44,7 +45,7 @@
     position: relative;
   }
 
-  .bx--snippet__icon {
+  .#{$prefix}--snippet__icon {
     cursor: pointer;
     fill: $brand-01;
     height: rem(24px);
@@ -56,7 +57,7 @@
     }
   }
 
-  .bx--snippet--terminal .bx--snippet__icon {
+  .#{$prefix}--snippet--terminal .#{$prefix}--snippet__icon {
     fill: $inverse-01;
 
     &:hover {
@@ -64,7 +65,7 @@
     }
   }
 
-  .bx--snippet-button {
+  .#{$prefix}--snippet-button {
     @include reset;
     position: absolute;
     top: 0.5rem;
@@ -81,7 +82,7 @@
     }
   }
 
-  .bx--snippet .bx--btn--copy__feedback {
+  .#{$prefix}--snippet .#{$prefix}--btn--copy__feedback {
     @include font-family;
     z-index: z('overlay');
     font-weight: 600;

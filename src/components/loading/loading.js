@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -33,14 +34,14 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
     }
 
     this.active = active;
-    this.element.classList.toggle('bx--loading--stop', !this.active);
+    this.element.classList.toggle(this.options.classLoadingStop, !this.active);
 
     /**
      * If overlay is the parentNode then toggle it too.
      */
     const parentNode = this.element.parentNode;
 
-    if (parentNode && parentNode.classList.contains('bx--loading-overlay')) {
+    if (parentNode && parentNode.classList.contains(this.options.classLoadingOverlay)) {
       parentNode.classList.toggle(this.options.classLoadingOverlayStop, !this.active);
     }
 
@@ -107,12 +108,17 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find spinners.
    */
-  static options = {
-    selectorInit: '[data-loading]',
-    selectorLoadingOverlay: '.bx--loading-overlay',
-    classLoadingOverlayStop: 'bx--loading-overlay--stop',
-    active: true,
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-loading]',
+      selectorLoadingOverlay: `.${prefix}--loading-overlay`,
+      classLoadingOverlay: `${prefix}--loading-overlay`,
+      classLoadingStop: `${prefix}--loading--stop`,
+      classLoadingOverlayStop: `${prefix}--loading-overlay--stop`,
+      active: true,
+    };
+  }
 }
 
 export default Loading;

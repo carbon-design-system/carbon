@@ -1,6 +1,6 @@
-tr.bx--expandable-row-v2 {
+tr.#{$prefix}--expandable-row-v2 {
   // hide on init
-  &.bx--expandable-row--hidden-v2 {
+  &.#{$prefix}--expandable-row--hidden-v2 {
     display: none;
   }
 
@@ -56,7 +56,7 @@ tr.bx--expandable-row-v2 {
   }
 }
 
-tr.bx--expandable-row--hover-v2 {
+tr.#{$prefix}--expandable-row--hover-v2 {
   > td {
     background-color: rgba($brand-02, 0.1);
     border-top: 1px solid $brand-01;
@@ -67,12 +67,12 @@ tr.bx--expandable-row--hover-v2 {
   }
 }
 
-.bx--table-expand-v2[data-previous-value='collapsed'] .bx--table-expand-v2__svg {
+.#{$prefix}--table-expand-v2[data-previous-value='collapsed'] .#{$prefix}--table-expand-v2__svg {
   transform: rotate(90deg);
-  transition: transform 200ms $bx--standard-easing;
+  transition: transform 200ms $carbon--standard-easing;
 }
 
-.bx--table-expand-v2__button {
+.#{$prefix}--table-expand-v2__button {
   @include button-reset(false);
 
   &:focus {
@@ -84,10 +84,10 @@ tr.bx--expandable-row--hover-v2 {
   }
 }
 
-.bx--table-expand-v2__svg {
+.#{$prefix}--table-expand-v2__svg {
   fill: $ui-05;
   transform: rotate(0deg);
-  transition: transform 200ms $bx--standard-easing;
+  transition: transform 200ms $carbon--standard-easing;
   height: 16px;
   width: auto;
   max-width: 16px;

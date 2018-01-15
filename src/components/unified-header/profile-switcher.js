@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -266,28 +267,31 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
    * @property {string} [selectorSpaceDropdown]
    *   The data attribute selector for the dropdown item containing the current space name.
    */
-  static options = {
-    selectorInit: '[data-profile-switcher]',
-    // Data Attribute selectors
-    selectorProfileSwitcher: '[data-profile-switcher]',
-    selectorToggle: '[data-profile-switcher-toggle]',
-    selectorMenu: '[data-switcher-menu]',
-    selectorLinkedAccount: '[data-switcher-account-sl]',
-    selectorAccount: '[data-switcher-account]',
-    selectorRegion: '[data-switcher-region]',
-    selectorOrg: '[data-switcher-org]',
-    selectorSpace: '[data-switcher-space]',
-    selectorDropdown: '[data-dropdown]',
-    selectorAccountDropdown: '[data-dropdown-account]',
-    selectorAccountSlDropdown: '[data-dropdown-account-sl]',
-    selectorAccountLinked: '[data-dropdown-account-linked]',
-    selectorAccountSlLinked: '[data-dropdown-account-sl-linked]',
-    selectorRegionDropdown: '[data-dropdown-region]',
-    selectorOrgDropdown: '[data-dropdown-org]',
-    selectorSpaceDropdown: '[data-dropdown-space]',
-    classSwitcherOpen: 'bx--account-switcher--open',
-    classLinkedIcon: '.bx--account-switcher__linked-icon',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-profile-switcher]',
+      // Data Attribute selectors
+      selectorProfileSwitcher: '[data-profile-switcher]',
+      selectorToggle: '[data-profile-switcher-toggle]',
+      selectorMenu: '[data-switcher-menu]',
+      selectorLinkedAccount: '[data-switcher-account-sl]',
+      selectorAccount: '[data-switcher-account]',
+      selectorRegion: '[data-switcher-region]',
+      selectorOrg: '[data-switcher-org]',
+      selectorSpace: '[data-switcher-space]',
+      selectorDropdown: '[data-dropdown]',
+      selectorAccountDropdown: '[data-dropdown-account]',
+      selectorAccountSlDropdown: '[data-dropdown-account-sl]',
+      selectorAccountLinked: '[data-dropdown-account-linked]',
+      selectorAccountSlLinked: '[data-dropdown-account-sl-linked]',
+      selectorRegionDropdown: '[data-dropdown-region]',
+      selectorOrgDropdown: '[data-dropdown-org]',
+      selectorSpaceDropdown: '[data-dropdown-space]',
+      classSwitcherOpen: `${prefix}--account-switcher--open`,
+      classLinkedIcon: `.${prefix}--account-switcher__linked-icon`,
+    };
+  }
 
   /**
    * The map associating DOM element and profile switcher instance.

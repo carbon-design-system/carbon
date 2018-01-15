@@ -1,12 +1,12 @@
 @import '../../globals/scss/import-once';
 
 @include exports('left-nav-trigger') {
-  .bx--left-nav__trigger {
+  .#{$prefix}--left-nav__trigger {
     @include reset;
     width: rem(60px);
     height: rem(50px);
     position: relative;
-    transition: $transition--base $bx--standard-easing;
+    transition: $transition--base $carbon--standard-easing;
     cursor: pointer;
     z-index: 9999;
 
@@ -26,13 +26,13 @@
     }
   }
 
-  .bx--left-nav__trigger--btn {
+  .#{$prefix}--left-nav__trigger--btn {
     @include reset;
     position: absolute;
     top: 1.5rem;
     left: rem(20px);
     width: 100%;
-    transition: $transition--base $bx--standard-easing;
+    transition: $transition--base $carbon--standard-easing;
     display: flex;
 
     span,
@@ -56,7 +56,7 @@
       bottom: rem(-6px);
     }
 
-    .bx--left-nav__trigger--active & {
+    .#{$prefix}--left-nav__trigger--active & {
       left: rem(18px);
 
       span:before,
@@ -75,7 +75,7 @@
     }
   }
 
-  .bx--left-nav__trigger--apps {
+  .#{$prefix}--left-nav__trigger--apps {
     span,
     span:before,
     span:after {
@@ -98,7 +98,7 @@
     }
   }
 
-  .bx--left-nav__trigger--apps.bx--left-nav__trigger--active {
+  .#{$prefix}--left-nav__trigger--apps.#{$prefix}--left-nav__trigger--active {
     span {
       background: transparent;
     }
@@ -119,7 +119,7 @@
     }
   }
 
-  .bx--left-nav__trigger--services {
+  .#{$prefix}--left-nav__trigger--services {
     span,
     span:before,
     span:after {
@@ -142,7 +142,7 @@
     }
   }
 
-  .bx--left-nav__trigger--services.bx--left-nav__trigger--active {
+  .#{$prefix}--left-nav__trigger--services.#{$prefix}--left-nav__trigger--active {
     span {
       background: transparent;
     }
@@ -163,7 +163,7 @@
     }
   }
 
-  .bx--left-nav__trigger--infrastructure {
+  .#{$prefix}--left-nav__trigger--infrastructure {
     span,
     span:before,
     span:after {
@@ -186,7 +186,7 @@
     }
   }
 
-  .bx--left-nav__trigger--infrastructure.bx--left-nav__trigger--active {
+  .#{$prefix}--left-nav__trigger--infrastructure.#{$prefix}--left-nav__trigger--active {
     span {
       background: transparent;
     }

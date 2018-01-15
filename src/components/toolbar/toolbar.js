@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -120,13 +121,16 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} classTallRows The CSS class for making table rows into tall rows.
    * @property {string} classSearchActive The CSS class the active state of the search input.
    */
-  static options = {
-    selectorInit: '[data-toolbar]',
-    selectorSearch: '[data-toolbar-search]',
-    selectorRowHeight: '[data-row-height]',
-    classTallRows: 'bx--responsive-table--tall',
-    classSearchActive: 'bx--toolbar-search--active',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-toolbar]',
+      selectorSearch: '[data-toolbar-search]',
+      selectorRowHeight: '[data-row-height]',
+      classTallRows: `${prefix}--responsive-table--tall`,
+      classSearchActive: `${prefix}--toolbar-search--active`,
+    };
+  }
 }
 
 export default Toolbar;

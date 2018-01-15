@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByLauncher from '../../globals/js/mixins/init-component-by-launcher';
@@ -183,19 +184,22 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    *   The name of the custom event telling that modal is sure hidden
    *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    */
-  static options = {
-    selectorInit: '[data-modal]',
-    selectorModalClose: '[data-modal-close]',
-    selectorPrimaryFocus: '[data-modal-primary-focus]',
-    selectorsFloatingMenus: ['.bx--overflow-menu-options', '.bx-tooltip'],
-    classVisible: 'is-visible',
-    attribInitTarget: 'data-modal-target',
-    initEventNames: ['click'],
-    eventBeforeShown: 'modal-beingshown',
-    eventAfterShown: 'modal-shown',
-    eventBeforeHidden: 'modal-beinghidden',
-    eventAfterHidden: 'modal-hidden',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-modal]',
+      selectorModalClose: '[data-modal-close]',
+      selectorPrimaryFocus: '[data-modal-primary-focus]',
+      selectorsFloatingMenus: [`.${prefix}--overflow-menu-options`, '.bx-tooltip'],
+      classVisible: 'is-visible',
+      attribInitTarget: 'data-modal-target',
+      initEventNames: ['click'],
+      eventBeforeShown: 'modal-beingshown',
+      eventAfterShown: 'modal-shown',
+      eventBeforeHidden: 'modal-beinghidden',
+      eventAfterHidden: 'modal-hidden',
+    };
+  }
 }
 
 export default Modal;

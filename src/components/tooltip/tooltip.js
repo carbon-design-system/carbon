@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
@@ -79,13 +80,16 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
 
   static components = new WeakMap();
 
-  static options = {
-    selectorInit: '[data-tooltip-trigger]',
-    classShown: 'bx--tooltip--shown',
-    attribTooltipTarget: 'data-tooltip-target',
-    objMenuOffset: { top: 10, left: 0 },
-    initEventNames: ['mouseover', 'focus'],
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-tooltip-trigger]',
+      classShown: `${prefix}--tooltip--shown`,
+      attribTooltipTarget: 'data-tooltip-target',
+      objMenuOffset: { top: 10, left: 0 },
+      initEventNames: ['mouseover', 'focus'],
+    };
+  }
 }
 
 export default Tooltip;

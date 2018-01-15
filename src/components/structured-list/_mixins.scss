@@ -1,4 +1,4 @@
-// Used only for .bx--structured-list--condensed
+// Used only for .#{prefix}--structured-list--condensed
 @mixin padding-td--condensed($padding: $structured-list-padding) {
   padding: $padding / 4;
 }

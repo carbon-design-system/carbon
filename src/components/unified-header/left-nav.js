@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -28,12 +29,14 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    *   The data attribute selector for the three sections in the header of the left nav.
    * @param {string} [options.selectorLeftNavCurrentPage]
    *   The data attribute selector for the current section title in the left nav header.
+   * @param {string} [options.selectorLeftNavMainNavHidden] The CSS selector for the hidden main nav.
    * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
    * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
    * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
    * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
    * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
    * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
+   * @param {string} [options.classTaxonomyIcon] The class name for the taxonomy icon.
    */
   constructor(element, options) {
     super(element, options);
@@ -106,7 +109,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    */
   animateNavList(selectedNavTitle) {
     const currentLeftNavList = this.element.querySelector(
-      `${this.options.selectorLeftNavList}:not(.bx--left-nav__main-nav--hidden)`
+      `${this.options.selectorLeftNavList}:not(${this.options.selectorLeftNavMainNavHidden})`
     );
     const newLeftNavList = this.element.querySelector(`[data-left-nav-list=${selectedNavTitle}]`);
     const currentLeftNavItems = [...currentLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)].reverse();
@@ -421,7 +424,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
 
       const newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
       // IE11 doesn't support classList on SVG, must revert to className
-      newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
+      newLeftNavSectionItemIcon.setAttribute('class', this.options.classTaxonomyIcon);
       newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
       newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
 
@@ -471,54 +474,61 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
    * @property {string} [selectorLeftNavCurrentPage]
    *   The data attribute selector for the current section title in the left nav header.
+   * @property {string} [selectorLeftNavMainNavHidden] The CSS selector for the hidden main nav.
    * @property {string} [classActiveLeftNav] The class name for when a left nav is active.
    * @property {string} [classActiveLeftNavListItem] The class name for when a left nav list item is active.
    * @property {string} [classExpandedLeftNavListItem] The class name for when a nested list is expanded.
    * @property {string} [classFlyoutDisplayed] The class name for when a flyout menu is displayed.
    * @property {string} [classActiveSection] The class name for an active section item in the left nav header.
    * @property {string} [classItemHasChildren] The class name for when a list item has children.
+   * @property {string} [classTaxonomyIcon] The class name for the taxonomy icon.
    */
-  static options = {
-    selectorInit: '[data-left-nav-container]',
-    // Data Attribute selectors
-    selectorLeftNav: '[data-left-nav]',
-    selectorLeftNavList: '[data-left-nav-list]',
-    selectorLeftNavNestedList: '[data-left-nav-nested-list]',
-    selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
-    selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
-    selectorLeftNavListItem: '[data-left-nav-item]',
-    selectorLeftNavListItemLink: '[data-left-nav-item-link]',
-    selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
-    selectorLeftNavArrowIcon: '[data-left-nav-icon]',
-    selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
-    selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
-    selectorLeftNavSections: '[data-left-nav-sections]',
-    selectorLeftNavSection: '[data-left-nav-section]',
-    selectorLeftNavSectionLink: '[data-left-nav-section-link]',
-    selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
-    selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
-    selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
-    selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
-    selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
-    selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
-    selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
-    // CSS Class Selectors
-    classActiveTrigger: 'bx--left-nav__trigger--active',
-    classActiveLeftNav: 'bx--left-nav--active',
-    classActiveLeftNavListItem: 'bx--active-list-item',
-    classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
-    classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
-    classItemHasChildren: 'bx--main-nav__parent-item--has-children',
-    classNavSection: 'bx--left-nav__section',
-    classNavSectionTransition: 'bx--left-nav__section--transition',
-    classNavSectionAnchor: 'bx--left-nav__section--anchor',
-    classNavSectionLink: 'bx--left-nav__section--link',
-    classNavHeaderTitle: 'bx--left-nav__header--title',
-    classItemFade: 'bx--main-nav__parent-item--fade',
-    classItemHidden: 'bx--main-nav__parent-item--hidden',
-    classListHidden: 'bx--left-nav__main-nav--hidden',
-    classListTop: 'bx--left-nav__main-nav--top',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-left-nav-container]',
+      // Data Attribute selectors
+      selectorLeftNav: '[data-left-nav]',
+      selectorLeftNavList: '[data-left-nav-list]',
+      selectorLeftNavNestedList: '[data-left-nav-nested-list]',
+      selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
+      selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
+      selectorLeftNavListItem: '[data-left-nav-item]',
+      selectorLeftNavListItemLink: '[data-left-nav-item-link]',
+      selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
+      selectorLeftNavArrowIcon: '[data-left-nav-icon]',
+      selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
+      selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+      selectorLeftNavSections: '[data-left-nav-sections]',
+      selectorLeftNavSection: '[data-left-nav-section]',
+      selectorLeftNavSectionLink: '[data-left-nav-section-link]',
+      selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
+      selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+      selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
+      selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
+      selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
+      selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
+      selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
+      selectorLeftNavMainNavHidden: `.${prefix}--left-nav__main-nav--hidden`,
+      // CSS Class Selectors
+      classActiveTrigger: `${prefix}--left-nav__trigger--active`,
+      classActiveLeftNav: `${prefix}--left-nav--active`,
+      classActiveLeftNavListItem: `${prefix}--active-list-item`,
+      classExpandedLeftNavListItem: `${prefix}--main-nav__parent-item--expanded`,
+      classFlyoutDisplayed: `${prefix}--nested-list__flyout-menu--displayed`,
+      classItemHasChildren: `${prefix}--main-nav__parent-item--has-children`,
+      classNavSection: `${prefix}--left-nav__section`,
+      classNavSectionTransition: `${prefix}--left-nav__section--transition`,
+      classNavSectionAnchor: `${prefix}--left-nav__section--anchor`,
+      classNavSectionLink: `${prefix}--left-nav__section--link`,
+      classNavHeaderTitle: `${prefix}--left-nav__header--title`,
+      classItemFade: `${prefix}--main-nav__parent-item--fade`,
+      classItemHidden: `${prefix}--main-nav__parent-item--hidden`,
+      classListHidden: `${prefix}--left-nav__main-nav--hidden`,
+      classListTop: `${prefix}--left-nav__main-nav--top`,
+      classTaxonomyIcon: `${prefix}--left-nav__section--taxonomy-icon`,
+    };
+  }
 
   /**
    * The map associating DOM element and left navigation instance.

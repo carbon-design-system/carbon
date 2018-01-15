@@ -2,6 +2,7 @@
 // Text area
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
@@ -10,7 +11,7 @@
 @import '../form/form';
 
 @include exports('text-area') {
-  .bx--text-area {
+  .#{$prefix}--text-area {
     @include reset;
     @include font-family;
     @include typescale('zeta');

@@ -2,6 +2,7 @@
 // Footer
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
@@ -10,13 +11,13 @@
 @import '../button/button';
 @import '../link/link';
 
-.bx--footer--bottom-fixed {
+.#{$prefix}--footer--bottom-fixed {
   position: fixed;
   bottom: 0;
   left: 0;
 }
 
-.bx--footer {
+.#{$prefix}--footer {
   @include reset;
   @include font-family;
   box-sizing: border-box;
@@ -30,7 +31,7 @@
   width: 100%;
 }
 
-.bx--footer-info {
+.#{$prefix}--footer-info {
   display: flex;
 
   @media screen and (max-width: 600px) {
@@ -38,7 +39,7 @@
   }
 }
 
-.bx--footer-info__item {
+.#{$prefix}--footer-info__item {
   @include typescale('delta');
   @include line-height('body');
   display: flex;
@@ -47,11 +48,11 @@
   margin-right: rem(64px);
 }
 
-.bx--footer-info__item > .bx--link {
+.#{$prefix}--footer-info__item > .#{$prefix}--link {
   font-weight: 600;
 }
 
-.bx--footer-info__item > .bx--footer-label {
+.#{$prefix}--footer-info__item > .#{$prefix}--footer-label {
   @include typescale('zeta');
   @include line-height('body');
   margin: 0;
@@ -61,6 +62,6 @@
   }
 }
 
-.bx--footer-cta {
+.#{$prefix}--footer-cta {
   margin-left: auto;
 }

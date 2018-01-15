@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import InitComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -48,12 +49,15 @@ class CopyButton extends mixin(createComponent, InitComponentBySearch, handles) 
    * @property {string} classShowFeedback The CSS selector for showing the feedback tooltip.
    * @property {number} timeoutValue The specified timeout value before the feedback tooltip is hidden.
    */
-  static options = {
-    selectorInit: '[data-copy-btn]',
-    feedbackTooltip: '[data-feedback]',
-    classShowFeedback: 'bx--btn--copy__feedback--displayed',
-    timeoutValue: 2000,
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-copy-btn]',
+      feedbackTooltip: '[data-feedback]',
+      classShowFeedback: `${prefix}--btn--copy__feedback--displayed`,
+      timeoutValue: 2000,
+    };
+  }
 }
 
 export default CopyButton;

@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -59,7 +60,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     );
     this.manage(
       on(this.element.ownerDocument, 'mousemove', evt => {
-        const disabled = this.element.classList.contains('bx--slider--disabled');
+        const disabled = this.element.classList.contains(this.options.classDisabled);
         if (this.sliderActive === true && !disabled) {
           this._updatePosition(evt);
         }
@@ -67,7 +68,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     );
     this.manage(
       on(this.thumb, 'keydown', evt => {
-        const disabled = this.element.classList.contains('bx--slider--disabled');
+        const disabled = this.element.classList.contains(this.options.classDisabled);
         if (!disabled) {
           this._updatePosition(evt);
         }
@@ -75,7 +76,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     );
     this.manage(
       on(this.track, 'click', evt => {
-        const disabled = this.element.classList.contains('bx--slider--disabled');
+        const disabled = this.element.classList.contains(this.options.classDisabled);
         if (!disabled) {
           this._updatePosition(evt);
         }
@@ -138,9 +139,9 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
       }
       if (type === 'mousemove' || type === 'click') {
         if (type === 'click') {
-          this.element.querySelector(this.options.selectorThumb).classList.add('bx--slider__thumb--clicked');
+          this.element.querySelector(this.options.selectorThumb).classList.add(this.options.classThumbClicked);
         } else {
-          this.element.querySelector(this.options.selectorThumb).classList.remove('bx--slider__thumb--clicked');
+          this.element.querySelector(this.options.selectorThumb).classList.remove(this.options.classThumbClicked);
         }
 
         const track = this.track.getBoundingClientRect();
@@ -206,16 +207,21 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
    * properties in this object are overriden for the instance being created.
    * @property {string} selectorInit The CSS selector to find slider instances.
    */
-  static options = {
-    selectorInit: '[data-slider]',
-    selectorTrack: '.bx--slider__track',
-    selectorFilledTrack: '.bx--slider__filled-track',
-    selectorThumb: '.bx--slider__thumb',
-    selectorInput: '.bx--slider__input',
-    eventBeforeSliderValueChange: 'slider-before-value-change',
-    eventAfterSliderValueChange: 'slider-after-value-change',
-    stepMultiplier: 4,
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-slider]',
+      selectorTrack: `.${prefix}--slider__track`,
+      selectorFilledTrack: `.${prefix}--slider__filled-track`,
+      selectorThumb: `.${prefix}--slider__thumb`,
+      selectorInput: `.${prefix}--slider__input`,
+      classDisabled: `${prefix}--slider--disabled`,
+      classThumbClicked: `${prefix}--slider__thumb--clicked`,
+      eventBeforeSliderValueChange: 'slider-before-value-change',
+      eventAfterSliderValueChange: 'slider-after-value-change',
+      stepMultiplier: 4,
+    };
+  }
 }
 
 export default Slider;

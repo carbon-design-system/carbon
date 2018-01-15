@@ -1,11 +1,11 @@
-.bx--table-toolbar {
+.#{$prefix}--table-toolbar {
   display: flex;
   padding-top: rem(8px);
   padding-bottom: rem(8px);
   width: 100%;
   position: relative;
 
-  .bx--search-input {
+  .#{$prefix}--search-input {
     position: relative;
 
     &:focus {
@@ -14,39 +14,39 @@
     }
   }
 
-  .bx--search-close {
+  .#{$prefix}--search-close {
     height: 10px;
     width: 10px;
     top: calc(50% - 5px);
   }
 }
 
-.bx--toolbar-content {
+.#{$prefix}--toolbar-content {
   display: flex;
   margin-left: auto;
 }
 
-.bx--toolbar-action {
+.#{$prefix}--toolbar-action {
   @include button-reset;
   cursor: pointer;
   padding-left: rem(12px);
   padding-right: rem(12px);
 
   &:hover {
-    > .bx--toolbar-action__icon {
+    > .#{$prefix}--toolbar-action__icon {
       fill: $brand-01;
     }
   }
 
   &:focus {
     @include focus-outline;
-    > .bx--toolbar-action__icon {
+    > .#{$prefix}--toolbar-action__icon {
       fill: $brand-01;
     }
   }
 
   &:active {
-    > .bx--toolbar-action__icon {
+    > .#{$prefix}--toolbar-action__icon {
       fill: darken($brand-01, 5%);
     }
   }
@@ -55,13 +55,13 @@
     padding-right: 0;
   }
 
-  ~ .bx--btn {
+  ~ .#{$prefix}--btn {
     margin-left: rem(12px);
     margin-right: rem(2px);
   }
 }
 
-.bx--toolbar-action__icon {
+.#{$prefix}--toolbar-action__icon {
   height: rem(16px);
   width: auto;
   max-width: 16px;
@@ -69,7 +69,7 @@
   transition: $transition--base;
 }
 
-.bx--batch-actions {
+.#{$prefix}--batch-actions {
   display: flex;
   align-items: center;
   position: absolute;
@@ -82,7 +82,7 @@
   height: 100%;
   z-index: 99999;
   background-color: transparent;
-  transition: opacity 200ms $bx--standard-easing, background-color 200ms $bx--standard-easing;
+  transition: opacity 200ms $carbon--standard-easing, background-color 200ms $carbon--standard-easing;
   pointer-events: none;
   visibility: hidden;
 
@@ -90,21 +90,21 @@
     @include focus-outline;
   }
 
-  .bx--btn {
+  .#{$prefix}--btn {
     color: $ui-01;
   }
 
-  .bx--btn__icon {
+  .#{$prefix}--btn__icon {
     fill: $ui-01;
   }
 
-  .bx--btn--ghost {
+  .#{$prefix}--btn--ghost {
     &:hover,
     &:focus {
       background-color: $ui-01;
       color: $brand-01;
 
-      .bx--btn__icon {
+      .#{$prefix}--btn__icon {
         fill: $brand-01;
       }
     }
@@ -116,7 +116,7 @@
   }
 }
 
-.bx--batch-actions--active {
+.#{$prefix}--batch-actions--active {
   visibility: visible;
   background-color: $brand-01;
   pointer-events: all;
@@ -124,11 +124,11 @@
   opacity: 1;
 }
 
-.bx--action-list {
+.#{$prefix}--action-list {
   margin-left: -0.5rem;
 }
 
-.bx--action-icons {
+.#{$prefix}--action-icons {
   margin-left: auto;
   svg {
     padding: 0 rem(12px);
@@ -138,26 +138,26 @@
   }
 }
 
-.bx--batch-summary {
+.#{$prefix}--batch-summary {
   margin-left: auto;
   display: flex;
   align-items: center;
   color: $ui-01;
 }
 
-.bx--batch-summary__para {
+.#{$prefix}--batch-summary__para {
   @include typescale('zeta');
   margin-right: rem(24px);
 }
 
-.bx--batch-summary__cancel {
+.#{$prefix}--batch-summary__cancel {
   @include button-reset(auto);
   @include typescale('zeta');
   color: $ui-01;
   border-bottom: 1px solid transparent;
   font-weight: 600;
   cursor: pointer;
-  transition: border $transition--base $bx--standard-easing;
+  transition: border $transition--base $carbon--standard-easing;
 
   &:hover,
   &:focus {
@@ -165,13 +165,13 @@
   }
 }
 
-.bx--batch-actions ~ .bx--toolbar-search-container,
-.bx--batch-actions ~ .bx--toolbar-content {
+.#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-search-container,
+.#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
   opacity: 1;
   transition: opacity $transition--base;
 }
 
-.bx--batch-actions--active ~ .bx--toolbar-search-container,
-.bx--batch-actions--active ~ .bx--toolbar-content {
+.#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
+.#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
   opacity: 0;
 }

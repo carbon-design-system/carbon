@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
@@ -6,7 +7,7 @@
 @import '../../globals/scss/css--reset';
 
 @include exports('checkbox') {
-  .bx--form-item.bx--checkbox-wrapper {
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin-bottom: 1rem;
 
     &:first-of-type {
@@ -18,11 +19,11 @@
     }
   }
 
-  .bx--checkbox {
+  .#{$prefix}--checkbox {
     @include hidden;
   }
 
-  .bx--checkbox-label {
+  .#{$prefix}--checkbox-label {
     @include reset;
     @include font-family;
     @include font-smoothing;
@@ -34,7 +35,7 @@
     padding-left: rem(25px);
   }
 
-  .bx--checkbox-label::before {
+  .#{$prefix}--checkbox-label::before {
     box-sizing: border-box;
     content: '';
     position: absolute;
@@ -46,7 +47,7 @@
     background-color: $ui-01;
   }
 
-  .bx--checkbox-label::after {
+  .#{$prefix}--checkbox-label::after {
     content: '';
     width: 10px;
     height: 5px;
@@ -59,32 +60,32 @@
     left: 3px;
   }
 
-  .bx--checkbox:checked + .bx--checkbox-label::before,
-  .bx--checkbox:indeterminate + .bx--checkbox-label::before,
-  .bx--checkbox-label[data-contained-checkbox-state='true']::before,
-  .bx--checkbox-label[data-contained-checkbox-state='mixed']::before {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
     background-color: $brand-01;
     border-color: $brand-01;
   }
 
-  .bx--checkbox:checked + .bx--checkbox-label::after,
-  .bx--checkbox-label[data-contained-checkbox-state='true']::after {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
     opacity: 1;
     transform: scale(1) rotate(-45deg);
   }
 
-  .bx--checkbox:not(:checked) + .bx--checkbox-label::after {
+  .#{$prefix}--checkbox:not(:checked) + .#{$prefix}--checkbox-label::after {
     opacity: 0;
     transform: scale(0) rotate(-45deg);
   }
 
-  .bx--checkbox:focus + .bx--checkbox-label::before,
-  .bx--checkbox-label__focus::before {
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label__focus::before {
     @include focus-outline('blurred');
   }
 
-  .bx--checkbox:indeterminate + .bx--checkbox-label::after,
-  .bx--checkbox-label[data-contained-checkbox-state='mixed']::after {
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     transform: scale(1) rotate(0deg);
     border-left: 0 solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
@@ -93,7 +94,7 @@
     top: rem(1px);
   }
 
-  .bx--checkbox-appearance {
+  .#{$prefix}--checkbox-appearance {
     position: absolute;
     left: 0;
     display: inline-block;
@@ -105,35 +106,35 @@
     min-width: 18px;
   }
 
-  .bx--checkbox:checked + .bx--checkbox-appearance,
-  .bx--checkbox:checked + .bx--checkbox-label .bx--checkbox-appearance {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance {
     display: flex;
     align-items: baseline;
     background-color: $brand-01;
     border-color: $brand-01;
   }
 
-  .bx--checkbox:disabled + .bx--checkbox-label,
-  .bx--checkbox:disabled + .bx--checkbox-appearance,
-  .bx--checkbox:disabled ~ .bx--checkbox-label-text {
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:disabled ~ .#{$prefix}--checkbox-label-text {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .bx--checkbox:focus + .bx--checkbox-label .bx--checkbox-appearance,
-  .bx--checkbox:focus + .bx--checkbox-appearance {
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-appearance {
     @include focus-outline('blurred');
   }
 
-  .bx--checkbox-checkmark {
+  .#{$prefix}--checkbox-checkmark {
     display: none;
     fill: $inverse-01;
     width: 100%;
     height: 100%;
   }
 
-  .bx--checkbox:checked + .bx--checkbox-appearance .bx--checkbox-checkmark,
-  .bx--checkbox:checked + .bx--checkbox-label .bx--checkbox-appearance .bx--checkbox-checkmark {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-appearance .#{$prefix}--checkbox-checkmark,
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance .#{$prefix}--checkbox-checkmark {
     display: block;
 
     @-moz-document url-prefix() {

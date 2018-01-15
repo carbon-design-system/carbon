@@ -10,21 +10,21 @@
 @import '../form/form';
 
 @include exports('toggle') {
-  .bx--toggle {
+  .#{$prefix}--toggle {
     @include hidden;
   }
 
-  .bx--toggle__label {
+  .#{$prefix}--toggle__label {
     @include font-family;
     position: relative;
     display: flex;
     align-items: center;
-    transition: $transition--base $bx--standard-easing;
+    transition: $transition--base $carbon--standard-easing;
     cursor: pointer;
     margin: 1rem 0;
   }
 
-  .bx--toggle__appearance {
+  .#{$prefix}--toggle__appearance {
     position: relative;
     width: 48px;
 
@@ -36,7 +36,7 @@
       height: 4px;
       top: -2px;
       background-color: $ui-05;
-      transition: $transition--base $bx--standard-easing;
+      transition: $transition--base $carbon--standard-easing;
       cursor: pointer;
     }
 
@@ -52,25 +52,25 @@
       background-color: $ui-01;
       border-radius: 50%;
       content: '';
-      transition: $transition--base $bx--standard-easing;
+      transition: $transition--base $carbon--standard-easing;
     }
   }
 
-  .bx--toggle__text--left,
-  .bx--toggle__text--right {
+  .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle__text--right {
     @include typescale('zeta');
     position: relative;
   }
 
-  .bx--toggle__text--left {
+  .#{$prefix}--toggle__text--left {
     margin-right: 0.5rem;
   }
 
-  .bx--toggle__text--right {
+  .#{$prefix}--toggle__text--right {
     margin-left: 0.5rem;
   }
 
-  .bx--toggle:checked + .bx--toggle__label .bx--toggle__appearance {
+  .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     &:before {
       background-color: $brand-01;
     }
@@ -83,26 +83,26 @@
     }
   }
 
-  .bx--toggle:focus + .bx--toggle__label {
-    .bx--toggle__appearance:before {
+  .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
       outline: 1px solid transparent;
     }
 
-    .bx--toggle__appearance:after {
+    .#{$prefix}--toggle__appearance:after {
       @include focus-outline('blurred');
     }
   }
 
-  .bx--toggle:disabled + .bx--toggle__label {
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label {
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  .bx--toggle:disabled + .bx--toggle__label .bx--toggle__appearance {
+  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     &:before,
     &:after {
       cursor: not-allowed;
-      transition: $transition--base $bx--standard-easing;
+      transition: $transition--base $carbon--standard-easing;
     }
   }
 }

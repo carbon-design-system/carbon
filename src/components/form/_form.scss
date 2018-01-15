@@ -4,12 +4,12 @@
 @import '../../globals/scss/import-once';
 
 @include exports('form') {
-  .bx--fieldset {
+  .#{$prefix}--fieldset {
     @include reset;
     margin-bottom: 2rem;
   }
 
-  .bx--form-item {
+  .#{$prefix}--form-item {
     @include font-family;
     flex: 1;
     margin-right: 1rem;
@@ -21,7 +21,7 @@
     }
   }
 
-  .bx--label {
+  .#{$prefix}--label {
     @include reset;
     @include font-family;
     @include typescale('zeta');
@@ -31,11 +31,11 @@
     margin-bottom: rem(10px);
   }
 
-  .bx--label .bx--tooltip__trigger {
+  .#{$prefix}--label .#{$prefix}--tooltip__trigger {
     @include typescale('zeta');
   }
 
-  .bx--label--disabled {
+  .#{$prefix}--label--disabled {
     opacity: 0.5;
   }
 
@@ -44,12 +44,12 @@
   select[data-invalid] {
     box-shadow: 0 2px 0px 0px $support-01;
 
-    ~ .bx--form-requirement {
+    ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
     }
   }
 
-  .bx--form-requirement {
+  .#{$prefix}--form-requirement {
     @include reset;
     @include typescale('omega');
     margin: 0.75rem 0 0;

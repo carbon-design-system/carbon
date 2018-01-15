@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -48,8 +49,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   _getInput(index) {
     const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
-    const id = `#${rows[index].getAttribute('for')}`;
-    return this.element.ownerDocument.querySelector(`${id}.bx--structured-list-input`);
+    return this.element.ownerDocument.querySelector(this.options.selectorListInput(rows[index].getAttribute('for')));
   }
 
   _handleInputChecked(index) {
@@ -71,7 +71,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
     [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
-      const input = this.element.querySelector(`#${selectedRow.getAttribute('for')}.bx--structured-list-input`);
+      const input = this.element.querySelector(this.options.selectorListInput(selectedRow.getAttribute('for')));
       input.checked = true;
     }
   }
@@ -110,11 +110,15 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   static components = new WeakMap();
 
-  static options = {
-    selectorInit: '[data-structured-list]',
-    selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
-    classActive: 'bx--structured-list-row--selected',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-structured-list]',
+      selectorRow: `[data-structured-list] .${prefix}--structured-list-tbody > label.${prefix}--structured-list-row`,
+      selectorListInput: id => `#${id}.${prefix}--structured-list-input`,
+      classActive: `${prefix}--structured-list-row--selected`,
+    };
+  }
 }
 
 export default StructuredList;

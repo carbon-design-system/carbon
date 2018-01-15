@@ -1,5 +1,6 @@
 $css--helpers: true;
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/layout';
@@ -9,11 +10,11 @@ $css--helpers: true;
 @import '../text-input/text-input';
 
 @include exports('pagination') {
-  .bx--data-table-v2-container + .bx--pagination {
+  .#{$prefix}--data-table-v2-container + .#{$prefix}--pagination {
     border-top: 0;
   }
 
-  .bx--pagination {
+  .#{$prefix}--pagination {
     @include reset;
     @include font-family;
     width: 100%;
@@ -23,23 +24,23 @@ $css--helpers: true;
     align-items: center;
     border: 1px solid $ui-04;
 
-    .bx--form-item {
+    .#{$prefix}--form-item {
       flex: auto;
     }
   }
 
-  .bx--pagination__left {
+  .#{$prefix}--pagination__left {
     display: flex;
     align-items: center;
   }
 
-  .bx--pagination__right {
+  .#{$prefix}--pagination__right {
     display: flex;
     align-items: center;
     margin-left: auto;
   }
 
-  .bx--pagination__text {
+  .#{$prefix}--pagination__text {
     @include typescale('omega');
     color: $text-02;
     display: none;
@@ -49,7 +50,7 @@ $css--helpers: true;
     }
   }
 
-  .bx--pagination__button-icon {
+  .#{$prefix}--pagination__button-icon {
     height: rem(12px);
     width: rem(12px);
     fill: $ui-05;
@@ -57,14 +58,14 @@ $css--helpers: true;
     transition: $transition--base;
   }
 
-  .bx--pagination__button {
+  .#{$prefix}--pagination__button {
     @include reset;
     border: none;
     background: none;
     cursor: pointer;
 
     &:hover {
-      .bx--pagination__button-icon {
+      .#{$prefix}--pagination__button-icon {
         fill: $brand-01;
       }
     }
@@ -76,32 +77,32 @@ $css--helpers: true;
     &:disabled:hover {
       cursor: default;
       
-      .bx--pagination__button-icon {
+      .#{$prefix}--pagination__button-icon {
         fill: $ui-05;
       }
     }
   }
 
-  .bx--pagination__button--backward {
+  .#{$prefix}--pagination__button--backward {
     margin-left: rem(20px);
     margin-right: rem(28px);
   }
 
-  .bx--pagination__button--forward {
+  .#{$prefix}--pagination__button--forward {
     margin-left: rem(28px);
   }
 
-  .bx--pagination {
-    .bx--select {
+  .#{$prefix}--pagination {
+    .#{$prefix}--select {
       margin-right: rem(10px);
     }
 
-    .bx--select--inline {
+    .#{$prefix}--select--inline {
       margin-right: 0;
       width: rem(48px);
     }
 
-    .bx--select-input {
+    .#{$prefix}--select-input {
       height: rem(24px);
       width: rem(54px);
       padding: 0 rem(8px);
@@ -113,12 +114,12 @@ $css--helpers: true;
       }
     }
 
-    .bx--select__arrow {
+    .#{$prefix}--select__arrow {
       right: 0.5rem;
       top: 0.625rem;
     }
 
-    .bx--text-input {
+    .#{$prefix}--text-input {
       height: rem(24px);
       min-width: rem(24px);
       width: rem(24px);
@@ -133,13 +134,13 @@ $css--helpers: true;
     }
   }
 
-  .bx--pagination--inline {
+  .#{$prefix}--pagination--inline {
     height: 42px;
     margin-top: -0.5rem;
     margin-bottom: -0.5rem;
     margin-right: -1rem;
 
-    .bx--pagination__button {
+    .#{$prefix}--pagination__button {
       height: 100%;
       border-left: 1px solid $ui-04;
       border-right: 1px solid $ui-04;
@@ -148,24 +149,24 @@ $css--helpers: true;
       margin: 0;
     }
 
-    .bx--pagination__button--forward {
+    .#{$prefix}--pagination__button--forward {
       border-right: 0;
     }
 
-    .bx--pagination__button--backward {
+    .#{$prefix}--pagination__button--backward {
       margin-left: 1rem;
     }
 
-    .bx--select--inline {
+    .#{$prefix}--select--inline {
       position: relative;
       top: -1.5px;
     }
 
-    .bx--select-input {
+    .#{$prefix}--select-input {
       padding-left: 0.9rem;
     }
 
-    .bx--select__arrow {
+    .#{$prefix}--select__arrow {
       right: 0.7rem;
     }
   }

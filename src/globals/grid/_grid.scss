@@ -1,3 +1,5 @@
+@import '../scss/vars';
+
 // map functions
 @function breakpoint($breakpoint) {
   @if map-has-key($grid-breakpoints, $breakpoint) {
@@ -30,7 +32,7 @@ $grid-breakpoints: (sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1600px);
 $gutter-breakpoints: (xs: 5px, sm: 10px);
 $grid-gutter-breakpoints: (xs: 3%, sm: 5%);
 
-.bx--grid {
+.#{$prefix}--grid {
   margin-left: grid-gutter('xs');
   margin-right: grid-gutter('xs');
   padding-left: gutter('xs');
@@ -48,7 +50,7 @@ $grid-gutter-breakpoints: (xs: 3%, sm: 5%);
   }
 }
 
-.bx--row {
+.#{$prefix}--row {
   display: flex;
   flex-wrap: wrap;
   margin: 0 gutter('xs') * -1;
@@ -58,7 +60,7 @@ $grid-gutter-breakpoints: (xs: 3%, sm: 5%);
   }
 }
 
-[class*='bx--col'] {
+[class*='#{$prefix}--col'] {
   position: relative;
   width: 100%;
   min-height: 1px;
@@ -70,20 +72,20 @@ $grid-gutter-breakpoints: (xs: 3%, sm: 5%);
 }
 
 @for $i from 1 through $columns {
-  .bx--col-xs-#{$i} {
+  .#{$prefix}--col-xs-#{$i} {
     flex-basis: (100% * $i / $columns);
   }
 }
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   @media (min-width: breakpoint($breakpoint)) {
-    .bx--col-#{$breakpoint}-auto {
+    .#{$prefix}--col-#{$breakpoint}-auto {
       flex: 0 0 auto;
       width: auto;
     }
 
     @for $i from 1 through $columns {
-      .bx--col-#{$breakpoint}-#{$i} {
+      .#{$prefix}--col-#{$breakpoint}-#{$i} {
         flex-basis: (100% * $i / $columns);
       }
     }
@@ -98,10 +100,10 @@ $gutter-size: 10px;
   max-width: (100% * $col-num / $columns);
 }
 
-.bx--col-xs,
-.bx--col-sm,
-.bx--col-md,
-.bx--col-lg {
+.#{$prefix}--col-xs,
+.#{$prefix}--col-sm,
+.#{$prefix}--col-md,
+.#{$prefix}--col-lg {
   flex-basis: 0;
   flex: 1;
   flex-grow: 1;

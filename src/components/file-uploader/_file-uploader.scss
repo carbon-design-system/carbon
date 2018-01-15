@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
@@ -9,20 +10,20 @@
 @import '../loading/loading';
 
 @include exports('file-uploader') {
-  .bx--file {
+  .#{$prefix}--file {
     width: 100%;
   }
 
-  .bx--file-input {
+  .#{$prefix}--file-input {
     @include hidden;
   }
 
-  .bx--file-btn {
+  .#{$prefix}--file-btn {
     display: inline-flex;
     margin: 0;
   }
 
-  .bx--label-description {
+  .#{$prefix}--label-description {
     @include reset;
     @include typescale('zeta');
     @include line-height('body');
@@ -31,13 +32,13 @@
     margin-bottom: 1.25rem;
   }
 
-  .bx--file-container {
+  .#{$prefix}--file-container {
     display: block;
     width: 100%;
     margin-top: rem(20px);
   }
 
-  .bx--file__selected-file {
+  .#{$prefix}--file__selected-file {
     @include text-overflow(300px);
     display: flex;
     align-items: center;
@@ -52,7 +53,7 @@
     }
   }
 
-  .bx--file-filename {
+  .#{$prefix}--file-filename {
     @include typescale('omega');
     @include text-overflow(100%);
     display: inline-flex;
@@ -62,23 +63,23 @@
     height: 1.875rem;
   }
 
-  .bx--file__state-container {
+  .#{$prefix}--file__state-container {
     display: flex;
     align-items: center;
 
-    .bx--loading {
+    .#{$prefix}--loading {
       width: 1.125rem;
       height: 1.125rem;
       margin-right: -7px;
     }
 
-    .bx--loading__svg {
+    .#{$prefix}--loading__svg {
       stroke: $ui-05;
     }
   }
 
-  .bx--file__state-container .bx--file-close,
-  .bx--file__state-container .bx--file-complete {
+  .#{$prefix}--file__state-container .#{$prefix}--file-close,
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
     width: 1rem;
     height: 1rem;
     fill: $text-01;
@@ -89,11 +90,11 @@
     }
   }
 
-  .bx--file__state-container .bx--file-close {
+  .#{$prefix}--file__state-container .#{$prefix}--file-close {
     fill: $ui-05;
   }
 
-  .bx--file__state-container .bx--file-complete {
+  .#{$prefix}--file__state-container .#{$prefix}--file-complete {
     fill: $support-02;
   }
 }

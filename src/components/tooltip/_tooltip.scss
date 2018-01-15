@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
@@ -7,12 +8,12 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tooltip') {
-  .bx--tooltip--simple {
+  .#{$prefix}--tooltip--simple {
     display: flex;
     align-items: center;
   }
 
-  .bx--tooltip__trigger {
+  .#{$prefix}--tooltip__trigger {
     @include font-family;
     @include typescale('epsilon');
     display: inline-flex;
@@ -39,7 +40,7 @@
     }
   }
 
-  .bx--tooltip {
+  .#{$prefix}--tooltip {
     @include layer('overlay');
     @include reset;
     position: absolute;
@@ -55,7 +56,7 @@
       @include typescale('zeta');
     }
 
-    .bx--tooltip__label {
+    .#{$prefix}--tooltip__label {
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
@@ -106,13 +107,13 @@
     }
   }
 
-  .bx--tooltip--shown {
+  .#{$prefix}--tooltip--shown {
     display: block;
   }
 
   // Simple CSS only tooltip
-  .bx--tooltip--simple__top,
-  .bx--tooltip--simple__bottom {
+  .#{$prefix}--tooltip--simple__top,
+  .#{$prefix}--tooltip--simple__bottom {
     @include font-family;
     @include reset;
     @include typescale('delta');
@@ -183,7 +184,7 @@
   }
 
   // Tooltip caret - top position
-  .bx--tooltip--simple__top {
+  .#{$prefix}--tooltip--simple__top {
     &:before {
       bottom: 1.8rem;
     }
@@ -195,7 +196,7 @@
   }
 
   // Tooltip caret - bottom position
-  .bx--tooltip--simple__bottom {
+  .#{$prefix}--tooltip--simple__bottom {
     &:before {
       top: 1.8rem;
     }

@@ -18,7 +18,7 @@
       '`carbon-components` package is deprecated. Use the ' +
       '`carbon-addons-bluemix` package instead.'
   ) {
-    .bx--detail-page-header--no-tabs {
+    .#{$prefix}--detail-page-header--no-tabs {
       @include detail-page-header;
       max-height: rem(66px);
       height: rem(66px);
@@ -34,7 +34,7 @@
       }
     }
 
-    .bx--detail-page-header--with-tabs {
+    .#{$prefix}--detail-page-header--with-tabs {
       @include detail-page-header;
       min-height: rem(66px);
       background-color: $ui-01;
@@ -48,10 +48,10 @@
       }
     }
 
-    .bx--detail-page-header .bx--breadcrumb {
+    .#{$prefix}--detail-page-header .#{$prefix}--breadcrumb {
       display: none;
-      transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
-        visibility $transition--base $bx--standard-easing $transition-time / 2, transform $transition--base $bx--standard-easing 0s;
+      transition: opacity $transition--base $carbon--standard-easing $transition-time / 2,
+        visibility $transition--base $carbon--standard-easing $transition-time / 2, transform $transition--base $carbon--standard-easing 0s;
       will-change: opacity, visibility, transform;
 
       @include breakpoint(bp--sm--major) {
@@ -60,24 +60,24 @@
       }
     }
 
-    .bx--detail-page-header--no-tabs .bx--breadcrumb {
+    .#{$prefix}--detail-page-header--no-tabs .#{$prefix}--breadcrumb {
       margin-bottom: 0.75rem;
       transform: translate3d(0, 0, 0);
     }
 
-    .bx--detail-page-header-title-container {
+    .#{$prefix}--detail-page-header-title-container {
       display: flex;
       align-items: center;
       min-height: rem(36px);
       height: rem(36px);
-      transition: transform $transition-time $bx--standard-easing 0s;
+      transition: transform $transition-time $carbon--standard-easing 0s;
 
       @include breakpoint(bp--sm--major) {
         padding-bottom: 0;
       }
     }
 
-    .bx--detail-page-header--with-tabs .bx--detail-page-header-title-container {
+    .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--detail-page-header-title-container {
       margin-top: rem(3px);
 
       @include breakpoint(bp--sm--major) {
@@ -85,11 +85,11 @@
       }
     }
 
-    .bx--detail-page-header--no-tabs .bx--detail-page-header-title-container {
+    .#{$prefix}--detail-page-header--no-tabs .#{$prefix}--detail-page-header-title-container {
       padding-bottom: 0;
     }
 
-    .bx--detail-page-header-content {
+    .#{$prefix}--detail-page-header-content {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -99,7 +99,7 @@
       }
     }
 
-    .bx--detail-page-header-icon-container {
+    .#{$prefix}--detail-page-header-icon-container {
       @include reset;
       display: inline-flex;
       justify-content: center;
@@ -111,7 +111,7 @@
       margin-right: 0.625rem;
     }
 
-    .bx--detail-page-header-title {
+    .#{$prefix}--detail-page-header-title {
       @include typescale('gamma');
       font-weight: 300;
       color: $text-02;
@@ -121,7 +121,7 @@
       }
     }
 
-    .bx--detail-page-header-status-container {
+    .#{$prefix}--detail-page-header-status-container {
       display: none;
       margin-top: rem(8px);
 
@@ -130,7 +130,7 @@
       }
     }
 
-    .bx--detail-page-header-status-icon {
+    .#{$prefix}--detail-page-header-status-icon {
       display: inline-block;
       border-radius: 50%;
       height: rem(12px);
@@ -139,12 +139,12 @@
       margin-left: 0.625rem;
     }
 
-    .bx--detail-page-header-menu {
+    .#{$prefix}--detail-page-header-menu {
       position: absolute;
       right: 0.75rem;
       display: flex;
       align-items: flex-start;
-      transition: top $transition--base $bx--standard-easing 0s, transform $transition--base $bx--standard-easing 0s;
+      transition: top $transition--base $carbon--standard-easing 0s, transform $transition--base $carbon--standard-easing 0s;
       will-change: transform, top;
 
       @include breakpoint(bp--sm--major) {
@@ -154,13 +154,13 @@
       }
     }
 
-    .bx--detail-page-header .bx--tabs {
-      transition: opacity $transition--base $bx--standard-easing $transition-time / 2,
-        visibility $transition--base $bx--standard-easing $transition-time / 2;
+    .#{$prefix}--detail-page-header .#{$prefix}--tabs {
+      transition: opacity $transition--base $carbon--standard-easing $transition-time / 2,
+        visibility $transition--base $carbon--standard-easing $transition-time / 2;
       will-change: opacity, visibility, transform;
     }
 
-    .bx--detail-page-header--with-tabs .bx--tabs {
+    .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--tabs {
       padding: 0.75rem 0;
       display: none;
 
@@ -171,18 +171,18 @@
       }
     }
 
-    .bx--detail-page-header--with-tabs .bx--tabs__nav {
+    .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--tabs__nav {
       margin-left: 0;
     }
 
-    .bx--detail-page-header--with-tabs .bx--tabs__nav-link {
+    .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--tabs__nav-link {
       white-space: nowrap;
     }
 
     // Scroll
-    .bx--detail-page-header--scroll {
-      .bx--breadcrumb,
-      .bx--tabs {
+    .#{$prefix}--detail-page-header--scroll {
+      .#{$prefix}--breadcrumb,
+      .#{$prefix}--tabs {
         transition-delay: 0s;
 
         @include breakpoint(bp--sm--major) {
@@ -193,7 +193,7 @@
     }
 
     // Scroll -- With Tabs
-    .bx--detail-page-header--scroll.bx--detail-page-header--with-tabs {
+    .#{$prefix}--detail-page-header--scroll.#{$prefix}--detail-page-header--with-tabs {
       padding: 0.75rem 3% 0;
       transition-delay: $transition-time / 2;
 
@@ -202,11 +202,11 @@
         transform: translate3d(0, -50%, 0);
       }
 
-      .bx--tabs {
+      .#{$prefix}--tabs {
         display: block;
       }
 
-      .bx--detail-page-header-menu {
+      .#{$prefix}--detail-page-header-menu {
         transition-delay: $transition-time / 2;
 
         @include breakpoint(bp--sm--major) {
@@ -214,7 +214,7 @@
         }
       }
 
-      .bx--detail-page-header-title-container {
+      .#{$prefix}--detail-page-header-title-container {
         transition-delay: $transition-time / 2;
         @include breakpoint(bp--sm--major) {
           transform: translate3d(0, 100%, 0);
@@ -223,18 +223,18 @@
     }
 
     // Scroll -- No Tabs
-    .bx--detail-page-header--scroll.bx--detail-page-header--no-tabs {
+    .#{$prefix}--detail-page-header--scroll.#{$prefix}--detail-page-header--no-tabs {
       @include breakpoint(bp--sm--major) {
         transform: translate3d(0, rem(-22px), 0);
       }
 
-      .bx--breadcrumb {
+      .#{$prefix}--breadcrumb {
         transform: translate3d(0, -100%, 0);
         transition-delay: 0s;
         margin-bottom: 0;
       }
 
-      .bx--detail-page-header-title-container {
+      .#{$prefix}--detail-page-header-title-container {
         padding: 0;
 
         @include breakpoint(bp--sm--major) {
@@ -242,7 +242,7 @@
         }
       }
 
-      .bx--detail-page-header-menu {
+      .#{$prefix}--detail-page-header-menu {
         @include breakpoint(bp--sm--major) {
           transform: translate3d(0, rem(-8px), 0);
         }

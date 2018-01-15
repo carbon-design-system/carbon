@@ -16,7 +16,7 @@
     'Accessing the `interior-left-nav` component from the `carbon-components`' +
       'package is deprecated. Use the `carbon-addons-bluemix` package instead.'
   ) {
-    .bx--interior-left-nav {
+    .#{$prefix}--interior-left-nav {
       @include reset;
       @include font-family;
       width: rem(250px);
@@ -85,7 +85,7 @@
           &-icon {
             display: flex;
 
-            .bx--interior-left-nav__icon {
+            .#{$prefix}--interior-left-nav__icon {
               fill: $color__blue-51;
               width: rem(8px);
               height: rem(8px);
@@ -96,7 +96,7 @@
           &--expanded {
             .left-nav-list--nested {
               max-height: 20rem;
-              transition: $transition--expansion $bx--ease-in;
+              transition: $transition--expansion $carbon--ease-in;
               overflow: inherit;
               opacity: 1;
 
@@ -109,7 +109,7 @@
               color: $color__blue-51;
             }
 
-            .left-nav-list__item-icon .bx--interior-left-nav__icon {
+            .left-nav-list__item-icon .#{$prefix}--interior-left-nav__icon {
               transform: rotate(180deg);
             }
           }
@@ -138,7 +138,7 @@
       .left-nav-list--nested {
         max-height: 0;
         overflow: hidden;
-        transition: $transition--expansion $bx--ease-out;
+        transition: $transition--expansion $carbon--ease-out;
         padding: 0;
         opacity: 0;
 
@@ -183,18 +183,18 @@
       }
     }
 
-    .bx--interior-left-nav--collapseable {
+    .#{$prefix}--interior-left-nav--collapseable {
       overflow: hidden;
       display: flex;
       flex-direction: column;
       width: rem(200px);
       padding-top: rem(20px);
-      transition: background-color 300ms $bx--standard-easing, width 300ms $bx--standard-easing;
+      transition: background-color 300ms $carbon--standard-easing, width 300ms $carbon--standard-easing;
 
       ul,
       li,
       hr,
-      .bx--interior-left-nav-collapse__target {
+      .#{$prefix}--interior-left-nav-collapse__target {
         opacity: 1;
       }
 
@@ -254,7 +254,7 @@
         padding-left: rem(40px);
       }
 
-      .bx--interior-left-nav-collapse {
+      .#{$prefix}--interior-left-nav-collapse {
         cursor: pointer;
         background-color: rgba($color__blue-51, 0.1);
         display: flex;
@@ -274,12 +274,12 @@
         }
       }
 
-      .bx--interior-left-nav-collapse__target {
+      .#{$prefix}--interior-left-nav-collapse__target {
         margin-left: rem(10px);
         margin-right: rem(10px);
       }
 
-      .bx--interior-left-nav-collapse__link {
+      .#{$prefix}--interior-left-nav-collapse__link {
         @include typescale('zeta');
         display: flex;
         align-items: center;
@@ -291,7 +291,7 @@
         }
       }
 
-      .bx--interior-left-nav-collapse__arrow {
+      .#{$prefix}--interior-left-nav-collapse__arrow {
         transform: rotate(0);
         fill: $color__blue-51;
         height: 12px;
@@ -299,10 +299,10 @@
       }
     }
 
-    .bx--interior-left-nav--collapsing,
-    .bx--interior-left-nav--collapsed {
+    .#{$prefix}--interior-left-nav--collapsing,
+    .#{$prefix}--interior-left-nav--collapsed {
       width: rem(48px);
-      transition: background-color 300ms $bx--standard-easing, width 300ms $bx--standard-easing;
+      transition: background-color 300ms $carbon--standard-easing, width 300ms $carbon--standard-easing;
       cursor: pointer;
       background-color: rgba($color__blue-51, 0.1);
 
@@ -314,14 +314,14 @@
       ul,
       li,
       hr,
-      .bx--interior-left-nav-collapse__target {
+      .#{$prefix}--interior-left-nav-collapse__target {
         opacity: 0;
-        transition: opacity 300ms $bx--standard-easing;
+        transition: opacity 300ms $carbon--standard-easing;
         overflow: hidden;
         white-space: nowrap;
       }
 
-      .bx--interior-left-nav-collapse {
+      .#{$prefix}--interior-left-nav-collapse {
         background-color: transparent;
 
         &:hover {
@@ -329,45 +329,45 @@
         }
       }
 
-      .bx--interior-left-nav-collapse__arrow {
+      .#{$prefix}--interior-left-nav-collapse__arrow {
         transform: rotate(180deg);
-        transition: transform 300ms $bx--standard-easing;
+        transition: transform 300ms $carbon--standard-easing;
       }
     }
 
-    .bx--interior-left-nav--collapsed {
+    .#{$prefix}--interior-left-nav--collapsed {
       ul,
       li,
       hr,
-      .bx--interior-left-nav-collapse__target {
+      .#{$prefix}--interior-left-nav-collapse__target {
         display: none;
       }
 
-      .bx--interior-left-nav-collapse {
+      .#{$prefix}--interior-left-nav-collapse {
         justify-content: center;
         padding-left: 0;
         padding-right: 0;
       }
     }
 
-    .bx--interior-left-nav--expanding {
+    .#{$prefix}--interior-left-nav--expanding {
       width: rem(200px);
-      transition: width 300ms $bx--standard-easing;
+      transition: width 300ms $carbon--standard-easing;
       background-color: #fff;
 
       ul,
       li,
       hr,
-      .bx--interior-left-nav-collapse__target {
+      .#{$prefix}--interior-left-nav-collapse__target {
         opacity: 1;
-        transition: opacity 300ms $bx--standard-easing;
+        transition: opacity 300ms $carbon--standard-easing;
         overflow: hidden;
         white-space: nowrap;
       }
 
-      .bx--interior-left-nav-collapse__arrow {
+      .#{$prefix}--interior-left-nav-collapse__arrow {
         transform: rotate(0deg);
-        transition: transform 300ms $bx--standard-easing;
+        transition: transform 300ms $carbon--standard-easing;
       }
     }
   }

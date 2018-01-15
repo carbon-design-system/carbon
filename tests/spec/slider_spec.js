@@ -30,6 +30,8 @@ describe('Test slider', function() {
         selectorFilledTrack: '.bx--slider__filled-track',
         selectorThumb: '.bx--slider__thumb',
         selectorInput: '.bx--slider__input',
+        classDisabled: 'bx--slider--disabled',
+        classThumbClicked: 'bx--slider__thumb--clicked',
         eventBeforeSliderValueChange: 'slider-before-value-change',
         eventAfterSliderValueChange: 'slider-after-value-change',
         stepMultiplier: 4,

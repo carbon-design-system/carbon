@@ -12,6 +12,7 @@
 // Misc
 // ---------------------------------------------
 
+@import 'vars';
 @import 'css--reset';
 @import 'typography';
 
@@ -111,7 +112,7 @@ REASON: #{$reason}';
 // ---------------------------------------------
 
 @mixin light-ui {
-  .bx--global-light-ui & {
+  .#{$prefix}--global-light-ui & {
     @content;
   }
 }

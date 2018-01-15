@@ -1,5 +1,6 @@
 import warning from 'warning';
 import debounce from 'lodash.debounce';
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -78,10 +79,13 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch, han
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find detail page headers.
    */
-  static options = {
-    selectorInit: '[data-detail-page-header]',
-    scroll: 'bx--detail-page-header--scroll',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-detail-page-header]',
+      scroll: `${prefix}--detail-page-header--scroll`,
+    };
+  }
 }
 
 export default DetailPageHeader;

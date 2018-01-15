@@ -1,6 +1,7 @@
 $loading__gap: 40;
 $loading__size: 10.5rem;
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
@@ -8,7 +9,7 @@ $loading__size: 10.5rem;
 @import 'mixins';
 
 @include exports('loading') {
-  .bx--loading {
+  .#{$prefix}--loading {
     @include reset;
     @include animation__loading--spin;
     width: $loading__size;
@@ -16,7 +17,7 @@ $loading__size: 10.5rem;
   }
 
   // Animation (Spin by default)
-  .bx--loading__svg {
+  .#{$prefix}--loading__svg {
     fill: transparent;
     stroke: $brand-03;
     stroke-width: 7;
@@ -25,20 +26,20 @@ $loading__size: 10.5rem;
     stroke-dashoffset: $loading__gap;
   }
 
-  .bx--loading--stop {
+  .#{$prefix}--loading--stop {
     @include animation__loading--stop;
   }
 
-  .bx--loading--small {
+  .#{$prefix}--loading--small {
     width: 2rem;
     height: 2rem;
 
-    .bx--loading__svg {
+    .#{$prefix}--loading__svg {
       stroke: $ui-05;
     }
   }
 
-  .bx--loading-overlay {
+  .#{$prefix}--loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -48,11 +49,11 @@ $loading__size: 10.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 2000ms $bx--standard-easing;
+    transition: background-color 2000ms $carbon--standard-easing;
     z-index: z('overlay');
   }
 
-  .bx--loading-overlay--stop {
+  .#{$prefix}--loading-overlay--stop {
     display: none;
   }
 }

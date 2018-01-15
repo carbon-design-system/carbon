@@ -2,6 +2,7 @@
 // Slider
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
@@ -12,7 +13,7 @@
 @import '../text-input/text-input';
 
 @include exports('slider') {
-  .bx--slider-container {
+  .#{$prefix}--slider-container {
     max-width: rem(600px);
     min-width: rem(200px);
     display: flex;
@@ -24,17 +25,17 @@
     }
   }
 
-  .bx--slider {
+  .#{$prefix}--slider {
     position: relative;
     width: 100%;
     margin: 0 1rem;
   }
 
-  .bx--slider--disabled {
+  .#{$prefix}--slider--disabled {
     opacity: 0.5;
   }
 
-  .bx--slider--disabled .bx--slider__thumb {
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
     &:hover {
       transform: translate(-50%, -50%);
     }
@@ -48,7 +49,7 @@
     }
   }
 
-  .bx--slider__range-label {
+  .#{$prefix}--slider__range-label {
     @include typescale('zeta');
     color: $text-02;
 
@@ -57,7 +58,7 @@
     }
   }
 
-  .bx--slider__track {
+  .#{$prefix}--slider__track {
     position: absolute;
     width: 100%;
     height: rem(4px);
@@ -66,7 +67,7 @@
     transform: translate(0%, -50%);
   }
 
-  .bx--slider__filled-track {
+  .#{$prefix}--slider__filled-track {
     position: absolute;
     width: 100%;
     height: rem(4px);
@@ -76,7 +77,7 @@
     transform: translate(0%, -50%);
   }
 
-  .bx--slider__thumb {
+  .#{$prefix}--slider__thumb {
     position: absolute;
     height: rem(24px);
     width: rem(24px);
@@ -84,12 +85,12 @@
     border-radius: 50%;
     top: 0;
     transform: translate(-50%, -50%);
-    transition: transform 100ms $bx--standard-easing, background 100ms $bx--standard-easing;
+    transition: transform 100ms $carbon--standard-easing, background 100ms $carbon--standard-easing;
     cursor: pointer;
     outline: none;
 
     &--clicked {
-      transition: left $transition--base $bx--standard-easing;
+      transition: left $transition--base $carbon--standard-easing;
     }
 
     &:hover {
@@ -104,12 +105,12 @@
     }
   }
 
-  .bx--slider__input {
+  .#{$prefix}--slider__input {
     display: none;
   }
 
-  .bx--slider-text-input,
-  .bx-slider-text-input {
+  .#{$prefix}--slider-text-input,
+  .#{$prefix}-slider-text-input {
     width: rem(60px);
     min-width: 0;
     height: 2rem;

@@ -1,4 +1,5 @@
 import warning from 'warning';
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -72,10 +73,13 @@ class Card extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} selectorInit The CSS selector to find card containers.
    * @property {string} [selectorCard] The CSS selector to find cards.
    */
-  static options = {
-    selectorInit: '[data-card-list]',
-    selectorCard: '.bx--card',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-card-list]',
+      selectorCard: `.${prefix}--card`,
+    };
+  }
 
   /**
    * Enum for navigating backward/forward.

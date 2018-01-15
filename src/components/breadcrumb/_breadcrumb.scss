@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
@@ -6,7 +7,7 @@
 @import '../link/link';
 
 @include exports('breadcrumb') {
-  .bx--breadcrumb {
+  .#{$prefix}--breadcrumb {
     @include typescale('zeta');
     @include font-family;
     display: none;
@@ -17,23 +18,23 @@
     }
   }
 
-  .bx--breadcrumb-item {
+  .#{$prefix}--breadcrumb-item {
     margin-right: rem(20.66px);
     display: flex;
     align-items: center;
   }
 
-  .bx--breadcrumb-item::after {
+  .#{$prefix}--breadcrumb-item::after {
     content: '/';
     margin-left: 1rem;
     color: $text-03;
   }
 
-  .bx--breadcrumb--no-trailing-slash .bx--breadcrumb-item:last-child::after {
+  .#{$prefix}--breadcrumb--no-trailing-slash .#{$prefix}--breadcrumb-item:last-child::after {
     content: '';
   }
 
-  .bx--breadcrumb-item:last-child {
+  .#{$prefix}--breadcrumb-item:last-child {
     margin-right: 0;
 
     &::after {
@@ -41,7 +42,7 @@
     }
   }
 
-  .bx--breadcrumb .bx--link {
+  .#{$prefix}--breadcrumb .#{$prefix}--link {
     white-space: nowrap;
     font-weight: 400;
     text-decoration: none;

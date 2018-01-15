@@ -7,22 +7,22 @@
 @import '../../globals/scss/import-once';
 
 @include exports('structured-list') {
-  .bx--structured-list--selection .bx--structured-list-td,
-  .bx--structured-list--selection .bx--structured-list-th {
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
   }
 
   // Deprecated
-  [data-structured-list] .bx--structured-list-td,
-  [data-structured-list] .bx--structured-list-th {
+  [data-structured-list] .#{$prefix}--structured-list-td,
+  [data-structured-list] .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
   }
 
-  .bx--structured-list-input {
+  .#{$prefix}--structured-list-input {
     display: none;
   }
 
-  .bx--structured-list {
+  .#{$prefix}--structured-list {
     @include reset;
     @include font-family;
     display: table;
@@ -35,52 +35,52 @@
     margin-bottom: 5rem;
     background-color: transparent;
 
-    &.bx--structured-list--border {
+    &.#{$prefix}--structured-list--border {
       border: 1px solid $ui-04;
       background-color: $ui-01;
     }
 
-    &.bx--structured-list--condensed .bx--structured-list-td {
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td {
       @include padding-td--condensed;
     }
   }
 
-  .bx--structured-list-row {
+  .#{$prefix}--structured-list-row {
     display: table-row;
     border-bottom: 1px solid $ui-04;
-    transition: $transition--base $bx--standard-easing;
+    transition: $transition--base $carbon--standard-easing;
 
-    .bx--structured-list--selection &:hover:not(.bx--structured-list-row--header-row) {
+    .#{$prefix}--structured-list--selection &:hover:not(.#{$prefix}--structured-list-row--header-row) {
       background-color: rgba($brand-02, 0.1);
       cursor: pointer;
     }
 
     // Deprecated
-    [data-structured-list] &:hover:not(.bx--structured-list-row--header-row) {
+    [data-structured-list] &:hover:not(.#{$prefix}--structured-list-row--header-row) {
       background-color: rgba($brand-02, 0.1);
       cursor: pointer;
     }
 
-    &.bx--structured-list-row--selected {
+    &.#{$prefix}--structured-list-row--selected {
       background-color: rgba($brand-02, 0.1);
     }
 
-    &.bx--structured-list-row--header-row {
+    &.#{$prefix}--structured-list-row--header-row {
       border-bottom: 2px solid $brand-01;
       cursor: inherit;
     }
 
-    &:focus:not(.bx--structured-list-row--header-row) {
+    &:focus:not(.#{$prefix}--structured-list-row--header-row) {
       @include focus-outline('border');
     }
   }
 
-  .bx--structured-list-thead {
+  .#{$prefix}--structured-list-thead {
     display: table-header-group;
     vertical-align: middle;
   }
 
-  .bx--structured-list-th {
+  .#{$prefix}--structured-list-th {
     @include reset;
     @include padding-th;
     @include typescale('zeta');
@@ -92,12 +92,12 @@
     vertical-align: middle;
   }
 
-  .bx--structured-list-tbody {
+  .#{$prefix}--structured-list-tbody {
     display: table-row-group;
     vertical-align: middle;
   }
 
-  .bx--structured-list-td {
+  .#{$prefix}--structured-list-td {
     @include reset;
     @include typescale('zeta');
     @include line-height('body');
@@ -106,28 +106,28 @@
     display: table-cell;
   }
 
-  .bx--structured-list-content--nowrap {
+  .#{$prefix}--structured-list-content--nowrap {
     white-space: nowrap;
   }
 
-  .bx--structured-list-svg {
+  .#{$prefix}--structured-list-svg {
     display: inline-block;
     fill: transparent;
     vertical-align: middle;
-    transition: $transition--base $bx--standard-easing;
+    transition: $transition--base $carbon--standard-easing;
 
-    .bx--structured-list-row:hover & {
+    .#{$prefix}--structured-list-row:hover & {
       fill: rgba($brand-02, 0.1);
     }
 
-    .bx--structured-list-input:checked + .bx--structured-list-row &,
-    .bx--structured-list-input:checked + .bx--structured-list-td & {
+    .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-row &,
+    .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-td & {
       fill: $brand-02;
     }
   }
 
   // Deprecated class
-  .bx--structured-list-content {
+  .#{$prefix}--structured-list-content {
     @include typescale('zeta');
   }
 }

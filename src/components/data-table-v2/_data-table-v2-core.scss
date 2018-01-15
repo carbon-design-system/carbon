@@ -1,11 +1,11 @@
-.bx--data-table-v2-container {
+.#{$prefix}--data-table-v2-container {
   width: 100%;
   min-width: rem(500px);
   overflow-x: auto;
   padding-top: 2px; // allow space for focus styles
 }
 
-.bx--data-table-v2 {
+.#{$prefix}--data-table-v2 {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
@@ -40,7 +40,7 @@
         }
       }
 
-      .bx--overflow-menu {
+      .#{$prefix}--overflow-menu {
         opacity: 1;
       }
     }
@@ -69,42 +69,42 @@
   }
 
   // Overrrides
-  .bx--checkbox-label {
+  .#{$prefix}--checkbox-label {
     margin-top: rem(-8px);
     padding-left: rem(22px);
   }
 
-  .bx--overflow-menu {
+  .#{$prefix}--overflow-menu {
     opacity: 0;
 
     &:focus {
       outline: 0;
       opacity: 1;
 
-      .bx--overflow-menu__icon {
+      .#{$prefix}--overflow-menu__icon {
         box-shadow: inset 0px 0px 0px 1px $brand-01;
       }
     }
   }
 
-  .bx--overflow-menu__icon {
+  .#{$prefix}--overflow-menu__icon {
     transform: rotate(90deg);
   }
 }
 
 // Options
 
-.bx--data-table-v2-header {
+.#{$prefix}--data-table-v2-header {
   margin-bottom: .5rem;
 }
 
-.bx--data-table-v2--zebra {
+.#{$prefix}--data-table-v2--zebra {
   tbody tr:nth-child(even) {
     background-color: $ui-02;
   }
 }
 
-.bx--data-table-v2--no-border {
+.#{$prefix}--data-table-v2--no-border {
   tr {
     &:last-of-type {
       td {
@@ -125,29 +125,29 @@
   }
 }
 
-.bx--data-table-v2--compact {
+.#{$prefix}--data-table-v2--compact {
   tbody tr {
     height: rem(24px);
   }
 }
 
-.bx--data-table-v2--short {
+.#{$prefix}--data-table-v2--short {
   tbody tr {
     height: rem(32px);
   }
 }
 
-.bx--data-table-v2--tall {
+.#{$prefix}--data-table-v2--tall {
   tbody tr {
     height: rem(64px);
   }
 }
 
-.bx--data-table-v2--static {
+.#{$prefix}--data-table-v2--static {
   width: auto;
 }
 
-.bx--data-table-v2--zebra tbody tr.bx--data-table-v2--selected,
-tbody tr.bx--data-table-v2--selected {
+.#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
+tbody tr.#{$prefix}--data-table-v2--selected {
   background-color: rgba($brand-02, .10);
 }

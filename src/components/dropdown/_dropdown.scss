@@ -13,7 +13,7 @@
 @import '../../globals/scss/layout';
 
 @include exports('dropdown') {
-  .bx--dropdown {
+  .#{$prefix}--dropdown {
     @include reset;
     @include font-family;
     @include typescale('zeta');
@@ -30,13 +30,13 @@
       @include focus-outline('border');
     }
 
-    &.bx--dropdown--open:focus {
+    &.#{$prefix}--dropdown--open:focus {
       outline: 1px solid transparent;
       box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
     }
   }
 
-  .bx--dropdown__arrow {
+  .#{$prefix}--dropdown__arrow {
     fill: $brand-01;
     position: absolute;
     right: 1rem;
@@ -44,15 +44,15 @@
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
-    transition: transform $transition--expansion $bx--standard-easing;
+    transition: transform $transition--expansion $carbon--standard-easing;
     transform-origin: 50% 45%;
   }
 
-  .bx--dropdown[data-value=''] .bx--dropdown-text {
+  .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
     color: $text-03;
   }
 
-  .bx--dropdown-text {
+  .#{$prefix}--dropdown-text {
     height: rem(40px);
     padding-top: rem(13px);
     padding-bottom: rem(13px);
@@ -65,7 +65,7 @@
     border: $input-border;
   }
 
-  .bx--dropdown-list {
+  .#{$prefix}--dropdown-list {
     @include reset;
     @include layer('overlay');
     width: 100%;
@@ -74,11 +74,11 @@
     z-index: z('dropdown');
     max-height: 0;
     overflow: hidden;
-    transition: $transition--expansion $bx--ease-out;
+    transition: $transition--expansion $carbon--ease-out;
     opacity: 0;
   }
 
-  .bx--dropdown-link {
+  .#{$prefix}--dropdown-link {
     display: block;
     color: currentColor;
     text-decoration: none;
@@ -98,34 +98,34 @@
     }
   }
 
-  .bx--dropdown--selected {
+  .#{$prefix}--dropdown--selected {
     display: none;
   }
 
-  .bx--dropdown--open {
-    .bx--dropdown__arrow {
+  .#{$prefix}--dropdown--open {
+    .#{$prefix}--dropdown__arrow {
       transform: rotate(-180deg);
     }
 
-    .bx--dropdown-list {
+    .#{$prefix}--dropdown-list {
       @include typescale('zeta');
       display: flex;
       flex-direction: column;
       background-color: $ui-01;
       max-height: 15rem;
       overflow: auto;
-      transition: $transition--expansion $bx--ease-in;
+      transition: $transition--expansion $carbon--ease-in;
       opacity: 1;
     }
 
     &:focus {
-      .bx--dropdown-list {
+      .#{$prefix}--dropdown-list {
         box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
       }
     }
   }
 
-  .bx--dropdown--disabled {
+  .#{$prefix}--dropdown--disabled {
     opacity: 0.5;
     cursor: not-allowed;
 

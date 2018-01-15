@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
@@ -6,18 +7,18 @@
 
 @include exports('button') {
   // <button> elements cannot be used as flex containers
-  button.bx--btn {
+  button.#{$prefix}--btn {
     display: inline-block;
   }
 
   // Reset intrisic padding in Firefox (see #731)
-  button.bx--btn::-moz-focus-inner {
+  button.#{$prefix}--btn::-moz-focus-inner {
     padding: 0;
     border: 0;
   }
 
   // Vertically center icon inside <button>
-  button.bx--btn .bx--btn__icon {
+  button.#{$prefix}--btn .#{$prefix}--btn__icon {
     position: relative;
     vertical-align: middle;
     top: -1px;
@@ -28,11 +29,11 @@
     }
   }
 
-  .bx--btn {
+  .#{$prefix}--btn {
     @include button-base;
   }
 
-  .bx--btn--primary {
+  .#{$prefix}--btn--primary {
     @include button-theme(
       $brand-01,
       transparent,
@@ -42,7 +43,7 @@
     );
   }
 
-  .bx--btn--secondary {
+  .#{$prefix}--btn--secondary {
     @include button-theme(
       transparent,
       $brand-01,
@@ -60,8 +61,8 @@
       color: $brand-01;
     }
 
-    &:hover > .bx--btn__icon,
-    &:focus > .bx--btn__icon {
+    &:hover > .#{$prefix}--btn__icon,
+    &:focus > .#{$prefix}--btn__icon {
       fill: $inverse-01;
     }
 
@@ -71,7 +72,7 @@
     }
   }
 
-  .bx--btn--ghost {
+  .#{$prefix}--btn--ghost {
     @include button-theme(
       transparent,
       transparent,
@@ -84,12 +85,12 @@
     &:focus {
       color: $inverse-01;
 
-      .bx--btn__icon {
+      .#{$prefix}--btn__icon {
         fill: $inverse-01;
       }
     }
 
-    .bx--btn__icon {
+    .#{$prefix}--btn__icon {
       margin-left: 0.275rem;
     }
 
@@ -97,13 +98,13 @@
     &:focus:disabled {
       color: $brand-01;
 
-      .bx--btn__icon {
+      .#{$prefix}--btn__icon {
         fill: $brand-01;
       }
     }
   }
 
-  .bx--btn--danger {
+  .#{$prefix}--btn--danger {
     @include button-theme(
       transparent,
       $support-01,
@@ -127,19 +128,19 @@
       border: $button-border-width solid currentColor;
     }
 
-    &:hover > .bx--btn__icon,
-    &:focus > .bx--btn__icon {
+    &:hover > .#{$prefix}--btn__icon,
+    &:focus > .#{$prefix}--btn__icon {
       fill: $inverse-01;
     }
   }
 
-  .bx--btn--sm {
+  .#{$prefix}--btn--sm {
     height: 2rem;
     padding: $button-padding-sm;
     letter-spacing: 0;
   }
 
-  .bx--btn--secondary + .bx--btn--primary {
+  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary {
     margin-left: 1rem;
   }
 }

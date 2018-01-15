@@ -2,6 +2,7 @@
 // Overflow Menu
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
@@ -11,7 +12,7 @@
 @import '../../globals/scss/import-once';
 
 @include exports('overflow-menu') {
-  .bx--overflow-menu {
+  .#{$prefix}--overflow-menu {
     @include reset;
     position: relative;
     width: rem(20px);
@@ -24,7 +25,7 @@
     }
   }
 
-  .bx--overflow-menu__icon {
+  .#{$prefix}--overflow-menu__icon {
     width: 100%;
     height: 100%;
     padding: 0.5rem;
@@ -36,7 +37,7 @@
     }
   }
 
-  .bx--overflow-menu-options {
+  .#{$prefix}--overflow-menu-options {
     @include reset;
     @include layer('overlay');
     display: none;
@@ -53,11 +54,11 @@
     left: -20px;
   }
 
-  .bx--overflow-menu-options--open {
+  .#{$prefix}--overflow-menu-options--open {
     display: flex;
   }
 
-  .bx--overflow-menu-options:before {
+  .#{$prefix}--overflow-menu-options:before {
     content: '';
     position: absolute;
     display: block;
@@ -72,7 +73,7 @@
     left: 24px;
   }
 
-  .bx--overflow-menu-options__option {
+  .#{$prefix}--overflow-menu-options__option {
     @include reset;
     display: flex;
     background-color: transparent;
@@ -81,11 +82,11 @@
     padding: 0;
   }
 
-  .bx--overflow-menu--divider {
+  .#{$prefix}--overflow-menu--divider {
     border-top: 1px solid $ui-04;
   }
 
-  .bx--overflow-menu-options__btn {
+  .#{$prefix}--overflow-menu-options__btn {
     @include reset;
     @include typescale('zeta');
     @include font-family;
@@ -105,30 +106,30 @@
       color: $inverse-01;
     }
 
-    .bx--overflow-menu-options__option--danger & {
+    .#{$prefix}--overflow-menu-options__option--danger & {
       &:focus {
         background-color: $support-01;
       }
     }
   }
 
-  .bx--overflow-menu-options__option:hover {
+  .#{$prefix}--overflow-menu-options__option:hover {
     background-color: $brand-01;
   }
 
-  .bx--overflow-menu-options__option:hover .bx--overflow-menu-options__btn {
+  .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
     color: $inverse-01;
   }
 
-  .bx--overflow-menu-options__option--danger {
+  .#{$prefix}--overflow-menu-options__option--danger {
     border-top: 1px solid $ui-04;
   }
 
-  .bx--overflow-menu-options__option--danger:hover {
+  .#{$prefix}--overflow-menu-options__option--danger:hover {
     background-color: $support-01;
   }
 
-  .bx--overflow-menu--flip {
+  .#{$prefix}--overflow-menu--flip {
     left: -140px;
 
     &:before {
