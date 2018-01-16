@@ -2,6 +2,7 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--typography';
 @import '../link/link';
@@ -19,14 +20,14 @@
   }
 
   .#{$prefix}--breadcrumb-item {
-    margin-right: rem(20.66px);
+    margin-right: $spacing-md;
     display: flex;
     align-items: center;
   }
 
   .#{$prefix}--breadcrumb-item::after {
     content: '/';
-    margin-left: 1rem;
+    margin-left: $spacing-md;
     color: $text-03;
   }
 

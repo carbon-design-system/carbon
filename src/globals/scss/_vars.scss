@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'spacing';
 
 $prefix: 'bx' !default;
 
@@ -55,16 +56,16 @@ $button-font-weight: 600 !default;
 $button-font-size: 0.875rem !default;
 $button-border-radius: 0 !default;
 $button-height: 40px !default;
-$button-padding: 0 1rem !default;
-$button-padding-sm: 0 0.5rem !default;
+$button-padding: 0 $spacing-md !default;
+$button-padding-sm: 0 $spacing-xs !default;
 $button-border-width: 2px !default;
 
 // Accordion (Reverse)
 $accordion-flex-direction: row !default;
 $accordion-justify-content: flex-start !default;
-$accordion-arrow-margin: 0 0 0 0.25rem !default;
-$accordion-title-margin: 0 0 0 1rem !default;
-$accordion-content-padding: 0 1rem 0 1.75rem !default;
+$accordion-arrow-margin: 0 0 0 $spacing-2xs !default;
+$accordion-title-margin: 0 0 0 $spacing-md !default;
+$accordion-content-padding: 0 $spacing-md 0  $spacing-2xl !default;
 
 // Card
 $card-text-align: center !default;

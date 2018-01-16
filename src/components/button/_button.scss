@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import 'mixins';
 @import '../../globals/scss/css--reset';
@@ -91,7 +92,7 @@
     }
 
     .#{$prefix}--btn__icon {
-      margin-left: 0.275rem;
+      margin-left: $spacing-xs;
     }
 
     &:hover:disabled,
@@ -141,6 +142,6 @@
   }
 
   .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary {
-    margin-left: 1rem;
+    margin-left: $spacing-md;
   }
 }

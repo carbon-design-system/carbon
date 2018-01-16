@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
@@ -42,7 +43,7 @@
     justify-content: $accordion-justify-content;
     flex-direction: $accordion-flex-direction;
     cursor: pointer;
-    padding: 0.5rem 0;
+    padding: $spacing-xs 0;
 
     // new version of markup uses focus on the heading,
     // not the list element itself
@@ -61,7 +62,7 @@
     transition: all $transition--base $carbon--standard-easing;
     height: 1.25rem;
     width: 1.25rem;
-    padding: 0.25rem 0.125rem 0.25rem 0.25rem;
+    padding: $spacing-2xs $spacing-3xs $spacing-2xs $spacing-2xs;
     margin: $accordion-arrow-margin;
     fill: $ui-05;
   }
@@ -87,8 +88,8 @@
   overflow: visible;
 
   .#{$prefix}--accordion__content {
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
+    padding-top: $spacing-md;
+    padding-bottom: $spacing-lg;
     height: auto;
     visibility: visible;
     opacity: 1;
