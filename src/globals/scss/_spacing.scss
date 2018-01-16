@@ -15,21 +15,15 @@
 //   3xl  ||  48px
 //   ==========================================
 
-//Should this by default be 16px or $base-font-size  
-$spacing-baseline: $base-font-size !default; 
+$spacing-baseline: 1rem !default;
 
-$spacing-3xs: rem($spacing-baseline * .125) !default; 
-$spacing-2xs: rem($spacing-baseline * .25) !default; 
-$spacing-xs: rem($spacing-baseline * .5) !default; 
-$spacing-sm	: rem($spacing-baseline * .75) !default; 
-$spacing-md: rem($spacing-baseline) !default; 
-$spacing-lg: rem($spacing-baseline * 1.5) !default; 
-$spacing-xl: rem($spacing-baseline * 2) !default; 
-$spacing-2xl: rem($spacing-baseline * 2.5) !default; 
-$spacing-3xl: rem($spacing-baseline * 3) !default; 
-
-//Do we even need these variables?
-$spacing-center: center; 
-$spacing-auto: auto;
-
+$spacing-3xs: $spacing-baseline * .125 !default; 
+$spacing-2xs: $spacing-baseline * .25 !default; 
+$spacing-xs: $spacing-baseline * .5 !default; 
+$spacing-sm: $spacing-baseline * .75 !default; 
+$spacing-md: $spacing-baseline !default; 
+$spacing-lg: $spacing-baseline * 1.5 !default; 
+$spacing-xl: $spacing-baseline * 2 !default; 
+$spacing-2xl: $spacing-baseline * 2.5 !default; 
+$spacing-3xl: $spacing-baseline * 3 !default; 
 
