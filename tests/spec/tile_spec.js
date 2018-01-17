@@ -1,8 +1,8 @@
 import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Tile from '../../src/components/tile/tile';
-import clickableTile from '../../src/components/tile/clickable-tile.html';
-import expandableTile from '../../src/components/tile/expandable-tile.html';
-import selectableTile from '../../src/components/tile/selectable-tile.html';
+import clickableTile from '../../src/components/tile/tile--clickable.html';
+import expandableTile from '../../src/components/tile/tile--expandable.html';
+import selectableTile from '../../src/components/tile/tile--selectable.html';
 
 describe('Test tile', function() {
   describe('Constructor', function() {

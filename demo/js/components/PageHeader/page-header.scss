@@ -1,0 +1,52 @@
+.page-header {
+  @include grid-padding;
+  height: rem(196px);
+  background-color: $ui-02;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-bottom: 1px solid $brand-01;
+  padding-bottom: 1rem;
+
+  @include breakpoint('768px') {
+    padding-bottom: 0;
+  }
+
+  @media all and (max-width: 550px) {
+    height: rem(250px);
+  }
+}
+
+.page-header__label {
+  @include typescale('zeta');
+  color: $text-02;
+  font-weight: 400;
+  margin: 4rem 0 1rem;
+  white-space: nowrap;
+  text-transform: capitalize;
+
+  @include breakpoint('500px') {
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+  }
+}
+
+.page-header__title {
+  @include typescale('mega');
+  color: $text-01;
+  font-weight: 300;
+  margin: -1.15rem 0 0 -3px;
+  line-height: 1.25;
+  letter-spacing: 0;
+  padding: 0;
+  transition: $transition--base $bx--standard-easing;
+
+  @include breakpoint('500px') {
+    font-size: rem(52px);
+  }
+
+  @include breakpoint('840px') {
+    font-size: rem(66px);
+  }
+}

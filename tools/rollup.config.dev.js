@@ -17,6 +17,10 @@ module.exports = {
     commonjs({
       include: 'node_modules/**',
       sourceMap: true,
+      namedExports: {
+        'node_modules/react/index.js': ['Children', 'Component', 'PureComponent', 'Fragment', 'PropTypes', 'createElement'],
+        'node_modules/react-dom/index.js': ['render'],
+      },
     }),
     babel({
       exclude: 'node_modules/**',

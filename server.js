@@ -5,15 +5,29 @@ const { promisify } = require('bluebird'); // eslint-disable-line
 const fs = require('fs');
 const path = require('path');
 const express = require('express'); // eslint-disable-line
+const Fractal = require('@frctl/fractal'); // eslint-disable-line
+
+const webpack = require('webpack'); // eslint-disable-line
+const webpackDevMiddleware = require('webpack-dev-middleware'); // eslint-disable-line
+const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line
 
 const readFile = promisify(fs.readFile);
-const readdir = promisify(fs.readdir);
-const stat = promisify(fs.stat);
 
 const app = express();
 const adaro = require('adaro'); // eslint-disable-line
 
 const port = process.env.PORT || 8080;
+
+const config = require('./tools/webpack.dev.config');
+
+const compiler = webpack(config);
+app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+app.use(webpackHotMiddleware(compiler));
+
+const fractal = Fractal.create();
+fractal.components.set('path', path.join(__dirname, 'src/components'));
+fractal.components.set('ext', '.html');
+fractal.docs.set('path', path.join(__dirname, 'docs'));
 
 app.engine('dust', adaro.dust());
 app.set('view engine', 'dust');
@@ -23,6 +37,10 @@ app.use(express.static('src'));
 app.use(express.static('scripts'));
 app.use('/docs/js', express.static('docs/js'));
 
+/**
+ * @param {string} glob The glob.
+ * @returns {string} The file contents of files matching the given glob, concatenated.
+ */
 const getContent = glob =>
   globby(glob).then(filePaths => {
     if (filePaths.length === 0) {
@@ -33,152 +51,70 @@ const getContent = glob =>
     );
   });
 
-const getEachContent = glob =>
-  globby(glob).then(filePaths =>
-    // eslint-disable-line arrow-body-style
-    Promise.all(filePaths.map(filePath => readFile(filePath, { encoding: 'utf8' }))).then(contents =>
-      contents.map((content, i) => ({
-        name: path.basename(filePaths[i], '.html'),
-        content,
-      }))
-    )
-  );
-
-const componentDirs = readdir('src/components').then(items =>
-  // eslint-disable-line arrow-body-style
-  Promise.all(items.map(item => stat(path.resolve('src/components', item)))).then(stats =>
-    items.filter((item, i) => stats[i].isDirectory())
-  )
-);
-
-const topRouteHandler = (req, res) => {
-  const name = req.params.component;
-
-  if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
-    res.status(404).end();
-  } else {
-    componentDirs
-      .then(dirs =>
-        // eslint-disable-line arrow-body-style
-        Promise.all(dirs.map(dir => getEachContent(path.resolve('src/components', dir, '**/*.html'))))
-          .then(subItemsList =>
-            subItemsList.map(
-              (subItems, i) =>
-                // eslint-disable-line arrow-body-style
-                subItems.length > 0 &&
-                Object.assign(
-                  {
-                    name: dirs[i],
-                    selected: name === dirs[i] || subItems.find(subItem => name === subItem.name),
-                  },
-                  subItems.length <= 1
-                    ? {
-                        content: subItems[0].content,
-                      }
-                    : {},
-                  subItems.length <= 1
-                    ? {}
-                    : {
-                        items: subItems.map(subItem =>
-                          Object.assign(subItem, {
-                            selected: name === subItem.name,
-                          })
-                        ),
-                      }
-                )
-            )
-          )
-          .then(links => links.filter(Boolean))
-          .then(links => {
-            if (!name) {
-              const firstLink = links[0];
-              (firstLink.items ? firstLink.items[0] : firstLink).selected = true;
-            }
-            return links;
-          })
-      )
-      .then(links => {
-        res.render('demo-all', {
-          links,
-        });
-      })
-      .catch(error => {
-        console.error(error.stack); // eslint-disable-line no-console
-        res.status(500).end();
-      });
+/**
+ * @param {ComponentCollection|Component} item The component data.
+ * @returns {Promise<ComponentCollection|Component>}
+ *   The component data, with README.md content assigned to `.notes` property for component with variants (`ComponentCollection`).
+ *   Fractal automatically populate `.notes` for component without variants (`Component`).
+ */
+const ensureComponentItemNotes = item => {
+  if (!item.isCollection || !item.config.readme) {
+    return item;
   }
+  return item.config.readme
+    .getContent()
+    .then(notes => Object.assign(typeof item.toJSON !== 'function' ? item : item.toJSON(), { notes }));
 };
 
-app.get('/', topRouteHandler);
-app.get('/demo/:component', topRouteHandler);
+['/', '/demo/:component'].forEach(route => {
+  app.get(route, (req, res) => {
+    const name = req.params.component;
 
-app.get('/components/:component', (req, res) => {
-  const glob = `src/components/${req.params.component}/**/*.html`;
-
-  if (path.relative('src/components', glob).substr(0, 2) === '..') {
-    res.status(404).end();
-  } else {
-    getContent(glob)
-      .then(html => {
-        if (typeof html === 'undefined') {
-          res.status(404).end();
-        } else {
-          res.render('demo-all', {
-            content: html,
+    if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+      res.status(404).end();
+    } else {
+      fractal
+        .load()
+        .then(([componentSource, docSource]) =>
+          Promise.all([Promise.all(componentSource.items().map(ensureComponentItemNotes)), docSource.items()])
+        )
+        .then(([componentItems, docItems]) => {
+          res.render('demo-nav', {
+            componentItems,
+            docItems,
           });
-        }
-      })
-      .catch(error => {
-        console.error(error.stack); // eslint-disable-line no-console
-        res.status(500).end();
-      });
-  }
+        })
+        .catch(err => {
+          console.error(err.stack); // eslint-disable-line no-console
+          res.status(500).end();
+        });
+    }
+  });
 });
 
-app.get('/grid', (req, res) => {
-  const glob = 'src/globals/grid/grid.html';
+['/component/:component', '/component/:component/:variant'].forEach(route => {
+  app.get(route, (req, res) => {
+    const glob = `src/components/${req.params.component}/**/${req.params.variant || '*'}.html`;
 
-  if (path.relative('src/globals', glob).substr(0, 2) === '..') {
-    res.status(404).end();
-  } else {
-    Promise.all([getContent(glob)])
-      .then(results => {
-        if (typeof results[0] === 'undefined') {
-          res.status(404).end();
-        } else {
-          res.render('demo-grid', {
-            html: results[0],
-          });
-        }
-      })
-      .catch(error => {
-        console.error(error.stack); // eslint-disable-line no-console
-        res.status(500).end();
-      });
-  }
-});
-
-app.get('/tile-demo', (req, res) => {
-  const glob = 'src/components/tile/tile-demo.html';
-
-  if (path.relative('src/components', glob).substr(0, 2) === '..') {
-    res.status(404).end();
-  } else {
-    Promise.all([getContent(glob)])
-      .then(results => {
-        if (typeof results[0] === 'undefined') {
-          res.status(404).end();
-        } else {
-          res.render('demo-grid', {
-            html: results[0],
-          });
-        }
-      })
-      .catch(error => {
-        console.error(error.stack); // eslint-disable-line no-console
-        res.status(500).end();
-      });
-  }
+    if (path.relative('src/components', glob).substr(0, 2) === '..') {
+      res.status(404).end();
+    } else {
+      getContent(glob)
+        .then(html => {
+          if (typeof html === 'undefined') {
+            res.status(404).end();
+          } else {
+            res.render('demo-live', {
+              content: html,
+            });
+          }
+        })
+        .catch(error => {
+          console.error(error.stack); // eslint-disable-line no-console
+          res.status(500).end();
+        });
+    }
+  });
 });
 
 app.listen(port, () => {

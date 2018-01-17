@@ -1,18 +1,48 @@
 @import '../../src/globals/scss/styles';
+@import './_vars.scss';
+@import './_mixins.scss';
+@import './_layout.scss';
+@import './_markdown-page.scss';
+@import './_page.scss';
+@import './_prism.scss';
+@import '../js/components/CodeExample/code-example.scss';
+@import '../js/components/CodePage/code-page.scss';
+@import '../js/components/ComponentExample/component-example.scss';
+@import '../js/components/ComponentExample/component-overrides.scss';
+@import '../js/components/PageHeader/page-header.scss';
+@import '../js/components/SideNavToggle/side-nav-toggle.scss';
+
+[data-renderroot] {
+  .component-example__live {
+    height: 25rem;
+
+    iframe {
+      height: 100%;
+    }
+  }
+
+  .bx--interior-left-nav--collapseable .bx--interior-left-nav-collapse {
+    display: none;
+  }
+
+  .bx--interior-left-nav {
+    top: 0;
+    overflow: auto;
+    border-right: none;
+    z-index: 7000;
+
+    &.bx--interior-left-nav--collapsed {
+      width: 0;
+    }
+  }
+}
 
 .demo--container {
   box-sizing: border-box;
   padding-top: 1em;
   transition: .2s;
   background-color: $ui-02;
-
-  .demo--collapsed & {
-    padding-left: 3rem;
-  }
-
-  .demo--standalone & {
-    padding-left: 0;
-  }
+  padding-left: 0;
 }
 
 .bx--tile-container {
@@ -91,56 +121,24 @@
   }
 }
 
-.demo--standalone {
-  .test-header {
-    position: fixed;
-    background-color: $ui-05;
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 86px;
-    z-index: 8000;
-  }
-
-  .test-nav {
-    position: fixed;
-    background-color: $ui-04;
-    width: 200px;
-    height: calc(100vh - 86px);
-    bottom: 0;
-    left: 0;
-    z-index: 8000;
-  }
+.test-header {
+  position: fixed;
+  background-color: $ui-05;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 86px;
+  z-index: 8000;
 }
 
-.demo--navigated {
-  .test-header {
-    display: none;
-  }
-
-  .test-nav {
-    display: none;
-  }
-
-  .demo--container {
-    padding-left: 12.5rem;
-  }
-
-  .bx--detail-page-header--with-tabs {
-    margin-left: 12.5em;
-  }
-
-  &.demo--collapsed .bx--detail-page-header--with-tabs {
-    margin-left: 3rem;
-  }
-}
-
-// carbon-components no longer owns alternate theme, hiding the theme switcher for now
-.theme-switcher {
-  .demo--navigated &,
-  .demo--standalone & {
-    display: none;
-  }
+.test-nav {
+  position: fixed;
+  background-color: $ui-04;
+  width: 200px;
+  height: calc(100vh - 86px);
+  bottom: 0;
+  left: 0;
+  z-index: 8000;
 }
 
 .bx--row {
