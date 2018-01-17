@@ -157,14 +157,6 @@ describe('Tabs', () => {
           expect(wrapper.state().dropdownHidden).toEqual(true);
         });
       });
-
-      describe('state: selectedLabel', () => {
-        it('sets a new value for selectedLabel state when Tab is clicked', () => {
-          const lastTab = wrapper.find('.lastTab').last();
-          lastTab.simulate('click');
-          expect(wrapper.state().selectedLabel).toEqual('lastTab');
-        });
-      });
     });
 
     describe('keydown', () => {
@@ -237,17 +229,6 @@ describe('Tabs', () => {
         expect(wrapper.state().selected).toEqual(0);
       });
     });
-
-    describe('selectedLabel', () => {
-      it('should be a string', () => {
-        const string = typeof wrapper.state().selectedLabel;
-        expect(string).toBe('string');
-      });
-
-      it('selectedLabel and firstTab label should be the same', () => {
-        expect(wrapper.state().selectedLabel).toEqual('firstTab');
-      });
-    });
   });
 
   describe('Allow initial state to draw from props', () => {
@@ -288,5 +269,24 @@ describe('props update', () => {
     expect(wrapper.state().selected).toEqual(1);
     wrapper.setProps({ selected: 0 });
     expect(wrapper.state().selected).toEqual(0);
+  });
+});
+
+describe('selection change', () => {
+  const wrapper = mount(
+    <Tabs selected={0} onSelectionChange={jest.fn()}>
+      <Tab label="firstTab">content</Tab>
+      <Tab label="lastTab" className="secondTab">
+        content
+      </Tab>
+    </Tabs>
+  );
+
+  it('updates selected state when selected prop changes', () => {
+    wrapper
+      .find('.secondTab')
+      .last()
+      .simulate('click');
+    expect(wrapper.props().onSelectionChange).toHaveBeenCalledWith(1);
   });
 });

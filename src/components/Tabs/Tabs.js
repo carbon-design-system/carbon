@@ -8,12 +8,13 @@ export default class Tabs extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    firstSelectedLabel: PropTypes.string,
     hidden: PropTypes.bool,
     href: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
+    /** Called whenever selection changes, with index of the tab that was selected */
+    onSelectionChange: PropTypes.func,
     triggerHref: PropTypes.string.isRequired,
     selected: PropTypes.number,
     iconDescription: PropTypes.string.isRequired,
@@ -30,25 +31,31 @@ export default class Tabs extends React.Component {
   state = {
     dropdownHidden: true,
     selected: this.props.selected,
-    selectedLabel: React.Children.toArray(this.props.children)[0].props.label,
   };
 
   componentWillReceiveProps({ selected }) {
-    if (selected !== this.props.selected) {
-      this.setState({ selected });
-    }
+    this.selectTabAt(selected);
   }
 
   getTabs() {
     return React.Children.map(this.props.children, tab => tab);
   }
 
+  getTabAt = index => {
+    return (
+      this[`tab${index}`] || React.Children.toArray(this.props.children)[index]
+    );
+  };
+
+  setTabAt = (index, tabRef) => {
+    this[`tab${index}`] = tabRef;
+  };
+
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
   handleTabClick = (index, label, evt) => {
     evt.preventDefault();
+    this.selectTabAt(index);
     this.setState({
-      selected: index,
-      selectedLabel: label,
       dropdownHidden: !this.state.dropdownHidden,
     });
   };
@@ -57,9 +64,8 @@ export default class Tabs extends React.Component {
     const key = evt.key || evt.which;
 
     if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      this.selectTabAt(index);
       this.setState({
-        selected: index,
-        selectedLabel: label,
         dropdownHidden: !this.state.dropdownHidden,
       });
     }
@@ -67,19 +73,21 @@ export default class Tabs extends React.Component {
 
   handleTabAnchorFocus = index => {
     const tabCount = React.Children.count(this.props.children) - 1;
+    let tabIndex = index;
 
     if (index < 0) {
-      const tab = this.refs[`tab${tabCount}`];
-      tab.refs.tabAnchor.focus();
-      this.setState({ selected: tabCount });
+      tabIndex = tabCount;
     } else if (index > tabCount) {
-      const tab = this.refs.tab0;
-      tab.refs.tabAnchor.focus();
-      this.setState({ selected: 0 });
-    } else {
-      const tab = this.refs[`tab${index}`];
-      tab.refs.tabAnchor.focus();
-      this.setState({ selected: index });
+      tabIndex = 0;
+    }
+
+    const tab = this.getTabAt(tabIndex);
+
+    if (tab) {
+      this.selectTabAt(tabIndex);
+      if (tab.tabAnchor) {
+        tab.tabAnchor.focus();
+      }
     }
   };
 
@@ -87,6 +95,17 @@ export default class Tabs extends React.Component {
     this.setState({
       dropdownHidden: !this.state.dropdownHidden,
     });
+  };
+
+  selectTabAt = index => {
+    if (this.state.selected !== index) {
+      this.setState({
+        selected: index,
+      });
+      if (this.props.onSelectionChange) {
+        this.props.onSelectionChange(index);
+      }
+    }
   };
 
   render() {
@@ -104,7 +123,9 @@ export default class Tabs extends React.Component {
         selected: index === this.state.selected,
         handleTabClick: this.handleTabClick,
         handleTabAnchorFocus: this.handleTabAnchorFocus,
-        ref: `tab${index}`,
+        ref: e => {
+          this.setTabAt(index, e);
+        },
         handleTabKeyDown: this.handleTabKeyDown,
       });
 
@@ -131,6 +152,9 @@ export default class Tabs extends React.Component {
       }),
     };
 
+    const selectedTab = this.getTabAt(this.state.selected);
+    const selectedLabel = selectedTab ? selectedTab.props.label : '';
+
     return (
       <div>
         <nav {...other} className={classes.tabs} role={role}>
@@ -145,7 +169,7 @@ export default class Tabs extends React.Component {
               className="bx--tabs-trigger-text"
               href={triggerHref}
               onClick={this.handleDropdownClick}>
-              {this.state.selectedLabel}
+              {selectedLabel}
             </a>
             <Icon description={iconDescription} name="caret--down" />
           </div>

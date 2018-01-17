@@ -83,7 +83,9 @@ export default class Tab extends React.Component {
           href={href}
           role="tab"
           tabIndex={tabIndex}
-          ref="tabAnchor">
+          ref={e => {
+            this.tabAnchor = e;
+          }}>
           {label}
         </a>
       </li>
