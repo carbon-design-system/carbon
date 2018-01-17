@@ -23,6 +23,21 @@ export const assertMenuOpen = (wrapper, mockProps) => {
     })
   );
 };
+export const assertMenuClosed = wrapper => {
+  expect(findMenuIconNode(wrapper).prop('className')).toEqual(
+    expect.stringContaining('bx--list-box__menu-icon')
+  );
+  expect(findMenuIconNode(wrapper).prop('className')).not.toEqual(
+    expect.stringContaining('bx--list-box__menu-icon--open')
+  );
+  expect(findFieldNode(wrapper).props()).toEqual(
+    expect.objectContaining({
+      'aria-expanded': false,
+      'aria-haspopup': true,
+      'aria-label': 'open menu',
+    })
+  );
+};
 
 // `GenericItem` corresponds to an item in a collection that is passed to
 // MultiSelect that is in a predictable shape and works with the default

@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownV2 should render 1`] = `
+<DropdownV2
+  disabled={false}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "id": "id-0",
+        "label": "Item 0",
+        "value": 0,
+      },
+      Object {
+        "id": "id-1",
+        "label": "Item 1",
+        "value": 1,
+      },
+      Object {
+        "id": "id-2",
+        "label": "Item 2",
+        "value": 2,
+      },
+      Object {
+        "id": "id-3",
+        "label": "Item 3",
+        "value": 3,
+      },
+      Object {
+        "id": "id-4",
+        "label": "Item 4",
+        "value": 4,
+      },
+    ]
+  }
+  label="input"
+  onChange={[MockFunction]}
+  placeholder="Filter..."
+  type="default"
+>
+  <Downshift
+    breakingChanges={Object {}}
+    defaultHighlightedIndex={null}
+    defaultInputValue=""
+    defaultIsOpen={false}
+    defaultSelectedItem={null}
+    environment={[Window]}
+    getA11yStatusMessage={[Function]}
+    id="downshift-1"
+    itemToString={[Function]}
+    onChange={[Function]}
+    onInputValueChange={[Function]}
+    onOuterClick={[Function]}
+    onSelect={[Function]}
+    onStateChange={[Function]}
+    onUserAction={[Function]}
+    selectedItemChanged={[Function]}
+  >
+    <ListBox
+      className="bx--dropdown-v2"
+      disabled={false}
+      innerRef={[Function]}
+      type="default"
+    >
+      <div
+        className="bx--dropdown-v2 bx--list-box bx--form-item"
+      >
+        <ListBoxField
+          aria-expanded={false}
+          aria-haspopup={true}
+          aria-label="open menu"
+          disabled={false}
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+        >
+          <div
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            className="bx--list-box__field"
+            disabled={false}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            <span
+              className="bx--list-box__label"
+              htmlFor="downshift-input-2"
+            >
+              input
+            </span>
+            <ListBoxMenuIcon
+              isOpen={false}
+              translateWithId={[Function]}
+            >
+              <div
+                className="bx--list-box__menu-icon"
+              >
+                <Icon
+                  alt="Open menu"
+                  description="Open menu"
+                  fillRule="evenodd"
+                  name="caret--down"
+                  role="img"
+                >
+                  <svg
+                    alt="Open menu"
+                    aria-label="Open menu"
+                    className={undefined}
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Open menu
+                    </title>
+                    <path
+                      d="M10 0L5 5 0 0z"
+                      key="key0"
+                    />
+                  </svg>
+                </Icon>
+              </div>
+            </ListBoxMenuIcon>
+          </div>
+        </ListBoxField>
+      </div>
+    </ListBox>
+  </Downshift>
+</DropdownV2>
+`;

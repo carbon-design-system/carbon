@@ -25,7 +25,7 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
     <div className={className}>
-      <Icon name="caret--down" description={description} />
+      <Icon name="caret--down" description={description} alt={description} />
     </div>
   );
 };
