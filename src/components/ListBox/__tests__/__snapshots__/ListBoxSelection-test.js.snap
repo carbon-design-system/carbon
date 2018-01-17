@@ -32,13 +32,10 @@ exports[`ListBoxSelection should render 1`] = `
     >
       <svg
         aria-label="translation"
-        className={undefined}
-        fill={undefined}
         fillRule="evenodd"
         height="10"
         name="close"
         role="img"
-        style={undefined}
         viewBox="0 0 10 10"
         width="10"
       >
@@ -89,13 +86,10 @@ exports[`ListBoxSelection should render 2`] = `
     >
       <svg
         aria-label="translation"
-        className={undefined}
-        fill={undefined}
         fillRule="evenodd"
         height="10"
         name="close"
         role="img"
-        style={undefined}
         viewBox="0 0 10 10"
         width="10"
       >

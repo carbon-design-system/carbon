@@ -89,12 +89,10 @@ exports[`ModalWrapper should render 1`] = `
                 <svg
                   aria-label="close the modal"
                   className="bx--modal-close__icon"
-                  fill={undefined}
                   fillRule="evenodd"
                   height="10"
                   name="close"
                   role="img"
-                  style={undefined}
                   viewBox="0 0 10 10"
                   width="10"
                 >

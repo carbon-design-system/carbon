@@ -135,13 +135,13 @@ export default class DatePicker extends Component {
     calendarContainer
       .querySelector('.flatpickr-days')
       .classList.add('bx--date-picker__days');
-    [
-      ...calendarContainer.querySelectorAll('.flatpickr-weekday'),
-    ].forEach(item => {
-      const currentItem = item;
-      currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
-      currentItem.classList.add('bx--date-picker__weekday');
-    });
+    [...calendarContainer.querySelectorAll('.flatpickr-weekday')].forEach(
+      item => {
+        const currentItem = item;
+        currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
+        currentItem.classList.add('bx--date-picker__weekday');
+      }
+    );
     [...daysContainer.querySelectorAll('.flatpickr-day')].forEach(item => {
       item.classList.add('bx--date-picker__day');
       if (

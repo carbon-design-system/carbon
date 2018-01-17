@@ -129,7 +129,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.16.0",
     "bowser": "^1.6.1",
-    "carbon-components": "^8.4.0",
+    "carbon-components": "^8.6.0",
     "carbon-icons": "^6.1.0",
     "commitizen": "^2.9.5",
     "css-loader": "^0.28.4",

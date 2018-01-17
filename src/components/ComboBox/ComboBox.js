@@ -175,19 +175,17 @@ export default class ComboBox extends React.Component {
             </ListBox.Field>
             {isOpen && (
               <ListBox.Menu>
-                {this.filterItems(
-                  items,
-                  itemToString,
-                  inputValue
-                ).map((item, index) => (
-                  <ListBox.MenuItem
-                    key={itemToString(item)}
-                    isActive={selectedItem === item}
-                    isHighlighted={highlightedIndex === index}
-                    {...getItemProps({ item, index })}>
-                    {itemToString(item)}
-                  </ListBox.MenuItem>
-                ))}
+                {this.filterItems(items, itemToString, inputValue).map(
+                  (item, index) => (
+                    <ListBox.MenuItem
+                      key={itemToString(item)}
+                      isActive={selectedItem === item}
+                      isHighlighted={highlightedIndex === index}
+                      {...getItemProps({ item, index })}>
+                      {itemToString(item)}
+                    </ListBox.MenuItem>
+                  )
+                )}
               </ListBox.Menu>
             )}
           </ListBox>
