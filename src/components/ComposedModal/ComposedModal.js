@@ -265,7 +265,7 @@ export class ModalFooter extends Component {
 
         {primaryButtonText && (
           <Button
-            onClick={this.onRequestSubmit}
+            onClick={onRequestSubmit}
             className={primaryClass}
             disabled={primaryButtonDisabled}
             kind="primary">
