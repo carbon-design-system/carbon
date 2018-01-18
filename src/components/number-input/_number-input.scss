@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
@@ -19,8 +20,8 @@
     display: inline-flex;
     width: 100%;
     min-width: 9.375rem;
-    padding-left: 1rem;
-    padding-right: 2rem;
+    padding-left: $spacing-md;
+    padding-right: $spacing-xl;
     font-weight: 300;
     height: rem(40px);
     color: $text-01;
