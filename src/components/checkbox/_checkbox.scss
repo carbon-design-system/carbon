@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../form/form';
@@ -8,10 +9,10 @@
 
 @include exports('checkbox') {
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-md;
 
     &:first-of-type {
-      margin-top: rem(6px);
+      margin-top: $spacing-xs;
     }
 
     &:last-of-type {
@@ -32,7 +33,7 @@
     align-items: center;
     cursor: pointer;
     position: relative;
-    padding-left: rem(25px);
+    padding-left: $spacing-lg;
     min-height: rem(16px);
   }
 
@@ -47,6 +48,7 @@
     background-color: $ui-01;
   }
 
+  // Checkmark
   .#{$prefix}--checkbox-label::after {
     content: '';
     width: 10px;
@@ -85,6 +87,7 @@
     @include focus-outline('blurred');
   }
 
+  // Indeterminate dash
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     transform: scale(1) rotate(0deg);
@@ -101,7 +104,7 @@
     display: inline-block;
     height: rem(18px);
     width: rem(18px);
-    margin-right: 0.5rem;
+    margin-right: $spacing-xs;
     background-color: $ui-01;
     border: $checkbox-border-width solid $ui-05;
     min-width: rem(18px);

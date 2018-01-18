@@ -7,6 +7,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
@@ -19,7 +20,7 @@
     width: 100%;
     height: rem(40px);
     min-width: 10rem;
-    padding: 0 1rem;
+    padding: 0 $spacing-md;
     color: $text-01;
     background-color: $field-01;
     border: $input-border;
