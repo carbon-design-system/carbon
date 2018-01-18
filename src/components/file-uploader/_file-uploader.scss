@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
@@ -28,14 +29,13 @@
     @include typescale('zeta');
     @include line-height('body');
     color: $text-02;
-    margin-top: 0.25rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: $spacing-lg;
   }
 
   .#{$prefix}--file-container {
     display: block;
     width: 100%;
-    margin-top: rem(20px);
+    margin-top: $spacing-lg;
   }
 
   .#{$prefix}--file__selected-file {
@@ -45,8 +45,8 @@
     justify-content: space-between;
     min-height: rem(30px);
     background-color: $field-01;
-    padding: 0 1rem;
-    margin-bottom: rem(20px);
+    padding: 0 $spacing-md;
+    margin-bottom: $spacing-md;
 
     &:last-child {
       margin-bottom: 0;
@@ -59,7 +59,7 @@
     display: inline-flex;
     align-items: center;
     color: $text-01;
-    margin-right: 1rem;
+    margin-right: $spacing-md;
     height: 1.875rem;
   }
 
@@ -70,7 +70,7 @@
     .#{$prefix}--loading {
       width: 1.125rem;
       height: 1.125rem;
-      margin-right: -7px;
+      margin-right: $spacing-xs;
     }
 
     .#{$prefix}--loading__svg {

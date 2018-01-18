@@ -5,6 +5,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../form/form';
@@ -14,7 +15,7 @@
   .#{$prefix}--radio-button-group {
     display: flex;
     align-items: center;
-    margin-top: rem(6px);
+    margin-top: $spacing-xs;
   }
 
   .#{$prefix}--radio-button {
@@ -27,7 +28,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-right: 1rem;
+    margin-right: $spacing-md;
   }
 
   .#{$prefix}--radio-button__appearance {
@@ -38,7 +39,7 @@
     flex-shrink: 0;
     height: rem(18px);
     width: rem(18px);
-    margin-right: rem(10px);
+    margin-right: $spacing-xs;
   }
 
   .#{$prefix}--radio-button:checked + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
