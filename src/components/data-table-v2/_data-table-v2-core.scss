@@ -79,6 +79,7 @@
     &:focus {
       outline: 0;
       opacity: 1;
+      box-shadow: none;
 
       .#{$prefix}--overflow-menu__icon {
         box-shadow: inset 0px 0px 0px 1px $brand-01;
@@ -94,7 +95,7 @@
 // Options
 
 .#{$prefix}--data-table-v2-header {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .#{$prefix}--data-table-v2--zebra {
@@ -148,5 +149,5 @@
 
 .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
 tbody tr.#{$prefix}--data-table-v2--selected {
-  background-color: rgba($brand-02, .10);
+  background-color: rgba($brand-02, 0.1);
 }
