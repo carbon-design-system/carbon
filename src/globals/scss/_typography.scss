@@ -1,20 +1,25 @@
 @import 'vars';
 
+$font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
+$font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
+$font-family-serif: 'ibm-plex-serif', 'Georgia', Times, serif !default;
+$font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif !default;
+
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
 $typescale-map: (
-  'giga'    : 4.75rem,
-  'mega'    : 3.375rem,
-  'alpha'   : 2.25rem,
-  'beta'    : 1.75rem,
-  'gamma'   : 1.25rem,
-  'delta'   : 1.125rem,
+  'giga' : 4.75rem,
+  'mega' : 3.375rem,
+  'alpha' : 2.25rem,
+  'beta' : 1.75rem,
+  'gamma' : 1.25rem,
+  'delta' : 1.125rem,
   'epsilon' : 1rem,
-  'zeta'    : 0.875rem,
-  'omega'   : 0.75rem,
+  'zeta' : 0.875rem,
+  'omega' : 0.75rem,
   'caption' : 0.75rem,
-  'legal'   : 0.6875rem,
-  'p'       : 1rem,
+  'legal' : 0.6875rem,
+  'p' : 1rem
 );
 
 @mixin typescale($size) {
@@ -34,14 +39,14 @@ $typescale-map: (
 }
 
 @mixin helvetica {
-  font-family: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
+  font-family: $font-family-helvetica;
 }
 
 @mixin font-family {
   @if global-variable-exists('css--plex') and $css--plex == true {
-    font-family: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif;
+    font-family: $font-family-sans-serif;
   } @else {
-    font-family: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
+    font-family: $font-family-helvetica;
   }
 }
 
