@@ -88,7 +88,17 @@ export default class DatePicker extends Component {
     ) {
       this.cal.destroy();
     }
+    this.inputField.removeEventListener(this.onChange);
+    if (this.toInputField) {
+      this.toInputField.removeEventListener(this.onChange);
+    }
   }
+
+  onChange = e => {
+    if (e.target.value === '' && this.cal.selectedDates.length > 0) {
+      this.cal.clear();
+    }
+  };
 
   addKeyboardEvents = cal => {
     const input = this.inputField;
@@ -97,10 +107,12 @@ export default class DatePicker extends Component {
         cal.calendarContainer.focus();
       }
     });
+    input.addEventListener('change', this.onChange);
     if (this.toInputField) {
       this.toInputField.addEventListener('blur', () => {
         this.cal.close();
       });
+      this.toInputField.addEventListener('change', this.onChange);
     }
   };
 
