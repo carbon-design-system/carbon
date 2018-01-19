@@ -7,6 +7,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
@@ -23,7 +24,7 @@
     appearance: none;
     display: block;
     width: 100%;
-    padding: 0.75rem 2.75rem 0.75rem 1rem;
+    padding: $spacing-sm $spacing-2xl $spacing-sm $spacing-md;
     color: $text-01;
     background-color: $field-01;
     border: $input-border;
@@ -79,7 +80,7 @@
 
   .#{$prefix}--label {
     white-space: nowrap;
-    margin: 0 0.5rem 0 0;
+    margin: 0 $spacing-xs 0 0;
     font-weight: 400;
   }
 
