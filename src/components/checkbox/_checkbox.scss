@@ -42,6 +42,7 @@
     content: '';
     position: absolute;
     left: 0;
+    top: calc(50% - 9px);
     height: rem(18px);
     width: rem(18px);
     border: $checkbox-border-width solid $ui-05;
@@ -101,6 +102,7 @@
   .#{$prefix}--checkbox-appearance {
     position: absolute;
     left: 0;
+    top: calc(50% - 9px);
     display: inline-block;
     height: rem(18px);
     width: rem(18px);
