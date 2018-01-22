@@ -148,6 +148,20 @@ export default class OverflowMenu extends Component {
       })
     );
 
+    const menuBody = (
+      <ul className={overflowMenuOptionsClasses}>{childrenWithProps}</ul>
+    );
+    const wrappedMenuBody = !floatingMenu ? (
+      menuBody
+    ) : (
+      <FloatingMenu
+        menuPosition={this.state.menuPosition}
+        menuDirection="bottom"
+        menuOffset={flipped ? menuOffsetFlip : menuOffset}>
+        {menuBody}
+      </FloatingMenu>
+    );
+
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
@@ -166,18 +180,7 @@ export default class OverflowMenu extends Component {
             description={iconDescription}
             style={{ width: '100%' }}
           />
-          {!open ? null : floatingMenu ? (
-            <FloatingMenu
-              menuPosition={this.state.menuPosition}
-              menuDirection="bottom"
-              menuOffset={flipped ? menuOffsetFlip : menuOffset}>
-              <ul className={overflowMenuOptionsClasses}>
-                {childrenWithProps}
-              </ul>
-            </FloatingMenu>
-          ) : (
-            <ul className={overflowMenuOptionsClasses}>{childrenWithProps}</ul>
-          )}
+          {open && wrappedMenuBody}
         </div>
       </ClickListener>
     );
