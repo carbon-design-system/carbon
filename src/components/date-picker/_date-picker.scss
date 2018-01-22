@@ -1,5 +1,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
@@ -44,7 +45,7 @@
     position: relative;
     height: rem(40px);
     max-width: 9rem;
-    padding: 0 1rem;
+    padding: 0 $spacing-md;
     background-color: $field-01;
     color: $text-01;
     border: 1px solid transparent;
@@ -78,7 +79,7 @@
   }
 
   .#{$prefix}--date-picker__icon + .#{$prefix}--date-picker__input {
-    padding-left: 2.9rem;
+    padding-left: $spacing-3xl;
   }
 
   .#{$prefix}--date-picker--range {
@@ -87,7 +88,7 @@
   }
 
   .#{$prefix}--date-picker--range > .#{$prefix}--date-picker-container:first-child {
-    margin-right: 0.5rem;
+    margin-right: $spacing-xs;
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__icon {
@@ -107,7 +108,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0.875rem 1rem 0.25rem;
+    padding: $spacing-md $spacing-md $spacing-2xs;
     width: rem(285px);
     height: rem(230px);
     border-radius: 0;
@@ -128,7 +129,7 @@
   .#{$prefix}--date-picker__month,
   .flatpickr-month {
     width: 100%;
-    margin-bottom: 0.2rem;
+    margin-bottom: $spacing-2xs;
   }
 
   .#{$prefix}--date-picker__month .flatpickr-prev-month,
@@ -177,7 +178,7 @@
     border-radius: 0;
     min-width: rem(38px);
     width: rem(38px);
-    padding: .25rem;
+    padding: $spacing-2xs;
 
     &:focus {
       outline: 1px solid $brand-01;
@@ -330,6 +331,6 @@
   .#{$prefix}--date-picker__weekdays,
   .flatpickr-weekdays {
     width: rem(225px);
-    margin-bottom: 0.325rem;
+    margin-bottom: $spacing-2xs;
   }
 }

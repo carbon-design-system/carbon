@@ -25,7 +25,7 @@ tr.#{$prefix}--expandable-row-v2 {
   + tr[data-child-row] {
     td {
       border-top: 0;
-      padding-bottom: rem(8px);
+      padding-bottom: $spacing-xs;
     }
   }
 
@@ -91,5 +91,5 @@ tr.#{$prefix}--expandable-row--hover-v2 {
   height: 16px;
   width: auto;
   max-width: 16px;
-  padding: 2px;
+  padding: $spacing-3xs;
 }
