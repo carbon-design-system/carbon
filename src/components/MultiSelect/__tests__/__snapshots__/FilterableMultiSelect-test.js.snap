@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiSelect.Filterable should render 1`] = `
+<FilterableMultiSelect
+  compareItems={[Function]}
+  disabled={false}
+  filterItems={[Function]}
+  initialSelectedItems={Array []}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "id": "id-0",
+        "label": "Item 0",
+        "value": 0,
+      },
+      Object {
+        "id": "id-1",
+        "label": "Item 1",
+        "value": 1,
+      },
+      Object {
+        "id": "id-2",
+        "label": "Item 2",
+        "value": 2,
+      },
+      Object {
+        "id": "id-3",
+        "label": "Item 3",
+        "value": 3,
+      },
+      Object {
+        "id": "id-4",
+        "label": "Item 4",
+        "value": 4,
+      },
+    ]
+  }
+  locale="en"
+  onChange={[MockFunction]}
+  placeholder="Placeholder..."
+  sortItems={[Function]}
+>
+  <Selection
+    initialSelectedItems={Array []}
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      id="downshift-1"
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={Array []}
+      selectedItemChanged={[Function]}
+    >
+      <ListBox
+        className="bx--multi-select bx--combo-box"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          className="bx--multi-select bx--combo-box bx--list-box bx--form-item"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            disabled={false}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              disabled={false}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-expanded={false}
+                autoComplete="off"
+                className="bx--text-input"
+                disabled={false}
+                id="downshift-input-2"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    name="caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      name="caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M10 0L5 5 0 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</FilterableMultiSelect>
+`;

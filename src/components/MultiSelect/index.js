@@ -1,1 +1,6 @@
-export default from './MultiSelect';
+import MultiSelect from './MultiSelect';
+import FilterableMultiSelect from './FilterableMultiSelect';
+
+MultiSelect.Filterable = FilterableMultiSelect;
+
+export default MultiSelect;

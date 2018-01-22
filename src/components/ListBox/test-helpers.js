@@ -41,7 +41,7 @@ export const assertMenuClosed = wrapper => {
 
 // `GenericItem` corresponds to an item in a collection that is passed to
 // MultiSelect that is in a predictable shape and works with the default
-// `itemTostring` out of the box.
+// `itemToString` out of the box.
 export const generateGenericItem = index => ({
   id: `id-${index}`,
   label: `Item ${index}`,

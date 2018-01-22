@@ -4,22 +4,25 @@ import MultiSelect from '../MultiSelect';
 
 const items = [
   {
-    id: 'option-1',
-    text: 'Option 1',
+    id: 'item-1',
+    text: 'Item 1',
   },
   {
-    id: 'option-2',
-    text: 'Option 2',
+    id: 'item-2',
+    text: 'Item 2',
   },
   {
-    id: 'option-3',
-    text: 'Option 3',
+    id: 'item-3',
+    text: 'Item 3',
   },
   {
-    id: 'option-4',
-    text: 'Option 4',
+    id: 'item-4',
+    text: 'Item 4',
   },
 ];
+
+const defaultLabel = 'MultiSelect Label';
+const defaultPlaceholder = 'Filter';
 
 storiesOf('MultiSelect', module)
   .addWithInfo(
@@ -30,10 +33,10 @@ storiesOf('MultiSelect', module)
     () => (
       <div style={{ width: 300 }}>
         <MultiSelect
-          label="Label"
+          label={defaultLabel}
           items={items}
           itemToString={item => (item ? item.text : '')}
-          onChange={action('onChange - MultiSelect')}
+          onChange={action('onChange')}
         />
       </div>
     )
@@ -46,10 +49,10 @@ storiesOf('MultiSelect', module)
     () => (
       <MultiSelect
         type="inline"
-        label="Label"
+        label={defaultLabel}
         items={items}
         itemToString={item => (item ? item.text : '')}
-        onChange={action('onChange - Inline MultiSelect')}
+        onChange={action('onChange')}
       />
     )
   )
@@ -61,10 +64,10 @@ storiesOf('MultiSelect', module)
     () => (
       <div style={{ width: 300 }}>
         <MultiSelect
-          label="Label"
+          label={defaultLabel}
           items={items}
           itemToString={item => (item ? item.text : '')}
-          onChange={action('onChange - Inline MultiSelect')}
+          onChange={action('onChange')}
           disabled
         />
       </div>
@@ -78,11 +81,61 @@ storiesOf('MultiSelect', module)
     () => (
       <MultiSelect
         type="inline"
-        label="Label"
+        label={defaultLabel}
         items={items}
         itemToString={item => (item ? item.text : '')}
-        onChange={action('onChange - Inline MultiSelect')}
+        onChange={action('onChange')}
         disabled
       />
+    )
+  )
+  .addWithInfo(
+    'with initial selected items',
+    `
+      Provide a set of items to initially select in the control
+    `,
+    () => (
+      <div style={{ width: 300 }}>
+        <MultiSelect
+          label={defaultLabel}
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          initialSelectedItems={[items[0], items[1]]}
+          onChange={action('onChange - Inline MultiSelect')}
+        />
+      </div>
+    )
+  )
+  .addWithInfo(
+    'filterable',
+    `
+      Filterable version of our MultiSelect component
+    `,
+    () => (
+      <div style={{ width: 300 }}>
+        <MultiSelect.Filterable
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+          placeholder={defaultPlaceholder}
+        />
+      </div>
+    )
+  )
+  .addWithInfo(
+    'filterable - disabled',
+    `
+      Dislabed filterable version of our MultiSelect component
+    `,
+    () => (
+      <div style={{ width: 300 }}>
+        <MultiSelect.Filterable
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+          placeholder={defaultPlaceholder}
+          disabled
+        />
+      </div>
     )
   );

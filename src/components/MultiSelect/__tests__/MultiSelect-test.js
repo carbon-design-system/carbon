@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import MultiSelect from '../MultiSelect';
+import MultiSelect from '../../MultiSelect';
 import {
   openMenu,
   generateItems,
   generateGenericItem,
-} from '../ListBox/test-helpers';
+} from '../../ListBox/test-helpers';
 
 const mouseDownAndUp = node => {
   node.dispatchEvent(new window.MouseEvent('mousedown', { bubbles: true }));

@@ -1,6 +1,6 @@
 import cx from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import Downshift from 'downshift';
 import ListBox from '../ListBox';
 import Checkbox from '../Checkbox';
@@ -8,8 +8,9 @@ import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import { defaultFilterItems } from '../ComboBox/tools/filter';
 
-export default class MultiSelect extends React.Component {
+export default class FilterableMultiSelect extends React.Component {
   static propTypes = {
     ...sortingPropTypes,
 
@@ -38,12 +39,6 @@ export default class MultiSelect extends React.Component {
     itemToString: PropTypes.func,
 
     /**
-     * Generic `label` that will be used as the textual representation of what
-     * this field is for
-     */
-    label: PropTypes.node.isRequired,
-
-    /**
      * Specify the locale of the control. Used for the default `compareItems`
      * used for sorting the list of items in the control.
      */
@@ -54,16 +49,22 @@ export default class MultiSelect extends React.Component {
      * consuming component what kind of internal state changes are occuring.
      */
     onChange: PropTypes.func,
+
+    /**
+     * Generic `placeholder` that will be used as the textual representation of
+     * what this field is for
+     */
+    placeholder: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
     compareItems: defaultCompareItems,
     disabled: false,
-    locale: 'en',
-    itemToString: defaultItemToString,
+    filterItems: defaultFilterItems,
     initialSelectedItems: [],
+    itemToString: defaultItemToString,
+    locale: 'en',
     sortItems: defaultSortItems,
-    type: 'default',
   };
 
   constructor(props) {
@@ -71,6 +72,7 @@ export default class MultiSelect extends React.Component {
     this.state = {
       highlightedIndex: null,
       isOpen: false,
+      inputValue: '',
     };
   }
 
@@ -95,6 +97,9 @@ export default class MultiSelect extends React.Component {
   handleOnStateChange = changes => {
     const { type } = changes;
     switch (type) {
+      case Downshift.stateChangeTypes.changeInput:
+        this.setState({ inputValue: changes.inputValue });
+        break;
       case Downshift.stateChangeTypes.keyDownArrowDown:
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.itemMouseEnter:
@@ -109,25 +114,66 @@ export default class MultiSelect extends React.Component {
       // Reference: https://github.com/paypal/downshift/issues/206
       case Downshift.stateChangeTypes.clickButton:
       case Downshift.stateChangeTypes.keyDownSpaceButton:
-        this.handleOnToggleMenu();
+        this.setState(() => {
+          let nextIsOpen = changes.isOpen;
+          if (changes.isOpen === false) {
+            // If Downshift is trying to close the menu, but we know the input
+            // is the active element in thedocument, then keep the menu open
+            if (this.inputNode === document.activeElement) {
+              nextIsOpen = true;
+            }
+          }
+          return {
+            isOpen: nextIsOpen,
+          };
+        });
         break;
     }
   };
 
+  handleOnInputKeyDown = event => {
+    event.stopPropagation();
+  };
+
+  handleOnInputValueChange = inputValue => {
+    this.setState(() => {
+      if (Array.isArray(inputValue)) {
+        return {
+          inputValue: '',
+        };
+      }
+      return {
+        inputValue: inputValue || '',
+      };
+    });
+  };
+
+  clearInputValue = event => {
+    event.stopPropagation();
+    this.setState({ inputValue: '' });
+    this.inputNode && this.inputNode.focus && this.inputNode.focus();
+  };
+
   render() {
-    const { highlightedIndex, isOpen } = this.state;
+    const { highlightedIndex, isOpen, inputValue } = this.state;
     const {
       className: containerClassName,
+      disabled,
+      filterItems,
       items,
       itemToString,
-      label,
-      type,
-      disabled,
       initialSelectedItems,
+      id,
+      locale,
+      placeholder,
       sortItems,
       compareItems,
     } = this.props;
-    const className = cx('bx--multi-select', containerClassName);
+    const className = cx(
+      'bx--multi-select',
+      'bx--combo-box',
+      containerClassName
+    );
     return (
       <Selection
         onChange={this.handleOnChange}
@@ -136,22 +182,23 @@ export default class MultiSelect extends React.Component {
           <Downshift
             highlightedIndex={highlightedIndex}
             isOpen={isOpen}
-            itemToString={itemToString}
+            inputValue={inputValue}
+            onInputValueChange={this.handleOnInputValueChange}
             onChange={onItemChange}
+            itemToString={itemToString}
             onStateChange={this.handleOnStateChange}
             onOuterClick={this.handleOnOuterClick}
             selectedItem={selectedItems}
             render={({
-              getRootProps,
-              selectedItem,
-              isOpen,
-              itemToString,
-              highlightedIndex,
-              getItemProps,
               getButtonProps,
+              getInputProps,
+              getItemProps,
+              getRootProps,
+              isOpen,
+              inputValue,
+              selectedItem,
             }) => (
               <ListBox
-                type={type}
                 className={className}
                 disabled={disabled}
                 {...getRootProps({ refKey: 'innerRef' })}>
@@ -162,17 +209,35 @@ export default class MultiSelect extends React.Component {
                       selectionCount={selectedItem.length}
                     />
                   )}
-                  <span className="bx--list-box__label">{label}</span>
+                  <input
+                    className="bx--text-input"
+                    ref={el => (this.inputNode = el)}
+                    {...getInputProps({
+                      disabled,
+                      id,
+                      placeholder,
+                      onKeyDown: this.handleOnInputKeyDown,
+                    })}
+                  />
+                  {inputValue &&
+                    isOpen && (
+                      <ListBox.Selection
+                        clearSelection={this.clearInputValue}
+                      />
+                    )}
                   <ListBox.MenuIcon isOpen={isOpen} />
                 </ListBox.Field>
                 {isOpen && (
                   <ListBox.Menu>
-                    {sortItems(items, {
-                      selectedItems,
-                      itemToString,
-                      compareItems,
-                      locale: 'en',
-                    }).map((item, index) => {
+                    {sortItems(
+                      filterItems(items, { itemToString, inputValue }),
+                      {
+                        selectedItems,
+                        itemToString,
+                        compareItems,
+                        locale,
+                      }
+                    ).map((item, index) => {
                       const itemProps = getItemProps({ item });
                       const itemText = itemToString(item);
                       const isChecked = selectedItem.indexOf(item) !== -1;
