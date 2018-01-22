@@ -1,58 +1,31 @@
 import './polyfills/index';
 
-import DemoSwitcher from './js/demo-switcher';
+import './js/components/boot-nav';
+import './js/prism';
 
-import eventMatches from '../src/globals/js/misc/event-matches';
+import * as components from '../src/globals/js/components';
 
 export * from '../src/bundle';
 
-function switchTo(name) {
-  const selectedLeftNavItem = document.querySelector(`[data-demo-name=${name}].left-nav-list__item`);
-  [...document.querySelectorAll('[data-demo-name].left-nav-list__item')].forEach(item => {
-    item.classList.toggle('left-nav-list__item--active', item.dataset.demoName === name);
-  });
-  [...document.querySelectorAll('[data-interior-left-nav-with-children]')].forEach(item => {
-    if (item.contains(selectedLeftNavItem)) {
-      item.classList.add('left-nav-list__item--expanded');
-    }
-  });
-  [...document.querySelectorAll('[data-demo-name].demo--container__panel')].forEach(panel => {
-    if (panel.dataset.demoName === name) {
-      panel.removeAttribute('hidden');
-    } else {
-      panel.setAttribute('hidden', '');
-    }
-  });
-}
+if (typeof module !== 'undefined' && module.hot) {
+  const forEach = Array.prototype.forEach;
 
-const init = () => {
-  DemoSwitcher.init();
+  if (window.oldComponentClasses) {
+    // Releases component instances of (old) component classes that have been replaced with new ones by HMR
+    window.oldComponentClasses.forEach(Clz => {
+      forEach.call(document.body.querySelectorAll(Clz.options.selectorInit), element => {
+        const instance = Clz.components.get(element);
+        if (instance) {
+          instance.release();
+        }
+      });
+    });
+  }
 
-  document.body.addEventListener('left-nav-toggled', evt => {
-    document.body.classList.toggle('demo--collapsed', evt.detail.collapsed);
-  });
+  // Preserves component classe refs, that would be replaced replaced with new ones by HMR, to `window`
+  window.oldComponentClasses = Object.keys(components)
+    .map(key => components[key])
+    .filter(component => typeof component.init === 'function');
 
-  document.body.addEventListener('click', evt => {
-    const link = eventMatches(evt, '.left-nav-list__item-link');
-    if (link) {
-      evt.preventDefault();
-    }
-    const leafLink = eventMatches(evt, '[data-interior-left-nav-leaf-item-link]');
-    if (leafLink) {
-      const name = leafLink.textContent;
-      window.history.pushState({ name }, name, `/demo/${name}`);
-      switchTo(name);
-    }
-  });
-
-  window.addEventListener('popstate', evt => {
-    switchTo(evt.state.name);
-  });
-};
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  // DOMContentLoaded has been fired already
-  setTimeout(init, 0);
+  module.hot.accept();
 }

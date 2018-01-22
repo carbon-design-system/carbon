@@ -1,0 +1,79 @@
+//--------------------
+// GLOBAL MIXINS
+//--------------------
+
+
+//--------------------
+// BREAKPOINTS
+//
+// Usage:
+//
+// @include breakpoint('bp--xs--major') {
+//    // your content here
+// }
+//--------------------
+
+$breakpoints: (
+  bp--xs--major: 600px,
+  bp--sm--major: 840px,
+  bp--md--major: 1024px,
+);
+
+@mixin breakpoint($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media screen and (min-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  }
+
+  @else {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+}
+
+//--------------------
+// GRID MARGINS
+//
+// Usage:
+//
+// @include grid-margins;
+//--------------------
+
+@mixin grid-margins {
+  margin-left: 3%;
+  margin-right: 3%;
+
+  @include breakpoint('600px') {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  @include breakpoint('840px') {
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+  }
+}
+
+//--------------------
+// GRID PADDING
+//
+// Usage:
+//
+// @include grid-padding;
+//--------------------
+@mixin grid-padding {
+  padding-left: 3%;
+  padding-right: 3%;
+
+  @include breakpoint('600px') {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  @include breakpoint('840px') {
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+  }
+}

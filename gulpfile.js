@@ -12,9 +12,11 @@ const babel = require('gulp-babel');
 const eslint = require('gulp-eslint');
 const uglify = require('gulp-uglify');
 const pump = require('pump');
+const { promisify } = require('bluebird');
 
-// BrowserSync
+// BrowserSync/NodeMon
 const browserSync = require('browser-sync').create();
+const nodemon = require('gulp-nodemon');
 
 // Gulp
 const gulp = require('gulp');
@@ -28,6 +30,10 @@ const rollup = require('rollup');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
 
+// WebPack
+const webpack = promisify(require('webpack'));
+const webpackDevConfig = require('./tools/webpack.dev.config');
+
 // JSDoc
 const jsdocConfig = require('gulp-jsdoc3/dist/jsdocConfig.json');
 
@@ -39,8 +45,14 @@ const Server = require('karma').Server;
 const cloptions = require('minimist')(process.argv.slice(2), {
   alias: {
     k: 'keepalive',
+    p: 'port',
+    r: 'rollup',
   },
-  boolean: ['keepalive'],
+  default: {
+    port: 3000,
+    serverport: 8080,
+  },
+  boolean: ['keepalive', 'rollup'],
 });
 
 // Axe A11y Test
@@ -51,12 +63,27 @@ const axeArgs = require('minimist')(process.argv.slice(2));
  * BrowserSync
  */
 
-gulp.task('browser-sync', ['build:dev'], () => {
-  browserSync.init({
-    logPrefix: 'Carbon Components',
-    open: false,
-    proxy: 'localhost:8080',
-    timestamps: false,
+gulp.task('browser-sync', ['build:dev'], cb => {
+  let started;
+  nodemon({
+    script: './server.js',
+    ext: 'dust js',
+    watch: ['./demo/views', './server.js'],
+    env: {
+      PORT: cloptions.serverport,
+    },
+  }).on('start', () => {
+    if (!started) {
+      started = true;
+      browserSync.init({
+        logPrefix: 'Carbon Components',
+        open: false,
+        port: cloptions.port,
+        proxy: `localhost:${cloptions.serverport}`,
+        timestamps: false,
+      });
+      cb();
+    }
   });
 });
 
@@ -86,14 +113,24 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
-gulp.task('scripts:dev', () =>
-  rollup
-    .rollup(rollupConfigDev)
-    .then(bundle => bundle.write(rollupConfigDev))
-    .then(() => {
-      browserSync.reload();
-    })
-);
+gulp.task('scripts:dev', () => {
+  if (cloptions.rollup) {
+    return rollup
+      .rollup(rollupConfigDev)
+      .then(bundle => bundle.write(rollupConfigDev))
+      .then(() => {
+        browserSync.reload();
+      });
+  }
+  return webpack(webpackDevConfig).then(stats => {
+    gutil.log(
+      '[webpack:build]',
+      stats.toString({
+        colors: true,
+      })
+    );
+  });
+});
 
 gulp.task('scripts:umd', () => {
   const srcFiles = ['./src/**/*.js'];
@@ -228,7 +265,16 @@ gulp.task('html:source', () => {
 
 gulp.task('lint', () =>
   gulp
-    .src(['gulpfile.js', 'server.js', 'src/**/*.js', 'tests/**/*.js', 'tools/**/*.js', 'demo/**/*.js'])
+    .src([
+      'gulpfile.js',
+      'server.js',
+      'src/**/*.js',
+      'tests/**/*.js',
+      'tools/**/*.js',
+      'demo/**/*.js',
+      '!demo/js/prism.js',
+      '!demo/hot/**/*.js',
+    ])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
@@ -322,8 +368,9 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
 // Watch Tasks
 gulp.task('watch', () => {
   gulp.watch('src/**/**/*.html').on('change', browserSync.reload);
-  gulp.watch(['src/**/**/*.js'], ['scripts:dev', 'scripts:compiled']);
-  gulp.watch(['demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
+  if (cloptions.rollup) {
+    gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
+  }
   gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
 });
 

@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "extends": [
+    "carbon",
+    "../../.eslintrc"
+  ],
+  "rules": {
+    "react/require-extension": 0
+  }
+}

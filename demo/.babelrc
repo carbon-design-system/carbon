@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 1 version", "ie >= 11"]
+        }
+      }
+    ],
+    "react"
+  ],
+  "plugins": ["transform-class-properties", "dev-expression"]
+}
