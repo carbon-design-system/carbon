@@ -60,6 +60,24 @@ describe('Toggle', () => {
   });
 
   describe('events', () => {
+    it('passes along onChange to <input>', () => {
+      const onChange = jest.fn();
+      const id = 'test-input';
+      const wrapper = mount(<Toggle id={id} onChange={onChange} />);
+
+      const input = wrapper.find('input');
+      const inputElement = input.instance();
+
+      inputElement.checked = true;
+      wrapper.find('input').simulate('change');
+
+      expect(
+        onChange.mock.calls.map(call =>
+          call.map((arg, i) => (i > 0 ? arg : arg.target))
+        )
+      ).toEqual([[inputElement]]);
+    });
+
     it('should invoke onToggle with expected arguments', () => {
       const onToggle = jest.fn();
       const id = 'test-input';

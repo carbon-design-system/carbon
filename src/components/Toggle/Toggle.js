@@ -6,6 +6,7 @@ const Toggle = ({
   className,
   defaultToggled,
   toggled,
+  onChange,
   onToggle,
   id,
   labelA,
@@ -35,6 +36,7 @@ const Toggle = ({
         id={id}
         className="bx--toggle"
         onChange={evt => {
+          onChange && onChange(evt);
           onToggle(input.checked, id, evt);
         }}
         ref={el => {
