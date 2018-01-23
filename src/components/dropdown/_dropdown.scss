@@ -69,13 +69,21 @@
   .#{$prefix}--dropdown-list {
     @include reset;
     @include layer('overlay');
+    @include typescale('zeta');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     list-style: none;
     position: absolute;
     z-index: z('dropdown');
     max-height: 0;
+    transition: max-height $transition--expansion $carbon--ease-out;
     overflow: hidden;
-    transition: $transition--expansion $carbon--ease-out;
+  }
+
+  .#{$prefix}--dropdown-item {
+    transition: opacity $transition--expansion $carbon--ease-out;
     opacity: 0;
   }
 
@@ -106,20 +114,18 @@
     }
 
     .#{$prefix}--dropdown-list {
-      @include typescale('zeta');
-      display: flex;
-      flex-direction: column;
-      background-color: $ui-01;
       max-height: 15rem;
       overflow: auto;
-      transition: $transition--expansion $carbon--ease-in;
-      opacity: 1;
     }
 
     &:focus {
       .#{$prefix}--dropdown-list {
         box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
       }
+    }
+
+    .#{$prefix}--dropdown-item {
+      opacity: 1;
     }
   }
 
