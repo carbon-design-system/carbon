@@ -7,15 +7,62 @@ import ClickListener from '../../internal/ClickListener';
 
 export default class Tooltip extends Component {
   static propTypes = {
+    /**
+     * Open/closed state.
+     */
     open: PropTypes.bool,
+
+    /**
+     * Contents to put into the tooltip.
+     */
     children: PropTypes.node,
+
+    /**
+     * The CSS class names of the tooltip.
+     */
     className: PropTypes.string,
+
+    /**
+     * The CSS class names of the trigger UI.
+     */
+    triggerClassName: PropTypes.string,
+
+    /**
+     * Where to put the tooltip, relative to the trigger UI.
+     */
     direction: PropTypes.oneOf(['bottom', 'top', 'left', 'right']),
-    menuOffset: PropTypes.object,
-    triggerText: PropTypes.string,
+
+    /**
+     * The adjustment of the tooltip position.
+     */
+    menuOffset: PropTypes.shape({
+      top: PropTypes.number,
+      left: PropTypes.number,
+    }),
+
+    /**
+     * The content to put into the trigger UI, except the (default) tooltip icon.
+     */
+    triggerText: PropTypes.node,
+
+    /**
+     * `true` to show the default tooltip icon.
+     */
     showIcon: PropTypes.bool,
+
+    /**
+     * The name of the default tooltip icon.
+     */
     iconName: PropTypes.string,
+
+    /**
+     * The description of the default tooltip icon, to be put in its SVG `<title>` element.
+     */
     iconDescription: PropTypes.string,
+
+    /**
+     * `true` if opening tooltip should be triggered by clicking the trigger button.
+     */
     clickToOpen: PropTypes.bool,
   };
 
@@ -77,12 +124,16 @@ export default class Tooltip extends Component {
     const {
       children,
       className,
+      triggerClassName,
       direction,
       triggerText,
       showIcon,
       iconName,
       iconDescription,
       menuOffset,
+      // Exclude `clickToOpen` from `other` to avoid passing it along to `<div>`
+      // eslint-disable-next-line no-unused-vars
+      clickToOpen,
       ...other
     } = this.props;
 
@@ -92,11 +143,13 @@ export default class Tooltip extends Component {
       className
     );
 
+    const triggerClasses = classNames('bx--tooltip__trigger', triggerClassName);
+
     return (
       <div>
         <ClickListener onClickOutside={this.handleClickOutside}>
           {showIcon ? (
-            <div className="bx--tooltip__trigger">
+            <div className={triggerClasses}>
               {triggerText}
               <div
                 ref={node => {
@@ -118,7 +171,7 @@ export default class Tooltip extends Component {
             </div>
           ) : (
             <div
-              className="bx--tooltip__trigger"
+              className={triggerClasses}
               ref={node => {
                 this.triggerEl = node;
               }}

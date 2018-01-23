@@ -31,6 +31,8 @@ describe('Tooltip', () => {
   describe('Renders as expected with specified properties', () => {
     const wrapper = mount(
       <Tooltip
+        className="tooltip--class"
+        triggerClassName="tooltip--trigger-class"
         triggerText="Tooltip"
         direction="bottom"
         menuOffset={{ left: 10, top: 15 }}
@@ -54,6 +56,19 @@ describe('Tooltip', () => {
       it('does not render info icon', () => {
         const icon = trigger.find(Icon);
         expect(icon.exists()).toBe(false);
+      });
+      it('sets the tooltip class', () => {
+        expect(
+          floatingMenu
+            .find('[data-floating-menu-direction]')
+            .first()
+            .prop('className')
+        ).toBe('bx--tooltip tooltip--class');
+      });
+      it('sets the trigger class', () => {
+        expect(trigger.prop('className')).toBe(
+          'bx--tooltip__trigger tooltip--trigger-class'
+        );
       });
     });
   });

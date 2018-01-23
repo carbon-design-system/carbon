@@ -5,11 +5,34 @@ import window from 'window-or-global';
 
 class FloatingMenu extends React.Component {
   static propTypes = {
+    /**
+     * Contents to put into the floating menu.
+     */
     children: PropTypes.object,
-    menuPosition: PropTypes.object.isRequired,
+
+    /**
+     * The position in the viewport of the trigger button.
+     */
+    menuPosition: PropTypes.shape({
+      top: PropTypes.number,
+      right: PropTypes.number,
+      bottom: PropTypes.number,
+      left: PropTypes.number,
+    }).isRequired,
+
+    /**
+     * Where to put the tooltip, relative to the trigger button.
+     */
     menuDirection: PropTypes.oneOf(['left', 'top', 'right', 'bottom'])
       .isRequired,
-    menuOffset: PropTypes.object.isRequired,
+
+    /**
+     * The adjustment of the tooltip position.
+     */
+    menuOffset: PropTypes.shape({
+      top: PropTypes.number,
+      left: PropTypes.number,
+    }).isRequired,
     styles: PropTypes.object,
   };
 
