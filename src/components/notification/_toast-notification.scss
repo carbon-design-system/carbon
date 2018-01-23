@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
@@ -20,18 +21,15 @@
     display: flex;
     justify-content: space-between;
     width: 16.875rem;
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
     background-color: $inverse-01;
     color: $text-01;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    margin-right: 1rem;
+    margin-top: $spacing-xs;
+    margin-bottom: $spacing-xs;
+    margin-right: $spacing-md;
 
     &:first-child {
-      margin-top: 1rem;
+      margin-top: $spacing-md;
     }
   }
 
@@ -79,14 +77,14 @@
     font-weight: 600;
     letter-spacing: 0;
     line-height: 1;
-    padding-bottom: 0.125rem;
+    padding-bottom: $spacing-3xs;
   }
 
   .#{$prefix}--toast-notification__subtitle {
     @include typescale('omega');
     color: $text-03;
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-md;
     line-height: 1.2;
   }
 

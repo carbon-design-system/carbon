@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
@@ -10,7 +11,7 @@
   .#{$prefix}--snippet--code {
     @include bx--snippet;
     background-color: $snippet-background-color;
-    padding: 1rem 2.5rem 1rem 1rem;
+    padding: $spacing-md $spacing-2xl $spacing-md $spacing-md;
   }
 
   .#{$prefix}--snippet code {
@@ -20,7 +21,7 @@
   .#{$prefix}--snippet--code .#{$prefix}--snippet-container {
     max-height: rem(192px);
     overflow-y: scroll;
-    margin-right: 1rem;
+    margin-right: $spacing-md;
     position: relative;
   }
 
@@ -33,7 +34,7 @@
     background-color: $text-01;
     color: $inverse-01;
     height: 3.5rem;
-    padding: 0 2.5rem 0 1rem;
+    padding: 0 $spacing-2xl 0 $spacing-md;
   }
 
   .#{$prefix}--snippet--terminal .#{$prefix}--snippet-container {

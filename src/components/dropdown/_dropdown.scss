@@ -7,6 +7,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
@@ -56,8 +57,8 @@
     height: rem(40px);
     padding-top: rem(13px);
     padding-bottom: rem(13px);
-    padding-left: 1rem;
-    padding-right: 2.25rem;
+    padding-left: $spacing-md;
+    padding-right: $spacing-2xl;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -82,10 +83,7 @@
     display: block;
     color: currentColor;
     text-decoration: none;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
-    padding-right: 1.5rem;
+    padding: $spacing-md $spacing-lg $spacing-md $spacing-md;
     text-overflow: ellipsis;
     overflow: hidden;
 

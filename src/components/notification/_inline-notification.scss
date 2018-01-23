@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
@@ -20,11 +21,11 @@
     display: flex;
     justify-content: space-between;
     background-color: transparent;
-    padding: 0.75rem 1rem;
+    padding: $spacing-sm $spacing-md;
     min-height: rem(40px);
     color: $text-03;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: $spacing-md;
+    margin-bottom: $spacing-md;
   }
 
   .#{$prefix}--inline-notification--error {
@@ -57,7 +58,7 @@
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 1rem;
+    margin: 0 $spacing-md;
 
     @media (max-width: 640px) {
       flex-direction: column;
@@ -68,7 +69,7 @@
   .#{$prefix}--inline-notification__title {
     @include typescale('zeta');
     font-weight: 600;
-    margin-right: 0.25rem;
+    margin-right: $spacing-2xs;
     line-height: 1.125;
   }
 

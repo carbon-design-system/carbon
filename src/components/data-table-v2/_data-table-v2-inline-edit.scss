@@ -23,7 +23,7 @@
 
   &:focus {
     @include focus-outline;
-    padding: 2px;
+    padding: $spacing-3xs;
 
     .#{$prefix}--inline-edit-label__icon {
       width: auto;
@@ -46,7 +46,7 @@
   margin-left: rem(-12px);
 
   input {
-    padding-left: rem(12px);
+    padding-left: $spacing-sm;
   }
 }
 
@@ -56,7 +56,7 @@
   }
 
   select {
-    padding: 0.45rem 2.75rem 0.45rem 1rem;
+    padding: 0.45rem 2.75rem 0.45rem $spacing-md;
   }
 
   .#{$prefix}--select__arrow {

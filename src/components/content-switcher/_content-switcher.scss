@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
@@ -20,7 +21,7 @@
     background-color: transparent;
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 $spacing-xl;
     margin: 0;
     text-decoration: none;
     border: 1px solid $brand-01;

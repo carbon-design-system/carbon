@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
@@ -16,18 +17,18 @@
     @include font-family;
     @include typescale('zeta');
     @include font-smoothing;
-    margin-left: 2rem;
+    margin-left: $spacing-xl;
     line-height: 1.5;
   }
 
   .#{$prefix}--list--unordered,
   .#{$prefix}--list--ordered {
-    padding: 1rem;
+    padding: $spacing-md;
   }
 
   .#{$prefix}--list__item {
     font-weight: 600;
-    padding-left: 0.25rem;
+    padding-left: $spacing-2xs;
   }
 
   .#{$prefix}--list--unordered > .#{$prefix}--list__item {
@@ -39,7 +40,7 @@
   }
 
   .#{$prefix}--list--nested {
-    margin-left: 0.5rem;
+    margin-left: $spacing-xs;
   }
 
   .#{$prefix}--list--nested > .#{$prefix}--list__item {
@@ -49,6 +50,6 @@
 
   .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
     content: '-';
-    padding-right: 0.25rem;
+    padding-right: $spacing-2xs;
   }
 }

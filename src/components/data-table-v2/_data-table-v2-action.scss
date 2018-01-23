@@ -1,7 +1,7 @@
 .#{$prefix}--table-toolbar {
   display: flex;
-  padding-top: rem(8px);
-  padding-bottom: rem(8px);
+  padding-top: $spacing-xs;
+  padding-bottom: $spacing-xs;
   width: 100%;
   position: relative;
 
@@ -29,8 +29,8 @@
 .#{$prefix}--toolbar-action {
   @include button-reset;
   cursor: pointer;
-  padding-left: rem(12px);
-  padding-right: rem(12px);
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
 
   &:hover {
     > .#{$prefix}--toolbar-action__icon {
@@ -56,8 +56,8 @@
   }
 
   ~ .#{$prefix}--btn {
-    margin-left: rem(12px);
-    margin-right: rem(2px);
+    margin-left: $spacing-sm;
+    margin-right: $spacing-sm;
   }
 }
 
@@ -76,8 +76,8 @@
   opacity: 0;
   left: 0;
   top: 0;
-  padding-left: rem(24px);
-  padding-right: rem(24px);
+  padding-left: $spacing-lg;
+  padding-right: $spacing-lg;
   width: 100%;
   height: 100%;
   z-index: 99999;
@@ -131,7 +131,7 @@
 .#{$prefix}--action-icons {
   margin-left: auto;
   svg {
-    padding: 0 rem(12px);
+    padding: 0 $spacing-sm;
     fill: $ui-01;
     height: rem(16px);
     width: auto;
@@ -147,7 +147,7 @@
 
 .#{$prefix}--batch-summary__para {
   @include typescale('zeta');
-  margin-right: rem(24px);
+  margin-right: $spacing-lg;
 }
 
 .#{$prefix}--batch-summary__cancel {

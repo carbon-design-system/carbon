@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
@@ -49,8 +50,8 @@
     border: 1px solid $ui-04;
     width: 11.25rem;
     list-style: none;
-    margin-top: 0.25rem;
-    padding: 0.285rem 0 0.5rem;
+    margin-top: $spacing-2xs;
+    padding: $spacing-2xs 0 $spacing-xs;
     left: -20px;
   }
 
@@ -97,7 +98,7 @@
     display: inline-block;
     background-color: transparent;
     text-align: left;
-    padding: 0.5625rem 1rem;
+    padding: $spacing-xs $spacing-md;
     cursor: pointer;
 
     &:focus {
