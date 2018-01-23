@@ -23,8 +23,8 @@
 @mixin padding-td($padding: $structured-list-padding) {
   padding-left: 0;
   padding-right: $padding;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
 
   &:last-child {
     padding-right: $padding;
@@ -35,8 +35,8 @@
 @mixin padding-th($padding: $structured-list-padding) {
   padding-left: 0;
   padding-right: $padding;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
 
   &:last-child {
     padding-right: 0;

@@ -1,5 +1,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
@@ -42,7 +43,7 @@
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-xs;
   }
 
   .#{$prefix}--progress-label {

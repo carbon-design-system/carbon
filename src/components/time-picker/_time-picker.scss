@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
@@ -15,7 +16,7 @@
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
-    padding-right: rem(32px);
+    padding-right: $spacing-xl;
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select__arrow {
@@ -33,7 +34,7 @@
     width: 4.875rem;
     color: $text-01;
     height: rem(40px);
-    padding: 0 1rem;
+    padding: 0 $spacing-md;
 
     &:focus {
       @include focus-outline('border');

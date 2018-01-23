@@ -2,6 +2,7 @@ $css--helpers: true;
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/css--helpers';
@@ -19,7 +20,7 @@ $css--helpers: true;
     @include font-family;
     width: 100%;
     background-color: $ui-01;
-    padding: 0.5rem 1rem;
+    padding: $spacing-xs $spacing-md;
     display: flex;
     align-items: center;
     border: 1px solid $ui-04;
@@ -84,17 +85,17 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination__button--backward {
-    margin-left: rem(20px);
-    margin-right: rem(28px);
+    margin-left: $spacing-md;
+    margin-right: $spacing-lg;
   }
 
   .#{$prefix}--pagination__button--forward {
-    margin-left: rem(28px);
+    margin-left: $spacing-lg;
   }
 
   .#{$prefix}--pagination {
     .#{$prefix}--select {
-      margin-right: rem(10px);
+      margin-right: $spacing-xs;
     }
 
     .#{$prefix}--select--inline {
@@ -105,7 +106,7 @@ $css--helpers: true;
     .#{$prefix}--select-input {
       height: rem(24px);
       width: rem(54px);
-      padding: 0 rem(8px);
+      padding: 0 $spacing-xs;
       margin: 0;
       font-weight: 600;
 
@@ -144,8 +145,7 @@ $css--helpers: true;
       height: 100%;
       border-left: 1px solid $ui-04;
       border-right: 1px solid $ui-04;
-      padding-left: 0.9rem;
-      padding-right: 0.9rem;
+      width: rem(42px);
       margin: 0;
     }
 
@@ -154,7 +154,7 @@ $css--helpers: true;
     }
 
     .#{$prefix}--pagination__button--backward {
-      margin-left: 1rem;
+      margin-left: $spacing-md;
     }
 
     .#{$prefix}--select--inline {
@@ -163,7 +163,7 @@ $css--helpers: true;
     }
 
     .#{$prefix}--select-input {
-      padding-left: 0.9rem;
+      padding-left: $spacing-md;
     }
 
     .#{$prefix}--select__arrow {

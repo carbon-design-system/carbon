@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
@@ -19,7 +20,7 @@
     background-color: $ui-01;
     border: 1px solid $ui-03;
     position: relative;
-    padding: 1rem;
+    padding: $spacing-md;
 
     &:focus {
       @include focus-outline('border');
@@ -56,7 +57,7 @@
   }
 
   .#{$prefix}--tile--selectable {
-    padding-right: 3rem;
+    padding-right: $spacing-3xl;
   }
 
   .#{$prefix}--tile--selectable:focus {

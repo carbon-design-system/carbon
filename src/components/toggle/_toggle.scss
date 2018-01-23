@@ -3,6 +3,7 @@
 //-----------------------------
 
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
@@ -21,7 +22,7 @@
     align-items: center;
     transition: $transition--base $carbon--standard-easing;
     cursor: pointer;
-    margin: 1rem 0;
+    margin: $spacing-md 0;
   }
 
   .#{$prefix}--toggle__appearance {
@@ -63,11 +64,11 @@
   }
 
   .#{$prefix}--toggle__text--left {
-    margin-right: 0.5rem;
+    margin-right: $spacing-xs;
   }
 
   .#{$prefix}--toggle__text--right {
-    margin-left: 0.5rem;
+    margin-left: $spacing-xs;
   }
 
   .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {

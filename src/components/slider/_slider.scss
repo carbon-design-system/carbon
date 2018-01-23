@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
@@ -28,7 +29,7 @@
   .#{$prefix}--slider {
     position: relative;
     width: 100%;
-    margin: 0 1rem;
+    margin: 0 $spacing-md;
   }
 
   .#{$prefix}--slider--disabled {
@@ -54,7 +55,7 @@
     color: $text-02;
 
     &:last-of-type {
-      margin-right: 1rem;
+      margin-right: $spacing-md;
     }
   }
 
