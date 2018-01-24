@@ -4,23 +4,96 @@ import classNames from 'classnames';
 import isEqual from 'lodash.isequal';
 import TextInput from '../TextInput';
 
+const defaultFormatLabel = (value, label) => {
+  return typeof label === 'function' ? label(value) : `${value}${label}`;
+};
+
 export default class Slider extends PureComponent {
   static propTypes = {
+    /**
+     * The CSS class name for the slider.
+     */
     className: PropTypes.string,
+
+    /**
+     * `true` to hide the number input box.
+     */
     hideTextInput: PropTypes.bool,
+
+    /**
+     * The ID of the `<input>`.
+     */
     id: PropTypes.string,
+
+    /**
+     * The callback to get notified of change in value.
+     */
     onChange: PropTypes.func,
+
+    /**
+     * The value.
+     */
     value: PropTypes.number.isRequired,
+
+    /**
+     * The minimum value.
+     */
     min: PropTypes.number.isRequired,
+
+    /**
+     * The label associated with the minimum value.
+     */
     minLabel: PropTypes.string,
+
+    /**
+     * The maximum value.
+     */
     max: PropTypes.number.isRequired,
+
+    /**
+     * The label associated with the maximum value.
+     */
     maxLabel: PropTypes.string,
+
+    /**
+     * The callback to format the label associated with the minimum/maximum value.
+     */
+    formatLabel: PropTypes.func,
+
+    /**
+     * The label for the slider.
+     */
     labelText: PropTypes.string,
+
+    /**
+     * A value determining how much the value should increase/decrease by moving the thumb by mouse.
+     */
     step: PropTypes.number,
+
+    /**
+     * A value determining how much the value should increase/decrease by Shift+arrow keys,
+     * which will be `(max - min) / stepMuliplier`.
+     */
     stepMuliplier: PropTypes.number,
+
+    /**
+     * The child nodes.
+     */
     children: PropTypes.node,
+
+    /**
+     * `true` to disable this slider.
+     */
     disabled: PropTypes.bool,
+
+    /**
+     * The `name` attribute of the `<input>`.
+     */
     name: PropTypes.bool,
+
+    /**
+     * The `type` attribute of the `<input>`.
+     */
     inputType: PropTypes.string,
   };
 
@@ -208,11 +281,16 @@ export default class Slider extends PureComponent {
     const {
       className,
       hideTextInput,
-      id,
+      id = (this.inputId =
+        this.inputId ||
+        `__carbon-slider_${Math.random()
+          .toString(36)
+          .substr(2)}`),
       min,
       minLabel,
       max,
       maxLabel,
+      formatLabel = defaultFormatLabel,
       labelText,
       step,
       stepMuliplier, // eslint-disable-line no-unused-vars
@@ -245,8 +323,7 @@ export default class Slider extends PureComponent {
         </label>
         <div className="bx--slider-container">
           <span className="bx--slider__range-label">
-            <span>{min}</span>
-            <span>{minLabel}</span>
+            {formatLabel(min, minLabel)}
           </span>
           <div
             className={sliderClasses}
@@ -293,8 +370,7 @@ export default class Slider extends PureComponent {
             />
           </div>
           <span className="bx--slider__range-label">
-            <span>{max}</span>
-            <span>{maxLabel}</span>
+            {formatLabel(max, maxLabel)}
           </span>
           {!hideTextInput && (
             <TextInput
