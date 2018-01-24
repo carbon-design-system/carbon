@@ -17,7 +17,7 @@
     @include reset;
     @include font-family;
     @include font-smoothing;
-    @include layer('overlay')
+    @include layer('overlay');
     display: flex;
     justify-content: space-between;
     width: 16.875rem;
