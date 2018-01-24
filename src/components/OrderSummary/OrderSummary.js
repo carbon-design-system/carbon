@@ -37,9 +37,11 @@ export class OrderSummaryHeader extends Component {
     const {
       children,
       className,
-      id = `order__summary__header__id_${Math.random()
-        .toString(36)
-        .substr(2)}`,
+      id = (this._sectionId =
+        this._sectionId ||
+        `order__summary__header__id_${Math.random()
+          .toString(36)
+          .substr(2)}`),
       title,
       ...other
     } = this.props;
@@ -191,9 +193,11 @@ export class OrderSummaryFooter extends Component {
   render() {
     const {
       className,
-      id = `order__summary__footer__id_${Math.random()
-        .toString(36)
-        .substr(2)}`,
+      id = (this._sectionId =
+        this._sectionId ||
+        `order__summary__footer__id_${Math.random()
+          .toString(36)
+          .substr(2)}`),
       footerText,
       linkText,
       href,
