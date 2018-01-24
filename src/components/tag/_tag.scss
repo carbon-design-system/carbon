@@ -1,5 +1,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import 'mixins';
@@ -10,9 +11,9 @@
     @include typescale('omega');
     display: inline-flex;
     align-items: center;
-    padding: 0 0.625rem;
+    padding: 0 $spacing-xs;
     height: 1.25rem;
-    margin: 0.1875rem;
+    margin: $spacing-3xs;
     border-radius: rem(15px);
 
     &:not(:first-child) {

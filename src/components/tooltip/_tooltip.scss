@@ -1,5 +1,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
@@ -23,7 +24,7 @@
 
     svg {
       fill: $brand-01;
-      margin-left: 0.625rem;
+      margin-left: $spacing-xs;
       cursor: pointer;
 
       &:focus {
@@ -47,7 +48,7 @@
     display: none;
     max-width: rem(240px);
     background: $ui-01;
-    padding: 1.5rem;
+    padding: $spacing-lg;
     border: 1px solid $ui-04;
     z-index: z('floating');
 
@@ -58,7 +59,7 @@
 
     .#{$prefix}--tooltip__label {
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: $spacing-xs;
     }
 
     &:before {
@@ -77,7 +78,7 @@
     }
 
     &[data-floating-menu-direction='left'] {
-      margin-left: -.6rem;
+      margin-left: -$spacing-sm;
 
       &:before {
         left: auto;
@@ -96,7 +97,7 @@
     }
 
     &[data-floating-menu-direction='right'] {
-      margin-left: 0.6rem;
+      margin-left: $spacing-sm;
 
       &:before {
         left: rem(-6px);
@@ -124,7 +125,7 @@
 
     svg {
       fill: $brand-01;
-      margin-left: 0.625rem;
+      margin-left: $spacing-xs;
     }
 
     // Tooltip - renders as a combo of :before and :after elements
@@ -140,7 +141,7 @@
       @include typescale('zeta');
       @include layer('overlay');
       max-width: rem(240px);
-      padding: 1.5rem;
+      padding: $spacing-lg;
       border: 1px solid $ui-04;
       margin-left: 50%;
       color: $text-01;

@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
@@ -30,7 +31,7 @@
     background-color: $field-01;
     color: $text-01;
     font-weight: 600;
-    padding: 0 2.5rem 0 2.5rem;
+    padding: 0 $spacing-2xl;
     text-overflow: ellipsis;
     width: 100%;
 
@@ -94,7 +95,7 @@
     height: rem(40px);
     width: rem(40px);
     min-width: rem(40px);
-    margin-left: 0.25rem;
+    margin-left: $spacing-2xs;;
     background-color: $ui-01;
     position: relative;
     padding: 0;

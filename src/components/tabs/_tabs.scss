@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
@@ -33,7 +34,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: rem(13px) rem(16px);
+    padding: 0 $spacing-md;
+    height: rem(40px);
     cursor: pointer;
     background-color: $field-01;
 
@@ -75,8 +77,8 @@
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
       flex-direction: row;
-      margin-right: rem(16px);
-      margin-left: rem(16px);
+      margin-right: $spacing-md;
+      margin-left: $spacing-md;
       background: none;
       box-shadow: none;
     }
@@ -111,7 +113,7 @@
 
     @include breakpoint(bp--sm--major) {
       background: transparent;
-      padding: 0.725rem 0 rem(10px);
+      padding: $spacing-sm 0 $spacing-sm;
 
       & + & {
         margin-left: rem(48px);
@@ -147,7 +149,7 @@
     display: inline-block;
     color: $text-01;
     text-decoration: none;
-    padding: 1rem;
+    padding: $spacing-md;
     width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -159,7 +161,7 @@
     }
 
     @include breakpoint(bp--sm--major) {
-      padding: 0.05rem;
+      padding: 0 $spacing-3xs;
       width: auto;
 
       &:hover {
