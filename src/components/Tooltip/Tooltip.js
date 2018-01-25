@@ -8,6 +8,15 @@ import ClickListener from '../../internal/ClickListener';
 export default class Tooltip extends Component {
   static propTypes = {
     /**
+     * The ID of the trigger button.
+     */
+    triggerId: PropTypes.string,
+
+    /**
+     * The ID of the tooltip content.
+     */
+    tooltipId: PropTypes.string,
+    /**
      * Open/closed state.
      */
     open: PropTypes.bool,
@@ -122,6 +131,16 @@ export default class Tooltip extends Component {
 
   render() {
     const {
+      triggerId = (this.triggerId =
+        this.triggerId ||
+        `__carbon-tooltip-trigger_${Math.random()
+          .toString(36)
+          .substr(2)}`),
+      tooltipId = (this.tooltipId =
+        this.tooltipId ||
+        `__carbon-tooltip_${Math.random()
+          .toString(36)
+          .substr(2)}`),
       children,
       className,
       triggerClassName,
@@ -137,9 +156,11 @@ export default class Tooltip extends Component {
       ...other
     } = this.props;
 
+    const { open } = this.state;
+
     const tooltipClasses = classNames(
       'bx--tooltip',
-      { 'bx--tooltip--shown': this.state.open },
+      { 'bx--tooltip--shown': open },
       className
     );
 
@@ -152,6 +173,7 @@ export default class Tooltip extends Component {
             <div className={triggerClasses}>
               {triggerText}
               <div
+                id={triggerId}
                 role="button"
                 tabIndex="0"
                 ref={node => {
@@ -160,7 +182,10 @@ export default class Tooltip extends Component {
                 onMouseOver={() => this.handleMouse('over')}
                 onMouseOut={() => this.handleMouse('out')}
                 onFocus={() => this.handleMouse('over')}
-                onBlur={() => this.handleMouse('out')}>
+                onBlur={() => this.handleMouse('out')}
+                aria-haspopup="true"
+                aria-owns={tooltipId}
+                aria-expanded={open}>
                 <Icon
                   onKeyDown={this.handleKeyPress}
                   onClick={() => this.handleMouse('click')}
@@ -171,6 +196,7 @@ export default class Tooltip extends Component {
             </div>
           ) : (
             <div
+              id={triggerId}
               className={triggerClasses}
               ref={node => {
                 this.triggerEl = node;
@@ -178,7 +204,10 @@ export default class Tooltip extends Component {
               onMouseOver={() => this.handleMouse('over')}
               onMouseOut={() => this.handleMouse('out')}
               onFocus={() => this.handleMouse('over')}
-              onBlur={() => this.handleMouse('out')}>
+              onBlur={() => this.handleMouse('out')}
+              aria-haspopup="true"
+              aria-owns={tooltipId}
+              aria-expanded={open}>
               {triggerText}
             </div>
           )}
@@ -188,9 +217,11 @@ export default class Tooltip extends Component {
           menuDirection={direction}
           menuOffset={menuOffset}>
           <div
+            id={tooltipId}
             className={tooltipClasses}
             {...other}
-            data-floating-menu-direction={direction}>
+            data-floating-menu-direction={direction}
+            aria-labelledby={triggerId}>
             {children}
           </div>
         </FloatingMenu>
