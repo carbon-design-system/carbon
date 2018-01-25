@@ -42,8 +42,8 @@ export default class Dropdown extends PureComponent {
     let matchingChild;
     React.Children.forEach(children, child => {
       if (
-        child.props.itemText === selectedText ||
-        child.props.value === value
+        child &&
+        (child.props.itemText === selectedText || child.props.value === value)
       ) {
         matchingChild = child;
       }
@@ -96,14 +96,16 @@ export default class Dropdown extends PureComponent {
       ...other
     } = this.props;
 
-    const children = React.Children.map(this.props.children, child =>
-      React.cloneElement(child, {
-        onClick: (...args) => {
-          child.props.onClick && child.props.onClick(...args);
-          this.handleItemClick(...args);
-        },
-      })
-    );
+    const children = React.Children.toArray(this.props.children)
+      .filter(Boolean)
+      .map(child =>
+        React.cloneElement(child, {
+          onClick: (...args) => {
+            child.props.onClick && child.props.onClick(...args);
+            this.handleItemClick(...args);
+          },
+        })
+      );
 
     const dropdownClasses = classNames({
       'bx--dropdown': true,
