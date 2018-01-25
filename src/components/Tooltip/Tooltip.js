@@ -152,6 +152,8 @@ export default class Tooltip extends Component {
             <div className={triggerClasses}>
               {triggerText}
               <div
+                role="button"
+                tabIndex="0"
                 ref={node => {
                   this.triggerEl = node;
                 }}
@@ -162,8 +164,6 @@ export default class Tooltip extends Component {
                 <Icon
                   onKeyDown={this.handleKeyPress}
                   onClick={() => this.handleMouse('click')}
-                  role="button"
-                  tabIndex="0"
                   name={iconName}
                   description={iconDescription}
                 />

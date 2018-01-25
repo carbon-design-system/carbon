@@ -131,7 +131,9 @@ export default class Dropdown extends PureComponent {
             />
           </li>
           <li>
-            <ul className="bx--dropdown-list">{children}</ul>
+            <ul role="menu" className="bx--dropdown-list">
+              {children}
+            </ul>
           </li>
         </ul>
       </ClickListener>
