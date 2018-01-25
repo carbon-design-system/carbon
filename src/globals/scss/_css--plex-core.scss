@@ -32,7 +32,7 @@ $weights: (
     font-style: normal,
     font-weight: 600,
   )
-);
+) !default;
 
 @mixin plex-font-face {
   @each $family, $name in $families {
