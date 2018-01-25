@@ -1,30 +1,3 @@
-export ComposedModal, {
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from './components/ComposedModal';
-export { Module, ModuleBody, ModuleHeader } from './components/Module';
-export {
-  ProgressIndicator,
-  ProgressStep,
-} from './components/ProgressIndicator';
-export {
-  OrderSummary,
-  OrderSummaryHeader,
-  OrderSummaryCategory,
-  OrderSummaryList,
-  OrderSummaryListItem,
-  OrderSummaryTotal,
-  OrderSummaryFooter,
-} from './components/OrderSummary';
-export {
-  StructuredListWrapper,
-  StructuredListHead,
-  StructuredListBody,
-  StructuredListRow,
-  StructuredListInput,
-  StructuredListCell,
-} from './components/StructuredList';
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
 export Breadcrumb from './components/Breadcrumb';
@@ -38,6 +11,12 @@ export CardFooter from './components/CardFooter';
 export CardStatus from './components/CardStatus';
 export Checkbox from './components/Checkbox';
 export CodeSnippet from './components/CodeSnippet';
+export ComboBox from './components/ComboBox';
+export ComposedModal, {
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from './components/ComposedModal';
 export ContentSwitcher from './components/ContentSwitcher';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
@@ -46,6 +25,7 @@ export DatePickerInput from './components/DatePickerInput';
 export DetailPageHeader from './components/DetailPageHeader';
 export Dropdown from './components/Dropdown';
 export DropdownItem from './components/DropdownItem';
+export DropdownV2 from './components/DropdownV2';
 export FileUploader, {
   Filename,
   FileUploaderButton,
@@ -64,6 +44,8 @@ export ListItem from './components/ListItem';
 export Loading from './components/Loading';
 export Modal from './components/Modal';
 export ModalWrapper from './components/ModalWrapper';
+export { Module, ModuleBody, ModuleHeader } from './components/Module';
+export MultiSelect from './components/MultiSelect';
 export Notification, {
   ToastNotification,
   InlineNotification,
@@ -72,10 +54,23 @@ export Notification, {
 } from './components/Notification';
 export NumberInput from './components/NumberInput';
 export OrderedList from './components/OrderedList';
+export {
+  OrderSummary,
+  OrderSummaryHeader,
+  OrderSummaryCategory,
+  OrderSummaryList,
+  OrderSummaryListItem,
+  OrderSummaryTotal,
+  OrderSummaryFooter,
+} from './components/OrderSummary';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
 export PrimaryButton from './components/PrimaryButton';
+export {
+  ProgressIndicator,
+  ProgressStep,
+} from './components/ProgressIndicator';
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
@@ -85,6 +80,14 @@ export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
 export Switch from './components/Switch';
 export Slider from './components/Slider';
+export {
+  StructuredListWrapper,
+  StructuredListHead,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListInput,
+  StructuredListCell,
+} from './components/StructuredList';
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
 export Table from './components/Table';
