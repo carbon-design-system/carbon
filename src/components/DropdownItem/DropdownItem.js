@@ -9,6 +9,7 @@ const DropdownItem = ({
   onClick,
   onKeyPress,
   href,
+  selected,
   ...other
 }) => {
   const dropdownItemClasses = classNames({
@@ -40,7 +41,8 @@ const DropdownItem = ({
       onClick={handleClick}
       onKeyPress={handleKeypress}
       tabIndex={-1}
-      role="menuitem">
+      aria-selected={selected}
+      role="option">
       <a
         href={href}
         onClick={/* istanbul ignore next */ evt => evt.preventDefault()}
@@ -58,12 +60,14 @@ DropdownItem.propTypes = {
   onClick: PropTypes.func,
   onKeyPress: PropTypes.func,
   href: PropTypes.string,
+  selected: PropTypes.bool,
 };
 
 DropdownItem.defaultProps = {
   onClick: /* istanbul ignore next */ () => {},
   onKeyPress: /* istanbul ignore next */ () => {},
   href: '',
+  selected: false,
 };
 
 export default DropdownItem;
