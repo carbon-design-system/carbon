@@ -154,15 +154,14 @@ export class SelectableTile extends Component {
     );
 
     return (
-      // eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/onclick-has-role
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <label
         htmlFor={id}
         className={classes}
         tabIndex={tabIndex}
         {...other}
         onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}
-        role="presentation">
+        onKeyDown={this.handleKeyDown}>
         <input
           ref={input => {
             this.input = input;
