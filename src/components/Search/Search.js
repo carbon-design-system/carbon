@@ -10,7 +10,7 @@ export default class Search extends Component {
     type: PropTypes.string,
     small: PropTypes.bool,
     placeHolderText: PropTypes.string,
-    labelText: PropTypes.string.isRequired,
+    labelText: PropTypes.node.isRequired,
     id: PropTypes.string,
     searchButtonLabelText: PropTypes.string,
     layoutButtonLabelText: PropTypes.string,
