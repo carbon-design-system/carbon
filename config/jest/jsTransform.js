@@ -7,17 +7,19 @@ const { createTransformer } = require('babel-jest');
 const babelOptions = {
   presets: [
     [
-      'env',
+      '@babel/preset-env',
       {
         targets: {
           browsers: ['last 1 versions', 'Firefox ESR'],
         },
       },
     ],
-    'react',
-    'stage-1',
+    '@babel/preset-stage-1',
+    '@babel/preset-react',
   ],
-  plugins: ['transform-object-assign'],
+  // Adding in here otherwise Jest complains about no plugin for class
+  // properties
+  plugins: ['@babel/plugin-proposal-class-properties'],
 };
 
 module.exports = createTransformer(babelOptions);

@@ -12,8 +12,8 @@ const OverflowMenuItem = ({
   ...other
 }) => {
   const overflowMenuBtnClasses = classNames(
-    ([className]: className),
-    'bx--overflow-menu-options__btn'
+    'bx--overflow-menu-options__btn',
+    className
   );
 
   const overflowMenuItemClasses = classNames(
