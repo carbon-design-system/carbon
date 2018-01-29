@@ -97,14 +97,12 @@ export default class InteriorLeftNav extends Component {
     } = this.props;
 
     const newChildren = React.Children.map(children, (child, index) => {
-      let newChild;
       if (child.type === InteriorLeftNavList) {
-        newChild = this.buildNewListChild(child, index);
-      } else {
-        newChild = this.buildNewItemChild(child, index);
+        return this.buildNewListChild(child, index);
+      } else if (child.type === InteriorLeftNavItem) {
+        return this.buildNewItemChild(child, index);
       }
-
-      return newChild;
+      return child;
     });
 
     const classNames = classnames(

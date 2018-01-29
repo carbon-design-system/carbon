@@ -32,6 +32,7 @@ describe('InteriorLeftNav', () => {
             className="test-child">
             <a href="http://www.carbondesignsystem.com">test-title</a>
           </InteriorLeftNavItem>
+          <div data-child-div>foo</div>
         </InteriorLeftNav>
       );
       expect(interiorLeftNav.find('.left-nav-list').length).toEqual(2);
@@ -39,6 +40,11 @@ describe('InteriorLeftNav', () => {
       expect(
         interiorLeftNav.find('.bx--interior-left-nav-collapse').length
       ).toEqual(1);
+      expect(
+        interiorLeftNav
+          .find('[data-child-div]')
+          .matchesElement(<div data-child-div>foo</div>)
+      ).toBe(true);
     });
   });
 
