@@ -88,11 +88,12 @@
     top: 6px;
     z-index: 1;
     transition: $transition--base $carbon--standard-easing;
+    transform: scale(.2);
   }
 
   .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
     fill: $brand-01;
-    transform: translateX(16px);
+    transform: scale(1) translateX(16px);
   }
     
   .#{$prefix}--toggle__text--left,
