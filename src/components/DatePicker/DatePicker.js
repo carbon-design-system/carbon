@@ -88,9 +88,9 @@ export default class DatePicker extends Component {
     ) {
       this.cal.destroy();
     }
-    this.inputField.removeEventListener(this.onChange);
+    this.inputField.removeEventListener('change', this.onChange);
     if (this.toInputField) {
-      this.toInputField.removeEventListener(this.onChange);
+      this.toInputField.removeEventListener('change', this.onChange);
     }
   }
 
