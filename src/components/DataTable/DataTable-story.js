@@ -230,6 +230,7 @@ class BasicDataTable extends Component {
               </DataTableActionList>
             </DataTableBatchActions>
             <DataTableSearch
+              id="id-search"
               onInput={this.searchTable}
               onChange={this.searchTable}
             />
