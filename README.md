@@ -41,7 +41,7 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 	$ npm run storybook
 	```
 
-2. Open browser to `http://localhost:8080/`.
+2. Open browser to `http://localhost:9000/`.
 
 3. Develop components in their respective folders (`/components` or `/internal`).
 
