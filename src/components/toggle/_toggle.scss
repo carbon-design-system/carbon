@@ -57,6 +57,45 @@
     }
   }
 
+  .#{$prefix}--toggle--small + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+    width: 32px;
+    height: 16px;
+
+    &:before {
+      box-sizing: border-box;
+      height: 16px;
+      width: 32px;
+      border-radius: 0.9375rem;
+      background-color: transparent;
+      border: 2px solid $ui-05;
+      top: 0;
+    }
+
+    &:after {
+      width: 10px;
+      height: 10px;
+      background-color: $ui-05;
+      border: none;
+      top: 3px;
+      left: 3px;
+    }
+  }
+
+  .#{$prefix}--toggle__check {
+    fill: $ui-05;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    z-index: 1;
+    transition: $transition--base $carbon--standard-easing;
+    transform: scale(.2);
+  }
+
+  .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
+    fill: $brand-01;
+    transform: scale(1) translateX(16px);
+  }
+    
   .#{$prefix}--toggle__text--left,
   .#{$prefix}--toggle__text--right {
     @include typescale('zeta');
@@ -84,6 +123,20 @@
     }
   }
 
+  .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+    &:before {
+      background-color: $brand-01;
+      border-color: $brand-01;
+    }
+
+    &:after {
+      background-color: $ui-01;
+      border-color: $ui-01;
+      margin-left: 0px;
+      transform: translateX(17px);
+    }
+  }
+
   .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
       outline: 1px solid transparent;
@@ -91,6 +144,18 @@
 
     .#{$prefix}--toggle__appearance:after {
       @include focus-outline('blurred');
+    }
+  }
+
+  .#{$prefix}--toggle--small:focus + .#{$prefix}--toggle__label {
+    .#{$prefix}--toggle__appearance:before {
+      
+      @include focus-outline('blurred');
+    }
+
+    .#{$prefix}--toggle__appearance:after {
+      outline: none;
+      box-shadow: none;
     }
   }
 
