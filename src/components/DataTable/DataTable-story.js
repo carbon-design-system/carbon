@@ -250,7 +250,7 @@ class BasicDataTable extends Component {
                 iconDescription="Settings"
                 onClick={action('Toolbar Action 1')}
               />
-              <Button onClick={action('Add new row')} kind="primary">
+              <Button onClick={action('Add new row')} small kind="primary">
                 Add new
               </Button>
             </DataTableToolbarContent>
