@@ -26,6 +26,7 @@ exports[`ListBoxField should render 1`] = `
           role="img"
         >
           <svg
+            alt="Clear selected item"
             aria-label="Clear selected item"
             fillRule="evenodd"
             height="10"

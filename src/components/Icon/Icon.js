@@ -105,7 +105,7 @@ const Icon = ({
   const svgContent = icon ? svgShapes(icon.svgData) : '';
 
   return (
-    <svg {...props} aria-label={description}>
+    <svg {...props} aria-label={description} alt={description}>
       <title>{description}</title>
       {svgContent}
     </svg>
