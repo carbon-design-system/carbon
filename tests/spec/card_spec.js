@@ -1,22 +1,23 @@
 import Card from '../../src/components/card/card';
+import flattenOptions from '../utils/flatten-options';
 
 describe('Test card', function() {
   describe('Constructor', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Card();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Card(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should set default options', function() {
       const cardlist = new Card(document.createElement('div'));
-      expect(cardlist.options).to.deep.equal({
+      expect(flattenOptions(cardlist.options)).toEqual({
         selectorInit: '[data-card-list]',
         selectorCard: '.bx--card',
       });
@@ -26,9 +27,8 @@ describe('Test card', function() {
   describe('Keyboard navigation', function() {
     let element;
     let cardNodes;
-    let spyFocus;
 
-    before(function() {
+    beforeAll(function() {
       element = document.createElement('div');
       cardNodes = [...new Array(2)].map(() => {
         const cardNode = document.createElement('div');
@@ -45,44 +45,37 @@ describe('Test card', function() {
     });
 
     it('Should focus on the new active card upon right key', function() {
-      spyFocus = sinon.spy(cardNodes[1], 'focus');
+      spyOn(cardNodes[1], 'focus');
       cardNodes[0].dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           which: 39,
         })
       );
-      expect(spyFocus).to.be.calledOnce;
+      expect(cardNodes[1].focus).toHaveBeenCalledTimes(1);
     });
 
     it('Should handle out of range index', function() {
       cardNodes[1].focus();
-      spyFocus = sinon.spy(cardNodes[0], 'focus');
+      spyOn(cardNodes[0], 'focus');
       cardNodes[1].dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           which: 39,
         })
       );
-      expect(spyFocus).to.be.calledOnce;
+      expect(cardNodes[0].focus).toHaveBeenCalledTimes(1);
     });
 
     it('Should focus on the new active card upon left key', function() {
-      spyFocus = sinon.spy(cardNodes[1], 'focus');
+      spyOn(cardNodes[1], 'focus');
       cardNodes[0].dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           which: 37,
         })
       );
-      expect(spyFocus).to.be.calledOnce;
+      expect(cardNodes[1].focus).toHaveBeenCalledTimes(1);
     });
 
-    afterEach(function() {
-      if (spyFocus) {
-        spyFocus.restore();
-        spyFocus = null;
-      }
-    });
-
-    after(function() {
+    afterAll(function() {
       document.body.focus(); // Removing focused element seems to cause IE bug `document.activeElement` returning an empty object
       const card = Card.components.get(element);
       document.body.removeChild(element);
@@ -95,7 +88,7 @@ describe('Test card', function() {
   describe('Managing instances', function() {
     let element;
 
-    before(function() {
+    beforeAll(function() {
       element = document.createElement('div');
     });
 
@@ -105,7 +98,7 @@ describe('Test card', function() {
       try {
         first = Card.create(element);
         second = Card.create(element);
-        expect(first).to.equal(second);
+        expect(first).toBe(second);
       } finally {
         first && first.release();
         if (first !== second) {
@@ -121,7 +114,7 @@ describe('Test card', function() {
         first = Card.create(element);
         first.release();
         second = Card.create(element);
-        expect(first).not.to.equal(second);
+        expect(first).not.toBe(second);
       } finally {
         first && first.release();
         if (first !== second) {

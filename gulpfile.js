@@ -42,22 +42,19 @@ const del = require('del');
 
 // Test environment
 const Server = require('karma').Server;
-const cloptions = require('minimist')(process.argv.slice(2), {
-  alias: {
-    k: 'keepalive',
-    p: 'port',
-    r: 'rollup',
-  },
-  default: {
-    port: 3000,
-    serverport: 8080,
-  },
-  boolean: ['keepalive', 'rollup'],
-});
+const commander = require('commander');
+
+const assign = v => v;
+const cloptions = commander
+  .option('-k, --keepalive', 'Keeps browser open after first run of Karma test finishes')
+  .option('--name [name]', 'Component name used for aXe testing', assign, '')
+  .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
+  .option('-r, --rollup', 'Uses Rollup for dev env')
+  .option('--serverport [port]', 'Uses the given port for dev env server', assign, 8080)
+  .parse(process.argv);
 
 // Axe A11y Test
 const axe = require('gulp-axe-webdriver');
-const axeArgs = require('minimist')(process.argv.slice(2));
 
 /**
  * BrowserSync
@@ -344,7 +341,7 @@ gulp.task('test:unit', done => {
 });
 
 gulp.task('test:a11y', ['sass:compiled'], done => {
-  const componentName = axeArgs.name === undefined ? undefined : axeArgs.name;
+  const componentName = cloptions.name;
   const options = {
     a11yCheckOptions: {
       rules: {
@@ -357,9 +354,9 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
     showOnlyViolations: true,
     exclude: '.offleft, #flex-col, #flex-row',
     tags: ['wcag2aa', 'wcag2a'],
-    folderOutputReport: componentName === undefined ? 'tests/axe/allHtml' : 'tests/axe',
-    saveOutputIn: componentName === undefined ? `a11y-html.json` : `a11y-${componentName}.json`,
-    urls: componentName === undefined ? ['http://localhost:3000'] : [`http://localhost:3000/components/${componentName}/`],
+    folderOutputReport: !componentName ? 'tests/axe/allHtml' : 'tests/axe',
+    saveOutputIn: !componentName ? `a11y-html.json` : `a11y-${componentName}.json`,
+    urls: !componentName ? ['http://localhost:3000'] : [`http://localhost:3000/component/${componentName}/`],
   };
 
   return axe(options, done);

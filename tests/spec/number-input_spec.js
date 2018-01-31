@@ -2,6 +2,7 @@ import Promise from 'bluebird'; // For testing on browsers not supporting Promis
 import EventManager from '../utils/event-manager';
 import NumberInput from '../../src/components/number-input/number-input';
 import HTML from '../../src/components/number-input/number-input.html';
+import flattenOptions from '../utils/flatten-options';
 
 describe('Test Number Input', function() {
   describe('Constructor', function() {
@@ -9,7 +10,7 @@ describe('Test Number Input', function() {
     let instance;
     let container;
 
-    before(function() {
+    beforeAll(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -20,23 +21,23 @@ describe('Test Number Input', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new NumberInput();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new NumberInput(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('should set default options', function() {
-      expect(instance.options).to.deep.equal({
+      expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-numberinput]',
         selectorInput: '.bx--number input',
       });
     });
 
-    after(function() {
+    afterAll(function() {
       document.body.removeChild(container);
       instance.release();
     });
@@ -56,21 +57,20 @@ describe('Test Number Input', function() {
     });
 
     it('Should be called on click', function() {
-      const spy = sinon.spy(instance, '_handleClick');
+      spyOn(instance, '_handleClick');
       const event = new CustomEvent('click', { bubbles: true });
       const clickTarget = element.querySelector('.up-icon');
       clickTarget.dispatchEvent(event);
-      expect(spy).to.have.been.called;
-      spy.restore();
+      expect(instance._handleClick).toHaveBeenCalled();
     });
 
     it('Should emit a change event', function() {
-      const spyOnChange = sinon.spy();
+      const spyOnChange = jasmine.createSpy();
       document.body.addEventListener('change', spyOnChange);
       const event = new CustomEvent('click', { bubbles: true });
       const clickTarget = element.querySelector('.up-icon');
       clickTarget.dispatchEvent(event);
-      expect(spyOnChange).to.have.been.called;
+      expect(spyOnChange).toHaveBeenCalled();
     });
 
     afterEach(function() {
@@ -86,7 +86,7 @@ describe('Test Number Input', function() {
     let container;
     const events = new EventManager();
 
-    before(function() {
+    beforeAll(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -102,8 +102,8 @@ describe('Test Number Input', function() {
         events.on(document.body, 'change', resolve);
         upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
-      expect(e.cancelable).to.be.false;
-      expect(inputNode.value).to.equal('1');
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe('1');
     });
 
     it('Should decrease the value', async function() {
@@ -113,15 +113,15 @@ describe('Test Number Input', function() {
         events.on(document.body, 'change', resolve);
         downArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
-      expect(e.cancelable).to.be.false;
-      expect(inputNode.value).to.equal('0');
+      expect(e.cancelable).toBe(false);
+      expect(inputNode.value).toBe('0');
     });
 
     afterEach(function() {
       events.reset();
     });
 
-    after(function() {
+    afterAll(function() {
       document.body.removeChild(container);
       instance.release();
     });
@@ -131,7 +131,7 @@ describe('Test Number Input', function() {
     let element;
     let container;
 
-    before(function() {
+    beforeAll(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -144,7 +144,7 @@ describe('Test Number Input', function() {
       try {
         first = NumberInput.create(element);
         second = NumberInput.create(element);
-        expect(first).to.equal(second);
+        expect(first).toBe(second);
       } finally {
         first && first.release();
         if (first !== second) {
@@ -160,7 +160,7 @@ describe('Test Number Input', function() {
         first = NumberInput.create(element);
         first.release();
         second = NumberInput.create(element);
-        expect(first).not.to.equal(second);
+        expect(first).not.toBe(second);
       } finally {
         first && first.release();
         if (first !== second) {
@@ -169,7 +169,7 @@ describe('Test Number Input', function() {
       }
     });
 
-    after(function() {
+    afterAll(function() {
       document.body.removeChild(container);
     });
   });

@@ -27,18 +27,20 @@ function flattenOptions(options) {
  */
 function augmentFlatpickr(calendar) {
   const container = calendar._;
-  if (container.changeEvent) {
-    container._changeEvent = container.changeEvent; // eslint-disable-line no-underscore-dangle
+  if (container) {
+    if (container.changeEvent) {
+      container._changeEvent = container.changeEvent; // eslint-disable-line no-underscore-dangle
+    }
+    Object.defineProperty(container, 'changeEvent', {
+      get() {
+        return this._changeEvent;
+      },
+      set(value) {
+        value.detail = Object.assign(value.detail || {}, { fromFlatpickr: true });
+        this._changeEvent = value;
+      },
+    });
   }
-  Object.defineProperty(container, 'changeEvent', {
-    get() {
-      return this._changeEvent;
-    },
-    set(value) {
-      value.detail = Object.assign(value.detail || {}, { fromFlatpickr: true });
-      this._changeEvent = value;
-    },
-  });
   return calendar;
 }
 

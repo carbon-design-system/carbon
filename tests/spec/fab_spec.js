@@ -5,13 +5,13 @@ describe('Test floating action button', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new FabButton();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new FabButton(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
   });
 
@@ -19,7 +19,7 @@ describe('Test floating action button', function() {
     let fab;
     let element;
 
-    before(function() {
+    beforeAll(function() {
       element = document.createElement('a');
       fab = new FabButton(element);
       document.body.appendChild(element);
@@ -28,26 +28,26 @@ describe('Test floating action button', function() {
     it('Should cancel the event for <a>', function() {
       // eslint-disable-next-line max-len
       // https://connect.microsoft.com/IE/feedback/details/790389/event-defaultprevented-returns-false-after-preventdefault-was-called
-      expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).to.be.false;
+      expect(element.dispatchEvent(new CustomEvent('click', { cancelable: true }))).toBe(false);
     });
 
     it('Should turn to open state from closed state', function() {
       element.dataset.state = 'open';
       element.dispatchEvent(new CustomEvent('click'));
-      expect(element.dataset.state).to.equal('closed');
+      expect(element.dataset.state).toBe('closed');
     });
 
     it('Should turn to closed state from open state', function() {
       element.dataset.state = 'closed';
       element.dispatchEvent(new CustomEvent('click'));
-      expect(element.dataset.state).to.equal('open');
+      expect(element.dataset.state).toBe('open');
     });
 
     afterEach(function() {
       element.dataset.state = 'open';
     });
 
-    after(function() {
+    afterAll(function() {
       fab.release();
       document.body.removeChild(element);
     });
@@ -56,7 +56,7 @@ describe('Test floating action button', function() {
   describe('Managing instances', function() {
     let element;
 
-    before(function() {
+    beforeAll(function() {
       element = document.createElement('a');
     });
 
@@ -66,7 +66,7 @@ describe('Test floating action button', function() {
       try {
         first = FabButton.create(element);
         second = FabButton.create(element);
-        expect(first).to.equal(second);
+        expect(first).toBe(second);
       } finally {
         first && first.release();
         if (first !== second) {
@@ -82,7 +82,7 @@ describe('Test floating action button', function() {
         first = FabButton.create(element);
         first.release();
         second = FabButton.create(element);
-        expect(first).not.to.equal(second);
+        expect(first).not.toBe(second);
       } finally {
         first && first.release();
         if (first !== second) {
@@ -96,7 +96,7 @@ describe('Test floating action button', function() {
     let element;
     let initContext;
 
-    before(function() {
+    beforeAll(function() {
       initContext = FabButton.init();
       element = document.createElement('a');
       element.dataset.fab = '';
@@ -106,18 +106,14 @@ describe('Test floating action button', function() {
 
     it('Should create an instance upon clicking', function() {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(element.dataset.state).to.equal('closed');
+      expect(element.dataset.state).toBe('closed');
     });
 
     it('Should not create a new instance upon clicking if one has been there already', function() {
-      const stubComponentsSet = sinon.stub(FabButton.components, 'set');
-      try {
-        element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(element.dataset.state).to.equal('closed');
-        expect(stubComponentsSet).not.have.been.called;
-      } finally {
-        stubComponentsSet.restore();
-      }
+      spyOn(FabButton.components, 'set').and.callThrough();
+      element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      expect(element.dataset.state).toBe('closed');
+      expect(FabButton.components.set).not.toHaveBeenCalled();
     });
 
     it('Should provide a way to remove event listener', function() {
@@ -136,7 +132,7 @@ describe('Test floating action button', function() {
       try {
         FabButton.init(container).release();
         elementInContainer.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-        expect(elementInContainer.dataset.state).not.to.equal('closed');
+        expect(elementInContainer.dataset.state).not.toBe('closed');
       } finally {
         document.body.removeChild(container);
       }
@@ -146,7 +142,7 @@ describe('Test floating action button', function() {
       element.dataset.state = 'open';
     });
 
-    after(function() {
+    afterAll(function() {
       const fab = FabButton.components.get(element);
       if (fab) {
         fab.release();

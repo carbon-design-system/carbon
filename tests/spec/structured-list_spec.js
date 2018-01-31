@@ -1,5 +1,6 @@
 import StructuredList from '../../src/components/structured-list/structured-list';
 import HTML from '../../src/components/structured-list/structured-list--selection.html';
+import flattenOptions from '../utils/flatten-options';
 
 describe('StructuredList', function() {
   describe('Constructor', function() {
@@ -7,7 +8,7 @@ describe('StructuredList', function() {
     let element;
     let wrapper;
 
-    before(function() {
+    beforeAll(function() {
       wrapper = document.createElement('div');
       wrapper.innerHTML = HTML;
       document.body.appendChild(wrapper);
@@ -18,27 +19,27 @@ describe('StructuredList', function() {
     it('should throw if root element is not given', function() {
       expect(() => {
         new StructuredList();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('should throw if root element is not a DOM element', function() {
       expect(() => {
         new StructuredList(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('should set default options', function() {
       // Spread operator does not take non-owning props
       const { selectorListInput, ...options } = Object.getPrototypeOf(instance.options);
-      expect(selectorListInput('foo'), 'selectorListInput option').to.equal('#foo.bx--structured-list-input');
-      expect(options, 'Other options').to.deep.equal({
+      expect(selectorListInput('foo'), 'selectorListInput option').toBe('#foo.bx--structured-list-input');
+      expect(flattenOptions(options), 'Other options').toEqual({
         selectorInit: '[data-structured-list]',
         selectorRow: '[data-structured-list] .bx--structured-list-tbody > label.bx--structured-list-row',
         classActive: 'bx--structured-list-row--selected',
       });
     });
 
-    after(function() {
+    afterAll(function() {
       instance.release();
       document.body.removeChild(wrapper);
     });
@@ -48,7 +49,6 @@ describe('StructuredList', function() {
     let instance;
     let element;
     let wrapper;
-    let spy;
 
     beforeEach(function() {
       wrapper = document.createElement('div');
@@ -59,7 +59,7 @@ describe('StructuredList', function() {
     });
 
     it('should be called on "enter" keydown event', function() {
-      spy = sinon.spy(instance, '_handleKeydownChecked');
+      spyOn(instance, '_handleKeydownChecked');
       const event = Object.assign(
         new CustomEvent('keydown', {
           bubbles: true,
@@ -67,11 +67,11 @@ describe('StructuredList', function() {
         { which: 13 }
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.have.been.called;
+      expect(instance._handleKeydownChecked).toHaveBeenCalled();
     });
 
     it('should be called on "space" keydown event', function() {
-      spy = sinon.spy(instance, '_handleKeydownChecked');
+      spyOn(instance, '_handleKeydownChecked');
       const event = Object.assign(
         new CustomEvent('keydown', {
           bubbles: true,
@@ -79,11 +79,11 @@ describe('StructuredList', function() {
         { which: 32 }
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.have.been.called;
+      expect(instance._handleKeydownChecked).toHaveBeenCalled();
     });
 
     it('should not be called with another keydown event', function() {
-      spy = sinon.spy(instance, '_handleKeydownChecked');
+      spyOn(instance, '_handleKeydownChecked');
       const event = Object.assign(
         new CustomEvent('keydown', {
           bubbles: true,
@@ -91,11 +91,10 @@ describe('StructuredList', function() {
         { which: 40 }
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.not.have.been.called;
+      expect(instance._handleKeydownChecked).not.toHaveBeenCalled();
     });
 
     afterEach(function() {
-      spy.restore();
       instance.release();
       document.body.removeChild(wrapper);
     });
@@ -105,7 +104,6 @@ describe('StructuredList', function() {
     let instance;
     let element;
     let wrapper;
-    let spy;
 
     beforeEach(function() {
       wrapper = document.createElement('div');
@@ -116,18 +114,18 @@ describe('StructuredList', function() {
     });
 
     it('should be called on "click" keydown event', function() {
-      spy = sinon.spy(instance, '_handleClick');
+      spyOn(instance, '_handleClick');
       const event = Object.assign(
         new CustomEvent('click', {
           bubbles: true,
         })
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.have.been.called;
+      expect(instance._handleClick).toHaveBeenCalled();
     });
 
     it('should toggle classActive on a selectorRow', function() {
-      spy = sinon.spy(instance, '_handleClick');
+      spyOn(instance, '_handleClick').and.callThrough();
       const event = Object.assign(
         new CustomEvent('click', {
           bubbles: true,
@@ -135,11 +133,10 @@ describe('StructuredList', function() {
       );
       const rows = instance.element.querySelectorAll(instance.options.selectorRow);
       rows[1].dispatchEvent(event);
-      expect(rows[1].classList.contains(instance.options.classActive)).to.equal(true);
+      expect(rows[1].classList.contains(instance.options.classActive)).toBe(true);
     });
 
     afterEach(function() {
-      spy.restore();
       instance.release();
       document.body.removeChild(wrapper);
     });
@@ -149,7 +146,6 @@ describe('StructuredList', function() {
     let instance;
     let element;
     let wrapper;
-    let spy;
 
     beforeEach(function() {
       wrapper = document.createElement('div');
@@ -160,7 +156,7 @@ describe('StructuredList', function() {
     });
 
     it('should be called on "up" keydown event', function() {
-      spy = sinon.spy(instance, '_direction');
+      spyOn(instance, '_direction');
       const event = Object.assign(
         new CustomEvent('keydown', {
           bubbles: true,
@@ -168,11 +164,11 @@ describe('StructuredList', function() {
         { which: 38 }
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.have.been.called;
+      expect(instance._direction).toHaveBeenCalled();
     });
 
     it('should be called on "down" keydown event', function() {
-      spy = sinon.spy(instance, '_direction');
+      spyOn(instance, '_direction');
       const event = Object.assign(
         new CustomEvent('keydown', {
           bubbles: true,
@@ -180,7 +176,7 @@ describe('StructuredList', function() {
         { which: 40 }
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.have.been.called;
+      expect(instance._direction).toHaveBeenCalled();
     });
 
     it('should return -1 on "up" key', function() {
@@ -191,7 +187,7 @@ describe('StructuredList', function() {
         { which: 38 }
       );
       const direction = instance._direction(event);
-      expect(direction).to.equal(-1);
+      expect(direction).toBe(-1);
     });
 
     it('should return 1 on "down" key', function() {
@@ -202,7 +198,7 @@ describe('StructuredList', function() {
         { which: 40 }
       );
       const direction = instance._direction(event);
-      expect(direction).to.equal(1);
+      expect(direction).toBe(1);
     });
 
     it('should return undefined on other key presses', function() {
@@ -213,11 +209,10 @@ describe('StructuredList', function() {
         { which: 70 }
       );
       const direction = instance._direction(event);
-      expect(direction).to.be.undefined;
+      expect(direction).toBe(undefined);
     });
 
     afterEach(function() {
-      spy.restore();
       instance.release();
       document.body.removeChild(wrapper);
     });
@@ -227,7 +222,6 @@ describe('StructuredList', function() {
     let instance;
     let element;
     let wrapper;
-    let spy;
 
     beforeEach(function() {
       wrapper = document.createElement('div');
@@ -238,19 +232,18 @@ describe('StructuredList', function() {
     });
 
     it('should be called', function() {
-      spy = sinon.spy(instance, '_nextIndex');
+      spyOn(instance, '_nextIndex');
       instance._nextIndex([0, 1, 2, 3], 0, 1);
-      expect(spy).to.have.been.called;
+      expect(instance._nextIndex).toHaveBeenCalled();
     });
 
     it('should return a number', function() {
       const array = [0, 1, 2, 3];
       const result = instance._nextIndex(array, 0, 1);
-      expect(typeof result).to.equal('number');
+      expect(typeof result).toBe('number');
     });
 
     afterEach(function() {
-      spy.restore();
       instance.release();
       document.body.removeChild(wrapper);
     });
@@ -260,7 +253,6 @@ describe('StructuredList', function() {
     let instance;
     let element;
     let wrapper;
-    let spy;
 
     beforeEach(function() {
       wrapper = document.createElement('div');
@@ -271,13 +263,12 @@ describe('StructuredList', function() {
     });
 
     it('should be called', function() {
-      spy = sinon.spy(instance, '_handleInputChecked');
+      spyOn(instance, '_handleInputChecked');
       instance._handleInputChecked(0);
-      expect(spy).to.have.been.called;
+      expect(instance._handleInputChecked).toHaveBeenCalled();
     });
 
     afterEach(function() {
-      spy.restore();
       instance.release();
       document.body.removeChild(wrapper);
     });
@@ -287,7 +278,6 @@ describe('StructuredList', function() {
     let instance;
     let element;
     let wrapper;
-    let spy;
 
     beforeEach(function() {
       wrapper = document.createElement('div');
@@ -298,7 +288,7 @@ describe('StructuredList', function() {
     });
 
     it('should be called on "up" keydown event', function() {
-      spy = sinon.spy(instance, '_handleKeydownArrow');
+      spyOn(instance, '_handleKeydownArrow');
       const event = Object.assign(
         new CustomEvent('keydown', {
           bubbles: true,
@@ -306,11 +296,11 @@ describe('StructuredList', function() {
         { which: 38 }
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.have.been.called;
+      expect(instance._handleKeydownArrow).toHaveBeenCalled();
     });
 
     it('should be called on "down" keydown event', function() {
-      spy = sinon.spy(instance, '_handleKeydownArrow');
+      spyOn(instance, '_handleKeydownArrow');
       const event = Object.assign(
         new CustomEvent('keydown', {
           bubbles: true,
@@ -318,11 +308,11 @@ describe('StructuredList', function() {
         { which: 40 }
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.have.been.called;
+      expect(instance._handleKeydownArrow).toHaveBeenCalled();
     });
 
     it('should not be called with another keydown event', function() {
-      spy = sinon.spy(instance, '_handleKeydownArrow');
+      spyOn(instance, '_handleKeydownArrow');
       const event = Object.assign(
         new CustomEvent('keydown', {
           bubbles: true,
@@ -330,11 +320,10 @@ describe('StructuredList', function() {
         { which: 13 }
       );
       instance.element.dispatchEvent(event);
-      expect(spy).to.not.have.been.called;
+      expect(instance._handleKeydownArrow).not.toHaveBeenCalled();
     });
 
     afterEach(function() {
-      spy.restore();
       instance.release();
       document.body.removeChild(wrapper);
     });

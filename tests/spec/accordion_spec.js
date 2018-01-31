@@ -1,6 +1,7 @@
 import Accordion from '../../src/components/accordion/accordion';
 import HTML from '../../src/components/accordion/accordion.html';
 import LegacyHTML from '../../src/components/accordion/legacyaccordion.html';
+import flattenOptions from '../utils/flatten-options';
 
 describe('Test accordion', function() {
   describe('Constructor', function() {
@@ -8,7 +9,7 @@ describe('Test accordion', function() {
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       instance = new Accordion(document.querySelector('[data-accordion]'));
     });
@@ -16,17 +17,17 @@ describe('Test accordion', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Accordion();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Accordion(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should set default options', function() {
-      expect(instance.options).to.deep.equal({
+      expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-accordion]',
         selectorAccordionItem: '.bx--accordion__item',
         selectorAccordionItemHeading: '.bx--accordion__heading',
@@ -35,7 +36,7 @@ describe('Test accordion', function() {
       });
     });
 
-    after(function() {
+    afterAll(function() {
       if (document.body.contains(container)) {
         document.body.removeChild(container);
       }
@@ -53,7 +54,7 @@ describe('Test accordion', function() {
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       new Accordion(document.querySelector('[data-accordion]'));
       listItem = document.querySelector('[data-accordion-item]');
@@ -62,15 +63,15 @@ describe('Test accordion', function() {
 
     it('Should set active state on click', function() {
       buttonItem.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.true;
+      expect(listItem.classList.contains('bx--accordion__item--active')).toBe(true);
     });
 
     it('Should remove active state on second click', function() {
       buttonItem.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
+      expect(listItem.classList.contains('bx--accordion__item--active')).toBe(false);
     });
 
-    after(function() {
+    afterAll(function() {
       if (document.body.contains(container)) {
         document.body.removeChild(container);
       }
@@ -84,7 +85,7 @@ describe('Test accordion', function() {
     const container = document.createElement('div');
     container.innerHTML = LegacyHTML;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       accordion = new Accordion(document.querySelector('[data-accordion]'));
       listItem = document.querySelector('[data-accordion-item]');
@@ -94,24 +95,24 @@ describe('Test accordion', function() {
       const event = new CustomEvent('keypress', { bubbles: true });
       event.which = 86;
       listItem.dispatchEvent(event);
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
+      expect(listItem.classList.contains('bx--accordion__item--active')).toBe(false);
     });
 
     it('Should set active state on enter or spacebar press', function() {
       const event = new CustomEvent('keypress', { bubbles: true });
       event.which = 13;
       listItem.dispatchEvent(event);
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.true;
+      expect(listItem.classList.contains('bx--accordion__item--active')).toBe(true);
     });
 
     it('Should remove active state on second enter or spacebar press', function() {
       const event = new CustomEvent('keypress', { bubbles: true });
       event.which = 13;
       listItem.dispatchEvent(event);
-      expect(listItem.classList.contains('bx--accordion__item--active')).to.be.false;
+      expect(listItem.classList.contains('bx--accordion__item--active')).toBe(false);
     });
 
-    after(function() {
+    afterAll(function() {
       accordion.release();
       document.body.removeChild(container);
     });

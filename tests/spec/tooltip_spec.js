@@ -6,13 +6,13 @@ describe('Test tooltip', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Tooltip();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Tooltip(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
   });
 
@@ -24,38 +24,38 @@ describe('Test tooltip', function() {
     const floating = container.querySelector('.bx--tooltip');
     let tooltip;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       tooltip = new Tooltip(element);
     });
 
     it('Should show the tooltip upon hovering over', function() {
       element.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).to.be.true;
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
     it('Should hide the tooltip upon hovering out', function() {
       floating.classList.add('bx--tooltip--shown');
       element.dispatchEvent(new CustomEvent('mouseout', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).to.be.false;
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
     });
 
     it('Should show the tooltip upon focusing', function() {
       element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).to.be.true;
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
     it('Should hide the tooltip upon bluring', function() {
       floating.classList.add('bx--tooltip--shown');
       element.dispatchEvent(new CustomEvent('blur', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).to.be.false;
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
     });
 
     afterEach(function() {
       floating.classList.remove('bx--tooltip--shown');
     });
 
-    after(function() {
+    afterAll(function() {
       if (document.body.contains(floating)) {
         floating.parentNode.removeChild(floating);
       }
@@ -75,19 +75,19 @@ describe('Test tooltip', function() {
     const floating = container.querySelector('.bx--tooltip');
     let initContext;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       initContext = Tooltip.init();
     });
 
     it('Should create an instance upon hovering over', function() {
       element.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).to.be.true;
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
     it('Should create an instance upon focusing', function() {
       element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).to.be.true;
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
     afterEach(function() {
@@ -98,7 +98,7 @@ describe('Test tooltip', function() {
       }
     });
 
-    after(function() {
+    afterAll(function() {
       if (initContext) {
         initContext.release();
       }

@@ -49,8 +49,9 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
   handleBlur(event) {
     if (this.element.classList.contains(this.options.classShown)) {
       this.changeState('hidden', getLaunchingDetails(event));
-      if (this.element.contains(event.relatedTarget) && event.target !== this.options.refNode) {
-        this.options.refNode.focus();
+      const { refNode } = this.options;
+      if (this.element.contains(event.relatedTarget) && refNode && event.target !== refNode) {
+        refNode.focus();
       }
     }
   }
@@ -162,6 +163,9 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
   _changeState(state, detail, callback) {
     const shown = state === 'shown';
     const { refNode, classShown, classRefShown } = this.options;
+    if (!refNode) {
+      throw new TypeError('Cannot find the refernce node for changing the style.');
+    }
     this.element.classList.toggle(classShown, shown);
     if (classRefShown) {
       refNode.classList.toggle(classRefShown, shown);

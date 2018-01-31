@@ -7,8 +7,8 @@ describe('Test init component by launcher', function() {
   let launcherButton;
   let context;
   const events = new EventManager();
-  const spyCreate = sinon.spy();
-  const spyCreatedByLauncher = sinon.spy();
+  const spyCreate = jasmine.createSpy();
+  const spyCreatedByLauncher = jasmine.createSpy();
   const initOptions = { foo: 'Foo' };
   const Class = class extends mixin(initComponentByLauncher) {
     static options = {
@@ -26,28 +26,27 @@ describe('Test init component by launcher', function() {
   it('Should throw if given element is neither a DOM element or a document', function() {
     expect(() => {
       Class.init(document.createTextNode(''));
-    }).to.throw(Error);
+    }).toThrowError(TypeError, 'DOM document or DOM element should be given to search for and initialize this widget.');
   });
 
   it('Should do nothing if there is no target modals for a button upon button click', function() {
     launcherButton = document.createElement('a');
     document.body.appendChild(launcherButton);
-    expect(launcherButton.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).to.be.true;
+    expect(launcherButton.dispatchEvent(new CustomEvent('click', { bubbles: true, cancelable: true }))).toBe(true);
   });
 
   it('Should create an instance if the given element is of the widget', function() {
     container = document.createElement('div');
     container.dataset.myComponent = '';
     context = Class.init(container, initOptions);
-    expect(spyCreate, 'Call count of create()').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, initOptions]);
+    expect(spyCreate.calls.allArgs()).toEqual([[container, initOptions]]);
   });
 
   it('Should throw if launcher targets to multiple components', function() {
     const origOnError = window.onError;
     window.onerror = null; // Mocha sets its own global `onerror` handler that causes test to fail
     try {
-      const spyGlobalError = sinon.spy();
+      const spyGlobalError = jasmine.createSpy();
       events.on(window, 'error', spyGlobalError);
       container = document.createElement('div');
       [...new Array(2)].forEach(() => {
@@ -61,7 +60,7 @@ describe('Test init component by launcher', function() {
       document.body.appendChild(launcherButton);
       context = Class.init();
       launcherButton.dispatchEvent(new CustomEvent('foo', { bubbles: true }));
-      expect(spyGlobalError).to.have.been.calledOnce;
+      expect(spyGlobalError).toHaveBeenCalledTimes(1);
     } finally {
       window.onerror = origOnError;
     }
@@ -75,11 +74,10 @@ describe('Test init component by launcher', function() {
     launcherButton.dataset.initTarget = '[data-my-component]';
     document.body.appendChild(launcherButton);
     context = Class.init();
-    expect(spyCreate, 'Call count of create() before hitting launcher button').not.have.been.called;
+    expect(spyCreate, 'Call count of create() before hitting launcher button').not.toHaveBeenCalled();
     launcherButton.dispatchEvent(new CustomEvent('foo', { bubbles: true }));
-    expect(spyCreate, 'Call count of create() after hitting launcher button').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, {}]);
-    expect(spyCreatedByLauncher, 'Call count of createdByLauncher()').to.have.been.calledOnce;
+    expect(spyCreate.calls.allArgs(), 'create()').toEqual([[container, {}]]);
+    expect(spyCreatedByLauncher, 'Call count of createdByLauncher()').toHaveBeenCalledTimes(1);
   });
 
   it('Should cancel the event if launcher button is <a>', function() {
@@ -90,12 +88,12 @@ describe('Test init component by launcher', function() {
     launcherButton.dataset.initTarget = '[data-my-component]';
     document.body.appendChild(launcherButton);
     context = Class.init();
-    expect(launcherButton.dispatchEvent(new CustomEvent('foo', { bubbles: true, cancelable: true }))).to.be.false;
+    expect(launcherButton.dispatchEvent(new CustomEvent('foo', { bubbles: true, cancelable: true }))).toBe(false);
   });
 
   afterEach(function() {
-    spyCreatedByLauncher.reset();
-    spyCreate.reset();
+    spyCreatedByLauncher.calls.reset();
+    spyCreate.calls.reset();
     events.reset();
     if (context) {
       context.release();

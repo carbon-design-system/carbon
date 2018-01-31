@@ -3,7 +3,7 @@ import initComponentBySearch from '../../../src/globals/js/mixins/init-component
 
 describe('Test init component by search', function() {
   let container;
-  const spyCreate = sinon.spy();
+  const spyCreate = jasmine.createSpy();
   const options = { foo: 'Foo' };
   const Class = class extends mixin(initComponentBySearch) {
     static options = {
@@ -16,7 +16,7 @@ describe('Test init component by search', function() {
   it('Should throw if given element is neither a DOM element or a document', function() {
     expect(() => {
       Class.init(document.createTextNode(''));
-    }).to.throw(Error);
+    }).toThrowError(TypeError, 'DOM document or DOM element should be given to search for and initialize this widget.');
   });
 
   it('Should search from document if root element is not given', function() {
@@ -24,8 +24,7 @@ describe('Test init component by search', function() {
     container.dataset.myComponent = '';
     document.body.appendChild(container);
     Class.init();
-    expect(spyCreate, 'Call count of create()').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, {}]);
+    expect(spyCreate.calls.allArgs()).toEqual([[container, {}]]);
   });
 
   it('Should search from document if document node is given', function() {
@@ -33,20 +32,18 @@ describe('Test init component by search', function() {
     container.dataset.myComponent = '';
     document.body.appendChild(container);
     Class.init(container.ownerDocument, options);
-    expect(spyCreate, 'Call count of create()').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, options]);
+    expect(spyCreate.calls.allArgs()).toEqual([[container, options]]);
   });
 
   it('Should create an instance if the given element is of the widget', function() {
     container = document.createElement('div');
     container.dataset.myComponent = '';
     Class.init(container, options);
-    expect(spyCreate, 'Call count of create()').to.be.calledOnce;
-    expect(spyCreate.firstCall.args, 'Arguments of create()').to.deep.equal([container, options]);
+    expect(spyCreate.calls.allArgs()).toEqual([[container, options]]);
   });
 
   afterEach(function() {
-    spyCreate.reset();
+    spyCreate.calls.reset();
     if (container) {
       if (container.parentNode) {
         container.parentNode.removeChild(container);
