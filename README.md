@@ -25,6 +25,8 @@ npm install -S carbon-components-react carbon-components carbon-icons
 
 2. Components do not import any of the styles themselves, use the scss or css from `carbon-components` to bring in styling. You can also use the `unpkg` cdn to bring in the styles wholesale - `unpkg.com/carbon-components/css/carbon-components.css` aliases the latest css file.
 
+3. For older browsers (e.g. IE11), polyfills listed in [`carbon-components-react/.storybook/polyfills.js` file](./.storybook/polyfills.js) is required.
+
 ## Development
 
 Please refer to the [Contribution Guidelines](CONTRIBUTING.md) before starting any work.

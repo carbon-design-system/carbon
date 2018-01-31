@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './polyfills';
 import './_container.scss';
 
 export default class Container extends Component {
