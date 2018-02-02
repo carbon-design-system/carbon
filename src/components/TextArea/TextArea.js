@@ -6,6 +6,7 @@ const TextArea = ({
   className,
   id,
   labelText,
+  hideLabel,
   onChange,
   onClick,
   invalid,
@@ -27,8 +28,12 @@ const TextArea = ({
   };
 
   const textareaClasses = classNames('bx--text-area', className);
+  const labelClasses = classNames('bx--label', {
+    'bx--visually-hidden': hideLabel,
+  });
+
   const label = labelText ? (
-    <label htmlFor={id} className="bx--label">
+    <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>
   ) : null;
@@ -71,6 +76,7 @@ TextArea.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   invalid: PropTypes.bool,
   invalidText: PropTypes.string,
+  hideLabel: PropTypes.bool,
 };
 
 TextArea.defaultProps = {
