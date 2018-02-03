@@ -39,20 +39,30 @@ export class ClickableTile extends Component {
     handleKeyDown: () => {},
   };
 
-  handleClick = () => {
-    this.setState({
-      clicked: !this.state.clicked,
-    });
-    this.props.handleClick();
+  handleClick = evt => {
+    this.setState(
+      {
+        clicked: !this.state.clicked,
+      },
+      () => {
+        this.props.handleClick(evt);
+      }
+    );
   };
 
   handleKeyDown = evt => {
     if (evt.which === 13 || evt.which === 32) {
-      this.setState({
-        clicked: !this.state.clicked,
-      });
+      this.setState(
+        {
+          clicked: !this.state.clicked,
+        },
+        () => {
+          this.props.handleKeyDown(evt);
+        }
+      );
+    } else {
+      this.props.handleKeyDown(evt);
     }
-    this.props.handleKeyDown();
   };
 
   render() {
@@ -112,22 +122,36 @@ export class SelectableTile extends Component {
   };
 
   handleClick = evt => {
+    evt.preventDefault();
     const isInput = evt.target === this.input;
     if (!isInput) {
-      this.setState({
-        selected: !this.state.selected,
-      });
+      this.setState(
+        {
+          selected: !this.state.selected,
+        },
+        () => {
+          this.props.handleClick(evt);
+        }
+      );
+    } else {
+      this.props.handleClick(evt);
     }
-    this.props.handleClick();
   };
 
   handleKeyDown = evt => {
+    evt.preventDefault();
     if (evt.which === 13 || evt.which === 32) {
-      this.setState({
-        selected: !this.state.selected,
-      });
+      this.setState(
+        {
+          selected: !this.state.selected,
+        },
+        () => {
+          this.props.handleKeyDown(evt);
+        }
+      );
+    } else {
+      this.props.handleKeyDown(evt);
     }
-    this.props.handleKeyDown();
   };
 
   render() {
@@ -225,16 +249,16 @@ export class ExpandableTile extends Component {
     }
   };
 
-  handleClick = () => {
+  handleClick = evt => {
     this.setState(
       {
         expanded: !this.state.expanded,
       },
       () => {
         this.setMaxHeight();
+        this.props.handleClick(evt);
       }
     );
-    this.props.handleClick();
   };
 
   getChildren = () => {
