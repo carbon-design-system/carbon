@@ -1,5 +1,6 @@
 import ProfileSwitcher from '../../src/components/unified-header/profile-switcher';
 import unifiedHeaderHtml from '../../src/components/unified-header/unified-header.html';
+import flattenOptions from '../utils/flatten-options';
 
 describe('Test profile switcher', function() {
   describe('Constructor', function() {
@@ -8,20 +9,20 @@ describe('Test profile switcher', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new ProfileSwitcher();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new ProfileSwitcher(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should set default options', function() {
       const container = document.createElement('div');
       container.innerHTML = unifiedHeaderHtml;
       profileSwitcher = new ProfileSwitcher(container.querySelector('[data-profile-switcher]'));
-      expect(profileSwitcher.options).to.deep.equal({
+      expect(flattenOptions(profileSwitcher.options)).toEqual({
         selectorInit: '[data-profile-switcher]',
         selectorProfileSwitcher: '[data-profile-switcher]',
         selectorToggle: '[data-profile-switcher-toggle]',

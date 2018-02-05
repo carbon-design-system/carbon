@@ -23,11 +23,11 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
     this.container = this.element.querySelector(this.options.selectorContainer);
 
     if (!this.input) {
-      throw new Error('Cannot find the file input box.');
+      throw new TypeError('Cannot find the file input box.');
     }
 
     if (!this.container) {
-      throw new Error('Cannot find the file names container.');
+      throw new TypeError('Cannot find the file names container.');
     }
 
     this.inputId = this.input.getAttribute('id');

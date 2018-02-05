@@ -7,13 +7,13 @@ describe('Test responsive table', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new ResponsiveTable();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new ResponsiveTable(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
   });
 
@@ -22,7 +22,7 @@ describe('Test responsive table', function() {
     let element;
     let table;
 
-    before(function() {
+    beforeAll(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -36,11 +36,11 @@ describe('Test responsive table', function() {
       const oddRows = rows.filter((row, index) => index % 2 !== 0);
 
       evenRows.forEach(row => {
-        expect(row.classList.contains('bx--parent-row--even')).to.be.true;
+        expect(row.classList.contains('bx--parent-row--even')).toBe(true);
       });
 
       oddRows.forEach(row => {
-        expect(row.classList.contains('bx--parent-row--even')).to.be.false;
+        expect(row.classList.contains('bx--parent-row--even')).toBe(false);
       });
     });
 
@@ -48,11 +48,11 @@ describe('Test responsive table', function() {
       const rows = [...element.querySelectorAll('tbody > tr')];
 
       rows.forEach(row => {
-        expect(row.classList.contains('bx--expandable-row')).to.be.false;
+        expect(row.classList.contains('bx--expandable-row')).toBe(false);
       });
     });
 
-    after(function() {
+    afterAll(function() {
       document.body.removeChild(container);
       table.release();
     });
@@ -64,7 +64,7 @@ describe('Test responsive table', function() {
     let expanseTable;
     let container;
 
-    before(function() {
+    beforeAll(function() {
       container = document.createElement('div');
       element;
       expanseTable;
@@ -78,39 +78,39 @@ describe('Test responsive table', function() {
       const firstRowExpand = document.querySelector('.bx--table-expand');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
-      expect(document.querySelector('.bx--expandable-row')).to.not.be.null;
+      expect(document.querySelector('.bx--expandable-row')).toBeTruthy();
     });
 
     it('Remove element on second click', function() {
       const firstRowExpand = document.querySelector('.bx--table-expand');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
-      expect(document.querySelector('.bx--expandable-row')).to.be.null;
+      expect(document.querySelector('.bx--expandable-row')).toBeFalsy();
     });
 
     it('Clicking a row expand table cell should trigger the event', function() {
       const rowExpansion = document.querySelector('.bx--table-expand');
-      const spyToggleRowExpandEvent = sinon.spy();
+      const spyToggleRowExpandEvent = jasmine.createSpy();
       events.on(element.ownerDocument.body, 'responsive-table-aftertoggleexpand', spyToggleRowExpandEvent);
       rowExpansion.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
-      expect(spyToggleRowExpandEvent).to.have.been.called;
+      expect(spyToggleRowExpandEvent).toHaveBeenCalled();
     });
 
     it('The event should trigger the function', function() {
       const rowExpansion = document.querySelector('.bx--table-expand');
 
-      const spyToggleRowExpand = sinon.spy(expanseTable, '_toggleRowExpand');
+      spyOn(expanseTable, '_toggleRowExpand');
       rowExpansion.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
-      expect(spyToggleRowExpand).to.have.been.called;
+      expect(expanseTable._toggleRowExpand).toHaveBeenCalled();
     });
 
     afterEach(function() {
       events.reset();
     });
 
-    after(function() {
+    afterAll(function() {
       document.body.removeChild(container);
       expanseTable.release();
     });

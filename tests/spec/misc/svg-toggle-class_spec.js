@@ -6,36 +6,36 @@ describe('Test toggling class for <svg>', function() {
   it('Should add class for toggling', function() {
     svg.setAttribute('class', 'foo bar');
     svgToggleClass(svg, 'baz');
-    expect(svg.getAttribute('class')).to.equal('foo bar baz');
+    expect(svg.getAttribute('class')).toBe('foo bar baz');
   });
 
   it('Should remove class for toggling', function() {
     svg.setAttribute('class', 'foo bar');
     svgToggleClass(svg, 'foo');
-    expect(svg.getAttribute('class')).to.equal('bar');
+    expect(svg.getAttribute('class')).toBe('bar');
   });
 
   it('Should add class if specified', function() {
     svg.setAttribute('class', 'foo bar');
     svgToggleClass(svg, 'baz', true);
-    expect(svg.getAttribute('class')).to.equal('foo bar baz');
+    expect(svg.getAttribute('class')).toBe('foo bar baz');
   });
 
   it('Should remove class if specified', function() {
     svg.setAttribute('class', 'foo bar');
     svgToggleClass(svg, 'foo', false);
-    expect(svg.getAttribute('class')).to.equal('bar');
+    expect(svg.getAttribute('class')).toBe('bar');
   });
 
   it('Should sanitize upon edit', function() {
     svg.setAttribute('class', ' foo bar  foo ');
     svgToggleClass(svg, 'baz', true);
-    expect(svg.getAttribute('class')).to.equal('foo bar baz');
+    expect(svg.getAttribute('class')).toBe('foo bar baz');
   });
 
   it('Should keep class attribute intact if there is no edit', function() {
     svg.setAttribute('class', ' foo bar  foo ');
     svgToggleClass(svg, 'baz', false);
-    expect(svg.getAttribute('class')).to.equal(' foo bar  foo ');
+    expect(svg.getAttribute('class')).toBe(' foo bar  foo ');
   });
 });

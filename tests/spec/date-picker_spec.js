@@ -2,18 +2,18 @@ import DatePicker from '../../src/components/date-picker/date-picker';
 import singleCalHTML from '../../src/components/date-picker/date-picker--single.html';
 import rangeCalHTML from '../../src/components/date-picker/date-picker--range.html';
 
-describe('Test data picker', function() {
+describe('Test date picker', function() {
   describe('Constructor', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new DatePicker();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new DatePicker(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
   });
 
@@ -25,7 +25,7 @@ describe('Test data picker', function() {
     const container = document.createElement('div');
     container.innerHTML = singleCalHTML;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       element = document.querySelector('[data-date-picker]');
       datePicker = new DatePicker(element);
@@ -34,38 +34,36 @@ describe('Test data picker', function() {
     });
 
     it('Should add a calendar', function() {
-      expect(datePicker.calendar).not.to.be.undefined;
+      expect(datePicker.calendar).not.toBe(undefined);
     });
 
     it('Should be a single calendar and not range mode', function() {
-      expect(datePicker.calendar.config.mode === 'single').to.be.true;
+      expect(datePicker.calendar.config.mode === 'single').toBe(true);
     });
 
     it('Should show the calendar when the input field is clicked', function() {
       datePickerInput.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(true);
     });
 
     it('Should show the calendar when the calendar icon is clicked', function() {
       datePickerIcon.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(true);
     });
 
     it('Should hide the calendar on click outside the date picker', function() {
       datePicker.calendar.close();
       container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(false);
     });
 
     it('Should update the selected date in the calendar when input changes', function() {
       datePickerInput.value = '10/10/2017';
       datePickerInput.dispatchEvent(new CustomEvent('change', { bubbles: true }));
-      expect(datePicker.calendar.selectedDates[0].valueOf()).to.equal(
-        datePicker.calendar.parseDate(datePickerInput.value).valueOf()
-      );
+      expect(datePicker.calendar.selectedDates[0].valueOf()).toBe(datePicker.calendar.parseDate(datePickerInput.value).valueOf());
     });
 
-    after(function() {
+    afterAll(function() {
       datePicker.release();
       document.body.removeChild(container);
     });
@@ -80,7 +78,7 @@ describe('Test data picker', function() {
     const container = document.createElement('div');
     container.innerHTML = rangeCalHTML;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       element = document.querySelector('[data-date-picker]');
       datePicker = new DatePicker(element);
@@ -90,43 +88,43 @@ describe('Test data picker', function() {
     });
 
     it('Should add a calendar', function() {
-      expect(datePicker.calendar).not.to.be.undefined;
+      expect(datePicker.calendar).not.toBe(undefined);
     });
 
     it('Should be a range calendar', function() {
-      expect(datePicker.calendar.config.mode === 'range').to.be.true;
+      expect(datePicker.calendar.config.mode === 'range').toBe(true);
     });
 
     it('Should show the calendar when the first input field is clicked', function() {
       datePickerInputFrom.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(true);
     });
 
     it('Should show the calendar when the second input field is clicked', function() {
       datePickerInputTo.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(true);
     });
 
     it('Should show the calendar when the calendar icon is clicked', function() {
       datePickerIcon.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.true;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(true);
     });
 
     it('Should hide the calendar on click outside the date picker', function() {
       datePicker.calendar.close();
       container.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(datePicker.calendar.calendarContainer.classList.contains('open')).to.be.false;
+      expect(datePicker.calendar.calendarContainer.classList.contains('open')).toBe(false);
     });
 
     it('Should update the selected date in the calendar when input changes', function() {
       datePickerInputFrom.value = '10/10/2017';
       datePickerInputFrom.dispatchEvent(new CustomEvent('change', { bubbles: true }));
-      expect(datePicker.calendar.selectedDates[0].valueOf()).to.equal(
+      expect(datePicker.calendar.selectedDates[0].valueOf()).toBe(
         datePicker.calendar.parseDate(datePickerInputFrom.value).valueOf()
       );
     });
 
-    after(function() {
+    afterAll(function() {
       datePicker.release();
       document.body.removeChild(container);
     });
