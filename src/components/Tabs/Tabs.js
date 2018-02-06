@@ -52,43 +52,49 @@ export default class Tabs extends React.Component {
   };
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
-  handleTabClick = (index, label, evt) => {
-    evt.preventDefault();
-    this.selectTabAt(index);
-    this.setState({
-      dropdownHidden: !this.state.dropdownHidden,
-    });
-  };
-
-  handleTabKeyDown = (index, label, evt) => {
-    const key = evt.key || evt.which;
-
-    if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
-      this.selectTabAt(index);
+  handleTabClick = onSelectionChange => {
+    return (index, label, evt) => {
+      evt.preventDefault();
+      this.selectTabAt(index, onSelectionChange);
       this.setState({
         dropdownHidden: !this.state.dropdownHidden,
       });
-    }
+    };
   };
 
-  handleTabAnchorFocus = index => {
-    const tabCount = React.Children.count(this.props.children) - 1;
-    let tabIndex = index;
+  handleTabKeyDown = onSelectionChange => {
+    return (index, label, evt) => {
+      const key = evt.key || evt.which;
 
-    if (index < 0) {
-      tabIndex = tabCount;
-    } else if (index > tabCount) {
-      tabIndex = 0;
-    }
-
-    const tab = this.getTabAt(tabIndex);
-
-    if (tab) {
-      this.selectTabAt(tabIndex);
-      if (tab.tabAnchor) {
-        tab.tabAnchor.focus();
+      if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+        this.selectTabAt(index, onSelectionChange);
+        this.setState({
+          dropdownHidden: !this.state.dropdownHidden,
+        });
       }
-    }
+    };
+  };
+
+  handleTabAnchorFocus = onSelectionChange => {
+    return index => {
+      const tabCount = React.Children.count(this.props.children) - 1;
+      let tabIndex = index;
+
+      if (index < 0) {
+        tabIndex = tabCount;
+      } else if (index > tabCount) {
+        tabIndex = 0;
+      }
+
+      const tab = this.getTabAt(tabIndex);
+
+      if (tab) {
+        this.selectTabAt(tabIndex, onSelectionChange);
+        if (tab.tabAnchor) {
+          tab.tabAnchor.focus();
+        }
+      }
+    };
   };
 
   handleDropdownClick = () => {
@@ -97,13 +103,13 @@ export default class Tabs extends React.Component {
     });
   };
 
-  selectTabAt = index => {
+  selectTabAt = (index, onSelectionChange) => {
     if (this.state.selected !== index) {
       this.setState({
         selected: index,
       });
-      if (this.props.onSelectionChange) {
-        this.props.onSelectionChange(index);
+      if (typeof onSelectionChange === 'function') {
+        onSelectionChange(index);
       }
     }
   };
@@ -114,6 +120,7 @@ export default class Tabs extends React.Component {
       className,
       triggerHref,
       role,
+      onSelectionChange,
       ...other
     } = this.props;
 
@@ -121,12 +128,12 @@ export default class Tabs extends React.Component {
       const newTab = React.cloneElement(tab, {
         index,
         selected: index === this.state.selected,
-        handleTabClick: this.handleTabClick,
-        handleTabAnchorFocus: this.handleTabAnchorFocus,
+        handleTabClick: this.handleTabClick(onSelectionChange),
+        handleTabAnchorFocus: this.handleTabAnchorFocus(onSelectionChange),
         ref: e => {
           this.setTabAt(index, e);
         },
-        handleTabKeyDown: this.handleTabKeyDown,
+        handleTabKeyDown: this.handleTabKeyDown(onSelectionChange),
       });
 
       return newTab;
