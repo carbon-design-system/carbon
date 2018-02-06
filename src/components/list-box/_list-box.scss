@@ -81,6 +81,10 @@ $list-box-menu-width: rem(300px);
     cursor: pointer;
   }
 
+  .#{$prefix}--list-box__field:hover {
+    background: $field-01;
+  }
+
   .#{$prefix}--list-box__field:focus,
   .#{$prefix}--list-box__field[aria-expanded='true'] {
     outline: 1px solid $brand-01;
