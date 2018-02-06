@@ -1,3 +1,4 @@
+import window from 'window-or-global';
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
