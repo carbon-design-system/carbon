@@ -27,5 +27,5 @@ module.exports = {
   resolve: {
     modules: ['node_modules'],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [new webpack.ProgressPlugin(), new webpack.HotModuleReplacementPlugin()],
 };
