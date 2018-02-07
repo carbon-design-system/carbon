@@ -10,7 +10,8 @@ Contributing to carbon-components requires that you can run this repo locally on
 
 ## Class names
 
-Prefix all class names with `bx--`.
+Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with `bx--` by default,
+and design systems inheriting Carbon can override.
 This prefix prevents potential conflicts with class names from the user.
 
 __HTML__
@@ -24,21 +25,21 @@ __HTML__
 __SCSS__
 
 ```scss
-.bx--inline-notification {
+.#{$prefix}--inline-notification {
   ...
 }
 
-.bx--inline-notification__details {
+.#{$prefix}--inline-notification__details {
   ...
 }
 ```
 
-Follow BEM naming convention for classes. Again, the only thing we do differently is prefix all classes with `bx--`.
+Follow BEM naming convention for classes. Again, the only thing we do differently is prefix all classes with `#{$prefix}--`.
 
 ```scss
-.bx--block
-.bx--block__element
-.bx--block--modifier
+.#{$prefix}--block
+.#{$prefix}--block__element
+.#{$prefix}--block--modifier
 ```
 
 ### Start a new `block` or `element`?
@@ -50,16 +51,16 @@ A nested element can use a new block name as long as the styles are independent 
   <button class="bx--component-button">Button</button>
 </div>
 ```
-:point_up: The `bx--component-button` class implies that this button has independent styles from its parent.
+:point_up: The `#{$prefix}--component-button` class implies that this button has independent styles from its parent.
 Generally, it's preferred to start a new block.
 
 ### Red Flags
 
 Avoid names with multiple `__element` names:
 
-- :x: `.bx--card__list__item`
-- :white_check_mark: `.bx--card-item`
-- :white_check_mark: `.bx--card__item`
+- :x: `.#{$prefix}--card__list__item`
+- :white_check_mark: `.#{$prefix}--card-item`
+- :white_check_mark: `.#{$prefix}--card__item`
 
 ## Files and folders
 
