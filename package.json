@@ -67,12 +67,16 @@
     ],
     "plugins": [
       "react",
+      "jsdoc",
       "jsx-a11y"
     ],
     "rules": {
       "react/jsx-uses-vars": 1,
       "react/jsx-uses-react": 1,
       "react/no-find-dom-node": 1,
+      "jsdoc/check-param-names": 2,
+      "jsdoc/check-tag-names": 2,
+      "jsdoc/check-types": 2,
       "jsx-a11y/no-static-element-interactions": 1,
       "jsx-a11y/no-noninteractive-element-interactions": 1,
       "jsx-a11y/click-events-have-key-events": 1,
@@ -100,6 +104,13 @@
       "es6": true,
       "jest": true,
       "jasmine": true
+    },
+    "settings": {
+      "jsdoc": {
+        "tagNamePreference": {
+          "augments": "extends"
+        }
+      }
     }
   },
   "peerDependencies": {
@@ -145,6 +156,7 @@
     "enzyme-adapter-react-16": "^1.1.0",
     "enzyme-to-json": "^3.1.2",
     "eslint": "^4.11.0",
+    "eslint-plugin-jsdoc": "^3.3.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
     "gh-pages": "1.0.0",

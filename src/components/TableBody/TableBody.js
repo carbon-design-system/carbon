@@ -5,8 +5,8 @@ import TableRow from '../TableRow';
 
 /**
  * Adds striping to TableRows if the `even` prop wasn’t explicitly set.
- * @param  {array} rows  React elements that are children of the TableBody
- * @return {array}       the updated child elements
+ * @param {Array} rows React elements that are children of the `<TableBody>`.
+ * @returns {Array} The updated child elements.
  */
 const handleRowStriping = rows => {
   let count = 0;

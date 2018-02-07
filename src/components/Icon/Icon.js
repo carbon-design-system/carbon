@@ -4,7 +4,7 @@ import icons from 'carbon-icons';
 
 /**
  * Returns a single icon Object
- * @param {string} iconName - "name" property of icon
+ * @param {string} name - "name" property of icon
  * @param {Object} [iconsObj=icons] - JSON Array of Objects
  * @example
  * // Returns a single icon Object

@@ -1,7 +1,7 @@
 /**
  * Shallow compare two arrays for equality
- * @param {array} arr1 the first array
- * @param {array} arr2 the second array
+ * @param {Array} arr1 the first array
+ * @param {Array} arr2 the second array
  * @returns {boolean} true if both arrays have the same contents, otherwise false
  */
 export function equals(arr1, arr2) {

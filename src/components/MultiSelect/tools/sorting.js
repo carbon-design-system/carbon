@@ -5,8 +5,8 @@
  * @param {string} itemA
  * @param {string} itemB
  * @param {Object} options
- * @param {String} options.locale
- * @return {number}
+ * @param {string} options.locale
+ * @returns {number}
  */
 export const defaultCompareItems = (itemA, itemB, { locale }) =>
   itemA.localeCompare(itemB, locale, {
