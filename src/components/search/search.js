@@ -71,7 +71,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
 
   /**
    * Toggles the clear icon visibility
-   * @param {HTMLElement} input The element serving as the search input.
+   * @param {HTMLElement} value The element serving as the search input.
    * @param {HTMLElement} icon The element serving as close icon.
    */
   showClear(value, icon) {

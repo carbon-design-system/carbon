@@ -337,7 +337,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Handles click on the document.
    * Closes the left navigation when document is clicked outside the left navigation.
-   * @param {Event} event The event triggering this method.
+   * @param {Event} evt The event triggering this method.
    */
   handleDocumentClick(evt) {
     const clickTarget = evt.target;
@@ -368,7 +368,6 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    * Handles click on a list item that contains a nested list in the left navigation.
    * It hides all flyout menus and switches the tab-index on the list items based on whether or not the list is expanded.
    * @param {HTMLElement} listItem The list item that was clicked.
-   * @param {Event} event The event triggering this method.
    */
   handleNestedListClick(listItem) {
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
