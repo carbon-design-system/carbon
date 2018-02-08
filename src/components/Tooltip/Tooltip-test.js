@@ -36,7 +36,8 @@ describe('Tooltip', () => {
         triggerText="Tooltip"
         direction="bottom"
         menuOffset={{ left: 10, top: 15 }}
-        showIcon={false}>
+        showIcon={false}
+        open={true}>
         {' '}
         <p className="bx--tooltip__label">Tooltip label</p>
         <p>Lorem ipsum dolor sit amet</p>
@@ -63,7 +64,7 @@ describe('Tooltip', () => {
             .find('[data-floating-menu-direction]')
             .first()
             .prop('className')
-        ).toBe('bx--tooltip tooltip--class');
+        ).toBe('bx--tooltip bx--tooltip--shown tooltip--class');
       });
       it('sets the trigger class', () => {
         expect(trigger.prop('className')).toBe(

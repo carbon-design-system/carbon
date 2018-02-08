@@ -85,6 +85,7 @@ const Icon = ({
   role,
   style,
   width,
+  iconRef,
   ...other
 }) => {
   const icon = isPrefixed(name) ? findIcon(name) : findIcon(`icon--${name}`);
@@ -99,6 +100,7 @@ const Icon = ({
     style,
     viewBox: icon.viewBox,
     width: width || icon.width,
+    ref: iconRef,
     ...other,
   };
 
@@ -113,16 +115,60 @@ const Icon = ({
 };
 
 Icon.propTypes = {
+  /**
+   * The CSS class name.
+   */
   className: PropTypes.string,
+
+  /**
+   * The icon description.
+   */
   description: PropTypes.string.isRequired,
+
+  /**
+   * The `<svg>` `fill` attribute.
+   */
   fill: PropTypes.string,
+
+  /**
+   * The `<svg>` `fillRule` attribute.
+   */
   fillRule: PropTypes.string,
+
+  /**
+   * The `<svg>` `height` attribute.
+   */
   height: PropTypes.string,
+
+  /**
+   * The name in the sprite.
+   */
   name: PropTypes.string.isRequired,
+
+  /**
+   * The `role` attribute.
+   */
   role: PropTypes.string,
+
+  /**
+   * The CSS styles.
+   */
   style: PropTypes.object,
+
+  /**
+   * The `<svg>` `viewbox` attribute.
+   */
   viewBox: PropTypes.string,
+
+  /**
+   * The `<svg>` `width` attribute.
+   */
   width: PropTypes.string,
+
+  /**
+   * The `ref` callback for the icon.
+   */
+  iconRef: PropTypes.func,
 };
 
 Icon.defaultProps = {

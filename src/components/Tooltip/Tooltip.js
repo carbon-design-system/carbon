@@ -2,8 +2,60 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import classNames from 'classnames';
-import FloatingMenu from '../../internal/FloatingMenu';
+import FloatingMenu, {
+  DIRECTION_LEFT,
+  DIRECTION_TOP,
+  DIRECTION_RIGHT,
+  DIRECTION_BOTTOM,
+} from '../../internal/FloatingMenu';
 import ClickListener from '../../internal/ClickListener';
+
+/**
+ * @param {Element} menuBody The menu body with the menu arrow.
+ * @param {string} menuDirection Where the floating menu menu should be placed relative to the trigger button.
+ * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
+ * @private
+ */
+const getMenuOffset = (menuBody, menuDirection) => {
+  const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(
+    menuBody,
+    ':before'
+  );
+  const arrowPositionProp = {
+    [DIRECTION_LEFT]: 'right',
+    [DIRECTION_TOP]: 'bottom',
+    [DIRECTION_RIGHT]: 'left',
+    [DIRECTION_BOTTOM]: 'top',
+  }[menuDirection];
+  const menuPositionAdjustmentProp = {
+    [DIRECTION_LEFT]: 'left',
+    [DIRECTION_TOP]: 'top',
+    [DIRECTION_RIGHT]: 'left',
+    [DIRECTION_BOTTOM]: 'top',
+  }[menuDirection];
+  const values = [arrowPositionProp, 'border-bottom-width'].reduce(
+    (o, name) => ({
+      ...o,
+      [name]: Number(
+        (/^([\d-]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]
+      ),
+    }),
+    {}
+  );
+  values[arrowPositionProp] = values[arrowPositionProp] || -6; // IE, etc.
+  if (Object.keys(values).every(name => !isNaN(values[name]))) {
+    const {
+      [arrowPositionProp]: arrowPosition,
+      'border-bottom-width': borderBottomWidth,
+    } = values;
+    return {
+      left: 0,
+      top: 0,
+      [menuPositionAdjustmentProp]:
+        Math.sqrt(Math.pow(borderBottomWidth, 2) * 2) - arrowPosition,
+    };
+  }
+};
 
 export default class Tooltip extends Component {
   static propTypes = {
@@ -16,6 +68,7 @@ export default class Tooltip extends Component {
      * The ID of the tooltip content.
      */
     tooltipId: PropTypes.string,
+
     /**
      * Open/closed state.
      */
@@ -44,10 +97,13 @@ export default class Tooltip extends Component {
     /**
      * The adjustment of the tooltip position.
      */
-    menuOffset: PropTypes.shape({
-      top: PropTypes.number,
-      left: PropTypes.number,
-    }),
+    menuOffset: PropTypes.oneOfType([
+      PropTypes.shape({
+        top: PropTypes.number,
+        left: PropTypes.number,
+      }),
+      PropTypes.func,
+    ]),
 
     /**
      * The content to put into the trigger UI, except the (default) tooltip icon.
@@ -77,12 +133,12 @@ export default class Tooltip extends Component {
 
   static defaultProps = {
     open: false,
-    direction: 'bottom',
+    direction: DIRECTION_BOTTOM,
     showIcon: true,
     iconName: 'info--glyph',
     iconDescription: 'tooltip',
     triggerText: 'Provide triggerText',
-    menuOffset: {},
+    menuOffset: getMenuOffset,
   };
 
   state = {
@@ -176,9 +232,6 @@ export default class Tooltip extends Component {
                 id={triggerId}
                 role="button"
                 tabIndex="0"
-                ref={node => {
-                  this.triggerEl = node;
-                }}
                 onMouseOver={() => this.handleMouse('over')}
                 onMouseOut={() => this.handleMouse('out')}
                 onFocus={() => this.handleMouse('over')}
@@ -191,6 +244,9 @@ export default class Tooltip extends Component {
                   onClick={() => this.handleMouse('click')}
                   name={iconName}
                   description={iconDescription}
+                  iconRef={node => {
+                    this.triggerEl = node;
+                  }}
                 />
               </div>
             </div>
@@ -212,19 +268,21 @@ export default class Tooltip extends Component {
             </div>
           )}
         </ClickListener>
-        <FloatingMenu
-          menuPosition={this.state.triggerPosition}
-          menuDirection={direction}
-          menuOffset={menuOffset}>
-          <div
-            id={tooltipId}
-            className={tooltipClasses}
-            {...other}
-            data-floating-menu-direction={direction}
-            aria-labelledby={triggerId}>
-            {children}
-          </div>
-        </FloatingMenu>
+        {open && (
+          <FloatingMenu
+            menuPosition={this.state.triggerPosition}
+            menuDirection={direction}
+            menuOffset={menuOffset}>
+            <div
+              id={tooltipId}
+              className={tooltipClasses}
+              {...other}
+              data-floating-menu-direction={direction}
+              aria-labelledby={triggerId}>
+              {children}
+            </div>
+          </FloatingMenu>
+        )}
       </div>
     );
   }

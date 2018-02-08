@@ -157,8 +157,7 @@ storiesOf('Tooltip', module)
         <Tooltip
           triggerText="Tooltip - no icon - left"
           direction="left"
-          showIcon={false}
-          menuOffset={{ left: 8 }}>
+          showIcon={false}>
           >
           <p className="bx--tooltip__label">Tooltip subtitle</p>
           <p>
