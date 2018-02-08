@@ -17,12 +17,48 @@ flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
 
 export default class DatePicker extends Component {
   static propTypes = {
+    /**
+     * The child nodes.
+     */
     children: PropTypes.node,
+
+    /**
+     * The CSS class names.
+     */
     className: PropTypes.string,
+
+    /**
+     * `true` to use the short version.
+     */
     short: PropTypes.bool,
-    datePickerType: PropTypes.string,
+
+    /**
+     * The type of the date picker:
+     *
+     * * `simple` - Without calendar dropdown.
+     * * `single` - With calendar dropdown and single date.
+     * * `range` - With calendar dropdown and a date range.
+     */
+    datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
+
+    /**
+     * The date format.
+     */
     dateFormat: PropTypes.string,
+
+    /**
+     * The value of the `<input>`.
+     */
     value: PropTypes.string,
+
+    /**
+     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
+     */
+    appendTo: PropTypes.object,
+
+    /**
+     * The `change` event handler.
+     */
     onChange: PropTypes.func,
   };
 
@@ -48,27 +84,26 @@ export default class DatePicker extends Component {
   }
 
   componentDidMount() {
-    if (
-      this.props.datePickerType === 'single' ||
-      this.props.datePickerType === 'range'
-    ) {
+    const { datePickerType, dateFormat, appendTo, onChange } = this.props;
+    if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
         this.updateClassNames(instance);
       };
       this.cal = flatpickr(this.inputField, {
-        mode: this.props.datePickerType,
+        appendTo,
+        mode: datePickerType,
         allowInput: true,
-        dateFormat: this.props.dateFormat,
+        dateFormat: dateFormat,
         plugins:
-          this.props.datePickerType === 'range'
+          datePickerType === 'range'
             ? [new rangePlugin({ input: this.toInputField })]
             : '',
         clickOpens: true,
         nextArrow: this.rightArrowHTML(),
         leftArrow: this.leftArrowHTML(),
         onChange: (...args) => {
-          if (this.props.onChange) {
-            this.props.onChange(...args);
+          if (onChange) {
+            onChange(...args);
           }
         },
         onReady: onHook,
