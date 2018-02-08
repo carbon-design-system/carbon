@@ -30,10 +30,9 @@ const OverflowMenuItem = ({
   };
 
   const item = (
-    <li className={overflowMenuItemClasses}>
+    <li className={overflowMenuItemClasses} role="menuitem">
       <button
         {...other}
-        type="button"
         className={overflowMenuBtnClasses}
         onClick={handleClick}>
         {itemText}
