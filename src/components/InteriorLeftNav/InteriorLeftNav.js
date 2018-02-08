@@ -125,7 +125,6 @@ export default class InteriorLeftNav extends Component {
         aria-label="Interior Left Navigation"
         className={classNames}
         onClick={!this.state.open ? this.toggle : () => {}}
-        onKeyPress={!this.state.open ? this.toggle : () => {}}
         {...other}>
         <ul key="main_list" className="left-nav-list" role="menubar">
           {newChildren}
