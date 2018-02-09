@@ -27,15 +27,6 @@
     border: 1px solid $brand-01;
     color: $brand-01;
 
-    > svg {
-      margin-right: 0.5rem;
-      fill: currentColor;
-    }
-
-    > svg * {
-      fill: currentColor;
-    }
-
     &:focus {
       outline: 1px solid transparent;
       box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
@@ -55,6 +46,15 @@
       background-color: $brand-02;
       border-color: $brand-02;
       color: $inverse-01;
+    }
+  }
+
+  .#{$prefix}--content-switcher__icon {
+    margin-right: $spacing-xs;
+    fill: currentColor;
+    // need to color any child path or g
+    * {
+      fill: currentColor;
     }
   }
 
