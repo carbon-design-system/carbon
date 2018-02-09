@@ -27,6 +27,15 @@
     border: 1px solid $brand-01;
     color: $brand-01;
 
+    > svg {
+      margin-right: 0.5rem;
+      fill: currentColor;
+    }
+
+    > svg g {
+      fill: currentColor;
+    }
+
     &:focus {
       outline: 1px solid transparent;
       box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
