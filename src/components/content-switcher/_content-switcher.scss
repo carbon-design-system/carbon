@@ -49,6 +49,15 @@
     }
   }
 
+  .#{$prefix}--content-switcher__icon {
+    margin-right: $spacing-xs;
+    fill: currentColor;
+    // need to color any child path or g
+    * {
+      fill: currentColor;
+    }
+  }
+
   .#{$prefix}--content-switcher-btn:not(:last-of-type) {
     border-right: none;
   }
