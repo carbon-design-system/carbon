@@ -19,7 +19,6 @@
     @include font-family;
     color: $text-01;
     font-weight: 600;
-    cursor: pointer;
     height: auto;
     width: 100%;
     position: relative;
@@ -100,6 +99,7 @@
     @include typescale('zeta');
     background-color: $ui-01;
     padding: 0;
+    cursor: pointer;
 
     &:hover,
     &:focus {
