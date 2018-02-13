@@ -1,5 +1,5 @@
 import Checkbox from '../../src/components/checkbox/checkbox';
-import HTML from '../../src/components/checkbox/checkbox.html';
+import HTML from '../../html/checkbox/checkbox.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test Checkbox', function() {

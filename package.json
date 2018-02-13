@@ -80,6 +80,7 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.5.0",
     "express": "4.16.2",
+    "express-handlebars": "^3.0.0",
     "globby": "4.0.0",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.1",
@@ -93,6 +94,7 @@
     "gulp-sourcemaps": "~1.6.0",
     "gulp-uglify": "^2.1.2",
     "gulp-util": "~3.0.7",
+    "handlebars-helpers": "^0.10.0",
     "html-loader": "^0.5.0",
     "husky": "^0.12.0",
     "jasmine-core": "^2.9.0",
@@ -112,6 +114,7 @@
     "markdown-it": "^8.4.0",
     "merge-stream": "^1.0.0",
     "minimatch": "^3.0.0",
+    "mkdirp": "^0.5.0",
     "mock-raf": "^1.0.0",
     "nodemon": "1.9.1",
     "postcss-loader": "^2.1.0",
@@ -137,7 +140,8 @@
     "vinyl-named": "^1.1.0",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.0",
-    "webpack-hot-middleware": "^2.21.0"
+    "webpack-hot-middleware": "^2.21.0",
+    "whatwg-fetch": "^2.0.0"
   },
   "resolutions": {
     "freshy": ">= 1.0.3"

@@ -1,6 +1,6 @@
 import EventManager from '../utils/event-manager';
 import Notification from '../../src/components/notification/notification';
-import HTML from '../../src/components/notification/toast-notification.html';
+import HTML from '../../html/notification/toast-notification.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('ToastNotification', function() {
