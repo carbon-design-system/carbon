@@ -80,7 +80,7 @@
   padding-right: $spacing-lg;
   width: 100%;
   height: 100%;
-  z-index: 99999;
+  z-index: z('header');
   background-color: transparent;
   transition: opacity 200ms $carbon--standard-easing, background-color 200ms $carbon--standard-easing;
   pointer-events: none;
