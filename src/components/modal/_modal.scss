@@ -42,6 +42,10 @@
     }
   }
 
+  .#{$prefix}--modal--danger {
+    @include modal--color($support-01);
+  }
+
   .#{$prefix}--modal-container {
     @include reset;
     @include layer('pop-out');
