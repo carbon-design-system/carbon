@@ -2,7 +2,7 @@ import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
-import defaultOptios from './options';
+import defaultOptions from './options';
 
 class Carousel extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -47,7 +47,7 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
   };
 
   static get options() {
-    return defaultOptios(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**
