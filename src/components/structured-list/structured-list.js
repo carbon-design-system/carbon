@@ -112,7 +112,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   static components = new WeakMap();
 
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

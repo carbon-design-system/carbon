@@ -82,7 +82,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   static components = new WeakMap();
 
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

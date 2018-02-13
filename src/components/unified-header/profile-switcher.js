@@ -269,7 +269,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
    *   The data attribute selector for the dropdown item containing the current space name.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**

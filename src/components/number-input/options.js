@@ -1,4 +1,7 @@
-export default prefix => ({
-  selectorInit: '[data-numberinput]',
-  selectorInput: `.${prefix}--number input`,
-});
+export default settings => {
+  const { prefix } = settings;
+  return {
+    selectorInit: '[data-numberinput]',
+    selectorInput: `.${prefix}--number input`,
+  };
+};

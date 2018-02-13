@@ -82,7 +82,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} selectorInit The CSS selector to find accordion UIs.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**

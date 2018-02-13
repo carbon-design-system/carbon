@@ -123,7 +123,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} classSearchActive The CSS class the active state of the search input.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

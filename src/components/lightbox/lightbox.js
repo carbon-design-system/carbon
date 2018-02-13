@@ -50,7 +50,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
   };
 
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**

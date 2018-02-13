@@ -254,7 +254,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
   };
 
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

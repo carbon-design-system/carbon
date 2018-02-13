@@ -193,7 +193,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch, hand
    * @property {string} selectorInit The CSS selector to find interior left navs.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

@@ -71,7 +71,7 @@ class NumberInput extends mixin(createComponent, initComponentBySearch, handles)
    * @property {string} [selectorInput] The CSS selector to find the `<input>` element.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

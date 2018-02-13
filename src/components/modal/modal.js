@@ -186,7 +186,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

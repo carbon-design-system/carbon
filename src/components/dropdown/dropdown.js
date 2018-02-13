@@ -201,7 +201,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**

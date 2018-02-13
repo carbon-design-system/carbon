@@ -138,7 +138,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

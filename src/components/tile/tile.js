@@ -81,7 +81,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    * @property {string} selectorInit The CSS selector to find Tile instances.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

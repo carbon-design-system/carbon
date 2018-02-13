@@ -233,7 +233,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
    * @property {string} selectorInit The CSS selector to find date picker UIs.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**

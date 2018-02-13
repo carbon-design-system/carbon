@@ -161,7 +161,7 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * @property {string} [classIncomplete] The className for a incomplete step element.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

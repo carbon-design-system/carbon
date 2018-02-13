@@ -1,4 +1,7 @@
-export default prefix => ({
-  selectorInit: '[data-card-list]',
-  selectorCard: `.${prefix}--card`,
-});
+export default settings => {
+  const { prefix } = settings;
+  return {
+    selectorInit: '[data-card-list]',
+    selectorCard: `.${prefix}--card`,
+  };
+};

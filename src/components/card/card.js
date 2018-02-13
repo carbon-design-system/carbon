@@ -75,7 +75,7 @@ class Card extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [selectorCard] The CSS selector to find cards.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**

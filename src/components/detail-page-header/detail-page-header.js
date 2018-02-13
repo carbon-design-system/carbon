@@ -81,7 +81,7 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch, han
    * @property {string} selectorInit The CSS selector to find detail page headers.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

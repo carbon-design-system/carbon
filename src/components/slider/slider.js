@@ -209,7 +209,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
    * @property {string} selectorInit The CSS selector to find slider instances.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 

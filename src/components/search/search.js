@@ -100,7 +100,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [options.classLayoutHidden] The class used to hide nonselected layout view.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**

@@ -485,7 +485,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [classTaxonomyIcon] The class name for the taxonomy icon.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   /**

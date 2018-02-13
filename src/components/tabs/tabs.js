@@ -161,7 +161,7 @@ class Tab extends ContentSwitcher {
    * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
    */
   static get options() {
-    return Object.assign(Object.create(ContentSwitcher.options), defaultOptions(settings.prefix));
+    return Object.assign(Object.create(ContentSwitcher.options), defaultOptions(settings));
   }
 
   /**

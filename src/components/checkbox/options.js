@@ -1,3 +1,6 @@
-export default prefix => ({
-  selectorInit: `.${prefix}--checkbox`,
-});
+export default settings => {
+  const { prefix } = settings;
+  return {
+    selectorInit: `.${prefix}--checkbox`,
+  };
+};

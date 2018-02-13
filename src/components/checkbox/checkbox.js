@@ -134,7 +134,7 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} selectorInit The data attribute to find copy button UIs.
    */
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 
   static stateChangeTypes = stateChangeTypes;

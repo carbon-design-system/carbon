@@ -164,7 +164,7 @@ class FileUploader extends mixin(createComponent, initComponentBySearch, evented
   static components = new WeakMap();
 
   static get options() {
-    return defaultOptions(settings.prefix);
+    return defaultOptions(settings);
   }
 }
 
