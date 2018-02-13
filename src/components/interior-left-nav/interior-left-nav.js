@@ -7,6 +7,7 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 import toggleClass from '../../globals/js/misc/svg-toggle-class';
+import defaultOptions from './options';
 
 let didWarnAboutDeprecation = false;
 
@@ -192,32 +193,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch, hand
    * @property {string} selectorInit The CSS selector to find interior left navs.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-interior-left-nav]',
-      // Data Attribute selectors
-      selectorLeftNavList: '[data-interior-left-nav-list]',
-      selectorLeftNavNestedList: '[data-interior-left-nav-nested-list]',
-      selectorLeftNavListItem: '[data-interior-left-nav-item]',
-      selectorLeftNavListItemLink: '[data-interior-left-nav-item-link]',
-      selectorLeftNavNestedListItem: '[data-interior-left-nav-nested-item]',
-      selectorLeftNavListItemHasChildren: '[data-interior-left-nav-with-children]',
-      selectorLeftNavCollapse: '[data-interior-left-nav-collapse]',
-      selectorLeftNavArrowTitle: '[data-interior-left-nav-arrow] title',
-      // CSS Class Selectors
-      classActiveLeftNavListItem: 'left-nav-list__item--active',
-      classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
-      classLeftNavCollapsing: `${prefix}--interior-left-nav--collapsing`,
-      classLeftNavCollapsed: `${prefix}--interior-left-nav--collapsed`,
-      classLeftNavExpanding: `${prefix}--interior-left-nav--expanding`,
-      // Event
-      eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
-      eventAfterLeftNavToggled: 'left-nav-toggled',
-      // Option
-      expandTitle: 'Expand nav pane',
-      collapseTitle: 'Collapse nav pane',
-      keepOpen: false,
-    };
+    return defaultOptions(settings.prefix);
   }
 }
 

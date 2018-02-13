@@ -2,6 +2,7 @@ import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import defaultOptions from './options';
 
 class Lightbox extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
@@ -49,14 +50,7 @@ class Lightbox extends mixin(createComponent, initComponentBySearch) {
   };
 
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-lightbox]',
-      selectorScrollRight: '[data-scroll-right]',
-      selectorScrollLeft: '[data-scroll-left]',
-      selectorLightboxItem: `.${prefix}--lightbox__item`,
-      classActiveItem: `${prefix}--lightbox__item--shown`,
-    };
+    return defaultOptions(settings.prefix);
   }
 
   /**

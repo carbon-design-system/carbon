@@ -2,6 +2,7 @@ import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import defaultOptios from './options';
 
 class Carousel extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -46,15 +47,7 @@ class Carousel extends mixin(createComponent, initComponentBySearch) {
   };
 
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-carousel]',
-      selectorFilmstrip: `.${prefix}--filmstrip`,
-      selectorScrollRight: '[data-scroll-right]',
-      selectorScrollLeft: '[data-scroll-left]',
-      selectorCarouselBtn: `.${prefix}--carousel__btn`,
-      selectorCarouselItem: `.${prefix}--carousel__item`,
-    };
+    return defaultOptios(settings.prefix);
   }
 
   /**

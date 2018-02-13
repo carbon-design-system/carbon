@@ -4,6 +4,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import eventedState from '../../globals/js/mixins/evented-state';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Notification extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
@@ -50,12 +51,9 @@ class Notification extends mixin(createComponent, initComponentBySearch, evented
    * @property {string} selectorInit The CSS selector to find InlineNotification.
    * @property {string} selectorButton The CSS selector to find close button.
    */
-  static options = {
-    selectorInit: '[data-notification]',
-    selectorButton: '[data-notification-btn]',
-    eventBeforeDeleteNotification: 'notification-before-delete',
-    eventAfterDeleteNotification: 'notification-after-delete',
-  };
+  static get options() {
+    return defaultOptions();
+  }
 }
 
 export default Notification;

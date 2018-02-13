@@ -5,6 +5,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -81,14 +82,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} selectorInit The CSS selector to find accordion UIs.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-accordion]',
-      selectorAccordionItem: `.${prefix}--accordion__item`,
-      selectorAccordionItemHeading: `.${prefix}--accordion__heading`,
-      selectorAccordionContent: `.${prefix}--accordion__content`,
-      classActive: `${prefix}--accordion__item--active`,
-    };
+    return defaultOptions(settings.prefix);
   }
 
   /**

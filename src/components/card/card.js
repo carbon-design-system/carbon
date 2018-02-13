@@ -6,6 +6,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 let didWarnAboutDeprecation = false;
 
@@ -74,11 +75,7 @@ class Card extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [selectorCard] The CSS selector to find cards.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-card-list]',
-      selectorCard: `.${prefix}--card`,
-    };
+    return defaultOptions(settings.prefix);
   }
 
   /**

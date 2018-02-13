@@ -1,8 +1,10 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 const stateChangeTypes = {
   true: 'true',
@@ -131,9 +133,9 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
    * @type {Object}
    * @property {string} selectorInit The data attribute to find copy button UIs.
    */
-  static options = {
-    selectorInit: '.bx--checkbox',
-  };
+  static get options() {
+    return defaultOptions(settings.prefix);
+  }
 
   static stateChangeTypes = stateChangeTypes;
 }

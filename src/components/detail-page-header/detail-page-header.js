@@ -6,6 +6,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 let didWarnAboutDeprecation = false;
 
@@ -80,11 +81,7 @@ class DetailPageHeader extends mixin(createComponent, initComponentBySearch, han
    * @property {string} selectorInit The CSS selector to find detail page headers.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-detail-page-header]',
-      scroll: `${prefix}--detail-page-header--scroll`,
-    };
+    return defaultOptions(settings.prefix);
   }
 }
 

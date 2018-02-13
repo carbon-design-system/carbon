@@ -2,6 +2,7 @@ import settings from '../../globals/js/settings';
 import eventMatches from '../../globals/js/misc/event-matches';
 import ContentSwitcher from '../content-switcher/content-switcher';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Tab extends ContentSwitcher {
   /**
@@ -160,20 +161,7 @@ class Tab extends ContentSwitcher {
    * @property {string} [eventAfterSelected] The name of the custom event fired after a tab is selected.
    */
   static get options() {
-    const { prefix } = settings;
-    return Object.assign(Object.create(ContentSwitcher.options), {
-      selectorInit: '[data-tabs]',
-      selectorMenu: `.${prefix}--tabs__nav`,
-      selectorTrigger: `.${prefix}--tabs-trigger`,
-      selectorTriggerText: `.${prefix}--tabs-trigger-text`,
-      selectorButton: `.${prefix}--tabs__nav-item`,
-      selectorButtonSelected: `.${prefix}--tabs__nav-item--selected`,
-      selectorLink: `.${prefix}--tabs__nav-link`,
-      classActive: `${prefix}--tabs__nav-item--selected`,
-      classHidden: `${prefix}--tabs__nav--hidden`,
-      eventBeforeSelected: 'tab-beingselected',
-      eventAfterSelected: 'tab-selected',
-    });
+    return Object.assign(Object.create(ContentSwitcher.options), defaultOptions(settings.prefix));
   }
 
   /**

@@ -5,6 +5,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 // `this.options` create-component mix-in creates prototype chain
 // so that `options` given in constructor argument wins over the one defined in static `options` property
@@ -232,23 +233,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
    * @property {string} selectorInit The CSS selector to find date picker UIs.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-date-picker]',
-      selectorDatePickerInput: '[data-date-picker-input]',
-      selectorDatePickerInputFrom: '[data-date-picker-input-from]',
-      selectorDatePickerInputTo: '[data-date-picker-input-to]',
-      selectorDatePickerIcon: '[data-date-picker-icon]',
-      classCalendarContainer: `${prefix}--date-picker__calendar`,
-      classMonth: `${prefix}--date-picker__month`,
-      classWeekdays: `${prefix}--date-picker__weekdays`,
-      classDays: `${prefix}--date-picker__days`,
-      classWeekday: `${prefix}--date-picker__weekday`,
-      classDay: `${prefix}--date-picker__day`,
-      classFocused: `${prefix}--focused`,
-      attribType: 'data-date-picker-type',
-      dateFormat: 'm/d/Y',
-    };
+    return defaultOptions(settings.prefix);
   }
 
   /**

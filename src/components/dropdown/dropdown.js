@@ -5,6 +5,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
   /**
@@ -200,18 +201,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-dropdown]',
-      selectorText: `.${prefix}--dropdown-text`,
-      selectorItem: `.${prefix}--dropdown-link`,
-      selectorItemSelected: `.${prefix}--dropdown--selected`,
-      classSelected: `${prefix}--dropdown--selected`,
-      classOpen: `${prefix}--dropdown--open`,
-      classDisabled: `${prefix}--dropdown--disabled`,
-      eventBeforeSelected: 'dropdown-beingselected',
-      eventAfterSelected: 'dropdown-selected',
-    };
+    return defaultOptions(settings.prefix);
   }
 
   /**

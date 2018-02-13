@@ -3,6 +3,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class FabButton extends mixin(createComponent, initComponentByEvent, handles) {
   /**
@@ -68,10 +69,9 @@ class FabButton extends mixin(createComponent, initComponentByEvent, handles) {
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find floating action buttons.
    */
-  static options = {
-    selectorInit: '[data-fab]',
-    initEventNames: ['click'],
-  };
+  static get options() {
+    return defaultOptions();
+  }
 }
 
 export default FabButton;

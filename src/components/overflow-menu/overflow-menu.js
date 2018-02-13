@@ -7,6 +7,7 @@ import handles from '../../globals/js/mixins/handles';
 import FloatingMenu from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class OverflowMenu extends mixin(createComponent, initComponentBySearch, eventedShowHideState, handles) {
   /**
@@ -122,16 +123,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   static components = new WeakMap();
 
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-overflow-menu]',
-      selectorOptionMenu: `.${prefix}--overflow-menu-options`,
-      classShown: `${prefix}--overflow-menu--open`,
-      classMenuShown: `${prefix}--overflow-menu-options--open`,
-      classMenuFlip: `${prefix}--overflow-menu--flip`,
-      objMenuOffset: { top: 3, left: 61 },
-      objMenuOffsetFlip: { top: 3, left: -61 },
-    };
+    return defaultOptions(settings.prefix);
   }
 }
 
