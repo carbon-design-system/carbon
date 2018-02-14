@@ -60,7 +60,7 @@ const axe = require('gulp-axe-webdriver');
  * BrowserSync
  */
 
-gulp.task('browser-sync', ['build:dev'], cb => {
+gulp.task('browser-sync', ['sass:dev'], cb => {
   let started;
   nodemon({
     script: './server.js',
