@@ -34,5 +34,10 @@
     &:focus {
       @include focus-outline('border');
     }
+
+    &[disabled] {
+      opacity: .5;
+      pointer-events: none;
+    }
   }
 }
