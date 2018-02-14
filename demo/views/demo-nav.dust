@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Carbon Components</title>
-    <link rel="stylesheet" href="/demo.css">
+    <link rel="stylesheet" href="/demo/demo.css">
     <style>
       .offleft {
         position: absolute;
@@ -24,6 +24,6 @@
       var componentItems = {componentItems|js|s};
       var docItems = {docItems|js|s};
     </script>
-    <script src="/demo.js"></script>
+    <script src="/demo/demo.js"></script>
   </body>
 </html>
