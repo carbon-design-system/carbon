@@ -73,6 +73,30 @@
     }
   }
 
+  .#{$prefix}--btn--tertiary {
+    @include button-theme(
+      transparent,
+      $ui-05,
+      $ui-05,
+      $ui-05,
+      $ui-05
+    );
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+
+    &:active {
+      color: $ui-05;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $ui-05;
+    }
+  }
+
   .#{$prefix}--btn--ghost {
     @include button-theme(
       transparent,
