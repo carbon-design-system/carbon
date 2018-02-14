@@ -1,9 +1,5 @@
 @import 'values';
 
-$prefix: gridish !default;
-@if map-get($grid-values, 'prefix') {
-  $prefix: map-get($grid-values, 'prefix');
-}
 $extraBreakpoints: () !default;
 $breakpoints: addPadding(map-get($grid-values, 'breakpoints'));
 $first: nth(nth($breakpoints, 1), 2);

@@ -1,24 +1,28 @@
 $includeFlexFallback: true;
-@import 'core';
+@import 'experimental';
 
-@supports (display: grid) {
-  .#{$prefix}-grid > * {
-    display: initial;
-    min-width: initial;
-    max-width: initial;
-    width: initial;
+@mixin grid-experimental-fallback {
+  @include grid-experimental;
 
-    &.#{$prefix}-grid {
-      display: grid;
+  @supports (display: grid) {
+    .#{$prefix}-grid > * {
+      display: initial;
+      min-width: initial;
+      max-width: initial;
+      width: initial;
+
+      &.#{$prefix}-grid {
+        display: grid;
+      }
+    }
+
+    [class*='#{$prefix}-grid__height-'] {
+      height: unset;
+      max-height: unset;
     }
   }
 
-  [class*='#{$prefix}-grid__height-'] {
-    height: unset;
-    max-height: unset;
+  .#{$prefix}-grid > script {
+    display: none;
   }
-}
-
-.#{$prefix}-grid > script {
-  display: none;
 }
