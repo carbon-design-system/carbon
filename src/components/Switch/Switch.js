@@ -12,6 +12,7 @@ const Switch = props => {
     onKeyDown,
     selected,
     text,
+    icon,
     href,
     ...other
   } = props;
@@ -39,9 +40,19 @@ const Switch = props => {
     className: classes,
   };
 
+  const btnIcon = icon
+    ? React.cloneElement(icon, {
+        className: classNames(
+          icon.props.className,
+          ' bx--content-switcher__icon'
+        ),
+      })
+    : null;
+
   if (kind === 'button') {
     return (
       <button {...other} {...commonProps}>
+        {btnIcon}
         {text}
       </button>
     );
@@ -49,6 +60,7 @@ const Switch = props => {
 
   return (
     <a href={href} {...other} {...commonProps}>
+      {btnIcon}
       {text}
     </a>
   );
@@ -63,6 +75,7 @@ Switch.propTypes = {
   onKeyDown: PropTypes.func,
   selected: PropTypes.bool,
   text: PropTypes.string.isRequired,
+  icon: PropTypes.element,
   href: PropTypes.string,
 };
 
