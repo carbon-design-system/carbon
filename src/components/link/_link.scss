@@ -34,5 +34,10 @@
     &:focus {
       @include focus-outline('border');
     }
+
+    &[aria-disabled="true"] {
+      opacity: .5;
+      pointer-events: none;
+    }
   }
 }
