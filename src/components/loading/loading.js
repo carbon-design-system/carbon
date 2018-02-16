@@ -50,7 +50,6 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
 
   /**
    * Toggles active/inactive state.
-   * @param {boolean} active `true` if this spinner should roll.
    */
   toggle() {
     return this.set(!this.active);

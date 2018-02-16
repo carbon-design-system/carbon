@@ -4,6 +4,7 @@ export default function(ToMix) {
    * @class EventedState
    */
   class EventedState extends ToMix {
+    // eslint-disable-next-line jsdoc/check-param-names
     /**
      * The internal implementation for {@link EventedState#changeState `.changeState()`}, performing actual change in state.
      * @param {string} [state] The new state. Can be an omitted, which means toggling.
@@ -17,6 +18,7 @@ export default function(ToMix) {
       throw new Error('_changeState() should be overriden to perform actual change in state.');
     }
 
+    // eslint-disable-next-line jsdoc/check-param-names
     /**
      * Changes the state of this component.
      * @param {string} [state] The new state. Can be an omitted, which means toggling.

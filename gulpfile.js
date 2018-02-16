@@ -60,7 +60,7 @@ const axe = require('gulp-axe-webdriver');
  * BrowserSync
  */
 
-gulp.task('browser-sync', ['build:dev'], cb => {
+gulp.task('browser-sync', ['sass:dev'], cb => {
   let started;
   nodemon({
     script: './server.js',
@@ -99,8 +99,10 @@ gulp.task('clean', () =>
     'html',
     'dist',
     'demo/**/*.{js,map}',
+    '!demo/js/components/**/*',
     '!demo/js/demo-switcher.js',
     '!demo/js/theme-switcher.js',
+    '!demo/js/prism.js',
     '!demo/index.js',
     '!demo/polyfills/*.js',
   ])
