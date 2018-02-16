@@ -71,35 +71,23 @@ $typescale-map: (
   letter-spacing: 0.5px;
 }
 
-// ☠️ Deprecated ☠️
-$major-second-typescale-map: (
-  '11' : 0.6875rem,
-  '12' : 0.75rem,
-  '14' : 0.875rem,
-  '16' : 1rem,
-  '18' : 1.125rem,
-  '20' : 1.25rem,
-  '23' : 1.4375rem,
-  '26' : 1.625rem,
-  '29' : 1.8125rem,
-  '32' : 2rem,
+$font-size-map: (
+  '76' : 4.75rem,
+  '54' : 3.375rem,
   '36' : 2.25rem,
-  '41' : 2.5625rem,
-  '46' : 2.875rem,
-  '52' : 3.25rem,
-  '58' : 3.625rem,
-  '66' : 4.125rem,
-  '74' : 4.625rem,
-  '83' : 5.1875rem,
-  '94' : 5.875rem
-);
+  '28' : 1.75rem,
+  '20' : 1.25rem,
+  '18' : 1.125rem,
+  '16' : 1rem,
+  '14' : 0.875rem,
+  '12' : 0.75rem,
+  '11' : 0.6875rem,
+ );
 
-// ☠️ Deprecated ☠️
 @mixin font-size($size) {
-  @if map-has-key($major-second-typescale-map, $size) {
+  @if map-has-key($font-size-map, $size) {
     font-size: map-get($major-second-typescale-map, $size);
-    @warn 'This mixin will be deprecated in V9';
   } @else {
-    @warn 'This is not a step of the Carbon Type Scale!';
+    @warn 'This is not a step of the Carbon Type Scale! Valid sizes are 11, 12, 14, 16, 18, 20, 28, 36, 54, and 76';
   }
 }
