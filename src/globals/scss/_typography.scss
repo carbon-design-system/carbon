@@ -86,7 +86,7 @@ $font-size-map: (
 
 @mixin font-size($size) {
   @if map-has-key($font-size-map, $size) {
-    font-size: map-get($major-second-typescale-map, $size);
+    font-size: map-get($font-size-map, $size);
   } @else {
     @warn 'This is not a step of the Carbon Type Scale! Valid sizes are 11, 12, 14, 16, 18, 20, 28, 36, 54, and 76';
   }
