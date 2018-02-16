@@ -73,7 +73,7 @@ class Pagination extends mixin(createComponent, initComponentBySearch, handles) 
 
   /**
    * Dispatches a custom event
-   * @param {String} evtName name of the event to be dispatched.
+   * @param {string} evtName name of the event to be dispatched.
    * @param {Object} detail contains the original event and any other necessary details.
    */
   _emitEvent = (evtName, detail) => {

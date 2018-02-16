@@ -110,7 +110,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
    * Handles click on the document.
    * Closes the profile switcherwhen document is clicked outside the left navigation or
    * the user clicks the profile switcher while it is open.
-   * @param {Event} event The event triggering this method.
+   * @param {Event} evt The event triggering this method.
    */
   handleDocumentClick(evt) {
     const clickTarget = evt.target;

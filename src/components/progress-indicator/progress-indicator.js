@@ -9,9 +9,6 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @param {HTMLElement} element The element representing the ProgressIndicator.
-   * @param {Object} [state] The component state.
-   * @param {Object} [state.currentIndex] The current step index.
-   * @param {Object} [state.totalSteps] Total number of steps.
    * @param {Object} [options] The component options.
    * @property {string} [options.selectorStepElement] The CSS selector to find step elements.
    * @property {string} [options.selectorCurrent] The CSS selector to find the current step element.
@@ -24,8 +21,22 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    */
   constructor(element, options) {
     super(element, options);
+
+    /**
+     * The component state.
+     * @type {Object}
+     */
     this.state = {
+      /**
+       * The current step index.
+       * @type {number}
+       */
       currentIndex: this.getCurrent().index,
+
+      /**
+       * Total number of steps.
+       * @type {number}
+       */
       totalSteps: this.getSteps().length,
     };
   }

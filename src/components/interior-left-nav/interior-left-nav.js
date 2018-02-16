@@ -95,7 +95,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch, hand
    * Handles click on a list item that contains a nested list in the left navigation.
    * The nested list is expanded and the icon is rotated.
    * @param {HTMLElement} listItem The list item that was clicked.
-   * @param {Event} event The event triggering this method.
+   * @param {Event} evt The evt triggering this method.
    */
   handleNestedListClick(listItem, evt) {
     const allNestedItems = [...this.element.querySelectorAll(this.options.selectorLeftNavListItemHasChildren)];

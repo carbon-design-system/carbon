@@ -76,6 +76,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * Changes the shown/hidden state.
    * @private
    * @param {string} state The new state.
+   * @param {Object} detail The detail data to be included in the event that will be fired.
    * @param {Function} callback Callback called when change in state completes.
    */
   _changeState(state, detail, callback) {
