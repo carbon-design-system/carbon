@@ -99,8 +99,10 @@ gulp.task('clean', () =>
     'html',
     'dist',
     'demo/**/*.{js,map}',
+    '!demo/js/components/**/*',
     '!demo/js/demo-switcher.js',
     '!demo/js/theme-switcher.js',
+    '!demo/js/prism.js',
     '!demo/index.js',
     '!demo/polyfills/*.js',
   ])
