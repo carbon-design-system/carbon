@@ -134,6 +134,9 @@
     "webpack-dev-middleware": "^2.0.0",
     "webpack-hot-middleware": "^2.21.0"
   },
+  "resolutions": {
+    "freshy": ">= 1.0.3"
+  },
   "files": [
     "css/**/*",
     "es/**/*",
