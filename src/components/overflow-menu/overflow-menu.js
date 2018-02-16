@@ -8,6 +8,31 @@ import FloatingMenu from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
 
+/**
+ * @param {Element} menuBody The menu body with the menu arrow.
+ * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
+ * @private
+ */
+export const getMenuOffset = menuBody => {
+  const menuWidth = menuBody.offsetWidth;
+  const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
+  const values = ['top', 'left', 'width', 'height', 'border-top-width'].reduce(
+    (o, name) => ({
+      ...o,
+      [name]: Number((/^([\d-]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
+    }),
+    {}
+  );
+  if (Object.keys(values).every(name => !isNaN(values[name]))) {
+    const { top, left, width, height, 'border-top-width': borderTopWidth } = values;
+    return {
+      left: menuWidth / 2 - (left + Math.sqrt(width ** 2 + height ** 2) / 2),
+      top: Math.sqrt(borderTopWidth ** 2 * 2) - top,
+    };
+  }
+  return undefined;
+};
+
 class OverflowMenu extends mixin(createComponent, initComponentBySearch, eventedShowHideState, handles) {
   /**
    * Overflow menu.
@@ -129,8 +154,8 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       classShown: `${prefix}--overflow-menu--open`,
       classMenuShown: `${prefix}--overflow-menu-options--open`,
       classMenuFlip: `${prefix}--overflow-menu--flip`,
-      objMenuOffset: { top: 3, left: 61 },
-      objMenuOffsetFlip: { top: 3, left: -61 },
+      objMenuOffset: getMenuOffset,
+      objMenuOffsetFlip: getMenuOffset,
     };
   }
 }

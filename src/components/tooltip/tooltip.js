@@ -4,9 +4,48 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentByEvent from '../../globals/js/mixins/init-component-by-event';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import handles from '../../globals/js/mixins/handles';
-import FloatingMenu from '../floating-menu/floating-menu';
+import FloatingMenu, { DIRECTION_LEFT, DIRECTION_TOP, DIRECTION_RIGHT, DIRECTION_BOTTOM } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
+
+/**
+ * @param {Element} menuBody The menu body with the menu arrow.
+ * @param {string} menuDirection Where the floating menu menu should be placed relative to the trigger button.
+ * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
+ * @private
+ */
+const getMenuOffset = (menuBody, menuDirection) => {
+  const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
+  const arrowPositionProp = {
+    [DIRECTION_LEFT]: 'right',
+    [DIRECTION_TOP]: 'bottom',
+    [DIRECTION_RIGHT]: 'left',
+    [DIRECTION_BOTTOM]: 'top',
+  }[menuDirection];
+  const menuPositionAdjustmentProp = {
+    [DIRECTION_LEFT]: 'left',
+    [DIRECTION_TOP]: 'top',
+    [DIRECTION_RIGHT]: 'left',
+    [DIRECTION_BOTTOM]: 'top',
+  }[menuDirection];
+  const values = [arrowPositionProp, 'border-bottom-width'].reduce(
+    (o, name) => ({
+      ...o,
+      [name]: Number((/^([\d-]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
+    }),
+    {}
+  );
+  values[arrowPositionProp] = values[arrowPositionProp] || -6; // IE, etc.
+  if (Object.keys(values).every(name => !isNaN(values[name]))) {
+    const { [arrowPositionProp]: arrowPosition, 'border-bottom-width': borderBottomWidth } = values;
+    return {
+      left: 0,
+      top: 0,
+      [menuPositionAdjustmentProp]: Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition,
+    };
+  }
+  return undefined;
+};
 
 class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHideState, handles) {
   /**
@@ -86,7 +125,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
       selectorInit: '[data-tooltip-trigger]',
       classShown: `${prefix}--tooltip--shown`,
       attribTooltipTarget: 'data-tooltip-target',
-      objMenuOffset: { top: 10, left: 0 },
+      objMenuOffset: getMenuOffset,
       initEventNames: ['mouseover', 'focus'],
     };
   }
