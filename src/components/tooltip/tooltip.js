@@ -7,6 +7,7 @@ import handles from '../../globals/js/mixins/handles';
 import FloatingMenu from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHideState, handles) {
   /**
@@ -81,14 +82,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   static components = new WeakMap();
 
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-tooltip-trigger]',
-      classShown: `${prefix}--tooltip--shown`,
-      attribTooltipTarget: 'data-tooltip-target',
-      objMenuOffset: { top: 10, left: 0 },
-      initEventNames: ['mouseover', 'focus'],
-    };
+    return defaultOptions(settings);
   }
 }
 

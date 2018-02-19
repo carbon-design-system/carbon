@@ -5,6 +5,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class StructuredList extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -111,13 +112,7 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   static components = new WeakMap();
 
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-structured-list]',
-      selectorRow: `[data-structured-list] .${prefix}--structured-list-tbody > label.${prefix}--structured-list-row`,
-      selectorListInput: id => `#${id}.${prefix}--structured-list-input`,
-      classActive: `${prefix}--structured-list-row--selected`,
-    };
+    return defaultOptions(settings);
   }
 }
 

@@ -4,6 +4,7 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
+import defaultOptions from './options';
 
 class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlur) {
   /**
@@ -195,22 +196,9 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     super.release();
   }
 
-  static options = {
-    selectorContainer: '[data-floating-menu-container]',
-    selectorPrimaryFocus: '[data-floating-menu-primary-focus]',
-    attribDirection: 'data-floating-menu-direction',
-    classShown: '', // Should be provided from options arg in constructor
-    classRefShown: '', // Should be provided from options arg in constructor
-    eventBeforeShown: 'floating-menu-beingshown',
-    eventAfterShown: 'floating-menu-shown',
-    eventBeforeHidden: 'floating-menu-beinghidden',
-    eventAfterHidden: 'floating-menu-hidden',
-    refNode: null, // Should be provided from options arg in constructor
-    offset: {
-      left: 0,
-      top: 0,
-    },
-  };
+  static get options() {
+    return defaultOptions();
+  }
 
   static components = new WeakMap();
 }

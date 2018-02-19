@@ -4,6 +4,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class NumberInput extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -70,11 +71,7 @@ class NumberInput extends mixin(createComponent, initComponentBySearch, handles)
    * @property {string} [selectorInput] The CSS selector to find the `<input>` element.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-numberinput]',
-      selectorInput: `.${prefix}--number input`,
-    };
+    return defaultOptions(settings);
   }
 }
 

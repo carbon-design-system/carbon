@@ -3,6 +3,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Pagination extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -113,16 +114,9 @@ class Pagination extends mixin(createComponent, initComponentBySearch, handles) 
    *   The name of the custom event fired when a user goes forward or backward a page.
    *   event.detail.direction contains the direction a user wishes to go.
    */
-  static options = {
-    selectorInit: '[data-pagination]',
-    selectorItemsPerPageInput: '[data-items-per-page]',
-    selectorPageNumberInput: '[data-page-number-input]',
-    selectorPageBackward: '[data-page-backward]',
-    selectorPageForward: '[data-page-forward]',
-    eventItemsPerPage: 'itemsPerPage',
-    eventPageNumber: 'pageNumber',
-    eventPageChange: 'pageChange',
-  };
+  static get options() {
+    return defaultOptions();
+  }
 }
 
 export default Pagination;

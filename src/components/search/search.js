@@ -6,6 +6,7 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 import svgToggleClass from '../../globals/js/misc/svg-toggle-class';
+import defaultOptions from './options';
 
 class Search extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -99,16 +100,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} [options.classLayoutHidden] The class used to hide nonselected layout view.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-search]',
-      selectorSearchView: '[data-search-view]',
-      selectorSearchInput: `.${prefix}--search-input`,
-      selectorClearIcon: `.${prefix}--search-close`,
-      selectorIconContainer: `.${prefix}--search-button[data-search-toggle]`,
-      classClearHidden: `${prefix}--search-close--hidden`,
-      classLayoutHidden: `${prefix}--search-view--hidden`,
-    };
+    return defaultOptions(settings);
   }
 
   /**

@@ -5,6 +5,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import { profileSwitcherOptions as defaultOptions } from './options';
 
 class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -268,29 +269,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, hand
    *   The data attribute selector for the dropdown item containing the current space name.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-profile-switcher]',
-      // Data Attribute selectors
-      selectorProfileSwitcher: '[data-profile-switcher]',
-      selectorToggle: '[data-profile-switcher-toggle]',
-      selectorMenu: '[data-switcher-menu]',
-      selectorLinkedAccount: '[data-switcher-account-sl]',
-      selectorAccount: '[data-switcher-account]',
-      selectorRegion: '[data-switcher-region]',
-      selectorOrg: '[data-switcher-org]',
-      selectorSpace: '[data-switcher-space]',
-      selectorDropdown: '[data-dropdown]',
-      selectorAccountDropdown: '[data-dropdown-account]',
-      selectorAccountSlDropdown: '[data-dropdown-account-sl]',
-      selectorAccountLinked: '[data-dropdown-account-linked]',
-      selectorAccountSlLinked: '[data-dropdown-account-sl-linked]',
-      selectorRegionDropdown: '[data-dropdown-region]',
-      selectorOrgDropdown: '[data-dropdown-org]',
-      selectorSpaceDropdown: '[data-dropdown-space]',
-      classSwitcherOpen: `${prefix}--account-switcher--open`,
-      classLinkedIcon: `.${prefix}--account-switcher__linked-icon`,
-    };
+    return defaultOptions(settings);
   }
 
   /**

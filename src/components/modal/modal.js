@@ -6,6 +6,7 @@ import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-stat
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowHideState, handles) {
   /**
@@ -186,20 +187,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    *   without being canceled by the event handler named by `eventBeforeHidden` option (`modal-beinghidden`).
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-modal]',
-      selectorModalClose: '[data-modal-close]',
-      selectorPrimaryFocus: '[data-modal-primary-focus]',
-      selectorsFloatingMenus: [`.${prefix}--overflow-menu-options`, '.bx-tooltip'],
-      classVisible: 'is-visible',
-      attribInitTarget: 'data-modal-target',
-      initEventNames: ['click'],
-      eventBeforeShown: 'modal-beingshown',
-      eventAfterShown: 'modal-shown',
-      eventBeforeHidden: 'modal-beinghidden',
-      eventAfterHidden: 'modal-hidden',
-    };
+    return defaultOptions(settings);
   }
 }
 

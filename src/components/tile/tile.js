@@ -3,6 +3,7 @@ import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventMatches from '../../globals/js/misc/event-matches';
+import defaultOptions from './options';
 
 class Tile extends mixin(createComponent, initComponentBySearch) {
   /**
@@ -80,15 +81,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    * @property {string} selectorInit The CSS selector to find Tile instances.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-tile]',
-      selectorAboveTheFold: '[data-tile-atf]',
-      selectorTileInput: '[data-tile-input]',
-      classExpandedTile: `${prefix}--tile--is-expanded`,
-      classClickableTile: `${prefix}--tile--is-clicked`,
-      classSelectableTile: `${prefix}--tile--is-selected`,
-    };
+    return defaultOptions(settings);
   }
 }
 

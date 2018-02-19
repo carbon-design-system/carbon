@@ -6,6 +6,7 @@ import eventedState from '../../globals/js/mixins/evented-state';
 import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class ContentSwitcher extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
@@ -137,14 +138,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * @property {string} [eventAfterSelected] The name of the custom event fired after a switcher button is selected.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-content-switcher]',
-      selectorButton: `input[type="radio"], .${prefix}--content-switcher-btn`,
-      classActive: `${prefix}--content-switcher--selected`,
-      eventBeforeSelected: 'content-switcher-beingselected',
-      eventAfterSelected: 'content-switcher-selected',
-    };
+    return defaultOptions(settings);
   }
 }
 

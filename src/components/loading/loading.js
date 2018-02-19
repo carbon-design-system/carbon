@@ -4,6 +4,7 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Loading extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -108,15 +109,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
    * @property {string} selectorInit The CSS selector to find spinners.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-loading]',
-      selectorLoadingOverlay: `.${prefix}--loading-overlay`,
-      classLoadingOverlay: `${prefix}--loading-overlay`,
-      classLoadingStop: `${prefix}--loading--stop`,
-      classLoadingOverlayStop: `${prefix}--loading-overlay--stop`,
-      active: true,
-    };
+    return defaultOptions(settings);
   }
 }
 

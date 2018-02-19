@@ -5,6 +5,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import eventedState from '../../globals/js/mixins/evented-state';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
+import defaultOptions from './options';
 
 class Slider extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
@@ -208,19 +209,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
    * @property {string} selectorInit The CSS selector to find slider instances.
    */
   static get options() {
-    const { prefix } = settings;
-    return {
-      selectorInit: '[data-slider]',
-      selectorTrack: `.${prefix}--slider__track`,
-      selectorFilledTrack: `.${prefix}--slider__filled-track`,
-      selectorThumb: `.${prefix}--slider__thumb`,
-      selectorInput: `.${prefix}--slider__input`,
-      classDisabled: `${prefix}--slider--disabled`,
-      classThumbClicked: `${prefix}--slider__thumb--clicked`,
-      eventBeforeSliderValueChange: 'slider-before-value-change',
-      eventAfterSliderValueChange: 'slider-after-value-change',
-      stepMultiplier: 4,
-    };
+    return defaultOptions(settings);
   }
 }
 
