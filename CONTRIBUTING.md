@@ -159,7 +159,7 @@ Test your changes by running our test commands:
   npm run test-watch
   ```
 
-* Generate code coverage report (stored in .gh-pages/coverage folder):
+* Generate code coverage report (stored in `.gh-pages/coverage` folder):
 
   ```
   npm run coverage
