@@ -48,6 +48,10 @@ describe('FileUploaderButton', () => {
       expect(mountWrapper.props().disableLabelChanges).toEqual(false);
     });
 
+    it('renders with default accept prop', () => {
+      expect(mountWrapper.props().accept).toEqual([]);
+    });
+
     it('does not have default role', () => {
       expect(mountWrapper.props().role).not.toBeTruthy();
     });

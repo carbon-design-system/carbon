@@ -27,9 +27,10 @@ storiesOf('FileUploader', module)
     () => (
       <FileUploader
         labelTitle="Upload"
-        labelDescription="only .jpg files at 500mb or less"
+        labelDescription="only .jpg and .png files at 500mb or less"
         buttonLabel="Add files"
         filenameStatus="edit"
+        accept={['.jpg', '.png']}
         multiple
       />
     )
