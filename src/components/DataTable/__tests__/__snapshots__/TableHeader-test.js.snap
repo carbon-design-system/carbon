@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableHeader should have an active and ascending class if sorting by ASC 1`] = `
+<Table>
+  <table
+    className="bx--data-table-v2 bx--data-table-v2--zebra"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableHeader
+              isSortHeader={true}
+              onClick={[MockFunction]}
+              scope="col"
+              sortDirection="ASC"
+              translateWithId={[Function]}
+            >
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--active bx--table-sort-v2--ascending"
+                  onClick={[MockFunction]}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Header
+                  </span>
+                  <Icon
+                    className="bx--table-sort-v2__icon"
+                    description="Sort rows by this header in ascending order"
+                    fillRule="evenodd"
+                    name="caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Sort rows by this header in ascending order"
+                      aria-label="Sort rows by this header in ascending order"
+                      className="bx--table-sort-v2__icon"
+                      fillRule="evenodd"
+                      height="5"
+                      name="caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Sort rows by this header in ascending order
+                      </title>
+                      <path
+                        d="M10 0L5 5 0 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </button>
+              </th>
+            </TableHeader>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;
+
+exports[`DataTable.TableHeader should have an active class if it is the sort header and the sort state is not NONE 1`] = `
+<Table>
+  <table
+    className="bx--data-table-v2 bx--data-table-v2--zebra"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableHeader
+              isSortHeader={true}
+              onClick={[MockFunction]}
+              scope="col"
+              sortDirection="NONE"
+              translateWithId={[Function]}
+            >
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2"
+                  onClick={[MockFunction]}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Header
+                  </span>
+                  <Icon
+                    className="bx--table-sort-v2__icon"
+                    description="Sort rows by this header in ascending order"
+                    fillRule="evenodd"
+                    name="caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Sort rows by this header in ascending order"
+                      aria-label="Sort rows by this header in ascending order"
+                      className="bx--table-sort-v2__icon"
+                      fillRule="evenodd"
+                      height="5"
+                      name="caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Sort rows by this header in ascending order
+                      </title>
+                      <path
+                        d="M10 0L5 5 0 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </button>
+              </th>
+            </TableHeader>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;
+
+exports[`DataTable.TableHeader should render 1`] = `
+<Table>
+  <table
+    className="bx--data-table-v2 bx--data-table-v2--zebra"
+  >
+    <TableHead>
+      <thead>
+        <TableRow>
+          <tr>
+            <TableHeader
+              isSortHeader={false}
+              onClick={[MockFunction]}
+              scope="col"
+              sortDirection="NONE"
+              translateWithId={[Function]}
+            >
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2"
+                  onClick={[MockFunction]}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Header
+                  </span>
+                  <Icon
+                    className="bx--table-sort-v2__icon"
+                    description="Sort rows by this header in descending order"
+                    fillRule="evenodd"
+                    name="caret--down"
+                    role="img"
+                  >
+                    <svg
+                      alt="Sort rows by this header in descending order"
+                      aria-label="Sort rows by this header in descending order"
+                      className="bx--table-sort-v2__icon"
+                      fillRule="evenodd"
+                      height="5"
+                      name="caret--down"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Sort rows by this header in descending order
+                      </title>
+                      <path
+                        d="M10 0L5 5 0 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </button>
+              </th>
+            </TableHeader>
+          </tr>
+        </TableRow>
+      </thead>
+    </TableHead>
+  </table>
+</Table>
+`;

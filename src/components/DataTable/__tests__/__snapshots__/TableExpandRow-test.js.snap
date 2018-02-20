@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable.TableExpandRow should render 1`] = `
+<Table>
+  <table
+    className="bx--data-table-v2 bx--data-table-v2--zebra"
+  >
+    <TableBody>
+      <tbody>
+        <TableExpandRow
+          ariaLabel="Aria label"
+          className="custom-class"
+          isExpanded={false}
+          onExpand={[MockFunction]}
+        >
+          <tr
+            className="bx--parent-row-v2 custom-class"
+            data-parent-row={true}
+          >
+            <TableCell
+              className="bx--table-expand-v2"
+            >
+              <td
+                className="bx--table-expand-v2"
+              >
+                <button
+                  aria-label="Aria label"
+                  className="bx--table-expand-v2__button"
+                  onClick={[MockFunction]}
+                >
+                  <Icon
+                    className="bx--table-expand-v2__svg"
+                    description="Provide a description that will be used as the title"
+                    fillRule="evenodd"
+                    name="chevron--right"
+                    role="img"
+                  >
+                    <svg
+                      alt="Provide a description that will be used as the title"
+                      aria-label="Provide a description that will be used as the title"
+                      className="bx--table-expand-v2__svg"
+                      fillRule="evenodd"
+                      height="12"
+                      name="chevron--right"
+                      role="img"
+                      viewBox="0 0 8 12"
+                      width="8"
+                    >
+                      <title>
+                        Provide a description that will be used as the title
+                      </title>
+                      <path
+                        d="M0 10.6L4.7 6 0 1.4 1.4 0l6.1 6-6.1 6z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </button>
+              </td>
+            </TableCell>
+          </tr>
+        </TableExpandRow>
+        <TableExpandedRow>
+          <tr
+            className="bx--expandable-row-v2"
+            data-child-row={true}
+          />
+        </TableExpandedRow>
+      </tbody>
+    </TableBody>
+  </table>
+</Table>
+`;

@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`DataTableRow should render 1`] = `
-<tr>
-  <div>
-    Children
-  </div>
-</tr>
-`;

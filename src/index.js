@@ -20,6 +20,7 @@ export ComposedModal, {
 export ContentSwitcher from './components/ContentSwitcher';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
+export DataTable from './components/DataTable';
 export DatePicker from './components/DatePicker';
 export DatePickerInput from './components/DatePickerInput';
 export DetailPageHeader from './components/DetailPageHeader';

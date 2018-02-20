@@ -1,0 +1,578 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable should render 1`] = `
+<DataTable
+  filterRows={[Function]}
+  headers={
+    Array [
+      Object {
+        "header": "Field A",
+        "key": "fieldA",
+      },
+      Object {
+        "header": "Field B",
+        "key": "fieldB",
+      },
+    ]
+  }
+  locale="en"
+  render={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "expandRow": [Function],
+            "getBatchActionProps": [Function],
+            "getHeaderProps": [Function],
+            "getRowProps": [Function],
+            "getSelectionProps": [Function],
+            "headers": Array [
+              Object {
+                "header": "Field A",
+                "key": "fieldA",
+              },
+              Object {
+                "header": "Field B",
+                "key": "fieldB",
+              },
+            ],
+            "onInputChange": [Function],
+            "rows": Array [
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldA",
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "b:fieldB",
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 2:B",
+                  },
+                ],
+                "id": "b",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldA",
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "a:fieldB",
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 1:B",
+                  },
+                ],
+                "id": "a",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+              Object {
+                "cells": Array [
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldA",
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:A",
+                  },
+                  Object {
+                    "errors": null,
+                    "id": "c:fieldB",
+                    "isEditable": false,
+                    "isEditing": false,
+                    "isValid": true,
+                    "value": "Field 3:B",
+                  },
+                ],
+                "id": "c",
+                "isExpanded": false,
+                "isSelected": false,
+              },
+            ],
+            "selectAll": [Function],
+            "selectRow": [Function],
+            "selectedRows": Array [],
+            "sortBy": [Function],
+          },
+        ],
+      ],
+    }
+  }
+  rows={
+    Array [
+      Object {
+        "fieldA": "Field 2:A",
+        "fieldB": "Field 2:B",
+        "id": "b",
+      },
+      Object {
+        "fieldA": "Field 1:A",
+        "fieldB": "Field 1:B",
+        "id": "a",
+      },
+      Object {
+        "fieldA": "Field 3:A",
+        "fieldB": "Field 3:B",
+        "id": "c",
+      },
+    ]
+  }
+  sortRow={[Function]}
+  translateWithId={[Function]}
+>
+  <TableContainer
+    title="DataTable with toolbar"
+  >
+    <div
+      className="bx--data-table-v2-container"
+    >
+      <h4
+        className="bx--data-table-v2-header"
+      >
+        DataTable with toolbar
+      </h4>
+      <TableToolbar>
+        <section
+          className="bx--table-toolbar"
+        >
+          <TableToolbarSearch
+            onChange={[Function]}
+          >
+            <div
+              className="bx--toolbar-search-container"
+            >
+              <Search
+                id="search-2"
+                labelText="Filter table"
+                onChange={[Function]}
+                placeHolderText="Search"
+                small={true}
+                type="text"
+              >
+                <div
+                  className="bx--search bx--search-with-options bx--search--sm"
+                  role="search"
+                >
+                  <Icon
+                    className="bx--search-magnifier"
+                    description="search"
+                    fillRule="evenodd"
+                    name="search--glyph"
+                    role="img"
+                  >
+                    <svg
+                      alt="search"
+                      aria-label="search"
+                      className="bx--search-magnifier"
+                      fillRule="evenodd"
+                      height="16"
+                      name="search--glyph"
+                      role="img"
+                      viewBox="0 0 16 16"
+                      width="16"
+                    >
+                      <title>
+                        search
+                      </title>
+                      <path
+                        d="M6 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm0-2C2.7 0 0 2.7 0 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm10 13.8L13.8 16l-3.6-3.6 2.2-2.2z"
+                        key="key0"
+                      />
+                      <path
+                        d="M16 13.8L13.8 16l-3.6-3.6 2.2-2.2z"
+                        key="key1"
+                      />
+                    </svg>
+                  </Icon>
+                  <label
+                    className="bx--label"
+                    htmlFor="search-2"
+                  >
+                    Filter table
+                  </label>
+                  <input
+                    className="bx--search-input"
+                    id="search-2"
+                    onChange={[Function]}
+                    placeholder="Search"
+                    type="text"
+                  />
+                  <Icon
+                    className="bx--search-close bx--search-close--hidden"
+                    description="close"
+                    fillRule="evenodd"
+                    name="close--glyph"
+                    onClick={[Function]}
+                    role="img"
+                  >
+                    <svg
+                      alt="close"
+                      aria-label="close"
+                      className="bx--search-close bx--search-close--hidden"
+                      fillRule="evenodd"
+                      height="16"
+                      name="close--glyph"
+                      onClick={[Function]}
+                      role="img"
+                      viewBox="0 0 16 16"
+                      width="16"
+                    >
+                      <title>
+                        close
+                      </title>
+                      <path
+                        d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8 9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </Search>
+            </div>
+          </TableToolbarSearch>
+          <TableToolbarContent>
+            <div
+              className="bx--toolbar-content"
+            >
+              <TableToolbarAction
+                iconDescription="Download"
+                iconName="download"
+                onClick={[MockFunction]}
+              >
+                <button
+                  className="bx--toolbar-action"
+                  onClick={[MockFunction]}
+                >
+                  <Icon
+                    className="bx--toolbar-action__icon"
+                    description="Download"
+                    fillRule="evenodd"
+                    name="download"
+                    role="img"
+                  >
+                    <svg
+                      alt="Download"
+                      aria-label="Download"
+                      className="bx--toolbar-action__icon"
+                      fillRule="evenodd"
+                      height="24"
+                      name="download"
+                      role="img"
+                      viewBox="0 0 24 24"
+                      width="24"
+                    >
+                      <title>
+                        Download
+                      </title>
+                      <path
+                        d="M19 9.4l-1.2-1.1L13 13V0h-2v13L6.2 8.3 5 9.4l7 6.6z"
+                        key="key0"
+                      />
+                      <path
+                        d="M22 14v6H2v-6H0v10h24V14z"
+                        key="key1"
+                      />
+                    </svg>
+                  </Icon>
+                </button>
+              </TableToolbarAction>
+              <TableToolbarAction
+                iconDescription="Edit"
+                iconName="edit"
+                onClick={[MockFunction]}
+              >
+                <button
+                  className="bx--toolbar-action"
+                  onClick={[MockFunction]}
+                >
+                  <Icon
+                    className="bx--toolbar-action__icon"
+                    description="Edit"
+                    fillRule="evenodd"
+                    name="edit"
+                    role="img"
+                  >
+                    <svg
+                      alt="Edit"
+                      aria-label="Edit"
+                      className="bx--toolbar-action__icon"
+                      fillRule="evenodd"
+                      height="29"
+                      name="edit"
+                      role="img"
+                      viewBox="0 0 29 29"
+                      width="29"
+                    >
+                      <title>
+                        Edit
+                      </title>
+                      <path
+                        d="M20.297 2.932l2.9-2.9 5.806 5.805-2.9 2.9zM3.867 19.385l5.8 5.807 14.5-14.517-5.8-5.806-14.5 14.515zm5.8 3.07L6.6 19.384 18.367 7.607l3.066 3.068-11.766 11.78zM0 29.062l4.833-1.936-2.9-2.903z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </button>
+              </TableToolbarAction>
+              <TableToolbarAction
+                iconDescription="Settings"
+                iconName="settings"
+                onClick={[MockFunction]}
+              >
+                <button
+                  className="bx--toolbar-action"
+                  onClick={[MockFunction]}
+                >
+                  <Icon
+                    className="bx--toolbar-action__icon"
+                    description="Settings"
+                    fillRule="evenodd"
+                    name="settings"
+                    role="img"
+                  >
+                    <svg
+                      alt="Settings"
+                      aria-label="Settings"
+                      className="bx--toolbar-action__icon"
+                      fillRule="evenodd"
+                      height="24"
+                      name="settings"
+                      role="img"
+                      viewBox="0 0 24 24"
+                      width="24"
+                    >
+                      <title>
+                        Settings
+                      </title>
+                      <path
+                        d="M21.2 12c0-.5 0-1-.1-1.4L24 8l-2.5-4.1L18 5.1c-.8-.7-1.8-1.3-2.9-1.7L14.4 0H9.6l-.8 3.4c-1.1.4-2 1-2.9 1.7L2.5 3.9 0 8l2.9 2.6c-.1.4-.1.9-.1 1.4 0 .5 0 1 .1 1.4L0 16l2.5 4.1L6 18.9c.8.7 1.8 1.3 2.9 1.7l.7 3.4h4.8l.8-3.4c1.1-.4 2-1 2.9-1.7l3.5 1.1 2.4-4-2.9-2.6c.1-.4.1-.9.1-1.4zM12 15c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </button>
+              </TableToolbarAction>
+              <Button
+                disabled={false}
+                iconDescription="Provide icon description if icon is used"
+                kind="primary"
+                onClick={[MockFunction]}
+                small={true}
+                tabIndex={0}
+                type="button"
+              >
+                <button
+                  className="bx--btn bx--btn--sm bx--btn--primary"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  Add new
+                </button>
+              </Button>
+            </div>
+          </TableToolbarContent>
+        </section>
+      </TableToolbar>
+      <Table>
+        <table
+          className="bx--data-table-v2 bx--data-table-v2--zebra"
+        >
+          <TableHead>
+            <thead>
+              <TableRow>
+                <tr>
+                  <TableHeader
+                    isSortHeader={false}
+                    key="fieldA"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Field A
+                        </span>
+                        <Icon
+                          className="bx--table-sort-v2__icon"
+                          description="Sort rows by this header in descending order"
+                          fillRule="evenodd"
+                          name="caret--down"
+                          role="img"
+                        >
+                          <svg
+                            alt="Sort rows by this header in descending order"
+                            aria-label="Sort rows by this header in descending order"
+                            className="bx--table-sort-v2__icon"
+                            fillRule="evenodd"
+                            height="5"
+                            name="caret--down"
+                            role="img"
+                            viewBox="0 0 10 5"
+                            width="10"
+                          >
+                            <title>
+                              Sort rows by this header in descending order
+                            </title>
+                            <path
+                              d="M10 0L5 5 0 0z"
+                              key="key0"
+                            />
+                          </svg>
+                        </Icon>
+                      </button>
+                    </th>
+                  </TableHeader>
+                  <TableHeader
+                    isSortHeader={false}
+                    key="fieldB"
+                    onClick={[Function]}
+                    scope="col"
+                    sortDirection="NONE"
+                    translateWithId={[Function]}
+                  >
+                    <th
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Field B
+                        </span>
+                        <Icon
+                          className="bx--table-sort-v2__icon"
+                          description="Sort rows by this header in descending order"
+                          fillRule="evenodd"
+                          name="caret--down"
+                          role="img"
+                        >
+                          <svg
+                            alt="Sort rows by this header in descending order"
+                            aria-label="Sort rows by this header in descending order"
+                            className="bx--table-sort-v2__icon"
+                            fillRule="evenodd"
+                            height="5"
+                            name="caret--down"
+                            role="img"
+                            viewBox="0 0 10 5"
+                            width="10"
+                          >
+                            <title>
+                              Sort rows by this header in descending order
+                            </title>
+                            <path
+                              d="M10 0L5 5 0 0z"
+                              key="key0"
+                            />
+                          </svg>
+                        </Icon>
+                      </button>
+                    </th>
+                  </TableHeader>
+                </tr>
+              </TableRow>
+            </thead>
+          </TableHead>
+          <TableBody>
+            <tbody>
+              <TableRow
+                key="b"
+              >
+                <tr>
+                  <TableCell
+                    key="b:fieldA"
+                  >
+                    <td>
+                      Field 2:A
+                    </td>
+                  </TableCell>
+                  <TableCell
+                    key="b:fieldB"
+                  >
+                    <td>
+                      Field 2:B
+                    </td>
+                  </TableCell>
+                </tr>
+              </TableRow>
+              <TableRow
+                key="a"
+              >
+                <tr>
+                  <TableCell
+                    key="a:fieldA"
+                  >
+                    <td>
+                      Field 1:A
+                    </td>
+                  </TableCell>
+                  <TableCell
+                    key="a:fieldB"
+                  >
+                    <td>
+                      Field 1:B
+                    </td>
+                  </TableCell>
+                </tr>
+              </TableRow>
+              <TableRow
+                key="c"
+              >
+                <tr>
+                  <TableCell
+                    key="c:fieldA"
+                  >
+                    <td>
+                      Field 3:A
+                    </td>
+                  </TableCell>
+                  <TableCell
+                    key="c:fieldB"
+                  >
+                    <td>
+                      Field 3:B
+                    </td>
+                  </TableCell>
+                </tr>
+              </TableRow>
+            </tbody>
+          </TableBody>
+        </table>
+      </Table>
+    </div>
+  </TableContainer>
+</DataTable>
+`;

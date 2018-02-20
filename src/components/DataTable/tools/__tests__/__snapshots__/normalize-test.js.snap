@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalize should return a normalized map of cells by id 1`] = `
+Object {
+  "a:fieldA": Object {
+    "errors": null,
+    "id": "a:fieldA",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "a:fieldB": Object {
+    "errors": null,
+    "id": "a:fieldB",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "a:fieldC": Object {
+    "errors": null,
+    "id": "a:fieldC",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+  "b:fieldA": Object {
+    "errors": null,
+    "id": "b:fieldA",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "b:fieldB": Object {
+    "errors": null,
+    "id": "b:fieldB",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "b:fieldC": Object {
+    "errors": null,
+    "id": "b:fieldC",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+  "c:fieldA": Object {
+    "errors": null,
+    "id": "c:fieldA",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "c:fieldB": Object {
+    "errors": null,
+    "id": "c:fieldB",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "c:fieldC": Object {
+    "errors": null,
+    "id": "c:fieldC",
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+}
+`;
+
+exports[`normalize should return a normalized map of rows by id 1`] = `
+Object {
+  "a": Object {
+    "cells": Array [
+      "a:fieldA",
+      "a:fieldB",
+      "a:fieldC",
+    ],
+    "id": "a",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+  "b": Object {
+    "cells": Array [
+      "b:fieldA",
+      "b:fieldB",
+      "b:fieldC",
+    ],
+    "id": "b",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+  "c": Object {
+    "cells": Array [
+      "c:fieldA",
+      "c:fieldB",
+      "c:fieldC",
+    ],
+    "id": "c",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+}
+`;
+
+exports[`normalize should return an array of the row ids 1`] = `
+Array [
+  "a",
+  "b",
+  "c",
+]
+`;

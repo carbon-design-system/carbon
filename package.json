@@ -125,6 +125,7 @@
     "flatpickr": "4.3.0",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
+    "lodash.omit": "^4.5.0",
     "warning": "3.0.0",
     "window-or-global": "^1.0.1"
   },
@@ -284,5 +285,5 @@
       "enzyme-to-json/serializer"
     ]
   },
-  "bundleSizeThreshold": 60000
+  "bundleSizeThreshold": 80000
 }
