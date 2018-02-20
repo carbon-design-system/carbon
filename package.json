@@ -83,7 +83,6 @@
     "gulp-autoprefixer": "~3.0.1",
     "gulp-axe-webdriver": "^1.4.0",
     "gulp-babel": "^6.1.2",
-    "gulp-eslint": "^3.0.0",
     "gulp-jsdoc3": "^0.2.1",
     "gulp-nodemon": "^2.2.0",
     "gulp-rename": "^1.2.2",
@@ -106,6 +105,7 @@
     "karma-sourcemap-loader": "~0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^2.0.0",
+    "lint-staged": "^6.1.0",
     "lolex": "1.4.0",
     "markdown-it": "^8.4.0",
     "merge-stream": "^1.0.0",
@@ -151,9 +151,13 @@
     "build-dev": "gulp build:dev",
     "commitmsg": "validate-commit-msg",
     "dev": "gulp serve",
-    "lint": "gulp lint",
+    "lint": "eslint .",
+    "lint:staged": "eslint",
     "prebuild": "gulp clean",
+    "precommit": "lint-staged",
     "prepublishOnly": "npm run build",
+    "prettier": "prettier --write \"**/*.{scss,css,js}\"",
+    "prettier:staged": "prettier --write",
     "start": "node server.js",
     "test": "gulp test",
     "test:unit": "gulp test:unit",
@@ -182,6 +186,17 @@
       ],
       "warnOnFail": false
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier:staged",
+      "lint:staged",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "prettier:staged",
+      "git add"
+    ]
   },
   "maintainers": [
     {

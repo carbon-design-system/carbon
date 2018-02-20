@@ -2,6 +2,7 @@ demo/*.css
 demo/*.map
 demo/*.js
 demo/js/prism.js
+demo/scss/_prism.scss
 demo/hot
 !demo/index.js
 dist
