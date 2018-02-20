@@ -33,6 +33,7 @@
     "node": ">=6.x"
   },
   "dependencies": {
+    "all-contributors-cli": "^4.10.1",
     "carbon-icons": "^6.0.4",
     "flatpickr": "2.6.3",
     "lodash.debounce": "^4.0.8",
