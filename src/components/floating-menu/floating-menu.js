@@ -5,6 +5,72 @@ import trackBlur from '../../globals/js/mixins/track-blur';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import optimizedResize from '../../globals/js/misc/resize';
 
+/**
+ * The structure for the position of floating menu.
+ * @typedef {Object} FloatingMenu~position
+ * @property {number} left The left position.
+ * @property {number} top The top position.
+ * @property {number} right The right position.
+ * @property {number} bottom The bottom position.
+ */
+
+/**
+ * The structure for the size of floating menu.
+ * @typedef {Object} FloatingMenu~size
+ * @property {number} width The width.
+ * @property {number} height The height.
+ */
+
+/**
+ * The structure for the position offset of floating menu.
+ * @typedef {Object} FloatingMenu~offset
+ * @property {number} top The top position.
+ * @property {number} left The left position.
+ */
+
+export const DIRECTION_LEFT = 'left';
+export const DIRECTION_TOP = 'top';
+export const DIRECTION_RIGHT = 'right';
+export const DIRECTION_BOTTOM = 'bottom';
+
+/**
+ * @param {Object} params The parameters.
+ * @param {FloatingMenu~size} params.menuSize The size of the menu.
+ * @param {FloatingMenu~position} params.refPosition The position of the triggering element.
+ * @param {FloatingMenu~offset} [params.offset={ left: 0, top: 0 }] The position offset of the menu.
+ * @param {string} [params.direction=bottom] The menu direction.
+ * @param {number} [params.scrollY=0] The scroll position of the viewport.
+ * @returns {FloatingMenu~offset} The position of the menu, relative to the top-left corner of the viewport.
+ * @private
+ */
+export const getFloatingPosition = ({ menuSize, refPosition, offset = {}, direction = DIRECTION_BOTTOM, scrollY = 0 }) => {
+  const { left: refLeft = 0, top: refTop = 0, right: refRight = 0, bottom: refBottom = 0 } = refPosition;
+
+  const { width, height } = menuSize;
+  const { top = 0, left = 0 } = offset;
+  const refCenterHorizontal = (refLeft + refRight) / 2;
+  const refCenterVertical = (refTop + refBottom) / 2;
+
+  return {
+    [DIRECTION_LEFT]: {
+      left: refLeft - width - left,
+      top: refCenterVertical - height / 2 + scrollY + top,
+    },
+    [DIRECTION_TOP]: {
+      left: refCenterHorizontal - width / 2 + left,
+      top: refTop - height + scrollY - top,
+    },
+    [DIRECTION_RIGHT]: {
+      left: refRight + left,
+      top: refCenterVertical - height / 2 + scrollY + top,
+    },
+    [DIRECTION_BOTTOM]: {
+      left: refCenterHorizontal - width / 2 + left,
+      top: refBottom + scrollY + top,
+    },
+  }[direction];
+};
+
 class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlur) {
   /**
    * Floating menu.
@@ -76,33 +142,13 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       throw new Error('Cannot find the refernce node for positioning floating menu.');
     }
 
-    const scroll = refNode.ownerDocument.defaultView.pageYOffset;
-
-    const { left: refLeft, top: refTop, right: refRight, bottom: refBottom } = refNode.getBoundingClientRect();
-
-    const { width: menuWidth, height: menuHeight } = element.getBoundingClientRect();
-
-    const refCenterHorizontal = (refLeft + refRight) / 2;
-    const refCenterVertical = (refTop + refBottom) / 2;
-
-    return {
-      left: () => ({
-        left: refLeft - menuWidth - offset.left,
-        top: refCenterVertical - menuHeight / 2 + scroll + offset.top,
-      }),
-      top: () => ({
-        left: refCenterHorizontal - menuWidth / 2 + offset.left,
-        top: refTop - menuHeight + scroll - offset.top,
-      }),
-      right: () => ({
-        left: refRight + offset.left,
-        top: refCenterVertical - menuHeight / 2 + scroll + offset.top,
-      }),
-      bottom: () => ({
-        left: refCenterHorizontal - menuWidth / 2 + offset.left,
-        top: refBottom + scroll + offset.top,
-      }),
-    }[direction]();
+    return getFloatingPosition({
+      menuSize: element.getBoundingClientRect(),
+      refPosition: refNode.getBoundingClientRect(),
+      offset: typeof offset !== 'function' ? offset : offset(element, direction),
+      direction,
+      scrollY: refNode.ownerDocument.defaultView.pageYOffset,
+    });
   }
 
   /**
