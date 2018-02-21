@@ -105,9 +105,10 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    * @private
    */
   _handleDocumentClick(event) {
-    const element = this.element;
+    const { element, optionMenu, wasOpenBeforeClick } = this;
     const isOfSelf = element.contains(event.target);
-    const shouldBeOpen = isOfSelf && !this.wasOpenBeforeClick;
+    const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
+    const shouldBeOpen = isOfSelf && !wasOpenBeforeClick;
     const state = shouldBeOpen ? 'shown' : 'hidden';
 
     if (isOfSelf) {
@@ -117,7 +118,11 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       event.delegateTarget = element; // eslint-disable-line no-param-reassign
     }
 
-    this.changeState(state, getLaunchingDetails(event));
+    this.changeState(state, getLaunchingDetails(event), () => {
+      if (state === 'hidden' && isOfMenu) {
+        element.focus();
+      }
+    });
   }
 
   /**
@@ -128,9 +133,10 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
   _handleKeyPress(event) {
     const key = event.which;
     if (key === 13) {
-      const element = this.element;
+      const { element, optionMenu, options } = this;
       const isOfSelf = element.contains(event.target);
-      const shouldBeOpen = isOfSelf && !element.classList.contains(this.options.classShown);
+      const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
+      const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
       const state = shouldBeOpen ? 'shown' : 'hidden';
 
       if (isOfSelf) {
@@ -140,7 +146,11 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
         event.delegateTarget = element; // eslint-disable-line no-param-reassign
       }
 
-      this.changeState(state, getLaunchingDetails(event));
+      this.changeState(state, getLaunchingDetails(event), () => {
+        if (state === 'hidden' && isOfMenu) {
+          element.focus();
+        }
+      });
     }
   }
 
