@@ -111,6 +111,8 @@ export {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from './components/Tile';
+export RadioTile from './components/RadioTile';
+export TileGroup from './components/TileGroup';
 export TimePicker from './components/TimePicker';
 export TimePickerSelect from './components/TimePickerSelect';
 export Toggle from './components/Toggle';
