@@ -3,6 +3,14 @@
 // Node
 const path = require('path');
 
+// Fonts
+const fonts = [
+  './node_modules/@ibm/plex/IBM-Plex-Mono/fonts/split/**/*.woff',
+  './node_modules/@ibm/plex/IBM-Plex-Mono/fonts/split/**/*.woff2',
+  './node_modules/@ibm/plex/IBM-Plex-Sans/fonts/split/**/*.woff',
+  './node_modules/@ibm/plex/IBM-Plex-Sans/fonts/split/**/*.woff2',
+];
+
 // Styles
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
@@ -106,6 +114,13 @@ gulp.task('clean', () =>
     '!demo/polyfills/*.js',
   ])
 );
+
+/**
+ * Fonts
+ */
+gulp.task('fonts', () => {
+  gulp.src(fonts, { base: './node_modules/@ibm/plex/' }).pipe(gulp.dest('src/globals/fonts/'));
+});
 
 /**
  * JavaScript Tasks
@@ -245,7 +260,7 @@ gulp.task('sass:dev', () =>
     .pipe(browserSync.stream())
 );
 
-gulp.task('sass:source', () => {
+gulp.task('sass:source', ['fonts'], () => {
   const srcFiles = './src/**/*.scss';
 
   return gulp.src(srcFiles).pipe(gulp.dest('scss'));
