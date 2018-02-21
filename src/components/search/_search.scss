@@ -88,6 +88,10 @@
     right: rem(100px);
   }
 
+  .#{$prefix}--search--lg:last-child .#{$prefix}--search-close {
+    right: rem(12px);
+  }
+
   .#{$prefix}--search-button {
     @include reset;
     border: 0;
