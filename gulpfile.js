@@ -9,7 +9,6 @@ const autoprefixer = require('gulp-autoprefixer');
 
 // Javascript deps
 const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
 const uglify = require('gulp-uglify');
 const pump = require('pump');
 const { promisify } = require('bluebird');
@@ -257,38 +256,6 @@ gulp.task('html:source', () => {
 
   return gulp.src(srcFiles).pipe(gulp.dest('html'));
 });
-
-/**
- * Lint
- */
-
-gulp.task('lint', () =>
-  gulp
-    .src([
-      'gulpfile.js',
-      'server.js',
-      'src/**/*.js',
-      'tests/**/*.js',
-      'tools/**/*.js',
-      'demo/**/*.js',
-      '!demo/js/prism.js',
-      '!demo/hot/**/*.js',
-    ])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-    .pipe(
-      eslint.results(results => {
-        const count = results.warningCount;
-        if (count > 0) {
-          throw new gutil.PluginError('gulp-eslint', {
-            name: 'ESLintWarning',
-            message: `Has ${count} warning${count > 1 ? 's' : ''}`,
-          });
-        }
-      })
-    )
-);
 
 /**
  * JSDoc
