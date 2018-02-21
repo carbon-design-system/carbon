@@ -32,6 +32,12 @@ export default class NumberInput extends Component {
     invalidText: 'Provide invalidText',
   };
 
+  /**
+   * The DOM node refernce to the `<input>`.
+   * @type {HTMLInputElement}
+   */
+  _inputRef = null;
+
   constructor(props) {
     super(props);
 
@@ -53,6 +59,8 @@ export default class NumberInput extends Component {
 
   handleChange = evt => {
     if (!this.props.disabled) {
+      evt.persist();
+      evt.imaginaryTarget = this._inputRef;
       this.setState(
         {
           value: evt.target.value,
@@ -77,7 +85,8 @@ export default class NumberInput extends Component {
 
     if (!disabled && conditional) {
       value = direction === 'down' ? value - step : value + step;
-
+      evt.persist();
+      evt.imaginaryTarget = this._inputRef;
       this.setState(
         {
           value,
@@ -88,6 +97,14 @@ export default class NumberInput extends Component {
         }
       );
     }
+  };
+
+  /**
+   * Preserves the DOM node ref of `<input>`.
+   * @param {HTMLInputElement} ref The DOM node ref of `<input>`.
+   */
+  _handleInputRef = ref => {
+    this._inputRef = ref;
   };
 
   render() {
@@ -136,7 +153,13 @@ export default class NumberInput extends Component {
           {label}
         </label>
         <div className={numberInputClasses} {...inputWrapperProps}>
-          <input type="number" pattern="[0-9]*" {...other} {...props} />
+          <input
+            type="number"
+            pattern="[0-9]*"
+            {...other}
+            {...props}
+            ref={this._handleInputRef}
+          />
           <div className="bx--number__controls">
             <button
               {...buttonProps}
