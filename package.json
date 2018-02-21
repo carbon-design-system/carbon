@@ -165,7 +165,7 @@
     "husky": "^0.14.3",
     "jest": "^22.1.0",
     "lcov2badge": "^0.1.0",
-    "lint-staged": "^6.0.1",
+    "lint-staged": "^7.0.0",
     "node-sass": "4.6.0",
     "object-assign": "^4.1.1",
     "postcss-loader": "^2.0.5",
@@ -208,12 +208,12 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier",
-      "lint",
+      "yarn prettier",
+      "yarn lint",
       "git add"
     ],
-    "*.{css,scss}": [
-      "prettier",
+    "*.{css,md,scss}": [
+      "yarn prettier",
       "git add"
     ]
   },
