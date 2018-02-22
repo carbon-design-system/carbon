@@ -1,15 +1,15 @@
 $font-prefix: 'https://unpkg.com/@ibm/plex@v1.0.0' !default;
 
 @import 'import-once';
-@import '../../../node_modules/@ibm/plex/scss/mono/italic/index';
-@import '../../../node_modules/@ibm/plex/scss/mono/light/index';
-@import '../../../node_modules/@ibm/plex/scss/mono/light/italic/index';
-@import '../../../node_modules/@ibm/plex/scss/mono/regular/index';
-@import '../../../node_modules/@ibm/plex/scss/mono/semibold/index';
-@import '../../../node_modules/@ibm/plex/scss/mono/semibold/italic/index';
-@import '../../../node_modules/@ibm/plex/scss/sans/italic/index';
-@import '../../../node_modules/@ibm/plex/scss/sans/light/index';
-@import '../../../node_modules/@ibm/plex/scss/sans/light/italic/index';
-@import '../../../node_modules/@ibm/plex/scss/sans/regular/index';
-@import '../../../node_modules/@ibm/plex/scss/sans/semibold/index';
-@import '../../../node_modules/@ibm/plex/scss/sans/semibold/italic/index';
+@import '@ibm/plex/scss/mono/italic/index';
+@import '@ibm/plex/scss/mono/light/index';
+@import '@ibm/plex/scss/mono/light/italic/index';
+@import '@ibm/plex/scss/mono/regular/index';
+@import '@ibm/plex/scss/mono/semibold/index';
+@import '@ibm/plex/scss/mono/semibold/italic/index';
+@import '@ibm/plex/scss/sans/italic/index';
+@import '@ibm/plex/scss/sans/light/index';
+@import '@ibm/plex/scss/sans/light/italic/index';
+@import '@ibm/plex/scss/sans/regular/index';
+@import '@ibm/plex/scss/sans/semibold/index';
+@import '@ibm/plex/scss/sans/semibold/italic/index';
