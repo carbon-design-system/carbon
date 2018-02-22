@@ -40,7 +40,7 @@
 .demo--container {
   box-sizing: border-box;
   padding-top: 1em;
-  transition: .2s;
+  transition: 0.2s;
   background-color: $ui-02;
   padding-left: 0;
 }
@@ -65,7 +65,6 @@
   width: 100%;
   max-width: 960px;
   height: 100%;
-  min-height: 2000px;
   padding: 1em;
 
   display: flex;
@@ -145,7 +144,7 @@
   min-height: 50px;
 }
 
-[class*="bx--col"] {
+[class*='bx--col'] {
   background-color: $color__gray-1;
 
   p {
