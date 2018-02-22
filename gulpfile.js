@@ -61,26 +61,31 @@ const axe = require('gulp-axe-webdriver');
 
 gulp.task('browser-sync', ['sass:dev'], cb => {
   let started;
-  nodemon({
+  const options = {
     script: './server.js',
     ext: 'dust js',
-    watch: ['./demo/views', './server.js'],
+    watch: ['demo/**/*.dust', 'server.js'],
     env: {
       PORT: cloptions.serverport,
     },
-  }).on('start', () => {
-    if (!started) {
-      started = true;
-      browserSync.init({
-        logPrefix: 'Carbon Components',
-        open: false,
-        port: cloptions.port,
-        proxy: `localhost:${cloptions.serverport}`,
-        timestamps: false,
-      });
-      cb();
-    }
-  });
+  };
+  nodemon(options)
+    .on('start', () => {
+      if (!started) {
+        started = true;
+        browserSync.init({
+          logPrefix: 'Carbon Components',
+          open: false,
+          port: cloptions.port,
+          proxy: `localhost:${cloptions.serverport}`,
+          timestamps: false,
+        });
+        cb();
+      }
+    })
+    .on('restart', () => {
+      browserSync.reload();
+    });
 });
 
 /**
@@ -219,7 +224,7 @@ gulp.task('sass:compiled', () => {
         })
       )
       .pipe(gulp.dest('css'))
-      .pipe(browserSync.stream());
+      .pipe(browserSync.stream({ match: '**/*.css' }));
   }
 
   buildStyles(); // Expanded CSS
@@ -242,7 +247,7 @@ gulp.task('sass:dev', () =>
     )
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.stream({ match: '**/*.css' }))
 );
 
 gulp.task('sass:source', () => {
