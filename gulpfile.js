@@ -30,8 +30,12 @@ const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
 
 // WebPack
-const webpack = promisify(require('webpack'));
+const webpack = require('webpack');
 const webpackDevConfig = require('./tools/webpack.dev.config');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+
+const webpackPromisified = promisify(webpack);
 
 // JSDoc
 const jsdocConfig = require('gulp-jsdoc3/dist/jsdocConfig.json');
@@ -72,12 +76,17 @@ gulp.task('browser-sync', ['sass:dev'], cb => {
   nodemon(options)
     .on('start', () => {
       if (!started) {
+        const compiler = webpack(webpackDevConfig);
         started = true;
         browserSync.init({
           logPrefix: 'Carbon Components',
           open: false,
           port: cloptions.port,
           proxy: `localhost:${cloptions.serverport}`,
+          middleware: [
+            webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackDevConfig.output.publicPath }),
+            webpackHotMiddleware(compiler),
+          ],
           timestamps: false,
         });
         cb();
@@ -125,7 +134,7 @@ gulp.task('scripts:dev', () => {
         browserSync.reload();
       });
   }
-  return webpack(webpackDevConfig).then(stats => {
+  return webpackPromisified(webpackDevConfig).then(stats => {
     gutil.log(
       '[webpack:build]',
       stats.toString({
