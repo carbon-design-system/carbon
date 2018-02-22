@@ -3,7 +3,7 @@
 // Includes styles for body, link, wrapper and container.
 //--------------------
 @import 'typography';
-@include plex-font-face;
+@import '../../src/globals/scss/css--plex-core';
 
 body {
   font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
