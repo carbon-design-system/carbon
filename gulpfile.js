@@ -273,7 +273,7 @@ gulp.task('jsdoc', cb => {
     .src('./src/**/*.js')
     .pipe(
       babel({
-        plugins: ['transform-class-properties'],
+        plugins: ['transform-class-properties', 'transform-object-rest-spread'],
         babelrc: false,
       })
     )
