@@ -144,6 +144,13 @@ export default class PaginationV2 extends Component {
     const statePage = this.state.page;
     const statePageSize = this.state.pageSize;
     const classNames = classnames('bx--pagination', className);
+    const backButtonClasses = classnames(
+      'bx--pagination__button',
+      'bx--pagination__button--backward',
+      {
+        'bx--pagination__button--no-index': pageInputDisabled,
+      }
+    );
     const inputId = id || this.uniqueId;
     const totalPages = Math.ceil(totalItems / statePageSize);
     const selectItems = this.renderSelectItems(totalPages);
@@ -186,7 +193,7 @@ export default class PaginationV2 extends Component {
               : pageRangeText(statePage, Math.ceil(totalItems / statePageSize))}
           </span>
           <button
-            className="bx--pagination__button bx--pagination__button--backward"
+            className={backButtonClasses}
             onClick={this.decrementPage}
             disabled={this.props.disabled || statePage === 1}>
             <Icon
@@ -195,9 +202,7 @@ export default class PaginationV2 extends Component {
               description={backwardText}
             />
           </button>
-          {pageInputDisabled ? (
-            <span className="bx--pagination__text">|</span>
-          ) : (
+          {pageInputDisabled ? null : (
             <Select
               id={`bx-pagination-select-${inputId + 2}`}
               labelText={itemsPerPageText}
