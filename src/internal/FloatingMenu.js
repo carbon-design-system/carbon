@@ -181,6 +181,13 @@ class FloatingMenu extends React.Component {
    */
   _menuBody = null;
 
+  constructor(props) {
+    super(props);
+    if (typeof document !== 'undefined' && hasCreatePortal) {
+      this.el = document.createElement('div');
+    }
+  }
+
   /**
    * A callback called when a new menu ref is available.
    * @private
@@ -277,6 +284,10 @@ class FloatingMenu extends React.Component {
         ReactDOM.render(this._getChildrenWithProps(), this._menuContainer);
       });
     } else {
+      if (this.el && this.el.firstChild) {
+        this._menuBody = this.el.firstChild;
+        document.body.appendChild(this._menuBody);
+      }
       this._updateMenuSize();
     }
   }
@@ -289,6 +300,9 @@ class FloatingMenu extends React.Component {
         menuContainer.parentNode.removeChild(menuContainer);
       }
       this._menuContainer = null;
+    } else if (this._menuBody) {
+      // Moves the menu body back to the portal container so that React unmount code does not crash
+      this.el.appendChild(this._menuBody);
     }
   }
 
@@ -318,10 +332,7 @@ class FloatingMenu extends React.Component {
 
   render() {
     if (typeof document !== 'undefined' && hasCreatePortal) {
-      return ReactDOM.createPortal(
-        <div ref={this._onNewMenuRef}>{this._getChildrenWithProps()}</div>, // Add wrapper `<div>` to align to React15 version
-        document.body
-      );
+      return ReactDOM.createPortal(this._getChildrenWithProps(), this.el);
     }
     return null;
   }
