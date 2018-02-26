@@ -77,7 +77,7 @@ $css--helpers: true;
 
     &:disabled:hover {
       cursor: default;
-      
+
       .#{$prefix}--pagination__button-icon {
         fill: $ui-05;
       }
@@ -91,6 +91,11 @@ $css--helpers: true;
 
   .#{$prefix}--pagination__button--forward {
     margin-left: $spacing-lg;
+  }
+
+  .#{$prefix}--pagination__button--no-index {
+    border-right: 0;
+    margin-right: 1px;
   }
 
   .#{$prefix}--pagination {
