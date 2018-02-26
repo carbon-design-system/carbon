@@ -40,7 +40,6 @@
   },
   "devDependencies": {
     "@frctl/fractal": "^1.1.0",
-    "@ibm/plex": "^1.0.0",
     "adaro": "1.0.4",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",
@@ -230,5 +229,8 @@
     "exports": false,
     "name": "carbon-components",
     "needs": "^1.2.1"
+  },
+  "peerDependencies": {
+    "@ibm/plex": "^1.0.1"
   }
 }
