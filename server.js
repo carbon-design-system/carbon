@@ -7,22 +7,12 @@ const path = require('path');
 const express = require('express'); // eslint-disable-line
 const Fractal = require('@frctl/fractal'); // eslint-disable-line
 
-const webpack = require('webpack'); // eslint-disable-line
-const webpackDevMiddleware = require('webpack-dev-middleware'); // eslint-disable-line
-const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line
-
 const readFile = promisify(fs.readFile);
 
 const app = express();
 const adaro = require('adaro'); // eslint-disable-line
 
 const port = process.env.PORT || 8080;
-
-const config = require('./tools/webpack.dev.config');
-
-const compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-app.use(webpackHotMiddleware(compiler));
 
 const fractal = Fractal.create();
 fractal.components.set('path', path.join(__dirname, 'src/components'));
