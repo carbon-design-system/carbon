@@ -3,6 +3,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import FileUploader, { FileUploaderButton } from '../FileUploader';
+import Button from '../Button';
 
 storiesOf('FileUploader', module)
   .addWithInfo(
@@ -22,16 +23,28 @@ storiesOf('FileUploader', module)
   .addWithInfo(
     'FileUploader',
     `
-      The FileUploader components allow the user to upload any necessary files. This uses the FileUploaderButton and Filename components. Filename components will appear below the FileUploaderButton when files are added. Use the filenameStatus prop to control what icon appears in Filename ('edit', 'complete', or 'uploading').
+      The FileUploader components allow the user to upload any necessary files. This uses the FileUploaderButton and Filename components. Filename components will appear below the FileUploaderButton when files are added. Use the filenameStatus prop to control what icon appears in Filename ('edit', 'complete', or 'uploading'). The FileUploader component contains a method to clear all files uploaded, clearFiles. This can be used with a ref in the parent component. The clear file button in this example is an example of how to use the clearFiles method.
     `,
     () => (
-      <FileUploader
-        labelTitle="Upload"
-        labelDescription="only .jpg and .png files at 500mb or less"
-        buttonLabel="Add files"
-        filenameStatus="edit"
-        accept={['.jpg', '.png']}
-        multiple
-      />
+      <div className="bx--file__container">
+        <FileUploader
+          labelTitle="Upload"
+          labelDescription="only .jpg and .png files at 500mb or less"
+          buttonLabel="Add files"
+          filenameStatus="edit"
+          accept={['.jpg', '.png']}
+          multiple
+          ref={fileUploader => (this.fileUploader = fileUploader)}
+        />
+        <Button
+          kind="secondary"
+          small
+          style={{ marginTop: '1rem' }}
+          onClick={() => {
+            this.fileUploader.clearFiles();
+          }}>
+          Clear File
+        </Button>
+      </div>
     )
   );
