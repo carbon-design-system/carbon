@@ -57,6 +57,10 @@
     }
   }
 
+  .#{$prefix}--toggle--small + .#{$prefix}--toggle__label {
+    width: rem(32px);
+  }
+
   .#{$prefix}--toggle--small + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
     width: 32px;
     height: 16px;
@@ -88,14 +92,14 @@
     top: 6px;
     z-index: 1;
     transition: $transition--base $carbon--standard-easing;
-    transform: scale(.2);
+    transform: scale(0.2);
   }
 
   .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
     fill: $brand-01;
     transform: scale(1) translateX(16px);
   }
-    
+
   .#{$prefix}--toggle__text--left,
   .#{$prefix}--toggle__text--right {
     @include typescale('zeta');
@@ -149,7 +153,6 @@
 
   .#{$prefix}--toggle--small:focus + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
-      
       @include focus-outline('blurred');
     }
 
