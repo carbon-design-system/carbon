@@ -27,14 +27,14 @@
 
   .#{$prefix}--toggle__appearance {
     position: relative;
-    width: 48px;
+    width: rem(48px);
 
     &:before {
       position: absolute;
       display: block;
       content: '';
       width: 100%;
-      height: 4px;
+      height: rem(4px);
       top: -2px;
       background-color: $ui-05;
       transition: $transition--base $carbon--standard-easing;
@@ -48,8 +48,8 @@
       border: 2px solid $ui-05;
       cursor: pointer;
       top: -12px;
-      width: 24px;
-      height: 24px;
+      width: rem(24px);
+      height: rem(24px);
       background-color: $ui-01;
       border-radius: 50%;
       content: '';
@@ -58,17 +58,17 @@
   }
 
   .#{$prefix}--toggle--small + .#{$prefix}--toggle__label {
-    width: 32px;
+    width: rem(32px);
   }
 
   .#{$prefix}--toggle--small + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
-    width: 32px;
-    height: 16px;
+    width: rem(24px);
+    height: rem(16px);
 
     &:before {
       box-sizing: border-box;
-      height: 16px;
-      width: 32px;
+      height: rem(16px);
+      width: rem(32px);
       border-radius: 0.9375rem;
       background-color: transparent;
       border: 2px solid $ui-05;
@@ -76,8 +76,8 @@
     }
 
     &:after {
-      width: 10px;
-      height: 10px;
+      width: rem(10px);
+      height: rem(10px);
       background-color: $ui-05;
       border: none;
       top: 3px;
