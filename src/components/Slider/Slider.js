@@ -148,7 +148,7 @@ export default class Slider extends PureComponent {
           prevState,
           props
         );
-        const newValue = fromInput ? evt.target.value : newSliderValue;
+        const newValue = fromInput ? Number(evt.target.value) : newSliderValue;
         if (prevState.left === left && prevState.value === newValue) {
           return { dragging: false };
         }
