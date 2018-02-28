@@ -208,7 +208,6 @@ gulp.task('sass:compiled', () => {
       .pipe(sourcemaps.init())
       .pipe(
         sass({
-          includePaths: ['node_modules/'],
           outputStyle: prod ? 'compressed' : 'expanded',
         }).on('error', sass.logError)
       )
@@ -247,7 +246,6 @@ gulp.task('sass:dev', () =>
     .pipe(sourcemaps.init())
     .pipe(
       sass({
-        includePaths: ['node_modules/'],
         outputStyle: 'expanded',
       }).on('error', sass.logError)
     )
