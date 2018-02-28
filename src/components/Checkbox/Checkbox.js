@@ -8,10 +8,14 @@ const Checkbox = ({
   labelText,
   onChange,
   indeterminate,
+  hideLabel,
   ...other
 }) => {
   let input;
   const wrapperClasses = classNames('bx--checkbox-label', className);
+  const labelClasses = classNames({
+    'bx--visually-hidden': hideLabel,
+  });
 
   return (
     <div className="bx--form-item bx--checkbox-wrapper">
@@ -31,7 +35,7 @@ const Checkbox = ({
         }}
       />
       <label htmlFor={id} className={wrapperClasses}>
-        {labelText}
+        <span className={labelClasses}>{labelText}</span>
       </label>
     </div>
   );
@@ -45,6 +49,7 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
   labelText: PropTypes.node.isRequired,
+  hideLabel: PropTypes.bool,
   onChange: PropTypes.func,
 };
 

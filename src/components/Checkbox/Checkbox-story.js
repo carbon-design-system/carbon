@@ -104,4 +104,22 @@ storiesOf('Checkbox', module)
         />
       </fieldset>
     )
+  )
+  .addWithInfo(
+    'no label',
+    `
+      Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
+      The example below shows a Checkbox component with a hidden label. Use this property to hide the label visually but still preserve accessibility.
+    `,
+    () => (
+      <fieldset className="bx--fieldset">
+        <legend className="bx--label">Checkbox heading</legend>
+        <Checkbox
+          {...checkboxEvents}
+          id="checkbox-label-2"
+          labelText="Checkbox label hidden"
+          hideLabel={true}
+        />
+      </fieldset>
+    )
   );

@@ -77,4 +77,12 @@ storiesOf('TextInput', module)
         invalidText={'A valid value is required'}
       />
     )
+  )
+  .addWithInfo(
+    'no Label',
+    `
+      ${introText}
+      The example below shows an Text Input with a hidden Label.  Use this property to hide the label visually but still preserve accessibility.
+    `,
+    () => <TextInput {...TextInputProps} hideLabel={true} />
   );

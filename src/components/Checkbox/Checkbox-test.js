@@ -64,6 +64,17 @@ describe('Checkbox', () => {
     expect(input().props().checked).toEqual(false);
   });
 
+  it('hideLabel hides the label visually', () => {
+    const wrapper = mount(
+      <Checkbox id="test" labelText="testlabel" hideLabel />
+    );
+
+    const label = wrapper.find('label');
+    expect(label.length).toEqual(1);
+    const span = wrapper.find('span');
+    expect(span.hasClass('bx--visually-hidden')).toEqual(true);
+  });
+
   describe('events', () => {
     it('should invoke onChange with expected arguments', () => {
       const onChange = jest.fn();
