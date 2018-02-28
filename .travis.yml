@@ -29,11 +29,7 @@ install:
   - if [[ -n "${AAT_TOKEN}" ]]; then npm i https://aat.mybluemix.net/dist/karma-ibma.tgz; fi
 
 script:
-  - npm run lint
-  - npm run build
-  - npm run test:unit -- -b ChromeHeadless_Travis -b Firefox
-  - if [[ -n "$RUN_EACH" ]]; then find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm run test:unit -- -d -f; fi
-  - if [[ -n "$AAT_TOKEN" ]]; then npm run test:a11y; fi
+  - yarn ci-check
 
 after_success:
   - npm run semantic-release
