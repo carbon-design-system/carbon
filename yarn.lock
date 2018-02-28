@@ -68,9 +68,9 @@
     js-beautify "^1.6.2"
     lodash "^4.12.0"
 
-"@ibm/plex@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@ibm/plex/-/plex-1.0.0.tgz#afac8ec2f8a126eb517eb043a9af4d7224538bee"
+"@ibm/plex@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@ibm/plex/-/plex-1.0.1.tgz#5bd7186bdf1c2daa491aa37a6e9a3e4e4a945d94"
 
 "@semantic-release/commit-analyzer@^2.0.0":
   version "2.0.0"
