@@ -230,8 +230,5 @@
     "exports": false,
     "name": "carbon-components",
     "needs": "^1.2.1"
-  },
-  "peerDependencies": {
-    "@ibm/plex": "^1.0.1"
   }
 }
