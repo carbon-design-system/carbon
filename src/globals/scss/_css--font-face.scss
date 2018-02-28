@@ -1,4 +1,4 @@
-$font-path: 'https://unpkg.com/carbon-components@v7.2.1/src/globals/fonts' !default;
+$font-path: 'https://unpkg.com/carbon-components@latest/src/globals/fonts' !default;
 
 @import 'import-once';
 @import 'css--plex-core';
@@ -57,7 +57,9 @@ $font-path: 'https://unpkg.com/carbon-components@v7.2.1/src/globals/fonts' !defa
 }
 
 @include exports('css--font-face') {
-  @if global-variable-exists('css--plex') == false or $css--plex == false {
+  @if global-variable-exists('css--plex') and $css--plex == true {
+    @include plex-font-face;
+  } @else {
     @include helvetica-font-face;
   }
 }

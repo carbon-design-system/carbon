@@ -125,7 +125,7 @@
     padding: 0.25rem;
     background-color: $field-01;
     color: $text-02;
-    font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+    font-family: 'ibm-plex-mono', Courier, monospace;
     -webkit-font-smoothing: auto;
   }
 
@@ -216,7 +216,14 @@
     }
   }
 
-  main[data-page='style-overview-typography'] & hr + hr + table tbody tr td:nth-child(2) {
+  main[data-page='style-overview-typography']
+    &
+    hr
+    + hr
+    + table
+    tbody
+    tr
+    td:nth-child(2) {
     @media all and (max-width: 600px) {
       text-align: left;
       font-size: 3rem;
