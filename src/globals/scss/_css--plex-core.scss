@@ -1,4 +1,6 @@
-$font-prefix: 'https://unpkg.com/@ibm/plex@v1.0.0' !default;
+$font-path: 'https://unpkg.com/@ibm/plex@v1.0.1' !default;
+// Compat layer for @ibm/plex which expects `font-prefix`
+$font-prefix: $font-path !default;
 
 @import 'import-once';
 @import '@ibm/plex/scss/mono/italic/index';
