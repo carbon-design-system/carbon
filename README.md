@@ -1,13 +1,10 @@
 # Carbon Components React
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/carbon-design-system/carbon-components-react.svg)](https://greenkeeper.io/)
-[![All Contributors](https://img.shields.io/badge/all_contributors-53-orange.svg?style=flat-square)](#contributors)
-
 [![Build Status](https://travis-ci.org/carbon-design-system/carbon-components-react.svg?branch=master)](https://travis-ci.org/carbon-design-system/carbon-components-react)
+[![All Contributors](https://img.shields.io/badge/all_contributors-53-orange.svg?style=flat-square)](#contributors)
+[![Greenkeeper badge](https://badges.greenkeeper.io/carbon-design-system/carbon-components-react.svg)](https://greenkeeper.io/)
 
-**React component library for building websites and UIs with Carbon**
-
-This repository provides a collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using [React](https://facebook.github.io/react/).
+> A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using [React](https://facebook.github.io/react/).
 
 ## Usage
 
@@ -19,6 +16,8 @@ View available React Components [here](http://react.carbondesignsystem.com). Usa
 
 ```
 npm install -S carbon-components-react carbon-components carbon-icons
+# Or, with yarn
+yarn add carbon-components-rect carbon-components carbon-icons
 ```
 
 1. These components require the use of [Webpack](http://webpack.github.io/docs/tutorials/getting-started/) in your project. See our [`webpack.config.js`](/.storybook/webpack.config.js) for an example configuration.
@@ -29,7 +28,7 @@ npm install -S carbon-components-react carbon-components carbon-icons
 
 ## Development
 
-Please refer to the [Contribution Guidelines](CONTRIBUTING.md) before starting any work.
+Please refer to the [Contribution Guidelines](./github/CONTRIBUTING.md) before starting any work.
 
 ### Using the server
 
@@ -38,7 +37,7 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 1. Start the server:
 
    ```
-   $ npm run storybook
+   $ yarn storybook
    ```
 
 2. Open browser to `http://localhost:9000/`.
@@ -49,7 +48,7 @@ We recommend the use of [React Storybook](https://github.com/storybooks/react-st
 
 ## Contributing
 
-Please check out our [Contribution Guidelines](CONTRIBUTING.md) for detailed information on how you can lend a hand.
+Please check out our [Contribution Guidelines](./.github/CONTRIBUTING.md) for detailed information on how you can lend a hand.
 
 ## Contributors
 
@@ -68,4 +67,5 @@ Thanks goes to these wonderful people:
 | [<img src="https://avatars2.githubusercontent.com/u/4289301?v=4" width="100px;"/><br /><sub><b>Toni</b></sub>](https://github.com/tonitagd)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=tonitagd "Code") | [<img src="https://avatars3.githubusercontent.com/u/29720673?v=4" width="100px;"/><br /><sub><b>shyfruan</b></sub>](https://github.com/shyfruan)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=shyfruan "Code") |
 | [<img src="https://avatars2.githubusercontent.com/u/4289301?v=4" width="100px;"/><br /><sub><b>Toni</b></sub>](https://github.com/tonitagd)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=tonitagd "Code") | [<img src="https://avatars3.githubusercontent.com/u/29720673?v=4" width="100px;"/><br /><sub><b>shyfruan</b></sub>](https://github.com/shyfruan)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=shyfruan "Code") | [<img src="https://avatars1.githubusercontent.com/u/7243419?s=400&v=4" width="100px;"/><br /><sub><b>Joseph Gordon</b></sub>](https://github.com/JMGordon)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=JMGordon "Code") | [<img src="https://avatars3.githubusercontent.com/u/7374889?s=400&v=4" width="100px;"/><br /><sub><b>Logan McCaul</b></sub>](https://github.com/loganmccaul)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=loganmccaul "Code") | [<img src="https://avatars2.githubusercontent.com/u/14233261?s=400&v=4" width="100px;"/><br /><sub><b>Matt Chapman</b></sub>](https://github.com/asfordmatt)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=asfordmatt "Code") | [<img src="https://avatars1.githubusercontent.com/u/6663002?s=400&v=4" width="100px;"/><br /><sub><b>Scott Dickerson</b></sub>](https://github.com/scottdickerson)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=scottdickerson "Code") | [<img src="https://avatars3.githubusercontent.com/u/32717?s=400&v=4" width="100px;"/><br /><sub><b>Darío Hereñú</b></sub>](https://github.com/kant)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=kant "Code") |
 | [<img src="https://avatars3.githubusercontent.com/u/1449523?s=400&v=4" width="100px;"/><br /><sub><b>James Zhang</b></sub>](https://github.com/jzhang300)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=jzhang300 "Code") | [<img src="https://avatars0.githubusercontent.com/u/6776917?s=400&v=4" width="100px;"/><br /><sub><b>Simone Riccardelli</b></sub>](https://github.com/michead)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=michead "Code") | [<img src="https://avatars2.githubusercontent.com/u/7711697?s=400&v=4" width="100px;"/><br /><sub><b>Tom</b></sub>](https://github.com/Tom-Danger-Bryant)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=Tom-Danger-Bryant "Code") | [<img src="https://avatars2.githubusercontent.com/u/2263351?s=400&v=4" width="100px;"/><br /><sub><b>Zeus Courtois</b></sub>](https://github.com/zeusorion)<br />[💻](https://github.com/carbon-design-system/carbon-components-react/commits?author=zeusorion "Code") |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
