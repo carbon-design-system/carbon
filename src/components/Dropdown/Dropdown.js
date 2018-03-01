@@ -13,6 +13,8 @@ export default class Dropdown extends PureComponent {
     tabIndex: PropTypes.number,
     onClick: PropTypes.func,
     onChange: PropTypes.func.isRequired,
+    onOpen: PropTypes.func,
+    onClose: PropTypes.func,
     selectedText: PropTypes.string,
     open: PropTypes.bool,
     iconDescription: PropTypes.string,
@@ -25,6 +27,8 @@ export default class Dropdown extends PureComponent {
     disabled: false,
     iconDescription: 'open list of options',
     onChange: () => {},
+    onOpen: () => {},
+    onClose: () => {},
   };
 
   constructor(props) {
@@ -34,6 +38,15 @@ export default class Dropdown extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     this.setState(this.resetState(nextProps));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.open && this.state.open) {
+      this.props.onOpen();
+    }
+    if (prevState.open && !this.state.open) {
+      this.props.onClose();
+    }
   }
 
   resetState(props) {
@@ -93,6 +106,8 @@ export default class Dropdown extends PureComponent {
       iconDescription,
       disabled,
       selectedText, // eslint-disable-line no-unused-vars
+      onOpen, // eslint-disable-line no-unused-vars
+      onClose, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 

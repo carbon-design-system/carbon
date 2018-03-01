@@ -98,9 +98,11 @@ describe('Dropdown', () => {
 
   describe('events', () => {
     const onClick = jest.fn();
+    const onOpen = jest.fn();
+    const onClose = jest.fn();
 
     const wrapper = mount(
-      <Dropdown onClick={onClick}>
+      <Dropdown onClick={onClick} onOpen={onOpen} onClose={onClose}>
         <DropdownItem
           className="test-child"
           itemText="test-child"
@@ -158,6 +160,17 @@ describe('Dropdown', () => {
       const listener = wrapper.find(ClickListener);
       listener.props().onClickOutside();
       expect(wrapper.state().open).toBe(false);
+    });
+
+    it('fires open and close callbacks when the dropdown is clicked', () => {
+      onOpen.mockReset();
+      onClose.mockReset();
+      dropdown.simulate('click');
+      expect(onOpen).toHaveBeenCalled();
+      expect(onClose).not.toHaveBeenCalled();
+      dropdown.simulate('click');
+      expect(onOpen).toHaveBeenCalled();
+      expect(onClose).toHaveBeenCalled();
     });
 
     it('should not open when disabled', () => {
