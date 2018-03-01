@@ -176,7 +176,8 @@
     letter-spacing: 0;
   }
 
-  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary {
+  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
+  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger--primary {
     margin-left: $spacing-md;
   }
 }
