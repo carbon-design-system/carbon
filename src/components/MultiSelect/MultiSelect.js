@@ -54,6 +54,10 @@ export default class MultiSelect extends React.Component {
      * consuming component what kind of internal state changes are occuring.
      */
     onChange: PropTypes.func,
+    /**
+     * Specify 'inline' to create an inline multi-select.
+     */
+    type: PropTypes.oneOf(['default', 'inline']),
   };
 
   static defaultProps = {
