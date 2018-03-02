@@ -61,6 +61,12 @@
       background-color: $ui-03;
       padding-left: 1rem;
       padding-right: 1rem;
+
+      > .#{$prefix}--btn {
+        @include text-overflow();
+        margin-right: 0.25rem;
+        flex: 1;
+      }
     }
 
     .#{$prefix}--card-footer__link {
@@ -78,16 +84,18 @@
       flex-direction: column;
       align-items: $card-flex-align;
       padding-top: 1rem;
+      width: 100%;
     }
 
     .#{$prefix}--about__title {
       font-weight: 400;
       padding-top: 1.5rem;
+      width: 100%;
     }
 
     .#{$prefix}--about__title--name {
       @include typescale('delta');
-      @include text-overflow(rem(180px));
+      @include text-overflow();
       font-weight: 400;
       margin: 0;
       line-height: 1.2;
@@ -96,16 +104,14 @@
 
     .#{$prefix}--about__title--link {
       @include typescale('omega');
-      @include text-overflow(rem(180px));
-      display: inline;
+      @include text-overflow();
       font-weight: 400;
       text-align: center;
     }
 
     .#{$prefix}--about__title--additional-info {
       @include typescale('omega');
-      @include text-overflow(rem(180px));
-      display: inline;
+      @include text-overflow();
       font-weight: 400;
       padding: 0;
       margin: 0;

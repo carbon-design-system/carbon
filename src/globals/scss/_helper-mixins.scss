@@ -16,12 +16,16 @@
 @import 'css--reset';
 @import 'typography';
 
-@mixin text-overflow($width) {
+@mixin text-overflow($width: false) {
   display: block;
-  width: $width;
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  // apply a width if width parameter exists
+  @if ($width) {
+    width: $width;
+  }
 }
 
 @mixin placeholder-colors {
