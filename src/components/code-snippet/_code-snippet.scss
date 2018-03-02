@@ -47,7 +47,6 @@
   }
 
   .#{$prefix}--snippet__icon {
-    cursor: pointer;
     fill: $brand-01;
     height: rem(24px);
     width: rem(18px);
@@ -68,6 +67,7 @@
 
   .#{$prefix}--snippet-button {
     @include reset;
+    cursor: pointer;
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
