@@ -16,7 +16,7 @@ const CodeSnippet = ({
   const wrapperClasses = classNames('bx--snippet', className, snippetType);
   return (
     <div className={wrapperClasses} {...other}>
-      <div className="bx--snippet-container">
+      <div role="textbox" tabIndex={0} className="bx--snippet-container">
         <code>
           <pre ref={wrappedContentRef}>{children}</pre>
         </code>
