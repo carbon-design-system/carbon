@@ -91,6 +91,7 @@ export default class Modal extends Component {
         ref={modal => {
           this.innerModal = modal;
         }}
+        role="dialog"
         className="bx--modal-container">
         <div className="bx--modal-header">
           {passiveModal && modalButton}

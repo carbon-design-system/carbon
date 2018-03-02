@@ -60,6 +60,7 @@ exports[`ModalWrapper should render 1`] = `
       >
         <div
           className="bx--modal-container"
+          role="dialog"
         >
           <div
             className="bx--modal-header"
