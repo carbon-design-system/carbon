@@ -85,6 +85,7 @@ export default class ComboBox extends React.Component {
     itemToString: defaultItemToString,
     shouldFilterItem: defaultShouldFilterItem,
     type: 'default',
+    ariaLabel: 'ListBox input field',
   };
 
   constructor(props) {
@@ -135,6 +136,7 @@ export default class ComboBox extends React.Component {
       itemToString,
       placeholder,
       initialSelectedItem,
+      ariaLabel,
     } = this.props;
     const className = cx('bx--combo-box', containerClassName);
     return (
@@ -162,6 +164,7 @@ export default class ComboBox extends React.Component {
             <ListBox.Field {...getButtonProps({ disabled })}>
               <input
                 className="bx--text-input"
+                aria-label={ariaLabel}
                 {...getInputProps({
                   disabled,
                   id,
