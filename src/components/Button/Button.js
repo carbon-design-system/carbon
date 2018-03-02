@@ -23,6 +23,8 @@ const Button = ({
     'bx--btn--danger': kind === 'danger',
     'bx--btn--secondary': kind === 'secondary',
     'bx--btn--ghost': kind === 'ghost',
+    'bx--btn--danger--primary': kind === 'danger--primary',
+    'bx--btn--tertiary': kind === 'tertiary',
   });
 
   const commonProps = {
@@ -56,7 +58,14 @@ Button.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   small: PropTypes.bool,
-  kind: PropTypes.oneOf(['primary', 'secondary', 'danger', 'ghost']).isRequired,
+  kind: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'danger',
+    'ghost',
+    'danger--primary',
+    'tertiary',
+  ]).isRequired,
   href: PropTypes.string,
   tabIndex: PropTypes.number,
   type: PropTypes.oneOf(['button', 'reset', 'submit']),

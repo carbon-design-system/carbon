@@ -185,3 +185,19 @@ describe('Modal Wrapper', () => {
     });
   });
 });
+describe('Danger Modal', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<Modal danger />);
+
+    it('has the expected classes', () => {
+      expect(wrapper.hasClass('bx--modal--danger')).toEqual(true);
+    });
+
+    it('has correct button combination', () => {
+      const modalButtons = wrapper.find('.bx--modal__buttons-container').props()
+        .children;
+      expect(modalButtons[0].props.kind).toEqual('tertiary');
+      expect(modalButtons[1].props.kind).toEqual('danger--primary');
+    });
+  });
+});

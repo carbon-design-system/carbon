@@ -21,6 +21,7 @@ export default class Modal extends Component {
     iconDescription: PropTypes.string,
     primaryButtonDisabled: PropTypes.bool,
     onSecondarySubmit: PropTypes.func,
+    danger: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -59,6 +60,7 @@ export default class Modal extends Component {
       onSecondarySubmit,
       iconDescription,
       primaryButtonDisabled,
+      danger,
       ...other
     } = this.props;
 
@@ -70,6 +72,7 @@ export default class Modal extends Component {
       'bx--modal': true,
       'bx--modal-tall': !passiveModal,
       'is-visible': open,
+      'bx--modal--danger': this.props.danger,
       [this.props.className]: this.props.className,
     });
 
@@ -105,11 +108,13 @@ export default class Modal extends Component {
         {!passiveModal && (
           <div className="bx--modal-footer">
             <div className="bx--modal__buttons-container">
-              <Button kind="secondary" onClick={onSecondaryButtonClick}>
+              <Button
+                kind={danger ? 'tertiary' : 'secondary'}
+                onClick={onSecondaryButtonClick}>
                 {secondaryButtonText}
               </Button>
               <Button
-                kind="primary"
+                kind={danger ? 'danger--primary' : 'primary'}
                 disabled={primaryButtonDisabled}
                 onClick={onRequestSubmit}>
                 {primaryButtonText}

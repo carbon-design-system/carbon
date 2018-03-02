@@ -183,3 +183,33 @@ describe('DangerButton', () => {
     });
   });
 });
+
+describe('danger--primaryButton', () => {
+  describe('Renders as exptected', () => {
+    const wrapper = shallow(
+      <Button kind="danger--primary" className="extra-class" />
+    );
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--btn--danger--primary')).toEqual(true);
+    });
+
+    it('Should add extra classes that are passed via className', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+});
+
+describe('TertiaryButton', () => {
+  describe('Renders as exptected', () => {
+    const wrapper = shallow(<Button kind="tertiary" className="extra-class" />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--btn--tertiary')).toEqual(true);
+    });
+
+    it('Should add extra classes that are passed via className', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+});
