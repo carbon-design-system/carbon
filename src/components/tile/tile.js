@@ -32,7 +32,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     const isExpandable = this.tileType === 'expandable';
     if (isExpandable) {
       const aboveTheFold = this.element.querySelector(this.options.selectorAboveTheFold);
-      const tilePadding = parseInt(window.getComputedStyle(this.element, null).getPropertyValue('padding'), 10);
+      const tilePadding = parseInt(window.getComputedStyle(this.element, null).getPropertyValue('padding'), 10) * 2;
       if (aboveTheFold) {
         this.tileHeight = this.element.getBoundingClientRect().height;
         this.atfHeight = aboveTheFold.getBoundingClientRect().height + tilePadding;
