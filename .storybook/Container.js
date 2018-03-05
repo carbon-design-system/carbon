@@ -8,6 +8,7 @@ export default class Container extends Component {
 
     return (
       <div
+        role="main"
         style={{
           padding: '3em',
           display: 'flex',
