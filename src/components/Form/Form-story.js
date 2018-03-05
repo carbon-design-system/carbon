@@ -54,6 +54,7 @@ const fieldsetToggleProps = {
 };
 
 const fileUploaderEvents = {
+  buttonLabel: 'Add files',
   className: 'some-class',
 };
 
@@ -93,13 +94,13 @@ const TextInputProps = {
 
 const PasswordProps = {
   className: 'some-class',
-  id: 'test2',
+  id: 'test3',
   labelText: 'Password',
 };
 
 const InvalidPasswordProps = {
   className: 'some-class',
-  id: 'test2',
+  id: 'test4',
   labelText: 'Password',
   invalid: true,
   invalidText:
@@ -110,7 +111,7 @@ const textareaProps = {
   labelText: 'Text Area label',
   className: 'some-class',
   placeholder: 'Placeholder text',
-  id: 'test2',
+  id: 'test5',
   cols: 50,
   rows: 4,
 };
@@ -169,9 +170,15 @@ storiesOf('Form', module).addWithInfo(
             {...radioProps}
           />
           <RadioButton
+            value="blue"
+            labelText="Standard Radio Button"
+            id="radio-3"
+            {...radioProps}
+          />
+          <RadioButton
             value="disabled"
             labelText="Disabled Radio Button"
-            id="radio-3"
+            id="radio-4"
             disabled
             {...radioProps}
           />
