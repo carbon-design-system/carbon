@@ -161,6 +161,16 @@ describe('Tooltip', () => {
       rootWrapper.instance().handleClickOutside();
       expect(rootWrapper.state().open).toEqual(false);
     });
+
+    it('prop.open change should update open state', () => {
+      const rootWrapper = mount(<Tooltip open={false} triggerText="Tooltip" />);
+      expect(rootWrapper.state().open).toEqual(false);
+      rootWrapper.setProps({
+        open: true,
+        triggerText: 'Tooltip',
+      });
+      expect(rootWrapper.state().open).toEqual(true);
+    });
   });
 
   describe('getTriggerPosition', () => {

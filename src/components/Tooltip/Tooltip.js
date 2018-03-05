@@ -151,6 +151,15 @@ export default class Tooltip extends Component {
     });
   }
 
+  componentWillReceiveProps(newProps) {
+    /**
+     * so that tooltip can be controlled programmatically thru this `open` prop
+     */
+    this.setState({
+      open: newProps.open,
+    });
+  }
+
   getTriggerPosition = () => {
     if (this.triggerEl) {
       const triggerPosition = this.triggerEl.getBoundingClientRect();

@@ -28,7 +28,7 @@ yarn add carbon-components-rect carbon-components carbon-icons
 
 ## Development
 
-Please refer to the [Contribution Guidelines](./github/CONTRIBUTING.md) before starting any work.
+Please refer to the [Contribution Guidelines](./.github/CONTRIBUTING.md) before starting any work.
 
 ### Using the server
 
