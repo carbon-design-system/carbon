@@ -25,6 +25,7 @@ storiesOf('OrderSummary', module)
       <OrderSummary>
         <OrderSummaryHeader title="Order Summary">
           <Dropdown
+            ariaLabel="currency selector"
             onChange={selectedItemInfo => console.log(selectedItemInfo)}
             defaultText="USD">
             <DropdownItem itemText="USD" value="usd" />

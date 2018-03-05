@@ -6,6 +6,7 @@ import Icon from '../Icon';
 
 export default class Dropdown extends PureComponent {
   static propTypes = {
+    ariaLabel: PropTypes.string.isRequired,
     children: PropTypes.node,
     className: PropTypes.string,
     defaultText: PropTypes.string,
@@ -101,6 +102,7 @@ export default class Dropdown extends PureComponent {
 
   render() {
     const {
+      ariaLabel,
       tabIndex,
       defaultText, // eslint-disable-line no-unused-vars
       iconDescription,
@@ -119,6 +121,7 @@ export default class Dropdown extends PureComponent {
             child.props.onClick && child.props.onClick(...args);
             this.handleItemClick(...args);
           },
+          isDropdownOpen: this.state.open,
         })
       );
 
@@ -138,6 +141,7 @@ export default class Dropdown extends PureComponent {
           value={this.state.value}
           className={dropdownClasses}
           tabIndex={tabIndex}
+          aria-label={ariaLabel}
           role="listbox">
           <li className="bx--dropdown-text">{this.state.selectedText}</li>
           <li>
@@ -148,7 +152,10 @@ export default class Dropdown extends PureComponent {
             />
           </li>
           <li>
-            <ul role="menu" className="bx--dropdown-list">
+            <ul
+              role="menu"
+              className="bx--dropdown-list"
+              aria-label="inner dropdown menu">
               {children}
             </ul>
           </li>

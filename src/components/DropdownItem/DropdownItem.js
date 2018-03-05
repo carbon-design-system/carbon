@@ -5,6 +5,7 @@ import classNames from 'classnames';
 const DropdownItem = ({
   className,
   value,
+  isDropdownOpen,
   itemText,
   onClick,
   onKeyPress,
@@ -44,6 +45,7 @@ const DropdownItem = ({
       aria-selected={selected}
       role="option">
       <a
+        tabIndex={isDropdownOpen ? 0 : -1}
         href={href}
         onClick={/* istanbul ignore next */ evt => evt.preventDefault()}
         className="bx--dropdown-link">

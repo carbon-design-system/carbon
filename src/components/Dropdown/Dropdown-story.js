@@ -21,6 +21,7 @@ storiesOf('Dropdown', module)
     () => (
       <Dropdown
         {...dropdownEvents}
+        ariaLabel="dropdown menu label"
         onChange={action('onChange')}
         onOpen={action('onOpen')}
         onClose={action('onClose')}
