@@ -37,7 +37,12 @@ const CodePage = ({ metadata, hideViewFullRender }) => {
   const subItems = getSubItems(metadata).filter(item => !item.isHidden);
   const componentContent =
     !metadata.isCollection && subItems.length <= 1 ? (
-      <ComponentExample hideViewFullRender={hideViewFullRender} component={metadata.name} htmlFile={getContent(metadata)} />
+      <ComponentExample
+        hideViewFullRender={hideViewFullRender}
+        component={metadata.name}
+        htmlFile={getContent(metadata)}
+        useIframe={metadata.useIframe}
+      />
     ) : (
       subItems.map(item => (
         <div key={item.id} className="component-variation">
@@ -46,6 +51,7 @@ const CodePage = ({ metadata, hideViewFullRender }) => {
             variant={item.handle.replace(/--default$/, '')}
             component={metadata.name}
             htmlFile={getContent(item)}
+            useIframe={metadata.useIframe}
           />
         </div>
       ))
