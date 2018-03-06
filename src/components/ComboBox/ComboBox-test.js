@@ -64,6 +64,19 @@ describe('ComboBox', () => {
     }
   });
 
+  it('capture filter text events', () => {
+    const onInputChange = jest.fn();
+    const wrapper = mount(
+      <ComboBox {...mockProps} onInputChange={onInputChange} />
+    );
+
+    findInputNode(wrapper).simulate('change', {
+      target: { value: 'something' },
+    });
+
+    expect(onInputChange).toHaveBeenCalledWith('something');
+  });
+
   describe('when disabled', () => {
     it('should not let the user edit the input node', () => {
       const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);

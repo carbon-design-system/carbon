@@ -57,7 +57,8 @@ export default class ComboBox extends React.Component {
 
     /**
      * `onChange` is a utility for this controlled component to communicate to a
-     * consuming component what kind of internal state changes are occuring
+     * consuming component when a specific dropdown item is selected.
+     * @param {{ selectedItem }}
      */
     onChange: PropTypes.func.isRequired,
 
@@ -78,6 +79,12 @@ export default class ComboBox extends React.Component {
      * Currently supports either the default type, or an inline variant
      */
     type: ListBoxPropTypes.ListBoxType,
+    /**
+     * Callback function to notify consumer when the text input changes.
+     * This provides support to change available items based on the text.
+     * @param {string} inputText
+     */
+    onInputChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -121,10 +128,18 @@ export default class ComboBox extends React.Component {
   };
 
   handleOnInputValueChange = inputValue => {
-    this.setState(() => ({
-      // Default to empty string if we have a false-y `inputValue`
-      inputValue: inputValue || '',
-    }));
+    const { onInputChange } = this.props;
+    this.setState(
+      () => ({
+        // Default to empty string if we have a false-y `inputValue`
+        inputValue: inputValue || '',
+      }),
+      () => {
+        if (onInputChange) {
+          onInputChange(inputValue);
+        }
+      }
+    );
   };
 
   render() {
