@@ -26,7 +26,11 @@ describe('Test tooltip', function() {
 
     beforeAll(function() {
       document.body.appendChild(container);
-      tooltip = new Tooltip(element);
+      return Tooltip.__with__({
+        debounce: fn => fn,
+      })(() => {
+        tooltip = new Tooltip(element);
+      });
     });
 
     it('Should show the tooltip upon hovering over', function() {
@@ -81,13 +85,21 @@ describe('Test tooltip', function() {
     });
 
     it('Should create an instance upon hovering over', function() {
-      element.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
+      return Tooltip.__with__({
+        debounce: fn => fn,
+      })(() => {
+        element.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
+        expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
+      });
     });
 
     it('Should create an instance upon focusing', function() {
-      element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
+      return Tooltip.__with__({
+        debounce: fn => fn,
+      })(() => {
+        element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
+        expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
+      });
     });
 
     afterEach(function() {
