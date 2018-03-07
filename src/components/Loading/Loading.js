@@ -24,6 +24,10 @@ export default class Loading extends React.Component {
       'bx--loading--stop': !active,
     });
 
+    const overlayClasses = classNames('bx--loading-overlay', {
+      'bx--loading-overlay--stop': !active,
+    });
+
     const loading = (
       <div {...other} className={loadingClasses}>
         <svg className="bx--loading__svg" viewBox="-75 -75 150 150">
@@ -33,7 +37,7 @@ export default class Loading extends React.Component {
     );
 
     return withOverlay ? (
-      <div className="bx--loading-overlay">{loading}</div>
+      <div className={overlayClasses}>{loading}</div>
     ) : (
       loading
     );
