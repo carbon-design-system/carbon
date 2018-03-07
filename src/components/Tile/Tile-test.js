@@ -97,16 +97,6 @@ describe('Tile', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
 
-    it('toggles the selectable class on click', () => {
-      expect(wrapper.children().hasClass('bx--tile--is-selected')).toEqual(
-        false
-      );
-      wrapper.simulate('click');
-      expect(wrapper.children().hasClass('bx--tile--is-selected')).toEqual(
-        true
-      );
-    });
-
     it('toggles the selectable state on click', () => {
       expect(wrapper.state().selected).toEqual(false);
       wrapper.simulate('click');

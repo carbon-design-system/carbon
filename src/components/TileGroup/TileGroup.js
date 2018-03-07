@@ -38,7 +38,8 @@ export default class TileGroup extends React.Component {
   }
 
   getRadioTiles = () => {
-    const children = React.Children.map(this.props.children, tileRadio => {
+    const childrenArray = React.Children.toArray(this.props.children);
+    const children = childrenArray.map(tileRadio => {
       const { value, ...other } = tileRadio.props;
       /* istanbul ignore if */
       if (tileRadio.props.hasOwnProperty('checked')) {

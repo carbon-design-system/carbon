@@ -168,14 +168,7 @@ export class SelectableTile extends Component {
       ...other
     } = this.props;
 
-    const classes = classNames(
-      'bx--tile',
-      'bx--tile--selectable',
-      {
-        'bx--tile--is-selected': this.state.selected,
-      },
-      className
-    );
+    const classes = classNames('bx--tile', 'bx--tile--selectable', className);
 
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
