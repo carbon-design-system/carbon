@@ -95,6 +95,11 @@ export default class Slider extends PureComponent {
      * The `type` attribute of the `<input>`.
      */
     inputType: PropTypes.string,
+
+    /**
+     * The `ariaLabel` for the `<input>`.
+     */
+    ariaLabelInput: PropTypes.string,
   };
 
   static defaultProps = {
@@ -104,6 +109,7 @@ export default class Slider extends PureComponent {
     minLabel: '',
     maxLabel: '',
     inputType: 'number',
+    ariaLabelInput: 'Slider number input',
   };
 
   state = {
@@ -278,6 +284,7 @@ export default class Slider extends PureComponent {
 
   render() {
     const {
+      ariaLabelInput,
       className,
       hideTextInput,
       id = (this.inputId =
@@ -347,6 +354,7 @@ export default class Slider extends PureComponent {
             <div
               className="bx--slider__thumb"
               role="slider"
+              id={id}
               tabIndex={0}
               aria-valuemax={max}
               aria-valuemin={min}
@@ -357,7 +365,6 @@ export default class Slider extends PureComponent {
               onKeyDown={this.updatePosition}
             />
             <input
-              id={id}
               type="hidden"
               name={name}
               value={value}
@@ -379,6 +386,7 @@ export default class Slider extends PureComponent {
               value={value}
               onChange={this.handleChange}
               labelText=""
+              aria-label={ariaLabelInput}
             />
           )}
         </div>
