@@ -17,7 +17,7 @@ View available React Components [here](http://react.carbondesignsystem.com). Usa
 ```
 npm install -S carbon-components-react carbon-components carbon-icons
 # Or, with yarn
-yarn add carbon-components-rect carbon-components carbon-icons
+yarn add carbon-components-react carbon-components carbon-icons
 ```
 
 1. These components require the use of [Webpack](http://webpack.github.io/docs/tutorials/getting-started/) in your project. See our [`webpack.config.js`](/.storybook/webpack.config.js) for an example configuration.
