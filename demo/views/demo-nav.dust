@@ -31,9 +31,9 @@
         'order-summary',
         'unified-header',
       ];
-      var componentItems = {componentItems|js|s}.map(
-        item => (needIframe.indexOf(item.name) >= 0 ? { ...item, useIframe: true } : item)
-      );
+      var componentItems = {componentItems|js|s}.map(function (item) {
+        return needIframe.indexOf(item.name) >= 0 ? Object.assign(item, { useIframe: true }) : item;
+      });
       var docItems = {docItems|js|s};
     </script>
     <script src="/demo/demo.js"></script>
