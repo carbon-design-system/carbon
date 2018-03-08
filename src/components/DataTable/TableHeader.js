@@ -24,6 +24,7 @@ const translateWithId = (key, { sortDirection, isSortHeader, sortStates }) => {
 const TableHeader = ({
   className: headerClassName,
   children,
+  isSortable,
   isSortHeader,
   onClick,
   scope,
@@ -31,6 +32,14 @@ const TableHeader = ({
   translateWithId: t,
   ...rest
 }) => {
+  if (!isSortable) {
+    return (
+      <th {...rest} className={headerClassName} scope={scope}>
+        {children}
+      </th>
+    );
+  }
+
   const className = cx(headerClassName, {
     'bx--table-sort-v2': true,
     'bx--table-sort-v2--active':
@@ -38,6 +47,7 @@ const TableHeader = ({
     'bx--table-sort-v2--ascending':
       isSortHeader && sortDirection === sortStates.ASC,
   });
+
   return (
     <th scope={scope}>
       <button className={className} onClick={onClick} {...rest}>
@@ -67,6 +77,11 @@ TableHeader.propTypes = {
    * Pass in children that will be embedded in the table header label
    */
   children: PropTypes.string,
+
+  /**
+   * Specify whether this header is one through which a user can sort the table
+   */
+  isSortable: PropTypes.bool,
 
   /**
    * Specify whether this header is the header by which a table is being sorted
@@ -101,6 +116,7 @@ TableHeader.propTypes = {
 };
 
 TableHeader.defaultProps = {
+  isSortable: false,
   scope: 'col',
   translateWithId,
 };

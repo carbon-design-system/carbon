@@ -128,6 +128,7 @@ export default class DataTable extends React.Component {
       ...rest,
       key: header.key,
       sortDirection,
+      isSortable: true,
       isSortHeader: sortHeaderKey === header.key,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler

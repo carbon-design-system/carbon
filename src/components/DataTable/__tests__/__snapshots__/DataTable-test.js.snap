@@ -404,6 +404,7 @@ exports[`DataTable should render 1`] = `
                 <tr>
                   <TableHeader
                     isSortHeader={false}
+                    isSortable={true}
                     key="fieldA"
                     onClick={[Function]}
                     scope="col"
@@ -454,6 +455,7 @@ exports[`DataTable should render 1`] = `
                   </TableHeader>
                   <TableHeader
                     isSortHeader={false}
+                    isSortable={true}
                     key="fieldB"
                     onClick={[Function]}
                     scope="col"

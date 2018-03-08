@@ -14,7 +14,7 @@ describe('DataTable.TableHeader', () => {
   });
 
   it('should render', () => {
-    const wrapper = mount(
+    const simpleHeader = mount(
       <Table>
         <TableHead>
           <TableRow>
@@ -23,7 +23,20 @@ describe('DataTable.TableHeader', () => {
         </TableHead>
       </Table>
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(simpleHeader).toMatchSnapshot();
+
+    const sortHeader = mount(
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableHeader {...mockProps} isSortHeader>
+              Header
+            </TableHeader>
+          </TableRow>
+        </TableHead>
+      </Table>
+    );
+    expect(sortHeader).toMatchSnapshot();
   });
 
   it('should have an active class if it is the sort header and the sort state is not NONE', () => {
