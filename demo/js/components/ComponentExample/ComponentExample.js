@@ -119,8 +119,12 @@ class ComponentExample extends Component {
 
   render() {
     const { htmlFile, component, variant, codepenSlug, hideViewFullRender, useIframe } = this.props;
-    const classNames = classnames({
-      'component-example__live--rendered': true,
+
+    const classNamesContainer = classnames('component-example__live', {
+      'component-example__live--with-iframe': useIframe,
+    });
+
+    const classNames = classnames('component-example__live--rendered', {
       [component]: true,
     });
 
@@ -142,7 +146,7 @@ class ComponentExample extends Component {
     return (
       <div className={lightUIclassnames}>
         <div className="svg--sprite" aria-hidden="true" />
-        <div className="component-example__live">
+        <div className={classNamesContainer}>
           {useIframe ? (
             <iframe
               className={classNames}
