@@ -55,6 +55,15 @@ describe('FileUploaderButton', () => {
     it('does not have default role', () => {
       expect(mountWrapper.props().role).not.toBeTruthy();
     });
+
+    it('resets the input value onClick', () => {
+      const input = mountWrapper.find('.bx--visually-hidden');
+      input.instance().value = '';
+      const evt = { target: { value: input.instance().value } };
+      input.simulate('click', evt);
+
+      expect(evt.target.value).toEqual(null);
+    });
   });
 
   describe('Unique id props', () => {
