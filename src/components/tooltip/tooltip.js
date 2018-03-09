@@ -61,6 +61,12 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   }
 
   /**
+   * A flag to detect if `oncontextmenu` event is fired right before `mouseover`/`mouseout`/`focus`/`blur` events.
+   * @type {boolean}
+   */
+  _hasContextMenu = false;
+
+  /**
    * The debounced version of the event handler.
    * @type {Function}
    * @private
@@ -114,7 +120,9 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
       this.manage(
         on(element, name, event => {
           const { relatedTarget, type } = event;
-          this._debouncedHandleHover({ relatedTarget, type, details: getLaunchingDetails(event) });
+          const hadContextMenu = this._hasContextMenu;
+          this._hasContextMenu = type === 'contextmenu';
+          this._debouncedHandleHover({ relatedTarget, type, hadContextMenu, details: getLaunchingDetails(event) });
         })
       );
     });
@@ -125,10 +133,12 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    * @param {Object} params The parameters.
    * @param {number} params.relatedTarget For `mouseover` event, indicates where the mouse pointer is gone.
    * @param {string} params.type The event type triggering this method.
+   * @param {boolean} params.hadContextMenu
+   *   `true` if `oncontextmenu` event is fired right before `mouseover`/`mouseout`, etc. events.
    * @param {Object} params.details The event details.
    * @private
    */
-  _handleHover({ relatedTarget, type, details }) {
+  _handleHover({ relatedTarget, type, hadContextMenu, details }) {
     const state = {
       mouseover: 'shown',
       mouseout: 'hidden',
@@ -137,11 +147,14 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
       touchleave: 'hidden',
       touchcancel: 'hidden',
     }[type];
-    // Note: SVGElement in IE11 does not have `.contains()`
-    const shouldPreventClose =
-      type === 'mouseout' &&
-      relatedTarget &&
-      ((this.element.contains && this.element.contains(relatedTarget)) || this.tooltip.element.contains(relatedTarget));
+    let shouldPreventClose;
+    if (type === 'mouseout') {
+      // Note: SVGElement in IE11 does not have `.contains()`
+      const wentToSelf =
+        (relatedTarget && (this.element.contains && this.element.contains(relatedTarget))) ||
+        this.tooltip.element.contains(relatedTarget);
+      shouldPreventClose = hadContextMenu || wentToSelf;
+    }
     if (!shouldPreventClose) {
       this.changeState(state, details);
     }
