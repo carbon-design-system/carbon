@@ -93,4 +93,26 @@ storiesOf('Notifications', module)
         />
       </div>
     )
+  )
+  .addWithInfo(
+    'hidden close button',
+    `
+  ...
+  `,
+    () => (
+      <div>
+        <ToastNotification
+          {...notificationProps.toast}
+          kind="error"
+          hideCloseButton={true}
+        />
+        <ToastNotification {...notificationProps.toast} kind="error" />
+        <InlineNotification
+          {...notificationProps.inline}
+          kind="info"
+          hideCloseButton={true}
+        />
+        <InlineNotification {...notificationProps.inline} kind="success" />
+      </div>
+    )
   );

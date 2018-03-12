@@ -107,6 +107,7 @@ export class ToastNotification extends Component {
     onCloseButtonClick: PropTypes.func,
     iconDescription: PropTypes.string.isRequired,
     notificationType: PropTypes.string,
+    hideCloseButton: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -118,6 +119,7 @@ export class ToastNotification extends Component {
     notificationType: 'toast',
     iconDescription: 'closes notification',
     onCloseButtonClick: () => {},
+    hideCloseButton: false,
   };
 
   state = {
@@ -149,6 +151,7 @@ export class ToastNotification extends Component {
       subtitle,
       title,
       kind,
+      hideCloseButton,
       ...other
     } = this.props;
 
@@ -166,11 +169,13 @@ export class ToastNotification extends Component {
           caption={caption}
           notificationType={notificationType}
         />
-        <NotificationButton
-          iconDescription={iconDescription}
-          notificationType={notificationType}
-          onClick={this.handleCloseButtonClick}
-        />
+        {!hideCloseButton && (
+          <NotificationButton
+            iconDescription={iconDescription}
+            notificationType={notificationType}
+            onClick={this.handleCloseButtonClick}
+          />
+        )}
       </div>
     );
   }
@@ -187,6 +192,7 @@ export class InlineNotification extends Component {
     onCloseButtonClick: PropTypes.func,
     iconDescription: PropTypes.string.isRequired,
     notificationType: PropTypes.string,
+    hideCloseButton: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -194,6 +200,7 @@ export class InlineNotification extends Component {
     notificationType: 'inline',
     iconDescription: 'closes notification',
     onCloseButtonClick: () => {},
+    hideCloseButton: false,
   };
 
   state = {
@@ -224,6 +231,7 @@ export class InlineNotification extends Component {
       subtitle,
       title,
       kind,
+      hideCloseButton,
       ...other
     } = this.props;
 
@@ -248,10 +256,12 @@ export class InlineNotification extends Component {
             notificationType={notificationType}
           />
         </div>
-        <NotificationButton
-          notificationType={notificationType}
-          onClick={this.handleCloseButtonClick}
-        />
+        {!hideCloseButton && (
+          <NotificationButton
+            notificationType={notificationType}
+            onClick={this.handleCloseButtonClick}
+          />
+        )}
       </div>
     );
   }
@@ -269,6 +279,7 @@ export default class Notification extends Component {
     caption: PropTypes.string,
     onCloseButtonClick: PropTypes.func,
     iconDescription: PropTypes.string.isRequired,
+    hideCloseButton: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -276,6 +287,7 @@ export default class Notification extends Component {
     iconDescription: 'closes notification',
     title: 'Provide a title',
     subtitle: 'Provide a subtitle',
+    hideCloseButton: false,
   };
 
   state = {
@@ -305,6 +317,7 @@ export default class Notification extends Component {
       subtitle,
       title,
       kind,
+      hideCloseButton,
       ...other
     } = this.props;
 
@@ -333,10 +346,12 @@ export default class Notification extends Component {
           caption={caption}
           notificationType="toast"
         />
-        <NotificationButton
-          notificationType="toast"
-          onClick={this.handleCloseButtonClick}
-        />
+        {!hideCloseButton && (
+          <NotificationButton
+            notificationType="toast"
+            onClick={this.handleCloseButtonClick}
+          />
+        )}
       </div>
     );
 
@@ -359,10 +374,12 @@ export default class Notification extends Component {
             notificationType="inline"
           />
         </div>
-        <NotificationButton
-          notificationType="inline"
-          onClick={this.handleCloseButtonClick}
-        />
+        {!hideCloseButton && (
+          <NotificationButton
+            notificationType="inline"
+            onClick={this.handleCloseButtonClick}
+          />
+        )}
       </div>
     );
 

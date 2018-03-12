@@ -406,6 +406,14 @@ describe('events and state', () => {
     expect(mountedInline.state().open).toEqual(false);
   });
 
+  it('close button is not shown if hideCloseButton prop set', () => {
+    const mountedToast = mount(
+      <Notification {...props} hideCloseButton={true} />
+    );
+
+    expect(mountedToast.find('button')).toHaveLength(0);
+  });
+
   it('renders null when open state is false', () => {
     const mountedToast = mount(<Notification {...props} caption="caption" />);
     const mountedInline = mount(<Notification {...props} />);
