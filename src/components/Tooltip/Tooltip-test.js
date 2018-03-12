@@ -1,8 +1,13 @@
 import React from 'react';
+import debounce from 'lodash.debounce';
 import Icon from '../Icon';
 import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
 import { mount } from 'enzyme';
+
+jest.mock('lodash.debounce');
+
+debounce.mockImplementation(fn => fn);
 
 describe('Tooltip', () => {
   describe('Renders as expected with defaults', () => {

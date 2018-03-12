@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
 import Icon from '../Icon';
 import classNames from 'classnames';
 import FloatingMenu, {
@@ -141,6 +142,19 @@ export default class Tooltip extends Component {
     menuOffset: getMenuOffset,
   };
 
+  /**
+   * A flag to detect if `oncontextmenu` event is fired right before `mouseover`/`mouseout`/`focus`/`blur` events.
+   * @type {boolean}
+   */
+  _hasContextMenu = false;
+
+  /**
+   * The element of the tooltip body.
+   * @type {Element}
+   * @private
+   */
+  _tooltipEl = null;
+
   state = {
     open: this.props.open,
   };
@@ -167,23 +181,63 @@ export default class Tooltip extends Component {
     }
   };
 
-  handleMouse = state => {
-    if (this.props.clickToOpen) {
-      if (state === 'click') {
-        this.setState({ open: !this.state.open });
-      }
+  /**
+   * Handles `mouseover`/`mouseout`/`focus`/`blur` event.
+   * @param {string} state `over` to show the tooltip, `out` to hide the tooltip.
+   * @param {Element} [relatedTarget] For handing `mouseout` event, indicates where the mouse pointer is gone.
+   */
+  _handleHover = (state, relatedTarget) => {
+    if (state === 'over') {
+      this.getTriggerPosition();
+      this.setState({ open: true });
     } else {
-      if (state === 'over') {
-        this.getTriggerPosition();
-        this.setState({ open: true });
-      } else {
+      // Note: SVGElement in IE11 does not have `.contains()`
+      const shouldPreventClose =
+        relatedTarget &&
+        ((this.triggerEl &&
+          this.triggerEl.contains &&
+          this.triggerEl.contains(relatedTarget)) ||
+          (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
+      if (!shouldPreventClose) {
         this.setState({ open: false });
       }
     }
   };
 
-  handleClickOutside = () => {
-    this.setState({ open: false });
+  /**
+   * The debounced version of the `mouseover`/`mouseout`/`focus`/`blur` event handler.
+   * @type {Function}
+   * @private
+   */
+  _debouncedHandleHover = debounce(this._handleHover, 200);
+
+  handleMouse = evt => {
+    const state =
+      typeof evt === 'string'
+        ? evt
+        : { mouseover: 'over', mouseout: 'out', focus: 'over', blur: 'out' }[
+            evt.type
+          ];
+    const hadContextMenu = this._hasContextMenu;
+    this._hasContextMenu = evt.type === 'contextmenu';
+    if (this.props.clickToOpen) {
+      if (state === 'click') {
+        this.setState({ open: !this.state.open });
+      }
+    } else if (state && (state !== 'out' || !hadContextMenu)) {
+      this._debouncedHandleHover(state, evt.relatedTarget);
+    }
+  };
+
+  handleClickOutside = evt => {
+    const shouldPreventClose =
+      evt &&
+      evt.target &&
+      this._tooltipEl &&
+      this._tooltipEl.contains(evt.target);
+    if (!shouldPreventClose) {
+      this.setState({ open: false });
+    }
   };
 
   handleKeyPress = evt => {
@@ -241,10 +295,10 @@ export default class Tooltip extends Component {
                 id={triggerId}
                 role="button"
                 tabIndex="0"
-                onMouseOver={() => this.handleMouse('over')}
-                onMouseOut={() => this.handleMouse('out')}
-                onFocus={() => this.handleMouse('over')}
-                onBlur={() => this.handleMouse('out')}
+                onMouseOver={evt => this.handleMouse(evt)}
+                onMouseOut={evt => this.handleMouse(evt)}
+                onFocus={evt => this.handleMouse(evt)}
+                onBlur={evt => this.handleMouse(evt)}
                 aria-haspopup="true"
                 aria-owns={tooltipId}
                 aria-expanded={open}>
@@ -266,10 +320,10 @@ export default class Tooltip extends Component {
               ref={node => {
                 this.triggerEl = node;
               }}
-              onMouseOver={() => this.handleMouse('over')}
-              onMouseOut={() => this.handleMouse('out')}
-              onFocus={() => this.handleMouse('over')}
-              onBlur={() => this.handleMouse('out')}
+              onMouseOver={evt => this.handleMouse(evt)}
+              onMouseOut={evt => this.handleMouse(evt)}
+              onFocus={evt => this.handleMouse(evt)}
+              onBlur={evt => this.handleMouse(evt)}
               aria-haspopup="true"
               aria-owns={tooltipId}
               aria-expanded={open}>
@@ -287,7 +341,15 @@ export default class Tooltip extends Component {
               className={tooltipClasses}
               {...other}
               data-floating-menu-direction={direction}
-              aria-labelledby={triggerId}>
+              aria-labelledby={triggerId}
+              onMouseOver={evt => this.handleMouse(evt)}
+              onMouseOut={evt => this.handleMouse(evt)}
+              onFocus={evt => this.handleMouse(evt)}
+              onBlur={evt => this.handleMouse(evt)}
+              onContextMenu={evt => this.handleMouse(evt)}
+              ref={node => {
+                this._tooltipEl = node;
+              }}>
               {children}
             </div>
           </FloatingMenu>
