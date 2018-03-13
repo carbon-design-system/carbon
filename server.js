@@ -1,18 +1,28 @@
 'use strict';
 
-const globby = require('globby'); // eslint-disable-line
-const { promisify } = require('bluebird'); // eslint-disable-line
+const globby = require('globby');
+const { promisify } = require('bluebird');
 const fs = require('fs');
 const path = require('path');
-const express = require('express'); // eslint-disable-line
-const Fractal = require('@frctl/fractal'); // eslint-disable-line
+const express = require('express');
+const Fractal = require('@frctl/fractal');
+
+const webpack = require('webpack');
+const webpackDevConfig = require('./tools/webpack.dev.config');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+
+const compiler = webpack(webpackDevConfig);
 
 const readFile = promisify(fs.readFile);
 
 const app = express();
-const adaro = require('adaro'); // eslint-disable-line
+const adaro = require('adaro');
 
 const port = process.env.PORT || 8080;
+
+app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackDevConfig.output.publicPath }));
+app.use(webpackHotMiddleware(compiler));
 
 const fractal = Fractal.create();
 fractal.components.set('path', path.join(__dirname, 'src/components'));

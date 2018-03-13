@@ -6,8 +6,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <title>Carbon Components</title>
-  <link rel="stylesheet" href="/demo/demo.css">
   <style>
+    .demo--container {
+      display: none;
+    }
+
     .offleft {
       position: absolute;
       top: 0;
