@@ -69,7 +69,7 @@
   .#{$prefix}--inline-notification__title {
     @include typescale('zeta');
     font-weight: 600;
-    margin-right: $spacing-2xs;
+    margin: 0 $spacing-2xs 0 0;
     line-height: 1.125;
   }
 
