@@ -30,8 +30,8 @@ export function findIcon(name, iconsObj = icons) {
  * this.getSvgData('copy-code');
  */
 export function getSvgData(iconName) {
-  const name = findIcon(iconName);
-  return name ? name.svgData : false;
+  const icon = findIcon(iconName);
+  return icon ? icon.svgData : false;
 }
 
 /**
