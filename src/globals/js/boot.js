@@ -1,4 +1,5 @@
 import settings from './settings';
+import '../../globals/js/misc/focus-input-method-monitor';
 import * as components from './components';
 
 /**
