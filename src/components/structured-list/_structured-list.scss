@@ -72,7 +72,8 @@
     }
 
     &:focus:not(.#{$prefix}--structured-list-row--header-row) {
-      @include focus-outline('border');
+      // list row
+      @include focus-outline('border', $touch: false);
     }
   }
 

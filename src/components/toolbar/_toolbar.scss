@@ -94,7 +94,7 @@ $css--helpers: true;
     width: rem(32px);
 
     &:focus {
-      @include focus-outline;
+      @include focus-outline($mouse: false, $touch: false);
     }
   }
 

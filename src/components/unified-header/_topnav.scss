@@ -119,12 +119,20 @@
     font-weight: 600;
     margin-right: 1rem;
 
-    &:hover,
-    &:focus {
+    @mixin hover-focus {
       color: $color__blue-30; // anna
 
       .#{$prefix}--top-nav__left-container__link--icon {
         fill: $color__blue-30; // anna
+      }
+    }
+    &:hover {
+      @include hover-focus;
+    }
+
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
       }
     }
   }
@@ -144,8 +152,7 @@
 
   .#{$prefix}--top-nav__left-container {
     .#{$prefix}--dropdown {
-      &:focus,
-      &:hover {
+      @mixin hover-focus {
         outline: 0;
 
         .#{$prefix}--dropdown__arrow use {
@@ -156,6 +163,15 @@
           background-color: $color__navy-gray-3; // anna
           color: $color__blue-30; // anna
         }
+      }
+
+      &:focus {
+        @include interaction-wrapper($touch: false) {
+          @include hover-focus;
+        }
+      }
+      &:hover {
+        @include hover-focus;
       }
     }
 
@@ -181,10 +197,15 @@
     .#{$prefix}--dropdown-link {
       padding: 0.6rem 0.75rem;
 
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: $color__blue-30; // anna
         color: $color__blue-90; // anna
+      }
+      &:focus {
+        @include interaction-wrapper($mouse: false, $touch: false) {
+          background-color: $color__blue-30; // anna
+          color: $color__blue-90; // anna
+        }
       }
     }
   }
@@ -220,8 +241,7 @@
       color: $color__blue-30; // anna
     }
 
-    .#{$prefix}--dropdown:hover,
-    .#{$prefix}--dropdown:focus {
+    @mixin hover-focus {
       outline: 0;
       background-color: $color__navy-gray-3; // anna
 
@@ -233,6 +253,14 @@
         fill: $color__blue-30; // anna
       }
     }
+    .#{$prefix}--dropdown:hover {
+      @include hover-focus;
+    }
+    .#{$prefix}--dropdown:focus {
+      @include interaction-wrapper($touch: false) {
+        @include hover-focus;
+      }
+    }
 
     .#{$prefix}--dropdown__trial-content,
     .#{$prefix}--dropdown__credit-content {
@@ -241,11 +269,18 @@
       flex-direction: column;
       padding: 1rem;
 
-      &:focus,
-      &:hover {
+      @mixin hover-focus {
         outline: 0;
         background-color: initial;
         color: $inverse-01;
+      }
+      &:focus {
+        @include interaction-wrapper($touch: false) {
+          @include hover-focus;
+        }
+      }
+      &:hover {
+        @include hover-focus;
       }
     }
 
@@ -287,10 +322,17 @@
 
   .#{$prefix}--top-nav__right-container__item:last-child {
     .#{$prefix}--dropdown {
-      &:focus,
-      &:hover {
+      @mixin hover-focus {
         background-color: $color__navy-gray-3; // anna
         outline: 0;
+      }
+      &:focus {
+        @include interaction-wrapper($touch: false) {
+          @include hover-focus;
+        }
+      }
+      &:hover {
+        @include hover-focus;
       }
     }
 

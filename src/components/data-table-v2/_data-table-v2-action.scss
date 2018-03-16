@@ -9,8 +9,11 @@
     position: relative;
 
     &:focus {
-      box-shadow: inset 0px 0px 0px 1px $brand-01;
-      outline: 0;
+      outline: none;
+
+      @include interaction-wrapper($touch: false) {
+        box-shadow: inset 0px 0px 0px 1px $brand-01;
+      }
     }
   }
 
@@ -39,7 +42,7 @@
   }
 
   &:focus {
-    @include focus-outline;
+    @include focus-outline($mouse: false, $touch: false);
     > .#{$prefix}--toolbar-action__icon {
       fill: $brand-01;
     }
@@ -87,7 +90,7 @@
   visibility: hidden;
 
   &:focus {
-    @include focus-outline;
+    @include focus-outline($touch: false);
   }
 
   .#{$prefix}--btn {
@@ -99,8 +102,7 @@
   }
 
   .#{$prefix}--btn--ghost {
-    &:hover,
-    &:focus {
+    @mixin hover-focus {
       background-color: $ui-01;
       color: $brand-01;
 
@@ -109,9 +111,16 @@
       }
     }
 
+    &:hover {
+      @include hover-focus;
+    }
+
     &:focus {
-      border: 2px solid $brand-01;
-      outline: 2px solid $ui-02;
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
+        border: 2px solid $brand-01;
+        outline: 2px solid $ui-02;
+      }
     }
   }
 }
@@ -159,9 +168,14 @@
   cursor: pointer;
   transition: border $transition--base $carbon--standard-easing;
 
-  &:hover,
-  &:focus {
+  &:hover {
     border-bottom: 1px solid $ui-01;
+  }
+
+  &:focus {
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      border-bottom: 1px solid $ui-01;
+    }
   }
 }
 

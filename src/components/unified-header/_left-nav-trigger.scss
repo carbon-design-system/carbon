@@ -1,5 +1,20 @@
 @import '../../globals/scss/import-once';
 
+@mixin hover-focus($color, $doSpan: true) {
+  background-color: $color;
+
+  $span: '';
+
+  @if $doSpan {
+    $span: 'span,';
+  }
+
+  #{$span} span:before,
+  span:after {
+    background: $color__white;
+  }
+}
+
 @include exports('left-nav-trigger') {
   .#{$prefix}--left-nav__trigger {
     @include reset;
@@ -14,14 +29,13 @@
       outline: 0;
     }
 
-    &:hover,
-    &:focus {
-      background-color: $color__blue-30;
+    &:hover {
+      @include hover-focus($color__blue-30);
+    }
 
-      span,
-      span:before,
-      span:after {
-        background: $color__white;
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus($color__blue-30);
       }
     }
   }
@@ -86,14 +100,13 @@
       outline: 0;
     }
 
-    &:hover,
-    &:focus {
-      background-color: $nav-06;
+    &:hover {
+      @include hover-focus($nav-06);
+    }
 
-      span,
-      span:before,
-      span:after {
-        background: $color__white;
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus($nav-06);
       }
     }
   }
@@ -108,13 +121,13 @@
       background: $nav-06;
     }
 
-    &:hover,
-    &:focus {
-      background-color: $nav-06;
+    &:hover {
+      @include hover-focus($nav-06, false);
+    }
 
-      span:before,
-      span:after {
-        background: $color__white;
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus($nav-06, false);
       }
     }
   }
@@ -130,14 +143,12 @@
       outline: 0;
     }
 
-    &:hover,
+    &:hover {
+      @include hover-focus($nav-04);
+    }
     &:focus {
-      background-color: $nav-04;
-
-      span,
-      span:before,
-      span:after {
-        background: $color__white;
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus($nav-04);
       }
     }
   }
@@ -152,14 +163,12 @@
       background: $nav-04;
     }
 
-    &:hover,
-    &:focus {
-      background-color: $nav-04;
+    &:hover {
+      @include hover-focus($nav-04, false);
+    }
 
-      span:before,
-      span:after {
-        background: $color__white;
-      }
+    &:focus {
+      @include hover-focus($nav-04, false);
     }
   }
 
@@ -174,15 +183,12 @@
       outline: 0;
     }
 
-    &:hover,
-    &:focus {
-      background-color: $nav-08;
+    &:hover {
+      @include hover-focus($nav-06);
+    }
 
-      span,
-      span:before,
-      span:after {
-        background: $color__white;
-      }
+    &:focus {
+      @include hover-focus($nav-06);
     }
   }
 
@@ -196,14 +202,11 @@
       background: $nav-08;
     }
 
-    &:hover,
+    &:hover {
+      @include hover-focus($nav-08, false);
+    }
     &:focus {
-      background-color: $nav-08;
-
-      span:before,
-      span:after {
-        background: $color__white;
-      }
+      @include hover-focus($nav-08, false);
     }
   }
 }

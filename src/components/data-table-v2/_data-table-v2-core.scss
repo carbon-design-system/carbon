@@ -78,11 +78,14 @@
 
     &:focus {
       outline: 0;
-      opacity: 1;
-      box-shadow: none;
 
-      .#{$prefix}--overflow-menu__icon {
-        box-shadow: inset 0px 0px 0px 1px $brand-01;
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        opacity: 1;
+        box-shadow: none;
+
+        .#{$prefix}--overflow-menu__icon {
+          box-shadow: inset 0px 0px 0px 1px $brand-01;
+        }
       }
     }
   }

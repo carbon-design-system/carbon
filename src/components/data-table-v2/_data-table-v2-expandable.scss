@@ -76,10 +76,14 @@ tr.#{$prefix}--expandable-row--hover-v2 {
   @include button-reset(false);
 
   &:focus {
-    outline: 1px solid transparent;
+    outline: none;
 
-    svg {
-      box-shadow: inset 0px 0px 0px 1px $brand-01;
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      outline: 1px solid transparent;
+
+      svg {
+        box-shadow: inset 0px 0px 0px 1px $brand-01;
+      }
     }
   }
 }

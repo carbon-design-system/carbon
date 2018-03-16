@@ -7,6 +7,7 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
 
 $list-box-width: 100%;
 $list-box-height: rem(40px);
@@ -87,7 +88,11 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__field:focus,
   .#{$prefix}--list-box__field[aria-expanded='true'] {
-    outline: 1px solid $brand-01;
+    outline: none;
+
+    @include interaction-wrapper($touch: false) {
+      outline: 1px solid $brand-01;
+    }
   }
 
   .#{$prefix}--list-box__field[disabled] {
@@ -149,7 +154,10 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__selection:focus {
-    outline: 1px solid $brand-01;
+    outline: none;
+    @include interaction-wrapper($touch: false) {
+      outline: 1px solid $brand-01;
+    }
   }
 
   // Modifier for a selection to show that multiple selections have been made
@@ -177,10 +185,16 @@ $list-box-menu-width: rem(300px);
     margin-left: rem(5px);
   }
 
-  .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
     background-color: $brand-02;
     outline: none;
+  }
+
+  .#{$prefix}--list-box__selection--multi:focus {
+    @include interaction-wrapper($touch: false) {
+      background-color: $brand-02;
+      outline: none;
+    }
   }
 
   // Descendant of a `list-box` that displays a list of options to select

@@ -29,10 +29,19 @@
     color: $color__white; // anna
     position: relative;
 
-    &:hover,
-    &:focus {
+    @mixin hover-focus {
       .#{$prefix}--logo__text {
         color: $color__blue-20; // anna
+      }
+    }
+
+    &:hover {
+      @include hover-focus;
+    }
+
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
       }
     }
   }
@@ -105,8 +114,11 @@
 
     &:focus {
       outline: 0;
-      background-color: $color__navy-gray-3; // anna
-      color: $color__blue-30; // anna
+
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        background-color: $color__navy-gray-3; // anna
+        color: $color__blue-30; // anna
+      }
     }
 
     &:last-child {
@@ -136,8 +148,11 @@
 
     &:focus {
       outline: 0;
-      background-color: $color__navy-gray-3; // anna
-      color: $color__blue-30; // anna
+
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        background-color: $color__navy-gray-3; // anna
+        color: $color__blue-30; // anna
+      }
     }
   }
 
@@ -147,15 +162,17 @@
 
     &:focus {
       outline: 0;
-      background-color: $color__navy-gray-3; // anna
+      @include interaction-wrapper($touch: false) {
+        background-color: $color__navy-gray-3; // anna
 
-      .#{$prefix}--dropdown__menu-text {
-        color: $color__blue-30; // anna
-      }
+        .#{$prefix}--dropdown__menu-text {
+          color: $color__blue-30; // anna
+        }
 
-      .#{$prefix}--dropdown__menu-text,
-      .#{$prefix}--dropdown__list {
-        outline: 0;
+        .#{$prefix}--dropdown__menu-text,
+        .#{$prefix}--dropdown__list {
+          outline: 0;
+        }
       }
     }
   }

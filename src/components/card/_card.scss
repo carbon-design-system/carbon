@@ -29,7 +29,7 @@
       border: 1px solid $ui-04;
 
       &:focus {
-        @include focus-outline('border');
+        @include focus-outline('border', $touch: false);
       }
     }
 
@@ -73,7 +73,7 @@
       @include typescale('zeta');
 
       &:focus {
-        @include focus-outline('border');
+        @include focus-outline('border', $mouse: false, $touch: false);
       }
     }
 
@@ -178,15 +178,22 @@
       background: none;
       border: none;
 
-      &:hover,
-      &:focus {
+      &:hover {
         .#{$prefix}--app-actions__button--icon {
           fill: $brand-01;
         }
       }
 
       &:focus {
-        @include focus-outline('border');
+        @include interaction-wrapper($mouse: false, $touch: false) {
+          .#{$prefix}--app-actions__button--icon {
+            fill: $brand-01;
+          }
+        }
+      }
+
+      &:focus {
+        @include focus-outline('border', $mouse: false, $touch: false);
       }
     }
 

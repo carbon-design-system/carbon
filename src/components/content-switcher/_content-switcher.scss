@@ -28,13 +28,17 @@
     color: $brand-01;
 
     &:focus {
-      outline: 1px solid transparent;
-      box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
-      background-color: $brand-02;
-      z-index: 2;
-      border-color: $brand-02;
-      text-decoration: underline;
-      color: $inverse-01;
+      outline: none;
+
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        outline: 1px solid transparent;
+        box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+        background-color: $brand-02;
+        z-index: 2;
+        border-color: $brand-02;
+        text-decoration: underline;
+        color: $inverse-01;
+      }
     }
 
     &:hover {
@@ -75,8 +79,10 @@
     }
 
     &:focus {
-      box-shadow: -2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
-      z-index: 0;
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        box-shadow: -2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+        z-index: 0;
+      }
     }
   }
 
@@ -89,8 +95,10 @@
     }
 
     &:focus {
-      box-shadow: 2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
-      z-index: 0;
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        box-shadow: 2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+        z-index: 0;
+      }
     }
   }
 

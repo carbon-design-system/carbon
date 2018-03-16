@@ -28,12 +28,16 @@
     color: $text-01;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $touch: false);
     }
 
     &.#{$prefix}--dropdown--open:focus {
-      outline: 1px solid transparent;
-      box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      outline: none;
+
+      @include interaction-wrapper($touch: false) {
+        outline: 1px solid transparent;
+        box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      }
     }
   }
 
@@ -95,12 +99,23 @@
     text-overflow: ellipsis;
     overflow: hidden;
 
-    &:hover,
-    &:focus {
+    @mixin hover-focus {
       background-color: $brand-01;
       color: $inverse-01;
       outline: 1px solid transparent;
       text-decoration: underline;
+    }
+
+    &:hover {
+      @include hover-focus;
+    }
+
+    &:focus {
+      outline: none;
+
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
+      }
     }
   }
 
@@ -119,8 +134,10 @@
     }
 
     &:focus {
-      .#{$prefix}--dropdown-list {
-        box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      @include interaction-wrapper($touch: false) {
+        .#{$prefix}--dropdown-list {
+          box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+        }
       }
     }
 

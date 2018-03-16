@@ -59,7 +59,7 @@
     position: relative;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $mouse: false, $touch: false);
     }
   }
 
