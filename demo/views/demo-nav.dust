@@ -28,10 +28,6 @@
         'detail-page-header',
         'footer',
         'grid',
-        'interior-left-nav',
-        'lightbox',
-        'module',
-        'order-summary',
         'unified-header',
       ];
       var componentItems = {componentItems|js|s}.map(function (item) {
