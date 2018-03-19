@@ -8,6 +8,8 @@ import DataTable, {
   TableHead,
   TableHeader,
   TableRow,
+  TableSelectAll,
+  TableSelectRow,
   TableToolbar,
   TableToolbarAction,
   TableToolbarContent,
@@ -16,9 +18,15 @@ import DataTable, {
 import { sortStates } from '../state/sorting';
 import { mount } from 'enzyme';
 
+// Test helpers
 const getHeaderAt = (wrapper, index) =>
   wrapper.find('TableHeader button').at(index);
+const getRowAt = (wrapper, index) => wrapper.find('tbody tr').at(index);
 const getFilterInput = wrapper => wrapper.find('TableToolbarSearch input');
+const getSelectAll = wrapper =>
+  wrapper.find('TableSelectAll input[type="checkbox"]');
+const getLastCallFor = mocker =>
+  mocker.mock.calls[mocker.mock.calls.length - 1];
 
 describe('DataTable', () => {
   let mockProps;
@@ -162,6 +170,109 @@ describe('DataTable', () => {
           ],
         })
       );
+    });
+  });
+
+  describe('selection', () => {
+    let mockProps;
+
+    beforeEach(() => {
+      mockProps = {
+        rows: [
+          {
+            id: 'b',
+            fieldA: 'Field 2:A',
+            fieldB: 'Field 2:B',
+          },
+          {
+            id: 'a',
+            fieldA: 'Field 1:A',
+            fieldB: 'Field 1:B',
+          },
+          {
+            id: 'c',
+            fieldA: 'Field 3:A',
+            fieldB: 'Field 3:B',
+          },
+        ],
+        headers: [
+          {
+            key: 'fieldA',
+            header: 'Field A',
+          },
+          {
+            key: 'fieldB',
+            header: 'Field B',
+          },
+        ],
+        locale: 'en',
+        render: jest.fn(
+          ({ rows, headers, getHeaderProps, getSelectionProps }) => (
+            <TableContainer title="DataTable with selection">
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableSelectAll {...getSelectionProps()} />
+                    {headers.map(header => (
+                      <TableHeader {...getHeaderProps({ header })}>
+                        {header.header}
+                      </TableHeader>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                    <TableRow key={row.id}>
+                      <TableSelectRow {...getSelectionProps({ row })} />
+                      {row.cells.map(cell => (
+                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )
+        ),
+      };
+    });
+
+    it('should render', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should have select-all default to un-checked if no rows are present', () => {
+      const wrapper = mount(<DataTable {...mockProps} rows={[]} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should select all rows if a user interacts with select all', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(getSelectAll(wrapper).prop('checked')).toBe(false);
+
+      getSelectAll(wrapper).simulate('click');
+
+      expect(getSelectAll(wrapper).prop('checked')).toBe(true);
+
+      const { selectedRows } = getLastCallFor(mockProps.render)[0];
+      expect(selectedRows.length).toBe(mockProps.rows.length);
+    });
+
+    it('should select a specific row when a user interacts with select row', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      expect(getSelectAll(wrapper).prop('checked')).toBe(false);
+
+      const beforeInput = getRowAt(wrapper, 0).find('input[type="checkbox"]');
+      expect(beforeInput.prop('checked')).toBe(false);
+
+      beforeInput.simulate('click');
+
+      const afterInput = getRowAt(wrapper, 0).find('input[type="checkbox"]');
+      expect(afterInput.prop('checked')).toBe(true);
+
+      const { selectedRows } = getLastCallFor(mockProps.render)[0];
+      expect(selectedRows.length).toBe(1);
     });
   });
 });
