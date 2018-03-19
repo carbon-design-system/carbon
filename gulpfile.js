@@ -32,8 +32,6 @@ const rollupConfigProd = require('./tools/rollup.config');
 // WebPack
 const webpack = require('webpack');
 const webpackDevConfig = require('./tools/webpack.dev.config');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const webpackPromisified = promisify(webpack);
 
@@ -53,48 +51,31 @@ const cloptions = commander
   .option('--name [name]', 'Component name used for aXe testing', assign, '')
   .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
   .option('-r, --rollup', 'Uses Rollup for dev env')
-  .option('--serverport [port]', 'Uses the given port for dev env server', assign, 8080)
   .parse(process.argv);
 
 // Axe A11y Test
 const axe = require('gulp-axe-webdriver');
 
 /**
- * BrowserSync
+ * Dev server
  */
 
-gulp.task('browser-sync', ['sass:dev'], cb => {
+gulp.task('dev-server', cb => {
   let started;
   const options = {
     script: './server.js',
     ext: 'dust js',
     watch: ['demo/**/*.dust', 'server.js'],
     env: {
-      PORT: cloptions.serverport,
+      PORT: cloptions.port,
     },
   };
-  nodemon(options)
-    .on('start', () => {
-      if (!started) {
-        const compiler = webpack(webpackDevConfig);
-        started = true;
-        browserSync.init({
-          logPrefix: 'Carbon Components',
-          open: false,
-          port: cloptions.port,
-          proxy: `localhost:${cloptions.serverport}`,
-          middleware: [
-            webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackDevConfig.output.publicPath }),
-            webpackHotMiddleware(compiler),
-          ],
-          timestamps: false,
-        });
-        cb();
-      }
-    })
-    .on('restart', () => {
-      browserSync.reload();
-    });
+  nodemon(options).on('start', () => {
+    if (!started) {
+      started = true;
+      cb();
+    }
+  });
 });
 
 /**
@@ -347,14 +328,13 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
 
 // Watch Tasks
 gulp.task('watch', () => {
-  gulp.watch('src/**/**/*.html').on('change', browserSync.reload);
   if (cloptions.rollup) {
     gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
+    gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
   }
-  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
 });
 
-gulp.task('serve', ['browser-sync', 'watch']);
+gulp.task('serve', ['dev-server', 'watch']);
 
 // Build task collection
 gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev']);

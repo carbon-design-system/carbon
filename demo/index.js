@@ -1,3 +1,5 @@
+import './scss/demo.scss';
+
 import './polyfills/index';
 
 import './js/components/boot-nav';

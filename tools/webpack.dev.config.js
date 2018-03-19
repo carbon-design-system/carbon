@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-maps',
-  entry: ['webpack-hot-middleware/client', path.resolve(__dirname, '../demo/index')],
+  entry: ['webpack-hot-middleware/client?reload=true', path.resolve(__dirname, '../demo/index')],
   output: {
     path: path.resolve(__dirname, '../demo'),
     publicPath: '/demo/',
@@ -21,6 +21,24 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: ['node_modules'],
+            },
+          },
+        ],
       },
     ],
   },

@@ -13,6 +13,8 @@
 @import '../js/components/SideNavToggle/side-nav-toggle.scss';
 
 [data-renderroot] {
+  display: block;
+
   .component-example__live--with-iframe {
     height: 25rem;
 
@@ -38,6 +40,7 @@
 }
 
 .demo--container {
+  display: block;
   box-sizing: border-box;
   padding-top: 1em;
   transition: 0.2s;
