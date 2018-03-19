@@ -2,15 +2,16 @@ let lastInteraction = 'none';
 let lastActiveElement = null;
 let lastTimeStamp = 0;
 
-const debounce = 100; // ms
+const debounce = 1000; // ms - simulated mouse events observed 600ms after touch
 const attr = 'data-input-method';
 const state = function state() {
   return { lastInteraction, lastActiveElement };
 };
-const interact = function interact(type, e) {
-  if (e.timeStamp > lastTimeStamp + debounce) {
+const interact = function interact(type) {
+  // performance.now is better cross browser than event.timestamp
+  if (performance.now > lastTimeStamp + debounce) {
     // debounce helps us detect simulated mouse events that happen near touch
-    lastTimeStamp = e.timeStamp;
+    lastTimeStamp = performance.now();
     lastInteraction = type;
   }
 };
@@ -19,10 +20,10 @@ const init = () => {
   lastActiveElement = document.activeElement;
 
   document.body.setAttribute(attr, 'none');
-  document.body.addEventListener('mousedown', e => interact('mouse', e), true);
-  document.body.addEventListener('pointerdown', e => interact(e.pointerType ? e.pointerType : 'mouse', e), true);
-  document.body.addEventListener('touchstart', e => interact('touch', e), true);
-  document.body.addEventListener('keydown', e => interact('keyboard', e), true);
+  document.body.addEventListener('mousedown', () => interact('mouse'), true);
+  document.body.addEventListener('pointerdown', e => interact(e.pointerType ? e.pointerType : 'mouse'), true);
+  document.body.addEventListener('touchstart', () => interact('touch'), true);
+  document.body.addEventListener('keydown', () => interact('keyboard'), true);
 
   document.body.addEventListener(
     'focus',
