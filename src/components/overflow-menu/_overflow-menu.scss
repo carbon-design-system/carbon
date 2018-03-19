@@ -21,6 +21,8 @@
     cursor: pointer;
 
     &:focus {
+      outline: none;
+
       @include interaction-wrapper($mouse: false, $touch: false) {
         outline: 1px solid transparent;
         box-shadow: 0 0 0 1px $brand-01;
@@ -109,6 +111,8 @@
     cursor: pointer;
 
     &:focus {
+      outline: none;
+
       @include interaction-wrapper($mouse: false, $touch: false) {
         outline: 1px solid transparent;
         background-color: $brand-01;

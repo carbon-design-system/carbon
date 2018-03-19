@@ -9,7 +9,8 @@ const state = function state() {
 };
 const interact = function interact(type) {
   // performance.now is better cross browser than event.timestamp
-  if (performance.now > lastTimeStamp + debounce) {
+  const timestamp = performance.now();
+  if (timestamp > lastTimeStamp + debounce || type !== 'mouse') {
     // debounce helps us detect simulated mouse events that happen near touch
     lastTimeStamp = performance.now();
     lastInteraction = type;

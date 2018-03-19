@@ -28,6 +28,8 @@
       cursor: pointer;
 
       &:focus {
+        outline: none;
+
         @include interaction-wrapper($mouse: false, $touch: false) {
           @include focus-outline('border');
           fill: $brand-02;
