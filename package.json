@@ -186,7 +186,7 @@
     "rollup-plugin-sizes": "^0.4.0",
     "rollup-plugin-uglify": "^3.0.0",
     "sass-loader": "^6.0.5",
-    "semantic-release": "^12.2.2",
+    "semantic-release": "^15.0.0",
     "storybook-addon-a11y": "^3.0.0",
     "validate-commit-msg": "^2.10.1",
     "whatwg-fetch": "^2.0.3"
