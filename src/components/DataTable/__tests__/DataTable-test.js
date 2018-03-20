@@ -274,5 +274,22 @@ describe('DataTable', () => {
       const { selectedRows } = getLastCallFor(mockProps.render)[0];
       expect(selectedRows.length).toBe(1);
     });
+
+    it('should deselect all rows when onCancel invoked', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      getSelectAll(wrapper).simulate('click');
+      expect(getSelectAll(wrapper).prop('checked')).toBe(true);
+
+      const { getBatchActionProps } = getLastCallFor(mockProps.render)[0];
+      expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+
+      getBatchActionProps().onCancel();
+
+      wrapper.update();
+
+      expect(getSelectAll(wrapper).prop('checked')).toBe(false);
+      const { selectedRows } = getLastCallFor(mockProps.render)[0];
+      expect(selectedRows.length).toBe(0);
+    });
   });
 });

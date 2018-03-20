@@ -239,10 +239,38 @@ export default class DataTable extends React.Component {
   getTablePrefix = () => `data-table-${this.instanceId}`;
 
   /**
-   * Handler for the `onCancel` event to hide the batch action bar
+   * Helper for toggling all selected items in a state. Does not call
+   * setState, so use it when setting state.
+   * @param {Object} initialState
+   * @returns {Object} object to put into this.setState (use spread operator)
+   */
+  setAllSelectedState = (initialState, isSelected) => {
+    const { rowIds } = initialState;
+    return {
+      rowsById: rowIds.reduce(
+        (acc, id) => ({
+          ...acc,
+          [id]: {
+            ...initialState.rowsById[id],
+            isSelected,
+          },
+        }),
+        {}
+      ),
+    };
+  };
+
+  /**
+   * Handler for the `onCancel` event to hide the batch action bar and
+   * deselect all selected rows
    */
   handleOnCancel = () => {
-    this.setState({ shouldShowBatchActions: false });
+    this.setState(state => {
+      return {
+        shouldShowBatchActions: false,
+        ...this.setAllSelectedState(state, false),
+      };
+    });
   };
 
   /**
@@ -254,16 +282,7 @@ export default class DataTable extends React.Component {
       const isSelected = this.getSelectedRows().length !== rowIds.length;
       return {
         shouldShowBatchActions: isSelected,
-        rowsById: rowIds.reduce(
-          (acc, id) => ({
-            ...acc,
-            [id]: {
-              ...state.rowsById[id],
-              isSelected,
-            },
-          }),
-          {}
-        ),
+        ...this.setAllSelectedState(state, isSelected),
       };
     });
   };
