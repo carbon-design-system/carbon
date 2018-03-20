@@ -1,3 +1,4 @@
+import debounce from 'lodash.debounce';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -56,21 +57,29 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    */
   constructor(element, options) {
     super(element, options);
-    ['mouseover', 'mouseout', 'focus', 'blur', 'touchleave', 'touchcancel'].forEach(name => {
-      this.manage(
-        on(this.element, name, event => {
-          this._handleHover(event);
-        })
-      );
-    });
+    this._hookOn(element);
   }
+
+  /**
+   * A flag to detect if `oncontextmenu` event is fired right before `mouseover`/`mouseout`/`focus`/`blur` events.
+   * @type {boolean}
+   */
+  _hasContextMenu = false;
+
+  /**
+   * The debounced version of the event handler.
+   * @type {Function}
+   * @private
+   */
+  _debouncedHandleHover = debounce(this._handleHover, 200);
 
   /**
    * A method called when this widget is created upon events.
    * @param {Event} event The event triggering the creation.
    */
   createdByEvent(event) {
-    this._handleHover(event);
+    const { relatedTarget, type } = event;
+    this._debouncedHandleHover({ relatedTarget, type, details: getLaunchingDetails(event) });
   }
 
   /**
@@ -92,6 +101,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
         classShown: this.options.classShown,
         offset: this.options.objMenuOffset,
       });
+      this._hookOn(tooltip);
       this.children.push(this.tooltip);
     }
 
@@ -101,11 +111,34 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   }
 
   /**
-   * Handles hover/focus events.
-   * @param {Event} event The event.
+   * Attaches event handlers to show/hide the tooltip.
+   * @param {Element} element The element to attach the events to.
    * @private
    */
-  _handleHover(event) {
+  _hookOn(element) {
+    ['mouseover', 'mouseout', 'focus', 'blur', 'touchleave', 'touchcancel'].forEach(name => {
+      this.manage(
+        on(element, name, event => {
+          const { relatedTarget, type } = event;
+          const hadContextMenu = this._hasContextMenu;
+          this._hasContextMenu = type === 'contextmenu';
+          this._debouncedHandleHover({ relatedTarget, type, hadContextMenu, details: getLaunchingDetails(event) });
+        })
+      );
+    });
+  }
+
+  /**
+   * Handles hover/focus events.
+   * @param {Object} params The parameters.
+   * @param {number} params.relatedTarget For `mouseover` event, indicates where the mouse pointer is gone.
+   * @param {string} params.type The event type triggering this method.
+   * @param {boolean} params.hadContextMenu
+   *   `true` if `oncontextmenu` event is fired right before `mouseover`/`mouseout`, etc. events.
+   * @param {Object} params.details The event details.
+   * @private
+   */
+  _handleHover({ relatedTarget, type, hadContextMenu, details }) {
     const state = {
       mouseover: 'shown',
       mouseout: 'hidden',
@@ -113,8 +146,18 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
       blur: 'hidden',
       touchleave: 'hidden',
       touchcancel: 'hidden',
-    }[event.type];
-    this.changeState(state, getLaunchingDetails(event));
+    }[type];
+    let shouldPreventClose;
+    if (type === 'mouseout') {
+      // Note: SVGElement in IE11 does not have `.contains()`
+      const wentToSelf =
+        (relatedTarget && (this.element.contains && this.element.contains(relatedTarget))) ||
+        this.tooltip.element.contains(relatedTarget);
+      shouldPreventClose = hadContextMenu || wentToSelf;
+    }
+    if (!shouldPreventClose) {
+      this.changeState(state, details);
+    }
   }
 
   static components = new WeakMap();
