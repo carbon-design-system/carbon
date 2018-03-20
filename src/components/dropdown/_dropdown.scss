@@ -37,6 +37,20 @@
     }
   }
 
+  .#{$prefix}--dropdown--up {
+    &.#{$prefix}--dropdown--open:focus {
+      box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+
+      .#{$prefix}--dropdown-list {
+        box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      }
+    }
+
+    .#{$prefix}--dropdown-list {
+      bottom: 2.5rem;
+    }
+  }
+
   .#{$prefix}--dropdown__arrow {
     fill: $brand-01;
     position: absolute;
