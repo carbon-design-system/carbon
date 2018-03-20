@@ -5,6 +5,7 @@
   "license": "Apache-2",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "sideEffects": false,
   "scripts": {
     "build": "node scripts/build.js",
     "build-storybook": "build-storybook",
