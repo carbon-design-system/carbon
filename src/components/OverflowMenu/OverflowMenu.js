@@ -137,6 +137,11 @@ export default class OverflowMenu extends Component {
      * The CSS class for the icon.
      */
     iconClass: PropTypes.string,
+
+    /**
+     * Function called to override icon rendering.
+     */
+    renderIcon: PropTypes.func,
   };
 
   static defaultProps = {
@@ -243,6 +248,7 @@ export default class OverflowMenu extends Component {
       menuOffsetFlip,
       iconClass,
       onClick, // eslint-disable-line
+      renderIcon,
       ...other
     } = this.props;
 
@@ -287,6 +293,13 @@ export default class OverflowMenu extends Component {
       </div>
     );
 
+    const iconProps = {
+      onClick: this.handleClick,
+      onKeyDown: this.handleKeyDown,
+      className: overflowMenuIconClasses,
+      description: iconDescription,
+    };
+
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <div
@@ -300,14 +313,11 @@ export default class OverflowMenu extends Component {
           id={id}
           tabIndex={tabIndex}
           ref={this.bindMenuEl}>
-          <Icon
-            onClick={this.handleClick}
-            onKeyDown={this.handleKeyDown}
-            className={overflowMenuIconClasses}
-            name={iconName}
-            description={iconDescription}
-            style={{ width: '100%' }}
-          />
+          {renderIcon ? (
+            renderIcon(iconProps)
+          ) : (
+            <Icon {...iconProps} name={iconName} style={{ width: '100%' }} />
+          )}
           {open && wrappedMenuBody}
         </div>
       </ClickListener>

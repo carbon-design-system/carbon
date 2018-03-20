@@ -56,4 +56,28 @@ storiesOf('OverflowMenu', module)
         />
       </OverflowMenu>
     )
+  )
+  .addWithInfo(
+    'custom trigger',
+    `
+      Sometimes you just want to render something other than an icon
+    `,
+    () => (
+      <OverflowMenu
+        {...overflowMenuEvents}
+        style={{ width: 'auto' }}
+        floatingMenu
+        renderIcon={iconProps => <div {...iconProps}>Custom trigger</div>}>
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 1" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
+        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText="Danger option"
+          hasDivider
+          isDelete
+        />
+      </OverflowMenu>
+    )
   );

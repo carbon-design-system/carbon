@@ -171,4 +171,19 @@ describe('OverflowMenu', () => {
       expect(rootWrapper.state().open).toEqual(true);
     });
   });
+
+  describe('customized icon', () => {
+    it('renders', () => {
+      const rootWrapper = shallow(
+        <OverflowMenu
+          className="extra-class"
+          renderIcon={() => <div className="other">Other</div>}>
+          <div className="test-child" />
+          <div className="test-child" />
+        </OverflowMenu>
+      );
+      expect(rootWrapper.find('.bx--overflow-menu__icon')).toHaveLength(0);
+      expect(rootWrapper.find('.other')).toHaveLength(1);
+    });
+  });
 });
