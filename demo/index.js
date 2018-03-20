@@ -1,6 +1,7 @@
 import './scss/demo.scss';
 
 import './polyfills/index';
+import './polyfills/devenv';
 
 import './js/components/boot-nav';
 import './js/prism';
