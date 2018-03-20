@@ -31,7 +31,10 @@
         'unified-header',
       ];
       var componentItems = {componentItems|js|s}.map(function (item) {
-        return needIframe.indexOf(item.name) >= 0 ? Object.assign(item, { useIframe: true }) : item;
+        if (needIframe.indexOf(item.name) >= 0) {
+          item.useIframe = true;
+        }
+        return item;
       });
       var docItems = {docItems|js|s};
     </script>
