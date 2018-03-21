@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
-import { getNextSortState } from './state/sorting';
+import { getNextSortState, getCurrentSortState } from './state/sorting';
 import denormalize from './tools/denormalize';
 import { composeEventHandlers } from './tools/events';
 import { defaultFilterRows } from './tools/filter';
@@ -102,14 +102,24 @@ export default class DataTable extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = getDerivedStateFromProps(props);
+    this.state = getDerivedStateFromProps(props, {});
     this.instanceId = getInstanceId();
   }
 
   componentWillReceiveProps(nextProps) {
-    const nextState = getDerivedStateFromProps(nextProps);
-    if (nextState) {
-      this.setState(nextState);
+    const nextState = getDerivedStateFromProps(nextProps, this.state);
+
+    // Preserve the sorted order by re-sorting the data
+    if (
+      (nextState && nextState.sortHeaderKey !== this.state.sortHeaderKey) ||
+      nextState.sortDirection !== this.state.sortDirection
+    ) {
+      this.setState({
+        ...nextState,
+        ...getCurrentSortState(this.props, this.state, {
+          key: this.state.sortHeaderKey,
+        }),
+      });
     }
   }
 

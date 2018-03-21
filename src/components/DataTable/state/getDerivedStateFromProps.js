@@ -8,14 +8,14 @@ import normalize from '../tools/normalize';
  * Currently, it's being used as a way to normalize the incoming data that we
  * are receiving for rows
  */
-const getDerivedStateFromProps = props => {
+const getDerivedStateFromProps = (props, prevState) => {
   const { rowIds, rowsById, cellsById } = normalize(props.rows, props.headers);
   return {
     rowIds,
     rowsById,
     cellsById,
-    sortDirection: initialSortState,
-    sortHeaderKey: null,
+    sortDirection: prevState.sortDirection || initialSortState,
+    sortHeaderKey: prevState.sortHeaderKey || null,
     // Copy over rowIds so the reference doesn't mutate the stored
     // `initialRowOrder`
     initialRowOrder: rowIds.slice(),

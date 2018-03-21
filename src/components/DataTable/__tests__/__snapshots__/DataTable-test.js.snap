@@ -73,7 +73,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                   <TableSelectAll
                     ariaLabel="Select all rows"
                     checked={false}
-                    id="data-table-6__select-all"
+                    id="data-table-7__select-all"
                     name="select-all"
                     onSelect={[Function]}
                   >
@@ -83,14 +83,14 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                       <InlineCheckbox
                         ariaLabel="Select all rows"
                         checked={false}
-                        id="data-table-6__select-all"
+                        id="data-table-7__select-all"
                         name="select-all"
                         onClick={[Function]}
                       >
                         <input
                           checked={false}
                           className="bx--checkbox"
-                          id="data-table-6__select-all"
+                          id="data-table-7__select-all"
                           name="select-all"
                           onClick={[Function]}
                           type="checkbox"
@@ -98,7 +98,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         <label
                           aria-label="Select all rows"
                           className="bx--checkbox-label"
-                          htmlFor="data-table-6__select-all"
+                          htmlFor="data-table-7__select-all"
                         />
                       </InlineCheckbox>
                     </th>
@@ -380,7 +380,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectAll
                     ariaLabel="Select all rows"
                     checked={false}
-                    id="data-table-5__select-all"
+                    id="data-table-6__select-all"
                     name="select-all"
                     onSelect={[Function]}
                   >
@@ -390,14 +390,14 @@ exports[`DataTable selection should render 1`] = `
                       <InlineCheckbox
                         ariaLabel="Select all rows"
                         checked={false}
-                        id="data-table-5__select-all"
+                        id="data-table-6__select-all"
                         name="select-all"
                         onClick={[Function]}
                       >
                         <input
                           checked={false}
                           className="bx--checkbox"
-                          id="data-table-5__select-all"
+                          id="data-table-6__select-all"
                           name="select-all"
                           onClick={[Function]}
                           type="checkbox"
@@ -405,7 +405,7 @@ exports[`DataTable selection should render 1`] = `
                         <label
                           aria-label="Select all rows"
                           className="bx--checkbox-label"
-                          htmlFor="data-table-5__select-all"
+                          htmlFor="data-table-6__select-all"
                         />
                       </InlineCheckbox>
                     </th>
@@ -525,7 +525,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
-                    id="data-table-5__select-row-b"
+                    id="data-table-6__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                   >
@@ -533,14 +533,14 @@ exports[`DataTable selection should render 1`] = `
                       <InlineCheckbox
                         ariaLabel="Select row"
                         checked={false}
-                        id="data-table-5__select-row-b"
+                        id="data-table-6__select-row-b"
                         name="select-row-b"
                         onClick={[Function]}
                       >
                         <input
                           checked={false}
                           className="bx--checkbox"
-                          id="data-table-5__select-row-b"
+                          id="data-table-6__select-row-b"
                           name="select-row-b"
                           onClick={[Function]}
                           type="checkbox"
@@ -548,7 +548,7 @@ exports[`DataTable selection should render 1`] = `
                         <label
                           aria-label="Select row"
                           className="bx--checkbox-label"
-                          htmlFor="data-table-5__select-row-b"
+                          htmlFor="data-table-6__select-row-b"
                         />
                       </InlineCheckbox>
                     </td>
@@ -576,7 +576,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
-                    id="data-table-5__select-row-a"
+                    id="data-table-6__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                   >
@@ -584,14 +584,14 @@ exports[`DataTable selection should render 1`] = `
                       <InlineCheckbox
                         ariaLabel="Select row"
                         checked={false}
-                        id="data-table-5__select-row-a"
+                        id="data-table-6__select-row-a"
                         name="select-row-a"
                         onClick={[Function]}
                       >
                         <input
                           checked={false}
                           className="bx--checkbox"
-                          id="data-table-5__select-row-a"
+                          id="data-table-6__select-row-a"
                           name="select-row-a"
                           onClick={[Function]}
                           type="checkbox"
@@ -599,7 +599,7 @@ exports[`DataTable selection should render 1`] = `
                         <label
                           aria-label="Select row"
                           className="bx--checkbox-label"
-                          htmlFor="data-table-5__select-row-a"
+                          htmlFor="data-table-6__select-row-a"
                         />
                       </InlineCheckbox>
                     </td>
@@ -627,7 +627,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectRow
                     ariaLabel="Select row"
                     checked={false}
-                    id="data-table-5__select-row-c"
+                    id="data-table-6__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                   >
@@ -635,14 +635,14 @@ exports[`DataTable selection should render 1`] = `
                       <InlineCheckbox
                         ariaLabel="Select row"
                         checked={false}
-                        id="data-table-5__select-row-c"
+                        id="data-table-6__select-row-c"
                         name="select-row-c"
                         onClick={[Function]}
                       >
                         <input
                           checked={false}
                           className="bx--checkbox"
-                          id="data-table-5__select-row-c"
+                          id="data-table-6__select-row-c"
                           name="select-row-c"
                           onClick={[Function]}
                           type="checkbox"
@@ -650,7 +650,7 @@ exports[`DataTable selection should render 1`] = `
                         <label
                           aria-label="Select row"
                           className="bx--checkbox-label"
-                          htmlFor="data-table-5__select-row-c"
+                          htmlFor="data-table-6__select-row-c"
                         />
                       </InlineCheckbox>
                     </td>

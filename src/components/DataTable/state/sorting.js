@@ -43,9 +43,25 @@ export const getNextSortDirection = (prevHeader, header, prevState) => {
   return sortStates.DESC;
 };
 
+export const getNextSortState = (props, state, { key }) => {
+  const { sortDirection, sortHeaderKey } = state;
+
+  const nextSortDirection = getNextSortDirection(
+    key,
+    sortHeaderKey,
+    sortDirection
+  );
+
+  return getSortedState(props, state, key, nextSortDirection);
+};
+
+export const getCurrentSortState = (props, state, { key }) => {
+  return getSortedState(props, state, key, state.sortDirection);
+};
+
 /**
- * Derive the next set of sort state fields from props and state for the given
- * header key.
+ * Derive the set of sorted state fields from props and state for the given
+ * header key and sortDirection
  *
  * @param {Object} props
  * @param {string} props.locale The current locale
@@ -54,31 +70,18 @@ export const getNextSortDirection = (prevHeader, header, prevState) => {
  * @param {Object} state
  * @param {Array<string>} state.rowIds Array of row ids
  * @param {Object} state.cellsById Lookup object for cells by id
- * @param {string} state.sortDirection The current sort direction
- * @param {string} state.sortHeaderKey The current sort header ky
  * @param {Array<string>} state.initialRowOrder Initial row order for the
  * current set of rows
- * @param {Object} options
- * @param {string} options.key the key for the given header we are derving the
- * next sort state for
+ * @param {string} key The key for the given header we are derving the
+ * sorted state for
+ * @param {string} sortDirection The sortState that we want to order by
  * @returns {Object}
  */
-export const getNextSortState = (props, state, { key }) => {
-  const {
-    rowIds,
-    cellsById,
-    sortDirection,
-    sortHeaderKey,
-    initialRowOrder,
-  } = state;
+const getSortedState = (props, state, key, sortDirection) => {
+  const { rowIds, cellsById, initialRowOrder } = state;
   const { locale, sortRow } = props;
-  const nextSortDirection = getNextSortDirection(
-    key,
-    sortHeaderKey,
-    sortDirection
-  );
   const nextRowIds =
-    nextSortDirection !== sortStates.NONE
+    sortDirection !== sortStates.NONE
       ? sortRows({
           rowIds,
           cellsById,
@@ -90,7 +93,7 @@ export const getNextSortState = (props, state, { key }) => {
       : initialRowOrder;
   return {
     sortHeaderKey: key,
-    sortDirection: nextSortDirection,
+    sortDirection: sortDirection,
     rowIds: nextRowIds,
   };
 };

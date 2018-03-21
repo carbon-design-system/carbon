@@ -80,7 +80,7 @@ export const defaultSortRow = (
   cellB,
   { sortDirection, sortStates, locale }
 ) => {
-  if (sortDirection === sortStates.DESC) {
+  if (sortDirection === sortStates.ASC) {
     return compare(cellB, cellA, locale);
   }
 
