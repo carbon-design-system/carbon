@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@storybook/react';
 import DropdownV2 from '../DropdownV2';
+import WithState from '../../tools/withState';
 
 const items = [
   {
@@ -88,5 +89,29 @@ storiesOf('DropdownV2', module)
           disabled
         />
       </div>
+    )
+  )
+  .addWithInfo(
+    'fully controlled',
+    `
+    Sometimes you want to control everything.
+  `,
+    () => (
+      <WithState initialState={{ selectedItem: items[0] }}>
+        {({ state, setState }) => (
+          <div style={{ width: 300 }}>
+            <DropdownV2
+              type="inline"
+              label="Label"
+              items={items}
+              itemToString={item => (item ? item.text : '')}
+              onChange={({ selectedItem }) =>
+                setTimeout(() => setState({ selectedItem }), 1000)
+              }
+              selectedItem={state.selectedItem}
+            />
+          </div>
+        )}
+      </WithState>
     )
   );

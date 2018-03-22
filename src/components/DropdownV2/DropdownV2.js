@@ -43,6 +43,11 @@ export default class DropdownV2 extends React.Component {
     label: PropTypes.node.isRequired,
 
     type: ListBoxPropTypes.ListBoxType,
+
+    /**
+     * In the case you want to control the dropdown selection entirely.
+     */
+    selectedItem: PropTypes.object,
   };
 
   static defaultProps = {
@@ -66,13 +71,15 @@ export default class DropdownV2 extends React.Component {
       itemToString,
       type,
       initialSelectedItem,
+      selectedItem,
     } = this.props;
     const className = cx('bx--dropdown-v2', containerClassName);
     return (
       <Downshift
         onChange={this.handleOnChange}
         itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}>
+        defaultSelectedItem={initialSelectedItem}
+        selectedItem={selectedItem}>
         {({
           isOpen,
           itemToString,
