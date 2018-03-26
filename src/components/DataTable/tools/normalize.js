@@ -33,6 +33,9 @@ const normalize = (rows, headers) => {
         isEditing: false,
         isValid: true,
         errors: null,
+        info: {
+          header: key,
+        },
       };
 
       rowsById[row.id].cells[i] = id;

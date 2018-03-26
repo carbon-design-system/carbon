@@ -5,6 +5,9 @@ Object {
   "a:fieldA": Object {
     "errors": null,
     "id": "a:fieldA",
+    "info": Object {
+      "header": "fieldA",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,
@@ -13,6 +16,9 @@ Object {
   "a:fieldB": Object {
     "errors": null,
     "id": "a:fieldB",
+    "info": Object {
+      "header": "fieldB",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,
@@ -21,6 +27,9 @@ Object {
   "a:fieldC": Object {
     "errors": null,
     "id": "a:fieldC",
+    "info": Object {
+      "header": "fieldC",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,
@@ -29,6 +38,9 @@ Object {
   "b:fieldA": Object {
     "errors": null,
     "id": "b:fieldA",
+    "info": Object {
+      "header": "fieldA",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,
@@ -37,6 +49,9 @@ Object {
   "b:fieldB": Object {
     "errors": null,
     "id": "b:fieldB",
+    "info": Object {
+      "header": "fieldB",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,
@@ -45,6 +60,9 @@ Object {
   "b:fieldC": Object {
     "errors": null,
     "id": "b:fieldC",
+    "info": Object {
+      "header": "fieldC",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,
@@ -53,6 +71,9 @@ Object {
   "c:fieldA": Object {
     "errors": null,
     "id": "c:fieldA",
+    "info": Object {
+      "header": "fieldA",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,
@@ -61,6 +82,9 @@ Object {
   "c:fieldB": Object {
     "errors": null,
     "id": "c:fieldB",
+    "info": Object {
+      "header": "fieldB",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,
@@ -69,6 +93,9 @@ Object {
   "c:fieldC": Object {
     "errors": null,
     "id": "c:fieldC",
+    "info": Object {
+      "header": "fieldC",
+    },
     "isEditable": false,
     "isEditing": false,
     "isValid": true,

@@ -262,6 +262,9 @@ exports[`DataTable selection should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -270,6 +273,9 @@ exports[`DataTable selection should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -285,6 +291,9 @@ exports[`DataTable selection should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -293,6 +302,9 @@ exports[`DataTable selection should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -308,6 +320,9 @@ exports[`DataTable selection should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -316,6 +331,9 @@ exports[`DataTable selection should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -723,6 +741,9 @@ exports[`DataTable should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "b:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -731,6 +752,9 @@ exports[`DataTable should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "b:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -746,6 +770,9 @@ exports[`DataTable should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "a:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -754,6 +781,9 @@ exports[`DataTable should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "a:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -769,6 +799,9 @@ exports[`DataTable should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "c:fieldA",
+                    "info": Object {
+                      "header": "fieldA",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
@@ -777,6 +810,9 @@ exports[`DataTable should render 1`] = `
                   Object {
                     "errors": null,
                     "id": "c:fieldB",
+                    "info": Object {
+                      "header": "fieldB",
+                    },
                     "isEditable": false,
                     "isEditing": false,
                     "isValid": true,
