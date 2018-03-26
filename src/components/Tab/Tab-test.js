@@ -1,6 +1,6 @@
 import React from 'react';
 import Tab from '../Tab';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 describe('Tab', () => {
   describe('renders as expected', () => {
@@ -93,5 +93,19 @@ describe('Tab', () => {
         expect(handleTabAnchorFocus).toBeCalled();
       });
     });
+  });
+  describe('custom render label', () => {
+    const wrapper = mount(
+      <Tab
+        renderAnchor={() => (
+          <a id="custom-label" href="#other-content">
+            Content
+          </a>
+        )}
+      />
+    );
+    expect(wrapper.find('#custom-label').props().href).toEqual(
+      '#other-content'
+    );
   });
 });

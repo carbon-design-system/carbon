@@ -10,12 +10,18 @@ export default class Tab extends React.Component {
     handleTabKeyDown: PropTypes.func,
     href: PropTypes.string.isRequired,
     index: PropTypes.number,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     role: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     onKeyDown: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
     tabIndex: PropTypes.number.isRequired,
+    /*
+     * An optional parameter to allow overriding the anchor rendering.
+     * Useful for using Tab along with react-router or other client
+     * side router libraries.
+     **/
+    renderAnchor: PropTypes.func,
   };
 
   static defaultProps = {
@@ -53,6 +59,7 @@ export default class Tab extends React.Component {
       tabIndex,
       onClick,
       onKeyDown,
+      renderAnchor,
       ...other
     } = this.props;
 
@@ -61,6 +68,16 @@ export default class Tab extends React.Component {
       { 'bx--tabs__nav-item--selected': selected },
       className
     );
+
+    const anchorProps = {
+      className: 'bx--tabs__nav-link',
+      href,
+      role: 'tab',
+      tabIndex,
+      ref: e => {
+        this.tabAnchor = e;
+      },
+    };
 
     return (
       <li
@@ -78,16 +95,11 @@ export default class Tab extends React.Component {
         }}
         role="presentation"
         selected={selected}>
-        <a
-          className="bx--tabs__nav-link"
-          href={href}
-          role="tab"
-          tabIndex={tabIndex}
-          ref={e => {
-            this.tabAnchor = e;
-          }}>
-          {label}
-        </a>
+        {renderAnchor ? (
+          renderAnchor(anchorProps)
+        ) : (
+          <a {...anchorProps}>{label}</a>
+        )}
       </li>
     );
   }
