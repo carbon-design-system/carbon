@@ -5,6 +5,7 @@
 | Name      | Params                        | Description                                                                                                           |
 |-----------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | setState | state: `String` ['true', 'false', 'mixed'] | Can be used to set the checkbox to `true`(checked), `false`(unchecked) or `mixed` (indeterminate) |
+| setDisabled | state: `String` ['true', 'false'] | Can be used to set the checkbox to disabled, needed for the `input > label` |
 
 #### Options
 

@@ -99,6 +99,14 @@
     margin-top: rem(-6px);
   }
 
+  //Disabled
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
+  .#{$prefix}--checkbox:disabled ~ .#{$prefix}--checkbox-label-text,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--checkbox-appearance {
     position: absolute;
     left: 0;
@@ -125,16 +133,14 @@
     border-color: $brand-01;
   }
 
-  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
-  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-appearance,
-  .#{$prefix}--checkbox:disabled ~ .#{$prefix}--checkbox-label-text {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
   .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance,
   .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-appearance {
     @include focus-outline('blurred');
+  }
+
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-appearance {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--checkbox-checkmark {

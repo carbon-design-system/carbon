@@ -10,6 +10,11 @@ const stateChangeTypes = {
   mixed: 'mixed',
 };
 
+const disabledTypes = {
+  true: 'true',
+  false: 'false',
+};
+
 class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Checkbox UI.
@@ -96,6 +101,23 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     }
   }
 
+  setDisabled(value) {
+    if (value === undefined || disabledTypes[value] === undefined) {
+      throw new TypeError('setDisabled expects a value of true or false');
+    }
+
+    if (value === 'true') {
+      this.element.setAttribute('disabled', value);
+    } else if (value === 'false') {
+      this.element.removeAttribute('disabled', 'true');
+    }
+
+    const container = this.element.closest('[data-contained-checkbox-disabled]');
+    if (container) {
+      this.element.parentElement.setAttribute('data-contained-checkbox-disabled', value);
+    }
+  }
+
   _indeterminateCheckbox() {
     if (this.element.getAttribute('aria-checked', 'mixed')) {
       this.element.indeterminate = true;
@@ -113,6 +135,12 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     }
     if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.checked) {
       this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
+    }
+    if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
+      this.element.parentElement.setAttribute('data-contained-checkbox-disabled', 'false');
+    }
+    if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.disabled) {
+      this.element.parentElement.setAttribute('data-contained-checkbox-disabled', 'true');
     }
   }
 
