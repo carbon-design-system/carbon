@@ -96,14 +96,30 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     }
   }
 
+  setDisabled(value) {
+    if (value === undefined) {
+      throw new TypeError('setDisabled expects a boolean value of true or false');
+    }
+    if (value === true) {
+      this.element.setAttribute('disabled', true);
+    } else if (value === false) {
+      this.element.removeAttribute('disabled');
+    }
+    const container = this.element.closest('[data-contained-checkbox-disabled]');
+    if (container) {
+      container.setAttribute('data-contained-checkbox-disabled', value);
+    }
+  }
+
   _indeterminateCheckbox() {
-    if (this.element.getAttribute('aria-checked', 'mixed')) {
+    if (this.element.getAttribute('aria-checked') === 'mixed') {
       this.element.indeterminate = true;
     }
-
     if (this.element.indeterminate === true) {
-      this.element.parentElement.setAttribute('data-contained-checkbox-state', 'mixed');
       this.element.setAttribute('aria-checked', 'mixed');
+    }
+    if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.indeterminate === true) {
+      this.element.parentElement.setAttribute('data-contained-checkbox-state', 'mixed');
     }
   }
 
@@ -113,6 +129,12 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     }
     if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.checked) {
       this.element.parentElement.setAttribute('data-contained-checkbox-state', 'true');
+    }
+    if (this.element.parentElement.classList.contains('bx--checkbox-label')) {
+      this.element.parentElement.setAttribute('data-contained-checkbox-disabled', 'false');
+    }
+    if (this.element.parentElement.classList.contains('bx--checkbox-label') && this.element.disabled) {
+      this.element.parentElement.setAttribute('data-contained-checkbox-disabled', 'true');
     }
   }
 
