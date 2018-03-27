@@ -381,15 +381,6 @@
       ]
     },
     {
-      "login": "Flyingcirc-Danger",
-      "name": "Tom ",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/7711697?v=4",
-      "profile": "https://github.com/Flyingcirc-Danger",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
       "login": "tonitagd",
       "name": "Toni",
       "avatar_url": "https://avatars2.githubusercontent.com/u/4289301?v=4",
@@ -484,6 +475,80 @@
       "name": "Zeus Courtois",
       "avatar_url": "https://avatars2.githubusercontent.com/u/2263351?s=400&v=4",
       "profile": "https://github.com/zeusorion",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ajdaniel",
+      "name": "Andrew Daniel",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/867941?v=4",
+      "profile": "http://www.andrewdaniel.co.uk",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "AndySeymour2904",
+      "name": "Andy",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/36265276?v=4",
+      "profile": "https://github.com/AndySeymour2904",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "nicholaslee119",
+      "name": "Nicholas Lee",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7650400?v=4",
+      "profile": "https://github.com/nicholaslee119",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "davidmenendez",
+      "name": "David Menendez",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6370760?v=4",
+      "profile": "http://davidmenendez.net",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "pfarkya",
+      "name": "Prashant Farkya",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/14758158?v=4",
+      "profile": "https://github.com/pfarkya",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "neonwarp",
+      "name": "Tibor Cz",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4045950?v=4",
+      "profile": "https://neonwarp.github.io",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "nelsonchen90",
+      "name": "Xixiang Chen",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/10108576?v=4",
+      "profile": "https://github.com/nelsonchen90",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "s100",
+      "name": "s100",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/9932290?v=4",
+      "profile": "https://github.com/s100",
       "contributions": [
         "code"
       ]

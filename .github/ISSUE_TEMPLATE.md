@@ -22,6 +22,17 @@
 
 ## Steps to reproduce the issue
 
+<!--
+Please try to re-create the issue using our Codesandbox template available here:
+https://codesandbox.io/s/x2mjypo6pp
+
+This helps reduce the issue to an isolated case that helps us out when debugging.
+If you're able to reproduce using the codesandbox link above, please include the
+link in addition to the steps to reproduce. Thanks so much!
+-->
+
+<!-- [Codesandbox](<url>) -->
+
 1. Step one
 2. Step two
 3. Step three
