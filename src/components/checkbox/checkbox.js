@@ -103,7 +103,7 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
     if (value === true) {
       this.element.setAttribute('disabled', true);
     } else if (value === false) {
-      this.element.removeAttribute('disabled', true);
+      this.element.removeAttribute('disabled');
     }
     const container = this.element.closest('[data-contained-checkbox-disabled]');
     if (container) {
