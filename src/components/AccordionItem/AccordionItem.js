@@ -7,7 +7,7 @@ export default class AccordionItem extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    title: PropTypes.string,
+    title: PropTypes.node,
     open: PropTypes.bool,
     onClick: PropTypes.func,
     onHeadingClick: PropTypes.func,

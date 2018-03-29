@@ -53,7 +53,13 @@ storiesOf('Accordion', module).addWithInfo(
           <SelectItem value="option-3" text="Option 3" />
         </Select>
       </AccordionItem>
-      <AccordionItem title="Section 4 title" {...props}>
+      <AccordionItem
+        title={
+          <h4>
+            Section 4 title (<em>the title can be a node</em>)
+          </h4>
+        }
+        {...props}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

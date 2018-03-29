@@ -59,6 +59,35 @@ describe('AccordionItem', () => {
     });
   });
 
+  describe('Renders a node title as expected', () => {
+    const titleNode = shallow(
+      <h2 className="TitleClass">
+        <img src="some_image.png" alt="Something" />
+        A heading
+      </h2>
+    );
+    const wrapper = shallow(
+      <AccordionItem title={titleNode} className="extra-class">
+        Lorem ipsum.
+      </AccordionItem>
+    );
+
+    it('renders heading as expected', () => {
+      const heading = wrapper.find('.bx--accordion__heading');
+      expect(heading.length).toBe(1);
+      expect(heading.find(Icon).length).toBe(1);
+      const title = heading.find('.bx--accordion__title');
+      expect(title.text()).toBe('A heading');
+      expect(title.find('h2').exists()).toEqual(true);
+      expect(title.find('h2').hasClass('TitleClass')).toEqual(true);
+      expect(title.find('img').exists()).toEqual(true);
+      expect(title.find('img').props()).toEqual({
+        alt: 'Something',
+        src: 'some_image.png',
+      });
+    });
+  });
+
   describe('Check that functions passed in as props are called', () => {
     const onClick = jest.fn();
     const onHeadingClick = jest.fn();
