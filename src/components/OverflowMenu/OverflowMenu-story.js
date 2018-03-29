@@ -23,7 +23,11 @@ storiesOf('OverflowMenu', module)
     `,
     () => (
       <OverflowMenu {...overflowMenuEvents}>
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 1" />
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText="Option 1"
+          primaryFocus={true}
+        />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
@@ -44,7 +48,11 @@ storiesOf('OverflowMenu', module)
     `,
     () => (
       <OverflowMenu {...overflowMenuEvents} floatingMenu>
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 1" />
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText="Option 1"
+          primaryFocus={true}
+        />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />

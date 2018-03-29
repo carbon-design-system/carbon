@@ -150,6 +150,11 @@ class FloatingMenu extends React.Component {
      * The additional styles to put to the floating menu.
      */
     styles: PropTypes.object,
+
+    /**
+     * The callback called when the menu body has been mounted to/will be unmounted from the DOM.
+     */
+    menuRef: PropTypes.func,
   };
 
   static defaultProps = {
@@ -187,16 +192,6 @@ class FloatingMenu extends React.Component {
       this.el = document.createElement('div');
     }
   }
-
-  /**
-   * A callback called when a new menu ref is available.
-   * @private
-   */
-  _onNewMenuRef = menu => {
-    if (hasCreatePortal) {
-      this._menuBody = menu && menu.firstChild;
-    }
-  };
 
   /**
    * Calculates the position in the viewport of floating menu,
@@ -268,6 +263,7 @@ class FloatingMenu extends React.Component {
   }
 
   componentDidMount() {
+    const { menuRef } = this.props;
     if (!hasCreatePortal) {
       this._menuContainer = document.createElement('div');
       document.body.appendChild(this._menuContainer);
@@ -281,18 +277,27 @@ class FloatingMenu extends React.Component {
       ReactDOM.render(childrenWithProps, this._menuContainer, () => {
         this._menuBody = this._menuContainer.firstChild;
         this._updateMenuSize();
-        ReactDOM.render(this._getChildrenWithProps(), this._menuContainer);
+        ReactDOM.render(
+          this._getChildrenWithProps(),
+          this._menuContainer,
+          () => {
+            menuRef && menuRef(this._menuBody);
+          }
+        );
       });
     } else {
       if (this.el && this.el.firstChild) {
         this._menuBody = this.el.firstChild;
         document.body.appendChild(this._menuBody);
+        menuRef && menuRef(this._menuBody);
       }
       this._updateMenuSize();
     }
   }
 
   componentWillUnmount() {
+    const { menuRef } = this.props;
+    menuRef && menuRef(null);
     if (!hasCreatePortal) {
       const menuContainer = this._menuContainer;
       ReactDOM.unmountComponentAtNode(menuContainer);

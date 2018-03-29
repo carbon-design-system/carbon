@@ -9,6 +9,7 @@ const OverflowMenuItem = ({
   isDelete,
   closeMenu,
   onClick,
+  primaryFocus,
   ...other
 }) => {
   const overflowMenuBtnClasses = classNames(
@@ -29,10 +30,14 @@ const OverflowMenuItem = ({
     closeMenu();
   };
 
+  const primaryFocusProp = !primaryFocus
+    ? {}
+    : { 'data-floating-menu-primary-focus': true };
   const item = (
     <li className={overflowMenuItemClasses} role="menuitem">
       <button
         {...other}
+        {...primaryFocusProp}
         className={overflowMenuBtnClasses}
         onClick={handleClick}>
         {itemText}
@@ -44,10 +49,26 @@ const OverflowMenuItem = ({
 };
 
 OverflowMenuItem.propTypes = {
+  /**
+   * The CSS class names.
+   */
   className: PropTypes.string,
+
+  /**
+   * The text in the menu item.
+   */
   itemText: PropTypes.string.isRequired,
+
+  /**
+   * `true` to make this menu item a divider.
+   */
   hasDivider: PropTypes.bool,
+
+  /**
+   * `true` to make this menu item a "danger button".
+   */
   isDelete: PropTypes.bool,
+
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
   onFocus: PropTypes.func,
@@ -57,7 +78,16 @@ OverflowMenuItem.propTypes = {
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   onMouseUp: PropTypes.func,
+
+  /**
+   * A callback to tell the parent menu component that the menu should be closed.
+   */
   closeMenu: PropTypes.func,
+
+  /**
+   * `true` if this menu item should get focus when the menu gets open.
+   */
+  primaryFocus: PropTypes.bool,
 };
 
 OverflowMenuItem.defaultProps = {

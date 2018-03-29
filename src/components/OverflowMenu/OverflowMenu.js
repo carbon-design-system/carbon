@@ -6,6 +6,16 @@ import FloatingMenu from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
 import Icon from '../Icon';
 
+const on = (element, ...args) => {
+  element.addEventListener(...args);
+  return {
+    release() {
+      element.removeEventListener(...args);
+      return null;
+    },
+  };
+};
+
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
  * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
@@ -158,6 +168,12 @@ export default class OverflowMenu extends Component {
     menuOffsetFlip: getMenuOffset,
   };
 
+  /**
+   * The handle of `onfocusin` or `focus` event handler.
+   * @private
+   */
+  _hFocusIn = null;
+
   state = {
     /**
      * The open/closed state.
@@ -234,6 +250,34 @@ export default class OverflowMenu extends Component {
     this.menuEl = menuEl;
   };
 
+  /**
+   * Handles the floating menu being mounted/unmounted.
+   * @param {Element} menuBody The DOM element of the menu body.
+   * @private
+   */
+  _bindMenuBody = menuBody => {
+    if (menuBody) {
+      (
+        menuBody.querySelector('[data-floating-menu-primary-focus]') || menuBody
+      ).focus();
+      const hasFocusin = 'onfocusin' in window;
+      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+      this._hFocusIn = on(
+        menuBody.ownerDocument,
+        focusinEventName,
+        event => {
+          if (!menuBody.contains(event.target)) {
+            this.closeMenu();
+            this.menuEl && this.menuEl.focus();
+          }
+        },
+        !hasFocusin
+      );
+    } else if (this._hFocusIn) {
+      this._hFocusIn = this._hFocusIn.release();
+    }
+  };
+
   render() {
     const {
       id,
@@ -279,7 +323,12 @@ export default class OverflowMenu extends Component {
     );
 
     const menuBody = (
-      <ul className={overflowMenuOptionsClasses}>{childrenWithProps}</ul>
+      <ul
+        className={overflowMenuOptionsClasses}
+        tabIndex="-1"
+        ref={!floatingMenu && this._bindMenuBody}>
+        {childrenWithProps}
+      </ul>
     );
     const wrappedMenuBody = !floatingMenu ? (
       menuBody
@@ -287,7 +336,8 @@ export default class OverflowMenu extends Component {
       <div role="menuitem">
         <FloatingMenu
           menuPosition={this.state.menuPosition}
-          menuOffset={flipped ? menuOffsetFlip : menuOffset}>
+          menuOffset={flipped ? menuOffsetFlip : menuOffset}
+          menuRef={this._bindMenuBody}>
           {menuBody}
         </FloatingMenu>
       </div>
