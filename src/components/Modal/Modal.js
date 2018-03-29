@@ -13,6 +13,7 @@ export default class Modal extends Component {
     id: PropTypes.string,
     modalHeading: PropTypes.string,
     modalLabel: PropTypes.string,
+    modalAriaLabel: PropTypes.string,
     secondaryButtonText: PropTypes.string,
     primaryButtonText: PropTypes.string,
     open: PropTypes.bool,
@@ -51,6 +52,7 @@ export default class Modal extends Component {
     const {
       modalHeading,
       modalLabel,
+      modalAriaLabel,
       passiveModal,
       secondaryButtonText,
       primaryButtonText,
@@ -95,7 +97,8 @@ export default class Modal extends Component {
           this.innerModal = modal;
         }}
         role="dialog"
-        className="bx--modal-container">
+        className="bx--modal-container"
+        ariaLabel={modalAriaLabel}>
         <div className="bx--modal-header">
           {passiveModal && modalButton}
           {modalLabel && (
