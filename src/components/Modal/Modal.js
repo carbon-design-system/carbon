@@ -98,7 +98,7 @@ export default class Modal extends Component {
         }}
         role="dialog"
         className="bx--modal-container"
-        ariaLabel={modalAriaLabel}>
+        aria-label={modalAriaLabel}>
         <div className="bx--modal-header">
           {passiveModal && modalButton}
           {modalLabel && (
