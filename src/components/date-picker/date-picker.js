@@ -6,7 +6,7 @@ import initComponentBySearch from '../../globals/js/mixins/init-component-by-sea
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-/* eslint no-underscore-dangle: [2, { "allow": ["_input"], "allowAfterThis": true }] */
+/* eslint no-underscore-dangle: [2, { "allow": ["_input", "_updateClassNames", "_updateInputFields"], "allowAfterThis": true }] */
 
 // `this.options` create-component mix-in creates prototype chain
 // so that `options` given in constructor argument wins over the one defined in static `options` property
@@ -141,39 +141,51 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
         }
       });
     }
+    const self = this;
     const date = type === 'range' ? this._rangeInput : this.element.querySelector(this.options.selectorDatePickerInput);
+    const { onClose, onChange, onMonthChange, onYearChange, onOpen, onValueUpdate } = this.options;
     const calendar = new Flatpickr(
       date,
       Object.assign(flattenOptions(this.options), {
         allowInput: true,
         mode: type,
         positionElement: type === 'range' && this.element.querySelector(this.options.selectorDatePickerInputFrom),
-        onClose: selectedDates => {
-          this._updateClassNames(calendar);
-          this._updateInputFields(selectedDates, type);
+        onClose(selectedDates, ...remainder) {
+          if (!onClose || onClose.call(this, selectedDates, ...remainder) !== false) {
+            self._updateClassNames(calendar);
+            self._updateInputFields(selectedDates, type);
+          }
         },
-        onChange: () => {
-          this._updateClassNames(calendar);
-          if (type === 'range') {
-            if (calendar.selectedDates.length === 1 && calendar.isOpen) {
-              this.element.querySelector(this.options.selectorDatePickerInputTo).classList.add(this.options.classFocused);
-            } else {
-              this.element.querySelector(this.options.selectorDatePickerInputTo).classList.remove(this.options.classFocused);
+        onChange(...args) {
+          if (!onChange || onChange.call(this, ...args) !== false) {
+            self._updateClassNames(calendar);
+            if (type === 'range') {
+              if (calendar.selectedDates.length === 1 && calendar.isOpen) {
+                self.element.querySelector(self.options.selectorDatePickerInputTo).classList.add(self.options.classFocused);
+              } else {
+                self.element.querySelector(self.options.selectorDatePickerInputTo).classList.remove(self.options.classFocused);
+              }
             }
           }
         },
-        onMonthChange: () => {
-          this._updateClassNames(calendar);
+        onMonthChange(...args) {
+          if (!onMonthChange || onMonthChange.call(this, ...args) !== false) {
+            self._updateClassNames(calendar);
+          }
         },
-        onYearChange: () => {
-          this._updateClassNames(calendar);
+        onYearChange(...args) {
+          if (!onYearChange || onYearChange.call(this, ...args) !== false) {
+            self._updateClassNames(calendar);
+          }
         },
-        onOpen: () => {
-          this._updateClassNames(calendar);
+        onOpen(...args) {
+          if (!onOpen || onOpen.call(this, ...args) !== false) {
+            self._updateClassNames(calendar);
+          }
         },
-        onValueUpdate: () => {
-          if (type === 'range') {
-            this._updateInputFields(this.calendar.selectedDates, type);
+        onValueUpdate(...args) {
+          if ((!onValueUpdate || onValueUpdate.call(this, ...args) !== false) && type === 'range') {
+            self._updateInputFields(self.calendar.selectedDates, type);
           }
         },
         nextArrow: this._rightArrowHTML(),
