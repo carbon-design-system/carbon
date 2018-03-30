@@ -3,6 +3,7 @@
 exports[`DataTable.TableToolbarSearch should render 1`] = `
 <TableToolbarSearch
   className="custom-class"
+  id="custom-id"
   onChange={[MockFunction]}
 >
   <div
@@ -10,7 +11,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   >
     <Search
       className="custom-class"
-      id="search-2"
+      id="custom-id"
       labelText="Filter table"
       onChange={[MockFunction]}
       placeHolderText="Search"
@@ -54,13 +55,13 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         </Icon>
         <label
           className="bx--label"
-          htmlFor="search-2"
+          htmlFor="custom-id"
         >
           Filter table
         </label>
         <input
           className="bx--search-input"
-          id="search-2"
+          id="custom-id"
           onChange={[Function]}
           placeholder="Search"
           type="text"

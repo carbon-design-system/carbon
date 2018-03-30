@@ -2,11 +2,15 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Search from '../Search';
+import setupGetInstanceId from './tools/instanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const TableToolbarSearch = ({
   className,
   searchContainerClass,
   onChange,
+  id = `data-table-search-${getInstanceId()}`,
   ...rest
 }) => {
   const searchContainerClasses = cx(
@@ -19,7 +23,7 @@ const TableToolbarSearch = ({
         className={className}
         {...rest}
         small
-        id="search-2"
+        id={id}
         labelText="Filter table"
         placeHolderText="Search"
         onChange={onChange}
@@ -30,10 +34,16 @@ const TableToolbarSearch = ({
 
 TableToolbarSearch.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string,
+
   /**
    * Provide an optional class name for the search container
    */
+  className: PropTypes.string,
+
+  /**
+   * Provide an optional id for the search container
+   */
+  id: PropTypes.string,
   searchContainerClasses: PropTypes.string,
 
   /**

@@ -64,7 +64,7 @@ describe('DataTable', () => {
       render: jest.fn(({ rows, headers, getHeaderProps, onInputChange }) => (
         <TableContainer title="DataTable with toolbar">
           <TableToolbar>
-            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarSearch onChange={onInputChange} id="custom-id" />
             <TableToolbarContent>
               <TableToolbarAction
                 iconName="download"

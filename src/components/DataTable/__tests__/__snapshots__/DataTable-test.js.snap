@@ -871,13 +871,14 @@ exports[`DataTable should render 1`] = `
           className="bx--table-toolbar"
         >
           <TableToolbarSearch
+            id="custom-id"
             onChange={[Function]}
           >
             <div
               className="bx--toolbar-search-container"
             >
               <Search
-                id="search-2"
+                id="custom-id"
                 labelText="Filter table"
                 onChange={[Function]}
                 placeHolderText="Search"
@@ -921,13 +922,13 @@ exports[`DataTable should render 1`] = `
                   </Icon>
                   <label
                     className="bx--label"
-                    htmlFor="search-2"
+                    htmlFor="custom-id"
                   >
                     Filter table
                   </label>
                   <input
                     className="bx--search-input"
-                    id="search-2"
+                    id="custom-id"
                     onChange={[Function]}
                     placeholder="Search"
                     type="text"
