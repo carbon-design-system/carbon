@@ -12,6 +12,10 @@ export default class NumberInput extends Component {
     label: PropTypes.string,
     max: PropTypes.number,
     min: PropTypes.number,
+    /**
+     * The new value is available in 'imaginaryTarget.value'
+     * i.e. to get the value: evt.imaginaryTarget.value
+     */
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     step: PropTypes.number,
