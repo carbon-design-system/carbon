@@ -26,6 +26,6 @@ Use these modifiers with `.bx--pagination__button` class.
 
 | Name              | Description                                                                                                                                        |
 |-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| eventItemsPerPage | Custom event fired when a user changes the number of items per page. event.detail.value contains the number of items a user wishes to see.         |
-| eventPageNumber   | The name of the custom event fired when a user inputs a specific page number. event.detail.value contains the value that the user input.           |
-| eventPageChange   | The name of the custom event fired when a user goes forward or backward a page. event.detail.direction contains the direction a user wishes to go. |
+| itemsPerPage | Custom event fired when a user changes the number of items per page. event.detail.value contains the number of items a user wishes to see.         |
+| pageNumber   | The name of the custom event fired when a user inputs a specific page number. event.detail.value contains the value that the user input.           |
+| pageChange   | The name of the custom event fired when a user goes forward or backward a page. event.detail.direction contains the direction a user wishes to go. |
