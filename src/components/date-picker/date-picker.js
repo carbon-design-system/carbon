@@ -231,7 +231,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       on(inputField, 'change', evt => {
         if (!evt.detail || !evt.detail.fromFlatpickr) {
           const inputDate = this.calendar.parseDate(inputField.value);
-          if (!isNaN(inputDate.valueOf())) {
+          if (inputDate && !isNaN(inputDate.valueOf())) {
             if (isNaN(index)) {
               this.calendar.setDate(inputDate);
             } else {
