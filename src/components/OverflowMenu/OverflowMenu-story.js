@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import Icon from '../Icon';
 
 const overflowMenuEvents = {
   onClick: action('onClick'),
@@ -31,6 +32,18 @@ storiesOf('OverflowMenu', module)
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
         <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
+        <OverflowMenuItem
+          {...overflowMenuItemEvents}
+          itemText={
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}>
+              Add <Icon name="icon--add" style={{ height: '12px' }} />
+            </div>
+          }
+        />
         <OverflowMenuItem
           {...overflowMenuItemEvents}
           itemText="Danger option"

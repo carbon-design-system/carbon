@@ -57,7 +57,7 @@ OverflowMenuItem.propTypes = {
   /**
    * The text in the menu item.
    */
-  itemText: PropTypes.string.isRequired,
+  itemText: PropTypes.node.isRequired,
 
   /**
    * `true` to make this menu item a divider.
