@@ -65,6 +65,12 @@ export class ClickableTile extends Component {
     }
   };
 
+  componentWillReceiveProps({ clicked }) {
+    if (clicked !== this.props.clicked) {
+      this.setState({ clicked });
+    }
+  }
+
   render() {
     const {
       children,
@@ -154,6 +160,12 @@ export class SelectableTile extends Component {
     }
   };
 
+  componentWillReceiveProps({ selected }) {
+    if (selected !== this.props.selected) {
+      this.setState({ selected });
+    }
+  }
+
   render() {
     const {
       children,
@@ -222,6 +234,18 @@ export class ExpandableTile extends Component {
     handleClick: () => {},
   };
 
+  componentWillReceiveProps({ expanded, tileMaxHeight, tilePadding }) {
+    if (expanded !== this.props.expanded) {
+      this.setState({ expanded });
+    }
+    if (tileMaxHeight !== this.props.tileMaxHeight) {
+      this.setState({ tileMaxHeight });
+    }
+    if (tilePadding !== this.props.tilePadding) {
+      this.setState({ tilePadding });
+    }
+  }
+
   componentDidMount = () => {
     if (this.refs[0]) {
       this.aboveTheFold = ReactDOM.findDOMNode(this.refs[0]); // eslint-disable-line
@@ -268,6 +292,7 @@ export class ExpandableTile extends Component {
       tabIndex,
       className,
       tileMaxHeight, // eslint-disable-line
+      tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
       expanded, // eslint-disable-line
       ...other
