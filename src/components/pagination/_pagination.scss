@@ -105,12 +105,12 @@ $css--helpers: true;
 
     .#{$prefix}--select--inline {
       margin-right: 0;
-      width: rem(48px);
+      width: auto;
     }
 
     .#{$prefix}--select-input {
       height: rem(24px);
-      width: rem(54px);
+      width: auto;
       padding: 0 $spacing-xs;
       margin: 0;
       font-weight: 600;
@@ -121,7 +121,7 @@ $css--helpers: true;
     }
 
     .#{$prefix}--select__arrow {
-      right: 0.5rem;
+      right: -0.05rem;
       top: 0.625rem;
     }
 
@@ -172,7 +172,7 @@ $css--helpers: true;
     }
 
     .#{$prefix}--select__arrow {
-      right: 0.7rem;
+      right: -0.05rem;
     }
   }
 }
