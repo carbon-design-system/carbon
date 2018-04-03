@@ -37,6 +37,16 @@
       width: 0;
     }
   }
+
+  .component-example__live--rendered {
+    .bx--interior-left-nav--collapseable .bx--interior-left-nav-collapse {
+      display: flex;
+    }
+
+    .bx--interior-left-nav.bx--interior-left-nav--collapsed {
+      width: 3rem;
+    }
+  }
 }
 
 .demo--container {
