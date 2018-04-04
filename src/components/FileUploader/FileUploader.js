@@ -76,7 +76,6 @@ export class FileUploaderButton extends Component {
       <div
         role="button"
         className={classes}
-        tabIndex={tabIndex}
         onKeyDown={evt => {
           if (evt.which === 13 || evt.which === 32) {
             this.input.click();
@@ -84,6 +83,7 @@ export class FileUploaderButton extends Component {
         }}>
         <label
           className={`bx--btn bx--btn--${buttonKind}`}
+          tabIndex={tabIndex}
           htmlFor={this.uid}
           role={role}
           {...other}>
