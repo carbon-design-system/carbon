@@ -10,6 +10,7 @@ const OverflowMenuItem = ({
   closeMenu,
   onClick,
   primaryFocus,
+  wrapperClassName,
   ...other
 }) => {
   const overflowMenuBtnClasses = classNames(
@@ -22,7 +23,8 @@ const OverflowMenuItem = ({
     {
       'bx--overflow-menu--divider': hasDivider,
       'bx--overflow-menu-options__option--danger': isDelete,
-    }
+    },
+    wrapperClassName
   );
 
   const handleClick = evt => {
@@ -50,9 +52,14 @@ const OverflowMenuItem = ({
 
 OverflowMenuItem.propTypes = {
   /**
-   * The CSS class names.
+   * The CSS class name to be placed on the button element
    */
   className: PropTypes.string,
+
+  /**
+   * The CSS class name to be placed on the wrapper list item element
+   */
+  wrapperClassName: PropTypes.string,
 
   /**
    * The text in the menu item.

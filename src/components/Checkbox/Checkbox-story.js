@@ -119,6 +119,7 @@ storiesOf('Checkbox', module)
           id="checkbox-label-2"
           labelText="Checkbox label hidden"
           hideLabel={true}
+          wrapperClassName="wrapper-class"
         />
       </fieldset>
     )
