@@ -4,6 +4,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 
+const defaultItemToString = item => {
+  if (typeof item === 'string') {
+    return item;
+  }
+
+  return item ? item.label : '';
+};
+
 export default class DropdownV2 extends React.Component {
   static propTypes = {
     /**
@@ -18,10 +26,13 @@ export default class DropdownV2 extends React.Component {
     items: PropTypes.array.isRequired,
 
     /**
-     * Allow users to pass in arbitrary items from their collection that are
-     * pre-selected
+     * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
+     * from their collection that are pre-selected
      */
-    initialSelectedItem: PropTypes.object,
+    initialSelectedItem: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
 
     /**
      * Helper function passed to downshift that allows the library to render a
@@ -53,7 +64,7 @@ export default class DropdownV2 extends React.Component {
   static defaultProps = {
     disabled: false,
     type: 'default',
-    itemToString: item => (item ? item.label : ''),
+    itemToString: defaultItemToString,
   };
 
   handleOnChange = selectedItem => {

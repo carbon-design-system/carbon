@@ -40,15 +40,6 @@ describe('ComboBox', () => {
     assertMenuOpen(wrapper, mockProps);
   });
 
-  it('should display the initially selected item found in `initialSelectedItem`', () => {
-    const wrapper = mount(
-      <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
-    );
-    expect(findInputNode(wrapper).prop('value')).toEqual(
-      mockProps.items[0].label
-    );
-  });
-
   it('should call `onChange` each time an item is selected', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     expect(mockProps.onChange).not.toHaveBeenCalled();
@@ -75,6 +66,31 @@ describe('ComboBox', () => {
     });
 
     expect(onInputChange).toHaveBeenCalledWith('something');
+  });
+
+  describe('should display initially selected item found in `initialSelectedItem`', () => {
+    it('using an object type for the `initialSelectedItem` prop', () => {
+      const wrapper = mount(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
+      );
+      expect(findInputNode(wrapper).prop('value')).toEqual(
+        mockProps.items[0].label
+      );
+    });
+
+    it('using a string type for the `initialSelectedItem` prop', () => {
+      // Replace the 'items' property in mockProps with a list of strings
+      mockProps = {
+        ...mockProps,
+        items: ['1', '2', '3'],
+      };
+
+      const wrapper = mount(
+        <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
+      );
+
+      expect(findInputNode(wrapper).prop('value')).toEqual(mockProps.items[1]);
+    });
   });
 
   describe('when disabled', () => {

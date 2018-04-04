@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 
-const defaultItemToString = item => item && item.label;
+const defaultItemToString = item => {
+  if (typeof item === 'string') {
+    return item;
+  }
+
+  return item && item.label;
+};
+
 const defaultShouldFilterItem = ({ inputValue, item, itemToString }) =>
   !inputValue ||
   itemToString(item)
@@ -37,10 +44,13 @@ export default class ComboBox extends React.Component {
     id: PropTypes.string,
 
     /**
-     * Allow users to pass in arbitrary items from their collection that are
-     * pre-selected
+     * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
+     * from their collection that are pre-selected
      */
-    initialSelectedItem: PropTypes.object,
+    initialSelectedItem: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
 
     /**
      * We try to stay as generic as possible here to allow individuals to pass
