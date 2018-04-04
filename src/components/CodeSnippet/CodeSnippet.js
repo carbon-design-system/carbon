@@ -7,6 +7,7 @@ const CodeSnippet = ({
   className,
   type,
   children,
+  feedback,
   onClick,
   wrappedContentRef,
   ...other
@@ -21,7 +22,7 @@ const CodeSnippet = ({
           <pre ref={wrappedContentRef}>{children}</pre>
         </code>
       </div>
-      <CopyButton onClick={onClick} />
+      <CopyButton onClick={onClick} feedback={feedback} />
     </div>
   );
 };
@@ -30,6 +31,7 @@ CodeSnippet.propTypes = {
   type: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.string,
+  feedback: PropTypes.string,
   onClick: PropTypes.func,
   wrappedContentRef: PropTypes.func,
 };

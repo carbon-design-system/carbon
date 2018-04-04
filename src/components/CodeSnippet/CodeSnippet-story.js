@@ -5,6 +5,7 @@ import CodeSnippet from '../CodeSnippet';
 
 const copyProps = {
   onClick: action('onClick'),
+  feedback: 'Feedback Enabled 👍',
 };
 
 storiesOf('CodeSnippet', module)
