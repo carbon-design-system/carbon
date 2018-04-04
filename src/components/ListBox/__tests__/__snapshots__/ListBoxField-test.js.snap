@@ -22,6 +22,7 @@ exports[`ListBoxField should render 1`] = `
         <Icon
           description="Clear selected item"
           fillRule="evenodd"
+          focusable="false"
           name="close"
           role="img"
         >
@@ -29,6 +30,7 @@ exports[`ListBoxField should render 1`] = `
             alt="Clear selected item"
             aria-label="Clear selected item"
             fillRule="evenodd"
+            focusable="false"
             height="10"
             name="close"
             role="img"

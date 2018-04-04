@@ -27,6 +27,7 @@ exports[`ListBoxSelection should render 1`] = `
     <Icon
       description="translation"
       fillRule="evenodd"
+      focusable="false"
       name="close"
       role="img"
     >
@@ -34,6 +35,7 @@ exports[`ListBoxSelection should render 1`] = `
         alt="translation"
         aria-label="translation"
         fillRule="evenodd"
+        focusable="false"
         height="10"
         name="close"
         role="img"
@@ -82,6 +84,7 @@ exports[`ListBoxSelection should render 2`] = `
     <Icon
       description="translation"
       fillRule="evenodd"
+      focusable="false"
       name="close"
       role="img"
     >
@@ -89,6 +92,7 @@ exports[`ListBoxSelection should render 2`] = `
         alt="translation"
         aria-label="translation"
         fillRule="evenodd"
+        focusable="false"
         height="10"
         name="close"
         role="img"
