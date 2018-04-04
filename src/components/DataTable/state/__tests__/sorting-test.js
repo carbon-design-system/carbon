@@ -4,7 +4,6 @@ describe('sorting state', () => {
   let initialSortState;
   let getNextSortDirection;
   let getNextSortState;
-  let getCurrentSortState;
 
   beforeEach(() => {
     jest.mock('../../tools/sorting', () => ({
@@ -16,7 +15,6 @@ describe('sorting state', () => {
     initialSortState = sorting.initialSortState;
     getNextSortDirection = sorting.getNextSortDirection;
     getNextSortState = sorting.getNextSortState;
-    getCurrentSortState = sorting.getCurrentSortState;
   });
 
   describe('sortStates', () => {
@@ -183,87 +181,6 @@ describe('sorting state', () => {
         sortDirection: sortStates.NONE,
         // Initial row order
         rowIds: ['a', 'b', 'c'],
-      });
-    });
-  });
-
-  describe('getCurrentSortState', () => {
-    let mockProps;
-    let mockState;
-
-    beforeEach(() => {
-      mockProps = {
-        locale: 'en',
-        sortRow: jest.fn(),
-      };
-      mockState = {
-        sortDirection: sortStates.NONE,
-        sortHeaderKey: null,
-        rowIds: ['b', 'a', 'c'],
-        initialRowOrder: ['a', 'b', 'c'],
-        cellsById: {
-          'a:a': {
-            value: 'row-a:header-a',
-          },
-          'a:b': {
-            value: 'row-a:header-b',
-          },
-          'a:c': {
-            value: 'row-a:header-c',
-          },
-          'b:a': {
-            value: 'row-b:header-a',
-          },
-          'b:b': {
-            value: 'row-b:header-b',
-          },
-          'b:c': {
-            value: 'row-b:header-c',
-          },
-        },
-      };
-    });
-
-    it('should sort based on the current sort state options', () => {
-      const sortHeaderKey = 'a';
-      const state1 = getCurrentSortState(mockProps, mockState, {
-        key: sortHeaderKey,
-      });
-      const state2 = getCurrentSortState(
-        mockProps,
-        {
-          ...mockState,
-          sortDirection: 'DESC',
-        },
-        {
-          key: sortHeaderKey,
-        }
-      );
-      const state3 = getCurrentSortState(
-        mockProps,
-        {
-          ...mockState,
-          sortDirection: 'ASC',
-        },
-        {
-          key: sortHeaderKey,
-        }
-      );
-      expect(state1).toEqual({
-        sortHeaderKey,
-        sortDirection: sortStates.NONE,
-        rowIds: ['a', 'b', 'c'],
-      });
-      expect(state2).toEqual({
-        sortHeaderKey,
-        sortDirection: sortStates.DESC,
-        rowIds: ['b', 'a', 'c'],
-      });
-      expect(state3).toEqual({
-        sortHeaderKey,
-        sortDirection: sortStates.ASC,
-        // Initial row order
-        rowIds: ['b', 'a', 'c'],
       });
     });
   });

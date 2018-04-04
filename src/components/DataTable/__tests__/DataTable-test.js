@@ -2,9 +2,14 @@ import React from 'react';
 import Button from '../../Button';
 import DataTable, {
   Table,
+  TableBatchActions,
+  TableBatchAction,
   TableBody,
   TableCell,
   TableContainer,
+  TableExpandHeader,
+  TableExpandRow,
+  TableExpandedRow,
   TableHead,
   TableHeader,
   TableRow,
@@ -301,6 +306,204 @@ describe('DataTable', () => {
       expect(getSelectAll(wrapper).prop('checked')).toBe(false);
       const { selectedRows } = getLastCallFor(mockProps.render)[0];
       expect(selectedRows.length).toBe(0);
+    });
+  });
+
+  describe('componentWillReceiveProps', () => {
+    let mockProps;
+
+    beforeEach(() => {
+      mockProps = {
+        rows: [
+          {
+            id: 'b',
+            fieldA: 'Field 2:A',
+            fieldB: 'Field 2:B',
+          },
+          {
+            id: 'a',
+            fieldA: 'Field 1:A',
+            fieldB: 'Field 1:B',
+          },
+          {
+            id: 'c',
+            fieldA: 'Field 3:A',
+            fieldB: 'Field 3:B',
+          },
+        ],
+        headers: [
+          {
+            key: 'fieldA',
+            header: 'Field A',
+          },
+          {
+            key: 'fieldB',
+            header: 'Field B',
+          },
+        ],
+        locale: 'en',
+        render: jest.fn(
+          ({
+            rows,
+            headers,
+            getHeaderProps,
+            getSelectionProps,
+            getBatchActionProps,
+            getRowProps,
+            onInputChange,
+          }) => (
+            <TableContainer title="container">
+              <TableToolbar>
+                <TableBatchActions {...getBatchActionProps()}>
+                  <TableBatchAction onClick={jest.fn()}>Ghost</TableBatchAction>
+                </TableBatchActions>
+                <TableToolbarSearch onChange={onInputChange} />
+              </TableToolbar>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableExpandHeader />
+                    <TableSelectAll {...getSelectionProps()} />
+                    {headers.map(header => (
+                      <TableHeader {...getHeaderProps({ header })}>
+                        {header.header}
+                      </TableHeader>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                    <React.Fragment key={row.id}>
+                      <TableExpandRow {...getRowProps({ row })}>
+                        <TableSelectRow {...getSelectionProps({ row })} />
+                        {row.cells.map(cell => (
+                          <TableCell key={cell.id}>{cell.value}</TableCell>
+                        ))}
+                      </TableExpandRow>
+                      {row.isExpanded && (
+                        <TableExpandedRow>
+                          <TableCell colSpan={headers.length + 3}>
+                            <h1>Expandable row content</h1>
+                            <p>Description here</p>
+                          </TableCell>
+                        </TableExpandedRow>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )
+        ),
+      };
+    });
+
+    it('should add additional rows when receiving new props', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      const args = mockProps.render.mock.calls[0][0];
+
+      expect(args.rows.length).toEqual(mockProps.rows.length);
+
+      const nextRows = [
+        ...mockProps.rows,
+        {
+          id: 'd',
+          fieldA: 'Field 4:A',
+          fieldB: 'Field 4:B',
+        },
+      ];
+
+      wrapper.setProps({ rows: nextRows });
+
+      const nextArgs = mockProps.render.mock.calls[1][0];
+      expect(nextArgs.rows.length).toBe(nextRows.length);
+      expect(nextArgs.rows.map(row => row.id)).toEqual(['b', 'a', 'c', 'd']);
+    });
+
+    it('should add additional headers when receiving new props', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      const args = mockProps.render.mock.calls[0][0];
+
+      expect(args.headers).toEqual(mockProps.headers);
+
+      const nextProps = {
+        rows: mockProps.rows.map(row => ({
+          ...row,
+          fieldC: 'Field X:C',
+        })),
+        headers: [
+          ...mockProps.headers,
+          {
+            key: 'fieldC',
+            header: 'Field C',
+          },
+        ],
+      };
+
+      wrapper.setProps(nextProps);
+
+      const nextArgs = mockProps.render.mock.calls[1][0];
+      expect(nextArgs.headers).toEqual(nextProps.headers);
+    });
+
+    it('should keep batch action after adding rows, as long as some existing rows are selected', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      getSelectAll(wrapper).simulate('click');
+
+      const nextRows = [
+        ...mockProps.rows.map(row => ({ ...row, isSelected: true })),
+        {
+          id: 'd',
+          fieldA: 'Field 4:A',
+          fieldB: 'Field 4:B',
+          isSelected: false,
+        },
+      ];
+
+      wrapper.setProps({ rows: nextRows });
+
+      expect(getSelectAll(wrapper).prop('checked')).toBe(false);
+      const { getBatchActionProps, selectedRows } = getLastCallFor(
+        mockProps.render
+      )[0];
+      expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+      expect(selectedRows.length).toBe(3);
+    });
+
+    it('should keep selected all state after adding rows, as long as all existing rows and new row are selected', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      getSelectAll(wrapper).simulate('click');
+
+      const nextRows = [
+        ...mockProps.rows,
+        {
+          id: 'd',
+          fieldA: 'Field 4:A',
+          fieldB: 'Field 4:B',
+        },
+      ];
+
+      wrapper.setProps({ rows: nextRows });
+
+      const { getBatchActionProps, selectedRows } = getLastCallFor(
+        mockProps.render
+      )[0];
+      expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+      expect(selectedRows.length).toBe(3);
+    });
+
+    it('should update rows when receiving new props', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      const args = mockProps.render.mock.calls[0][0];
+
+      expect(args.rows.length).toEqual(mockProps.rows.length);
+
+      const nextRows = mockProps.rows.slice().reverse();
+
+      wrapper.setProps({ rows: nextRows });
+
+      const nextArgs = mockProps.render.mock.calls[1][0];
+      expect(nextArgs.rows.map(row => row.id)).toEqual(['c', 'a', 'b']);
     });
   });
 });

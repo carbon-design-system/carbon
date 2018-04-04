@@ -7,7 +7,8 @@ import { getCellId } from './cells';
  * @param {Array<Object>} headers
  * @returns {Object}
  */
-const normalize = (rows, headers) => {
+const normalize = (rows, headers, prevState = {}) => {
+  const { rowsById: prevRowsByIds } = prevState;
   const rowIds = new Array(rows.length);
   const rowsById = {};
   const cellsById = {};
@@ -23,6 +24,13 @@ const normalize = (rows, headers) => {
       cells: new Array(headers.length),
     };
 
+    // If we have a previous state, and the row existed in that previous state,
+    // then we'll set the state values of the row to the previous state values.
+    if (prevRowsByIds && prevRowsByIds[row.id] !== undefined) {
+      rowsById[row.id].isSelected = prevRowsByIds[row.id].isSelected;
+      rowsById[row.id].isExpanded = prevRowsByIds[row.id].isExpanded;
+    }
+
     headers.forEach(({ key }, i) => {
       const id = getCellId(row.id, key);
       // Initialize the cell info and state values, namely for editing
@@ -37,6 +45,9 @@ const normalize = (rows, headers) => {
           header: key,
         },
       };
+
+      // TODO: When working on inline edits, we'll need to derive the state
+      // values similarly to rows above.
 
       rowsById[row.id].cells[i] = id;
     });

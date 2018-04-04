@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import isEqual from 'lodash.isequal';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
-import { getNextSortState, getCurrentSortState } from './state/sorting';
+import { getNextSortState } from './state/sorting';
 import denormalize from './tools/denormalize';
 import { composeEventHandlers } from './tools/events';
 import { defaultFilterRows } from './tools/filter';
@@ -107,19 +108,20 @@ export default class DataTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const nextState = getDerivedStateFromProps(nextProps, this.state);
+    const rowIds = this.props.rows.map(row => row.id);
+    const nextRowIds = nextProps.rows.map(row => row.id);
 
-    // Preserve the sorted order by re-sorting the data
-    if (
-      (nextState && nextState.sortHeaderKey !== this.state.sortHeaderKey) ||
-      nextState.sortDirection !== this.state.sortDirection
-    ) {
-      this.setState({
-        ...nextState,
-        ...getCurrentSortState(this.props, this.state, {
-          key: this.state.sortHeaderKey,
-        }),
-      });
+    if (!isEqual(rowIds, nextRowIds)) {
+      this.setState(state => getDerivedStateFromProps(nextProps, state));
+      return;
+    }
+
+    const headers = this.props.headers.map(header => header.key);
+    const nextHeaders = nextProps.headers.map(header => header.key);
+
+    if (!isEqual(headers, nextHeaders)) {
+      this.setState(state => getDerivedStateFromProps(nextProps, state));
+      return;
     }
   }
 
