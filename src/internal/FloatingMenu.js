@@ -318,21 +318,27 @@ class FloatingMenu extends React.Component {
   _getChildrenWithProps = () => {
     const { styles, children } = this.props;
     const { floatingPosition: pos } = this.state;
-    return !pos
-      ? children
-      : React.cloneElement(children, {
-          style: Object.assign(
-            {
-              left: `${pos.left}px`,
-              top: `${pos.top}px`,
-              position: 'absolute',
-              right: 'auto',
-              margin: 0,
-              opacity: 1,
-            },
-            styles
-          ),
-        });
+    // If no pos available, we need to hide the element (offscreen to the left)
+    // This is done so we can measure the content before positioning it correctly.
+    const positioningStyle = pos
+      ? {
+          left: `${pos.left}px`,
+          top: `${pos.top}px`,
+          right: 'auto',
+        }
+      : {
+          left: `${window.innerWidth}px`,
+          top: '0px',
+        };
+    return React.cloneElement(children, {
+      style: {
+        ...styles,
+        ...positioningStyle,
+        position: 'absolute',
+        margin: 0,
+        opacity: 1,
+      },
+    });
   };
 
   render() {
