@@ -33,10 +33,10 @@ export default class ComposedModal extends Component {
     }
   }
 
-  componentWillReceiveProps({ open }) {
-    if (open !== this.state.open) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.open !== this.state.open) {
       this.setState({
-        open,
+        open: nextProps.open,
       });
     }
   }
@@ -48,13 +48,8 @@ export default class ComposedModal extends Component {
   };
 
   render() {
-    const {
-      className,
-      open,
-      containerClassName,
-      children,
-      ...other
-    } = this.props;
+    const { open } = this.state;
+    const { className, containerClassName, children, ...other } = this.props;
 
     const modalClass = classNames({
       'bx--modal': true,
