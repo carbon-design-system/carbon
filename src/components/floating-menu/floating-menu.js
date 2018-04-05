@@ -117,7 +117,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       this.changeState('hidden', getLaunchingDetails(event));
       const { refNode } = this.options;
       if (this.element.contains(event.relatedTarget) && refNode && event.target !== refNode) {
-        refNode.focus();
+        HTMLElement.prototype.focus.call(refNode); // SVGElement in IE11 does not have `.focus()` method
       }
     }
   }
