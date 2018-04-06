@@ -191,7 +191,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
       selectorInit: '[data-modal]',
       selectorModalClose: '[data-modal-close]',
       selectorPrimaryFocus: '[data-modal-primary-focus]',
-      selectorsFloatingMenus: [`.${prefix}--overflow-menu-options`, '.bx-tooltip'],
+      selectorsFloatingMenus: [`.${prefix}--overflow-menu-options`, '.${prefix}--tooltip'],
       classVisible: 'is-visible',
       attribInitTarget: 'data-modal-target',
       initEventNames: ['click'],
