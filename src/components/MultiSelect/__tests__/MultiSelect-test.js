@@ -55,6 +55,78 @@ describe('MultiSelect', () => {
     });
   });
 
+  describe('MultiSelect with InitialSelectedItems', () => {
+    let mockProps;
+    const items = generateItems(5, generateGenericItem);
+
+    beforeEach(() => {
+      mockProps = {
+        items: items,
+        initialSelectedItems: [items[0], items[1], items[2]],
+        itemToString: ({ label }) => label,
+        onChange: jest.fn(),
+        label: 'Label',
+      };
+    });
+
+    it('should allow a user to de-select an item by clicking on a initial selected items', () => {
+      const wrapper = mount(<MultiSelect {...mockProps} />);
+      expect(
+        wrapper.find('Selection').instance().state.selectedItems.length
+      ).toBe(3);
+
+      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper
+        .find('.bx--list-box__menu-item')
+        .at(0)
+        .simulate('click');
+
+      expect(
+        wrapper.find('Selection').instance().state.selectedItems.length
+      ).toBe(2);
+    });
+
+    it('should allow a user to de-select an initial selected item by hitting enter on ainitial selected item', () => {
+      const wrapper = mount(<MultiSelect {...mockProps} />);
+      const simulateArrowDown = wrapper =>
+        wrapper.find('.bx--list-box__field').simulate('keydown', {
+          key: 'ArrowDown',
+        });
+
+      expect(
+        wrapper.find('Selection').instance().state.selectedItems.length
+      ).toBe(3);
+      openMenu(wrapper);
+      simulateArrowDown(wrapper);
+      wrapper
+        .find('.bx--list-box__field')
+        .at(0)
+        .simulate('keydown', {
+          key: 'Enter',
+        });
+      expect(
+        wrapper.find('Selection').instance().state.selectedItems.length
+      ).toBe(2);
+    });
+
+    it('should select an item when a user clicks on an item', () => {
+      const wrapper = mount(<MultiSelect {...mockProps} />);
+      expect(
+        wrapper.find('Selection').instance().state.selectedItems.length
+      ).toBe(3);
+
+      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper
+        .find('.bx--list-box__menu-item')
+        .at(4)
+        .simulate('click');
+
+      expect(
+        wrapper.find('Selection').instance().state.selectedItems.length
+      ).toBe(4);
+    });
+  });
+
   describe('e2e', () => {
     let mockProps;
 

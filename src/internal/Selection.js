@@ -17,19 +17,6 @@ export default class Selection extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { selectedItems } = this.state;
-    const itemsToAdd = nextProps.initialSelectedItems.filter(item => {
-      return selectedItems.indexOf(item) === -1;
-    });
-
-    if (itemsToAdd.length > 0) {
-      this.setState(state => ({
-        selectedItems: state.selectedItems.concat(itemsToAdd),
-      }));
-    }
-  }
-
   internalSetState = (stateToSet, callback) =>
     this.setState(stateToSet, () => {
       if (callback) {
