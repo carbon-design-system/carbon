@@ -41,6 +41,7 @@
   "devDependencies": {
     "@frctl/fractal": "^1.1.0",
     "adaro": "1.0.4",
+    "autoprefixer": "^8.2.0",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",
     "babel-loader": "^7.1.0",
@@ -113,6 +114,7 @@
     "minimatch": "^3.0.0",
     "mock-raf": "^1.0.0",
     "nodemon": "1.9.1",
+    "postcss-loader": "^2.1.0",
     "prettier": "^1.7.0",
     "prop-types": "^15.6.0",
     "pump": "^1.0.2",
