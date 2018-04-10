@@ -20,7 +20,7 @@ storiesOf('Slider', module)
           max={100}
           step={1}
           labelText="Slider Label"
-          onChange={action('onChange')}
+          onChange={mock}
         />
       </div>
     )
@@ -28,7 +28,7 @@ storiesOf('Slider', module)
   .addWithInfo(
     'without TextInput',
     `
-      This example shows the Slider without it's accompanying TextInput. This is an exception and the majority of the time the default state should be used.
+      This example shows the Slider without its accompanying TextInput. This is an exception and the majority of the time the default state should be used.
     `,
     () => (
       <div style={{ marginTop: '2rem' }}>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from '../Slider';
-import TextInput from '../TextInput';
 import { mount } from 'enzyme';
 import 'requestanimationframe';
 
@@ -15,13 +14,8 @@ describe('Slider', () => {
         min={0}
         max={100}
         step={1}
-        onChange={mockFn}>
-        <TextInput
-          id="input-for-slider"
-          labelText="testlabel"
-          className="bx-slider-text-input"
-        />
-      </Slider>
+        onChange={mockFn}
+      />
     );
 
     it('renders children as expected', () => {
