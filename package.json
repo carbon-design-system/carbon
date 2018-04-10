@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@frctl/fractal": "^1.1.0",
+    "@semantic-release/commit-analyzer": "^2.0.0",
     "adaro": "1.0.4",
     "autoprefixer": "^8.2.0",
     "babel-core": "^6.22.0",
@@ -186,6 +187,7 @@
         "fix",
         "perf",
         "refactor",
+        "release",
         "revert",
         "style",
         "test"
@@ -203,6 +205,9 @@
       "prettier:staged",
       "git add"
     ]
+  },
+  "release": {
+    "analyzeCommits": "./tools/analyze-commits.js"
   },
   "maintainers": [
     {
