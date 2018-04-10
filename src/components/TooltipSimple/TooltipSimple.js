@@ -17,18 +17,31 @@ const TooltipSimple = ({
 
   const tooltipWrapperClasses = classNames(`bx--tooltip--simple`, className);
   return (
-    <div className={tooltipWrapperClasses}>
-      {children}
-      <div
-        className={tooltipClasses}
-        data-tooltip-text={text}
-        tabIndex="0"
-        role="button"
-        {...other}>
-        {showIcon && (
-          <Icon role="img" name={iconName} description={iconDescription} />
-        )}
-      </div>
+    <div>
+      {showIcon ? (
+        <div className={tooltipWrapperClasses}>
+          {children}
+          <div
+            className={tooltipClasses}
+            data-tooltip-text={text}
+            tabIndex="0"
+            role="button"
+            {...other}>
+            <Icon role="img" name={iconName} description={iconDescription} />
+          </div>
+        </div>
+      ) : (
+        <div className={tooltipWrapperClasses}>
+          <div
+            className={tooltipClasses}
+            data-tooltip-text={text}
+            tabIndex="0"
+            role="button"
+            {...other}>
+            {children}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
