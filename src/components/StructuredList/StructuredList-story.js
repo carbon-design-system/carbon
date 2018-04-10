@@ -66,12 +66,12 @@ storiesOf('StructuredList', module)
           </StructuredListRow>
         </StructuredListHead>
         <StructuredListBody>
-          <StructuredListRow label htmlFor="Row 1">
+          <StructuredListRow label htmlFor="row-1">
             <StructuredListInput
               id="row-1"
-              value="row-2"
-              title="row-3"
-              name="Row-1"
+              value="row-1"
+              title="row-1"
+              name="row-1"
               defaultChecked
             />
             <StructuredListCell>
@@ -90,12 +90,12 @@ storiesOf('StructuredList', module)
               Pellentesque vulputate nisl a porttitor interdum.
             </StructuredListCell>
           </StructuredListRow>
-          <StructuredListRow label htmlFor="Row2">
+          <StructuredListRow label htmlFor="row-2">
             <StructuredListInput
               id="row-2"
               value="row-2"
               title="row-2"
-              name="row-2"
+              name="row-1"
             />
             <StructuredListCell>
               <Icon

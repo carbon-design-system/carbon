@@ -9,15 +9,24 @@ export class StructuredListWrapper extends Component {
     className: PropTypes.string,
     border: PropTypes.bool,
     selection: PropTypes.bool,
+    ariaLabel: PropTypes.string,
   };
 
   static defaultProps = {
     border: false,
     selection: false,
+    ariaLabel: 'Structured list section',
   };
 
   render() {
-    const { children, selection, className, border, ...other } = this.props;
+    const {
+      children,
+      selection,
+      className,
+      border,
+      ariaLabel,
+      ...other
+    } = this.props;
 
     const classes = classNames('bx--structured-list', className, {
       'bx--structured-list--border': border,
@@ -25,7 +34,7 @@ export class StructuredListWrapper extends Component {
     });
 
     return (
-      <section className={classes} {...other}>
+      <section className={classes} {...other} aria-label={ariaLabel}>
         {children}
       </section>
     );
@@ -95,13 +104,11 @@ export class StructuredListRow extends Component {
     className: PropTypes.string,
     head: PropTypes.bool,
     label: PropTypes.bool,
-    htmlFor: PropTypes.string,
     tabIndex: PropTypes.number,
     onKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
-    htmlFor: 'unique id',
     head: false,
     label: false,
     tabIndex: 0,
@@ -112,7 +119,6 @@ export class StructuredListRow extends Component {
     const {
       onKeyDown,
       tabIndex,
-      htmlFor,
       children,
       className,
       head,
@@ -129,7 +135,6 @@ export class StructuredListRow extends Component {
         {...other}
         tabIndex={tabIndex}
         className={classes}
-        htmlFor={htmlFor}
         onKeyDown={onKeyDown}
         role="presentation">
         {children}

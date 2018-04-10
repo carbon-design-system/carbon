@@ -95,7 +95,7 @@
               "id"
             ]
           },
-          "allowChildren": false
+          "allowChildren": true
         }
       ]
     },
