@@ -52,7 +52,7 @@
 
     &:focus,
     &.#{$prefix}--focused {
-      @include focus-outline('border');
+      @include focus-outline('border', $touch: false);
     }
 
     &:disabled {
@@ -122,7 +122,9 @@
     }
 
     &:focus {
-      outline: 1px solid $brand-01;
+      @include interaction-wrapper($touch: false) {
+        outline: 1px solid $brand-01;
+      }
     }
   }
 
@@ -181,7 +183,10 @@
     padding: $spacing-2xs;
 
     &:focus {
-      outline: 1px solid $brand-01;
+      outline: none;
+      @include interaction-wrapper($touch: false) {
+        outline: 1px solid $brand-01;
+      }
     }
   }
 
@@ -245,7 +250,10 @@
 
     &:focus {
       outline: none;
-      background: $ui-04;
+
+      @include interaction-wrapper($touch: false) {
+        background: $ui-04;
+      }
     }
   }
 

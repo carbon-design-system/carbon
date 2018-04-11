@@ -65,6 +65,6 @@
   }
 
   .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
-    @include focus-outline('blurred');
+    @include focus-outline('blurred', $mouse: false, $touch: false);
   }
 }

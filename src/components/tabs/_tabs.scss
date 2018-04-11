@@ -45,7 +45,7 @@
     }
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $mouse: false, $touch: false);
     }
 
     @include breakpoint(bp--sm--major) {
@@ -59,7 +59,7 @@
     color: $text-01;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $mouse: false, $touch: false);
     }
   }
 
@@ -101,13 +101,23 @@
     padding: 0;
     cursor: pointer;
 
-    &:hover,
-    &:focus {
+    @mixin hover-focus {
       background-color: $brand-01;
 
       @include breakpoint(bp--sm--major) {
         outline: 1px solid transparent;
         background: transparent;
+      }
+    }
+    &:hover {
+      @include hover-focus;
+    }
+
+    &:focus {
+      outline: none;
+
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
       }
     }
 
@@ -131,7 +141,9 @@
         color: $brand-01;
 
         &:focus {
-          color: $brand-01;
+          @include interaction-wrapper($mouse: false, $touch: false) {
+            color: $brand-01;
+          }
         }
       }
     }
@@ -155,9 +167,13 @@
     text-overflow: ellipsis;
 
     &:focus {
-      outline: 1px solid transparent;
-      background-color: $brand-01;
-      color: $inverse-01;
+      outline: none;
+
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        outline: 1px solid transparent;
+        background-color: $brand-01;
+        color: $inverse-01;
+      }
     }
 
     @include breakpoint(bp--sm--major) {
@@ -169,10 +185,14 @@
       }
 
       &:focus {
-        background-color: transparent;
-        color: $text-01;
-        outline: 1px solid transparent;
-        box-shadow: 0 0 0 1px $brand-01;
+        outline: none;
+
+        @include interaction-wrapper($mouse: false, $touch: false) {
+          background-color: transparent;
+          color: $text-01;
+          outline: 1px solid transparent;
+          box-shadow: 0 0 0 1px $brand-01;
+        }
       }
     }
   }

@@ -37,7 +37,7 @@
     padding: 0 $spacing-md;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $touch: false);
     }
 
     &:disabled {

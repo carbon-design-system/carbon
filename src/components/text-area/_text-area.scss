@@ -25,7 +25,7 @@
     resize: vertical;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $touch: false);
     }
 
     &::-webkit-input-placeholder {

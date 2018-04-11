@@ -23,7 +23,7 @@
     padding: $spacing-md;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $touch: false);
     }
   }
 
@@ -37,8 +37,7 @@
       border: 1px solid $ui-04;
     }
 
-    &:hover,
-    &:focus {
+    @mixin hover-focus {
       .#{$prefix}--tile__checkmark {
         opacity: 1;
       }
@@ -47,12 +46,22 @@
         fill: $brand-01;
       }
     }
+
+    &:hover {
+      @include hover-focus;
+    }
+
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
+      }
+    }
   }
 
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--expandable {
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $mouse: false, $touch: false);
     }
   }
 
@@ -62,7 +71,9 @@
 
   .#{$prefix}--tile--selectable:focus {
     outline: none;
-    border: 1px solid $brand-01;
+    @include interaction-wrapper($touch: false) {
+      border: 1px solid $brand-01;
+    }
   }
 
   .#{$prefix}--tile--is-clicked {
@@ -78,7 +89,7 @@
     background: transparent;
 
     &:focus {
-      @include focus-outline;
+      @include focus-outline($mouse: false, $touch: false);
     }
   }
 
@@ -90,15 +101,15 @@
 
     svg {
       border-radius: 50%;
-      background-color: rgba($ui-01, .25);
-      fill: rgba($brand-01, .25);
+      background-color: rgba($ui-01, 0.25);
+      fill: rgba($brand-01, 0.25);
     }
   }
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    bottom: .5rem;
-    right: .5rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
     height: 1rem;
 
     svg {
@@ -143,10 +154,16 @@
   }
 
   .#{$prefix}--tile--is-selected,
-  .#{$prefix}--tile--is-selected:hover,
-  .#{$prefix}--tile--is-selected:focus {
+  .#{$prefix}--tile--is-selected:hover {
     border: 1px solid $brand-01;
     outline: none;
+  }
+
+  .#{$prefix}--tile--is-selected:focus {
+    @include interaction-wrapper($touch: false) {
+      border: 1px solid $brand-01;
+      outline: none;
+    }
   }
 
   .#{$prefix}--tile-input:checked {

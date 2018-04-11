@@ -43,14 +43,49 @@
   }
 }
 
-@mixin focus-outline($type: 'border') {
-  @if ($type == 'border') {
-    outline: 1px solid $brand-01;
-  }
+// interaction wrapper function allows CSS to be styled based on the users last interaction
+// Requires data-input-method to be applied in javascript
+@mixin interaction-wrapper($keyboard: true, $mouse: true, $touch: true) {
+  @if $keyboard and $mouse and $touch {
+    // If all three are true no need for data-input-method check
+    @content;
+  } @else {
+    body:not([data-input-method]) & {
+      // not yet initialised, default to showing focus indicator
+      @content;
+    }
 
-  @if ($type == 'blurred') {
-    box-shadow: 0 0 0 3px $color__blue-20;
-    outline: 1px solid transparent;
+    @if $keyboard != false {
+      [data-input-method='keyboard'] & {
+        @content;
+      }
+    }
+    @if $mouse != false {
+      [data-input-method='mouse'] & {
+        @content;
+      }
+    }
+    @if $touch != false {
+      [data-input-method='touch'] & {
+        @content;
+      }
+    }
+  }
+}
+
+// Enhanced focus-outline mixin used to turn off focus indicators in certain scenarios
+@mixin focus-outline($type: 'border', $keyboard: true, $mouse: true, $touch: true) {
+  outline: none; // off by default
+
+  @include interaction-wrapper($keyboard, $mouse, $touch) {
+    @if ($type == 'border') {
+      outline: 1px solid $brand-01;
+    }
+
+    @if ($type == 'blurred') {
+      box-shadow: 0 0 0 3px $color__blue-20;
+      outline: 1px solid transparent;
+    }
   }
 }
 

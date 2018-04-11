@@ -28,15 +28,26 @@
       cursor: pointer;
 
       &:focus {
-        @include focus-outline('border');
+        outline: none;
+
+        @include interaction-wrapper($mouse: false, $touch: false) {
+          @include focus-outline('border');
+          fill: $brand-02;
+        }
+      }
+    }
+
+    &:hover {
+      svg {
         fill: $brand-02;
       }
     }
 
-    &:hover,
     &:focus {
-      svg {
-        fill: $brand-02;
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        svg {
+          fill: $brand-02;
+        }
       }
     }
   }
@@ -162,8 +173,7 @@
       content: '';
     }
 
-    &:hover,
-    &:focus {
+    @mixin hover-focus {
       svg {
         fill: $brand-02;
       }
@@ -174,12 +184,21 @@
         display: block;
       }
     }
+    &:hover {
+      @include hover-focus;
+    }
+
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
+      }
+    }
 
     &:focus {
       outline: 1px solid transparent;
 
       svg {
-        @include focus-outline('border');
+        @include focus-outline('border', $mouse: false, $touch: false);
       }
     }
   }

@@ -26,17 +26,19 @@
     }
 
     &:active,
-    &:hover,
-    &:focus {
+    &:hover {
       color: $brand-02;
     }
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $mouse: false, $touch: false);
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        color: $brand-02;
+      }
     }
 
-    &[aria-disabled="true"] {
-      opacity: .5;
+    &[aria-disabled='true'] {
+      opacity: 0.5;
       pointer-events: none;
     }
   }

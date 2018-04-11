@@ -21,8 +21,12 @@
     cursor: pointer;
 
     &:focus {
-      outline: 1px solid transparent;
-      box-shadow: 0 0 0 1px $brand-01;
+      outline: none;
+
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        outline: 1px solid transparent;
+        box-shadow: 0 0 0 1px $brand-01;
+      }
     }
   }
 
@@ -32,9 +36,14 @@
     padding: 0.5rem;
     fill: $ui-05;
 
-    &:hover,
-    &:focus {
+    &:hover {
       fill: $brand-01;
+    }
+
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        fill: $brand-01;
+      }
     }
   }
 
@@ -102,14 +111,20 @@
     cursor: pointer;
 
     &:focus {
-      outline: 1px solid transparent;
-      background-color: $brand-01;
-      color: $inverse-01;
+      outline: none;
+
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        outline: 1px solid transparent;
+        background-color: $brand-01;
+        color: $inverse-01;
+      }
     }
 
     .#{$prefix}--overflow-menu-options__option--danger & {
       &:focus {
-        background-color: $support-01;
+        @include interaction-wrapper($mouse: false, $touch: false) {
+          background-color: $support-01;
+        }
       }
     }
   }

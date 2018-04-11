@@ -41,23 +41,41 @@
   border-color: $border-color;
   color: $font-color;
 
-  &:focus,
   &:hover {
     background-color: $hover-bg-color;
   }
 
   &:focus {
-    border: $button-border-width solid $ui-02;
-    outline: $button-border-width solid $hover-bg-color;
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      background-color: $hover-bg-color;
+    }
   }
 
-  &:disabled:hover,
-  &:disabled:focus {
+  &:focus {
+    outline: none;
+
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      border: $button-border-width solid $ui-02;
+      outline: $button-border-width solid $hover-bg-color;
+    }
+  }
+
+  &:disabled:hover {
     background-color: $bg-color;
   }
 
-  &:active {
+  &:disabled:focus {
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      background-color: $bg-color;
+    }
+  }
+
+  &:active,
+  &:active:focus {
+    // :active:focus overrides [data-input-method] :focus
     background-color: darken($bg-color, 20%);
+    border: $button-border-width solid $ui-02;
+    outline: $button-border-width solid $hover-bg-color;
   }
 
   .#{$prefix}--btn__icon {

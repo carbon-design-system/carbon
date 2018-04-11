@@ -32,8 +32,7 @@
     background-color: $nav-01;
     cursor: pointer;
 
-    &:focus,
-    &:hover {
+    @mixin hover-focus {
       outline: 0;
       background-color: $color__navy-gray-3; // anna
 
@@ -44,6 +43,16 @@
       svg {
         fill: $color__blue-30; // anna
       }
+    }
+
+    &:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
+      }
+    }
+
+    &:hover {
+      @include hover-focus;
     }
   }
 
@@ -243,13 +252,22 @@
   .#{$prefix}--account-switcher__menu__item .#{$prefix}--dropdown-item {
     background-color: $color__navy-gray-3; // anna
 
-    > .#{$prefix}--dropdown-link:hover,
-    .#{$prefix}--dropdown-link:focus {
+    @mixin hover-focus {
       background-color: $color__blue-30; // anna
       color: $color__blue-90; // anna
 
       svg {
         fill: $color__blue-90; // anna
+      }
+    }
+
+    > .#{$prefix}--dropdown-link:hover {
+      @include hover-focus;
+    }
+
+    > .#{$prefix}--dropdown-link:focus {
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        @include hover-focus;
       }
     }
   }

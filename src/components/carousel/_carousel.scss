@@ -36,7 +36,7 @@
     }
 
     &:focus {
-      @include focus-outline;
+      @include focus-outline($mouse: false, $touch: false);
     }
   }
 
@@ -54,7 +54,7 @@
     }
 
     &:focus {
-      @include focus-outline;
+      @include focus-outline($mouse: false, $touch: false);
     }
 
     &:last-of-type {
@@ -74,12 +74,15 @@
     margin-right: rem(20px);
     cursor: pointer;
 
-    &:hover,
+    &:hover {
+      @include focus-outline; // hover
+    }
+
     &:focus {
-      @include focus-outline;
+      @include focus-outline($mouse: false, $touch: false);
     }
   }
   .#{$prefix}--carousel__item--active {
-    @include focus-outline;
+    @include focus-outline; // active
   }
 }

@@ -86,7 +86,7 @@
     cursor: pointer;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $mouse: true, $touch: false);
     }
   }
 

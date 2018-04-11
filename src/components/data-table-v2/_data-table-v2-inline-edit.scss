@@ -22,12 +22,15 @@
   }
 
   &:focus {
-    @include focus-outline;
-    padding: $spacing-3xs;
+    @include focus-outline($mouse: false, $touch: false);
 
-    .#{$prefix}--inline-edit-label__icon {
-      width: auto;
-      opacity: 1;
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      padding: $spacing-3xs;
+
+      .#{$prefix}--inline-edit-label__icon {
+        width: auto;
+        opacity: 1;
+      }
     }
   }
 }

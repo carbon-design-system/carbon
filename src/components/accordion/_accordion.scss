@@ -24,9 +24,9 @@
       outline: none;
 
       .#{$prefix}--accordion__arrow {
-        @include focus-outline('border');
+        @include focus-outline('border', $touch: false);
         overflow: visible; // safari fix
-        outline-offset: -.5px; // safari fix
+        outline-offset: -0.5px; // safari fix
       }
     }
 
@@ -51,9 +51,9 @@
       outline: none;
 
       .#{$prefix}--accordion__arrow {
-        @include focus-outline('border');
+        @include focus-outline('border', $mouse: false, $touch: false);
         overflow: visible; // safari fix
-        outline-offset: -.5px; // safari fix
+        outline-offset: -0.5px; // safari fix
       }
     }
   }

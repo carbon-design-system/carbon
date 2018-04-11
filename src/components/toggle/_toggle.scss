@@ -143,17 +143,20 @@
 
   .#{$prefix}--toggle:focus + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
-      outline: 1px solid transparent;
+      outline: none;
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        outline: 1px solid transparent;
+      }
     }
 
     .#{$prefix}--toggle__appearance:after {
-      @include focus-outline('blurred');
+      @include focus-outline('blurred', $mouse: false, $touch: false);
     }
   }
 
   .#{$prefix}--toggle--small:focus + .#{$prefix}--toggle__label {
     .#{$prefix}--toggle__appearance:before {
-      @include focus-outline('blurred');
+      @include focus-outline('blurred', $mouse: false, $touch: false);
     }
 
     .#{$prefix}--toggle__appearance:after {

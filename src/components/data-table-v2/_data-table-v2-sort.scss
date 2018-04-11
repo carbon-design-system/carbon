@@ -32,11 +32,13 @@
   &:focus {
     outline: 0;
 
-    svg {
-      opacity: 1;
-      outline: 1px solid $brand-01;
-      fill: $brand-01;
-      outline-offset: -0.5px; // safari fix
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      svg {
+        opacity: 1;
+        outline: 1px solid $brand-01;
+        fill: $brand-01;
+        outline-offset: -0.5px; // safari fix
+      }
     }
   }
 }

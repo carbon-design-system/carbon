@@ -72,7 +72,7 @@ $css--helpers: true;
     }
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $mouse: false, $touch: false);
     }
 
     &:disabled:hover {
@@ -116,7 +116,7 @@ $css--helpers: true;
       font-weight: 600;
 
       &:focus {
-        @include focus-outline('border');
+        @include focus-outline('border', $touch: false);
       }
     }
 
@@ -135,7 +135,7 @@ $css--helpers: true;
       text-align: center;
 
       &:focus {
-        @include focus-outline('border');
+        @include focus-outline('border', $touch: false);
       }
     }
   }

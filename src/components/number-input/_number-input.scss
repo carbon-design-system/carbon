@@ -30,7 +30,7 @@
     border-radius: 0;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $touch: false);
     }
 
     &:disabled {
@@ -76,7 +76,7 @@
     height: rem(10px);
 
     &:focus {
-      @include focus-outline;
+      @include focus-outline($mouse: false, $touch: false);
     }
 
     &:hover {

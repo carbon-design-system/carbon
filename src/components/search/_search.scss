@@ -36,7 +36,7 @@
     width: 100%;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('border', $touch: false);
     }
 
     &::placeholder {
@@ -99,7 +99,7 @@
     height: rem(40px);
     width: rem(40px);
     min-width: rem(40px);
-    margin-left: $spacing-2xs;;
+    margin-left: $spacing-2xs;
     background-color: $ui-01;
     position: relative;
     padding: 0;
@@ -116,16 +116,32 @@
     width: 1rem;
   }
 
-  .#{$prefix}--search-button:hover,
-  .#{$prefix}--search-button:focus {
+  @mixin hover-focus {
     cursor: pointer;
     background-color: $brand-01;
     outline: 1px solid transparent;
   }
 
-  .#{$prefix}--search-button:hover svg,
-  .#{$prefix}--search-button:focus svg {
+  .#{$prefix}--search-button:hover {
+    @include hover-focus;
+  }
+
+  .#{$prefix}--search-button:focus {
+    outline: none;
+
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      @include hover-focus;
+    }
+  }
+
+  .#{$prefix}--search-button:hover svg {
     fill: $ui-01;
+  }
+
+  .#{$prefix}--search-button:focus svg {
+    @include interaction-wrapper($mouse: false, $touch: false) {
+      fill: $ui-01;
+    }
   }
 
   .#{$prefix}--search-close--hidden {

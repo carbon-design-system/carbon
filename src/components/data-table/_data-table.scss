@@ -43,10 +43,13 @@
       font-weight: 600;
 
       &:focus {
-        outline: 1px solid transparent;
+        outline: none;
+        @include interaction-wrapper($mouse: false, $touch: false) {
+          outline: 1px solid transparent;
+        }
 
         span {
-          @include focus-outline('border');
+          @include focus-outline('border', $mouse: false, $touch: false);
         }
       }
     }
@@ -128,16 +131,29 @@
   .#{$prefix}--table-body .#{$prefix}--table-row {
     border: 1px solid transparent;
 
-    &:first-child:hover,
-    &:first-child:focus {
+    &:first-child:hover {
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
     }
 
-    &:not(:first-child):hover,
-    &:not(:first-child):focus {
+    &:first-child:focus {
+      outline: none;
+      @include interaction-wrapper($touch: false) {
+        border-left: 2px solid $brand-02;
+        outline: 1px solid $brand-02;
+      }
+    }
+
+    &:not(:first-child):hover {
       border-left: 2px solid $brand-02;
       outline: 1px solid $brand-02;
+    }
+
+    &:not(:first-child):focus {
+      @include interaction-wrapper($touch: false) {
+        border-left: 2px solid $brand-02;
+        outline: 1px solid $brand-02;
+      }
     }
   }
 
@@ -162,10 +178,13 @@
     cursor: pointer;
 
     &:focus {
-      outline: 1px solid transparent;
+      outline: none;
+      @include interaction-wrapper($mouse: false, $touch: false) {
+        outline: 1px solid transparent;
+      }
 
       svg {
-        @include focus-outline('border');
+        @include focus-outline('border', $mouse: false, $touch: false);
       }
     }
   }
