@@ -19,7 +19,7 @@
     display: block;
     width: 100%;
     height: rem(40px);
-    min-width: 10rem;
+    min-width: rem(300px);
     padding: 0 $spacing-md;
     color: $text-01;
     background-color: $field-01;
@@ -40,6 +40,29 @@
 
     &:disabled:hover {
       border: $input-border;
+    }
+  }
+
+  .#{$prefix}--text-input--v2 {
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 2;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &:focus + .bx--label {
+      color: $brand-01;
+    }
+
+    & + .bx--label {
+      order: 1;
+    }
+
+    &:disabled:hover {
+      border: none;
     }
   }
 }

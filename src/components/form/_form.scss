@@ -12,6 +12,8 @@
 
   .#{$prefix}--form-item {
     @include font-family;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     margin-right: $spacing-md;
     margin-bottom: $spacing-lg;
