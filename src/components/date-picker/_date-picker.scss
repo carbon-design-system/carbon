@@ -46,7 +46,7 @@
     height: rem(40px);
     max-width: 9rem;
     padding: 0 $spacing-md;
-    background-color: $field-01;
+    background-color: $field-02;
     color: $text-01;
     border: 1px solid transparent;
 
@@ -240,12 +240,12 @@
     border-radius: 0;
 
     &:hover {
-      background: $ui-04;
+      background: $ui-03;
     }
 
     &:focus {
       outline: none;
-      background: $ui-04;
+      background: $ui-03;
     }
   }
 

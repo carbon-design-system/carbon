@@ -28,7 +28,7 @@
     @include font-family;
     appearance: none;
     border: none;
-    background-color: $field-01;
+    background-color: $field-02;
     color: $text-01;
     font-weight: 600;
     padding: 0 $spacing-2xl;
@@ -70,6 +70,7 @@
   .#{$prefix}--search-magnifier {
     left: 0.75rem;
     fill: $ui-05;
+    z-index: 2;
   }
 
   .#{$prefix}--search-close {
@@ -99,7 +100,7 @@
     height: rem(40px);
     width: rem(40px);
     min-width: rem(40px);
-    margin-left: $spacing-2xs;;
+    margin-left: $spacing-2xs;
     background-color: $ui-01;
     position: relative;
     padding: 0;

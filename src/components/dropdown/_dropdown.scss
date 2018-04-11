@@ -21,7 +21,7 @@
     position: relative;
     list-style: none;
     display: block;
-    background-color: $field-01;
+    background-color: $field-02;
     width: 100%;
     height: rem(40px);
     cursor: pointer;
@@ -64,7 +64,7 @@
   }
 
   .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
-    color: $text-03;
+    color: $text-02;
   }
 
   .#{$prefix}--dropdown-text {

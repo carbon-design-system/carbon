@@ -25,16 +25,18 @@ $brand-01: $color__blue-51 !default;
 $brand-02: $color__blue-40 !default;
 $brand-03: $color__teal-20 !default;
 $inverse-01: $color__white !default;
+$inverse-02: #272d33 !default;
 $ui-01: $color__white !default;
-$ui-02: $color__gray-3 !default;
-$ui-03: $color__gray-2 !default;
-$ui-04: $color__gray-1 !default;
-$ui-05: $color__navy-gray-7 !default;
+$ui-02: #f4f7fb !default;
+$ui-03: $color__gray-1 !default;
+$ui-04: #8897a2 !default;
+$ui-05: $color__navy-gray-6 !default;
 $text-01: $color__blue-90 !default;
 $text-02: $color__navy-gray-6 !default;
-$text-03: $color__navy-gray-6 !default;
-$field-01: rgba($color__blue-51, 0.1) !default;
-$support-01: #E0182D !default;
+$text-03: #cdd1d4 !default;
+$field-01: #f4f7fb !default;
+$field-02: $color__white !default;
+$support-01: #e0182d !default;
 $support-02: $color__green-40 !default;
 $support-03: $color__yellow-30 !default;
 $support-04: $color__blue-30 !default;
@@ -65,7 +67,7 @@ $accordion-flex-direction: row !default;
 $accordion-justify-content: flex-start !default;
 $accordion-arrow-margin: 0 0 0 $spacing-2xs !default;
 $accordion-title-margin: 0 0 0 $spacing-md !default;
-$accordion-content-padding: 0 $spacing-md 0  $spacing-2xl !default;
+$accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default;
 
 // Card
 $card-text-align: center !default;
@@ -75,7 +77,7 @@ $card-flex-align: center !default;
 $checkbox-border-width: 2px !default;
 
 // Code Snippet
-$snippet-background-color: $field-01 !default;
+$snippet-background-color: rgba($color__blue-51, 0.1) !default;
 
 // Content Switcher
 $content-switcher-border-radius: 8px !default;
