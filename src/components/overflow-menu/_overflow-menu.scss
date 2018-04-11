@@ -47,7 +47,7 @@
     position: absolute;
     z-index: z('floating');
     background-color: $inverse-01;
-    border: 1px solid $ui-04;
+    border: 1px solid $ui-03;
     width: 11.25rem;
     list-style: none;
     margin-top: $spacing-2xs;
@@ -68,8 +68,8 @@
     z-index: -1;
     transform: rotate(45deg);
     background-color: $inverse-01;
-    border-top: 1px solid $ui-04;
-    border-left: 1px solid $ui-04;
+    border-top: 1px solid $ui-03;
+    border-left: 1px solid $ui-03;
     top: -5px;
     left: 24px;
   }
@@ -84,7 +84,7 @@
   }
 
   .#{$prefix}--overflow-menu--divider {
-    border-top: 1px solid $ui-04;
+    border-top: 1px solid $ui-03;
   }
 
   .#{$prefix}--overflow-menu-options__btn {
@@ -123,7 +123,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option--danger {
-    border-top: 1px solid $ui-04;
+    border-top: 1px solid $ui-03;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger:hover {

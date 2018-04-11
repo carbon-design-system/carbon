@@ -111,10 +111,10 @@
 
     &:hover,
     &:focus {
-      background-color: $brand-01;
-      color: $inverse-01;
+      background-color: rgba($brand-02, 0.1);
       outline: 1px solid transparent;
       text-decoration: underline;
+      color: $text-01;
     }
   }
 
