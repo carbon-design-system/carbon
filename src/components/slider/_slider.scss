@@ -45,7 +45,7 @@
       outline: none;
     }
     &:active {
-      background: $brand-01;
+      background: $hover-secondary;
       transform: translate(-50%, -50%);
     }
   }

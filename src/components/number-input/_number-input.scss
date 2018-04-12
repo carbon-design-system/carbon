@@ -84,7 +84,7 @@
     }
 
     &:hover svg {
-      fill: $brand-02;
+      fill: $hover-primary;
     }
   }
 
@@ -96,7 +96,7 @@
     // Hover styles for use with old HTML w/o button
     &:hover {
       cursor: pointer;
-      fill: $brand-02;
+      fill: $hover-primary;
     }
   }
 }

@@ -34,7 +34,7 @@
 
     &:hover,
     &:focus {
-      fill: $brand-01;
+      fill: $hover-secondary;
     }
   }
 
@@ -103,8 +103,7 @@
 
     &:focus {
       outline: 1px solid transparent;
-      background-color: $brand-01;
-      color: $inverse-01;
+      background-color: $hover-row;
     }
 
     .#{$prefix}--overflow-menu-options__option--danger & {
@@ -115,11 +114,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
-    background-color: $brand-01;
-  }
-
-  .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
-    color: $inverse-01;
+    background-color: $hover-row;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger {

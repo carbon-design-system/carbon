@@ -111,7 +111,7 @@
 
     &:hover,
     &:focus {
-      background-color: rgba($brand-02, 0.1);
+      background-color: $hover-row;
       outline: 1px solid transparent;
       text-decoration: underline;
       color: $text-01;

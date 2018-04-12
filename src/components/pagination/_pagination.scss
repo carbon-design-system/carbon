@@ -67,7 +67,7 @@ $css--helpers: true;
 
     &:hover {
       .#{$prefix}--pagination__button-icon {
-        fill: $brand-01;
+        fill: $hover-secondary;
       }
     }
 

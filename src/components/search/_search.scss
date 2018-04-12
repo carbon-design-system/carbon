@@ -104,6 +104,7 @@
     background-color: $ui-01;
     position: relative;
     padding: 0;
+    outline: 1px solid transparent;
   }
 
   .#{$prefix}--search-button svg {
@@ -120,7 +121,7 @@
   .#{$prefix}--search-button:hover,
   .#{$prefix}--search-button:focus {
     cursor: pointer;
-    background-color: $brand-01;
+    background-color: $hover-primary;
     outline: 1px solid transparent;
   }
 

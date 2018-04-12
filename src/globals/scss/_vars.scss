@@ -49,6 +49,12 @@ $nav-06: $color__teal-50 !default;
 $nav-07: $color__blue-30 !default;
 $nav-08: $color__blue-51 !default;
 
+$hover-primary: darken($brand-01, 10%) !default;
+$hover-primary-text: darken($brand-01, 15%) !default;
+$hover-danger: darken($support-01, 10%) !default;
+$hover-secondary: $brand-01 !default;
+$hover-row: rgba($brand-02, 0.1) !default;
+
 // Global
 $input-border: 1px solid transparent !default;
 $input-label-weight: 600 !default;

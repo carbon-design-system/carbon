@@ -181,7 +181,7 @@
       &:hover,
       &:focus {
         .#{$prefix}--app-actions__button--icon {
-          fill: $brand-01;
+          fill: $hover-secondary;
         }
       }
 

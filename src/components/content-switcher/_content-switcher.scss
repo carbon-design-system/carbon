@@ -43,8 +43,8 @@
 
     &:hover,
     &:active {
-      background-color: $brand-02;
-      border-color: $brand-02;
+      background-color: $hover-primary;
+      border-color: $hover-primary;
       color: $inverse-01;
     }
   }
@@ -71,7 +71,7 @@
     border-top-left-radius: $content-switcher-border-radius;
 
     &:hover {
-      border-color: $brand-02;
+      border-color: $hover-primary;
     }
 
     &:focus {
@@ -85,7 +85,7 @@
     border-bottom-right-radius: $content-switcher-border-radius;
 
     &:hover {
-      border-color: $brand-02;
+      border-color: $hover-primary;
     }
 
     &:focus {
@@ -95,13 +95,13 @@
   }
 
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    background-color: $brand-01;
+    background-color: $hover-primary;
     color: $inverse-01;
     font-weight: 400;
     outline: 1px solid transparent;
 
     &:hover {
-      border-color: $brand-01;
+      border-color: $hover-primary;
     }
   }
 }

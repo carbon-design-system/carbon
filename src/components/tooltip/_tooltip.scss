@@ -36,7 +36,7 @@
     &:hover,
     &:focus {
       svg {
-        fill: $brand-02;
+        fill: $hover-primary;
       }
     }
   }
@@ -165,7 +165,7 @@
     &:hover,
     &:focus {
       svg {
-        fill: $brand-02;
+        fill: $hover-primary;
       }
 
       &:before,
