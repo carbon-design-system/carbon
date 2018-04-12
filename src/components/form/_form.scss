@@ -67,4 +67,15 @@
       color: $support-01;
     }
   }
+
+  .#{$prefix}--form__helper-text {
+    @include typescale('omega');
+    color: $text-02;
+    z-index: -1;
+    transition: $transition--base $carbon--standard-easing;
+    order: 1;
+    max-height: 0;
+    opacity: 0;
+    line-height: 1.5;
+  }
 }

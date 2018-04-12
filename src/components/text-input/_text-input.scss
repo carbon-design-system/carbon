@@ -65,10 +65,11 @@
       color: $brand-01;
     }
 
-    &:focus ~ .#{$prefix}--text-input__helper-text {
+    &:focus ~ .#{$prefix}--form__helper-text {
       z-index: 0;
       max-height: 3rem;
       opacity: 1;
+      margin-bottom: $spacing-xs;
     }
 
     &[data-invalid]:focus + .#{$prefix}--label {
@@ -88,18 +89,6 @@
       &::before {
         display: none;
       }
-    }
-
-    & ~ .#{$prefix}--text-input__helper-text {
-      @include typescale('omega');
-      color: $text-02;
-      z-index: -1;
-      transition: $transition--base $carbon--standard-easing;
-      order: 1;
-      max-height: 0;
-      opacity: 0;
-      line-height: 1.5;
-      margin-bottom: $spacing-xs;
     }
   }
 }
