@@ -11,7 +11,7 @@
   .#{$prefix}--breadcrumb {
     @include typescale('zeta');
     @include font-family;
-    display: none;
+    display: inline;
 
     @include breakpoint(bp--xs--major) {
       display: flex;
