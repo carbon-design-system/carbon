@@ -53,6 +53,10 @@
       order: 1;
     }
 
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
     &:focus {
       outline: none;
       box-shadow: 0 2px 0 0 $brand-01;
