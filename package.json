@@ -1,6 +1,6 @@
 {
   "name": "carbon-components",
-  "version": "6.19.1",
+  "version": "6.20.1",
   "description": "Bluemix Components is a component library for Bluemix",
   "jsnext:main": "consumables/js/es2015/index",
   "main": "consumables/js/umd/lib/index",
@@ -28,7 +28,7 @@
   "dependencies": {
     "adaro": "1.0.4",
     "bluebird": "~3.1.1",
-    "express": "4.13.4",
+    "express": "4.16.2",
     "globby": "4.0.0",
     "lodash.debounce": "^4.0.6",
     "svgxuse": "1.1.22"
