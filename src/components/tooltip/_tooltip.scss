@@ -48,8 +48,9 @@
     display: none;
     max-width: rem(240px);
     background: $ui-01;
-    padding: $spacing-lg;
+    padding: $spacing-sm;
     border: 1px solid $ui-04;
+    border-radius: 4px;
     z-index: z('floating');
 
     p {
@@ -141,8 +142,9 @@
       @include typescale('zeta');
       @include layer('overlay');
       max-width: rem(240px);
-      padding: $spacing-lg;
+      padding: $spacing-xs;
       border: 1px solid $ui-04;
+      border-radius: 4px;
       margin-left: 50%;
       color: $text-01;
       content: attr(data-tooltip-text);
@@ -205,6 +207,32 @@
     &:after {
       top: 1.5rem;
       transform: rotate(-135deg);
+    }
+  }
+
+  // Tooltip Definition
+  .#{$prefix}--tooltip--definition {
+    .#{$prefix}--tooltip--simple__bottom,
+    .#{$prefix}--tooltip--simple__top {
+      &:before,
+      &:after {
+        border: none;
+        background: black; // change to $inverse-02 after TJ's PR
+        color: $inverse-01;
+      }
+      &:focus .#{$prefix}--tooltip__trigger {
+        @include focus-outline('border');
+        // border-bottom: 2px dotted $hover-primary; *uncomment after TJ's PR
+      }
+    }
+
+    .#{$prefix}--tooltip__trigger {
+      border-bottom: 2px dotted $brand-01;
+
+      &:hover {
+        cursor: pointer;
+        // border-bottom: 2px dotted $hover-primary; *uncomment after TJ's PR
+      }
     }
   }
 }
