@@ -47,9 +47,21 @@ export default class DatePicker extends Component {
     dateFormat: PropTypes.string,
 
     /**
-     * The value of the `<input>`.
+     * The value of the date value provided to flatpickr, could
+     * be a date, a date number, a date string, an array of dates.
      */
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number,
+          PropTypes.object,
+        ])
+      ),
+      PropTypes.object,
+      PropTypes.number,
+    ]),
 
     /**
      * The DOM element the Flatpicker should be inserted into. `<body>` by default.
@@ -236,6 +248,7 @@ export default class DatePicker extends Component {
       short,
       datePickerType,
       dateFormat, // eslint-disable-line
+      onChange, // eslint-disable-line
       ...other
     } = this.props;
 

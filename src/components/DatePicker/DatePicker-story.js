@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action, decorateAction } from '@storybook/addon-actions';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
+import WithState from '../../tools/withState';
 
 // Datepickers last argument contains an instance of flatpickr
 // and will cause action logger to enter an infinite loop. Just don't log that argument
@@ -86,5 +87,39 @@ storiesOf('DatePicker', module)
           id="date-picker-input-id-2"
         />
       </DatePicker>
+    )
+  )
+  .addWithInfo(
+    'fully controlled',
+    `
+      If your application needs to control the value of the date picker and
+      be notified of any changes.
+    `,
+    () => (
+      <WithState initialState={{ date: '' }}>
+        {({ state, setState }) => (
+          <>
+            <DatePicker
+              datePickerType="single"
+              dateFormat="m/d/Y"
+              value={state.date}
+              onChange={eventOrDates => {
+                const value = eventOrDates.target
+                  ? eventOrDates.target.value
+                  : eventOrDates[0];
+                setState({ date: value });
+              }}>
+              <DatePickerInput
+                key="label"
+                labelText="Controlled Date"
+                id="date-picker-input-id"
+              />
+            </DatePicker>
+            <button onClick={() => setState({ date: '01/01/2011' })}>
+              Click me to set to 01/01/2011
+            </button>
+          </>
+        )}
+      </WithState>
     )
   );
