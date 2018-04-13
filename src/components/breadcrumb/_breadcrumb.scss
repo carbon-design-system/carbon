@@ -28,7 +28,7 @@
   .#{$prefix}--breadcrumb-item::after {
     content: '/';
     margin-left: $spacing-md;
-    color: $text-03;
+    color: $text-02;
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash .#{$prefix}--breadcrumb-item:last-child::after {
