@@ -40,7 +40,7 @@
     }
 
     &::placeholder {
-      @include placeholder-colors;
+      color: $text-02;
       font-weight: 400;
     }
 

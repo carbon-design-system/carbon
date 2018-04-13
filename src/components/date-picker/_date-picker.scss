@@ -238,6 +238,7 @@
     justify-content: center;
     color: $text-01;
     border-radius: 0;
+    border: 2px solid transparent;
 
     &:hover {
       background: $hover-row;
@@ -251,12 +252,27 @@
 
   .#{$prefix}--date-picker__day.today,
   .flatpickr-day.today {
-    border: 2px solid $brand-01;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 90%;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 3px;
+      width: 3px;
+      border-radius: 50%;
+      background: $brand-01;
+    }
   }
 
-  .#{$prefix}--date-picker__day.today.no-border,
-  .flatpickr-day.today.no-border {
-    border: none;
+  .#{$prefix}--date-picker__day.today.selected {
+    border: 2px solid $brand-01;
+    &::after {
+      display: none;
+    }
   }
 
   .#{$prefix}--date-picker__day.disabled,
@@ -271,16 +287,14 @@
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $brand-02;
-    box-shadow: -6px 0 0 $brand-02, 6px 0 0 $brand-02;
-    border: 2px solid transparent;
+    background: $ui-02;
+    box-shadow: -6px 0 0 $ui-02, 6px 0 0 $ui-02;
   }
 
   .#{$prefix}--date-picker__day.selected,
   .flatpickr-day.selected {
-    background: $brand-01;
-    color: $inverse-01;
-    border: 2px solid transparent;
+    border: 2px solid $brand-01;
+    background: $ui-01;
   }
 
   .#{$prefix}--date-picker__day.startRange.selected,
@@ -300,10 +314,9 @@
 
   .#{$prefix}--date-picker__day.endRange.inRange.selected,
   .flatpickr-day.endRange.inRange.selected {
-    background: $brand-01;
-    border: none;
-    color: $inverse-01;
     box-shadow: none;
+    border: 2px solid $brand-01;
+    background: $ui-01;
   }
 
   .#{$prefix}--date-picker__day.startRange.inRange:not(.selected),
