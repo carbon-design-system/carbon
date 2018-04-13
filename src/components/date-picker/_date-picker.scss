@@ -361,6 +361,30 @@
   .flatpickr-prev-month,
   .flatpickr-next-month {
     padding-top: 5px;
+  .#{$prefix}--date-picker--v2 {
+    .#{$prefix}--date-picker-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+  }
+
+  .#{$prefix}--date-picker--v2 .#{$prefix}--date-picker__input {
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 1;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
   }
 
   .#{$prefix}--date-picker__calendar--v2.open {
