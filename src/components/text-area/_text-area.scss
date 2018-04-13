@@ -56,6 +56,7 @@
       box-shadow: 0 2px 0 0 $brand-01;
     }
 
+    &[data-invalid],
     &[data-invalid]:focus {
       box-shadow: 0 2px 0 0 $support-01;
     }
@@ -79,7 +80,7 @@
       order: 3;
       color: $support-01;
       font-weight: 400;
-      margin-top: $spacing-xs;
+      margin-top: $spacing-2xs;
 
       &::before {
         display: none;
