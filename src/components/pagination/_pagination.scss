@@ -114,6 +114,7 @@ $css--helpers: true;
       padding: 0 $spacing-md;
       margin: 0;
       font-weight: 600;
+      text-align-last: center;
 
       &:focus {
         @include focus-outline('border');
