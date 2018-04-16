@@ -9,7 +9,7 @@ export default class DatePickerInput extends Component {
   };
 
   static defaultProps = {
-    pattern: 'd{1,2}/d{1,2}/d{4}',
+    pattern: '\\d{1,2}\\/\\d{1,2}\\/\\d{4}',
     type: 'text',
     disabled: false,
     invalid: false,

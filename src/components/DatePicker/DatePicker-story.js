@@ -22,13 +22,13 @@ const datePickerInputProps = {
   onClick: action('onClick'),
   onChange: action('onInputChange'),
   placeholder: 'mm/dd/yyyy',
-  pattern: 'd{1,2}/d{1,2}/d{4}',
+  pattern: '\\d{1,2}\\/\\d{1,2}\\/\\d{4}',
   id: 'date-picker-input-id',
 };
 
 const simpleShortDatePickerInputProps = {
   placeholder: 'mm/yyyy',
-  pattern: 'd{1,2}/d{4}',
+  pattern: '\\d{1,2}\\/\\d{4}',
 };
 
 storiesOf('DatePicker', module)
