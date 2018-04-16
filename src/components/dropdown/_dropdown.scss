@@ -92,7 +92,7 @@
     position: absolute;
     z-index: z('dropdown');
     max-height: 0;
-    transition: max-height $carbon--ease-in $transition--expansion $carbon--ease-out;
+    transition: max-height $transition--expansion $carbon--ease-out;
     overflow: hidden;
   }
 
@@ -129,7 +129,10 @@
 
     .#{$prefix}--dropdown-list {
       max-height: 15rem;
-      overflow: auto;
+
+      &:hover {
+        overflow: auto;
+      }
     }
 
     &:focus {
