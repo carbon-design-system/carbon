@@ -111,7 +111,7 @@ $css--helpers: true;
     .#{$prefix}--select-input {
       height: rem(24px);
       width: auto;
-      padding: 0 $spacing-xs;
+      padding: 0 $spacing-md;
       margin: 0;
       font-weight: 600;
 
@@ -121,7 +121,7 @@ $css--helpers: true;
     }
 
     .#{$prefix}--select__arrow {
-      right: 0.5rem;
+      right: 0.3rem;
       top: 0.625rem;
     }
 
@@ -172,7 +172,7 @@ $css--helpers: true;
     }
 
     .#{$prefix}--select__arrow {
-      right: 0.7rem;
+      right: 0.3rem;
     }
   }
 }
