@@ -1,0 +1,10 @@
+@import '../../globals/scss/import-once';
+
+@include exports('skeleton-icon') {
+  .#{$prefix}--icon--skeleton {
+    @include skeleton;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+  }
+}
