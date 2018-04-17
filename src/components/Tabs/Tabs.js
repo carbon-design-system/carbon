@@ -6,6 +6,7 @@ import TabContent from '../TabContent';
 
 export default class Tabs extends React.Component {
   static propTypes = {
+    ariaLabel: PropTypes.string,
     children: PropTypes.node,
     className: PropTypes.string,
     hidden: PropTypes.bool,
@@ -26,6 +27,7 @@ export default class Tabs extends React.Component {
     href: '#',
     triggerHref: '#',
     selected: 0,
+    ariaLabel: 'listbox',
   };
 
   state = {
@@ -116,6 +118,7 @@ export default class Tabs extends React.Component {
 
   render() {
     const {
+      ariaLabel,
       iconDescription,
       className,
       triggerHref,
@@ -167,6 +170,7 @@ export default class Tabs extends React.Component {
         <nav {...other} className={classes.tabs} role={role}>
           <div
             role="listbox"
+            aria-label={ariaLabel}
             tabIndex={0}
             className="bx--tabs-trigger"
             onClick={this.handleDropdownClick}
