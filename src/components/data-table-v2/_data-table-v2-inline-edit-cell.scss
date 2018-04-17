@@ -1,0 +1,87 @@
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
+
+@include exports('data-table-v2-inline-edit-cell') {
+  .#{$prefix}--data-table-cell--editable {
+    @include button-reset();
+
+    display: inline-flex;
+    align-items: center;
+    font-size: rem(14px);
+    height: 100%;
+  }
+
+  .#{$prefix}--data-table-cell__edit-label {
+    margin-left: 1rem;
+    visibility: hidden;
+    fill: $ui-05;
+  }
+
+  .#{$prefix}--data-table-cell--editable:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--data-table-cell--editable:focus > .#{$prefix}--data-table-cell__content {
+    outline: 1px solid $brand-01;
+    outline-offset: 1px;
+  }
+
+  .#{$prefix}--data-table-cell--editable:hover > .#{$prefix}--data-table-cell__edit-label,
+  .#{$prefix}--data-table-cell--editable:focus > .#{$prefix}--data-table-cell__edit-label {
+    visibility: visible;
+  }
+
+  // Form elements
+  #{$prefix}--data-table-cell--editing {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--label {
+    display: none;
+  }
+
+  .#{$prefix}--data-table-cell--editing {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .#{$prefix}--data-table-cell--editing > .#{$prefix}--form-item {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--text-input {
+    height: 100%;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--data-table-cell--editing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .#{$prefix}--data-table-cell__edit-actions .#{$prefix}--btn:last-of-type {
+    margin-left: 0.5rem;
+  }
+
+  .#{$prefix}--data-table-cell__edit-actions {
+    @include layer('overlay');
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    background-color: $inverse-01;
+    z-index: z('overlay');
+    // Include extra px of padding to account for outline offset in text field
+    padding: 0.5rem #{0.5rem + rem(1px)};
+    border: 1px solid $ui-04;
+    margin-top: 1px;
+    min-height: rem(48px);
+  }
+}
