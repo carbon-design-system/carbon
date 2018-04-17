@@ -100,6 +100,7 @@ describe('Dropdown', () => {
     const onClick = jest.fn();
     const onOpen = jest.fn();
     const onClose = jest.fn();
+    const handleKeydown = jest.fn();
 
     const wrapper = mount(
       <Dropdown onClick={onClick} onOpen={onOpen} onClose={onClose}>
@@ -143,6 +144,30 @@ describe('Dropdown', () => {
       expect(
         wrapper.find('.bx--dropdown').hasClass('bx--dropdown--open')
       ).toEqual(false);
+    });
+
+    it('should close when ESC is pressed', () => {
+      const wrapper = mount(
+        <Dropdown handleKeydown={handleKeydown}>
+          <DropdownItem
+            className="test-child"
+            itemText="test-child"
+            value="test-child"
+          />
+        </Dropdown>
+      );
+
+      wrapper.setState({ open: true });
+      wrapper.mount();
+      dropdown.simulate('keypress', { which: 27 });
+      expect(
+        wrapper.find('.bx--dropdown').hasClass('bx--dropdown--open')
+      ).toEqual(false);
+      dropdown.simulate('keypress', { which: 27 });
+      expect(
+        wrapper.find('.bx--dropdown').hasClass('bx--dropdown--open')
+      ).toEqual(false);
+      wrapper.unmount();
     });
 
     it('should update data value state when child item is clicked', () => {

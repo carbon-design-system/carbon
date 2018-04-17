@@ -50,6 +50,14 @@ export default class Dropdown extends PureComponent {
     }
   }
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeydown);
+  }
+
   resetState(props) {
     const { children, selectedText, value, defaultText, open } = props;
 
@@ -88,6 +96,13 @@ export default class Dropdown extends PureComponent {
 
     // Open on click, enter, or space
     if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {
+      this.setState({ open: !this.state.open });
+    }
+  };
+
+  handleKeydown = evt => {
+    const key = evt.keyCode || evt.which;
+    if (key === 27 && this.state.open) {
       this.setState({ open: !this.state.open });
     }
   };
