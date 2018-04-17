@@ -2,6 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   devtool: 'source-maps',
@@ -31,6 +32,12 @@ module.exports = {
           },
           {
             loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [autoprefixer],
+            },
           },
           {
             loader: 'sass-loader',

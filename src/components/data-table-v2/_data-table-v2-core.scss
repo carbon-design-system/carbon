@@ -1,153 +1,157 @@
-.#{$prefix}--data-table-v2-container {
-  width: 100%;
-  min-width: rem(500px);
-  overflow-x: auto;
-  padding-top: $spacing-3xs; // allow space for focus styles
-}
+@import '../../globals/scss/import-once';
 
-.#{$prefix}--data-table-v2 {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border-bottom: 1px solid $ui-04;
-
-  thead {
-    @include typescale('zeta');
-    background-color: $ui-02;
-    font-weight: 700;
+@include exports('data-table-v2-core') {
+  .#{$prefix}--data-table-v2-container {
+    width: 100%;
+    min-width: rem(500px);
+    overflow-x: auto;
+    padding-top: $spacing-3xs; // allow space for focus styles
   }
 
-  tbody {
-    @include typescale('zeta');
-    background-color: $ui-01;
-  }
+  .#{$prefix}--data-table-v2 {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border-bottom: 1px solid $ui-04;
 
-  tr {
-    height: rem(48px);
+    thead {
+      @include typescale('zeta');
+      background-color: $ui-02;
+      font-weight: 700;
+    }
 
-    &:hover {
-      td {
-        background-color: rgba($brand-02, 0.1);
-        border-top: 1px solid $brand-01;
-        border-bottom: 1px solid $brand-01;
+    tbody {
+      @include typescale('zeta');
+      background-color: $ui-01;
+    }
 
-        &:first-of-type {
-          border-left: 1px solid $brand-01;
+    tr {
+      height: rem(48px);
+
+      &:hover {
+        td {
+          background-color: rgba($brand-02, 0.1);
+          border-top: 1px solid $brand-01;
+          border-bottom: 1px solid $brand-01;
+
+          &:first-of-type {
+            border-left: 1px solid $brand-01;
+          }
+
+          &:last-of-type {
+            border-right: 1px solid $brand-01;
+          }
         }
 
-        &:last-of-type {
-          border-right: 1px solid $brand-01;
+        .#{$prefix}--overflow-menu {
+          opacity: 1;
         }
       }
+    }
 
-      .#{$prefix}--overflow-menu {
+    th {
+      border-top: 1px solid $ui-04;
+    }
+
+    th,
+    td {
+      border-top: 1px solid $ui-04;
+      padding-left: $spacing-sm;
+      vertical-align: middle;
+      text-align: left;
+
+      &:first-of-type {
+        padding-left: rem(24px);
+        border-left: 1px solid $ui-04;
+      }
+
+      &:last-of-type {
+        padding-right: $spacing-lg;
+        border-right: 1px solid $ui-04;
+      }
+    }
+
+    // Overrrides
+    .#{$prefix}--checkbox-label {
+      padding-left: rem(28px);
+    }
+
+    .#{$prefix}--overflow-menu {
+      opacity: 0;
+
+      &:focus {
+        outline: 0;
         opacity: 1;
+        box-shadow: none;
+
+        .#{$prefix}--overflow-menu__icon {
+          box-shadow: inset 0px 0px 0px 1px $brand-01;
+        }
+      }
+    }
+
+    .#{$prefix}--overflow-menu__icon {
+      transform: rotate(90deg);
+    }
+  }
+
+  // Options
+
+  .#{$prefix}--data-table-v2-header {
+    margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--data-table-v2--zebra {
+    tbody tr:nth-child(even) {
+      background-color: $ui-02;
+    }
+  }
+
+  .#{$prefix}--data-table-v2--no-border {
+    tr {
+      &:last-of-type {
+        td {
+          border-bottom-color: transparent;
+        }
+      }
+    }
+
+    th,
+    td {
+      &:first-of-type {
+        border-left-color: transparent;
+      }
+
+      &:last-of-type {
+        border-right-color: $ui-04;
       }
     }
   }
 
-  th {
-    border-top: 1px solid $ui-04;
-  }
-
-  th,
-  td {
-    border-top: 1px solid $ui-04;
-    padding-left: $spacing-sm;
-    vertical-align: middle;
-    text-align: left;
-
-    &:first-of-type {
-      padding-left: rem(24px);
-      border-left: 1px solid $ui-04;
-    }
-
-    &:last-of-type {
-      padding-right: $spacing-lg;
-      border-right: 1px solid $ui-04;
+  .#{$prefix}--data-table-v2--compact {
+    tbody tr {
+      height: rem(24px);
     }
   }
 
-  // Overrrides
-  .#{$prefix}--checkbox-label {
-    padding-left: rem(28px);
-  }
-
-  .#{$prefix}--overflow-menu {
-    opacity: 0;
-
-    &:focus {
-      outline: 0;
-      opacity: 1;
-      box-shadow: none;
-
-      .#{$prefix}--overflow-menu__icon {
-        box-shadow: inset 0px 0px 0px 1px $brand-01;
-      }
+  .#{$prefix}--data-table-v2--short {
+    tbody tr {
+      height: rem(32px);
     }
   }
 
-  .#{$prefix}--overflow-menu__icon {
-    transform: rotate(90deg);
-  }
-}
-
-// Options
-
-.#{$prefix}--data-table-v2-header {
-  margin-bottom: $spacing-xs;
-}
-
-.#{$prefix}--data-table-v2--zebra {
-  tbody tr:nth-child(even) {
-    background-color: $ui-02;
-  }
-}
-
-.#{$prefix}--data-table-v2--no-border {
-  tr {
-    &:last-of-type {
-      td {
-        border-bottom-color: transparent;
-      }
+  .#{$prefix}--data-table-v2--tall {
+    tbody tr {
+      height: rem(64px);
     }
   }
 
-  th,
-  td {
-    &:first-of-type {
-      border-left-color: transparent;
-    }
-
-    &:last-of-type {
-      border-right-color: $ui-04;
-    }
+  .#{$prefix}--data-table-v2--static {
+    width: auto;
   }
-}
 
-.#{$prefix}--data-table-v2--compact {
-  tbody tr {
-    height: rem(24px);
+  .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
+  tbody tr.#{$prefix}--data-table-v2--selected {
+    background-color: rgba($brand-02, 0.1);
   }
-}
-
-.#{$prefix}--data-table-v2--short {
-  tbody tr {
-    height: rem(32px);
-  }
-}
-
-.#{$prefix}--data-table-v2--tall {
-  tbody tr {
-    height: rem(64px);
-  }
-}
-
-.#{$prefix}--data-table-v2--static {
-  width: auto;
-}
-
-.#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
-tbody tr.#{$prefix}--data-table-v2--selected {
-  background-color: rgba($brand-02, 0.1);
 }
