@@ -327,7 +327,7 @@ class FloatingMenu extends React.Component {
           right: 'auto',
         }
       : {
-          left: `${window.innerWidth}px`,
+          visibility: 'hidden',
           top: '0px',
         };
     return React.cloneElement(children, {
