@@ -143,6 +143,12 @@
   .#{$prefix}--overflow-menu-options__option--disabled:hover .#{$prefix}--overflow-menu-options__btn {
     color: $text-01;
     opacity: 0.5;
+    
+    &:active,
+    &:focus {
+      background-color: $ui-01;
+      pointer-events: none;
+    }
   }
 
   .#{$prefix}--overflow-menu--flip {
