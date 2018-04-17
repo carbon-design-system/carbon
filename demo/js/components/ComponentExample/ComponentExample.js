@@ -47,16 +47,16 @@ class ComponentExample extends Component {
     this._instantiateComponents();
   }
 
-  componentWillUpdate({ component }) {
-    const { component: prevComponent } = this.props;
-    if (prevComponent !== component) {
+  componentWillUpdate({ component, htmlFile }) {
+    const { component: prevComponent, htmlFile: prevHtmlFile } = this.props;
+    if (prevComponent !== component || prevHtmlFile !== htmlFile) {
       this._releaseComponents();
     }
   }
 
-  componentDidUpdate({ component }) {
-    const { component: prevComponent } = this.props;
-    if (prevComponent !== component) {
+  componentDidUpdate({ component, htmlFile }) {
+    const { component: prevComponent, htmlFile: prevHtmlFile } = this.props;
+    if (prevComponent !== component || prevHtmlFile !== htmlFile) {
       this._instantiateComponents();
     }
   }
