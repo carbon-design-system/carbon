@@ -110,12 +110,13 @@
   }
 
   // Skeleton State
-  .#{$prefix}--number.#{$prefix}--skeleton input[type='number'] {
+  .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
     width: 100%;
+    height: 2.5rem;
 
-    &::-webkit-input-placeholder {
-      color: transparent;
+    input[type='number'] {
+      display: none;
     }
   }
 }
