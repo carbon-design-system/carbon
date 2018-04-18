@@ -36,7 +36,7 @@
       width: 100%;
       height: rem(4px);
       top: -2px;
-      background-color: $ui-05;
+      background-color: $ui-04;
       transition: $transition--base $carbon--standard-easing;
       cursor: pointer;
     }
@@ -45,7 +45,7 @@
       box-sizing: border-box;
       position: absolute;
       display: block;
-      border: 2px solid $ui-05;
+      border: 2px solid $ui-04;
       cursor: pointer;
       top: -12px;
       width: rem(24px);
@@ -71,14 +71,14 @@
       width: rem(32px);
       border-radius: 0.9375rem;
       background-color: transparent;
-      border: 2px solid $ui-05;
+      border: 2px solid $ui-04;
       top: 0;
     }
 
     &:after {
       width: rem(10px);
       height: rem(10px);
-      background-color: $ui-05;
+      background-color: $ui-04;
       border: none;
       top: 3px;
       left: 3px;
