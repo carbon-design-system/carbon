@@ -26,7 +26,7 @@
       .#{$prefix}--accordion__arrow {
         @include focus-outline('border');
         overflow: visible; // safari fix
-        outline-offset: -.5px; // safari fix
+        outline-offset: -0.5px; // safari fix
       }
     }
 
@@ -53,7 +53,7 @@
       .#{$prefix}--accordion__arrow {
         @include focus-outline('border');
         overflow: visible; // safari fix
-        outline-offset: -.5px; // safari fix
+        outline-offset: -0.5px; // safari fix
       }
     }
   }
@@ -99,5 +99,85 @@
   .#{$prefix}--accordion__arrow {
     transform: rotate(90deg);
     fill: $brand-01;
+  }
+
+  // Skeleton state
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__heading,
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__button {
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__item {
+    .#{$prefix}--accordion__title {
+      @include skeleton;
+      width: 10%;
+      height: 14px;
+    }
+
+    &:nth-child(2) {
+      .#{$prefix}--accordion__title {
+        width: 7%;
+      }
+    }
+
+    &:nth-child(3) {
+      .#{$prefix}--accordion__title {
+        width: 12%;
+      }
+    }
+
+    &:nth-child(4) {
+      .#{$prefix}--accordion__title {
+        width: 8%;
+      }
+    }
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__item--active {
+    height: 108px;
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__content {
+    @include skeleton;
+    width: 85%;
+    height: 14px;
+    margin-left: $spacing-2xl;
+    position: relative;
+
+    &:after,
+    &:before {
+      @include skeleton;
+      display: block;
+      height: 14px;
+      position: absolute;
+      content: '';
+      width: 80%;
+      top: 24px;
+    }
+
+    &:after {
+      width: 95%;
+      top: 48px;
+    }
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    pointer-events: none;
+    fill: $ui-05;
+    cursor: default;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+      cursor: default;
+    }
+  }
+
+  .#{$prefix}--skeleton .#{$prefix}--accordion__heading:focus .#{$prefix}--accordion__arrow {
+    border: none;
+    outline: none;
+    cursor: default;
   }
 }

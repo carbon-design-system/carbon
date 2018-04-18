@@ -176,4 +176,25 @@
       }
     }
   }
+
+  // Skeleton state
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    @include skeleton;
+    width: 75px;
+    height: 12px;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+    @include skeleton;
+    width: 100px;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+    @include hidden;
+  }
 }

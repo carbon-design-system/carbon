@@ -151,4 +151,9 @@
       outline: none;
     }
   }
+
+  // Skeleton State
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton {
+    @include skeleton;
+  }
 }

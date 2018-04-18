@@ -40,6 +40,13 @@
     opacity: 0.5;
   }
 
+  // Skeleton State
+  .#{$prefix}--label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 75px;
+    height: 14px;
+  }
+
   input[data-invalid],
   textarea[data-invalid],
   select[data-invalid] {
