@@ -24,6 +24,11 @@
     }
   }
 
+  .#{$prefix}--form-item--light input,
+  .#{$prefix}--form-item--light input[type='number'] {
+    background: $field-02 !important;
+  }
+
   .#{$prefix}--label {
     @include reset;
     @include font-family;

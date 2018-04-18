@@ -334,6 +334,10 @@
     margin-bottom: $spacing-2xs;
   }
 
+  .#{$prefix}--date-picker__calendar--v2.open {
+    margin-top: 1px !important;
+  }
+
   .#{$prefix}--date-picker--v2 {
     .#{$prefix}--date-picker-container {
       display: flex;
@@ -348,7 +352,7 @@
   .#{$prefix}--date-picker--v2 .#{$prefix}--date-picker__input {
     border: none;
     box-shadow: 0 1px 0 0 $text-02;
-    order: 1;
+    order: 2;
 
     &:focus {
       outline: none;
@@ -358,5 +362,37 @@
     &:focus ~ .#{$prefix}--label {
       color: $brand-01;
     }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &[data-invalid]:focus + .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &:focus ~ .#{$prefix}--form__helper-text {
+      z-index: 0;
+      max-height: 3rem;
+      opacity: 1;
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  .#{$prefix}--date-picker--light input {
+    background: $field-02;
   }
 }

@@ -173,4 +173,8 @@
   .#{$prefix}--number--v2[data-invalid] input[type='number']:focus ~ .#{$prefix}--label {
     color: $support-01;
   }
+
+  .#{$prefix}--number--light input[type='number'] {
+    background-color: $field-02;
+  }
 }

@@ -155,4 +155,8 @@
   .#{$prefix}--search--v2 .#{$prefix}--search-button {
     order: 2;
   }
+
+  .#{$prefix}--search--light input {
+    background: $field-02;
+  }
 }

@@ -149,4 +149,8 @@
       }
     }
   }
+
+  .#{$prefix}--select--light select {
+    background: $field-02;
+  }
 }

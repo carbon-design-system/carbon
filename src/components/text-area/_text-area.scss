@@ -87,4 +87,8 @@
       }
     }
   }
+
+  .#{$prefix}--text-area--light {
+    background: $field-02;
+  }
 }

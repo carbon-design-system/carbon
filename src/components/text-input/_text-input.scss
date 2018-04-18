@@ -92,4 +92,8 @@
       }
     }
   }
+
+  .#{$prefix}--text-input--light {
+    background: $field-02;
+  }
 }
