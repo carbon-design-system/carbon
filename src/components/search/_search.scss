@@ -99,7 +99,7 @@
     height: rem(40px);
     width: rem(40px);
     min-width: rem(40px);
-    margin-left: $spacing-2xs;;
+    margin-left: $spacing-2xs;
     background-color: $ui-01;
     position: relative;
     padding: 0;
@@ -135,5 +135,28 @@
 
   .#{$prefix}--search-view--hidden {
     display: none;
+  }
+
+  .#{$prefix}--search--v2 {
+    display: flex;
+  }
+
+  .#{$prefix}--search--v2 .#{$prefix}--search-input {
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 1;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+  }
+
+  .#{$prefix}--search--v2 .#{$prefix}--search-button {
+    order: 2;
+  }
+
+  .#{$prefix}--search--light input {
+    background: $field-02;
   }
 }

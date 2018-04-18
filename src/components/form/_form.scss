@@ -12,6 +12,8 @@
 
   .#{$prefix}--form-item {
     @include font-family;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     margin-right: $spacing-md;
     margin-bottom: $spacing-lg;
@@ -20,6 +22,11 @@
       margin-right: 0;
       margin-bottom: 0;
     }
+  }
+
+  .#{$prefix}--form-item--light input,
+  .#{$prefix}--form-item--light input[type='number'] {
+    background: $field-02 !important;
   }
 
   .#{$prefix}--label {
@@ -64,5 +71,16 @@
       display: inline-block;
       color: $support-01;
     }
+  }
+
+  .#{$prefix}--form__helper-text {
+    @include typescale('omega');
+    color: $text-02;
+    z-index: -1;
+    transition: $transition--base $carbon--standard-easing;
+    order: 1;
+    max-height: 0;
+    opacity: 0;
+    line-height: 1.5;
   }
 }

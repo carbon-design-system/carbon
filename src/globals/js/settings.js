@@ -14,5 +14,6 @@
  */
 const settings = {
   prefix: 'bx',
+  v2inputs: true,
 };
 export default settings;
