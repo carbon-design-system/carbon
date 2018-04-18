@@ -4006,10 +4006,6 @@ flatpickr@4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.3.0.tgz#9cc3aa8c9a2bde1ea431be0f4a74f40f9bad79e3"
 
-flatpickr@4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.4.1.tgz#894255e33c2bed93f48171f8eb5980a79b76ab1d"
-
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
