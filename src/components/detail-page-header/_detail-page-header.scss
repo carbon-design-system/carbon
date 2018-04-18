@@ -49,9 +49,10 @@
     }
 
     .#{$prefix}--detail-page-header .#{$prefix}--breadcrumb {
-      display: none;
+      display: inline;
       transition: opacity $transition--base $carbon--standard-easing $transition-time / 2,
-        visibility $transition--base $carbon--standard-easing $transition-time / 2, transform $transition--base $carbon--standard-easing 0s;
+        visibility $transition--base $carbon--standard-easing $transition-time / 2,
+        transform $transition--base $carbon--standard-easing 0s;
       will-change: opacity, visibility, transform;
 
       @include breakpoint(bp--sm--major) {
@@ -122,7 +123,7 @@
     }
 
     .#{$prefix}--detail-page-header-status-container {
-      display: none;
+      display: inline;
       margin-top: rem(8px);
 
       @include breakpoint(bp--sm--major) {
@@ -162,7 +163,7 @@
 
     .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--tabs {
       padding: 0.75rem 0;
-      display: none;
+      display: inline;
 
       @include breakpoint(bp--sm--major) {
         display: block;
