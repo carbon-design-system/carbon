@@ -26,7 +26,7 @@
       display: flex;
       align-items: center;
       padding: 0 0 0 1.25rem;
-      border-bottom: 1px solid $ui-05;
+      border-bottom: 1px solid $ui-03;
 
       .#{$prefix}--dropdown {
         flex: 1;
@@ -59,7 +59,7 @@
     .#{$prefix}--order-list {
       padding: 1.25rem 0;
       margin: 0 1.25rem;
-      border-bottom: 1px solid $ui-05;
+      border-bottom: 1px solid $ui-03;
     }
 
     .#{$prefix}--order-item {

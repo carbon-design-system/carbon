@@ -28,7 +28,7 @@
       @include typescale('omega');
       top: 1.1rem;
       padding: 0.5rem 1rem;
-      border: 1px solid $ui-04;
+      border: 1px solid $ui-03;
       color: $text-01;
       content: attr(data-feedback);
       transform: translateX(-50%);
@@ -40,8 +40,8 @@
       top: 0.85rem;
       width: 0.5rem;
       height: 0.5rem;
-      border-right: 1px solid $ui-04;
-      border-bottom: 1px solid $ui-04;
+      border-right: 1px solid $ui-03;
+      border-bottom: 1px solid $ui-03;
       content: '';
       transform: rotate(-135deg);
     }

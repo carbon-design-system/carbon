@@ -26,7 +26,7 @@
       width: rem(200px);
       height: rem(240px);
       background-color: $ui-01;
-      border: 1px solid $ui-04;
+      border: 1px solid $ui-03;
 
       &:focus {
         @include focus-outline('border');
@@ -58,7 +58,7 @@
       align-items: center;
       justify-content: space-between;
       height: rem(48px);
-      background-color: $ui-03;
+      background-color: $ui-02;
       padding-left: 1rem;
       padding-right: 1rem;
 
@@ -130,7 +130,7 @@
       width: rem(50px);
       height: rem(50px);
       background-color: $ui-01;
-      border: 1px solid $ui-04;
+      border: 1px solid $ui-03;
       border-radius: 100%;
 
       .#{$prefix}--about__icon--img {
@@ -181,7 +181,7 @@
       &:hover,
       &:focus {
         .#{$prefix}--app-actions__button--icon {
-          fill: $brand-01;
+          fill: $hover-secondary;
         }
       }
 
