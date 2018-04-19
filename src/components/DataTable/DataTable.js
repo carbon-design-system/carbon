@@ -123,6 +123,11 @@ export default class DataTable extends React.Component {
       this.setState(state => getDerivedStateFromProps(nextProps, state));
       return;
     }
+
+    if (!isEqual(this.props.rows, nextProps.rows)) {
+      this.setState(state => getDerivedStateFromProps(nextProps, state));
+      return;
+    }
   }
 
   /**

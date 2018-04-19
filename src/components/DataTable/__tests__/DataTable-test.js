@@ -505,5 +505,28 @@ describe('DataTable', () => {
       const nextArgs = mockProps.render.mock.calls[1][0];
       expect(nextArgs.rows.map(row => row.id)).toEqual(['c', 'a', 'b']);
     });
+
+    it('should update cells when receiving new props', () => {
+      const wrapper = mount(<DataTable {...mockProps} />);
+      const args = mockProps.render.mock.calls[0][0];
+
+      expect(args.rows.length).toEqual(mockProps.rows.length);
+
+      const nextRows = mockProps.rows.map(row => {
+        return {
+          ...row,
+          fieldA: row.fieldA + '!',
+        };
+      });
+
+      wrapper.setProps({ rows: nextRows });
+
+      const nextArgs = mockProps.render.mock.calls[1][0];
+      expect(nextArgs.rows.map(row => row.cells[0].value)).toEqual([
+        'Field 2:A!',
+        'Field 1:A!',
+        'Field 3:A!',
+      ]);
+    });
   });
 });
