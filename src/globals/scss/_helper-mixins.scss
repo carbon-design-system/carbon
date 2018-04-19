@@ -105,10 +105,29 @@
     $deprecations--reasons: append($deprecations--reasons, $reason) !global;
     @content;
   } @else {
-    @warn 'Deprecated code was found, this code will be removed before the next release of Carbon.
-REASON: #{$reason}';
+    @warn 'Deprecated code was found, this code will be removed before the next release of Carbon. REASON: #{$reason}';
     @content;
   }
+}
+
+@mixin truncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin assistive-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  visibility: visible;
+  white-space: nowrap;
 }
 
 //----------------------------------------------
