@@ -127,11 +127,15 @@ When you do `git remote -v`, you'll see these remotes:
 
 ### 5. Start the server
 
-```
-run run start
+```sh
+npm run dev
+
+# or
+
+yarn dev
 ```
 
-Once it's done building, you can start editing source code or creating new components. The system is set up to automatically bundle your changes/additions. Visit http://localhost:8080 to see the changes happen on the fly.
+Once it's done building, you can start editing source code or creating new components. The system is set up to automatically bundle your changes/additions. Visit http://localhost:3000 to see the changes happen on the fly.
 
 
 ### 6. Test your JavaScript code
