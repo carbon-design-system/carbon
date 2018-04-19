@@ -130,6 +130,27 @@
     background-color: $support-01;
   }
 
+  .#{$prefix}--overflow-menu-options__option--disabled:hover {
+    background-color: $inverse-01;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
+    color: $text-01;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled:hover .#{$prefix}--overflow-menu-options__btn {
+    color: $text-01;
+    opacity: 0.5;
+    
+    &:active,
+    &:focus {
+      background-color: $ui-01;
+      pointer-events: none;
+    }
+  }
+
   .#{$prefix}--overflow-menu--flip {
     left: -140px;
 
