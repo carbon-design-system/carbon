@@ -135,13 +135,33 @@ describe('Modal', () => {
       expect(wrapper.state('isOpen')).toEqual(false);
     });
 
-    it('should handle keyDown events', () => {
+    it('should handle close keyDown events', () => {
       const onRequestClose = jest.fn();
       const wrapper = mount(<Modal onRequestClose={onRequestClose} />);
       wrapper.simulate('keyDown', { which: 26 });
       expect(onRequestClose).not.toBeCalled();
       wrapper.simulate('keyDown', { which: 27 });
       expect(onRequestClose).toBeCalled();
+    });
+
+    it('should handle submit keyDown events with shouldSubmitOnEnter enabled', () => {
+      const onRequestSubmit = jest.fn();
+      const wrapper = mount(
+        <Modal onRequestSubmit={onRequestSubmit} shouldSubmitOnEnter />
+      );
+      wrapper.simulate('keyDown', { which: 14 });
+      expect(onRequestSubmit).not.toBeCalled();
+      wrapper.simulate('keyDown', { which: 13 });
+      expect(onRequestSubmit).toBeCalled();
+    });
+
+    it('should not handle submit keyDown events with shouldSubmitOnEnter not enabled', () => {
+      const onRequestSubmit = jest.fn();
+      const wrapper = mount(<Modal onRequestSubmit={onRequestSubmit} />);
+      wrapper.simulate('keyDown', { which: 14 });
+      expect(onRequestSubmit).not.toBeCalled();
+      wrapper.simulate('keyDown', { which: 13 });
+      expect(onRequestSubmit).not.toBeCalled();
     });
 
     it('should close by default on secondary button click', () => {

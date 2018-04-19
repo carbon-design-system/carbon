@@ -23,6 +23,7 @@ export default class Modal extends Component {
     primaryButtonDisabled: PropTypes.bool,
     onSecondarySubmit: PropTypes.func,
     danger: PropTypes.bool,
+    shouldSubmitOnEnter: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -39,6 +40,9 @@ export default class Modal extends Component {
   handleKeyDown = evt => {
     if (evt.which === 27) {
       this.props.onRequestClose();
+    }
+    if (evt.which === 13 && this.props.shouldSubmitOnEnter) {
+      this.props.onRequestSubmit();
     }
   };
 
