@@ -72,7 +72,7 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-
+    z-index: 1;
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
       flex-direction: row;
