@@ -120,7 +120,21 @@ describe('OverflowMenu', () => {
       expect(rootWrapper.state().open).toEqual(true);
     });
 
-    it('should toggle state in response to Enter or Space', () => {
+    it('should toggle state in response to Enter or Space when the menu is closed', () => {
+      const enterKey = 13;
+      const spaceKey = 32;
+      const rootWrapper = shallow(<OverflowMenu />);
+      const menu = rootWrapper.childAt(0);
+
+      rootWrapper.setState({ open: false });
+
+      menu.simulate('keydown', { which: spaceKey });
+      expect(rootWrapper.state().open).toEqual(true);
+      menu.simulate('keydown', { which: enterKey });
+      expect(rootWrapper.state().open).toEqual(true);
+    });
+
+    it('should NOT toggle state in response to Enter or Space when the menu is open', () => {
       const enterKey = 13;
       const spaceKey = 32;
       const rootWrapper = shallow(<OverflowMenu />);
@@ -129,7 +143,7 @@ describe('OverflowMenu', () => {
       rootWrapper.setState({ open: true });
 
       menu.simulate('keydown', { which: spaceKey });
-      expect(rootWrapper.state().open).toEqual(false);
+      expect(rootWrapper.state().open).toEqual(true);
       menu.simulate('keydown', { which: enterKey });
       expect(rootWrapper.state().open).toEqual(true);
     });
