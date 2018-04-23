@@ -72,7 +72,8 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-
+    z-index: z('dropdown');
+    
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
       flex-direction: row;
@@ -80,6 +81,7 @@
       margin-left: $spacing-md;
       background: none;
       box-shadow: none;
+      z-index: auto;
     }
 
     @include breakpoint(bp--lg--major) {
