@@ -4,11 +4,13 @@
 
 Set up your SSH Key GitHub Enterprise account and install node.js 4 or higher.
 * [Generating SSH Keys - GitHub](https://help.github.com/articles/generating-ssh-keys/)
-* [`NVM` (node version manager)](https://github.com/creationix/nvm) to use the `Node 6`.
+* [`nvm` (Node Version Manager)](https://github.com/creationix/nvm) to use the `Node 6`.
 
 Contributing to carbon-components requires that you can run this repo locally on your computer.
 
-## Class names
+## Coding Style
+
+### Class names
 
 Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with `bx--` by default,
 and design systems inheriting Carbon can override.
@@ -78,73 +80,65 @@ button
 Also note that all variants of a component can live in a single HTML, SCSS and JS file respectively.
 For example, while there are many button variants (primary, secondary, etc.), they're all contained in those single source files in the button folder.
 
-## 1. Fork The Repo:
+## Start Contributing
+
+### 1. Fork The Repo:
 
 Go to [carbon-components](https://github.com/carbon-design-system/carbon-components) and click the "Fork" button in the top-right corner.
 
-## 2. Clone Your Fork:
+### 2. Clone Your Fork:
 
-* Go to your GitHub profile.
-* Find carbon-components.
-* Copy the **SSH clone URL**.
+1. Go to your [GitHub Repositories](https://github.com/settings/repositories).
+1. Click on `[your_github_username]/carbon-components`.
+1. Click on the `Clone or Download` button and copy the URL from the `Clone with SSH` option. It should start with `git@github.com...`
 
 In your terminal:
 
 ```sh
-git clone git@github.com:{ YOUR_USERNAME }/carbon-components.git
+git clone git@github.com:[your_github_username]/carbon-components.git
 cd carbon-components
 ```
 
 See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more details.
 
-## 3. Add Remotes
+### 3. Add Upstream Remotes
 
-When you clone your personal repo, you will see `origin` is set up for you already by default. This should be pointing to your personal repo.
+When you clone your forked repo, doing a `git remote -v` will show that the `origin` remote is set up for you already by default. This should be pointing to your forked repo.
+
+Add the `carbon-design-system/carbon-components` repo to your remote (this can be useful to update your fork of new changes down the road):
 
 ```sh
+# Add the upstream remote to your repo
 git remote add upstream git@github.com:carbon-design-system/carbon-components.git
-git remote add {{YOUR_NAME_HERE}} git@github.com:{{YOUR_NAME_HERE}}/carbon-components.git
 
-# List all your remotes
+# Verify the remote was added
 git remote -v
 ```
 
 When you do `git remote -v`, you'll see these remotes:
 * `origin`: connection to your fork
-* `upstream`: connection to the original project.
-* `bthan`: connection to [Brian Han's](https://github.com/bthan/carbon-components) fork.
+* `upstream`: connection to the original repo.
 
-## 4. Work in a Branch
+### 4. Work in a Branch
 
 * Always work in a branch.
 * Submit pull requests from a branch.
 * All commits must follow the convention outlined [here](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md).
 
-> __Writing commit messages__
->
-> - `<type>` indicates the type of commit that's being made. This can be: `feat`, `fix`, `perf`, `docs`, `chore`, `style`, `refactor`
-> - `<scope>` The scope could be anything specifying place of the commit change or the thing(s) that changed.
->
-> __Commit message format:__
-> ```
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
+### 5. Start the server
+
+```sh
+npm run dev
+
+# or
+
+yarn dev
 ```
 
-*Do not submit pull requests from the `master` branch of your fork.*
+Once it's done building, you can start editing source code or creating new components. The system is set up to automatically bundle your changes/additions. Visit http://localhost:3000 to see the changes happen on the fly.
 
-```
-git checkout -b { YOUR_BRANCH_NAME }
-git add .
-git commit -m "fix(table): IE11 positioning error" -m "Fixes #34"
-```
 
-* [Close a commit via commit message](https://help.github.com/articles/closing-issues-via-commit-messages/)
-
-## 5. Test your JavaScript code
+### 6. Test your JavaScript code
 
 If you're contributing to our JavaScript code, test your changes by running our test commands:
 
@@ -176,7 +170,7 @@ Other options for testing are:
 * `-k`/`--keepalive`: Keep running test runner even after test ends. Test will restart running when you make changes to any test files or any files under test.
 * `-v`/`--verbose`: Let Karma emit detailed log.
 
-## 6. Test your HTML/CSS code for a11y
+### 7. Test your HTML/CSS code for a11y
 
 If you're contributing to our HTML/CSS code, a11y compliance of your code should be tested.
 
@@ -203,11 +197,36 @@ gulp test:a11y -f consumables/html/components/fab/fab.html
 
 The a11y test may report potential issues that should be handled in application-level, not in carbon-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/carbon-design-system/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
 
-## 7. Make a Pull Request
+### 8. Make a Pull Request
 
 **Note:** Before you make a pull request, [search](https://github.com/carbon-design-system/carbon-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.
 
 When you're at a good stopping place and you're ready for feedback from other contributors and maintainers, **push your commits to your fork**:
+
+#### Commit Tip
+> __Writing commit messages__
+>
+> - `<type>` indicates the type of commit that's being made. This can be: `feat`, `fix`, `perf`, `docs`, `chore`, `style`, `refactor`
+> - `<scope>` The scope could be anything specifying place of the commit change or the thing(s) that changed.
+>
+> __Commit message format:__
+> ```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+*Do not submit pull requests from the `master` branch of your fork.*
+
+```
+git checkout -b { YOUR_BRANCH_NAME }
+git add .
+git commit -m "fix(table): IE11 positioning error" -m "Fixes #34"
+```
+
+* [Close a commit via commit message](https://help.github.com/articles/closing-issues-via-commit-messages/)
 
 ```
 git push origin { YOUR_BRANCH_NAME }
@@ -238,7 +257,7 @@ Write a title and description then click "Create pull request"
 
 * [How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
 
-## 8. Updating a Pull Request
+### 9. Updating a Pull Request
 
 Stay up to date with the activity in your pull request. Maintainers from the Design System team will be reviewing your work and making comments, asking questions and suggesting changes to be made before they merge your code.
 
