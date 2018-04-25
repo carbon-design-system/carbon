@@ -109,7 +109,7 @@
     align-items: center;
     justify-content: center;
     padding: $spacing-md $spacing-md $spacing-2xs;
-    width: rem(285px);
+    width: rem(285px) !important;
     height: rem(230px);
     border-radius: 0;
     border: none;
@@ -329,8 +329,24 @@
   }
 
   .#{$prefix}--date-picker__weekdays,
-  .flatpickr-weekdays {
+  .flatpickr-weekdays,
+  .flatpickr-weekdaycontainer {
     width: rem(225px);
     margin-bottom: $spacing-2xs;
+  }
+
+  .flatpickr-weekdaycontainer {
+    display: flex;
+  }
+
+  .flatpickr-months {
+    display: flex;
+    width: 100%;
+    position: relative;
+  }
+
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    padding-top: 5px;
   }
 }
