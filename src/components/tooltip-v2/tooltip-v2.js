@@ -48,7 +48,7 @@ const getMenuOffset = (menuBody, menuDirection) => {
   return undefined;
 };
 
-class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHideState, handles) {
+class TooltipV2 extends mixin(createComponent, initComponentByEvent, eventedShowHideState, handles) {
   /**
    * Tooltip.
    * @extends CreateComponent
@@ -152,12 +152,12 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
     const { prefix } = settings;
     return {
       selectorInit: '[data-tooltip-v2-trigger]',
-      classShown: `${prefix}--tooltip--shown`,
-      attribTooltipTarget: 'data-tooltip-v2-target',
+      classShown: `${prefix}--tooltip-v2--shown`,
+      attribTooltipTarget: 'data-tooltip-target',
       objMenuOffset: getMenuOffset,
       initEventNames: ['focus'],
     };
   }
 }
 
-export default Tooltip;
+export default TooltipV2;

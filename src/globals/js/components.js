@@ -23,6 +23,7 @@ export { default as CopyButton } from '../../components/copy-button/copy-button'
 export { default as Notification } from '../../components/notification/notification';
 export { default as Toolbar } from '../../components/toolbar/toolbar';
 export { default as Tooltip } from '../../components/tooltip/tooltip';
+export { default as TooltipV2 } from '../../components/tooltip-v2/tooltip-v2';
 export { default as ProgressIndicator } from '../../components/progress-indicator/progress-indicator';
 export { default as FloatingMenu } from '../../components/floating-menu/floating-menu';
 export { default as StructuredList } from '../../components/structured-list/structured-list';

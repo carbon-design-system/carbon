@@ -8,7 +8,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
-@include exports('tooltip') {
+@include exports('tooltip-v2') {
   .#{$prefix}--tooltip-v2--simple {
     display: flex;
     align-items: center;
@@ -59,7 +59,7 @@
       @include typescale('zeta');
     }
 
-    .#{$prefix}--tooltip__label {
+    .#{$prefix}--tooltip-v2__label {
       font-weight: 600;
       margin-bottom: $spacing-xs;
     }
@@ -110,13 +110,13 @@
     }
   }
 
-  .#{$prefix}--tooltip--shown {
+  .#{$prefix}--tooltip-v2--shown {
     display: block;
   }
 
   // Simple Icon CSS only tooltip
-  .#{$prefix}--tooltip--simple__top,
-  .#{$prefix}--tooltip--simple__bottom {
+  .#{$prefix}--tooltip--simple-v2__top,
+  .#{$prefix}--tooltip--simple-v2__bottom {
     @include font-family;
     @include reset;
     @include typescale('delta');
@@ -186,7 +186,7 @@
   }
 
   // Tooltip caret - top position
-  .#{$prefix}--tooltip--simple__top {
+  .#{$prefix}--tooltip--simple-v2__top {
     &:before {
       bottom: 1.8rem;
     }
@@ -198,7 +198,7 @@
   }
 
   // Tooltip caret - bottom position
-  .#{$prefix}--tooltip--simple__bottom {
+  .#{$prefix}--tooltip--simple-v2__bottom {
     &:before {
       top: 1.8rem;
     }
@@ -211,8 +211,8 @@
 
   // Tooltip Definition
   .#{$prefix}--tooltip-v2--definition {
-    .#{$prefix}--tooltip--simple__bottom,
-    .#{$prefix}--tooltip--simple__top {
+    .#{$prefix}--tooltip--simple-v2__bottom,
+    .#{$prefix}--tooltip--simple-v2__top {
       &:after {
         margin-left: rem(24px);
       }
@@ -230,7 +230,7 @@
       }
     }
 
-    .#{$prefix}--tooltip--simple__top {
+    .#{$prefix}--tooltip--simple-v2__top {
       &:before {
         bottom: 2.2rem;
       }
@@ -240,7 +240,7 @@
       }
     }
 
-    .#{$prefix}--tooltip--simple__bottom {
+    .#{$prefix}--tooltip--simple-v2__bottom {
       &:before {
         top: 2.2rem;
       }
@@ -262,8 +262,8 @@
 
   //Tooltip Icon Simple
   .#{$prefix}--tooltip-v2--simple {
-    .#{$prefix}--tooltip--simple__bottom,
-    .#{$prefix}--tooltip--simple__top {
+    .#{$prefix}--tooltip--simple-v2__bottom,
+    .#{$prefix}--tooltip--simple-v2__top {
       &:before {
         margin-left: 50%;
         transform: translateX(-50%);
