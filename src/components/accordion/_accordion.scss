@@ -180,4 +180,8 @@
     outline: none;
     cursor: default;
   }
+
+  .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
+    margin-bottom: 0;
+  }
 }
