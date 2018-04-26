@@ -1,0 +1,108 @@
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
+
+@include exports('data-table-v2-inline-edit-cell') {
+  // Edit triggers
+  .#{$prefix}--data-table-cell--editable {
+    position: relative;
+  }
+
+  .#{$prefix}--data-table-cell__align {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--data-table-cell__content {
+    @include truncate;
+  }
+
+  .#{$prefix}--data-table-cell__edit {
+    @include button-reset(false);
+    margin-left: 1rem;
+    opacity: 0;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .#{$prefix}--data-table-cell__edit:focus,
+  .#{$prefix}--data-table-cell--editable:hover .#{$prefix}--data-table-cell__edit {
+    opacity: 1;
+  }
+
+  .#{$prefix}--data-table-cell__edit:focus {
+    outline: 1px solid $brand-01;
+    outline-offset: 2px;
+  }
+
+  .#{$prefix}--data-table-cell__icon--edit {
+    fill: $ui-05;
+  }
+
+  // Form controls
+  .#{$prefix}--data-table-cell--editing {
+    padding-right: 6rem;
+  }
+
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--label {
+    @include assistive-text;
+  }
+
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--data-table__edit-field {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // Stretch input to match padding-left provided by table cell styles
+    // margin-left: -1.5rem;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .#{$prefix}--data-table-cell--editing:first-child input[type='text'],
+  .#{$prefix}--data-table-cell--editing:first-child input[type='number'],
+  .#{$prefix}--data-table-cell--editing:first-child .#{$prefix}--select-input {
+    padding-left: 1.5rem;
+  }
+
+  .#{$prefix}--data-table-cell--editing input[type='text'],
+  .#{$prefix}--data-table-cell--editing input[type='number'],
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--select-input {
+    padding-left: rem(11px);
+  }
+
+  // Reset form-specific styles
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--text-input,
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--number,
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--number input[type='number'],
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--select,
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--select-input {
+    height: 100%;
+    min-width: 100%;
+  }
+
+  .#{$prefix}--data-table-cell--editing .#{$prefix}--select__arrow {
+    top: 1.3rem;
+  }
+
+  // Controls
+  .#{$prefix}--data-table__edit-actions {
+    @include layer('overlay');
+
+    position: absolute;
+    top: #{3rem + rem(1px)};
+    right: 0;
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    background-color: $inverse-01;
+    padding: 0.5rem;
+    z-index: z('overlay');
+  }
+
+  .#{$prefix}--data-table__edit-actions .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary {
+    margin-left: 0.5rem;
+  }
+}
