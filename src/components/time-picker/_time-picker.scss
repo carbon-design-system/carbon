@@ -45,4 +45,57 @@
       cursor: not-allowed;
     }
   }
+
+  .#{$prefix}--time-picker--v2 {
+    align-items: flex-end;
+
+    .#{$prefix}--label {
+      order: 1;
+    }
+
+    .#{$prefix}--time-picker__input {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--time-picker--v2 .#{$prefix}--time-picker__input-field {
+    order: 2;
+    background: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus + .#{$prefix}--label {
+      color: $support-01;
+    }
+  }
+
+  .#{$prefix}--time-picker--light .#{$prefix}--time-picker__input-field {
+    background: $field-02;
+  }
 }

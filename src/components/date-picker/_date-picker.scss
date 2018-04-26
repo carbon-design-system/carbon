@@ -382,6 +382,7 @@
     border: none;
     box-shadow: 0 1px 0 0 $text-02;
     order: 2;
+    background: $field-01;
 
     &:focus {
       outline: none;
@@ -421,7 +422,7 @@
     }
   }
 
-  .#{$prefix}--date-picker--light input {
+  .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
     background: $field-02;
   }
 }

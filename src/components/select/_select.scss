@@ -108,6 +108,7 @@
     border: none;
     box-shadow: 0 1px 0 0 $text-02;
     order: 2;
+    background: $field-01;
 
     & ~ .#{$prefix}--label {
       order: 1;
@@ -150,7 +151,7 @@
     }
   }
 
-  .#{$prefix}--select--light select {
+  .#{$prefix}--select--light .#{$prefix}--select-input {
     background: $field-02;
   }
 }
