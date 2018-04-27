@@ -132,14 +132,16 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
 
       // An attempt to disable Flatpickr's focus tracking system,
       // which has adverse effect with our old set up with two `<input>`s or our latest setup with a hidden `<input>`
-      on(doc, 'mousedown', () => {
-        if (this.calendar.isOpen) {
-          this.calendar.config.inline = true;
-          setTimeout(() => {
-            this.calendar.config.inline = false;
-          }, 0);
-        }
-      });
+      this.manage(
+        on(doc, 'mousedown', () => {
+          if (this.calendar.isOpen) {
+            this.calendar.config.inline = true;
+            setTimeout(() => {
+              this.calendar.config.inline = false;
+            }, 0);
+          }
+        })
+      );
     }
     const self = this;
     const date = type === 'range' ? this._rangeInput : this.element.querySelector(this.options.selectorDatePickerInput);
