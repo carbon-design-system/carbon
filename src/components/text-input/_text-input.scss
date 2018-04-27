@@ -30,6 +30,7 @@
     }
 
     &:focus {
+      outline: none;
       border: 1px solid $brand-01;
     }
 
