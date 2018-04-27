@@ -68,7 +68,7 @@
   }
 
   .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
-    color: $text-02;
+    color: $text-01;
   }
 
   .#{$prefix}--dropdown-text {
@@ -109,13 +109,15 @@
     display: block;
     color: currentColor;
     text-decoration: none;
+    font-weight: normal;
     padding: $spacing-md $spacing-lg $spacing-md $spacing-md;
     text-overflow: ellipsis;
     overflow: hidden;
 
     &:hover,
     &:focus {
-      background-color: $hover-row;
+      background-color: $field-01;
+      color: $text-01;
       outline: 1px solid transparent;
       text-decoration: underline;
       color: $text-01;
@@ -180,6 +182,43 @@
 
     .#{$prefix}--dropdown-list {
       box-shadow: 0 2px 0 0 $brand-01;
+    }
+  }
+
+  .#{$prefix}--dropdown--inline {
+    background-color: transparent;
+
+    &[data-value=''] .#{$prefix}--dropdown-text {
+      color: $brand-01;
+    }
+
+    &.#{$prefix}--dropdown--open:focus {
+      box-shadow: none;
+    }
+
+    &.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
+      @include layer('overlay');
+    }
+
+    &:not(.#{$prefix}--dropdown--open):hover {
+      background-color: $field-01;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      position: relative;
+      top: -2px;
+      left: 8px;
+      right: 0;
+      bottom: 0;
+    }
+
+    .#{$prefix}--dropdown-link {
+      font-weight: normal;
+    }
+
+    .#{$prefix}--dropdown-link:hover {
+      background-color: $field-01;
+      color: $text-01;
     }
   }
 }
