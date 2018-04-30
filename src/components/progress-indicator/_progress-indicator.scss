@@ -112,7 +112,7 @@
   // Skeleton State
   .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
     @include skeleton;
-    height: 12px;
-    width: 40px;
+    height: rem(12px);
+    width: rem(40px);
   }
 }

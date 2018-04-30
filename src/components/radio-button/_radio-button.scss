@@ -71,8 +71,8 @@
   // Skeleton State
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
     @include skeleton;
-    width: 100px;
-    height: 18px;
+    width: rem(100px);
+    height: rem(18px);
   }
 
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton .#{$prefix}--radio-button__appearance {

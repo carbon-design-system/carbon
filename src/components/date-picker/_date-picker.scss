@@ -347,7 +347,7 @@
 
   .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
     @include skeleton;
-    width: 75px;
-    height: 14px;
+    width: rem(75px);
+    height: rem(14px);
   }
 }

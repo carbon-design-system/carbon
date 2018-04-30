@@ -45,7 +45,7 @@
   // Skeleton State
   #{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
-    height: 100px;
+    height: rem(100px);
 
     &::-webkit-input-placeholder {
       color: transparent;

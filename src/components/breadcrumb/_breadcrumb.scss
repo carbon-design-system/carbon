@@ -67,7 +67,7 @@
   // Skeleton State
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;
-    width: 100px;
+    width: rem(100px);
     height: 1rem;
   }
 }

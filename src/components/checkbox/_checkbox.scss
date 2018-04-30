@@ -164,8 +164,8 @@
   // Skeleton state
   .#{$prefix}--checkbox-label.#{$prefix}--skeleton {
     @include skeleton;
-    width: 100px;
-    height: 18px;
+    width: rem(100px);
+    height: rem(18px);
 
     &:after,
     &:before {

@@ -185,13 +185,13 @@
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
     @include skeleton;
-    width: 75px;
-    height: 12px;
+    width: rem(75px);
+    height: rem(12px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
     @include skeleton;
-    width: 100px;
+    width: rem(100px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {

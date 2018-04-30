@@ -4,7 +4,7 @@
   .#{$prefix}--icon--skeleton {
     @include skeleton;
     display: inline-block;
-    width: 16px;
-    height: 16px;
+    width: rem(16px);
+    height: rem(16px);
   }
 }

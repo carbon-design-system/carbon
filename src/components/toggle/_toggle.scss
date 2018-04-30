@@ -192,8 +192,8 @@
   .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__text--left,
   .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__text--right {
     @include skeleton;
-    width: 20px;
-    height: 12px;
+    width: rem(20px);
+    height: rem(12px);
   }
 
   .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__appearance {

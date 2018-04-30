@@ -128,8 +128,8 @@
   // Skeleton state
   .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__range-label {
     @include skeleton;
-    width: 20px;
-    height: 12px;
+    width: rem(20px);
+    height: rem(12px);
   }
 
   .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__track {

@@ -184,6 +184,6 @@
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
-    width: 150px;
+    width: rem(150px);
   }
 }
