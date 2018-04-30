@@ -21,10 +21,11 @@
   .#{$prefix}--select-input {
     @include font-family;
     @include typescale('zeta');
+    height: rem(40px);
     appearance: none;
     display: block;
     width: 100%;
-    padding: $spacing-sm $spacing-2xl $spacing-sm $spacing-md;
+    padding: 0 $spacing-2xl 0 $spacing-md;
     color: $text-01;
     background-color: $field-01;
     border: $input-border;
