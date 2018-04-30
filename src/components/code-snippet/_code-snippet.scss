@@ -92,26 +92,6 @@
     right: 1.25rem;
   }
 
-  //Skeleton State
-  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
-    height: 98px;
-  }
-
-  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
-    height: 56px;
-  }
-
-  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
-    height: 100%;
-  }
-
-  .#{$prefix}--snippet.#{$prefix}--skeleton code {
-    @include skeleton;
-    width: 100%;
-    height: 1rem;
-    display: block;
-  }
-
   // Skeleton State
   .#{$prefix}--snippet--code.#{$prefix}--skeleton {
     height: rem(98px);
