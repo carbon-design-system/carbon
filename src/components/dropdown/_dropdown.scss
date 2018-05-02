@@ -188,8 +188,26 @@
   .#{$prefix}--dropdown--inline {
     background-color: transparent;
 
+    &:focus {
+      outline: none;
+    }
+
+    &:focus .#{$prefix}--dropdown-text {
+      @include focus-outline('border');
+    }
+
     &[data-value=''] .#{$prefix}--dropdown-text {
       color: $brand-01;
+    }
+
+    .#{$prefix}--dropdown-text {
+      display: inline-block;
+      padding-right: 1.5rem;
+      overflow: visible;
+    }
+
+    .#{$prefix}--dropdown-text:hover {
+      background-color: $field-01;
     }
 
     &.#{$prefix}--dropdown--open:focus {
@@ -200,8 +218,8 @@
       @include layer('overlay');
     }
 
-    &:not(.#{$prefix}--dropdown--open):hover {
-      background-color: $field-01;
+    &.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-text {
+      outline: none;
     }
 
     .#{$prefix}--dropdown__arrow {
