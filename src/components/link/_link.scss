@@ -21,6 +21,10 @@
     text-decoration: underline;
     transition: $transition--base;
 
+    > svg {
+      fill: $brand-01;
+    }
+
     &:visited {
       color: $brand-01;
     }
@@ -29,6 +33,10 @@
     &:hover,
     &:focus {
       color: $hover-primary-text;
+
+      > svg {
+        fill: $hover-primary-text;
+      }
     }
 
     &:focus {
