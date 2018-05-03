@@ -30,7 +30,8 @@
     }
 
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+      border: 1px solid $brand-01;
     }
 
     &:disabled {
