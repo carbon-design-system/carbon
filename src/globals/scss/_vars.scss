@@ -103,6 +103,5 @@ $structured-list-padding: 2rem !default;
 $structured-list-text-transform: none !default;
 
 // Skeleton Loading
-// ** need to add correct color variables here **
-$skeleton-background: #ebf0f7 !default;
-$skeleton-bar: #d9e3f0 !default;
+
+$skeleton: rgba($color__blue-51, 0.1) !default; //old $field-01

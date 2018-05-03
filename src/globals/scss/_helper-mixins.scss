@@ -118,7 +118,7 @@
   padding: 0;
   box-shadow: none;
   pointer-events: none;
-  background: $skeleton-background;
+  background: $skeleton;
 
   &:hover,
   &:focus,
@@ -136,7 +136,7 @@
     top: 0;
     left: 0;
     opacity: 0.3;
-    background: $skeleton-bar;
+    background: $skeleton;
     animation: 3000ms ease-in-out skeleton infinite;
   }
 }
