@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
+import SearchFilterButton from '../SearchFilterButton';
+import SearchLayoutButton from '../SearchLayoutButton';
 
 export default class Search extends Component {
   static propTypes = {
@@ -24,7 +26,6 @@ export default class Search extends Component {
   };
 
   state = {
-    format: 'list',
     hasContent: this.props.value || this.props.defaultValue || false,
   };
 
@@ -44,73 +45,12 @@ export default class Search extends Component {
     this.setState({ hasContent: false }, () => this.input.focus());
   };
 
-  toggleLayout = () => {
-    if (this.state.format === 'list') {
-      this.setState({
-        format: 'grid',
-      });
-    } else {
-      this.setState({
-        format: 'list',
-      });
-    }
-  };
-
   handleChange = evt => {
     this.setState({
       hasContent: evt.target.value !== '',
     });
 
     this.props.onChange(evt);
-  };
-
-  // eslint-disable-next-line consistent-return
-  searchFilterBtn = () => {
-    if (!this.props.small) {
-      return (
-        <button
-          className="bx--search-button"
-          type="button"
-          aria-label={this.props.searchButtonLabelText}>
-          <Icon
-            name="filter--glyph"
-            description="filter"
-            className="bx--search-filter"
-          />
-        </button>
-      );
-    }
-  };
-
-  // eslint-disable-next-line consistent-return
-  searchLayoutBtn = () => {
-    if (!this.props.small) {
-      return (
-        <button
-          className="bx--search-button"
-          type="button"
-          onClick={this.toggleLayout}
-          aria-label={this.props.layoutButtonLabelText}>
-          {this.state.format === 'list' ? (
-            <div className="bx--search__toggle-layout__container">
-              <Icon
-                name="list"
-                description="list"
-                className="bx--search-view"
-              />
-            </div>
-          ) : (
-            <div className="bx--search__toggle-layout__container">
-              <Icon
-                name="grid"
-                description="toggle-layout"
-                className="bx--search-view"
-              />
-            </div>
-          )}
-        </button>
-      );
-    }
   };
 
   render() {
@@ -124,7 +64,10 @@ export default class Search extends Component {
           .substr(2)}`),
       placeHolderText,
       labelText,
+      searchButtonLabelText,
+      layoutButtonLabelText,
       small,
+      children,
       ...other
     } = this.props;
 
@@ -141,6 +84,8 @@ export default class Search extends Component {
       'bx--search-close': true,
       'bx--search-close--hidden': !hasContent,
     });
+
+    const renderButtons = !children && !small;
 
     return (
       <div className={searchClasses} role="search">
@@ -169,8 +114,13 @@ export default class Search extends Component {
           className={clearClasses}
           onClick={this.clearInput}
         />
-        {this.searchFilterBtn()}
-        {this.searchLayoutBtn()}
+        {children}
+        {renderButtons && (
+          <SearchFilterButton labelText={searchButtonLabelText} />
+        )}
+        {renderButtons && (
+          <SearchLayoutButton labelText={layoutButtonLabelText} />
+        )}
       </div>
     );
   }

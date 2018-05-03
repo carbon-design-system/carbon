@@ -120,12 +120,6 @@ describe('Search', () => {
           const icon = wrapper.find(Icon).at(3);
           expect(icon.props().name).toEqual('list');
         });
-
-        it('should use "grid" icon when format state is not "list"', () => {
-          wrapper.setState({ format: 'not-list' });
-          const icon = wrapper.find(Icon).at(3);
-          expect(icon.props().name).toEqual('grid');
-        });
       });
     });
 
