@@ -25,7 +25,7 @@
     font-weight: 300;
     height: rem(40px);
     color: $text-01;
-    background-color: $field-01;
+    background-color: $field-02;
     border: $input-border;
     border-radius: 0;
 
@@ -84,7 +84,7 @@
     }
 
     &:hover svg {
-      fill: $brand-02;
+      fill: $hover-primary;
     }
   }
 
@@ -96,16 +96,86 @@
     // Hover styles for use with old HTML w/o button
     &:hover {
       cursor: pointer;
-      fill: $brand-02;
+      fill: $hover-primary;
     }
   }
-}
 
-.#{$prefix}--number[data-invalid] {
-  input[type='number'] {
-    box-shadow: 0 2px 0px 0px $support-01;
+  .#{$prefix}--number[data-invalid] {
+    input[type='number'] {
+      box-shadow: 0 2px 0px 0px $support-01;
+    }
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+    }
   }
-  ~ .#{$prefix}--form-requirement {
-    max-height: rem(200px);
+
+  .#{$prefix}--number--v2 {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .#{$prefix}--number--v2 .#{$prefix}--number__controls {
+    position: absolute;
+    left: auto;
+    right: 0.5rem;
+    bottom: 0.5rem;
+  }
+
+  .#{$prefix}--number--v2[data-invalid] .#{$prefix}--number__controls {
+    bottom: 0.75rem;
+  }
+
+  .#{$prefix}--number--v2 input[type='number'] {
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 2;
+    background: $field-01;
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &:focus ~ .#{$prefix}--form__helper-text {
+      z-index: 0;
+      max-height: 3rem;
+      opacity: 1;
+      margin-bottom: $spacing-xs;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--number--v2[data-invalid] input[type='number'],
+  .#{$prefix}--number--v2[data-invalid] input[type='number']:focus {
+    outline: none;
+    box-shadow: 0 2px 0 0 $support-01;
+  }
+
+  .#{$prefix}--number--v2[data-invalid] input[type='number']:focus ~ .#{$prefix}--label {
+    color: $support-01;
+  }
+
+  .#{$prefix}--number--light input[type='number'] {
+    background-color: $field-02;
   }
 }

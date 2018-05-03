@@ -21,7 +21,7 @@
     position: relative;
     list-style: none;
     display: block;
-    background-color: $field-01;
+    background-color: $field-02;
     width: 100%;
     height: rem(40px);
     cursor: pointer;
@@ -35,6 +35,10 @@
       outline: 1px solid transparent;
       box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
     }
+  }
+
+  .#{$prefix}--dropdown--light {
+    background-color: $field-02;
   }
 
   .#{$prefix}--dropdown--up {
@@ -64,7 +68,7 @@
   }
 
   .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
-    color: $text-03;
+    color: $text-02;
   }
 
   .#{$prefix}--dropdown-text {
@@ -111,10 +115,10 @@
 
     &:hover,
     &:focus {
-      background-color: $brand-01;
-      color: $inverse-01;
+      background-color: $hover-row;
       outline: 1px solid transparent;
       text-decoration: underline;
+      color: $text-01;
     }
   }
 
@@ -152,6 +156,30 @@
 
     &:focus {
       outline: none;
+    }
+  }
+
+  .#{$prefix}--dropdown--v2 {
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 1;
+    background: $field-01;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &.#{$prefix}--dropdown--light {
+      background: $field-02;
+    }
+  }
+
+  .#{$prefix}--dropdown--v2.#{$prefix}--dropdown--open:focus {
+    box-shadow: none;
+
+    .#{$prefix}--dropdown-list {
+      box-shadow: 0 2px 0 0 $brand-01;
     }
   }
 }
