@@ -28,7 +28,7 @@
     @include font-family;
     appearance: none;
     border: none;
-    background-color: $field-01;
+    background-color: $field-01--old;
     color: $text-01;
     font-weight: 600;
     padding: 0 $spacing-2xl;
@@ -40,7 +40,7 @@
     }
 
     &::placeholder {
-      @include placeholder-colors;
+      color: $text-02;
       font-weight: 400;
     }
 
@@ -70,6 +70,7 @@
   .#{$prefix}--search-magnifier {
     left: 0.75rem;
     fill: $ui-05;
+    z-index: 2;
   }
 
   .#{$prefix}--search-close {
@@ -110,6 +111,7 @@
     background-color: $ui-01;
     position: relative;
     padding: 0;
+    outline: 1px solid transparent;
   }
 
   .#{$prefix}--search-button svg {
@@ -126,7 +128,7 @@
   .#{$prefix}--search-button:hover,
   .#{$prefix}--search-button:focus {
     cursor: pointer;
-    background-color: $brand-01;
+    background-color: $hover-primary;
     outline: 1px solid transparent;
   }
 
@@ -142,5 +144,31 @@
 
   .#{$prefix}--search-view--hidden {
     display: none;
+  }
+
+  .#{$prefix}--search--v2 {
+    display: flex;
+  }
+
+  .#{$prefix}--search--v2 .#{$prefix}--search-input {
+    background: $field-01;
+    border: none;
+    order: 1;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus ~ .#{$prefix}--search-magnifier {
+      fill: $brand-01;
+    }
+  }
+
+  .#{$prefix}--search--v2 .#{$prefix}--search-button {
+    order: 2;
+  }
+
+  .#{$prefix}--search--light .#{$prefix}--search-input {
+    background: $field-02;
   }
 }

@@ -261,7 +261,12 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
 
   _updateClassNames = calendar => {
     const calendarContainer = calendar.calendarContainer;
-    calendarContainer.classList.add(this.options.classCalendarContainer);
+    if (this.element.dataset.datePickerVersion === 'v2') {
+      calendarContainer.classList.add(this.options.classCalendarContainer);
+      calendarContainer.classList.add(this.options.classCalendarContainerV2);
+    } else {
+      calendarContainer.classList.add(this.options.classCalendarContainer);
+    }
     calendarContainer.querySelector('.flatpickr-month').classList.add(this.options.classMonth);
     calendarContainer.querySelector('.flatpickr-weekdays').classList.add(this.options.classWeekdays);
     calendarContainer.querySelector('.flatpickr-days').classList.add(this.options.classDays);
@@ -322,6 +327,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       selectorDatePickerInputTo: '[data-date-picker-input-to]',
       selectorDatePickerIcon: '[data-date-picker-icon]',
       classCalendarContainer: `${prefix}--date-picker__calendar`,
+      classCalendarContainerV2: `${prefix}--date-picker__calendar--v2`,
       classMonth: `${prefix}--date-picker__month`,
       classWeekdays: `${prefix}--date-picker__weekdays`,
       classDays: `${prefix}--date-picker__days`,

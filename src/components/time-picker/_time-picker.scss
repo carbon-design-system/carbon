@@ -29,7 +29,7 @@
     @include typescale('zeta');
     display: flex;
     align-items: center;
-    background-color: $field-01;
+    background-color: $field-01--old;
     border: 1px solid transparent;
     width: 4.875rem;
     color: $text-01;
@@ -44,5 +44,63 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
+  }
+
+  .#{$prefix}--time-picker--v2 {
+    align-items: flex-end;
+
+    .#{$prefix}--time-picker__input {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .#{$prefix}--label {
+      order: 1;
+    }
+
+    .#{$prefix}--time-picker__input-field {
+      background: $field-01;
+      order: 2;
+      border: none;
+      box-shadow: 0 1px 0 0 $text-02;
+    }
+
+    .#{$prefix}--time-picker__input-field:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    .#{$prefix}--time-picker__input-field:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    .#{$prefix}--time-picker__input-field[data-invalid],
+    .#{$prefix}--time-picker__input-field[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    .#{$prefix}--time-picker__input-field[data-invalid]:focus ~ .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    .#{$prefix}--time-picker__input-field ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      max-height: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .#{$prefix}--time-picker__input-field[data-invalid] ~ .#{$prefix}--form-requirement {
+      overflow: visible;
+    }
+  }
+
+  .#{$prefix}--time-picker--light .#{$prefix}--time-picker__input-field {
+    background: $field-02;
   }
 }

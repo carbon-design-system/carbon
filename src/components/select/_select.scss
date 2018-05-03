@@ -27,7 +27,7 @@
     width: 100%;
     padding: 0 $spacing-2xl 0 $spacing-md;
     color: $text-01;
-    background-color: $field-01;
+    background-color: $field-01--old;
     border: $input-border;
     border-radius: 0;
     cursor: pointer;
@@ -73,26 +73,80 @@
       color: $text-01;
     }
   }
-}
 
-.#{$prefix}--select--inline {
-  display: flex;
-  align-items: center;
+  .#{$prefix}--select--inline {
+    display: flex;
+    align-items: center;
 
-  .#{$prefix}--label {
-    white-space: nowrap;
-    margin: 0 $spacing-xs 0 0;
-    font-weight: 400;
+    .#{$prefix}--label {
+      white-space: nowrap;
+      margin: 0 $spacing-xs 0 0;
+      font-weight: 400;
+    }
+
+    .#{$prefix}--select-input {
+      background-color: transparent;
+      color: $brand-01;
+      font-weight: 600;
+
+      &:disabled ~ * {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
   }
 
-  .#{$prefix}--select-input {
-    background-color: transparent;
-    color: $brand-01;
-    font-weight: 600;
+  .#{$prefix}--select--v2 {
+    display: flex;
+    flex-direction: column;
 
-    &:disabled ~ * {
-      opacity: 0.5;
-      cursor: not-allowed;
+    .#{$prefix}--select__arrow {
+      top: 2.625rem;
     }
+  }
+
+  .#{$prefix}--select--v2 .#{$prefix}--select-input {
+    background: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 2;
+    background: $field-01;
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus ~ .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background: $field-02;
   }
 }
