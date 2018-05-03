@@ -17,10 +17,6 @@
     flex: 1;
     margin-right: $spacing-md;
     margin-bottom: $spacing-lg;
-
-    &:last-of-type {
-      margin-bottom: 0;
-    }
   }
 
   .#{$prefix}--form-item--light input,
