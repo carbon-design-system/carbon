@@ -41,7 +41,8 @@
       background-color: $ui-01;
     }
 
-    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td {
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
       @include padding-td--condensed;
     }
   }
