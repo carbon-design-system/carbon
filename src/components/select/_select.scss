@@ -26,7 +26,7 @@
     width: 100%;
     padding: $spacing-sm $spacing-2xl $spacing-sm $spacing-md;
     color: $text-01;
-    background-color: $field-02;
+    background-color: $field-01--old;
     border: $input-border;
     border-radius: 0;
     cursor: pointer;
@@ -105,6 +105,7 @@
   }
 
   .#{$prefix}--select--v2 .#{$prefix}--select-input {
+    background: $field-01;
     border: none;
     box-shadow: 0 1px 0 0 $text-02;
     order: 2;
@@ -130,13 +131,6 @@
 
     &[data-invalid]:focus ~ .#{$prefix}--label {
       color: $support-01;
-    }
-
-    &:focus ~ .#{$prefix}--form__helper-text {
-      z-index: 0;
-      max-height: 3rem;
-      opacity: 1;
-      margin-bottom: $spacing-xs;
     }
 
     & ~ .#{$prefix}--form-requirement {

@@ -46,7 +46,7 @@
     height: rem(40px);
     max-width: 9rem;
     padding: 0 $spacing-md;
-    background-color: $field-02;
+    background-color: $field-01--old;
     color: $text-01;
     border: 1px solid transparent;
 
@@ -379,6 +379,7 @@
   }
 
   .#{$prefix}--date-picker--v2 .#{$prefix}--date-picker__input {
+    background: $field-01;
     border: none;
     box-shadow: 0 1px 0 0 $text-02;
     order: 2;
@@ -412,16 +413,9 @@
         display: none;
       }
     }
-
-    &:focus ~ .#{$prefix}--form__helper-text {
-      z-index: 0;
-      max-height: 3rem;
-      opacity: 1;
-      margin-bottom: $spacing-xs;
-    }
   }
 
-  .#{$prefix}--date-picker--light input {
+  .#{$prefix}--date-picker--v2.#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
     background: $field-02;
   }
 

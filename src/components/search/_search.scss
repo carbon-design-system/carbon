@@ -28,7 +28,7 @@
     @include font-family;
     appearance: none;
     border: none;
-    background-color: $field-02;
+    background-color: $field-01--old;
     color: $text-01;
     font-weight: 600;
     padding: 0 $spacing-2xl;
@@ -144,9 +144,17 @@
   }
 
   .#{$prefix}--search--v2 .#{$prefix}--search-input {
+    background: $field-01;
     border: none;
     order: 1;
-    background: $field-01;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus ~ .#{$prefix}--search-magnifier {
+      fill: $brand-01;
+    }
   }
 
   .#{$prefix}--search--v2 .#{$prefix}--search-button {

@@ -21,7 +21,7 @@
     position: relative;
     list-style: none;
     display: block;
-    background-color: $field-02;
+    background-color: $field-01--old;
     width: 100%;
     height: rem(40px);
     cursor: pointer;
@@ -160,6 +160,7 @@
   }
 
   .#{$prefix}--dropdown--v2 {
+    background: $field-01;
     border: none;
     box-shadow: 0 1px 0 0 $text-02;
     order: 1;
@@ -175,11 +176,15 @@
     }
   }
 
+  .#{$prefix}--dropdown--light {
+    background: $field-02;
+  }
+
   .#{$prefix}--dropdown--v2.#{$prefix}--dropdown--open:focus {
     box-shadow: none;
+  }
 
-    .#{$prefix}--dropdown-list {
-      box-shadow: 0 2px 0 0 $brand-01;
-    }
+  .#{$prefix}--dropdown--v2.#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+    @include layer('overlay');
   }
 }

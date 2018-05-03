@@ -22,7 +22,7 @@
     min-width: rem(300px);
     padding: 0 $spacing-md;
     color: $text-01;
-    background-color: $field-02;
+    background-color: $field-01--old;
     border: $input-border;
 
     &::-webkit-input-placeholder {
@@ -44,6 +44,7 @@
   }
 
   .#{$prefix}--text-input--v2 {
+    background: $field-01;
     border: none;
     box-shadow: 0 1px 0 0 $text-02;
     order: 2;
@@ -69,13 +70,6 @@
 
     &:focus ~ .#{$prefix}--label {
       color: $brand-01;
-    }
-
-    &:focus ~ .#{$prefix}--form__helper-text {
-      z-index: 0;
-      max-height: 3rem;
-      opacity: 1;
-      margin-bottom: $spacing-xs;
     }
 
     &[data-invalid]:focus + .#{$prefix}--label {
