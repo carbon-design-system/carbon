@@ -99,7 +99,6 @@
     @include reset;
     @include typescale('omega');
     font-weight: 600;
-    letter-spacing: 1px;
     text-align: left;
     text-transform: $data-table-heading-transform;
     height: rem(40px);

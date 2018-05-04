@@ -80,10 +80,10 @@
   .#{$prefix}--modal-header__label {
     @include reset;
     @include typescale('omega');
+    @include letter-spacing;
     color: $text-01;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     margin-bottom: $spacing-xs;
   }
 
