@@ -123,6 +123,13 @@ describe('NumberInput', () => {
           let numberInput = wrapper.find('input');
           expect(numberInput.prop('value')).toEqual(5);
         });
+
+        it('should set invalidText when value is empty string', () => {
+          wrapper.setProps({ value: '' });
+          const invalidText = wrapper.find('.bx--form-requirement');
+          expect(invalidText.length).toEqual(1);
+          expect(invalidText.text()).toEqual('invalid text');
+        });
       });
     });
 

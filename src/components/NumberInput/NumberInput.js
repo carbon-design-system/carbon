@@ -146,7 +146,7 @@ export default class NumberInput extends Component {
 
     const inputWrapperProps = {};
     let error = null;
-    if (invalid) {
+    if (invalid || this.state.value === '') {
       inputWrapperProps['data-invalid'] = true;
       error = <div className="bx--form-requirement">{invalidText}</div>;
     }
