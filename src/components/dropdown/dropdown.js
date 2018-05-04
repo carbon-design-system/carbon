@@ -143,7 +143,9 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
 
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
-        const text = this.element.querySelector(this.options.selectorText);
+        const selectorText =
+          this.element.dataset.dropdownType !== 'inline' ? this.options.selectorText : this.options.selectorTextInner;
+        const text = this.element.querySelector(selectorText);
         if (text) {
           text.innerHTML = itemToSelect.innerHTML;
         }
@@ -189,6 +191,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find selectors.
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
+   * @property {string} [selectorTextInner] The CSS selector to find the element showing the selected item, used for inline mode.
    * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
@@ -204,6 +207,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     return {
       selectorInit: '[data-dropdown]',
       selectorText: `.${prefix}--dropdown-text`,
+      selectorTextInner: `.${prefix}--dropdown-text__inner`,
       selectorItem: `.${prefix}--dropdown-link`,
       selectorItemSelected: `.${prefix}--dropdown--selected`,
       classSelected: `${prefix}--dropdown--selected`,
