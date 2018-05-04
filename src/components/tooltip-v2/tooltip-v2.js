@@ -64,6 +64,7 @@ class TooltipV2 extends mixin(createComponent, initComponentByEvent, eventedShow
    * A flag to detect if `oncontextmenu` event is fired right before `focus`/`blur` events.
    * @type {boolean}
    */
+  _hasContextMenu = false;
 
   /**
    * The debounced version of the event handler.
@@ -77,8 +78,8 @@ class TooltipV2 extends mixin(createComponent, initComponentByEvent, eventedShow
    * @param {Event} event The event triggering the creation.
    */
   createdByEvent(event) {
-    const { type } = event;
-    this._debouncedHandleClick({ type, details: getLaunchingDetails(event) });
+    const { relatedTarget, type } = event;
+    this._debouncedHandleClick({ relatedTarget, type, details: getLaunchingDetails(event) });
   }
 
   /**
@@ -118,8 +119,10 @@ class TooltipV2 extends mixin(createComponent, initComponentByEvent, eventedShow
     ['focus', 'blur', 'touchleave', 'touchcancel'].forEach(name => {
       this.manage(
         on(element, name, event => {
-          const { type } = event;
-          this._debouncedHandleClick({ type, details: getLaunchingDetails(event) });
+          const { target, type } = event;
+          const hadContextMenu = this._hasContextMenu;
+          this._hasContextMenu = type === 'contextmenu';
+          this._debouncedHandleClick({ target, type, hadContextMenu, details: getLaunchingDetails(event) });
         })
       );
     });
@@ -128,19 +131,28 @@ class TooltipV2 extends mixin(createComponent, initComponentByEvent, eventedShow
   /**
    * Handles click/focus events.
    * @param {Object} params The parameters.
+   * @param {number} params.target
    * @param {string} params.type The event type triggering this method.
+   * @param {boolean} params.hadContextMenu
    * @param {Object} params.details The event details.
    * @private
    */
 
-  _handleClick({ type, details }) {
+  _handleClick({ target, type, hadContextMenu, details }) {
     const state = {
       focus: 'shown',
       blur: 'hidden',
       touchleave: 'hidden',
       touchcancel: 'hidden',
     }[type];
+
     let shouldPreventClose;
+    if (type === 'blur') {
+      // Note: SVGElement in IE11 does not have `.contains()`
+      const wentToSelf =
+        (target && (this.element.contains && this.element.contains(target))) || this.tooltip.element.contains(target);
+      shouldPreventClose = hadContextMenu || wentToSelf;
+    }
     if (!shouldPreventClose) {
       this.changeState(state, details);
     }

@@ -9,7 +9,7 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tooltip-v2') {
-  .#{$prefix}--tooltip-v2--simple {
+  .#{$prefix}--tooltip-v2--icon {
     display: flex;
     align-items: center;
   }
@@ -23,7 +23,6 @@
     font-weight: 600;
 
     svg {
-      fill: $brand-01;
       margin-left: $spacing-xs;
       cursor: pointer;
 
@@ -33,9 +32,18 @@
       }
     }
 
+    path,
+    polygon,
+    circle {
+      fill: $brand-01;
+    }
+
     &:hover,
     &:focus {
-      svg {
+      color: $text-01;
+      path,
+      polygon,
+      circle {
         fill: $brand-02;
       }
     }
@@ -57,6 +65,13 @@
     p {
       @include font-family;
       @include typescale('zeta');
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 1rem;
     }
 
     .#{$prefix}--tooltip-v2__label {
@@ -114,20 +129,99 @@
     display: block;
   }
 
-  // Simple Icon CSS only tooltip
-  .#{$prefix}--tooltip--simple-v2__top,
-  .#{$prefix}--tooltip--simple-v2__bottom {
+  // Tooltip Definition
+  // Definition CSS only tooltip
+  .#{$prefix}--tooltip-v2--definition {
     @include font-family;
     @include reset;
     @include typescale('delta');
+
+    .#{$prefix}--tooltip-v2__trigger {
+      display: inline-flex;
+      position: relative;
+      border-bottom: 2px dotted $ui-04;
+
+      &:hover {
+        border-bottom: 2px dotted $brand-01; // change to $hover-primary
+        cursor: pointer;
+
+        + .#{$prefix}--tooltip-v2--definition__top,
+        + .#{$prefix}--tooltip-v2--definition__bottom {
+          display: block;
+        }
+      }
+
+      &:focus {
+        @include focus-outline('border');
+
+        + .#{$prefix}--tooltip-v2--definition__top,
+        + .#{$prefix}--tooltip-v2--definition__bottom {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--tooltip-v2--definition__bottom,
+  .#{$prefix}--tooltip-v2--definition__top {
+    @include font-family;
+    @include typescale('omega');
+    @include layer('overlay');
+    position: absolute;
+    z-index: 1;
+    display: none;
+    background: #272d33; // change to $inverse-02 after TJ's PR
+    max-width: rem(170px);
+    margin-top: $spacing-sm;
+    padding: $spacing-xs;
+    color: $inverse-01;
+    border-radius: 4px;
+    pointer-events: none;
+    cursor: pointer;
+
+    &:after {
+      background: #272d33; // change to $inverse-02 after TJ's PR
+      position: absolute;
+      right: 0;
+      left: 0;
+      width: 0.6rem;
+      height: 0.6rem;
+      margin-left: 24px;
+      content: '';
+    }
+  }
+
+  // Tooltip Definition caret - bottom position
+  .#{$prefix}--tooltip-v2--definition__bottom {
+    &:after {
+      top: -0.3rem;
+      transform: rotate(-135deg);
+    }
+  }
+
+  // Tooltip Definition caret - top position
+  .#{$prefix}--tooltip-v2--definition__top {
+    top: 0.5rem;
+
+    &:after {
+      bottom: -0.3rem;
+      transform: rotate(45deg);
+    }
+  }
+
+  // Tooltip Icon
+  // Icon CSS only tooltip
+  .#{$prefix}--tooltip-v2--icon__top,
+  .#{$prefix}--tooltip-v2--icon__bottom {
+    @include font-family;
+    @include reset;
     position: relative;
     display: inline-flex;
     align-items: center;
     cursor: pointer;
 
-    svg {
+    path {
       fill: $brand-01;
-      margin-left: $spacing-xs;
     }
 
     // Tooltip - renders as a combo of :before and :after elements
@@ -136,18 +230,20 @@
       @include font-family;
       position: absolute;
       display: none;
-      background: $ui-01;
+      background-color: black; // change to $inverse-02 after TJ's PR
     }
 
     &:before {
-      @include typescale('zeta');
+      @include typescale('omega');
       @include layer('overlay');
       max-width: rem(170px);
-      padding: rem(10px) $spacing-xs;
-      border: 1px solid $ui-04;
+      margin-left: 50%;
+      padding: $spacing-2xs;
       border-radius: 4px;
-      color: $text-01;
+      color: $inverse-01;
+      font-weight: 400;
       content: attr(data-tooltip-text);
+      transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
     }
@@ -157,15 +253,13 @@
       left: 0;
       width: 0.6rem;
       height: 0.6rem;
-      border-right: 1px solid $ui-04;
-      border-bottom: 1px solid $ui-04;
       margin: 0 auto;
       content: '';
     }
 
     &:hover,
     &:focus {
-      svg {
+      path {
         fill: $brand-02;
       }
 
@@ -185,8 +279,8 @@
     }
   }
 
-  // Tooltip caret - top position
-  .#{$prefix}--tooltip--simple-v2__top {
+  // Tooltip Icon caret - top position
+  .#{$prefix}--tooltip-v2--icon__top {
     &:before {
       bottom: 1.8rem;
     }
@@ -197,8 +291,8 @@
     }
   }
 
-  // Tooltip caret - bottom position
-  .#{$prefix}--tooltip--simple-v2__bottom {
+  // Tooltip Icon caret - bottom position
+  .#{$prefix}--tooltip-v2--icon__bottom {
     &:before {
       top: 1.8rem;
     }
@@ -209,64 +303,11 @@
     }
   }
 
-  // Tooltip Definition
-  .#{$prefix}--tooltip-v2--definition {
-    .#{$prefix}--tooltip--simple-v2__bottom,
-    .#{$prefix}--tooltip--simple-v2__top {
-      &:after {
-        margin-left: rem(24px);
-      }
-
-      &:before,
-      &:after {
-        border: none;
-        background: black; // change to $inverse-02 after TJ's PR
-        color: $inverse-01;
-      }
-
-      &:focus .#{$prefix}--tooltip-v2__trigger {
-        @include focus-outline('border');
-        // border-bottom: 2px dotted $hover-primary; *uncomment after TJ's PR
-      }
-    }
-
-    .#{$prefix}--tooltip--simple-v2__top {
-      &:before {
-        bottom: 2.2rem;
-      }
-
-      &:after {
-        bottom: 2rem;
-      }
-    }
-
-    .#{$prefix}--tooltip--simple-v2__bottom {
-      &:before {
-        top: 2.2rem;
-      }
-
-      &:after {
-        top: 2rem;
-      }
-    }
-
+  // Tooltip position - icon only
+  .#{$prefix}--tooltip-v2--icon {
     .#{$prefix}--tooltip-v2__trigger {
-      border-bottom: 2px dotted $brand-01;
-
-      &:hover {
-        cursor: pointer;
-        // border-bottom: 2px dotted $hover-primary; *uncomment after TJ's PR
-      }
-    }
-  }
-
-  //Tooltip Icon Simple
-  .#{$prefix}--tooltip-v2--simple {
-    .#{$prefix}--tooltip--simple-v2__bottom,
-    .#{$prefix}--tooltip--simple-v2__top {
-      &:before {
-        margin-left: 50%;
-        transform: translateX(-50%);
+      svg {
+        margin-left: 0;
       }
     }
   }
