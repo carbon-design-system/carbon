@@ -41,7 +41,7 @@
       .#{$prefix}--module__title {
         @include typescale('zeta');
         @include font-smoothing;
-        letter-spacing: 0;
+        @include letter-spacing;
         font-weight: 600;
         color: $text-01;
       }
