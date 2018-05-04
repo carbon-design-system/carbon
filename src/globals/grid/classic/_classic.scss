@@ -3,9 +3,21 @@
 $max-width: 1600px;
 $columns: 12;
 
-$grid-breakpoints: (sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1600px);
-$gutter-breakpoints: (xs: 5px, sm: 10px);
-$grid-gutter-breakpoints: (xs: 3%, sm: 5%);
+$grid-breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px
+);
+$gutter-breakpoints: (
+  xs: 5px,
+  sm: 10px
+);
+$grid-gutter-breakpoints: (
+  xs: 3%,
+  sm: 5%
+);
 
 @mixin grid {
   .#{$prefix}--grid {
@@ -19,6 +31,10 @@ $grid-gutter-breakpoints: (xs: 3%, sm: 5%);
       margin-right: grid-gutter('sm');
       padding-left: gutter('sm');
       padding-right: gutter('sm');
+    }
+
+    @media (min-width: breakpoint('xxl')) {
+      margin: 0 auto;
     }
 
     &.max {

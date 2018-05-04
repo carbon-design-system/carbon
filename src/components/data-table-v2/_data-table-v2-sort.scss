@@ -54,6 +54,6 @@
     height: rem(9px);
     padding: $spacing-3xs;
     width: auto;
-    max-width: 14px;
+    min-width: 14px;
   }
 }

@@ -14,10 +14,15 @@ Use these modifiers with `.bx--inline-notification` class.
 
 | Selector                         | Description                        |
 |----------------------------------|------------------------------------|
-| .bx--toast-notification--error   | Apply error color to border and icon   |
-| .bx--toast-notification--success | Apply success color to border and icon |
-| .bx--toast-notification--info    | Apply info color to border and icon    |
-| .bx--toast-notification--warning | Apply warning color to border and icon |
+| .bx--inline-notification--error   | Apply error color to border and icon   |
+| .bx--inline-notification--success | Apply success color to border and icon |
+| .bx--inline-notification--info    | Apply info color to border and icon    |
+| .bx--inline-notification--warning | Apply warning color to border and icon |
+
+Use these modifiers with `.bx--toast-notification` class.
+
+| Selector                         | Description                        |
+|----------------------------------|------------------------------------|
 | .bx--toast-notification--error   | Apply error color on left border   |
 | .bx--toast-notification--success | Apply success color on left border |
 | .bx--toast-notification--info    | Apply info color on left border    |
