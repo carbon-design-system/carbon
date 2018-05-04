@@ -74,6 +74,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     ariaLabel="Select all rows"
                     checked={false}
                     id="data-table-7__select-all"
+                    indeterminate={false}
                     name="select-all"
                     onSelect={[Function]}
                   >
@@ -84,6 +85,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         ariaLabel="Select all rows"
                         checked={false}
                         id="data-table-7__select-all"
+                        indeterminate={false}
                         name="select-all"
                         onClick={[Function]}
                       >
@@ -399,6 +401,7 @@ exports[`DataTable selection should render 1`] = `
                     ariaLabel="Select all rows"
                     checked={false}
                     id="data-table-6__select-all"
+                    indeterminate={false}
                     name="select-all"
                     onSelect={[Function]}
                   >
@@ -409,6 +412,7 @@ exports[`DataTable selection should render 1`] = `
                         ariaLabel="Select all rows"
                         checked={false}
                         id="data-table-6__select-all"
+                        indeterminate={false}
                         name="select-all"
                         onClick={[Function]}
                       >

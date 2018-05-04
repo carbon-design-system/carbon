@@ -2,14 +2,22 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import InlineCheckbox from '../InlineCheckbox';
 
-const TableSelectAll = ({ ariaLabel, checked, id, name, onSelect }) => (
+const TableSelectAll = ({
+  ariaLabel,
+  checked,
+  id,
+  indeterminate,
+  name,
+  onSelect,
+}) => (
   <th scope="col">
     <InlineCheckbox
+      ariaLabel={ariaLabel}
+      checked={checked}
       id={id}
+      indeterminate={indeterminate}
       name={name}
       onClick={onSelect}
-      checked={checked}
-      ariaLabel={ariaLabel}
     />
   </th>
 );
@@ -29,6 +37,11 @@ TableSelectAll.propTypes = {
    * Provide an `id` for the underlying input control
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether the selection only has a subset of all items
+   */
+  indeterminate: PropTypes.bool,
 
   /**
    * Provide a `name` for the underlying input control

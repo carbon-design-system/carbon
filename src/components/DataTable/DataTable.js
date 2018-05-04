@@ -207,22 +207,24 @@ export default class DataTable extends React.Component {
     }
 
     // Otherwise, we're working on `TableSelectAll` which handles toggling the
-    // selection state of all rows. If we have no rows, then this value defaults
-    // to false.
-    const checked =
-      this.state.rowIds.length > 0
-        ? this.getSelectedRows().length === this.state.rowIds.length
-        : false;
+    // selection state of all rows.
+    const rowCount = this.state.rowIds.length;
+    const selectedRowCount = this.getSelectedRows().length;
+    const checked = rowCount > 0 && selectedRowCount === rowCount;
+    const indeterminate =
+      rowCount > 0 && selectedRowCount > 0 && selectedRowCount !== rowCount;
+
     const translationKey = checked
       ? translationKeys.unselectAll
       : translationKeys.selectAll;
     return {
       ...rest,
-      checked,
-      onSelect: composeEventHandlers([this.handleSelectAll, onClick]),
-      id: `${this.getTablePrefix()}__select-all`,
-      name: 'select-all',
       ariaLabel: t(translationKey),
+      checked,
+      id: `${this.getTablePrefix()}__select-all`,
+      indeterminate,
+      name: 'select-all',
+      onSelect: composeEventHandlers([this.handleSelectAll, onClick]),
     };
   };
 
