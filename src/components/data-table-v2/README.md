@@ -69,7 +69,7 @@ The update to tables splits out the `scss` files into multiple partial files wit
 ### FAQ
 
 **How do I sort the tables**
-The table component does not sort the table for you, rather it emits an event and toggles the sort UI. It is up to the user to re-render the table rows sorted; you can see this in action `here`.
+The table component does not sort the table for you, rather it emits an event and toggles the sort UI. It is up to the user to re-render the table rows sorted; you can see this in action [in the React Storybook](http://react.carbondesignsystem.com/?selectedKind=DataTable&selectedStory=with%20sorting&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 **How do I use the expandable rows**
 If you would like to programmatically expand table rows, you can add the `bx--expandable-row-v2` to the `selectorParentRows` elements.
