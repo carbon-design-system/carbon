@@ -73,11 +73,18 @@
   }
 
   .#{$prefix}--search-close {
-    transition: $transition--base;
+    @include button-reset(false);
+
+    transition: opacity $transition--base;
     fill: $ui-05;
     cursor: pointer;
     visibility: visible;
     opacity: 1;
+  }
+
+  .#{$prefix}--search-close:focus {
+    outline: 1px solid $brand-01;
+    outline-offset: 2px;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-close {
@@ -99,7 +106,7 @@
     height: rem(40px);
     width: rem(40px);
     min-width: rem(40px);
-    margin-left: $spacing-2xs;;
+    margin-left: $spacing-2xs;
     background-color: $ui-01;
     position: relative;
     padding: 0;
