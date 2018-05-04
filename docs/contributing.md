@@ -210,7 +210,7 @@ When you're at a good stopping place and you're ready for feedback from other co
 > - `<scope>` The scope could be anything specifying place of the commit change or the thing(s) that changed.
 >
 > __Commit message format:__
-> ```
+```
 <type>(<scope>): <subject>
 <BLANK LINE>
 <body>

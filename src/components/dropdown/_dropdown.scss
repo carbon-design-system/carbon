@@ -64,7 +64,7 @@
   }
 
   .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
-    color: $text-03;
+    color: $text-01;
   }
 
   .#{$prefix}--dropdown-text {
@@ -105,16 +105,18 @@
     display: block;
     color: currentColor;
     text-decoration: none;
+    font-weight: normal;
     padding: $spacing-md $spacing-lg $spacing-md $spacing-md;
     text-overflow: ellipsis;
     overflow: hidden;
 
     &:hover,
     &:focus {
-      background-color: $brand-01;
-      color: $inverse-01;
+      background-color: $field-01;
+      color: $text-01;
       outline: 1px solid transparent;
       text-decoration: underline;
+      color: $text-01;
     }
   }
 
@@ -152,6 +154,62 @@
 
     &:focus {
       outline: none;
+    }
+  }
+
+  .#{$prefix}--dropdown--inline {
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus .#{$prefix}--dropdown-text {
+      @include focus-outline('border');
+    }
+
+    &[data-value=''] .#{$prefix}--dropdown-text {
+      color: $brand-01;
+    }
+
+    .#{$prefix}--dropdown-text {
+      display: inline-block;
+      padding-right: 1.5rem;
+      overflow: visible;
+      color: $brand-01;
+    }
+
+    .#{$prefix}--dropdown-text:hover {
+      background-color: $field-01;
+    }
+
+    &.#{$prefix}--dropdown--open:focus {
+      box-shadow: none;
+    }
+
+    &.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
+      @include layer('overlay');
+    }
+
+    &.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-text {
+      outline: none;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      position: relative;
+      top: -2px;
+      left: 8px;
+      right: 0;
+      bottom: 0;
+    }
+
+    .#{$prefix}--dropdown-link {
+      font-weight: normal;
+    }
+
+    .#{$prefix}--dropdown-link:hover {
+      background-color: $field-01;
+      color: $text-01;
     }
   }
 }
