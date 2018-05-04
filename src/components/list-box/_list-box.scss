@@ -73,16 +73,11 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__field {
     @include button-reset;
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    width: 100%;
     height: 100%;
     padding: 0 1rem;
     cursor: pointer;
-  }
-
-  .#{$prefix}--list-box__field:hover {
-    background: $field-01;
   }
 
   .#{$prefix}--list-box__field:focus,
