@@ -171,9 +171,9 @@
   }
 
   .#{$prefix}--btn--sm {
+    @include letter-spacing;
     height: 2rem;
     padding: $button-padding-sm;
-    letter-spacing: 0;
   }
 
   .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,

@@ -61,6 +61,7 @@ td {
 
   .page__desc {
     @include font-smoothing;
+    @include letter-spacing;
     max-width: 38rem;
     color: $text-01;
     word-wrap: break-word;
@@ -68,7 +69,6 @@ td {
     line-height: 1.5;
     font-weight: 600;
     padding-bottom: 1rem;
-    letter-spacing: 0;
 
     span {
       color: $brand-01;
@@ -95,9 +95,9 @@ td {
 
     h1 {
       @include typescale('mega');
+      @include letter-spacing;
       font-weight: 300;
       line-height: 1.25;
-      letter-spacing: 0px;
 
       &#helvetica-neue-light {
         font-weight: 300;
@@ -151,7 +151,7 @@ td {
         display: block;
         background-color: $brand-01;
         position: absolute;
-        top: -.5rem;
+        top: -0.5rem;
         left: 0;
       }
 
@@ -170,10 +170,10 @@ td {
 
     h3 {
       @include typescale('delta');
+      @include letter-spacing;
       color: $brand-01;
       padding: 4rem 0 1rem;
       font-weight: 600;
-      letter-spacing: 0;
 
       & + h4 {
         padding-top: 0;
