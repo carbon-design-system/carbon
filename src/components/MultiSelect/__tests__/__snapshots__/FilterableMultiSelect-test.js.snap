@@ -76,7 +76,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
         type="default"
       >
         <div
-          className="bx--multi-select bx--combo-box bx--list-box bx--form-item"
+          className="bx--multi-select bx--combo-box bx--list-box"
         >
           <ListBoxField
             aria-expanded={false}

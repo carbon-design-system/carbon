@@ -63,7 +63,7 @@ exports[`DropdownV2 should render 1`] = `
       type="default"
     >
       <div
-        className="bx--dropdown-v2 bx--list-box bx--form-item"
+        className="bx--dropdown-v2 bx--list-box"
       >
         <ListBoxField
           aria-expanded={false}

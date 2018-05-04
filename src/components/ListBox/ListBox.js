@@ -21,7 +21,6 @@ const ListBox = ({
   const className = cx({
     [containerClassName]: !!containerClassName,
     'bx--list-box': true,
-    'bx--form-item': true,
     'bx--list-box--inline': type === 'inline',
     'bx--list-box--disabled': disabled,
   });
