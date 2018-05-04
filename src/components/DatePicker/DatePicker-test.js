@@ -167,4 +167,53 @@ describe('DatePicker', () => {
       expect(icon.length).toEqual(1);
     });
   });
+
+  describe('Date picker with locale', () => {
+    const wrapper = mount(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="range"
+        className="extra-class"
+        locale="es">
+        <div className="test-child">
+          <input
+            type="text"
+            className="bx--date-picker__input"
+            id="input-from"
+          />
+        </div>
+        <div className="test-child">
+          <input type="text" className="bx--date-picker__input" id="input-to" />
+        </div>
+      </DatePicker>
+    );
+
+    const wrapperNoLocale = mount(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="range"
+        className="extra-class">
+        <div className="test-child">
+          <input
+            type="text"
+            className="bx--date-picker__input"
+            id="input-from"
+          />
+        </div>
+        <div className="test-child">
+          <input type="text" className="bx--date-picker__input" id="input-to" />
+        </div>
+      </DatePicker>
+    );
+
+    it('has the range date picker locale', () => {
+      const datepicker = wrapper.find('DatePicker');
+      expect(datepicker.props().locale).toBe('es');
+    });
+
+    it('has the range date picker without locale defined', () => {
+      const datepicker = wrapperNoLocale.find('DatePicker');
+      expect(datepicker.props().locale).toBe('en');
+    });
+  });
 });

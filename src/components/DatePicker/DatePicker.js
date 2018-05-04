@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import flatpickr from 'flatpickr';
+import l10n from 'flatpickr/dist/l10n/index';
 import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
 import DatePickerInput from '../DatePickerInput';
 
 // Weekdays shorthand for english locale
-flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
-  const currentDay = flatpickr.l10ns.en.weekdays.shorthand;
+l10n.en.weekdays.shorthand.forEach((day, index) => {
+  const currentDay = l10n.en.weekdays.shorthand;
   if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
     currentDay[index] = 'Th';
   } else {
@@ -47,6 +48,113 @@ export default class DatePicker extends Component {
     dateFormat: PropTypes.string,
 
     /**
+     *  The language locale used to format the days of the week, months, and numbers.
+     *
+     * * `ar` - Arabic
+     * * `at` - Austria
+     * * `be` - Belarusian
+     * * `bg` - Bulgarian
+     * * `bn` - Bangla
+     * * `cat` - Catalan
+     * * `cs` - Czech
+     * * `cy` - Welsh
+     * * `da` - Danish
+     * * `de` - German
+     * * `en` - English
+     * * `eo` - Esperanto
+     * * `es` - Spanish
+     * * `et` - Estonian
+     * * `fa` - Persian
+     * * `fi` - Finnish
+     * * `fr` - French
+     * * `gr` - Greek
+     * * `he` - Hebrew
+     * * `hi` - Hindi
+     * * `hr` - Croatian
+     * * `hu` - Hungarian
+     * * `id` - Indonesian
+     * * `it` - Italian
+     * * `ja` - Japanese
+     * * `ko` - Korean
+     * * `lt` - Lithuanian
+     * * `lv` - Latvian
+     * * `mk` - Macedonian
+     * * `mn` - Mongolian
+     * * `ms` - Malaysian
+     * * `my` - Burmese
+     * * `nl` - Dutch
+     * * `no` - Norwegian
+     * * `pa` - Punjabi
+     * * `pl` - Polish
+     * * `pt` - Portuguese
+     * * `ro` - Romanian
+     * * `si` - Sinhala
+     * * `sk` - Slovak
+     * * `sl` - Slovenian
+     * * `sq` - Albanian
+     * * `sr` - Serbian
+     * * `sv` - Swedish
+     * * `th` - Thai
+     * * `tr` - Turkish
+     * * `uk` - Ukrainian
+     * * `vn` - Vietnamese
+     * * `zh` - Mandarin
+     */
+    locale: PropTypes.oneOf([
+      'ar',
+      'at',
+      'be',
+      'bg',
+      'bn',
+      'cat',
+      'cs',
+      'cy',
+      'da',
+      'de',
+      'en',
+      'en',
+      'eo',
+      'es',
+      'et',
+      'fa',
+      'fi',
+      'fr',
+      'gr',
+      'he',
+      'hi',
+      'hr',
+      'hu',
+      'id',
+      'it',
+      'ja',
+      'ko',
+      'lt',
+      'lv',
+      'mk',
+      'mn',
+      'ms',
+      'my',
+      'nl',
+      'no',
+      'pa',
+      'pl',
+      'pt',
+      'ro',
+      'ru',
+      'si',
+      'sk',
+      'sl',
+      'sq',
+      'sr',
+      'sv',
+      'th',
+      'tr',
+      'uk',
+      'vn',
+      'zh',
+    ]),
+
+    /**
      * The value of the date value provided to flatpickr, could
      * be a date, a date number, a date string, an array of dates.
      */
@@ -77,6 +185,7 @@ export default class DatePicker extends Component {
   static defaultProps = {
     short: false,
     dateFormat: 'm/d/Y',
+    locale: 'en',
   };
 
   componentWillUpdate(nextProps) {
@@ -96,7 +205,13 @@ export default class DatePicker extends Component {
   }
 
   componentDidMount() {
-    const { datePickerType, dateFormat, appendTo, onChange } = this.props;
+    const {
+      datePickerType,
+      dateFormat,
+      locale,
+      appendTo,
+      onChange,
+    } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
         this.updateClassNames(instance);
@@ -106,6 +221,7 @@ export default class DatePicker extends Component {
         mode: datePickerType,
         allowInput: true,
         dateFormat: dateFormat,
+        locale: l10n[locale],
         plugins:
           datePickerType === 'range'
             ? [new rangePlugin({ input: this.toInputField })]
