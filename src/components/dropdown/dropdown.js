@@ -141,11 +141,19 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       detail: { item: itemToSelect },
     });
 
+    const caretHTML = `
+    <svg width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
+      <path d="M10 0L5 5 0 0z"></path>
+    </svg>
+    `;
+
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
         const text = this.element.querySelector(this.options.selectorText);
-        if (text) {
+        if (text && this.element.dataset.dropdownType !== 'inline') {
           text.innerHTML = itemToSelect.innerHTML;
+        } else {
+          text.innerHTML = `${itemToSelect.innerHTML} ${caretHTML}`;
         }
         itemToSelect.classList.add(this.options.classSelected);
       }
