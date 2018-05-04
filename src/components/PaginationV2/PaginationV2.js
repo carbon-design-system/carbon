@@ -10,24 +10,102 @@ let instanceId = 0;
 
 export default class PaginationV2 extends Component {
   static propTypes = {
+    /**
+     * The description for the backward icon.
+     */
     backwardText: PropTypes.string,
+
+    /**
+     * The CSS class names.
+     */
     className: PropTypes.string,
+
+    /**
+     * The function returning a translatable text showing where the current page is,
+     * in a manner of the range of items.
+     */
     itemRangeText: PropTypes.func,
+
+    /**
+     * The description for the forward icon.
+     */
     forwardText: PropTypes.string,
+
+    /**
+     * The unique ID of this component instance.
+     */
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * The translatable text indicating the number of items per page.
+     */
     itemsPerPageText: PropTypes.string,
+
+    /**
+     * A variant of `itemsPerPageText`, with a sign indicating that the number follows, e.g. ':'.
+     */
+    itemsPerPageFollowsText: PropTypes.string,
+
+    /**
+     * A variant of `itemRangeText`, used if the total number of items is unknown.
+     */
     itemText: PropTypes.func,
+
+    /**
+     * The callback function called when the current page changes.
+     */
     onChange: PropTypes.func,
+
     pageNumberText: PropTypes.string,
+
+    /**
+     * A function returning PII showing where the current page is.
+     */
     pageRangeText: PropTypes.func,
+
+    /**
+     * The translatable text showing the current page.
+     */
     pageText: PropTypes.func,
+
+    /**
+     * The choices for `pageSize`.
+     */
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+
+    /**
+     * The total number of items.
+     */
     totalItems: PropTypes.number,
+
+    /**
+     * `true` if the backward/forward buttons should be disabled.
+     */
     disabled: PropTypes.bool,
+
+    /**
+     * The current page.
+     */
     page: PropTypes.number,
+
+    /**
+     * The number dictating how many items a page contains.
+     */
     pageSize: PropTypes.number,
+
+    /**
+     * `true` if the total number of items is unknown.
+     */
     pagesUnknown: PropTypes.bool,
+
+    /**
+     * `true` if the current page should be the last page.
+     */
     isLastPage: PropTypes.bool,
+
+    /**
+     * `true` if the select box to change the page should be disabled.
+     */
     pageInputDisabled: PropTypes.bool,
   };
 
@@ -125,6 +203,7 @@ export default class PaginationV2 extends Component {
       forwardText,
       id,
       itemsPerPageText,
+      itemsPerPageFollowsText,
       itemRangeText,
       pageRangeText,
       pageSize, // eslint-disable-line no-unused-vars
@@ -159,7 +238,7 @@ export default class PaginationV2 extends Component {
       <div className={classNames} {...other}>
         <div className="bx--pagination__left">
           <span className="bx--pagination__text">
-            {itemsPerPageText}:&nbsp;&nbsp;
+            {itemsPerPageFollowsText || `${itemsPerPageText}:`}&nbsp;&nbsp;
           </span>
           <Select
             id={`bx-pagination-select-${inputId}`}
