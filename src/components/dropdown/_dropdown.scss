@@ -21,7 +21,7 @@
     position: relative;
     list-style: none;
     display: block;
-    background-color: $field-02;
+    background-color: $field-01;
     width: 100%;
     height: rem(40px);
     cursor: pointer;
@@ -35,10 +35,6 @@
       outline: 1px solid transparent;
       box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
     }
-  }
-
-  .#{$prefix}--dropdown--light {
-    background-color: $field-02;
   }
 
   .#{$prefix}--dropdown--up {
@@ -55,8 +51,7 @@
     }
   }
 
-  .#{$prefix}--dropdown__arrow,
-  .#{$prefix}--dropdown-text svg {
+  .#{$prefix}--dropdown__arrow {
     fill: $brand-01;
     position: absolute;
     right: 1rem;
@@ -130,8 +125,7 @@
   }
 
   .#{$prefix}--dropdown--open {
-    .#{$prefix}--dropdown__arrow,
-    .#{$prefix}--dropdown-text svg {
+    .#{$prefix}--dropdown__arrow {
       transform: rotate(-180deg);
     }
 
@@ -201,8 +195,7 @@
       outline: none;
     }
 
-    .#{$prefix}--dropdown__arrow,
-    .#{$prefix}--dropdown-text svg {
+    .#{$prefix}--dropdown__arrow {
       position: relative;
       top: -2px;
       left: 8px;
