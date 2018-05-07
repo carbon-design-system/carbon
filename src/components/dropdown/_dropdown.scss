@@ -129,7 +129,10 @@
 
     .#{$prefix}--dropdown-list {
       max-height: 15rem;
-      overflow: auto;
+
+      &:hover {
+        overflow: auto;
+      }
     }
 
     &:focus {
