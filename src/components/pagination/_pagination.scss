@@ -3,6 +3,7 @@ $css--helpers: true;
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/css--helpers';
@@ -175,5 +176,11 @@ $css--helpers: true;
     .#{$prefix}--select__arrow {
       right: 0.3rem;
     }
+  }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-right: 1rem;
+    margin-bottom: 0;
   }
 }

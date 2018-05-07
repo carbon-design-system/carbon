@@ -73,7 +73,7 @@
     display: flex;
     flex-direction: column;
     z-index: z('dropdown');
-    
+
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
       flex-direction: row;
@@ -177,5 +177,26 @@
         box-shadow: 0 0 0 1px $brand-01;
       }
     }
+  }
+
+  // Skeleton state
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+    @include skeleton;
+    width: rem(100px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+    @include hidden;
   }
 }

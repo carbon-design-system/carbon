@@ -26,7 +26,7 @@
       .#{$prefix}--accordion__arrow {
         @include focus-outline('border');
         overflow: visible; // safari fix
-        outline-offset: -.5px; // safari fix
+        outline-offset: -0.5px; // safari fix
       }
     }
 
@@ -53,7 +53,7 @@
       .#{$prefix}--accordion__arrow {
         @include focus-outline('border');
         overflow: visible; // safari fix
-        outline-offset: -.5px; // safari fix
+        outline-offset: -0.5px; // safari fix
       }
     }
   }
@@ -82,22 +82,52 @@
       @include typescale('zeta');
     }
   }
-}
 
-.#{$prefix}--accordion__item--active {
-  overflow: visible;
+  .#{$prefix}--accordion__item--active {
+    overflow: visible;
 
-  .#{$prefix}--accordion__content {
-    padding-top: $spacing-md;
-    padding-bottom: $spacing-lg;
-    height: auto;
-    visibility: visible;
-    opacity: 1;
-    transition: all $transition--expansion $carbon--ease-in;
+    .#{$prefix}--accordion__content {
+      padding-top: $spacing-md;
+      padding-bottom: $spacing-lg;
+      height: auto;
+      visibility: visible;
+      opacity: 1;
+      transition: all $transition--expansion $carbon--ease-in;
+    }
+
+    .#{$prefix}--accordion__arrow {
+      transform: rotate(90deg);
+      fill: $brand-01;
+    }
   }
 
-  .#{$prefix}--accordion__arrow {
-    transform: rotate(90deg);
-    fill: $brand-01;
+  // Skeleton state
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__heading,
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__button {
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    pointer-events: none;
+    fill: $ui-05;
+    cursor: default;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+      cursor: default;
+    }
+  }
+
+  .#{$prefix}--skeleton .#{$prefix}--accordion__heading:focus .#{$prefix}--accordion__arrow {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
+    margin-bottom: 0;
   }
 }

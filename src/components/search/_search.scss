@@ -143,4 +143,14 @@
   .#{$prefix}--search-view--hidden {
     display: none;
   }
+
+  .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
+  .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
+    @include skeleton;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
 }

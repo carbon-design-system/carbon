@@ -2,6 +2,7 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import 'mixins';
 @import '../../globals/scss/css--reset';
@@ -179,5 +180,11 @@
   .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
   .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger--primary {
     margin-left: $spacing-md;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(150px);
   }
 }

@@ -34,7 +34,7 @@ $text-01: $color__blue-90 !default;
 $text-02: $color__navy-gray-6 !default;
 $text-03: $color__navy-gray-6 !default;
 $field-01: rgba($color__blue-51, 0.1) !default;
-$support-01: #E0182D !default;
+$support-01: #e0182d !default;
 $support-02: $color__green-40 !default;
 $support-03: $color__yellow-30 !default;
 $support-04: $color__blue-30 !default;
@@ -65,7 +65,7 @@ $accordion-flex-direction: row !default;
 $accordion-justify-content: flex-start !default;
 $accordion-arrow-margin: 0 0 0 $spacing-2xs !default;
 $accordion-title-margin: 0 0 0 $spacing-md !default;
-$accordion-content-padding: 0 $spacing-md 0  $spacing-2xl !default;
+$accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default;
 
 // Card
 $card-text-align: center !default;
@@ -101,3 +101,7 @@ $radio-border-width: 2px !default;
 // Structured Theme Variables
 $structured-list-padding: 2rem !default;
 $structured-list-text-transform: none !default;
+
+// Skeleton Loading
+
+$skeleton: rgba($color__blue-51, 0.1) !default; //old $field-01
