@@ -212,4 +212,9 @@
       color: $text-01;
     }
   }
+
+  // Skeleton State
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton {
+    @include skeleton;
+  }
 }

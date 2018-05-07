@@ -174,4 +174,37 @@
       transition: $transition--base $carbon--standard-easing;
     }
   }
+
+  // Skeleton state
+  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label {
+    cursor: default;
+  }
+
+  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__appearance {
+    &:before,
+    &:after {
+      background-color: $brand-01;
+      border-color: $brand-01;
+      cursor: default;
+    }
+  }
+
+  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__text--right {
+    @include skeleton;
+    width: rem(20px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__appearance {
+    &:before {
+      background: transparent;
+      border-color: $ui-05;
+    }
+
+    &:after {
+      background-color: $ui-05;
+      border: none;
+    }
+  }
 }

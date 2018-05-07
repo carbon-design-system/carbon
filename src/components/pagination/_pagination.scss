@@ -176,4 +176,10 @@ $css--helpers: true;
       right: 0.3rem;
     }
   }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
 }

@@ -128,6 +128,40 @@
     }
   }
 
+  // Skeleton State
+  .#{$prefix}--structured-list.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th {
+      &:first-child {
+        width: 8%;
+      }
+
+      &:nth-child(3n + 2) {
+        width: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        width: 15%;
+      }
+    }
+
+    .bx--structured-list-th span {
+      @include skeleton;
+      width: 75%;
+      height: 1rem;
+      display: block;
+    }
+  }
+
+  .#{$prefix}--structured-list.#{$prefix}--structured-list--border.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th:first-child {
+      width: 5%;
+
+      span {
+        display: none;
+      }
+    }
+  }
+
   // Deprecated class
   .#{$prefix}--structured-list-content {
     @include typescale('zeta');

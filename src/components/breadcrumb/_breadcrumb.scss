@@ -63,4 +63,11 @@
       }
     }
   }
+
+  // Skeleton State
+  .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
+    @include skeleton;
+    width: rem(100px);
+    height: 1rem;
+  }
 }

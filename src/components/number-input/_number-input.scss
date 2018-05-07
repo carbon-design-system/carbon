@@ -99,13 +99,24 @@
       fill: $brand-02;
     }
   }
-}
 
-.#{$prefix}--number[data-invalid] {
-  input[type='number'] {
-    box-shadow: 0 2px 0px 0px $support-01;
+  .#{$prefix}--number[data-invalid] {
+    input[type='number'] {
+      box-shadow: 0 2px 0px 0px $support-01;
+    }
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+    }
   }
-  ~ .#{$prefix}--form-requirement {
-    max-height: rem(200px);
+
+  // Skeleton State
+  .#{$prefix}--number.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+
+    input[type='number'] {
+      display: none;
+    }
   }
 }
