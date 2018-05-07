@@ -238,8 +238,9 @@ export default class PaginationV2 extends Component {
       <div className={classNames} {...other}>
         <div className="bx--pagination__left">
           <span className="bx--pagination__text">
-            {itemsPerPageFollowsText || `${itemsPerPageText}:`}&nbsp;&nbsp;
+            {itemsPerPageFollowsText || `${itemsPerPageText}:`}
           </span>
+
           <Select
             id={`bx-pagination-select-${inputId}`}
             labelText={itemsPerPageText}
