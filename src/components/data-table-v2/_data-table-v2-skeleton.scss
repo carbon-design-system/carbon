@@ -18,7 +18,8 @@
       }
     }
 
-    th span {
+    th span,
+    td span {
       @include skeleton;
       width: 75%;
       height: 1rem;
