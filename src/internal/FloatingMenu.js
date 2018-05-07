@@ -155,6 +155,11 @@ class FloatingMenu extends React.Component {
      * The callback called when the menu body has been mounted to/will be unmounted from the DOM.
      */
     menuRef: PropTypes.func,
+
+    /**
+     * The callback called when the menu body has been mounted and positioned.
+     */
+    onPlace: PropTypes.func,
   };
 
   static defaultProps = {
@@ -162,6 +167,9 @@ class FloatingMenu extends React.Component {
     menuOffset: {},
     menuDirection: DIRECTION_BOTTOM,
   };
+
+  // `true` if the menu body is mounted and calculation of the position is in progress.
+  _placeInProgress = false;
 
   state = {
     /**
@@ -260,6 +268,15 @@ class FloatingMenu extends React.Component {
     } else {
       this._updateMenuSize(prevProps);
     }
+    const { onPlace } = this.props;
+    if (
+      this._placeInProgress &&
+      this.state.floatingPosition &&
+      typeof onPlace === 'function'
+    ) {
+      onPlace(this._menuBody);
+      this._placeInProgress = false;
+    }
   }
 
   componentDidMount() {
@@ -281,6 +298,7 @@ class FloatingMenu extends React.Component {
           this._getChildrenWithProps(),
           this._menuContainer,
           () => {
+            this._placeInProgress = true;
             menuRef && menuRef(this._menuBody);
           }
         );
@@ -289,6 +307,7 @@ class FloatingMenu extends React.Component {
       if (this.el && this.el.firstChild) {
         this._menuBody = this.el.firstChild;
         document.body.appendChild(this._menuBody);
+        this._placeInProgress = true;
         menuRef && menuRef(this._menuBody);
       }
       this._updateMenuSize();
@@ -298,6 +317,7 @@ class FloatingMenu extends React.Component {
   componentWillUnmount() {
     const { menuRef } = this.props;
     menuRef && menuRef(null);
+    this._placeInProgress = false;
     if (!hasCreatePortal) {
       const menuContainer = this._menuContainer;
       ReactDOM.unmountComponentAtNode(menuContainer);

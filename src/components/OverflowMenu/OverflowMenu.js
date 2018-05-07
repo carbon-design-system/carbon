@@ -6,6 +6,22 @@ import FloatingMenu from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
 import Icon from '../Icon';
 
+const matchesFuncName =
+  typeof Element !== 'undefined' &&
+  ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(
+    name => typeof Element.prototype[name] === 'function'
+  )[0];
+
+/**
+ * @param {Node} elem A DOM node.
+ * @param {string} selector A CSS selector
+ * @returns {boolean} `true` if the given DOM element is a element node and matches the given selector.
+ * @private
+ */
+const matches = (elem, selector) =>
+  typeof elem[matchesFuncName] === 'function' &&
+  elem[matchesFuncName](selector);
+
 const on = (element, ...args) => {
   element.addEventListener(...args);
   return {
@@ -254,11 +270,22 @@ export default class OverflowMenu extends Component {
   };
 
   /**
-   * Handles the floating menu being mounted/unmounted.
+   * Handles the floating menu being unmounted.
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
   _bindMenuBody = menuBody => {
+    if (!menuBody && this._hFocusIn) {
+      this._hFocusIn = this._hFocusIn.release();
+    }
+  };
+
+  /**
+   * Handles the floating menu being placed.
+   * @param {Element} menuBody The DOM element of the menu body.
+   * @private
+   */
+  _handlePlace = menuBody => {
     if (menuBody) {
       (
         menuBody.querySelector('[data-floating-menu-primary-focus]') || menuBody
@@ -269,15 +296,22 @@ export default class OverflowMenu extends Component {
         menuBody.ownerDocument,
         focusinEventName,
         event => {
-          if (!menuBody.contains(event.target)) {
+          const { target } = event;
+          if (!menuBody.contains(target)) {
             this.closeMenu();
-            this.menuEl && this.menuEl.focus();
+            if (
+              this.menuEl &&
+              !matches(target, '.bx--overflow-menu,.bx--overflow-menu-options')
+            ) {
+              // Note:
+              // The last focusable element in the page should NOT be the trigger button of overflow menu.
+              // Doing so breaks the code that detects if floating menu losing focus, e.g. by keyboard events.
+              this.menuEl.focus();
+            }
           }
         },
         !hasFocusin
       );
-    } else if (this._hFocusIn) {
-      this._hFocusIn = this._hFocusIn.release();
     }
   };
 
@@ -340,7 +374,8 @@ export default class OverflowMenu extends Component {
         <FloatingMenu
           menuPosition={this.state.menuPosition}
           menuOffset={flipped ? menuOffsetFlip : menuOffset}
-          menuRef={this._bindMenuBody}>
+          menuRef={this._bindMenuBody}
+          onPlace={this._handlePlace}>
           {menuBody}
         </FloatingMenu>
       </div>
@@ -351,6 +386,7 @@ export default class OverflowMenu extends Component {
       onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
       description: iconDescription,
+      focusable: 'false', // Prevent `<svg>` in trigger icon from getting focus for IE11
     };
 
     return (
