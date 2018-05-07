@@ -94,6 +94,14 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
           this.element.focus();
         }
       });
+      const listItems = [...this.element.querySelectorAll(this.options.selectorItem)];
+      listItems.forEach(item => {
+        if (this.element.classList.contains(this.options.classOpen)) {
+          item.tabIndex = 0;
+        } else {
+          item.tabIndex = -1;
+        }
+      });
     }
   }
 
