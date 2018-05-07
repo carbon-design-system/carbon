@@ -1,0 +1,45 @@
+@import '../../globals/scss/import-once';
+
+@include exports('data-table-v2-skeleton') {
+  .#{$prefix}--data-table-v2.#{$prefix}--skeleton {
+    th {
+      border-bottom: 1px solid $brand-01;
+
+      &:nth-child(3n + 1) {
+        width: 10%;
+      }
+
+      &:nth-child(3n + 2) {
+        width: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        width: 15%;
+      }
+    }
+
+    th span,
+    td span {
+      @include skeleton;
+      width: 75%;
+      height: 1rem;
+      display: block;
+    }
+
+    tr:hover {
+      td {
+        border-color: $ui-04;
+        background: transparent;
+
+        &:first-of-type,
+        &:last-of-type {
+          border-color: $ui-04;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--data-table-v2.#{$prefix}--skeleton .#{$prefix}--table-sort-v2 {
+    pointer-events: none;
+  }
+}

@@ -160,4 +160,16 @@
       }
     }
   }
+
+  // Skeleton state
+  .#{$prefix}--checkbox-label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(100px);
+    height: rem(18px);
+
+    &:after,
+    &:before {
+      border: none;
+    }
+  }
 }

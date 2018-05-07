@@ -151,4 +151,15 @@
   .#{$prefix}--number--light input[type='number'] {
     background: $field-02;
   }
+
+  // Skeleton State
+  .#{$prefix}--number.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+
+    input[type='number'] {
+      display: none;
+    }
+  }
 }

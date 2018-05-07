@@ -108,4 +108,11 @@
       background-color: $brand-01;
     }
   }
+
+  // Skeleton State
+  .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
+    @include skeleton;
+    height: rem(12px);
+    width: rem(40px);
+  }
 }
