@@ -50,6 +50,11 @@
     }
   }
 
+  // Fix for red ring when input is marked required in Firefox, refs #744
+  input:not(output):not([data-invalid]):-moz-ui-invalid {
+    box-shadow: none;
+  }
+
   .#{$prefix}--form-requirement {
     @include reset;
     @include typescale('omega');
