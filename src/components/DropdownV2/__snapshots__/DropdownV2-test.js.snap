@@ -46,7 +46,6 @@ exports[`DropdownV2 should render 1`] = `
     defaultSelectedItem={null}
     environment={[Window]}
     getA11yStatusMessage={[Function]}
-    id="downshift-1"
     itemToString={[Function]}
     onChange={[Function]}
     onInputValueChange={[Function]}
@@ -55,6 +54,7 @@ exports[`DropdownV2 should render 1`] = `
     onStateChange={[Function]}
     onUserAction={[Function]}
     selectedItemChanged={[Function]}
+    stateReducer={[Function]}
   >
     <ListBox
       className="bx--dropdown-v2"
@@ -64,30 +64,37 @@ exports[`DropdownV2 should render 1`] = `
     >
       <div
         className="bx--dropdown-v2 bx--list-box"
+        onKeyDown={[Function]}
       >
         <ListBoxField
           aria-expanded={false}
           aria-haspopup={true}
           aria-label="open menu"
+          data-toggle={true}
           disabled={false}
+          onBlur={[Function]}
           onClick={[Function]}
           onKeyDown={[Function]}
           role="button"
+          type="button"
         >
           <div
             aria-expanded={false}
             aria-haspopup={true}
             aria-label="open menu"
             className="bx--list-box__field"
+            data-toggle={true}
             disabled={false}
+            onBlur={[Function]}
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
+            type="button"
           >
             <span
               className="bx--list-box__label"
-              htmlFor="downshift-input-2"
+              htmlFor="downshift-0-input"
             >
               input
             </span>

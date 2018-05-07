@@ -25,6 +25,7 @@ exports[`ListBox should render 1`] = `
 >
   <div
     className="bx--list-box__container bx--list-box"
+    onKeyDown={[Function]}
   >
     <ListBoxField>
       <div

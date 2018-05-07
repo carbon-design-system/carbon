@@ -55,7 +55,6 @@ exports[`MultiSelect.Filterable should render 1`] = `
       environment={[Window]}
       getA11yStatusMessage={[Function]}
       highlightedIndex={null}
-      id="downshift-1"
       inputValue=""
       isOpen={false}
       itemToString={[Function]}
@@ -68,6 +67,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
       render={[Function]}
       selectedItem={Array []}
       selectedItemChanged={[Function]}
+      stateReducer={[Function]}
     >
       <ListBox
         className="bx--multi-select bx--combo-box"
@@ -77,26 +77,33 @@ exports[`MultiSelect.Filterable should render 1`] = `
       >
         <div
           className="bx--multi-select bx--combo-box bx--list-box"
+          onKeyDown={[Function]}
         >
           <ListBoxField
             aria-expanded={false}
             aria-haspopup={true}
             aria-label="open menu"
+            data-toggle={true}
             disabled={false}
+            onBlur={[Function]}
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
+            type="button"
           >
             <div
               aria-expanded={false}
               aria-haspopup={true}
               aria-label="open menu"
               className="bx--list-box__field"
+              data-toggle={true}
               disabled={false}
+              onBlur={[Function]}
               onClick={[Function]}
               onKeyDown={[Function]}
               role="button"
               tabIndex="0"
+              type="button"
             >
               <input
                 aria-activedescendant={null}
@@ -105,7 +112,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                 autoComplete="off"
                 className="bx--text-input"
                 disabled={false}
-                id="downshift-input-2"
+                id="downshift-0-input"
                 onBlur={[Function]}
                 onChange={[Function]}
                 onKeyDown={[Function]}
