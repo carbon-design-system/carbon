@@ -75,10 +75,10 @@ describe('Search', () => {
     describe('Large Search', () => {
       describe('buttons', () => {
         const btns = wrapper.find('button');
-        const sortBtn = btns.first();
+        const sortBtn = btns.last();
 
-        it('should be two buttons', () => {
-          expect(btns.length).toBe(2);
+        it('should be three buttons', () => {
+          expect(btns.length).toBe(3);
         });
 
         it('should have type="button"', () => {
@@ -145,9 +145,9 @@ describe('Search', () => {
         expect(smallContainer.hasClass('bx--search--sm')).toEqual(true);
       });
 
-      it('should not have buttons', () => {
+      it('should only have 1 button (clear)', () => {
         const btn = small.find('button');
-        expect(btn.length).toEqual(0);
+        expect(btn.length).toEqual(1);
       });
 
       it('renders one Icon', () => {
@@ -198,13 +198,13 @@ describe('Search', () => {
       });
 
       it('should toggle layout to "grid" when clicked', () => {
-        const button = wrapper.find('button').at(1);
+        const button = wrapper.find('button').at(2);
         button.simulate('click');
         const icon = wrapper.find(Icon).at(3);
         expect(icon.props().name).toEqual('grid');
       });
       it('should toggle layout to "list" when clicked and currently set to "grid"', () => {
-        const button = wrapper.find('button').at(1);
+        const button = wrapper.find('button').at(2);
         wrapper.setState({
           format: 'grid',
         });

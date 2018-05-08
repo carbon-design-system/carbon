@@ -66,35 +66,37 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           placeholder="Search"
           type="text"
         />
-        <Icon
+        <button
           className="bx--search-close bx--search-close--hidden"
-          description="close"
-          fillRule="evenodd"
-          name="close--glyph"
           onClick={[Function]}
-          role="img"
+          type="button"
         >
-          <svg
-            alt="close"
-            aria-label="close"
-            className="bx--search-close bx--search-close--hidden"
+          <Icon
+            description="close"
             fillRule="evenodd"
-            height="16"
             name="close--glyph"
-            onClick={[Function]}
             role="img"
-            viewBox="0 0 16 16"
-            width="16"
           >
-            <title>
-              close
-            </title>
-            <path
-              d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8 9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z"
-              key="key0"
-            />
-          </svg>
-        </Icon>
+            <svg
+              alt="close"
+              aria-label="close"
+              fillRule="evenodd"
+              height="16"
+              name="close--glyph"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <title>
+                close
+              </title>
+              <path
+                d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8 9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z"
+                key="key0"
+              />
+            </svg>
+          </Icon>
+        </button>
       </div>
     </Search>
   </div>

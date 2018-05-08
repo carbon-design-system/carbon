@@ -16,6 +16,7 @@ export default class Search extends Component {
     id: PropTypes.string,
     searchButtonLabelText: PropTypes.string,
     layoutButtonLabelText: PropTypes.string,
+    closeButtonLabelText: PropTypes.string,
   };
 
   static defaultProps = {
@@ -66,6 +67,7 @@ export default class Search extends Component {
       labelText,
       searchButtonLabelText,
       layoutButtonLabelText,
+      closeButtonLabelText,
       small,
       children,
       ...other
@@ -108,12 +110,13 @@ export default class Search extends Component {
             this.input = input;
           }}
         />
-        <Icon
-          name="close--glyph"
-          description="close"
+        <button
           className={clearClasses}
           onClick={this.clearInput}
-        />
+          type="button"
+          aria-label={closeButtonLabelText}>
+          <Icon name="close--glyph" description="close" />
+        </button>
         {children}
         {renderButtons && (
           <SearchFilterButton labelText={searchButtonLabelText} />
