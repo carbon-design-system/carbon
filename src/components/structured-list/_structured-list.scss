@@ -92,7 +92,7 @@
     height: rem(40px);
     text-align: left;
     text-transform: $structured-list-text-transform;
-    vertical-align: middle;
+    vertical-align: bottom;
   }
 
   .#{$prefix}--structured-list-tbody {
