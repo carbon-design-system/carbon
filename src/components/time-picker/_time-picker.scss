@@ -69,7 +69,7 @@
       order: 3;
       color: $support-01;
       font-weight: 400;
-      margin-top: $spacing-2xs;
+      margin-top: 0;
       max-height: 0;
 
       &::before {
@@ -79,6 +79,8 @@
 
     &[data-invalid] ~ .#{$prefix}--form-requirement {
       overflow: visible;
+      max-height: 0;
+      margin-top: $spacing-2xs;
     }
 
     &:disabled {

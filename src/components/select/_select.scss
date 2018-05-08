@@ -112,6 +112,7 @@
 
   .#{$prefix}--select--inline {
     display: flex;
+    flex-direction: row;
     align-items: center;
 
     .#{$prefix}--label {
@@ -124,11 +125,20 @@
       background-color: transparent;
       color: $brand-01;
       font-weight: 600;
+      box-shadow: none;
+
+      &:focus {
+        @include focus-outline('border');
+      }
 
       &:disabled ~ * {
         opacity: 0.5;
         cursor: not-allowed;
       }
+    }
+
+    .#{$prefix}--select__arrow {
+      top: auto;
     }
   }
 }
