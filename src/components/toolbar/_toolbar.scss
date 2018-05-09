@@ -62,7 +62,7 @@ $css--helpers: true;
       }
 
       .#{$prefix}--search-input {
-        background-color: $field-01;
+        background-color: $field-02;
       }
 
       .#{$prefix}--search-close {
@@ -117,7 +117,7 @@ $css--helpers: true;
   .#{$prefix}--toolbar-menu__divider {
     width: 100%;
     border: 0;
-    border-top: 1px solid $ui-04;
+    border-top: 1px solid $ui-03;
   }
 
   .#{$prefix}--radio-button-group {
