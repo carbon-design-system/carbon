@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import RadioButton from '../RadioButton';
+import RadioButtonSkeleton from '../RadioButton/RadioButton.Skeleton';
 
 const radioProps = {
   className: 'some-class',
@@ -42,5 +43,16 @@ storiesOf('RadioButton', module)
         disabled
         {...radioProps}
       />
+    )
+  )
+  .addWithInfo(
+    'skeleton',
+    `
+      Placeholder skeleton state to use when content is loading.
+    `,
+    () => (
+      <div>
+        <RadioButtonSkeleton />
+      </div>
     )
   );

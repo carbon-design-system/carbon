@@ -2,6 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Icon from '../Icon';
 import NumberInput from '../NumberInput';
+import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 
 describe('NumberInput', () => {
   describe('should render as expected', () => {
@@ -298,6 +299,20 @@ describe('NumberInput', () => {
         expect(onChange).toBeCalled();
         expect(onChange).toHaveBeenCalledWith(expect.anything());
       });
+    });
+  });
+});
+
+describe('NumberInputSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<NumberInputSkeleton />);
+
+    const container = wrapper.find('.bx--number');
+    const label = wrapper.find('.bx--label');
+
+    it('has the expected classes', () => {
+      expect(container.hasClass('bx--skeleton')).toEqual(true);
+      expect(label.hasClass('bx--skeleton')).toEqual(true);
     });
   });
 });

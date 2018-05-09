@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action, decorateAction } from '@storybook/addon-actions';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
+import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import WithState from '../../tools/withState';
 
 // Datepickers last argument contains an instance of flatpickr
@@ -123,4 +124,11 @@ storiesOf('DatePicker', module)
         )}
       </WithState>
     )
+  )
+  .addWithInfo(
+    'skeleton',
+    `
+    Placeholder skeleton state to use when content is loading.
+    `,
+    () => <DatePickerSkeleton range />
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import Checkbox from '../Checkbox';
+import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 import { mount } from 'enzyme';
 
 describe('Checkbox', () => {
@@ -94,6 +95,24 @@ describe('Checkbox', () => {
       expect(call[0]).toEqual(true);
       expect(call[1]).toEqual(id);
       expect(call[2].target).toBe(inputElement);
+    });
+  });
+});
+
+describe('CheckboxSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = mount(<CheckboxSkeleton />);
+    const label = wrapper.find('label');
+
+    describe('label', () => {
+      it('renders a label', () => {
+        expect(label.length).toEqual(1);
+      });
+
+      it('has the expected classes', () => {
+        expect(label.hasClass('bx--checkbox-label')).toEqual(true);
+        expect(label.hasClass('bx--skeleton')).toEqual(true);
+      });
     });
   });
 });

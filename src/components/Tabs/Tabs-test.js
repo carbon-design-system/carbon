@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from '../Icon';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
+import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 import { shallow, mount } from 'enzyme';
 
 describe('Tabs', () => {
@@ -288,5 +289,16 @@ describe('selection change', () => {
       .last()
       .simulate('click');
     expect(wrapper.props().onSelectionChange).toHaveBeenCalledWith(1);
+  });
+});
+
+describe('TabsSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<TabsSkeleton />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass('bx--tabs')).toEqual(true);
+    });
   });
 });

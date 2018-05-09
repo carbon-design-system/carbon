@@ -3,6 +3,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import FileUploader, { FileUploaderButton } from '../FileUploader';
+import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import Button from '../Button';
 
 storiesOf('FileUploader', module)
@@ -45,6 +46,17 @@ storiesOf('FileUploader', module)
           }}>
           Clear File
         </Button>
+      </div>
+    )
+  )
+  .addWithInfo(
+    'skeleton',
+    `
+      Placeholder skeleton state to use when content is loading.
+    `,
+    () => (
+      <div style={{ width: '500px' }}>
+        <FileUploaderSkeleton />
       </div>
     )
   );

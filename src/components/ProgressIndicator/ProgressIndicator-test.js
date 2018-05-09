@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
+import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
 import { shallow, mount } from 'enzyme';
 
 describe('ProgressIndicator', () => {
@@ -154,6 +155,17 @@ describe('ProgressIndicator', () => {
           ).toBe(false);
         });
       });
+    });
+  });
+});
+
+describe('ProgressIndicatorSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<ProgressIndicatorSkeleton />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass('bx--progress')).toEqual(true);
     });
   });
 });

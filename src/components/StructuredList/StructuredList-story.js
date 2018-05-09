@@ -9,6 +9,7 @@ import {
   StructuredListInput,
   StructuredListCell,
 } from '../StructuredList';
+import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
 
 storiesOf('StructuredList', module)
   .addWithInfo(
@@ -115,5 +116,17 @@ storiesOf('StructuredList', module)
           </StructuredListRow>
         </StructuredListBody>
       </StructuredListWrapper>
+    )
+  )
+  .addWithInfo(
+    'skeleton',
+    `
+      description here
+    `,
+    () => (
+      <div style={{ width: '800px' }}>
+        <StructuredListSkeleton />
+        <StructuredListSkeleton border />
+      </div>
     )
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import NumberInput from '../NumberInput';
+import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 
 const numberInputProps = {
   className: 'some-class',
@@ -44,4 +45,11 @@ storiesOf('NumberInput', module)
       The example below shows an disabled Number Input component.
     `,
     () => <NumberInput {...numberInputProps} invalid />
+  )
+  .addWithInfo(
+    'skeleton',
+    `
+      Placeholder skeleton state to use when content is loading.
+    `,
+    () => <NumberInputSkeleton />
   );

@@ -2,7 +2,8 @@ import React from 'react';
 import Icon from '../Icon';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
-import { mount } from 'enzyme';
+import SelectSkeleton from '../Select/Select.Skeleton';
+import { mount, shallow } from 'enzyme';
 
 describe('Select', () => {
   describe('Renders as expected', () => {
@@ -115,6 +116,18 @@ describe('Select', () => {
 
     it('has the expected classes', () => {
       expect(selectContainer.hasClass('bx--select--inline')).toEqual(true);
+    });
+  });
+});
+
+describe('SelectSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<SelectSkeleton />);
+
+    const select = wrapper.find('.bx--select');
+
+    it('Has the expected classes', () => {
+      expect(select.hasClass('bx--skeleton')).toEqual(true);
     });
   });
 });

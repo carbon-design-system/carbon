@@ -1,6 +1,7 @@
 import React from 'react';
 import RadioButton from '../RadioButton';
-import { mount } from 'enzyme';
+import RadioButtonSkeleton from '../RadioButton/RadioButton.Skeleton';
+import { mount, shallow } from 'enzyme';
 
 const render = props =>
   mount(
@@ -112,6 +113,19 @@ describe('RadioButton', () => {
       expect(call[0]).toEqual('test-value');
       expect(call[1]).toEqual('test-name');
       expect(call[2].target).toBe(inputElement);
+    });
+  });
+});
+
+describe('RadioButtonSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<RadioButtonSkeleton />);
+
+    const label = wrapper.find('label');
+
+    it('Has the expected classes', () => {
+      expect(label.hasClass('bx--skeleton')).toEqual(true);
+      expect(label.hasClass('bx--radio-button__label')).toEqual(true);
     });
   });
 });

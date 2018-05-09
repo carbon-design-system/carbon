@@ -1,7 +1,8 @@
 import React from 'react';
 import Breadcrumb from '../Breadcrumb';
 import BreadcrumbItem from '../BreadcrumbItem';
-import { mount } from 'enzyme';
+import BreadcrumbSkeleton from '../Breadcrumb/Breadcrumb.Skeleton';
+import { mount, shallow } from 'enzyme';
 
 describe('Breadcrumb', () => {
   describe('Renders as expected', () => {
@@ -33,6 +34,17 @@ describe('Breadcrumb', () => {
 
     it('should render children content as expected', () => {
       expect(breadcrumbItem.text()).toEqual('Breadcrumb 1');
+    });
+  });
+});
+
+describe('BreadcrumbSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<BreadcrumbSkeleton />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass('bx--breadcrumb')).toEqual(true);
     });
   });
 });

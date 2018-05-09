@@ -1,5 +1,6 @@
 import React from 'react';
 import CodeSnippet from '../CodeSnippet';
+import CodeSnippetSkeleton from '../CodeSnippet/CodeSnippet.Skeleton';
 import { mount, shallow } from 'enzyme';
 
 describe('Code Snippet', () => {
@@ -35,5 +36,17 @@ describe('Code Snippet', () => {
     );
     expect(mockRef.textContent).toBe(content);
     expect(wrappedContentRef).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('CodeSnippetSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<CodeSnippetSkeleton type="terminal" />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass('bx--snippet')).toEqual(true);
+      expect(wrapper.hasClass('bx--snippet--terminal')).toEqual(true);
+    });
   });
 });

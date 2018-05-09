@@ -1,6 +1,7 @@
 import React from 'react';
 import Icon from '../Icon';
 import Search from '../Search';
+import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';
 
 describe('Search', () => {
@@ -212,6 +213,28 @@ describe('Search', () => {
         const icon = wrapper.find(Icon).at(3);
         expect(icon.props().name).toEqual('list');
       });
+    });
+  });
+});
+
+describe('SearchSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<SearchSkeleton />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass('bx--search--lg')).toEqual(true);
+    });
+  });
+});
+
+describe('SearchSkeleton Small', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<SearchSkeleton small />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass('bx--search--sm')).toEqual(true);
     });
   });
 });

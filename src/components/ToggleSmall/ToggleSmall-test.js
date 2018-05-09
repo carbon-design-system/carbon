@@ -1,6 +1,7 @@
 import React from 'react';
 import ToggleSmall from '../ToggleSmall';
-import { mount } from 'enzyme';
+import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
+import { mount, shallow } from 'enzyme';
 
 describe('ToggleSmall', () => {
   describe('Renders as expected', () => {
@@ -86,6 +87,20 @@ describe('ToggleSmall', () => {
       expect(call[0]).toEqual(true);
       expect(call[1]).toEqual(id);
       expect(call[2].target).toBe(inputElement);
+    });
+  });
+});
+
+describe('ToggleSmallSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<ToggleSmallSkeleton />);
+    const input = wrapper.find('input');
+    const toggleLabel = wrapper.find('.bx--toggle__label');
+
+    it('Has the expected classes', () => {
+      expect(input.hasClass('bx--skeleton')).toEqual(true);
+      expect(input.hasClass('bx--toggle')).toEqual(true);
+      expect(toggleLabel.hasClass('bx--skeleton')).toEqual(true);
     });
   });
 });

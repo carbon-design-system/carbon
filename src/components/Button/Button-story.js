@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Button from '../Button';
+import ButtonSkeleton from '../Button/Button.Skeleton';
 
 const buttonEvents = {
   onClick: action('onClick'),
@@ -226,6 +227,21 @@ storiesOf('Buttons', module)
         <Button kind="primary" {...buttonEvents} className="some-class">
           Primary button
         </Button>
+      </div>
+    )
+  )
+  .addWithInfo(
+    'skeleton',
+    `
+      Placeholder skeleton state to use when content is loading.
+    `,
+    () => (
+      <div>
+        <ButtonSkeleton />
+        &nbsp;
+        <ButtonSkeleton href="#" />
+        &nbsp;
+        <ButtonSkeleton small />
       </div>
     )
   );

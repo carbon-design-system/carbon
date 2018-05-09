@@ -1,6 +1,7 @@
 import React from 'react';
 import Toggle from '../Toggle';
-import { mount } from 'enzyme';
+import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
+import { mount, shallow } from 'enzyme';
 
 describe('Toggle', () => {
   describe('Renders as expected', () => {
@@ -94,6 +95,20 @@ describe('Toggle', () => {
       expect(call[0]).toEqual(true);
       expect(call[1]).toEqual(id);
       expect(call[2].target).toBe(inputElement);
+    });
+  });
+});
+
+describe('ToggleSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<ToggleSkeleton />);
+    const input = wrapper.find('input');
+    const toggleLabel = wrapper.find('.bx--toggle__label');
+
+    it('Has the expected classes', () => {
+      expect(input.hasClass('bx--skeleton')).toEqual(true);
+      expect(input.hasClass('bx--toggle')).toEqual(true);
+      expect(toggleLabel.hasClass('bx--skeleton')).toEqual(true);
     });
   });
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../Button';
+import ButtonSkeleton from '../Button/Button.Skeleton';
 import { shallow, mount } from 'enzyme';
 
 describe('Button', () => {
@@ -171,7 +172,7 @@ describe('Small Button', () => {
 });
 
 describe('DangerButton', () => {
-  describe('Renders as exptected', () => {
+  describe('Renders as expected', () => {
     const wrapper = shallow(<Button kind="danger" className="extra-class" />);
 
     it('Has the expected classes', () => {
@@ -210,6 +211,43 @@ describe('TertiaryButton', () => {
 
     it('Should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+});
+
+describe('ButtonSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<ButtonSkeleton />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass('bx--btn')).toEqual(true);
+    });
+  });
+
+  describe('Renders <a> props as expected', () => {
+    const wrapper = shallow(
+      // eslint-disable-next-line jsx-a11y/tabindex-no-positive
+      <ButtonSkeleton href="#" />
+    );
+
+    it('Renders as an <a> element with an href', () => {
+      expect(wrapper.is('a')).toBe(true);
+    });
+
+    it('Should always render with [role="button"] by default', () => {
+      expect(wrapper.props().role).toEqual('button');
+    });
+  });
+});
+
+describe('Small ButtonSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<ButtonSkeleton small />);
+
+    it('Has the expected classes for small', () => {
+      expect(wrapper.hasClass('bx--btn--sm')).toEqual(true);
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
     });
   });
 });

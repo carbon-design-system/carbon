@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
+import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
 const props = {
   tabs: {
@@ -62,4 +63,11 @@ storiesOf('Tabs', module)
         </Tab>
       </Tabs>
     )
+  )
+  .addWithInfo(
+    'skeleton',
+    `
+      Placeholder skeleton state to use when content is loading.
+    `,
+    () => <TabsSkeleton />
   );

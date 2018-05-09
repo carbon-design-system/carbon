@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
+import SelectSkeleton from '../Select/Select.Skeleton';
 
 const selectProps = {
   onChange: action('onChange'),
@@ -120,5 +121,16 @@ storiesOf('Select', module)
           <SelectItem value="option-4" text="Option 4" />
         </SelectItemGroup>
       </Select>
+    )
+  )
+  .addWithInfo(
+    'skeleton',
+    `
+      Placeholder skeleton state to use when content is loading.
+    `,
+    () => (
+      <div style={{ width: '300px' }}>
+        <SelectSkeleton />
+      </div>
     )
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import Tag from '../Tag';
+import TagSkeleton from '../Tag/Tag.Skeleton';
 import { shallow } from 'enzyme';
 
 describe('Tag', () => {
@@ -26,5 +27,16 @@ describe('Tag', () => {
   it('should support extra class names', () => {
     const tag = shallow(<Tag type="beta" className="extra-class" />);
     expect(tag.hasClass('extra-class')).toEqual(true);
+  });
+});
+
+describe('TagSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<TagSkeleton />);
+
+    it('Has the expected classes', () => {
+      expect(wrapper.hasClass('bx--skeleton')).toEqual(true);
+      expect(wrapper.hasClass('bx--tag')).toEqual(true);
+    });
   });
 });
