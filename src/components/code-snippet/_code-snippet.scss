@@ -8,42 +8,63 @@
 @import 'mixins';
 
 @include exports('snippet') {
-  .#{$prefix}--snippet--code {
-    @include bx--snippet;
-    background-color: $snippet-background-color;
-    padding: $spacing-md $spacing-2xl $spacing-md $spacing-md;
-  }
-
   .#{$prefix}--snippet code {
     @include typescale('epsilon');
+    font-family: $font-family-mono;
   }
 
-  .#{$prefix}--snippet--code .#{$prefix}--snippet-container {
-    max-height: rem(192px);
-    overflow-y: scroll;
-    margin-right: $spacing-md;
-    position: relative;
+  // Inline Code Snippet
+  .#{$prefix}--snippet--inline {
+    padding: 0;
+    background: transparent;
   }
 
-  .#{$prefix}--snippet--code .#{$prefix}--snippet-container pre {
-    white-space: pre-wrap;
+  .#{$prefix}--snippet--inline code {
+    background-color: $field-01;
+    border-radius: 4px;
+    padding: 0 $spacing-xs;
+    cursor: pointer;
   }
 
-  .#{$prefix}--snippet--terminal {
+  .#{$prefix}--snippet--inline:hover code {
+    background-color: darken($field-01, 10%);
+  }
+
+  // Single Line Snippet
+  .#{$prefix}--snippet--single {
     @include bx--snippet;
-    background-color: $text-01;
-    color: $inverse-01;
-    height: 3.5rem;
+    height: rem(56px);
     padding: 0 $spacing-2xl 0 $spacing-md;
   }
 
-  .#{$prefix}--snippet--terminal .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
     display: flex;
     align-items: center;
     height: 130%;
     white-space: nowrap;
     overflow-x: scroll;
     position: relative;
+    padding-bottom: $spacing-md;
+  }
+
+  // Multi Line Snippet
+  .#{$prefix}--snippet--multi {
+    @include bx--snippet;
+    padding: $spacing-md $spacing-3xl $spacing-md $spacing-lg;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    max-height: rem(254px);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
+    white-space: pre-wrap;
+  }
+
+  .#{$prefix}--snippet--expanded.#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    max-height: none;
   }
 
   .#{$prefix}--snippet__icon {
@@ -53,15 +74,7 @@
     transition: $transition--base;
 
     &:hover {
-      fill: $brand-02;
-    }
-  }
-
-  .#{$prefix}--snippet--terminal .#{$prefix}--snippet__icon {
-    fill: $inverse-01;
-
-    &:hover {
-      fill: $brand-02;
+      fill: $hover-primary;
     }
   }
 
@@ -69,7 +82,7 @@
     @include reset;
     cursor: pointer;
     position: absolute;
-    top: 0.5rem;
+    top: 0.675rem;
     right: 0.5rem;
     border: none;
     background-color: transparent;
@@ -90,5 +103,27 @@
     left: inherit;
     top: 1rem;
     right: 1.25rem;
+  }
+
+  .#{$prefix}--snippet-btn--expand {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
+    display: none;
+  }
+
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    fill: $brand-01;
+  }
+
+  .#{$prefix}--snippet-btn--expand:hover .#{$prefix}--icon-chevron--down {
+    fill: $inverse-01;
+  }
+
+  .#{$prefix}--snippet--expanded .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+    transform: rotate(180deg);
   }
 }
