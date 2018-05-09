@@ -36,7 +36,7 @@
     &:hover,
     &:focus {
       svg {
-        fill: $brand-02;
+        fill: $hover-primary;
       }
     }
   }
@@ -49,7 +49,7 @@
     max-width: rem(240px);
     background: $ui-01;
     padding: $spacing-lg;
-    border: 1px solid $ui-04;
+    border: 1px solid $ui-03;
     z-index: z('floating');
     word-wrap: break-word;
 
@@ -72,8 +72,8 @@
       transform: rotate(-135deg);
       width: 0.6rem;
       height: 0.6rem;
-      border-right: 1px solid $ui-04;
-      border-bottom: 1px solid $ui-04;
+      border-right: 1px solid $ui-03;
+      border-bottom: 1px solid $ui-03;
       margin: 0 auto;
       content: '';
     }
@@ -143,7 +143,7 @@
       @include layer('overlay');
       max-width: rem(240px);
       padding: $spacing-lg;
-      border: 1px solid $ui-04;
+      border: 1px solid $ui-03;
       margin-left: 50%;
       color: $text-01;
       content: attr(data-tooltip-text);
@@ -157,8 +157,8 @@
       left: 0;
       width: 0.6rem;
       height: 0.6rem;
-      border-right: 1px solid $ui-04;
-      border-bottom: 1px solid $ui-04;
+      border-right: 1px solid $ui-03;
+      border-bottom: 1px solid $ui-03;
       margin: 0 auto;
       content: '';
     }
@@ -166,7 +166,7 @@
     &:hover,
     &:focus {
       svg {
-        fill: $brand-02;
+        fill: $hover-primary;
       }
 
       &:before,

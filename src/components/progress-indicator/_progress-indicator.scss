@@ -75,7 +75,7 @@
 
   .#{$prefix}--progress-step--incomplete {
     circle {
-      stroke: $ui-05;
+      stroke: $ui-04;
       stroke-width: $progress-indicator-stroke-width;
       fill: transparent;
     }
@@ -85,7 +85,7 @@
     }
 
     .#{$prefix}--progress-line {
-      background-color: $ui-05;
+      background-color: $ui-04;
     }
   }
 

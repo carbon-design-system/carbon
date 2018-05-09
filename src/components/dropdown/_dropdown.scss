@@ -22,30 +22,34 @@
     list-style: none;
     display: block;
     background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 1;
     width: 100%;
     height: rem(40px);
     cursor: pointer;
     color: $text-01;
 
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
     }
 
     &.#{$prefix}--dropdown--open:focus {
       outline: 1px solid transparent;
-      box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
+      @include layer('overlay');
     }
   }
 
+  .#{$prefix}--dropdown--light {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--dropdown--up {
-    &.#{$prefix}--dropdown--open:focus {
-      box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
-
-      .#{$prefix}--dropdown-list {
-        box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
-      }
-    }
-
     .#{$prefix}--dropdown-list {
       bottom: 2.5rem;
     }
@@ -112,8 +116,7 @@
 
     &:hover,
     &:focus {
-      background-color: $field-01;
-      color: $text-01;
+      background-color: $hover-row;
       outline: 1px solid transparent;
       text-decoration: underline;
       color: $text-01;
@@ -134,12 +137,6 @@
 
       &:hover {
         overflow: auto;
-      }
-    }
-
-    &:focus {
-      .#{$prefix}--dropdown-list {
-        box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
       }
     }
 

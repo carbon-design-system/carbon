@@ -19,11 +19,17 @@
     display: block;
     width: 100%;
     height: rem(40px);
-    min-width: 10rem;
+    min-width: rem(300px);
     padding: 0 $spacing-md;
     color: $text-01;
     background-color: $field-01;
-    border: $input-border;
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 2;
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
 
     &::-webkit-input-placeholder {
       @include placeholder-colors;
@@ -31,7 +37,20 @@
 
     &:focus {
       outline: none;
-      border: 1px solid $brand-01;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus + .#{$prefix}--label {
+      color: $support-01;
     }
 
     &:disabled {
@@ -40,7 +59,18 @@
     }
 
     &:disabled:hover {
-      border: $input-border;
+      border: none;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
     }
   }
 

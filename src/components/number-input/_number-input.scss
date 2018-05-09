@@ -11,6 +11,8 @@
   .#{$prefix}--number {
     @include reset;
     display: flex;
+    flex-direction: column;
+    position: relative;
   }
 
   .#{$prefix}--number input[type='number'] {
@@ -26,11 +28,22 @@
     height: rem(40px);
     color: $text-01;
     background-color: $field-01;
-    border: $input-border;
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 2;
     border-radius: 0;
 
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
     }
 
     &:disabled {
@@ -42,6 +55,18 @@
       opacity: 0.5;
       cursor: not-allowed;
       pointer-events: none;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+      overflow: visible;
+
+      &::before {
+        display: none;
+      }
     }
   }
 
@@ -59,13 +84,16 @@
 
   .#{$prefix}--number__controls {
     @include reset;
-    position: relative;
+    position: absolute;
     display: block;
-    left: -1.75rem;
+    left: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    left: auto;
+    right: 0.5rem;
+    bottom: 0.5rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -84,7 +112,7 @@
     }
 
     &:hover svg {
-      fill: $brand-02;
+      fill: $hover-primary;
     }
   }
 
@@ -96,27 +124,31 @@
     // Hover styles for use with old HTML w/o button
     &:hover {
       cursor: pointer;
-      fill: $brand-02;
+      fill: $hover-primary;
     }
   }
 
   .#{$prefix}--number[data-invalid] {
-    input[type='number'] {
+    input[type='number'],
+    input[type='number']:focus {
+      outline: none;
       box-shadow: 0 2px 0px 0px $support-01;
     }
+
+    input[type='number']:focus ~ .#{$prefix}--label {
+      color: $support-01;
+    }
+
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
     }
+
+    .#{$prefix}--number__controls {
+      bottom: 0.75rem;
+    }
   }
 
-  // Skeleton State
-  .#{$prefix}--number.#{$prefix}--skeleton {
-    @include skeleton;
-    width: 100%;
-    height: 2.5rem;
-
-    input[type='number'] {
-      display: none;
-    }
+  .#{$prefix}--number--light input[type='number'] {
+    background: $field-02;
   }
 }
