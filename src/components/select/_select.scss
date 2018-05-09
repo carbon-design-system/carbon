@@ -15,7 +15,8 @@
   .#{$prefix}--select {
     @include reset;
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .#{$prefix}--select-input {
@@ -28,7 +29,9 @@
     padding: 0 $spacing-2xl 0 $spacing-md;
     color: $text-01;
     background-color: $field-01;
-    border: $input-border;
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 2;
     border-radius: 0;
     cursor: pointer;
 
@@ -37,21 +40,54 @@
       display: none;
     }
 
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus ~ .#{$prefix}--label {
+      color: $support-01;
     }
 
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background: $field-02;
   }
 
   .#{$prefix}--select__arrow {
     fill: $brand-01;
     position: absolute;
     right: 1rem;
-    top: 1.175rem;
+    top: 2.625rem;
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
@@ -78,26 +114,36 @@
       color: $text-01;
     }
   }
-}
 
-.#{$prefix}--select--inline {
-  display: flex;
-  align-items: center;
+  .#{$prefix}--select--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-  .#{$prefix}--label {
-    white-space: nowrap;
-    margin: 0 $spacing-xs 0 0;
-    font-weight: 400;
-  }
+    .#{$prefix}--label {
+      white-space: nowrap;
+      margin: 0 $spacing-xs 0 0;
+      font-weight: 400;
+    }
 
-  .#{$prefix}--select-input {
-    background-color: transparent;
-    color: $brand-01;
-    font-weight: 600;
+    .#{$prefix}--select-input {
+      background-color: transparent;
+      color: $brand-01;
+      font-weight: 600;
+      box-shadow: none;
 
-    &:disabled ~ * {
-      opacity: 0.5;
-      cursor: not-allowed;
+      &:focus {
+        @include focus-outline('border');
+      }
+
+      &:disabled ~ * {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .#{$prefix}--select__arrow {
+      top: auto;
     }
   }
 }

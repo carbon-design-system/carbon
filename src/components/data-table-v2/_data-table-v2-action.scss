@@ -31,20 +31,20 @@
 
     &:hover {
       > .#{$prefix}--toolbar-action__icon {
-        fill: $brand-01;
+        fill: $hover-secondary;
       }
     }
 
     &:focus {
       @include focus-outline;
       > .#{$prefix}--toolbar-action__icon {
-        fill: $brand-01;
+        fill: $hover-secondary;
       }
     }
 
     &:active {
       > .#{$prefix}--toolbar-action__icon {
-        fill: darken($brand-01, 5%);
+        fill: $hover-secondary;
       }
     }
 

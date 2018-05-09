@@ -28,15 +28,15 @@
     &:active,
     &:hover,
     &:focus {
-      color: $brand-02;
+      color: $hover-primary-text;
     }
 
     &:focus {
       @include focus-outline('border');
     }
 
-    &[aria-disabled="true"] {
-      opacity: .5;
+    &[aria-disabled='true'] {
+      opacity: 0.5;
       pointer-events: none;
     }
   }

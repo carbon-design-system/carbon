@@ -24,7 +24,7 @@ $css--helpers: true;
     padding: $spacing-xs $spacing-md;
     display: flex;
     align-items: center;
-    border: 1px solid $ui-04;
+    border: 1px solid $ui-03;
 
     .#{$prefix}--form-item {
       flex: auto;
@@ -55,7 +55,7 @@ $css--helpers: true;
   .#{$prefix}--pagination__button-icon {
     height: rem(12px);
     width: rem(12px);
-    fill: $ui-05;
+    fill: $hover-secondary;
     pointer-events: none;
     transition: $transition--base;
   }
@@ -112,10 +112,11 @@ $css--helpers: true;
     .#{$prefix}--select-input {
       height: rem(24px);
       width: auto;
-      padding: 0 $spacing-md;
+      padding: 0 1.25rem 0 0.5rem;
       margin: 0;
       font-weight: 600;
       text-align-last: center;
+      box-shadow: none;
 
       &:focus {
         @include focus-outline('border');
@@ -128,6 +129,7 @@ $css--helpers: true;
     }
 
     .#{$prefix}--text-input {
+      background-color: $field-01;
       height: rem(24px);
       min-width: rem(24px);
       width: rem(24px);
@@ -135,6 +137,7 @@ $css--helpers: true;
       margin: 0;
       font-weight: 600;
       text-align: center;
+      box-shadow: none;
 
       &:focus {
         @include focus-outline('border');
@@ -150,8 +153,8 @@ $css--helpers: true;
 
     .#{$prefix}--pagination__button {
       height: 100%;
-      border-left: 1px solid $ui-04;
-      border-right: 1px solid $ui-04;
+      border-left: 1px solid $ui-03;
+      border-right: 1px solid $ui-03;
       width: rem(42px);
       margin: 0;
     }
@@ -167,10 +170,6 @@ $css--helpers: true;
     .#{$prefix}--select--inline {
       position: relative;
       top: -1.5px;
-    }
-
-    .#{$prefix}--select-input {
-      padding-left: $spacing-md;
     }
 
     .#{$prefix}--select__arrow {

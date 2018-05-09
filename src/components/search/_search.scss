@@ -34,19 +34,28 @@
     padding: 0 $spacing-2xl;
     text-overflow: ellipsis;
     width: 100%;
+    order: 1;
 
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+    }
+
+    &:focus ~ .#{$prefix}--search-magnifier {
+      fill: $brand-01;
     }
 
     &::placeholder {
-      @include placeholder-colors;
+      color: $text-02;
       font-weight: 400;
     }
 
     &::-ms-clear {
       display: none;
     }
+  }
+
+  .#{$prefix}--search--light .#{$prefix}--search-input {
+    background: $field-02;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-input {
@@ -70,6 +79,7 @@
   .#{$prefix}--search-magnifier {
     left: 0.75rem;
     fill: $ui-05;
+    z-index: 2;
   }
 
   .#{$prefix}--search-close {
@@ -110,6 +120,8 @@
     background-color: $ui-01;
     position: relative;
     padding: 0;
+    outline: 1px solid transparent;
+    order: 2;
   }
 
   .#{$prefix}--search-button svg {
@@ -118,7 +130,7 @@
     box-sizing: border-box;
     vertical-align: middle;
     transition: $transition--base;
-    fill: $brand-01;
+    fill: $hover-primary;
     height: 1rem;
     width: 1rem;
   }

@@ -45,7 +45,7 @@
       outline: none;
     }
     &:active {
-      background: $brand-01;
+      background: $hover-secondary;
       transform: translate(-50%, -50%);
     }
   }
@@ -63,7 +63,7 @@
     position: absolute;
     width: 100%;
     height: rem(4px);
-    background: $ui-05;
+    background: $ui-04;
     cursor: pointer;
     transform: translate(0%, -50%);
   }

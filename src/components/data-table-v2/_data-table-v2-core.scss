@@ -12,7 +12,7 @@
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $ui-03;
 
     thead {
       @include typescale('zeta');
@@ -50,24 +50,24 @@
     }
 
     th {
-      border-top: 1px solid $ui-04;
+      border-top: 1px solid $ui-03;
     }
 
     th,
     td {
-      border-top: 1px solid $ui-04;
+      border-top: 1px solid $ui-03;
       padding-left: $spacing-sm;
       vertical-align: middle;
       text-align: left;
 
       &:first-of-type {
         padding-left: rem(24px);
-        border-left: 1px solid $ui-04;
+        border-left: 1px solid $ui-03;
       }
 
       &:last-of-type {
         padding-right: $spacing-lg;
-        border-right: 1px solid $ui-04;
+        border-right: 1px solid $ui-03;
       }
     }
 
@@ -123,7 +123,7 @@
       }
 
       &:last-of-type {
-        border-right-color: $ui-04;
+        border-right-color: $ui-03;
       }
     }
   }

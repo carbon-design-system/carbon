@@ -36,7 +36,7 @@
     padding: 0 $spacing-md;
     height: rem(40px);
     cursor: pointer;
-    background-color: $field-01;
+    background-color: $field-02;
 
     svg {
       width: rem(12px);
@@ -73,6 +73,7 @@
     display: flex;
     flex-direction: column;
     z-index: z('dropdown');
+    background: $ui-01;
 
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
@@ -105,7 +106,7 @@
 
     &:hover,
     &:focus {
-      background-color: $brand-01;
+      background-color: $hover-row;
 
       @include breakpoint(bp--sm--major) {
         outline: 1px solid transparent;
@@ -140,10 +141,10 @@
   }
 
   .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
-    color: $inverse-01;
+    color: $text-01;
 
     @include breakpoint(bp--sm--major) {
-      color: $brand-01;
+      color: $hover-secondary;
     }
   }
 
