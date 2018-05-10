@@ -1,4 +1,4 @@
-.bx--text-truncate--end {
+.#{$prefix}--text-truncate--end {
   width: 100%;
   display: inline-block;
   text-overflow: ellipsis;
@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.bx--text-truncate--front {
+.#{$prefix}--text-truncate--front {
   width: 100%;
   display: inline-block;
   direction: rtl;
