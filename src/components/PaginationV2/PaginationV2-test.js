@@ -5,6 +5,8 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { shallow, mount } from 'enzyme';
 
+jest.useFakeTimers();
+
 describe('Pagination', () => {
   describe('renders as expected', () => {
     const paginationV2 = shallow(
@@ -351,6 +353,7 @@ describe('Pagination', () => {
             .find('select')
             .last()
             .simulate('change', { target: { value: 2 } });
+          jest.runAllTimers();
           expect(actualPage).toBe(2);
           expect(pager.state().page).toBe(2);
         });
