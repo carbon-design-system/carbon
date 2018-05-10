@@ -1,12 +1,12 @@
 <div class="bx--form-item">
-  <div class="bx--time-picker">
+  <div class="bx--time-picker bx--time-picker--light">
     <div class="bx--time-picker__input">
-      <input id="time-picker-1" type="text" class="bx--time-picker__input-field" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)"
+      <input data-invalid id="time-picker-1" type="text" class="bx--time-picker__input-field" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)"
         placeholder="hh:mm" maxlength="5" />
-      <label for="time-picker-1" class="bx--label">Select a time</label>
       <div class="bx--form-requirement">
         Invalid time.
       </div>
+      <label for="time-picker-1" class="bx--label">Select a time</label>
     </div>
     <div class="bx--time-picker__select bx--select bx--select--inline">
       <label for="select-id-1" class="bx--label bx--visually-hidden">Select AM/PM</label>

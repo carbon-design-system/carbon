@@ -1,6 +1,7 @@
 @mixin bx--snippet {
+  @include typescale('epsilon');
   background: $snippet-background-color;
-  border: 1px solid $snipppet-border-color;
+  border: 1px solid $snippet-border-color;
   font-family: $font-family-mono;
   position: relative;
   max-width: rem(600px);

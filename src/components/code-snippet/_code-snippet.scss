@@ -9,25 +9,43 @@
 
 @include exports('snippet') {
   .#{$prefix}--snippet code {
-    @include typescale('epsilon');
     font-family: $font-family-mono;
   }
 
   // Inline Code Snippet
   .#{$prefix}--snippet--inline {
+    @include reset;
+    position: relative;
+    display: inline;
     padding: 0;
     background: transparent;
+    font-size: inherit;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: $field-01;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($field-01, 10%);
+    }
+
+    &:focus {
+      @include focus-outline;
+      outline: none;
+      border: 1px solid $brand-01;
+    }
   }
 
   .#{$prefix}--snippet--inline code {
-    background-color: $field-01;
-    border-radius: 4px;
-    padding: 0 $spacing-xs;
-    cursor: pointer;
+    padding: rem(1px) $spacing-xs;
   }
 
-  .#{$prefix}--snippet--inline:hover code {
-    background-color: darken($field-01, 10%);
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--light {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: darken($field-02, 10%);
+    }
   }
 
   // Single Line Snippet
@@ -54,24 +72,26 @@
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
-    max-height: rem(254px);
     overflow: hidden;
     position: relative;
+    max-height: rem(254px);
+    min-height: rem(56px);
+    transition: all $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--snippet--expand.#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    max-height: rem(1500px);
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     white-space: pre-wrap;
   }
 
-  .#{$prefix}--snippet--expanded.#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
-    max-height: none;
-  }
-
   .#{$prefix}--snippet__icon {
     fill: $brand-01;
     height: rem(24px);
     width: rem(18px);
-    transition: $transition--base;
+    transition: all $transition--base $carbon--standard-easing;
 
     &:hover {
       fill: $hover-primary;
@@ -105,6 +125,7 @@
     right: 1.25rem;
   }
 
+  // Show more / less button
   .#{$prefix}--snippet-btn--expand {
     position: absolute;
     right: 0;
@@ -117,13 +138,17 @@
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     fill: $brand-01;
+    margin-left: $spacing-2xs;
+    transform: rotate(0deg);
+    transition: $transition--base;
   }
 
-  .#{$prefix}--snippet-btn--expand:hover .#{$prefix}--icon-chevron--down {
+  .#{$prefix}--snippet-btn--expand:hover .#{$prefix}--icon-chevron--down,
+  .#{$prefix}--snippet-btn--expand:focus .#{$prefix}--icon-chevron--down {
     fill: $inverse-01;
   }
 
-  .#{$prefix}--snippet--expanded .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+  .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
   }
 }
