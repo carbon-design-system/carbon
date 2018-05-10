@@ -74,11 +74,12 @@ export default class ComposedModal extends Component {
 
     return (
       <div
+        {...other}
         role="presentation"
         ref={modal => (this.modal = modal)}
         onKeyDown={this.handleKeyDown}
         className={modalClass}
-        {...other}>
+        tabIndex={-1}>
         <div className={containerClass}>{childrenWithProps}</div>
       </div>
     );
