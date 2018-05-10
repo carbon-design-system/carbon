@@ -20,6 +20,9 @@
     &:not(:first-child) {
       margin-left: 0;
     }
+    &__removed {
+      display: none;
+    }
   }
 
   .#{$prefix}--tag--ibm {
@@ -38,6 +41,16 @@
   .#{$prefix}--tag--dedicated,
   .#{$prefix}--tag--custom {
     @include tag-theme($color__purple-10, $color__purple-60);
+  }
+
+  .#{$prefix}--tag--functional {
+    @include tag-theme($color__gray-1, $color__navy-gray-4);
+    cursor: default;
+    white-space: nowrap;
+
+    &__selected {
+      @include tag-theme($color__blue-10, $color__blue-60);
+    }
   }
 
   .#{$prefix}--tag--experimental {
@@ -63,5 +76,19 @@
       height: rem(6px);
       width: 100%;
     }
+  }
+
+  .#{$prefix}--tag-close {
+    fill: $color__navy-gray-4;
+    padding-left: rem(5px);
+    width: rem(13px);
+    height: rem(13px);
+    cursor: pointer;
+  }
+
+  .#{$prefix}--tag-spacing {
+    margin-left: rem(1.5px);
+    padding-top: rem(4px);
+    padding-bottom: rem(2px);
   }
 }
