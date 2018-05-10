@@ -1,5 +1,6 @@
 @mixin bx--snippet {
-  @include typescale('epsilon');
+  @include typescale('omega');
+  line-height: 1.45;
   background: $snippet-background-color;
   border: 1px solid $snippet-border-color;
   font-family: $font-family-mono;
