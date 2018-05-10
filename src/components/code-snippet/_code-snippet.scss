@@ -120,10 +120,14 @@
   .#{$prefix}--snippet .#{$prefix}--btn--copy__feedback {
     @include font-family;
     z-index: z('overlay');
-    font-weight: 600;
+    font-weight: 400;
     left: inherit;
     top: 1rem;
     right: 1.25rem;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
   }
 
   // Show more / less button
