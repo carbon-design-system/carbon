@@ -25,25 +25,29 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
   }
 
   _handleClick() {
-    this.element.parentElement.classList.toggle('bx--snippet--expand');
+    const expandBtn = this.element.querySelector(this.options.classExpandText);
+    this.element.classList.toggle(this.options.classExpanded);
 
-    if (this.element.parentElement.classList.contains('bx--snippet--expand')) {
-      this.element.querySelectorAll('.bx--snippet-btn--text')[0].innerHTML = this.options.showLess;
+    if (this.element.classList.contains(this.options.classExpanded)) {
+      expandBtn.textContent = expandBtn.getAttribute(this.options.showLessText);
     } else {
-      this.element.querySelectorAll('.bx--snippet-btn--text')[0].innerHTML = this.options.showMore;
+      expandBtn.textContent = expandBtn.getAttribute(this.options.showMoreText);
     }
   }
 
   _initCodeSnippet() {
-    this.element.querySelectorAll('.bx--snippet-btn--text')[0].innerHTML = this.options.showMore;
-    if (this.element.parentElement.offsetHeight < 288) {
-      this.element.classList.add('bx--snippet-btn--expand--hide');
-      this.element.parentElement.classList.add('bx--snippet--expand');
+    const expandBtn = this.element.querySelector(this.options.classExpandText);
+
+    expandBtn.textContent = expandBtn.getAttribute(this.options.showMoreText);
+
+    if (this.element.offsetHeight < this.options.minHeight) {
+      this.element.classList.add(this.options.classHideExpand);
+      this.element.classList.add(this.options.classExpanded);
     }
   }
 
   /**
-   * The map associating DOM element and copy button UI instance.
+   * The map associating DOM element and code snippet UI instance.
    * @member CodeSnippet.components
    * @type {WeakMap}
    */
@@ -56,12 +60,17 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
    * properties in this object are overriden for the instance being create and how {@linkcode CodeSnippet.init .init()} works.
    * @member CodeSnippet.options
    * @type {Object}
-   * @property {string} selectorInit The data attribute to find copy button UIs.
+   * @property {string} selectorInit The data attribute to find code snippet UIs.
    */
   static options = {
-    selectorInit: '.bx--snippet--multi .bx--snippet-btn--expand',
-    showMore: 'Show more',
-    showLess: 'Show less',
+    selectorInit: '[data-code-snippet]',
+    showMoreText: 'data-show-more-text',
+    showLessText: 'data-show-less-text',
+    minHeight: 288,
+    classExpanded: 'bx--snippet--expand',
+    classExpandBtn: 'bx--snippet-btn--expand',
+    classExpandText: '.bx--snippet-btn--text',
+    classHideExpand: 'bx--snippet-btn--expand--hide',
   };
 }
 
