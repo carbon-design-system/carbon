@@ -1,6 +1,16 @@
-$breakpoints: (bp--xs--major: 500px, bp--sm--major: 768px, bp--md--major: 992px, bp--lg--major: 1200px);
+@import 'helper-classes';
 
-$padding: ('mobile': 3%, 'xs': 5%);
+$breakpoints: (
+  bp--xs--major: 500px,
+  bp--sm--major: 768px,
+  bp--md--major: 992px,
+  bp--lg--major: 1200px
+);
+
+$padding: (
+  'mobile': 3%,
+  'xs': 5%
+);
 
 @function padding($value) {
   @if map-has-key($padding, $value) {
