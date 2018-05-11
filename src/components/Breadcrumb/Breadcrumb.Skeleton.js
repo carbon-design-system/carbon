@@ -4,7 +4,7 @@ export default class BreadcrumbSkeleton extends React.Component {
   render() {
     const item = (
       <div className="bx--breadcrumb-item">
-        <a href="/#" class="bx--link">
+        <a href="/#" className="bx--link">
           &nbsp;
         </a>
       </div>
