@@ -86,7 +86,7 @@
   .#{$prefix}--structured-list-th {
     @include reset;
     @include padding-th;
-    @include typescale('zeta');
+    @include typescale('omega');
     display: table-cell;
     font-weight: 600;
     height: rem(40px);
