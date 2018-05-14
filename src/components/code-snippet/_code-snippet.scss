@@ -45,7 +45,7 @@
     background-color: $field-02;
 
     &:hover {
-      background-color: darken($field-02, 10%);
+      background-color: rgba($brand-02, 0.1);
     }
   }
 
@@ -122,11 +122,13 @@
     z-index: z('overlay');
     font-weight: 400;
     left: inherit;
-    top: 1rem;
+    top: 0.75rem;
     right: 1.25rem;
   }
 
-  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+  .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
+    top: rem(25px);
+    left: 1rem;
     right: auto;
   }
 
