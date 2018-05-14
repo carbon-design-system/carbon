@@ -73,10 +73,7 @@
     display: flex;
     flex-direction: column;
     z-index: z('dropdown');
-<<<<<<< HEAD
-=======
     background: $ui-01;
->>>>>>> 18b868793c3e3be113b11652d464a1bc328a98d7
 
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
