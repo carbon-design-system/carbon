@@ -156,4 +156,49 @@
   .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
   }
+
+  /* 
+    Deprecated class names will be removed in v10.x
+  */
+
+  .#{$prefix}--snippet--terminal {
+    @include bx--snippet;
+    height: rem(56px);
+    padding: 0 $spacing-2xl 0 $spacing-md;
+  }
+
+  .#{$prefix}--snippet--terminal .#{$prefix}--snippet-container {
+    display: flex;
+    align-items: center;
+    height: 130%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    position: relative;
+    padding-bottom: $spacing-md;
+  }
+
+  .#{$prefix}--snippet--code {
+    @include bx--snippet;
+    padding: $spacing-md $spacing-3xl $spacing-md $spacing-lg;
+  }
+
+  .#{$prefix}--snippet--code .#{$prefix}--snippet-container {
+    overflow: hidden;
+    position: relative;
+    max-height: rem(254px);
+    min-height: rem(56px);
+    transition: all $transition--base $carbon--standard-easing;
+  }
+
+  .#{$prefix}--snippet--expand.#{$prefix}--snippet--code .#{$prefix}--snippet-container {
+    max-height: rem(1500px);
+  }
+
+  .#{$prefix}--snippet--code .#{$prefix}--snippet-container pre {
+    white-space: pre-wrap;
+  }
+
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+  }
 }
