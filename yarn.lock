@@ -309,11 +309,7 @@ ansi-styles@^3.2.0:
 
 ansi-styles@^3.2.1:
   version "3.2.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
-=======
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     color-convert "^1.9.0"
 
@@ -327,11 +323,7 @@ ansi@^0.3.0, ansi@~0.3.0:
 
 any-observable@^0.2.0:
   version "0.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/any-observable/-/any-observable-0.2.0.tgz#c67870058003579009083f54ac0abafb5c33d242"
-=======
   resolved "https://registry.yarnpkg.com/any-observable/-/any-observable-0.2.0.tgz#c67870058003579009083f54ac0abafb5c33d242"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 anymatch@^1.3.0:
   version "1.3.2"
@@ -349,11 +341,7 @@ anymatch@^2.0.0:
 
 app-root-path@^2.0.0:
   version "2.0.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/app-root-path/-/app-root-path-2.0.1.tgz#cd62dcf8e4fd5a417efc664d2e5b10653c651b46"
-=======
   resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-2.0.1.tgz#cd62dcf8e4fd5a417efc664d2e5b10653c651b46"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 aproba@^1.0.1, aproba@^1.0.3:
   version "1.2.0"
@@ -582,16 +570,6 @@ autoprefixer@^6.0.0, autoprefixer@^6.3.1:
     postcss-value-parser "^3.2.3"
 
 autoprefixer@^8.2.0:
-<<<<<<< HEAD
-  version "8.2.0"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/autoprefixer/-/autoprefixer-8.2.0.tgz#1e49b611b31a5259b86b7a6b2b1b8faf091abe2a"
-  dependencies:
-    browserslist "^3.2.0"
-    caniuse-lite "^1.0.30000817"
-    normalize-range "^0.1.2"
-    num2fraction "^1.2.2"
-    postcss "^6.0.20"
-=======
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-8.3.0.tgz#22ac5151c3c8946bb8f75f337d5c5042c0ec6404"
   dependencies:
@@ -600,7 +578,6 @@ autoprefixer@^8.2.0:
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
     postcss "^6.0.21"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
     postcss-value-parser "^3.2.3"
 
 aws-sign2@~0.6.0:
@@ -1243,11 +1220,7 @@ backo2@1.0.2:
 
 balanced-match@^0.4.2:
   version "0.4.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
-=======
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -1674,15 +1647,9 @@ browserslist@^2.1.2:
     caniuse-lite "^1.0.30000792"
     electron-to-chromium "^1.3.30"
 
-<<<<<<< HEAD
-browserslist@^3.2.0:
-  version "3.2.4"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/browserslist/-/browserslist-3.2.4.tgz#fb9ad70fd09875137ae943a31ab815ed76896031"
-=======
 browserslist@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-3.2.4.tgz#fb9ad70fd09875137ae943a31ab815ed76896031"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     caniuse-lite "^1.0.30000821"
     electron-to-chromium "^1.3.41"
@@ -1815,11 +1782,7 @@ camelcase@^4.0.0, camelcase@^4.1.0:
 
 caniuse-api@^1.5.2:
   version "1.6.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/caniuse-api/-/caniuse-api-1.6.1.tgz#b534e7c734c4f81ec5fbe8aca2ad24354b962c6c"
-=======
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-1.6.1.tgz#b534e7c734c4f81ec5fbe8aca2ad24354b962c6c"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     browserslist "^1.3.6"
     caniuse-db "^1.0.30000529"
@@ -1827,13 +1790,8 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529:
-<<<<<<< HEAD
-  version "1.0.30000828"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/caniuse-db/-/caniuse-db-1.0.30000828.tgz#ed6d6f03b5a81fb291c3c0e088828b11a70948bf"
-=======
   version "1.0.30000830"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000830.tgz#6e45255b345649fd15ff59072da1e12bb3de2f13"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   version "1.0.30000808"
@@ -1843,15 +1801,9 @@ caniuse-lite@^1.0.30000792:
   version "1.0.30000808"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000808.tgz#7d759b5518529ea08b6705a19e70dbf401628ffc"
 
-<<<<<<< HEAD
-caniuse-lite@^1.0.30000817, caniuse-lite@^1.0.30000821:
-  version "1.0.30000828"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/caniuse-lite/-/caniuse-lite-1.0.30000828.tgz#048f98de213f7a3c047bf78a9523c611855d4fdd"
-=======
 caniuse-lite@^1.0.30000821, caniuse-lite@^1.0.30000830:
   version "1.0.30000830"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000830.tgz#cb96b8a2dd3cbfe04acea2af3c4e894249095328"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -1935,13 +1887,8 @@ chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1:
     supports-color "^5.2.0"
 
 chalk@^2.3.2:
-<<<<<<< HEAD
-  version "2.3.2"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/chalk/-/chalk-2.3.2.tgz#250dc96b07491bfd601e648d66ddf5f60c7a5c65"
-=======
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.0.tgz#a060a297a6b57e15b61ca63ce84995daa0fe6e52"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
@@ -2041,11 +1988,7 @@ circular-json@^0.5.1:
 
 clap@^1.0.9:
   version "1.2.3"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/clap/-/clap-1.2.3.tgz#4f36745b32008492557f46412d66d50cb99bce51"
-=======
   resolved "https://registry.yarnpkg.com/clap/-/clap-1.2.3.tgz#4f36745b32008492557f46412d66d50cb99bce51"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     chalk "^1.1.3"
 
@@ -2080,11 +2023,7 @@ cli-cursor@^1.0.1, cli-cursor@^1.0.2:
 
 cli-spinners@^0.1.2:
   version "0.1.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/cli-spinners/-/cli-spinners-0.1.2.tgz#bb764d88e185fb9e1e6a2a1f19772318f605e31c"
-=======
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-0.1.2.tgz#bb764d88e185fb9e1e6a2a1f19772318f605e31c"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 cli-table2@^0.2.0:
   version "0.2.0"
@@ -2097,11 +2036,7 @@ cli-table2@^0.2.0:
 
 cli-truncate@^0.2.1:
   version "0.2.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/cli-truncate/-/cli-truncate-0.2.1.tgz#9f15cfbb0705005369216c626ac7d05ab90dd574"
-=======
   resolved "https://registry.yarnpkg.com/cli-truncate/-/cli-truncate-0.2.1.tgz#9f15cfbb0705005369216c626ac7d05ab90dd574"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     slice-ansi "0.0.4"
     string-width "^1.0.1"
@@ -2139,11 +2074,7 @@ cliui@^3.0.3, cliui@^3.2.0:
 
 clone-deep@^2.0.1:
   version "2.0.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/clone-deep/-/clone-deep-2.0.2.tgz#00db3a1e173656730d1188c3d6aced6d7ea97713"
-=======
   resolved "https://registry.yarnpkg.com/clone-deep/-/clone-deep-2.0.2.tgz#00db3a1e173656730d1188c3d6aced6d7ea97713"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     for-own "^1.0.0"
     is-plain-object "^2.0.4"
@@ -2172,11 +2103,7 @@ co@~3.0.6:
 
 coa@~1.0.1:
   version "1.0.4"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/coa/-/coa-1.0.4.tgz#a9ef153660d6a86a8bdec0289a5c684d217432fd"
-=======
   resolved "https://registry.yarnpkg.com/coa/-/coa-1.0.4.tgz#a9ef153660d6a86a8bdec0289a5c684d217432fd"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     q "^1.1.2"
 
@@ -2207,11 +2134,7 @@ color-name@^1.0.0, color-name@^1.1.1:
 
 color-string@^0.3.0:
   version "0.3.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/color-string/-/color-string-0.3.0.tgz#27d46fb67025c5c2fa25993bfbf579e47841b991"
-=======
   resolved "https://registry.yarnpkg.com/color-string/-/color-string-0.3.0.tgz#27d46fb67025c5c2fa25993bfbf579e47841b991"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     color-name "^1.0.0"
 
@@ -2221,11 +2144,7 @@ color-support@^1.1.3:
 
 color@^0.11.0:
   version "0.11.4"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/color/-/color-0.11.4.tgz#6d7b5c74fb65e841cd48792ad1ed5e07b904d764"
-=======
   resolved "https://registry.yarnpkg.com/color/-/color-0.11.4.tgz#6d7b5c74fb65e841cd48792ad1ed5e07b904d764"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     clone "^1.0.2"
     color-convert "^1.3.0"
@@ -2233,11 +2152,7 @@ color@^0.11.0:
 
 colormin@^1.0.5:
   version "1.1.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/colormin/-/colormin-1.1.2.tgz#ea2f7420a72b96881a38aae59ec124a6f7298133"
-=======
   resolved "https://registry.yarnpkg.com/colormin/-/colormin-1.1.2.tgz#ea2f7420a72b96881a38aae59ec124a6f7298133"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     color "^0.11.0"
     css-color-names "0.0.4"
@@ -2294,11 +2209,7 @@ commander@2.14.x, commander@^2.13.0, commander@^2.2.0, commander@^2.8.1, command
 
 commander@^2.11.0:
   version "2.15.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
-=======
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 commander@~2.1.0:
   version "2.1.0"
@@ -2509,11 +2420,7 @@ core-util-is@1.0.2, core-util-is@^1.0.0, core-util-is@^1.0.1, core-util-is@~1.0.
 
 cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
   version "2.2.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/cosmiconfig/-/cosmiconfig-2.2.2.tgz#6173cebd56fac042c1f4390edf7af6c07c7cb892"
-=======
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-2.2.2.tgz#6173cebd56fac042c1f4390edf7af6c07c7cb892"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     is-directory "^0.3.1"
     js-yaml "^3.4.3"
@@ -2525,11 +2432,7 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
 
 cosmiconfig@^4.0.0:
   version "4.0.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/cosmiconfig/-/cosmiconfig-4.0.0.tgz#760391549580bbd2df1e562bc177b13c290972dc"
-=======
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-4.0.0.tgz#760391549580bbd2df1e562bc177b13c290972dc"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     is-directory "^0.3.1"
     js-yaml "^3.9.0"
@@ -2618,19 +2521,11 @@ crypto-random-string@^1.0.0:
 
 css-color-names@0.0.4:
   version "0.0.4"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
-
-css-loader@^0.28.0:
-  version "0.28.11"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/css-loader/-/css-loader-0.28.11.tgz#c3f9864a700be2711bb5a2462b2389b1a392dab7"
-=======
   resolved "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
 
 css-loader@^0.28.0:
   version "0.28.11"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-0.28.11.tgz#c3f9864a700be2711bb5a2462b2389b1a392dab7"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     babel-code-frame "^6.26.0"
     css-selector-tokenizer "^0.7.0"
@@ -2649,11 +2544,7 @@ css-loader@^0.28.0:
 
 css-selector-tokenizer@^0.7.0:
   version "0.7.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/css-selector-tokenizer/-/css-selector-tokenizer-0.7.0.tgz#e6988474ae8c953477bf5e7efecfceccd9cf4c86"
-=======
   resolved "https://registry.yarnpkg.com/css-selector-tokenizer/-/css-selector-tokenizer-0.7.0.tgz#e6988474ae8c953477bf5e7efecfceccd9cf4c86"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     cssesc "^0.1.0"
     fastparse "^1.1.1"
@@ -2661,11 +2552,7 @@ css-selector-tokenizer@^0.7.0:
 
 cssesc@^0.1.0:
   version "0.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/cssesc/-/cssesc-0.1.0.tgz#c814903e45623371a0477b40109aaafbeeaddbb4"
-=======
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-0.1.0.tgz#c814903e45623371a0477b40109aaafbeeaddbb4"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 cssmin@^0.4.3:
   version "0.4.3"
@@ -2673,11 +2560,7 @@ cssmin@^0.4.3:
 
 cssnano@^3.10.0:
   version "3.10.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/cssnano/-/cssnano-3.10.0.tgz#4f38f6cea2b9b17fa01490f23f1dc68ea65c1c38"
-=======
   resolved "https://registry.yarnpkg.com/cssnano/-/cssnano-3.10.0.tgz#4f38f6cea2b9b17fa01490f23f1dc68ea65c1c38"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     autoprefixer "^6.3.1"
     decamelize "^1.1.2"
@@ -2714,11 +2597,7 @@ cssnano@^3.10.0:
 
 csso@~2.3.1:
   version "2.3.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/csso/-/csso-2.3.2.tgz#ddd52c587033f49e94b71fc55569f252e8ff5f85"
-=======
   resolved "https://registry.yarnpkg.com/csso/-/csso-2.3.2.tgz#ddd52c587033f49e94b71fc55569f252e8ff5f85"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     clap "^1.0.9"
     source-map "^0.5.3"
@@ -2766,11 +2645,7 @@ data-uri-to-buffer@1:
 
 date-fns@^1.27.2:
   version "1.29.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
-=======
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 date-format@^1.2.0:
   version "1.2.0"
@@ -2841,11 +2716,7 @@ decode-uri-component@^0.2.0:
 
 dedent@^0.7.0:
   version "0.7.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
-=======
   resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 deep-aplus@^1.0.2:
   version "1.0.4"
@@ -3192,19 +3063,11 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.30:
 
 electron-to-chromium@^1.3.41:
   version "1.3.42"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/electron-to-chromium/-/electron-to-chromium-1.3.42.tgz#95c33bf01d0cc405556aec899fe61fd4d76ea0f9"
-
-elegant-spinner@^1.0.1:
-  version "1.0.1"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
-=======
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.42.tgz#95c33bf01d0cc405556aec899fe61fd4d76ea0f9"
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 elliptic@^6.0.0:
   version "6.4.0"
@@ -3765,11 +3628,7 @@ execa@^0.7.0:
 
 execa@^0.8.0:
   version "0.8.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
-=======
   resolved "https://registry.yarnpkg.com/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     cross-spawn "^5.0.1"
     get-stream "^3.0.0"
@@ -4149,11 +4008,7 @@ flatpickr@4.3.0:
 
 flatten@^1.0.2:
   version "1.0.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
-=======
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 follow-redirects@0.0.7:
   version "0.0.7"
@@ -4170,11 +4025,7 @@ follow-redirects@1.0.0:
 
 for-in@^0.1.3:
   version "0.1.8"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
-=======
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -4431,11 +4282,7 @@ get-caller-file@^1.0.1:
 
 get-own-enumerable-property-symbols@^2.0.1:
   version "2.0.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-2.0.1.tgz#5c4ad87f2834c4b9b4e84549dc1e0650fb38c24b"
-=======
   resolved "https://registry.yarnpkg.com/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-2.0.1.tgz#5c4ad87f2834c4b9b4e84549dc1e0650fb38c24b"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 get-stdin@^4.0.1:
   version "4.0.1"
@@ -5141,11 +4988,7 @@ hosted-git-info@^2.1.4, hosted-git-info@^2.1.5:
 
 html-comment-regex@^1.1.0:
   version "1.1.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/html-comment-regex/-/html-comment-regex-1.1.1.tgz#668b93776eaae55ebde8f3ad464b307a4963625e"
-=======
   resolved "https://registry.yarnpkg.com/html-comment-regex/-/html-comment-regex-1.1.1.tgz#668b93776eaae55ebde8f3ad464b307a4963625e"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 html-entities@^1.2.0:
   version "1.2.1"
@@ -5297,19 +5140,11 @@ iconv-lite@0.4.19, iconv-lite@~0.4.13:
 
 icss-replace-symbols@^1.1.0:
   version "1.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/icss-replace-symbols/-/icss-replace-symbols-1.1.0.tgz#06ea6f83679a7749e386cfe1fe812ae5db223ded"
-
-icss-utils@^2.1.0:
-  version "2.1.0"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/icss-utils/-/icss-utils-2.1.0.tgz#83f0a0ec378bf3246178b6c2ad9136f135b1c962"
-=======
   resolved "https://registry.yarnpkg.com/icss-replace-symbols/-/icss-replace-symbols-1.1.0.tgz#06ea6f83679a7749e386cfe1fe812ae5db223ded"
 
 icss-utils@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-2.1.0.tgz#83f0a0ec378bf3246178b6c2ad9136f135b1c962"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^6.0.1"
 
@@ -5361,19 +5196,11 @@ indent-string@^2.1.0:
 
 indent-string@^3.0.0:
   version "3.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/indent-string/-/indent-string-3.2.0.tgz#4a5fd6d27cc332f37e5419a504dbb837105c9289"
-
-indexes-of@^1.0.1:
-  version "1.0.1"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
-=======
   resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-3.2.0.tgz#4a5fd6d27cc332f37e5419a504dbb837105c9289"
 
 indexes-of@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 indexof@0.0.1:
   version "0.0.1"
@@ -5522,11 +5349,7 @@ ipaddr.js@1.5.2:
 
 is-absolute-url@^2.0.0:
   version "2.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/is-absolute-url/-/is-absolute-url-2.1.0.tgz#50530dfb84fcc9aa7dbe7852e83a37b93b9f2aa6"
-=======
   resolved "https://registry.yarnpkg.com/is-absolute-url/-/is-absolute-url-2.1.0.tgz#50530dfb84fcc9aa7dbe7852e83a37b93b9f2aa6"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 is-absolute@^1.0.0:
   version "1.0.0"
@@ -5611,11 +5434,7 @@ is-descriptor@^1.0.0:
 
 is-directory@^0.3.1:
   version "0.3.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/is-directory/-/is-directory-0.3.1.tgz#61339b6f2475fc772fd9c9d83f5c8575dc154ae1"
-=======
   resolved "https://registry.yarnpkg.com/is-directory/-/is-directory-0.3.1.tgz#61339b6f2475fc772fd9c9d83f5c8575dc154ae1"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 is-dotfile@^1.0.0:
   version "1.0.3"
@@ -5736,11 +5555,7 @@ is-obj@^1.0.0, is-obj@^1.0.1:
 
 is-observable@^0.2.0:
   version "0.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/is-observable/-/is-observable-0.2.0.tgz#b361311d83c6e5d726cabf5e250b0237106f5ae2"
-=======
   resolved "https://registry.yarnpkg.com/is-observable/-/is-observable-0.2.0.tgz#b361311d83c6e5d726cabf5e250b0237106f5ae2"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     symbol-observable "^0.2.2"
 
@@ -5768,11 +5583,7 @@ is-path-inside@^1.0.0:
 
 is-plain-obj@^1.0.0:
   version "1.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
-=======
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
@@ -5808,11 +5619,7 @@ is-regex@^1.0.4:
 
 is-regexp@^1.0.0:
   version "1.0.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/is-regexp/-/is-regexp-1.0.0.tgz#fd2d883545c46bac5a633e7b9a09e87fa2cb5069"
-=======
   resolved "https://registry.yarnpkg.com/is-regexp/-/is-regexp-1.0.0.tgz#fd2d883545c46bac5a633e7b9a09e87fa2cb5069"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 is-relative@^1.0.0:
   version "1.0.0"
@@ -5834,11 +5641,7 @@ is-stream@^1.0.0, is-stream@^1.0.1, is-stream@^1.1.0:
 
 is-svg@^2.0.0:
   version "2.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/is-svg/-/is-svg-2.1.0.tgz#cf61090da0d9efbcab8722deba6f032208dbb0e9"
-=======
   resolved "https://registry.yarnpkg.com/is-svg/-/is-svg-2.1.0.tgz#cf61090da0d9efbcab8722deba6f032208dbb0e9"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     html-comment-regex "^1.1.0"
 
@@ -5958,19 +5761,11 @@ jest-docblock@^21.0.0:
 
 jest-get-type@^21.2.0:
   version "21.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/jest-get-type/-/jest-get-type-21.2.0.tgz#f6376ab9db4b60d81e39f30749c6c466f40d4a23"
-
-jest-validate@^21.1.0:
-  version "21.2.1"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/jest-validate/-/jest-validate-21.2.1.tgz#cc0cbca653cd54937ba4f2a111796774530dd3c7"
-=======
   resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-21.2.0.tgz#f6376ab9db4b60d81e39f30749c6c466f40d4a23"
 
 jest-validate@^21.1.0:
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-validate/-/jest-validate-21.2.1.tgz#cc0cbca653cd54937ba4f2a111796774530dd3c7"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     chalk "^2.0.1"
     jest-get-type "^21.2.0"
@@ -6012,22 +5807,14 @@ js-yaml@3.x, js-yaml@^3.4.6, js-yaml@^3.5.1, js-yaml@^3.5.4, js-yaml@^3.6.1, js-
 
 js-yaml@^3.4.3, js-yaml@^3.9.0:
   version "3.11.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/js-yaml/-/js-yaml-3.11.0.tgz#597c1a8bd57152f26d622ce4117851a51f5ebaef"
-=======
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.11.0.tgz#597c1a8bd57152f26d622ce4117851a51f5ebaef"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
 js-yaml@~3.7.0:
   version "3.7.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/js-yaml/-/js-yaml-3.7.0.tgz#5c967ddd837a9bfdca5f2de84253abe8a1c03b80"
-=======
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.7.0.tgz#5c967ddd837a9bfdca5f2de84253abe8a1c03b80"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     argparse "^1.0.7"
     esprima "^2.6.0"
@@ -6073,11 +5860,7 @@ json-loader@^0.5.4:
 
 json-parse-better-errors@^1.0.1:
   version "1.0.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
-=======
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 json-schema-traverse@^0.3.0:
   version "0.3.1"
@@ -6354,11 +6137,7 @@ lcid@^1.0.0:
 
 leven@^2.1.0:
   version "2.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
-=======
   resolved "https://registry.yarnpkg.com/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
@@ -6420,11 +6199,7 @@ linkify-it@^2.0.0:
 
 lint-staged@^6.1.0:
   version "6.1.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/lint-staged/-/lint-staged-6.1.1.tgz#cd08c4d9b8ccc2d37198d1c47ce77d22be6cf324"
-=======
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-6.1.1.tgz#cd08c4d9b8ccc2d37198d1c47ce77d22be6cf324"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     app-root-path "^2.0.0"
     chalk "^2.1.0"
@@ -6449,19 +6224,11 @@ lint-staged@^6.1.0:
 
 listr-silent-renderer@^1.1.1:
   version "1.1.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/listr-silent-renderer/-/listr-silent-renderer-1.1.1.tgz#924b5a3757153770bf1a8e3fbf74b8bbf3f9242e"
-
-listr-update-renderer@^0.4.0:
-  version "0.4.0"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/listr-update-renderer/-/listr-update-renderer-0.4.0.tgz#344d980da2ca2e8b145ba305908f32ae3f4cc8a7"
-=======
   resolved "https://registry.yarnpkg.com/listr-silent-renderer/-/listr-silent-renderer-1.1.1.tgz#924b5a3757153770bf1a8e3fbf74b8bbf3f9242e"
 
 listr-update-renderer@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/listr-update-renderer/-/listr-update-renderer-0.4.0.tgz#344d980da2ca2e8b145ba305908f32ae3f4cc8a7"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     chalk "^1.1.3"
     cli-truncate "^0.2.1"
@@ -6474,11 +6241,7 @@ listr-update-renderer@^0.4.0:
 
 listr-verbose-renderer@^0.4.0:
   version "0.4.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/listr-verbose-renderer/-/listr-verbose-renderer-0.4.1.tgz#8206f4cf6d52ddc5827e5fd14989e0e965933a35"
-=======
   resolved "https://registry.yarnpkg.com/listr-verbose-renderer/-/listr-verbose-renderer-0.4.1.tgz#8206f4cf6d52ddc5827e5fd14989e0e965933a35"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     chalk "^1.1.3"
     cli-cursor "^1.0.2"
@@ -6487,11 +6250,7 @@ listr-verbose-renderer@^0.4.0:
 
 listr@^0.13.0:
   version "0.13.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/listr/-/listr-0.13.0.tgz#20bb0ba30bae660ee84cc0503df4be3d5623887d"
-=======
   resolved "https://registry.yarnpkg.com/listr/-/listr-0.13.0.tgz#20bb0ba30bae660ee84cc0503df4be3d5623887d"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     chalk "^1.1.3"
     cli-truncate "^0.2.1"
@@ -6652,11 +6411,7 @@ lodash.assign@^4.2.0:
 
 lodash.camelcase@^4.3.0:
   version "4.3.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
-=======
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 lodash.capitalize@^4.1.0:
   version "4.2.1"
@@ -6766,11 +6521,7 @@ lodash.map@^4.5.1:
 
 lodash.memoize@^4.1.2:
   version "4.1.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
-=======
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 lodash.memoize@~3.0.3:
   version "3.0.4"
@@ -6818,11 +6569,7 @@ lodash.startswith@^4.2.1:
 
 lodash.tail@^4.1.1:
   version "4.1.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
-=======
   resolved "https://registry.yarnpkg.com/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 lodash.template@^3.0.0:
   version "3.6.2"
@@ -6854,11 +6601,7 @@ lodash.toplainobject@^3.0.0:
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
-=======
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 lodash@^3.10.1, lodash@^3.3.1, lodash@^3.6.0, lodash@^3.8.0, lodash@^3.9.3:
   version "3.10.1"
@@ -6878,11 +6621,7 @@ lodash@~1.3.1:
 
 log-symbols@^1.0.2:
   version "1.0.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/log-symbols/-/log-symbols-1.0.2.tgz#376ff7b58ea3086a0f09facc74617eca501e1a18"
-=======
   resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-1.0.2.tgz#376ff7b58ea3086a0f09facc74617eca501e1a18"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     chalk "^1.0.0"
 
@@ -6982,11 +6721,7 @@ lru-cache@~2.6.5:
 
 macaddress@^0.2.8:
   version "0.2.8"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
-=======
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 magic-string@^0.22.4:
   version "0.22.4"
@@ -7075,11 +6810,7 @@ marked@^0.3.6, marked@~0.3.6:
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
-=======
   resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 md5.js@^1.3.4:
   version "1.3.4"
@@ -7299,11 +7030,7 @@ mixin-deep@^1.2.0:
 
 mixin-object@^2.0.1:
   version "2.0.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/mixin-object/-/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
-=======
   resolved "https://registry.yarnpkg.com/mixin-object/-/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     for-in "^0.1.3"
     is-extendable "^0.1.1"
@@ -7432,11 +7159,7 @@ negotiator@0.6.1:
 
 neo-async@^2.5.0:
   version "2.5.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
-=======
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 nerf-dart@^1.0.0:
   version "1.0.0"
@@ -7694,11 +7417,7 @@ normalize-range@^0.1.2:
 
 normalize-url@^1.4.0:
   version "1.9.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/normalize-url/-/normalize-url-1.9.1.tgz#2cc0d66b31ea23036458436e3620d85954c66c3c"
-=======
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-1.9.1.tgz#2cc0d66b31ea23036458436e3620d85954c66c3c"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     object-assign "^4.0.1"
     prepend-http "^1.0.0"
@@ -7714,11 +7433,7 @@ normalize-url@^1.4.0:
 
 npm-path@^2.0.2:
   version "2.0.4"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/npm-path/-/npm-path-2.0.4.tgz#c641347a5ff9d6a09e4d9bce5580c4f505278e64"
-=======
   resolved "https://registry.yarnpkg.com/npm-path/-/npm-path-2.0.4.tgz#c641347a5ff9d6a09e4d9bce5580c4f505278e64"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     which "^1.2.10"
 
@@ -7746,11 +7461,7 @@ npm-run-path@^2.0.0:
 
 npm-which@^3.0.1:
   version "3.0.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/npm-which/-/npm-which-3.0.1.tgz#9225f26ec3a285c209cae67c3b11a6b4ab7140aa"
-=======
   resolved "https://registry.yarnpkg.com/npm-which/-/npm-which-3.0.1.tgz#9225f26ec3a285c209cae67c3b11a6b4ab7140aa"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     commander "^2.9.0"
     npm-path "^2.0.2"
@@ -7948,11 +7659,7 @@ options@>=0.0.5:
 
 ora@^0.2.3:
   version "0.2.3"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/ora/-/ora-0.2.3.tgz#37527d220adcd53c39b73571d754156d5db657a4"
-=======
   resolved "https://registry.yarnpkg.com/ora/-/ora-0.2.3.tgz#37527d220adcd53c39b73571d754156d5db657a4"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     chalk "^1.1.1"
     cli-cursor "^1.0.2"
@@ -8026,11 +7733,7 @@ p-locate@^2.0.0:
 
 p-map@^1.1.1:
   version "1.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/p-map/-/p-map-1.2.0.tgz#e4e94f311eabbc8633a1e79908165fca26241b6b"
-=======
   resolved "https://registry.yarnpkg.com/p-map/-/p-map-1.2.0.tgz#e4e94f311eabbc8633a1e79908165fca26241b6b"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 p-try@^1.0.0:
   version "1.0.0"
@@ -8146,11 +7849,7 @@ parse-json@^2.1.0, parse-json@^2.2.0:
 
 parse-json@^4.0.0:
   version "4.0.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/parse-json/-/parse-json-4.0.0.tgz#be35f5425be1f7f6c747184f98a788cb99477ee0"
-=======
   resolved "https://registry.yarnpkg.com/parse-json/-/parse-json-4.0.0.tgz#be35f5425be1f7f6c747184f98a788cb99477ee0"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     error-ex "^1.3.1"
     json-parse-better-errors "^1.0.1"
@@ -8384,11 +8083,7 @@ posix-character-classes@^0.1.0:
 
 postcss-calc@^5.2.0:
   version "5.3.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
-=======
   resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.2"
     postcss-message-helpers "^2.0.0"
@@ -8396,11 +8091,7 @@ postcss-calc@^5.2.0:
 
 postcss-colormin@^2.1.8:
   version "2.2.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-colormin/-/postcss-colormin-2.2.2.tgz#6631417d5f0e909a3d7ec26b24c8a8d1e4f96e4b"
-=======
   resolved "https://registry.yarnpkg.com/postcss-colormin/-/postcss-colormin-2.2.2.tgz#6631417d5f0e909a3d7ec26b24c8a8d1e4f96e4b"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     colormin "^1.0.5"
     postcss "^5.0.13"
@@ -8408,84 +8099,52 @@ postcss-colormin@^2.1.8:
 
 postcss-convert-values@^2.3.4:
   version "2.6.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-convert-values/-/postcss-convert-values-2.6.1.tgz#bbd8593c5c1fd2e3d1c322bb925dcae8dae4d62d"
-=======
   resolved "https://registry.yarnpkg.com/postcss-convert-values/-/postcss-convert-values-2.6.1.tgz#bbd8593c5c1fd2e3d1c322bb925dcae8dae4d62d"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.11"
     postcss-value-parser "^3.1.2"
 
 postcss-discard-comments@^2.0.4:
   version "2.0.4"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-discard-comments/-/postcss-discard-comments-2.0.4.tgz#befe89fafd5b3dace5ccce51b76b81514be00e3d"
-=======
   resolved "https://registry.yarnpkg.com/postcss-discard-comments/-/postcss-discard-comments-2.0.4.tgz#befe89fafd5b3dace5ccce51b76b81514be00e3d"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.14"
 
 postcss-discard-duplicates@^2.0.1:
   version "2.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-discard-duplicates/-/postcss-discard-duplicates-2.1.0.tgz#b9abf27b88ac188158a5eb12abcae20263b91932"
-=======
   resolved "https://registry.yarnpkg.com/postcss-discard-duplicates/-/postcss-discard-duplicates-2.1.0.tgz#b9abf27b88ac188158a5eb12abcae20263b91932"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.4"
 
 postcss-discard-empty@^2.0.1:
   version "2.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-discard-empty/-/postcss-discard-empty-2.1.0.tgz#d2b4bd9d5ced5ebd8dcade7640c7d7cd7f4f92b5"
-=======
   resolved "https://registry.yarnpkg.com/postcss-discard-empty/-/postcss-discard-empty-2.1.0.tgz#d2b4bd9d5ced5ebd8dcade7640c7d7cd7f4f92b5"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.14"
 
 postcss-discard-overridden@^0.1.1:
   version "0.1.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-discard-overridden/-/postcss-discard-overridden-0.1.1.tgz#8b1eaf554f686fb288cd874c55667b0aa3668d58"
-=======
   resolved "https://registry.yarnpkg.com/postcss-discard-overridden/-/postcss-discard-overridden-0.1.1.tgz#8b1eaf554f686fb288cd874c55667b0aa3668d58"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.16"
 
 postcss-discard-unused@^2.2.1:
   version "2.2.3"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-discard-unused/-/postcss-discard-unused-2.2.3.tgz#bce30b2cc591ffc634322b5fb3464b6d934f4433"
-=======
   resolved "https://registry.yarnpkg.com/postcss-discard-unused/-/postcss-discard-unused-2.2.3.tgz#bce30b2cc591ffc634322b5fb3464b6d934f4433"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.14"
     uniqs "^2.0.0"
 
 postcss-filter-plugins@^2.0.0:
   version "2.0.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-filter-plugins/-/postcss-filter-plugins-2.0.2.tgz#6d85862534d735ac420e4a85806e1f5d4286d84c"
-=======
   resolved "https://registry.yarnpkg.com/postcss-filter-plugins/-/postcss-filter-plugins-2.0.2.tgz#6d85862534d735ac420e4a85806e1f5d4286d84c"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.4"
     uniqid "^4.0.0"
 
 postcss-load-config@^1.2.0:
   version "1.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-load-config/-/postcss-load-config-1.2.0.tgz#539e9afc9ddc8620121ebf9d8c3673e0ce50d28a"
-=======
   resolved "https://registry.yarnpkg.com/postcss-load-config/-/postcss-load-config-1.2.0.tgz#539e9afc9ddc8620121ebf9d8c3673e0ce50d28a"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     cosmiconfig "^2.1.0"
     object-assign "^4.1.0"
@@ -8494,34 +8153,21 @@ postcss-load-config@^1.2.0:
 
 postcss-load-options@^1.2.0:
   version "1.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-load-options/-/postcss-load-options-1.2.0.tgz#b098b1559ddac2df04bc0bb375f99a5cfe2b6d8c"
-=======
   resolved "https://registry.yarnpkg.com/postcss-load-options/-/postcss-load-options-1.2.0.tgz#b098b1559ddac2df04bc0bb375f99a5cfe2b6d8c"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     cosmiconfig "^2.1.0"
     object-assign "^4.1.0"
 
 postcss-load-plugins@^2.3.0:
   version "2.3.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-load-plugins/-/postcss-load-plugins-2.3.0.tgz#745768116599aca2f009fad426b00175049d8d92"
-=======
   resolved "https://registry.yarnpkg.com/postcss-load-plugins/-/postcss-load-plugins-2.3.0.tgz#745768116599aca2f009fad426b00175049d8d92"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     cosmiconfig "^2.1.1"
     object-assign "^4.1.0"
 
 postcss-loader@^2.1.0:
-<<<<<<< HEAD
-  version "2.1.3"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-loader/-/postcss-loader-2.1.3.tgz#eb210da734e475a244f76ccd61f9860f5bb3ee09"
-=======
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.1.4.tgz#f44a6390e03c84108b2b2063182d1a1011b2ce76"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     loader-utils "^1.1.0"
     postcss "^6.0.0"
@@ -8530,11 +8176,7 @@ postcss-loader@^2.1.0:
 
 postcss-merge-idents@^2.1.5:
   version "2.1.7"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-merge-idents/-/postcss-merge-idents-2.1.7.tgz#4c5530313c08e1d5b3bbf3d2bbc747e278eea270"
-=======
   resolved "https://registry.yarnpkg.com/postcss-merge-idents/-/postcss-merge-idents-2.1.7.tgz#4c5530313c08e1d5b3bbf3d2bbc747e278eea270"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     has "^1.0.1"
     postcss "^5.0.10"
@@ -8542,21 +8184,13 @@ postcss-merge-idents@^2.1.5:
 
 postcss-merge-longhand@^2.0.1:
   version "2.0.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-merge-longhand/-/postcss-merge-longhand-2.0.2.tgz#23d90cd127b0a77994915332739034a1a4f3d658"
-=======
   resolved "https://registry.yarnpkg.com/postcss-merge-longhand/-/postcss-merge-longhand-2.0.2.tgz#23d90cd127b0a77994915332739034a1a4f3d658"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.4"
 
 postcss-merge-rules@^2.0.3:
   version "2.1.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-merge-rules/-/postcss-merge-rules-2.1.2.tgz#d1df5dfaa7b1acc3be553f0e9e10e87c61b5f721"
-=======
   resolved "https://registry.yarnpkg.com/postcss-merge-rules/-/postcss-merge-rules-2.1.2.tgz#d1df5dfaa7b1acc3be553f0e9e10e87c61b5f721"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     browserslist "^1.5.2"
     caniuse-api "^1.5.2"
@@ -8566,19 +8200,11 @@ postcss-merge-rules@^2.0.3:
 
 postcss-message-helpers@^2.0.0:
   version "2.0.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-message-helpers/-/postcss-message-helpers-2.0.0.tgz#a4f2f4fab6e4fe002f0aed000478cdf52f9ba60e"
-
-postcss-minify-font-values@^1.0.2:
-  version "1.0.5"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-minify-font-values/-/postcss-minify-font-values-1.0.5.tgz#4b58edb56641eba7c8474ab3526cafd7bbdecb69"
-=======
   resolved "https://registry.yarnpkg.com/postcss-message-helpers/-/postcss-message-helpers-2.0.0.tgz#a4f2f4fab6e4fe002f0aed000478cdf52f9ba60e"
 
 postcss-minify-font-values@^1.0.2:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/postcss-minify-font-values/-/postcss-minify-font-values-1.0.5.tgz#4b58edb56641eba7c8474ab3526cafd7bbdecb69"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     object-assign "^4.0.1"
     postcss "^5.0.4"
@@ -8586,22 +8212,14 @@ postcss-minify-font-values@^1.0.2:
 
 postcss-minify-gradients@^1.0.1:
   version "1.0.5"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-minify-gradients/-/postcss-minify-gradients-1.0.5.tgz#5dbda11373703f83cfb4a3ea3881d8d75ff5e6e1"
-=======
   resolved "https://registry.yarnpkg.com/postcss-minify-gradients/-/postcss-minify-gradients-1.0.5.tgz#5dbda11373703f83cfb4a3ea3881d8d75ff5e6e1"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.12"
     postcss-value-parser "^3.3.0"
 
 postcss-minify-params@^1.0.4:
   version "1.2.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-minify-params/-/postcss-minify-params-1.2.2.tgz#ad2ce071373b943b3d930a3fa59a358c28d6f1f3"
-=======
   resolved "https://registry.yarnpkg.com/postcss-minify-params/-/postcss-minify-params-1.2.2.tgz#ad2ce071373b943b3d930a3fa59a358c28d6f1f3"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     alphanum-sort "^1.0.1"
     postcss "^5.0.2"
@@ -8610,11 +8228,7 @@ postcss-minify-params@^1.0.4:
 
 postcss-minify-selectors@^2.0.4:
   version "2.1.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-minify-selectors/-/postcss-minify-selectors-2.1.1.tgz#b2c6a98c0072cf91b932d1a496508114311735bf"
-=======
   resolved "https://registry.yarnpkg.com/postcss-minify-selectors/-/postcss-minify-selectors-2.1.1.tgz#b2c6a98c0072cf91b932d1a496508114311735bf"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     alphanum-sort "^1.0.2"
     has "^1.0.1"
@@ -8623,64 +8237,40 @@ postcss-minify-selectors@^2.0.4:
 
 postcss-modules-extract-imports@^1.2.0:
   version "1.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-modules-extract-imports/-/postcss-modules-extract-imports-1.2.0.tgz#66140ecece38ef06bf0d3e355d69bf59d141ea85"
-=======
   resolved "https://registry.yarnpkg.com/postcss-modules-extract-imports/-/postcss-modules-extract-imports-1.2.0.tgz#66140ecece38ef06bf0d3e355d69bf59d141ea85"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^6.0.1"
 
 postcss-modules-local-by-default@^1.2.0:
   version "1.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-modules-local-by-default/-/postcss-modules-local-by-default-1.2.0.tgz#f7d80c398c5a393fa7964466bd19500a7d61c069"
-=======
   resolved "https://registry.yarnpkg.com/postcss-modules-local-by-default/-/postcss-modules-local-by-default-1.2.0.tgz#f7d80c398c5a393fa7964466bd19500a7d61c069"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     css-selector-tokenizer "^0.7.0"
     postcss "^6.0.1"
 
 postcss-modules-scope@^1.1.0:
   version "1.1.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-modules-scope/-/postcss-modules-scope-1.1.0.tgz#d6ea64994c79f97b62a72b426fbe6056a194bb90"
-=======
   resolved "https://registry.yarnpkg.com/postcss-modules-scope/-/postcss-modules-scope-1.1.0.tgz#d6ea64994c79f97b62a72b426fbe6056a194bb90"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     css-selector-tokenizer "^0.7.0"
     postcss "^6.0.1"
 
 postcss-modules-values@^1.3.0:
   version "1.3.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-modules-values/-/postcss-modules-values-1.3.0.tgz#ecffa9d7e192518389f42ad0e83f72aec456ea20"
-=======
   resolved "https://registry.yarnpkg.com/postcss-modules-values/-/postcss-modules-values-1.3.0.tgz#ecffa9d7e192518389f42ad0e83f72aec456ea20"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     icss-replace-symbols "^1.1.0"
     postcss "^6.0.1"
 
 postcss-normalize-charset@^1.1.0:
   version "1.1.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-normalize-charset/-/postcss-normalize-charset-1.1.1.tgz#ef9ee71212d7fe759c78ed162f61ed62b5cb93f1"
-=======
   resolved "https://registry.yarnpkg.com/postcss-normalize-charset/-/postcss-normalize-charset-1.1.1.tgz#ef9ee71212d7fe759c78ed162f61ed62b5cb93f1"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.5"
 
 postcss-normalize-url@^3.0.7:
   version "3.0.8"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-normalize-url/-/postcss-normalize-url-3.0.8.tgz#108f74b3f2fcdaf891a2ffa3ea4592279fc78222"
-=======
   resolved "https://registry.yarnpkg.com/postcss-normalize-url/-/postcss-normalize-url-3.0.8.tgz#108f74b3f2fcdaf891a2ffa3ea4592279fc78222"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     is-absolute-url "^2.0.0"
     normalize-url "^1.4.0"
@@ -8689,43 +8279,27 @@ postcss-normalize-url@^3.0.7:
 
 postcss-ordered-values@^2.1.0:
   version "2.2.3"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-ordered-values/-/postcss-ordered-values-2.2.3.tgz#eec6c2a67b6c412a8db2042e77fe8da43f95c11d"
-=======
   resolved "https://registry.yarnpkg.com/postcss-ordered-values/-/postcss-ordered-values-2.2.3.tgz#eec6c2a67b6c412a8db2042e77fe8da43f95c11d"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.4"
     postcss-value-parser "^3.0.1"
 
 postcss-reduce-idents@^2.2.2:
   version "2.4.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-reduce-idents/-/postcss-reduce-idents-2.4.0.tgz#c2c6d20cc958284f6abfbe63f7609bf409059ad3"
-=======
   resolved "https://registry.yarnpkg.com/postcss-reduce-idents/-/postcss-reduce-idents-2.4.0.tgz#c2c6d20cc958284f6abfbe63f7609bf409059ad3"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.4"
     postcss-value-parser "^3.0.2"
 
 postcss-reduce-initial@^1.0.0:
   version "1.0.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-reduce-initial/-/postcss-reduce-initial-1.0.1.tgz#68f80695f045d08263a879ad240df8dd64f644ea"
-=======
   resolved "https://registry.yarnpkg.com/postcss-reduce-initial/-/postcss-reduce-initial-1.0.1.tgz#68f80695f045d08263a879ad240df8dd64f644ea"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     postcss "^5.0.4"
 
 postcss-reduce-transforms@^1.0.3:
   version "1.0.4"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-reduce-transforms/-/postcss-reduce-transforms-1.0.4.tgz#ff76f4d8212437b31c298a42d2e1444025771ae1"
-=======
   resolved "https://registry.yarnpkg.com/postcss-reduce-transforms/-/postcss-reduce-transforms-1.0.4.tgz#ff76f4d8212437b31c298a42d2e1444025771ae1"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     has "^1.0.1"
     postcss "^5.0.8"
@@ -8733,11 +8307,7 @@ postcss-reduce-transforms@^1.0.3:
 
 postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.2:
   version "2.2.3"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-selector-parser/-/postcss-selector-parser-2.2.3.tgz#f9437788606c3c9acee16ffe8d8b16297f27bb90"
-=======
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-2.2.3.tgz#f9437788606c3c9acee16ffe8d8b16297f27bb90"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     flatten "^1.0.2"
     indexes-of "^1.0.1"
@@ -8745,11 +8315,7 @@ postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.2:
 
 postcss-svgo@^2.1.1:
   version "2.1.6"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-svgo/-/postcss-svgo-2.1.6.tgz#b6df18aa613b666e133f08adb5219c2684ac108d"
-=======
   resolved "https://registry.yarnpkg.com/postcss-svgo/-/postcss-svgo-2.1.6.tgz#b6df18aa613b666e133f08adb5219c2684ac108d"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     is-svg "^2.0.0"
     postcss "^5.0.14"
@@ -8758,11 +8324,7 @@ postcss-svgo@^2.1.1:
 
 postcss-unique-selectors@^2.0.2:
   version "2.0.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-unique-selectors/-/postcss-unique-selectors-2.0.2.tgz#981d57d29ddcb33e7b1dfe1fd43b8649f933ca1d"
-=======
   resolved "https://registry.yarnpkg.com/postcss-unique-selectors/-/postcss-unique-selectors-2.0.2.tgz#981d57d29ddcb33e7b1dfe1fd43b8649f933ca1d"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     alphanum-sort "^1.0.1"
     postcss "^5.0.4"
@@ -8774,11 +8336,7 @@ postcss-value-parser@^3.0.1, postcss-value-parser@^3.0.2, postcss-value-parser@^
 
 postcss-zindex@^2.0.1:
   version "2.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss-zindex/-/postcss-zindex-2.2.0.tgz#d2109ddc055b91af67fc4cb3b025946639d2af22"
-=======
   resolved "https://registry.yarnpkg.com/postcss-zindex/-/postcss-zindex-2.2.0.tgz#d2109ddc055b91af67fc4cb3b025946639d2af22"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     has "^1.0.1"
     postcss "^5.0.4"
@@ -8793,15 +8351,9 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-<<<<<<< HEAD
-postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.20:
-  version "6.0.21"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/postcss/-/postcss-6.0.21.tgz#8265662694eddf9e9a5960db6da33c39e4cd069d"
-=======
 postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.21:
   version "6.0.21"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.21.tgz#8265662694eddf9e9a5960db6da33c39e4cd069d"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     chalk "^2.3.2"
     source-map "^0.6.1"
@@ -8833,11 +8385,7 @@ prettier@^1.7.0:
 
 pretty-format@^21.2.1:
   version "21.2.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/pretty-format/-/pretty-format-21.2.1.tgz#ae5407f3cf21066cd011aa1ba5fce7b6a2eddb36"
-=======
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-21.2.1.tgz#ae5407f3cf21066cd011aa1ba5fce7b6a2eddb36"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
@@ -8957,11 +8505,7 @@ punycode@1.4.1, punycode@^1.2.4, punycode@^1.3.2, punycode@^1.4.1:
 
 q@^1.1.2:
   version "1.5.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
-=======
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 q@~1.4.0:
   version "1.4.1"
@@ -8999,11 +8543,7 @@ query-string@^2.4.0:
 
 query-string@^4.1.0:
   version "4.3.4"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/query-string/-/query-string-4.3.4.tgz#bbb693b9ca915c232515b228b1a02b609043dbeb"
-=======
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.4.tgz#bbb693b9ca915c232515b228b1a02b609043dbeb"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
@@ -9231,11 +8771,7 @@ redis@^2.7.1:
 
 reduce-css-calc@^1.2.6:
   version "1.3.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/reduce-css-calc/-/reduce-css-calc-1.3.0.tgz#747c914e049614a4c9cfbba629871ad1d2927716"
-=======
   resolved "https://registry.yarnpkg.com/reduce-css-calc/-/reduce-css-calc-1.3.0.tgz#747c914e049614a4c9cfbba629871ad1d2927716"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     balanced-match "^0.4.2"
     math-expression-evaluator "^1.2.14"
@@ -9243,11 +8779,7 @@ reduce-css-calc@^1.2.6:
 
 reduce-function-call@^1.0.1:
   version "1.0.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
-=======
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     balanced-match "^0.4.2"
 
@@ -9285,11 +8817,7 @@ regex-not@^1.0.0:
 
 regexpu-core@^1.0.0:
   version "1.0.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/regexpu-core/-/regexpu-core-1.0.0.tgz#86a763f58ee4d7c2f6b102e4764050de7ed90c6b"
-=======
   resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-1.0.0.tgz#86a763f58ee4d7c2f6b102e4764050de7ed90c6b"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     regenerate "^1.2.1"
     regjsgen "^0.2.0"
@@ -9508,19 +9036,11 @@ require-directory@^2.1.1:
 
 require-from-string@^1.1.0:
   version "1.2.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/require-from-string/-/require-from-string-1.2.1.tgz#529c9ccef27380adfec9a2f965b649bbee636418"
-
-require-from-string@^2.0.1:
-  version "2.0.2"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
-=======
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-1.2.1.tgz#529c9ccef27380adfec9a2f965b649bbee636418"
 
 require-from-string@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 require-main-filename@^1.0.1:
   version "1.0.1"
@@ -9730,11 +9250,7 @@ rx@4.1.0, rx@^4.1.0:
 
 rxjs@^5.4.2:
   version "5.5.10"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/rxjs/-/rxjs-5.5.10.tgz#fde02d7a614f6c8683d0d1957827f492e09db045"
-=======
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.10.tgz#fde02d7a614f6c8683d0d1957827f492e09db045"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     symbol-observable "1.0.1"
 
@@ -9785,11 +9301,7 @@ sass-lint@^1.3.2:
 
 sass-loader@^6.0.0:
   version "6.0.7"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/sass-loader/-/sass-loader-6.0.7.tgz#dd2fdb3e7eeff4a53f35ba6ac408715488353d00"
-=======
   resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-6.0.7.tgz#dd2fdb3e7eeff4a53f35ba6ac408715488353d00"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     clone-deep "^2.0.1"
     loader-utils "^1.0.1"
@@ -9800,13 +9312,6 @@ sass-loader@^6.0.0:
 sax@>=0.6.0, sax@~1.2.1:
   version "1.2.4"
   resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
-
-schema-utils@^0.4.0, schema-utils@^0.4.5:
-  version "0.4.5"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/schema-utils/-/schema-utils-0.4.5.tgz#21836f0608aac17b78f9e3e24daff14a5ca13a3e"
-  dependencies:
-    ajv "^6.1.0"
-    ajv-keywords "^3.1.0"
 
 schema-utils@^0.4.0, schema-utils@^0.4.5:
   version "0.4.5"
@@ -10058,11 +9563,7 @@ sha.js@^2.4.0, sha.js@^2.4.8, sha.js@~2.4.4:
 
 shallow-clone@^1.0.0:
   version "1.0.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/shallow-clone/-/shallow-clone-1.0.0.tgz#4480cd06e882ef68b2ad88a3ea54832e2c48b571"
-=======
   resolved "https://registry.yarnpkg.com/shallow-clone/-/shallow-clone-1.0.0.tgz#4480cd06e882ef68b2ad88a3ea54832e2c48b571"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     is-extendable "^0.1.1"
     kind-of "^5.0.0"
@@ -10291,11 +9792,7 @@ socks@~1.1.5:
 
 sort-keys@^1.0.0:
   version "1.1.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
-=======
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     is-plain-obj "^1.0.0"
 
@@ -10413,11 +9910,7 @@ sshpk@^1.7.0:
 
 staged-git-files@1.0.0:
   version "1.0.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/staged-git-files/-/staged-git-files-1.0.0.tgz#cdb847837c1fcc52c08a872d4883cc0877668a80"
-=======
   resolved "https://registry.yarnpkg.com/staged-git-files/-/staged-git-files-1.0.0.tgz#cdb847837c1fcc52c08a872d4883cc0877668a80"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 static-extend@^0.1.1:
   version "0.1.2"
@@ -10492,11 +9985,7 @@ stream-throttle@^0.1.3:
 
 stream-to-observable@^0.2.0:
   version "0.2.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/stream-to-observable/-/stream-to-observable-0.2.0.tgz#59d6ea393d87c2c0ddac10aa0d561bc6ba6f0e10"
-=======
   resolved "https://registry.yarnpkg.com/stream-to-observable/-/stream-to-observable-0.2.0.tgz#59d6ea393d87c2c0ddac10aa0d561bc6ba6f0e10"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     any-observable "^0.2.0"
 
@@ -10546,11 +10035,7 @@ string_decoder@~0.10.x:
 
 stringify-object@^3.2.0:
   version "3.2.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/stringify-object/-/stringify-object-3.2.2.tgz#9853052e5a88fb605a44cd27445aa257ad7ffbcd"
-=======
   resolved "https://registry.yarnpkg.com/stringify-object/-/stringify-object-3.2.2.tgz#9853052e5a88fb605a44cd27445aa257ad7ffbcd"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     get-own-enumerable-property-symbols "^2.0.1"
     is-obj "^1.0.1"
@@ -10609,11 +10094,7 @@ strip-json-comments@~2.0.1:
 
 style-loader@^0.20.0:
   version "0.20.3"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/style-loader/-/style-loader-0.20.3.tgz#ebef06b89dec491bcb1fdb3452e913a6fd1c10c4"
-=======
   resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.20.3.tgz#ebef06b89dec491bcb1fdb3452e913a6fd1c10c4"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
@@ -10647,23 +10128,14 @@ supports-color@^5.2.0:
     has-flag "^3.0.0"
 
 supports-color@^5.3.0:
-<<<<<<< HEAD
-  version "5.3.0"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/supports-color/-/supports-color-5.3.0.tgz#5b24ac15db80fa927cf5227a4a33fd3c4c7676c0"
-=======
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.4.0.tgz#1c6b337402c2137605efe19f10fec390f6faab54"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     has-flag "^3.0.0"
 
 svgo@^0.7.0:
   version "0.7.2"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/svgo/-/svgo-0.7.2.tgz#9f5772413952135c6fefbf40afe6a4faa88b4bb5"
-=======
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-0.7.2.tgz#9f5772413952135c6fefbf40afe6a4faa88b4bb5"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     coa "~1.0.1"
     colors "~1.1.2"
@@ -10675,19 +10147,11 @@ svgo@^0.7.0:
 
 symbol-observable@1.0.1:
   version "1.0.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
-
-symbol-observable@^0.2.2:
-  version "0.2.4"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/symbol-observable/-/symbol-observable-0.2.4.tgz#95a83db26186d6af7e7a18dbd9760a2f86d08f40"
-=======
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
 
 symbol-observable@^0.2.2:
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-0.2.4.tgz#95a83db26186d6af7e7a18dbd9760a2f86d08f40"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 syntax-error@^1.1.1:
   version "1.4.0"
@@ -11128,29 +10592,17 @@ union-value@^1.0.0:
 
 uniq@^1.0.1:
   version "1.0.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
-
-uniqid@^4.0.0:
-  version "4.1.1"
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/uniqid/-/uniqid-4.1.1.tgz#89220ddf6b751ae52b5f72484863528596bb84c1"
-=======
   resolved "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
 
 uniqid@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/uniqid/-/uniqid-4.1.1.tgz#89220ddf6b751ae52b5f72484863528596bb84c1"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
   dependencies:
     macaddress "^0.2.8"
 
 uniqs@^2.0.0:
   version "2.0.0"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/uniqs/-/uniqs-2.0.0.tgz#ffede4b36b25290696e6e165d4a59edb998e6b02"
-=======
   resolved "https://registry.yarnpkg.com/uniqs/-/uniqs-2.0.0.tgz#ffede4b36b25290696e6e165d4a59edb998e6b02"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 unique-stream@^1.0.0:
   version "1.0.0"
@@ -11341,11 +10793,7 @@ vary@~1.1.2:
 
 vendors@^1.0.0:
   version "1.0.1"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/vendors/-/vendors-1.0.1.tgz#37ad73c8ee417fb3d580e785312307d274847f22"
-=======
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.1.tgz#37ad73c8ee417fb3d580e785312307d274847f22"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 verror@1.10.0, verror@^1.6.0:
   version "1.10.0"
@@ -11556,11 +11004,7 @@ when@^3.7.7:
 
 whet.extend@~0.9.9:
   version "0.9.9"
-<<<<<<< HEAD
-  resolved "https://na.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-carbon-npm-virtual/whet.extend/-/whet.extend-0.9.9.tgz#f877d5bf648c97e5aa542fadc16d6a259b9c11a1"
-=======
   resolved "https://registry.yarnpkg.com/whet.extend/-/whet.extend-0.9.9.tgz#f877d5bf648c97e5aa542fadc16d6a259b9c11a1"
->>>>>>> bfceee3497b6198013873400ff5805879420a4dc
 
 which-module@^1.0.0:
   version "1.0.0"
