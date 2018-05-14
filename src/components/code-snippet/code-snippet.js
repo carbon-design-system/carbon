@@ -15,6 +15,7 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
 
   constructor(element, options) {
     super(element, options);
+
     this.manage(
       on(this.element, 'click', event => {
         this._handleClick(event);
@@ -29,16 +30,19 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
     this.element.classList.toggle(this.options.classExpanded);
 
     if (this.element.classList.contains(this.options.classExpanded)) {
-      expandBtn.textContent = expandBtn.getAttribute(this.options.showLessText);
+      expandBtn.textContent = expandBtn.getAttribute(this.options.attribShowLessText);
     } else {
-      expandBtn.textContent = expandBtn.getAttribute(this.options.showMoreText);
+      expandBtn.textContent = expandBtn.getAttribute(this.options.attribShowMoreText);
     }
   }
 
   _initCodeSnippet() {
     const expandBtn = this.element.querySelector(this.options.classExpandText);
+    if (!expandBtn) {
+      throw new TypeError('Cannot find the expand button.');
+    }
 
-    expandBtn.textContent = expandBtn.getAttribute(this.options.showMoreText);
+    expandBtn.textContent = expandBtn.getAttribute(this.options.attribShowMoreText);
 
     if (this.element.offsetHeight < this.options.minHeight) {
       this.element.classList.add(this.options.classHideExpand);
@@ -64,8 +68,8 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
    */
   static options = {
     selectorInit: '[data-code-snippet]',
-    showMoreText: 'data-show-more-text',
-    showLessText: 'data-show-less-text',
+    attribShowMoreText: 'data-show-more-text',
+    attribShowLessText: 'data-show-less-text',
     minHeight: 288,
     classExpanded: 'bx--snippet--expand',
     classExpandBtn: 'bx--snippet-btn--expand',
