@@ -132,6 +132,11 @@
     right: auto;
   }
 
+  .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
+    right: auto;
+    left: 50%;
+  }
+
   // Show more / less button
   .#{$prefix}--snippet-btn--expand {
     position: absolute;
