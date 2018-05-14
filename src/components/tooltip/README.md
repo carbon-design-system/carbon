@@ -22,13 +22,24 @@
 | `selectorInit`           | `[data-tooltip-trigger]`        | The CSS selector to find the tooltip.
 | `objMenuOffset`          | `{ top: 10, left: 0 }`          | An object containing the top and left offset values in px
 
-### Simple tooltip
+### Definition tooltip
 
-This tooltip variation does not use any JavaScript and is good for short single line of text. For anything more advanced please use the main variation.
+This tooltip variation does not use any JavaScript and should be used to define a word. For anything more advanced please use the main variation.
 
 | Selector                     | Description                                           |
 |------------------------------|-------------------------------------------------------|
-| .bx--tooltip--simple__top    | A simple tooltip that is displayed above the trigger. |
-| .bx--tooltip--simple__bottom | A simple tooltip that is displayed below the trigger. |
+| .bx--tooltip-v2--simple__top    | A simple tooltip that is displayed above the trigger. |
+| .bx--tooltip-v2--simple__bottom | A simple tooltip that is displayed below the trigger. |
+
+To set the content of the tooltip place your text in the `data-tooltip-text` attribute. Keep in mind that the simple tooltip does not support more than a single line of text and no other types of content.
+
+### Simple tooltip
+
+This tooltip variation does not use any JavaScript and is good for short single line of text describing an icon. For anything more advanced please use the main variation.
+
+| Selector                     | Description                                           |
+|------------------------------|-------------------------------------------------------|
+| .bx--tooltip-v2--simple__top    | A simple tooltip that is displayed above the trigger. |
+| .bx--tooltip-v2--simple__bottom | A simple tooltip that is displayed below the trigger. |
 
 To set the content of the tooltip place your text in the `data-tooltip-text` attribute. Keep in mind that the simple tooltip does not support more than a single line of text and no other types of content.
