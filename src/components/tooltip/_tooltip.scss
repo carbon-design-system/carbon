@@ -20,7 +20,7 @@
     display: inline-flex;
     align-items: center;
     color: $text-01;
-    font-weight: 600;
+    font-weight: normal;
 
     svg {
       margin-left: $spacing-xs;
@@ -47,6 +47,10 @@
         fill: $hover-primary;
       }
     }
+  }
+
+  .#{$prefix}--tooltip__trigger--bold {
+    font-weight: 600;
   }
 
   .#{$prefix}--tooltip {
