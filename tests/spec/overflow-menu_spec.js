@@ -1,6 +1,6 @@
 import EventManager from '../utils/event-manager';
 import OverflowMenu from '../../src/components/overflow-menu/overflow-menu';
-import HTML from '../../src/components/overflow-menu/overflow-menu.html';
+import HTML from '../../html/overflow-menu/overflow-menu.html';
 
 describe('Test Overflow menu', function() {
   describe('Constructor', function() {
