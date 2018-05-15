@@ -1,5 +1,5 @@
 import Loading from '../../src/components/loading/loading';
-import LoadingHTML from '../../src/components/loading/loading.html';
+import LoadingHTML from '../../html/loading/loading.html';
 
 describe('Test Loading', function() {
   describe('Constructor', function() {
