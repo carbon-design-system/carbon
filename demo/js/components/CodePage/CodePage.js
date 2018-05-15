@@ -5,59 +5,35 @@ import Markdown from 'markdown-it';
 import ComponentExample from '../ComponentExample/ComponentExample';
 
 /**
- * @param {ComponentCollection|Component} metadata The component data.
- * @returns {string} The HTML snippet for the component.
- */
-const getContent = metadata => {
-  const { variants = {} } = metadata;
-  const { items = [] } = variants;
-  const variant = items[0];
-  return metadata.content || (variant && variant.content) || '';
-};
-
-/**
- * @param {ComponentCollection|Component} metadata The component data.
- * @returns {Component[]|Variant[]} The data of the component variants.
- */
-const getSubItems = metadata => {
-  if (metadata.isCollection) {
-    return metadata.items;
-  }
-  if (!metadata.isCollated) {
-    return metadata.variants.items;
-  }
-  return [];
-};
-
-/**
  * The page to show the component demo, its code as well as its README.
  */
 const CodePage = ({ metadata, hideViewFullRender }) => {
   const md = new Markdown({ html: true });
-  const subItems = getSubItems(metadata).filter(item => !item.isHidden);
+  const subItems = (metadata.items || []).filter(item => !item.isHidden);
+  /* eslint-disable react/no-danger */
   const componentContent =
     !metadata.isCollection && subItems.length <= 1 ? (
       <ComponentExample
         hideViewFullRender={hideViewFullRender}
         component={metadata.name}
-        htmlFile={getContent(metadata)}
+        htmlFile={metadata.renderedContent}
         useIframe={metadata.useIframe}
       />
     ) : (
       subItems.map(item => (
         <div key={item.id} className="component-variation">
           <h2 className="component-variation__name">{item.label}</h2>
+          {item.notes && metadata.notes !== item.notes && <p>{item.notes}</p>}
           <ComponentExample
             variant={item.handle.replace(/--default$/, '')}
             component={metadata.name}
-            htmlFile={getContent(item)}
+            htmlFile={item.renderedContent}
             useIframe={metadata.useIframe}
           />
         </div>
       ))
     );
 
-  /* eslint-disable react/no-danger */
   return (
     <div className="page code-page test">
       {componentContent}
