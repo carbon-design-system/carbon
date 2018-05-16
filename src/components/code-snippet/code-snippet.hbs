@@ -1,25 +1,29 @@
-<div class="bx--snippet bx--snippet--{{variant}}">
+<div class="bx--snippet bx--snippet--{{variant}}"{{#is variant "multi"}} data-code-snippet{{/is}}>
   <div class="bx--snippet-container">
-    {{#is variant "code"}}
+    {{#is variant "multi"}}
       <code>
         <pre>
-@mixin bx--snippet($type) {
-  @if $type == 'terminal' {
-    background-color: red;
-  } @else if $type == 'code' {
-    background-color: blue;
-  } @else if $type == 'text' {
-    background-color: white;
-  }
+@mixin grid-container {
+  width: 100%;
+  padding-right: padding(mobile);
+  padding-left: padding(mobile);
 
-  @if $type == 'terminal' {
-    background-color: red;
-  } @else if $type == 'code' {
-    background-color: blue;
-  } @else if $type == 'text' {
-    background-color: white;
+  @include breakpoint(bp--xs--major) {
+    padding-right: padding(xs);
+    padding-left: padding(xs);
   }
 }
+
+$z-indexes: (
+  modal : 9000,
+  overlay : 8000,
+  dropdown : 7000,
+  header : 6000,
+  footer : 5000,
+  hidden : - 1,
+  overflowHidden: - 1,
+  floating: 10000
+);
         </pre>
       </code>
     {{else}}
@@ -33,4 +37,10 @@
     </svg>
     <div class="bx--btn--copy__feedback" data-feedback="Copied!"></div>
   </button>
+  {{#is variant "multi"}}
+    <button class="bx--btn bx--btn--ghost bx--btn--sm bx--snippet-btn--expand" type="button">
+      <span class="bx--snippet-btn--text" data-show-more-text="Show more" data-show-less-text="Show less">Show more</span>
+      <svg class="bx--icon-chevron--down" width='12' height='8' viewBox='0 0 12 8' fill-rule='evenodd' aria-label="Show more icon" alt="Show more icon"><title>Show more icon</title><path d='M10.6 0L6 4.7 1.4 0 0 1.4l6 6.1 6-6.1z'></path></svg>
+    </button>
+  {{/is}}
 </div>

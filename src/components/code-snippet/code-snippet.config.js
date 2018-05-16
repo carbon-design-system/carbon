@@ -4,27 +4,38 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Code',
+      label: 'Multi',
       notes: `
         Code snippets are small blocks of reusable code that can be inserted in a code file.
-
-        The Code style is for larger, multi-line code snippets.
       `,
       context: {
-        variant: 'code',
+        variant: 'multi',
       },
     },
     {
-      name: 'terminal',
-      label: 'Terminal',
+      name: 'single',
+      label: 'Single',
       notes: `
         Code snippets are small blocks of reusable code that can be inserted in a code file.
 
-        The Terminal style is for single-line .
+        The single-line style is for e.g. terminal.
       `,
       context: {
-        variant: 'terminal',
+        variant: 'single',
       },
+    },
+    {
+      name: 'inline',
+      label: 'Inline',
+      preview: 'code-snippet--inline',
+    },
+    {
+      name: 'inline-light',
+      label: 'Inline light',
+      context: {
+        variant: 'light',
+      },
+      preview: 'code-snippet--inline',
     },
   ],
 };
