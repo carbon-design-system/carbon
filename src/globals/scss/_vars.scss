@@ -83,7 +83,8 @@ $card-flex-align: center !default;
 $checkbox-border-width: 2px !default;
 
 // Code Snippet
-$snippet-background-color: rgba($color__blue-51, 0.1) !default;
+$snippet-background-color: $ui-01 !default;
+$snippet-border-color: $ui-03 !default;
 
 // Content Switcher
 $content-switcher-border-radius: 8px !default;

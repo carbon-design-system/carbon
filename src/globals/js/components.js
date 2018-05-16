@@ -30,3 +30,4 @@ export { default as Slider } from '../../components/slider/slider';
 export { default as Tile } from '../../components/tile/tile';
 export { default as Carousel } from '../../components/carousel/carousel';
 export { default as Lightbox } from '../../components/lightbox/lightbox';
+export { default as CodeSnippet } from '../../components/code-snippet/code-snippet';
