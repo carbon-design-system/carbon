@@ -175,7 +175,7 @@
     z-index: 1;
     display: none;
     background: $inverse-02;
-    max-width: rem(170px);
+    max-width: rem(176px);
     margin-top: $spacing-sm;
     padding: $spacing-xs;
     color: $inverse-01;
@@ -240,7 +240,7 @@
     &:before {
       @include typescale('omega');
       @include layer('overlay');
-      max-width: rem(170px);
+      max-width: rem(176px);
       margin-left: 50%;
       padding: $spacing-2xs;
       border-radius: 4px;
