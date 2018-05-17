@@ -92,6 +92,26 @@ storiesOf('DatePicker', module)
     )
   )
   .addWithInfo(
+    'range with calendar and min/max dates',
+    `
+      A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.
+    `,
+    () => (
+      <DatePicker
+        {...datePickerProps}
+        minDate="1/10/2020"
+        maxDate="1/20/2020"
+        datePickerType="range"
+        dateFormat="m/d/Y">
+        <DatePickerInput {...datePickerInputProps} id="date-picker-input-id" />
+        <DatePickerInput
+          {...datePickerInputProps}
+          id="date-picker-input-id-2"
+        />
+      </DatePicker>
+    )
+  )
+  .addWithInfo(
     'fully controlled',
     `
       If your application needs to control the value of the date picker and

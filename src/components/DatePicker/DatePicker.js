@@ -211,6 +211,8 @@ export default class DatePicker extends Component {
       locale,
       appendTo,
       onChange,
+      minDate,
+      maxDate,
     } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
@@ -222,6 +224,8 @@ export default class DatePicker extends Component {
         allowInput: true,
         dateFormat: dateFormat,
         locale: l10n[locale],
+        minDate: minDate,
+        maxDate: maxDate,
         plugins:
           datePickerType === 'range'
             ? [new rangePlugin({ input: this.toInputField })]
