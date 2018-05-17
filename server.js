@@ -95,7 +95,7 @@ app.get('/component/:component', (req, res) => {
     res.status(404).end();
   } else {
     templates
-      .render({ defaultPreview: 'preview', concat: true }, name)
+      .render({ layout: 'preview', concat: true }, name)
       .then(rendered => {
         // eslint-disable-next-line eqeqeq
         if (rendered == null) {
@@ -117,7 +117,7 @@ app.get('/code/:component', (req, res) => {
     res.status(404).end();
   } else {
     templates
-      .render({ preview: 'NONE' }, name)
+      .render({}, name)
       .then(renderedItems => {
         const o = {};
         renderedItems.forEach((rendered, item) => {
