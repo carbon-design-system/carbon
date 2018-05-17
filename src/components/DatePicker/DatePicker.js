@@ -218,7 +218,7 @@ export default class DatePicker extends Component {
       const onHook = (electedDates, dateStr, instance) => {
         this.updateClassNames(instance);
       };
-      this.cal = flatpickr(this.inputField, {
+      this.cal = new flatpickr(this.inputField, {
         appendTo,
         mode: datePickerType,
         allowInput: true,
