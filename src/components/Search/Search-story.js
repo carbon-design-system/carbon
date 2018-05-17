@@ -26,10 +26,7 @@ storiesOf('Search', module)
         id="search-1"
         labelText="Search"
         placeHolderText="Search"
-        onChange={() => {
-          console.log('onChange');
-          action('onChange');
-        }}
+        onChange={action('onChange')}
       />
     )
   )
@@ -49,10 +46,7 @@ storiesOf('Search', module)
         id="search-2"
         labelText="Search"
         placeHolderText="Search"
-        onChange={() => {
-          console.log('onChange');
-          action('onChange');
-        }}
+        onChange={action('onChange')}
       />
     )
   )
@@ -102,11 +96,8 @@ storiesOf('Search', module)
         id="search-1"
         labelText="Search"
         placeHolderText="Search"
-        onChange={() => {
-          console.log('onChange');
-          action('onChange');
-        }}>
-        <SearchFilterButton />
+        onChange={action('onChange')}>
+        <SearchFilterButton onClick={action('onClick')} />
       </Search>
     )
   )
