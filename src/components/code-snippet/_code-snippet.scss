@@ -61,10 +61,13 @@
     display: flex;
     align-items: center;
     height: 130%;
-    white-space: nowrap;
     overflow-x: scroll;
     position: relative;
     padding-bottom: $spacing-md;
+  }
+
+  .#{$prefix}--snippet--single pre {
+    white-space: nowrap;
   }
 
   // Multi Line Snippet
