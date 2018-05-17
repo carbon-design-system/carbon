@@ -16,7 +16,7 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
     super(element, options);
 
     this._initCodeSnippet();
-    this.element.querySelector(this.options.classExpandText).addEventListener('click', evt => this._handleClick(evt));
+    this.element.querySelector(this.options.classExpandBtn).addEventListener('click', evt => this._handleClick(evt));
   }
 
   _handleClick() {
@@ -66,7 +66,7 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
     attribShowLessText: 'data-show-less-text',
     minHeight: 288,
     classExpanded: 'bx--snippet--expand',
-    classExpandBtn: 'bx--snippet-btn--expand',
+    classExpandBtn: '.bx--snippet-btn--expand',
     classExpandText: '.bx--snippet-btn--text',
     classHideExpand: 'bx--snippet-btn--expand--hide',
   };
