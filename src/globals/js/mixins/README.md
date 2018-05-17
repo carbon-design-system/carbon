@@ -1,3 +1,58 @@
+# Carbon component model
+
+Carbon has a very simple component model for vanilla JavaScript, like below, covering basic lifecycle of [creation](#creation)/[clean-up](#clean-up).
+Most of the interface is implemented in [`create-component.js`](./create-component.js) mixin, explained [later](#component-lifecycle-create-componentjs).
+
+```typescript
+interface Handle {
+  // Clean things up, e.g. event handlers
+  release(): null;
+}
+
+// No mandatory properties in component options at bare-bone component model
+// (But mix-ins define ones, e.g. `.selectorInit` used for most components)
+interface ComponentOptions {}
+
+interface Component extends Handle {
+  // The constructor takes the DOM element to work with, and instance-specific options
+  new (element: Element, options: ComponentOptions = {});
+
+  // List of components instantiated by this component
+  // `.release()` in this component should release them
+  children: Component[];
+
+  // Factory method, checks for existing instance before calling the constructor
+  static create(element: Element, options: ComponentOptions = {}): Component;
+
+  // Registry of component instances
+  static WeakMap<Element, Component> components;
+
+  // Default options
+  static ComponentOptions options;
+}
+```
+
+## Example
+
+```javascript
+import { Loading } from `carbon-components`;
+
+// Where HTML snippet like one in http://carbondesignsystem.com/components/loading/code is
+const element = document.querySelector('[data-loading]');
+
+// Instantiates `Loading` (spinner) without making it spinning
+const loading = Loading.create(element, { active: false });
+
+loading.set(true); // Starts the spinner
+loading.set(false); // Stops the spinner
+
+// Returns an existing instance if there is one, creates a new instance otherwise
+console.log(Loading.create(element) === loading); // `true`
+
+// Looks for an existing instance
+console.log(Loading.components.get(element) === loading); // `true`
+```
+
 # Carbon component mixins
 
 Carbon component mixins, based on [Subclass Factory Pattern](https://github.com/justinfagnani/proposal-mixins#subclass-factory-pattern), provides the basis for Carbon component classes by allowing component implementation to compose small pieces of functionalities to base them on, instead of introducing "fat base class".
@@ -8,7 +63,7 @@ Carbon component mixins, based on [Subclass Factory Pattern](https://github.com/
 - [Component lifecycle (`create-component.js`)](#component-lifecycle-create-componentjs)
   - [Creation](#creation)
   - [Clean-up](#clean-up)
-  - [Component registry](#component-registry)
+  - [Registry of component instances](#registry-of-component-instances)
 - [Sugar layers for component instantiation](#sugar-layers-for-component-instantiation)
   - [Searching for DOM nodes to intantiate components on (`init-component-by-search.js`)](#searching-for-dom-nodes-to-intantiate-components-on-init-component-by-searchjs)
   - [Lazily instantiating a component upon an event on a root element (`init-component-by-event.js`)](#lazily-instantiating-a-component-upon-an-event-on-a-root-element-init-component-by-eventjs)
@@ -63,7 +118,7 @@ If a Carbon component has other things to clean-up (e.g. event listeners), it ca
 
 `.release()` method should return `null` to allow the caller of `.release()` e.g. to assign the return value to a variable referring to Carbon component instance, marking that the instance is gone.
 
-### Component registry
+### Registry of component instances
 
 Every component must define static `components` property, which is an instance of [`WeakMap`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap). The constructor in `create-component.js` [sets the component instance to static `.components` property](https://github.com/carbon-design-system/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L37), mapped with the DOM element the component is instantiated on. This allows application code to grab a Carbon component instance associated with the root element.
 

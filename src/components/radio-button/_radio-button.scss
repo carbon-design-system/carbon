@@ -67,4 +67,15 @@
   .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
     @include focus-outline('blurred');
   }
+
+  // Skeleton State
+  .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(100px);
+    height: rem(18px);
+  }
+
+  .#{$prefix}--radio-button__label.#{$prefix}--skeleton .#{$prefix}--radio-button__appearance {
+    display: none;
+  }
 }

@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
@@ -107,5 +108,12 @@
     .#{$prefix}--progress-line {
       background-color: $brand-01;
     }
+  }
+
+  // Skeleton State
+  .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
+    @include skeleton;
+    height: rem(12px);
+    width: rem(40px);
   }
 }

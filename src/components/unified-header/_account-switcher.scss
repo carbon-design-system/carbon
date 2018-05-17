@@ -54,7 +54,7 @@
 
   .#{$prefix}--account-switcher__toggle--text {
     @include typescale('legal');
-    letter-spacing: 0.5px;
+    @include letter-spacing;
     overflow: hidden;
     display: inline-flex;
     white-space: nowrap;

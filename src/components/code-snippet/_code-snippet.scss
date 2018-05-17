@@ -2,6 +2,7 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
@@ -207,5 +208,25 @@
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
     right: auto;
+  }
+
+  // Skeleton State
+  .#{$prefix}--snippet--code.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--terminal.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton code {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
   }
 }
