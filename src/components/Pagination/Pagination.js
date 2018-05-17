@@ -106,7 +106,8 @@ export default class Pagination extends Component {
       // used for case when page # is 0 or empty. For other cases
       // existing props will be used.
       page >= 0 &&
-      page <= Math.ceil(this.props.totalItems / this.state.pageSize)
+      page <=
+        Math.max(Math.ceil(this.props.totalItems / this.state.pageSize), 1)
     ) {
       this.setState({ page }, () => this.pageInputDebouncer(this.state.page));
     }
@@ -138,7 +139,7 @@ export default class Pagination extends Component {
       return itemText(pageSize * (page - 1) + 1, page * pageSize);
     } else if (page > 0) {
       return itemRangeText(
-        pageSize * (page - 1) + 1,
+        Math.min(pageSize * (page - 1) + 1, totalItems),
         Math.min(page * pageSize, totalItems),
         totalItems
       );
@@ -159,7 +160,7 @@ export default class Pagination extends Component {
     if (pagesUnknown) {
       return pageText(page);
     } else if (page > 0) {
-      return pageRangeText(page, Math.ceil(totalItems / pageSize));
+      return pageRangeText(page, Math.max(Math.ceil(totalItems / pageSize), 1));
     }
     return defaultPageText(Math.ceil(totalItems / pageSize));
   };
@@ -192,6 +193,7 @@ export default class Pagination extends Component {
 
     const statePage = this.state.page;
     const statePageSize = this.state.pageSize;
+    const totalPages = Math.max(Math.ceil(totalItems / statePageSize), 1);
     const classNames = classnames('bx--pagination', className);
     const inputId = id || this.uniqueId;
 
@@ -240,9 +242,7 @@ export default class Pagination extends Component {
             className="bx--pagination__button bx--pagination__button--forward"
             onClick={this.incrementPage}
             disabled={
-              this.props.disabled ||
-              statePage === Math.ceil(totalItems / statePageSize) ||
-              isLastPage
+              this.props.disabled || statePage === totalPages || isLastPage
             }>
             <Icon
               className="bx--pagination__button-icon"
