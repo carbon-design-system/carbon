@@ -1,0 +1,18 @@
+@import 'vars';
+
+.#{$prefix}--text-truncate--end {
+  width: 100%;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.#{$prefix}--text-truncate--front {
+  width: 100%;
+  display: inline-block;
+  direction: rtl;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

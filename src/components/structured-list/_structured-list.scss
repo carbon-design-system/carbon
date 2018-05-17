@@ -1,5 +1,6 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/mixins';
@@ -85,13 +86,13 @@
   .#{$prefix}--structured-list-th {
     @include reset;
     @include padding-th;
-    @include typescale('zeta');
+    @include typescale('omega');
     display: table-cell;
     font-weight: 600;
     height: rem(40px);
     text-align: left;
     text-transform: $structured-list-text-transform;
-    vertical-align: middle;
+    vertical-align: bottom;
   }
 
   .#{$prefix}--structured-list-tbody {
@@ -125,6 +126,40 @@
     .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-row &,
     .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-td & {
       fill: $brand-02;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--structured-list.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th {
+      &:first-child {
+        width: 8%;
+      }
+
+      &:nth-child(3n + 2) {
+        width: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        width: 15%;
+      }
+    }
+
+    .bx--structured-list-th span {
+      @include skeleton;
+      width: 75%;
+      height: 1rem;
+      display: block;
+    }
+  }
+
+  .#{$prefix}--structured-list.#{$prefix}--structured-list--border.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th:first-child {
+      width: 5%;
+
+      span {
+        display: none;
+      }
     }
   }
 
