@@ -61,10 +61,13 @@
     display: flex;
     align-items: center;
     height: 130%;
-    white-space: nowrap;
     overflow-x: scroll;
     position: relative;
     padding-bottom: $spacing-md;
+  }
+
+  .#{$prefix}--snippet--single pre {
+    white-space: nowrap;
   }
 
   // Multi Line Snippet
@@ -183,6 +186,44 @@
 
   .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
+  }
+
+  // Skeleton
+
+  #{$prefix}--snippet--multi.#{$prefix}--skeleton {
+    height: rem(98px);
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton {
+    height: rem(56px);
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet.#{$prefix}--skeleton span {
+    @include skeleton;
+    width: 100%;
+    height: 1rem;
+    display: block;
+    margin-top: 0.5rem;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    &:nth-child(2) {
+      width: 85%;
+    }
+
+    &:nth-child(3) {
+      width: 95%;
+    }
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+    padding-bottom: 0;
   }
 
   /* 
