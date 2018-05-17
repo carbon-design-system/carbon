@@ -254,7 +254,7 @@ gulp.task('sass:source', () => {
 });
 
 gulp.task('html:source', () =>
-  templates.render({ preview: 'NONE' }).then(renderedItems => {
+  templates.render().then(renderedItems => {
     const promises = [];
     renderedItems.forEach((rendered, item) => {
       const dirname = path.dirname(path.resolve(__dirname, 'html', item.relViewPath));
