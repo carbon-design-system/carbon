@@ -53,10 +53,12 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     });
     this.element.addEventListener('keydown', evt => {
       const input = this.element.querySelector(this.options.selectorTileInput);
-      if (evt.which === 13 || evt.which === 32) {
-        if (!isExpandable) {
-          this.element.classList.toggle(tileClass);
-          input.checked = !input.checked;
+      if (input) {
+        if (evt.which === 13 || evt.which === 32) {
+          if (!isExpandable) {
+            this.element.classList.toggle(tileClass);
+            input.checked = !input.checked;
+          }
         }
       }
     });
