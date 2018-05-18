@@ -70,8 +70,7 @@ const promiseCache = Promise.all([fractal.load(), loadContents(path.resolve(__di
 
 /**
  * @param {Object} [options] The options.
- * @param {string} [options.preview] The preview Handlebars template name to force. Useful to force an empty preview.
- * @param {string} [options.defaultPreview] The preview Handlebars template name working as the default one.
+ * @param {string} [options.layout] The Handlebars template name to lay out stuffs.
  * @param {boolean} [options.concat] Setting `true` here returns rendered contents all concatenated, instead of returning a map.
  * @param {string} [handle]
  *   The internal component name seen in Fractal.
@@ -79,7 +78,7 @@ const promiseCache = Promise.all([fractal.load(), loadContents(path.resolve(__di
  *   Leaving `handle` empty renders all components.
  * @returns {string|Map<Variant, string>} The list of rendered template, keyed by Fractal `Variant` object.
  */
-const renderComponent = ({ preview, defaultPreview, concat } = {}, handle) =>
+const renderComponent = ({ layout, concat } = {}, handle) =>
   promiseCache.then(({ componentSource, contents }) => {
     const renderedItems = new Map();
     componentSource.forEach(metadata => {
@@ -88,10 +87,10 @@ const renderComponent = ({ preview, defaultPreview, concat } = {}, handle) =>
         const filteredItems = !handle || handle === metadata.handle ? items : items.filter(item => handle === item.handle);
         filteredItems.forEach(item => {
           const { handle: itemHandle, baseHandle, context } = item;
-          const template = contents.get(itemHandle) || contents.get(baseHandle);
+          const template = contents.get(item.preview) || contents.get(itemHandle) || contents.get(baseHandle);
           if (template) {
             const body = template(context);
-            const layoutTemplate = contents.get(preview || item.preview || defaultPreview);
+            const layoutTemplate = contents.get(layout);
             renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ body }, context)));
           }
         });
