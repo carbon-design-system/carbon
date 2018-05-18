@@ -123,7 +123,7 @@
   "dependencies": {
     "classnames": "2.2.5",
     "downshift": "^1.31.14",
-    "flatpickr": "4.4.1",
+    "flatpickr": "4.5.0",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
