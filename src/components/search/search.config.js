@@ -5,7 +5,7 @@ module.exports = {
   variants: [
     {
       name: 'large',
-      label: 'Normal',
+      label: 'Normal search',
       notes: `
         Search enables users to specify a word or a phrase to find particular relevant pieces of content
         without the use of navigation. Search can be used as the primary means of discovering content,
@@ -17,7 +17,7 @@ module.exports = {
     },
     {
       name: 'small',
-      label: 'Small',
+      label: 'Small search',
       notes: `
         Search enables users to specify a word or a phrase to find particular relevant pieces of content
         without the use of navigation. Search can be used as the primary means of discovering content,
@@ -30,7 +30,7 @@ module.exports = {
     },
     {
       name: 'large-light',
-      label: 'Normal Light',
+      label: 'Normal search (Light)',
       notes: `
         Search enables users to specify a word or a phrase to find particular relevant pieces of content
         without the use of navigation. Search can be used as the primary means of discovering content,
@@ -43,7 +43,7 @@ module.exports = {
     },
     {
       name: 'small-light',
-      label: 'Small Light',
+      label: 'Small search (Light)',
       notes: `
         Search enables users to specify a word or a phrase to find particular relevant pieces of content
         without the use of navigation. Search can be used as the primary means of discovering content,

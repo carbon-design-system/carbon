@@ -4,12 +4,12 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Form',
       notes: 'Forms are widely used to collect user input.',
     },
     {
       name: 'light',
-      label: 'Light',
+      label: 'Form (Light)',
       context: {
         light: true,
       },
