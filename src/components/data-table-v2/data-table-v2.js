@@ -122,6 +122,11 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   _actionBarCancel = () => {
     const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+    const row = [...this.element.querySelectorAll(this.options.selectorTableSelected)];
+
+    row.forEach(item => {
+      item.classList.remove(this.options.classTableSelected);
+    });
 
     inputs.forEach(item => {
       item.checked = false;
@@ -267,6 +272,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
       selectorChildRow: '[data-child-row]',
       selectorTableBody: 'tbody',
       selectorTableSort: `.${prefix}--table-sort-v2`,
+      selectorTableSelected: `.${prefix}--data-table-v2--selected`,
       classExpandableRow: `${prefix}--expandable-row-v2`,
       classExpandableRowHidden: `${prefix}--expandable-row--hidden-v2`,
       classExpandableRowHover: `${prefix}--expandable-row--hover-v2`,
