@@ -108,7 +108,8 @@
 
     .#{$prefix}--overflow-menu-options__option--danger & {
       &:focus {
-        background-color: $support-01;
+        outline: 1px solid transparent;
+        text-decoration: underline;
       }
     }
   }
