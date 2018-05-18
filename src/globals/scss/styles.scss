@@ -2,7 +2,7 @@
 // 🌍 Global
 //-------------------------
 
-$css--font-face: false !default;
+$css--font-face: true !default;
 $css--helpers: true !default;
 $css--body: true !default;
 $css--use-experimental-grid: false !default;
@@ -98,6 +98,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @import '../../components/tile/tile';
 @import '../../components/lightbox/lightbox';
 @import '../../components/carousel/carousel';
+@import '../../components/skeleton/skeleton';
 
 //-------------------------------------
 // 🙈 Hidden (Not exposed on website)

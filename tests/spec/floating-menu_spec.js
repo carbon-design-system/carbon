@@ -1,6 +1,6 @@
 import EventManager from '../utils/event-manager';
 import FloatingMenu from '../../src/components/floating-menu/floating-menu';
-import HTML from '../../src/components/overflow-menu/overflow-menu.html'; // Use ul.bx--overflow-menu-options for testing
+import HTML from '../../html/overflow-menu/overflow-menu.html'; // Use ul.bx--overflow-menu-options for testing
 
 describe('Test floating menu', function() {
   describe('Constructor', function() {

@@ -124,4 +124,22 @@
       display: none;
     }
   }
+
+  // Skeleton state
+  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__range-label {
+    @include skeleton;
+    width: rem(20px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__track {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__thumb {
+    left: 50%;
+    cursor: default;
+    pointer-events: none;
+  }
 }

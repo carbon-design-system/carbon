@@ -65,6 +65,7 @@
     border: 1px solid $ui-03;
     border-radius: 4px;
     z-index: z('floating');
+    word-wrap: break-word;
 
     p {
       @include font-family;

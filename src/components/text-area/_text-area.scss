@@ -76,4 +76,24 @@
   .#{$prefix}--text-area--light {
     background: $field-02;
   }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
 }

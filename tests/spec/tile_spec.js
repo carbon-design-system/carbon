@@ -1,7 +1,7 @@
 import Tile from '../../src/components/tile/tile';
-import clickableTile from '../../src/components/tile/tile--clickable.html';
-import expandableTile from '../../src/components/tile/tile--expandable.html';
-import selectableTile from '../../src/components/tile/tile--selectable.html';
+import clickableTile from '../../html/tile/tile--clickable.html';
+import expandableTile from '../../html/tile/tile--expandable.html';
+import selectableTile from '../../html/tile/tile--selectable.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test tile', function() {

@@ -1,5 +1,5 @@
 import Lightbox from '../../src/components/lightbox/lightbox';
-import HTML from '../../src/components/lightbox/lightbox.html';
+import HTML from '../../html/lightbox/lightbox.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Lightbox', () => {

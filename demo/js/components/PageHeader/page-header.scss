@@ -34,11 +34,11 @@
 
 .page-header__title {
   @include typescale('mega');
+  @include letter-spacing;
   color: $text-01;
   font-weight: 300;
   margin: -1.15rem 0 0 -3px;
   line-height: 1.25;
-  letter-spacing: 0;
   padding: 0;
   transition: $transition--base $bx--standard-easing;
 

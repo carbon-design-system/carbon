@@ -58,11 +58,11 @@
     margin-bottom: 4rem;
 
     strong {
+      @include letter-spacing;
       font-size: 1.125rem;
       line-height: 1.5;
       font-weight: 600;
       word-wrap: break-word;
-      letter-spacing: 0;
     }
   }
 
@@ -187,7 +187,7 @@
           line-height: 1.25;
 
           strong {
-            letter-spacing: 0;
+            @include letter-spacing;
           }
 
           &:first-child {
@@ -216,14 +216,7 @@
     }
   }
 
-  main[data-page='style-overview-typography']
-    &
-    hr
-    + hr
-    + table
-    tbody
-    tr
-    td:nth-child(2) {
+  main[data-page='style-overview-typography'] & hr + hr + table tbody tr td:nth-child(2) {
     @media all and (max-width: 600px) {
       text-align: left;
       font-size: 3rem;
@@ -456,12 +449,12 @@
       margin-bottom: 3rem;
 
       strong {
+        @include letter-spacing;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 2;
         color: $color__white;
-        letter-spacing: 0;
         font-size: 1.625rem;
         top: 2.2rem;
         left: 1.625rem;

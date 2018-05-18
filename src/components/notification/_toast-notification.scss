@@ -74,8 +74,8 @@
 
   .#{$prefix}--toast-notification__title {
     @include typescale('zeta');
+    @include letter-spacing;
     font-weight: 600;
-    letter-spacing: 0;
     line-height: 1;
     padding-bottom: $spacing-3xs;
   }

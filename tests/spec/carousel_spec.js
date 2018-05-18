@@ -1,5 +1,5 @@
 import Carousel from '../../src/components/carousel/carousel';
-import HTML from '../../src/components/carousel/carousel.html';
+import HTML from '../../html/carousel/carousel.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Carousel', () => {

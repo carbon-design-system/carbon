@@ -105,9 +105,90 @@
     $deprecations--reasons: append($deprecations--reasons, $reason) !global;
     @content;
   } @else {
-    @warn 'Deprecated code was found, this code will be removed before the next release of Carbon.
-REASON: #{$reason}';
+    @warn 'Deprecated code was found, this code will be removed before the next release of Carbon. REASON: #{$reason}';
     @content;
+  }
+}
+
+// 💀 Skeleton loading animation
+
+@mixin skeleton {
+  position: relative;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  pointer-events: none;
+  background: $skeleton;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
+  &:before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    background: $skeleton;
+    animation: 3000ms ease-in-out skeleton infinite;
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    width: 0%;
+    left: 0;
+    right: auto;
+    opacity: 0.3;
+  }
+  20% {
+    width: 100%;
+    left: 0;
+    right: auto;
+    opacity: 1;
+  }
+  28% {
+    width: 100%;
+    left: auto;
+    right: 0;
+  }
+  51% {
+    width: 0%;
+    left: auto;
+    right: 0;
+  }
+  58% {
+    width: 0%;
+    left: auto;
+    right: 0;
+  }
+  82% {
+    width: 100%;
+    left: auto;
+    right: 0;
+  }
+  83% {
+    width: 100%;
+    left: 0;
+    right: auto;
+  }
+  96% {
+    width: 0%;
+    left: 0;
+    right: auto;
+  }
+  100% {
+    width: 0%;
+    left: 0;
+    right: auto;
+    opacity: 0.3;
   }
 }
 

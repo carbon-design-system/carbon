@@ -1,5 +1,5 @@
 import FileUploader from '../../src/components/file-uploader/file-uploader';
-import HTML from '../../src/components/file-uploader/file-uploader.html';
+import HTML from '../../html/file-uploader/file-uploader.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('File Uploader', function() {
