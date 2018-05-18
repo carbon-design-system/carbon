@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Order Summary',
       notes: `
         This component is used to display the items a user will be purchasing.
         This version does not include OrderSummaryCategory.

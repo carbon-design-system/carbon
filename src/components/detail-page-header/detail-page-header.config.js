@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Detail Page Header',
     },
     {
       name: 'with-tabs',
