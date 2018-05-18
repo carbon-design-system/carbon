@@ -217,6 +217,40 @@ describe('DatePicker', () => {
       expect(datepicker.props().locale).toBe('en');
     });
   });
+
+  describe('Date picker with minDate and maxDate', () => {
+    console.error = jest.genMockFn(); // eslint-disable-line no-console
+
+    const wrapper = mount(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="range"
+        className="extra-class"
+        minDate="01/01/2018"
+        maxDate="01/30/2018">
+        <div className="test-child">
+          <input
+            type="text"
+            className="bx--date-picker__input"
+            id="input-from"
+          />
+        </div>
+        <div className="test-child">
+          <input type="text" className="bx--date-picker__input" id="input-to" />
+        </div>
+      </DatePicker>
+    );
+
+    it('has the range date picker with min and max dates', () => {
+      const datepicker = wrapper.find('DatePicker');
+      expect(datepicker.props().minDate).toBe('01/01/2018');
+      expect(datepicker.props().maxDate).toBe('01/30/2018');
+    });
+
+    it('should not have "console.error" being created', () => {
+      expect(console.error).not.toBeCalled(); // eslint-disable-line no-console
+    });
+  });
 });
 
 describe('DatePickerSkeleton', () => {
