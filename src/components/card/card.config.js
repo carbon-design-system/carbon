@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Card',
       notes: `
         Cards provide an at-a glance preview of the content they link to and frequently contain
         easily-consumable content.

@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Loading',
       notes: `
         Loading spinners are used when retrieving data or performing slow computations,
         and help to notify users that loading is underway.

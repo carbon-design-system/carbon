@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Text Input',
       notes: `
         Text fields enable the user to interact with and input data. A single line
         field is used when the input anticipated by the user is a single line of
@@ -13,7 +13,7 @@ module.exports = {
     },
     {
       name: 'light',
-      label: 'Light',
+      label: 'Text Input (Light)',
       context: {
         light: true,
       },

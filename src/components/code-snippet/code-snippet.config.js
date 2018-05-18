@@ -41,7 +41,7 @@ module.exports = {
     },
     {
       name: 'inline-light',
-      label: 'Inline Light',
+      label: 'Inline (Light)',
       notes: `
         Code snippets are small blocks of reusable code that can be inserted in a code file.
 

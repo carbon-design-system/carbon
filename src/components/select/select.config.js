@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Select',
       notes: `
         Select displays a list below its title when selected. They are used primarily in forms,
         where a user chooses one option from a list. Once the user selects an item, the dropdown will
@@ -14,7 +14,7 @@ module.exports = {
     },
     {
       name: 'inline',
-      label: 'Inline',
+      label: 'Inline Select',
       notes: 'Inline select is for use when there will be multiple elements in a row.',
       context: {
         inline: true,
@@ -22,21 +22,21 @@ module.exports = {
     },
     {
       name: 'light',
-      label: 'Light',
+      label: 'Select (Light)',
       context: {
         light: true,
       },
     },
     {
       name: 'invalid',
-      label: 'Invalid',
+      label: 'Select (Invalid)',
       context: {
         invalid: true,
       },
     },
     {
       name: 'light-invalid',
-      label: 'Light invalid',
+      label: 'Select (Light/Invalid)',
       context: {
         light: true,
         invalid: true,
