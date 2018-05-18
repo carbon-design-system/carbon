@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Combo Box',
     },
     {
       name: 'disabled',

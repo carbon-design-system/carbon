@@ -4,14 +4,14 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Dropdown',
       notes: `
         The Dropdown component is used for navigating or filtering existing content.
       `,
     },
     {
       name: 'light',
-      label: 'Light',
+      label: 'Dropdown (Light)',
       context: {
         light: true,
       },
@@ -25,7 +25,7 @@ module.exports = {
     },
     {
       name: 'up-light',
-      label: 'Up light',
+      label: 'Up (Light)',
       context: {
         up: true,
         light: true,

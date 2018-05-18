@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Interior Left Nav',
       notes: `
         Interior left navigation organizes the content structure and provides
         context to support user orientation. This pattern accommodates the

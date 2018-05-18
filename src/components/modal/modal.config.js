@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Transactional modal',
       notes: `
         Modals communicate information via a secondary window and allow the user to maintain the context of a particular task.
       `,
@@ -19,7 +19,7 @@ module.exports = {
     },
     {
       name: 'nofooter',
-      label: 'Without footer',
+      label: 'Passive modal',
       notes: 'Passive modals are modals without footers.',
       context: {
         idSuffix: Math.random()
@@ -32,7 +32,7 @@ module.exports = {
     },
     {
       name: 'danger',
-      label: 'Danger',
+      label: 'Danger modal',
       context: {
         idSuffix: Math.random()
           .toString(36)

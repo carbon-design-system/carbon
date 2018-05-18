@@ -4,7 +4,7 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Default',
+      label: 'Text Area',
       notes: `
         Text areas enable the user to interact with and input data. A text area is used when you
         anticipate the user to input more than 1 sentence.
