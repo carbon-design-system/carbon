@@ -5,6 +5,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   className="custom-class"
   id="custom-id"
   onChange={[MockFunction]}
+  translateWithId={[Function]}
 >
   <div
     className="bx--toolbar-search-container"
