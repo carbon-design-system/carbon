@@ -25,7 +25,6 @@
   .#{$prefix}--table-sort-v2 {
     @include button-reset(false);
     position: relative;
-    left: 2px;
     font: inherit;
     cursor: pointer;
     display: flex;
