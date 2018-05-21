@@ -90,15 +90,15 @@
 
     svg {
       border-radius: 50%;
-      background-color: rgba($ui-01, .25);
-      fill: rgba($brand-01, .25);
+      background-color: rgba($ui-01, 0.25);
+      fill: rgba($brand-01, 0.25);
     }
   }
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    bottom: .5rem;
-    right: .5rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
     height: 1rem;
 
     svg {
@@ -133,7 +133,7 @@
     transition: $transition--base $carbon--standard-easing;
 
     .#{$prefix}--tile__chevron svg {
-      transform: rotate(-180deg) translateY(4px);
+      transform: rotate(-180deg);
     }
 
     .#{$prefix}--tile-content__below-the-fold {
