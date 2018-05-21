@@ -146,6 +146,8 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
       touchcancel: 'hidden',
     }[type];
 
+    console.log('clicked');
+
     let shouldPreventClose;
     if (type === 'blur') {
       // Note: SVGElement in IE11 does not have `.contains()`
