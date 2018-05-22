@@ -18,6 +18,7 @@ export ComposedModal, {
   ModalFooter,
 } from './components/ComposedModal';
 export ContentSwitcher from './components/ContentSwitcher';
+export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
 export DataTable from './components/DataTable';
