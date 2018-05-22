@@ -1,10 +1,18 @@
-<a class="bx--tooltip__trigger">
-  Tooltip label
-  <svg tabindex="0" data-tooltip-trigger data-tooltip-target="#unique-tooltip" width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
-    <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 4c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm2 8H6v-1h1V8H6V7h3v4h1v1z"></path>
-  </svg>
-</a>
+<div class="bx--tooltip__label" aria-describedby="unique-tooltip">
+  Tooltip Label
+  <div tabindex="0" data-tooltip-trigger data-tooltip-target="#unique-tooltip" role="tooltip" class="bx--tooltip__trigger">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill-rule="evenodd">
+      <path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm0-2C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0z"/>
+      <path d="M14 10H9v2h2v4H9v2h7v-2h-2z"/>
+      <circle cx="12.5" cy="7.5" r="1.5"/>
+    </svg>
+  </div>
+</div>
 <div id="unique-tooltip" data-floating-menu-direction="bottom" class="bx--tooltip">
-  <p class="bx--tooltip__label">Tooltip subtitle</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, seed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <span class="bx--tooltip__caret"></span>
+  <p>This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed please use a modal instead.</p>
+  <div>
+    <a href="#" class="bx--link">Learn More</a>
+    <button class="bx--btn bx--btn--primary" type="button">Create</button>
+  </div>
 </div>
