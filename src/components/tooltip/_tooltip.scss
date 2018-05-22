@@ -63,7 +63,7 @@
     margin-top: $spacing-xs;
     padding: $spacing-md;
     border: 1px solid $ui-03;
-    border-radius: 4px;
+    border-radius: rem(4px);
     z-index: z('floating');
     word-wrap: break-word;
 
@@ -79,11 +79,11 @@
       margin-top: 1rem;
     }
 
-    &:before {
+    .#{$prefix}--tooltip__caret {
       position: absolute;
       background: $ui-01;
       left: 0;
-      top: rem(-6px);
+      top: rem(-5px);
       right: 0;
       transform: rotate(-135deg);
       width: 0.6rem;
@@ -97,16 +97,16 @@
     &[data-floating-menu-direction='left'] {
       margin-left: -$spacing-sm;
 
-      &:before {
+      .#{$prefix}--tooltip__caret {
         left: auto;
         top: 44.7%;
-        right: rem(-6px);
+        right: rem(-5px);
         transform: rotate(-45deg);
       }
     }
 
     &[data-floating-menu-direction='top'] {
-      &:before {
+      .#{$prefix}--tooltip__caret {
         top: auto;
         bottom: rem(-6px);
         transform: rotate(45deg);
@@ -116,8 +116,8 @@
     &[data-floating-menu-direction='right'] {
       margin-left: $spacing-sm;
 
-      &:before {
-        left: rem(-6px);
+      .#{$prefix}--tooltip__caret {
+        left: rem(-5px);
         top: 44.7%;
         right: auto;
         transform: rotate(135deg);
@@ -164,8 +164,6 @@
 
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
-    @include font-family;
-    @include typescale('omega');
     @include layer('overlay');
     position: absolute;
     z-index: 1;
@@ -174,37 +172,41 @@
     max-width: rem(176px);
     margin-top: $spacing-sm;
     padding: $spacing-xs;
-    color: $inverse-01;
-    border-radius: 4px;
+    border-radius: rem(4px);
     pointer-events: none;
     cursor: pointer;
 
-    &:after {
-      background: $inverse-02;
+    p {
+      @include font-family;
+      @include typescale('omega');
+      color: $inverse-01;
+    }
+
+    .#{$prefix}--tooltip__caret {
       position: absolute;
       right: 0;
       left: 0;
       width: 0.6rem;
       height: 0.6rem;
-      margin-left: 24px;
-      content: '';
+      background: $inverse-02;
+      margin-left: $spacing-lg;
     }
   }
 
   // Tooltip Definition caret - bottom position
   .#{$prefix}--tooltip--definition__bottom {
-    &:after {
-      top: -0.3rem;
+    .#{$prefix}--tooltip__caret {
+      top: -0.2rem;
       transform: rotate(-135deg);
     }
   }
 
   // Tooltip Definition caret - top position
   .#{$prefix}--tooltip--definition__top {
-    top: 0.5rem;
+    top: -0.3rem;
 
-    &:after {
-      bottom: -0.3rem;
+    .#{$prefix}--tooltip__caret {
+      bottom: -0.2rem;
       transform: rotate(45deg);
     }
   }

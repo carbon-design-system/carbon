@@ -1,14 +1,15 @@
 <div class="bx--tooltip__label">
   Tooltip Label
-  <div tabindex="0" data-tooltip-trigger data-tooltip-target="#unique-tooltip" role="tooltip" aria-labelledby="information-tooltip" class="bx--tooltip__trigger">
-    <svg width="16px" height="16px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill-rule="evenodd">
-      <path d="M12,2 C17.5,2 22,6.5 22,12 C22,17.5 17.5,22 12,22 C6.5,22 2,17.5 2,12 C2,6.5 6.5,2 12,2 L12,2 Z M12,0 C5.4,0 0,5.4 0,12 C0,18.6 5.4,24 12,24 C18.6,24 24,18.6 24,12 C24,5.4 18.6,0 12,0 L12,0 L12,0 Z"></path>
-      <polygon points="14 10 9 10 9 12 11 12 11 16 9 16 9 18 16 18 16 16 14 16"></polygon>
-      <circle cx="12.5" cy="7.5" r="1.5"></circle>
+  <div tabindex="0" data-tooltip-trigger data-tooltip-target="#unique-tooltip" role="tooltip" aria-labelledby="unique-tooltip" class="bx--tooltip__trigger">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill-rule="evenodd">
+      <path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm0-2C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0z"/>
+      <path d="M14 10H9v2h2v4H9v2h7v-2h-2z"/>
+      <circle cx="12.5" cy="7.5" r="1.5"/>
     </svg>
   </div>
 </div>
 <div id="unique-tooltip" data-floating-menu-direction="bottom" class="bx--tooltip">
+  <span class="bx--tooltip__caret"></span>
   <p>This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed please use a modal instead.</p>
   <div>
     <a href="#" class="bx--link">Learn More</a>
