@@ -14,13 +14,14 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       className="custom-class"
       id="custom-id"
       labelText="Filter table"
+      light={true}
       onChange={[MockFunction]}
       placeHolderText="Search"
       small={true}
       type="text"
     >
       <div
-        className="bx--search bx--search-with-options bx--search--sm custom-class"
+        className="bx--search bx--search-with-options bx--search--sm bx--search--light custom-class"
         role="search"
       >
         <Icon

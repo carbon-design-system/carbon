@@ -22,6 +22,10 @@ export default class NumberInput extends Component {
     value: PropTypes.number,
     invalid: PropTypes.bool,
     invalidText: PropTypes.string,
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -34,6 +38,7 @@ export default class NumberInput extends Component {
     value: 0,
     invalid: false,
     invalidText: 'Provide invalidText',
+    light: false,
   };
 
   /**
@@ -123,10 +128,13 @@ export default class NumberInput extends Component {
       step,
       invalid,
       invalidText,
+      light,
       ...other
     } = this.props;
 
-    const numberInputClasses = classNames('bx--number', className);
+    const numberInputClasses = classNames('bx--number', className, {
+      'bx--number--light': light,
+    });
 
     const props = {
       disabled,

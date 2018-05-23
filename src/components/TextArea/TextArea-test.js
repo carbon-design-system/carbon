@@ -55,6 +55,12 @@ describe('TextArea', () => {
         wrapper.setProps({ defaultValue: 'default value' });
         expect(textarea().props().defaultValue).toEqual('default value');
       });
+
+      it('should specify light version as expected', () => {
+        expect(wrapper.props().light).toEqual(false);
+        wrapper.setProps({ light: true });
+        expect(wrapper.props().light).toEqual(true);
+      });
     });
 
     describe('label', () => {

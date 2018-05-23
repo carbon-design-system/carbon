@@ -20,6 +20,10 @@ export default class TimePicker extends Component {
     hideLabel: PropTypes.bool,
     disabled: PropTypes.bool,
     value: PropTypes.string,
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -33,6 +37,7 @@ export default class TimePicker extends Component {
     onChange: () => {},
     onClick: () => {},
     onBlur: () => {},
+    light: false,
   };
 
   constructor(props) {
@@ -65,6 +70,7 @@ export default class TimePicker extends Component {
       invalidText,
       invalid,
       hideLabel,
+      light,
       ...other
     } = this.props;
 
@@ -103,6 +109,7 @@ export default class TimePicker extends Component {
 
     const timePickerClasses = classNames({
       'bx--time-picker': true,
+      'bx--time-picker--light': light,
       [className]: className,
     });
 

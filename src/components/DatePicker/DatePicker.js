@@ -34,6 +34,11 @@ export default class DatePicker extends Component {
     short: PropTypes.bool,
 
     /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
+
+    /**
      * The type of the date picker:
      *
      * * `simple` - Without calendar dropdown.
@@ -194,6 +199,7 @@ export default class DatePicker extends Component {
 
   static defaultProps = {
     short: false,
+    light: false,
     dateFormat: 'm/d/Y',
     locale: 'en',
   };
@@ -376,6 +382,7 @@ export default class DatePicker extends Component {
       children,
       className,
       short,
+      light,
       datePickerType,
       minDate, // eslint-disable-line
       maxDate, // eslint-disable-line
@@ -386,6 +393,7 @@ export default class DatePicker extends Component {
 
     const datePickerClasses = classNames('bx--date-picker', className, {
       'bx--date-picker--short': short,
+      'bx--date-picker--light': light,
       'bx--date-picker--simple': datePickerType === 'simple',
       'bx--date-picker--single': datePickerType === 'single',
       'bx--date-picker--range': datePickerType === 'range',

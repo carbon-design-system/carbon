@@ -12,11 +12,13 @@ const Select = ({
   children,
   iconDescription,
   hideLabel,
+  light,
   ...other
 }) => {
   const selectClasses = classNames({
     'bx--select': true,
     'bx--select--inline': inline,
+    'bx--select--light': light,
     [className]: className,
   });
   const labelClasses = classNames('bx--label', {
@@ -24,11 +26,6 @@ const Select = ({
   });
   return (
     <div className="bx--form-item">
-      {!inline ? (
-        <label htmlFor={id} className={labelClasses}>
-          {labelText}
-        </label>
-      ) : null}
       <div className={selectClasses}>
         {inline ? (
           <label htmlFor={id} className={labelClasses}>
@@ -47,6 +44,11 @@ const Select = ({
           className="bx--select__arrow"
           description={iconDescription}
         />
+        {!inline ? (
+          <label htmlFor={id} className={labelClasses}>
+            {labelText}
+          </label>
+        ) : null}
       </div>
     </div>
   );
@@ -63,6 +65,7 @@ Select.propTypes = {
   defaultValue: PropTypes.any,
   iconDescription: PropTypes.string.isRequired,
   hideLabel: PropTypes.bool,
+  light: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -70,6 +73,7 @@ Select.defaultProps = {
   labelText: 'Select',
   inline: false,
   iconDescription: 'open list of options',
+  light: false,
 };
 
 export default Select;

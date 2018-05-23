@@ -55,6 +55,12 @@ describe('Select', () => {
           wrapper.find(Icon).props().description;
         expect(matches).toEqual(true);
       });
+
+      it('should specify light select as expected', () => {
+        expect(wrapper.props().light).toEqual(false);
+        wrapper.setProps({ light: true });
+        expect(wrapper.props().light).toEqual(true);
+      });
     });
 
     describe('select', () => {

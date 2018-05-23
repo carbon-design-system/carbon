@@ -45,6 +45,21 @@ describe('TimePicker', () => {
         expect(textInput().props().placeholder).toEqual('ss:mm');
       });
     });
+    /*
+    describe('Light', () => {
+      describe('Renders as expected', () => {
+        wrapper = mount(<TimePicker id="test" light className="extra-class" />);
+    
+        it('Has the expected classes for light', () => {
+          expect(wrapper.hasClass('bx--time-picker--light')).toEqual(true);
+        });
+    
+        it('Should add extra classes that are passed via className', () => {
+          expect(wrapper.hasClass('extra-class')).toEqual(true);
+        });
+      });
+    });
+    */
 
     describe('label', () => {
       let wrapper;

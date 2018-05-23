@@ -5,7 +5,12 @@ import { mount, shallow } from 'enzyme';
 describe('TextInput', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
-      <TextInput id="test" className="extra-class" labelText="testlabel" />
+      <TextInput
+        id="test"
+        className="extra-class"
+        labelText="testlabel"
+        light
+      />
     );
 
     const textInput = () => wrapper.find('input');
@@ -21,6 +26,11 @@ describe('TextInput', () => {
 
       it('should add extra classes that are passed via className', () => {
         expect(textInput().hasClass('extra-class')).toEqual(true);
+      });
+
+      it('has the expected classes for light', () => {
+        wrapper.setProps({ light: true });
+        expect(textInput().hasClass('bx--text-input--light')).toEqual(true);
       });
 
       it('should set type as expected', () => {

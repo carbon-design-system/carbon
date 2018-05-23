@@ -885,13 +885,14 @@ exports[`DataTable should render 1`] = `
               <Search
                 id="custom-id"
                 labelText="Filter table"
+                light={true}
                 onChange={[Function]}
                 placeHolderText="Search"
                 small={true}
                 type="text"
               >
                 <div
-                  className="bx--search bx--search-with-options bx--search--sm"
+                  className="bx--search bx--search-with-options bx--search--sm bx--search--light"
                   role="search"
                 >
                   <Icon

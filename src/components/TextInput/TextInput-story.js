@@ -88,6 +88,15 @@ storiesOf('TextInput', module)
     () => <TextInput {...TextInputProps} hideLabel={true} />
   )
   .addWithInfo(
+    'light',
+    `
+      ${introText}
+      The example below shows an enabled Text Input component. The default type is 'text' and its
+      value can be either 'string' or 'number'.
+    `,
+    () => <TextInput light {...TextInputProps} />
+  )
+  .addWithInfo(
     'skeleton',
     `
     Placeholder skeleton state to use when content is loading.

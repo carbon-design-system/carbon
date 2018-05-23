@@ -146,6 +146,21 @@ storiesOf('DatePicker', module)
     )
   )
   .addWithInfo(
+    'light',
+    `
+      A single Date Picker consists of an input field and a calendar.
+    `,
+    () => (
+      <DatePicker
+        light
+        {...datePickerProps}
+        datePickerType="single"
+        dateFormat="m/d/Y">
+        <DatePickerInput {...datePickerInputProps} />
+      </DatePicker>
+    )
+  )
+  .addWithInfo(
     'skeleton',
     `
     Placeholder skeleton state to use when content is loading.

@@ -47,6 +47,14 @@ storiesOf('NumberInput', module)
     () => <NumberInput {...numberInputProps} invalid />
   )
   .addWithInfo(
+    'light',
+    `
+      ${introText}
+      The example below shows an enabled Number Input component.
+    `,
+    () => <NumberInput light {...numberInputProps} />
+  )
+  .addWithInfo(
     'skeleton',
     `
       Placeholder skeleton state to use when content is loading.

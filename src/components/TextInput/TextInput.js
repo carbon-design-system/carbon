@@ -13,6 +13,7 @@ const TextInput = ({
   hideLabel,
   invalid,
   invalidText,
+  light,
   ...other
 }) => {
   const textInputProps = {
@@ -32,7 +33,9 @@ const TextInput = ({
   };
 
   const errorId = id + '-error-msg';
-  const textInputClasses = classNames('bx--text-input', className);
+  const textInputClasses = classNames('bx--text-input', className, {
+    'bx--text-input--light': light,
+  });
   const labelClasses = classNames('bx--label', {
     'bx--visually-hidden': hideLabel,
   });
@@ -85,6 +88,10 @@ TextInput.propTypes = {
   hideLabel: PropTypes.bool,
   invalid: PropTypes.bool,
   invalidText: PropTypes.string,
+  /**
+   * `true` to use the light version.
+   */
+  light: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -95,6 +102,7 @@ TextInput.defaultProps = {
   onClick: () => {},
   invalid: false,
   invalidText: '',
+  light: false,
 };
 
 export default TextInput;
