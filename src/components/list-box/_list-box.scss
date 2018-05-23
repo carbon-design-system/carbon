@@ -1,0 +1,237 @@
+//-----------------------------
+// List Box
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/vars';
+
+$list-box-width: 100%;
+$list-box-height: rem(40px);
+$list-box-inline-height: rem(32px);
+$list-box-menu-width: rem(300px);
+
+@include exports('list-box') {
+  // The overall container element for a `list-box`. Has two variants,
+  // `disabled` and `inline`.
+  .#{$prefix}--list-box {
+    position: relative;
+    width: $list-box-width;
+    height: $list-box-height;
+    max-height: $list-box-height;
+    background-color: rgba($field-01, 0.1);
+  }
+
+  // Disabled state for a `list-box`
+  .#{$prefix}--list-box--disabled {
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--list-box--disabled,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon {
+    cursor: not-allowed;
+  }
+
+  // Inline variant for a `list-box`
+  .#{$prefix}--list-box--inline {
+    background-color: inherit;
+    width: auto;
+    height: $list-box-inline-height;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
+    color: $brand-01;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    padding: 0 0 0 rem(10px);
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
+    position: static;
+    padding: 0 rem(10px) 0 rem(12px);
+  }
+
+  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__menu {
+    top: $list-box-inline-height;
+    width: $list-box-menu-width;
+  }
+
+  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'] ~ .#{$prefix}--list-box__menu {
+    outline: 1px solid $brand-01;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'] {
+    outline: none;
+  }
+
+  // The field we use for input, showing selection, etc.
+  .#{$prefix}--list-box__field {
+    @include button-reset;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1rem;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--list-box__field[aria-expanded='true'] {
+    outline: 1px solid $brand-01;
+  }
+
+  .#{$prefix}--list-box__field[disabled] {
+    outline: none;
+  }
+
+  .#{$prefix}--list-box__field[aria-expanded='true'] ~ .#{$prefix}--list-box__menu {
+    box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01, 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  // Label for a `list-box__field`
+  .#{$prefix}--list-box__label {
+    @include typescale('zeta');
+
+    color: $text-01;
+    font-weight: 600;
+    user-select: none;
+  }
+
+  // Menu status inside of a `list-box__field`
+  .#{$prefix}--list-box__menu-icon {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    padding: 0 1rem;
+    transition: transform 200ms $carbon--standard-easing;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--list-box__menu-icon > svg {
+    fill: $brand-01;
+    height: 100%;
+  }
+
+  .#{$prefix}--list-box__menu-icon--open {
+    transform: rotate(180deg);
+  }
+
+  // Selection indicator for a `list-box__field`
+  .#{$prefix}--list-box__selection {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: rem(26px);
+    bottom: 0;
+    height: rem(40px);
+    padding: 0 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 200ms $carbon--standard-easing;
+  }
+
+  .#{$prefix}--list-box__selection > svg {
+    fill: $ui-05;
+    height: 100%;
+  }
+
+  .#{$prefix}--list-box__selection:focus {
+    outline: 1px solid $brand-01;
+  }
+
+  // Modifier for a selection to show that multiple selections have been made
+  .#{$prefix}--list-box__selection--multi {
+    @include typescale('omega');
+
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: $brand-01;
+    height: rem(18px);
+    color: white;
+    line-height: 0;
+    padding: rem(5px);
+    margin-right: rem(10px);
+    border-radius: rem(13px);
+  }
+
+  .#{$prefix}--list-box__selection--multi > svg {
+    fill: white;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: rem(5px);
+  }
+
+  .#{$prefix}--list-box__selection--multi:focus,
+  .#{$prefix}--list-box__selection--multi:hover {
+    background-color: $brand-02;
+    outline: none;
+  }
+
+  // Descendant of a `list-box` that displays a list of options to select
+  .#{$prefix}--list-box__menu {
+    @include box-shadow();
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: $list-box-height;
+    width: $list-box-width;
+    background-color: $ui-01;
+    max-height: rem(120px);
+    overflow-y: auto;
+    z-index: z('dropdown');
+  }
+
+  // Descendant of a `list-box__menu` that represents a selection for a control
+  .#{$prefix}--list-box__menu-item {
+    @include typescale('zeta');
+
+    display: flex;
+    align-items: center;
+    height: rem(40px);
+    padding: 0 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .#{$prefix}--list-box__menu-item:hover,
+  .#{$prefix}--list-box__menu-item--highlighted {
+    background-color: rgba($field-01, 0.1);
+    color: $text-01;
+  }
+
+  // Tweaks for descendants
+
+  // In multi-select scenarios, we need to target checkbox inputs
+  .#{$prefix}--list-box__menu-item > .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin: 0;
+  }
+
+  // When handling input, we need to target nodes that specifically opt-in to
+  // the `combobox` role in order to make sure the text input is styled
+  // correctly.
+  .#{$prefix}--list-box input[role='combobox'] {
+    background-color: inherit;
+    font-weight: 600;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box input[role='combobox']::placeholder {
+    font-weight: 400;
+  }
+
+  .#{$prefix}--list-box--disabled input[role='combobox'] {
+    opacity: 1;
+  }
+}

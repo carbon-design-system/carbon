@@ -13,7 +13,7 @@ $css--helpers: true;
 @import '../search/search';
 
 @include exports('toolbar') {
-  .bx--toolbar {
+  .#{$prefix}--toolbar {
     @include font-family;
     display: flex;
     flex-flow: row nowrap;
@@ -24,25 +24,25 @@ $css--helpers: true;
       margin: 0 rem(4px);
     }
 
-    .bx--search-input {
+    .#{$prefix}--search-input {
       height: rem(32px);
       background-color: transparent;
       outline: none;
     }
 
-    .bx--search-close {
+    .#{$prefix}--search-close {
       display: none;
     }
 
-    .bx--overflow-menu__icon {
+    .#{$prefix}--overflow-menu__icon {
       fill: $text-02;
-      transition: fill 50ms $bx--standard-easing;
+      transition: fill 50ms $carbon--standard-easing;
     }
 
-    .bx--search-magnifier {
+    .#{$prefix}--search-magnifier {
       fill: $text-02;
       transform: scale(1.3);
-      transition: all 175ms $bx--standard-easing;
+      transition: all 175ms $carbon--standard-easing;
       top: rem(8px);
       left: rem(6px);
       cursor: pointer;
@@ -53,38 +53,38 @@ $css--helpers: true;
       padding: 0;
     }
 
-    .bx--toolbar-search--active {
+    .#{$prefix}--toolbar-search--active {
       width: rem(250px);
 
-      .bx--search-magnifier {
+      .#{$prefix}--search-magnifier {
         transform: scale(1);
         top: rem(9px);
       }
 
-      .bx--search-input {
+      .#{$prefix}--search-input {
         background-color: $field-01;
       }
 
-      .bx--search-close {
+      .#{$prefix}--search-close {
         display: block;
       }
     }
 
-    .bx--checkbox-label {
+    .#{$prefix}--checkbox-label {
       margin-bottom: 0;
     }
 
-    .bx--overflow-menu--open > .bx--overflow-menu__icon {
+    .#{$prefix}--overflow-menu--open > .#{$prefix}--overflow-menu__icon {
       fill: $brand-01;
     }
   }
 
-  .bx--toolbar-search {
+  .#{$prefix}--toolbar-search {
     width: 1.8rem;
-    transition: all 175ms $bx--standard-easing;
+    transition: all 175ms $carbon--standard-easing;
   }
 
-  .bx--toolbar-search__btn {
+  .#{$prefix}--toolbar-search__btn {
     position: absolute;
     left: 0;
     top: 0;
@@ -98,29 +98,29 @@ $css--helpers: true;
     }
   }
 
-  .bx--toolbar-filter-icon {
+  .#{$prefix}--toolbar-filter-icon {
     padding-left: 0;
     padding-right: 0;
   }
 
-  .bx--toolbar-menu__title {
+  .#{$prefix}--toolbar-menu__title {
     @include typescale('omega');
     @include letter-spacing;
     font-weight: 600;
     padding: 0.5rem 1.25rem;
   }
 
-  .bx--toolbar-menu__option {
+  .#{$prefix}--toolbar-menu__option {
     padding: 0.5rem 1.25rem;
   }
 
-  .bx--toolbar-menu__divider {
+  .#{$prefix}--toolbar-menu__divider {
     width: 100%;
     border: 0;
     border-top: 1px solid $ui-04;
   }
 
-  .bx--radio-button-group {
+  .#{$prefix}--radio-button-group {
     border: none;
   }
 }

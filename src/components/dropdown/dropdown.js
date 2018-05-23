@@ -1,3 +1,4 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
@@ -10,11 +11,14 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * A selector with drop downs.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends TrackBlur
    * @param {HTMLElement} element The element working as a selector.
    * @param {Object} [options] The component options.
    * @param {string} [options.selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @param {string} [options.selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @param {string} [options.classSelected] The CSS class for the selected dropdown item.
+   * @param {string} [options.classOpen] The CSS class for the open state.
+   * @param {string} [options.classDisabled] The CSS class for the disabled state.
    * @param {string} [options.eventBeforeSelected]
    *   The name of the custom event fired before a drop down item is selected.
    *   Cancellation of this event stops selection of drop down item.
@@ -23,36 +27,24 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
   constructor(element, options) {
     super(element, options);
 
-    /**
-     * The handle to release click event listener on document object.
-     * @member {Handle}
-     */
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', event => {
-      this._toggle(event);
-    });
-
-    this.element.addEventListener('keydown', event => {
-      this._handleKeyDown(event);
-    });
-    this.element.addEventListener('click', event => {
-      const item = eventMatches(event, this.options.selectorItem);
-      if (item) {
-        this.select(item);
-      }
-    });
-  }
-
-  /**
-   * Cleans up stuffs specific to this widget.
-   */
-  release() {
-    if (this.hFocusIn) {
-      this.hFocusIn = this.hFocusIn.release();
-    }
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    super.release();
+    this.manage(
+      on(this.element.ownerDocument, 'click', event => {
+        this._toggle(event);
+      })
+    );
+    this.manage(
+      on(this.element, 'keydown', event => {
+        this._handleKeyDown(event);
+      })
+    );
+    this.manage(
+      on(this.element, 'click', event => {
+        const item = eventMatches(event, this.options.selectorItem);
+        if (item) {
+          this.select(item);
+        }
+      })
+    );
   }
 
   /**
@@ -60,7 +52,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @param {Event} event The event triggering this method.
    */
   _handleKeyDown(event) {
-    const isOpen = this.element.classList.contains('bx--dropdown--open');
+    const isOpen = this.element.classList.contains(this.options.classOpen);
     const direction = {
       38: this.constructor.NAVIGATE.BACKWARD,
       40: this.constructor.NAVIGATE.FORWARD,
@@ -78,7 +70,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @param {Event} [event] The event triggering this method.
    */
   _toggle(event) {
-    const isDisabled = this.element.classList.contains('bx--dropdown--disabled');
+    const isDisabled = this.element.classList.contains(this.options.classDisabled);
 
     if (isDisabled) {
       return;
@@ -89,7 +81,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       event.which === 27 ||
       event.type === 'click'
     ) {
-      const isOpen = this.element.classList.contains('bx--dropdown--open');
+      const isOpen = this.element.classList.contains(this.options.classOpen);
       const isOfSelf = this.element.contains(event.target);
       const actions = {
         add: isOfSelf && event.which === 40 && !isOpen,
@@ -98,8 +90,16 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       };
       Object.keys(actions).forEach(action => {
         if (actions[action]) {
-          this.element.classList[action]('bx--dropdown--open');
+          this.element.classList[action](this.options.classOpen);
           this.element.focus();
+        }
+      });
+      const listItems = [...this.element.querySelectorAll(this.options.selectorItem)];
+      listItems.forEach(item => {
+        if (this.element.classList.contains(this.options.classOpen)) {
+          item.tabIndex = 0;
+        } else {
+          item.tabIndex = -1;
         }
       });
     }
@@ -151,7 +151,9 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
 
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
-        const text = this.element.querySelector(this.options.selectorText);
+        const selectorText =
+          this.element.dataset.dropdownType !== 'inline' ? this.options.selectorText : this.options.selectorTextInner;
+        const text = this.element.querySelector(selectorText);
         if (text) {
           text.innerHTML = itemToSelect.innerHTML;
         }
@@ -179,7 +181,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * Closes the dropdown menu if this component loses focus.
    */
   handleBlur() {
-    this.element.classList.remove('bx--dropdown--open');
+    this.element.classList.remove(this.options.classOpen);
   }
 
   /**
@@ -197,23 +199,32 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find selectors.
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
+   * @property {string} [selectorTextInner] The CSS selector to find the element showing the selected item, used for inline mode.
    * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
+   * @property {string} [classOpen] The CSS class for the open state.
+   * @property {string} [classDisabled] The CSS class for the disabled state.
    * @property {string} [eventBeforeSelected]
    *   The name of the custom event fired before a drop down item is selected.
    *   Cancellation of this event stops selection of drop down item.
    * @property {string} [eventAfterSelected] The name of the custom event fired after a drop down item is selected.
    */
-  static options = {
-    selectorInit: '[data-dropdown]',
-    selectorText: '.bx--dropdown-text',
-    selectorItem: '.bx--dropdown-link',
-    selectorItemSelected: '.bx--dropdown--selected',
-    classSelected: 'bx--dropdown--selected',
-    eventBeforeSelected: 'dropdown-beingselected',
-    eventAfterSelected: 'dropdown-selected',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-dropdown]',
+      selectorText: `.${prefix}--dropdown-text`,
+      selectorTextInner: `.${prefix}--dropdown-text__inner`,
+      selectorItem: `.${prefix}--dropdown-link`,
+      selectorItemSelected: `.${prefix}--dropdown--selected`,
+      classSelected: `${prefix}--dropdown--selected`,
+      classOpen: `${prefix}--dropdown--open`,
+      classDisabled: `${prefix}--dropdown--disabled`,
+      eventBeforeSelected: 'dropdown-beingselected',
+      eventAfterSelected: 'dropdown-selected',
+    };
+  }
 
   /**
    * Enum for navigating backward/forward.

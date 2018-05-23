@@ -1,6 +1,6 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Carousel from '../../src/components/carousel/carousel';
 import HTML from '../../src/components/carousel/carousel.html';
+import flattenOptions from '../utils/flatten-options';
 
 describe('Carousel', () => {
   describe('Constructor', () => {
@@ -18,17 +18,17 @@ describe('Carousel', () => {
     it('Should throw if root element is not given', () => {
       expect(() => {
         new Carousel();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', () => {
       expect(() => {
         new Carousel(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('should set default options', () => {
-      expect(instance.options).to.deep.equal({
+      expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-carousel]',
         selectorFilmstrip: '.bx--filmstrip',
         selectorScrollRight: '[data-scroll-right]',
@@ -57,12 +57,11 @@ describe('Carousel', () => {
     });
 
     it('should be called on click', () => {
-      const spy = sinon.spy(instance, 'sideScroll');
+      spyOn(instance, 'sideScroll');
       const event = new CustomEvent('click', { bubbles: true });
       const rightButton = element.querySelector(instance.options.selectorScrollRight);
       rightButton.dispatchEvent(event);
-      expect(spy).to.have.been.called;
-      spy.restore();
+      expect(instance.sideScroll).toHaveBeenCalled();
     });
 
     it('should scroll right on click', () => {
@@ -70,7 +69,7 @@ describe('Carousel', () => {
       const rightButton = element.querySelector(instance.options.selectorScrollRight);
       const event = new CustomEvent('click', { bubbles: true });
       rightButton.dispatchEvent(event);
-      expect(initalStyle).to.not.equal(instance.filmstrip.style.transform);
+      expect(initalStyle).not.toBe(instance.filmstrip.style.transform);
     });
 
     it('should scroll left on click', () => {
@@ -78,7 +77,7 @@ describe('Carousel', () => {
       const leftButton = element.querySelector(instance.options.selectorScrollLeft);
       const event = new CustomEvent('click', { bubbles: true });
       leftButton.dispatchEvent(event);
-      expect(initalStyle).to.not.equal(instance.filmstrip.style.transform);
+      expect(initalStyle).not.toBe(instance.filmstrip.style.transform);
     });
 
     afterEach(() => {

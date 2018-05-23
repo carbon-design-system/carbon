@@ -1,14 +1,18 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 import svgToggleClass from '../../globals/js/misc/svg-toggle-class';
 
-class Search extends mixin(createComponent, initComponentBySearch) {
+class Search extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Search with Options.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as the search component.
    * @param {Object} [options] The component options
    * @property {string} [options.selectorInit]
@@ -32,21 +36,27 @@ class Search extends mixin(createComponent, initComponentBySearch) {
     }
 
     if (closeIcon) {
-      closeIcon.addEventListener('click', () => {
-        svgToggleClass(closeIcon, this.options.classClearHidden, true);
-        input.value = '';
-        input.focus();
-      });
+      this.manage(
+        on(closeIcon, 'click', () => {
+          svgToggleClass(closeIcon, this.options.classClearHidden, true);
+          input.value = '';
+          input.focus();
+        })
+      );
     }
 
-    this.element.addEventListener('click', evt => {
-      const toggleItem = eventMatches(evt, this.options.selectorIconContainer);
-      if (toggleItem) this.toggleLayout(toggleItem);
-    });
+    this.manage(
+      on(this.element, 'click', evt => {
+        const toggleItem = eventMatches(evt, this.options.selectorIconContainer);
+        if (toggleItem) this.toggleLayout(toggleItem);
+      })
+    );
 
-    input.addEventListener('input', evt => {
-      if (closeIcon) this.showClear(evt.target.value, closeIcon);
-    });
+    this.manage(
+      on(input, 'input', evt => {
+        if (closeIcon) this.showClear(evt.target.value, closeIcon);
+      })
+    );
   }
 
   /**
@@ -61,7 +71,7 @@ class Search extends mixin(createComponent, initComponentBySearch) {
 
   /**
    * Toggles the clear icon visibility
-   * @param {HTMLElement} input The element serving as the search input.
+   * @param {HTMLElement} value The element serving as the search input.
    * @param {HTMLElement} icon The element serving as close icon.
    */
   showClear(value, icon) {
@@ -88,15 +98,18 @@ class Search extends mixin(createComponent, initComponentBySearch) {
    * @property {string} [options.classClearHidden] The class used to hide the clear icon.
    * @property {string} [options.classLayoutHidden] The class used to hide nonselected layout view.
    */
-  static options = {
-    selectorInit: '[data-search]',
-    selectorSearchView: '[data-search-view]',
-    selectorSearchInput: '.bx--search-input',
-    selectorClearIcon: '.bx--search-close',
-    selectorIconContainer: '.bx--search-button[data-search-toggle]',
-    classClearHidden: 'bx--search-close--hidden',
-    classLayoutHidden: 'bx--search-view--hidden',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-search]',
+      selectorSearchView: '[data-search-view]',
+      selectorSearchInput: `.${prefix}--search-input`,
+      selectorClearIcon: `.${prefix}--search-close`,
+      selectorIconContainer: `.${prefix}--search-button[data-search-toggle]`,
+      classClearHidden: `${prefix}--search-close--hidden`,
+      classLayoutHidden: `${prefix}--search-view--hidden`,
+    };
+  }
 
   /**
    * The map associating DOM element and search instance.

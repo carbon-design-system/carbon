@@ -2,8 +2,10 @@
 // Modals
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
@@ -14,7 +16,7 @@
 @import '../button/button';
 
 @include exports('modal') {
-  .bx--modal {
+  .#{$prefix}--modal {
     @include reset;
     @include font-family;
     position: fixed;
@@ -40,7 +42,11 @@
     }
   }
 
-  .bx--modal-container {
+  .#{$prefix}--modal--danger {
+    @include modal--color($support-01);
+  }
+
+  .#{$prefix}--modal-container {
     @include reset;
     @include layer('pop-out');
     position: relative;
@@ -51,14 +57,14 @@
     min-width: 100%;
     max-height: 100%;
     height: 100%;
-    padding: rem(32px) 3% 0rem 3%;
+    padding: $spacing-xl 3% 0rem 3%;
 
     @media (min-width: 600px) {
       height: auto;
       min-width: 500px;
       max-width: 75%;
       max-height: 90%;
-      padding: rem(44px) rem(48px) 0 rem(48px);
+      padding: $spacing-2xl $spacing-3xl 0 $spacing-3xl;
     }
 
     @media (min-width: 1024px) {
@@ -67,52 +73,52 @@
     }
   }
 
-  .bx--modal-header {
-    margin-bottom: rem(24px);
+  .#{$prefix}--modal-header {
+    margin-bottom: $spacing-lg;
   }
 
-  .bx--modal-header__label {
+  .#{$prefix}--modal-header__label {
     @include reset;
     @include typescale('omega');
+    @include letter-spacing;
     color: $text-01;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: rem(8px);
+    margin-bottom: $spacing-xs;
   }
 
-  .bx--modal-header__heading {
+  .#{$prefix}--modal-header__heading {
     @include reset;
     @include typescale('beta');
     font-weight: 300;
     color: $text-02;
   }
 
-  .bx--modal-content {
+  .#{$prefix}--modal-content {
     overflow-y: auto;
-    margin-bottom: rem(48px);
+    margin-bottom: $spacing-3xl;
 
     > * {
       @include reset;
     }
   }
 
-  .bx--modal-footer {
+  .#{$prefix}--modal-footer {
     margin-top: auto;
     text-align: right;
     background-color: $modal-footer-background-color;
     margin-left: rem(-24px);
     margin-right: rem(-24px);
-    padding: rem(24px) rem(24px);
+    padding: $spacing-xl $spacing-xl;
 
     @media (min-width: 600px) {
       margin-left: rem(-48px);
       margin-right: rem(-48px);
-      padding: rem(24px) rem(48px);
+      padding: $spacing-xl $spacing-3xl;
     }
   }
 
-  .bx--modal-close {
+  .#{$prefix}--modal-close {
     position: absolute;
     top: rem(16px);
     right: rem(16px);
@@ -128,7 +134,7 @@
     }
   }
 
-  .bx--modal-close__icon {
+  .#{$prefix}--modal-close__icon {
     transition: 200ms;
     fill: $ui-05;
     width: rem(12px);

@@ -2,21 +2,23 @@
 // Text area
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
 @include exports('text-area') {
-  .bx--text-area {
+  .#{$prefix}--text-area {
     @include reset;
     @include font-family;
     @include typescale('zeta');
     width: 100%;
     min-width: 10rem;
-    padding: 1rem;
+    padding: $spacing-md;
     color: $text-01;
     background-color: $field-01;
     border: $input-border;
@@ -37,6 +39,16 @@
 
     &:disabled:hover {
       border: $input-border;
+    }
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
     }
   }
 }

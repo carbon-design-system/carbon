@@ -7,14 +7,15 @@ bower_components
 demo/*.css
 demo/*.map
 demo/*.js
+demo/hot
 !demo/index.js
 dist
 
 # OSX
 .DS_Store
 
-# Debug
-npm-debug.log
+# Logs
+*.log
 
 # Editors
 project.sublime-project

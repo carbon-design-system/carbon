@@ -1,4 +1,5 @@
 import Pagination from '../../src/components/pagination/pagination';
+import flattenOptions from '../utils/flatten-options';
 
 describe('Test pagination', function() {
   describe('Constructor', function() {
@@ -7,17 +8,17 @@ describe('Test pagination', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         pagination = new Pagination();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         pagination = new Pagination(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should set default options', function() {
-      expect((pagination = new Pagination(document.createElement('div'))).options).to.deep.equal({
+      expect(flattenOptions((pagination = new Pagination(document.createElement('div'))).options)).toEqual({
         selectorInit: '[data-pagination]',
         selectorItemsPerPageInput: '[data-items-per-page]',
         selectorPageNumberInput: '[data-page-number-input]',

@@ -1,6 +1,7 @@
 import '../../demo/polyfills/custom-event';
 import ProgressIndicator from '../../src/components/progress-indicator/progress-indicator';
 import HTML from '../../src/components/progress-indicator/progress-indicator.html';
+import flattenOptions from '../utils/flatten-options';
 
 describe('ProgressIndicator', function() {
   describe('Constructor', function() {
@@ -18,17 +19,17 @@ describe('ProgressIndicator', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new ProgressIndicator();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new ProgressIndicator(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('should set default options', function() {
-      expect(instance.options).to.deep.equal({
+      expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-progress]',
         selectorStepElement: '.bx--progress-step',
         selectorCurrent: '.bx--progress-step--current',
@@ -42,11 +43,11 @@ describe('ProgressIndicator', function() {
     });
 
     it('state.currentIndex should be a number', function() {
-      expect(instance.state.currentIndex).to.be.a('number');
+      expect(isNaN(instance.state.currentIndex)).toBe(false);
     });
 
     it('state.totalSteps should be a number', function() {
-      expect(instance.state.totalSteps).to.be.a('number');
+      expect(isNaN(instance.state.totalSteps)).toBe(false);
     });
 
     afterEach(function() {
@@ -73,7 +74,7 @@ describe('ProgressIndicator', function() {
         element: el,
         className: instance.options.classComplete,
       });
-      expect(el.firstElementChild.tagName).to.not.equal('svg');
+      expect(el.firstElementChild.tagName).not.toBe('svg');
     });
 
     it('should update className with given className param', function() {
@@ -82,7 +83,7 @@ describe('ProgressIndicator', function() {
         element: el,
         className: instance.options.classComplete,
       });
-      expect(el.classList.contains(instance.options.classComplete)).to.equal(true);
+      expect(el.classList.contains(instance.options.classComplete)).toBe(true);
     });
 
     afterEach(function() {
@@ -104,25 +105,25 @@ describe('ProgressIndicator', function() {
     });
 
     it('should loop through all step elements with the correct selector', function() {
-      const className = instance.options.selectorStepElement;
+      const className = instance.options.classStep;
       const steps = instance.getSteps();
-      steps.forEach(step => expect(step.element.classList.contains(className)));
+      steps.forEach(step => expect(step.element.classList.contains(className)).toBe(true));
     });
 
     it('should return an Array of objects with "element" and "index" keynames', function() {
       const elementKey = Object.keys(instance.getSteps()[0])[0];
       const indexKey = Object.keys(instance.getSteps()[0])[1];
-      expect(elementKey).to.equal('element');
-      expect(indexKey).to.equal('index');
+      expect(elementKey).toBe('element');
+      expect(indexKey).toBe('index');
     });
 
     it('index should be a number', function() {
-      expect(instance.getSteps()[0].index).to.be.a('number');
+      expect(isNaN(instance.getSteps()[0].index)).toBe(false);
     });
 
     it('order should start counting from 0', function() {
       const firstStepIndex = instance.getSteps().map(step => step.index)[0];
-      expect(firstStepIndex).to.equal(0);
+      expect(firstStepIndex).toBe(0);
     });
 
     afterEach(function() {
@@ -144,18 +145,18 @@ describe('ProgressIndicator', function() {
     });
 
     it('should return an object with element and index keys', function() {
-      expect(Object.keys(instance.getCurrent())[0]).to.equal('element');
-      expect(Object.keys(instance.getCurrent())[1]).to.equal('index');
+      expect(Object.keys(instance.getCurrent())[0]).toBe('element');
+      expect(Object.keys(instance.getCurrent())[1]).toBe('index');
     });
 
     it('element value should have correct className: classStep', function() {
       const el = instance.getCurrent().element;
-      expect(el.classList.contains(instance.options.classStep)).to.equal(true);
+      expect(el.classList.contains(instance.options.classStep)).toBe(true);
     });
 
     it('element value should have correct className: classCurrent', function() {
       const el = instance.getCurrent().element;
-      expect(el.classList.contains(instance.options.classCurrent)).to.equal(true);
+      expect(el.classList.contains(instance.options.classCurrent)).toBe(true);
     });
 
     afterEach(function() {
@@ -178,13 +179,13 @@ describe('ProgressIndicator', function() {
 
     it('should set a new currentIndex with a given number param', function() {
       instance.setCurrent(2);
-      expect(instance.state.currentIndex).to.equal(2);
+      expect(instance.state.currentIndex).toBe(2);
     });
 
     it('should update className of new currentIndex', function() {
       instance.setCurrent(2);
       const el = instance.getCurrent().element;
-      expect(el.classList.contains(instance.options.classCurrent)).to.equal(true);
+      expect(el.classList.contains(instance.options.classCurrent)).toBe(true);
     });
 
     it('should set state of previous steps to complete', function() {
@@ -195,8 +196,8 @@ describe('ProgressIndicator', function() {
         .map(step => step)
         .filter(step => step.index < 2)[0];
 
-      expect(previousStep.element.classList.contains(instance.options.classComplete)).to.equal(true);
-      expect(previousStep.element.classList.contains(instance.options.classCurrent)).to.equal(false);
+      expect(previousStep.element.classList.contains(instance.options.classComplete)).toBe(true);
+      expect(previousStep.element.classList.contains(instance.options.classCurrent)).toBe(false);
     });
 
     it('should set state of next steps to incomplete', function() {
@@ -207,9 +208,9 @@ describe('ProgressIndicator', function() {
         .map(step => step)
         .filter(step => step.index > 2)[0];
 
-      expect(nextStep.element.classList.contains(instance.options.classIncomplete)).to.equal(true);
-      expect(nextStep.element.classList.contains(instance.options.classComplete)).to.equal(false);
-      expect(nextStep.element.classList.contains(instance.options.classCurrent)).to.equal(false);
+      expect(nextStep.element.classList.contains(instance.options.classIncomplete)).toBe(true);
+      expect(nextStep.element.classList.contains(instance.options.classComplete)).toBe(false);
+      expect(nextStep.element.classList.contains(instance.options.classCurrent)).toBe(false);
     });
 
     afterEach(function() {

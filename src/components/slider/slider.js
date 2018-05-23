@@ -1,14 +1,17 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
+import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-class Slider extends mixin(createComponent, initComponentBySearch, eventedState) {
+class Slider extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
    * Slider.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as an slider.
    */
   constructor(element, options) {
@@ -25,44 +28,60 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     if (this.element.dataset.sliderInputBox) {
       this.boundInput = this.element.ownerDocument.querySelector(this.element.dataset.sliderInputBox);
       this._updateInput();
-      this.boundInput.addEventListener('change', evt => {
-        this.setValue(evt.target.value);
-      });
-      this.boundInput.addEventListener('focus', evt => {
-        evt.target.select();
-      });
+      this.manage(
+        on(this.boundInput, 'change', evt => {
+          this.setValue(evt.target.value);
+        })
+      );
+      this.manage(
+        on(this.boundInput, 'focus', evt => {
+          evt.target.select();
+        })
+      );
       // workaround for safari
-      this.boundInput.addEventListener('mouseup', evt => {
-        evt.preventDefault();
-      });
+      this.manage(
+        on(this.boundInput, 'mouseup', evt => {
+          evt.preventDefault();
+        })
+      );
     }
 
     this._updatePosition();
 
-    this.thumb.addEventListener('mousedown', () => {
-      this.sliderActive = true;
-    });
-    this.hDocumentMouseUp = on(this.element.ownerDocument, 'mouseup', () => {
-      this.sliderActive = false;
-    });
-    this.hDocumentMouseMove = on(this.element.ownerDocument, 'mousemove', evt => {
-      const disabled = this.element.classList.contains('bx--slider--disabled');
-      if (this.sliderActive === true && !disabled) {
-        this._updatePosition(evt);
-      }
-    });
-    this.thumb.addEventListener('keydown', evt => {
-      const disabled = this.element.classList.contains('bx--slider--disabled');
-      if (!disabled) {
-        this._updatePosition(evt);
-      }
-    });
-    this.track.addEventListener('click', evt => {
-      const disabled = this.element.classList.contains('bx--slider--disabled');
-      if (!disabled) {
-        this._updatePosition(evt);
-      }
-    });
+    this.manage(
+      on(this.thumb, 'mousedown', () => {
+        this.sliderActive = true;
+      })
+    );
+    this.manage(
+      on(this.element.ownerDocument, 'mouseup', () => {
+        this.sliderActive = false;
+      })
+    );
+    this.manage(
+      on(this.element.ownerDocument, 'mousemove', evt => {
+        const disabled = this.element.classList.contains(this.options.classDisabled);
+        if (this.sliderActive === true && !disabled) {
+          this._updatePosition(evt);
+        }
+      })
+    );
+    this.manage(
+      on(this.thumb, 'keydown', evt => {
+        const disabled = this.element.classList.contains(this.options.classDisabled);
+        if (!disabled) {
+          this._updatePosition(evt);
+        }
+      })
+    );
+    this.manage(
+      on(this.track, 'click', evt => {
+        const disabled = this.element.classList.contains(this.options.classDisabled);
+        if (!disabled) {
+          this._updatePosition(evt);
+        }
+      })
+    );
   }
 
   _changeState = (state, detail, callback) => {
@@ -120,9 +139,9 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
       }
       if (type === 'mousemove' || type === 'click') {
         if (type === 'click') {
-          this.element.querySelector(this.options.selectorThumb).classList.add('bx--slider__thumb--clicked');
+          this.element.querySelector(this.options.selectorThumb).classList.add(this.options.classThumbClicked);
         } else {
-          this.element.querySelector(this.options.selectorThumb).classList.remove('bx--slider__thumb--clicked');
+          this.element.querySelector(this.options.selectorThumb).classList.remove(this.options.classThumbClicked);
         }
 
         const track = this.track.getBoundingClientRect();
@@ -176,16 +195,6 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
     this._updatePosition();
   }
 
-  release() {
-    if (this.hDocumentMouseUp) {
-      this.hDocumentMouseUp = this.hDocumentMouseUp.release();
-    }
-    if (this.hDocumentMouseMove) {
-      this.hDocumentMouseMove = this.hDocumentMouseMove.release();
-    }
-    super.release();
-  }
-
   /**
    * The map associating DOM element and Slider UI instance.
    * @type {WeakMap}
@@ -198,16 +207,21 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState)
    * properties in this object are overriden for the instance being created.
    * @property {string} selectorInit The CSS selector to find slider instances.
    */
-  static options = {
-    selectorInit: '[data-slider]',
-    selectorTrack: '.bx--slider__track',
-    selectorFilledTrack: '.bx--slider__filled-track',
-    selectorThumb: '.bx--slider__thumb',
-    selectorInput: '.bx--slider__input',
-    eventBeforeSliderValueChange: 'slider-before-value-change',
-    eventAfterSliderValueChange: 'slider-after-value-change',
-    stepMultiplier: 4,
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-slider]',
+      selectorTrack: `.${prefix}--slider__track`,
+      selectorFilledTrack: `.${prefix}--slider__filled-track`,
+      selectorThumb: `.${prefix}--slider__thumb`,
+      selectorInput: `.${prefix}--slider__input`,
+      classDisabled: `${prefix}--slider--disabled`,
+      classThumbClicked: `${prefix}--slider__thumb--clicked`,
+      eventBeforeSliderValueChange: 'slider-before-value-change',
+      eventAfterSliderValueChange: 'slider-after-value-change',
+      stepMultiplier: 4,
+    };
+  }
 }
 
 export default Slider;

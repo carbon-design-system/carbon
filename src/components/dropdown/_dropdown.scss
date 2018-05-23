@@ -7,13 +7,14 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/layout';
 
 @include exports('dropdown') {
-  .bx--dropdown {
+  .#{$prefix}--dropdown {
     @include reset;
     @include font-family;
     @include typescale('zeta');
@@ -30,13 +31,27 @@
       @include focus-outline('border');
     }
 
-    &.bx--dropdown--open:focus {
+    &.#{$prefix}--dropdown--open:focus {
       outline: 1px solid transparent;
       box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
     }
   }
 
-  .bx--dropdown__arrow {
+  .#{$prefix}--dropdown--up {
+    &.#{$prefix}--dropdown--open:focus {
+      box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+
+      .#{$prefix}--dropdown-list {
+        box-shadow: 0 -1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
+      }
+    }
+
+    .#{$prefix}--dropdown-list {
+      bottom: 2.5rem;
+    }
+  }
+
+  .#{$prefix}--dropdown__arrow {
     fill: $brand-01;
     position: absolute;
     right: 1rem;
@@ -44,20 +59,20 @@
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
-    transition: transform $transition--expansion $bx--standard-easing;
+    transition: transform $transition--expansion $carbon--standard-easing;
     transform-origin: 50% 45%;
   }
 
-  .bx--dropdown[data-value=''] .bx--dropdown-text {
-    color: $text-03;
+  .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
+    color: $text-01;
   }
 
-  .bx--dropdown-text {
+  .#{$prefix}--dropdown-text {
     height: rem(40px);
     padding-top: rem(13px);
     padding-bottom: rem(13px);
-    padding-left: 1rem;
-    padding-right: 2.25rem;
+    padding-left: $spacing-md;
+    padding-right: $spacing-2xl;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -65,70 +80,141 @@
     border: $input-border;
   }
 
-  .bx--dropdown-list {
+  .#{$prefix}--dropdown-list {
     @include reset;
     @include layer('overlay');
+    @include typescale('zeta');
+    background-color: $ui-01;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     list-style: none;
     position: absolute;
     z-index: z('dropdown');
     max-height: 0;
+    transition: max-height $transition--expansion $carbon--ease-out;
     overflow: hidden;
-    transition: $transition--expansion $bx--ease-out;
+  }
+
+  .#{$prefix}--dropdown-item {
+    transition: opacity $transition--expansion $carbon--ease-out;
     opacity: 0;
   }
 
-  .bx--dropdown-link {
+  .#{$prefix}--dropdown-link {
     display: block;
     color: currentColor;
     text-decoration: none;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
-    padding-right: 1.5rem;
+    font-weight: normal;
+    padding: $spacing-md $spacing-lg $spacing-md $spacing-md;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     &:hover,
     &:focus {
-      background-color: $brand-01;
-      color: $inverse-01;
+      background-color: $field-01;
+      color: $text-01;
       outline: 1px solid transparent;
       text-decoration: underline;
+      color: $text-01;
     }
   }
 
-  .bx--dropdown--selected {
+  .#{$prefix}--dropdown--selected {
     display: none;
   }
 
-  .bx--dropdown--open {
-    .bx--dropdown__arrow {
+  .#{$prefix}--dropdown--open {
+    .#{$prefix}--dropdown__arrow {
       transform: rotate(-180deg);
     }
 
-    .bx--dropdown-list {
-      @include typescale('zeta');
-      display: flex;
-      flex-direction: column;
-      background-color: $ui-01;
-      max-height: 50rem;
-      overflow: visible;
-      transition: $transition--expansion $bx--ease-in;
-      opacity: 1;
+    .#{$prefix}--dropdown-list {
+      max-height: 15rem;
+
+      &:hover {
+        overflow: auto;
+      }
     }
 
     &:focus {
-      .bx--dropdown-list {
+      .#{$prefix}--dropdown-list {
         box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01;
       }
     }
+
+    .#{$prefix}--dropdown-item {
+      opacity: 1;
+    }
   }
 
-  .bx--dropdown--disabled {
+  .#{$prefix}--dropdown--disabled {
     opacity: 0.5;
     cursor: not-allowed;
 
     &:focus {
       outline: none;
     }
+  }
+
+  .#{$prefix}--dropdown--inline {
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus .#{$prefix}--dropdown-text {
+      @include focus-outline('border');
+    }
+
+    &[data-value=''] .#{$prefix}--dropdown-text {
+      color: $brand-01;
+    }
+
+    .#{$prefix}--dropdown-text {
+      display: inline-block;
+      padding-right: 1.5rem;
+      overflow: visible;
+      color: $brand-01;
+    }
+
+    .#{$prefix}--dropdown-text:hover {
+      background-color: $field-01;
+    }
+
+    &.#{$prefix}--dropdown--open:focus {
+      box-shadow: none;
+    }
+
+    &.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-list {
+      @include layer('overlay');
+    }
+
+    &.#{$prefix}--dropdown--open:focus .#{$prefix}--dropdown-text {
+      outline: none;
+    }
+
+    .#{$prefix}--dropdown__arrow {
+      position: relative;
+      top: -2px;
+      left: 8px;
+      right: 0;
+      bottom: 0;
+    }
+
+    .#{$prefix}--dropdown-link {
+      font-weight: normal;
+    }
+
+    .#{$prefix}--dropdown-link:hover {
+      background-color: $field-01;
+      color: $text-01;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton {
+    @include skeleton;
   }
 }

@@ -6,7 +6,7 @@ const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
 
 module.exports = {
-  input: 'src/index.js',
+  input: 'src/bundle.js',
   format: 'iife',
   name: 'CarbonComponents',
   plugins: [

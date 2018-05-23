@@ -1,14 +1,17 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class Toolbar extends mixin(createComponent, initComponentBySearch) {
+class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Toolbar.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as an toolbar.
    */
   constructor(element, options) {
@@ -20,22 +23,27 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
       const boundTable = this.element.ownerDocument.querySelector(this.element.dataset.tableTarget);
       const rowHeightBtns = this.element.querySelector(this.options.selectorRowHeight);
       if (rowHeightBtns) {
-        rowHeightBtns.addEventListener('click', event => {
-          this._handleRowHeightChange(event, boundTable);
-        });
+        this.manage(
+          on(rowHeightBtns, 'click', event => {
+            this._handleRowHeightChange(event, boundTable);
+          })
+        );
         // [...this.element.querySelectorAll(this.options.selectorRowHeight)].forEach((item) => {
         //   item.addEventListener('click', (event) => { this._handleRowHeightChange(event, boundTable); });
         // });
       }
     }
 
-    this.hDocumentKeyDown = on(this.element.ownerDocument, 'keydown', evt => {
-      this._handleKeyDown(evt);
-    });
-
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
-      this._handleDocumentClick(evt);
-    });
+    this.manage(
+      on(this.element.ownerDocument, 'keydown', evt => {
+        this._handleKeyDown(evt);
+      })
+    );
+    this.manage(
+      on(this.element.ownerDocument, 'click', evt => {
+        this._handleDocumentClick(evt);
+      })
+    );
   }
 
   /**
@@ -97,16 +105,6 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
     }
   }
 
-  release() {
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    if (this.hDocumentKeyPress) {
-      this.hDocumentKeyPress = this.hDocumentKeyPress.release();
-    }
-    super.release();
-  }
-
   /**
    * The map associating DOM element and Toolbar UI instance.
    * @type {WeakMap}
@@ -123,13 +121,16 @@ class Toolbar extends mixin(createComponent, initComponentBySearch) {
    * @property {string} classTallRows The CSS class for making table rows into tall rows.
    * @property {string} classSearchActive The CSS class the active state of the search input.
    */
-  static options = {
-    selectorInit: '[data-toolbar]',
-    selectorSearch: '[data-toolbar-search]',
-    selectorRowHeight: '[data-row-height]',
-    classTallRows: 'bx--responsive-table--tall',
-    classSearchActive: 'bx--toolbar-search--active',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-toolbar]',
+      selectorSearch: '[data-toolbar-search]',
+      selectorRowHeight: '[data-row-height]',
+      classTallRows: `${prefix}--responsive-table--tall`,
+      classSearchActive: `${prefix}--toolbar-search--active`,
+    };
+  }
 }
 
 export default Toolbar;

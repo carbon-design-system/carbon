@@ -15,7 +15,13 @@
   "extends": [
     "carbon-base"
   ],
+  "plugins": [
+    "jsdoc"
+  ],
   "rules": {
+    "jsdoc/check-param-names": 2,
+    "jsdoc/check-tag-names": 2,
+    "jsdoc/check-types": 2,
     "comma-dangle": [
       2,
       {
@@ -30,5 +36,12 @@
     "max-len": [2, 130, 4],
     "no-plusplus": 0,
     "no-underscore-dangle": [2, { "allowAfterThis": true, "allowAfterSuper": true }]
+  },
+  "settings": {
+    "jsdoc": {
+      "tagNamePreference": {
+        "augments": "extends"
+      }
+    }
   }
 }

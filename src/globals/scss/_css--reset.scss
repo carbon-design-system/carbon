@@ -112,14 +112,14 @@
 
     // Chrome 62 fix
     button,
-    input[type="button"],
-    input[type="submit"],
-    input[type="reset"],
-    input[type="file"] {
+    input[type='button'],
+    input[type='submit'],
+    input[type='reset'],
+    input[type='file'] {
       border-radius: 0;
     }
 
-    input[type="text"]::-ms-clear {
+    input[type='text']::-ms-clear {
       display: none;
     }
 
@@ -140,6 +140,14 @@
 
     body {
       line-height: 1;
+    }
+
+    sup {
+      vertical-align: super;
+    }
+
+    sub {
+      vertical-align: sub;
     }
 
     ol,

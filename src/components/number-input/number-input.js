@@ -1,24 +1,32 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
-class NumberInput extends mixin(createComponent, initComponentBySearch) {
+class NumberInput extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Number input UI.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a number input UI.
    */
   constructor(element, options) {
     super(element, options);
     // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
     // <svg> does not have `Element.classList` in IE11
-    this.element.querySelector('.up-icon').addEventListener('click', event => {
-      this._handleClick(event);
-    });
-    this.element.querySelector('.down-icon').addEventListener('click', event => {
-      this._handleClick(event);
-    });
+    this.manage(
+      on(this.element.querySelector('.up-icon'), 'click', event => {
+        this._handleClick(event);
+      })
+    );
+    this.manage(
+      on(this.element.querySelector('.down-icon'), 'click', event => {
+        this._handleClick(event);
+      })
+    );
   }
 
   /**
@@ -26,7 +34,7 @@ class NumberInput extends mixin(createComponent, initComponentBySearch) {
    * @param {Event} event The event triggering this method.
    */
   _handleClick(event) {
-    const numberInput = this.element.querySelector('.bx--number input');
+    const numberInput = this.element.querySelector(this.options.selectorInput);
     const target = event.currentTarget.getAttribute('class').split(' ');
 
     if (target.indexOf('up-icon') >= 0) {
@@ -59,10 +67,15 @@ class NumberInput extends mixin(createComponent, initComponentBySearch) {
    * @member NumberInput.options
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find number input UIs.
+   * @property {string} [selectorInput] The CSS selector to find the `<input>` element.
    */
-  static options = {
-    selectorInit: '[data-numberinput]',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-numberinput]',
+      selectorInput: `.${prefix}--number input`,
+    };
+  }
 }
 
 export default NumberInput;

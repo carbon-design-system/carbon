@@ -1,14 +1,17 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
+class ProfileSwitcher extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Profile Switcher.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a profile switcher.
    * @param {Object} [options] The component options
    * @param {string} [options.selectorProfileSwitcher] The data attribute selector for the profile switcher.
@@ -28,38 +31,48 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
   constructor(element, options) {
     super(element, options);
 
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
-      this.handleDocumentClick(evt);
-    });
+    this.manage(
+      on(this.element.ownerDocument, 'click', evt => {
+        this.handleDocumentClick(evt);
+      })
+    );
 
-    this.element.addEventListener('dropdown-beingselected', event => {
-      if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
-        const linkedIconNode = event.detail.item.querySelector(this.options.classLinkedIcon);
-        this.element.isLinked = !!linkedIconNode;
-        this.element.linkedIcon = linkedIconNode && linkedIconNode.cloneNode(true);
-        const linkedAccountNode = event.detail.item.querySelector(this.options.selectorAccountSlLinked);
-        this.element.linkedAccount = linkedAccountNode && linkedAccountNode.cloneNode(true);
-      }
-    });
+    this.manage(
+      on(this.element, 'dropdown-beingselected', event => {
+        if (event.target.querySelector(this.options.selectorAccountDropdown) !== null) {
+          const linkedIconNode = event.detail.item.querySelector(this.options.classLinkedIcon);
+          this.element.isLinked = !!linkedIconNode;
+          this.element.linkedIcon = linkedIconNode && linkedIconNode.cloneNode(true);
+          const linkedAccountNode = event.detail.item.querySelector(this.options.selectorAccountSlLinked);
+          this.element.linkedAccount = linkedAccountNode && linkedAccountNode.cloneNode(true);
+        }
+      })
+    );
 
     const toggleNode = this.element.querySelector(this.options.selectorToggle);
     if (toggleNode) {
-      toggleNode.addEventListener('keydown', event => {
-        this.toggle(event);
-      });
+      this.manage(
+        on(toggleNode, 'keydown', event => {
+          this.toggle(event);
+        })
+      );
 
-      toggleNode.addEventListener('mouseenter', event => {
-        this.getLinkedData(event);
-        this.determineSwitcherValues(true);
-      });
+      this.manage(
+        on(toggleNode, 'mouseenter', event => {
+          this.getLinkedData(event);
+          this.determineSwitcherValues(true);
+        })
+      );
 
-      toggleNode.addEventListener('mouseleave', event => {
-        this.getLinkedData(event);
-        this.determineSwitcherValues(false);
-      });
+      this.manage(
+        on(toggleNode, 'mouseleave', event => {
+          this.getLinkedData(event);
+          this.determineSwitcherValues(false);
+        })
+      );
     }
 
-    this.element.ownerDocument.addEventListener('keyup', () => this.handleBlur());
+    this.manage(on(this.element.ownerDocument, 'keyup', () => this.handleBlur()));
   }
 
   /**
@@ -97,7 +110,7 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
    * Handles click on the document.
    * Closes the profile switcherwhen document is clicked outside the left navigation or
    * the user clicks the profile switcher while it is open.
-   * @param {Event} event The event triggering this method.
+   * @param {Event} evt The event triggering this method.
    */
   handleDocumentClick(evt) {
     const clickTarget = evt.target;
@@ -235,13 +248,6 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
     }
   }
 
-  release() {
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    super.release();
-  }
-
   /**
    * The component options.
    * @member ProfileSwitcher.options
@@ -261,28 +267,31 @@ class ProfileSwitcher extends mixin(createComponent, initComponentBySearch) {
    * @property {string} [selectorSpaceDropdown]
    *   The data attribute selector for the dropdown item containing the current space name.
    */
-  static options = {
-    selectorInit: '[data-profile-switcher]',
-    // Data Attribute selectors
-    selectorProfileSwitcher: '[data-profile-switcher]',
-    selectorToggle: '[data-profile-switcher-toggle]',
-    selectorMenu: '[data-switcher-menu]',
-    selectorLinkedAccount: '[data-switcher-account-sl]',
-    selectorAccount: '[data-switcher-account]',
-    selectorRegion: '[data-switcher-region]',
-    selectorOrg: '[data-switcher-org]',
-    selectorSpace: '[data-switcher-space]',
-    selectorDropdown: '[data-dropdown]',
-    selectorAccountDropdown: '[data-dropdown-account]',
-    selectorAccountSlDropdown: '[data-dropdown-account-sl]',
-    selectorAccountLinked: '[data-dropdown-account-linked]',
-    selectorAccountSlLinked: '[data-dropdown-account-sl-linked]',
-    selectorRegionDropdown: '[data-dropdown-region]',
-    selectorOrgDropdown: '[data-dropdown-org]',
-    selectorSpaceDropdown: '[data-dropdown-space]',
-    classSwitcherOpen: 'bx--account-switcher--open',
-    classLinkedIcon: '.bx--account-switcher__linked-icon',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-profile-switcher]',
+      // Data Attribute selectors
+      selectorProfileSwitcher: '[data-profile-switcher]',
+      selectorToggle: '[data-profile-switcher-toggle]',
+      selectorMenu: '[data-switcher-menu]',
+      selectorLinkedAccount: '[data-switcher-account-sl]',
+      selectorAccount: '[data-switcher-account]',
+      selectorRegion: '[data-switcher-region]',
+      selectorOrg: '[data-switcher-org]',
+      selectorSpace: '[data-switcher-space]',
+      selectorDropdown: '[data-dropdown]',
+      selectorAccountDropdown: '[data-dropdown-account]',
+      selectorAccountSlDropdown: '[data-dropdown-account-sl]',
+      selectorAccountLinked: '[data-dropdown-account-linked]',
+      selectorAccountSlLinked: '[data-dropdown-account-sl-linked]',
+      selectorRegionDropdown: '[data-dropdown-region]',
+      selectorOrgDropdown: '[data-dropdown-org]',
+      selectorSpaceDropdown: '[data-dropdown-space]',
+      classSwitcherOpen: `${prefix}--account-switcher--open`,
+      classLinkedIcon: `.${prefix}--account-switcher__linked-icon`,
+    };
+  }
 
   /**
    * The map associating DOM element and profile switcher instance.

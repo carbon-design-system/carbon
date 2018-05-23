@@ -9,12 +9,13 @@ const autoprefixer = require('gulp-autoprefixer');
 
 // Javascript deps
 const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
 const uglify = require('gulp-uglify');
 const pump = require('pump');
+const { promisify } = require('bluebird');
 
-// BrowserSync
+// BrowserSync/NodeMon
 const browserSync = require('browser-sync').create();
+const nodemon = require('gulp-nodemon');
 
 // Gulp
 const gulp = require('gulp');
@@ -28,6 +29,12 @@ const rollup = require('rollup');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
 
+// WebPack
+const webpack = require('webpack');
+const webpackDevConfig = require('./tools/webpack.dev.config');
+
+const webpackPromisified = promisify(webpack);
+
 // JSDoc
 const jsdocConfig = require('gulp-jsdoc3/dist/jsdocConfig.json');
 
@@ -36,27 +43,38 @@ const del = require('del');
 
 // Test environment
 const Server = require('karma').Server;
-const cloptions = require('minimist')(process.argv.slice(2), {
-  alias: {
-    k: 'keepalive',
-  },
-  boolean: ['keepalive'],
-});
+const commander = require('commander');
+
+const assign = v => v;
+const cloptions = commander
+  .option('-k, --keepalive', 'Keeps browser open after first run of Karma test finishes')
+  .option('--name [name]', 'Component name used for aXe testing', assign, '')
+  .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
+  .option('-r, --rollup', 'Uses Rollup for dev env')
+  .parse(process.argv);
 
 // Axe A11y Test
 const axe = require('gulp-axe-webdriver');
-const axeArgs = require('minimist')(process.argv.slice(2));
 
 /**
- * BrowserSync
+ * Dev server
  */
 
-gulp.task('browser-sync', ['build:dev'], () => {
-  browserSync.init({
-    logPrefix: 'Carbon Components',
-    open: false,
-    proxy: 'localhost:8080',
-    timestamps: false,
+gulp.task('dev-server', cb => {
+  let started;
+  const options = {
+    script: './server.js',
+    ext: 'dust js',
+    watch: ['demo/**/*.dust', 'server.js'],
+    env: {
+      PORT: cloptions.port,
+    },
+  };
+  nodemon(options).on('start', () => {
+    if (!started) {
+      started = true;
+      cb();
+    }
   });
 });
 
@@ -75,8 +93,10 @@ gulp.task('clean', () =>
     'html',
     'dist',
     'demo/**/*.{js,map}',
+    '!demo/js/components/**/*',
     '!demo/js/demo-switcher.js',
     '!demo/js/theme-switcher.js',
+    '!demo/js/prism.js',
     '!demo/index.js',
     '!demo/polyfills/*.js',
   ])
@@ -86,14 +106,24 @@ gulp.task('clean', () =>
  * JavaScript Tasks
  */
 
-gulp.task('scripts:dev', () =>
-  rollup
-    .rollup(rollupConfigDev)
-    .then(bundle => bundle.write(rollupConfigDev))
-    .then(() => {
-      browserSync.reload();
-    })
-);
+gulp.task('scripts:dev', () => {
+  if (cloptions.rollup) {
+    return rollup
+      .rollup(rollupConfigDev)
+      .then(bundle => bundle.write(rollupConfigDev))
+      .then(() => {
+        browserSync.reload();
+      });
+  }
+  return webpackPromisified(webpackDevConfig).then(stats => {
+    gutil.log(
+      '[webpack:build]',
+      stats.toString({
+        colors: true,
+      })
+    );
+  });
+});
 
 gulp.task('scripts:umd', () => {
   const srcFiles = ['./src/**/*.js'];
@@ -184,7 +214,7 @@ gulp.task('sass:compiled', () => {
         })
       )
       .pipe(gulp.dest('css'))
-      .pipe(browserSync.stream());
+      .pipe(browserSync.stream({ match: '**/*.css' }));
   }
 
   buildStyles(); // Expanded CSS
@@ -207,7 +237,7 @@ gulp.task('sass:dev', () =>
     )
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.stream({ match: '**/*.css' }))
 );
 
 gulp.task('sass:source', () => {
@@ -223,29 +253,6 @@ gulp.task('html:source', () => {
 });
 
 /**
- * Lint
- */
-
-gulp.task('lint', () =>
-  gulp
-    .src(['gulpfile.js', 'server.js', 'src/**/*.js', 'tests/**/*.js', 'tools/**/*.js', 'demo/**/*.js'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-    .pipe(
-      eslint.results(results => {
-        const count = results.warningCount;
-        if (count > 0) {
-          throw new gutil.PluginError('gulp-eslint', {
-            name: 'ESLintWarning',
-            message: `Has ${count} warning${count > 1 ? 's' : ''}`,
-          });
-        }
-      })
-    )
-);
-
-/**
  * JSDoc
  */
 
@@ -254,7 +261,7 @@ gulp.task('jsdoc', cb => {
     .src('./src/**/*.js')
     .pipe(
       babel({
-        plugins: ['transform-class-properties'],
+        plugins: ['transform-class-properties', 'transform-object-rest-spread'],
         babelrc: false,
       })
     )
@@ -298,7 +305,7 @@ gulp.task('test:unit', done => {
 });
 
 gulp.task('test:a11y', ['sass:compiled'], done => {
-  const componentName = axeArgs.name === undefined ? undefined : axeArgs.name;
+  const componentName = cloptions.name;
   const options = {
     a11yCheckOptions: {
       rules: {
@@ -311,9 +318,9 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
     showOnlyViolations: true,
     exclude: '.offleft, #flex-col, #flex-row',
     tags: ['wcag2aa', 'wcag2a'],
-    folderOutputReport: componentName === undefined ? 'tests/axe/allHtml' : 'tests/axe',
-    saveOutputIn: componentName === undefined ? `a11y-html.json` : `a11y-${componentName}.json`,
-    urls: componentName === undefined ? ['http://localhost:3000'] : [`http://localhost:3000/components/${componentName}/`],
+    folderOutputReport: !componentName ? 'tests/axe/allHtml' : 'tests/axe',
+    saveOutputIn: !componentName ? `a11y-html.json` : `a11y-${componentName}.json`,
+    urls: !componentName ? ['http://localhost:3000'] : [`http://localhost:3000/component/${componentName}/`],
   };
 
   return axe(options, done);
@@ -321,13 +328,13 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
 
 // Watch Tasks
 gulp.task('watch', () => {
-  gulp.watch('src/**/**/*.html').on('change', browserSync.reload);
-  gulp.watch(['src/**/**/*.js'], ['scripts:dev', 'scripts:compiled']);
-  gulp.watch(['demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
-  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
+  if (cloptions.rollup) {
+    gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
+    gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
+  }
 });
 
-gulp.task('serve', ['browser-sync', 'watch']);
+gulp.task('serve', ['dev-server', 'watch']);
 
 // Build task collection
 gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev']);

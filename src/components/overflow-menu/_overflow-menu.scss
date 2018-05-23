@@ -2,7 +2,9 @@
 // Overflow Menu
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layer';
@@ -11,7 +13,7 @@
 @import '../../globals/scss/import-once';
 
 @include exports('overflow-menu') {
-  .bx--overflow-menu {
+  .#{$prefix}--overflow-menu {
     @include reset;
     position: relative;
     width: rem(20px);
@@ -19,11 +21,12 @@
     cursor: pointer;
 
     &:focus {
-      @include focus-outline('border');
+      outline: 1px solid transparent;
+      box-shadow: 0 0 0 1px $brand-01;
     }
   }
 
-  .bx--overflow-menu__icon {
+  .#{$prefix}--overflow-menu__icon {
     width: 100%;
     height: 100%;
     padding: 0.5rem;
@@ -35,7 +38,7 @@
     }
   }
 
-  .bx--overflow-menu-options {
+  .#{$prefix}--overflow-menu-options {
     @include reset;
     @include layer('overlay');
     display: none;
@@ -47,16 +50,16 @@
     border: 1px solid $ui-04;
     width: 11.25rem;
     list-style: none;
-    margin-top: 0.25rem;
-    padding: 0.285rem 0 0.5rem;
+    margin-top: $spacing-2xs;
+    padding: $spacing-2xs 0 $spacing-xs;
     left: -20px;
   }
 
-  .bx--overflow-menu-options--open {
+  .#{$prefix}--overflow-menu-options--open {
     display: flex;
   }
 
-  .bx--overflow-menu-options:before {
+  .#{$prefix}--overflow-menu-options:before {
     content: '';
     position: absolute;
     display: block;
@@ -71,7 +74,7 @@
     left: 24px;
   }
 
-  .bx--overflow-menu-options__option {
+  .#{$prefix}--overflow-menu-options__option {
     @include reset;
     display: flex;
     background-color: transparent;
@@ -80,11 +83,11 @@
     padding: 0;
   }
 
-  .bx--overflow-menu--divider {
+  .#{$prefix}--overflow-menu--divider {
     border-top: 1px solid $ui-04;
   }
 
-  .bx--overflow-menu-options__btn {
+  .#{$prefix}--overflow-menu-options__btn {
     @include reset;
     @include typescale('zeta');
     @include font-family;
@@ -95,39 +98,61 @@
     display: inline-block;
     background-color: transparent;
     text-align: left;
-    padding: 0.5625rem 1rem;
+    padding: $spacing-xs $spacing-md;
     cursor: pointer;
 
     &:focus {
       outline: 1px solid transparent;
-      background-color: $brand-01;
-      color: $inverse-01;
+      text-decoration: underline;
     }
 
-    .bx--overflow-menu-options__option--danger & {
+    .#{$prefix}--overflow-menu-options__option--danger & {
       &:focus {
-        background-color: $support-01;
+        outline: 1px solid transparent;
+        text-decoration: underline;
       }
     }
   }
 
-  .bx--overflow-menu-options__option:hover {
+  .#{$prefix}--overflow-menu-options__option:hover {
     background-color: $brand-01;
   }
 
-  .bx--overflow-menu-options__option:hover .bx--overflow-menu-options__btn {
+  .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
     color: $inverse-01;
+    text-decoration: none;
   }
 
-  .bx--overflow-menu-options__option--danger {
+  .#{$prefix}--overflow-menu-options__option--danger {
     border-top: 1px solid $ui-04;
   }
 
-  .bx--overflow-menu-options__option--danger:hover {
+  .#{$prefix}--overflow-menu-options__option--danger:hover {
     background-color: $support-01;
   }
 
-  .bx--overflow-menu--flip {
+  .#{$prefix}--overflow-menu-options__option--disabled:hover {
+    background-color: $inverse-01;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
+    color: $text-01;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled:hover .#{$prefix}--overflow-menu-options__btn {
+    color: $text-01;
+    opacity: 0.5;
+
+    &:active,
+    &:focus {
+      background-color: $ui-01;
+      pointer-events: none;
+    }
+  }
+
+  .#{$prefix}--overflow-menu--flip {
     left: -140px;
 
     &:before {

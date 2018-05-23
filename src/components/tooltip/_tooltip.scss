@@ -1,4 +1,6 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/helper-mixins';
@@ -7,12 +9,12 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tooltip') {
-  .bx--tooltip--simple {
+  .#{$prefix}--tooltip--simple {
     display: flex;
     align-items: center;
   }
 
-  .bx--tooltip__trigger {
+  .#{$prefix}--tooltip__trigger {
     @include font-family;
     @include typescale('epsilon');
     display: inline-flex;
@@ -22,7 +24,7 @@
 
     svg {
       fill: $brand-01;
-      margin-left: 0.625rem;
+      margin-left: $spacing-xs;
       cursor: pointer;
 
       &:focus {
@@ -39,25 +41,26 @@
     }
   }
 
-  .bx--tooltip {
+  .#{$prefix}--tooltip {
     @include layer('overlay');
     @include reset;
     position: absolute;
     display: none;
     max-width: rem(240px);
     background: $ui-01;
-    padding: 1.5rem;
+    padding: $spacing-lg;
     border: 1px solid $ui-04;
     z-index: z('floating');
+    word-wrap: break-word;
 
     p {
       @include font-family;
       @include typescale('zeta');
     }
 
-    .bx--tooltip__label {
+    .#{$prefix}--tooltip__label {
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: $spacing-xs;
     }
 
     &:before {
@@ -76,7 +79,7 @@
     }
 
     &[data-floating-menu-direction='left'] {
-      margin-left: -.6rem;
+      margin-left: -$spacing-sm;
 
       &:before {
         left: auto;
@@ -95,7 +98,7 @@
     }
 
     &[data-floating-menu-direction='right'] {
-      margin-left: 0.6rem;
+      margin-left: $spacing-sm;
 
       &:before {
         left: rem(-6px);
@@ -106,13 +109,13 @@
     }
   }
 
-  .bx--tooltip--shown {
+  .#{$prefix}--tooltip--shown {
     display: block;
   }
 
   // Simple CSS only tooltip
-  .bx--tooltip--simple__top,
-  .bx--tooltip--simple__bottom {
+  .#{$prefix}--tooltip--simple__top,
+  .#{$prefix}--tooltip--simple__bottom {
     @include font-family;
     @include reset;
     @include typescale('delta');
@@ -123,7 +126,7 @@
 
     svg {
       fill: $brand-01;
-      margin-left: 0.625rem;
+      margin-left: $spacing-xs;
     }
 
     // Tooltip - renders as a combo of :before and :after elements
@@ -139,7 +142,7 @@
       @include typescale('zeta');
       @include layer('overlay');
       max-width: rem(240px);
-      padding: 1.5rem;
+      padding: $spacing-lg;
       border: 1px solid $ui-04;
       margin-left: 50%;
       color: $text-01;
@@ -183,7 +186,7 @@
   }
 
   // Tooltip caret - top position
-  .bx--tooltip--simple__top {
+  .#{$prefix}--tooltip--simple__top {
     &:before {
       bottom: 1.8rem;
     }
@@ -195,7 +198,7 @@
   }
 
   // Tooltip caret - bottom position
-  .bx--tooltip--simple__bottom {
+  .#{$prefix}--tooltip--simple__bottom {
     &:before {
       top: 1.8rem;
     }

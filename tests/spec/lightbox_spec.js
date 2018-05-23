@@ -1,6 +1,6 @@
-import 'core-js/modules/es6.weak-map'; // For PhantomJS
 import Lightbox from '../../src/components/lightbox/lightbox';
 import HTML from '../../src/components/lightbox/lightbox.html';
+import flattenOptions from '../utils/flatten-options';
 
 describe('Lightbox', () => {
   describe('Constructor', () => {
@@ -18,17 +18,17 @@ describe('Lightbox', () => {
     it('Should throw if root element is not given', () => {
       expect(() => {
         new Lightbox();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', () => {
       expect(() => {
         new Lightbox(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('should set default options', () => {
-      expect(instance.options).to.deep.equal({
+      expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '[data-lightbox]',
         selectorScrollRight: '[data-scroll-right]',
         selectorScrollLeft: '[data-scroll-left]',
@@ -56,12 +56,11 @@ describe('Lightbox', () => {
     });
 
     it('should be called on click', () => {
-      const spy = sinon.spy(instance, 'updateSlide');
+      spyOn(instance, 'updateSlide');
       const event = new CustomEvent('click', { bubbles: true });
       const rightButton = element.querySelector(instance.options.selectorScrollRight);
       rightButton.dispatchEvent(event);
-      expect(spy).to.have.been.called;
-      spy.restore();
+      expect(instance.updateSlide).toHaveBeenCalled();
     });
 
     afterEach(() => {

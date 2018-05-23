@@ -1,23 +1,29 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 
-class Accordion extends mixin(createComponent, initComponentBySearch) {
+class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Accordion.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as an accordion.
    */
   constructor(element, options) {
     super(element, options);
-    this.element.addEventListener('click', event => {
-      const item = eventMatches(event, this.options.selectorAccordionItem);
-      if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
-        this._toggle(item);
-      }
-    });
+    this.manage(
+      on(this.element, 'click', event => {
+        const item = eventMatches(event, this.options.selectorAccordionItem);
+        if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
+          this._toggle(item);
+        }
+      })
+    );
 
     /**
      *
@@ -30,13 +36,15 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
      */
 
     if (!this._checkIfButton()) {
-      this.element.addEventListener('keypress', event => {
-        const item = eventMatches(event, this.options.selectorAccordionItem);
+      this.manage(
+        on(this.element, 'keypress', event => {
+          const item = eventMatches(event, this.options.selectorAccordionItem);
 
-        if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
-          this._handleKeypress(event);
-        }
-      });
+          if (item && !eventMatches(event, this.options.selectorAccordionContent)) {
+            this._handleKeypress(event);
+          }
+        })
+      );
     }
   }
 
@@ -72,13 +80,16 @@ class Accordion extends mixin(createComponent, initComponentBySearch) {
    * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
    * @property {string} selectorInit The CSS selector to find accordion UIs.
    */
-  static options = {
-    selectorInit: '[data-accordion]',
-    selectorAccordionItem: '.bx--accordion__item',
-    selectorAccordionItemHeading: '.bx--accordion__heading',
-    selectorAccordionContent: '.bx--accordion__content',
-    classActive: 'bx--accordion__item--active',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-accordion]',
+      selectorAccordionItem: `.${prefix}--accordion__item`,
+      selectorAccordionItemHeading: `.${prefix}--accordion__heading`,
+      selectorAccordionContent: `.${prefix}--accordion__content`,
+      classActive: `${prefix}--accordion__item--active`,
+    };
+  }
 
   /**
    * The map associating DOM element and accordion UI instance.

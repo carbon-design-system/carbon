@@ -4,12 +4,6 @@ cache:
   directories:
   - node_modules
 
-env:
-  - TEST_SUITE=misc
-  - TEST_SUITE=unit
-  - TEST_SUITE=unit-each
-  - TEST_SUITE=a11y
-
 node_js:
   - "6"
 
@@ -20,13 +14,6 @@ addons:
     packages:
       - google-chrome-stable
   firefox: "latest-esr"
-
-matrix:
-  exclude:
-  - env: TEST_SUITE=unit-each
-  allow_failures:
-  - env: TEST_SUITE=unit-each
-  - env: TEST_SUITE=a11y
 
 before_install:
   - if [[ -n "${AAT_TOKEN}" ]]; then sed -e "s|\${AAT_TOKEN}|$AAT_TOKEN|g" < .aat.yml.src > .aat.yml; fi
@@ -39,14 +26,10 @@ before_install:
 install:
   - npm prune
   - npm install || (cat npm-debug.log; false)
-  - if [[ -n "${AAT_TOKEN}" && "$TEST_SUITE" == "a11y" ]]; then npm i https://aat.mybluemix.net/dist/karma-ibma.tgz; fi
+  - if [[ -n "${AAT_TOKEN}" ]]; then npm i https://aat.mybluemix.net/dist/karma-ibma.tgz; fi
 
 script:
-  - if [[ "$TEST_SUITE" == "misc" ]]; then npm run lint; fi
-  - if [[ "$TEST_SUITE" == "misc" ]]; then npm run build; fi
-  - if [[ "$TEST_SUITE" == "unit" ]]; then npm run test:unit -- -b ChromeHeadless_Travis -b Firefox; fi
-  - if [[ "$TEST_SUITE" == "unit-each" ]]; then find tests/spec -name "*.js" ! -name left-nav_spec.js -print0 | xargs -0 -n 1 -P 1 npm run test:unit -- -d -f; fi
-  - if [[ -n "${AAT_TOKEN}" && "$TEST_SUITE" == "a11y" ]]; then npm run test:a11y; fi
+  - yarn ci-check
 
 after_success:
   - npm run semantic-release

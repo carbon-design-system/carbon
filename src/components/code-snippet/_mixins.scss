@@ -1,5 +1,5 @@
 @mixin bx--snippet {
-  font-family: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  font-family: $font-family-mono;
   position: relative;
   max-width: rem(640px);
   width: 100%;

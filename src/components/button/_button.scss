@@ -1,23 +1,26 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/import-once';
 @import 'mixins';
 @import '../../globals/scss/css--reset';
 
 @include exports('button') {
   // <button> elements cannot be used as flex containers
-  button.bx--btn {
+  button.#{$prefix}--btn {
     display: inline-block;
   }
 
   // Reset intrisic padding in Firefox (see #731)
-  button.bx--btn::-moz-focus-inner {
+  button.#{$prefix}--btn::-moz-focus-inner {
     padding: 0;
     border: 0;
   }
 
   // Vertically center icon inside <button>
-  button.bx--btn .bx--btn__icon {
+  button.#{$prefix}--btn .#{$prefix}--btn__icon {
     position: relative;
     vertical-align: middle;
     top: -1px;
@@ -28,28 +31,16 @@
     }
   }
 
-  .bx--btn {
+  .#{$prefix}--btn {
     @include button-base;
   }
 
-  .bx--btn--primary {
-    @include button-theme(
-      $brand-01,
-      transparent,
-      $inverse-01,
-      $brand-02,
-      $ui-01
-    );
+  .#{$prefix}--btn--primary {
+    @include button-theme($brand-01, transparent, $inverse-01, $brand-02, $ui-01);
   }
 
-  .bx--btn--secondary {
-    @include button-theme(
-      transparent,
-      $brand-01,
-      $brand-01,
-      $brand-01,
-      $brand-01
-    );
+  .#{$prefix}--btn--secondary {
+    @include button-theme(transparent, $brand-01, $brand-01, $brand-01, $brand-01);
 
     &:hover,
     &:focus {
@@ -60,8 +51,8 @@
       color: $brand-01;
     }
 
-    &:hover > .bx--btn__icon,
-    &:focus > .bx--btn__icon {
+    &:hover > .#{$prefix}--btn__icon,
+    &:focus > .#{$prefix}--btn__icon {
       fill: $inverse-01;
     }
 
@@ -71,46 +62,52 @@
     }
   }
 
-  .bx--btn--ghost {
-    @include button-theme(
-      transparent,
-      transparent,
-      $brand-01,
-      $brand-01,
-      $brand-01
-    );
+  .#{$prefix}--btn--tertiary {
+    @include button-theme(transparent, $ui-05, $ui-05, $ui-05, $ui-05);
+
+    &:hover,
+    &:focus {
+      color: $inverse-01;
+    }
+
+    &:active {
+      color: $ui-05;
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $ui-05;
+    }
+  }
+
+  .#{$prefix}--btn--ghost {
+    @include button-theme(transparent, transparent, $brand-01, $brand-01, $brand-01);
 
     &:hover,
     &:focus {
       color: $inverse-01;
 
-      .bx--btn__icon {
+      .#{$prefix}--btn__icon {
         fill: $inverse-01;
       }
     }
 
-    .bx--btn__icon {
-      margin-left: 0.275rem;
+    .#{$prefix}--btn__icon {
+      margin-left: $spacing-xs;
     }
 
     &:hover:disabled,
     &:focus:disabled {
       color: $brand-01;
 
-      .bx--btn__icon {
+      .#{$prefix}--btn__icon {
         fill: $brand-01;
       }
     }
   }
 
-  .bx--btn--danger {
-    @include button-theme(
-      transparent,
-      $support-01,
-      $support-01,
-      $support-01,
-      $support-01
-    );
+  .#{$prefix}--btn--danger {
+    @include button-theme(transparent, $support-01, $support-01, $support-01, $support-01);
 
     &:hover {
       color: $inverse-01;
@@ -123,23 +120,40 @@
 
     &:hover:disabled,
     &:focus:disabled {
-      color: $ui-05;
-      border: $button-border-width solid currentColor;
+      color: $support-01;
+      border: $button-border-width solid $support-01;
     }
 
-    &:hover > .bx--btn__icon,
-    &:focus > .bx--btn__icon {
+    &:hover > .#{$prefix}--btn__icon,
+    &:focus > .#{$prefix}--btn__icon {
       fill: $inverse-01;
     }
   }
 
-  .bx--btn--sm {
-    height: 2rem;
-    padding: $button-padding-sm;
-    letter-spacing: 0;
+  .#{$prefix}--btn--danger--primary {
+    @include button-theme($support-01, transparent, $inverse-01, darken($support-01, 10%), $ui-01);
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $ui-01;
+      border: $button-border-width solid $support-01;
+    }
   }
 
-  .bx--btn--secondary + .bx--btn--primary {
-    margin-left: 1rem;
+  .#{$prefix}--btn--sm {
+    @include letter-spacing;
+    height: 2rem;
+    padding: $button-padding-sm;
+  }
+
+  .#{$prefix}--btn--secondary + .#{$prefix}--btn--primary,
+  .#{$prefix}--btn--tertiary + .#{$prefix}--btn--danger--primary {
+    margin-left: $spacing-md;
+  }
+
+  // Skeleton State
+  .#{$prefix}--btn.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(150px);
   }
 }

@@ -1,0 +1,28 @@
+$includeFlexFallback: true;
+@import 'experimental';
+
+@mixin grid-experimental-fallback {
+  @include grid-experimental;
+
+  @supports (display: grid) {
+    .#{$prefix}-grid > * {
+      display: initial;
+      min-width: initial;
+      max-width: initial;
+      width: initial;
+
+      &.#{$prefix}-grid {
+        display: grid;
+      }
+    }
+
+    [class*='#{$prefix}-grid__height-'] {
+      height: unset;
+      max-height: unset;
+    }
+  }
+
+  .#{$prefix}-grid > script {
+    display: none;
+  }
+}

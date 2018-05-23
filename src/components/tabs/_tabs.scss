@@ -2,7 +2,9 @@
 // Tabs
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
@@ -11,13 +13,12 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tabs') {
-  .bx--tabs {
+  .#{$prefix}--tabs {
     @include typescale('zeta');
     @include font-smoothing;
     @include font-family;
     color: $text-01;
     font-weight: 600;
-    cursor: pointer;
     height: auto;
     width: 100%;
     position: relative;
@@ -28,11 +29,12 @@
     }
   }
 
-  .bx--tabs-trigger {
+  .#{$prefix}--tabs-trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: rem(13px) rem(16px);
+    padding: 0 $spacing-md;
+    height: rem(40px);
     cursor: pointer;
     background-color: $field-01;
 
@@ -51,7 +53,7 @@
     }
   }
 
-  .bx--tabs-trigger-text {
+  .#{$prefix}--tabs-trigger-text {
     text-decoration: none;
     font-weight: 600;
     color: $text-01;
@@ -61,7 +63,7 @@
     }
   }
 
-  .bx--tabs__nav {
+  .#{$prefix}--tabs__nav {
     @include layer('overlay');
     margin: 0;
     padding: 0;
@@ -70,14 +72,16 @@
     list-style: none;
     display: flex;
     flex-direction: column;
+    z-index: z('dropdown');
 
     @include breakpoint(bp--sm--major) {
       @include typescale('epsilon');
       flex-direction: row;
-      margin-right: rem(16px);
-      margin-left: rem(16px);
+      margin-right: $spacing-md;
+      margin-left: $spacing-md;
       background: none;
       box-shadow: none;
+      z-index: auto;
     }
 
     @include breakpoint(bp--lg--major) {
@@ -85,7 +89,7 @@
     }
   }
 
-  .bx--tabs__nav--hidden {
+  .#{$prefix}--tabs__nav--hidden {
     display: none;
 
     @include breakpoint(bp--sm--major) {
@@ -93,10 +97,11 @@
     }
   }
 
-  .bx--tabs__nav-item {
+  .#{$prefix}--tabs__nav-item {
     @include typescale('zeta');
     background-color: $ui-01;
     padding: 0;
+    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -110,7 +115,7 @@
 
     @include breakpoint(bp--sm--major) {
       background: transparent;
-      padding: 0.725rem 0 rem(10px);
+      padding: $spacing-sm 0 $spacing-sm;
 
       & + & {
         margin-left: rem(48px);
@@ -118,13 +123,13 @@
     }
   }
 
-  .bx--tabs__nav-item--selected {
+  .#{$prefix}--tabs__nav-item--selected {
     border: none;
 
     @include breakpoint(bp--sm--major) {
       border-bottom: 2px solid $brand-01;
 
-      .bx--tabs__nav-link {
+      .#{$prefix}--tabs__nav-link {
         color: $brand-01;
 
         &:focus {
@@ -134,7 +139,7 @@
     }
   }
 
-  .bx--tabs__nav-item:hover .bx--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
     color: $inverse-01;
 
     @include breakpoint(bp--sm--major) {
@@ -142,11 +147,11 @@
     }
   }
 
-  .bx--tabs__nav-link {
+  .#{$prefix}--tabs__nav-link {
     display: inline-block;
     color: $text-01;
     text-decoration: none;
-    padding: 1rem;
+    padding: $spacing-md;
     width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -158,7 +163,7 @@
     }
 
     @include breakpoint(bp--sm--major) {
-      padding: 0.05rem;
+      padding: 0 $spacing-3xs;
       width: auto;
 
       &:hover {
@@ -172,5 +177,26 @@
         box-shadow: 0 0 0 1px $brand-01;
       }
     }
+  }
+
+  // Skeleton state
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+    @include skeleton;
+    width: rem(100px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+    @include hidden;
   }
 }

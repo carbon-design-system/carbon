@@ -1,17 +1,20 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
+@import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import 'mixins';
 
 @include exports('tags') {
-  .bx--tag {
+  .#{$prefix}--tag {
     @include font-family;
     @include typescale('omega');
     display: inline-flex;
     align-items: center;
-    padding: 0 0.625rem;
+    padding: 0 $spacing-xs;
     height: 1.25rem;
-    margin: 0.1875rem;
+    margin: $spacing-3xs;
     border-radius: rem(15px);
 
     &:not(:first-child) {
@@ -19,33 +22,46 @@
     }
   }
 
-  .bx--tag--ibm {
+  .#{$prefix}--tag--ibm {
     @include tag-theme($color__blue-10, $color__blue-60);
   }
 
-  .bx--tag--beta {
+  .#{$prefix}--tag--beta {
     @include tag-theme($color__gray-1, $color__navy-gray-4);
   }
 
-  .bx--tag--third-party {
+  .#{$prefix}--tag--third-party {
     @include tag-theme($color__teal-10, $color__teal-60);
   }
 
-  .bx--tag--local,
-  .bx--tag--dedicated,
-  .bx--tag--custom {
+  .#{$prefix}--tag--local,
+  .#{$prefix}--tag--dedicated,
+  .#{$prefix}--tag--custom {
     @include tag-theme($color__purple-10, $color__purple-60);
   }
 
-  .bx--tag--experimental {
+  .#{$prefix}--tag--experimental {
     @include tag-theme($color__orange-10, $color__orange-60);
   }
 
-  .bx--tag--community {
+  .#{$prefix}--tag--community {
     @include tag-theme($color__green-10, $color__green-60);
   }
 
-  .bx--tag--private {
+  .#{$prefix}--tag--private {
     @include tag-theme($color__yellow-10, $color__yellow-60);
+  }
+
+  // Skeleton state
+  .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include tag-theme($color__gray-1, $color__navy-gray-4);
+    width: rem(60px);
+
+    &:after {
+      @include skeleton;
+      content: '';
+      height: rem(6px);
+      width: 100%;
+    }
   }
 }

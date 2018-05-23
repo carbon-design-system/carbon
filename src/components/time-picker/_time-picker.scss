@@ -2,26 +2,28 @@
 // Time Picker
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
 
 @include exports('time-picker') {
-  .bx--time-picker {
+  .#{$prefix}--time-picker {
     display: flex;
     align-items: flex-start;
   }
 
-  .bx--time-picker .bx--select-input {
-    padding-right: rem(32px);
+  .#{$prefix}--time-picker .#{$prefix}--select-input {
+    padding-right: $spacing-xl;
   }
 
-  .bx--time-picker .bx--select__arrow {
+  .#{$prefix}--time-picker .#{$prefix}--select__arrow {
     right: 0.875rem;
   }
 
-  .bx--time-picker__input-field {
+  .#{$prefix}--time-picker__input-field {
     @include reset;
     @include font-family;
     @include typescale('zeta');
@@ -32,7 +34,7 @@
     width: 4.875rem;
     color: $text-01;
     height: rem(40px);
-    padding: 0 1rem;
+    padding: 0 $spacing-md;
 
     &:focus {
       @include focus-outline('border');

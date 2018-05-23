@@ -1,7 +1,7 @@
 @import '../../globals/scss/import-once';
 
 @include exports('topnav') {
-  .bx--top-nav {
+  .#{$prefix}--top-nav {
     @include reset;
     @include font-family;
     display: flex;
@@ -16,8 +16,8 @@
     z-index: 9500;
   }
 
-  .bx--top-nav__left-container,
-  .bx--top-nav__right-container {
+  .#{$prefix}--top-nav__left-container,
+  .#{$prefix}--top-nav__right-container {
     @include reset;
     list-style: none;
     display: flex;
@@ -25,9 +25,9 @@
     min-width: 50%;
   }
 
-  .bx--top-nav__left-container,
-  .bx--top-nav__right-container {
-    .bx--dropdown {
+  .#{$prefix}--top-nav__left-container,
+  .#{$prefix}--top-nav__right-container {
+    .#{$prefix}--dropdown {
       @include typescale('omega');
       list-style: none;
       background-color: $nav-01;
@@ -37,14 +37,14 @@
       align-items: center;
     }
 
-    .bx--dropdown__arrow {
+    .#{$prefix}--dropdown__arrow {
       fill: $inverse-01;
       right: 0.75rem;
       width: rem(12px);
       height: rem(24px);
     }
 
-    .bx--dropdown-text {
+    .#{$prefix}--dropdown-text {
       @include font-smoothing;
       max-width: rem(200px);
       white-space: nowrap;
@@ -53,13 +53,13 @@
       font-weight: 600;
     }
 
-    .bx--dropdown-list {
+    .#{$prefix}--dropdown-list {
       width: auto;
       position: absolute;
       top: 100%;
       left: 0;
       background-color: $color__navy-gray-3; // anna
-      transition: $transition--base all $bx--standard-easing;
+      transition: $transition--base all $carbon--standard-easing;
       display: flex;
       flex-direction: column;
       opacity: 0;
@@ -68,7 +68,7 @@
       z-index: -1;
     }
 
-    .bx--dropdown-item {
+    .#{$prefix}--dropdown-item {
       min-width: rem(170px);
       overflow: hidden;
       white-space: nowrap;
@@ -80,26 +80,26 @@
       }
     }
 
-    .bx--dropdown-link {
+    .#{$prefix}--dropdown-link {
       color: $inverse-01;
     }
   }
 
-  .bx--top-nav__left-container,
-  .bx--top-nav__right-container {
-    .bx--dropdown--open {
+  .#{$prefix}--top-nav__left-container,
+  .#{$prefix}--top-nav__right-container {
+    .#{$prefix}--dropdown--open {
       background-color: $color__navy-gray-3; // anna
     }
 
-    .bx--dropdown--open .bx--dropdown-text {
+    .#{$prefix}--dropdown--open .#{$prefix}--dropdown-text {
       color: $color__blue-30; // anna
     }
 
-    .bx--dropdown--open .bx--dropdown__arrow {
+    .#{$prefix}--dropdown--open .#{$prefix}--dropdown__arrow {
       fill: $color__blue-30; // anna
     }
 
-    .bx--dropdown--open .bx--dropdown-list {
+    .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
       transform: translateY(0);
       opacity: 1;
       visibility: visible;
@@ -107,7 +107,7 @@
     }
   }
 
-  .bx--top-nav__left-container__link {
+  .#{$prefix}--top-nav__left-container__link {
     @include typescale('legal');
     @include font-smoothing;
     display: flex;
@@ -123,47 +123,47 @@
     &:focus {
       color: $color__blue-30; // anna
 
-      .bx--top-nav__left-container__link--icon {
+      .#{$prefix}--top-nav__left-container__link--icon {
         fill: $color__blue-30; // anna
       }
     }
   }
 
-  .bx--top-nav__left-container__link--icon {
+  .#{$prefix}--top-nav__left-container__link--icon {
     width: 0.675rem;
     height: 0.7rem;
     fill: $inverse-01;
     margin-right: 0.3rem;
   }
 
-  .bx--top-nav__left-container__item {
+  .#{$prefix}--top-nav__left-container__item {
     &:focus {
       outline: 0;
     }
   }
 
-  .bx--top-nav__left-container {
-    .bx--dropdown {
+  .#{$prefix}--top-nav__left-container {
+    .#{$prefix}--dropdown {
       &:focus,
       &:hover {
         outline: 0;
 
-        .bx--dropdown__arrow use {
+        .#{$prefix}--dropdown__arrow use {
           fill: $color__blue-30; // anna
         }
 
-        .bx--dropdown-text {
+        .#{$prefix}--dropdown-text {
           background-color: $color__navy-gray-3; // anna
           color: $color__blue-30; // anna
         }
       }
     }
 
-    .bx--dropdown-list {
+    .#{$prefix}--dropdown-list {
       padding-bottom: 0.5rem;
     }
 
-    .bx--dropdown__arrow {
+    .#{$prefix}--dropdown__arrow {
       top: 0.3rem;
       left: 0.75rem;
       opacity: 0;
@@ -171,14 +171,14 @@
       animation: $transition--base cubic-bezier(0.64, 0.57, 0.67, 1.53) 650ms 1 normal forwards fade;
     }
 
-    .bx--dropdown-text {
+    .#{$prefix}--dropdown-text {
       animation: $transition--base cubic-bezier(0.6, 0.22, 0.38, 2.03) 1 normal forwards pop-in;
       opacity: 0;
       transform: scale(0.5);
       padding: 0.725rem 1rem 0.725rem 2rem;
     }
 
-    .bx--dropdown-link {
+    .#{$prefix}--dropdown-link {
       padding: 0.6rem 0.75rem;
 
       &:hover,
@@ -189,18 +189,18 @@
     }
   }
 
-  .bx--top-nav__right-container {
+  .#{$prefix}--top-nav__right-container {
     justify-content: flex-end;
   }
 
-  .bx--top-nav__right-container__item[data-trial],
-  .bx--top-nav__right-container__item[data-credit] {
-    .bx--dropdown-text {
+  .#{$prefix}--top-nav__right-container__item[data-trial],
+  .#{$prefix}--top-nav__right-container__item[data-credit] {
+    .#{$prefix}--dropdown-text {
       padding: 0.75rem 2rem 0.75rem 1rem;
       color: $inverse-01;
     }
 
-    .bx--dropdown-list {
+    .#{$prefix}--dropdown-list {
       left: initial;
       outline: 0;
       right: 0;
@@ -208,34 +208,34 @@
       transform: translateY(-10%);
     }
 
-    .bx--dropdown__arrow {
+    .#{$prefix}--dropdown__arrow {
       top: 0.5rem;
     }
 
-    .bx--dropdown--open .bx--dropdown-list {
+    .#{$prefix}--dropdown--open .#{$prefix}--dropdown-list {
       transform: translateY(0);
     }
 
-    .bx--dropdown--open .bx--dropdown-text {
+    .#{$prefix}--dropdown--open .#{$prefix}--dropdown-text {
       color: $color__blue-30; // anna
     }
 
-    .bx--dropdown:hover,
-    .bx--dropdown:focus {
+    .#{$prefix}--dropdown:hover,
+    .#{$prefix}--dropdown:focus {
       outline: 0;
       background-color: $color__navy-gray-3; // anna
 
-      .bx--dropdown-text {
+      .#{$prefix}--dropdown-text {
         color: $color__blue-30; // anna
       }
 
-      .bx--dropdown__arrow use {
+      .#{$prefix}--dropdown__arrow use {
         fill: $color__blue-30; // anna
       }
     }
 
-    .bx--dropdown__trial-content,
-    .bx--dropdown__credit-content {
+    .#{$prefix}--dropdown__trial-content,
+    .#{$prefix}--dropdown__credit-content {
       cursor: auto;
       display: flex;
       flex-direction: column;
@@ -249,44 +249,44 @@
       }
     }
 
-    .bx--dropdown__trial-content--desc,
-    .bx--dropdown__credit-content--desc {
+    .#{$prefix}--dropdown__trial-content--desc,
+    .#{$prefix}--dropdown__credit-content--desc {
       margin-bottom: 1rem;
     }
 
-    .bx--dropdown__trial-content .bx--link,
-    .bx--dropdown__credit-content .bx--link {
+    .#{$prefix}--dropdown__trial-content .#{$prefix}--link,
+    .#{$prefix}--dropdown__credit-content .#{$prefix}--link {
       @include typescale('legal');
       color: $color__blue-30; // anna
       margin-top: 1rem;
       text-align: center;
     }
 
-    .bx--dropdown__trial-content--desc {
+    .#{$prefix}--dropdown__trial-content--desc {
       @include typescale('omega');
     }
 
-    .bx--dropdown__credit-content div {
-      .bx--dropdown__credit-content--heading {
+    .#{$prefix}--dropdown__credit-content div {
+      .#{$prefix}--dropdown__credit-content--heading {
         @include font-smoothing;
         @include typescale('omega');
         font-weight: 600;
       }
 
-      .bx--dropdown__credit-content--desc {
+      .#{$prefix}--dropdown__credit-content--desc {
         @include typescale('zeta');
       }
 
       &:last-child {
-        .bx--dropdown__credit-content--desc {
+        .#{$prefix}--dropdown__credit-content--desc {
           margin-bottom: 0;
         }
       }
     }
   }
 
-  .bx--top-nav__right-container__item:last-child {
-    .bx--dropdown {
+  .#{$prefix}--top-nav__right-container__item:last-child {
+    .#{$prefix}--dropdown {
       &:focus,
       &:hover {
         background-color: $color__navy-gray-3; // anna
@@ -294,7 +294,7 @@
       }
     }
 
-    .bx--dropdown__arrow {
+    .#{$prefix}--dropdown__arrow {
       transform-origin: 50% 40%;
 
       use {
@@ -302,7 +302,7 @@
       }
     }
 
-    .bx--dropdown-text--profile-image {
+    .#{$prefix}--dropdown-text--profile-image {
       height: rem(36px);
       width: rem(36px);
       min-height: rem(36px);
@@ -313,7 +313,7 @@
       margin: 0rem 1rem;
     }
 
-    .bx--dropdown-text--profile-image .profile-image {
+    .#{$prefix}--dropdown-text--profile-image .profile-image {
       display: flex;
       align-items: center;
       border-radius: 50%;
@@ -327,14 +327,14 @@
       }
     }
 
-    .bx--dropdown-list {
+    .#{$prefix}--dropdown-list {
       right: 0;
       left: inherit;
       padding: 1rem;
       min-width: 225px;
     }
 
-    .bx--dropdown-item {
+    .#{$prefix}--dropdown-item {
       display: flex;
       justify-content: space-between;
 
@@ -350,12 +350,12 @@
     }
   }
 
-  .bx--top-nav__right-container__item[data-credit] .bx--dropdown-list {
+  .#{$prefix}--top-nav__right-container__item[data-credit] .#{$prefix}--dropdown-list {
     min-width: 0;
     width: 100%;
   }
 
-  .bx--dropdown__profile-dropdown--picture {
+  .#{$prefix}--dropdown__profile-dropdown--picture {
     max-width: 3rem;
     max-height: 3rem;
     border-radius: 50%;
@@ -363,7 +363,7 @@
     fill: $inverse-01;
   }
 
-  .bx--dropdown__profile-dropdown--information {
+  .#{$prefix}--dropdown__profile-dropdown--information {
     margin-left: 1rem;
 
     p {
@@ -373,7 +373,7 @@
     }
   }
 
-  .bx--dropdown__profile-dropdown__container {
+  .#{$prefix}--dropdown__profile-dropdown__container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -406,8 +406,8 @@
   }
 
   @for $i from 1 to 4 {
-    .bx--top-nav__left-container--item:nth-child(#{$i}) {
-      .bx--dropdown-text {
+    .#{$prefix}--top-nav__left-container--item:nth-child(#{$i}) {
+      .#{$prefix}--dropdown-text {
         animation-delay: ($i * 100ms) + 100ms;
       }
     }

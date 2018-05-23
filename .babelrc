@@ -9,5 +9,5 @@
         }
     }]
   ],
-  "plugins": ["transform-class-properties", "dev-expression"],
+  "plugins": ["transform-class-properties", "transform-object-rest-spread", "dev-expression"]
 }

@@ -1,14 +1,17 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class LeftNav extends mixin(createComponent, initComponentBySearch) {
+class LeftNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Left Navigation.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a left navigation.
    * @param {Object} [options] The component options
    * @param {string} [options.selectorLeftNav] The data attribute selector for the nav element in the left nav container.
@@ -26,12 +29,14 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    *   The data attribute selector for the three sections in the header of the left nav.
    * @param {string} [options.selectorLeftNavCurrentPage]
    *   The data attribute selector for the current section title in the left nav header.
+   * @param {string} [options.selectorLeftNavMainNavHidden] The CSS selector for the hidden main nav.
    * @param {string} [options.classActiveLeftNav] The class name for when a left nav is active.
    * @param {string} [options.classActiveLeftNavListItem] The class name for when a left nav list item is active.
    * @param {string} [options.classExpandedLeftNavListItem] The class name for when a nested list is expanded.
    * @param {string} [options.classFlyoutDisplayed] The class name for when a flyout menu is displayed.
    * @param {string} [options.classActiveSection] The class name for an active section item in the left nav header.
    * @param {string} [options.classItemHasChildren] The class name for when a list item has children.
+   * @param {string} [options.classTaxonomyIcon] The class name for the taxonomy icon.
    */
   constructor(element, options) {
     super(element, options);
@@ -39,9 +44,11 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     this.hookOpenActions();
     this.hookListSectionEvents();
     this.hookListItemsEvents();
-    this.hDocumentClick = on(this.element.ownerDocument, 'click', evt => {
-      this.handleDocumentClick(evt);
-    });
+    this.manage(
+      on(this.element.ownerDocument, 'click', evt => {
+        this.handleDocumentClick(evt);
+      })
+    );
   }
 
   /**
@@ -102,7 +109,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    */
   animateNavList(selectedNavTitle) {
     const currentLeftNavList = this.element.querySelector(
-      `${this.options.selectorLeftNavList}:not(.bx--left-nav__main-nav--hidden)`
+      `${this.options.selectorLeftNavList}:not(${this.options.selectorLeftNavMainNavHidden})`
     );
     const newLeftNavList = this.element.querySelector(`[data-left-nav-list=${selectedNavTitle}]`);
     const currentLeftNavItems = [...currentLeftNavList.querySelectorAll(this.options.selectorLeftNavListItem)].reverse();
@@ -140,37 +147,47 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     const openBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleOpen);
     const closeBtn = this.element.ownerDocument.querySelector(this.options.selectorLeftNavToggleClose);
 
-    openBtn.addEventListener('click', () => {
-      this.element.tabIndex = '0';
-      this.toggleMenu();
-    });
-
-    openBtn.addEventListener('keydown', evt => {
-      if (evt.which === 13) {
+    this.manage(
+      on(openBtn, 'click', () => {
         this.element.tabIndex = '0';
         this.toggleMenu();
-      }
-    });
+      })
+    );
+
+    this.manage(
+      on(openBtn, 'keydown', evt => {
+        if (evt.which === 13) {
+          this.element.tabIndex = '0';
+          this.toggleMenu();
+        }
+      })
+    );
 
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        this.element.tabIndex = '-1';
-        this.closeMenu();
-      });
-
-      closeBtn.addEventListener('keydown', evt => {
-        if (evt.which === 13) {
+      this.manage(
+        on(closeBtn, 'click', () => {
           this.element.tabIndex = '-1';
           this.closeMenu();
-        }
-      });
+        })
+      );
+
+      this.manage(
+        on(closeBtn, 'keydown', evt => {
+          if (evt.which === 13) {
+            this.element.tabIndex = '-1';
+            this.closeMenu();
+          }
+        })
+      );
     }
 
-    this.element.ownerDocument.addEventListener('keydown', evt => {
-      if (evt.which === 27 && this.element.classList.contains(this.options.classActiveLeftNav)) {
-        this.closeMenu();
-      }
-    });
+    this.manage(
+      on(this.element.ownerDocument, 'keydown', evt => {
+        if (evt.which === 27 && this.element.classList.contains(this.options.classActiveLeftNav)) {
+          this.closeMenu();
+        }
+      })
+    );
   }
 
   /**
@@ -178,16 +195,20 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    */
   hookListSectionEvents() {
     const leftNavSections = this.element.querySelector(this.options.selectorLeftNavSections);
-    leftNavSections.addEventListener('click', evt => {
-      this.handleSectionItemClick(evt, leftNavSections);
-    });
-
-    leftNavSections.addEventListener('keydown', evt => {
-      if (evt.which === 13) {
+    this.manage(
+      on(leftNavSections, 'click', evt => {
         this.handleSectionItemClick(evt, leftNavSections);
-        this.element.querySelector(this.options.selectorLeftNavCurrentSectionTitle).focus();
-      }
-    });
+      })
+    );
+
+    this.manage(
+      on(leftNavSections, 'keydown', evt => {
+        if (evt.which === 13) {
+          this.handleSectionItemClick(evt, leftNavSections);
+          this.element.querySelector(this.options.selectorLeftNavCurrentSectionTitle).focus();
+        }
+      })
+    );
   }
 
   /**
@@ -196,76 +217,84 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
   hookListItemsEvents() {
     const leftNavList = [...this.element.querySelectorAll(this.options.selectorLeftNavList)];
     leftNavList.forEach(list => {
-      list.addEventListener('click', evt => {
-        const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
-        if (leftNavItem) {
-          const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
-          const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
-          const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
-          if (flyoutItem) {
-            this.addActiveListItem(flyoutItem);
-          } else if (childItem) {
-            if (childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-              const flyoutMenu = childItem.querySelector(this.options.selectorLeftNavFlyoutMenu);
-              flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
-            } else {
-              this.addActiveListItem(childItem);
-            }
-          } else if (hasChildren) {
-            this.handleNestedListClick(leftNavItem);
-          } else {
-            this.addActiveListItem(leftNavItem);
-          }
-        }
-      });
-      list.addEventListener('keydown', evt => {
-        if (evt.which === 13) {
+      this.manage(
+        on(list, 'click', evt => {
           const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
           if (leftNavItem) {
             const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
             const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
             const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
-            const hasLinkItem = !(leftNavItem.querySelector(this.options.selectorLeftNavListItemLink) === undefined);
             if (flyoutItem) {
               this.addActiveListItem(flyoutItem);
             } else if (childItem) {
-              if (!childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
-                this.addActiveListItem(childItem);
+              if (childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+                const flyoutMenu = childItem.querySelector(this.options.selectorLeftNavFlyoutMenu);
+                flyoutMenu.classList.toggle(this.options.classFlyoutDisplayed);
               } else {
-                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
-                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${childItem.offsetTop -
-                  this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
-                childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${childItem.offsetLeft +
-                  Math.round(childItem.offsetWidth)}px`;
+                this.addActiveListItem(childItem);
               }
             } else if (hasChildren) {
               this.handleNestedListClick(leftNavItem);
-            } else if (hasLinkItem) {
-              const link = leftNavItem.querySelector(this.options.selectorLeftNavListItemLink);
-              link.click();
             } else {
               this.addActiveListItem(leftNavItem);
             }
           }
-        }
-      });
+        })
+      );
+      this.manage(
+        on(list, 'keydown', evt => {
+          if (evt.which === 13) {
+            const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+            if (leftNavItem) {
+              const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
+              const hasChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+              const flyoutItem = eventMatches(evt, this.options.selectorLeftNavFlyoutItem);
+              const hasLinkItem = !(leftNavItem.querySelector(this.options.selectorLeftNavListItemLink) === undefined);
+              if (flyoutItem) {
+                this.addActiveListItem(flyoutItem);
+              } else if (childItem) {
+                if (!childItem.querySelector(this.options.selectorLeftNavFlyoutMenu)) {
+                  this.addActiveListItem(childItem);
+                } else {
+                  childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
+                  childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${childItem.offsetTop -
+                    this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
+                  childItem.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${childItem.offsetLeft +
+                    Math.round(childItem.offsetWidth)}px`;
+                }
+              } else if (hasChildren) {
+                this.handleNestedListClick(leftNavItem);
+              } else if (hasLinkItem) {
+                const link = leftNavItem.querySelector(this.options.selectorLeftNavListItemLink);
+                link.click();
+              } else {
+                this.addActiveListItem(leftNavItem);
+              }
+            }
+          }
+        })
+      );
     });
     const flyouts = [...this.element.ownerDocument.querySelectorAll(this.options.selectorLeftNavListItemHasFlyout)];
     flyouts.forEach(flyout => {
-      flyout.addEventListener('mouseenter', () => {
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
-        // eslint-disable-next-line no-param-reassign
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${flyout.offsetTop -
-          this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
-        // eslint-disable-next-line no-param-reassign
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${flyout.offsetLeft +
-          Math.round(flyout.offsetWidth)}px`;
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.toggle(this.options.classFlyoutDisplayed);
-      });
-      flyout.addEventListener('mouseleave', () => {
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'true');
-        flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
-      });
+      this.manage(
+        on(flyout, 'mouseenter', () => {
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'false');
+          // eslint-disable-next-line no-param-reassign
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.top = `${flyout.offsetTop -
+            this.element.querySelector(this.options.selectorLeftNav).scrollTop}px`;
+          // eslint-disable-next-line no-param-reassign
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).style.left = `${flyout.offsetLeft +
+            Math.round(flyout.offsetWidth)}px`;
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.toggle(this.options.classFlyoutDisplayed);
+        })
+      );
+      this.manage(
+        on(flyout, 'mouseleave', () => {
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).setAttribute('aria-hidden', 'true');
+          flyout.querySelector(this.options.selectorLeftNavFlyoutMenu).classList.remove(this.options.classFlyoutDisplayed);
+        })
+      );
     });
   }
 
@@ -308,7 +337,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
   /**
    * Handles click on the document.
    * Closes the left navigation when document is clicked outside the left navigation.
-   * @param {Event} event The event triggering this method.
+   * @param {Event} evt The event triggering this method.
    */
   handleDocumentClick(evt) {
     const clickTarget = evt.target;
@@ -339,7 +368,6 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    * Handles click on a list item that contains a nested list in the left navigation.
    * It hides all flyout menus and switches the tab-index on the list items based on whether or not the list is expanded.
    * @param {HTMLElement} listItem The list item that was clicked.
-   * @param {Event} event The event triggering this method.
    */
   handleNestedListClick(listItem) {
     const isOpen = listItem.classList.contains(this.options.classExpandedLeftNavListItem);
@@ -395,7 +423,7 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
 
       const newLeftNavSectionItemIcon = selectedLeftNavSectionItemIcon.cloneNode(true);
       // IE11 doesn't support classList on SVG, must revert to className
-      newLeftNavSectionItemIcon.setAttribute('class', 'bx--left-nav__section--taxonomy-icon');
+      newLeftNavSectionItemIcon.setAttribute('class', this.options.classTaxonomyIcon);
       newLeftNavSectionItemIcon.removeAttribute('data-left-nav-current-section-icon');
       newLeftNavSectionItemIcon.setAttribute('data-left-nav-section-icon', selectedLeftNavSectionValue);
 
@@ -424,13 +452,6 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
     }
   }
 
-  release() {
-    if (this.hDocumentClick) {
-      this.hDocumentClick = this.hDocumentClick.release();
-    }
-    super.release();
-  }
-
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode LeftNav.create .create()}, or {@linkcode LeftNav.init .init()},
@@ -452,54 +473,61 @@ class LeftNav extends mixin(createComponent, initComponentBySearch) {
    * @property {string} [selectorLeftNavSection] The data attribute selector for the three sections in the header of the left nav.
    * @property {string} [selectorLeftNavCurrentPage]
    *   The data attribute selector for the current section title in the left nav header.
+   * @property {string} [selectorLeftNavMainNavHidden] The CSS selector for the hidden main nav.
    * @property {string} [classActiveLeftNav] The class name for when a left nav is active.
    * @property {string} [classActiveLeftNavListItem] The class name for when a left nav list item is active.
    * @property {string} [classExpandedLeftNavListItem] The class name for when a nested list is expanded.
    * @property {string} [classFlyoutDisplayed] The class name for when a flyout menu is displayed.
    * @property {string} [classActiveSection] The class name for an active section item in the left nav header.
    * @property {string} [classItemHasChildren] The class name for when a list item has children.
+   * @property {string} [classTaxonomyIcon] The class name for the taxonomy icon.
    */
-  static options = {
-    selectorInit: '[data-left-nav-container]',
-    // Data Attribute selectors
-    selectorLeftNav: '[data-left-nav]',
-    selectorLeftNavList: '[data-left-nav-list]',
-    selectorLeftNavNestedList: '[data-left-nav-nested-list]',
-    selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
-    selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
-    selectorLeftNavListItem: '[data-left-nav-item]',
-    selectorLeftNavListItemLink: '[data-left-nav-item-link]',
-    selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
-    selectorLeftNavArrowIcon: '[data-left-nav-icon]',
-    selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
-    selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
-    selectorLeftNavSections: '[data-left-nav-sections]',
-    selectorLeftNavSection: '[data-left-nav-section]',
-    selectorLeftNavSectionLink: '[data-left-nav-section-link]',
-    selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
-    selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
-    selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
-    selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
-    selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
-    selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
-    selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
-    // CSS Class Selectors
-    classActiveTrigger: 'bx--left-nav__trigger--active',
-    classActiveLeftNav: 'bx--left-nav--active',
-    classActiveLeftNavListItem: 'bx--active-list-item',
-    classExpandedLeftNavListItem: 'bx--main-nav__parent-item--expanded',
-    classFlyoutDisplayed: 'bx--nested-list__flyout-menu--displayed',
-    classItemHasChildren: 'bx--main-nav__parent-item--has-children',
-    classNavSection: 'bx--left-nav__section',
-    classNavSectionTransition: 'bx--left-nav__section--transition',
-    classNavSectionAnchor: 'bx--left-nav__section--anchor',
-    classNavSectionLink: 'bx--left-nav__section--link',
-    classNavHeaderTitle: 'bx--left-nav__header--title',
-    classItemFade: 'bx--main-nav__parent-item--fade',
-    classItemHidden: 'bx--main-nav__parent-item--hidden',
-    classListHidden: 'bx--left-nav__main-nav--hidden',
-    classListTop: 'bx--left-nav__main-nav--top',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-left-nav-container]',
+      // Data Attribute selectors
+      selectorLeftNav: '[data-left-nav]',
+      selectorLeftNavList: '[data-left-nav-list]',
+      selectorLeftNavNestedList: '[data-left-nav-nested-list]',
+      selectorLeftNavToggleOpen: '[data-left-nav-toggle="open"]',
+      selectorLeftNavToggleClose: '[data-left-nav-toggle="close"]',
+      selectorLeftNavListItem: '[data-left-nav-item]',
+      selectorLeftNavListItemLink: '[data-left-nav-item-link]',
+      selectorLeftNavNestedListItem: '[data-left-nav-nested-item]',
+      selectorLeftNavArrowIcon: '[data-left-nav-icon]',
+      selectorLeftNavFlyoutMenu: '[data-left-nav-flyout]',
+      selectorLeftNavFlyoutItem: '[data-left-nav-flyout-item]',
+      selectorLeftNavSections: '[data-left-nav-sections]',
+      selectorLeftNavSection: '[data-left-nav-section]',
+      selectorLeftNavSectionLink: '[data-left-nav-section-link]',
+      selectorLeftNavSectionIcon: '[data-left-nav-section-icon]',
+      selectorLeftNavCurrentSection: '[data-left-nav-current-section]',
+      selectorLeftNavCurrentSectionTitle: '[data-left-nav-current-section-title]',
+      selectorLeftNavCurrentSectionIcon: '[data-left-nav-current-section-icon]',
+      selectorLeftNavListItemHasChildren: '[data-left-nav-item-with-children]',
+      selectorLeftNavListItemHasFlyout: '[data-left-nav-has-flyout]',
+      selectorLeftNavAllListItems: '[data-left-nav-item], [data-left-nav-nested-item], [data-left-nav-flyout-item]',
+      selectorLeftNavMainNavHidden: `.${prefix}--left-nav__main-nav--hidden`,
+      // CSS Class Selectors
+      classActiveTrigger: `${prefix}--left-nav__trigger--active`,
+      classActiveLeftNav: `${prefix}--left-nav--active`,
+      classActiveLeftNavListItem: `${prefix}--active-list-item`,
+      classExpandedLeftNavListItem: `${prefix}--main-nav__parent-item--expanded`,
+      classFlyoutDisplayed: `${prefix}--nested-list__flyout-menu--displayed`,
+      classItemHasChildren: `${prefix}--main-nav__parent-item--has-children`,
+      classNavSection: `${prefix}--left-nav__section`,
+      classNavSectionTransition: `${prefix}--left-nav__section--transition`,
+      classNavSectionAnchor: `${prefix}--left-nav__section--anchor`,
+      classNavSectionLink: `${prefix}--left-nav__section--link`,
+      classNavHeaderTitle: `${prefix}--left-nav__header--title`,
+      classItemFade: `${prefix}--main-nav__parent-item--fade`,
+      classItemHidden: `${prefix}--main-nav__parent-item--hidden`,
+      classListHidden: `${prefix}--left-nav__main-nav--hidden`,
+      classListTop: `${prefix}--left-nav__main-nav--top`,
+      classTaxonomyIcon: `${prefix}--left-nav__section--taxonomy-icon`,
+    };
+  }
 
   /**
    * The map associating DOM element and left navigation instance.

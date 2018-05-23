@@ -1,3 +1,4 @@
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layout';
@@ -16,7 +17,7 @@
     'Accessing the `card` component from the `carbon-components` package is ' +
       'deprecated. Use the `carbon-addons-cloud` package instead.'
   ) {
-    .bx--card {
+    .#{$prefix}--card {
       @include reset;
       @include font-family;
       @include layer('raised');
@@ -32,7 +33,7 @@
       }
     }
 
-    .bx--card__card-overview {
+    .#{$prefix}--card__card-overview {
       @include reset;
       position: relative;
       display: flex;
@@ -43,7 +44,7 @@
       padding-right: 1rem;
       height: 12rem;
 
-      .bx--overflow-menu {
+      .#{$prefix}--overflow-menu {
         position: absolute;
         top: 1rem;
         right: 1rem;
@@ -52,7 +53,7 @@
       }
     }
 
-    .bx--card-footer {
+    .#{$prefix}--card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -60,9 +61,15 @@
       background-color: $ui-03;
       padding-left: 1rem;
       padding-right: 1rem;
+
+      > .#{$prefix}--btn {
+        @include text-overflow();
+        margin-right: 0.25rem;
+        flex: 1;
+      }
     }
 
-    .bx--card-footer__link {
+    .#{$prefix}--card-footer__link {
       @include typescale('zeta');
 
       &:focus {
@@ -70,40 +77,41 @@
       }
     }
 
-    .bx--card-overview__about {
+    .#{$prefix}--card-overview__about {
       @include reset;
       display: flex;
       flex: 1;
       flex-direction: column;
       align-items: $card-flex-align;
       padding-top: 1rem;
+      width: 100%;
     }
 
-    .bx--about__title {
+    .#{$prefix}--about__title {
       font-weight: 400;
       padding-top: 1.5rem;
+      width: 100%;
     }
 
-    .bx--about__title--name {
+    .#{$prefix}--about__title--name {
       @include typescale('delta');
-      @include text-overflow(rem(180px));
+      @include text-overflow();
       font-weight: 400;
       margin: 0;
       line-height: 1.2;
+      overflow: hidden;
     }
 
-    .bx--about__title--link {
+    .#{$prefix}--about__title--link {
       @include typescale('omega');
-      @include text-overflow(rem(180px));
-      display: inline;
+      @include text-overflow();
       font-weight: 400;
       text-align: center;
     }
 
-    .bx--about__title--additional-info {
+    .#{$prefix}--about__title--additional-info {
       @include typescale('omega');
-      @include text-overflow(rem(180px));
-      display: inline;
+      @include text-overflow();
       font-weight: 400;
       padding: 0;
       margin: 0;
@@ -114,7 +122,7 @@
       }
     }
 
-    .bx--about__icon {
+    .#{$prefix}--about__icon {
       @include reset;
       display: flex;
       align-items: center;
@@ -125,7 +133,7 @@
       border: 1px solid $ui-04;
       border-radius: 100%;
 
-      .bx--about__icon--img {
+      .#{$prefix}--about__icon--img {
         width: rem(32px);
         height: rem(32px);
         overflow: hidden;
@@ -133,7 +141,7 @@
     }
 
     // APP CARD STYLES
-    .bx--card-footer__app-status {
+    .#{$prefix}--card-footer__app-status {
       @include reset;
 
       .active {
@@ -141,27 +149,27 @@
       }
     }
 
-    .bx--card-footer__app-status--running {
+    .#{$prefix}--card-footer__app-status--running {
       @include app-status('running');
     }
 
-    .bx--card-footer__app-status--not-running {
+    .#{$prefix}--card-footer__app-status--not-running {
       @include app-status('not-running');
     }
 
-    .bx--card-footer__app-status--stopped {
+    .#{$prefix}--card-footer__app-status--stopped {
       @include app-status('stopped');
     }
 
-    .bx--card-footer__app-status--limited {
+    .#{$prefix}--card-footer__app-status--limited {
       @include app-status('limited');
     }
 
-    .bx--card-footer__app-actions {
+    .#{$prefix}--card-footer__app-actions {
       display: flex;
     }
 
-    .bx--app-actions__button {
+    .#{$prefix}--app-actions__button {
       @include typescale('epsilon');
       display: inline-block;
       padding: 0.125rem 0 0;
@@ -172,7 +180,7 @@
 
       &:hover,
       &:focus {
-        .bx--app-actions__button--icon {
+        .#{$prefix}--app-actions__button--icon {
           fill: $brand-01;
         }
       }
@@ -182,7 +190,7 @@
       }
     }
 
-    .bx--app-actions__button--icon {
+    .#{$prefix}--app-actions__button--icon {
       width: 1rem;
       height: 1rem;
       margin: 0 0.125rem;

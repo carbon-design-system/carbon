@@ -1,15 +1,19 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedState from '../../globals/js/mixins/evented-state';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 
-class DataTable extends mixin(createComponent, initComponentBySearch, eventedState) {
+class DataTable extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
   /**
    * Data Table
    * @extends CreateComponent
    * @extends InitComponentBySearch
    * @extends EventedState
+   * @extends Handles
    * @param {HTMLElement} element The root element of tables
    * @param {Object} [options] the... options
    * @param {string} [options.selectorInit] selector initialization
@@ -32,21 +36,25 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
 
     this.refreshRows();
 
-    this.element.addEventListener('click', evt => {
-      const eventElement = eventMatches(evt, this.options.eventTrigger);
-      if (eventElement) {
-        this._toggleState(eventElement, evt);
-      }
-    });
-
-    this.element.addEventListener('keydown', evt => {
-      if (evt.which === 13) {
+    this.manage(
+      on(this.element, 'click', evt => {
         const eventElement = eventMatches(evt, this.options.eventTrigger);
         if (eventElement) {
           this._toggleState(eventElement, evt);
         }
-      }
-    });
+      })
+    );
+
+    this.manage(
+      on(this.element, 'keydown', evt => {
+        if (evt.which === 13) {
+          const eventElement = eventMatches(evt, this.options.eventTrigger);
+          if (eventElement) {
+            this._toggleState(eventElement, evt);
+          }
+        }
+      })
+    );
   }
 
   /**
@@ -198,27 +206,30 @@ class DataTable extends mixin(createComponent, initComponentBySearch, eventedSta
     'select-all': '_toggleSelectAll',
   };
 
-  static options = {
-    selectorInit: '[data-responsive-table]',
-    selectorExpandCells: '.bx--table-expand',
-    selectorExpandableRows: '.bx--expandable-row',
-    selectorParentRows: '.bx--parent-row',
-    selectorTableBody: '.bx--table-body',
-    selectorCheckbox: '.bx--checkbox',
-    classParentRowEven: 'bx--parent-row--even',
-    classExpandableRow: 'bx--expandable-row',
-    classExpandableRowEven: 'bx--expandable-row--even',
-    classExpandableRowHidden: 'bx--expandable-row--hidden',
-    classTableSortAscending: 'bx--table-sort--ascending',
-    eventBeforeExpand: 'responsive-table-beforetoggleexpand',
-    eventAfterExpand: 'responsive-table-aftertoggleexpand',
-    eventBeforeSort: 'responsive-table-beforetogglesort',
-    eventAfterSort: 'responsive-table-aftertogglesort',
-    eventBeforeSelectAll: 'responsive-table-beforetoggleselectall',
-    eventAfterSelectAll: 'responsive-table-aftertoggleselectall',
-    eventTrigger: '[data-event]',
-    eventParentContainer: '[data-parent-row]',
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-responsive-table]',
+      selectorExpandCells: `.${prefix}--table-expand`,
+      selectorExpandableRows: `.${prefix}--expandable-row`,
+      selectorParentRows: `.${prefix}--parent-row`,
+      selectorTableBody: `.${prefix}--table-body`,
+      selectorCheckbox: `.${prefix}--checkbox`,
+      classParentRowEven: `${prefix}--parent-row--even`,
+      classExpandableRow: `${prefix}--expandable-row`,
+      classExpandableRowEven: `${prefix}--expandable-row--even`,
+      classExpandableRowHidden: `${prefix}--expandable-row--hidden`,
+      classTableSortAscending: `${prefix}--table-sort--ascending`,
+      eventBeforeExpand: 'responsive-table-beforetoggleexpand',
+      eventAfterExpand: 'responsive-table-aftertoggleexpand',
+      eventBeforeSort: 'responsive-table-beforetogglesort',
+      eventAfterSort: 'responsive-table-aftertogglesort',
+      eventBeforeSelectAll: 'responsive-table-beforetoggleselectall',
+      eventAfterSelectAll: 'responsive-table-aftertoggleselectall',
+      eventTrigger: '[data-event]',
+      eventParentContainer: '[data-parent-row]',
+    };
+  }
 }
 
 export default DataTable;

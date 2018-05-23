@@ -2,27 +2,30 @@
 // Select
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
 @include exports('select') {
-  .bx--select {
+  .#{$prefix}--select {
     @include reset;
     position: relative;
     display: block;
   }
 
-  .bx--select-input {
+  .#{$prefix}--select-input {
     @include font-family;
     @include typescale('zeta');
+    height: rem(40px);
     appearance: none;
     display: block;
     width: 100%;
-    padding: 0.75rem 2.75rem 0.75rem 1rem;
+    padding: 0 $spacing-2xl 0 $spacing-md;
     color: $text-01;
     background-color: $field-01;
     border: $input-border;
@@ -44,7 +47,7 @@
     }
   }
 
-  .bx--select__arrow {
+  .#{$prefix}--select__arrow {
     fill: $brand-01;
     position: absolute;
     right: 1rem;
@@ -54,35 +57,40 @@
     pointer-events: none;
   }
 
-  .bx--select-optgroup,
-  .bx--select-option {
+  .#{$prefix}--select-optgroup,
+  .#{$prefix}--select-option {
     color: $text-01; // For the options to show in IE11
+  }
+
+  .#{$prefix}--select-option[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   // Override some Firefox user-agent styles
   @-moz-document url-prefix() {
-    .bx--select-option {
+    .#{$prefix}--select-option {
       background-color: $ui-01;
       color: $text-01;
     }
 
-    .bx--select-optgroup {
+    .#{$prefix}--select-optgroup {
       color: $text-01;
     }
   }
 }
 
-.bx--select--inline {
+.#{$prefix}--select--inline {
   display: flex;
   align-items: center;
 
-  .bx--label {
+  .#{$prefix}--label {
     white-space: nowrap;
-    margin: 0 0.5rem 0 0;
+    margin: 0 $spacing-xs 0 0;
     font-weight: 400;
   }
 
-  .bx--select-input {
+  .#{$prefix}--select-input {
     background-color: transparent;
     color: $brand-01;
     font-weight: 600;

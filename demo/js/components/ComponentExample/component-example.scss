@@ -1,0 +1,38 @@
+.component-example {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  color: $color__white;
+
+  &__live {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: rem(200px);
+    position: relative;
+    padding: 2rem 2rem 2.5rem;
+    margin: 1.5rem 0 0;
+    background-color: $color__gray-3;
+    color: $color__blue-90;
+    border: 1px solid $color__gray-1;
+
+    &--rendered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+  }
+
+  &__view-full-render {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: $color__navy-gray-6;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    z-index: 9999;
+  }
+}

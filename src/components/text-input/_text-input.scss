@@ -2,15 +2,17 @@
 // Text
 //-----------------------------
 
+@import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
+@import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
 @include exports('text-input') {
-  .bx--text-input {
+  .#{$prefix}--text-input {
     @include reset;
     @include font-family;
     @include typescale('zeta');
@@ -18,7 +20,7 @@
     width: 100%;
     height: rem(40px);
     min-width: 10rem;
-    padding: 0 1rem;
+    padding: 0 $spacing-md;
     color: $text-01;
     background-color: $field-01;
     border: $input-border;
@@ -28,7 +30,8 @@
     }
 
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+      border: 1px solid $brand-01;
     }
 
     &:disabled {
@@ -38,6 +41,16 @@
 
     &:disabled:hover {
       border: $input-border;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--text-input.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+      color: transparent;
     }
   }
 }

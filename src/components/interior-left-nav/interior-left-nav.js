@@ -1,17 +1,21 @@
 import warning from 'warning';
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
+import on from '../../globals/js/misc/on';
 import toggleClass from '../../globals/js/misc/svg-toggle-class';
 
 let didWarnAboutDeprecation = false;
 
-class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
+class InteriorLeftNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Interior left nav.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as an interior left nav.
    * @param {Object} options The component options.
    */
@@ -34,39 +38,43 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
   }
 
   hookListItemsEvents = () => {
-    this.element.addEventListener('click', evt => {
-      const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
-      const collapseEl = eventMatches(evt, this.options.selectorLeftNavCollapse);
-      const collapsedBar = eventMatches(evt, `.${this.options.classLeftNavCollapsed}`);
+    this.manage(
+      on(this.element, 'click', evt => {
+        const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+        const collapseEl = eventMatches(evt, this.options.selectorLeftNavCollapse);
+        const collapsedBar = eventMatches(evt, `.${this.options.classLeftNavCollapsed}`);
 
-      if (leftNavItem) {
-        const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
-        const hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
-        if (childItem) {
-          this.addActiveListItem(childItem);
-        } else if (hasChildren) {
-          this.handleNestedListClick(leftNavItem, evt);
-        } else {
+        if (leftNavItem) {
+          const childItem = eventMatches(evt, this.options.selectorLeftNavNestedListItem);
+          const hasChildren = leftNavItem.classList.contains('left-nav-list__item--has-children');
+          if (childItem) {
+            this.addActiveListItem(childItem);
+          } else if (hasChildren) {
+            this.handleNestedListClick(leftNavItem, evt);
+          } else {
+            this.addActiveListItem(leftNavItem);
+          }
+        }
+
+        if (collapseEl || collapsedBar) {
+          evt.preventDefault();
+          this.toggleLeftNav();
+        }
+      })
+    );
+
+    this.manage(
+      on(this.element, 'keydown', evt => {
+        const leftNavItemWithChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
+        const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
+
+        if (leftNavItemWithChildren && evt.which === 13) {
+          this.handleNestedListClick(leftNavItemWithChildren, evt);
+        } else if (leftNavItem && evt.which === 13) {
           this.addActiveListItem(leftNavItem);
         }
-      }
-
-      if (collapseEl || collapsedBar) {
-        evt.preventDefault();
-        this.toggleLeftNav();
-      }
-    });
-
-    this.element.addEventListener('keydown', evt => {
-      const leftNavItemWithChildren = eventMatches(evt, this.options.selectorLeftNavListItemHasChildren);
-      const leftNavItem = eventMatches(evt, this.options.selectorLeftNavListItem);
-
-      if (leftNavItemWithChildren && evt.which === 13) {
-        this.handleNestedListClick(leftNavItemWithChildren, evt);
-      } else if (leftNavItem && evt.which === 13) {
-        this.addActiveListItem(leftNavItem);
-      }
-    });
+      })
+    );
   };
 
   addActiveListItem(item) {
@@ -87,7 +95,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
    * Handles click on a list item that contains a nested list in the left navigation.
    * The nested list is expanded and the icon is rotated.
    * @param {HTMLElement} listItem The list item that was clicked.
-   * @param {Event} event The event triggering this method.
+   * @param {Event} evt The evt triggering this method.
    */
   handleNestedListClick(listItem, evt) {
     const allNestedItems = [...this.element.querySelectorAll(this.options.selectorLeftNavListItemHasChildren)];
@@ -183,31 +191,34 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch) {
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find interior left navs.
    */
-  static options = {
-    selectorInit: '[data-interior-left-nav]',
-    // Data Attribute selectors
-    selectorLeftNavList: '[data-interior-left-nav-list]',
-    selectorLeftNavNestedList: '[data-interior-left-nav-nested-list]',
-    selectorLeftNavListItem: '[data-interior-left-nav-item]',
-    selectorLeftNavListItemLink: '[data-interior-left-nav-item-link]',
-    selectorLeftNavNestedListItem: '[data-interior-left-nav-nested-item]',
-    selectorLeftNavListItemHasChildren: '[data-interior-left-nav-with-children]',
-    selectorLeftNavCollapse: '[data-interior-left-nav-collapse]',
-    selectorLeftNavArrowTitle: '[data-interior-left-nav-arrow] title',
-    // CSS Class Selectors
-    classActiveLeftNavListItem: 'left-nav-list__item--active',
-    classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
-    classLeftNavCollapsing: 'bx--interior-left-nav--collapsing',
-    classLeftNavCollapsed: 'bx--interior-left-nav--collapsed',
-    classLeftNavExpanding: 'bx--interior-left-nav--expanding',
-    // Event
-    eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
-    eventAfterLeftNavToggled: 'left-nav-toggled',
-    // Option
-    expandTitle: 'Expand nav pane',
-    collapseTitle: 'Collapse nav pane',
-    keepOpen: false,
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-interior-left-nav]',
+      // Data Attribute selectors
+      selectorLeftNavList: '[data-interior-left-nav-list]',
+      selectorLeftNavNestedList: '[data-interior-left-nav-nested-list]',
+      selectorLeftNavListItem: '[data-interior-left-nav-item]',
+      selectorLeftNavListItemLink: '[data-interior-left-nav-item-link]',
+      selectorLeftNavNestedListItem: '[data-interior-left-nav-nested-item]',
+      selectorLeftNavListItemHasChildren: '[data-interior-left-nav-with-children]',
+      selectorLeftNavCollapse: '[data-interior-left-nav-collapse]',
+      selectorLeftNavArrowTitle: '[data-interior-left-nav-arrow] title',
+      // CSS Class Selectors
+      classActiveLeftNavListItem: 'left-nav-list__item--active',
+      classExpandedLeftNavListItem: 'left-nav-list__item--expanded',
+      classLeftNavCollapsing: `${prefix}--interior-left-nav--collapsing`,
+      classLeftNavCollapsed: `${prefix}--interior-left-nav--collapsed`,
+      classLeftNavExpanding: `${prefix}--interior-left-nav--expanding`,
+      // Event
+      eventBeforeLeftNavToggled: 'left-nav-beingtoggled',
+      eventAfterLeftNavToggled: 'left-nav-toggled',
+      // Option
+      expandTitle: 'Expand nav pane',
+      collapseTitle: 'Collapse nav pane',
+      keepOpen: false,
+    };
+  }
 }
 
 export default InteriorLeftNav;

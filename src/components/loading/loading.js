@@ -1,12 +1,16 @@
+import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
+import handles from '../../globals/js/mixins/handles';
+import on from '../../globals/js/misc/on';
 
-class Loading extends mixin(createComponent, initComponentBySearch) {
+class Loading extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * Spinner indicating loading state.
    * @extends CreateComponent
    * @extends InitComponentBySearch
+   * @extends Handles
    * @param {HTMLElement} element The element working as a spinner.
    * @param {Object} [options] The component options.
    * @param {boolean} [options.active] `true` if this spinner should roll.
@@ -30,14 +34,14 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
     }
 
     this.active = active;
-    this.element.classList.toggle('bx--loading--stop', !this.active);
+    this.element.classList.toggle(this.options.classLoadingStop, !this.active);
 
     /**
      * If overlay is the parentNode then toggle it too.
      */
     const parentNode = this.element.parentNode;
 
-    if (parentNode && parentNode.classList.contains('bx--loading-overlay')) {
+    if (parentNode && parentNode.classList.contains(this.options.classLoadingOverlay)) {
       parentNode.classList.toggle(this.options.classLoadingOverlayStop, !this.active);
     }
 
@@ -46,7 +50,6 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
 
   /**
    * Toggles active/inactive state.
-   * @param {boolean} active `true` if this spinner should roll.
    */
   toggle() {
     return this.set(!this.active);
@@ -64,11 +67,16 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
    */
   end() {
     this.set(false);
-    this.element.addEventListener('animationend', evt => {
-      if (evt.animationName === 'rotate-end-p2') {
-        this._deleteElement();
-      }
-    });
+    let handleAnimationEnd = this.manage(
+      on(this.element, 'animationend', evt => {
+        if (handleAnimationEnd) {
+          handleAnimationEnd = this.unmanage(handleAnimationEnd).release();
+        }
+        if (evt.animationName === 'rotate-end-p2') {
+          this._deleteElement();
+        }
+      })
+    );
   }
 
   /**
@@ -99,12 +107,17 @@ class Loading extends mixin(createComponent, initComponentBySearch) {
    * @type {Object}
    * @property {string} selectorInit The CSS selector to find spinners.
    */
-  static options = {
-    selectorInit: '[data-loading]',
-    selectorLoadingOverlay: '.bx--loading-overlay',
-    classLoadingOverlayStop: 'bx--loading-overlay--stop',
-    active: true,
-  };
+  static get options() {
+    const { prefix } = settings;
+    return {
+      selectorInit: '[data-loading]',
+      selectorLoadingOverlay: `.${prefix}--loading-overlay`,
+      classLoadingOverlay: `${prefix}--loading-overlay`,
+      classLoadingStop: `${prefix}--loading--stop`,
+      classLoadingOverlayStop: `${prefix}--loading-overlay--stop`,
+      active: true,
+    };
+  }
 }
 
 export default Loading;

@@ -44,6 +44,30 @@
       ]
     },
     {
+      "login": "alisonjoseph",
+      "name": "Alison Joseph",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2753488?s=400&v=4",
+      "profile": "https://github.com/alisonjoseph",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "tutorial"
+      ]
+    },
+    {
+      "login": "joshblack",
+      "name": "Josh Black",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3901764?s=400&v=4",
+      "profile": "https://github.com/joshblack",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "tutorial"
+      ]
+    },
+    {
       "login": "chrisdhanaraj",
       "name": "Chris Dhanaraj",
       "avatar_url": "https://avatars2.githubusercontent.com/u/1266014?v=4",
@@ -262,6 +286,133 @@
       "profile": "https://github.com/bschwanke",
       "contributions": [
         "doc"
+      ]
+    },
+    {
+      "login": "davidmenendez",
+      "name": "David Menendez",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6370760?s=460&v=4",
+      "profile": "https://github.com/davidmenendez",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "derick-montague",
+      "name": "Derick Montague",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1183515?s=400&v=4",
+      "profile": "https://github.com/derick-montague",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mven",
+      "name": "Michael Vendivel",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/940113?s=400&v=4",
+      "profile": "https://github.com/mven",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jamesvclements",
+      "name": "James Clements",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/20052710?s=400&v=4",
+      "profile": "https://github.com/jamesvclements",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jlengstorf",
+      "name": "Jason Lengstorf",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/163561?s=400&v=4",
+      "profile": "https://github.com/jlengstorf",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rahulrkr08",
+      "name": "Rahul Radhakrishnan",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2932484?s=400&v=4",
+      "profile": "https://github.com/rahulrkr08",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "stpCollabr8nLstn",
+      "name": "Adriana Rios",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11317322?s=400&v=4",
+      "profile": "https://github.com/stpCollabr8nLstn",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ctcpip",
+      "name": "Chris de Almeida",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15326526?s=400&v=4",
+      "profile": "https://github.com/ctcpip",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "psachs21",
+      "name": "Paul Sachs",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11449728?s=400&v=4",
+      "profile": "https://github.com/psachs21",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ryanomackey",
+      "name": "Ryan Mackey",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/17710824?s=400&v=4",
+      "profile": "https://github.com/ryanomackey",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "srlim",
+      "name": "Sae",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5316797?s=400&v=4",
+      "profile": "https://github.com/srlim",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "scottdickerson",
+      "name": "Scott Dickerson",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6663002?s=400&v=4",
+      "profile": "https://github.com/scottdickerson",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "aliciahickman",
+      "name": "Alicia Hickman",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4836277?s=400&v=4",
+      "profile": "https://github.com/aliciahickman",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "j1mie",
+      "name": "j1mie",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12685163?s=400&v=4",
+      "profile": "https://github.com/j1mie",
+      "contributions": [
+        "code"
       ]
     }
   ]

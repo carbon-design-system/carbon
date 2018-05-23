@@ -6,7 +6,7 @@
   border: 1px solid $color;
   border-left: 6px solid $color;
 
-  .bx--inline-notification__icon {
+  .#{$prefix}--inline-notification__icon {
     fill: $color;
   }
 }

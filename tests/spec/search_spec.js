@@ -1,18 +1,19 @@
 import Search from '../../src/components/search/search';
 import searchHTML from '../../src/components/search/search-large.html';
+import flattenOptions from '../utils/flatten-options';
 
 describe('Test Search', function() {
   describe('Constructor', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Search();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Search(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should set default options', function() {
@@ -20,7 +21,7 @@ describe('Test Search', function() {
       container.innerHTML = searchHTML;
       const search = new Search(container);
       try {
-        expect(search.options).to.deep.equal({
+        expect(flattenOptions(search.options)).toEqual({
           selectorInit: '[data-search]',
           selectorSearchView: '[data-search-view]',
           selectorSearchInput: '.bx--search-input',
@@ -43,7 +44,7 @@ describe('Test Search', function() {
     const container = document.createElement('div');
     container.innerHTML = searchHTML;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       instance = new Search(document.querySelector('[data-search]'));
       toggle = container.querySelector('.bx--search-button[data-search-toggle]');
@@ -52,22 +53,22 @@ describe('Test Search', function() {
     });
 
     it('Should show grid view by default', function() {
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.false;
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(false);
     });
 
     it('Should show list view after click', function() {
       toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.true;
-      expect(listIcon.classList.contains('bx--search-view--hidden')).to.be.false;
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(true);
+      expect(listIcon.classList.contains('bx--search-view--hidden')).toBe(false);
     });
 
     it('Should show grid view after second click', function() {
       toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).to.be.false;
-      expect(listIcon.classList.contains('bx--search-view--hidden')).to.be.true;
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(false);
+      expect(listIcon.classList.contains('bx--search-view--hidden')).toBe(true);
     });
 
-    after(function() {
+    afterAll(function() {
       instance.release();
       document.body.removeChild(container);
     });
@@ -80,7 +81,7 @@ describe('Test Search', function() {
     const container = document.createElement('div');
     container.innerHTML = searchHTML;
 
-    before(function() {
+    beforeAll(function() {
       document.body.appendChild(container);
       instance = new Search(document.querySelector('[data-search]'));
       input = container.querySelector('.bx--search-input');
@@ -95,7 +96,7 @@ describe('Test Search', function() {
           .trim()
           .split(/\s+/)
           .indexOf('bx--search-close--hidden') >= 0
-      ).to.be.true;
+      ).toBe(true);
     });
 
     it('Clear icon should be shown when input has value', function() {
@@ -108,15 +109,15 @@ describe('Test Search', function() {
           .trim()
           .split(/\s+/)
           .indexOf('bx--search-close--hidden') < 0
-      ).to.be.true;
+      ).toBe(true);
     });
 
     it('Should clear the input when clicked', function() {
       clearIcon.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(input.value).to.equal('');
+      expect(input.value).toBe('');
     });
 
-    after(function() {
+    afterAll(function() {
       instance.release();
       document.body.removeChild(container);
     });

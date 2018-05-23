@@ -1,0 +1,21 @@
+//-----------------------------
+// List Box
+//-----------------------------
+
+@import '../../globals/scss/colors';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/vars';
+@import '../list-box/list-box';
+
+@include exports('multi-select') {
+  .bx--multi-select.bx--combo-box > .bx--list-box__field {
+    padding: 0 1rem;
+  }
+
+  .bx--multi-select.bx--combo-box input[role='combobox'] {
+    padding: 0;
+    outline: none;
+  }
+}

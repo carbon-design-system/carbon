@@ -7,13 +7,13 @@ describe('Test interior left nav', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new InteriorLeftNav();
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new InteriorLeftNav(document.createTextNode(''));
-      }).to.throw(Error);
+      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
     });
   });
 
@@ -31,10 +31,9 @@ describe('Test interior left nav', function() {
     });
 
     it('should be called', function() {
-      const spy = sinon.spy(instance, 'hookListItemsEvents');
+      spyOn(instance, 'hookListItemsEvents');
       instance.hookListItemsEvents();
-      expect(spy).to.have.been.called;
-      spy.restore();
+      expect(instance.hookListItemsEvents).toHaveBeenCalled();
     });
 
     afterEach(function() {
@@ -59,7 +58,7 @@ describe('Test interior left nav', function() {
 
     it('Should have a default setting of false', function() {
       instance1 = new InteriorLeftNav(element);
-      expect(instance1.options.keepOpen).to.be.false;
+      expect(instance1.options.keepOpen).toBe(false);
       document.body.removeChild(container);
       instance1.release();
     });
@@ -68,7 +67,7 @@ describe('Test interior left nav', function() {
       instance2 = new InteriorLeftNav(element, {
         keepOpen: true,
       });
-      expect(instance2.options.keepOpen).to.be.true;
+      expect(instance2.options.keepOpen).toBe(true);
       document.body.removeChild(container);
       instance2.release();
     });
@@ -80,7 +79,7 @@ describe('Test interior left nav', function() {
       document.body.appendChild(container2);
       element = document.querySelector('[data-interior-left-nav]');
       instance3 = new InteriorLeftNav(element);
-      expect(instance3.keepOpen).to.be.true;
+      expect(instance3.keepOpen).toBe(true);
       document.body.removeChild(container2);
       instance3.release();
     });
@@ -100,7 +99,7 @@ describe('Test interior left nav', function() {
       }
 
       const expanded = document.querySelectorAll('.left-nav-list__item--expanded');
-      expect(expanded.length).to.equal(nested.length);
+      expect(expanded.length).toBe(nested.length);
     });
   });
 
@@ -119,10 +118,9 @@ describe('Test interior left nav', function() {
 
     it('should be called', function() {
       const item = document.querySelector(instance.options.selectorLeftNavListItem);
-      const spy = sinon.spy(instance, 'addActiveListItem');
+      spyOn(instance, 'addActiveListItem');
       instance.addActiveListItem(item);
-      expect(spy).to.have.been.called;
-      spy.restore();
+      expect(instance.addActiveListItem).toHaveBeenCalled();
     });
 
     afterEach(function() {
