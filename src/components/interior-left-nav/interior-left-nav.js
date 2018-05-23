@@ -31,7 +31,7 @@ class InteriorLeftNav extends mixin(createComponent, initComponentBySearch, hand
         didWarnAboutDeprecation,
         'Accessing the `interior-left-nav` component from the' +
           '`carbon-components` package is deprecated. Use the' +
-          '`carbon-addons-bluemix` package instead.'
+          '`carbon-addons-cloud` package instead.'
       );
       didWarnAboutDeprecation = true;
     }

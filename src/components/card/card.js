@@ -30,7 +30,7 @@ class Card extends mixin(createComponent, initComponentBySearch, handles) {
       warning(
         didWarnAboutDeprecation,
         'Accessing the `card` component from the `carbon-components` package ' +
-          'is deprecated. Use the `carbon-addons-bluemix` package instead.'
+          'is deprecated. Use the `carbon-addons-cloud` package instead.'
       );
       didWarnAboutDeprecation = true;
     }

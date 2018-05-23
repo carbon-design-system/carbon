@@ -14,7 +14,7 @@
 @include exports('modules') {
   @include deprecate(
     'Accessing the `module` component from the `carbon-components` package ' +
-      'is deprecated. Use the `carbon-addons-bluemix` package instead.'
+      'is deprecated. Use the `carbon-addons-cloud` package instead.'
   ) {
     .#{$prefix}--module {
       @include reset;

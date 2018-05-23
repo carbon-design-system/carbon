@@ -15,7 +15,7 @@
 @include exports('card') {
   @include deprecate(
     'Accessing the `card` component from the `carbon-components` package is ' +
-      'deprecated. Use the `carbon-addons-bluemix` package instead.'
+      'deprecated. Use the `carbon-addons-cloud` package instead.'
   ) {
     .#{$prefix}--card {
       @include reset;

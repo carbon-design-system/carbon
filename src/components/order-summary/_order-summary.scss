@@ -10,7 +10,7 @@
 @include exports('order-summary') {
   @include deprecate(
     'Accessing the `order-summary` component from the `carbon-components` ' +
-    'package is deprecated. Use the `carbon-addons-bluemix` package instead.'
+    'package is deprecated. Use the `carbon-addons-cloud` package instead.'
   ) {
     .#{$prefix}--order-summary {
       @include typescale('zeta');

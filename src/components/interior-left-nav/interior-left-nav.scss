@@ -13,8 +13,8 @@
 
 @include exports('interior-left-nav') {
   @include deprecate(
-    'Accessing the `interior-left-nav` component from the `carbon-components`' +
-      'package is deprecated. Use the `carbon-addons-bluemix` package instead.'
+    'Accessing the `interior-left-nav` component from the `carbon-components` ' +
+      'package is deprecated. Use the `carbon-addons-cloud` package instead.'
   ) {
     .#{$prefix}--interior-left-nav {
       @include reset;
