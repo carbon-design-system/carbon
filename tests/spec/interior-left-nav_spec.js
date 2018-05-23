@@ -1,6 +1,6 @@
 import InteriorLeftNav from '../../src/components/interior-left-nav/interior-left-nav';
 import InteriorLeftNavHtml from '../../src/components/interior-left-nav/interior-left-nav.html';
-import KeepOpen from '../../src/components/interior-left-nav/interior-left-nav-keep-open.html';
+import KeepOpen from '../../src/components/interior-left-nav/interior-left-nav--keep-open.html';
 
 describe('Test interior left nav', function() {
   describe('Constructor', function() {
