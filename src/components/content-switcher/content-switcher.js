@@ -74,6 +74,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
 
     selectorButtons.forEach(button => {
       if (button !== item) {
+        button.setAttribute('aria-selected', false);
         button.classList.toggle(this.options.classActive, false);
         [...button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => {
           element.setAttribute('hidden', '');
@@ -83,6 +84,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
     });
 
     item.classList.toggle(this.options.classActive, true);
+    item.setAttribute('aria-selected', true);
     [...item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => {
       element.removeAttribute('hidden');
       element.setAttribute('aria-hidden', 'false');
