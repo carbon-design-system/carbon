@@ -13,5 +13,12 @@ module.exports = {
         inline: true,
       },
     },
+    {
+      name: 'light',
+      label: 'Light',
+      context: {
+        light: true,
+      },
+    },
   ],
 };
