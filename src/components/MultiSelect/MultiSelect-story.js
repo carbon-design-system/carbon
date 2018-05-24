@@ -42,6 +42,23 @@ storiesOf('MultiSelect', module)
     )
   )
   .addWithInfo(
+    'light',
+    `
+    MultiSelect
+  `,
+    () => (
+      <div style={{ width: 300 }}>
+        <MultiSelect
+          light
+          label={defaultLabel}
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+        />
+      </div>
+    )
+  )
+  .addWithInfo(
     'inline',
     `
       Inline variant of a MultiSelect
@@ -114,6 +131,23 @@ storiesOf('MultiSelect', module)
     () => (
       <div style={{ width: 300 }}>
         <MultiSelect.Filterable
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+          placeholder={defaultPlaceholder}
+        />
+      </div>
+    )
+  )
+  .addWithInfo(
+    'filterable light',
+    `
+      Filterable version of our MultiSelect component
+    `,
+    () => (
+      <div style={{ width: 300 }}>
+        <MultiSelect.Filterable
+          light
           items={items}
           itemToString={item => (item ? item.text : '')}
           onChange={action('onChange')}

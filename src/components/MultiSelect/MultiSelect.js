@@ -58,6 +58,11 @@ export default class MultiSelect extends React.Component {
      * Specify 'inline' to create an inline multi-select.
      */
     type: PropTypes.oneOf(['default', 'inline']),
+
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -68,6 +73,7 @@ export default class MultiSelect extends React.Component {
     initialSelectedItems: [],
     sortItems: defaultSortItems,
     type: 'default',
+    light: false,
   };
 
   constructor(props) {
@@ -130,8 +136,11 @@ export default class MultiSelect extends React.Component {
       initialSelectedItems,
       sortItems,
       compareItems,
+      light,
     } = this.props;
-    const className = cx('bx--multi-select', containerClassName);
+    const className = cx('bx--multi-select', containerClassName, {
+      'bx--list-box--light': light,
+    });
     return (
       <Selection
         onChange={this.handleOnChange}

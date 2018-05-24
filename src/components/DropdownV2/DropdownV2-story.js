@@ -117,6 +117,23 @@ storiesOf('DropdownV2', module)
     )
   )
   .addWithInfo(
+    'light',
+    `
+    DropdownV2
+  `,
+    () => (
+      <div style={{ width: 300 }}>
+        <DropdownV2
+          light
+          label="Label"
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+        />
+      </div>
+    )
+  )
+  .addWithInfo(
     'skeleton',
     `
     Placeholder skeleton state to use when content is loading.

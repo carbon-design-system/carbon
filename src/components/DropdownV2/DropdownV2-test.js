@@ -39,6 +39,13 @@ describe('DropdownV2', () => {
     assertMenuOpen(wrapper, mockProps);
   });
 
+  it('should specify light version as expected', () => {
+    const wrapper = mount(<DropdownV2 {...mockProps} />);
+    expect(wrapper.props().light).toEqual(false);
+    wrapper.setProps({ light: true });
+    expect(wrapper.props().light).toEqual(true);
+  });
+
   it('should let the user select an option by clicking on the option node', () => {
     const wrapper = mount(<DropdownV2 {...mockProps} />);
     openMenu(wrapper);

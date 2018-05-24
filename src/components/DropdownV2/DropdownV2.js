@@ -59,12 +59,18 @@ export default class DropdownV2 extends React.Component {
      * In the case you want to control the dropdown selection entirely.
      */
     selectedItem: PropTypes.object,
+
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
     disabled: false,
     type: 'default',
     itemToString: defaultItemToString,
+    light: false,
   };
 
   handleOnChange = selectedItem => {
@@ -83,8 +89,11 @@ export default class DropdownV2 extends React.Component {
       type,
       initialSelectedItem,
       selectedItem,
+      light,
     } = this.props;
-    const className = cx('bx--dropdown-v2', containerClassName);
+    const className = cx('bx--dropdown', containerClassName, {
+      'bx--dropdown--light': light,
+    });
     return (
       <Downshift
         onChange={this.handleOnChange}
