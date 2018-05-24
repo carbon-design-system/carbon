@@ -104,11 +104,13 @@
     &:focus {
       outline: 1px solid transparent;
       background-color: $hover-row;
+      text-decoration: underline;
     }
 
     .#{$prefix}--overflow-menu-options__option--danger & {
       &:focus {
-        background-color: $support-01;
+        outline: 1px solid transparent;
+        text-decoration: underline;
       }
     }
   }
@@ -119,6 +121,8 @@
 
   .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
     background-color: $hover-row;
+    color: $inverse-01;
+    text-decoration: none;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger {

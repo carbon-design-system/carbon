@@ -14,8 +14,8 @@ dist
 # OSX
 .DS_Store
 
-# Debug
-npm-debug.log
+# Logs
+*.log
 
 # Editors
 project.sublime-project
