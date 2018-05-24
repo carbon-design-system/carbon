@@ -298,8 +298,8 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
   _formatDate = date => this.calendar.formatDate(date, this.calendar.config.dateFormat);
 
   release() {
-    if (this._rangeInput) {
-      this._rangeInput.remove();
+    if (this._rangeInput && this._rangeInput.parentNode) {
+      this._rangeInput.parentNode.removeChild(this._rangeInput);
     }
     if (this.calendar) {
       try {
