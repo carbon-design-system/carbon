@@ -105,6 +105,7 @@
       outline: 1px solid transparent;
       text-decoration: underline;
       background-color: $hover-row;
+      text-decoration: underline;
     }
 
     .#{$prefix}--overflow-menu-options__option--danger & {
@@ -122,6 +123,8 @@
   .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
     text-decoration: none;
     background-color: $hover-row;
+    color: $inverse-01;
+    text-decoration: none;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger {
