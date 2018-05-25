@@ -1,16 +1,19 @@
 <div class="bx--tooltip__label" aria-describedby="unique-tooltip">
   Tooltip Label
   <div tabindex="0" data-tooltip-trigger data-tooltip-target="#unique-tooltip" role="tooltip" class="bx--tooltip__trigger">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill-rule="evenodd">
-      <path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm0-2C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0z"/>
-      <path d="M14 10H9v2h2v4H9v2h7v-2h-2z"/>
-      <circle cx="12.5" cy="7.5" r="1.5"/>
+    <svg width="16" height="16" viewBox="0 0 16 16">
+      <g fill-rule="evenodd">
+        <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="nonzero" />
+        <path d="M8.5 7.007v3.991h2v1h-2V12h-1v-.002h-2v-1h2V7.007h-.995v-1h2v1H8.5z" fill-rule="nonzero" />
+        <circle cx="8" cy="4" r="1" />
+      </g>
     </svg>
   </div>
 </div>
 <div id="unique-tooltip" data-floating-menu-direction="bottom" class="bx--tooltip">
   <span class="bx--tooltip__caret"></span>
-  <p>This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed please use a modal instead.</p>
+  <p>This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed
+    please use a modal instead.</p>
   <div>
     <a href="#" class="bx--link">Learn More</a>
     <button class="bx--btn bx--btn--primary" type="button">Create</button>

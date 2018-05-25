@@ -78,6 +78,11 @@
     &:focus:disabled {
       color: $ui-05;
     }
+
+    &:hover > .#{$prefix}--btn__icon,
+    &:focus > .#{$prefix}--btn__icon {
+      fill: $inverse-01;
+    }
   }
 
   .#{$prefix}--btn--ghost {
