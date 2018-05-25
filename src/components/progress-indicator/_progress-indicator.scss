@@ -45,6 +45,7 @@
     height: 1.5rem;
     border-radius: 50%;
     margin-bottom: $spacing-xs;
+    fill: $brand-01;
   }
 
   .#{$prefix}--progress-label {
@@ -57,10 +58,6 @@
       stroke: $brand-01;
       stroke-width: $progress-indicator-stroke-width;
       fill: transparent;
-    }
-
-    circle:last-child {
-      fill: $brand-01;
     }
 
     .#{$prefix}--progress-label {
