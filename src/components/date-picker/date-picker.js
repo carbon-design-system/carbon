@@ -117,6 +117,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       const doc = this.element.ownerDocument;
       const rangeInput = doc.createElement('input');
       rangeInput.className = this.options.classVisuallyHidden;
+      rangeInput.setAttribute('aria-hidden', 'true');
       doc.body.appendChild(rangeInput);
       this._rangeInput = rangeInput;
 
@@ -297,6 +298,9 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
   _formatDate = date => this.calendar.formatDate(date, this.calendar.config.dateFormat);
 
   release() {
+    if (this._rangeInput && this._rangeInput.parentNode) {
+      this._rangeInput.parentNode.removeChild(this._rangeInput);
+    }
     if (this.calendar) {
       try {
         this.calendar.destroy();

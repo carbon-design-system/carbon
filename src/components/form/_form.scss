@@ -55,6 +55,7 @@
 
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);
+      display: block;
     }
   }
 
@@ -71,6 +72,7 @@
     overflow: hidden;
     font-weight: 600;
     line-height: 1.5;
+    display: none;
 
     &::before {
       content: '*';
