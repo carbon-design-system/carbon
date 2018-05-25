@@ -123,7 +123,6 @@
   .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
     text-decoration: none;
     background-color: $hover-row;
-    color: $inverse-01;
     text-decoration: none;
   }
 
@@ -131,8 +130,14 @@
     border-top: 1px solid $ui-03;
   }
 
-  .#{$prefix}--overflow-menu-options__option--danger:hover {
-    background-color: $support-01;
+  .#{$prefix}--overflow-menu-options__option--danger {
+    .bx--overflow-menu-options__btn {
+      &:hover,
+      &:focus {
+        color: $inverse-01;
+        background-color: $support-01;
+      }
+    }
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled:hover {
