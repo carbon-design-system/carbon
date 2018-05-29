@@ -5,23 +5,27 @@
     <div class="bx--modal-header">
       <p class="bx--modal-header__label bx--type-delta">Optional label</p>
       <p class="bx--modal-header__heading bx--type-beta">Modal heading</p>
-      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"{{#unless hasFooter}} data-modal-primary-focus{{/unless}}>
-        <svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" fill-rule="evenodd">
+      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" {{#unless hasFooter}} data-modal-primary-focus{{/unless}}>
+        <svg class="bx--modal-close__icon" width="16" height="16" viewBox="0 0 16 16">
           <title>Close Modal</title>
-          <path d="M9.8 8.6L8.4 10 5 6.4 1.4 10 0 8.6 3.6 5 .1 1.4 1.5 0 5 3.6 8.6 0 10 1.4 6.4 5z"></path>
+          <path d="M8.703 7.996l4.293 4.294-.706.706-4.294-4.293-4.293 4.293-.707-.706L7.29 7.996 2.996 3.703l.707-.707L7.996 7.29l4.294-4.294.706.707-4.293 4.293z"
+            fill-rule="nonzero" />
         </svg>
       </button>
     </div>
 
     <div class="bx--modal-content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue vitae tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla facilisi. Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
     </div>
 
     {{#if hasFooter}}
-      <div class="bx--modal-footer">
-        <button class="bx--btn {{classCloseButton}}" type="button" data-modal-close>Secondary button</button>
-        <button class="bx--btn {{classPrimaryButton}}" type="button" {{#if labelPrimaryButton}}aria-label="{{labelPrimaryButton}}"{{/if}} data-modal-primary-focus>Primary button</button>
-      </div>
+    <div class="bx--modal-footer">
+      <button class="bx--btn {{classCloseButton}}" type="button" data-modal-close>Secondary button</button>
+      <button class="bx--btn {{classPrimaryButton}}" type="button" {{#if labelPrimaryButton}}aria-label="{{labelPrimaryButton}}"
+        {{/if}} data-modal-primary-focus>Primary button</button>
+    </div>
     {{/if}}
   </div>
 </div>

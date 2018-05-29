@@ -41,7 +41,12 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
         this.atfHeight = aboveTheFold.getBoundingClientRect().height + tilePadding;
         this.element.style.maxHeight = `${this.atfHeight}px`;
       }
+
+      if (this.element.classList.contains(this.options.classExpandedTile)) {
+        this._setTileHeight();
+      }
     }
+
     this.element.addEventListener('click', evt => {
       const input = eventMatches(evt, this.options.selectorTileInput);
       if (!input) {
@@ -53,10 +58,12 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     });
     this.element.addEventListener('keydown', evt => {
       const input = this.element.querySelector(this.options.selectorTileInput);
-      if (evt.which === 13 || evt.which === 32) {
-        if (!isExpandable) {
-          this.element.classList.toggle(tileClass);
-          input.checked = !input.checked;
+      if (input) {
+        if (evt.which === 13 || evt.which === 32) {
+          if (!isExpandable) {
+            this.element.classList.toggle(tileClass);
+            input.checked = !input.checked;
+          }
         }
       }
     });

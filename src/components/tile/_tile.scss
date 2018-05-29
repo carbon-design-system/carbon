@@ -133,7 +133,7 @@
     transition: $transition--base $carbon--standard-easing;
 
     .#{$prefix}--tile__chevron svg {
-      transform: rotate(-180deg) translateY(4px);
+      transform: rotate(-180deg);
     }
 
     .#{$prefix}--tile-content__below-the-fold {

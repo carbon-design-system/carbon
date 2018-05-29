@@ -31,5 +31,12 @@ module.exports = {
         light: true,
       },
     },
+    {
+      name: 'inline',
+      label: 'Inline',
+      context: {
+        inline: true,
+      },
+    },
   ],
 };
