@@ -39,15 +39,3 @@ You can also include `<title>` for better accessibility to describe what the but
   </svg>
 </button>
 ```
-
-Be aware that only `--glyph` icons should be used with buttons.
-Here's an example using `carbon-icons.svg`.
-
-```html
-<button class="bx--btn bx--btn--secondary" type="button">
-  Secondary
-  <svg class="bx--btn__icon">
-    <use xlink:href="/carbon-icons/carbon-icons.svg#add--glyph"></use>
-  </svg>
-</button>
-```
