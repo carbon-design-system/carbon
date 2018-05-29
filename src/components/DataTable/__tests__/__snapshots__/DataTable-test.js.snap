@@ -896,14 +896,14 @@ exports[`DataTable should render 1`] = `
                 >
                   <Icon
                     className="bx--search-magnifier"
-                    description="search"
+                    description="Filter table"
                     fillRule="evenodd"
                     name="search--glyph"
                     role="img"
                   >
                     <svg
-                      alt="search"
-                      aria-label="search"
+                      alt="Filter table"
+                      aria-label="Filter table"
                       className="bx--search-magnifier"
                       fillRule="evenodd"
                       height="16"
@@ -913,7 +913,7 @@ exports[`DataTable should render 1`] = `
                       width="16"
                     >
                       <title>
-                        search
+                        Filter table
                       </title>
                       <path
                         d="M6 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm0-2C2.7 0 0 2.7 0 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm10 13.8L13.8 16l-3.6-3.6 2.2-2.2z"
@@ -944,14 +944,14 @@ exports[`DataTable should render 1`] = `
                     type="button"
                   >
                     <Icon
-                      description="close"
+                      description="Provide a description that will be used as the title"
                       fillRule="evenodd"
                       name="close--glyph"
                       role="img"
                     >
                       <svg
-                        alt="close"
-                        aria-label="close"
+                        alt="Provide a description that will be used as the title"
+                        aria-label="Provide a description that will be used as the title"
                         fillRule="evenodd"
                         height="16"
                         name="close--glyph"
@@ -960,7 +960,7 @@ exports[`DataTable should render 1`] = `
                         width="16"
                       >
                         <title>
-                          close
+                          Provide a description that will be used as the title
                         </title>
                         <path
                           d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3.5 10.1l-1.4 1.4L8 9.4l-2.1 2.1-1.4-1.4L6.6 8 4.5 5.9l1.4-1.4L8 6.6l2.1-2.1 1.4 1.4L9.4 8l2.1 2.1z"
