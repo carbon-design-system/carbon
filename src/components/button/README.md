@@ -18,6 +18,7 @@ Use these modifiers with `.bx--btn` class.
 |---------------------|-----------------------------------------------|
 | .bx--btn--primary   | Selector for applying primary button styles   |
 | .bx--btn--secondary | Selector for applying secondary button styles |
+| .bx--btn--tertiary  | Selector for applying tertiary button styles  |
 | .bx--btn--danger    | Selector for applying danger button styles    |
 | .bx--btn--sm        | Selector for applying small button styles     |
 

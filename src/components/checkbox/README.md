@@ -9,10 +9,9 @@
 
 #### Options
 
-| Option              | Default Selector                               | Description                                                        |
-|---------------------|------------------------------------------------|--------------------------------------------------------------------|
-| selectorInit        | .bx--checkbox                        | The CSS selector to find checkbox          
- |
+| Option              | Default Selector                               | Description                                             |
+|---------------------|------------------------------------------------|--|
+| selectorInit        | .bx--checkbox                        | The CSS selector to find checkbox  |
 
 ### FAQ
 
