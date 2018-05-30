@@ -52,16 +52,16 @@
   // Checkmark
   .#{$prefix}--checkbox-label::after {
     content: '';
-    width: 10px;
-    height: 5px;
+    width: 9px;
+    height: 4px;
     background: none;
-    border-left: 2px solid $inverse-01;
-    border-bottom: 2px solid $inverse-01;
+    border-left: 1px solid $inverse-01;
+    border-bottom: 1px solid $inverse-01;
     transform: scale(0) rotate(-45deg);
     position: absolute;
-    left: rem(3px);
+    left: rem(4px);
     top: 50%;
-    margin-top: rem(-5px);
+    margin-top: rem(-4px);
   }
 
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
@@ -93,10 +93,11 @@
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     transform: scale(1) rotate(0deg);
     border-left: 0 solid $inverse-01;
-    border-bottom: 2px solid $inverse-01;
+    border-bottom: 1px solid $inverse-01;
     opacity: 1;
     width: rem(12px);
-    margin-top: rem(-6px);
+    margin-top: rem(-5px);
+    left: rem(3px);
   }
 
   //Disabled
