@@ -160,5 +160,50 @@ describe('Tile', () => {
       wrapper.simulate('click');
       expect(wrapper.state().expanded).toEqual(true);
     });
+
+    it('displays the default tooltip for the chevron depending on state', () => {
+      const defaultExpandedIconText = 'Collapse';
+      const defaultCollapsedIconText = 'Expand';
+
+      // Force the expanded tile to be collapsed.
+      wrapper.setState({ expanded: false });
+      const collapsedDescription = wrapper
+        .find('[name="chevron--down"]')
+        .getElements()[0].props.description;
+      expect(collapsedDescription).toEqual(defaultCollapsedIconText);
+
+      // click on the item to expand it.
+      wrapper.simulate('click');
+
+      // Validate the description change
+      const expandedDescription = wrapper
+        .find('[name="chevron--down"]')
+        .getElements()[0].props.description;
+      expect(expandedDescription).toEqual(defaultExpandedIconText);
+    });
+
+    it('displays the custom tooltips for the chevron depending on state', () => {
+      const tileExpandedIconText = 'Click To Collapse';
+      const tileCollapsedIconText = 'Click To Expand';
+
+      // Force the custom icon text
+      wrapper.setProps({ tileExpandedIconText, tileCollapsedIconText });
+
+      // Force the expanded tile to be collapsed.
+      wrapper.setState({ expanded: false });
+      const collapsedDescription = wrapper
+        .find('[name="chevron--down"]')
+        .getElements()[0].props.description;
+      expect(collapsedDescription).toEqual(tileCollapsedIconText);
+
+      // click on the item to expand it.
+      wrapper.simulate('click');
+
+      // Validate the description change
+      const expandedDescription = wrapper
+        .find('[name="chevron--down"]')
+        .getElements()[0].props.description;
+      expect(expandedDescription).toEqual(tileExpandedIconText);
+    });
   });
 });
