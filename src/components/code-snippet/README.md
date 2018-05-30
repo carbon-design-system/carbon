@@ -15,6 +15,7 @@ Use these modifiers with `.bx--snippet` class.
 
 | Selector                         | Description                        |
 |----------------------------------|------------------------------------|
-| .bx--snippet--single             | Styles for multiple lines of code  |
-| .bx--snippet--multi              | Styles for single lines of code    |
-| .bx--snippet--inline             | Styles for code inline inside text  |
+| .bx--snippet--single             | Selector for multiple lines of code  |
+| .bx--snippet--multi              | Selector for single lines of code    |
+| .bx--snippet--inline             | Selector for inline code inside text  |
+| .bx--snippet--light              | Selector for inline code inside text with a light background. Can only be used with .bx--snippet-inline selector  |
