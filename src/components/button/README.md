@@ -18,6 +18,7 @@ Use these modifiers with `.bx--btn` class.
 |---------------------|-----------------------------------------------|
 | .bx--btn--primary   | Selector for applying primary button styles   |
 | .bx--btn--secondary | Selector for applying secondary button styles |
+| .bx--btn--tertiary  | Selector for applying tertiary button styles  |
 | .bx--btn--danger    | Selector for applying danger button styles    |
 | .bx--btn--sm        | Selector for applying small button styles     |
 
@@ -36,18 +37,6 @@ You can also include `<title>` for better accessibility to describe what the but
   <svg class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" fill-rule="evenodd">
     <title>add a new connection to your instance</title>
     <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm4 9H9v3H7V9H4V7h3V4h2v3h3v2z"></path>
-  </svg>
-</button>
-```
-
-Be aware that only `--glyph` icons should be used with buttons.
-Here's an example using `carbon-icons.svg`.
-
-```html
-<button class="bx--btn bx--btn--secondary" type="button">
-  Secondary
-  <svg class="bx--btn__icon">
-    <use xlink:href="/carbon-icons/carbon-icons.svg#add--glyph"></use>
   </svg>
 </button>
 ```
