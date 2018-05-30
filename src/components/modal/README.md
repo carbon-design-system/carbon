@@ -1,3 +1,13 @@
+### SCSS
+
+#### Modifiers
+
+Use these modifiers with `.bx--modal` class.
+
+| Name                    | Description                                           |
+|-------------------------|-------------------------------------------------------|
+| .bx--modal--danger | Selector for applying danger modal styles |
+
 ### JavaScript
 
 #### Public Methods

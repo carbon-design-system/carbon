@@ -123,6 +123,10 @@
       color: $inverse-01;
     }
 
+    &:active {
+      color: $support-01;
+    }
+
     &:hover:disabled,
     &:focus:disabled {
       color: $support-01;
