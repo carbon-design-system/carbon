@@ -131,7 +131,7 @@
     "rollup-plugin-uglify": "^2.0.0",
     "sass-loader": "^6.0.0",
     "scss-to-json": "1.1.0",
-    "semantic-release": "^6.3.2",
+    "semantic-release": "^15.5.0",
     "style-loader": "^0.20.0",
     "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0",
@@ -168,7 +168,7 @@
     "test": "gulp test",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "license": "Apache-2",
   "config": {
