@@ -4,10 +4,10 @@ module.exports = {
   variants: [
     {
       name: 'default',
-      label: 'Text Area',
+      label: 'Slider',
       notes: `
-        Text areas enable the user to interact with and input data. A text area is used when you
-        anticipate the user to input more than 1 sentence.
+        A slider enables the user to specify a numeric value which must be no less than a given value, 
+        and no more than another given value. 
       `,
     },
     {
