@@ -36,7 +36,6 @@ module.exports = {
       `,
       context: {
         variant: 'inline',
-        light: 'false',
       },
     },
     {
