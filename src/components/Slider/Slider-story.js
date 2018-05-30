@@ -27,6 +27,26 @@ storiesOf('Slider', module)
     )
   )
   .addWithInfo(
+    'light',
+    `
+      Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
+    `,
+    () => (
+      <div style={{ marginTop: '2rem' }}>
+        <Slider
+          light
+          id="slider"
+          value={50}
+          min={0}
+          max={100}
+          step={1}
+          labelText="Slider Label"
+          onChange={mock}
+        />
+      </div>
+    )
+  )
+  .addWithInfo(
     'without TextInput',
     `
       This example shows the Slider without its accompanying TextInput. This is an exception and the majority of the time the default state should be used.

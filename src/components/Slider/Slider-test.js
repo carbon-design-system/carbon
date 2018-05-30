@@ -40,6 +40,12 @@ describe('Slider', () => {
       wrapper.setProps({ value: 55 });
       expect(wrapper.props().value).toEqual(55);
     });
+
+    it('should specify light version as expected', () => {
+      expect(wrapper.props().light).toEqual(false);
+      wrapper.setProps({ light: true });
+      expect(wrapper.props().light).toEqual(true);
+    });
   });
 
   describe('Supporting label', () => {

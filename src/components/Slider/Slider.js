@@ -100,6 +100,11 @@ export default class Slider extends PureComponent {
      * The `ariaLabel` for the `<input>`.
      */
     ariaLabelInput: PropTypes.string,
+
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -111,6 +116,7 @@ export default class Slider extends PureComponent {
     maxLabel: '',
     inputType: 'number',
     ariaLabelInput: 'Slider number input',
+    light: false,
   };
 
   state = {
@@ -307,6 +313,7 @@ export default class Slider extends PureComponent {
       required,
       disabled,
       name,
+      light,
       ...other
     } = this.props;
 
@@ -317,6 +324,10 @@ export default class Slider extends PureComponent {
       { 'bx--slider--disabled': disabled },
       className
     );
+
+    const inputClasses = classNames('bx-slider-text-input', {
+      'bx--text-input--light': light,
+    });
 
     const filledTrackStyle = {
       transform: `translate(0%, -50%) scaleX(${left / 100})`,
@@ -385,7 +396,7 @@ export default class Slider extends PureComponent {
             <TextInput
               type={inputType}
               id="input-for-slider"
-              className="bx-slider-text-input"
+              className={inputClasses}
               value={value}
               onChange={this.handleChange}
               labelText=""
