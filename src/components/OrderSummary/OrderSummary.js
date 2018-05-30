@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import warning from 'warning';
 import Link from '../Link';
+
+let didWarnAboutDeprecation = false;
 
 export class OrderSummary extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
   };
+
+  constructor(props) {
+    super(props);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'Accessing the `OrderSummary` component from the ' +
+          '`carbon-components-react` package is deprecated. Use the ' +
+          '`carbon-addons-cloud-react` package instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
+  }
 
   render() {
     const { children, className, ...other } = this.props;

@@ -106,6 +106,9 @@
       "jest": true,
       "jasmine": true
     },
+    "globals": {
+      "__DEV__": true
+    },
     "settings": {
       "jsdoc": {
         "tagNamePreference": {
@@ -128,7 +131,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
-    "warning": "3.0.0",
+    "warning": "^3.0.0",
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {
@@ -146,6 +149,7 @@
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^8.0.2",
     "babel-jest": "^22.1.0",
+    "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "bowser": "^1.6.1",
     "carbon-components": "^8.20.0",
@@ -198,7 +202,15 @@
     "presets": [
       "./scripts/env",
       "@babel/preset-react",
-      ["@babel/preset-stage-1", { "decoratorsLegacy": true }]
+      [
+        "@babel/preset-stage-1",
+        {
+          "decoratorsLegacy": true
+        }
+      ]
+    ],
+    "plugins": [
+      "dev-expression"
     ]
   },
   "prettier": {

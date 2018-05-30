@@ -138,7 +138,7 @@ describe('CardContent', () => {
         'Specified a custom icon while the icon description is provided.',
         "It'll be ignored as an icon description is only used for carbon-icons sprite.",
       ].join('\n');
-      expect(warning.mock.calls).toEqual([[false, message]]);
+      expect(warning.mock.calls[1]).toEqual([false, message]);
     });
   });
 

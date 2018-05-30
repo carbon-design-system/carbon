@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import warning from 'warning';
+
+let didWarnAboutDeprecation = false;
 
 const propTypes = {
   children: PropTypes.node,
@@ -28,6 +31,16 @@ const moduleBodydefaultProps = {
 };
 
 const Module = ({ children, className, size, ...other }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'Accessing the `Module` component from the ' +
+        '`carbon-components-react` package is deprecated. Use the ' +
+        '`carbon-addons-cloud-react` package instead.'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   const wrapperClasses = classNames(
     `bx--module bx--module--${size}`,
     className

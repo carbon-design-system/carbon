@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import warning from 'warning';
 import InteriorLeftNavItem from '../InteriorLeftNavItem';
 import Icon from '../Icon';
+
+let didWarnAboutDeprecation = false;
 
 export default class InteriorLeftNavList extends Component {
   static propTypes = {
@@ -30,9 +33,21 @@ export default class InteriorLeftNavList extends Component {
     isExpanded: false,
   };
 
-  state = {
-    open: this.props.open,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: props.open,
+    };
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'Accessing the `InteriorLeftNavList` component from the ' +
+          '`carbon-components-react` package is deprecated. Use the ' +
+          '`carbon-addons-cloud-react` package instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
+  }
 
   toggle = evt => {
     if (evt.which === 13 || evt.which === 32 || evt.type === 'click') {

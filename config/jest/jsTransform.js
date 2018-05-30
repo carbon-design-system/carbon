@@ -19,7 +19,7 @@ const babelOptions = {
   ],
   // Adding in here otherwise Jest complains about no plugin for class
   // properties
-  plugins: ['@babel/plugin-proposal-class-properties'],
+  plugins: ['@babel/plugin-proposal-class-properties', 'dev-expression'],
 };
 
 module.exports = createTransformer(babelOptions);

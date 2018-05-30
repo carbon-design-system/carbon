@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import window from 'window-or-global';
-
+import warning from 'warning';
 import InteriorLeftNavList from '../InteriorLeftNavList';
 import InteriorLeftNavItem from '../InteriorLeftNavItem';
 import Icon from '../Icon';
+
+let didWarnAboutDeprecation = false;
 
 export default class InteriorLeftNav extends Component {
   static propTypes = {
@@ -21,11 +23,23 @@ export default class InteriorLeftNav extends Component {
     open: true,
   };
 
-  state = {
-    activeHref:
-      this.props.activeHref || (window.location && window.location.pathname),
-    open: this.props.open !== undefined ? this.props.open : true,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeHref:
+        props.activeHref || (window.location && window.location.pathname),
+      open: props.open !== undefined ? props.open : true,
+    };
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'Accessing the `InteriorLeftNav` component from the ' +
+          '`carbon-components-react` package is deprecated. Use the ' +
+          '`carbon-addons-cloud-react` package instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
+  }
 
   componentWillReceiveProps = nextProps => {
     if (nextProps.activeHref) {

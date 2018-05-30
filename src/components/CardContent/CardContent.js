@@ -1,8 +1,10 @@
-import warning from 'warning';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { isValidElement } from 'react';
-import classNames from 'classnames';
+import warning from 'warning';
 import Icon from '../Icon';
+
+let didWarnAboutDeprecation = false;
 
 const CardContent = ({
   className,
@@ -14,6 +16,15 @@ const CardContent = ({
   iconDescription,
   ...other
 }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'Accessing the `CardContent` component from the ' +
+        '`carbon-components-react` package is deprecated. Use the ' +
+        '`carbon-addons-cloud-react` package instead.'
+    );
+    didWarnAboutDeprecation = true;
+  }
   const cardContentClasses = classNames({
     'bx--card__card-overview': true,
     [className]: className,

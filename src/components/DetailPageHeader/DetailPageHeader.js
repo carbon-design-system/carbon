@@ -7,6 +7,9 @@ import Breadcrumb from '../Breadcrumb';
 import Tabs from '../Tabs';
 import OverflowMenu from '../OverflowMenu';
 import Icon from '../Icon';
+import warning from 'warning';
+
+let didWarnAboutDeprecation = false;
 
 export default class DetailPageHeader extends Component {
   static propTypes = {
@@ -28,11 +31,24 @@ export default class DetailPageHeader extends Component {
     hasTabs: false,
   };
 
-  state = {
-    isScrolled: this.props.isScrolled || false,
-    isScrollingDownward: this.props.isScrollingDownward || false,
-    lastPosition: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isScrolled: props.isScrolled || false,
+      isScrollingDownward: props.isScrollingDownward || false,
+      lastPosition: 0,
+    };
+
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'Accessing the `DetailPageHeader` component from the ' +
+          '`carbon-components-react` package is deprecated. Use the ' +
+          '`carbon-addons-cloud-react` package instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
+  }
 
   componentDidMount() {
     this._debouncedScroll = debounce(this.handleScroll, 25);

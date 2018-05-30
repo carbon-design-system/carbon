@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
+import warning from 'warning';
+
+let didWarnAboutDeprecation = false;
 
 const CardActionItem = ({
   className,
@@ -11,6 +14,15 @@ const CardActionItem = ({
   description,
   ...other
 }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'Accessing the `CardActionItem` component from the ' +
+        '`carbon-components-react` package is deprecated. Use the ' +
+        '`carbon-addons-cloud-react` package instead.'
+    );
+    didWarnAboutDeprecation = true;
+  }
   const cardActionItemClasses = classNames({
     'bx--app-actions__button': true,
     [className]: className,

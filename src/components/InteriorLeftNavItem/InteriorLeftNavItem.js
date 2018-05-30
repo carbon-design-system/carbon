@@ -2,6 +2,9 @@ import window from 'window-or-global';
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import warning from 'warning';
+
+let didWarnAboutDeprecation = false;
 
 const newChild = (children, tabIndex) => {
   const child = React.Children.only(children);
@@ -19,6 +22,16 @@ const InteriorLeftNavItem = ({
   activeHref,
   ...other
 }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'Accessing the `InteriorLeftNavItem` component from the ' +
+        '`carbon-components-react` package is deprecated. Use the ' +
+        '`carbon-addons-cloud-react` package instead.'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   const childHref =
     children.props.href === undefined ? children.props.to : children.props.href;
   const activePath =
