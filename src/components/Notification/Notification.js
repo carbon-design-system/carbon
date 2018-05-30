@@ -133,7 +133,7 @@ export class ToastNotification extends Component {
 
   useIconName = kindProp => {
     const isSuccess = kindProp === 'success';
-    return isSuccess ? 'checkmark--glyph' : `${kindProp}--glyph`;
+    return isSuccess ? 'checkmark--solid' : `${kindProp}--solid`;
   };
 
   render() {
@@ -214,7 +214,7 @@ export class InlineNotification extends Component {
 
   useIconName = kindProp => {
     const isSuccess = kindProp === 'success';
-    return isSuccess ? 'checkmark--glyph' : `${kindProp}--glyph`;
+    return isSuccess ? 'checkmark--solid' : `${kindProp}--solid`;
   };
 
   render() {
@@ -301,7 +301,7 @@ export default class Notification extends Component {
 
   useIconName = kindProp => {
     const isSuccess = kindProp === 'success';
-    return isSuccess ? 'checkmark--glyph' : `${kindProp}--glyph`;
+    return isSuccess ? 'checkmark--solid' : `${kindProp}--solid`;
   };
 
   render() {

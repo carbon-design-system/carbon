@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '../Button';
 
 const TableBatchAction = props => (
-  <Button small kind="ghost" icon="add--glyph" {...props} />
+  <Button small kind="ghost" icon="add--solid" {...props} />
 );
 
 TableBatchAction.propTypes = {

@@ -35,7 +35,7 @@ storiesOf('Icon', module)
     () => (
       <div>
         <Icon name="icon--add" {...props} />
-        <Icon name="add--glyph" {...props} />
+        <Icon name="add--solid" {...props} />
         <Icon name="add--outline" {...props} />
       </div>
     )

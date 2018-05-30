@@ -107,9 +107,9 @@ describe('Search', () => {
       });
 
       describe('icons', () => {
-        it('renders "search--glyph" icon', () => {
+        it('renders "search" icon', () => {
           const icons = wrapper.find(Icon);
-          expect(icons.at(0).props().name).toEqual('search--glyph');
+          expect(icons.at(0).props().name).toEqual('search');
         });
 
         it('renders four Icons', () => {
@@ -118,9 +118,9 @@ describe('Search', () => {
           expect(icons.length).toEqual(4);
         });
 
-        it('should use "filter--glyph" icon for sort button', () => {
+        it('should use "filter" icon for sort button', () => {
           const icon = wrapper.find(Icon).at(2);
-          expect(icon.props().name).toEqual('filter--glyph');
+          expect(icon.props().name).toEqual('filter');
         });
 
         it('should use "list" icon for toggle button', () => {
@@ -145,7 +145,7 @@ describe('Search', () => {
 
       it('renders correct search icon', () => {
         const icons = small.find(Icon);
-        expect(icons.at(0).props().name).toEqual('search--glyph');
+        expect(icons.at(0).props().name).toEqual('search');
       });
 
       it('should have the expected small class', () => {

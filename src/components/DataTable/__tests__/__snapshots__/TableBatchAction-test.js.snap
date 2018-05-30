@@ -8,7 +8,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
   <Button
     className="custom-class"
     disabled={false}
-    icon="add--glyph"
+    icon="add--solid"
     iconDescription="Add"
     kind="ghost"
     small={true}
@@ -25,7 +25,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
         className="bx--btn__icon"
         description="Add"
         fillRule="evenodd"
-        name="add--glyph"
+        name="add--solid"
         role="img"
       >
         <svg
@@ -34,7 +34,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
           className="bx--btn__icon"
           fillRule="evenodd"
           height="16"
-          name="add--glyph"
+          name="add--solid"
           role="img"
           viewBox="0 0 16 16"
           width="16"
@@ -43,7 +43,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
             Add
           </title>
           <path
-            d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm4 9H9v3H7V9H4V7h3V4h2v3h3v2z"
+            d="M7.5 7.5H4v1h3.5V12h1V8.5H12v-1H8.5V4h-1v3.5zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
             key="key0"
           />
         </svg>

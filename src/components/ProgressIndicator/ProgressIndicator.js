@@ -14,38 +14,33 @@ export const ProgressStep = ({ ...props }) => {
   });
 
   const currentSvg = current && (
-    <g>
-      <circle
-        stroke="#3d70b2"
-        strokeWidth="5"
-        fill="transparent"
-        cx="12"
-        cy="12"
-        r="12"
-      />
-      <circle fill="#3d70b2" cx="12" cy="12" r="6" />
-    </g>
+    <svg>
+      <circle cx="12" cy="12" r="12" />
+      <circle cx="12" cy="12" r="6" />
+      <title>{description}</title>
+    </svg>
   );
 
   const completeSvg = complete && (
-    <g>
-      <circle cx="12" cy="12" r="12" />
-      <polygon points="10.3 13.6 7.7 11 6.3 12.4 10.3 16.4 17.8 9 16.4 7.6" />
-    </g>
+    <svg width="16" height="16" viewBox="0 0 16 16">
+      <title>{description}</title>
+      <g fill-rule="nonzero">
+        <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+        <path d="M11.646 5.146l.708.708-5.604 5.603-3.104-3.103.708-.708 2.396 2.397z" />
+      </g>
+    </svg>
   );
 
   const incompleteSvg = !complete && (
-    <g>
+    <svg>
+      <title>{description}</title>
       <circle cx="12" cy="12" r="12" />
-    </g>
+    </svg>
   );
 
   return (
     <li className={classes}>
-      <svg>
-        <title>{description}</title>
-        {currentSvg || completeSvg || incompleteSvg}
-      </svg>
+      {currentSvg || completeSvg || incompleteSvg}
       <p className="bx--progress-label">{label}</p>
       <span className="bx--progress-line" />
     </li>

@@ -127,7 +127,7 @@ exports[`DropdownV2 should render 1`] = `
                       Open menu
                     </title>
                     <path
-                      d="M10 0L5 5 0 0z"
+                      d="M0 0l5 4.998L10 0z"
                       key="key0"
                     />
                   </svg>

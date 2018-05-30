@@ -29,7 +29,7 @@ exports[`ListBoxMenuIcon should render 1`] = `
           Close menu
         </title>
         <path
-          d="M10 0L5 5 0 0z"
+          d="M0 0l5 4.998L10 0z"
           key="key0"
         />
       </svg>
@@ -67,7 +67,7 @@ exports[`ListBoxMenuIcon should render 2`] = `
           Open menu
         </title>
         <path
-          d="M10 0L5 5 0 0z"
+          d="M0 0l5 4.998L10 0z"
           key="key0"
         />
       </svg>

@@ -140,7 +140,7 @@ export class Filename extends Component {
         <Icon
           description={iconDescription}
           className="bx--file-close"
-          name="close--glyph"
+          name="close--solid"
           style={style}
           {...other}
         />
@@ -150,7 +150,7 @@ export class Filename extends Component {
         <Icon
           description={iconDescription}
           className="bx--file-complete"
-          name="checkmark--glyph"
+          name="checkmark--solid"
           style={style}
           {...other}
         />

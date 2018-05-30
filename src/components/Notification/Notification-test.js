@@ -183,22 +183,22 @@ describe('InlineNotification', () => {
 
     it('renders success notification with matching kind and <icon name=""> values', () => {
       inline.setProps({ kind: 'success' });
-      expect(inline.find(Icon).some('[name="checkmark--glyph"]')).toBe(true);
+      expect(inline.find(Icon).some('[name="checkmark--solid"]')).toBe(true);
     });
 
     it('renders error notification with matching kind and <icon name=""> values', () => {
       inline.setProps({ kind: 'error' });
-      expect(inline.find(Icon).some('[name="error--glyph"]')).toBe(true);
+      expect(inline.find(Icon).some('[name="error--solid"]')).toBe(true);
     });
 
     it('renders warning notification with matching kind and <icon name=""> values', () => {
       inline.setProps({ kind: 'warning' });
-      expect(inline.find(Icon).some('[name="warning--glyph"]')).toBe(true);
+      expect(inline.find(Icon).some('[name="warning--solid"]')).toBe(true);
     });
 
     it('renders info notification with matching kind and <icon name=""> values', () => {
       inline.setProps({ kind: 'info' });
-      expect(inline.find(Icon).some('[name="info--glyph"]')).toBe(true);
+      expect(inline.find(Icon).some('[name="info--solid"]')).toBe(true);
     });
 
     it('renders HTML for inline notifications when caption does not exist', () => {
@@ -293,24 +293,24 @@ describe('[Deprecated]: Notification', () => {
         expect(inline.length).toEqual(1);
       });
 
-      it('renders checkmark--glyph icon for success inline notification', () => {
-        const icon = inline.find('[name="checkmark--glyph"]');
-        expect(icon.props().name).toEqual('checkmark--glyph');
+      it('renders checkmark--solid icon for success inline notification', () => {
+        const icon = inline.find('[name="checkmark--solid"]');
+        expect(icon.props().name).toEqual('checkmark--solid');
       });
 
       it('renders error notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'error' });
-        expect(inline.find(Icon).some('[name="error--glyph"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="error--solid"]')).toBe(true);
       });
 
       it('renders warning notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'warning' });
-        expect(inline.find(Icon).some('[name="warning--glyph"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="warning--solid"]')).toBe(true);
       });
 
       it('renders info notification with matching kind and <icon name=""> values', () => {
         inline.setProps({ kind: 'info' });
-        expect(inline.find(Icon).some('[name="info--glyph"]')).toBe(true);
+        expect(inline.find(Icon).some('[name="info--solid"]')).toBe(true);
       });
 
       it('renders HTML for toast notifications when caption exists', () => {

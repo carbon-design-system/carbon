@@ -77,7 +77,7 @@ export default class ToolbarSearch extends Component {
             className="bx--toolbar-search__btn"
             onClick={this.expandSearch}>
             <Icon
-              name="search--glyph"
+              name="search"
               description="search"
               className="bx--search-magnifier"
             />

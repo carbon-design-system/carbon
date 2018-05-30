@@ -59,7 +59,7 @@ TooltipSimple.propTypes = {
 TooltipSimple.defaultProps = {
   position: 'top',
   showIcon: true,
-  iconName: 'info--glyph',
+  iconName: 'info--solid',
   iconDescription: 'tooltip',
   text: 'Provide text',
 };

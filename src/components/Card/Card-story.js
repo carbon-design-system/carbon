@@ -154,12 +154,12 @@ class ControlledCard extends Component {
           <CardStatus status={this.state.status} />
           <CardActions>
             <CardActionItem
-              iconName="restart--glyph"
+              iconName="restart"
               onClick={this.restartApp}
               description="Restart App"
             />
             <CardActionItem
-              iconName="launch--glyph"
+              iconName="launch"
               onClick={this.goToApp}
               description="Go To App"
             />

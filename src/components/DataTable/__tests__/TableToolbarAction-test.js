@@ -7,7 +7,7 @@ describe('DataTable.TableToolbarAction', () => {
     const wrapper = mount(
       <TableToolbarAction
         className="custom-class"
-        iconName="add--glyph"
+        iconName="add--solid"
         iconDescription="Add"
       />
     );

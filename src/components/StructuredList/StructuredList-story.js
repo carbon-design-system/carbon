@@ -78,7 +78,7 @@ storiesOf('StructuredList', module)
             <StructuredListCell>
               <Icon
                 className="bx--structured-list-svg"
-                name="checkmark--glyph"
+                name="checkmark--solid"
                 description="select an option"
               />
             </StructuredListCell>
@@ -101,7 +101,7 @@ storiesOf('StructuredList', module)
             <StructuredListCell>
               <Icon
                 className="bx--structured-list-svg"
-                name="checkmark--glyph"
+                name="checkmark--solid"
                 description="select an option"
               />
             </StructuredListCell>

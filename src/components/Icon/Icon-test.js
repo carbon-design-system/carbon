@@ -12,7 +12,7 @@ describe('Icon', () => {
   describe('Renders as expected', () => {
     const props = {
       className: 'extra-class',
-      name: 'search--glyph',
+      name: 'search',
       width: '20',
       height: '20',
       description: 'close the thing',
@@ -104,12 +104,12 @@ describe('Icon', () => {
 
   describe('isPrefixed', () => {
     it('returns true when given a name with icon-- prefix', () => {
-      const prefixed = isPrefixed('icon--search--glyph');
+      const prefixed = isPrefixed('icon--search');
       expect(prefixed).toBe(true);
     });
 
     it('returns false when given a name without icon-- prefix', () => {
-      const prefixed = isPrefixed('search--glyph');
+      const prefixed = isPrefixed('search');
       expect(prefixed).toBe(false);
     });
   });

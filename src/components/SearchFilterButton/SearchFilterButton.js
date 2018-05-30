@@ -11,11 +11,7 @@ const SearchFilterButton = ({ labelText, ...other }) => (
     type="button"
     aria-label={labelText}
     {...other}>
-    <Icon
-      name="filter--glyph"
-      description="filter"
-      className="bx--search-filter"
-    />
+    <Icon name="filter" description="filter" className="bx--search-filter" />
   </button>
 );
 

@@ -6,7 +6,7 @@ import { mount, shallow } from 'enzyme';
 describe('Filename', () => {
   const mountWrapper = mount(<Filename name={'trees.jpg'} />);
 
-  describe('click on edit icon (close--glyph)', () => {
+  describe('click on edit icon (close--solid)', () => {
     it('should have a click event', () => {
       const onClick = jest.fn();
       mountWrapper.setProps({ onClick, status: 'edit' });

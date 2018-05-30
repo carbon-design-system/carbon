@@ -205,7 +205,7 @@ export class SelectableTile extends Component {
           checked={this.state.selected}
         />
         <div className="bx--tile__checkmark">
-          <Icon name="checkmark--glyph" description="Tile checkmark" />
+          <Icon name="checkmark--solid" description="Tile checkmark" />
         </div>
         <div className="bx--tile-content">{children}</div>
       </label>
