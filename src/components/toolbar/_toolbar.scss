@@ -41,7 +41,7 @@ $css--helpers: true;
 
     .#{$prefix}--search-magnifier {
       fill: $text-02;
-      transform: scale(1.3);
+      transform: scale(1.15);
       transition: all 175ms $carbon--standard-easing;
       top: rem(8px);
       left: rem(6px);
