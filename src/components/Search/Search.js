@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
-import SearchFilterButton from '../SearchFilterButton';
-import SearchLayoutButton from '../SearchLayoutButton';
 
 export default class Search extends Component {
   static propTypes = {
@@ -14,8 +12,6 @@ export default class Search extends Component {
     placeHolderText: PropTypes.string,
     labelText: PropTypes.node.isRequired,
     id: PropTypes.string,
-    searchButtonLabelText: PropTypes.string,
-    layoutButtonLabelText: PropTypes.string,
     closeButtonLabelText: PropTypes.string,
     /**
      * `true` to use the light version.
@@ -70,8 +66,6 @@ export default class Search extends Component {
           .substr(2)}`),
       placeHolderText,
       labelText,
-      searchButtonLabelText,
-      layoutButtonLabelText,
       closeButtonLabelText,
       small,
       children,
@@ -82,7 +76,7 @@ export default class Search extends Component {
     const { hasContent } = this.state;
 
     const searchClasses = classNames({
-      'bx--search bx--search-with-options': true,
+      'bx--search': true,
       'bx--search--lg': !small,
       'bx--search--sm': small,
       'bx--search--light': light,
@@ -93,8 +87,6 @@ export default class Search extends Component {
       'bx--search-close': true,
       'bx--search-close--hidden': !hasContent,
     });
-
-    const renderButtons = !children && !small;
 
     return (
       <div className={searchClasses} role="search">
@@ -125,12 +117,6 @@ export default class Search extends Component {
           <Icon name="close--solid" description={closeButtonLabelText} />
         </button>
         {children}
-        {renderButtons && (
-          <SearchFilterButton labelText={searchButtonLabelText} />
-        )}
-        {renderButtons && (
-          <SearchLayoutButton labelText={layoutButtonLabelText} />
-        )}
       </div>
     );
   }

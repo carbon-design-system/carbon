@@ -21,7 +21,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       type="text"
     >
       <div
-        className="bx--search bx--search-with-options bx--search--sm bx--search--light custom-class"
+        className="bx--search bx--search--sm bx--search--light custom-class"
         role="search"
       >
         <Icon

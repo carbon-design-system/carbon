@@ -892,7 +892,7 @@ exports[`DataTable should render 1`] = `
                 type="text"
               >
                 <div
-                  className="bx--search bx--search-with-options bx--search--sm bx--search--light"
+                  className="bx--search bx--search--sm bx--search--light"
                   role="search"
                 >
                   <Icon

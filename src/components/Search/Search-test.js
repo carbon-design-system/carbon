@@ -82,10 +82,9 @@ describe('Search', () => {
     describe('Large Search', () => {
       describe('buttons', () => {
         const btns = wrapper.find('button');
-        const sortBtn = btns.last();
 
-        it('should be three buttons', () => {
-          expect(btns.length).toBe(3);
+        it('should be one button', () => {
+          expect(btns.length).toBe(1);
         });
 
         it('should have type="button"', () => {
@@ -100,10 +99,6 @@ describe('Search', () => {
           expect(type1).toEqual('button');
           expect(type2).toEqual('button');
         });
-
-        it('has expected class for sort button', () => {
-          expect(sortBtn.hasClass('bx--search-button')).toEqual(true);
-        });
       });
 
       describe('icons', () => {
@@ -112,20 +107,10 @@ describe('Search', () => {
           expect(icons.at(0).props().name).toEqual('search');
         });
 
-        it('renders four Icons', () => {
+        it('renders two Icons', () => {
           wrapper.setProps({ small: false });
           const icons = wrapper.find(Icon);
-          expect(icons.length).toEqual(4);
-        });
-
-        it('should use "filter" icon for sort button', () => {
-          const icon = wrapper.find(Icon).at(2);
-          expect(icon.props().name).toEqual('filter');
-        });
-
-        it('should use "list" icon for toggle button', () => {
-          const icon = wrapper.find(Icon).at(3);
-          expect(icon.props().name).toEqual('list');
+          expect(icons.length).toEqual(2);
         });
       });
     });
@@ -193,31 +178,6 @@ describe('Search', () => {
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
         expect(onChange).toBeCalledWith(eventObject);
-      });
-    });
-
-    describe('enabled toggling layout', () => {
-      const wrapper = mount(<Search labelText="testlabel" id="test" />);
-
-      it('should default to "list" layout', () => {
-        const icon = wrapper.find(Icon).at(3);
-        expect(icon.props().name).toEqual('list');
-      });
-
-      it('should toggle layout to "grid" when clicked', () => {
-        const button = wrapper.find('button').at(2);
-        button.simulate('click');
-        const icon = wrapper.find(Icon).at(3);
-        expect(icon.props().name).toEqual('grid');
-      });
-      it('should toggle layout to "list" when clicked and currently set to "grid"', () => {
-        const button = wrapper.find('button').at(2);
-        wrapper.setState({
-          format: 'grid',
-        });
-        button.simulate('click');
-        const icon = wrapper.find(Icon).at(3);
-        expect(icon.props().name).toEqual('list');
       });
     });
   });
