@@ -102,6 +102,10 @@
   }
 
   .#{$prefix}--search--lg .#{$prefix}--search-close {
+    right: rem(55px);
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-close:last-child {
     right: rem(12px);
   }
 
