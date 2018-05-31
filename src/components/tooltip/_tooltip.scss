@@ -24,6 +24,8 @@
   }
 
   .#{$prefix}--tooltip__trigger {
+    display: inline-flex;
+    align-items: center;
     margin-left: $spacing-xs;
     cursor: pointer;
 
