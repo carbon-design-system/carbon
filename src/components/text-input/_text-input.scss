@@ -74,6 +74,10 @@
     }
   }
 
+  .#{$prefix}--text-input--light {
+    background-color: $field-02;
+  }
+
   // Skeleton State
   .#{$prefix}--text-input.#{$prefix}--skeleton {
     @include skeleton;

@@ -93,13 +93,15 @@
     align-items: center;
     left: auto;
     right: 0.5rem;
-    bottom: 0.5rem;
+    bottom: 0.625rem;
   }
 
   .#{$prefix}--number__control-btn {
     @include button-reset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    bottom: 0;
     width: rem(20px);
     height: rem(10px);
 
@@ -118,8 +120,6 @@
 
   .#{$prefix}--number__controls svg {
     fill: $brand-01;
-    width: rem(9px);
-    height: rem(9px);
 
     // Hover styles for use with old HTML w/o button
     &:hover {
@@ -144,7 +144,7 @@
     }
 
     .#{$prefix}--number__controls {
-      bottom: 0.75rem;
+      bottom: 0.875rem;
     }
   }
 
