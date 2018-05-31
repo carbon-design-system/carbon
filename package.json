@@ -153,7 +153,7 @@
     "babel-plugin-transform-object-assign": "^6.22.0",
     "bowser": "^1.6.1",
     "carbon-components": "^8.20.0",
-    "carbon-icons": "^7.0.3",
+    "carbon-icons": "^7.0.4",
     "chalk": "^2.3.0",
     "cli-table": "^0.3.0",
     "commitizen": "^2.9.5",

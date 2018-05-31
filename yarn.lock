@@ -2774,9 +2774,9 @@ carbon-icons@^6.0.4:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-6.2.0.tgz#84f568a64b1465c52183eb26de736893b3d8abdb"
 
-carbon-icons@^7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-7.0.3.tgz#97fa64810aa46a98101f142e8a130f458b7af546"
+carbon-icons@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-7.0.4.tgz#ebf76e08369944e8f0514776a41e9923f8aa58bc"
 
 cardinal@^1.0.0:
   version "1.0.0"
