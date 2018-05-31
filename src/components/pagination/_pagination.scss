@@ -55,7 +55,7 @@ $css--helpers: true;
   .#{$prefix}--pagination__button-icon {
     height: rem(12px);
     width: rem(12px);
-    fill: $hover-secondary;
+    fill: $ui-05;
     pointer-events: none;
     transition: $transition--base;
   }
@@ -68,7 +68,7 @@ $css--helpers: true;
 
     &:hover {
       .#{$prefix}--pagination__button-icon {
-        fill: $brand-01;
+        fill: $hover-secondary;
       }
     }
 
