@@ -185,7 +185,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
-    background-color: $brand-02;
+    background-color: $hover-primary;
     outline: none;
   }
 
