@@ -64,7 +64,6 @@
     display: none;
     max-width: rem(240px);
     background: $ui-01;
-    margin-top: $spacing-xs;
     padding: $spacing-md;
     border: 1px solid $ui-03;
     border-radius: rem(4px);
@@ -99,13 +98,11 @@
     }
 
     &[data-floating-menu-direction='left'] {
-      margin-left: -$spacing-sm;
-
       .#{$prefix}--tooltip__caret {
         left: auto;
-        top: 44.7%;
+        top: 50%;
         right: rem(-5px);
-        transform: rotate(-45deg);
+        transform: rotate(-45deg) translate(50%, -50%);
       }
     }
 
@@ -118,13 +115,11 @@
     }
 
     &[data-floating-menu-direction='right'] {
-      margin-left: $spacing-sm;
-
       .#{$prefix}--tooltip__caret {
         left: rem(-5px);
-        top: 44.7%;
+        top: 50%;
         right: auto;
-        transform: rotate(135deg);
+        transform: rotate(135deg) translate(-50%, 50%);
       }
     }
   }
