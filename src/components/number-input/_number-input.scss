@@ -129,6 +129,11 @@
   }
 
   .#{$prefix}--number[data-invalid] {
+    .#{$prefix}--form-requirement {
+      display: inline-block;
+      max-height: rem(200px);
+    }
+
     input[type='number'],
     input[type='number']:focus {
       outline: none;
@@ -139,26 +144,13 @@
       color: $support-01;
     }
 
-    ~ .#{$prefix}--form-requirement {
-      max-height: rem(200px);
-    }
-
     .#{$prefix}--number__controls {
-      bottom: 0.875rem;
+      bottom: 2rem;
     }
   }
 
   .#{$prefix}--number--light input[type='number'] {
     background: $field-02;
-  }
-
-  .#{$prefix}--number[data-invalid] {
-    input[type='number'] {
-      box-shadow: 0 2px 0px 0px $support-01;
-    }
-    ~ .#{$prefix}--form-requirement {
-      max-height: rem(200px);
-    }
   }
 
   // Skeleton State
