@@ -38,7 +38,7 @@ This tooltip variation does not use any JavaScript and should be used to define 
 | .bx--tooltip--definition__bottom | A simple tooltip that is displayed below the trigger. |
 
 
-### Simple tooltip
+### Icon tooltip
 
 This tooltip variation does not use any JavaScript and is good for short single line of text describing an icon. No label should be added to this variation.
 
