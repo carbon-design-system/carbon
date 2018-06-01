@@ -19,7 +19,7 @@ export default class RadioTile extends React.Component {
     onChange: () => {},
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.uid = this.props.id || uid();
   }
 

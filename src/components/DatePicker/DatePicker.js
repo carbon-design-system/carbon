@@ -205,7 +205,7 @@ export default class DatePicker extends Component {
     locale: 'en',
   };
 
-  componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps) {
     if (nextProps.value !== this.props.value) {
       if (
         this.props.datePickerType === 'single' ||

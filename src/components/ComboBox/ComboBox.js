@@ -112,7 +112,7 @@ export default class ComboBox extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState(state => ({
       inputValue: getInputValue(nextProps, state),
     }));

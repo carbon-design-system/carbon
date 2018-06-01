@@ -62,7 +62,7 @@ export default class Pagination extends Component {
         : this.props.pageSizes[0],
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.uniqueId = `${Math.floor(Math.random() * 0xffff)}`;
   }
 
@@ -79,7 +79,7 @@ export default class Pagination extends Component {
     this.pageInputDebouncer.cancel();
   }
 
-  componentWillReceiveProps({ pageSizes, page, pageSize }) {
+  UNSAFE_componentWillReceiveProps({ pageSizes, page, pageSize }) {
     if (!equals(pageSizes, this.props.pageSizes)) {
       this.setState({ pageSize: pageSizes[0], page: 1 });
     }

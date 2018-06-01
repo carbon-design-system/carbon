@@ -35,7 +35,7 @@ export default class Tabs extends React.Component {
     selected: this.props.selected,
   };
 
-  componentWillReceiveProps({ selected }) {
+  UNSAFE_componentWillReceiveProps({ selected }) {
     this.selectTabAt(selected);
   }
 

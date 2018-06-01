@@ -107,7 +107,7 @@ export default class DataTable extends React.Component {
     this.instanceId = getInstanceId();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const rowIds = this.props.rows.map(row => row.id);
     const nextRowIds = nextProps.rows.map(row => row.id);
 

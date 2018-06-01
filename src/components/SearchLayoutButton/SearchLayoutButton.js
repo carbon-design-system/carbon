@@ -35,7 +35,7 @@ class SearchLayoutButton extends Component {
     format: this.props.format || 'list',
   };
 
-  componentWillReceiveProps({ format }) {
+  UNSAFE_componentWillReceiveProps({ format }) {
     const { format: prevFormat } = this.props;
     if (prevFormat !== format) {
       this.setState({ format: format || 'list' });

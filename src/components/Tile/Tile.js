@@ -65,7 +65,7 @@ export class ClickableTile extends Component {
     }
   };
 
-  componentWillReceiveProps({ clicked }) {
+  UNSAFE_componentWillReceiveProps({ clicked }) {
     if (clicked !== this.props.clicked) {
       this.setState({ clicked });
     }
@@ -160,7 +160,7 @@ export class SelectableTile extends Component {
     }
   };
 
-  componentWillReceiveProps({ selected }) {
+  UNSAFE_componentWillReceiveProps({ selected }) {
     if (selected !== this.props.selected) {
       this.setState({ selected });
     }
@@ -238,7 +238,7 @@ export class ExpandableTile extends Component {
     tileExpandedIconText: 'Collapse',
   };
 
-  componentWillReceiveProps({ expanded, tileMaxHeight, tilePadding }) {
+  UNSAFE_componentWillReceiveProps({ expanded, tileMaxHeight, tilePadding }) {
     if (expanded !== this.props.expanded) {
       this.setState({ expanded });
     }

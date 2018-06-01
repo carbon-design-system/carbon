@@ -165,7 +165,7 @@ export default class Tooltip extends Component {
     });
   }
 
-  componentWillReceiveProps({ open }) {
+  UNSAFE_componentWillReceiveProps({ open }) {
     /**
      * so that tooltip can be controlled programmatically through this `open` prop
      */

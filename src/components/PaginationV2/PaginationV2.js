@@ -133,11 +133,11 @@ export default class PaginationV2 extends Component {
         : this.props.pageSizes[0],
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.uniqueId = ++instanceId;
   }
 
-  componentWillReceiveProps({ pageSizes, page, pageSize }) {
+  UNSAFE_componentWillReceiveProps({ pageSizes, page, pageSize }) {
     if (!equals(pageSizes, this.props.pageSizes)) {
       this.setState({ pageSize: pageSizes[0], page: 1 });
     }

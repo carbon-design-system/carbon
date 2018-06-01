@@ -7,16 +7,18 @@ export default class Container extends Component {
     const { story } = this.props;
 
     return (
-      <div
-        role="main"
-        style={{
-          padding: '3em',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}>
-        {story()}
-      </div>
+      <React.StrictMode>
+        <div
+          role="main"
+          style={{
+            padding: '3em',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+          {story()}
+        </div>
+      </React.StrictMode>
     );
   }
 }

@@ -37,7 +37,7 @@ export default class Dropdown extends PureComponent {
     this.state = this.resetState(props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState(this.resetState(nextProps));
   }
 

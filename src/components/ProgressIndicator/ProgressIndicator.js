@@ -70,7 +70,7 @@ export class ProgressIndicator extends Component {
     currentIndex: this.props.currentIndex,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.currentIndex !== this.props.currentIndex) {
       this.setState({ currentIndex: nextProps.currentIndex });
     }

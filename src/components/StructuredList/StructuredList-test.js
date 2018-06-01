@@ -7,7 +7,7 @@ import {
   StructuredListRow,
   StructuredListCell,
 } from '../StructuredList';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 describe('StructuredListWrapper', () => {
   describe('Renders as expected', () => {
@@ -86,9 +86,9 @@ describe('StructuredListInput', () => {
     });
 
     it('Should render unique id with multiple inputs when no id prop is given', () => {
-      const wrapper1 = shallow(<StructuredListInput className="extra-class" />);
-      const wrapper2 = shallow(<StructuredListInput className="extra-class" />);
-      expect(wrapper1.props().id).not.toEqual(wrapper2.props().id);
+      const wrapper1 = mount(<StructuredListInput className="extra-class" />);
+      const wrapper2 = mount(<StructuredListInput className="extra-class" />);
+      expect(wrapper1.instance().uid).not.toEqual(wrapper2.instance().uid);
     });
   });
 });

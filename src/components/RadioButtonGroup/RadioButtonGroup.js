@@ -23,13 +23,13 @@ export default class RadioButtonGroup extends React.Component {
     selected: null,
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState({
       selected: this.props.valueSelected || this.props.defaultSelected || null,
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.hasOwnProperty('valueSelected')) {
       this.setState({
         selected: nextProps.valueSelected,

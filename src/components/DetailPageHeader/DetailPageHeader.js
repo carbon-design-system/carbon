@@ -55,7 +55,7 @@ export default class DetailPageHeader extends Component {
     window.addEventListener('scroll', this._debouncedScroll);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.isScrolled !== this.props.isScrolled) {
       this.setState({ isScrolled: nextProps.isScrolled });
     }

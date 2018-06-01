@@ -24,7 +24,7 @@ export default class AccordionItem extends Component {
     open: this.props.open,
   };
 
-  componentWillReceiveProps({ open }) {
+  UNSAFE_componentWillReceiveProps({ open }) {
     if (open !== this.props.open) {
       this.setState({ open });
     }

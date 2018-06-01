@@ -76,7 +76,7 @@ export class StructuredListInput extends Component {
     title: 'title',
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.uid = this.props.id || uid();
   }
 

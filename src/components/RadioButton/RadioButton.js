@@ -20,7 +20,7 @@ export default class RadioButton extends React.Component {
     onChange: () => {},
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.uid = this.props.id || uid();
   }
 
