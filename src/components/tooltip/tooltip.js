@@ -39,11 +39,27 @@ const getMenuOffset = (menuBody, menuDirection) => {
   values[arrowPositionProp] = values[arrowPositionProp] || -6; // IE, etc.
   if (Object.keys(values).every(name => !isNaN(values[name]))) {
     const { [arrowPositionProp]: arrowPosition, 'border-bottom-width': borderBottomWidth } = values;
+    if (arrowPositionProp === 'bottom') {
+      return {
+        left: 0,
+        top: 0,
+        [menuPositionAdjustmentProp]: Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition * 4,
+      };
+    }
     return {
       left: 0,
       top: 0,
       [menuPositionAdjustmentProp]: Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition,
     };
+    // return {
+    //   left: 0,
+    //   top: 0,
+    //   if (arrowPositionProp === 'bottom') {
+    //       [menuPositionAdjustmentProp]: Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition * 4,
+    //     } else {
+    //     [menuPositionAdjustmentProp]: Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition
+    //   }
+    // };
   }
   return undefined;
 };
