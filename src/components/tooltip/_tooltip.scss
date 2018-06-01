@@ -138,6 +138,8 @@
     @include reset;
     @include typescale('delta');
 
+    position: relative;
+
     .#{$prefix}--tooltip__trigger {
       display: inline-flex;
       position: relative;
@@ -205,7 +207,8 @@
 
   // Tooltip Definition caret - top position
   .#{$prefix}--tooltip--definition__top {
-    top: -0.3rem;
+    transform: translateY(-100%);
+    margin-top: rem(-32px);
 
     .#{$prefix}--tooltip__caret {
       bottom: -0.2rem;
