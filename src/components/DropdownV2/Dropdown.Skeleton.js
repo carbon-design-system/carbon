@@ -12,7 +12,7 @@ const DropdownSkeleton = ({ inline }) => {
   });
   return (
     <div className={wrapperClasses}>
-      <div role="button" class="bx--list-box__field">
+      <div role="button" className="bx--list-box__field">
         <span className="bx--list-box__label" />
       </div>
     </div>
