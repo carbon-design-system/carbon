@@ -51,15 +51,6 @@ const getMenuOffset = (menuBody, menuDirection) => {
       top: 0,
       [menuPositionAdjustmentProp]: Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition,
     };
-    // return {
-    //   left: 0,
-    //   top: 0,
-    //   if (arrowPositionProp === 'bottom') {
-    //       [menuPositionAdjustmentProp]: Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition * 4,
-    //     } else {
-    //     [menuPositionAdjustmentProp]: Math.sqrt(borderBottomWidth ** 2 * 2) - arrowPosition
-    //   }
-    // };
   }
   return undefined;
 };
@@ -161,8 +152,6 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
       touchleave: 'hidden',
       touchcancel: 'hidden',
     }[type];
-
-    console.log('clicked');
 
     let shouldPreventClose;
     if (type === 'blur') {
