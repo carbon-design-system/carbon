@@ -138,6 +138,7 @@ $css--helpers: true;
       font-weight: 600;
       text-align: center;
       box-shadow: none;
+      order: 0;
 
       &:focus {
         @include focus-outline('border');
