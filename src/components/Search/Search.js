@@ -5,7 +5,6 @@ import Icon from '../Icon';
 
 export default class Search extends Component {
   static propTypes = {
-    children: PropTypes.node,
     className: PropTypes.string,
     type: PropTypes.string,
     small: PropTypes.bool,
@@ -68,7 +67,6 @@ export default class Search extends Component {
       labelText,
       closeButtonLabelText,
       small,
-      children,
       light,
       ...other
     } = this.props;
@@ -116,7 +114,6 @@ export default class Search extends Component {
           aria-label={closeButtonLabelText}>
           <Icon name="close--solid" description={closeButtonLabelText} />
         </button>
-        {children}
       </div>
     );
   }

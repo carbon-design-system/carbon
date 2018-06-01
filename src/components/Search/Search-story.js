@@ -6,6 +6,7 @@ import { action } from '@storybook/addon-actions';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import SearchFilterButton from '../SearchFilterButton';
+import SearchLayoutButton from '../SearchLayoutButton';
 
 const searchProps = {
   className: 'some-class',
@@ -85,23 +86,6 @@ storiesOf('Search', module)
     }
   )
   .addWithInfo(
-    'Custom set of buttons',
-    `
-      You can control what set of buttons you want.
-    `,
-    () => (
-      <Search
-        {...searchProps}
-        className="some-class"
-        id="search-1"
-        labelText="Search"
-        placeHolderText="Search"
-        onChange={action('onChange')}>
-        <SearchFilterButton onClick={action('onClick')} />
-      </Search>
-    )
-  )
-  .addWithInfo(
     'light',
     `
       Search enables users to specify a word or a phrase to find particular relevant pieces of content
@@ -121,6 +105,30 @@ storiesOf('Search', module)
           action('onChange');
         }}
       />
+    )
+  )
+  .addWithInfo(
+    'custom buttons',
+    `
+      You can control what set of buttons you want.
+    `,
+    () => (
+      <div style={{ display: 'flex' }}>
+        <Search
+          {...searchProps}
+          light
+          className="some-class"
+          id="search-1"
+          labelText="Search"
+          placeHolderText="Search"
+          onChange={() => {
+            console.log('onChange');
+            action('onChange');
+          }}
+        />
+        <SearchFilterButton onClick={action('onClick')} />
+        <SearchLayoutButton onClick={action('onClick')} />
+      </div>
     )
   )
   .addWithInfo(
