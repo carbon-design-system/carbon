@@ -28,7 +28,7 @@ describe('Tooltip', () => {
       it('renders the info icon', () => {
         const icon = trigger.find(Icon);
         expect(icon.length).toBe(1);
-        expect(icon.props().name).toBe('info--solid');
+        expect(icon.props().name).toBe('info--glyph');
       });
     });
   });

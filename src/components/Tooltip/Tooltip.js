@@ -136,7 +136,7 @@ export default class Tooltip extends Component {
     open: false,
     direction: DIRECTION_BOTTOM,
     showIcon: true,
-    iconName: 'info--solid',
+    iconName: 'info--glyph',
     iconDescription: 'tooltip',
     triggerText: 'Provide triggerText',
     menuOffset: getMenuOffset,

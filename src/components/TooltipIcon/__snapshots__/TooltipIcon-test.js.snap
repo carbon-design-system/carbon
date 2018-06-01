@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TooltipIcon should allow the user to specify the direction 1`] = `
+<TooltipIcon
+  className="custom-class"
+  direction="top"
+  tooltipText="tooltip text"
+>
+  <div
+    className="custom-class bx--tooltip-icon"
+  >
+    <button
+      className="bx--tooltip__trigger bx--tooltip--icon__top"
+      title="tooltip text"
+    >
+      <svg />
+    </button>
+  </div>
+</TooltipIcon>
+`;
+
+exports[`TooltipIcon should render 1`] = `
+<TooltipIcon
+  className="custom-class"
+  direction="bottom"
+  tooltipText="tooltip text"
+>
+  <div
+    className="custom-class bx--tooltip-icon"
+  >
+    <button
+      className="bx--tooltip__trigger bx--tooltip--icon__bottom"
+      title="tooltip text"
+    >
+      <svg />
+    </button>
+  </div>
+</TooltipIcon>
+`;
