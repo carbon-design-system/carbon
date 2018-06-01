@@ -251,7 +251,7 @@
       border-radius: 4px;
       color: $inverse-01;
       font-weight: 400;
-      content: attr(data-tooltip-text);
+      content: attr(title);
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
@@ -264,6 +264,7 @@
       height: 0.6rem;
       margin: 0 auto;
       content: '';
+      margin-top: 1px;
     }
 
     &:hover,
