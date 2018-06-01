@@ -46,3 +46,15 @@ This tooltip variation does not use any JavaScript and is good for short single 
 |------------------------------|-------------------------------------------------------|
 | .bx--tooltip--icon__top      | A simple tooltip that is displayed above the trigger. |
 | .bx--tooltip--icon__bottom   | A simple tooltip that is displayed below the trigger. |
+
+## Accessibility Notes
+
+* Triggers should most likely be using `button` as the interactive element. In addition, they should include the following attributes:
+  - `type="button"` for "toggletips", or tooltips that you click to trigger, so that they don't submit when placed in forms
+  - `aria-describedby` for hover tooltips
+  - `aria-labelledby` for interactive tooltips?
+
+### Links & Resources
+
+- [Tooltips & Toggletips](https://inclusive-components.design/tooltips-toggletips/)
+
