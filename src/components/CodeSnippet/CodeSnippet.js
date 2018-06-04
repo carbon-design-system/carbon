@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import warning from 'warning';
 import Copy from '../Copy';
 import CopyButton from '../CopyButton';
 import Icon from '../Icon';
@@ -10,8 +11,10 @@ export default class CodeSnippet extends Component {
     /**
      * The type of code snippet
      * can be inline, single or multi
+     * code & terminal have been deprecated
+     * and will be removed in v10.
      */
-    type: PropTypes.oneOf(['single', 'inline', 'multi']),
+    type: PropTypes.oneOf(['single', 'inline', 'multi', 'code', 'terminal']),
     className: PropTypes.string,
     children: PropTypes.string,
     feedback: PropTypes.string,
@@ -54,6 +57,7 @@ export default class CodeSnippet extends Component {
   };
 
   render() {
+    let didWarnAboutDeprecation = false;
     const {
       className,
       type,
@@ -67,10 +71,20 @@ export default class CodeSnippet extends Component {
       ...other
     } = this.props;
 
+    if (__DEV__ && (type === 'terminal' || type === 'code')) {
+      warning(
+        didWarnAboutDeprecation,
+        'The `code` & `terminal` type of code snippet has been deprecated and will be removed ' +
+          'in the next major release of `carbon-components-react`. Please use ' +
+          '`multi` `single` or `inline` instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
+
     const codeSnippetClasses = classNames(className, {
       'bx--snippet': true,
-      'bx--snippet--single': type === 'single',
-      'bx--snippet--multi': type === 'multi',
+      'bx--snippet--single': type === 'single' || type === 'terminal',
+      'bx--snippet--multi': type === 'multi' || type === 'code',
       'bx--snippet--inline': type === 'inline',
       'bx--snippet--expand': this.state.expandedCode,
       'bx--snippet--light': light,
@@ -122,7 +136,7 @@ export default class CodeSnippet extends Component {
       );
     }
 
-    if (type === 'single') {
+    if (type === 'single' || type === 'terminal') {
       return (
         <div {...other} className={codeSnippetClasses}>
           {code}
@@ -131,7 +145,10 @@ export default class CodeSnippet extends Component {
       );
     }
 
-    if (!this.state.shouldShowMoreLessBtn && type === 'multi') {
+    if (
+      !this.state.shouldShowMoreLessBtn &&
+      (type === 'multi' || type === 'code')
+    ) {
       return (
         <div {...other} className={codeSnippetClasses}>
           {code}
@@ -140,7 +157,10 @@ export default class CodeSnippet extends Component {
       );
     }
 
-    if (this.state.shouldShowMoreLessBtn && type === 'multi') {
+    if (
+      this.state.shouldShowMoreLessBtn &&
+      (type === 'multi' || type === 'code')
+    ) {
       return (
         <div className={codeSnippetClasses} {...other}>
           {code}
