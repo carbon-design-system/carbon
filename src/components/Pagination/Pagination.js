@@ -2,11 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import debounce from 'lodash.debounce';
+import warning from 'warning';
 import Icon from '../Icon';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import { equals } from '../../tools/array';
+
+let didWarnAboutDeprecation = false;
 
 export default class Pagination extends Component {
   static propTypes = {
@@ -53,6 +56,18 @@ export default class Pagination extends Component {
     defaultItemText: totalItems => `${totalItems} items`,
     onChangeInterval: 250,
   };
+
+  constructor(props) {
+    super(props);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The `Pagination` component is being updated in the next release of ' +
+          '`carbon-components-react`. Please use `PaginationV2` instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
+  }
 
   state = {
     page: this.props.page,

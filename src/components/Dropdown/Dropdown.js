@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import warning from 'warning';
 import ClickListener from '../../internal/ClickListener';
 import Icon from '../Icon';
+
+let didWarnAboutDeprecation = false;
 
 export default class Dropdown extends PureComponent {
   static propTypes = {
@@ -35,6 +38,14 @@ export default class Dropdown extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.resetState(props);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The `Dropdown` component is being updated in the next release of ' +
+          '`carbon-components-react`. Please use `DropdownV2` instead.'
+      );
+      didWarnAboutDeprecation = true;
+    }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
