@@ -129,7 +129,6 @@ export default class TimePicker extends Component {
 
     return (
       <div className="bx--form-item">
-        {label}
         <div className={timePickerClasses}>
           <div className="bx--time-picker__input">
             <input
@@ -138,6 +137,7 @@ export default class TimePicker extends Component {
               data-invalid={invalid ? invalid : undefined}
               className="bx--time-picker__input-field"
             />
+            {label}
             {error}
           </div>
           {children}

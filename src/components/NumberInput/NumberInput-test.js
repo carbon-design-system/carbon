@@ -191,8 +191,8 @@ describe('NumberInput', () => {
       );
 
       const input = wrapper.find('input');
-      const upArrow = wrapper.find('.up-icon').parent();
-      const downArrow = wrapper.find('.down-icon').parent();
+      const upArrow = wrapper.find('button.up-icon');
+      const downArrow = wrapper.find('button.down-icon');
 
       it('should be disabled when numberInput is disabled', () => {
         expect(upArrow.prop('disabled')).toEqual(true);
