@@ -1,0 +1,24 @@
+@mixin app-status($status) {
+  @include reset;
+  @include typescale('omega');
+  display: none;
+  align-items: center;
+
+  &::before {
+    content: ' ';
+    height: 1rem;
+    width: 1rem;
+    border-radius: 100%;
+    margin-right: 0.25rem;
+  }
+
+  @if ($status == 'running') {
+    &::before {
+      background-color: $support-02;
+    }
+  } @else if ($status == 'not-running') {
+    &::before {
+      background-color: $support-01;
+    }
+  }
+}

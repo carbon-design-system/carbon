@@ -15,6 +15,3 @@ tests/coverage
 /html
 /docs/js
 node_modules
-
-# TODO: Upgrade to ESLint4 so we can apply a specific rule (one for CJS code) for below files
-src/**/*.config.js

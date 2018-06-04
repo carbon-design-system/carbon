@@ -1,5 +1,5 @@
 import Modal from '../../src/components/modal/modal';
-import ModalHtml from '../../html/modal/modal.html';
+import ModalHtml from '../../src/components/modal/modal.html';
 import EventManager from '../utils/event-manager';
 import flattenOptions from '../utils/flatten-options';
 

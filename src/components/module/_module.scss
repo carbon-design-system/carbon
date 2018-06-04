@@ -1,0 +1,81 @@
+//-----------------------------
+// Modules
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
+
+@include exports('modules') {
+  @include deprecate(
+    'Accessing the `module` component from the `carbon-components` package ' +
+      'is deprecated. Use the `carbon-addons-cloud` package instead.'
+  ) {
+    .#{$prefix}--module {
+      @include reset;
+      @include font-family;
+      display: flex;
+      flex-direction: column;
+      padding: rem(10px);
+      flex: 1 0 auto;
+      margin: 0;
+
+      .#{$prefix}--module__inner {
+        @include layer('raised');
+        background-color: $ui-01;
+        border: 1px solid transparent;
+      }
+
+      .#{$prefix}--module__header {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid $ui-04;
+      }
+
+      .#{$prefix}--module__title {
+        @include typescale('zeta');
+        @include font-smoothing;
+        @include letter-spacing;
+        font-weight: 600;
+        color: $text-01;
+      }
+
+      .#{$prefix}--module__content {
+        display: flex;
+        flex-direction: column;
+        flex: 3;
+        padding: 1.5rem;
+
+        p {
+          @include typescale('zeta');
+        }
+      }
+
+      .#{$prefix}--module__content--centered {
+        align-items: center;
+        justify-content: center;
+        padding: 5rem;
+      }
+
+      .#{$prefix}--module__content--scrollable {
+        max-height: rem(300px);
+        overflow-y: scroll;
+        margin-bottom: 2rem;
+      }
+
+      &.#{$prefix}--module--single {
+        max-width: rem(500px);
+      }
+
+      &.#{$prefix}--module--double {
+        max-width: rem(1000px);
+      }
+    }
+  }
+}

@@ -320,19 +320,19 @@
   .#{$prefix}--data-table__icon--error:hover
     ~ .#{$prefix}--data-table__error-text,
 
-    /* Display text area triangle on hover*/
+    // Display text area triangle on hover
   .#{$prefix}--data-table__icon--error:hover
     ~ .#{$prefix}--data-table__error-text::after,
 
-    /* Display text area on focus*/
+    // Display text area on focus
   .#{$prefix}--data-table__status--error:focus
     > .#{$prefix}--data-table__error-text,
 
-    /* Display text area triangle on focus*/
+    // Display text area triangle on focus
   .#{$prefix}--data-table__status--error:focus
     > .#{$prefix}--data-table__error-text::after,
 
-  /* Display when user is typing in edit field*/
+  // Display when user is typing in edit field
   .#{$prefix}--data-table__edit-field--editing.#{$prefix}--data-table__edit-field--error +
   .#{$prefix}--data-table__edit-status .#{$prefix}--data-table__error-text,
 

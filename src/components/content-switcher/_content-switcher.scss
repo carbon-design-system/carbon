@@ -29,10 +29,10 @@
 
     &:focus {
       outline: 1px solid transparent;
-      // box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
-      background-color: $hover-primary;
+      box-shadow: 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+      background-color: $brand-02;
       z-index: 2;
-      border-color: $hover-primary;
+      border-color: $brand-02;
       text-decoration: underline;
       color: $inverse-01;
     }
@@ -43,8 +43,8 @@
 
     &:hover,
     &:active {
-      background-color: $hover-primary;
-      border-color: $hover-primary;
+      background-color: $brand-02;
+      border-color: $brand-02;
       color: $inverse-01;
     }
   }
@@ -64,10 +64,6 @@
 
   .#{$prefix}--content-switcher-btn:not(:first-of-type) {
     border-left: $content-switcher-option-border;
-
-    &:hover {
-      border-left-color: $hover-primary;
-    }
   }
 
   .#{$prefix}--content-switcher-btn:first-of-type {
@@ -75,11 +71,11 @@
     border-top-left-radius: $content-switcher-border-radius;
 
     &:hover {
-      border-color: $hover-primary;
+      border-color: $brand-02;
     }
 
     &:focus {
-      // box-shadow: -2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+      box-shadow: -2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 0;
     }
   }
@@ -89,11 +85,11 @@
     border-bottom-right-radius: $content-switcher-border-radius;
 
     &:hover {
-      border-color: $hover-primary;
+      border-color: $brand-02;
     }
 
     &:focus {
-      // box-shadow: 2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
+      box-shadow: 2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 0;
     }
   }
@@ -104,10 +100,8 @@
     font-weight: 400;
     outline: 1px solid transparent;
 
-    &:hover,
-    &:focus {
-      border-color: $hover-primary;
-      background-color: $hover-primary;
+    &:hover {
+      border-color: $brand-01;
     }
   }
 }

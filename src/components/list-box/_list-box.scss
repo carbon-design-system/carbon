@@ -21,17 +21,7 @@ $list-box-menu-width: rem(300px);
     width: $list-box-width;
     height: $list-box-height;
     max-height: $list-box-height;
-    background-color: $field-01;
-    border: none;
-    box-shadow: 0 1px 0 0 $text-02;
-    order: 1;
-    cursor: pointer;
-    color: $text-01;
-  }
-
-  // Light variation for 'list-box'
-  .#{$prefix}--list-box--light {
-    background-color: $field-02;
+    background-color: rgba($field-01, 0.1);
   }
 
   // Disabled state for a `list-box`
@@ -45,18 +35,11 @@ $list-box-menu-width: rem(300px);
     cursor: not-allowed;
   }
 
-  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
-  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item--highlighted {
-    background-color: transparent;
-    text-decoration: none;
-  }
-
   // Inline variant for a `list-box`
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline {
+  .#{$prefix}--list-box--inline {
     background-color: inherit;
     width: auto;
     height: $list-box-inline-height;
-    box-shadow: none;
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
@@ -82,10 +65,8 @@ $list-box-menu-width: rem(300px);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
-  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'],
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline > .#{$prefix}--list-box__field:focus {
+  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'] {
     outline: none;
-    box-shadow: none;
   }
 
   // The field we use for input, showing selection, etc.
@@ -101,13 +82,15 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__field:focus,
   .#{$prefix}--list-box__field[aria-expanded='true'] {
-    outline: none;
-    box-shadow: 0 2px 0 0 $brand-01;
+    outline: 1px solid $brand-01;
   }
 
   .#{$prefix}--list-box__field[disabled] {
     outline: none;
-    opacity: 0.5;
+  }
+
+  .#{$prefix}--list-box__field[aria-expanded='true'] ~ .#{$prefix}--list-box__menu {
+    box-shadow: 0 1px 0 0 $brand-01, 1px 0 0 0 $brand-01, -1px 0 0 0 $brand-01, 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
   // Label for a `list-box__field`
@@ -191,7 +174,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
-    background-color: $hover-primary;
+    background-color: $brand-02;
     outline: none;
   }
 
@@ -224,9 +207,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box__menu-item--highlighted {
-    background-color: $hover-row;
-    outline: 1px solid transparent;
-    text-decoration: underline;
+    background-color: rgba($field-01, 0.1);
     color: $text-01;
   }
 
@@ -244,7 +225,6 @@ $list-box-menu-width: rem(300px);
     background-color: inherit;
     font-weight: 600;
     outline-offset: 0;
-    min-width: 0;
   }
 
   .#{$prefix}--list-box input[role='combobox']::placeholder {

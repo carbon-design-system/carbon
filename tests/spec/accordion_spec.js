@@ -1,6 +1,6 @@
 import Accordion from '../../src/components/accordion/accordion';
-import HTML from '../../html/accordion/accordion.html';
-import LegacyHTML from '../../html/accordion/accordion--legacy.html';
+import HTML from '../../src/components/accordion/accordion.html';
+import LegacyHTML from '../../src/components/accordion/legacyaccordion.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test accordion', function() {

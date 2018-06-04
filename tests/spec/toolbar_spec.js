@@ -1,6 +1,6 @@
 import '../../demo/polyfills/custom-event';
 import Toolbar from '../../src/components/toolbar/toolbar';
-import ToolbarHTML from '../../html/toolbar/toolbar.html';
+import ToolbarHTML from '../../src/components/toolbar/toolbar.html';
 
 describe('Test toolbar', function() {
   describe('Constructor', function() {

@@ -1,0 +1,18 @@
+$transition-time: 300ms;
+
+@mixin detail-page-header {
+  @include reset;
+  @include font-family;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: rem(86px);
+  transition: transform $transition-time $carbon--standard-easing 0s, max-height $transition-time $carbon--standard-easing 0s,
+    box-shadow $transition-time $carbon--standard-easing 0s, height $transition-time $carbon--standard-easing 0s;
+  will-change: transform, height, max-height, box-shadow;
+  z-index: z('header');
+
+  &[data-header-active='true'] {
+    @include layer('sticky-nav');
+  }
+}

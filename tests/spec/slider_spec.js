@@ -1,6 +1,6 @@
 import createMockRaf from 'mock-raf';
 import Slider from '../../src/components/slider/slider';
-import SliderHTML from '../../html/slider/slider.html';
+import SliderHTML from '../../src/components/slider/slider.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test slider', function() {

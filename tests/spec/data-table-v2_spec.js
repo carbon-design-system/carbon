@@ -1,7 +1,7 @@
 import EventManager from '../utils/event-manager';
 import DataTableV2 from '../../src/components/data-table-v2/data-table-v2';
-import HTML from '../../html/data-table-v2/data-table-v2.html';
-import ExpandableHTML from '../../html/data-table-v2/data-table-v2--expandable.html';
+import HTML from '../../src/components/data-table-v2/data-table-v2.html';
+import ExpandableHTML from '../../src/components/data-table-v2/data-table-v2--expandable.html';
 
 describe('Dropdown', function() {
   describe('Constructor', function() {

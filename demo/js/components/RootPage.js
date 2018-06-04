@@ -6,67 +6,6 @@ import SideNav from './SideNav';
 import PageHeader from './PageHeader/PageHeader';
 import SideNavToggle from './SideNavToggle/SideNavToggle';
 
-const checkStatus = response => {
-  if (response.status >= 200 && response.status < 400) {
-    return response;
-  }
-
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
-};
-
-const load = (componentItems, selectedNavItemId) => {
-  const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
-  const subItems = metadata.items || [];
-  const hasRenderedContent =
-    !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
-  if (!hasRenderedContent) {
-    return fetch(`/code/${metadata.name}`)
-      .then(checkStatus)
-      .then(response => {
-        const contentType = response.headers.get('content-type');
-        return contentType && contentType.includes('application/json') ? response.json() : response.text();
-      })
-      .then(responseContent => {
-        if (Object(responseContent) === responseContent) {
-          return componentItems.map(item => {
-            if (item.id !== selectedNavItemId) {
-              return item;
-            }
-            return !item.items
-              ? {
-                  ...item,
-                  renderedContent: responseContent[`${item.handle}--default`],
-                }
-              : {
-                  ...item,
-                  items: item.items.map(
-                    subItem =>
-                      !responseContent[subItem.handle]
-                        ? subItem
-                        : {
-                            ...subItem,
-                            renderedContent: responseContent[subItem.handle],
-                          }
-                  ),
-                };
-          });
-        }
-        return componentItems.map(
-          item =>
-            item.id !== selectedNavItemId
-              ? item
-              : {
-                  ...item,
-                  renderedContent: responseContent,
-                }
-        );
-      });
-  }
-  return Promise.resolve(null);
-};
-
 /**
  * The top-most React component for dev env page.
  */
@@ -83,19 +22,9 @@ class RootPage extends Component {
     docItems: PropTypes.arrayOf(PropTypes.shape()).isRequired, // eslint-disable-line react/no-unused-prop-types
   };
 
-  constructor(props) {
+  constructor() {
     super();
-
-    const { componentItems } = props;
-
-    this.state = {
-      /**
-       * The array of component data.
-       * @type {Object[]}
-       */
-      componentItems,
-    };
-
+    this.state = {};
     window.addEventListener('popstate', evt => {
       this.switchTo(evt.state.name);
     });
@@ -113,13 +42,6 @@ class RootPage extends Component {
     }
   }
 
-  componentWillReceiveProps(props) {
-    const { componentItems } = props;
-    if (this.props.componentItems !== componentItems) {
-      this.setState({ componentItems });
-    }
-  }
-
   /**
    * The handler for changing in the state of side nav's toggle button.
    */
@@ -131,7 +53,7 @@ class RootPage extends Component {
    * The handler for the `click` event on the side nav for changing selection.
    */
   onSideNavItemClick = evt => {
-    const { componentItems } = this.state;
+    const { componentItems } = this.props;
     const selectedNavItem = componentItems && componentItems.find(item => item.id === evt.target.dataset.navId);
     if (selectedNavItem) {
       this.switchTo(selectedNavItem.id);
@@ -142,7 +64,7 @@ class RootPage extends Component {
    * @returns The component data that is currently selected.
    */
   getCurrentComponentItem() {
-    const { componentItems } = this.state;
+    const { componentItems } = this.props;
     return componentItems && componentItems.find(item => item.id === this.state.selectedNavItemId);
   }
 
@@ -152,22 +74,17 @@ class RootPage extends Component {
    */
   switchTo(selectedNavItemId) {
     this.setState({ selectedNavItemId }, () => {
-      const { componentItems } = this.state;
+      const { componentItems } = this.props;
       const selectedNavItem = componentItems && componentItems.find(item => item.id === selectedNavItemId);
       const { name } = selectedNavItem || {};
       if (name) {
         history.pushState({ name }, name, `/demo/${name}`);
       }
-      load(componentItems, selectedNavItemId).then(newComponentItems => {
-        if (newComponentItems) {
-          this.setState({ componentItems: newComponentItems });
-        }
-      });
     });
   }
 
   render() {
-    const { componentItems } = this.state;
+    const { componentItems } = this.props;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
     const classNames = classnames({

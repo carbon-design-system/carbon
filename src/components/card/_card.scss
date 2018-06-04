@@ -1,0 +1,202 @@
+@import '../../globals/scss/vars';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+@import '../overflow-menu/overflow-menu';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
+@import '../button/button';
+@import '../link/link';
+@import 'mixins';
+
+@include exports('card') {
+  @include deprecate(
+    'Accessing the `card` component from the `carbon-components` package is ' +
+      'deprecated. Use the `carbon-addons-cloud` package instead.'
+  ) {
+    .#{$prefix}--card {
+      @include reset;
+      @include font-family;
+      @include layer('raised');
+      display: flex;
+      flex-direction: column;
+      width: rem(200px);
+      height: rem(240px);
+      background-color: $ui-01;
+      border: 1px solid $ui-04;
+
+      &:focus {
+        @include focus-outline('border');
+      }
+    }
+
+    .#{$prefix}--card__card-overview {
+      @include reset;
+      position: relative;
+      display: flex;
+      justify-content: $card-flex-align;
+      text-align: $card-text-align;
+      padding-left: 1rem;
+      padding-top: 1rem;
+      padding-right: 1rem;
+      height: 12rem;
+
+      .#{$prefix}--overflow-menu {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: z('floating');
+        margin: 0;
+      }
+    }
+
+    .#{$prefix}--card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: rem(48px);
+      background-color: $ui-03;
+      padding-left: 1rem;
+      padding-right: 1rem;
+
+      > .#{$prefix}--btn {
+        @include text-overflow();
+        margin-right: 0.25rem;
+        flex: 1;
+      }
+    }
+
+    .#{$prefix}--card-footer__link {
+      @include typescale('zeta');
+
+      &:focus {
+        @include focus-outline('border');
+      }
+    }
+
+    .#{$prefix}--card-overview__about {
+      @include reset;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: $card-flex-align;
+      padding-top: 1rem;
+      width: 100%;
+    }
+
+    .#{$prefix}--about__title {
+      font-weight: 400;
+      padding-top: 1.5rem;
+      width: 100%;
+    }
+
+    .#{$prefix}--about__title--name {
+      @include typescale('delta');
+      @include text-overflow();
+      font-weight: 400;
+      margin: 0;
+      line-height: 1.2;
+      overflow: hidden;
+    }
+
+    .#{$prefix}--about__title--link {
+      @include typescale('omega');
+      @include text-overflow();
+      font-weight: 400;
+      text-align: center;
+    }
+
+    .#{$prefix}--about__title--additional-info {
+      @include typescale('omega');
+      @include text-overflow();
+      font-weight: 400;
+      padding: 0;
+      margin: 0;
+      color: $text-02;
+
+      &:first-child {
+        padding-top: 0.25rem;
+      }
+    }
+
+    .#{$prefix}--about__icon {
+      @include reset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(50px);
+      height: rem(50px);
+      background-color: $ui-01;
+      border: 1px solid $ui-04;
+      border-radius: 100%;
+
+      .#{$prefix}--about__icon--img {
+        width: rem(32px);
+        height: rem(32px);
+        overflow: hidden;
+      }
+    }
+
+    // APP CARD STYLES
+    .#{$prefix}--card-footer__app-status {
+      @include reset;
+
+      .active {
+        display: flex;
+      }
+    }
+
+    .#{$prefix}--card-footer__app-status--running {
+      @include app-status('running');
+    }
+
+    .#{$prefix}--card-footer__app-status--not-running {
+      @include app-status('not-running');
+    }
+
+    .#{$prefix}--card-footer__app-status--stopped {
+      @include app-status('stopped');
+    }
+
+    .#{$prefix}--card-footer__app-status--limited {
+      @include app-status('limited');
+    }
+
+    .#{$prefix}--card-footer__app-actions {
+      display: flex;
+    }
+
+    .#{$prefix}--app-actions__button {
+      @include typescale('epsilon');
+      display: inline-block;
+      padding: 0.125rem 0 0;
+      margin: 0 0.175rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+
+      &:hover,
+      &:focus {
+        .#{$prefix}--app-actions__button--icon {
+          fill: $brand-01;
+        }
+      }
+
+      &:focus {
+        @include focus-outline('border');
+      }
+    }
+
+    .#{$prefix}--app-actions__button--icon {
+      width: 1rem;
+      height: 1rem;
+      margin: 0 0.125rem;
+      transition: 200ms;
+      fill: $ui-05;
+      cursor: pointer;
+    }
+  }
+}

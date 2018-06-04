@@ -36,11 +36,11 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme($brand-01, transparent, $inverse-01, $hover-primary, $ui-01);
+    @include button-theme($brand-01, transparent, $inverse-01, $brand-02, $ui-01);
   }
 
   .#{$prefix}--btn--secondary {
-    @include button-theme(transparent, $brand-01, $brand-01, $hover-secondary, $brand-01);
+    @include button-theme(transparent, $brand-01, $brand-01, $brand-01, $brand-01);
 
     &:hover,
     &:focus {
@@ -77,11 +77,6 @@
     &:hover:disabled,
     &:focus:disabled {
       color: $ui-05;
-    }
-
-    &:hover > .#{$prefix}--btn__icon,
-    &:focus > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
     }
   }
 
@@ -121,10 +116,6 @@
 
     &:focus {
       color: $inverse-01;
-    }
-
-    &:active {
-      color: $support-01;
     }
 
     &:hover:disabled,
