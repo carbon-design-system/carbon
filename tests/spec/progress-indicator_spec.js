@@ -1,6 +1,6 @@
 import '../../demo/polyfills/custom-event';
 import ProgressIndicator from '../../src/components/progress-indicator/progress-indicator';
-import HTML from '../../html/progress-indicator/progress-indicator.html';
+import HTML from '../../src/components/progress-indicator/progress-indicator.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('ProgressIndicator', function() {

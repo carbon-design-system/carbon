@@ -1,0 +1,253 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
+@import '../tabs/tabs';
+@import '../overflow-menu/overflow-menu';
+@import '../breadcrumb/breadcrumb';
+@import 'mixins';
+
+@include exports('detail-page-header') {
+  @include deprecate(
+    'Accessing the `detail-page-header` component from the ' +
+      '`carbon-components` package is deprecated. Use the ' +
+      '`carbon-addons-cloud` package instead.'
+  ) {
+    .#{$prefix}--detail-page-header--no-tabs {
+      @include detail-page-header;
+      max-height: rem(66px);
+      height: rem(66px);
+      left: rem(200px);
+      background-color: $ui-02;
+      width: calc(100% - 200px);
+      padding: 0.875rem 3%;
+
+      @include breakpoint(bp--sm--major) {
+        padding: 0.75rem 5%;
+        height: rem(88px);
+        max-height: rem(88px);
+      }
+    }
+
+    .#{$prefix}--detail-page-header--with-tabs {
+      @include detail-page-header;
+      min-height: rem(66px);
+      background-color: $ui-01;
+      padding: 0.75rem 3% 0;
+      left: 0;
+      width: 100%;
+
+      @include breakpoint(bp--sm--major) {
+        padding: 0.75rem 5% 0;
+        height: rem(124px);
+      }
+    }
+
+    .#{$prefix}--detail-page-header .#{$prefix}--breadcrumb {
+      display: inline;
+      transition: opacity $transition--base $carbon--standard-easing $transition-time / 2,
+        visibility $transition--base $carbon--standard-easing $transition-time / 2,
+        transform $transition--base $carbon--standard-easing 0s;
+      will-change: opacity, visibility, transform;
+
+      @include breakpoint(bp--sm--major) {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+    }
+
+    .#{$prefix}--detail-page-header--no-tabs .#{$prefix}--breadcrumb {
+      margin-bottom: 0.75rem;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .#{$prefix}--detail-page-header-title-container {
+      display: flex;
+      align-items: center;
+      min-height: rem(36px);
+      height: rem(36px);
+      transition: transform $transition-time $carbon--standard-easing 0s;
+
+      @include breakpoint(bp--sm--major) {
+        padding-bottom: 0;
+      }
+    }
+
+    .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--detail-page-header-title-container {
+      margin-top: rem(3px);
+
+      @include breakpoint(bp--sm--major) {
+        margin-top: 0.5rem;
+      }
+    }
+
+    .#{$prefix}--detail-page-header--no-tabs .#{$prefix}--detail-page-header-title-container {
+      padding-bottom: 0;
+    }
+
+    .#{$prefix}--detail-page-header-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      @include breakpoint(bp--sm--major) {
+        justify-content: space-between;
+      }
+    }
+
+    .#{$prefix}--detail-page-header-icon-container {
+      @include reset;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border: 1px solid $ui-05;
+      height: rem(36px);
+      width: rem(36px);
+      margin-right: 0.625rem;
+    }
+
+    .#{$prefix}--detail-page-header-title {
+      @include typescale('gamma');
+      font-weight: 300;
+      color: $text-02;
+
+      @include breakpoint(bp--sm--major) {
+        @include typescale('beta');
+      }
+    }
+
+    .#{$prefix}--detail-page-header-status-container {
+      display: inline;
+      margin-top: rem(8px);
+
+      @include breakpoint(bp--sm--major) {
+        display: inline-block;
+      }
+    }
+
+    .#{$prefix}--detail-page-header-status-icon {
+      display: inline-block;
+      border-radius: 50%;
+      height: rem(12px);
+      width: rem(12px);
+      background-color: $support-02;
+      margin-left: 0.625rem;
+    }
+
+    .#{$prefix}--detail-page-header-menu {
+      position: absolute;
+      right: 0.75rem;
+      display: flex;
+      align-items: flex-start;
+      transition: top $transition--base $carbon--standard-easing 0s, transform $transition--base $carbon--standard-easing 0s;
+      will-change: transform, top;
+
+      @include breakpoint(bp--sm--major) {
+        align-items: center;
+        top: 50%;
+        transform: translate3d(0, -50%, 0);
+      }
+    }
+
+    .#{$prefix}--detail-page-header .#{$prefix}--tabs {
+      transition: opacity $transition--base $carbon--standard-easing $transition-time / 2,
+        visibility $transition--base $carbon--standard-easing $transition-time / 2;
+      will-change: opacity, visibility, transform;
+    }
+
+    .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--tabs {
+      padding: 0.75rem 0;
+      display: inline;
+
+      @include breakpoint(bp--sm--major) {
+        display: block;
+        padding: 0;
+        min-height: rem(46px);
+      }
+    }
+
+    .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--tabs__nav {
+      margin-left: 0;
+    }
+
+    .#{$prefix}--detail-page-header--with-tabs .#{$prefix}--tabs__nav-link {
+      white-space: nowrap;
+    }
+
+    // Scroll
+    .#{$prefix}--detail-page-header--scroll {
+      .#{$prefix}--breadcrumb,
+      .#{$prefix}--tabs {
+        transition-delay: 0s;
+
+        @include breakpoint(bp--sm--major) {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
+
+    // Scroll -- With Tabs
+    .#{$prefix}--detail-page-header--scroll.#{$prefix}--detail-page-header--with-tabs {
+      padding: 0.75rem 3% 0;
+      transition-delay: $transition-time / 2;
+
+      @include breakpoint(bp--sm--major) {
+        padding: 0.75rem 5% 0;
+        transform: translate3d(0, -50%, 0);
+      }
+
+      .#{$prefix}--tabs {
+        display: block;
+      }
+
+      .#{$prefix}--detail-page-header-menu {
+        transition-delay: $transition-time / 2;
+
+        @include breakpoint(bp--sm--major) {
+          top: 75%;
+        }
+      }
+
+      .#{$prefix}--detail-page-header-title-container {
+        transition-delay: $transition-time / 2;
+        @include breakpoint(bp--sm--major) {
+          transform: translate3d(0, 100%, 0);
+        }
+      }
+    }
+
+    // Scroll -- No Tabs
+    .#{$prefix}--detail-page-header--scroll.#{$prefix}--detail-page-header--no-tabs {
+      @include breakpoint(bp--sm--major) {
+        transform: translate3d(0, rem(-22px), 0);
+      }
+
+      .#{$prefix}--breadcrumb {
+        transform: translate3d(0, -100%, 0);
+        transition-delay: 0s;
+        margin-bottom: 0;
+      }
+
+      .#{$prefix}--detail-page-header-title-container {
+        padding: 0;
+
+        @include breakpoint(bp--sm--major) {
+          margin-bottom: rem(3px);
+        }
+      }
+
+      .#{$prefix}--detail-page-header-menu {
+        @include breakpoint(bp--sm--major) {
+          transform: translate3d(0, rem(-8px), 0);
+        }
+      }
+    }
+  }
+}

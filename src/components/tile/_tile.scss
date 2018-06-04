@@ -18,7 +18,7 @@
     min-width: 8rem;
     min-height: 4rem;
     background-color: $ui-01;
-    border: 1px solid $ui-02;
+    border: 1px solid $ui-03;
     position: relative;
     padding: $spacing-md;
 
@@ -34,7 +34,7 @@
     cursor: pointer;
 
     &:hover {
-      border: 1px solid $ui-03;
+      border: 1px solid $ui-04;
     }
 
     &:hover,
@@ -67,7 +67,7 @@
 
   .#{$prefix}--tile--is-clicked {
     @include layer('flat');
-    border: 1px solid $ui-03;
+    border: 1px solid $ui-04;
   }
 
   .#{$prefix}--tile__checkmark,

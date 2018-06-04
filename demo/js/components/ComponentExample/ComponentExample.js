@@ -134,8 +134,7 @@ class ComponentExample extends Component {
     });
 
     const codepenLink = codepenSlug && `https://codepen.io/team/carbon/full/${codepenSlug}/`;
-    const variantSuffix = (component === variant && '--default') || '';
-    const componentLink = variant ? `/component/${variant}${variantSuffix}` : `/component/${component}`;
+    const componentLink = variant ? `/component/${component}/${variant}` : `/component/${component}`;
 
     const viewFullRender = hideViewFullRender ? null : (
       <Link className="component-example__view-full-render" target="_blank" href={codepenLink || componentLink}>

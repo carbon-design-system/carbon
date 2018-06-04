@@ -1,5 +1,5 @@
 import ProfileSwitcher from '../../src/components/unified-header/profile-switcher';
-import unifiedHeaderHtml from '../../html/unified-header/unified-header.html';
+import unifiedHeaderHtml from '../../src/components/unified-header/unified-header.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test profile switcher', function() {

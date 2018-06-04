@@ -1,6 +1,6 @@
 import EventManager from '../utils/event-manager';
 import ResponsiveTable from '../../src/components/data-table/data-table';
-import HTML from '../../html/data-table/data-table.html';
+import HTML from '../../src/components/data-table/data-table.html';
 
 describe('Test responsive table', function() {
   describe('Constructor', function() {

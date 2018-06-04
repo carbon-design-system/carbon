@@ -1,5 +1,5 @@
 import StructuredList from '../../src/components/structured-list/structured-list';
-import HTML from '../../html/structured-list/structured-list--selection.html';
+import HTML from '../../src/components/structured-list/structured-list--selection.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('StructuredList', function() {

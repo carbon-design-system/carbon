@@ -1,7 +1,7 @@
 import Promise, { promisify } from 'bluebird'; // For testing on browsers not supporting Promise
 import EventManager from '../utils/event-manager';
 import ContentSwitcher from '../../src/components/content-switcher/content-switcher';
-import HTML from '../../html/content-switcher/content-switcher.html';
+import HTML from '../../src/components/content-switcher/content-switcher.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test content switcher', function() {

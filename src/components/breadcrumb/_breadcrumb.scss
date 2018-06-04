@@ -29,7 +29,7 @@
   .#{$prefix}--breadcrumb-item::after {
     content: '/';
     margin-left: $spacing-md;
-    color: $text-02;
+    color: $text-03;
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash .#{$prefix}--breadcrumb-item:last-child::after {
@@ -53,8 +53,8 @@
     &:hover,
     &:focus {
       outline: none;
-      color: $hover-primary-text;
-      border-bottom: 1px solid $hover-primary-text;
+      color: $brand-01;
+      border-bottom: 1px solid $brand-01;
     }
 
     // Applies to Firefox only

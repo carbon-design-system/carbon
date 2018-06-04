@@ -1,0 +1,163 @@
+//-----------------------------
+// Order Summary
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/colors';
+@import '../../globals/scss/mixins';
+@import '../dropdown/_dropdown.scss';
+
+@include exports('order-summary') {
+  @include deprecate(
+    'Accessing the `order-summary` component from the `carbon-components` ' +
+    'package is deprecated. Use the `carbon-addons-cloud` package instead.'
+  ) {
+    .#{$prefix}--order-summary {
+      @include typescale('zeta');
+      background-color: $ui-01;
+      padding-bottom: 1.25rem;
+      width: 18rem;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .#{$prefix}--order-header {
+      display: flex;
+      align-items: center;
+      padding: 0 0 0 1.25rem;
+      border-bottom: 1px solid $ui-05;
+
+      .#{$prefix}--dropdown {
+        flex: 1;
+        background-color: $ui-01;
+        margin-right: rem(1px);
+      }
+
+      .#{$prefix}--dropdown-text {
+        max-width: rem(100px);
+      }
+
+      .#{$prefix}--dropdown-link {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text,
+      .#{$prefix}--dropdown-text {
+        color: $brand-01;
+      }
+    }
+
+    .#{$prefix}--order-header-title {
+      @include typescale('zeta');
+      font-weight: 600;
+      flex: 2;
+    }
+
+    .#{$prefix}--order-list {
+      padding: 1.25rem 0;
+      margin: 0 1.25rem;
+      border-bottom: 1px solid $ui-05;
+    }
+
+    .#{$prefix}--order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.125rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .#{$prefix}--order-detail {
+      @include typescale('zeta');
+      color: $text-02;
+      padding-right: 1.25rem;
+      line-height: 1.25;
+    }
+
+    .#{$prefix}--order-price {
+      @include typescale('omega');
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .#{$prefix}--order-total-container {
+      padding: 1.125rem 1.25rem 0;
+
+      .#{$prefix}--btn {
+        width: 100%;
+        margin-top: 1rem;
+
+        &:first-of-type {
+          margin-top: 2rem;
+        }
+
+        &:last-of-type {
+          margin-bottom: 2rem;
+        }
+      }
+    }
+
+    .#{$prefix}--order-total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .#{$prefix}--order-total-text {
+      font-weight: 600;
+    }
+
+    .#{$prefix}--order-total-price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-weight: 600;
+
+      span {
+        @include typescale('omega');
+        color: $text-02;
+        font-weight: 400;
+      }
+    }
+
+    .#{$prefix}--order-total-subtitle {
+      @include typescale('legal');
+      color: $text-02;
+      font-style: italic;
+    }
+
+    .#{$prefix}--order-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: auto;
+      padding-right: 1.25rem;
+    }
+
+    .#{$prefix}--order-footer-text {
+      @include typescale('zeta');
+      color: $text-02;
+      line-height: 1;
+    }
+
+    .#{$prefix}--order-category {
+      margin-bottom: 2rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .#{$prefix}--order-category-title {
+      @include typescale('omega');
+      font-weight: 600;
+      margin-bottom: rem(4px);
+      text-transform: uppercase;
+    }
+  }
+}

@@ -1,14 +1,3 @@
-### SCSS
-
-#### Modifiers
-
-Use these modifiers with `.bx--select` class.
-
-| Name                 | Description                                  |
-|----------------------|----------------------------------------------|
-| .bx--select--inline  | Selector for applying inline select styles   |
-| .bx--select--light   | Selector for applying light select styles    |
-
 #### Inline Select width
 
 The width of the inline select box should be the width of the default placeholder text + 16px/1rem of padding.

@@ -13,15 +13,14 @@
 
   .#{$prefix}--form-item {
     @include font-family;
-    display: flex;
-    flex-direction: column;
     flex: 1;
-    align-items: flex-start;
-  }
+    margin-right: $spacing-md;
+    margin-bottom: $spacing-lg;
 
-  .#{$prefix}--form-item--light input,
-  .#{$prefix}--form-item--light input[type='number'] {
-    background: $field-02 !important;
+    &:last-of-type {
+      margin-right: 0;
+      margin-bottom: 0;
+    }
   }
 
   .#{$prefix}--label {
@@ -80,16 +79,5 @@
       display: inline-block;
       color: $support-01;
     }
-  }
-
-  .#{$prefix}--form__helper-text {
-    @include typescale('omega');
-    color: $text-02;
-    order: 1;
-    line-height: 1.5;
-    z-index: 0;
-    max-height: 3rem;
-    opacity: 1;
-    margin-bottom: $spacing-xs;
   }
 }

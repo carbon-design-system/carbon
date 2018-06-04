@@ -30,7 +30,7 @@
 
     &:hover {
       > td {
-        background-color: $hover-row;
+        background-color: rgba($brand-02, 0.1);
       }
 
       > td:first-of-type {
@@ -47,7 +47,7 @@
 
       + tr[data-child-row] {
         > td {
-          background-color: $hover-row;
+          background-color: rgba($brand-02, 0.1);
           border-bottom: 1px solid $brand-01;
           border-right: 1px solid $brand-01;
         }
@@ -57,7 +57,7 @@
 
   tr.#{$prefix}--expandable-row--hover-v2 {
     > td {
-      background-color: $hover-row;
+      background-color: rgba($brand-02, 0.1);
       border-top: 1px solid $brand-01;
     }
 

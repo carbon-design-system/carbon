@@ -23,42 +23,34 @@
     top: 1.2rem;
     left: 50%;
 
-    &:focus {
-      border: 2px solid red;
-    }
-
     &:before {
       @include layer('overlay');
       @include typescale('omega');
       top: 1.1rem;
-      padding: $spacing-2xs;
-      color: $inverse-01;
+      padding: 0.5rem 1rem;
+      border: 1px solid $ui-04;
+      color: $text-01;
       content: attr(data-feedback);
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
-      border-radius: 4px;
-      font-weight: 400;
-      z-index: 2;
     }
 
     &:after {
       top: 0.85rem;
-      width: 0.6rem;
-      height: 0.6rem;
-      left: -0.3rem;
-      border-right: 1px solid $inverse-02;
-      border-bottom: 1px solid $inverse-02;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-right: 1px solid $ui-04;
+      border-bottom: 1px solid $ui-04;
       content: '';
       transform: rotate(-135deg);
-      z-index: 1;
     }
 
     &:before,
     &:after {
       position: absolute;
       display: block;
-      background: $inverse-02;
+      background: $ui-01;
     }
 
     &--displayed {

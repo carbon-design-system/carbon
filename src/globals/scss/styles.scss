@@ -71,11 +71,14 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @import '../../components/structured-list/structured-list';
 @import '../../components/code-snippet/code-snippet';
 @import '../../components/overflow-menu/overflow-menu';
+@import '../../components/card/card';
 @import '../../components/content-switcher/content-switcher';
 @import '../../components/date-picker/date-picker';
+@import '../../components/detail-page-header/detail-page-header';
 @import '../../components/dropdown/dropdown';
 @import '../../components/loading/loading';
 @import '../../components/modal/modal';
+@import '../../components/module/module';
 @import '../../components/multi-select/multi-select';
 @import '../../components/notification/inline-notification';
 @import '../../components/notification/toast-notification';
@@ -83,6 +86,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @import '../../components/tabs/tabs';
 @import '../../components/tag/tag';
 @import '../../components/unified-header/unified-header';
+@import '../../components/interior-left-nav/interior-left-nav';
 @import '../../components/pagination/pagination';
 @import '../../components/accordion/accordion';
 @import '../../components/progress-indicator/progress-indicator';
@@ -90,6 +94,7 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 @import '../../components/toolbar/toolbar';
 @import '../../components/time-picker/time-picker';
 @import '../../components/slider/slider';
+@import '../../components/order-summary/order-summary';
 @import '../../components/tile/tile';
 @import '../../components/lightbox/lightbox';
 @import '../../components/carousel/carousel';

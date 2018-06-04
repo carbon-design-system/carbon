@@ -1,6 +1,6 @@
 import DatePicker from '../../src/components/date-picker/date-picker';
-import singleCalHTML from '../../html/date-picker/date-picker--single.html';
-import rangeCalHTML from '../../html/date-picker/date-picker--range.html';
+import singleCalHTML from '../../src/components/date-picker/date-picker--single.html';
+import rangeCalHTML from '../../src/components/date-picker/date-picker--range.html';
 
 describe('Test date picker', function() {
   describe('Constructor', function() {

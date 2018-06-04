@@ -9,52 +9,36 @@
 @import '../../globals/scss/css--typography';
 
 @include exports('tooltip') {
-  .#{$prefix}--tooltip--icon {
+  .#{$prefix}--tooltip--simple {
     display: flex;
     align-items: center;
   }
 
-  .#{$prefix}--tooltip__label {
+  .#{$prefix}--tooltip__trigger {
     @include font-family;
     @include typescale('epsilon');
     display: inline-flex;
     align-items: center;
     color: $text-01;
-    font-weight: normal;
-  }
+    font-weight: 600;
 
-  .#{$prefix}--tooltip__trigger {
-    @include button-reset($width: false);
-    display: inline-flex;
-    align-items: center;
-    margin-left: $spacing-xs;
-    cursor: pointer;
-    font-size: 1rem;
-
-    &:focus {
-      @include focus-outline('border');
-      fill: $hover-primary;
-    }
-
-    path,
-    polygon,
-    circle {
+    svg {
       fill: $brand-01;
+      margin-left: $spacing-xs;
+      cursor: pointer;
+
+      &:focus {
+        @include focus-outline('border');
+        fill: $brand-02;
+      }
     }
 
     &:hover,
     &:focus {
-      color: $text-01;
-      path,
-      polygon,
-      circle {
-        fill: $hover-primary;
+      svg {
+        fill: $brand-02;
       }
     }
-  }
-
-  .#{$prefix}--tooltip__label--bold {
-    font-weight: 600;
   }
 
   .#{$prefix}--tooltip {
@@ -64,9 +48,8 @@
     display: none;
     max-width: rem(240px);
     background: $ui-01;
-    padding: $spacing-md;
-    border: 1px solid $ui-03;
-    border-radius: rem(4px);
+    padding: $spacing-lg;
+    border: 1px solid $ui-04;
     z-index: z('floating');
     word-wrap: break-word;
 
@@ -75,39 +58,39 @@
       @include typescale('zeta');
     }
 
-    div {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-top: 1rem;
+    .#{$prefix}--tooltip__label {
+      font-weight: 600;
+      margin-bottom: $spacing-xs;
     }
 
-    .#{$prefix}--tooltip__caret {
+    &:before {
       position: absolute;
       background: $ui-01;
       left: 0;
-      top: rem(-5px);
+      top: rem(-6px);
       right: 0;
       transform: rotate(-135deg);
       width: 0.6rem;
       height: 0.6rem;
-      border-right: 1px solid $ui-03;
-      border-bottom: 1px solid $ui-03;
+      border-right: 1px solid $ui-04;
+      border-bottom: 1px solid $ui-04;
       margin: 0 auto;
       content: '';
     }
 
     &[data-floating-menu-direction='left'] {
-      .#{$prefix}--tooltip__caret {
+      margin-left: -$spacing-sm;
+
+      &:before {
         left: auto;
-        top: 50%;
-        right: rem(-5px);
-        transform: rotate(-45deg) translate(50%, -50%);
+        top: 44.7%;
+        right: rem(-6px);
+        transform: rotate(-45deg);
       }
     }
 
     &[data-floating-menu-direction='top'] {
-      .#{$prefix}--tooltip__caret {
+      &:before {
         top: auto;
         bottom: rem(-6px);
         transform: rotate(45deg);
@@ -115,11 +98,13 @@
     }
 
     &[data-floating-menu-direction='right'] {
-      .#{$prefix}--tooltip__caret {
-        left: rem(-5px);
-        top: 50%;
+      margin-left: $spacing-sm;
+
+      &:before {
+        left: rem(-6px);
+        top: 44.7%;
         right: auto;
-        transform: rotate(135deg) translate(-50%, 50%);
+        transform: rotate(135deg);
       }
     }
   }
@@ -128,104 +113,20 @@
     display: block;
   }
 
-  // Tooltip Definition
-  // Definition CSS only tooltip
-  .#{$prefix}--tooltip--definition {
+  // Simple CSS only tooltip
+  .#{$prefix}--tooltip--simple__top,
+  .#{$prefix}--tooltip--simple__bottom {
     @include font-family;
     @include reset;
     @include typescale('delta');
-
-    position: relative;
-
-    .#{$prefix}--tooltip__trigger {
-      display: inline-flex;
-      position: relative;
-      border-bottom: 2px dotted $ui-04;
-
-      &:hover {
-        border-bottom: 2px dotted $hover-primary;
-        cursor: pointer;
-
-        + .#{$prefix}--tooltip--definition__top,
-        + .#{$prefix}--tooltip--definition__bottom {
-          display: block;
-        }
-      }
-
-      &:focus {
-        @include focus-outline('border');
-
-        + .#{$prefix}--tooltip--definition__top,
-        + .#{$prefix}--tooltip--definition__bottom {
-          display: block;
-        }
-      }
-    }
-  }
-
-  .#{$prefix}--tooltip--definition__bottom,
-  .#{$prefix}--tooltip--definition__top {
-    @include layer('overlay');
-    position: absolute;
-    z-index: 1;
-    display: none;
-    background: $inverse-02;
-    max-width: rem(176px);
-    margin-top: $spacing-sm;
-    padding: $spacing-xs;
-    border-radius: rem(4px);
-    pointer-events: none;
-    cursor: pointer;
-
-    p {
-      @include font-family;
-      @include typescale('omega');
-      color: $inverse-01;
-    }
-
-    .#{$prefix}--tooltip__caret {
-      position: absolute;
-      right: 0;
-      left: 0;
-      width: 0.6rem;
-      height: 0.6rem;
-      background: $inverse-02;
-      margin-left: $spacing-lg;
-    }
-  }
-
-  // Tooltip Definition caret - bottom position
-  .#{$prefix}--tooltip--definition__bottom {
-    .#{$prefix}--tooltip__caret {
-      top: -0.2rem;
-      transform: rotate(-135deg);
-    }
-  }
-
-  // Tooltip Definition caret - top position
-  .#{$prefix}--tooltip--definition__top {
-    transform: translateY(-100%);
-    margin-top: rem(-32px);
-
-    .#{$prefix}--tooltip__caret {
-      bottom: -0.2rem;
-      transform: rotate(45deg);
-    }
-  }
-
-  // Tooltip Icon
-  // Icon CSS only tooltip
-  .#{$prefix}--tooltip--icon__top,
-  .#{$prefix}--tooltip--icon__bottom {
-    @include font-family;
-    @include reset;
     position: relative;
     display: inline-flex;
     align-items: center;
     cursor: pointer;
 
-    path {
+    svg {
       fill: $brand-01;
+      margin-left: $spacing-xs;
     }
 
     // Tooltip - renders as a combo of :before and :after elements
@@ -234,19 +135,18 @@
       @include font-family;
       position: absolute;
       display: none;
-      background-color: $inverse-02;
+      background: $ui-01;
     }
 
     &:before {
-      @include typescale('omega');
+      @include typescale('zeta');
       @include layer('overlay');
-      max-width: rem(176px);
+      max-width: rem(240px);
+      padding: $spacing-lg;
+      border: 1px solid $ui-04;
       margin-left: 50%;
-      padding: $spacing-2xs;
-      border-radius: 4px;
-      color: $inverse-01;
-      font-weight: 400;
-      content: attr(title);
+      color: $text-01;
+      content: attr(data-tooltip-text);
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
@@ -257,15 +157,16 @@
       left: 0;
       width: 0.6rem;
       height: 0.6rem;
+      border-right: 1px solid $ui-04;
+      border-bottom: 1px solid $ui-04;
       margin: 0 auto;
       content: '';
-      margin-top: 1px;
     }
 
     &:hover,
     &:focus {
-      path {
-        fill: $hover-primary;
+      svg {
+        fill: $brand-02;
       }
 
       &:before,
@@ -284,8 +185,8 @@
     }
   }
 
-  // Tooltip Icon caret - top position
-  .#{$prefix}--tooltip--icon__top {
+  // Tooltip caret - top position
+  .#{$prefix}--tooltip--simple__top {
     &:before {
       bottom: 1.8rem;
     }
@@ -296,8 +197,8 @@
     }
   }
 
-  // Tooltip Icon caret - bottom position
-  .#{$prefix}--tooltip--icon__bottom {
+  // Tooltip caret - bottom position
+  .#{$prefix}--tooltip--simple__bottom {
     &:before {
       top: 1.8rem;
     }
@@ -305,15 +206,6 @@
     &:after {
       top: 1.5rem;
       transform: rotate(-135deg);
-    }
-  }
-
-  // Tooltip position - icon only
-  .#{$prefix}--tooltip--icon {
-    .#{$prefix}--tooltip__trigger {
-      svg {
-        margin-left: 0;
-      }
     }
   }
 }
