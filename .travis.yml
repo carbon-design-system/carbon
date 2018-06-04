@@ -5,7 +5,7 @@ cache:
   - node_modules
 
 node_js:
-  - "6"
+  - "8"
 
 dist: trusty
 
