@@ -1996,9 +1996,9 @@ capture-stack-trace@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.0.tgz#4a6fa07399c26bba47f0b2496b4d0fb408c5550d"
 
-carbon-addons-cloud@^1.1.0:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/carbon-addons-cloud/-/carbon-addons-cloud-1.6.1.tgz#a3089d229a6189da03d6e7190ec24d14619fd7ca"
+carbon-addons-cloud@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/carbon-addons-cloud/-/carbon-addons-cloud-1.8.0.tgz#4a2a3b98f2c7989a8e21ad57a601248dbd9d7ce5"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.0"

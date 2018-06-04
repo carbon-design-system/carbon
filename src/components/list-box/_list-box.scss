@@ -45,6 +45,12 @@ $list-box-menu-width: rem(300px);
     cursor: not-allowed;
   }
 
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item--highlighted {
+    background-color: transparent;
+    text-decoration: none;
+  }
+
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
     background-color: inherit;
