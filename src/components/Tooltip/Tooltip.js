@@ -358,6 +358,7 @@ export default class Tooltip extends Component {
               ref={node => {
                 this._tooltipEl = node;
               }}>
+              <span className="bx--tooltip__caret" />
               {children}
             </div>
           </FloatingMenu>
