@@ -8,10 +8,16 @@ The component library gives developers a collection of re-usable HTML and SCSS p
 
 # How to install
 
-Using npm,
+Run the following command using [npm](https://www.npmjs.com/):
 
-```
+```bash
 npm install -S carbon-components
+```
+
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command instead:
+
+```bash
+yarn add carbon-components
 ```
 
 # :books: Documentation
