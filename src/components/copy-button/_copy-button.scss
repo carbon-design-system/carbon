@@ -39,6 +39,7 @@
       pointer-events: none;
       border-radius: 4px;
       font-weight: 400;
+      z-index: 2;
     }
 
     &:after {
@@ -50,6 +51,7 @@
       border-bottom: 1px solid $inverse-02;
       content: '';
       transform: rotate(-135deg);
+      z-index: 1;
     }
 
     &:before,
