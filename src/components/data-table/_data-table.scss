@@ -22,7 +22,7 @@
     min-width: 500px;
     border-collapse: collapse;
     border-spacing: 0;
-    border: 2px solid $ui-04;
+    border: 2px solid $ui-03;
 
     td {
       @include reset;
@@ -67,7 +67,7 @@
       @include reset;
       border-collapse: collapse;
       width: auto;
-      border: 2px solid $ui-04;
+      border: 2px solid $ui-03;
 
       tr td:first-child,
       tr th:first-child {
@@ -115,10 +115,10 @@
       }
 
       &--even {
-        background-color: $ui-03;
+        background-color: $ui-02;
 
         & + .#{$prefix}--expandable-row {
-          background-color: $ui-03;
+          background-color: $ui-02;
         }
       }
     }

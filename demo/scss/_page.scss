@@ -75,12 +75,12 @@ td {
     }
   }
 
-  button {
-    border-radius: 0;
-  }
-
   & > *:not(.component-example):not(.component-variation),
-  & >  {
+  & > {
+    button {
+      border-radius: 0;
+    }
+
     .page__divider-heading {
       @include typescale('zeta');
       font-weight: 600;

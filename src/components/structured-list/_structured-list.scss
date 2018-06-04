@@ -38,7 +38,7 @@
     background-color: transparent;
 
     &.#{$prefix}--structured-list--border {
-      border: 1px solid $ui-04;
+      border: 1px solid $ui-03;
       background-color: $ui-01;
     }
 
@@ -50,22 +50,22 @@
 
   .#{$prefix}--structured-list-row {
     display: table-row;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $ui-03;
     transition: $transition--base $carbon--standard-easing;
 
     .#{$prefix}--structured-list--selection &:hover:not(.#{$prefix}--structured-list-row--header-row) {
-      background-color: rgba($brand-02, 0.1);
+      background-color: $hover-row;
       cursor: pointer;
     }
 
     // Deprecated
     [data-structured-list] &:hover:not(.#{$prefix}--structured-list-row--header-row) {
-      background-color: rgba($brand-02, 0.1);
+      background-color: $hover-row;
       cursor: pointer;
     }
 
     &.#{$prefix}--structured-list-row--selected {
-      background-color: rgba($brand-02, 0.1);
+      background-color: $hover-row;
     }
 
     &.#{$prefix}--structured-list-row--header-row {
@@ -120,7 +120,7 @@
     transition: $transition--base $carbon--standard-easing;
 
     .#{$prefix}--structured-list-row:hover & {
-      fill: rgba($brand-02, 0.1);
+      fill: $hover-row;
     }
 
     .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-row &,

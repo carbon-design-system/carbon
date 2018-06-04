@@ -21,11 +21,18 @@
     padding: $spacing-md;
     color: $text-01;
     background-color: $field-01;
-    border: $input-border;
+    border: none;
+    box-shadow: 0 1px 0 0 $text-02;
+    order: 2;
     resize: vertical;
 
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
     }
 
     &::-webkit-input-placeholder {
@@ -39,6 +46,54 @@
 
     &:disabled:hover {
       border: $input-border;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      box-shadow: 0 2px 0 0 $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus + .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    & ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--text-area--light {
+    background: $field-02;
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
+    }
+  }
+
+  // Skeleton State
+  #{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+    height: rem(100px);
+
+    &::-webkit-input-placeholder {
+      color: transparent;
     }
   }
 

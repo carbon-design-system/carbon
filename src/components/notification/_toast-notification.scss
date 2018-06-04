@@ -22,7 +22,7 @@
     justify-content: space-between;
     width: 16.875rem;
     padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
-    background-color: $inverse-01;
+    background-color: $ui-01;
     color: $text-01;
     margin-top: $spacing-xs;
     margin-bottom: $spacing-xs;
@@ -50,7 +50,7 @@
   }
 
   .#{$prefix}--toast-notification__close-button {
-    background-color: $inverse-01;
+    background-color: $ui-01;
     border: none;
     cursor: pointer;
     margin: 0;
@@ -66,7 +66,7 @@
   .#{$prefix}--toast-notification__icon {
     height: 10px;
     width: 10px;
-    fill: $text-03;
+    fill: $ui-05;
     position: absolute;
     top: 1px;
     right: 1px;
@@ -82,7 +82,7 @@
 
   .#{$prefix}--toast-notification__subtitle {
     @include typescale('omega');
-    color: $text-03;
+    color: $text-02;
     margin-top: 0;
     margin-bottom: $spacing-md;
     line-height: 1.2;
@@ -90,7 +90,7 @@
 
   .#{$prefix}--toast-notification__caption {
     @include typescale('omega');
-    color: $text-03;
+    color: $text-02;
     line-height: 1;
   }
 }

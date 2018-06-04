@@ -25,15 +25,17 @@ $brand-01: $color__blue-51 !default;
 $brand-02: $color__blue-40 !default;
 $brand-03: $color__teal-20 !default;
 $inverse-01: $color__white !default;
+$inverse-02: #272d33 !default;
 $ui-01: $color__white !default;
-$ui-02: $color__gray-3 !default;
-$ui-03: $color__gray-2 !default;
-$ui-04: $color__gray-1 !default;
-$ui-05: $color__navy-gray-7 !default;
+$ui-02: #f4f7fb !default;
+$ui-03: $color__gray-1 !default;
+$ui-04: #8897a2 !default;
+$ui-05: $color__navy-gray-6 !default;
 $text-01: $color__blue-90 !default;
 $text-02: $color__navy-gray-6 !default;
-$text-03: $color__navy-gray-6 !default;
-$field-01: rgba($color__blue-51, 0.1) !default;
+$text-03: #cdd1d4 !default;
+$field-01: #f4f7fb !default;
+$field-02: $color__white !default;
 $support-01: #e0182d !default;
 $support-02: $color__green-40 !default;
 $support-03: $color__yellow-30 !default;
@@ -46,6 +48,12 @@ $nav-05: $color__teal-40 !default;
 $nav-06: $color__teal-50 !default;
 $nav-07: $color__blue-30 !default;
 $nav-08: $color__blue-51 !default;
+
+$hover-primary: darken($brand-01, 10%) !default;
+$hover-primary-text: darken($brand-01, 15%) !default;
+$hover-danger: darken($support-01, 10%) !default;
+$hover-secondary: $brand-01 !default;
+$hover-row: rgba($brand-02, 0.1) !default;
 
 // Global
 $input-border: 1px solid transparent !default;
@@ -75,7 +83,8 @@ $card-flex-align: center !default;
 $checkbox-border-width: 2px !default;
 
 // Code Snippet
-$snippet-background-color: $field-01 !default;
+$snippet-background-color: $ui-01 !default;
+$snippet-border-color: $ui-03 !default;
 
 // Content Switcher
 $content-switcher-border-radius: 8px !default;
@@ -88,7 +97,7 @@ $data-table-row-height: 2rem !default;
 
 // Modal
 $modal-border-top: $brand-01 4px solid !default;
-$modal-footer-background-color: $ui-03 !default;
+$modal-footer-background-color: $ui-02 !default;
 
 // Progress Indicator
 $progress-indicator-bar-width: 1px inset transparent !default;

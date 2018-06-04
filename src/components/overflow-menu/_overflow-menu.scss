@@ -34,7 +34,7 @@
 
     &:hover,
     &:focus {
-      fill: $brand-01;
+      fill: $hover-secondary;
     }
   }
 
@@ -47,7 +47,7 @@
     position: absolute;
     z-index: z('floating');
     background-color: $inverse-01;
-    border: 1px solid $ui-04;
+    border: 1px solid $ui-03;
     width: 11.25rem;
     list-style: none;
     margin-top: $spacing-2xs;
@@ -68,8 +68,8 @@
     z-index: -1;
     transform: rotate(45deg);
     background-color: $inverse-01;
-    border-top: 1px solid $ui-04;
-    border-left: 1px solid $ui-04;
+    border-top: 1px solid $ui-03;
+    border-left: 1px solid $ui-03;
     top: -5px;
     left: 24px;
   }
@@ -84,7 +84,7 @@
   }
 
   .#{$prefix}--overflow-menu--divider {
-    border-top: 1px solid $ui-04;
+    border-top: 1px solid $ui-03;
   }
 
   .#{$prefix}--overflow-menu-options__btn {
@@ -104,6 +104,8 @@
     &:focus {
       outline: 1px solid transparent;
       text-decoration: underline;
+      background-color: $hover-row;
+      text-decoration: underline;
     }
 
     .#{$prefix}--overflow-menu-options__option--danger & {
@@ -115,24 +117,31 @@
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
-    background-color: $brand-01;
+    background-color: $hover-row;
   }
 
   .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
-    color: $inverse-01;
+    text-decoration: none;
+    background-color: $hover-row;
     text-decoration: none;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger {
-    border-top: 1px solid $ui-04;
+    border-top: 1px solid $ui-03;
   }
 
-  .#{$prefix}--overflow-menu-options__option--danger:hover {
-    background-color: $support-01;
+  .#{$prefix}--overflow-menu-options__option--danger {
+    .bx--overflow-menu-options__btn {
+      &:hover,
+      &:focus {
+        color: $inverse-01;
+        background-color: $support-01;
+      }
+    }
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled:hover {
-    background-color: $inverse-01;
+    background-color: $ui-01;
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
@@ -144,6 +153,7 @@
   .#{$prefix}--overflow-menu-options__option--disabled:hover .#{$prefix}--overflow-menu-options__btn {
     color: $text-01;
     opacity: 0.5;
+    background-color: $ui-01;
 
     &:active,
     &:focus {

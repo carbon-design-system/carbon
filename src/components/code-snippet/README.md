@@ -11,9 +11,11 @@ Mixins specific to Code Snippet are located in [src/components/code-snippet/_mix
 
 #### Modifiers
 
-Use these modifiers with `.bx--root-class` class.
+Use these modifiers with `.bx--snippet` class.
 
 | Selector                         | Description                        |
 |----------------------------------|------------------------------------|
-| .bx--snippet--code               | Styles for multiple lines of code  |
-| .bx--snippet--terminal           | Styles for single lines of code    |
+| .bx--snippet--single             | Selector for multiple lines of code  |
+| .bx--snippet--multi              | Selector for single lines of code    |
+| .bx--snippet--inline             | Selector for inline code inside text  |
+| .bx--snippet--light              | Selector for inline code inside text with a light background. Can only be used with .bx--snippet-inline selector  |

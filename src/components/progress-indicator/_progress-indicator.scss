@@ -45,6 +45,7 @@
     height: 1.5rem;
     border-radius: 50%;
     margin-bottom: $spacing-xs;
+    fill: $brand-01;
   }
 
   .#{$prefix}--progress-label {
@@ -59,10 +60,6 @@
       fill: transparent;
     }
 
-    circle:last-child {
-      fill: $brand-01;
-    }
-
     .#{$prefix}--progress-label {
       @include font-smoothing;
       color: $brand-01;
@@ -75,7 +72,7 @@
 
   .#{$prefix}--progress-step--incomplete {
     circle {
-      stroke: $ui-05;
+      stroke: $ui-04;
       stroke-width: $progress-indicator-stroke-width;
       fill: transparent;
     }
@@ -85,7 +82,7 @@
     }
 
     .#{$prefix}--progress-line {
-      background-color: $ui-05;
+      background-color: $ui-04;
     }
   }
 

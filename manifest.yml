@@ -1,7 +1,7 @@
 ---
 applications:
 - name: carbon-dev-environment
-  memory: 64M
+  memory: 1G
   buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git#v1.5.22
   random-route: true
   env:
