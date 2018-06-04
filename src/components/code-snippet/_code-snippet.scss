@@ -115,6 +115,7 @@
     padding: 0;
     height: rem(32px);
     width: rem(32px);
+    overflow: visible;
 
     &:focus {
       @include focus-outline('border');
@@ -226,7 +227,7 @@
     padding-bottom: 0;
   }
 
-  /* 
+  /*
     Deprecated class names will be removed in v10.x
   */
 

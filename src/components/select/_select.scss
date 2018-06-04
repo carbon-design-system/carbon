@@ -87,10 +87,14 @@
     fill: $brand-01;
     position: absolute;
     right: 1rem;
-    top: 2.625rem;
+    bottom: 1rem;
     width: rem(10px);
     height: rem(5px);
     pointer-events: none;
+  }
+
+  &[data-invalid] ~ .#{$prefix}--select__arrow {
+    bottom: 2.25rem;
   }
 
   .#{$prefix}--select-optgroup,
@@ -140,10 +144,6 @@
         opacity: 0.5;
         cursor: not-allowed;
       }
-    }
-
-    .#{$prefix}--select__arrow {
-      top: auto;
     }
   }
 }

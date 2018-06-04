@@ -156,9 +156,11 @@
 
   .#{$prefix}--dropdown--inline {
     background-color: transparent;
+    box-shadow: none;
 
     &:focus {
       outline: none;
+      box-shadow: none;
     }
 
     &:focus .#{$prefix}--dropdown-text {
