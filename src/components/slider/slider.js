@@ -6,7 +6,12 @@ import eventedState from '../../globals/js/mixins/evented-state';
 import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 
-class Slider extends mixin(createComponent, initComponentBySearch, eventedState, handles) {
+class Slider extends mixin(
+  createComponent,
+  initComponentBySearch,
+  eventedState,
+  handles
+) {
   /**
    * Slider.
    * @extends CreateComponent
@@ -21,12 +26,16 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     this.dragging = false;
 
     this.track = this.element.querySelector(this.options.selectorTrack);
-    this.filledTrack = this.element.querySelector(this.options.selectorFilledTrack);
+    this.filledTrack = this.element.querySelector(
+      this.options.selectorFilledTrack
+    );
     this.thumb = this.element.querySelector(this.options.selectorThumb);
     this.input = this.element.querySelector(this.options.selectorInput);
 
     if (this.element.dataset.sliderInputBox) {
-      this.boundInput = this.element.ownerDocument.querySelector(this.element.dataset.sliderInputBox);
+      this.boundInput = this.element.ownerDocument.querySelector(
+        this.element.dataset.sliderInputBox
+      );
       this._updateInput();
       this.manage(
         on(this.boundInput, 'change', evt => {
@@ -60,7 +69,9 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     );
     this.manage(
       on(this.element.ownerDocument, 'mousemove', evt => {
-        const disabled = this.element.classList.contains(this.options.classDisabled);
+        const disabled = this.element.classList.contains(
+          this.options.classDisabled
+        );
         if (this.sliderActive === true && !disabled) {
           this._updatePosition(evt);
         }
@@ -68,7 +79,9 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     );
     this.manage(
       on(this.thumb, 'keydown', evt => {
-        const disabled = this.element.classList.contains(this.options.classDisabled);
+        const disabled = this.element.classList.contains(
+          this.options.classDisabled
+        );
         if (!disabled) {
           this._updatePosition(evt);
         }
@@ -76,7 +89,9 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     );
     this.manage(
       on(this.track, 'click', evt => {
-        const disabled = this.element.classList.contains(this.options.classDisabled);
+        const disabled = this.element.classList.contains(
+          this.options.classDisabled
+        );
         if (!disabled) {
           this._updatePosition(evt);
         }
@@ -100,7 +115,8 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     requestAnimationFrame(() => {
       this.dragging = false;
       this.thumb.style.left = `${left}%`;
-      this.filledTrack.style.transform = `translate(0%, -50%) scaleX(${left / 100})`;
+      this.filledTrack.style.transform = `translate(0%, -50%) scaleX(${left /
+        100})`;
       this.input.value = newValue;
       this._updateInput();
       this.changeState('slider-value-change', { value: newValue });
@@ -111,7 +127,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     const { value, min, max, step } = this.getInputProps();
 
     const range = max - min;
-    const valuePercentage = (value - min) / range * 100;
+    const valuePercentage = ((value - min) / range) * 100;
 
     let left;
     let newValue;
@@ -130,24 +146,31 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
         }[evt.which];
 
         if (direction !== undefined) {
-          const multiplier = evt.shiftKey === true ? range / step / this.options.stepMultiplier : 1;
+          const multiplier =
+            evt.shiftKey === true
+              ? range / step / this.options.stepMultiplier
+              : 1;
           const stepMultiplied = step * multiplier;
-          const stepSize = stepMultiplied / range * 100;
+          const stepSize = (stepMultiplied / range) * 100;
           left = valuePercentage + stepSize * direction;
           newValue = Number(value) + stepMultiplied * direction;
         }
       }
       if (type === 'mousemove' || type === 'click') {
         if (type === 'click') {
-          this.element.querySelector(this.options.selectorThumb).classList.add(this.options.classThumbClicked);
+          this.element
+            .querySelector(this.options.selectorThumb)
+            .classList.add(this.options.classThumbClicked);
         } else {
-          this.element.querySelector(this.options.selectorThumb).classList.remove(this.options.classThumbClicked);
+          this.element
+            .querySelector(this.options.selectorThumb)
+            .classList.remove(this.options.classThumbClicked);
         }
 
         const track = this.track.getBoundingClientRect();
         const unrounded = (evt.clientX - track.left) / track.width;
-        const rounded = Math.round(range * unrounded / step) * step;
-        left = rounded / range * 100;
+        const rounded = Math.round((range * unrounded) / step) * step;
+        left = (rounded / range) * 100;
         newValue = rounded + min;
       }
     }

@@ -34,7 +34,13 @@
   }
 }
 
-@mixin button-theme($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
+@mixin button-theme(
+  $bg-color,
+  $border-color,
+  $font-color,
+  $hover-bg-color,
+  $icon-color
+) {
   background-color: $bg-color;
   border-width: $button-border-width;
   border-style: solid;

@@ -8,17 +8,27 @@ describe('Test pagination', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         pagination = new Pagination();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         pagination = new Pagination(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default options', function() {
-      expect(flattenOptions((pagination = new Pagination(document.createElement('div'))).options)).toEqual({
+      expect(
+        flattenOptions(
+          (pagination = new Pagination(document.createElement('div'))).options
+        )
+      ).toEqual({
         selectorInit: '[data-pagination]',
         selectorItemsPerPageInput: '[data-items-per-page]',
         selectorPageNumberInput: '[data-page-number-input]',

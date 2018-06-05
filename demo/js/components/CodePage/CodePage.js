@@ -37,7 +37,12 @@ const CodePage = ({ metadata, hideViewFullRender }) => {
   return (
     <div className="page code-page test">
       {componentContent}
-      {metadata.notes && <div className="page_md" dangerouslySetInnerHTML={{ __html: md.render(metadata.notes) }} />}
+      {metadata.notes && (
+        <div
+          className="page_md"
+          dangerouslySetInnerHTML={{ __html: md.render(metadata.notes) }}
+        />
+      )}
     </div>
   );
   /* eslint-enable react/no-danger */

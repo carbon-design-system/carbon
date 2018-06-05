@@ -81,7 +81,13 @@
     @include gridBreakpointWrapper($breakpoint, $first) {
       @if $includeFlexFallback {
         @include gridLegacyZeros($breakpoint, $allBreakpoints, $name);
-        @include gridLegacyColumns($breakpoint, $first, $last, $name, $allBreakpoints);
+        @include gridLegacyColumns(
+          $breakpoint,
+          $first,
+          $last,
+          $name,
+          $allBreakpoints
+        );
         @if isSameBreakpoint($breakpoint, $last) == false {
           @include gridLegacyHeights($name, $rows, $rowHeight);
         }

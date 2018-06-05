@@ -150,7 +150,9 @@
     width: auto;
   }
 
-  .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
+  .#{$prefix}--data-table-v2--zebra
+    tbody
+    tr.#{$prefix}--data-table-v2--selected,
   tbody tr.#{$prefix}--data-table-v2--selected {
     background-color: rgba($brand-02, 0.1);
   }

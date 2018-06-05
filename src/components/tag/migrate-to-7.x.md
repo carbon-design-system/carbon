@@ -6,18 +6,20 @@ HTML has not changed except for class attributes. See SCSS for more details.
 
 The `_tag.scss` file is now located at `src/components/tag/_tag.scss`. You will need to update any `@import` statements for this file to reflect this change.
 
-**New**: 
+**New**:
+
 ```scss
 @import 'path_to_node_modules/carbon-components/src/components/tag/tag';
 ```
 
-**Old**: 
+**Old**:
+
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/tag/tag';
 ```
 
 | Old Class         | New Class             | Note    |
-|-------------------|-----------------------|---------|
+| ----------------- | --------------------- | ------- |
 |                   | bx--tag               | Added   |
 | tag--ibm          | bx--tag--ibm          | Changed |
 | tag--beta         | bx--tag--beta         | Changed |
@@ -29,5 +31,3 @@ The `_tag.scss` file is now located at `src/components/tag/_tag.scss`. You will 
 | tag--community    | bx--tag--community    | Changed |
 | tag--private      | bx--tag--private      | Changed |
 | tag--deprecated   |                       | Removed |
-
-

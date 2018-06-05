@@ -383,7 +383,8 @@
     margin-bottom: 0;
   }
 
-  .#{$prefix}--main-nav__parent-item--expanded .#{$prefix}--main-nav__nested-list {
+  .#{$prefix}--main-nav__parent-item--expanded
+    .#{$prefix}--main-nav__nested-list {
     max-height: 20rem;
     transition: 300ms $carbon--standard-easing;
     opacity: 1;
@@ -538,15 +539,21 @@
     align-items: center;
 
     &:hover {
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps'] & .#{$prefix}--flyout-menu__item--link {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='apps']
+        &
+        .#{$prefix}--flyout-menu__item--link {
         color: $nav-06;
       }
 
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services'] & .#{$prefix}--flyout-menu__item--link {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='services']
+        &
+        .#{$prefix}--flyout-menu__item--link {
         color: $nav-04;
       }
 
-      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure'] & .#{$prefix}--flyout-menu__item--link {
+      .#{$prefix}--left-nav__main-nav[data-left-nav-list='infrastructure']
+        &
+        .#{$prefix}--flyout-menu__item--link {
         color: $nav-08;
       }
     }

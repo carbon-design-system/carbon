@@ -4,34 +4,34 @@
 
 Use these modifiers with `.bx--modal` class.
 
-| Name                    | Description                                           |
-|-------------------------|-------------------------------------------------------|
+| Name               | Description                               |
+| ------------------ | ----------------------------------------- |
 | .bx--modal--danger | Selector for applying danger modal styles |
 
 ### JavaScript
 
 #### Public Methods
 
-| Name              | Params           | Description          |
-|-------------------|------------------|----------------------|
-| release           |                  | Deletes the instance |
-| show              |                  | Show the modal       |
-| hide              |                  | Hide the modal       |
+| Name    | Params | Description          |
+| ------- | ------ | -------------------- |
+| release |        | Deletes the instance |
+| show    |        | Show the modal       |
+| hide    |        | Hide the modal       |
 
 #### Options
 
-| Option             | Default Selector     | Description                                                                                                                           |
-|--------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| selectorInit       | '[data-modal]'       | The css selector for root modal component                                                                                             |
-| selectorModalClose | '[data-modal-close]' | The selector to find elements that close the modal                                                                                    |
-| classVisible       | 'is-visible'         | Class to toggle visibility of modal                                                                                                   |
-| attribInitTarget   | 'data-modal-target'  | The attribute on the launching element to target the modal                                                                            |
-| initEventNames     | '['click']'          | On specified events, if event matches the attribInitTarget, then initialize the component and run createdByLauncher if method exists  |
+| Option             | Default Selector     | Description                                                                                                                          |
+| ------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| selectorInit       | '[data-modal]'       | The css selector for root modal component                                                                                            |
+| selectorModalClose | '[data-modal-close]' | The selector to find elements that close the modal                                                                                   |
+| classVisible       | 'is-visible'         | Class to toggle visibility of modal                                                                                                  |
+| attribInitTarget   | 'data-modal-target'  | The attribute on the launching element to target the modal                                                                           |
+| initEventNames     | '['click']'          | On specified events, if event matches the attribInitTarget, then initialize the component and run createdByLauncher if method exists |
 
 #### Events
 
 | Event Option      | Event Name          |
-|-------------------|---------------------|
+| ----------------- | ------------------- |
 | eventBeforeShown  | 'modal-beingshown'  |
 | eventAfterShown   | 'modal-shown'       |
 | eventBeforeHidden | 'modal-beinghidden' |

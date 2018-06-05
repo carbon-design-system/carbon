@@ -73,7 +73,8 @@
     align-items: center;
   }
 
-  .#{$prefix}--account-switcher__toggle--text[data-switcher-account] .#{$prefix}--account-switcher__linked-icon {
+  .#{$prefix}--account-switcher__toggle--text[data-switcher-account]
+    .#{$prefix}--account-switcher__linked-icon {
     margin-right: 0;
   }
 
@@ -186,7 +187,9 @@
     min-width: 200px;
   }
 
-  .#{$prefix}--account-switcher__menu__item .#{$prefix}--dropdown[data-value=''] .#{$prefix}--dropdown-text {
+  .#{$prefix}--account-switcher__menu__item
+    .#{$prefix}--dropdown[data-value='']
+    .#{$prefix}--dropdown-text {
     color: $color__white; // anna
   }
 

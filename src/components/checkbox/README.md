@@ -2,16 +2,16 @@
 
 #### Public Methods
 
-| Name      | Params                        | Description                                                                                                           |
-|-----------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| setState | state: `String` ['true', 'false', 'mixed'] | Can be used to set the checkbox to `true`(checked), `false`(unchecked) or `mixed` (indeterminate) |
-| setDisabled | state: `Boolean` | Can be used to set the checkbox to disabled, needed for the `label > input` |
+| Name        | Params                                     | Description                                                                                       |
+| ----------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| setState    | state: `String` ['true', 'false', 'mixed'] | Can be used to set the checkbox to `true`(checked), `false`(unchecked) or `mixed` (indeterminate) |
+| setDisabled | state: `Boolean`                           | Can be used to set the checkbox to disabled, needed for the `label > input`                       |
 
 #### Options
 
-| Option              | Default Selector                               | Description                                             |
-|---------------------|------------------------------------------------|--|
-| selectorInit        | .bx--checkbox                        | The CSS selector to find checkbox  |
+| Option       | Default Selector | Description                       |
+| ------------ | ---------------- | --------------------------------- |
+| selectorInit | .bx--checkbox    | The CSS selector to find checkbox |
 
 ### FAQ
 
@@ -41,14 +41,12 @@ With `label` wrapping `input`
 </div>
 ```
 
-Note: You no longer need to include a SVG for the checkmark to render.  
+Note: You no longer need to include a SVG for the checkmark to render.
 
 #### Fieldset and Legend
 
 As a best practice, groups of checkboxes should make use of `<fieldset>` and `<legend>` (see Form for details).
 This is especially true for forms submitting data.
 
-But, there are exceptions to the rule. For example, Data Tables make use of checkboxes as a way to select rows of data. 
+But, there are exceptions to the rule. For example, Data Tables make use of checkboxes as a way to select rows of data.
 Checkboxes in this context would represent an entire row of data in its associated table row.
-
-

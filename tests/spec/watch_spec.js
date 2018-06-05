@@ -11,7 +11,10 @@ settings.disableAutoInit = true;
 
 describe('Test watch mode', function() {
   const watchOptions = { foo: 'Foo' };
-  const ClassInitedBySearch = class extends mixin(createComponent, initComponentBySearch) {
+  const ClassInitedBySearch = class extends mixin(
+    createComponent,
+    initComponentBySearch
+  ) {
     // release = spyReleaseComponentBySearch;
     static options = {
       selectorInit: '[data-my-component-inited-by-search]',
@@ -19,7 +22,10 @@ describe('Test watch mode', function() {
     static components = new WeakMap();
   };
 
-  const ClassInitedByEvent = class extends mixin(createComponent, initComponentByEvent) {
+  const ClassInitedByEvent = class extends mixin(
+    createComponent,
+    initComponentByEvent
+  ) {
     // release = spyReleaseComponentByEvent;
     static options = {
       selectorInit: '[data-my-component-inited-by-event]',
@@ -28,7 +34,10 @@ describe('Test watch mode', function() {
     static components = new WeakMap();
   };
 
-  const ClassInitedByLauncher = class extends mixin(createComponent, initComponentByLauncher) {
+  const ClassInitedByLauncher = class extends mixin(
+    createComponent,
+    initComponentByLauncher
+  ) {
     // release = spyReleaseComponentByLauncher;
     static options = {
       selectorInit: '[data-my-component-inited-by-launcher]',
@@ -38,7 +47,11 @@ describe('Test watch mode', function() {
     static components = new WeakMap();
   };
 
-  const components = { ClassInitedBySearch, ClassInitedByEvent, ClassInitedByLauncher };
+  const components = {
+    ClassInitedBySearch,
+    ClassInitedByEvent,
+    ClassInitedByLauncher,
+  };
 
   beforeAll(function() {
     spyOn(ClassInitedBySearch, 'init').and.callThrough();
@@ -56,10 +69,12 @@ describe('Test watch mode', function() {
 
     beforeAll(function() {
       const origObserve = MutationObserver.prototype.observe;
-      spyOn(MutationObserver.prototype, 'observe').and.callFake(function stubObserveImpl(target, options) {
-        lastTarget = target;
-        origObserve.call(this, target, options);
-      });
+      spyOn(MutationObserver.prototype, 'observe').and.callFake(
+        function stubObserveImpl(target, options) {
+          lastTarget = target;
+          origObserve.call(this, target, options);
+        }
+      );
     });
 
     it('Should throw if given element is neither a DOM element or a document', function() {
@@ -83,8 +98,14 @@ describe('Test watch mode', function() {
         ClassInitedBySearch.init.calls.reset();
 
         expect(lastTarget, 'Watch target').toBe(document);
-        expect(ClassInitedByEvent.init.calls.allArgs(), 'ClassInitedByEvent.init()').toEqual([[document, watchOptions]]);
-        expect(ClassInitedByLauncher.init.calls.allArgs(), 'ClassInitedByLauncher.init()').toEqual([[document, watchOptions]]);
+        expect(
+          ClassInitedByEvent.init.calls.allArgs(),
+          'ClassInitedByEvent.init()'
+        ).toEqual([[document, watchOptions]]);
+        expect(
+          ClassInitedByLauncher.init.calls.allArgs(),
+          'ClassInitedByLauncher.init()'
+        ).toEqual([[document, watchOptions]]);
 
         element = document.createElement('div');
         element.dataset.myComponentInitedBySearch = '';
@@ -92,7 +113,10 @@ describe('Test watch mode', function() {
 
         await delay(0); // Wait for mutation observer to deliver records
 
-        expect(ClassInitedBySearch.init.calls.allArgs(), 'ClassInitedBySearch.init()').toEqual([[element, watchOptions]]);
+        expect(
+          ClassInitedBySearch.init.calls.allArgs(),
+          'ClassInitedBySearch.init()'
+        ).toEqual([[element, watchOptions]]);
       });
     });
 
@@ -123,10 +147,16 @@ describe('Test watch mode', function() {
         element.appendChild(elementInitedByLauncher);
 
         const launcherButton = document.createElement('button');
-        launcherButton.dataset.initTarget = '[data-my-component-inited-by-launcher]';
+        launcherButton.dataset.initTarget =
+          '[data-my-component-inited-by-launcher]';
         element.appendChild(launcherButton);
 
-        launcherButton.dispatchEvent(new CustomEvent('launching-event', { bubbles: true, cancelable: true }));
+        launcherButton.dispatchEvent(
+          new CustomEvent('launching-event', {
+            bubbles: true,
+            cancelable: true,
+          })
+        );
 
         await delay(0); // Wait for mutation observer to deliver records
 
@@ -136,7 +166,9 @@ describe('Test watch mode', function() {
 
         expect(ClassInitedBySearch.prototype.release).toHaveBeenCalledTimes(1);
         expect(ClassInitedByEvent.prototype.release).toHaveBeenCalledTimes(1);
-        expect(ClassInitedByLauncher.prototype.release).toHaveBeenCalledTimes(1);
+        expect(ClassInitedByLauncher.prototype.release).toHaveBeenCalledTimes(
+          1
+        );
       });
     });
 
@@ -165,8 +197,14 @@ describe('Test watch mode', function() {
         ClassInitedBySearch.init.calls.reset();
 
         expect(lastTarget, 'Watch target').toBe(document);
-        expect(ClassInitedByEvent.init.calls.allArgs(), 'ClassInitedByEvent.init()').toEqual([[document, watchOptions]]);
-        expect(ClassInitedByLauncher.init.calls.allArgs(), 'ClassInitedByLauncher.init()').toEqual([[document, watchOptions]]);
+        expect(
+          ClassInitedByEvent.init.calls.allArgs(),
+          'ClassInitedByEvent.init()'
+        ).toEqual([[document, watchOptions]]);
+        expect(
+          ClassInitedByLauncher.init.calls.allArgs(),
+          'ClassInitedByLauncher.init()'
+        ).toEqual([[document, watchOptions]]);
 
         element = document.createElement('div');
         element.dataset.myComponentInitedBySearch = '';
@@ -176,7 +214,10 @@ describe('Test watch mode', function() {
 
         await delay(0); // Wait for mutation observer to deliver records
 
-        expect(ClassInitedBySearch.init, 'ClassInitedBySearch.init()').not.toHaveBeenCalled();
+        expect(
+          ClassInitedBySearch.init,
+          'ClassInitedBySearch.init()'
+        ).not.toHaveBeenCalled();
       });
     });
 

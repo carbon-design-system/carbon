@@ -7,12 +7,14 @@ All checkboxes must use SVG icons to ensure browser compatibility.
 
 The `_checkbox.scss` file is now located in `src/components/checkbox/_checkbox.scss`. You'll need to update any `@import` statements for this file to reflect this change.
 
-**New**: 
+**New**:
+
 ```scss
 @import 'path_to_node_modules/carbon-components/src/components/checkbox/checkbox';
 ```
 
-**Old**: 
+**Old**:
+
 ```scss
 @import 'path_to_node_modules/@console/bluemix-components/src/components/checkbox/checkbox';
 ```

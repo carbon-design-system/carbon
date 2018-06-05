@@ -6,7 +6,15 @@
   @each $name, $breakpoint in $breakpoints {
     $cleanBreakpoints: map-merge(
       $cleanBreakpoints,
-       ($name: map-merge($breakpoint,  (padding: calc(#{map-get($breakpoint, gutter)} / 2))))
+      (
+        $name:
+          map-merge(
+            $breakpoint,
+            (
+              padding: calc(#{map-get($breakpoint, gutter)} / 2),
+            )
+          ),
+      )
     );
   }
 
@@ -23,7 +31,9 @@
     $match: null;
     @each $majorBreakpoint in $breakpoints {
       @if $found == false {
-        @if map-get(nth($majorBreakpoint, 2), breakpoint) > $extraBreakpointWidth {
+        @if map-get(nth($majorBreakpoint, 2), breakpoint) >
+          $extraBreakpointWidth
+        {
           $found: true;
         } @else {
           $match: $majorBreakpoint;
@@ -37,8 +47,21 @@
       $match: (first, $first);
     }
 
-    $newBreakpoint: map-merge(nth($match, 2),  (breakpoint: $extraBreakpointWidth));
-    $currentBreakpoint: ($extraBreakpointName: map-merge(nth($match, 2),  (breakpoint: $extraBreakpointWidth)));
+    $newBreakpoint: map-merge(
+      nth($match, 2),
+      (
+        breakpoint: $extraBreakpointWidth,
+      )
+    );
+    $currentBreakpoint: (
+      $extraBreakpointName:
+        map-merge(
+          nth($match, 2),
+          (
+            breakpoint: $extraBreakpointWidth,
+          )
+        ),
+    );
     $allBreakpoints: map-merge($allBreakpoints, $currentBreakpoint);
   }
 
@@ -50,15 +73,19 @@
 }
 
 @function columnWidth($breakpoint, $first, $last, $i, $columnAmount) {
-  $columnSize: 100 / map-get($breakpoint, columns) * $i * map-get($breakpoint, columns) / $columnAmount;
+  $columnSize: 100 / map-get($breakpoint, columns) * $i *
+    map-get($breakpoint, columns) / $columnAmount;
   $margin: 0;
   $type: 'vw';
   @if map-get($breakpoint, margin) {
     $margin: map-get($breakpoint, margin) * 2;
   }
-  @if (map-get($breakpoint, margin) != null and
-map-get($breakpoint, margin) != 0) {
-    $columnSize: calc( (#{100vw} - #{$margin}) * #{roundDecimal($i / $columnAmount, 3, floor)});
+  @if (
+    map-get($breakpoint, margin) != null and map-get($breakpoint, margin) != 0
+  ) {
+    $columnSize: calc(
+      (#{100vw} - #{$margin}) * #{roundDecimal($i / $columnAmount, 3, floor)}
+    );
     $type: '';
   }
 
@@ -70,7 +97,7 @@ map-get($breakpoint, margin) != 0) {
 }
 
 // _decimal.scss | MIT License | gist.github.com/terkel/4373420
-@function roundDecimal ($number, $digits: 0, $mode: round) {
+@function roundDecimal($number, $digits: 0, $mode: round) {
   $n: 1;
   // $number must be a number
   @if type-of($number) != number {
@@ -101,7 +128,7 @@ map-get($breakpoint, margin) != 0) {
 }
 
 // _decimal.scss | MIT License | gist.github.com/terkel/4373420
-@function roundDecimal ($number, $digits: 0, $mode: round) {
+@function roundDecimal($number, $digits: 0, $mode: round) {
   $n: 1;
   // $number must be a number
   @if type-of($number) != number {
@@ -143,12 +170,23 @@ map-get($breakpoint, margin) != 0) {
   $result: 0;
   $digits: 0;
   $minus: str-slice($value, 1, 1) == '-';
-  $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+  $numbers: (
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+  );
 
   @for $i from if($minus, 2, 1) through str-length($value) {
     $character: str-slice($value, $i, $i);
 
-    @if not (index(map-keys($numbers), $character) or $character == '.') {
+    @if not(index(map-keys($numbers), $character) or $character == '.') {
       @return to-length(if($minus, -$result, $result), str-slice($value, $i));
     }
 

@@ -4,8 +4,16 @@
 @import './experimental/fallback';
 
 @include exports('grid') {
-  @if global-variable-exists('css--use-experimental-grid') == true and $css--use-experimental-grid == true {
-    @if global-variable-exists('css--use-experimental-grid-fallback') == true and $css--use-experimental-grid-fallback == true {
+  @if global-variable-exists('css--use-experimental-grid') ==
+    true and
+    $css--use-experimental-grid ==
+    true
+  {
+    @if global-variable-exists('css--use-experimental-grid-fallback') ==
+      true and
+      $css--use-experimental-grid-fallback ==
+      true
+    {
       @include grid-experimental-fallback;
     } @else {
       @include grid-experimental;

@@ -45,7 +45,9 @@ class ProgressIndicator extends mixin(createComponent, initComponentBySearch) {
    * Returns all steps with details about element and index.
    */
   getSteps() {
-    return [...this.element.querySelectorAll(this.options.selectorStepElement)].map((element, index) => ({
+    return [
+      ...this.element.querySelectorAll(this.options.selectorStepElement),
+    ].map((element, index) => ({
       element,
       index,
     }));

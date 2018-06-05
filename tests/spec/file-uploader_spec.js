@@ -19,13 +19,19 @@ describe('File Uploader', function() {
     it('should throw if root element is not given', function() {
       expect(() => {
         new FileUploader();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should throw if root element is not a DOM element', function() {
       expect(() => {
         new FileUploader(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should throw if the <input type="file"> is not found', function() {
@@ -57,8 +63,10 @@ describe('File Uploader', function() {
         classFileComplete: 'bx--file-complete',
         classSelectedFile: 'bx--file__selected-file',
         classStateContainer: 'bx--file__state-container',
-        eventBeforeDeleteFilenameFileuploader: 'fileuploader-before-delete-filename',
-        eventAfterDeleteFilenameFileuploader: 'fileuploader-after-delete-filename',
+        eventBeforeDeleteFilenameFileuploader:
+          'fileuploader-before-delete-filename',
+        eventAfterDeleteFilenameFileuploader:
+          'fileuploader-after-delete-filename',
       });
     });
 
@@ -271,7 +279,9 @@ describe('File Uploader', function() {
     it('should have an empty stateContainer', function() {
       const filenameElement = instance._filenamesHTML('name', instance.inputId);
       instance.container.insertAdjacentHTML('beforeend', filenameElement);
-      const stateContainer = document.querySelector('.bx--file__state-container');
+      const stateContainer = document.querySelector(
+        '.bx--file__state-container'
+      );
       expect(stateContainer.innerHTML).toBe('');
     });
 
@@ -296,7 +306,9 @@ describe('File Uploader', function() {
 
     it('should be called on input change event', function() {
       spyOn(instance, '_displayFilenames');
-      instance.input.dispatchEvent(new CustomEvent('change', { bubbles: true }));
+      instance.input.dispatchEvent(
+        new CustomEvent('change', { bubbles: true })
+      );
 
       expect(instance._displayFilenames).toHaveBeenCalled();
     });
@@ -322,13 +334,18 @@ describe('File Uploader', function() {
     });
 
     it('should be called', function() {
-      const testHTML = '<ul><li class="test">...</li><li class="test">...</li></ul>';
+      const testHTML =
+        '<ul><li class="test">...</li><li class="test">...</li></ul>';
       const div = document.createElement('div');
       div.id = 'bob';
       div.innerHTML = testHTML;
       document.body.appendChild(div);
       spyOn(instance, '_handleStateChange');
-      instance._handleStateChange([...document.querySelectorAll('.test')], 1, div);
+      instance._handleStateChange(
+        [...document.querySelectorAll('.test')],
+        1,
+        div
+      );
       expect(instance._handleStateChange).toHaveBeenCalled();
       document.body.removeChild(div);
     });

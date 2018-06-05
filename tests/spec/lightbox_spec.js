@@ -18,13 +18,19 @@ describe('Lightbox', () => {
     it('Should throw if root element is not given', () => {
       expect(() => {
         new Lightbox();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', () => {
       expect(() => {
         new Lightbox(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should set default options', () => {
@@ -58,7 +64,9 @@ describe('Lightbox', () => {
     it('should be called on click', () => {
       spyOn(instance, 'updateSlide');
       const event = new CustomEvent('click', { bubbles: true });
-      const rightButton = element.querySelector(instance.options.selectorScrollRight);
+      const rightButton = element.querySelector(
+        instance.options.selectorScrollRight
+      );
       rightButton.dispatchEvent(event);
       expect(instance.updateSlide).toHaveBeenCalled();
     });

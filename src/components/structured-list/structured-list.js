@@ -6,7 +6,11 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class StructuredList extends mixin(createComponent, initComponentBySearch, handles) {
+class StructuredList extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * StructuredList
    * @extends CreateComponent
@@ -49,7 +53,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   _getInput(index) {
     const rows = [...this.element.querySelectorAll(this.options.selectorRow)];
-    return this.element.ownerDocument.querySelector(this.options.selectorListInput(rows[index].getAttribute('for')));
+    return this.element.ownerDocument.querySelector(
+      this.options.selectorListInput(rows[index].getAttribute('for'))
+    );
   }
 
   _handleInputChecked(index) {
@@ -59,7 +65,9 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
 
   _handleClick(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
+    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row =>
+      row.classList.remove(this.options.classActive)
+    );
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
     }
@@ -68,10 +76,14 @@ class StructuredList extends mixin(createComponent, initComponentBySearch, handl
   // Handle Enter or Space keydown events for selecting <label> rows
   _handleKeydownChecked(evt) {
     const selectedRow = eventMatches(evt, this.options.selectorRow);
-    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row => row.classList.remove(this.options.classActive));
+    [...this.element.querySelectorAll(this.options.selectorRow)].forEach(row =>
+      row.classList.remove(this.options.classActive)
+    );
     if (selectedRow) {
       selectedRow.classList.add(this.options.classActive);
-      const input = this.element.querySelector(this.options.selectorListInput(selectedRow.getAttribute('for')));
+      const input = this.element.querySelector(
+        this.options.selectorListInput(selectedRow.getAttribute('for'))
+      );
       input.checked = true;
     }
   }

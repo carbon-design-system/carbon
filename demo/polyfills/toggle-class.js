@@ -10,7 +10,9 @@ if (missingNativeDOMTokenListToggleForce) {
   (() => {
     const origToggle = DOMTokenList.prototype.toggle;
     DOMTokenList.prototype.toggle = function toggleDOMTokenList(name, add) {
-      return arguments.length < 2 || this.contains(name) === !add ? origToggle.call(this, name) : add;
+      return arguments.length < 2 || this.contains(name) === !add
+        ? origToggle.call(this, name)
+        : add;
     };
   })();
 }

@@ -7,13 +7,19 @@ describe('Test responsive table', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new ResponsiveTable();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new ResponsiveTable(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
   });
 
@@ -91,7 +97,11 @@ describe('Test responsive table', function() {
     it('Clicking a row expand table cell should trigger the event', function() {
       const rowExpansion = document.querySelector('.bx--table-expand');
       const spyToggleRowExpandEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, 'responsive-table-aftertoggleexpand', spyToggleRowExpandEvent);
+      events.on(
+        element.ownerDocument.body,
+        'responsive-table-aftertoggleexpand',
+        spyToggleRowExpandEvent
+      );
       rowExpansion.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       expect(spyToggleRowExpandEvent).toHaveBeenCalled();

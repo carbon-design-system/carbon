@@ -168,11 +168,13 @@
       left: 0.75rem;
       opacity: 0;
       transform: rotate(0);
-      animation: $transition--base cubic-bezier(0.64, 0.57, 0.67, 1.53) 650ms 1 normal forwards fade;
+      animation: $transition--base cubic-bezier(0.64, 0.57, 0.67, 1.53) 650ms 1
+        normal forwards fade;
     }
 
     .#{$prefix}--dropdown-text {
-      animation: $transition--base cubic-bezier(0.6, 0.22, 0.38, 2.03) 1 normal forwards pop-in;
+      animation: $transition--base cubic-bezier(0.6, 0.22, 0.38, 2.03) 1 normal
+        forwards pop-in;
       opacity: 0;
       transform: scale(0.5);
       padding: 0.725rem 1rem 0.725rem 2rem;
@@ -350,7 +352,8 @@
     }
   }
 
-  .#{$prefix}--top-nav__right-container__item[data-credit] .#{$prefix}--dropdown-list {
+  .#{$prefix}--top-nav__right-container__item[data-credit]
+    .#{$prefix}--dropdown-list {
     min-width: 0;
     width: 100%;
   }

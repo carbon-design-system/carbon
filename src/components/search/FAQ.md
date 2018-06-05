@@ -7,12 +7,10 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Why is the clear icon a button?](#why-is-the-clear-icon-a-button)
 - [The close icon isn't tab-able in Safari](#the-close-icon-isnt-tab-able-in-safari)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 
 ## Why is the clear icon a button?
 

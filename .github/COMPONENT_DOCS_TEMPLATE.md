@@ -2,48 +2,46 @@
 
 #### Mixins
 
-Mixins specific to { THIS_COMPONENT_NAME } are located in [src/components/{ COMPONENT }/_mixins.scss]().
+Mixins specific to { THIS_COMPONENT_NAME } are located in [src/components/{ COMPONENT }/\_mixins.scss]().
 
-| Name                | Params | Description                         |
-|---------------------|--------|-------------------------------------|
-| mixin name          | $param: `String` | description |
-
+| Name       | Params           | Description |
+| ---------- | ---------------- | ----------- |
+| mixin name | $param: `String` | description |
 
 #### Modifiers
 
 Use these modifiers with `.bx--root-class` class.
 
-| Selector                         | Description                        |
-|----------------------------------|------------------------------------|
-| .bx--something                   | Description here                   |
-
+| Selector       | Description      |
+| -------------- | ---------------- |
+| .bx--something | Description here |
 
 ### JavaScript
 
 #### Public Methods
 
 | Name       | Params                             | Description          |
-|------------|------------------------------------|----------------------|
+| ---------- | ---------------------------------- | -------------------- |
 | release    |                                    | Deletes the instance |
 | methodName | param1: `String`, param2: `Object` | Description here     |
 
 #### Options
 
 | Option       | Default Selector     | Description                            |
-|--------------|----------------------|----------------------------------------|
+| ------------ | -------------------- | -------------------------------------- |
 | selectorInit | [data-overflow-menu] | A description of this awesome function |
 
 #### Events
 
 | Name                     | Description         |
-|--------------------------|---------------------|
+| ------------------------ | ------------------- |
 | overflow-menu-beingshown | when does this fire |
 
 #### Classes
 
-| Name                     | Description         |
-|--------------------------|---------------------|
-| bx--class__element | The class for  |
+| Name                 | Description   |
+| -------------------- | ------------- |
+| bx--class\_\_element | The class for |
 
 ### FAQ
 

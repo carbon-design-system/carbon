@@ -18,7 +18,14 @@ module.exports = {
       include: 'node_modules/**',
       sourceMap: true,
       namedExports: {
-        'node_modules/react/index.js': ['Children', 'Component', 'PureComponent', 'Fragment', 'PropTypes', 'createElement'],
+        'node_modules/react/index.js': [
+          'Children',
+          'Component',
+          'PureComponent',
+          'Fragment',
+          'PropTypes',
+          'createElement',
+        ],
         'node_modules/react-dom/index.js': ['render'],
       },
     }),

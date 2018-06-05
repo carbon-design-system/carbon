@@ -121,7 +121,9 @@
     }
   }
 
-  .#{$prefix}--skeleton .#{$prefix}--accordion__heading:focus .#{$prefix}--accordion__arrow {
+  .#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:focus
+    .#{$prefix}--accordion__arrow {
     border: none;
     outline: none;
     cursor: default;

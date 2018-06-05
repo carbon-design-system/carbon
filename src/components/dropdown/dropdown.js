@@ -6,7 +6,11 @@ import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) {
+class Dropdown extends mixin(
+  createComponent,
+  initComponentBySearch,
+  trackBlur
+) {
   /**
    * A selector with drop downs.
    * @extends CreateComponent
@@ -70,14 +74,17 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @param {Event} [event] The event triggering this method.
    */
   _toggle(event) {
-    const isDisabled = this.element.classList.contains(this.options.classDisabled);
+    const isDisabled = this.element.classList.contains(
+      this.options.classDisabled
+    );
 
     if (isDisabled) {
       return;
     }
 
     if (
-      ([13, 32, 40].indexOf(event.which) >= 0 && !event.target.matches(this.options.selectorItem)) ||
+      ([13, 32, 40].indexOf(event.which) >= 0 &&
+        !event.target.matches(this.options.selectorItem)) ||
       event.which === 27 ||
       event.type === 'click'
     ) {
@@ -94,7 +101,9 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
           this.element.focus();
         }
       });
-      const listItems = [...this.element.querySelectorAll(this.options.selectorItem)];
+      const listItems = [
+        ...this.element.querySelectorAll(this.options.selectorItem),
+      ];
       listItems.forEach(item => {
         if (this.element.classList.contains(this.options.classOpen)) {
           item.tabIndex = 0;
@@ -110,7 +119,10 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    */
   getCurrentNavigation() {
     const focused = this.element.ownerDocument.activeElement;
-    return focused.nodeType === Node.ELEMENT_NODE && focused.matches(this.options.selectorItem) ? focused : null;
+    return focused.nodeType === Node.ELEMENT_NODE &&
+      focused.matches(this.options.selectorItem)
+      ? focused
+      : null;
   }
 
   /**
@@ -119,15 +131,23 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    */
   navigate(direction) {
     const items = [...this.element.querySelectorAll(this.options.selectorItem)];
-    const start = this.getCurrentNavigation() || this.element.querySelector(this.options.selectorItemSelected);
+    const start =
+      this.getCurrentNavigation() ||
+      this.element.querySelector(this.options.selectorItemSelected);
     const getNextItem = old => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
       const handleOverflow = (i, l) => i - (i < l ? 0 : l);
       // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
       const index = Math.max(items.indexOf(old) + direction, -1);
-      return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
+      return items[
+        handleUnderflow(handleOverflow(index, items.length), items.length)
+      ];
     };
-    for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
+    for (
+      let current = getNextItem(start);
+      current && current !== start;
+      current = getNextItem(current)
+    ) {
       if (!current.matches(this.options.selectorItemSelected)) {
         current.focus();
         break;
@@ -152,7 +172,9 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
     if (this.element.dispatchEvent(eventStart)) {
       if (this.element.dataset.dropdownType !== 'navigation') {
         const selectorText =
-          this.element.dataset.dropdownType !== 'inline' ? this.options.selectorText : this.options.selectorTextInner;
+          this.element.dataset.dropdownType !== 'inline'
+            ? this.options.selectorText
+            : this.options.selectorTextInner;
         const text = this.element.querySelector(selectorText);
         if (text) {
           text.innerHTML = itemToSelect.innerHTML;
@@ -161,7 +183,9 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       }
       this.element.dataset.value = itemToSelect.parentElement.dataset.value;
 
-      [...this.element.querySelectorAll(this.options.selectorItemSelected)].forEach(item => {
+      [
+        ...this.element.querySelectorAll(this.options.selectorItemSelected),
+      ].forEach(item => {
         if (itemToSelect !== item) {
           item.classList.remove(this.options.classSelected);
         }

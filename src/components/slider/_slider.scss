@@ -86,7 +86,8 @@
     border-radius: 50%;
     top: 0;
     transform: translate(-50%, -50%);
-    transition: transform 100ms $carbon--standard-easing, background 100ms $carbon--standard-easing;
+    transition: transform 100ms $carbon--standard-easing,
+      background 100ms $carbon--standard-easing;
     cursor: pointer;
     outline: none;
 
@@ -126,18 +127,21 @@
   }
 
   // Skeleton state
-  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__range-label {
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__range-label {
     @include skeleton;
     width: rem(20px);
     height: rem(12px);
   }
 
-  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__track {
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__track {
     cursor: default;
     pointer-events: none;
   }
 
-  .#{$prefix}--slider-container.#{$prefix}--skeleton .#{$prefix}--slider__thumb {
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__thumb {
     left: 50%;
     cursor: default;
     pointer-events: none;

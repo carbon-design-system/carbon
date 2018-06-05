@@ -13,7 +13,11 @@ export default class EventManager {
   }
 
   reset() {
-    for (let handle = this.handles.shift(); handle; handle = this.handles.shift()) {
+    for (
+      let handle = this.handles.shift();
+      handle;
+      handle = this.handles.shift()
+    ) {
       handle();
     }
   }

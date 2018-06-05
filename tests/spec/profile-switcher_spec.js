@@ -9,19 +9,27 @@ describe('Test profile switcher', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new ProfileSwitcher();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new ProfileSwitcher(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default options', function() {
       const container = document.createElement('div');
       container.innerHTML = unifiedHeaderHtml;
-      profileSwitcher = new ProfileSwitcher(container.querySelector('[data-profile-switcher]'));
+      profileSwitcher = new ProfileSwitcher(
+        container.querySelector('[data-profile-switcher]')
+      );
       expect(flattenOptions(profileSwitcher.options)).toEqual({
         selectorInit: '[data-profile-switcher]',
         selectorProfileSwitcher: '[data-profile-switcher]',
