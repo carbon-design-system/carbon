@@ -79,7 +79,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    */
   createdByEvent(event) {
     const { relatedTarget, type } = event;
-    this._debouncedHandleClick({ relatedTarget, type, details: getLaunchingDetails(event) });
+    this._debouncedHandleClick({ relatedTarget, type: type === 'focusin' ? 'focus' : type, details: getLaunchingDetails(event) });
   }
 
   /**
@@ -116,14 +116,26 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    * @private
    */
   _hookOn(element) {
-    ['focus', 'blur', 'touchleave', 'touchcancel'].forEach(name => {
+    const hasFocusin = 'onfocusin' in window;
+    const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+    [focusinEventName, 'blur', 'touchleave', 'touchcancel'].forEach(name => {
       this.manage(
-        on(element, name, event => {
-          const { target, type } = event;
-          const hadContextMenu = this._hasContextMenu;
-          this._hasContextMenu = type === 'contextmenu';
-          this._debouncedHandleClick({ target, type, hadContextMenu, details: getLaunchingDetails(event) });
-        })
+        on(
+          element,
+          name,
+          event => {
+            const { target, type } = event;
+            const hadContextMenu = this._hasContextMenu;
+            this._hasContextMenu = type === 'contextmenu';
+            this._debouncedHandleClick({
+              target,
+              type: type === 'focusin' ? 'focus' : type,
+              hadContextMenu,
+              details: getLaunchingDetails(event),
+            });
+          },
+          name === focusinEventName && !hasFocusin
+        )
       );
     });
   }
