@@ -22,7 +22,7 @@ yarn add carbon-components
 
 # :books: Documentation
 
-* See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
+* See our documentation site [here](http://www.carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
 * [Contributing](/docs/contributing.md): Guidelines for making contributions to this repo.
 
 ## Contributors
