@@ -9,6 +9,7 @@ describe('ModalWrapper', () => {
     mockProps = {
       id: 'modal',
       buttonTriggerText: 'Test Modal',
+      buttonTriggerClassName: 'btn-trigger',
       modalHeading: 'Transactional Modal',
       modalLabel: 'Test Modal Label',
       primaryButtonText: 'Save',

@@ -2,6 +2,7 @@
 
 exports[`ModalWrapper should render 1`] = `
 <ModalWrapper
+  buttonTriggerClassName="btn-trigger"
   buttonTriggerText="Test Modal"
   disabled={false}
   handleSubmit={[MockFunction]}
@@ -18,6 +19,7 @@ exports[`ModalWrapper should render 1`] = `
     role="presentation"
   >
     <Button
+      className="btn-trigger"
       disabled={false}
       iconDescription="Provide icon description if icon is used"
       kind="primary"
@@ -27,7 +29,7 @@ exports[`ModalWrapper should render 1`] = `
       type="button"
     >
       <button
-        className="bx--btn bx--btn--primary"
+        className="btn-trigger bx--btn bx--btn--primary"
         disabled={false}
         onClick={[Function]}
         tabIndex={0}
