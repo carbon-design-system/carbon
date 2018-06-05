@@ -211,10 +211,6 @@
   },
   "maintainers": [
     {
-      "name": "Brian Han",
-      "email": "bthan@us.ibm.com"
-    },
-    {
       "name": "Mari Johannessen",
       "email": "mjohannessen@us.ibm.com"
     },
@@ -223,16 +219,16 @@
       "email": "twegan@us.ibm.com"
     },
     {
-      "name": "Ian Fleming",
-      "email": "ianfleming@us.ibm.com"
-    },
-    {
       "name": "Akira Sudoh",
       "email": "asudoh@jp.ibm.com"
     },
     {
-      "name": "Chris Dhanaraj",
-      "email": "chrisdhanaraj@us.ibm.com"
+      "name": "Alison Joseph",
+      "email": "alison.joseph@us.ibm.com"
+    },
+    {
+      "name": "Alessandra Davila",
+      "email": "aledavila@us.ibm.com"
     }
   ],
   "eyeglass": {
