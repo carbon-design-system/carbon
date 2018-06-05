@@ -183,7 +183,8 @@
     }
   }
 
-  .#{$prefix}--table-expand[data-previous-value='collapsed'] .#{$prefix}--table-expand__svg {
+  .#{$prefix}--table-expand[data-previous-value='collapsed']
+    .#{$prefix}--table-expand__svg {
     transform: rotate(90deg);
     transition: transform 200ms $carbon--standard-easing;
   }

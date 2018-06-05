@@ -3,7 +3,11 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import handles from '../../globals/js/mixins/handles';
 
-class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles) {
+class CodeSnippet extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * CodeSnippet UI.
    * @extends CreateComponent
@@ -16,7 +20,9 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
     super(element, options);
 
     this._initCodeSnippet();
-    this.element.querySelector(this.options.classExpandBtn).addEventListener('click', evt => this._handleClick(evt));
+    this.element
+      .querySelector(this.options.classExpandBtn)
+      .addEventListener('click', evt => this._handleClick(evt));
   }
 
   _handleClick() {
@@ -24,9 +30,13 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
     this.element.classList.toggle(this.options.classExpanded);
 
     if (this.element.classList.contains(this.options.classExpanded)) {
-      expandBtn.textContent = expandBtn.getAttribute(this.options.attribShowLessText);
+      expandBtn.textContent = expandBtn.getAttribute(
+        this.options.attribShowLessText
+      );
     } else {
-      expandBtn.textContent = expandBtn.getAttribute(this.options.attribShowMoreText);
+      expandBtn.textContent = expandBtn.getAttribute(
+        this.options.attribShowMoreText
+      );
     }
   }
 
@@ -36,7 +46,9 @@ class CodeSnippet extends mixin(createComponent, initComponentBySearch, handles)
       throw new TypeError('Cannot find the expand button.');
     }
 
-    expandBtn.textContent = expandBtn.getAttribute(this.options.attribShowMoreText);
+    expandBtn.textContent = expandBtn.getAttribute(
+      this.options.attribShowMoreText
+    );
 
     if (this.element.offsetHeight < this.options.minHeight) {
       this.element.classList.add(this.options.classHideExpand);

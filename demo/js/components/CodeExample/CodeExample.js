@@ -46,7 +46,13 @@ class CodeExample extends Component {
         window.Prism.highlightElement(node);
       }
       this._observerCode = new MutationObserver(() => {
-        if (window.Prism && Array.prototype.every.call(node.childNodes, childNode => childNode.nodeType === Node.TEXT_NODE)) {
+        if (
+          window.Prism &&
+          Array.prototype.every.call(
+            node.childNodes,
+            childNode => childNode.nodeType === Node.TEXT_NODE
+          )
+        ) {
           window.Prism.highlightElement(node);
         }
       });
@@ -82,15 +88,16 @@ class CodeExample extends Component {
       'code-example__expand--hidden': !this.state.showBtn,
     });
 
-    const expandCodeBtnText = this.state.expandedCode ? 'Show less code' : 'Show more code';
+    const expandCodeBtnText = this.state.expandedCode
+      ? 'Show less code'
+      : 'Show more code';
     return (
       <div className="code-example">
         <div
           className={codeExampleClass}
           ref={ref => {
             this.codeBlock = ref;
-          }}
-        >
+          }}>
           <pre className="line-numbers">
             <code className="language-html" ref={this.highlight}>
               {htmlFile}
@@ -98,15 +105,26 @@ class CodeExample extends Component {
           </pre>
         </div>
         <CopyToClipboard text={htmlFile} onCopy={this.handleCopy}>
-          <button data-copy-btn className="bx--snippet-button code-example__copy-btn" onClick={() => this.handleClick()}>
+          <button
+            data-copy-btn
+            className="bx--snippet-button code-example__copy-btn"
+            onClick={() => this.handleClick()}>
             Copy
-            <Icon className="code-example__copy-btn--icon bx--snippet__icon" name="copy" description="Copy code icon" />
+            <Icon
+              className="code-example__copy-btn--icon bx--snippet__icon"
+              name="copy"
+              description="Copy code icon"
+            />
             <div className={copyBtnClass} data-feedback="Copied!" />
           </button>
         </CopyToClipboard>
         <button className={expandBtnClass} onClick={this.expandCode}>
           <span>{expandCodeBtnText}</span>
-          <Icon className={expandBtnIconClass} name="chevron--down" description="Expand code icon" />
+          <Icon
+            className={expandBtnIconClass}
+            name="chevron--down"
+            description="Expand code icon"
+          />
         </button>
       </div>
     );

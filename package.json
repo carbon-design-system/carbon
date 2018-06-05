@@ -206,12 +206,12 @@
   },
   "lint-staged": {
     "*.js": [
-      "format:staged",
-      "lint:staged",
+      "yarn format:staged",
+      "yarn lint:staged",
       "git add"
     ],
     "*.{css,md,scss}": [
-      "format:staged",
+      "yarn format:staged",
       "git add"
     ]
   },

@@ -120,7 +120,8 @@
     background-color: $hover-row;
   }
 
-  .#{$prefix}--overflow-menu-options__option:hover .#{$prefix}--overflow-menu-options__btn {
+  .#{$prefix}--overflow-menu-options__option:hover
+    .#{$prefix}--overflow-menu-options__btn {
     text-decoration: none;
     background-color: $hover-row;
     text-decoration: none;
@@ -144,13 +145,15 @@
     background-color: $ui-01;
   }
 
-  .#{$prefix}--overflow-menu-options__option--disabled .#{$prefix}--overflow-menu-options__btn {
+  .#{$prefix}--overflow-menu-options__option--disabled
+    .#{$prefix}--overflow-menu-options__btn {
     color: $text-01;
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  .#{$prefix}--overflow-menu-options__option--disabled:hover .#{$prefix}--overflow-menu-options__btn {
+  .#{$prefix}--overflow-menu-options__option--disabled:hover
+    .#{$prefix}--overflow-menu-options__btn {
     color: $text-01;
     opacity: 0.5;
     background-color: $ui-01;

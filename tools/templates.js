@@ -57,16 +57,17 @@ fractal.components.set('path', path.join(__dirname, '../src/components'));
 fractal.components.set('ext', '.hbs');
 fractal.docs.set('path', path.join(__dirname, '../docs'));
 
-const promiseCache = Promise.all([fractal.load(), loadContents(path.resolve(__dirname, '../{demo,src}/**/*.hbs'))]).then(
-  ([sources, contents]) => {
-    const [componentSource, docSource] = sources;
-    return {
-      componentSource,
-      docSource,
-      contents,
-    };
-  }
-);
+const promiseCache = Promise.all([
+  fractal.load(),
+  loadContents(path.resolve(__dirname, '../{demo,src}/**/*.hbs')),
+]).then(([sources, contents]) => {
+  const [componentSource, docSource] = sources;
+  return {
+    componentSource,
+    docSource,
+    contents,
+  };
+});
 
 /**
  * @param {Object} [options] The options.
@@ -82,16 +83,29 @@ const renderComponent = ({ layout, concat } = {}, handle) =>
   promiseCache.then(({ componentSource, contents }) => {
     const renderedItems = new Map();
     componentSource.forEach(metadata => {
-      const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
+      const items = metadata.isCollection
+        ? metadata
+        : !metadata.isCollated && metadata.variants && metadata.variants();
       if (items) {
-        const filteredItems = !handle || handle === metadata.handle ? items : items.filter(item => handle === item.handle);
+        const filteredItems =
+          !handle || handle === metadata.handle
+            ? items
+            : items.filter(item => handle === item.handle);
         filteredItems.forEach(item => {
           const { handle: itemHandle, baseHandle, context } = item;
-          const template = contents.get(item.preview) || contents.get(itemHandle) || contents.get(baseHandle);
+          const template =
+            contents.get(item.preview) ||
+            contents.get(itemHandle) ||
+            contents.get(baseHandle);
           if (template) {
             const body = template(context);
             const layoutTemplate = contents.get(layout);
-            renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ body }, context)));
+            renderedItems.set(
+              item,
+              !layoutTemplate
+                ? body
+                : layoutTemplate(Object.assign({ body }, context))
+            );
           }
         });
       }

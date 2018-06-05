@@ -7,13 +7,19 @@ describe('Test Search', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         new Search();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         new Search(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default options', function() {
@@ -47,24 +53,32 @@ describe('Test Search', function() {
     beforeAll(function() {
       document.body.appendChild(container);
       instance = new Search(document.querySelector('[data-search]'));
-      toggle = container.querySelector('.bx--search-button[data-search-toggle]');
+      toggle = container.querySelector(
+        '.bx--search-button[data-search-toggle]'
+      );
       gridIcon = container.querySelector('div[data-search-view="grid"]');
       listIcon = container.querySelector('div[data-search-view="list"]');
     });
 
     it('Should show grid view by default', function() {
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(false);
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(
+        false
+      );
     });
 
     it('Should show list view after click', function() {
       toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(true);
-      expect(listIcon.classList.contains('bx--search-view--hidden')).toBe(false);
+      expect(listIcon.classList.contains('bx--search-view--hidden')).toBe(
+        false
+      );
     });
 
     it('Should show grid view after second click', function() {
       toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(false);
+      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(
+        false
+      );
       expect(listIcon.classList.contains('bx--search-view--hidden')).toBe(true);
     });
 

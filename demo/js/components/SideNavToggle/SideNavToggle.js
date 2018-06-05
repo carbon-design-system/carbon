@@ -37,7 +37,10 @@ class SideNavToggle extends Component {
     });
 
     return (
-      <button aria-label="Toggle Side Navigation" className={classNames} onClick={this.toggle}>
+      <button
+        aria-label="Toggle Side Navigation"
+        className={classNames}
+        onClick={this.toggle}>
         <div>
           <span className="line" />
           <span className="line" />

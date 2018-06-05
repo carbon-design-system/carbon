@@ -107,18 +107,28 @@ class ComponentExample extends Component {
         .map(key => components[key])
         .filter(Clz => typeof Clz.init === 'function')
         .forEach(Clz => {
-          forEach.call(container.querySelectorAll(Clz.options.selectorInit), element => {
-            const instance = Clz.components.get(element);
-            if (instance) {
-              instance.release();
+          forEach.call(
+            container.querySelectorAll(Clz.options.selectorInit),
+            element => {
+              const instance = Clz.components.get(element);
+              if (instance) {
+                instance.release();
+              }
             }
-          });
+          );
         });
     }
   };
 
   render() {
-    const { htmlFile, component, variant, codepenSlug, hideViewFullRender, useIframe } = this.props;
+    const {
+      htmlFile,
+      component,
+      variant,
+      codepenSlug,
+      hideViewFullRender,
+      useIframe,
+    } = this.props;
 
     const classNamesContainer = classnames('component-example__live', {
       'component-example__live--with-iframe': useIframe,
@@ -133,12 +143,18 @@ class ComponentExample extends Component {
       'bx--global-light-ui': component === 'tabs',
     });
 
-    const codepenLink = codepenSlug && `https://codepen.io/team/carbon/full/${codepenSlug}/`;
+    const codepenLink =
+      codepenSlug && `https://codepen.io/team/carbon/full/${codepenSlug}/`;
     const variantSuffix = (component === variant && '--default') || '';
-    const componentLink = variant ? `/component/${variant}${variantSuffix}` : `/component/${component}`;
+    const componentLink = variant
+      ? `/component/${variant}${variantSuffix}`
+      : `/component/${component}`;
 
     const viewFullRender = hideViewFullRender ? null : (
-      <Link className="component-example__view-full-render" target="_blank" href={codepenLink || componentLink}>
+      <Link
+        className="component-example__view-full-render"
+        target="_blank"
+        href={codepenLink || componentLink}>
         {codepenLink ? 'View on CodePen' : 'View full render'}
       </Link>
     );
@@ -164,7 +180,10 @@ class ComponentExample extends Component {
             />
           ) : (
             <div className={classNames}>
-              <div dangerouslySetInnerHTML={{ __html: htmlFile }} ref={this._setContainer} />
+              <div
+                dangerouslySetInnerHTML={{ __html: htmlFile }}
+                ref={this._setContainer}
+              />
             </div>
           )}
           {viewFullRender}

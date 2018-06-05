@@ -41,8 +41,14 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
      */
     const parentNode = this.element.parentNode;
 
-    if (parentNode && parentNode.classList.contains(this.options.classLoadingOverlay)) {
-      parentNode.classList.toggle(this.options.classLoadingOverlayStop, !this.active);
+    if (
+      parentNode &&
+      parentNode.classList.contains(this.options.classLoadingOverlay)
+    ) {
+      parentNode.classList.toggle(
+        this.options.classLoadingOverlayStop,
+        !this.active
+      );
     }
 
     return this;

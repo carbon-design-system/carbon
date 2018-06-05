@@ -18,13 +18,19 @@ describe('Carousel', () => {
     it('Should throw if root element is not given', () => {
       expect(() => {
         new Carousel();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', () => {
       expect(() => {
         new Carousel(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('should set default options', () => {
@@ -59,14 +65,18 @@ describe('Carousel', () => {
     it('should be called on click', () => {
       spyOn(instance, 'sideScroll');
       const event = new CustomEvent('click', { bubbles: true });
-      const rightButton = element.querySelector(instance.options.selectorScrollRight);
+      const rightButton = element.querySelector(
+        instance.options.selectorScrollRight
+      );
       rightButton.dispatchEvent(event);
       expect(instance.sideScroll).toHaveBeenCalled();
     });
 
     it('should scroll right on click', () => {
       const initalStyle = instance.filmstrip.style.transform;
-      const rightButton = element.querySelector(instance.options.selectorScrollRight);
+      const rightButton = element.querySelector(
+        instance.options.selectorScrollRight
+      );
       const event = new CustomEvent('click', { bubbles: true });
       rightButton.dispatchEvent(event);
       expect(initalStyle).not.toBe(instance.filmstrip.style.transform);
@@ -74,7 +84,9 @@ describe('Carousel', () => {
 
     it('should scroll left on click', () => {
       const initalStyle = instance.filmstrip.style.transform;
-      const leftButton = element.querySelector(instance.options.selectorScrollLeft);
+      const leftButton = element.querySelector(
+        instance.options.selectorScrollLeft
+      );
       const event = new CustomEvent('click', { bubbles: true });
       leftButton.dispatchEvent(event);
       expect(initalStyle).not.toBe(instance.filmstrip.style.transform);

@@ -39,12 +39,17 @@ class SideNav extends Component {
     const activeItem = items && items.find(item => item.id === activeItemId);
     const { activeName } = activeItem || {};
     return (
-      <InteriorLeftNav className={className} activeHref={activeName ? `/demo/${activeName}` : ''}>
+      <InteriorLeftNav
+        className={className}
+        activeHref={activeName ? `/demo/${activeName}` : ''}>
         {items.map(item => {
           const { id, name, label } = item;
           return (
             <InteriorLeftNavItem key={id} href={`/demo/${name}`}>
-              <a href={`/demo/${name}`} data-nav-id={id} onClick={this.handleItemClick}>
+              <a
+                href={`/demo/${name}`}
+                data-nav-id={id}
+                onClick={this.handleItemClick}>
                 {label}
               </a>
             </InteriorLeftNavItem>

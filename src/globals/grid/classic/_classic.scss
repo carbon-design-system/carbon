@@ -8,15 +8,15 @@ $grid-breakpoints: (
   md: 768px,
   lg: 992px,
   xl: 1200px,
-  xxl: 1600px
+  xxl: 1600px,
 );
 $gutter-breakpoints: (
   xs: 5px,
-  sm: 10px
+  sm: 10px,
 );
 $grid-gutter-breakpoints: (
   xs: 3%,
-  sm: 5%
+  sm: 5%,
 );
 
 @mixin grid {

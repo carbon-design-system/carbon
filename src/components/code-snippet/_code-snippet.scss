@@ -84,7 +84,8 @@
     transition: all $transition--base $carbon--standard-easing;
   }
 
-  .#{$prefix}--snippet--expand.#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--expand.#{$prefix}--snippet--multi
+    .#{$prefix}--snippet-container {
     max-height: rem(1500px);
   }
 
@@ -185,7 +186,9 @@
     fill: $inverse-01;
   }
 
-  .#{$prefix}--snippet--expand .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
+  .#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
   }
 
@@ -223,7 +226,8 @@
     }
   }
 
-  .#{$prefix}--snippet--single.#{$prefix}--skeleton .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--single.#{$prefix}--skeleton
+    .#{$prefix}--snippet-container {
     padding-bottom: 0;
   }
 
@@ -260,7 +264,8 @@
     transition: all $transition--base $carbon--standard-easing;
   }
 
-  .#{$prefix}--snippet--expand.#{$prefix}--snippet--code .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--expand.#{$prefix}--snippet--code
+    .#{$prefix}--snippet-container {
     max-height: rem(1500px);
   }
 

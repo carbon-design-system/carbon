@@ -15,7 +15,8 @@ module.exports = {
     {
       name: 'inline',
       label: 'Inline Select',
-      notes: 'Inline select is for use when there will be multiple elements in a row.',
+      notes:
+        'Inline select is for use when there will be multiple elements in a row.',
       context: {
         inline: true,
       },

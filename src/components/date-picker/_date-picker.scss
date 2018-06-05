@@ -129,7 +129,8 @@
     position: relative;
   }
 
-  .#{$prefix}--date-picker--range > .#{$prefix}--date-picker-container:first-child {
+  .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child {
     margin-right: $spacing-xs;
   }
 

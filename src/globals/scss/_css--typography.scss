@@ -120,7 +120,11 @@
 }
 
 @include exports('css--typography') {
-  @if global-variable-exists('css--typography') == false or $css--typography == true {
+  @if global-variable-exists('css--typography') ==
+    false or
+    $css--typography ==
+    true
+  {
     @include typography;
   }
 }

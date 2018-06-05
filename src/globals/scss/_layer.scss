@@ -30,12 +30,16 @@ $layer-shadows: (
   overlay: $box-shadow--overlay,
   pop-out: $box-shadow--pop-out,
   temporary-nav: $box-shadow--temporary-nav,
-  sticky-nav: $box-shadow--sticky-nav
+  sticky-nav: $box-shadow--sticky-nav,
 );
 
 // Layer mixin
 @mixin layer($layer) {
-  @if global-variable-exists('css--use-layer') == false or $css--use-layer == true {
+  @if global-variable-exists('css--use-layer') ==
+    false or
+    $css--use-layer ==
+    true
+  {
     @if map-has-key($layer-shadows, $layer) {
       box-shadow: #{map-get($layer-shadows, $layer)};
     } @else {

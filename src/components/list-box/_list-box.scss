@@ -46,7 +46,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
-  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item--highlighted {
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item--highlighted {
     background-color: transparent;
     text-decoration: none;
   }
@@ -77,13 +78,17 @@ $list-box-menu-width: rem(300px);
     width: $list-box-menu-width;
   }
 
-  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'] ~ .#{$prefix}--list-box__menu {
+  .#{$prefix}--list-box--inline
+    > .#{$prefix}--list-box__field[aria-expanded='true']
+    ~ .#{$prefix}--list-box__menu {
     outline: 1px solid $brand-01;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
-  .#{$prefix}--list-box--inline > .#{$prefix}--list-box__field[aria-expanded='true'],
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline > .#{$prefix}--list-box__field:focus {
+  .#{$prefix}--list-box--inline
+    > .#{$prefix}--list-box__field[aria-expanded='true'],
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    > .#{$prefix}--list-box__field:focus {
     outline: none;
     box-shadow: none;
   }
@@ -233,7 +238,8 @@ $list-box-menu-width: rem(300px);
   // Tweaks for descendants
 
   // In multi-select scenarios, we need to target checkbox inputs
-  .#{$prefix}--list-box__menu-item > .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+  .#{$prefix}--list-box__menu-item
+    > .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin: 0;
   }
 

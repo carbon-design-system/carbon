@@ -61,7 +61,9 @@
     width: rem(32px);
   }
 
-  .#{$prefix}--toggle--small + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle--small
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
     width: rem(32px);
     height: rem(16px);
 
@@ -95,7 +97,9 @@
     transform: scale(0.2);
   }
 
-  .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__check {
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__check {
     fill: $brand-01;
     transform: scale(1) translateX(16px);
   }
@@ -114,7 +118,9 @@
     margin-left: $spacing-xs;
   }
 
-  .#{$prefix}--toggle:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
     &:before {
       background-color: $brand-01;
     }
@@ -127,7 +133,9 @@
     }
   }
 
-  .#{$prefix}--toggle--small:checked + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle--small:checked
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
     &:before {
       background-color: $brand-01;
       border-color: $brand-01;
@@ -167,7 +175,9 @@
     opacity: 0.5;
   }
 
-  .#{$prefix}--toggle:disabled + .#{$prefix}--toggle__label .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle:disabled
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__appearance {
     &:before,
     &:after {
       cursor: not-allowed;
@@ -180,7 +190,9 @@
     cursor: default;
   }
 
-  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__appearance {
     &:before,
     &:after {
       background-color: $brand-01;
@@ -189,14 +201,20 @@
     }
   }
 
-  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__text--left,
-  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__text--right {
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__text--left,
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__text--right {
     @include skeleton;
     width: rem(20px);
     height: rem(12px);
   }
 
-  .#{$prefix}--toggle.#{$prefix}--skeleton + .#{$prefix}--toggle__label > .#{$prefix}--toggle__appearance {
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle__label
+    > .#{$prefix}--toggle__appearance {
     &:before {
       background: transparent;
       border-color: $ui-05;

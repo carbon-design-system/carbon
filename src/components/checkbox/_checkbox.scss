@@ -122,19 +122,25 @@
   }
 
   // Backwards compatibilty for old checkbox html using .#{$prefix}--checkbox-appearance
-  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance {
+  .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label
+    .#{$prefix}--checkbox-appearance {
     top: rem(-1px);
   }
 
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-appearance,
-  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance {
+  .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label
+    .#{$prefix}--checkbox-appearance {
     display: flex;
     align-items: baseline;
     background-color: $brand-01;
     border-color: $brand-01;
   }
 
-  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance,
+  .#{$prefix}--checkbox:focus
+    + .#{$prefix}--checkbox-label
+    .#{$prefix}--checkbox-appearance,
   .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-appearance {
     @include focus-outline('blurred');
   }
@@ -151,8 +157,13 @@
     height: 100%;
   }
 
-  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-appearance .#{$prefix}--checkbox-checkmark,
-  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label .#{$prefix}--checkbox-appearance .#{$prefix}--checkbox-checkmark {
+  .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-appearance
+    .#{$prefix}--checkbox-checkmark,
+  .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label
+    .#{$prefix}--checkbox-appearance
+    .#{$prefix}--checkbox-checkmark {
     display: block;
 
     @-moz-document url-prefix() {

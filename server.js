@@ -16,7 +16,12 @@ const port = process.env.PORT || 8080;
 const config = require('./tools/webpack.dev.config');
 
 const compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+app.use(
+  webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+  })
+);
 app.use(webpackHotMiddleware(compiler));
 
 app.engine('hbs', templates.handlebars.engine);
@@ -35,9 +40,12 @@ app.use('/docs/js', express.static('docs/js'));
  *   Fractal automatically populate `.notes` for component without variants (`Component`).
  */
 const normalizeMetadata = metadata => {
-  const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
+  const items = metadata.isCollection
+    ? metadata
+    : !metadata.isCollated && metadata.variants && metadata.variants();
   const visibleItems = items && items.filter(item => !item.isHidden);
-  const metadataJSON = typeof metadata.toJSON !== 'function' ? metadata : metadata.toJSON();
+  const metadataJSON =
+    typeof metadata.toJSON !== 'function' ? metadata : metadata.toJSON();
   if (!metadata.isCollection && visibleItems && visibleItems.size === 1) {
     const firstVariant = visibleItems.first();
     return Object.assign(metadataJSON, {
@@ -48,7 +56,10 @@ const normalizeMetadata = metadata => {
     });
   }
   return Object.assign(metadataJSON, {
-    items: !items || items.size <= 1 ? undefined : items.map(normalizeMetadata).toJSON().items,
+    items:
+      !items || items.size <= 1
+        ? undefined
+        : items.map(normalizeMetadata).toJSON().items,
     variants: undefined,
   });
 };
@@ -59,7 +70,10 @@ const normalizeMetadata = metadata => {
  */
 const promiseNavItems = templates.promiseCache
   .then(({ componentSource, docSource }) =>
-    Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items()])
+    Promise.all([
+      Promise.all(componentSource.items().map(normalizeMetadata)),
+      docSource.items(),
+    ])
   )
   .then(([componentItems, docItems]) => ({
     componentItems,
@@ -70,7 +84,11 @@ const promiseNavItems = templates.promiseCache
   app.get(route, (req, res) => {
     const name = req.params.component;
 
-    if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+    if (
+      name &&
+      path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
+        '..'
+    ) {
       res.status(404).end();
     } else {
       promiseNavItems
@@ -91,7 +109,10 @@ const promiseNavItems = templates.promiseCache
 app.get('/component/:component', (req, res) => {
   const name = req.params.component;
 
-  if (path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+  if (
+    path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
+    '..'
+  ) {
     res.status(404).end();
   } else {
     templates
@@ -113,7 +134,11 @@ app.get('/component/:component', (req, res) => {
 app.get('/code/:component', (req, res) => {
   const name = req.params.component;
 
-  if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+  if (
+    name &&
+    path.relative('src/components', `src/components/${name}`).substr(0, 2) ===
+      '..'
+  ) {
     res.status(404).end();
   } else {
     templates

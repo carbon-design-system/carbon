@@ -38,7 +38,9 @@ function augmentFlatpickr(calendar) {
         return this._changeEvent;
       },
       set(value) {
-        value.detail = Object.assign(value.detail || {}, { fromFlatpickr: true });
+        value.detail = Object.assign(value.detail || {}, {
+          fromFlatpickr: true,
+        });
         this._changeEvent = value;
       },
     });
@@ -56,7 +58,11 @@ Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
   }
 });
 
-class DatePicker extends mixin(createComponent, initComponentBySearch, handles) {
+class DatePicker extends mixin(
+  createComponent,
+  initComponentBySearch,
+  handles
+) {
   /**
    * DatePicker.
    * @extends CreateComponent
@@ -79,7 +85,9 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       on(this.calendar.calendarContainer, 'keydown', e => {
         if (e.which === 9 && type === 'range') {
           this._updateClassNames(this.calendar);
-          this.element.querySelector(this.options.selectorDatePickerInputFrom).focus();
+          this.element
+            .querySelector(this.options.selectorDatePickerInputFrom)
+            .focus();
         }
       })
     );
@@ -104,7 +112,11 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
   _handleBlur = event => {
     if (this.calendar) {
       const focusTo = event.relatedTarget;
-      if (!focusTo || (!this.element.contains(focusTo) && !this.calendar.calendarContainer.contains(focusTo))) {
+      if (
+        !focusTo ||
+        (!this.element.contains(focusTo) &&
+          !this.calendar.calendarContainer.contains(focusTo))
+      ) {
         this.calendar.close();
       }
     }
@@ -128,8 +140,12 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       const hasFocusout = 'onfocusout' in w;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       const focusoutEventName = hasFocusout ? 'focusout' : 'blur';
-      this.manage(on(this.element, focusinEventName, this._handleFocus, !hasFocusin));
-      this.manage(on(this.element, focusoutEventName, this._handleBlur, !hasFocusout));
+      this.manage(
+        on(this.element, focusinEventName, this._handleFocus, !hasFocusin)
+      );
+      this.manage(
+        on(this.element, focusoutEventName, this._handleBlur, !hasFocusout)
+      );
 
       // An attempt to disable Flatpickr's focus tracking system,
       // which has adverse effect with our old set up with two `<input>`s or our latest setup with a hidden `<input>`
@@ -145,16 +161,31 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       );
     }
     const self = this;
-    const date = type === 'range' ? this._rangeInput : this.element.querySelector(this.options.selectorDatePickerInput);
-    const { onClose, onChange, onMonthChange, onYearChange, onOpen, onValueUpdate } = this.options;
+    const date =
+      type === 'range'
+        ? this._rangeInput
+        : this.element.querySelector(this.options.selectorDatePickerInput);
+    const {
+      onClose,
+      onChange,
+      onMonthChange,
+      onYearChange,
+      onOpen,
+      onValueUpdate,
+    } = this.options;
     const calendar = new Flatpickr(
       date,
       Object.assign(flattenOptions(this.options), {
         allowInput: true,
         mode: type,
-        positionElement: type === 'range' && this.element.querySelector(this.options.selectorDatePickerInputFrom),
+        positionElement:
+          type === 'range' &&
+          this.element.querySelector(this.options.selectorDatePickerInputFrom),
         onClose(selectedDates, ...remainder) {
-          if (!onClose || onClose.call(this, selectedDates, ...remainder) !== false) {
+          if (
+            !onClose ||
+            onClose.call(this, selectedDates, ...remainder) !== false
+          ) {
             self._updateClassNames(calendar);
             self._updateInputFields(selectedDates, type);
           }
@@ -164,9 +195,13 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
             self._updateClassNames(calendar);
             if (type === 'range') {
               if (calendar.selectedDates.length === 1 && calendar.isOpen) {
-                self.element.querySelector(self.options.selectorDatePickerInputTo).classList.add(self.options.classFocused);
+                self.element
+                  .querySelector(self.options.selectorDatePickerInputTo)
+                  .classList.add(self.options.classFocused);
               } else {
-                self.element.querySelector(self.options.selectorDatePickerInputTo).classList.remove(self.options.classFocused);
+                self.element
+                  .querySelector(self.options.selectorDatePickerInputTo)
+                  .classList.remove(self.options.classFocused);
               }
             }
           }
@@ -187,7 +222,10 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
           }
         },
         onValueUpdate(...args) {
-          if ((!onValueUpdate || onValueUpdate.call(this, ...args) !== false) && type === 'range') {
+          if (
+            (!onValueUpdate || onValueUpdate.call(this, ...args) !== false) &&
+            type === 'range'
+          ) {
             self._updateInputFields(self.calendar.selectedDates, type);
           }
         },
@@ -196,13 +234,23 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       })
     );
     if (type === 'range') {
-      this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInputFrom), 0);
-      this._addInputLogic(this.element.querySelector(this.options.selectorDatePickerInputTo), 1);
+      this._addInputLogic(
+        this.element.querySelector(this.options.selectorDatePickerInputFrom),
+        0
+      );
+      this._addInputLogic(
+        this.element.querySelector(this.options.selectorDatePickerInputTo),
+        1
+      );
     }
     this.manage(
-      on(this.element.querySelector(this.options.selectorDatePickerIcon), 'click', () => {
-        calendar.open();
-      })
+      on(
+        this.element.querySelector(this.options.selectorDatePickerIcon),
+        'click',
+        () => {
+          calendar.open();
+        }
+      )
     );
     this._updateClassNames(calendar);
     if (type !== 'range') {
@@ -263,19 +311,33 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
   _updateClassNames = calendar => {
     const calendarContainer = calendar.calendarContainer;
     calendarContainer.classList.add(this.options.classCalendarContainer);
-    calendarContainer.querySelector('.flatpickr-month').classList.add(this.options.classMonth);
-    calendarContainer.querySelector('.flatpickr-weekdays').classList.add(this.options.classWeekdays);
-    calendarContainer.querySelector('.flatpickr-days').classList.add(this.options.classDays);
-    [...calendarContainer.querySelectorAll('.flatpickr-weekday')].forEach(item => {
-      const currentItem = item;
-      currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
-      currentItem.classList.add(this.options.classWeekday);
-    });
+    calendarContainer
+      .querySelector('.flatpickr-month')
+      .classList.add(this.options.classMonth);
+    calendarContainer
+      .querySelector('.flatpickr-weekdays')
+      .classList.add(this.options.classWeekdays);
+    calendarContainer
+      .querySelector('.flatpickr-days')
+      .classList.add(this.options.classDays);
+    [...calendarContainer.querySelectorAll('.flatpickr-weekday')].forEach(
+      item => {
+        const currentItem = item;
+        currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
+        currentItem.classList.add(this.options.classWeekday);
+      }
+    );
     [...calendarContainer.querySelectorAll('.flatpickr-day')].forEach(item => {
       item.classList.add(this.options.classDay);
-      if (item.classList.contains('today') && calendar.selectedDates.length > 0) {
+      if (
+        item.classList.contains('today') &&
+        calendar.selectedDates.length > 0
+      ) {
         item.classList.add('no-border');
-      } else if (item.classList.contains('today') && calendar.selectedDates.length === 0) {
+      } else if (
+        item.classList.contains('today') &&
+        calendar.selectedDates.length === 0
+      ) {
         item.classList.remove('no-border');
       }
     });
@@ -284,18 +346,27 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
   _updateInputFields = (selectedDates, type) => {
     if (type === 'range') {
       if (selectedDates.length === 2) {
-        this.element.querySelector(this.options.selectorDatePickerInputFrom).value = this._formatDate(selectedDates[0]);
-        this.element.querySelector(this.options.selectorDatePickerInputTo).value = this._formatDate(selectedDates[1]);
+        this.element.querySelector(
+          this.options.selectorDatePickerInputFrom
+        ).value = this._formatDate(selectedDates[0]);
+        this.element.querySelector(
+          this.options.selectorDatePickerInputTo
+        ).value = this._formatDate(selectedDates[1]);
       } else if (selectedDates.length === 1) {
-        this.element.querySelector(this.options.selectorDatePickerInputFrom).value = this._formatDate(selectedDates[0]);
+        this.element.querySelector(
+          this.options.selectorDatePickerInputFrom
+        ).value = this._formatDate(selectedDates[0]);
       }
     } else if (selectedDates.length === 1) {
-      this.element.querySelector(this.options.selectorDatePickerInput).value = this._formatDate(selectedDates[0]);
+      this.element.querySelector(
+        this.options.selectorDatePickerInput
+      ).value = this._formatDate(selectedDates[0]);
     }
     this._updateClassNames(this.calendar);
   };
 
-  _formatDate = date => this.calendar.formatDate(date, this.calendar.config.dateFormat);
+  _formatDate = date =>
+    this.calendar.formatDate(date, this.calendar.config.dateFormat);
 
   release() {
     if (this._rangeInput && this._rangeInput.parentNode) {

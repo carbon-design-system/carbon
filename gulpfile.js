@@ -54,7 +54,10 @@ const templates = require('./tools/templates');
 
 const assign = v => v;
 const cloptions = commander
-  .option('-k, --keepalive', 'Keeps browser open after first run of Karma test finishes')
+  .option(
+    '-k, --keepalive',
+    'Keeps browser open after first run of Karma test finishes'
+  )
   .option('--name [name]', 'Component name used for aXe testing', assign, '')
   .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
   .option('-r, --rollup', 'Uses Rollup for dev env')
@@ -177,12 +180,22 @@ gulp.task('scripts:es', () => {
     .pipe(gulp.dest('es/'));
 });
 
-gulp.task('scripts:rollup', () => rollup.rollup(rollupConfigProd).then(bundle => bundle.write(rollupConfigProd)));
+gulp.task('scripts:rollup', () =>
+  rollup.rollup(rollupConfigProd).then(bundle => bundle.write(rollupConfigProd))
+);
 
 gulp.task('scripts:compiled', ['scripts:rollup'], cb => {
   const srcFile = './scripts/carbon-components.js';
 
-  pump([gulp.src(srcFile), uglify(), rename('carbon-components.min.js'), gulp.dest('scripts')], cb);
+  pump(
+    [
+      gulp.src(srcFile),
+      uglify(),
+      rename('carbon-components.min.js'),
+      gulp.dest('scripts'),
+    ],
+    cb
+  );
 });
 
 /**
@@ -257,9 +270,15 @@ gulp.task('html:source', () =>
   templates.render().then(renderedItems => {
     const promises = [];
     renderedItems.forEach((rendered, item) => {
-      const dirname = path.dirname(path.resolve(__dirname, 'html', item.relViewPath));
+      const dirname = path.dirname(
+        path.resolve(__dirname, 'html', item.relViewPath)
+      );
       const filename = `${item.handle.replace(/--default$/, '')}.html`;
-      promises.push(mkdirp(dirname).then(() => writeFile(path.resolve(dirname, filename), rendered)));
+      promises.push(
+        mkdirp(dirname).then(() =>
+          writeFile(path.resolve(dirname, filename), rendered)
+        )
+      );
     });
     return Promise.all(promises);
   })
@@ -332,8 +351,12 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
     exclude: '.offleft, #flex-col, #flex-row',
     tags: ['wcag2aa', 'wcag2a'],
     folderOutputReport: !componentName ? 'tests/axe/allHtml' : 'tests/axe',
-    saveOutputIn: !componentName ? `a11y-html.json` : `a11y-${componentName}.json`,
-    urls: !componentName ? ['http://localhost:3000'] : [`http://localhost:3000/component/${componentName}/`],
+    saveOutputIn: !componentName
+      ? `a11y-html.json`
+      : `a11y-${componentName}.json`,
+    urls: !componentName
+      ? ['http://localhost:3000']
+      : [`http://localhost:3000/component/${componentName}/`],
   };
 
   return axe(options, done);
@@ -342,7 +365,10 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
 // Watch Tasks
 gulp.task('watch', () => {
   if (cloptions.rollup) {
-    gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
+    gulp.watch(
+      ['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'],
+      ['scripts:dev']
+    );
     gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
   }
 });
@@ -350,7 +376,12 @@ gulp.task('watch', () => {
 gulp.task('serve', ['dev-server', 'watch']);
 
 // Build task collection
-gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev']);
+gulp.task('build:scripts', [
+  'scripts:umd',
+  'scripts:es',
+  'scripts:compiled',
+  'scripts:dev',
+]);
 gulp.task('build:styles', ['sass:compiled', 'sass:source']);
 
 // Mapped to npm run build
@@ -361,5 +392,7 @@ gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
 
 gulp.task('default', () => {
   // eslint-disable-next-line no-console
-  console.log('\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n');
+  console.log(
+    '\n\n Please use `$ npm run dev` and navigate to \n http://localhost:3000 to view project locally \n\n'
+  );
 });

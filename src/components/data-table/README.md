@@ -5,7 +5,7 @@
 Modifier classes for Data Tables are used with various classes.
 
 | Selector                     | Description                                                                                                                                                                                                   |
-|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `bx--responsive-table--tall` | Makes tables taller. Specifically, rendered height of a table row will be `44px` (by default, table rows are `32px` without this modifier). Apply this class to `div.bx--responsive-tabler-container` element |
 | `bx--parent-row--even`       | The class for even parent rows                                                                                                                                                                                |
 | `bx--expandable-row`         | The class for expandable rows                                                                                                                                                                                 |
@@ -17,16 +17,15 @@ Modifier classes for Data Tables are used with various classes.
 
 #### Public Methods
 
-| Name        | Params | Description                                                                       |
-|-------------|--------|-----------------------------------------------------------------------------------|
-| release     |        | Deletes the instance and removes document event listeners                         |
-| refreshRows |        | When adding in new table rows, use this method to correctly re-apply stripes      |
-
+| Name        | Params | Description                                                                  |
+| ----------- | ------ | ---------------------------------------------------------------------------- |
+| release     |        | Deletes the instance and removes document event listeners                    |
+| refreshRows |        | When adding in new table rows, use this method to correctly re-apply stripes |
 
 #### Options
 
 | Option                   | Default Selector                         | Description                                                                         |
-|--------------------------|------------------------------------------|-------------------------------------------------------------------------------------|
+| ------------------------ | ---------------------------------------- | ----------------------------------------------------------------------------------- |
 | selectorInit             | `[data-responsive-table]`                | The selector to find instances of the component                                     |
 | selectorExpandCells      | `.bx--table-expand`                      | The selector to find expanded cells                                                 |
 | selectorExpandableRows   | `.bx--expandable-row`                    | The selector to find expandable rows                                                |
@@ -50,7 +49,7 @@ Modifier classes for Data Tables are used with various classes.
 #### Events
 
 | Option               | Default Selector                         | Description                                                                         |
-|----------------------|------------------------------------------|-------------------------------------------------------------------------------------|
+| -------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------- |
 | eventBeforeExpand    | `responsive-table-beforetoggleexpand`    | Event triggered before expanding a table row                                        |
 | eventAfterExpand     | `responsive-table-aftertoggleexpand`     | Event triggered after expanding a table row                                         |
 | eventBeforeSort      | `responsive-table-beforetogglesort`      | Event triggered before toggling a sort action                                       |

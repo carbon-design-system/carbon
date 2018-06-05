@@ -11,13 +11,19 @@ describe('Test tile', function() {
     it('Should throw if root element is not given', function() {
       expect(() => {
         tile = new Tile();
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should throw if root element is not a DOM element', function() {
       expect(() => {
         tile = new Tile(document.createTextNode(''));
-      }).toThrowError(TypeError, 'DOM element should be given to initialize this widget.');
+      }).toThrowError(
+        TypeError,
+        'DOM element should be given to initialize this widget.'
+      );
     });
 
     it('Should set default options', function() {
@@ -80,7 +86,9 @@ describe('Test tile', function() {
     });
 
     it('Should not have the is-clicked class before its been clicked', function() {
-      expect(tileElement.classList.contains('bx--tile--is-clicked')).toBe(false);
+      expect(tileElement.classList.contains('bx--tile--is-clicked')).toBe(
+        false
+      );
     });
 
     it('Should have the is-clicked class after its been clicked', function() {
@@ -107,19 +115,25 @@ describe('Test tile', function() {
     });
 
     it('Should not have the is-expanded class before its been clicked', function() {
-      expect(tileElement.classList.contains('bx--tile--is-expanded')).toBe(false);
+      expect(tileElement.classList.contains('bx--tile--is-expanded')).toBe(
+        false
+      );
     });
 
     it('Should have the is-expanded class after its been clicked', function() {
       tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(tileElement.classList.contains('bx--tile--is-expanded')).toBe(true);
+      expect(tileElement.classList.contains('bx--tile--is-expanded')).toBe(
+        true
+      );
     });
 
     it('Should have the is-expanded class after enter has been pressed', function() {
       tileElement.dispatchEvent(new CustomEvent('keydown', { bubbles: true }), {
         which: 13,
       });
-      expect(tileElement.classList.contains('bx--tile--is-expanded')).toBe(true);
+      expect(tileElement.classList.contains('bx--tile--is-expanded')).toBe(
+        true
+      );
     });
 
     afterAll(function() {
@@ -141,12 +155,16 @@ describe('Test tile', function() {
     });
 
     it('Should not have the is-clicked class before its been clicked', function() {
-      expect(tileElement.classList.contains('bx--tile--is-selected')).toBe(false);
+      expect(tileElement.classList.contains('bx--tile--is-selected')).toBe(
+        false
+      );
     });
 
     it('Should have the is-clicked class after its been clicked', function() {
       tileElement.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(tileElement.classList.contains('bx--tile--is-selected')).toBe(true);
+      expect(tileElement.classList.contains('bx--tile--is-selected')).toBe(
+        true
+      );
     });
 
     afterAll(function() {

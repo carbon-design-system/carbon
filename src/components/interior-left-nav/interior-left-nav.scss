@@ -189,7 +189,8 @@
       flex-direction: column;
       width: rem(200px);
       padding-top: rem(20px);
-      transition: background-color 300ms $carbon--standard-easing, width 300ms $carbon--standard-easing;
+      transition: background-color 300ms $carbon--standard-easing,
+        width 300ms $carbon--standard-easing;
 
       ul,
       li,
@@ -302,7 +303,8 @@
     .#{$prefix}--interior-left-nav--collapsing,
     .#{$prefix}--interior-left-nav--collapsed {
       width: rem(48px);
-      transition: background-color 300ms $carbon--standard-easing, width 300ms $carbon--standard-easing;
+      transition: background-color 300ms $carbon--standard-easing,
+        width 300ms $carbon--standard-easing;
       cursor: pointer;
       background-color: rgba($color__blue-51, 0.1);
 
