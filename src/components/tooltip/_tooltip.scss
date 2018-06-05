@@ -223,6 +223,7 @@
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    overflow: visible;
 
     path {
       fill: $brand-01;
