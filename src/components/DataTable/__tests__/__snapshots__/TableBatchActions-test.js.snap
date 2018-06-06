@@ -18,10 +18,8 @@ exports[`DataTable.TableBatchActions should render 1`] = `
         className="bx--batch-summary__para"
       >
         <span>
-          10
+          10 items selected
         </span>
-         
-        items selected
       </p>
       <button
         className="bx--batch-summary__cancel"
@@ -52,10 +50,8 @@ exports[`DataTable.TableBatchActions should render 2`] = `
         className="bx--batch-summary__para"
       >
         <span>
-          10
+          10 items selected
         </span>
-         
-        items selected
       </p>
       <button
         className="bx--batch-summary__cancel"

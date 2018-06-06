@@ -3,11 +3,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const translationKeys = {
+  'carbon.table.batch.cancel': 'Cancel',
   'carbon.table.batch.items.selected': 'items selected',
   'carbon.table.batch.item.selected': 'item selected',
 };
 
-const translateWithId = id => translationKeys[id];
+const translateWithId = (id, state) => {
+  if (id === 'carbon.table.batch.cancel') {
+    return translationKeys[id];
+  }
+  return `${state.totalSelected} ${translationKeys[id]}`;
+};
 
 const TableBatchActions = ({
   className,
@@ -31,13 +37,14 @@ const TableBatchActions = ({
       {children}
       <div className="bx--batch-summary">
         <p className="bx--batch-summary__para">
-          <span>{totalSelected}</span>{' '}
-          {totalSelected > 1
-            ? t('carbon.table.batch.items.selected')
-            : t('carbon.table.batch.item.selected')}
+          <span>
+            {totalSelected > 1
+              ? t('carbon.table.batch.items.selected', { totalSelected })
+              : t('carbon.table.batch.item.selected', { totalSelected })}
+          </span>
         </p>
         <button className="bx--batch-summary__cancel" onClick={onCancel}>
-          Cancel
+          {t('carbon.table.batch.cancel')}
         </button>
       </div>
     </div>
