@@ -109,7 +109,7 @@
 
   .#{$prefix}--date-picker__icon {
     position: absolute;
-    top: 2.25rem;
+    bottom: rem(10px);
     left: 1rem;
     fill: $brand-01;
     cursor: pointer;
