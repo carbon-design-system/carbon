@@ -108,6 +108,7 @@ export class ToastNotification extends Component {
     iconDescription: PropTypes.string.isRequired,
     notificationType: PropTypes.string,
     hideCloseButton: PropTypes.bool,
+    timeout: PropTypes.number,
   };
 
   static defaultProps = {
@@ -120,11 +121,20 @@ export class ToastNotification extends Component {
     iconDescription: 'closes notification',
     onCloseButtonClick: () => {},
     hideCloseButton: false,
+    timeout: 0,
   };
 
   state = {
     open: true,
   };
+
+  componentDidMount() {
+    if (this.props.timeout) {
+      setTimeout(() => {
+        this.handleCloseButtonClick();
+      }, this.props.timeout);
+    }
+  }
 
   handleCloseButtonClick = evt => {
     this.setState({ open: false });

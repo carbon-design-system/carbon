@@ -17,6 +17,7 @@ const notificationProps = {
     captionNode: <Link href="#">The caption can be any node.</Link>,
     iconDescription: 'describes the close button',
     style: { minWidth: '30rem', marginBottom: '.5rem' },
+    timeout: 0,
   },
   inline: {
     onCloseButtonClick: action('onCloseButtonClick'),
