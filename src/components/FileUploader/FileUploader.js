@@ -13,6 +13,7 @@ export class FileUploaderButton extends Component {
     labelText: PropTypes.string,
     listFiles: PropTypes.bool,
     multiple: PropTypes.bool,
+    name: PropTypes.string,
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     role: PropTypes.string,
@@ -65,6 +66,7 @@ export class FileUploaderButton extends Component {
       tabIndex,
       buttonKind,
       accept,
+      name,
       ...other
     } = this.props;
     const classes = classNames({
@@ -96,6 +98,7 @@ export class FileUploaderButton extends Component {
           type="file"
           multiple={multiple}
           accept={accept}
+          name={name}
           onChange={this.handleChange}
           onClick={evt => {
             evt.target.value = null;
@@ -171,6 +174,7 @@ export default class FileUploader extends Component {
     labelDescription: PropTypes.string,
     labelTitle: PropTypes.string,
     multiple: PropTypes.bool,
+    name: PropTypes.string,
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     className: PropTypes.string,
@@ -229,6 +233,7 @@ export default class FileUploader extends Component {
       className,
       multiple,
       accept,
+      name,
       ...other
     } = this.props;
 
@@ -248,6 +253,7 @@ export default class FileUploader extends Component {
           onChange={this.handleChange}
           disableLabelChanges
           accept={accept}
+          name={name}
         />
         <div className="bx--file-container">
           {this.state.filenames.length === 0

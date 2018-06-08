@@ -16,6 +16,7 @@ storiesOf('FileUploader', module)
       <FileUploaderButton
         labelText="Add files"
         className="bob"
+        name="file"
         onChange={() => console.log('hi')}
         multiple
       />
@@ -34,6 +35,7 @@ storiesOf('FileUploader', module)
           buttonLabel="Add files"
           filenameStatus="edit"
           accept={['.jpg', '.png']}
+          name="file"
           multiple
           ref={fileUploader => (this.fileUploader = fileUploader)}
         />
