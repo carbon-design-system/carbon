@@ -120,6 +120,10 @@
     }
   }
 
+  .#{$prefix}--date-picker__icon:nth-last-child(4) {
+    bottom: rem(32px);
+  }
+
   .#{$prefix}--date-picker__icon + .#{$prefix}--date-picker__input {
     padding-left: $spacing-3xl;
   }
