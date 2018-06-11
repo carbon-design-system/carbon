@@ -120,6 +120,8 @@
     }
   }
 
+  // Sets the correct position of the calendar icon when there is an
+  // error message/validation below the date picker
   .#{$prefix}--date-picker__icon:nth-last-child(4) {
     bottom: rem(32px);
   }
