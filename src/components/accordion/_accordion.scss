@@ -17,7 +17,7 @@
 
   .#{$prefix}--accordion__item {
     transition: all $transition--base $carbon--standard-easing;
-    border-top: 1px solid $ui-04;
+    border-top: 1px solid $ui-03;
     overflow: hidden;
 
     &:focus {
@@ -31,7 +31,7 @@
     }
 
     &:last-child {
-      border-bottom: 1px solid $ui-04;
+      border-bottom: 1px solid $ui-03;
     }
   }
 

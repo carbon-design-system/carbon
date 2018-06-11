@@ -8,18 +8,18 @@ $font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetic
 $base-font-size: 16px !default; // Default, Use with em() and rem() functions
 
 $typescale-map: (
-  'giga' : 4.75rem,
-  'mega' : 3.375rem,
-  'alpha' : 2.25rem,
-  'beta' : 1.75rem,
-  'gamma' : 1.25rem,
-  'delta' : 1.125rem,
-  'epsilon' : 1rem,
-  'zeta' : 0.875rem,
-  'omega' : 0.75rem,
-  'caption' : 0.75rem,
-  'legal' : 0.6875rem,
-  'p' : 1rem
+  'giga': 4.75rem,
+  'mega': 3.375rem,
+  'alpha': 2.25rem,
+  'beta': 1.75rem,
+  'gamma': 1.25rem,
+  'delta': 1.125rem,
+  'epsilon': 1rem,
+  'zeta': 0.875rem,
+  'omega': 0.75rem,
+  'caption': 0.75rem,
+  'legal': 0.6875rem,
+  'p': 1rem
 );
 
 @mixin typescale($size) {
@@ -72,16 +72,16 @@ $typescale-map: (
 }
 
 $font-size-map: (
-  '76' : 4.75rem,
-  '54' : 3.375rem,
-  '36' : 2.25rem,
-  '28' : 1.75rem,
-  '20' : 1.25rem,
-  '18' : 1.125rem,
-  '16' : 1rem,
-  '14' : 0.875rem,
-  '12' : 0.75rem,
-  '11' : 0.6875rem
+  '76': 4.75rem,
+  '54': 3.375rem,
+  '36': 2.25rem,
+  '28': 1.75rem,
+  '20': 1.25rem,
+  '18': 1.125rem,
+  '16': 1rem,
+  '14': 0.875rem,
+  '12': 0.75rem,
+  '11': 0.6875rem
 );
 
 @mixin font-size($size) {

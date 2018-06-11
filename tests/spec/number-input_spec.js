@@ -1,7 +1,7 @@
 import Promise from 'bluebird'; // For testing on browsers not supporting Promise
 import EventManager from '../utils/event-manager';
 import NumberInput from '../../src/components/number-input/number-input';
-import HTML from '../../src/components/number-input/number-input.html';
+import HTML from '../../html/number-input/number-input.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test Number Input', function() {

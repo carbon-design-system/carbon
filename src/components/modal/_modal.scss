@@ -135,9 +135,6 @@
   }
 
   .#{$prefix}--modal-close__icon {
-    transition: 200ms;
     fill: $ui-05;
-    width: rem(12px);
-    height: rem(12px);
   }
 }

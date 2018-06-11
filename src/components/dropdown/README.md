@@ -8,6 +8,7 @@ Use these modifiers with `.bx--dropdown` class.
 |-------------------------|-------------------------------------------------------|
 | .bx--dropdown--selected | Applies specific styles for a selected dropdown item. |
 | .bx--dropdown--open     | Applies specific styles when the dropdown is opened   |
+| .bx--dropdown--up       | Applies style to have the dropdown slide up instead of down   |
 
 ### JavaScript
 

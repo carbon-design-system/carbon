@@ -1,5 +1,5 @@
 import Tooltip from '../../src/components/tooltip/tooltip';
-import HTML from '../../src/components/tooltip/tooltip.html';
+import HTML from '../../html/tooltip/tooltip.html';
 
 describe('Test tooltip', function() {
   describe('Constructor', function() {
