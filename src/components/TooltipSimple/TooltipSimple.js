@@ -29,9 +29,9 @@ const TooltipSimple = ({
 
   const tooltipWrapperClasses = classNames(`bx--tooltip--simple`, className);
   return (
-    <div>
+    <div className={tooltipWrapperClasses}>
       {showIcon ? (
-        <div className={tooltipWrapperClasses}>
+        <React.Fragment>
           {children}
           <div
             className={tooltipClasses}
@@ -41,17 +41,15 @@ const TooltipSimple = ({
             {...other}>
             <Icon role="img" name={iconName} description={iconDescription} />
           </div>
-        </div>
+        </React.Fragment>
       ) : (
-        <div className={tooltipWrapperClasses}>
-          <div
-            className={tooltipClasses}
-            data-tooltip-text={text}
-            tabIndex="0"
-            role="button"
-            {...other}>
-            {children}
-          </div>
+        <div
+          className={tooltipClasses}
+          data-tooltip-text={text}
+          tabIndex="0"
+          role="button"
+          {...other}>
+          {children}
         </div>
       )}
     </div>
