@@ -210,6 +210,18 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     });
   };
 
+  _batchCancel() {
+    const inputs = [...this.element.querySelectorAll(this.options.selectorCheckbox)];
+
+    inputs.forEach(item => {
+      item.checked = false;
+    });
+
+    this.state.checkboxCount = 0;
+    this._actionBarToggle(false);
+    this.countEl.textContent = this.state.checkboxCount;
+  }
+
   _keydownHandler = evt => {
     if (evt.which === 27) {
       this._batchCancel();
