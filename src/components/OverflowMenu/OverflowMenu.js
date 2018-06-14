@@ -168,6 +168,16 @@ export default class OverflowMenu extends Component {
      * Function called to override icon rendering.
      */
     renderIcon: PropTypes.func,
+
+    /**
+     * Function called when menu is closed
+     */
+    onClose: PropTypes.func,
+
+    /**
+     * Function called when menu is closed
+     */
+    onOpen: PropTypes.func,
   };
 
   static defaultProps = {
@@ -179,6 +189,8 @@ export default class OverflowMenu extends Component {
     floatingMenu: false,
     onClick: () => {},
     onKeyDown: () => {},
+    onClose: () => {},
+    onOpen: () => {},
     tabIndex: 0,
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
@@ -205,6 +217,7 @@ export default class OverflowMenu extends Component {
       });
       return false; // Let `.getMenuPosition()` cause render
     }
+
     return true;
   }
 
@@ -215,6 +228,18 @@ export default class OverflowMenu extends Component {
     this.hResize = OptimizedResize.add(() => {
       this.getMenuPosition();
     });
+  }
+
+  componentDidUpdate() {
+    const { onClose, onOpen, floatingMenu } = this.props;
+
+    if (this.state.open) {
+      if (!floatingMenu) {
+        onOpen();
+      }
+    } else {
+      onClose();
+    }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -264,7 +289,9 @@ export default class OverflowMenu extends Component {
   };
 
   closeMenu = () => {
-    this.setState({ open: false });
+    this.setState({ open: false }, () => {
+      this.props.onClose();
+    });
   };
 
   bindMenuEl = menuEl => {
@@ -318,6 +345,7 @@ export default class OverflowMenu extends Component {
         },
         !hasFocusin
       );
+      this.props.onOpen();
     }
   };
 
@@ -373,6 +401,7 @@ export default class OverflowMenu extends Component {
         {childrenWithProps}
       </ul>
     );
+
     const wrappedMenuBody = !floatingMenu ? (
       menuBody
     ) : (
