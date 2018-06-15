@@ -109,7 +109,7 @@
 
   .#{$prefix}--date-picker__icon {
     position: absolute;
-    bottom: rem(10px);
+    top: 2.25rem;
     left: 1rem;
     fill: $brand-01;
     cursor: pointer;
@@ -118,12 +118,6 @@
     &:hover {
       fill: $hover-primary;
     }
-  }
-
-  // Sets the correct position of the calendar icon when there is an
-  // error message/validation below the date picker
-  .#{$prefix}--date-picker__icon:nth-last-child(4) {
-    bottom: rem(32px);
   }
 
   .#{$prefix}--date-picker__icon + .#{$prefix}--date-picker__input {
