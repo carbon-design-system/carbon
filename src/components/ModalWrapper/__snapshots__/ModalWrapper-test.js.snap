@@ -9,6 +9,7 @@ exports[`ModalWrapper should render 1`] = `
   id="modal"
   modalHeading="Transactional Modal"
   modalLabel="Test Modal Label"
+  onKeyDown={[Function]}
   primaryButtonText="Save"
   secondaryButtonText="Cancel"
   shouldCloseAfterSubmit={true}

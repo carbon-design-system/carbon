@@ -35,6 +35,7 @@ export default class ModalWrapper extends React.Component {
     secondaryButtonText: 'Cancel',
     triggerButtonKind: 'primary',
     disabled: false,
+    onKeyDown: () => {},
   };
 
   state = {
