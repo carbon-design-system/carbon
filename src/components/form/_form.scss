@@ -28,6 +28,7 @@
     @include reset;
     @include font-family;
     @include typescale('zeta');
+    color: $text-01;
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;

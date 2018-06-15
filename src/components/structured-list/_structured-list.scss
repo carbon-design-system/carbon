@@ -109,6 +109,11 @@
     display: table-cell;
   }
 
+  .#{$prefix}--structured-list-th,
+  .#{$prefix}--structured-list-td {
+    color: $text-01;
+  }
+
   .#{$prefix}--structured-list-content--nowrap {
     white-space: nowrap;
   }
