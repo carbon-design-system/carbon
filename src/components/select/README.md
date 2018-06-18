@@ -22,16 +22,18 @@ For example, here's a __Select__ that provides a message if an option is not sel
 
 ```html
 <div class="bx--form-item">
-  <label for="select-id" class="bx--label">Select</label>
-  <div data-invalid class="bx--select">
-    <select id="select-id" class="bx--select-input">...</select>
+  <div class="bx--select">
+    <select data-invalid id="select-id" class="bx--select-input">...</select>
     ...
   </div>
+  <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd"><path d="M10 0L5 5 0 0z"></path></svg>
+  <label for="select-id" class="bx--label">Select</label>
   <div class="bx--form-requirement">
     Please select an option.
   </div>
 </div>
 ```
 
-The `bx--form-requirement` element will be hidden until `data-invalid` attribute gets added to `bx--select`.
+The `bx--form-requirement` element will be hidden until `data-invalid` attribute gets added to the 
+`select` child of `bx--select`.
 Validate the select on your own and then use JavaScript to add the attribute if the select value is invalid.

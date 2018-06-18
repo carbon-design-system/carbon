@@ -130,6 +130,9 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       const focusoutEventName = hasFocusout ? 'focusout' : 'blur';
       this.manage(on(this.element, focusinEventName, this._handleFocus, !hasFocusin));
       this.manage(on(this.element, focusoutEventName, this._handleBlur, !hasFocusout));
+      this.manage(
+        on(this.element.querySelector(this.options.selectorDatePickerIcon), focusoutEventName, this._handleBlur, !hasFocusout)
+      );
 
       // An attempt to disable Flatpickr's focus tracking system,
       // which has adverse effect with our old set up with two `<input>`s or our latest setup with a hidden `<input>`
