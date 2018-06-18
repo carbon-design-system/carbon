@@ -97,6 +97,7 @@
   .#{$prefix}--modal-content {
     overflow-y: auto;
     margin-bottom: $spacing-3xl;
+    color: $text-01;
 
     > * {
       @include reset;
