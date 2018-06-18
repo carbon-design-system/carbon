@@ -29,6 +29,7 @@
   .#{$prefix}--list__item {
     font-weight: 600;
     padding-left: $spacing-2xs;
+    color: $text-01;
   }
 
   .#{$prefix}--list--unordered > .#{$prefix}--list__item {
