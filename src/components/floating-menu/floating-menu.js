@@ -224,7 +224,10 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       }
       this._getContainer().appendChild(this.element);
       this._place();
-      (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
+      // IE11 puts focus on elements with `.focus()`, even ones without `tabindex` attribute
+      if (!this.element.hasAttribute(this.options.attribAvoidFocusOnOpen)) {
+        (this.element.querySelector(this.options.selectorPrimaryFocus) || this.element).focus();
+      }
     }
     if (state === 'hidden' && this.hResize) {
       this.hResize.release();
@@ -245,6 +248,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
     selectorContainer: '[data-floating-menu-container]',
     selectorPrimaryFocus: '[data-floating-menu-primary-focus]',
     attribDirection: 'data-floating-menu-direction',
+    attribAvoidFocusOnOpen: 'data-avoid-focus-on-open',
     classShown: '', // Should be provided from options arg in constructor
     classRefShown: '', // Should be provided from options arg in constructor
     eventBeforeShown: 'floating-menu-beingshown',
