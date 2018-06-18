@@ -120,6 +120,10 @@
     }
   }
 
+  .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
+    top: rem(14px);
+  }
+
   .#{$prefix}--date-picker__icon + .#{$prefix}--date-picker__input {
     padding-left: $spacing-3xl;
   }
@@ -325,6 +329,7 @@
   .#{$prefix}--date-picker__day.disabled,
   .flatpickr-day.disabled {
     cursor: not-allowed;
+    opacity: 0.5;
     color: $ui-05;
 
     &:hover {
@@ -408,6 +413,26 @@
   .flatpickr-prev-month,
   .flatpickr-next-month {
     padding-top: 5px;
+  }
+
+  .flatpickr-prev-month:hover svg,
+  .flatpickr-next-month:hover svg {
+    fill: $brand-01;
+  }
+
+  .flatpickr-next-month.disabled,
+  .flatpickr-prev-month.disabled {
+    svg {
+      fill: $ui-05;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      svg {
+        fill: $ui-05;
+      }
+    }
   }
 
   // Skeleton State
