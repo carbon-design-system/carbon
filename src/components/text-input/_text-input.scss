@@ -26,6 +26,7 @@
     border: none;
     box-shadow: 0 1px 0 0 $text-02;
     order: 2;
+    border-bottom: 1px solid transparent;
 
     & ~ .#{$prefix}--label {
       order: 1;

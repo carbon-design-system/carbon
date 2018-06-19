@@ -34,6 +34,7 @@
     order: 2;
     border-radius: 0;
     cursor: pointer;
+    border-bottom: 1px solid transparent;
 
     // Hide default select arrow in IE10+
     &::-ms-expand {
