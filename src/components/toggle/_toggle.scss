@@ -104,6 +104,7 @@
   .#{$prefix}--toggle__text--right {
     @include typescale('zeta');
     position: relative;
+    color: $text-01;
   }
 
   .#{$prefix}--toggle__text--left {

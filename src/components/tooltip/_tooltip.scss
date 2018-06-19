@@ -64,6 +64,7 @@
     display: none;
     max-width: rem(240px);
     background: $ui-01;
+    margin-top: $spacing-2xs;
     padding: $spacing-md;
     border: 1px solid $ui-03;
     border-radius: rem(4px);
@@ -247,7 +248,7 @@
       border-radius: 4px;
       color: $inverse-01;
       font-weight: 400;
-      content: attr(title);
+      content: attr(aria-label);
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;

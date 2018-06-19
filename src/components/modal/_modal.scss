@@ -97,6 +97,7 @@
   .#{$prefix}--modal-content {
     overflow-y: auto;
     margin-bottom: $spacing-3xl;
+    color: $text-01;
 
     > * {
       @include reset;
@@ -105,7 +106,8 @@
 
   .#{$prefix}--modal-footer {
     margin-top: auto;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
     background-color: $modal-footer-background-color;
     margin-left: rem(-24px);
     margin-right: rem(-24px);
