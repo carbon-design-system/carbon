@@ -12,7 +12,7 @@
   }
 
   .#{$prefix}--inline-loading__text {
-    font-size: 0.875rem;
+    @include typescale('zeta');
   }
 
   .#{$prefix}--inline-loading__animation {
