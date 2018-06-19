@@ -225,7 +225,11 @@ export default class Tooltip extends Component {
     this._hasContextMenu = evt.type === 'contextmenu';
     if (this.props.clickToOpen) {
       if (state === 'click') {
-        this.setState({ open: !this.state.open });
+        const shouldOpen = !this.state.open;
+        if (shouldOpen) {
+          this.getTriggerPosition();
+        }
+        this.setState({ open: shouldOpen });
       }
     } else if (state && (state !== 'out' || !hadContextMenu)) {
       this._debouncedHandleHover(state, evt.relatedTarget);
