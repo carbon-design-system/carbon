@@ -37,6 +37,8 @@ export default class Modal extends Component {
     modalLabel: '',
   };
 
+  button = React.createRef();
+
   handleKeyDown = evt => {
     if (evt.which === 27) {
       this.props.onRequestClose();
@@ -49,6 +51,31 @@ export default class Modal extends Component {
   handleClick = evt => {
     if (this.innerModal && !this.innerModal.contains(evt.target)) {
       this.props.onRequestClose();
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.open && this.props.open) {
+      this.beingOpen = true;
+    } else if (prevProps.open && !this.props.open) {
+      this.beingOpen = false;
+    }
+  }
+
+  focusButton = () => {
+    if (this.button) {
+      this.button.current.focus();
+    }
+  };
+
+  handleTransitionEnd = () => {
+    if (
+      this.outerModal.offsetWidth &&
+      this.outerModal.offsetHeight &&
+      this.beingOpen
+    ) {
+      this.focusButton();
+      this.beingOpen = false;
     }
   };
 
@@ -86,7 +113,8 @@ export default class Modal extends Component {
       <button
         className="bx--modal-close"
         type="button"
-        onClick={onRequestClose}>
+        onClick={onRequestClose}
+        ref={this.button}>
         <Icon
           name="close"
           className="bx--modal-close__icon"
@@ -123,7 +151,8 @@ export default class Modal extends Component {
               <Button
                 kind={danger ? 'danger--primary' : 'primary'}
                 disabled={primaryButtonDisabled}
-                onClick={onRequestSubmit}>
+                onClick={onRequestSubmit}
+                inputref={this.button}>
                 {primaryButtonText}
               </Button>
             </div>
@@ -139,7 +168,11 @@ export default class Modal extends Component {
         onClick={this.handleClick}
         className={modalClasses}
         role="presentation"
-        tabIndex={-1}>
+        tabIndex={-1}
+        onTransitionEnd={this.props.open ? this.handleTransitionEnd : undefined}
+        ref={outerModal => {
+          this.outerModal = outerModal;
+        }}>
         {modalBody}
       </div>
     );

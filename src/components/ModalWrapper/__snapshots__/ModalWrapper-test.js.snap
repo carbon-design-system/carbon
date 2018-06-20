@@ -149,6 +149,18 @@ exports[`ModalWrapper should render 1`] = `
               <Button
                 disabled={false}
                 iconDescription="Provide icon description if icon is used"
+                inputref={
+                  Object {
+                    "current": <button
+                      class="bx--btn bx--btn--primary"
+                      inputref="[object Object]"
+                      tabindex="0"
+                      type="button"
+                    >
+                      Save
+                    </button>,
+                  }
+                }
                 kind="primary"
                 onClick={[Function]}
                 small={false}
@@ -158,6 +170,18 @@ exports[`ModalWrapper should render 1`] = `
                 <button
                   className="bx--btn bx--btn--primary"
                   disabled={false}
+                  inputref={
+                    Object {
+                      "current": <button
+                        class="bx--btn bx--btn--primary"
+                        inputref="[object Object]"
+                        tabindex="0"
+                        type="button"
+                      >
+                        Save
+                      </button>,
+                    }
+                  }
                   onClick={[Function]}
                   tabIndex={0}
                   type="button"

@@ -37,14 +37,24 @@ const Button = ({
   ) : null;
 
   const button = (
-    <button {...other} {...commonProps} disabled={disabled} type={type}>
+    <button
+      {...other}
+      {...commonProps}
+      disabled={disabled}
+      type={type}
+      ref={other.inputref}>
       {children}
       {buttonImage}
     </button>
   );
 
   const anchor = (
-    <a {...other} {...commonProps} href={href} role="button">
+    <a
+      {...other}
+      {...commonProps}
+      href={href}
+      role="button"
+      ref={other.inputref}>
       {children}
       {buttonImage}
     </a>
