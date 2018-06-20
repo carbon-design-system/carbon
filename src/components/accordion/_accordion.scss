@@ -65,7 +65,7 @@
     padding: $spacing-2xs $spacing-3xs $spacing-2xs $spacing-2xs;
     margin: $accordion-arrow-margin;
     fill: $ui-05;
-    transform: rotate(0)/*rtl:rotate(180deg)*/;
+    transform: rotate(0) /*rtl:rotate(180deg)*/;
   }
 
   .#{$prefix}--accordion__title {
