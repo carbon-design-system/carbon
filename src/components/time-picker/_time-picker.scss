@@ -22,6 +22,7 @@
   .#{$prefix}--time-picker__input {
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
