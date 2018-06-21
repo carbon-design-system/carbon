@@ -72,12 +72,13 @@ Name files and folders using __singular__ form; not plural.
 
 ```
 button
-  - button.html
+  - button.hbs
   - _button.scss
   - button.js
+  - button.config.js
 ```
 
-Also note that all variants of a component can live in a single HTML, SCSS and JS file respectively.
+Also note that all variants of a component can live in a single HBS, SCSS and JS file respectively.
 For example, while there are many button variants (primary, secondary, etc.), they're all contained in those single source files in the button folder.
 
 ## Start Contributing
