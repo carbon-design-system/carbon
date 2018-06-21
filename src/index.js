@@ -31,6 +31,7 @@ export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
 export Icon from './components/Icon';
+export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
 export ListItem from './components/ListItem';
 export Loading from './components/Loading';
