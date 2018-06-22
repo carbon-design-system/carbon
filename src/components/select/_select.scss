@@ -68,7 +68,7 @@
       cursor: not-allowed;
     }
 
-    & ~ .#{$prefix}--form-requirement {
+    ~ .#{$prefix}--form-requirement {
       order: 3;
       color: $support-01;
       font-weight: 400;
@@ -141,9 +141,28 @@
         @include focus-outline('border');
       }
 
+      &[data-invalid] {
+        outline: 1px solid $support-01;
+        color: $text-01;
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        ~ .#{$prefix}--select__arrow {
+          bottom: 1rem;
+        }
+      }
+
       &:disabled ~ * {
         opacity: 0.5;
         cursor: not-allowed;
+      }
+
+      ~ .#{$prefix}--form-requirement {
+        position: absolute;
+        bottom: -1.5rem;
+        left: 5.05rem;
       }
     }
   }
