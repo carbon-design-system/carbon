@@ -241,6 +241,7 @@
       position: absolute;
       display: none;
       background-color: $inverse-02;
+      margin-left: 50%;
     }
 
     &:before {
@@ -295,13 +296,11 @@
     &:before {
       top: 0;
       transform: translate(-50%, calc(-100% - 10px)) rotate(45deg);
-      margin-left: 50%;
     }
 
     &:after {
       top: 0;
       transform: translate(-50%, calc(-100% - 10px));
-      margin-left: 50%;
     }
   }
 
@@ -310,13 +309,11 @@
     &:before {
       bottom: 0;
       transform: translate(-50%, calc(100% + 10px)) rotate(135deg);
-      margin-left: 50%;
     }
 
     &:after {
       bottom: 0;
       transform: translate(-50%, calc(100% + 10px));
-      margin-left: 50%;
     }
   }
 

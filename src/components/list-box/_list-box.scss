@@ -69,7 +69,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__menu-icon {
     position: static;
-    padding: 0 rem(8px) 0 rem(8px);
+    padding: 0 $spacing-xs;
   }
 
   .#{$prefix}--list-box--inline > .#{$prefix}--list-box__menu {
