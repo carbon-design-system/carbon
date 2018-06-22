@@ -57,6 +57,10 @@
       color: $brand-01;
     }
 
+    &::-webkit-input-placeholder {
+      color: $text-02;
+    }
+
     &[data-invalid],
     &[data-invalid]:focus {
       box-shadow: 0 2px 0 0 $support-01;
