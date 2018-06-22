@@ -70,6 +70,7 @@
     border-radius: rem(4px);
     z-index: z('floating');
     word-wrap: break-word;
+    color: $text-01;
 
     p {
       @include font-family;
