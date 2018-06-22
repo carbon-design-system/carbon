@@ -154,10 +154,10 @@
       }
 
       &[data-invalid] {
-        outline: 1px solid $support-01;
         color: $text-01;
 
         &:focus {
+          outline: 1px solid $support-01;
           box-shadow: none;
         }
       }
