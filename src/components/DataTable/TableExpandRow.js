@@ -10,6 +10,7 @@ const TableExpandRow = ({
   children,
   isExpanded,
   onExpand,
+  expandIconDescription,
   ...rest
 }) => {
   const className = cx(
@@ -30,7 +31,11 @@ const TableExpandRow = ({
           className="bx--table-expand-v2__button"
           onClick={onExpand}
           aria-label={ariaLabel}>
-          <Icon className="bx--table-expand-v2__svg" name="chevron--right" />
+          <Icon
+            className="bx--table-expand-v2__svg"
+            name="chevron--right"
+            description={expandIconDescription}
+          />
         </button>
       </TableCell>
       {children}
@@ -56,6 +61,11 @@ TableExpandRow.propTypes = {
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand: PropTypes.func.isRequired,
+
+  /**
+   * The description of the chevron right icon, to be put in its SVG `<title>` element.
+   */
+  expandIconDescription: PropTypes.string,
 };
 
 export default TableExpandRow;
