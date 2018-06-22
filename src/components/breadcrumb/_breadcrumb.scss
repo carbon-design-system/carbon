@@ -56,13 +56,6 @@
       color: $hover-primary-text;
       border-bottom: 1px solid $hover-primary-text;
     }
-
-    // Applies to Firefox only
-    @-moz-document url-prefix() {
-      & {
-        border-bottom: none;
-      }
-    }
   }
 
   // Skeleton State
