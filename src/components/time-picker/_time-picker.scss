@@ -57,7 +57,7 @@
       color: $brand-01;
     }
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       color: $text-02;
     }
 
