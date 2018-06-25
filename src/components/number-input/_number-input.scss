@@ -29,9 +29,10 @@
     color: $text-01;
     background-color: $field-01;
     border: none;
-    box-shadow: 0 1px 0 0 $text-02;
+    box-shadow: 0 1px 0 0 $ui-05;
     order: 2;
     border-radius: 0;
+    border-bottom: 1px solid transparent;
 
     & ~ .#{$prefix}--label {
       order: 1;

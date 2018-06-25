@@ -62,6 +62,9 @@
     color: $text-01;
     margin-right: $spacing-md;
     height: 1.875rem;
+    /*rtl:ignore*/
+    direction: ltr;
+    justify-content: flex-start; /*rtl:{flex-end}*/
   }
 
   .#{$prefix}--file__state-container {
