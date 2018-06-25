@@ -212,7 +212,7 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
   _keydownHandler = evt => {
     if (evt.which === 27) {
-      this._batchCancel();
+      this._actionBarCancel();
     }
   };
 
