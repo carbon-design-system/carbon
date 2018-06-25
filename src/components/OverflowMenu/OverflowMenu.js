@@ -334,17 +334,16 @@ export default class OverflowMenu extends Component {
         focusinEventName,
         event => {
           const { target } = event;
-          if (!menuBody.contains(target)) {
+          if (
+            !menuBody.contains(target) &&
+            this.menuEl &&
+            !matches(target, '.bx--overflow-menu,.bx--overflow-menu-options')
+          ) {
             this.closeMenu();
-            if (
-              this.menuEl &&
-              !matches(target, '.bx--overflow-menu,.bx--overflow-menu-options')
-            ) {
-              // Note:
-              // The last focusable element in the page should NOT be the trigger button of overflow menu.
-              // Doing so breaks the code that detects if floating menu losing focus, e.g. by keyboard events.
-              this.menuEl.focus();
-            }
+            // Note:
+            // The last focusable element in the page should NOT be the trigger button of overflow menu.
+            // Doing so breaks the code that detects if floating menu losing focus, e.g. by keyboard events.
+            this.menuEl.focus();
           }
         },
         !hasFocusin
