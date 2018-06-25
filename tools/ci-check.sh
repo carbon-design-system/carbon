@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 yarn build
 yarn lint
 yarn test:unit -- -b ChromeHeadless_Travis -b Firefox

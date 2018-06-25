@@ -124,11 +124,11 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
           element,
           name,
           event => {
-            const { target, type } = event;
+            const { relatedTarget, type } = event;
             const hadContextMenu = this._hasContextMenu;
             this._hasContextMenu = type === 'contextmenu';
             this._debouncedHandleClick({
-              target,
+              relatedTarget,
               type: type === 'focusin' ? 'focus' : type,
               hadContextMenu,
               details: getLaunchingDetails(event),
@@ -143,14 +143,13 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   /**
    * Handles click/focus events.
    * @param {Object} params The parameters.
-   * @param {number} params.target
+   * @param {Element} params.relatedTarget The element that focus went to. (For `blur` event)
    * @param {string} params.type The event type triggering this method.
    * @param {boolean} params.hadContextMenu
    * @param {Object} params.details The event details.
    * @private
    */
-
-  _handleClick({ target, type, hadContextMenu, details }) {
+  _handleClick({ relatedTarget, type, hadContextMenu, details }) {
     const state = {
       focus: 'shown',
       blur: 'hidden',
@@ -162,7 +161,8 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
     if (type === 'blur') {
       // Note: SVGElement in IE11 does not have `.contains()`
       const wentToSelf =
-        (target && (this.element.contains && this.element.contains(target))) || this.tooltip.element.contains(target);
+        (relatedTarget && (this.element.contains && this.element.contains(relatedTarget))) ||
+        (this.tooltip && this.tooltip.element.contains(relatedTarget));
       shouldPreventClose = hadContextMenu || wentToSelf;
     }
     if (!shouldPreventClose) {
