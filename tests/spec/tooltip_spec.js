@@ -33,19 +33,10 @@ describe('Test tooltip', function() {
       });
     });
 
-    it('Should show the tooltip upon hovering over', function() {
-      element.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
-    });
-
-    it('Should hide the tooltip upon hovering out', function() {
-      floating.classList.add('bx--tooltip--shown');
-      element.dispatchEvent(new CustomEvent('mouseout', { bubbles: true }));
-      expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
-    });
-
-    it('Should show the tooltip upon focusing', function() {
-      element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
+    it('Should show the tooltip upon clicking/focusing', function() {
+      const hasFocusin = 'onfocusin' in window;
+      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+      element.dispatchEvent(new CustomEvent(focusinEventName, { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
@@ -84,20 +75,13 @@ describe('Test tooltip', function() {
       initContext = Tooltip.init();
     });
 
-    it('Should create an instance upon hovering over', function() {
+    it('Should create an instance upon clicking/focusing', function() {
+      const hasFocusin = 'onfocusin' in window;
+      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       return Tooltip.__with__({
         debounce: fn => fn,
       })(() => {
-        element.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
-        expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
-      });
-    });
-
-    it('Should create an instance upon focusing', function() {
-      return Tooltip.__with__({
-        debounce: fn => fn,
-      })(() => {
-        element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
+        element.dispatchEvent(new CustomEvent(focusinEventName, { bubbles: true }));
         expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
       });
     });

@@ -36,44 +36,6 @@ describe('Test Search', function() {
     });
   });
 
-  describe('Toggling between views', function() {
-    let gridIcon;
-    let listIcon;
-    let toggle;
-    let instance;
-    const container = document.createElement('div');
-    container.innerHTML = searchHTML;
-
-    beforeAll(function() {
-      document.body.appendChild(container);
-      instance = new Search(document.querySelector('[data-search]'));
-      toggle = container.querySelector('.bx--search-button[data-search-toggle]');
-      gridIcon = container.querySelector('div[data-search-view="grid"]');
-      listIcon = container.querySelector('div[data-search-view="list"]');
-    });
-
-    it('Should show grid view by default', function() {
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(false);
-    });
-
-    it('Should show list view after click', function() {
-      toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(true);
-      expect(listIcon.classList.contains('bx--search-view--hidden')).toBe(false);
-    });
-
-    it('Should show grid view after second click', function() {
-      toggle.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      expect(gridIcon.classList.contains('bx--search-view--hidden')).toBe(false);
-      expect(listIcon.classList.contains('bx--search-view--hidden')).toBe(true);
-    });
-
-    afterAll(function() {
-      instance.release();
-      document.body.removeChild(container);
-    });
-  });
-
   describe('Clearing the search bar', function() {
     let input;
     let clearIcon;

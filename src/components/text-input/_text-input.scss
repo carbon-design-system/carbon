@@ -88,34 +88,4 @@
       color: transparent;
     }
   }
-
-  // Skeleton State
-  .#{$prefix}--text-input.#{$prefix}--skeleton {
-    @include skeleton;
-    width: 100%;
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
-
-  // Skeleton State
-  .#{$prefix}--text-input.#{$prefix}--skeleton {
-    @include skeleton;
-    width: 100%;
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
-
-  // Skeleton State
-  .#{$prefix}--text-input.#{$prefix}--skeleton {
-    @include skeleton;
-    width: 100%;
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
 }
