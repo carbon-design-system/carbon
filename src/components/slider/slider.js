@@ -111,7 +111,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
     const { value, min, max, step } = this.getInputProps();
 
     const range = max - min;
-    const valuePercentage = (value - min) / range * 100;
+    const valuePercentage = ((value - min) / range) * 100;
 
     let left;
     let newValue;
@@ -132,7 +132,7 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
         if (direction !== undefined) {
           const multiplier = evt.shiftKey === true ? range / step / this.options.stepMultiplier : 1;
           const stepMultiplied = step * multiplier;
-          const stepSize = stepMultiplied / range * 100;
+          const stepSize = (stepMultiplied / range) * 100;
           left = valuePercentage + stepSize * direction;
           newValue = Number(value) + stepMultiplied * direction;
         }
@@ -146,8 +146,8 @@ class Slider extends mixin(createComponent, initComponentBySearch, eventedState,
 
         const track = this.track.getBoundingClientRect();
         const unrounded = (evt.clientX - track.left) / track.width;
-        const rounded = Math.round(range * unrounded / step) * step;
-        left = rounded / range * 100;
+        const rounded = Math.round((range * unrounded) / step) * step;
+        left = (rounded / range) * 100;
         newValue = rounded + min;
       }
     }
