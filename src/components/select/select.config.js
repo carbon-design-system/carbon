@@ -35,6 +35,14 @@ module.exports = {
       },
     },
     {
+      name: 'inline-invalid',
+      label: 'Inline Select (Invalid)',
+      context: {
+        inline: true,
+        invalid: true,
+      },
+    },
+    {
       name: 'light-invalid',
       label: 'Select (Light/Invalid)',
       context: {
