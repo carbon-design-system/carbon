@@ -430,16 +430,16 @@ describe('Test floating menu', function() {
     it('Should focus back on the trigger button when floating menu loses focus', function() {
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      spyOn(refNode, 'focus');
       primaryFocusNode.focus();
       menu.changeState('shown', {});
+      spyOn(HTMLElement.prototype, 'focus');
       // Firefox does not fire `onfocus` event with `input.focus()` call, presumably when the window does not have focus
       input.dispatchEvent(
         Object.assign(new CustomEvent(focusinEventName, { bubbles: true }), {
           relatedTarget: primaryFocusNode,
         })
       );
-      expect(refNode.focus).toHaveBeenCalledTimes(1);
+      expect(HTMLElement.prototype.focus).toHaveBeenCalledTimes(1);
     });
 
     afterEach(function() {
