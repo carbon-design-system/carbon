@@ -121,14 +121,21 @@
   }
 
   .#{$prefix}--select--inline {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto;
+
+    // Targets IE10+ browsers: Display grid auto not supported
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
 
     .#{$prefix}--label {
       white-space: nowrap;
       margin: 0 $spacing-xs 0 0;
       font-weight: 400;
+      align-self: center;
     }
 
     .#{$prefix}--select-input {
@@ -141,16 +148,17 @@
         @include focus-outline('border');
       }
 
+      ~ .#{$prefix}--select__arrow {
+        bottom: auto;
+        top: 1rem;
+      }
+
       &[data-invalid] {
         outline: 1px solid $support-01;
         color: $text-01;
 
         &:focus {
           box-shadow: none;
-        }
-
-        ~ .#{$prefix}--select__arrow {
-          bottom: 1rem;
         }
       }
 
@@ -160,9 +168,13 @@
       }
 
       ~ .#{$prefix}--form-requirement {
-        position: absolute;
-        bottom: -1.5rem;
-        left: 5.05rem;
+        grid-column-start: 2;
+
+        // Targets IE10+ browsers: Display grid auto not supported
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+          position: absolute;
+          bottom: -1.5rem;
+        }
       }
     }
   }
