@@ -241,7 +241,6 @@
       position: absolute;
       display: none;
       background-color: $inverse-02;
-      margin-left: 50%;
     }
 
     &:before {
@@ -252,6 +251,7 @@
       margin: 0 auto;
       content: '';
       margin-top: 1px;
+      margin-left: 50%;
     }
 
     &:after {
@@ -267,6 +267,7 @@
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
+      margin-left: 50%;
     }
 
     &:hover,
