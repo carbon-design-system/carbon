@@ -248,6 +248,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box input[role='combobox']::placeholder {
+    @include placeholder-colors;
     font-weight: 400;
   }
 
