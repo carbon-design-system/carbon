@@ -36,7 +36,7 @@
       box-shadow: 0 2px 0 0 $brand-01;
     }
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       @include placeholder-colors;
     }
 
