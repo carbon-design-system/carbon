@@ -123,7 +123,6 @@
   .#{$prefix}--select--inline {
     display: grid;
     grid-template-columns: auto auto;
-    display: -ms-grid;
 
     // Targets IE10+ browsers: Display grid auto not supported
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
