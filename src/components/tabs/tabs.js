@@ -62,11 +62,14 @@ class Tab extends ContentSwitcher {
    */
   _handleClick(event) {
     super._handleClick(event);
-    const button = eventMatches(event, this.options.selectorButton);
+    const button = eventMatches(event, this.options.selectorButtonSelected);
     const trigger = eventMatches(event, this.options.selectorTrigger);
-    if (button) {
-      super._handleClick(event);
-      this._updateMenuState();
+    const triggerNode = this.element.querySelector(this.options.selectorTrigger);
+    if (triggerNode && triggerNode.offsetParent) {
+      if (button) {
+        super._handleClick(event);
+        this._updateMenuState();
+      }
     }
     if (trigger) {
       this._updateMenuState();
