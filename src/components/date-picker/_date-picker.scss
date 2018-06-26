@@ -103,8 +103,8 @@
       border: 1px solid transparent;
     }
 
-    &::-webkit-input-placeholder {
-      color: $text-03;
+    &::placeholder {
+      color: $text-02;
     }
   }
 

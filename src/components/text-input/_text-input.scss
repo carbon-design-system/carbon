@@ -32,7 +32,7 @@
       order: 1;
     }
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       @include placeholder-colors;
     }
 
