@@ -52,21 +52,37 @@ const loadContents = glob =>
     return contents;
   });
 
-const fractal = Fractal.create();
-fractal.components.set('path', path.join(__dirname, '../src/components'));
-fractal.components.set('ext', '.hbs');
-fractal.docs.set('path', path.join(__dirname, '../docs'));
+const cache = {
+  /**
+   * @returns {Promise<Object>} The promise that is resolved with the content cache.
+   */
+  get() {
+    if (!this.promiseCache) {
+      const fractal = Fractal.create();
+      fractal.components.set('path', path.join(__dirname, '../src/components'));
+      fractal.components.set('ext', '.hbs');
+      fractal.docs.set('path', path.join(__dirname, '../docs'));
+      this.promiseCache = Promise.all([fractal.load(), loadContents(path.resolve(__dirname, '../{demo,src}/**/*.hbs'))]).then(
+        ([sources, contents]) => {
+          const [componentSource, docSource] = sources;
+          return {
+            componentSource,
+            docSource,
+            contents,
+          };
+        }
+      );
+    }
+    return this.promiseCache;
+  },
 
-const promiseCache = Promise.all([fractal.load(), loadContents(path.resolve(__dirname, '../{demo,src}/**/*.hbs'))]).then(
-  ([sources, contents]) => {
-    const [componentSource, docSource] = sources;
-    return {
-      componentSource,
-      docSource,
-      contents,
-    };
-  }
-);
+  /**
+   * Clears the content cache.
+   */
+  clear() {
+    this.promiseCache = undefined;
+  },
+};
 
 /**
  * @param {Object} [options] The options.
@@ -79,7 +95,7 @@ const promiseCache = Promise.all([fractal.load(), loadContents(path.resolve(__di
  * @returns {string|Map<Variant, string>} The list of rendered template, keyed by Fractal `Variant` object.
  */
 const renderComponent = ({ layout, concat } = {}, handle) =>
-  promiseCache.then(({ componentSource, contents }) => {
+  cache.get().then(({ componentSource, contents }) => {
     const renderedItems = new Map();
     componentSource.forEach(metadata => {
       const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
@@ -107,7 +123,7 @@ const renderComponent = ({ layout, concat } = {}, handle) =>
   });
 
 module.exports = {
-  promiseCache,
+  cache,
   render: renderComponent,
   handlebars,
 };
