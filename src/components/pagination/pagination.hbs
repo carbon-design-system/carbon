@@ -1,7 +1,9 @@
 <div class="bx--pagination" data-pagination>
   <div class="bx--pagination__left">
     <div class="bx--select{{#is version "v2"}} bx--select--inline{{/is}}">
-      <label for="select-id-pagination" class="bx--visually-hidden">Number of items per page</label>
+      {{#is version "v2"}}
+        <label for="select-id-pagination" class="bx--pagination__text">Items per page: </label>
+      {{/is}}
       <select id="select-id-pagination" class="bx--select-input" data-items-per-page>
         <option class="bx--select-option" value="10" selected>10</option>
         <option class="bx--select-option" value="20">20</option>

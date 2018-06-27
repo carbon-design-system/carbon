@@ -25,6 +25,7 @@ $css--helpers: true;
     display: flex;
     align-items: center;
     border: 1px solid $ui-03;
+    height: rem(40px);
 
     .#{$prefix}--form-item {
       flex: auto;
@@ -46,6 +47,7 @@ $css--helpers: true;
     @include typescale('omega');
     color: $text-02;
     display: none;
+    padding-right: $spacing-2xs;
 
     @include breakpoint('530px') {
       display: block;
@@ -58,6 +60,7 @@ $css--helpers: true;
     fill: $ui-05;
     pointer-events: none;
     transition: $transition--base;
+    margin-top: $spacing-3xs;
   }
 
   .#{$prefix}--pagination__button {
@@ -112,7 +115,7 @@ $css--helpers: true;
     .#{$prefix}--select-input {
       height: rem(24px);
       width: auto;
-      padding: 0 1.25rem 0 0.5rem;
+      padding: 0 1.25rem 0 0;
       margin: 0;
       font-weight: 600;
       text-align-last: center;
@@ -153,28 +156,26 @@ $css--helpers: true;
     margin-right: -1rem;
 
     .#{$prefix}--pagination__button {
-      height: 100%;
+      height: rem(40px);
       border-left: 1px solid $ui-03;
       border-right: 1px solid $ui-03;
-      width: rem(42px);
       margin: 0;
     }
 
     .#{$prefix}--pagination__button--forward {
       border-right: 0;
-    }
-
-    .#{$prefix}--pagination__button--backward {
+      padding: 0 $spacing-md;
       margin-left: $spacing-md;
     }
 
-    .#{$prefix}--select--inline {
-      position: relative;
-      top: -1.5px;
+    .#{$prefix}--pagination__button--backward {
+      margin: 0 $spacing-md;
+      padding: 0 $spacing-md;
     }
 
     .#{$prefix}--select__arrow {
-      right: 0.3rem;
+      right: 0;
+      top: 0.6rem;
     }
   }
 
