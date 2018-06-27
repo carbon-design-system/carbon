@@ -366,6 +366,7 @@ export default class OverflowMenu extends Component {
       menuOffsetFlip,
       iconClass,
       onClick, // eslint-disable-line
+      onOpen, // eslint-disable-line
       renderIcon,
       ...other
     } = this.props;
