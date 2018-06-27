@@ -98,6 +98,7 @@
     overflow-y: auto;
     margin-bottom: $spacing-3xl;
     color: $text-01;
+    font-weight: 400;
 
     > * {
       @include reset;

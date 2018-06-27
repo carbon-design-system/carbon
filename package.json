@@ -60,6 +60,7 @@
     "browser-sync": "~2.10.0",
     "carbon-addons-cloud": "^1.8.0",
     "carbon-components-react": "^5.8.0",
+    "chokidar": "^2.0.0",
     "classnames": "^2.2.0",
     "commander": "^2.13.0",
     "core-js": "^2.4.0",
