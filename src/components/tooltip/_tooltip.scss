@@ -21,13 +21,16 @@
     align-items: center;
     color: $text-01;
     font-weight: normal;
+
+    .#{$prefix}--tooltip__trigger {
+      margin-left: $spacing-xs;
+    }
   }
 
   .#{$prefix}--tooltip__trigger {
     @include button-reset($width: false);
     display: inline-flex;
     align-items: center;
-    margin-left: $spacing-xs;
     cursor: pointer;
     font-size: 1rem;
 
@@ -70,6 +73,7 @@
     border-radius: rem(4px);
     z-index: z('floating');
     word-wrap: break-word;
+    color: $text-01;
 
     p {
       @include font-family;
@@ -240,6 +244,17 @@
     }
 
     &:before {
+      right: 0;
+      left: 0;
+      width: 0.6rem;
+      height: 0.6rem;
+      margin: 0 auto;
+      content: '';
+      margin-top: 1px;
+      margin-left: 50%;
+    }
+
+    &:after {
       @include typescale('omega');
       @include layer('overlay');
       max-width: rem(176px);
@@ -252,16 +267,7 @@
       transform: translateX(-50%);
       white-space: nowrap;
       pointer-events: none;
-    }
-
-    &:after {
-      right: 0;
-      left: 0;
-      width: 0.6rem;
-      height: 0.6rem;
-      margin: 0 auto;
-      content: '';
-      margin-top: 1px;
+      margin-left: 50%;
     }
 
     &:hover,
@@ -289,24 +295,26 @@
   // Tooltip Icon caret - top position
   .#{$prefix}--tooltip--icon__top {
     &:before {
-      bottom: 1.8rem;
+      top: 0;
+      transform: translate(-50%, calc(-100% - 10px)) rotate(45deg);
     }
 
     &:after {
-      bottom: 1.5rem;
-      transform: rotate(45deg);
+      top: 0;
+      transform: translate(-50%, calc(-100% - 10px));
     }
   }
 
   // Tooltip Icon caret - bottom position
   .#{$prefix}--tooltip--icon__bottom {
     &:before {
-      top: 1.8rem;
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 10px)) rotate(135deg);
     }
 
     &:after {
-      top: 1.5rem;
-      transform: rotate(-135deg);
+      bottom: 0;
+      transform: translate(-50%, calc(100% + 10px));
     }
   }
 
