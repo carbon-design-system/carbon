@@ -31,9 +31,9 @@ describe('MultiSelect', () => {
       const items = generateItems(5, generateGenericItem);
       const wrapper = mount(<MultiSelect label="Field" items={items} />);
       expect(wrapper.state('isOpen')).toBe(false);
-      wrapper.instance().handleOnToggleMenu();
+      wrapper.find('.bx--list-box__field').simulate('click');
       expect(wrapper.state('isOpen')).toBe(true);
-      wrapper.instance().handleOnToggleMenu();
+      wrapper.find('.bx--list-box__field').simulate('click');
       expect(wrapper.state('isOpen')).toBe(false);
     });
   });
