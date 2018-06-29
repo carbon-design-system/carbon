@@ -29,7 +29,10 @@ export default class Loading extends React.Component {
     });
 
     const loading = (
-      <div {...other} className={loadingClasses}>
+      <div
+        {...other}
+        aria-live={active ? 'assertive' : 'off'}
+        className={loadingClasses}>
         <svg className="bx--loading__svg" viewBox="-75 -75 150 150">
           <circle cx="0" cy="0" r="37.5" />
         </svg>
