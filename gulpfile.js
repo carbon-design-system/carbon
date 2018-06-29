@@ -71,8 +71,8 @@ gulp.task('dev-server', cb => {
   let started;
   const options = {
     script: './server.js',
-    ext: 'hbs js',
-    watch: ['demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js', 'server.js'],
+    ext: 'js',
+    watch: ['server.js', 'tools/templates.js'],
     env: {
       PORT: cloptions.port,
     },

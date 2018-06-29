@@ -4,10 +4,11 @@
 
 Modifiers are used with various classes for Tabs.
 
-| Name                            | Description                                                   | 
-|---------------------------------|---------------------------------------------------------------|
-| .bx--tabs__nav--hidden          | Applies specific styles to hide the narrow tab menu options   |
-| .bx--tabs__nav-item--selected   | Applies specific styles to the currently selected tab item    |
+| Name                            | Description                                                              | 
+|---------------------------------|--------------------------------------------------------------------------|
+| .bx--tabs__nav--hidden          | Applies specific styles to hide the narrow tab menu options              |
+| .bx--tabs__nav-item--selected   | Applies specific styles to the currently selected tab item               |
+| .bx--tabs--light                | Selector for applying light dropdown styles when tabs are in mobile view |
 
 ### JavaScript
 

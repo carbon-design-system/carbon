@@ -29,6 +29,7 @@
       @include typescale('zeta');
       padding: 0 rem(6px);
       vertical-align: middle;
+      color: $text-01;
     }
 
     td p {
@@ -41,6 +42,7 @@
       padding: rem(9px) rem(6px);
       vertical-align: middle;
       font-weight: 600;
+      color: $text-01;
 
       &:focus {
         outline: 1px solid transparent;

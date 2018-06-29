@@ -32,7 +32,7 @@
       order: 1;
     }
 
-    &::-webkit-input-placeholder {
+    &::placeholder {
       @include placeholder-colors;
     }
 
@@ -77,36 +77,6 @@
 
   .#{$prefix}--text-input--light {
     background-color: $field-02;
-  }
-
-  // Skeleton State
-  .#{$prefix}--text-input.#{$prefix}--skeleton {
-    @include skeleton;
-    width: 100%;
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
-
-  // Skeleton State
-  .#{$prefix}--text-input.#{$prefix}--skeleton {
-    @include skeleton;
-    width: 100%;
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-  }
-
-  // Skeleton State
-  .#{$prefix}--text-input.#{$prefix}--skeleton {
-    @include skeleton;
-    width: 100%;
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
   }
 
   // Skeleton State

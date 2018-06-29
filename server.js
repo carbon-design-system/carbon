@@ -5,6 +5,9 @@
 const path = require('path');
 const express = require('express');
 
+const chokidar = require('chokidar');
+const debounce = require('lodash.debounce');
+
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -17,7 +20,21 @@ const config = require('./tools/webpack.dev.config');
 
 const compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-app.use(webpackHotMiddleware(compiler));
+
+const hotMiddleware = webpackHotMiddleware(compiler);
+app.use(hotMiddleware);
+
+let dummyHashSeq = 0;
+const watchCallback = debounce(() => {
+  templates.cache.clear();
+  hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
+}, 500);
+
+chokidar
+  .watch(['demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
+  .on('add', watchCallback)
+  .on('change', watchCallback)
+  .on('unlink', watchCallback);
 
 app.engine('hbs', templates.handlebars.engine);
 app.set('view engine', 'hbs');
@@ -54,17 +71,18 @@ const normalizeMetadata = metadata => {
 };
 
 /**
- * The promise resolved with the list of nav items.
- * @type {Promise<(ComponentCollection|Component)[]>}
+ * @returns {Promise<(ComponentCollection|Component)[]>} The promise resolved with the list of nav items.
  */
-const promiseNavItems = templates.promiseCache
-  .then(({ componentSource, docSource }) =>
-    Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items()])
-  )
-  .then(([componentItems, docItems]) => ({
-    componentItems,
-    docItems,
-  }));
+const getNavItems = () =>
+  templates.cache
+    .get()
+    .then(({ componentSource, docSource }) =>
+      Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items()])
+    )
+    .then(([componentItems, docItems]) => ({
+      componentItems,
+      docItems,
+    }));
 
 ['/', '/demo/:component'].forEach(route => {
   app.get(route, (req, res) => {
@@ -73,7 +91,7 @@ const promiseNavItems = templates.promiseCache
     if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
       res.status(404).end();
     } else {
-      promiseNavItems
+      getNavItems()
         .then(({ componentItems, docItems }) => {
           res.render('demo-nav-data', {
             componentItems,
