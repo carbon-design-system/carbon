@@ -36,21 +36,28 @@
     padding: 0 $spacing-md;
     height: rem(40px);
     cursor: pointer;
-    background-color: $field-02;
+    background-color: $field-01;
+    box-shadow: 0 1px 0 0 $ui-05;
 
     svg {
-      width: rem(12px);
-      height: rem(12px);
+      width: rem(10px);
+      height: rem(5px);
       fill: $brand-01;
     }
 
     &:focus {
-      @include focus-outline('border');
+      outline: none;
+      box-shadow: 0 2px 0 0 $brand-01;
     }
 
     @include breakpoint(bp--sm--major) {
       display: none;
     }
+  }
+
+  // There is only a difference in tab color when in mobile/dropdown view
+  .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
+    background-color: $field-02;
   }
 
   .#{$prefix}--tabs-trigger-text {
