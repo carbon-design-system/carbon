@@ -74,6 +74,7 @@ export default class Tab extends React.Component {
       href,
       role: 'tab',
       tabIndex,
+      ['aria-selected']: selected,
       ref: e => {
         this.tabAnchor = e;
       },
