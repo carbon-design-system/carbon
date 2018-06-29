@@ -9,6 +9,7 @@ export default class Container extends Component {
     return (
       <React.StrictMode>
         <div
+          data-floating-menu-container
           role="main"
           style={{
             padding: '3em',
@@ -18,6 +19,11 @@ export default class Container extends Component {
           }}>
           {story()}
         </div>
+        <input
+          aria-label="inpute-text-offleft"
+          type="text"
+          class="bx--visually-hidden"
+        />
       </React.StrictMode>
     );
   }

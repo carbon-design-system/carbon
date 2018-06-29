@@ -12,6 +12,26 @@ import FloatingMenu, {
 import ClickListener from '../../internal/ClickListener';
 
 /**
+ * @param {Element} elem An element.
+ * @param {string} selector An query selector.
+ * @returns {Element} The ancestor of the given element matching the given selector.
+ * @private
+ */
+const closest = (elem, selector) => {
+  const doc = elem.ownerDocument;
+  for (
+    let traverse = elem;
+    traverse && traverse !== doc;
+    traverse = traverse.parentNode
+  ) {
+    if (traverse.matches(selector)) {
+      return traverse;
+    }
+  }
+  return null;
+};
+
+/**
  * @param {Element} menuBody The menu body with the menu arrow.
  * @param {string} menuDirection Where the floating menu menu should be placed relative to the trigger button.
  * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
@@ -214,6 +234,14 @@ export default class Tooltip extends Component {
    */
   _debouncedHandleHover = debounce(this._handleHover, 200);
 
+  /**
+   * @returns {Element} The DOM element where the floating menu is placed in.
+   */
+  _getTarget = () =>
+    (this.triggerEl &&
+      closest(this.triggerEl, '[data-floating-menu-container]')) ||
+    document.body;
+
   handleMouse = evt => {
     const state =
       typeof evt === 'string'
@@ -345,9 +373,13 @@ export default class Tooltip extends Component {
         </ClickListener>
         {open && (
           <FloatingMenu
+            target={this._getTarget}
             menuPosition={this.state.triggerPosition}
             menuDirection={direction}
-            menuOffset={menuOffset}>
+            menuOffset={menuOffset}
+            menuRef={node => {
+              this._tooltipEl = node;
+            }}>
             <div
               id={tooltipId}
               className={tooltipClasses}
@@ -358,10 +390,7 @@ export default class Tooltip extends Component {
               onMouseOut={evt => this.handleMouse(evt)}
               onFocus={evt => this.handleMouse(evt)}
               onBlur={evt => this.handleMouse(evt)}
-              onContextMenu={evt => this.handleMouse(evt)}
-              ref={node => {
-                this._tooltipEl = node;
-              }}>
+              onContextMenu={evt => this.handleMouse(evt)}>
               <span className="bx--tooltip__caret" />
               {children}
             </div>
