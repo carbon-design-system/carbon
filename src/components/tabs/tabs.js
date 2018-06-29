@@ -83,11 +83,12 @@ class Tab extends ContentSwitcher {
    * @param {Event} event The event triggering this method.
    */
   _handleKeyDown(event) {
-    const triggerNode = this.element.querySelector(this.options.selectorTrigger);
-    if (triggerNode && triggerNode.offsetParent) {
+    const triggerNode = eventMatches(event, this.options.selectorTrigger);
+    if (triggerNode) {
       if (event.which === 13) {
         this._updateMenuState();
       }
+      return;
     }
 
     const direction = {
