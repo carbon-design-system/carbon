@@ -101,6 +101,10 @@
     padding: $spacing-xs $spacing-md;
     cursor: pointer;
     color: $text-01;
+    max-width: 11.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:focus {
       outline: 1px solid transparent;
