@@ -15,21 +15,17 @@
 
 @include exports('slider') {
   .#{$prefix}--slider-container {
-    max-width: rem(600px);
-    min-width: rem(200px);
     display: flex;
     align-items: center;
     user-select: none;
-
-    @media screen and (min-width: 768px) {
-      min-width: rem(350px);
-    }
   }
 
   .#{$prefix}--slider {
     position: relative;
     width: 100%;
     margin: 0 $spacing-md;
+    max-width: rem(640px);
+    min-width: rem(200px);
   }
 
   .#{$prefix}--slider--disabled {

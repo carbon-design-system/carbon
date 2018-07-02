@@ -21,6 +21,7 @@
     align-items: center;
     color: $text-01;
     font-weight: normal;
+    margin-bottom: $spacing-xs;
 
     .#{$prefix}--tooltip__trigger {
       margin-left: $spacing-xs;
