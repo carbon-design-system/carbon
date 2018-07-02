@@ -67,7 +67,8 @@ Note that each progress step will need a modifier class. In the example above, i
 Use the `setCurrent(index)` class method. The `index` number corresponds to a progress step.
 
 ```js
-const instance = ProgressIndicator.init();
+const ele = document.querySelector('[data-progress]');
+const instance = CarbonComponents.ProgressIndicator.create(ele);
 
 // Sets the first progress step as the current step
 instance.setCurrent(0)
