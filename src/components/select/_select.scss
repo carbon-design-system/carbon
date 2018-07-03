@@ -144,6 +144,10 @@
       font-weight: 600;
       box-shadow: none;
 
+      &:hover {
+        background-color: $color__white;
+      }
+
       &:focus {
         @include focus-outline('border');
       }
