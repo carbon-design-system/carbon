@@ -55,6 +55,7 @@
 
     th,
     td {
+      @include typescale('zeta');
       border-top: 1px solid $ui-03;
       padding-left: $spacing-sm;
       vertical-align: middle;
