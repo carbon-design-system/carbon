@@ -35,6 +35,7 @@
     position: relative;
     padding-left: $spacing-lg;
     min-height: rem(16px);
+    height: rem(8px); // For IE11 bug fix
   }
 
   .#{$prefix}--checkbox-label::before {
