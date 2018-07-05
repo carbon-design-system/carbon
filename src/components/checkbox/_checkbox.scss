@@ -55,8 +55,10 @@
     width: 7px;
     height: 3px;
     background: none;
+    /*rtl:ignore*/
     border-left: 2px solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
+    /*rtl:ignore*/
     transform: scale(0) rotate(-45deg);
     position: absolute;
     left: rem(5px);
@@ -75,11 +77,13 @@
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
     opacity: 1;
+    /*rtl:ignore*/
     transform: scale(1) rotate(-45deg);
   }
 
   .#{$prefix}--checkbox:not(:checked) + .#{$prefix}--checkbox-label::after {
     opacity: 0;
+    /*rtl:ignore*/
     transform: scale(0) rotate(-45deg);
   }
 
@@ -92,6 +96,7 @@
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     transform: scale(1) rotate(0deg);
+    /*rtl:ignore*/
     border-left: 0 solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
     opacity: 1;
