@@ -27,3 +27,24 @@ Use these modifiers with .bx--overflow-menu-options class.
 | `selectorOptionMenu`        | `.bx--overflow-menu-options`             | The CSS selector to find the contents of the menu
 | `objMenuOffset`    | `{ top: 3, left: 61`        | An object containing the top and left offset values in px
 | `objMenuOffsetFlip`    | `{ top: 3, left: -61`        | An object containing the top and left offset values in px for the "flipped" state
+
+### HTML
+
+By default, the menu body (`ul.bx--overflow-menu-options`) goes right under `<body>`. You can change the behavior by adding `data-floating-menu-container` to one of the DOM ancestors of the root element (`div[data-overflow-menu]`). For example, if you have HTML structure like below, the menu body will go under the second `<div>`:
+
+```html
+<body>
+  <div>
+    <div data-floating-menu-container>
+      <div>
+        <div data-overflow-menu class="bx--overflow-menu" ...>
+          ...
+          <ul class="bx--overflow-menu-options" ...>
+            ...
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+```
