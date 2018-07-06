@@ -78,6 +78,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
         button.classList.toggle(this.options.classActive, false);
         [...button.ownerDocument.querySelectorAll(button.dataset.target)].forEach(element => {
           element.setAttribute('hidden', '');
+          element.classList.add(this.options.classHidden);
           element.setAttribute('aria-hidden', 'true');
         });
       }
@@ -87,6 +88,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
     item.setAttribute('aria-selected', true);
     [...item.ownerDocument.querySelectorAll(item.dataset.target)].forEach(element => {
       element.removeAttribute('hidden');
+      element.classList.remove(this.options.classHidden);
       element.setAttribute('aria-hidden', 'false');
     });
 
@@ -139,6 +141,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
    * @property {string} [selectorButton] The CSS selector to find switcher buttons.
    * @property {string} [selectorButtonSelected] The CSS selector to find the selected switcher button.
    * @property {string} [classActive] The CSS class for switcher button's selected state.
+   * * @property {string} [classHidden] The CSS class for the contents hidden state.
    * @property {string} [eventBeforeSelected]
    *   The name of the custom event fired before a switcher button is selected.
    *   Cancellation of this event stops selection of content switcher button.
@@ -150,6 +153,7 @@ class ContentSwitcher extends mixin(createComponent, initComponentBySearch, even
       selectorInit: '[data-content-switcher]',
       selectorButton: `input[type="radio"], .${prefix}--content-switcher-btn`,
       classActive: `${prefix}--content-switcher--selected`,
+      classHidden: `${prefix}--content-switcher--hidden`,
       eventBeforeSelected: 'content-switcher-beingselected',
       eventAfterSelected: 'content-switcher-selected',
     };

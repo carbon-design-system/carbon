@@ -79,7 +79,6 @@
     }
 
     &:focus {
-      // box-shadow: -2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 0;
     }
   }
@@ -93,7 +92,6 @@
     }
 
     &:focus {
-      // box-shadow: 2px 0 0 0 $color__blue-20, 0 2px 0 0 $color__blue-20, 0 -2px 0 0 $color__blue-20;
       z-index: 0;
     }
   }
@@ -109,5 +107,9 @@
       border-color: $hover-primary;
       background-color: $hover-primary;
     }
+  }
+
+  .#{$prefix}--content-switcher--hidden {
+    display: none;
   }
 }
