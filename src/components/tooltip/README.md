@@ -28,6 +28,31 @@
 |------------------------------|------------------------------------|
 | .bx--tooltip__trigger--bold  | Modifier class to make label bold. |
 
+#### HTML
+
+By default, the tooltip (`.bx--tooltip`) goes right under `<body>`. You can change the behavior by adding `data-floating-menu-container` to one of the DOM ancestors of the tooltip's original location. For example, if you have HTML structure like below, the menu body will go under the second `<div>`:
+
+```html
+<body>
+  <div>
+    <div data-floating-menu-container>
+      <div>
+        <div class="bx--tooltip__label" ...>
+          Tooltip label
+          <div tabindex="0" data-tooltip-trigger data-tooltip-target="#unique-tooltip" class="bx--tooltip__trigger" ...>
+            ...
+          </div>
+        </div>
+        <div id="unique-tooltip" data-floating-menu-direction="bottom" class="bx--tooltip" ...>
+          <span class="bx--tooltip__caret"></span>
+          ...
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+```
+
 ### Definition tooltip
 
 This tooltip variation does not use any JavaScript and should be used to define a word. For anything more advanced please use the main variation.
