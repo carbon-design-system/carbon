@@ -82,7 +82,7 @@ describe('Select', () => {
       });
 
       it('should set disabled as expected', () => {
-        expect(select.props().disabled).toEqual(false);
+        expect(select.props().disabled).toEqual(undefined);
         wrapper.setProps({ disabled: true });
         expect(wrapper.find('select').props().disabled).toEqual(true);
       });

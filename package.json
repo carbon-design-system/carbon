@@ -34,8 +34,7 @@
     "es/**/*",
     "umd/**/*"
   ],
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Brian Han",
       "email": "bthan@us.ibm.com"
     },
@@ -201,8 +200,7 @@
   "babel": {
     "presets": [
       "./scripts/env",
-      "@babel/preset-react",
-      [
+      "@babel/preset-react", [
         "@babel/preset-stage-1",
         {
           "decoratorsLegacy": true

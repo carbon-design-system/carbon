@@ -17,7 +17,7 @@ storiesOf('Select', module)
     `
       Select displays a list below its title when selected. They are used primarily in forms,
       where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      dissapear and the field will reflect the user's choice. Create Select Item components for each
+      disappear and the field will reflect the user's choice. Create Select Item components for each
       option in the list. The example below shows an enabled Select component with three items.
     `,
     () => (
@@ -71,7 +71,7 @@ storiesOf('Select', module)
     `
       Select displays a list below its title when selected. They are used primarily in forms,
       where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      dissapear and the field will reflect the user's choice. Create SelectItem components for each
+      disappear and the field will reflect the user's choice. Create SelectItem components for each
       option in the list. The example below shows an disabled Select component.
     `,
     () => (
@@ -93,11 +93,69 @@ storiesOf('Select', module)
     )
   )
   .addWithInfo(
+    'invalid',
+    `
+      Select displays a list below its title when selected. They are used primarily in forms,
+      where a user chooses one option from a list. Once the user selects an item, the dropdown will
+      disappear and the field will reflect the user's choice. Create Select Item components for each
+      option in the list. The example below shows an enabled Select component with three items. The example below shows a Select component after an invalid entry is chosen.
+    `,
+    () => (
+      <>
+        <Select
+          {...selectProps}
+          light
+          id="select-1"
+          defaultValue="placeholder-item"
+          invalid
+          invalidText="A valid value is required">
+          <SelectItem
+            disabled
+            hidden
+            value="placeholder-item"
+            text="Choose an option"
+          />
+          <SelectItemGroup label="Category 1">
+            <SelectItem value="option-1" text="Option 1" />
+            <SelectItem value="option-2" text="Option 2" />
+          </SelectItemGroup>
+          <SelectItemGroup label="Category 2">
+            <SelectItem value="option-3" text="Option 3" />
+            <SelectItem value="option-4" text="Option 4" />
+          </SelectItemGroup>
+        </Select>
+        <Select
+          {...selectProps}
+          inline
+          light
+          id="select-2"
+          defaultValue="placeholder-item"
+          invalid
+          invalidText="A valid value is required">
+          <SelectItem
+            disabled
+            hidden
+            value="placeholder-item"
+            text="Choose an option"
+          />
+          <SelectItemGroup label="Category 1">
+            <SelectItem value="option-1" text="Option 1" />
+            <SelectItem value="option-2" text="Option 2" />
+          </SelectItemGroup>
+          <SelectItemGroup label="Category 2">
+            <SelectItem value="option-3" text="Option 3" />
+            <SelectItem value="option-4" text="Option 4" />
+          </SelectItemGroup>
+        </Select>
+      </>
+    )
+  )
+  .addWithInfo(
     'no label',
     `
       Select displays a list below its title when selected. They are used primarily in forms,
       where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      dissapear and the field will reflect the user's choice. Create SelectItem components for each
+      disappear and the field will reflect the user's choice. Create SelectItem components for each
       option in the list. The example below shows a Select component without a label.
     `,
     () => (
@@ -128,7 +186,7 @@ storiesOf('Select', module)
     `
       Select displays a list below its title when selected. They are used primarily in forms,
       where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      dissapear and the field will reflect the user's choice. Create Select Item components for each
+      disappear and the field will reflect the user's choice. Create Select Item components for each
       option in the list. The example below shows an enabled Select component with three items.
     `,
     () => (
