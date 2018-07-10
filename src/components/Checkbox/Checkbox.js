@@ -10,6 +10,7 @@ const Checkbox = ({
   indeterminate,
   hideLabel,
   wrapperClassName,
+  title = '',
   ...other
 }) => {
   let input;
@@ -40,7 +41,7 @@ const Checkbox = ({
           }
         }}
       />
-      <label htmlFor={id} className={labelClasses}>
+      <label htmlFor={id} className={labelClasses} title={title || null}>
         <span className={innerLabelClasses}>{labelText}</span>
       </label>
     </div>
@@ -60,6 +61,7 @@ Checkbox.propTypes = {
   labelText: PropTypes.node.isRequired,
   hideLabel: PropTypes.bool,
   onChange: PropTypes.func,
+  title: PropTypes.string,
   /**
    * The CSS class name to be placed on the wrapping element
    */
