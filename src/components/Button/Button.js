@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from '../Icon';
 import classNames from 'classnames';
+import { ButtonTypes } from '../../prop-types/types';
 
 const Button = ({
   children,
@@ -68,14 +69,7 @@ Button.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   small: PropTypes.bool,
-  kind: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'danger',
-    'ghost',
-    'danger--primary',
-    'tertiary',
-  ]).isRequired,
+  kind: ButtonTypes.buttonKind.isRequired,
   href: PropTypes.string,
   tabIndex: PropTypes.number,
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
