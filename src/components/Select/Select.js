@@ -59,7 +59,7 @@ Select.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string.isRequired,
   inline: PropTypes.bool,
-  labelText: PropTypes.string,
+  labelText: PropTypes.node,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   defaultValue: PropTypes.any,

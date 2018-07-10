@@ -9,7 +9,7 @@ export default class NumberInput extends Component {
     disabled: PropTypes.bool,
     iconDescription: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
-    label: PropTypes.string,
+    label: PropTypes.node,
     max: PropTypes.number,
     min: PropTypes.number,
     /**
