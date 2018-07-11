@@ -144,7 +144,7 @@
     "@storybook/addon-actions": "^3.2.15",
     "@storybook/addon-info": "^3.2.13",
     "@storybook/react": "^3.2.13",
-    "all-contributors-cli": "^4.10.1",
+    "all-contributors-cli": "^5.2.1",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^8.0.2",
     "babel-jest": "^22.1.0",
