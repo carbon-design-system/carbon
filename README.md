@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/carbon-design-system/carbon-components.svg?branch=master)](https://travis-ci.org/carbon-design-system/carbon-components)
+[![Build Status](https://travis-ci.org/IBM/carbon-components.svg?branch=master)](https://travis-ci.org/IBM/carbon-components)
 
 # Carbon Components
 
