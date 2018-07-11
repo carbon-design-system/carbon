@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
+import { iconCaretUp, iconCaretDown } from 'carbon-icons';
 import Icon from '../Icon';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
@@ -150,8 +151,8 @@ describe('NumberInput', () => {
       });
 
       it('should use correct icons', () => {
-        expect(icons.at(0).prop('name')).toEqual('caret--up');
-        expect(icons.at(1).prop('name')).toEqual('caret--down');
+        expect(icons.at(0).prop('icon')).toEqual(iconCaretUp);
+        expect(icons.at(1).prop('icon')).toEqual(iconCaretDown);
       });
 
       it('adds new iconDescription when passed via props', () => {

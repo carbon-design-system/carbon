@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { iconOverflowMenu } from 'carbon-icons';
 import ClickListener from '../../internal/ClickListener';
 import FloatingMenu from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
@@ -153,6 +154,16 @@ export default class OverflowMenu extends Component {
     iconDescription: PropTypes.string.isRequired,
 
     /**
+     * The icon.
+     */
+    icon: PropTypes.shape({
+      width: PropTypes.string,
+      height: PropTypes.string,
+      viewBox: PropTypes.string.isRequired,
+      svgData: PropTypes.object.isRequired,
+    }),
+
+    /**
      * The icon name.
      */
     iconName: PropTypes.string,
@@ -203,7 +214,6 @@ export default class OverflowMenu extends Component {
   static defaultProps = {
     ariaLabel: 'list of options',
     iconDescription: 'open and close list of options',
-    iconName: 'overflow-menu',
     open: false,
     flipped: false,
     floatingMenu: false,
@@ -386,6 +396,7 @@ export default class OverflowMenu extends Component {
       ariaLabel,
       children,
       iconDescription,
+      icon,
       iconName,
       flipped,
       floatingMenu,
@@ -473,7 +484,12 @@ export default class OverflowMenu extends Component {
           {renderIcon ? (
             renderIcon(iconProps)
           ) : (
-            <Icon {...iconProps} name={iconName} style={{ width: '100%' }} />
+            <Icon
+              {...iconProps}
+              icon={!icon && !iconName ? iconOverflowMenu : icon}
+              name={iconName}
+              style={{ width: '100%' }}
+            />
           )}
           {open && wrappedMenuBody}
         </div>

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { iconChevronRight } from 'carbon-icons';
 import Icon from '../Icon';
 
 export default class AccordionItem extends Component {
@@ -80,7 +81,7 @@ export default class AccordionItem extends Component {
           onClick={this.handleHeadingClick}>
           <Icon
             className="bx--accordion__arrow"
-            name="chevron--right"
+            icon={iconChevronRight}
             description="Expand/Collapse"
           />
           <p className="bx--accordion__title">{title}</p>

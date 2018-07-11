@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconSearch } from 'carbon-icons';
 import SecondaryButton from '../SecondaryButton';
 import { shallow, mount } from 'enzyme';
 
@@ -30,7 +31,7 @@ describe('SecondaryButton', () => {
 
     describe('Renders icon buttons', () => {
       const iconButton = mount(
-        <SecondaryButton icon="search" iconDescription="Search">
+        <SecondaryButton icon={iconSearch} iconDescription="Search">
           Search
         </SecondaryButton>
       );

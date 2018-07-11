@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import Icon from '../Icon';
 import classNames from 'classnames';
+import { iconInfoGlyph } from 'carbon-icons';
 import FloatingMenu, {
   DIRECTION_LEFT,
   DIRECTION_TOP,
@@ -137,6 +138,16 @@ export default class Tooltip extends Component {
     showIcon: PropTypes.bool,
 
     /**
+     * The the default tooltip icon.
+     */
+    icon: PropTypes.shape({
+      width: PropTypes.string,
+      height: PropTypes.string,
+      viewBox: PropTypes.string.isRequired,
+      svgData: PropTypes.object.isRequired,
+    }),
+
+    /**
      * The name of the default tooltip icon.
      */
     iconName: PropTypes.string,
@@ -156,7 +167,6 @@ export default class Tooltip extends Component {
     open: false,
     direction: DIRECTION_BOTTOM,
     showIcon: true,
-    iconName: 'info--glyph',
     iconDescription: 'tooltip',
     triggerText: 'Provide triggerText',
     menuOffset: getMenuOffset,
@@ -301,6 +311,7 @@ export default class Tooltip extends Component {
       direction,
       triggerText,
       showIcon,
+      icon,
       iconName,
       iconDescription,
       menuOffset,
@@ -345,6 +356,7 @@ export default class Tooltip extends Component {
                 <Icon
                   onKeyDown={this.handleKeyPress}
                   onClick={() => this.handleMouse('click')}
+                  icon={!icon && !iconName ? iconInfoGlyph : icon}
                   name={iconName}
                   description={iconDescription}
                   iconRef={node => {

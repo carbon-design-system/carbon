@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { iconChevronRight } from 'carbon-icons';
 import Icon from '../Icon';
 import TableCell from './TableCell';
 
@@ -33,7 +34,7 @@ const TableExpandRow = ({
           aria-label={ariaLabel}>
           <Icon
             className="bx--table-expand-v2__svg"
-            name="chevron--right"
+            icon={iconChevronRight}
             description={expandIconDescription}
           />
         </button>

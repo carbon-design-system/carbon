@@ -3,6 +3,12 @@ import React from 'react';
 import icons from 'carbon-icons';
 
 /**
+ * The icons list object from `carbon-icons`.
+ * @type {Object}
+ */
+let iconsList = icons;
+
+/**
  * Returns a single icon Object
  * @param {string} name - "name" property of icon
  * @param {Object} [iconsObj=icons] - JSON Array of Objects
@@ -10,7 +16,7 @@ import icons from 'carbon-icons';
  * // Returns a single icon Object
  * this.findIcon('copy-code', icons.json);
  */
-export function findIcon(name, iconsObj = icons) {
+export function findIcon(name, iconsObj = iconsList) {
   const icon = iconsObj.filter(obj => obj.name === name);
 
   if (icon.length === 0) {
@@ -20,6 +26,16 @@ export function findIcon(name, iconsObj = icons) {
   } else {
     return icon[0];
   }
+}
+
+/**
+ * Sets the icons list object from `carbon-icons`.
+ * Doing so instead of having this module directly import `carbon-icons`
+ * avoids the icons list being included in applications' bundles if only limited set of icons is in use.
+ * @param {Object} list The icons list from `carbon-icons`.
+ */
+export function setIconsList(list) {
+  iconsList = list;
 }
 
 /**
@@ -35,8 +51,8 @@ export function getSvgData(iconName) {
 }
 
 /**
- * Returns Elements/Nodes for SVG
  * @param {Object} svgData - JSON Object for an SVG icon
+ * @returns {ReactElement} Elements/Nodes for SVG
  * @example
  * // Returns SVG elements
  * const svgData = getSvgData('copy-code');
@@ -82,14 +98,13 @@ const Icon = ({
   fillRule,
   height,
   name,
+  icon = isPrefixed(name) ? findIcon(name) : findIcon(`icon--${name}`),
   role,
   style,
   width,
   iconRef,
   ...other
 }) => {
-  const icon = isPrefixed(name) ? findIcon(name) : findIcon(`icon--${name}`);
-
   const props = {
     className,
     fill,
@@ -141,9 +156,19 @@ Icon.propTypes = {
   height: PropTypes.string,
 
   /**
+   * The icon data.
+   */
+  icon: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.string,
+    viewBox: PropTypes.string.isRequired,
+    svgData: PropTypes.object.isRequired,
+  }),
+
+  /**
    * The name in the sprite.
    */
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
 
   /**
    * The `role` attribute.

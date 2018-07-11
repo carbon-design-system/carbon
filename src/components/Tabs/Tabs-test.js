@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconCaretDown } from 'carbon-icons';
 import Icon from '../Icon';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
@@ -56,7 +57,7 @@ describe('Tabs', () => {
       });
 
       it('renders <Icon>', () => {
-        expect(trigger.find(Icon).props().name).toEqual('caret--down');
+        expect(trigger.find(Icon).props().icon).toEqual(iconCaretDown);
       });
     });
 

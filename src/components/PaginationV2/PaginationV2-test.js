@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconChevronLeft, iconChevronRight } from 'carbon-icons';
 import Icon from '../Icon';
 import PaginationV2 from '../PaginationV2';
 import Select from '../Select';
@@ -29,11 +30,11 @@ describe('Pagination', () => {
       });
 
       it('should use correct "backward" icon', () => {
-        expect(icons.first().props().name).toEqual('chevron--left');
+        expect(icons.first().props().icon).toEqual(iconChevronLeft);
       });
 
       it('should use correct "forward" icon', () => {
-        expect(icons.last().props().name).toEqual('chevron--right');
+        expect(icons.last().props().icon).toEqual(iconChevronRight);
       });
     });
 

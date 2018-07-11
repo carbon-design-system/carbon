@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from '../Icon';
 import SearchFilterButton from '../SearchFilterButton';
 import { mount } from 'enzyme';
+import { iconFilter } from 'carbon-icons';
 
 describe('SearchFilterButton', () => {
   const wrapper = mount(<SearchFilterButton labelText="testlabel" />);
@@ -22,7 +23,7 @@ describe('SearchFilterButton', () => {
   describe('icons', () => {
     it('should use "filter" icon', () => {
       const icon = wrapper.find(Icon);
-      expect(icon.props().name).toEqual('filter');
+      expect(icon.props().icon).toEqual(iconFilter);
     });
   });
 });

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { iconClose } from 'carbon-icons';
 import Button from '../Button';
 import Icon from '../Icon';
 import classNames from 'classnames';
@@ -165,7 +166,7 @@ export class ModalHeader extends Component {
           className={closeClass}
           type="button">
           <Icon
-            name="close"
+            icon={iconClose}
             className={closeIconClass}
             description={iconDescription}
           />

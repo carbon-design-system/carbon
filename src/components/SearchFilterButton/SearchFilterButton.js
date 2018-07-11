@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { iconFilter } from 'carbon-icons';
 import Icon from '../Icon';
 
 /**
@@ -11,7 +12,11 @@ const SearchFilterButton = ({ labelText, ...other }) => (
     type="button"
     aria-label={labelText}
     {...other}>
-    <Icon name="filter" description="filter" className="bx--search-filter" />
+    <Icon
+      icon={iconFilter}
+      description="filter"
+      className="bx--search-filter"
+    />
   </button>
 );
 

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { iconChevronLeft, iconChevronRight } from 'carbon-icons';
 import Icon from '../Icon';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -279,7 +280,7 @@ export default class PaginationV2 extends Component {
             disabled={this.props.disabled || statePage === 1}>
             <Icon
               className="bx--pagination__button-icon"
-              name="chevron--left"
+              icon={iconChevronLeft}
               description={backwardText}
             />
           </button>
@@ -302,7 +303,7 @@ export default class PaginationV2 extends Component {
             }>
             <Icon
               className="bx--pagination__button-icon"
-              name="chevron--right"
+              icon={iconChevronRight}
               description={forwardText}
             />
           </button>

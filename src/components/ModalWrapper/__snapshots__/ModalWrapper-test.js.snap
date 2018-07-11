@@ -87,7 +87,30 @@ exports[`ModalWrapper should render 1`] = `
                 className="bx--modal-close__icon"
                 description="close the modal"
                 fillRule="evenodd"
-                name="close"
+                icon={
+                  Object {
+                    "height": "10",
+                    "id": "icon--close",
+                    "name": "icon--close",
+                    "styles": "",
+                    "svgData": Object {
+                      "circles": "",
+                      "ellipses": "",
+                      "paths": Array [
+                        Object {
+                          "d": "M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z",
+                          "fill-rule": "nonzero",
+                        },
+                      ],
+                      "polygons": "",
+                      "polylines": "",
+                      "rects": "",
+                    },
+                    "tags": "icon--close",
+                    "viewBox": "0 0 10 10",
+                    "width": "10",
+                  }
+                }
                 role="img"
               >
                 <svg
@@ -96,7 +119,6 @@ exports[`ModalWrapper should render 1`] = `
                   className="bx--modal-close__icon"
                   fillRule="evenodd"
                   height="10"
-                  name="close"
                   role="img"
                   viewBox="0 0 10 10"
                   width="10"

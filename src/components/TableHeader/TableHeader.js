@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { iconCaretDown, iconCaretUp } from 'carbon-icons';
 import Icon from '../Icon';
 
 const TableHeader = props => {
@@ -15,13 +16,13 @@ const TableHeader = props => {
     sortContent =
       sortDir === 'DESC' ? (
         <Icon
-          name="caret--down"
+          icon={iconCaretDown}
           description="descending sort"
           className={iconClasses}
         />
       ) : (
         <Icon
-          name="caret--up"
+          icon={iconCaretUp}
           description="ascending sort"
           className={iconClasses}
         />

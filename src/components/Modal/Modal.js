@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { iconClose } from 'carbon-icons';
 import Icon from '../Icon';
 import Button from '../Button';
 
@@ -116,7 +117,7 @@ export default class Modal extends Component {
         onClick={onRequestClose}
         ref={this.button}>
         <Icon
-          name="close"
+          icon={iconClose}
           className="bx--modal-close__icon"
           description={iconDescription}
         />

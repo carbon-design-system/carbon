@@ -5,6 +5,7 @@ import Icon from '../Icon';
 
 const TableToolbarAction = ({
   className,
+  icon,
   iconName,
   iconDescription,
   ...rest
@@ -14,6 +15,7 @@ const TableToolbarAction = ({
     <button className={toolbarActionClasses} {...rest}>
       <Icon
         className="bx--toolbar-action__icon"
+        icon={icon}
         name={iconName}
         description={iconDescription}
       />
@@ -26,9 +28,19 @@ TableToolbarAction.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify the icon for the toolbar action
+   */
+  icon: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.string,
+    viewBox: PropTypes.string.isRequired,
+    svgData: PropTypes.object.isRequired,
+  }).isRequired,
+
+  /**
    * Specify the name of the icon for the toolbar action
    */
-  iconName: PropTypes.string.isRequired,
+  iconName: PropTypes.string,
 
   /**
    * Specify the description of the icon for the toolbar action

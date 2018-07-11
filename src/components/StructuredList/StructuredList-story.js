@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { iconCheckmarkSolid } from 'carbon-icons';
 import Icon from '../Icon';
 import {
   StructuredListWrapper,
@@ -78,7 +79,7 @@ storiesOf('StructuredList', module)
             <StructuredListCell>
               <Icon
                 className="bx--structured-list-svg"
-                name="checkmark--solid"
+                icon={iconCheckmarkSolid}
                 description="select an option"
               />
             </StructuredListCell>
@@ -101,7 +102,7 @@ storiesOf('StructuredList', module)
             <StructuredListCell>
               <Icon
                 className="bx--structured-list-svg"
-                name="checkmark--solid"
+                icon={iconCheckmarkSolid}
                 description="select an option"
               />
             </StructuredListCell>

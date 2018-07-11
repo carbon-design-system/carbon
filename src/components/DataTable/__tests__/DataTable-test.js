@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconDownload, iconEdit, iconSettings } from 'carbon-icons';
 import Button from '../../Button';
 import DataTable, {
   Table,
@@ -72,17 +73,17 @@ describe('DataTable', () => {
             <TableToolbarSearch onChange={onInputChange} id="custom-id" />
             <TableToolbarContent>
               <TableToolbarAction
-                iconName="download"
+                icon={iconDownload}
                 iconDescription="Download"
                 onClick={jest.fn()}
               />
               <TableToolbarAction
-                iconName="edit"
+                icon={iconEdit}
                 iconDescription="Edit"
                 onClick={jest.fn()}
               />
               <TableToolbarAction
-                iconName="settings"
+                icon={iconSettings}
                 iconDescription="Settings"
                 onClick={jest.fn()}
               />

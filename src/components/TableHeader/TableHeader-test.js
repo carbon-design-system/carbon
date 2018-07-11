@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconCaretDown } from 'carbon-icons';
 import TableHeader from '../TableHeader';
 import Icon from '../Icon';
 import { shallow } from 'enzyme';
@@ -30,7 +31,7 @@ describe('TableHeader', () => {
       const icon = theader.find(Icon);
       expect(icon.length).toEqual(1);
       expect(icon.hasClass('bx--table-sort__svg')).toEqual(true);
-      expect(icon.props().name).toEqual('caret--down');
+      expect(icon.props().icon).toEqual(iconCaretDown);
     });
   });
 });

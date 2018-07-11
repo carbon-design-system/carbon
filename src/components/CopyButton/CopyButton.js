@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { iconCopy } from 'carbon-icons';
 import Icon from '../Icon';
 
 export default class CopyButton extends Component {
@@ -57,7 +58,7 @@ export default class CopyButton extends Component {
         {...other}>
         <Icon
           className="bx--snippet__icon"
-          name="copy"
+          icon={iconCopy}
           description={iconDescription}
         />
         <div className={feedbackClassNames} data-feedback={feedback} />

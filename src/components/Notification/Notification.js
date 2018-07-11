@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import {
+  iconClose,
+  iconCheckmarkSolid,
+  iconErrorSolid,
+  iconInfoSolid,
+  iconWarningSolid,
+} from 'carbon-icons';
 import Icon from '../Icon';
 
 export class NotificationButton extends Component {
@@ -9,6 +16,12 @@ export class NotificationButton extends Component {
     ariaLabel: PropTypes.string,
     type: PropTypes.string,
     iconDescription: PropTypes.string,
+    icon: PropTypes.shape({
+      width: PropTypes.string,
+      height: PropTypes.string,
+      viewBox: PropTypes.string.isRequired,
+      svgData: PropTypes.object.isRequired,
+    }),
     name: PropTypes.string,
     notificationType: PropTypes.oneOf(['toast', 'inline']),
   };
@@ -17,7 +30,6 @@ export class NotificationButton extends Component {
     notificationType: 'toast',
     type: 'button',
     iconDescription: 'close icon',
-    name: 'close',
   };
   render() {
     const {
@@ -25,6 +37,7 @@ export class NotificationButton extends Component {
       className,
       iconDescription,
       type,
+      icon,
       name,
       notificationType,
       ...other
@@ -49,6 +62,7 @@ export class NotificationButton extends Component {
           description={iconDescription}
           className={iconClasses}
           aria-label={ariaLabel}
+          icon={!icon && !name ? iconClose : icon}
           name={name}
         />
       </button>
@@ -141,10 +155,13 @@ export class ToastNotification extends Component {
     this.props.onCloseButtonClick(evt);
   };
 
-  useIconName = kindProp => {
-    const isSuccess = kindProp === 'success';
-    return isSuccess ? 'checkmark--solid' : `${kindProp}--solid`;
-  };
+  useIcon = kindProp =>
+    ({
+      error: iconErrorSolid,
+      info: iconInfoSolid,
+      success: iconCheckmarkSolid,
+      warning: iconWarningSolid,
+    }[kindProp]);
 
   render() {
     if (!this.state.open) {
@@ -222,10 +239,13 @@ export class InlineNotification extends Component {
     this.props.onCloseButtonClick(evt);
   };
 
-  useIconName = kindProp => {
-    const isSuccess = kindProp === 'success';
-    return isSuccess ? 'checkmark--solid' : `${kindProp}--solid`;
-  };
+  useIcon = kindProp =>
+    ({
+      error: iconErrorSolid,
+      info: iconInfoSolid,
+      success: iconCheckmarkSolid,
+      warning: iconWarningSolid,
+    }[kindProp]);
 
   render() {
     if (!this.state.open) {
@@ -258,7 +278,7 @@ export class InlineNotification extends Component {
             description={this.props.iconDescription}
             className="bx--inline-notification__icon"
             aria-label="close"
-            name={this.useIconName(kind)}
+            icon={this.useIcon(kind)}
           />
           <NotificationTextDetails
             title={title}
@@ -309,10 +329,13 @@ export default class Notification extends Component {
     this.props.onCloseButtonClick(evt);
   };
 
-  useIconName = kindProp => {
-    const isSuccess = kindProp === 'success';
-    return isSuccess ? 'checkmark--solid' : `${kindProp}--solid`;
-  };
+  useIcon = kindProp =>
+    ({
+      error: iconErrorSolid,
+      info: iconInfoSolid,
+      success: iconCheckmarkSolid,
+      warning: iconWarningSolid,
+    }[kindProp]);
 
   render() {
     if (!this.state.open) {
@@ -376,7 +399,7 @@ export default class Notification extends Component {
             description={this.props.iconDescription}
             className="bx--inline-notification__icon"
             aria-label="close"
-            name={this.useIconName(kind)}
+            icon={this.useIcon(kind)}
           />
           <NotificationTextDetails
             title={title}

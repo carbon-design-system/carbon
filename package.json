@@ -286,7 +286,7 @@
       "/cjs/"
     ],
     "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+      "[/\\\\]node_modules[/\\\\](?!(carbon-icons)).+\\.(js|jsx)$"
     ],
     "moduleFileExtensions": [
       "js",

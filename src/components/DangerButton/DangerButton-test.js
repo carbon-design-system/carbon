@@ -1,6 +1,7 @@
 import React from 'react';
 import DangerButton from '../DangerButton';
 import { shallow, mount } from 'enzyme';
+import { iconSearch } from 'carbon-icons';
 
 describe('DangerButton', () => {
   describe('Renders as expected', () => {
@@ -30,7 +31,7 @@ describe('DangerButton', () => {
 
     describe('Renders icon buttons', () => {
       const iconButton = mount(
-        <DangerButton icon="search" iconDescription="Search">
+        <DangerButton icon={iconSearch} iconDescription="Search">
           Search
         </DangerButton>
       );

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import warning from 'warning';
+import { iconCaretDown } from 'carbon-icons';
 import ClickListener from '../../internal/ClickListener';
 import Icon from '../Icon';
 
@@ -172,7 +173,7 @@ export default class Dropdown extends PureComponent {
           <li className="bx--dropdown-text">{this.state.selectedText}</li>
           <li>
             <Icon
-              name="caret--down"
+              icon={iconCaretDown}
               className="bx--dropdown__arrow"
               description={iconDescription}
             />

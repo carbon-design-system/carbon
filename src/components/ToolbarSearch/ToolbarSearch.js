@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { iconSearch } from 'carbon-icons';
 import Icon from '../Icon';
 import ClickListener from '../../internal/ClickListener';
 
@@ -77,7 +78,7 @@ export default class ToolbarSearch extends Component {
             className="bx--toolbar-search__btn"
             onClick={this.expandSearch}>
             <Icon
-              name="search"
+              icon={iconSearch}
               description="search"
               className="bx--search-magnifier"
             />

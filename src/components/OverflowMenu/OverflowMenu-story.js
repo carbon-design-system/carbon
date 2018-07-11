@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { iconAdd } from 'carbon-icons';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import Icon from '../Icon';
@@ -44,7 +45,7 @@ storiesOf('OverflowMenu', module)
                 display: 'flex',
                 justifyContent: 'space-between',
               }}>
-              Add <Icon name="icon--add" style={{ height: '12px' }} />
+              Add <Icon icon={iconAdd} style={{ height: '12px' }} />
             </div>
           }
         />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { iconList, iconGrid } from 'carbon-icons';
 import Icon from '../Icon';
 
 /**
@@ -65,12 +66,16 @@ class SearchLayoutButton extends Component {
         aria-label={labelText}>
         {this.state.format === 'list' ? (
           <div className="bx--search__toggle-layout__container">
-            <Icon name="list" description="list" className="bx--search-view" />
+            <Icon
+              icon={iconList}
+              description="list"
+              className="bx--search-view"
+            />
           </div>
         ) : (
           <div className="bx--search__toggle-layout__container">
             <Icon
-              name="grid"
+              icon={iconGrid}
               description="toggle-layout"
               className="bx--search-view"
             />

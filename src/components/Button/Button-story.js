@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { iconAddSolid, iconSearch } from 'carbon-icons';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 
@@ -83,7 +84,7 @@ storiesOf('Buttons', module)
           small
           {...buttonEvents}
           kind="ghost"
-          icon="add--solid"
+          icon={iconAddSolid}
           iconDescription="Add">
           Small ghost Button
         </Button>
@@ -119,13 +120,13 @@ storiesOf('Buttons', module)
     `,
     () => (
       <div>
-        <Button icon="search" iconDescription="Search" {...buttonEvents}>
+        <Button icon={iconSearch} iconDescription="Search" {...buttonEvents}>
           Primary with icon
         </Button>
         &nbsp;
         <Button
           kind="secondary"
-          icon="search"
+          icon={iconSearch}
           iconDescription="Search"
           {...buttonEvents}>
           Secondary with icon
@@ -134,7 +135,7 @@ storiesOf('Buttons', module)
         <Button
           small
           kind="primary"
-          icon="search"
+          icon={iconSearch}
           iconDescription="Search"
           {...buttonEvents}>
           Small primary with icon
@@ -143,7 +144,7 @@ storiesOf('Buttons', module)
         <Button
           small
           kind="secondary"
-          icon="search"
+          icon={iconSearch}
           iconDescription="Search"
           {...buttonEvents}>
           Small secondary with icon
@@ -164,7 +165,7 @@ storiesOf('Buttons', module)
         <Button
           kind="ghost"
           className="some-class"
-          icon="add--solid"
+          icon={iconAddSolid}
           iconDescription="Add"
           {...buttonEvents}>
           Ghost button
@@ -174,7 +175,7 @@ storiesOf('Buttons', module)
           kind="ghost"
           href="#"
           className="some-class"
-          icon="add--solid"
+          icon={iconAddSolid}
           iconDescription="Add"
           {...buttonEvents}>
           Ghost link

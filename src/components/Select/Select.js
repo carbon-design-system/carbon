@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { iconCaretDown } from 'carbon-icons';
 import Icon from '../Icon';
 
 const Select = ({
@@ -46,7 +47,7 @@ const Select = ({
           {children}
         </select>
         <Icon
-          name="caret--down"
+          icon={iconCaretDown}
           className="bx--select__arrow"
           description={iconDescription}
         />

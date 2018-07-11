@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { iconCaretDown } from 'carbon-icons';
 import Icon from '../Icon';
 
 export const translationIds = {
@@ -25,7 +26,7 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
     <div className={className}>
-      <Icon name="caret--down" description={description} alt={description} />
+      <Icon icon={iconCaretDown} description={description} alt={description} />
     </div>
   );
 };

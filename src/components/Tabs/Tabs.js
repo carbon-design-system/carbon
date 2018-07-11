@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { iconCaretDown } from 'carbon-icons';
 import Icon from '../Icon';
 import TabContent from '../TabContent';
 
@@ -183,7 +184,7 @@ export default class Tabs extends React.Component {
               onClick={this.handleDropdownClick}>
               {selectedLabel}
             </a>
-            <Icon description={iconDescription} name="caret--down" />
+            <Icon description={iconDescription} icon={iconCaretDown} />
           </div>
           <ul role="tablist" className={classes.tablist}>
             {tabsWithProps}

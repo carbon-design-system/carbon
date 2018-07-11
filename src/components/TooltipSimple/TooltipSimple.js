@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { iconInfoGlyph } from 'carbon-icons';
 import classNames from 'classnames';
 import warning from 'warning';
 import Icon from '../Icon';
@@ -12,6 +13,7 @@ const TooltipSimple = ({
   position,
   text,
   showIcon,
+  icon,
   iconName,
   iconDescription,
   ...other
@@ -39,7 +41,12 @@ const TooltipSimple = ({
             tabIndex="0"
             role="button"
             {...other}>
-            <Icon role="img" name={iconName} description={iconDescription} />
+            <Icon
+              role="img"
+              icon={!icon && !iconName ? iconInfoGlyph : icon}
+              name={iconName}
+              description={iconDescription}
+            />
           </div>
         </React.Fragment>
       ) : (
@@ -62,6 +69,12 @@ TooltipSimple.propTypes = {
   position: PropTypes.oneOf(['bottom', 'top']),
   text: PropTypes.string.isRequired,
   showIcon: PropTypes.bool,
+  icon: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.string,
+    viewBox: PropTypes.string.isRequired,
+    svgData: PropTypes.object.isRequired,
+  }),
   iconName: PropTypes.string,
   iconDescription: PropTypes.string,
 };
@@ -69,7 +82,6 @@ TooltipSimple.propTypes = {
 TooltipSimple.defaultProps = {
   position: 'top',
   showIcon: true,
-  iconName: 'info--glyph',
   iconDescription: 'tooltip',
   text: 'Provide text',
 };

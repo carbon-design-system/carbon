@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconOverflowMenu } from 'carbon-icons';
 import OverflowMenu from '../OverflowMenu';
 import Icon from '../Icon';
 import { shallow, mount } from 'enzyme';
@@ -20,7 +21,7 @@ describe('OverflowMenu', () => {
     });
 
     it('should use correct overflow-menu icon', () => {
-      expect(icon.props().name).toEqual('overflow-menu');
+      expect(icon.props().icon).toEqual(iconOverflowMenu);
     });
 
     it('has the expected classes', () => {

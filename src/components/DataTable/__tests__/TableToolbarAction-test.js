@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { iconAddSolid } from 'carbon-icons';
 import { TableToolbarAction } from '../';
 
 describe('DataTable.TableToolbarAction', () => {
@@ -7,7 +8,7 @@ describe('DataTable.TableToolbarAction', () => {
     const wrapper = mount(
       <TableToolbarAction
         className="custom-class"
-        iconName="add--solid"
+        icon={iconAddSolid}
         iconDescription="Add"
       />
     );

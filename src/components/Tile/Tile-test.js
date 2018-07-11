@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconChevronDown } from 'carbon-icons';
 import {
   Tile,
   ClickableTile,
@@ -168,7 +169,7 @@ describe('Tile', () => {
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
       const collapsedDescription = wrapper
-        .find('[name="chevron--down"]')
+        .find({ icon: iconChevronDown })
         .getElements()[0].props.description;
       expect(collapsedDescription).toEqual(defaultCollapsedIconText);
 
@@ -177,7 +178,7 @@ describe('Tile', () => {
 
       // Validate the description change
       const expandedDescription = wrapper
-        .find('[name="chevron--down"]')
+        .find({ icon: iconChevronDown })
         .getElements()[0].props.description;
       expect(expandedDescription).toEqual(defaultExpandedIconText);
     });
@@ -192,7 +193,7 @@ describe('Tile', () => {
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
       const collapsedDescription = wrapper
-        .find('[name="chevron--down"]')
+        .find({ icon: iconChevronDown })
         .getElements()[0].props.description;
       expect(collapsedDescription).toEqual(tileCollapsedIconText);
 
@@ -201,7 +202,7 @@ describe('Tile', () => {
 
       // Validate the description change
       const expandedDescription = wrapper
-        .find('[name="chevron--down"]')
+        .find({ icon: iconChevronDown })
         .getElements()[0].props.description;
       expect(expandedDescription).toEqual(tileExpandedIconText);
     });

@@ -1,5 +1,6 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
+import { iconInfoGlyph } from 'carbon-icons';
 import Icon from '../Icon';
 import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
@@ -28,7 +29,7 @@ describe('Tooltip', () => {
       it('renders the info icon', () => {
         const icon = trigger.find(Icon);
         expect(icon.length).toBe(1);
-        expect(icon.props().name).toBe('info--glyph');
+        expect(icon.props().icon).toBe(iconInfoGlyph);
       });
     });
   });

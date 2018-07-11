@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconCopy } from 'carbon-icons';
 import CopyButton from '../CopyButton';
 import Icon from '../Icon';
 import { shallow, mount } from 'enzyme';
@@ -29,7 +30,7 @@ describe('CopyButton', () => {
       expect(wrapper.hasClass('bx--snippet-button')).toBe(true);
       expect(wrapper.find('.bx--btn--copy__feedback').length).toBe(1);
       expect(wrapper.find(Icon).length).toBe(1);
-      expect(wrapper.find(Icon).props().name).toBe('copy');
+      expect(wrapper.find(Icon).props().icon).toBe(iconCopy);
     });
 
     it('Should be able to disable the button', () => {

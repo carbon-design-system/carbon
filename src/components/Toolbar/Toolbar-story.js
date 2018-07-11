@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { iconFilter } from 'carbon-icons';
 import Toolbar, {
   ToolbarItem,
   ToolbarTitle,
@@ -30,7 +31,7 @@ storiesOf('Toolbar', module).addWithInfo(
     <Toolbar {...toolbarProps} className="some-class">
       <ToolbarItem type="search" placeHolderText="Search" />
       <ToolbarItem>
-        <OverflowMenu iconName="filter" floatingMenu>
+        <OverflowMenu icon={iconFilter} floatingMenu>
           <ToolbarTitle title="FILTER BY" />
           <ToolbarOption>
             <Checkbox

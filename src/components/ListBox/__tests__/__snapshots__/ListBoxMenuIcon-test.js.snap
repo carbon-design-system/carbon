@@ -12,7 +12,29 @@ exports[`ListBoxMenuIcon should render 1`] = `
       alt="Close menu"
       description="Close menu"
       fillRule="evenodd"
-      name="caret--down"
+      icon={
+        Object {
+          "height": "5",
+          "id": "icon--caret--down",
+          "name": "icon--caret--down",
+          "styles": "",
+          "svgData": Object {
+            "circles": "",
+            "ellipses": "",
+            "paths": Array [
+              Object {
+                "d": "M0 0l5 4.998L10 0z",
+              },
+            ],
+            "polygons": "",
+            "polylines": "",
+            "rects": "",
+          },
+          "tags": "icon--caret--down",
+          "viewBox": "0 0 10 5",
+          "width": "10",
+        }
+      }
       role="img"
     >
       <svg
@@ -20,7 +42,6 @@ exports[`ListBoxMenuIcon should render 1`] = `
         aria-label="Close menu"
         fillRule="evenodd"
         height="5"
-        name="caret--down"
         role="img"
         viewBox="0 0 10 5"
         width="10"
@@ -50,7 +71,29 @@ exports[`ListBoxMenuIcon should render 2`] = `
       alt="Open menu"
       description="Open menu"
       fillRule="evenodd"
-      name="caret--down"
+      icon={
+        Object {
+          "height": "5",
+          "id": "icon--caret--down",
+          "name": "icon--caret--down",
+          "styles": "",
+          "svgData": Object {
+            "circles": "",
+            "ellipses": "",
+            "paths": Array [
+              Object {
+                "d": "M0 0l5 4.998L10 0z",
+              },
+            ],
+            "polygons": "",
+            "polylines": "",
+            "rects": "",
+          },
+          "tags": "icon--caret--down",
+          "viewBox": "0 0 10 5",
+          "width": "10",
+        }
+      }
       role="img"
     >
       <svg
@@ -58,7 +101,6 @@ exports[`ListBoxMenuIcon should render 2`] = `
         aria-label="Open menu"
         fillRule="evenodd"
         height="5"
-        name="caret--down"
         role="img"
         viewBox="0 0 10 5"
         width="10"

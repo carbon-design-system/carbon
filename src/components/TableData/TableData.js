@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { iconChevronRight } from 'carbon-icons';
 import Icon from '../Icon';
 
 const TableData = props => {
@@ -23,7 +24,7 @@ const TableData = props => {
       ) : (
         <Icon
           className={iconClasses}
-          name="chevron--right"
+          icon={iconChevronRight}
           description="expand row"
           style={style}
           tabIndex={0}

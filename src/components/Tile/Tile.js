@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { iconCheckmarkSolid, iconChevronDown } from 'carbon-icons';
 import Icon from '../Icon';
 
 export class Tile extends Component {
@@ -205,7 +206,7 @@ export class SelectableTile extends Component {
           checked={this.state.selected}
         />
         <div className="bx--tile__checkmark">
-          <Icon name="checkmark--solid" description="Tile checkmark" />
+          <Icon icon={iconCheckmarkSolid} description="Tile checkmark" />
         </div>
         <div className="bx--tile-content">{children}</div>
       </label>
@@ -333,7 +334,7 @@ export class ExpandableTile extends Component {
         tabIndex={tabIndex}>
         <button className="bx--tile__chevron">
           <Icon
-            name="chevron--down"
+            icon={iconChevronDown}
             description={
               this.state.expanded ? tileExpandedIconText : tileCollapsedIconText
             }

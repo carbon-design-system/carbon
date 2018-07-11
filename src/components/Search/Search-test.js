@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconSearch } from 'carbon-icons';
 import Icon from '../Icon';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
@@ -104,7 +105,7 @@ describe('Search', () => {
       describe('icons', () => {
         it('renders "search" icon', () => {
           const icons = wrapper.find(Icon);
-          expect(icons.at(0).props().name).toEqual('search');
+          expect(icons.at(0).props().icon).toEqual(iconSearch);
         });
 
         it('renders two Icons', () => {
@@ -130,7 +131,7 @@ describe('Search', () => {
 
       it('renders correct search icon', () => {
         const icons = small.find(Icon);
-        expect(icons.at(0).props().name).toEqual('search');
+        expect(icons.at(0).props().icon).toEqual(iconSearch);
       });
 
       it('should have the expected small class', () => {

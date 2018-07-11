@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { iconClose } from 'carbon-icons';
 import Icon from '../Icon';
 
 /**
@@ -42,7 +43,7 @@ const ListBoxSelection = ({
       onKeyDown={handleOnKeyDown}
       title={description}>
       {selectionCount}
-      <Icon name="close" description={description} focusable="false" />
+      <Icon icon={iconClose} description={description} focusable="false" />
     </div>
   );
 };

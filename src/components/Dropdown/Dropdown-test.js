@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconCaretDown } from 'carbon-icons';
 import Dropdown from '../Dropdown';
 import DropdownItem from '../DropdownItem';
 import Icon from '../Icon';
@@ -58,7 +59,7 @@ describe('Dropdown', () => {
 
     it('should use correct icon', () => {
       const icon = mounted.find(Icon);
-      expect(icon.props().name).toEqual('caret--down');
+      expect(icon.props().icon).toEqual(iconCaretDown);
     });
 
     it('has the expected default iconDescription', () => {

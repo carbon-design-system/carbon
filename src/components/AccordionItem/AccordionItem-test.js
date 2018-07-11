@@ -1,4 +1,5 @@
 import React from 'react';
+import { iconChevronRight } from 'carbon-icons';
 import AccordionItem from '../AccordionItem';
 import Icon from '../Icon';
 import { shallow, mount } from 'enzyme';
@@ -26,7 +27,7 @@ describe('AccordionItem', () => {
 
     it('should use correct icon', () => {
       const heading = wrapper.find('.bx--accordion__heading');
-      expect(heading.find(Icon).props().name).toEqual('chevron--right');
+      expect(heading.find(Icon).props().icon).toEqual(iconChevronRight);
     });
 
     it('has the expected classes', () => {
