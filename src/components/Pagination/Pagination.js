@@ -41,7 +41,7 @@ export default class Pagination extends Component {
     backwardText: 'Backward',
     itemRangeText: (min, max, total) => `${min}-${max} of ${total} items`,
     forwardText: 'Forward',
-    itemsPerPageText: 'items per page',
+    itemsPerPageText: 'items per page | ',
     onChange: () => {},
     pageNumberText: 'Page Number',
     pageRangeText: (current, total) => `${current} of ${total} pages`,
@@ -225,9 +225,7 @@ export default class Pagination extends Component {
               <SelectItem key={size} value={size} text={String(size)} />
             ))}
           </Select>
-          <span className="bx--pagination__text">
-            {itemsPerPageText}&nbsp;&nbsp;|&nbsp;&nbsp;
-          </span>
+          <span className="bx--pagination__text">{itemsPerPageText}</span>
           <span className="bx--pagination__text">{this.getItemsText()}</span>
         </div>
         <div className="bx--pagination__right">
