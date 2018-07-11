@@ -54,7 +54,7 @@ storiesOf('Search', module)
   .addWithInfo(
     'Controlled',
     `
-      You can control the Search input like you would with a normal input as well. See the Storybook source to see the source code behind this at https://github.com/carbon-design-system/carbon-components-react/blob/master/.storybook/components/SearchStory.js
+      You can control the Search input like you would with a normal input as well. See the Storybook source to see the source code behind this at https://github.com/IBM/carbon-components-react/blob/master/.storybook/components/SearchStory.js
     `,
     () => {
       class ControlledSearch extends React.Component {

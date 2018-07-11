@@ -1,4 +1,4 @@
-Closes carbon-design-system/carbon-components-react#
+Closes IBM/carbon-components-react#
 
 {{short description}}
 

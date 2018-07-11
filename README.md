@@ -1,10 +1,10 @@
 # Carbon Components React
 
-[![Build Status](https://travis-ci.org/carbon-design-system/carbon-components-react.svg?branch=master)](https://travis-ci.org/carbon-design-system/carbon-components-react)
+[![Build Status](https://travis-ci.org/IBM/carbon-components-react.svg?branch=master)](https://travis-ci.org/IBM/carbon-components-react)
 [![All Contributors](https://img.shields.io/badge/all_contributors-61-orange.svg?style=flat-square)](#contributors)
-[![Greenkeeper badge](https://badges.greenkeeper.io/carbon-design-system/carbon-components-react.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/IBM/carbon-components-react.svg)](https://greenkeeper.io/)
 
-> A collection of [Carbon Components](https://github.com/carbon-design-system/carbon-components) implemented using [React](https://facebook.github.io/react/).
+> A collection of [Carbon Components](https://github.com/IBM/carbon-components) implemented using [React](https://facebook.github.io/react/).
 
 ## Usage
 
