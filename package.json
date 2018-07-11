@@ -34,7 +34,8 @@
     "es/**/*",
     "umd/**/*"
   ],
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Brian Han",
       "email": "bthan@us.ibm.com"
     },
@@ -200,7 +201,8 @@
   "babel": {
     "presets": [
       "./scripts/env",
-      "@babel/preset-react", [
+      "@babel/preset-react",
+      [
         "@babel/preset-stage-1",
         {
           "decoratorsLegacy": true
@@ -252,7 +254,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon-components-react.git"
+    "url": "https://github.com/ibm/carbon-components-react.git"
   },
   "jest": {
     "collectCoverageFrom": [
