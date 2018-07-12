@@ -297,6 +297,12 @@
     }
   }
 
+  .nextMonthDay,
+  .prevMonthDay {
+    opacity: 0.5;
+    color: $ui-05;
+  }
+
   .#{$prefix}--date-picker__day.today,
   .flatpickr-day.today {
     position: relative;
