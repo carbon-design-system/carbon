@@ -30,6 +30,21 @@ storiesOf('Breadcrumb', module)
     )
   )
   .addWithInfo(
+    'No Trailing Slash',
+    `
+      Use prop noTrailingSlash to disable the trailing slash.
+    `,
+    () => (
+      <Breadcrumb noTrailingSlash {...additionalProps}>
+        <BreadcrumbItem>
+          <a href="/#">Breadcrumb 1</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+      </Breadcrumb>
+    )
+  )
+  .addWithInfo(
     'skeleton',
     `
     Placeholder skeleton state to use when content is loading.
