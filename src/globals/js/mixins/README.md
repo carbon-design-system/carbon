@@ -77,7 +77,7 @@ Carbon component mixins, based on [Subclass Factory Pattern](https://github.com/
 
 ### Creation
 
-[Static `.create(element)` method](https://github.com/ibm/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L44-L46) covers the creation part. It first checks if there is an instance of the same component class with by looking up static `components` property for one associated with the given `element`, and simply returns it if there is one. Otherwise, a new instance of the component is created by calling the constructor with the given `element` and returns the new instance.
+[Static `.create(element)` method](https://github.com/IBM/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L44-L46) covers the creation part. It first checks if there is an instance of the same component class with by looking up static `components` property for one associated with the given `element`, and simply returns it if there is one. Otherwise, a new instance of the component is created by calling the constructor with the given `element` and returns the new instance.
 
 A Carbon component works with the given `element` and its descendants to hook event handlers on, change DOM properties of, mangle styles of, and so on. We call it the *root element* of the component.
 
@@ -112,7 +112,7 @@ The `.options` property inherits static `.options` property and merges in the 2n
 
 ### Clean-up
 
-[`.release()`](https://github.com/ibm/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L51-L57) method covers the clean-up part. It takes care of cleaning-up Carbon components in `.children` property as well as one in static `.components` property.
+[`.release()`](https://github.com/IBM/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L51-L57) method covers the clean-up part. It takes care of cleaning-up Carbon components in `.children` property as well as one in static `.components` property.
 
 If a Carbon component has other things to clean-up (e.g. event listeners), it can override the `.release()` method and write code there to clean things up.
 
@@ -120,7 +120,7 @@ If a Carbon component has other things to clean-up (e.g. event listeners), it ca
 
 ### Registry of component instances
 
-Every component must define static `components` property, which is an instance of [`WeakMap`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap). The constructor in `create-component.js` [sets the component instance to static `.components` property](https://github.com/ibm/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L37), mapped with the DOM element the component is instantiated on. This allows application code to grab a Carbon component instance associated with the root element.
+Every component must define static `components` property, which is an instance of [`WeakMap`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap). The constructor in `create-component.js` [sets the component instance to static `.components` property](https://github.com/IBM/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L37), mapped with the DOM element the component is instantiated on. This allows application code to grab a Carbon component instance associated with the root element.
 
 ## Sugar layers for component instantiation
 
