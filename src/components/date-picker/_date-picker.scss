@@ -157,7 +157,7 @@
     justify-content: center;
     padding: $spacing-md $spacing-md $spacing-2xs;
     width: rem(285px) !important;
-    height: rem(230px);
+    height: rem(262px);
     border-radius: 0;
     border: none;
     overflow: hidden;
@@ -297,6 +297,12 @@
     }
   }
 
+  .#{$prefix}--date-picker__days .nextMonthDay,
+  .#{$prefix}--date-picker__days .prevMonthDay {
+    opacity: 0.5;
+    color: $ui-05;
+  }
+
   .#{$prefix}--date-picker__day.today,
   .flatpickr-day.today {
     position: relative;
@@ -385,13 +391,13 @@
     width: rem(225px);
     min-width: rem(225px);
     max-width: rem(225px);
-    height: rem(132px);
+    height: rem(164px);
   }
 
   .flatpickr-innerContainer,
   .flatpickr-rContainer {
     width: rem(225px);
-    height: rem(168px);
+    height: rem(200px);
   }
 
   .#{$prefix}--date-picker__weekdays,
