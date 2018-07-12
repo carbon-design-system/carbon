@@ -33,6 +33,8 @@ const ListBox = ({
   return (
     <div
       {...rest}
+      role="listbox"
+      tabindex="0"
       className={className}
       ref={innerRef}
       onKeyDown={handleOnKeyDown}>

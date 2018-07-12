@@ -4,7 +4,10 @@ import React from 'react';
 const DatePickerSkeleton = ({ range, id }) => {
   const dateInput = (
     <div className="bx--date-picker-container">
-      <label className="bx--label" htmlFor={id} />
+      {
+        /* eslint-disable jsx-a11y/label-has-for */
+        <label className="bx--label" htmlFor={id} />
+      }
       <div className="bx--date-picker__input bx--skeleton" />
     </div>
   );

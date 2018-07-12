@@ -86,11 +86,14 @@ export default class InlineCheckbox extends React.Component {
     return (
       <React.Fragment>
         <input {...inputProps} />
-        <label
-          htmlFor={id}
-          className="bx--checkbox-label"
-          aria-label={ariaLabel}
-        />
+        {
+          /* eslint-disable jsx-a11y/label-has-for */
+          <label
+            htmlFor={id}
+            className="bx--checkbox-label"
+            aria-label={ariaLabel}
+          />
+        }
       </React.Fragment>
     );
   }

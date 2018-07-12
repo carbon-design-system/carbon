@@ -66,6 +66,8 @@ exports[`DropdownV2 should render 1`] = `
       <div
         className="bx--dropdown bx--list-box"
         onKeyDown={[Function]}
+        role="listbox"
+        tabindex="0"
       >
         <ListBoxField
           aria-expanded={false}

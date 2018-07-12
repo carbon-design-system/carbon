@@ -10,6 +10,8 @@ exports[`ListBox should render 1`] = `
         Array [
           <div
             class="bx--list-box__container bx--list-box"
+            role="listbox"
+            tabindex="0"
           >
             <div
               class="bx--list-box__field"
@@ -26,6 +28,8 @@ exports[`ListBox should render 1`] = `
   <div
     className="bx--list-box__container bx--list-box"
     onKeyDown={[Function]}
+    role="listbox"
+    tabindex="0"
   >
     <ListBoxField>
       <div
