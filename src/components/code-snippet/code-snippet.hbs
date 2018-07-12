@@ -11,11 +11,27 @@
 <div class="bx--snippet bx--snippet--{{variant}}" {{#is variant "multi"}}data-code-snippet{{/is}}>
   <div class="bx--snippet-container">
     <pre>
-<code>@mixin grid-container {
+      <code>@mixin grid-container {
     width: 100%;
     padding-right: padding(mobile);
     padding-left: padding(mobile);
-</code>
+
+    @include breakpoint(bp--xs--major) {
+      padding-right: padding(xs);
+      padding-left: padding(xs);
+    }
+  }
+
+  $z-indexes: (
+    modal : 9000,
+    overlay : 8000,
+    dropdown : 7000,
+    header : 6000,
+    footer : 5000,
+    hidden : - 1,
+    overflowHidden: - 1,
+    floating: 10000
+  );</code>
     </pre>
   </div>
   <button data-copy-btn class="bx--snippet-button" aria-label="Copy code" tabindex="0">
