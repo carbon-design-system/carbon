@@ -297,8 +297,8 @@
     }
   }
 
-  .nextMonthDay,
-  .prevMonthDay {
+  .#{$prefix}--date-picker__days .nextMonthDay,
+  .#{$prefix}--date-picker__days .prevMonthDay {
     opacity: 0.5;
     color: $ui-05;
   }
