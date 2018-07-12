@@ -17,6 +17,7 @@ export default class CodeSnippet extends Component {
     feedback: PropTypes.string,
     copyLabel: PropTypes.string,
     onClick: PropTypes.func,
+    ariaLabel: PropTypes.string,
     /**
      * Used with multi snippet only
      * when text is more than 15 lines
@@ -60,6 +61,7 @@ export default class CodeSnippet extends Component {
       children,
       feedback,
       onClick,
+      ariaLabel,
       copyLabel,
       light,
       showMoreText,
@@ -97,7 +99,11 @@ export default class CodeSnippet extends Component {
     );
 
     const code = (
-      <div role="textbox" tabIndex={0} className="bx--snippet-container">
+      <div
+        role="textbox"
+        tabIndex={0}
+        className="bx--snippet-container"
+        aria-label={ariaLabel ? ariaLabel : 'code-snippet'}>
         <code>
           <pre
             ref={codeContent => {
