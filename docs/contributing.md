@@ -99,7 +99,7 @@ Component variants can be specified by either:
 
 ### 1. Fork The Repo:
 
-Go to [carbon-components](https://github.com/carbon-design-system/carbon-components) and click the "Fork" button in the top-right corner.
+Go to [carbon-components](https://github.com/ibm/carbon-components) and click the "Fork" button in the top-right corner.
 
 ### 2. Clone Your Fork:
 
@@ -120,11 +120,11 @@ See [GitHub docs](https://help.github.com/articles/fork-a-repo/) for more detail
 
 When you clone your forked repo, doing a `git remote -v` will show that the `origin` remote is set up for you already by default. This should be pointing to your forked repo.
 
-Add the `carbon-design-system/carbon-components` repo to your remote (this can be useful to update your fork of new changes down the road):
+Add the `ibm/carbon-components` repo to your remote (this can be useful to update your fork of new changes down the road):
 
 ```sh
 # Add the upstream remote to your repo
-git remote add upstream git@github.com:carbon-design-system/carbon-components.git
+git remote add upstream git@github.com:ibm/carbon-components.git
 
 # Verify the remote was added
 git remote -v
@@ -210,11 +210,11 @@ If you are very sure that your change affects a specific set of components, you 
 gulp test:a11y -f consumables/html/components/fab/fab.html
 ```
 
-The a11y test may report potential issues that should be handled in application-level, not in carbon-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/carbon-design-system/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
+The a11y test may report potential issues that should be handled in application-level, not in carbon-components code. In such case, you can ignore those issues by adding an item to `shouldIssueBeIgnoredForRule` table in [tests/a11y/global-ignore-aat-issues.js](https://github.com/ibm/carbon-components/blob/master/tests/a11y/global-ignore-aat-issues.js). The table is keyed by something like `wcag20.tech.h59.linkValid` which helps indentifying what RPT rule to ignore. You can specify `true` to the value which ignores all violations of the rule, or a function which takes the DOM element violating the rule and returns `true` if such violation should be ignored.
 
 ### 8. Make a Pull Request
 
-**Note:** Before you make a pull request, [search](https://github.com/carbon-design-system/carbon-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.
+**Note:** Before you make a pull request, [search](https://github.com/ibm/carbon-components/issues) the issues to see if a similar issue has already been submitted. If a similar issue has been submitted, assign yourself or ask to be assigned to the issue by posting a comment. If the issue does not exist, create a new issue.
 
 When you're at a good stopping place and you're ready for feedback from other contributors and maintainers, **push your commits to your fork**:
 
@@ -247,7 +247,7 @@ git commit -m "fix(table): IE11 positioning error" -m "Fixes #34"
 git push origin { YOUR_BRANCH_NAME }
 ```
 
-In your browser, navigate to [carbon-design-system/carbon-components](https://github.com/carbon-design-system/carbon-components) and click the button that reads "Compare & pull request"
+In your browser, navigate to [ibm/carbon-components](https://github.com/ibm/carbon-components) and click the button that reads "Compare & pull request"
 
 > **Is it a Breaking Change?**
 
