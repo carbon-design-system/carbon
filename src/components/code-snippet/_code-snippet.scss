@@ -74,13 +74,13 @@
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
     @include bx--snippet;
-    padding: $spacing-md $spacing-3xl $spacing-md $spacing-lg;
+    padding: $spacing-md $spacing-3xl $spacing-xl $spacing-lg;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     overflow: hidden;
     position: relative;
-    max-height: rem(254px);
+    max-height: rem(238px);
     min-height: rem(56px);
     transition: all $transition--base $carbon--standard-easing;
   }
@@ -170,7 +170,7 @@
     bottom: 0;
   }
 
-  .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
+  .#{$prefix}--snippet-btn--expand--hide .#{$prefix}--snippet-btn--expand {
     display: none;
   }
 
