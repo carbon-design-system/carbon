@@ -6,10 +6,12 @@ import './polyfills/devenv';
 import './js/components/boot-nav';
 import './js/prism';
 
-import * as components from '../src/globals/js/components';
-import lazyInitHandles from '../src/globals/js/boot';
+import * as components from './components';
+import lazyInitHandles, { setComponents } from '../src/globals/js/boot';
 
 export * from '../src/bundle';
+
+setComponents(components);
 
 if (typeof module !== 'undefined' && module.hot) {
   const forEach = Array.prototype.forEach;
