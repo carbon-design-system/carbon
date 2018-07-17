@@ -7,10 +7,10 @@
   "main": "umd/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon-components.git"
+    "url": "https://github.com/IBM/carbon-components.git"
   },
   "bugs": {
-    "url": "https://github.com/carbon-design-system/carbon-components/issues"
+    "url": "https://github.com/IBM/carbon-components/issues"
   },
   "keywords": [
     "carbon",

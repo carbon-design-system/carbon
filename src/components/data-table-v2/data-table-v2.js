@@ -117,7 +117,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     });
 
     this._actionBarToggle(this.state.checkboxCount > 0);
-    this.countEl.textContent = this.state.checkboxCount;
+
+    if (this.batchActionEl) {
+      this.countEl.textContent = this.state.checkboxCount;
+    }
   };
 
   _actionBarCancel = () => {
@@ -134,7 +137,10 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
 
     this.state.checkboxCount = 0;
     this._actionBarToggle(false);
-    this.countEl.textContent = this.state.checkboxCount;
+
+    if (this.batchActionEl) {
+      this.countEl.textContent = this.state.checkboxCount;
+    }
   };
 
   _actionBarToggle = toggleOn => {
@@ -153,12 +159,13 @@ class DataTableV2 extends mixin(createComponent, initComponentBySearch, eventedS
     if (toggleOn) {
       this.batchActionEl.dataset.active = true;
       this.batchActionEl.classList.add(this.options.classActionBarActive);
-    } else {
+    } else if (this.batchActionEl) {
       this.batchActionEl.dataset.active = false;
       this.batchActionEl.classList.remove(this.options.classActionBarActive);
     }
-
-    this.batchActionEl.addEventListener('transitionend', transition);
+    if (this.batchActionEl) {
+      this.batchActionEl.addEventListener('transitionend', transition);
+    }
   };
 
   _expandableRowsInit = expandableRows => {
