@@ -19,7 +19,7 @@ export const getMenuOffset = menuBody => {
   const values = ['top', 'left', 'width', 'height', 'border-top-width'].reduce(
     (o, name) => ({
       ...o,
-      [name]: Number((/^([\d-]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
+      [name]: Number((/^([\d-.]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
     }),
     {}
   );

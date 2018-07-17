@@ -32,7 +32,7 @@ const getMenuOffset = (menuBody, menuDirection) => {
   const values = [arrowPositionProp, 'border-bottom-width'].reduce(
     (o, name) => ({
       ...o,
-      [name]: Number((/^([\d-]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
+      [name]: Number((/^([\d-.]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
     }),
     {}
   );
