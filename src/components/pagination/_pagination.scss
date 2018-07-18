@@ -110,6 +110,9 @@ $css--helpers: true;
     .#{$prefix}--select--inline {
       margin-right: 0;
       width: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
 
     .#{$prefix}--select-input {
@@ -126,7 +129,7 @@ $css--helpers: true;
       }
     }
 
-    .#{$prefix}--select__arrow {
+    .#{$prefix}--select--inline .#{$prefix}--select-input ~ .#{$prefix}--select__arrow {
       right: 0.3rem;
       top: 0.625rem;
     }
