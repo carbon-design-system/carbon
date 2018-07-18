@@ -20,9 +20,9 @@ export default class Container extends Component {
           {story()}
         </div>
         <input
-          aria-label="inpute-text-offleft"
+          aria-label="input-text-offleft"
           type="text"
-          class="bx--visually-hidden"
+          className="bx--visually-hidden"
         />
       </React.StrictMode>
     );

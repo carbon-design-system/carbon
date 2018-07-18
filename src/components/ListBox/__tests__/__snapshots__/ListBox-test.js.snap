@@ -29,7 +29,7 @@ exports[`ListBox should render 1`] = `
     className="bx--list-box__container bx--list-box"
     onKeyDown={[Function]}
     role="listbox"
-    tabindex="0"
+    tabIndex="0"
   >
     <ListBoxField>
       <div

@@ -34,7 +34,7 @@ const ListBox = ({
     <div
       {...rest}
       role="listbox"
-      tabindex="0"
+      tabIndex="0"
       className={className}
       ref={innerRef}
       onKeyDown={handleOnKeyDown}>
