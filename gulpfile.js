@@ -67,7 +67,7 @@ const axe = require('gulp-axe-webdriver');
  * Dev server
  */
 
-gulp.task('dev-server', cb => {
+gulp.task('dev-server', ['sass:dev'], cb => {
   let started;
   const options = {
     script: './server.js',
@@ -343,8 +343,8 @@ gulp.task('test:a11y', ['sass:compiled'], done => {
 gulp.task('watch', () => {
   if (cloptions.rollup) {
     gulp.watch(['src/**/**/*.js', 'demo/**/**/*.js', '!demo/demo.js'], ['scripts:dev']);
-    gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
   }
+  gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
 });
 
 gulp.task('serve', ['dev-server', 'watch']);
