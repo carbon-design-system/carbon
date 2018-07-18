@@ -59,19 +59,27 @@
     display: flex;
   }
 
-  .#{$prefix}--overflow-menu-options:before {
-    content: '';
-    position: absolute;
-    display: block;
-    width: rem(8px);
-    height: rem(8px);
-    z-index: -1;
-    transform: rotate(45deg);
-    background-color: $inverse-01;
-    border-top: 1px solid $ui-03;
-    border-left: 1px solid $ui-03;
-    top: -5px;
-    left: 24px;
+  .#{$prefix}--overflow-menu-options {
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: rem(8px);
+      height: rem(8px);
+      z-index: -1;
+      transform: rotate(45deg);
+      background-color: $inverse-01;
+      border-top: 1px solid $ui-03;
+      border-left: 1px solid $ui-03;
+      top: -5px;
+      left: 24px;
+    }
+
+    &[data-floating-menu-direction='top']:before {
+      transform: rotate(225deg);
+      top: auto;
+      bottom: -5px;
+    }
   }
 
   .#{$prefix}--overflow-menu-options__option {
