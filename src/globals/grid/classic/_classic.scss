@@ -8,15 +8,15 @@ $grid-breakpoints: (
   md: 768px,
   lg: 992px,
   xl: 1200px,
-  xxl: 1600px
+  xxl: 1600px,
 );
 $gutter-breakpoints: (
   xs: 5px,
-  sm: 10px
+  sm: 10px,
 );
 $grid-gutter-breakpoints: (
   xs: 3%,
-  sm: 5%
+  sm: 5%,
 );
 
 @mixin grid {
@@ -67,6 +67,10 @@ $grid-gutter-breakpoints: (
     .#{$prefix}--col-xs-#{$i} {
       flex-basis: (100% * $i / $columns);
     }
+
+    .#{$prefix}--offset-xs-#{$i} {
+      margin-left: (100% * $i / $columns);
+    }
   }
 
   @each $breakpoint in map-keys($grid-breakpoints) {
@@ -79,6 +83,10 @@ $grid-gutter-breakpoints: (
       @for $i from 1 through $columns {
         .#{$prefix}--col-#{$breakpoint}-#{$i} {
           flex-basis: (100% * $i / $columns);
+        }
+
+        .#{$prefix}--offset-#{$breakpoint}-#{$i} {
+          margin-left: (100% * $i / $columns);
         }
       }
     }
