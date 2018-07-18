@@ -2,7 +2,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import InlineCheckbox from '../InlineCheckbox';
 
-const TableSelectRow = ({ ariaLabel, checked, id, name, onSelect }) => (
+const TableSelectRow = ({
+  ariaLabel,
+  checked,
+  id,
+  name,
+  onSelect,
+  disabled,
+}) => (
   <td>
     <InlineCheckbox
       id={id}
@@ -10,6 +17,7 @@ const TableSelectRow = ({ ariaLabel, checked, id, name, onSelect }) => (
       onClick={onSelect}
       checked={checked}
       ariaLabel={ariaLabel}
+      disabled={disabled}
     />
   </td>
 );

@@ -14,6 +14,11 @@ export default class InlineCheckbox extends React.Component {
     checked: PropTypes.bool.isRequired,
 
     /**
+     * Specify whether the underlying input control should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
      * Provide an `id` for the underlying input control
      */
     id: PropTypes.string.isRequired,
@@ -58,6 +63,7 @@ export default class InlineCheckbox extends React.Component {
       id,
       indeterminate,
       checked,
+      disabled,
       ariaLabel,
       name,
       onClick,
@@ -72,6 +78,7 @@ export default class InlineCheckbox extends React.Component {
       type: 'checkbox',
       ref: this.handleRef,
       checked: false,
+      disabled,
     };
 
     if (checked) {

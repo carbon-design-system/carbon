@@ -9,6 +9,7 @@ const TableSelectAll = ({
   indeterminate,
   name,
   onSelect,
+  disabled,
 }) => (
   <th scope="col">
     <InlineCheckbox
@@ -18,6 +19,7 @@ const TableSelectAll = ({
       indeterminate={indeterminate}
       name={name}
       onClick={onSelect}
+      disabled={disabled}
     />
   </th>
 );
