@@ -4,19 +4,43 @@ import createComponent from '../../globals/js/mixins/create-component';
 import initComponentBySearch from '../../globals/js/mixins/init-component-by-search';
 import eventedShowHideState from '../../globals/js/mixins/evented-show-hide-state';
 import handles from '../../globals/js/mixins/handles';
-import FloatingMenu from '../floating-menu/floating-menu';
+import FloatingMenu, { DIRECTION_TOP, DIRECTION_BOTTOM } from '../floating-menu/floating-menu';
 import getLaunchingDetails from '../../globals/js/misc/get-launching-details';
 import on from '../../globals/js/misc/on';
 
 /**
+ * The CSS property names of the arrow keyed by the floating menu direction.
+ * @type {Object<string, string>}
+ */
+const triggerButtonPositionProps = {
+  [DIRECTION_TOP]: 'bottom',
+  [DIRECTION_BOTTOM]: 'top',
+};
+
+/**
+ * Determines how the position of arrow should affect the floating menu position.
+ * @type {Object<string, number>}
+ */
+const triggerButtonPositionFactors = {
+  [DIRECTION_TOP]: -2,
+  [DIRECTION_BOTTOM]: -1,
+};
+
+/**
  * @param {Element} menuBody The menu body with the menu arrow.
+ * @param {string} direction The floating menu direction.
  * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
  * @private
  */
-export const getMenuOffset = menuBody => {
+export const getMenuOffset = (menuBody, direction) => {
+  const triggerButtonPositionProp = triggerButtonPositionProps[direction];
+  const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
+  if (!triggerButtonPositionProp || !triggerButtonPositionFactor) {
+    console.warn('Wrong floating menu direction:', direction); // eslint-disable-line no-console
+  }
   const menuWidth = menuBody.offsetWidth;
   const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(menuBody, ':before');
-  const values = ['top', 'left', 'width', 'height', 'border-top-width'].reduce(
+  const values = [triggerButtonPositionProp, 'left', 'width', 'height', 'border-top-width'].reduce(
     (o, name) => ({
       ...o,
       [name]: Number((/^([\d-.]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]),
@@ -24,10 +48,10 @@ export const getMenuOffset = menuBody => {
     {}
   );
   if (Object.keys(values).every(name => !isNaN(values[name]))) {
-    const { top, left, width, height, 'border-top-width': borderTopWidth } = values;
+    const { left, width, height, 'border-top-width': borderTopWidth } = values;
     return {
       left: menuWidth / 2 - (left + Math.sqrt(width ** 2 + height ** 2) / 2),
-      top: Math.sqrt(borderTopWidth ** 2 * 2) - top,
+      top: Math.sqrt(borderTopWidth ** 2 * 2) + triggerButtonPositionFactor * values[triggerButtonPositionProp],
     };
   }
   return undefined;
