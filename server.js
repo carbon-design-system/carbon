@@ -3,7 +3,9 @@
 /* eslint import/no-extraneous-dependencies: [2, {"devDependencies": true}] */
 
 const path = require('path');
-const express = require('express');
+const pathRegexp = require('path-to-regexp');
+const browserSync = require('browser-sync');
+const serveStatic = require('serve-static');
 
 const chokidar = require('chokidar');
 const debounce = require('lodash.debounce');
@@ -13,16 +15,10 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const templates = require('./tools/templates');
-
-const app = express();
-const port = process.env.PORT || 8080;
 const config = require('./tools/webpack.dev.config');
 
 const compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-
 const hotMiddleware = webpackHotMiddleware(compiler);
-app.use(hotMiddleware);
 
 let dummyHashSeq = 0;
 const watchCallback = debounce(() => {
@@ -36,13 +32,10 @@ chokidar
   .on('change', watchCallback)
   .on('unlink', watchCallback);
 
-app.engine('hbs', templates.handlebars.engine);
-app.set('view engine', 'hbs');
-app.set('views', path.resolve(__dirname, 'demo/views'));
-app.use('/demo', express.static('demo'));
-app.use(express.static('src'));
-app.use(express.static('scripts'));
-app.use('/docs/js', express.static('docs/js'));
+const reComponentPath = pathRegexp('/component/:component');
+const reDemoComponentPath = pathRegexp('/demo/:component');
+const reCodePath = pathRegexp('/code/:component');
+const demoStaticRoute = serveStatic('demo');
 
 /**
  * @param {ComponentCollection|Component} metadata The component data.
@@ -76,40 +69,47 @@ const normalizeMetadata = metadata => {
 const getNavItems = () =>
   templates.cache
     .get()
-    .then(({ componentSource, docSource }) =>
-      Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items()])
+    .then(({ componentSource, docSource, contents }) =>
+      Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items(), contents])
     )
-    .then(([componentItems, docItems]) => ({
+    .then(([componentItems, docItems, contents]) => ({
       componentItems,
       docItems,
+      contents,
     }));
 
-['/', '/demo/:component'].forEach(route => {
-  app.get(route, (req, res) => {
-    const name = req.params.component;
+function navRoute(req, res, next) {
+  const { url } = req;
+  const name = url === '/' ? url : (reDemoComponentPath.exec(url) || [])[1];
+  if (!name || /\.(js|css)/i.test(name)) {
+    next();
+  } else if (name !== '/' && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+    res.status(404).end();
+  } else {
+    getNavItems()
+      .then(({ componentItems, docItems, contents }) => {
+        res.setHeader('Content-Type', 'text/html');
+        res.end(
+          contents.get('demo-nav')({
+            body: contents.get('demo-nav-data')({
+              componentItems,
+              docItems,
+            }),
+          })
+        );
+      })
+      .catch(err => {
+        console.error(err.stack); // eslint-disable-line no-console
+        res.status(500).end();
+      });
+  }
+}
 
-    if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
-      res.status(404).end();
-    } else {
-      getNavItems()
-        .then(({ componentItems, docItems }) => {
-          res.render('demo-nav-data', {
-            componentItems,
-            docItems,
-          });
-        })
-        .catch(err => {
-          console.error(err.stack); // eslint-disable-line no-console
-          res.status(500).end();
-        });
-    }
-  });
-});
-
-app.get('/component/:component', (req, res) => {
-  const name = req.params.component;
-
-  if (path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+function componentRoute(req, res, next) {
+  const name = (reComponentPath.exec(req.url) || [])[1];
+  if (!name) {
+    next();
+  } else if (path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
     templates
@@ -119,19 +119,21 @@ app.get('/component/:component', (req, res) => {
         if (rendered == null) {
           res.status(404).end();
         }
-        res.send(rendered);
+        res.setHeader('Content-Type', 'text/html');
+        res.end(rendered);
       })
       .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console
         res.status(500).end();
       });
   }
-});
+}
 
-app.get('/code/:component', (req, res) => {
-  const name = req.params.component;
-
-  if (name && path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
+function codeRoute(req, res, next) {
+  const name = (reCodePath.exec(req.url) || [])[1];
+  if (!name) {
+    next();
+  } else if (path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
     res.status(404).end();
   } else {
     templates
@@ -141,15 +143,44 @@ app.get('/code/:component', (req, res) => {
         renderedItems.forEach((rendered, item) => {
           o[item.handle] = rendered.trim();
         });
-        res.json(o);
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(o));
       })
       .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console
         res.status(500).end();
       });
   }
-});
+}
 
-app.listen(port, () => {
-  console.log(`Listening on port: ${port}`); // eslint-disable-line no-console
+function demoRoute(req, res, next) {
+  if (!/^\/demo/i.test(req.url)) {
+    next();
+  } else {
+    demoStaticRoute(req, res, next);
+  }
+}
+
+browserSync({
+  baseDir: 'demo',
+  files: ['demo/demo.css'],
+  open: false,
+
+  server: {
+    port: process.env.PORT || 8080,
+    middleware: [
+      webpackDevMiddleware(compiler, {
+        noInfo: true,
+        publicPath: config.output.publicPath,
+        stats: { colors: true },
+      }),
+      hotMiddleware,
+      navRoute,
+      componentRoute,
+      codeRoute,
+      demoRoute,
+      serveStatic('src'),
+      serveStatic('scripts'),
+    ],
+  },
 });
