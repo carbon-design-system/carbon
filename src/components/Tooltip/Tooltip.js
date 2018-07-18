@@ -12,6 +12,22 @@ import FloatingMenu, {
 } from '../../internal/FloatingMenu';
 import ClickListener from '../../internal/ClickListener';
 
+const matchesFuncName =
+  typeof Element !== 'undefined' &&
+  ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(
+    name => typeof Element.prototype[name] === 'function'
+  )[0];
+
+/**
+ * @param {Node} elem A DOM node.
+ * @param {string} selector A CSS selector
+ * @returns {boolean} `true` if the given DOM element is a element node and matches the given selector.
+ * @private
+ */
+const matches = (elem, selector) =>
+  typeof elem[matchesFuncName] === 'function' &&
+  elem[matchesFuncName](selector);
+
 /**
  * @param {Element} elem An element.
  * @param {string} selector An query selector.
@@ -25,7 +41,7 @@ const closest = (elem, selector) => {
     traverse && traverse !== doc;
     traverse = traverse.parentNode
   ) {
-    if (traverse.matches(selector)) {
+    if (matches(traverse, selector)) {
       return traverse;
     }
   }

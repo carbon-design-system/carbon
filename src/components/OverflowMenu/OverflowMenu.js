@@ -46,7 +46,7 @@ const closest = (elem, selector) => {
     traverse && traverse !== doc;
     traverse = traverse.parentNode
   ) {
-    if (traverse.matches(selector)) {
+    if (matches(traverse, selector)) {
       return traverse;
     }
   }
