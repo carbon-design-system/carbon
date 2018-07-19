@@ -84,6 +84,7 @@ export TableHeader from './components/TableHeader';
 export TableRow from './components/TableRow';
 export TableRowExpanded from './components/TableRowExpanded';
 export Tabs from './components/Tabs';
+export Tag from './components/Tag';
 export TextArea from './components/TextArea';
 export TextInput from './components/TextInput';
 export {
@@ -128,6 +129,7 @@ export SearchSkeleton from './components/Search/Search.Skeleton';
 export SelectSkeleton from './components/Select/Select.Skeleton';
 export SliderSkeleton from './components/Slider/Slider.Skeleton';
 export TabsSkeleton from './components/Tabs/Tabs.Skeleton';
+export TagSkeleton from './components/Tag/Tag.Skeleton';
 export TextAreaSkeleton from './components/TextArea/TextArea.Skeleton';
 export TextInputSkeleton from './components/TextInput/TextInput.Skeleton';
 export ToggleSkeleton from './components/Toggle/Toggle.Skeleton';
