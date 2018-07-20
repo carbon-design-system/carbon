@@ -15,6 +15,7 @@
 @import 'vars';
 @import 'css--reset';
 @import 'typography';
+@import 'import-once';
 
 @mixin text-overflow($width: false) {
   display: block;
@@ -138,57 +139,6 @@
     opacity: 0.3;
     background: $skeleton;
     animation: 3000ms ease-in-out skeleton infinite;
-  }
-}
-
-@keyframes skeleton {
-  0% {
-    width: 0%;
-    left: 0;
-    right: auto;
-    opacity: 0.3;
-  }
-  20% {
-    width: 100%;
-    left: 0;
-    right: auto;
-    opacity: 1;
-  }
-  28% {
-    width: 100%;
-    left: auto;
-    right: 0;
-  }
-  51% {
-    width: 0%;
-    left: auto;
-    right: 0;
-  }
-  58% {
-    width: 0%;
-    left: auto;
-    right: 0;
-  }
-  82% {
-    width: 100%;
-    left: auto;
-    right: 0;
-  }
-  83% {
-    width: 100%;
-    left: 0;
-    right: auto;
-  }
-  96% {
-    width: 0%;
-    left: 0;
-    right: auto;
-  }
-  100% {
-    width: 0%;
-    left: 0;
-    right: auto;
-    opacity: 0.3;
   }
 }
 
