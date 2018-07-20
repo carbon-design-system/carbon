@@ -1,5 +1,3 @@
-import './scss/demo.scss';
-
 import './polyfills/index';
 import './polyfills/devenv';
 
