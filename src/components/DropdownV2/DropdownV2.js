@@ -90,12 +90,14 @@ export default class DropdownV2 extends React.Component {
       initialSelectedItem,
       selectedItem,
       light,
+      id,
     } = this.props;
     const className = cx('bx--dropdown', containerClassName, {
       'bx--dropdown--light': light,
     });
     return (
       <Downshift
+        id={id}
         onChange={this.handleOnChange}
         itemToString={itemToString}
         defaultSelectedItem={initialSelectedItem}
