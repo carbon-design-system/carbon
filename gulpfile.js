@@ -103,7 +103,9 @@ gulp.task('clean', () =>
     '!demo/js/components/**/*',
     '!demo/js/demo-switcher.js',
     '!demo/js/theme-switcher.js',
+    '!demo/js/inline-loading-demo-button.js',
     '!demo/js/prism.js',
+    '!demo/components.js',
     '!demo/index.js',
     '!demo/polyfills/*.js',
   ])

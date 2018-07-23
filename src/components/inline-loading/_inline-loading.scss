@@ -28,6 +28,10 @@
     width: 0.75rem;
     position: absolute;
     top: 0.75rem;
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   .#{$prefix}--inline-loading__checkmark {

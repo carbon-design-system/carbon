@@ -4,6 +4,7 @@ import { Link } from 'carbon-components-react';
 import classnames from 'classnames';
 
 import CodeExample from '../CodeExample/CodeExample';
+import InlineLoadingDemoButton from '../../inline-loading-demo-button';
 
 const forEach = Array.prototype.forEach;
 
@@ -85,15 +86,16 @@ class ComponentExample extends Component {
    */
   _instantiateComponents = () => {
     const container = this._container;
-    const components = container.ownerDocument.defaultView.CarbonComponents;
-    if (components) {
-      const componentClasses = Object.keys(components)
-        .map(key => components[key])
-        .filter(Clz => typeof Clz.init === 'function');
-      componentClasses.filter(Clz => !Clz.forLazyInit).forEach(Clz => {
-        Clz.init(container);
-      });
-    }
+    const components = {
+      ...(container.ownerDocument.defaultView.CarbonComponents || {}),
+      InlineLoadingDemoButton,
+    };
+    const componentClasses = Object.keys(components)
+      .map(key => components[key])
+      .filter(Clz => typeof Clz.init === 'function');
+    componentClasses.filter(Clz => !Clz.forLazyInit).forEach(Clz => {
+      Clz.init(container);
+    });
   };
 
   /**
@@ -101,20 +103,21 @@ class ComponentExample extends Component {
    */
   _releaseComponents = () => {
     const container = this._container;
-    const components = container.ownerDocument.defaultView.CarbonComponents;
-    if (components) {
-      Object.keys(components)
-        .map(key => components[key])
-        .filter(Clz => typeof Clz.init === 'function')
-        .forEach(Clz => {
-          forEach.call(container.querySelectorAll(Clz.options.selectorInit), element => {
-            const instance = Clz.components.get(element);
-            if (instance) {
-              instance.release();
-            }
-          });
+    const components = {
+      ...(container.ownerDocument.defaultView.CarbonComponents || {}),
+      InlineLoadingDemoButton,
+    };
+    Object.keys(components)
+      .map(key => components[key])
+      .filter(Clz => typeof Clz.init === 'function')
+      .forEach(Clz => {
+        forEach.call(container.querySelectorAll(Clz.options.selectorInit), element => {
+          const instance = Clz.components.get(element);
+          if (instance) {
+            instance.release();
+          }
         });
-    }
+      });
   };
 
   render() {

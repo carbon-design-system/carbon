@@ -1,21 +1,18 @@
-<!-- Loading State -->
-<div class="bx--inline-loading">
+<!-- Loading Success State -->
+<div data-inline-loading class="bx--inline-loading">
   <div class="bx--inline-loading__animation">
-    <div class="bx--loading bx--loading--small">
+    <div data-inline-loading-spinner class="bx--loading bx--loading--small">
       <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
         <circle cx="0" cy="0" r="37.5"></circle>
       </svg>
     </div>
-  </div>
-  <p class="bx--inline-loading__text">Loading data...</p>
-</div>
-
-<!-- Loading Success State -->
-<div class="bx--inline-loading">
-  <div class="bx--inline-loading__animation">
-    <svg class="bx--inline-loading__checkmark-container bx--inline-loading__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+    <svg data-inline-loading-finished hidden class="bx--inline-loading__checkmark-container bx--inline-loading__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
       <polyline class="bx--inline-loading__checkmark" points="0.74 3.4 3.67 6.34 9.24 0.74"></polyline>
     </svg>
   </div>
-  <p class="bx--inline-loading__text">Data loaded.</p>
+  <p data-inline-loading-text-active class="bx--inline-loading__text">Loading data...</p>
+  <p data-inline-loading-text-finished hidden class="bx--inline-loading__text">Data loaded.</p>
 </div>
+{{#if showToggleButton}}
+  <button data-inline-loading-demo-button class="bx--btn bx--btn--primary">Toggle state</button>
+{{/if}}
