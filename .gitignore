@@ -9,6 +9,7 @@ demo/*.map
 demo/*.js
 demo/hot
 !demo/index.js
+!demo/components.js
 dist
 
 # OSX

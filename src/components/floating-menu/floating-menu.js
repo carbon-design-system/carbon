@@ -39,11 +39,19 @@ export const DIRECTION_BOTTOM = 'bottom';
  * @param {FloatingMenu~position} params.refPosition The position of the triggering element.
  * @param {FloatingMenu~offset} [params.offset={ left: 0, top: 0 }] The position offset of the menu.
  * @param {string} [params.direction=bottom] The menu direction.
+ * @param {number} [params.scrollX=0] The scroll position of the viewport.
  * @param {number} [params.scrollY=0] The scroll position of the viewport.
  * @returns {FloatingMenu~offset} The position of the menu, relative to the top-left corner of the viewport.
  * @private
  */
-export const getFloatingPosition = ({ menuSize, refPosition, offset = {}, direction = DIRECTION_BOTTOM, scrollY = 0 }) => {
+export const getFloatingPosition = ({
+  menuSize,
+  refPosition,
+  offset = {},
+  direction = DIRECTION_BOTTOM,
+  scrollX = 0,
+  scrollY = 0,
+}) => {
   const { left: refLeft = 0, top: refTop = 0, right: refRight = 0, bottom: refBottom = 0 } = refPosition;
 
   const { width, height } = menuSize;
@@ -53,19 +61,19 @@ export const getFloatingPosition = ({ menuSize, refPosition, offset = {}, direct
 
   return {
     [DIRECTION_LEFT]: {
-      left: refLeft - width - left,
+      left: refLeft - width + scrollX - left,
       top: refCenterVertical - height / 2 + scrollY + top,
     },
     [DIRECTION_TOP]: {
-      left: refCenterHorizontal - width / 2 + left,
+      left: refCenterHorizontal - width / 2 + scrollX + left,
       top: refTop - height + scrollY - top,
     },
     [DIRECTION_RIGHT]: {
-      left: refRight + left,
+      left: refRight + scrollX + left,
       top: refCenterVertical - height / 2 + scrollY + top,
     },
     [DIRECTION_BOTTOM]: {
-      left: refCenterHorizontal - width / 2 + left,
+      left: refCenterHorizontal - width / 2 + scrollX + left,
       top: refBottom + scrollY + top,
     },
   }[direction];
@@ -147,6 +155,7 @@ class FloatingMenu extends mixin(createComponent, eventedShowHideState, trackBlu
       refPosition: refNode.getBoundingClientRect(),
       offset: typeof offset !== 'function' ? offset : offset(element, direction),
       direction,
+      scrollX: refNode.ownerDocument.defaultView.pageXOffset,
       scrollY: refNode.ownerDocument.defaultView.pageYOffset,
     });
   }
