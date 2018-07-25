@@ -20,6 +20,7 @@
 
   .#{$prefix}--radio-button {
     @include hidden;
+    visibility:unset;
   }
 
   .#{$prefix}--radio-button__label {

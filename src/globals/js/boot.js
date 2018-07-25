@@ -1,5 +1,7 @@
 import settings from './settings';
-import * as components from './components';
+import * as defaultComponents from './components';
+
+let components = defaultComponents;
 
 /**
  * The handles for event handlers to lazily instantiate components.
@@ -26,6 +28,14 @@ const init = () => {
       }
     });
   }
+};
+
+/**
+ * Replaces the list of components to initialize.
+ * @param {Object} componentsToReplaceWith The new list of components.
+ */
+export const setComponents = componentsToReplaceWith => {
+  components = componentsToReplaceWith;
 };
 
 if (document.readyState === 'loading') {

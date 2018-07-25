@@ -6,6 +6,7 @@ export { default as Tab } from '../../components/tabs/tabs';
 export { default as OverflowMenu } from '../../components/overflow-menu/overflow-menu';
 export { default as Modal } from '../../components/modal/modal';
 export { default as Loading } from '../../components/loading/loading';
+export { default as InlineLoading } from '../../components/inline-loading/inline-loading';
 export { default as Dropdown } from '../../components/dropdown/dropdown';
 export { default as NumberInput } from '../../components/number-input/number-input';
 export { default as DataTable } from '../../components/data-table/data-table';
