@@ -12,6 +12,27 @@ Use these modifiers with `.bx--dropdown` class.
 
 ### JavaScript
 
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { Dropdown } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var Dropdown = CarbonComponents.Dropdown;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-dropdown` is an element with `[data-dropdown]` attribute
+Dropdown.create(document.getElementById('my-dropdown'));
+```
+
 #### Public Methods
 
 | Name                 | Params                 | Description                                                                                                                                                                      |
@@ -21,6 +42,15 @@ Use these modifiers with `.bx--dropdown` class.
 | navigate             | direction: `Number`    | Moves the focus up or down                                                                                                                                                       |
 | select               | itemToSelect: `Object` | Handles clicking on the dropdown options, doing the following: Changing text to selected option, removing selected option from options when selected, and emitting custom events |
 | setCloseOnBlur       |                        | Sets an event handler to document for "close on blue" behavior                                                                                                                   |
+
+##### Example - Changing the active item
+
+```javascript
+// `#my-dropdown` is an element with `[data-dropdown]` attribute
+var dropdownInstance = Dropdown.create(document.getElementById('my-dropdown'));
+// `#my-dropdown-link-1` is one of the `<a>`s with `bx--dropdown-link` class
+dropdownInstance.select(document.getElementById('my-dropdown-link-1'));
+```
 
 #### Options
 
@@ -37,3 +67,24 @@ Use these modifiers with `.bx--dropdown` class.
 |------------------------|--------------------------------------------------------|
 | dropdown-beingselected | Custom event fired before a dropdown item is selected |
 | dropdown-selected      | Custom event fired after a dropdown item is selected  |
+
+##### Example - Preventing a dropdown item from being selected in a certain condition
+
+```javascript
+document.addEventListener('dropdown-beingselected', function (evt) {
+  if (!myApplication.shouldDropdownItemBeSelected(evt.target)) {
+    evt.preventDefault();
+  }
+});
+```
+
+##### Example - Notifying events of all dropdown items being selected to an analytics library
+
+```javascript
+document.addEventListener('dropdown-selected', function (evt) {
+  myAnalyticsLibrary.send({
+    action: 'Dropdown item selected',
+    id: evt.target.id,
+  });
+});
+```
