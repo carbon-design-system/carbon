@@ -61,7 +61,6 @@ class Tab extends ContentSwitcher {
    * @param {Event} event The event triggering this method.
    */
   _handleClick(event) {
-    super._handleClick(event);
     const button = eventMatches(event, this.options.selectorButton);
     const trigger = eventMatches(event, this.options.selectorTrigger);
     if (button) {
