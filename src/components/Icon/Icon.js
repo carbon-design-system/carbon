@@ -88,7 +88,7 @@ export function svgShapes(svgData) {
 }
 
 export function isPrefixed(name) {
-  return name.split('--')[0] === 'icon';
+  return !!name && name.split('--')[0] === 'icon';
 }
 
 const Icon = ({

@@ -45,6 +45,10 @@ describe('Icon', () => {
     it('should recieve style props', () => {
       expect(wrapper.props().style).toEqual({ transition: '2s' });
     });
+
+    it('should not crash when there is no name prop', () => {
+      mount(<Icon />);
+    });
   });
 
   describe('Supports legacy icon', () => {
