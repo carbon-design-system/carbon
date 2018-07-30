@@ -107,7 +107,7 @@ export const getMenuOffset = (menuBody, direction) => {
     (o, name) => ({
       ...o,
       [name]: Number(
-        (/^([\d-]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]
+        (/^([\d-.]+)px$/.exec(arrowStyle.getPropertyValue(name)) || [])[1]
       ),
     }),
     {}
