@@ -195,17 +195,15 @@ export default class MultiSelect extends React.Component {
                       const itemProps = getItemProps({ item });
                       const itemText = itemToString(item);
                       const isChecked =
-                        selectedItem.findIndex(
-                          selected => item.id === selected.id
-                        ) !== -1;
+                        selectedItem
+                          .map(selected => {
+                            return selected.id;
+                          })
+                          .indexOf(item.id) !== -1;
                       return (
                         <ListBox.MenuItem
                           key={itemProps.id}
-                          isActive={
-                            selectedItem.findIndex(
-                              selected => item.id === selected.id
-                            ) !== -1
-                          }
+                          isActive={isChecked}
                           isHighlighted={highlightedIndex === index}
                           {...itemProps}>
                           <Checkbox
