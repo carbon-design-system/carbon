@@ -83,6 +83,24 @@ storiesOf('OverflowMenu', module)
       </OverflowMenu>
     )
   )
+  .add('floating menu (up)', () => (
+    <OverflowMenu {...overflowMenuEvents} floatingMenu direction="top">
+      <OverflowMenuItem
+        {...overflowMenuItemEvents}
+        itemText="Option 1"
+        primaryFocus={true}
+      />
+      <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
+      <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
+      <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
+      <OverflowMenuItem
+        {...overflowMenuItemEvents}
+        itemText="Danger option"
+        hasDivider
+        isDelete
+      />
+    </OverflowMenu>
+  ))
   .addWithInfo(
     'custom trigger',
     `

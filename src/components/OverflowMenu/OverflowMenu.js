@@ -1,9 +1,14 @@
+import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import warning from 'warning';
 import { iconOverflowMenu } from 'carbon-icons';
 import ClickListener from '../../internal/ClickListener';
-import FloatingMenu from '../../internal/FloatingMenu';
+import FloatingMenu, {
+  DIRECTION_TOP,
+  DIRECTION_BOTTOM,
+} from '../../internal/FloatingMenu';
 import OptimizedResize from '../../internal/OptimizedResize';
 import Icon from '../Icon';
 
@@ -54,17 +59,51 @@ const closest = (elem, selector) => {
 };
 
 /**
+ * The CSS property names of the arrow keyed by the floating menu direction.
+ * @type {Object<string, string>}
+ */
+const triggerButtonPositionProps = {
+  [DIRECTION_TOP]: 'bottom',
+  [DIRECTION_BOTTOM]: 'top',
+};
+
+/**
+ * Determines how the position of arrow should affect the floating menu position.
+ * @type {Object<string, number>}
+ */
+const triggerButtonPositionFactors = {
+  [DIRECTION_TOP]: -2,
+  [DIRECTION_BOTTOM]: -1,
+};
+
+/**
  * @param {Element} menuBody The menu body with the menu arrow.
+ * @param {string} direction The floating menu direction.
  * @returns {FloatingMenu~offset} The adjustment of the floating menu position, upon the position of the menu arrow.
  * @private
  */
-const getMenuOffset = menuBody => {
+export const getMenuOffset = (menuBody, direction) => {
+  const triggerButtonPositionProp = triggerButtonPositionProps[direction];
+  const triggerButtonPositionFactor = triggerButtonPositionFactors[direction];
+  if (__DEV__) {
+    invariant(
+      triggerButtonPositionProp && triggerButtonPositionFactor,
+      '[OverflowMenu] wrong floating menu direction: `%s`',
+      direction
+    );
+  }
   const menuWidth = menuBody.offsetWidth;
   const arrowStyle = menuBody.ownerDocument.defaultView.getComputedStyle(
     menuBody,
     ':before'
   );
-  const values = ['top', 'left', 'width', 'height', 'border-top-width'].reduce(
+  const values = [
+    triggerButtonPositionProp,
+    'left',
+    'width',
+    'height',
+    'border-top-width',
+  ].reduce(
     (o, name) => ({
       ...o,
       [name]: Number(
@@ -74,18 +113,12 @@ const getMenuOffset = menuBody => {
     {}
   );
   if (Object.keys(values).every(name => !isNaN(values[name]))) {
-    const {
-      top,
-      left,
-      width,
-      height,
-      'border-top-width': borderTopWidth,
-    } = values;
+    const { left, width, height, 'border-top-width': borderTopWidth } = values;
     return {
-      left:
-        menuWidth / 2 -
-        (left + Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / 2),
-      top: Math.sqrt(Math.pow(borderTopWidth, 2) * 2) - top,
+      left: menuWidth / 2 - (left + Math.sqrt(width ** 2 + height ** 2) / 2),
+      top:
+        Math.sqrt(borderTopWidth ** 2 * 2) +
+        triggerButtonPositionFactor * values[triggerButtonPositionProp],
     };
   }
 };
@@ -96,6 +129,11 @@ export default class OverflowMenu extends Component {
      * `true` if the menu should be open.
      */
     open: PropTypes.bool,
+
+    /**
+     * The menu direction, supported only with `floatingMenu={true}`.
+     */
+    direction: PropTypes.oneOf([DIRECTION_TOP, DIRECTION_BOTTOM]),
 
     /**
      * `true` if the menu alignment should be flipped.
@@ -215,6 +253,7 @@ export default class OverflowMenu extends Component {
     ariaLabel: 'list of options',
     iconDescription: 'open and close list of options',
     open: false,
+    direction: DIRECTION_BOTTOM,
     flipped: false,
     floatingMenu: false,
     onClick: () => {},
@@ -398,6 +437,7 @@ export default class OverflowMenu extends Component {
       iconDescription,
       icon,
       iconName,
+      direction,
       flipped,
       floatingMenu,
       menuOffset,
@@ -408,6 +448,14 @@ export default class OverflowMenu extends Component {
       renderIcon,
       ...other
     } = this.props;
+
+    if (__DEV__) {
+      warning(
+        floatingMenu || direction === DIRECTION_BOTTOM,
+        '[OverflowMenu] menu direction other than `bottom` is only supporting with `floatingMenu` option. Received: `%s`',
+        direction
+      );
+    }
 
     const { open } = this.state;
 
@@ -451,11 +499,14 @@ export default class OverflowMenu extends Component {
       <div role="menuitem">
         <FloatingMenu
           menuPosition={this.state.menuPosition}
+          menuDirection={direction}
           menuOffset={flipped ? menuOffsetFlip : menuOffset}
           menuRef={this._bindMenuBody}
           target={this._getTarget}
           onPlace={this._handlePlace}>
-          {menuBody}
+          {React.cloneElement(menuBody, {
+            'data-floating-menu-direction': direction,
+          })}
         </FloatingMenu>
       </div>
     );
