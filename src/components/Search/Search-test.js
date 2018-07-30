@@ -205,3 +205,36 @@ describe('SearchSkeleton Small', () => {
     });
   });
 });
+
+describe('Detecting change in value from props', () => {
+  it('changes the hasContent state upon change in props', () => {
+    const wrapper = shallow(
+      <Search
+        id="test"
+        className="extra-class"
+        label="Search Field"
+        labelText="testlabel"
+        value="foo"
+      />
+    );
+    expect(wrapper.state().hasContent).toBeTruthy();
+    wrapper.setProps({ value: '' });
+    expect(wrapper.state().hasContent).toBeFalsy();
+  });
+
+  it('avoids change the hasContent state upon setting props, unless the value actually changes', () => {
+    const wrapper = shallow(
+      <Search
+        id="test"
+        className="extra-class"
+        label="Search Field"
+        labelText="testlabel"
+        value="foo"
+      />
+    );
+    expect(wrapper.state().hasContent).toBeTruthy();
+    wrapper.setState({ hasContent: false });
+    wrapper.setProps({ value: 'foo' });
+    expect(wrapper.state().hasContent).toBeFalsy();
+  });
+});

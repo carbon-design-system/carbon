@@ -29,7 +29,18 @@ export default class Search extends Component {
 
   state = {
     hasContent: this.props.value || this.props.defaultValue || false,
+    prevValue: this.props.value,
   };
+
+  static getDerivedStateFromProps({ value }, state) {
+    const { prevValue } = state || {};
+    return state && prevValue === value
+      ? null
+      : {
+          hasContent: !!value,
+          prevValue: value,
+        };
+  }
 
   clearInput = evt => {
     if (!this.props.value) {

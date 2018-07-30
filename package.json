@@ -195,6 +195,9 @@
     "validate-commit-msg": "^2.10.1",
     "whatwg-fetch": "^2.0.3"
   },
+  "resolutions": {
+    "enzyme-adapter-react-16/react-test-renderer": "^16.4.0"
+  },
   "release": {
     "branch": "master"
   },
