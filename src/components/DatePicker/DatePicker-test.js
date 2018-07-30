@@ -2,6 +2,7 @@ import React from 'react';
 import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
+import DatePickerInput from '../DatePickerInput/DatePickerInput';
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
@@ -122,6 +123,31 @@ describe('DatePicker', () => {
 
     it('should not render an icon', () => {
       expect(icon.length).toEqual(0);
+    });
+  });
+
+  describe('Single date picker with initial value', () => {
+    const wrapper = mount(
+      <DatePicker
+        datePickerType="single"
+        dateFormat="m/d/Y"
+        value={'02/26/2017'}
+        onChange={() => {}}>
+        <DatePickerInput
+          key="label"
+          labelText="Controlled Date"
+          id="date-picker-input-id"
+        />
+      </DatePicker>
+    );
+
+    it('has the value as expected', () => {
+      // MOUNT
+      expect(wrapper.props().value).toEqual('02/26/2017');
+
+      // UPDATE
+      wrapper.setProps({ value: '02/17/2017' });
+      expect(wrapper.props().value).toEqual('02/17/2017');
     });
   });
 
