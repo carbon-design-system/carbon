@@ -51,6 +51,14 @@ export default class CodeSnippet extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.children !== prevProps.children && this.codeContent) {
+      if (this.codeContent.getBoundingClientRect().height > 255) {
+        this.setState({ shouldShowMoreLessBtn: true });
+      }
+    }
+  }
+
   expandCode = () => {
     this.setState({ expandedCode: !this.state.expandedCode });
   };
