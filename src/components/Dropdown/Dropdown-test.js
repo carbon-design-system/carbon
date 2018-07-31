@@ -32,6 +32,14 @@ describe('Dropdown', () => {
       expect(wrapper.hasClass('bx--dropdown--disabled')).toEqual(true);
     });
 
+    it('has the expected classes when light is true', () => {
+      const wrapper = shallow(
+        <Dropdown defaultText="Choose something.." light />
+      ).childAt(0);
+
+      expect(wrapper.hasClass('bx--dropdown--light')).toEqual(true);
+    });
+
     it('should add extra classes that are passed via className', () => {
       expect(dropdownWrapper.hasClass('extra-class')).toEqual(true);
     });

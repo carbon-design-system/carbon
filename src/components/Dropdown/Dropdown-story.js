@@ -79,6 +79,28 @@ storiesOf('Dropdown', module)
     )
   )
   .addWithInfo(
+    'light',
+    `
+      The Dropdown component is used for navigating or filtering existing content.
+      You can also have an option preselected in the dropdown.
+    `,
+    () => (
+      <Dropdown
+        {...dropdownEvents}
+        onChange={selectedItemInfo => console.log(selectedItemInfo)}
+        onOpen={action('onOpen')}
+        onClose={action('onClose')}
+        defaultText="Dropdown label"
+        light>
+        <DropdownItem itemText="Option 1" value="option1" />
+        <DropdownItem itemText="Option 2" value="option2" />
+        <DropdownItem itemText="Option 3" value="option3" />
+        <DropdownItem itemText="Option 4" value="option4" />
+        <DropdownItem itemText="Option 5" value="option5" />
+      </Dropdown>
+    )
+  )
+  .addWithInfo(
     'with pre-selected value',
     `
         The Dropdown component is used for navigating or filtering existing content.

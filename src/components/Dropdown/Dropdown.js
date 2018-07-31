@@ -24,12 +24,14 @@ export default class Dropdown extends PureComponent {
     open: PropTypes.bool,
     iconDescription: PropTypes.string,
     disabled: PropTypes.bool,
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
     tabIndex: 0,
     open: false,
     disabled: false,
+    light: false,
     iconDescription: 'open list of options',
     onChange: () => {},
     onOpen: () => {},
@@ -134,6 +136,7 @@ export default class Dropdown extends PureComponent {
       defaultText, // eslint-disable-line no-unused-vars
       iconDescription,
       disabled,
+      light,
       selectedText, // eslint-disable-line no-unused-vars
       onOpen, // eslint-disable-line no-unused-vars
       onClose, // eslint-disable-line no-unused-vars
@@ -156,6 +159,7 @@ export default class Dropdown extends PureComponent {
       'bx--dropdown': true,
       'bx--dropdown--open': this.state.open,
       'bx--dropdown--disabled': disabled,
+      'bx--dropdown--light': light,
       [this.props.className]: this.props.className,
     });
 
