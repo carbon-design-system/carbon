@@ -33,7 +33,7 @@
     "node": ">=6.x"
   },
   "dependencies": {
-    "carbon-icons": "^6.0.4",
+    "carbon-icons": "^7.0.7",
     "flatpickr": "2.6.3",
     "lodash.debounce": "^4.0.8",
     "warning": "^3.0.0"

@@ -9,12 +9,42 @@
 
 ### Javascript
 
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { ContentSwitcher } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var ContentSwitcher = CarbonComponents.ContentSwitcher;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-content-switcher` is an element with `[data-content-switcher]` attribute
+ContentSwitcher.create(document.getElementById('my-content-switcher'));
+```
+
 #### Public Methods
 
 | Name      | Params                        | Description                                                                                                           |
 |-----------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | setActive | item: `HTMLElement`, callback: `Function` | Uses `data-target` attribute to show a content panel using the given CSS selector. Non-active targets will be hidden. You can also pass in an optional callback function, see FAQ for details |
 | release   |                               | Deletes the instance and removes document event listeners                                                             |
+
+##### Example - Changing the active item
+
+```javascript
+// `#my-content-switcher` is an element with `[data-content-switcher]` attribute
+var contentSwitcherInstance = ContentSwitcher.create(document.getElementById('my-content-switcher'));
+// `#my-content-switcher-btn-1` is one of the `<button>`s with `bx--content-switcher-btn` class
+contentSwitcherInstance.setActive(document.getElementById('my-content-switcher-btn-1'));
+```
 
 #### Options
 
@@ -33,6 +63,27 @@
 |--------------------------------|--------------------------------------------------------------------|
 | content-switcher-beingselected | Custom event fired before a button is selected in content-switcher |
 | content-switcher-selected      | Custom event fired after a button is selected in content-switcher  |
+
+##### Example - Preventing a content switcher item from being selected in a certain condition
+
+```javascript
+document.addEventListener('content-switcher-beingselected', function (evt) {
+  if (!myApplication.shouldContentSwitcherItemBeSelected(evt.target)) {
+    evt.preventDefault();
+  }
+});
+```
+
+##### Example - Notifying events of all content switcher items being selected to an analytics library
+
+```javascript
+document.addEventListener('content-switcher-selected', function (evt) {
+  myAnalyticsLibrary.send({
+    action: 'Content switcher item selected',
+    id: evt.target.id,
+  });
+});
+```
 
 #### Classes
 
@@ -83,7 +134,7 @@ Below is an HTML setup for Content Switcher that will do the following:
 Use `setActive` class method to preset the selection on a Content Switcher; doing this will avoid manually adding `bx--content-switcher--selected` modifier class and `hidden` attributes on HTML.
 
 ```html
-<div data-content-switcher class="bx--content-switcher">
+<div data-content-switcher id="my-content-switcher" class="bx--content-switcher">
   <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-1">Option 1</button>
   <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-2">Option 2</button>
   <button class="bx--content-switcher-btn" data-target=".demo--panel--opt-3">Option 3</button>
@@ -102,8 +153,10 @@ Use `setActive` class method to preset the selection on a Content Switcher; doin
 ```js
 // Get HTMLelement for button to preselect it with setActive
 const button = document.querySelector('[data-target=".demo--panel--opt-2"]');
-// Initialize an instance of ContentSwitcher with init(), create() or new ContentSwitcher(element)
-const instance = ContentSwitcher.init();
+// Initialize an instance of ContentSwitcher with init(), create(element) or new ContentSwitcher(element)
+ContentSwitcher.init();
+// Grab an ContentSwitcher instance
+const instance = ContentSwitcher.components.get(document.getElementById('my-content-switcher'));
 // Use setActive
 instance.setActive(button);
 ```

@@ -30,6 +30,27 @@ Use these modifiers with `.bx--toast-notification` class.
 
 ### JavaScript
 
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { Notification } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var Notification = CarbonComponents.Notification;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-notification` is an element with `[data-notification]` attribute
+Notification.create(document.getElementById('my-notification'));
+```
+
 #### Public Methods
 
 | Name    | Params | Description                                                                       |
@@ -37,6 +58,13 @@ Use these modifiers with `.bx--toast-notification` class.
 | remove  |        | Removes the component, deletes the instance, and removes document event listeners |
 | release |        | Delete the instance                                                               |
 
+##### Example - Removing a notification
+
+```javascript
+// `#my-notification` is an element with `[data-notification]` attribute
+notificationInstance = Notification.create(document.getElementById('my-notification'));
+notificationInstance.remove();
+```
 
 #### Options
 
@@ -47,6 +75,26 @@ Use these modifiers with `.bx--toast-notification` class.
 | eventBeforeDeleteNotification | `notification-before-delete` | Event before deleting the notification                    |
 | eventAfterDeleteNotification  | `notification-after-delete`  | Event after deleting the notification                     |
 
+##### Example - Preventing a notification from being removed in a certain condition
+
+```javascript
+document.addEventListener('notification-before-delete', function (evt) {
+  if (!myApplication.shouldNotificationBeRemoved(evt.target)) {
+    evt.preventDefault();
+  }
+});
+```
+
+##### Example - Notifying events of all notifications being removed to an analytics library
+
+```javascript
+document.addEventListener('notification-after-delete', function (evt) {
+  myAnalyticsLibrary.send({
+    action: 'Notification removed',
+    id: evt.target.id,
+  });
+});
+```
 
 ### FAQ 
 

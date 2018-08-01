@@ -12,6 +12,43 @@ Modifiers are used with various classes for Tabs.
 
 ### JavaScript
 
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { Tabs } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var Tabs = CarbonComponents.Tabs;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-tabs` is an element with `[data-tabs]` attribute
+Tabs.create(document.getElementById('my-tabs'));
+```
+
+#### Public Methods
+
+| Name      | Params                        | Description                                                                                                           |
+|-----------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| setActive | item: `HTMLElement`, callback: `Function` | Uses `data-target` attribute to show a content panel using the given CSS selector. Non-active targets will be hidden. You can also pass in an optional callback function, see FAQ in Content Switcher for details |
+| release   |                               | Deletes the instance and removes document event listeners                                                             |
+
+##### Example - Changing the active item
+
+```javascript
+// `#my-tabs` is an element with `[data-tabs]` attribute
+var tabsInstance = Tabs.create(document.getElementById('my-tabs'));
+// `#my-tab-item-1` is one of the `<li>`s with `bx--tabs__nav-item` class
+tabsInstance.setActive(document.getElementById('my-tab-item-1'));
+```
+
 #### Options
 
 | Option                 | Default Selector              | Description                                                                            |
@@ -34,3 +71,24 @@ Modifiers are used with various classes for Tabs.
 |---------------------|-----------------------------------------------------------------------------------------------------------------|
 | tab-beingselected   | The name of the custom event fired before a tab is selected. Cancellation of this event stops selection of tab. |
 | tab-selected        | The name of the custom event fired after a tab is selected                                                      |
+
+##### Example - Preventing a tab from being selected in a certain condition
+
+```javascript
+document.addEventListener('tab-beingselected', function (evt) {
+  if (!myApplication.shouldTabItemBeSelected(evt.target)) {
+    evt.preventDefault();
+  }
+});
+```
+
+##### Example - Notifying events of all tab items being selected to an analytics library
+
+```javascript
+document.addEventListener('tab-selected', function (evt) {
+  myAnalyticsLibrary.send({
+    action: 'Tab selected',
+    id: evt.target.id,
+  });
+});
+```

@@ -12,6 +12,27 @@ Use these modifiers with `.bx--progress` class.
 
 ### Javascript
 
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { ProgressIndicator } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var ProgressIndicator = CarbonComponents.ProgressIndicator;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-progress` is an element with `[data-progress]` attribute
+ProgressIndicator.create(document.getElementById('my-progress'));
+```
+
 #### Public Methods
 
 | Name       | Params                   | Description                                                                                                                                                                                                                                                    |
@@ -19,6 +40,18 @@ Use these modifiers with `.bx--progress` class.
 | getSteps   |                          | Returns Array of Objects with `element` and `order` key/value pairs. The `element` key contains a step element. The `order` key is what order the step element is, order starts counting from 1 (the first step element) to whatever the last step element is. |
 | getCurrent |                          | Returns an Object with data of the current step (`element` and `order` key/value pairs)                                                                                                                                                                        |
 | setCurrent | newCurrentStep: `Number` | Changes the current step with the given `index` number. (ex. `setCurrent(0)` sets the first step as the current step)                                                                                                                                          |
+
+##### Example - Changing the current step
+
+```javascript
+// `#my-progress` is an element with `[data-progress]` attribute
+var progressIndicatorInstance = ProgressIndicator.create(document.getElementById('my-progress'));
+// Sets the 2nd step current
+progressIndicatorInstance.setCurrent(1);
+```
+
+- All index numbers less than the current index will be complete
+- All index numbers greater than the current index will be incomplete
 
 #### Options
 
@@ -61,23 +94,3 @@ Once `ProgressIndicator` instance is initialized, simply add or remove Progress 
 ```
 
 Note that each progress step will need a modifier class. In the example above, it is `bx--progress-step--complete`, but the JavaScript will set this to the appropriate modifier class relative to the current step as indicated by `bx--progress-step--incomplete`.
-
-#### How to set current Progress step 
-
-Use the `setCurrent(index)` class method. The `index` number corresponds to a progress step.
-
-```js
-const instance = ProgressIndicator.create(document.querySelector('[data-progress]'));
-
-// Sets the first progress step as the current step
-instance.setCurrent(0)
-
-// Sets the second progress step as the current step
-instance.setCurrent(1)
-
-// Sets the third progress step as the current step
-instance.setCurrent(2)
-```
-
-- All index numbers less than the current index will be complete
-- All index numbers greater than the current index will be incomplete

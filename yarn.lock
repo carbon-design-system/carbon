@@ -1979,9 +1979,9 @@ carbon-components-react@^5.8.0:
     warning "3.0.0"
     window-or-global "^1.0.1"
 
-carbon-icons@^6.0.4:
-  version "6.3.2"
-  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-6.3.2.tgz#2cc942225442b0d5c02593e344b50c7ec22edf28"
+carbon-icons@^7.0.7:
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-7.0.7.tgz#ebafe3e9fa25df973796a8eca06d8a7c501cc610"
 
 cardinal@^1.0.0:
   version "1.0.0"
