@@ -1,4 +1,25 @@
-### JavaScript
+### JavaScript (Applied *only* to click-to-open tooltip)
+
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { Tooltip } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var Tooltip = CarbonComponents.Tooltip;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-tooltip-trigger` is an element with `[data-tooltip-trigger]` attribute
+Tooltip.create(document.getElementById('my-tooltip-trigger'));
+```
 
 #### Attributes
 
@@ -15,12 +36,67 @@
 | hide    |        | Hides the tooltip.                                         |
 | release |        | Deletes the instance and removes document event listeners. |
 
+##### Example - Showing tooltip
+
+```javascript
+// `#my-tooltip-trigger` is an element with `[data-tooltip-trigger]` attribute
+var tooltipInstance = Tooltip.create(document.getElementById('my-tooltip-trigger'));
+tooltipInstance.show();
+```
+
 #### Options
 
 | Option                   | Default Selector                | Description                                                                            |
 |--------------------------|---------------------------------|----------------------------------------------------------------------------------------|
 | `selectorInit`           | `[data-tooltip-trigger]`        | The CSS selector to find the tooltip.
 | `objMenuOffset`          | `{ top: 10, left: 0 }`          | An object containing the top and left offset values in px
+
+##### Example - Changing menu position by 8 pixels vertically
+
+```javascript
+// `#my-tooltip-trigger` is an element with `[data-tooltip-trigger]` attribute
+Tooltip.create(document.getElementById('my-tooltip-trigger'), {
+  objMenuOffset(menuBody, direction) {
+    const { objMenuOffset: offset } = Tooltip.options;
+    const { top, left } = typeof offset !== 'function' ? offset:
+      offset(menuBody, direction);
+    return {
+      top: top + 8,
+      left,
+    };
+  },
+});
+```
+
+#### Events
+
+| Event Name                  | Description                                         |
+|-----------------------------|-----------------------------------------------------|
+| 'floating-menu-beingshown'  | The custom event fired before the menu gets open.   |
+| 'floating-menu-shown'       | The custom event fired after the menu gets open.    |
+| 'floating-menu-beinghidden' | The custom event fired before the menu gets closed. |
+| 'floating-menu-hidden'      | The custom event fired after the menu gets closed.  |
+
+##### Example - Preventing click-to-open tooltip from being closed in a certain condition
+
+```javascript
+document.addEventListener('floating-menu-beinghidden', function (evt) {
+  if (myApplication.shouldTooltipKeptOpen(evt.target)) {
+    evt.preventDefault();
+  }
+});
+```
+
+##### Example - Notifying events of all click-to-open tooltips being hidden to an analytics library
+
+```javascript
+document.addEventListener('floating-menu-hidden', function (evt) {
+  myAnalyticsLibrary.send({
+    action: 'Tooltip hidden',
+    id: evt.target.id,
+  });
+});
+```
 
 ### Interactive tooltip
 
