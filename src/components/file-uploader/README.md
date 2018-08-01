@@ -1,11 +1,41 @@
 ### JavaScript
 
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { FileUploader } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var FileUploader = CarbonComponents.FileUploader;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-file` is an element with `[data-file]` attribute
+FileUploader.create(document.getElementById('my-file'));
+```
+
 #### Public Methods
 
 | Name     | Params                                 | Description                                                                                                       |
 |----------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | setState | state: `String`, selectIndex: `Number` | After files are added, call this method to change `state` of the filenames (`'upload'`, `'complete'`, `'edit'`).  |
 | release  |                                        | Deletes the instance                                                                                              |
+
+##### Example - Changing the uploading state
+
+```javascript
+// `#my-file` is an element with `[data-file]` attribute
+var fileUploaderInstance = FileUploader.create(document.getElementById('my-file'));
+// Makes the 2nd file shown as its uploading complete
+fileUploaderInstance.setState('complete', 1);
+```
 
 #### Options
 

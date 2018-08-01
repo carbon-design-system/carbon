@@ -11,6 +11,27 @@ Use these modifiers with .bx--overflow-menu-options class.
 
 ### JavaScript
 
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { OverflowMenu } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var OverflowMenu = CarbonComponents.OverflowMenu;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-overflow-menu` is an element with `[data-overflow-menu]` attribute
+OverflowMenu.create(document.getElementById('my-overflow-menu'));
+```
+
 #### Public Methods
 
 | Name                 | Params          | Description                                                        |
@@ -27,6 +48,53 @@ Use these modifiers with .bx--overflow-menu-options class.
 | `selectorOptionMenu`        | `.bx--overflow-menu-options`             | The CSS selector to find the contents of the menu
 | `objMenuOffset`    | `{ top: 3, left: 61`        | An object containing the top and left offset values in px
 | `objMenuOffsetFlip`    | `{ top: 3, left: -61`        | An object containing the top and left offset values in px for the "flipped" state
+
+##### Example - Changing menu position by 8 pixels vertically
+
+```javascript
+// `#my-overflow-menu` is an element with `[data-overflow-menu]` attribute
+OverflowMenu.create(document.getElementById('my-overflow-menu'), {
+  objMenuOffset(menuBody, direction) {
+    const { objMenuOffset: offset } = OverflowMenu.options;
+    const { top, left } = typeof offset !== 'function' ? offset:
+      offset(menuBody, direction);
+    return {
+      top: top + 8,
+      left,
+    };
+  },
+});
+```
+
+#### Events
+
+| Event Name                  | Description                                         |
+|-----------------------------|-----------------------------------------------------|
+| 'floating-menu-beingshown'  | The custom event fired before the menu gets open.   |
+| 'floating-menu-shown'       | The custom event fired after the menu gets open.    |
+| 'floating-menu-beinghidden' | The custom event fired before the menu gets closed. |
+| 'floating-menu-hidden'      | The custom event fired after the menu gets closed.  |
+
+##### Example - Preventing menu from being closed in a certain condition
+
+```javascript
+document.addEventListener('floating-menu-beinghidden', function (evt) {
+  if (myApplication.shouldMenuKeptOpen(evt.target)) {
+    evt.preventDefault();
+  }
+});
+```
+
+##### Example - Notifying events of all overflow menus being closed to an analytics library
+
+```javascript
+document.addEventListener('floating-menu-hidden', function (evt) {
+  myAnalyticsLibrary.send({
+    action: 'Overflow menu closed',
+    id: evt.target.id,
+  });
+});
+```
 
 ### HTML
 
