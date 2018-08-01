@@ -36,6 +36,9 @@ const Select = ({
   return (
     <div className="bx--form-item">
       <div className={selectClasses}>
+        <label htmlFor={id} className={labelClasses}>
+          {labelText}
+        </label>
         <select
           {...other}
           id={id}
@@ -51,9 +54,6 @@ const Select = ({
           className="bx--select__arrow"
           description={iconDescription}
         />
-        <label htmlFor={id} className={labelClasses}>
-          {labelText}
-        </label>
         {error}
       </div>
     </div>
