@@ -561,6 +561,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "zgrossbart",
+      "name": "Zack Grossbart",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/664044?v=4",
+      "profile": "http://www.zackgrossbart.com/",
+      "contributions": [
+        "code"
+      ]
     }
-  ]
+  ],
+  "repoType": "github"
 }
