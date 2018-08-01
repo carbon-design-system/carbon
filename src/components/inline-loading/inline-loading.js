@@ -64,7 +64,7 @@ class InlineLoading extends mixin(createComponent, initComponentBySearch, handle
 
   /**
    * The list of states.
-   * @type {Object{<string, string}}
+   * @type {Object<string, string>}
    */
   static states = {
     INACTIVE: 'inactive',

@@ -25,12 +25,41 @@ The update to tables splits out the `scss` files into multiple partial files wit
 
 ### JavaScript
 
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { DataTableV2 } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var DataTableV2 = CarbonComponents.DataTableV2;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-data-table-v2` is an element with `[data-data-table-v2]` attribute
+DataTableV2.create(document.getElementById('my-data-table-v2'));
+```
+
 #### Public Methods
 
 | Name        | Params | Descriptions                                                                                                      |
 |-------------|--------|-------------------------------------------------------------------------------------------------------------------|
 | release     |        | Deletes the instance and removes document event listeners                                                         |
 | refreshRows |        | When adding in new table rows, reinitialize parent-child relationships. Not required if not using expandable rows |
+
+##### Example - Keeping data table in sync with dynamic change in rows list (For expantable table)
+
+```javascript
+// `#my-data-table-v2` is an element with `[data-data-table-v2]` attribute
+var dataTableV2Instance = DataTableV2.create(document.getElementById('my-data-table-v2'));
+dataTableV2Instance.refreshRows();
+```
 
 #### Events
 
@@ -43,6 +72,27 @@ The update to tables splits out the `scss` files into multiple partial files wit
 | eventTrigger             | [data-event]                     | Data attribute for clickable events        |
 | eventParentContainer     | [data-parent-row]                | Data attribute for event container         |
 
+##### Example - Preventing a table expando from being toggled in a certain condition
+
+```javascript
+document.addEventListener('data-table-v2-beforetoggleexpand', function (evt) {
+  if (!myApplication.shouldToggleExpando(evt.target)) {
+    evt.preventDefault();
+  }
+});
+```
+
+##### Example - Sorting table content
+
+```javascript
+document.addEventListener('data-table-v2-aftertogglesort', function (evt) {
+  // `evt.target` will be `div.bx--data-table-v2-container`
+  // `evt.detail.element` will be `button.bx--table-sort-v2` whose sorting is changed,
+  // and will have `bx--table-sort-v2--ascending` class or not depending on the sorting state
+  evt.target.querySelector('tbody').innerHTML
+    = myApplication.resortTableContent(evt.target, evt.detail.element);
+});
+```
 
 #### Options
 
