@@ -1,6 +1,25 @@
 ### JavaScript
 
-The date picker is built on top of [Flatpickr](https://chmln.github.io/flatpickr/), so the [events](https://chmln.github.io/flatpickr/events/) and [config options](https://chmln.github.io/flatpickr/options/) that come with Flatpickr is therefore available to the date picker. This includes methods for setting a min date, max date, disabling date(s), specifiying a range of dates, and more.
+#### Getting component class reference
+
+##### ES2015
+
+```javascript
+import { DatePicker } from 'carbon-components';
+```
+
+##### With pre-build bundle (`carbon-components.min.js`)
+
+```javascript
+var DatePicker = CarbonComponents.DatePicker;
+```
+
+#### Instantiating
+
+```javascript
+// `#my-date-picker` is an element with `[data-date-picker]` attribute
+DatePicker.create(document.getElementById('my-date-picker'));
+```
 
 #### Public Methods
 
@@ -26,6 +45,18 @@ The date picker is built on top of [Flatpickr](https://chmln.github.io/flatpickr
 | attribType | data-date-picker-type       | Specifies the calendar mode (single or range) |
 | dateFormat | 'm/d/Y' | The date format given to the calendar instance |
 
+The date picker is built on top of [Flatpickr](https://chmln.github.io/flatpickr/), so many of the [events](https://chmln.github.io/flatpickr/events/) and [config options](https://chmln.github.io/flatpickr/options/) that come with Flatpickr is therefore available to the date picker options. This includes methods for setting a min date, max date, disabling date(s), specifiying a range of dates, and more.
+
+##### Example - Getting notified of date picker dropdown being closed
+
+```javascript
+// `#my-date-picker` is an element with `[data-date-picker]` attribute
+DatePicker.create(document.getElementById('my-date-picker'), {
+  onClose() {
+    console.log('Date picker dropdown closed!');
+  },
+});
+```
 
 ### FAQ 
 
