@@ -165,6 +165,35 @@
     }
   }
 
+  .#{$prefix}--batch-edit-status {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    color: $ui-01;
+  }
+
+  .#{$prefix}--batch-edit-summary {
+    padding-left: rem(16px);
+
+    &__cancel {
+      margin: 0 rem(8px);
+    }
+
+    &__save {
+      .#{$prefix}--inline-loading__text {
+        order: 1;
+      }
+
+      .#{$prefix}--inline-loading__animation {
+        order: 2;
+      }
+
+      .#{$prefix}--inline-loading ~ .#{$prefix}--btn__icon {
+        display: none;
+      }
+    }
+  }
+
   .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-content {
     opacity: 1;
