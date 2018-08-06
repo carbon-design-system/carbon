@@ -104,6 +104,7 @@ storiesOf('TextInput', module)
     () => (
       <div>
         <TextInputSkeleton />
+        <br />
         <TextInputSkeleton hideLabel />
       </div>
     )

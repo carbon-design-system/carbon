@@ -58,8 +58,8 @@ const TextArea = ({
 
   return (
     <div className="bx--form-item">
-      {input}
       {label}
+      {input}
       {error}
     </div>
   );

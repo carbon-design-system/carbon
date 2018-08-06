@@ -98,8 +98,8 @@ export default class DatePickerInput extends Component {
     return (
       <div className="bx--date-picker-container">
         {datePickerIcon}
-        {input}
         {label}
+        {input}
         {error}
       </div>
     );

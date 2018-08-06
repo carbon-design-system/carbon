@@ -67,8 +67,8 @@ const TextInput = ({
 
   return (
     <div className="bx--form-item">
-      {input}
       {label}
+      {input}
       {error}
     </div>
   );

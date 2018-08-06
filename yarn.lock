@@ -2776,22 +2776,22 @@ caniuse-lite@^1.0.30000791, caniuse-lite@^1.0.30000792:
   version "1.0.30000792"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000792.tgz#d0cea981f8118f3961471afbb43c9a1e5bbf0332"
 
-carbon-components@^9.2.0:
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.3.0.tgz#59349a381369cb9aa9d05ddd35db9c39dee108c9"
+carbon-components@^9.6.1:
+  version "9.6.1"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.6.1.tgz#71f16ae84f1b29ed72b8c174ab8b9660a3e74734"
   dependencies:
-    carbon-icons "^6.0.4"
+    carbon-icons "^7.0.7"
     flatpickr "2.6.3"
     lodash.debounce "^4.0.8"
     warning "^3.0.0"
 
-carbon-icons@^6.0.4:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-6.2.0.tgz#84f568a64b1465c52183eb26de736893b3d8abdb"
-
 carbon-icons@^7.0.5:
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-7.0.5.tgz#cd0c44dd96c6853544445bd9a71da6e602793b9c"
+
+carbon-icons@^7.0.7:
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-7.0.7.tgz#ebafe3e9fa25df973796a8eca06d8a7c501cc610"
 
 cardinal@^1.0.0:
   version "1.0.0"

@@ -186,6 +186,9 @@ export default class NumberInput extends Component {
               />
             </button>
           </div>
+          <label htmlFor={id} className="bx--label">
+            {label}
+          </label>
           <input
             type="number"
             pattern="[0-9]*"
@@ -193,9 +196,6 @@ export default class NumberInput extends Component {
             {...props}
             ref={this._handleInputRef}
           />
-          <label htmlFor={id} className="bx--label">
-            {label}
-          </label>
           {error}
         </div>
       </div>
