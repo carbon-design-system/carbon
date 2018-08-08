@@ -1,24 +1,21 @@
-## Overview
+Closes #
 
-Resolves {{ issue number(s) here }}
+{{short description}}
 
-{{ Description about the PR }}
+#### Changelog
 
-{{ Include images and gifs when applicable }}
+**New**
 
-### Added
+- {{new thing}}
 
-{{ Description of things added }}
+**Changed**
 
-### Removed
+- {{change thing}}
 
-{{ Description of things removed }}
+**Removed**
 
-### Changed
+- {{removed thing}}
 
-{{ Description of things changed }}
-
-
-## Testing / Reviewing
+#### Testing / Reviewing
 
 {{ Add descriptions, steps or a checklist for how reviewers can verify this PR works or not }}
