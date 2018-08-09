@@ -30,12 +30,12 @@
 
     tr:hover {
       td {
-        border-color: $ui-04;
+        border-color: $ui-03;
         background: transparent;
 
         &:first-of-type,
         &:last-of-type {
-          border-color: $ui-04;
+          border-color: $ui-03;
         }
       }
     }
