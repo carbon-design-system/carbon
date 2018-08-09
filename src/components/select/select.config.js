@@ -1,5 +1,44 @@
 'use strict';
 
+const items = [
+  {
+    label: 'Choose an option',
+    disabled: true,
+    selected: true,
+    hidden: true,
+  },
+  {
+    label: 'A much longer option that is worth having around to check how text flows',
+    value: 'solong',
+  },
+  {
+    label: 'Category 1',
+    items: [
+      {
+        label: 'Option 1',
+        value: 'option1',
+      },
+      {
+        label: 'Option 2',
+        value: 'option2',
+      },
+    ],
+  },
+  {
+    label: 'Category 2',
+    items: [
+      {
+        label: 'Option 1',
+        value: 'option1',
+      },
+      {
+        label: 'Option 2',
+        value: 'option2',
+      },
+    ],
+  },
+];
+
 module.exports = {
   variants: [
     {
@@ -11,6 +50,9 @@ module.exports = {
         dissapear and the field will reflect the user's choice. Create Select Item components for each
         option in the list.
       `,
+      context: {
+        items,
+      },
     },
     {
       name: 'inline',
@@ -18,6 +60,7 @@ module.exports = {
       notes: 'Inline select is for use when there will be multiple elements in a row.',
       context: {
         inline: true,
+        items,
       },
     },
     {
@@ -25,6 +68,7 @@ module.exports = {
       label: 'Select (Light)',
       context: {
         light: true,
+        items,
       },
     },
     {
@@ -32,6 +76,7 @@ module.exports = {
       label: 'Select (Invalid)',
       context: {
         invalid: true,
+        items,
       },
     },
     {
@@ -40,6 +85,7 @@ module.exports = {
       context: {
         inline: true,
         invalid: true,
+        items,
       },
     },
     {
@@ -48,6 +94,7 @@ module.exports = {
       context: {
         light: true,
         invalid: true,
+        items,
       },
     },
   ],

@@ -1,13 +1,11 @@
 <footer class="bx--footer bx--footer--bottom-fixed" role="contentinfo">
   <div class="bx--footer-info">
-    <div class="bx--footer-info__item">
-      <p class="bx--footer-label">Need Help?</p>
-      <a class="bx--link" href="#">Contact Bluemix Sales</a>
-    </div>
-    <div class="bx--footer-info__item">
-      <p class="bx--footer-label">Estimate Monthly Cost</p>
-      <a class="bx--link" href="#">Cost Calculator</a>
-    </div>
+    {{#each items}}
+      <div class="bx--footer-info__item">
+        <p class="bx--footer-label">{{title}}</p>
+        <a class="bx--link" href="#">{{label}}Contact Bluemix Sales</a>
+      </div>
+    {{/each}}
   </div>
   <div class="bx--footer-cta">
     <button class="bx--btn bx--btn--primary" type="submit">Create</button>

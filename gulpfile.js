@@ -255,17 +255,21 @@ gulp.task('sass:source', () => {
   return gulp.src(srcFiles).pipe(gulp.dest('scss'));
 });
 
-gulp.task('html:source', () =>
-  templates.render().then(renderedItems => {
+gulp.task('html:source', () => {
+  const names = {
+    'notification--default': 'inline-notification',
+    'notification--toast': 'toast-notification',
+  };
+  return templates.render().then(renderedItems => {
     const promises = [];
     renderedItems.forEach((rendered, item) => {
       const dirname = path.dirname(path.resolve(__dirname, 'html', item.relViewPath));
-      const filename = `${item.handle.replace(/--default$/, '')}.html`;
+      const filename = `${names[item.handle] || item.handle.replace(/--default$/, '')}.html`;
       promises.push(mkdirp(dirname).then(() => writeFile(path.resolve(dirname, filename), rendered)));
     });
     return Promise.all(promises);
-  })
-);
+  });
+});
 
 /**
  * JSDoc

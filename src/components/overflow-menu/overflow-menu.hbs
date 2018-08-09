@@ -7,24 +7,11 @@
     </g>
   </svg>
   <ul class="bx--overflow-menu-options" tabindex="-1" data-floating-menu-direction="{{direction}}">
-    <li class="bx--overflow-menu-options__option">
-      <button class="bx--overflow-menu-options__btn" data-floating-menu-primary-focus>Option 1</button>
-    </li>
-    <li class="bx--overflow-menu-options__option">
-      <button class="bx--overflow-menu-options__btn">Option 2</button>
-    </li>
-    <li class="bx--overflow-menu-options__option">
-      <button class="bx--overflow-menu-options__btn">Option 3</button>
-    </li>
-    <li class="bx--overflow-menu-options__option">
-      <button class="bx--overflow-menu-options__btn">Option 4</button>
-    </li>
-    <li class="bx--overflow-menu-options__option bx--overflow-menu-options__option--disabled">
-      <button class="bx--overflow-menu-options__btn" tabindex="-1">Disabled</button>
-    </li>
-    <li class="bx--overflow-menu-options__option bx--overflow-menu-options__option--danger">
-      <button class="bx--overflow-menu-options__btn">Danger option</button>
-    </li>
+    {{#each items}}
+      <li class="bx--overflow-menu-options__option{{#if disabled}} bx--overflow-menu-options__option--disabled{{/if}}{{#if danger}} bx--overflow-menu-options__option--danger{{/if}}">
+        <button class="bx--overflow-menu-options__btn"{{#if title}} title="{{title}}"{{/if}}{{#if primaryFocus}} data-floating-menu-primary-focus{{/if}}{{#if disabled}} tabindex="-1"{{/if}}>{{label}}</button>
+      </li>
+    {{/each}}
   </ul>
 </div>
 
@@ -37,23 +24,10 @@
     </g>
   </svg>
   <ul class="bx--overflow-menu-options bx--overflow-menu--flip" tabindex="-1" data-floating-menu-direction="{{direction}}">
-    <li class="bx--overflow-menu-options__option">
-      <button class="bx--overflow-menu-options__btn" data-floating-menu-primary-focus>Option 1</button>
-    </li>
-    <li class="bx--overflow-menu-options__option">
-      <button class="bx--overflow-menu-options__btn" title="An example option that is really long to show what should be done to handle long text">An example option that is really long to show what should be done to handle long text</button>
-    </li>
-    <li class="bx--overflow-menu-options__option">
-      <button class="bx--overflow-menu-options__btn">Option 3</button>
-    </li>
-    <li class="bx--overflow-menu-options__option">
-      <button class="bx--overflow-menu-options__btn">Option 4</button>
-    </li>
-    <li class="bx--overflow-menu-options__option bx--overflow-menu-options__option--disabled">
-      <button class="bx--overflow-menu-options__btn" tabindex="-1">Disabled</button>
-    </li>
-    <li class="bx--overflow-menu-options__option bx--overflow-menu-options__option--danger">
-      <button class="bx--overflow-menu-options__btn">Danger option</button>
-    </li>
+    {{#each items}}
+      <li class="bx--overflow-menu-options__option{{#if disabled}} bx--overflow-menu-options__option--disabled{{/if}}{{#if danger}} bx--overflow-menu-options__option--danger{{/if}}">
+        <button class="bx--overflow-menu-options__btn"{{#if title}} title="{{title}}"{{/if}}{{#if primaryFocus}} data-floating-menu-primary-focus{{/if}}{{#if disabled}} tabindex="-1"{{/if}}>{{label}}</button>
+      </li>
+    {{/each}}
   </ul>
 </div>
