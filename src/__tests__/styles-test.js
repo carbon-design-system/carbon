@@ -27,7 +27,7 @@ describe('styles', () => {
         file: filepath,
         ...defaultOptions,
       },
-      async (error, result) => {
+      (error, result) => {
         if (error) {
           const { column, line, message } = error;
           done.fail(`${filepath}\n[${line}:${column}] ${message}`);
