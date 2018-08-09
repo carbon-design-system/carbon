@@ -29,3 +29,6 @@ script:
 
 after_success:
   - yarn semantic-release
+
+notifications:
+  email: false
