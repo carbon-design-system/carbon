@@ -539,7 +539,6 @@ export default class OverflowMenu extends Component {
               {...iconProps}
               icon={!icon && !iconName ? iconOverflowMenu : icon}
               name={iconName}
-              style={{ width: '100%' }}
             />
           )}
           {open && wrappedMenuBody}
