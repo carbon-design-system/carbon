@@ -1,0 +1,26 @@
+{{#each items}}
+  <div data-notification class="bx--{{../variant}}-notification bx--{{../variant}}-notification--{{type}}" role="alert">
+    <div class="bx--{{../variant}}-notification__details">
+      {{#is ../variant "inline"}}
+        <svg class="bx--{{../variant}}-notification__icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM3.293 4.707l8 8 1.414-1.414-8-8-1.414 1.414z" fill-rule="evenodd" />
+        </svg>
+        <div class="bx--{{../variant}}-notification__text-wrapper">
+          <p class="bx--{{../variant}}-notification__title">{{title}}</p>
+          <p class="bx--{{../variant}}-notification__subtitle">{{subtitle}}</p>
+        </div>
+      {{/is}}
+      {{#is ../variant "toast"}}
+        <h3 class="bx--{{../variant}}-notification__title">{{title}}</h3>
+        <p class="bx--{{../variant}}-notification__subtitle">{{subtitle}}</p>
+        <p class="bx--{{../variant}}-notification__caption">{{timestamp}}</p>
+      {{/is}}
+    </div>
+    <button data-notification-btn class="bx--{{../variant}}-notification__close-button" type="button">
+      <svg class="bx--{{../variant}}-notification{{#is ../variant "inline"}}__close{{/is}}-icon" aria-label="close" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z" fill-rule="nonzero"
+        />
+      </svg>
+    </button>
+  </div>
+{{/each}}

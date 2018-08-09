@@ -15,21 +15,11 @@
   {{/unless}}
   <li>
     <ul class="bx--dropdown-list">
-      <li data-option data-value="all" class="bx--dropdown-item">
-        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1">Option 1</a>
-      </li>
-      <li data-option data-value="cloudFoundry" class="bx--dropdown-item">
-        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1">Option 2</a>
-      </li>
-      <li data-option data-value="staging" class="bx--dropdown-item">
-        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1">Option 3</a>
-      </li>
-      <li data-option data-value="dea" class="bx--dropdown-item">
-        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1">Option 4</a>
-      </li>
-      <li data-option data-value="router" class="bx--dropdown-item">
-        <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1">Option 5</a>
-      </li>
+      {{#each items}}
+        <li data-option data-value="{{value}}" class="bx--dropdown-item">
+          <a class="bx--dropdown-link" href="javascript:void(0)" tabindex="-1">{{label}}</a>
+        </li>
+      {{/each}}
     </ul>
   </li>
 </ul>
