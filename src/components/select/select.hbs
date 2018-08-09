@@ -1,5 +1,6 @@
 <div class="bx--form-item">
   <div class="bx--select{{#if inline}} bx--select--inline{{/if}}{{#if light}} bx--select--light{{/if}}">
+    <label for="select-id" class="bx--label">Select label</label>
     <select {{#if invalid}}data-invalid{{/if}} id="select-id" class="bx--select-input">
       <option class="bx--select-option" disabled selected hidden>Choose an option</option>
       <option class="bx--select-option" value="solong">A much longer option that is worth having around to check how text flows</option>
@@ -15,7 +16,6 @@
     <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
-    <label for="select-id" class="bx--label">Select label</label>
     {{#if invalid}}
     <div class="bx--form-requirement">
       Validation message here
