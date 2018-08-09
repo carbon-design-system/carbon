@@ -172,4 +172,22 @@ storiesOf('MultiSelect', module)
         />
       </div>
     )
+  )
+  .addWithInfo(
+    'invalid',
+    `
+    Invalid text showing
+  `,
+    () => (
+      <div style={{ width: 300 }}>
+        <MultiSelect
+          label={defaultLabel}
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          onChange={action('onChange')}
+          invalid={true}
+          invalidText="Invalid Selection"
+        />
+      </div>
+    )
   );
