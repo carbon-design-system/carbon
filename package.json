@@ -82,6 +82,7 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.5.0",
     "express-handlebars": "^3.0.0",
+    "glob": "^7.1.2",
     "globby": "4.0.0",
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "~3.0.1",
@@ -99,6 +100,7 @@
     "html-loader": "^0.5.0",
     "husky": "^0.14.3",
     "jasmine-core": "^2.9.0",
+    "jest": "^23.4.2",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.0",
@@ -117,6 +119,7 @@
     "minimatch": "^3.0.0",
     "mkdirp": "^0.5.0",
     "mock-raf": "^1.0.0",
+    "node-sass": "^4.9.2",
     "nodemon": "1.9.1",
     "path-to-regexp": "^2.2.0",
     "postcss-loader": "^2.1.0",
@@ -173,6 +176,7 @@
     "format:staged": "prettier --write",
     "start": "node server.js",
     "test": "gulp test",
+    "test:styles": "jest",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
     "semantic-release": "semantic-release"
@@ -196,9 +200,13 @@
         {
           "modules": false,
           "targets": {
-            "browsers": ["last 1 version", "ie >= 11"]
+            "browsers": [
+              "last 1 version",
+              "ie >= 11"
+            ]
           }
-      }]
+        }
+      ]
     ],
     "plugins": [
       "transform-class-properties",

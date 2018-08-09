@@ -1,4 +1,8 @@
+@import '../../globals/scss/css--reset';
+@import '../../globals/scss/css--typography';
+@import '../../globals/scss/layer';
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/vars';
 
 @include exports('left-nav') {
   .#{$prefix}--global-header__left-nav {
