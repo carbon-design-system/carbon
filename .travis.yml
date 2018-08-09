@@ -16,7 +16,7 @@ addons:
   firefox: 'latest-esr'
 
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.5.1
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.9.2
   - export PATH=$HOME/.yarn/bin:$PATH
   - tar -xjf /tmp/firefox-latest-esr.tar.bz2 --directory /tmp
   - export PATH="/tmp/firefox:$PATH"
