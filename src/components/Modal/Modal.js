@@ -25,6 +25,7 @@ export default class Modal extends Component {
     onSecondarySubmit: PropTypes.func,
     danger: PropTypes.bool,
     shouldSubmitOnEnter: PropTypes.bool,
+    selectorPrimaryFocus: PropTypes.string,
   };
 
   static defaultProps = {
@@ -36,6 +37,7 @@ export default class Modal extends Component {
     iconDescription: 'close the modal',
     modalHeading: '',
     modalLabel: '',
+    selectorPrimaryFocus: '[data-modal-primary-focus]',
   };
 
   button = React.createRef();
@@ -63,19 +65,26 @@ export default class Modal extends Component {
     }
   }
 
-  focusButton = () => {
+  focusButton = evt => {
+    const primaryFocusElement = evt.currentTarget.querySelector(
+      this.props.selectorPrimaryFocus
+    );
+    if (primaryFocusElement) {
+      primaryFocusElement.focus();
+      return;
+    }
     if (this.button) {
       this.button.current.focus();
     }
   };
 
-  handleTransitionEnd = () => {
+  handleTransitionEnd = evt => {
     if (
       this.outerModal.offsetWidth &&
       this.outerModal.offsetHeight &&
       this.beingOpen
     ) {
-      this.focusButton();
+      this.focusButton(evt);
       this.beingOpen = false;
     }
   };

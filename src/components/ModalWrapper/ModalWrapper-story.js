@@ -152,4 +152,60 @@ storiesOf('ModalWrapper', module)
         </RadioButtonGroup>
       </ModalWrapper>
     )
+  )
+  .addWithInfo(
+    'selectorPrimaryFocus',
+    `
+      The 'selectorPrimaryFocus' prop can be used to focus on any single element when the modal is opened. The example shows an input field being focused on modal open, rather than the default behavior of focusing on the 'Save' button.
+    `,
+    () => (
+      <ModalWrapper
+        id="input-modal"
+        buttonTriggerText="Input Modal"
+        modalHeading="Modal with inputs and custom focus selector"
+        handleSubmit={action('onSubmit')}>
+        <TextInput
+          id="test2"
+          placeholder="Hint text here"
+          label="Text Input:"
+          data-modal-primary-focus
+        />
+        <br />
+        <Select id="select-1" labelText="Select">
+          <SelectItem
+            disabled
+            hidden
+            value="placeholder-item"
+            text="Pick an option"
+          />
+          <SelectItem value="option-1" text="Option 1" />
+          <SelectItem value="option-2" text="Option 2" />
+          <SelectItem value="option-3" text="Option 3" />
+        </Select>
+        <br />
+        <RadioButtonGroup
+          name="radio-button-group"
+          defaultSelected="default-selected">
+          <RadioButton
+            value="default-selected"
+            id="radio-1"
+            labelText="Radio Button label 1"
+            className="some-class"
+          />
+          <RadioButton
+            value="standard"
+            labelText="Radio Button label 2"
+            id="radio-2"
+            className="some-class"
+          />
+          <RadioButton
+            value="standard"
+            labelText="Radio Button label 3"
+            id="radio-3"
+            className="some-class"
+            disabled
+          />
+        </RadioButtonGroup>
+      </ModalWrapper>
+    )
   );

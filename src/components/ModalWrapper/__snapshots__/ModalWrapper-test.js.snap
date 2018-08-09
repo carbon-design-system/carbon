@@ -52,6 +52,7 @@ exports[`ModalWrapper should render 1`] = `
       primaryButtonDisabled={false}
       primaryButtonText="Save"
       secondaryButtonText="Cancel"
+      selectorPrimaryFocus="[data-modal-primary-focus]"
     >
       <div
         className="bx--modal bx--modal-tall"
@@ -59,6 +60,7 @@ exports[`ModalWrapper should render 1`] = `
         onClick={[Function]}
         onKeyDown={[Function]}
         role="presentation"
+        selectorPrimaryFocus="[data-modal-primary-focus]"
         tabIndex={-1}
       >
         <div
