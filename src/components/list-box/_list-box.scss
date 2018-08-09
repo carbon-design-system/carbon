@@ -31,6 +31,27 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
   }
 
+  // invalid states
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field:focus {
+    box-shadow: 0 2px 0 0 $support-01;
+  }
+
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field:focus .#{$prefix}--list-box__label {
+    color: $support-01;
+  }
+
+  .#{$prefix}--list-box ~ .#{$prefix}--form-requirement {
+    order: 3;
+    color: $support-01;
+    font-weight: 400;
+    margin-top: $spacing-2xs;
+
+    &::before {
+      display: none;
+    }
+  }
+
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
     background-color: $field-02;
