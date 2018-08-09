@@ -252,5 +252,11 @@
     "exports": false,
     "name": "carbon-components",
     "needs": "^1.2.1"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/**/__tests__/**/*.js?(x)",
+      "<rootDir>/**/?(*-)(spec|test).js?(x)"
+    ]
   }
 }

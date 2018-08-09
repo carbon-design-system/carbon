@@ -135,7 +135,7 @@ gulp.task('scripts:dev', () => {
 });
 
 gulp.task('scripts:umd', () => {
-  const srcFiles = ['./src/**/*.js', '!**/__tests__/**'];
+  const srcFiles = ['./src/**/*.js'];
   const babelOpts = {
     presets: [
       [
@@ -157,7 +157,7 @@ gulp.task('scripts:umd', () => {
 });
 
 gulp.task('scripts:es', () => {
-  const srcFiles = ['./src/**/*.js', '!**/__tests__/**'];
+  const srcFiles = ['./src/**/*.js'];
   const babelOpts = {
     presets: [
       [

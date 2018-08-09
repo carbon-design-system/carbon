@@ -14,7 +14,7 @@ const glob = require('glob');
 const defaultOptions = {
   includePaths: ['node_modules'],
 };
-const cwd = path.resolve(__dirname, '../');
+const cwd = path.resolve(__dirname, '../src');
 const files = glob.sync('**/*.scss', {
   cwd,
 });
