@@ -5,11 +5,9 @@
         <label for="select-id-pagination" class="bx--pagination__text">Items per page: </label>
       {{/is}}
       <select id="select-id-pagination" class="bx--select-input" data-items-per-page>
-        <option class="bx--select-option" value="10" selected>10</option>
-        <option class="bx--select-option" value="20">20</option>
-        <option class="bx--select-option" value="30">30</option>
-        <option class="bx--select-option" value="40">40</option>
-        <option class="bx--select-option" value="50">50</option>
+        {{#each itemsPerPageChoices}}
+          <option class="bx--select-option" value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>
+        {{/each}}
       </select>
       <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
         <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"/>
@@ -39,13 +37,11 @@
       <input id="page-number-input" type="text" class="bx--text-input" placeholder="0" value="1" data-page-number-input>
     {{else}}
       <div class="bx--select bx--select--inline">
-        <label for="select-id-pagination" class="bx--visually-hidden">Number of items per page</label>
+        <label for="select-id-pagination" class="bx--visually-hidden">Page number</label>
         <select id="select-id-pagination" class="bx--select-input" data-page-number-input>
-          <option class="bx--select-option" value="1" selected>1</option>
-          <option class="bx--select-option" value="2">2</option>
-          <option class="bx--select-option" value="3">3</option>
-          <option class="bx--select-option" value="4">4</option>
-          <option class="bx--select-option" value="5">5</option>
+          {{#each pageNumberChoices}}
+            <option class="bx--select-option" value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>
+          {{/each}}
         </select>
         <svg class="bx--select__arrow" width="10" height="5" viewBox="0 0 10 5">
           <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd"/>

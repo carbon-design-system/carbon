@@ -25,39 +25,19 @@
     </svg>
     <ul class="bx--overflow-menu-options">
       <li class="bx--toolbar-menu__title">FILTER BY</li>
-      <li class="bx--toolbar-menu__option">
-        <input id="filter-option-1" class="bx--checkbox" type="checkbox" value="filter-option-1" name="checkbox">
-        <label for="filter-option-1" class="bx--checkbox-label">
-          <span class="bx--checkbox-appearance">
-            <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
-              <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
-            </svg>
-          </span>
-          Filter option 1
-        </label>
-      </li>
-      <li class="bx--toolbar-menu__option">
-        <input id="filter-option-2" class="bx--checkbox" type="checkbox" value="filter-option-2" name="checkbox">
-        <label for="filter-option-2" class="bx--checkbox-label">
-          <span class="bx--checkbox-appearance">
-            <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
-              <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
-            </svg>
-          </span>
-          Filter option 2
-        </label>
-      </li>
-      <li class="bx--toolbar-menu__option">
-        <input id="filter-option-3" class="bx--checkbox" type="checkbox" value="filter-option-3" name="checkbox">
-        <label for="filter-option-3" class="bx--checkbox-label">
-          <span class="bx--checkbox-appearance">
-            <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
-              <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
-            </svg>
-          </span>
-          Filter option 3
-        </label>
-      </li>
+      {{#each filterOptions}}
+        <li class="bx--toolbar-menu__option">
+          <input id="{{id}}" class="bx--checkbox" type="checkbox" value="{{value}}" name="checkbox">
+          <label for="{{id}}" class="bx--checkbox-label">
+            <span class="bx--checkbox-appearance">
+              <svg class="bx--checkbox-checkmark" width="12" height="9" viewBox="0 0 12 9" fill-rule="evenodd">
+                <path d="M4.1 6.1L1.4 3.4 0 4.9 4.1 9l7.6-7.6L10.3 0z"></path>
+              </svg>
+            </span>
+            {{label}}
+          </label>
+        </li>
+      {{/each}}
     </ul>
   </div>
   <div data-overflow-menu class="bx--overflow-menu" tabindex="0" aria-label="List of options">
@@ -74,20 +54,15 @@
       <li class="bx--toolbar-menu__title">ROW HEIGHT</li>
       <fieldset data-row-height class="bx--radio-button-group">
         <legend class="bx--visually-hidden">Select table row height</legend>
-        <li class="bx--toolbar-menu__option">
-          <input id="short-rows" class="bx--radio-button" type="radio" value="short" name="radio" checked>
-          <label for="short-rows" class="bx--radio-button__label">
-            <span class="bx--radio-button__appearance"></span>
-            Short
-          </label>
-        </li>
-        <li class="bx--toolbar-menu__option">
-          <input id="tall-rows" class="bx--radio-button" type="radio" value="tall" name="radio">
-          <label for="tall-rows" class="bx--radio-button__label">
-            <span class="bx--radio-button__appearance"></span>
-            Tall
-          </label>
-        </li>
+        {{#each rowHeightOptions}}
+          <li class="bx--toolbar-menu__option">
+            <input id="{{id}}" class="bx--radio-button" type="radio" value="{{value}}" name="radio"{{#if selected}} checked{{/if}}>
+            <label for="{{id}}" class="bx--radio-button__label">
+              <span class="bx--radio-button__appearance"></span>
+              {{label}}
+            </label>
+          </li>
+        {{/each}}
       </fieldset>
     </ul>
   </div>

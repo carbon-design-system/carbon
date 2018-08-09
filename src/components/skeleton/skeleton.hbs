@@ -21,15 +21,11 @@
 
 <p>Breadcrumb</p>
 <div class="bx--breadcrumb bx--skeleton">
-  <div class="bx--breadcrumb-item">
-    <a href="/#" class="bx--link">&nbsp;</a>
-  </div>
-  <div class="bx--breadcrumb-item">
-    <a href="/#" class="bx--link">&nbsp;</a>
-  </div>
-  <div class="bx--breadcrumb-item">
-    <a href="/#" class="bx--link">&nbsp;</a>
-  </div>
+  {{#each breadCrumbItems}}
+    <div class="bx--breadcrumb-item">
+      <a href="/#" class="bx--link">&nbsp;</a>
+    </div>
+  {{/each}}
 </div>
 
 <p>Dropdown</p>
@@ -41,42 +37,17 @@
 
 <p>Progress Indicator</p>
 <ul class="bx--progress bx--skeleton">
+  {{#each progressIndicatorItems}}
     <li class="bx--progress-step bx--progress-step--incomplete">
-        <svg>
-            <g>
-                <circle cx="12" cy="12" r="12"></circle>
-            </g>
-        </svg>
-        <p class="bx--progress-label"></p>
-        <span class="bx--progress-line"></span>
+      <svg>
+        <g>
+          <circle cx="12" cy="12" r="12"></circle>
+        </g>
+      </svg>
+      <p class="bx--progress-label"></p>
+      <span class="bx--progress-line"></span>
     </li>
-    <li class="bx--progress-step bx--progress-step--incomplete">
-        <svg>
-            <g>
-                <circle cx="12" cy="12" r="12"></circle>
-            </g>
-        </svg>
-        <p class="bx--progress-label"></p>
-        <span class="bx--progress-line"></span>
-    </li>
-    <li class="bx--progress-step bx--progress-step--incomplete">
-        <svg>
-            <g>
-                <circle cx="12" cy="12" r="12"></circle>
-            </g>
-        </svg>
-        <p class="bx--progress-label"></p>
-        <span class="bx--progress-line"></span>
-    </li>
-    <li class="bx--progress-step bx--progress-step--incomplete">
-        <svg>
-            <g>
-                <circle cx="12" cy="12" r="12"></circle>
-            </g>
-        </svg>
-        <p class="bx--progress-label"></p>
-        <span class="bx--progress-line"></span>
-    </li>
+  {{/each}}
 </ul>
 
 <p>Toggle</p>
@@ -117,14 +88,10 @@
     </svg>
   </div>
   <ul class="bx--tabs__nav bx--tabs__nav--hidden">
-    <li class="bx--tabs__nav-item bx--tabs__nav-item--selected"><a class="bx--tabs__nav-link" href="javascript:void(0)">&nbsp;</a>
-    </li>
-    <li class="bx--tabs__nav-item"><a class="bx--tabs__nav-link" href="javascript:void(0)">&nbsp;</a>
-    </li>
-    <li class="bx--tabs__nav-item"><a class="bx--tabs__nav-link" href="javascript:void(0)">&nbsp;</a>
-    </li>
-    <li class="bx--tabs__nav-item"><a class="bx--tabs__nav-link" href="javascript:void(0)">&nbsp;</a>
-    </li>
+    {{#each tabItems}}
+      <li class="bx--tabs__nav-item{{#if selected}} bx--tabs__nav-item--selected{{/if}}"><a class="bx--tabs__nav-link" href="javascript:void(0)">&nbsp;</a>
+      </li>
+    {{/each}}
   </ul>
 </nav>
 

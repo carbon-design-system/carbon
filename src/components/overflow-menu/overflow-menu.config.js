@@ -1,5 +1,30 @@
 'use strict';
 
+const items = [
+  {
+    title: 'An example option that is really long to show what should be done to handle long text',
+    label: 'An example option that is really long to show what should be done to handle long text',
+    primaryFocus: true,
+  },
+  {
+    label: 'Option 2',
+  },
+  {
+    label: 'Option 3',
+  },
+  {
+    label: 'Option 4',
+  },
+  {
+    label: 'Disabled',
+    disabled: true,
+  },
+  {
+    label: 'Danger option',
+    danger: true,
+  },
+];
+
 module.exports = {
   variants: [
     {
@@ -11,6 +36,7 @@ module.exports = {
       `,
       context: {
         direction: 'bottom',
+        items,
       },
     },
     {
@@ -18,6 +44,7 @@ module.exports = {
       label: 'Up',
       context: {
         direction: 'top',
+        items,
       },
     },
   ],
