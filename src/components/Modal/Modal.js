@@ -5,6 +5,12 @@ import { iconClose } from 'carbon-icons';
 import Icon from '../Icon';
 import Button from '../Button';
 
+const matchesFuncName =
+  typeof Element !== 'undefined' &&
+  ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(
+    name => typeof Element.prototype[name] === 'function'
+  )[0];
+
 export default class Modal extends Component {
   static propTypes = {
     children: PropTypes.node,
@@ -25,6 +31,7 @@ export default class Modal extends Component {
     onSecondarySubmit: PropTypes.func,
     danger: PropTypes.bool,
     shouldSubmitOnEnter: PropTypes.bool,
+    selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
     selectorPrimaryFocus: PropTypes.string,
   };
 
@@ -37,10 +44,38 @@ export default class Modal extends Component {
     iconDescription: 'close the modal',
     modalHeading: '',
     modalLabel: '',
+    selectorsFloatingMenus: [
+      '.bx--overflow-menu-options',
+      '.bx--tooltip',
+      '.flatpickr-calendar',
+    ],
     selectorPrimaryFocus: '[data-modal-primary-focus]',
   };
 
   button = React.createRef();
+
+  elementOrParentIsFloatingMenu = target => {
+    if (target && typeof target.closest === 'function') {
+      return this.props.selectorsFloatingMenus.some(selector =>
+        target.closest(selector)
+      );
+    } else {
+      // Alternative if closest does not exist.
+      while (target) {
+        if (typeof target[matchesFuncName] === 'function') {
+          if (
+            this.props.selectorsFloatingMenus.some(selector =>
+              target[matchesFuncName](selector)
+            )
+          ) {
+            return true;
+          }
+        }
+        target = target.parentNode;
+      }
+      return false;
+    }
+  };
 
   handleKeyDown = evt => {
     if (evt.which === 27) {
@@ -52,8 +87,24 @@ export default class Modal extends Component {
   };
 
   handleClick = evt => {
-    if (this.innerModal && !this.innerModal.contains(evt.target)) {
+    if (
+      this.innerModal &&
+      !this.innerModal.contains(evt.target) &&
+      !this.elementOrParentIsFloatingMenu(evt.target)
+    ) {
       this.props.onRequestClose();
+    }
+  };
+
+  handleBlur = evt => {
+    // Keyboard trap
+    if (
+      this.innerModal &&
+      this.props.open &&
+      (!evt.relatedTarget || !this.innerModal.contains(evt.relatedTarget)) &&
+      !this.elementOrParentIsFloatingMenu(evt.relatedTarget)
+    ) {
+      this.focusModal();
     }
   };
 
@@ -64,6 +115,12 @@ export default class Modal extends Component {
       this.beingOpen = false;
     }
   }
+
+  focusModal = () => {
+    if (this.outerModal) {
+      this.outerModal.focus();
+    }
+  };
 
   focusButton = evt => {
     const primaryFocusElement = evt.currentTarget.querySelector(
@@ -104,6 +161,7 @@ export default class Modal extends Component {
       iconDescription,
       primaryButtonDisabled,
       danger,
+      selectorsFloatingMenus, // eslint-disable-line
       ...other
     } = this.props;
 
@@ -176,6 +234,7 @@ export default class Modal extends Component {
         {...other}
         onKeyDown={this.handleKeyDown}
         onClick={this.handleClick}
+        onBlur={this.handleBlur}
         className={modalClasses}
         role="presentation"
         tabIndex={-1}
