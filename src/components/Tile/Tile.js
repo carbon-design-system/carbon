@@ -111,18 +111,51 @@ export class SelectableTile extends Component {
   };
 
   static propTypes = {
+    /**
+     * The child nodes.
+     */
     children: PropTypes.node,
+
+    /**
+     * The CSS class names.
+     */
     className: PropTypes.string,
+
+    /**
+     * `true` to select this tile.
+     */
     selected: PropTypes.bool,
+
+    /**
+     * The ID of the `<input>`.
+     */
     id: PropTypes.string,
+
+    /**
+     * The value of the `<input>`.
+     */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+
+    /**
+     * The `name` of the `<input>`.
+     */
     name: PropTypes.string,
+
+    /**
+     * The `title` of the `<input>`.
+     */
     title: PropTypes.string,
+
+    /**
+     * The description of the checkmark icon.
+     */
+    iconDescription: PropTypes.string,
   };
 
   static defaultProps = {
     value: 'value',
     title: 'title',
+    iconDescription: 'Tile checkmark',
     selected: false,
     handleClick: () => {},
     handleKeyDown: () => {},
@@ -175,6 +208,7 @@ export class SelectableTile extends Component {
       value,
       name,
       title,
+      iconDescription,
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
@@ -206,7 +240,7 @@ export class SelectableTile extends Component {
           checked={this.state.selected}
         />
         <div className="bx--tile__checkmark">
-          <Icon icon={iconCheckmarkSolid} description="Tile checkmark" />
+          <Icon icon={iconCheckmarkSolid} description={iconDescription} />
         </div>
         <div className="bx--tile-content">{children}</div>
       </label>

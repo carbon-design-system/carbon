@@ -6,16 +6,45 @@ import Icon from '../Icon';
 
 export default class AccordionItem extends Component {
   static propTypes = {
+    /**
+     * The child nodes.
+     */
     children: PropTypes.node,
+
+    /**
+     * The CSS class names.
+     */
     className: PropTypes.string,
+
+    /**
+     * The accordion title.
+     */
     title: PropTypes.node,
+
+    /**
+     * The description of the expando icon.
+     */
+    iconDescription: PropTypes.string,
+
+    /**
+     * `true` to open the expando.
+     */
     open: PropTypes.bool,
+
+    /**
+     * The handler of the massaged `click` event.
+     */
     onClick: PropTypes.func,
+
+    /**
+     * The handler of the massaged `click` event on the heading.
+     */
     onHeadingClick: PropTypes.func,
   };
 
   static defaultProps = {
     title: 'title',
+    iconDescription: 'Expand/Collapse',
     open: false,
     onClick: () => {},
     onHeadingClick: () => {},
@@ -54,6 +83,7 @@ export default class AccordionItem extends Component {
     const {
       className,
       title,
+      iconDescription,
       children,
       onClick, // eslint-disable-line no-unused-vars
       onHeadingClick, // eslint-disable-line no-unused-vars
@@ -82,7 +112,7 @@ export default class AccordionItem extends Component {
           <Icon
             className="bx--accordion__arrow"
             icon={iconChevronRight}
-            description="Expand/Collapse"
+            description={iconDescription}
           />
           <p className="bx--accordion__title">{title}</p>
         </button>

@@ -7,12 +7,44 @@ import ClickListener from '../../internal/ClickListener';
 
 export default class ToolbarSearch extends Component {
   static propTypes = {
+    /**
+     * The child nodes.
+     */
     children: PropTypes.node,
+
+    /**
+     * The CSS class names.
+     */
     className: PropTypes.string,
+
+    /**
+     * The `type` of the `<input>`.
+     */
     type: PropTypes.string,
+
+    /**
+     * `true` to use the small version of the UI.
+     */
     small: PropTypes.bool,
+
+    /**
+     * The description of the search icon.
+     */
+    iconDescription: PropTypes.string,
+
+    /**
+     * The placeholder text of the `<input>`.
+     */
     placeHolderText: PropTypes.string,
+
+    /**
+     * The text in the `<label>`.
+     */
     labelText: PropTypes.string,
+
+    /**
+     * The ID of the `<input>`.
+     */
     id: PropTypes.string,
   };
 
@@ -20,6 +52,7 @@ export default class ToolbarSearch extends Component {
     type: 'search',
     id: 'search__input',
     labelText: '',
+    iconDescription: 'search',
     placeHolderText: '',
     role: 'search',
   };
@@ -46,6 +79,7 @@ export default class ToolbarSearch extends Component {
       className,
       type,
       id,
+      iconDescription,
       placeHolderText,
       labelText,
       role,
@@ -79,7 +113,7 @@ export default class ToolbarSearch extends Component {
             onClick={this.expandSearch}>
             <Icon
               icon={iconSearch}
-              description="search"
+              description={iconDescription}
               className="bx--search-magnifier"
             />
           </button>
