@@ -82,21 +82,21 @@
       .#{$prefix}--number {
         width: 100%;
 
-        &__controls {
-          bottom: rem(14px);
-        }
-
         input[type='number'] {
           font-weight: 400;
         }
       }
 
+      .#{$prefix}--number__controls {
+        bottom: rem(14px);
+      }
+
       .#{$prefix}--select {
         width: 100%;
+      }
 
-        &__arrow {
-          bottom: rem(21.5px);
-        }
+      .#{$prefix}--select__arrow {
+        bottom: rem(21.5px);
       }
 
       .#{$prefix}--number,
