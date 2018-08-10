@@ -50,7 +50,7 @@ const TableHeader = ({
   });
 
   return (
-    <th scope={scope}>
+    <th scope={scope} className={headerClassName}>
       <button className={className} onClick={onClick} {...rest}>
         <span className="bx--table-header-label">{children}</span>
         <Icon
