@@ -64,7 +64,7 @@ export default class DataTable extends React.Component {
     headers: PropTypes.arrayOf(
       PropTypes.shape({
         key: PropTypes.string.isRequired,
-        header: PropTypes.string.isRequired,
+        header: PropTypes.node.isRequired,
       })
     ).isRequired,
 
