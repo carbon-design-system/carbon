@@ -174,23 +174,23 @@
 
   .#{$prefix}--batch-edit-summary {
     padding-left: rem(16px);
+  }
 
-    &__cancel {
-      margin: 0 rem(8px);
+  .#{$prefix}--batch-edit-summary__cancel {
+    margin: 0 rem(8px);
+  }
+
+  .#{$prefix}--batch-edit-summary__save {
+    .#{$prefix}--inline-loading__text {
+      order: 1;
     }
 
-    &__save {
-      .#{$prefix}--inline-loading__text {
-        order: 1;
-      }
+    .#{$prefix}--inline-loading__animation {
+      order: 2;
+    }
 
-      .#{$prefix}--inline-loading__animation {
-        order: 2;
-      }
-
-      .#{$prefix}--inline-loading ~ .#{$prefix}--btn__icon {
-        display: none;
-      }
+    .#{$prefix}--inline-loading ~ .#{$prefix}--btn__icon {
+      display: none;
     }
   }
 
