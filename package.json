@@ -39,6 +39,8 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
     "@frctl/fractal": "^1.1.0",
     "adaro": "1.0.4",
     "autoprefixer": "^8.2.0",
@@ -66,7 +68,6 @@
     "core-js": "^2.4.0",
     "css-loader": "^0.28.0",
     "custom-event": "^1.0.0",
-    "cz-conventional-changelog": "^1.2.0",
     "del": "~2.0.2",
     "diff": "^3.4.0",
     "eslint": "^3.0.0",
@@ -96,7 +97,7 @@
     "gulp-util": "~3.0.7",
     "handlebars-helpers": "^0.10.0",
     "html-loader": "^0.5.0",
-    "husky": "^0.12.0",
+    "husky": "^0.14.3",
     "jasmine-core": "^2.9.0",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -109,7 +110,7 @@
     "karma-sourcemap-loader": "~0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^2.0.0",
-    "lint-staged": "^6.1.0",
+    "lint-staged": "^7.1.3",
     "lolex": "1.4.0",
     "markdown-it": "^8.4.0",
     "merge-stream": "^1.0.0",
@@ -139,7 +140,6 @@
     "semantic-release": "^15.5.0",
     "serve-static": "^1.13.0",
     "style-loader": "^0.20.0",
-    "validate-commit-msg": "^2.8.2",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.0",
@@ -162,52 +162,58 @@
     "build": "gulp build",
     "build-dev": "gulp build:dev",
     "ci-check": "sh ./tools/ci-check.sh",
-    "commitmsg": "validate-commit-msg",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
     "dev": "gulp serve",
     "lint": "eslint .",
     "lint:staged": "eslint",
     "prebuild": "gulp clean",
     "precommit": "lint-staged",
     "prepublishOnly": "npm run build",
-    "prettier": "prettier --write \"**/*.{scss,css,js}\"",
-    "prettier:staged": "prettier --write",
+    "format": "prettier --write \"**/*.{css,js,md,scss}\"",
+    "format:staged": "prettier --write",
     "start": "node server.js",
     "test": "gulp test",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
     "semantic-release": "semantic-release"
   },
-  "license": "Apache-2",
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    },
-    "validate-commit-msg": {
-      "maxSubjectLength": 100,
-      "subjectPattern": ".+",
-      "subjectPatternErrorMsg": "Subject does not match subject pattern!",
-      "types": [
-        "chore",
-        "docs",
-        "feat",
-        "fix",
-        "perf",
-        "refactor",
-        "revert",
-        "style",
-        "test"
-      ],
-      "warnOnFail": false
-    }
+  "license": "Apache-2.0",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "printWidth": 130,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false,
+          "targets": {
+            "browsers": ["last 1 version", "ie >= 11"]
+          }
+      }]
+    ],
+    "plugins": [
+      "transform-class-properties",
+      "transform-object-rest-spread",
+      "dev-expression"
+    ]
   },
   "lint-staged": {
     "*.js": [
-      "prettier:staged",
-      "lint:staged",
+      "yarn format:staged",
+      "yarn lint:staged",
       "git add"
     ],
-    "*.{css,scss}": [
-      "prettier:staged",
+    "*.{css,md,scss}": [
+      "yarn format:staged",
       "git add"
     ]
   },

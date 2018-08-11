@@ -42,7 +42,7 @@ module.exports = function(config) {
       ...(isFilesDefault
         ? [
             'node_modules/core-js/modules/es6.weak-map.js', // For generatoring coverage report for untested files
-            'src/components/**/*.js', // For generatoring coverage report for untested files
+            'src/components/**/!(*.config).js', // For generatoring coverage report for untested files
             'src/globals/js/{misc,mixins}/**/*.js', // For generatoring coverage report for untested files
             'tests/spec/**/*.js',
           ]

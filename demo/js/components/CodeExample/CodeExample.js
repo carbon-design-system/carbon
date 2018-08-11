@@ -89,8 +89,7 @@ class CodeExample extends Component {
           className={codeExampleClass}
           ref={ref => {
             this.codeBlock = ref;
-          }}
-        >
+          }}>
           <pre className="line-numbers">
             <code className="language-html" ref={this.highlight}>
               {htmlFile}

@@ -1,8 +1,8 @@
+# carbon-components
+
 [![Build Status](https://travis-ci.org/IBM/carbon-components.svg?branch=master)](https://travis-ci.org/IBM/carbon-components)
 
-# Carbon Components
-
- The Carbon Design System is a series of individual styles and components, that when combined make beautiful, intuitive designs. These designs are systemic and logical, as they all follow the same universal principles.
+The Carbon Design System is a series of individual styles and components, that when combined make beautiful, intuitive designs. These designs are systemic and logical, as they all follow the same universal principles.
 
 The component library gives developers a collection of re-usable HTML and SCSS partials for building their products.
 
@@ -22,8 +22,8 @@ yarn add carbon-components
 
 # :books: Documentation
 
-* See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
-* [Contributing](/docs/contributing.md): Guidelines for making contributions to this repo.
+- See our documentation site [here](http://carbondesignsystem.com/getting-started/developers) for full how-to docs and guidelines
+- [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions to this repo.
 
 ## Contributors
 
@@ -37,7 +37,9 @@ yarn add carbon-components
 | [<img src="https://avatars3.githubusercontent.com/u/2699599?v=4" width="100px;"/><br /><sub><b>Bethany Schwanke</b></sub>](https://github.com/bschwanke)<br />[📖](https://github.com/carbon-design-system/carbon-components/commits?author=bschwanke "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/6370760?s=460&v=4" width="100px;"/><br /><sub><b>David Menendez</b></sub>](https://github.com/davidmenendez)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=davidmenendez "Code") | [<img src="https://avatars1.githubusercontent.com/u/1183515?s=400&v=4" width="100px;"/><br /><sub><b>Derick Montague</b></sub>](https://github.com/derick-montague)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=derick-montague "Code") | [<img src="https://avatars2.githubusercontent.com/u/940113?s=400&v=4" width="100px;"/><br /><sub><b>Michael Vendivel</b></sub>](https://github.com/mven)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=mven "Code") | [<img src="https://avatars0.githubusercontent.com/u/20052710?s=400&v=4" width="100px;"/><br /><sub><b>James Clements</b></sub>](https://github.com/jamesvclements)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=jamesvclements "Code") | [<img src="https://avatars3.githubusercontent.com/u/163561?s=400&v=4" width="100px;"/><br /><sub><b>Jason Lengstorf</b></sub>](https://github.com/jlengstorf)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=jlengstorf "Code") | [<img src="https://avatars2.githubusercontent.com/u/2932484?s=400&v=4" width="100px;"/><br /><sub><b>Rahul Radhakrishnan</b></sub>](https://github.com/rahulrkr08)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=rahulrkr08 "Code") [📖](https://github.com/carbon-design-system/carbon-components/commits?author=rahulrkr08 "Documentation") |
 | [<img src="https://avatars2.githubusercontent.com/u/11317322?s=400&v=4" width="100px;"/><br /><sub><b>Adriana Rios</b></sub>](https://github.com/stpCollabr8nLstn)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=stpCollabr8nLstn "Code") | [<img src="https://avatars1.githubusercontent.com/u/15326526?s=400&v=4" width="100px;"/><br /><sub><b>Chris de Almeida</b></sub>](https://github.com/ctcpip)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=ctcpip "Code") | [<img src="https://avatars2.githubusercontent.com/u/11449728?s=400&v=4" width="100px;"/><br /><sub><b>Paul Sachs</b></sub>](https://github.com/psachs21)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=psachs21 "Code") | [<img src="https://avatars1.githubusercontent.com/u/17710824?s=400&v=4" width="100px;"/><br /><sub><b>Ryan Mackey</b></sub>](https://github.com/ryanomackey)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=ryanomackey "Code") | [<img src="https://avatars3.githubusercontent.com/u/5316797?s=400&v=4" width="100px;"/><br /><sub><b>Sae</b></sub>](https://github.com/srlim)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=srlim "Code") | [<img src="https://avatars1.githubusercontent.com/u/6663002?s=400&v=4" width="100px;"/><br /><sub><b>Scott Dickerson</b></sub>](https://github.com/scottdickerson)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=scottdickerson "Code") | [<img src="https://avatars1.githubusercontent.com/u/4836277?s=400&v=4" width="100px;"/><br /><sub><b>Alicia Hickman</b></sub>](https://github.com/aliciahickman)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=aliciahickman "Code") |
 | [<img src="https://avatars2.githubusercontent.com/u/12685163?s=400&v=4" width="100px;"/><br /><sub><b>j1mie</b></sub>](https://github.com/j1mie)<br />[💻](https://github.com/carbon-design-system/carbon-components/commits?author=j1mie "Code") |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
