@@ -42,8 +42,9 @@
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "@frctl/fractal": "^1.1.0",
+    "@storybook/html": "^4.0.0-alpha.11",
     "adaro": "1.0.4",
-    "autoprefixer": "^8.2.0",
+    "autoprefixer": "^9.1.0",
     "babel-core": "^6.22.0",
     "babel-eslint": "^7.0.0",
     "babel-loader": "^7.1.0",
@@ -172,6 +173,7 @@
     "format": "prettier --write \"**/*.{css,js,md,scss}\"",
     "format:staged": "prettier --write",
     "start": "node server.js",
+    "storybook": "start-storybook -p 3000",
     "test": "gulp test",
     "test:unit": "gulp test:unit",
     "test:a11y": "gulp test:a11y",
@@ -196,9 +198,13 @@
         {
           "modules": false,
           "targets": {
-            "browsers": ["last 1 version", "ie >= 11"]
+            "browsers": [
+              "last 1 version",
+              "ie >= 11"
+            ]
           }
-      }]
+        }
+      ]
     ],
     "plugins": [
       "transform-class-properties",
