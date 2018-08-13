@@ -97,6 +97,10 @@
       }
     }
 
+    &:active {
+      color: $ui-05;
+    }
+
     .#{$prefix}--btn__icon {
       margin-left: $spacing-xs;
     }
