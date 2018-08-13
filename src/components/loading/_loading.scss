@@ -1,12 +1,10 @@
-$loading__gap: 40;
-$loading__size: 10.5rem;
-
 @import '../../globals/scss/vars';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
 @import 'keyframes';
 @import 'mixins';
+@import 'vars';
 
 @include exports('loading') {
   .#{$prefix}--loading {

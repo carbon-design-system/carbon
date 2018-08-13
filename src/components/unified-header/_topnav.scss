@@ -1,4 +1,6 @@
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/mixins';
+@import '../../globals/scss/vars';
 
 @include exports('topnav') {
   .#{$prefix}--top-nav {

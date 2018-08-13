@@ -1,4 +1,6 @@
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/mixins';
 
 @include exports('left-nav-trigger') {
   .#{$prefix}--left-nav__trigger {
