@@ -3,6 +3,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Accordion from '../Accordion';
 import AccordionItem from '../AccordionItem';
 import Select from '../Select';
@@ -10,20 +12,24 @@ import SelectItem from '../SelectItem';
 import AccordionSkeleton from '../Accordion/Accordion.Skeleton';
 
 const props = {
-  onHeadingClick: ({ isOpen }) => {
-    console.log(`Is open: ${isOpen}`);
-  }, // eslint-disable-line no-console
+  onClick: action('onClick'),
+  onHeadingClick: action('onHeadingClick'),
 };
 
 storiesOf('Accordion', module)
-  .addWithInfo(
+  .addDecorator(withKnobs)
+  .add(
     'Default',
-    `
-      Accordions allow users to expand and collapse sections of content.
-    `,
-    () => (
+    withInfo({
+      text: `
+        Accordions allow users to expand and collapse sections of content.
+      `,
+    })(() => (
       <Accordion>
-        <AccordionItem title="Section 1 title" {...props}>
+        <AccordionItem
+          title={text('The title (title)', 'Section 1 title')}
+          open={boolean('Open the section (open)', false)}
+          {...props}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -31,7 +37,7 @@ storiesOf('Accordion', module)
             aliquip ex ea commodo consequat.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 2 title" open {...props}>
+        <AccordionItem title="Section 2 title" {...props}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -70,16 +76,17 @@ storiesOf('Accordion', module)
           </p>
         </AccordionItem>
       </Accordion>
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'skeleton',
-    `
-    Placeholder skeleton state to use when content is loading.
-  `,
-    () => (
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => (
       <div style={{ width: '500px' }}>
         <AccordionSkeleton />
       </div>
-    )
+    ))
   );

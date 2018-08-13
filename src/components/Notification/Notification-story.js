@@ -1,119 +1,62 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Notification, {
   ToastNotification,
   InlineNotification,
 } from '../Notification';
-import Link from '../Link';
 
-const notificationProps = {
-  toast: {
-    onCloseButtonClick: action('onCloseButtonClick'),
-    className: 'some-class',
-    title: 'Notification title',
-    subtitle: 'Subtitle text goes here.',
-    caption: 'Time stamp [00:00:00]',
-    captionNode: <Link href="#">The caption can be any node.</Link>,
-    iconDescription: 'describes the close button',
-    style: { minWidth: '30rem', marginBottom: '.5rem' },
-    timeout: 0,
-  },
-  inline: {
-    onCloseButtonClick: action('onCloseButtonClick'),
-    className: 'some-class',
-    title: 'Notification title',
-    subtitle: 'Subtitle text goes here.',
-    iconDescription: 'describes the close button',
-  },
-  subtitleNode: <Link href="#">The subtitle can be any node.</Link>,
+const kinds = {
+  error: 'Error (error)',
+  info: 'Info (info)',
+  success: 'Success (success)',
+  warning: 'Warning (warning)',
 };
 
+const notificationProps = () => ({
+  kind: select('The notification kind (kind)', kinds, 'error'),
+  role: text('ARIA role (role)', 'alert'),
+  title: text('Title (title)', 'Notification title'),
+  subtitle: text('Subtitle (subtitle)', 'Subtitle text goes here.'),
+  iconDescription: text(
+    'Icon description (iconDescription)',
+    'describes the close button'
+  ),
+  hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
+  onCloseButtonClick: action('onCloseButtonClick'),
+});
+
 storiesOf('Notifications', module)
-  .addWithInfo(
+  .addDecorator(withKnobs)
+  .add(
     'Deprecated: <Notfication />',
-    `
-      Toast notifications are typically passive, meaning they won't affect the user's workflow if not addressed.
-      Toast Notifications use 'kind' props to specify the kind of notification that should render (error, info, success, warning).
-    `,
-    () => (
+    withInfo({
+      text: `
+        Toast notifications are typically passive, meaning they won't affect the user's workflow if not addressed.
+        Toast Notifications use 'kind' props to specify the kind of notification that should render (error, info, success, warning).
+      `,
+    })(() => (
       <div>
-        <Notification {...notificationProps.toast} kind="error" />
-        <Notification {...notificationProps.toast} kind="info" />
-        <Notification {...notificationProps.toast} kind="success" />
-        <Notification {...notificationProps.toast} kind="warning" />
-        <Notification {...notificationProps.inline} kind="error" />
-        <Notification {...notificationProps.inline} kind="info" />
-        <Notification {...notificationProps.inline} kind="success" />
-        <Notification {...notificationProps.inline} kind="warning" />
-      </div>
-    )
-  )
-  .addWithInfo(
-    'Toast',
-    `
-  ...
-  `,
-    () => {
-      const { toast } = notificationProps;
-      return (
-        <div>
-          <ToastNotification {...toast} kind="error" />
-          <ToastNotification {...toast} kind="info" />
-          <ToastNotification {...toast} kind="success" />
-          <ToastNotification {...toast} kind="warning" />
-          <ToastNotification
-            {...{
-              ...toast,
-              subtitle: notificationProps.subtitleNode,
-              caption: toast.captionNode,
-            }}
-            kind="info"
-          />
-        </div>
-      );
-    }
-  )
-  .addWithInfo(
-    'inline',
-    `
-  ...
-  `,
-    () => (
-      <div>
-        <InlineNotification {...notificationProps.inline} kind="error" />
-        <InlineNotification {...notificationProps.inline} kind="info" />
-        <InlineNotification {...notificationProps.inline} kind="success" />
-        <InlineNotification {...notificationProps.inline} kind="warning" />
-        <InlineNotification
-          {...{
-            ...notificationProps.inline,
-            subtitle: notificationProps.subtitleNode,
-          }}
-          kind="info"
+        <Notification
+          {...notificationProps()}
+          caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
         />
       </div>
-    )
+    ))
   )
-  .addWithInfo(
-    'hidden close button',
-    `
-  ...
-  `,
-    () => (
-      <div>
-        <ToastNotification
-          {...notificationProps.toast}
-          kind="error"
-          hideCloseButton={true}
-        />
-        <ToastNotification {...notificationProps.toast} kind="error" />
-        <InlineNotification
-          {...notificationProps.inline}
-          kind="info"
-          hideCloseButton={true}
-        />
-        <InlineNotification {...notificationProps.inline} kind="success" />
-      </div>
-    )
-  );
+  .add('Toast', () => (
+    <div>
+      <ToastNotification
+        {...notificationProps()}
+        caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+        style={{ minWidth: '30rem', marginBottom: '.5rem' }}
+      />
+    </div>
+  ))
+  .add('inline', () => (
+    <div>
+      <InlineNotification {...notificationProps()} />
+    </div>
+  ));

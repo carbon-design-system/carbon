@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
 import DataTable, {
   Table,
   TableBatchAction,
@@ -87,20 +88,21 @@ const batchActionClick = selectedRows => () =>
   action('batch action click')(selectedRows);
 
 storiesOf('DataTable', module)
-  .addWithInfo(
+  .add(
     'default',
-    /* eslint-disable no-useless-escape */
-    `
-      Data Tables are used to represent a collection of resources, displaying a
-      subset of their fields in columns, or headers. The \`DataTable\` component
-      that we export from Carbon requires two props to be passed in: \`rows\`
-      and \`headers\`.
+    withInfo({
+      /* eslint-disable no-useless-escape */
+      text: `
+        Data Tables are used to represent a collection of resources, displaying a
+        subset of their fields in columns, or headers. The \`DataTable\` component
+        that we export from Carbon requires two props to be passed in: \`rows\`
+        and \`headers\`.
 
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-    /* eslint-enable no-useless-escape */
-    () => (
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+      /* eslint-enable no-useless-escape */
+    })(() => (
       <DataTable
         rows={initialRows}
         headers={headers}
@@ -173,17 +175,18 @@ storiesOf('DataTable', module)
           </TableContainer>
         )}
       />
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'with toolbar',
-    `
-      DataTable with toolbar and filtering.
+    withInfo({
+      text: `
+        DataTable with toolbar and filtering.
 
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-    () => (
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+    })(() => (
       <DataTable
         rows={initialRows}
         headers={headers}
@@ -235,17 +238,18 @@ storiesOf('DataTable', module)
           </TableContainer>
         )}
       />
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'with sorting',
-    `
-      DataTable with sorting
+    withInfo({
+      text: `
+        DataTable with sorting
 
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-    () => (
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+    })(() => (
       <DataTable
         rows={initialRows}
         headers={headers}
@@ -274,17 +278,18 @@ storiesOf('DataTable', module)
           </TableContainer>
         )}
       />
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'with selection',
-    `
-      DataTable with selection
+    withInfo({
+      text: `
+        DataTable with selection
 
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-    () => (
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+    })(() => (
       <DataTable
         rows={initialRows}
         headers={headers}
@@ -315,17 +320,18 @@ storiesOf('DataTable', module)
           </TableContainer>
         )}
       />
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'with expansion',
-    `
-      DataTable with expansion
+    withInfo({
+      text: `
+        DataTable with expansion
 
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-    () => (
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+    })(() => (
       <DataTable
         rows={initialRows}
         headers={headers}
@@ -365,27 +371,28 @@ storiesOf('DataTable', module)
           </TableContainer>
         )}
       />
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'with batch actions',
-    `
-      Uses <TableToolbar> alongside <TableBatchActions> and <TableBatchAction>
-      to create the toolbar and placeholder for where the batch action menu will
-      be displayed.
+    withInfo({
+      text: `
+        Uses <TableToolbar> alongside <TableBatchActions> and <TableBatchAction>
+        to create the toolbar and placeholder for where the batch action menu will
+        be displayed.
 
-      You can use the \`getBatchActionProps\` prop getter on the
-      <TableBatchActions> component to have it wire up the ghost menu for you.
+        You can use the \`getBatchActionProps\` prop getter on the
+        <TableBatchActions> component to have it wire up the ghost menu for you.
 
-      Individual <TableBatchAction> components take in any kind of event handler
-      prop that you would expect to use, like \`onClick\`. You can use these
-      alongside the \`selectedRows\` property in your \`render\` prop function
-      to pass along this info to your batch action handler.
+        Individual <TableBatchAction> components take in any kind of event handler
+        prop that you would expect to use, like \`onClick\`. You can use these
+        alongside the \`selectedRows\` property in your \`render\` prop function
+        to pass along this info to your batch action handler.
 
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-    () => (
+        You can find more detailed information surrounding usage of this component
+        at the following url: ${readmeURL}
+      `,
+    })(() => (
       <DataTable
         rows={initialRows}
         headers={headers}
@@ -458,15 +465,16 @@ storiesOf('DataTable', module)
           </TableContainer>
         )}
       />
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'with dynamic content',
-    `
-      Showcases DataTable behavior when rows are added to the component,
-      and when cell data changes dynamically.
-    `,
-    () => {
+    withInfo({
+      text: `
+        Showcases DataTable behavior when rows are added to the component,
+        and when cell data changes dynamically.
+      `,
+    })(() => {
       const insertInRandomPosition = (array, element) => {
         const index = Math.floor(Math.random() * (array.length + 1));
         return [...array.slice(0, index), element, ...array.slice(index)];
@@ -641,5 +649,5 @@ storiesOf('DataTable', module)
       }
 
       return <DynamicRows />;
-    }
+    })
   );

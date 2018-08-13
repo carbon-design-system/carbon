@@ -1,5 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
 import WithState from '../../tools/withState';
 
@@ -22,44 +24,33 @@ const items = [
   },
 ];
 
+const props = () => ({
+  disabled: boolean('Disabled (disabled)', false),
+  placeholder: text('Placeholder text (placeholder)', 'Filter...'),
+  onChange: action('onChange'),
+});
+
 storiesOf('ComboBox', module)
-  .addWithInfo(
-    'default',
-    `
-    ComboBox
-  `,
-    () => (
+  .addDecorator(withKnobs)
+  .add(
+    'Default',
+    withInfo({
+      text: 'ComboBox',
+    })(() => (
       <div style={{ width: 300 }}>
         <ComboBox
           items={items}
           itemToString={item => (item ? item.text : '')}
-          onChange={action('onChange - ComboBox')}
-          placeholder="Filter..."
+          {...props()}
         />
       </div>
-    )
+    ))
   )
-  .addWithInfo(
-    'disabled',
-    `
-    Disabled ComboBox
-  `,
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          onChange={action('onChange - ComboBox')}
-          placeholder="Filter..."
-          disabled
-        />
-      </div>
-    )
-  )
-  .addWithInfo(
+  .add(
     'custom text input handling',
-    `Sometimes you want to perform an async action to trigger a backend call on input change.`,
-    () => (
+    withInfo({
+      text: `Sometimes you want to perform an async action to trigger a backend call on input change.`,
+    })(() => (
       <WithState initialState={{ inputText: '' }}>
         {({ state, setState }) => (
           <div style={{ width: 300 }}>
@@ -68,13 +59,12 @@ storiesOf('ComboBox', module)
               itemToString={item =>
                 item ? `${item.text} queried with ${state.inputText}` : ''
               }
-              onChange={action('onChange - ComboBox')}
-              placeholder="Filter..."
               shouldFilterItem={() => true}
               onInputChange={text => setState({ inputText: text })}
+              {...props()}
             />
           </div>
         )}
       </WithState>
-    )
+    ))
   );

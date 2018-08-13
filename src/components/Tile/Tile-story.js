@@ -1,6 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import {
   Tile,
   ClickableTile,
@@ -12,45 +20,98 @@ import {
 import TileGroup from '../TileGroup';
 import RadioTile from '../RadioTile';
 
-storiesOf('Tile', module)
-  .addWithInfo(
-    'Default',
-    `
-      Default tile without any interactions
-    `,
-    () => <Tile>Default tile</Tile>
-  )
-  .addWithInfo(
-    'Clickable',
-    `
-      Clickable tile
-    `,
-    () => <ClickableTile>Clickable Tile</ClickableTile>
-  )
-  .addWithInfo(
-    'Multi-select',
-    `
-      Selectable tile
+const radioValues = {
+  '': 'None',
+  standard: 'standard',
+  'default-selected': 'default-selected',
+  selected: 'selected',
+};
 
-      Use this to select multiple tiles.
-    `,
-    () => (
-      <div>
-        <SelectableTile id="tile-1" name="tiles">
-          Multi-select Tile
-        </SelectableTile>
-        <SelectableTile id="tile-1" name="tiles">
-          Multi-select Tile
-        </SelectableTile>
-        <SelectableTile id="tile-1" name="tiles">
-          Multi-select Tile
-        </SelectableTile>
-      </div>
-    )
+const props = {
+  selectable: () => ({
+    selected: boolean('Selected (selected)', false),
+    handleClick: action('handleClick'),
+    handleKeyDown: action('handleKeyDown'),
+  }),
+  group: () => ({
+    name: text('Form item (name in <TileGroup>)', 'tile-group'),
+    valueSelected: select(
+      'Value of the selected item (valueSelected in <TileGroup>)',
+      radioValues,
+      ''
+    ),
+    onChange: action('onChange'),
+  }),
+  radio: () => ({
+    name: text('Form item name (name in <RadioTile>)', 'tiles'),
+    onChange: action('onChange'),
+  }),
+  expandable: () => ({
+    tabIndex: number('Tab index (tabIndex)', 0),
+    tileMaxHeight: number('Max height (tileMaxHeight)', 0),
+    tileCollapsedIconText: text(
+      'Collapsed icon text (tileCollapsedIconText)',
+      'Expand'
+    ),
+    tileExpandedIconText: text(
+      'Collapsed icon text (tileExpandedIconText)',
+      'Collapse'
+    ),
+    handleClick: action('handleClick'),
+  }),
+};
+
+storiesOf('Tile', module)
+  .addDecorator(withKnobs)
+  .add(
+    'Default',
+    withInfo({
+      text: `
+        Default tile without any interactions
+      `,
+    })(() => <Tile>Default tile</Tile>)
   )
-  .addWithInfo(
+  .add(
+    'Clickable',
+    withInfo({
+      text: `
+        Clickable tile
+      `,
+    })(() => (
+      <ClickableTile href={text('Href for clicable UI (href)', '#')}>
+        Clickable Tile
+      </ClickableTile>
+    ))
+  )
+  .add(
+    'Multi-select',
+    withInfo({
+      text: `
+        Selectable tile
+
+        Use this to select multiple tiles.
+      `,
+    })(() => {
+      const selectableProps = props.selectable();
+      return (
+        <div>
+          <SelectableTile id="tile-1" name="tiles" {...selectableProps}>
+            Multi-select Tile
+          </SelectableTile>
+          <SelectableTile id="tile-1" name="tiles" {...selectableProps}>
+            Multi-select Tile
+          </SelectableTile>
+          <SelectableTile id="tile-1" name="tiles" {...selectableProps}>
+            Multi-select Tile
+          </SelectableTile>
+        </div>
+      );
+    })
+  )
+  .add(
     'Selectable',
-    `
+    withInfo({
+      text: `
          The example below shows a Tile Group component with a default selected Tile.
          Although you can set the checked prop on the Tile, when using the RadioTile component
          as a child of the Tile Group, either set the defaultSelected or valueSelected which will
@@ -61,34 +122,46 @@ storiesOf('Tile', module)
 
          Use this to select one tile at a time.
       `,
-    () => (
-      <TileGroup
-        onChange={action('onChange')}
-        name="tile-group"
-        defaultSelected="default-selected"
-        legend="Selectable Tile Group">
-        <RadioTile value="standard" id="tile-1" labelText="Selectable Tile">
-          Selectable Tile
-        </RadioTile>
-        <RadioTile
-          value="default-selected"
-          labelText="Default selected tile"
-          id="tile-2">
-          Selectable Tile
-        </RadioTile>
-        <RadioTile value="selected" labelText="Selectable Tile" id="tile-3">
-          Selectable Tile
-        </RadioTile>
-      </TileGroup>
-    )
+    })(() => {
+      const radioProps = props.radio();
+      return (
+        <TileGroup
+          defaultSelected="default-selected"
+          legend="Selectable Tile Group"
+          {...props.group()}>
+          <RadioTile
+            value="standard"
+            id="tile-1"
+            labelText="Selectable Tile"
+            {...radioProps}>
+            Selectable Tile
+          </RadioTile>
+          <RadioTile
+            value="default-selected"
+            labelText="Default selected tile"
+            id="tile-2"
+            {...radioProps}>
+            Selectable Tile
+          </RadioTile>
+          <RadioTile
+            value="selected"
+            labelText="Selectable Tile"
+            id="tile-3"
+            {...radioProps}>
+            Selectable Tile
+          </RadioTile>
+        </TileGroup>
+      );
+    })
   )
-  .addWithInfo(
+  .add(
     'Expandable',
-    `
-      Expandable tile
-    `,
-    () => (
-      <ExpandableTile>
+    withInfo({
+      text: `
+        Expandable tile
+      `,
+    })(() => (
+      <ExpandableTile {...props.expandable()}>
         <TileAboveTheFoldContent>
           <div style={{ height: '200px' }}>Above the fold content here</div>
         </TileAboveTheFoldContent>
@@ -96,5 +169,5 @@ storiesOf('Tile', module)
           <div style={{ height: '400px' }}>Below the fold content here</div>
         </TileBelowTheFoldContent>
       </ExpandableTile>
-    )
+    ))
   );

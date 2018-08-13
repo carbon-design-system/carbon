@@ -1,52 +1,46 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import TextArea from '../TextArea';
 import TextAreaSkeleton from '../TextArea/TextArea.Skeleton';
 
-const TextAreaProps = {
-  labelText: 'Text Area label',
+const TextAreaProps = () => ({
   className: 'some-class',
+  disabled: boolean('Disabled (disabled)', false),
+  light: boolean('Light variant (light)', false),
+  hideLabel: boolean('No label (hideLabel)', false),
+  labelText: text('Label text (labelText)', 'Text Area label'),
+  invalid: boolean('Show form validation UI (invalid)', false),
+  invalidText: text(
+    'Content of form validation UI (invalidText)',
+    'A valid value is required'
+  ),
+  placeholder: text('Placeholder text (placeholder)', 'Placeholder text.'),
+  id: 'test2',
+  cols: number('Columns (columns)', 50),
+  rows: number('Rows (rows)', 4),
   onChange: action('onChange'),
   onClick: action('onClick'),
-  placeholder: 'Placeholder text.',
-  id: 'test2',
-  cols: 50,
-  rows: 4,
-};
+});
 
 storiesOf('TextArea', module)
-  .addWithInfo(
-    'enabled',
-    `
-      Text areas enable the user to interact with and input data. A text area is used when you
-      anticipate the user to input more than 1 sentence. The example belows shows an enabled
-      Text Area component.
-    `,
-    () => <TextArea {...TextAreaProps} />
+  .addDecorator(withKnobs)
+  .add(
+    'Default',
+    withInfo({
+      text: `
+        Text areas enable the user to interact with and input data. A text area is used when you
+        anticipate the user to input more than 1 sentence.
+      `,
+    })(() => <TextArea {...TextAreaProps()} />)
   )
-  .addWithInfo(
-    'disabled',
-    `
-      Text areas enable the user to interact with and input data. A text area is used when you
-      anticipate the user to input more than 1 sentence. The example belows shows an disabled
-      Text Area component.
-    `,
-    () => <TextArea disabled {...TextAreaProps} placeholder={'Disabled'} />
-  )
-  .addWithInfo(
-    'light',
-    `
-      Text areas enable the user to interact with and input data. A text area is used when you
-      anticipate the user to input more than 1 sentence. The example belows shows an enabled
-      Text Area component.
-    `,
-    () => <TextArea light {...TextAreaProps} />
-  )
-  .addWithInfo(
+  .add(
     'skeleton',
-    `
-      Placeholder skeleton state to use when content is loading.
-    `,
-    () => <TextAreaSkeleton />
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => <TextAreaSkeleton />)
   );

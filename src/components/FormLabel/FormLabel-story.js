@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import FormLabel from './FormLabel';
 import Tooltip from '../Tooltip';
 
@@ -8,24 +9,21 @@ const additionalProps = {
 };
 
 storiesOf('FormLabel', module)
-  .addWithInfo(
+  .add(
     'Default',
-    `
-    Form label.
-
-  `,
-    () => <FormLabel {...additionalProps}>Label</FormLabel>
+    withInfo({
+      text: 'Form label.',
+    })(() => <FormLabel {...additionalProps}>Label</FormLabel>)
   )
-  .addWithInfo(
+  .add(
     'With tooltip',
-    `
-    Form label with tooltip.
-  `,
-    () => (
+    withInfo({
+      text: 'Form label with tooltip.',
+    })(() => (
       <FormLabel {...additionalProps}>
         <Tooltip triggerText="Label">
           This is the content of the tooltip.
         </Tooltip>
       </FormLabel>
-    )
+    ))
   );

@@ -2,34 +2,37 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import SkeletonText from '../SkeletonText';
 
+const widths = {
+  '100%': '100%',
+  '250px': '250px',
+};
+
+const props = () => ({
+  heading: boolean('Skeleton text at a larger size (heading)'),
+  paragraph: boolean('Use multiple lines of text (paragraph)'),
+  lineCount: number('The number of lines in a paragraph (lineCount)', 3),
+  width: select(
+    'Width (in px or %) of single line of text or max-width of paragraph lines (width)',
+    widths,
+    '100%'
+  ),
+});
+
 storiesOf('SkeletonText', module)
-  .addWithInfo(
-    'heading',
-    `
-      Skeleton states are used as a progressive loading state while the user waits for content to load.
-
-      This example shows a skeleton state for a heading. 
-    `,
-    () => (
+  .addDecorator(withKnobs)
+  .add(
+    'Default',
+    withInfo({
+      text: `
+        Skeleton states are used as a progressive loading state while the user waits for content to load.
+      `,
+    })(() => (
       <div style={{ width: '300px' }}>
-        <SkeletonText heading />
+        <SkeletonText {...props()} />
       </div>
-    )
-  )
-  .addWithInfo(
-    'paragraph',
-    `
-      Skeleton states are used as a progressive loading state while the user waits for content to load.
-
-      This example shows a skeleton state for a paragraph of text.
-    `,
-    () => (
-      <div style={{ width: '500px' }}>
-        <SkeletonText paragraph />
-        <br />
-        <SkeletonText width="250px" lineCount={8} paragraph />
-      </div>
-    )
+    ))
   );

@@ -53,6 +53,9 @@ export default class DropdownV2 extends React.Component {
      */
     label: PropTypes.node.isRequired,
 
+    /**
+     * The dropdown type, `default` or `inline`
+     */
     type: ListBoxPropTypes.ListBoxType,
 
     /**

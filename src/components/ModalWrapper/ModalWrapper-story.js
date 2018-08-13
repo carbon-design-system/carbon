@@ -1,6 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import ModalWrapper from '../ModalWrapper';
 import TextInput from '../TextInput';
 import Select from '../Select';
@@ -8,7 +10,28 @@ import SelectItem from '../SelectItem';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 
-const modalProps = {
+const props = () => ({
+  className: 'some-class',
+  disabled: boolean('Disable the launcher button (disabled)', false),
+  passiveModal: boolean('Without footer (passiveModal)', false),
+  buttonTriggerText: text(
+    'The text in the trigger button (buttonTriggerText)',
+    'Launch Modal'
+  ),
+  modalLabel: text('The modal label (optional) (modalLabel)', 'Label'),
+  modalHeading: text('The modal heading (modalHeading)', 'Modal'),
+  primaryButtonText: text(
+    'The text in the primary button (primaryButtonText)',
+    'Save'
+  ),
+  secondaryButtonText: text(
+    'The text in the secondary button (secondaryButtonText)',
+    'Cancel'
+  ),
+  shouldCloseAfterSubmit: boolean(
+    'Close after submit (shouldCloseAfterSubmit)',
+    true
+  ),
   onBlur: action('onBlur'),
   onClick: action('onClick'),
   onFocus: action('onFocus'),
@@ -16,34 +39,26 @@ const modalProps = {
   onMouseEnter: action('onMouseEnter'),
   onMouseLeave: action('onMouseLeave'),
   onMouseUp: action('onMouseUp'),
-  className: 'some-class',
-};
+});
 
 storiesOf('ModalWrapper', module)
-  .addWithInfo(
-    'transactional modal',
-    `
-      Transactional modals are used to validate user decisions or to gain secondary confirmation from the user.
-    `,
-    () => (
+  .addDecorator(withKnobs)
+  .add(
+    'transactional/passive modal',
+    withInfo({
+      text: `
+        Transactional modals are used to validate user decisions or to gain secondary confirmation from the user.
+        Passive modal notifications should only appear if there is an action the user needs to address immediately.
+        Passive modal notifications are persistent on screen.
+      `,
+    })(() => (
       <ModalWrapper
-        modalProps={modalProps}
-        id="transactional-modal"
-        buttonTriggerText="Transactional Modal"
-        modalLabel="Label (optional)"
-        modalHeading="Transactional Modal"
-        primaryButtonText="Save"
-        secondaryButtonText="Cancel"
+        id="transactional-passive-modal"
         handleSubmit={() => {
           action('onSubmit')();
           return true;
         }}
-        shouldCloseAfterSubmit={true}>
-        <p className="bx--modal-content__text">
-          Transactional modals are used to validate user decisions os to gain
-          secondary confirmation from the user. Typically, the modal requests
-          either a 'yes' or 'no' response.
-        </p>
+        {...props()}>
         <p className="bx--modal-content__text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           cursus fermentum risus, sit amet fringilla nunc pellentesque quis.
@@ -73,97 +88,24 @@ storiesOf('ModalWrapper', module)
           tincidunt sodales.
         </p>
       </ModalWrapper>
-    )
+    ))
   )
-  .addWithInfo(
-    'passive modal',
-    `
-      Passive modal notifications should only appear if there is an action the user needs to address immediately.
-      Passive modal notifications are persistent on screen.
-    `,
-    () => (
-      <ModalWrapper
-        id="passive modal"
-        buttonTriggerText="Passive Modal"
-        modalLabel="Label (optional)"
-        modalHeading="Passive Modal"
-        passiveModal>
-        <p className="bx--modal-content__text">
-          Passive modal notifications should only appear if there is an action
-          the user needs to address immediately. Passive modal notifications are
-          persistent on screen.
-        </p>
-      </ModalWrapper>
-    )
-  )
-  .addWithInfo(
+  .add(
     'input modal',
-    `
-      Input modals are used to follow up with previous user input. These modals should include areas
-      for input that the user can interact with, such as forms, dropdowns, selectors, and links. The example
-      below shows a Modal Wrapper component with various input components.
-    `,
-    () => (
+    withInfo({
+      text: `
+        Input modals are used to follow up with previous user input. These modals should include areas
+        for input that the user can interact with, such as forms, dropdowns, selectors, and links. The example
+        below shows a Modal Wrapper component with various input components.
+      `,
+    })(() => (
       <ModalWrapper
         id="input-modal"
-        buttonTriggerText="Input Modal"
-        modalHeading="Modal with Inputs"
-        handleSubmit={action('onSubmit')}>
-        <TextInput
-          id="test2"
-          placeholder="Hint text here"
-          label="Text Input:"
-        />
-        <br />
-        <Select id="select-1" labelText="Select">
-          <SelectItem
-            disabled
-            hidden
-            value="placeholder-item"
-            text="Pick an option"
-          />
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-          <SelectItem value="option-3" text="Option 3" />
-        </Select>
-        <br />
-        <RadioButtonGroup
-          name="radio-button-group"
-          defaultSelected="default-selected">
-          <RadioButton
-            value="default-selected"
-            id="radio-1"
-            labelText="Radio Button label 1"
-            className="some-class"
-          />
-          <RadioButton
-            value="standard"
-            labelText="Radio Button label 2"
-            id="radio-2"
-            className="some-class"
-          />
-          <RadioButton
-            value="standard"
-            labelText="Radio Button label 3"
-            id="radio-3"
-            className="some-class"
-            disabled
-          />
-        </RadioButtonGroup>
-      </ModalWrapper>
-    )
-  )
-  .addWithInfo(
-    'selectorPrimaryFocus',
-    `
-      The 'selectorPrimaryFocus' prop can be used to focus on any single element when the modal is opened. The example shows an input field being focused on modal open, rather than the default behavior of focusing on the 'Save' button.
-    `,
-    () => (
-      <ModalWrapper
-        id="input-modal"
-        buttonTriggerText="Input Modal"
-        modalHeading="Modal with inputs and custom focus selector"
-        handleSubmit={action('onSubmit')}>
+        handleSubmit={() => {
+          action('onSubmit')();
+          return true;
+        }}
+        {...props()}>
         <TextInput
           id="test2"
           placeholder="Hint text here"
@@ -207,5 +149,5 @@ storiesOf('ModalWrapper', module)
           />
         </RadioButtonGroup>
       </ModalWrapper>
-    )
+    ))
   );

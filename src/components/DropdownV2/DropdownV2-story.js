@@ -1,5 +1,8 @@
 import React from 'react';
-import { storiesOf, action } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import DropdownV2 from '../DropdownV2';
 import DropdownSkeleton from '../DropdownV2/Dropdown.Skeleton';
 import WithState from '../../tools/withState';
@@ -23,87 +26,47 @@ const items = [
   },
 ];
 
+const types = {
+  default: 'Default (default)',
+  inline: 'Inline (inline)',
+};
+
+const props = () => ({
+  type: select('Dropdown type (type)', types, 'default'),
+  label: text('Label (label)', 'Label'),
+  disabled: boolean('Disabled (disabled)', false),
+  light: boolean('Light variant (light)', false),
+});
+
 storiesOf('DropdownV2', module)
-  .addWithInfo(
+  .addDecorator(withKnobs)
+  .add(
     'default',
-    `
-    DropdownV2
-  `,
-    () => (
+    withInfo({
+      text: 'DropdownV2',
+    })(() => (
       <div style={{ width: 300 }}>
         <DropdownV2
-          label="Label"
+          {...props()}
           items={items}
           itemToString={item => (item ? item.text : '')}
           onChange={action('onChange')}
         />
       </div>
-    )
+    ))
   )
-  .addWithInfo(
-    'inline',
-    `
-    Disabled DropdownV2
-  `,
-    () => (
-      <div style={{ width: 300 }}>
-        <DropdownV2
-          type="inline"
-          label="Label"
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          onChange={action('onChange')}
-        />
-      </div>
-    )
-  )
-  .addWithInfo(
-    'disabled',
-    `
-    Disabled DropdownV2
-  `,
-    () => (
-      <div style={{ width: 300 }}>
-        <DropdownV2
-          label="Label"
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          onChange={action('onChange')}
-          disabled
-        />
-      </div>
-    )
-  )
-  .addWithInfo(
-    'disabled - inline',
-    `
-    Disabled Inline DropdownV2
-  `,
-    () => (
-      <div style={{ width: 300 }}>
-        <DropdownV2
-          type="inline"
-          label="Label"
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          onChange={action('onChange')}
-          disabled
-        />
-      </div>
-    )
-  )
-  .addWithInfo(
+  .add(
     'fully controlled',
-    `
-    Sometimes you want to control everything.
-  `,
-    () => (
+    withInfo({
+      text: `
+        Sometimes you want to control everything.
+      `,
+    })(() => (
       <WithState initialState={{ selectedItem: items[0] }}>
         {({ state, setState }) => (
           <div style={{ width: 300 }}>
             <DropdownV2
-              type="inline"
-              label="Label"
+              {...props()}
               items={items}
               itemToString={item => (item ? item.text : '')}
               onChange={({ selectedItem }) =>
@@ -114,34 +77,18 @@ storiesOf('DropdownV2', module)
           </div>
         )}
       </WithState>
-    )
+    ))
   )
-  .addWithInfo(
-    'light',
-    `
-    DropdownV2
-  `,
-    () => (
-      <div style={{ width: 300 }}>
-        <DropdownV2
-          light
-          label="Label"
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          onChange={action('onChange')}
-        />
-      </div>
-    )
-  )
-  .addWithInfo(
+  .add(
     'skeleton',
-    `
-    Placeholder skeleton state to use when content is loading.
-  `,
-    () => (
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => (
       <div style={{ width: 300 }}>
         <DropdownSkeleton />&nbsp;
         <DropdownSkeleton inline />
       </div>
-    )
+    ))
   );

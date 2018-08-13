@@ -1,225 +1,80 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
 import SelectSkeleton from '../Select/Select.Skeleton';
 
-const selectProps = {
-  onChange: action('onChange'),
-  className: 'some-class',
+const props = {
+  select: () => ({
+    className: 'some-class',
+    light: boolean('Light variant (light in <Select>)', false),
+    inline: boolean(
+      'Put control in-line with label (inline in <Select>)',
+      false
+    ),
+    disabled: boolean('Disabled (disabled in <Select>)', false),
+    hideLabel: boolean('No label (hideLabel in <Select>)', false),
+    invalid: boolean('Show form validation UI (invalid in <Select>)', false),
+    invalidText: text(
+      'Form validation UI content (invalidText in <Select>)',
+      'A valid value is required'
+    ),
+    onChange: action('onChange'),
+  }),
+  group: () => ({
+    disabled: boolean('Disabled (disabled in <SelectItemGroup>)', false),
+  }),
 };
 
 storiesOf('Select', module)
-  .addWithInfo(
-    'enabled',
-    `
-      Select displays a list below its title when selected. They are used primarily in forms,
-      where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      disappear and the field will reflect the user's choice. Create Select Item components for each
-      option in the list. The example below shows an enabled Select component with three items.
-    `,
-    () => (
-      <Select {...selectProps} id="select-1" defaultValue="placeholder-item">
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
-        <SelectItemGroup label="Category 1">
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-        </SelectItemGroup>
-        <SelectItemGroup label="Category 2">
-          <SelectItem value="option-3" text="Option 3" />
-          <SelectItem value="option-4" text="Option 4" />
-        </SelectItemGroup>
-      </Select>
-    )
-  )
-  .addWithInfo(
-    'inline',
-    `
-      Inline select is for use when there will be multiple elements in a row
-    `,
-    () => (
-      <Select
-        {...selectProps}
-        inline
-        id="select-1"
-        defaultValue="placeholder-item">
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
-        <SelectItemGroup label="Starter">
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-        </SelectItemGroup>
-        <SelectItemGroup label="Advanced">
-          <SelectItem value="option-3" text="Option 3" />
-        </SelectItemGroup>
-      </Select>
-    )
-  )
-  .addWithInfo(
-    'disabled',
-    `
-      Select displays a list below its title when selected. They are used primarily in forms,
-      where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      disappear and the field will reflect the user's choice. Create SelectItem components for each
-      option in the list. The example below shows an disabled Select component.
-    `,
-    () => (
-      <Select disabled {...selectProps} id="select-2">
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
-        <SelectItemGroup label="Category 1">
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-        </SelectItemGroup>
-        <SelectItemGroup label="Category 2">
-          <SelectItem value="option-3" text="Option 3" />
-        </SelectItemGroup>
-      </Select>
-    )
-  )
-  .addWithInfo(
-    'invalid',
-    `
-      Select displays a list below its title when selected. They are used primarily in forms,
-      where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      disappear and the field will reflect the user's choice. Create Select Item components for each
-      option in the list. The example below shows an enabled Select component with three items. The example below shows a Select component after an invalid entry is chosen.
-    `,
-    () => (
-      <>
+  .addDecorator(withKnobs)
+  .add(
+    'Default',
+    withInfo({
+      text: `
+        Select displays a list below its title when selected. They are used primarily in forms,
+        where a user chooses one option from a list. Once the user selects an item, the dropdown will
+        disappear and the field will reflect the user's choice. Create Select Item components for each
+        option in the list. The example below shows an enabled Select component with three items.
+      `,
+    })(() => {
+      const groupProps = props.group();
+      return (
         <Select
-          {...selectProps}
-          light
+          {...props.select()}
           id="select-1"
-          defaultValue="placeholder-item"
-          invalid
-          invalidText="A valid value is required">
+          defaultValue="placeholder-item">
           <SelectItem
             disabled
             hidden
             value="placeholder-item"
             text="Choose an option"
           />
-          <SelectItemGroup label="Category 1">
+          <SelectItemGroup label="Category 1" {...groupProps}>
             <SelectItem value="option-1" text="Option 1" />
             <SelectItem value="option-2" text="Option 2" />
           </SelectItemGroup>
-          <SelectItemGroup label="Category 2">
+          <SelectItemGroup label="Category 2" {...groupProps}>
             <SelectItem value="option-3" text="Option 3" />
             <SelectItem value="option-4" text="Option 4" />
           </SelectItemGroup>
         </Select>
-        <Select
-          {...selectProps}
-          inline
-          light
-          id="select-2"
-          defaultValue="placeholder-item"
-          invalid
-          invalidText="A valid value is required">
-          <SelectItem
-            disabled
-            hidden
-            value="placeholder-item"
-            text="Choose an option"
-          />
-          <SelectItemGroup label="Category 1">
-            <SelectItem value="option-1" text="Option 1" />
-            <SelectItem value="option-2" text="Option 2" />
-          </SelectItemGroup>
-          <SelectItemGroup label="Category 2">
-            <SelectItem value="option-3" text="Option 3" />
-            <SelectItem value="option-4" text="Option 4" />
-          </SelectItemGroup>
-        </Select>
-      </>
-    )
+      );
+    })
   )
-  .addWithInfo(
-    'no label',
-    `
-      Select displays a list below its title when selected. They are used primarily in forms,
-      where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      disappear and the field will reflect the user's choice. Create SelectItem components for each
-      option in the list. The example below shows a Select component without a label.
-    `,
-    () => (
-      <Select
-        {...selectProps}
-        id="select-3"
-        defaultValue="placeholder-item"
-        hideLabel>
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
-        <SelectItemGroup label="Starter">
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-        </SelectItemGroup>
-        <SelectItemGroup label="Category 2">
-          <SelectItem value="option-3" text="Option 3" />
-          <SelectItem value="option-4" text="Option 4" />
-        </SelectItemGroup>
-      </Select>
-    )
-  )
-  .addWithInfo(
-    'light',
-    `
-      Select displays a list below its title when selected. They are used primarily in forms,
-      where a user chooses one option from a list. Once the user selects an item, the dropdown will
-      disappear and the field will reflect the user's choice. Create Select Item components for each
-      option in the list. The example below shows an enabled Select component with three items.
-    `,
-    () => (
-      <Select
-        {...selectProps}
-        light
-        id="select-1"
-        defaultValue="placeholder-item">
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
-        <SelectItemGroup label="Category 1">
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-        </SelectItemGroup>
-        <SelectItemGroup label="Category 2">
-          <SelectItem value="option-3" text="Option 3" />
-          <SelectItem value="option-4" text="Option 4" />
-        </SelectItemGroup>
-      </Select>
-    )
-  )
-  .addWithInfo(
+  .add(
     'skeleton',
-    `
-      Placeholder skeleton state to use when content is loading.
-    `,
-    () => (
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => (
       <div style={{ width: '300px' }}>
         <SelectSkeleton />
       </div>
-    )
+    ))
   );

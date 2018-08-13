@@ -1,127 +1,116 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAdd } from 'carbon-icons';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import Icon from '../Icon';
 
-const overflowMenuEvents = {
-  onClick: action('onClick'),
-  className: 'some-class',
+const directions = {
+  bottom: 'Bottom of the trigger button (bottom)',
+  top: 'Top of the trigger button (top)',
 };
 
-const overflowMenuItemEvents = {
-  onClick: action('onClick'),
-  className: 'some-class',
+const props = {
+  menu: () => ({
+    floatingMenu: boolean('Floating menu (floatingMenu)', false),
+    direction: select(
+      'Menu direction (Only with `floatingMenu`) (direction)',
+      directions,
+      'bottom'
+    ),
+    ariaLabel: text('ARIA label (ariaLabel)', ''),
+    iconDescription: text('Icon description (iconDescription)', ''),
+    onClick: action('onClick'),
+    onFocus: action('onFocus'),
+    onKeyDown: action('onKeyDown'),
+    onClose: action('onClose'),
+    onOpen: action('onOpen'),
+  }),
+  menuItem: () => ({
+    className: 'some-class',
+    disabled: boolean('Disabled (disabled)', false),
+    requireTitle: boolean(
+      'Use hover over text for menu item (requireTitle)',
+      false
+    ),
+    onClick: action('onClick'),
+  }),
 };
 
 storiesOf('OverflowMenu', module)
-  .addWithInfo(
+  .addDecorator(withKnobs)
+  .add(
     'basic',
-    `
-      Overflow Menu is used when additional options are available to the user and there is a space constraint.
-      Create Overflow Menu Item components for each option on the menu.
-    `,
-    () => (
-      <OverflowMenu {...overflowMenuEvents}>
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Option 1"
-          primaryFocus={true}
-        />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Option 2 is an example of a really long string and how we recommend handling this"
-          requireTitle
-        />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText={
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}>
-              Add <Icon icon={iconAdd} style={{ height: '12px' }} />
-            </div>
-          }
-        />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Danger option"
-          hasDivider
-          isDelete
-        />
-      </OverflowMenu>
-    )
+    withInfo({
+      text: `
+        Overflow Menu is used when additional options are available to the user and there is a space constraint.
+        Create Overflow Menu Item components for each option on the menu.
+      `,
+    })(() => {
+      const overflowMenuItemProps = props.menuItem();
+      return (
+        <OverflowMenu {...props.menu()}>
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText="Option 1"
+            primaryFocus={true}
+          />
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText="Option 2 is an example of a really long string and how we recommend handling this"
+            requireTitle
+          />
+          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
+          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText={
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}>
+                Add <Icon icon={iconAdd} style={{ height: '12px' }} />
+              </div>
+            }
+          />
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText="Danger option"
+            hasDivider
+            isDelete
+          />
+        </OverflowMenu>
+      );
+    })
   )
-  .addWithInfo(
-    'floating menu',
-    `
-      Overflow Menu with the floatingMenu prop is used when you need to place an OverflowMenu
-      inside a container with "overflow" CSS set.
-    `,
-    () => (
-      <OverflowMenu {...overflowMenuEvents} floatingMenu>
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Option 1"
-          primaryFocus={true}
-        />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Danger option"
-          hasDivider
-          isDelete
-        />
-      </OverflowMenu>
-    )
-  )
-  .add('floating menu (up)', () => (
-    <OverflowMenu {...overflowMenuEvents} floatingMenu direction="top">
-      <OverflowMenuItem
-        {...overflowMenuItemEvents}
-        itemText="Option 1"
-        primaryFocus={true}
-      />
-      <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
-      <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
-      <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
-      <OverflowMenuItem
-        {...overflowMenuItemEvents}
-        itemText="Danger option"
-        hasDivider
-        isDelete
-      />
-    </OverflowMenu>
-  ))
-  .addWithInfo(
+  .add(
     'custom trigger',
-    `
-      Sometimes you just want to render something other than an icon
-    `,
-    () => (
-      <OverflowMenu
-        {...overflowMenuEvents}
-        style={{ width: 'auto' }}
-        floatingMenu
-        renderIcon={iconProps => <div {...iconProps}>Custom trigger</div>}>
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 1" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 2" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 3" />
-        <OverflowMenuItem {...overflowMenuItemEvents} itemText="Option 4" />
-        <OverflowMenuItem
-          {...overflowMenuItemEvents}
-          itemText="Danger option"
-          hasDivider
-          isDelete
-        />
-      </OverflowMenu>
-    )
+    withInfo({
+      text: `
+        Sometimes you just want to render something other than an icon
+      `,
+    })(() => {
+      const overflowMenuItemProps = props.menuItem();
+      return (
+        <OverflowMenu
+          {...props.menu()}
+          style={{ width: 'auto' }}
+          renderIcon={iconProps => <div {...iconProps}>Custom trigger</div>}>
+          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 1" />
+          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 2" />
+          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
+          <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
+          <OverflowMenuItem
+            {...overflowMenuItemProps}
+            itemText="Danger option"
+            hasDivider
+            isDelete
+          />
+        </OverflowMenu>
+      );
+    })
   );

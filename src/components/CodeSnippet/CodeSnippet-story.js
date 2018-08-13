@@ -1,60 +1,89 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import CodeSnippet from '../CodeSnippet';
 import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 
-const copyProps = {
-  onClick: action('onClick'),
-  feedback: 'Feedback Enabled 👍',
-  copyLabel: 'Copy Code',
+const props = {
+  inline: () => ({
+    light: boolean('Light variant (light)', false),
+    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    copyLabel: text('ARIA label of the copy button (copyLabel)', 'Copy Code'),
+    onClick: action('onClick'),
+  }),
+  single: () => ({
+    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    copyButtonDescription: text(
+      'Copy icon description (copyButtonDescription)',
+      ''
+    ),
+    ariaLabel: text('ARIA label of the container (ariaLabel)', ''),
+    onClick: action('onClick'),
+  }),
+  multiline: () => ({
+    feedback: text('Feedback text (feedback)', 'Feedback Enabled 👍'),
+    showMoreText: text(
+      'Text for "show more" button (showMoreText)',
+      'Show more'
+    ),
+    showLessText: text(
+      'Text for "show less" button (showLessText)',
+      'Show less'
+    ),
+    onClick: action('onClick'),
+  }),
 };
 
 storiesOf('CodeSnippet', module)
-  .addWithInfo(
+  .addDecorator(withKnobs)
+  .add(
     'inline',
-    `
+    withInfo({
+      text: `
       Code snippets are small blocks of reusable code that can be inserted in a code file.
 
       The Inline style is for code used within a block of text.
     `,
-    () => (
+    })(() => (
       <div>
-        <CodeSnippet type="inline" {...copyProps}>
-          {'node -v'}
-        </CodeSnippet>
-        <CodeSnippet type="inline" light {...copyProps}>
+        <CodeSnippet type="inline" {...props.inline()}>
           {'node -v'}
         </CodeSnippet>
       </div>
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'single line',
-    `
-      Code snippets are small blocks of reusable code that can be inserted in a code file.
+    withInfo({
+      text: `
+        Code snippets are small blocks of reusable code that can be inserted in a code file.
 
-      The Code style is for larger, multi-line code snippets.
-    `,
-    () => (
-      <CodeSnippet type="single" {...copyProps}>
+        The Code style is for larger, multi-line code snippets.
+      `,
+    })(() => (
+      <CodeSnippet type="single" {...props.single()}>
         {
           'node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae fuga laboriosam!'
         }
       </CodeSnippet>
-    )
+    ))
   )
-  .addWithInfo(
+  .add(
     'multi line',
-    `
-      Code snippets are small blocks of reusable code that can be inserted in a code file.
+    withInfo({
+      text: `
+        Code snippets are small blocks of reusable code that can be inserted in a code file.
 
-      The Terminal style is for single-line .
-    `,
-    () => (
-      <div style={{ width: '800px' }}>
-        <CodeSnippet type="multi" {...copyProps}>
-          {`@mixin grid-container {
+        The Terminal style is for single-line .
+      `,
+    })(() => {
+      const multilineProps = props.multiline();
+      return (
+        <div style={{ width: '800px' }}>
+          <CodeSnippet type="multi" {...multilineProps}>
+            {`@mixin grid-container {
   width: 100%;
   padding-right: padding(mobile);
   padding-left: padding(mobile);
@@ -74,11 +103,11 @@ $z-indexes: (
   hidden : - 1,
   overflowHidden: - 1,
   floating: 10000
-);   `}
-        </CodeSnippet>
-        <br />
-        <CodeSnippet type="multi" {...copyProps}>
-          {`@mixin grid-container {
+);`}
+          </CodeSnippet>
+          <br />
+          <CodeSnippet type="multi" {...multilineProps}>
+            {`@mixin grid-container {
   width: 100%;
   padding-right: padding(mobile);
   padding-left: padding(mobile);
@@ -86,20 +115,22 @@ $z-indexes: (
   @include breakpoint(bp--xs--major) {
     padding-right: padding(xs);
   }
-}  `}
-        </CodeSnippet>
-      </div>
-    )
+}`}
+          </CodeSnippet>
+        </div>
+      );
+    })
   )
-  .addWithInfo(
+  .add(
     'skeleton',
-    `
-    Placeholder skeleton state to use when content is loading.
-    `,
-    () => (
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+        `,
+    })(() => (
       <div style={{ width: '800px' }}>
         <CodeSnippetSkeleton type="single" />
         <CodeSnippetSkeleton type="multi" />
       </div>
-    )
+    ))
   );
