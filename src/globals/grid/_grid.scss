@@ -1,16 +1,18 @@
-@import '../scss/import-once';
+@import '../scss/mixins';
 @import './classic/classic';
 @import './experimental/experimental';
 @import './experimental/fallback';
 
 @include exports('grid') {
-  @if global-variable-exists('css--use-experimental-grid') == true and $css--use-experimental-grid == true {
-    @if global-variable-exists('css--use-experimental-grid-fallback') == true and $css--use-experimental-grid-fallback == true {
+  @include experimental('grid') {
+    @include experimental('grid--fallback') {
       @include grid-experimental-fallback;
-    } @else {
-      @include grid-experimental;
     }
-  } @else {
+
+    @include grid-experimental;
+  }
+
+  @include stable('grid') {
     @include grid;
   }
 }
