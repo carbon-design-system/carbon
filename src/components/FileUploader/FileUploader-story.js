@@ -17,9 +17,12 @@ import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import Button from '../Button';
 
 const buttonKinds = {
-  none: 'None ()',
   primary: 'Primary (primary)',
   secondary: 'Secondary (secondary)',
+  danger: 'Danger (danger)',
+  ghost: 'Ghost (ghost)',
+  'danger--primary': 'Danger Primary (danger--primary)',
+  tertiary: 'Tertiary (tertiary)',
 };
 
 const filenameStatuses = {
@@ -36,7 +39,7 @@ const props = {
       labelText: text('Label text (labelText)', 'Add files'),
       name: text('Form item name: (name)', ''),
       multiple: boolean('Supports multiple files (multiple)', true),
-      buttonKind: buttonKind === 'none' ? '' : buttonKind,
+      buttonKind: buttonKind || 'primary',
       disableLabelChanges: boolean(
         'Prevent the label from being replaced with file selected file (disableLabelChanges)',
         false
@@ -83,7 +86,7 @@ storiesOf('FileUploader', module)
     })(() => (
       <div className="bx--file__container">
         <FileUploader
-          {...props.fileUploader()()}
+          {...props.fileUploader()}
           ref={fileUploader => (this.fileUploader = fileUploader)}
         />
         <Button
