@@ -62,25 +62,19 @@ export default class ModalWrapper extends React.Component {
 
   render() {
     const {
-      id,
+      children,
+      onKeyDown,
       buttonTriggerText,
       buttonTriggerClassName,
       triggerButtonKind,
-      modalLabel,
-      modalHeading,
-      passiveModal,
-      primaryButtonText,
-      secondaryButtonText,
       disabled,
+      handleSubmit, // eslint-disable-line no-unused-vars
+      shouldCloseAfterSubmit, // eslint-disable-line no-unused-vars
+      ...other
     } = this.props;
 
     const props = {
-      id,
-      modalLabel,
-      modalHeading,
-      passiveModal,
-      primaryButtonText,
-      secondaryButtonText,
+      ...other,
       open: this.state.isOpen,
       onRequestClose: this.handleClose,
       onRequestSubmit: this.handleOnRequestSubmit,
@@ -92,7 +86,7 @@ export default class ModalWrapper extends React.Component {
         onKeyDown={evt => {
           if (evt.which === 27) {
             this.handleClose();
-            this.props.onKeyDown(evt);
+            onKeyDown(evt);
           }
         }}>
         <Button
@@ -102,7 +96,7 @@ export default class ModalWrapper extends React.Component {
           onClick={this.handleOpen}>
           {buttonTriggerText}
         </Button>
-        <Modal {...props}>{this.props.children}</Modal>
+        <Modal {...props}>{children}</Modal>
       </div>
     );
   }
