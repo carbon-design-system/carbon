@@ -1,0 +1,141 @@
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vars';
+@import 'theme';
+@import 'functions';
+
+@include exports('platform-header') {
+  @include experimental('ui-shell') {
+    .#{$prefix}--platform-header {
+      display: flex;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: units(6);
+      background-color: $shell-header-bg-01;
+      color: $shell-header-text-01;
+    }
+
+    .#{$prefix}--platform-header__action {
+      @include button-reset();
+      width: units(6);
+      height: units(6);
+      border: units(0.5) solid transparent;
+    }
+
+    .#{$prefix}--platform-header__action:hover {
+      background-color: #3d3d3d;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .#{$prefix}--platform-header__action:active {
+      background-color: #0062ff;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .#{$prefix}--platform-header__action:focus {
+      border-color: #0062ff;
+      outline: none;
+    }
+
+    .#{$prefix}--platform-header__action > svg {
+      fill: $shell-header-icon-01;
+    }
+
+    .#{$prefix}--platform-header__menu-trigger {
+      margin-right: units(1);
+    }
+
+    //--------------------------------------------------------------------------
+    // Platform Header - Name
+    //--------------------------------------------------------------------------
+    a.#{$prefix}--platform-header__name {
+      text-decoration: none;
+      // TODO: sync type styles
+      font-size: rem(14px);
+      font-weight: 600;
+      letter-spacing: 0.1px;
+      line-height: 20px;
+      user-select: none;
+    }
+
+    a.#{$prefix}--platform-header__name,
+    a.#{$prefix}--platform-header__name:hover {
+      color: $shell-header-text-01;
+    }
+
+    //--------------------------------------------------------------------------
+    // Platform Header - Navigation
+    //--------------------------------------------------------------------------
+    .#{$prefix}--platform-header__nav {
+      flex: 2 1 0%;
+      height: 100%;
+    }
+
+    .#{$prefix}--platform-header__links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .#{$prefix}--platform-header__link-item {
+      height: 100%;
+    }
+
+    .#{$prefix}--platform-header__link-item:hover {
+      background-color: #3d3d3d;
+    }
+
+    a.#{$prefix}--platform-header__link {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      // TODO: sync type styles
+      font-size: rem(14px);
+      line-height: 18px;
+      letter-spacing: 0;
+      text-decoration: none;
+      font-weight: 400;
+
+      padding: 0 units(2);
+      border: units(0.5) solid transparent;
+    }
+
+    a.#{$prefix}--platform-header__link,
+    a.#{$prefix}--platform-header__link:hover {
+      color: $shell-header-text-01;
+    }
+
+    a.#{$prefix}--platform-header__link:active {
+      background-color: #3d3d3d;
+    }
+
+    a.#{$prefix}--platform-header__link:focus {
+      border-color: #0062ff;
+      outline: none;
+    }
+
+    //--------------------------------------------------------------------------
+    // Platform Header - Global
+    //--------------------------------------------------------------------------
+    .#{$prefix}--platform-header__global {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1 1 0%;
+      height: 100%;
+    }
+
+    .#{$prefix}--platform-header__global-action {
+      @include button-reset();
+      width: units(6);
+      height: units(6);
+    }
+
+    .#{$prefix}--platform-header__global-action:hover {
+      background-color: #3d3d3d;
+    }
+  }
+}

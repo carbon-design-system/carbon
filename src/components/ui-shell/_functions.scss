@@ -1,0 +1,5 @@
+@import 'variables';
+
+@function units($count) {
+  @return $unit * $count;
+}
