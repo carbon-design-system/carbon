@@ -26,12 +26,10 @@
 
     .#{$prefix}--platform-header__action:hover {
       background-color: #3d3d3d;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25);
     }
 
     .#{$prefix}--platform-header__action:active {
       background-color: #0062ff;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25);
     }
 
     .#{$prefix}--platform-header__action:focus {
