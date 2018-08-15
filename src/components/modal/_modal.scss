@@ -106,13 +106,12 @@
   }
 
   .#{$prefix}--modal-footer {
-    margin-top: auto;
-    display: flex;
-    justify-content: flex-end;
     background-color: $modal-footer-background-color;
     margin-left: rem(-24px);
     margin-right: rem(-24px);
+    margin-top: auto;
     padding: $spacing-xl $spacing-xl;
+    text-align: right;
 
     @media (min-width: 600px) {
       margin-left: rem(-48px);
