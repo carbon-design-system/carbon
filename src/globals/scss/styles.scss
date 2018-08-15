@@ -9,6 +9,10 @@ $css--use-layer: true !default;
 $css--reset: true !default;
 $css--typography: true !default;
 $css--plex: true !default;
+// TODO: remove in next major release. Synced in `feature-flags` as an adapter
+// in the interim
+$css--use-experimental-grid: false !default;
+$css--use-experimental-grid-fallback: false !default;
 
 @import 'feature-flags';
 @import 'colors';

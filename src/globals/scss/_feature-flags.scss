@@ -6,3 +6,11 @@ $feature-flags: (
   grid: false,
   grid--fallback: false,
 ) !default;
+
+@if global-variable-exists(css--use-experimental-grid) == true {
+  $feature-flags: map-set($feature-flags, grid, $css--use-experimental-grid);
+}
+
+@if global-variable-exists(css--use-experimental-grid-fallback) == true {
+  $feature-flags: map-set($feature-flags, grid, $css--use-experimental-grid-fallback);
+}
