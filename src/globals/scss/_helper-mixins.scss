@@ -12,6 +12,7 @@
 // Misc
 // ---------------------------------------------
 
+@import 'feature-flags';
 @import 'vars';
 @import 'css--reset';
 @import 'typography';
@@ -192,6 +193,18 @@
       right: auto;
       opacity: 0.3;
     }
+  }
+}
+
+@mixin experimental($feature) {
+  @if global-variable-exists(feature-flags) == true and map-get($feature-flags, $feature) == true {
+    @content;
+  }
+}
+
+@mixin stable($feature) {
+  @if global-variable-exists(feature-flags) == true and map-get($feature-flags, $feature) == false {
+    @content;
   }
 }
 
