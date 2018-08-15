@@ -13,6 +13,7 @@ const blacklist = new Set([
   '__tests__',
   '__mocks__',
   'DataTable.js',
+  'stories',
 ]);
 const components = fs
   .readdirSync(COMPONENT_PATH)
