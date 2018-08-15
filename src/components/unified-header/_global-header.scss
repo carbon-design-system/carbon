@@ -1,4 +1,7 @@
 @import '../../globals/scss/import-once';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/layer';
+@import '../../globals/scss/css--typography';
 
 @include exports('global-header') {
   .#{$prefix}--global-header {
