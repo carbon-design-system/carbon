@@ -1,6 +1,8 @@
+import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React from 'react';
 import icons from 'carbon-icons';
+import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 
 /**
  * The icons list object from `carbon-icons`.
@@ -88,7 +90,15 @@ export function svgShapes(svgData) {
 }
 
 export function isPrefixed(name) {
-  return !!name && name.split('--')[0] === 'icon';
+  if (__DEV__) {
+    invariant(
+      typeof name === 'string',
+      '[Icon] icon name is missing. You likely forgot to specify the icon, ' +
+        'or are using older (pre-`7.x`) version of `carbon-icons` library. ' +
+        'To specify the icon, use either `icon` (data) or `name` (icon name) properties.'
+    );
+  }
+  return name && name.split('--')[0] === 'icon';
 }
 
 const Icon = ({
@@ -155,20 +165,22 @@ Icon.propTypes = {
    */
   height: PropTypes.string,
 
-  /**
-   * The icon data.
-   */
-  icon: PropTypes.shape({
-    width: PropTypes.string,
-    height: PropTypes.string,
-    viewBox: PropTypes.string.isRequired,
-    svgData: PropTypes.object.isRequired,
-  }),
+  ...isRequiredOneOf({
+    /**
+     * The icon data.
+     */
+    icon: PropTypes.shape({
+      width: PropTypes.string,
+      height: PropTypes.string,
+      viewBox: PropTypes.string.isRequired,
+      svgData: PropTypes.object.isRequired,
+    }),
 
-  /**
-   * The name in the sprite.
-   */
-  name: PropTypes.string,
+    /**
+     * The name in the sprite.
+     */
+    name: PropTypes.string,
+  }),
 
   /**
    * The `role` attribute.
