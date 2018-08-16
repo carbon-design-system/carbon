@@ -12,6 +12,11 @@ const handleOnKeyDown = event => {
   }
 };
 
+const handleClick = event => {
+  event.preventDefault();
+  event.stopPropagation();
+};
+
 /**
  * `ListBox` is a generic container component that handles creating the
  * container class name in response to certain props.
@@ -41,6 +46,7 @@ const ListBox = ({
         className={className}
         ref={innerRef}
         onKeyDown={handleOnKeyDown}
+        onClick={handleClick}
         data-invalid={invalid || undefined}
         aria-invalid={invalid || undefined}>
         {children}

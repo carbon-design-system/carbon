@@ -65,6 +65,7 @@ exports[`DropdownV2 should render 1`] = `
     >
       <div
         className="bx--dropdown bx--list-box"
+        onClick={[Function]}
         onKeyDown={[Function]}
         role="listbox"
         tabIndex="0"
