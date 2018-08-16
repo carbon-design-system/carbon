@@ -10,6 +10,18 @@ module.exports = {
   format: 'iife',
   name: 'CarbonComponents',
   plugins: [
+    {
+      load(id) {
+        if (id === require.resolve('markdown-it')) {
+          return `
+            export default class Markdown {
+              render() { return '' }
+            }
+          `;
+        }
+        return undefined;
+      },
+    },
     resolve({
       jsnext: true,
       main: true,
@@ -18,7 +30,15 @@ module.exports = {
       include: 'node_modules/**',
       sourceMap: true,
       namedExports: {
-        'node_modules/react/index.js': ['Children', 'Component', 'PureComponent', 'Fragment', 'PropTypes', 'createElement'],
+        'node_modules/react/index.js': [
+          'Children',
+          'Component',
+          'PureComponent',
+          'Fragment',
+          'PropTypes',
+          'createElement',
+          'isValidElement',
+        ],
         'node_modules/react-dom/index.js': ['render'],
       },
     }),
