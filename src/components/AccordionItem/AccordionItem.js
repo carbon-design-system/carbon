@@ -50,14 +50,14 @@ export default class AccordionItem extends Component {
     onHeadingClick: () => {},
   };
 
-  state = {
-    open: this.props.open,
-  };
-
-  UNSAFE_componentWillReceiveProps({ open }) {
-    if (open !== this.props.open) {
-      this.setState({ open });
-    }
+  static getDerivedStateFromProps({ open }, state) {
+    const { prevOpen } = state || {};
+    return state && prevOpen === open
+      ? null
+      : {
+          open,
+          prevOpen: open,
+        };
   }
 
   handleClick = evt => {

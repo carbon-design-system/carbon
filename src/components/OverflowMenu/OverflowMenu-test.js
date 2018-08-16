@@ -169,13 +169,13 @@ describe('OverflowMenu', () => {
     it('should be in a closed state after handleOutsideClick() is invoked', () => {
       const rootWrapper = shallow(<OverflowMenu />);
 
-      expect(rootWrapper.state().open).toEqual(false);
+      expect(rootWrapper.state().open).not.toEqual(true);
 
       rootWrapper.setState({ open: true });
 
       rootWrapper.props().onClickOutside();
 
-      expect(rootWrapper.state().open).toEqual(false);
+      expect(rootWrapper.state().open).not.toEqual(true);
     });
 
     it('open state should be controlled by open props', () => {
@@ -199,6 +199,23 @@ describe('OverflowMenu', () => {
       );
       expect(rootWrapper.find('.bx--overflow-menu__icon')).toHaveLength(0);
       expect(rootWrapper.find('.other')).toHaveLength(1);
+    });
+  });
+
+  describe('Getting derived state from props', () => {
+    it('should change the open state upon change in props', () => {
+      const wrapper = shallow(<OverflowMenu open />);
+      expect(wrapper.state().open).toEqual(true);
+      wrapper.setProps({ open: false });
+      expect(wrapper.state().open).toEqual(false);
+    });
+
+    it('should avoid change the open state upon setting props, unless there the value actually changes', () => {
+      const wrapper = mount(<OverflowMenu />);
+      wrapper.setProps({ open: true });
+      wrapper.setState({ open: false });
+      wrapper.setProps({ open: true });
+      expect(wrapper.state().open).toEqual(false);
     });
   });
 });

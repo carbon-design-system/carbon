@@ -84,16 +84,23 @@ describe('FileUploaderButton', () => {
 
   describe('Update labelText', () => {
     it('should have equal state and props', () => {
-      expect(mountWrapper.state().labelText).toEqual(
-        mountWrapper.props().labelText
-      );
+      expect(
+        shallow(<FileUploaderButton labelText="foo" />).state().labelText
+      ).toEqual('foo');
     });
 
-    it('should update state with props', () => {
-      mountWrapper.setProps({ labelText: 'new label' });
-      expect(mountWrapper.state().labelText).toEqual(
-        mountWrapper.props().labelText
-      );
+    it('should change the label text upon change in props', () => {
+      mountWrapper.setProps({ labelText: 'foo' });
+      mountWrapper.setState({ labelText: 'foo' });
+      mountWrapper.setProps({ labelText: 'bar' });
+      expect(mountWrapper.state().labelText).toEqual('bar');
+    });
+
+    it('should avoid change the label text upon setting props, unless there the value actually changes', () => {
+      mountWrapper.setProps({ labelText: 'foo' });
+      mountWrapper.setState({ labelText: 'bar' });
+      mountWrapper.setProps({ labelText: 'foo' });
+      expect(mountWrapper.state().labelText).toEqual('bar');
     });
   });
 });
@@ -137,6 +144,29 @@ describe('FileUploader', () => {
       // Test to make sure it was properly removed
       mountUploadedWrapper.instance().clearFiles();
       expect(mountUploadedWrapper.update().find(Filename)).toHaveLength(0);
+    });
+  });
+
+  describe('Update filenameStatus', () => {
+    it('should have equal state and props', () => {
+      expect(
+        shallow(<FileUploader filenameStatus="uploading" />).state()
+          .filenameStatus
+      ).toEqual('uploading');
+    });
+
+    it('should change the label text upon change in props', () => {
+      mountWrapper.setProps({ filenameStatus: 'uploading' });
+      mountWrapper.setState({ filenameStatus: 'uploading' });
+      mountWrapper.setProps({ filenameStatus: 'edit' });
+      expect(mountWrapper.state().filenameStatus).toEqual('edit');
+    });
+
+    it('should avoid change the label text upon setting props, unless there the value actually changes', () => {
+      mountWrapper.setProps({ filenameStatus: 'uploading' });
+      mountWrapper.setState({ filenameStatus: 'edit' });
+      mountWrapper.setProps({ filenameStatus: 'uploading' });
+      expect(mountWrapper.state().filenameStatus).toEqual('edit');
     });
   });
 });

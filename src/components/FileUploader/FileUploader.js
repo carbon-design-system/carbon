@@ -33,16 +33,15 @@ export class FileUploaderButton extends Component {
     onClick: () => {},
     accept: [],
   };
-  state = {
-    labelText: this.props.labelText,
-  };
-  UNSAFE_componentWillMount() {
-    this.uid = this.props.id || uid();
-  }
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.labelText !== this.props.labelText) {
-      this.setState({ labelText: nextProps.labelText });
-    }
+
+  static getDerivedStateFromProps({ labelText }, state) {
+    const { prevLabelText } = state || {};
+    return state && prevLabelText === labelText
+      ? null
+      : {
+          labelText,
+          prevLabelText: labelText,
+        };
   }
 
   handleChange = evt => {
@@ -75,6 +74,8 @@ export class FileUploaderButton extends Component {
       'bx--file': true,
       [className]: className,
     });
+
+    this.uid = this.props.id || uid();
 
     return (
       <div
@@ -195,16 +196,20 @@ export default class FileUploader extends Component {
 
   state = {
     filenames: [],
-    filenameStatus: '',
   };
 
   nodes = [];
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.filenameStatus !== this.props.filenameStatus) {
-      this.setState({ filenameStatus: nextProps.filenameStatus });
-    }
+  static getDerivedStateFromProps({ filenameStatus }, state) {
+    const { prevFilenameStatus } = state;
+    return prevFilenameStatus === filenameStatus
+      ? null
+      : {
+          filenameStatus,
+          prevFilenameStatus: filenameStatus,
+        };
   }
+
   handleChange = evt => {
     evt.stopPropagation();
     this.setState({

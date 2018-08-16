@@ -24,10 +24,6 @@ export class Tile extends Component {
 }
 
 export class ClickableTile extends Component {
-  state = {
-    clicked: this.props.clicked,
-  };
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -66,10 +62,14 @@ export class ClickableTile extends Component {
     }
   };
 
-  UNSAFE_componentWillReceiveProps({ clicked }) {
-    if (clicked !== this.props.clicked) {
-      this.setState({ clicked });
-    }
+  static getDerivedStateFromProps({ clicked }, state) {
+    const { prevClicked } = state || {};
+    return state && prevClicked === clicked
+      ? null
+      : {
+          clicked,
+          prevClicked: clicked,
+        };
   }
 
   render() {
@@ -194,10 +194,14 @@ export class SelectableTile extends Component {
     }
   };
 
-  UNSAFE_componentWillReceiveProps({ selected }) {
-    if (selected !== this.props.selected) {
-      this.setState({ selected });
-    }
+  static getDerivedStateFromProps({ selected }, state) {
+    const { prevSelected } = state || {};
+    return state && prevSelected === selected
+      ? null
+      : {
+          selected,
+          prevSelected: selected,
+        };
   }
 
   render() {
@@ -249,12 +253,6 @@ export class SelectableTile extends Component {
 }
 
 export class ExpandableTile extends Component {
-  state = {
-    expanded: this.props.expanded,
-    tileMaxHeight: this.props.tileMaxHeight,
-    tilePadding: this.props.tilePadding,
-  };
-
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -273,16 +271,37 @@ export class ExpandableTile extends Component {
     tileExpandedIconText: 'Collapse',
   };
 
-  UNSAFE_componentWillReceiveProps({ expanded, tileMaxHeight, tilePadding }) {
-    if (expanded !== this.props.expanded) {
-      this.setState({ expanded });
-    }
-    if (tileMaxHeight !== this.props.tileMaxHeight) {
-      this.setState({ tileMaxHeight });
-    }
-    if (tilePadding !== this.props.tilePadding) {
-      this.setState({ tilePadding });
-    }
+  static getDerivedStateFromProps(
+    { expanded, tileMaxHeight, tilePadding },
+    state
+  ) {
+    const {
+      prevExpanded,
+      prevTileMaxHeight,
+      prevTilePadding,
+      expanded: currentExpanded,
+      tileMaxHeight: currentTileMaxHeight,
+      tilePadding: currentTilePadding,
+    } =
+      state || {};
+    const expandedChanged = prevExpanded !== expanded;
+    const tileMaxHeightChanged = prevTileMaxHeight !== tileMaxHeight;
+    const tilePaddingChanged = prevTilePadding !== tilePadding;
+    return state &&
+      !expandedChanged &&
+      !tileMaxHeightChanged &&
+      !tilePaddingChanged
+      ? null
+      : {
+          expanded: !expandedChanged ? currentExpanded : expanded,
+          tileMaxHeight: !tileMaxHeightChanged
+            ? currentTileMaxHeight
+            : tileMaxHeight,
+          tilePadding: !tilePaddingChanged ? currentTilePadding : tilePadding,
+          prevExpanded: expanded,
+          prevTileMaxHeight: tileMaxHeight,
+          prevTilePadding: tilePadding,
+        };
   }
 
   componentDidMount = () => {

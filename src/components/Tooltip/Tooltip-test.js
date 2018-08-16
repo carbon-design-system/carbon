@@ -4,7 +4,7 @@ import { iconInfoGlyph } from 'carbon-icons';
 import Icon from '../Icon';
 import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 jest.mock('lodash.debounce');
 
@@ -176,6 +176,14 @@ describe('Tooltip', () => {
         triggerText: 'Tooltip',
       });
       expect(rootWrapper.state().open).toEqual(true);
+    });
+
+    it('should avoid change the open state upon setting props, unless there the value actually changes', () => {
+      const rootWrapper = shallow(<Tooltip />);
+      rootWrapper.setProps({ open: true });
+      rootWrapper.setState({ open: false });
+      rootWrapper.setProps({ open: true });
+      expect(rootWrapper.state().open).toEqual(false);
     });
   });
 

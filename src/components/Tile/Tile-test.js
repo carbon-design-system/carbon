@@ -73,6 +73,24 @@ describe('Tile', () => {
       wrapper.simulate('keydown', { which: 13 });
       expect(wrapper.state().clicked).toEqual(false);
     });
+
+    it('supports setting initial clicked state from props', () => {
+      expect(shallow(<ClickableTile clicked />).state().clicked).toEqual(true);
+    });
+
+    it('supports setting clicked state from props', () => {
+      wrapper.setProps({ clicked: true });
+      wrapper.setState({ clicked: true });
+      wrapper.setProps({ clicked: false });
+      expect(wrapper.state().clicked).toEqual(false);
+    });
+
+    it('avoids changing clicked state upon setting props, unless actual value change is detected', () => {
+      wrapper.setProps({ clicked: true });
+      wrapper.setState({ clicked: false });
+      wrapper.setProps({ clicked: true });
+      expect(wrapper.state().clicked).toEqual(false);
+    });
   });
 
   describe('Renders selectable tile as expected', () => {
@@ -115,6 +133,26 @@ describe('Tile', () => {
     it('the input should be checked when state is selected', () => {
       wrapper.setState({ selected: true });
       expect(wrapper.find('input').props().checked).toEqual(true);
+    });
+
+    it('supports setting initial selected state from props', () => {
+      expect(shallow(<SelectableTile selected />).state().selected).toEqual(
+        true
+      );
+    });
+
+    it('supports setting selected state from props', () => {
+      wrapper.setProps({ selected: true });
+      wrapper.setState({ selected: true });
+      wrapper.setProps({ selected: false });
+      expect(wrapper.state().selected).toEqual(false);
+    });
+
+    it('avoids changing selected state upon setting props, unless actual value change is detected', () => {
+      wrapper.setProps({ selected: true });
+      wrapper.setState({ selected: false });
+      wrapper.setProps({ selected: true });
+      expect(wrapper.state().selected).toEqual(false);
     });
   });
 
@@ -205,6 +243,62 @@ describe('Tile', () => {
         .find({ icon: iconChevronDown })
         .getElements()[0].props.description;
       expect(expandedDescription).toEqual(tileExpandedIconText);
+    });
+
+    it('supports setting initial expanded state from props', () => {
+      const { expanded } = mount(
+        <ExpandableTile expanded>
+          <TileAboveTheFoldContent className="child">
+            <div style={{ height: '200px' }}>Test</div>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent className="child">
+            <div style={{ height: '500px' }}>Test</div>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      ).state();
+      expect(expanded).toEqual(true);
+    });
+
+    it('supports setting expanded state from props', () => {
+      wrapper.setProps({ expanded: true });
+      wrapper.setState({ expanded: true });
+      wrapper.setProps({ expanded: false });
+      expect(wrapper.state().expanded).toEqual(false);
+    });
+
+    it('avoids changing expanded state upon setting props, unless actual value change is detected', () => {
+      wrapper.setProps({ expanded: true });
+      wrapper.setState({ expanded: false });
+      wrapper.setProps({ expanded: true });
+      expect(wrapper.state().expanded).toEqual(false);
+    });
+
+    it('supports setting max height from props', () => {
+      wrapper.setProps({ tileMaxHeight: 2 });
+      wrapper.setState({ tileMaxHeight: 2 });
+      wrapper.setProps({ tileMaxHeight: 1 });
+      expect(wrapper.state().tileMaxHeight).toEqual(1);
+    });
+
+    it('avoids changing max height upon setting props, unless actual value change is detected', () => {
+      wrapper.setProps({ tileMaxHeight: 2 });
+      wrapper.setState({ tileMaxHeight: 1 });
+      wrapper.setProps({ tileMaxHeight: 2 });
+      expect(wrapper.state().tileMaxHeight).toEqual(1);
+    });
+
+    it('supports setting padding from props', () => {
+      wrapper.setProps({ tilePadding: 2 });
+      wrapper.setState({ tilePadding: 2 });
+      wrapper.setProps({ tilePadding: 1 });
+      expect(wrapper.state().tilePadding).toEqual(1);
+    });
+
+    it('avoids changing padding upon setting props, unless actual value change is detected', () => {
+      wrapper.setProps({ tilePadding: 2 });
+      wrapper.setState({ tilePadding: 1 });
+      wrapper.setProps({ tilePadding: 2 });
+      expect(wrapper.state().tilePadding).toEqual(1);
     });
   });
 });

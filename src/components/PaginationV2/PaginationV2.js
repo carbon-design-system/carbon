@@ -126,30 +126,42 @@ export default class PaginationV2 extends Component {
     pageText: page => `page ${page}`,
   };
 
-  state = {
-    page: this.props.page,
-    pageSize:
-      this.props.pageSize && this.props.pageSizes.includes(this.props.pageSize)
-        ? this.props.pageSize
-        : this.props.pageSizes[0],
-  };
-
   UNSAFE_componentWillMount() {
     this.uniqueId = ++instanceId;
   }
 
-  UNSAFE_componentWillReceiveProps({ pageSizes, page, pageSize }) {
-    if (!equals(pageSizes, this.props.pageSizes)) {
-      this.setState({ pageSize: pageSizes[0], page: 1 });
+  static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
+    if (!state) {
+      return {
+        page: page,
+        pageSize:
+          pageSize && pageSizes.includes(pageSize) ? pageSize : pageSizes[0],
+        prevPageSizes: pageSizes,
+        prevPage: page,
+        prevPageSize: pageSize,
+      };
     }
-    if (page !== this.props.page) {
-      this.setState({
-        page,
-      });
-    }
-    if (pageSize !== this.props.pageSize) {
-      this.setState({ pageSize });
-    }
+    const {
+      prevPageSizes,
+      prevPage,
+      prevPageSize,
+      page: currentPage,
+      pageSize: currentPageSize,
+    } = state;
+    const pageSizesChanged = !equals(pageSizes, prevPageSizes);
+    const pageChanged = page !== prevPage;
+    const pageSizeChanged = pageSize !== prevPageSize;
+    return !pageSizesChanged && !pageChanged && !pageSizeChanged
+      ? null
+      : {
+          page: pageSizesChanged ? 1 : pageChanged ? page : currentPage,
+          pageSize: pageSizesChanged
+            ? pageSizes[0]
+            : pageSizeChanged ? pageSize : currentPageSize,
+          prevPageSizes: pageSizes,
+          prevPage: page,
+          prevPageSize: pageSize,
+        };
   }
 
   handleSizeChange = evt => {

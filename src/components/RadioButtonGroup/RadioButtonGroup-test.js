@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 
@@ -103,6 +103,36 @@ describe('RadioButtonGroup', () => {
       onChange.mockClear();
       firstRadio.props().onChange(...args);
       expect(onChange).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Getting derived state from props', () => {
+    const wrapper = shallow(
+      <RadioButtonGroup
+        valueSelected="male"
+        defaultSelected="female"
+        name="gender">
+        <RadioButton labelText="Male" value="male" />
+        <RadioButton labelText="Female" value="female" />
+      </RadioButtonGroup>
+    );
+
+    it('should initialize the current selection from props', () => {
+      expect(wrapper.state().selected).toEqual('male');
+    });
+
+    it('should change the current selection upon change in props', () => {
+      wrapper.setProps({ valueSelected: 'male' });
+      wrapper.setState({ selected: 'male' });
+      wrapper.setProps({ valueSelected: undefined });
+      expect(wrapper.state().selected).toEqual('female');
+    });
+
+    it('should avoid change the current selection upon setting props, unless there the value actually changes', () => {
+      wrapper.setProps({ valueSelected: 'female' });
+      wrapper.setState({ selected: 'male' });
+      wrapper.setProps({ valueSelected: 'female' });
+      expect(wrapper.state().selected).toEqual('male');
     });
   });
 });

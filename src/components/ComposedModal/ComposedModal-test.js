@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ModalHeader, ModalBody, ModalFooter } from '../ComposedModal';
+import ComposedModal, {
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from '../ComposedModal';
 
 describe('<ModalHeader />', () => {
   describe('Renders as expected', () => {
@@ -113,5 +117,22 @@ describe('<ModalFooter />', () => {
       expect(buttonComponent.exists()).toBe(true);
       expect(buttonComponent.props().kind).toBe('secondary');
     });
+  });
+});
+
+describe('<ComposedModal />', () => {
+  it('changes the open state upon change in props', () => {
+    const wrapper = shallow(<ComposedModal open />);
+    expect(wrapper.state().open).toEqual(true);
+    wrapper.setProps({ open: false });
+    expect(wrapper.state().open).toEqual(false);
+  });
+
+  it('avoids change the open state upon setting props, unless there the value actually changes', () => {
+    const wrapper = shallow(<ComposedModal />);
+    wrapper.setProps({ open: true });
+    wrapper.setState({ open: false });
+    wrapper.setProps({ open: true });
+    expect(wrapper.state().open).toEqual(false);
   });
 });

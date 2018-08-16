@@ -16,10 +16,6 @@ export default class ComposedModal extends Component {
     onKeyDown: PropTypes.func,
   };
 
-  state = {
-    open: this.props.open,
-  };
-
   handleKeyDown = evt => {
     if (evt.which === 27) {
       this.closeModal();
@@ -34,12 +30,14 @@ export default class ComposedModal extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.open !== this.state.open) {
-      this.setState({
-        open: nextProps.open,
-      });
-    }
+  static getDerivedStateFromProps({ open }, state) {
+    const { prevOpen } = state || {};
+    return state && prevOpen === open
+      ? null
+      : {
+          open,
+          prevOpen: open,
+        };
   }
 
   closeModal = () => {

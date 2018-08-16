@@ -66,14 +66,14 @@ export class ProgressIndicator extends Component {
     currentIndex: 0,
   };
 
-  state = {
-    currentIndex: this.props.currentIndex,
-  };
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.currentIndex !== this.props.currentIndex) {
-      this.setState({ currentIndex: nextProps.currentIndex });
-    }
+  static getDerivedStateFromProps({ currentIndex }, state) {
+    const { prevCurrentIndex } = state || {};
+    return state && prevCurrentIndex === currentIndex
+      ? null
+      : {
+          currentIndex,
+          prevCurrentIndex: currentIndex,
+        };
   }
 
   renderSteps = () =>

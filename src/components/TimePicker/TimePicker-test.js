@@ -154,4 +154,22 @@ describe('TimePicker', () => {
       });
     });
   });
+
+  describe('Getting derived state from props', () => {
+    const wrapper = shallow(<TimePicker />);
+
+    it('should change the value upon change in props', () => {
+      wrapper.setProps({ value: 'foo' });
+      wrapper.setState({ value: 'foo' });
+      wrapper.setProps({ value: 'bar' });
+      expect(wrapper.state().value).toEqual('bar');
+    });
+
+    it('should avoid change the value upon setting props, unless there the value actually changes', () => {
+      wrapper.setProps({ value: 'foo' });
+      wrapper.setState({ value: 'bar' });
+      wrapper.setProps({ value: 'foo' });
+      expect(wrapper.state().value).toEqual('bar');
+    });
+  });
 });

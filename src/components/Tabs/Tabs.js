@@ -33,11 +33,16 @@ export default class Tabs extends React.Component {
 
   state = {
     dropdownHidden: true,
-    selected: this.props.selected,
   };
 
-  UNSAFE_componentWillReceiveProps({ selected }) {
-    this.selectTabAt(selected);
+  static getDerivedStateFromProps({ selected }, state) {
+    const { prevSelected } = state;
+    return prevSelected === selected
+      ? null
+      : {
+          selected,
+          prevSelected: selected,
+        };
   }
 
   getTabs() {

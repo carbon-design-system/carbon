@@ -271,14 +271,6 @@ export default class OverflowMenu extends Component {
    */
   _hFocusIn = null;
 
-  state = {
-    /**
-     * The open/closed state.
-     * @type {boolean}
-     */
-    open: this.props.open,
-  };
-
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.open && !this.state.open) {
       requestAnimationFrame(() => {
@@ -315,10 +307,14 @@ export default class OverflowMenu extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.open !== this.props.open) {
-      this.setState({ open: nextProps.open });
-    }
+  static getDerivedStateFromProps({ open }, state) {
+    const { prevOpen } = state || {};
+    return state && prevOpen === open
+      ? null
+      : {
+          open,
+          prevOpen: open,
+        };
   }
 
   componentWillUnmount() {

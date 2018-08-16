@@ -19,22 +19,14 @@ export default class TileGroup extends React.Component {
     className: 'bx--tile-group',
   };
 
-  state = {
-    selected: null,
-  };
-
-  UNSAFE_componentWillMount() {
-    this.setState({
-      selected: this.props.valueSelected || this.props.defaultSelected || null,
-    });
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.hasOwnProperty('valueSelected')) {
-      this.setState({
-        selected: nextProps.valueSelected,
-      });
-    }
+  static getDerivedStateFromProps({ valueSelected, defaultSelected }, state) {
+    const { prevValueSelected } = state || {};
+    return state && prevValueSelected === valueSelected
+      ? null
+      : {
+          selected: valueSelected || defaultSelected || null,
+          prevValueSelected: valueSelected,
+        };
   }
 
   getRadioTiles = () => {

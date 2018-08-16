@@ -272,6 +272,13 @@ describe('props update', () => {
     wrapper.setProps({ selected: 0 });
     expect(wrapper.state().selected).toEqual(0);
   });
+
+  it('avoids updating state upon setting props, unless there the value actually changes', () => {
+    wrapper.setProps({ selected: 1 });
+    wrapper.setState({ selected: 2 });
+    wrapper.setProps({ selected: 1 });
+    expect(wrapper.state().selected).toEqual(2);
+  });
 });
 
 describe('selection change', () => {

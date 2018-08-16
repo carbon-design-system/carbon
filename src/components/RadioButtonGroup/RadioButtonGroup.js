@@ -19,22 +19,14 @@ export default class RadioButtonGroup extends React.Component {
     className: 'bx--radio-button-group',
   };
 
-  state = {
-    selected: null,
-  };
-
-  UNSAFE_componentWillMount() {
-    this.setState({
-      selected: this.props.valueSelected || this.props.defaultSelected || null,
-    });
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.hasOwnProperty('valueSelected')) {
-      this.setState({
-        selected: nextProps.valueSelected,
-      });
-    }
+  static getDerivedStateFromProps({ valueSelected, defaultSelected }, state) {
+    const { prevValueSelected } = state || {};
+    return state && prevValueSelected === valueSelected
+      ? null
+      : {
+          selected: valueSelected || defaultSelected,
+          prevValueSelected: valueSelected,
+        };
   }
 
   getRadioButtons = () => {

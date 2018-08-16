@@ -138,6 +138,20 @@ describe('NumberInput', () => {
           expect(invalidText.length).toEqual(1);
           expect(invalidText.text()).toEqual('invalid text');
         });
+
+        it('should change the value upon change in props', () => {
+          wrapper.setProps({ value: 1 });
+          wrapper.setState({ value: 1 });
+          wrapper.setProps({ value: 2 });
+          expect(wrapper.state().value).toEqual(2);
+        });
+
+        it('should avoid change the value upon setting props, unless there the value actually changes', () => {
+          wrapper.setProps({ value: 1 });
+          wrapper.setState({ value: 2 });
+          wrapper.setProps({ value: 1 });
+          expect(wrapper.state().value).toEqual(2);
+        });
       });
     });
 

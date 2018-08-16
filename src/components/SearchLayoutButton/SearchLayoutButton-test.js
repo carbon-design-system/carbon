@@ -2,7 +2,7 @@ import React from 'react';
 import { iconList, iconGrid } from 'carbon-icons';
 import Icon from '../Icon';
 import SearchLayoutButton from '../SearchLayoutButton';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 describe('SearchLayoutButton', () => {
   const wrapper = mount(<SearchLayoutButton labelText="testlabel" />);
@@ -39,6 +39,14 @@ describe('SearchLayoutButton', () => {
       expect(wrapperWithFormatProps.find(Icon).props().icon).toEqual(iconGrid);
       wrapperWithFormatProps.setProps({ format: 'list' });
       expect(wrapperWithFormatProps.find(Icon).props().icon).toEqual(iconList);
+    });
+
+    it('should avoid change the format upon setting props, unless there the value actually changes', () => {
+      const wrapperWithFormatProps = shallow(<SearchLayoutButton />);
+      wrapperWithFormatProps.setProps({ format: 'grid' });
+      wrapperWithFormatProps.setState({ format: 'list' });
+      wrapperWithFormatProps.setProps({ format: 'grid' });
+      expect(wrapperWithFormatProps.state().format).toEqual('list');
     });
 
     it('should support being notified of change in layout', () => {

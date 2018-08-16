@@ -33,10 +33,15 @@ describe('ContentSwitcher', () => {
   });
 
   describe('Allow initial state to draw from props', () => {
-    const wrapper = shallow(
+    const onChange = jest.fn();
+    const mockData = {
+      index: 0,
+    };
+
+    const wrapper = mount(
       <ContentSwitcher
         selectedIndex={1}
-        onChange={() => {}}
+        onChange={onChange}
         className="extra-class">
         <Switch kind="anchor" text="one" />
         <Switch kind="anchor" text="two" />
@@ -48,6 +53,31 @@ describe('ContentSwitcher', () => {
     it('Should apply the selected property on the selected child', () => {
       expect(children.first().props().selected).toEqual(false);
       expect(children.last().props().selected).toEqual(true);
+    });
+
+    it('should avoid change the selected index upon setting props, unless there the value actually changes', () => {
+      wrapper.setProps({ selectedIndex: 1 });
+      // Turns `state.selectedIndex` to `0`
+      children
+        .first()
+        .props()
+        .onClick(mockData);
+      wrapper.setProps({ selectedIndex: 1 }); // No change in `selectedIndex` prop
+      const clonedChildren = wrapper.find(Switch);
+      expect(clonedChildren.first().props().selected).toEqual(true);
+      expect(clonedChildren.last().props().selected).toEqual(false);
+    });
+
+    it('should change the selected index upon change in props', () => {
+      wrapper.setProps({ selectedIndex: 0 });
+      children
+        .first()
+        .props()
+        .onClick(mockData);
+      wrapper.setProps({ selectedIndex: 1 });
+      const clonedChildren = wrapper.find(Switch);
+      expect(clonedChildren.first().props().selected).toEqual(false);
+      expect(clonedChildren.last().props().selected).toEqual(true);
     });
   });
 

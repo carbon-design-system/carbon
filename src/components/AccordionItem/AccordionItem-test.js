@@ -39,7 +39,7 @@ describe('AccordionItem', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
 
-    it('can be open by default', () => {
+    it('changes the open state upon change in props', () => {
       const openItem = shallow(
         <AccordionItem title="A heading" open>
           Lorem ipsum.
@@ -47,6 +47,20 @@ describe('AccordionItem', () => {
       );
       expect(openItem.hasClass('bx--accordion__item--active')).toEqual(true);
       expect(openItem.state().open).toEqual(true);
+      openItem.setState({ open: true });
+      openItem.setProps({ open: false });
+      expect(openItem.state().open).toEqual(false);
+    });
+
+    it('avoids change the open state upon setting props, unless the value actually changes', () => {
+      const openItem = shallow(
+        <AccordionItem title="A heading" open>
+          Lorem ipsum.
+        </AccordionItem>
+      );
+      openItem.setState({ open: false });
+      openItem.setProps({ open: true });
+      expect(openItem.state().open).toEqual(false);
     });
 
     it('should apply the active class when the state is open', () => {
