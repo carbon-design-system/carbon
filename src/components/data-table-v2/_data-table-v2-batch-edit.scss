@@ -49,11 +49,13 @@
       }
     }
 
+    .#{$prefix}--data-table-v2--zebra tbody tr:nth-child(even),
     tr:hover td,
-    td {
-      background-color: $field-02;
+    .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
+    tbody tr.#{$prefix}--data-table-v2--selected {
+      background-color: transparent;
     }
-
+  
     td {
       border-left: 1px solid $ui-03;
       padding: 0;
