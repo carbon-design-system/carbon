@@ -14,11 +14,13 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const templates = require('./tools/templates');
-const config = require('./tools/webpack.dev.config');
+const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
-const compiler = webpack(config);
-const hotMiddleware = webpackHotMiddleware(compiler);
+const templates = require('./tools/templates');
+const config = devMode && require('./tools/webpack.dev.config'); // eslint-disable-line global-require
+
+const compiler = devMode && webpack(config);
+const hotMiddleware = devMode && webpackHotMiddleware(compiler);
 
 let dummyHashSeq = 0;
 const watchCallback = debounce(() => {
@@ -26,11 +28,13 @@ const watchCallback = debounce(() => {
   hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
 }, 500);
 
-chokidar
-  .watch(['demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
-  .on('add', watchCallback)
-  .on('change', watchCallback)
-  .on('unlink', watchCallback);
+if (devMode) {
+  chokidar
+    .watch(['demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
+    .on('add', watchCallback)
+    .on('change', watchCallback)
+    .on('unlink', watchCallback);
+}
 
 const reComponentPath = pathRegexp('/component/:component');
 const reDemoComponentPath = pathRegexp('/demo/:component');
@@ -78,6 +82,10 @@ const getNavItems = () =>
       contents,
     }));
 
+function noopRoute(req, res, next) {
+  next();
+}
+
 function navRoute(req, res, next) {
   const { url } = req;
   const name = url === '/' ? url : (reDemoComponentPath.exec(url) || [])[1];
@@ -100,7 +108,8 @@ function navRoute(req, res, next) {
       })
       .catch(err => {
         console.error(err.stack); // eslint-disable-line no-console
-        res.status(500).end();
+        res.writeHead(500);
+        res.end();
       });
   }
 }
@@ -110,21 +119,24 @@ function componentRoute(req, res, next) {
   if (!name) {
     next();
   } else if (path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
-    res.status(404).end();
+    res.writeHead(404);
+    res.end();
   } else {
     templates
       .render({ layout: 'preview', concat: true }, name)
       .then(rendered => {
         // eslint-disable-next-line eqeqeq
         if (rendered == null) {
-          res.status(404).end();
+          res.writeHead(404);
+          res.end();
         }
         res.setHeader('Content-Type', 'text/html');
         res.end(rendered);
       })
       .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console
-        res.status(500).end();
+        res.writeHead(500);
+        res.end();
       });
   }
 }
@@ -134,7 +146,8 @@ function codeRoute(req, res, next) {
   if (!name) {
     next();
   } else if (path.relative('src/components', `src/components/${name}`).substr(0, 2) === '..') {
-    res.status(404).end();
+    res.writeHead(404);
+    res.end();
   } else {
     templates
       .render({}, name)
@@ -148,7 +161,8 @@ function codeRoute(req, res, next) {
       })
       .catch(error => {
         console.error(error.stack); // eslint-disable-line no-console
-        res.status(500).end();
+        res.writeHead(500);
+        res.end();
       });
   }
 }
@@ -165,16 +179,18 @@ browserSync({
   baseDir: 'demo',
   files: ['demo/demo.css'],
   open: false,
+  port: process.env.PORT || 8080,
 
   server: {
-    port: process.env.PORT || 8080,
     middleware: [
-      webpackDevMiddleware(compiler, {
-        noInfo: true,
-        publicPath: config.output.publicPath,
-        stats: { colors: true },
-      }),
-      hotMiddleware,
+      !devMode
+        ? noopRoute
+        : webpackDevMiddleware(compiler, {
+            noInfo: true,
+            publicPath: config.output.publicPath,
+            stats: { colors: true },
+          }),
+      !devMode ? noopRoute : hotMiddleware,
       navRoute,
       componentRoute,
       codeRoute,
@@ -183,4 +199,6 @@ browserSync({
       serveStatic('scripts'),
     ],
   },
+
+  ui: !devMode ? false : {},
 });
