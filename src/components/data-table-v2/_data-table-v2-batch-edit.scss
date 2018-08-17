@@ -135,6 +135,10 @@
       .#{$prefix}--number .#{$prefix}--form-requirement {
         right: rem(32px);
       }
+
+      .#{$prefix}--toolbar-action {
+        width: auto;
+      }
     }
 
     td.#{$prefix}--data-table-v2--batch-edit-default-cell {
