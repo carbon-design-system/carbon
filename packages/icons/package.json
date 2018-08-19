@@ -1,0 +1,21 @@
+{
+  "name": "@carbon/icons",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons",
+  "bugs": "https://github.com/IBM/carbon-elements/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node tasks/build.js",
+    "prepublishOnly": "yarn build"
+  },
+  "devDependencies": {
+    "change-case": "^3.0.2",
+    "del": "^3.0.0",
+    "prettier": "^1.14.2",
+    "rollup": "^0.64.1",
+    "svgo": "^1.0.5"
+  }
+}

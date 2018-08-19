@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;}
+	.st2{fill:#EAEAEA;}
+	.st3{fill:none;}
+</style>
+<g id="Padding" class="st0">
+	<g class="st1">
+		<path class="st2" d="M0,0v32h32V0H0z M30,30H2V2h28V30z"/>
+	</g>
+</g>
+<g id="Icon">
+	<g>
+		<path d="M16,17v8H6v-8H16 M16,15H6c-1.1,0-2,0.9-2,2v8c0,1.1,0.9,2,2,2h10c1.1,0,2-0.9,2-2v-8C18,15.9,17.1,15,16,15L16,15z"/>
+	</g>
+	<g>
+		<path d="M27,6v5H17V6H27 M27,4H17c-1.1,0-2,0.9-2,2v5c0,1.1,0.9,2,2,2h10c1.1,0,2-0.9,2-2V6C29,4.9,28.1,4,27,4L27,4z"/>
+	</g>
+	<g>
+		<path d="M27,17v5h-5v-5H27 M27,15h-5c-1.1,0-2,0.9-2,2v5c0,1.1,0.9,2,2,2h5c1.1,0,2-0.9,2-2v-5C29,15.9,28.1,15,27,15L27,15z"/>
+	</g>
+	<g>
+		<path d="M11,6v5H6V6H11 M11,4H6C4.9,4,4,4.9,4,6v5c0,1.1,0.9,2,2,2h5c1.1,0,2-0.9,2-2V6C13,4.9,12.1,4,11,4L11,4z"/>
+	</g>
+</g>
+<g id="Grid">
+</g>
+<g id="Transparent_Rectangle">
+	<rect class="st3" width="32" height="32"/>
+</g>
+</svg>

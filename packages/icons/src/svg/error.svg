@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;opacity:0.1;}
+	.st2{fill:#0F6DFF;}
+	.st3{display:inline;}
+	.st4{fill:#EAEAEA;}
+	.st5{fill:none;}
+	.st6{fill:none;stroke:#000000;stroke-width:2;stroke-linejoin:round;}
+	.st7{fill:#FFFFFF;}
+	.st8{fill:#231F20;}
+	.st9{fill:#181616;}
+	.st10{fill:none;stroke:#231F20;stroke-width:2;stroke-miterlimit:10;}
+	.st11{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st12{fill:#E900C9;}
+</style>
+<g id="icon_placement" class="st0">
+</g>
+<g id="padding" class="st0">
+	<g class="st3">
+		<path class="st4" d="M0,0v32h32V0H0z M30,30H2V2h28V30z"/>
+	</g>
+</g>
+<g id="grid" class="st0">
+</g>
+<g id="icon">
+	<g id="Icon_20_">
+		<path d="M2,16L2,16c0,7.7,6.3,14,14,14s14-6.3,14-14S23.7,2,16,2C8.3,2,2,8.3,2,16z M25.1,23.7L8.3,6.9C10.4,5,13.2,4,16,4
+			c6.6,0,12,5.4,12,12C28,18.8,27,21.6,25.1,23.7z M8.2,25.2C3.2,20.9,2.6,13.3,6.8,8.3l16.9,16.9C21.6,27,18.8,28,16,28
+			C13.2,28,10.4,27,8.2,25.2z"/>
+	</g>
+	<g id="Transparent_Rectangle_1_">
+		<rect x="0" y="0" class="st5" width="32" height="32"/>
+	</g>
+</g>
+</svg>

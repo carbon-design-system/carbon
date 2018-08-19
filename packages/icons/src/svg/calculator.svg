@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<title>iconsmore</title>
+<g id="Icon">
+	<path d="M26,4v24H6V4H26 M26,2H6C4.9,2,4,2.9,4,4v24c0,1.1,0.9,2,2,2h20c1.1,0,2-0.9,2-2V4C28,2.9,27.1,2,26,2z"/>
+	<rect x="9" y="23" width="2" height="2"/>
+	<rect x="21" y="23" width="2" height="2"/>
+	<rect x="9" y="18" width="2" height="2"/>
+	<rect x="21" y="18" width="2" height="2"/>
+	<rect x="9" y="13" width="2" height="2"/>
+	<rect x="15" y="23" width="2" height="2"/>
+	<rect x="15" y="18" width="2" height="2"/>
+	<rect x="15" y="13" width="2" height="2"/>
+	<rect x="21" y="13" width="2" height="2"/>
+	<rect x="9" y="7" width="14" height="3"/>
+</g>
+<g id="Transparent_Rectangle">
+	<rect class="st0" width="32" height="32"/>
+</g>
+</svg>
