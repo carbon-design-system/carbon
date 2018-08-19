@@ -8,21 +8,21 @@
 @include exports('data-table-v2-batch-edit') {
   .#{$prefix}--data-table-v2.#{$prefix}--data-table-v2--batch-editable {
     table-layout: fixed;
+  }
 
-    &.#{$prefix}--data-table-v2--batch-saving {
-      position: relative;
+  .#{$prefix}--data-table-v2.#{$prefix}--data-table-v2--batch-saving {
+    position: relative;
+  }
 
-      & tbody:after {
-        content: '';
-        background-color: rgba($ui-01, 0.6);
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: block;
-        top: 0;
-        left: 0;
-      }
-    }
+  .#{$prefix}--data-table-v2.#{$prefix}--data-table-v2--batch-saving tbody:after {
+    content: '';
+    background-color: rgba($ui-01, 0.6);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    top: 0;
+    left: 0;
   }
 
   .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editable {
@@ -55,14 +55,10 @@
     tbody tr.#{$prefix}--data-table-v2--selected {
       background-color: transparent;
     }
-  
+
     td {
       border-left: 1px solid $ui-03;
       padding: 0;
-
-      &:first-of-type {
-        padding-left: rem(8px);
-      }
 
       .#{$prefix}--form-item {
         position: relative;
@@ -143,12 +139,16 @@
       }
     }
 
+    td:first-of-type {
+      padding-left: rem(8px);
+    }
+
     td.#{$prefix}--data-table-v2--batch-edit-default-cell {
       padding: 0 rem(16px);
+    }
 
-      &:first-of-type {
-        padding-left: rem(24px);
-      }
+    td.#{$prefix}--data-table-v2--batch-edit-default-cell:first-of-type {
+      padding-left: rem(24px);
     }
   }
 
