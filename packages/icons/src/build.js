@@ -130,6 +130,7 @@ async function build() {
         };
 
         if (type === 'umd') {
+          // If we're in our entrypoint, just default to CarbonIcons
           outputOptions.name = getModuleName(file.name, file.size);
         }
 
@@ -145,7 +146,10 @@ function isUppercase(string) {
 }
 
 function getModuleName(name, size) {
-  return isUppercase(name) ? `${name}${size}` : pascal(`${name}${size}`);
+  if (size) {
+    return isUppercase(name) ? `${name}${size}` : pascal(`${name}${size}`);
+  }
+  return name;
 }
 
 function createEntrypoint(folder, modules) {
