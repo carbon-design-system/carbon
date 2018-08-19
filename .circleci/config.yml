@@ -25,3 +25,11 @@ jobs:
       - run:
           name: Run ci checks
           command: yarn ci-check
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+
+      - store_test_results:
+          path: ~/reports
+
+      - store_artifacts:
+          path: ~/reports
