@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Icons UMD Demo</title>
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+  <style>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+      font-family: 'IBM Plex Mono', monospace;
+  }
+  .icon-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .icon-example {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 8rem;
+    height: 8rem;
+  }
+  .icon {
+    flex: 1 1 0%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-description {
+    width: 100%;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+  }
+  </style>
+</head>
+<body>
+  <script src="../umd/index.js"></script>
+  <script>
+    const sizes = [16, 20, 24, 32];
+    const icons = Object.keys(CarbonIcons).reduce((acc, name) => {
+      const [iconSize] = sizes.filter(size => {
+        return name.includes(size);
+      });
+
+      return {
+        ...acc,
+        [iconSize]: acc[iconSize].concat(CarbonIcons[name]),
+      };
+    }, { 16: [], 20: [], 24: [], 32: [] });
+
+    for (const size of Object.keys(icons)) {
+      const section = document.createElement('section');
+      const iconList = document.createElement('ul');
+      const heading = document.createElement('h1');
+
+      heading.textContent = `${size}x${size}`;
+
+      iconList.classList.add('icon-list');
+      section.classList.add('icons');
+      section.appendChild(heading);
+
+      for (const icon of icons[size]) {
+        const node = document.createElement('li');
+        const iconNode = document.createElement('div');
+
+        node.classList.add('icon-example');
+        iconNode.classList.add('icon');
+        iconNode.appendChild(toSVG(icon, size));
+
+        const description = document.createElement('span');
+        description.classList.add('icon-description');
+        description.textContent = icon.name;
+        description.setAttribute('title', icon.name);
+
+        node.appendChild(iconNode);
+        node.appendChild(description);
+
+
+        iconList.appendChild(node);
+      }
+
+      section.appendChild(iconList);
+
+      document.body.appendChild(section);
+    };
+
+    function print(node) {
+      const { elem, attrs = {}, content } = node;
+      const iconNode = document.createElementNS('http://www.w3.org/2000/svg', elem);
+
+      for (const [key, value] of Object.entries(attrs)) {
+        iconNode.setAttribute(key, value);
+      }
+
+      if (Array.isArray(content) && content.length > 0) {
+        const children = content.map(print);
+        for (const child of children) {
+          iconNode.appendChild(child);
+        }
+      }
+
+      return iconNode;
+    }
+
+    function toSVG(icon, size) {
+      const children = icon.content.map(print);
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      svg.setAttribute('width', size);
+      svg.setAttribute('height', size);
+      svg.setAttribute('viewBox', icon.viewBox || `0 0 32 32`);
+      svg.setAttribute('aria-hidden', true);
+
+      for (const child of children) {
+        svg.appendChild(child);
+      }
+
+      return svg;
+    }
+
+    console.log(icons);
+  </script>
+</body>
+</html>
