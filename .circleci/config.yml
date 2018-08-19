@@ -23,13 +23,18 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
+          # Helps to speed up some of the tests that we have
+          name: Build packages
+          command: yarn build
+
+      - run:
           name: Run ci checks
           command: yarn ci-check
           environment:
             JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
 
       - store_test_results:
-          path: ~/reports
+          path: reports
 
       - store_artifacts:
-          path: ~/reports
+          path: reports
