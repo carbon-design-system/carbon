@@ -7,6 +7,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "es",
+    "lib",
+    "svg",
+    "umd"
+  ],
   "scripts": {
     "build": "node tasks/build.js",
     "prepublishOnly": "yarn build"
