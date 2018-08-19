@@ -1,0 +1,51 @@
+{
+  "name": "elements",
+  "version": "0.0.0",
+  "private": true,
+  "repository": "git@github.com:IBM/carbon-elements.git",
+  "license": "Apache-2.0",
+  "scripts": {
+    "ci-check": "toolkit format:diff",
+    "format": "toolkit format",
+    "format:diff": "toolkit format:diff",
+    "lint": "toolkit lint .",
+    "lint:styles": "toolkit stylelint \"**/*.{css,scss}\"",
+    "test": "toolkit test"
+  },
+  "devDependencies": {
+    "@carbon/cli-plugin-editorconfig": "^0.0.21",
+    "@carbon/cli-plugin-eslint": "^0.0.21",
+    "@carbon/cli-plugin-github-files": "^0.0.21",
+    "@carbon/cli-plugin-jest": "^0.0.21",
+    "@carbon/cli-plugin-prettier": "^0.0.21",
+    "@carbon/cli-plugin-stylelint": "^0.0.21",
+    "@carbon/toolkit": "^0.0.21",
+    "lerna": "^2.11.0"
+  },
+  "toolkit": {
+    "plugins": [
+      "@carbon/cli-plugin-prettier",
+      "@carbon/cli-plugin-eslint",
+      "@carbon/cli-plugin-stylelint",
+      "@carbon/cli-plugin-jest",
+      "@carbon/cli-plugin-github-files",
+      "@carbon/cli-plugin-editorconfig"
+    ]
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint-config-toolkit"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-toolkit"
+    ]
+  }
+}
