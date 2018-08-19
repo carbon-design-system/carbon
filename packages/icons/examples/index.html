@@ -124,6 +124,7 @@
       svg.setAttribute('height', size);
       svg.setAttribute('viewBox', icon.viewBox || `0 0 32 32`);
       svg.setAttribute('aria-hidden', true);
+      svg.setAttribute('role', 'img');
 
       for (const child of children) {
         svg.appendChild(child);
