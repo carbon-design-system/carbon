@@ -1,7 +1,9 @@
 # Build folders
 build
+es
 lib
 dist
+umd
 
 # Config files
 .npmrc
@@ -25,8 +27,10 @@ pids
 .idea
 .vscode
 
-# Coverage directory used by tools like istanbul
+# Coverage directory used by tools like istanbul, also includes default junit
+# output file
 coverage
+/junit.xml
 
 # Dependency directory
 node_modules
