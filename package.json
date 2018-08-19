@@ -13,10 +13,13 @@
   "scripts": {
     "build": "lerna run build --stream --prefix --parallel --npm-client yarn",
     "ci-check": "toolkit format:diff && toolkit test --ci --reporters=default --reporters=jest-junit",
+    "clean": "lerna clean --yes && rimraf node_modules",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
     "format": "toolkit format",
     "format:diff": "toolkit format:diff",
     "lint": "toolkit lint .",
     "lint:styles": "toolkit stylelint \"**/*.{css,scss}\"",
+    "precommit": "lint-staged",
     "test": "toolkit test"
   },
   "devDependencies": {
@@ -35,7 +38,8 @@
     "husky": "^0.14.3",
     "jest-junit": "^5.1.0",
     "lerna": "^2.11.0",
-    "lint-staged": "^7.2.2"
+    "lint-staged": "^7.2.2",
+    "rimraf": "^2.6.2"
   },
   "toolkit": {
     "plugins": [
