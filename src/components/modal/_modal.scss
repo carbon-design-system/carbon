@@ -58,6 +58,7 @@
     max-height: 100%;
     height: 100%;
     padding: $spacing-xl 3% 0rem 3%;
+    text-align: right;
 
     @media (min-width: 600px) {
       height: auto;
@@ -107,8 +108,10 @@
 
   .#{$prefix}--modal-footer {
     margin-top: auto;
-    display: flex;
-    justify-content: flex-end;
+    display: inline-block;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: flex-end;
     background-color: $modal-footer-background-color;
     margin-left: rem(-24px);
     margin-right: rem(-24px);
