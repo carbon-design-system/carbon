@@ -109,9 +109,6 @@
   .#{$prefix}--modal-footer {
     margin-top: auto;
     display: inline-block;
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: flex-end;
     background-color: $modal-footer-background-color;
     margin-left: rem(-24px);
     margin-right: rem(-24px);
