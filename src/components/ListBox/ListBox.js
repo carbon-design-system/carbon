@@ -22,6 +22,7 @@ const handleClick = event => {
  * container class name in response to certain props.
  */
 const ListBox = ({
+  ariaLabel,
   children,
   className: containerClassName,
   disabled,
@@ -42,6 +43,7 @@ const ListBox = ({
       <div
         {...rest}
         role="listbox"
+        aria-label={ariaLabel}
         tabIndex="0"
         className={className}
         ref={innerRef}
@@ -82,12 +84,18 @@ ListBox.propTypes = {
    * `inline` as an option.
    */
   type: ListBoxType.isRequired,
+
+  /**
+   * Specify the "aria-label" of the ListBox.
+   */
+  ariaLabel: PropTypes.string,
 };
 
 ListBox.defaultProps = {
   innerRef: () => {},
   disabled: false,
   type: 'default',
+  ariaLabel: 'Choose an item',
 };
 
 export default ListBox;

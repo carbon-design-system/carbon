@@ -2,6 +2,7 @@
 
 exports[`ListBox should render 1`] = `
 <ListBox
+  ariaLabel="Choose an item"
   className="bx--list-box__container"
   disabled={false}
   innerRef={
@@ -9,6 +10,7 @@ exports[`ListBox should render 1`] = `
       "calls": Array [
         Array [
           <div
+            aria-label="Choose an item"
             class="bx--list-box__container bx--list-box"
             role="listbox"
             tabindex="0"
@@ -26,6 +28,7 @@ exports[`ListBox should render 1`] = `
   type="default"
 >
   <div
+    aria-label="Choose an item"
     className="bx--list-box__container bx--list-box"
     onClick={[Function]}
     onKeyDown={[Function]}

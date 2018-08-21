@@ -58,12 +58,14 @@ exports[`DropdownV2 should render 1`] = `
     stateReducer={[Function]}
   >
     <ListBox
+      ariaLabel="Choose an item"
       className="bx--dropdown"
       disabled={false}
       innerRef={[Function]}
       type="default"
     >
       <div
+        aria-label="Choose an item"
         className="bx--dropdown bx--list-box"
         onClick={[Function]}
         onKeyDown={[Function]}
