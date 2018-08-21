@@ -111,6 +111,9 @@
       background-color: #3d3d3d;
     }
 
+    // Safari: use the active style for links to simulate the focus
+    // styles since links in safari don't display the focus styles.
+    a.#{$prefix}--platform-header__link:active,
     a.#{$prefix}--platform-header__link:focus {
       border-color: #0062ff;
       outline: none;
