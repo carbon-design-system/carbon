@@ -40,7 +40,7 @@ export default class ToolbarSearch extends Component {
     /**
      * The text in the `<label>`.
      */
-    labelText: PropTypes.string,
+    labelText: PropTypes.node,
 
     /**
      * The ID of the `<input>`.

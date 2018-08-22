@@ -10,7 +10,7 @@ export default class RadioButton extends React.Component {
     defaultChecked: PropTypes.bool,
     disabled: PropTypes.bool,
     id: PropTypes.string,
-    labelText: PropTypes.string.isRequired,
+    labelText: PropTypes.node.isRequired,
     name: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

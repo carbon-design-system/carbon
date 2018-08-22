@@ -63,7 +63,7 @@ export default class Slider extends PureComponent {
     /**
      * The label for the slider.
      */
-    labelText: PropTypes.string,
+    labelText: PropTypes.node,
 
     /**
      * A value determining how much the value should increase/decrease by moving the thumb by mouse.
