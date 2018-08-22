@@ -60,6 +60,10 @@ Checkbox.propTypes = {
   id: PropTypes.string.isRequired,
   labelText: PropTypes.node.isRequired,
   hideLabel: PropTypes.bool,
+  /**
+   * Receives three arguments: true/false, the checkbox's id, and the dom event.
+   * `(value, id, event) => console.log({value, id, event})`
+   */
   onChange: PropTypes.func,
   title: PropTypes.string,
   /**
