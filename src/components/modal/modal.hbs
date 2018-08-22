@@ -1,10 +1,10 @@
 <button class="bx--btn {{classPrimaryButton}}" type="button" data-modal-target="#modal-{{idSuffix}}">Show modal</button>
 
-<div data-modal id="modal-{{idSuffix}}" class="bx--modal {{classModalSupplemental}}" tabindex="-1">
+<div data-modal id="modal-{{idSuffix}}" class="bx--modal {{classModalSupplemental}}" role="dialog" aria-modal="true" aria-labelledby="modal-{{idSuffix}}-label" aria-describedby="modal-{{idSuffix}}-heading" tabindex="-1">
   <div class="bx--modal-container">
     <div class="bx--modal-header">
-      <p class="bx--modal-header__label bx--type-delta">Optional label</p>
-      <p class="bx--modal-header__heading bx--type-beta">Modal heading</p>
+      <p class="bx--modal-header__label bx--type-delta" id="modal-{{idSuffix}}-label">Optional label</p>
+      <p class="bx--modal-header__heading bx--type-beta" id="modal-{{idSuffix}}-heading">Modal heading</p>
       <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" {{#unless hasFooter}} data-modal-primary-focus{{/unless}}>
         <svg class="bx--modal-close__icon" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
           <title>Close Modal</title>
