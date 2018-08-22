@@ -103,10 +103,10 @@ const renderComponent = ({ layout, concat } = {}, handle) =>
         const filteredItems = !handle || handle === metadata.handle ? items : items.filter(item => handle === item.handle);
         filteredItems.forEach(item => {
           const { handle: itemHandle, baseHandle, context } = item;
-          const template = contents.get(item.preview) || contents.get(itemHandle) || contents.get(baseHandle);
+          const template = contents.get(item.view) || contents.get(itemHandle) || contents.get(baseHandle);
           if (template) {
             const body = template(context);
-            const layoutTemplate = contents.get(layout);
+            const layoutTemplate = contents.get(item.preview) || contents.get(layout);
             renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ body }, context)));
           }
         });
