@@ -86,7 +86,7 @@ const cache = {
 
 /**
  * @param {Object} [options] The options.
- * @param {string} [options.layout] The Handlebars template name to lay out stuffs.
+ * @param {string} [options.layout] The default Handlebars template name to lay out stuffs. `false` to force empty layout.
  * @param {boolean} [options.concat] Setting `true` here returns rendered contents all concatenated, instead of returning a map.
  * @param {string} [handle]
  *   The internal component name seen in Fractal.
@@ -106,7 +106,7 @@ const renderComponent = ({ layout, concat } = {}, handle) =>
           const template = contents.get(item.view) || contents.get(itemHandle) || contents.get(baseHandle);
           if (template) {
             const body = template(context);
-            const layoutTemplate = contents.get(item.preview) || contents.get(layout);
+            const layoutTemplate = layout !== false && (contents.get(item.preview) || contents.get(layout));
             renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ body }, context)));
           }
         });

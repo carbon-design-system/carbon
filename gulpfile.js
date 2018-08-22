@@ -260,7 +260,7 @@ gulp.task('html:source', () => {
     'notification--default': 'inline-notification',
     'notification--toast': 'toast-notification',
   };
-  return templates.render().then(renderedItems => {
+  return templates.render({ layout: false }).then(renderedItems => {
     const promises = [];
     renderedItems.forEach((rendered, item) => {
       const dirname = path.dirname(path.resolve(__dirname, 'html', item.relViewPath));
