@@ -9,6 +9,7 @@ describe('TextInput', () => {
         id="test"
         className="extra-class"
         labelText="testlabel"
+        helperText="testHelper"
         light
       />
     );
@@ -72,6 +73,35 @@ describe('TextInput', () => {
 
       it('should set label as expected', () => {
         expect(renderedLabel.text()).toEqual('Email Input');
+      });
+    });
+
+    describe('helper', () => {
+      it('renders a helper', () => {
+        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        expect(renderedHelper.length).toEqual(1);
+      });
+
+      it('renders children as expected', () => {
+        wrapper.setProps({
+          helperText: (
+            <span>
+              This helper text has <a href="#">a link</a>.
+            </span>
+          ),
+        });
+        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        expect(renderedHelper.props().children).toEqual(
+          <span>
+            This helper text has <a href="#">a link</a>.
+          </span>
+        );
+      });
+
+      it('should set helper text as expected', () => {
+        wrapper.setProps({ helperText: 'Helper text' });
+        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        expect(renderedHelper.text()).toEqual('Helper text');
       });
     });
   });

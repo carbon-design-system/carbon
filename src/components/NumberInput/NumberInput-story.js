@@ -20,6 +20,7 @@ const props = () => ({
     'Form validation UI content (invalidText)',
     'Number is not valid'
   ),
+  helperText: text('Helper text (helperText)', 'Optional helper text.'),
   light: boolean('Light variant (light)', false),
   onChange: action('onChange'),
   onClick: action('onClick'),

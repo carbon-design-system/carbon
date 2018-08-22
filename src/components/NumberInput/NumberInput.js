@@ -23,6 +23,7 @@ export default class NumberInput extends Component {
     value: PropTypes.number,
     invalid: PropTypes.bool,
     invalidText: PropTypes.string,
+    helperText: PropTypes.node,
     /**
      * `true` to use the light version.
      */
@@ -39,6 +40,7 @@ export default class NumberInput extends Component {
     value: 0,
     invalid: false,
     invalidText: 'Provide invalidText',
+    helperText: '',
     light: false,
   };
 
@@ -120,6 +122,7 @@ export default class NumberInput extends Component {
       step,
       invalid,
       invalidText,
+      helperText,
       light,
       ...other
     } = this.props;
@@ -149,6 +152,10 @@ export default class NumberInput extends Component {
       inputWrapperProps['data-invalid'] = true;
       error = <div className="bx--form-requirement">{invalidText}</div>;
     }
+
+    const helper = helperText ? (
+      <div className="bx--form__helper-text">{helperText}</div>
+    ) : null;
 
     return (
       <div className="bx--form-item">
@@ -188,6 +195,7 @@ export default class NumberInput extends Component {
             ref={this._handleInputRef}
           />
           {error}
+          {helper}
         </div>
       </div>
     );

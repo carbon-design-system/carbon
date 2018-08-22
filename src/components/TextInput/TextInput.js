@@ -13,6 +13,7 @@ const TextInput = ({
   hideLabel,
   invalid,
   invalidText,
+  helperText,
   light,
   ...other
 }) => {
@@ -65,10 +66,15 @@ const TextInput = ({
     <input {...other} {...textInputProps} className={textInputClasses} />
   );
 
+  const helper = helperText ? (
+    <div className="bx--form__helper-text">{helperText}</div>
+  ) : null;
+
   return (
     <div className="bx--form-item">
       {label}
       {input}
+      {helper}
       {error}
     </div>
   );
@@ -88,6 +94,7 @@ TextInput.propTypes = {
   hideLabel: PropTypes.bool,
   invalid: PropTypes.bool,
   invalidText: PropTypes.string,
+  helperText: PropTypes.node,
   /**
    * `true` to use the light version.
    */
@@ -102,6 +109,7 @@ TextInput.defaultProps = {
   onClick: () => {},
   invalid: false,
   invalidText: '',
+  helperText: '',
   light: false,
 };
 

@@ -9,7 +9,11 @@ import { iconCaretDown } from 'carbon-icons';
 describe('Select', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(
-      <Select id="testing" labelText="Select" className="extra-class">
+      <Select
+        id="testing"
+        labelText="Select"
+        className="extra-class"
+        helperText="Helper text">
         <SelectItem />
         <SelectItem />
       </Select>
@@ -18,6 +22,7 @@ describe('Select', () => {
     const selectContainer = wrapper.find('.bx--form-item > div');
     const label = wrapper.find('label');
     const select = wrapper.find('select');
+    const helper = wrapper.find('.bx--form__helper-text');
 
     describe('selectContainer', () => {
       it('renders a container', () => {
@@ -108,6 +113,33 @@ describe('Select', () => {
 
       it('renders children as expected', () => {
         expect(label.props().children).toEqual('Select');
+      });
+    });
+
+    describe('helper', () => {
+      it('renders a helper', () => {
+        expect(helper.length).toEqual(1);
+      });
+
+      it('renders children as expected', () => {
+        wrapper.setProps({
+          helperText: (
+            <span>
+              This helper text has <a href="#">a link</a>.
+            </span>
+          ),
+        });
+        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        expect(renderedHelper.props().children).toEqual(
+          <span>
+            This helper text has <a href="#">a link</a>.
+          </span>
+        );
+      });
+
+      it('should set helper text as expected', () => {
+        wrapper.setProps({ helperText: 'Helper text' });
+        expect(helper.text()).toEqual('Helper text');
       });
     });
   });

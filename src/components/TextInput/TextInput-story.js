@@ -26,6 +26,7 @@ const TextInputProps = () => ({
     'Form validation UI content (invalidText)',
     'A valid value is required'
   ),
+  helperText: text('Helper text (helperText)', 'Optional helper text.'),
   onClick: action('onClick'),
   onChange: action('onChange'),
 });

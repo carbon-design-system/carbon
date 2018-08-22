@@ -15,6 +15,7 @@ const Select = ({
   hideLabel,
   invalid,
   invalidText,
+  helperText,
   light,
   ...other
 }) => {
@@ -33,6 +34,9 @@ const Select = ({
       {invalidText}
     </div>
   ) : null;
+  const helper = helperText ? (
+    <div className="bx--form__helper-text">{helperText}</div>
+  ) : null;
   return (
     <div className="bx--form-item">
       <div className={selectClasses}>
@@ -46,7 +50,7 @@ const Select = ({
           disabled={disabled || undefined}
           data-invalid={invalid || undefined}
           aria-invalid={invalid || undefined}
-          aria-describedby={errorId}>
+          aria-describedby={invalid && errorId}>
           {children}
         </select>
         <Icon
@@ -54,6 +58,7 @@ const Select = ({
           className="bx--select__arrow"
           description={iconDescription}
         />
+        {helper}
         {error}
       </div>
     </div>
@@ -73,6 +78,7 @@ Select.propTypes = {
   hideLabel: PropTypes.bool,
   invalid: PropTypes.bool,
   invalidText: PropTypes.string,
+  helperText: PropTypes.node,
   light: PropTypes.bool,
 };
 
@@ -83,6 +89,7 @@ Select.defaultProps = {
   iconDescription: 'open list of options',
   invalid: false,
   invalidText: '',
+  helperText: '',
   light: false,
 };
 

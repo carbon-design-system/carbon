@@ -5,7 +5,12 @@ import TextArea from '../TextArea';
 describe('TextArea', () => {
   describe('should render as expected', () => {
     const wrapper = mount(
-      <TextArea id="testing" labelText="testlabel" className="extra-class" />
+      <TextArea
+        id="testing"
+        labelText="testlabel"
+        className="extra-class"
+        helperText="testHelper"
+      />
     );
 
     const textarea = () => wrapper.find('textarea');
@@ -77,6 +82,35 @@ describe('TextArea', () => {
 
       it('has the expected classes', () => {
         expect(renderedLabel.hasClass('bx--label')).toEqual(true);
+      });
+    });
+
+    describe('helper', () => {
+      it('renders a helper', () => {
+        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        expect(renderedHelper.length).toEqual(1);
+      });
+
+      it('renders children as expected', () => {
+        wrapper.setProps({
+          helperText: (
+            <span>
+              This helper text has <a href="#">a link</a>.
+            </span>
+          ),
+        });
+        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        expect(renderedHelper.props().children).toEqual(
+          <span>
+            This helper text has <a href="#">a link</a>.
+          </span>
+        );
+      });
+
+      it('should set helper text as expected', () => {
+        wrapper.setProps({ helperText: 'Helper text' });
+        const renderedHelper = wrapper.find('.bx--form__helper-text');
+        expect(renderedHelper.text()).toEqual('Helper text');
       });
     });
   });

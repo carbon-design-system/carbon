@@ -11,6 +11,7 @@ const TextArea = ({
   onClick,
   invalid,
   invalidText,
+  helperText,
   light,
   ...other
 }) => {
@@ -56,10 +57,15 @@ const TextArea = ({
     <textarea {...other} {...textareaProps} className={textareaClasses} />
   );
 
+  const helper = helperText ? (
+    <div className="bx--form__helper-text">{helperText}</div>
+  ) : null;
+
   return (
     <div className="bx--form-item">
       {label}
       {input}
+      {helper}
       {error}
     </div>
   );
@@ -79,6 +85,7 @@ TextArea.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   invalid: PropTypes.bool,
   invalidText: PropTypes.string,
+  helperText: PropTypes.node,
   hideLabel: PropTypes.bool,
   /**
    * `true` to use the light version.
@@ -95,6 +102,7 @@ TextArea.defaultProps = {
   cols: 50,
   invalid: false,
   invalidText: '',
+  helperText: '',
   light: false,
 };
 
