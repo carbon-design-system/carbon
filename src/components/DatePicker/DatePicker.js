@@ -178,9 +178,9 @@ export default class DatePicker extends Component {
     ]),
 
     /**
-     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
+     * The DOM element or selector the Flatpicker should be inserted into. `<body>` by default.
      */
-    appendTo: PropTypes.object,
+    appendTo: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
     /**
      * The `change` event handler.
@@ -236,9 +236,13 @@ export default class DatePicker extends Component {
       const onHook = (electedDates, dateStr, instance) => {
         this.updateClassNames(instance);
       };
+      const appendToNode =
+        typeof appendTo === 'string'
+          ? document.querySelector(appendTo)
+          : appendTo;
       this.cal = new flatpickr(this.inputField, {
         defaultDate: value,
-        appendTo,
+        appendTo: appendToNode,
         mode: datePickerType,
         allowInput: true,
         dateFormat: dateFormat,
