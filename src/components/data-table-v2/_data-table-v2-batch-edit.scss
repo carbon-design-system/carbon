@@ -33,20 +33,21 @@
     th,
     td {
       padding-left: rem(16px);
+    }
 
-      &:first-of-type {
-        padding-left: rem(24px);
-      }
+    th:first-of-type,
+    td:first-of-type {
+      padding-left: rem(24px);
     }
   }
 
   .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing {
     th {
       border-left: 1px solid $ui-03;
+    }
 
-      &:first-of-type {
-        padding-left: rem(24px);
-      }
+    th:first-of-type {
+      padding-left: rem(24px);
     }
 
     .#{$prefix}--data-table-v2--zebra tbody tr:nth-child(even),
