@@ -150,7 +150,7 @@ function codeRoute(req, res, next) {
     res.end();
   } else {
     templates
-      .render({}, name)
+      .render({ layout: false }, name)
       .then(renderedItems => {
         const o = {};
         renderedItems.forEach((rendered, item) => {
