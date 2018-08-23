@@ -3,9 +3,10 @@
 exports[`DataTable.Table should render 1`] = `
 <Table
   className="custom-class"
+  zebra={true}
 >
   <table
-    className="bx--data-table-v2 bx--data-table-v2--zebra custom-class"
+    className="bx--data-table-v2 custom-class bx--data-table-v2--zebra"
   />
 </Table>
 `;

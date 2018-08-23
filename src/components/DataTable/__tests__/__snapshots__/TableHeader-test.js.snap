@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataTable.TableHeader should have an active and ascending class if sorting by ASC 1`] = `
-<Table>
+<Table
+  zebra={true}
+>
   <table
     className="bx--data-table-v2 bx--data-table-v2--zebra"
   >
@@ -32,7 +34,9 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
 `;
 
 exports[`DataTable.TableHeader should have an active class if it is the sort header and the sort state is not NONE 1`] = `
-<Table>
+<Table
+  zebra={true}
+>
   <table
     className="bx--data-table-v2 bx--data-table-v2--zebra"
   >
@@ -63,7 +67,9 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
 `;
 
 exports[`DataTable.TableHeader should render 1`] = `
-<Table>
+<Table
+  zebra={true}
+>
   <table
     className="bx--data-table-v2 bx--data-table-v2--zebra"
   >
@@ -94,7 +100,9 @@ exports[`DataTable.TableHeader should render 1`] = `
 `;
 
 exports[`DataTable.TableHeader should render 2`] = `
-<Table>
+<Table
+  zebra={true}
+>
   <table
     className="bx--data-table-v2 bx--data-table-v2--zebra"
   >

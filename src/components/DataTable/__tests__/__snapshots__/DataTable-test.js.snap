@@ -62,7 +62,9 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       >
         DataTable with selection
       </h4>
-      <Table>
+      <Table
+        zebra={true}
+      >
         <table
           className="bx--data-table-v2 bx--data-table-v2--zebra"
         >
@@ -431,7 +433,9 @@ exports[`DataTable selection should render 1`] = `
       >
         DataTable with selection
       </h4>
-      <Table>
+      <Table
+        zebra={true}
+      >
         <table
           className="bx--data-table-v2 bx--data-table-v2--zebra"
         >
@@ -1379,7 +1383,9 @@ exports[`DataTable should render 1`] = `
           </TableToolbarContent>
         </section>
       </TableToolbar>
-      <Table>
+      <Table
+        zebra={true}
+      >
         <table
           className="bx--data-table-v2 bx--data-table-v2--zebra"
         >
