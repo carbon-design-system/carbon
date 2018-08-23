@@ -25,15 +25,15 @@
     }
 
     .#{$prefix}--platform-header__action:hover {
-      background-color: #3d3d3d;
+      background-color: $shell-ui-02;
     }
 
     .#{$prefix}--platform-header__action:active {
-      background-color: #0062ff;
+      background-color: $shell-brand-01;
     }
 
     .#{$prefix}--platform-header__action:focus {
-      border-color: #0062ff;
+      border-color: $shell-brand-01;
       outline: none;
     }
 
@@ -81,7 +81,7 @@
     }
 
     .#{$prefix}--platform-header__link-item:hover {
-      background-color: #3d3d3d;
+      background-color: $shell-ui-02;
     }
 
     a.#{$prefix}--platform-header__link {
@@ -106,14 +106,14 @@
     }
 
     a.#{$prefix}--platform-header__link:active {
-      background-color: #3d3d3d;
+      background-color: $shell-ui-02;
     }
 
     // Safari: use the active style for links to simulate the focus
     // styles since links in safari don't display the focus styles.
     a.#{$prefix}--platform-header__link:active,
     a.#{$prefix}--platform-header__link:focus {
-      border-color: #0062ff;
+      border-color: $shell-brand-01;
       outline: none;
     }
 
