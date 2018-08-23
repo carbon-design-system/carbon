@@ -67,14 +67,12 @@
     // Platform Header - Navigation
     //--------------------------------------------------------------------------
     .#{$prefix}--platform-header__nav {
-      flex: 2 1 0%;
       height: 100%;
     }
 
     .#{$prefix}--platform-header__links {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-left: units(34);
       height: 100%;
     }
 
