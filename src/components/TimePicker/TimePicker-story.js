@@ -62,8 +62,8 @@ storiesOf('TimePicker', module)
             <SelectItem value="PM" text="PM" />
           </TimePickerSelect>
           <TimePickerSelect id="time-picker-select-2" {...selectProps}>
-            <SelectItem value="Timezone 1" text="Timezone 1" />
-            <SelectItem value="Timezone 2" text="Timezone 2" />
+            <SelectItem value="Time zone 1" text="Time zone 1" />
+            <SelectItem value="Time zone 2" text="Time zone 2" />
           </TimePickerSelect>
         </TimePicker>
       );
