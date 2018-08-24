@@ -88,14 +88,15 @@ Component variants can be specified by either:
 - Adding an item to `variants` in `.config.js` file (In this case, a `.hbs` file whose basename is exactly the same as the component name should be defined)
 - Adding a `.hbs` file to component directory (Note: If there is a `.hbs` file whose basename is exactly the same as the component name, other `.hbs` files has to be in `componentname--variantname.hbs` format)
 - `.hbs` files are rendered with the data given via `variants[n].context` property (see below)
-- Supported properties in `.config.js` are the following:
+- Supported [properties in `.config.js`](https://fractal.build/guide/components/configuration) are the following:
   - [`default`](https://fractal.build/guide/components/configuration#default)
-  - [`variants`](https://fractal.build/guide/components/configuration#variant-properties) - An array of objects with the following properties:
+  - [`variants`](https://fractal.build/guide/components/configuration#variant-properties) - An array of objects, supporitng the following properties:
     - `name`
     - `label`
     - `notes`
     - `context`
-    - (`preview` - Unlike [Fractal](https://fractal.build/guide/components/configuration#preview), this property should point to a `.hbs` file under `demo` directory or `src` directory, _without_ `@` symbol)
+    - (`view` - Unlike [Fractal](https://fractal.build/guide/components/configuration#preview), this property should point to the basename of a `.hbs` file under `demo` directory or `src` directory, _without_ its path)
+    - (`preview` - Unlike [Fractal](https://fractal.build/guide/components/configuration#preview), this property should point to the basename of a `.hbs` file under `demo` directory or `src` directory, _without_ `@` symbol)
 
 ## Start Contributing
 
