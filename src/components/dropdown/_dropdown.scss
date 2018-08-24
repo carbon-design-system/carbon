@@ -213,7 +213,8 @@
   }
 
   // Skeleton State
-  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton {
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+  .#{$prefix}--dropdown.#{$prefix}--skeleton {
     @include skeleton;
   }
 }
