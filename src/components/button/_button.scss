@@ -189,65 +189,65 @@
     }
 
     .#{$button}__icon {
-      margin: $button__icon__spacing__margin;
+      margin: $spacing-2xs $spacing-md 0 0;
     }
 
     &.#{$button}--danger {
-      background-color: $button--danger__color__background;
-      color: $button--danger__color__text;
+      background-color: $hover-danger;
+      color: $inverse-01;
 
       &:hover {
-        background-color: $button--danger__color__background--hover;
+        background-color: $hover-danger;
       }
 
       &:active {
-        background-color: $button--danger__color__background--active;
+        background-color: $hover-danger;
       }
 
       &:focus {
-        border: 3px solid $button__color__text--focus;
+        border: 3px solid $brand-02;
       }
 
       &--ghost {
         background-color: transparent;
-        color: $button--danger--ghost__color__text;
+        color: $brand-02;
 
         &:hover:not([disabled]) {
-          background-color: $button--ghost__color__background--hover;
+          background-color: $ui-03;
         }
 
         &:active:not([disabled]) {
-          background-color: $button--ghost__color__background--active;
+          background-color: $ui-03;
         }
 
         &:focus:not([disabled]) {
-          border: 3px solid $button--danger--ghost__color__outline--focus;
+          border: 3px solid $brand-02;
         }
 
         &[disabled] {
-          color: $button--ghost__color__text--disabled;
+          color: $ui-03;
         }
       }
     }
 
     &.#{$button}--ghost {
       background-color: transparent;
-      color: $button--ghost__color__text;
+      color: $support-01;
 
       &:hover:not([disabled]) {
-        background-color: $button--ghost__color__background--hover;
+        background-color: $ui-03;
       }
 
       &:active:not([disabled]) {
-        background-color: $button--ghost__color__background--active;
+        background-color: $ui-03;
       }
 
       &:focus:not([disabled]) {
-        border: 3px solid $button__color__text--focus;
+        border: 3px solid $brand-02;
       }
 
       &[disabled] {
-        color: $button--ghost__color__text--disabled;
+        color: $ui-03;
       }
     }
   }
