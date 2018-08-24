@@ -16,6 +16,8 @@ $css--use-experimental-grid-fallback: false !default;
 
 @import 'feature-flags';
 @import 'colors';
+@import 'colors--experimental';
+@import 'theme';
 @import 'vars';
 @import 'mixins';
 @import 'layout';
