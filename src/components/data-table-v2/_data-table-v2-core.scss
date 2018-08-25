@@ -1,6 +1,7 @@
 @import '../../globals/scss/css--typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 
 @include exports('data-table-v2-core') {
   .#{$prefix}--data-table-v2-container {
