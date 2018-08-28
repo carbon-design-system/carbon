@@ -163,6 +163,7 @@ export default class Modal extends Component {
       danger,
       selectorPrimaryFocus, // eslint-disable-line
       selectorsFloatingMenus, // eslint-disable-line
+      shouldSubmitOnEnter, // eslint-disable-line
       ...other
     } = this.props;
 
