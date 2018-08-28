@@ -32,7 +32,6 @@ const props = {
       'Label text (labelText in <DatePickerInput>)',
       'Date Picker label'
     ),
-    locale: text('Locale (locale in <DatePickerInput>)', 'en'),
     pattern: select(
       'The date format (pattern in <DatePickerInput>)',
       patterns,
