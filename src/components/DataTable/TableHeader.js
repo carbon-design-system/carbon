@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { iconCaretDown } from 'carbon-icons';
+import { iconCaretUp } from 'carbon-icons';
 import Icon from '../Icon';
 import { sortStates } from './state/sorting';
 
@@ -55,7 +55,7 @@ const TableHeader = ({
         <span className="bx--table-header-label">{children}</span>
         <Icon
           className="bx--table-sort-v2__icon"
-          icon={iconCaretDown}
+          icon={iconCaretUp}
           description={t('carbon.table.header.icon.description', {
             header: children,
             sortDirection,
