@@ -39,8 +39,7 @@ $weights: (
   @if (str-index($font-path, 'https://unpkg.com/') == 1) {
     @warn 'The default font path (#{$font-path}) should be used only for demonstration/evaluation purposes. For production applications, please host fonts in your own CDN and change `$font-path` accordingly.';
     @content;
-  }
-  else {
+  } @else {
     @content;
   }
 }
