@@ -1,0 +1,111 @@
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
+@import 'theme';
+@import 'functions';
+
+@include exports('app-switcher') {
+  @include experimental('ui-shell') {
+    .#{$prefix}--panel--overlay {
+      position: fixed;
+      top: units(6);
+      left: unset;
+      right: 0;
+      bottom: 0;
+      width: units(40);
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+      padding: 1rem 0;
+      overflow-y: auto;
+      z-index: 1000;
+      background-color: $shell-header-bg-02;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    .#{$prefix}--app-switcher {
+      .#{$prefix}--switcher__search-container {
+        padding: 0 units(2);
+        margin-bottom: units(3);
+      }
+
+      .#{$prefix}--search-input {
+        background-color: #fff;
+      }
+
+      .#{$prefix}--switcher__subheader {
+        padding: 0 units(3);
+        font-size: 14px; //change
+        font-weight: bold; //change
+        margin-left: units(4);
+        color: $shell-header-text-03;
+      }
+
+      .#{$prefix}--switcher__app-list {
+        margin-bottom: 0.8rem;
+      }
+
+      .#{$prefix}--app-list__item {
+        cursor: pointer;
+        padding: 0 2px;
+
+        &:hover {
+          background: $shell-header-bg-03;
+        }
+      }
+
+      .#{$prefix}--app-list__link {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: units(1) units(2);
+        text-decoration: none;
+
+        &:focus {
+          outline: 2px solid $shell-header-link;
+        }
+      }
+
+      .#{$prefix}--app-list__img {
+        width: units(2);
+        height: units(2);
+        margin-right: units(2.5);
+        border: 1px solid black;
+      }
+
+      .#{$prefix}--app-list__name {
+        font-size: 14px;
+        color: $shell-header-text-02;
+      }
+
+      .#{$prefix}--overflow-menu {
+        position: absolute;
+        right: 0;
+        width: units(4);
+        height: units(4);
+
+        svg {
+          fill: $shell-header-text-02;
+        }
+
+        &:hover {
+          background: $shell-header-bg-04;
+        }
+
+        &:focus {
+          box-shadow: none;
+          outline: 2px solid $shell-header-link;
+        }
+      }
+
+      .#{$prefix}--overflow-menu-options__option {
+        &:hover {
+          background: $shell-header-bg-03;
+        }
+      }
+    }
+  }
+}
