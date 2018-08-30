@@ -124,7 +124,6 @@
     "react-dom": "^16.4.0"
   },
   "dependencies": {
-    "@storybook/addon-options": "^3.4.10",
     "classnames": "2.2.6",
     "downshift": "^1.31.14",
     "flatpickr": "4.5.1",
@@ -146,6 +145,7 @@
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/addon-info": "^3.4.10",
     "@storybook/addon-knobs": "^3.4.10",
+    "@storybook/addon-options": "^3.4.10",
     "@storybook/addons": "^3.4.10",
     "@storybook/react": "^3.4.10",
     "all-contributors-cli": "^5.2.1",

@@ -1,7 +1,6 @@
 ---
 name: "Bug Report \U0001F41B"
 about: Create a report to help us improve
-
 ---
 
 <!-- Feel free to remove sections that aren't relevant.
@@ -31,8 +30,8 @@ about: Create a report to help us improve
 3. Step three
 4. etc.
 
-> Please create a reduced test case in code sandbox 
-https://codesandbox.io/s/r4zxq9pvq
+> Please create a reduced test case in code sandbox
+> https://codesandbox.io/s/r4zxq9pvq
 
 ## Additional information
 
