@@ -1,6 +1,6 @@
 @import 'helper-mixins';
 
-@mixin theme--cloud() {
+@mixin theme() {
   // Color Theme Variables
   $brand-01: $color__blue-51 !default !global;
   $brand-02: $color__blue-40 !default !global;
@@ -106,7 +106,7 @@
   $brand-02: $ibm-color__blue-80 !default !global;
   $brand-03: $ibm-color__blue-60 !default !global;
   $inverse-01: $ibm-color__white-0 !default !global;
-  $inverse-02: $ibm-color__white-0 !default !global; // TODO: Define for duo
+  $inverse-02: $ibm-color__white-0 !default !global; // TODO: Define for experimental
   $ui-01: $ibm-color__gray-10 !default !global;
   $ui-02: $ibm-color__white-0 !default !global;
   $ui-03: $ibm-color__gray-20 !default !global;
@@ -116,7 +116,7 @@
   $text-02: $ibm-color__gray-70 !default !global;
   $text-03: $ibm-color__gray-40 !default !global;
   $field-01: $ibm-color__gray-10 !default !global;
-  $field-02: $ibm-color__gray-10 !default !global; // TODO: Define for Duo
+  $field-02: $ibm-color__gray-10 !default !global; // TODO: Define for experimental
   $support-01: $ibm-color__red-60 !default !global;
   $support-02: $ibm-color__green-50 !default !global;
   $support-03: $ibm-color__yellow-20 !default !global;
@@ -130,7 +130,7 @@
   $nav-07: $color__blue-30 !default !global;
   $nav-08: $color__blue-51 !default !global;
 
-  // TODO: Define for Duo
+  // TODO: Define for experimental
   $hover-primary: darken($brand-01, 10%) !default !global;
   $hover-primary-text: darken($brand-01, 15%) !default !global;
   $hover-danger: darken($support-01, 10%) !default !global;
@@ -168,8 +168,8 @@
   $checkbox-border-width: 2px !default !global;
 
   // Code Snippet
-  $snippet-background-color: $ui-01 !default !global; // TODO: Define for Duo
-  $snippet-border-color: $ui-03 !default !global; // TODO: Define for Duo
+  $snippet-background-color: $ui-01 !default !global; // TODO: Define for experimental
+  $snippet-border-color: $ui-03 !default !global; // TODO: Define for experimental
 
   // Content Switcher
   $content-switcher-border-radius: 4px !default !global;
@@ -198,13 +198,13 @@
 
   // Skeleton Loading
 
-  $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for Duo
+  $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental
 }
 
 @include stable('components') {
-  @include theme--cloud;
-}
-
-@include experimental('components') {
-  @include theme--experimental;
+  @if feature('components-x') {
+    @include theme--experimental;
+  } @else {
+    @include theme;
+  }
 }

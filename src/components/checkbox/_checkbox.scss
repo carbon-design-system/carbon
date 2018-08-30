@@ -1,6 +1,7 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
+@import '../../globals/scss/colors--experimental';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
@@ -332,12 +333,10 @@
   }
 }
 
-@include exports('checkbox') {
-  @include stable('components') {
-    @include checkbox;
-  }
-
-  @include experimental('components') {
+@include stable('components') {
+  @if feature('components-x') {
     @include checkbox--experimental;
+  } @else {
+    @include checkbox;
   }
 }

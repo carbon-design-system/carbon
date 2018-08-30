@@ -1,6 +1,5 @@
 $ibm-colors__exclude-css-variables: true !default;
 
-//@import '@ibmduo/colors/scss/ibm-colors';
 @import 'ibm-colors'; // This will eventually need to come from carbon-elements package
 
 /**
