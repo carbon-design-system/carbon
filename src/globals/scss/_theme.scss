@@ -1,4 +1,5 @@
 @import 'helper-mixins';
+@import 'functions';
 
 @mixin theme() {
   // Color Theme Variables
@@ -201,8 +202,8 @@
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental
 }
 
-@include stable('components') {
-  @if feature('components-x') {
+@include exports('theme') {
+  @if feature-flag-enabled('components-x') {
     @include theme--experimental;
   } @else {
     @include theme;

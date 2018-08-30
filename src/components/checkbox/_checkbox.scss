@@ -5,6 +5,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/import-once';
 @import '../form/form';
 @import '../../globals/scss/css--reset';
@@ -333,8 +334,8 @@
   }
 }
 
-@include stable('components') {
-  @if feature('components-x') {
+@include exports('checkbox') {
+  @if feature-flag-enabled('components-x') {
     @include checkbox--experimental;
   } @else {
     @include checkbox;

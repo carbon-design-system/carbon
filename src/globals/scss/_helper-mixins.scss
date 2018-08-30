@@ -196,18 +196,6 @@
   }
 }
 
-@mixin feature($feature) {
-  @if global-variable-exists(feature-flags) == true and map-get($feature-flags, $feature) == true {
-    @content;
-  }
-}
-
-@mixin stable($feature) {
-  @if global-variable-exists(feature-flags) == true and map-get($feature-flags, $feature) == false {
-    @content;
-  }
-}
-
 //----------------------------------------------
 // Deprecated
 // ---------------------------------------------

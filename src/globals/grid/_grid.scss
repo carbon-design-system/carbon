@@ -1,19 +1,17 @@
 @import '../scss/feature-flags';
+@import '../scss/functions';
 @import '../scss/mixins';
 @import './classic/classic';
 @import './experimental/experimental';
 @import './experimental/fallback';
 
 @include exports('grid') {
-  @include experimental('grid') {
-    @include experimental('grid--fallback') {
+  @if feature-flag-enabled('grid') {
+    @if feature-flag-enabled('grid--fallback') {
       @include grid-experimental-fallback;
     }
-
     @include grid-experimental;
-  }
-
-  @include stable('grid') {
+  } @else {
     @include grid;
   }
 }
