@@ -86,9 +86,16 @@ export default class ComboBox extends React.Component {
     shouldFilterItem: PropTypes.func,
 
     /**
+     * Specify a custom translation function that takes in a message identifier
+     * and returns the localized string for the message
+     */
+    translateWithId: PropTypes.func,
+
+    /**
      * Currently supports either the default type, or an inline variant
      */
     type: ListBoxPropTypes.ListBoxType,
+
     /**
      * Callback function to notify consumer when the text input changes.
      * This provides support to change available items based on the text.
@@ -162,8 +169,10 @@ export default class ComboBox extends React.Component {
       placeholder,
       initialSelectedItem,
       ariaLabel,
+      translateWithId,
     } = this.props;
     const className = cx('bx--combo-box', containerClassName);
+
     return (
       <Downshift
         onChange={this.handleOnChange}
@@ -199,7 +208,10 @@ export default class ComboBox extends React.Component {
               />
               {inputValue &&
                 isOpen && <ListBox.Selection clearSelection={clearSelection} />}
-              <ListBox.MenuIcon isOpen={isOpen} />
+              <ListBox.MenuIcon
+                isOpen={isOpen}
+                translateWithId={translateWithId}
+              />
             </ListBox.Field>
             {isOpen && (
               <ListBox.Menu>
