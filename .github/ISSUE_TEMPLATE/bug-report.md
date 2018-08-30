@@ -14,8 +14,6 @@ about: Something isn't working as expected? Here is the right place to report.
 
 > Describe in detail the issue you're having.
 
-> Is this a feature request (new component, new icon), a bug, or a general issue?
-
 > Is this issue related to a specific component?
 
 > What did you expect to happen? What happened instead? What would you like to see changed?
