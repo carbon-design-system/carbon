@@ -1,6 +1,6 @@
 {
   "name": "@carbon/icons",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/icons",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
