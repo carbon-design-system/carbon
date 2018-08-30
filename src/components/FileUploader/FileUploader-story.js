@@ -17,7 +17,6 @@ import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import Button from '../Button';
 
 const buttonKinds = {
-  none: 'None ()',
   primary: 'Primary (primary)',
   secondary: 'Secondary (secondary)',
   danger: 'Danger (danger)',
@@ -34,13 +33,13 @@ const filenameStatuses = {
 
 const props = {
   fileUploaderButton: () => {
-    const buttonKind = select('Button kind (buttonKind)', buttonKinds, 'none');
+    const buttonKind = select('Button kind (buttonKind)', buttonKinds, '');
     return {
       className: 'bob',
       labelText: text('Label text (labelText)', 'Add files'),
       name: text('Form item name: (name)', ''),
       multiple: boolean('Supports multiple files (multiple)', true),
-      buttonKind: buttonKind === 'none' ? '' : buttonKind,
+      buttonKind: buttonKind || 'primary',
       disableLabelChanges: boolean(
         'Prevent the label from being replaced with file selected file (disableLabelChanges)',
         false
