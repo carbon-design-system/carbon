@@ -1,6 +1,7 @@
 ---
 name: "Bug Report \U0001F41B"
 about: Create a report to help us improve
+
 ---
 
 <!-- Feel free to remove sections that aren't relevant.
@@ -12,8 +13,6 @@ about: Create a report to help us improve
 ## Detailed description
 
 > Describe in detail the issue you're having.
-
-> Is this a feature request (new component, new icon), a bug, or a general issue?
 
 > Is this issue related to a specific component?
 
@@ -31,6 +30,9 @@ about: Create a report to help us improve
 2. Step two
 3. Step three
 4. etc.
+
+> Please create a reduced test case in code sandbox 
+https://codesandbox.io/s/r4zxq9pvq
 
 ## Additional information
 
