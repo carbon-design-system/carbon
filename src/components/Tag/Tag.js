@@ -25,8 +25,19 @@ const Tag = ({ children, className, type, ...other }) => {
 };
 
 Tag.propTypes = {
+  /**
+   * Provide content to be rendered inside of a <Tag>
+   */
   children: PropTypes.node,
+
+  /**
+   * Provide a custom className that is applied to the containing <span>
+   */
   className: PropTypes.string,
+
+  /**
+   * Specify the type of the <Tag>
+   */
   type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
 };
 

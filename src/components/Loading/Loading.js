@@ -4,9 +4,24 @@ import classNames from 'classnames';
 
 export default class Loading extends React.Component {
   static propTypes = {
+    /**
+     * Specify whether you want the loading indicator to be spinning or not
+     */
     active: PropTypes.bool,
+
+    /**
+     * Provide an optional className to be applied to the containing node
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify whether you want the loader to be applied with an overlay
+     */
     withOverlay: PropTypes.bool,
+
+    /**
+     * Specify whether you would like the small variant of <Loading>
+     */
     small: PropTypes.bool,
   };
 

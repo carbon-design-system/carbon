@@ -408,7 +408,6 @@ export class ExpandableTile extends Component {
 export class TileAboveTheFoldContent extends Component {
   static propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string,
   };
 
   render() {
@@ -421,7 +420,6 @@ export class TileAboveTheFoldContent extends Component {
 export class TileBelowTheFoldContent extends Component {
   static propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string,
   };
 
   render() {

@@ -14,7 +14,14 @@ const Form = ({ className, children, ...other }) => {
 };
 
 Form.propTypes = {
+  /**
+   * Provide children to be rendered inside of the <form> element
+   */
   children: PropTypes.node,
+
+  /**
+   * Provide a custom className to be applied on the containing <form> node
+   */
   className: PropTypes.string,
 };
 

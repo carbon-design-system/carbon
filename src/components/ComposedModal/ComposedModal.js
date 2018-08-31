@@ -11,8 +11,20 @@ export default class ComposedModal extends Component {
   };
 
   static propTypes = {
+    /**
+     * Specify an optional className to be applied to the modal root node
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify an optional className to be applied to the modal node
+     */
     containerClassName: PropTypes.string,
+
+    /**
+     * Specify an optional handler for the `onKeyDown` event. Called for all
+     * `onKeyDown` events that do not close the modal
+     */
     onKeyDown: PropTypes.func,
   };
 
@@ -86,23 +98,68 @@ export default class ComposedModal extends Component {
 }
 
 export class ModalHeader extends Component {
+  static propTypes = {
+    /**
+     * Specify an optional className to be applied to the modal header
+     */
+    className: PropTypes.string,
+
+    /**
+     * Specify an optional className to be applied to the modal header label
+     */
+    labelClassName: PropTypes.string,
+
+    /**
+     * Specify an optional className to be applied to the modal heading
+     */
+    titleClassName: PropTypes.string,
+
+    /**
+     * Specify an optional className to be applied to the modal close node
+     */
+    closeClassName: PropTypes.string,
+
+    /**
+     * Specify an optional className to be applied to the modal close icon node
+     */
+    closeIconClassName: PropTypes.string,
+
+    /**
+     * Specify an optional label to be displayed
+     */
+    label: PropTypes.string,
+
+    /**
+     * Specify an optional title to be displayed
+     */
+    title: PropTypes.string,
+
+    /**
+     * Specify the content to be placed in the ModalHeader
+     */
+    children: PropTypes.node,
+
+    /**
+     * Specify a description for the close icon that can be read by screen
+     * readers
+     */
+    iconDescription: PropTypes.string,
+
+    /**
+     * Provide an optional function to be called when the modal is closed
+     */
+    closeModal: PropTypes.func,
+
+    /**
+     * Provide an optional function to be called when the close button is
+     * clicked
+     */
+    buttonOnClick: PropTypes.func,
+  };
+
   static defaultProps = {
     iconDescription: 'Close the modal',
     buttonOnClick: () => {},
-  };
-
-  static propTypes = {
-    className: PropTypes.string,
-    labelClassName: PropTypes.string,
-    titleClassName: PropTypes.string,
-    closeClassName: PropTypes.string,
-    closeIconClassName: PropTypes.string,
-    label: PropTypes.string,
-    title: PropTypes.string,
-    children: PropTypes.node,
-    iconDescription: PropTypes.string,
-    closeModal: PropTypes.func,
-    buttonOnClick: PropTypes.func,
   };
 
   handleCloseButtonClick = () => {
@@ -176,6 +233,9 @@ export class ModalHeader extends Component {
 
 export class ModalBody extends Component {
   static propTypes = {
+    /**
+     * Specify an optional className to be added to the Modal Body node
+     */
     className: PropTypes.string,
   };
 
@@ -197,15 +257,56 @@ export class ModalBody extends Component {
 
 export class ModalFooter extends Component {
   static propTypes = {
+    /**
+     * Specify a custom className to be applied to the Modal Footer container
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify a custom className to be applied to the primary button
+     */
     primaryClassName: PropTypes.string,
-    secondaryClassName: PropTypes.string,
-    secondaryButtonText: PropTypes.string,
+
+    /**
+     * Specify the text for the primary button
+     */
     primaryButtonText: PropTypes.string,
+
+    /**
+     * Specify whether the primary button should be disabled
+     */
     primaryButtonDisabled: PropTypes.bool,
+
+    /**
+     * Specify a custom className to be applied to the secondary button
+     */
+    secondaryClassName: PropTypes.string,
+
+    /**
+     * Specify the text for the secondary button
+     */
+    secondaryButtonText: PropTypes.string,
+
+    /**
+     * Specify an optional function for when the modal is requesting to be
+     * closed
+     */
     onRequestClose: PropTypes.func,
+
+    /**
+     * Specify an optional function for when the modal is requesting to be
+     * submitted
+     */
     onRequestSubmit: PropTypes.func,
+
+    /**
+     * Specify an optional function that is called whenever the modal is closed
+     */
     closeModal: PropTypes.func,
+
+    /**
+     * Pass in content that will be rendered in the Modal Footer
+     */
     children: PropTypes.node,
   };
 

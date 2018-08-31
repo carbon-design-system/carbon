@@ -7,12 +7,12 @@ import Icon from '../Icon';
 export default class AccordionItem extends Component {
   static propTypes = {
     /**
-     * The child nodes.
+     * Provide the contents of your AccordionItem
      */
     children: PropTypes.node,
 
     /**
-     * The CSS class names.
+     * Specify an optional className to be applied to the container node
      */
     className: PropTypes.string,
 

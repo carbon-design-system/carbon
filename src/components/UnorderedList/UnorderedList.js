@@ -14,8 +14,19 @@ const UnorderedList = ({ children, className, nested, ...other }) => {
 };
 
 UnorderedList.propTypes = {
+  /**
+   * Specify a collection of ListItem's to be rendered in the UnorderedList
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the underlying <ul> node
+   */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the list is nested, or not
+   */
   nested: PropTypes.bool,
 };
 

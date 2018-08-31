@@ -61,10 +61,19 @@ const DataTableSkeleton = ({ rowCount, zebra, compact, ...other }) => {
 
 DataTableSkeleton.propTypes = {
   /**
-   * number of table rows
+   * Specify the number of rows that you want to render in the skeleton state
    */
   rowCount: PropTypes.number,
+
+  /**
+   * Optionally specify whether you want the DataTable to be zebra striped
+   */
   zebra: PropTypes.bool,
+
+  /**
+   * Optionally specify whether you want the Skeleton to be rendered as a
+   * compact DataTable
+   */
   compact: PropTypes.bool,
 };
 

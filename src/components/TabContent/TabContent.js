@@ -12,7 +12,14 @@ const TabContent = props => {
 };
 
 TabContent.propTypes = {
+  /**
+   * Specify whether the TabContent is selected
+   */
   selected: PropTypes.bool,
+
+  /**
+   * Pass in content to render inside of the TabContent
+   */
   children: PropTypes.node,
 };
 

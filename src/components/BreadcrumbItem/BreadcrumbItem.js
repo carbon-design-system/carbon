@@ -23,8 +23,19 @@ const BreadcrumbItem = ({ children, className, href, ...other }) => {
 };
 
 BreadcrumbItem.propTypes = {
+  /**
+   * Pass in content that will be inside of the BreadcrumbItem
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
   className: PropTypes.string,
+
+  /**
+   * Optional string representing the link location for the BreadcrumbItem
+   */
   href: PropTypes.string,
 };
 

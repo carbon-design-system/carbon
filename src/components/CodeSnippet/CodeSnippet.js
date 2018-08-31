@@ -8,26 +8,62 @@ import Icon from '../Icon';
 export default class CodeSnippet extends Component {
   static propTypes = {
     /**
-     * The type of code snippet
-     * can be inline, single or multi
+     * Provide the type of Code Snippet
      */
     type: PropTypes.oneOf(['single', 'inline', 'multi']),
-    className: PropTypes.string,
-    children: PropTypes.string,
-    feedback: PropTypes.string,
-    copyLabel: PropTypes.string,
-    copyButtonDescription: PropTypes.string,
-    onClick: PropTypes.func,
-    ariaLabel: PropTypes.string,
+
     /**
-     * Used with multi snippet only
-     * when text is more than 15 lines
+     * Specify an optional className to be applied to the container node
+     */
+    className: PropTypes.string,
+
+    /**
+     * Provide the content of your CodeSnippet as a string
+     */
+    children: PropTypes.string,
+
+    /**
+     * Specify the string displayed when the snippet is copied
+     */
+    feedback: PropTypes.string,
+
+    /**
+     * Specify the label used for the Copy Button
+     */
+    copyLabel: PropTypes.string,
+
+    /**
+     * Specify the description for the Copy Button
+     */
+    copyButtonDescription: PropTypes.string,
+
+    /**
+     * An optional handler to listen to the `onClick` even fired by the Copy
+     * Button
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Specify a label to be read by screen readers on the containing <textbox>
+     * node
+     */
+    ariaLabel: PropTypes.string,
+
+    /**
+     * Specify a string that is displayed when the Code Snippet text is more
+     * than 15 lines
      */
     showMoreText: PropTypes.string,
-    showLessText: PropTypes.string,
+
     /**
-     * Used with inline snippet only
-     * to display alternate color
+     * Specify a string that is displayed when the Code Snippet has been
+     * interacted with to show more lines
+     */
+    showLessText: PropTypes.string,
+
+    /**
+     * Specify whether you are using the light variant of the Code Snippet,
+     * typically used for inline snippest to display an alternate color
      */
     light: PropTypes.bool,
   };

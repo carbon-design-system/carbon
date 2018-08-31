@@ -16,7 +16,14 @@ const Accordion = ({ children, className, ...other }) => {
 };
 
 Accordion.propTypes = {
+  /**
+   * Pass in the children that will be rendered within the Accordion
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
   className: PropTypes.string,
 };
 

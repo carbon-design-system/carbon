@@ -12,8 +12,19 @@ const Link = ({ children, className, href, ...other }) => {
 };
 
 Link.propTypes = {
+  /**
+   * Provide the content for the Link
+   */
   children: PropTypes.node,
+
+  /**
+   * Provide a custom className to be applied to the containing <a> node
+   */
   className: PropTypes.string,
+
+  /**
+   * Provide the `href` attribute for the <a> node
+   */
   href: PropTypes.string,
 };
 

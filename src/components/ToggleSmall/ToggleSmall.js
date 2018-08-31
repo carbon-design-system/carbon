@@ -64,22 +64,27 @@ ToggleSmall.propTypes = {
    * The CSS class for the toggle
    */
   className: PropTypes.string,
+
   /**
    * `true` to make it toggled on by default.
    */
   defaultToggled: PropTypes.bool,
+
   /**
    * The event handler for the `onChange` event.
    */
   onToggle: PropTypes.func,
+
   /**
    * The `id` attribute for the toggle
    */
   id: PropTypes.string.isRequired,
+
   /**
    * `true` to make it toggled on
    */
   toggled: PropTypes.bool,
+
   /**
    * The `aria-label` attribute for the toggle
    */

@@ -5,10 +5,30 @@ import Loading from '../Loading';
 
 export default class InlineLoading extends React.Component {
   static propTypes = {
+    /**
+     * Specify a custom className to be applied to the container node
+     */
     className: PropTypes.string,
+
+    /**
+     * Specify whether the load was successful
+     */
     success: PropTypes.bool,
+
+    /**
+     * Specify the description for the inline loading text
+     */
     description: PropTypes.string,
+
+    /**
+     * Provide an optional handler to be inovked when <InlineLoading> is
+     * successful
+     */
     onSuccess: PropTypes.func,
+
+    /**
+     * Provide a delay for the `setTimeout` for success
+     */
     successDelay: PropTypes.number,
   };
 

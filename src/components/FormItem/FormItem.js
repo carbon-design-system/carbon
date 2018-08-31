@@ -13,7 +13,14 @@ const FormItem = ({ className, children, ...other }) => {
 };
 
 FormItem.propTypes = {
+  /**
+   * Provide content to be rendered in the form item
+   */
   children: PropTypes.node,
+
+  /**
+   * Provide a custom className to be applied to the containing node
+   */
   className: PropTypes.string,
 };
 

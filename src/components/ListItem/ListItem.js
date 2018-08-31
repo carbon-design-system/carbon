@@ -12,7 +12,14 @@ const ListItem = ({ children, className, ...other }) => {
 };
 
 ListItem.propTypes = {
+  /**
+   * Specify the content for the ListItem
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to apply to the underlying <li> node
+   */
   className: PropTypes.string,
 };
 

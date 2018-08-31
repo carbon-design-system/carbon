@@ -5,9 +5,10 @@ import Icon from '../Icon';
 
 export default class DatePickerInput extends Component {
   static propTypes = {
+    /**
+     * Specify an id that unique identifies the <input>
+     */
     id: PropTypes.string.isRequired,
-    children: PropTypes.node,
-    value: PropTypes.string,
   };
 
   static defaultProps = {

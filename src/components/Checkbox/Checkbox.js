@@ -49,23 +49,58 @@ const Checkbox = ({
 };
 
 Checkbox.propTypes = {
-  checked: PropTypes.bool,
-  defaultChecked: PropTypes.bool,
-  indeterminate: PropTypes.bool,
   /**
-   * The CSS class name to be placed on inner label element.
+   * Specify whether the underlying input should be checked
+   */
+  checked: PropTypes.bool,
+
+  /**
+   * Specify whether the underlying input should be checked by default
+   */
+  defaultChecked: PropTypes.bool,
+
+  /**
+   * Specify whether the Checkbox is in an indeterminate state
+   */
+  indeterminate: PropTypes.bool,
+
+  /**
+   * Specify an optional className to be applied to the <label> node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the Checkbox should be disabled
+   */
   disabled: PropTypes.bool,
+
+  /**
+   * Provide an `id` to uniquely identify the Checkbox input
+   */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Provide a label to provide a description of the Checkbox input that you are
+   * exposing to the user
+   */
   labelText: PropTypes.node.isRequired,
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
   hideLabel: PropTypes.bool,
+
   /**
    * Receives three arguments: true/false, the checkbox's id, and the dom event.
    * `(value, id, event) => console.log({value, id, event})`
    */
   onChange: PropTypes.func,
+
+  /**
+   * Specify a title for the <label> node for the Checkbox
+   */
   title: PropTypes.string,
+
   /**
    * The CSS class name to be placed on the wrapping element
    */

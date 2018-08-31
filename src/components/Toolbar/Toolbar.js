@@ -14,7 +14,14 @@ const Toolbar = ({ children, className, ...other }) => {
 };
 
 Toolbar.propTypes = {
+  /**
+   * Specify a collection of ToolbarItem's that should render in the Toolbar
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the containing Toolbar node
+   */
   className: PropTypes.string,
 };
 
@@ -29,8 +36,21 @@ export const ToolbarItem = ({ children, type, placeHolderText }) => {
 };
 
 ToolbarItem.propTypes = {
+  /**
+   * Specify the contents of the ToolbarItem
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify the type of the ToolbarItem. The `search` type will render a
+   * `ToolbarSearch` component
+   */
   type: PropTypes.string,
+
+  /**
+   * Specify the placeholder text for the ToolbarSearch component. Useful if
+   * `type` is set to 'search'
+   */
   placeHolderText: PropTypes.string,
 };
 
@@ -43,6 +63,9 @@ export const ToolbarTitle = ({ title }) => (
 );
 
 ToolbarTitle.propTypes = {
+  /**
+   * Specify the title of the Toolbar
+   */
   title: PropTypes.string,
 };
 
@@ -51,6 +74,9 @@ export const ToolbarOption = ({ children }) => (
 );
 
 ToolbarOption.propTypes = {
+  /**
+   * Specify the contents of the ToolbarOption
+   */
   children: PropTypes.node,
 };
 
