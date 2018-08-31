@@ -15,10 +15,9 @@ $css--use-experimental-grid: false !default;
 $css--use-experimental-grid-fallback: false !default;
 
 @import 'feature-flags';
-@import 'colors';
-@import 'colors--experimental';
-@import 'theme';
 @import 'vars';
+@import 'colors';
+@import 'theme';
 @import 'mixins';
 @import 'layout';
 @import 'layer';

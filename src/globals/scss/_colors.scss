@@ -1,5 +1,12 @@
-// @import 'node_modules/@carbon/colors/scss/colors';
-@import 'ibm-colors';
+//--------------------
+// EXPERIMENTAL COLORS
+//--------------------
+@import 'node_modules/@carbon/colors/scss/colors';
+$ibm-colors__yellow--20: #fdd13a;
+
+//--------------------
+// CLASSIC COLORS
+//--------------------
 
 // UI Color Scheme
 $color__blue-20: #7cc7ff !default;

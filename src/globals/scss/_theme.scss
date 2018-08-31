@@ -103,25 +103,27 @@
   $use-layer: true !default !global;
 
   // Color Theme Variables
-  $brand-01: $ibm-color__blue-60 !default !global;
-  $brand-02: $ibm-color__blue-80 !default !global;
-  $brand-03: $ibm-color__blue-60 !default !global;
-  $inverse-01: $ibm-color__white-0 !default !global;
-  $inverse-02: $ibm-color__white-0 !default !global; // TODO: Define for experimental
-  $ui-01: $ibm-color__gray-10 !default !global;
-  $ui-02: $ibm-color__white-0 !default !global;
-  $ui-03: $ibm-color__gray-20 !default !global;
-  $ui-04: $ibm-color__gray-50 !default !global;
-  $ui-05: $ibm-color__gray-100 !default !global;
-  $text-01: $ibm-color__gray-100 !default !global;
-  $text-02: $ibm-color__gray-70 !default !global;
-  $text-03: $ibm-color__gray-40 !default !global;
-  $field-01: $ibm-color__gray-10 !default !global;
-  $field-02: $ibm-color__gray-10 !default !global; // TODO: Define for experimental
-  $support-01: $ibm-color__red-60 !default !global;
-  $support-02: $ibm-color__green-50 !default !global;
-  $support-03: $ibm-color__yellow-20 !default !global;
-  $support-04: $ibm-color__blue-50 !default !global;
+  $brand-01: $ibm-colors__blue--60 !default !global;
+  $brand-02: $ibm-colors__blue--80 !default !global;
+  $brand-03: $ibm-colors__blue--60 !default !global;
+  $inverse-01: $ibm-colors__white !default !global;
+  $inverse-02: $ibm-colors__white !default !global; // TODO: Define for experimental
+  $ui-01: $ibm-colors__gray--10 !default !global;
+  $ui-02: $ibm-colors__white !default !global;
+  $ui-03: $ibm-colors__gray--20 !default !global;
+  $ui-04: $ibm-colors__gray--50 !default !global;
+  $ui-05: $ibm-colors__gray--100 !default !global;
+  $text-01: $ibm-colors__gray--100 !default !global;
+  $text-02: $ibm-colors__gray--70 !default !global;
+  $text-03: $ibm-colors__gray--40 !default !global;
+  $field-01: $ibm-colors__gray--10 !default !global;
+  $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for experimental
+  $support-01: $ibm-colors__red--60 !default !global;
+  $support-02: $ibm-colors__green--50 !default !global;
+  $support-03: $ibm-colors__yellow--20 !default !global;
+  $support-04: $ibm-colors__blue--50 !default !global;
+
+  // TODO: Define for experimental
   $nav-01: $color__navy-gray-1 !default !global;
   $nav-02: $color__blue-90 !default !global;
   $nav-03: $color__purple-30 !default !global;
@@ -152,7 +154,7 @@
   $button-padding-lg: $spacing-sm !default !global;
   $button-border-width: 4px !default !global;
   $button-outline-offset: -5px !default !global;
-  $button-outline: 1px solid $ibm-color__white-0 !default !global;
+  $button-outline: 1px solid $ibm-colors__white !default !global;
 
   // Accordion (Reverse)
   $accordion-flex-direction: row !default !global;
