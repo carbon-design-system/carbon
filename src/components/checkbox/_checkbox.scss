@@ -212,6 +212,7 @@
     @include font-family;
     @include font-smoothing;
     @include typescale('zeta');
+    line-height: 1.25rem;
     position: relative;
     display: flex;
     cursor: pointer;
