@@ -35,16 +35,30 @@
         background-color: #fff;
       }
 
-      .#{$prefix}--switcher__subheader {
+      .#{$prefix}--switcher__subheader,
+      .#{$prefix}--switcher__all-btn {
         padding: 0 units(3);
-        font-size: 14px; //change
-        font-weight: bold; //change
+        @include typescale('omega');
+        margin-bottom: units(1);
         margin-left: units(4);
         color: $shell-header-text-03;
       }
 
+      .#{$prefix}--switcher__all-btn {
+        display: inline-block;
+        margin-bottom: units(2);
+        background: transparent;
+        border: none;
+        color: $shell-header-link;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
       .#{$prefix}--switcher__app-list {
-        margin-bottom: 0.8rem;
+        margin-bottom: units(1);
       }
 
       .#{$prefix}--app-list__item {
@@ -73,7 +87,7 @@
         width: units(2);
         height: units(2);
         margin-right: units(2.5);
-        border: 1px solid black;
+        border: 1px solid #000;
       }
 
       .#{$prefix}--app-list__name {
