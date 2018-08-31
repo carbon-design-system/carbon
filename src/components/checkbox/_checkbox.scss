@@ -1,7 +1,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
-@import '../../globals/scss/colors--experimental';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
@@ -212,8 +211,7 @@
     @include reset;
     @include font-family;
     @include font-smoothing;
-    //@include type-scale-item('b');
-
+    @include typescale('zeta');
     position: relative;
     display: flex;
     cursor: pointer;
