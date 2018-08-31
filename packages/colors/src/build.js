@@ -44,6 +44,7 @@ async function build() {
   await fs.writeFile(
     entryFilename,
     prettier.format(file, {
+      parser: 'scss',
       jsxBracketSameLine: true,
       printWidth: 80,
       singleQuote: true,
