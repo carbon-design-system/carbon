@@ -4,7 +4,7 @@
 
 // Initialize our feature flag map with default values
 $feature-flags: (
-  components-x: true,
+  components-x: false,
   ui-shell: false,
 ) !default;
 
