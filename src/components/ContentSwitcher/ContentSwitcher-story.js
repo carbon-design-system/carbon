@@ -29,6 +29,7 @@ const props = {
     onChange: action('onChange'),
   }),
   switch: () => ({
+    onClick: action('onClick - Switch'),
     kind: select('Butto kind (kind in <Switch>)', kinds, 'anchor'),
     href: text('The link href (href in <Switch>)', ''),
     icon: iconMap[select('Icon (icon in <Switch>)', icons, 'none')],
