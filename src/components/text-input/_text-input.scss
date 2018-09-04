@@ -90,6 +90,14 @@
       background: none;
       cursor: pointer;
       outline: inherit;
+
+      svg {
+        fill: $brand-01;
+
+        &:hover {
+          fill: $hover-primary;
+        }
+      }
     }
   }
 
