@@ -53,7 +53,7 @@
   input[data-invalid],
   textarea[data-invalid],
   select[data-invalid],
-  div[data-invalid] {
+  .#{$prefix}--list-box[data-invalid] {
     box-shadow: 0 2px 0px 0px $support-01;
 
     ~ .#{$prefix}--form-requirement {
