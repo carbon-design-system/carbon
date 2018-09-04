@@ -101,7 +101,8 @@ export default class Modal extends Component {
     if (
       this.innerModal &&
       this.props.open &&
-      (!evt.relatedTarget || !this.innerModal.contains(evt.relatedTarget)) &&
+      evt.relatedTarget &&
+      !this.innerModal.contains(evt.relatedTarget) &&
       !this.elementOrParentIsFloatingMenu(evt.relatedTarget)
     ) {
       this.focusModal();
