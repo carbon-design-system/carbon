@@ -2,6 +2,15 @@
 
 Part of our review process involves creating live staging links for Pull Requests. Ideally, this process should be automated but in the meantime here is a brief outline of how to create staging links for `carbon-components`.
 
+## TL;DR
+
+- Install the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html)
+  - _Note: after it's downloaded, you should have the `ibmcloud` command available_
+- Login to Cloud foundry by running `ibmcloud login`, or `ibmcloud login --sso` if you are an IBMer
+- Target your Cloud foundry organization and space by running `ibmcloud cf target`
+- Build the application assets using `yarn build`
+- Push the application to Cloud foundry by running `ibmcloud cf push`
+
 ## IBM Cloud
 
 We use [Cloud Foundry](https://www.cloudfoundry.org/) on IBM Cloud to deploy our staging environment. You can find the specific [manifest.yml](../manifest.yml) which configures the deployment itself at the root of the project.
