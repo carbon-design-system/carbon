@@ -1,33 +1,63 @@
-<div class="bx--form-item">
+<div data-text-input class="bx--form-item">
   <label for="text-input-3" class="bx--label">Text Input label</label>
-  <input id="text-input-3" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Optional placeholder text">
+  <input id="text-input-3" {{#if password}}type="password" {{else}}type="text" {{/if}} class="bx--text-input{{#if light}} bx--text-input--light{{/if}}"
+    {{#if password}}data-toggle-password-visibility{{/if}} placeholder="Optional placeholder text"> {{#if password}}
+  <button class="bx--text-input--password__visibility">
+    <svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 7.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 1c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"></path>
+      <path d="M8 10c2.8 0 5.1-1.5 6.9-4.6C13.1 2.5 10.8 1 8 1 5.2 1 3 2.4 1.2 5.4 2.9 8.6 5.2 10 8 10zM8 0c3.3 0 6 1.8 8.1 5.4C14 9.2 11.3 11 8 11S2 9.2 0 5.5C2 1.9 4.6 0 8 0z"></path></svg>
+  </button>
+  {{/if}}
 </div>
 
-<div class="bx--form-item">
+<div data-text-input class="bx--form-item">
   <label for="text-input-4" class="bx--label">Text Input label</label>
-  <input data-invalid id="text-input-4" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Optional placeholder text">
+  <input data-invalid id="text-input-4" {{#if password}}type="password" {{else}}type="text" {{/if}} class="bx--text-input{{#if light}} bx--text-input--light{{/if}}"
+    {{#if password}}data-toggle-password-visibility{{/if}} placeholder="Optional placeholder text"> {{#if password}}
+  <button class="bx--text-input--password__visibility">
+    <svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 7.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 1c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"></path>
+      <path d="M8 10c2.8 0 5.1-1.5 6.9-4.6C13.1 2.5 10.8 1 8 1 5.2 1 3 2.4 1.2 5.4 2.9 8.6 5.2 10 8 10zM8 0c3.3 0 6 1.8 8.1 5.4C14 9.2 11.3 11 8 11S2 9.2 0 5.5C2 1.9 4.6 0 8 0z"></path></svg>
+  </button>
+  {{/if}}
   <div class="bx--form-requirement">
     Validation message here
   </div>
 </div>
 
-<div class="bx--form-item">
+<div data-text-input class="bx--form-item">
   <label for="text-input-5" class="bx--label">Text Input label</label>
-  <input id="text-input-5" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Optional placeholder text">
+  <input id="text-input-5" {{#if password}}type="password" {{else}}type="text" {{/if}} class="bx--text-input{{#if light}} bx--text-input--light{{/if}}"
+    {{#if password}} data-toggle-password-visibility{{/if}} placeholder="Optional placeholder text"> {{#if password}}
+  <button class="bx--text-input--password__visibility">
+    <svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 7.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 1c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"></path>
+      <path d="M8 10c2.8 0 5.1-1.5 6.9-4.6C13.1 2.5 10.8 1 8 1 5.2 1 3 2.4 1.2 5.4 2.9 8.6 5.2 10 8 10zM8 0c3.3 0 6 1.8 8.1 5.4C14 9.2 11.3 11 8 11S2 9.2 0 5.5C2 1.9 4.6 0 8 0z"></path></svg>
+  </button>
+  {{/if}}
   <div class="bx--form__helper-text">
     Optional helper text goes here
   </div>
 </div>
 
-<div class="bx--form-item" style="width: 300px">
-  <label for="text-input-5" class="bx--label">Text Input label</label>
-  <input id="text-input-5" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Optional placeholder text">
+<div data-text-input class="bx--form-item" style="width: 320px">
+  <label for="text-input-6" class="bx--label">Text Input label</label>
+  <input id="text-input-6" {{#if password}}type="password" {{else}}type="text" {{/if}} class="bx--text-input{{#if light}} bx--text-input--light{{/if}}"
+    {{#if password}} data-toggle-password-visibility{{/if}} placeholder="Optional placeholder text"> {{#if password}}
+  <button class="bx--text-input--password__visibility">
+    <svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 7.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 1c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"></path>
+      <path d="M8 10c2.8 0 5.1-1.5 6.9-4.6C13.1 2.5 10.8 1 8 1 5.2 1 3 2.4 1.2 5.4 2.9 8.6 5.2 10 8 10zM8 0c3.3 0 6 1.8 8.1 5.4C14 9.2 11.3 11 8 11S2 9.2 0 5.5C2 1.9 4.6 0 8 0z"></path></svg>
+  </button>
+  {{/if}}
   <div class="bx--form__helper-text">
     Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
   </div>
 </div>
 
-<div class="bx--form-item">
-  <label for="text-input-6" class="bx--label bx--label--disabled">Text Input label</label>
-  <input id="text-input-6" type="text" class="bx--text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="Optional placeholder text" disabled>
+<div data-text-input class="bx--form-item">
+  <label for="text-input-7" class="bx--label bx--label--disabled">Text Input label</label>
+  <input id="text-input-7" {{#if password}}type="password" {{else}}type="text" {{/if}} class="bx--text-input{{#if light}} bx--text-input--light{{/if}}"
+    {{#if password}} data-toggle-password-visibility{{/if}} placeholder="Optional placeholder text" disabled> {{#if password}}
+  <button class="bx--text-input--password__visibility">
+    <svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 7.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 1c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"></path>
+      <path d="M8 10c2.8 0 5.1-1.5 6.9-4.6C13.1 2.5 10.8 1 8 1 5.2 1 3 2.4 1.2 5.4 2.9 8.6 5.2 10 8 10zM8 0c3.3 0 6 1.8 8.1 5.4C14 9.2 11.3 11 8 11S2 9.2 0 5.5C2 1.9 4.6 0 8 0z"></path></svg>
+  </button>
+  {{/if}}
 </div>

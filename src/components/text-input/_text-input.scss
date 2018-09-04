@@ -74,6 +74,23 @@
         display: none;
       }
     }
+
+    &[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
+      position: relative;
+      top: rem(-40px);
+      align-self: flex-end;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      order: 3;
+      height: rem(40px);
+      width: rem(40px);
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      outline: inherit;
+    }
   }
 
   .#{$prefix}--text-input--light {
