@@ -4,6 +4,7 @@
 
 @import '../../globals/scss/colors';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/theme';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
@@ -213,7 +214,8 @@
   }
 
   // Skeleton State
-  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton {
+  .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
+  .#{$prefix}--dropdown.#{$prefix}--skeleton {
     @include skeleton;
   }
 }

@@ -2,7 +2,6 @@
 // GLOBAL MIXINS
 //--------------------
 
-
 //--------------------
 // BREAKPOINTS
 //
@@ -24,9 +23,7 @@ $breakpoints: (
     @media screen and (min-width: map-get($breakpoints, $size)) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @media (min-width: $size) {
       @content;
     }

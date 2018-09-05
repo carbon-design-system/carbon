@@ -459,7 +459,7 @@
       }
     ],
     "incomplete": [],
-    "timestamp": 1517346656687,
+    "timestamp": 1535160618213,
     "url": "http://localhost:3000",
     "violations": [
       {
@@ -479,8 +479,7 @@
                   "expectedContrastRatio": "4.5:1",
                   "fgColor": "#ffffff",
                   "fontSize": "9.8pt",
-                  "fontWeight": "normal",
-                  "missingData": null
+                  "fontWeight": "normal"
                 },
                 "id": "color-contrast",
                 "impact": "serious",
@@ -572,7 +571,7 @@
         ]
       }
     ],
-    "time": 254,
+    "time": 717,
     "status": 404
   }
 ]
