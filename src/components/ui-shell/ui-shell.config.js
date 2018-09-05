@@ -36,14 +36,23 @@ const header = {
   ],
 };
 
-function createSidebarLinks(count) {
-  return Array.from({ length: count }).fill({
-    title: 'L3 link',
-    href: '#',
+function createSidebarLinks(count, activeIndex) {
+  return Array.from({ length: count }, (_, i) => {
+    const link = {
+      title: 'L3 link',
+      href: '/component/ui-shell--default',
+    };
+    if (i === activeIndex) {
+      link.active = true;
+    }
+    return link;
   });
 }
 
 const sidenav = {
+  state: {
+    expanded: false,
+  },
   title: {
     text: '[L1 name here]',
   },
@@ -54,7 +63,8 @@ const sidenav = {
     },
     {
       category: 'L2 Category',
-      links: createSidebarLinks(3),
+      links: createSidebarLinks(3, 1),
+      active: true,
     },
     {
       category: 'L2 Category',
@@ -69,4 +79,16 @@ module.exports = {
     header,
     sidenav,
   },
+  variants: [
+    {
+      name: 'expanded',
+      context: {
+        sidenav: {
+          state: {
+            expanded: true,
+          },
+        },
+      },
+    },
+  ],
 };

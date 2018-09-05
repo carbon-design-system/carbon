@@ -46,6 +46,8 @@ $shell-side-nav-accent-01: #0062ff;
     background-color: $shell-side-nav-bg-01;
     will-change: width;
     transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+    // Useful to toggle this property to see what's going on when not expanded
+    overflow: hidden;
   }
 
   .#{$prefix}--side-nav--expanded {
@@ -72,6 +74,152 @@ $shell-side-nav-accent-01: #0062ff;
   }
 
   //----------------------------------------------------------------------------
+  // Header
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__header {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--side-nav__header-title {
+    font-size: rem(14px);
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    line-height: rem(32px);
+    margin-left: get-fixed-size(1);
+    user-select: none;
+    opacity: 0;
+  }
+
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__header-title {
+    opacity: 1;
+  }
+
+  //----------------------------------------------------------------------------
+  // Divider
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__divider {
+    width: get-fixed-size(2);
+    height: 1px;
+    background-color: $shell-side-nav-bg-02;
+    margin: 0 get-fixed-size(2) get-fixed-size(1);
+  }
+
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__divider {
+    width: unset;
+  }
+
+  //----------------------------------------------------------------------------
+  // Nav
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__nav-item {
+    height: get-fixed-size(6);
+    overflow: hidden;
+  }
+
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__nav-item {
+    height: unset;
+  }
+
+  //----------------------------------------------------------------------------
+  // Categories
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__category {
+    position: relative;
+  }
+
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category {
+    padding-top: get-fixed-size(1);
+  }
+
+  .#{$prefix}--side-nav__category--active {
+    background-color: $shell-side-nav-bg-02;
+  }
+
+  .#{$prefix}--side-nav__category--active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: $shell-side-nav-accent-01;
+  }
+
+  .#{$prefix}--side-nav__category-header {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--side-nav__category-title {
+    // TODO: sync with tokens
+    color: #a4a4a4;
+    font-size: rem(14px);
+    line-height: rem(20px);
+    margin-left: get-fixed-size(1);
+    user-select: none;
+    opacity: 0;
+  }
+
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category-title {
+    opacity: 1;
+  }
+
+  .#{$prefix}--side-nav__category-items {
+    display: none;
+    opacity: 0;
+  }
+
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category-items {
+    display: block;
+    opacity: 1;
+  }
+
+  .#{$prefix}--side-nav__category-item {
+    position: relative;
+  }
+
+  .#{$prefix}--side-nav__category-item--active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 2px;
+    width: 3px;
+    background-color: $shell-side-nav-accent-01;
+  }
+
+  .#{$prefix}--side-nav__category-item > a {
+    display: inline-block;
+    font-size: rem(14px);
+    letter-spacing: 0.1px;
+    line-height: rem(32px);
+    color: $shell-side-nav-text-01;
+    text-decoration: none;
+    font-weight: 400;
+    width: 100%;
+    padding-left: get-fixed-size(7);
+  }
+
+  .#{$prefix}--side-nav__category-item > a:hover {
+    background-color: $shell-side-nav-bg-02;
+    color: $shell-side-nav-text-01;
+  }
+
+  .#{$prefix}--side-nav__category-item > a:focus {
+    box-shadow: inset 0 0 0 4px $shell-side-nav-accent-01;
+    outline: none;
+  }
+
+  .#{$prefix}--side-nav__category--active .#{$prefix}--side-nav__category-item > a:hover {
+    background-color: $shell-side-nav-bg-03;
+  }
+
+  .#{$prefix}--side-nav__category-item--active > a {
+    background-color: $shell-side-nav-bg-03;
+  }
+
+  //----------------------------------------------------------------------------
   // Footer
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__footer {
@@ -84,7 +232,6 @@ $shell-side-nav-accent-01: #0062ff;
     @include button-reset($width: true);
     height: 100%;
     text-align: left;
-    border: 4px solid transparent;
   }
 
   .#{$prefix}--side-nav__toggle:hover {
@@ -93,7 +240,7 @@ $shell-side-nav-accent-01: #0062ff;
 
   .#{$prefix}--side-nav__toggle:focus {
     outline: none;
-    border-color: $shell-side-nav-accent-01;
+    box-shadow: inset 0 0 0 4px $shell-side-nav-accent-01;
   }
 
   .#{$prefix}--side-nav__toggle:active {
@@ -113,6 +260,11 @@ $shell-side-nav-accent-01: #0062ff;
 
   .#{$prefix}--side-nav__icon > svg {
     fill: $shell-side-nav-icon-01;
+  }
+
+  .#{$prefix}--side-nav__icon--small {
+    width: get-fixed-size(6);
+    height: get-fixed-size(4);
   }
 }
 
