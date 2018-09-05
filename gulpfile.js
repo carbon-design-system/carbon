@@ -3,6 +3,7 @@
 // Node
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 
 // Styles
 const sass = require('gulp-sass');
@@ -13,6 +14,7 @@ const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const pump = require('pump');
 const { promisify } = require('bluebird');
+const debounce = require('lodash.debounce');
 
 // BrowserSync/NodeMon
 const browserSync = require('browser-sync').create();
@@ -23,6 +25,7 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const gutil = require('gulp-util');
+const header = require('gulp-header');
 const jsdoc = require('gulp-jsdoc3');
 
 // Rollup
@@ -45,6 +48,8 @@ const del = require('del');
 const writeFile = promisify(fs.writeFile);
 const mkdirp = promisify(require('mkdirp'));
 
+const portscanner = require('portscanner');
+
 // Test environment
 const Server = require('karma').Server;
 const commander = require('commander');
@@ -57,32 +62,43 @@ const cloptions = commander
   .option('-k, --keepalive', 'Keeps browser open after first run of Karma test finishes')
   .option('--name [name]', 'Component name used for aXe testing', assign, '')
   .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
+  .option('--port-sass-dev-build [port]', 'Uses the given port for Sass dev build server', assign, 5000)
   .option('-r, --rollup', 'Uses Rollup for dev env')
   .parse(process.argv);
 
 // Axe A11y Test
 const axe = require('gulp-axe-webdriver');
 
+const promisePortSassDevBuild = portscanner.findAPortNotInUse(cloptions.portSassDevBuild, cloptions.portSassDevBuild + 100);
+
 /**
  * Dev server
  */
 
 gulp.task('dev-server', ['sass:dev'], cb => {
-  let started;
-  const options = {
-    script: './server.js',
-    ext: 'js',
-    watch: ['server.js', 'tools/templates.js'],
-    env: {
-      PORT: cloptions.port,
+  promisePortSassDevBuild.then(
+    portSassDevBuild => {
+      let started;
+      const options = {
+        script: './server.js',
+        ext: 'js',
+        watch: ['server.js', 'tools/templates.js'],
+        env: {
+          PORT: cloptions.port,
+          PORT_SASS_DEV_BUILD: portSassDevBuild,
+        },
+      };
+      nodemon(options).on('start', () => {
+        if (!started) {
+          started = true;
+          cb();
+        }
+      });
     },
-  };
-  nodemon(options).on('start', () => {
-    if (!started) {
-      started = true;
-      cb();
+    err => {
+      console.log('Error finding the port for Sass dev build:', err); // eslint-disable-line no-console
     }
-  });
+  );
 });
 
 /**
@@ -230,10 +246,21 @@ gulp.task('sass:compiled', () => {
   buildStyles(true); // Minified CSS
 });
 
+let useExperimenalFeatures = false;
+
 gulp.task('sass:dev', () =>
   gulp
     .src('demo/scss/demo.scss')
     .pipe(sourcemaps.init())
+    .pipe(
+      header(`
+        $feature-flags: (
+          components-x: ${useExperimenalFeatures},
+          grid: ${useExperimenalFeatures},
+          ui-shell: ${useExperimenalFeatures},
+        );
+      `)
+    )
     .pipe(
       sass({
         outputStyle: 'expanded',
@@ -248,6 +275,30 @@ gulp.task('sass:dev', () =>
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream({ match: '**/*.css' }))
 );
+
+gulp.task('sass:dev:server', () => {
+  const debouncedSassBuild = debounce(switchTo => {
+    if (!useExperimenalFeatures !== !switchTo) {
+      useExperimenalFeatures = switchTo;
+      gulp.start('sass:dev');
+    }
+  }, 500);
+  return promisePortSassDevBuild.then(portSassDevBuild => {
+    http
+      .createServer((req, res) => {
+        const switchTo = ((/^\/(experimental|classic)/i.exec(req.url) || [])[1] || '').toLowerCase();
+        if (switchTo) {
+          res.writeHead(200, {
+            'Access-Control-Allow-Origin': `http://localhost:${cloptions.port}`,
+          });
+          res.end();
+          debouncedSassBuild(switchTo === 'experimental');
+        }
+      })
+      .listen(portSassDevBuild);
+    console.log(`Sass dev build server started on port: ${portSassDevBuild}`); // eslint-disable-line no-console
+  });
+});
 
 gulp.task('sass:source', () => {
   const srcFiles = './src/**/*.scss';
@@ -353,7 +404,7 @@ gulp.task('watch', () => {
   gulp.watch(['src/**/**/*.scss', 'demo/**/*.scss'], ['sass:dev']);
 });
 
-gulp.task('serve', ['dev-server', 'watch']);
+gulp.task('serve', ['dev-server', 'watch', 'sass:dev:server']);
 
 // Build task collection
 gulp.task('build:scripts', ['scripts:umd', 'scripts:es', 'scripts:compiled', 'scripts:dev']);

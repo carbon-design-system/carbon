@@ -33,6 +33,7 @@
     "node": ">=6.x"
   },
   "dependencies": {
+    "@carbon/colors": "^0.0.1-alpha.0",
     "carbon-icons": "^7.0.7",
     "flatpickr": "2.6.3",
     "lodash.debounce": "^4.0.8",
@@ -88,6 +89,7 @@
     "gulp-autoprefixer": "~3.0.1",
     "gulp-axe-webdriver": "^1.4.0",
     "gulp-babel": "^6.1.2",
+    "gulp-header": "^2.0.0",
     "gulp-jsdoc3": "^0.2.1",
     "gulp-nodemon": "^2.2.0",
     "gulp-rename": "^1.2.2",
@@ -100,7 +102,7 @@
     "html-loader": "^0.5.0",
     "husky": "^0.14.3",
     "jasmine-core": "^2.9.0",
-    "jest": "^23.4.2",
+    "jest": "^23.5.0",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.0",
@@ -122,6 +124,7 @@
     "node-sass": "^4.9.2",
     "nodemon": "1.9.1",
     "path-to-regexp": "^2.2.0",
+    "portscanner": "^2.2.0",
     "postcss-loader": "^2.1.0",
     "prettier": "^1.13.0",
     "promise": "^8.0.1",
