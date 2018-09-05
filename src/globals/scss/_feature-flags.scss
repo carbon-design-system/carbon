@@ -4,7 +4,8 @@
 
 // Initialize our feature flag map with default values
 $feature-flags: (
-  components: false,
+  components-x: false,
+  ui-shell: false,
 ) !default;
 
 // We supported a flag for experimental grid in the past that we want to keep
