@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import classnames from 'classnames';
+import { ToggleSmall } from 'carbon-components-react';
+import on from '../../../src/globals/js/misc/on';
 import CodePage from './CodePage/CodePage';
 import SideNav from './SideNav';
 import PageHeader from './PageHeader/PageHeader';
@@ -68,6 +70,65 @@ const load = (componentItems, selectedNavItemId) => {
 };
 
 /**
+ * @param {Object[]} componentItems The components data.
+ * @returns {Object[]} The component data with `isHidden` moved to `meta.isDefaultHidden`.
+ */
+const preserveDefaultHidden = componentItems =>
+  componentItems.map(item => {
+    const { items: subItems, meta = {} } = item;
+    return {
+      ...item,
+      meta: {
+        ...meta,
+        isDefaultHidden: item.isHidden,
+      },
+      ...(!subItems
+        ? {}
+        : {
+            items: preserveDefaultHidden(subItems),
+          }),
+    };
+  });
+
+/**
+ * @param {Object[]} componentItems The components data.
+ * @param {boolean} isComponentsX `true` if the current style is of the experimental version.
+ * @returns {Object[]} The component data with `isHidden` calculated with `meta.isDefaultHidden` and `isComponentsX`.
+ */
+const applyComponentsX = (componentItems, isComponentsX) =>
+  componentItems.map(item => {
+    const { items: subItems, meta = {} } = item;
+    return {
+      ...item,
+      isHidden: meta.isDefaultHidden || (meta.xVersionNotSupported && isComponentsX) || (meta.xVersionOnly && !isComponentsX),
+      ...(!subItems
+        ? {}
+        : {
+            items: applyComponentsX(subItems, isComponentsX),
+          }),
+    };
+  });
+
+/**
+ * @param {string} name The event name.
+ * @param {Function} callback The callback.
+ * @returns {Handle} The handle to release the attached event handler.
+ */
+const onBrowserSyncEvent = (name, callback) => {
+  // eslint-disable-next-line no-underscore-dangle
+  if (!window.___browserSync___) {
+    return null;
+  }
+  window.___browserSync___.socket.on(name, callback); // eslint-disable-line no-underscore-dangle
+  return {
+    release() {
+      window.___browserSync___.socket.off(name, callback); // eslint-disable-line no-underscore-dangle
+      return null;
+    },
+  };
+};
+
+/**
  * The top-most React component for dev env page.
  */
 class RootPage extends Component {
@@ -81,24 +142,36 @@ class RootPage extends Component {
      * The array of document data. (Preserved for future)
      */
     docItems: PropTypes.arrayOf(PropTypes.shape()).isRequired, // eslint-disable-line react/no-unused-prop-types
+
+    /**
+     * The port of the server triggering experimental/classic Sass build
+     */
+    portSassBuild: PropTypes.number,
   };
 
-  constructor(props) {
+  constructor() {
     super();
-
-    const { componentItems } = props;
-
-    this.state = {
-      /**
-       * The array of component data.
-       * @type {Object[]}
-       */
-      componentItems,
-    };
-
     window.addEventListener('popstate', evt => {
       this.switchTo(evt.state.name);
     });
+  }
+
+  state = {};
+
+  static getDerivedStateFromProps({ componentItems, isComponentsX }, state) {
+    const { prevComponentItems, prevIsComponentsX, componentItems: currentComponentItems } = state;
+    if (prevComponentItems === componentItems && prevIsComponentsX === isComponentsX) {
+      return null;
+    }
+    return {
+      componentItems: applyComponentsX(
+        preserveDefaultHidden(prevComponentItems === componentItems ? currentComponentItems : componentItems),
+        isComponentsX
+      ),
+      isComponentsX,
+      prevComponentItems: componentItems,
+      prevIsComponentsX: isComponentsX,
+    };
   }
 
   componentDidMount() {
@@ -111,12 +184,22 @@ class RootPage extends Component {
         this.switchTo(selectedNavItem.id);
       }
     }
+    if (!this.hBrowserSyncEvent) {
+      this.hBrowserSyncEvent = onBrowserSyncEvent('file:reload', this._handleBrowserSyncEvent);
+    }
+    this._inspectLinkTag();
   }
 
-  componentWillReceiveProps(props) {
-    const { componentItems } = props;
-    if (this.props.componentItems !== componentItems) {
-      this.setState({ componentItems });
+  componentWillUnmount() {
+    if (this.hStyleLoad) {
+      this.hStyleLoad = this.hStyleLoad.release();
+    }
+    if (this.hStyleInspectionTimeout) {
+      clearTimeout(this.hStyleInspectionTimeout);
+      this.hStyleInspectionTimeout = null;
+    }
+    if (this.hBrowserSyncEvent) {
+      this.hBrowserSyncEvent = this.hBrowserSyncEvent.release();
     }
   }
 
@@ -147,6 +230,80 @@ class RootPage extends Component {
   }
 
   /**
+   * Detects if the demo CSS bundle is of X version and set states accordingly.
+   * @param {HTMLElement} link The `<link>` for the demo CSS bundle.
+   * @private
+   */
+  _detectComponentsX(link) {
+    if (this.hTimeoutDetectExperimental) {
+      clearTimeout(this.hTimeoutDetectExperimental);
+      this.hTimeoutDetectExperimental = null;
+    }
+    // For IE11
+    if (link.sheet.cssRules.length === 0) {
+      this.hTimeoutDetectExperimental = setTimeout(() => {
+        this._detectComponentsX(link);
+      }, 100);
+    }
+    const isComponentsX = Array.prototype.some.call(
+      link.sheet.cssRules,
+      rule =>
+        /^\.bx--body$/.test(rule.selectorText) &&
+        /^rgb\(255,\s*255,\s*255\)$/.test(rule.style.getPropertyValue('background-color'))
+    );
+    this.setState({
+      componentItems: applyComponentsX(this.state.componentItems, isComponentsX),
+      isComponentsX,
+    });
+  }
+
+  /**
+   * Handles an event from BrowserSync.
+   * @param {Object} evt The event.
+   * @private
+   */
+  _handleBrowserSyncEvent = evt => {
+    if (evt.basename === 'demo.css') {
+      this._inspectLinkTag();
+    }
+  };
+
+  /**
+   * Inspects `<link>` tag to see if experimental version of demo CSS is loaded there.
+   */
+  _inspectLinkTag() {
+    if (this.hStyleLoad) {
+      this.hStyleLoad = this.hStyleLoad.release();
+    }
+    if (this.hStyleInspectionTimeout) {
+      clearTimeout(this.hStyleInspectionTimeout);
+      this.hStyleInspectionTimeout = null;
+    }
+    this.hStyleInspectionTimeout = setTimeout(() => {
+      const links = Array.prototype.filter.call(document.querySelectorAll('link[type="text/css"]'), link =>
+        /\/demo\/demo\.css/i.test(link.getAttribute('href'))
+      );
+      const lastLink = links[links.length - 1];
+      if (lastLink.sheet) {
+        this._detectComponentsX(lastLink);
+      } else {
+        this.hStyleLoad = on(lastLink, 'load', () => {
+          this._detectComponentsX(lastLink);
+        });
+      }
+    }, 0);
+  }
+
+  /**
+   * Toggles usage of experimental CSS upon user event.
+   * @param {Object} evt The event.
+   * @private
+   */
+  _switchExperimental = evt => {
+    fetch(`http://localhost:${this.props.portSassBuild}/${evt.target.checked ? 'experimental' : 'classic'}`);
+  };
+
+  /**
    * Switches the selected component.
    * @param {string} selectedNavItemId The ID of the newly selected component.
    */
@@ -167,7 +324,7 @@ class RootPage extends Component {
   }
 
   render() {
-    const { componentItems } = this.state;
+    const { componentItems, isComponentsX } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
     const classNames = classnames({
@@ -180,6 +337,13 @@ class RootPage extends Component {
         <main role="main" id="maincontent" className="container" aria-labelledby="page-title" tabIndex="-1" data-page={name}>
           <PageHeader label="Component" title={label} />
           <CodePage metadata={metadata} />
+          <ToggleSmall
+            id="theme-switcher"
+            className="demo--theme-switcher"
+            ariaLabel="Theme switcher"
+            toggled={isComponentsX}
+            onChange={this._switchExperimental}
+          />
         </main>
       </Fragment>
     );
