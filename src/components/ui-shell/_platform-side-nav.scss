@@ -50,6 +50,7 @@ $shell-side-nav-accent-01: #0062ff;
     overflow: hidden;
   }
 
+  .#{$prefix}--side-nav:hover,
   .#{$prefix}--side-nav--expanded {
     width: get-fixed-size(32);
   }
@@ -91,6 +92,7 @@ $shell-side-nav-accent-01: #0062ff;
     opacity: 0;
   }
 
+  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__header-title,
   .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__header-title {
     opacity: 1;
   }
@@ -105,6 +107,7 @@ $shell-side-nav-accent-01: #0062ff;
     margin: 0 get-fixed-size(2) get-fixed-size(1);
   }
 
+  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__divider,
   .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__divider {
     width: unset;
   }
@@ -117,6 +120,7 @@ $shell-side-nav-accent-01: #0062ff;
     overflow: hidden;
   }
 
+  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__nav-item,
   .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__nav-item {
     height: unset;
   }
@@ -128,6 +132,7 @@ $shell-side-nav-accent-01: #0062ff;
     position: relative;
   }
 
+  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category,
   .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category {
     padding-top: get-fixed-size(1);
   }
@@ -161,6 +166,7 @@ $shell-side-nav-accent-01: #0062ff;
     opacity: 0;
   }
 
+  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category-title,
   .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category-title {
     opacity: 1;
   }
@@ -170,6 +176,7 @@ $shell-side-nav-accent-01: #0062ff;
     opacity: 0;
   }
 
+  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category-items,
   .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category-items {
     display: block;
     opacity: 1;
