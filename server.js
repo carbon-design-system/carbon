@@ -102,6 +102,7 @@ function navRoute(req, res, next) {
             body: contents.get('demo-nav-data')({
               componentItems,
               docItems,
+              portSassBuild: process.env.PORT_SASS_DEV_BUILD,
             }),
           })
         );
