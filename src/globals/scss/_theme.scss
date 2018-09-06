@@ -97,8 +97,8 @@
   $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01
 }
 
-// Light Experimental Theme
-@mixin theme--experimental() {
+// Light Carbon X Theme
+@mixin theme--x() {
   $edited: true !default !global;
   $use-layer: true !default !global;
 
@@ -107,7 +107,7 @@
   $brand-02: $ibm-colors__blue--80 !default !global;
   $brand-03: $ibm-colors__blue--60 !default !global;
   $inverse-01: $ibm-colors__white !default !global;
-  $inverse-02: $ibm-colors__white !default !global; // TODO: Define for experimental
+  $inverse-02: $ibm-colors__white !default !global; // TODO: Define for Carbon X
   $ui-01: $ibm-colors__gray--10 !default !global;
   $ui-02: $ibm-colors__white !default !global;
   $ui-03: $ibm-colors__gray--20 !default !global;
@@ -117,13 +117,13 @@
   $text-02: $ibm-colors__gray--70 !default !global;
   $text-03: $ibm-colors__gray--40 !default !global;
   $field-01: $ibm-colors__gray--10 !default !global;
-  $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for experimental
+  $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for Carbon X
   $support-01: $ibm-colors__red--60 !default !global;
   $support-02: $ibm-colors__green--50 !default !global;
   $support-03: $ibm-colors__yellow--20 !default !global;
   $support-04: $ibm-colors__blue--50 !default !global;
 
-  // TODO: Define for experimental
+  // TODO: Define for Carbon X
   $nav-01: $color__navy-gray-1 !default !global;
   $nav-02: $color__blue-90 !default !global;
   $nav-03: $color__purple-30 !default !global;
@@ -133,7 +133,7 @@
   $nav-07: $color__blue-30 !default !global;
   $nav-08: $color__blue-51 !default !global;
 
-  // TODO: Define for experimental
+  // TODO: Define for Carbon X
   $hover-primary: darken($brand-01, 10%) !default !global;
   $hover-primary-text: darken($brand-01, 15%) !default !global;
   $hover-danger: darken($support-01, 10%) !default !global;
@@ -171,8 +171,8 @@
   $checkbox-border-width: 2px !default !global;
 
   // Code Snippet
-  $snippet-background-color: $ui-01 !default !global; // TODO: Define for experimental
-  $snippet-border-color: $ui-03 !default !global; // TODO: Define for experimental
+  $snippet-background-color: $ui-01 !default !global; // TODO: Define for Carbon X
+  $snippet-border-color: $ui-03 !default !global; // TODO: Define for Carbon X
 
   // Content Switcher
   $content-switcher-border-radius: 4px !default !global;
@@ -201,12 +201,12 @@
 
   // Skeleton Loading
 
-  $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for experimental
+  $skeleton: rgba($color__blue-51, 0.1) !default !global; //old $field-01 TODO: Define for Carbon X
 }
 
 @include exports('theme') {
   @if feature-flag-enabled('components-x') {
-    @include theme--experimental;
+    @include theme--x;
   } @else {
     @include theme;
   }
