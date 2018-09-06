@@ -51,7 +51,7 @@ describe('Test text input', () => {
     beforeAll(() => {
       document.body.appendChild(container);
       new TextInput(document.querySelector('[data-text-input]'));
-      textInput = document.querySelector('.bx--form-item');
+      textInput = document.querySelector('[data-text-input]');
       passwordVisibilityButton = document.querySelector('.bx--text-input--password__visibility');
     });
 
