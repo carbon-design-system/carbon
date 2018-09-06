@@ -8,7 +8,7 @@ Part of our review process involves creating live staging links for Pull Request
   - _Note: after it's downloaded, you should have the `ibmcloud` command available_
 - Login to Cloud foundry by running `ibmcloud login`, or `ibmcloud login --sso` if you are an IBMer
 - Target your Cloud foundry organization and space by running `ibmcloud cf target`
-- Build the application assets using `yarn build`
+- Build the application assets using `$(yarn bin) gulp build:dev --rollup`
 - Push the application to Cloud foundry by running `ibmcloud cf push`
 
 ## IBM Cloud
@@ -23,6 +23,6 @@ Once you have the CLI installed, you'll just need to login to your personal acco
 
 After going through the login process, you'll need to use `ibmcloud cf target` to choose the specific Cloud Foundry organization and space that you'll want to deploy to.
 
-Once you've selected the appropriate organization and space, you'll need to make sure to run `yarn build` to make sure we're deploying the latest changes. Finally, you'll need to run `ibmcloud cf push` in the root of the project. This command will read from the `manifest.yml` file and deploy our development environment to a `random-route` on IBM Cloud.
+Once you've selected the appropriate organization and space, you'll need to make sure to run `$(yarn bin) gulp build:dev --rollup` to make sure we're deploying the latest changes. Finally, you'll need to run `ibmcloud cf push` in the root of the project. This command will read from the `manifest.yml` file and deploy our development environment to a `random-route` on IBM Cloud.
 
 To create a link to embed in your Pull Request, you can navigate to the component that you're working on and click "View full render". This link should take you to a URL that displays only that component. Depending on the type of Pull Request you're working on, this should be your best best for a live URL to share with reviewers.
