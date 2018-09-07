@@ -59,6 +59,7 @@ const templates = require('./tools/templates');
 
 const assign = v => v;
 const cloptions = commander
+  .option('-e, --use-experimental-features', 'Build with experimental features turned on (For dev build only)')
   .option('-k, --keepalive', 'Keeps browser open after first run of Karma test finishes')
   .option('--name [name]', 'Component name used for aXe testing', assign, '')
   .option('-p, --port [port]', 'Uses the given port for dev env', assign, 3000)
@@ -246,7 +247,7 @@ gulp.task('sass:compiled', () => {
   buildStyles(true); // Minified CSS
 });
 
-let useExperimenalFeatures = false;
+let useExperimenalFeatures = cloptions.useExperimentalFeatures;
 
 gulp.task('sass:dev', () =>
   gulp

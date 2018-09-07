@@ -13,5 +13,7 @@
     return item;
   });
   var docItems = {{{JSONstringify docItems}}};
-  var portSassBuild = {{portSassBuild}}
+  {{#if portSassBuild}}
+    var portSassBuild = {{portSassBuild}}
+  {{/if}}
 </script>
