@@ -18,7 +18,7 @@ TableContainer.propTypes = {
   /**
    * Provide a title for the Table
    */
-  title: PropTypes.string,
+  title: PropTypes.node,
 };
 
 export default TableContainer;
