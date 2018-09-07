@@ -936,7 +936,7 @@ async@1.5.2, async@1.x, async@^1.4.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.0.0, async@^2.1.2, async@^2.1.4, async@~2.6.0:
+async@^2.0.0, async@^2.1.2, async@^2.1.4, async@^2.6.0, async@~2.6.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
   dependencies:
@@ -2671,6 +2671,12 @@ concat-stream@1.6.2, concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^
     inherits "^2.0.3"
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
+
+concat-with-sourcemaps@*:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/concat-with-sourcemaps/-/concat-with-sourcemaps-1.1.0.tgz#d4ea93f05ae25790951b99e7b3b09e3908a4082e"
+  dependencies:
+    source-map "^0.6.1"
 
 config-chain@~1.1.5:
   version "1.1.11"
@@ -5273,6 +5279,14 @@ gulp-babel@^6.1.2:
     through2 "^2.0.0"
     vinyl-sourcemaps-apply "^0.2.0"
 
+gulp-header@^2.0.0:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/gulp-header/-/gulp-header-2.0.5.tgz#16e229c73593ade301168024fea68dab75d9d38c"
+  dependencies:
+    concat-with-sourcemaps "*"
+    lodash.template "^4.4.0"
+    through2 "^2.0.0"
+
 gulp-jsdoc3@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/gulp-jsdoc3/-/gulp-jsdoc3-0.2.1.tgz#cf595b1a3ccfa04f127a909892a4af489250cbf6"
@@ -7642,7 +7656,7 @@ lodash.template@^3.0.0:
     lodash.restparam "^3.0.0"
     lodash.templatesettings "^3.0.0"
 
-lodash.template@^4.0.2:
+lodash.template@^4.0.2, lodash.template@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.template/-/lodash.template-4.4.0.tgz#e73a0385c8355591746e020b99679c690e68fba0"
   dependencies:
@@ -9265,6 +9279,13 @@ portscanner@^1.0.0:
   resolved "https://registry.yarnpkg.com/portscanner/-/portscanner-1.2.0.tgz#b14bbda257d14c310fa9cc09682af02d40961802"
   dependencies:
     async "1.5.2"
+
+portscanner@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/portscanner/-/portscanner-2.2.0.tgz#6059189b3efa0965c9d96a56b958eb9508411cf1"
+  dependencies:
+    async "^2.6.0"
+    is-number-like "^1.0.3"
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
