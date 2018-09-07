@@ -124,6 +124,8 @@ export const getMenuOffset = (menuBody, direction) => {
 };
 
 export default class OverflowMenu extends Component {
+  state = {};
+
   static propTypes = {
     /**
      * `true` if the menu should be open.
@@ -308,8 +310,8 @@ export default class OverflowMenu extends Component {
   }
 
   static getDerivedStateFromProps({ open }, state) {
-    const { prevOpen } = state || {};
-    return state && prevOpen === open
+    const { prevOpen } = state;
+    return prevOpen === open
       ? null
       : {
           open,

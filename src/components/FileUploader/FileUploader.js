@@ -8,6 +8,8 @@ import { ButtonTypes } from '../../prop-types/types';
 import { iconCloseSolid, iconCheckmarkSolid } from 'carbon-icons';
 
 export class FileUploaderButton extends Component {
+  state = {};
+
   static propTypes = {
     /**
      * Provide a custom className to be applied to the container node

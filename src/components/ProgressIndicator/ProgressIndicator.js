@@ -75,6 +75,8 @@ ProgressStep.propTypes = {
 };
 
 export class ProgressIndicator extends Component {
+  state = {};
+
   static propTypes = {
     /**
      * Provide <ProgressStep> components to be rendered in the
@@ -98,8 +100,8 @@ export class ProgressIndicator extends Component {
   };
 
   static getDerivedStateFromProps({ currentIndex }, state) {
-    const { prevCurrentIndex } = state || {};
-    return state && prevCurrentIndex === currentIndex
+    const { prevCurrentIndex } = state;
+    return prevCurrentIndex === currentIndex
       ? null
       : {
           currentIndex,

@@ -5,6 +5,8 @@ import { iconChevronRight } from 'carbon-icons';
 import Icon from '../Icon';
 
 export default class AccordionItem extends Component {
+  state = {};
+
   static propTypes = {
     /**
      * Provide the contents of your AccordionItem

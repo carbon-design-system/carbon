@@ -136,9 +136,10 @@ describe('NumberInput', () => {
         });
 
         it('should set invalidText when value is empty string', () => {
-          wrapper.setProps({ value: '' });
+          wrapper.setState({ value: '' });
           const invalidText = wrapper.find('.bx--form-requirement');
           expect(invalidText.length).toEqual(1);
+
           expect(invalidText.text()).toEqual('invalid text');
         });
 

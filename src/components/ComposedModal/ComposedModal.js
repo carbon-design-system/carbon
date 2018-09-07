@@ -6,6 +6,8 @@ import Icon from '../Icon';
 import classNames from 'classnames';
 
 export default class ComposedModal extends Component {
+  state = {};
+
   static defaultProps = {
     onKeyDown: () => {},
   };
@@ -43,8 +45,8 @@ export default class ComposedModal extends Component {
   }
 
   static getDerivedStateFromProps({ open }, state) {
-    const { prevOpen } = state || {};
-    return state && prevOpen === open
+    const { prevOpen } = state;
+    return prevOpen === open
       ? null
       : {
           open,

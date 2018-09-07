@@ -10,6 +10,19 @@ import { equals } from '../../tools/array';
 let instanceId = 0;
 
 export default class PaginationV2 extends Component {
+  constructor(props) {
+    super(props);
+    const { pageSizes, page, pageSize } = this.props;
+    this.state = {
+      page: page,
+      pageSize:
+        pageSize && pageSizes.includes(pageSize) ? pageSize : pageSizes[0],
+      prevPageSizes: pageSizes,
+      prevPage: page,
+      prevPageSize: pageSize,
+    };
+  }
+
   static propTypes = {
     /**
      * The description for the backward icon.
@@ -131,16 +144,6 @@ export default class PaginationV2 extends Component {
   }
 
   static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
-    if (!state) {
-      return {
-        page: page,
-        pageSize:
-          pageSize && pageSizes.includes(pageSize) ? pageSize : pageSizes[0],
-        prevPageSizes: pageSizes,
-        prevPage: page,
-        prevPageSize: pageSize,
-      };
-    }
     const {
       prevPageSizes,
       prevPage,

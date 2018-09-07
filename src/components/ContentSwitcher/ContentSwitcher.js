@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { composeEventHandlers } from '../../tools/events';
 
 export default class ContentSwitcher extends React.Component {
+  state = {};
+
   static propTypes = {
     /**
      * Pass in Switch components to be rendered in the ContentSwitcher
@@ -32,8 +34,8 @@ export default class ContentSwitcher extends React.Component {
   };
 
   static getDerivedStateFromProps({ selectedIndex }, state) {
-    const { prevSelectedIndex } = state || {};
-    return state && prevSelectedIndex === selectedIndex
+    const { prevSelectedIndex } = state;
+    return prevSelectedIndex === selectedIndex
       ? null
       : {
           selectedIndex,

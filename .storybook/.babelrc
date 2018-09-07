@@ -5,10 +5,7 @@
       {
         "modules": false,
         "targets": {
-          "browsers": [
-            "last 1 version",
-            "ie >= 11"
-          ]
+          "browsers": ["last 1 version", "ie >= 11"]
         }
       }
     ],
@@ -20,8 +17,5 @@
       }
     ]
   ],
-  "plugins": [
-    "dev-expression",
-    "react-docgen"
-  ]
+  "plugins": ["dev-expression", "react-docgen"]
 }
