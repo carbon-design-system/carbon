@@ -156,6 +156,11 @@
   $button-outline-offset: -5px !default !global;
   $button-outline: 1px solid $ibm-colors__white !default !global;
 
+  // Icon Size Variables
+  $icon-size-sm: rem(16px);
+  $icon-size-md: rem(20px);
+  $icon-size-lg: rem(24px);
+
   // Accordion (Reverse)
   $accordion-flex-direction: row !default !global;
   $accordion-justify-content: flex-start !default !global;
