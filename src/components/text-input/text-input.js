@@ -33,17 +33,17 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
    * the SVG icon for visibility on
    * @param {HTMLElement} obj.iconVisibilityOff - The element functioning as
    * the SVG icon for visibility off
-   * @param {boolean} obj.visible - The visibility of the password in the
+   * @param {boolean} obj.passwordIsVisible - The visibility of the password in the
    * input field
    */
-  _setIconVisibility = ({ iconVisibilityOn, iconVisibilityOff, visible }) => {
-    if (!visible) {
-      iconVisibilityOn.style.display = 'none';
-      iconVisibilityOff.style.display = 'block';
+  _setIconVisibility = ({ iconVisibilityOn, iconVisibilityOff, passwordIsVisible }) => {
+    if (passwordIsVisible) {
+      iconVisibilityOn.setAttribute('hidden', true);
+      iconVisibilityOff.setAttribute('hidden', false);
       return;
     }
-    iconVisibilityOn.style.display = 'block';
-    iconVisibilityOff.style.display = 'none';
+    iconVisibilityOn.setAttribute('hidden', false);
+    iconVisibilityOff.setAttribute('hidden', true);
   };
 
   /**
@@ -63,7 +63,7 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
     this._setIconVisibility({
       iconVisibilityOn,
       iconVisibilityOff,
-      visible: passwordIsVisible,
+      passwordIsVisible,
     });
     input.type = passwordIsVisible ? 'text' : 'password';
   };

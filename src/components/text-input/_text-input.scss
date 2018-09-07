@@ -1,7 +1,6 @@
 //-----------------------------
 // Text
 //-----------------------------
-
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
@@ -73,6 +72,10 @@
       &::before {
         display: none;
       }
+    }
+
+    &-wrapper svg[hidden='true'] {
+      display: none;
     }
 
     &[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
