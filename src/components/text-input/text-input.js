@@ -54,10 +54,10 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
    * The component options.
    *
    * If `options` is specified in the constructor,
-   * {@linkcode NumberInput.create .create()},
-   * or {@linkcode NumberInput.init .init()},
+   * {@linkcode TextInput.create .create()},
+   * or {@linkcode TextInput.init .init()},
    * properties in this object are overriden for the instance being
-   * created and how {@linkcode NumberInput.init .init()} works.
+   * created and how {@linkcode TextInput.init .init()} works.
    * @property {string} selectorInit The CSS selector to find text input UIs.
    */
   static get options() {
