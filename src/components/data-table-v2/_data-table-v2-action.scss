@@ -180,18 +180,16 @@
     margin: 0 rem(8px);
   }
 
-  .#{$prefix}--batch-edit-summary__save {
-    .#{$prefix}--inline-loading__text {
-      order: 1;
-    }
+  .#{$prefix}--batch-edit-summary__save .#{$prefix}--inline-loading__text {
+    order: 1;
+  }
 
-    .#{$prefix}--inline-loading__animation {
-      order: 2;
-    }
+  .#{$prefix}--batch-edit-summary__save .#{$prefix}--inline-loading__animation {
+    order: 2;
+  }
 
-    .#{$prefix}--inline-loading ~ .#{$prefix}--btn__icon {
-      display: none;
-    }
+  .#{$prefix}--batch-edit-summary__save .#{$prefix}--inline-loading ~ .#{$prefix}--btn__icon {
+    display: none;
   }
 
   .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-search-container,

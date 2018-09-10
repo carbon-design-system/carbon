@@ -25,132 +25,136 @@
     left: 0;
   }
 
-  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editable {
-    .#{$prefix}--table-toolbar {
-      min-height: rem(48px);
-    }
-
-    th,
-    td {
-      padding-left: rem(16px);
-    }
-
-    th:first-of-type,
-    td:first-of-type {
-      padding-left: rem(24px);
-    }
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editable .#{$prefix}--table-toolbar {
+    min-height: rem(48px);
   }
 
-  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing {
-    th {
-      border-left: 1px solid $ui-03;
-    }
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editable th,
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editable td {
+    padding-left: rem(16px);
+  }
 
-    th:first-of-type {
-      padding-left: rem(24px);
-    }
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editable th:first-of-type,
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editable td:first-of-type {
+    padding-left: rem(24px);
+  }
 
-    .#{$prefix}--data-table-v2--zebra tbody tr:nth-child(even),
-    tr:hover td,
-    .#{$prefix}--data-table-v2--zebra tbody tr.#{$prefix}--data-table-v2--selected,
-    tbody tr.#{$prefix}--data-table-v2--selected {
-      background-color: transparent;
-    }
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing th {
+    border-left: 1px solid $ui-03;
+  }
 
-    td {
-      border-left: 1px solid $ui-03;
-      padding: 0;
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing th:first-of-type {
+    padding-left: rem(24px);
+  }
 
-      .#{$prefix}--form-item {
-        position: relative;
-      }
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing
+    .#{$prefix}--data-table-v2--zebra
+    tbody
+    tr:nth-child(even),
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing tr:hover td,
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing
+    .#{$prefix}--data-table-v2--zebra
+    tbody
+    tr.#{$prefix}--data-table-v2--selected,
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing tbody tr.#{$prefix}--data-table-v2--selected {
+    background-color: transparent;
+  }
 
-      .#{$prefix}--text-input,
-      .#{$prefix}--number input[type='number'] {
-        background-color: $field-02;
-        box-shadow: 0 2px 0px 0px transparent;
-        height: calc(#{rem(48px)} - 2px);
-        min-width: auto;
-      }
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing td {
+    border-left: 1px solid $ui-03;
+    padding: 0;
+  }
 
-      .#{$prefix}--text-input[data-invalid],
-      .#{$prefix}--number[data-invalid] input[type='number'] {
-        box-shadow: 0 2px 0px 0px $support-01;
-      }
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing .#{$prefix}--form-item {
+    position: relative;
+  }
 
-      .#{$prefix}--number {
-        width: 100%;
+  .#{$prefix}--text-input--batch-edit,
+  .#{$prefix}--number--batch-edit input[type='number'] {
+    background-color: $field-02;
+    box-shadow: 0 2px 0px 0px transparent;
+    height: calc(#{rem(48px)} - 2px);
+    min-width: auto;
+  }
 
-        input[type='number'] {
-          font-weight: 400;
-        }
-      }
+  .#{$prefix}--text-input--batch-edit[data-invalid],
+  .#{$prefix}--number--batch-edit[data-invalid] input[type='number'] {
+    box-shadow: 0 2px 0px 0px $support-01;
+  }
 
-      .#{$prefix}--number__controls {
-        bottom: rem(14px);
-      }
+  .#{$prefix}--number--batch-edit {
+    width: 100%;
+  }
 
-      .#{$prefix}--select {
-        width: 100%;
-      }
+  .#{$prefix}--number--batch-edit input[type='number'] {
+    font-weight: 400;
+  }
 
-      .#{$prefix}--select__arrow {
-        bottom: rem(21.5px);
-      }
+  .#{$prefix}--number--batch-edit[data-invalid] .#{$prefix}--number__controls {
+    bottom: rem(14px);
+  }
 
-      .#{$prefix}--number,
-      .#{$prefix}--select {
-        .#{$prefix}--label {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          overflow: hidden;
-        }
-      }
+  .#{$prefix}--select--batch-edit {
+    width: 100%;
+  }
 
-      .#{$prefix}--select-input {
-        background-color: $field-02;
-        box-shadow: 0 1px 0px 0px transparent;
-        height: calc(#{rem(48px)} - 1px);
-      }
+  .#{$prefix}--select--batch-edit .#{$prefix}--select__arrow {
+    bottom: rem(21.5px);
+  }
 
-      .#{$prefix}--text-input ~ .#{$prefix}--form-requirement,
-      .#{$prefix}--number .#{$prefix}--form-requirement {
-        position: absolute;
-        right: rem(12px);
-        top: calc(50% - 8px);
-        margin-top: 0;
+  .#{$prefix}--number--batch-edit .#{$prefix}--label,
+  .#{$prefix}--select--batch-edit .#{$prefix}--label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
 
-        .#{$prefix}--tooltip__trigger > div {
-          width: 16px;
-          height: 16px;
-        }
+  .#{$prefix}--select--batch-edit .#{$prefix}--select-input {
+    background-color: $field-02;
+    box-shadow: 0 1px 0px 0px transparent;
+    height: calc(#{rem(48px)} - 1px);
+  }
 
-        svg path {
-          fill: $support-01;
-        }
-      }
+  .#{$prefix}--text-input--batch-edit ~ .#{$prefix}--form-requirement,
+  .#{$prefix}--number--batch-edit input[type='number'] ~ .#{$prefix}--form-requirement {
+    position: absolute;
+    right: rem(12px);
+    top: calc(50% - 8px);
+    margin-top: 0;
+  }
 
-      .#{$prefix}--number .#{$prefix}--form-requirement {
-        right: rem(32px);
-      }
+  .#{$prefix}--text-input--batch-edit ~ .#{$prefix}--form-requirement .#{$prefix}--tooltip__trigger > div,
+  .#{$prefix}--number--batch-edit .#{$prefix}--form-requirement .#{$prefix}--tooltip__trigger > div {
+    width: 16px;
+    height: 16px;
+  }
 
-      .#{$prefix}--toolbar-action {
-        width: auto;
-      }
-    }
+  .#{$prefix}--text-input--batch-edit ~ .#{$prefix}--form-requirement svg path,
+  .#{$prefix}--number--batch-edit input[type='number'] ~ .#{$prefix}--form-requirement svg path {
+    fill: $support-01;
+  }
 
-    td:first-of-type {
-      padding-left: rem(8px);
-    }
+  .#{$prefix}--number--batch-edit input[type='number'] ~ .#{$prefix}--form-requirement {
+    right: rem(32px);
+  }
 
+  .#{$prefix}--batch-edit-action {
+    width: auto;
+  }
+
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing td:first-of-type {
+    padding-left: rem(8px);
+  }
+
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing
     td.#{$prefix}--data-table-v2--batch-edit-default-cell {
-      padding: 0 rem(16px);
-    }
+    padding: 0 rem(16px);
+  }
 
+  .#{$prefix}--data-table-v2-container.#{$prefix}--data-table-v2--batch-editing
     td.#{$prefix}--data-table-v2--batch-edit-default-cell:first-of-type {
-      padding-left: rem(24px);
-    }
+    padding-left: rem(24px);
   }
 
   th.#{$prefix}--data-table-v2--batch-edit-delete-cell {
@@ -159,9 +163,9 @@
 
   td.#{$prefix}--data-table-v2--batch-edit-delete-cell {
     text-align: center;
+  }
 
-    button {
-      padding: 0;
-    }
+  td.#{$prefix}--data-table-v2--batch-edit-delete-cell button {
+    padding: 0;
   }
 }
