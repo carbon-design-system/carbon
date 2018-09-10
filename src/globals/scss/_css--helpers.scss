@@ -5,6 +5,7 @@
 @import 'import-once';
 
 @mixin css-helpers {
+  .#{$prefix}--assistive-text,
   .#{$prefix}--visually-hidden {
     position: absolute;
     width: 1px;
