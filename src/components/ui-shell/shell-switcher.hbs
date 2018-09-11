@@ -1,49 +1,99 @@
-<aside class="bx--panel--overlay">
-  <div class="bx--app-switcher">
-    <div class="bx--switcher__search-container">
-      <div class="bx--form-item">
-        <div data-search class="bx--search bx--search--sm bx--search--shell" role="search">
-          <label id="search-input-label-1" class="bx--label" for="search__input-1">Search</label>
-          <input class="bx--search-input" type="text" role="search" id="search__input-1" placeholder="Search all products" aria-labelledby="search-input-label-2">
-          <svg class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
-              <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z" fill-rule="nonzero" />
-          </svg>
-          <button class="bx--search-close bx--search-close--hidden" title="Clear search input" aria-label="Clear search input">
-            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
+{{#if switcher.state.expanded}}
+  <aside class="bx--panel--overlay bx--panel--expanded">
+{{else}}
+  <aside class="bx--panel--overlay">
+{{/if}}
+    <div class="bx--app-switcher">
+      <div class="bx--switcher__search-container">
+        <div class="bx--form-item">
+          <div data-search class="bx--search bx--search--sm bx--search--shell" role="search">
+            <label id="search-input-label-1" class="bx--label" for="search__input-1">Search</label>
+            <input class="bx--search-input" type="text" role="search" id="search__input-1" placeholder="Search all products" aria-labelledby="search-input-label-2">
+            <svg class="bx--search-magnifier" width="16" height="16" viewBox="0 0 16 16">
+                <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z" fill-rule="nonzero" />
             </svg>
-          </button>
+            <button class="bx--search-close bx--search-close--hidden" title="Clear search input" aria-label="Clear search input">
+              <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <p class="bx--switcher__subheader">My Products</p>
-    <ul class="bx--switcher__app-list">
-      <li class="bx--app-list__item">
-        <a class="bx--app-link" href="#">
-          <span class="bx--app-link__img"></span>
-          <span class="bx--app-link__name">[Product]</span>
-          <div data-overflow-menu tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
-            <svg class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
-              <g fill-rule="evenodd">
-                <circle cx="1.5" cy="1.5" r="1.5" />
-                <circle cx="1.5" cy="7.5" r="1.5" />
-                <circle cx="1.5" cy="13.5" r="1.5" />
-              </g>
+      {{#if switcher.state.showAll}}
+        <div class="bx--switcher__item">
+          <button aria-label="Back" tabindex="0" class="bx--switcher__back-btn">
+            <svg class="bx--switcher__back-arrow" width="16" height="14" viewBox="0 0 16 14">
+              <path d="M4.044 8.003l4.09 3.905-1.374 1.453-6.763-6.356L6.759.639 8.135 2.09 4.043 6.003h11.954v2H4.044z" />
             </svg>
-            <ul class="bx--overflow-menu-options bx--overflow-menu--flip" tabindex="-1" data-floating-menu-direction="bottom">
-              <li class="bx--overflow-menu-options__option bx--overflow__item">
-                <button class="bx--overflow-menu-options__btn" title="Option 1" data-floating-menu-primary-focus>Option 1</button>
-              </li>
-              <li class="bx--overflow-menu-options__option">
-                <button class="bx--overflow-menu-options__btn">Option 2</button>
-              </li>
-            </ul>
+            Back
+          </button>
+        </div>
+        <ul class="bx--switcher__app-list">
+          {{#each switcher.allLinks}}
+            <li class="bx--app-list__item">
+              <a class="bx--app-link" href="#">
+                <span class="bx--app-link__img"></span>
+                <span class="bx--app-link__name">{{ this.title }}</span>
+                <div data-overflow-menu tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
+                  <svg class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+                    <g fill-rule="evenodd">
+                      <circle cx="1.5" cy="1.5" r="1.5" />
+                      <circle cx="1.5" cy="7.5" r="1.5" />
+                      <circle cx="1.5" cy="13.5" r="1.5" />
+                    </g>
+                  </svg>
+                  <ul class="bx--overflow-menu-options bx--overflow-menu--flip" tabindex="-1" data-floating-menu-direction="bottom">
+                    <li class="bx--overflow-menu-options__option bx--overflow__item">
+                      <button class="bx--overflow-menu-options__btn" title="Option 1" data-floating-menu-primary-focus>Option 1</button>
+                    </li>
+                    <li class="bx--overflow-menu-options__option">
+                      <button class="bx--overflow-menu-options__btn">Option 2</button>
+                    </li>
+                  </ul>
+                </div>
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p class="bx--switcher__subheader">My Products</p>
+        <ul class="bx--switcher__app-list">
+          {{#each switcher.links}}
+            <li class="bx--app-list__item">
+              <a class="bx--app-link" href="#">
+                <span class="bx--app-link__img"></span>
+                <span class="bx--app-link__name">{{ this.title }}</span>
+                <div data-overflow-menu tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
+                  <svg class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+                    <g fill-rule="evenodd">
+                      <circle cx="1.5" cy="1.5" r="1.5" />
+                      <circle cx="1.5" cy="7.5" r="1.5" />
+                      <circle cx="1.5" cy="13.5" r="1.5" />
+                    </g>
+                  </svg>
+                  <ul class="bx--overflow-menu-options bx--overflow-menu--flip" tabindex="-1" data-floating-menu-direction="bottom">
+                    <li class="bx--overflow-menu-options__option bx--overflow__item">
+                      <button class="bx--overflow-menu-options__btn" title="Option 1" data-floating-menu-primary-focus>Option 1</button>
+                    </li>
+                    <li class="bx--overflow-menu-options__option">
+                      <button class="bx--overflow-menu-options__btn">Option 2</button>
+                    </li>
+                  </ul>
+                </div>
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+
+        {{#if switcher.state.showAll}}
+        {{else}}
+          <div class="bx--switcher__item">
+            <button aria-label="Show All Applications" tabindex="0" class="bx--switcher__all-btn">
+              View all products
+            </button>
           </div>
-        </a>
-      </li>
-    </ul>
-    <button aria-label="Show All Applications" tabindex="0" class="bx--switcher__all-btn">
-      View all products
-    </button>
-  </div>
-</aside>
+        {{/if}}
+      {{/if}}
+    </div>
+  </aside>
