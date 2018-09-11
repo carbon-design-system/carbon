@@ -18,6 +18,7 @@
     flex-direction: column;
     flex: 1;
     align-items: flex-start;
+    position: relative;
   }
 
   .#{$prefix}--form-item--light input,

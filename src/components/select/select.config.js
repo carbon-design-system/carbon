@@ -97,5 +97,40 @@ module.exports = {
         items,
       },
     },
+    {
+      name: 'invalid-inline',
+      label: 'Select (Invalid inline)',
+      context: {
+        invalidInline: true,
+        items,
+        tooltipId: `__carbon-tooltip_${Math.random()
+          .toString(36)
+          .substr(2)}`,
+      },
+    },
+    {
+      name: 'inline-invalid-inline',
+      label: 'Inline Select (Invalid inline)',
+      context: {
+        inline: true,
+        invalidInline: true,
+        items,
+        tooltipId: `__carbon-tooltip_${Math.random()
+          .toString(36)
+          .substr(2)}`,
+      },
+    },
+    {
+      name: 'light-invalid-inline',
+      label: 'Select (Light/Invalid inline)',
+      context: {
+        light: true,
+        invalidInline: true,
+        items,
+        tooltipId: `__carbon-tooltip_${Math.random()
+          .toString(36)
+          .substr(2)}`,
+      },
+    },
   ],
 };

@@ -18,9 +18,25 @@
       <path d="M0 0l5 4.998L10 0z" fill-rule="evenodd" />
     </svg>
     {{#if invalid}}
-    <div class="bx--form-requirement">
-      Validation message here
-    </div>
+      <div class="bx--form-requirement">
+        Validation message here
+      </div>
+    {{/if}}
+    {{#if invalidInline}}
+      <div class="bx--form-requirement--inline">
+        <div data-tooltip-trigger data-tooltip-supports-hover data-tooltip-target="#{{tooltipId}}" role="tooltip" class="bx--tooltip__trigger">
+          <div role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+            <svg fill-rule="evenodd" height="16" role="img" viewBox="0 0 16 16" width="16" aria-label="tooltip" alt="tooltip">
+              <title>tooltip</title>
+              <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM3.293 4.707l8 8 1.414-1.414-8-8-1.414 1.414z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div id="{{tooltipId}}" data-floating-menu-direction="bottom" class="bx--tooltip" data-avoid-focus-on-open>
+        <span class="bx--tooltip__caret"></span>
+        <p>Validation message here</p>
+      </div>
     {{/if}}
   </div>
 </div>

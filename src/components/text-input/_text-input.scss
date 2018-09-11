@@ -74,6 +74,17 @@
         display: none;
       }
     }
+
+    & ~ .#{$prefix}--form-requirement--inline {
+      position: absolute;
+      right: rem(12px);
+      bottom: 0.625rem;
+      margin-top: 0;
+
+      svg path {
+        fill: $support-01;
+      }
+    }
   }
 
   .#{$prefix}--text-input--light {

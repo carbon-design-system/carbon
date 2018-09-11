@@ -57,6 +57,7 @@
       opacity: 0.5;
       cursor: not-allowed;
       pointer-events: none;
+      order: 4;
     }
 
     & ~ .#{$prefix}--form-requirement {
@@ -69,6 +70,21 @@
       &::before {
         display: none;
       }
+    }
+
+    & ~ .#{$prefix}--form-requirement--inline {
+      position: absolute;
+      right: rem(32px);
+      bottom: 0.625rem;
+      margin-top: 0;
+
+      svg path {
+        fill: $support-01;
+      }
+    }
+
+    & ~ .#{$prefix}--form-requirement--inline ~ .#{$prefix}--number__controls {
+      bottom: 0.625rem;
     }
   }
 
