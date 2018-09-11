@@ -155,6 +155,11 @@
     }
   }
 
+  .#{$prefix}--dropdown--narrow {
+    width: auto;
+    max-width: rem(400px);
+  }
+
   .#{$prefix}--dropdown--inline {
     background-color: transparent;
     box-shadow: none;
