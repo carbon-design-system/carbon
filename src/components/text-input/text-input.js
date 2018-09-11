@@ -57,8 +57,8 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
     // toggle action must come before querying the classList
     element.classList.toggle(this.options.passwordIsVisible);
     const passwordIsVisible = element.classList.contains(this.options.passwordIsVisible);
-    const iconVisibilityOn = button.querySelector('svg.icon--visibility-on');
-    const iconVisibilityOff = button.querySelector('svg.icon--visibility-off');
+    const iconVisibilityOn = button.querySelector(this.options.svgIconVisibilityOn);
+    const iconVisibilityOff = button.querySelector(this.options.svgIconVisibilityOff);
     const input = element.querySelector(this.options.selectorPasswordField);
     this._setIconVisibility({
       iconVisibilityOn,
@@ -85,6 +85,8 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
       selectorPasswordField: `.${prefix}--text-input[data-toggle-password-visibility]`,
       selectorPasswordVisibilityButton: `.${prefix}--text-input--password__visibility`,
       passwordIsVisible: `${prefix}--text-input--password-visible`,
+      svgIconVisibilityOn: 'svg.icon--visibility-on',
+      svgIconVisibilityOff: 'svg.icon--visibility-off',
     };
   }
 
