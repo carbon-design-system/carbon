@@ -8,11 +8,11 @@
 @mixin shell-switcher {
   .#{$prefix}--panel--overlay {
     position: fixed;
-    top: units(6);
+    top: get-fixed-size(6);
     left: unset;
     right: 0;
     bottom: 0;
-    width: units(40);
+    width: get-fixed-size(40);
     will-change: transform;
     transform: translate3d(100%, 0, 0);
     padding: 1rem 0;
@@ -30,27 +30,23 @@
   }
 
   .#{$prefix}--switcher__search-container {
-    padding: 0 units(2);
-    margin-bottom: units(3);
+    padding: 0 get-fixed-size(2);
+    margin-bottom: get-fixed-size(3);
   }
 
   .#{$prefix}--search--shell input {
     background-color: #fff;
   }
 
-  .#{$prefix}--switcher__item {
-    padding: 3px;
-  }
-
   .#{$prefix}--switcher__subheader,
   .#{$prefix}--switcher__all-btn {
     @include typescale('omega');
-    padding: units(1);
+    padding: get-fixed-size(1);
     color: $shell-header-text-03;
   }
 
   .#{$prefix}--switcher__subheader {
-    padding-left: units(6.9);
+    padding-left: get-fixed-size(6.5);
   }
 
   .#{$prefix}--switcher__all-btn {
@@ -88,10 +84,6 @@
     margin-right: units(2.5);
   }
 
-  .#{$prefix}--switcher__app-list {
-    padding: 3px;
-  }
-
   .#{$prefix}--app-list__item {
     cursor: pointer;
 
@@ -117,7 +109,8 @@
     width: units(2);
     height: units(2);
     margin-right: units(2.5);
-    border: 1px solid #000;
+    //placeholder border for product icon
+    border: 1px solid $shell-header-bg-01;
   }
 
   .#{$prefix}--app-link__name {
