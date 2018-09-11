@@ -73,11 +73,51 @@ const sidenav = {
   ],
 };
 
+const switcher = {
+  state: {
+    expanded: false,
+    showAll: false,
+  },
+  links: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'My Product',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'My Product 2',
+    },
+  ],
+  allLinks: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+  ],
+};
+
 module.exports = {
   preview: 'ui-shell-preview',
   context: {
     header,
     sidenav,
+    switcher,
   },
   variants: [
     {
@@ -86,6 +126,22 @@ module.exports = {
         sidenav: {
           state: {
             expanded: true,
+          },
+        },
+        switcher: {
+          state: {
+            expanded: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'switcher',
+      context: {
+        switcher: {
+          state: {
+            expanded: true,
+            showAll: true,
           },
         },
       },
