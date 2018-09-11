@@ -39,10 +39,10 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
   _setIconVisibility = ({ iconVisibilityOn, iconVisibilityOff, passwordIsVisible }) => {
     if (passwordIsVisible) {
       iconVisibilityOn.setAttribute('hidden', true);
-      iconVisibilityOff.setAttribute('hidden', false);
+      iconVisibilityOff.removeAttribute('hidden');
       return;
     }
-    iconVisibilityOn.setAttribute('hidden', false);
+    iconVisibilityOn.removeAttribute('hidden');
     iconVisibilityOff.setAttribute('hidden', true);
   };
 
