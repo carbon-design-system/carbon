@@ -28,10 +28,13 @@
     background-color: $shell-ui-02;
   }
 
+  .#{$prefix}--platform-header__action--active,
+  .#{$prefix}--platform-header__action--active:hover,
   .#{$prefix}--platform-header__action:active {
     background-color: $shell-brand-01;
   }
 
+  .#{$prefix}--platform-header__action--active,
   .#{$prefix}--platform-header__action:focus {
     border-color: $shell-brand-01;
     outline: none;
