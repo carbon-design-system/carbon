@@ -12,7 +12,6 @@
   .#{$prefix}--panel--overlay {
     position: fixed;
     top: get-fixed-size(6);
-    left: unset;
     right: 0;
     bottom: 0;
     width: get-fixed-size(40);
@@ -22,12 +21,12 @@
     overflow-y: auto;
     z-index: 1000;
     background-color: $shell-header-bg-02;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     height: 100%;
     overflow-x: hidden;
   }
 
   .#{$prefix}--panel--expanded {
+    box-shadow: 0 8px 16px 0 rgba($shell-ui-03, 0.25);
     transform: translate3d(0, 0, 0);
     transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
   }
@@ -41,7 +40,7 @@
   }
 
   .#{$prefix}--search--shell input {
-    background-color: #fff;
+    background-color: $shell-header-bg-05;
   }
 
   //--------------------------------------------------------------------------
