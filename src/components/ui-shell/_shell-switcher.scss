@@ -136,6 +136,7 @@
 
   .#{$prefix}--overflow-menu {
     position: absolute;
+    top: 0;
     right: 0;
     width: get-fixed-size(4);
     height: get-fixed-size(4);
