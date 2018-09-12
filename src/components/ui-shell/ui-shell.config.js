@@ -128,15 +128,21 @@ module.exports = {
             expanded: true,
           },
         },
+      },
+    },
+    {
+      name: 'Switcher Expanded Default',
+      context: {
         switcher: {
           state: {
             expanded: true,
+            showAll: false,
           },
         },
       },
     },
     {
-      name: 'switcher',
+      name: 'Switcher All Products',
       context: {
         switcher: {
           state: {
