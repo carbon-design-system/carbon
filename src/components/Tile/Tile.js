@@ -24,6 +24,8 @@ export class Tile extends Component {
 }
 
 export class ClickableTile extends Component {
+  state = {};
+
   static propTypes = {
     /**
      * The child nodes.
@@ -79,8 +81,8 @@ export class ClickableTile extends Component {
   };
 
   static getDerivedStateFromProps({ clicked }, state) {
-    const { prevClicked } = state || {};
-    return state && prevClicked === clicked
+    const { prevClicked } = state;
+    return prevClicked === clicked
       ? null
       : {
           clicked,
@@ -211,8 +213,8 @@ export class SelectableTile extends Component {
   };
 
   static getDerivedStateFromProps({ selected }, state) {
-    const { prevSelected } = state || {};
-    return state && prevSelected === selected
+    const { prevSelected } = state;
+    return prevSelected === selected
       ? null
       : {
           selected,
