@@ -49,6 +49,11 @@ export default class DatePicker extends Component {
     datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
 
     /**
+     * The description of the calendar icon.
+     */
+    iconDescription: PropTypes.string,
+
+    /**
      * The date format.
      */
     dateFormat: PropTypes.string,
@@ -398,6 +403,7 @@ export default class DatePicker extends Component {
       onChange, // eslint-disable-line
       locale, // eslint-disable-line
       value, // eslint-disable-line
+      iconDescription,
       ...other
     } = this.props;
 
@@ -414,6 +420,7 @@ export default class DatePicker extends Component {
         <Icon
           name="calendar"
           className="bx--date-picker__icon"
+          description={iconDescription}
           onClick={this.openCalendar}
         />
       ) : (
