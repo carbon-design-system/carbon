@@ -4,11 +4,12 @@
 
 Use these modifiers with `.bx--dropdown` class.
 
-| Name                    | Description                                           |
-|-------------------------|-------------------------------------------------------|
-| .bx--dropdown--selected | Applies specific styles for a selected dropdown item. |
-| .bx--dropdown--open     | Applies specific styles when the dropdown is opened   |
-| .bx--dropdown--up       | Applies style to have the dropdown slide up instead of down   |
+| Name                      | Description                                                                                                                      |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| .bx--dropdown--auto-width | Allows the width of the dropdown to be equal to the width of the content inside it instead of being 100% width of the container. |
+| .bx--dropdown--selected   | Applies specific styles for a selected dropdown item.                                                                            |
+| .bx--dropdown--open       | Applies specific styles when the dropdown is opened                                                                              |
+| .bx--dropdown--up         | Applies style to have the dropdown slide up instead of down                                                                      |
 
 ### JavaScript
 
@@ -36,7 +37,7 @@ Dropdown.create(document.getElementById('my-dropdown'));
 #### Public Methods
 
 | Name                 | Params                 | Description                                                                                                                                                                      |
-|----------------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | release              |                        | Deletes the instance                                                                                                                                                             |
 | getCurrentNavigation |                        | Returns the currently highlighted element                                                                                                                                        |
 | navigate             | direction: `Number`    | Moves the focus up or down                                                                                                                                                       |
@@ -55,7 +56,7 @@ dropdownInstance.select(document.getElementById('my-dropdown-link-1'));
 #### Options
 
 | Option               | Default Selector        | Description                                                           |
-|----------------------|-------------------------|-----------------------------------------------------------------------|
+| -------------------- | ----------------------- | --------------------------------------------------------------------- |
 | selectorInit         | [data-dropdown]         | The selector to find the dropdown component                           |
 | selectorItem         | .bx--dropdown-link      | The selector to find the clickable area in the selected dropdown item |
 | selectorItemSelected | .bx--dropdown--selected | The selector to find the clickable area in the selected dropdown item |
@@ -63,15 +64,15 @@ dropdownInstance.select(document.getElementById('my-dropdown-link-1'));
 
 #### Events
 
-| Event Name             | Description                                            |
-|------------------------|--------------------------------------------------------|
+| Event Name             | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
 | dropdown-beingselected | Custom event fired before a dropdown item is selected |
 | dropdown-selected      | Custom event fired after a dropdown item is selected  |
 
 ##### Example - Preventing a dropdown item from being selected in a certain condition
 
 ```javascript
-document.addEventListener('dropdown-beingselected', function (evt) {
+document.addEventListener('dropdown-beingselected', function(evt) {
   if (!myApplication.shouldDropdownItemBeSelected(evt.target)) {
     evt.preventDefault();
   }
@@ -81,7 +82,7 @@ document.addEventListener('dropdown-beingselected', function (evt) {
 ##### Example - Notifying events of all dropdown items being selected to an analytics library
 
 ```javascript
-document.addEventListener('dropdown-selected', function (evt) {
+document.addEventListener('dropdown-selected', function(evt) {
   myAnalyticsLibrary.send({
     action: 'Dropdown item selected',
     id: evt.target.id,
