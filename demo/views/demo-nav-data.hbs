@@ -3,11 +3,15 @@
     'detail-page-header',
     'footer',
     'grid',
-    'unified-header',
-    'ui-shell',
+    'unified-header'
+  ];
+  var linkOnly = [
+    'ui-shell'
   ];
   var componentItems = {{{JSONstringify componentItems}}}.map(function (item) {
-    if (needIframe.indexOf(item.name) >= 0) {
+    if (linkOnly.indexOf(item.name) >= 0) {
+      item.linkOnly = true;
+    } else if (needIframe.indexOf(item.name) >= 0) {
       item.useIframe = true;
     }
     return item;
