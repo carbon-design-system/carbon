@@ -146,6 +146,7 @@
     "@storybook/addon-info": "^3.4.10",
     "@storybook/addon-knobs": "^3.4.10",
     "@storybook/addon-options": "^3.4.10",
+    "@storybook/addon-storysource": "^3.4.10",
     "@storybook/addons": "^3.4.10",
     "@storybook/react": "^3.4.10",
     "all-contributors-cli": "^5.2.1",
@@ -196,6 +197,7 @@
     "sass-loader": "^6.0.5",
     "semantic-release": "^15.0.0",
     "storybook-addon-a11y": "^3.1.9",
+    "storybook-readme": "^4.0.0-beta1",
     "validate-commit-msg": "^2.10.1",
     "whatwg-fetch": "^2.0.3"
   },
