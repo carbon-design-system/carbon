@@ -86,6 +86,16 @@ export default class ComboBox extends React.Component {
     shouldFilterItem: PropTypes.func,
 
     /**
+     * Specify if the currently selected value is invalid.
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Message which is displayed if the value is invalid.
+     */
+    invalidText: PropTypes.string,
+
+    /**
      * Specify a custom translation function that takes in a message identifier
      * and returns the localized string for the message
      */
@@ -170,6 +180,8 @@ export default class ComboBox extends React.Component {
       initialSelectedItem,
       ariaLabel,
       translateWithId,
+      invalid,
+      invalidText,
     } = this.props;
     const className = cx('bx--combo-box', containerClassName);
 
@@ -194,6 +206,8 @@ export default class ComboBox extends React.Component {
           <ListBox
             className={className}
             disabled={disabled}
+            invalid={invalid}
+            invalidText={invalidText}
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field {...getButtonProps({ disabled })}>
               <input
