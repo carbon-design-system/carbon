@@ -70,9 +70,9 @@
   }
 
   .#{$prefix}--accordion__title {
+    @include typescale('epsilon');
+    @include line-height('body');
     margin: $accordion-title-margin;
-    font-size: 1rem;
-    line-height: 1.5;
     font-weight: 400;
   }
 
