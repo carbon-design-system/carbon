@@ -1,6 +1,7 @@
 *
 !package.json
 !server.js
+!yarn.lock
 !demo/
 demo/*
 !demo/demo.js
