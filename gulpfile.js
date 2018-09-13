@@ -247,7 +247,7 @@ gulp.task('sass:compiled', () => {
   buildStyles(true); // Minified CSS
 });
 
-let useExperimenalFeatures = cloptions.useExperimentalFeatures;
+let useExperimenalFeatures = !!cloptions.useExperimentalFeatures;
 
 gulp.task('sass:dev', () =>
   gulp
