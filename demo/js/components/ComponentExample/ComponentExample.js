@@ -181,7 +181,7 @@ class ComponentExample extends Component {
       /* eslint-disable react/no-danger */
       liveExample = (
         <div className={classNames}>
-          <div dangerouslySetInnerHTML={{ __html: htmlFile }} ref={this._setContainer} />}
+          <div dangerouslySetInnerHTML={{ __html: htmlFile }} ref={this._setContainer} />
         </div>
       );
       /* eslint-enable react/no-danger */
