@@ -31,7 +31,7 @@
     display: block;
     content: '';
     height: 1px;
-    background-color: #3d3d3d;
+    background-color: $ibm-colors__gray--80;
     margin: 0 get-fixed-size(2);
   }
 
@@ -71,12 +71,58 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--platform__category {
     width: 100%;
-    padding-right: get-fixed-size(1);
   }
 
   .#{$prefix}--platform__category-toggle {
+    @include button-reset($width: true);
+
     display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--platform__category-toggle:hover {
+    background-color: $ibm-colors__gray--80;
+  }
+
+  .#{$prefix}--platform__category-toggle:focus {
+    outline: get-fixed-size(0.5) solid $ibm-colors__blue--60;
+    outline-offset: get-fixed-size(-0.5);
+  }
+
+  .#{$prefix}--platform__category-title {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
+    padding-right: get-fixed-size(2);
+    width: 100%;
+    color: $ibm-colors__gray--10;
+    font-size: rem(14px);
+    font-weight: 400;
+  }
+
+  .#{$prefix}--platform__category-items {
+    display: none;
+    visibility: hidden;
+  }
+
+  .#{$prefix}--platform__category-item > a.#{$prefix}--platform__nav-link {
+    display: flex;
+    align-items: center;
+    min-height: get-fixed-size(5);
+    padding-left: get-fixed-size(7);
+  }
+
+  .#{$prefix}--platform__category--expanded .#{$prefix}--platform__category-title {
+    font-weight: 600;
+  }
+
+  .#{$prefix}--platform__category--expanded .#{$prefix}--platform__category-title > svg {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--platform__category--expanded .#{$prefix}--platform__category-items {
+    display: block;
+    visibility: visible;
   }
 
   //----------------------------------------------------------------------------
@@ -87,6 +133,7 @@
     align-items: center;
     justify-content: center;
     width: get-fixed-size(6);
+    min-width: get-fixed-size(6);
     height: get-fixed-size(5);
     margin-right: get-fixed-size(1);
   }
