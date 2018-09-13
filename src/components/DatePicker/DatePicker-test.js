@@ -251,7 +251,7 @@ describe('DatePicker', () => {
   });
 
   describe('Date picker with minDate and maxDate', () => {
-    console.error = jest.genMockFn(); // eslint-disable-line no-console
+    console.error = jest.fn(); // eslint-disable-line no-console
 
     const wrapper = mount(
       <DatePicker

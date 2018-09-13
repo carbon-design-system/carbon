@@ -23,6 +23,12 @@ exports[`ListBox should render 1`] = `
           </div>,
         ],
       ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
+      ],
     }
   }
   type="default"

@@ -13,6 +13,16 @@ exports[`ListBoxSelection should render 1`] = `
           "clear.all",
         ],
       ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": "translation",
+        },
+        Object {
+          "isThrow": false,
+          "value": "translation",
+        },
+      ],
     }
   }
 >
@@ -90,6 +100,16 @@ exports[`ListBoxSelection should render 2`] = `
         Array [
           "clear.all",
         ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": "translation",
+        },
+        Object {
+          "isThrow": false,
+          "value": "translation",
+        },
       ],
     }
   }
