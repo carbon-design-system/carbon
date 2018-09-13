@@ -53,6 +53,8 @@ export default class Modal extends Component {
   };
 
   button = React.createRef();
+  outerModal = React.createRef();
+  innerModal = React.createRef();
 
   elementOrParentIsFloatingMenu = target => {
     if (target && typeof target.closest === 'function') {
@@ -88,8 +90,8 @@ export default class Modal extends Component {
 
   handleClick = evt => {
     if (
-      this.innerModal &&
-      !this.innerModal.contains(evt.target) &&
+      this.innerModal.current &&
+      !this.innerModal.current.contains(evt.target) &&
       !this.elementOrParentIsFloatingMenu(evt.target)
     ) {
       this.props.onRequestClose(evt);
@@ -99,10 +101,10 @@ export default class Modal extends Component {
   handleBlur = evt => {
     // Keyboard trap
     if (
-      this.innerModal &&
+      this.innerModal.current &&
       this.props.open &&
       evt.relatedTarget &&
-      !this.innerModal.contains(evt.relatedTarget) &&
+      !this.innerModal.current.contains(evt.relatedTarget) &&
       !this.elementOrParentIsFloatingMenu(evt.relatedTarget)
     ) {
       this.focusModal();
@@ -118,8 +120,8 @@ export default class Modal extends Component {
   }
 
   focusModal = () => {
-    if (this.outerModal) {
-      this.outerModal.focus();
+    if (this.outerModal.current) {
+      this.outerModal.current.focus();
     }
   };
 
@@ -138,8 +140,8 @@ export default class Modal extends Component {
 
   handleTransitionEnd = evt => {
     if (
-      this.outerModal.offsetWidth &&
-      this.outerModal.offsetHeight &&
+      this.outerModal.current.offsetWidth &&
+      this.outerModal.current.offsetHeight &&
       this.beingOpen
     ) {
       this.focusButton(evt);
@@ -196,9 +198,7 @@ export default class Modal extends Component {
 
     const modalBody = (
       <div
-        ref={modal => {
-          this.innerModal = modal;
-        }}
+        ref={this.innerModal}
         role="dialog"
         className="bx--modal-container"
         aria-label={modalAriaLabel}>
@@ -242,9 +242,7 @@ export default class Modal extends Component {
         role="presentation"
         tabIndex={-1}
         onTransitionEnd={this.props.open ? this.handleTransitionEnd : undefined}
-        ref={outerModal => {
-          this.outerModal = outerModal;
-        }}>
+        ref={this.outerModal}>
         {modalBody}
       </div>
     );

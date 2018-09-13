@@ -34,6 +34,7 @@ export default class ModalWrapper extends React.Component {
     onKeyDown: () => {},
   };
 
+  triggerButton = React.createRef();
   state = {
     isOpen: false,
   };
@@ -45,9 +46,7 @@ export default class ModalWrapper extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({
-      isOpen: false,
-    });
+    this.setState({ isOpen: false }, () => this.triggerButton.current.focus());
   };
 
   handleOnRequestSubmit = () => {
@@ -93,7 +92,8 @@ export default class ModalWrapper extends React.Component {
           className={buttonTriggerClassName}
           disabled={disabled}
           kind={triggerButtonKind}
-          onClick={this.handleOpen}>
+          onClick={this.handleOpen}
+          inputref={this.triggerButton}>
           {buttonTriggerText}
         </Button>
         <Modal {...props}>{children}</Modal>
