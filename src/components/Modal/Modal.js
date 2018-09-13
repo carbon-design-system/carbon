@@ -79,10 +79,10 @@ export default class Modal extends Component {
 
   handleKeyDown = evt => {
     if (evt.which === 27) {
-      this.props.onRequestClose();
+      this.props.onRequestClose(evt);
     }
     if (evt.which === 13 && this.props.shouldSubmitOnEnter) {
-      this.props.onRequestSubmit();
+      this.props.onRequestSubmit(evt);
     }
   };
 
@@ -92,7 +92,7 @@ export default class Modal extends Component {
       !this.innerModal.contains(evt.target) &&
       !this.elementOrParentIsFloatingMenu(evt.target)
     ) {
-      this.props.onRequestClose();
+      this.props.onRequestClose(evt);
     }
   };
 
