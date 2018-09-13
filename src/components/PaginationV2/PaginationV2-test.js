@@ -19,7 +19,7 @@ describe('Pagination', () => {
     );
 
     beforeEach(() => {
-      paginationV2.setProps('itemsPerPageFollowsText', undefined);
+      paginationV2.setProps({ itemsPerPageFollowsText: undefined });
     });
 
     describe('icons', () => {

@@ -21,6 +21,7 @@ export default class PaginationV2 extends Component {
       prevPage: page,
       prevPageSize: pageSize,
     };
+    this.uniqueId = ++instanceId;
   }
 
   static propTypes = {
@@ -138,10 +139,6 @@ export default class PaginationV2 extends Component {
     itemText: (min, max) => `${min}-${max} items`,
     pageText: page => `page ${page}`,
   };
-
-  UNSAFE_componentWillMount() {
-    this.uniqueId = ++instanceId;
-  }
 
   static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
     const {
