@@ -34,6 +34,11 @@ class ComponentExample extends Component {
     hideViewFullRender: PropTypes.bool,
 
     /**
+     * `true` to use a link (only) for the live demo.
+     */
+    linkOnly: PropTypes.bool,
+
+    /**
      * `true` to use `<iframe>`.
      */
     useIframe: PropTypes.bool,
@@ -86,16 +91,18 @@ class ComponentExample extends Component {
    */
   _instantiateComponents = () => {
     const container = this._container;
-    const components = {
-      ...(container.ownerDocument.defaultView.CarbonComponents || {}),
-      InlineLoadingDemoButton,
-    };
-    const componentClasses = Object.keys(components)
-      .map(key => components[key])
-      .filter(Clz => typeof Clz.init === 'function');
-    componentClasses.filter(Clz => !Clz.forLazyInit).forEach(Clz => {
-      Clz.init(container);
-    });
+    if (container) {
+      const components = {
+        ...(container.ownerDocument.defaultView.CarbonComponents || {}),
+        InlineLoadingDemoButton,
+      };
+      const componentClasses = Object.keys(components)
+        .map(key => components[key])
+        .filter(Clz => typeof Clz.init === 'function');
+      componentClasses.filter(Clz => !Clz.forLazyInit).forEach(Clz => {
+        Clz.init(container);
+      });
+    }
   };
 
   /**
@@ -103,25 +110,27 @@ class ComponentExample extends Component {
    */
   _releaseComponents = () => {
     const container = this._container;
-    const components = {
-      ...(container.ownerDocument.defaultView.CarbonComponents || {}),
-      InlineLoadingDemoButton,
-    };
-    Object.keys(components)
-      .map(key => components[key])
-      .filter(Clz => typeof Clz.init === 'function')
-      .forEach(Clz => {
-        forEach.call(container.querySelectorAll(Clz.options.selectorInit), element => {
-          const instance = Clz.components.get(element);
-          if (instance) {
-            instance.release();
-          }
+    if (container) {
+      const components = {
+        ...(container.ownerDocument.defaultView.CarbonComponents || {}),
+        InlineLoadingDemoButton,
+      };
+      Object.keys(components)
+        .map(key => components[key])
+        .filter(Clz => typeof Clz.init === 'function')
+        .forEach(Clz => {
+          forEach.call(container.querySelectorAll(Clz.options.selectorInit), element => {
+            const instance = Clz.components.get(element);
+            if (instance) {
+              instance.release();
+            }
+          });
         });
-      });
+    }
   };
 
   render() {
-    const { htmlFile, component, variant, codepenSlug, hideViewFullRender, useIframe } = this.props;
+    const { htmlFile, component, variant, codepenSlug, hideViewFullRender, linkOnly, useIframe } = this.props;
 
     const classNamesContainer = classnames('component-example__live', {
       'component-example__live--with-iframe': useIframe,
@@ -136,46 +145,58 @@ class ComponentExample extends Component {
       'bx--global-light-ui': component === 'tabs',
     });
 
+    const viewFullRenderClassNames = classnames({
+      'component-example__view-full-render': true,
+      'component-example__view-full-render--link-only': linkOnly,
+    });
+
     const codepenLink = codepenSlug && `https://codepen.io/team/carbon/full/${codepenSlug}/`;
     const variantSuffix = (component === variant && '--default') || '';
     const componentLink = variant ? `/component/${variant}${variantSuffix}` : `/component/${component}`;
 
     const viewFullRender = hideViewFullRender ? null : (
-      <Link className="component-example__view-full-render" target="_blank" href={codepenLink || componentLink}>
+      <Link className={viewFullRenderClassNames} target="_blank" href={codepenLink || componentLink}>
         {codepenLink ? 'View on CodePen' : 'View full render'}
       </Link>
     );
 
-    /* eslint-disable react/no-danger */
+    let liveExample = null;
+    if (useIframe) {
+      liveExample = (
+        <iframe
+          className={classNames}
+          data-role="window"
+          src={componentLink}
+          sandbox="allow-same-origin allow-scripts allow-forms"
+          marginWidth="0"
+          marginHeight="0"
+          frameBorder="0"
+          vspace="0"
+          hspace="0"
+          scrolling="yes"
+          ref={this._setContainer}
+        />
+      );
+    } else if (!linkOnly) {
+      /* eslint-disable react/no-danger */
+      liveExample = (
+        <div className={classNames}>
+          <div dangerouslySetInnerHTML={{ __html: htmlFile }} ref={this._setContainer} />
+        </div>
+      );
+      /* eslint-enable react/no-danger */
+    }
+
     return (
       <div className={lightUIclassnames}>
         <div className="svg--sprite" aria-hidden="true" />
         <div className={classNamesContainer}>
-          {useIframe ? (
-            <iframe
-              className={classNames}
-              data-role="window"
-              src={componentLink}
-              sandbox="allow-same-origin allow-scripts allow-forms"
-              marginWidth="0"
-              marginHeight="0"
-              frameBorder="0"
-              vspace="0"
-              hspace="0"
-              scrolling="yes"
-              ref={this._setContainer}
-            />
-          ) : (
-            <div className={classNames}>
-              <div dangerouslySetInnerHTML={{ __html: htmlFile }} ref={this._setContainer} />
-            </div>
-          )}
+          {liveExample}
           {viewFullRender}
         </div>
         <CodeExample htmlFile={htmlFile} />
       </div>
     );
-    /* eslint-enable react/no-danger */
   }
 }
 
