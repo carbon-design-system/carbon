@@ -121,6 +121,9 @@ const nav = {
 
 module.exports = {
   preview: 'ui-shell-preview',
+  meta: {
+    xVersionOnly: true,
+  },
   context: {
     header,
     nav,
