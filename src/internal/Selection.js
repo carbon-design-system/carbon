@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash.isequal';
 
 export default class Selection extends React.Component {
   static propTypes = {
@@ -44,12 +45,17 @@ export default class Selection extends React.Component {
       selectedItems: removeAtIndex(state.selectedItems, index),
     }));
   };
-
   handleOnItemChange = item => {
     const { selectedItems } = this.state;
-    const selectedIndex = selectedItems.indexOf(item);
 
-    if (selectedIndex === -1) {
+    let selectedIndex;
+    selectedItems.forEach((selectedItem, index) => {
+      if (isEqual(selectedItem, item)) {
+        selectedIndex = index;
+      }
+    });
+
+    if (selectedIndex === undefined) {
       this.handleSelectItem(item);
       return;
     }

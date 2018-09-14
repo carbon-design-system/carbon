@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiSelect should render 1`] = `
+<MultiSelect
+  compareItems={[Function]}
+  disabled={false}
+  initialSelectedItems={Array []}
+  itemToString={[Function]}
+  items={
+    Array [
+      Object {
+        "id": "id-0",
+        "label": "Item 0",
+        "value": 0,
+      },
+      Object {
+        "id": "id-1",
+        "label": "Item 1",
+        "value": 1,
+      },
+      Object {
+        "id": "id-2",
+        "label": "Item 2",
+        "value": 2,
+      },
+      Object {
+        "id": "id-3",
+        "label": "Item 3",
+        "value": 3,
+      },
+      Object {
+        "id": "id-4",
+        "label": "Item 4",
+        "value": 4,
+      },
+    ]
+  }
+  label="Field"
+  light={false}
+  locale="en"
+  sortItems={[Function]}
+  type="default"
+>
+  <Selection
+    initialSelectedItems={Array []}
+    onChange={[Function]}
+    render={[Function]}
+  >
+    <Downshift
+      breakingChanges={Object {}}
+      defaultHighlightedIndex={null}
+      defaultInputValue=""
+      defaultIsOpen={false}
+      defaultSelectedItem={null}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      isOpen={false}
+      itemToString={[Function]}
+      onChange={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      render={[Function]}
+      selectedItem={Array []}
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+    >
+      <ListBox
+        ariaLabel="Choose an item"
+        className="bx--multi-select"
+        disabled={false}
+        innerRef={[Function]}
+        type="default"
+      >
+        <div
+          aria-label="Choose an item"
+          className="bx--multi-select bx--list-box"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+          tabIndex="0"
+        >
+          <ListBoxField
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            type="button"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label="open menu"
+              className="bx--list-box__field"
+              data-toggle={true}
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="0"
+              type="button"
+            >
+              <span
+                className="bx--list-box__label"
+              >
+                Field
+              </span>
+              <ListBoxMenuIcon
+                isOpen={false}
+                translateWithId={[Function]}
+              >
+                <div
+                  className="bx--list-box__menu-icon"
+                >
+                  <Icon
+                    alt="Open menu"
+                    description="Open menu"
+                    fillRule="evenodd"
+                    icon={
+                      Object {
+                        "height": "5",
+                        "id": "icon--caret--down",
+                        "name": "icon--caret--down",
+                        "styles": "",
+                        "svgData": Object {
+                          "circles": "",
+                          "ellipses": "",
+                          "paths": Array [
+                            Object {
+                              "d": "M0 0l5 4.998L10 0z",
+                            },
+                          ],
+                          "polygons": "",
+                          "polylines": "",
+                          "rects": "",
+                        },
+                        "tags": "icon--caret--down",
+                        "viewBox": "0 0 10 5",
+                        "width": "10",
+                      }
+                    }
+                    role="img"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      fillRule="evenodd"
+                      height="5"
+                      role="img"
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                        key="key0"
+                      />
+                    </svg>
+                  </Icon>
+                </div>
+              </ListBoxMenuIcon>
+            </div>
+          </ListBoxField>
+        </div>
+      </ListBox>
+    </Downshift>
+  </Selection>
+</MultiSelect>
+`;

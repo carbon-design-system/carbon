@@ -13,6 +13,16 @@ const mouseDownAndUp = node => {
 };
 
 describe('MultiSelect', () => {
+  it('should render', () => {
+    const wrapper = mount(
+      <MultiSelect
+        label="Field"
+        items={generateItems(5, generateGenericItem)}
+      />
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should initialize with no selected items if no `initialSelectedItems` are given', () => {
     const items = generateItems(5, generateGenericItem);
     const wrapper = mount(<MultiSelect label="Field" items={items} />);
@@ -69,7 +79,7 @@ describe('MultiSelect', () => {
       };
     });
 
-    it('should allow a user to de-select an item by clicking on a initial selected items', () => {
+    it('should allow a user to de-select an item by clicking on initial selected items', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
       expect(
         wrapper.find('Selection').instance().state.selectedItems.length
@@ -86,7 +96,7 @@ describe('MultiSelect', () => {
       ).toBe(2);
     });
 
-    it('should allow a user to de-select an initial selected item by hitting enter on ainitial selected item', () => {
+    it('should allow a user to de-select an initial selected item by hitting enter on initial selected item', () => {
       const wrapper = mount(<MultiSelect {...mockProps} />);
       const simulateArrowDown = wrapper =>
         wrapper.find('.bx--list-box__field').simulate('keydown', {
@@ -107,6 +117,29 @@ describe('MultiSelect', () => {
       expect(
         wrapper.find('Selection').instance().state.selectedItems.length
       ).toBe(2);
+    });
+
+    it('should allow a user to de-select an item after calling setState by clicking on selected item', () => {
+      const wrapper = mount(
+        <MultiSelect
+          {...mockProps}
+          items={[{ label: 'foo' }]}
+          initialSelectedItems={[{ label: 'foo' }]}
+        />
+      );
+      expect(
+        wrapper.find('Selection').instance().state.selectedItems.length
+      ).toBe(1);
+      wrapper.setState({ foo: 'bar' });
+      wrapper.find('.bx--list-box__field').simulate('click');
+      wrapper
+        .find('.bx--list-box__menu-item')
+        .at(0)
+        .simulate('click');
+
+      expect(
+        wrapper.find('Selection').instance().state.selectedItems.length
+      ).toBe(0);
     });
 
     it('should select an item when a user clicks on an item', () => {
@@ -186,17 +219,17 @@ describe('MultiSelect', () => {
       const getHighlightedId = () =>
         wrapper.find('.bx--list-box__menu-item--highlighted').prop('id');
       simulateArrowDown();
-      expect(getHighlightedId()).toBe('downshift-10-item-0');
+      expect(getHighlightedId()).toBe('downshift-12-item-0');
       simulateArrowDown();
-      expect(getHighlightedId()).toBe('downshift-10-item-1');
+      expect(getHighlightedId()).toBe('downshift-12-item-1');
       // Simulate "wrap" behavior
       simulateArrowDown();
       simulateArrowDown();
       simulateArrowDown();
       simulateArrowDown();
-      expect(getHighlightedId()).toBe('downshift-10-item-0');
+      expect(getHighlightedId()).toBe('downshift-12-item-0');
       simulateArrowUp();
-      expect(getHighlightedId()).toBe('downshift-10-item-4');
+      expect(getHighlightedId()).toBe('downshift-12-item-4');
     });
 
     it('should close the menu when a user clicks outside of the control', () => {

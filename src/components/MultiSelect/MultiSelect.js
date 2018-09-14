@@ -2,6 +2,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
+import isEqual from 'lodash.isequal';
 import ListBox from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
@@ -207,11 +208,8 @@ export default class MultiSelect extends React.Component {
                       const itemProps = getItemProps({ item });
                       const itemText = itemToString(item);
                       const isChecked =
-                        selectedItem
-                          .map(selected => {
-                            return selected.id;
-                          })
-                          .indexOf(item.id) !== -1;
+                        selectedItem.filter(selected => isEqual(selected, item))
+                          .length > 0;
                       return (
                         <ListBox.MenuItem
                           key={itemProps.id}

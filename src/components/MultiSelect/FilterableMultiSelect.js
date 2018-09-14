@@ -2,6 +2,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Downshift from 'downshift';
+import isEqual from 'lodash.isequal';
 import ListBox from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
@@ -250,11 +251,13 @@ export default class FilterableMultiSelect extends React.Component {
                     ).map((item, index) => {
                       const itemProps = getItemProps({ item });
                       const itemText = itemToString(item);
-                      const isChecked = selectedItem.indexOf(item) !== -1;
+                      const isChecked =
+                        selectedItem.filter(selected => isEqual(selected, item))
+                          .length > 0;
                       return (
                         <ListBox.MenuItem
                           key={itemProps.id}
-                          isActive={selectedItem.indexOf(item) !== -1}
+                          isActive={isChecked}
                           isHighlighted={highlightedIndex === index}
                           {...itemProps}>
                           <Checkbox
