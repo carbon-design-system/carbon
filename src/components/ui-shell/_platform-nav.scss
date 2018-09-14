@@ -122,7 +122,7 @@
 
   .#{$prefix}--platform__category--expanded .#{$prefix}--platform__category-items {
     display: block;
-    visibility: visible;
+    visibility: inherit;
   }
 
   //----------------------------------------------------------------------------
