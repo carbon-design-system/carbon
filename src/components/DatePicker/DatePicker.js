@@ -332,37 +332,40 @@ export default class DatePicker extends Component {
   updateClassNames = calendar => {
     const calendarContainer = calendar.calendarContainer;
     const daysContainer = calendar.days;
-    calendarContainer.classList.add('bx--date-picker__calendar');
-    calendarContainer
-      .querySelector('.flatpickr-month')
-      .classList.add('bx--date-picker__month');
-    calendarContainer
-      .querySelector('.flatpickr-weekdays')
-      .classList.add('bx--date-picker__weekdays');
-    calendarContainer
-      .querySelector('.flatpickr-days')
-      .classList.add('bx--date-picker__days');
-    [...calendarContainer.querySelectorAll('.flatpickr-weekday')].forEach(
-      item => {
-        const currentItem = item;
-        currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
-        currentItem.classList.add('bx--date-picker__weekday');
-      }
-    );
-    [...daysContainer.querySelectorAll('.flatpickr-day')].forEach(item => {
-      item.classList.add('bx--date-picker__day');
-      if (
-        item.classList.contains('today') &&
-        calendar.selectedDates.length > 0
-      ) {
-        item.classList.add('no-border');
-      } else if (
-        item.classList.contains('today') &&
-        calendar.selectedDates.length === 0
-      ) {
-        item.classList.remove('no-border');
-      }
-    });
+    if (calendarContainer && daysContainer) {
+      // calendarContainer and daysContainer are undefined if flatpickr detects a mobile device
+      calendarContainer.classList.add('bx--date-picker__calendar');
+      calendarContainer
+        .querySelector('.flatpickr-month')
+        .classList.add('bx--date-picker__month');
+      calendarContainer
+        .querySelector('.flatpickr-weekdays')
+        .classList.add('bx--date-picker__weekdays');
+      calendarContainer
+        .querySelector('.flatpickr-days')
+        .classList.add('bx--date-picker__days');
+      [...calendarContainer.querySelectorAll('.flatpickr-weekday')].forEach(
+        item => {
+          const currentItem = item;
+          currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
+          currentItem.classList.add('bx--date-picker__weekday');
+        }
+      );
+      [...daysContainer.querySelectorAll('.flatpickr-day')].forEach(item => {
+        item.classList.add('bx--date-picker__day');
+        if (
+          item.classList.contains('today') &&
+          calendar.selectedDates.length > 0
+        ) {
+          item.classList.add('no-border');
+        } else if (
+          item.classList.contains('today') &&
+          calendar.selectedDates.length === 0
+        ) {
+          item.classList.remove('no-border');
+        }
+      });
+    }
   };
 
   assignInputFieldRef = node => {
