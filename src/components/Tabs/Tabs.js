@@ -222,7 +222,7 @@ export default class Tabs extends React.Component {
     const selectedLabel = selectedTab ? selectedTab.props.label : '';
 
     return (
-      <React.Fragment>
+      <>
         <nav {...other} className={classes.tabs} role={role}>
           <div
             role="listbox"
@@ -245,7 +245,7 @@ export default class Tabs extends React.Component {
           </ul>
         </nav>
         {tabContentWithProps}
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -33,7 +33,7 @@ const TooltipSimple = ({
   return (
     <div className={tooltipWrapperClasses}>
       {showIcon ? (
-        <React.Fragment>
+        <>
           {children}
           <div
             className={tooltipClasses}
@@ -48,7 +48,7 @@ const TooltipSimple = ({
               description={iconDescription}
             />
           </div>
-        </React.Fragment>
+        </>
       ) : (
         <div
           className={tooltipClasses}

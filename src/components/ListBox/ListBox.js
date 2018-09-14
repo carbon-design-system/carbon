@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ListBoxField from './ListBoxField';
 import ListBoxMenu from './ListBoxMenu';
@@ -39,7 +39,7 @@ const ListBox = ({
     'bx--list-box--disabled': disabled,
   });
   return (
-    <Fragment>
+    <>
       <div
         {...rest}
         role="listbox"
@@ -56,7 +56,7 @@ const ListBox = ({
       {invalid ? (
         <div className="bx--form-requirement">{invalidText}</div>
       ) : null}
-    </Fragment>
+    </>
   );
 };
 

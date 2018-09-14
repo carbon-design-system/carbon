@@ -91,7 +91,7 @@ export default class InlineCheckbox extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <>
         <input {...inputProps} />
         {
           /* eslint-disable jsx-a11y/label-has-for */
@@ -101,7 +101,7 @@ export default class InlineCheckbox extends React.Component {
             aria-label={ariaLabel}
           />
         }
-      </React.Fragment>
+      </>
     );
   }
 }
