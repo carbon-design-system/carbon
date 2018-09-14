@@ -14,7 +14,7 @@
     top: get-fixed-size(6);
     right: 0;
     bottom: 0;
-    width: get-fixed-size(40);
+    width: get-fixed-size(32);
     will-change: transform;
     transform: translate3d(100%, 0, 0);
     padding: 1rem 0;
@@ -138,8 +138,11 @@
     position: absolute;
     top: 0;
     right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: get-fixed-size(4);
-    height: get-fixed-size(4);
+    height: 100%;
   }
 
   .#{$prefix}--overflow-menu > svg {

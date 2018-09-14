@@ -22,12 +22,14 @@
       </div>
       {{#if switcher.state.showAll}}
         <div class="bx--switcher__item">
-          <button aria-label="Back" tabindex="0" class="bx--switcher__back-btn">
+          {{!-- TODO remove subheader and replace with button --}}
+          <p class="bx--switcher__subheader">Section Title</p>
+          {{!-- <button aria-label="Back" tabindex="0" class="bx--switcher__back-btn">
             <svg class="bx--switcher__back-arrow" width="20" height="20" viewBox="0 0 16 14">
               <path d="M4.044 8.003l4.09 3.905-1.374 1.453-6.763-6.356L6.759.639 8.135 2.09 4.043 6.003h11.954v2H4.044z" />
             </svg>
             Back
-          </button>
+          </button> --}}
         </div>
         <ul class="bx--switcher__app-list">
           {{#each switcher.allLinks}}

@@ -81,33 +81,33 @@ const switcher = {
   links: [
     {
       href: '/component/ui-shell--default',
-      title: 'My Product',
+      title: 'Link 1',
     },
     {
       href: '/component/ui-shell--default',
-      title: 'My Product 2',
+      title: 'Link 2',
     },
   ],
   allLinks: [
     {
       href: '/component/ui-shell--default',
-      title: 'All Products',
+      title: 'Product Name',
     },
     {
       href: '/component/ui-shell--default',
-      title: 'All Products',
+      title: 'Product Name',
     },
     {
       href: '/component/ui-shell--default',
-      title: 'All Products',
+      title: 'Product Name',
     },
     {
       href: '/component/ui-shell--default',
-      title: 'All Products',
+      title: 'Product Name',
     },
     {
       href: '/component/ui-shell--default',
-      title: 'All Products',
+      title: 'Product Name',
     },
   ],
 };
