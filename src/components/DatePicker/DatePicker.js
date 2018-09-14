@@ -389,6 +389,9 @@ export default class DatePicker extends Component {
           : null;
   };
 
+  isLabelTextEmpty = children =>
+    children.every(child => !child.props.labelText);
+
   render() {
     const {
       appendTo, // eslint-disable-line
@@ -413,6 +416,8 @@ export default class DatePicker extends Component {
       'bx--date-picker--simple': datePickerType === 'simple',
       'bx--date-picker--single': datePickerType === 'single',
       'bx--date-picker--range': datePickerType === 'range',
+      'bx--date-picker--nolabel':
+        datePickerType === 'range' && this.isLabelTextEmpty(children),
     });
 
     const datePickerIcon =

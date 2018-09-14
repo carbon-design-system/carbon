@@ -84,6 +84,10 @@ export default class DatePickerInput extends Component {
       <div className="bx--form-requirement">{invalidText}</div>
     ) : null;
 
+    const containerClasses = classNames('bx--date-picker-container', {
+      'bx--date-picker--nolabel': !label,
+    });
+
     const input = invalid ? (
       <input
         {...other}
@@ -106,7 +110,7 @@ export default class DatePickerInput extends Component {
     );
 
     return (
-      <div className="bx--date-picker-container">
+      <div className={containerClasses}>
         {datePickerIcon}
         {label}
         {input}
