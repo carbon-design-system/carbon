@@ -75,6 +75,9 @@ const sidenav = {
 
 module.exports = {
   preview: 'ui-shell-preview',
+  meta: {
+    xVersionOnly: true,
+  },
   context: {
     header,
     sidenav,
