@@ -37,7 +37,8 @@
     "carbon-icons": "^7.0.7",
     "flatpickr": "2.6.3",
     "lodash.debounce": "^4.0.8",
-    "warning": "^3.0.0"
+    "warning": "^3.0.0",
+    "yarn": "^1.9.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
