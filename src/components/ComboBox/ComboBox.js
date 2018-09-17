@@ -221,7 +221,12 @@ export default class ComboBox extends React.Component {
                 })}
               />
               {inputValue &&
-                isOpen && <ListBox.Selection clearSelection={clearSelection} />}
+                isOpen && (
+                  <ListBox.Selection
+                    clearSelection={clearSelection}
+                    translateWithId={translateWithId}
+                  />
+                )}
               <ListBox.MenuIcon
                 isOpen={isOpen}
                 translateWithId={translateWithId}
