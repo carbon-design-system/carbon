@@ -39,6 +39,7 @@ export default class DatePickerInput extends Component {
       datePickerType,
       pattern,
       iconDescription,
+      openCalendar,
       ...other
     } = this.props;
 
@@ -69,6 +70,7 @@ export default class DatePickerInput extends Component {
           name="calendar"
           className="bx--date-picker__icon"
           description={iconDescription}
+          onClick={openCalendar}
         />
       ) : (
         ''
