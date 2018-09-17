@@ -17,6 +17,7 @@ const CodePage = ({ metadata, hideViewFullRender }) => {
         hideViewFullRender={hideViewFullRender}
         component={metadata.name}
         htmlFile={metadata.renderedContent}
+        linkOnly={metadata.linkOnly}
         useIframe={metadata.useIframe}
       />
     ) : (
@@ -28,6 +29,7 @@ const CodePage = ({ metadata, hideViewFullRender }) => {
             variant={item.handle.replace(/--default$/, '')}
             component={metadata.name}
             htmlFile={item.renderedContent}
+            linkOnly={metadata.linkOnly}
             useIframe={metadata.useIframe}
           />
         </div>
