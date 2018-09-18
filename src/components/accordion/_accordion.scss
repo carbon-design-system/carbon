@@ -142,7 +142,7 @@
     @include font-family;
     list-style: none;
     width: 100%;
-    background-color: $ui-01;
+    // background-color: $ui-01;
   }
 
   .#{$prefix}--accordion__item {
@@ -173,7 +173,7 @@
     justify-content: $accordion-justify-content;
     cursor: pointer;
     padding: $spacing-xs 0;
-    flex-direction: $accordion-flex-direction-2;
+    flex-direction: $accordion-flex-direction;
     width: 100%;
 
     // new version of markup uses focus on the heading,
@@ -188,7 +188,7 @@
       }
     }
     &:hover {
-      background-color: $ui-03;
+      background-color: $ibm-colors__gray--20;
     }
   }
 
@@ -197,7 +197,7 @@
     height: 1.25rem;
     width: 1.25rem;
     padding: $spacing-2xs $spacing-3xs $spacing-2xs $spacing-2xs;
-    margin: $accordion-arrow-margin-2;
+    margin: $accordion-arrow-margin;
     fill: $ui-05;
     transform: rotate(0) /*rtl:rotate(180deg)*/;
   }
@@ -214,7 +214,7 @@
     height: 0;
     visibility: hidden;
     opacity: 0;
-    background-color: $ui-02;
+    // background-color: $ui-02;
 
     p {
       @include typescale('zeta');
@@ -223,6 +223,10 @@
 
   .#{$prefix}--accordion__item--active {
     overflow: visible;
+
+    .#{$prefix}--accordion__heading {
+      background-color: $ibm-colors__gray--20;
+    }
 
     .#{$prefix}--accordion__content {
       padding-top: $spacing-md;
