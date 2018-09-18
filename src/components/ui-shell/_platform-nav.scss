@@ -39,8 +39,25 @@
   // Platform Nav Item
   //----------------------------------------------------------------------------
   .#{$prefix}--platform__nav-item {
+    position: relative;
     display: flex;
     align-items: center;
+  }
+
+  .#{$prefix}--platform__nav-item--active > a.#{$prefix}--platform__nav-link {
+    color: $ibm-colors__white;
+    font-weight: bold;
+  }
+
+  .#{$prefix}--platform__nav-item--active::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $ibm-colors__blue--60;
   }
 
   //----------------------------------------------------------------------------
@@ -54,6 +71,8 @@
     font-size: rem(14px);
     font-weight: 400;
     width: 100%;
+    min-height: get-fixed-size(5);
+    padding-left: get-fixed-size(2);
   }
 
   a.#{$prefix}--platform__nav-link:hover {
@@ -64,6 +83,10 @@
   a.#{$prefix}--platform__nav-link:focus {
     outline: get-fixed-size(0.5) solid $ibm-colors__blue--60;
     outline-offset: get-fixed-size(-0.5);
+  }
+
+  .#{$prefix}--platform__nav-item--icon > a.#{$prefix}--platform__nav-link {
+    padding-left: 0;
   }
 
   //----------------------------------------------------------------------------
@@ -98,6 +121,12 @@
     color: $ibm-colors__gray--10;
     font-size: rem(14px);
     font-weight: 400;
+    min-height: get-fixed-size(5);
+    padding-left: get-fixed-size(2);
+  }
+
+  .#{$prefix}--platform__nav-item--icon .#{$prefix}--platform__category-title {
+    padding-left: 0;
   }
 
   .#{$prefix}--platform__category-items {
@@ -109,7 +138,31 @@
     display: flex;
     align-items: center;
     min-height: get-fixed-size(5);
+    padding-left: get-fixed-size(4);
+  }
+
+  .#{$prefix}--platform__category-item {
+    position: relative;
+  }
+
+  .#{$prefix}--platform__nav-item--icon .#{$prefix}--platform__category-item > a.#{$prefix}--platform__nav-link {
     padding-left: get-fixed-size(7);
+  }
+
+  .#{$prefix}--platform__category-item--active::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $ibm-colors__blue--60;
+  }
+
+  .#{$prefix}--platform__category-item--active > a.#{$prefix}--platform__nav-link {
+    font-weight: 600;
+    color: $ibm-colors__white;
   }
 
   .#{$prefix}--platform__category--expanded .#{$prefix}--platform__category-title {

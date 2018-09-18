@@ -1,7 +1,8 @@
 'use strict';
 
 const header = {
-  name: 'IBM [Platform]',
+  company: 'IBM',
+  platform: '[Platform]',
   links: [
     {
       href: '/component/ui-shell--default',
@@ -45,16 +46,16 @@ const sidenav = {
   },
   links: [
     {
-      category: 'L2 Category',
+      category: 'Category label',
       links: createSidebarLinks(2),
     },
     {
-      category: 'L2 Category',
+      category: 'Category label',
       links: createSidebarLinks(3, 1),
       active: true,
     },
     {
-      category: 'L2 Category',
+      category: 'Category label',
       links: createSidebarLinks(4),
     },
   ],
@@ -69,13 +70,15 @@ const nav = {
       items: [
         {
           type: 'link',
-          title: 'L1 link',
+          title: 'Item link',
           href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
         },
         {
           type: 'link',
-          title: 'L1 link',
+          title: 'Item link',
           href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
         },
       ],
     },
@@ -83,33 +86,39 @@ const nav = {
       items: [
         {
           type: 'link',
-          title: 'L1 link',
+          title: 'Item link',
           href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
+          active: true,
         },
         {
           type: 'link',
-          title: 'L1 link',
+          title: 'Item link',
           href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
         },
         {
           type: 'link',
-          title: 'L1 link',
+          title: 'Item link',
           href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
         },
         {
           type: 'category',
           title: 'L1 category',
+          hasIcon: true,
           links: [
             {
-              title: 'L2 link',
+              title: 'Nested link',
               href: '/component/ui-shell--platform-navigation-expanded',
             },
             {
-              title: 'L2 link',
+              title: 'Nested link',
               href: '/component/ui-shell--platform-navigation-expanded',
+              active: true,
             },
             {
-              title: 'L2 link',
+              title: 'Nested link',
               href: '/component/ui-shell--platform-navigation-expanded',
             },
           ],
@@ -130,16 +139,16 @@ module.exports = {
     sidenav,
   },
   variants: [
-    {
-      name: 'Side-nav expanded',
-      context: {
-        sidenav: {
-          state: {
-            expanded: true,
-          },
-        },
-      },
-    },
+    // {
+    // name: 'Side-nav expanded',
+    // context: {
+    // sidenav: {
+    // state: {
+    // expanded: true,
+    // },
+    // },
+    // },
+    // },
     {
       name: 'Platform nav expanded',
       context: {
@@ -161,13 +170,32 @@ module.exports = {
         },
       },
     },
+    {
+      name: 'Platform nav with no icons',
+      context: {
+        nav: {
+          state: {
+            expanded: true,
+            category: true,
+          },
+          sections: nav.sections.map(section => {
+            return {
+              items: section.items.map(item => ({
+                ...item,
+                hasIcon: false,
+              })),
+            };
+          }),
+        },
+      },
+    },
   ],
 };
 
 function createSidebarLinks(count, activeIndex) {
   return Array.from({ length: count }, (_, i) => {
     const link = {
-      title: 'L3 link',
+      title: 'Nested link',
       href: '/component/ui-shell--default',
     };
     if (i === activeIndex) {
