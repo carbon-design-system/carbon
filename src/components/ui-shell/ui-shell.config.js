@@ -36,19 +36,6 @@ const header = {
   ],
 };
 
-function createSidebarLinks(count, activeIndex) {
-  return Array.from({ length: count }, (_, i) => {
-    const link = {
-      title: 'L3 link',
-      href: '/component/ui-shell--default',
-    };
-    if (i === activeIndex) {
-      link.active = true;
-    }
-    return link;
-  });
-}
-
 const sidenav = {
   state: {
     expanded: false,
@@ -73,41 +60,61 @@ const sidenav = {
   ],
 };
 
-const switcher = {
+const nav = {
   state: {
     expanded: false,
-    showAll: false,
   },
-  links: [
+  sections: [
     {
-      href: '/component/ui-shell--default',
-      title: 'Link 1',
+      items: [
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+      ],
     },
     {
-      href: '/component/ui-shell--default',
-      title: 'Link 2',
-    },
-  ],
-  allLinks: [
-    {
-      href: '/component/ui-shell--default',
-      title: 'Product Name',
-    },
-    {
-      href: '/component/ui-shell--default',
-      title: 'Product Name',
-    },
-    {
-      href: '/component/ui-shell--default',
-      title: 'Product Name',
-    },
-    {
-      href: '/component/ui-shell--default',
-      title: 'Product Name',
-    },
-    {
-      href: '/component/ui-shell--default',
-      title: 'Product Name',
+      items: [
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+        {
+          type: 'category',
+          title: 'L1 category',
+          links: [
+            {
+              title: 'L2 link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+            },
+            {
+              title: 'L2 link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+            },
+            {
+              title: 'L2 link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+            },
+          ],
+        },
+      ],
     },
   ],
 };
@@ -119,12 +126,13 @@ module.exports = {
   },
   context: {
     header,
+    nav,
     sidenav,
     switcher,
   },
   variants: [
     {
-      name: 'expanded',
+      name: 'Side-nav expanded',
       context: {
         sidenav: {
           state: {
@@ -145,6 +153,16 @@ module.exports = {
       },
     },
     {
+      name: 'Platform nav expanded',
+      context: {
+        nav: {
+          state: {
+            expanded: true,
+          },
+        },
+      },
+    },
+    {
       name: 'Switcher All Products',
       context: {
         switcher: {
@@ -155,5 +173,29 @@ module.exports = {
         },
       },
     },
+    {
+      name: 'Platform nav category expanded',
+      context: {
+        nav: {
+          state: {
+            expanded: true,
+            category: true,
+          },
+        },
+      },
+    },
   ],
 };
+
+function createSidebarLinks(count, activeIndex) {
+  return Array.from({ length: count }, (_, i) => {
+    const link = {
+      title: 'L3 link',
+      href: '/component/ui-shell--default',
+    };
+    if (i === activeIndex) {
+      link.active = true;
+    }
+    return link;
+  });
+}
