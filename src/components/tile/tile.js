@@ -82,7 +82,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
    * The map associating DOM element and Tile UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE__ */ = new WeakMap();
 
   /**
    * The component options.

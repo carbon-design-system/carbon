@@ -95,7 +95,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
    * The map associating DOM element and accordion UI instance.
    * @type {WeakMap}
    */
-  static components = new WeakMap();
+  static components /* #__PURE__ */ = new WeakMap();
 }
 
 export default Accordion;

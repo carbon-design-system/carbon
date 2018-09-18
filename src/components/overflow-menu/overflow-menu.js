@@ -237,7 +237,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     }
   }
 
-  static components = new WeakMap();
+  static components /* #__PURE__ */ = new WeakMap();
 
   static get options() {
     const { prefix } = settings;
