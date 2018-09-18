@@ -101,6 +101,8 @@
     padding: 0 $spacing-xl 0 $spacing-md;
     color: $text-02;
     border: none;
+    outline: 1px solid $ui-04;
+    outline-offset: -1px;
   }
 
   .#{$prefix}--text-input ~ .#{$prefix}--label {
@@ -144,7 +146,7 @@
 
   .#{$prefix}--text-input[data-invalid],
   .#{$prefix}--text-input:invalid {
-    outline: 1px solid $support-01;
+    outline: 2px solid $support-01;
     outline-offset: -2px;
     box-shadow: none;
   }
