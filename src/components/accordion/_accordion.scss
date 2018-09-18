@@ -145,7 +145,6 @@
     @include font-family;
     list-style: none;
     width: 100%;
-    // background-color: $ui-01;
   }
 
   .#{$prefix}--accordion__item {
@@ -217,7 +216,6 @@
     height: 0;
     visibility: hidden;
     opacity: 0;
-    // background-color: $ui-02;
 
     p {
       @include typescale('zeta');
