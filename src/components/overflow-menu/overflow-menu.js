@@ -81,7 +81,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       })
     );
     this.manage(
-      on(this.element.ownerDocument, 'keypress', event => {
+      on(this.element.ownerDocument, 'keydown', event => {
         this._handleKeyPress(event);
       })
     );
@@ -99,6 +99,12 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    * @param {Function} callback Callback called when change in state completes.
    */
   changeState(state, detail, callback) {
+    if (state === 'hidden') {
+      this.element.setAttribute('aria-expanded', 'false');
+    } else {
+      this.element.setAttribute('aria-expanded', 'true');
+    }
+
     if (!this.optionMenu) {
       const optionMenu = this.element.querySelector(this.options.selectorOptionMenu);
       if (!optionMenu) {
@@ -156,17 +162,24 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
    */
   _handleKeyPress(event) {
     const key = event.which;
-    if (key === 13) {
-      const { element, optionMenu, options } = this;
+    const { element, optionMenu, options } = this;
+    const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
+
+    if (key === 27) {
+      this.changeState('hidden', getLaunchingDetails(event), () => {
+        if (isOfMenu) {
+          element.focus();
+        }
+      });
+    }
+
+    if (key === 13 || key === 32) {
       const isOfSelf = element.contains(event.target);
-      const isOfMenu = optionMenu && optionMenu.element.contains(event.target);
       const shouldBeOpen = isOfSelf && !element.classList.contains(options.classShown);
       const state = shouldBeOpen ? 'shown' : 'hidden';
 
       if (isOfSelf) {
-        if (element.tagName === 'A') {
-          event.preventDefault();
-        }
+        event.preventDefault();
         event.delegateTarget = element; // eslint-disable-line no-param-reassign
       }
 
