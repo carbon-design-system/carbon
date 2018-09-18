@@ -166,6 +166,8 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
    * @member Modal.options
    * @type {Object}
    * @property {string} selectorInit The CSS class to find modal dialogs.
+   * @property {string} [selectorModalClose] The selector to find elements that close the modal.
+   * @property {string} [selectorPrimaryFocus] The CSS selector to determine the element to put focus when modal gets open.
    * @property {string} attribInitTarget The attribute name in the launcher buttons to find target modal dialogs.
    * @property {string[]} [selectorsFloatingMenu]
    *   The CSS selectors of floating menus.

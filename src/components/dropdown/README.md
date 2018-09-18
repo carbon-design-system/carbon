@@ -55,12 +55,13 @@ dropdownInstance.select(document.getElementById('my-dropdown-link-1'));
 
 #### Options
 
-| Option               | Default Selector        | Description                                                           |
-| -------------------- | ----------------------- | --------------------------------------------------------------------- |
-| selectorInit         | [data-dropdown]         | The selector to find the dropdown component                           |
-| selectorItem         | .bx--dropdown-link      | The selector to find the clickable area in the selected dropdown item |
-| selectorItemSelected | .bx--dropdown--selected | The selector to find the clickable area in the selected dropdown item |
-| classSelected        | bx--dropdown--selected  | The class for the selected dropdown item.                             |
+| Option               | Default Selector              | Description                                                                                      |
+| -------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------ |
+| selectorInit         | [data-dropdown]               | The selector to find the dropdown component                                                      |
+| selectorItem         | .bx--dropdown-link            | The selector to find the clickable area in the selected dropdown item                            |
+| selectorItemSelected | .bx--dropdown--selected       | The selector to find the clickable area in the selected dropdown item                            |
+| selectorItemHidden   | [hidden],[aria-hidden="true"] | The selector to find hidden dropdown items. Used to skip dropdown items for keyboard navigation. |
+| classSelected        | bx--dropdown--selected        | The class for the selected dropdown item.                                                        |
 
 #### Events
 
