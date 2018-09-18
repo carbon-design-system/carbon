@@ -139,16 +139,16 @@ module.exports = {
     sidenav,
   },
   variants: [
-    // {
-    // name: 'Side-nav expanded',
-    // context: {
-    // sidenav: {
-    // state: {
-    // expanded: true,
-    // },
-    // },
-    // },
-    // },
+    {
+      name: 'Side-nav expanded',
+      context: {
+        sidenav: {
+          state: {
+            expanded: true,
+          },
+        },
+      },
+    },
     {
       name: 'Platform nav expanded',
       context: {
