@@ -44,5 +44,18 @@ module.exports = {
         classCloseButton: 'bx--btn--tertiary',
       },
     },
+    {
+      name: 'input',
+      label: 'Input Modal',
+      context: {
+        idSuffix: Math.random()
+          .toString(36)
+          .substr(2),
+        hasInput: true,
+        hasFooter: true,
+        classPrimaryButton: 'bx--btn--primary',
+        classCloseButton: 'bx--btn--secondary',
+      },
+    },
   ],
 };
