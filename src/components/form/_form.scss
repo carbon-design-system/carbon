@@ -181,10 +181,6 @@
     margin-top: $spacing-2xs;
     margin-bottom: $spacing-xs;
   }
-
-  .bx--form-item {
-    margin-bottom: 50px;
-  }
 }
 
 @include exports('form') {

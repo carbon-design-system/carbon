@@ -149,6 +149,10 @@
     outline: 2px solid $support-01;
     outline-offset: -2px;
     box-shadow: none;
+    background: $field-01
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" class="ibm-icons ibm-icons--error--filled"><path fill="#da1e28" d="M6.95 26.66A14 14 0 0 0 26.67 6.93zM16 2A14 14 0 0 0 5.35 25.07L25.08 5.34A13.93 13.93 0 0 0 16 2z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 16px bottom 50%;
   }
 
   .#{$prefix}--text-input[data-invalid] ~ .#{$prefix}--label,
