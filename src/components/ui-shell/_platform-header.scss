@@ -1,6 +1,7 @@
 @import '../../globals/scss/functions';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
 @import 'theme';
 @import 'functions';
 
@@ -12,16 +13,16 @@
     top: 0;
     left: 0;
     right: 0;
-    height: units(6);
+    height: get-fixed-size(6);
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
   }
 
   .#{$prefix}--platform-header__action {
     @include button-reset();
-    width: units(6);
-    height: units(6);
-    border: units(0.5) solid transparent;
+    width: get-fixed-size(6);
+    height: get-fixed-size(6);
+    border: get-fixed-size(0.5) solid transparent;
   }
 
   .#{$prefix}--platform-header__action:hover {
@@ -45,16 +46,15 @@
   }
 
   .#{$prefix}--platform-header__menu-trigger {
-    margin-right: units(1);
+    margin-right: get-fixed-size(1);
   }
 
   //--------------------------------------------------------------------------
   // Platform Header - Name
   //--------------------------------------------------------------------------
   a.#{$prefix}--platform-header__name {
+    @include typescale('zeta');
     text-decoration: none;
-    // TODO: sync type styles
-    font-size: rem(14px);
     font-weight: 600;
     letter-spacing: 0.1px;
     line-height: 20px;
@@ -75,49 +75,75 @@
 
   .#{$prefix}--platform-header__links {
     display: flex;
-    margin-left: units(34);
+    margin-left: get-fixed-size(3);
     height: 100%;
   }
 
   .#{$prefix}--platform-header__link-item {
+    @include typescale('zeta');
+    position: relative;
+    display: flex;
+    align-items: center;
     height: 100%;
+    line-height: 18px;
+    letter-spacing: 0;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 0 get-fixed-size(2);
+    cursor: pointer;
   }
 
   .#{$prefix}--platform-header__link-item:hover {
     background-color: $shell-ui-02;
   }
 
-  a.#{$prefix}--platform-header__link {
+  .#{$prefix}--platform-header__arrow--down,
+  .#{$prefix}--platform-header__arrow--up {
+    fill: $shell-header-text-01;
+    margin-left: get-fixed-size(2);
+  }
+
+  .#{$prefix}--platform-header__arrow--up,
+  .#{$prefix}--platform-header__link-item:hover .#{$prefix}--platform-header__arrow--down {
+    display: none;
+  }
+
+  .#{$prefix}--platform-header__link-item:hover .#{$prefix}--link-item__menu,
+  .#{$prefix}--platform-header__link-item:hover .#{$prefix}--platform-header__arrow--up {
+    display: block;
+  }
+
+  .#{$prefix}--link-item__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: inherit;
+    padding: 0;
+    box-shadow: 0 8px 16px 0 rgba($shell-ui-03, 0.25);
+  }
+
+  .#{$prefix}--link-item__menu-item {
+    width: get-fixed-size(25);
+    height: get-fixed-size(6);
+  }
+
+  .#{$prefix}--link-item__menu-item a {
+    @include typescale('zeta');
     display: flex;
     align-items: center;
     height: 100%;
-
-    // TODO: sync type styles
-    font-size: rem(14px);
     line-height: 18px;
     letter-spacing: 0;
     text-decoration: none;
     font-weight: 400;
-
-    padding: 0 units(2);
-    border: units(0.5) solid transparent;
-  }
-
-  a.#{$prefix}--platform-header__link,
-  a.#{$prefix}--platform-header__link:hover {
     color: $shell-header-text-01;
+    padding: 0 get-fixed-size(2);
   }
 
-  a.#{$prefix}--platform-header__link:active {
-    background-color: $shell-ui-02;
-  }
-
-  // Safari: use the active style for links to simulate the focus
-  // styles since links in safari don't display the focus styles.
-  a.#{$prefix}--platform-header__link:active,
-  a.#{$prefix}--platform-header__link:focus {
-    border-color: $shell-brand-01;
-    outline: none;
+  .#{$prefix}--link-item__menu-item a:hover {
+    background-color: $shell-header-bg-04;
+    color: $shell-header-text-01;
   }
 
   //--------------------------------------------------------------------------
@@ -136,3 +162,36 @@
     @include platform-header;
   }
 }
+
+// a.#{$prefix}--platform-header__link {
+//   display: flex;
+//   align-items: center;
+//   height: 100%;
+
+//   // TODO: sync type styles
+//   font-size: rem(14px);
+//   line-height: 18px;
+//   letter-spacing: 0;
+//   text-decoration: none;
+//   font-weight: 400;
+
+//   padding: 0 get-fixed-size(2);
+//   border: get-fixed-size(0.5) solid transparent;
+// }
+
+// a.#{$prefix}--platform-header__link,
+// a.#{$prefix}--platform-header__link:hover {
+//   color: $shell-header-text-01;
+// }
+
+// a.#{$prefix}--platform-header__link:active {
+//   background-color: $shell-ui-02;
+// }
+
+// // Safari: use the active style for links to simulate the focus
+// // styles since links in safari don't display the focus styles.
+// a.#{$prefix}--platform-header__link:active,
+// a.#{$prefix}--platform-header__link:focus {
+//   border-color: $shell-brand-01;
+//   outline: none;
+// }
