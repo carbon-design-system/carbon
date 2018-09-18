@@ -324,6 +324,7 @@ class RootPage extends Component {
   }
 
   render() {
+    const { portSassBuild } = this.props;
     const { componentItems, isComponentsX } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
@@ -341,6 +342,7 @@ class RootPage extends Component {
             id="theme-switcher"
             className="demo--theme-switcher"
             ariaLabel="Theme switcher"
+            disabled={!portSassBuild}
             toggled={isComponentsX}
             onChange={this._switchExperimental}
           />
