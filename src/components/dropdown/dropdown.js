@@ -128,7 +128,11 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       return items[handleUnderflow(handleOverflow(index, items.length), items.length)];
     };
     for (let current = getNextItem(start); current && current !== start; current = getNextItem(current)) {
-      if (!current.matches(this.options.selectorItemSelected)) {
+      if (
+        !current.matches(this.options.selectorItemHidden) &&
+        !current.parentNode.matches(this.options.selectorItemHidden) &&
+        !current.matches(this.options.selectorItemSelected)
+      ) {
         current.focus();
         break;
       }
@@ -201,6 +205,9 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
    * @property {string} [selectorText] The CSS selector to find the element showing the selected item.
    * @property {string} [selectorTextInner] The CSS selector to find the element showing the selected item, used for inline mode.
    * @property {string} [selectorItem] The CSS selector to find clickable areas in dropdown items.
+   * @property {string} [selectorItemHidden]
+   *   The CSS selector to find hidden dropdown items.
+   *   Used to skip dropdown items for keyboard navigation.
    * @property {string} [selectorItemSelected] The CSS selector to find the clickable area in the selected dropdown item.
    * @property {string} [classSelected] The CSS class for the selected dropdown item.
    * @property {string} [classOpen] The CSS class for the open state.
@@ -218,6 +225,7 @@ class Dropdown extends mixin(createComponent, initComponentBySearch, trackBlur) 
       selectorTextInner: `.${prefix}--dropdown-text__inner`,
       selectorItem: `.${prefix}--dropdown-link`,
       selectorItemSelected: `.${prefix}--dropdown--selected`,
+      selectorItemHidden: `[hidden],[aria-hidden="true"]`,
       classSelected: `${prefix}--dropdown--selected`,
       classOpen: `${prefix}--dropdown--open`,
       classDisabled: `${prefix}--dropdown--disabled`,
