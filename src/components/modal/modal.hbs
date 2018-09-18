@@ -15,16 +15,23 @@
     </div>
 
     <div class="bx--modal-content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue vitae
-        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
-        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+      {{#if hasInput}}
+        <div class="bx--form-item">
+          <label for="text-input-{{idSuffix}}" class="bx--label">Text Input label</label>
+          <input id="text-input-{{idSuffix}}" type="text" class="bx--text-input" placeholder="Optional placeholder text" data-modal-primary-focus>
+        </div>
+      {{else}}
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue vitae
+          tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla facilisi.
+          Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+      {{/if}}
     </div>
 
     {{#if hasFooter}}
     <div class="bx--modal-footer">
       <button class="bx--btn {{classCloseButton}}" type="button" data-modal-close>Secondary button</button>
       <button class="bx--btn {{classPrimaryButton}}" type="button" {{#if labelPrimaryButton}}aria-label="{{labelPrimaryButton}}"
-        {{/if}} data-modal-primary-focus>Primary button</button>
+        {{/if}}{{#unless hasInput}} data-modal-primary-focus{{/unless}}>Primary button</button>
     </div>
     {{/if}}
   </div>
