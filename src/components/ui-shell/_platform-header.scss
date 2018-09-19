@@ -45,15 +45,15 @@
     fill: $shell-header-icon-01;
   }
 
-  .#{$prefix}--platform-header__menu-trigger {
-    margin-right: get-fixed-size(1);
-  }
-
   //--------------------------------------------------------------------------
   // Platform Header - Name
   //--------------------------------------------------------------------------
   a.#{$prefix}--platform-header__name {
     @include typescale('zeta');
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 get-fixed-size(2);
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.1px;
@@ -66,6 +66,11 @@
     color: $shell-header-text-01;
   }
 
+  a.#{$prefix}--platform-header__name:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 4px $shell-brand-01;
+  }
+
   //--------------------------------------------------------------------------
   // Platform Header - Navigation
   //--------------------------------------------------------------------------
@@ -75,13 +80,13 @@
 
   .#{$prefix}--platform-header__links {
     display: flex;
-    margin-left: get-fixed-size(3);
+    margin-left: get-fixed-size(1);
     height: 100%;
   }
 
-  .#{$prefix}--platform-header__link-item,
+  .#{$prefix}--platform-header__dropdown-item,
   a.#{$prefix}--platform-header__link,
-  .#{$prefix}--link-item__menu-item a {
+  .#{$prefix}--dropdown-item__menu-item a {
     @include typescale('zeta');
     position: relative;
     display: flex;
@@ -95,12 +100,13 @@
     cursor: pointer;
   }
 
-  .#{$prefix}--platform-header__link-item:hover,
+  .#{$prefix}--platform-header__dropdown-item:hover,
   a.#{$prefix}--platform-header__link:hover {
     background-color: $shell-ui-02;
   }
 
-  .#{$prefix}--platform-header__link-item:focus {
+  .#{$prefix}--platform-header__dropdown-item:focus,
+  .#{$prefix}--dropdown-item__menu-item a:focus {
     outline: none;
     box-shadow: inset 0 0 0 4px $shell-brand-01;
   }
@@ -112,35 +118,38 @@
   }
 
   .#{$prefix}--platform-header__arrow--up,
-  .#{$prefix}--platform-header__link-item:hover .#{$prefix}--platform-header__arrow--down {
+  .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--platform-header__arrow--down,
+  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--platform-header__arrow--down {
     display: none;
   }
 
-  .#{$prefix}--platform-header__link-item:hover .#{$prefix}--link-item__menu,
-  .#{$prefix}--platform-header__link-item:hover .#{$prefix}--platform-header__arrow--up {
+  .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--dropdown-item__menu,
+  .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--platform-header__arrow--up,
+  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--dropdown-item__menu,
+  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--platform-header__arrow--up {
     display: block;
   }
 
-  .#{$prefix}--link-item__menu {
+  .#{$prefix}--dropdown-item__menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background: inherit;
+    background-color: $shell-ui-02;
     padding: 0;
     box-shadow: 0 8px 16px 0 rgba($shell-ui-03, 0.25);
   }
 
-  .#{$prefix}--link-item__menu-item {
+  .#{$prefix}--dropdown-item__menu-item {
     width: get-fixed-size(25);
     height: get-fixed-size(6);
   }
 
-  .#{$prefix}--link-item__menu-item a {
+  .#{$prefix}--dropdown-item__menu-item a {
     color: $shell-header-text-01;
   }
 
-  .#{$prefix}--link-item__menu-item a:hover {
+  .#{$prefix}--dropdown-item__menu-item a:hover {
     background-color: $shell-header-bg-04;
     color: $shell-header-text-01;
   }
