@@ -79,7 +79,9 @@
     height: 100%;
   }
 
-  .#{$prefix}--platform-header__link-item {
+  .#{$prefix}--platform-header__link-item,
+  a.#{$prefix}--platform-header__link,
+  .#{$prefix}--link-item__menu-item a {
     @include typescale('zeta');
     position: relative;
     display: flex;
@@ -93,8 +95,14 @@
     cursor: pointer;
   }
 
-  .#{$prefix}--platform-header__link-item:hover {
+  .#{$prefix}--platform-header__link-item:hover,
+  a.#{$prefix}--platform-header__link:hover {
     background-color: $shell-ui-02;
+  }
+
+  .#{$prefix}--platform-header__link-item:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 4px $shell-brand-01;
   }
 
   .#{$prefix}--platform-header__arrow--down,
@@ -129,21 +137,33 @@
   }
 
   .#{$prefix}--link-item__menu-item a {
-    @include typescale('zeta');
-    display: flex;
-    align-items: center;
-    height: 100%;
-    line-height: 18px;
-    letter-spacing: 0;
-    text-decoration: none;
-    font-weight: 400;
     color: $shell-header-text-01;
-    padding: 0 get-fixed-size(2);
   }
 
   .#{$prefix}--link-item__menu-item a:hover {
     background-color: $shell-header-bg-04;
     color: $shell-header-text-01;
+  }
+
+  a.#{$prefix}--platform-header__link {
+    border: get-fixed-size(0.5) solid transparent;
+  }
+
+  a.#{$prefix}--platform-header__link,
+  a.#{$prefix}--platform-header__link:hover {
+    color: $shell-header-text-01;
+  }
+
+  a.#{$prefix}--platform-header__link:active {
+    background-color: $shell-ui-02;
+  }
+
+  // Safari: use the active style for links to simulate the focus
+  // styles since links in safari don't display the focus styles.
+  a.#{$prefix}--platform-header__link:active,
+  a.#{$prefix}--platform-header__link:focus {
+    border-color: $shell-brand-01;
+    outline: none;
   }
 
   //--------------------------------------------------------------------------
@@ -162,36 +182,3 @@
     @include platform-header;
   }
 }
-
-// a.#{$prefix}--platform-header__link {
-//   display: flex;
-//   align-items: center;
-//   height: 100%;
-
-//   // TODO: sync type styles
-//   font-size: rem(14px);
-//   line-height: 18px;
-//   letter-spacing: 0;
-//   text-decoration: none;
-//   font-weight: 400;
-
-//   padding: 0 get-fixed-size(2);
-//   border: get-fixed-size(0.5) solid transparent;
-// }
-
-// a.#{$prefix}--platform-header__link,
-// a.#{$prefix}--platform-header__link:hover {
-//   color: $shell-header-text-01;
-// }
-
-// a.#{$prefix}--platform-header__link:active {
-//   background-color: $shell-ui-02;
-// }
-
-// // Safari: use the active style for links to simulate the focus
-// // styles since links in safari don't display the focus styles.
-// a.#{$prefix}--platform-header__link:active,
-// a.#{$prefix}--platform-header__link:focus {
-//   border-color: $shell-brand-01;
-//   outline: none;
-// }

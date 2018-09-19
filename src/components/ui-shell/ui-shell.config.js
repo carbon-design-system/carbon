@@ -36,6 +36,26 @@ const header = {
   ],
 };
 
+const headernav = {
+  name: 'IBM [Platform]',
+  links: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'L1 link 1',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'L1 link 2',
+    },
+    {
+      title: 'L1 link 3',
+    },
+    {
+      title: 'L1 link 4',
+    },
+  ],
+};
+
 const sidenav = {
   state: {
     expanded: false,
@@ -126,6 +146,7 @@ module.exports = {
   },
   context: {
     header,
+    headernav,
     nav,
     sidenav,
   },
