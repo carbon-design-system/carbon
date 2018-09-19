@@ -213,11 +213,11 @@
     @include font-family;
     @include font-smoothing;
     @include typescale('zeta');
-    line-height: 1.25rem;
+    line-height: 1.5rem;
     position: relative;
     display: flex;
     cursor: pointer;
-    padding-left: rem(24px);
+    padding-left: rem(28px);
     min-height: rem(24px);
     user-select: none;
   }
@@ -230,8 +230,8 @@
     // According to the spec, we'll want the bounding box for our checkbox to
     // be 16px. The border size will be what will be updated during the
     // different checkbox states.
-    width: rem(12px);
-    height: rem(12px);
+    width: rem(16px);
+    height: rem(16px);
     margin: rem(2px);
 
     // We need to position the pseudo-element absolutely in the space that we've
@@ -250,25 +250,16 @@
   .#{$prefix}--checkbox-label::after {
     content: '';
     position: absolute;
-    left: rem(5px);
-    top: rem(7px);
-    width: rem(6px);
+    left: rem(6px);
+    top: rem(8px);
+    width: rem(7px);
     height: rem(3px);
     background: none;
-    border-left: 1px solid $ui-02;
-    border-bottom: 1px solid $ui-02;
+    border-left: 2px solid $ui-02;
+    border-bottom: 2px solid $ui-02;
     transform: scale(0) rotate(-45deg);
     transform-origin: bottom right;
     margin-top: rem(-3px);
-  }
-
-  //----------------------------------------------
-  // Hover
-  // ---------------------------------------------
-
-  // Hover color for border
-  .#{$prefix}--checkbox-wrapper:hover .#{$prefix}--checkbox-label::before {
-    border-color: $ibm-colors__gray--70;
   }
 
   //----------------------------------------------
@@ -277,8 +268,7 @@
 
   // Update border color and width for focus
   .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox-label__focus::before,
-  .#{$prefix}--checkbox-wrapper:hover .#{$prefix}--checkbox-label__focus::before {
+  .#{$prefix}--checkbox-label__focus::before {
     border-color: $brand-01;
     border-width: 3px;
   }
@@ -286,7 +276,6 @@
   // Handle case of checked and focused
   .#{$prefix}--checkbox:checked:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'].#{$prefix}--checkbox-label__focus::before {
-    background-color: $brand-01;
     border-color: $brand-01;
   }
 
@@ -316,15 +305,16 @@
     transform: scale(1) rotate(0deg);
     border-left: 0 solid $inverse-01;
     border-bottom: 1.5px solid $inverse-01;
-    width: rem(6px);
-    top: rem(9.25px);
+    width: rem(8px);
+    top: rem(11px);
   }
 
   //----------------------------------------------
   // Disabled
   // ---------------------------------------------
 
-  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label {
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
+  .#{$prefix}--checkbox-label--disabled {
     cursor: not-allowed;
     color: $text-03;
   }
