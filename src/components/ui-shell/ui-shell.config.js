@@ -119,6 +119,45 @@ const nav = {
   ],
 };
 
+const switcher = {
+  state: {
+    expanded: false,
+    showAll: false,
+  },
+  links: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'My Product',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'My Product 2',
+    },
+  ],
+  allLinks: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+  ],
+};
+
 module.exports = {
   preview: 'ui-shell-preview',
   meta: {
@@ -142,33 +181,11 @@ module.exports = {
       },
     },
     {
-      name: 'Switcher Expanded Default',
-      context: {
-        switcher: {
-          state: {
-            expanded: true,
-            showAll: false,
-          },
-        },
-      },
-    },
-    {
       name: 'Platform nav expanded',
       context: {
         nav: {
           state: {
             expanded: true,
-          },
-        },
-      },
-    },
-    {
-      name: 'Switcher All Products',
-      context: {
-        switcher: {
-          state: {
-            expanded: true,
-            showAll: true,
           },
         },
       },
@@ -180,6 +197,28 @@ module.exports = {
           state: {
             expanded: true,
             category: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'Switcher Expanded Default',
+      context: {
+        switcher: {
+          state: {
+            expanded: true,
+            showAll: false,
+          },
+        },
+      },
+    },
+    {
+      name: 'Switcher All Products',
+      context: {
+        switcher: {
+          state: {
+            expanded: true,
+            showAll: true,
           },
         },
       },
