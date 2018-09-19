@@ -21,6 +21,12 @@ Platform Navigation has the following cases for configuration:
   - Category with icon and category item
   - Category with icon and category item selected
 
+## Side navigation
+
+### Title bar
+
+![Spec](https://user-images.githubusercontent.com/3901764/45775998-1b1daf00-bc17-11e8-95a0-a0d9ca5d1f2a.png)
+
 ## Tokens
 
 ## Header & header-panel
