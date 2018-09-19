@@ -28,10 +28,13 @@
     background-color: $shell-ui-02;
   }
 
+  .#{$prefix}--platform-header__action--active,
+  .#{$prefix}--platform-header__action--active:hover,
   .#{$prefix}--platform-header__action:active {
     background-color: $shell-brand-01;
   }
 
+  .#{$prefix}--platform-header__action--active,
   .#{$prefix}--platform-header__action:focus {
     border-color: $shell-brand-01;
     outline: none;
@@ -50,12 +53,15 @@
   //--------------------------------------------------------------------------
   a.#{$prefix}--platform-header__name {
     text-decoration: none;
-    // TODO: sync type styles
     font-size: rem(14px);
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.1px;
     line-height: 20px;
     user-select: none;
+  }
+
+  .#{$prefix}--platform-header__platform-name {
+    font-weight: 600;
   }
 
   a.#{$prefix}--platform-header__name,
@@ -72,7 +78,7 @@
 
   .#{$prefix}--platform-header__links {
     display: flex;
-    margin-left: units(34);
+    margin-left: units(3);
     height: 100%;
   }
 
