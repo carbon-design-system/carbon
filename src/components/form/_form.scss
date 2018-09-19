@@ -111,15 +111,10 @@
     align-items: flex-start;
   }
 
-  .#{$prefix}--form-item--light input,
-  .#{$prefix}--form-item--light input[type='number'] {
-    background: $field-02 !important;
-  }
-
   .#{$prefix}--label {
     @include reset;
     @include font-family;
-    @include typescale('zeta');
+    @include typescale('omega');
     color: $text-01;
     font-weight: $input-label-weight;
     display: inline-block;
@@ -132,7 +127,8 @@
   }
 
   .#{$prefix}--label--disabled {
-    opacity: 0.5;
+    color: $text-disabled;
+    cursor: not-allowed;
   }
 
   // Skeleton State
