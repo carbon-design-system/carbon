@@ -61,7 +61,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   }
 
   /**
-   * A flag to detect if `oncontextmenu` event is fired right before `focus`/`blur` events.
+   * A flag to detect if `oncontextmenu` event is fired right before `mouseover`/`mouseout`/`focus`/`blur` events.
    * @type {boolean}
    */
   _hasContextMenu = false;
@@ -71,7 +71,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    * @type {Function}
    * @private
    */
-  _debouncedHandleClick = debounce(this._handleClick, 200);
+  _debouncedHandleClickHover = debounce(this._handleClickHover, 200);
 
   /**
    * A method called when this widget is created upon events.
@@ -79,7 +79,13 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
    */
   createdByEvent(event) {
     const { relatedTarget, type } = event;
-    this._debouncedHandleClick({ relatedTarget, type: type === 'focusin' ? 'focus' : type, details: getLaunchingDetails(event) });
+    if (this.element.hasAttribute(this.options.attribSupportsHover) || type !== 'mouseover') {
+      this._debouncedHandleClickHover({
+        relatedTarget,
+        type: type === 'focusin' ? 'focus' : type,
+        details: getLaunchingDetails(event),
+      });
+    }
   }
 
   /**
@@ -118,21 +124,23 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   _hookOn(element) {
     const hasFocusin = 'onfocusin' in window;
     const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-    [focusinEventName, 'blur', 'touchleave', 'touchcancel'].forEach(name => {
+    ['mouseover', 'mouseout', focusinEventName, 'blur', 'touchleave', 'touchcancel'].forEach(name => {
       this.manage(
         on(
           element,
           name,
           event => {
             const { relatedTarget, type } = event;
-            const hadContextMenu = this._hasContextMenu;
-            this._hasContextMenu = type === 'contextmenu';
-            this._debouncedHandleClick({
-              relatedTarget,
-              type: type === 'focusin' ? 'focus' : type,
-              hadContextMenu,
-              details: getLaunchingDetails(event),
-            });
+            if (this.element.hasAttribute(this.options.attribSupportsHover) || ['mouseover', 'mouseout'].indexOf(type) < 0) {
+              const hadContextMenu = this._hasContextMenu;
+              this._hasContextMenu = type === 'contextmenu';
+              this._debouncedHandleClickHover({
+                relatedTarget,
+                type: type === 'focusin' ? 'focus' : type,
+                hadContextMenu,
+                details: getLaunchingDetails(event),
+              });
+            }
           },
           name === focusinEventName && !hasFocusin
         )
@@ -141,16 +149,21 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   }
 
   /**
-   * Handles click/focus events.
+   * Handles click/hover/focus events.
    * @param {Object} params The parameters.
-   * @param {Element} params.relatedTarget The element that focus went to. (For `blur` event)
+   * @param {Element} params.relatedTarget
+   *   For `mouseover` event, indicates where the mouse pointer is gone.
+   *   For `blur` event, the element that focus went to.
    * @param {string} params.type The event type triggering this method.
    * @param {boolean} params.hadContextMenu
+   *   `true` if `oncontextmenu` event is fired right before `mouseover`/`mouseout`, etc. events.
    * @param {Object} params.details The event details.
    * @private
    */
-  _handleClick({ relatedTarget, type, hadContextMenu, details }) {
+  _handleClickHover({ relatedTarget, type, hadContextMenu, details }) {
     const state = {
+      mouseover: 'shown',
+      mouseout: 'hidden',
       focus: 'shown',
       blur: 'hidden',
       touchleave: 'hidden',
@@ -158,7 +171,7 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
     }[type];
 
     let shouldPreventClose;
-    if (type === 'blur') {
+    if (type === 'blur' || type === 'mouseout') {
       // Note: SVGElement in IE11 does not have `.contains()`
       const wentToSelf =
         (relatedTarget && (this.element.contains && this.element.contains(relatedTarget))) ||
@@ -177,9 +190,10 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
     return {
       selectorInit: '[data-tooltip-trigger]',
       classShown: `${prefix}--tooltip--shown`,
+      attribSupportsHover: 'data-tooltip-supports-hover',
       attribTooltipTarget: 'data-tooltip-target',
       objMenuOffset: getMenuOffset,
-      initEventNames: ['focus'],
+      initEventNames: ['mouseover', 'focus'],
     };
   }
 }
