@@ -130,6 +130,7 @@
 
   .#{$prefix}--app-link__name {
     @include typescale('zeta');
+    margin-left: 0.25rem;
     font-weight: 400;
     color: $shell-header-text-02;
   }
@@ -138,7 +139,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     width: get-fixed-size(4);
@@ -160,6 +161,11 @@
 
   .#{$prefix}--overflow-menu-options__option:hover {
     background: $shell-header-bg-03;
+  }
+
+  .#{$prefix}--app-list__item:hover .#{$prefix}--overflow-menu,
+  .#{$prefix}--app-link:focus .#{$prefix}--overflow-menu {
+    display: flex;
   }
 }
 
