@@ -80,14 +80,14 @@
   }
 
   .#{$prefix}--breadcrumb-item {
-    margin-right: $spacing-md;
+    margin-right: $spacing-xs;
     display: flex;
     align-items: center;
   }
 
   .#{$prefix}--breadcrumb-item::after {
     content: '/';
-    margin-left: $spacing-md;
+    margin-left: $spacing-xs;
     color: $text-02;
   }
 
@@ -105,15 +105,9 @@
 
   .#{$prefix}--breadcrumb .#{$prefix}--link {
     white-space: nowrap;
-    font-weight: 400;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
 
     &:hover,
     &:focus {
-      outline: none;
-      color: $hover-primary-text;
-      border-bottom: 1px solid $hover-primary-text;
     }
   }
 
