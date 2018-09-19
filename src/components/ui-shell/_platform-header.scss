@@ -55,10 +55,14 @@
     height: 100%;
     padding: 0 get-fixed-size(2);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.1px;
     line-height: 20px;
     user-select: none;
+  }
+
+  .#{$prefix}--platform-header__platform-name {
+    font-weight: 600;
   }
 
   a.#{$prefix}--platform-header__name,
@@ -80,7 +84,11 @@
 
   .#{$prefix}--platform-header__links {
     display: flex;
-    margin-left: get-fixed-size(1);
+    margin-left: units(1);
+    height: 100%;
+  }
+
+  .#{$prefix}--platform-header__link-item {
     height: 100%;
   }
 
