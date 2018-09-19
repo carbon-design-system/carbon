@@ -164,41 +164,6 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     fill: $shell-side-nav-icon-01;
   }
 
-  // .#{$prefix}--side-nav__header {
-  // display: flex;
-  // align-items: center;
-  // }
-
-  // .#{$prefix}--side-nav__header-title {
-  // font-size: rem(14px);
-  // font-weight: 400;
-  // letter-spacing: 0.1px;
-  // line-height: rem(32px);
-  // margin-left: get-fixed-size(1);
-  // user-select: none;
-  // opacity: 0;
-  // }
-
-  // .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__header-title,
-  // .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__header-title {
-  // opacity: 1;
-  // }
-
-  //----------------------------------------------------------------------------
-  // Divider
-  //----------------------------------------------------------------------------
-  .#{$prefix}--side-nav__divider {
-    width: get-fixed-size(2);
-    height: 1px;
-    background-color: $shell-side-nav-bg-02;
-    margin: 0 get-fixed-size(2) get-fixed-size(1);
-  }
-
-  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__divider,
-  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__divider {
-    width: unset;
-  }
-
   //----------------------------------------------------------------------------
   // Nav
   //----------------------------------------------------------------------------
