@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+'use strict';
+
 const { prefix } = require('../../globals/js/settings');
 
 const navigationMenu = {
@@ -17,14 +19,14 @@ const navigationMenu = {
         {
           type: 'link',
           title: 'Item link',
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           // href: '/component/ui-shell--platform-navigation-expanded',
           hasIcon: true,
         },
         {
           type: 'link',
           title: 'Item link',
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           // href: '/component/ui-shell--platform-navigation-expanded',
           hasIcon: true,
         },
@@ -35,7 +37,7 @@ const navigationMenu = {
         {
           type: 'link',
           title: 'Item link',
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           // href: '/component/ui-shell--platform-navigation-expanded',
           hasIcon: true,
           active: true,
@@ -43,14 +45,14 @@ const navigationMenu = {
         {
           type: 'link',
           title: 'Item link',
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           // href: '/component/ui-shell--platform-navigation-expanded',
           hasIcon: true,
         },
         {
           type: 'link',
           title: 'Item link',
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           // href: '/component/ui-shell--platform-navigation-expanded',
           hasIcon: true,
         },
@@ -61,18 +63,18 @@ const navigationMenu = {
           links: [
             {
               title: 'Nested link',
-              href: 'javascript:void(0)',
+              href: 'javascript:void(0)', // eslint-disable-line no-script-url
               // href: '/component/ui-shell--platform-navigation-expanded',
             },
             {
               title: 'Nested link',
-              href: 'javascript:void(0)',
+              href: 'javascript:void(0)', // eslint-disable-line no-script-url
               // href: '/component/ui-shell--platform-navigation-expanded',
               active: true,
             },
             {
               title: 'Nested link',
-              href: 'javascript:void(0)',
+              href: 'javascript:void(0)', // eslint-disable-line no-script-url
               // href: '/component/ui-shell--platform-navigation-expanded',
             },
           ],
@@ -92,33 +94,33 @@ const switcher = {
   },
   links: [
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'My Product',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'My Product 2',
     },
   ],
   allLinks: [
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'All Products',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'All Products',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'All Products',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'All Products',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'All Products',
     },
   ],
@@ -132,19 +134,19 @@ const header = {
   platform: '[Platform]',
   links: [
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'L1 link 1',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'L1 link 2',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'L1 link 3',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'L1 link 4',
     },
   ],
@@ -168,11 +170,11 @@ const header = {
   ],
   navLinks: [
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'L1 link 1',
     },
     {
-      href: 'javascript:void(0)',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
       title: 'L1 link 2',
     },
     {
@@ -182,15 +184,15 @@ const header = {
       },
       items: [
         {
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           title: 'Link 1',
         },
         {
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           title: 'Link 2',
         },
         {
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           title: 'Ipsum architecto voluptatem',
         },
       ],
@@ -202,21 +204,34 @@ const header = {
       },
       items: [
         {
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           title: 'Link 1',
         },
         {
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           title: 'Link 2',
         },
         {
-          href: 'javascript:void(0)',
+          href: 'javascript:void(0)', // eslint-disable-line no-script-url
           title: 'Ipsum architecto voluptatem',
         },
       ],
     },
   ],
 };
+
+function createSidebarLinks(count, activeIndex) {
+  return Array.from({ length: count }, (_, i) => {
+    const link = {
+      title: 'Nested link',
+      href: 'javascript:void(0)', // eslint-disable-line no-script-url
+    };
+    if (i === activeIndex) {
+      link.active = true;
+    }
+    return link;
+  });
+}
 
 const sidenav = {
   state: {
@@ -293,16 +308,3 @@ module.exports = {
     },
   ],
 };
-
-function createSidebarLinks(count, activeIndex) {
-  return Array.from({ length: count }, (_, i) => {
-    const link = {
-      title: 'Nested link',
-      href: 'javascript:void(0)',
-    };
-    if (i === activeIndex) {
-      link.active = true;
-    }
-    return link;
-  });
-}

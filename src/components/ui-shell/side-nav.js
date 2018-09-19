@@ -22,6 +22,7 @@ export default class SideNav extends mixin(createComponent, initComponentBySearc
    * @type {WeakMap}
    */
   static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
+
   constructor(element, options) {
     super(element, options);
     this.manage(on(element, 'click', this._handleClick));
