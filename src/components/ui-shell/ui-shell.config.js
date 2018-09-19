@@ -36,19 +36,6 @@ const header = {
   ],
 };
 
-function createSidebarLinks(count, activeIndex) {
-  return Array.from({ length: count }, (_, i) => {
-    const link = {
-      title: 'L3 link',
-      href: '/component/ui-shell--default',
-    };
-    if (i === activeIndex) {
-      link.active = true;
-    }
-    return link;
-  });
-}
-
 const sidenav = {
   state: {
     expanded: false,
@@ -73,15 +60,78 @@ const sidenav = {
   ],
 };
 
+const nav = {
+  state: {
+    expanded: false,
+  },
+  sections: [
+    {
+      items: [
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+      ],
+    },
+    {
+      items: [
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+        {
+          type: 'link',
+          title: 'L1 link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+        },
+        {
+          type: 'category',
+          title: 'L1 category',
+          links: [
+            {
+              title: 'L2 link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+            },
+            {
+              title: 'L2 link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+            },
+            {
+              title: 'L2 link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 module.exports = {
   preview: 'ui-shell-preview',
+  meta: {
+    xVersionOnly: true,
+  },
   context: {
     header,
+    nav,
     sidenav,
   },
   variants: [
     {
-      name: 'expanded',
+      name: 'Side-nav expanded',
       context: {
         sidenav: {
           state: {
@@ -90,5 +140,39 @@ module.exports = {
         },
       },
     },
+    {
+      name: 'Platform nav expanded',
+      context: {
+        nav: {
+          state: {
+            expanded: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'Platform nav category expanded',
+      context: {
+        nav: {
+          state: {
+            expanded: true,
+            category: true,
+          },
+        },
+      },
+    },
   ],
 };
+
+function createSidebarLinks(count, activeIndex) {
+  return Array.from({ length: count }, (_, i) => {
+    const link = {
+      title: 'L3 link',
+      href: '/component/ui-shell--default',
+    };
+    if (i === activeIndex) {
+      link.active = true;
+    }
+    return link;
+  });
+}
