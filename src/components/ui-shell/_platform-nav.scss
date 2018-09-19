@@ -137,7 +137,7 @@
   .#{$prefix}--platform__category-item > a.#{$prefix}--platform__nav-link {
     display: flex;
     align-items: center;
-    min-height: get-fixed-size(5);
+    min-height: get-fixed-size(4);
     padding-left: get-fixed-size(4);
   }
 
