@@ -283,7 +283,9 @@ export default class DatePicker extends Component {
     ) {
       this.cal.destroy();
     }
-    this.inputField.removeEventListener('change', this.onChange);
+    if (this.inputField) {
+      this.inputField.removeEventListener('change', this.onChange);
+    }
     if (this.toInputField) {
       this.toInputField.removeEventListener('change', this.onChange);
     }
@@ -296,13 +298,14 @@ export default class DatePicker extends Component {
   };
 
   addKeyboardEvents = cal => {
-    const input = this.inputField;
-    input.addEventListener('keydown', e => {
-      if (e.which === 40) {
-        cal.calendarContainer.focus();
-      }
-    });
-    input.addEventListener('change', this.onChange);
+    if (this.inputField) {
+      this.inputField.addEventListener('keydown', e => {
+        if (e.which === 40) {
+          cal.calendarContainer.focus();
+        }
+      });
+      this.inputField.addEventListener('change', this.onChange);
+    }
     if (this.toInputField) {
       this.toInputField.addEventListener('blur', () => {
         this.cal.close();
