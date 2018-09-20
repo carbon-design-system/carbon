@@ -17,6 +17,8 @@ l10n.en.weekdays.shorthand.forEach((day, index) => {
   }
 });
 
+const forEach = Array.prototype.forEach;
+
 export default class DatePicker extends Component {
   static propTypes = {
     /**
@@ -347,14 +349,15 @@ export default class DatePicker extends Component {
       calendarContainer
         .querySelector('.flatpickr-days')
         .classList.add('bx--date-picker__days');
-      [...calendarContainer.querySelectorAll('.flatpickr-weekday')].forEach(
+      forEach.call(
+        calendarContainer.querySelectorAll('.flatpickr-weekday'),
         item => {
           const currentItem = item;
           currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
           currentItem.classList.add('bx--date-picker__weekday');
         }
       );
-      [...daysContainer.querySelectorAll('.flatpickr-day')].forEach(item => {
+      forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), item => {
         item.classList.add('bx--date-picker__day');
         if (
           item.classList.contains('today') &&
