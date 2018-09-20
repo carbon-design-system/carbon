@@ -74,8 +74,7 @@
     }
 
     &[aria-disabled='true'][tabindex='-1'] {
-      // pointer-events: none;
-      color: $ibm-colors__gray--30;
+      color: $text-disabled;
       cursor: not-allowed;
       &:hover {
         box-shadow: none;
