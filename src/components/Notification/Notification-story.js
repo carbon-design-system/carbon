@@ -46,17 +46,23 @@ storiesOf('Notifications', module)
       </div>
     ))
   )
-  .add('Toast', () => (
-    <div>
-      <ToastNotification
-        {...notificationProps()}
-        caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
-        style={{ minWidth: '30rem', marginBottom: '.5rem' }}
-      />
-    </div>
-  ))
-  .add('inline', () => (
-    <div>
-      <InlineNotification {...notificationProps()} />
-    </div>
-  ));
+  .add(
+    'Toast',
+    withInfo()(() => (
+      <div>
+        <ToastNotification
+          {...notificationProps()}
+          caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+          style={{ minWidth: '30rem', marginBottom: '.5rem' }}
+        />
+      </div>
+    ))
+  )
+  .add(
+    'inline',
+    withInfo()(() => (
+      <div>
+        <InlineNotification {...notificationProps()} />
+      </div>
+    ))
+  );
