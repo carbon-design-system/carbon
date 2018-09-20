@@ -229,12 +229,7 @@
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
-    // .#{$prefix}--accordion__heading {
-    //   background-color: $ibm-colors__gray--20;
-    // }
-
     .#{$prefix}--accordion__content {
-      // padding-top: $spacing-md;
       padding-bottom: $spacing-lg;
       height: auto;
       visibility: visible;
