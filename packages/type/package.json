@@ -1,23 +1,15 @@
 {
-  "name": "@carbon/colors",
+  "name": "@carbon/type",
   "version": "0.0.1-alpha.0",
   "main": "src/index.js",
   "license": "Apache-2.0",
-  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/colors",
+  "repository": "https://github.com/IBM/carbon-elements/tree/master/packages/type",
   "bugs": "https://github.com/IBM/carbon-elements/issues",
   "keywords": [
     "eyeglass-module"
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "build": "node tasks/build.js"
-  },
-  "devDependencies": {
-    "fs-extra": "^7.0.0",
-    "node-sass": "^4.9.3",
-    "prettier": "^1.14.2"
   },
   "eyeglass": {
     "exports": false,

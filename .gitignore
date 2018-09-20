@@ -1,6 +1,7 @@
 # Build folders
 /build
 packages/*/build/
+packages/*/examples/*/build/
 es
 lib
 dist

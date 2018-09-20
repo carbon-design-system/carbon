@@ -1,0 +1,132 @@
+@import 'font-families';
+@import 'scale';
+
+$heading: (
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 400,
+    font-size: get-type-size(2),
+    line-height: rem(18px),
+    letter-spacing: '0.01rem',
+  ),
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 400,
+    font-size: get-type-size(3),
+    line-height: rem(22px),
+    letter-spacing: 0,
+  ),
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 600,
+    font-size: get-type-size(3),
+    line-height: rem(22px),
+    letter-spacing: 0,
+  ),
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 400,
+    font-size: get-type-size(5),
+    line-height: rem(26px),
+    letter-spacing: 0,
+  ),
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 400,
+    font-size: get-type-size(8),
+    line-height: rem(40px),
+    letter-spacing: 0,
+  ),
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 400,
+    font-size: get-type-size(10),
+    line-height: rem(50px),
+    letter-spacing: 0,
+  )
+) !default;
+
+$body: (
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 400,
+    font-size: get-type-size(1),
+    line-height: rem(16px),
+    letter-spacing: 0.02rem,
+  ),
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 400,
+    font-size: get-type-size(2),
+    line-height: rem(20px),
+    letter-spacing: 0.01rem,
+  ),
+  (
+    font-family: map-get($font-families, 'Sans'),
+    font-weight: 400,
+    font-size: get-type-size(3),
+    line-height: rem(24px),
+    letter-spacing: 0,
+  )
+) !default;
+
+$code: (
+  (
+    font-family: map-get($font-families, 'Mono'),
+    font-weight: 400,
+    font-size: get-type-size(1),
+    line-height: rem(16px),
+    letter-spacing: 0.01rem,
+  ),
+  (
+    font-family: map-get($font-families, 'Mono'),
+    font-weight: 400,
+    font-size: get-type-size(2),
+    line-height: rem(20px),
+    letter-spacing: 0.01rem,
+  )
+) !default;
+
+$tokens: (
+  heading: $heading,
+  body: $body,
+  code: $code,
+);
+
+@function number($string) {
+  // Matrices
+  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+  $numbers: 0 1 2 3 4 5 6 7 8 9;
+
+  // Result
+  $result: 0;
+
+  // Looping through all characters
+  @for $i from 1 through str-length($string) {
+    $character: str-slice($string, $i, $i);
+    $index: index($strings, $character);
+
+    @if not $index {
+      @warn "Unknown character `#{$character}`.";
+      @return false;
+    }
+
+    $number: nth($numbers, $index);
+    $result: $result * 10 + $number;
+  }
+
+  @return $result;
+}
+
+@mixin type($token) {
+  $index: str-index($token, '-');
+  $name: str-slice($token, 1, $index - 1);
+  $step: number(str-slice($token, $index + 1));
+
+  // Get the specific scale from tokens, for example heading, body, or code.
+  // Then, use the step from the scale to get the map of values. For example,
+  // heading-01 would use the
+  @each $name, $value in nth(map-get($tokens, $name), $step) {
+    #{$name}: $value;
+  }
+}

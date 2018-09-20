@@ -1,0 +1,15 @@
+{
+  "name": "css",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "parcel build -d build --public-url \"/carbon-elements/type/examples/basic\" index.html",
+    "develop": "parcel index.html"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "parcel-bundler": "^1.10.0-beta.1"
+  }
+}
