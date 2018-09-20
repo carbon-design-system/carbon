@@ -75,6 +75,7 @@
     height: 1rem;
     width: 1rem;
     top: calc(50% - 0.5rem);
+    z-index: 1;
   }
 
   .#{$prefix}--search-magnifier {
