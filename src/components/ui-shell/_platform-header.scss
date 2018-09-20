@@ -93,7 +93,7 @@
   }
 
   .#{$prefix}--platform-header__dropdown-item,
-  a.#{$prefix}--platform-header__link,
+  .#{$prefix}--platform-header__link,
   .#{$prefix}--dropdown-item__menu-item a {
     @include typescale('zeta');
     position: relative;
@@ -109,7 +109,7 @@
   }
 
   .#{$prefix}--platform-header__dropdown-item:hover,
-  a.#{$prefix}--platform-header__link:hover {
+  .#{$prefix}--platform-header__link:hover {
     background-color: $shell-ui-02;
   }
 
@@ -119,22 +119,18 @@
     box-shadow: inset 0 0 0 4px $shell-brand-01;
   }
 
-  .#{$prefix}--platform-header__arrow--down,
-  .#{$prefix}--platform-header__arrow--up {
+  .#{$prefix}--platform-header__arrow {
     fill: $shell-header-text-01;
     margin-left: get-fixed-size(2);
   }
 
-  .#{$prefix}--platform-header__arrow--up,
-  .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--platform-header__arrow--down,
-  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--platform-header__arrow--down {
-    display: none;
+  .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--platform-header__arrow,
+  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--platform-header__arrow {
+    transform: rotate(180deg);
   }
 
   .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--dropdown-item__menu,
-  .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--platform-header__arrow--up,
-  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--dropdown-item__menu,
-  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--platform-header__arrow--up {
+  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--dropdown-item__menu {
     display: block;
   }
 
@@ -162,23 +158,23 @@
     color: $shell-header-text-01;
   }
 
-  a.#{$prefix}--platform-header__link {
+  .#{$prefix}--platform-header__link {
     border: get-fixed-size(0.5) solid transparent;
   }
 
-  a.#{$prefix}--platform-header__link,
-  a.#{$prefix}--platform-header__link:hover {
+  .#{$prefix}--platform-header__link,
+  .#{$prefix}--platform-header__link:hover {
     color: $shell-header-text-01;
   }
 
-  a.#{$prefix}--platform-header__link:active {
+  .#{$prefix}--platform-header__link:active {
     background-color: $shell-ui-02;
   }
 
   // Safari: use the active style for links to simulate the focus
   // styles since links in safari don't display the focus styles.
-  a.#{$prefix}--platform-header__link:active,
-  a.#{$prefix}--platform-header__link:focus {
+  .#{$prefix}--platform-header__link:active,
+  .#{$prefix}--platform-header__link:focus {
     border-color: $shell-brand-01;
     outline: none;
   }
