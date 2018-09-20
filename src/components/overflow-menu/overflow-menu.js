@@ -179,7 +179,9 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       const state = shouldBeOpen ? 'shown' : 'hidden';
 
       if (isOfSelf) {
-        event.preventDefault();
+        if (element.tagName === 'A' || key === 13) {
+          event.preventDefault();
+        }
         event.delegateTarget = element; // eslint-disable-line no-param-reassign
       }
 
