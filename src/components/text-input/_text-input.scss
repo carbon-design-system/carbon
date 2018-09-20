@@ -1,7 +1,6 @@
 //-----------------------------
 // Text
 //-----------------------------
-
 @import '../../globals/scss/vars';
 @import '../../globals/scss/theme';
 @import '../../globals/scss/colors';
@@ -72,6 +71,35 @@
 
       &::before {
         display: none;
+      }
+    }
+
+    &-wrapper svg[hidden] {
+      display: none;
+    }
+
+    &[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
+      top: rem(-40px);
+      display: flex;
+      justify-content: center;
+      align-self: flex-end;
+      align-items: center;
+      order: 3;
+      height: rem(40px);
+      width: rem(40px);
+      margin-top: rem(-40px);
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      outline: inherit;
+
+      svg {
+        fill: $brand-01;
+
+        &:hover {
+          fill: $hover-primary;
+        }
       }
     }
   }
