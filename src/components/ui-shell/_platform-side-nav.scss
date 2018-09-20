@@ -49,6 +49,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
     // Useful to toggle this property to see what's going on when not expanded
     overflow: hidden;
+    border-top: 1px solid $ibm-colors__gray--80;
   }
 
   .#{$prefix}--side-nav:hover,
@@ -142,16 +143,6 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     background-color: $shell-side-nav-bg-02;
   }
 
-  .#{$prefix}--side-nav__category--active::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 2px;
-    background-color: $shell-side-nav-accent-01;
-  }
-
   .#{$prefix}--side-nav__category-header {
     display: flex;
     align-items: center;
@@ -193,8 +184,8 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 2px;
-    width: 3px;
+    left: 0;
+    width: 4px;
     background-color: $shell-side-nav-accent-01;
   }
 
@@ -208,6 +199,11 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     font-weight: 400;
     width: 100%;
     padding-left: get-fixed-size(7);
+  }
+
+  .#{$prefix}--side-nav__category-item--active > a {
+    font-weight: 600;
+    color: $ibm-colors__white;
   }
 
   .#{$prefix}--side-nav__category-item > a:hover {
