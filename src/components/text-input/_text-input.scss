@@ -127,10 +127,11 @@
     width: 100%;
     height: rem(32px);
     padding: 0 $spacing-xl 0 $spacing-md;
-    color: $text-02;
+    color: $text-01;
     border: none;
     outline: 1px solid $ui-04;
     outline-offset: -1px;
+    padding-bottom: 1px;
   }
 
   .#{$prefix}--text-input:hover {
@@ -146,7 +147,7 @@
   }
 
   .#{$prefix}--text-input::-webkit-input-placeholder {
-    color: $text-02;
+    color: $text-03;
   }
 
   //-----------------------------
