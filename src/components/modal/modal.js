@@ -131,6 +131,7 @@ class Modal extends mixin(createComponent, initComponentByLauncher, eventedShowH
     this._handleKeydownListener = this.manage(
       on(this.element.ownerDocument.body, 'keydown', evt => {
         if (evt.which === 27) {
+          evt.stopPropagation();
           this.hide(evt);
         }
       })
