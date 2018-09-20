@@ -1,5 +1,26 @@
 # UI Shell
 
+## Platform Navigation
+
+Platform Navigation has the following cases for configuration:
+
+- Can have one or more sections. A section is a collection of links or categories.
+- A link will have to have an href and title, and optionally an icon.
+- A category will have a collection of links, and optionally an icon.
+- State variations:
+  - Item link
+  - Item link selected
+  - Item link with icon
+  - Item link with icon and selected
+  - Category collapsed
+  - Category expanded
+  - Category with icon and collapsed
+  - Category with icon and expanded
+  - Category item
+  - Category item selected
+  - Category with icon and category item
+  - Category with icon and category item selected
+
 ## Tokens
 
 ## Header & header-panel
