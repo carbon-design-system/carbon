@@ -217,7 +217,7 @@
     position: relative;
     display: flex;
     cursor: pointer;
-    padding-left: rem(28px);
+    padding-left: rem(26px); //width of checkbox 16px + 10px of padding
     min-height: rem(24px);
     user-select: none;
   }
