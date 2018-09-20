@@ -174,9 +174,10 @@
     align-items: center;
     justify-content: $accordion-justify-content;
     cursor: pointer;
-    padding: $spacing-xs 0;
+    padding: rem(14px) 0;
     flex-direction: $accordion-flex-direction;
     width: 100%;
+    margin: 0;
 
     // new version of markup uses focus on the heading,
     // not the list element itself
@@ -190,7 +191,7 @@
       }
     }
     &:hover {
-      background-color: $ibm-colors__gray--20;
+      background-color: $field-01;
     }
   }
 
@@ -201,7 +202,7 @@
     padding: $spacing-2xs $spacing-3xs $spacing-2xs $spacing-2xs;
     margin: $accordion-arrow-margin;
     fill: $ui-05;
-    transform: rotate(0) /*rtl:rotate(180deg)*/;
+    transform: rotate(90deg) /*rtl:rotate(180deg)*/;
   }
 
   .#{$prefix}--accordion__title {
@@ -228,12 +229,12 @@
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
-    .#{$prefix}--accordion__heading {
-      background-color: $ibm-colors__gray--20;
-    }
+    // .#{$prefix}--accordion__heading {
+    //   background-color: $ibm-colors__gray--20;
+    // }
 
     .#{$prefix}--accordion__content {
-      padding-top: $spacing-md;
+      // padding-top: $spacing-md;
       padding-bottom: $spacing-lg;
       height: auto;
       visibility: visible;
@@ -243,8 +244,8 @@
 
     .#{$prefix}--accordion__arrow {
       /*rtl:ignore*/
-      transform: rotate(90deg);
-      fill: $brand-01;
+      transform: rotate(-90deg);
+      fill: $ui-05;
     }
   }
 
