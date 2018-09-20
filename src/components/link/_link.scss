@@ -63,7 +63,8 @@
       box-shadow: 0 1px currentColor;
     }
 
-    &:active {
+    &:active,
+    &:active:visited {
       color: $text-01;
       box-shadow: 0 1px currentColor;
     }
