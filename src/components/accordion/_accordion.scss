@@ -179,8 +179,6 @@
     width: 100%;
     margin: 0;
 
-    // new version of markup uses focus on the heading,
-    // not the list element itself
     &:focus {
       outline: none;
 
