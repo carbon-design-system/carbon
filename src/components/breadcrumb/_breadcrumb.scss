@@ -69,7 +69,7 @@
 
 @mixin breadcrumb-experimental {
   .#{$prefix}--breadcrumb {
-    @include typescale('omega');
+    @include typescale('zeta');
     @include font-family;
     display: inline;
 
@@ -83,6 +83,7 @@
     margin-right: $spacing-xs;
     display: flex;
     align-items: center;
+    line-height: 1.25; //needed for correct spacing for underline hover
   }
 
   .#{$prefix}--breadcrumb-item::after {
@@ -105,10 +106,6 @@
 
   .#{$prefix}--breadcrumb .#{$prefix}--link {
     white-space: nowrap;
-
-    &:hover,
-    &:focus {
-    }
   }
 
   // Skeleton State
