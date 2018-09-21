@@ -26,10 +26,10 @@ about: Something isn't working as expected? Here is the right place to report.
 
 ## Steps to reproduce the issue
 
-1. Step one
-2. Step two
-3. Step three
-4. etc.
+1.  Step one
+2.  Step two
+3.  Step three
+4.  etc.
 
 ## Additional information
 

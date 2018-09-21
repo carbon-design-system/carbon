@@ -4,11 +4,12 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/import-once';
 @import 'mixins';
 @import '../../globals/scss/css--reset';
 
-@include exports('button') {
+@mixin button {
   // <button> elements cannot be used as flex containers
   button.#{$prefix}--btn {
     display: inline-block;
@@ -169,5 +170,92 @@
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
     width: rem(150px);
+  }
+}
+
+@mixin button--x {
+  $button: #{$prefix}--btn;
+  $ibm-colors--white--0: $inverse-01;
+
+  &.#{$button}-link:not(.#{$button}--lg):not(.#{$button}--xlg) {
+    align-items: center;
+  }
+
+  &.#{$button}--icon {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .#{$button}__icon {
+      margin: 0 auto;
+    }
+  }
+
+  &.#{$button}--danger {
+    background-color: $ibm-colors__red--60;
+    color: $ibm-colors__white--0;
+
+    &:hover {
+      background-color: $hover-danger;
+    }
+
+    &:active {
+      background-color: $ibm-colors__red--60;
+    }
+
+    &:focus {
+      border: 3px solid $ibm-colors__white--0;
+    }
+
+    &--ghost {
+      background-color: transparent;
+      color: $ibm-colors__red--50;
+
+      &:hover:not([disabled]) {
+        background-color: $ibm-colors__gray--80;
+      }
+
+      &:active:not([disabled]) {
+        background-color: $ibm-colors__gray--70;
+      }
+
+      &:focus:not([disabled]) {
+        border: 3px solid $ibm-colors__white--0;
+      }
+
+      &[disabled] {
+        color: $ibm-colors__gray--70;
+      }
+    }
+  }
+
+  &.#{$button}--ghost {
+    background-color: transparent;
+    color: $ibm-colors__blue--40;
+
+    &:hover:not([disabled]) {
+      background-color: $ibm-colors__gray--80;
+    }
+
+    &:active:not([disabled]) {
+      background-color: $ibm-colors__gray--70;
+    }
+
+    &:focus:not([disabled]) {
+      border: 3px solid $ibm-colors__white--0;
+    }
+
+    &[disabled] {
+      color: $ibm-colors__gray--70;
+    }
+  }
+}
+
+@include exports('button') {
+  @if feature-flag-enabled('components-x') {
+    @include button;
+    @include button--x;
+  } @else {
+    @include button;
   }
 }
