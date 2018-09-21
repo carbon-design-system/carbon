@@ -174,7 +174,7 @@
     align-items: center;
     justify-content: $accordion-justify-content;
     cursor: pointer;
-    padding: rem(14px) 0;
+    padding: rem(7px) 0;
     flex-direction: $accordion-flex-direction;
     width: 100%;
     margin: 0; // safari fix
@@ -214,21 +214,24 @@
 
   .#{$prefix}--accordion__content {
     transition: all $transition--expansion $carbon--ease-out;
-    padding: $accordion-content-padding;
+    padding-left: $spacing-md;
     height: 0;
     visibility: hidden;
     opacity: 0;
 
     p {
       @include typescale('zeta');
+      padding-right: 20%;
     }
   }
 
   .#{$prefix}--accordion__item--active {
     overflow: visible;
+    border-top: 1px solid transparent;
 
     .#{$prefix}--accordion__content {
       padding-bottom: $spacing-lg;
+      padding-top: $spacing-xs;
       height: auto;
       visibility: visible;
       opacity: 1;
