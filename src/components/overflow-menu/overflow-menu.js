@@ -82,7 +82,16 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
     );
     this.manage(
       on(this.element.ownerDocument, 'keydown', event => {
-        this._handleKeyPress(event);
+        if (event.which === 27) {
+          this._handleKeyPress(event);
+        }
+      })
+    );
+    this.manage(
+      on(this.element.ownerDocument, 'keypress', event => {
+        if (event.which !== 27) {
+          this._handleKeyPress(event);
+        }
       })
     );
     this.manage(
@@ -179,7 +188,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       const state = shouldBeOpen ? 'shown' : 'hidden';
 
       if (isOfSelf) {
-        if (element.tagName === 'A' || key === 13) {
+        if (element.tagName === 'A' || key === 32) {
           event.preventDefault();
         }
         event.delegateTarget = element; // eslint-disable-line no-param-reassign
