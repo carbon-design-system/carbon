@@ -6,7 +6,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/import-once';
 
-@include exports('form') {
+@mixin form {
   .#{$prefix}--fieldset {
     @include reset;
     margin-bottom: $spacing-xl;
@@ -94,5 +94,95 @@
     max-height: 3rem;
     opacity: 1;
     margin-bottom: $spacing-xs;
+  }
+}
+
+@mixin form--experimental {
+  .#{$prefix}--fieldset {
+    @include reset;
+    margin-bottom: $spacing-xl;
+  }
+
+  .#{$prefix}--form-item {
+    @include font-family;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .#{$prefix}--label {
+    @include reset;
+    @include font-family;
+    @include typescale('omega');
+    color: $text-01;
+    font-weight: $input-label-weight;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-bottom: $spacing-xs;
+  }
+
+  .#{$prefix}--label .#{$prefix}--tooltip__trigger {
+    @include typescale('zeta');
+  }
+
+  .#{$prefix}--label--disabled {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
+  // Skeleton State
+  .#{$prefix}--label.#{$prefix}--skeleton {
+    @include skeleton;
+    width: rem(75px);
+    height: rem(14px);
+  }
+
+  input[data-invalid],
+  textarea[data-invalid],
+  select[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    box-shadow: 0 2px 0px 0px $support-01;
+
+    ~ .#{$prefix}--form-requirement {
+      max-height: rem(200px);
+      display: block;
+      color: $support-01;
+    }
+  }
+
+  // Fix for red ring when input is marked required in Firefox, refs #744
+  input:not(output):not([data-invalid]):-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--form-requirement {
+    @include reset;
+    @include typescale('omega');
+    margin: $spacing-2xs 0 0;
+    max-height: 0;
+    overflow: hidden;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .#{$prefix}--form__helper-text {
+    @include typescale('omega');
+    color: $text-02;
+    order: 1;
+    line-height: 1.5;
+    z-index: 0;
+    max-height: 3rem;
+    opacity: 1;
+    margin-top: $spacing-2xs;
+    margin-bottom: $spacing-xs;
+  }
+}
+
+@include exports('form') {
+  @if feature-flag-enabled('components-x') {
+    @include form--experimental;
+  } @else {
+    @include form;
   }
 }
