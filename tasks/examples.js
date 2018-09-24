@@ -3,6 +3,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const ghpages = require('gh-pages');
+const spawn = require('cross-spawn');
 
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const BUILD_DIR = path.resolve(__dirname, '../build');
@@ -69,6 +70,16 @@ async function main() {
       await fs.ensureDir(exampleDir);
 
       if (await fs.pathExists(exampleBuildDir)) {
+        const packageJsonPath = path.join(example.filepath, 'package.json');
+        const packageJson = await fs.readJson(packageJsonPath);
+
+        if (packageJson.scripts.build) {
+          spawn.sync('yarn', ['build'], {
+            stdio: 'inherit',
+            cwd: example.filepath,
+          });
+        }
+
         await fs.copy(exampleBuildDir, exampleDir);
         continue;
       }

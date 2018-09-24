@@ -1,0 +1,76 @@
+@import '../../scss/layout';
+
+// System Fonts as used by GitHub
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+//------------------------------------------------------------------------------
+// Conversion
+//------------------------------------------------------------------------------
+.convert-box {
+  width: rem(48px);
+  height: em(48px);
+  background-color: black;
+}
+
+//------------------------------------------------------------------------------
+// Mini unit
+//------------------------------------------------------------------------------
+.mini-unit-box {
+  width: mini-units(6);
+  height: mini-units(6);
+  background-color: black;
+}
+
+//------------------------------------------------------------------------------
+// Spacing scale
+//------------------------------------------------------------------------------
+.spacing-scale {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@each $step in $spacing-scale {
+  $index: index($spacing-scale, $step) - 1;
+
+  .spacing-scale-#{$index} {
+    width: spacing($index);
+    height: spacing($index);
+    background-color: black;
+    margin-right: mini-units(3);
+    margin-bottom: mini-units(3);
+  }
+}
+
+//------------------------------------------------------------------------------
+// Key heights
+//------------------------------------------------------------------------------
+.key-heights {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+@each $breakpoint, $scale in $key-height-scales {
+  @include breakpoint($breakpoint) {
+    @each $value in $scale {
+      $index: index($scale, $value);
+
+      .key-height-#{$index} {
+        width: $value;
+        height: $value;
+        background-color: black;
+        margin-right: mini-units(3);
+        margin-bottom: mini-units(3);
+      }
+    }
+  }
+}

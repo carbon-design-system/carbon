@@ -10,6 +10,9 @@ umd
 # Config files
 .npmrc
 
+# Cache folders
+.cache
+
 # Logs
 logs
 *.log

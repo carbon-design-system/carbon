@@ -34,6 +34,7 @@
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "babel-eslint": "^9.0.0-beta.3",
+    "cross-spawn": "^6.0.5",
     "eslint-plugin-import": "^2.14.0",
     "fs-extra": "^7.0.0",
     "gh-pages": "^2.0.0",
