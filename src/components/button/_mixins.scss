@@ -64,3 +64,69 @@
     fill: $icon-color;
   }
 }
+
+@mixin button-base--x {
+  @include reset;
+  @include font-family;
+  @include font-smoothing;
+  @include letter-spacing;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  height: rem($button-height);
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  text-align: left;
+  text-decoration: none;
+  transition-duration: $transition--base;
+  transition-timing-function: ease-in;
+  white-space: nowrap;
+  line-height: 16px;
+  min-width: 200px;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .#{$prefix}--btn__icon {
+    width: rem(16px);
+    height: rem(16px);
+    margin-left: 0.5rem;
+    transition-duration: $transition--base;
+    transition-timing-function: ease-in;
+    float: right;
+  }
+}
+
+@mixin button-theme--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
+  background-color: $bg-color;
+  border-width: $button-border-width;
+  border-style: solid;
+  border-color: $border-color;
+  color: $font-color;
+
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+
+  &:focus {
+    border: $button-border-width solid $ui-02;
+    outline: $button-outline-width solid $bg-color;
+  }
+
+  &:disabled:hover,
+  &:disabled:focus {
+    background-color: $bg-color;
+  }
+
+  &:active {
+    background-color: $brand-02;
+    outline-color: $brand-02;
+  }
+
+  .#{$prefix}--btn__icon {
+    fill: $icon-color;
+  }
+}
