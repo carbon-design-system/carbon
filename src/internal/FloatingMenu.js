@@ -1,6 +1,6 @@
 import warning from 'warning';
 import PropTypes from 'prop-types';
-import React, { createRef } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
 
@@ -193,11 +193,14 @@ class FloatingMenu extends React.Component {
   _menuContainer = null;
 
   /**
-   * The cached refernce to the menu body.
-   * @type {React.RefObject}
+   * The cached reference to the menu body.
+   * The reference is set via callback ref instead of object ref,
+   * in order to hook the event when the element ref gets available,
+   * which can be at a different timing from `cDM()`, presumably with SSR scenario.
+   * @type {Element}
    * @private
    */
-  _menuBody = createRef();
+  _menuBody = null;
 
   /**
    * Calculates the position in the viewport of floating menu,
@@ -210,7 +213,7 @@ class FloatingMenu extends React.Component {
    * @private
    */
   _updateMenuSize = (prevProps = {}) => {
-    const menuBody = this._menuBody.current;
+    const menuBody = this._menuBody;
     warning(
       menuBody,
       'The DOM node for menu body for calculating its position is not available. Skipping...'
@@ -269,23 +272,23 @@ class FloatingMenu extends React.Component {
       this.state.floatingPosition &&
       typeof onPlace === 'function'
     ) {
-      onPlace(this._menuBody.current);
+      onPlace(this._menuBody);
       this._placeInProgress = false;
     }
   }
 
-  componentDidMount() {
+  /**
+   * A callback for called when menu body is mounted or unmounted.
+   * @param {Element} menuBody The menu body being mounted. `null` if the menu body is being unmounted.
+   */
+  _menuRef = menuBody => {
     const { menuRef } = this.props;
-    this._placeInProgress = true;
-    menuRef && menuRef(this._menuBody.current);
-    this._updateMenuSize();
-  }
-
-  componentWillUnmount() {
-    const { menuRef } = this.props;
-    menuRef && menuRef(null);
-    this._placeInProgress = false;
-  }
+    this._placeInProgress = !!menuBody;
+    menuRef && menuRef((this._menuBody = menuBody));
+    if (menuBody) {
+      this._updateMenuSize();
+    }
+  };
 
   /**
    * @returns The child nodes, with styles containing the floating menu position.
@@ -307,7 +310,7 @@ class FloatingMenu extends React.Component {
           top: '0px',
         };
     return React.cloneElement(children, {
-      ref: this._menuBody,
+      ref: this._menuRef,
       style: {
         ...styles,
         ...positioningStyle,
