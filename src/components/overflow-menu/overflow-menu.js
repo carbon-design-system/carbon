@@ -188,6 +188,7 @@ class OverflowMenu extends mixin(createComponent, initComponentBySearch, evented
       const state = shouldBeOpen ? 'shown' : 'hidden';
 
       if (isOfSelf) {
+        // 32 is to prevent screen from jumping when menu is opened with spacebar
         if (element.tagName === 'A' || key === 32) {
           event.preventDefault();
         }
