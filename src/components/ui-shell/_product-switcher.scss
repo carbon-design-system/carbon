@@ -100,6 +100,8 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--product-list__item {
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
   }
 
   .#{$prefix}--product-list__item:hover {
@@ -107,10 +109,10 @@
   }
 
   .#{$prefix}--product-link {
-    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 100%;
     padding: units(1) units(2);
     text-decoration: none;
   }
@@ -120,12 +122,8 @@
     box-shadow: inset 0 0 0 3px $shell-header-link;
   }
 
-  .#{$prefix}--product-link__img {
-    width: units(2.5);
-    height: units(2.5);
+  .#{$prefix}--product-switcher__icon {
     margin-right: units(2);
-    //placeholder border for product icon
-    border: 1px solid $shell-header-bg-01;
   }
 
   .#{$prefix}--product-link__name {
@@ -136,14 +134,10 @@
   }
 
   .#{$prefix}--overflow-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
     display: none;
     justify-content: center;
     align-items: center;
-    width: units(4);
-    height: 100%;
+    width: units(5);
   }
 
   .#{$prefix}--overflow-menu > svg {
@@ -154,7 +148,12 @@
     background: $shell-header-bg-04;
   }
 
+  .#{$prefix}--overflow-menu:hover > svg {
+    fill: $shell-header-text-02;
+  }
+
   .#{$prefix}--overflow-menu:focus {
+    display: flex;
     outline: none;
     box-shadow: inset 0 0 0 3px $shell-header-link;
   }
@@ -163,8 +162,7 @@
     background: $shell-header-bg-03;
   }
 
-  .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu,
-  .#{$prefix}--product-link:focus .#{$prefix}--overflow-menu {
+  .#{$prefix}--product-list__item:hover .#{$prefix}--overflow-menu {
     display: flex;
   }
 }
