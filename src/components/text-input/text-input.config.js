@@ -20,14 +20,14 @@ module.exports = {
     },
     {
       name: 'toggle password visibility',
-      label: 'Password Input (toggle password visibility)',
+      label: 'Password Input',
       context: {
         password: true,
       },
     },
     {
       name: 'toggle password visibility light',
-      label: 'Password Input (Light) (toggle password visibility)',
+      label: 'Password Input (Light)',
       context: {
         light: true,
         password: true,
