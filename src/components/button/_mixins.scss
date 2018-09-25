@@ -83,24 +83,28 @@
   transition-timing-function: ease-in;
   white-space: nowrap;
   line-height: 16px;
-  min-width: 200px;
+  outline: $button-outline-width solid transparent;
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+    color: $ui-04;
+    background: $ibm-colors__gray--30;
+    border-color: $ibm-colors__gray--30;
   }
 
   .#{$prefix}--btn__icon {
+    margin-left: rem(32px);
+    margin-right: rem(-16px);
     width: rem(16px);
     height: rem(16px);
-    margin-left: 0.5rem;
     transition-duration: $transition--base;
     transition-timing-function: ease-in;
     float: right;
   }
 }
 
-@mixin button-theme--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color) {
+@mixin button-theme--x($bg-color, $border-color, $font-color, $hover-bg-color, $icon-color, $active-color) {
   background-color: $bg-color;
   border-width: $button-border-width;
   border-style: solid;
@@ -113,17 +117,19 @@
 
   &:focus {
     border: $button-border-width solid $ui-02;
-    outline: $button-outline-width solid $bg-color;
+    outline: $button-outline-width solid $brand-01;
   }
 
   &:disabled:hover,
   &:disabled:focus {
-    background-color: $bg-color;
+    color: $ui-04;
+    background: $ibm-colors__gray--30;
+    border-color: $ibm-colors__gray--30;
+    text-decoration: none;
   }
 
   &:active {
-    background-color: $brand-02;
-    outline-color: $brand-02;
+    background-color: $active-color;
   }
 
   .#{$prefix}--btn__icon {

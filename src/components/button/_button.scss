@@ -201,87 +201,105 @@
   }
 
   .#{$prefix}--btn--primary {
-    @include button-theme--x($brand-01, transparent, $inverse-01, #0353e9, $ui-01);
+    @include button-theme--x($brand-01, transparent, $inverse-01, #0353e9, $ui-01, $brand-02);
   }
 
   .#{$prefix}--btn--secondary {
-    @include button-theme--x(transparent, $brand-01, $brand-01, $hover-secondary, $brand-01);
+    @include button-theme--x(
+      $ibm-colors__gray--80,
+      $ibm-colors__gray--80,
+      $inverse-01,
+      $ibm-colors__gray--70,
+      $inverse-01,
+      $ibm-colors__gray--60
+    );
 
     &:hover,
     &:focus {
       color: $inverse-01;
-    }
-
-    &:active {
-      color: $brand-01;
-    }
-
-    &:hover > .#{$prefix}--btn__icon,
-    &:focus > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
-    }
-
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $brand-01;
     }
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $ui-05, $ui-05, $ui-05, $ui-05);
+    @include button-theme--x(transparent, $brand-01, $brand-01, transparent, $brand-01, transparent);
+    position: relative;
 
     &:hover,
     &:focus {
-      color: $inverse-01;
+      color: $brand-02;
+      border-color: $brand-02;
+      text-decoration: underline;
     }
 
     &:active {
-      color: $ui-05;
+      color: $ibm-colors__blue--100;
+      border-color: $ibm-colors__blue--100;
+      text-decoration: underline;
+    }
+
+    &:disabled {
+      background: transparent;
+      color: $ibm-colors__gray--30;
     }
 
     &:hover:disabled,
     &:focus:disabled {
-      color: $ui-05;
+      background: transparent;
     }
 
-    &:hover > .#{$prefix}--btn__icon,
+    &:hover > .#{$prefix}--btn__icon {
+      fill: $brand-02;
+    }
+
     &:focus > .#{$prefix}--btn__icon {
-      fill: $inverse-01;
+      fill: $ibm-colors__blue--100;
     }
   }
 
   .#{$prefix}--btn--ghost {
-    @include button-theme--x(transparent, transparent, $brand-01, $brand-01, $brand-01);
+    @include button-theme--x(transparent, transparent, $brand-01, $ibm-colors__gray--10, $brand-01, $ibm-colors__blue--70);
 
     &:hover,
-    &:focus {
-      color: $inverse-01;
+    &:active {
+      color: $ibm-colors__blue--70;
 
       .#{$prefix}--btn__icon {
-        fill: $inverse-01;
+        fill: $ibm-colors__blue--70;
       }
     }
 
     &:active {
-      color: $ui-05;
+      background-color: $ibm-colors__gray--30;
     }
 
     .#{$prefix}--btn__icon {
       margin-left: $spacing-xs;
     }
 
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $brand-01;
+    &:disabled {
+      color: $ibm-colors__gray--30;
+      background: transparent;
+      border-color: transparent;
 
       .#{$prefix}--btn__icon {
-        fill: $brand-01;
+        fill: $ibm-colors__gray--30;
+      }
+    }
+
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $ibm-colors__gray--30;
+      background: transparent;
+      border-color: transparent;
+
+      .#{$prefix}--btn__icon {
+        fill: $ibm-colors__gray--30;
       }
     }
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01);
+    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, red);
 
     &:hover {
       color: $inverse-01;
@@ -309,7 +327,7 @@
   }
 
   .#{$prefix}--btn--danger--primary {
-    @include button-theme--x($support-01, transparent, $inverse-01, darken($support-01, 10%), $ui-01);
+    @include button-theme--x($support-01, transparent, $inverse-01, darken($support-01, 10%), $ui-01, red);
 
     &:hover:disabled,
     &:focus:disabled {
