@@ -35,7 +35,7 @@ const header = {
       title: 'Action 4',
     },
   ],
-  navlinks: [
+  navLinks: [
     {
       href: '/component/ui-shell--default',
       title: 'L1 link 1',
