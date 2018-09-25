@@ -3,8 +3,8 @@
 {{else}}
   <aside class="bx--panel--overlay">
 {{/if}}
-    <div class="bx--app-switcher">
-      <div class="bx--switcher__search-container">
+    <div class="bx--product-switcher">
+      <div class="bx--product-switcher__search">
         <div class="bx--form-item">
           <div data-search class="bx--search bx--search--sm bx--search--shell" role="search">
             <label id="search-input-label-1" class="bx--label" for="search__input-1">Search</label>
@@ -21,20 +21,20 @@
         </div>
       </div>
       {{#if switcher.state.showAll}}
-        <div class="bx--switcher__item">
-          <button aria-label="Back" tabindex="0" class="bx--switcher__back-btn">
-            <svg class="bx--switcher__back-arrow" width="20" height="20" viewBox="0 0 16 14">
+        <div class="bx--product-switcher__item">
+          <button aria-label="Back" tabindex="0" class="bx--product-switcher__back-btn">
+            <svg class="bx--product-switcher__back-arrow" width="20" height="20" viewBox="0 0 16 14">
               <path d="M4.044 8.003l4.09 3.905-1.374 1.453-6.763-6.356L6.759.639 8.135 2.09 4.043 6.003h11.954v2H4.044z" />
             </svg>
             Back
           </button>
         </div>
-        <ul class="bx--switcher__app-list">
+        <ul class="bx--product-switcher__product-list">
           {{#each switcher.allLinks}}
-            <li class="bx--app-list__item">
-              <a class="bx--app-link" tabindex="0" href="#">
-                <span class="bx--app-link__img"></span>
-                <span class="bx--app-link__name">{{ this.title }}</span>
+            <li class="bx--product-list__item">
+              <a class="bx--product-link" tabindex="0" href="#">
+                <span class="bx--product-link__img"></span>
+                <span class="bx--product-link__name">{{ this.title }}</span>
                 <div data-overflow-menu tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
                   <svg class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
                     <g fill-rule="evenodd">
@@ -57,13 +57,13 @@
           {{/each}}
         </ul>
       {{else}}
-        <p class="bx--switcher__subheader">My Products</p>
-        <ul class="bx--switcher__app-list">
+        <p class="bx--product-switcher__subheader">My Products</p>
+        <ul class="bx--product-switcher__product-list">
           {{#each switcher.links}}
-            <li class="bx--app-list__item">
-              <a class="bx--app-link" tabindex="0" href="#">
-                <span class="bx--app-link__img"></span>
-                <span class="bx--app-link__name">{{ this.title }}</span>
+            <li class="bx--product-list__item">
+              <a class="bx--product-link" tabindex="0" href="#">
+                <span class="bx--product-link__img"></span>
+                <span class="bx--product-link__name">{{ this.title }}</span>
                 <div data-overflow-menu tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
                   <svg class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
                     <g fill-rule="evenodd">
@@ -88,8 +88,8 @@
 
         {{#if switcher.state.showAll}}
         {{else}}
-          <div class="bx--switcher__item">
-            <button aria-label="Show All Applications" tabindex="0" class="bx--switcher__all-btn">
+          <div class="bx--product-switcher__item">
+            <button aria-label="Show All Applications" tabindex="0" class="bx--product-switcher__all-btn">
               View all products
             </button>
           </div>
