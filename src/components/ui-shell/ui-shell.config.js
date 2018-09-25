@@ -35,11 +35,7 @@ const header = {
       title: 'Action 4',
     },
   ],
-};
-
-const headernav = {
-  name: 'IBM [Platform]',
-  links: [
+  navlinks: [
     {
       href: '/component/ui-shell--default',
       title: 'L1 link 1',
