@@ -31,6 +31,12 @@ describe('Test Checkbox', function() {
     it('should set default options', function() {
       expect(flattenOptions(instance.options)).toEqual({
         selectorInit: '.bx--checkbox',
+        selectorContainedCheckboxState: '[data-contained-checkbox-state]',
+        selectorContainedCheckboxDisabled: '[data-contained-checkbox-disabled]',
+        classLabel: 'bx--checkbox-label',
+        classLabelFocused: 'bx--checkbox-label__focus',
+        attribContainedCheckboxState: 'data-contained-checkbox-state',
+        attribContainedCheckboxDisabled: 'data-contained-checkbox-disabled',
       });
     });
 
