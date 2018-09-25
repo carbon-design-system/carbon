@@ -335,7 +335,7 @@ class DatePicker extends mixin(createComponent, initComponentBySearch, handles) 
       classWeekday: `${prefix}--date-picker__weekday`,
       classDay: `${prefix}--date-picker__day`,
       classFocused: `${prefix}--focused`,
-      classVisuallyHidden: 'bx--visually-hidden',
+      classVisuallyHidden: `${prefix}--visually-hidden`,
       attribType: 'data-date-picker-type',
       dateFormat: 'm/d/Y',
     };
