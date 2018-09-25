@@ -161,11 +161,11 @@
   $button-outline: 1px solid $ibm-colors__white !default !global;
   
   // Accordion (Reverse)
-  $accordion-flex-direction: row !default !global;
+  $accordion-flex-direction: row-reverse !default !global;
   $accordion-justify-content: flex-start !default !global;
-  $accordion-arrow-margin: 0 0 0 $spacing-2xs !default !global;
+  $accordion-arrow-margin: 0 $spacing-md 0 0 !default !global;
   $accordion-title-margin: 0 0 0 $spacing-md !default !global;
-  $accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default !global;
+  $accordion-content-padding: 0 0 0 $spacing-md !default !global;
 
   // Card
   $card-text-align: center !default !global;
