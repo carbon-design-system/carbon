@@ -237,11 +237,18 @@ class RootPage extends Component {
       clearTimeout(this.hTimeoutDetectExperimental);
       this.hTimeoutDetectExperimental = null;
     }
-    // For IE11
-    if (link.sheet.cssRules.length === 0) {
+    let rulesLength = 0;
+    try {
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=761236#c1 suggests that `NS_ERROR_DOM_INVALID_ACCESS_ERR` is thrown
+      // if we try to read `.cssRules` on a stylesheet that's not done being parsed yet
+      rulesLength = link.sheet.cssRules.length;
+    } catch (err) {} // eslint-disable-line no-empty
+    // For IE11/FF
+    if (rulesLength === 0) {
       this.hTimeoutDetectExperimental = setTimeout(() => {
         this._detectComponentsX(link);
       }, 100);
+      return;
     }
     const isComponentsX = Array.prototype.some.call(
       link.sheet.cssRules,
