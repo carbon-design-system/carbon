@@ -151,7 +151,6 @@ module.exports = {
   },
   context: {
     header,
-    headernav,
     nav,
     sidenav,
   },
