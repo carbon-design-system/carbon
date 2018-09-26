@@ -44,17 +44,23 @@ Please refer to the [Contribution Guidelines](./.github/CONTRIBUTING.md) before 
 
 We recommend the use of [React Storybook](https://github.com/storybooks/react-storybook) for developing components.
 
-1. Start the server:
+1. (Optional) Set `true` to `CARBON_USE_EXPERIMENTAL_FEATURES` environment variable to test some of the experimental features:
+
+   ```
+   $ export CARBON_USE_EXPERIMENTAL_FEATURES=true
+   ```
+
+2) Start the server:
 
    ```
    $ yarn storybook
    ```
 
-2. Open browser to `http://localhost:9000/`.
+3) Open browser to `http://localhost:9000/`.
 
-3. Develop components in their respective folders (`/components` or `/internal`).
+4) Develop components in their respective folders (`/components` or `/internal`).
 
-4. Write stories for your components in `/.storybook`.
+5) Write stories for your components in `/.storybook`.
 
 ## Contributing
 

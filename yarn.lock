@@ -782,6 +782,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@carbon/colors@^0.0.1-alpha.0":
+  version "0.0.1-alpha.0"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.0.tgz#8c53ef65f864106a63cfc412d8ff083a8a04905f"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -3460,10 +3464,11 @@ caniuse-lite@^1.0.30000884:
   version "1.0.30000885"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000885.tgz#e889e9f8e7e50e769f2a49634c932b8aee622984"
 
-carbon-components@^9.6.1:
-  version "9.6.1"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.6.1.tgz#71f16ae84f1b29ed72b8c174ab8b9660a3e74734"
+carbon-components@^9.21.0:
+  version "9.21.1"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.21.1.tgz#7dafddea311a4ee455f66aa0c4ef6c9923f76f51"
   dependencies:
+    "@carbon/colors" "^0.0.1-alpha.0"
     carbon-icons "^7.0.7"
     flatpickr "2.6.3"
     lodash.debounce "^4.0.8"
@@ -11277,6 +11282,13 @@ string-length@^2.0.0:
 string-raw@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/string-raw/-/string-raw-1.0.1.tgz#01be2665a1cfa2c57520c910698f6ca276a4c726"
+
+string-replace-loader@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/string-replace-loader/-/string-replace-loader-2.1.1.tgz#b72e7b57b6ef04efe615aff0ad989b5c14ca63d1"
+  dependencies:
+    loader-utils "^1.1.0"
+    schema-utils "^0.4.5"
 
 string-width@^1.0.1, string-width@^1.0.2:
   version "1.0.2"

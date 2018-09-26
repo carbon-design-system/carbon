@@ -118,7 +118,7 @@
     }
   },
   "peerDependencies": {
-    "carbon-components": "^9.6.4",
+    "carbon-components": "^9.21.0",
     "carbon-icons": "^7.0.5",
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
@@ -170,7 +170,7 @@
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-react-docgen": "^2.0.0",
     "bowser": "^1.6.1",
-    "carbon-components": "^9.6.1",
+    "carbon-components": "^9.21.0",
     "carbon-icons": "^7.0.5",
     "chalk": "^2.3.0",
     "cli-table": "^0.3.0",
@@ -211,6 +211,7 @@
     "semantic-release": "^15.0.0",
     "storybook-addon-a11y": "^3.1.9",
     "storybook-readme": "^4.0.0-beta1",
+    "string-replace-loader": "^2.1.0",
     "validate-commit-msg": "^2.10.1",
     "whatwg-fetch": "^2.0.3"
   },
