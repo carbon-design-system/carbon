@@ -16,7 +16,13 @@ export default () => (
   <DataTable
     rows={initialRows}
     headers={headers}
-    render={({ rows, headers, getHeaderProps, getSelectionProps }) => (
+    render={({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getSelectionProps,
+    }) => (
       <TableContainer title="DataTable">
         <Table>
           <TableHead>
@@ -31,7 +37,7 @@ export default () => (
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <TableRow key={row.id}>
+              <TableRow {...getRowProps({ row })}>
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map(cell => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>

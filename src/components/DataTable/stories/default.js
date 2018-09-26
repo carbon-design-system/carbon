@@ -29,6 +29,7 @@ export default () => (
       rows,
       headers,
       getHeaderProps,
+      getRowProps,
       getSelectionProps,
       getBatchActionProps,
       onInputChange,
@@ -82,7 +83,7 @@ export default () => (
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <TableRow key={row.id}>
+              <TableRow {...getRowProps({ row })}>
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map(cell => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>

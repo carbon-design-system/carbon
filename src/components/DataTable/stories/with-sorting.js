@@ -14,7 +14,7 @@ export default () => (
   <DataTable
     rows={initialRows}
     headers={headers}
-    render={({ rows, headers, getHeaderProps }) => (
+    render={({ rows, headers, getHeaderProps, getRowProps }) => (
       <TableContainer title="DataTable with sorting">
         <Table>
           <TableHead>
@@ -28,7 +28,7 @@ export default () => (
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <TableRow key={row.id}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map(cell => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
