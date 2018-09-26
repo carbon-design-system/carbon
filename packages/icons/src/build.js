@@ -84,11 +84,10 @@ async function build() {
 
         return {
           name,
-          filepath,
           size: size !== 'glyph' ? parseInt(size, 10) : size,
           svg: optimized.data,
           source,
-          descriptor: JSON.stringify(descriptor),
+          descriptor,
         };
       })
     );
@@ -136,7 +135,9 @@ async function build() {
   const entrypoint = prettier.format(
     files.reduce((acc, file) => {
       const name = getModuleName(file.name, file.size);
-      const jsExport = `export const ${name} = ${file.descriptor};`;
+      const jsExport = `export const ${name} = ${JSON.stringify(
+        file.descriptor
+      )};`;
       return acc + jsExport;
     }, ''),
     prettierOptions
