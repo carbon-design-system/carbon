@@ -13,16 +13,16 @@
     top: 0;
     left: 0;
     right: 0;
-    height: get-fixed-size(6);
+    height: units(6);
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
   }
 
   .#{$prefix}--platform-header__action {
     @include button-reset();
-    width: get-fixed-size(6);
-    height: get-fixed-size(6);
-    border: get-fixed-size(0.5) solid transparent;
+    width: units(6);
+    height: units(6);
+    border: units(0.5) solid transparent;
   }
 
   .#{$prefix}--platform-header__action:hover {
@@ -53,7 +53,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 get-fixed-size(2);
+    padding: 0 units(2);
     text-decoration: none;
     font-weight: 400;
     letter-spacing: 0.1px;
@@ -104,7 +104,7 @@
     letter-spacing: 0;
     text-decoration: none;
     font-weight: 400;
-    padding: 0 get-fixed-size(2);
+    padding: 0 units(2);
     cursor: pointer;
   }
 
@@ -121,7 +121,7 @@
 
   .#{$prefix}--platform-header__arrow {
     fill: $shell-header-text-01;
-    margin-left: get-fixed-size(2);
+    margin-left: units(2);
   }
 
   .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--platform-header__arrow,
@@ -145,8 +145,8 @@
   }
 
   .#{$prefix}--dropdown-item__menu-item {
-    width: get-fixed-size(25);
-    height: get-fixed-size(6);
+    width: units(25);
+    height: units(6);
   }
 
   .#{$prefix}--dropdown-item__menu-item a {
@@ -159,7 +159,7 @@
   }
 
   .#{$prefix}--platform-header__link {
-    border: get-fixed-size(0.5) solid transparent;
+    border: units(0.5) solid transparent;
   }
 
   .#{$prefix}--platform-header__link,
