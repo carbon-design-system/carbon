@@ -66,20 +66,23 @@ async function main() {
     for (const example of examples) {
       const exampleDir = path.join(packageDir, example.name);
       const exampleBuildDir = path.join(example.filepath, 'build');
+      const packageJsonPath = path.join(example.filepath, 'package.json');
+      const packageJson = await fs.readJson(packageJsonPath);
 
       await fs.ensureDir(exampleDir);
 
+      if (packageJson.scripts.build) {
+        spawn.sync('yarn', ['install'], {
+          stdio: 'inherit',
+          cwd: example.filepath,
+        });
+        spawn.sync('yarn', ['build'], {
+          stdio: 'inherit',
+          cwd: example.filepath,
+        });
+      }
+
       if (await fs.pathExists(exampleBuildDir)) {
-        const packageJsonPath = path.join(example.filepath, 'package.json');
-        const packageJson = await fs.readJson(packageJsonPath);
-
-        if (packageJson.scripts.build) {
-          spawn.sync('yarn', ['build'], {
-            stdio: 'inherit',
-            cwd: example.filepath,
-          });
-        }
-
         await fs.copy(exampleBuildDir, exampleDir);
         continue;
       }

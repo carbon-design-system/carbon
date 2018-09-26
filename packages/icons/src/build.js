@@ -18,127 +18,148 @@ const prettierOptions = {
   trailingComma: 'es5',
 };
 
+const MODULE_TYPES = [
+  {
+    type: 'cjs',
+    folder: 'lib',
+  },
+  {
+    type: 'umd',
+    folder: 'umd',
+  },
+];
+
 async function build() {
+  console.log('Cleaning up build directories...');
   await del(BUILD_DIRS);
 
-  // Build phase
-  const filenames = await fs.readdir(SVG_DIR);
-  const files = await Promise.all(
-    filenames.map(async filename => {
-      const name = path.basename(filename, '.svg');
-      const filepath = path.join(SVG_DIR, filename);
-      return {
-        name,
-        filename,
-        filepath,
-        source: await fs.readFile(filepath, 'utf8'),
-      };
-    })
-  );
+  const sizes = await fs.readdir(SVG_DIR);
 
-  console.log('Optimizing icons');
+  console.log('Building icons for sizes:', sizes);
+  const files = await flatMapAsync(sizes, async size => {
+    const sizeDirectory = path.join(SVG_DIR, size);
+    const filenames = await fs.readdir(sizeDirectory);
+    return Promise.all(
+      filenames.map(async filename => {
+        const name = path.basename(filename, '.svg');
+        const filepath = path.join(sizeDirectory, filename);
+        // SVG source
+        const svg = await fs.readFile(filepath, 'utf8');
+        // Optimized SVG source
+        const optimized = await svgo.optimize(svg, {
+          path: filepath,
+        });
+        // Grab SVG information from optimized SVG source
+        const info = await parse(optimized.data, name);
+        const descriptor = {
+          ...info,
+          name,
+        };
 
-  const icons = await Promise.all(
-    files.map(async file => {
-      const optimized = await svgo.optimize(file.source, {
-        path: file.filepath,
-      });
-      const content = await parse(optimized.data, file.name);
-      return {
-        ...file,
-        optimized: {
-          ...optimized,
-          content,
-        },
-      };
-    })
-  );
+        if (size !== 'glyph') {
+          descriptor.attrs = {
+            ...descriptor.attrs,
+            width: parseInt(size, 10),
+            height: parseInt(size, 10),
+            viewBox: `0 0 ${size} ${size}`,
+          };
+        } else {
+          const [width, height] = info.attrs.viewBox
+            .split(' ')
+            .slice(2)
+            .map(number => parseInt(number, 10));
 
-  console.log('Building module source');
+          descriptor.attrs = {
+            ...descriptor.attrs,
+            width,
+            height,
+          };
+        }
 
-  const sizes = [16, 20, 24, 32];
-  const iconModules = icons.reduce((acc, icon) => {
-    const { name, optimized } = icon;
-    const folder = path.join(BUILD_ES_DIR, name);
-    const files = sizes.map(size => {
-      const source = `export default {
-  name: '${name}',
-  width: ${size},
-  height: ${size},
-  viewBox: '0 0 32 32',
-  content: ${JSON.stringify(optimized.content)},
-  }`;
-      return {
-        name,
-        size,
-        source: prettier.format(source, prettierOptions),
-        dest: path.join(folder, `${size}.js`),
-      };
-    });
+        // JS source
+        const source = prettier.format(
+          `export default ${JSON.stringify(descriptor)};`,
+          prettierOptions
+        );
 
-    return acc.concat(files);
-  }, []);
-  const entrypoint = createEntrypoint(BUILD_ES_DIR, iconModules);
-  const modules = [...iconModules, entrypoint];
-
-  // Write phase
-  console.log('Write optimized svg files');
+        return {
+          name,
+          filepath,
+          size: size !== 'glyph' ? parseInt(size, 10) : size,
+          svg: optimized.data,
+          source,
+          descriptor: JSON.stringify(descriptor),
+        };
+      })
+    );
+  });
 
   await fs.ensureDir(BUILD_SVG_DIR);
+
+  console.log('Copying SVG source and building JS modules...');
   await Promise.all(
-    icons.map(icon => {
-      const { optimized } = icon;
-      return fs.writeFile(
-        path.resolve(BUILD_SVG_DIR, `${icon.name}.svg`),
-        optimized.data
-      );
-    })
-  );
+    files.map(async file => {
+      const { name, size, svg, source } = file;
+      const moduleFolder = path.join(BUILD_ES_DIR, name);
+      const jsFilepath = path.join(moduleFolder, `${size}.js`);
+      const svgFilepath = path.join(BUILD_SVG_DIR, `${name}-${size}.svg`);
 
-  console.log('Create source modules');
+      await fs.ensureDir(moduleFolder);
+      await Promise.all([
+        fs.writeFile(svgFilepath, svg),
+        fs.writeFile(jsFilepath, source),
+      ]);
 
-  await Promise.all(
-    modules.map(async file => {
-      await fs.ensureFile(file.dest);
-      return fs.writeFile(file.dest, file.source);
-    })
-  );
-
-  console.log('Build modules');
-
-  const BUNDLE_TYPES = [
-    {
-      type: 'cjs',
-      folder: 'lib',
-    },
-    {
-      type: 'umd',
-      folder: 'umd',
-    },
-  ];
-
-  await Promise.all(
-    BUNDLE_TYPES.map(({ type, folder }) => {
-      const bundles = modules.map(async file => {
+      const modules = MODULE_TYPES.map(async ({ type, folder }) => {
         const bundle = await rollup({
-          input: file.dest,
+          input: jsFilepath,
         });
 
         const outputOptions = {
           format: type,
-          file: file.dest.replace(/\/es\//, `/${folder}/`),
+          file: jsFilepath.replace(/\/es\//, `/${folder}/`),
         };
 
         if (type === 'umd') {
-          // If we're in our entrypoint, just default to CarbonIcons
-          outputOptions.name = getModuleName(file.name, file.size);
+          outputOptions.name = getModuleName(name, size);
         }
 
-        await bundle.write(outputOptions);
+        return bundle.write(outputOptions);
       });
-      return Promise.all(bundles);
+
+      return Promise.all(modules);
     })
   );
+
+  console.log('Creating entrypoints...');
+  const entrypointPath = path.join(BUILD_ES_DIR, 'index.js');
+  const entrypoint = prettier.format(
+    files.reduce((acc, file) => {
+      const name = getModuleName(file.name, file.size);
+      const jsExport = `export const ${name} = ${file.descriptor};`;
+      return acc + jsExport;
+    }, ''),
+    prettierOptions
+  );
+  await fs.writeFile(entrypointPath, entrypoint);
+
+  const entrypointBundle = await rollup({
+    input: entrypointPath,
+  });
+  await Promise.all(
+    MODULE_TYPES.map(async ({ type, folder }) => {
+      const outputOptions = {
+        format: type,
+        file: entrypointPath.replace(/\/es\//, `/${folder}/`),
+      };
+      if (type === 'umd') {
+        outputOptions.name = 'CarbonIcons';
+      }
+      return entrypointBundle.write(outputOptions);
+    })
+  );
+
+  console.log('Done! 🎉');
 }
 
 function isUppercase(string) {
@@ -147,24 +168,27 @@ function isUppercase(string) {
 
 function getModuleName(name, size) {
   if (size) {
-    return isUppercase(name) ? `${name}${size}` : pascal(`${name}${size}`);
+    const variant =
+      typeof size === 'number' ? size : size[0].toUpperCase() + size.slice(1);
+
+    // Handle cases where the icon starts with a number, like 4K
+    if (isNaN(name[0])) {
+      return isUppercase(name)
+        ? `${name}${variant}`
+        : pascal(`${name}${variant}`);
+    }
+
+    return isUppercase(name)
+      ? `_${name}${variant}`
+      : '_' + pascal(`${name}${variant}`);
   }
+
   return name;
 }
 
-function createEntrypoint(folder, modules) {
-  const source = modules.reduce((acc, file) => {
-    const moduleName = getModuleName(file.name, file.size);
-    const modulePath = path.relative(folder, file.dest);
-    return (
-      acc + `\nexport { default as ${moduleName} } from './${modulePath}';`
-    );
-  }, '');
-  return {
-    name: 'CarbonIcons',
-    source: prettier.format(source, prettierOptions),
-    dest: path.join(folder, 'index.js'),
-  };
+async function flatMapAsync(source, callback) {
+  const sink = await Promise.all(source.map(callback));
+  return sink.reduce((acc, elem) => acc.concat(elem), []);
 }
 
 module.exports = build;

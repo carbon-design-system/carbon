@@ -171,7 +171,7 @@ const svg2jsAsync = (...args) =>
 const parse = async (svg, name) => {
   const root = await svg2jsAsync(svg);
   try {
-    return root.content[0].content.map(convert);
+    return convert(root.content[0]);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);

@@ -23,7 +23,7 @@ beforeAll(async () => {
   await build();
 });
 
-describe('CommonJS', () => {
+xdescribe('CommonJS', () => {
   it('should build an entrypoint that is require-able', async () => {
     const indexJsPath = path.join(BUILD_CJS_DIR, 'index.js');
     expect(await fs.pathExists(indexJsPath)).toBe(true);
