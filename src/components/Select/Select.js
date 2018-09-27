@@ -37,6 +37,10 @@ const Select = ({
   const helper = helperText ? (
     <div className="bx--form__helper-text">{helperText}</div>
   ) : null;
+  const ariaProps = {};
+  if (invalid) {
+    ariaProps['aria-describedby'] = errorId;
+  }
   return (
     <div className="bx--form-item">
       <div className={selectClasses}>
@@ -45,12 +49,12 @@ const Select = ({
         </label>
         <select
           {...other}
+          {...ariaProps}
           id={id}
           className="bx--select-input"
           disabled={disabled || undefined}
           data-invalid={invalid || undefined}
-          aria-invalid={invalid || undefined}
-          aria-describedby={invalid && errorId}>
+          aria-invalid={invalid || undefined}>
           {children}
         </select>
         <Icon
