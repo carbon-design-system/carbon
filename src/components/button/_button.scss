@@ -224,11 +224,19 @@
     @include button-theme--x(transparent, $brand-01, $brand-01, transparent, $brand-01, transparent);
     position: relative;
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: $brand-02;
       border-color: $brand-02;
       text-decoration: underline;
+    }
+
+    &:focus {
+      text-decoration: none;
+      color: $brand-01;
+    }
+
+    &:focus:hover {
+      border: 1px solid transparent;
     }
 
     &:active {
@@ -244,6 +252,7 @@
 
     &:hover:disabled,
     &:focus:disabled {
+      color: $ibm-colors__gray--30;
       background: transparent;
     }
 
@@ -252,6 +261,10 @@
     }
 
     &:focus > .#{$prefix}--btn__icon {
+      fill: $brand-01;
+    }
+
+    &:active > .#{$prefix}--btn__icon {
       fill: $ibm-colors__blue--100;
     }
   }
@@ -327,12 +340,12 @@
   }
 
   .#{$prefix}--btn--danger--primary {
-    @include button-theme--x($support-01, transparent, $inverse-01, darken($support-01, 10%), $ui-01, red);
+    @include button-theme--x($support-01, transparent, $inverse-01, #ba1b23, $ui-01, $ibm-colors__red--80);
 
     &:hover:disabled,
     &:focus:disabled {
-      color: $ui-01;
-      border: $button-border-width solid $support-01;
+      color: $ui-04;
+      border: $button-border-width solid $ibm-colors__gray--30;
     }
   }
 
