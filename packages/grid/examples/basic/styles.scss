@@ -1,0 +1,44 @@
+@import '@carbon/layout/scss/key-height';
+@import '@carbon/layout/scss/spacing';
+@import '../../scss/grid';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.tile {
+  background-color: #edf4ff;
+  border: 1px solid #97c1ff;
+  height: key-height(sm, 1);
+}
+
+.#{$prefix}--row {
+  margin-bottom: spacing(6);
+}
+
+.#{$prefix}--grid.#{$prefix}--grid--padding [class^='#{$prefix}--col'] {
+  background-color: #dbeaff;
+  border: 1px solid #97c1ff;
+}

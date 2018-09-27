@@ -1,0 +1,65 @@
+@import '@carbon/layout/scss/breakpoint';
+@import 'variables';
+@import 'utilities';
+
+/**
+ * Defines our initial grid context, including width, max-width, and padding
+ * constraints based off of the given breakpoint.
+ */
+.#{$prefix}--grid {
+  $margin: map-deep-get($breakpoints, sm, margin);
+
+  width: 100%;
+  max-width: map-deep-get($breakpoints, max, width);
+  padding-left: $margin;
+  padding-right: $margin;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.#{$prefix}--grid > .#{$prefix}--row {
+  $breakpoint: map-get($breakpoints, sm);
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/**
+ * Generic helper column that will automatically span as much space as possible
+ * given the number of `.col` descendants there are in a row.
+ */
+.#{$prefix}--grid > .#{$prefix}--row > .#{$prefix}--col {
+  flex: 1 1 0%;
+}
+
+@mixin column-rules($col-width, $size, $number, $gutter) {
+  .#{$prefix}--col-#{$size}-#{$number} {
+    flex: 0 0 $col-width;
+    max-width: $col-width;
+  }
+
+  .#{$prefix}--offset-#{$size}-#{$number} {
+    margin-left: $col-width;
+  }
+}
+
+@mixin columns($breakpoint, $values) {
+  $columns: map-get($values, columns);
+  $width: map-get($values, width);
+  $gutter: map-get($values, gutter);
+
+  @for $i from 0 through $columns {
+    $col-width: (100% / $columns) * $i;
+    @include column-rules($col-width, $breakpoint, $i, $gutter);
+  }
+}
+
+@each $breakpoint, $values in $breakpoints {
+  @if $breakpoint == sm {
+    @include columns($breakpoint, $values);
+  } @else {
+    @include breakpoint($breakpoint) {
+      @include columns($breakpoint, $values);
+    }
+  }
+}
