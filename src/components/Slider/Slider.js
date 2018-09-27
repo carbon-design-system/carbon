@@ -152,9 +152,12 @@ export default class Slider extends PureComponent {
 
     requestAnimationFrame(() => {
       this.setState((prevState, props) => {
+        // Note: In FF, `evt.target` of `mousemove` event can be `HTMLDocument` which doesn't have `classList`.
+        // One example is dragging out of browser viewport.
         const fromInput =
           evt &&
           evt.target &&
+          evt.target.classList &&
           evt.target.classList.contains('bx-slider-text-input');
         const { left, newValue: newSliderValue } = this.calcValue(
           evt,
