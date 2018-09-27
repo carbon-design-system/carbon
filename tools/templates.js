@@ -19,6 +19,18 @@ helpers();
 
 const readFile = promisify(fs.readFile);
 
+try {
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  const logger = require(path.resolve(path.dirname(require.resolve('@frctl/fractal')), 'core/log'));
+  ['log', 'error', 'warn'].forEach(name => {
+    logger.on(name, evt => {
+      console[name](`Fractal ${name}:`, evt); // eslint-disable-line no-console
+    });
+  });
+} catch (err) {
+  console.error('Failed to hook Fractal logger', err.stack); // eslint-disable-line no-console
+}
+
 /**
  * @param {string} glob A glob.
  * @returns {Set<string, string>} A set of file contents matching the given glob, keyed by the basename of the file.
@@ -97,6 +109,12 @@ const cache = {
 const renderComponent = ({ layout, concat } = {}, handle) =>
   cache.get().then(({ componentSource, contents }) => {
     const renderedItems = new Map();
+    if (!componentSource) {
+      throw new TypeError(
+        'Fractal configuration (`*.config.js`) could not be harvested. ' +
+          'The most typical cause is a JavaScript error in one of the `*.config.js` files.'
+      );
+    }
     componentSource.forEach(metadata => {
       const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
       if (items) {
