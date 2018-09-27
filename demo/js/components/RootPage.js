@@ -271,7 +271,7 @@ class RootPage extends Component {
       }, 100);
       return;
     }
-    const { oldIsComponentsX, componentItems } = this.state;
+    const { isComponentsX: oldIsComponentsX, componentItems } = this.state;
     const isComponentsX = Array.prototype.some.call(
       link.sheet.cssRules,
       rule =>
