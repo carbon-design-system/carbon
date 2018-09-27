@@ -129,7 +129,6 @@
     transform: rotate(180deg);
   }
 
-  .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--dropdown-item__menu,
   .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--dropdown-item__menu {
     display: block;
   }
