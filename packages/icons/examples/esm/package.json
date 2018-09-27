@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "parcel build -d build --public-url \"/carbon-elements/icons/examples/esm\" index.html",
-    "develop": "parcel index.html"
+    "develop": "parcel index.html --no-cache"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",

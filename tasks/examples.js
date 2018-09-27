@@ -127,7 +127,9 @@ async function main() {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
   <title>Carbon Elements</title>
+  <style>body { font-family: 'IBM Plex Mono', monospaces; }</style>
 </head>
 <body>${links}</body>
 </html>
