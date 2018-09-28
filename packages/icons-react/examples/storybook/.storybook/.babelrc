@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": ["last 1 versions", "Firefox ESR"]
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ]
+}

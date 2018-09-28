@@ -23,39 +23,40 @@ beforeAll(async () => {
   await build();
 });
 
-xdescribe('CommonJS', () => {
-  it('should build an entrypoint that is require-able', async () => {
-    const indexJsPath = path.join(BUILD_CJS_DIR, 'index.js');
-    expect(await fs.pathExists(indexJsPath)).toBe(true);
+describe('CommonJS', () => {
+  it(
+    'should build an entrypoint that is require-able',
+    async () => {
+      const indexJsPath = path.join(BUILD_CJS_DIR, 'index.js');
+      expect(await fs.pathExists(indexJsPath)).toBe(true);
 
-    expect(() => {
-      require(indexJsPath);
-    }).not.toThrow();
-  });
+      expect(() => {
+        require(indexJsPath);
+      }).not.toThrow();
+    },
+    60 * 1000
+  );
 
-  it('should export all built icons with each size variant', async () => {
-    const icons = (await fs.readdir(BUILD_CJS_DIR)).filter(
-      name => name !== '__tools__' && name !== 'index.js'
-    );
-    const sizes = [16, 20, 24, 32];
+  it(
+    'should export icons that can be rendered',
+    async () => {
+      const icons = (await fs.readdir(BUILD_CJS_DIR)).filter(
+        name => name !== 'tools.js' && name !== 'index.js'
+      );
 
-    // Iterate through all of our icons and make sure that an export is defined
-    // for each icon and that it can be rendered
-    icons.map(icon => {
-      const name = path.basename(icon, '.svg');
-      const folder = path.join(BUILD_CJS_DIR, name);
-      return sizes.map(size => {
-        const filename = path.join(folder, `${size}.js`);
+      for (const icon of icons) {
+        const folder = path.join(BUILD_CJS_DIR, icon);
+        const sizes = await fs.readdir(folder);
 
-        expect(() => {
-          require(filename);
-        }).not.toThrow();
-
-        const Icon = require(filename);
-        expect(() => {
-          renderToStaticMarkup(React.createElement(Icon));
-        }).not.toThrow();
-      });
-    });
-  });
+        for (const size of sizes) {
+          const filename = path.join(folder, size);
+          expect(() => {
+            const Icon = require(filename);
+            renderToStaticMarkup(React.createElement(Icon));
+          }).not.toThrow();
+        }
+      }
+    },
+    60 * 1000
+  );
 });

@@ -54,6 +54,7 @@ async function build() {
         const descriptor = {
           ...info,
           name,
+          size,
         };
 
         if (size !== 'glyph') {
