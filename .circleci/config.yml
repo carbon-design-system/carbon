@@ -38,3 +38,10 @@ jobs:
 
       - store_artifacts:
           path: reports
+
+      - deploy:
+          name: deploy examples
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              yarn examples
+            fi
