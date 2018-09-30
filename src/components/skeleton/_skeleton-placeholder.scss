@@ -1,0 +1,9 @@
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/import-once';
+@import '../../globals/scss/vars';
+
+@include exports('skeleton-placeholder') {
+  .#{$prefix}--skeleton__placeholder {
+    @include skeleton;
+  }
+}
