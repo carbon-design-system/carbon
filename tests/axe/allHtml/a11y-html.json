@@ -459,7 +459,7 @@
       }
     ],
     "incomplete": [],
-    "timestamp": 1535160618213,
+    "timestamp": 1538076704912,
     "url": "http://localhost:3000",
     "violations": [
       {
@@ -571,7 +571,7 @@
         ]
       }
     ],
-    "time": 717,
+    "time": 8052,
     "status": 404
   }
 ]
