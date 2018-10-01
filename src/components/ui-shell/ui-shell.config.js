@@ -35,6 +35,22 @@ const header = {
       title: 'Action 4',
     },
   ],
+  navLinks: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'L1 link 1',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'L1 link 2',
+    },
+    {
+      title: 'L1 link 3',
+    },
+    {
+      title: 'L1 link 4',
+    },
+  ],
 };
 
 const sidenav = {
@@ -128,6 +144,45 @@ const nav = {
   ],
 };
 
+const switcher = {
+  state: {
+    expanded: false,
+    showAll: false,
+  },
+  links: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'My Product',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'My Product 2',
+    },
+  ],
+  allLinks: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+  ],
+};
+
 module.exports = {
   preview: 'ui-shell-preview',
   meta: {
@@ -137,6 +192,7 @@ module.exports = {
     header,
     nav,
     sidenav,
+    switcher,
   },
   variants: [
     {
@@ -220,6 +276,28 @@ module.exports = {
           state: {
             expanded: true,
             category: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'Switcher Expanded Default',
+      context: {
+        switcher: {
+          state: {
+            expanded: true,
+            showAll: false,
+          },
+        },
+      },
+    },
+    {
+      name: 'Switcher All Products',
+      context: {
+        switcher: {
+          state: {
+            expanded: true,
+            showAll: true,
           },
         },
       },

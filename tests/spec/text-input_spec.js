@@ -1,6 +1,6 @@
 // only test JS class since it is only instantiated with password fields
 import TextInput from '../../src/components/text-input/text-input';
-import PasswordVisibilityHTML from '../../html/text-input/text-input--toggle-password-visibility.html';
+import PasswordVisibilityHTML from '../../html/text-input/text-input--password.html';
 import flattenOptions from '../utils/flatten-options';
 
 describe('Test text input', () => {
