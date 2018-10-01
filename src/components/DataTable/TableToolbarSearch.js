@@ -19,6 +19,8 @@ const TableToolbarSearch = ({
   searchContainerClass,
   onChange,
   translateWithId: t,
+  placeHolderText,
+  labelText,
   id = `data-table-search-${getInstanceId()}`,
   ...rest
 }) => {
@@ -34,8 +36,10 @@ const TableToolbarSearch = ({
         {...rest}
         small
         id={id}
-        labelText={t('carbon.table.toolbar.search.label')}
-        placeHolderText={t('carbon.table.toolbar.search.placeholder')}
+        labelText={labelText || t('carbon.table.toolbar.search.label')}
+        placeHolderText={
+          placeHolderText || t('carbon.table.toolbar.search.placeholder')
+        }
         onChange={onChange}
       />
     </div>
@@ -64,6 +68,16 @@ TableToolbarSearch.propTypes = {
    * Provide an optional hook that is called each time the input is updated
    */
   onChange: PropTypes.func,
+
+  /**
+   * Provide an optional placeholder text for the Search component
+   */
+  placeHolderText: PropTypes.string,
+
+  /**
+   * Provide an optional label text for the Search component icon
+   */
+  labelText: PropTypes.string,
 
   /**
    * Provide custom text for the component for each translation id
