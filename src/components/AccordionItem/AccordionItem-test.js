@@ -109,7 +109,7 @@ describe('AccordionItem', () => {
     const wrapper = mount(
       <AccordionItem onClick={onClick} onHeadingClick={onHeadingClick} />
     );
-    const heading = wrapper.find('.bx--accordion__heading');
+    const heading = wrapper.find('button.bx--accordion__heading');
 
     it('should call onClick', () => {
       wrapper.simulate('click');
@@ -126,7 +126,7 @@ describe('AccordionItem', () => {
     const toggler = mount(
       <AccordionItem title="A heading">Lorem ipsum.</AccordionItem>
     );
-    const heading = toggler.find('.bx--accordion__heading');
+    const heading = toggler.find('button.bx--accordion__heading');
 
     it('should set state to open when clicked', () => {
       expect(toggler.state().open).toEqual(false);
