@@ -143,7 +143,7 @@ describe('Test floating menu', function() {
 
     afterEach(function() {
       element.classList.remove('my-floating-menu-open');
-      element.classList.remove('my-floating-menu-trigger-open');
+      refNode.classList.remove('my-floating-menu-trigger-open');
       events.reset();
     });
 
