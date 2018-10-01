@@ -6,7 +6,6 @@
 @include exports('data-table-v2-core') {
   .#{$prefix}--data-table-v2-container {
     width: 100%;
-    min-width: rem(500px);
     overflow-x: auto;
     padding-top: $spacing-3xs; // allow space for focus styles
   }
@@ -15,6 +14,7 @@
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
+    min-width: rem(500px);
     border-bottom: 1px solid $ui-03;
 
     thead {
