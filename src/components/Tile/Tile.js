@@ -271,6 +271,8 @@ export class SelectableTile extends Component {
 }
 
 export class ExpandableTile extends Component {
+  state = {};
+
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -300,15 +302,11 @@ export class ExpandableTile extends Component {
       expanded: currentExpanded,
       tileMaxHeight: currentTileMaxHeight,
       tilePadding: currentTilePadding,
-    } =
-      state || {};
+    } = state;
     const expandedChanged = prevExpanded !== expanded;
     const tileMaxHeightChanged = prevTileMaxHeight !== tileMaxHeight;
     const tilePaddingChanged = prevTilePadding !== tilePadding;
-    return state &&
-      !expandedChanged &&
-      !tileMaxHeightChanged &&
-      !tilePaddingChanged
+    return !expandedChanged && !tileMaxHeightChanged && !tilePaddingChanged
       ? null
       : {
           expanded: !expandedChanged ? currentExpanded : expanded,
