@@ -268,16 +268,18 @@ export default class Tooltip extends Component {
     document.body;
 
   handleMouse = evt => {
-    const state =
-      typeof evt === 'string'
-        ? evt
-        : { mouseover: 'over', mouseout: 'out', focus: 'over', blur: 'out' }[
-            evt.type
-          ];
+    const state = {
+      mouseover: 'over',
+      mouseout: 'out',
+      focus: 'over',
+      blur: 'out',
+      click: 'click',
+    }[evt.type];
     const hadContextMenu = this._hasContextMenu;
     this._hasContextMenu = evt.type === 'contextmenu';
     if (this.props.clickToOpen) {
       if (state === 'click') {
+        evt.stopPropagation();
         const shouldOpen = !this.state.open;
         if (shouldOpen) {
           this.getTriggerPosition();
@@ -304,6 +306,7 @@ export default class Tooltip extends Component {
     const key = evt.key || evt.which;
 
     if (key === 'Enter' || key === 13 || key === ' ' || key === 32) {
+      evt.stopPropagation();
       this.setState({ open: !this.state.open });
     }
   };
@@ -361,6 +364,8 @@ export default class Tooltip extends Component {
                 id={triggerId}
                 role="button"
                 tabIndex="0"
+                onClick={evt => this.handleMouse(evt)}
+                onKeyDown={evt => this.handleKeyPress(evt)}
                 onMouseOver={evt => this.handleMouse(evt)}
                 onMouseOut={evt => this.handleMouse(evt)}
                 onFocus={evt => this.handleMouse(evt)}
@@ -369,8 +374,6 @@ export default class Tooltip extends Component {
                 aria-expanded={open}
                 {...ariaOwnsProps}>
                 <Icon
-                  onKeyDown={this.handleKeyPress}
-                  onClick={() => this.handleMouse('click')}
                   icon={!icon && !iconName ? iconInfoGlyph : icon}
                   name={iconName}
                   description={iconDescription}
