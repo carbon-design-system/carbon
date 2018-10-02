@@ -1,6 +1,6 @@
 {
   "name": "@carbon/icons-react",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -19,7 +19,7 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/icons": "0.0.1-alpha.1",
+    "@carbon/icons": "0.0.1-alpha.2",
     "change-case": "^3.0.2",
     "del": "^3.0.0",
     "fs-extra": "^6.0.1",
