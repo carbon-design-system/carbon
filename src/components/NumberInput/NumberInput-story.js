@@ -24,6 +24,7 @@ const props = () => ({
   light: boolean('Light variant (light)', false),
   onChange: action('onChange'),
   onClick: action('onClick'),
+  allowEmpty: boolean('Allow empty value (allowEmpty)', false),
 });
 
 storiesOf('NumberInput', module)
