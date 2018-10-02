@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  hidden: true,
   variants: [
     {
       name: 'default',
