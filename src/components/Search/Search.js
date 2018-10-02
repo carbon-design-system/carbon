@@ -33,8 +33,8 @@ export default class Search extends Component {
   };
 
   static getDerivedStateFromProps({ value }, state) {
-    const { prevValue } = state || {};
-    return state && prevValue === value
+    const { prevValue } = state;
+    return prevValue === value
       ? null
       : {
           hasContent: !!value,
