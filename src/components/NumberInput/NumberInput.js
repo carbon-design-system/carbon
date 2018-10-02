@@ -65,7 +65,7 @@ export default class NumberInput extends Component {
   _inputRef = null;
 
   static getDerivedStateFromProps({ min, value }, state) {
-    const { prevValue } = state || {};
+    const { prevValue } = state;
     return prevValue === value
       ? null
       : {

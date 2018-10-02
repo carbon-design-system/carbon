@@ -4,6 +4,11 @@ import RadioTile from '../RadioTile';
 import warning from 'warning';
 
 export default class TileGroup extends React.Component {
+  state = {
+    selected: this.props.valueSelected || this.props.defaultSelected || null,
+    prevValueSelected: this.props.valueSelected,
+  };
+
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -20,8 +25,8 @@ export default class TileGroup extends React.Component {
   };
 
   static getDerivedStateFromProps({ valueSelected, defaultSelected }, state) {
-    const { prevValueSelected } = state || {};
-    return state && prevValueSelected === valueSelected
+    const { prevValueSelected } = state;
+    return prevValueSelected === valueSelected
       ? null
       : {
           selected: valueSelected || defaultSelected || null,
