@@ -247,34 +247,37 @@ export default class DatePicker extends Component {
         typeof appendTo === 'string'
           ? document.querySelector(appendTo)
           : appendTo;
-      this.cal = new flatpickr(this.inputField, {
-        defaultDate: value,
-        appendTo: appendToNode,
-        mode: datePickerType,
-        allowInput: true,
-        dateFormat: dateFormat,
-        locale: l10n[locale],
-        minDate: minDate,
-        maxDate: maxDate,
-        plugins:
-          datePickerType === 'range'
-            ? [new rangePlugin({ input: this.toInputField })]
-            : '',
-        clickOpens: true,
-        nextArrow: this.rightArrowHTML(),
-        leftArrow: this.leftArrowHTML(),
-        onChange: (...args) => {
-          if (onChange) {
-            onChange(...args);
-          }
-        },
-        onReady: onHook,
-        onMonthChange: onHook,
-        onYearChange: onHook,
-        onOpen: onHook,
-        onValueUpdate: onHook,
-      });
-      this.addKeyboardEvents(this.cal);
+      // inputField ref might not be set in enzyme tests
+      if (this.inputField) {
+        this.cal = new flatpickr(this.inputField, {
+          defaultDate: value,
+          appendTo: appendToNode,
+          mode: datePickerType,
+          allowInput: true,
+          dateFormat: dateFormat,
+          locale: l10n[locale],
+          minDate: minDate,
+          maxDate: maxDate,
+          plugins:
+            datePickerType === 'range'
+              ? [new rangePlugin({ input: this.toInputField })]
+              : '',
+          clickOpens: true,
+          nextArrow: this.rightArrowHTML(),
+          leftArrow: this.leftArrowHTML(),
+          onChange: (...args) => {
+            if (onChange) {
+              onChange(...args);
+            }
+          },
+          onReady: onHook,
+          onMonthChange: onHook,
+          onYearChange: onHook,
+          onOpen: onHook,
+          onValueUpdate: onHook,
+        });
+        this.addKeyboardEvents(this.cal);
+      }
     }
   }
 
