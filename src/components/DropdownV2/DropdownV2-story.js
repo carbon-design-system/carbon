@@ -34,6 +34,7 @@ const types = {
 const props = () => ({
   type: select('Dropdown type (type)', types, 'default'),
   label: text('Label (label)', 'Label'),
+  ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
 });

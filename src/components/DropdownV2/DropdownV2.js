@@ -54,6 +54,11 @@ export default class DropdownV2 extends React.Component {
     label: PropTypes.node.isRequired,
 
     /**
+     * 'aria-label' of the ListBox component.
+     */
+    ariaLabel: PropTypes.string,
+
+    /**
      * The dropdown type, `default` or `inline`
      */
     type: ListBoxPropTypes.ListBoxType,
@@ -88,6 +93,7 @@ export default class DropdownV2 extends React.Component {
       disabled,
       items,
       label,
+      ariaLabel,
       itemToString,
       type,
       initialSelectedItem,
@@ -119,6 +125,7 @@ export default class DropdownV2 extends React.Component {
             type={type}
             className={className}
             disabled={disabled}
+            ariaLabel={ariaLabel}
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field {...getButtonProps({ disabled })}>
               <span className="bx--list-box__label" {...getLabelProps()}>
