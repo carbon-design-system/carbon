@@ -112,6 +112,11 @@ export default class ComboBox extends React.Component {
      * @param {string} inputText
      */
     onInputChange: PropTypes.func,
+
+    /**
+     * should use "light theme" (white background)?
+     */
+    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -120,6 +125,7 @@ export default class ComboBox extends React.Component {
     shouldFilterItem: defaultShouldFilterItem,
     type: 'default',
     ariaLabel: 'ListBox input field',
+    light: false,
   };
 
   constructor(props) {
@@ -182,6 +188,7 @@ export default class ComboBox extends React.Component {
       translateWithId,
       invalid,
       invalidText,
+      light,
     } = this.props;
     const className = cx('bx--combo-box', containerClassName);
 
@@ -208,6 +215,7 @@ export default class ComboBox extends React.Component {
             disabled={disabled}
             invalid={invalid}
             invalidText={invalidText}
+            light={light}
             {...getRootProps({ refKey: 'innerRef' })}>
             <ListBox.Field {...getButtonProps({ disabled })}>
               <input

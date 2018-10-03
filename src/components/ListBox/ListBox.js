@@ -30,6 +30,7 @@ const ListBox = ({
   type,
   invalid,
   invalidText,
+  light,
   ...rest
 }) => {
   const className = cx({
@@ -37,6 +38,7 @@ const ListBox = ({
     'bx--list-box': true,
     'bx--list-box--inline': type === 'inline',
     'bx--list-box--disabled': disabled,
+    'bx--list-box--light': light,
   });
   return (
     <>
