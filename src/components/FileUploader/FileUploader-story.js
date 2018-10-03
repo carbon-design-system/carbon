@@ -83,30 +83,33 @@ storiesOf('FileUploader', module)
       text: `
         The FileUploader components allow the user to upload any necessary files. This uses the FileUploaderButton and Filename components. Filename components will appear below the FileUploaderButton when files are added. Use the filenameStatus prop to control what icon appears in Filename ('edit', 'complete', or 'uploading').
       `,
-    })(() => (
-      <div className="bx--file__container">
-        <FileUploader
-          {...props.fileUploader()}
-          ref={fileUploader => (this.fileUploader = fileUploader)}
-        />
-        <Button
-          kind="secondary"
-          small
-          style={{ marginTop: '1rem' }}
-          onClick={() => {
-            this.fileUploader.clearFiles();
-          }}>
-          Clear File
-        </Button>
-      </div>
-    ))
+    })(() => {
+      let fileUploader;
+      return (
+        <div className="bx--file__container">
+          <FileUploader
+            {...props.fileUploader()}
+            ref={node => (fileUploader = node)}
+          />
+          <Button
+            kind="secondary"
+            small
+            style={{ marginTop: '1rem' }}
+            onClick={() => {
+              fileUploader.clearFiles();
+            }}>
+            Clear File
+          </Button>
+        </div>
+      );
+    })
   )
   .add(
     'skeleton',
     withInfo({
       text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
+Placeholder skeleton state to use when content is loading.
+`,
     })(() => (
       <div style={{ width: '500px' }}>
         <FileUploaderSkeleton />
