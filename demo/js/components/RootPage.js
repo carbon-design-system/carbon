@@ -20,6 +20,27 @@ const checkStatus = response => {
 
 /**
  * @param {Object[]} componentItems The components data.
+ * @returns {Object[]} The components data with the contents of all components cleared.
+ */
+const clearContent = componentItems =>
+  componentItems.map(
+    item =>
+      !item.items
+        ? {
+            ...item,
+            renderedContent: undefined,
+          }
+        : {
+            ...item,
+            items: item.items.map(subItem => ({
+              ...subItem,
+              renderedContent: undefined,
+            })),
+          }
+  );
+
+/**
+ * @param {Object[]} componentItems The components data.
  * @param {string} id The component ID.
  * @param {Object|string} content The content. String for component content, object for variant content (keyed by variant ID).
  * @returns {Object[]} The components data with the content of the given component ID populated with the given content.
@@ -250,16 +271,23 @@ class RootPage extends Component {
       }, 100);
       return;
     }
+    const { isComponentsX: oldIsComponentsX, componentItems } = this.state;
     const isComponentsX = Array.prototype.some.call(
       link.sheet.cssRules,
       rule =>
         /^\.bx--body$/.test(rule.selectorText) &&
         /^rgb\(255,\s*255,\s*255\)$/.test(rule.style.getPropertyValue('background-color'))
     );
-    this.setState({
-      componentItems: applyComponentsX(this.state.componentItems, isComponentsX),
-      isComponentsX,
-    });
+    if (oldIsComponentsX !== isComponentsX) {
+      this.setState(
+        {
+          // TODO: Load/navigate
+          componentItems: applyComponentsX(clearContent(componentItems), isComponentsX),
+          isComponentsX,
+        },
+        this._populateCurrent
+      );
+    }
   }
 
   /**
@@ -300,6 +328,29 @@ class RootPage extends Component {
   }
 
   /**
+   * Populates the content of current selection.
+   */
+  _populateCurrent() {
+    const { componentItems, selectedNavItemId } = this.state;
+    const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
+    const subItems = metadata.items || [];
+    const hasRenderedContent =
+      !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
+    if (!hasRenderedContent) {
+      fetch(`/code/${metadata.name}`)
+        .then(checkStatus)
+        .then(response => {
+          const contentType = response.headers.get('content-type');
+          return contentType && contentType.includes('application/json') ? response.json() : response.text();
+        })
+        .then(responseContent => {
+          // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
+          this.setState({ componentItems: applyContent(this.state.componentItems, selectedNavItemId, responseContent) });
+        });
+    }
+  }
+
+  /**
    * Toggles usage of experimental CSS upon user event.
    * @param {Object} evt The event.
    * @private
@@ -320,22 +371,7 @@ class RootPage extends Component {
       if (name) {
         history.pushState({ name }, name, `/demo/${name}`);
       }
-      const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
-      const subItems = metadata.items || [];
-      const hasRenderedContent =
-        !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
-      if (!hasRenderedContent) {
-        fetch(`/code/${metadata.name}`)
-          .then(checkStatus)
-          .then(response => {
-            const contentType = response.headers.get('content-type');
-            return contentType && contentType.includes('application/json') ? response.json() : response.text();
-          })
-          .then(responseContent => {
-            // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
-            this.setState({ componentItems: applyContent(this.state.componentItems, selectedNavItemId, responseContent) });
-          });
-      }
+      this._populateCurrent();
     });
   }
 
