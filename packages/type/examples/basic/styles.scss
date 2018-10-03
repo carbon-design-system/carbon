@@ -1,16 +1,61 @@
 @import '../../scss/type';
 
-@each $name, $value in $tokens {
-  @each $step in $value {
-    $index: index($value, $step);
-    $variant: #{$name}-0#{$index};
+//------------------------------------------------------------------------------
+// Font-face
+//------------------------------------------------------------------------------
+.type-sans,
+.type-mono {
+  @include font-weight('regular');
+  @include type-scale(8);
+}
 
-    .type--#{$variant} {
-      @include type($variant);
-    }
+.type-sans {
+  @include font-family('sans');
+}
+
+.type-mono {
+  @include font-family('mono');
+}
+
+.type-weight-light {
+  @include font-weight('light');
+}
+
+.type-weight-semibold {
+  @include font-weight('semibold');
+}
+
+//------------------------------------------------------------------------------
+// Type-scale
+//------------------------------------------------------------------------------
+@each $value in $type-scale {
+  $step: index($type-scale, $value);
+
+  .type-scale-#{$step} {
+    @include type-scale($step);
   }
 }
 
-body {
-  @include type(body-03);
+//------------------------------------------------------------------------------
+// Type styles
+//------------------------------------------------------------------------------
+// Headings
+@for $i from 1 through 6 {
+  .type-heading-0#{$i} {
+    @include type-style('heading-0#{$i}');
+  }
+}
+
+// Body
+@for $i from 1 through 3 {
+  .type-body-0#{$i} {
+    @include type-style('body-0#{$i}');
+  }
+}
+
+// Code
+@for $i from 1 through 2 {
+  .type-code-0#{$i} {
+    @include type-style('code-0#{$i}');
+  }
 }

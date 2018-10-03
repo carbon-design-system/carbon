@@ -1,0 +1,158 @@
+@import '@carbon/layout/scss/breakpoint';
+@import 'font-family';
+@import 'scale';
+
+$heading-01: (
+  font-family: font-family('sans'),
+  font-size: type-scale(2),
+  font-weight: font-weight('regular'),
+  line-height: rem(18px),
+  letter-spacing: 0.01rem,
+) !default;
+
+$heading-02: (
+  font-family: font-family('sans'),
+  font-size: type-scale(3),
+  font-weight: font-weight('regular'),
+  line-height: rem(22px),
+  letter-spacing: 0,
+) !default;
+
+$heading-03: (
+  font-family: font-family('sans'),
+  font-size: type-scale(3),
+  font-weight: font-weight('semibold'),
+  line-height: rem(22px),
+  letter-spacing: 0,
+) !default;
+
+$heading-04: (
+  font-family: font-family('sans'),
+  font-size: type-scale(5),
+  font-weight: font-weight('regular'),
+  line-height: rem(26px),
+  letter-spacing: 0,
+  breakpoints: (
+    max: (
+      font-size: type-scale(6),
+      line-height: rem(30px),
+    ),
+  ),
+) !default;
+
+$heading-05: (
+  font-family: font-family('sans'),
+  font-size: type-scale(7),
+  font-weight: font-weight('regular'),
+  line-height: rem(32px),
+  letter-spacing: 0,
+  breakpoints: (
+    max: (
+      font-size: type-scale(8),
+      line-height: rem(32px),
+    ),
+  ),
+) !default;
+
+$heading-06: (
+  font-family: font-family('sans'),
+  font-size: type-scale(8),
+  font-weight: font-weight('light'),
+  line-height: rem(32px),
+  letter-spacing: 0,
+  breakpoints: (
+    lg: (
+      font-size: type-scale(9),
+      line-height: rem(44px),
+    ),
+    xlg: (
+      font-size: type-scale(10),
+      line-height: rem(50px),
+    ),
+    max: (
+      font-size: type-scale(11),
+      line-height: rem(56px),
+    ),
+  ),
+) !default;
+
+$body-01: (
+  font-family: font-family('sans'),
+  font-weight: font-weight('regular'),
+  font-size: type-scale(1),
+  line-height: rem(16px),
+  letter-spacing: 0.02rem,
+);
+
+$body-02: (
+  font-family: font-family('sans'),
+  font-weight: font-weight('regular'),
+  font-size: type-scale(2),
+  line-height: rem(20px),
+  letter-spacing: 0.01rem,
+);
+
+$body-03: (
+  font-family: font-family('sans'),
+  font-weight: font-weight('regular'),
+  font-size: type-scale(3),
+  line-height: rem(24px),
+  letter-spacing: 0,
+);
+
+$code-01: (
+  font-family: font-family('mono'),
+  font-weight: font-weight('regular'),
+  font-size: type-scale(1),
+  line-height: rem(16px),
+  letter-spacing: 0.01rem,
+) !default;
+
+$code-02: (
+  font-family: font-family('mono'),
+  font-weight: font-weight('regular'),
+  font-size: type-scale(2),
+  line-height: rem(20px),
+  letter-spacing: 0.01rem,
+) !default;
+
+// prettier-ignore
+$tokens: (
+  // Heading styles
+  heading-01: $heading-01,
+  heading-02: $heading-02,
+  heading-03: $heading-03,
+  heading-04: $heading-04,
+  heading-05: $heading-05,
+  heading-06: $heading-06,
+
+  // Body styles
+  body-01: $body-01, body-02: $body-02,
+  body-03: $body-03,
+
+  // Code styles
+  code-01: $code-01,
+  code-02: $code-02,
+);
+
+@mixin properties($map) {
+  @each $name, $value in $map {
+    #{$name}: $value;
+  }
+}
+
+@mixin type-style($name) {
+  $token: map-get($tokens, $name);
+  $default-values: map-remove($token, 'breakpoints');
+
+  @include properties($default-values);
+
+  @if map-has-key($token, 'breakpoints') {
+    $breakpoints: map-get($token, 'breakpoints');
+    @each $name, $value in $breakpoints {
+      @include breakpoint($name) {
+        @include properties($value);
+      }
+    }
+  }
+}

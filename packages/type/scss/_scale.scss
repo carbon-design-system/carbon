@@ -1,29 +1,38 @@
-$base-font-size: 16px !default; // Default, Use with em() and rem() functions
+@import '@carbon/layout/scss/convert';
 
-$typescale: (
-  0.75rem,
-  0.875rem,
-  1rem,
-  1.125rem,
-  1.25rem,
-  1.5rem,
-  1.75rem,
-  2rem,
-  2.25rem,
-  2.625rem,
-  3rem,
-  3.375rem,
-  3.75rem,
-  4.25rem,
-  4.75rem,
-  5.25rem,
-  5.75rem
-);
-
+/// Compute the type size for the given type scale step
+/// @param {Number} $step
+/// @return {px}
 @function get-type-size($step) {
-  @return nth($typescale, $step);
+  @if $step == 1 {
+    @return 12px;
+  }
+  // Yn = Yn-1 + {INT[(n-2)/4] + 1} * 2
+  @return get-type-size($step - 1) + (floor(($step - 2) / 4) + 1) * 2;
 }
 
-@function rem($px) {
-  @return ($px / $base-font-size) * 1rem;
+/// Our type scale. Follows a custom formula for determining each step size.
+/// Supports sizes from 12px to 92px.
+$type-scale: ();
+@for $i from 1 through 17 {
+  $type-scale: append($type-scale, rem(get-type-size($i)));
+}
+
+/// Get the value of a specific step in the typescale
+/// @param {Number} $step
+/// @return {rem}
+@function type-scale($step) {
+  @return nth($type-scale, $step);
+}
+
+/// Set the font-size value of a selector with the value at the given $step
+/// @param {Number} $step
+@mixin type-scale($step) {
+  font-size: type-scale($step);
+}
+
+/// Alias of `type-scale` mixin.
+/// @param {Number} $step
+@mixin font-size($step) {
+  font-size: type-scale($step);
 }

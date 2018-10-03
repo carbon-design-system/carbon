@@ -12,6 +12,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "dependencies": {
+    "@carbon/layout": "0.0.1-alpha.2",
+    "@carbon/scss-helpers": "0.0.1-alpha.2"
+  },
   "eyeglass": {
     "exports": false,
     "name": "carbon-colors",

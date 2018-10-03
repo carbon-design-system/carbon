@@ -1,17 +1,5 @@
 @import 'breakpoint';
-
-/// Map deep get
-/// @author Hugo Giraudel
-/// @access public
-/// @param {Map} $map - Map
-/// @param {Arglist} $keys - Key chain
-/// @return {*} - Desired value
-@function map-deep-get($map, $keys...) {
-  @each $key in $keys {
-    $map: map-get($map, $key);
-  }
-  @return $map;
-}
+@import 'utilities';
 
 /// Get the column width for a given breakpoint. Useful for figuring out key
 /// heights

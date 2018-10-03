@@ -1,0 +1,20 @@
+@import '@carbon/layout/scss/convert';
+@import '@carbon/scss-helpers/import-once';
+@import 'font-family';
+
+/// Include a type reset that individuals can use in their projects for
+/// consistent rendering
+@include exports('type-reset') {
+  html {
+    font-size: $base-font-size;
+  }
+
+  body {
+    @include font-family('sans');
+    @include font-weight('regular');
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
