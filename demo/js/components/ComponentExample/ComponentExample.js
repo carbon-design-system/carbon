@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'carbon-components-react';
 import classnames from 'classnames';
 
+import * as components from '../../../components';
+
 import CodeExample from '../CodeExample/CodeExample';
-import InlineLoadingDemoButton from '../../inline-loading-demo-button';
 
 const forEach = Array.prototype.forEach;
 
@@ -92,10 +93,6 @@ class ComponentExample extends Component {
   _instantiateComponents = () => {
     const container = this._container;
     if (container) {
-      const components = {
-        ...(container.ownerDocument.defaultView.CarbonComponents || {}),
-        InlineLoadingDemoButton,
-      };
       const componentClasses = Object.keys(components)
         .map(key => components[key])
         .filter(Clz => typeof Clz.init === 'function');
@@ -111,10 +108,6 @@ class ComponentExample extends Component {
   _releaseComponents = () => {
     const container = this._container;
     if (container) {
-      const components = {
-        ...(container.ownerDocument.defaultView.CarbonComponents || {}),
-        InlineLoadingDemoButton,
-      };
       Object.keys(components)
         .map(key => components[key])
         .filter(Clz => typeof Clz.init === 'function')

@@ -3,6 +3,7 @@
 /* eslint import/no-extraneous-dependencies: [2, {"devDependencies": true}] */
 
 const path = require('path');
+const Module = require('module');
 const pathRegexp = require('path-to-regexp');
 const browserSync = require('browser-sync');
 const serveStatic = require('serve-static');
@@ -23,18 +24,41 @@ const compiler = devMode && webpack(config);
 const hotMiddleware = devMode && webpackHotMiddleware(compiler);
 
 let dummyHashSeq = 0;
+let templateOrConfigChanged = false;
 const watchCallback = debounce(() => {
+  const featureFlagCacheKey = Object.keys(require.cache).find(key => /feature-flags\.js$/i.test(key));
+  if (featureFlagCacheKey) {
+    require.cache[featureFlagCacheKey] = undefined;
+  }
   templates.cache.clear();
-  hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
+  if (templateOrConfigChanged) {
+    templateOrConfigChanged = false;
+    hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
+  }
 }, 500);
+
+const invokeWatchCallback = name => {
+  if (!/feature-flags\.js$/i.test(name)) {
+    templateOrConfigChanged = true;
+  }
+  watchCallback();
+};
 
 if (devMode) {
   chokidar
-    .watch(['demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
-    .on('add', watchCallback)
-    .on('change', watchCallback)
-    .on('unlink', watchCallback);
+    .watch(['demo/feature-flags.js', 'demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
+    .on('add', invokeWatchCallback)
+    .on('change', invokeWatchCallback)
+    .on('unlink', invokeWatchCallback);
 }
+
+const origResolveFilename = Module._resolveFilename;
+Module._resolveFilename = function resolveModule(request, parentModule, ...other) {
+  const newRequest = !/feature-flags$/i.test(request)
+    ? request
+    : path.relative(path.dirname(parentModule.id), path.resolve(__dirname, 'demo/feature-flags.js'));
+  return origResolveFilename.call(this, newRequest, parentModule, ...other);
+};
 
 const reComponentPath = pathRegexp('/component/:component');
 const reDemoComponentPath = pathRegexp('/demo/:component');
