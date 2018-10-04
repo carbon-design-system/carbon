@@ -29,7 +29,7 @@ module.exports = {
   entry: ['webpack-hot-middleware/client?reload=true', path.resolve(__dirname, '../demo/index')],
   output: {
     path: path.resolve(__dirname, '../demo'),
-    publicPath: '/demo/',
+    publicPath: '/',
     hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
     hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     filename: 'demo.js',

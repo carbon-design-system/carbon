@@ -193,7 +193,7 @@ function codeRoute(req, res, next) {
 }
 
 function demoRoute(req, res, next) {
-  if (!/^\/demo/i.test(req.url)) {
+  if (!/^\/demo\.(css|js)$/i.test(req.url)) {
     next();
   } else {
     demoStaticRoute(req, res, next);
@@ -201,12 +201,12 @@ function demoRoute(req, res, next) {
 }
 
 browserSync({
-  baseDir: 'demo',
   files: ['demo/demo.css'],
   open: false,
   port: process.env.PORT || 8080,
 
   server: {
+    baseDir: 'demo',
     middleware: [
       !devMode
         ? noopRoute
