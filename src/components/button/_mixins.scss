@@ -81,10 +81,11 @@
   text-decoration: none;
   transition-duration: $transition--base;
   transition-timing-function: ease-in;
-  line-height: rem(14px);
+  line-height: 1.125rem;
   outline: $button-outline-width solid transparent;
   position: relative;
-  max-width: rem(250px);
+  max-width: rem(320px);
+  min-width: rem(80px);
 
   &:disabled {
     cursor: not-allowed;
