@@ -184,18 +184,6 @@
     border: 0;
   }
 
-  // Vertically center icon inside <button>
-  button.#{$prefix}--btn .#{$prefix}--btn__icon {
-    position: relative;
-    vertical-align: middle;
-    top: -1px;
-
-    // Targets IE10+ browsers: Reset <svg> position for vertical centering
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      top: 0;
-    }
-  }
-
   .#{$prefix}--btn {
     @include button-base--x;
   }
@@ -221,28 +209,11 @@
   }
 
   .#{$prefix}--btn--tertiary {
-    @include button-theme--x(transparent, $brand-01, $brand-01, transparent, $brand-01, transparent);
+    @include button-theme--x(transparent, $brand-01, $brand-01, #0353e9, $brand-01, $brand-02);
     position: relative;
 
     &:hover {
-      color: $brand-02;
-      border-color: $brand-02;
-      text-decoration: underline;
-    }
-
-    &:focus {
-      text-decoration: none;
-      color: $brand-01;
-    }
-
-    &:focus:hover {
-      border: 1px solid transparent;
-    }
-
-    &:active {
-      color: $ibm-colors__blue--100;
-      border-color: $ibm-colors__blue--100;
-      text-decoration: underline;
+      color: $inverse-01;
     }
 
     &:disabled,
@@ -257,15 +228,7 @@
     }
 
     &:hover > .#{$prefix}--btn__icon {
-      fill: $brand-02;
-    }
-
-    &:focus > .#{$prefix}--btn__icon {
-      fill: $brand-01;
-    }
-
-    &:active > .#{$prefix}--btn__icon {
-      fill: $ibm-colors__blue--100;
+      fill: $inverse-01;
     }
   }
 
@@ -342,7 +305,7 @@
 
   .#{$prefix}--btn--sm {
     @include letter-spacing;
-    height: 2rem;
+    height: auto;
     padding: $button-padding-sm;
   }
 

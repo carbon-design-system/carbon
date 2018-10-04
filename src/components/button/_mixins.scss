@@ -74,16 +74,17 @@
   flex-shrink: 0;
   font-size: $button-font-size;
   font-weight: $button-font-weight;
-  height: rem($button-height);
+  height: auto;
   padding: $button-padding;
   border-radius: $button-border-radius;
   text-align: left;
   text-decoration: none;
   transition-duration: $transition--base;
   transition-timing-function: ease-in;
-  white-space: nowrap;
-  line-height: 16px;
+  line-height: rem(14px);
   outline: $button-outline-width solid transparent;
+  position: relative;
+  max-width: rem(250px);
 
   &:disabled {
     cursor: not-allowed;
@@ -94,13 +95,14 @@
   }
 
   .#{$prefix}--btn__icon {
-    margin-left: rem(32px);
-    margin-right: rem(-16px);
     width: rem(16px);
     height: rem(16px);
     transition-duration: $transition--base;
     transition-timing-function: ease-in;
-    float: right;
+    position: absolute;
+    right: rem(16px);
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
