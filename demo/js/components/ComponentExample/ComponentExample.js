@@ -48,6 +48,11 @@ class ComponentExample extends Component {
      * The slug of the CodePen link.
      */
     codepenSlug: PropTypes.string,
+
+    /**
+     * `true` to use static full render page.
+     */
+    useStaticFullRenderPage: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -123,7 +128,16 @@ class ComponentExample extends Component {
   };
 
   render() {
-    const { htmlFile, component, variant, codepenSlug, hideViewFullRender, linkOnly, useIframe } = this.props;
+    const {
+      htmlFile,
+      component,
+      variant,
+      codepenSlug,
+      hideViewFullRender,
+      linkOnly,
+      useIframe,
+      useStaticFullRenderPage,
+    } = this.props;
 
     const classNamesContainer = classnames('component-example__live', {
       'component-example__live--with-iframe': useIframe,
@@ -145,7 +159,10 @@ class ComponentExample extends Component {
 
     const codepenLink = codepenSlug && `https://codepen.io/team/carbon/full/${codepenSlug}/`;
     const variantSuffix = (component === variant && '--default') || '';
-    const componentLink = variant ? `/component/${variant}${variantSuffix}` : `/component/${component}`;
+    const staticSuffix = !useStaticFullRenderPage ? '' : '.html';
+    const componentLink = variant
+      ? `/component/${variant}${variantSuffix}${staticSuffix}`
+      : `/component/${component}--default${staticSuffix}`;
 
     const viewFullRender = hideViewFullRender ? null : (
       <Link className={viewFullRenderClassNames} target="_blank" href={codepenLink || componentLink}>
