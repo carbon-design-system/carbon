@@ -159,6 +159,11 @@ class RootPage extends Component {
      * The port of the server triggering experimental/classic Sass build
      */
     portSassBuild: PropTypes.number,
+
+    /**
+     * `true` to use static full render page.
+     */
+    useStaticFullRenderPage: PropTypes.bool,
   };
 
   constructor() {
@@ -314,7 +319,7 @@ class RootPage extends Component {
     }
     this.hStyleInspectionTimeout = setTimeout(() => {
       const links = Array.prototype.filter.call(document.querySelectorAll('link[type="text/css"]'), link =>
-        /\/demo\/demo\.css/i.test(link.getAttribute('href'))
+        /\/demo\.css/i.test(link.getAttribute('href'))
       );
       const lastLink = links[links.length - 1];
       if (lastLink.sheet) {
@@ -339,10 +344,7 @@ class RootPage extends Component {
     if (!hasRenderedContent) {
       fetch(`/code/${metadata.name}`)
         .then(checkStatus)
-        .then(response => {
-          const contentType = response.headers.get('content-type');
-          return contentType && contentType.includes('application/json') ? response.json() : response.text();
-        })
+        .then(response => response.json())
         .then(responseContent => {
           // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
           this.setState({ componentItems: applyContent(this.state.componentItems, selectedNavItemId, responseContent) });
@@ -376,7 +378,7 @@ class RootPage extends Component {
   }
 
   render() {
-    const { portSassBuild } = this.props;
+    const { portSassBuild, useStaticFullRenderPage } = this.props;
     const { componentItems, isComponentsX } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
@@ -389,7 +391,7 @@ class RootPage extends Component {
         <SideNav items={componentItems} className={classNames} onItemClick={this.onSideNavItemClick} />
         <main role="main" id="maincontent" className="container" aria-labelledby="page-title" tabIndex="-1" data-page={name}>
           <PageHeader label="Component" title={label} />
-          <CodePage metadata={metadata} />
+          <CodePage metadata={metadata} useStaticFullRenderPage={useStaticFullRenderPage} />
           <ToggleSmall
             id="theme-switcher"
             className="demo--theme-switcher"

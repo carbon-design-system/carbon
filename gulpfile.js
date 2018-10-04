@@ -74,6 +74,32 @@ const axe = require('gulp-axe-webdriver');
 const promisePortSassDevBuild = portscanner.findAPortNotInUse(cloptions.portSassDevBuild, cloptions.portSassDevBuild + 100);
 
 /**
+ * @param {ComponentCollection|Component} metadata The component data.
+ * @returns {Promise<ComponentCollection|Component>}
+ *   The normalized component data,
+ *   esp. with README.md content assigned to `.notes` property for component with variants (`ComponentCollection`).
+ *   Fractal automatically populate `.notes` for component without variants (`Component`).
+ */
+const normalizeMetadata = metadata => {
+  const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
+  const visibleItems = items && items.filter(item => !item.isHidden);
+  const metadataJSON = typeof metadata.toJSON !== 'function' ? metadata : metadata.toJSON();
+  if (!metadata.isCollection && visibleItems && visibleItems.size === 1) {
+    const firstVariant = visibleItems.first();
+    return Object.assign(metadataJSON, {
+      context: firstVariant.context,
+      notes: firstVariant.notes,
+      preview: firstVariant.preview,
+      variants: undefined,
+    });
+  }
+  return Object.assign(metadataJSON, {
+    items: !items || items.size <= 1 ? undefined : items.map(normalizeMetadata).toJSON().items,
+    variants: undefined,
+  });
+};
+
+/**
  * Dev server
  */
 
@@ -325,6 +351,48 @@ gulp.task('sass:source', () => {
   return gulp.src(srcFiles).pipe(gulp.dest('scss'));
 });
 
+gulp.task('html:dev', () =>
+  Promise.all([mkdirp(path.resolve(__dirname, 'demo/code')), mkdirp(path.resolve(__dirname, 'demo/component'))]).then(() =>
+    templates.cache.get().then(({ componentSource, docSource, contents }) =>
+      Promise.all([
+        Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items(), contents]).then(
+          ([componentItems, docItems]) =>
+            writeFile(
+              path.resolve(__dirname, 'demo/index.html'),
+              contents.get('demo-nav')({
+                body: contents.get('demo-nav-data')({
+                  componentItems,
+                  docItems,
+                  useStaticFullRenderPage: true,
+                }),
+              })
+            )
+        ),
+        ...componentSource
+          .map(({ handle }) =>
+            templates.render({ layout: false }, handle).then(renderedItems => {
+              const o = {};
+              renderedItems.forEach((rendered, item) => {
+                o[item.handle] = rendered.trim();
+              });
+              return writeFile(path.resolve(__dirname, 'demo/code', handle), JSON.stringify(o));
+            })
+          )
+          .toArray(),
+        templates
+          .render({ layout: 'preview' })
+          .then(table =>
+            Promise.all(
+              Array.from(table.entries()).map(([{ handle }, value]) =>
+                writeFile(path.resolve(__dirname, 'demo/component', `${handle}.html`), value)
+              )
+            )
+          ),
+      ])
+    )
+  )
+);
+
 gulp.task('html:source', () => {
   const names = {
     'notification--default': 'inline-notification',
@@ -433,7 +501,7 @@ gulp.task('build:styles', ['sass:compiled', 'sass:source']);
 gulp.task('build', ['build:scripts', 'build:styles', 'html:source']);
 
 // For demo environment
-gulp.task('build:dev', ['sass:dev', 'scripts:dev']);
+gulp.task('build:dev', ['sass:dev', 'scripts:dev', 'html:dev']);
 
 gulp.task('default', () => {
   // eslint-disable-next-line no-console
