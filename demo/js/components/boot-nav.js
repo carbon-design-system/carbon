@@ -26,6 +26,7 @@ pollForBrowserSync(() => {
       componentItems: window.componentItems,
       docItems: window.docItems,
       portSassBuild: window.portSassBuild,
+      useStaticFullRenderPage: window.useStaticFullRenderPage,
     };
     ReactDOM.render(<RootPage {...props} />, renderRoot);
   }

@@ -1,0 +1,199 @@
+@import '../../globals/scss/colors';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vars';
+@import 'functions';
+
+@mixin platform-nav {
+  //----------------------------------------------------------------------------
+  // Platform Navigation
+  //----------------------------------------------------------------------------
+  .#{$prefix}--platform__nav {
+    position: absolute;
+    top: get-fixed-size(6);
+    bottom: 0;
+    left: 0;
+    background-color: $ibm-colors__gray--90;
+    width: get-fixed-size(32);
+    z-index: 1000;
+    box-shadow: 0 get-fixed-size(1) get-fixed-size(2) 0 rgba(0, 0, 0, 0.25);
+    color: $ibm-colors__gray--10;
+  }
+
+  .#{$prefix}--platform__nav svg {
+    fill: $ibm-colors__gray--10;
+  }
+
+  //----------------------------------------------------------------------------
+  // Platform Nav Section
+  //----------------------------------------------------------------------------
+  .#{$prefix}--platform__nav-section:not(:last-child)::after {
+    display: block;
+    content: '';
+    height: 1px;
+    background-color: $ibm-colors__gray--80;
+    margin: 0 get-fixed-size(2);
+  }
+
+  //----------------------------------------------------------------------------
+  // Platform Nav Item
+  //----------------------------------------------------------------------------
+  .#{$prefix}--platform__nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--platform__nav-item--active > a.#{$prefix}--platform__nav-link {
+    color: $ibm-colors__white;
+    font-weight: bold;
+  }
+
+  .#{$prefix}--platform__nav-item--active::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $ibm-colors__blue--60;
+  }
+
+  //----------------------------------------------------------------------------
+  // Platform Nav Link
+  //----------------------------------------------------------------------------
+  a.#{$prefix}--platform__nav-link {
+    display: flex;
+    align-items: center;
+    color: $ibm-colors__gray--10;
+    text-decoration: none;
+    font-size: rem(14px);
+    font-weight: 400;
+    width: 100%;
+    min-height: get-fixed-size(5);
+    padding-left: get-fixed-size(2);
+  }
+
+  a.#{$prefix}--platform__nav-link:hover {
+    background-color: $ibm-colors__gray--80;
+    color: $ibm-colors__gray--10;
+  }
+
+  a.#{$prefix}--platform__nav-link:focus {
+    outline: get-fixed-size(0.5) solid $ibm-colors__blue--60;
+    outline-offset: get-fixed-size(-0.5);
+  }
+
+  .#{$prefix}--platform__nav-item--icon > a.#{$prefix}--platform__nav-link {
+    padding-left: 0;
+  }
+
+  //----------------------------------------------------------------------------
+  // Platform Nav Category
+  //----------------------------------------------------------------------------
+  .#{$prefix}--platform__category {
+    width: 100%;
+  }
+
+  .#{$prefix}--platform__category-toggle {
+    @include button-reset($width: true);
+
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--platform__category-toggle:hover {
+    background-color: $ibm-colors__gray--80;
+  }
+
+  .#{$prefix}--platform__category-toggle:focus {
+    outline: get-fixed-size(0.5) solid $ibm-colors__blue--60;
+    outline-offset: get-fixed-size(-0.5);
+  }
+
+  .#{$prefix}--platform__category-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: get-fixed-size(2);
+    width: 100%;
+    color: $ibm-colors__gray--10;
+    font-size: rem(14px);
+    font-weight: 400;
+    min-height: get-fixed-size(5);
+    padding-left: get-fixed-size(2);
+  }
+
+  .#{$prefix}--platform__nav-item--icon .#{$prefix}--platform__category-title {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--platform__category-items {
+    display: none;
+    visibility: hidden;
+  }
+
+  .#{$prefix}--platform__category-item > a.#{$prefix}--platform__nav-link {
+    display: flex;
+    align-items: center;
+    min-height: get-fixed-size(4);
+    padding-left: get-fixed-size(4);
+  }
+
+  .#{$prefix}--platform__category-item {
+    position: relative;
+  }
+
+  .#{$prefix}--platform__nav-item--icon .#{$prefix}--platform__category-item > a.#{$prefix}--platform__nav-link {
+    padding-left: get-fixed-size(7);
+  }
+
+  .#{$prefix}--platform__category-item--active::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $ibm-colors__blue--60;
+  }
+
+  .#{$prefix}--platform__category-item--active > a.#{$prefix}--platform__nav-link {
+    font-weight: 600;
+    color: $ibm-colors__white;
+  }
+
+  .#{$prefix}--platform__category--expanded .#{$prefix}--platform__category-title {
+    font-weight: 600;
+  }
+
+  .#{$prefix}--platform__category--expanded .#{$prefix}--platform__category-title > svg {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--platform__category--expanded .#{$prefix}--platform__category-items {
+    display: block;
+    visibility: inherit;
+  }
+
+  //----------------------------------------------------------------------------
+  // Platform Nav Icon
+  //----------------------------------------------------------------------------
+  .#{$prefix}--platform__nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: get-fixed-size(6);
+    min-width: get-fixed-size(6);
+    height: get-fixed-size(5);
+    margin-right: get-fixed-size(1);
+  }
+}
+
+@include exports('platform-nav') {
+  @if feature-flag-enabled('ui-shell') {
+    @include platform-nav;
+  }
+}

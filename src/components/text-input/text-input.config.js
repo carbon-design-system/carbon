@@ -18,5 +18,20 @@ module.exports = {
         light: true,
       },
     },
+    {
+      name: 'password',
+      label: 'Password Input',
+      context: {
+        password: true,
+      },
+    },
+    {
+      name: 'password--light',
+      label: 'Password Input (Light)',
+      context: {
+        light: true,
+        password: true,
+      },
+    },
   ],
 };

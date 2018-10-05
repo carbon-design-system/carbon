@@ -18,55 +18,67 @@ const checkStatus = response => {
   throw error;
 };
 
-const load = (componentItems, selectedNavItemId) => {
-  const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
-  const subItems = metadata.items || [];
-  const hasRenderedContent =
-    !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
-  if (!hasRenderedContent) {
-    return fetch(`/code/${metadata.name}`)
-      .then(checkStatus)
-      .then(response => {
-        const contentType = response.headers.get('content-type');
-        return contentType && contentType.includes('application/json') ? response.json() : response.text();
-      })
-      .then(responseContent => {
-        if (Object(responseContent) === responseContent) {
-          return componentItems.map(item => {
-            if (item.id !== selectedNavItemId) {
-              return item;
-            }
-            return !item.items
-              ? {
-                  ...item,
-                  renderedContent: responseContent[`${item.handle}--default`],
-                }
-              : {
-                  ...item,
-                  items: item.items.map(
-                    subItem =>
-                      !responseContent[subItem.handle]
-                        ? subItem
-                        : {
-                            ...subItem,
-                            renderedContent: responseContent[subItem.handle],
-                          }
-                  ),
-                };
-          });
-        }
-        return componentItems.map(
-          item =>
-            item.id !== selectedNavItemId
-              ? item
-              : {
-                  ...item,
-                  renderedContent: responseContent,
-                }
-        );
-      });
+/**
+ * @param {Object[]} componentItems The components data.
+ * @returns {Object[]} The components data with the contents of all components cleared.
+ */
+const clearContent = componentItems =>
+  componentItems.map(
+    item =>
+      !item.items
+        ? {
+            ...item,
+            renderedContent: undefined,
+          }
+        : {
+            ...item,
+            items: item.items.map(subItem => ({
+              ...subItem,
+              renderedContent: undefined,
+            })),
+          }
+  );
+
+/**
+ * @param {Object[]} componentItems The components data.
+ * @param {string} id The component ID.
+ * @param {Object|string} content The content. String for component content, object for variant content (keyed by variant ID).
+ * @returns {Object[]} The components data with the content of the given component ID populated with the given content.
+ */
+const applyContent = (componentItems, id, content) => {
+  if (Object(content) === content) {
+    return componentItems.map(item => {
+      if (item.id !== id) {
+        return item;
+      }
+      return !item.items
+        ? {
+            ...item,
+            renderedContent: content[`${item.handle}--default`],
+          }
+        : {
+            ...item,
+            items: item.items.map(
+              subItem =>
+                !content[subItem.handle]
+                  ? subItem
+                  : {
+                      ...subItem,
+                      renderedContent: content[subItem.handle],
+                    }
+            ),
+          };
+    });
   }
-  return Promise.resolve(null);
+  return componentItems.map(
+    item =>
+      item.id !== id
+        ? item
+        : {
+            ...item,
+            renderedContent: content,
+          }
+  );
 };
 
 /**
@@ -147,6 +159,11 @@ class RootPage extends Component {
      * The port of the server triggering experimental/classic Sass build
      */
     portSassBuild: PropTypes.number,
+
+    /**
+     * `true` to use static full render page.
+     */
+    useStaticFullRenderPage: PropTypes.bool,
   };
 
   constructor() {
@@ -159,16 +176,23 @@ class RootPage extends Component {
   state = {};
 
   static getDerivedStateFromProps({ componentItems, isComponentsX }, state) {
-    const { prevComponentItems, prevIsComponentsX, componentItems: currentComponentItems } = state;
+    const {
+      prevComponentItems,
+      prevIsComponentsX,
+      componentItems: currentComponentItems,
+      isComponentsX: currentIsComponentsX,
+    } = state;
     if (prevComponentItems === componentItems && prevIsComponentsX === isComponentsX) {
       return null;
     }
+    const newIsComponentsX = prevIsComponentsX === isComponentsX ? currentIsComponentsX : isComponentsX;
+    const newComponentItems = applyComponentsX(
+      preserveDefaultHidden(prevComponentItems === componentItems ? currentComponentItems : componentItems),
+      newIsComponentsX
+    );
     return {
-      componentItems: applyComponentsX(
-        preserveDefaultHidden(prevComponentItems === componentItems ? currentComponentItems : componentItems),
-        isComponentsX
-      ),
-      isComponentsX,
+      componentItems: newComponentItems,
+      isComponentsX: newIsComponentsX,
       prevComponentItems: componentItems,
       prevIsComponentsX: isComponentsX,
     };
@@ -239,22 +263,36 @@ class RootPage extends Component {
       clearTimeout(this.hTimeoutDetectExperimental);
       this.hTimeoutDetectExperimental = null;
     }
-    // For IE11
-    if (link.sheet.cssRules.length === 0) {
+    let rulesLength = 0;
+    try {
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=761236#c1 suggests that `NS_ERROR_DOM_INVALID_ACCESS_ERR` is thrown
+      // if we try to read `.cssRules` on a stylesheet that's not done being parsed yet
+      rulesLength = link.sheet.cssRules.length;
+    } catch (err) {} // eslint-disable-line no-empty
+    // For IE11/FF
+    if (rulesLength === 0) {
       this.hTimeoutDetectExperimental = setTimeout(() => {
         this._detectComponentsX(link);
       }, 100);
+      return;
     }
+    const { isComponentsX: oldIsComponentsX, componentItems } = this.state;
     const isComponentsX = Array.prototype.some.call(
       link.sheet.cssRules,
       rule =>
         /^\.bx--body$/.test(rule.selectorText) &&
         /^rgb\(255,\s*255,\s*255\)$/.test(rule.style.getPropertyValue('background-color'))
     );
-    this.setState({
-      componentItems: applyComponentsX(this.state.componentItems, isComponentsX),
-      isComponentsX,
-    });
+    if (oldIsComponentsX !== isComponentsX) {
+      this.setState(
+        {
+          // TODO: Load/navigate
+          componentItems: applyComponentsX(clearContent(componentItems), isComponentsX),
+          isComponentsX,
+        },
+        this._populateCurrent
+      );
+    }
   }
 
   /**
@@ -281,7 +319,7 @@ class RootPage extends Component {
     }
     this.hStyleInspectionTimeout = setTimeout(() => {
       const links = Array.prototype.filter.call(document.querySelectorAll('link[type="text/css"]'), link =>
-        /\/demo\/demo\.css/i.test(link.getAttribute('href'))
+        /\/demo\.css/i.test(link.getAttribute('href'))
       );
       const lastLink = links[links.length - 1];
       if (lastLink.sheet) {
@@ -292,6 +330,26 @@ class RootPage extends Component {
         });
       }
     }, 0);
+  }
+
+  /**
+   * Populates the content of current selection.
+   */
+  _populateCurrent() {
+    const { componentItems, selectedNavItemId } = this.state;
+    const metadata = componentItems && componentItems.find(item => item.id === selectedNavItemId);
+    const subItems = metadata.items || [];
+    const hasRenderedContent =
+      !metadata.isCollection && subItems.length <= 1 ? metadata.renderedContent : subItems.every(item => item.renderedContent);
+    if (!hasRenderedContent) {
+      fetch(`/code/${metadata.name}`)
+        .then(checkStatus)
+        .then(response => response.json())
+        .then(responseContent => {
+          // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
+          this.setState({ componentItems: applyContent(this.state.componentItems, selectedNavItemId, responseContent) });
+        });
+    }
   }
 
   /**
@@ -315,15 +373,12 @@ class RootPage extends Component {
       if (name) {
         history.pushState({ name }, name, `/demo/${name}`);
       }
-      load(componentItems, selectedNavItemId).then(newComponentItems => {
-        if (newComponentItems) {
-          this.setState({ componentItems: newComponentItems });
-        }
-      });
+      this._populateCurrent();
     });
   }
 
   render() {
+    const { portSassBuild, useStaticFullRenderPage } = this.props;
     const { componentItems, isComponentsX } = this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
@@ -336,11 +391,12 @@ class RootPage extends Component {
         <SideNav items={componentItems} className={classNames} onItemClick={this.onSideNavItemClick} />
         <main role="main" id="maincontent" className="container" aria-labelledby="page-title" tabIndex="-1" data-page={name}>
           <PageHeader label="Component" title={label} />
-          <CodePage metadata={metadata} />
+          <CodePage metadata={metadata} useStaticFullRenderPage={useStaticFullRenderPage} />
           <ToggleSmall
             id="theme-switcher"
             className="demo--theme-switcher"
             ariaLabel="Theme switcher"
+            disabled={!portSassBuild}
             toggled={isComponentsX}
             onChange={this._switchExperimental}
           />

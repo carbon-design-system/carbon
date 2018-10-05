@@ -1,7 +1,8 @@
 'use strict';
 
 const header = {
-  name: 'IBM [Platform]',
+  company: 'IBM',
+  platform: '[Platform]',
   links: [
     {
       href: '/component/ui-shell--default',
@@ -34,20 +35,23 @@ const header = {
       title: 'Action 4',
     },
   ],
-};
-
-function createSidebarLinks(count, activeIndex) {
-  return Array.from({ length: count }, (_, i) => {
-    const link = {
-      title: 'L3 link',
+  navLinks: [
+    {
       href: '/component/ui-shell--default',
-    };
-    if (i === activeIndex) {
-      link.active = true;
-    }
-    return link;
-  });
-}
+      title: 'L1 link 1',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'L1 link 2',
+    },
+    {
+      title: 'L1 link 3',
+    },
+    {
+      title: 'L1 link 4',
+    },
+  ],
+};
 
 const sidenav = {
   state: {
@@ -58,30 +62,141 @@ const sidenav = {
   },
   links: [
     {
-      category: 'L2 Category',
+      category: 'Category label',
       links: createSidebarLinks(2),
     },
     {
-      category: 'L2 Category',
+      category: 'Category label',
       links: createSidebarLinks(3, 1),
       active: true,
     },
     {
-      category: 'L2 Category',
+      category: 'Category label',
       links: createSidebarLinks(4),
+    },
+  ],
+};
+
+const nav = {
+  state: {
+    expanded: false,
+  },
+  sections: [
+    {
+      items: [
+        {
+          type: 'link',
+          title: 'Item link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
+        },
+        {
+          type: 'link',
+          title: 'Item link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
+        },
+      ],
+    },
+    {
+      items: [
+        {
+          type: 'link',
+          title: 'Item link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
+          active: true,
+        },
+        {
+          type: 'link',
+          title: 'Item link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
+        },
+        {
+          type: 'link',
+          title: 'Item link',
+          href: '/component/ui-shell--platform-navigation-expanded',
+          hasIcon: true,
+        },
+        {
+          type: 'category',
+          title: 'L1 category',
+          hasIcon: true,
+          links: [
+            {
+              title: 'Nested link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+            },
+            {
+              title: 'Nested link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+              active: true,
+            },
+            {
+              title: 'Nested link',
+              href: '/component/ui-shell--platform-navigation-expanded',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const switcher = {
+  state: {
+    expanded: false,
+    showAll: false,
+  },
+  links: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'My Product',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'My Product 2',
+    },
+  ],
+  allLinks: [
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
+    },
+    {
+      href: '/component/ui-shell--default',
+      title: 'All Products',
     },
   ],
 };
 
 module.exports = {
   preview: 'ui-shell-preview',
+  meta: {
+    xVersionOnly: true,
+  },
   context: {
     header,
+    nav,
     sidenav,
+    switcher,
   },
   variants: [
     {
-      name: 'expanded',
+      name: 'Side-nav expanded',
       context: {
         sidenav: {
           state: {
@@ -90,5 +205,134 @@ module.exports = {
         },
       },
     },
+    {
+      name: 'Side-nav with no title bar',
+      context: {
+        sidenav: {
+          state: {
+            expanded: true,
+          },
+          title: false,
+        },
+      },
+    },
+    {
+      name: 'Side-nav with title bar',
+      context: {
+        sidenav: {
+          state: {
+            expanded: true,
+          },
+          title: {
+            text: 'Section title',
+          },
+        },
+      },
+    },
+    {
+      name: 'Side-nav with title bar and sub-menu',
+      context: {
+        sidenav: {
+          state: {
+            expanded: true,
+          },
+          title: {
+            text: 'Section title',
+            subMenu: {
+              label: 'Inline select',
+              options: [
+                {
+                  text: 'Option 1',
+                  value: 'option1',
+                },
+                {
+                  text: 'Option 2',
+                  value: 'option2',
+                },
+                {
+                  text: 'Option 3',
+                  value: 'option3',
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+    {
+      name: 'Platform nav expanded',
+      context: {
+        nav: {
+          state: {
+            expanded: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'Platform nav category expanded',
+      context: {
+        nav: {
+          state: {
+            expanded: true,
+            category: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'Switcher Expanded Default',
+      context: {
+        switcher: {
+          state: {
+            expanded: true,
+            showAll: false,
+          },
+        },
+      },
+    },
+    {
+      name: 'Switcher All Products',
+      context: {
+        switcher: {
+          state: {
+            expanded: true,
+            showAll: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'Platform nav with no icons',
+      context: {
+        nav: {
+          state: {
+            expanded: true,
+            category: true,
+          },
+          sections: nav.sections.map(section => {
+            return {
+              items: section.items.map(item => ({
+                ...item,
+                hasIcon: false,
+              })),
+            };
+          }),
+        },
+      },
+    },
   ],
 };
+
+function createSidebarLinks(count, activeIndex) {
+  return Array.from({ length: count }, (_, i) => {
+    const link = {
+      title: 'Nested link',
+      href: '/component/ui-shell--default',
+    };
+    if (i === activeIndex) {
+      link.active = true;
+    }
+    return link;
+  });
+}

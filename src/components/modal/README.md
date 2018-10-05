@@ -4,8 +4,8 @@
 
 Use these modifiers with `.bx--modal` class.
 
-| Name                    | Description                                           |
-|-------------------------|-------------------------------------------------------|
+| Name               | Description                               |
+| ------------------ | ----------------------------------------- |
 | .bx--modal--danger | Selector for applying danger modal styles |
 
 ### JavaScript
@@ -41,11 +41,11 @@ Modal.create(document.getElementById('my-modal'));
 
 #### Public Methods
 
-| Name              | Params           | Description          |
-|-------------------|------------------|----------------------|
-| release           |                  | Deletes the instance |
-| show              |                  | Show the modal       |
-| hide              |                  | Hide the modal       |
+| Name    | Params | Description          |
+| ------- | ------ | -------------------- |
+| release |        | Deletes the instance |
+| show    |        | Show the modal       |
+| hide    |        | Hide the modal       |
 
 ##### Example - Showing modal
 
@@ -57,18 +57,38 @@ modalInstance.show();
 
 #### Options
 
-| Option             | Default Selector     | Description                                                                                                                           |
-|--------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| selectorInit       | '[data-modal]'       | The css selector for root modal component                                                                                             |
-| selectorModalClose | '[data-modal-close]' | The selector to find elements that close the modal                                                                                    |
-| classVisible       | 'is-visible'         | Class to toggle visibility of modal                                                                                                   |
-| attribInitTarget   | 'data-modal-target'  | The attribute on the launching element to target the modal                                                                            |
-| initEventNames     | '['click']'          | On specified events, if event matches the attribInitTarget, then initialize the component and run createdByLauncher if method exists  |
+| Option               | Default Selector             | Description                                                                                                                          |
+| -------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| selectorInit         | '[data-modal]'               | The css selector for root modal component                                                                                            |
+| selectorModalClose   | '[data-modal-close]'         | The selector to find elements that close the modal                                                                                   |
+| selectorPrimaryFocus | '[data-modal-primary-focus]' | The CSS selector to determine the element to put focus when modal gets open                                                          |
+| classVisible         | 'is-visible'                 | Class to toggle visibility of modal                                                                                                  |
+| attribInitTarget     | 'data-modal-target'          | The attribute on the launching element to target the modal                                                                           |
+| initEventNames       | '['click']'                  | On specified events, if event matches the attribInitTarget, then initialize the component and run createdByLauncher if method exists |
+
+##### Example - Putting focus on text box when modal gets open
+
+```html
+<div data-modal id="my-modal" class="bx--modal " role="dialog" aria-modal="true" aria-labelledby="my-modal-label" aria-describedby="my-modal-heading" tabindex="-1">
+  <div class="bx--modal-container">
+    <div class="bx--modal-header">
+      <p class="bx--modal-header__heading bx--type-beta" id="my-modal-heading">Modal heading</p>
+      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" >
+        (The close button image)
+      </button>
+    </div>
+    <div class="bx--modal-content">
+      <label for="my-text-input" class="bx--label">Text Input label</label>
+      <input id="my-text-input" type="text" class="bx--text-input" placeholder="Optional placeholder text" data-modal-primary-focus>
+    </div>
+  </div>
+</div>
+```
 
 #### Events
 
 | Event Option      | Event Name          |
-|-------------------|---------------------|
+| ----------------- | ------------------- |
 | eventBeforeShown  | 'modal-beingshown'  |
 | eventAfterShown   | 'modal-shown'       |
 | eventBeforeHidden | 'modal-beinghidden' |
@@ -77,7 +97,7 @@ modalInstance.show();
 ##### Example - Preventing modals from being closed in a certain condition
 
 ```javascript
-document.addEventListener('modal-beinghidden', function (evt) {
+document.addEventListener('modal-beinghidden', function(evt) {
   if (myApplication.shouldModalKeptOpen(evt.target)) {
     evt.preventDefault();
   }
@@ -87,7 +107,7 @@ document.addEventListener('modal-beinghidden', function (evt) {
 ##### Example - Notifying events of all modals being closed to an analytics library
 
 ```javascript
-document.addEventListener('modal-hidden', function (evt) {
+document.addEventListener('modal-hidden', function(evt) {
   myAnalyticsLibrary.send({
     action: 'Modal hidden',
     id: evt.target.id,

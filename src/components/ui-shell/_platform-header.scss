@@ -1,6 +1,7 @@
 @import '../../globals/scss/functions';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vars';
+@import '../../globals/scss/typography';
 @import 'theme';
 @import 'functions';
 
@@ -28,10 +29,13 @@
     background-color: $shell-ui-02;
   }
 
+  .#{$prefix}--platform-header__action--active,
+  .#{$prefix}--platform-header__action--active:hover,
   .#{$prefix}--platform-header__action:active {
     background-color: $shell-brand-01;
   }
 
+  .#{$prefix}--platform-header__action--active,
   .#{$prefix}--platform-header__action:focus {
     border-color: $shell-brand-01;
     outline: none;
@@ -41,26 +45,34 @@
     fill: $shell-header-icon-01;
   }
 
-  .#{$prefix}--platform-header__menu-trigger {
-    margin-right: units(1);
-  }
-
   //--------------------------------------------------------------------------
   // Platform Header - Name
   //--------------------------------------------------------------------------
   a.#{$prefix}--platform-header__name {
+    @include typescale('zeta');
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 units(2);
     text-decoration: none;
-    // TODO: sync type styles
-    font-size: rem(14px);
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.1px;
     line-height: 20px;
     user-select: none;
   }
 
+  .#{$prefix}--platform-header__platform-name {
+    font-weight: 600;
+  }
+
   a.#{$prefix}--platform-header__name,
   a.#{$prefix}--platform-header__name:hover {
     color: $shell-header-text-01;
+  }
+
+  a.#{$prefix}--platform-header__name:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 4px $shell-brand-01;
   }
 
   //--------------------------------------------------------------------------
@@ -72,7 +84,7 @@
 
   .#{$prefix}--platform-header__links {
     display: flex;
-    margin-left: units(34);
+    margin-left: units(1);
     height: 100%;
   }
 
@@ -80,39 +92,88 @@
     height: 100%;
   }
 
-  .#{$prefix}--platform-header__link-item:hover {
-    background-color: $shell-ui-02;
-  }
-
-  a.#{$prefix}--platform-header__link {
+  .#{$prefix}--platform-header__dropdown-item,
+  .#{$prefix}--platform-header__link,
+  .#{$prefix}--dropdown-item__menu-item a {
+    @include typescale('zeta');
+    position: relative;
     display: flex;
     align-items: center;
     height: 100%;
-
-    // TODO: sync type styles
-    font-size: rem(14px);
     line-height: 18px;
     letter-spacing: 0;
     text-decoration: none;
     font-weight: 400;
-
     padding: 0 units(2);
-    border: units(0.5) solid transparent;
+    cursor: pointer;
   }
 
-  a.#{$prefix}--platform-header__link,
-  a.#{$prefix}--platform-header__link:hover {
+  .#{$prefix}--platform-header__dropdown-item:hover,
+  .#{$prefix}--platform-header__link:hover {
+    background-color: $shell-ui-02;
+  }
+
+  .#{$prefix}--platform-header__dropdown-item:focus,
+  .#{$prefix}--dropdown-item__menu-item a:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 4px $shell-brand-01;
+  }
+
+  .#{$prefix}--platform-header__arrow {
+    fill: $shell-header-text-01;
+    margin-left: units(2);
+  }
+
+  .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--platform-header__arrow,
+  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--platform-header__arrow {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--platform-header__dropdown-item:hover .#{$prefix}--dropdown-item__menu {
+    display: block;
+  }
+
+  .#{$prefix}--dropdown-item__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $shell-ui-02;
+    padding: 0;
+    box-shadow: 0 8px 16px 0 rgba($shell-ui-03, 0.25);
+  }
+
+  .#{$prefix}--dropdown-item__menu-item {
+    width: units(25);
+    height: units(6);
+  }
+
+  .#{$prefix}--dropdown-item__menu-item a {
     color: $shell-header-text-01;
   }
 
-  a.#{$prefix}--platform-header__link:active {
+  .#{$prefix}--dropdown-item__menu-item a:hover {
+    background-color: $shell-header-bg-06;
+    color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--platform-header__link {
+    border: units(0.5) solid transparent;
+  }
+
+  .#{$prefix}--platform-header__link,
+  .#{$prefix}--platform-header__link:hover {
+    color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--platform-header__link:active {
     background-color: $shell-ui-02;
   }
 
   // Safari: use the active style for links to simulate the focus
   // styles since links in safari don't display the focus styles.
-  a.#{$prefix}--platform-header__link:active,
-  a.#{$prefix}--platform-header__link:focus {
+  .#{$prefix}--platform-header__link:active,
+  .#{$prefix}--platform-header__link:focus {
     border-color: $shell-brand-01;
     outline: none;
   }

@@ -115,7 +115,7 @@
   $ui-05: $ibm-colors__gray--100 !default !global;
   $text-01: $ibm-colors__gray--100 !default !global;
   $text-02: $ibm-colors__gray--70 !default !global;
-  $text-03: $ibm-colors__gray--40 !default !global;
+  $text-03: $ibm-colors__gray--50 !default !global;
   $field-01: $ibm-colors__gray--10 !default !global;
   $field-02: $ibm-colors__gray--10 !default !global; // TODO: Define for experimental
   $support-01: $ibm-colors__red--60 !default !global;
@@ -143,6 +143,10 @@
   // Global
   $input-border: 1px solid transparent !default !global;
   $input-label-weight: 400 !default !global;
+  $text-disabled: $ibm-colors__gray--30 !default !global;
+
+  // Link
+  $link-visited: $ibm-colors__purple--60 !default !global;
 
   // Button Theme Variables
   $button-font-weight: 400 !default !global;
@@ -157,11 +161,11 @@
   $button-outline: 1px solid $ibm-colors__white !default !global;
 
   // Accordion (Reverse)
-  $accordion-flex-direction: row !default !global;
+  $accordion-flex-direction: row-reverse !default !global;
   $accordion-justify-content: flex-start !default !global;
-  $accordion-arrow-margin: 0 0 0 $spacing-2xs !default !global;
+  $accordion-arrow-margin: 0 $spacing-md 0 0 !default !global;
   $accordion-title-margin: 0 0 0 $spacing-md !default !global;
-  $accordion-content-padding: 0 $spacing-md 0 $spacing-2xl !default !global;
+  $accordion-content-padding: 0 0 0 $spacing-md !default !global;
 
   // Card
   $card-text-align: center !default !global;

@@ -7,7 +7,7 @@ import ComponentExample from '../ComponentExample/ComponentExample';
 /**
  * The page to show the component demo, its code as well as its README.
  */
-const CodePage = ({ metadata, hideViewFullRender }) => {
+const CodePage = ({ metadata, hideViewFullRender, useStaticFullRenderPage }) => {
   const md = new Markdown({ html: true });
   const subItems = metadata.items || [];
   /* eslint-disable react/no-danger */
@@ -15,8 +15,10 @@ const CodePage = ({ metadata, hideViewFullRender }) => {
     !metadata.isCollection && subItems.length <= 1 ? (
       <ComponentExample
         hideViewFullRender={hideViewFullRender}
+        useStaticFullRenderPage={useStaticFullRenderPage}
         component={metadata.name}
         htmlFile={metadata.renderedContent}
+        linkOnly={metadata.linkOnly}
         useIframe={metadata.useIframe}
       />
     ) : (
@@ -28,7 +30,9 @@ const CodePage = ({ metadata, hideViewFullRender }) => {
             variant={item.handle.replace(/--default$/, '')}
             component={metadata.name}
             htmlFile={item.renderedContent}
+            linkOnly={metadata.linkOnly}
             useIframe={metadata.useIframe}
+            useStaticFullRenderPage={useStaticFullRenderPage}
           />
         </div>
       ))
@@ -53,6 +57,11 @@ CodePage.propTypes = {
    * `true` to hide "full render" link.
    */
   hideViewFullRender: PropTypes.bool,
+
+  /**
+   * `true` to use static full render page.
+   */
+  useStaticFullRenderPage: PropTypes.bool,
 };
 
 export default CodePage;
