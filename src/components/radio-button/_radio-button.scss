@@ -134,19 +134,19 @@
   // Disabled
 
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
-    color: $text-disabled;
+    color: $disabled;
     cursor: not-allowed;
   }
 
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance,
   .#{$prefix}--radio-button:disabled:checked + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
-    border-color: $text-disabled;
+    border-color: $disabled;
   }
 
   // Focus
 
   .#{$prefix}--radio-button:focus + .#{$prefix}--radio-button__label .#{$prefix}--radio-button__appearance {
-    @include focus-outline('experimental');
+    @include focus-outline('blurred');
   }
 
   // Skeleton State
