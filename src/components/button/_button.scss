@@ -132,12 +132,6 @@
       color: $support-01;
     }
 
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $support-01;
-      border: $button-border-width solid $support-01;
-    }
-
     &:hover > .#{$prefix}--btn__icon,
     &:focus > .#{$prefix}--btn__icon {
       fill: $inverse-01;
@@ -279,12 +273,6 @@
 
     &:active {
       color: $support-01;
-    }
-
-    &:hover:disabled,
-    &:focus:disabled {
-      color: $support-01;
-      border: $button-border-width solid $support-01;
     }
 
     &:hover > .#{$prefix}--btn__icon,
