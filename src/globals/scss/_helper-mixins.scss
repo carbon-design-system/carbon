@@ -51,7 +51,7 @@
   }
 
   @if ($type == 'blurred') {
-    box-shadow: 0 0 0 3px $color__blue-20;
+    box-shadow: 0 0 0 3px $focus;
     outline: 1px solid transparent;
   }
 }
