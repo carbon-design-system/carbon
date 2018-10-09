@@ -1286,6 +1286,7 @@ exports[`DataTable should render 1`] = `
                 type="text"
               >
                 <div
+                  aria-labelledby="custom-id-label"
                   className="bx--search bx--search--sm bx--search--light"
                   role="search"
                 >
@@ -1341,6 +1342,7 @@ exports[`DataTable should render 1`] = `
                   <label
                     className="bx--label"
                     htmlFor="custom-id"
+                    id="custom-id-label"
                   >
                     Filter table
                   </label>
