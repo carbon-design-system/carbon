@@ -214,10 +214,7 @@ export default class DatePicker extends Component {
 
   UNSAFE_componentWillUpdate(nextProps) {
     if (nextProps.value !== this.props.value) {
-      if (
-        this.props.datePickerType === 'single' ||
-        this.props.datePickerType === 'range'
-      ) {
+      if (this.cal) {
         this.cal.setDate(nextProps.value);
         this.updateClassNames(this.cal);
       } else {
@@ -282,10 +279,7 @@ export default class DatePicker extends Component {
   }
 
   componentWillUnmount() {
-    if (
-      this.props.datePickerType === 'range' ||
-      this.props.datePickerType === 'single'
-    ) {
+    if (this.cal) {
       this.cal.destroy();
     }
     if (this.inputField) {
@@ -297,7 +291,11 @@ export default class DatePicker extends Component {
   }
 
   onChange = e => {
-    if (e.target.value === '' && this.cal.selectedDates.length > 0) {
+    if (
+      e.target.value === '' &&
+      this.cal &&
+      this.cal.selectedDates.length > 0
+    ) {
       this.cal.clear();
     }
   };
@@ -334,7 +332,9 @@ export default class DatePicker extends Component {
   }
 
   openCalendar = () => {
-    this.cal.open();
+    if (this.cal) {
+      this.cal.open();
+    }
   };
 
   updateClassNames = calendar => {

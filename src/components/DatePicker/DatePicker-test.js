@@ -250,6 +250,43 @@ describe('DatePicker', () => {
     });
   });
 
+  describe('Date picker can be used with enzyme shallow', () => {
+    beforeEach(done => {
+      const spy = {};
+      spy.console = jest.spyOn(console, 'error').mockImplementation(e => {
+        done.fail(e);
+      });
+      done();
+    });
+
+    it('date picker should not throw exception when mounted or unmounted', () => {
+      const wrapper = shallow(
+        <DatePicker
+          onChange={() => {}}
+          datePickerType="range"
+          className="extra-class"
+          locale="es">
+          <div className="test-child">
+            <input
+              type="text"
+              className="bx--date-picker__input"
+              id="input-from"
+            />
+          </div>
+          <div className="test-child">
+            <input
+              type="text"
+              className="bx--date-picker__input"
+              id="input-to"
+            />
+          </div>
+        </DatePicker>
+      );
+      expect(wrapper.find('DatePicker')).toBeDefined();
+      wrapper.unmount();
+    });
+  });
+
   describe('Date picker with minDate and maxDate', () => {
     console.error = jest.fn(); // eslint-disable-line no-console
 
