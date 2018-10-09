@@ -61,6 +61,11 @@ export default class MultiSelect extends React.Component {
     type: PropTypes.oneOf(['default', 'inline']),
 
     /**
+     *  Specify title to show title on hover
+     */
+    useTitleInItem: PropTypes.bool,
+
+    /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
@@ -83,6 +88,7 @@ export default class MultiSelect extends React.Component {
     sortItems: defaultSortItems,
     type: 'default',
     light: false,
+    title: false,
   };
 
   constructor(props) {
@@ -154,6 +160,7 @@ export default class MultiSelect extends React.Component {
       light,
       invalid,
       invalidText,
+      useTitleInItem,
     } = this.props;
     const className = cx('bx--multi-select', containerClassName, {
       'bx--list-box--light': light,
@@ -218,6 +225,7 @@ export default class MultiSelect extends React.Component {
                           {...itemProps}>
                           <Checkbox
                             id={itemProps.id}
+                            title={useTitleInItem ? itemText : null}
                             name={itemText}
                             checked={isChecked}
                             readOnly={true}

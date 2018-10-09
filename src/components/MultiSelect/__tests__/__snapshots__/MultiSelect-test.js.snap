@@ -39,6 +39,7 @@ exports[`MultiSelect should render 1`] = `
   light={false}
   locale="en"
   sortItems={[Function]}
+  title={false}
   type="default"
 >
   <Selection
