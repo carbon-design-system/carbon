@@ -132,6 +132,12 @@
       color: $support-01;
     }
 
+    &:hover:disabled,
+    &:focus:disabled {
+      color: $support-01;
+      border: $button-border-width solid $support-01;
+    }
+
     &:hover > .#{$prefix}--btn__icon,
     &:focus > .#{$prefix}--btn__icon {
       fill: $inverse-01;
@@ -260,23 +266,14 @@
   }
 
   .#{$prefix}--btn--danger {
-    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, red);
+    @include button-theme--x(transparent, $support-01, $support-01, $support-01, $support-01, $ibm-colors__red--80);
 
     &:hover {
       color: $inverse-01;
       border: $button-border-width solid transparent;
     }
 
-    &:focus {
-      color: $inverse-01;
-    }
-
-    &:active {
-      color: $support-01;
-    }
-
-    &:hover > .#{$prefix}--btn__icon,
-    &:focus > .#{$prefix}--btn__icon {
+    &:hover > .#{$prefix}--btn__icon {
       fill: $inverse-01;
     }
   }
