@@ -18,6 +18,13 @@
     position: relative;
     display: flex;
     flex-direction: column;
+
+    /* 
+      the label element preceeds the input as a sibling, and CSS cannot see up the tree that way, so we must use `:focus-within` on the parent of the input and label. this is not compatible with Edge yet. an alternative would be a JS solution
+    */
+    &:focus-within .#{$prefix}--label {
+      color: $brand-01;
+    }
   }
 
   .#{$prefix}--select-input {
@@ -42,10 +49,6 @@
       display: none;
     }
 
-    & ~ .#{$prefix}--label {
-      order: 1;
-    }
-
     &:focus {
       outline: none;
       box-shadow: 0 2px 0 0 $brand-01;
@@ -54,14 +57,6 @@
     &[data-invalid],
     &[data-invalid]:focus {
       box-shadow: 0 2px 0 0 $support-01;
-    }
-
-    &:focus ~ .#{$prefix}--label {
-      color: $brand-01;
-    }
-
-    &[data-invalid]:focus ~ .#{$prefix}--label {
-      color: $support-01;
     }
 
     &:disabled {

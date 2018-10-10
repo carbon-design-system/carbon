@@ -14,6 +14,10 @@
     display: flex;
     flex-direction: column;
     position: relative;
+
+    &:focus-within .#{$prefix}--label {
+      color: $brand-01;
+    }
   }
 
   .#{$prefix}--number input[type='number'] {
@@ -35,17 +39,9 @@
     border-radius: 0;
     border-bottom: 1px solid transparent;
 
-    & ~ .#{$prefix}--label {
-      order: 1;
-    }
-
     &:focus {
       outline: none;
       box-shadow: 0 2px 0 0 $brand-01;
-    }
-
-    &:focus ~ .#{$prefix}--label {
-      color: $brand-01;
     }
 
     &:disabled {
@@ -131,6 +127,10 @@
   }
 
   .#{$prefix}--number[data-invalid] {
+    &:focus-within .#{$prefix}--label {
+      color: $support-01;
+    }
+
     .#{$prefix}--form-requirement {
       display: inline-block;
       max-height: rem(200px);
@@ -140,10 +140,6 @@
     input[type='number']:focus {
       outline: none;
       box-shadow: 0 2px 0px 0px $support-01;
-    }
-
-    input[type='number']:focus ~ .#{$prefix}--label {
-      color: $support-01;
     }
 
     .#{$prefix}--number__controls {

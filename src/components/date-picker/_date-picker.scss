@@ -28,6 +28,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
+
+    &:focus-within .#{$prefix}--label {
+      color: $brand-01;
+    }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
@@ -70,16 +74,12 @@
       box-shadow: 0 2px 0 0 $brand-01;
     }
 
-    &:focus ~ .#{$prefix}--label {
-      color: $brand-01;
-    }
-
     &[data-invalid],
     &[data-invalid]:focus {
       box-shadow: 0 2px 0 0 $support-01;
     }
 
-    &[data-invalid]:focus + .#{$prefix}--label {
+    &[data-invalid]:focus-within .#{$prefix}--label {
       color: $support-01;
     }
 

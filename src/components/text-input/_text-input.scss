@@ -28,10 +28,6 @@
     order: 2;
     border-bottom: 1px solid transparent;
 
-    & ~ .#{$prefix}--label {
-      order: 1;
-    }
-
     &::placeholder {
       @include placeholder-colors;
     }
@@ -44,14 +40,6 @@
     &[data-invalid],
     &[data-invalid]:focus {
       box-shadow: 0 2px 0 0 $support-01;
-    }
-
-    &:focus ~ .#{$prefix}--label {
-      color: $brand-01;
-    }
-
-    &[data-invalid]:focus + .#{$prefix}--label {
-      color: $support-01;
     }
 
     &:disabled {
@@ -100,6 +88,19 @@
         &:hover {
           fill: $hover-primary;
         }
+      }
+    }
+  }
+
+  .#{$prefix}--text-input-wrapper {
+    &:focus-within .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    // TODO: how to fix??
+    &[data-invalid]:focus-within {
+      .#{$prefix}--label {
+        color: $support-01;
       }
     }
   }
