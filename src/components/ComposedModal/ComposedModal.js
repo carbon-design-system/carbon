@@ -12,6 +12,9 @@ export default class ComposedModal extends Component {
     onKeyDown: () => {},
   };
 
+  outerModal = React.createRef();
+  innerModal = React.createRef();
+
   static propTypes = {
     /**
      * Specify an optional className to be applied to the modal root node
@@ -39,8 +42,8 @@ export default class ComposedModal extends Component {
   };
 
   componentDidMount() {
-    if (this.modal) {
-      this.modal.focus();
+    if (this.outerModal.current) {
+      this.outerModal.current.focus();
     }
   }
 
@@ -58,6 +61,15 @@ export default class ComposedModal extends Component {
     this.setState({
       open: false,
     });
+  };
+
+  handleClick = evt => {
+    if (
+      this.innerModal.current &&
+      !this.innerModal.current.contains(evt.target)
+    ) {
+      this.closeModal();
+    }
   };
 
   render() {
@@ -89,11 +101,14 @@ export default class ComposedModal extends Component {
       <div
         {...other}
         role="presentation"
-        ref={modal => (this.modal = modal)}
+        ref={this.outerModal}
+        onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         className={modalClass}
         tabIndex={-1}>
-        <div className={containerClass}>{childrenWithProps}</div>
+        <div ref={this.innerModal} className={containerClass}>
+          {childrenWithProps}
+        </div>
       </div>
     );
   }
