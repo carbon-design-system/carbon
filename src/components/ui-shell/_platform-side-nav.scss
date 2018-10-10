@@ -85,8 +85,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     align-items: stretch;
   }
 
-  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__title-bar,
-  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__title-bar {
+  .#{$prefix}--side-nav__title-bar {
     border-bottom: 1px solid $shell-side-nav-bg-02;
   }
 
@@ -182,11 +181,6 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__category {
     position: relative;
-  }
-
-  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category,
-  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category {
-    padding-top: get-fixed-size(1);
   }
 
   .#{$prefix}--side-nav__category--active {
