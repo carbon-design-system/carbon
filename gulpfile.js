@@ -363,6 +363,7 @@ gulp.task('html:dev', () =>
                 body: contents.get('demo-nav-data')({
                   componentItems,
                   docItems,
+                  routeWithQueryArgs: true,
                   useStaticFullRenderPage: true,
                 }),
               })

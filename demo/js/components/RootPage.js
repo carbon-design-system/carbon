@@ -161,6 +161,11 @@ class RootPage extends Component {
     portSassBuild: PropTypes.number,
 
     /**
+     * `true` to use query args for routing.
+     */
+    routeWithQueryArgs: PropTypes.bool,
+
+    /**
      * `true` to use static full render page.
      */
     useStaticFullRenderPage: PropTypes.bool,
@@ -201,8 +206,19 @@ class RootPage extends Component {
   componentDidMount() {
     const { componentItems } = this.props;
     if (!this.state.selectedNavItemId && componentItems) {
+      const { search } = location;
+      const nameInQueryArg =
+        search &&
+        search
+          .replace(/^\??(.*?)\/?$/, '$1')
+          .split('&')
+          .reduce((o, item) => {
+            const pair = item.split('=');
+            o[pair[0]] = pair[1];
+            return o;
+          }, {}).nav;
       const pathnameTokens = /^\/demo\/([\w-]+)$/.exec(location.pathname);
-      const name = (pathnameTokens && pathnameTokens[1]) || '';
+      const name = nameInQueryArg || (pathnameTokens && pathnameTokens[1]) || '';
       const selectedNavItem = (name && componentItems.find(item => item.name === name)) || componentItems[0];
       if (selectedNavItem) {
         this.switchTo(selectedNavItem.id);
@@ -366,12 +382,13 @@ class RootPage extends Component {
    * @param {string} selectedNavItemId The ID of the newly selected component.
    */
   switchTo(selectedNavItemId) {
+    const { routeWithQueryArgs } = this.props;
     this.setState({ selectedNavItemId }, () => {
       const { componentItems } = this.state;
       const selectedNavItem = componentItems && componentItems.find(item => item.id === selectedNavItemId);
       const { name } = selectedNavItem || {};
       if (name) {
-        history.pushState({ name }, name, `/demo/${name}`);
+        history.pushState({ name }, name, !routeWithQueryArgs ? `/demo/${name}` : `/?nav=${name}`);
       }
       this._populateCurrent();
     });
