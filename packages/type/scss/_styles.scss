@@ -7,7 +7,7 @@ $heading-01: (
   font-size: type-scale(2),
   font-weight: font-weight('regular'),
   line-height: rem(18px),
-  letter-spacing: 0.01rem,
+  letter-spacing: 0,
 ) !default;
 
 $heading-02: (
@@ -42,25 +42,39 @@ $heading-04: (
 
 $heading-05: (
   font-family: font-family('sans'),
-  font-size: type-scale(7),
+  font-size: type-scale(6),
   font-weight: font-weight('regular'),
-  line-height: rem(32px),
+  line-height: rem(30px),
   letter-spacing: 0,
   breakpoints: (
-    max: (
+    lg: (
+      font-size: type-scale(7),
+      line-height: rem(36px),
+    ),
+    xlg: (
       font-size: type-scale(8),
-      line-height: rem(32px),
+      font-weight: font-weight('light'),
+      line-height: rem(40px),
+    ),
+    max: (
+      font-size: type-scale(9),
+      line-height: rem(44px),
     ),
   ),
 ) !default;
 
 $heading-06: (
   font-family: font-family('sans'),
-  font-size: type-scale(8),
-  font-weight: font-weight('light'),
-  line-height: rem(32px),
+  font-size: type-scale(7),
+  font-weight: font-weight('regular'),
+  line-height: rem(36px),
   letter-spacing: 0,
   breakpoints: (
+    md: (
+      font-size: type-scale(8),
+      font-weight: font-weight('light'),
+      line-height: rem(40px),
+    ),
     lg: (
       font-size: type-scale(9),
       line-height: rem(44px),
@@ -105,7 +119,7 @@ $code-01: (
   font-weight: font-weight('regular'),
   font-size: type-scale(1),
   line-height: rem(16px),
-  letter-spacing: 0.01rem,
+  letter-spacing: 0,
 ) !default;
 
 $code-02: (
@@ -113,7 +127,7 @@ $code-02: (
   font-weight: font-weight('regular'),
   font-size: type-scale(2),
   line-height: rem(20px),
-  letter-spacing: 0.01rem,
+  letter-spacing: 0,
 ) !default;
 
 // prettier-ignore
