@@ -97,7 +97,7 @@
       color: $brand-01;
     }
 
-    // TODO: how to fix??
+    // TODO: need `data-invalid` prop to be added to this parent element
     &[data-invalid]:focus-within {
       .#{$prefix}--label {
         color: $support-01;

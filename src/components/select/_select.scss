@@ -19,9 +19,6 @@
     display: flex;
     flex-direction: column;
 
-    /* 
-      the label element preceeds the input as a sibling, and CSS cannot see up the tree that way, so we must use `:focus-within` on the parent of the input and label. this is not compatible with Edge yet. an alternative would be a JS solution
-    */
     &:focus-within .#{$prefix}--label {
       color: $brand-01;
     }

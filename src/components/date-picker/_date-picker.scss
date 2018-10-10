@@ -32,6 +32,11 @@
     &:focus-within .#{$prefix}--label {
       color: $brand-01;
     }
+
+    // TODO: need `data-invalid` prop to be added to this parent element
+    &[data-invalid]:focus-within .#{$prefix}--label {
+      color: $support-01;
+    }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
@@ -77,10 +82,6 @@
     &[data-invalid],
     &[data-invalid]:focus {
       box-shadow: 0 2px 0 0 $support-01;
-    }
-
-    &[data-invalid]:focus-within .#{$prefix}--label {
-      color: $support-01;
     }
 
     & ~ .#{$prefix}--form-requirement {
