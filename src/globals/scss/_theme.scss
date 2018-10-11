@@ -50,6 +50,7 @@
   $button-padding: 0 $spacing-md !default !global;
   $button-padding-sm: 0 $spacing-xs !default !global;
   $button-border-width: 2px !default !global;
+  $button-outline-width: 1px !default !global;
 
   // Accordion (Reverse)
   $accordion-flex-direction: row !default !global;
@@ -155,10 +156,11 @@
   $button-font-size: 0.875rem !default !global;
   $button-border-radius: 0 !default !global;
   $button-height: 48px !default !global;
-  $button-padding: 0.25rem 0.75rem 0 0.75rem !default !global;
-  $button-padding-sm: 0 $spacing-xs !default !global;
+  $button-padding: 0.875rem 4rem 0.875rem 1rem !default !global;
+  $button-padding-sm: 0.375rem 4rem 0.375rem 1rem !default !global;
   $button-padding-lg: $spacing-sm !default !global;
-  $button-border-width: 4px !default !global;
+  $button-border-width: 1px !default !global;
+  $button-outline-width: 3px !default !global;
   $button-outline-offset: -5px !default !global;
   $button-outline: 1px solid $ibm-colors__white !default !global;
 
