@@ -543,6 +543,8 @@
   .#{$prefix}--tooltip--definition__bottom {
     padding: 1rem 1rem 1.5rem;
     min-width: rem(208px);
+    max-width: rem(288px);
+    min-height: rem(76px);
 
     .#{$prefix}--tooltip__caret {
       top: -0.2rem;
