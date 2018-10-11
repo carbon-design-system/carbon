@@ -56,6 +56,8 @@ const header = {
 const sidenav = {
   state: {
     expanded: false,
+    hasIcons: false,
+    fixed: false,
   },
   title: {
     text: '[L1 name here]',
@@ -200,7 +202,20 @@ module.exports = {
       context: {
         sidenav: {
           state: {
+            hasIcons: true,
             expanded: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'Side-nav fixed',
+      context: {
+        sidenav: {
+          state: {
+            hasIcons: false,
+            expanded: true,
+            fixed: true,
           },
         },
       },
