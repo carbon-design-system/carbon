@@ -492,7 +492,8 @@ export default class OverflowMenu extends Component {
       <ul
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
-        ref={!floatingMenu && this._bindMenuBody}>
+        ref={!floatingMenu && this._bindMenuBody}
+        role="menu">
         {childrenWithProps}
       </ul>
     );
