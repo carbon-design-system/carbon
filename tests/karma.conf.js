@@ -11,6 +11,7 @@ const cloptions = commander
   .option('-b, --browser [browser]', 'Browser to test with (ChromeHeadless or Chrome)', collect, [])
   .option('-d, --debug', 'Disables collection of code coverage, useful for runinng debugger against specs or sources')
   .option('-f, --file [file]', 'Spec files to run', collect, defaultFiles)
+  .option('-r, --random', 'Enable random execution order of tests')
   .option('-v, --verbose', 'Enables verbose output')
   .parse(process.argv);
 const isFilesDefault =
@@ -36,6 +37,12 @@ module.exports = function(config) {
     basePath: '..',
 
     frameworks: ['jasmine'],
+
+    client: {
+      jasmine: {
+        random: !!cloptions.random,
+      },
+    },
 
     files: [
       ...cloptions.file,

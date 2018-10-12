@@ -39,6 +39,7 @@ describe('Test Search', function() {
   describe('Clearing the search bar', function() {
     let input;
     let clearIcon;
+    let clearIconInitialState;
     let instance;
     const container = document.createElement('div');
     container.innerHTML = searchHTML;
@@ -48,17 +49,17 @@ describe('Test Search', function() {
       instance = new Search(document.querySelector('[data-search]'));
       input = container.querySelector('.bx--search-input');
       clearIcon = container.querySelector('.bx--search-close');
-    });
-
-    it('Clear icon should be hidden by default', function() {
       // IE11 doesn't have `.classList` for `<svg>`
-      expect(
+      clearIconInitialState =
         clearIcon
           .getAttribute('class')
           .trim()
           .split(/\s+/)
-          .indexOf('bx--search-close--hidden') >= 0
-      ).toBe(true);
+          .indexOf('bx--search-close--hidden') >= 0;
+    });
+
+    it('Clear icon should be hidden by default', function() {
+      expect(clearIconInitialState).toBe(true);
     });
 
     it('Clear icon should be shown when input has value', function() {

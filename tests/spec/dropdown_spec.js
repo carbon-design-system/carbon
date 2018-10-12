@@ -151,6 +151,7 @@ describe('Dropdown', function() {
     });
 
     afterEach(function() {
+      element.classList.remove('bx--dropdown--disabled');
       element.classList.remove('bx--dropdown--open');
     });
 
