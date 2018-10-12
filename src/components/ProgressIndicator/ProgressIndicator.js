@@ -51,7 +51,7 @@ ProgressStep.propTypes = {
   /**
    * Provide the label for the <ProgressStep>
    */
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
 
   /**
    * Provide an optional className to be applied to the containing <li> node
