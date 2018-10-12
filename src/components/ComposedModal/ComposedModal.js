@@ -27,6 +27,12 @@ export default class ComposedModal extends Component {
     containerClassName: PropTypes.string,
 
     /**
+     * Specify an optional handler for closing modal.
+     * Returning `false` here prevents closing modal.
+     */
+    onClose: PropTypes.func,
+
+    /**
      * Specify an optional handler for the `onKeyDown` event. Called for all
      * `onKeyDown` events that do not close the modal
      */
@@ -58,9 +64,12 @@ export default class ComposedModal extends Component {
   }
 
   closeModal = () => {
-    this.setState({
-      open: false,
-    });
+    const { onClose } = this.props;
+    if (!onClose || onClose() !== false) {
+      this.setState({
+        open: false,
+      });
+    }
   };
 
   handleClick = evt => {

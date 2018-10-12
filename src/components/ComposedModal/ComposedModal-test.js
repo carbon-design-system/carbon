@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import ComposedModal, {
   ModalHeader,
   ModalBody,
@@ -134,5 +134,30 @@ describe('<ComposedModal />', () => {
     wrapper.setState({ open: false });
     wrapper.setProps({ open: true });
     expect(wrapper.state().open).toEqual(false);
+  });
+
+  it('calls onClick upon user-initiated closing', () => {
+    const onClose = jest.fn();
+    const wrapper = mount(
+      <ComposedModal open onClose={onClose}>
+        <ModalHeader />
+      </ComposedModal>
+    );
+    const button = wrapper.find('.bx--modal-close').first();
+    button.simulate('click');
+    expect(wrapper.state().open).toEqual(false);
+    expect(onClose.mock.calls.length).toBe(1);
+  });
+
+  it('provides a way to prevent upon user-initiated closing', () => {
+    const onClose = jest.fn(() => false);
+    const wrapper = mount(
+      <ComposedModal open onClose={onClose}>
+        <ModalHeader />
+      </ComposedModal>
+    );
+    const button = wrapper.find('.bx--modal-close').first();
+    button.simulate('click');
+    expect(wrapper.state().open).toEqual(true);
   });
 });
