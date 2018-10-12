@@ -365,7 +365,7 @@
     path,
     polygon,
     circle {
-      fill: $brand-01;
+      fill: $ui-05;
     }
 
     &:hover,
@@ -374,7 +374,7 @@
       path,
       polygon,
       circle {
-        fill: $hover-primary;
+        fill: $ui-05;
       }
     }
   }
