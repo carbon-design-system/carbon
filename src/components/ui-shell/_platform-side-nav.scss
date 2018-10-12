@@ -183,7 +183,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     position: relative;
   }
 
-  .#{$prefix}--side-nav__category--active {
+  .#{$prefix}--side-nav__category--active:not('.#{prefix}--side-nav--fixed') {
     background-color: $shell-side-nav-bg-02;
   }
 
