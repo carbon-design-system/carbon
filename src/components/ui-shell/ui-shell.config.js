@@ -1,5 +1,3 @@
-'use strict';
-
 const header = {
   company: 'IBM',
   platform: '[Platform]',
@@ -325,14 +323,12 @@ module.exports = {
             expanded: true,
             category: true,
           },
-          sections: nav.sections.map(section => {
-            return {
-              items: section.items.map(item => ({
-                ...item,
-                hasIcon: false,
-              })),
-            };
-          }),
+          sections: nav.sections.map(section => ({
+            items: section.items.map(item => ({
+              ...item,
+              hasIcon: false,
+            })),
+          })),
         },
       },
     },
