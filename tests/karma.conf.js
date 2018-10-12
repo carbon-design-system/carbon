@@ -40,7 +40,7 @@ module.exports = function(config) {
 
     client: {
       jasmine: {
-        random: cloptions.random,
+        random: !!cloptions.random,
       },
     },
 
