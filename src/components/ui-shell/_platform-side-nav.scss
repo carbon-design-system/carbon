@@ -203,6 +203,13 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     opacity: 0;
   }
 
+  .title--fixed {
+    margin-left: get-fixed-size(2);
+    margin-top: get-fixed-size(2);
+    font-weight: normal;
+    color: $shell-header-text-03;
+  }
+
   .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category-title,
   .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category-title {
     opacity: 1;

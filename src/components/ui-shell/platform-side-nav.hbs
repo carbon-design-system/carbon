@@ -1,13 +1,15 @@
 {{#if sidenav.state.expanded}}
-<aside class="bx--side-nav bx--side-nav--expanded">
+  <aside class="bx--side-nav bx--side-nav--expanded">
 {{else}}
-<aside class="bx--side-nav">
+  <aside class="bx--side-nav">
 {{/if}}
-  <div class="bx--side-nav__content">
-    {{> platform-side-nav-title-bar sidenav=sidenav }}
-    <div class="bx--side-nav__scroll">
-      {{> platform-side-nav-nav sidenav=sidenav }}
-    </div>
-    {{> platform-side-nav-footer expanded=sidenav.state.expanded }}
+<div class="bx--side-nav__content">
+  {{> platform-side-nav-title-bar sidenav=sidenav }}
+  <div class="bx--side-nav__scroll">
+    {{> platform-side-nav-nav sidenav=sidenav }}
   </div>
+  {{#unless sidenav.state.fixed}}
+    {{> platform-side-nav-footer expanded=sidenav.state.expanded }}
+  {{/unless}}
+</div>
 </aside>
