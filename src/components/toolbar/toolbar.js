@@ -76,17 +76,8 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
    */
   _handleKeyDown(event) {
     const searchInput = eventMatches(event, this.options.selectorSearch);
-    const isOfSelf = this.element.contains(event.target);
-    const shouldBeOpen = isOfSelf && !this.element.classList.contains(this.options.classSearchActive);
-
-    if (searchInput) {
-      if ((event.which === 13 || event.which === 32) && !shouldBeOpen) {
-        searchInput.classList.add(this.options.classSearchActive);
-      }
-
-      if (event.which === 27) {
-        searchInput.classList.remove(this.options.classSearchActive);
-      }
+    if (searchInput && event.which === 27) {
+      searchInput.classList.remove(this.options.classSearchActive);
     }
   }
 

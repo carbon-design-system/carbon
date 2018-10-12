@@ -143,7 +143,7 @@ describe('Test floating menu', function() {
 
     afterEach(function() {
       element.classList.remove('my-floating-menu-open');
-      element.classList.remove('my-floating-menu-trigger-open');
+      refNode.classList.remove('my-floating-menu-trigger-open');
       events.reset();
     });
 
@@ -175,7 +175,8 @@ describe('Test floating menu', function() {
     tempDiv.innerHTML = HTML;
 
     beforeAll(function() {
-      window.scrollY = 500;
+      window.pageXOffset = 0;
+      window.pageYOffset = 0;
       element = tempDiv.querySelector('ul.bx--overflow-menu-options');
       spyOn(element, 'getBoundingClientRect').and.callFake(() => ({
         width: 400,

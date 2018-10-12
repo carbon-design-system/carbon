@@ -1,4 +1,4 @@
-import Promise from 'bluebird'; // For testing on browsers not supporting Promise
+import Promise, { delay } from 'bluebird'; // For testing on browsers not supporting Promise
 import EventManager from '../utils/event-manager';
 import NumberInput from '../../src/components/number-input/number-input';
 import HTML from '../../html/number-input/number-input.html';
@@ -93,6 +93,9 @@ describe('Test Number Input', function() {
       element = document.querySelector('[data-numberinput]');
       instance = new NumberInput(element);
       inputNode = document.querySelector('input');
+    });
+
+    beforeEach(function() {
       inputNode.value = '0';
     });
 
@@ -102,6 +105,7 @@ describe('Test Number Input', function() {
         events.on(document.body, 'change', resolve);
         upArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
+      await delay(0);
       expect(e.cancelable).toBe(false);
       expect(inputNode.value).toBe('1');
     });
@@ -113,6 +117,7 @@ describe('Test Number Input', function() {
         events.on(document.body, 'change', resolve);
         downArrowNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       });
+      await delay(0);
       expect(e.cancelable).toBe(false);
       expect(inputNode.value).toBe('0');
     });
