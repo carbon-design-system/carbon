@@ -93,6 +93,9 @@ describe('Test Number Input', function() {
       element = document.querySelector('[data-numberinput]');
       instance = new NumberInput(element);
       inputNode = document.querySelector('input');
+    });
+
+    beforeEach(function() {
       inputNode.value = '0';
     });
 
