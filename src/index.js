@@ -128,6 +128,7 @@ export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
 export SearchSkeleton from './components/Search/Search.Skeleton';
 export SelectSkeleton from './components/Select/Select.Skeleton';
 export SliderSkeleton from './components/Slider/Slider.Skeleton';
+export StructuredListSkeleton from './components/StructuredList/StructuredList.Skeleton';
 export TabsSkeleton from './components/Tabs/Tabs.Skeleton';
 export TagSkeleton from './components/Tag/Tag.Skeleton';
 export TextAreaSkeleton from './components/TextArea/TextArea.Skeleton';
