@@ -3,6 +3,7 @@
 exports[`DataTable.Table should render 1`] = `
 <Table
   className="custom-class"
+  short={false}
   zebra={true}
 >
   <table

@@ -90,6 +90,11 @@ export default class DataTable extends React.Component {
      * available message ids.
      */
     translateWithId: PropTypes.func,
+
+    /**
+     * Optional boolean to create a short data table.
+     */
+    short: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -97,6 +102,7 @@ export default class DataTable extends React.Component {
     filterRows: defaultFilterRows,
     locale: 'en',
     translateWithId,
+    short: false,
   };
 
   static translationKeys = Object.values(translationKeys);
@@ -237,6 +243,15 @@ export default class DataTable extends React.Component {
       shouldShowBatchActions,
       totalSelected,
       onCancel: this.handleOnCancel,
+    };
+  };
+  /**
+   * Helper utility to get the Table Props.
+   */
+  getTableProps = () => {
+    const { short } = this.props;
+    return {
+      short,
     };
   };
 
@@ -406,6 +421,7 @@ export default class DataTable extends React.Component {
       getRowProps: this.getRowProps,
       getSelectionProps: this.getSelectionProps,
       getBatchActionProps: this.getBatchActionProps,
+      getTableProps: this.getTableProps,
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,

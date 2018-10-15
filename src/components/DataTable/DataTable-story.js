@@ -1,11 +1,17 @@
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 
 const readmeURL = 'https://goo.gl/dq6CEK';
 
+const props = () => ({
+  short: boolean('Short variant (short)', false),
+});
+
 storiesOf('DataTable', module)
+  .addDecorator(withKnobs)
   .add(
     'default',
     withReadme(
@@ -21,7 +27,7 @@ storiesOf('DataTable', module)
         at the following url: ${readmeURL}
       `,
         /* eslint-enable no-useless-escape */
-      })(require('./stories/default').default)
+      })(() => require('./stories/default').default(props()))
     )
   )
   .add(

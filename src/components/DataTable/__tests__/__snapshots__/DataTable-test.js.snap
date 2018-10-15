@@ -26,6 +26,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             "getHeaderProps": [Function],
             "getRowProps": [Function],
             "getSelectionProps": [Function],
+            "getTableProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -52,6 +53,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
             title="DataTable with selection"
           >
             <Table
+              short={false}
               zebra={true}
             >
               <TableHead>
@@ -94,6 +96,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     }
   }
   rows={Array []}
+  short={false}
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -109,6 +112,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
         DataTable with selection
       </h4>
       <Table
+        short={false}
         zebra={true}
       >
         <table
@@ -337,6 +341,7 @@ exports[`DataTable selection should render 1`] = `
             "getHeaderProps": [Function],
             "getRowProps": [Function],
             "getSelectionProps": [Function],
+            "getTableProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -451,6 +456,7 @@ exports[`DataTable selection should render 1`] = `
             title="DataTable with selection"
           >
             <Table
+              short={false}
               zebra={true}
             >
               <TableHead>
@@ -557,6 +563,7 @@ exports[`DataTable selection should render 1`] = `
       },
     ]
   }
+  short={false}
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -572,6 +579,7 @@ exports[`DataTable selection should render 1`] = `
         DataTable with selection
       </h4>
       <Table
+        short={false}
         zebra={true}
       >
         <table
@@ -954,6 +962,7 @@ exports[`DataTable should render 1`] = `
             "getHeaderProps": [Function],
             "getRowProps": [Function],
             "getSelectionProps": [Function],
+            "getTableProps": [Function],
             "headers": Array [
               Object {
                 "header": "Field A",
@@ -1173,6 +1182,7 @@ exports[`DataTable should render 1`] = `
               </TableToolbarContent>
             </TableToolbar>
             <Table
+              short={false}
               zebra={true}
             >
               <TableHead>
@@ -1250,6 +1260,7 @@ exports[`DataTable should render 1`] = `
       },
     ]
   }
+  short={false}
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1692,6 +1703,7 @@ exports[`DataTable should render 1`] = `
         </section>
       </TableToolbar>
       <Table
+        short={false}
         zebra={true}
       >
         <table

@@ -2,6 +2,7 @@
 
 exports[`DataTable.TableCell should render 1`] = `
 <Table
+  short={false}
   zebra={true}
 >
   <table

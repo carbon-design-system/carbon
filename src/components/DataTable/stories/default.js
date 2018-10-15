@@ -21,10 +21,11 @@ import DataTable, {
 } from '../../DataTable';
 import { batchActionClick, initialRows, headers } from './shared';
 
-export default () => (
+export default ({ short }) => (
   <DataTable
     rows={initialRows}
     headers={headers}
+    short={short}
     render={({
       rows,
       headers,
@@ -34,6 +35,7 @@ export default () => (
       getBatchActionProps,
       onInputChange,
       selectedRows,
+      getTableProps,
     }) => (
       <TableContainer title="DataTable">
         <TableToolbar>
@@ -70,7 +72,7 @@ export default () => (
             </Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table>
+        <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
               <TableSelectAll {...getSelectionProps()} />
