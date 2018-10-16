@@ -118,6 +118,23 @@ describe('Icon', () => {
       expect(content.length).toBeGreaterThan(0);
       expect(content).toEqual(['']);
     });
+
+    it('takes care of polygons', () => {
+      const svgData = {
+        polygons: [
+          {
+            points: 'POINT',
+          },
+        ],
+      };
+      expect(
+        svgShapes(svgData).map(item =>
+          item.map(({ type, key, props }) => ({ type, key, props }))
+        )
+      ).toEqual([
+        [{ type: 'polygon', key: 'key0', props: { points: 'POINT' } }],
+      ]);
+    });
   });
 
   describe('isPrefixed', () => {

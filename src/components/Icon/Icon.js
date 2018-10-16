@@ -81,6 +81,10 @@ export function svgShapes(svgData) {
         return data.map((path, index) => (
           <path d={path.d} key={`key${index}`} />
         ));
+      } else if (svgProp === 'polygons') {
+        return data.map((polygon, index) => (
+          <polygon points={polygon.points} key={`key${index}`} />
+        ));
       }
 
       return '';
