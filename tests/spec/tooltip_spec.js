@@ -22,6 +22,8 @@ describe('Test tooltip', function() {
 
     const element = container.querySelector('[data-tooltip-trigger]');
     const floating = container.querySelector('.bx--tooltip');
+    const hasFocusin = 'onfocusin' in window;
+    const focusinEventName = hasFocusin ? 'focusin' : 'focus';
     let tooltip;
 
     beforeAll(function() {
@@ -34,16 +36,30 @@ describe('Test tooltip', function() {
     });
 
     it('Should show the tooltip upon clicking/focusing', function() {
-      const hasFocusin = 'onfocusin' in window;
-      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       element.dispatchEvent(new CustomEvent(focusinEventName, { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
     it('Should hide the tooltip upon bluring', function() {
+      element.dispatchEvent(new CustomEvent(focusinEventName, { bubbles: true }));
       floating.classList.add('bx--tooltip--shown');
       element.dispatchEvent(new CustomEvent('blur', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
+    });
+
+    it('Should hide the tooltip upon hitting ESC key', function() {
+      element.dispatchEvent(new CustomEvent(focusinEventName, { bubbles: true }));
+      floating.classList.add('bx--tooltip--shown');
+      element.dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { which: 27 }));
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
+    });
+
+    it('Should move the focus back to the trigger node upon hitting ESC key on tooltip', function() {
+      element.dispatchEvent(new CustomEvent(focusinEventName, { bubbles: true }));
+      floating.classList.add('bx--tooltip--shown');
+      floating.dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { which: 27 }));
+      expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
+      expect(document.activeElement).toBe(element);
     });
 
     afterEach(function() {

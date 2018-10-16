@@ -58,6 +58,11 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
   constructor(element, options) {
     super(element, options);
     this._hookOn(element);
+    this.manage(
+      on(this.element.ownerDocument, 'keydown', event => {
+        this._handleKeyDown(event);
+      })
+    );
   }
 
   /**
@@ -167,6 +172,24 @@ class Tooltip extends mixin(createComponent, initComponentByEvent, eventedShowHi
     }
     if (!shouldPreventClose) {
       this.changeState(state, details);
+    }
+  }
+
+  /**
+   * Handles key press on document.
+   * @param {Event} event The triggering event.
+   * @private
+   */
+  _handleKeyDown(event) {
+    const key = event.which;
+    const { element, tooltip } = this;
+    const isOfMenu = tooltip && tooltip.element.contains(event.target);
+    if (key === 27) {
+      this.changeState('hidden', getLaunchingDetails(event), () => {
+        if (isOfMenu) {
+          element.focus();
+        }
+      });
     }
   }
 
