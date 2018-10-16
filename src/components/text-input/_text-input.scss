@@ -67,15 +67,15 @@
     }
 
     &[data-toggle-password-visibility] + .#{$prefix}--text-input--password__visibility {
-      top: rem(-40px);
+      top: rem(-28px);
+      right: rem(12px);
       display: flex;
       justify-content: center;
       align-self: flex-end;
       align-items: center;
       order: 3;
-      height: rem(40px);
-      width: rem(40px);
-      margin-top: rem(-40px);
+      height: rem(16px);
+      width: rem(16px);
       padding: 0;
       border: 0;
       background: none;
@@ -130,15 +130,14 @@
     padding: 0 $spacing-xl 0 $spacing-md;
     color: $text-01;
     border: none;
-    outline: 1px solid $ui-04;
-    outline-offset: -1px;
-    padding-bottom: 1px;
+    border-bottom: 1px solid $ui-04;
+    outline: 2px solid transparent;
+    transition: $transition--base all;
+    outline-offset: -2px;
   }
 
   .#{$prefix}--text-input:hover {
-    color: $text-01;
-    outline: 1px solid $brand-01;
-    outline-offset: -1px;
+    background-color: $hover-field;
   }
 
   .#{$prefix}--text-input:focus,
@@ -171,6 +170,8 @@
     // THIS SHOULD BE MOVED TO AN INLINE SVG IN NEXT MAJOR RELEASE
     background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' class='ibm-icons ibm-icons--error--filled' fill='%23bebebe'%3e%3cpath d='M6.95 26.66A14 14 0 0 0 26.67 6.93zM16 2A14 14 0 0 0 5.35 25.07L25.08 5.34A13.93 13.93 0 0 0 16 2z'/%3e%3c/svg%3e");
     outline: none;
+    background-color: $disabled-background-color;
+    border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--text-input:disabled::-webkit-input-placeholder {

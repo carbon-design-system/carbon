@@ -53,6 +53,7 @@ describe('Test Overflow menu', function() {
   describe('Custom event emission', function() {
     let menu;
     let element;
+    let optionsElement;
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
@@ -61,6 +62,7 @@ describe('Test Overflow menu', function() {
     beforeAll(function() {
       document.body.appendChild(container);
       element = document.querySelector('.bx--overflow-menu');
+      optionsElement = element.querySelector('.bx--overflow-menu-options');
       menu = new OverflowMenu(element);
     });
 
@@ -89,6 +91,7 @@ describe('Test Overflow menu', function() {
       });
       events.on(element.ownerDocument.body, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
+      optionsElement.classList.add('bx--overflow-menu-options--open');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent, 'floating-menu-hidden event').not.toHaveBeenCalled();
       expect(element.classList.contains('bx--overflow-menu--open'), 'State of root element').toBe(true);
@@ -98,12 +101,14 @@ describe('Test Overflow menu', function() {
       const spyOverflowEvent = jasmine.createSpy();
       events.on(document, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
+      optionsElement.classList.add('bx--overflow-menu-options--open');
       element.dispatchEvent(new CustomEvent('mousedown', { bubbles: true }));
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent).toHaveBeenCalled();
     });
 
     afterEach(function() {
+      optionsElement.classList.remove('bx--overflow-menu-options--open');
       element.classList.remove('bx--overflow-menu--open');
       events.reset();
     });
@@ -119,6 +124,7 @@ describe('Test Overflow menu', function() {
     let element1;
     let element2;
     let element3;
+    let optionElements;
     const container = document.createElement('div');
     container.innerHTML = [HTML, HTML, HTML].join('');
 
@@ -128,6 +134,7 @@ describe('Test Overflow menu', function() {
       element1 = elements[0];
       element2 = elements[1];
       element3 = elements[2];
+      optionElements = elements.map(element => element.querySelector('.bx--overflow-menu-options'));
       new OverflowMenu(element1);
       new OverflowMenu(element2);
       new OverflowMenu(element3);
@@ -149,9 +156,12 @@ describe('Test Overflow menu', function() {
     });
 
     afterEach(function() {
-      element1.classList.remove('bx--overflow-menu--open');
-      element2.classList.remove('bx--overflow-menu--open');
-      element3.classList.remove('bx--overflow-menu--open');
+      optionElements.forEach(optionElement => {
+        optionElement.classList.remove('bx--overflow-menu-options--open');
+      });
+      elements.forEach(element => {
+        element.classList.remove('bx--overflow-menu--open');
+      });
     });
 
     afterAll(function() {

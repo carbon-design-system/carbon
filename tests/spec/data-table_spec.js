@@ -64,27 +64,19 @@ describe('Test responsive table', function() {
     let expanseTable;
     let container;
 
-    beforeAll(function() {
+    beforeEach(function() {
       container = document.createElement('div');
-      element;
-      expanseTable;
       container.innerHTML = HTML;
       document.body.appendChild(container);
-      element = document.querySelector('[data-responsive-table]');
+      element = container.querySelector('[data-responsive-table]');
       expanseTable = new ResponsiveTable(element);
     });
 
-    it('On first click, insert the saved row', function() {
+    it('Insert/remove the saved row upon toggling the expandable row', function() {
       const firstRowExpand = document.querySelector('.bx--table-expand');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-
       expect(document.querySelector('.bx--expandable-row')).toBeTruthy();
-    });
-
-    it('Remove element on second click', function() {
-      const firstRowExpand = document.querySelector('.bx--table-expand');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
-
       expect(document.querySelector('.bx--expandable-row')).toBeFalsy();
     });
 
@@ -108,11 +100,8 @@ describe('Test responsive table', function() {
 
     afterEach(function() {
       events.reset();
-    });
-
-    afterAll(function() {
-      document.body.removeChild(container);
       expanseTable.release();
+      document.body.removeChild(container);
     });
   });
 });
