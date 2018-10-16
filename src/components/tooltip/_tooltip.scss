@@ -391,7 +391,7 @@
     min-width: rem(208px);
     max-width: rem(288px);
     // Need to add new UI color -- IBM Color Gray 80
-    background: #3d3d3d;
+    background: $tooltip-background-color;
     margin-top: $spacing-2xs;
     padding: rem(16px) rem(16px) rem(24px) rem(16px);
     border-radius: rem(2px);
@@ -412,15 +412,24 @@
       padding-right: rem(32px);
     }
 
-    a {
+    .#{$prefix}--link {
       // Need to add new link / UI color -- IBM Color Blue 40
-      color: #6ea6ff;
+      color: $link-inverse-color;
+      font-size: rem(14px);
+
+      &:active {
+        color: $ui-01;
+      }
+
+      &:vistited {
+        color: $link-inverse-color;
+      }
     }
 
     .#{$prefix}--tooltip__caret {
       position: absolute;
       // Need to add new UI color -- IBM Color Gray 80
-      background: #3d3d3d;
+      background: $tooltip-background-color;
       left: 0;
       top: rem(-4px);
       right: 0;
@@ -475,8 +484,6 @@
   .#{$prefix}--tooltip--definition {
     @include font-family;
     @include reset;
-    @include typescale('delta');
-
     position: relative;
 
     .#{$prefix}--tooltip__trigger {
@@ -512,8 +519,9 @@
     z-index: 1;
     display: none;
     // Need to add new UI color -- IBM Color Gray 80
-    background: #3d3d3d;
-    max-width: rem(176px);
+    background: $tooltip-background-color;
+    min-width: rem(208px);
+    max-width: rem(288px);
     margin-top: $spacing-sm;
     padding: $spacing-xs;
     border-radius: rem(2px);
@@ -522,7 +530,7 @@
 
     p {
       @include font-family;
-      @include typescale('omega');
+      @include typescale('zeta');
       // Need to change inverse color to Gray--10 across the board?
       color: $ui-01;
     }
@@ -534,15 +542,14 @@
       width: 0.6rem;
       height: 0.6rem;
       // Need to add new UI color -- IBM Color Gray 80
-      background: #3d3d3d;
-      margin-left: $spacing-lg;
+      background: $tooltip-background-color;
+      margin-left: $spacing-md;
     }
   }
 
   // Tooltip Definition caret - bottom position
   .#{$prefix}--tooltip--definition__bottom {
     padding: 1rem 1rem 1.5rem;
-    min-width: rem(208px);
     max-width: rem(288px);
     min-height: rem(76px);
 
@@ -586,7 +593,7 @@
       position: absolute;
       display: none;
       // Need to add new UI color -- IBM Color Gray 80
-      background-color: #3d3d3d;
+      background-color: $tooltip-background-color;
     }
 
     &:before {
@@ -601,12 +608,13 @@
     }
 
     &:after {
-      @include typescale('omega');
+      @include typescale('zeta');
       @include layer('overlay');
       min-width: rem(32px);
       max-width: rem(208px);
+      height: rem(32px);
       margin-left: 50%;
-      padding: $spacing-2xs 1rem;
+      padding: 0 1rem;
       border-radius: rem(2px);
       // Need to change inverse color to Gray--10 across the board?
       color: $ui-01;
@@ -627,7 +635,8 @@
       &:before,
       &:after {
         position: absolute;
-        display: block;
+        display: flex;
+        align-items: center;
       }
     }
 
