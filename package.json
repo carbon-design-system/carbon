@@ -4,6 +4,9 @@
   "private": true,
   "repository": "git@github.com:IBM/carbon-elements.git",
   "license": "Apache-2.0",
+  "engines": {
+    "node": "8.x"
+  },
   "workspaces": {
     "packages": [
       "packages/*"
