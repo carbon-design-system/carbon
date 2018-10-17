@@ -312,12 +312,12 @@
     position: absolute;
     z-index: z('dropdown');
     max-height: 0;
-    transition: max-height $transition--expansion $carbon--ease-out;
+    transition: max-height $transition--expansion cubic-bezier(0, 0, 0.38, 0.9);
     overflow: hidden;
   }
 
   .#{$prefix}--dropdown-item {
-    transition: opacity $transition--expansion $carbon--ease-out;
+    transition: opacity $transition--expansion cubic-bezier(0, 0, 0.38, 0.9);
     opacity: 0;
     margin-top: -1px;
 
