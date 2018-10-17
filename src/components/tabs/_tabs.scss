@@ -24,7 +24,7 @@
     width: 100%;
     position: relative;
 
-    @include breakpoint(bp--sm--major) {
+    @include breakpoint(md) {
       background: none;
       min-height: rem(49px);
     }
@@ -51,7 +51,7 @@
       box-shadow: 0 2px 0 0 $brand-01;
     }
 
-    @include breakpoint(bp--sm--major) {
+    @include breakpoint(md) {
       display: none;
     }
   }
@@ -83,7 +83,7 @@
     z-index: z('dropdown');
     background: $ui-01;
 
-    @include breakpoint(bp--sm--major) {
+    @include breakpoint(md) {
       @include typescale('epsilon');
       flex-direction: row;
       margin-right: $spacing-md;
@@ -93,7 +93,7 @@
       z-index: auto;
     }
 
-    @include breakpoint(bp--lg--major) {
+    @include breakpoint(xl) {
       margin-left: 0;
     }
   }
@@ -101,7 +101,7 @@
   .#{$prefix}--tabs__nav--hidden {
     display: none;
 
-    @include breakpoint(bp--sm--major) {
+    @include breakpoint(md) {
       display: flex;
     }
   }
@@ -116,13 +116,13 @@
     &:focus {
       background-color: $hover-row;
 
-      @include breakpoint(bp--sm--major) {
+      @include breakpoint(md) {
         outline: 1px solid transparent;
         background: transparent;
       }
     }
 
-    @include breakpoint(bp--sm--major) {
+    @include breakpoint(md) {
       background: transparent;
       padding: $spacing-sm 0 $spacing-sm;
 
@@ -135,7 +135,7 @@
   .#{$prefix}--tabs__nav-item--selected {
     border: none;
 
-    @include breakpoint(bp--sm--major) {
+    @include breakpoint(md) {
       border-bottom: 2px solid $brand-01;
 
       .#{$prefix}--tabs__nav-link {
@@ -151,7 +151,7 @@
   .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
     color: $text-01;
 
-    @include breakpoint(bp--sm--major) {
+    @include breakpoint(md) {
       color: $hover-secondary;
     }
   }
@@ -171,7 +171,7 @@
       color: $inverse-01;
     }
 
-    @include breakpoint(bp--sm--major) {
+    @include breakpoint(md) {
       padding: 0 $spacing-3xs;
       width: auto;
 
