@@ -55,7 +55,6 @@ $grid-gutter-breakpoints: (
   [class*='#{$prefix}--col'] {
     position: relative;
     width: 100%;
-    min-height: 1px;
     padding: 0 gutter('xs');
 
     @media (min-width: breakpoint('sm')) {
