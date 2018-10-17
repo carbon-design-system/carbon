@@ -12,7 +12,7 @@
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
-@import '../../globals/scss/breakpoint';
+@import '../../globals/scss/breakpoints';
 @import '../../globals/scss/layout';
 
 @include exports('dropdown') {
