@@ -1,0 +1,97 @@
+//-------------------------------------
+/*
+@mixin: breakpoint($size $direction[optional(up|down|only)])
+
+usage:
+    @include breakpoint(sm) {
+        - styles here --
+    }
+    @include breakpoint(md only) {
+        - styles here --
+    }
+    @include breakpoint(lg down) {
+        - styles here --
+    }
+    @include breakpoint(500px) {
+        - styles here --
+    }
+*/
+//-------------------------------------
+
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1600px,
+) !default;
+
+@function map-get-next($map, $key) {
+    $n: index(map-keys($map), $key);
+    @return if($n < length(map-keys($map)), nth(map-keys($map), $n + 1), null);
+}
+
+@function getBreakpointString($value) {
+    $size: nth($value, 1);
+    $dir: if(length($value) > 1, nth($value, 2), 'up');
+    $str: '';
+    $bp: 0;
+    $bp-top: 0;
+    $media: '';
+
+    @if $dir == 'down' {
+        $media: 'max-width';
+    } 
+    @else if $dir == 'only' {
+        $media: $dir;
+    }
+    @else {
+        $media: 'min-width';
+    }
+    @if $dir != 'down' and $dir != 'up' and $dir != 'only' {
+        @warn 'Invalid breakpoint direction: "#{$value}"';
+    }
+
+    @if map-has-key($breakpoints, $size) {
+        $bp: map-get($breakpoints, $size);
+        
+        @if $dir == 'down' or $dir == 'only' {
+            $bp-top: if(map-get-next($breakpoints, $size), map-get($breakpoints, map-get-next($breakpoints, $size)) - 1, '9999em');
+        }
+        @if $dir == 'down' {
+            $bp: $bp-top;
+        }
+    }
+    @else {
+        @if type-of($size) == 'number' {
+            $bp: $size;
+        }
+        @else {
+            $bp: 0;
+            @warn 'Breakpoint not found: "#{$value}"';
+        }
+    }
+      
+    @if $media != '' {
+        @if $bp-top != 0 and $media == 'only' {
+            $str: "(min-width: #{$bp}) and (max-width: #{$bp-top})";
+        } 
+        @else {
+            $str: "(#{$media}: #{$bp})";
+        }
+    }
+
+    @return $str;
+}
+
+@mixin breakpoint($value) {
+    $str: getBreakpointString($value);
+        
+    // If string is empty no need for media query
+    @if $str != '' {
+        @media screen and #{$str} {
+            @content;
+        }
+    }
+}

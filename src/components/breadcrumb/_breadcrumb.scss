@@ -15,7 +15,7 @@
     @include font-family;
     display: inline;
 
-    @include breakpoint(bp--xs--major) {
+    @include breakpoint(500px) {
       display: flex;
       flex-wrap: wrap;
     }
@@ -73,7 +73,7 @@
     @include font-family;
     display: inline;
 
-    @include breakpoint(bp--xs--major) {
+    @include breakpoint(500px) {
       display: flex;
       flex-wrap: wrap;
     }

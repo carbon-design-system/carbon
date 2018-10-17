@@ -1,12 +1,5 @@
 @import 'helper-classes';
 
-$breakpoints: (
-  bp--xs--major: 500px,
-  bp--sm--major: 768px,
-  bp--md--major: 992px,
-  bp--lg--major: 1200px
-);
-
 $padding: (
   'mobile': 3%,
   'xs': 5%
@@ -17,27 +10,6 @@ $padding: (
     @return map-get($padding, $value);
   } @else {
     @warn 'padding: could not find #{$value} in $padding map. Please make sure it is defined';
-  }
-}
-
-//-------------------------------------
-// @mixin: breakpoint($size)
-//-------------------------------------
-// usage:
-// @include breakpoint(bp--md--major) {
-//    - styles here --
-// }
-//-------------------------------------
-
-@mixin breakpoint($size) {
-  @if map-has-key($breakpoints, $size) {
-    @media screen and (min-width: map-get($breakpoints, $size)) {
-      @content;
-    }
-  } @else {
-    @media (min-width: $size) {
-      @content;
-    }
   }
 }
 
@@ -55,7 +27,7 @@ $padding: (
   padding-right: padding(mobile);
   padding-left: padding(mobile);
 
-  @include breakpoint(bp--xs--major) {
+  @include breakpoint(500px) {
     padding-right: padding(xs);
     padding-left: padding(xs);
   }

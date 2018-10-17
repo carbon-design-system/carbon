@@ -50,7 +50,7 @@ $css--helpers: true;
     display: none;
     padding-right: $spacing-2xs;
 
-    @include breakpoint('530px') {
+    @include breakpoint(530px) {
       display: block;
     }
   }
