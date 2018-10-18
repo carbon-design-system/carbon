@@ -10,7 +10,7 @@
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 
-@include exports('lists') {
+@mixin lists {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
   .#{$prefix}--list--ordered {
@@ -53,5 +53,64 @@
   .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
     content: '-';
     padding-right: $spacing-2xs;
+  }
+}
+
+@mixin lists--x {
+  .#{$prefix}--list--nested,
+  .#{$prefix}--list--unordered,
+  .#{$prefix}--list--ordered {
+    @include reset;
+    @include font-family;
+    @include typescale('zeta');
+    @include font-smoothing;
+  }
+
+  .#{$prefix}--list__item {
+    font-weight: 400;
+    color: $text-01;
+  }
+
+  .#{$prefix}--list--nested {
+    margin-bottom: rem(4px);
+    margin-left: $spacing-xl;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
+    display: inline-block;
+    list-style-type: none;
+    content: '\002013';
+    padding-right: $spacing-xs;
+    margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    list-style-type: none;
+    content: '\0025AA';
+    padding-right: $spacing-xs;
+  }
+
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item {
+    list-style-type: decimal;
+    margin-left: 1rem;
+    margin-bottom: rem(4px);
+    text-align: left;
+  }
+
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested {
+    margin-top: rem(4px);
+    margin-left: 1rem;
+  }
+
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item {
+    list-style-type: lower-alpha;
+  }
+}
+
+@include exports('lists') {
+  @if feature-flag-enabled('components-x') {
+    @include lists--x;
+  } @else {
+    @include lists;
   }
 }
