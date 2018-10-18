@@ -155,17 +155,19 @@ $tokens: (
   }
 }
 
-@mixin type-style($name) {
+@mixin type-style($name, $responsive: false) {
   $token: map-get($tokens, $name);
   $default-values: map-remove($token, 'breakpoints');
 
   @include properties($default-values);
 
-  @if map-has-key($token, 'breakpoints') {
-    $breakpoints: map-get($token, 'breakpoints');
-    @each $name, $value in $breakpoints {
-      @include breakpoint($name) {
-        @include properties($value);
+  @if $responsive == true {
+    @if map-has-key($token, 'breakpoints') {
+      $breakpoints: map-get($token, 'breakpoints');
+      @each $name, $value in $breakpoints {
+        @include breakpoint($name) {
+          @include properties($value);
+        }
       }
     }
   }

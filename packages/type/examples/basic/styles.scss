@@ -42,7 +42,8 @@
 // Headings
 @for $i from 1 through 6 {
   .type-heading-0#{$i} {
-    @include type-style('heading-0#{$i}');
+    // Includes responsive styles, off by default
+    @include type-style($name: 'heading-0#{$i}', $responsive: true);
   }
 }
 
