@@ -57,12 +57,17 @@ describe('Test text input', () => {
       passwordVisibilityButton = document.querySelector('.bx--text-input--password__visibility');
     });
 
+    beforeEach(() => {
+      textInput.classList.remove('bx--text-input--password-visible');
+    });
+
     it('Should set password visibility state on 2n+1 clicks', () => {
       passwordVisibilityButton.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(textInput.classList.contains('bx--text-input--password-visible')).toBe(true);
     });
 
     it('Should remove password visibility state on 2n clicks', () => {
+      textInput.classList.add('bx--text-input--password-visible');
       passwordVisibilityButton.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(textInput.classList.contains('bx--text-input--password-visible')).toBe(false);
     });

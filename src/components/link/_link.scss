@@ -75,7 +75,7 @@
     }
 
     &[aria-disabled='true'][tabindex='-1'] {
-      color: $text-disabled;
+      color: $disabled;
       cursor: not-allowed;
       &:hover {
         box-shadow: none;

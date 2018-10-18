@@ -36,14 +36,16 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
    * @param {boolean} obj.passwordIsVisible - The visibility of the password in the
    * input field
    */
-  _setIconVisibility = ({ iconVisibilityOn, iconVisibilityOff, passwordIsVisible }) => {
+  _setIconVisibility = ({ iconVisibilityOn, iconVisibilityOff, passwordIsVisible, selectorPasswordVisibilityButton }) => {
     if (passwordIsVisible) {
       iconVisibilityOn.setAttribute('hidden', true);
       iconVisibilityOff.removeAttribute('hidden');
+      selectorPasswordVisibilityButton.setAttribute('aria-label', 'Hide password');
       return;
     }
     iconVisibilityOn.removeAttribute('hidden');
     iconVisibilityOff.setAttribute('hidden', true);
+    selectorPasswordVisibilityButton.setAttribute('aria-label', 'Show password');
   };
 
   /**
@@ -60,10 +62,12 @@ export default class TextInput extends mixin(createComponent, initComponentBySea
     const iconVisibilityOn = button.querySelector(this.options.svgIconVisibilityOn);
     const iconVisibilityOff = button.querySelector(this.options.svgIconVisibilityOff);
     const input = element.querySelector(this.options.selectorPasswordField);
+    const selectorPasswordVisibilityButton = element.querySelector(this.options.selectorPasswordVisibilityButton);
     this._setIconVisibility({
       iconVisibilityOn,
       iconVisibilityOff,
       passwordIsVisible,
+      selectorPasswordVisibilityButton,
     });
     input.type = passwordIsVisible ? 'text' : 'password';
   };

@@ -115,7 +115,7 @@
     @include reset;
     @include font-family;
     @include typescale('omega');
-    color: $text-01;
+    color: $text-02;
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
@@ -127,7 +127,7 @@
   }
 
   .#{$prefix}--label--disabled {
-    color: $text-disabled;
+    color: $disabled;
     cursor: not-allowed;
   }
 
