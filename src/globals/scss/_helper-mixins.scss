@@ -56,6 +56,18 @@
   }
 }
 
+@mixin focus-outline--x($type: 'border') {
+  @if ($type == 'border') {
+    outline: 2px solid $brand-01;
+    outline-offset: -2px;
+  }
+
+  @if ($type == 'blurred') {
+    box-shadow: 0 0 0 3px $focus;
+    outline: 1px solid transparent;
+  }
+}
+
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
   transition: transform $speed;
