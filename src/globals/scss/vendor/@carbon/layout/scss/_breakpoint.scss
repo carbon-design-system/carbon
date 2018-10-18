@@ -1,0 +1,51 @@
+@import 'convert';
+
+// Initial map of our breakpoints and their values
+$breakpoints: (
+  sm: (
+    width: rem(320px),
+    columns: 4,
+    gutter: rem(16px),
+    margin: 0,
+  ),
+  md: (
+    width: rem(672px),
+    columns: 8,
+    gutter: rem(16px),
+    margin: rem(16px),
+  ),
+  lg: (
+    width: rem(1056px),
+    columns: 16,
+    gutter: rem(16px),
+    margin: rem(16px),
+  ),
+  xlg: (
+    width: rem(1312px),
+    columns: 16,
+    gutter: rem(16px),
+    margin: rem(16px),
+  ),
+  max: (
+    width: rem(1584px),
+    columns: 16,
+    gutter: rem(16px),
+    margin: rem(16px),
+  ),
+) !default;
+
+/// Generate a media query for a given breakpoint
+/// @param {string} $breakpoint
+@mixin breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @if $breakpoint == sm {
+      @content;
+    } @else {
+      @media screen and (min-width: map-deep-get($breakpoints, $breakpoint, width)) {
+        @content;
+      }
+    }
+  } @else {
+    @warn 'Breakpoint: `#{$breakpoint}` is not a valid breakpoint.';
+  }
+}
