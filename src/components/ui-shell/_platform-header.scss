@@ -163,6 +163,10 @@
     height: units(6);
   }
 
+  .#{$prefix}--platform-header__menu .#{$prefix}--platform-header__menu-item[role='menuitem']:hover {
+    background-color: #4c4c4c;
+  }
+
   .#{$prefix}--platform-header__menu-arrow {
     fill: $ibm-colors__gray--10;
     margin-left: units(1);
