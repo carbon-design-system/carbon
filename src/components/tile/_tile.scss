@@ -181,11 +181,9 @@
     padding: $spacing-md;
     outline: 2px solid transparent;
     outline-offset: -2px;
-    height: 165px;
-    width: 309px;
 
     &:focus {
-      @include focus-outline--x('border');
+      @include focus-outline--x;
     }
   }
 
