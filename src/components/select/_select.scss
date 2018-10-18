@@ -7,12 +7,13 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/functions';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/import-once';
 @import '../form/form';
 
-@include exports('select') {
+@mixin select {
   .#{$prefix}--select {
     @include reset;
     position: relative;
@@ -194,5 +195,206 @@
 
   .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
     display: none;
+  }
+}
+
+@mixin select--experimental {
+  .#{$prefix}--select {
+    @include reset;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--select-input {
+    @include font-family;
+    @include typescale('zeta');
+    height: rem(40px);
+    appearance: none;
+    display: block;
+    width: 100%;
+    padding: 0 $spacing-2xl 0 $spacing-md;
+    color: $text-01;
+    background-color: $field-01;
+    border: none;
+    box-shadow: 0 1px 0 0 $ui-05;
+    order: 2;
+    border-radius: 0;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
+
+    & ~ .#{$prefix}--label {
+      order: 1;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border: 2px solid $brand-01;
+    }
+
+    &:hover {
+      background-color: $field-01;
+    }
+
+    &[data-invalid],
+    &[data-invalid]:focus {
+      // box-shadow: 0 2px 0 0 $support-01;
+      box-shadow: none;
+      border: 2px solid $support-01;
+    }
+
+    &:focus ~ .#{$prefix}--label {
+      color: $brand-01;
+    }
+
+    &[data-invalid]:focus ~ .#{$prefix}--label {
+      color: $support-01;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    ~ .#{$prefix}--form-requirement {
+      order: 3;
+      color: $support-01;
+      font-weight: 400;
+      margin-top: $spacing-2xs;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--select__arrow {
+    fill: $text-01;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: rem(10px);
+    height: rem(5px);
+    pointer-events: none;
+  }
+
+  &[data-invalid] ~ .#{$prefix}--select__arrow {
+    bottom: 2.25rem;
+  }
+
+  .#{$prefix}--select-optgroup,
+  .#{$prefix}--select-option {
+    color: $text-01; // For the options to show in IE11
+  }
+
+  .#{$prefix}--select-option[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Override some Firefox user-agent styles
+  @-moz-document url-prefix() {
+    .#{$prefix}--select-option {
+      background-color: $ui-01;
+      color: $text-01;
+    }
+
+    .#{$prefix}--select-optgroup {
+      color: $text-01;
+    }
+  }
+
+  .#{$prefix}--select--inline {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    // Targets IE10+ browsers: Display grid auto not supported
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .#{$prefix}--label {
+      white-space: nowrap;
+      margin: 0 $spacing-xs 0 0;
+      font-weight: 400;
+      color: $ui-04;
+      align-self: center;
+    }
+
+    .#{$prefix}--select-input {
+      background-color: transparent;
+      color: $text-01;
+      font-weight: 600;
+      box-shadow: none;
+
+      &:hover {
+        background-color: $field-01;
+      }
+
+      &:focus {
+        @include focus-outline('border');
+      }
+
+      ~ .#{$prefix}--select__arrow {
+        bottom: auto;
+        top: 1rem;
+      }
+
+      &[data-invalid] {
+        color: $text-01;
+        outline-offset: 2px;
+
+        &:focus {
+          outline: 1px solid $support-01;
+          box-shadow: none;
+        }
+      }
+
+      &:disabled ~ * {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      ~ .#{$prefix}--form-requirement {
+        grid-column-start: 2;
+
+        // Targets IE10+ browsers: Display grid auto not supported
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+          position: absolute;
+          bottom: -1.5rem;
+        }
+      }
+    }
+  }
+
+  //Skeleton State
+  .#{$prefix}--select.#{$prefix}--skeleton {
+    @include skeleton;
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
+    display: none;
+  }
+}
+
+@include exports('select') {
+  @if feature-flag-enabled('components-x') {
+    @include select--experimental;
+  } @else {
+    @include select;
   }
 }
