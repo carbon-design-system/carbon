@@ -369,7 +369,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
-    color: $brand-01;
+    color: $text-01;
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
@@ -403,7 +403,7 @@ $list-box-menu-width: rem(300px);
     position: relative;
     display: inline-flex;
     align-items: center;
-    height: 100%;
+    height: rem(32px);
     padding: 0 1rem;
     cursor: pointer;
   }

@@ -268,7 +268,7 @@
 
   .#{$prefix}--dropdown--up {
     .#{$prefix}--dropdown-list {
-      bottom: 2.5rem;
+      bottom: 2rem;
     }
   }
 
@@ -343,6 +343,7 @@
     line-height: rem(16px);
     padding: $spacing-xs 0;
     margin: 0 rem(16px);
+    border: 1px solid transparent;
     border-bottom: 1px solid $ui-03;
     text-overflow: ellipsis;
     overflow: hidden;
