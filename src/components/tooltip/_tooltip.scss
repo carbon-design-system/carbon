@@ -338,7 +338,7 @@
 
   .#{$prefix}--tooltip__label {
     @include font-family;
-    @include typescale('epsilon');
+    @include typescale('zeta');
     display: inline-flex;
     align-items: center;
     color: $text-01;
@@ -487,6 +487,7 @@
     position: relative;
 
     .#{$prefix}--tooltip__trigger {
+      @include typescale('zeta');
       display: inline-flex;
       position: relative;
       border-bottom: 1px dotted $brand-01;
@@ -520,6 +521,7 @@
     display: none;
     // Need to add new UI color -- IBM Color Gray 80
     background: $tooltip-background-color;
+    width: 100vw;
     min-width: rem(208px);
     max-width: rem(288px);
     margin-top: $spacing-sm;
@@ -550,7 +552,6 @@
   // Tooltip Definition caret - bottom position
   .#{$prefix}--tooltip--definition__bottom {
     padding: 1rem 1rem 1.5rem;
-    max-width: rem(288px);
     min-height: rem(76px);
 
     .#{$prefix}--tooltip__caret {
@@ -652,13 +653,13 @@
   // Tooltip Icon caret - top position
   .#{$prefix}--tooltip--icon__top {
     &:before {
-      top: 0;
-      transform: translate(-50%, calc(-100% - 10px)) rotate(45deg);
+      top: 1px;
+      transform: translate(-50%, calc(-100% - 12px)) rotate(45deg);
     }
 
     &:after {
       top: 0;
-      transform: translate(-50%, calc(-100% - 10px));
+      transform: translate(-50%, calc(-100% - 12px));
     }
   }
 
