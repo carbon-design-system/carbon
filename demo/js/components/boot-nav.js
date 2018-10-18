@@ -10,7 +10,9 @@ import RootPage from './RootPage';
  * @private
  */
 const pollForBrowserSync = callback => {
-  const bsScriptTag = document.getElementById('__bs_script__');
+  const bsScriptTag = Array.prototype.find.call(document.querySelectorAll('script'), elem =>
+    /browser-sync-client/i.test(elem.src)
+  );
   // eslint-disable-next-line no-underscore-dangle
   if (!bsScriptTag || window.___browserSync___) {
     callback();
