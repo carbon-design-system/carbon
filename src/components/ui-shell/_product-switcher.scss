@@ -1,9 +1,9 @@
+@import '../../globals/scss/vendor/@carbon/layout/scss/mini-unit';
 @import '../../globals/scss/functions';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import 'theme';
-@import 'functions';
 
 @mixin product-switcher {
   //--------------------------------------------------------------------------
@@ -11,10 +11,10 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--panel--overlay {
     position: fixed;
-    top: units(6);
+    top: mini-units(6);
     right: 0;
     bottom: 0;
-    width: units(32);
+    width: mini-units(32);
     will-change: transform;
     transform: translate3d(100%, 0, 0);
     padding: 1rem 0;
@@ -35,8 +35,8 @@
   // Platform Switcher - Search
   //--------------------------------------------------------------------------
   .#{$prefix}--product-switcher__search {
-    padding: 0 units(2);
-    margin-bottom: units(3);
+    padding: 0 mini-units(2);
+    margin-bottom: mini-units(3);
   }
 
   .#{$prefix}--search--shell input {
@@ -49,16 +49,16 @@
   .#{$prefix}--product-switcher__subheader,
   .#{$prefix}--product-switcher__all-btn {
     @include typescale('omega');
-    padding: units(1);
+    padding: mini-units(1);
     color: $shell-header-text-03;
   }
 
   .#{$prefix}--product-switcher__subheader {
-    padding-left: units(7);
+    padding-left: mini-units(7);
   }
 
   .#{$prefix}--product-switcher__all-btn {
-    padding-left: units(7);
+    padding-left: mini-units(7);
   }
 
   .#{$prefix}--product-switcher__all-btn,
@@ -87,12 +87,12 @@
     display: flex;
     align-items: center;
     @include typescale('omega');
-    padding: units(1) units(2);
+    padding: mini-units(1) mini-units(2);
   }
 
   .#{$prefix}--product-switcher__back-arrow {
     fill: $shell-header-link;
-    margin-right: units(2);
+    margin-right: mini-units(2);
   }
 
   //--------------------------------------------------------------------------
@@ -113,7 +113,7 @@
     flex-direction: row;
     align-items: center;
     width: 100%;
-    padding: units(1) units(2);
+    padding: mini-units(1) mini-units(2);
     text-decoration: none;
   }
 
@@ -123,7 +123,7 @@
   }
 
   .#{$prefix}--product-switcher__icon {
-    margin-right: units(2);
+    margin-right: mini-units(2);
   }
 
   .#{$prefix}--product-link__name {
@@ -137,7 +137,7 @@
     display: none;
     justify-content: center;
     align-items: center;
-    width: units(5);
+    width: mini-units(5);
   }
 
   .#{$prefix}--overflow-menu > svg {

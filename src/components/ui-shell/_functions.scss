@@ -1,9 +1,0 @@
-@import 'variables';
-
-@function units($count) {
-  @return $unit * $count;
-}
-
-@function get-fixed-size($count) {
-  @return $unit * $count;
-}

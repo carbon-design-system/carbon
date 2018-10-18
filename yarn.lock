@@ -28,6 +28,11 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-0.0.1-alpha.0.tgz#8c53ef65f864106a63cfc412d8ff083a8a04905f"
   integrity sha512-/v5d1iw5MuHQgBgArItzHF04VgqeE5u/oSXwx/FDrZOZiJQ2IAlq3ocCglAq0P2xd8Wkzy2jKKIcL7LOGQYfww==
 
+"@carbon/layout@^0.0.1-alpha.2":
+  version "0.0.1-alpha.2"
+  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-0.0.1-alpha.2.tgz#89c23e2318643022a8247e7e59890094d853fc35"
+  integrity sha512-R334UqWoiNgj80hAsph3+m8amZAV5M+El1PcwgKe40i/m3ruTOzndxp8gZXnXFPesvvQklMPbTKU0wVEymzqUg==
+
 "@commitlint/cli@^7.0.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.1.2.tgz#9ad1b4703679e18e3b1972c4abf0441255219e78"

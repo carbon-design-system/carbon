@@ -1,9 +1,9 @@
+@import '../../globals/scss/vendor/@carbon/layout/scss/mini-unit';
 @import '../../globals/scss/functions';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vars';
 @import '../../globals/scss/typography';
 @import 'theme';
-@import 'functions';
 
 @mixin platform-header {
   .#{$prefix}--platform-header {
@@ -13,16 +13,16 @@
     top: 0;
     left: 0;
     right: 0;
-    height: units(6);
+    height: mini-units(6);
     background-color: $shell-header-bg-01;
     color: $shell-header-text-01;
   }
 
   .#{$prefix}--platform-header__action {
     @include button-reset();
-    width: units(6);
-    height: units(6);
-    border: units(0.5) solid transparent;
+    width: mini-units(6);
+    height: mini-units(6);
+    border: mini-units(0.5) solid transparent;
   }
 
   .#{$prefix}--platform-header__action:hover {
@@ -53,7 +53,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 units(2);
+    padding: 0 mini-units(2);
     text-decoration: none;
     font-weight: 400;
     letter-spacing: 0.1px;
@@ -84,7 +84,7 @@
 
   .#{$prefix}--platform-header__links {
     display: flex;
-    margin-left: units(1);
+    margin-left: mini-units(1);
     height: 100%;
   }
 
@@ -104,7 +104,7 @@
     letter-spacing: 0;
     text-decoration: none;
     font-weight: 400;
-    padding: 0 units(2);
+    padding: 0 mini-units(2);
     cursor: pointer;
   }
 
@@ -121,7 +121,7 @@
 
   .#{$prefix}--platform-header__arrow {
     fill: $shell-header-text-01;
-    margin-left: units(2);
+    margin-left: mini-units(2);
   }
 
   .#{$prefix}--platform-header__dropdown-item:focus .#{$prefix}--platform-header__arrow,
@@ -144,8 +144,8 @@
   }
 
   .#{$prefix}--dropdown-item__menu-item {
-    width: units(25);
-    height: units(6);
+    width: mini-units(25);
+    height: mini-units(6);
   }
 
   .#{$prefix}--dropdown-item__menu-item a {
@@ -158,7 +158,7 @@
   }
 
   .#{$prefix}--platform-header__link {
-    border: units(0.5) solid transparent;
+    border: mini-units(0.5) solid transparent;
   }
 
   .#{$prefix}--platform-header__link,

@@ -28,6 +28,8 @@
 //   2xl  ||  160px
 //   ==========================================
 
+@import 'vendor/@carbon/layout/scss/spacing';
+
 $spacing-baseline: 1rem !default;
 
 $spacing-3xs: $spacing-baseline * 0.125 !default;

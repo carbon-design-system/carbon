@@ -1,9 +1,9 @@
+@import '../../globals/scss/vendor/@carbon/layout/scss/mini-unit';
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vars';
-@import 'functions';
 
 // Side-nav panel background
 $shell-side-nav-bg-01: $ibm-colors__gray--90;
@@ -42,8 +42,8 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     top: 0;
     bottom: 0;
     left: 0;
-    width: get-fixed-size(6);
-    max-width: get-fixed-size(32);
+    width: mini-units(6);
+    max-width: mini-units(32);
     color: $shell-side-nav-text-01;
     background-color: $shell-side-nav-bg-01;
     will-change: width;
@@ -55,11 +55,11 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
 
   .#{$prefix}--side-nav:hover,
   .#{$prefix}--side-nav--expanded {
-    width: get-fixed-size(32);
+    width: mini-units(32);
   }
 
   .#{$prefix}--platform-header ~ .#{$prefix}--side-nav {
-    top: get-fixed-size(6);
+    top: mini-units(6);
   }
 
   //----------------------------------------------------------------------------
@@ -68,7 +68,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
   .#{$prefix}--side-nav__content {
     display: flex;
     flex-direction: column;
-    width: get-fixed-size(32);
+    width: mini-units(32);
     height: 100%;
   }
 
@@ -118,20 +118,20 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     letter-spacing: 0.1px;
     line-height: rem(32px);
     user-select: none;
-    margin-left: get-fixed-size(1);
+    margin-left: mini-units(1);
   }
 
   .#{$prefix}--side-nav__title-bar--sub-menu .#{$prefix}--side-nav__title {
     position: relative;
-    top: get-fixed-size(1);
+    top: mini-units(1);
   }
 
   .#{$prefix}--side-nav__sub-menu {
     position: relative;
     display: flex;
     align-items: center;
-    height: get-fixed-size(4);
-    padding-right: get-fixed-size(2);
+    height: mini-units(4);
+    padding-right: mini-units(2);
   }
 
   .#{$prefix}--side-nav__sub-menu__input {
@@ -146,7 +146,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     border-radius: 0;
     cursor: pointer;
     font-size: rem(12px);
-    padding: 0 get-fixed-size(1);
+    padding: 0 mini-units(1);
   }
 
   .#{$prefix}--side-nav__sub-menu__input:focus {
@@ -156,7 +156,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
 
   .#{$prefix}--side-nav__sub-menu__arrow {
     position: absolute;
-    right: get-fixed-size(3);
+    right: mini-units(3);
   }
 
   .#{$prefix}--side-nav__sub-menu__arrow > svg {
@@ -167,7 +167,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
   // Nav
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__nav-item {
-    height: get-fixed-size(6);
+    height: mini-units(6);
     overflow: hidden;
   }
 
@@ -198,7 +198,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     font-size: rem(14px);
     font-weight: 600;
     line-height: rem(20px);
-    margin-left: get-fixed-size(1);
+    margin-left: mini-units(1);
     user-select: none;
     opacity: 0;
   }
@@ -242,7 +242,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     text-decoration: none;
     font-weight: 400;
     width: 100%;
-    padding-left: get-fixed-size(7);
+    padding-left: mini-units(7);
   }
 
   .#{$prefix}--side-nav__category-item--active > a {
@@ -303,8 +303,8 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: get-fixed-size(6);
-    height: get-fixed-size(6);
+    width: mini-units(6);
+    height: mini-units(6);
   }
 
   .#{$prefix}--side-nav__icon > svg {
@@ -312,8 +312,8 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
   }
 
   .#{$prefix}--side-nav__icon--small {
-    width: get-fixed-size(6);
-    height: get-fixed-size(4);
+    width: mini-units(6);
+    height: mini-units(4);
   }
 }
 
