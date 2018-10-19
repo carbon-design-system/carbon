@@ -155,6 +155,10 @@
 
   // Link
   $link-visited: $ibm-colors__purple--60 !default !global;
+  $link-inverse-color: #6ea6ff !default !global;
+
+  // Tooltip
+  $tooltip-background-color: #3d3d3d !default !global;
 
   // Button Theme Variables
   $button-font-weight: 400 !default !global;
