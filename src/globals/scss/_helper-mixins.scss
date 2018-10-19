@@ -54,6 +54,11 @@
     box-shadow: 0 0 0 3px $focus;
     outline: 1px solid transparent;
   }
+
+  @if ($type == 'outline') {
+    outline: 2px solid $brand-01;
+    outline-offset: -2px;
+  }
 }
 
 @mixin rotate($deg, $speed, $origin: center) {
