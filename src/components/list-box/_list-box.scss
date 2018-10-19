@@ -254,11 +254,11 @@ $list-box-menu-width: rem(300px);
     color: $text-01;
   }
 
-  .bx--list-box__menu-item .bx--checkbox-label {
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
     width: 100%;
   }
 
-  .bx--list-box__menu-item .bx--checkbox-label-text {
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -313,7 +313,7 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box .bx--text-input {
+  .#{$prefix}--list-box .#{$prefix}--text-input {
     height: 100%;
   }
 
@@ -571,11 +571,11 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .bx--list-box__menu-item .bx--checkbox-label {
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
     width: 100%;
   }
 
-  .bx--list-box__menu-item .bx--checkbox-label-text {
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
