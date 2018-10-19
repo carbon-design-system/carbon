@@ -1,5 +1,27 @@
 # UI Shell
 
+## Accessibility
+
+#### Platform Header
+
+> A menu that is visually persistent is a menubar. A menubar is typically horizontal and is often used to create a menu bar similar to those found near the top of the window in many desktop applications, offering the user quick access to a consistent set of commands.
+
+Source: https://www.w3.org/TR/wai-aria-practices/#menu
+
+Resources:
+
+- https://www.w3.org/TR/wai-aria-practices/#menu
+- https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html
+
+Requirements:
+
+- https://www.w3.org/TR/wai-aria-practices/#menu
+- `nav` should have an `aria-label` that matches the label on the menubar since
+  it is a site navigation system
+- Verify that the icons are compatible in high contrast mode
+- [Keyboard Support](https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#kbd_label)
+- When a menu opens, or when a menubar receives focus, keyboard focus is placed on the first item. All items are focusable as described in 5.6 Keyboard Navigation Inside Components.
+
 ## Platform Navigation
 
 Platform Navigation has the following cases for configuration:
