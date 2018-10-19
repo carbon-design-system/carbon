@@ -295,10 +295,8 @@
     opacity: 1;
   }
 
-  .#{$prefix}--tile-input:checked {
-    & + .#{$prefix}--tile__checkmark svg {
-      fill: $ui-05;
-    }
+  .#{$prefix}--tile-input:checked + .#{$prefix}--tile__checkmark svg {
+    fill: $ui-05;
   }
 
   .#{$prefix}--tile-content {
