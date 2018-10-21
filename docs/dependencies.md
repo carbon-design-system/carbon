@@ -18,7 +18,7 @@
 
 # Overview
 
-In light of potential `npm` security issues [[1]](https://blog.npmjs.org/post/175824896885/incident-report-npm-inc-operations-incident-of) [[2]](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes), this document looks to show how we're looking to address some of the issues with installing dependencies from a live registry by taking advantage of [Yarn's offline feature](https://yarnpkg.com/blog/2016/11/24/offline-mirror/). The majority of steps taken are inspired by [this tweet](https://twitter.com/leeb/status/1017607265115750400) from Lee Byron.
+In light of potential `npm` security issues [[1]](https://blog.npmjs.org/post/175824896885/incident-report-npm-inc-operations-incident-of) [[2]](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes), we are addressing some of the issues with installing dependencies from a live registry by taking advantage of [Yarn's offline feature](https://yarnpkg.com/blog/2016/11/24/offline-mirror/). The majority of steps taken are inspired by [this tweet](https://twitter.com/leeb/status/1017607265115750400) from Lee Byron.
 
 # Continuous Integration
 
