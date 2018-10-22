@@ -43,7 +43,11 @@ module.exports = {
       },
     }),
     babel({
-      exclude: 'node_modules/**',
+      exclude: ['node_modules/**'],
+      plugins: ['external-helpers'],
+    }),
+    babel({
+      include: ['node_modules/markdown-it/**'],
       plugins: ['external-helpers'],
     }),
     replace({
