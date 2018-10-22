@@ -64,11 +64,15 @@
     @include font-family;
     @include typescale('zeta');
     @include font-smoothing;
+    counter-reset: list-item;
   }
 
   .#{$prefix}--list__item {
     font-weight: 400;
     color: $text-01;
+    list-style-type: none;
+    counter-increment: list-item;
+    line-height: rem(18px);
   }
 
   .#{$prefix}--list--nested {
@@ -76,34 +80,38 @@
     margin-left: $spacing-xl;
   }
 
-  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
     display: inline-block;
-    list-style-type: none;
-    content: '\002013';
-    padding-right: $spacing-xs;
+    margin-right: $spacing-xs;
     margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before,
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    margin-right: $spacing-xs;
+    display: inline-block;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item:before {
+    content: '\002013';
   }
 
   .#{$prefix}--list--unordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
-    list-style-type: none;
     content: '\0025AA';
-    padding-right: $spacing-xs;
   }
 
-  .#{$prefix}--list--ordered > .#{$prefix}--list__item {
-    list-style-type: decimal;
-    margin-left: 1rem;
-    margin-bottom: rem(4px);
-    text-align: left;
-  }
-
-  .#{$prefix}--list--ordered .#{$prefix}--list--nested {
-    margin-top: rem(4px);
-    margin-left: 1rem;
+  .#{$prefix}--list--ordered > .#{$prefix}--list__item:before {
+    content: counter(list-item) '.';
   }
 
   .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item {
-    list-style-type: lower-alpha;
+    counter-increment: sub-list-item;
+  }
+
+  .#{$prefix}--list--ordered .#{$prefix}--list--nested > .#{$prefix}--list__item:before {
+    content: counter(sub-list-item, lower-alpha) '.';
+    width: 0.6rem;
   }
 }
 
