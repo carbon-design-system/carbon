@@ -44,9 +44,43 @@ const header = {
     },
     {
       title: 'L1 link 3',
+      state: {
+        expanded: true,
+      },
+      items: [
+        {
+          href: 'javascript:void(0)',
+          title: 'Link 1',
+        },
+        {
+          href: 'javascript:void(0)',
+          title: 'Link 2',
+        },
+        {
+          href: 'javascript:void(0)',
+          title: 'Ipsum architecto voluptatem',
+        },
+      ],
     },
     {
       title: 'L1 link 4',
+      state: {
+        expanded: false,
+      },
+      items: [
+        {
+          href: 'javascript:void(0)',
+          title: 'Link 1',
+        },
+        {
+          href: 'javascript:void(0)',
+          title: 'Link 2',
+        },
+        {
+          href: 'javascript:void(0)',
+          title: 'Ipsum architecto voluptatem',
+        },
+      ],
     },
   ],
 };

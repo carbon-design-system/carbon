@@ -1,24 +1,49 @@
-<nav class="bx--platform-header__nav">
-  <ul class="bx--platform-header__links">
+<!--
+  We're designating the platform-header navigation as a menubar. As a result, we
+  have each link designated as a menuitem. Links have a tabindex of "0" since
+  Safari does not provide links focus by default.
+
+  For sub-menus, we are following the guidance specified here:
+  https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#rps_label
+
+  Most noticeably, the first menuitem in a submenu should receive a tabindex of
+  "0", while the rest should get "-1"
+-->
+<nav class="bx--platform-header__nav" aria-label="Platform Name">
+  <ul class="bx--platform-header__menu-bar" role="menubar" aria-label="Platform Name">
     {{#each header.navLinks}}
       {{#if href}}
-        <li class="bx--platform-header__link-item">
-          <a href="javascript:void(0)" class="bx--platform-header__link">
+        <li>
+          <a class="bx--platform-header__menu-item" href="javascript:void(0)" role="menuitem" tabindex="0">
             {{this.title}}
           </a>
         </li>
       {{else}}
-      <li class="bx--platform-header__dropdown-item" tabindex="0">
-          {{this.title}}
-          <svg class="bx--platform-header__arrow" width="12" height="7">
-            <path d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"/>
-          </svg>
-          <ul class="bx--dropdown-item__menu">
-            <li class="bx--dropdown-item__menu-item"><a href="#">Link 1</a></li>
-            <li class="bx--dropdown-item__menu-item"><a href="#">Link 2</a></li>
-            <li class="bx--dropdown-item__menu-item"><a href="#">Link 3</a></li>
+        <li class="bx--platform-header__submenu">
+          <a
+            class="bx--platform-header__menu-item bx--platform-header__menu-title"
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded="{{this.state.expanded}}"
+            href="javascript:void(0)"
+            tabindex="0">
+            {{this.title}}
+            <svg class="bx--platform-header__menu-arrow" width="12" height="7" aria-hidden="true">
+              <path d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"/>
+            </svg>
+          </a>
+          <ul class="bx--platform-header__menu" role="menu" aria-label="{{this.title}}">
+            {{#each this.items}}
+              <li role="none">
+                <a class="bx--platform-header__menu-item" role="menuitem" href="{{this.href}}" tabindex="-1">
+                  <span class="bx--text-truncate--end">
+                    {{this.title}}
+                  </span>
+                </a>
+              </li>
+            {{/each}}
           </ul>
-      </li>
+        </li>
       {{/if}}
     {{/each}}
   </ul>
