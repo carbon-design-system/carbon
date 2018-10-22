@@ -2,7 +2,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const DataTableSkeleton = ({ rowCount, zebra, compact, ...other }) => {
+const DataTableSkeleton = ({
+  rowCount,
+  columnCount,
+  zebra,
+  compact,
+  ...other
+}) => {
   const dataTableSkeletonClasses = classNames({
     'bx--skeleton': true,
     'bx--data-table-v2': true,
@@ -12,46 +18,23 @@ const DataTableSkeleton = ({ rowCount, zebra, compact, ...other }) => {
 
   const rows = [];
   const rowRepeat = rowCount - 1;
+  const columnsArray = Array.from(Array(columnCount).keys()); // [0,1,2...columnCount-1]
   for (var i = 0; i < rowRepeat; i++) {
-    rows.push(
-      <tr key={i}>
-        <td />
-        <td />
-        <td />
-        <td />
-        <td />
-      </tr>
-    );
+    rows.push(<tr key={i}>{columnsArray.map(j => <td key={j} />)}</tr>);
   }
 
   return (
     <table className={dataTableSkeletonClasses} {...other}>
       <thead>
-        <tr>
-          <th />
-          <th />
-          <th />
-          <th />
-          <th />
-        </tr>
+        <tr>{columnsArray.map(i => <th key={i} />)}</tr>
       </thead>
       <tbody>
         <tr>
-          <td>
-            <span />
-          </td>
-          <td>
-            <span />
-          </td>
-          <td>
-            <span />
-          </td>
-          <td>
-            <span />
-          </td>
-          <td>
-            <span />
-          </td>
+          {columnsArray.map(i => (
+            <td key={i}>
+              <span />
+            </td>
+          ))}
         </tr>
         {rows}
       </tbody>
@@ -64,6 +47,11 @@ DataTableSkeleton.propTypes = {
    * Specify the number of rows that you want to render in the skeleton state
    */
   rowCount: PropTypes.number,
+
+  /**
+   * Specify the number of columns that you want to render in the skeleton state
+   */
+  columnCount: PropTypes.number,
 
   /**
    * Optionally specify whether you want the DataTable to be zebra striped
@@ -79,6 +67,7 @@ DataTableSkeleton.propTypes = {
 
 DataTableSkeleton.defaultProps = {
   rowCount: 5,
+  columnCount: 5,
   zebra: false,
   compact: false,
 };
