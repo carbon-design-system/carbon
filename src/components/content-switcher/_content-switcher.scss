@@ -117,7 +117,7 @@
   .#{$prefix}--content-switcher {
     @include font-family;
     display: flex;
-    height: rem(40px);
+    height: rem(32px);
   }
 
   .#{$prefix}--content-switcher-btn {
