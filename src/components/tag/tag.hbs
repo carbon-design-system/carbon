@@ -1,4 +1,12 @@
-{{!-- need to add tabindex="0" to v10 variant --}}
+{{#if componentsX}}
+<ul role="listbox">
+  {{#each tags}}
+  <li class="bx--tag bx--tag--{{type}}" tabindex="0">{{label}}</li>
+  {{/each}}
+  <li class="bx--tag bx--tag--basic" tabindex="0" disabled>Component</li>
+</ul>
+{{else}}
 {{#each tags}}
-  <span class="bx--tag bx--tag--{{type}}">{{label}}</span>
+<span class="bx--tag bx--tag--{{type}}">{{label}}</span>
 {{/each}}
+{{/if}}
