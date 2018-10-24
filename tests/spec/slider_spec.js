@@ -89,10 +89,13 @@ describe('Test slider', function() {
       slider = new Slider(document.querySelector('[data-slider]'));
       thumb = document.querySelector('.bx--slider__thumb');
       mockRaf.step({ count: 1 });
+      slider.setValue(50);
     });
     it('Should stepUp value on up/right key', function() {
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 39;
+      thumb.dispatchEvent(event);
+      mockRaf.step({ count: 1 });
       thumb.dispatchEvent(event);
       mockRaf.step({ count: 1 });
       expect(slider.getInputProps().value).toBe(51);
@@ -104,6 +107,8 @@ describe('Test slider', function() {
     it('Should stepDown value on down/left key', function() {
       const event = new CustomEvent('keydown', { bubbles: true });
       event.which = 40;
+      thumb.dispatchEvent(event);
+      mockRaf.step({ count: 1 });
       thumb.dispatchEvent(event);
       mockRaf.step({ count: 1 });
       expect(slider.getInputProps().value).toBe(49);
