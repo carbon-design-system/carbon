@@ -351,7 +351,7 @@ gulp.task('sass:source', () => {
   return gulp.src(srcFiles).pipe(gulp.dest('scss'));
 });
 
-gulp.task('html:dev', () =>
+gulp.task('html:dev', ['scripts:dev:feature-flags'], () =>
   Promise.all([mkdirp(path.resolve(__dirname, 'demo/code')), mkdirp(path.resolve(__dirname, 'demo/component'))]).then(() =>
     templates.cache.get().then(({ componentSource, docSource, contents }) =>
       Promise.all([
