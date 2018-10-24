@@ -289,6 +289,7 @@ export default class PaginationV2 extends Component {
           <button
             className={backButtonClasses}
             onClick={this.decrementPage}
+            aria-label={backwardText}
             disabled={this.props.disabled || statePage === 1}>
             <Icon
               className="bx--pagination__button-icon"
@@ -309,6 +310,7 @@ export default class PaginationV2 extends Component {
           )}
           <button
             className="bx--pagination__button bx--pagination__button--forward"
+            aria-label={forwardText}
             onClick={this.incrementPage}
             disabled={
               this.props.disabled || statePage === totalPages || isLastPage
