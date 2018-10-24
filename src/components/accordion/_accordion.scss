@@ -92,7 +92,7 @@
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
-    .#{$prefix}--accordion__content {
+    > .#{$prefix}--accordion__content {
       padding-top: $spacing-md;
       padding-bottom: $spacing-lg;
       height: auto;
@@ -101,7 +101,7 @@
       transition: all $transition--expansion $carbon--ease-in;
     }
 
-    .#{$prefix}--accordion__arrow {
+    > .#{$prefix}--accordion__heading > .#{$prefix}--accordion__arrow {
       /*rtl:ignore*/
       transform: rotate(90deg);
       fill: $brand-01;
