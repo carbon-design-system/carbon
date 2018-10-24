@@ -114,6 +114,7 @@ export TooltipIcon from './components/TooltipIcon';
 export TooltipSimple from './components/TooltipSimple';
 export UnorderedList from './components/UnorderedList';
 export SkeletonText from './components/SkeletonText';
+export SkeletonPlaceholder from './components/SkeletonPlaceholder';
 export DataTableSkeleton from './components/DataTableSkeleton';
 export AccordionSkeleton from './components/Accordion/Accordion.Skeleton';
 export BreadcrumbSkeleton from './components/Breadcrumb/Breadcrumb.Skeleton';
