@@ -82,11 +82,6 @@
       margin-left: 0;
     }
 
-    &:focus {
-      outline: none;
-      box-shadow: inset 0 0 0 2px $ibm-colors__blue--60;
-    }
-
     &[disabled] {
       @include tag-theme--x($ibm-colors__gray--10, $ibm-colors__gray--30);
     }

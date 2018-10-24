@@ -1,9 +1,9 @@
 {{#if componentsX}}
 <ul role="listbox">
   {{#each tags}}
-  <li class="bx--tag bx--tag--{{type}}" tabindex="0">{{label}}</li>
+  <li class="bx--tag bx--tag--{{type}}">{{label}}</li>
   {{/each}}
-  <li class="bx--tag bx--tag--basic" tabindex="0" disabled>Component</li>
+  <li class="bx--tag bx--tag--basic" disabled>Component</li>
 </ul>
 {{else}}
 {{#each tags}}
