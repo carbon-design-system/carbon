@@ -177,7 +177,7 @@
 
   .#{$prefix}--number input[type='number'] {
     @include typescale('zeta');
-    @include font-family;
+    font-family: $font-family-mono;
     box-sizing: border-box;
     display: inline-flex;
     width: 100%;
