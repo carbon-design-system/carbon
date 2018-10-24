@@ -138,6 +138,10 @@
     height: rem(14px);
   }
 
+  input[type='number'] {
+    font-family: $font-family-mono;
+  }
+
   input[data-invalid],
   textarea[data-invalid],
   select[data-invalid],
