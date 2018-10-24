@@ -1,12 +1,10 @@
 {{#if componentsX}}
-<ul role="listbox">
-  {{#each tags}}
-  <li class="bx--tag bx--tag--{{type}}">{{label}}</li>
-  {{/each}}
-  <li class="bx--tag bx--tag--basic" disabled>Component</li>
-</ul>
-{{else}}
 {{#each tags}}
 <span class="bx--tag bx--tag--{{type}}">{{label}}</span>
 {{/each}}
+<span class="bx--tag bx--tag--basic" disabled>Component</span>
+{{else}}
+{{#each tags}}
+<span class="bx--tag bx--tag--{{type}}">{{label}}</span>
+  {{/each}}
 {{/if}}
