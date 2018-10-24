@@ -191,6 +191,10 @@
   $snippet-background-color: $ui-01 !default !global; // TODO: Define for experimental
   $snippet-border-color: $ui-03 !default !global; // TODO: Define for experimental
 
+  // Content Switcher
+  $content-switcher-border-radius: 0px !default !global;
+  $content-switcher-option-border: 1px solid $brand-01 !default !global;
+
   // Data Table
   $data-table-heading-transform: uppercase !default !global;
   $data-table-heading-border-bottom: 1px solid $brand-01 !default !global;
