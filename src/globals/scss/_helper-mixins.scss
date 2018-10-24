@@ -59,6 +59,16 @@
     outline: 2px solid $brand-01;
     outline-offset: -2px;
   }
+
+  @if ($type == 'invalid') {
+    outline: 2px solid $support-01;
+    outline-offset: -2px;
+  }
+
+  @if ($type == 'reset') {
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+  }
 }
 
 @mixin rotate($deg, $speed, $origin: center) {
