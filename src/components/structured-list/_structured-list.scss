@@ -224,7 +224,7 @@
     }
 
     &:focus:not(.#{$prefix}--structured-list-row--header-row) {
-      @include focus-outline('border');
+      outline: 2px solid $ibm-colors__blue--60;
     }
   }
 
