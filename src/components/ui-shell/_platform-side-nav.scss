@@ -1,6 +1,7 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/css--helpers';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
 @import '../../globals/scss/vars';
 @import 'functions';
 
@@ -49,6 +50,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
     // Useful to toggle this property to see what's going on when not expanded
     overflow: hidden;
+    border-top: 1px solid $ibm-colors__gray--80;
   }
 
   .#{$prefix}--side-nav:hover,
@@ -76,41 +78,89 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
   }
 
   //----------------------------------------------------------------------------
-  // Header
+  // Title bar
   //----------------------------------------------------------------------------
-  .#{$prefix}--side-nav__header {
+  .#{$prefix}--side-nav__title-bar {
     display: flex;
-    align-items: center;
+    align-items: stretch;
   }
 
-  .#{$prefix}--side-nav__header-title {
+  .#{$prefix}--side-nav__title-bar {
+    border-bottom: 1px solid $shell-side-nav-bg-02;
+  }
+
+  // Only show a bottom border for the Icon in the Title bar if we do not have a
+  // sub-menu
+  .#{$prefix}--side-nav__title-bar:not(.#{$prefix}--side-nav__title-bar--sub-menu) > .#{$prefix}--side-nav__icon {
+    border-bottom: 1px solid $shell-side-nav-bg-02;
+  }
+
+  .#{$prefix}--side-nav__title-details {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__title-details,
+  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__title-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 0%;
+  }
+
+  .#{$prefix}--side-nav__title-bar--sub-menu .#{$prefix}--side-nav__title-details {
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--side-nav__title {
+    color: $shell-side-nav-text-01;
     font-size: rem(14px);
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 0.1px;
     line-height: rem(32px);
-    margin-left: get-fixed-size(1);
     user-select: none;
-    opacity: 0;
+    margin-left: get-fixed-size(1);
   }
 
-  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__header-title,
-  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__header-title {
-    opacity: 1;
+  .#{$prefix}--side-nav__title-bar--sub-menu .#{$prefix}--side-nav__title {
+    position: relative;
+    top: get-fixed-size(1);
   }
 
-  //----------------------------------------------------------------------------
-  // Divider
-  //----------------------------------------------------------------------------
-  .#{$prefix}--side-nav__divider {
-    width: get-fixed-size(2);
-    height: 1px;
-    background-color: $shell-side-nav-bg-02;
-    margin: 0 get-fixed-size(2) get-fixed-size(1);
+  .#{$prefix}--side-nav__sub-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: get-fixed-size(4);
+    padding-right: get-fixed-size(2);
   }
 
-  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__divider,
-  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__divider {
-    width: unset;
+  .#{$prefix}--side-nav__sub-menu__input {
+    @include font-family();
+
+    appearance: none;
+    flex: 1 1 0%;
+    background-color: $shell-header-bg-01;
+    color: $shell-header-text-01;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: rem(12px);
+    padding: 0 get-fixed-size(1);
+  }
+
+  .#{$prefix}--side-nav__sub-menu__input:focus {
+    box-shadow: inset 0 0 0 4px $shell-side-nav-accent-01;
+    outline: none;
+  }
+
+  .#{$prefix}--side-nav__sub-menu__arrow {
+    position: absolute;
+    right: get-fixed-size(3);
+  }
+
+  .#{$prefix}--side-nav__sub-menu__arrow > svg {
+    fill: $shell-side-nav-icon-01;
   }
 
   //----------------------------------------------------------------------------
@@ -133,23 +183,8 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     position: relative;
   }
 
-  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category,
-  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category {
-    padding-top: get-fixed-size(1);
-  }
-
-  .#{$prefix}--side-nav__category--active {
+  .#{$prefix}--side-nav__category--active:not(.#{prefix}--side-nav--fixed) {
     background-color: $shell-side-nav-bg-02;
-  }
-
-  .#{$prefix}--side-nav__category--active::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 2px;
-    background-color: $shell-side-nav-accent-01;
   }
 
   .#{$prefix}--side-nav__category-header {
@@ -166,6 +201,13 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     margin-left: get-fixed-size(1);
     user-select: none;
     opacity: 0;
+  }
+
+  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__category-title {
+    margin-left: get-fixed-size(2);
+    margin-top: get-fixed-size(2);
+    font-weight: normal;
+    color: $shell-header-text-03;
   }
 
   .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category-title,
@@ -193,8 +235,8 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 2px;
-    width: 3px;
+    left: 0;
+    width: 4px;
     background-color: $shell-side-nav-accent-01;
   }
 
@@ -208,6 +250,11 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     font-weight: 400;
     width: 100%;
     padding-left: get-fixed-size(7);
+  }
+
+  .#{$prefix}--side-nav__category-item--active > a {
+    font-weight: 600;
+    color: $ibm-colors__white;
   }
 
   .#{$prefix}--side-nav__category-item > a:hover {

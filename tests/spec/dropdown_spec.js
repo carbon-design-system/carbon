@@ -151,6 +151,7 @@ describe('Dropdown', function() {
     });
 
     afterEach(function() {
+      element.classList.remove('bx--dropdown--disabled');
       element.classList.remove('bx--dropdown--open');
     });
 
@@ -288,6 +289,10 @@ describe('Dropdown', function() {
     beforeEach(function() {
       itemNodes.forEach(item => {
         item.classList.remove('bx--dropdown--selected');
+        item.removeAttribute('hidden');
+        item.parentNode.removeAttribute('hidden');
+        item.removeAttribute('aria-hidden');
+        item.parentNode.removeAttribute('aria-hidden');
       });
       element.classList.add('bx--dropdown--open');
       element.focus();
@@ -415,6 +420,82 @@ describe('Dropdown', function() {
         return itemNodes[0];
       });
       itemNodes[1].classList.add('bx--dropdown--selected');
+      itemNodes.forEach(item => {
+        spyOn(item, 'focus');
+      });
+      const defaultPrevented = !element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          which: 40,
+        })
+      );
+      expect(defaultPrevented, 'Canceling event').toBe(true);
+      expect(itemNodes[0].focus, 'Focus on 1st item').not.toHaveBeenCalled();
+      expect(itemNodes[1].focus, 'Focus on 2nd item').not.toHaveBeenCalled();
+      expect(itemNodes[2].focus, 'Focus on 3rd item').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should skip items with hidden link', function() {
+      spyOn(dropdown, 'getCurrentNavigation').and.callFake(function() {
+        return itemNodes[0];
+      });
+      itemNodes[1].setAttribute('hidden', '');
+      itemNodes.forEach(item => {
+        spyOn(item, 'focus');
+      });
+      const defaultPrevented = !element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          which: 40,
+        })
+      );
+      expect(defaultPrevented, 'Canceling event').toBe(true);
+      expect(itemNodes[0].focus, 'Focus on 1st item').not.toHaveBeenCalled();
+      expect(itemNodes[1].focus, 'Focus on 2nd item').not.toHaveBeenCalled();
+      expect(itemNodes[2].focus, 'Focus on 3rd item').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should skip items with hidden container', function() {
+      spyOn(dropdown, 'getCurrentNavigation').and.callFake(function() {
+        return itemNodes[0];
+      });
+      itemNodes[1].parentNode.setAttribute('hidden', '');
+      itemNodes.forEach(item => {
+        spyOn(item, 'focus');
+      });
+      const defaultPrevented = !element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          which: 40,
+        })
+      );
+      expect(defaultPrevented, 'Canceling event').toBe(true);
+      expect(itemNodes[0].focus, 'Focus on 1st item').not.toHaveBeenCalled();
+      expect(itemNodes[1].focus, 'Focus on 2nd item').not.toHaveBeenCalled();
+      expect(itemNodes[2].focus, 'Focus on 3rd item').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should skip items with link with aria-hidden', function() {
+      spyOn(dropdown, 'getCurrentNavigation').and.callFake(function() {
+        return itemNodes[0];
+      });
+      itemNodes[1].setAttribute('aria-hidden', 'true');
+      itemNodes.forEach(item => {
+        spyOn(item, 'focus');
+      });
+      const defaultPrevented = !element.dispatchEvent(
+        Object.assign(new CustomEvent('keydown', { cancelable: true }), {
+          which: 40,
+        })
+      );
+      expect(defaultPrevented, 'Canceling event').toBe(true);
+      expect(itemNodes[0].focus, 'Focus on 1st item').not.toHaveBeenCalled();
+      expect(itemNodes[1].focus, 'Focus on 2nd item').not.toHaveBeenCalled();
+      expect(itemNodes[2].focus, 'Focus on 3rd item').toHaveBeenCalledTimes(1);
+    });
+
+    it('Should skip items with container with aria-hidden', function() {
+      spyOn(dropdown, 'getCurrentNavigation').and.callFake(function() {
+        return itemNodes[0];
+      });
+      itemNodes[1].parentNode.setAttribute('aria-hidden', 'true');
       itemNodes.forEach(item => {
         spyOn(item, 'focus');
       });

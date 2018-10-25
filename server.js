@@ -23,17 +23,32 @@ const compiler = devMode && webpack(config);
 const hotMiddleware = devMode && webpackHotMiddleware(compiler);
 
 let dummyHashSeq = 0;
+let templateOrConfigChanged = false;
 const watchCallback = debounce(() => {
+  const featureFlagCacheKey = Object.keys(require.cache).find(key => /feature-flags\.js$/i.test(key));
+  if (featureFlagCacheKey) {
+    require.cache[featureFlagCacheKey] = undefined;
+  }
   templates.cache.clear();
-  hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
+  if (templateOrConfigChanged) {
+    templateOrConfigChanged = false;
+    hotMiddleware.publish({ action: 'sync', hash: `DUMMY_HASH_${dummyHashSeq++}`, errors: [], warnings: [] });
+  }
 }, 500);
+
+const invokeWatchCallback = name => {
+  if (!/feature-flags\.js$/i.test(name)) {
+    templateOrConfigChanged = true;
+  }
+  watchCallback();
+};
 
 if (devMode) {
   chokidar
-    .watch(['demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
-    .on('add', watchCallback)
-    .on('change', watchCallback)
-    .on('unlink', watchCallback);
+    .watch(['demo/feature-flags.js', 'demo/**/*.hbs', 'src/**/*.hbs', 'src/**/*.config.js'])
+    .on('add', invokeWatchCallback)
+    .on('change', invokeWatchCallback)
+    .on('unlink', invokeWatchCallback);
 }
 
 const reComponentPath = pathRegexp('/component/:component');
@@ -169,7 +184,7 @@ function codeRoute(req, res, next) {
 }
 
 function demoRoute(req, res, next) {
-  if (!/^\/demo/i.test(req.url)) {
+  if (!/^\/demo\.(css|js)$/i.test(req.url)) {
     next();
   } else {
     demoStaticRoute(req, res, next);
@@ -177,12 +192,12 @@ function demoRoute(req, res, next) {
 }
 
 browserSync({
-  baseDir: 'demo',
   files: ['demo/demo.css'],
   open: false,
   port: process.env.PORT || 8080,
 
   server: {
+    baseDir: 'demo',
     middleware: [
       !devMode
         ? noopRoute

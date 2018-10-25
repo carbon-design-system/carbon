@@ -21,11 +21,13 @@
       @include typescale('zeta');
       background-color: $ui-02;
       font-weight: 700;
+      border-right: 1px solid $ui-03;
     }
 
     tbody {
       @include typescale('zeta');
       background-color: $ui-01;
+      border-right: 1px solid $ui-03;
     }
 
     tr {
@@ -72,7 +74,6 @@
 
       &:last-of-type {
         padding-right: $spacing-lg;
-        border-right: 1px solid $ui-03;
       }
     }
 

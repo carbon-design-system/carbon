@@ -51,7 +51,7 @@ describe('Dropdown', function() {
     let table;
     let container;
 
-    beforeAll(function() {
+    beforeEach(function() {
       container = document.createElement('div');
       container.innerHTML = ExpandableHTML;
       document.body.appendChild(container);
@@ -59,14 +59,10 @@ describe('Dropdown', function() {
       table = new DataTableV2(element);
     });
 
-    it('Should insert the row on click', function() {
+    it('Should toggle the row on click', function() {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(document.querySelector('[data-child-row]')).toBeTruthy();
-    });
-
-    it('Should remove the row on second click', function() {
-      const firstRowExpand = document.querySelector('[data-event="expand"]');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(document.querySelector('[data-child-row]')).toBeFalsy();
     });
@@ -88,11 +84,8 @@ describe('Dropdown', function() {
 
     afterEach(function() {
       events.reset();
-    });
-
-    afterAll(function() {
-      document.body.removeChild(container);
       table.release();
+      document.body.removeChild(container);
     });
   });
 
@@ -101,23 +94,23 @@ describe('Dropdown', function() {
     let element;
     let table;
     let container;
+    let firstSort;
 
     beforeAll(function() {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
       element = document.querySelector('[data-table-v2]');
+      firstSort = element.querySelector('[data-event="sort"]');
       table = new DataTableV2(element);
     });
 
     it('Should toggle the class on click', function() {
-      const firstSort = document.querySelector('[data-event="sort"');
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(firstSort.classList.contains('bx--table-sort-v2--ascending')).toBe(true);
     });
 
     it('Should emit an event on sort click', function() {
-      const firstSort = document.querySelector('[data-event="sort"');
       const spyToggleSortEvent = jasmine.createSpy();
       events.on(element.ownerDocument.body, 'data-table-v2-aftertogglesort', spyToggleSortEvent);
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -125,6 +118,8 @@ describe('Dropdown', function() {
     });
 
     afterEach(function() {
+      firstSort.classList.remove('bx--table-sort-v2--ascending');
+      firstSort.dataset.previousValue = '';
       events.reset();
     });
 
@@ -148,23 +143,19 @@ describe('Dropdown', function() {
       table = new DataTableV2(element);
     });
 
-    it('Should activate the action bar on checkbox select', function() {
+    it('Should toggle the action bar on checkbox select', function() {
       const firstSelect = document.querySelector('[data-event="select"]');
       firstSelect.click();
 
-      const batchActions = document.querySelector('.bx--batch-actions');
+      const batchActions = element.querySelector('.bx--batch-actions');
       expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(true);
+
+      firstSelect.click();
+
+      expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(false);
     });
 
     // it('Should close the action bar on a cancel click', function() {});
-
-    it('Should close the action bar on no checkboxes selected', function() {
-      const firstSelect = document.querySelector('[data-event="select"]');
-      firstSelect.click();
-
-      const batchActions = document.querySelector('.bx--batch-actions');
-      expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(false);
-    });
 
     // it('Should close the action bar on ESC key', function() {});
 
@@ -172,11 +163,12 @@ describe('Dropdown', function() {
       const firstSelect = document.querySelector('[data-event="select-all"]');
       firstSelect.click();
 
-      const batchActions = document.querySelector('.bx--batch-actions');
+      const batchActions = element.querySelector('.bx--batch-actions');
       expect(batchActions.classList.contains('bx--batch-actions--active')).toBe(true);
     });
 
     afterEach(function() {
+      table._actionBarCancel();
       events.reset();
     });
 
