@@ -3,7 +3,6 @@
 /* eslint import/no-extraneous-dependencies: [2, {"devDependencies": true}] */
 
 const path = require('path');
-const Module = require('module');
 const pathRegexp = require('path-to-regexp');
 const browserSync = require('browser-sync');
 const serveStatic = require('serve-static');
@@ -51,14 +50,6 @@ if (devMode) {
     .on('change', invokeWatchCallback)
     .on('unlink', invokeWatchCallback);
 }
-
-const origResolveFilename = Module._resolveFilename;
-Module._resolveFilename = function resolveModule(request, parentModule, ...other) {
-  const newRequest = !/feature-flags$/i.test(request)
-    ? request
-    : path.relative(path.dirname(parentModule.id), path.resolve(__dirname, 'demo/feature-flags.js'));
-  return origResolveFilename.call(this, newRequest, parentModule, ...other);
-};
 
 const reComponentPath = pathRegexp('/component/:component');
 const reDemoComponentPath = pathRegexp('/demo/:component');

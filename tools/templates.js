@@ -4,9 +4,20 @@ const globby = require('globby');
 const { promisify } = require('bluebird');
 const fs = require('fs');
 const path = require('path');
+const Module = require('module');
 const expressHandlebars = require('express-handlebars');
 const helpers = require('handlebars-helpers');
 const Fractal = require('@frctl/fractal');
+
+const origResolveFilename = Module._resolveFilename;
+Module._resolveFilename = function resolveModule(request, parentModule, ...other) {
+  const devFeatureFlags = path.resolve(__dirname, '../demo/feature-flags.js');
+  const newRequest =
+    !/feature-flags$/i.test(request) || !fs.existsSync(devFeatureFlags)
+      ? request
+      : path.relative(path.dirname(parentModule.id), devFeatureFlags);
+  return origResolveFilename.call(this, newRequest, parentModule, ...other);
+};
 
 const handlebars = expressHandlebars.create({
   defaultLayout: 'demo-nav',
