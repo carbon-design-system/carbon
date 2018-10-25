@@ -496,7 +496,7 @@
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--single {
     .#{$prefix}--date-picker__input {
-      min-width: 9.25rem;
+      width: rem(288px);
     }
   }
 
@@ -512,7 +512,6 @@
     padding: 0 $spacing-md;
     background-color: $field-01;
     border: none;
-    order: 2;
     color: $text-01;
     border-bottom: 1px solid $ui-04;
     transition: $transition--base all;
@@ -574,7 +573,7 @@
   }
 
   .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
-    top: rem(14px);
+    top: rem(8px);
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -745,12 +744,11 @@
     transition: all $transition--base;
 
     &:hover {
-      background: $hover-row;
+      background: $hover-field;
     }
 
     &:focus {
-      outline: none;
-      background: $ui-03;
+      @include focus-outline('outline');
     }
   }
 
@@ -841,7 +839,7 @@
   .#{$prefix}--date-picker__days,
   .dayContainer {
     width: 100%;
-    min-width: auto;
+    min-width: 100%;
   }
 
   .flatpickr-innerContainer,
