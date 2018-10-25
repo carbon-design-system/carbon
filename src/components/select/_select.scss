@@ -95,10 +95,6 @@
     pointer-events: none;
   }
 
-  &[data-invalid] ~ .#{$prefix}--select__arrow {
-    bottom: 2.25rem;
-  }
-
   .#{$prefix}--select-optgroup,
   .#{$prefix}--select-option {
     color: $text-01; // For the options to show in IE11
