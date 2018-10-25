@@ -30,6 +30,7 @@ describe('Test Copy Button', function() {
     let element;
     let feedbackTooltip;
     let copyBtn;
+    let feedbackTooltipInitialState;
 
     beforeAll(function() {
       container = document.createElement('div');
@@ -37,6 +38,7 @@ describe('Test Copy Button', function() {
       document.body.appendChild(container);
       element = document.querySelector('[data-copy-btn]');
       feedbackTooltip = document.querySelector('[data-feedback]');
+      feedbackTooltipInitialState = feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed');
       copyBtn = new CopyButton(element);
     });
 
@@ -45,7 +47,7 @@ describe('Test Copy Button', function() {
     });
 
     it('Should not show the feedback tooltip before click', function() {
-      expect(feedbackTooltip.classList.contains('bx--btn--copy__feedback--displayed')).toBe(false);
+      expect(feedbackTooltipInitialState).toBe(false);
     });
 
     it('Should show the feedback tooltip on click', function() {
@@ -61,6 +63,7 @@ describe('Test Copy Button', function() {
     });
 
     afterEach(function() {
+      feedbackTooltip.classList.remove('bx--btn--copy__feedback--displayed');
       jasmine.clock().uninstall();
     });
 

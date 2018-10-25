@@ -1,5 +1,3 @@
-'use strict';
-
 const header = {
   company: 'IBM',
   platform: '[Platform]',
@@ -46,9 +44,43 @@ const header = {
     },
     {
       title: 'L1 link 3',
+      state: {
+        expanded: true,
+      },
+      items: [
+        {
+          href: 'javascript:void(0)',
+          title: 'Link 1',
+        },
+        {
+          href: 'javascript:void(0)',
+          title: 'Link 2',
+        },
+        {
+          href: 'javascript:void(0)',
+          title: 'Ipsum architecto voluptatem',
+        },
+      ],
     },
     {
       title: 'L1 link 4',
+      state: {
+        expanded: false,
+      },
+      items: [
+        {
+          href: 'javascript:void(0)',
+          title: 'Link 1',
+        },
+        {
+          href: 'javascript:void(0)',
+          title: 'Link 2',
+        },
+        {
+          href: 'javascript:void(0)',
+          title: 'Ipsum architecto voluptatem',
+        },
+      ],
     },
   ],
 };
@@ -56,6 +88,8 @@ const header = {
 const sidenav = {
   state: {
     expanded: false,
+    hasIcons: false,
+    fixed: false,
   },
   title: {
     text: '[L1 name here]',
@@ -200,7 +234,20 @@ module.exports = {
       context: {
         sidenav: {
           state: {
+            hasIcons: true,
             expanded: true,
+          },
+        },
+      },
+    },
+    {
+      name: 'Side-nav fixed',
+      context: {
+        sidenav: {
+          state: {
+            hasIcons: false,
+            expanded: true,
+            fixed: true,
           },
         },
       },
@@ -310,14 +357,12 @@ module.exports = {
             expanded: true,
             category: true,
           },
-          sections: nav.sections.map(section => {
-            return {
-              items: section.items.map(item => ({
-                ...item,
-                hasIcon: false,
-              })),
-            };
-          }),
+          sections: nav.sections.map(section => ({
+            items: section.items.map(item => ({
+              ...item,
+              hasIcon: false,
+            })),
+          })),
         },
       },
     },

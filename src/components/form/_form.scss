@@ -115,7 +115,7 @@
     @include reset;
     @include font-family;
     @include typescale('omega');
-    color: $text-01;
+    color: $text-02;
     font-weight: $input-label-weight;
     display: inline-block;
     vertical-align: baseline;
@@ -127,7 +127,7 @@
   }
 
   .#{$prefix}--label--disabled {
-    color: $text-disabled;
+    color: $disabled;
     cursor: not-allowed;
   }
 
@@ -138,11 +138,16 @@
     height: rem(14px);
   }
 
+  input[type='number'] {
+    font-family: $font-family-mono;
+  }
+
   input[data-invalid],
   textarea[data-invalid],
   select[data-invalid],
   .#{$prefix}--list-box[data-invalid] {
-    box-shadow: 0 2px 0px 0px $support-01;
+    outline: 2px solid $support-01;
+    outline-offset: -2px;
 
     ~ .#{$prefix}--form-requirement {
       max-height: rem(200px);

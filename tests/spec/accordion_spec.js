@@ -67,6 +67,7 @@ describe('Test accordion', function() {
     });
 
     it('Should remove active state on second click', function() {
+      listItem.classList.add('bx--accordion__item--active');
       buttonItem.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(listItem.classList.contains('bx--accordion__item--active')).toBe(false);
     });
@@ -106,10 +107,15 @@ describe('Test accordion', function() {
     });
 
     it('Should remove active state on second enter or spacebar press', function() {
+      listItem.classList.add('bx--accordion__item--active');
       const event = new CustomEvent('keypress', { bubbles: true });
       event.which = 13;
       listItem.dispatchEvent(event);
       expect(listItem.classList.contains('bx--accordion__item--active')).toBe(false);
+    });
+
+    afterEach(function() {
+      listItem.classList.remove('bx--accordion__item--active');
     });
 
     afterAll(function() {

@@ -1,0 +1,39 @@
+<aside class="bx--side-nav bx--side-nav--expanded bx--side-nav bx--side-nav--fixed">
+  <div class="bx--side-nav__content">
+    {{> platform-side-nav-title-bar sidenav=sidenav }}
+    <div class="bx--side-nav__scroll">
+      <nav class="bx--side-nav__nav">
+        <ul class="bx--side-nav__nav-items">
+          {{#each sidenav.links}}
+          <li class="bx--side-nav__nav-item">
+            {{#if this.active}}
+            <div class="bx--side-nav__category bx--side-nav__category--active">
+            {{else}}
+            <div class="bx--side-nav__category">
+            {{/if}}
+              <div class="bx--side-nav__category-header">
+                <div class="bx--side-nav__category-title title--fixed">
+                  {{ this.category }}
+                </div>
+              </div>
+              <ul class="bx--side-nav__category-itms">
+                {{#each this.links}}
+                {{#if this.active}}
+                <li class="bx--side-nav__category-item bx--side-nav__category-item--active">
+                {{else}}
+                <li class="bx--side-nav__category-item">
+                {{/if}}
+                  <a class="bx--side-nav__link" href="{{ this.href }}">
+                    {{ this.title }}
+                  </a>
+                </li>
+                {{/each}}
+              </ul>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</aside>

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'carbon-components-react';
 import classnames from 'classnames';
 
+import * as components from '../../../components';
+
 import CodeExample from '../CodeExample/CodeExample';
-import InlineLoadingDemoButton from '../../inline-loading-demo-button';
 
 const forEach = Array.prototype.forEach;
 
@@ -47,6 +48,11 @@ class ComponentExample extends Component {
      * The slug of the CodePen link.
      */
     codepenSlug: PropTypes.string,
+
+    /**
+     * `true` to use static full render page.
+     */
+    useStaticFullRenderPage: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -92,10 +98,6 @@ class ComponentExample extends Component {
   _instantiateComponents = () => {
     const container = this._container;
     if (container) {
-      const components = {
-        ...(container.ownerDocument.defaultView.CarbonComponents || {}),
-        InlineLoadingDemoButton,
-      };
       const componentClasses = Object.keys(components)
         .map(key => components[key])
         .filter(Clz => typeof Clz.init === 'function');
@@ -111,10 +113,6 @@ class ComponentExample extends Component {
   _releaseComponents = () => {
     const container = this._container;
     if (container) {
-      const components = {
-        ...(container.ownerDocument.defaultView.CarbonComponents || {}),
-        InlineLoadingDemoButton,
-      };
       Object.keys(components)
         .map(key => components[key])
         .filter(Clz => typeof Clz.init === 'function')
@@ -130,7 +128,16 @@ class ComponentExample extends Component {
   };
 
   render() {
-    const { htmlFile, component, variant, codepenSlug, hideViewFullRender, linkOnly, useIframe } = this.props;
+    const {
+      htmlFile,
+      component,
+      variant,
+      codepenSlug,
+      hideViewFullRender,
+      linkOnly,
+      useIframe,
+      useStaticFullRenderPage,
+    } = this.props;
 
     const classNamesContainer = classnames('component-example__live', {
       'component-example__live--with-iframe': useIframe,
@@ -152,7 +159,10 @@ class ComponentExample extends Component {
 
     const codepenLink = codepenSlug && `https://codepen.io/team/carbon/full/${codepenSlug}/`;
     const variantSuffix = (component === variant && '--default') || '';
-    const componentLink = variant ? `/component/${variant}${variantSuffix}` : `/component/${component}`;
+    const staticSuffix = !useStaticFullRenderPage ? '' : '.html';
+    const componentLink = variant
+      ? `/component/${variant}${variantSuffix}${staticSuffix}`
+      : `/component/${component}--default${staticSuffix}`;
 
     const viewFullRender = hideViewFullRender ? null : (
       <Link className={viewFullRenderClassNames} target="_blank" href={codepenLink || componentLink}>

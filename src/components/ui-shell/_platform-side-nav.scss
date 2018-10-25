@@ -85,8 +85,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     align-items: stretch;
   }
 
-  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__title-bar,
-  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__title-bar {
+  .#{$prefix}--side-nav__title-bar {
     border-bottom: 1px solid $shell-side-nav-bg-02;
   }
 
@@ -184,12 +183,7 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     position: relative;
   }
 
-  .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category,
-  .#{$prefix}--side-nav--expanded .#{$prefix}--side-nav__category {
-    padding-top: get-fixed-size(1);
-  }
-
-  .#{$prefix}--side-nav__category--active {
+  .#{$prefix}--side-nav__category--active:not(.#{prefix}--side-nav--fixed) {
     background-color: $shell-side-nav-bg-02;
   }
 
@@ -207,6 +201,13 @@ $shell-side-nav-accent-01: $ibm-colors__blue--60;
     margin-left: get-fixed-size(1);
     user-select: none;
     opacity: 0;
+  }
+
+  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__category-title {
+    margin-left: get-fixed-size(2);
+    margin-top: get-fixed-size(2);
+    font-weight: normal;
+    color: $shell-header-text-03;
   }
 
   .#{$prefix}--side-nav:hover .#{$prefix}--side-nav__category-title,
