@@ -394,7 +394,7 @@ gulp.task('html:dev', ['scripts:dev:feature-flags'], () =>
   )
 );
 
-gulp.task('html:source', () => {
+gulp.task('html:source', ['scripts:dev:feature-flags'], () => {
   const names = {
     'notification--default': 'inline-notification',
     'notification--toast': 'toast-notification',
