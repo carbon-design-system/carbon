@@ -192,7 +192,7 @@
   $snippet-border-color: $ui-03 !default !global; // TODO: Define for experimental
 
   // Content Switcher
-  $content-switcher-border-radius: 4px !default !global;
+  $content-switcher-border-radius: 0px !default !global;
   $content-switcher-option-border: 1px solid $brand-01 !default !global;
 
   // Data Table
@@ -215,6 +215,8 @@
   // Structured Theme Variables
   $structured-list-padding: 2rem !default !global;
   $structured-list-text-transform: none !default !global;
+
+  // Slider
 
   // Toggle
   $toggle-background-color: $ibm-colors__green--30 !default !global;
