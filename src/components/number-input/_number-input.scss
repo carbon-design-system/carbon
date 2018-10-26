@@ -177,6 +177,7 @@
 
   .#{$prefix}--number input[type='number'] {
     @include typescale('zeta');
+    @include focus-outline('reset');
     font-family: $font-family-mono;
     box-sizing: border-box;
     display: inline-flex;
@@ -185,22 +186,21 @@
     padding-left: $spacing-md;
     padding-right: $spacing-xl;
     font-weight: 300;
-    height: rem(40px);
+    height: rem(32px);
     color: $text-01;
     background-color: $field-01;
     border: none;
     order: 2;
     border-radius: 0;
     border-bottom: 1px solid $ui-04;
-    transition: background $transition--base;
+    transition: all $transition--base;
 
     & ~ .#{$prefix}--label {
       order: 1;
     }
 
     &:focus {
-      outline: 2px solid $brand-01;
-      outline-offset: -2px;
+      @include focus-outline('outline');
     }
 
     &:hover {
@@ -257,8 +257,8 @@
     justify-content: center;
     align-items: center;
     left: auto;
-    right: 0.5rem;
-    bottom: 0.625rem;
+    right: 0.25rem;
+    bottom: 0.5rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -291,12 +291,11 @@
     }
 
     input[type='number'] {
-      outline: 2px solid $support-01;
-      outline-offset: -2px;
+      @include focus-outline('invalid');
     }
 
     .#{$prefix}--number__controls {
-      bottom: 2rem;
+      bottom: 1.875rem;
     }
   }
 
