@@ -30,11 +30,16 @@ th {
   border: 1px solid black;
 }
 
+td,
+th {
+  padding: 0 1rem;
+}
+
 .icon-preview {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
 }
 
 .icon-preview > svg {
