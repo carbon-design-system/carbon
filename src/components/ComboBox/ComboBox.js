@@ -189,6 +189,11 @@ export default class ComboBox extends React.Component {
       invalid,
       invalidText,
       light,
+      type, // eslint-disable-line no-unused-vars
+      shouldFilterItem, // eslint-disable-line no-unused-vars
+      onChange, // eslint-disable-line no-unused-vars
+      onInputChange, // eslint-disable-line no-unused-vars
+      ...rest
     } = this.props;
     const className = cx('bx--combo-box', containerClassName);
 
@@ -221,6 +226,7 @@ export default class ComboBox extends React.Component {
               <input
                 className="bx--text-input"
                 aria-label={ariaLabel}
+                {...rest}
                 {...getInputProps({
                   disabled,
                   id,
