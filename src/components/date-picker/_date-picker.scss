@@ -671,7 +671,7 @@
 
   .#{$prefix}--date-picker__month .flatpickr-current-month .cur-month,
   .flatpickr-month .flatpickr-current-month .cur-month {
-    margin-right: 0.25rem;
+    margin-right: $spacing-2xs;
     color: $text-01;
   }
 
@@ -754,7 +754,7 @@
 
   .#{$prefix}--date-picker__days .nextMonthDay,
   .#{$prefix}--date-picker__days .prevMonthDay {
-    color: $next-month-color;
+    color: $date-picker-next-month-color;
   }
 
   .#{$prefix}--date-picker__day.today,
@@ -800,7 +800,7 @@
 
   .#{$prefix}--date-picker__day.inRange,
   .flatpickr-day.inRange {
-    background: $in-range-background-color;
+    background: $date-picker-in-range-background-color;
     color: $text-01;
   }
 
