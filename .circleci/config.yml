@@ -4,41 +4,22 @@ jobs:
     docker:
       - image: circleci/node:8
     working_directory: ~/repo
-
     steps:
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
       - run: yarn install --offline
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
       - run:
           # Helps to speed up some of the tests that we have
           name: Build packages
           command: yarn build
-
       - run:
           name: Run ci checks
           command: yarn ci-check
           environment:
             JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
-
       - store_test_results:
           path: reports
-
       - store_artifacts:
           path: reports
-
       - deploy:
           name: deploy examples
           command: |

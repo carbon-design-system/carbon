@@ -139,9 +139,22 @@ async function main() {
 
   await fs.writeFile(path.join(BUILD_DIR, 'index.html'), indexFile);
 
-  ghpages.publish(BUILD_DIR, { remote: GH_REMOTE }, error => {
+  const publishOptions = {
+    remote: GH_REMOTE,
+    message: 'Auto-generated commit',
+  };
+  if (process.env.GH_USER) {
+    publishOptions.user = process.env.GH_USER;
+  }
+  if (process.env.GH_EMAIL) {
+    publishOptions.email = process.env.GH_EMAIL;
+  }
+
+  ghpages.publish(BUILD_DIR, publishOptions, error => {
     if (error) {
-      throw error;
+      console.log(error);
+      process.exit(1);
+      return;
     }
 
     console.log('Done!');
