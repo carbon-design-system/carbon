@@ -21,9 +21,12 @@ const App = ({ icons }) => (
           const { width, height } = attrs;
           const variant = glyph ? 'glyph' : width;
           const svg = js2svg(icon);
+          const id = `${icon.name}-${width}x${height}`;
           return (
-            <tr key={`${icon.name}-${width}x${height}`}>
-              <td className="icon-name">{icon.name}</td>
+            <tr key={id} id={id}>
+              <td className="icon-name">
+                <a href={`#${id}`}>{icon.name}</a>
+              </td>
               <td className="icon-size">{`${width}x${height}`}</td>
               <td>
                 <div className={`icon-preview icon-preview--${variant}`}>
