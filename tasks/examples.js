@@ -43,7 +43,9 @@ async function main() {
         return descriptor;
       }
 
-      const examples = await fs.readdir(examplesDir);
+      const examples = (await fs.readdir(examplesDir)).filter(example => {
+        return example !== '.yarnrc';
+      });
 
       return {
         ...descriptor,
