@@ -17,25 +17,26 @@ body {
   margin: 0;
   padding: 0;
 }
-.icon-example {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 8rem;
-  height: 8rem;
+
+table {
+  text-align: left;
+  vertical-align: middle;
 }
-.icon {
-  flex: 1 1 0%;
-  display: inline-flex;
+
+table,
+tr,
+td,
+th {
+  border: 1px solid black;
+}
+
+.icon-preview {
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 }
-.icon-description {
-  width: 100%;
-  max-width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  text-align: center;
+
+.icon-preview > svg {
+  border: 1px solid black;
 }

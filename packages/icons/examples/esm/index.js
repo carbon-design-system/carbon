@@ -1,86 +1,60 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import * as CarbonIcons from '../../es';
 
 const App = ({ icons }) => (
-  <div className="icon-list">
-    {Object.keys(icons)
-      .sort()
-      .map(key => {
-        const icon = icons[key];
-        const svg = js2svg(icon);
-
-        return (
-          <article className="icon-example">
-            <header className="icon-name">{icon.name}</header>
-            <div className="icon">{svg}</div>
-          </article>
-        );
-      })}
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Preview</th>
+      </tr>
+    </thead>
+    <tbody>
+      {Object.keys(icons)
+        .sort()
+        .map(key => {
+          const icon = icons[key];
+          const { width, height } = icon.attrs;
+          const svg = js2svg(icon);
+          return (
+            <tr key={`${icon.name}-${width}x${height}`}>
+              <td className="icon-name">{icon.name}</td>
+              <td className="icon-size">{`${width}x${height}`}</td>
+              <td>
+                <div className={`icon-preview icon-preview--${width}`}>
+                  {svg}
+                </div>
+              </td>
+            </tr>
+          );
+        })}
+    </tbody>
+  </table>
 );
 
-render(<App icons={CarbonIcons} />, document.getElementById('root'));
-
-if (module.hot) {
-  module.hot.dispose(() => {
-    document.getElementById('root').innerHTML = '';
-  });
-}
-
-function render(element, node) {
-  for (const child of node.children) {
-    child.parentNode.removeChild(child);
-  }
-
-  node.appendChild(element);
-}
-
-function createElement(descriptor, attrs, ...children) {
-  if (typeof descriptor === 'function') {
-    return descriptor({
-      ...attrs,
-      children,
-    });
-  }
-  const node = document.createElement(descriptor);
-
-  if (attrs) {
-    for (const attr of Object.keys(attrs)) {
-      if (attr === 'class' || attr === 'className') {
-        node.classList.add(attrs[attr]);
-      } else {
-        node.setAttribute(attr, attrs[attr]);
-      }
-    }
-  }
-
-  if (children.length > 0) {
-    const flattenedChildren = children.reduce(
-      (acc, child) => acc.concat(child),
-      []
-    );
-    for (const child of flattenedChildren) {
-      if (typeof child === 'string') {
-        node.appendChild(document.createTextNode(child));
-      } else {
-        node.appendChild(child);
-      }
-    }
-  }
-
-  return node;
+function render() {
+  ReactDOM.render(<App icons={CarbonIcons} />, document.getElementById('root'));
 }
 
 function js2svg(descriptor) {
   const { elem, attrs = {}, content = [] } = descriptor;
-  const node = document.createElementNS('http://www.w3.org/2000/svg', elem);
+  return React.createElement(elem, format(attrs), ...content.map(js2svg));
+}
 
-  for (const attr of Object.keys(attrs)) {
-    node.setAttribute(attr, attrs[attr]);
-  }
+function format(attrs) {
+  const { 'fill-rule': fillRule, ...rest } = attrs;
+  return {
+    ...rest,
+    fillRule,
+  };
+}
 
-  for (const child of content) {
-    node.appendChild(js2svg(child));
-  }
+render();
 
-  return node;
+if (module.hot) {
+  module.hot.dispose(() => {
+    render();
+  });
 }
