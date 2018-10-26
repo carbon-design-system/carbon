@@ -64,12 +64,14 @@ async function build() {
             height: parseInt(size, 10),
             viewBox: `0 0 ${size} ${size}`,
           };
+          descriptor.size = descriptor.attrs.width;
         } else {
           const [width, height] = info.attrs.viewBox
             .split(' ')
             .slice(2)
             .map(number => parseInt(number, 10));
 
+          descriptor.size = 'glyph';
           descriptor.attrs = {
             ...descriptor.attrs,
             width,

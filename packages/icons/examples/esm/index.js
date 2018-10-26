@@ -9,6 +9,7 @@ const App = ({ icons }) => (
         <th>Name</th>
         <th>Size</th>
         <th>Preview</th>
+        <th>GitHub</th>
       </tr>
     </thead>
     <tbody>
@@ -16,16 +17,23 @@ const App = ({ icons }) => (
         .sort()
         .map(key => {
           const icon = icons[key];
-          const { width, height } = icon.attrs;
+          const { attrs, glyph } = icon;
+          const { width, height } = attrs;
+          const variant = glyph ? 'glyph' : width;
           const svg = js2svg(icon);
           return (
             <tr key={`${icon.name}-${width}x${height}`}>
               <td className="icon-name">{icon.name}</td>
               <td className="icon-size">{`${width}x${height}`}</td>
               <td>
-                <div className={`icon-preview icon-preview--${width}`}>
+                <div className={`icon-preview icon-preview--${variant}`}>
                   {svg}
                 </div>
+              </td>
+              <td>
+                <a href={getLink(icon)} rel="noopener noreferrer">
+                  Source
+                </a>
               </td>
             </tr>
           );
@@ -49,6 +57,12 @@ function format(attrs) {
     ...rest,
     fillRule,
   };
+}
+
+function getLink(icon) {
+  const baseUrl =
+    'https://github.com/IBM/carbon-elements/tree/master/packages/icons/src/svg';
+  return `${baseUrl}/${icon.size}/${icon.name}.svg`;
 }
 
 render();
