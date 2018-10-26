@@ -210,21 +210,21 @@
     transition: $transition--base $carbon--standard-easing;
 
     .#{$prefix}--structured-list--selection &:hover:not(.#{$prefix}--structured-list-row--header-row) {
-      background-color: $ibm-colors__gray--10;
+      background-color: $ui_01;
       cursor: pointer;
     }
 
     &.#{$prefix}--structured-list-row--selected {
-      background-color: $ibm-colors__gray--20;
+      background-color: $ui-03;
     }
 
     &.#{$prefix}--structured-list-row--header-row {
-      border-bottom: 1px solid $ibm-colors__gray--20;
+      border-bottom: 1px solid $ui-03;
       cursor: inherit;
     }
 
     &:focus:not(.#{$prefix}--structured-list-row--header-row) {
-      outline: 2px solid $ibm-colors__blue--60;
+      @include focus-outline('outline');
     }
   }
 
@@ -260,10 +260,10 @@
   }
 
   .#{$prefix}--structured-list-th {
-    color: $ibm-colors__gray--100;
+    color: $text-01;
   }
   .#{$prefix}--structured-list-td {
-    color: $ibm-colors__gray--70;
+    color: $text-02;
   }
 
   .#{$prefix}--structured-list-content--nowrap {
@@ -282,7 +282,7 @@
 
     .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-row &,
     .#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-td & {
-      fill: $ibm-colors__gray--100;
+      fill: $text-01;
     }
   }
 

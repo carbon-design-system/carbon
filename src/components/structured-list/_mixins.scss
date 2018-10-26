@@ -65,14 +65,18 @@
 // Used only for experimental normal structured-list
 @mixin padding-th--x($padding: $structured-list-padding) {
   padding-left: $spacing-md;
-  padding-right: $padding;
+  padding-right: $spacing-md;
   padding-top: $spacing-md;
-  padding-bottom: $spacing-md;
+  padding-bottom: $spacing-xs;
 }
 
 // Used only for experimental normal structured-list
 @mixin padding-td--x($padding: $structured-list-padding) {
-  padding: $spacing-md;
+  padding-top: $spacing-md;
+  padding-right: $spacing-md;
+  padding-bottom: $spacing-lg;
+  padding-left: $spacing-md;
+
   &:last-child {
     padding-right: $spacing-md;
   }
