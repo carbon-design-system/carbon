@@ -11,7 +11,7 @@ module.exports = {
                 bracketSpacing: true,
                 parser: 'babylon',
                 printWidth: 80,
-                singleQuotes: true,
+                singleQuote: true,
                 trailingComma: 'es5',
               },
             },
