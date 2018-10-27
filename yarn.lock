@@ -870,109 +870,111 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@carbon/cli-config@0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-config/-/cli-config-0.0.21.tgz#c71de9889aac1fa343d9e28662a3e30fcc6305e8"
-  integrity sha512-Bak/myYdQycZhi6BKX4HD57d/sXTkhSLvEJgCjSU4mHyocQZ0U8hkmfiWVsqN68F2ejIsrq6xaS4xPCCKPpuaA==
+"@carbon/cli-config@0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-config/-/cli-config-0.0.23.tgz#dcdf083b61b3ae6a4c1127b4bd01f9eb5707f646"
+  integrity sha512-UODN4xFi6VtMISFkx53QjaiBoOkOl6vohtWzx8eCd5sH6T0iDvKomqsVjmZMLOBBHPsvqanQbqw87f1xj5H0ig==
   dependencies:
     cosmiconfig "^5.0.5"
     invariant "^2.2.4"
     joi "^13.5.2"
 
-"@carbon/cli-plugin-editorconfig@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-editorconfig/-/cli-plugin-editorconfig-0.0.21.tgz#220f4e84aa89ce20a7e17ff489a81f9e8b1dea1c"
-  integrity sha512-uTKvZEmRqnBAcLrEj4Xc3M20iRSHSfbGyantKoyq9psgcIC8mTxP6ZU0m7RuhnR7FQirWM+Yl+5WtboaFremCg==
+"@carbon/cli-plugin-editorconfig@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-editorconfig/-/cli-plugin-editorconfig-0.0.23.tgz#519f39ef8d267163a5e65d5630b90f5e7bce074c"
+  integrity sha512-Mh3yAUaxnrMC2UIueYVe/lGHrILxwozlXDFDK6pa4KPNUORphp2hmU1Xeo0CfbGYBhLiKlY9U+/0nMC8BY4qSQ==
 
-"@carbon/cli-plugin-eslint@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-eslint/-/cli-plugin-eslint-0.0.21.tgz#83c3b415f0e8f29866f7b68a938dbf477fdd3368"
-  integrity sha512-26DXjkCyt9wGTZ4uNZXlQ3UQijsTXP2uK10FuVDjZEik4C9a1eQ9vqqZzz3ga4O9i73dplJeMDojuMUKMsKz5w==
+"@carbon/cli-plugin-eslint@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-eslint/-/cli-plugin-eslint-0.0.23.tgz#f96277e68c149cce07f8d7a009e4918e92b96cb5"
+  integrity sha512-odQqlmyqyI80UtkQlgEVaB2xO1+sJPwCq6rPsbCtiIsjkyv4BfPzDIM/eyWcaa2yg/WTkWhn0ey9C3Lz26IDuQ==
   dependencies:
+    "@carbon/cli-runtime" "0.0.23"
+    babel-eslint "^9.0.0-beta.3"
     eslint "^5.3.0"
-    eslint-config-toolkit "0.0.21"
+    eslint-config-toolkit "0.0.23"
+    eslint-plugin-import "^2.13.0"
+    eslint-plugin-jsdoc "^3.7.1"
 
-"@carbon/cli-plugin-github-files@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-github-files/-/cli-plugin-github-files-0.0.21.tgz#f4f4c159a855ecb299188278e5817b13a2c04e0c"
-  integrity sha512-Vb1h7vfhCtTwd6iiFAHFYQZcuygLnx/4pbLgZ6Wh+XDlaBJU6RQ9ky1C92fP+W2ob8XzYv1k+9zxc2BGiZzNjw==
+"@carbon/cli-plugin-github-files@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-github-files/-/cli-plugin-github-files-0.0.23.tgz#335b83ef4cfd7835c21ac446454e502f0650e0d1"
+  integrity sha512-/SHKD6NAQGurNmpGb7XByLK1NIKnjQ5H9isMHki0LBUhuyOQRRphVfl4CWO5cIuAVqVfQ8Sr3bUrTFtyUNwolA==
   dependencies:
     fs-extra "^7.0.0"
 
-"@carbon/cli-plugin-jest@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-jest/-/cli-plugin-jest-0.0.21.tgz#3c226d1088d8c7a6c5963f40fe54fea76015f289"
-  integrity sha512-ks4RwJaPFN0zGmD/530vn0eFFzVtoohWNbW8PDqEAyEdX+0lbueNrJblucH6DxP0+rn84ljAFqQm8dmGT4zhog==
+"@carbon/cli-plugin-jest@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-jest/-/cli-plugin-jest-0.0.23.tgz#0e39803cb878c123dd1d9c312354d5aede31cce2"
+  integrity sha512-xheQbrzM9Xp6HOj/5/2+uraHlCznP+Wr02cs2I+Kde8XtxB51b+a0QxgfrPzxGx/ZWCFaFfrRO0NnmJ+sslYPg==
   dependencies:
     "@babel/core" "^7.0.0-rc.1"
     "@babel/runtime" "^7.0.0-rc.1"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.4.0"
-    babel-preset-toolkit "0.0.21"
+    babel-preset-toolkit "0.0.23"
     jest "^23.4.1"
     lodash.mergewith "^4.6.1"
     object-assign "^4.1.1"
     promise "^8.0.1"
     whatwg-fetch "^2.0.4"
 
-"@carbon/cli-plugin-prettier@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-prettier/-/cli-plugin-prettier-0.0.21.tgz#96f014d1249485b960b4f9c3257370d6032012aa"
-  integrity sha512-gFdLBb/8YhZXzwvlPIDIyHICI4F7SAmWB1pyKoo5yIWtPajKDJlywKY1BfohiVeoJZ9PxzfEbJ08mFSMLzLHNg==
+"@carbon/cli-plugin-prettier@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-prettier/-/cli-plugin-prettier-0.0.23.tgz#2dfd22c7300617cb318225d5b427c5b915eed621"
+  integrity sha512-TGLo6tAoy7TkScn/F1jIk2UU9y+Kt0Z4Qu+RJvBuhGYrxPbkWweB9DUc7lIY3r/6XYEe6mIKCbgIc2H12y+IMg==
   dependencies:
-    "@carbon/cli-tools" "0.0.21"
+    "@carbon/cli-tools" "0.0.23"
     chalk "^2.4.1"
     npm-which "^3.0.1"
     prettier "^1.14.2"
 
-"@carbon/cli-plugin-stylelint@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-stylelint/-/cli-plugin-stylelint-0.0.21.tgz#b36dd8519b9ab9ec12d0da273dcce856c5750020"
-  integrity sha512-WrAVE00NPIk7uvUN8EKC6NUORmoOEv+gRn97piND8TZUBjVE903C89KPrAlo6omD1bw+w3JfxS0guDv8Jy4+AA==
+"@carbon/cli-plugin-stylelint@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-plugin-stylelint/-/cli-plugin-stylelint-0.0.23.tgz#82ebb20750d436ab301a1f6d68027b1788b8f54c"
+  integrity sha512-EIAiidHod/8KSoxyglZ0QDst6JJb+zE1ebMHOxixqj5peW3c0zbvvqy6qJ3XMysF5vFudxrwhJC+brKG5GCUJA==
   dependencies:
     stylelint "^9.4.0"
 
-"@carbon/cli-runtime@0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-runtime/-/cli-runtime-0.0.21.tgz#d799e445063a1edba739a6472b89d81f99573d36"
-  integrity sha512-DM5Z8ESbILi+HkID95Z6cAO9y1LsxI8faBi4zy4LcTRcQIXpJMJDulsTm/lx77Gb64B6Y+gprKssJg7kLnSYgA==
+"@carbon/cli-runtime@0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-runtime/-/cli-runtime-0.0.23.tgz#3df920ae77e92b952dfc1629057030e7961dfe36"
+  integrity sha512-n7K5Tui7tKFbiiMfO/uq+wsBvvM4eVj5IWTJH8rScAlBMm8/IY4LLCXsnZGj3bEWekPVBqA1Fa7nd1a10erBIw==
   dependencies:
-    "@carbon/cli-config" "0.0.21"
-    "@carbon/cli-tools" "0.0.21"
-    "@carbon/npm" "0.0.21"
+    "@carbon/cli-config" "0.0.23"
+    "@carbon/cli-tools" "0.0.23"
+    "@carbon/npm" "0.0.23"
     fs-extra "^7.0.0"
     inquirer "^6.1.0"
     invariant "^2.2.4"
     joi "^13.4.0"
-    lodash.get "^4.4.2"
     lodash.merge "^4.6.1"
-    lodash.set "^4.3.2"
     npm-which "^3.0.1"
     ora "^3.0.0"
 
-"@carbon/cli-tools@0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/cli-tools/-/cli-tools-0.0.21.tgz#2481cc4a7e49e372ba98ef372453280b3e0c3fe3"
-  integrity sha512-kWjTbe2P9gdFlrVktiV1l6QJLg/hsav7fFERRtGd032ww3sVFWewSCOfnxYcQjLMeSE82jo8A9+ukwmukGrckg==
+"@carbon/cli-tools@0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/cli-tools/-/cli-tools-0.0.23.tgz#89213de5ec644785ab06727f4ca337263d244fa9"
+  integrity sha512-aW7+DzVrJpk/SCyYVrGHW3XCn7nQQpH+QVvbPK6uLpFOLWVKf0s9hXF1sCv/OnvLdNQvfb9kuJe1y+NvFFTfAg==
   dependencies:
     cross-spawn "^6.0.5"
     log4js "^3.0.4"
 
-"@carbon/npm@0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/npm/-/npm-0.0.21.tgz#fe360e6db0c9ab39413958b7117c1979253f11fc"
-  integrity sha512-Xbhr/Lgl3gekxduPX5N40ZPQJKwlWHsDqb8mq7SCIFLmqoNyhRGPV1FeJ5U8ZbVdLkZ9NP0rwnxMLILVJQacng==
+"@carbon/npm@0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/npm/-/npm-0.0.23.tgz#3a94e3e941812e55799b7b03277a0b9fff7b23f4"
+  integrity sha512-CjaihWOKPyDYJoQWtxucUYoqJDRy9PRDy8GZdS5iVPq+CV4vp/0ugBqx9ci+CV8+8zQ0CG+Y4MP7KMjBfJukSw==
   dependencies:
-    "@carbon/cli-tools" "0.0.21"
+    "@carbon/cli-tools" "0.0.23"
     fs-extra "^7.0.0"
 
-"@carbon/toolkit@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@carbon/toolkit/-/toolkit-0.0.21.tgz#1dcd4288d7969c8423c3b6e6a62673d39dc87cdc"
-  integrity sha512-KEsYQ2XHssIQZS+xfFd2ekcM9QKrRxSUnL8u91JAUOEdWC4GmH0p+Dl7o0bDaHUCbcihHN0o31Nsvh9yh66kTg==
+"@carbon/toolkit@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@carbon/toolkit/-/toolkit-0.0.23.tgz#ced7e325d68ef1dd43578441abf82553e8bc1368"
+  integrity sha512-eZpmnn7LD5H98ncE/jvyZvck8ojRH7Xq7l6QmtGXrFc9nmAQlOMUxy7iYGJZTCOTb+VjS9Q9ayfWnPVQNLKA9Q==
   dependencies:
-    "@carbon/cli-runtime" "0.0.21"
-    "@carbon/cli-tools" "0.0.21"
+    "@carbon/cli-runtime" "0.0.23"
+    "@carbon/cli-tools" "0.0.23"
     chalk "^2.4.1"
     commander "^2.17.0"
 
@@ -1508,6 +1510,18 @@ babel-eslint@^10.0.1:
     eslint-scope "3.7.1"
     eslint-visitor-keys "^1.0.0"
 
+babel-eslint@^9.0.0-beta.3:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-9.0.0.tgz#7d9445f81ed9f60aff38115f838970df9f2b6220"
+  integrity sha512-itv1MwE3TMbY0QtNfeL7wzak1mV47Uy+n6HtSOO4Xd7rvmO+tsGQSgyOEEgo6Y2vHZKZphaoelNeSVj4vkLA1g==
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+    "@babel/parser" "^7.0.0"
+    "@babel/traverse" "^7.0.0"
+    "@babel/types" "^7.0.0"
+    eslint-scope "3.7.1"
+    eslint-visitor-keys "^1.0.0"
+
 babel-generator@^6.18.0, babel-generator@^6.26.0:
   version "6.26.1"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.26.1.tgz#1844408d3b8f0d35a404ea7ac180f087a601bd90"
@@ -1590,10 +1604,10 @@ babel-preset-jest@^23.2.0:
     babel-plugin-jest-hoist "^23.2.0"
     babel-plugin-syntax-object-rest-spread "^6.13.0"
 
-babel-preset-toolkit@0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/babel-preset-toolkit/-/babel-preset-toolkit-0.0.21.tgz#5e188d89c9eff85a3c431e79ceff4e42ac30c06e"
-  integrity sha512-67T0yZ7tSlbHMCjdIBUDaYfBrVQdhVTLSq+4poQnjjv22ltBRR4y0oFsDd2+Gao4R493P9fd9FOPA+zz6Zu3Fw==
+babel-preset-toolkit@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/babel-preset-toolkit/-/babel-preset-toolkit-0.0.23.tgz#b7f7a372979dbc1f63f3345f6828cde50f56b9b0"
+  integrity sha512-ZPhWn1rR4okTlMcowo2xARg7fbHg7TkjBtaABMUarpXg06pjUg58fQ7p6l1d/5oMe040D8S8HihphM4bdvj81g==
   dependencies:
     "@babel/core" "7.0.0-rc.1"
     "@babel/helper-plugin-utils" "7.0.0-rc.1"
@@ -1610,7 +1624,7 @@ babel-preset-toolkit@0.0.21:
     "@babel/plugin-transform-runtime" "7.0.0-rc.1"
     "@babel/preset-env" "7.0.0-rc.1"
     "@babel/preset-react" "7.0.0-rc.1"
-    browserslist-config-toolkit "0.0.21"
+    browserslist-config-toolkit "0.0.23"
 
 babel-register@^6.26.0:
   version "6.26.0"
@@ -1761,10 +1775,10 @@ browser-resolve@^1.11.3:
   dependencies:
     resolve "1.1.7"
 
-browserslist-config-toolkit@0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/browserslist-config-toolkit/-/browserslist-config-toolkit-0.0.21.tgz#118ff133c29b71831b548e17d692fa44ce0590a2"
-  integrity sha512-/nPn8YeVgCtq8aKaYRgLJTZ2xzgU2LE2iVDwiw7vU4F0SvA+11UvE+R+uVr1chmJy7/VLo5xROYCgQ1Bu2BFFA==
+browserslist-config-toolkit@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/browserslist-config-toolkit/-/browserslist-config-toolkit-0.0.23.tgz#4e208b6e6bdf71c74e23cdd993850cfce6744a59"
+  integrity sha512-gv6in7IiTrqTsWhf8hqwAA5B339nFCpOURqCfSGL+u4Eb+7QchsnENjlTHlPP1CCC5EWQykw1DAJcgd+yWjz3g==
 
 browserslist@^3.0.0:
   version "3.2.8"
@@ -2948,20 +2962,19 @@ eslint-config-prettier@^2.9.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-config-toolkit-base@0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/eslint-config-toolkit-base/-/eslint-config-toolkit-base-0.0.21.tgz#816a5675a8887cec97f31a54c0cc3dc44875846d"
-  integrity sha512-71bHkm7hu81sgWH6L5okoP+MHfNjy8vB2l42nzDTNqGW4OzUtvm4lNnKuWKyfpq+25wr/cpNSADn9bX8VENGyg==
+eslint-config-toolkit-base@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/eslint-config-toolkit-base/-/eslint-config-toolkit-base-0.0.23.tgz#c980eca3ab630c3174fcdbbb8c05635bb32be0ca"
+  integrity sha512-YfEublQhBI9/cBXtgdBqhcJCzs8osnE5VjzpOt2OVgB1sWOZCz+QIynk+4F9aS8LQUo/1dh8nPYVTjSEju/zGg==
   dependencies:
     eslint-config-prettier "^2.9.0"
-    eslint-plugin-jsdoc "^3.7.1"
 
-eslint-config-toolkit@0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/eslint-config-toolkit/-/eslint-config-toolkit-0.0.21.tgz#f9fcfb8900dff43d2d03b2e0033f0a3cacbc2038"
-  integrity sha512-2XcnjthgcZfa0JHob/SfCPR/x+BWm2cVT9VDbady3eNGcWK/WX5Kcu4+YRoEVwhfMafzWogqCDQF3n7kX4Kjhw==
+eslint-config-toolkit@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/eslint-config-toolkit/-/eslint-config-toolkit-0.0.23.tgz#1110e81237c3b1b605ca83ef6502f61886d57f88"
+  integrity sha512-5jyts2CpIp7LabOhMdJFwTpnQiVbBpOE/KmM1fgJebSU1f9xvsdXCjmVZ+Mlg+Y0mX4rTUS2I8j5kP55qRFC+A==
   dependencies:
-    eslint-config-toolkit-base "0.0.21"
+    eslint-config-toolkit-base "0.0.23"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"
@@ -2979,7 +2992,7 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-import@^2.14.0:
+eslint-plugin-import@^2.13.0, eslint-plugin-import@^2.14.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.14.0.tgz#6b17626d2e3e6ad52cfce8807a845d15e22111a8"
   integrity sha512-FpuRtniD/AY6sXByma2Wr0TXvXJ4nA/2/04VPlfpmUDPOpOY264x+ILiwnrk/k4RINgDAyFZByxqPUbSQ5YE7g==
@@ -5477,11 +5490,6 @@ lodash.clonedeep@^4.3.2:
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
-lodash.get@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
-  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
-
 lodash.kebabcase@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.kebabcase/-/lodash.kebabcase-4.1.1.tgz#8489b1cb0d29ff88195cceca448ff6d6cc295c36"
@@ -5506,11 +5514,6 @@ lodash.pick@4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
   integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
-
-lodash.set@^4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
-  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
 
 lodash.snakecase@4.1.1:
   version "4.1.1"
