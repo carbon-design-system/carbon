@@ -44,23 +44,42 @@ Please refer to the [Contribution Guidelines](./.github/CONTRIBUTING.md) before 
 
 We recommend the use of [React Storybook](https://github.com/storybooks/react-storybook) for developing components.
 
-1. (Optional) Set `true` to `CARBON_USE_EXPERIMENTAL_FEATURES` environment variable to test some of the experimental features:
+1. (Optional) Set environment variables:
 
-   ```
-   $ export CARBON_USE_EXPERIMENTAL_FEATURES=true
-   ```
+   * `true` to `CARBON_USE_EXPERIMENTAL_FEATURES` environment variable to test some of the experimental features:
 
-2) Start the server:
+     ```
+     $ export CARBON_USE_EXPERIMENTAL_FEATURES=true
+     ```
+
+   * `true` to `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS` environment variable to use external CSS, making style source link usable in DOM inspector:
+
+     ```
+     $ export CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS=true
+     ```
+
+   * `true` to `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP` environment variable to use Sass source map, making style source link point to the original Sass code:
+
+     ```
+     $ export CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true
+     ```
+
+Caveats:
+
+* `CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS=true` and `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true` make WebPack builds slightly slower.
+* With `CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP=true`, the source map (hitting style source link in DOM inspector) sometimes leads you to a mix-in, instead of a style rule calling the mix-in, which may get you lost.
+
+2. Start the server:
 
    ```
    $ yarn storybook
    ```
 
-3) Open browser to `http://localhost:9000/`.
+3. Open browser to `http://localhost:9000/`.
 
-4) Develop components in their respective folders (`/components` or `/internal`).
+4. Develop components in their respective folders (`/components` or `/internal`).
 
-5) Write stories for your components in `/.storybook`.
+5. Write stories for your components in `/.storybook`.
 
 ## Contributing
 

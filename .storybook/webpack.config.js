@@ -1,11 +1,55 @@
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const useExperimentalFeatures =
   process.env.CARBON_USE_EXPERIMENTAL_FEATURES === 'true';
 
+const useExternalCss =
+  process.env.CARBON_REACT_STORYBOOK_USE_EXTERNAL_CSS === 'true';
+
+const useStyleSourceMap =
+  process.env.CARBON_REACT_STORYBOOK_USE_STYLE_SOURCEMAP === 'true';
+
 const replaceTable = {
   componentsX: useExperimentalFeatures,
 };
+
+const styleLoaders = [
+  {
+    loader: 'css-loader',
+    options: {
+      importLoaders: 2,
+      sourceMap: useStyleSourceMap,
+    },
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      plugins: () => [
+        require('autoprefixer')({
+          browsers: ['last 1 version', 'ie >= 11'],
+        }),
+      ],
+      sourceMap: useStyleSourceMap,
+    },
+  },
+  {
+    loader: 'sass-loader',
+    options: {
+      includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+      data: `
+        $feature-flags: (
+          components-x: ${useExperimentalFeatures},
+          grid: ${useExperimentalFeatures},
+          ui-shell: ${useExperimentalFeatures},
+        );
+      `,
+      sourceMap: useStyleSourceMap,
+      // Ref: webpack-contrib/sass-loader#272
+      outputStyle: useStyleSourceMap ? 'compressed' : 'expanded',
+    },
+  },
+];
 
 module.exports = {
   module: {
@@ -42,37 +86,19 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          { loader: 'style-loader' },
-          {
-            loader: 'css-loader',
-            options: { importLoaders: 2 },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                require('autoprefixer')({
-                  browsers: ['last 1 version', 'ie >= 11'],
-                }),
-              ],
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-              data: `
-                $feature-flags: (
-                  components-x: ${useExperimentalFeatures},
-                  grid: ${useExperimentalFeatures},
-                  ui-shell: ${useExperimentalFeatures},
-                );
-              `,
-            },
-          },
-        ],
+        use: !useExternalCss
+          ? [{ loader: 'style-loader' }, ...styleLoaders]
+          : ExtractTextPlugin.extract({
+              use: styleLoaders,
+            }),
       },
     ],
   },
+  plugins: !useExternalCss
+    ? []
+    : [
+        new ExtractTextPlugin({
+          filename: '[name].[contenthash].css',
+        }),
+      ],
 };
