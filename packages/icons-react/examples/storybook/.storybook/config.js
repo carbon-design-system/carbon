@@ -1,11 +1,14 @@
-import { configure } from '@storybook/react';
-import { setOptions } from '@storybook/addon-options';
+import { addDecorator, configure } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
+import { withOptions } from '@storybook/addon-options';
 
-setOptions({
+withOptions({
   name: `@carbon/icons-react`,
   url:
     'https://github.com/IBM/carbon-elements/tree/master/packages/icons-react',
 });
+
+addDecorator(withInfo);
 
 function loadStories() {
   const req = require.context('../stories', true, /\-story\.js$/);

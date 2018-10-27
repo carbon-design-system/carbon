@@ -27,5 +27,8 @@
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "rollup": "^0.66.6"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.2"
   }
 }

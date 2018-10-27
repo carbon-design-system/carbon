@@ -2,4 +2,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import CloseGlyph from '../../../lib/close/glyph';
 
-storiesOf('CloseGlyph', module).add('default', () => <CloseGlyph />);
+storiesOf('CloseGlyph', module)
+  .add('default', () => <CloseGlyph />)
+  .add('with accessibility label', () => (
+    <CloseGlyph aria-label="Accessibility label" />
+  ))
+  .add('with title', () => (
+    <CloseGlyph focusable>
+      <title>Icon title</title>
+    </CloseGlyph>
+  ));

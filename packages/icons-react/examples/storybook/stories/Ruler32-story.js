@@ -2,4 +2,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Ruler32 from '../../../lib/ruler/32';
 
-storiesOf('Ruler32', module).add('default', () => <Ruler32 />);
+storiesOf('Ruler32', module)
+  .add('default', () => <Ruler32 />)
+  .add('with accessibility label', () => (
+    <Ruler32 aria-label="Accessibility label" />
+  ))
+  .add('with title', () => (
+    <Ruler32 focusable>
+      <title>Icon title</title>
+    </Ruler32>
+  ));

@@ -39,7 +39,7 @@ async function build() {
 
   const toolsBundle = await rollup({
     input: toolsPath,
-    external: ['react'],
+    external: ['prop-types', 'react'],
   });
   await Promise.all(
     MODULE_TYPES.map(async ({ type, folder }) => {
@@ -51,6 +51,7 @@ async function build() {
         outputOptions.name = 'CarbonIconsReactTools';
         outputOptions.globals = {
           react: 'React',
+          'prop-types': 'PropTypes',
         };
       }
       return toolsBundle.write(outputOptions);
@@ -106,9 +107,11 @@ export default createIconComponent({
             input: filepath,
             external(id) {
               if (type === 'umd') {
-                return id === 'react';
+                return id === 'react' || id === 'prop-types';
               }
-              return id === 'react' || id.includes('tools.js');
+              return (
+                id === 'react' || id === 'prop-types' || id.includes('tools.js')
+              );
             },
           });
 
@@ -121,6 +124,7 @@ export default createIconComponent({
             outputOptions.name = exportName;
             outputOptions.globals = {
               react: 'React',
+              'prop-types': 'PropTypes',
             };
           }
 
@@ -157,7 +161,7 @@ export default createIconComponent({
 
   const entrypointBundle = await rollup({
     input: entrypointPath,
-    external: ['react'],
+    external: ['prop-types', 'react'],
   });
 
   await Promise.all(
@@ -171,6 +175,7 @@ export default createIconComponent({
         outputOptions.name = 'CarbonIconsReact';
         outputOptions.globals = {
           react: 'React',
+          'prop-types': 'PropTypes',
         };
       }
 
@@ -189,7 +194,16 @@ export default createIconComponent({
 import { storiesOf } from '@storybook/react';
 import ${getModuleName(name)} from '../../../lib/${file.name}/${file.size}';
 
-storiesOf('${name}', module).add('default', () => <${getModuleName(name)} />);
+storiesOf('${name}', module)
+  .add('default', () => <${getModuleName(name)} />)
+  .add('with accessibility label', () => <${getModuleName(
+    name
+  )} aria-label="Accessibility label" />)
+  .add('with title', () => (
+    <${getModuleName(name)} focusable>
+      <title>Icon title</title>
+    </${getModuleName(name)}>
+  ));
 `;
 
       await fs.writeFile(

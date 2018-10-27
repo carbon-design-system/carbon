@@ -10,8 +10,11 @@
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-react": "^7.0.0",
-    "@storybook/addon-options": "^3.4.11",
-    "@storybook/react": "^3.4.11",
+    "@storybook/addon-actions": "^4.0.0-rc.6",
+    "@storybook/addon-info": "^4.0.0-rc.6",
+    "@storybook/addon-options": "^4.0.0-rc.6",
+    "@storybook/addon-storysource": "^4.0.0-rc.6",
+    "@storybook/react": "^4.0.0-rc.6",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.4",
     "react": "^16.5.2",
