@@ -1,0 +1,146 @@
+[
+  {
+    "filename": "colors.scss",
+    "package": "@carbon/colors",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_core.scss",
+    "package": "@carbon/grid",
+    "size": 7832,
+    "gzip": 1079
+  },
+  {
+    "filename": "_gutter.scss",
+    "package": "@carbon/grid",
+    "size": 6536,
+    "gzip": 363
+  },
+  {
+    "filename": "_helpers.scss",
+    "package": "@carbon/grid",
+    "size": 332,
+    "gzip": 159
+  },
+  {
+    "filename": "_padding.scss",
+    "package": "@carbon/grid",
+    "size": 10887,
+    "gzip": 571
+  },
+  {
+    "filename": "_utilities.scss",
+    "package": "@carbon/grid",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_variables.scss",
+    "package": "@carbon/grid",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "grid.scss",
+    "package": "@carbon/grid",
+    "size": 25923,
+    "gzip": 1941
+  },
+  {
+    "filename": "_breakpoint.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_convert.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_key-height.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_mini-unit.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_spacing.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_utilities.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "layout.scss",
+    "package": "@carbon/layout",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "import-once.scss",
+    "package": "@carbon/scss-helpers",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_font-family.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_reset.scss",
+    "package": "@carbon/type",
+    "size": 242,
+    "gzip": 194
+  },
+  {
+    "filename": "_scale.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_styles.scss",
+    "package": "@carbon/type",
+    "size": 0,
+    "gzip": 20
+  },
+  {
+    "filename": "_font-face.scss",
+    "package": "@carbon/type",
+    "size": 13019,
+    "gzip": 894
+  },
+  {
+    "filename": "_mono.scss",
+    "package": "@carbon/type",
+    "size": 6509,
+    "gzip": 658
+  },
+  {
+    "filename": "_sans.scss",
+    "package": "@carbon/type",
+    "size": 6509,
+    "gzip": 661
+  },
+  {
+    "filename": "type.scss",
+    "package": "@carbon/type",
+    "size": 13262,
+    "gzip": 1016
+  }
+]

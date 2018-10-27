@@ -55,4 +55,5 @@ class ConsoleReporter {
 
 module.exports = {
   ConsoleReporter,
+  reporter: new ConsoleReporter(),
 };

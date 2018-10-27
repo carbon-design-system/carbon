@@ -4,6 +4,7 @@ const program = require('commander');
 const packageJson = require('../package.json');
 const { ConsoleReporter } = require('./reporter');
 const check = require('./commands/check');
+const measure = require('./commands/measure');
 
 const reporter = new ConsoleReporter();
 
@@ -28,7 +29,18 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
       })
     );
 
-  // TODO: `measure`, measure package(s) size
+  program
+    .command('measure <glob>')
+    .description('measure the compiled size of your package(s)')
+    .option('-i, --ignore <glob>', 'pass in a glob of files to ignore')
+    .option('-o, --output <path>', 'specify the output path of your report')
+    .action((pattern, cmd) =>
+      measure(pattern, {
+        cwd,
+        ignore: cmd.ignore,
+        output: cmd.output,
+      })
+    );
 
   program.parse(argv);
 }

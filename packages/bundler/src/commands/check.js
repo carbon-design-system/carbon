@@ -3,10 +3,8 @@
 const path = require('path');
 const chalk = require('chalk');
 const glob = require('../glob');
-const sass = require('node-sass');
-const { ConsoleReporter } = require('../reporter');
-
-const reporter = new ConsoleReporter();
+const { reporter } = require('../reporter');
+const compile = require('../tools/compile');
 
 async function check(pattern, { ignore, cwd } = {}) {
   reporter.info(`Running in: ${cwd}`);
@@ -23,25 +21,7 @@ async function check(pattern, { ignore, cwd } = {}) {
   reporter.info(`Compiling ${files.length} files...`);
 
   const results = await Promise.all(
-    files.map(
-      file =>
-        new Promise((resolve, reject) => {
-          const filepath = path.join(cwd, file);
-          sass.render(
-            {
-              file: filepath,
-              ...defaultOptions,
-            },
-            (error, result) => {
-              resolve({
-                result,
-                filepath,
-                error,
-              });
-            }
-          );
-        })
-    )
+    compile(files.map(file => path.join(cwd, file)))
   );
 
   const errors = results.reduce((acc, result) => {
@@ -60,6 +40,7 @@ async function check(pattern, { ignore, cwd } = {}) {
       console.log(chalk.gray(formatted));
     });
     process.exit(1);
+    return;
   }
 
   reporter.success(`Successfully compiled ${files.length} files! 🎉`);
