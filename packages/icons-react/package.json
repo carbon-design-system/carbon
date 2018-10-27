@@ -22,10 +22,10 @@
     "@carbon/icons": "0.0.1-alpha.2",
     "change-case": "^3.0.2",
     "del": "^3.0.0",
-    "fs-extra": "^6.0.1",
-    "prettier": "^1.13.7",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "rollup": "^0.62.0"
+    "fs-extra": "^7.0.0",
+    "prettier": "^1.14.3",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "rollup": "^0.66.6"
   }
 }

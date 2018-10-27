@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "fs-extra": "^7.0.0",
-    "node-sass": "^4.9.3",
-    "prettier": "^1.14.2"
+    "node-sass": "^4.9.4",
+    "prettier": "^1.14.3"
   },
   "eyeglass": {
     "exports": false,

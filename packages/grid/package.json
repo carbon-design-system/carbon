@@ -10,8 +10,5 @@
   },
   "dependencies": {
     "@carbon/layout": "0.0.1-alpha.2"
-  },
-  "devDependencies": {
-    "parcel-bundler": "^1.10.0-beta.1"
   }
 }
