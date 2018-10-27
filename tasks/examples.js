@@ -143,12 +143,6 @@ async function main() {
     remote: GH_REMOTE,
     message: 'Auto-generated commit',
   };
-  if (process.env.GH_USER) {
-    publishOptions.user = process.env.GH_USER;
-  }
-  if (process.env.GH_EMAIL) {
-    publishOptions.email = process.env.GH_EMAIL;
-  }
 
   ghpages.publish(BUILD_DIR, publishOptions, error => {
     if (error) {
