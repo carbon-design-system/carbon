@@ -809,20 +809,6 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.1.3.tgz#b700d97385fa91affed60c71dfd51c67e9dad762"
   integrity sha512-QsYGKdhhuDFNq7bjm2r44y0mp5xW3uO3csuTPDWZc0OIiMQv+AIY5Cqwd4mJiC5N8estVl7qlvOx1hbtOuUWbw==
 
-"@storybook/addon-a11y@^4.0.0-rc.6":
-  version "4.0.0-rc.6"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-4.0.0-rc.6.tgz#67f138400e92a9a3d5ed39e64e028587c021b55b"
-  integrity sha512-F/6CCHt3Fa2WJZMiOivF0FN6+rqk+CNnoBys4pp8EfnjFMuhXMmiH8VVW1kMz5FP2M0BaesR1U5YUsbpFBIEdA==
-  dependencies:
-    "@emotion/styled" "^0.10.6"
-    "@storybook/addons" "4.0.0-rc.6"
-    "@storybook/client-logger" "4.0.0-rc.6"
-    "@storybook/components" "4.0.0-rc.6"
-    "@storybook/core-events" "4.0.0-rc.6"
-    axe-core "^3.1.2"
-    global "^4.3.2"
-    prop-types "^15.6.2"
-
 "@storybook/addon-actions@^4.0.0-rc.6":
   version "4.0.0-rc.6"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-4.0.0-rc.6.tgz#d788ac929cadc00cd8ba3f2bf2db95959551249c"
@@ -1534,11 +1520,6 @@ autoprefixer@^9.2.1:
     num2fraction "^1.2.2"
     postcss "^7.0.5"
     postcss-value-parser "^3.3.1"
-
-axe-core@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.1.2.tgz#ca0aff897ebefca7552f97859dc1217c06c4f9e6"
-  integrity sha512-e1WVs0SQu3tM29J9a/mISGvlo2kdCStE+yffIAJF6eb42FS+eUFEVz9j4rgDeV2TAfPJmuOZdRetWYycIbK7Vg==
 
 babel-code-frame@^6.26.0:
   version "6.26.0"

@@ -139,6 +139,12 @@ async function main() {
 
   await fs.writeFile(path.join(BUILD_DIR, 'index.html'), indexFile);
 
+  // Copy icons over, useful for adding download links
+  await fs.copy(
+    path.resolve(__dirname, '../packages/icons/svg'),
+    path.join(BUILD_DIR, 'icons/svg')
+  );
+
   const publishOptions = {
     remote: GH_REMOTE,
     message: 'Auto-generated commit',

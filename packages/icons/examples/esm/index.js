@@ -9,6 +9,7 @@ const App = ({ icons }) => (
         <th>Name</th>
         <th>Size</th>
         <th>Preview</th>
+        <th>Download</th>
         <th>GitHub</th>
         <th>Report Issue</th>
       </tr>
@@ -33,6 +34,9 @@ const App = ({ icons }) => (
                 <div className={`icon-preview icon-preview--${variant}`}>
                   {svg}
                 </div>
+              </td>
+              <td>
+                <a href={`../../svg/${icon.name}-${icon.size}.svg`}>Download</a>
               </td>
               <td>
                 <a
