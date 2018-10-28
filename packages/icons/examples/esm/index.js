@@ -36,7 +36,9 @@ const App = ({ icons }) => (
                 </div>
               </td>
               <td>
-                <a href={`../../svg/${icon.name}-${icon.size}.svg`}>Download</a>
+                <a href={`../../svg/${icon.name}-${icon.size}.svg`} download>
+                  Download
+                </a>
               </td>
               <td>
                 <a
