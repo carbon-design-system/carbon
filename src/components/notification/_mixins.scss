@@ -18,3 +18,12 @@
 @mixin notification--color($color) {
   border-left: 6px solid $color;
 }
+
+@mixin notification--experimental($color, $background-color) {
+  border-color: $color;
+  background: $background-color;
+
+  .#{$prefix}--inline-notification__icon {
+    fill: $color;
+  }
+}

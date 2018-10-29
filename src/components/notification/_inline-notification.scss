@@ -13,7 +13,7 @@
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
-@include exports('inline-notifications') {
+@mixin inline-notifications {
   .#{$prefix}--inline-notification {
     @include reset;
     @include font-family;
@@ -100,5 +100,103 @@
     position: absolute;
     top: 3px;
     right: 1px;
+  }
+}
+
+@mixin inline-notifications--x {
+  .#{$prefix}--inline-notification {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+    @include typescale('zeta');
+    display: flex;
+    height: rem(48px);
+    max-width: rem(288px);
+    color: $text-01;
+    margin-top: $spacing-md;
+    margin-bottom: $spacing-md;
+    border-left-width: rem(2px);
+    border-left-style: solid;
+  }
+
+  .#{$prefix}--inline-notification--error {
+    @include notification--experimental($support-01, $notification-error-background-color);
+  }
+
+  .#{$prefix}--inline-notification--success {
+    @include notification--experimental($support-02, $notification-success-background-color);
+  }
+
+  .#{$prefix}--inline-notification--info {
+    @include notification--experimental($support-04, $notification-info-background-color);
+  }
+
+  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
+    display: none;
+  }
+
+  .#{$prefix}--inline-notification--warning {
+    @include notification--experimental($support-03, $notification-warning-background-color);
+  }
+
+  .#{$prefix}--inline-notification__details {
+    display: flex;
+    align-items: center;
+    margin: 0 $spacing-md;
+    width: 100%;
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    height: rem(20px);
+    width: rem(20px);
+    min-height: rem(20px);
+    min-width: rem(20px);
+    margin-right: $spacing-md;
+  }
+
+  .#{$prefix}--inline-notification__text-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .#{$prefix}--inline-notification__title {
+    @include typescale('zeta');
+    font-weight: 600;
+    margin: 0 $spacing-2xs 0 0;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--inline-notification__subtitle {
+    @include typescale('zeta');
+    min-width: 200px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('reset');
+    background: transparent;
+    border: none;
+    border-left: 1px solid $ui-02;
+    cursor: pointer;
+    padding: 0;
+    height: rem(48px);
+    width: rem(48px);
+    transition: outline $transition--base;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+}
+
+@include exports('inline-notifications') {
+  @if feature-flag-enabled('components-x') {
+    @include inline-notifications--x;
+  } @else {
+    @include inline-notifications;
   }
 }

@@ -2,13 +2,13 @@
 
 const items = [
   {
-    type: 'error',
+    type: 'info',
     title: 'Notification title',
     subtitle: 'Subtitle text goes here.',
     timestamp: 'Time stamp [00:00:00]',
   },
   {
-    type: 'info',
+    type: 'error',
     title: 'Notification title',
     subtitle: 'Subtitle text goes here.',
     timestamp: 'Time stamp [00:00:00]',
@@ -16,7 +16,8 @@ const items = [
   {
     type: 'success',
     title: 'Notification title',
-    subtitle: 'Subtitle text goes here.',
+    subtitle:
+      'WARNING: The default font path (https://unpkg.com/carbon-components@latest/src/globals/fonts) should be used only for demonstration/evaluation purposes.',
     timestamp: 'Time stamp [00:00:00]',
   },
   {
