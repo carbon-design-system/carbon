@@ -120,6 +120,7 @@
     display: inline-block;
     vertical-align: baseline;
     margin-bottom: $spacing-xs;
+    line-height: rem(16px);
   }
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
