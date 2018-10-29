@@ -120,6 +120,7 @@
     display: inline-block;
     vertical-align: baseline;
     margin-bottom: $spacing-xs;
+    line-height: rem(16px);
   }
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
@@ -136,6 +137,10 @@
     @include skeleton;
     width: rem(75px);
     height: rem(14px);
+  }
+
+  input[type='number'] {
+    font-family: $font-family-mono;
   }
 
   input[data-invalid],

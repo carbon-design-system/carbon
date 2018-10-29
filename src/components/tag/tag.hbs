@@ -1,3 +1,10 @@
+{{#if componentsX}}
 {{#each tags}}
-  <span class="bx--tag bx--tag--{{type}}">{{label}}</span>
+<span class="bx--tag bx--tag--{{type}}">{{label}}</span>
 {{/each}}
+<span class="bx--tag bx--tag--basic" disabled>Component</span>
+{{else}}
+{{#each tags}}
+<span class="bx--tag bx--tag--{{type}}">{{label}}</span>
+  {{/each}}
+{{/if}}
