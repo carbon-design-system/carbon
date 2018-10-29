@@ -30,7 +30,7 @@ const App = ({ icons }) => (
                 <a href={`#${id}`}>{icon.name}</a>
               </td>
               <td className="icon-size">{`${width}x${height}`}</td>
-              <td>
+              <td className="icon-preview-container">
                 <div className={`icon-preview icon-preview--${variant}`}>
                   {svg}
                 </div>
