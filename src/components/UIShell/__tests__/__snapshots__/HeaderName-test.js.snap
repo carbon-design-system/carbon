@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderName should render 1`] = `
+<HeaderName
+  className="custom-class"
+  href="/"
+  prefix="IBM"
+>
+  <a
+    className="bx--platform-header__name custom-class"
+    href="/"
+  >
+    IBM
+     
+    <span
+      className="bx--platform-header__platform-name"
+    >
+      Name
+    </span>
+  </a>
+</HeaderName>
+`;

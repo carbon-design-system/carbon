@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render 1`] = `
+<Header
+  className="custom-class"
+>
+  <header
+    className="bx--platform-header custom-class"
+  />
+</Header>
+`;
