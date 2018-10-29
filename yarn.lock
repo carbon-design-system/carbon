@@ -8087,6 +8087,25 @@ jest-changed-files@^23.4.2:
   dependencies:
     throat "^4.0.0"
 
+jest-circus@^23.6.0:
+  version "23.6.0"
+  resolved "https://registry.yarnpkg.com/jest-circus/-/jest-circus-23.6.0.tgz#8f3edf425c2bd89fff46438d491f6e1e192e2bf7"
+  integrity sha512-fzfLQpWeEmUtKrAJZb9T2tim+YCOHRR6WuYaRdz5cMOFtmkm2iJQ0afWxFyBfNj3DcIQ6SF8C9Ulbzk4hYMFOA==
+  dependencies:
+    babel-traverse "^6.0.0"
+    chalk "^2.0.1"
+    co "^4.6.0"
+    expect "^23.6.0"
+    is-generator-fn "^1.0.0"
+    jest-diff "^23.6.0"
+    jest-each "^23.6.0"
+    jest-matcher-utils "^23.6.0"
+    jest-message-util "^23.4.0"
+    jest-snapshot "^23.6.0"
+    jest-util "^23.4.0"
+    pretty-format "^23.6.0"
+    stack-utils "^1.0.1"
+
 jest-cli@^23.6.0:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-23.6.0.tgz#61ab917744338f443ef2baa282ddffdd658a5da4"
