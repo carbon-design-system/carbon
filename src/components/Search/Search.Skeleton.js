@@ -23,7 +23,7 @@ export default class SearchSkeleton extends Component {
     return (
       <div className={searchClasses} role="search">
         {
-          /* eslint-disable jsx-a11y/label-has-for */
+          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control */
           <label htmlFor={id} className="bx--label" />
         }
         <div className="bx--search-input" />

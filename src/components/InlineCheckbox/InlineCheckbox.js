@@ -94,7 +94,7 @@ export default class InlineCheckbox extends React.Component {
       <>
         <input {...inputProps} />
         {
-          /* eslint-disable jsx-a11y/label-has-for */
+          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control */
           <label
             htmlFor={id}
             className="bx--checkbox-label"
