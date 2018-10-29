@@ -74,32 +74,6 @@ const axe = require('gulp-axe-webdriver');
 const promisePortSassDevBuild = portscanner.findAPortNotInUse(cloptions.portSassDevBuild, cloptions.portSassDevBuild + 100);
 
 /**
- * @param {ComponentCollection|Component} metadata The component data.
- * @returns {Promise<ComponentCollection|Component>}
- *   The normalized component data,
- *   esp. with README.md content assigned to `.notes` property for component with variants (`ComponentCollection`).
- *   Fractal automatically populate `.notes` for component without variants (`Component`).
- */
-const normalizeMetadata = metadata => {
-  const items = metadata.isCollection ? metadata : !metadata.isCollated && metadata.variants && metadata.variants();
-  const visibleItems = items && items.filter(item => !item.isHidden);
-  const metadataJSON = typeof metadata.toJSON !== 'function' ? metadata : metadata.toJSON();
-  if (!metadata.isCollection && visibleItems && visibleItems.size === 1) {
-    const firstVariant = visibleItems.first();
-    return Object.assign(metadataJSON, {
-      context: firstVariant.context,
-      notes: firstVariant.notes,
-      preview: firstVariant.preview,
-      variants: undefined,
-    });
-  }
-  return Object.assign(metadataJSON, {
-    items: !items || items.size <= 1 ? undefined : items.map(normalizeMetadata).toJSON().items,
-    variants: undefined,
-  });
-};
-
-/**
  * Dev server
  */
 
@@ -355,19 +329,16 @@ gulp.task('html:dev', ['scripts:dev:feature-flags'], () =>
   Promise.all([mkdirp(path.resolve(__dirname, 'demo/code')), mkdirp(path.resolve(__dirname, 'demo/component'))]).then(() =>
     templates.cache.get().then(({ componentSource, docSource, contents }) =>
       Promise.all([
-        Promise.all([Promise.all(componentSource.items().map(normalizeMetadata)), docSource.items(), contents]).then(
-          ([componentItems, docItems]) =>
-            writeFile(
-              path.resolve(__dirname, 'demo/index.html'),
-              contents.get('demo-nav')({
-                body: contents.get('demo-nav-data')({
-                  componentItems,
-                  docItems,
-                  routeWithQueryArgs: true,
-                  useStaticFullRenderPage: true,
-                }),
-              })
-            )
+        writeFile(
+          path.resolve(__dirname, 'demo/index.html'),
+          contents.get('demo-nav')({
+            yield: contents.get('demo-nav-data')({
+              componentSource,
+              docSource,
+              routeWithQueryArgs: true,
+              useStaticFullRenderPage: true,
+            }),
+          })
         ),
         ...componentSource
           .map(({ handle }) =>

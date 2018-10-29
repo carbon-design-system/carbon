@@ -19,31 +19,24 @@ const checkStatus = response => {
 };
 
 /**
- * @param {Object[]} componentItems The components data.
- * @returns {Object[]} The components data with the contents of all components cleared.
+ * @param {Object[]} componentItems List of Fractal Component instance data.
+ * @returns {Object[]} List of Fractal Component instance data with the contents of all components cleared.
  */
 const clearContent = componentItems =>
-  componentItems.map(
-    item =>
-      !item.items
-        ? {
-            ...item,
-            renderedContent: undefined,
-          }
-        : {
-            ...item,
-            items: item.items.map(subItem => ({
-              ...subItem,
-              renderedContent: undefined,
-            })),
-          }
-  );
+  componentItems.map(item => ({
+    ...item,
+    items: item.items.map(subItem => ({
+      ...subItem,
+      renderedContent: undefined,
+    })),
+  }));
 
 /**
- * @param {Object[]} componentItems The components data.
+ * @param {Object[]} componentItems List of Fractal Component instance data.
  * @param {string} id The component ID.
  * @param {Object|string} content The content. String for component content, object for variant content (keyed by variant ID).
- * @returns {Object[]} The components data with the content of the given component ID populated with the given content.
+ * @returns {Object[]}
+ *   List of Fractal Component instance data with the content of the given component ID populated with the given content.
  */
 const applyContent = (componentItems, id, content) => {
   if (Object(content) === content) {
@@ -82,7 +75,7 @@ const applyContent = (componentItems, id, content) => {
 };
 
 /**
- * @param {Object[]} componentItems The components data.
+ * @param {Object[]} componentItems List of Fractal Component instance data.
  * @returns {Object[]} The component data with `isHidden` moved to `meta.isDefaultHidden`.
  */
 const preserveDefaultHidden = componentItems =>
@@ -92,6 +85,7 @@ const preserveDefaultHidden = componentItems =>
       ...item,
       meta: {
         ...meta,
+        // `hidden` in config data is set to `isHidden` in Fractal Component instance
         isDefaultHidden: item.isHidden,
       },
       ...(!subItems
@@ -103,7 +97,7 @@ const preserveDefaultHidden = componentItems =>
   });
 
 /**
- * @param {Object[]} componentItems The components data.
+ * @param {Object[]} componentItems List of Fractal Component instance data.
  * @param {boolean} isComponentsX `true` if the current style is of the experimental version.
  * @returns {Object[]} The component data with `isHidden` calculated with `meta.isDefaultHidden` and `isComponentsX`.
  */
