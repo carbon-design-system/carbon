@@ -147,6 +147,18 @@
     }
   }
 
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 2.25rem;
+  }
+
+  .#{$prefix}--number--helpertext:not(.#{$prefix}--number--nolabel) .#{$prefix}--number__controls {
+    top: 3.625rem;
+  }
+
   .#{$prefix}--number--light input[type='number'] {
     background: $field-02;
   }
@@ -290,6 +302,18 @@
       outline: 2px solid $support-01;
       outline-offset: -2px;
     }
+  }
+
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 2.25rem;
+  }
+
+  .#{$prefix}--number--helpertext:not(.#{$prefix}--number--nolabel) .#{$prefix}--number__controls {
+    top: 3.625rem;
   }
 
   .#{$prefix}--number--light input[type='number'] {
