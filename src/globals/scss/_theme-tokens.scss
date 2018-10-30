@@ -111,7 +111,7 @@
   $brand-01: $ibm-colors__blue--60 !default !global;
   $brand-02: $ibm-colors__blue--80 !default !global;
   $brand-03: $ibm-colors__blue--60 !default !global;
-  $inverse-01: $ibm-colors__white !default !global;
+  $inverse-01: $ibm-colors__gray--10 !default !global;
   $inverse-02: $ibm-colors__white !default !global; // TODO: Define for experimental
   $ui-01: $ibm-colors__gray--10 !default !global;
   $ui-02: $ibm-colors__white !default !global;
@@ -194,6 +194,7 @@
   // Content Switcher
   $content-switcher-border-radius: 0px !default !global;
   $content-switcher-option-border: 1px solid $brand-01 !default !global;
+  $content-switcher-divider: $ibm-colors__gray--30 !default !global;
 
   // Data Table
   $data-table-heading-transform: uppercase !default !global;
