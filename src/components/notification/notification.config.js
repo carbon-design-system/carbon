@@ -17,7 +17,7 @@ const items = [
     type: 'success',
     title: 'Notification title',
     subtitle:
-      'WARNING: The default font path (https://unpkg.com/carbon-components@latest/src/globals/fonts) should be used only for demonstration/evaluation purposes.',
+      'Our goal is to become better at our craft and raise our collective knowledge by sharing experiences, best practices, what we have recently learned or what we are working on.',
     timestamp: 'Time stamp [00:00:00]',
   },
   {

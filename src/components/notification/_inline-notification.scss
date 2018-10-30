@@ -7,6 +7,7 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/mixins';
@@ -110,13 +111,27 @@
     @include font-smoothing;
     @include typescale('zeta');
     display: flex;
-    height: rem(48px);
+    height: auto;
+    min-height: rem(48px);
+    min-width: rem(288px);
     max-width: rem(288px);
     color: $text-01;
     margin-top: $spacing-md;
     margin-bottom: $spacing-md;
     border-left-width: rem(2px);
     border-left-style: solid;
+
+    @include exp-breakpoint(md) {
+      max-width: rem(608px);
+    }
+
+    @include exp-breakpoint(lg) {
+      max-width: rem(736px);
+    }
+
+    @include exp-breakpoint(max) {
+      max-width: rem(832px);
+    }
   }
 
   .#{$prefix}--inline-notification--error {
@@ -143,7 +158,6 @@
     display: flex;
     align-items: center;
     margin: 0 $spacing-md;
-    width: 100%;
   }
 
   .#{$prefix}--inline-notification__icon {
@@ -156,8 +170,8 @@
 
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
-    align-items: center;
-    width: 100%;
+    flex-wrap: wrap;
+    padding: $spacing-sm 0;
   }
 
   .#{$prefix}--inline-notification__title {
@@ -169,22 +183,19 @@
 
   .#{$prefix}--inline-notification__subtitle {
     @include typescale('zeta');
-    min-width: 200px;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-word;
   }
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
     background: transparent;
     border: none;
-    border-left: 1px solid $ui-02;
     cursor: pointer;
     padding: 0;
     height: rem(48px);
     width: rem(48px);
+    min-width: rem(48px);
+    max-width: rem(48px);
     transition: outline $transition--base;
 
     &:focus {
