@@ -7,6 +7,7 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/mixins';
@@ -102,11 +103,10 @@
     @include font-family;
     @include font-smoothing;
     display: flex;
-    // justify-content: space-between;
-    width: 16.875rem;
+    justify-content: space-between;
+    width: rem(288px);
     height: auto;
     padding-left: $spacing-md;
-    background-color: $ui-01;
     color: $text-01;
     margin-top: $spacing-xs;
     margin-bottom: $spacing-xs;
@@ -116,6 +116,10 @@
 
     &:first-child {
       margin-top: $spacing-md;
+    }
+
+    @include exp-breakpoint(max) {
+      width: rem(352px);
     }
   }
 
@@ -135,6 +139,15 @@
     @include notification--experimental($support-03, $notification-warning-background-color);
   }
 
+  .#{$prefix}--toast-notification__icon {
+    height: rem(20px);
+    width: rem(20px);
+    min-height: rem(20px);
+    min-width: rem(20px);
+    margin-right: $spacing-md;
+    margin-top: $spacing-md;
+  }
+
   .#{$prefix}--toast-notification__close-button {
     @include focus-outline('reset');
     background-color: transparent;
@@ -146,7 +159,7 @@
     width: rem(48px);
     min-height: rem(48px);
     min-width: rem(48px);
-    transition: outline $transition--base;
+    transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
       @include focus-outline('outline');

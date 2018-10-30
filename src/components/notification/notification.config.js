@@ -1,5 +1,7 @@
 'use strict';
 
+const { componentsX } = require('../../globals/js/feature-flags');
+
 const items = [
   {
     type: 'info',
@@ -36,6 +38,7 @@ module.exports = {
       context: {
         variant: 'inline',
         items,
+        componentsX,
       },
     },
     {
@@ -48,6 +51,7 @@ module.exports = {
       context: {
         variant: 'toast',
         items,
+        componentsX,
       },
     },
   ],

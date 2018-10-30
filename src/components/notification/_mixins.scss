@@ -23,7 +23,13 @@
   border-color: $color;
   background: $background-color;
 
-  .#{$prefix}--inline-notification__icon {
+  .#{$prefix}--inline-notification__icon,
+  .#{$prefix}--toast-notification__icon {
     fill: $color;
+  }
+
+  .#{$prefix}--inline-notification__close-button:hover,
+  .#{$prefix}--toast-notification__close-button:hover {
+    background-color: darken($background-color, 15%);
   }
 }
