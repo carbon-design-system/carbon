@@ -125,6 +125,7 @@
     @include font-smoothing;
     @include typescale('zeta');
     @include font-family;
+    @include focus-outline('reset');
     background-color: $ui-01;
     display: flex;
     align-items: center;
@@ -134,8 +135,6 @@
     border: none;
     color: $text-02;
     transition: all $transition--base $carbon--standard-easing;
-    outline: 2px solid transparent;
-    outline-offset: -2px;
     position: relative;
 
     &:focus {
@@ -161,7 +160,7 @@
     display: block;
     height: rem(16px);
     width: rem(1px);
-    background-color: $ui-04;
+    background-color: $content-switcher-divider;
     position: absolute;
     z-index: 2;
     right: rem(-1px);
@@ -188,8 +187,8 @@
   }
 
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    background-color: $ui-03;
-    color: $text-01;
+    background-color: $ui-05;
+    color: $inverse-01;
     z-index: 3;
   }
 
