@@ -227,7 +227,7 @@
       @include focus-outline('outline');
     }
 
-    #{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list--selection
       &:hover:not(.#{$prefix}--structured-list-row--header-row)
       > .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list-row--selected > .#{$prefix}--structured-list-td,
