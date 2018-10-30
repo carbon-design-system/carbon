@@ -572,6 +572,10 @@
     }
   }
 
+  .#{$prefix}--date-picker--single .#{$prefix}--date-picker__icon {
+    top: 2rem;
+  }
+
   .#{$prefix}--date-picker--nolabel .#{$prefix}--date-picker__icon {
     top: rem(8px);
   }
