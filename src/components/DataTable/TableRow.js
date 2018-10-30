@@ -9,7 +9,7 @@ const TableRow = props => {
     'bx--data-table-v2--selected': props.isSelected,
   });
   const cleanProps = {
-    ...omit(props, ['ariaLabel', 'onExpand', 'isExpanded']),
+    ...omit(props, ['ariaLabel', 'onExpand', 'isExpanded', 'isSelected']),
     className: className || undefined,
   };
   return <tr {...cleanProps} />;
