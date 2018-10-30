@@ -95,7 +95,7 @@
     align-items: center;
     left: auto;
     right: 0.5rem;
-    bottom: 0.625rem;
+    top: 2rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -144,10 +144,6 @@
 
     input[type='number']:focus ~ .#{$prefix}--label {
       color: $support-01;
-    }
-
-    .#{$prefix}--number__controls {
-      bottom: 2rem;
     }
   }
 
@@ -258,7 +254,7 @@
     align-items: center;
     left: auto;
     right: 0.5rem;
-    bottom: 0.625rem;
+    top: 2rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -293,10 +289,6 @@
     input[type='number'] {
       outline: 2px solid $support-01;
       outline-offset: -2px;
-    }
-
-    .#{$prefix}--number__controls {
-      bottom: 2rem;
     }
   }
 
