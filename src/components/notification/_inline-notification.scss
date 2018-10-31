@@ -121,15 +121,15 @@
     border-left-width: rem(2px);
     border-left-style: solid;
 
-    @include exp-breakpoint(md) {
+    @include breakpoint(md) {
       max-width: rem(608px);
     }
 
-    @include exp-breakpoint(lg) {
+    @include breakpoint(lg) {
       max-width: rem(736px);
     }
 
-    @include exp-breakpoint(max) {
+    @include breakpoint(max) {
       max-width: rem(832px);
     }
   }

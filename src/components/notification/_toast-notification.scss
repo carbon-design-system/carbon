@@ -118,7 +118,7 @@
       margin-top: $spacing-md;
     }
 
-    @include exp-breakpoint(max) {
+    @include breakpoint(max) {
       width: rem(352px);
     }
   }

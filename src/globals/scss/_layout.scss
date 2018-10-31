@@ -5,9 +5,6 @@ $breakpoints: (
   bp--sm--major: 768px,
   bp--md--major: 992px,
   bp--lg--major: 1200px,
-);
-
-$exp-breakpoints: (
   sm: 320px,
   md: 672px,
   lg: 1056px,
@@ -40,27 +37,6 @@ $padding: (
 @mixin breakpoint($size) {
   @if map-has-key($breakpoints, $size) {
     @media screen and (min-width: map-get($breakpoints, $size)) {
-      @content;
-    }
-  } @else {
-    @media (min-width: $size) {
-      @content;
-    }
-  }
-}
-
-//-------------------------------------
-// @mixin: exp-breakpoint($size)
-//-------------------------------------
-// usage:
-// @include exp-breakpoint(md) {
-//    - styles here --
-// }
-//-------------------------------------
-
-@mixin exp-breakpoint($size) {
-  @if map-has-key($exp-breakpoints, $size) {
-    @media screen and (min-width: map-get($exp-breakpoints, $size)) {
       @content;
     }
   } @else {
