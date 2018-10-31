@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
+
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 
 import Button from '../Button';
@@ -24,26 +24,23 @@ storiesOf('InlineLoading', module)
   .addDecorator(withKnobs)
   .add(
     'Inline loading',
-    withInfo({
-      text: `
-        Inline Loading spinners are used when creating, updating, or deleting an item.
-        They help notify users that their change is underway, with different states for 'loading' and 'success'.
-      `,
-    })(() => (
+    () => (
       <div>
         <InlineLoading {...props()} />
       </div>
-    ))
+    ),
+    {
+      info: {
+        text: `
+            Inline Loading spinners are used when creating, updating, or deleting an item.
+            They help notify users that their change is underway, with different states for 'loading' and 'success'.
+          `,
+      },
+    }
   )
   .add(
     'UX example',
-    withInfo({
-      text: `
-        This is a full example of how to levarage the <InlineLoading /> component to create a nice user experience when submitting a form.
-
-        For the full source code of this example, check out the 'story' panel below.
-      `,
-    })(() => {
+    () => {
       class MockSubmission extends PureComponent {
         state = {
           submitting: false,
@@ -96,5 +93,14 @@ storiesOf('InlineLoading', module)
           )}
         </MockSubmission>
       );
-    })
+    },
+    {
+      info: {
+        text: `
+            This is a full example of how to levarage the <InlineLoading /> component to create a nice user experience when submitting a form.
+    
+            For the full source code of this example, check out the 'story' panel below.
+          `,
+      },
+    }
   );
