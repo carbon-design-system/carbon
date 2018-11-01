@@ -55,7 +55,7 @@ const getContents = glob =>
     return Promise.all(
       filePaths.map(filePath =>
         readFile(filePath, { encoding: 'utf8' }).then(content => {
-          contents.set(path.basename(filePath, '.hbs'), content);
+          contents.set(path.basename(filePath, path.extname(filePath)), content);
         })
       )
     ).then(() => contents);
@@ -136,7 +136,7 @@ const renderComponent = ({ layout, concat } = {}, handle) =>
           if (template) {
             const body = template(context);
             const layoutTemplate = layout !== false && (contents.get(item.preview) || contents.get(layout));
-            renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ body }, context)));
+            renderedItems.set(item, !layoutTemplate ? body : layoutTemplate(Object.assign({ yield: body }, context)));
           }
         });
       }
