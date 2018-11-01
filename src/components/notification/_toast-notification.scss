@@ -103,7 +103,6 @@
     @include font-family;
     @include font-smoothing;
     display: flex;
-    justify-content: space-between;
     width: rem(288px);
     height: auto;
     padding-left: $spacing-md;
@@ -111,8 +110,6 @@
     margin-top: $spacing-xs;
     margin-bottom: $spacing-xs;
     margin-right: $spacing-md;
-    border-left-width: rem(3px);
-    border-left-style: solid;
 
     &:first-child {
       margin-top: $spacing-md;
@@ -148,12 +145,16 @@
     margin-top: $spacing-md;
   }
 
+  .#{$prefix}--toast-notification__details {
+    margin-right: $spacing-md;
+  }
+
   .#{$prefix}--toast-notification__close-button {
     @include focus-outline('reset');
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin-left: $spacing-md;
+    margin-left: auto;
     padding: 0;
     height: rem(48px);
     width: rem(48px);

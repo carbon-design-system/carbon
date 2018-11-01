@@ -20,16 +20,11 @@
 }
 
 @mixin notification--experimental($color, $background-color) {
-  border-color: $color;
+  border-left: 3px solid $color;
   background: $background-color;
 
   .#{$prefix}--inline-notification__icon,
   .#{$prefix}--toast-notification__icon {
     fill: $color;
-  }
-
-  .#{$prefix}--inline-notification__close-button:hover,
-  .#{$prefix}--toast-notification__close-button:hover {
-    background-color: darken($background-color, 15%);
   }
 }

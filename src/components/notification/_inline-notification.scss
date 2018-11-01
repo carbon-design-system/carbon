@@ -118,8 +118,6 @@
     color: $text-01;
     margin-top: $spacing-md;
     margin-bottom: $spacing-md;
-    border-left-width: rem(2px);
-    border-left-style: solid;
 
     @include breakpoint(md) {
       max-width: rem(608px);
@@ -156,7 +154,6 @@
 
   .#{$prefix}--inline-notification__details {
     display: flex;
-    align-items: center;
     margin: 0 $spacing-md;
   }
 
@@ -166,11 +163,13 @@
     min-height: rem(20px);
     min-width: rem(20px);
     margin-right: $spacing-md;
+    margin-top: rem(14px);
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     padding: $spacing-sm 0;
   }
 
