@@ -1,5 +1,5 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const useExperimentalFeatures =
   process.env.CARBON_USE_EXPERIMENTAL_FEATURES === 'true';
@@ -88,14 +88,16 @@ module.exports = {
         test: /\.scss$/,
         use: !useExternalCss
           ? [{ loader: 'style-loader' }, ...styleLoaders]
-          : [{ loader: MiniCssExtractPlugin.loader }, ...styleLoaders],
+          : ExtractTextPlugin.extract({
+              use: styleLoaders,
+            }),
       },
     ],
   },
   plugins: !useExternalCss
     ? []
     : [
-        new MiniCssExtractPlugin({
+        new ExtractTextPlugin({
           filename: '[name].[contenthash].css',
         }),
       ],

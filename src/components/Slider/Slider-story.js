@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
@@ -30,31 +30,25 @@ storiesOf('Slider', module)
   .addDecorator(withKnobs)
   .add(
     'default',
-    () => (
+    withInfo({
+      text: `
+        Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
+      `,
+    })(() => (
       <div style={{ marginTop: '2rem' }}>
         <Slider id="slider" value={50} {...props()} />
       </div>
-    ),
-    {
-      info: {
-        text: `
-            Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
-          `,
-      },
-    }
+    ))
   )
   .add(
     'skeleton',
-    () => (
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => (
       <div style={{ marginTop: '2rem' }}>
         <SliderSkeleton />
       </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+    ))
   );

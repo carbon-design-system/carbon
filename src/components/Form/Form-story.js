@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Checkbox from '../Checkbox';
 import Form from '../Form';
@@ -129,7 +129,15 @@ storiesOf('Form', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
-    () => (
+    withInfo({
+      text: `
+        Forms are widely used to collect user input.
+
+        Form can have any number of react components enclosed within FormGroup component. FormGroup component
+        is a wrapper for legend and fieldset component.
+
+      `,
+    })(() => (
       <Form {...additionalProps}>
         <FormGroup {...fieldsetCheckboxProps()}>
           <Checkbox defaultChecked {...checkboxEvents} id="checkbox-0" />
@@ -228,16 +236,5 @@ storiesOf('Form', module)
           Submit
         </Button>
       </Form>
-    ),
-    {
-      info: {
-        text: `
-            Forms are widely used to collect user input.
-    
-            Form can have any number of react components enclosed within FormGroup component. FormGroup component
-            is a wrapper for legend and fieldset component.
-    
-          `,
-      },
-    }
+    ))
   );

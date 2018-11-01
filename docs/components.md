@@ -68,10 +68,11 @@ import readme from './README.md';
 
 storiesOf('ComponentName', module).add(
   'story-title',
-  withReadme(readme, () => <ComponentExample />, {
-    info: {
+  withReadme(
+    readme,
+    withInfo({
       text: 'Information for the given story',
-    },
-  })
+    })(() => <ComponentExample />)
+  )
 );
 ```

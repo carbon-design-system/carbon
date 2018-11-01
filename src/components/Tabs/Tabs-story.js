@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, number, text } from '@storybook/addon-knobs';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
@@ -38,7 +38,12 @@ storiesOf('Tabs', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
-    () => (
+    withInfo({
+      text: `
+        Tabs are used to quickly navigate between views within the same context. Create individual
+        Tab components for each item in the Tabs list.
+      `,
+    })(() => (
       <Tabs {...props.tabs()}>
         <Tab {...props.tab()} label="Tab label 1">
           <div className="some-content">Content for first tab goes here.</div>
@@ -53,20 +58,13 @@ storiesOf('Tabs', module)
           <div className="some-content">Content for fourth tab goes here.</div>
         </Tab>
       </Tabs>
-    ),
-    {
-      info: {
-        text: `
-            Tabs are used to quickly navigate between views within the same context. Create individual
-            Tab components for each item in the Tabs list.
-          `,
-      },
-    }
+    ))
   )
-  .add('skeleton', () => <TabsSkeleton />, {
-    info: {
+  .add(
+    'skeleton',
+    withInfo({
       text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-    },
-  });
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => <TabsSkeleton />)
+  );

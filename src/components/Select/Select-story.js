@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -35,7 +35,14 @@ storiesOf('Select', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
-    () => {
+    withInfo({
+      text: `
+        Select displays a list below its title when selected. They are used primarily in forms,
+        where a user chooses one option from a list. Once the user selects an item, the dropdown will
+        disappear and the field will reflect the user's choice. Create Select Item components for each
+        option in the list. The example below shows an enabled Select component with three items.
+      `,
+    })(() => {
       const groupProps = props.group();
       return (
         <Select
@@ -58,30 +65,17 @@ storiesOf('Select', module)
           </SelectItemGroup>
         </Select>
       );
-    },
-    {
-      info: {
-        text: `
-            Select displays a list below its title when selected. They are used primarily in forms,
-            where a user chooses one option from a list. Once the user selects an item, the dropdown will
-            disappear and the field will reflect the user's choice. Create Select Item components for each
-            option in the list. The example below shows an enabled Select component with three items.
-          `,
-      },
-    }
+    })
   )
   .add(
     'skeleton',
-    () => (
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => (
       <div style={{ width: '300px' }}>
         <SelectSkeleton />
       </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+    ))
   );

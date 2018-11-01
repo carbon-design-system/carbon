@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import TimePicker from '../TimePicker';
 import TimePickerSelect from '../TimePickerSelect';
@@ -49,7 +49,11 @@ storiesOf('TimePicker', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
-    () => {
+    withInfo({
+      text: `
+        The time picker allow users to select a time.
+      `,
+    })(() => {
       const selectProps = props.select();
       return (
         <TimePicker id="time-picker" {...props.timepicker()}>
@@ -63,12 +67,5 @@ storiesOf('TimePicker', module)
           </TimePickerSelect>
         </TimePicker>
       );
-    },
-    {
-      info: {
-        text: `
-            The time picker allow users to select a time.
-          `,
-      },
-    }
+    })
   );

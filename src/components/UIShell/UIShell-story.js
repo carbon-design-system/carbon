@@ -1,7 +1,7 @@
 import { Notification16, User16 } from '@carbon/icons-react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import React from 'react';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
@@ -21,40 +21,42 @@ import HeaderGlobalAction from './HeaderGlobalAction';
 // usage patterns for each to see what kind of component API we should expose
 storiesOf('[Experimental] UI Shell', module).add(
   'Header',
-  withReadme(readme, () => (
-    <Header>
-      <HeaderMenuButton
-        aria-label="Open menu"
-        onClick={action('Menu clicked')}
-      />
-      <HeaderName href="#" prefix="IBM">
-        [Platform]
-      </HeaderName>
-      <HeaderNavigation aria-label="IBM [Platform]">
-        <HeaderMenuItem href="#">Catalog</HeaderMenuItem>
-        <HeaderMenuItem href="#">Docs</HeaderMenuItem>
-        <HeaderMenuItem href="#">Support</HeaderMenuItem>
-        <HeaderMenu aria-label="Manage">
-          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-        </HeaderMenu>
-      </HeaderNavigation>
-      <HeaderGlobalBar>
-        <HeaderGlobalAction
-          aria-label="Notifications"
-          onClick={action('notification click')}>
-          <Notification16 />
-        </HeaderGlobalAction>
-        <HeaderGlobalAction aria-label="Profile" onClick={action('user click')}>
-          <User16 />
-        </HeaderGlobalAction>
-      </HeaderGlobalBar>
-    </Header>
-  )),
-  {
-    info: {
+  withReadme(
+    readme,
+    withInfo({
       text: '[Experimental] UI Shell',
-    },
-  }
+    })(() => (
+      <Header>
+        <HeaderMenuButton
+          aria-label="Open menu"
+          onClick={action('Menu clicked')}
+        />
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+        <HeaderNavigation aria-label="IBM [Platform]">
+          <HeaderMenuItem href="#">Catalog</HeaderMenuItem>
+          <HeaderMenuItem href="#">Docs</HeaderMenuItem>
+          <HeaderMenuItem href="#">Support</HeaderMenuItem>
+          <HeaderMenu aria-label="Manage">
+            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+          </HeaderMenu>
+        </HeaderNavigation>
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Notifications"
+            onClick={action('notification click')}>
+            <Notification16 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Profile"
+            onClick={action('user click')}>
+            <User16 />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+      </Header>
+    ))
+  )
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import TextArea from '../TextArea';
 import TextAreaSkeleton from '../TextArea/TextArea.Skeleton';
@@ -28,18 +28,20 @@ const TextAreaProps = () => ({
 
 storiesOf('TextArea', module)
   .addDecorator(withKnobs)
-  .add('Default', () => <TextArea {...TextAreaProps()} />, {
-    info: {
+  .add(
+    'Default',
+    withInfo({
       text: `
-            Text areas enable the user to interact with and input data. A text area is used when you
-            anticipate the user to input more than 1 sentence.
-          `,
-    },
-  })
-  .add('skeleton', () => <TextAreaSkeleton />, {
-    info: {
+        Text areas enable the user to interact with and input data. A text area is used when you
+        anticipate the user to input more than 1 sentence.
+      `,
+    })(() => <TextArea {...TextAreaProps()} />)
+  )
+  .add(
+    'skeleton',
+    withInfo({
       text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-    },
-  });
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => <TextAreaSkeleton />)
+  );

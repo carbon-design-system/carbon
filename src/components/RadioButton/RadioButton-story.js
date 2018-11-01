@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import RadioButton from '../RadioButton';
 import RadioButtonSkeleton from '../RadioButton/RadioButton.Skeleton';
@@ -18,28 +18,26 @@ const radioProps = () => ({
 
 storiesOf('RadioButton', module)
   .addDecorator(withKnobs)
-  .add('Default', () => <RadioButton id="radio-1" {...radioProps()} />, {
-    info: {
+  .add(
+    'Default',
+    withInfo({
       text: `
-            Radio buttons are used when a list of two or more options are mutually exclusive,
-            meaning the user must select only one option. The example below shows how the Radio Button component
-            can be used as an uncontrolled component that is initially checked by setting the defaultChecked property
-            to true. To use the component in a controlled way, set the checked property instead.
-          `,
-    },
-  })
+        Radio buttons are used when a list of two or more options are mutually exclusive,
+        meaning the user must select only one option. The example below shows how the Radio Button component
+        can be used as an uncontrolled component that is initially checked by setting the defaultChecked property
+        to true. To use the component in a controlled way, set the checked property instead.
+      `,
+    })(() => <RadioButton id="radio-1" {...radioProps()} />)
+  )
   .add(
     'skeleton',
-    () => (
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => (
       <div>
         <RadioButtonSkeleton />
       </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+    ))
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-
+import { withInfo } from '@storybook/addon-info';
 import { iconCheckmarkSolid } from 'carbon-icons';
 import Icon from '../Icon';
 import {
@@ -16,7 +16,11 @@ import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
 storiesOf('StructuredList', module)
   .add(
     'Simple',
-    () => (
+    withInfo({
+      text: `
+        Structured Lists group content that is similar or related, such as terms or definitions.
+      `,
+    })(() => (
       <StructuredListWrapper>
         <StructuredListHead>
           <StructuredListRow head>
@@ -48,18 +52,15 @@ storiesOf('StructuredList', module)
           </StructuredListRow>
         </StructuredListBody>
       </StructuredListWrapper>
-    ),
-    {
-      info: {
-        text: `
-            Structured Lists group content that is similar or related, such as terms or definitions.
-          `,
-      },
-    }
+    ))
   )
   .add(
     'Selection',
-    () => (
+    withInfo({
+      text: `
+        Structured Lists with selection allow a row of list content to be selected.
+      `,
+    })(() => (
       <StructuredListWrapper selection border>
         <StructuredListHead>
           <StructuredListRow head>
@@ -119,28 +120,18 @@ storiesOf('StructuredList', module)
           </StructuredListRow>
         </StructuredListBody>
       </StructuredListWrapper>
-    ),
-    {
-      info: {
-        text: `
-            Structured Lists with selection allow a row of list content to be selected.
-          `,
-      },
-    }
+    ))
   )
   .add(
     'skeleton',
-    () => (
+    withInfo({
+      text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+    })(() => (
       <div style={{ width: '800px' }}>
         <StructuredListSkeleton />
         <StructuredListSkeleton border />
       </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+    ))
   );

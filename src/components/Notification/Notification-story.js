@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Notification, {
   ToastNotification,
@@ -9,10 +9,10 @@ import Notification, {
 } from '../Notification';
 
 const kinds = {
-  'Error (error)': 'error',
-  'Info (info)': 'info',
-  'Success (success)': 'success',
-  'Warning (warning)': 'warning',
+  error: 'Error (error)',
+  info: 'Info (info)',
+  success: 'Success (success)',
+  warning: 'Warning (warning)',
 };
 
 const notificationProps = () => ({
@@ -32,34 +32,37 @@ storiesOf('Notifications', module)
   .addDecorator(withKnobs)
   .add(
     'Deprecated: <Notfication />',
-    () => (
+    withInfo({
+      text: `
+        Toast notifications are typically passive, meaning they won't affect the user's workflow if not addressed.
+        Toast Notifications use 'kind' props to specify the kind of notification that should render (error, info, success, warning).
+      `,
+    })(() => (
       <div>
         <Notification
           {...notificationProps()}
           caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
         />
       </div>
-    ),
-    {
-      info: {
-        text: `
-            Toast notifications are typically passive, meaning they won't affect the user's workflow if not addressed.
-            Toast Notifications use 'kind' props to specify the kind of notification that should render (error, info, success, warning).
-          `,
-      },
-    }
+    ))
   )
-  .add('Toast', () => (
-    <div>
-      <ToastNotification
-        {...notificationProps()}
-        caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
-        style={{ minWidth: '30rem', marginBottom: '.5rem' }}
-      />
-    </div>
-  ))
-  .add('inline', () => (
-    <div>
-      <InlineNotification {...notificationProps()} />
-    </div>
-  ));
+  .add(
+    'Toast',
+    withInfo()(() => (
+      <div>
+        <ToastNotification
+          {...notificationProps()}
+          caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+          style={{ minWidth: '30rem', marginBottom: '.5rem' }}
+        />
+      </div>
+    ))
+  )
+  .add(
+    'inline',
+    withInfo()(() => (
+      <div>
+        <InlineNotification {...notificationProps()} />
+      </div>
+    ))
+  );

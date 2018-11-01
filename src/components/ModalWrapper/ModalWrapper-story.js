@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import ModalWrapper from '../ModalWrapper';
 import TextInput from '../TextInput';
@@ -45,7 +45,13 @@ storiesOf('ModalWrapper', module)
   .addDecorator(withKnobs)
   .add(
     'transactional/passive modal',
-    () => (
+    withInfo({
+      text: `
+        Transactional modals are used to validate user decisions or to gain secondary confirmation from the user.
+        Passive modal notifications should only appear if there is an action the user needs to address immediately.
+        Passive modal notifications are persistent on screen.
+      `,
+    })(() => (
       <ModalWrapper
         id="transactional-passive-modal"
         handleSubmit={() => {
@@ -82,20 +88,17 @@ storiesOf('ModalWrapper', module)
           tincidunt sodales.
         </p>
       </ModalWrapper>
-    ),
-    {
-      info: {
-        text: `
-            Transactional modals are used to validate user decisions or to gain secondary confirmation from the user.
-            Passive modal notifications should only appear if there is an action the user needs to address immediately.
-            Passive modal notifications are persistent on screen.
-          `,
-      },
-    }
+    ))
   )
   .add(
     'input modal',
-    () => (
+    withInfo({
+      text: `
+        Input modals are used to follow up with previous user input. These modals should include areas
+        for input that the user can interact with, such as forms, dropdowns, selectors, and links. The example
+        below shows a Modal Wrapper component with various input components.
+      `,
+    })(() => (
       <ModalWrapper
         id="input-modal"
         handleSubmit={() => {
@@ -146,14 +149,5 @@ storiesOf('ModalWrapper', module)
           />
         </RadioButtonGroup>
       </ModalWrapper>
-    ),
-    {
-      info: {
-        text: `
-            Input modals are used to follow up with previous user input. These modals should include areas
-            for input that the user can interact with, such as forms, dropdowns, selectors, and links. The example
-            below shows a Modal Wrapper component with various input components.
-          `,
-      },
-    }
+    ))
   );
