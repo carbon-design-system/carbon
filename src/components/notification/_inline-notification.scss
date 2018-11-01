@@ -171,6 +171,7 @@
     flex-wrap: wrap;
     align-items: center;
     padding: $spacing-sm 0;
+    max-width: 75%;
   }
 
   .#{$prefix}--inline-notification__title {
