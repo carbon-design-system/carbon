@@ -210,16 +210,6 @@
     transition: $transition--base $carbon--standard-easing;
     position: relative;
 
-    // &:after {
-    //   position: absolute;
-    //   content: '';
-    //   // display: block;
-    //   width: 100%;
-    //   height: rem(1px);
-    //   background-color: $ui-01;
-    //   top: -1px;
-    // }
-
     .#{$prefix}--structured-list--selection
       &:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
       background-color: $ui_01;
