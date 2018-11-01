@@ -207,16 +207,12 @@
   .#{$prefix}--structured-list-row {
     display: table-row;
     border-bottom: 1px solid $ui-03;
-    transition: $transition--base $carbon--standard-easing;
-    position: relative;
 
     .#{$prefix}--structured-list--selection
       &:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
       background-color: $ui_01;
       cursor: pointer;
-      outline: 1px solid #f3f3f3;
-      outline-offset: -1px;
-      border-bottom: 1px solid #f3f3f3;
+      border-bottom: 1px solid $ui-01;
     }
 
     &.#{$prefix}--structured-list-row--selected {
@@ -237,6 +233,12 @@
       > .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list-row--selected > .#{$prefix}--structured-list-td {
       color: $text-01;
+    }
+
+    .#{$prefix}--structured-list--selection
+      &:hover:not(.#{$prefix}--structured-list-row--header-row)
+      > .#{$prefix}--structured-list-td {
+      border-top: 1px solid $ui-01;
     }
   }
 
