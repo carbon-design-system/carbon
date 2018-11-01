@@ -1,5 +1,7 @@
 'use strict';
 
+const { componentsX } = require('../../globals/js/feature-flags');
+
 const columns = [
   {
     name: 'column1',
@@ -78,6 +80,7 @@ module.exports = {
       name: 'selection',
       label: 'With selection',
       context: {
+        componentsX,
         columns,
         rows,
         hasBorder: true,
