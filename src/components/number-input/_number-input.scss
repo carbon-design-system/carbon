@@ -95,7 +95,7 @@
     align-items: center;
     left: auto;
     right: 0.5rem;
-    bottom: 0.625rem;
+    top: 2rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -145,10 +145,18 @@
     input[type='number']:focus ~ .#{$prefix}--label {
       color: $support-01;
     }
+  }
 
-    .#{$prefix}--number__controls {
-      bottom: 2rem;
-    }
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 2.25rem;
+  }
+
+  .#{$prefix}--number--helpertext:not(.#{$prefix}--number--nolabel) .#{$prefix}--number__controls {
+    top: 3.625rem;
   }
 
   .#{$prefix}--number--light input[type='number'] {
@@ -258,7 +266,7 @@
     align-items: center;
     left: auto;
     right: 0.25rem;
-    bottom: 0.5rem;
+    top: 2rem;
   }
 
   .#{$prefix}--number__control-btn {
@@ -293,10 +301,18 @@
     input[type='number'] {
       @include focus-outline('invalid');
     }
+  }
 
-    .#{$prefix}--number__controls {
-      bottom: 1.875rem;
-    }
+  .#{$prefix}--number--nolabel .#{$prefix}--number__controls {
+    top: 0.625rem;
+  }
+
+  .#{$prefix}--number--helpertext .#{$prefix}--number__controls {
+    top: 2.25rem;
+  }
+
+  .#{$prefix}--number--helpertext:not(.#{$prefix}--number--nolabel) .#{$prefix}--number__controls {
+    top: 3.625rem;
   }
 
   .#{$prefix}--number--light input[type='number'] {
