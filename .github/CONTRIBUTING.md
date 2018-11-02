@@ -50,16 +50,22 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
 ```scss
 <-- Don't do this -->
 .#{$prefix}--inline-notification {
-  &:hover {
-    svg {
-      ...
+  .#{$prefix}--btn {
+    &:hover {
+      svg {
+        ...
+      }
     }
   }
 }
 
 <!-- Do this instead -->
-.#{$prefix}--inline-notification:hover svg {
-  ...
+.#{$prefix}--inline-notification .#{$prefix}--btn {
+    &:hover svg {
+      ...
+    }
+  }
+
 }
 ```
 
