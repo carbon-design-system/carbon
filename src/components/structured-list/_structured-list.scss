@@ -151,7 +151,7 @@
       }
     }
 
-    .bx--structured-list-th span {
+    .#{$prefix}--structured-list-th span {
       @include skeleton;
       width: 75%;
       height: 1rem;
@@ -315,7 +315,7 @@
     }
   }
 
-  .#{$prefix}--structured-list.#{$prefix}--skeleton .bx--structured-list-th span {
+  .#{$prefix}--structured-list.#{$prefix}--skeleton .#{$prefix}--structured-list-th span {
     @include skeleton;
     width: 75%;
     height: 1rem;
