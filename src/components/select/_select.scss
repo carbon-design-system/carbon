@@ -229,6 +229,11 @@
       display: none;
     }
 
+    // Select text renders a little high on Firefox
+    @-moz-document url-prefix() {
+      padding-top: rem(4px);
+    }
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -326,6 +331,10 @@
     border-bottom: none;
     padding-left: $spacing-xs;
     padding-right: $spacing-lg;
+
+    @-moz-document url-prefix() {
+      padding-top: 0;
+    }
 
     &:hover {
       background-color: $ui-01;
