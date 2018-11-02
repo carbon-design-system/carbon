@@ -45,6 +45,22 @@ Follow BEM naming convention for classes. Again, the only thing we do differentl
 .#{$prefix}--block--modifier
 ```
 
+Avoid nesting selectors, this will make it easier to maintain in the future
+
+```scss
+<-- Don't do this -->
+.#{$prefix}--inline-notification {
+  .#{$prefix}--inline-notification__details {
+    ...
+  }
+}
+
+<!-- Do this instead -->
+.#{$prefix}--inline-notification .#{$prefix}--inline-notification__details {
+  ...
+}
+```
+
 ### Start a new `block` or `element`?
 
 A nested element can use a new block name as long as the styles are independent of the parent.
