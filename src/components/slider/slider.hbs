@@ -8,8 +8,8 @@
       <div class="bx--slider__filled-track"></div>
       <input aria-label="slider" id="slider" class="bx--slider__input" type="range" step="1" min="0" max="100" value="0">
     </div>
-    <label id="bottom-range-label" class="bx--slider__range-label">0</label>
-    <label id="top-range-label" class="bx--slider__range-label">100</label>
-    <input id="{{inputId}}" aria-labelledby="bottom-range-label top-range-label" type="number" class="bx--text-input bx--slider-text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="0">
+    <label id="{{inputId}}_bottom-range-label" class="bx--slider__range-label">0</label>
+    <label id="{{inputId}}_top-range-label" class="bx--slider__range-label">100</label>
+    <input id="{{inputId}}" aria-labelledby="{{inputId}}_bottom-range-label {{InputId}}_top-range-label" type="number" class="bx--text-input bx--slider-text-input{{#if light}} bx--text-input--light{{/if}}" placeholder="0">
   </div>
 </div>
