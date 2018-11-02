@@ -7,13 +7,14 @@
 @import '../../globals/scss/colors';
 @import '../../globals/scss/spacing';
 @import '../../globals/scss/layer';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/import-once';
 @import '../../globals/scss/mixins';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--typography';
 
-@include exports('toast-notifications') {
+@mixin toast-notifications {
   .#{$prefix}--toast-notification {
     @include reset;
     @include font-family;
@@ -93,5 +94,104 @@
     @include typescale('omega');
     color: $text-02;
     line-height: 1;
+  }
+}
+
+@mixin toast-notifications--x {
+  .#{$prefix}--toast-notification {
+    @include reset;
+    @include font-family;
+    @include font-smoothing;
+    display: flex;
+    width: rem(288px);
+    height: auto;
+    padding-left: $spacing-md;
+    color: $text-01;
+    margin-top: $spacing-xs;
+    margin-bottom: $spacing-xs;
+    margin-right: $spacing-md;
+
+    &:first-child {
+      margin-top: $spacing-md;
+    }
+
+    @include breakpoint(max) {
+      width: rem(352px);
+    }
+  }
+
+  .#{$prefix}--toast-notification--error {
+    @include notification--experimental($support-01, $notification-error-background-color);
+  }
+
+  .#{$prefix}--toast-notification--success {
+    @include notification--experimental($support-02, $notification-success-background-color);
+  }
+
+  .#{$prefix}--toast-notification--info {
+    @include notification--experimental($support-04, $notification-info-background-color);
+  }
+
+  .#{$prefix}--toast-notification--warning {
+    @include notification--experimental($support-03, $notification-warning-background-color);
+  }
+
+  .#{$prefix}--toast-notification__icon {
+    height: rem(20px);
+    width: rem(20px);
+    min-height: rem(20px);
+    min-width: rem(20px);
+    margin-right: $spacing-md;
+    margin-top: $spacing-md;
+  }
+
+  .#{$prefix}--toast-notification__details {
+    margin-right: $spacing-md;
+  }
+
+  .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('reset');
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+    height: rem(48px);
+    width: rem(48px);
+    min-height: rem(48px);
+    min-width: rem(48px);
+    transition: outline $transition--base, background-color $transition--base;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--toast-notification__title {
+    @include typescale('zeta');
+    @include letter-spacing;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  .#{$prefix}--toast-notification__subtitle {
+    @include typescale('zeta');
+    color: $text-01;
+    margin-top: 0;
+    margin-bottom: $spacing-lg;
+  }
+
+  .#{$prefix}--toast-notification__caption {
+    @include typescale('zeta');
+    color: $text-01;
+    margin-bottom: $spacing-md;
+  }
+}
+
+@include exports('toast-notifications') {
+  @if feature-flag-enabled('components-x') {
+    @include toast-notifications--x;
+  } @else {
+    @include toast-notifications;
   }
 }
