@@ -45,18 +45,20 @@ Follow BEM naming convention for classes. Again, the only thing we do differentl
 .#{$prefix}--block--modifier
 ```
 
-Avoid nesting selectors, this will make it easier to maintain in the future
+Avoid nesting selectors, this will make it easier to maintain in the future.
 
 ```scss
 <-- Don't do this -->
 .#{$prefix}--inline-notification {
-  .#{$prefix}--inline-notification__details {
-    ...
+  &:hover {
+    svg {
+      ...
+    }
   }
 }
 
 <!-- Do this instead -->
-.#{$prefix}--inline-notification .#{$prefix}--inline-notification__details {
+.#{$prefix}--inline-notification svg {
   ...
 }
 ```
