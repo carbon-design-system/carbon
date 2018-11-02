@@ -197,11 +197,11 @@
     border-spacing: 0;
     margin-bottom: 5rem;
     background-color: transparent;
-  }
 
-  .#{$prefix}--structured-list.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
-  .#{$prefix}--structured-list.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
-    @include padding-td--condensed--x;
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
+      @include padding-td--condensed--x;
+    }
   }
 
   .#{$prefix}--structured-list-row {
@@ -209,9 +209,8 @@
     border-bottom: 1px solid $ui-03;
   }
 
-  .#{$prefix}--structured-list-row
-    .#{$prefix}--structured-list--selection
-    &:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
     background-color: $ui_01;
     cursor: pointer;
     border-bottom: 1px solid $ui-01;
@@ -230,17 +229,15 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--structured-list-row
-    .#{$prefix}--structured-list--selection
-    &:hover:not(.#{$prefix}--structured-list-row--header-row)
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td,
-  &.#{$prefix}--structured-list-row--selected > .#{$prefix}--structured-list-td {
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected > .#{$prefix}--structured-list-td {
     color: $text-01;
   }
 
-  .#{$prefix}--structured-list-row
-    .#{$prefix}--structured-list--selection
-    &:hover:not(.#{$prefix}--structured-list-row--header-row)
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td {
     border-top: 1px solid $ui-01;
   }
@@ -304,36 +301,33 @@
   }
 
   // Skeleton State
-  .#{$prefix}--structured-list.#{$prefix}--skeleton {
-    .#{$prefix}--structured-list-th {
-      &:first-child {
-        width: 8%;
-      }
-
-      &:nth-child(3n + 2) {
-        width: 30%;
-      }
-
-      &:nth-child(3n + 3) {
-        width: 15%;
-      }
+  .#{$prefix}--structured-list.#{$prefix}--skeleton .#{$prefix}--structured-list-th {
+    &:first-child {
+      width: 8%;
     }
 
-    .bx--structured-list-th span {
-      @include skeleton;
-      width: 75%;
-      height: 1rem;
-      display: block;
+    &:nth-child(3n + 2) {
+      width: 30%;
+    }
+
+    &:nth-child(3n + 3) {
+      width: 15%;
     }
   }
 
-  .#{$prefix}--structured-list.#{$prefix}--structured-list--border.#{$prefix}--skeleton {
-    .#{$prefix}--structured-list-th:first-child {
-      width: 5%;
+  .#{$prefix}--structured-list.#{$prefix}--skeleton .bx--structured-list-th span {
+    @include skeleton;
+    width: 75%;
+    height: 1rem;
+    display: block;
+  }
 
-      span {
-        display: none;
-      }
+  .#{$prefix}--structured-list.#{$prefix}--structured-list--border.#{$prefix}--skeleton
+    .#{$prefix}--structured-list-th:first-child {
+    width: 5%;
+
+    span {
+      display: none;
     }
   }
 }
